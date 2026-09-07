@@ -1,0 +1,756 @@
+{
+ "esquema": 1,
+ "generado": "2026-09-04T00:55:26+00:00",
+ "indicadores": {
+  "shf": {
+   "fuente": "SHF Índice de Precios de la Vivienda",
+   "url": "https://www.gob.mx/cms/uploads/attachment/file/1097035/Indice_SHF_datos_abiertos_2_trim_2026.xlsx",
+   "cadencia": "trimestral",
+   "periodo": "2026-2T",
+   "aviso": "Índice base 2017=100 rebaseado por serie. Los niveles NO son comparables entre geografías; solo las variaciones. El índice no da precios en pesos por municipio.",
+   "universo": "Universo: avalúos de vivienda adquirida con crédito hipotecario. Quedan fuera las operaciones al contado, el suelo sin construir y la tierra ejidal, que es buena parte de la oferta costera de Baja California.",
+   "sin_cobertura": [
+    "Ensenada",
+    "Tecate",
+    "Playas de Rosarito",
+    "San Quintín",
+    "San Felipe"
+   ],
+   "series": {
+    "Baja California": {
+     "ambito": "estado",
+     "periodo": "2026-2T",
+     "indice": 241.66,
+     "variacion_anual_pct": 8.92,
+     "trimestres": 86
+    },
+    "Baja California · Mexicali": {
+     "ambito": "municipio",
+     "periodo": "2026-2T",
+     "indice": 235.1,
+     "variacion_anual_pct": 9.61,
+     "trimestres": 86
+    },
+    "Baja California · Tijuana": {
+     "ambito": "municipio",
+     "periodo": "2026-2T",
+     "indice": 248.66,
+     "variacion_anual_pct": 8.64,
+     "trimestres": 86
+    },
+    "Nacional": {
+     "ambito": "global",
+     "periodo": "2026-2T",
+     "indice": 205.87,
+     "variacion_anual_pct": 7.31,
+     "trimestres": 86
+    },
+    "ZM Tijuana": {
+     "ambito": "global",
+     "periodo": "2026-2T",
+     "indice": 248.22,
+     "variacion_anual_pct": 8.64,
+     "trimestres": 86
+    }
+   },
+   "familia": "vivienda",
+   "obtenido": "2026-09-04T00:55:26+00:00"
+  },
+  "predial": {
+   "fuente": "SHCP · Impuesto predial municipal",
+   "url": "https://repodatos.atdt.gob.mx/api_update/secretaria_hacienda/impuesto_predial_municipal/mapa_imp_predial.csv",
+   "cadencia": "anual",
+   "periodo": "2024",
+   "aviso": "Recaudación de predial, NO valuación. El monto por cuenta pagada es un proxy del valor del suelo y está contaminado por diferencias de tasa y de eficiencia de cobro entre municipios. Sirve para comparar la evolución de un municipio consigo mismo, no para rankear municipios.",
+   "municipios": {
+    "Ensenada": {
+     "ciclo": 2024,
+     "por_cuenta_mxn": 4771.41,
+     "cuentas_pagadas": 111672,
+     "variacion_anual_pct": 21.2,
+     "ciclos": 15
+    },
+    "Mexicali": {
+     "ciclo": 2024,
+     "por_cuenta_mxn": 3680.18,
+     "cuentas_pagadas": 242555,
+     "variacion_anual_pct": 18.14,
+     "ciclos": 15
+    },
+    "Playas de Rosarito": {
+     "ciclo": 2024,
+     "por_cuenta_mxn": 2462.74,
+     "cuentas_pagadas": 57373,
+     "variacion_anual_pct": -2.11,
+     "ciclos": 15
+    },
+    "San Felipe": {
+     "ciclo": 2024,
+     "por_cuenta_mxn": 2329.68,
+     "cuentas_pagadas": 10949,
+     "variacion_anual_pct": -26.07,
+     "ciclos": 4
+    },
+    "San Quintín": {
+     "ciclo": 2024,
+     "por_cuenta_mxn": 1213.21,
+     "cuentas_pagadas": 16620,
+     "variacion_anual_pct": 8.0,
+     "ciclos": 5
+    },
+    "Tecate": {
+     "ciclo": 2024,
+     "por_cuenta_mxn": 1996.6,
+     "cuentas_pagadas": 31557,
+     "variacion_anual_pct": -7.86,
+     "ciclos": 15
+    },
+    "Tijuana": {
+     "ciclo": 2024,
+     "por_cuenta_mxn": 3184.58,
+     "cuentas_pagadas": 380393,
+     "variacion_anual_pct": -1.72,
+     "ciclos": 15
+    }
+   },
+   "familia": "suelo",
+   "obtenido": "2026-09-04T00:54:36+00:00"
+  },
+  "sesnsp": {
+   "fuente": "SESNSP · Incidencia delictiva municipal (RNID)",
+   "url": "https://sspcgob-my.sharepoint.com/personal/cni_sspc_gob_mx/_layouts/15/download.aspx?share=IQCG_K5ZFRu0RobE0TfVmcQ1AXKVGMkVAWKilpe341CUDJs",
+   "archivo": "RNID-Delitos_Municipal-2026-jul2026.csv",
+   "cadencia": "mensual",
+   "rezago": "~3 semanas: el mes M sale cerca del 20 de M+1",
+   "periodo": "Julio",
+   "aviso": "Delitos REPORTADOS, no delitos ocurridos: la cifra depende de que la gente denuncie. Serie RNID 2026, que no se puede concatenar con 2015-2025 sin crosswalk porque cambió la clasificación de tipos de delito.",
+   "municipios": {
+    "Ensenada": {
+     "cve": "2001",
+     "cvegeo": "02001",
+     "total": 7522,
+     "ultimo_mes": "Julio",
+     "por_mes": [
+      1003,
+      921,
+      1204,
+      1101,
+      1068,
+      1135,
+      1090
+     ],
+     "delitos_clave": {
+      "Robo": 1297,
+      "Violencia familiar": 1294,
+      "Narcomenudeo": 1002,
+      "Lesiones": 568,
+      "Homicidio": 99,
+      "Extorsión": 43,
+      "Feminicidio": 1
+     }
+    },
+    "Mexicali": {
+     "cve": "2002",
+     "cvegeo": "02002",
+     "total": 19007,
+     "ultimo_mes": "Julio",
+     "por_mes": [
+      2532,
+      2444,
+      2997,
+      2828,
+      2915,
+      2643,
+      2648
+     ],
+     "delitos_clave": {
+      "Violencia familiar": 4008,
+      "Robo": 3913,
+      "Lesiones": 1235,
+      "Narcomenudeo": 903,
+      "Homicidio": 164,
+      "Extorsión": 10,
+      "Feminicidio": 8,
+      "Secuestro": 1
+     }
+    },
+    "Tecate": {
+     "cve": "2003",
+     "cvegeo": "02003",
+     "total": 1981,
+     "ultimo_mes": "Julio",
+     "por_mes": [
+      292,
+      306,
+      297,
+      313,
+      265,
+      280,
+      228
+     ],
+     "delitos_clave": {
+      "Robo": 456,
+      "Violencia familiar": 424,
+      "Narcomenudeo": 141,
+      "Homicidio": 137,
+      "Lesiones": 117,
+      "Feminicidio": 1
+     }
+    },
+    "Tijuana": {
+     "cve": "2004",
+     "cvegeo": "02004",
+     "total": 20919,
+     "ultimo_mes": "Julio",
+     "por_mes": [
+      2803,
+      2754,
+      3203,
+      3028,
+      3040,
+      2979,
+      3112
+     ],
+     "delitos_clave": {
+      "Robo": 6058,
+      "Violencia familiar": 3099,
+      "Narcomenudeo": 2302,
+      "Lesiones": 1638,
+      "Homicidio": 689,
+      "Extorsión": 31,
+      "Feminicidio": 5,
+      "Secuestro": 4
+     }
+    },
+    "Playas de Rosarito": {
+     "cve": "2005",
+     "cvegeo": "02005",
+     "total": 1941,
+     "ultimo_mes": "Julio",
+     "por_mes": [
+      240,
+      227,
+      280,
+      302,
+      295,
+      314,
+      283
+     ],
+     "delitos_clave": {
+      "Robo": 430,
+      "Violencia familiar": 373,
+      "Narcomenudeo": 198,
+      "Lesiones": 149,
+      "Homicidio": 59,
+      "Extorsión": 3,
+      "Feminicidio": 1
+     }
+    },
+    "San Quintín": {
+     "cve": "2006",
+     "cvegeo": "02006",
+     "total": 1360,
+     "ultimo_mes": "Julio",
+     "por_mes": [
+      160,
+      160,
+      187,
+      202,
+      188,
+      236,
+      227
+     ],
+     "delitos_clave": {
+      "Violencia familiar": 420,
+      "Robo": 142,
+      "Lesiones": 134,
+      "Narcomenudeo": 68,
+      "Homicidio": 41,
+      "Extorsión": 9,
+      "Feminicidio": 3
+     }
+    },
+    "San Felipe": {
+     "cve": "2007",
+     "cvegeo": "02007",
+     "total": 515,
+     "ultimo_mes": "Julio",
+     "por_mes": [
+      59,
+      69,
+      70,
+      80,
+      83,
+      80,
+      74
+     ],
+     "delitos_clave": {
+      "Violencia familiar": 139,
+      "Robo": 74,
+      "Narcomenudeo": 39,
+      "Lesiones": 31,
+      "Homicidio": 6
+     }
+    }
+   },
+   "familia": "crimen",
+   "obtenido": "2026-09-04T00:54:36+00:00"
+  },
+  "ensu": {
+   "fuente": "INEGI · ENSU",
+   "url": "https://www.inegi.org.mx/contenidos/programas/ensu/datosabiertos/conjunto_de_datos_ensu_2026_2t_csv.zip",
+   "archivo": "conjunto_de_datos_ensu_cb_0626/conjunto_de_datos/conjunto_de_datos_ensu_cb_0626.csv",
+   "cadencia": "trimestral",
+   "periodo": "2026-2T",
+   "aviso": "Única medición de percepción con muestra probabilística. Ponderada con FAC_SEL; los 'no sabe' salen del denominador.",
+   "cobertura": "Solo Tijuana y Mexicali en Baja California. Ensenada, Tecate, Rosarito, San Quintín y San Felipe NUNCA han estado en la muestra, así que para esas zonas no hay medición de percepción y no se debe inferir de las otras.",
+   "ciudades": {
+    "Mexicali": {
+     "pct_inseguro": 70.8,
+     "poblacion_18mas": 653919
+    },
+    "Tijuana": {
+     "pct_inseguro": 67.6,
+     "poblacion_18mas": 1432355
+    }
+   },
+   "nacional": {
+    "pct_inseguro": 59.9
+   },
+   "familia": "percepcion",
+   "obtenido": "2026-09-04T00:54:36+00:00"
+  },
+  "san_diego": {
+   "fuente": "SANDAG · Parcels (valor catastral)",
+   "url": "https://geo.sandag.org/server/rest/services/Hosted/Parcels/FeatureServer/0/query",
+   "cadencia": "mensual",
+   "periodo": null,
+   "aviso": "Valor CATASTRAL (assessed), no precio de venta. En California la Proposición 13 congela la base gravable hasta que la propiedad cambia de dueño, así que el catastral queda MUY por debajo del precio de mercado en casas que no se han vendido en años. No es comparable con el índice SHF del lado mexicano.",
+   "faltantes": "No hay precio de venta ni nombre del propietario en la fuente gratuita; el nombre está retenido por la ley AB1785 de California.",
+   "zips": {
+    "91901": {
+     "mediana_usd": 559644,
+     "parcelas": 5972
+    },
+    "91902": {
+     "mediana_usd": 580124,
+     "parcelas": 5649
+    },
+    "91905": {
+     "mediana_usd": 170456,
+     "parcelas": 1035
+    },
+    "91906": {
+     "mediana_usd": 254252,
+     "parcelas": 1555
+    },
+    "91910": {
+     "mediana_usd": 441630,
+     "parcelas": 17161
+    },
+    "91911": {
+     "mediana_usd": 370313,
+     "parcelas": 16850
+    },
+    "91913": {
+     "mediana_usd": 566877,
+     "parcelas": 14130
+    },
+    "91914": {
+     "mediana_usd": 740725,
+     "parcelas": 5200
+    },
+    "91915": {
+     "mediana_usd": 581672,
+     "parcelas": 8385
+    },
+    "91916": {
+     "mediana_usd": 312228,
+     "parcelas": 945
+    },
+    "91917": {
+     "mediana_usd": 199302,
+     "parcelas": 383
+    },
+    "91931": {
+     "mediana_usd": 136242,
+     "parcelas": 139
+    },
+    "91932": {
+     "mediana_usd": 464552,
+     "parcelas": 5562
+    },
+    "91934": {
+     "mediana_usd": 92388,
+     "parcelas": 552
+    },
+    "91935": {
+     "mediana_usd": 539425,
+     "parcelas": 3508
+    },
+    "91941": {
+     "mediana_usd": 552315,
+     "parcelas": 10010
+    },
+    "91942": {
+     "mediana_usd": 422774,
+     "parcelas": 11467
+    },
+    "91945": {
+     "mediana_usd": 401098,
+     "parcelas": 7118
+    },
+    "91948": {
+     "mediana_usd": 161597,
+     "parcelas": 102
+    },
+    "91950": {
+     "mediana_usd": 317717,
+     "parcelas": 10089
+    },
+    "91962": {
+     "mediana_usd": 328361,
+     "parcelas": 1022
+    },
+    "91963": {
+     "mediana_usd": 165611,
+     "parcelas": 446
+    },
+    "91977": {
+     "mediana_usd": 406196,
+     "parcelas": 15465
+    },
+    "91978": {
+     "mediana_usd": 438383,
+     "parcelas": 2633
+    },
+    "91980": {
+     "mediana_usd": 143284,
+     "parcelas": 153
+    },
+    "92003": {
+     "mediana_usd": 638229,
+     "parcelas": 2305
+    },
+    "92004": {
+     "mediana_usd": 94409,
+     "parcelas": 4145
+    },
+    "92007": {
+     "mediana_usd": 806905,
+     "parcelas": 3954
+    },
+    "92008": {
+     "mediana_usd": 766167,
+     "parcelas": 9131
+    },
+    "92009": {
+     "mediana_usd": 815005,
+     "parcelas": 15418
+    },
+    "92010": {
+     "mediana_usd": 662447,
+     "parcelas": 6064
+    },
+    "92011": {
+     "mediana_usd": 805784,
+     "parcelas": 8579
+    },
+    "92014": {
+     "mediana_usd": 1164532,
+     "parcelas": 6443
+    },
+    "92019": {
+     "mediana_usd": 492452,
+     "parcelas": 12821
+    },
+    "92020": {
+     "mediana_usd": 473133,
+     "parcelas": 12818
+    },
+    "92021": {
+     "mediana_usd": 373035,
+     "parcelas": 15802
+    },
+    "92024": {
+     "mediana_usd": 807132,
+     "parcelas": 18152
+    },
+    "92025": {
+     "mediana_usd": 506880,
+     "parcelas": 10914
+    },
+    "92026": {
+     "mediana_usd": 464866,
+     "parcelas": 15091
+    },
+    "92027": {
+     "mediana_usd": 431743,
+     "parcelas": 13589
+    },
+    "92028": {
+     "mediana_usd": 545466,
+     "parcelas": 18742
+    },
+    "92029": {
+     "mediana_usd": 670527,
+     "parcelas": 7794
+    },
+    "92036": {
+     "mediana_usd": 188229,
+     "parcelas": 3751
+    },
+    "92037": {
+     "mediana_usd": 1056954,
+     "parcelas": 17597
+    },
+    "92040": {
+     "mediana_usd": 394325,
+     "parcelas": 12616
+    },
+    "92054": {
+     "mediana_usd": 568649,
+     "parcelas": 11660
+    },
+    "92056": {
+     "mediana_usd": 455754,
+     "parcelas": 18389
+    },
+    "92057": {
+     "mediana_usd": 440716,
+     "parcelas": 18354
+    },
+    "92058": {
+     "mediana_usd": 397799,
+     "parcelas": 5849
+    },
+    "92059": {
+     "mediana_usd": 293827,
+     "parcelas": 270
+    },
+    "92060": {
+     "mediana_usd": 168145,
+     "parcelas": 505
+    },
+    "92061": {
+     "mediana_usd": 455493,
+     "parcelas": 1032
+    },
+    "92064": {
+     "mediana_usd": 669306,
+     "parcelas": 15429
+    },
+    "92065": {
+     "mediana_usd": 499390,
+     "parcelas": 12341
+    },
+    "92066": {
+     "mediana_usd": 133969,
+     "parcelas": 343
+    },
+    "92067": {
+     "mediana_usd": 2737901,
+     "parcelas": 4195
+    },
+    "92069": {
+     "mediana_usd": 487487,
+     "parcelas": 11942
+    },
+    "92070": {
+     "mediana_usd": 208367,
+     "parcelas": 599
+    },
+    "92071": {
+     "mediana_usd": 437760,
+     "parcelas": 17276
+    },
+    "92075": {
+     "mediana_usd": 938466,
+     "parcelas": 5272
+    },
+    "92078": {
+     "mediana_usd": 603146,
+     "parcelas": 15406
+    },
+    "92081": {
+     "mediana_usd": 551066,
+     "parcelas": 8586
+    },
+    "92082": {
+     "mediana_usd": 575969,
+     "parcelas": 7436
+    },
+    "92083": {
+     "mediana_usd": 407835,
+     "parcelas": 7702
+    },
+    "92084": {
+     "mediana_usd": 479400,
+     "parcelas": 12821
+    },
+    "92086": {
+     "mediana_usd": 186231,
+     "parcelas": 966
+    },
+    "92091": {
+     "mediana_usd": 1623636,
+     "parcelas": 1099
+    },
+    "92101": {
+     "mediana_usd": 649921,
+     "parcelas": 14109
+    },
+    "92102": {
+     "mediana_usd": 353891,
+     "parcelas": 8019
+    },
+    "92103": {
+     "mediana_usd": 631971,
+     "parcelas": 10911
+    },
+    "92104": {
+     "mediana_usd": 510936,
+     "parcelas": 11313
+    },
+    "92105": {
+     "mediana_usd": 334654,
+     "parcelas": 11671
+    },
+    "92106": {
+     "mediana_usd": 890741,
+     "parcelas": 6509
+    },
+    "92107": {
+     "mediana_usd": 674288,
+     "parcelas": 8253
+    },
+    "92108": {
+     "mediana_usd": 422775,
+     "parcelas": 7269
+    },
+    "92109": {
+     "mediana_usd": 769539,
+     "parcelas": 14685
+    },
+    "92110": {
+     "mediana_usd": 520000,
+     "parcelas": 8166
+    },
+    "92111": {
+     "mediana_usd": 456466,
+     "parcelas": 12623
+    },
+    "92113": {
+     "mediana_usd": 300704,
+     "parcelas": 7824
+    },
+    "92114": {
+     "mediana_usd": 310398,
+     "parcelas": 16067
+    },
+    "92115": {
+     "mediana_usd": 446114,
+     "parcelas": 13654
+    },
+    "92116": {
+     "mediana_usd": 530388,
+     "parcelas": 9224
+    },
+    "92117": {
+     "mediana_usd": 476000,
+     "parcelas": 16346
+    },
+    "92118": {
+     "mediana_usd": 1209401,
+     "parcelas": 7580
+    },
+    "92119": {
+     "mediana_usd": 435133,
+     "parcelas": 8610
+    },
+    "92120": {
+     "mediana_usd": 499390,
+     "parcelas": 10499
+    },
+    "92121": {
+     "mediana_usd": 921626,
+     "parcelas": 2809
+    },
+    "92122": {
+     "mediana_usd": 524522,
+     "parcelas": 10941
+    },
+    "92123": {
+     "mediana_usd": 508733,
+     "parcelas": 7621
+    },
+    "92124": {
+     "mediana_usd": 527375,
+     "parcelas": 6488
+    },
+    "92126": {
+     "mediana_usd": 420123,
+     "parcelas": 20210
+    },
+    "92127": {
+     "mediana_usd": 906050,
+     "parcelas": 14571
+    },
+    "92128": {
+     "mediana_usd": 577143,
+     "parcelas": 18324
+    },
+    "92129": {
+     "mediana_usd": 573321,
+     "parcelas": 15826
+    },
+    "92130": {
+     "mediana_usd": 992988,
+     "parcelas": 17691
+    },
+    "92131": {
+     "mediana_usd": 726921,
+     "parcelas": 12056
+    },
+    "92139": {
+     "mediana_usd": 316542,
+     "parcelas": 8273
+    },
+    "92145": {
+     "mediana_usd": 212241,
+     "parcelas": 33
+    },
+    "92154": {
+     "mediana_usd": 382603,
+     "parcelas": 17660
+    },
+    "92173": {
+     "mediana_usd": 281941,
+     "parcelas": 3895
+    },
+    "92536": {
+     "mediana_usd": 137595,
+     "parcelas": 114
+    }
+   },
+   "familia": "vivienda",
+   "obtenido": "2026-09-04T00:55:26+00:00"
+  }
+ },
+ "salud": [
+  {
+   "id": "shf",
+   "estado": "ok",
+   "ms": 812,
+   "error": null,
+   "periodo": "2026-2T"
+  },
+  {
+   "id": "san_diego",
+   "estado": "ok",
+   "ms": 1015,
+   "error": null,
+   "periodo": null
+  }
+ ]
+}

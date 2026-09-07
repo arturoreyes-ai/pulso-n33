@@ -1,0 +1,174 @@
+name: Pulso — ingesta y despliegue
+
+# Un solo workflow es dueno del commit de datos Y del despliegue, a proposito.
+#
+# Los commits hechos con GITHUB_TOKEN NO disparan `on: push`. Un workflow
+# aparte de "desplegar al hacer push" nunca se ejecutaria despues del commit
+# del cron: la pagina se quedaria congelada mientras data/ avanza. La otra
+# cara de la moneda es util: el commit del bot no puede volver a disparar
+# este workflow, asi que no hay ciclo.
+
+on:
+  workflow_dispatch:
+    inputs:
+      sin_red:
+        description: "Correr sin red (usa tests/fixtures/corpus.json)"
+        type: boolean
+        default: false
+      forzar_indicadores:
+        description: "Volver a bajar vivienda, crimen y percepción aunque estén frescos"
+        type: boolean
+        default: false
+      descubrimiento_web:
+        description: "Descubrir publishers recientes con GDELT"
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+  # Minuto 17 y no 0 porque a la hora en punto GitHub encola miles de crons.
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pulso-main
+  cancel-in-progress: false
+
+env:
+  PYTHONUTF8: "1"
+
+jobs:
+  ingesta:
+    name: Pruebas, pipeline y commit de data/
+    runs-on: ubuntu-latest
+    # El modelo de sentimiento agrega unos minutos la primera vez (torch CPU
+    # y ~430 MB de pesos); con los dos caches de abajo, despues es rapido.
+    timeout-minutes: 25
+    permissions:
+      contents: write
+    outputs:
+      cambios: ${{ steps.commit.outputs.cambios }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # La punta de main, no github.sha: si una corrida quedo encolada
+          # mientras otra empujo, el push de esta seria non-fast-forward.
+          ref: main
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-modelo.txt
+
+      - name: Instalar dependencias
+        run: python -m pip install --requirement requirements.txt
+
+      # El clasificador local de tono y sentimiento (pulso/sentimiento.py).
+      # Torch va del indice CPU: la rueda CUDA pesa ~800 MB y aqui no hay GPU.
+      - name: Instalar el modelo de sentimiento
+        run: |
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --requirement requirements-modelo.txt
+
+      # Los pesos del modelo (~430 MB) se bajan de Hugging Face en la primera
+      # prediccion. Sin este cache, cada corrida del cron los volveria a bajar.
+      - name: Cache del modelo de sentimiento
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: modelo-robertuito-sentiment-analysis-v1
+
+      - name: Pruebas
+        run: python -m unittest discover -s tests -v
+
+      - name: Validar lo que hay en el repo
+        run: python -m pulso validar
+
+      # --metodo modelo: tono de cada titular con el modelo local. Es tono de
+      # la frase, no postura hacia una persona; el tablero lo rotula asi.
+      - name: Pipeline
+        run: python -m pulso correr --metodo modelo ${{ (github.event_name == 'schedule' || inputs.descubrimiento_web) && '--descubrimiento-web' || '' }} ${{ inputs.sin_red && '--sin-red' || '' }}
+
+      # El cache de comentarios NO puede ir a git (retencion de 30 dias, ver
+      # pulso/youtube.py), pero sin persistirlo entre corridas la ventana de
+      # 30 dias no existiria: cada corrida derivaria solo de si misma.
+      # actions/cache resuelve las dos cosas: no es git, caduca solo, y es
+      # privado del repo.
+      - name: Restaurar el cache de comentarios
+        if: vars.YOUTUBE_HABILITADO == 'true'
+        uses: actions/cache@v4
+        with:
+          path: cache
+          key: comentarios-${{ github.run_id }}
+          restore-keys: comentarios-
+
+      # --sentimiento modelo etiqueta cada comentario EN EL CACHE (que vive 30
+      # dias y no entra a git); a data/ solo llegan conteos por zona y tema.
+      - name: Conversación (YouTube)
+        if: vars.YOUTUBE_HABILITADO == 'true'
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: python -m pulso conversacion --sentimiento modelo
+
+      # Vivienda, suelo, crimen y percepcion. Se salta solo si lo que hay
+      # tiene menos de una semana: son fuentes trimestrales y mensuales, y
+      # bajar 60 MB cada hora seria una groseria sin dato nuevo a cambio.
+      - name: Indicadores oficiales
+        run: python -m pulso indicadores ${{ inputs.forzar_indicadores && '--forzar' || '' }}
+
+      - name: Validar lo que acaba de escribir
+        run: python -m pulso validar
+
+      - name: Commit de data/ si cambio
+        id: commit
+        run: |
+          git config user.name "pulso-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "Sin cambios en data/"
+            echo "cambios=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "datos: ingesta $(date -u +'%Y-%m-%d %H:%MZ') [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+            echo "cambios=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Se arma siempre, aunque Pages este apagado: es la prueba de humo de
+      # pulso/sitio.py.
+      - name: Armar _site
+        run: python -m pulso sitio --destino _site
+
+      - name: Subir el artefacto de Pages
+        if: vars.DESPLEGAR_PAGES == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  desplegar:
+    name: Desplegar en GitHub Pages
+    needs: ingesta
+    # Apagado mientras el repo sea privado: Pages en repo privado exige plan
+    # de pago. Para encenderlo, ver README seccion "Publicar el tablero".
+    if: vars.DESPLEGAR_PAGES == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

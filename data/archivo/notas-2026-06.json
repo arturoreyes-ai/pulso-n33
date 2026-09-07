@@ -1,0 +1,109 @@
+{
+ "esquema": 1,
+ "mes": "2026-06",
+ "total": 3,
+ "notas": [
+  {
+   "id": "f3b5926f167287d9",
+   "titulo": "Tijuana estrena alcalde: Abdiel Gutiérrez toma protesta tras licencia de Burgueño",
+   "url": "https://bajanews.mx/",
+   "dominio": "bajanews.mx",
+   "fuente": "bajanews",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-06-21",
+   "publicado": "2026-06-21T00:00:00",
+   "capturado": "2026-09-03T23:57:28+00:00",
+   "figuras": [
+    {
+     "id": "agc",
+     "via": "nominal",
+     "clave": "abdiel gutierrez"
+    },
+    {
+     "id": "ibr",
+     "via": "nominal",
+     "clave": "burgueno"
+    }
+   ],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4548,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "5bed46bb0c58929e",
+   "titulo": "Burgueño se va de licencia a interna de Morena; Abdiel Gutiérrez asume alcaldía de Tijuana",
+   "url": "https://zetatijuana.com/feed/",
+   "dominio": "zetatijuana.com",
+   "fuente": "zeta",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-06-21",
+   "publicado": "2026-06-21T00:00:00",
+   "capturado": "2026-09-03T23:57:28+00:00",
+   "figuras": [
+    {
+     "id": "agc",
+     "via": "nominal",
+     "clave": "abdiel gutierrez"
+    },
+    {
+     "id": "ibr",
+     "via": "nominal",
+     "clave": "burgueno"
+    }
+   ],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5164,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "3b9badb3b4210beb",
+   "titulo": "Cabildo aprobó licencia indefinida a Burgueño; Abdiel Gutiérrez asume el cargo",
+   "url": "https://afntijuana.info/",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "estatal"
+   ],
+   "alcance": "estatal",
+   "fecha": "2026-06-20",
+   "publicado": "2026-06-20T00:00:00",
+   "capturado": "2026-09-03T23:57:28+00:00",
+   "figuras": [
+    {
+     "id": "agc",
+     "via": "nominal",
+     "clave": "abdiel gutierrez"
+    },
+    {
+     "id": "ibr",
+     "via": "nominal",
+     "clave": "burgueno"
+    }
+   ],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7181,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  }
+ ]
+}

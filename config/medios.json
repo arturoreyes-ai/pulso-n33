@@ -1,0 +1,221 @@
+{
+ "nota": "Catálogo de fuentes. 'tipo' puede ser rss (omisión) o scrapy. Scrapy solo lee portadas permitidas por robots.txt y publica titular, fuente y enlace, nunca el cuerpo. 'zona' es la cobertura principal del medio; no es la zona de cada nota. Para apagar un medio sin perder su registro, pon 'activo': false y di por qué en 'nota'. 'idioma' es el del medio (es u en) y decide con que modelo se etiqueta el tono: los cuatro medios de San Diego publican en inglés y el modelo de tono es español, así que sin este campo se les asignaba una etiqueta que no significaba nada.",
+ "medios": [
+  {
+   "id": "zeta",
+   "nombre": "Zeta Tijuana",
+   "url": "https://zetatijuana.com/feed/",
+   "zona": "Tijuana",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-03"
+  },
+  {
+   "id": "soltij",
+   "nombre": "El Sol de Tijuana",
+   "url": "https://www.elsoldetijuana.com.mx/rss",
+   "zona": "Tijuana",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "OEM. Feed largo, 100 notas por lectura."
+  },
+  {
+   "id": "jornadabc",
+   "nombre": "Jornada Baja California",
+   "url": "https://jornadabc.mx/feed/",
+   "zona": "Tijuana",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-03"
+  },
+  {
+   "id": "sintesis",
+   "nombre": "Síntesis TV",
+   "url": "https://sintesistv.com.mx/feed/",
+   "zona": "Tijuana",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-03"
+  },
+  {
+   "id": "uniradio",
+   "nombre": "Uniradio Informa",
+   "url": "https://www.uniradioinforma.com/feed/",
+   "zona": "estatal",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "El prototipo apuntaba a uniradiobaja.com/rss, que da 404. El dominio correcto es uniradioinforma.com."
+  },
+  {
+   "id": "imparcial",
+   "nombre": "El Imparcial",
+   "url": "https://www.elimparcial.com/arc/outboundfeeds/rss/?outputType=xml",
+   "zona": "estatal",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "El prototipo apuntaba a /rss/portada.xml, que responde 200 con una página HTML, no con RSS. Este es el feed de Arc, su plataforma. OJO: trae el grupo entero y la mayoría de las notas son de Sonora (Hermosillo), no de BC. Es el medio que más volumen aporta y el que menos relevancia regional tiene. Los slugs /category/tijuana/, /mexicali/ y /bajacalifornia/ responden 200 con feed vacío, así que el slug correcto existe pero es otro."
+  },
+  {
+   "id": "lavoz",
+   "nombre": "La Voz de la Frontera",
+   "url": "https://www.lavozdelafrontera.com.mx/rss",
+   "zona": "Mexicali",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "OEM Mexicali. Feed largo, 100 notas por lectura. Es la fuente principal de Mexicali."
+  },
+  {
+   "id": "tecate",
+   "nombre": "Tecate Noticias",
+   "url": "https://tecatenoticias.com/feed/",
+   "zona": "Tecate",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "Único feed de Tecate que se encontró funcionando."
+  },
+  {
+   "id": "rosarito",
+   "nombre": "Rosarito Noticias",
+   "url": "https://rosaritonoticias.com/feed/",
+   "zona": "Playas de Rosarito",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "Único feed de Rosarito que se encontró funcionando."
+  },
+  {
+   "id": "notiens",
+   "nombre": "Noticias Ensenada",
+   "url": "https://noticiasensenada.com/feed/",
+   "zona": "Ensenada",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "Noticias Ensenada sí publica RSS. El Vigía se integra aparte con Scrapy porque /rss es una página HTML, no un feed."
+  },
+  {
+   "id": "elvigia",
+   "nombre": "El Vigía",
+   "url": "https://www.elvigia.net/",
+   "zona": "Ensenada",
+   "idioma": "es",
+   "tipo": "scrapy",
+   "scrapy": {
+    "item": "article",
+    "titulo": "h2.titulo a::text",
+    "url": "h2.titulo a::attr(href)",
+    "fecha_url": "/(?P<ano>\\d{4})/(?P<mes>\\d{1,2})/(?P<dia>\\d{1,2})/"
+   },
+   "activo": true,
+   "verificado": "2026-09-04",
+   "nota": "Portada HTML sin RSS util. robots.txt permite la portada; Scrapy no sigue los artículos."
+  },
+  {
+   "id": "radarbc",
+   "nombre": "Radar BC",
+   "url": "https://radarbc.com/feed/",
+   "zona": "Ensenada",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-03"
+  },
+  {
+   "id": "kpbs",
+   "nombre": "KPBS",
+   "url": "https://www.kpbs.org/index.rss",
+   "zona": "San Diego",
+   "idioma": "en",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "En inglés. Cubre la frontera con regularidad."
+  },
+  {
+   "id": "voiceofsd",
+   "nombre": "Voice of San Diego",
+   "url": "https://voiceofsandiego.org/feed/",
+   "zona": "San Diego",
+   "idioma": "en",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "En inglés."
+  },
+  {
+   "id": "timessd",
+   "nombre": "Times of San Diego",
+   "url": "https://timesofsandiego.com/feed/",
+   "zona": "San Diego",
+   "idioma": "en",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "En inglés."
+  },
+  {
+   "id": "inewsource",
+   "nombre": "inewsource",
+   "url": "https://inewsource.org/feed/",
+   "zona": "San Diego",
+   "idioma": "en",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "En inglés. Periodismo de investigación."
+  },
+  {
+   "id": "psn",
+   "nombre": "PSN",
+   "url": "https://psn.mx/feed/",
+   "zona": "Tijuana",
+   "idioma": "es",
+   "activo": false,
+   "verificado": "2026-09-03",
+   "nota": "Apagado: el feed responde pero trae 4 entradas y la primera es publicidad ('D-Shirt: We Create Your Dream'). Revisar si vale la pena antes de encenderlo."
+  },
+  {
+   "id": "afn",
+   "nombre": "AFN Tijuana",
+   "url": "https://afntijuana.info/lo-ultimo.php",
+   "zona": "Tijuana",
+   "idioma": "es",
+   "tipo": "scrapy",
+   "scrapy": {
+    "item": ".card",
+    "titulo": "h5.card-title a::text",
+    "url": "h5.card-title a::attr(href)",
+    "fecha": "h6.card-subtitle::text"
+   },
+   "activo": true,
+   "verificado": "2026-09-04",
+   "nota": "No publica RSS. Se lee únicamente Lo último; robots.txt solo excluye /admin/. Conserva zona Tijuana por compatibilidad con su histórico; el gazetero corrige titulares que nombran otra ciudad."
+  },
+  {
+   "id": "bajanews",
+   "nombre": "Baja News",
+   "url": "https://bajanews.mx/feed",
+   "zona": "estatal",
+   "idioma": "es",
+   "tipo": "scrapy",
+   "scrapy": {
+    "item": "a[href^='/Cali-Baja/']",
+    "titulo": "::text",
+    "url": "::attr(href)"
+   },
+   "activo": true,
+   "verificado": "2026-09-04",
+   "nota": "/feed es una página HTML. Se leen solo enlaces Cali-Baja; robots.txt declara search=yes y permite /."
+  },
+  {
+   "id": "sanquintin",
+   "nombre": "San Quintín — sin fuente",
+   "url": "https://www.sanquintin.gob.mx/",
+   "zona": "San Quintín",
+   "idioma": "es",
+   "activo": false,
+   "verificado": "2026-09-03",
+   "nota": "Registro deliberado de un hueco, no un medio. San Quintín se volvió municipio en 2020 y no se encontró NINGÚN feed de prensa local. El tablero tiene que rotularlo como zona sin cobertura, no fingir que la cubre con notas estatales. Si aparece un medio local, este es el renglón que hay que llenar."
+  }
+ ]
+}

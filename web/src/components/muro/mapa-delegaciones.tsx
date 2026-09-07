@@ -4,6 +4,35 @@ import { MAPA_DELEGACIONES } from "@/lib/dominio/delegaciones-mapa";
 import { NOMBRE_CORTO_DELEGACION, type FiltroDelegacion } from "@/lib/dominio/delegaciones";
 import type { Delegacion } from "@/lib/datos/tipos";
 
+/**
+ * GUARDADO (7 de septiembre de 2026). Sin consumidor a proposito.
+ *
+ * Que lo enciende: renderizar <MapaDelegaciones> junto a <SelectorDelegacion>
+ * en `muro/muro.tsx`. Ya recibe las mismas tres props que ese sitio pasa hoy
+ * (activa, conteo, onElegir), asi que son cinco lineas.
+ *
+ * Por que esta apagado: `notas.json` todavia no trae la clave `delegaciones`,
+ * asi que las nueve delegaciones marcan 0 y «sin delegacion identificada» se
+ * queda con las 205. Un mapa de nueve poligonos en cero no informa.
+ *
+ * Se queda DENTRO de src/ y compilando, no en docs/ ni en una rama. El
+ * `Record<Delegacion, ...>` de aqui abajo es exhaustivo sobre la union, asi
+ * que `pnpm tipos` falla EN ESTE ARCHIVO en cuanto alguien agregue una decima
+ * delegacion, y le dice que falta su poligono y su etiqueta. Eso es mejor
+ * anti-podredumbre que cualquier nota, y es gratis; sacarlo de src/ lo tira.
+ * Tambien entro al barrido de tokens, para que encenderlo no reimporte de
+ * golpe nueve valores fuera de escala.
+ *
+ * Dos defectos conocidos, anotados mientras el contexto esta fresco:
+ *  - el <rect> de fondo codifica 1000x620 a mano contra
+ *    MAPA_DELEGACIONES.viewBox; si el viewBox cambia, se desincroniza y nada
+ *    lo detecta.
+ *  - los poligonos llevan role="button" y tabIndex sobre un <g> de SVG. No es
+ *    un boton: no hay semantica de Espacio/Enter de plataforma (se emula a
+ *    mano) y aria-pressed sobre un grafico se anuncia de forma inconsistente.
+ *    Si se enciende, necesita <button> de verdad encima del SVG.
+ */
+
 const ETIQUETAS: Record<Delegacion, [number, number]> = {
   Centro: [285, 205],
   "Cerro Colorado": [535, 226],
@@ -32,7 +61,7 @@ export function MapaDelegaciones({
     <section className="relative overflow-hidden rounded-nucleo border border-filo bg-[#0d0b0c] px-3 py-3 sm:px-5 sm:py-4" aria-labelledby="titulo-mapa-delegaciones">
       <div className="mb-3 flex items-end justify-between gap-3">
         <div>
-          <p className="text-meta uppercase text-chart-1/80">Corte territorial</p>
+          <p className="text-meta uppercase text-chart-1-texto">Corte territorial</p>
           <h2 id="titulo-mapa-delegaciones" className="mt-1 text-cuerpo font-medium text-tinta-dato">Delegaciones de Tijuana</h2>
         </div>
         <p className="max-w-[13rem] text-right text-meta text-tinta-meta">Pulsa un polígono para filtrar. Otro pulso limpia el filtro.</p>

@@ -1,0 +1,11 @@
+_site/
+__pycache__/
+*.pyc
+.venv/
+
+# Texto crudo de comentarios de YouTube. NO se commitea: las Politicas para
+# Desarrolladores de YouTube (III.E.4.d) limitan su almacenamiento a 30 dias
+# y git no puede borrar, porque lo commiteado vive en cada clon y en cada
+# commit anterior. pulso/youtube.py purga esta carpeta en cada corrida.
+# Al repo solo entra data/conversacion.json, con metricas derivadas.
+cache/

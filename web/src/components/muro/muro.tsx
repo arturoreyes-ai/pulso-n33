@@ -97,7 +97,7 @@ export function Muro({ zona }: { zona: ZonaRuta | null }) {
             <button
               type="button"
               onClick={limpiarTema}
-              className="inline-flex items-center gap-1.5 rounded-full bg-chart-1/15 px-3 py-2 text-meta text-chart-1 transition-colors hover:bg-chart-1/25"
+              className="inline-flex items-center gap-1.5 rounded-full bg-chart-1/15 px-3 py-2 text-meta text-chart-1-texto transition-colors hover:bg-chart-1/25"
             >
               <X size={12} weight="light" aria-hidden />
               filtrado por tema

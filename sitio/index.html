@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pulso N33 — muro de prensa</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+<a class="salto" href="#contenido">Saltar al contenido</a>
+
+<header class="cabeza">
+  <div class="marca">
+    <h1>PULSO <span class="n33">N33</span></h1>
+    <p class="lema">MURO DE PRENSA · BAJA CALIFORNIA POR ZONA</p>
+  </div>
+  <dl class="cifras" id="cifras">
+    <div><dt>notas</dt><dd id="c-notas">—</dd></div>
+    <div><dt>fuentes</dt><dd id="c-fuentes">—</dd></div>
+    <div><dt>corte</dt><dd id="c-corte">—</dd></div>
+  </dl>
+</header>
+
+<nav class="zonas" id="zonas" aria-label="Filtrar por zona"></nav>
+
+<p class="banda" id="banda" role="status"></p>
+
+<main id="contenido" tabindex="-1">
+  <section class="panel" id="indicadores" hidden>
+    <h2>Indicadores oficiales <span class="sub" id="ind-sub"></span></h2>
+    <div class="ind-grid" id="ind-grid"></div>
+    <p class="nota-panel" id="ind-nota"></p>
+  </section>
+
+  <section class="panel" id="temas" hidden>
+    <h2>Temas de la semana <span class="sub" id="temas-sub"></span></h2>
+    <ol class="lista-temas" id="temas-lista"></ol>
+    <p class="nota-panel" id="temas-nota"></p>
+  </section>
+
+  <section class="panel" id="conversacion" hidden>
+    <h2>Conversación en YouTube <span class="sub" id="conv-sub"></span></h2>
+    <div id="conv-cuerpo"></div>
+    <p class="nota-panel" id="conv-nota"></p>
+  </section>
+
+  <section class="panel" id="cobertura" hidden>
+    <h2>Cobertura por zona</h2>
+    <ul class="barras" id="cobertura-lista"></ul>
+    <p class="nota-panel">
+      Notas atribuidas a cada zona en el corte actual. Una nota que habla de
+      dos zonas cuenta en las dos. Las notas de fuera de la región se
+      descartan antes de contar.
+    </p>
+  </section>
+
+  <section class="panel" id="salud" hidden>
+    <h2>Salud de las fuentes</h2>
+    <ul id="salud-lista"></ul>
+  </section>
+
+  <div id="muro"></div>
+</main>
+
+<footer class="pie">
+  <p>
+    Esta página mide <strong>volumen de prensa y de conversación</strong>, no
+    opinión pública. Un titular es una decisión editorial y un comentario de
+    YouTube proviene de quien decidió comentar; ninguno representa a toda la
+    población. La única medición de percepción con muestra probabilística es
+    la ENSU del INEGI, y solo cubre Tijuana y Mexicali.
+  </p>
+  <p class="tenue">
+    Noticias agregadas como titular + fuente + enlace. Los comentarios sólo se
+    publican como conteos y temas derivados, sin texto ni identidad.
+  </p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

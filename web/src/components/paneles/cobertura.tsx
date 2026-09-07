@@ -87,7 +87,7 @@ function Region({
             const etiqueta: ReactNode = esZonaRuta(z) ? (
               <Link
                 href={rutaDeZona(z)}
-                className="transition-colors hover:text-chart-1"
+                className="transition-colors hover:text-chart-1-texto"
               >
                 {NOMBRE_CORTO[z]}
               </Link>

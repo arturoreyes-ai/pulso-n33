@@ -31,7 +31,7 @@ function enlaceZona(nombre: string): ReactNode {
   return (
     <Link
       href={rutaDeZona(nombre)}
-      className="transition-colors hover:text-chart-1"
+      className="transition-colors hover:text-chart-1-texto"
     >
       {NOMBRE_CORTO[nombre]}
     </Link>

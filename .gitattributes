@@ -1,0 +1,6 @@
+# LF en todo: el pipeline corre en Windows (local) y en Ubuntu (Actions).
+# Sin esto, un commit de data/ desde Windows y otro del bot pelean por los
+# saltos de linea y `git diff --quiet` deja de servir como guarda.
+* text=auto eol=lf
+*.png binary
+*.woff2 binary

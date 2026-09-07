@@ -47,7 +47,7 @@ const FilaTema = memo(function FilaTema({
         aria-pressed={activo}
         onClick={() => alternarTema(t.notas)}
         className={`text-left transition-colors ${
-          activo ? "text-chart-1" : "text-tinta-titulo hover:text-chart-1"
+          activo ? "text-chart-1-texto" : "text-tinta-titulo hover:text-chart-1-texto"
         }`}
       >
         <span className="text-lectura">{t.termino}</span>

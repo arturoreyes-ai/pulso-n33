@@ -27,6 +27,11 @@ const RAIZ = path.join(import.meta.dirname, "..", "src");
  */
 const EXCEPCIONES = [
   {
+    archivo: "components/cabecera/encabezado.tsx",
+    regla: "rojo-de-texto",
+    nota: "El h1 va a 48-72px: ahi manda el 3:1 de texto grande y #E0342B lo pasa con 4.42.",
+  },
+  {
     archivo: "components/ui/bisel.tsx",
     regla: "radio",
     nota: "Es el unico que puede nombrar un radio: es quien define los niveles.",
@@ -100,11 +105,50 @@ const REGLAS = [
     dice: "Un alfa de blanco en JS no lo ve ningun grep de clases. Usa var(--color-tinta-*) o var(--color-vela).",
   },
   {
+    nombre: "rojo-de-texto",
+    patron: /\btext-chart-1(?:\/\d+)?(?=[\s"'`]|$)/g,
+    dice: "#E0342B mide 4.42:1 sobre carta: no pasa AA a tamano de cuerpo. Usa text-chart-1-texto.",
+  },
+  {
     nombre: "alfa-sobre-token",
     patron: /\b(?:text|bg|border|fill|stroke|decoration)-(?:tinta-\w+|vela|filo|realce)\/\d+/g,
     dice: "PROHIBIDO: el token ya trae alfa y Tailwind lo compone con color-mix, dando un valor fuera de escala en silencio.",
   },
 ];
+
+
+/**
+ * Autoprueba. Una guardia que deja de vigilar EN SILENCIO es peor que no
+ * tenerla: da luz verde. Ya paso una vez —un \b de una regex acabo
+ * escrito como el caracter de retroceso 0x08, la regla dejo de casar con
+ * nada y el informe salio limpio—, asi que cada regla trae aqui un ejemplo
+ * que TIENE que marcar. Corre antes del analisis de verdad.
+ */
+const MUESTRAS = {
+  tinta: "className=\"text-white/45\"",
+  superficie: "className=\"bg-white/[0.04]\"",
+  tamano: "className=\"text-xs\"",
+  radio: "className=\"rounded-2xl\"",
+  duracion: "className=\"duration-700\"",
+  metrica: "className=\"leading-snug\"",
+  "rgb-crudo": "const c = \"rgb(255 255 255 / 0.5)\";",
+  "rojo-de-texto": "className=\"text-chart-1\"",
+  "alfa-sobre-token": "className=\"text-tinta-prosa/80\"",
+};
+
+const rotas = REGLAS.filter((r) => {
+  const m = MUESTRAS[r.nombre];
+  if (m === undefined) return true;
+  r.patron.lastIndex = 0;
+  return ![...m.matchAll(r.patron)].some((x) => !r.exento?.(x[0].trim()));
+}).map((r) => r.nombre);
+
+if (rotas.length > 0) {
+  console.error(
+    `verificar-tokens: ${rotas.length} regla(s) no marcan su propia muestra y por tanto no vigilan nada: ${rotas.join(", ")}.`,
+  );
+  process.exit(2);
+}
 
 const EXTS = new Set([".ts", ".tsx", ".css"]);
 

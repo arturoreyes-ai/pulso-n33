@@ -1,0 +1,12 @@
+# Dependencias OPCIONALES del clasificador local de sentimiento
+# (pulso/sentimiento.py). Sin ellas todo funciona con --metodo ninguno.
+#
+# Torch va aparte y del indice CPU, para no bajar la rueda CUDA de ~800 MB:
+#
+#   python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+#   python -m pip install -r requirements-modelo.txt
+#
+# El modelo (~430 MB) se baja solo en la primera prediccion a
+# ~/.cache/huggingface; en GitHub Actions ese directorio va a actions/cache.
+pysentimiento==0.7.3
+transformers<5

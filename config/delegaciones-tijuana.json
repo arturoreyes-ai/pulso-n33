@@ -1,0 +1,3375 @@
+{
+  "esquema": 1,
+  "actualizado": "2026-09-04",
+  "autoridad": "IMPLAN Tijuana",
+  "fuentes": {
+    "directorio": {
+      "url": "https://implan.tijuana.gob.mx/indicadores/territorio.aspx",
+      "fecha_corte": "2026-09-04",
+      "declaradas": 792,
+      "enumeradas": 791
+    },
+    "poligonos": {
+      "url": "https://www.arcgis.com/home/item.html?id=3db7ce3e475348e1b640fcd045d62901",
+      "item": "3db7ce3e475348e1b640fcd045d62901",
+      "titulo": "MAPA BASE DELEGACIONES-COLONIAS 2014",
+      "fecha": "2014",
+      "propietario": "implantijuana"
+    }
+  },
+  "reglas": {
+    "modo_predeterminado": "contextual",
+    "contexto": [
+      "colonia",
+      "col.",
+      "fraccionamiento",
+      "fracc.",
+      "residencial",
+      "sección",
+      "delegación",
+      "unidad",
+      "parque industrial",
+      "conjunto",
+      "barrio"
+    ],
+    "nota": "No se inventa la colonia faltante: IMPLAN declara 792 y enumera 791."
+  },
+  "delegaciones": [
+    {
+      "nombre": "Centro",
+      "slug": "centro",
+      "colonias": [
+        {
+          "nombre": "AGUA CALIENTE SECC.PINOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ALEMAN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ALTAMIRA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ALTAMIRA SUR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "AMERICA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "AVIACIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "AZCONA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "BUROCRATA HIPODROMO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CALETE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAMPO DE GOLF",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑÓN DE LA PEDRERA ESTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑÓN OASIS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑÓN PRIMAVERA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CASTILLO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CENTRO ESCOLAR AGUA CALIENTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CHAPULTEPEC",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CHAPULTEPEC ESTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CHULA VISTA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "COLINAS DE AGUA CALIENTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CONJUNTO RESIDENCIAL CATAVINA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CUAUHTEMOC",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CUBILLAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CUBILLAS SUR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CUMBRES DE JUAREZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "DAVILA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL BOSQUE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EMPLEADOS FEDERALES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FUNDADORES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GABILONDO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GUADALAJARA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GUERRERO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HACIENDA AGUA CALIENTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HACIENDA LAS PALOMAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HERRADURA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HERRADURA SUR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HERRERA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HIDALGO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HIPODROMO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HIPODROMO \"AGUA CALIENTE\"",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "I AYUNTAMIENTO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "INDEPENDENCIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "JARDINES DE CHAPULTEPEC",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "JARDINES DE CHAPULTEPEC S-E",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "JUAREZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA REMOSA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA SIERRA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LADERAS DE MONTERREY",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LINDA VISTA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DOCTORES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DE AGUA CALIENTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DE AGUA CALIENTE 1ra.SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DE AGUA CALIENTE 5a SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DE AGUA CALIENTE 6a SECCIÓN (LOMAS ALTAS)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS HIPODROMO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LÓPEZ MATEOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MADERO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MADERO SUR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MARRÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MÉXICO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MONTERREY",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MORELOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "NEIDHART",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PANTEÓN JARDIN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PLAN DE BARRANQUITAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PLANETARIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PRIVADA CATALANA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PUEBLO BONITO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PUERTA DE HIERRO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RANCHO EL GRANDE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "REVOLUCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RINCÓN COLONIAL CHAPULTEPEC",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ROMA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SAN JERONIMO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA LOMAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ZONA CENTRO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ZONA ESTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ZONA NORTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ZONA URBANA RIO TIJUANA",
+          "modo": "contextual"
+        }
+      ],
+      "hitos": [
+        "Garita San Ysidro",
+        "CECUT",
+        "Palacio Municipal"
+      ],
+      "alias_directos": [
+        "zona centro",
+        "centro de tijuana",
+        "zona rio",
+        "zona urbana rio",
+        "zona norte de tijuana",
+        "el chaparral",
+        "garita el chaparral",
+        "avenida revolución",
+        "av. revolución",
+        "fundadores",
+        "cañón de la pedrera"
+      ]
+    },
+    {
+      "nombre": "Cerro Colorado",
+      "slug": "cerro-colorado",
+      "colonias": [
+        {
+          "nombre": "AMPLIACIÓN LOMA BONITA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "AMPLIACIÓN GABRIEL RODRIGUEZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "AMPLIACIÓN GUAYCURA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "AZTECA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "BAJA MAQ.EL AGUILA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "BUENOS AIRES NORTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "BUENOS AIRES SUR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "BUGAMBILIAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑÓN DE LA RAZA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CERRO COLORADO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CERRO COLORADO 2a.SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CERRO COLORADO I",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CERRO II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "COLINAS DEL ALAMAR (TORRES DEL LAGO)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CONJUNTO HABITACIONAL LAS PRADERAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EJIDO MATAMOROS (HOROSCOPO)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL LAGO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL PORVENIR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FIDEL VELAZQUEZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GUAYCURA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HABIT.ESTADIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HACIENDA DEL COLORADO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "INFONAVIT CAPISTRANO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "J.LÓPEZ PORTILLO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "JARDIN DORADO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "JARDINES DEL LAGO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "KINO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "KINO II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA CAMPIÑA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAGO SUR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAS MISIONES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMA BONITA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMA DORADA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS LOBOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MESETAS DEL GUAYCURA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MIRADOR CAPISTRANO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MISIÓN DE LAS CALIFORNIAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MISIÓN DE LAS CALIFORNIAS II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MURUA ORIENTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PARQUE IND.PRESIDENTES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PASEOS DEL GUAYCURA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PATRIA NUEVA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PORTICOS DEL LAGO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PRADERAS DE LA MESA",
+          "modo": "omitido"
+        },
+        {
+          "nombre": "PRESIDENTES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PUERTA DEL SOL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RANCHO EL AGUILA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RESIDENCIAL CAPISTRANO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SAN CARLOS",
+          "modo": "omitido"
+        },
+        {
+          "nombre": "URBIQUINTA MARSELLA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA CRUZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ZONA URB.EJIDO MATAMOROS (AGRARISTAS)",
+          "modo": "contextual"
+        }
+      ],
+      "hitos": [
+        "Cerro Colorado",
+        "Blvd. Insurgentes",
+        "Central Camionera"
+      ],
+      "alias_directos": [
+        "cerro colorado",
+        "guaycura",
+        "buenos aires norte",
+        "buenos aires sur"
+      ]
+    },
+    {
+      "nombre": "La Mesa",
+      "slug": "la-mesa",
+      "colonias": [
+        {
+          "nombre": "18 DE MARZO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "20 DE NOVIEMBRE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "AGUA CALIENTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ALBA ROJA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ALCALA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ALFONSO CORONA DEL ROSAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ALICIA CARRILLO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "AMPLIACIÓN REFORMA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANAHUAC",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANEXA 20 DE NOVIEMBRE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANEXA DURANGO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANEXA LOMA DORADA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANEXA SANTA FE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANGELICA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ARBOLEDAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ARBOLEDAS DE LA MESA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "BAJA CALIFORNIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "BALCÓN LAS HUERTAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "BENTON",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAMICHIN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAMINO REAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAMPOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑÓN EL SALADO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CASTRO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CASTRO GREEN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CECEÑA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CHAPULTEPEC ALAMAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CHAPULTEPEC CALIFORNIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CHIHUAHUA LA MESA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "COLINAS DE LA MESA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "COLINAS DE SAN ANGEL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CONST.DEL 17",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CONTRERAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CONTRERAS OESTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CORTEZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "DIMENSTEIN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "DIVISIÓN DEL NORTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "DURANGO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL MIRADOR (LA MESA)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL PARAISO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL PEDREGAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL PRADO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL PRADO ESTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL PREDREGAL OESTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ELECTRICISTAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FORTIN DE LAS FLORES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FORTIN DE LAS FLORES OESTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FOVISSSTE LOS VOLCANES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GARCIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GAS Y ANEXAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GERONIMO MEZA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GERONIMO MEZA ESTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GERTRUDIS GREEN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GUADALAJARA (LA MESA)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GUANAJUATO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GUILLEN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HABIT ELECT.",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HIPODROMO DOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HUERTAS 1a SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HUERTAS 2a SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HUERTAS 5a SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "IMAQ TIJUANA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "INF.CACHANILLAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "INF.LATINOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "INF.LOMAS VERDES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "INFONAVIT LA MESA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "JALISCO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "JARDIN DE LAS BUGAMBILIAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "JARDINES DE AGUA CALIENTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "JARDINES DE LA MESA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "JARDINES DE SAN CARLOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "JOSE SANDOVAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA CIENEGA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA CIENEGA PONIENTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA CIENEGA SUR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA ESCONDIDA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA ESMERALDA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA JOYA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA JOYA ESTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA MESA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA MESA SUR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA VILLA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAS BRISAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAS BRISAS NORTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAS FUENTES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAS HUERTAS 3a SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAS HUERTAS 4a SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAS LILAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAS PALMAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAS PLAZAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAS VEGAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LEOS MONTOYA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LIBRAMIENTO (ZONA AO)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMA DE LA CRUZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMA DORADA CAMPOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS CONJUNTO RESIDENCIAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DE LA AMISTAD",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DE LA PRESA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS LAS HUERTAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOPEZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOPEZ LUCIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOPEZ OESTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS ALAMOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS ANGELES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS ARBOLES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS ESPANOLES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS NARANJOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS OLIVOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS OLIVOS NORTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS PIRULES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS REYES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS SANTOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS SAUCILLOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS VENADOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS VENADOS OESTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LUNA PARK",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LUZ JUAREZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MAGAÑA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MAURILIO MAGALLON",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MÉXICO LINDO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MONTE BELLO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MORENO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MORENO 2da SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "NIÑOS HEROES (LA MESA)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "NIÑOS HEROES ESTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ORIZABA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "P-113 P-110",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "P-122",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "P-125",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "P-146",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "P-151",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "P-42",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "P-44",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "P-51",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "P-53",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "P-65",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "P-69",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "P-77",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "P-90",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PARQUE IND.LA MESA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PASEO DE LOS REYES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PINOS DE AGUERO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PINOS DE NAREZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PLAN DE IGUALA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PRADERAS DE LA MESA",
+          "modo": "omitido"
+        },
+        {
+          "nombre": "SECCIÓN VALLE DE LAS FLORES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PRESA RODRIGUEZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "QUINTA ALTA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RAMIREZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RAMOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RAMOS SUR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RANCHO RIVIERA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "REAL DEL MONTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RESIDENCIAL AGUA CALIENTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RESIDENCIAL LOS PINOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "REYNOSO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "REYNOSO (P-162)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RIO TIJUANA 3 ra.ETAPA",
+          "modo": "omitido"
+        },
+        {
+          "nombre": "RUBIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SAN ANTONIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SAN ANTONIO OESTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SAN CARLOS",
+          "modo": "omitido"
+        },
+        {
+          "nombre": "SANTA FE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SIRAK M. BALOYAN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SONOITA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SONORA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "STA.ANITA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "STA.CECILIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "STA.CRUZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "STA.ELENA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "STA.ROSA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TERRAZAS DE LA PRESA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TERRAZAS DE LA PRESA SECCIÓN VISTAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TONA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "URIAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VAIM",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VERACRUZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA COLONIAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA FLORESTA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLAS DE BAJA CALIFORNIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VIVIENDA MAGISTERIAL 37",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "YAMILLE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ZERMENO (MERIDA)",
+          "modo": "contextual"
+        }
+      ],
+      "hitos": [
+        "Crucero 5 y 10",
+        "Macroplaza",
+        "Mundo Divertido"
+      ],
+      "alias_directos": [
+        "delegación la mesa",
+        "delegación de la mesa"
+      ]
+    },
+    {
+      "nombre": "La Presa A.L.R.",
+      "slug": "la-presa",
+      "colonias": [
+        {
+          "nombre": "ALTIPLANO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "COLAS DEL MATAMOROS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "DESARROLLO URBANO EJIDO MATAMOROS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EJIDO FRANCISCO VILLA 2DA SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EJIDO FRANCISCO VILLA SUR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL FLORIDO 1a. Y 2a.SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL FLORIDO III",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL FLORIDO IV",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL PEÑÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL PIPILA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FIDUZET",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GRANJAS FAMILIARES DEL MATAMOROS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HACIENDA LAS FUENTES",
+          "modo": "omitido"
+        },
+        {
+          "nombre": "HEROES DE INDEPENDENCIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DEL MATAMOROS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS TERRABELLA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MARIANO MATAMOROS (CENTRO)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MARIANO MATAMOROS (NORTE)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MARIANO MATAMOROS (SUR)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MIRADOR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PLANICIE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "POBLADO DEL EJIDO FRANCISCO VILLA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "POBLADO EJIDO MATAMOROS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "QUINTA RESIDENCIAL MONTECARLO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RANCHO EL ENCINAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "REAL DE SAN FRANCISCO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RESIDENCIAL DEL BOSQUE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RIBERA DEL BOSQUE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TIERRA Y LIBERTAD",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TORRES DE MATAMOROS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VALLE IMPERIAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VALLE IMPERIAL SEGUNDA SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VALLE VERDE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA DEL REAL I",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA DEL REAL II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA DEL REAL III",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA DEL REAL IV",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA DEL REAL V",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA DEL REAL VI",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA DEL REAL VII",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA DEL REAL VIII",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA DEL REAL X",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA DEL REAL XI",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA DEL SOL I",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA DEL SOL II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA DEL SOL III",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA DEL SOL IV",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA DEL SOL V",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA FONTANA I",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA FONTANA II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA FONTANA III",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA FONTANA IV",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA FONTANA IX",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA FONTANA V",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA FONTANA VI",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA FONTANA VII",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA FONTANA X",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA FONTANA XI",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA FONTANA XII",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA FONTANA XIII",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA FONTANA XIV",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA FONTANA XIX",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA FONTANA XVI",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLAS DEL DORADO",
+          "modo": "contextual"
+        }
+      ],
+      "hitos": [
+        "Presa Abelardo L. Rodríguez",
+        "Ruta Hidalgo"
+      ],
+      "alias_directos": [
+        "presa abelardo l. rodríguez",
+        "presa abelardo",
+        "abelardo l. rodríguez",
+        "presa rodríguez",
+        "villa fontana",
+        "villa del real",
+        "mariano matamoros"
+      ]
+    },
+    {
+      "nombre": "La Presa Este",
+      "slug": "la-presa-este",
+      "colonias": [
+        {
+          "nombre": "BODEGAS LA ENCANTADA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑADAS DEL FLORIDO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CASA GRANDE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CIUDAD VALLE DE LAS PALMAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EJIDO FRANCISCO VILLA 2DA.SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EJIDO LAZARO CARDENAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EJIDO OJO DE AGUA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL ENCINO (LA MORITA 2a SECCIÓN)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL NIÑO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL REALITO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL REFUGIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FIDEICOMISO EL FLORIDO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FRACCIONAMIENTO BONILLA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GRANJAS BUENOS AIRES SECCIÓN LA PALMA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GRANJAS PRINCESAS DEL SOL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HABITAT PIEDRAS BLANCAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HACIENDA LAS DELICIAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HACIENDA LAS DELICIAS II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HACIENDA LAS DELICIAS III",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HACIENDA LAS FUENTES",
+          "modo": "omitido"
+        },
+        {
+          "nombre": "HACIENDA LOS VENADOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HACIENDA SANTA MARIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA MORITA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA MURALLA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAS DELICIAS II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAUREL II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DE SAN PEDRO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DE TLATELOLCO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DEL REFUGIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DEL VALLE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS VIRREYES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS VALLES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MACLOVIO ROJAS MARQUEZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MARGARITA RESIDENCIAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "NATURA SECCIÓN BOSQUES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PALMA REAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PARAJES DEL VALLE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PARQUE INDUSTRIAL EL FLORIDO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PARQUE INDUSTRIAL EL FLORIDO I",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PARQUE INDUSTRIAL EL FLORIDO II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PARQUE INDUSTRIAL VALLE BONITO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PASEO SANTA MARIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PASEOS DEL FLORIDO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PASEOS DEL VERGEL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "QUINTAS CAMPESTRES EL REFUGIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RANCHO TRES PIEDRAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RIO TIJUANA 3 ra.ETAPA",
+          "modo": "omitido"
+        },
+        {
+          "nombre": "SEVILLA RESIDENCIAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TERRAZAS DEL VALLE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TERRAZAS DEL VALLE 2a.SECC.",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TERRAZAS LA MORITA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TIJUANA PROGRESO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "URBIVILLA DEL OLIVO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "URBIVILLA DEL PRADO",
+          "modo": "omitido"
+        },
+        {
+          "nombre": "VILLA DEL CAMPO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA DEL CAMPO SEGUNDA SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VIÑEDOS CASA BLANCA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VISTA DE PALMILLAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VISTA DEL VALLE",
+          "modo": "contextual"
+        }
+      ],
+      "hitos": [
+        "Corredor Industrial El Florido",
+        "Carretera Libre a Tecate"
+      ],
+      "alias_directos": [
+        "la morita",
+        "natura sección bosques",
+        "parajes del valle",
+        "valle de las palmas",
+        "villa del campo"
+      ]
+    },
+    {
+      "nombre": "Otay Centenario",
+      "slug": "otay",
+      "colonias": [
+        {
+          "nombre": "10 DE MAYO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "AEROPUERTO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "AEROPUERTO ABELARDO L.RODRIGUEZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ALAMAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ALFONSO GARZON",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ALTABRISA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "AMPLIACIÓN LOMAS TAURINAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANEXA BUENA VISTA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANEXA DEL RIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANEXA POSTAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ARENALES B",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "BOSQUE DE LAS URAUCARIAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "BUENA VISTA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "BUROCRATICA RUIZ CORTINEZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAMPESTRE MURUA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAMPOS DEPORTIVOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑÓN DEL PADRE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CBTIS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CC OTAY II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CENTRO COMERCIAL OTAY",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CENTRO URBANO 70-76",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CHAMIZAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CIUDAD INDUSTRIAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "DEFENSORES DE B.C.",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "DEL RIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "DELICIAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EJIDO CHILPANCINGO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EMPLEADO POSTAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EX-EJIDO TAMPICO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FERNANDEZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FOVISSSTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FOVISSSTE II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FOVISSSTE V",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GARITA DE OTAY",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GARITA INTERNACIONAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GRANJAS DIVISIÓN DEL NORTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GRANJAS FAM.UNIDAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GUADALUPE VICTORIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HOSPITAL DE LAS CALIFORNIAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "IGNACIO ZARAGOZA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "INDECO UNIVERSIDAD",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "INFONAVIT PATRIMONIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "INSURGENTES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "KENEDDY",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA PECHUGA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LADERAS DE OTAY",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAS CALIFORNIAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAS TORRES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LIBERTAD",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS TAURINAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS ARENALES A",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MAESTROS UNIVERSITARIOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MAGISTERIAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MANUEL RIVERA ANAYA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MELCHOR OCAMPO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MIGUEL HIDALGO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MINERAL DE SANTA FE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MISIONES DEL PEDREGAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MURUA PONIENTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "NIDO DE LAS AGUILAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "NUEVA TIJUANA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "OLACHEA RESIDENCIAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "OTAY CONSTITUYENTES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "OTAY GALERIAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "OTAY JARDIN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "OTAY JARDIN II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "OTAY LAGO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "OTAY UNIVERSIDAD",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "OTAY VISTA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PARQUE DE LA AMISTAD",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PARQUE II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PARQUE IND.CHILPANCINGO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PARQUE INDUSTRIAL INTERNACIONAL TIJUANA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PERIMETRAL NORTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PLAZA OTAY",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PLAZAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RANCHO ESCONDIDO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RESIDENCIAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RIVERAS DEL ALAMAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RINCONADA OTAY",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RINCONADA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RINCONADA DE OTAY",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RINCONADA II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RIO VISTA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "S.C.T.",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SEPANAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TECNOLOGICO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TOMAS AQUINO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "U.A.B.C.",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "UNIDAD DEPORTIVA ITT",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "UNIVERSIDAD SUR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VALLE DEL ALAMAR II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VALLE VISTA 1a SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VALLE VISTA 2a SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "XICOTENCATL LEYVA (OE)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "XICOTENCATL LEYVA ALEMAN (LE)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ZONA URB.EJIDO CHILPANCINGO",
+          "modo": "contextual"
+        }
+      ],
+      "hitos": [
+        "Garita de Otay",
+        "Aeropuerto Internacional de Tijuana",
+        "Campus UABC Tijuana"
+      ],
+      "alias_directos": [
+        "otay",
+        "mesa de otay",
+        "garita de otay",
+        "garita otay",
+        "aeropuerto de tijuana",
+        "aeropuerto internacional de tijuana",
+        "otay constituyentes",
+        "otay jardín",
+        "otay universidad",
+        "alamar",
+        "las torres"
+      ]
+    },
+    {
+      "nombre": "Playas de Tijuana",
+      "slug": "playas",
+      "colonias": [
+        {
+          "nombre": "ALBATROS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ALBERTO BUSTAMANTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ALDEAS BAJA MALIBU PUNTA BANDERA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANEXA DIVINA PROVIDENCIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANEXA HERRERA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANEXA LOS LAURELES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANEXA MIRAMAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "BAJA MALIBU (SECCIÓN LOMAS)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "BAJA MALIBU (SECCIÓN PLAYAS)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "BRISAS DEL MAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAMPO KOA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑON AZTECA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑON DE LAS PALMERAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑON DE LAS ROSAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑON DEL MATADERO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑON DEL MATADERO ESTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑON DEL MATADERO NORTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑON MIRAMAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑON ROSALES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑON TAMPICO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CIUDAD JARDIN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "COLINAS DEL MEDITERRANEO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CORONA DEL MAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CORONA ENCANTADA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "DIVINA PROVIDENCIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "DIVISION LOS ALTOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL MIRADOR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ENCANTO DEL MAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FRACC.COSTA CORONADO RESIDENCIAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GRAN TENOCHTITLAN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GRANJAS FAMILIARES ESPERANZA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GRANJAS LA ESPERANZA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HACIENDA DEL MAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HACIENDA LINDA VISTA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "INFONAVIT LOMAS DEL PORVENIR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ISLA CRETA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ISLA SICILIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "JARDINES DEL SOL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA CUSPIDE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LADERAS DEL MAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAS CUMBRES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAS PALMERAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAZARO CARDENAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAZARO CARDENAS 3RA.MESA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DEL MAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DEL MIRADOR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS MISION",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS TIJUANA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS ALTOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS DELFINES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOS LAURELES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MAR DE BUENA VISTA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MAR VISTA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MICHOACAN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MIRAMAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MISIÓN DEL SOL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "OASIS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PACIFICO CAMPESTRE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PACIFICO CAMPESTRE NORTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PANTEON No.3",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PARQUE INDUSTRIAL LA JOLLA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PUENTE LA JOYA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PUESTA DEL SOL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PUNTA BANDERA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RANCHO LAS FLORES 1a SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RANCHO LAS FLORES 2a SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RANCHO MACIAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "REAL DEL MAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "REAL DEL ORO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RESIDENCIAL SAN MARINO 1RA SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RESIDENCIAL SAN MARINO 2DA SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SAN ANGEL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SAN ANTONIO DEL MAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SANTA ROSA (CIUDAD)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SECCIÓN CAMPESTRE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SECCIÓN COSTA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SECCIÓN COSTA AZUL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SECCIÓN COSTA DE ORO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SECCIÓN COSTA HERMOSA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SECCIÓN DORADO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SECCIÓN JARDINES PLAYAS DE TIJUANA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SECCIÓN MONUMENTA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SECCIÓN PLAYAS CORONADO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SECCIÓN RIVERA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SECCIÓN TERRAZAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SOLER",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TECNOMEX",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TERRAZAS DE SAN BERNARDO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TERRAZAS DEL SOL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TRIANGULO DE ORO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "UNIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "URBI HACIENDA BALBOA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "URBIQUINTA DEL CEDRO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "URBIQUINTA DEL CEDRO SEGUNDA SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLAMAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VISTA AZUL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VISTA AZUL II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VISTA DEL PACIFICO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VISTA ENCANTADA",
+          "modo": "contextual"
+        }
+      ],
+      "hitos": [
+        "Malecón",
+        "Plaza Monumental",
+        "Cañón del Matadero"
+      ],
+      "alias_directos": [
+        "playas de tijuana",
+        "delegación playas",
+        "soler"
+      ]
+    },
+    {
+      "nombre": "San Antonio de los Buenos",
+      "slug": "sab",
+      "colonias": [
+        {
+          "nombre": "5 Y 8 HECTAREAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ALFONSO BALLESTEROS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ALFREDO AMES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "AMPLIACIÓN SALVATIERRA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "AMPLIACIÓN TEJAMEN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANEXA NIÑOS HEROES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANEXA PRO-HOGAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANEXA ROMA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANEXA SIMON BOLIVAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ARTESANAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "BARCELONA RESIDENCIAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "BONANZA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAMPESTRE LA GLORIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑÓN DE LAS CARRETAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑÓN DE SAN ANTONIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑÓN RUBI",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CHIHUAHUA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "COLINAS DE CALIFORNIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "COLINAS DEL SOL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "COSTA DORADA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CUARTEL 5o.BATALLÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CUESTA BLANCA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CUMBRES DEL RUBI",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL CORTEZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL JIBARITO II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL MONTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL PROGRESO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL ROSARIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL RUBI",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ESTRELLA DEL PACIFICO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FAUSTO GONZALEZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FCO.ZARCO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FLORES MAGON",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FRACC.EL JIBARITO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FRANCISCO VILLA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GUTIERREZ OVALLE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HACIENDA DEL PACIFICO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "IGNACIO RAMIREZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "INMOBILIARIA GONZARANT",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "JARDINES DE LA GLORIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "JARDINES DE LAS CRUCES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "JARDINES DEL RUBI",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA CUESTECITA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA GLORIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LA JOLLA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAGUNITAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LAS VILLAS SANTA FE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LEY DEL SERVICIO CIVIL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LIBERAL LOMAS DEL RUBI",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LLAMAS AMAYA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMA BONITA (NA)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMA BONITA NORTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DE SAN ANTONIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DEL PACIFICO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DEL REAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DEL RIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MANUEL PAREDES I",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MANUEL PAREDES II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MERIDIANO RESIDENCIAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MONARCA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MONTE SAN ANTONIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "MONTES OLIMPICOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "NIÑOS HEROES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "NUEVA AURORA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "NUEVA AURORA SUR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "NUEVO MILENIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "OAXACA (ANGEL FERNANDEZ)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "OBRERA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "OBRERA 1a.SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PARQUE IND.NORDIKA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PATRIMONIAL BENITO JUAREZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PATRIMONIO FAMILIAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PEDREGAL DE STA.JULIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PORTICOS DE SAN ANTONIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PRADEREAS DE LA GLORIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PRIVADAS DEL ROSARIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RANCHO GRANJAS TECOLOTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RANCHO LA CIMA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RANCHO LA CUEVA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "REACOMODO OB.PUBLICAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "REAL DE LOMA BONITA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "REAL DE SAN ANTONIO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ROBERTO CURIEL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SALVATIERRA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SAN AGUSTIN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SAN MATEO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SAN PEDRO RESIDENCIAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SANTA FE 1ra SECC.",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SANTA FE 2da SECC.",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SANTA FE 3ra SECC.",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SIMON BOLIVAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TEJAMEN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TERRAZAS DE SAN ANGEL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "URBIQUINTA VERSALLES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VALLE DEL RUBI SECC.LOMAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VALLE DEL RUBI SECCIÓN TERRAZAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VALLE DEL SUR 1",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VALLE DEL SUR 2",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VERONA RESIDENCIAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA RESIDENCIAL SANTA FE V",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLAS DE TIJUANA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLEGAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VISTA BELLA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VIVIENDA POPULAR",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "XICOTENCATL LEYVA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "XICOTENCATL LEYVA II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "XVIII AYUNTAMIENTO",
+          "modo": "contextual"
+        }
+      ],
+      "hitos": [
+        "Corredor Santa Fe / Rosarito",
+        "Libramiento Sur"
+      ],
+      "alias_directos": [
+        "san antonio de los buenos",
+        "salvatierra",
+        "flores magón",
+        "colinas de california"
+      ]
+    },
+    {
+      "nombre": "Sánchez Taboada",
+      "slug": "sanchez-taboada",
+      "colonias": [
+        {
+          "nombre": "AGUAJE DE LA TUNA 1a SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "AGUAJE DE LA TUNA 2a SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ALFA PANAMERICANO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "AMPARO SANCHEZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "AMPLIACIÓN SANCHEZ TABOADA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANEXA VERACRUZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANEXA PANAMERICANO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "ANEXA SANCHEZ TABOADA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "BONATERRA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAMINO VERDE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑÓN DE LA PEDRERA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑÓN DEL SAIZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "CAÑÓN PALMAS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "COLINAS DE LA PRESA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "COLINAS SAN RAFAEL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "DE LOS MAESTROS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL RANCHITO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL TECOLOTE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EL VALLE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EMILIANO ZAPATA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "EMPERADORES",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "FRACC.VALLE DORADO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GENARO VASQUEZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "GENERACIÓN 2000",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "HACIENDA ACUEDUCTO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "INDUSTRIAL PACIFICO I",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "INTERNACIONAL",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "JARDINES DE LA MISIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LEANDRO VALLE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LOMAS DE SAN MARTIN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "LUIS ECHEVERRIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "NUEVA ESPERANZA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PANAMERICANO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PANTEÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PARQUE INDUSTRIAL MORELOS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PARQUE INDUSTRIAL PACIFICO CUARTA ETAPA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PARQUE INDUSTRIAL PACIFICO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "PRESIDENCIAL LA ESMERALDA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RANCHO EL SUSPIRO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RANCHO SANTA CRUZ",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "REFORMA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "RESIDENCIAL LA ESPERANZA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SAN LUIS",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SANCHEZ TABOADA (PRODUTSA)",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "SANCHEZ TABOADA II",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TERRAZAS DEL PACIFICO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "TRES DE OCTUBRE",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "URBIVILLA DEL PRADO",
+          "modo": "omitido"
+        },
+        {
+          "nombre": "URBIVILLA DEL PRADO SEGUNDA SECCIÓN",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA DEL ALAMO",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "VILLA URRUTIA",
+          "modo": "contextual"
+        },
+        {
+          "nombre": "XOCHIMILCO SOLIDARIDAD",
+          "modo": "contextual"
+        }
+      ],
+      "hitos": [
+        "Parque Industrial Pacífico",
+        "Blvd. Cuauhtémoc Sur"
+      ],
+      "alias_directos": [
+        "sánchez taboada",
+        "sanchez taboada",
+        "camino verde",
+        "parque industrial pacífico"
+      ]
+    }
+  ],
+  "conflictos": [
+    "La Presa -> La Presa A.L.R.; Presa Este -> La Presa Este; Mesa de Otay Centenario -> Otay Centenario; Sanchez Taboada -> Sánchez Taboada.",
+    "Salvatierra y Flores Magón pertenecen a San Antonio de los Buenos.",
+    "Fundadores y Cañón de la Pedrera pertenecen a Centro.",
+    "Colinas de California pertenece a San Antonio de los Buenos.",
+    "Alamar y Las Torres pertenecen a Otay Centenario.",
+    "Nombres repetidos entre delegaciones (Hacienda Las Fuentes, Praderas de la Mesa, Río Tijuana 3ra Etapa, San Carlos y Urbivilla del Prado) quedan contextuales/omitidos."
+  ]
+}

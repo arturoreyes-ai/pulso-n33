@@ -1,0 +1,83 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHONUTF8: "1"
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: python -m pip install --requirement requirements.txt
+
+      - name: Pruebas unitarias
+        run: python -m unittest discover -s tests -v
+
+      - name: Validar config/ y data/ del repo
+        run: python -m pulso validar
+
+      # Corrida completa sin tocar la red, a una carpeta temporal: prueba el
+      # pipeline de punta a punta sin ensuciar data/ ni depender de que los
+      # feeds de BC esten arriba.
+      - name: Corrida offline y validacion de su salida
+        run: |
+          python -m pulso correr --sin-red --salida "${RUNNER_TEMP}/data"
+          python -m pulso validar --datos "${RUNNER_TEMP}/data"
+
+      - name: Armar el sitio
+        run: python -m pulso sitio --destino "${RUNNER_TEMP}/_site"
+
+  # El tablero no estaba en CI, asi que ni los tipos ni las escalas de diseno
+  # tenian quien los sostuviera entre commits.
+  tablero:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+          cache-dependency-path: web/pnpm-lock.yaml
+
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile
+
+      # Aqui es donde mapa-delegaciones.tsx se defiende solo: su Record sobre
+      # la union de delegaciones es exhaustivo, asi que agregar una decima sin
+      # su poligono rompe el build en ese archivo y no en produccion.
+      - name: Tipos
+        run: pnpm tipos
+
+      # La mitad duradera del barrido de diseno. El navegador probo aquel
+      # barrido; esto prueba todos los commits que vienen.
+      - name: Escalas de diseno
+        run: pnpm tokens
+
+      - name: Build
+        run: pnpm build

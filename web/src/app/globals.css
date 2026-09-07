@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/* scripts/ fuera del escaneo. verificar-tokens.mjs lleva DENTRO las clases
+   prohibidas —como muestras de su autoprueba y dentro de los mensajes de
+   error—, y el escaner de Tailwind no distingue una clase de un ejemplo:
+   generaba .text-xs y .rounded-2xl de verdad en el bundle. Ademas de bytes
+   muertos, rompia la propiedad en la que nos apoyamos para NO resetear los
+   espacios de nombres: que una utilidad solo existe si alguien la usa. */
+@source not "../../scripts";
+
 /* ===========================================================================
    Ethereal Glass — Pulso N33
 

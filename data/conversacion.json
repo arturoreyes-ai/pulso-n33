@@ -1,0 +1,917 @@
+{
+ "esquema": 1,
+ "generado": "2026-09-04T20:50:05+00:00",
+ "aviso": "Metricas derivadas. El texto de los comentarios NO se almacena aqui ni en el repo: las Politicas para Desarrolladores de YouTube (III.E.4.d) lo limitan a 30 dias y git no puede borrar. Ver pulso/youtube.py.",
+ "retencion_dias": 30,
+ "comentarios_vigentes": 194,
+ "por_zona": {
+  "Tijuana": 150,
+  "Mexicali": 38,
+  "Playas de Rosarito": 12,
+  "nacional": 9,
+  "Ensenada": 3,
+  "San Diego": 3,
+  "Tecate": 2,
+  "San Felipe": 1,
+  "San Quintín": 1
+ },
+ "por_canal": {
+  "canal66_yt": 71,
+  "siempre_yt": 15,
+  "sintesis_yt": 6,
+  "telemundo20": 4,
+  "zeta_yt": 2,
+  "afn_yt": 1
+ },
+ "por_figura": {
+  "ibr": 1,
+  "rcm": 1
+ },
+ "por_tema": [
+  {
+   "tema": "agua",
+   "comentarios": 65,
+   "videos": 2,
+   "interacciones": 186,
+   "preguntas": 6,
+   "zonas": {
+    "Tijuana": 65,
+    "Playas de Rosarito": 10,
+    "Ensenada": 3,
+    "Mexicali": 3,
+    "San Felipe": 1,
+    "San Quintín": 1,
+    "Tecate": 1
+   },
+   "subtemas": [
+    {
+     "termino": "playas",
+     "n": 20
+    },
+    {
+     "termino": "saludos",
+     "n": 12
+    },
+    {
+     "termino": "bien",
+     "n": 7
+    },
+    {
+     "termino": "malecon",
+     "n": 7
+    },
+    {
+     "termino": "videos",
+     "n": 7
+    },
+    {
+     "termino": "ojala",
+     "n": 5
+    }
+   ],
+   "sentimiento": {
+    "positivo": 25,
+    "negativo": 19,
+    "neutral": 21
+   }
+  },
+  {
+   "tema": "estados unidos",
+   "comentarios": 27,
+   "videos": 2,
+   "interacciones": 118,
+   "preguntas": 2,
+   "zonas": {
+    "Mexicali": 21,
+    "nacional": 6,
+    "Tijuana": 1
+   },
+   "subtemas": [
+    {
+     "termino": "bueno",
+     "n": 3
+    },
+    {
+     "termino": "cargas",
+     "n": 3
+    },
+    {
+     "termino": "choferes",
+     "n": 3
+    },
+    {
+     "termino": "trabajo",
+     "n": 3
+    },
+    {
+     "termino": "trump",
+     "n": 3
+    }
+   ],
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 16,
+    "neutral": 10
+   }
+  },
+  {
+   "tema": "sheinbaum",
+   "comentarios": 3,
+   "videos": 1,
+   "interacciones": 0,
+   "preguntas": 0,
+   "zonas": {
+    "nacional": 3
+   },
+   "subtemas": [],
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 3,
+    "neutral": 0
+   }
+  }
+ ],
+ "sentimiento": {
+  "metodo": "modelo",
+  "modelo": "pysentimiento/robertuito-sentiment-analysis",
+  "positivo": 35,
+  "negativo": 106,
+  "neutral": 53,
+  "sin_clasificar": 0
+ },
+ "por_zona_detalle": {
+  "Tijuana": {
+   "comentarios": 150,
+   "interacciones": 451,
+   "preguntas": 13,
+   "sentimiento": {
+    "positivo": 32,
+    "negativo": 79,
+    "neutral": 39
+   },
+   "por_tema": [
+    {
+     "tema": "agua",
+     "comentarios": 65,
+     "sentimiento": {
+      "positivo": 25,
+      "negativo": 19,
+      "neutral": 21
+     }
+    },
+    {
+     "tema": "estados unidos",
+     "comentarios": 1,
+     "sentimiento": {
+      "positivo": 0,
+      "negativo": 1,
+      "neutral": 0
+     }
+    }
+   ]
+  },
+  "Mexicali": {
+   "comentarios": 38,
+   "interacciones": 134,
+   "preguntas": 2,
+   "sentimiento": {
+    "positivo": 4,
+    "negativo": 21,
+    "neutral": 13
+   },
+   "por_tema": [
+    {
+     "tema": "estados unidos",
+     "comentarios": 21,
+     "sentimiento": {
+      "positivo": 1,
+      "negativo": 12,
+      "neutral": 8
+     }
+    },
+    {
+     "tema": "agua",
+     "comentarios": 3,
+     "sentimiento": {
+      "positivo": 1,
+      "negativo": 1,
+      "neutral": 1
+     }
+    }
+   ]
+  },
+  "Playas de Rosarito": {
+   "comentarios": 12,
+   "interacciones": 35,
+   "preguntas": 2,
+   "sentimiento": {
+    "positivo": 6,
+    "negativo": 3,
+    "neutral": 3
+   },
+   "por_tema": [
+    {
+     "tema": "agua",
+     "comentarios": 10,
+     "sentimiento": {
+      "positivo": 6,
+      "negativo": 1,
+      "neutral": 3
+     }
+    }
+   ]
+  },
+  "nacional": {
+   "comentarios": 9,
+   "interacciones": 12,
+   "preguntas": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 7,
+    "neutral": 2
+   },
+   "por_tema": [
+    {
+     "tema": "estados unidos",
+     "comentarios": 6,
+     "sentimiento": {
+      "positivo": 0,
+      "negativo": 4,
+      "neutral": 2
+     }
+    },
+    {
+     "tema": "sheinbaum",
+     "comentarios": 3,
+     "sentimiento": {
+      "positivo": 0,
+      "negativo": 3,
+      "neutral": 0
+     }
+    }
+   ]
+  },
+  "Ensenada": {
+   "comentarios": 3,
+   "interacciones": 10,
+   "preguntas": 0,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 1,
+    "neutral": 1
+   },
+   "por_tema": [
+    {
+     "tema": "agua",
+     "comentarios": 3,
+     "sentimiento": {
+      "positivo": 1,
+      "negativo": 1,
+      "neutral": 1
+     }
+    }
+   ]
+  },
+  "San Diego": {
+   "comentarios": 3,
+   "interacciones": 1,
+   "preguntas": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 2
+   },
+   "por_tema": []
+  },
+  "Tecate": {
+   "comentarios": 2,
+   "interacciones": 2,
+   "preguntas": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 1
+   },
+   "por_tema": [
+    {
+     "tema": "agua",
+     "comentarios": 1,
+     "sentimiento": {
+      "positivo": 0,
+      "negativo": 0,
+      "neutral": 1
+     }
+    }
+   ]
+  },
+  "San Felipe": {
+   "comentarios": 1,
+   "interacciones": 2,
+   "preguntas": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1
+   },
+   "por_tema": [
+    {
+     "tema": "agua",
+     "comentarios": 1,
+     "sentimiento": {
+      "positivo": 0,
+      "negativo": 0,
+      "neutral": 1
+     }
+    }
+   ]
+  },
+  "San Quintín": {
+   "comentarios": 1,
+   "interacciones": 2,
+   "preguntas": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1
+   },
+   "por_tema": [
+    {
+     "tema": "agua",
+     "comentarios": 1,
+     "sentimiento": {
+      "positivo": 0,
+      "negativo": 0,
+      "neutral": 1
+     }
+    }
+   ]
+  }
+ },
+ "temas": [
+  {
+   "termino": "playas",
+   "n": 20,
+   "n_previo": 0,
+   "momento": 20,
+   "zonas": {
+    "Tijuana": 20,
+    "Playas de Rosarito": 5,
+    "Ensenada": 1,
+    "Mexicali": 1
+   },
+   "fuentes": {
+    "UCQBk7L4MQmjrgsgYqxOi_4g": 20
+   },
+   "un_solo_medio": true
+  },
+  {
+   "termino": "bien",
+   "n": 17,
+   "n_previo": 0,
+   "momento": 17,
+   "zonas": {
+    "Tijuana": 15,
+    "Mexicali": 2,
+    "Playas de Rosarito": 1
+   },
+   "fuentes": {
+    "UCQBk7L4MQmjrgsgYqxOi_4g": 7,
+    "canal66_yt": 6,
+    "UCe4eO1IF8eovbnIhWGuNSAw": 2,
+    "siempre_yt": 2
+   },
+   "un_solo_medio": false
+  },
+  {
+   "termino": "patrulla espiritual",
+   "n": 15,
+   "n_previo": 0,
+   "momento": 15,
+   "zonas": {
+    "Tijuana": 15,
+    "Playas de Rosarito": 1
+   },
+   "fuentes": {
+    "canal66_yt": 13,
+    "siempre_yt": 1,
+    "zeta_yt": 1
+   },
+   "un_solo_medio": false
+  },
+  {
+   "termino": "saludos",
+   "n": 13,
+   "n_previo": 0,
+   "momento": 13,
+   "zonas": {
+    "Tijuana": 12,
+    "Mexicali": 2,
+    "Playas de Rosarito": 2
+   },
+   "fuentes": {
+    "UCQBk7L4MQmjrgsgYqxOi_4g": 12,
+    "canal66_yt": 1
+   },
+   "un_solo_medio": false
+  },
+  {
+   "termino": "bueno",
+   "n": 10,
+   "n_previo": 0,
+   "momento": 10,
+   "zonas": {
+    "Tijuana": 7,
+    "Mexicali": 3,
+    "Playas de Rosarito": 2
+   },
+   "fuentes": {
+    "UCQBk7L4MQmjrgsgYqxOi_4g": 4,
+    "UCe4eO1IF8eovbnIhWGuNSAw": 3,
+    "canal66_yt": 2,
+    "siempre_yt": 1
+   },
+   "un_solo_medio": false
+  },
+  {
+   "termino": "malecon",
+   "n": 7,
+   "n_previo": 0,
+   "momento": 7,
+   "zonas": {
+    "Tijuana": 7,
+    "Ensenada": 1,
+    "Mexicali": 1
+   },
+   "fuentes": {
+    "UCQBk7L4MQmjrgsgYqxOi_4g": 7
+   },
+   "un_solo_medio": true
+  },
+  {
+   "termino": "siempre",
+   "n": 7,
+   "n_previo": 0,
+   "momento": 7,
+   "zonas": {
+    "Tijuana": 6,
+    "Mexicali": 2,
+    "Ensenada": 1
+   },
+   "fuentes": {
+    "UCQBk7L4MQmjrgsgYqxOi_4g": 4,
+    "canal66_yt": 2,
+    "UCe4eO1IF8eovbnIhWGuNSAw": 1
+   },
+   "un_solo_medio": false
+  },
+  {
+   "termino": "ustedes",
+   "n": 7,
+   "n_previo": 0,
+   "momento": 7,
+   "zonas": {
+    "Tijuana": 6,
+    "Mexicali": 2
+   },
+   "fuentes": {
+    "canal66_yt": 3,
+    "UCQBk7L4MQmjrgsgYqxOi_4g": 2,
+    "UCe4eO1IF8eovbnIhWGuNSAw": 1,
+    "siempre_yt": 1
+   },
+   "un_solo_medio": false
+  },
+  {
+   "termino": "videos",
+   "n": 7,
+   "n_previo": 0,
+   "momento": 7,
+   "zonas": {
+    "Tijuana": 7,
+    "Ensenada": 1,
+    "Mexicali": 1
+   },
+   "fuentes": {
+    "UCQBk7L4MQmjrgsgYqxOi_4g": 7
+   },
+   "un_solo_medio": true
+  },
+  {
+   "termino": "dios",
+   "n": 6,
+   "n_previo": 0,
+   "momento": 6,
+   "zonas": {
+    "Tijuana": 4,
+    "Mexicali": 3
+   },
+   "fuentes": {
+    "UCQBk7L4MQmjrgsgYqxOi_4g": 2,
+    "UCe4eO1IF8eovbnIhWGuNSAw": 2,
+    "canal66_yt": 2
+   },
+   "un_solo_medio": false
+  },
+  {
+   "termino": "padrino",
+   "n": 6,
+   "n_previo": 0,
+   "momento": 6,
+   "zonas": {
+    "Tijuana": 6
+   },
+   "fuentes": {
+    "canal66_yt": 6
+   },
+   "un_solo_medio": true
+  },
+  {
+   "termino": "acoso",
+   "n": 5,
+   "n_previo": 0,
+   "momento": 5,
+   "zonas": {
+    "Tijuana": 5
+   },
+   "fuentes": {
+    "canal66_yt": 4,
+    "siempre_yt": 1
+   },
+   "un_solo_medio": false
+  },
+  {
+   "termino": "calle",
+   "n": 5,
+   "n_previo": 0,
+   "momento": 5,
+   "zonas": {
+    "Tijuana": 4,
+    "Mexicali": 1
+   },
+   "fuentes": {
+    "canal66_yt": 3,
+    "UCQBk7L4MQmjrgsgYqxOi_4g": 1,
+    "zeta_yt": 1
+   },
+   "un_solo_medio": false
+  },
+  {
+   "termino": "chikilin",
+   "n": 5,
+   "n_previo": 0,
+   "momento": 5,
+   "zonas": {
+    "Tijuana": 5
+   },
+   "fuentes": {
+    "canal66_yt": 4,
+    "siempre_yt": 1
+   },
+   "un_solo_medio": false
+  },
+  {
+   "termino": "chiquilin",
+   "n": 5,
+   "n_previo": 0,
+   "momento": 5,
+   "zonas": {
+    "Tijuana": 5
+   },
+   "fuentes": {
+    "canal66_yt": 4,
+    "siempre_yt": 1
+   },
+   "un_solo_medio": false
+  },
+  {
+   "termino": "estamos",
+   "n": 5,
+   "n_previo": 0,
+   "momento": 5,
+   "zonas": {
+    "Tijuana": 5
+   },
+   "fuentes": {
+    "canal66_yt": 4,
+    "siempre_yt": 1
+   },
+   "un_solo_medio": false
+  },
+  {
+   "termino": "ojala",
+   "n": 5,
+   "n_previo": 0,
+   "momento": 5,
+   "zonas": {
+    "Tijuana": 5,
+    "Ensenada": 2,
+    "Mexicali": 1,
+    "Playas de Rosarito": 1
+   },
+   "fuentes": {
+    "UCQBk7L4MQmjrgsgYqxOi_4g": 5
+   },
+   "un_solo_medio": true
+  },
+  {
+   "termino": "pasar",
+   "n": 5,
+   "n_previo": 0,
+   "momento": 5,
+   "zonas": {
+    "Mexicali": 3,
+    "Tijuana": 3,
+    "Ensenada": 1,
+    "Playas de Rosarito": 1
+   },
+   "fuentes": {
+    "UCQBk7L4MQmjrgsgYqxOi_4g": 2,
+    "UCe4eO1IF8eovbnIhWGuNSAw": 1,
+    "canal66_yt": 1,
+    "sintesis_yt": 1
+   },
+   "un_solo_medio": false
+  },
+  {
+   "termino": "periodista",
+   "n": 5,
+   "n_previo": 0,
+   "momento": 5,
+   "zonas": {
+    "Tijuana": 5
+   },
+   "fuentes": {
+    "canal66_yt": 5
+   },
+   "un_solo_medio": true
+  },
+  {
+   "termino": "reportero",
+   "n": 5,
+   "n_previo": 0,
+   "momento": 5,
+   "zonas": {
+    "Tijuana": 5
+   },
+   "fuentes": {
+    "canal66_yt": 3,
+    "siempre_yt": 2
+   },
+   "un_solo_medio": false
+  },
+  {
+   "termino": "verdad",
+   "n": 5,
+   "n_previo": 0,
+   "momento": 5,
+   "zonas": {
+    "Tijuana": 3,
+    "Mexicali": 1,
+    "nacional": 1
+   },
+   "fuentes": {
+    "UCQBk7L4MQmjrgsgYqxOi_4g": 2,
+    "UCPpfUlLJkeIlpCoX2ZHJ1rw": 1,
+    "UCe4eO1IF8eovbnIhWGuNSAw": 1,
+    "canal66_yt": 1
+   },
+   "un_solo_medio": false
+  },
+  {
+   "termino": "agua",
+   "n": 4,
+   "n_previo": 0,
+   "momento": 4,
+   "zonas": {
+    "Tijuana": 4
+   },
+   "fuentes": {
+    "UCLchqnFpruGR2_6v_b7bNog": 2,
+    "UCQBk7L4MQmjrgsgYqxOi_4g": 2
+   },
+   "un_solo_medio": false
+  },
+  {
+   "termino": "ahora",
+   "n": 4,
+   "n_previo": 0,
+   "momento": 4,
+   "zonas": {
+    "Tijuana": 4,
+    "Ensenada": 1,
+    "Mexicali": 1
+   },
+   "fuentes": {
+    "UCQBk7L4MQmjrgsgYqxOi_4g": 2,
+    "UCe4eO1IF8eovbnIhWGuNSAw": 1,
+    "canal66_yt": 1
+   },
+   "un_solo_medio": false
+  },
+  {
+   "termino": "apoyo patrulla",
+   "n": 4,
+   "n_previo": 0,
+   "momento": 4,
+   "zonas": {
+    "Tijuana": 4
+   },
+   "fuentes": {
+    "canal66_yt": 3,
+    "zeta_yt": 1
+   },
+   "un_solo_medio": false
+  },
+  {
+   "termino": "bendiciones",
+   "n": 4,
+   "n_previo": 0,
+   "momento": 4,
+   "zonas": {
+    "Tijuana": 4,
+    "Mexicali": 1
+   },
+   "fuentes": {
+    "UCQBk7L4MQmjrgsgYqxOi_4g": 3,
+    "siempre_yt": 1
+   },
+   "un_solo_medio": false
+  }
+ ],
+ "canales": [
+  {
+   "id": "uniradio_yt",
+   "nombre": "Uniradio Informa BC",
+   "canal": "UCmX0ozHGkEFewoIU5WaAyvA",
+   "zona": "estatal",
+   "estado": "ok",
+   "videos": 0,
+   "comentarios": 0,
+   "ultima_ok": "2026-09-04T18:27:11+00:00",
+   "error": null
+  },
+  {
+   "id": "siempre_yt",
+   "nombre": "Siempre En La Noticia",
+   "canal": "UCqaGC8znrYczX6jURde4Osg",
+   "zona": "Tijuana",
+   "estado": "ok",
+   "videos": 5,
+   "comentarios": 15,
+   "ultima_ok": "2026-09-04T18:27:11+00:00",
+   "error": null
+  },
+  {
+   "id": "zeta_yt",
+   "nombre": "Semanario ZETA",
+   "canal": "UC-NHHkALnId41yENpdCuLKQ",
+   "zona": "Tijuana",
+   "estado": "ok",
+   "videos": 2,
+   "comentarios": 2,
+   "ultima_ok": "2026-09-04T18:27:11+00:00",
+   "error": null
+  },
+  {
+   "id": "canal66_yt",
+   "nombre": "Canal 66 Mexicali",
+   "canal": "UC_PX-j6a_YHoRZAztFqSA_g",
+   "zona": "Mexicali",
+   "estado": "ok",
+   "videos": 4,
+   "comentarios": 71,
+   "ultima_ok": "2026-09-04T18:27:11+00:00",
+   "error": null
+  },
+  {
+   "id": "cnr_yt",
+   "nombre": "CNR Noticias BC",
+   "canal": "UCr8eCa3i5h4PGApvmK1IyTw",
+   "zona": "estatal",
+   "estado": "ok",
+   "videos": 0,
+   "comentarios": 0,
+   "ultima_ok": "2026-09-04T18:27:11+00:00",
+   "error": null
+  },
+  {
+   "id": "sintesis_yt",
+   "nombre": "Síntesis TV",
+   "canal": "UCiU0jvbuR6pn9aLznDKRaJQ",
+   "zona": "Tijuana",
+   "estado": "ok",
+   "videos": 1,
+   "comentarios": 6,
+   "ultima_ok": "2026-09-04T18:27:11+00:00",
+   "error": null
+  },
+  {
+   "id": "infonort_yt",
+   "nombre": "INFONORT Multimedios",
+   "canal": "UCozre3s5D7BaaWkLmMCUmHg",
+   "zona": "Playas de Rosarito",
+   "estado": "ok",
+   "videos": 0,
+   "comentarios": 0,
+   "ultima_ok": "2026-09-04T18:27:11+00:00",
+   "error": null
+  },
+  {
+   "id": "psn_yt",
+   "nombre": "PSN Primer Sistema de Noticias",
+   "canal": "UCfXogkQFUci7zRbZiOjxWZA",
+   "zona": "Tijuana",
+   "estado": "ok",
+   "videos": 0,
+   "comentarios": 0,
+   "ultima_ok": "2026-09-04T18:27:11+00:00",
+   "error": null
+  },
+  {
+   "id": "elvigia_yt",
+   "nombre": "Editorial El Vigía",
+   "canal": "UCIN8fNpieOt_gCE1sKyUylA",
+   "zona": "Ensenada",
+   "estado": "ok",
+   "videos": 0,
+   "comentarios": 0,
+   "ultima_ok": "2026-09-04T18:27:11+00:00",
+   "error": null
+  },
+  {
+   "id": "afn_yt",
+   "nombre": "Agencia Fronteriza de Noticias",
+   "canal": "UCjlFT_oq-VvAZre23p5kb3A",
+   "zona": "Tijuana",
+   "estado": "ok",
+   "videos": 1,
+   "comentarios": 1,
+   "ultima_ok": "2026-09-04T18:27:11+00:00",
+   "error": null
+  },
+  {
+   "id": "telemundo20",
+   "nombre": "Telemundo 20 San Diego",
+   "canal": "UCpov05QMApjt0BeaMxE1XmQ",
+   "zona": "San Diego",
+   "estado": "ok",
+   "videos": 2,
+   "comentarios": 4,
+   "ultima_ok": "2026-09-04T18:27:11+00:00",
+   "error": null
+  }
+ ],
+ "cuentas": {
+  "presupuesto": {
+   "tope": 8500,
+   "gastado": 56,
+   "cuota_diaria": 10000,
+   "reserva": 1500,
+   "llamadas": {
+    "channels": 11,
+    "commentThreads": 20,
+    "playlistItems": 11,
+    "videos": 14
+   }
+  },
+  "busqueda": {
+   "presupuesto": {
+    "tope": 3,
+    "gastado": 3,
+    "cuota_diaria": 100,
+    "reserva": 97,
+    "llamadas": {
+     "search": 3
+    }
+   },
+   "temas": [
+    {
+     "tema": "sheinbaum",
+     "estado": "ok",
+     "videos": 1,
+     "comentarios": 3,
+     "error": null
+    },
+    {
+     "tema": "agua",
+     "estado": "ok",
+     "videos": 2,
+     "comentarios": 65,
+     "error": null
+    },
+    {
+     "tema": "estados unidos",
+     "estado": "ok",
+     "videos": 2,
+     "comentarios": 27,
+     "error": null
+    }
+   ]
+  },
+  "cache": {
+   "archivos_vivos": 1,
+   "archivos_borrados": 0,
+   "retencion_dias": 30
+  }
+ }
+}

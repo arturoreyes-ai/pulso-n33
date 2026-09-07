@@ -1,0 +1,668 @@
+/* Muro de prensa. Oscuro a proposito: es un tablero de monitoreo que se deja
+   abierto todo el dia. Sin dependencias, sin build, sin fuentes remotas. */
+
+:root {
+  color-scheme: dark;
+
+  --fondo: #14181c;
+  --panel: #191e23;
+  --linea: #262d34;
+  --linea-tenue: #1f252b;
+  --texto: #e6edf3;
+  --texto-medio: #a9b6c1;
+  --texto-tenue: #6b7a86;
+  --acento: #e8402a;
+  --ok: #3fa66a;
+  --falla: #e8402a;
+  --aviso: #d99a2b;
+
+  --condensada: "Avenir Next Condensed", "Roboto Condensed", "Arial Narrow", system-ui, sans-serif;
+  --sans: "Avenir Next", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, "Liberation Mono", monospace;
+
+  --ancho: 1180px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 24px 64px;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+
+.salto {
+  position: absolute;
+  left: -9999px;
+}
+.salto:focus {
+  left: 24px;
+  top: 8px;
+  z-index: 10;
+  padding: 8px 12px;
+  background: var(--panel);
+  border: 1px solid var(--acento);
+}
+
+:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------- cabecera */
+
+.cabeza,
+.zonas,
+.banda,
+main,
+.pie {
+  max-width: var(--ancho);
+  margin: 0 auto;
+}
+
+.cabeza {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 28px 0 18px;
+}
+
+.marca h1 {
+  margin: 0;
+  font-family: var(--condensada);
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.n33 { color: var(--acento); }
+
+.lema {
+  margin: 3px 0 0;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--texto-tenue);
+}
+
+.cifras {
+  display: flex;
+  gap: 26px;
+  margin: 4px 0 0;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+.cifras div { text-align: right; }
+.cifras dt {
+  color: var(--texto-tenue);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 9px;
+}
+.cifras dd {
+  margin: 2px 0 0;
+  color: var(--texto-medio);
+  font-variant-numeric: tabular-nums;
+}
+.cifras dd strong { color: var(--texto); }
+
+/* ----------------------------------------------------------------- zonas */
+
+.zonas {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  padding: 6px 0 14px;
+  border-bottom: 1px solid var(--linea);
+}
+
+.zonas button {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 6px 11px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background: none;
+  color: var(--texto-medio);
+  font-family: var(--condensada);
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+}
+.zonas button:hover {
+  background: var(--panel);
+  color: var(--texto);
+}
+.zonas button[aria-pressed="true"] {
+  background: var(--panel);
+  border-color: var(--linea);
+  color: var(--texto);
+}
+.zonas .cuenta {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--texto-tenue);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ----------------------------------------------------------------- banda */
+
+.banda {
+  margin: 0;
+  padding: 11px 14px;
+  border-left: 2px solid var(--aviso);
+  background: var(--linea-tenue);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--texto-medio);
+}
+.banda b { color: var(--aviso); font-weight: 600; }
+.banda.viva { border-left-color: var(--ok); }
+.banda.viva b { color: var(--ok); }
+.banda.rota { border-left-color: var(--falla); }
+.banda.rota b { color: var(--falla); }
+
+/* ---------------------------------------------------------------- paneles */
+
+.panel {
+  margin: 22px 0 0;
+  padding: 14px 16px;
+  background: var(--panel);
+  border: 1px solid var(--linea);
+  border-radius: 4px;
+}
+.panel > h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 12px;
+  font-family: var(--condensada);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--texto-tenue);
+}
+.panel > h2 .sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #55636e;
+}
+.nota-panel {
+  margin: 12px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--linea-tenue);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  line-height: 1.6;
+  color: var(--texto-tenue);
+  max-width: 760px;
+}
+
+/* ------------------------------------------------------------ indicadores */
+
+.ind-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
+  gap: 16px 22px;
+}
+.ind-card {
+  min-width: 0;
+  padding-bottom: 2px;
+}
+.ind-card h3 {
+  margin: 0;
+  font-family: var(--condensada);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--texto);
+}
+.ind-meta {
+  margin: 2px 0 8px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: #55636e;
+}
+.ind-aviso {
+  margin: 8px 0 0;
+  font-size: 10.5px;
+  line-height: 1.55;
+  color: var(--texto-tenue);
+}
+/* Un hueco de cobertura se rotula en ambar y no se rellena con un cero, que
+   se leeria como 'aqui no pasa nada' en vez de 'aqui no medimos'. */
+.conteos li.hueco span { color: var(--aviso); }
+.conteos li.hueco .conteo-n { font-style: italic; }
+
+/* ------------------------------------------------------------------ temas */
+
+.lista-temas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 12px 26px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: tema;
+}
+.lista-temas li {
+  padding-left: 24px;
+  position: relative;
+  counter-increment: tema;
+}
+.lista-temas li::before {
+  content: counter(tema);
+  position: absolute;
+  left: 0;
+  top: 1px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: #4a5761;
+  font-variant-numeric: tabular-nums;
+}
+.tema-cab {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.tema-term {
+  font-family: var(--condensada);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--texto);
+}
+.tema-n {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--texto-tenue);
+  font-variant-numeric: tabular-nums;
+}
+.tema-mom {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 0 4px;
+  border-radius: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.tema-mom.sube { color: var(--ok); background: rgba(63, 166, 106, 0.12); }
+.tema-mom.baja { color: var(--texto-tenue); background: var(--linea-tenue); }
+.etiqueta {
+  font-family: var(--mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 1px 5px;
+  border: 1px solid var(--linea);
+  border-radius: 2px;
+  color: var(--aviso);
+}
+.tema-zonas {
+  margin: 3px 0 0;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--texto-tenue);
+}
+.tema-ej {
+  margin: 4px 0 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--texto-medio);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ----------------------------------------------------------- conversacion */
+
+.conv-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px 30px;
+}
+.conv-sub-h {
+  margin: 0 0 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #55636e;
+  font-weight: 400;
+}
+.conv-cols .conv-sub-h:first-child { margin-top: 0; }
+#conv-cuerpo > .conv-sub-h { margin-top: 16px; }
+
+.conteos {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+.conteos li {
+  display: flex;
+  gap: 10px;
+  padding: 2px 0;
+  color: var(--texto-medio);
+  border-bottom: 1px solid var(--linea-tenue);
+}
+.conteo-n {
+  margin-left: auto;
+  color: var(--texto);
+  font-variant-numeric: tabular-nums;
+}
+
+.conv-temas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.conv-temas li {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 3px 9px;
+  background: var(--linea-tenue);
+  border: 1px solid var(--linea);
+  border-radius: 3px;
+}
+.conv-temas .tema-term { font-size: 13px; }
+
+.conv-tema-titulo { margin-top: 22px !important; }
+.conv-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.conv-selector button {
+  padding: 5px 10px;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--texto-medio);
+  font: 11px var(--mono);
+  cursor: pointer;
+}
+.conv-selector button[aria-pressed="true"] {
+  border-color: var(--senal);
+  background: rgba(224, 52, 43, 0.1);
+  color: var(--senal);
+}
+.conv-detalle {
+  margin-top: 10px;
+  padding: 14px;
+  border: 1px solid rgba(224, 52, 43, 0.18);
+  background: rgba(224, 52, 43, 0.035);
+}
+.conv-metricas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+.conv-metricas dt,
+.conv-detalle-etiqueta {
+  font: 9px var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--texto-tenue);
+}
+.conv-metricas dd {
+  margin: 2px 0 0;
+  font: 20px var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+.conv-detalle-etiqueta {
+  margin: 14px 0 7px;
+  padding-top: 12px;
+  border-top: 1px solid var(--linea-tenue);
+}
+
+.vacio-panel {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--texto-tenue);
+  max-width: 700px;
+}
+
+/* -------------------------------------------------------------- cobertura */
+
+.barras {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 5px;
+  max-width: 620px;
+}
+.barras li {
+  display: grid;
+  grid-template-columns: 132px 1fr 92px;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+.barra-et { color: var(--texto); }
+.barra-pista {
+  height: 7px;
+  background: var(--linea-tenue);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.barra {
+  display: block;
+  height: 100%;
+  background: var(--acento);
+  border-radius: 2px;
+  min-width: 2px;
+}
+.barra-n {
+  color: var(--texto-medio);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+/* Una zona en cero se rotula, no se esconde: el hueco es el dato. */
+.barras li.cero .barra-et,
+.barras li.cero .barra-n {
+  color: var(--aviso);
+}
+.barras li.cero .barra { background: none; }
+
+/* ----------------------------------------------------------------- salud */
+
+.salud h2 {
+  margin: 0 0 10px;
+}
+.salud ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 7px 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+.salud li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;          /* deja que el detalle se recorte, no que empuje */
+}
+.salud .punto {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ok);
+}
+.salud li[data-estado="fallo"] .punto { background: var(--falla); }
+.salud .medio {
+  color: var(--texto);
+  white-space: nowrap;
+}
+/* El motivo del fallo se recorta con puntos suspensivos; completo va en el
+   title, para que una fila no se parta en dos lineas. */
+.salud .detalle {
+  margin-left: auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--texto-tenue);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------------ muro */
+
+.zona {
+  margin: 34px 0 0;
+}
+.zona > h2 {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 4px;
+  font-family: var(--condensada);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--texto);
+}
+.zona > h2::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--linea);
+}
+.zona > h2 .cuenta {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--texto-tenue);
+  font-variant-numeric: tabular-nums;
+}
+
+.nota {
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  gap: 0 18px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--linea-tenue);
+}
+
+.cuando {
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--texto-tenue);
+  font-variant-numeric: tabular-nums;
+  padding-top: 1px;
+}
+.cuando .edad {
+  display: block;
+  color: #55636e;
+}
+
+.nota h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.nota h3 a { text-decoration: none; }
+.nota h3 a:hover { color: var(--acento); }
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 5px 0 0;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--texto-tenue);
+}
+
+.figura {
+  display: inline-block;
+  padding: 1px 7px;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--texto-medio);
+  font-size: 10px;
+  white-space: nowrap;
+}
+.figura[data-via="cargo"] {
+  border-style: dashed;
+  color: var(--texto-tenue);
+}
+
+.vacio {
+  margin: 40px 0;
+  padding: 26px;
+  border: 1px dashed var(--linea);
+  border-radius: 4px;
+  text-align: center;
+  color: var(--texto-tenue);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+/* -------------------------------------------------------------------- pie */
+
+/* El bloque conserva el ancho del muro para que la regla y el texto arranquen
+   en el mismo borde izquierdo; lo que se limita a 720px es la medida de
+   lectura del parrafo, no el contenedor. */
+.pie {
+  margin-top: 52px;
+  padding-top: 18px;
+  border-top: 1px solid var(--linea);
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--texto-medio);
+}
+.pie p {
+  margin: 0 0 8px;
+  max-width: 720px;
+}
+.pie strong { color: var(--texto); }
+.pie .tenue {
+  color: var(--texto-tenue);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+@media (max-width: 640px) {
+  body { padding: 0 14px 48px; }
+  .cifras { gap: 18px; }
+  .nota { grid-template-columns: 58px 1fr; gap: 0 12px; }
+  .nota h3 { font-size: 14px; }
+}

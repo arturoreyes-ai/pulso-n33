@@ -80,7 +80,7 @@ const GrupoBase = function GrupoZona({
           {esZonaRuta(grupo.zona) ? (
             <Link
               href={rutaDeZona(grupo.zona)}
-              className="transition-colors hover:text-chart-1"
+              className="transition-colors hover:text-chart-1-texto"
               title={`Ver solo ${NOMBRE_CORTO[grupo.zona]}`}
             >
               {grupo.zona}

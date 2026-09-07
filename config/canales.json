@@ -1,0 +1,163 @@
+{
+ "nota": "Canales de YouTube para leer comentarios. Los IDs se verificaron el 3 sep 2026 resolviendo cada handle y confirmando el feed público del canal. NUNCA se usa search.list para descubrir canales: tiene cubeta propia con tope de 100 llamadas al día. Esta lista fija es el diseño, no un atajo. Ver pulso/youtube.py para la regla de retención de 30 días.",
+ "aviso_retencion": "El texto de los comentarios NO se commitea. Vive en cache/comentarios/ (ignorado por git) con TTL de 30 días, por las Políticas para Desarrolladores de YouTube III.E.4.d. Solo data/conversacion.json entra al repo, y solo con métricas derivadas.",
+ "canales": [
+  {
+   "id": "uniradio_yt",
+   "nombre": "Uniradio Informa BC",
+   "canal": "UCmX0ozHGkEFewoIU5WaAyvA",
+   "handle": "@uniradiobaja",
+   "zona": "estatal",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "El mejor todoterreno: noticiero diario más notas hiperlocales. OJO: el handle obvio @UniradioInforma es un canal señuelo, sin subir nada desde 2016."
+  },
+  {
+   "id": "siempre_yt",
+   "nombre": "Siempre En La Noticia",
+   "canal": "UCqaGC8znrYczX6jURde4Osg",
+   "handle": "@siempreenlanoticia",
+   "zona": "Tijuana",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "La audiencia más grande de la lista y contenido hiperlocal de Tijuana. Probablemente la mayor fuente de comentarios."
+  },
+  {
+   "id": "zeta_yt",
+   "nombre": "Semanario ZETA",
+   "canal": "UC-NHHkALnId41yENpdCuLKQ",
+   "handle": "@SemanarioZetapolicialibre",
+   "zona": "Tijuana",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "El medio de investigación. Alta carga política, comentarios densos. No existe handle 'zetatijuana'."
+  },
+  {
+   "id": "canal66_yt",
+   "nombre": "Canal 66 Mexicali",
+   "canal": "UC_PX-j6a_YHoRZAztFqSA_g",
+   "handle": "@Canal66mx",
+   "zona": "Mexicali",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "La mejor fuente de Mexicali: prefija los títulos con 'TIJUANA:' o 'MEXICALI:', así que se geoetiqueta solo."
+  },
+  {
+   "id": "cnr_yt",
+   "nombre": "CNR Noticias BC",
+   "canal": "UCr8eCa3i5h4PGApvmK1IyTw",
+   "handle": "@CNRNoticiasBC",
+   "zona": "estatal",
+   "activo": true,
+   "verificado": "2026-09-03"
+  },
+  {
+   "id": "sintesis_yt",
+   "nombre": "Síntesis TV",
+   "canal": "UCiU0jvbuR6pn9aLznDKRaJQ",
+   "handle": "@Sintesis_TV",
+   "zona": "Tijuana",
+   "activo": true,
+   "verificado": "2026-09-03"
+  },
+  {
+   "id": "infonort_yt",
+   "nombre": "INFONORT Multimedios",
+   "canal": "UCozre3s5D7BaaWkLmMCUmHg",
+   "handle": "@INFONORTMULTIMEDIOS",
+   "zona": "Playas de Rosarito",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "El ÚNICO canal que hace cobertura municipal real de Rosarito. Sin él, Rosarito queda en cero."
+  },
+  {
+   "id": "psn_yt",
+   "nombre": "PSN Primer Sistema de Noticias",
+   "canal": "UCfXogkQFUci7zRbZiOjxWZA",
+   "handle": "@redespsn",
+   "zona": "Tijuana",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "PSN es 'Primer Sistema de Noticias', no 'Periodismo Sin Nombre'."
+  },
+  {
+   "id": "elvigia_yt",
+   "nombre": "Editorial El Vigía",
+   "canal": "UCIN8fNpieOt_gCE1sKyUylA",
+   "handle": "@PeriodicoElVigia",
+   "zona": "Ensenada",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "El diario de Ensenada, pero su YouTube tira a Shorts nacionales e internacionales más que a nota municipal. Es lo mejor que hay para Ensenada y no es bueno."
+  },
+  {
+   "id": "afn_yt",
+   "nombre": "Agencia Fronteriza de Noticias",
+   "canal": "UCjlFT_oq-VvAZre23p5kb3A",
+   "handle": "@agenciafronterizadenoticias2",
+   "zona": "Tijuana",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "AFN de verdad, con contenido bueno de Tijuana y Tecate, pero sube esporádicamente. OJO: @afntijuana es un señuelo, 2 videos y nada desde 2007."
+  },
+  {
+   "id": "telemundo20",
+   "nombre": "Telemundo 20 San Diego",
+   "canal": "UCpov05QMApjt0BeaMxE1XmQ",
+   "handle": "@telemundo20sandiego",
+   "zona": "San Diego",
+   "activo": true,
+   "verificado": "2026-09-03",
+   "nota": "En español, del lado de San Diego. La frontera y Tijuana son minoría de su contenido."
+  },
+  {
+   "id": "televisatij",
+   "nombre": "Televisa Tijuana",
+   "canal": "UCjwXjnO3BGePtB7gSKEpoqA",
+   "handle": "@televisatijuanaof",
+   "zona": "Tijuana",
+   "activo": false,
+   "verificado": "2026-09-03",
+   "nota": "Apagado: sube programas completos, no notas, así que el título del video no dice de qué trata y no se puede geoetiquetar ni asociar a un tema."
+  },
+  {
+   "id": "televisamxl",
+   "nombre": "Televisa Mexicali",
+   "canal": "UCcmuFsMIIIHO3LBqeBVfm8Q",
+   "handle": "@televisamexicaliof",
+   "zona": "Mexicali",
+   "activo": false,
+   "verificado": "2026-09-03",
+   "nota": "Apagado: casi todo son volcados de transmisión en vivo con títulos inservibles."
+  },
+  {
+   "id": "califmedios",
+   "nombre": "California Medios Tecate",
+   "canal": "UCn0RdFc8EDjQQ1IyCeiASNQ",
+   "handle": "@CaliforniaMediosTecate",
+   "zona": "Tecate",
+   "activo": false,
+   "verificado": "2026-09-03",
+   "nota": "Apagado: es la radiodifusora de Tecate pero sube programas de radio ('La Hora de la Salud'), no noticias. Tecate queda como hueco de cobertura en YouTube."
+  },
+  {
+   "id": "sanquintintv",
+   "nombre": "San Quintín TV",
+   "canal": "UCnwETOL3-x_dkQ8tFeeeUqg",
+   "handle": "@sanquintintv",
+   "zona": "San Quintín",
+   "activo": false,
+   "verificado": "2026-09-03",
+   "nota": "Apagado: dejó de subir en abril de 2026 y su contenido era relleno viral, no periodismo local. San Quintín no tiene cobertura en YouTube."
+  }
+ ],
+ "senuelos": [
+  {"handle": "@UniradioInforma", "canal": "UCYQgFuwCR3K13nLZu8O3wzQ", "porque": "110 subs, última subida en 2016. El handle obvio de Uniradio NO es el vivo."},
+  {"handle": "@afntijuana", "canal": "UCBwrwQL3J2hjjuqnWzVTnQg", "porque": "2 videos, última subida en 2007."},
+  {"handle": "PSN.si", "canal": "UCUp-zVYaKB4MLbeZW5cgtfA", "porque": "última subida en 2017."},
+  {"handle": "Canal 66 Mexicali", "canal": "UCRYxMy-qW8NHlz7CZc7RdYQ", "porque": "un solo video."},
+  {"handle": "@canal66mexicalienvivo", "canal": "UCHs0pW4MG8NtCsVm5yOCqEA", "porque": "8.83K subs pero solo marcadores de transmisión."},
+  {"handle": "EL IMPARCIAL TV", "canal": "UCSZpvocAhw_WU5R3wVOxRCg", "porque": "190K subs y sube a diario, pero de 15 subidas revisadas: 7 mencionan Sonora, 5 Hermosillo y NINGUNA una ciudad de BC. Es el canal insignia de Sonora. Es el único lo bastante grande para torcer el tablero entero con contenido de otro estado, igual que su feed RSS."},
+  {"handle": "Meganoticias SLRC", "canal": "UCYlI0FN0SzhPLrAIHDmAbPg", "porque": "San Luis Río Colorado es Sonora, no BC."}
+ ]
+}

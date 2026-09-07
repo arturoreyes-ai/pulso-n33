@@ -413,7 +413,7 @@ function Comparativo({ d }: { d: Datos }) {
                   <td className="py-2">
                     <Link
                       href={rutaDeZona(z)}
-                      className="text-tinta-dato transition-colors hover:text-chart-1"
+                      className="text-tinta-dato transition-colors hover:text-chart-1-texto"
                     >
                       {NOMBRE_CORTO[z]}
                     </Link>

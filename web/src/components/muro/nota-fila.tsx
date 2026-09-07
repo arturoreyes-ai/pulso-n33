@@ -18,9 +18,27 @@ import { cargoDe, nombreCorto } from "@/lib/dominio/roster";
  * alcanzable por un lector de pantalla. `hidden` haria invisibles 660 de 669
  * titulares para los dos.
  *
- * La altura intrinseca es la medida real de una fila de una o dos lineas. Si
- * el numero esta mal, la barra de scroll salta; hay que volver a medirla si
- * cambia la escala tipografica.
+ * La altura intrinseca es la medida de una fila de dos lineas, que es el
+ * caso comun. Si el numero esta mal, la barra de scroll salta a lo largo de
+ * 669 filas, y se lee como un bug de scroll y no de tipografia.
+ *
+ * RECALCULADA al pasar a la escala de texto. El titular era 15px con
+ * leading-snug (1.375 -> 20.6px por linea) y ahora es `lectura`, 16px con
+ * 1.55 (24.8px). La cuenta, de arriba abajo:
+ *
+ *   py-3.5 arriba y abajo      28.0
+ *   titular de dos lineas      49.6   (2 x 16px x 1.55)
+ *   mt-1.5                      6.0
+ *   linea de meta con pastillas 19.4  (12px x 1.45, mas py-px)
+ *   border-b                    1.0
+ *                             ------
+ *                             104.0
+ *
+ * Antes daba 92.2 por la misma cuenta y el numero puesto era 96, o sea que
+ * llevaba holgura para las filas cuya linea de meta se envuelve. Se conserva
+ * esa proporcion. Es una cuenta, no una medicion: conviene confirmarla en el
+ * navegador con getBoundingClientRect sobre una fila DENTRO de pantalla
+ * (fuera de pantalla, content-visibility hace que mida cero).
  *
  * `memo` paga porque `nota` tiene identidad estable (los objetos son de SWR),
  * `corte` es un numero y `roster` es un Map memoizado. Si alguno se
@@ -39,7 +57,7 @@ const FilaBase = function Fila({
 
   return (
     <article
-      className="grid grid-cols-[4rem_1fr] gap-4 border-b border-vela py-3.5 [contain-intrinsic-size:0_96px] [content-visibility:auto]"
+      className="grid grid-cols-[4rem_1fr] gap-4 border-b border-vela py-3.5 [contain-intrinsic-size:0_104px] [content-visibility:auto]"
     >
       <div className="pt-0.5 font-mono text-meta tabular-nums text-tinta-meta">
         {t.iso === null ? (
@@ -58,7 +76,7 @@ const FilaBase = function Fila({
             href={nota.url}
             target="_blank"
             rel="noopener nofollow noreferrer"
-            className="text-tinta-titulo transition-colors hover:text-chart-1"
+            className="text-tinta-titulo transition-colors hover:text-chart-1-texto"
           >
             {nota.titulo}
           </a>
