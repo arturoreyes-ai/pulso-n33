@@ -41,7 +41,7 @@ const FilaBase = function Fila({
     <article
       className="grid grid-cols-[4rem_1fr] gap-4 border-b border-vela py-3.5 [contain-intrinsic-size:0_96px] [content-visibility:auto]"
     >
-      <div className="pt-0.5 font-mono text-2xs leading-snug tabular-nums text-tinta-meta">
+      <div className="pt-0.5 font-mono text-meta tabular-nums text-tinta-meta">
         {t.iso === null ? (
           t.principal
         ) : (
@@ -53,18 +53,18 @@ const FilaBase = function Fila({
       </div>
 
       <div className="min-w-0">
-        <h3 className="text-[15px] leading-snug font-normal">
+        <h3 className="text-lectura font-normal">
           <a
             href={nota.url}
             target="_blank"
             rel="noopener nofollow noreferrer"
-            className="text-tinta-titulo transition-colors duration-700 ease-firma hover:text-chart-1"
+            className="text-tinta-titulo transition-colors hover:text-chart-1"
           >
             {nota.titulo}
           </a>
         </h3>
 
-        <p className="mt-1.5 flex flex-wrap items-center gap-2 text-2xs text-tinta-meta">
+        <p className="mt-1.5 flex flex-wrap items-center gap-2 text-meta text-tinta-meta">
           <span>{nota.dominio}</span>
 
           {delegacionesDeNota(nota).map((d) => (
@@ -72,7 +72,7 @@ const FilaBase = function Fila({
               key={d}
               data-delegacion={d}
               title={`Delegación ${d}, nombrada en el titular`}
-              className="inline-block rounded-full border border-filo bg-vela px-2 py-px text-2xs whitespace-nowrap text-tinta-dato"
+              className="inline-block rounded-full border border-filo bg-vela px-2 py-px text-meta whitespace-nowrap text-tinta-dato"
             >
               {NOMBRE_CORTO_DELEGACION[d]}
             </span>
@@ -89,7 +89,7 @@ const FilaBase = function Fila({
                     ? "resuelto por el cargo vigente a la fecha"
                     : "nombrado en el titular"
                 } («${f.clave}»)`}
-                className={`inline-block rounded-full border px-2 py-px text-2xs whitespace-nowrap ${
+                className={`inline-block rounded-full border px-2 py-px text-meta whitespace-nowrap ${
                   f.via === "cargo"
                     ? "border-dashed border-filo text-tinta-meta"
                     : "border-filo bg-vela text-tinta-dato"
@@ -107,7 +107,7 @@ const FilaBase = function Fila({
                   ? "Tono del titular asignado por un modelo entrenado en texto de redes. Mide el tono de la frase, no la postura hacia una persona."
                   : "Tono del titular por diccionario de linea base, no publicable."
               }
-              className={`inline-block rounded-full border px-2 py-px text-2xs whitespace-nowrap ${
+              className={`inline-block rounded-full border px-2 py-px text-meta whitespace-nowrap ${
                 nota.postura.etiqueta === "adversa"
                   ? "border-baja/30 text-baja/80"
                   : nota.postura.etiqueta === "favorable"

@@ -76,11 +76,11 @@ const GrupoBase = function GrupoZona({
   return (
     <section className="mt-10 first:mt-0">
       {conCabecera ? (
-        <h3 className="flex items-center gap-4 text-sm text-tinta-dato">
+        <h3 className="flex items-center gap-4 text-cuerpo text-tinta-dato">
           {esZonaRuta(grupo.zona) ? (
             <Link
               href={rutaDeZona(grupo.zona)}
-              className="transition-colors duration-700 ease-firma hover:text-chart-1"
+              className="transition-colors hover:text-chart-1"
               title={`Ver solo ${NOMBRE_CORTO[grupo.zona]}`}
             >
               {grupo.zona}
@@ -89,7 +89,7 @@ const GrupoBase = function GrupoZona({
             <span>{grupo.zona}</span>
           )}
           <span aria-hidden className="h-px flex-1 bg-vela" />
-          <span className="text-2xs tabular-nums text-tinta-meta">{numero(total)}</span>
+          <span className="text-meta tabular-nums text-tinta-meta">{numero(total)}</span>
         </h3>
       ) : null}
 
@@ -106,7 +106,7 @@ const GrupoBase = function GrupoZona({
         <button
           type="button"
           onClick={ampliar}
-          className="group mt-1 flex w-full items-center gap-4 py-2.5 text-left text-[13px] text-tinta-prosa transition-colors duration-700 ease-firma hover:text-tinta-titulo"
+          className="group mt-1 flex w-full items-center gap-4 py-2.5 text-left text-cuerpo text-tinta-prosa transition-colors hover:text-tinta-titulo"
         >
           <span>
             {restantes > paso
@@ -117,9 +117,9 @@ const GrupoBase = function GrupoZona({
           </span>
           <span
             aria-hidden
-            className="h-px flex-1 bg-vela transition-colors duration-700 ease-firma group-hover:bg-realce"
+            className="h-px flex-1 bg-vela transition-colors group-hover:bg-realce"
           />
-          <span className="text-2xs tabular-nums text-tinta-meta">
+          <span className="text-meta tabular-nums text-tinta-meta">
             {numero(abiertas)} de {numero(total)}
           </span>
         </button>

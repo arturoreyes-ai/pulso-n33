@@ -79,13 +79,13 @@ function tarjetaTema(d: Datos, zona: ZonaRuta | null, sujeto: string): Tarjeta {
   const ejemplo = t?.ejemplos[0];
   return {
     etiqueta: `Tema con más notas en ${dias} días`,
-    valor: t === undefined ? "sin tema" : <span className="text-2xl">«{t.termino}»</span>,
+    valor: t === undefined ? "sin tema" : <span className="text-cifra">«{t.termino}»</span>,
     hueco: t === undefined,
     frase:
       d.temas === undefined ? "Sin temas en este corte." : F.fraseTemaPrincipal(t, sujeto, dias),
     extra:
       ejemplo === undefined ? undefined : (
-        <p className="text-xs leading-snug text-tinta-prosa">Titular de ejemplo: {ejemplo}</p>
+        <p className="text-meta text-tinta-prosa">Titular de ejemplo: {ejemplo}</p>
       ),
     fuente: "Titulares de prensa regional; conteo por documento, sin modelo.",
   };
@@ -205,7 +205,7 @@ function tarjetasMunicipio(zona: ZonaRuta, d: Datos): Tarjeta[] {
       ) : (
         <>
           {numero(ultimo)}{" "}
-          <span className="text-base">
+          <span className="text-lectura">
             <Signo v={F.variacionPct(ultimo, previo)} invertir />
           </span>
         </>
@@ -299,7 +299,7 @@ function tarjetasRegion(d: Datos): Tarjeta[] {
         ) : (
           <>
             {numero(ultimo)}{" "}
-            <span className="text-base">
+            <span className="text-lectura">
               <Signo v={F.variacionPct(ultimo, previo)} invertir />
             </span>
           </>
@@ -389,15 +389,15 @@ function Comparativo({ d }: { d: Datos }) {
   const mes = largo === 0 ? "último mes" : nombreMes(largo - 1);
   return (
     <div className="mt-8 border-t border-vela pt-6">
-      <h3 className="text-base tracking-tight text-tinta-titulo">Comparativo por zona</h3>
-      <p className="mt-1 text-xs text-tinta-prosa">
+      <h3 className="text-rotulo text-tinta-titulo">Comparativo por zona</h3>
+      <p className="mt-1 text-meta text-tinta-prosa">
         Toca una zona para ver solo sus cifras. Los delitos no son per cápita: comparan
         volumen, no riesgo.
       </p>
       <div className="mt-4 overflow-x-auto">
-        <table className="w-full min-w-[30rem] text-sm">
+        <table className="w-full min-w-[30rem] text-cuerpo">
           <thead>
-            <tr className="text-left text-2xs text-tinta-meta">
+            <tr className="text-left text-meta text-tinta-meta">
               <th className="py-2 font-normal">Zona</th>
               <th className="py-2 text-right font-normal">Notas, {d.estado.ventana_dias} días</th>
               <th className="py-2 text-right font-normal">Delitos en {mes}</th>
@@ -413,7 +413,7 @@ function Comparativo({ d }: { d: Datos }) {
                   <td className="py-2">
                     <Link
                       href={rutaDeZona(z)}
-                      className="text-tinta-dato transition-colors duration-700 ease-firma hover:text-chart-1"
+                      className="text-tinta-dato transition-colors hover:text-chart-1"
                     >
                       {NOMBRE_CORTO[z]}
                     </Link>
@@ -471,7 +471,7 @@ export function ResumenZona({ zona }: { zona: ZonaRuta | null }) {
   const totalFuentes = estado.fuentes_ok + estado.fuentes_fallo;
 
   return (
-    <Bisel opaco interior="p-6 md:p-8">
+    <Bisel interior="p-6 md:p-8">
       <div className="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
         {tarjetas.map((t) => (
           <Kpi key={t.etiqueta} {...t} />
@@ -480,16 +480,16 @@ export function ResumenZona({ zona }: { zona: ZonaRuta | null }) {
 
       {brecha === null || tono === undefined || sentimiento === undefined ? null : (
         <div className="mt-8 rounded-nucleo border border-filo p-5">
-          <p className="max-w-[70ch] text-sm leading-snug text-tinta-dato">{brecha}</p>
+          <p className="max-w-[70ch] text-lectura text-tinta-dato">{brecha}</p>
           <div className="mt-4 grid gap-6 sm:grid-cols-2">
             <div>
-              <p className="text-2xs text-tinta-meta">Tono de los titulares</p>
+              <p className="text-meta text-tinta-meta">Tono de los titulares</p>
               <div className="mt-2">
                 <BarraTono t={tono} ariaLabel={`Tono de los titulares sobre ${sujeto}`} />
               </div>
             </div>
             <div>
-              <p className="text-2xs text-tinta-meta">Sentimiento de los comentarios</p>
+              <p className="text-meta text-tinta-meta">Sentimiento de los comentarios</p>
               <div className="mt-2">
                 <BarraSentimiento
                   s={sentimiento}
@@ -498,7 +498,7 @@ export function ResumenZona({ zona }: { zona: ZonaRuta | null }) {
               </div>
             </div>
           </div>
-          <p className="mt-3 text-xs text-tinta-prosa">
+          <p className="mt-3 text-meta text-tinta-prosa">
             Titulares y comentarios miden cosas distintas; no se suman.
           </p>
         </div>
@@ -506,7 +506,7 @@ export function ResumenZona({ zona }: { zona: ZonaRuta | null }) {
 
       {zona === null ? <Comparativo d={d} /> : null}
 
-      <p className="mt-8 border-t border-vela pt-4 text-xs leading-relaxed text-tinta-meta">
+      <p className="mt-8 border-t border-vela pt-4 text-meta text-tinta-meta">
         Corte del {fechaLarga(estado.generado)} a las {hora(estado.generado)}.{" "}
         {estado.fuentes_ok} de {totalFuentes} fuentes respondieron. Archivo:{" "}
         {numero(estado.notas_archivadas)} notas en {estado.archivos} meses.

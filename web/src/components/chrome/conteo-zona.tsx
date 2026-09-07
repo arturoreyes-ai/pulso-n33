@@ -14,5 +14,5 @@ export function ConteoZona({ zona }: { zona: ZonaRuta | null }) {
   const { data: estado } = useEstado();
   if (estado === undefined) return null;
   const n = zona === null ? estado.notas_ventana : (estado.por_zona[zona] ?? 0);
-  return <span className="text-2xs tabular-nums text-tinta-meta">{numero(n)}</span>;
+  return <span className="text-meta tabular-nums text-tinta-meta">{numero(n)}</span>;
 }

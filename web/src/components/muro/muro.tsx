@@ -39,7 +39,7 @@ export function Muro({ zona }: { zona: ZonaRuta | null }) {
 
   if (m.error !== undefined) {
     return (
-      <p className="text-sm text-baja">
+      <p className="text-lectura text-baja">
         No se pudo leer notas.json. Corre{" "}
         <code className="text-tinta-titulo">python -m pulso correr</code>.
       </p>
@@ -53,7 +53,7 @@ export function Muro({ zona }: { zona: ZonaRuta | null }) {
   const agrupado = zona === null;
 
   return (
-    <Bisel opaco interior="p-4 md:p-8">
+    <Bisel interior="p-4 md:p-8">
       {/* Barra de filtros. Sticky con blur: elemento fijo y area chica, que es
           el caso donde el blur si esta permitido. Deja de ser sticky en movil
           porque ocuparia media pantalla. La zona ya no se elige aqui: es la
@@ -77,7 +77,7 @@ export function Muro({ zona }: { zona: ZonaRuta | null }) {
               onChange={(e) => m.setConsulta(e.target.value)}
               placeholder="Buscar en los titulares"
               aria-label="Buscar en los titulares"
-              className="w-56 rounded-full border border-filo bg-vela py-2 pr-3 pl-8 text-[13px] text-tinta-titulo placeholder:text-tinta-meta"
+              className="w-56 rounded-full border border-filo bg-vela py-2 pr-3 pl-8 text-cuerpo text-tinta-titulo placeholder:text-tinta-meta"
             />
           </div>
 
@@ -97,7 +97,7 @@ export function Muro({ zona }: { zona: ZonaRuta | null }) {
             <button
               type="button"
               onClick={limpiarTema}
-              className="inline-flex items-center gap-1.5 rounded-full bg-chart-1/15 px-3 py-2 text-[12px] text-chart-1 transition-all duration-700 ease-firma hover:bg-chart-1/25"
+              className="inline-flex items-center gap-1.5 rounded-full bg-chart-1/15 px-3 py-2 text-meta text-chart-1 transition-colors hover:bg-chart-1/25"
             >
               <X size={12} weight="light" aria-hidden />
               filtrado por tema
@@ -106,7 +106,7 @@ export function Muro({ zona }: { zona: ZonaRuta | null }) {
 
           {/* aria-live SOLO en la linea de conteo. Ponerlo en el muro
               anunciaria cientos de filas. */}
-          <p aria-live="polite" className="ml-auto text-xs tabular-nums text-tinta-meta">
+          <p aria-live="polite" className="ml-auto text-meta tabular-nums text-tinta-meta">
             {numero(m.visibles)}
             {m.desfasado ? "…" : ""}
             {sujeto === null ? " de " : ` notas sobre ${sujeto} de `}
@@ -135,12 +135,12 @@ export function Muro({ zona }: { zona: ZonaRuta | null }) {
           render ancho corre, en vez de bloquear el control. */}
       <div
         data-pendiente={m.pendiente ? "" : undefined}
-        className={`transition-opacity duration-700 ease-firma ${
+        className={`transition-opacity duration-[var(--dur-cambio)] ease-firma ${
           m.pendiente ? "opacity-60" : "opacity-100"
         }`}
       >
         {m.grupos.length === 0 ? (
-          <p className="py-16 text-center text-sm text-tinta-prosa">
+          <p className="py-16 text-center text-lectura text-tinta-prosa">
             {m.totalVentana > 0
               ? sujeto === null
                 ? "Sin notas que coincidan con este filtro."
@@ -166,7 +166,7 @@ export function Muro({ zona }: { zona: ZonaRuta | null }) {
           en el mismo pie porque las dos contestan la misma pregunta: por que
           la cifra de arriba no llega al total de la ventana. */}
       {zona === null && (m.fuera > 0 || m.nacionales > 0) ? (
-        <p className="mt-10 border-t border-vela pt-5 text-xs leading-relaxed text-tinta-prosa">
+        <p className="mt-10 border-t border-vela pt-5 text-meta text-tinta-prosa">
           {m.fuera > 0 ? (
             <>
               {numero(m.fuera)} notas de fuera de la región quedaron descartadas. Vienen

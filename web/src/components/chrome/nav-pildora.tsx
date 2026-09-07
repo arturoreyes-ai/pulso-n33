@@ -26,7 +26,7 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  */
 
 const CLASES_PILDORA =
-  "block rounded-full bg-filo px-3 py-2 text-[12px] font-medium text-tinta-titulo transition-all duration-700 ease-firma hover:bg-realce md:px-4 md:text-[13px]";
+  "block rounded-full bg-filo px-3 py-2 text-meta font-medium text-tinta-titulo transition-colors hover:bg-realce md:px-4";
 
 const SECCIONES = [
   { id: "indicadores", nombre: "Indicadores" },
@@ -67,7 +67,7 @@ export function NavPildora({ zona }: { zona: ZonaRuta | null }) {
             <li key={s.id}>
               <a
                 href={`#${s.id}`}
-                className="block rounded-full px-3 py-2 text-[12px] text-tinta-prosa transition-all duration-700 ease-firma hover:bg-filo hover:text-tinta-titulo md:px-4 md:text-[13px]"
+                className="block rounded-full px-3 py-2 text-meta text-tinta-prosa transition-colors hover:bg-filo hover:text-tinta-titulo md:px-4"
               >
                 {s.nombre}
               </a>

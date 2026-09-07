@@ -142,8 +142,13 @@
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
-  --text-2xs: 0.6875rem;
-  --text-2xs--line-height: 1.45;
+  /* NO se resetea --text-* ni --radius-* con `initial`. Tailwind v4 solo
+     genera una utilidad que VE usada en el codigo, asi que `text-xs` ya no
+     existe en el CSS compilado por el simple hecho de que nadie la
+     escribe: verificado, cero ocurrencias. Un reset solo cambiaria el modo
+     de fallo de un `text-xs` futuro a SILENCIOSO —sin CSS, el texto cae al
+     tamano heredado—, y de eso ya se encarga scripts/verificar-tokens.mjs,
+     que falla en CI diciendo por cual paso hay que cambiarlo. */
 
   /* --------------------------------------------------------- tipografia */
 
@@ -298,9 +303,9 @@ body {
   transform: none;
   filter: none;
   transition:
-    opacity 800ms var(--ease-firma),
-    transform 800ms var(--ease-firma),
-    filter 800ms var(--ease-firma);
+    opacity var(--dur-entrada) var(--ease-firma),
+    transform var(--dur-entrada) var(--ease-firma),
+    filter var(--dur-entrada) var(--ease-firma);
 }
 
 /* No es opcional. El arquetipo pide animacion en todo y esto la desactiva
@@ -337,5 +342,5 @@ body {
 }
 
 .entrada {
-  animation: entrada 900ms var(--ease-firma) both;
+  animation: entrada var(--dur-entrada) var(--ease-firma) both;
 }

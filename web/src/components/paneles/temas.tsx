@@ -38,7 +38,7 @@ const FilaTema = memo(function FilaTema({
 }) {
   return (
     <li className="relative pl-7">
-      <span className="absolute top-0.5 left-0 text-2xs tabular-nums text-tinta-meta">
+      <span className="absolute top-0.5 left-0 text-meta tabular-nums text-tinta-meta">
         {indice + 1}
       </span>
 
@@ -46,20 +46,20 @@ const FilaTema = memo(function FilaTema({
         type="button"
         aria-pressed={activo}
         onClick={() => alternarTema(t.notas)}
-        className={`text-left transition-colors duration-700 ease-firma ${
+        className={`text-left transition-colors ${
           activo ? "text-chart-1" : "text-tinta-titulo hover:text-chart-1"
         }`}
       >
-        <span className="text-[15px] tracking-tight">{t.termino}</span>
+        <span className="text-lectura">{t.termino}</span>
       </button>
 
-      <span className="ml-2 text-2xs tabular-nums text-tinta-meta">
+      <span className="ml-2 text-meta tabular-nums text-tinta-meta">
         {t.n} {pluralizar(t.n, "nota", "notas")}
       </span>
 
       {hayMomento && t.momento !== 0 ? (
         <span
-          className={`ml-2 rounded-etiqueta px-1 text-2xs font-semibold tabular-nums ${
+          className={`ml-2 rounded-etiqueta px-1 text-meta font-semibold tabular-nums ${
             t.momento > 0 ? "bg-sube/15 text-sube" : "bg-vela text-tinta-meta"
           }`}
           title={`contra las ${t.n_previo} de la ventana anterior`}
@@ -71,7 +71,7 @@ const FilaTema = memo(function FilaTema({
 
       {t.un_solo_medio ? (
         <span
-          className="ml-2 rounded-etiqueta border border-aviso/30 px-1.5 py-px text-2xs text-aviso"
+          className="ml-2 rounded-etiqueta border border-aviso/30 px-1.5 py-px text-meta text-aviso"
           title="Un tema sostenido por un medio es la agenda de ese medio, no de la región"
         >
           un solo medio
@@ -79,7 +79,7 @@ const FilaTema = memo(function FilaTema({
       ) : null}
 
       {mostrarZonas ? (
-        <p className="mt-1 text-2xs text-tinta-meta">
+        <p className="mt-1 text-meta text-tinta-meta">
           {Object.entries(t.zonas)
             .slice(0, 4)
             .map(([z, n]) => `${z} ${n}`)
@@ -90,7 +90,7 @@ const FilaTema = memo(function FilaTema({
       {ejemplos > 0 && t.ejemplos.length > 0 ? (
         <ul className="mt-2 space-y-1.5">
           {t.ejemplos.slice(0, ejemplos).map((e) => (
-            <li key={e} className="text-[13px] leading-snug text-tinta-prosa">
+            <li key={e} className="text-cuerpo text-tinta-prosa">
               {e}
             </li>
           ))}
@@ -104,7 +104,7 @@ export function PanelTemas({ zona, lectura }: { zona: ZonaRuta | null; lectura?:
   const { data, error } = useTemas();
   const temaIds = useFiltroTema();
 
-  if (error !== undefined) return <p className="text-sm text-baja">No se pudo leer temas.json.</p>;
+  if (error !== undefined) return <p className="text-lectura text-baja">No se pudo leer temas.json.</p>;
   if (data === undefined) return <Esqueleto className="h-[420px]" />;
 
   const nombre = zona === null ? null : NOMBRE_CORTO[zona];
@@ -124,8 +124,8 @@ export function PanelTemas({ zona, lectura }: { zona: ZonaRuta | null; lectura?:
 
   if (lista.length === 0) {
     return (
-      <Bisel opaco interior="p-6 md:p-8">
-        <p className="max-w-[65ch] text-sm leading-relaxed text-tinta-prosa">
+      <Bisel interior="p-6 md:p-8">
+        <p className="max-w-[65ch] text-lectura text-tinta-prosa">
           {nombre === null
             ? `Ningún tema alcanzó el mínimo de ${minimo} notas en la ventana de ${data.ventana_dias} días.`
             : `Ningún tema alcanzó el mínimo de ${minimo} notas sobre ${nombre} en ${data.ventana_dias} días. `}
@@ -145,8 +145,8 @@ export function PanelTemas({ zona, lectura }: { zona: ZonaRuta | null; lectura?:
   }
 
   return (
-    <Bisel opaco interior="p-6 md:p-8">
-      <p className="text-xs text-tinta-prosa">
+    <Bisel interior="p-6 md:p-8">
+      <p className="text-meta text-tinta-prosa">
         {nombre === null
           ? `${numero(notasVentana)} notas en ${data.ventana_dias} días, mínimo ${minimo} por tema.`
           : desglosado
@@ -168,7 +168,7 @@ export function PanelTemas({ zona, lectura }: { zona: ZonaRuta | null; lectura?:
         ))}
       </ol>
 
-      <p className="mt-6 text-xs text-tinta-prosa">
+      <p className="mt-6 text-meta text-tinta-prosa">
         Toca un tema para filtrar el muro de titulares.
         {hayMomento
           ? ""

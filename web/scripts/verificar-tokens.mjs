@@ -89,7 +89,9 @@ const REGLAS = [
   },
   {
     nombre: "metrica",
-    patron: /(?:^|[\s"'`:])(?:md:|sm:|lg:)*(?:tracking|leading)-(?:\[[^\]]+\]|tight|tighter|snug|normal|relaxed|loose|none)\b/g,
+    // El final va con lookahead y no con \b: despues de un ']' no hay
+    // frontera de palabra, asi que `leading-[0.95]` se colaba entero.
+    patron: /(?:^|[\s"'`:])(?:md:|sm:|lg:)*(?:tracking|leading)-(?:\[[^\]]+\]|tight|tighter|snug|normal|relaxed|loose|none)(?=[\s"'`]|$)/g,
     dice: "El interlineado y el tracking van horneados en el paso de texto; si hace falta otro, el paso esta mal elegido.",
   },
   {

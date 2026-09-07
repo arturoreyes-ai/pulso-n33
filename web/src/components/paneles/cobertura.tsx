@@ -29,7 +29,7 @@ type Canal = DocConversacion["canales"][number];
 function FilaFuente({ f }: { f: Fuente }) {
   return (
     <li
-      className="flex items-baseline gap-3 text-xs"
+      className="flex items-baseline gap-3 text-meta"
       title={
         f.estado === "ok"
           ? f.url
@@ -50,7 +50,7 @@ function FilaFuente({ f }: { f: Fuente }) {
 
 function FilaCanal({ c }: { c: Canal }) {
   return (
-    <li className="flex items-baseline gap-3 text-xs" title={c.error ?? undefined}>
+    <li className="flex items-baseline gap-3 text-meta" title={c.error ?? undefined}>
       <span className="min-w-0 truncate text-tinta-dato">{c.nombre}</span>
       <span className={`shrink-0 ${c.estado === "ok" ? "text-sube/80" : "text-aviso/90"}`}>
         {c.estado === "sin_llave" ? "sin llave" : c.estado}
@@ -79,15 +79,15 @@ function Region({
 
   return (
     <div className="grid gap-6 lg:grid-cols-2">
-      <Bisel opaco interior="p-6 md:p-8">
-        <h3 className="text-base tracking-tight text-tinta-titulo">Notas por zona</h3>
+      <Bisel interior="p-6 md:p-8">
+        <h3 className="text-rotulo text-tinta-titulo">Notas por zona</h3>
         <ul className="mt-6 grid gap-2.5">
           {FILAS.map((z) => {
             const n = estado.por_zona[z] ?? 0;
             const etiqueta: ReactNode = esZonaRuta(z) ? (
               <Link
                 href={rutaDeZona(z)}
-                className="transition-colors duration-700 ease-firma hover:text-chart-1"
+                className="transition-colors hover:text-chart-1"
               >
                 {NOMBRE_CORTO[z]}
               </Link>
@@ -97,7 +97,7 @@ function Region({
             return (
               <li
                 key={z}
-                className="grid grid-cols-[8.5rem_1fr_5.5rem] items-center gap-3 text-xs"
+                className="grid grid-cols-[8.5rem_1fr_5.5rem] items-center gap-3 text-meta"
               >
                 <span className={n === 0 ? "text-aviso/80" : "text-tinta-dato"}>{etiqueta}</span>
                 <Barra fraccion={max === 0 ? 0 : n / max} />
@@ -114,7 +114,7 @@ function Region({
             );
           })}
         </ul>
-        <p className="mt-6 max-w-[65ch] border-t border-vela pt-4 text-xs leading-relaxed text-tinta-prosa">
+        <p className="mt-6 max-w-[65ch] border-t border-vela pt-4 text-meta text-tinta-prosa">
           Una nota que habla de dos zonas cuenta en las dos, así que la suma es mayor
           que el total. Las de fuera de la región se descartan antes de contar. Un cero
           se rotula: significa que no medimos ahí, no que no pase nada.
@@ -122,8 +122,8 @@ function Region({
       </Bisel>
 
       <div className="grid gap-6">
-        <Bisel opaco interior="p-6 md:p-8">
-          <h3 className="text-base tracking-tight text-tinta-titulo">Salud de las fuentes de prensa</h3>
+        <Bisel interior="p-6 md:p-8">
+          <h3 className="text-rotulo text-tinta-titulo">Salud de las fuentes de prensa</h3>
           {fuentes === undefined ? (
             <Esqueleto className="mt-6 h-[260px]" />
           ) : (
@@ -136,8 +136,8 @@ function Region({
         </Bisel>
 
         {conv === undefined || conv.canales.length === 0 ? null : (
-          <Bisel opaco interior="p-6 md:p-8">
-            <h3 className="text-base tracking-tight text-tinta-titulo">Canales de YouTube</h3>
+          <Bisel interior="p-6 md:p-8">
+            <h3 className="text-rotulo text-tinta-titulo">Canales de YouTube</h3>
             <ul className="mt-6 grid gap-1.5">
               {conv.canales.map((c) => (
                 <FilaCanal key={c.id} c={c} />
@@ -183,14 +183,14 @@ function Zona({
 
   return (
     <div className="grid gap-6 lg:grid-cols-2">
-      <Bisel opaco interior="p-6 md:p-8">
-        <h3 className="text-base tracking-tight text-tinta-titulo">Fuentes que cubren {nombre}</h3>
-        <div className="mt-5 grid grid-cols-[8.5rem_1fr_5.5rem] items-center gap-3 text-xs">
+      <Bisel interior="p-6 md:p-8">
+        <h3 className="text-rotulo text-tinta-titulo">Fuentes que cubren {nombre}</h3>
+        <div className="mt-5 grid grid-cols-[8.5rem_1fr_5.5rem] items-center gap-3 text-meta">
           <span className="text-tinta-dato">Notas en {estado.ventana_dias} días</span>
           <Barra fraccion={max === 0 ? 0 : n / max} />
           <span className="text-right tabular-nums text-tinta-dato">{numero(n)}</span>
         </div>
-        <p className="mt-2 text-2xs text-tinta-meta">
+        <p className="mt-2 text-meta text-tinta-meta">
           La barra compara contra la zona con más notas del corte.
         </p>
 
@@ -198,7 +198,7 @@ function Zona({
           <Esqueleto className="mt-6 h-[160px]" />
         ) : !conZona ? (
           <>
-            <p className="mt-6 text-xs text-tinta-prosa">
+            <p className="mt-6 text-meta text-tinta-prosa">
               Este corte no trae la zona de cada medio; se listan todas las fuentes.
             </p>
             <ul className="mt-3 grid gap-1.5">
@@ -209,9 +209,9 @@ function Zona({
           </>
         ) : (
           <>
-            <h4 className="mt-6 text-xs text-tinta-prosa">Medios de {nombre}</h4>
+            <h4 className="mt-6 text-meta text-tinta-prosa">Medios de {nombre}</h4>
             {propias.length === 0 ? (
-              <p className="mt-2 text-sm text-tinta-prosa">
+              <p className="mt-2 text-lectura text-tinta-prosa">
                 Ningún medio del catálogo tiene a {nombre} como cobertura principal. Las
                 notas llegan de cables y de medios de otras zonas cuando nombran el lugar.
               </p>
@@ -224,7 +224,7 @@ function Zona({
             )}
             {estatales.length === 0 ? null : (
               <>
-                <h4 className="mt-6 text-xs text-tinta-prosa">Cables y medios estatales</h4>
+                <h4 className="mt-6 text-meta text-tinta-prosa">Cables y medios estatales</h4>
                 <ul className="mt-2 grid gap-1.5">
                   {estatales.map((f) => (
                     <FilaFuente key={f.id} f={f} />
@@ -237,9 +237,9 @@ function Zona({
 
         {conv === undefined ? null : (
           <>
-            <h4 className="mt-6 text-xs text-tinta-prosa">Canales de YouTube de {nombre}</h4>
+            <h4 className="mt-6 text-meta text-tinta-prosa">Canales de YouTube de {nombre}</h4>
             {canales.length === 0 ? (
-              <p className="mt-2 text-sm text-tinta-prosa">
+              <p className="mt-2 text-lectura text-tinta-prosa">
                 Sin canal verificado para {nombre}. Los comentarios atribuidos a la zona
                 vienen de videos que la nombran.
               </p>
@@ -254,8 +254,8 @@ function Zona({
         )}
       </Bisel>
 
-      <Bisel opaco interior="p-6 md:p-8">
-        <h3 className="text-base tracking-tight text-tinta-titulo">Indicadores disponibles para {nombre}</h3>
+      <Bisel interior="p-6 md:p-8">
+        <h3 className="text-rotulo text-tinta-titulo">Indicadores disponibles para {nombre}</h3>
         {I === undefined ? (
           <Esqueleto className="mt-6 h-[200px]" />
         ) : sd ? (
@@ -306,7 +306,7 @@ function Zona({
             />
           </ul>
         )}
-        <p className="mt-6 max-w-[65ch] border-t border-vela pt-4 text-xs leading-relaxed text-tinta-prosa">
+        <p className="mt-6 max-w-[65ch] border-t border-vela pt-4 text-meta text-tinta-prosa">
           Lo que falta no se rellena con ceros ni se infiere de otras zonas. El índice
           SHF solo existe para Tijuana y Mexicali; la ENSU nunca ha muestreado Ensenada,
           Tecate, Rosarito, San Quintín ni San Felipe.

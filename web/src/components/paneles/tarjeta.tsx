@@ -30,11 +30,11 @@ export function Tarjeta({
   children: ReactNode;
 }) {
   return (
-    <Bisel as="section" opaco className={className} interior="flex h-full flex-col p-6">
+    <Bisel as="section" nivel="panel" className={className} interior="flex h-full flex-col p-6">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <h3 className="text-base tracking-tight text-tinta-titulo">{titulo}</h3>
-          <p className="mt-1 text-2xs text-tinta-meta">
+          <h3 className="text-rotulo text-tinta-titulo">{titulo}</h3>
+          <p className="mt-1 text-meta text-tinta-meta">
             {fuente}
             {periodo === null || periodo === undefined ? "" : ` · ${periodo}`}
           </p>
@@ -45,7 +45,7 @@ export function Tarjeta({
       <div className="mt-5 flex-1">{children}</div>
 
       {aviso === undefined ? null : (
-        <p className="mt-5 border-t border-vela pt-4 text-xs leading-relaxed text-tinta-prosa">
+        <p className="mt-5 border-t border-vela pt-4 text-meta text-tinta-prosa">
           {aviso}
         </p>
       )}

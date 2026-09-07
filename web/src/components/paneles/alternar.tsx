@@ -42,7 +42,7 @@ export function Alternar({
           {...(v === "grafica"
             ? { onPointerEnter: onIntento, onFocus: onIntento }
             : {})}
-          className={`rounded-full px-3 py-1 text-xs transition-all duration-700 ease-firma ${
+          className={`rounded-full px-3 py-1 text-meta transition-colors duration-[var(--dur-cambio)] ease-firma ${
             vista === v
               ? "bg-realce text-tinta-titulo"
               : "text-tinta-meta hover:bg-vela hover:text-tinta-dato"

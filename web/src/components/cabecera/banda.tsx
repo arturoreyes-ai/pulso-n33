@@ -17,7 +17,7 @@ export function Banda() {
     return (
       <p
         role="status"
-        className="border-l-2 border-baja bg-vela px-4 py-3 text-xs leading-relaxed text-tinta-prosa"
+        className="border-l-2 border-baja bg-vela px-4 py-3 text-meta text-tinta-prosa"
       >
         <b className="font-semibold text-baja">Sin datos.</b> No se pudo leer
         estado.json. Corre <code className="text-tinta-titulo">python -m pulso correr</code> y
@@ -30,7 +30,7 @@ export function Banda() {
     return (
       <p
         role="status"
-        className="border-l-2 border-aviso bg-vela px-4 py-3 text-xs leading-relaxed text-tinta-prosa"
+        className="border-l-2 border-aviso bg-vela px-4 py-3 text-meta text-tinta-prosa"
       >
         <b className="font-semibold text-aviso">Corrida sin red.</b> Estas notas
         vienen del corpus de prueba, no de los feeds. Sirven para verificar el
@@ -61,7 +61,7 @@ export function Banda() {
   return (
     <p
       role="status"
-      className={`border-l-2 bg-vela px-4 py-3 text-xs leading-relaxed text-tinta-prosa ${
+      className={`border-l-2 bg-vela px-4 py-3 text-meta text-tinta-prosa ${
         roto ? "border-baja" : "border-sube"
       }`}
     >

@@ -31,7 +31,7 @@ function enlaceZona(nombre: string): ReactNode {
   return (
     <Link
       href={rutaDeZona(nombre)}
-      className="transition-colors duration-700 ease-firma hover:text-chart-1"
+      className="transition-colors hover:text-chart-1"
     >
       {NOMBRE_CORTO[nombre]}
     </Link>
@@ -101,7 +101,7 @@ function TarjetaCrimenZona({ panel, zona }: { panel: PanelSesnsp; zona: ZonaRuta
       className="md:col-span-8"
       extra={<Alternar vista={vista} onVista={setVista} onIntento={intento} />}
     >
-      <p className="max-w-[70ch] text-sm leading-snug text-tinta-dato">{F.fraseCrimen(m, nombre)}</p>
+      <p className="max-w-[70ch] text-lectura text-tinta-dato">{F.fraseCrimen(m, nombre)}</p>
       {vista === "grafica" ? (
         <div className="mt-4">
           <Grafica panel={panel} municipio={zona} />
@@ -123,12 +123,12 @@ function TarjetaCrimenZona({ panel, zona }: { panel: PanelSesnsp; zona: ZonaRuta
             ))}
           </ul>
           <div>
-            <p className="text-xs text-tinta-prosa">{F.fraseDelitosClave(m)}</p>
+            <p className="text-meta text-tinta-prosa">{F.fraseDelitosClave(m)}</p>
             <ul className="mt-3 grid gap-2.5">
               {clave.map(([d, n]) => (
                 <li
                   key={d}
-                  className="grid grid-cols-[8.5rem_1fr_3.5rem] items-center gap-3 text-xs"
+                  className="grid grid-cols-[8.5rem_1fr_3.5rem] items-center gap-3 text-meta"
                 >
                   <span className="truncate text-tinta-dato" title={d}>
                     {d}
@@ -187,7 +187,7 @@ function Region({ I }: { I: Ind }) {
               />
             ))}
           </ul>
-          <p className="mt-4 text-xs leading-relaxed text-tinta-prosa">{I.shf.universo}</p>
+          <p className="mt-4 text-meta text-tinta-prosa">{I.shf.universo}</p>
         </Tarjeta>
       )}
 
@@ -289,7 +289,7 @@ function Region({ I }: { I: Ind }) {
               );
             })}
           </ul>
-          <p className="mt-4 text-xs leading-relaxed text-tinta-prosa">
+          <p className="mt-4 text-meta text-tinta-prosa">
             {sd.faltantes} De {numero(Object.keys(sd.zips).length)} códigos postales, aquí se
             muestran los de la franja fronteriza.{" "}
             <Link href={rutaDeZona("San Diego")} className="text-tinta-dato underline decoration-tinta-inerte underline-offset-2 hover:decoration-tinta-prosa">
@@ -353,7 +353,7 @@ function Municipio({ I, zona }: { I: Ind; zona: ZonaRuta }) {
               />
             )}
           </ul>
-          <p className="mt-4 text-sm leading-snug text-tinta-prosa">
+          <p className="mt-4 text-lectura text-tinta-prosa">
             {F.fraseVivienda(serie, nombre, shf.periodo)}
           </p>
         </Tarjeta>
@@ -373,13 +373,13 @@ function Municipio({ I, zona }: { I: Ind; zona: ZonaRuta }) {
             <Hueco titulo="Sin registro de predial para este municipio">sin dato</Hueco>
           ) : (
             <>
-              <p className="text-3xl leading-none tracking-tight tabular-nums text-tinta-titulo">
+              <p className="text-cifra tabular-nums text-tinta-titulo">
                 {pesos(m.por_cuenta_mxn)}{" "}
-                <span className="text-base">
+                <span className="text-lectura">
                   <Signo v={m.variacion_anual_pct} />
                 </span>
               </p>
-              <p className="mt-3 text-sm leading-snug text-tinta-prosa">
+              <p className="mt-3 text-lectura text-tinta-prosa">
                 {F.frasePredial(m, nombre)} {numero(m.cuentas_pagadas)} cuentas pagadas,{" "}
                 {m.ciclos} ciclos de serie.
               </p>
@@ -417,7 +417,7 @@ function Municipio({ I, zona }: { I: Ind; zona: ZonaRuta }) {
               }
             />
           </ul>
-          <p className="mt-4 text-sm leading-snug text-tinta-prosa">
+          <p className="mt-4 text-lectura text-tinta-prosa">
             {F.frasePercepcion(e, nombre, ensu.nacional.pct_inseguro, ensu.periodo)}
           </p>
         </Tarjeta>
@@ -457,7 +457,7 @@ function SanDiego({ I }: { I: Ind }) {
           aviso={sd.aviso}
           className="md:col-span-8"
         >
-          <p className="max-w-[70ch] text-sm leading-snug text-tinta-dato">
+          <p className="max-w-[70ch] text-lectura text-tinta-dato">
             {F.fraseSanDiego(sd.zips, ZIPS_FRONTERA)}
           </p>
           <ul className="mt-4">
@@ -474,7 +474,7 @@ function SanDiego({ I }: { I: Ind }) {
               );
             })}
           </ul>
-          <p className="mt-4 text-xs leading-relaxed text-tinta-prosa">
+          <p className="mt-4 text-meta text-tinta-prosa">
             {sd.faltantes} De {numero(Object.keys(sd.zips).length)} códigos postales, aquí se
             muestran los de la franja fronteriza.
           </p>
@@ -482,7 +482,7 @@ function SanDiego({ I }: { I: Ind }) {
       )}
 
       <Tarjeta titulo="Indicadores mexicanos" fuente="SHF, SHCP, SESNSP e INEGI" className="md:col-span-4">
-        <p className="text-sm leading-relaxed text-tinta-prosa">
+        <p className="text-lectura text-tinta-prosa">
           El índice de vivienda, el predial, la incidencia delictiva y la ENSU miden
           municipios de Baja California y no aplican a San Diego. Para el lado
           mexicano de la garita,{" "}
@@ -512,7 +512,7 @@ export function PanelIndicadores({
 
   if (error !== undefined) {
     return (
-      <p className="text-sm text-baja">
+      <p className="text-lectura text-baja">
         No se pudo leer indicadores.json. Corre{" "}
         <code className="text-tinta-titulo">python -m pulso indicadores</code>.
       </p>
@@ -540,7 +540,7 @@ export function PanelIndicadores({
         <Municipio I={I} zona={zona} />
       )}
       {fallos.length > 0 ? (
-        <p className="mt-6 text-xs text-tinta-prosa">
+        <p className="mt-6 text-meta text-tinta-prosa">
           No se pudo actualizar: {fallos.map((f) => f.id).join(", ")}.
         </p>
       ) : null}

@@ -17,10 +17,10 @@ export function ComoLeer({
   if (children === undefined || children === null) return null;
   return (
     <details className="mt-6 border-t border-vela pt-4">
-      <summary className="cursor-pointer text-xs text-tinta-prosa select-none hover:text-tinta-dato">
+      <summary className="cursor-pointer text-meta text-tinta-prosa select-none hover:text-tinta-dato">
         {titulo}
       </summary>
-      <div className="mt-3 max-w-[80ch] space-y-3 text-sm leading-relaxed text-tinta-prosa">
+      <div className="mt-3 max-w-[80ch] space-y-3 text-lectura text-tinta-prosa">
         {children}
       </div>
     </details>

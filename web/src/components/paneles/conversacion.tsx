@@ -50,18 +50,18 @@ function Tema({ fila, dias }: { fila: FilaTema; dias: number }) {
   return (
     <li className="border-t border-vela py-5 first:border-0 first:pt-0">
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-        <h4 className="text-[15px] tracking-tight text-tinta-titulo">{fila.tema}</h4>
-        <span className="text-2xs tabular-nums text-tinta-meta">
+        <h4 className="text-lectura text-tinta-titulo">{fila.tema}</h4>
+        <span className="text-meta tabular-nums text-tinta-meta">
           {numero(fila.comentarios)} {pluralizar(fila.comentarios, "comentario", "comentarios")}
         </span>
       </div>
-      <p className="mt-2 max-w-[70ch] text-sm leading-snug text-tinta-dato">{frase}</p>
+      <p className="mt-2 max-w-[70ch] text-lectura text-tinta-dato">{frase}</p>
       {s !== undefined && clasificados > 0 ? (
         <div className="mt-3 max-w-md">
           <BarraSentimiento s={s} ariaLabel={frase} />
         </div>
       ) : null}
-      {meta.length > 0 ? <p className="mt-2 text-2xs text-tinta-meta">{meta.join("; ")}.</p> : null}
+      {meta.length > 0 ? <p className="mt-2 text-meta text-tinta-meta">{meta.join("; ")}.</p> : null}
     </li>
   );
 }
@@ -77,7 +77,7 @@ export function PanelConversacion({
   const { data: rosterDoc } = useRoster();
 
   if (error !== undefined) {
-    return <p className="text-sm text-tinta-prosa">No hay panel de conversación en este corte.</p>;
+    return <p className="text-lectura text-tinta-prosa">No hay panel de conversación en este corte.</p>;
   }
   if (data === undefined) return <Esqueleto className="h-[260px]" />;
 
@@ -95,7 +95,7 @@ export function PanelConversacion({
   let cabeza: ReactNode;
   if (sinLlave) {
     cabeza = (
-      <p className="max-w-[70ch] text-sm leading-relaxed text-tinta-prosa">
+      <p className="max-w-[70ch] text-lectura text-tinta-prosa">
         Sin llave de la API de YouTube configurada, así que no hay comentarios que
         medir. El resto del tablero funciona igual: es degradación esperada, no una
         falla.
@@ -103,7 +103,7 @@ export function PanelConversacion({
     );
   } else if (total === 0) {
     cabeza = (
-      <p className="max-w-[70ch] text-sm leading-relaxed text-tinta-prosa">
+      <p className="max-w-[70ch] text-lectura text-tinta-prosa">
         {zona === null
           ? `Sin comentarios vigentes en los últimos ${dias} días.`
           : `Sin comentarios atribuidos a ${nombre} en los últimos ${dias} días.`}
@@ -119,14 +119,14 @@ export function PanelConversacion({
     }
     cabeza = (
       <>
-        <p className="max-w-[70ch] text-base leading-snug text-tinta-titulo">{frase}</p>
+        <p className="max-w-[70ch] text-lectura text-tinta-titulo">{frase}</p>
         {sentimiento !== undefined && clasificados > 0 ? (
           <div className="mt-4 max-w-lg">
             <BarraSentimiento s={sentimiento} ariaLabel={frase} />
           </div>
         ) : null}
         {detalle === undefined ? null : (
-          <p className="mt-3 text-xs text-tinta-prosa">
+          <p className="mt-3 text-meta text-tinta-prosa">
             {numero(detalle.interacciones)} likes y respuestas; {detalle.preguntas}{" "}
             {pluralizar(detalle.preguntas, "pregunta", "preguntas")}.
           </p>
@@ -136,12 +136,12 @@ export function PanelConversacion({
   }
 
   return (
-    <Bisel opaco interior="p-6 md:p-8">
+    <Bisel interior="p-6 md:p-8">
       {cabeza}
 
       {filas.length > 0 ? (
         <div className="mt-8">
-          <h3 className="text-xs text-tinta-prosa">Por tema</h3>
+          <h3 className="text-meta text-tinta-prosa">Por tema</h3>
           <ul className="mt-3">
             {filas.slice(0, 8).map((f) => (
               <Tema key={f.tema} fila={f} dias={dias} />
@@ -152,20 +152,20 @@ export function PanelConversacion({
 
       {figuras.length > 0 ? (
         <div className="mt-8">
-          <h3 className="text-xs text-tinta-prosa">Figuras mencionadas en comentarios</h3>
+          <h3 className="text-meta text-tinta-prosa">Figuras mencionadas en comentarios</h3>
           <ul className="mt-2 max-w-sm">
             {figuras.map(([k, n]) => (
               <FilaConteo key={k} etiqueta={nombreCorto(k, roster)} valor={numero(n)} />
             ))}
           </ul>
-          <p className="mt-2 text-2xs text-tinta-meta">
+          <p className="mt-2 text-meta text-tinta-meta">
             Menciones por nombre o cargo. Con volúmenes así de bajos es un conteo, no una
             tendencia, y nunca se cruza con el sentimiento.
           </p>
         </div>
       ) : null}
 
-      <p className="mt-8 text-xs leading-relaxed text-tinta-prosa">
+      <p className="mt-8 text-meta text-tinta-prosa">
         Se publican conteos y sentimiento agregado, nunca el texto de un comentario ni
         quién lo escribió. Retención de {dias} días por las Políticas para Desarrolladores
         de YouTube.

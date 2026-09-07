@@ -9,7 +9,7 @@ export function Pie() {
   return (
     <footer className="mx-auto w-full max-w-[88rem] border-t border-filo px-4 py-16 md:px-8 md:py-24">
       <div className="grid gap-10 md:grid-cols-2">
-        <div className="max-w-[65ch] space-y-4 text-sm leading-relaxed text-tinta-prosa">
+        <div className="max-w-[65ch] space-y-4 text-lectura text-tinta-prosa">
           <p>
             Esta página mide <strong className="text-tinta-titulo">volumen de prensa</strong> y
             de conversación, no opinión pública. Un titular es una decisión
@@ -29,7 +29,7 @@ export function Pie() {
           </p>
         </div>
 
-        <div className="max-w-[65ch] space-y-4 text-sm leading-relaxed text-tinta-prosa">
+        <div className="max-w-[65ch] space-y-4 text-lectura text-tinta-prosa">
           <p>
             Los temas salen de contar repeticiones de frases en los titulares, sin
             modelo. Funcionan para lo que está claramente arriba y mal para lo
@@ -53,7 +53,7 @@ export function Pie() {
         </div>
       </div>
 
-      <p className="mt-14 text-2xs text-tinta-meta">
+      <p className="mt-14 text-meta text-tinta-meta">
         Agregación en formato titular, fuente y enlace. Nunca se republica el
         cuerpo de una nota ni el texto de un comentario.
       </p>

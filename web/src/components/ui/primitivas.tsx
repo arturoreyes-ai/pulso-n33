@@ -2,29 +2,14 @@ import type { ReactNode } from "react";
 
 import { pct } from "@/lib/dominio/formato";
 
-/* ---------------------------------------------------------------- cejilla */
-
-/**
- * La etiqueta minuscula que precede al titulo. Es la UNICA mayuscula con
- * tracking del tablero y vive solo en el encabezado: repetirla arriba de cada
- * seccion era ruido tipografico, no jerarquia.
- */
-export function Cejilla({ children }: { children: ReactNode }) {
-  return (
-    <p className="inline-block rounded-full border border-filo bg-vela px-3 py-1 text-2xs font-medium tracking-[0.16em] text-tinta-meta uppercase">
-      {children}
-    </p>
-  );
-}
-
 /* ------------------------------------------------------------------ chips */
 
 /** Clases de una pastilla de filtro. Las comparten el boton (Chip) y el
  *  enlace (SelectorZona), que son la misma cosa con distinta semantica. */
 export function clasesChip(activo: boolean): string {
   return [
-    "inline-flex items-baseline gap-2 rounded-full px-4 py-2 text-[13px]",
-    "transition-all duration-700 ease-firma",
+    "inline-flex items-baseline gap-2 rounded-full px-4 py-2 text-cuerpo",
+    "transition-colors duration-[var(--dur-cambio)] ease-firma",
     activo
       ? "bg-realce text-tinta-titulo"
       : "bg-vela text-tinta-prosa hover:bg-filo hover:text-tinta-titulo",
@@ -46,7 +31,7 @@ export function Chip({
     <button type="button" aria-pressed={activo} onClick={onClick} className={clasesChip(activo)}>
       <span>{children}</span>
       {cuenta === undefined ? null : (
-        <span className="text-2xs tabular-nums text-tinta-meta">{cuenta}</span>
+        <span className="text-meta tabular-nums text-tinta-meta">{cuenta}</span>
       )}
     </button>
   );
@@ -60,7 +45,7 @@ export function Chip({
  */
 export function Hueco({ children, titulo }: { children: ReactNode; titulo?: string }) {
   return (
-    <span title={titulo} className="text-xs text-aviso/80 italic">
+    <span title={titulo} className="text-meta text-aviso/80 italic">
       {children}
     </span>
   );
@@ -86,7 +71,7 @@ export function Barra({ fraccion, color }: { fraccion: number; color?: string })
   return (
     <span className="block h-[7px] w-full overflow-hidden rounded-full bg-vela">
       <span
-        className="block h-full origin-left rounded-full transition-transform duration-700 ease-firma"
+        className="block h-full origin-left rounded-full transition-transform duration-[var(--dur-cambio)] ease-firma"
         style={{
           transform: `scaleX(${f})`,
           backgroundColor: color ?? "var(--color-chart-1)",
@@ -129,7 +114,7 @@ export function BarraSegmentada({
           ),
         )}
       </div>
-      <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-2xs text-tinta-meta">
+      <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-meta text-tinta-meta">
         {segmentos.map((s) => (
           <li key={s.etiqueta} className="inline-flex items-center gap-1.5">
             <span
@@ -162,7 +147,7 @@ export function Signo({
   decimales?: number;
 }) {
   if (v === null || v === undefined || Number.isNaN(v)) {
-    return <span className="text-xs text-aviso/80 italic">sin dato</span>;
+    return <span className="text-meta text-aviso/80 italic">sin dato</span>;
   }
   if (Math.abs(v) < 0.05) return <span className="text-tinta-prosa">{pct(0, decimales)}</span>;
   const bueno = v > 0 !== invertir;
@@ -197,20 +182,20 @@ export function Kpi({
 }) {
   return (
     <div className="flex min-w-0 flex-col gap-2">
-      <p className="text-2xs text-tinta-meta">{etiqueta}</p>
+      <p className="text-meta text-tinta-meta">{etiqueta}</p>
       <p
         className={
           hueco
-            ? "text-lg text-aviso/85 italic"
-            : "text-3xl leading-none tracking-tight tabular-nums text-tinta-titulo"
+            ? "text-rotulo text-aviso/85 italic"
+            : "text-cifra tabular-nums text-tinta-titulo"
         }
       >
         {valor}
       </p>
-      <p className="text-sm leading-snug text-tinta-dato">{frase}</p>
+      <p className="text-lectura text-tinta-dato">{frase}</p>
       {extra === undefined ? null : <div className="mt-1">{extra}</div>}
       {fuente === undefined ? null : (
-        <p className="mt-auto text-2xs leading-snug text-tinta-meta">{fuente}</p>
+        <p className="mt-auto text-meta text-tinta-meta">{fuente}</p>
       )}
     </div>
   );
@@ -232,7 +217,7 @@ export function FilaConteo({
   return (
     <li
       title={titulo}
-      className="flex items-baseline gap-3 border-b border-vela py-1.5 text-xs last:border-0"
+      className="flex items-baseline gap-3 border-b border-vela py-1.5 text-meta last:border-0"
     >
       <span className={atenuada ? "text-aviso/80" : "text-tinta-dato"}>{etiqueta}</span>
       <span className={`ml-auto tabular-nums ${atenuada ? "text-aviso/80" : "text-tinta-titulo"}`}>
