@@ -28,9 +28,9 @@ export function Seccion({
 }) {
   return (
     <section id={id} className="mx-auto w-full max-w-[88rem] px-4 py-12 md:px-8 md:py-20">
-      <h2 className="text-3xl tracking-tight text-white md:text-4xl">{titulo}</h2>
+      <h2 className="text-3xl tracking-tight text-tinta-titulo md:text-4xl">{titulo}</h2>
       {entrada === undefined ? null : (
-        <p className="mt-4 max-w-[65ch] text-[15px] leading-relaxed text-white/60">{entrada}</p>
+        <p className="mt-4 max-w-[65ch] text-[15px] leading-relaxed text-tinta-prosa">{entrada}</p>
       )}
       <div className="mt-8">
         <Revelar>{children}</Revelar>

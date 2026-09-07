@@ -76,7 +76,7 @@ const GrupoBase = function GrupoZona({
   return (
     <section className="mt-10 first:mt-0">
       {conCabecera ? (
-        <h3 className="flex items-center gap-4 text-sm text-white/70">
+        <h3 className="flex items-center gap-4 text-sm text-tinta-dato">
           {esZonaRuta(grupo.zona) ? (
             <Link
               href={rutaDeZona(grupo.zona)}
@@ -88,8 +88,8 @@ const GrupoBase = function GrupoZona({
           ) : (
             <span>{grupo.zona}</span>
           )}
-          <span aria-hidden className="h-px flex-1 bg-white/[0.08]" />
-          <span className="text-2xs tabular-nums text-white/40">{numero(total)}</span>
+          <span aria-hidden className="h-px flex-1 bg-vela" />
+          <span className="text-2xs tabular-nums text-tinta-meta">{numero(total)}</span>
         </h3>
       ) : null}
 
@@ -106,7 +106,7 @@ const GrupoBase = function GrupoZona({
         <button
           type="button"
           onClick={ampliar}
-          className="group mt-1 flex w-full items-center gap-4 py-2.5 text-left text-[13px] text-white/55 transition-colors duration-700 ease-firma hover:text-white"
+          className="group mt-1 flex w-full items-center gap-4 py-2.5 text-left text-[13px] text-tinta-prosa transition-colors duration-700 ease-firma hover:text-tinta-titulo"
         >
           <span>
             {restantes > paso
@@ -117,9 +117,9 @@ const GrupoBase = function GrupoZona({
           </span>
           <span
             aria-hidden
-            className="h-px flex-1 bg-white/[0.08] transition-colors duration-700 ease-firma group-hover:bg-white/20"
+            className="h-px flex-1 bg-vela transition-colors duration-700 ease-firma group-hover:bg-realce"
           />
-          <span className="text-2xs tabular-nums text-white/35">
+          <span className="text-2xs tabular-nums text-tinta-meta">
             {numero(abiertas)} de {numero(total)}
           </span>
         </button>

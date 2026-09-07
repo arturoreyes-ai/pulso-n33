@@ -36,7 +36,7 @@ export function Marco({
 }) {
   return (
     <figure className="m-0" aria-labelledby={`${id}-t`}>
-      <figcaption id={`${id}-t`} className="mb-3 text-[13px] text-white/75">
+      <figcaption id={`${id}-t`} className="mb-3 text-[13px] text-tinta-dato">
         {titulo}
       </figcaption>
 
@@ -45,17 +45,17 @@ export function Marco({
       </div>
 
       <details className="mt-3 group">
-        <summary className="cursor-pointer text-xs text-white/45 hover:text-white/70">
+        <summary className="cursor-pointer text-xs text-tinta-meta hover:text-tinta-prosa">
           ver como tabla
         </summary>
         <table className="mt-3 w-full text-xs">
           <tbody>
             {filas.map((f) => (
-              <tr key={f.etiqueta} className="border-b border-white/[0.05]">
-                <th scope="row" className="py-1 text-left font-normal text-white/60">
+              <tr key={f.etiqueta} className="border-b border-vela">
+                <th scope="row" className="py-1 text-left font-normal text-tinta-prosa">
                   {f.etiqueta}
                 </th>
-                <td className="py-1 text-right tabular-nums text-white/85">{f.valor}</td>
+                <td className="py-1 text-right tabular-nums text-tinta-dato">{f.valor}</td>
               </tr>
             ))}
           </tbody>

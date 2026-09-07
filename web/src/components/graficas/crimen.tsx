@@ -17,12 +17,12 @@ import { Marco } from "./marco";
 
 const ESTILO_TOOLTIP = {
   background: "var(--color-carta)",
-  border: "1px solid rgb(255 255 255 / 0.12)",
-  borderRadius: 10,
+  border: "1px solid var(--color-filo)",
+  borderRadius: "var(--radius-etiqueta)",
   fontSize: 11,
 } as const;
 
-const ESTILO_ETIQUETA = { color: "rgb(255 255 255 / 0.6)" } as const;
+const ESTILO_ETIQUETA = { color: "var(--color-tinta-prosa)" } as const;
 
 /**
  * Delitos reportados por mes. Es la UNICA serie de tiempo real del conjunto
@@ -47,7 +47,7 @@ export default function Crimen({
     .toSorted((a, b) => b[1].total - a[1].total);
 
   if (municipios.length === 0) {
-    return <p className="text-xs text-white/45">Sin serie mensual en este corte.</p>;
+    return <p className="text-xs text-tinta-meta">Sin serie mensual en este corte.</p>;
   }
 
   const filas = municipios.map(([nombre, m]) => ({
@@ -81,8 +81,8 @@ export default function Crimen({
             const color = SERIES[i % SERIES.length];
             return (
               <div key={nombre} className="min-w-0">
-                <p className="truncate text-2xs text-white/55">{nombre}</p>
-                <p className="text-[13px] tabular-nums text-white/90">{numero(m.total)}</p>
+                <p className="truncate text-2xs text-tinta-meta">{nombre}</p>
+                <p className="text-[13px] tabular-nums text-tinta-titulo">{numero(m.total)}</p>
                 {/* Altura en PIXELES: ResponsiveContainer mide con
                     ResizeObserver y solo el ancho tiene que ser responsivo. */}
                 <div className="h-[76px]">
@@ -125,7 +125,7 @@ function CrimenZona({ panel, municipio }: { panel: PanelSesnsp; municipio: strin
   const m = panel.municipios[municipio];
   if (m === undefined || m.por_mes.length === 0) {
     return (
-      <p className="text-xs text-white/45">Sin serie mensual para {municipio} en este corte.</p>
+      <p className="text-xs text-tinta-meta">Sin serie mensual para {municipio} en este corte.</p>
     );
   }
   const datos = m.por_mes.map((v, k) => ({ mes: MESES_CORTOS[k] ?? String(k + 1), n: v }));

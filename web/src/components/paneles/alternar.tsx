@@ -44,8 +44,8 @@ export function Alternar({
             : {})}
           className={`rounded-full px-3 py-1 text-xs transition-all duration-700 ease-firma ${
             vista === v
-              ? "bg-white/15 text-white"
-              : "text-white/40 hover:bg-white/[0.06] hover:text-white/70"
+              ? "bg-realce text-tinta-titulo"
+              : "text-tinta-meta hover:bg-vela hover:text-tinta-dato"
           }`}
         >
           {v === "lista" ? "lista" : "gráfica"}

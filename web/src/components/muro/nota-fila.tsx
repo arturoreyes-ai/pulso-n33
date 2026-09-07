@@ -39,16 +39,16 @@ const FilaBase = function Fila({
 
   return (
     <article
-      className="grid grid-cols-[4rem_1fr] gap-4 border-b border-white/[0.06] py-3.5 [contain-intrinsic-size:0_96px] [content-visibility:auto]"
+      className="grid grid-cols-[4rem_1fr] gap-4 border-b border-vela py-3.5 [contain-intrinsic-size:0_96px] [content-visibility:auto]"
     >
-      <div className="pt-0.5 font-mono text-2xs leading-snug tabular-nums text-white/40">
+      <div className="pt-0.5 font-mono text-2xs leading-snug tabular-nums text-tinta-meta">
         {t.iso === null ? (
           t.principal
         ) : (
           <time dateTime={t.iso}>{t.principal}</time>
         )}
         {t.edad === "" ? null : (
-          <span className="block text-white/25">{t.edad}</span>
+          <span className="block text-tinta-meta">{t.edad}</span>
         )}
       </div>
 
@@ -58,13 +58,13 @@ const FilaBase = function Fila({
             href={nota.url}
             target="_blank"
             rel="noopener nofollow noreferrer"
-            className="text-white/90 transition-colors duration-700 ease-firma hover:text-chart-1"
+            className="text-tinta-titulo transition-colors duration-700 ease-firma hover:text-chart-1"
           >
             {nota.titulo}
           </a>
         </h3>
 
-        <p className="mt-1.5 flex flex-wrap items-center gap-2 text-2xs text-white/40">
+        <p className="mt-1.5 flex flex-wrap items-center gap-2 text-2xs text-tinta-meta">
           <span>{nota.dominio}</span>
 
           {delegacionesDeNota(nota).map((d) => (
@@ -72,7 +72,7 @@ const FilaBase = function Fila({
               key={d}
               data-delegacion={d}
               title={`Delegación ${d}, nombrada en el titular`}
-              className="inline-block rounded-full border border-white/15 bg-white/[0.04] px-2 py-px text-2xs whitespace-nowrap text-white/70"
+              className="inline-block rounded-full border border-filo bg-vela px-2 py-px text-2xs whitespace-nowrap text-tinta-dato"
             >
               {NOMBRE_CORTO_DELEGACION[d]}
             </span>
@@ -91,8 +91,8 @@ const FilaBase = function Fila({
                 } («${f.clave}»)`}
                 className={`inline-block rounded-full border px-2 py-px text-2xs whitespace-nowrap ${
                   f.via === "cargo"
-                    ? "border-dashed border-white/15 text-white/50"
-                    : "border-white/15 bg-white/[0.04] text-white/70"
+                    ? "border-dashed border-filo text-tinta-meta"
+                    : "border-filo bg-vela text-tinta-dato"
                 }`}
               >
                 {nombreCorto(f.id, roster)}
@@ -112,7 +112,7 @@ const FilaBase = function Fila({
                   ? "border-baja/30 text-baja/80"
                   : nota.postura.etiqueta === "favorable"
                     ? "border-sube/30 text-sube/80"
-                    : "border-white/15 text-white/50"
+                    : "border-filo text-tinta-meta"
               }`}
             >
               tono {nota.postura.etiqueta === "adversa" ? "adverso" : nota.postura.etiqueta}

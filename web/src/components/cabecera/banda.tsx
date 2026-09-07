@@ -17,10 +17,10 @@ export function Banda() {
     return (
       <p
         role="status"
-        className="border-l-2 border-baja bg-white/[0.03] px-4 py-3 text-xs leading-relaxed text-white/70"
+        className="border-l-2 border-baja bg-vela px-4 py-3 text-xs leading-relaxed text-tinta-prosa"
       >
         <b className="font-semibold text-baja">Sin datos.</b> No se pudo leer
-        estado.json. Corre <code className="text-white">python -m pulso correr</code> y
+        estado.json. Corre <code className="text-tinta-titulo">python -m pulso correr</code> y
         vuelve a cargar.
       </p>
     );
@@ -30,7 +30,7 @@ export function Banda() {
     return (
       <p
         role="status"
-        className="border-l-2 border-aviso bg-white/[0.03] px-4 py-3 text-xs leading-relaxed text-white/70"
+        className="border-l-2 border-aviso bg-vela px-4 py-3 text-xs leading-relaxed text-tinta-prosa"
       >
         <b className="font-semibold text-aviso">Corrida sin red.</b> Estas notas
         vienen del corpus de prueba, no de los feeds. Sirven para verificar el
@@ -61,7 +61,7 @@ export function Banda() {
   return (
     <p
       role="status"
-      className={`border-l-2 bg-white/[0.03] px-4 py-3 text-xs leading-relaxed text-white/70 ${
+      className={`border-l-2 bg-vela px-4 py-3 text-xs leading-relaxed text-tinta-prosa ${
         roto ? "border-baja" : "border-sube"
       }`}
     >
@@ -76,7 +76,7 @@ export function Banda() {
             href={estado.corrida}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white underline decoration-white/30 underline-offset-2 hover:decoration-white"
+            className="text-tinta-titulo underline decoration-tinta-inerte underline-offset-2 hover:decoration-tinta-prosa"
           >
             ver la corrida
           </a>

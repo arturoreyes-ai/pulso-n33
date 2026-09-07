@@ -101,7 +101,7 @@ function TarjetaCrimenZona({ panel, zona }: { panel: PanelSesnsp; zona: ZonaRuta
       className="md:col-span-8"
       extra={<Alternar vista={vista} onVista={setVista} onIntento={intento} />}
     >
-      <p className="max-w-[70ch] text-sm leading-snug text-white/75">{F.fraseCrimen(m, nombre)}</p>
+      <p className="max-w-[70ch] text-sm leading-snug text-tinta-dato">{F.fraseCrimen(m, nombre)}</p>
       {vista === "grafica" ? (
         <div className="mt-4">
           <Grafica panel={panel} municipio={zona} />
@@ -123,18 +123,18 @@ function TarjetaCrimenZona({ panel, zona }: { panel: PanelSesnsp; zona: ZonaRuta
             ))}
           </ul>
           <div>
-            <p className="text-xs text-white/60">{F.fraseDelitosClave(m)}</p>
+            <p className="text-xs text-tinta-prosa">{F.fraseDelitosClave(m)}</p>
             <ul className="mt-3 grid gap-2.5">
               {clave.map(([d, n]) => (
                 <li
                   key={d}
                   className="grid grid-cols-[8.5rem_1fr_3.5rem] items-center gap-3 text-xs"
                 >
-                  <span className="truncate text-white/75" title={d}>
+                  <span className="truncate text-tinta-dato" title={d}>
                     {d}
                   </span>
                   <Barra fraccion={n / max} color="var(--color-chart-5)" />
-                  <span className="text-right tabular-nums text-white/85">{numero(n)}</span>
+                  <span className="text-right tabular-nums text-tinta-dato">{numero(n)}</span>
                 </li>
               ))}
             </ul>
@@ -187,7 +187,7 @@ function Region({ I }: { I: Ind }) {
               />
             ))}
           </ul>
-          <p className="mt-4 text-xs leading-relaxed text-white/50">{I.shf.universo}</p>
+          <p className="mt-4 text-xs leading-relaxed text-tinta-prosa">{I.shf.universo}</p>
         </Tarjeta>
       )}
 
@@ -257,7 +257,7 @@ function Region({ I }: { I: Ind }) {
                   etiqueta={enlaceZona(z)}
                   valor={
                     <span className="inline-flex items-baseline gap-3">
-                      <span className="text-white/55">{pesos(m.por_cuenta_mxn)}</span>
+                      <span className="text-tinta-dato">{pesos(m.por_cuenta_mxn)}</span>
                       <Signo v={m.variacion_anual_pct} />
                     </span>
                   }
@@ -289,10 +289,10 @@ function Region({ I }: { I: Ind }) {
               );
             })}
           </ul>
-          <p className="mt-4 text-xs leading-relaxed text-white/50">
+          <p className="mt-4 text-xs leading-relaxed text-tinta-prosa">
             {sd.faltantes} De {numero(Object.keys(sd.zips).length)} códigos postales, aquí se
             muestran los de la franja fronteriza.{" "}
-            <Link href={rutaDeZona("San Diego")} className="text-white/75 underline decoration-white/30 underline-offset-2 hover:decoration-white">
+            <Link href={rutaDeZona("San Diego")} className="text-tinta-dato underline decoration-tinta-inerte underline-offset-2 hover:decoration-tinta-prosa">
               Ver San Diego
             </Link>
             .
@@ -353,7 +353,7 @@ function Municipio({ I, zona }: { I: Ind; zona: ZonaRuta }) {
               />
             )}
           </ul>
-          <p className="mt-4 text-sm leading-snug text-white/70">
+          <p className="mt-4 text-sm leading-snug text-tinta-prosa">
             {F.fraseVivienda(serie, nombre, shf.periodo)}
           </p>
         </Tarjeta>
@@ -373,13 +373,13 @@ function Municipio({ I, zona }: { I: Ind; zona: ZonaRuta }) {
             <Hueco titulo="Sin registro de predial para este municipio">sin dato</Hueco>
           ) : (
             <>
-              <p className="text-3xl leading-none tracking-tight tabular-nums text-white">
+              <p className="text-3xl leading-none tracking-tight tabular-nums text-tinta-titulo">
                 {pesos(m.por_cuenta_mxn)}{" "}
                 <span className="text-base">
                   <Signo v={m.variacion_anual_pct} />
                 </span>
               </p>
-              <p className="mt-3 text-sm leading-snug text-white/70">
+              <p className="mt-3 text-sm leading-snug text-tinta-prosa">
                 {F.frasePredial(m, nombre)} {numero(m.cuentas_pagadas)} cuentas pagadas,{" "}
                 {m.ciclos} ciclos de serie.
               </p>
@@ -417,7 +417,7 @@ function Municipio({ I, zona }: { I: Ind; zona: ZonaRuta }) {
               }
             />
           </ul>
-          <p className="mt-4 text-sm leading-snug text-white/70">
+          <p className="mt-4 text-sm leading-snug text-tinta-prosa">
             {F.frasePercepcion(e, nombre, ensu.nacional.pct_inseguro, ensu.periodo)}
           </p>
         </Tarjeta>
@@ -457,7 +457,7 @@ function SanDiego({ I }: { I: Ind }) {
           aviso={sd.aviso}
           className="md:col-span-8"
         >
-          <p className="max-w-[70ch] text-sm leading-snug text-white/75">
+          <p className="max-w-[70ch] text-sm leading-snug text-tinta-dato">
             {F.fraseSanDiego(sd.zips, ZIPS_FRONTERA)}
           </p>
           <ul className="mt-4">
@@ -474,7 +474,7 @@ function SanDiego({ I }: { I: Ind }) {
               );
             })}
           </ul>
-          <p className="mt-4 text-xs leading-relaxed text-white/50">
+          <p className="mt-4 text-xs leading-relaxed text-tinta-prosa">
             {sd.faltantes} De {numero(Object.keys(sd.zips).length)} códigos postales, aquí se
             muestran los de la franja fronteriza.
           </p>
@@ -482,13 +482,13 @@ function SanDiego({ I }: { I: Ind }) {
       )}
 
       <Tarjeta titulo="Indicadores mexicanos" fuente="SHF, SHCP, SESNSP e INEGI" className="md:col-span-4">
-        <p className="text-sm leading-relaxed text-white/70">
+        <p className="text-sm leading-relaxed text-tinta-prosa">
           El índice de vivienda, el predial, la incidencia delictiva y la ENSU miden
           municipios de Baja California y no aplican a San Diego. Para el lado
           mexicano de la garita,{" "}
           <Link
             href={rutaDeZona("Tijuana")}
-            className="text-white underline decoration-white/30 underline-offset-2 hover:decoration-white"
+            className="text-tinta-titulo underline decoration-tinta-inerte underline-offset-2 hover:decoration-tinta-prosa"
           >
             ver Tijuana
           </Link>
@@ -514,7 +514,7 @@ export function PanelIndicadores({
     return (
       <p className="text-sm text-baja">
         No se pudo leer indicadores.json. Corre{" "}
-        <code className="text-white">python -m pulso indicadores</code>.
+        <code className="text-tinta-titulo">python -m pulso indicadores</code>.
       </p>
     );
   }
@@ -540,7 +540,7 @@ export function PanelIndicadores({
         <Municipio I={I} zona={zona} />
       )}
       {fallos.length > 0 ? (
-        <p className="mt-6 text-xs text-white/55">
+        <p className="mt-6 text-xs text-tinta-prosa">
           No se pudo actualizar: {fallos.map((f) => f.id).join(", ")}.
         </p>
       ) : null}

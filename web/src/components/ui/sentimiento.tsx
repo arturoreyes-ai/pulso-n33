@@ -8,7 +8,9 @@ import { BarraSegmentada } from "./primitivas";
  * suman.
  */
 
-const NEUTRAL = "rgb(255 255 255 / 0.28)";
+/* El neutral no es una tercera opinion, es la ausencia de las otras dos: por
+   eso va en `inerte` y no en un color. */
+const NEUTRAL = "var(--color-tinta-inerte)";
 
 export function BarraSentimiento({ s, ariaLabel }: { s: Sentimiento; ariaLabel: string }) {
   return (

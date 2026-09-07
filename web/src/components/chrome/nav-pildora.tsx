@@ -26,7 +26,7 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  */
 
 const CLASES_PILDORA =
-  "block rounded-full bg-white/10 px-3 py-2 text-[12px] font-medium text-white transition-all duration-700 ease-firma hover:bg-white/15 md:px-4 md:text-[13px]";
+  "block rounded-full bg-filo px-3 py-2 text-[12px] font-medium text-tinta-titulo transition-all duration-700 ease-firma hover:bg-realce md:px-4 md:text-[13px]";
 
 const SECCIONES = [
   { id: "indicadores", nombre: "Indicadores" },
@@ -44,7 +44,7 @@ export function NavPildora({ zona }: { zona: ZonaRuta | null }) {
     <div className="pointer-events-none fixed inset-x-0 top-0 z-[var(--z-nav)] mt-4 flex justify-center px-3 md:mt-6 md:px-4">
       <nav
         aria-label="Secciones"
-        className="pointer-events-auto mx-auto max-w-full overflow-x-auto rounded-full border border-white/10 bg-black/40 px-2 py-2 shadow-[inset_0_1px_1px_rgba(255,255,255,0.12)] backdrop-blur-xl [scrollbar-width:none]"
+        className="pointer-events-auto mx-auto max-w-full overflow-x-auto rounded-full border border-filo bg-black/40 px-2 py-2 shadow-bisel backdrop-blur-xl [scrollbar-width:none]"
       >
         <ul className="flex items-center gap-1 whitespace-nowrap">
           <li>
@@ -67,7 +67,7 @@ export function NavPildora({ zona }: { zona: ZonaRuta | null }) {
             <li key={s.id}>
               <a
                 href={`#${s.id}`}
-                className="block rounded-full px-3 py-2 text-[12px] text-white/65 transition-all duration-700 ease-firma hover:bg-white/10 hover:text-white md:px-4 md:text-[13px]"
+                className="block rounded-full px-3 py-2 text-[12px] text-tinta-prosa transition-all duration-700 ease-firma hover:bg-filo hover:text-tinta-titulo md:px-4 md:text-[13px]"
               >
                 {s.nombre}
               </a>

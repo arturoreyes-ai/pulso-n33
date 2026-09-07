@@ -41,7 +41,7 @@ export function Muro({ zona }: { zona: ZonaRuta | null }) {
     return (
       <p className="text-sm text-baja">
         No se pudo leer notas.json. Corre{" "}
-        <code className="text-white">python -m pulso correr</code>.
+        <code className="text-tinta-titulo">python -m pulso correr</code>.
       </p>
     );
   }
@@ -62,14 +62,14 @@ export function Muro({ zona }: { zona: ZonaRuta | null }) {
           `top` es `--nav-alto`, no un 24 a ojo: la barra atraca EXACTAMENTE
           contra la pildora flotante. Con el 24 quedaba una banda de 20px
           entre las dos y las filas pasaban por ahi a opacidad completa. */}
-      <div className="sticky top-[var(--nav-alto)] z-[var(--z-elevado)] -mx-4 mb-6 border-b border-white/[0.06] bg-carta/85 px-4 py-3 backdrop-blur-md md:-mx-8 md:px-8 max-sm:static max-sm:bg-transparent max-sm:backdrop-blur-none">
+      <div className="sticky top-[var(--nav-alto)] z-[var(--z-elevado)] -mx-4 mb-6 border-b border-vela bg-carta/85 px-4 py-3 backdrop-blur-md md:-mx-8 md:px-8 max-sm:static max-sm:bg-transparent max-sm:backdrop-blur-none">
         <div className="flex flex-wrap items-center gap-3">
           <div role="search" className="relative">
             <MagnifyingGlass
               size={14}
               weight="light"
               aria-hidden
-              className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-white/35"
+              className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-tinta-meta"
             />
             <input
               type="search"
@@ -77,7 +77,7 @@ export function Muro({ zona }: { zona: ZonaRuta | null }) {
               onChange={(e) => m.setConsulta(e.target.value)}
               placeholder="Buscar en los titulares"
               aria-label="Buscar en los titulares"
-              className="w-56 rounded-full border border-white/10 bg-white/[0.04] py-2 pr-3 pl-8 text-[13px] text-white placeholder:text-white/40"
+              className="w-56 rounded-full border border-filo bg-vela py-2 pr-3 pl-8 text-[13px] text-tinta-titulo placeholder:text-tinta-meta"
             />
           </div>
 
@@ -106,7 +106,7 @@ export function Muro({ zona }: { zona: ZonaRuta | null }) {
 
           {/* aria-live SOLO en la linea de conteo. Ponerlo en el muro
               anunciaria cientos de filas. */}
-          <p aria-live="polite" className="ml-auto text-xs tabular-nums text-white/45">
+          <p aria-live="polite" className="ml-auto text-xs tabular-nums text-tinta-meta">
             {numero(m.visibles)}
             {m.desfasado ? "…" : ""}
             {sujeto === null ? " de " : ` notas sobre ${sujeto} de `}
@@ -140,7 +140,7 @@ export function Muro({ zona }: { zona: ZonaRuta | null }) {
         }`}
       >
         {m.grupos.length === 0 ? (
-          <p className="py-16 text-center text-sm text-white/50">
+          <p className="py-16 text-center text-sm text-tinta-prosa">
             {m.totalVentana > 0
               ? sujeto === null
                 ? "Sin notas que coincidan con este filtro."
@@ -166,7 +166,7 @@ export function Muro({ zona }: { zona: ZonaRuta | null }) {
           en el mismo pie porque las dos contestan la misma pregunta: por que
           la cifra de arriba no llega al total de la ventana. */}
       {zona === null && (m.fuera > 0 || m.nacionales > 0) ? (
-        <p className="mt-10 border-t border-white/[0.06] pt-5 text-xs leading-relaxed text-white/50">
+        <p className="mt-10 border-t border-vela pt-5 text-xs leading-relaxed text-tinta-prosa">
           {m.fuera > 0 ? (
             <>
               {numero(m.fuera)} notas de fuera de la región quedaron descartadas. Vienen

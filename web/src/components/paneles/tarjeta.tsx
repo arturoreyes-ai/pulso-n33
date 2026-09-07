@@ -33,8 +33,8 @@ export function Tarjeta({
     <Bisel as="section" opaco className={className} interior="flex h-full flex-col p-6">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <h3 className="text-base tracking-tight text-white">{titulo}</h3>
-          <p className="mt-1 text-2xs text-white/50">
+          <h3 className="text-base tracking-tight text-tinta-titulo">{titulo}</h3>
+          <p className="mt-1 text-2xs text-tinta-meta">
             {fuente}
             {periodo === null || periodo === undefined ? "" : ` · ${periodo}`}
           </p>
@@ -45,7 +45,7 @@ export function Tarjeta({
       <div className="mt-5 flex-1">{children}</div>
 
       {aviso === undefined ? null : (
-        <p className="mt-5 border-t border-white/[0.06] pt-4 text-xs leading-relaxed text-white/60">
+        <p className="mt-5 border-t border-vela pt-4 text-xs leading-relaxed text-tinta-prosa">
           {aviso}
         </p>
       )}

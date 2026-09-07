@@ -36,12 +36,12 @@ function FilaFuente({ f }: { f: Fuente }) {
           : `${f.error ?? ""}${f.ultima_ok === null ? "" : `; último éxito: ${f.ultima_ok}`}`
       }
     >
-      <span className="min-w-0 truncate text-white/85">{f.nombre}</span>
+      <span className="min-w-0 truncate text-tinta-dato">{f.nombre}</span>
       {/* El color no es el unico portador: va la palabra y el detalle. */}
       <span className={`shrink-0 ${f.estado === "ok" ? "text-sube/80" : "text-baja/90"}`}>
         {f.estado}
       </span>
-      <span className="ml-auto shrink-0 truncate text-right tabular-nums text-white/45">
+      <span className="ml-auto shrink-0 truncate text-right tabular-nums text-tinta-meta">
         {f.estado === "ok" ? `${f.obtenidas} notas, ${f.ms} ms` : (f.error ?? "fallo").slice(0, 34)}
       </span>
     </li>
@@ -51,11 +51,11 @@ function FilaFuente({ f }: { f: Fuente }) {
 function FilaCanal({ c }: { c: Canal }) {
   return (
     <li className="flex items-baseline gap-3 text-xs" title={c.error ?? undefined}>
-      <span className="min-w-0 truncate text-white/85">{c.nombre}</span>
+      <span className="min-w-0 truncate text-tinta-dato">{c.nombre}</span>
       <span className={`shrink-0 ${c.estado === "ok" ? "text-sube/80" : "text-aviso/90"}`}>
         {c.estado === "sin_llave" ? "sin llave" : c.estado}
       </span>
-      <span className="ml-auto shrink-0 tabular-nums text-white/45">
+      <span className="ml-auto shrink-0 tabular-nums text-tinta-meta">
         {c.estado === "ok" ? `${c.videos} videos, ${numero(c.comentarios)} comentarios` : ""}
       </span>
     </li>
@@ -80,7 +80,7 @@ function Region({
   return (
     <div className="grid gap-6 lg:grid-cols-2">
       <Bisel opaco interior="p-6 md:p-8">
-        <h3 className="text-base tracking-tight text-white">Notas por zona</h3>
+        <h3 className="text-base tracking-tight text-tinta-titulo">Notas por zona</h3>
         <ul className="mt-6 grid gap-2.5">
           {FILAS.map((z) => {
             const n = estado.por_zona[z] ?? 0;
@@ -99,7 +99,7 @@ function Region({
                 key={z}
                 className="grid grid-cols-[8.5rem_1fr_5.5rem] items-center gap-3 text-xs"
               >
-                <span className={n === 0 ? "text-aviso/80" : "text-white/80"}>{etiqueta}</span>
+                <span className={n === 0 ? "text-aviso/80" : "text-tinta-dato"}>{etiqueta}</span>
                 <Barra fraccion={max === 0 ? 0 : n / max} />
                 <span className="text-right tabular-nums">
                   {n === 0 ? (
@@ -107,14 +107,14 @@ function Region({
                       sin cobertura
                     </Hueco>
                   ) : (
-                    <span className="text-white/70">{numero(n)}</span>
+                    <span className="text-tinta-dato">{numero(n)}</span>
                   )}
                 </span>
               </li>
             );
           })}
         </ul>
-        <p className="mt-6 max-w-[65ch] border-t border-white/[0.06] pt-4 text-xs leading-relaxed text-white/50">
+        <p className="mt-6 max-w-[65ch] border-t border-vela pt-4 text-xs leading-relaxed text-tinta-prosa">
           Una nota que habla de dos zonas cuenta en las dos, así que la suma es mayor
           que el total. Las de fuera de la región se descartan antes de contar. Un cero
           se rotula: significa que no medimos ahí, no que no pase nada.
@@ -123,7 +123,7 @@ function Region({
 
       <div className="grid gap-6">
         <Bisel opaco interior="p-6 md:p-8">
-          <h3 className="text-base tracking-tight text-white">Salud de las fuentes de prensa</h3>
+          <h3 className="text-base tracking-tight text-tinta-titulo">Salud de las fuentes de prensa</h3>
           {fuentes === undefined ? (
             <Esqueleto className="mt-6 h-[260px]" />
           ) : (
@@ -137,7 +137,7 @@ function Region({
 
         {conv === undefined || conv.canales.length === 0 ? null : (
           <Bisel opaco interior="p-6 md:p-8">
-            <h3 className="text-base tracking-tight text-white">Canales de YouTube</h3>
+            <h3 className="text-base tracking-tight text-tinta-titulo">Canales de YouTube</h3>
             <ul className="mt-6 grid gap-1.5">
               {conv.canales.map((c) => (
                 <FilaCanal key={c.id} c={c} />
@@ -184,13 +184,13 @@ function Zona({
   return (
     <div className="grid gap-6 lg:grid-cols-2">
       <Bisel opaco interior="p-6 md:p-8">
-        <h3 className="text-base tracking-tight text-white">Fuentes que cubren {nombre}</h3>
+        <h3 className="text-base tracking-tight text-tinta-titulo">Fuentes que cubren {nombre}</h3>
         <div className="mt-5 grid grid-cols-[8.5rem_1fr_5.5rem] items-center gap-3 text-xs">
-          <span className="text-white/80">Notas en {estado.ventana_dias} días</span>
+          <span className="text-tinta-dato">Notas en {estado.ventana_dias} días</span>
           <Barra fraccion={max === 0 ? 0 : n / max} />
-          <span className="text-right tabular-nums text-white/70">{numero(n)}</span>
+          <span className="text-right tabular-nums text-tinta-dato">{numero(n)}</span>
         </div>
-        <p className="mt-2 text-2xs text-white/45">
+        <p className="mt-2 text-2xs text-tinta-meta">
           La barra compara contra la zona con más notas del corte.
         </p>
 
@@ -198,7 +198,7 @@ function Zona({
           <Esqueleto className="mt-6 h-[160px]" />
         ) : !conZona ? (
           <>
-            <p className="mt-6 text-xs text-white/55">
+            <p className="mt-6 text-xs text-tinta-prosa">
               Este corte no trae la zona de cada medio; se listan todas las fuentes.
             </p>
             <ul className="mt-3 grid gap-1.5">
@@ -209,9 +209,9 @@ function Zona({
           </>
         ) : (
           <>
-            <h4 className="mt-6 text-xs text-white/55">Medios de {nombre}</h4>
+            <h4 className="mt-6 text-xs text-tinta-prosa">Medios de {nombre}</h4>
             {propias.length === 0 ? (
-              <p className="mt-2 text-sm text-white/65">
+              <p className="mt-2 text-sm text-tinta-prosa">
                 Ningún medio del catálogo tiene a {nombre} como cobertura principal. Las
                 notas llegan de cables y de medios de otras zonas cuando nombran el lugar.
               </p>
@@ -224,7 +224,7 @@ function Zona({
             )}
             {estatales.length === 0 ? null : (
               <>
-                <h4 className="mt-6 text-xs text-white/55">Cables y medios estatales</h4>
+                <h4 className="mt-6 text-xs text-tinta-prosa">Cables y medios estatales</h4>
                 <ul className="mt-2 grid gap-1.5">
                   {estatales.map((f) => (
                     <FilaFuente key={f.id} f={f} />
@@ -237,9 +237,9 @@ function Zona({
 
         {conv === undefined ? null : (
           <>
-            <h4 className="mt-6 text-xs text-white/55">Canales de YouTube de {nombre}</h4>
+            <h4 className="mt-6 text-xs text-tinta-prosa">Canales de YouTube de {nombre}</h4>
             {canales.length === 0 ? (
-              <p className="mt-2 text-sm text-white/65">
+              <p className="mt-2 text-sm text-tinta-prosa">
                 Sin canal verificado para {nombre}. Los comentarios atribuidos a la zona
                 vienen de videos que la nombran.
               </p>
@@ -255,7 +255,7 @@ function Zona({
       </Bisel>
 
       <Bisel opaco interior="p-6 md:p-8">
-        <h3 className="text-base tracking-tight text-white">Indicadores disponibles para {nombre}</h3>
+        <h3 className="text-base tracking-tight text-tinta-titulo">Indicadores disponibles para {nombre}</h3>
         {I === undefined ? (
           <Esqueleto className="mt-6 h-[200px]" />
         ) : sd ? (
@@ -306,7 +306,7 @@ function Zona({
             />
           </ul>
         )}
-        <p className="mt-6 max-w-[65ch] border-t border-white/[0.06] pt-4 text-xs leading-relaxed text-white/50">
+        <p className="mt-6 max-w-[65ch] border-t border-vela pt-4 text-xs leading-relaxed text-tinta-prosa">
           Lo que falta no se rellena con ceros ni se infiere de otras zonas. El índice
           SHF solo existe para Tijuana y Mexicali; la ENSU nunca ha muestreado Ensenada,
           Tecate, Rosarito, San Quintín ni San Felipe.

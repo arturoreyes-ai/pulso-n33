@@ -19,12 +19,5 @@ export const SERIES = [
   "var(--color-chart-6)",
 ] as const;
 
-/** Cuando el color ES el dato, van estos y no la paleta de series. */
-export const SIGNO = {
-  sube: "var(--color-sube)",
-  baja: "var(--color-baja)",
-  cero: "rgb(255 255 255 / 0.35)",
-} as const;
-
-export const REJILLA = "rgb(255 255 255 / 0.06)";
-export const EJE = "rgb(255 255 255 / 0.45)";
+/** La etiqueta de los ejes. Es un ROTULO, asi que va en el paso `meta`. */
+export const EJE = "var(--color-tinta-meta)";

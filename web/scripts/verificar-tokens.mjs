@@ -65,6 +65,9 @@ const REGLAS = [
     nombre: "superficie",
     patron:
       /(?:^|[\s"'`:])(?:group-hover:|hover:|focus:|md:|sm:|lg:|max-sm:)*(?:bg|border|divide|ring)-white(?:\/(?:\[[\d.]+\]|\d+))?/g,
+    // `bg-white` a secas es una INVERSION deliberada (el salto al contenido),
+    // no un paso de una escala translucida. Solo se vigilan los que traen alfa.
+    exento: (m) => /-white$/.test(m.trim()),
     dice: "Usa la escala de superficie: vela (pelo) | filo (borde) | realce (activo).",
   },
   {

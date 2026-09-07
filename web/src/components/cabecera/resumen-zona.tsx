@@ -85,7 +85,7 @@ function tarjetaTema(d: Datos, zona: ZonaRuta | null, sujeto: string): Tarjeta {
       d.temas === undefined ? "Sin temas en este corte." : F.fraseTemaPrincipal(t, sujeto, dias),
     extra:
       ejemplo === undefined ? undefined : (
-        <p className="text-xs leading-snug text-white/60">Titular de ejemplo: {ejemplo}</p>
+        <p className="text-xs leading-snug text-tinta-prosa">Titular de ejemplo: {ejemplo}</p>
       ),
     fuente: "Titulares de prensa regional; conteo por documento, sin modelo.",
   };
@@ -388,16 +388,16 @@ function Comparativo({ d }: { d: Datos }) {
     : Math.max(0, ...Object.values(sesnsp.municipios).map((m) => m.por_mes.length));
   const mes = largo === 0 ? "último mes" : nombreMes(largo - 1);
   return (
-    <div className="mt-8 border-t border-white/[0.06] pt-6">
-      <h3 className="text-base tracking-tight text-white">Comparativo por zona</h3>
-      <p className="mt-1 text-xs text-white/50">
+    <div className="mt-8 border-t border-vela pt-6">
+      <h3 className="text-base tracking-tight text-tinta-titulo">Comparativo por zona</h3>
+      <p className="mt-1 text-xs text-tinta-prosa">
         Toca una zona para ver solo sus cifras. Los delitos no son per cápita: comparan
         volumen, no riesgo.
       </p>
       <div className="mt-4 overflow-x-auto">
         <table className="w-full min-w-[30rem] text-sm">
           <thead>
-            <tr className="text-left text-2xs text-white/50">
+            <tr className="text-left text-2xs text-tinta-meta">
               <th className="py-2 font-normal">Zona</th>
               <th className="py-2 text-right font-normal">Notas, {d.estado.ventana_dias} días</th>
               <th className="py-2 text-right font-normal">Delitos en {mes}</th>
@@ -409,26 +409,26 @@ function Comparativo({ d }: { d: Datos }) {
               const m = sesnsp?.municipios[z];
               const ultimo = m === undefined ? undefined : m.por_mes[m.por_mes.length - 1];
               return (
-                <tr key={z} className="border-t border-white/[0.05]">
+                <tr key={z} className="border-t border-vela">
                   <td className="py-2">
                     <Link
                       href={rutaDeZona(z)}
-                      className="text-white/85 transition-colors duration-700 ease-firma hover:text-chart-1"
+                      className="text-tinta-dato transition-colors duration-700 ease-firma hover:text-chart-1"
                     >
                       {NOMBRE_CORTO[z]}
                     </Link>
                   </td>
-                  <td className="py-2 text-right tabular-nums text-white/80">
+                  <td className="py-2 text-right tabular-nums text-tinta-dato">
                     {numero(d.estado.por_zona[z] ?? 0)}
                   </td>
-                  <td className="py-2 text-right tabular-nums text-white/80">
+                  <td className="py-2 text-right tabular-nums text-tinta-dato">
                     {ultimo === undefined ? (
                       <Hueco titulo="El SESNSP mide municipios de Baja California">no aplica</Hueco>
                     ) : (
                       numero(ultimo)
                     )}
                   </td>
-                  <td className="py-2 text-right tabular-nums text-white/80">
+                  <td className="py-2 text-right tabular-nums text-tinta-dato">
                     {numero(d.conv?.por_zona[z] ?? 0)}
                   </td>
                 </tr>
@@ -479,17 +479,17 @@ export function ResumenZona({ zona }: { zona: ZonaRuta | null }) {
       </div>
 
       {brecha === null || tono === undefined || sentimiento === undefined ? null : (
-        <div className="mt-8 rounded-2xl border border-white/10 p-5">
-          <p className="max-w-[70ch] text-sm leading-snug text-white/85">{brecha}</p>
+        <div className="mt-8 rounded-nucleo border border-filo p-5">
+          <p className="max-w-[70ch] text-sm leading-snug text-tinta-dato">{brecha}</p>
           <div className="mt-4 grid gap-6 sm:grid-cols-2">
             <div>
-              <p className="text-2xs text-white/50">Tono de los titulares</p>
+              <p className="text-2xs text-tinta-meta">Tono de los titulares</p>
               <div className="mt-2">
                 <BarraTono t={tono} ariaLabel={`Tono de los titulares sobre ${sujeto}`} />
               </div>
             </div>
             <div>
-              <p className="text-2xs text-white/50">Sentimiento de los comentarios</p>
+              <p className="text-2xs text-tinta-meta">Sentimiento de los comentarios</p>
               <div className="mt-2">
                 <BarraSentimiento
                   s={sentimiento}
@@ -498,7 +498,7 @@ export function ResumenZona({ zona }: { zona: ZonaRuta | null }) {
               </div>
             </div>
           </div>
-          <p className="mt-3 text-xs text-white/50">
+          <p className="mt-3 text-xs text-tinta-prosa">
             Titulares y comentarios miden cosas distintas; no se suman.
           </p>
         </div>
@@ -506,7 +506,7 @@ export function ResumenZona({ zona }: { zona: ZonaRuta | null }) {
 
       {zona === null ? <Comparativo d={d} /> : null}
 
-      <p className="mt-8 border-t border-white/[0.06] pt-4 text-xs leading-relaxed text-white/45">
+      <p className="mt-8 border-t border-vela pt-4 text-xs leading-relaxed text-tinta-meta">
         Corte del {fechaLarga(estado.generado)} a las {hora(estado.generado)}.{" "}
         {estado.fuentes_ok} de {totalFuentes} fuentes respondieron. Archivo:{" "}
         {numero(estado.notas_archivadas)} notas en {estado.archivos} meses.

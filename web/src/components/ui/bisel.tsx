@@ -44,13 +44,13 @@ export function Bisel({
 }: Props) {
   const r = RADIOS[radio];
   return (
-    <Tag className={`border border-white/10 bg-white/5 ${r.carcasa} ${className}`}>
+    <Tag className={`border border-filo bg-vela ${r.carcasa} ${className}`}>
       <div
         className={[
           "h-full w-full",
           r.nucleo,
           opaco ? "bg-carta" : "bg-carta/70 backdrop-blur-2xl",
-          "shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]",
+          "shadow-bisel",
           interior,
         ].join(" ")}
       >

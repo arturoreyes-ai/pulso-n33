@@ -11,7 +11,7 @@ import { pct } from "@/lib/dominio/formato";
  */
 export function Cejilla({ children }: { children: ReactNode }) {
   return (
-    <p className="inline-block rounded-full border border-white/10 bg-white/5 px-3 py-1 text-2xs font-medium tracking-[0.16em] text-white/70 uppercase">
+    <p className="inline-block rounded-full border border-filo bg-vela px-3 py-1 text-2xs font-medium tracking-[0.16em] text-tinta-meta uppercase">
       {children}
     </p>
   );
@@ -26,8 +26,8 @@ export function clasesChip(activo: boolean): string {
     "inline-flex items-baseline gap-2 rounded-full px-4 py-2 text-[13px]",
     "transition-all duration-700 ease-firma",
     activo
-      ? "bg-white/15 text-white"
-      : "bg-white/[0.04] text-white/65 hover:bg-white/10 hover:text-white",
+      ? "bg-realce text-tinta-titulo"
+      : "bg-vela text-tinta-prosa hover:bg-filo hover:text-tinta-titulo",
   ].join(" ");
 }
 
@@ -46,7 +46,7 @@ export function Chip({
     <button type="button" aria-pressed={activo} onClick={onClick} className={clasesChip(activo)}>
       <span>{children}</span>
       {cuenta === undefined ? null : (
-        <span className="text-2xs tabular-nums text-white/45">{cuenta}</span>
+        <span className="text-2xs tabular-nums text-tinta-meta">{cuenta}</span>
       )}
     </button>
   );
@@ -73,7 +73,7 @@ export function Esqueleto({ className = "h-[280px]" }: { className?: string }) {
     <div
       role="status"
       aria-label="Cargando"
-      className={`w-full animate-pulse rounded-xl bg-white/[0.04] ${className}`}
+      className={`w-full animate-pulse rounded-nucleo bg-vela ${className}`}
     />
   );
 }
@@ -84,7 +84,7 @@ export function Esqueleto({ className = "h-[280px]" }: { className?: string }) {
 export function Barra({ fraccion, color }: { fraccion: number; color?: string }) {
   const f = Math.max(0, Math.min(1, fraccion));
   return (
-    <span className="block h-[7px] w-full overflow-hidden rounded-full bg-white/[0.06]">
+    <span className="block h-[7px] w-full overflow-hidden rounded-full bg-vela">
       <span
         className="block h-full origin-left rounded-full transition-transform duration-700 ease-firma"
         style={{
@@ -121,7 +121,7 @@ export function BarraSegmentada({
       <div
         role="img"
         aria-label={ariaLabel}
-        className="flex h-2 w-full overflow-hidden rounded-full bg-white/[0.06]"
+        className="flex h-2 w-full overflow-hidden rounded-full bg-vela"
       >
         {segmentos.map((s) =>
           s.n === 0 ? null : (
@@ -129,7 +129,7 @@ export function BarraSegmentada({
           ),
         )}
       </div>
-      <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-2xs text-white/55">
+      <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-2xs text-tinta-meta">
         {segmentos.map((s) => (
           <li key={s.etiqueta} className="inline-flex items-center gap-1.5">
             <span
@@ -137,7 +137,7 @@ export function BarraSegmentada({
               className="inline-block h-2 w-2 rounded-full"
               style={{ backgroundColor: s.color }}
             />
-            <span className="tabular-nums text-white/80">{s.n}</span> {s.etiqueta}
+            <span className="tabular-nums text-tinta-dato">{s.n}</span> {s.etiqueta}
           </li>
         ))}
       </ul>
@@ -164,33 +164,13 @@ export function Signo({
   if (v === null || v === undefined || Number.isNaN(v)) {
     return <span className="text-xs text-aviso/80 italic">sin dato</span>;
   }
-  if (Math.abs(v) < 0.05) return <span className="text-white/60">{pct(0, decimales)}</span>;
+  if (Math.abs(v) < 0.05) return <span className="text-tinta-prosa">{pct(0, decimales)}</span>;
   const bueno = v > 0 !== invertir;
   return (
     <span className={bueno ? "text-sube" : "text-baja"}>
       {v > 0 ? "▲ " : "▼ "}
       {pct(v, decimales)}
     </span>
-  );
-}
-
-/* ------------------------------------------------------------------ cifra */
-
-export function Cifra({
-  etiqueta,
-  valor,
-  nota,
-}: {
-  etiqueta: string;
-  valor: ReactNode;
-  nota?: string;
-}) {
-  return (
-    <div>
-      <p className="text-2xs text-white/55">{etiqueta}</p>
-      <p className="mt-1 text-2xl tracking-tight tabular-nums">{valor}</p>
-      {nota === undefined ? null : <p className="mt-0.5 text-2xs text-white/45">{nota}</p>}
-    </div>
   );
 }
 
@@ -217,20 +197,20 @@ export function Kpi({
 }) {
   return (
     <div className="flex min-w-0 flex-col gap-2">
-      <p className="text-2xs text-white/55">{etiqueta}</p>
+      <p className="text-2xs text-tinta-meta">{etiqueta}</p>
       <p
         className={
           hueco
             ? "text-lg text-aviso/85 italic"
-            : "text-3xl leading-none tracking-tight tabular-nums text-white"
+            : "text-3xl leading-none tracking-tight tabular-nums text-tinta-titulo"
         }
       >
         {valor}
       </p>
-      <p className="text-sm leading-snug text-white/75">{frase}</p>
+      <p className="text-sm leading-snug text-tinta-dato">{frase}</p>
       {extra === undefined ? null : <div className="mt-1">{extra}</div>}
       {fuente === undefined ? null : (
-        <p className="mt-auto text-2xs leading-snug text-white/40">{fuente}</p>
+        <p className="mt-auto text-2xs leading-snug text-tinta-meta">{fuente}</p>
       )}
     </div>
   );
@@ -252,10 +232,10 @@ export function FilaConteo({
   return (
     <li
       title={titulo}
-      className="flex items-baseline gap-3 border-b border-white/[0.05] py-1.5 text-xs last:border-0"
+      className="flex items-baseline gap-3 border-b border-vela py-1.5 text-xs last:border-0"
     >
-      <span className={atenuada ? "text-aviso/80" : "text-white/70"}>{etiqueta}</span>
-      <span className={`ml-auto tabular-nums ${atenuada ? "text-aviso/80" : "text-white"}`}>
+      <span className={atenuada ? "text-aviso/80" : "text-tinta-dato"}>{etiqueta}</span>
+      <span className={`ml-auto tabular-nums ${atenuada ? "text-aviso/80" : "text-tinta-titulo"}`}>
         {valor}
       </span>
     </li>

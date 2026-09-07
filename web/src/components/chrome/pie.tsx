@@ -7,11 +7,11 @@
  */
 export function Pie() {
   return (
-    <footer className="mx-auto w-full max-w-[88rem] border-t border-white/10 px-4 py-16 md:px-8 md:py-24">
+    <footer className="mx-auto w-full max-w-[88rem] border-t border-filo px-4 py-16 md:px-8 md:py-24">
       <div className="grid gap-10 md:grid-cols-2">
-        <div className="max-w-[65ch] space-y-4 text-sm leading-relaxed text-white/60">
+        <div className="max-w-[65ch] space-y-4 text-sm leading-relaxed text-tinta-prosa">
           <p>
-            Esta página mide <strong className="text-white">volumen de prensa</strong> y
+            Esta página mide <strong className="text-tinta-titulo">volumen de prensa</strong> y
             de conversación, no opinión pública. Un titular es una decisión
             editorial de un medio; un comentario es de quien decidió comentar.
             Ninguno de los dos es una muestra de la población.
@@ -23,13 +23,13 @@ export function Pie() {
             de las otras.
           </p>
           <p>
-            Con volumen bajo se muestran <strong className="text-white">conteos, no
+            Con volumen bajo se muestran <strong className="text-tinta-titulo">conteos, no
             porcentajes</strong>. Con seis notas al día un porcentaje se mueve con
             dos comentarios.
           </p>
         </div>
 
-        <div className="max-w-[65ch] space-y-4 text-sm leading-relaxed text-white/60">
+        <div className="max-w-[65ch] space-y-4 text-sm leading-relaxed text-tinta-prosa">
           <p>
             Los temas salen de contar repeticiones de frases en los titulares, sin
             modelo. Funcionan para lo que está claramente arriba y mal para lo
@@ -37,8 +37,8 @@ export function Pie() {
             es la agenda de ese medio.
           </p>
           <p>
-            El <strong className="text-white">tono</strong> de titulares y el{" "}
-            <strong className="text-white">sentimiento</strong> de comentarios los
+            El <strong className="text-tinta-titulo">tono</strong> de titulares y el{" "}
+            <strong className="text-tinta-titulo">sentimiento</strong> de comentarios los
             asigna un modelo local entrenado en texto de redes sociales. Mide si
             una frase suena a queja, a celebración o a información; no mide la
             postura hacia una persona, y por eso nunca se cruza con las figuras
@@ -53,7 +53,7 @@ export function Pie() {
         </div>
       </div>
 
-      <p className="mt-14 text-2xs text-white/40">
+      <p className="mt-14 text-2xs text-tinta-meta">
         Agregación en formato titular, fuente y enlace. Nunca se republica el
         cuerpo de una nota ni el texto de un comentario.
       </p>

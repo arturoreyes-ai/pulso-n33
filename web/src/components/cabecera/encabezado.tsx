@@ -23,7 +23,7 @@ export function Encabezado({ zona }: { zona: ZonaRuta | null }) {
               : "Pulso N33 · Baja California"}
         </Cejilla>
 
-        <h1 className="mt-5 text-5xl leading-[0.95] tracking-tighter text-white md:text-7xl">
+        <h1 className="mt-5 text-5xl leading-[0.95] tracking-tighter text-tinta-titulo md:text-7xl">
           {nombre === null ? (
             <>
               Pulso <span className="text-chart-1">N33</span>
@@ -33,7 +33,7 @@ export function Encabezado({ zona }: { zona: ZonaRuta | null }) {
           )}
         </h1>
 
-        <p className="mt-6 max-w-[58ch] text-base leading-relaxed text-white/60 md:text-lg">
+        <p className="mt-6 max-w-[58ch] text-base leading-relaxed text-tinta-prosa md:text-lg">
           {nombre === null
             ? "Precios de vivienda y suelo, crimen, percepción, prensa y conversación por zona. Elige una zona para ver solo sus cifras."
             : `Precios, crimen, prensa y conversación en ${nombre}. Cada cifra dice de dónde viene y qué no se puede concluir de ella.`}
