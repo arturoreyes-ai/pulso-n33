@@ -1,0 +1,263 @@
+import type { ReactNode } from "react";
+
+import { pct } from "@/lib/dominio/formato";
+
+/* ---------------------------------------------------------------- cejilla */
+
+/**
+ * La etiqueta minuscula que precede al titulo. Es la UNICA mayuscula con
+ * tracking del tablero y vive solo en el encabezado: repetirla arriba de cada
+ * seccion era ruido tipografico, no jerarquia.
+ */
+export function Cejilla({ children }: { children: ReactNode }) {
+  return (
+    <p className="inline-block rounded-full border border-white/10 bg-white/5 px-3 py-1 text-2xs font-medium tracking-[0.16em] text-white/70 uppercase">
+      {children}
+    </p>
+  );
+}
+
+/* ------------------------------------------------------------------ chips */
+
+/** Clases de una pastilla de filtro. Las comparten el boton (Chip) y el
+ *  enlace (SelectorZona), que son la misma cosa con distinta semantica. */
+export function clasesChip(activo: boolean): string {
+  return [
+    "inline-flex items-baseline gap-2 rounded-full px-4 py-2 text-[13px]",
+    "transition-all duration-700 ease-firma",
+    activo
+      ? "bg-white/15 text-white"
+      : "bg-white/[0.04] text-white/65 hover:bg-white/10 hover:text-white",
+  ].join(" ");
+}
+
+export function Chip({
+  activo,
+  onClick,
+  children,
+  cuenta,
+}: {
+  activo: boolean;
+  onClick: () => void;
+  children: ReactNode;
+  cuenta?: number;
+}) {
+  return (
+    <button type="button" aria-pressed={activo} onClick={onClick} className={clasesChip(activo)}>
+      <span>{children}</span>
+      {cuenta === undefined ? null : (
+        <span className="text-2xs tabular-nums text-white/45">{cuenta}</span>
+      )}
+    </button>
+  );
+}
+
+/* ------------------------------------------------------------------ hueco */
+
+/**
+ * Un hueco de cobertura, rotulado. Nunca un cero: un cero se lee como "aqui
+ * no pasa nada" en vez de "aqui no medimos", y son cosas distintas.
+ */
+export function Hueco({ children, titulo }: { children: ReactNode; titulo?: string }) {
+  return (
+    <span title={titulo} className="text-xs text-aviso/80 italic">
+      {children}
+    </span>
+  );
+}
+
+/* --------------------------------------------------------------- esqueleto */
+
+export function Esqueleto({ className = "h-[280px]" }: { className?: string }) {
+  return (
+    <div
+      role="status"
+      aria-label="Cargando"
+      className={`w-full animate-pulse rounded-xl bg-white/[0.04] ${className}`}
+    />
+  );
+}
+
+/* ------------------------------------------------------------------ barra */
+
+/** Barra horizontal. Escala con `transform`, nunca con `width`. */
+export function Barra({ fraccion, color }: { fraccion: number; color?: string }) {
+  const f = Math.max(0, Math.min(1, fraccion));
+  return (
+    <span className="block h-[7px] w-full overflow-hidden rounded-full bg-white/[0.06]">
+      <span
+        className="block h-full origin-left rounded-full transition-transform duration-700 ease-firma"
+        style={{
+          transform: `scaleX(${f})`,
+          backgroundColor: color ?? "var(--color-chart-1)",
+        }}
+      />
+    </span>
+  );
+}
+
+export interface Segmento {
+  etiqueta: string;
+  n: number;
+  color: string;
+}
+
+/**
+ * Barra de partes (negativo / neutral / positivo). Cada segmento crece con
+ * flex-grow, asi que no hay ancho animado ni calculo de porcentaje en CSS.
+ * La leyenda dice conteos; el porcentaje, si aplica, lo dice la frase.
+ */
+export function BarraSegmentada({
+  segmentos,
+  ariaLabel,
+}: {
+  segmentos: readonly Segmento[];
+  ariaLabel: string;
+}) {
+  const total = segmentos.reduce((acc, s) => acc + s.n, 0);
+  if (total === 0) return null;
+  return (
+    <div>
+      <div
+        role="img"
+        aria-label={ariaLabel}
+        className="flex h-2 w-full overflow-hidden rounded-full bg-white/[0.06]"
+      >
+        {segmentos.map((s) =>
+          s.n === 0 ? null : (
+            <span key={s.etiqueta} style={{ flexGrow: s.n, backgroundColor: s.color }} />
+          ),
+        )}
+      </div>
+      <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-2xs text-white/55">
+        {segmentos.map((s) => (
+          <li key={s.etiqueta} className="inline-flex items-center gap-1.5">
+            <span
+              aria-hidden
+              className="inline-block h-2 w-2 rounded-full"
+              style={{ backgroundColor: s.color }}
+            />
+            <span className="tabular-nums text-white/80">{s.n}</span> {s.etiqueta}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ signo */
+
+/**
+ * Variacion con signo y flecha. El color no es el unico portador: va el
+ * glifo Y el numero con signo. `invertir` es para series donde subir es malo
+ * (delitos).
+ */
+export function Signo({
+  v,
+  invertir = false,
+  decimales = 1,
+}: {
+  v: number | null | undefined;
+  invertir?: boolean;
+  decimales?: number;
+}) {
+  if (v === null || v === undefined || Number.isNaN(v)) {
+    return <span className="text-xs text-aviso/80 italic">sin dato</span>;
+  }
+  if (Math.abs(v) < 0.05) return <span className="text-white/60">{pct(0, decimales)}</span>;
+  const bueno = v > 0 !== invertir;
+  return (
+    <span className={bueno ? "text-sube" : "text-baja"}>
+      {v > 0 ? "▲ " : "▼ "}
+      {pct(v, decimales)}
+    </span>
+  );
+}
+
+/* ------------------------------------------------------------------ cifra */
+
+export function Cifra({
+  etiqueta,
+  valor,
+  nota,
+}: {
+  etiqueta: string;
+  valor: ReactNode;
+  nota?: string;
+}) {
+  return (
+    <div>
+      <p className="text-2xs text-white/55">{etiqueta}</p>
+      <p className="mt-1 text-2xl tracking-tight tabular-nums">{valor}</p>
+      {nota === undefined ? null : <p className="mt-0.5 text-2xs text-white/45">{nota}</p>}
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------- kpi */
+
+/**
+ * Una cifra con su frase. La frase es el entregable: el numero solo la
+ * ilustra. `hueco` pinta el valor como salvedad y no como dato.
+ */
+export function Kpi({
+  etiqueta,
+  valor,
+  frase,
+  fuente,
+  hueco = false,
+  extra,
+}: {
+  etiqueta: string;
+  valor: ReactNode;
+  frase: string;
+  fuente?: string;
+  hueco?: boolean;
+  extra?: ReactNode;
+}) {
+  return (
+    <div className="flex min-w-0 flex-col gap-2">
+      <p className="text-2xs text-white/55">{etiqueta}</p>
+      <p
+        className={
+          hueco
+            ? "text-lg text-aviso/85 italic"
+            : "text-3xl leading-none tracking-tight tabular-nums text-white"
+        }
+      >
+        {valor}
+      </p>
+      <p className="text-sm leading-snug text-white/75">{frase}</p>
+      {extra === undefined ? null : <div className="mt-1">{extra}</div>}
+      {fuente === undefined ? null : (
+        <p className="mt-auto text-2xs leading-snug text-white/40">{fuente}</p>
+      )}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------- fila */
+
+export function FilaConteo({
+  etiqueta,
+  valor,
+  titulo,
+  atenuada = false,
+}: {
+  etiqueta: ReactNode;
+  valor: ReactNode;
+  titulo?: string;
+  atenuada?: boolean;
+}) {
+  return (
+    <li
+      title={titulo}
+      className="flex items-baseline gap-3 border-b border-white/[0.05] py-1.5 text-xs last:border-0"
+    >
+      <span className={atenuada ? "text-aviso/80" : "text-white/70"}>{etiqueta}</span>
+      <span className={`ml-auto tabular-nums ${atenuada ? "text-aviso/80" : "text-white"}`}>
+        {valor}
+      </span>
+    </li>
+  );
+}

@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+/* ===========================================================================
+   Ethereal Glass — Pulso N33
+
+   Negro OLED, malla radial con orbes violeta y esmeralda, tarjetas vantablack
+   con bisel doble y filos de white/10. Tipografia Grotesk (Geist).
+
+   OSCURO Y NADA MAS, a proposito. El arquetipo no es "colores oscuros", es un
+   conjunto de decisiones que solo se sostienen sobre negro: los filos de
+   `white/10` no tienen equivalente claro (`black/8` se lee como mancha, no
+   como filo), `backdrop-blur` sobre fondo claro se ve como leche congelada, y
+   los orbes son luz aditiva, o sea invisibles sobre blanco.
+
+   Y sobre todo: la paleta de series se eligio para negro y FALLA en blanco.
+   #34D399 sobre #FFFFFF da ~1.7:1, que para una marca de grafica es
+   practicamente invisible para alguien con baja vision, y no se arregla
+   ajustando: necesita una segunda paleta. Un tema claro no es un interruptor,
+   es un segundo sistema de diseno. Hacerlo a medias es publicarle un tema
+   roto a quien tenga el sistema en claro.
+
+   `color-scheme: dark` en :root hace el trabajo del script anti-FOUC: pone
+   oscuras las barras de scroll, los controles nativos y el lienzo que el
+   navegador pinta ANTES del primer frame. Sin JavaScript. Que es lo unico que
+   funciona en App Router, donde un <script> renderizado por React no se
+   ejecuta en el cliente y next/script con beforeInteractive se queda en el
+   payload RSC.
+   =========================================================================== */
+
+@theme {
+  --color-vanta: #050505;
+  --color-carta: #0a0a0c;
+  --color-filo: rgb(255 255 255 / 0.1);
+
+  /* La curva de firma. Como token para no repetir el cubic-bezier a mano. */
+  --ease-firma: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Series de graficas. NUNCA un hex en un dataset: solo var(). */
+  --color-chart-1: #E0342B;
+  --color-chart-2: #34d399;
+  --color-chart-3: #38bdf8;
+  --color-chart-4: #fbbf24;
+  --color-chart-5: #fb7185;
+  --color-chart-6: #a3e635;
+
+  /* Cuando el color ES el dato (sube/baja, sano/caido) van estos, no la
+     paleta de series. */
+  --color-sube: #34d399;
+  --color-baja: #fb7185;
+  --color-aviso: #fbbf24;
+
+  --color-orbe-violeta: 167 139 250;
+  --color-orbe-esmeralda: 52 211 153;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1.45;
+}
+
+/* Capas sistemicas. Cinco, con nombre, y nada fuera de esta lista: la regla
+   es que no haya z-50 ni z-[9999] sueltos. Se consumen como z-[var(--z-nav)]
+   porque Tailwind v4 no genera utilidades de z-index desde el tema. */
+:root {
+  color-scheme: dark;
+  --z-fondo: 0;
+  --z-base: 10;
+  --z-elevado: 20;
+  --z-nav: 30;
+  --z-portal: 40;
+
+  /* Lo que OCUPA la pildora flotante: su margen de arriba mas su alto
+     medido (53.5px). Dos cosas dependen de este numero —el velo de arriba y
+     el `top` de la barra pegajosa del muro— y antes cada una lo adivinaba
+     por su cuenta. Adivinar dejaba 20px de banda sin tapar entre la pildora
+     y la barra, y por ahi desfilaban los titulares. Si cambia el alto de la
+     pildora, se cambia AQUI. */
+  --nav-alto: 4.5rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    /* mt-6 en vez de mt-4. */
+    --nav-alto: 5rem;
+  }
+}
+
+html {
+  background: var(--color-vanta);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  color: rgb(255 255 255 / 0.92);
+}
+
+/* Foco visible en todo, nunca removido. chart-3 (#38bdf8) es el mas
+   contrastado de los seis sobre #050505 (~7.5:1), asi que el anillo se ve
+   sobre cualquier superficie de la app. */
+:focus-visible {
+  outline: 2px solid var(--color-chart-3);
+  outline-offset: 2px;
+  border-radius: inherit;
+}
+
+/* --------------------------------------------------------------- revelado */
+
+/* El HTML del servidor sale VISIBLE. El estado que oculta lo pone el JS solo
+   despues de comprobar prefers-reduced-motion y justo antes de observar. Asi
+   el modo de falla es "sin animacion", no "pagina en blanco": si el JS no
+   corre, si el observer no dispara, o si content-visibility interactua raro,
+   el contenido se ve. Es aditivo, nunca sustractivo. */
+[data-revelar="pendiente"] {
+  opacity: 0;
+  transform: translateY(2.5rem);
+  filter: blur(4px);
+}
+
+[data-revelar="listo"] {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition:
+    opacity 800ms var(--ease-firma),
+    transform 800ms var(--ease-firma),
+    filter 800ms var(--ease-firma);
+}
+
+/* No es opcional. El arquetipo pide animacion en todo y esto la desactiva
+   completa para quien la pidio desactivada. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-revelar],
+  [data-revelar="pendiente"] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+/* Entrada del encabezado en CSS puro, sin observer, para que anime sin JS.
+   El bloque de arriba la neutraliza cuando corresponde. */
+@keyframes entrada {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.entrada {
+  animation: entrada 900ms var(--ease-firma) both;
+}
