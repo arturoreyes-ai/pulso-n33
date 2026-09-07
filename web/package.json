@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "tipos": "next typegen && tsc --noEmit",
-    "datos": "node scripts/sincronizar-datos.mjs"
+    "datos": "node scripts/sincronizar-datos.mjs",
+    "tokens": "node scripts/verificar-tokens.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
