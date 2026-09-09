@@ -58,7 +58,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # `package_json_file` es OBLIGATORIO aqui: `defaults.run.working-directory`
+      # solo afecta a los pasos `run`, no a las entradas de una accion, asi que
+      # sin esto action-setup busca packageManager en el package.json de la
+      # RAIZ, que no existe, y el job muere en siete segundos con "No pnpm
+      # version is specified". No se noto antes porque este es el primer PR del
+      # repo: el job se agrego y nunca corrio.
       - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: web/package.json
 
       - uses: actions/setup-node@v4
         with:
