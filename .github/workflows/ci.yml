@@ -41,6 +41,7 @@ jobs:
       - name: Corrida offline y validacion de su salida
         run: |
           python -m pulso correr --sin-red --salida "${RUNNER_TEMP}/data"
+          python -m pulso comunicados --sin-red --salida "${RUNNER_TEMP}/data"
           python -m pulso validar --datos "${RUNNER_TEMP}/data"
 
       - name: Armar el sitio

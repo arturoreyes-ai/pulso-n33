@@ -48,7 +48,8 @@ jobs:
     runs-on: ubuntu-latest
     # El modelo de sentimiento agrega unos minutos la primera vez (torch CPU
     # y ~430 MB de pesos); con los dos caches de abajo, despues es rapido.
-    timeout-minutes: 25
+    # Dos actores sincronicos mas (TikTok) pueden sumar ~10 min al peor caso.
+    timeout-minutes: 35
     permissions:
       contents: write
     outputs:
@@ -98,6 +99,9 @@ jobs:
       - name: Pipeline
         run: python -m pulso correr --metodo modelo ${{ (github.event_name == 'schedule' || inputs.descubrimiento_web) && '--descubrimiento-web' || '' }} ${{ inputs.sin_red && '--sin-red' || '' }}
 
+      - name: Comunicados del Ayuntamiento de Tecate
+        run: python -m pulso comunicados ${{ inputs.sin_red && '--sin-red' || '' }}
+
       # El cache de comentarios NO puede ir a git (retencion de 30 dias, ver
       # pulso/youtube.py), pero sin persistirlo entre corridas la ventana de
       # 30 dias no existiria: cada corrida derivaria solo de si misma.
@@ -118,6 +122,72 @@ jobs:
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: python -m pulso conversacion --sentimiento modelo
+
+      # Apify (redes sociales). Este paso verifica el token y el catalogo
+      # antes de que Instagram y TikTok, mas abajo, gasten credito: un token
+      # caducado falla con 401 a media cosecha, seis horas despues y sin
+      # nadie mirando. Aqui falla en el paso que lleva su nombre. Es una
+      # llamada, sin costo. El catalogo trae los actores en `activo: false`
+      # a proposito: no es el interruptor (cada modulo fija su actor), es el
+      # registro que la guardia de sesion revisa (pulso/apify.py, docs/PLAN.md
+      # seccion 3).
+      - name: Apify — token y catálogo
+        if: vars.APIFY_HABILITADO == 'true'
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: python -m pulso apify --verificar
+
+      # cache/instagram guarda dos cosas que NO pueden ir a git: el texto
+      # crudo (30 dias, LFPDPPP y CPRA) y vistos.json, el registro de posts
+      # ya cosechados. Sin persistir el segundo, el freno de costo no existe:
+      # cada corrida volveria a pagarle a Apify por los comentarios de los
+      # mismos posts, y el deduplicado del cache lo escondería -- los conteos
+      # saldrian bien y la factura saldria mal.
+      - name: Restaurar el cache de Instagram
+        if: vars.APIFY_HABILITADO == 'true'
+        uses: actions/cache@v4
+        with:
+          path: cache/instagram
+          key: instagram-${{ github.run_id }}
+          restore-keys: instagram-
+
+      # Solo cosecha las cuentas con "verificado": true en
+      # config/instagram.json (diez, sondeadas el 8 de septiembre de 2026).
+      # Ver el aviso en ese archivo: un handle derivado del nombre del medio
+      # da una cuenta ajena o vacia, y las dos se cobran igual.
+      #
+      # Escribe dos cosas: data/redes.json (conteos y posts destacados, va a
+      # git) y efimero/redes-comentarios.json (el TEXTO de los comentarios,
+      # fuera de git: la carpeta esta ignorada y `git add data/` no la toca).
+      # El segundo sale del cache restaurado arriba y llega al sitio porque
+      # `pulso sitio` lo copia al armar _site, mas abajo.
+      - name: Redes (Instagram)
+        if: vars.APIFY_HABILITADO == 'true'
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: python -m pulso redes --sentimiento modelo
+
+      # cache/tiktok: mismo papel que cache/instagram (texto crudo 30 dias +
+      # vistos.json, el freno de costo). El actor de comentarios de TikTok
+      # cobra diez veces el de videos, asi que aqui el freno pesa mas.
+      - name: Restaurar el cache de TikTok
+        if: vars.APIFY_HABILITADO == 'true'
+        uses: actions/cache@v4
+        with:
+          path: cache/tiktok
+          key: tiktok-${{ github.run_id }}
+          restore-keys: tiktok-
+
+      # Una BUSQUEDA ("tijuana noticias", ultimas 24 horas), no cuentas: la
+      # zona de cada video sale de su pie con el gacetero, y el @ del creador
+      # si se publica (decision del cliente, 8 sep 2026). Escribe
+      # data/tiktok.json (git) y efimero/tiktok-comentarios.json (fuera de
+      # git, viaja al sitio al armar _site).
+      - name: TikTok (búsqueda)
+        if: vars.APIFY_HABILITADO == 'true'
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: python -m pulso tiktok --sentimiento modelo
 
       # Vivienda, suelo, crimen y percepcion. Se salta solo si lo que hay
       # tiene menos de una semana: son fuentes trimestrales y mensuales, y
