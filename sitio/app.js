@@ -686,6 +686,7 @@ function nodoNota(n) {
 }
 
 function pintarMuro() {
+  pintarComunicados();
   var muro = $("muro");
   muro.innerHTML = "";
 
@@ -728,6 +729,63 @@ function pintarMuro() {
 }
 
 /* --------------------------------------------------------------- arranque */
+
+var comunicadosDatos = null, comunicadosCargando = false, comunicadosIntentados = false;
+
+function pintarComunicados() {
+  var seccion = $("comunicados"), cuerpo = $("comunicados-cuerpo");
+  seccion.hidden = estado.zona !== "Tecate";
+  if (seccion.hidden) return;
+  if (!comunicadosIntentados) {
+    comunicadosIntentados = true;
+    comunicadosCargando = true;
+    pedir("data/comunicados.json").then(function (datos) {
+      comunicadosDatos = datos;
+    }).catch(function () { comunicadosDatos = null; }).then(function () {
+      comunicadosCargando = false;
+      pintarComunicados();
+    });
+  }
+  cuerpo.textContent = "";
+  if (comunicadosCargando || !comunicadosDatos) {
+    cuerpo.textContent = comunicadosCargando ? "Cargando comunicados…" : "Comunicados no disponibles en este corte.";
+    return;
+  }
+  var datos = comunicadosDatos;
+  var origen = document.createElement("p");
+  origen.className = "meta";
+  origen.textContent = "Gobierno de Tecate" + (datos.ultimo_exito ? " · Última lectura correcta: " + datos.ultimo_exito : "");
+  cuerpo.appendChild(origen);
+  if (datos.estado === "fallo" || datos.modo === "sin_red") {
+    var aviso = document.createElement("p");
+    aviso.className = "nota-panel";
+    aviso.textContent = (datos.modo === "sin_red" ? "Ejemplo sin red. Estos titulares son datos de prueba. " : "") +
+      (datos.estado === "fallo" ? "No se pudo actualizar la fuente. " + (datos.comunicados.length ? "Se conserva la última lectura correcta." : "Todavía no hay una lectura correcta disponible.") : "");
+    cuerpo.appendChild(aviso);
+  }
+  if (!datos.comunicados.length) {
+    var vacio = document.createElement("p");
+    vacio.textContent = "Sin comunicados disponibles.";
+    cuerpo.appendChild(vacio);
+  }
+  datos.comunicados.forEach(function (fila) {
+    var articulo = document.createElement("article");
+    articulo.className = "nota";
+    var fecha = document.createElement("span");
+    fecha.className = "meta";
+    fecha.textContent = fila.fecha || "Sin fecha";
+    var titulo = document.createElement("h3");
+    var enlace = document.createElement("a");
+    enlace.href = fila.url;
+    enlace.target = "_blank";
+    enlace.rel = "noopener noreferrer";
+    enlace.textContent = fila.titulo;
+    titulo.appendChild(enlace);
+    articulo.appendChild(fecha);
+    articulo.appendChild(titulo);
+    cuerpo.appendChild(articulo);
+  });
+}
 
 function fallido(x) { return x === null; }
 
