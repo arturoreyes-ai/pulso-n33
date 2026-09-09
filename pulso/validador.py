@@ -923,7 +923,7 @@ def validar_conversacion(datos):
 
 # ----------------------------------------------------------- indicadores
 
-FAMILIAS = ("vivienda", "suelo", "crimen", "percepcion")
+FAMILIAS = ("vivienda", "suelo", "crimen", "percepcion", "renta")
 
 
 def _validar_serie(serie, clave_orden, campos, esperados, et, errores, avisos):
@@ -1596,6 +1596,24 @@ def validar_indicadores(datos):
                                    ("por_cuenta_mxn", "cuentas_pagadas"),
                                    m.get("ciclos"), etm, errores, avisos)
 
+        elif clave == "acs":
+            zips = ind.get("zips")
+            if not isinstance(zips, dict) or not zips:
+                errores.append("{}: 'zips' debe ser objeto no vacio".format(et))
+            else:
+                for z, v in sorted(zips.items()):
+                    etz = "{}.zips[{}]".format(et, z)
+                    if not re.match(r"^\d{5}$", str(z)):
+                        errores.append("{}: no es un ZIP de 5 digitos".format(etz))
+                    if not isinstance(v, dict):
+                        errores.append("{}: debe ser objeto".format(etz))
+                        continue
+                    if not _texto(v.get("nombre")):
+                        errores.append("{}: falta 'nombre'".format(etz))
+                    if not _entero_no_negativo(v.get("renta_mediana_usd")):
+                        errores.append("{}: 'renta_mediana_usd' debe ser entero".format(etz))
+                    _validar_serie(v.get("serie"), "anio", ("renta_mediana_usd",),
+                                   v.get("anios"), etz, errores, avisos)
 
         elif clave == "san_diego":
             zips = ind.get("zips")
