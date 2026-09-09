@@ -1,0 +1,163 @@
+{
+ "nota": "Cuentas públicas de Instagram de las que se cosechan comentarios, vía Apify y sin sesión. Una cuenta corre solo si tiene `activo` Y `verificado` en true. Los handles de abajo se sondearon de verdad el 8 de septiembre de 2026 con `python -m pulso redes --sondear`, y los que no resistieron están en `senuelos` con el número que los delató.",
+
+ "aviso_verificacion": "No enciendas un handle sin sondearlo. Adivinarlo a partir del nombre del medio falla, y falla en silencio: de los seis handles derivados que traía este archivo, CINCO estaban mal. Tres eran cuentas ocupadas con 0 publicaciones, y una era un portal de Tocantins, Brasil. Ninguno habría dado error al cosechar. Dos de los handles buenos (@zeta.tijuana, @afntijuana2) no se adivinan de ninguna forma razonable: salieron del sitio web del propio medio.",
+
+ "aviso_retencion": "El texto crudo vive en cache/instagram/ con TTL de 30 días y nunca entra a git. La identidad de quien comenta (ownerUsername, ownerProfilePicUrl, ownerId) no llega ni al cache: se tira al ingerir. Ver el encabezado de pulso/instagram.py.",
+
+ "cosecha": {
+  "nota": "Son dos pasadas pagadas: posts por cuenta, luego comentarios por post. `dias_entre_cosechas` evita volver a pagar por los comentarios de un post reciente. Con 50 comentarios por post la mayoría de los cortes queda por encima del mínimo de 30 de PRODUCT.md, pero el pipeline sigue emitiendo conteos y no porcentajes: el que decide si un corte llega a 30 es quien lo pinta, no quien lo cosecha.",
+  "posts_por_cuenta": 5,
+  "comentarios_por_post": 30,
+  "dias_entre_cosechas": 3
+ },
+
+ "cuentas": [
+  {
+   "id": "zeta_ig",
+   "handle": "@zeta.tijuana",
+   "nombre": "Semanario ZETA",
+   "medio": "zeta",
+   "zona": "Tijuana",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-08: 49,525 seguidores, 4,756 posts, bio «Fundado en 1980 en #Tijuana, #BajaCalifornia por Jesús Blancornelas». El handle lleva PUNTO y no se adivina: salió de zetatijuana.com. Ojo, el sondeo la reprobó una vez porque el actor devolvió postsCount nulo; ver el comentario en instagram.sondear()."
+  },
+  {
+   "id": "sintesis_ig",
+   "handle": "@sintesistv",
+   "nombre": "Síntesis TV",
+   "medio": "sintesis",
+   "zona": "Tijuana",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-08: 56,120 seguidores, 24,210 posts. La cuenta más grande del catálogo."
+  },
+  {
+   "id": "uniradio_ig",
+   "handle": "@uniradiobaja",
+   "nombre": "Uniradio Informa Baja California",
+   "medio": "uniradio",
+   "zona": "estatal",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-08: 26,320 seguidores, 17,595 posts. Es el MISMO desdoble que en YouTube: @uniradioinforma tiene 1 seguidor y 0 posts, y el vivo es @uniradiobaja. La trampa se repitió idéntica en las dos plataformas."
+  },
+  {
+   "id": "elvigia_ig",
+   "handle": "@elvigiaensenada",
+   "nombre": "Periódico El Vigía",
+   "medio": "elvigia",
+   "zona": "Ensenada",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-08: 13,426 seguidores, 19,084 posts, bio «Ensenada, Baja California». Única cobertura de Ensenada en redes."
+  },
+  {
+   "id": "soltij_ig",
+   "handle": "@elsoldetijuana",
+   "nombre": "El Sol de Tijuana",
+   "medio": "soltij",
+   "zona": "Tijuana",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-08: 8,824 seguidores, 2,230 posts. Pertenece a la OEM, el mismo grupo que hace que Google Noticias etiquete sus notas como oem.com.mx (ver pulso/busquedas.py)."
+  },
+  {
+   "id": "afn_ig",
+   "handle": "@afntijuana2",
+   "nombre": "Agencia Fronteriza de Noticias",
+   "medio": "afn",
+   "zona": "Tijuana",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-08: 867 seguidores, 86 posts. El sondeo la marca «dudoso» por tamaño y aun así se enciende, porque el handle salió del sitio de AFN y la bio es correcta. El «2» del final tampoco se adivina: @afntijuana no existe y @afntj está ocupada."
+  },
+  {
+   "id": "tjnoticias_ig",
+   "handle": "@tjnoticias",
+   "nombre": "TjNoticias",
+   "medio": null,
+   "zona": "Tijuana",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-08: 475,159 seguidores, 29,147 posts, bio «Noticias en menos de 1 minuto». La cuenta más grande del catálogo por mucho, y no tiene medio equivalente en config/medios.json: es nativa de redes, así que aporta conversación que el muro de prensa no ve."
+  },
+  {
+   "id": "frontera_ig",
+   "handle": "@frontera",
+   "nombre": "Frontera",
+   "medio": null,
+   "zona": "Tijuana",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-08: 305,019 seguidores, 55,785 posts. Vigilar: la bio dice «Noroeste de México», no Tijuana, y ese es exactamente el encuadre que hizo que El Imparcial metiera Hermosillo y Sonora al tablero. Si sus comentarios empiezan a nombrar Sonora, la zona de esta cuenta pasa a `estatal` o se apaga."
+  },
+  {
+   "id": "siempre_ig",
+   "handle": "@siempreenlanoticia",
+   "nombre": "Siempre En La Noticia",
+   "medio": null,
+   "zona": "Tijuana",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-08: 55,324 seguidores, 6,914 posts. Mismo medio que el canal `siempre_yt` de config/canales.json, así que permite comparar la conversación del mismo emisor en dos plataformas. Nota: se pidió como «siempreenelanoticia», que no existe."
+  },
+  {
+   "id": "tjpublica_ig",
+   "handle": "@tijuanapublicamx",
+   "nombre": "Tijuana Pública",
+   "medio": null,
+   "zona": "Tijuana",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-08: 82,821 seguidores, 2,027 posts. Dos salvedades escritas antes de que sorprendan: (1) NO es un medio de noticias, es revista de estilo de vida —«Foodie•Lugares•Eventos•Noticias»— así que su conversación no es comparable con la de un diario; (2) su bio declara «Tijuana BC | San Diego CA», o sea que cubre los dos lados y puede publicar en inglés. Está marcada `es` porque publica sobre todo en español; si aparece inglés, el modelo de tono lo etiquetaría igual sin avisar, y entonces hay que partirla o apagarla."
+  },
+  {
+   "id": "canal66_ig",
+   "handle": null,
+   "nombre": "Mexicali — sin cuenta encontrada",
+   "medio": null,
+   "zona": "Mexicali",
+   "idioma": "es",
+   "activo": false,
+   "verificado": false,
+   "razon": "Registro deliberado de un hueco. @canal66 está ocupada (13 seguidores, 0 posts) y @canal66mexicali no existe. Mexicali queda sin cobertura en redes mientras no se encuentre la cuenta buena; el panel tiene que decir «sin dato», nunca 0."
+  },
+  {
+   "id": "sanquintin_ig",
+   "handle": null,
+   "nombre": "San Quintín — sin cuenta",
+   "medio": "sanquintin",
+   "zona": "San Quintín",
+   "idioma": "es",
+   "activo": false,
+   "verificado": false,
+   "razon": "Registro deliberado de un hueco, no una cuenta. San Quintín es municipio nuevo y no se le encontró medio con RSS; tampoco cuenta de Instagram."
+  }
+ ],
+
+ "senuelos": [
+  {"handle": "@zetatijuana", "porque": "16 seguidores, 0 publicaciones. Handle ocupado. Es el que cualquiera derivaría del nombre; el real es @zeta.tijuana, con punto."},
+  {"handle": "@zetatj", "porque": "30 seguidores, 0 publicaciones. Ocupado."},
+  {"handle": "@zetanoticias", "porque": "1,330 seguidores y 4,333 posts, o sea que PARECE viva, pero es «Zeta Noticias», otro portal informativo sin relación con el Semanario ZETA de Tijuana. El señuelo más peligroso del lote: pasa cualquier filtro numérico."},
+  {"handle": "@uniradioinforma", "porque": "1 seguidor, 0 publicaciones. Idéntico al señuelo de YouTube: el handle obvio de Uniradio está muerto en las dos plataformas."},
+  {"handle": "@afnoticias", "porque": "113,914 seguidores y 20,635 posts, pero es «AF Notícias | Tocantins», un portal de BRASIL con bio en portugués. Habría metido texto portugués a un modelo de tono español, que no devuelve error sino una etiqueta plausible. Es el bug de El Imparcial y Hermosillo, cruzando una frontera más."},
+  {"handle": "@jornada.bc", "porque": "1 seguidor, 0 publicaciones, y la bio está en portugués («Video Aulas, dicas e atualizações»). Ocupada y además de otro país."},
+  {"handle": "@afntijuana", "porque": "no existe. @afntj existe con 0 seguidores y 1 post. El real es @afntijuana2."},
+  {"handle": "@elvigia", "porque": "14 seguidores, 0 publicaciones. Ocupado; el real es @elvigiaensenada."},
+  {"handle": "@canal66 / @canal66mexicali", "porque": "13 seguidores y 0 posts el primero; el segundo no existe."},
+  {"handle": "@cadenanoticias", "porque": "12 seguidores, 2 publicaciones, pese a que la bio dice «el grupo de medios más completo en el noroeste de México». La bio no verifica nada: los números sí."},
+  {"handle": "hashtags", "porque": "NO USAR. Un hashtag no lleva zona, por la misma razón que no la lleva una búsqueda (ver pulso/busquedas.py): se la acreditaría a todo comentario que no nombre lugar alguno. Y en Instagram un hashtag local arrastra cuentas de viaje y de venta que no son conversación de residentes."}
+ ]
+}
