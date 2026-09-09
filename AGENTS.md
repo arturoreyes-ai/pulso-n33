@@ -98,6 +98,42 @@ Related: III.E.2.a restricts *aggregating* data across channels of different
 owners, so the whole conversation panel ships **off** behind
 `YOUTUBE_HABILITADO`, pending counsel. Do not enable it by default.
 
+### Instagram comment text is published, but never committed
+
+On 8 September 2026 the client's management asked to see the text of the
+most-liked comments on each featured Instagram post. That reverses, **for
+Instagram only**, the earlier "derived counts only" decision. Do not re-open
+it. It does not change the channel: `python -m pulso redes` writes the text to
+`efimero/redes-comentarios.json`, a git-ignored folder regenerated on every run
+from the 30-day cache, and `pulso sitio` plus `web/scripts/sincronizar-datos.mjs`
+copy it into the built site when it exists. `data/redes.json` still carries
+counts plus the featured posts (URL, the outlet's caption headline, likes,
+comments, plays), and `pulso/validador.py` still rejects comment text or any
+identity key inside `data/`.
+
+Why not put it in `data/`: the git history cannot honour a 30-day retention.
+Why this is still legal-adjacent: a comment is personal data under LFPDPPP and
+CPRA once tied to a person, so commenter identity (`ownerUsername`, ids,
+avatar) is dropped at ingest and does not exist in any file. Instagram exposes
+no share, repost or save counts for other accounts' posts; those are labelled
+`sin dato`, never zero.
+
+### TikTok is a search, so the zone comes from the caption
+
+`pulso/tiktok.py` (same architecture, shared core in `pulso/redes.py`) reads
+the query "tijuana noticias" over the last 24 hours. A query carries no zone,
+for the same reason a Google News search does not: it would credit Tijuana to
+every video that names no place. Each video's zone comes from
+`zonas.alcance` over its raw caption; out-of-region videos are dropped,
+no-place videos are `nacional`. Two identity rules differ from Instagram, both
+decided by the client on 8 September 2026: the **creator's @handle is
+published** (they chose to post; the URL carries it anyway) and the validator
+requires it to match the URL; **commenter identity is never stored**, as
+before. TikTok does publish shares and saves, so `compartidos` and `guardados`
+are required there and forbidden for Instagram. The window is `ventana_horas`
+on `publicado`, never `ventana_dias`. The comments actor costs ~$5 per 1,000
+results; `cache/tiktok/vistos.json` is what keeps that to once a day.
+
 ### The five product rules, as code constraints
 
 These are the claims in [PRODUCT.md](PRODUCT.md#lo-que-este-producto-no-dice).
@@ -125,6 +161,42 @@ In code they mean:
 - **Headline, source and link only** — never article body text. The client is
   launching a competing outlet, so this matters more than the usual aggregator
   norm.
+
+### Google News search feeds (`pulso/busquedas.py`)
+
+A third ingestion path beside RSS/Scrapy and GDELT discovery: standing queries
+in `config/busquedas.json`, harvested on the same cron. Four decisions that
+look arbitrary and are not:
+
+- **The Google redirect is never resolved.** `<link>` is an opaque
+  `news.google.com/rss/articles/CBM…` token. Following it costs one request per
+  item *and* the token can rotate between runs — the same note would change its
+  `url` on a run with no news, which is exactly what `notas.json` exists not to
+  do. Store it verbatim; take `dominio` from `<source>`.
+- **`fuente` maps to the catalogue when the publisher is in it.** `id_nota` is
+  `sha256(fuente|folded title)`, so a Zeta article found through Google only
+  dedupes against Zeta's own copy if both hash identically. Resolution order is
+  domain → folded name → the hand-written `publicadores` map; a miss mints
+  `gn-<hash12>`. The map is load-bearing, not a nicety: Google labels group
+  papers with the group's domain, so El Sol de Tijuana arrives as `oem.com.mx`
+  — the domain of neither `soltij` nor `lavoz`, the two longest feeds we have.
+- **Strip the `" - Publisher"` suffix by exact match, never a `" - "` regex.**
+  *"Tijuana - San Diego: la garita cierra el domingo"* is a normal headline
+  here, and a generic cut leaves "Tijuana".
+- **A búsqueda has no `zona`.** One that reached `zona_medio` would credit that
+  zone to every headline the query returns that names no place — the El
+  Imparcial/Hermosillo bug in a new costume. Synthetic sources are `estatal`.
+
+A synthetic source's `idioma` is recovered from `descubierta_por` →
+`config/busquedas.json`, not from `medios_runtime`. Putting it only in runtime
+fails on the *second* run, when the synthetic medio is gone and the language
+falls back to Spanish — and a sentiment model given foreign text returns a
+plausible label, not an error. That is the San Diego failure again, and it is
+why deleting a row from that config is a validator error rather than a warning.
+
+The per-run budget is **shared out, not raced for**. The first version spent it
+in file order and the first two queries took all 40, leaving the other four at
+zero with everything in `recortadas`.
 
 ---
 
@@ -238,10 +310,11 @@ The full command surface — `indicadores`, `conversacion`, `delegaciones`,
 
 ## Testing
 
-- **`unittest` only.** No pytest, no config file. 15 modules, 331 test methods.
-  Install `requirements.txt` first: without Scrapy, `tests/test_scraping.py`
-  fails to import and you see 328 run with one error, which is an unprovisioned
-  environment and not a regression.
+- **`unittest` only.** No pytest, no config file. 16 modules, 398 test
+  methods, and the suite is expected fully green. Install `requirements.txt`
+  first: without Scrapy, `tests/test_scraping.py` fails to import and you see
+  394 run with one error, which is an unprovisioned environment and not a
+  regression.
 - **Tests are always offline.** `tests/test_pipeline.py` says so in its
   docstring. Never add a test that touches the network.
 - **Tests read the real `config/*.json`** (`BasePipeline.setUpClass`), so a
@@ -272,6 +345,9 @@ The full command surface — `indicadores`, `conversacion`, `delegaciones`,
   `node_modules/next/dist/server/lib/generate-agent-files.js`). Removing it
   from a diff only recreates the uncommitted change; commit it with your work.
 - **`cache/`** — never goes into git. See the invariant above.
+- **`efimero/`** — written by `pulso redes` and `pulso tiktok`, git-ignored,
+  copied into the site at build time. The comment text lives here and nowhere
+  else.
 
 ---
 
@@ -318,9 +394,20 @@ Do not cross these without the user explicitly saying so; two of them are
 already refused on the record in `docs/PLAN.md` §3.
 
 - **No logged-in social scraping.** Cited: *Meta v. Bright Data*, *Meta v.
-  Voyager Labs*, plus LFPDPPP and CPRA.
+  Voyager Labs*, plus LFPDPPP and CPRA. **A rented scraper does not change
+  this** — the natural mistake is to read "we use Apify now" as a way around
+  it. Delegating the browser does not delegate the liability: the Bright Data
+  defense turned on not being a *user*, and an actor that logs in destroys it
+  whether the login is yours or a vendor's. `pulso/apify.py` makes the rule
+  executable rather than advisory: `leer_catalogo` rejects any **active**
+  actor whose input carries cookies, credentials or a session token, so
+  flipping `"activo": true` in `config/apify.json` is not enough to turn on a
+  logged-in scrape. `tests/test_apify.py` pins that.
 - **`ROBOTSTXT_OBEY` stays on** and per-domain concurrency stays at 1.
-- **Headline, source and link only.** Never article body text.
+- **Headline, source and link only.** Never article body text. For Instagram
+  posts that means the first line of the outlet's caption, never the whole pie.
+- **Instagram comment text goes to `efimero/`, never to `data/` or git**, and
+  commenter identity is never stored anywhere (see the invariant above).
 - **The YouTube panel stays off** behind `YOUTUBE_HABILITADO`.
 - Note that a GitHub Pages site is **public even when the repo is private**,
   and would publish `data/*.json` and `config/roster.json` along with it. That

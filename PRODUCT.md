@@ -25,7 +25,13 @@ El cliente está lanzando un medio. El encargo original, parafraseado en
 relevante, produzca un tablero con métricas de sentimiento público general».
 La conversación de seguimiento acotó las prioridades a cuatro: **precio de
 suelo, postura política, crimen y temas en tendencia**. Los tiempos de espera
-en la frontera quedaron explícitamente despriorizados.
+en la frontera quedaron inicialmente despriorizados. El 8 de septiembre de
+2026 se solicitó `/garitas`: un briefing para locución con esperas de CBP hacia
+Estados Unidos en San Ysidro y Otay Mesa, incluidos los peatones y PedWest.
+Es una consulta del servidor Next.js independiente del cron: no crea histórico
+en git ni requiere base de datos. Las barras miden minutos, no longitud de fila.
+Cada carril muestra su hora; reportes de más de 90 minutos quedan fuera del
+resumen para leer al aire. No incluye sentido sur, CBX ni carga comercial.
 
 Que el cliente sea un medio tiene una consecuencia legal directa, no
 decorativa: la agregación se queda en **titular, fuente y enlace**, nunca el
@@ -48,7 +54,9 @@ texto completo, y aquí el agregador competiría con ellos.
 | Percepción de inseguridad | funcionando | ENSU trimestral. Solo Tijuana y Mexicali |
 | San Diego, valor catastral | funcionando | SANDAG, mediana por ZIP |
 | Conversación (YouTube) | **necesita llave** | canales verificados + hasta 3 búsquedas temáticas por corrida; retención de 30 días |
-| Sentimiento de comentarios | funcionando | modelo local (pysentimiento), publicado como conteos por zona y tema; nunca el texto |
+| Sentimiento de comentarios | funcionando | modelo local (pysentimiento), publicado como conteos por zona y tema; en YouTube nunca el texto |
+| Redes (Instagram) | **necesita token** | 10 cuentas de medios verificadas, sin sesión; los 15 posts con más likes de la semana y sus comentarios más votados. El texto va fuera de git (`efimero/`), la identidad no se ingiere |
+| Redes (TikTok) | **necesita token** | búsqueda «tijuana noticias», relevancia, últimas 24 h, sin sesión; la zona sale del pie del video, se muestra el @ del creador y nunca quien comenta. Mismo canal fuera de git para el texto |
 | Tono de titulares | funcionando | mismo modelo, `--metodo modelo`. Tono de la frase, no postura hacia una persona |
 | Tablero por zona | funcionando | `web/`, Next.js: una página por zona con resumen, indicadores, temas, conversación y muro |
 | Valores unitarios de suelo por zona | pendiente | Periódico Oficial, solo PDF, 5 formatos distintos |
@@ -61,16 +69,16 @@ texto completo, y aquí el agregador competiría con ellos.
 
 Esto es lo que hay, medido, no lo que se querría tener.
 
-| Zona | Prensa | YouTube | Vivienda | Suelo | Crimen | Percepción |
-|---|---|---|---|---|---|---|
-| Tijuana | fuerte, 4 medios | fuerte, 6 canales | ✅ | ✅ | ✅ | ✅ |
-| Mexicali | fuerte | adecuado | ✅ | ✅ | ✅ | ✅ |
-| Ensenada | adecuada, 3 medios incluido El Vigía | débil | ❌ | ✅ | ✅ | ❌ |
-| Playas de Rosarito | débil, 1 medio | marginal, 1 canal | ❌ | ✅ | ✅ | ❌ |
-| Tecate | débil, 1 medio | **hueco** | ❌ | ✅ | ✅ | ❌ |
-| San Quintín | **sin cobertura** | **sin cobertura** | ❌ | ✅ | ✅ | ❌ |
-| San Felipe | sin cobertura | sin cobertura | ❌ | ✅ | ✅ | ❌ |
-| San Diego | fuerte, 4 medios | moderado | catastral | catastral | n/a | n/a |
+| Zona | Prensa (catálogo) | Búsqueda | YouTube | Vivienda | Suelo | Crimen | Percepción |
+|---|---|---|---|---|---|---|---|
+| Tijuana | fuerte, 4 medios | — | fuerte, 6 canales | ✅ | ✅ | ✅ | ✅ |
+| Mexicali | fuerte | — | adecuado | ✅ | ✅ | ✅ | ✅ |
+| Ensenada | adecuada, 3 medios incluido El Vigía | — | débil | ❌ | ✅ | ✅ | ❌ |
+| Playas de Rosarito | débil, 1 medio | sí | marginal, 1 canal | ❌ | ✅ | ✅ | ❌ |
+| Tecate | débil, 1 medio | sí | **hueco** | ❌ | ✅ | ✅ | ❌ |
+| San Quintín | **sin medio local** | sí | **sin cobertura** | ❌ | ✅ | ✅ | ❌ |
+| San Felipe | **sin medio local** | sí | sin cobertura | ❌ | ✅ | ✅ | ❌ |
+| San Diego | fuerte, 4 medios | sí, en inglés | moderado | catastral | catastral | n/a | n/a |
 
 Notas sobre los huecos:
 
@@ -80,7 +88,12 @@ Notas sobre los huecos:
 - **Tecate** tiene una radiodifusora con 27 mil suscriptores que sube
   programas de radio, no noticias.
 - **San Quintín** se volvió municipio en 2020 y no se encontró ningún medio
-  local, ni feed ni canal.
+  local, ni feed ni canal. Desde septiembre de 2026 la columna «Búsqueda» lo
+  cubre por otra vía: consultas permanentes en Google Noticias, que sí indexa
+  a los medios que publican del valle aunque no estén en el catálogo. Pasó de
+  2 notas en la ventana a 5 en la primera corrida. **Eso no lo convierte en
+  cobertura equivalente**: son medios sin verificar, el enlace pasa por el
+  redirector de Google, y el volumen depende de lo que Google decida indexar.
 - El **índice SHF solo trae Tijuana y Mexicali** de todo Baja California. Y
   `ZM Tijuana` no sirve de proxy para Rosarito: sigue a Tijuana municipio con
   una diferencia media de 0.077% en 86 trimestres. Ese hueco se llena con el
@@ -93,6 +106,34 @@ Notas sobre los huecos:
 El tablero **rotula cada hueco** con «sin dato» o «fuera de muestra» en vez
 de rellenarlo con un cero, que se leería como «aquí no pasa nada» en lugar de
 «aquí no medimos».
+
+### La columna «Búsqueda» mide otra cosa que la columna «Prensa»
+
+Desde septiembre de 2026 el volumen de prensa incluye una vía que **no pasa
+por el catálogo**: búsquedas permanentes en Google Noticias, pensadas para los
+municipios donde no existe un medio local que verificar. Hay que decir sin
+rodeos qué cambia y qué no.
+
+**Lo que no cambia.** Sigue siendo titular, fuente y enlace, nunca el cuerpo
+del artículo: el `<description>` de ese feed trae un ancla y el nombre del
+medio, así que no hay cuerpo que guardar aunque se quisiera. Las notas siguen
+recibiendo zona por lo que **nombra el titular**, no por quién las publicó, y
+el tono sigue saliendo del idioma declarado, nunca adivinado del texto. Y la
+regla 4 sigue en pie: esto no rellena un hueco con ceros, aporta notas reales.
+
+**Lo que sí cambia.** El conjunto de medios dejó de ser una lista revisada a
+mano. Un resultado de búsqueda puede venir de cualquier sitio que Google
+indexe, sin la verificación que sí tiene cada renglón de `config/medios.json`,
+y su enlace pasa por el redirector de Google antes de llegar al medio. Por eso
+la matriz de arriba separa las dos columnas en vez de sumarlas: «4 medios» y
+«sí» no son la misma clase de afirmación.
+
+**Y una parte no llega al muro.** Un titular que no nombra ningún lugar de la
+región queda como nacional y no se muestra: de las 56 notas de búsqueda del
+primer corte, 26 cayeron ahí. Se siguen contando en los temas y en el estado,
+y la banda de salud publica ese número por consulta (`sin_zona`) en vez de
+dejar que se deduzca. Es también la razón de que las consultas se escriban con
+topónimos: para que el lugar caiga en el titular y no solo en el cuerpo.
 
 Consecuencia estructural que hay que decir en voz alta: el tablero
 sobrerrepresenta a Tijuana. No es un defecto del código, es la distribución
@@ -208,6 +249,36 @@ Las mismas políticas (III.E.2.a) restringen **agregar** datos de canales de
 distintos dueños, y un tablero que suma varios medios roza esa línea. Por eso
 el panel viene apagado detrás de una variable, pendiente de la opinión de un
 abogado.
+
+### Instagram: el texto sí se muestra, y aun así no entra a git
+
+El 8 de septiembre de 2026 la dirección pidió ver los comentarios de Instagram
+tal cual, no solo contados. Se hace, con tres límites que no son de estilo:
+
+- **El texto no se commitea.** Va a `efimero/redes-comentarios.json`, carpeta
+  ignorada por git que el pipeline regenera en cada corrida desde un caché que
+  se purga a los 30 días. El sitio la copia al construir. Lo que sale del
+  caché desaparece de la página en la siguiente corrida; el historial de git
+  nunca lo tuvo.
+- **La identidad no existe en ningún archivo.** Usuario, foto e id de quien
+  comenta se descartan al leer. La página muestra la frase, no la persona.
+- **Instagram no publica compartidos, reposts ni guardados** de cuentas
+  ajenas. Esas cifras son «sin dato», no cero. Sí hay likes, comentarios y, en
+  video, reproducciones.
+
+En YouTube no cambia nada: ahí el «nunca el texto» sale de una política
+escrita, no de una decisión del cliente.
+
+### TikTok: una búsqueda, no cuentas, y lo que eso obliga
+
+La sección de TikTok lee la búsqueda «tijuana noticias» (relevancia, últimas
+24 horas) sin iniciar sesión. Como los videos vienen de cualquier creador, la
+regla de zona es la de las notas de prensa: la da lo que nombra la descripción,
+nunca la consulta. Un video que nombra otra región se descarta; uno que no
+nombra lugar se rotula «sin lugar en la descripción» y no tiene página de zona.
+Se muestra el @ del creador porque es quien publicó y la liga ya lo trae; quien
+comenta sigue anónimo. TikTok sí publica compartidos y guardados, y aquí
+aparecen como cifras medidas.
 
 ---
 
