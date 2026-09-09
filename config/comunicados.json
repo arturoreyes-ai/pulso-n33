@@ -1,0 +1,15 @@
+{
+ "nota": "Fuente municipal separada de la prensa: solo titulares y enlaces del Ayuntamiento. Una portada por corrida, sin archivo ni cuerpos. La zona indica la institución emisora, no una inferencia geográfica del titular.",
+ "verificado": "2026-09-08",
+ "fuente": {
+  "id": "gobtecate",
+  "nombre": "Gobierno de Tecate",
+  "url": "https://tecate.gob.mx/",
+  "scrapy": {
+   "item": "a[href^='/noticias/']",
+   "titulo": "h2 ::text, h2::text, h3 ::text, h3::text",
+   "url": "::attr(href)",
+   "fecha": "span::text"
+  }
+ }
+}

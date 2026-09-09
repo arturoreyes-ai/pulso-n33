@@ -1712,6 +1712,13 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None, dir_efimero="e
         if errores:
             return errores, avisos
 
+    ruta_comunicados = os.path.join(dir_config, "comunicados.json")
+    if os.path.exists(ruta_comunicados):
+        from .comunicados import leer_fuente
+        try:
+            leer_fuente(ruta_comunicados)
+        except (ValueError, OSError, KeyError, TypeError) as exc:
+            errores.append("comunicados: configuracion invalida ({})".format(exc))
 
     archivos = {
         "notas": (os.path.join(dir_datos, "notas.json"),
@@ -1726,6 +1733,7 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None, dir_efimero="e
     # solo si lo que hay tiene menos de una semana. Se validan si estan, y no
     # es error que falten.
     opcionales = {
+        "comunicados": (os.path.join(dir_datos, "comunicados.json"), validar_comunicados),
         "conversacion": (os.path.join(dir_datos, "conversacion.json"), validar_conversacion),
         "indicadores": (os.path.join(dir_datos, "indicadores.json"), validar_indicadores),
         # redes.json lo escribe `pulso redes` y pide APIFY_TOKEN mas al menos
@@ -1799,6 +1807,60 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None, dir_efimero="e
         errores += e
         avisos += a
     return errores, avisos
+
+
+def validar_comunicados(datos):
+    """Tecate publica boletines oficiales: no son notas de prensa ni opinion."""
+    errores = []
+    if not isinstance(datos, dict):
+        return ["comunicados: se esperaba un objeto"], []
+    claves = {"esquema", "fuente", "zona", "modo", "consultado", "ultimo_exito", "estado", "error", "comunicados"}
+    if set(datos) != claves:
+        errores.append("comunicados: claves inesperadas o incompletas")
+    if datos.get("esquema") != 1 or datos.get("zona") != "Tecate":
+        errores.append("comunicados: esquema o zona invalidos")
+    if datos.get("fuente") != {"id": "gobtecate", "nombre": "Gobierno de Tecate", "url": "https://tecate.gob.mx/"}:
+        errores.append("comunicados: fuente oficial invalida")
+    if datos.get("modo") not in ("red", "sin_red") or datos.get("estado") not in ("ok", "fallo"):
+        errores.append("comunicados: modo o estado invalido")
+    if not _es_iso(datos.get("consultado")):
+        errores.append("comunicados: consultado invalido")
+    ultimo = datos.get("ultimo_exito")
+    if ultimo is not None and not _es_iso(ultimo):
+        errores.append("comunicados: ultimo_exito invalido")
+    if datos.get("estado") == "ok" and (ultimo != datos.get("consultado") or datos.get("error") is not None):
+        errores.append("comunicados: exito sin fecha o con error")
+    if datos.get("estado") == "fallo" and not _texto(datos.get("error")):
+        errores.append("comunicados: fallo sin motivo")
+    filas = datos.get("comunicados")
+    if not isinstance(filas, list):
+        return errores + ["comunicados: listado invalido"], []
+    if datos.get("estado") == "ok" and not filas:
+        errores.append("comunicados: exito sin titulares")
+    if filas and ultimo is None:
+        errores.append("comunicados: titulares sin ultimo_exito")
+    vistos = set()
+    orden = []
+    for fila in filas:
+        if not isinstance(fila, dict) or set(fila) != {"id", "titulo", "url", "fecha"}:
+            errores.append("comunicados: solo id, titulo, url y fecha por titular")
+            continue
+        url, titulo, fecha = fila["url"], fila["titulo"], fila["fecha"]
+        if not isinstance(url, str) or not re.fullmatch(r"https://tecate\.gob\.mx/noticias/[0-9]+", url):
+            errores.append("comunicados: enlace ajeno a noticias municipales")
+            continue
+        if not _texto(titulo) or fila["id"] != id_nota("gobtecate", titulo):
+            errores.append("comunicados: titulo o identidad invalida")
+        if url in vistos:
+            errores.append("comunicados: URL duplicada")
+        vistos.add(url)
+        if fecha is not None and _fecha(fecha) is None:
+            errores.append("comunicados: fecha invalida")
+        else:
+            orden.append((-_fecha(fecha).toordinal() if fecha else 0, url))
+    if orden != sorted(orden):
+        errores.append("comunicados: fechas descendentes y URL ascendente requeridas")
+    return errores, []
 
 
 def resumen(dir_config="config", dir_datos="data"):
