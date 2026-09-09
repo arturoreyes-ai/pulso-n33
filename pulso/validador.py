@@ -987,6 +987,18 @@ CLAVES_PROHIBIDAS_COMENTARIO_PUBLICADO = (
     (CLAVES_PROHIBIDAS_REDES - {"post", "postUrl", "comentario"})
     | frozenset({"id", "commentUrl", "autor", "author", "respuestas"}))
 
+# Campos de identidad que devuelven los actores de TikTok (clockworks). Se
+# tiran al ingerir en pulso/tiktok.py; si uno aparece en data/ o en efimero/,
+# el filtro se rompio antes del cache.
+CLAVES_PROHIBIDAS_TIKTOK = frozenset(
+    {"uniqueId", "uid", "avatarThumbnail", "authorMeta", "nickName", "avatar", "cid",
+     "profileUrl"})
+
+# El @handle del CREADOR del video si se publica en TikTok (decision del
+# cliente del 8 de septiembre de 2026: es quien publico, y la URL ya lo trae).
+# Es la unica identidad que cruza a data/, y solo en esa plataforma.
+RE_CREADOR = re.compile(r"^@[A-Za-z0-9_.]{2,24}$")
+
 # Lo que cambia entre plataformas en redes.json y su archivo de texto. Todo
 # lo demas -- conteos, orden, sentimiento, prohibiciones de texto -- es igual.
 PLATAFORMAS_REDES = {
@@ -1000,7 +1012,85 @@ PLATAFORMAS_REDES = {
         "cifras": (),
         "modulo": "pulso/instagram.py:_limpiar",
     },
+    "tiktok": {
+        "prefijo": "https://www.tiktok.com/",
+        # Ventana en horas sobre `publicado`: una busqueda de "ultimas 24 horas".
+        "ventana": "ventana_horas",
+        "creador": True,
+        "prohibidas": CLAVES_PROHIBIDAS_TIKTOK,
+        # TikTok si los publica: un 0 es cero medido, y faltar es error.
+        "cifras": ("compartidos", "guardados"),
+        "modulo": "pulso/tiktok.py:_limpiar_comentario",
+    },
 }
+
+RE_BUSQUEDA_TIKTOK = re.compile(r"^tk_[a-z0-9_]{2,20}$")
+# Los dos enums salen de la validacion de entrada del actor (HTTP 400 con la
+# lista completa), no de su ficha: la primera version copio "YESTERDAY" de la
+# interfaz de TikTok y el actor lo rechazo.
+FILTROS_FECHA_TIKTOK = ("ALL_TIME", "PAST_24_HOURS", "PAST_WEEK", "PAST_MONTH",
+                        "LAST_3_MONTHS", "LAST_6_MONTHS")
+ORDENES_TIKTOK = ("MOST_RELEVANT", "MOST_LIKED", "LATEST")
+
+
+def validar_tiktok_config(datos):
+    """config/tiktok.json: busquedas, no cuentas. Una busqueda no lleva zona."""
+    errores, avisos = [], []
+    if not _texto(datos.get("nota")):
+        avisos.append("tiktok: falta la 'nota' que explica el archivo")
+    cosecha = datos.get("cosecha")
+    if not isinstance(cosecha, dict):
+        errores.append("tiktok: falta 'cosecha'")
+    else:
+        vh = cosecha.get("ventana_horas")
+        if not isinstance(vh, int) or isinstance(vh, bool) or not 1 <= vh <= 720:
+            errores.append("tiktok.cosecha: 'ventana_horas' debe ser entero entre 1 y 720")
+        if cosecha.get("filtro_fecha") not in FILTROS_FECHA_TIKTOK:
+            errores.append("tiktok.cosecha: 'filtro_fecha' {!r} no es un valor del actor; "
+                           "se espera {}".format(cosecha.get("filtro_fecha"),
+                                                 "|".join(FILTROS_FECHA_TIKTOK)))
+        for campo in ("videos_por_busqueda", "comentarios_por_video", "dias_entre_cosechas",
+                      "presupuesto_resultados"):
+            v = cosecha.get(campo)
+            if not isinstance(v, int) or isinstance(v, bool) or v < 1:
+                errores.append("tiktok.cosecha: '{}' debe ser entero positivo".format(campo))
+        if cosecha.get("orden", "MOST_RELEVANT") not in ORDENES_TIKTOK:
+            errores.append("tiktok.cosecha: 'orden' {!r} no es un valor del actor; se espera {}"
+                           .format(cosecha.get("orden"), "|".join(ORDENES_TIKTOK)))
+    busquedas = datos.get("busquedas")
+    if not isinstance(busquedas, list) or not busquedas:
+        errores.append("tiktok: 'busquedas' debe ser una lista no vacia")
+        return errores, avisos
+    ids = set()
+    for i, b in enumerate(busquedas):
+        et = "tiktok.busquedas[{}]".format(b.get("id", i) if isinstance(b, dict) else i)
+        if not isinstance(b, dict):
+            errores.append("{}: debe ser objeto".format(et))
+            continue
+        bid = b.get("id")
+        if not isinstance(bid, str) or not RE_BUSQUEDA_TIKTOK.match(bid):
+            errores.append("{}: 'id' invalido ({!r}); se espera ^tk_[a-z0-9_]{{2,20}}$".format(
+                et, bid))
+        elif bid in ids:
+            errores.append("{}: id repetido".format(et))
+        ids.add(bid)
+        for campo in ("nombre", "consulta", "nota"):
+            if not _texto(b.get(campo)):
+                errores.append("{}: falta '{}'".format(et, campo))
+        if b.get("idioma") not in IDIOMAS:
+            errores.append("{}: idioma {!r} desconocido".format(et, b.get("idioma")))
+        if not isinstance(b.get("activo"), bool):
+            errores.append("{}: 'activo' debe ser booleano".format(et))
+        if "zona" in b:
+            # Misma regla que config/busquedas.json: una consulta le acreditaria
+            # su zona a todo video que no nombre lugar alguno. La zona sale del
+            # pie del video, con el gacetero.
+            errores.append("{}: una busqueda no lleva 'zona'; la zona de cada video sale "
+                           "de lo que nombra su pie (pulso/zonas.py)".format(et))
+    if not any(isinstance(b, dict) and b.get("activo") for b in busquedas):
+        avisos.append("tiktok: ninguna busqueda activa; el panel va a salir vacio")
+    return errores, avisos
+
 
 def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
     """El bloque de posts destacados de redes.json. Ausente es aviso.
@@ -1608,6 +1698,19 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None, dir_efimero="e
             return errores, avisos
         busquedas = busquedas_datos.get("busquedas") or []
 
+    # config/tiktok.json es opcional (la seccion se puede no encender), pero si
+    # esta, se valida como los demas configs: una busqueda con zona o un
+    # filtro de fecha inventado fallan aqui y no a media cosecha.
+    ruta_tiktok = os.path.join(dir_config, "tiktok.json")
+    if os.path.exists(ruta_tiktok):
+        try:
+            e, a = validar_tiktok_config(_leer(ruta_tiktok))
+            errores += e
+            avisos += a
+        except (ValueError, OSError) as e:
+            errores.append("tiktok: no se pudo leer {} ({})".format(ruta_tiktok, e))
+        if errores:
+            return errores, avisos
 
 
     archivos = {
@@ -1629,6 +1732,10 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None, dir_efimero="e
         # una cuenta verificada en config/instagram.json. Igual que
         # conversacion, no es error que falte.
         "redes": (os.path.join(dir_datos, "redes.json"), validar_redes),
+        # tiktok.json lo escribe `pulso tiktok`; mismo contrato que redes.json
+        # con la ventana en horas y el creador visible. Tampoco es error que falte.
+        "tiktok": (os.path.join(dir_datos, "tiktok.json"),
+                   lambda d: validar_redes(d, plataforma="tiktok")),
     }
     presentes = [n for n, (ruta, _) in archivos.items() if os.path.exists(ruta)]
     if not presentes:
@@ -1669,7 +1776,8 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None, dir_efimero="e
     # El texto publicado vive fuera de data/ y de git. Si esta, tiene que
     # corresponder al archivo de conteos de este corte; solo, es huerfano.
     for archivo_texto, nombre, plataforma in (
-            ("redes-comentarios.json", "redes", "instagram"),):
+            ("redes-comentarios.json", "redes", "instagram"),
+            ("tiktok-comentarios.json", "tiktok", "tiktok")):
         ruta_texto = os.path.join(dir_efimero, archivo_texto)
         if not os.path.exists(ruta_texto):
             continue

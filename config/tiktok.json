@@ -1,0 +1,28 @@
+{
+ "nota": "Búsquedas en TikTok de las que se cosechan videos y comentarios, vía Apify (clockworks~tiktok-scraper para los videos, clockworks~tiktok-comments-scraper para los comentarios) y SIN sesión. A diferencia de config/instagram.json, aquí la fuente es una CONSULTA y no una cuenta verificada: los videos vienen de cualquier creador que TikTok considere relevante. Por eso ninguna búsqueda lleva `zona` (el validador lo rechaza): la zona de cada video sale de lo que nombra su pie, con el mismo gacetero que las notas de prensa (pulso/zonas.py). Un video que nombra Tijuana va a Tijuana; uno que nombra Hermosillo se descarta; uno que no nombra lugar queda `nacional` y solo se ve en la vista de región.",
+
+ "aviso_identidad": "Se publica el @handle del CREADOR del video como fuente (la URL del video ya lo trae, y es quien decidió publicar). Quien COMENTA sigue anónimo: uniqueId, uid, avatar y cid se tiran al ingerir y no llegan ni al cache; las @menciones dentro del texto se enmascaran al publicar. Decisión del cliente del 8 de septiembre de 2026.",
+
+ "cosecha": {
+  "nota": "Dos pasadas pagadas, como en Instagram: videos por búsqueda y luego comentarios por video. `filtro_fecha` (ALL_TIME | PAST_24_HOURS | PAST_WEEK | PAST_MONTH | LAST_3_MONTHS | LAST_6_MONTHS) y `orden` (MOST_RELEVANT | MOST_LIKED | LATEST) son filtros COBRADOS del actor y solo valen con searchSection /video. Los valores salieron de un 400 del propio actor: su ficha pública solo muestra un ejemplo, y la primera versión de este archivo traía YESTERDAY, copiado de la interfaz de TikTok, que el actor rechazó. La ventana de `ventana_horas` se impone igual en derivar() sobre la hora exacta de publicación; el filtro del actor solo recorta lo que se factura. `presupuesto_resultados` es el tope de ESTE comando, no del cron: cada verbo construye su propio Presupuesto. Costo real: el actor de comentarios cobra ~5 USD por 1,000 resultados, así que 30 videos × 30 comentarios ≈ 4.50 USD en la primera corrida del día; las otras tres del cron recortan por vistos.json.",
+  "videos_por_busqueda": 30,
+  "comentarios_por_video": 30,
+  "dias_entre_cosechas": 3,
+  "ventana_horas": 24,
+  "filtro_fecha": "PAST_24_HOURS",
+  "orden": "MOST_RELEVANT",
+  "presupuesto_resultados": 1000
+ },
+
+ "busquedas": [
+  {
+   "id": "tk_tijuana_noticias",
+   "nombre": "Tijuana noticias",
+   "consulta": "tijuana noticias",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-08",
+   "nota": "La búsqueda que pidió el cliente el 8 de septiembre de 2026. `idioma` es el del modelo de tono y sale de aquí, nunca del texto ni del campo textLanguage del actor. `verificado` es la fecha del primer `--probar` que devolvió videos con zona y título razonables: el 8 de septiembre de 2026 trajo tres videos de las últimas tres horas, los tres con zona Tijuana por su pie, de @ksdy50tv, @notisaid11 y @canal66tv (sí, un medio de Mexicali hablando de Tijuana: la zona la da el pie, no el creador)."
+  }
+ ]
+}
