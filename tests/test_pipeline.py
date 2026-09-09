@@ -8,6 +8,7 @@ Dos propiedades importan mas que los conteos:
 """
 
 import copy
+import hashlib
 import json
 import os
 import tempfile
@@ -15,6 +16,7 @@ import unittest
 from unittest.mock import patch
 
 from pulso import VERSION
+from pulso.busquedas import CLAVES_DETALLE
 from pulso.pipeline import correr
 from pulso.roster import Roster
 from pulso.sentimiento import AnalizadorFalso
@@ -44,8 +46,9 @@ class BasePipeline(unittest.TestCase):
     RETENCION_AMPLIA = 400
 
     def correr_en(self, destino, ahora=AHORA, metodo="ninguno",
-                  retener_dias=RETENCION_AMPLIA, analizador=None):
+                  retener_dias=RETENCION_AMPLIA, analizador=None, busquedas=None):
         return correr(
+            busquedas=busquedas,
             medios=self.medios,
             roster=self.roster,
             salida=destino,
@@ -395,6 +398,175 @@ class TestSitio(BasePipeline):
         self.assertIn("data/notas.json", archivos)
         self.assertIn("data/estado.json", archivos)
         self.assertIn("config/roster.json", archivos)
+
+
+class TestBusquedas(BasePipeline):
+    """Cosecha de Google Noticias dentro del pipeline. Nunca toca la red."""
+
+    DOC = {
+        "publicadores": {"oem.com.mx": "soltij"},
+        "busquedas": [{"id": "bq_sanquintin", "nombre": "San Quintin", "q": "x",
+                       "idioma": "es", "activo": True},
+                      {"id": "bq_frontera_en", "nombre": "Frontera", "q": "y",
+                       "idioma": "en", "activo": True}],
+    }
+
+    def cosecha_falsa(self, titulo, dominio="elvalledesq.example",
+                      bid="bq_sanquintin", fecha="Wed, 02 Sep 2026 14:00:00 GMT"):
+        """Un item ya resuelto, en la forma que devuelve busquedas.cosechar."""
+        fuente = "gn-" + hashlib.sha256(dominio.encode("utf-8")).hexdigest()[:12]
+        return {"medio": {"id": fuente, "nombre": dominio,
+                          "url": "https://" + dominio + "/", "zona": "estatal",
+                          "tipo": "busqueda"},
+                "item": {"titulo": titulo,
+                         "url": "https://news.google.com/rss/articles/CBM" + titulo[:4],
+                         "dominio": dominio, "fecha_cruda": fecha},
+                "origen": "busqueda_web", "descubierta_por": bid}
+
+    def correr_con(self, destino, items, ahora=AHORA, medios_rss=None, **kw):
+        """Corrida en modo red con LAS DOS fronteras de red sustituidas.
+
+        sin_red=False es lo unico que ejercita la rama de cosecha, pero
+        entonces fetch_medios tambien corre: si no se sustituye, cada prueba
+        sale a los 18 feeds de verdad. Las pruebas son siempre sin red.
+        """
+        salud = [{"id": b["id"], "nombre": b["nombre"],
+                  "url": "https://news.google.com/x", "metodo": "busqueda",
+                  "zona": "estatal", "estado": "ok", "obtenidas": len(items),
+                  "nuevas": 0, "ms": 0, "ultima_ok": ahora, "error": None,
+                  "detalle": dict.fromkeys(CLAVES_DETALLE, 0)}
+                 for b in self.DOC["busquedas"]]
+        resultados, salud_rss = medios_rss if medios_rss is not None else ([], [])
+        with patch("pulso.pipeline.fetch_medios",
+                   return_value=(resultados, salud_rss)):
+            with patch("pulso.pipeline.cosechar", return_value=(items, salud)):
+                return correr(medios=self.medios, roster=self.roster,
+                              salida=destino, sin_red=False, ahora=ahora,
+                              retener_dias=self.RETENCION_AMPLIA,
+                              busquedas=self.DOC, **kw)
+
+    def test_sin_red_emite_un_fallo_por_busqueda_y_no_toca_la_red(self):
+        destino = tempfile.mkdtemp()
+        with patch("pulso.pipeline.cosechar",
+                   side_effect=AssertionError("la red no se toca en modo corpus")):
+            self.correr_en(destino, busquedas=self.DOC)
+        salud = {s["id"]: s
+                 for s in leer(os.path.join(destino, "fuentes.json"))["fuentes"]}
+        for b in self.DOC["busquedas"]:
+            self.assertEqual(salud[b["id"]]["estado"], "fallo")
+            self.assertEqual(salud[b["id"]]["ms"], 0)
+            self.assertIn("sin red", salud[b["id"]]["error"])
+
+    def test_sin_busquedas_la_salida_es_la_de_siempre(self):
+        con, sin = tempfile.mkdtemp(), tempfile.mkdtemp()
+        self.correr_en(con, busquedas=None)
+        self.correr_en(sin)
+        self.assertEqual(leer(os.path.join(con, "notas.json")),
+                         leer(os.path.join(sin, "notas.json")))
+
+    def test_la_nota_de_busqueda_no_queda_con_el_dominio_de_google(self):
+        destino = tempfile.mkdtemp()
+        self.correr_con(destino,
+                        [self.cosecha_falsa("Productores del valle piden agua")])
+        notas = leer(os.path.join(destino, "notas.json"))["notas"]
+        bq = [n for n in notas if n.get("origen") == "busqueda_web"]
+        self.assertEqual(len(bq), 1)
+        self.assertEqual(bq[0]["dominio"], "elvalledesq.example")
+        self.assertEqual(bq[0]["zona_medio"], "estatal")
+
+    def test_nuevas_se_cuenta_contra_la_busqueda_no_contra_la_fuente(self):
+        destino = tempfile.mkdtemp()
+        self.correr_con(destino,
+                        [self.cosecha_falsa("Productores del valle piden agua")])
+        salud = {s["id"]: s
+                 for s in leer(os.path.join(destino, "fuentes.json"))["fuentes"]}
+        self.assertEqual(salud["bq_sanquintin"]["nuevas"], 1)
+
+    def test_ningun_feed_reporta_mas_nuevas_que_obtenidas(self):
+        # Una nota que Google encuentra de un medio del catalogo tiene fuente
+        # 'soltij'; contar su 'nueva' ahi inflaria las de ese feed por encima
+        # de lo que el feed mismo trajo, que es un numero que no se puede leer.
+        destino = tempfile.mkdtemp()
+        item = self.cosecha_falsa("Obras en el bulevar avanzan")
+        item["medio"] = {"id": "soltij", "nombre": "El Sol de Tijuana",
+                         "url": "https://www.elsoldetijuana.com.mx/",
+                         "zona": "Tijuana", "tipo": "rss"}
+        item["item"]["dominio"] = "elsoldetijuana.com.mx"
+        # El feed de El Sol responde en esta corrida, pero SIN esa nota: solo
+        # Google la trajo. Su renglon tiene obtenidas 0.
+        sol = [m for m in self.medios if m["id"] == "soltij"][0]
+        salud_rss = [{"id": "soltij", "nombre": sol["nombre"], "url": sol["url"],
+                      "metodo": "rss", "zona": sol["zona"], "estado": "ok",
+                      "obtenidas": 0, "nuevas": 0, "ms": 1, "ultima_ok": AHORA,
+                      "error": None}]
+        self.correr_con(destino, [item], medios_rss=([], salud_rss))
+        filas = [s for s in leer(os.path.join(destino, "fuentes.json"))["fuentes"]
+                 if s.get("metodo") == "rss"]
+        self.assertTrue(filas)
+        for s in filas:
+            self.assertLessEqual(s["nuevas"], s["obtenidas"], s["id"])
+
+    def test_la_copia_curada_gana_a_la_de_google(self):
+        # La misma nota por el feed de Zeta y por Google: sobrevive una sola,
+        # con el enlace real del medio y sin marca de origen.
+        destino = tempfile.mkdtemp()
+        titulo = "Reportan apagon en la zona centro de Tijuana"
+        zeta = [m for m in self.medios if m["id"] == "zeta"][0]
+        item = self.cosecha_falsa(titulo, dominio="zetatijuana.com")
+        item["medio"] = dict(zeta)
+        resultados = [(zeta, [{"titulo": titulo,
+                               "url": "https://zetatijuana.com/nota",
+                               "fecha_cruda": "Wed, 02 Sep 2026 14:00:00 GMT"}])]
+        salud_rss = [{"id": zeta["id"], "nombre": zeta["nombre"], "url": zeta["url"],
+                      "metodo": "rss", "zona": zeta["zona"], "estado": "ok",
+                      "obtenidas": 1, "nuevas": 0, "ms": 1, "ultima_ok": AHORA,
+                      "error": None}]
+        self.correr_con(destino, [item], medios_rss=(resultados, salud_rss))
+        notas = [n for n in leer(os.path.join(destino, "notas.json"))["notas"]
+                 if n["titulo"] == titulo]
+        self.assertEqual(len(notas), 1)
+        self.assertEqual(notas[0]["url"], "https://zetatijuana.com/nota")
+        self.assertNotIn("origen", notas[0])
+
+    def test_el_idioma_de_una_fuente_sintetica_sobrevive_a_la_segunda_corrida(self):
+        # En la corrida 1 el medio sintetico existe en memoria; en la 2 ya no,
+        # y sin recuperar el idioma desde 'descubierta_por' el modelo espanol
+        # etiquetaria un titular en ingles y devolveria una etiqueta plausible,
+        # no un error. Falla SOLO en la segunda corrida, que es exactamente
+        # como se escondio meses la falla original de los medios de San Diego.
+        destino = tempfile.mkdtemp()
+        item = self.cosecha_falsa("Sewage spill closes Imperial Beach shoreline",
+                                  dominio="borderreport.example",
+                                  bid="bq_frontera_en")
+        self.correr_con(destino, [item], metodo="modelo", analizador=AnalizadorFalso())
+
+        estado = self.correr_con(destino, [], ahora=DESPUES,
+                                 metodo="modelo", analizador=AnalizadorFalso())
+        notas = [n for n in leer(os.path.join(destino, "notas.json"))["notas"]
+                 if n.get("origen") == "busqueda_web"]
+        self.assertEqual(len(notas), 1)
+        self.assertIsNone(notas[0]["postura"],
+                          "el modelo espanol etiqueto un titular en ingles")
+        self.assertGreaterEqual(estado["notas_sin_modelo_idioma"], 1)
+
+    def test_el_detalle_reporta_cuantas_no_llegan_al_muro(self):
+        destino = tempfile.mkdtemp()
+        # Un titular que no nombra ningun lugar: alcance nacional, zonas [].
+        self.correr_con(destino, [self.cosecha_falsa("Suben los precios del gas")])
+        salud = {s["id"]: s
+                 for s in leer(os.path.join(destino, "fuentes.json"))["fuentes"]}
+        self.assertEqual(salud["bq_sanquintin"]["detalle"]["notas"], 1)
+        self.assertEqual(salud["bq_sanquintin"]["detalle"]["sin_zona"], 1)
+
+    def test_dos_corridas_con_busquedas_dan_bytes_identicos(self):
+        uno, dos = tempfile.mkdtemp(), tempfile.mkdtemp()
+        items = [self.cosecha_falsa("Productores del valle piden agua")]
+        self.correr_con(uno, items)
+        self.correr_con(dos, items)
+        for archivo in ("notas.json", "temas.json"):
+            with open(os.path.join(uno, archivo), encoding="utf-8") as a:
+                with open(os.path.join(dos, archivo), encoding="utf-8") as b:
+                    self.assertEqual(a.read(), b.read(), archivo)
 
 
 if __name__ == "__main__":

@@ -48,10 +48,18 @@ def fetch_rss(url, timeout=15):
 
     salida = []
     for item in raiz.iter("item"):                    # RSS 2.0
+        origen = item.find("source")
         salida.append({
             "titulo": _texto(item, "title"),
             "url": _texto(item, "link"),
             "fecha_cruda": _texto(item, "pubDate") or _texto(item, _DC + "date"),
+            # <source> es RSS 2.0 de toda la vida -- 'el canal del que viene
+            # este item' -- no una extension de Google. Casi ningun feed del
+            # catalogo lo trae y estas dos claves quedan vacias sin estorbar.
+            # El de Google Noticias lo trae en todos, y es el UNICO dato que
+            # dice de que medio es la nota: su <link> es un redirector propio.
+            "fuente_texto": _texto(item, "source"),
+            "fuente_url": (origen.get("url") or "").strip() if origen is not None else "",
         })
     for entry in raiz.iter(_ATOM + "entry"):          # Atom 1.0
         enlace = entry.find(_ATOM + "link")

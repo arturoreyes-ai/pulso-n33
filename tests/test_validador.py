@@ -13,6 +13,7 @@ from datetime import date
 from pulso.normalizar import id_nota
 from pulso.roster import Roster
 from pulso.validador import (
+    validar_busquedas,
     validar_estado,
     validar_fuentes,
     validar_indicadores,
@@ -45,8 +46,107 @@ class TestConfigPublicada(unittest.TestCase):
         _, avisos = validar_roster(leer("config/roster.json"), hoy=HOY)
         self.assertEqual([a for a in avisos if "vencido" in a], [])
 
+    def test_busquedas_sin_errores(self):
+        errores, _ = validar_busquedas(leer("config/busquedas.json"),
+                                       leer("config/medios.json")["medios"])
+        self.assertEqual(errores, [])
+
     def test_todo_junto(self):
         errores, _ = validar_todo("config", "data", hoy=HOY)
+        self.assertEqual(errores, [])
+
+
+class TestBusquedasRotas(unittest.TestCase):
+    def setUp(self):
+        self.datos = leer("config/busquedas.json")
+        self.medios = leer("config/medios.json")["medios"]
+
+    def validar(self):
+        return validar_busquedas(self.datos, self.medios)[0]
+
+    def test_id_sin_prefijo(self):
+        self.datos["busquedas"][0]["id"] = "sanquintin"
+        self.assertTrue(any("'id' invalido" in e for e in self.validar()))
+
+    def test_id_que_choca_con_un_medio(self):
+        # Medios y busquedas escriben en data/fuentes[].id: un id repetido
+        # haria que una pisara el registro de salud de la otra.
+        self.medios.append({"id": "bq_sanquintin", "nombre": "X",
+                            "url": "https://x.mx/", "zona": "Tijuana",
+                            "activo": False})
+        self.assertTrue(any("choca con un medio" in e for e in self.validar()))
+
+    def test_when_dentro_de_la_consulta(self):
+        self.datos["busquedas"][0]["q"] = "san quintin when:7d"
+        self.assertTrue(any("when:" in e for e in self.validar()))
+
+    def test_ventana_mal_formada(self):
+        self.datos["busquedas"][0]["ventana"] = "7 dias"
+        self.assertTrue(any("'ventana' invalida" in e for e in self.validar()))
+
+    def test_una_busqueda_no_lleva_zona(self):
+        # Una zona declarada que llegue a zona_medio le acredita esa zona a
+        # todo titular que no nombre ningun lugar: el error de El Imparcial y
+        # Hermosillo con otro disfraz.
+        self.datos["busquedas"][0]["zona"] = "Tijuana"
+        self.assertTrue(any("no lleva 'zona'" in e for e in self.validar()))
+
+    def test_publicador_hacia_un_medio_inexistente(self):
+        self.datos["publicadores"]["ejemplo.mx"] = "noexiste"
+        self.assertTrue(any("no es un medio" in e for e in self.validar()))
+
+    def test_activo_no_booleano(self):
+        self.datos["busquedas"][0]["activo"] = "si"
+        self.assertTrue(any("'activo'" in e for e in self.validar()))
+
+    def test_idioma_desconocido(self):
+        self.datos["busquedas"][0]["idioma"] = "fr"
+        self.assertTrue(any("'idioma'" in e for e in self.validar()))
+
+    def test_sin_publicadores_es_aviso_no_error(self):
+        del self.datos["publicadores"]
+        errores, avisos = validar_busquedas(self.datos, self.medios)
+        self.assertEqual(errores, [])
+        self.assertTrue(any("publicadores" in a for a in avisos))
+
+
+class TestFuentesDeBusqueda(unittest.TestCase):
+    def fila(self, **cambios):
+        base = {"id": "bq_sanquintin", "nombre": "San Quintin",
+                "url": "https://news.google.com/rss/search?q=x",
+                "metodo": "busqueda", "zona": "estatal", "estado": "ok",
+                "obtenidas": 3, "nuevas": 1, "ms": 12, "ultima_ok": None,
+                "error": None,
+                "detalle": {"items": 5, "sin_publicador": 0, "sin_fecha": 0,
+                            "fuera_de_ventana": 2, "sin_sufijo": 0,
+                            "resueltas": 1, "sinteticas": 2, "recortadas": 0,
+                            "notas": 3, "sin_zona": 1}}
+        base.update(cambios)
+        return base
+
+    def doc(self, filas):
+        return {"esquema": 1, "generado": "2026-09-03T18:00:00+00:00",
+                "fuentes": filas}
+
+    def test_metodo_busqueda_es_valido(self):
+        errores, _ = validar_fuentes(self.doc([self.fila()]))
+        self.assertEqual(errores, [])
+
+    def test_detalle_con_conteo_negativo(self):
+        fila = self.fila()
+        fila["detalle"]["sinteticas"] = -1
+        errores, _ = validar_fuentes(self.doc([fila]))
+        self.assertTrue(any("detalle" in e for e in errores))
+
+    def test_falta_el_renglon_de_una_busqueda_activa(self):
+        # Una busqueda que se saltara en silencio no dejaria rastro sin esto.
+        errores, _ = validar_fuentes(
+            self.doc([]), busquedas=[{"id": "bq_sanquintin", "activo": True}])
+        self.assertTrue(any("bq_sanquintin" in e for e in errores))
+
+    def test_una_busqueda_apagada_no_exige_renglon(self):
+        errores, _ = validar_fuentes(
+            self.doc([]), busquedas=[{"id": "bq_sanquintin", "activo": False}])
         self.assertEqual(errores, [])
 
 

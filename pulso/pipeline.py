@@ -26,6 +26,7 @@ from .archivo import (
     para_temas,
     particionar,
 )
+from .busquedas import activas as busquedas_activas, cosechar, salud_sin_red
 from .clasificar import clasificar_lote, sin_idioma
 from .delegaciones import delegaciones_en
 from .descubrimiento import descubrir
@@ -112,7 +113,11 @@ def _nota(medio, item, capturado):
         "id": id_nota(medio["id"], titulo),
         "titulo": titulo,
         "url": url,
-        "dominio": dominio(url) or dominio(medio["url"]),
+        # El cosechador puede mandar el dominio ya resuelto. Hace falta para
+        # las busquedas: su enlace es el redirector de Google, asi que
+        # dominio(url) daria 'news.google.com' en TODAS y el muro rotularia
+        # ahi cada nota en vez de en el medio que la publico.
+        "dominio": item.get("dominio") or dominio(url) or dominio(medio["url"]),
         "fuente": medio["id"],
         "zona_medio": medio.get("zona"),
         # Se llenan al resolver: dependen del roster y del gazetero.
@@ -160,11 +165,15 @@ def _desde_corpus(corpus, medios, capturado):
 
 def correr(*, medios, roster, salida="data", sin_red=False, corpus=None,
            ahora=None, metodo="ninguno", retener_dias=RETENCION_DIAS,
-           analizador=None, descubrimiento_web=False):
+           analizador=None, descubrimiento_web=False, busquedas=None):
     """Corre el pipeline completo y escribe la ventana, el archivo y los paneles.
 
     `analizador` es el clasificador de tono para metodo='modelo'; None carga
     pysentimiento. Las pruebas pasan un AnalizadorFalso.
+
+    `busquedas` es el documento entero de config/busquedas.json. None significa
+    no cosechar: asi una corrida sin ese archivo se comporta igual que antes de
+    que existiera.
     """
     ahora = ahora or ahora_utc()
     # 'hoy' sale de 'ahora', no de date.today(). Antes daba igual porque solo
@@ -183,6 +192,14 @@ def correr(*, medios, roster, salida="data", sin_red=False, corpus=None,
     discovery_health = None
     discovery_items = []
     medios_runtime = list(medios)
+    activas_bq = busquedas_activas(busquedas)
+
+    # De que RENGLON DE SALUD salio cada nota, que no siempre es su 'fuente'.
+    # Una nota que Google encontro de un medio del catalogo tiene fuente 'zeta'
+    # pero la cosecho la busqueda 'bq_...', y contar su 'nueva' contra 'zeta'
+    # inflaria las nuevas de un feed por encima de sus propias obtenidas.
+    # setdefault y no asignacion: gana el primero que la vio, igual que dedup.
+    cosechado_por = {}
     if sin_red:
         modo = "corpus"
         # Contra el catalogo COMPLETO, no solo los activos: 'activo' decide si
@@ -204,15 +221,19 @@ def correr(*, medios, roster, salida="data", sin_red=False, corpus=None,
         por_fuente = {}
         for n in frescas:
             por_fuente.setdefault(n["fuente"], []).append(n)
+            cosechado_por.setdefault(n["id"], n["fuente"])
         for s in salud:
             s["obtenidas"] = len(por_fuente.get(s["id"], []))
+        salud += salud_sin_red(activas_bq, ahora, salud_previa)
     else:
         modo = "red"
         resultados, salud = fetch_medios(activos, ahora)
         frescas = []
         for medio, items in resultados:
             for item in items:
-                frescas.append(_nota(medio, item, ahora))
+                n = _nota(medio, item, ahora)
+                frescas.append(n)
+                cosechado_por.setdefault(n["id"], medio["id"])
 
         if descubrimiento_web:
             discovery_items, discovery_health = descubrir(ahora=ahora)
@@ -222,22 +243,64 @@ def correr(*, medios, roster, salida="data", sin_red=False, corpus=None,
                 item = dict(descubrimiento["item"])
                 item["origen"] = descubrimiento["origen"]
                 item["descubierta_por"] = descubrimiento["descubierta_por"]
-                frescas.append(_nota(medio, item, ahora))
+                n = _nota(medio, item, ahora)
+                frescas.append(n)
+                cosechado_por.setdefault(n["id"], "descubrimiento-web")
 
-    # Una copia curada gana a una URL descubierta. GDELT puede devolver el
-    # mismo articulo con parametros distintos o un titulo ligeramente editado.
-    curadas = list(frescas[:len(frescas) - len(discovery_items)]) if discovery_items else list(frescas)
-    if discovery_items:
+        if activas_bq:
+            items_bq, salud_bq = cosechar(
+                activas_bq, medios, ahora=ahora,
+                alias=(busquedas or {}).get("publicadores"))
+            for hallazgo in items_bq:
+                # A diferencia del descubrimiento, el medio sintetico NO entra
+                # a medios_runtime. Si entrara, la corrida que lo descubre
+                # resolveria su zona e idioma desde el catalogo en memoria y la
+                # SIGUIENTE no, porque ya no estaria: mismo dato, dos
+                # comportamientos. El idioma se recupera mas abajo por la
+                # busqueda que lo trajo, que si es persistente.
+                item = dict(hallazgo["item"])
+                item["origen"] = hallazgo["origen"]
+                item["descubierta_por"] = hallazgo["descubierta_por"]
+                n = _nota(hallazgo["medio"], item, ahora)
+                frescas.append(n)
+                cosechado_por.setdefault(n["id"], hallazgo["descubierta_por"])
+            salud += salud_bq
+
+    # Una copia curada gana a una traida de fuera. GDELT devuelve el mismo
+    # articulo con parametros distintos o el titulo ligeramente editado;
+    # Google Noticias lo devuelve SIEMPRE con otra URL, porque su <link> es un
+    # redirector propio, asi que para las busquedas el cruce por URL no empata
+    # nunca y el unico posible es por titular.
+    #
+    # El corte va por 'origen' y no por posicion: con dos fuentes anexadas, el
+    # rebanado por longitud dejaba de senalar donde empiezan las traidas.
+    curadas = [n for n in frescas if not n.get("origen")]
+    traidas = [n for n in frescas if n.get("origen")]
+    if traidas:
         urls = {url_canonica(n.get("url")) for n in curadas}
-        titulos = {(fold(n.get("titulo")), dominio(n.get("url"))) for n in curadas}
-        frescas = curadas + [n for n in frescas[len(curadas):]
-                             if url_canonica(n.get("url")) not in urls
-                             and (fold(n.get("titulo")), dominio(n.get("url"))) not in titulos]
+        pares = {(fold(n.get("titulo")), n.get("dominio")) for n in curadas}
+        # Solo para busqueda, y por titular a secas. Es la unica defensa contra
+        # los diarios de grupo: Google rotula a El Sol de Tijuana como
+        # 'oem.com.mx', que no es su dominio, asi que el par (titular, dominio)
+        # no empata y la nota saldria dos veces. Se mira tambien lo ya
+        # guardado, para cerrar el caso entre corridas: Google encuentra el
+        # titular antes de que el feed del propio medio lo publique.
+        # Cuesta tirar el titular identico de OTRO medio -- pasa con los cables
+        # de OEM -- y se acepta: la copia de Google es peor que cualquier copia
+        # curada, con enlace redirigido y sin la zona del catalogo.
+        solo_titulo = {fold(n.get("titulo")) for n in curadas}
+        solo_titulo |= {fold(n.get("titulo")) for n in previas.values()
+                        if n.get("origen") != "busqueda_web"}
+        frescas = curadas + [
+            n for n in traidas
+            if url_canonica(n.get("url")) not in urls
+            and (fold(n.get("titulo")), n.get("dominio")) not in pares
+            and not (n.get("origen") == "busqueda_web"
+                     and fold(n.get("titulo")) in solo_titulo)]
 
     frescas = dedup(frescas)
 
     if discovery_health is not None:
-        discovery_health["nuevas"] = sum(1 for n in frescas if n.get("origen") == "descubrimiento_web")
         previa = salud_previa.get("descubrimiento-web") or {}
         if discovery_health["estado"] == "fallo":
             discovery_health["ultima_ok"] = previa.get("ultima_ok")
@@ -245,12 +308,19 @@ def correr(*, medios, roster, salida="data", sin_red=False, corpus=None,
 
     # Fusion por id: el 'capturado' original manda, asi que una nota no
     # cambia de fecha de captura por seguir apareciendo en el feed.
-    fusionadas, nuevas_por_fuente = dict(previas), {}
+    fusionadas, nuevas_por_salud = dict(previas), {}
     for n in frescas:
         vieja = fusionadas.get(n["id"])
         if vieja is None:
             fusionadas[n["id"]] = n
-            nuevas_por_fuente[n["fuente"]] = nuevas_por_fuente.get(n["fuente"], 0) + 1
+            clave = cosechado_por.get(n["id"], n["fuente"])
+            nuevas_por_salud[clave] = nuevas_por_salud.get(clave, 0) + 1
+        elif n.get("origen") == "busqueda_web" and not vieja.get("origen"):
+            # Ya esta la copia del feed del propio medio. La de Google solo
+            # aporta el enlace redirigido, y su token puede rotar: dejarla
+            # ganar cambiaria 'url' en corridas sin novedad, y notas.json
+            # existe justo para no cambiar cuando el contenido no cambia.
+            continue
         else:
             n["capturado"] = vieja.get("capturado") or n["capturado"]
             # La postura tambien se arrastra: clasificar_lote decide si la
@@ -289,6 +359,27 @@ def correr(*, medios, roster, salida="data", sin_red=False, corpus=None,
     # entrenado con tuits en espanol.
     idioma_por_fuente = {m["id"]: m.get("idioma", IDIOMA_OMISION)
                          for m in medios_runtime}
+    # Las fuentes sinteticas de busqueda no estan en el catalogo, asi que su
+    # idioma se recupera de la busqueda que las trajo: eso si vive en
+    # config/busquedas.json y la nota lo guarda en 'descubierta_por'. Sin esto
+    # falla la corrida SIGUIENTE a la que las descubrio, no la primera: el
+    # medio sintetico ya no esta en memoria, el idioma cae a la omision y el
+    # modelo espanol etiqueta texto en ingles. Es la falla de los medios de San
+    # Diego otra vez, y otra vez del tipo que no truena: un modelo de
+    # sentimiento con texto en otro idioma devuelve una etiqueta plausible, no
+    # un error.
+    #
+    # El recorrido va ordenado por id: si dos busquedas de distinto idioma
+    # encuentran al mismo publicador, gana siempre la misma y no el orden en
+    # que se hayan fusionado.
+    idioma_por_busqueda = {b["id"]: b.get("idioma", IDIOMA_OMISION)
+                           for b in (busquedas or {}).get("busquedas", [])}
+    for n in sorted(fusionadas.values(), key=lambda x: x["id"]):
+        if n.get("origen") != "busqueda_web" or n["fuente"] in idioma_por_fuente:
+            continue
+        idi = idioma_por_busqueda.get(n.get("descubierta_por"))
+        if idi:
+            idioma_por_fuente[n["fuente"]] = idi
     clasificar_lote(fusionadas.values(), metodo, analizador,
                     idiomas=idioma_por_fuente)
     if metodo == "ninguno":
@@ -301,8 +392,26 @@ def correr(*, medios, roster, salida="data", sin_red=False, corpus=None,
             getattr(analizador, "idioma", IDIOMA_OMISION),
             idioma_por_fuente)
 
+    # Cuanto de cada busqueda llega de verdad al muro. web/src/lib/muro/
+    # indexar.ts descarta las notas con zonas == []; medido sobre la ventana
+    # del 7 de septiembre de 2026, los medios de zona 'estatal' se quedan sin
+    # zona en 441 de 525 notas, y una fuente sintetica de busqueda es
+    # 'estatal' por definicion. Se publica en la banda de salud en vez de
+    # dejar que el operador lo deduzca de un archivo que crece.
+    notas_bq, sin_zona_bq = {}, {}
+    for n in fusionadas.values():
+        if n.get("origen") != "busqueda_web":
+            continue
+        b = n.get("descubierta_por")
+        notas_bq[b] = notas_bq.get(b, 0) + 1
+        if not n.get("zonas"):
+            sin_zona_bq[b] = sin_zona_bq.get(b, 0) + 1
+
     for s in salud:
-        s["nuevas"] = nuevas_por_fuente.get(s["id"], 0)
+        s["nuevas"] = nuevas_por_salud.get(s["id"], 0)
+        if s.get("metodo") == "busqueda" and isinstance(s.get("detalle"), dict):
+            s["detalle"]["notas"] = notas_bq.get(s["id"], 0)
+            s["detalle"]["sin_zona"] = sin_zona_bq.get(s["id"], 0)
         if s["estado"] == "fallo" and s.get("ultima_ok") is None:
             # Arrastrar el ultimo exito: es lo que lee la alarma de feed
             # muerto por 24 h (docs/PLAN.md seccion 8).
@@ -385,7 +494,7 @@ def correr(*, medios, roster, salida="data", sin_red=False, corpus=None,
         "notas_archivadas": indice["total"],
         "ventana_dias": retener_dias,
         "archivos": len(indice["meses"]),
-        "notas_nuevas": sum(nuevas_por_fuente.values()),
+        "notas_nuevas": sum(nuevas_por_salud.values()),
         "notas_region": len(de_region),
         # Notas sin postura por no haber modelo de su idioma. Si uno de
         # cada nueve titulares no se puede etiquetar, se dice.

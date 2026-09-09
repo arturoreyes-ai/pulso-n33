@@ -43,12 +43,18 @@ def cmd_correr(args):
     roster = Roster.desde_archivo(os.path.join(args.config, "roster.json"))
     medios = _leer(os.path.join(args.config, "medios.json"))["medios"]
     corpus = _leer(args.corpus) if args.sin_red else None
+    # Opcional: un checkout sin el archivo tiene que seguir corriendo, igual
+    # que data/ ausente no es error para el validador. No hay bandera para
+    # apagarlo porque el interruptor por renglon ya existe: 'activo': false.
+    ruta_bq = os.path.join(args.config, "busquedas.json")
+    busquedas = _leer(ruta_bq) if os.path.exists(ruta_bq) else None
 
     estado = correr(
         medios=medios,
         roster=roster,
         salida=args.salida,
         sin_red=args.sin_red,
+        busquedas=busquedas,
         corpus=corpus,
         metodo=args.metodo,
         retener_dias=args.retener_dias,
@@ -257,8 +263,7 @@ def cmd_apify(args):
 def cmd_validar(args):
     from .validador import resumen, validar_todo
 
-    errores, avisos = validar_todo(args.config, args.datos,
-                                   dir_efimero=getattr(args, "efimero", "efimero"))
+    errores, avisos = validar_todo(args.config, args.datos)
     for a in avisos:
         print("aviso: {}".format(a))
     for e in errores:
@@ -406,8 +411,6 @@ def main(argv=None):
 
     v = sub.add_parser("validar", help="valida config/ y data/")
     v.add_argument("--datos", default="data")
-    v.add_argument("--efimero", default="efimero",
-                   help="carpeta del texto de comentarios publicado; se valida si existe")
     v.set_defaults(fn=cmd_validar)
 
     s = sub.add_parser("sitio", help="arma _site/ para publicar en Pages")
