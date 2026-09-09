@@ -8,11 +8,11 @@ import type { DocIndicadores, PanelSesnsp } from "@/lib/datos/tipos";
 import { dolares, nombreMes, numero, pesos } from "@/lib/dominio/formato";
 import * as F from "@/lib/dominio/frases";
 import { ZIPS_FRONTERA, claveShf, periodoLegible } from "@/lib/dominio/indicadores";
+import { ruta } from "@/lib/dominio/secciones";
 import {
   MUNICIPIOS_BC,
   NOMBRE_CORTO,
   ZONAS_RUTA,
-  rutaDeZona,
   type ZonaRuta,
 } from "@/lib/dominio/zonas";
 import { GRAFICAS } from "@/lib/graficas/registro";
@@ -30,7 +30,7 @@ function enlaceZona(nombre: string): ReactNode {
   if (!esZonaRuta(nombre)) return nombre;
   return (
     <Link
-      href={rutaDeZona(nombre)}
+      href={ruta(nombre, "indicadores")}
       className="transition-colors hover:text-chart-1-texto"
     >
       {NOMBRE_CORTO[nombre]}
@@ -109,9 +109,11 @@ function TarjetaCrimenZona({ panel, zona }: { panel: PanelSesnsp; zona: ZonaRuta
       ) : (
         <div className="mt-4 grid gap-6 sm:grid-cols-2">
           <ul>
+            {/* La llave es el MES, no la posicion: la identidad de la fila es
+                "enero", y el indice solo es donde cae hoy en el arreglo. */}
             {m.por_mes.map((v, i) => (
               <FilaConteo
-                key={i}
+                key={nombreMes(i)}
                 etiqueta={nombreMes(i)}
                 valor={
                   <span className="inline-flex items-baseline gap-3">
@@ -292,7 +294,7 @@ function Region({ I }: { I: Ind }) {
           <p className="mt-4 text-meta text-tinta-prosa">
             {sd.faltantes} De {numero(Object.keys(sd.zips).length)} códigos postales, aquí se
             muestran los de la franja fronteriza.{" "}
-            <Link href={rutaDeZona("San Diego")} className="text-tinta-dato underline decoration-tinta-inerte underline-offset-2 hover:decoration-tinta-prosa">
+            <Link href={ruta("San Diego", "indicadores")} className="text-tinta-dato underline decoration-tinta-inerte underline-offset-2 hover:decoration-tinta-prosa">
               Ver San Diego
             </Link>
             .
@@ -305,141 +307,195 @@ function Region({ I }: { I: Ind }) {
 
 /* ----------------------------------------------------------- municipio */
 
+/**
+ * Cinco tarjetas independientes, una por fuente.
+ *
+ * Cada una se guarda a si misma: `Municipio` era un solo componente con cinco
+ * ramas `X === undefined ? null : <Tarjeta>` y sus derivaciones intercaladas,
+ * asi que para cambiar la tarjeta de predial habia que leer las otras cuatro.
+ * Ahora la ausencia de una fuente se decide en el unico lugar que la usa.
+ */
+function TarjetaVivienda({
+  shf,
+  zona,
+  nombre,
+}: {
+  shf: Ind["shf"];
+  zona: ZonaRuta;
+  nombre: string;
+}) {
+  if (shf === undefined) return null;
+  const serie = shf.series[claveShf(zona)];
+  const bc = shf.series["Baja California"];
+  const nac = shf.series["Nacional"];
+  return (
+    <Tarjeta
+      titulo="Vivienda, variación anual"
+      fuente={shf.fuente}
+      periodo={periodoLegible(shf.periodo)}
+      aviso={shf.aviso}
+      className="md:col-span-4"
+    >
+      <ul>
+        <FilaConteo
+          etiqueta={nombre}
+          atenuada={serie === undefined}
+          valor={
+            serie === undefined ? (
+              <Hueco titulo="La SHF no publica índice para este municipio">sin dato</Hueco>
+            ) : (
+              <Signo v={serie.variacion_anual_pct} decimales={2} />
+            )
+          }
+        />
+        {bc === undefined ? null : (
+          <FilaConteo
+            etiqueta="Baja California, referencia"
+            valor={<Signo v={bc.variacion_anual_pct} decimales={2} />}
+          />
+        )}
+        {nac === undefined ? null : (
+          <FilaConteo
+            etiqueta="Nacional, referencia"
+            valor={<Signo v={nac.variacion_anual_pct} decimales={2} />}
+          />
+        )}
+      </ul>
+      <p className="mt-4 text-lectura text-tinta-prosa">
+        {F.fraseVivienda(serie, nombre, shf.periodo)}
+      </p>
+    </Tarjeta>
+  );
+}
+
+function TarjetaPredial({
+  predial,
+  zona,
+  nombre,
+}: {
+  predial: Ind["predial"];
+  zona: ZonaRuta;
+  nombre: string;
+}) {
+  if (predial === undefined) return null;
+  const m = predial.municipios[zona];
+  return (
+    <Tarjeta
+      titulo="Suelo, predial por cuenta"
+      fuente={predial.fuente}
+      periodo={predial.periodo}
+      aviso={predial.aviso}
+      className="md:col-span-4"
+    >
+      {m === undefined ? (
+        <Hueco titulo="Sin registro de predial para este municipio">sin dato</Hueco>
+      ) : (
+        <>
+          <p className="text-cifra tabular-nums text-tinta-titulo">
+            {pesos(m.por_cuenta_mxn)}{" "}
+            <span className="text-lectura">
+              <Signo v={m.variacion_anual_pct} />
+            </span>
+          </p>
+          <p className="mt-3 text-lectura text-tinta-prosa">
+            {F.frasePredial(m, nombre)} {numero(m.cuentas_pagadas)} cuentas pagadas,{" "}
+            {m.ciclos} ciclos de serie.
+          </p>
+        </>
+      )}
+    </Tarjeta>
+  );
+}
+
+function TarjetaPercepcion({
+  ensu,
+  zona,
+  nombre,
+}: {
+  ensu: Ind["ensu"];
+  zona: ZonaRuta;
+  nombre: string;
+}) {
+  if (ensu === undefined) return null;
+  const e = ensu.ciudades[zona];
+  // "Fuera de muestra" y "sin dato" no son lo mismo: la ENSU nunca muestreo
+  // estas ciudades, no es que este corte no las traiga.
+  const fueraDeMuestra = e === undefined || e.pct_inseguro === null;
+  return (
+    <Tarjeta
+      titulo="Percepción de inseguridad"
+      fuente={ensu.fuente}
+      periodo={periodoLegible(ensu.periodo)}
+      aviso={ensu.cobertura}
+      className="md:col-span-4"
+    >
+      <ul>
+        <FilaConteo
+          etiqueta={nombre}
+          atenuada={fueraDeMuestra}
+          valor={
+            e === undefined || e.pct_inseguro === null ? (
+              <Hueco titulo="La ENSU nunca ha muestreado esta ciudad">fuera de muestra</Hueco>
+            ) : (
+              `${F.decimal(e.pct_inseguro)}%`
+            )
+          }
+        />
+        <FilaConteo
+          etiqueta="Nacional"
+          valor={
+            ensu.nacional.pct_inseguro === null
+              ? "sin dato"
+              : `${F.decimal(ensu.nacional.pct_inseguro)}%`
+          }
+        />
+      </ul>
+      <p className="mt-4 text-lectura text-tinta-prosa">
+        {F.frasePercepcion(e, nombre, ensu.nacional.pct_inseguro, ensu.periodo)}
+      </p>
+    </Tarjeta>
+  );
+}
+
+function TarjetaOtrosMunicipios({
+  sesnsp,
+  zona,
+}: {
+  sesnsp: Ind["sesnsp"];
+  zona: ZonaRuta;
+}) {
+  if (sesnsp === undefined) return null;
+  return (
+    <Tarjeta
+      titulo="Otros municipios, delitos en el año"
+      fuente={sesnsp.fuente}
+      periodo={sesnsp.periodo}
+      aviso="Para contexto. Los totales no son per cápita: comparan volumen, no riesgo."
+      className="md:col-span-4"
+    >
+      <ul>
+        {/* Una sola pasada, con las dos razones de omitir un municipio juntas
+            y a la vista: es el de esta pagina, o el corte no lo trae. */}
+        {MUNICIPIOS_BC.map((z) => {
+          if (z === zona) return null;
+          const o = sesnsp.municipios[z];
+          if (o === undefined) return null;
+          return <FilaConteo key={z} etiqueta={enlaceZona(z)} valor={numero(o.total)} />;
+        })}
+      </ul>
+    </Tarjeta>
+  );
+}
+
 function Municipio({ I, zona }: { I: Ind; zona: ZonaRuta }) {
   const nombre = NOMBRE_CORTO[zona];
-  const shf = I.shf;
-  const predial = I.predial;
-  const sesnsp = I.sesnsp;
-  const ensu = I.ensu;
-
-  const serie = shf?.series[claveShf(zona)];
-  const bc = shf?.series["Baja California"];
-  const nac = shf?.series["Nacional"];
-  const m = predial?.municipios[zona];
-  const e = ensu?.ciudades[zona];
-
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
-      {shf === undefined ? null : (
-        <Tarjeta
-          titulo="Vivienda, variación anual"
-          fuente={shf.fuente}
-          periodo={periodoLegible(shf.periodo)}
-          aviso={shf.aviso}
-          className="md:col-span-4"
-        >
-          <ul>
-            <FilaConteo
-              etiqueta={nombre}
-              atenuada={serie === undefined}
-              valor={
-                serie === undefined ? (
-                  <Hueco titulo="La SHF no publica índice para este municipio">sin dato</Hueco>
-                ) : (
-                  <Signo v={serie.variacion_anual_pct} decimales={2} />
-                )
-              }
-            />
-            {bc === undefined ? null : (
-              <FilaConteo
-                etiqueta="Baja California, referencia"
-                valor={<Signo v={bc.variacion_anual_pct} decimales={2} />}
-              />
-            )}
-            {nac === undefined ? null : (
-              <FilaConteo
-                etiqueta="Nacional, referencia"
-                valor={<Signo v={nac.variacion_anual_pct} decimales={2} />}
-              />
-            )}
-          </ul>
-          <p className="mt-4 text-lectura text-tinta-prosa">
-            {F.fraseVivienda(serie, nombre, shf.periodo)}
-          </p>
-        </Tarjeta>
-      )}
-
-      {sesnsp === undefined ? null : <TarjetaCrimenZona panel={sesnsp} zona={zona} />}
-
-      {predial === undefined ? null : (
-        <Tarjeta
-          titulo="Suelo, predial por cuenta"
-          fuente={predial.fuente}
-          periodo={predial.periodo}
-          aviso={predial.aviso}
-          className="md:col-span-4"
-        >
-          {m === undefined ? (
-            <Hueco titulo="Sin registro de predial para este municipio">sin dato</Hueco>
-          ) : (
-            <>
-              <p className="text-cifra tabular-nums text-tinta-titulo">
-                {pesos(m.por_cuenta_mxn)}{" "}
-                <span className="text-lectura">
-                  <Signo v={m.variacion_anual_pct} />
-                </span>
-              </p>
-              <p className="mt-3 text-lectura text-tinta-prosa">
-                {F.frasePredial(m, nombre)} {numero(m.cuentas_pagadas)} cuentas pagadas,{" "}
-                {m.ciclos} ciclos de serie.
-              </p>
-            </>
-          )}
-        </Tarjeta>
-      )}
-
-      {ensu === undefined ? null : (
-        <Tarjeta
-          titulo="Percepción de inseguridad"
-          fuente={ensu.fuente}
-          periodo={periodoLegible(ensu.periodo)}
-          aviso={ensu.cobertura}
-          className="md:col-span-4"
-        >
-          <ul>
-            <FilaConteo
-              etiqueta={nombre}
-              atenuada={e === undefined || e.pct_inseguro === null}
-              valor={
-                e === undefined || e.pct_inseguro === null ? (
-                  <Hueco titulo="La ENSU nunca ha muestreado esta ciudad">fuera de muestra</Hueco>
-                ) : (
-                  `${F.decimal(e.pct_inseguro)}%`
-                )
-              }
-            />
-            <FilaConteo
-              etiqueta="Nacional"
-              valor={
-                ensu.nacional.pct_inseguro === null
-                  ? "sin dato"
-                  : `${F.decimal(ensu.nacional.pct_inseguro)}%`
-              }
-            />
-          </ul>
-          <p className="mt-4 text-lectura text-tinta-prosa">
-            {F.frasePercepcion(e, nombre, ensu.nacional.pct_inseguro, ensu.periodo)}
-          </p>
-        </Tarjeta>
-      )}
-
-      {sesnsp === undefined ? null : (
-        <Tarjeta
-          titulo="Otros municipios, delitos en el año"
-          fuente={sesnsp.fuente}
-          periodo={sesnsp.periodo}
-          aviso="Para contexto. Los totales no son per cápita: comparan volumen, no riesgo."
-          className="md:col-span-4"
-        >
-          <ul>
-            {MUNICIPIOS_BC.filter((z) => z !== zona).map((z) => {
-              const o = sesnsp.municipios[z];
-              if (o === undefined) return null;
-              return <FilaConteo key={z} etiqueta={enlaceZona(z)} valor={numero(o.total)} />;
-            })}
-          </ul>
-        </Tarjeta>
-      )}
+      <TarjetaVivienda shf={I.shf} zona={zona} nombre={nombre} />
+      {I.sesnsp === undefined ? null : <TarjetaCrimenZona panel={I.sesnsp} zona={zona} />}
+      <TarjetaPredial predial={I.predial} zona={zona} nombre={nombre} />
+      <TarjetaPercepcion ensu={I.ensu} zona={zona} nombre={nombre} />
+      <TarjetaOtrosMunicipios sesnsp={I.sesnsp} zona={zona} />
     </div>
   );
 }
@@ -487,7 +543,7 @@ function SanDiego({ I }: { I: Ind }) {
           municipios de Baja California y no aplican a San Diego. Para el lado
           mexicano de la garita,{" "}
           <Link
-            href={rutaDeZona("Tijuana")}
+            href={ruta("Tijuana", "indicadores")}
             className="text-tinta-titulo underline decoration-tinta-inerte underline-offset-2 hover:decoration-tinta-prosa"
           >
             ver Tijuana

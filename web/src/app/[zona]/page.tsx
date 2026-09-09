@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { Tablero } from "@/components/tablero";
-import { NOMBRE_CORTO, SLUGS, zonaDeSlug } from "@/lib/dominio/zonas";
+import { Pagina } from "@/components/paginas/pagina";
+import { metadatos } from "@/lib/dominio/metadatos";
+import { SLUGS, zonaDeSlug } from "@/lib/dominio/zonas";
 
 /**
- * Una pagina por zona: /tijuana, /mexicali, /ensenada, /rosarito, /tecate,
+ * La portada de una zona: /tijuana, /mexicali, /ensenada, /rosarito, /tecate,
  * /san-quintin, /san-felipe y /san-diego.
  *
  * La zona es un SEGMENTO DE RUTA y no un parametro de consulta ni un estado
@@ -13,6 +14,9 @@ import { NOMBRE_CORTO, SLUGS, zonaDeSlug } from "@/lib/dominio/zonas";
  * titulo, se puede compartir y marcar, y el boton de atras funciona. Las
  * islas de cliente reciben la zona como prop y filtran el mismo JSON, que SWR
  * ya tiene en cache al cambiar de zona.
+ *
+ * Las otras tres vistas de esta misma zona cuelgan de `[seccion]`, un nivel
+ * mas abajo.
  */
 
 interface Props {
@@ -29,14 +33,11 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const z = zonaDeSlug((await params).zona);
   if (z === null) return {};
-  return {
-    title: `${NOMBRE_CORTO[z]} · Pulso N33`,
-    description: `Precios, crimen, prensa y conversación en ${NOMBRE_CORTO[z]}, con la fuente y la salvedad de cada cifra.`,
-  };
+  return metadatos(z, null);
 }
 
 export default async function PaginaZona({ params }: Props) {
   const z = zonaDeSlug((await params).zona);
   if (z === null) notFound();
-  return <Tablero zona={z} />;
+  return <Pagina zona={z} vista={null} />;
 }

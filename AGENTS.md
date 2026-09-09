@@ -427,6 +427,20 @@ Tailwind v4, pnpm.
 - `next.config.ts` leaves `output` undefined on purpose, so route handlers and
   ISR stay available.
 - Typecheck with `pnpm --dir web tipos` (`next typegen && tsc --noEmit`).
+- **Routes are a grid of two axes: place x view.** The place is a zone slug
+  (`zonas.ts`); the view is `redes`, `indicadores`, `cobertura`, or the
+  portada, which has no segment (`secciones.ts`). Every route is one cell:
+  `/`, `/tijuana`, `/redes`, `/tijuana/redes`. Build every internal link with
+  `secciones.ts::ruta(zona, vista)` — that is what keeps the two axes
+  independent, so changing zone keeps the view and changing view keeps the
+  zone. Region sections are literal folders (`app/redes/`) beside `app/[zona]/`
+  because the root cannot hold two dynamic segments; a section named like a
+  zone slug would silently shadow that zone's page, and `RUTAS_SIN_COLISION`
+  in `secciones.ts` is the type-level guard that stops it compiling.
+- **The three social platforms share one page.** Instagram, TikTok and YouTube
+  are one view (`redes`) with a facet selector, not three sections. They are
+  the same question asked in three places, and only one panel mounts at a time
+  because each is an island that fetches its own JSON.
 - `sitio/` is the previous flat dashboard — plain HTML, CSS and JS, no build
   step — and is still what the workflow assembles. It is not dead code yet.
 

@@ -70,6 +70,13 @@ const ZONA_DE_SLUG = new Map<string, ZonaRuta>(ZONAS_RUTA.map((z) => [SLUG_DE_ZO
 
 export const zonaDeSlug = (s: string): ZonaRuta | null => ZONA_DE_SLUG.get(s) ?? null;
 
+/**
+ * La PORTADA de una zona. Para conservar la vista en la que esta el lector
+ * —de /tijuana/redes a /ensenada/redes— es `secciones.ts::ruta`, que es la
+ * misma funcion con el segundo eje. Esta se queda para los enlaces que
+ * significan "vete a esa zona" y no "cambia de zona": el muro y el panorama,
+ * que solo existen en la portada.
+ */
 export const rutaDeZona = (z: ZonaRuta | null) => (z === null ? "/" : `/${SLUG_DE_ZONA[z]}`);
 
 /** Como se le dice a la zona en una frase corta. */
