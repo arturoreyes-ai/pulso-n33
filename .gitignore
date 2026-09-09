@@ -9,3 +9,9 @@ __pycache__/
 # commit anterior. pulso/youtube.py purga esta carpeta en cada corrida.
 # Al repo solo entra data/conversacion.json, con metricas derivadas.
 cache/
+
+# Store local de pnpm. Aparecio al instalar el tablero y trae una COPIA del
+# arbol del proyecto bajo projects/<hash>/: package.json, tsconfig.json y todo
+# src/. O sea que sin esta linea, cada instalacion propone commitear un
+# segundo ejemplar del codigo, desfasado desde el primer edit.
+.pnpm-store/
