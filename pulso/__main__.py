@@ -86,6 +86,18 @@ def cmd_correr(args):
     return 0
 
 
+def cmd_comunicados(args):
+    from .comunicados import correr, leer_fuente
+    from .pipeline import ahora_utc
+    fuente = leer_fuente(os.path.join(args.config, "comunicados.json"))
+    datos = correr(fuente, args.salida, ahora_utc(), sin_red=args.sin_red)
+    print("comunicados: {} · {} titulares{}".format(
+        datos["estado"], len(datos["comunicados"]),
+        " · " + datos["error"] if datos["error"] else ""))
+    # El fallo municipal queda en su panel y no bloquea la prensa.
+    return 0
+
+
 def cmd_delegaciones(args):
     from .delegaciones import actualizar_catalogo
 
@@ -561,6 +573,10 @@ def main(argv=None):
                         "por mes (por omision {})".format(RETENCION_DIAS))
     c.set_defaults(fn=cmd_correr)
 
+    municipal = sub.add_parser("comunicados", help="titulares oficiales del Ayuntamiento de Tecate")
+    municipal.add_argument("--salida", default="data")
+    municipal.add_argument("--sin-red", action="store_true")
+    municipal.set_defaults(fn=cmd_comunicados)
 
     d = sub.add_parser("delegaciones", help="mantenimiento explícito del catálogo IMPLAN")
     d.add_argument("--actualizar", action="store_true", required=True,

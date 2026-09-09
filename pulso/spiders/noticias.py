@@ -7,6 +7,7 @@ sigue articulos ni copia su cuerpo: el producto publica titular, fuente y liga.
 import json
 import re
 import time
+from datetime import date
 
 import scrapy
 
@@ -29,7 +30,7 @@ _MESES = {
     "diciembre": 12,
 }
 _FECHA_ES = re.compile(
-    r"\b(?P<dia>\d{1,2})\s+de\s+(?P<mes>[a-z]+)\s+de\s+(?P<ano>\d{4})\b"
+    r"\b(?P<dia>\d{1,2})\s+(?:de\s+)?(?P<mes>[a-z]+)\s+(?:de\s+)?(?P<ano>\d{4})\b"
 )
 
 
@@ -41,9 +42,11 @@ def fecha_es(texto):
     mes = _MESES.get(m.group("mes"))
     if mes is None:
         return ""
-    return "{:04d}-{:02d}-{:02d}".format(
-        int(m.group("ano")), mes, int(m.group("dia"))
-    )
+    # Tecate publica '8 Septiembre 2026'; una fecha imposible no es un dato.
+    try:
+        return date(int(m.group("ano")), mes, int(m.group("dia"))).isoformat()
+    except ValueError:
+        return ""
 
 
 def fecha_en_url(url, patron):
@@ -138,4 +141,3 @@ class NoticiasSpider(scrapy.Spider):
                 self.resultados[mid] = []
                 self.ms[mid] = int((time.monotonic() - self._inicio[mid]) * 1000)
                 self.errores[mid] = "spider cerrado antes de recibir la portada ({})".format(reason)
-
