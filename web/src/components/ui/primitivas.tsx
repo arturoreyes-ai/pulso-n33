@@ -1,20 +1,9 @@
 import type { ReactNode } from "react";
 
 import { pct } from "@/lib/dominio/formato";
+import { clasesChip } from "./clases";
 
 /* ------------------------------------------------------------------ chips */
-
-/** Clases de una pastilla de filtro. Las comparten el boton (Chip) y el
- *  enlace (SelectorZona), que son la misma cosa con distinta semantica. */
-export function clasesChip(activo: boolean): string {
-  return [
-    "inline-flex items-baseline gap-2 rounded-full px-4 py-2 text-cuerpo",
-    "transition-colors duration-[var(--dur-cambio)] ease-firma",
-    activo
-      ? "bg-realce text-tinta-titulo"
-      : "bg-vela text-tinta-prosa hover:bg-filo hover:text-tinta-titulo",
-  ].join(" ");
-}
 
 export function Chip({
   activo,

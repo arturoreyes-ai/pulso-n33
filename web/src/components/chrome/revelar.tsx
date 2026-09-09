@@ -33,15 +33,35 @@ export function Revelar({ children }: { children: ReactNode }) {
     // animacion que apreciar en una pestana que nadie esta viendo.
     if (document.hidden) return;
 
-    // Solo aqui es seguro ocultar.
-    el.dataset.revelar = "pendiente";
-
+    // NO se oculta aqui. Quien decide es la PRIMERA observacion del observer,
+    // abajo.
+    //
+    // Ocultar en el efecto significa ocultar despues del primer pintado, y
+    // para una seccion que ya esta en pantalla eso se ve: aparece el
+    // contenido, salta a opacity 0 con blur y desplazamiento —el estado
+    // 'pendiente' no lleva transicion, asi que el salto es seco— y recien
+    // entonces entra en 620 ms. Mientras el muro fue la ultima seccion nunca
+    // se noto, porque nada empezaba visible; como primera seccion se nota
+    // siempre.
+    //
+    // Medirlo a mano con getBoundingClientRect tampoco sirve: en ese instante
+    // el muro todavia no tiene filas —las trae SWR— asi que el documento
+    // entero cabe en la pantalla y TODAS las secciones se darian por
+    // visibles, que es como se apaga la animacion de la pagina completa sin
+    // querer. El observer mide cuando de verdad hay layout.
     const io = new IntersectionObserver(
       (entradas) => {
         for (const e of entradas) {
+          const nodo = e.target as HTMLElement;
           if (e.isIntersecting) {
-            (e.target as HTMLElement).dataset.revelar = "listo";
-            io.unobserve(e.target);
+            // Si nunca se oculto, es que ya estaba a la vista: no hay nada
+            // que animar y no se toca.
+            if (nodo.dataset.revelar === "pendiente") nodo.dataset.revelar = "listo";
+            io.unobserve(nodo);
+          } else if (nodo.dataset.revelar === undefined) {
+            // Fuera de pantalla en la primera observacion: recien aqui es
+            // seguro ocultar, porque nadie lo esta viendo.
+            nodo.dataset.revelar = "pendiente";
           }
         }
       },
