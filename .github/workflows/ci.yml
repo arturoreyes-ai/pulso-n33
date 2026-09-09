@@ -75,6 +75,9 @@ jobs:
       - name: Tipos
         run: pnpm tipos
 
+      - name: Contrato de garitas offline
+        run: node scripts/probar-garitas.cjs
+
       # La mitad duradera del barrido de diseno. El navegador probo aquel
       # barrido; esto prueba todos los commits que vienen.
       - name: Escalas de diseno
