@@ -622,6 +622,148 @@ def san_diego(url=SANDAG_QUERY, minimo_parcelas=30):
     }
 
 
+# --------------------------------------------- renta de San Diego (ACS)
+
+ACS_URL = "https://api.census.gov/data/{}/acs/acs5"
+
+# B25064: renta bruta mediana, en dolares por mes. 'Bruta' incluye servicios,
+# asi que es el desembolso real del inquilino y no el renglon del contrato.
+ACS_VARIABLE = "B25064_001E"
+ACS_MARGEN = "B25064_001M"
+
+# El censo suprime estimaciones y lo marca con este centinela, no con null.
+# Sumarlo como si fuera un monto da rentas negativas de nueve digitos.
+ACS_SUPRIMIDO = -666666666
+
+ACS_ANIO_PRIMERO = 2013
+ACS_ANIO_ULTIMO = 2023
+
+# Los ZIP que cuentan la historia, no los 101 del condado: la franja
+# fronteriza mas las colonias que aparecen en la conversacion de
+# gentrificacion, mas Coronado y Rancho Santa Fe como techo de referencia.
+# Los once existen en el panel de SANDAG, asi que renta y catastral se pueden
+# poner uno al lado del otro por ZIP.
+ACS_ZIPS = {
+    "92173": "San Ysidro",
+    "92154": "Otay Mesa",
+    "91910": "Chula Vista",
+    "91911": "Chula Vista sur",
+    "91932": "Imperial Beach",
+    "92101": "Downtown San Diego",
+    "92104": "North Park",
+    "92105": "City Heights",
+    "92113": "Barrio Logan",
+    "92118": "Coronado",
+    "92067": "Rancho Santa Fe",
+}
+
+ACS_AVISO = (
+    "Renta bruta MEDIANA de vivienda en alquiler, en dólares por mes, "
+    "incluyendo servicios. Es una muestra probabilística de 5 años, no un "
+    "censo del mes: el dato de 2023 promedia 2019-2023, así que suaviza los "
+    "brincos y va rezagado. Cada estimación trae su margen de error al 90% y "
+    "en un ZIP chico el margen puede ser grande; con el margen encima de la "
+    "diferencia, dos ZIP no se distinguen."
+)
+
+ACS_UNIVERSO = (
+    "Solo vivienda en ALQUILER ocupada. No es precio de venta ni valor "
+    "catastral, así que no se compara con el índice SHF ni con el catastral "
+    "de SANDAG: son tres cosas distintas."
+)
+
+
+class SinLlave(Exception):
+    """La fuente necesita una llave gratuita que no esta en el entorno."""
+
+
+def acs(anios=None, llave=None, zips=None):
+    """Renta mediana por ZIP de San Diego, serie anual del ACS.
+
+    Requiere una llave gratuita del Census (CENSUS_API_KEY). Sin llave la API
+    responde **200 con una pagina HTML** que dice 'Missing Key', que es la
+    misma trampa que INEGI y gob.mx: por eso se pide la llave antes de salir
+    a la red en vez de descubrirlo al parsear.
+    """
+    llave = llave or os.environ.get("CENSUS_API_KEY")
+    if not llave:
+        raise SinLlave(
+            "falta CENSUS_API_KEY; se saca gratis y al instante en "
+            "https://api.census.gov/data/key_signup.html y se guarda con "
+            "`gh secret set CENSUS_API_KEY`"
+        )
+    zips = zips or ACS_ZIPS
+    anios = list(anios or range(ACS_ANIO_PRIMERO, ACS_ANIO_ULTIMO + 1))
+    from urllib.parse import urlencode
+
+    series = {cp: [] for cp in zips}
+    fallos = []
+    for anio in anios:
+        q = urlencode({
+            "get": "{},{}".format(ACS_VARIABLE, ACS_MARGEN),
+            "for": "zip code tabulation area:" + ",".join(sorted(zips)),
+            "key": llave,
+        })
+        try:
+            filas = json.loads(_bajar("{}?{}".format(ACS_URL.format(anio), q),
+                                      timeout=90).decode("utf-8"))
+        except (NoEsDato, ValueError, OSError) as e:
+            # Un año que falta no tumba la serie: los ZCTA dejaron de anidar
+            # en estados en 2020 y los años viejos no siempre responden igual.
+            fallos.append({"anio": anio, "error": "{}: {}".format(type(e).__name__, e)[:120]})
+            continue
+        if not filas or len(filas) < 2:
+            fallos.append({"anio": anio, "error": "sin filas"})
+            continue
+        col = {n: i for i, n in enumerate(filas[0])}
+        for f in filas[1:]:
+            cp = str(f[col["zip code tabulation area"]]).strip()
+            if cp not in series:
+                continue
+            renta = _num(f[col[ACS_VARIABLE]])
+            margen = _num(f[col[ACS_MARGEN]])
+            if not renta or renta <= 0 or renta == ACS_SUPRIMIDO:
+                continue
+            punto = {"anio": anio, "renta_mediana_usd": int(renta)}
+            if margen and margen > 0 and margen != ACS_SUPRIMIDO:
+                punto["margen_usd"] = int(margen)
+            series[cp].append(punto)
+
+    salida = {}
+    for cp, puntos in sorted(series.items()):
+        if not puntos:
+            continue
+        puntos.sort(key=lambda p: p["anio"])
+        ultimo = puntos[-1]
+        var = None
+        previo = next((p for p in puntos if p["anio"] == ultimo["anio"] - 1), None)
+        if previo and previo["renta_mediana_usd"]:
+            var = round((ultimo["renta_mediana_usd"] / previo["renta_mediana_usd"] - 1) * 100, 2)
+        salida[cp] = {
+            "nombre": zips[cp],
+            "anio": ultimo["anio"],
+            "renta_mediana_usd": ultimo["renta_mediana_usd"],
+            "variacion_anual_pct": var,
+            "anios": len(puntos),
+            "serie": puntos,
+        }
+    if not salida:
+        raise NoEsDato("el ACS no devolvio renta para ningun ZIP: {}".format(fallos[:3]))
+
+    panel = {
+        "fuente": "US Census Bureau · ACS 5-year, B25064 (renta bruta mediana)",
+        "url": ACS_URL.format(ACS_ANIO_ULTIMO),
+        "cadencia": "anual",
+        "periodo": str(max(v["anio"] for v in salida.values())),
+        "aviso": ACS_AVISO,
+        "universo": ACS_UNIVERSO,
+        "zips": salida,
+    }
+    if fallos:
+        panel["anios_sin_dato"] = fallos
+    return panel
+
+
 # ------------------------------------------------------------ runner
 
 FUENTES = (
@@ -630,6 +772,7 @@ FUENTES = (
     ("sesnsp", sesnsp, "crimen"),
     ("ensu", ensu, "percepcion"),
     ("san_diego", san_diego, "vivienda"),
+    ("acs", acs, "renta"),
 )
 
 
@@ -672,6 +815,14 @@ def correr(salida="data", ahora=None, max_edad_dias=7, forzar=False, solo=None):
             paneles[nombre]["obtenido"] = ahora
             salud.append({"id": nombre, "estado": "ok", "ms": int((time.monotonic() - t0) * 1000),
                           "error": None, "periodo": paneles[nombre].get("periodo")})
+        except SinLlave as e:
+            # No es un fallo: es una fuente sin configurar. El tablero la
+            # rotula distinto de una que se cayo, igual que el panel de
+            # YouTube sin YOUTUBE_API_KEY.
+            salud.append({"id": nombre, "estado": "sin_llave",
+                          "ms": int((time.monotonic() - t0) * 1000),
+                          "error": str(e)[:300],
+                          "periodo": (paneles.get(nombre) or {}).get("periodo")})
         except Exception as e:
             salud.append({"id": nombre, "estado": "fallo",
                           "ms": int((time.monotonic() - t0) * 1000),

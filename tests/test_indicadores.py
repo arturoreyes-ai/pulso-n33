@@ -9,15 +9,19 @@ con codigo 200.
 import io
 import json
 import os
+import re
 import tempfile
 import unittest
 import unittest.mock
 import zipfile
 
 from pulso.indicadores import (
+    ACS_SUPRIMIDO,
     BC_MUNICIPIOS,
     MESES,
     NoEsDato,
+    SinLlave,
+    acs,
     _columna,
     _csv_de_zip,
     _filas,
@@ -26,6 +30,7 @@ from pulso.indicadores import (
     correr,
     predial,
 )
+from pulso.validador import validar_indicadores
 
 SHEET = """<?xml version="1.0"?>
 <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
@@ -274,6 +279,96 @@ class TestSeriePersistida(unittest.TestCase):
 
     def test_no_se_cuela_otra_entidad(self):
         self.assertNotIn("Hermosillo", predial()["municipios"])
+
+
+def acs_respuesta(anio):
+    """Respuesta del ACS con la forma real: encabezado y filas de texto."""
+    filas = [["B25064_001E", "B25064_001M", "zip code tabulation area"]]
+    base = {"92173": 1400, "92104": 1700, "92118": 2600}
+    for cp, renta in base.items():
+        # Sube ~4% al año para que la variacion sea comprobable.
+        v = int(renta * (1.04 ** (anio - 2021)))
+        filas.append([str(v), "95", cp])
+    # City Heights viene SUPRIMIDO: el censo no manda null, manda el
+    # centinela. Sumarlo como monto da rentas negativas de nueve digitos.
+    filas.append([str(ACS_SUPRIMIDO), str(ACS_SUPRIMIDO), "92105"])
+    return json.dumps(filas).encode("utf-8")
+
+
+class TestAcs(unittest.TestCase):
+    """Renta mediana del ACS: la unica fuente con nivel de renta real."""
+
+    def setUp(self):
+        self.anios = [2021, 2022, 2023]
+        parche = unittest.mock.patch(
+            "pulso.indicadores._bajar",
+            side_effect=lambda url, **kw: acs_respuesta(
+                int(re.search(r"/data/(\d{4})/", url).group(1))))
+        parche.start()
+        self.addCleanup(parche.stop)
+
+    def panel(self):
+        return acs(anios=self.anios, llave="falsa",
+                   zips={"92173": "San Ysidro", "92104": "North Park",
+                         "92118": "Coronado", "92105": "City Heights"})
+
+    def test_sin_llave_falla_antes_de_salir_a_la_red(self):
+        # Sin llave la API responde 200 con una pagina HTML 'Missing Key',
+        # asi que descubrirlo al parsear seria tarde y confuso.
+        with unittest.mock.patch.dict(os.environ, {}, clear=True):
+            with self.assertRaises(SinLlave) as ctx:
+                acs(anios=[2023])
+        self.assertIn("CENSUS_API_KEY", str(ctx.exception))
+
+    def test_serie_por_zip_ordenada_y_completa(self):
+        z = self.panel()["zips"]["92173"]
+        self.assertEqual(z["anios"], 3)
+        self.assertEqual([p["anio"] for p in z["serie"]], [2021, 2022, 2023])
+        self.assertEqual(z["nombre"], "San Ysidro")
+
+    def test_el_centinela_de_supresion_no_se_toma_como_renta(self):
+        self.assertNotIn("92105", self.panel()["zips"])
+
+    def test_variacion_anual_sobre_el_año_previo(self):
+        z = self.panel()["zips"]["92173"]
+        self.assertAlmostEqual(z["variacion_anual_pct"], 4.0, delta=0.3)
+
+    def test_trae_el_margen_de_error(self):
+        # Es muestra probabilistica: sin margen, dos ZIP parecen distintos
+        # cuando no lo son.
+        self.assertEqual(self.panel()["zips"]["92118"]["serie"][0]["margen_usd"], 95)
+
+    def test_declara_que_no_se_compara_con_catastral_ni_shf(self):
+        p = self.panel()
+        self.assertIn("catastral", p["universo"].lower())
+        self.assertIn("shf", p["universo"].lower())
+
+    def test_un_año_caido_no_tumba_la_serie(self):
+        def a_veces(url, **kw):
+            anio = int(re.search(r"/data/(\d{4})/", url).group(1))
+            if anio == 2022:
+                raise NoEsDato("pagina de error con 200")
+            return acs_respuesta(anio)
+        with unittest.mock.patch("pulso.indicadores._bajar", side_effect=a_veces):
+            p = self.panel()
+        self.assertEqual(p["zips"]["92173"]["anios"], 2)
+        self.assertEqual([f["anio"] for f in p["anios_sin_dato"]], [2022])
+
+    def test_si_no_hay_ni_un_zip_lanza(self):
+        with unittest.mock.patch("pulso.indicadores._bajar",
+                                 side_effect=NoEsDato("todo mal")):
+            with self.assertRaises(NoEsDato):
+                self.panel()
+
+    def test_el_panel_pasa_el_validador(self):
+        p = self.panel()
+        p["familia"] = "renta"
+        p["obtenido"] = "2026-09-07T00:00:00+00:00"
+        errores, _ = validar_indicadores({
+            "esquema": 1, "generado": "2026-09-07T00:00:00+00:00",
+            "indicadores": {"acs": p},
+        })
+        self.assertEqual(errores, [])
 
 
 class TestSalidaPublicada(unittest.TestCase):
