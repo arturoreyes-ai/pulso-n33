@@ -4,6 +4,7 @@
   python -m pulso delegaciones --actualizar
   python -m pulso conversacion [--sentimiento ninguno|modelo]
   python -m pulso redes [--posts N] [--comentarios N]
+  python -m pulso tiktok [--videos N] [--comentarios N] [--probar]
   python -m pulso apify [--verificar]
   python -m pulso validar [--config config] [--datos data]
   python -m pulso sitio [--destino _site]
@@ -319,6 +320,96 @@ def cmd_redes(args):
     return 0
 
 
+def cmd_tiktok(args):
+    """Busca videos de TikTok, cosecha sus comentarios y escribe conteos.
+
+    Espejo de cmd_redes con una fuente distinta: una BUSQUEDA, no cuentas
+    verificadas. La zona de cada video sale de su pie (pulso/zonas.py), nunca
+    de la consulta. El texto de los comentarios va a efimero/ (fuera de git);
+    la identidad de quien comenta no llega ni al cache; el @handle del
+    creador si se publica. Ver el encabezado de pulso/tiktok.py.
+    """
+    from .apify import Presupuesto
+    from .tiktok import (cosechar, derivar, leer_cache, leer_publicaciones, probar,
+                         publicar_comentarios)
+    from .pipeline import ahora_utc, _escribir
+
+    cfg = _leer(os.path.join(args.config, "tiktok.json"))
+    busquedas = cfg.get("busquedas", [])
+    cosecha = cfg.get("cosecha", {})
+    filtro_fecha = cosecha.get("filtro_fecha", "PAST_24_HOURS")
+    orden = cosecha.get("orden", "MOST_RELEVANT")
+    ahora = ahora_utc()
+
+    # --probar no cosecha comentarios ni escribe nada: tres videos por
+    # busqueda para leer que devuelve el filtro y como quedan zona y titulo.
+    if args.probar:
+        for r in probar(busquedas, ahora, filtro_fecha=filtro_fecha, orden=orden):
+            print("{}  ({} videos; descartes: {})".format(
+                r["busqueda"], len(r["videos"]),
+                ", ".join("{} {}".format(k, v) for k, v in r["descartes"].items()) or "ninguno"))
+            for v in r["videos"]:
+                print("  {}  {:<22} {:<9} {:>6} likes  {}".format(
+                    v["publicado"], v["creador"][:22], v["zona"], v["likes"], v["titulo"][:70]))
+        print("\nLa ventana de derivar() recorta a 'ventana_horas' aunque el filtro traiga "
+              "mas. Anota la fecha en 'verificado' del config.")
+        return 0
+
+    apify_cfg = _leer(os.path.join(args.config, "apify.json"))
+    tope = args.presupuesto or cosecha.get("presupuesto_resultados") or (
+        apify_cfg.get("presupuesto") or {}).get("resultados_por_corrida", 300)
+
+    nuevos, salud, gasto = cosechar(
+        busquedas, ahora,
+        presupuesto=Presupuesto(tope),
+        cache=args.cache,
+        videos_por_busqueda=args.videos or cosecha.get("videos_por_busqueda", 30),
+        comentarios_por_video=args.comentarios or cosecha.get("comentarios_por_video", 30),
+        filtro_fecha=filtro_fecha,
+        orden=orden,
+    )
+
+    etiquetados = omitidos = 0
+    if args.sentimiento == "modelo":
+        from .sentimiento import Analizador
+        from .tiktok import clasificar_cache
+        etiquetados, omitidos = clasificar_cache(args.cache, Analizador())
+
+    temas_doc = _leer(args.temas) if os.path.exists(args.temas) else {}
+    vigentes = leer_cache(args.cache)
+    panel = derivar(vigentes, ahora, salud, gasto, temas_doc.get("temas") or [],
+                    leer_publicaciones(args.cache), busquedas,
+                    ventana_horas=cosecha.get("ventana_horas", 24))
+    _escribir(os.path.join(args.salida, "tiktok.json"), panel)
+
+    publicados = 0
+    if not args.sin_texto:
+        texto = publicar_comentarios(vigentes, panel["destacados"], ahora)
+        _escribir(os.path.join(args.efimero, "tiktok-comentarios.json"), texto)
+        publicados = sum(len(v) for v in texto["por_post"].values())
+
+    print("comentarios nuevos: {} · vigentes en cache: {} · videos: {}".format(
+        len(nuevos), panel["comentarios_vigentes"], panel["posts_vigentes"]))
+    print("destacados: {} en las últimas {} horas · comentarios publicados: {} ({}, fuera de git)"
+          .format(len(panel["destacados"]), panel["ventana_horas"], publicados,
+                  args.efimero if not args.sin_texto else "--sin-texto"))
+    print("gasto Apify: {} de {} resultados".format(gasto["gastado"], gasto["resultados"]))
+    sen = panel["sentimiento"]
+    if sen["metodo"] == "modelo":
+        print("tono ({}): {} positivos · {} negativos · {} neutrales · {} sin clasificar"
+              " · {} sin modelo por idioma; {} etiquetados ahora".format(
+                  sen["modelo"], sen["positivo"], sen["negativo"], sen["neutral"],
+                  sen["sin_clasificar"], sen["sin_modelo_idioma"], etiquetados))
+    for s in salud:
+        if s["estado"] != "ok":
+            print("  {} · {} · {}".format(s["cuenta"], s["estado"],
+                                          s.get("error", "")[:120]), file=sys.stderr)
+        elif s.get("fuera") or s.get("descartados"):
+            print("  {} · fuera de la región: {} · descartados: {}".format(
+                s["cuenta"], s.get("fuera", 0), s.get("descartados", 0)), file=sys.stderr)
+    return 0
+
+
 def cmd_apify(args):
     """Revisa el token y el catalogo de actores. No raspa nada.
 
@@ -526,6 +617,27 @@ def main(argv=None):
                         "'*' sondea los del config. Cuesta 1 resultado por cuenta")
     r.set_defaults(fn=cmd_redes)
 
+    tk = sub.add_parser("tiktok", help="videos y comentarios de TikTok por búsqueda (requiere APIFY_TOKEN)")
+    tk.add_argument("--salida", default="data")
+    tk.add_argument("--cache", default=os.path.join("cache", "tiktok"))
+    tk.add_argument("--videos", type=int, default=0, help="videos por búsqueda (0 usa el config)")
+    tk.add_argument("--comentarios", type=int, default=0,
+                    help="comentarios por video (0 usa el config)")
+    tk.add_argument("--temas", default=os.path.join("data", "temas.json"))
+    tk.add_argument("--sentimiento", default="ninguno", choices=("ninguno", "modelo"),
+                    help="etiqueta el tono de cada comentario con el modelo local; "
+                         "a data/ solo llegan conteos")
+    tk.add_argument("--presupuesto", type=int, default=0,
+                    help="tope de resultados de esta corrida (0 usa config/tiktok.json)")
+    tk.add_argument("--efimero", default="efimero",
+                    help="carpeta IGNORADA POR GIT donde va el texto de los comentarios "
+                         "publicados (tiktok-comentarios.json); se regenera en cada corrida")
+    tk.add_argument("--sin-texto", action="store_true",
+                    help="no escribe el texto de los comentarios; data/ sale igual")
+    tk.add_argument("--probar", action="store_true",
+                    help="tres videos por búsqueda, sin comentarios y sin escribir: para ver "
+                         "qué devuelve el filtro de fecha antes de confiar en el cron")
+    tk.set_defaults(fn=cmd_tiktok)
 
     a = sub.add_parser("apify", help="revisa APIFY_TOKEN y el catálogo de actores")
     a.add_argument("--verificar", action="store_true",
