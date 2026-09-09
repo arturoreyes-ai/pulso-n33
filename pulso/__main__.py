@@ -468,7 +468,7 @@ def cmd_validar(args):
     from .validador import resumen, validar_todo
 
     errores, avisos = validar_todo(args.config, args.datos,
-                                   dir_efimero=getattr(args, "efimero", "efimero"))
+                                   dir_efimero=args.efimero)
     for a in avisos:
         print("aviso: {}".format(a))
     for e in errores:
@@ -662,8 +662,9 @@ def main(argv=None):
 
     v = sub.add_parser("validar", help="valida config/, data/ y efimero/")
     v.add_argument("--datos", default="data")
-    v.add_argument("--efimero", default="efimero",
-                   help="carpeta del texto de comentarios publicado; se valida si existe")
+    v.add_argument("--efimero", default=None,
+                   help="carpeta del texto de comentarios publicado; se valida si "
+                        "existe. Por omision, la hermana de --datos")
     v.set_defaults(fn=cmd_validar)
 
     s = sub.add_parser("sitio", help="arma _site/ para publicar en Pages")

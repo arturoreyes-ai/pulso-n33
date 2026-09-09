@@ -7,6 +7,9 @@ vigencia mal puesta, una nota editada a mano, una figura que ya no existe.
 
 import copy
 import json
+import os
+import shutil
+import tempfile
 import unittest
 from datetime import date
 
@@ -54,6 +57,50 @@ class TestConfigPublicada(unittest.TestCase):
     def test_todo_junto(self):
         errores, _ = validar_todo("config", "data", hoy=HOY)
         self.assertEqual(errores, [])
+
+
+class TestEfimeroEmparejado(unittest.TestCase):
+    """efimero/ se empareja con el data/ de SU corrida, no con el del repo.
+
+    El caso: CI corre `correr --salida $TEMP/data` y luego
+    `validar --datos $TEMP/data`. Con el default fijo en "efimero", eso
+    comparaba el ./efimero del repo -- que en una maquina con corridas reales
+    trae los dos archivos de texto -- contra un data/ que no tiene redes.json
+    ni tiktok.json, y los reportaba como huerfanos. Dos errores falsos en el
+    comando que la propia documentacion manda correr, invisibles en CI porque
+    ahi no existe ./efimero.
+    """
+
+    def _corrida(self, raiz):
+        """Un data/ minimo sin redes.json, con un efimero/ hermano vacio."""
+        datos = os.path.join(raiz, "data")
+        os.makedirs(datos)
+        os.makedirs(os.path.join(raiz, "efimero"))
+        for nombre in ("notas", "fuentes", "temas", "estado"):
+            origen = os.path.join("data", nombre + ".json")
+            shutil.copy(origen, os.path.join(datos, nombre + ".json"))
+        shutil.copytree(os.path.join("data", "archivo"), os.path.join(datos, "archivo"))
+        return datos
+
+    def test_el_efimero_del_repo_no_se_juzga_contra_otro_data(self):
+        with tempfile.TemporaryDirectory() as raiz:
+            datos = self._corrida(raiz)
+            errores, _ = validar_todo("config", datos, hoy=HOY)
+        huerfanos = [e for e in errores if "comentarios: existe" in e]
+        self.assertEqual(huerfanos, [])
+
+    def test_un_efimero_explicito_si_se_juzga(self):
+        """Pasarlo a mano sigue emparejando: la regla del huerfano no se pierde."""
+        with tempfile.TemporaryDirectory() as raiz:
+            datos = self._corrida(raiz)
+            suelto = os.path.join(raiz, "suelto")
+            os.makedirs(suelto)
+            with open(os.path.join(suelto, "redes-comentarios.json"), "w",
+                      encoding="utf-8") as f:
+                json.dump({"visibles": 5, "por_post": {}}, f)
+            errores, _ = validar_todo("config", datos, hoy=HOY, dir_efimero=suelto)
+        self.assertTrue([e for e in errores if "redes-comentarios: existe" in e],
+                        "un texto sin su redes.json sigue siendo huerfano")
 
 
 class TestBusquedasRotas(unittest.TestCase):
