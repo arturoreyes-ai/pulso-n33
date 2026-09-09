@@ -3,6 +3,7 @@
   python -m pulso correr [--sin-red] [--descubrimiento-web] [--salida data] [--metodo ninguno|diccionario|modelo]
   python -m pulso delegaciones --actualizar
   python -m pulso conversacion [--sentimiento ninguno|modelo]
+  python -m pulso apify [--verificar]
   python -m pulso validar [--config config] [--datos data]
   python -m pulso sitio [--destino _site]
   python -m pulso evaluar [--corpus tests/fixtures/corpus.json]
@@ -211,10 +212,53 @@ def cmd_indicadores(args):
     return 0 if not fallos else 0
 
 
+def cmd_apify(args):
+    """Revisa el token y el catalogo de actores. No raspa nada.
+
+    Es el paso de puesta a punto: un token mal pegado falla con 401 en medio
+    del cron, seis horas despues y sin nadie mirando. Corre esto primero.
+    """
+    from .apify import SinToken, leer_catalogo, verificar
+
+    codigo = 0
+    ruta = os.path.join(args.config, "apify.json")
+
+    if args.verificar:
+        try:
+            v = verificar()
+            print("token: válido · usuario {} · plan {} · {}".format(
+                v["usuario"], v["plan"], "de paga" if v["de_paga"] else "gratuito"))
+            if v["credito_mensual_usd"] is not None:
+                print("crédito mensual: {} USD".format(v["credito_mensual_usd"]))
+        except SinToken as e:
+            print("token: {}".format(e), file=sys.stderr)
+            codigo = 1
+
+    activos, errores = leer_catalogo(ruta)
+    doc = _leer(ruta)
+    apagados = [a for a in doc.get("actores", []) if not a.get("activo")]
+    presupuesto = (doc.get("presupuesto") or {}).get("resultados_por_corrida", 0)
+
+    print("actores activos: {} · apagados: {} · señuelos: {}".format(
+        len(activos), len(apagados), len(doc.get("senuelos", []))))
+    for a in activos:
+        print("  · {} [{}] cuota {}".format(a["id"], a["idioma"], a.get("cuota", 0)))
+    if activos:
+        print("presupuesto: {} resultados/corrida, {} por actor".format(
+            presupuesto, presupuesto // len(activos)))
+
+    for e in errores:
+        print("ERROR {}".format(e), file=sys.stderr)
+        codigo = 1
+
+    return codigo
+
+
 def cmd_validar(args):
     from .validador import resumen, validar_todo
 
-    errores, avisos = validar_todo(args.config, args.datos)
+    errores, avisos = validar_todo(args.config, args.datos,
+                                   dir_efimero=getattr(args, "efimero", "efimero"))
     for a in avisos:
         print("aviso: {}".format(a))
     for e in errores:
@@ -319,6 +363,7 @@ def main(argv=None):
                         "por mes (por omision {})".format(RETENCION_DIAS))
     c.set_defaults(fn=cmd_correr)
 
+
     d = sub.add_parser("delegaciones", help="mantenimiento explícito del catálogo IMPLAN")
     d.add_argument("--actualizar", action="store_true", required=True,
                    help="refresca directorio oficial y polígonos SVG")
@@ -352,8 +397,17 @@ def main(argv=None):
                         "(requiere requirements-modelo.txt); a data/ solo llegan conteos")
     k.set_defaults(fn=cmd_conversacion)
 
+
+
+    a = sub.add_parser("apify", help="revisa APIFY_TOKEN y el catálogo de actores")
+    a.add_argument("--verificar", action="store_true",
+                   help="pregunta a Apify si el token sirve (una llamada, sin costo)")
+    a.set_defaults(fn=cmd_apify)
+
     v = sub.add_parser("validar", help="valida config/ y data/")
     v.add_argument("--datos", default="data")
+    v.add_argument("--efimero", default="efimero",
+                   help="carpeta del texto de comentarios publicado; se valida si existe")
     v.set_defaults(fn=cmd_validar)
 
     s = sub.add_parser("sitio", help="arma _site/ para publicar en Pages")

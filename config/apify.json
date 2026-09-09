@@ -1,0 +1,84 @@
+{
+ "nota": "Actores de Apify para plataformas sociales. Todos vienen APAGADOS: encender uno es una decisión legal, no de configuración, y el razonamiento está en docs/PLAN.md §3 y en el encabezado de pulso/apify.py. La regla que no se negocia: ningún actor que inicie sesión. Un actor con cookies o credenciales destruye la defensa de Meta v. Bright Data igual de bien si el login lo hace Apify por contrato. pulso/apify.py lo rechaza al leer este archivo, así que no basta con quitar el 'activo': false.",
+
+ "presupuesto": {
+  "nota": "Apify cobra por resultado. El cron corre cuatro veces al día, así que este número se multiplica por 120 al mes antes de mirar la factura. Se REPARTE entre las cuentas activas, no se gasta en orden de archivo. Con el plan SCALE (199 USD/mes, confirmado 2026-09-08) el techo es holgado, pero el freno que de verdad contiene el gasto no es este número sino `dias_entre_cosechas` en config/instagram.json: sin él el cron vuelve a pagar cuatro veces al día por los comentarios de los mismos posts. Cuenta: 10 cuentas x (5 posts + 5x30 comentarios) = 1,550 resultados por corrida completa. OJO: el tope es POR COMANDO, no por corrida del cron: `pulso redes` y `pulso tiktok` construyen cada uno su Presupuesto, y TikTok trae el suyo en config/tiktok.json (`presupuesto_resultados`).",
+  "resultados_por_corrida": 2000,
+  "segundos_por_actor": 240
+ },
+
+ "actores": [
+  {
+   "id": "apify~facebook-posts-scraper",
+   "plataforma": "facebook",
+   "idioma": "es",
+   "activo": false,
+   "razon": "Páginas públicas de medios y ayuntamientos de BC, sin sesión. Es el candidato más fuerte: el volumen de comentarios locales en Facebook supera al de YouTube. Falta decidir la lista de páginas y confirmar que los comentarios se pueden derivar sin guardar texto ni identidad.",
+   "cuota": 100,
+   "entrada": {
+    "resultsLimit": 50
+   }
+  },
+  {
+   "id": "apify~instagram-scraper",
+   "plataforma": "instagram",
+   "idioma": "es",
+   "activo": false,
+   "razon": "Perfiles y hashtags públicos, sin sesión. Deslogueado Instagram muestra poco y lo que muestra es imagen: el texto aprovechable es el pie y los comentarios. Volumen por confirmar antes de pagar por él.",
+   "cuota": 60,
+   "entrada": {
+    "resultsLimit": 30
+   }
+  },
+  {
+   "id": "clockworks~tiktok-scraper",
+   "plataforma": "tiktok",
+   "idioma": "es",
+   "activo": false,
+   "razon": "Público y sin sesión. Desde el 8 de septiembre de 2026 lo corre pulso/tiktok.py con las búsquedas de config/tiktok.json (searchSection /video, orden MOST_RELEVANT y filtro de fecha PAST_24_HOURS, los dos cobrados). Esta fila sigue en `activo: false` porque este catálogo no es el interruptor —igual que apify~instagram-scraper, que corre desde pulso/instagram.py—; documenta el actor y deja que la guardia de sesión lo revise. Sus comentarios van a un dataset aparte (commentsDatasetURL), por eso la segunda pasada usa el actor de abajo.",
+   "cuota": 60,
+   "entrada": {
+    "searchSection": "/video",
+    "resultsPerPage": 30,
+    "videoSearchSorting": "MOST_RELEVANT",
+    "videoSearchDateFilter": "PAST_24_HOURS"
+   }
+  },
+  {
+   "id": "clockworks~tiktok-comments-scraper",
+   "plataforma": "tiktok",
+   "idioma": "es",
+   "activo": false,
+   "razon": "Segunda pasada de TikTok: comentarios por URL de video, sin sesión. Cobra ~5 USD por 1,000 resultados (diez veces el actor de videos), así que 30 videos x 30 comentarios son ~4.50 USD en la primera corrida del día; vistos.json en cache/tiktok evita volver a pagarlos. La identidad del comentarista (uniqueId, uid, avatarThumbnail, cid) se tira al ingerir en pulso/tiktok.py. Misma nota que arriba: `activo` aquí no enciende nada.",
+   "cuota": 60,
+   "entrada": {
+    "commentsPerPost": 30,
+    "maxRepliesPerComment": 0
+   }
+  },
+  {
+   "id": "trudax~reddit-scraper-lite",
+   "plataforma": "reddit",
+   "idioma": "en",
+   "activo": false,
+   "razon": "El lado San Diego, no el mexicano: docs/PLAN.md §2 ya registra que r/Tijuana es chico y sesga a angloparlantes y visitantes. Va en inglés, así que su postura queda en null y el conteo entra a estado.json como notas_sin_modelo_idioma, igual que los cuatro medios de San Diego.",
+   "cuota": 80,
+   "entrada": {
+    "maxItems": 40
+   }
+  }
+ ],
+
+ "senuelos": [
+  {
+   "id": "apidojo~tweet-scraper",
+   "plataforma": "x",
+   "razon": "NO USAR. Los raspadores de X que sirven piden cookies de sesión o una cuenta, porque X cerró la lectura anónima en 2023. Eso es exactamente el caso que docs/PLAN.md §3 refusa, y no cambia porque el login lo ejecute Apify. La alternativa legal es la API oficial de X, que empieza en 200 USD al mes por el nivel con búsqueda."
+  },
+  {
+   "id": "apify~facebook-groups-scraper",
+   "plataforma": "facebook",
+   "razon": "NO USAR. Los grupos vecinales de Tijuana que valdrían la pena son cerrados, y entrar a uno cerrado es sesión más aceptación de reglas del grupo. Los grupos públicos que quedan son de compraventa."
+  }
+ ]
+}

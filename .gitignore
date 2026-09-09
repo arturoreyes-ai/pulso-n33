@@ -15,3 +15,11 @@ cache/
 # src/. O sea que sin esta linea, cada instalacion propone commitear un
 # segundo ejemplar del codigo, desfasado desde el primer edit.
 .pnpm-store/
+
+# Credenciales. APIFY_TOKEN y YOUTUBE_API_KEY viven aqui, y pulso/entorno.py
+# lee el archivo directo, asi que el token esta a un `git add -A` de quedar
+# publicado. La regla es explicita en vez de depender de que la carpeta que
+# lo contiene este ignorada por otro motivo.
+.env
+.env.*
+!.env.example
