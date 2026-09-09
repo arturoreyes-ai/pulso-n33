@@ -812,6 +812,16 @@ CLAVES_PROHIBIDAS_CONVERSACION = frozenset(
     {"texto", "ejemplos", "notas", "autor", "author", "video_titulo"}
 )
 
+# Ademas de las de arriba, para data/redes.json. Son los campos de identidad
+# que devuelve el actor de Instagram: en ese modulo se tiran al INGERIR, asi
+# que si alguno aparece en data/ el filtro se rompio antes del cache y no
+# despues. Ver pulso/instagram.py::_limpiar.
+CLAVES_PROHIBIDAS_REDES = frozenset(
+    {"ownerUsername", "ownerProfilePicUrl", "ownerId", "owner", "username",
+     "handle", "post", "postUrl", "comentario"}
+)
+
+
 def _validar_conteo_sentimiento(s, et, errores):
     if not isinstance(s, dict):
         errores.append("{}: 'sentimiento' debe ser objeto".format(et))
@@ -963,6 +973,462 @@ def _validar_serie(serie, clave_orden, campos, esperados, et, errores, avisos):
             et, len(serie), esperados))
 
 
+TIPOS_POST = ("imagen", "video", "carrusel", "otro")
+ETIQUETAS_COMENTARIO = ("positivo", "negativo", "neutral")
+# Una @mencion dentro del texto publicado es la identidad de un tercero. El
+# pipeline la sustituye por "@…"; aqui se exige que no quede ninguna.
+RE_MENCION_PUBLICADA = re.compile(r"@[A-Za-z0-9_.]{2,}")
+
+# Lo que si puede llevar efimero/redes-comentarios.json: exactamente estas
+# cuatro claves por comentario. Cualquier otra es sospechosa, y las de
+# identidad son error con nombre propio (abajo).
+CLAVES_COMENTARIO_PUBLICADO = frozenset({"texto", "likes", "fecha", "sentimiento"})
+CLAVES_PROHIBIDAS_COMENTARIO_PUBLICADO = (
+    (CLAVES_PROHIBIDAS_REDES - {"post", "postUrl", "comentario"})
+    | frozenset({"id", "commentUrl", "autor", "author", "respuestas"}))
+
+# Lo que cambia entre plataformas en redes.json y su archivo de texto. Todo
+# lo demas -- conteos, orden, sentimiento, prohibiciones de texto -- es igual.
+PLATAFORMAS_REDES = {
+    "instagram": {
+        "prefijo": "https://www.instagram.com/",
+        # Ventana en dias sobre `fecha`: los posts de un medio duran una semana.
+        "ventana": "ventana_dias",
+        "creador": False,
+        "prohibidas": frozenset(),
+        # Instagram no publica compartidos ni guardados: su ausencia es "sin dato".
+        "cifras": (),
+        "modulo": "pulso/instagram.py:_limpiar",
+    },
+}
+
+def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
+    """El bloque de posts destacados de redes.json. Ausente es aviso.
+
+    Un corte anterior al campo sigue siendo valido -- el patron de
+    _validar_serie -- pero si el bloque esta, se exige entero: ventana, tope,
+    catalogo de cuentas y cada destacado con sus conteos cuadrados.
+    """
+    if "destacados" not in datos:
+        avisos.append("redes: corte anterior al campo 'destacados'; el panel de "
+                      "posts saldra vacio")
+        return
+    et = "redes.destacados"
+    esp = PLATAFORMAS_REDES[plataforma]
+    # Exactamente UNA ventana por plataforma. Emitir las dos obligaria a un
+    # `ventana_dias: 1` que miente: un video de hace 23 horas es de ayer.
+    clave_ventana = esp["ventana"]
+    otra = "ventana_horas" if clave_ventana == "ventana_dias" else "ventana_dias"
+    if otra in datos:
+        errores.append("redes: '{}' no aplica a {}; la ventana es '{}'".format(
+            otra, plataforma, clave_ventana))
+    tope = 30 if clave_ventana == "ventana_dias" else 720
+    ventana = datos.get(clave_ventana)
+    if not isinstance(ventana, int) or isinstance(ventana, bool) or not 1 <= ventana <= tope:
+        errores.append("redes: '{}' debe ser entero entre 1 y {}".format(clave_ventana, tope))
+        ventana = None
+    maximo = datos.get("destacados_maximo")
+    if not isinstance(maximo, int) or isinstance(maximo, bool) or maximo < 1:
+        errores.append("redes: 'destacados_maximo' debe ser entero positivo")
+        maximo = None
+
+    cuentas = datos.get("cuentas")
+    conocidas = set()
+    if not isinstance(cuentas, list):
+        errores.append("redes: 'cuentas' debe ser una lista (catalogo sin handle)")
+    else:
+        for c in cuentas:
+            if not isinstance(c, dict) or not _texto(c.get("cuenta")):
+                errores.append("redes.cuentas: cada registro necesita 'cuenta'")
+                continue
+            conocidas.add(c["cuenta"])
+            if not _texto(c.get("nombre")):
+                errores.append("redes.cuentas[{}]: falta 'nombre'".format(c["cuenta"]))
+            if c.get("zona") not in ZONAS_DE_CONTEO:
+                errores.append("redes.cuentas[{}]: zona desconocida ({!r})".format(
+                    c["cuenta"], c.get("zona")))
+            if not isinstance(c.get("activa"), bool):
+                errores.append("redes.cuentas[{}]: 'activa' debe ser booleano".format(
+                    c["cuenta"]))
+        ids = [c.get("cuenta") for c in cuentas if isinstance(c, dict)]
+        if ids != sorted(ids):
+            errores.append("redes: 'cuentas' no esta ordenado por cuenta")
+
+    lista = datos.get("destacados")
+    if not isinstance(lista, list):
+        errores.append("redes: 'destacados' debe ser una lista")
+        return
+
+    generado = str(datos.get("generado") or "")[:10]
+    desde = None
+    if clave_ventana == "ventana_dias" and _fecha(generado) and ventana:
+        desde = (_fecha(generado) - timedelta(days=ventana)).isoformat()
+    generado_dt = desde_dt = None
+    if clave_ventana == "ventana_horas" and _es_iso(datos.get("generado")) and ventana:
+        generado_dt = datetime.fromisoformat(str(datos["generado"]).replace("Z", "+00:00"))
+        desde_dt = generado_dt - timedelta(hours=ventana)
+
+    urls, por_zona = [], {}
+    for i, d in enumerate(lista):
+        eti = "{}[{}]".format(et, i)
+        if not isinstance(d, dict):
+            errores.append("{}: debe ser objeto".format(eti))
+            continue
+        url = d.get("url")
+        if not _texto(url) or not url.startswith(esp["prefijo"]):
+            errores.append("{}: 'url' debe empezar con {} ({!r})".format(eti, esp["prefijo"], url))
+        else:
+            urls.append(url)
+        # El creador solo cruza a data/ en TikTok, y ahi es obligatorio y
+        # tiene que ser el mismo de la URL: una guardia cruzada barata contra
+        # un handle que no corresponde al video.
+        creador = d.get("creador")
+        if esp["creador"]:
+            if not isinstance(creador, str) or not RE_CREADOR.match(creador):
+                errores.append("{}: 'creador' debe ser un @handle ({!r})".format(eti, creador))
+            elif _texto(url) and not url.startswith(esp["prefijo"] + creador + "/video/"):
+                errores.append("{}: 'creador' {} no es el de la url {}".format(eti, creador, url))
+        elif "creador" in d:
+            errores.append("{}: 'creador' no se publica en {}; la fuente es la cuenta".format(
+                eti, plataforma))
+        if conocidas and d.get("cuenta") not in conocidas:
+            errores.append("{}: cuenta {!r} no esta en 'cuentas'".format(eti, d.get("cuenta")))
+        if d.get("zona") not in ZONAS_DE_CONTEO:
+            errores.append("{}: zona desconocida ({!r})".format(eti, d.get("zona")))
+        else:
+            por_zona[d["zona"]] = por_zona.get(d["zona"], 0) + 1
+        fecha = d.get("fecha")
+        if not _fecha(fecha):
+            errores.append("{}: 'fecha' invalida ({!r})".format(eti, fecha))
+        elif clave_ventana == "ventana_dias":
+            # La ventana se mide contra 'generado', nunca contra el reloj de
+            # quien valida: el archivo tiene que ser valido hoy y en un ano.
+            if fecha > generado:
+                errores.append("{}: fecha {} posterior a generado {}; reloj roto".format(
+                    eti, fecha, generado))
+            elif desde and fecha < desde:
+                errores.append("{}: fecha {} fuera de la ventana de {} dias".format(
+                    eti, fecha, ventana))
+        if clave_ventana == "ventana_horas":
+            # En horas la ventana se mide sobre `publicado`, con hora y zona;
+            # `fecha` es su dia y solo sirve para agrupar en el tablero.
+            publicado = d.get("publicado")
+            if not _es_iso(publicado):
+                errores.append("{}: 'publicado' debe ser fecha-hora ISO ({!r})".format(
+                    eti, publicado))
+            else:
+                pub_dt = datetime.fromisoformat(str(publicado).replace("Z", "+00:00"))
+                if _fecha(fecha) and str(publicado)[:10] != fecha:
+                    errores.append("{}: 'fecha' {} no es el dia de 'publicado' {}".format(
+                        eti, fecha, publicado))
+                if generado_dt is not None:
+                    if pub_dt > generado_dt:
+                        errores.append("{}: publicado {} posterior a generado; reloj roto".format(
+                            eti, publicado))
+                    elif pub_dt < desde_dt:
+                        errores.append("{}: publicado {} fuera de la ventana de {} horas".format(
+                            eti, publicado, ventana))
+        elif "publicado" in d:
+            errores.append("{}: 'publicado' no aplica a {}".format(eti, plataforma))
+        titulo = d.get("titulo")
+        if not isinstance(titulo, str):
+            errores.append("{}: 'titulo' debe ser texto".format(eti))
+        elif len(titulo) > 160:
+            errores.append("{}: 'titulo' de {} caracteres; es el titular del pie, no "
+                           "el pie completo (maximo 160)".format(eti, len(titulo)))
+        elif not titulo.strip():
+            avisos.append("{}: post sin pie; la fila saldra solo con la liga".format(eti))
+        if d.get("tipo") not in TIPOS_POST:
+            errores.append("{}: tipo {!r} desconocido; se espera {}".format(
+                eti, d.get("tipo"), "|".join(TIPOS_POST)))
+        for campo in ("likes", "comentarios", "cosechados", "opinion") + tuple(esp["cifras"]):
+            if not _entero_no_negativo(d.get(campo)):
+                errores.append("{}: '{}' debe ser entero no negativo".format(eti, campo))
+        for campo in ("compartidos", "guardados"):
+            if campo in d and campo not in esp["cifras"]:
+                errores.append("{}: '{}' no existe en {}; ausente es 'sin dato', nunca 0".format(
+                    eti, campo, plataforma))
+        if "reproducciones" in d and not (
+                _entero_no_negativo(d["reproducciones"]) and d["reproducciones"] > 0):
+            errores.append("{}: 'reproducciones' solo se emite si es mayor que 0; un cero "
+                           "se leeria como 'nadie lo vio' y no como 'no es video'".format(eti))
+        if _entero_no_negativo(d.get("cosechados")):
+            if d["cosechados"] == 0:
+                avisos.append("{}: post destacado sin comentarios cosechados".format(eti))
+            elif _entero_no_negativo(d.get("comentarios")) and d["cosechados"] > d["comentarios"]:
+                avisos.append("{}: cosechados {} > comentarios {} que reporta el actor".format(
+                    eti, d["cosechados"], d["comentarios"]))
+        sen = d.get("sentimiento")
+        _validar_conteo_sentimiento(sen, eti, errores)
+        if isinstance(sen, dict) and isinstance(d.get("opinion"), int):
+            suma = sum(sen.get(k) or 0
+                       for k in SENTIMIENTOS + ("sin_clasificar", "sin_modelo_idioma"))
+            if suma != d["opinion"]:
+                errores.append("{}: sentimiento suma {} y 'opinion' es {}".format(
+                    eti, suma, d["opinion"]))
+        temas = d.get("temas")
+        if not isinstance(temas, list) or len(temas) > 3:
+            errores.append("{}: 'temas' debe ser lista de hasta 3".format(eti))
+        else:
+            for t in temas:
+                if not isinstance(t, dict) or not _texto(t.get("tema")) \
+                        or not _entero_no_negativo(t.get("comentarios")):
+                    errores.append("{}: cada tema necesita 'tema' y 'comentarios'".format(eti))
+                    break
+            claves = [(-t.get("comentarios", 0), t.get("tema", ""))
+                      for t in temas if isinstance(t, dict)]
+            if claves != sorted(claves):
+                errores.append("{}: 'temas' no esta ordenado".format(eti))
+
+    if len(set(urls)) != len(urls):
+        errores.append("redes: 'destacados' repite una url")
+    claves = [(-d.get("likes", 0), -d.get("comentarios", 0), d.get("url", ""))
+              for d in lista if isinstance(d, dict)]
+    if claves != sorted(claves):
+        errores.append("redes: 'destacados' no esta ordenado por (-likes, -comentarios, url); "
+                       "un orden distinto ensucia el diff de cada corrida detras de "
+                       "`git diff --cached --quiet`")
+    if maximo:
+        for z, n in sorted(por_zona.items()):
+            if n > maximo:
+                errores.append("redes: {} destacados de {} y el maximo es {}".format(n, z, maximo))
+
+
+def validar_redes_comentarios(datos, redes=None, plataforma="instagram"):
+    """efimero/redes-comentarios.json: el texto publicado, sin identidad.
+
+    Este archivo NO va a git (ver .gitignore) y se regenera en cada corrida.
+    Lo que se valida es lo que lo acota: solo posts destacados, la regla del
+    "ver mas" (del sexto en adelante, solo con likes), ni una clave de
+    identidad ni el id del comentario, y el recorte del texto.
+    """
+    errores, avisos = [], []
+    et = "redes-comentarios"
+    esp = PLATAFORMAS_REDES[plataforma]
+    if datos.get("esquema") != ESQUEMA:
+        errores.append("{}: 'esquema' debe ser {}".format(et, ESQUEMA))
+    if not _es_iso(datos.get("generado")):
+        errores.append("{}: 'generado' no es ISO-8601".format(et))
+    if datos.get("plataforma") != plataforma:
+        errores.append("{}: 'plataforma' debe ser {!r} ({!r})".format(
+            et, plataforma, datos.get("plataforma")))
+    if datos.get("retencion_dias") != 30:
+        errores.append("{}: 'retencion_dias' debe ser 30".format(et))
+    visibles, maximo = datos.get("visibles"), datos.get("maximo")
+    if not (_entero_no_negativo(visibles) and visibles >= 1):
+        errores.append("{}: 'visibles' debe ser entero positivo".format(et))
+        visibles = None
+    if not (_entero_no_negativo(maximo) and maximo >= (visibles or 1)):
+        errores.append("{}: 'maximo' debe ser entero >= visibles".format(et))
+        maximo = None
+
+    for ruta in _claves_prohibidas(datos,
+                                   CLAVES_PROHIBIDAS_COMENTARIO_PUBLICADO | esp["prohibidas"]):
+        errores.append(
+            "{}: clave prohibida (identidad o id) en {}. La identidad se tira al "
+            "ingerir y el id de Instagram nunca se publica.".format(et, ruta))
+    for ruta in _claves_prohibidas(datos, frozenset({"porcentaje", "pct"})):
+        errores.append("{}: porcentaje prohibido en {}".format(et, ruta))
+
+    por_post = datos.get("por_post")
+    if not isinstance(por_post, dict):
+        errores.append("{}: 'por_post' debe ser {{url: [comentarios]}}".format(et))
+        return errores, avisos
+    if list(por_post) != sorted(por_post):
+        errores.append("{}: 'por_post' no esta ordenado por url".format(et))
+
+    destacadas = None
+    if isinstance(redes, dict) and isinstance(redes.get("destacados"), list):
+        destacadas = {d.get("url") for d in redes["destacados"] if isinstance(d, dict)}
+
+    for url, lista in por_post.items():
+        eti = "{}[{}]".format(et, url)
+        if destacadas is not None and url not in destacadas:
+            errores.append("{}: post que no esta en redes.destacados".format(eti))
+        if not isinstance(lista, list):
+            errores.append("{}: debe ser lista".format(eti))
+            continue
+        if maximo and len(lista) > maximo:
+            errores.append("{}: {} comentarios y el maximo es {}".format(eti, len(lista), maximo))
+        likes_previos = None
+        for i, c in enumerate(lista):
+            if not isinstance(c, dict):
+                errores.append("{}[{}]: debe ser objeto".format(eti, i))
+                continue
+            sobrantes = set(c) - CLAVES_COMENTARIO_PUBLICADO
+            faltantes = CLAVES_COMENTARIO_PUBLICADO - set(c)
+            if sobrantes or faltantes:
+                errores.append("{}[{}]: claves exactas {}; sobran {} faltan {}".format(
+                    eti, i, sorted(CLAVES_COMENTARIO_PUBLICADO), sorted(sobrantes),
+                    sorted(faltantes)))
+                continue
+            if not _texto(c["texto"]):
+                errores.append("{}[{}]: 'texto' vacio".format(eti, i))
+            elif len(c["texto"]) > 300:
+                errores.append("{}[{}]: 'texto' de {} caracteres; el recorte es 300".format(
+                    eti, i, len(c["texto"])))
+            elif RE_MENCION_PUBLICADA.search(c["texto"]):
+                # La identidad de un tercero es identidad: pulso/instagram.py
+                # la enmascara al publicar, asi que si llego aqui se rompio.
+                errores.append("{}[{}]: 'texto' trae una mencion @usuario sin enmascarar".format(
+                    eti, i))
+            if not _entero_no_negativo(c["likes"]):
+                errores.append("{}[{}]: 'likes' debe ser entero no negativo".format(eti, i))
+            else:
+                if likes_previos is not None and c["likes"] > likes_previos:
+                    errores.append("{}[{}]: no esta ordenado por likes".format(eti, i))
+                likes_previos = c["likes"]
+                # La regla del "ver mas": lo que no se ve de entrada solo
+                # entra si alguien lo voto.
+                if visibles and i >= visibles and c["likes"] == 0:
+                    errores.append("{}[{}]: comentario sin likes despues de los {} visibles".format(
+                        eti, i, visibles))
+            if c["fecha"] != "" and not _fecha(c["fecha"]):
+                errores.append("{}[{}]: 'fecha' invalida ({!r})".format(eti, i, c["fecha"]))
+            if c["sentimiento"] is not None and c["sentimiento"] not in ETIQUETAS_COMENTARIO:
+                errores.append("{}[{}]: sentimiento {!r} desconocido".format(
+                    eti, i, c["sentimiento"]))
+    return errores, avisos
+
+
+def validar_redes(datos, plataforma="instagram"):
+    """redes.json: comentarios de Instagram, solo conteos.
+
+    Es mas estricto que validar_conversacion en dos puntos, y los dos tienen
+    razon escrita en pulso/instagram.py:
+
+    - `ownerUsername` y compania son claves prohibidas ademas de las de
+      conversacion, porque en Instagram la identidad se tira al INGERIR y no
+      al derivar. Si una de esas claves aparece aqui, el filtro de ingesta se
+      rompio en algun punto y el dato ya paso por el cache.
+    - No se admite ninguna clave que termine en '_pct' ni un 'porcentaje'. Los
+      planes gratuitos de Apify dan ~15 comentarios por post, o sea debajo del
+      minimo de 30 que fija PRODUCT.md para emitir porcentajes.
+    """
+    errores, avisos = [], []
+    if datos.get("esquema") != ESQUEMA:
+        errores.append("redes: 'esquema' debe ser {}".format(ESQUEMA))
+    if not _es_iso(datos.get("generado")):
+        errores.append("redes: 'generado' no es ISO-8601 ({!r})".format(datos.get("generado")))
+    esp = PLATAFORMAS_REDES[plataforma]
+    if datos.get("plataforma") != plataforma:
+        errores.append("redes: 'plataforma' debe ser {!r} ({!r})".format(
+            plataforma, datos.get("plataforma")))
+    if datos.get("retencion_dias") != 30:
+        errores.append(
+            "redes: 'retencion_dias' debe ser 30. Meta no concede plazo alguno; "
+            "se aplica el mas corto ya implementado (LFPDPPP y CPRA).")
+
+    for campo in ("comentarios_vigentes", "posts_vigentes", "opinion",
+                  "repetidos", "reacciones"):
+        if not _entero_no_negativo(datos.get(campo)):
+            errores.append("redes: '{}' debe ser entero no negativo".format(campo))
+
+    prohibidas = CLAVES_PROHIBIDAS_CONVERSACION | CLAVES_PROHIBIDAS_REDES | esp["prohibidas"]
+    for ruta in _claves_prohibidas(datos, prohibidas):
+        errores.append(
+            "redes: clave prohibida (texto literal o identidad): {}. La identidad "
+            "se tira al ingerir, asi que si llego hasta aqui el filtro de "
+            "{} se rompio.".format(ruta, esp["modulo"]))
+
+    for ruta in _claves_prohibidas(datos, frozenset({"porcentaje", "pct"})):
+        errores.append("redes: porcentaje prohibido en {} (regla de los 30)".format(ruta))
+
+    for campo in ("por_zona", "por_cuenta", "por_idioma"):
+        mapa = datos.get(campo)
+        if not isinstance(mapa, dict) or not all(_entero_no_negativo(n) for n in mapa.values()):
+            errores.append("redes: '{}' debe ser {{clave: conteo}}".format(campo))
+            continue
+        # Determinismo: el cron commitea data/ detras de `git diff --cached
+        # --quiet`, y un mapa desordenado ensucia el diff en cada corrida.
+        if list(mapa) != sorted(mapa):
+            errores.append("redes: '{}' no esta ordenado por clave".format(campo))
+    if isinstance(datos.get("por_zona"), dict):
+        for z in datos["por_zona"]:
+            if z not in ZONAS_DE_CONTEO:
+                errores.append("redes: por_zona con zona desconocida ({!r})".format(z))
+    if isinstance(datos.get("por_idioma"), dict):
+        for i in datos["por_idioma"]:
+            if i not in ("es", "en"):
+                errores.append(
+                    "redes: idioma {!r} desconocido. El modelo de tono es espanol y "
+                    "a texto en otro idioma no devuelve error, devuelve una "
+                    "etiqueta plausible.".format(i))
+
+    if not isinstance(datos.get("por_tema"), list):
+        errores.append("redes: 'por_tema' debe ser una lista")
+    else:
+        for t in datos["por_tema"]:
+            et = "redes.por_tema[{}]".format(t.get("tema") if isinstance(t, dict) else "?")
+            if not isinstance(t, dict) or not _texto(t.get("tema")):
+                errores.append("{}: falta 'tema'".format(et))
+                continue
+            for campo in ("comentarios", "posts"):
+                if not _entero_no_negativo(t.get(campo)):
+                    errores.append("{}: '{}' debe ser entero no negativo".format(et, campo))
+            # Un tema sostenido por un solo post no es conversacion de la
+            # ciudad: es un post. Aviso y no error, porque el dato es real.
+            if t.get("posts") == 1 and (t.get("comentarios") or 0) >= 5:
+                avisos.append(
+                    "redes.por_tema[{}]: {} comentarios en UN solo post; no es un "
+                    "tema de la ciudad".format(t.get("tema"), t.get("comentarios")))
+
+    sen = datos.get("sentimiento")
+    if not isinstance(sen, dict):
+        errores.append("redes: 'sentimiento' debe ser objeto")
+    else:
+        _validar_conteo_sentimiento(sen, "redes.sentimiento", errores)
+        if sen.get("metodo") not in ("modelo", "ninguno"):
+            errores.append("redes.sentimiento: 'metodo' debe ser 'modelo' o 'ninguno'")
+        # El tono se cuenta sobre `opinion`, no sobre el total: los aplausos
+        # y lo repetido quedan fuera. Si los conteos no cuadran con opinion,
+        # alguien sumo por otro lado y el panel esta mintiendo.
+        # Las CINCO cubetas, no las tres etiquetadas: cada comentario de
+        # opinion cae en exactamente una, y las dos que faltan
+        # (sin_clasificar, sin_modelo_idioma) son justo las que esconden un
+        # modelo que no corrio o que no habla el idioma.
+        suma = sum(sen.get(k) or 0
+                   for k in SENTIMIENTOS + ("sin_clasificar", "sin_modelo_idioma"))
+        if isinstance(datos.get("opinion"), int) and suma != datos["opinion"]:
+            errores.append(
+                "redes.sentimiento: los conteos suman {} y 'opinion' es {}; el tono "
+                "se cuenta sobre opinion, sin reacciones ni repetidos".format(
+                    suma, datos["opinion"]))
+        if not _entero_no_negativo(sen.get("sin_modelo_idioma")):
+            errores.append("redes.sentimiento: 'sin_modelo_idioma' debe ser entero")
+
+    salud = datos.get("salud")
+    if not isinstance(salud, list):
+        errores.append("redes: 'salud' debe ser una lista")
+    else:
+        for s in salud:
+            if not isinstance(s, dict) or not _texto(s.get("cuenta")):
+                errores.append("redes.salud: cada registro necesita 'cuenta'")
+                continue
+            # 'crudos' es lo facturado y 'comentarios' lo ingerido. Un
+            # crudos alto con comentarios en cero es una cuenta que se cobra
+            # y no aporta: relleno de posts sin comentarios.
+            if s.get("crudos") is not None and not _entero_no_negativo(s["crudos"]):
+                errores.append("redes.salud[{}]: 'crudos' debe ser entero no negativo".format(
+                    s.get("cuenta")))
+            if s.get("estado") not in ("ok", "fallo", "sin_token"):
+                errores.append("redes.salud[{}]: estado {!r} desconocido".format(
+                    s["cuenta"], s.get("estado")))
+        if [s.get("cuenta") for s in salud if isinstance(s, dict)] != sorted(
+                s.get("cuenta") for s in salud if isinstance(s, dict)):
+            errores.append("redes: 'salud' no esta ordenada por cuenta")
+
+    _validar_destacados(datos, errores, avisos, plataforma)
+
+    # Un panel sin cuentas verificadas no es un error, pero tiene que doler a
+    # la vista: un handle derivado del nombre del medio da una cuenta ajena o
+    # vacia, y las dos se cobran igual. Ver config/instagram.json.
+    if isinstance(salud, list) and not salud:
+        avisos.append("redes: ninguna cuenta verificada; el panel va a salir vacio")
+
+    return errores, avisos
+
+
 def validar_indicadores(datos):
     """indicadores.json: cifras oficiales leidas, no calculadas aqui.
 
@@ -1083,7 +1549,7 @@ def validar_estado(datos):
 
 # ------------------------------------------------------------------- todo
 
-def validar_todo(dir_config="config", dir_datos="data", hoy=None):
+def validar_todo(dir_config="config", dir_datos="data", hoy=None, dir_efimero="efimero"):
     """Valida todo lo que exista. data/ ausente es aviso, no error.
 
     efimero/ es el texto de comentarios publicado fuera de git: se valida si
@@ -1159,6 +1625,10 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
     opcionales = {
         "conversacion": (os.path.join(dir_datos, "conversacion.json"), validar_conversacion),
         "indicadores": (os.path.join(dir_datos, "indicadores.json"), validar_indicadores),
+        # redes.json lo escribe `pulso redes` y pide APIFY_TOKEN mas al menos
+        # una cuenta verificada en config/instagram.json. Igual que
+        # conversacion, no es error que falte.
+        "redes": (os.path.join(dir_datos, "redes.json"), validar_redes),
     }
     presentes = [n for n, (ruta, _) in archivos.items() if os.path.exists(ruta)]
     if not presentes:
@@ -1196,6 +1666,24 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
         errores += e
         avisos += a
 
+    # El texto publicado vive fuera de data/ y de git. Si esta, tiene que
+    # corresponder al archivo de conteos de este corte; solo, es huerfano.
+    for archivo_texto, nombre, plataforma in (
+            ("redes-comentarios.json", "redes", "instagram"),):
+        ruta_texto = os.path.join(dir_efimero, archivo_texto)
+        if not os.path.exists(ruta_texto):
+            continue
+        if nombre not in leidos:
+            errores.append("{}: existe {} sin {}.json en {}".format(
+                archivo_texto[:-5], ruta_texto, nombre, dir_datos))
+            continue
+        try:
+            e, a = validar_redes_comentarios(_leer(ruta_texto), leidos[nombre], plataforma)
+            errores += e
+            avisos += a
+        except (ValueError, OSError) as ex:
+            errores.append("{}: no se pudo leer {} ({})".format(
+                archivo_texto[:-5], ruta_texto, ex))
 
     if ventana is not None:
         e, a = validar_archivo(dir_datos, ventana, roster, medios, hoy=hoy,

@@ -16,6 +16,14 @@ cache/
 # segundo ejemplar del codigo, desfasado desde el primer edit.
 .pnpm-store/
 
+# Texto de comentarios de Instagram que SI se publica en la pagina (decision
+# del cliente del 8 de septiembre de 2026), pero que NO entra a git: el
+# historial no puede cumplir la retencion de 30 dias. `pulso redes` lo
+# regenera en cada corrida desde cache/instagram/, y el sitio lo copia al
+# construir. Sin este archivo la pagina muestra los posts sin comentarios y
+# lo dice; con el en git, cada frase viviria en cada clon para siempre.
+efimero/
+
 # Credenciales. APIFY_TOKEN y YOUTUBE_API_KEY viven aqui, y pulso/entorno.py
 # lee el archivo directo, asi que el token esta a un `git add -A` de quedar
 # publicado. La regla es explicita en vez de depender de que la carpeta que

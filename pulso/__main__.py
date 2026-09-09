@@ -3,6 +3,7 @@
   python -m pulso correr [--sin-red] [--descubrimiento-web] [--salida data] [--metodo ninguno|diccionario|modelo]
   python -m pulso delegaciones --actualizar
   python -m pulso conversacion [--sentimiento ninguno|modelo]
+  python -m pulso redes [--posts N] [--comentarios N]
   python -m pulso apify [--verificar]
   python -m pulso validar [--config config] [--datos data]
   python -m pulso sitio [--destino _site]
@@ -218,6 +219,106 @@ def cmd_indicadores(args):
     return 0 if not fallos else 0
 
 
+def cmd_redes(args):
+    """Cosecha comentarios de Instagram y escribe SOLO conteos derivados.
+
+    El texto crudo queda en cache/instagram (ignorado por git, TTL de 30
+    dias) y la identidad de quien comento no llega ni ahi: se tira al
+    ingerir. Ver el encabezado de pulso/instagram.py.
+    """
+    from .apify import Presupuesto
+    from .instagram import (cosechar, derivar, leer_cache, leer_publicaciones,
+                            publicar_comentarios, sondear)
+    from .pipeline import ahora_utc, _escribir
+
+    cfg = _leer(os.path.join(args.config, "instagram.json"))
+
+    # --sondear no cosecha ni escribe data/: solo pregunta si el handle es el
+    # medio. Cuesta un resultado por cuenta. Ver instagram.sondear().
+    if args.sondear:
+        handles = args.sondear if args.sondear != ["*"] else [
+            c["handle"] for c in cfg["cuentas"] if c.get("handle")]
+        print("{:<24} {:>9} {:>7}  {:<9} {}".format(
+            "handle", "seguidores", "posts", "veredicto", "nombre / bio"))
+        for s in sondear(handles):
+            print("{:<24} {:>9} {:>7}  {:<9} {} · {}".format(
+                s["handle"], s["seguidores"] if s["seguidores"] is not None else "-",
+                s["posts"] if s["posts"] is not None else "-",
+                s["veredicto"], s["nombre"], s["bio"]))
+        print("\nvivo = publica de verdad · ocupado = handle apartado sin publicar")
+        print("Lee la bio antes de marcar verificado: la región no se deduce del "
+              "handle (@afnoticias es de Tocantins, Brasil).")
+        return 0
+    cuentas = cfg.get("cuentas", [])
+    cosecha = cfg.get("cosecha", {})
+    apify_cfg = _leer(os.path.join(args.config, "apify.json"))
+    # El config manda para el cron; --presupuesto es para una corrida
+    # exploratoria a mano, donde interesa barrer hondo una vez y no cuatro
+    # veces al dia.
+    tope = args.presupuesto or (
+        apify_cfg.get("presupuesto") or {}).get("resultados_por_corrida", 300)
+    ahora = ahora_utc()
+
+    sin_verificar = [c["id"] for c in cuentas if c.get("activo") and not c.get("verificado")]
+    if sin_verificar:
+        print("aviso: {} cuenta(s) activas sin verificar, se omiten: {}".format(
+            len(sin_verificar), ", ".join(sin_verificar)), file=sys.stderr)
+        print("       abre cada handle, confirma que es el medio, y pon "
+              "\"verificado\": true en config/instagram.json", file=sys.stderr)
+
+    nuevos, salud, gasto = cosechar(
+        cuentas, ahora,
+        presupuesto=Presupuesto(tope),
+        cache=args.cache,
+        posts_por_cuenta=args.posts or cosecha.get("posts_por_cuenta", 5),
+        comentarios_por_post=args.comentarios or cosecha.get("comentarios_por_post", 15),
+    )
+
+    # El tono se etiqueta EN EL CACHE, comentario por comentario; a data/ solo
+    # llegan conteos. Ver pulso/sentimiento.py para lo que mide de verdad.
+    etiquetados = omitidos = 0
+    if args.sentimiento == "modelo":
+        from .sentimiento import Analizador
+        from .instagram import clasificar_cache
+        etiquetados, omitidos = clasificar_cache(args.cache, Analizador())
+
+    temas_doc = _leer(args.temas) if os.path.exists(args.temas) else {}
+    vigentes = leer_cache(args.cache)
+    panel = derivar(vigentes, ahora, salud, gasto, temas_doc.get("temas") or [],
+                    leer_publicaciones(args.cache), cuentas)
+    _escribir(os.path.join(args.salida, "redes.json"), panel)
+
+    # El texto de los comentarios va a efimero/, NUNCA a data/: la carpeta
+    # esta ignorada por git y se regenera aqui en cada corrida desde el
+    # cache, asi que la retencion de 30 dias sigue siendo ejecutable. Ver el
+    # encabezado de pulso/instagram.py.
+    publicados = 0
+    if not args.sin_texto:
+        texto = publicar_comentarios(vigentes, panel["destacados"], ahora)
+        _escribir(os.path.join(args.efimero, "redes-comentarios.json"), texto)
+        publicados = sum(len(v) for v in texto["por_post"].values())
+
+    print("comentarios nuevos: {} · vigentes en cache: {} · posts: {}".format(
+        len(nuevos), panel["comentarios_vigentes"], panel["posts_vigentes"]))
+    print("destacados: {} en {} días · comentarios publicados: {} ({}, fuera de git)".format(
+        len(panel["destacados"]), panel["ventana_dias"], publicados,
+        args.efimero if not args.sin_texto else "--sin-texto"))
+    print("gasto Apify: {} de {} resultados".format(gasto["gastado"], gasto["resultados"]))
+    sen = panel["sentimiento"]
+    if sen["metodo"] == "modelo":
+        print("tono ({}): {} positivos · {} negativos · {} neutrales · {} sin clasificar"
+              " · {} sin modelo por idioma; {} etiquetados ahora".format(
+                  sen["modelo"], sen["positivo"], sen["negativo"], sen["neutral"],
+                  sen["sin_clasificar"], sen["sin_modelo_idioma"], etiquetados))
+    print("opinión {} · reacciones {} · repetidos {}".format(
+        panel["opinion"], panel["reacciones"], panel["repetidos"]))
+    for s in salud:
+        if s["estado"] != "ok":
+            print("  {} · {} · {}".format(s["cuenta"], s["estado"],
+                                          s.get("error", "")[:120]), file=sys.stderr)
+    return 0
+
+
 def cmd_apify(args):
     """Revisa el token y el catalogo de actores. No raspa nada.
 
@@ -263,7 +364,8 @@ def cmd_apify(args):
 def cmd_validar(args):
     from .validador import resumen, validar_todo
 
-    errores, avisos = validar_todo(args.config, args.datos)
+    errores, avisos = validar_todo(args.config, args.datos,
+                                   dir_efimero=getattr(args, "efimero", "efimero"))
     for a in avisos:
         print("aviso: {}".format(a))
     for e in errores:
@@ -402,6 +504,27 @@ def main(argv=None):
                         "(requiere requirements-modelo.txt); a data/ solo llegan conteos")
     k.set_defaults(fn=cmd_conversacion)
 
+    r = sub.add_parser("redes", help="comentarios de Instagram (requiere APIFY_TOKEN)")
+    r.add_argument("--salida", default="data")
+    r.add_argument("--cache", default=os.path.join("cache", "instagram"))
+    r.add_argument("--posts", type=int, default=0, help="posts por cuenta (0 usa el config)")
+    r.add_argument("--comentarios", type=int, default=0,
+                   help="comentarios por post (0 usa el config)")
+    r.add_argument("--temas", default=os.path.join("data", "temas.json"))
+    r.add_argument("--sentimiento", default="ninguno", choices=("ninguno", "modelo"),
+                   help="etiqueta el tono de cada comentario con el modelo local; "
+                        "a data/ solo llegan conteos")
+    r.add_argument("--presupuesto", type=int, default=0,
+                   help="tope de resultados de esta corrida (0 usa config/apify.json)")
+    r.add_argument("--efimero", default="efimero",
+                   help="carpeta IGNORADA POR GIT donde va el texto de los comentarios "
+                        "publicados (redes-comentarios.json); se regenera en cada corrida")
+    r.add_argument("--sin-texto", action="store_true",
+                   help="no escribe el texto de los comentarios; data/ sale igual")
+    r.add_argument("--sondear", nargs="+", metavar="HANDLE",
+                   help="pregunta si esos handles son el medio y sale; "
+                        "'*' sondea los del config. Cuesta 1 resultado por cuenta")
+    r.set_defaults(fn=cmd_redes)
 
 
     a = sub.add_parser("apify", help="revisa APIFY_TOKEN y el catálogo de actores")
@@ -409,8 +532,10 @@ def main(argv=None):
                    help="pregunta a Apify si el token sirve (una llamada, sin costo)")
     a.set_defaults(fn=cmd_apify)
 
-    v = sub.add_parser("validar", help="valida config/ y data/")
+    v = sub.add_parser("validar", help="valida config/, data/ y efimero/")
     v.add_argument("--datos", default="data")
+    v.add_argument("--efimero", default="efimero",
+                   help="carpeta del texto de comentarios publicado; se valida si existe")
     v.set_defaults(fn=cmd_validar)
 
     s = sub.add_parser("sitio", help="arma _site/ para publicar en Pages")
