@@ -135,6 +135,71 @@ publica en `estado.json` como `notas_sin_modelo_idioma`. El idioma **no se
 adivina del texto**: adivinar falla justo en los titulares cortos y con
 nombres propios, que son casi todos. Lo declara el catálogo.
 
+## `config/busquedas.json`
+
+Consultas permanentes contra el RSS de búsqueda de Google Noticias. Se
+cosechan en la misma corrida del cron que los feeds del catálogo: no hay verbo
+ni cron nuevos, y el archivo es **opcional** (sin él, el pipeline se comporta
+igual que antes de que existiera).
+
+Existe porque el catálogo solo se entera de una nota cuando el medio la publica
+en su propio feed, y hay municipios donde ese feed no existe. San Quintín es el
+caso declarado: su renglón en `medios.json` es «registro deliberado de un
+hueco, no un medio».
+
+| Campo | Notas |
+|---|---|
+| `id` | `^bq_[a-z0-9_]{2,20}$`. **No** es `RE_ID`: doce caracteres no alcanzan para nombrar una consulta, y el prefijo evita que choque con un medio en `data/fuentes[].id` |
+| `q` | la consulta tal cual se escribiría en news.google.com. Los operadores (`site:`, comillas, `OR`) funcionan |
+| `idioma` | `es` o `en`. Elige el locale (`hl`/`gl`/`ceid`) **y** decide con qué modelo se etiqueta el tono de los publicadores que no están en el catálogo |
+| `activo` | `false` apaga la consulta sin perder su registro |
+| `ventana` | opcional, `when:<n><h\|d\|m\|y>`. Por omisión `when:1d` |
+| `publicadores` | mapa a mano de la etiqueta de Google → `id` del catálogo |
+
+Tres reglas que el validador impone y conviene entender:
+
+**Una búsqueda no lleva `zona`.** Si la llevara y llegara a `zona_medio`, la
+regla de medio de una sola zona le acreditaría esa zona a **todo** titular que
+la consulta devuelva sin nombrar ningún lugar. Es el error de El Imparcial y
+Hermosillo con otro disfraz. Las fuentes sintéticas son `estatal`, y la zona
+sale del titular.
+
+**`when:` no va en `q`.** La ventana es una propiedad de la cadencia del cron,
+no de la pregunta que hizo la persona. Puesta en cada renglón, cambiar
+`17 */6 * * *` obligaría a editarlos todos y el que se olvide se queda con otra
+ventana sin que nada lo señale.
+
+**Un renglón no se borra, se apaga.** Cada nota que trajo guarda su `id` en
+`descubierta_por`; borrarlo invalida el histórico que produjo y además deja sin
+idioma a sus fuentes sintéticas.
+
+### Por qué `publicadores` es a mano y hace falta
+
+Google rotula a los diarios de grupo con el dominio del **grupo**. El Sol de
+Tijuana llega como `oem.com.mx`, que no es su dominio ni el de La Voz de la
+Frontera —sus dos hermanos del catálogo, y los dos feeds más largos que hay—.
+Sin el mapa, los dos medios de mayor volumen son justo los que la resolución
+por dominio falla, y cada una de sus notas entra como fuente sintética
+duplicando una nota curada. Adivinar no es opción: atribuye la nota al medio
+equivocado.
+
+La resolución va en tres pasos: dominio del `<source>`, luego nombre plegado,
+luego el mapa. Si ninguno empata, la nota recibe `fuente: gn-<hash12>` derivado
+del dominio del publicador.
+
+### El enlace de una nota de búsqueda no es el del medio
+
+El `<link>` de Google es un redirector opaco
+(`news.google.com/rss/articles/CBM...`). **No se resuelve**: seguirlo es una
+petición más por nota y el token puede rotar entre corridas, con lo que la
+misma nota cambiaría de `url` en una corrida sin novedad. Se guarda tal cual, y
+el `dominio` —que es lo que rotula el muro— se toma del `<source>`.
+
+Por lo mismo, una copia curada siempre le gana a una de Google: el cruce entre
+las dos no puede ser por URL, así que se hace por titular plegado.
+
+---
+
 ### `config/delegaciones-tijuana.json`
 
 Es el snapshot versionado del directorio oficial de IMPLAN. La página declara
@@ -185,8 +250,8 @@ y el tablero se los bajaba todos en cada visita. Con la ventana el pico son
 | Campo | Notas |
 |---|---|
 | `id` | `sha256("<fuente>|<título plegado>")[:16]`. Se **recalcula** en cada validación |
-| `fuente` | `id` de un medio del catálogo |
-| `origen`, `descubierta_por` | opcionales: `descubrimiento_web` y `gdelt`; nunca contienen el cuerpo del artículo |
+| `fuente` | `id` de un medio del catálogo, o una fuente sintética: `web-<hash12>` (descubrimiento) o `gn-<hash12>` (búsqueda) |
+| `origen`, `descubierta_por` | opcionales. `descubrimiento_web`/`gdelt`, o `busqueda_web`/`<id de la búsqueda>`; nunca contienen el cuerpo del artículo |
 | `zona_medio` | cobertura declarada del medio; tiene que coincidir con el catálogo |
 | `zonas` | zonas de las que **habla la nota**. Puede traer varias, o ninguna |
 | `delegaciones` | delegaciones de Tijuana que nombra el **titular**. Solo trae algo si `zonas` incluye Tijuana |
@@ -352,6 +417,21 @@ El registro adicional `id: "descubrimiento-web"`, cuando se activa
 páginas visitadas, aceptadas, rechazos, exclusiones de robots y fallos. GDELT
 solo se usa para descubrir URLs transitorias; el publisher aporta el titular,
 dominio y fecha que sí se persisten.
+
+Cada búsqueda activa de `config/busquedas.json` trae **su propio registro**,
+con `metodo: "busqueda"`, `zona: "estatal"` y su `id` (`bq_...`). Es un
+renglón por consulta y no uno agregado, por dos razones: cada consulta falla
+por su cuenta y la banda de salud tiene que poder decir cuál, y el panel de
+cobertura filtra las fuentes por `zona`, así que un renglón agregado sin zona
+no aparecería en ninguna página.
+
+Su `detalle` lleva diez conteos: `items`, `sin_publicador`, `sin_fecha`,
+`fuera_de_ventana`, `sin_sufijo`, `resueltas`, `sinteticas`, `recortadas`,
+`notas` y `sin_zona`. Los dos últimos son los que se leen al revisar:
+`sin_zona` dice cuántas de las que trajo **no llegan al muro** porque su
+titular no nombra ningún lugar, que es la única forma de saber si una consulta
+está bien escrita sin abrir el archivo. `resueltas` + `sinteticas` suma
+`obtenidas`; lo recortado por el cupo no cuenta como resuelto.
 
 ---
 
@@ -597,6 +677,320 @@ El cache es efímero por corrida, así que sin persistirlo la ventana de 30 día
 no existiría: cada corrida derivaría solo de sí misma. Se persiste con
 `actions/cache`, que no es git, caduca solo y es privado del repo.
 
+## `data/redes.json` — comentarios de Instagram
+
+Lo escribe `python -m pulso redes`, vía Apify y **sin iniciar sesión**. Es
+opcional: si el archivo no está, el validador no protesta.
+
+```json
+{
+ "esquema": 1,
+ "generado": "2026-09-08T19:41:52+00:00",
+ "plataforma": "instagram",
+ "retencion_dias": 30,
+ "comentarios_vigentes": 567,
+ "posts_vigentes": 79,
+ "opinion": 492,
+ "repetidos": 12,
+ "reacciones": 66,
+ "por_zona": {"Ensenada": 61, "Tijuana": 351},
+ "por_cuenta": {"elvigia_ig": 61, "zeta_ig": 351},
+ "por_idioma": {"es": 412},
+ "por_tema": [{"tema": "morena", "comentarios": 15, "posts": 5}],
+ "salud": [{"cuenta": "zeta_ig", "estado": "ok", "posts": 5, "comentarios": 74}],
+ "gasto": {"resultados": 300, "gastado": 158, "por_concepto": {"zeta_ig": 79}}
+}
+```
+
+### Por qué este panel es más pobre que el de YouTube, a propósito
+
+**La identidad no se omite al publicar: no se ingiere.** El actor devuelve
+`ownerUsername`, `ownerProfilePicUrl` y `ownerId`, y `_limpiar()` los tira
+antes de escribir el caché. Ninguno hace falta para ningún conteo, y lo que
+no se guarda no se puede filtrar ni hay que borrarlo después. El validador
+trata esas claves como prohibidas en `data/`: si alguna aparece, el filtro de
+ingesta se rompió *antes* del caché, no después.
+
+El `id` de cada comentario tampoco es el de Instagram, sino
+`sha256(post|texto plegado)`. Es estable entre corridas —o sea idempotente—
+y no ata la frase a una cuenta. Dos comentarios idénticos en el mismo post
+colapsan en uno a propósito: el mismo comentario copiado dos veces no son dos
+opiniones.
+
+**No hay porcentajes en ningún nivel.** Los planes gratuitos de Apify
+devuelven ~15 comentarios por post, debajo del mínimo de 30 que fija
+PRODUCT.md. El validador rechaza cualquier clave `porcentaje` o `pct`, y el
+tablero tampoco debe calcularlos en el cliente: un `n / total` en un
+componente vuelve a meter por la puerta de atrás lo que el pipeline se negó a
+emitir.
+
+**La retención es de 30 días con menos derecho a ellos que YouTube.** YouTube
+al menos *concede* ese plazo por política escrita (III.E.4.d). Meta no concede
+nada: lo que ata aquí son sus términos más la LFPDPPP mexicana y la CPRA
+californiana, porque un comentario con nombre propio es dato personal en las
+dos. Ante la duda se aplica el plazo más corto que ya está implementado.
+
+### `opinion`, `repetidos` y `reacciones`
+
+Tres lecturas del mismo total, publicadas por separado y **no restadas entre
+sí** en el tablero. Sólo `opinion` alimenta `por_tema`.
+
+**`repetidos`** son los comentarios cuyo texto exacto aparece en 3 o más posts
+*distintos de la misma cuenta*. Eso ya no es conversación, es una persona
+insistiendo. El caso que lo motivó: la cosecha del 8 de septiembre de 2026
+trajo `PÁGINA DE 4SC0 Y APARTE FAKE!!` idéntico en **nueve** posts de AFN, el
+20% de los comentarios de esa cuenta. Dos mecanismos que ya existían no lo
+atrapan, y por buenas razones: el deduplicado no, porque el id es
+`sha256(post|texto)` y el mismo comentario en dos posts sí son dos hechos; y
+plegar el texto tampoco, porque el `4SC0` es evasión deliberada, no un acento.
+
+**`reacciones`** son los comentarios sin un solo carácter alfanumérico: `👏`,
+`😂😂😂`. Son reacción real y se cuentan, pero no dicen *de qué* hablan, así
+que sumarlas a un tema sería inflarlo con aplausos.
+
+**`posts` dentro de `por_tema`** dice cuántos posts distintos sostienen el
+tema. Es la lección del clúster «agua» de YouTube, que resultó ser un solo
+vlog del malecón: un tema con `posts: 1` es un post, no la ciudad. El
+validador lo avisa a partir de 5 comentarios en un solo post.
+
+### `gasto`, y por qué no es decorativo
+
+Son dos pasadas pagadas y las dos cuentan contra el mismo tope: `resultsType:
+"comments"` **solo acepta URLs de post**, así que no hay forma de pedir «los
+comentarios de esta cuenta» en una llamada. Primero se piden los posts del
+perfil, luego los comentarios de esos posts.
+
+En `salud`, `comentarios` es lo **ingerido** y `crudos` lo **facturado**. No
+son lo mismo: un post sin comentarios devuelve igual un item de relleno con
+`text` vacío, que el filtro descarta pero Apify ya cobró. En la primera
+cosecha El Vigía y Síntesis reportaban 5 comentarios cada uno y habían
+ingerido cero.
+
+`cache/instagram/vistos.json` registra qué posts ya se cosecharon y cuándo.
+Sin él, un cron de cuatro corridas al día paga cuatro veces por los mismos
+comentarios y el deduplicado del caché lo esconde: **los conteos salen bien y
+la factura sale mal.** Ese archivo tiene que sobrevivir entre corridas
+(`actions/cache`), igual que el caché de YouTube y por una razón distinta.
+
+### `destacados`, `cuentas`, `ventana_dias`, `destacados_maximo`
+
+Desde el 8 de septiembre de 2026 el archivo lleva también los posts de la
+última semana con más likes. Un corte anterior a estos campos sigue siendo
+válido: su ausencia es aviso, no error.
+
+```json
+"ventana_dias": 7,
+"destacados_maximo": 15,
+"cuentas": [
+ {"cuenta": "canal66_ig", "nombre": "Mexicali — sin cuenta encontrada", "zona": "Mexicali", "activa": false},
+ {"cuenta": "tjnoticias_ig", "nombre": "TjNoticias", "zona": "Tijuana", "activa": true}
+],
+"destacados": [
+ {
+  "url": "https://www.instagram.com/p/DdB_XeDm0S6/",
+  "cuenta": "tjnoticias_ig",
+  "zona": "Tijuana",
+  "fecha": "2026-09-06",
+  "titulo": "Cierran la garita de San Ysidro por obras",
+  "tipo": "video",
+  "likes": 1834,
+  "comentarios": 212,
+  "reproducciones": 12400,
+  "cosechados": 30,
+  "opinion": 27,
+  "sentimiento": {"positivo": 3, "negativo": 18, "neutral": 6, "sin_clasificar": 0, "sin_modelo_idioma": 0},
+  "temas": [{"tema": "garita", "comentarios": 9}]
+ }
+]
+```
+
+- **`titulo` es la primera línea del pie que escribió el medio**, recortada a
+  160 caracteres. Es la regla «titular, fuente y liga» de la prensa aplicada a
+  un post: el resto del pie no se publica, y un comentario jamás va aquí.
+- **`zona` es la sede de la cuenta**, no el tema del post, igual que
+  `por_zona`. El tablero dice «cuentas con sede en Tijuana».
+- **`destacados` es la unión del top 15 general y del top 15 de cada zona**,
+  sin repetir URL, ordenada por `(-likes, -comentarios, url)`. Así la página
+  de una zona tiene sus propios quince sin que el archivo lleve un bloque por
+  zona. El validador exige el orden (determinismo del `git diff --cached
+  --quiet`) y que ninguna zona pase de `destacados_maximo`; el largo total sí
+  puede superarlo.
+- **La ventana se mide contra `generado`**, nunca contra el reloj de quien
+  valida. Una `fecha` posterior a `generado` es reloj roto y es error.
+- **`comentarios` es el total que reporta Instagram; `cosechados` lo que hay en
+  caché** (a lo sumo `comentarios_por_post`). Se publican los dos.
+- **`reproducciones` solo existe en video y solo si es mayor que 0.** Un cero
+  se leería como «nadie lo vio» y no como «no es video». Instagram **no
+  publica compartidos, reposts ni guardados** de cuentas ajenas y el actor no
+  trae ningún campo para eso: el panel los rotula «sin dato».
+- **`likes` llega en -1** cuando la cuenta oculta los likes; se recorta a 0 y
+  el post se va al fondo. Un post que ya salió de los últimos N de su cuenta
+  conserva la última métrica vista, sin marca de tiempo.
+- **`tipo`** ∈ `imagen | video | carrusel | otro`.
+- **`cuentas` viaja sin `handle`** (clave prohibida) y con las cuentas apagadas
+  incluidas: son el registro deliberado de un hueco y permiten rotular «sin
+  cuenta» en Mexicali y San Quintín en vez de un cero.
+- `sentimiento` y `temas` de cada post se cuentan sobre su `opinion`, con las
+  mismas exclusiones que el bloque global.
+
+## `efimero/redes-comentarios.json` — el texto de los comentarios
+
+**No está en git, a propósito.** El 8 de septiembre de 2026 la dirección pidió
+ver el texto de los comentarios más votados de cada post destacado. Se
+publica, pero el historial de git no puede cumplir una retención de 30 días,
+así que `python -m pulso redes` lo escribe en `efimero/` —carpeta ignorada,
+ver `.gitignore`— regenerándolo en cada corrida desde el caché. `pulso sitio` y
+`web/scripts/sincronizar-datos.mjs` lo copian al artefacto **si existe**; un
+despliegue desde git puro sale sin él y el panel lo dice. `--sin-texto` lo
+omite.
+
+```json
+{
+ "esquema": 1,
+ "generado": "2026-09-08T20:36:52+00:00",
+ "plataforma": "instagram",
+ "retencion_dias": 30,
+ "visibles": 5,
+ "maximo": 10,
+ "por_post": {
+  "https://www.instagram.com/p/DdB_XeDm0S6/": [
+   {"texto": "…", "likes": 41, "fecha": "2026-09-06", "sentimiento": "negativo"},
+   {"texto": "…", "likes": 0, "fecha": "2026-09-07", "sentimiento": null}
+  ]
+ }
+}
+```
+
+- **Solo posts que están en `destacados`**; el validador lo cruza con el
+  `redes.json` del mismo corte, y un archivo huérfano (sin `redes.json`) es
+  error.
+- **Los primeros `visibles` van siempre; del siguiente a `maximo` solo con
+  `likes > 0`.** Es la regla literal del cliente: «ver más» no destapa
+  comentarios que nadie votó. Orden por likes y, a igual likes, el más
+  reciente primero.
+- **Cuatro claves exactas por comentario**: `texto` (recortado a 300), `likes`,
+  `fecha` (puede ser `""`), `sentimiento` (`positivo | negativo | neutral |
+  null`). **Sin `id`, sin usuario, sin URL del comentario.** Cualquier clave de
+  identidad es error, con el mismo mensaje que en `redes.json`.
+- **Fuera la brigada y las reacciones**: el mismo texto en tres o más posts de
+  la misma cuenta y los comentarios de puro emoji se cuentan en `redes.json`,
+  pero no se muestran como voz de nadie.
+- El tablero no calcula nada sobre esta lista: la pinta.
+
+## `data/tiktok.json` — videos de TikTok por búsqueda
+
+Lo escribe `python -m pulso tiktok`. **Mismo contrato que `redes.json`** (lo
+valida `validar_redes(…, plataforma="tiktok")`, con la tabla
+`PLATAFORMAS_REDES` del validador diciendo qué cambia), y es opcional. Lo que
+cambia, y por qué:
+
+- **La fuente es una búsqueda, no una cuenta.** `cuentas` trae la búsqueda
+  (`tk_tijuana_noticias`) con `zona: "estatal"`, que es la regla de fuente
+  sintética de `pulso/busquedas.py`: la fila no lleva zona porque una consulta
+  se la acreditaría a todo video que no nombre lugar alguno.
+- **La zona de cada video sale de su pie**, con el gacetero de `pulso/zonas.py`
+  y los hashtags incluidos (`#tijuana` pliega a `tijuana`). Un video que nombra
+  Hermosillo se descarta y se cuenta en `salud[].fuera`; uno que no nombra
+  lugar queda **`nacional`**, el veredicto literal del gacetero, y solo se ve
+  en la vista de región. Los comentarios heredan la zona de su video.
+- **`ventana_horas: 24` en vez de `ventana_dias`**, medida sobre `publicado`
+  (fecha-hora ISO en UTC, mismo formato que `generado`); `fecha` es su día y
+  solo sirve para agrupar. Exactamente una de las dos claves por plataforma:
+  emitir las dos obligaría a un `ventana_dias: 1` que miente.
+- **`creador`**: el @handle de quien publicó el video, en minúsculas. Es la
+  única identidad que cruza a `data/`, por decisión del cliente del 8 de
+  septiembre de 2026 (la URL ya lo trae), y el validador exige que sea el de la
+  URL. Quien comenta sigue sin ingerirse: `uniqueId`, `uid`, `avatarThumbnail`
+  y `cid` son claves prohibidas.
+- **`compartidos` y `guardados` son obligatorios**: TikTok los publica, así que
+  un 0 es cero medido. En Instagram están prohibidos, porque ahí faltar es
+  «sin dato». `reproducciones` conserva la regla compartida (solo si > 0).
+- `titulo` es la descripción del video **sin la cola de hashtags**; si el pie
+  era solo hashtags se deja intacto.
+
+```json
+{
+ "esquema": 1,
+ "generado": "2026-09-08T23:10:00+00:00",
+ "plataforma": "tiktok",
+ "retencion_dias": 30,
+ "ventana_horas": 24,
+ "destacados_maximo": 15,
+ "cuentas": [{"cuenta": "tk_tijuana_noticias", "nombre": "Tijuana noticias", "zona": "estatal", "activa": true}],
+ "destacados": [
+  {
+   "url": "https://www.tiktok.com/@tjnoticias/video/7301",
+   "cuenta": "tk_tijuana_noticias",
+   "creador": "@tjnoticias",
+   "zona": "Tijuana",
+   "publicado": "2026-09-08T10:00:00+00:00",
+   "fecha": "2026-09-08",
+   "titulo": "Cierran la garita de San Ysidro por obras",
+   "tipo": "video",
+   "likes": 1834, "comentarios": 212, "compartidos": 41, "guardados": 12, "reproducciones": 90000,
+   "cosechados": 30, "opinion": 27,
+   "sentimiento": {"positivo": 3, "negativo": 18, "neutral": 6, "sin_clasificar": 0, "sin_modelo_idioma": 0},
+   "temas": [{"tema": "garita", "comentarios": 9}]
+  }
+ ],
+ "salud": [{"cuenta": "tk_tijuana_noticias", "estado": "ok", "posts": 28, "comentarios": 410, "crudos": 430, "fuera": 1, "descartados": 1}]
+}
+```
+
+**Lo que hay que saber del actor.** `clockworks~tiktok-scraper` con
+`searchSection: "/video"`, `videoSearchSorting: "MOST_RELEVANT"` y
+`videoSearchDateFilter: "PAST_24_HOURS"` (los dos últimos son filtros
+cobrados). Los valores válidos no están en la ficha pública del actor: salieron
+de un HTTP 400 del propio actor el 8 de septiembre de 2026, cuando la primera
+versión mandó `YESTERDAY` copiado de la interfaz de TikTok. Son `ALL_TIME |
+PAST_24_HOURS | PAST_WEEK | PAST_MONTH | LAST_3_MONTHS | LAST_6_MONTHS` para la
+fecha y `MOST_RELEVANT | MOST_LIKED | LATEST` para el orden. La ventana se
+impone igual en `derivar()` y el filtro solo recorta lo que se factura;
+`python -m pulso tiktok --probar` trae tres videos para verlo. Los comentarios
+del actor van a un dataset aparte que `correr_actor` no lee, así que la segunda
+pasada usa `clockworks~tiktok-comments-scraper` (~5 USD por 1,000 resultados,
+diez veces el de videos): con 30 videos × 30 comentarios son ~4.50 USD en la
+primera corrida del día, y `cache/tiktok/vistos.json` evita repetirlos. Las
+URL de las dos pasadas se canonizan a `https://www.tiktok.com/@{handle}/video/{id}`
+porque llegan con distinto caso y query, y sin eso el cruce falla en silencio.
+`textLanguage` se ignora: el idioma sale del config.
+
+## `efimero/tiktok-comentarios.json` — el texto de los comentarios de TikTok
+
+Idéntico a `redes-comentarios.json` (`plataforma: "tiktok"`), validado contra
+`data/tiktok.json` y con las claves de identidad de TikTok además prohibidas.
+Mismas reglas: fuera de git, regenerado en cada corrida, 5 visibles y hasta 5
+más solo con likes, menciones enmascaradas, sin id ni usuario.
+
+### `config/tiktok.json`
+
+Búsquedas, no cuentas: `busquedas[]` con `id` (`^tk_[a-z0-9_]{2,20}$`),
+`nombre`, `consulta`, `idioma`, `activo`, `verificado` (fecha del `--probar`,
+informativa) y `nota`. **`zona` es error**, por la misma razón que en
+`config/busquedas.json`. `cosecha` trae `videos_por_busqueda`,
+`comentarios_por_video`, `dias_entre_cosechas`, `ventana_horas`,
+`filtro_fecha` (uno de `ALL_TIME | PAST_24_HOURS | PAST_WEEK | PAST_MONTH |
+LAST_3_MONTHS | LAST_6_MONTHS`), `orden` (`MOST_RELEVANT | MOST_LIKED | LATEST`)
+y `presupuesto_resultados`, el tope de **este comando**: cada verbo construye
+su propio `Presupuesto`. Lo valida `validar_tiktok_config`.
+
+### `config/instagram.json`
+
+Una cuenta se cosecha solo si tiene `activo` **y** `verificado` en `true`.
+Las diez activas se sondearon el 8 de septiembre de 2026 con `--sondear` y cada
+`razon` cita los números del sondeo; `canal66_ig` (Mexicali) y `sanquintin_ig`
+son huecos registrados a propósito, sin handle. Los handles derivados del
+nombre del medio que fallaron están en `senuelos`. Es la misma trampa que
+documenta la sección `senuelos` de `config/canales.json` —el handle obvio de
+Uniradio es un canal muerto desde 2016— con un agravante: un handle
+equivocado en Instagram no da error, da una cuenta ajena o vacía, y las dos se
+cobran igual.
+
+No hay hashtags, y no es un olvido. Un hashtag no lleva `zona`, por la misma
+razón que no la lleva una búsqueda de Google Noticias: se la acreditaría a
+todo comentario que no nombre lugar alguno, que es el bug de El Imparcial y
+Hermosillo con otro disfraz.
+
 ## `config/canales.json`
 
 Lista **fija** de canales de YouTube. No se descubren canales con
@@ -663,3 +1057,28 @@ para que el diff se lea), `indent=1`, `newline="\n"` y salto de línea final.
 `.gitattributes` fuerza LF en todo el repo: sin eso, un commit desde Windows
 y otro del bot en Ubuntu pelean por los saltos de línea y el guarda
 `git diff --quiet` deja de detectar "sin cambios".
+
+## Comunicados municipales (`comunicados.json`)
+
+Documento independiente de `notas.json`, escrito por `python -m pulso comunicados`.
+Los boletines del Ayuntamiento de Tecate no entran a cobertura de prensa,
+temas, figuras ni sentimiento. `config/comunicados.json` conserva la fuente,
+los selectores y la fecha de verificación; no se agrega a `medios.json`.
+
+- `esquema: 1`, `zona: "Tecate"`, `fuente: {id, nombre, url}` identifica a
+  `gobtecate`, Gobierno de Tecate, `https://tecate.gob.mx/`.
+- `modo`: `red` o `sin_red`; los ejemplos offline se rotulan en la interfaz.
+- `consultado`: instante ISO de la corrida, inyectado por el comando.
+- `ultimo_exito`: instante ISO de la última extracción correcta o `null`.
+- `estado`: `ok` o `fallo`; `error` es `null` en éxito y un motivo en fallo.
+- `comunicados`: objetos estrictos `{id, titulo, url, fecha}`; `id` usa el hash
+  existente de fuente y título, URL única `https://tecate.gob.mx/noticias/<id>`,
+  fecha editorial `YYYY-MM-DD` o `null`. Orden por fecha descendente, sin fecha
+  al final, y URL ascendente como desempate. No se guardan cuerpos ni resúmenes.
+
+Una lectura correcta reemplaza la lista. Una falla de red o extracción vacía
+conserva los titulares y `ultimo_exito` previos del mismo modo. Sin corte
+anterior, se publica lista vacía con estado `fallo`, nunca un éxito ficticio.
+Una corrida real no conserva ejemplos offline. La portada incluye un carrusel
+con noticias más antiguas: “últimos” significa lo expuesto allí, no una ventana
+temporal ni todo el archivo. No se sigue paginación ni artículos.

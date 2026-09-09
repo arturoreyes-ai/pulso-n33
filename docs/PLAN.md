@@ -90,6 +90,80 @@ implementacion se anotan arriba, no editando el texto de abajo. -->
 
 ---
 
+> ### Nota de implementación — Instagram vía Apify
+>
+> §3 cierra con «get a lawyer's sign-off before any scraping of a platform
+> with a login wall. **This plan assumes we don't.**» El cliente pidió
+> explícitamente el raspado de redes el **8 de septiembre de 2026** y se
+> construyó, así que el plan y la implementación ya no coinciden en este
+> punto. Lo que sigue en pie y lo que cambió:
+>
+> **Sigue en pie, y es la condición de todo lo demás: nadie inicia sesión.**
+> El actor de Instagram declara extraer solo los comentarios que ve un usuario
+> no logueado. Apify no altera el análisis de §3 —rentar el navegador no renta
+> la responsabilidad, y en *Meta v. Bright Data* la defensa dependió de no ser
+> «usuario»— así que la regla se volvió ejecutable en vez de quedar escrita:
+> `pulso/apify.py` rechaza cualquier actor activo cuya entrada traiga cookies,
+> credenciales o token de sesión, y hay una prueba que lo fija. Cambiar
+> `"activo": true` no basta para encender un raspado logueado.
+>
+> **Sigue en pie la advertencia de que deslogueado se ve poco.** §3 dice que
+> «logged out, Facebook and Instagram show almost nothing». Los planes
+> gratuitos de Apify devuelven ~15 comentarios por post, lo que choca de
+> frente con la cuarta regla de PRODUCT.md: debajo de 30 elementos se emiten
+> conteos, no porcentajes. Por eso `data/redes.json` no publica un solo
+> porcentaje y el validador los rechaza.
+>
+> **Cambió el fundamento de la retención, no el plazo.** §3 y la nota de
+> arriba razonan los 30 días desde la política de YouTube (III.E.4.d). Meta no
+> concede plazo alguno: aquí atan sus términos más la LFPDPPP y la CPRA. Se
+> aplica el mismo plazo por ser el más corto ya implementado, y además la
+> identidad de quien comenta **se tira al ingerir**, así que no llega ni al
+> caché.
+>
+> **X quedó fuera, y no por costo.** Cerró la lectura anónima en 2023, así que
+> todo raspador que sirve pide cookies: es exactamente el caso que §3 refusa.
+> Está registrado como señuelo en `config/apify.json`. La vía legal sería la
+> API oficial de pago.
+>
+> **Falta lo que §3 pide y no se ha hecho:** sigue sin haber opinión legal
+> escrita. Las diez cuentas de `config/instagram.json` se sondearon y
+> verificaron el 8 de septiembre de 2026; el panel sigue detrás de
+> `APIFY_HABILITADO`, igual que el de YouTube.
+>
+> **Se publica el texto de los comentarios, por instrucción de la dirección
+> (8 de septiembre de 2026, tarde).** Ese mismo día por la mañana se había
+> acordado publicar solo conteos derivados; por la tarde la dirección pidió
+> ver los 15 posts con más likes de la semana con el texto de sus comentarios
+> más votados. Es una decisión del cliente y queda aquí para que nadie la
+> vuelva a discutir desde cero. Lo que la acota: el texto **no entra a git**
+> —vive en `efimero/redes-comentarios.json`, carpeta ignorada que el pipeline
+> regenera en cada corrida desde el caché de 30 días y que el sitio copia al
+> construir—, la identidad de quien comenta sigue sin ingerirse, y se muestran
+> a lo sumo 10 comentarios por post (5 visibles y 5 más solo si tienen likes).
+> Para YouTube no cambia nada: ahí el «nunca texto» sale de política escrita.
+> Instagram no expone compartidos, reposts ni guardados de cuentas ajenas, así
+> que esas cifras se rotulan «sin dato».
+>
+> **TikTok entró, por búsqueda y sin sesión (8 de septiembre de 2026).** §3
+> lo descartaba porque la Research API es académica; el camino real es el
+> actor público `clockworks~tiktok-scraper`, deslogueado, con la consulta
+> «tijuana noticias» ordenada por relevancia sobre las últimas 24 horas, más
+> `clockworks~tiktok-comments-scraper` para los comentarios (~5 USD por 1,000
+> resultados). Cuatro decisiones del cliente lo acotan: (1) la fuente es una
+> **búsqueda**, así que ningún video hereda zona de la consulta; la zona sale
+> de lo que nombra la descripción con el mismo gacetero que las notas, un video
+> de fuera de la región se descarta y uno sin lugar queda `nacional`; (2) se
+> muestra el **@ del creador** como fuente, porque es quien publicó y la liga
+> ya lo trae, y es la única identidad que cruza a `data/`; quien comenta sigue
+> anónimo; (3) la ventana es de **24 horas** sobre la hora exacta de
+> publicación, impuesta en el pipeline y no confiada al filtro del actor; (4)
+> se muestran del más reciente al más antiguo. El texto va a
+> `efimero/tiktok-comentarios.json`, fuera de git, como el de Instagram. TikTok
+> sí publica compartidos y guardados; aquí aparecen.
+
+---
+
 # Pulso N33 — Project Plan
 
 Regional intelligence dashboard for the Tijuana–San Diego corridor, Tecate, Rosarito, Ensenada and San Quintín.

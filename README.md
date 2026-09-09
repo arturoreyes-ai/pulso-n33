@@ -154,12 +154,13 @@ salgan bien en la consola.
 | `pulso/validador.py` | el esquema ejecutable |
 | `config/roster.json` | funcionarios con vigencias y alias. **Entrada a mano** |
 | `config/medios.json` | catálogo de fuentes RSS o Scrapy. **Entrada a mano** |
+| `config/busquedas.json` | consultas permanentes en Google Noticias. **Entrada a mano**, opcional |
 | `config/canales.json` | canales de YouTube y señuelos a evitar. **Entrada a mano** |
 | `data/*.json` | salida del pipeline. La escribe el bot; no se edita |
 | `cache/` | texto crudo de comentarios. **Ignorado por git**, TTL de 30 días |
 | `sitio/` | el tablero plano anterior. HTML, CSS y JS, sin build |
 | `web/` | el tablero por zona. Next.js, lee los mismos JSON |
-| `tests/` | 331 pruebas con `unittest` |
+| `tests/` | 340 pruebas con `unittest` |
 
 ---
 
@@ -184,6 +185,23 @@ puesto, con fecha), actualiza `verificado` y corre `python -m pulso validar`.
 Si las vigencias se traslapan, falla y dice quiénes y por cuál alias.
 
 Conviene revisarlo una vez al mes.
+
+### Búsquedas en Google Noticias
+
+Para los municipios sin medio local hay una segunda vía, en la misma corrida y
+sin verbo aparte: las consultas de `config/busquedas.json` se leen del RSS de
+búsqueda de Google Noticias. Se apagan renglón por renglón con
+`"activo": false`, y el archivo entero es opcional.
+
+Cada consulta trae su propio registro de salud, con `metodo: "busqueda"`. Los
+dos conteos que hay que mirar ahí son `detalle.notas` y `detalle.sin_zona`:
+el segundo dice cuántas de las que trajo **no llegan al muro** porque su
+titular no nombra ningún lugar. Si una consulta corre muy alta en `sin_zona`,
+está mal escrita — hay que darle topónimos.
+
+El enlace que se guarda es el redirector de Google, no el del medio; el
+dominio que rotula el muro sale del `<source>` del feed. El porqué está en
+[docs/datos.md](docs/datos.md#configbusquedasjson).
 
 ### El catálogo de medios
 
@@ -248,6 +266,127 @@ apagado detrás de una variable y no encendido por omisión.
 
 ---
 
+## Apify: token y la regla de la sesión
+
+Apify renta actores que raspan plataformas sociales. El token se saca en
+`console.apify.com` → **Settings → API & Integrations**, y se guarda en dos
+lugares distintos según dónde vaya a correr.
+
+En tu máquina, como variable de entorno de la sesión —nunca en un archivo del
+repo:
+
+```powershell
+$env:APIFY_TOKEN = "apify_api_..."
+```
+
+En GitHub, como secreto. `gh` lo pide por stdin, así que el token no queda en
+el historial de la terminal:
+
+```bash
+gh secret set APIFY_TOKEN
+```
+
+```bash
+gh variable set APIFY_HABILITADO -b true
+```
+
+Comprueba que quedó bien antes de esperar al cron. Es una llamada y no cuesta
+crédito:
+
+```bash
+python -m pulso apify --verificar
+```
+
+### Sondea el handle antes de encenderlo
+
+```bash
+python -m pulso redes --sondear zeta.tijuana uniradiobaja
+```
+
+Cuesta un resultado por cuenta y evita pagar por la cuenta equivocada.
+**Adivinar el handle a partir del nombre del medio falla, y falla en
+silencio.** De los seis handles derivados con los que nació
+`config/instagram.json`, cinco estaban mal: tres eran cuentas ocupadas con 0
+publicaciones, `@afnoticias` resultó ser un portal de Tocantins, Brasil con
+113 mil seguidores y bio en portugués, y el de Uniradio repetía exactamente el
+señuelo que ya estaba documentado en YouTube. Los dos handles buenos que
+faltaban —`@zeta.tijuana`, con punto, y `@afntijuana2`— no se adivinan: salen
+del sitio web del propio medio.
+
+### Ningún actor inicia sesión, y no es negociable
+
+`docs/PLAN.md` §3 refusa el raspado con cuenta, y **Apify no cambia ese
+análisis**: rentar el navegador no renta la responsabilidad. En *Meta v.
+Bright Data* la defensa que prosperó dependió de no ser «usuario» de la
+plataforma, o sea de no haber iniciado sesión; un actor que se loguea destruye
+esa defensa igual de bien si el login lo ejecuta un tercero por contrato, y
+encima suma la cuenta del proveedor al expediente. Ese es el patrón de hechos
+de *Meta v. Voyager Labs*.
+
+Por eso la regla vive en el código y no en un comentario: `pulso/apify.py`
+rechaza al leer `config/apify.json` cualquier actor activo cuya entrada traiga
+cookies, credenciales o tokens de sesión. **No basta con cambiar `"activo":
+false`** — hay una prueba que lo fija (`tests/test_apify.py`).
+
+`config/apify.json` trae hoy cuatro actores apagados, cada uno con su razón
+escrita, y una sección `senuelos` con los que **no** hay que usar y por qué.
+Los raspadores de X están ahí: X cerró la lectura anónima en 2023, así que los
+que sirven piden cookies.
+
+### Lo que sí puede llegar a `data/`
+
+Conteos derivados y los posts destacados (URL, pie del medio como titular,
+likes, comentarios, reproducciones), y nada más. Misma disciplina que YouTube
+pero más estricta, porque YouTube al menos concede 30 días por política
+escrita (III.E.4.d) y Meta, TikTok y X no conceden nada: lo que ata aquí son
+los términos de cada plataforma más la LFPDPPP mexicana y la CPRA californiana,
+ya que un comentario con nombre propio es dato personal en las dos. El texto
+crudo vive en `cache/`, ignorado por git y purgado en cada corrida.
+
+### El texto de los comentarios va a `efimero/`, no a git
+
+El 8 de septiembre de 2026 la dirección pidió ver el texto de los comentarios
+más votados de cada post destacado. Se publica, pero **fuera de git**:
+`python -m pulso redes` escribe `efimero/redes-comentarios.json` (carpeta
+ignorada, ver `.gitignore`) desde el caché, y tanto `pulso sitio` como
+`web/scripts/sincronizar-datos.mjs` lo copian al artefacto si existe. Así la
+página lo muestra y el historial de git no conserva ni una frase, con lo que la
+retención de 30 días sigue siendo ejecutable. La identidad de quien comenta
+sigue sin ingerirse. Un despliegue hecho desde git puro sale sin ese archivo y
+el panel lo dice. `--sin-texto` lo omite; `--efimero RUTA` lo mueve.
+
+### TikTok: una búsqueda, con `--probar` antes del cron
+
+```bash
+python -m pulso tiktok --probar
+```
+
+Trae tres videos de cada búsqueda de `config/tiktok.json` sin cosechar
+comentarios ni escribir nada, para ver con ojos humanos qué devuelve el filtro
+`PAST_24_HOURS` del actor y cómo quedan zona y título. Anota la fecha en
+`verificado`. Luego:
+
+```bash
+python -m pulso tiktok --sentimiento modelo
+```
+
+Escribe `data/tiktok.json` y `efimero/tiktok-comentarios.json`. La zona de
+cada video sale de su descripción con el gacetero, nunca de la consulta; el @
+del creador sí se publica, quien comenta no. El actor de comentarios cobra
+~5 USD por 1,000 resultados: con 30 videos × 30 comentarios son ~4.50 USD la
+primera corrida del día, y `cache/tiktok/vistos.json` evita repetirlos.
+
+### El presupuesto es un tope duro
+
+Apify cobra por resultado. El cron corre cuatro veces al día, así que
+`resultados_por_corrida` se multiplica por 120 al mes antes de mirar la
+factura. El presupuesto se **reparte** entre los actores activos en vez de
+gastarse en orden de archivo, y el endpoint síncrono corta a los 300 segundos:
+si un actor empieza a devolver 408, baja su `cuota` en la configuración en vez
+de subir el timeout.
+
+---
+
 ## Automatización
 
 `.github/workflows/pulso.yml` corre las pruebas, el pipeline, la conversación
@@ -303,3 +442,39 @@ en `localhost` y bajo el subcamino `/pulso-n33/`.
   otro del bot en Ubuntu pelean por los saltos de línea y el guarda
   `git diff --quiet` deja de detectar «sin cambios».
 - `cache/` nunca debe entrar a git. Está en `.gitignore` con el motivo escrito.
+
+## Comunicados del Ayuntamiento de Tecate
+
+`python -m pulso comunicados` lee una vez la portada pública municipal con
+Scrapy y escribe `data/comunicados.json`. La sección aparece debajo del muro
+en Tecate, separada de las métricas de prensa. El cron la actualiza cada seis
+horas; ambos sitios copian el archivo con los demás datos.
+
+Para verificar sin red, usa:
+
+```bash
+python -m pulso comunicados --sin-red --salida <carpeta-temporal>
+```
+
+Los ejemplos se marcan como prueba; no uses esa salida
+para sustituir los datos reales. Si la fuente falla, el panel conserva la
+última lectura correcta e informa que no se pudo actualizar.
+
+## Garitas para locución
+
+La página Next.js `/garitas` consulta `/api/garitas` para San Ysidro, PedWest
+y Otay Mesa hacia Estados Unidos. Requiere el servidor Next.js; no forma parte
+del sitio estático anterior. El endpoint consulta el XML público de CBP con
+límite de 8 segundos y 2 MiB, sin credenciales ni redirecciones. Las respuestas
+válidas se cachean en el CDN hasta 5 minutos; los errores no se cachean.
+
+El navegador consulta al entrar en la página y después solo al pulsar Actualizar;
+no consulta por intervalo, foco, reconexión ni reintento automático. La fila
+peatonal Ready Lane de Otay se omite en la página. Conserva
+el último resultado si falla la actualización. La hora de cada carril, con PDT/PST explícito, determina su
+vigencia: después de 90 minutos se excluye del texto de locución. No se
+infieren ceros, longitud de fila ni tiempos para entrar a México.
+
+Verificación offline del contrato web: `node web/scripts/probar-garitas.cjs`
+después de instalar las dependencias de `web/`; también la invoca
+`python -m unittest discover -s tests -p test_garitas_web.py -v`.
