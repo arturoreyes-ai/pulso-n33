@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
+<channel>
+<generator>NFE/5.0</generator>
+<title>"san quintin" - Google Noticias</title>
+<link>https://news.google.com/search?q=san+quintin&amp;hl=es-419&amp;gl=MX&amp;ceid=MX:es-419</link>
+<language>es-419</language>
+<webMaster>news-webmaster@google.com</webMaster>
+<copyright>2026 Google Inc.</copyright>
+<lastBuildDate>Thu, 03 Sep 2026 17:00:00 GMT</lastBuildDate>
+<description>Google Noticias</description>
+
+<!-- 1. Publicador del catalogo por dominio. El id tiene que salir igual que
+     el de la copia que llega por el feed propio de Zeta. -->
+<item>
+<title>Reportan apagon en la zona centro - Zeta Tijuana</title>
+<link>https://news.google.com/rss/articles/CBMiUNO?oc=5</link>
+<guid isPermaLink="false">CBMiUNO</guid>
+<pubDate>Wed, 02 Sep 2026 14:00:00 GMT</pubDate>
+<description>&lt;a href="https://news.google.com/rss/articles/CBMiUNO?oc=5"&gt;Reportan apagon en la zona centro&lt;/a&gt;&amp;nbsp;&amp;nbsp;&lt;font color="#6f6f6f"&gt;Zeta Tijuana&lt;/font&gt;</description>
+<source url="https://zetatijuana.com">Zeta Tijuana</source>
+</item>
+
+<!-- 2. Diario de grupo: Google lo rotula con el dominio del GRUPO, que no es
+     el de El Sol de Tijuana ni el de La Voz de la Frontera. Sin el mapa
+     'publicadores' cae a fuente sintetica y duplica una nota curada. -->
+<item>
+<title>Obras en el bulevar avanzan al 60 por ciento - El Sol de Tijuana</title>
+<link>https://news.google.com/rss/articles/CBMiDOS?oc=5</link>
+<guid isPermaLink="false">CBMiDOS</guid>
+<pubDate>Wed, 02 Sep 2026 09:30:00 GMT</pubDate>
+<source url="https://oem.com.mx">oem.com.mx</source>
+</item>
+
+<!-- 3. Publicador que no esta en el catalogo: fuente sintetica gn-<hash>. -->
+<item>
+<title>Productores del valle piden agua para el ciclo - El Valle</title>
+<link>https://news.google.com/rss/articles/CBMiTRES?oc=5</link>
+<guid isPermaLink="false">CBMiTRES</guid>
+<pubDate>Tue, 01 Sep 2026 22:15:00 GMT</pubDate>
+<source url="https://elvalledesq.example">El Valle</source>
+</item>
+
+<!-- 4. La trampa del guion: el titular CONTIENE ' - ' en medio. Un recorte
+     generico por el ultimo guion lo parte a la mitad. -->
+<item>
+<title>Tijuana - San Diego: la garita cierra el domingo - Zeta Tijuana</title>
+<link>https://news.google.com/rss/articles/CBMiCUATRO?oc=5</link>
+<guid isPermaLink="false">CBMiCUATRO</guid>
+<pubDate>Tue, 01 Sep 2026 11:00:00 GMT</pubDate>
+<source url="https://zetatijuana.com">Zeta Tijuana</source>
+</item>
+
+<!-- 5. Fuera de la ventana de DIAS_ATRAS: 40 dias antes de AHORA. -->
+<item>
+<title>Nota vieja que no debe entrar - El Valle</title>
+<link>https://news.google.com/rss/articles/CBMiCINCO?oc=5</link>
+<guid isPermaLink="false">CBMiCINCO</guid>
+<pubDate>Sat, 25 Jul 2026 10:00:00 GMT</pubDate>
+<source url="https://elvalledesq.example">El Valle</source>
+</item>
+
+<!-- 6. Sin <source>: no hay forma de saber de que medio es. Se descarta en
+     vez de atribuirla a news.google.com. -->
+<item>
+<title>Titular huerfano sin publicador</title>
+<link>https://news.google.com/rss/articles/CBMiSEIS?oc=5</link>
+<guid isPermaLink="false">CBMiSEIS</guid>
+<pubDate>Wed, 02 Sep 2026 08:00:00 GMT</pubDate>
+</item>
+
+</channel>
+</rss>

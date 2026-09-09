@@ -1,0 +1,66 @@
+{
+ "nota": "Búsquedas permanentes en el RSS de Google Noticias. Se cosechan en la misma corrida del cron que los feeds del catálogo (17 */6 * * *): no hay verbo ni cron nuevos. 'q' es la consulta tal cual la escribiría una persona en news.google.com. El operador de ventana NO va aquí: lo pone pulso/busquedas.py desde la cadencia del cron, para que cambiarla no obligue a editar cada renglón y el que se olvide no quede con otra ventana en silencio. 'idioma' elige el locale (hl/gl/ceid) Y decide con qué modelo se etiqueta el tono de las notas de publicadores que no están en el catálogo; es el mismo campo y la misma regla que en medios.json. Una búsqueda NO lleva 'zona': si la llevara y llegara a 'zona_medio', la regla de medio de una sola zona (pulso/zonas.py) le acreditaría esa zona a todo titular que no nombre ningún lugar, que es el error de El Imparcial y Hermosillo con otro disfraz. Para apagar una búsqueda pon 'activo': false y di por qué en 'nota'. NO la borres: cada nota que trajo guarda su id en 'descubierta_por', el validador lo verifica contra este archivo, y de aquí sale el idioma de sus fuentes sintéticas; borrar un renglón invalida el archivo histórico que produjo. 'publicadores' traduce la etiqueta con la que Google nombra a un medio hacia el id del catálogo. Es a mano a propósito: adivinar atribuye notas al medio equivocado. Hace falta porque Google rotula a los diarios de grupo con el dominio del grupo — El Sol de Tijuana y La Voz de la Frontera llegan como 'oem.com.mx', que no es el dominio de ninguno de los dos, y son los dos feeds más largos del catálogo.",
+ "publicadores": {
+  "oem.com.mx": "soltij",
+  "El Sol de Tijuana": "soltij",
+  "La Voz de la Frontera": "lavoz",
+  "Uniradio Informa": "uniradio",
+  "ZETA Tijuana": "zeta"
+ },
+ "busquedas": [
+  {
+   "id": "bq_sanquintin",
+   "nombre": "San Quintín y el valle",
+   "q": "\"San Quintín\" OR \"Vicente Guerrero\" OR Camalú OR Colonet",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-08",
+   "nota": "San Quintín no tiene feed local: su renglón en medios.json es un hueco declarado, no un medio. En la ventana del 7 de septiembre de 2026, 2 notas de 1,254 lo nombraban. Ésta es la única vía de cobertura del municipio. Los términos son topónimos a propósito: una nota cuyo titular no nombre un lugar sale del muro (web/src/lib/muro/indexar.ts), así que la consulta se escribe para que el lugar caiga en el titular y no sólo en el cuerpo."
+  },
+  {
+   "id": "bq_sanfelipe",
+   "nombre": "San Felipe",
+   "q": "\"San Felipe\" \"Baja California\"",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-08",
+   "nota": "Municipio desde 2020 y sin medio local en el catálogo: 4 notas de 1,254 en la ventana del 7 de septiembre de 2026. El \"Baja California\" no es adorno: hay un San Felipe en Guanajuato y otro en Chile, y sin él la consulta trae más ruido que cobertura."
+  },
+  {
+   "id": "bq_tecate",
+   "nombre": "Tecate",
+   "q": "Tecate \"Baja California\" OR \"garita de Tecate\"",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-08",
+   "nota": "Cobertura débil: un solo medio en el catálogo, y su radiodifusora sube programas de radio, no nota municipal. El calificador de estado es obligatorio aquí: sin él la consulta se llena de la cerveza."
+  },
+  {
+   "id": "bq_rosarito",
+   "nombre": "Playas de Rosarito",
+   "q": "\"Playas de Rosarito\" OR \"Rosarito\" \"Baja California\"",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-08",
+   "nota": "Un solo medio en el catálogo. El índice SHF no trae Rosarito y ZM Tijuana no sirve de proxy, así que la prensa es lo único que hay para el municipio."
+  },
+  {
+   "id": "bq_frontera_en",
+   "nombre": "Frontera Tijuana–San Diego (inglés)",
+   "q": "Tijuana OR \"San Ysidro\" OR \"Otay Mesa\" border",
+   "idioma": "en",
+   "activo": true,
+   "verificado": "2026-09-08",
+   "nota": "En inglés: locale en-US/US, y el tono de sus notas NO se etiqueta con el modelo español. Los cuatro medios de San Diego del catálogo cubren la frontera de forma irregular; esto alcanza a los que no están (Border Report, KUSI, Union-Tribune)."
+  },
+  {
+   "id": "bq_aguasnegras",
+   "nombre": "Aguas negras del río Tijuana (inglés)",
+   "q": "\"Tijuana River\" sewage OR pollution",
+   "idioma": "en",
+   "activo": true,
+   "verificado": "2026-09-08",
+   "nota": "El tema binacional con más cobertura en inglés y menos en español. Se sigue aparte de bq_frontera_en porque una sola consulta con los dos temas devuelve casi puro cruce fronterizo y el drenaje se pierde."
+  }
+ ]
+}

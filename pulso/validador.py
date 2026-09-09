@@ -24,6 +24,14 @@ from .sentimiento import IDIOMA_OMISION, IDIOMAS
 
 RE_ID = re.compile(r"^[a-z0-9_]{2,12}$")
 RE_WEB_SOURCE = re.compile(r"^web-[a-f0-9]{12}$")
+RE_GN_SOURCE = re.compile(r"^gn-[a-f0-9]{12}$")
+# Los ids de busqueda NO comparten RE_ID con medios y roster, por dos razones.
+# Doce caracteres alcanzan para 'zeta' o 'soltij', no para nombrar una consulta
+# ('bq_sanquintin' son 13), y el id se lee en el 'descubierta_por' de cada nota
+# que trajo. Y las dos cosas escriben en el mismo espacio de nombres --
+# data/fuentes[].id -- asi que el prefijo hace imposible por construccion que
+# una busqueda colisione con un medio.
+RE_BUSQUEDA = re.compile(r"^bq_[a-z0-9_]{2,20}$")
 VIAS = ("nominal", "cargo")
 ALCANCES = ("zona", "estatal", "nacional", "fuera")
 ESQUEMA = 1
@@ -233,12 +241,114 @@ def validar_medios(datos):
 
     if not any(m.get("activo") for m in medios if isinstance(m.get("id"), str)):
         avisos.append("medios: ningun medio activo; la ingesta no traeria nada")
+
+    # Dos medios en el mismo host no se pueden distinguir al resolver el
+    # <source> de una busqueda, y todas sus notas de Google caerian en el que
+    # aparezca primero en el archivo. Aviso y no error: un grupo puede servir
+    # legitimamente dos feeds desde un solo host.
+    por_dominio = {}
+    for m in medios:
+        dom = _dominio_de(m.get("url"))
+        if not dom or not isinstance(m.get("id"), str):
+            continue
+        if dom in por_dominio:
+            avisos.append(
+                "medios: '{}' y '{}' comparten el dominio '{}'; una busqueda no "
+                "puede distinguirlos y les atribuiria las notas al primero".format(
+                    por_dominio[dom], m["id"], dom))
+        else:
+            por_dominio[dom] = m["id"]
+    return errores, avisos
+
+
+# -------------------------------------------------------------- busquedas
+
+# Las llena pulso/busquedas.py, en este orden. Se declaran aqui tambien para
+# que el validador revise exactamente la misma lista.
+CLAVES_DETALLE_BUSQUEDA = (
+    "items", "sin_publicador", "sin_fecha", "fuera_de_ventana", "sin_sufijo",
+    "resueltas", "sinteticas", "recortadas", "notas", "sin_zona",
+)
+
+RE_VENTANA = re.compile(r"^when:\d+[hdmy]$")
+
+
+def _dominio_de(url):
+    if not isinstance(url, str):
+        return ""
+    resto = url.split("://", 1)[-1].split("/", 1)[0].split("@")[-1].split(":")[0].lower()
+    return resto[4:] if resto.startswith("www.") else resto
+
+
+def validar_busquedas(datos, medios=None):
+    """config/busquedas.json. Ausente no es error; vacio o mal formado si."""
+    errores, avisos = [], []
+    busquedas = datos.get("busquedas")
+    if not isinstance(busquedas, list):
+        return ["busquedas: 'busquedas' debe ser una lista"], avisos
+
+    ids_medios = {m["id"] for m in (medios or []) if isinstance(m.get("id"), str)}
+    ids = set()
+    for i, b in enumerate(busquedas):
+        bid = b.get("id")
+        if not isinstance(bid, str) or not RE_BUSQUEDA.match(bid):
+            errores.append("busquedas[{}]: 'id' invalido ({!r}); se espera "
+                           "^bq_[a-z0-9_]{{2,20}}$".format(i, bid))
+            continue
+        et = "busquedas[{}]".format(bid)
+        if bid in ids:
+            errores.append("{}: 'id' duplicado".format(et))
+        ids.add(bid)
+        if bid in ids_medios:
+            # Medios y busquedas escriben en data/fuentes[].id: un id repetido
+            # haria que una pisara el registro de salud de la otra.
+            errores.append("{}: 'id' choca con un medio del catalogo".format(et))
+
+        for campo in ("nombre", "q", "nota"):
+            if not _texto(b.get(campo)):
+                errores.append("{}: falta '{}'".format(et, campo))
+        if b.get("idioma", IDIOMA_OMISION) not in IDIOMAS:
+            errores.append("{}: 'idioma' debe ser uno de {} ({!r})".format(
+                et, ", ".join(IDIOMAS), b.get("idioma")))
+        if not isinstance(b.get("activo"), bool):
+            errores.append("{}: 'activo' debe ser booleano".format(et))
+        if "zona" in b:
+            # Ver la nota de config/busquedas.json: una zona declarada que
+            # llegue a 'zona_medio' le acredita esa zona a todo titular que no
+            # nombre ningun lugar.
+            errores.append("{}: una busqueda no lleva 'zona'; sus notas son "
+                           "'estatal' y la zona sale del titular".format(et))
+        if _texto(b.get("q")) and "when:" in b["q"]:
+            errores.append("{}: 'when:' no va en 'q'; la ventana la pone "
+                           "pulso/busquedas.py desde la cadencia del cron".format(et))
+        if b.get("ventana") is not None and not (
+                isinstance(b["ventana"], str) and RE_VENTANA.match(b["ventana"])):
+            errores.append("{}: 'ventana' invalida ({!r}); se espera when:<n><h|d|m|y>"
+                           .format(et, b.get("ventana")))
+
+    publicadores = datos.get("publicadores")
+    if publicadores is None:
+        avisos.append(
+            "busquedas: sin 'publicadores'; Google rotula a los diarios de grupo con "
+            "el dominio del grupo y sus notas saldrian duplicadas como fuente sintetica")
+    elif not isinstance(publicadores, dict):
+        errores.append("busquedas: 'publicadores' debe ser un objeto")
+    else:
+        for clave, mid in sorted(publicadores.items()):
+            if ids_medios and mid not in ids_medios:
+                errores.append("busquedas.publicadores[{!r}]: {!r} no es un medio "
+                               "del catalogo".format(clave, mid))
+
+    if not _texto(datos.get("nota")):
+        avisos.append("busquedas: falta 'nota' con el contrato del archivo")
+    if not any(b.get("activo") for b in busquedas if isinstance(b.get("id"), str)):
+        avisos.append("busquedas: ninguna busqueda activa; no se cosecharia nada")
     return errores, avisos
 
 
 # ------------------------------------------------------------------ notas
 
-def validar_notas(datos, roster=None, medios=None):
+def validar_notas(datos, roster=None, medios=None, busquedas=None):
     errores, avisos = [], []
     if datos.get("esquema") != ESQUEMA:
         errores.append("notas: 'esquema' debe ser {}".format(ESQUEMA))
@@ -252,6 +362,7 @@ def validar_notas(datos, roster=None, medios=None):
 
     ids_medios = {m["id"] for m in (medios or []) if isinstance(m.get("id"), str)}
     zonas_medios = {m["id"]: m.get("zona") for m in (medios or [])}
+    ids_busquedas = {b["id"] for b in (busquedas or []) if isinstance(b.get("id"), str)}
     ids_roster = {f["id"] for f in (roster.figuras if roster else [])}
 
     vistos = set()
@@ -298,8 +409,41 @@ def validar_notas(datos, roster=None, medios=None):
                         "esperado {}".format(et, esperado)
                     )
         es_descubrimiento = n.get("origen") == "descubrimiento_web"
+        es_busqueda = n.get("origen") == "busqueda_web"
         fuente_web = isinstance(fuente, str) and bool(RE_WEB_SOURCE.match(fuente))
-        if ids_medios and fuente not in ids_medios and not (es_descubrimiento and fuente_web):
+        fuente_gn = isinstance(fuente, str) and bool(RE_GN_SOURCE.match(fuente))
+        conocida = isinstance(fuente, str) and fuente in ids_medios
+        if es_busqueda:
+            # Una nota de busqueda puede venir de un medio del catalogo --
+            # Google la encontro antes que su propio feed -- o de un publicador
+            # que no esta. El primer caso tiene que respetar el catalogo
+            # ENTERO, zona incluida; el segundo es el unico que puede traer una
+            # fuente sintetica. Por eso la zona se revisa en las dos ramas y no
+            # se cae por la de abajo.
+            if ids_medios and not (conocida or fuente_gn):
+                errores.append("{}: fuente de busqueda debe ser un medio del "
+                               "catalogo o gn-<hash> ({!r})".format(et, fuente))
+            bid = n.get("descubierta_por")
+            if not (isinstance(bid, str) and RE_BUSQUEDA.match(bid)):
+                errores.append("{}: 'descubierta_por' debe ser el id de una "
+                               "busqueda ({!r})".format(et, bid))
+            elif ids_busquedas and bid not in ids_busquedas:
+                # Borrar un renglon de config/busquedas.json invalida el
+                # historico que trajo y ademas le quita el idioma a sus fuentes
+                # sinteticas. Se apaga con 'activo': false, no se borra.
+                errores.append("{}: 'descubierta_por' ({!r}) no esta en "
+                               "config/busquedas.json".format(et, bid))
+            if not conocida:
+                if n.get("zona_medio") != "estatal":
+                    errores.append("{}: busqueda sin medio del catalogo debe "
+                                   "tener zona_medio 'estatal'".format(et))
+            elif zonas_medios and n.get("zona_medio") != zonas_medios.get(fuente):
+                errores.append(
+                    "{}: 'zona_medio' ({!r}) no coincide con la del medio ({!r})".format(
+                        et, n.get("zona_medio"), zonas_medios.get(fuente)
+                    )
+                )
+        elif ids_medios and fuente not in ids_medios and not (es_descubrimiento and fuente_web):
             errores.append("{}: 'fuente' ({!r}) no esta en config/medios.json".format(et, fuente))
         elif es_descubrimiento:
             if not fuente_web:
@@ -404,7 +548,8 @@ def validar_notas(datos, roster=None, medios=None):
 
 # ---------------------------------------------------------------- archivo
 
-def validar_archivo(dir_datos, ventana, roster=None, medios=None, hoy=None):
+def validar_archivo(dir_datos, ventana, roster=None, medios=None, hoy=None,
+                    busquedas=None):
     """Coherencia entre la ventana, los meses archivados y el indice.
 
     Tres formas de perder datos que estas reglas atrapan: una nota que queda
@@ -514,7 +659,7 @@ def validar_archivo(dir_datos, ventana, roster=None, medios=None, hoy=None):
 
 # ---------------------------------------------------------------- fuentes
 
-def validar_fuentes(datos, medios=None):
+def validar_fuentes(datos, medios=None, busquedas=None):
     errores, avisos = [], []
     if datos.get("esquema") != ESQUEMA:
         errores.append("fuentes: 'esquema' debe ser {}".format(ESQUEMA))
@@ -540,8 +685,15 @@ def validar_fuentes(datos, medios=None):
             errores.append("{}: estado 'fallo' exige 'error' con el motivo".format(et))
         if s.get("estado") == "ok" and s.get("error") is not None:
             errores.append("{}: estado 'ok' no debe traer 'error'".format(et))
-        if s.get("metodo", "rss") not in ("rss", "scrapy", "descubrimiento"):
-            errores.append("{}: 'metodo' debe ser 'rss', 'scrapy' o 'descubrimiento'".format(et))
+        if s.get("metodo", "rss") not in ("rss", "scrapy", "descubrimiento", "busqueda"):
+            errores.append("{}: 'metodo' debe ser 'rss', 'scrapy', 'descubrimiento' "
+                           "o 'busqueda'".format(et))
+        if s.get("metodo") == "busqueda":
+            detalle = s.get("detalle")
+            if detalle is not None and (not isinstance(detalle, dict)
+                                         or any(not _entero_no_negativo(detalle.get(k, 0))
+                                                for k in CLAVES_DETALLE_BUSQUEDA)):
+                errores.append("{}: 'detalle' de busqueda tiene conteos invalidos".format(et))
         if s.get("metodo") == "descubrimiento":
             detalle = s.get("detalle")
             if detalle is not None and (not isinstance(detalle, dict)
@@ -557,7 +709,12 @@ def validar_fuentes(datos, medios=None):
         if s.get("ultima_ok") is not None and not _es_iso(s.get("ultima_ok")):
             errores.append("{}: 'ultima_ok' no es ISO-8601 ({!r})".format(et, s.get("ultima_ok")))
 
+    # Toda fuente encendida tiene que dejar rastro, sea medio o busqueda. Una
+    # busqueda que se saltara en silencio -- por una excepcion tragada, por
+    # ejemplo -- no aparecería en ningun lado sin esta regla.
     activos = {m["id"] for m in (medios or []) if m.get("activo")}
+    activos |= {b["id"] for b in (busquedas or [])
+                if isinstance(b.get("id"), str) and b.get("activo", True)}
     faltan = activos - vistos
     if faltan:
         errores.append(
@@ -654,7 +811,6 @@ SENTIMIENTOS = ("positivo", "negativo", "neutral")
 CLAVES_PROHIBIDAS_CONVERSACION = frozenset(
     {"texto", "ejemplos", "notas", "autor", "author", "video_titulo"}
 )
-
 
 def _validar_conteo_sentimiento(s, et, errores):
     if not isinstance(s, dict):
@@ -884,6 +1040,7 @@ def validar_indicadores(datos):
                                    ("por_cuenta_mxn", "cuentas_pagadas"),
                                    m.get("ciclos"), etm, errores, avisos)
 
+
         elif clave == "san_diego":
             zips = ind.get("zips")
             if not isinstance(zips, dict) or not zips:
@@ -927,7 +1084,11 @@ def validar_estado(datos):
 # ------------------------------------------------------------------- todo
 
 def validar_todo(dir_config="config", dir_datos="data", hoy=None):
-    """Valida todo lo que exista. data/ ausente es aviso, no error."""
+    """Valida todo lo que exista. data/ ausente es aviso, no error.
+
+    efimero/ es el texto de comentarios publicado fuera de git: se valida si
+    esta, contra el redes.json del mismo corte.
+    """
     errores, avisos = [], []
 
     ruta_roster = os.path.join(dir_config, "roster.json")
@@ -964,9 +1125,30 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
     roster = Roster(roster_datos["figuras"], roster_datos.get("verificado"))
     medios = medios_datos["medios"]
 
+    # config/busquedas.json es opcional: un checkout sin el archivo valida
+    # igual que antes de que existiera.
+    ruta_busquedas = os.path.join(dir_config, "busquedas.json")
+    busquedas = []
+    if os.path.exists(ruta_busquedas):
+        try:
+            busquedas_datos = _leer(ruta_busquedas)
+        except (ValueError, OSError) as e:
+            errores.append("busquedas: no se pudo leer {} ({})".format(ruta_busquedas, e))
+            return errores, avisos
+        e, a = validar_busquedas(busquedas_datos, medios)
+        errores += e
+        avisos += a
+        if errores:
+            return errores, avisos
+        busquedas = busquedas_datos.get("busquedas") or []
+
+
+
     archivos = {
-        "notas": (os.path.join(dir_datos, "notas.json"), lambda d: validar_notas(d, roster, medios)),
-        "fuentes": (os.path.join(dir_datos, "fuentes.json"), lambda d: validar_fuentes(d, medios)),
+        "notas": (os.path.join(dir_datos, "notas.json"),
+                  lambda d: validar_notas(d, roster, medios, busquedas)),
+        "fuentes": (os.path.join(dir_datos, "fuentes.json"),
+                    lambda d: validar_fuentes(d, medios, busquedas)),
         "temas": (os.path.join(dir_datos, "temas.json"), validar_temas),
         "estado": (os.path.join(dir_datos, "estado.json"), validar_estado),
     }
@@ -983,11 +1165,11 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
         avisos.append(
             "datos: {} esta vacio; corre `python -m pulso correr --sin-red`".format(dir_datos)
         )
-        return errores, avisos
     ventana = None
     for nombre, (ruta, fn) in archivos.items():
         if nombre not in presentes:
-            errores.append("{}: no existe {} pero si los demas de data/".format(nombre, ruta))
+            if presentes:
+                errores.append("{}: no existe {} pero si los demas de data/".format(nombre, ruta))
             continue
         try:
             datos = _leer(ruta)
@@ -1000,6 +1182,7 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
         errores += e
         avisos += a
 
+    leidos = {}
     for nombre, (ruta, fn) in opcionales.items():
         if not os.path.exists(ruta):
             continue
@@ -1008,12 +1191,15 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
         except (ValueError, OSError) as ex:
             errores.append("{}: no se pudo leer {} ({})".format(nombre, ruta, ex))
             continue
+        leidos[nombre] = datos
         e, a = fn(datos)
         errores += e
         avisos += a
 
+
     if ventana is not None:
-        e, a = validar_archivo(dir_datos, ventana, roster, medios, hoy=hoy)
+        e, a = validar_archivo(dir_datos, ventana, roster, medios, hoy=hoy,
+                               busquedas=busquedas)
         errores += e
         avisos += a
     return errores, avisos
