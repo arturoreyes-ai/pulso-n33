@@ -409,9 +409,9 @@ already refused on the record in `docs/PLAN.md` §3.
 - **Instagram comment text goes to `efimero/`, never to `data/` or git**, and
   commenter identity is never stored anywhere (see the invariant above).
 - **The YouTube panel stays off** behind `YOUTUBE_HABILITADO`.
-- Note that a GitHub Pages site is **public even when the repo is private**,
+- Note that the published site is **public even when the repo is private**,
   and would publish `data/*.json` and `config/roster.json` along with it. That
-  is why `DESPLEGAR_PAGES` exists and defaults to off.
+  is why `DESPLEGAR_TABLERO` exists and defaults to off.
 
 ---
 
@@ -441,8 +441,13 @@ Tailwind v4, pnpm.
   are one view (`redes`) with a facet selector, not three sections. They are
   the same question asked in three places, and only one panel mounts at a time
   because each is an island that fetches its own JSON.
-- `sitio/` is the previous flat dashboard — plain HTML, CSS and JS, no build
-  step — and is still what the workflow assembles. It is not dead code yet.
+- **`web/` is what ships.** The cron builds it on the runner and deploys it
+  prebuilt, behind `DESPLEGAR_TABLERO`. It deploys from the runner rather than
+  from a host build against git because the comment text lives in `efimero/`,
+  outside git: a host building from the repo would publish posts with no
+  comments. `sitio/` is the previous flat dashboard — plain HTML, CSS and JS,
+  no build step. It is still in the repo, still smoke-tested by CI and still
+  what `pulso servir` serves, but the cron no longer assembles it.
 
 ---
 

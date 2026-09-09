@@ -214,31 +214,53 @@ jobs:
             echo "cambios=true" >> "$GITHUB_OUTPUT"
           fi
 
-      # Se arma siempre, aunque Pages este apagado: es la prueba de humo de
-      # pulso/sitio.py.
-      - name: Armar _site
-        run: python -m pulso sitio --destino _site
+      # ------------------------------------------------------ el tablero
 
-      - name: Subir el artefacto de Pages
-        if: vars.DESPLEGAR_PAGES == 'true'
-        uses: actions/upload-pages-artifact@v3
+      # A partir de aqui lo que se publica es web/ (Next.js), no sitio/. El
+      # tablero plano sigue en el repo y en CI, pero ya no es el producto.
+      #
+      # SE DESPLIEGA DESDE EL RUNNER, no desde un build del host contra git, y
+      # esa no es una preferencia de herramienta: es la unica forma de que el
+      # TEXTO de los comentarios llegue a la pagina. Vive en efimero/, fuera
+      # de git por la retencion de 30 dias (ver .gitignore), asi que un host
+      # que construya desde el repositorio nunca lo veria y publicaria los
+      # posts sin comentarios. Aqui, en cambio, la carpeta la acaba de
+      # escribir el paso de redes de esta misma corrida.
+      #
+      # `pnpm build` corre scripts/sincronizar-datos.mjs, que copia data/ y
+      # tambien esos dos archivos de efimero/ a web/public/data.
+      #
+      # El tablero necesita un host con Node: next.config.ts deja `output` sin
+      # definir a proposito para conservar las route handlers, y /api/garitas
+      # existe porque CBP no manda cabeceras CORS. No es exportacion estatica,
+      # y por eso Pages ya no sirve para esto.
+      - name: Instalar el tablero
+        if: vars.DESPLEGAR_TABLERO == 'true'
+        uses: pnpm/action-setup@v4
+
+      - name: Node
+        if: vars.DESPLEGAR_TABLERO == 'true'
+        uses: actions/setup-node@v4
         with:
-          path: _site
+          node-version: "22"
+          cache: pnpm
+          cache-dependency-path: web/pnpm-lock.yaml
 
-  desplegar:
-    name: Desplegar en GitHub Pages
-    needs: ingesta
-    # Apagado mientras el repo sea privado: Pages en repo privado exige plan
-    # de pago. Para encenderlo, ver README seccion "Publicar el tablero".
-    if: vars.DESPLEGAR_PAGES == 'true'
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
-    steps:
-      - id: deploy
-        uses: actions/deploy-pages@v4
+      - name: Dependencias del tablero
+        if: vars.DESPLEGAR_TABLERO == 'true'
+        working-directory: web
+        run: pnpm install --frozen-lockfile
+
+      # Construye contra el entorno del host para que las variables de
+      # produccion (NEXT_PUBLIC_*) sean las mismas que en el despliegue.
+      - name: Construir y desplegar el tablero
+        if: vars.DESPLEGAR_TABLERO == 'true'
+        working-directory: web
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          pnpm dlx vercel@latest pull --yes --environment=production --token="$VERCEL_TOKEN"
+          pnpm dlx vercel@latest build --prod --token="$VERCEL_TOKEN"
+          pnpm dlx vercel@latest deploy --prebuilt --prod --token="$VERCEL_TOKEN"
