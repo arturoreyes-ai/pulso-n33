@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
-/* scripts/ fuera del escaneo. verificar-tokens.mjs lleva DENTRO las clases
-   prohibidas —como muestras de su autoprueba y dentro de los mensajes de
-   error—, y el escaner de Tailwind no distingue una clase de un ejemplo:
-   generaba .text-xs y .rounded-2xl de verdad en el bundle. Ademas de bytes
-   muertos, rompia la propiedad en la que nos apoyamos para NO resetear los
-   espacios de nombres: que una utilidad solo existe si alguien la usa. */
+/* scripts/ y .next/ fuera del escaneo. verificar-tokens.mjs lleva DENTRO las
+   clases prohibidas —como muestras de su autoprueba y dentro de los mensajes
+   de error—, y el escaner de Tailwind no distingue una clase de un ejemplo:
+   generaba .text-xs y .rounded-2xl de verdad en el bundle. .next/ es el otro
+   caso peligroso: al leer el CSS generado vuelve a interpretar selectores
+   escapados como candidatos y fabrica utilidades arbitrarias invalidas. */
 @source not "../../scripts";
+@source not "../../.next";
 
 /* ===========================================================================
-   Ethereal Glass — Pulso N33
+   Ethereal Glass — Pulso
 
    Negro OLED, malla radial con orbes violeta y esmeralda, tarjetas vantablack
    con bisel doble y filos de white/10. Tipografia Grotesk (Geist).

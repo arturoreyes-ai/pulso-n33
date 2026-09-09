@@ -1,0 +1,56 @@
+# Endurecimiento de la cadena de suministro. No declara un monorepo: en pnpm
+# 10+ este archivo es tambien el lugar de los ajustes, y `packages` es
+# opcional. Sin `packages`, el "workspace" es solo este paquete.
+#
+# El repo instala dependencias de terceros y no hay .npmrc de organizacion ni
+# espejo privado que ya filtre versiones, asi que la exposicion es real y no
+# hay nada mas arriba que la cubra.
+
+# Ninguna version publicada hace menos de 7 dias (10080 minutos) se instala.
+#
+# Es el ajuste que mas importa aqui. El patron de los ataques recientes al
+# registro de npm es publicar una version con codigo malicioso, esperar a que
+# los CI del mundo la instalen sola y que alguien la reporte: la ventana entre
+# publicacion y baja se mide en HORAS. Este pipeline corre solo cada seis
+# horas en Actions, o sea que sin este retraso el bot podria instalar una
+# version envenenada sin que nadie del equipo estuviera mirando. Con 7 dias,
+# a la version le da tiempo de que la vetten antes de que la toquemos.
+#
+# No afecta al lockfile ya resuelto: `pnpm install` instala lo fijado. Solo
+# muerde al resolver rangos nuevos (`pnpm update`, agregar una dependencia).
+minimumReleaseAge: 10080
+
+# pnpm rechaza un paquete cuya confianza (procedencia, firmas) EMPEORE entre
+# resoluciones. Sin esto, un paquete que hoy publica con provenance atestiguada
+# y manana ya no, pasa en silencio; y perder la firma es justo la senal de que
+# la cuenta del publicador cambio de manos.
+trustPolicy: no-downgrade
+
+# Una sola excepcion, con nombre y version exactos a proposito: asi cualquier
+# bump de @types/node la vuelve a poner sobre la mesa en vez de heredar un
+# permiso silencioso. Se descarto `trustPolicyIgnoreAfter`, que habria abierto
+# la puerta a CUALQUIER paquete viejo con confianza debil.
+#
+# El caso: pnpm marca undici-types@6.21.0 como TRUST_DOWNGRADE
+# ("possible package takeover"). Lo que pasa de verdad es que la linea 7.x se
+# publica desde CI y trae attestations de procedencia, y la 6.x no, porque es
+# anterior a ese cambio de practica en el proyecto. Verificado en el registro:
+#
+#   - publicada el 13 nov 2024, desde github.com/nodejs/undici
+#   - firmada por matteo.collina, el autor de undici
+#   - "scripts": ninguno, asi que no ejecuta nada al instalar
+#   - es un paquete SOLO DE TIPOS: no aporta una linea de codigo al bundle
+#   - entra por @types/node, que es devDependency: no llega al usuario
+#
+# Y no se puede resolver de otra forma: @types/node@22 pide undici-types ~6.21,
+# y NINGUNA version 6.x tiene attestations. Sin esta excepcion, `pnpm install`
+# queda roto para siempre, no hasta el proximo bump.
+trustPolicyExclude:
+  - undici-types@6.21.0
+
+# Explicito aunque ya sea el valor por omision en pnpm reciente: las
+# dependencias transitivas no pueden venir de git:, file: ni de un tarball
+# suelto, que son las rutas que se saltan el registro y con el sus controles.
+# Ponerlo en false es lo que la regla de react-doctor marca; queda escrito
+# para que un cambio de omision en el futuro no lo afloje sin que se note.
+blockExoticSubdeps: true

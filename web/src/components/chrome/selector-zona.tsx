@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { clasesChip } from "@/components/ui/primitivas";
+import { clasesChip } from "@/components/ui/clases";
 import { NOMBRE_CORTO, ZONAS_RUTA, rutaDeZona, type ZonaRuta } from "@/lib/dominio/zonas";
 import { ConteoZona } from "./conteo-zona";
 

@@ -6,7 +6,7 @@ import { preload } from "react-dom";
 
 import { Malla } from "@/components/chrome/malla";
 import { Velo } from "@/components/chrome/velo";
-import { MISMO_ORIGEN, RUTAS } from "@/lib/datos/config";
+import { RUTAS } from "@/lib/datos/config";
 
 import "./globals.css";
 
@@ -52,7 +52,7 @@ const Archivo = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Pulso N33",
+  title: "Pulso",
   description:
     "Inteligencia regional del corredor Tijuana y San Diego: prensa, precios, crimen y percepción por zona.",
   // Igual que el tablero anterior: esto no se indexa mientras los datos y las
@@ -69,19 +69,51 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   // React 19 iza el link al <head> antes de que exista JS de cliente, asi que
   // el archivo mas grande empieza a bajar sin esperar la hidratacion.
   //
-  // `as: "fetch"` es quisquilloso: si el modo CORS del preload no coincide con
-  // el del fetch que lo consume, el navegador DESCARTA la descarga y avisa
-  // "preloaded but not used", o sea que se paga dos veces y no sirve. Mismo
-  // origen quiere SIN crossOrigin; un host remoto lo quiere y ademas necesita
-  // cabeceras CORS.
+  // `as: "fetch"` es quisquilloso: si el modo de CREDENCIALES del preload no
+  // coincide con el del fetch que lo consume, el navegador DESCARTA la
+  // descarga y avisa "preloaded but not used", o sea que se paga dos veces y
+  // no sirve.
+  //
+  // Va SIEMPRE con crossOrigin, tambien en mismo origen. La version anterior
+  // lo omitia cuando el origen coincidia, y Chrome tiraba el preload de
+  // notas.json en cada carga: "A preload for '/data/notas.json' is found, but
+  // is not used because the request credentials mode does not match". Justo el
+  // archivo mas grande y el unico con fetchPriority alto.
+  //
+  // Las reglas no son simetricas, y de ahi el error:
+  //
+  //   <link rel=preload as=fetch> sin crossorigin  -> credenciales "include"
+  //   ...con crossorigin="anonymous"               -> credenciales "same-origin"
+  //   fetch(url) sin opciones                      -> credenciales "same-origin"
+  //
+  // El consumidor es `leerJson`, un fetch pelado (lib/datos/fetcher.ts), asi
+  // que lo que empareja es "anonymous". En mismo origen no cuesta nada: una
+  // peticion al propio origen no pasa por CORS. Un host remoto ya lo queria, y
+  // ademas necesita cabeceras CORS en la respuesta.
   preload(RUTAS.notas, {
     as: "fetch",
     fetchPriority: "high",
-    ...(MISMO_ORIGEN ? {} : { crossOrigin: "anonymous" }),
+    crossOrigin: "anonymous",
   });
 
   return (
-    <html lang="es" className={`${GeistSans.variable} ${GeistMono.variable} ${Archivo.variable}`}>
+    // `suppressHydrationWarning` esta aqui por una EXTENSION del navegador, no
+    // por un desajuste de este arbol. LanguageTool escribe
+    // data-lt-installed="true" sobre <html> antes de que React hidrate, y el
+    // diff reporto ademas suppresshydrationwarning="true" en minusculas;
+    // ninguno de los dos sale de este repo (`suppressHydrationWarning` no
+    // aparecia en todo web/src, y no hay Date.now, Math.random, toLocale* ni
+    // ramas typeof window: el reloj se INYECTA, ver lib/datos/tipos.ts).
+    //
+    // Solo tapa UN nivel, los atributos de <html> y nada mas: <body> y todo el
+    // arbol de abajo siguen avisando, asi que esto no puede esconder un
+    // desajuste real de la app. Si algun dia aparece uno en <body>, sera otra
+    // extension (Grammarly pone data-gr-* ahi) y se decide entonces, no ahora.
+    <html
+      lang="es"
+      className={`${GeistSans.variable} ${GeistMono.variable} ${Archivo.variable}`}
+      suppressHydrationWarning
+    >
       <body className="min-h-[100dvh] font-sans antialiased">
         <a
           href="#contenido"

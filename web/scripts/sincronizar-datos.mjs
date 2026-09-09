@@ -14,6 +14,10 @@ import { fileURLToPath } from "node:url";
 
 const ORIGEN = new URL("../../data/", import.meta.url);
 const ROSTER = new URL("../../config/roster.json", import.meta.url);
+// El texto de los comentarios de Instagram vive fuera de git (ver .gitignore)
+// y se copia solo si existe: un build desde git puro no lo tiene, y el panel
+// de redes lo dice en vez de fallar.
+const EFIMERO = new URL("../../efimero/", import.meta.url);
 const DESTINO = new URL("../public/data/", import.meta.url);
 
 async function existe(url) {
@@ -44,8 +48,18 @@ await mkdir(DESTINO, { recursive: true });
 await cp(ORIGEN, DESTINO, { recursive: true });
 await cp(ROSTER, new URL("roster.json", DESTINO));
 
+let efimeros = 0;
+if (await existe(EFIMERO)) {
+  for (const nombre of await readdir(EFIMERO)) {
+    if (!nombre.endsWith(".json")) continue;
+    await cp(new URL(nombre, EFIMERO), new URL(nombre, DESTINO));
+    efimeros += 1;
+  }
+}
+
 const copiados = await readdir(DESTINO);
 console.log(
   "datos sincronizados -> public/data/ (" + copiados.filter((n) => n.endsWith(".json")).length +
-  " archivos + archivo/)"
+  " archivos + archivo/" +
+  (efimeros > 0 ? "; " + efimeros + " de efimero/, fuera de git" : "; sin efimero/") + ")"
 );

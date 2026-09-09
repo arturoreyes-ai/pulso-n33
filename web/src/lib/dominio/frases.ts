@@ -109,6 +109,36 @@ export function fraseSentimiento(
   );
 }
 
+/**
+ * Los comentarios de UN post de Instagram, siempre en conteos. No tiene
+ * umbral a proposito: con ~30 comentarios por post un porcentaje se mueve con
+ * uno, y el validador de redes.json rechaza porcentajes en cualquier nivel.
+ */
+export function fraseComentariosPost(
+  s: Sentimiento & { sin_clasificar: number },
+  cosechados: number,
+  comentarios: number,
+  opinion: number,
+): string {
+  if (cosechados === 0) return "Sin comentarios leídos en este post.";
+  const leidos =
+    cosechados >= comentarios
+      ? `${numero(cosechados)} ${pluralizar(cosechados, "comentario leído", "comentarios leídos")}`
+      : `${numero(cosechados)} de ${numero(comentarios)} comentarios leídos`;
+  if (opinion === 0) return `${leidos}; ninguno es opinión con palabras.`;
+  const clasificados = totalSentimiento(s);
+  if (clasificados === 0) {
+    return `${leidos}; ${numero(opinion)} ${pluralizar(opinion, "es opinión", "son opinión")}, sin clasificación de sentimiento en este corte.`;
+  }
+  const cola = s.sin_clasificar > 0 ? ` ${numero(s.sin_clasificar)} sin clasificar.` : "";
+  return (
+    `${leidos}; ${numero(opinion)} ${pluralizar(opinion, "es opinión y suena", "son opinión y suenan")}: ` +
+    `${numero(s.negativo)} ${pluralizar(s.negativo, "negativo", "negativos")}, ` +
+    `${numero(s.neutral)} ${pluralizar(s.neutral, "neutral", "neutrales")} y ` +
+    `${numero(s.positivo)} ${pluralizar(s.positivo, "positivo", "positivos")}.${cola}`
+  );
+}
+
 export function fraseTono(
   t: Tono | undefined,
   sujeto: string,

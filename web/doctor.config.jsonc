@@ -1,0 +1,35 @@
+{
+  // Una sola excepcion, con archivo y regla exactos. La regla sigue ENCENDIDA
+  // para todo lo demas: si alguien mete un import estatico de recharts, de
+  // monaco o de @react-pdf/renderer en otro componente, vuelve a saltar.
+  //
+  // Por que crimen.tsx es un falso positivo, y no una molestia que se calla:
+  //
+  // El detector es por archivo. Ve `import { AreaChart } from "recharts"` y
+  // concluye que recharts viaja en el bundle inicial. No puede ver que NADIE
+  // importa crimen.tsx de forma estatica: el unico camino hasta el es
+  // `dynamic(() => import("@/components/graficas/crimen"), { ssr: false })`
+  // en src/lib/graficas/registro.tsx, con su esqueleto de la misma altura
+  // para no aportar salto de layout.
+  //
+  // Comprobado contra el build y contra la pagina, no deducido:
+  //
+  //   - el chunk con recharts (341 KB) no aparece en NINGUN manifiesto de
+  //     carga inicial: 0 referencias en build-manifest.json, en app/page.js
+  //     y en app/[zona]/page.js
+  //   - en la pagina viva, 0 peticiones de recharts al cargar, de 16 archivos
+  //     JS pedidos, y 0 graficas montadas
+  //
+  // "Arreglarlo" seria diferir piezas sueltas DENTRO de un archivo que ya es
+  // diferido: mas indireccion, cero bytes ahorrados. Y la receta canonica de
+  // la regla advierte justo contra apagar SSR por cada dependencia pesada,
+  // que es lo que ya se hizo bien aqui, en el limite correcto.
+  "ignore": {
+    "overrides": [
+      {
+        "files": ["src/components/graficas/crimen.tsx"],
+        "rules": ["react-doctor/prefer-dynamic-import"]
+      }
+    ]
+  }
+}

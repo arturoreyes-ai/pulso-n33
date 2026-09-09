@@ -9,6 +9,7 @@
 const BASE = (process.env.NEXT_PUBLIC_DATOS_URL ?? "/data").replace(/\/+$/, "");
 
 export const RUTAS = {
+  comunicados: `${BASE}/comunicados.json`,
   estado: `${BASE}/estado.json`,
   fuentes: `${BASE}/fuentes.json`,
   notas: `${BASE}/notas.json`,
@@ -17,14 +18,20 @@ export const RUTAS = {
   indicadores: `${BASE}/indicadores.json`,
   roster: `${BASE}/roster.json`,
   archivoIndice: `${BASE}/archivo/indice.json`,
+  redes: `${BASE}/redes.json`,
+  // Viene de efimero/, fuera de git (ver .gitignore). Puede no existir en un
+  // despliegue desde git puro; el panel de redes lo dice en vez de fallar.
+  redesComentarios: `${BASE}/redes-comentarios.json`,
+  // TikTok: mismo contrato que redes.json, mismo par de archivos.
+  tiktok: `${BASE}/tiktok.json`,
+  tiktokComentarios: `${BASE}/tiktok-comentarios.json`,
 } as const;
 
 /** Un mes del archivo, que solo se pide cuando alguien lo pide. */
 export const rutaMes = (mes: string) => `${BASE}/archivo/notas-${mes}.json`;
 
-/**
- * Si los JSON son del mismo origen. Decide si el preload necesita
- * crossorigin: si el modo CORS del preload no coincide con el del fetch que
- * lo consume, el navegador descarta la descarga y la hace dos veces.
- */
-export const MISMO_ORIGEN = BASE.startsWith("/");
+// Aqui vivia MISMO_ORIGEN, que decidia si el preload llevaba crossorigin.
+// Se fue porque la respuesta no depende del origen: el preload lo lleva
+// SIEMPRE, o el modo de credenciales no empareja con el del fetch que lo
+// consume y el navegador tira la descarga. El razonamiento completo esta
+// donde se toma la decision, en app/layout.tsx.

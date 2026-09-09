@@ -75,9 +75,13 @@ export interface Nota {
   publicado: string | null;
   /** Cuando lo vio el pipeline la primera vez. Se conserva entre corridas. */
   capturado: string;
-  /** Solo las notas aceptadas por el descubrimiento web transitorio. */
-  origen?: "descubrimiento_web";
-  descubierta_por?: "gdelt";
+  /** Notas que no llegaron por el feed de un medio del catalogo:
+   *  `descubrimiento_web` es GDELT, `busqueda_web` es Google Noticias. */
+  origen?: "descubrimiento_web" | "busqueda_web";
+  /** "gdelt" para el descubrimiento; el id de la busqueda (bq_...) para
+   *  Google Noticias. En ese caso la `url` es el redirector de Google y el
+   *  `dominio` es el del medio que publico, tomado de su <source>. */
+  descubierta_por?: string;
   figuras: FiguraEnNota[];
   postura: Postura | null;
 }
@@ -153,7 +157,7 @@ export interface Fuente {
   id: string;
   nombre: string;
   url: string;
-  metodo?: "rss" | "scrapy" | "descubrimiento";
+  metodo?: "rss" | "scrapy" | "descubrimiento" | "busqueda";
   /** Cobertura declarada del medio. Opcional porque los cortes viejos no la traen. */
   zona?: Zona | null;
   estado: "ok" | "fallo";
@@ -162,14 +166,35 @@ export interface Fuente {
   ms: number;
   ultima_ok: string | null;
   error: string | null;
-  detalle?: {
-    candidatos: number;
-    publisher_pages: number;
-    aceptadas: number;
-    rechazadas: number;
-    robots_exclusiones: number;
-    fallos: number;
-  };
+  detalle?: DetalleDescubrimiento | DetalleBusqueda;
+}
+
+export interface DetalleDescubrimiento {
+  candidatos: number;
+  publisher_pages: number;
+  aceptadas: number;
+  rechazadas: number;
+  robots_exclusiones: number;
+  fallos: number;
+}
+
+/**
+ * Conteos de una busqueda de Google Noticias. `notas` y `sin_zona` son los que
+ * importan al leer la banda de salud: `sin_zona` dice cuantas de las que trajo
+ * no llegan al muro porque su titular no nombra ningun lugar, que es la unica
+ * forma de saber si una consulta esta bien escrita sin abrir el archivo.
+ */
+export interface DetalleBusqueda {
+  items: number;
+  sin_publicador: number;
+  sin_fecha: number;
+  fuera_de_ventana: number;
+  sin_sufijo: number;
+  resueltas: number;
+  sinteticas: number;
+  recortadas: number;
+  notas: number;
+  sin_zona: number;
 }
 
 export interface DocFuentes {
@@ -389,6 +414,9 @@ export interface DocEstado {
   archivos: number;
   notas_nuevas: number;
   notas_region: number;
+  /** Notas sin postura por no haber modelo de su idioma. El hueco se publica
+   *  en vez de rellenarse con una etiqueta que el modelo no puede sostener. */
+  notas_sin_modelo_idioma?: number;
   /** Suma MAS que notas_total: una nota puede contar en varias zonas.
    *  Normalizar al maximo, nunca a un total. */
   por_zona: Record<string, number>;
@@ -405,6 +433,174 @@ export interface DocEstado {
     robots_exclusiones?: number;
     fallos?: number;
   };
+}
+
+// -------------------------------------------------------------------- redes
+
+/**
+ * `data/redes.json` — comentarios públicos de Instagram, cosechados por Apify
+ * sin iniciar sesión.
+ *
+ * Deliberadamente más pobre que `DocConversacion`, en dos sentidos que el
+ * tablero tiene que respetar:
+ *
+ * - **No hay identidad de quien comenta, en ningún nivel.** No es que se
+ *   omita al publicar: se tira al ingerir, así que no existe ni en el caché.
+ *   Ver el encabezado de `pulso/instagram.py`.
+ * - **No hay porcentajes, y no se deben calcular en el cliente.** Los planes
+ *   gratuitos de Apify devuelven ~15 comentarios por post, o sea debajo del
+ *   mínimo de 30 que fija PRODUCT.md. Un `n / total` en un componente vuelve
+ *   a meter por la puerta de atrás justo lo que el pipeline se negó a emitir.
+ *
+ * Va **al lado** del panel de prensa y del de YouTube, nunca sumado con
+ * ellos: la distancia entre lo que publica la prensa y lo que responde la
+ * gente es la señal, y promediarlos la borra.
+ */
+export interface RedesSalud {
+  cuenta: string;
+  estado: "ok" | "fallo" | "sin_token";
+  posts?: number;
+  /** Comentarios realmente ingeridos. */
+  comentarios?: number;
+  /** Items facturados por Apify. Mayor que `comentarios` cuando un post no
+   *  tiene comentarios: el actor devuelve un item de relleno y lo cobra. */
+  crudos?: number;
+  nota?: string;
+  error?: string;
+}
+
+/** Las dos plataformas comparten contrato; ver `PLATAFORMAS_REDES` en el validador. */
+export type PlataformaRedes = "instagram" | "tiktok";
+
+export interface DocRedes {
+  esquema: 1;
+  generado: string;
+  plataforma: PlataformaRedes;
+  retencion_dias: 30;
+  comentarios_vigentes: number;
+  posts_vigentes: number;
+  /** Comentarios con palabras y no repetidos. Lo único sobre lo que se
+   *  cuentan temas. */
+  opinion: number;
+  /** Mismo texto en 3+ posts distintos de la misma cuenta: una persona
+   *  insistiendo, no conversación. Se publica aparte, no se resta en el UI. */
+  repetidos: number;
+  /** Sólo emoji o puntuación: reacción sin tema. */
+  reacciones: number;
+  por_zona: Record<string, number>;
+  por_cuenta: Record<string, number>;
+  por_idioma: Record<"es" | "en", number>;
+  /** `posts` es cuántos posts distintos lo sostienen. Un tema con posts:1 es
+   *  un post, no la ciudad — no pintarlo como tendencia. */
+  por_tema: { tema: string; comentarios: number; posts: number }[];
+  /** Tono contado SOLO sobre `opinion`. Nunca se cruza con figuras: el
+   *  modelo puntúa el tono de la frase, no la postura hacia una persona. */
+  sentimiento: {
+    metodo: "modelo" | "ninguno";
+    modelo: string | null;
+    positivo: number;
+    negativo: number;
+    neutral: number;
+    sin_clasificar: number;
+    /** En un idioma que el modelo no habla. Sin etiqueta, nunca inventada. */
+    sin_modelo_idioma: number;
+  };
+  salud: RedesSalud[];
+  gasto: {
+    resultados: number;
+    gastado: number;
+    por_concepto: Record<string, number>;
+  };
+  /** Ventana de los destacados. Instagram la da en días (sobre `fecha`);
+   *  TikTok en horas (sobre `publicado`). Exactamente una de las dos. La
+   *  calcula el pipeline con su propio reloj; el cliente nunca la recalcula.
+   *  Ausentes en cortes viejos. */
+  ventana_dias?: number;
+  ventana_horas?: number;
+  destacados_maximo?: number;
+  /** Catálogo de cuentas, sin handle. Las apagadas viajan también: son el
+   *  registro deliberado de un hueco (Mexicali, San Quintín) y permiten
+   *  rotular «sin cuenta» en vez de un cero. */
+  cuentas?: RedesCuenta[];
+  /** Unión del top general y del top por zona, ordenada por (-likes,
+   *  -comentarios, url). Filtrar por zona y cortar a `destacados_maximo`. */
+  destacados?: Destacado[];
+}
+
+export interface RedesCuenta {
+  cuenta: string;
+  nombre: string;
+  zona: string;
+  activa: boolean;
+}
+
+/**
+ * Un post destacado. `titulo` es la primera línea del pie del MEDIO, no un
+ * comentario: es la regla «titular, fuente y liga» aplicada a Instagram. La
+ * `zona` es la sede de la cuenta, no el tema del post.
+ */
+export interface Destacado {
+  url: string;
+  cuenta: string;
+  zona: string;
+  fecha: string;
+  titulo: string;
+  tipo: "imagen" | "video" | "carrusel" | "otro";
+  likes: number;
+  /** Total que reporta el actor. */
+  comentarios: number;
+  /** Solo en video, y solo si es mayor que 0. */
+  reproducciones?: number;
+  /** Solo TikTok. El @handle de quien publicó el video: la única identidad
+   *  que cruza a data/, por decisión del cliente (8 sep 2026). La URL ya lo
+   *  trae. Quien comenta nunca. */
+  creador?: string;
+  /** Solo TikTok: fecha-hora exacta de publicación (ISO, UTC). `fecha` es su día. */
+  publicado?: string;
+  /** Solo TikTok, que sí los publica: un 0 es cero medido. Instagram no los
+   *  expone y su ausencia es «sin dato». */
+  compartidos?: number;
+  guardados?: number;
+  /** Comentarios en el caché para este post (≤ comentarios_por_post). */
+  cosechados: number;
+  /** Con palabras y no repetidos. Lo único sobre lo que hay tono y temas. */
+  opinion: number;
+  sentimiento: {
+    positivo: number;
+    negativo: number;
+    neutral: number;
+    sin_clasificar: number;
+    sin_modelo_idioma: number;
+  };
+  temas: { tema: string; comentarios: number }[];
+}
+
+/**
+ * `redes-comentarios.json` — el TEXTO de los comentarios más votados por post.
+ *
+ * Vive en `efimero/`, fuera de git, y se regenera en cada corrida desde el
+ * caché de 30 días (decisión del cliente del 8 de septiembre de 2026; ver el
+ * encabezado de `pulso/instagram.py`). Puede faltar en un despliegue hecho
+ * desde git puro, y eso no es un error del panel: se dice.
+ *
+ * Sin identidad: ni usuario, ni id de comentario. Por post, los primeros
+ * `visibles` van siempre; del siguiente a `maximo` solo con likes > 0.
+ */
+export interface ComentarioPublicado {
+  texto: string;
+  likes: number;
+  fecha: string;
+  sentimiento: "positivo" | "negativo" | "neutral" | null;
+}
+
+export interface DocRedesComentarios {
+  esquema: 1;
+  generado: string;
+  plataforma: PlataformaRedes;
+  retencion_dias: 30;
+  visibles: number;
+  maximo: number;
+  por_post: Record<string, ComentarioPublicado[]>;
 }
 
 // ------------------------------------------------------------------- roster
@@ -425,4 +621,16 @@ export interface DocRoster {
   verificado: string;
   nota: string;
   figuras: Figura[];
+}
+/** Boletines municipales aislados de las métricas de prensa. */
+export interface DocComunicados {
+  esquema: 1;
+  fuente: { id: "gobtecate"; nombre: "Gobierno de Tecate"; url: string };
+  zona: "Tecate";
+  modo: "red" | "sin_red";
+  consultado: string;
+  ultimo_exito: string | null;
+  estado: "ok" | "fallo";
+  error: string | null;
+  comunicados: { id: string; titulo: string; url: string; fecha: string | null }[];
 }

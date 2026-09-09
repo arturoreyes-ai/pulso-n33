@@ -6,12 +6,15 @@ import useSWRImmutable from "swr/immutable";
 import { RUTAS } from "./config";
 import { leerJson } from "./fetcher";
 import type {
+  DocComunicados,
   DocArchivoIndice,
   DocConversacion,
   DocEstado,
   DocFuentes,
   DocIndicadores,
   DocNotas,
+  DocRedes,
+  DocRedesComentarios,
   DocRoster,
   DocTemas,
 } from "./tipos";
@@ -25,6 +28,8 @@ import type {
 // horas y no cambia mientras la pestana esta abierta.
 
 export const useNotas = () => useSWRImmutable<DocNotas>(RUTAS.notas, leerJson);
+export const useComunicados = () =>
+  useSWRImmutable<DocComunicados>(RUTAS.comunicados, leerJson);
 export const useTemas = () => useSWRImmutable<DocTemas>(RUTAS.temas, leerJson);
 export const useIndicadores = () =>
   useSWRImmutable<DocIndicadores>(RUTAS.indicadores, leerJson);
@@ -32,6 +37,14 @@ export const useConversacion = () =>
   useSWRImmutable<DocConversacion>(RUTAS.conversacion, leerJson);
 export const useFuentes = () => useSWRImmutable<DocFuentes>(RUTAS.fuentes, leerJson);
 export const useRoster = () => useSWRImmutable<DocRoster>(RUTAS.roster, leerJson);
+export const useRedes = () => useSWRImmutable<DocRedes>(RUTAS.redes, leerJson);
+/** El texto de los comentarios. Un 404 aqui NO es error del panel: el archivo
+ *  vive fuera de git y un despliegue puede no traerlo. */
+export const useRedesComentarios = () =>
+  useSWRImmutable<DocRedesComentarios>(RUTAS.redesComentarios, leerJson);
+export const useTikTok = () => useSWRImmutable<DocRedes>(RUTAS.tiktok, leerJson);
+export const useTikTokComentarios = () =>
+  useSWRImmutable<DocRedesComentarios>(RUTAS.tiktokComentarios, leerJson);
 
 /** El indice del archivo solo se pide si alguien abre el historico. */
 export const useArchivo = (activo: boolean) =>

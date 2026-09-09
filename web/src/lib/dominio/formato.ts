@@ -62,6 +62,16 @@ export function pct(v: number | null | undefined, decimales = 2): string {
 
 export const fechaLarga = (iso: string) => FECHA_LARGA.format(new Date(iso));
 
+/**
+ * "6 sept" a partir de una fecha SIN hora ("2026-09-06"). Se ancla al mediodia
+ * UTC a proposito: `new Date("2026-09-06")` es medianoche UTC, que en Tijuana
+ * todavia es el dia 5, y el formateador la mostraria un dia atras.
+ */
+export function fechaCorta(fecha: string): string {
+  const d = new Date(fecha.length === 10 ? fecha + "T12:00:00Z" : fecha);
+  return Number.isNaN(d.getTime()) ? "s/f" : DIA_MES.format(d);
+}
+
 export function hora(iso: string): string {
   const d = new Date(iso);
   return Number.isNaN(d.getTime()) ? "s/f" : HORA.format(d) + " h";
