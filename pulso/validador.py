@@ -1657,13 +1657,30 @@ def validar_estado(datos):
 
 # ------------------------------------------------------------------- todo
 
-def validar_todo(dir_config="config", dir_datos="data", hoy=None, dir_efimero="efimero"):
+def validar_todo(dir_config="config", dir_datos="data", hoy=None, dir_efimero=None):
     """Valida todo lo que exista. data/ ausente es aviso, no error.
 
     efimero/ es el texto de comentarios publicado fuera de git: se valida si
     esta, contra el redes.json del mismo corte.
     """
     errores, avisos = [], []
+
+    # efimero/ y data/ son HERMANOS de una misma corrida: `pulso redes`
+    # escribe data/redes.json y efimero/redes-comentarios.json en el mismo
+    # paso. Por eso el valor por omision se DERIVA de dir_datos en vez de ser
+    # la constante "efimero".
+    #
+    # El caso que lo motivo es el propio comando que la documentacion manda
+    # correr. CI hace `correr --salida $RUNNER_TEMP/data` y luego
+    # `validar --datos $RUNNER_TEMP/data`; con el default fijo, eso emparejaba
+    # el ./efimero del repo -- que en una maquina con corridas reales tiene los
+    # dos archivos de texto -- contra un data/ ajeno que no trae redes.json ni
+    # tiktok.json. Resultado: dos errores de "huerfano" que no lo eran. En CI
+    # no se veia porque ahi no existe ./efimero, o sea que el modo de falla
+    # solo aparecia en local, que es donde nadie lo iba a creer.
+    if dir_efimero is None:
+        dir_efimero = os.path.join(
+            os.path.dirname(os.path.normpath(dir_datos)) or ".", "efimero")
 
     ruta_roster = os.path.join(dir_config, "roster.json")
     ruta_medios = os.path.join(dir_config, "medios.json")
