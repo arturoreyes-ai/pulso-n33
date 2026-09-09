@@ -412,26 +412,37 @@ offline completa a una carpeta temporal.
 
 ## Publicar el tablero
 
-**Está apagado a propósito.** GitHub Pages en un repo privado exige plan de
-pago, y este repo es privado. El job de despliegue existe y se salta solo.
+Lo que se publica es **`web/`**, el tablero de Next.js. `sitio/` sigue en el
+repo y en CI, pero ya no es el producto: el cron dejó de armarlo.
 
-Para encenderlo:
-
-```bash
-gh api -X POST repos/arturoreyes-ai/pulso-n33/pages -f build_type=workflow
-```
+**Está apagado a propósito** hasta que el proyecto del host exista. Para
+encenderlo hacen falta una variable y tres secretos:
 
 ```bash
-gh variable set DESPLEGAR_PAGES -b true
+gh variable set DESPLEGAR_TABLERO -b true
+gh secret set VERCEL_TOKEN
+gh secret set VERCEL_ORG_ID
+gh secret set VERCEL_PROJECT_ID
 ```
 
-El sitio queda en `https://arturoreyes-ai.github.io/pulso-n33/`. Ojo: una
-página de Pages es **pública** aunque el repo sea privado, y publicaría
-también `data/*.json` y `config/roster.json`. La otra opción es hacer público
-el repo, que además da minutos de Actions ilimitados.
+**Se despliega desde el runner**, no desde un build del host contra git, y no
+es un detalle de herramienta. El texto de los comentarios vive en `efimero/`,
+fuera de git por la retención de 30 días, así que un host que construya desde
+el repositorio jamás lo vería y publicaría los posts sin comentarios. En el
+cron, en cambio, esa carpeta la acaba de escribir el paso de redes de la
+misma corrida, y `pnpm build` la copia a `web/public/data`.
 
-Todas las rutas del tablero son relativas, así que el mismo `_site/` funciona
-en `localhost` y bajo el subcamino `/pulso-n33/`.
+**No es exportación estática y por eso Pages ya no sirve.** `next.config.ts`
+deja `output` sin definir a propósito para conservar las route handlers, y
+`/api/garitas` existe porque CBP no manda cabeceras CORS: hace falta un host
+con Node.
+
+Ojo con lo mismo que antes: el sitio es **público** aunque el repo sea
+privado, y publica también `data/*.json` y `config/roster.json`.
+
+Para servir el tablero plano en local, `python -m pulso servir` sigue
+funcionando igual, con `/data/` y `/config/` mapeados a las carpetas de
+verdad.
 
 ---
 
