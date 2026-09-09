@@ -3,7 +3,7 @@
  "generado": "2026-09-09",
  "ventana_dias": 7,
  "minimo": 3,
- "notas_ventana": 1428,
+ "notas_ventana": 1442,
  "notas_previas": 230,
  "temas": [
   {
@@ -1299,7 +1299,7 @@
  ],
  "por_zona": {
   "Tijuana": {
-   "notas_ventana": 342,
+   "notas_ventana": 347,
    "minimo": 3,
    "temas": [
     {
@@ -1472,6 +1472,33 @@
       "Hijo de abogado Narciso Alemán asesinado en Playas de Tijuana exige detener a los delincuentes",
       "Vehículo de plataforma termina volcado en Playas de Tijuana; una mujer fue trasladada a un hospital",
       "Este es el plan para resolver en Vía Rápida el tránsito de Ready Lane y la conexión a playas"
+     ]
+    },
+    {
+     "termino": "xolos",
+     "n": 6,
+     "n_previo": 1,
+     "momento": 5,
+     "zonas": {
+      "Tijuana": 6
+     },
+     "fuentes": {
+      "imparcial": 3,
+      "soltij": 3
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "196020fed6c03030",
+      "70de044d5bb90173",
+      "95f937ba29f75086",
+      "a19cef18414cab8e",
+      "b003fc2f185af22e",
+      "bdbe4adca8565ef4"
+     ],
+     "ejemplos": [
+      "Aurinegros y Xolos empatan en la primera jornada de la Copa Promesas 2026",
+      "Iván Tona sería nuevo jugador del América tras cinco torneos como titular de Xolos",
+      "Xolos quedó fuera de la pelea por la CONCACAF Champions Cup"
      ]
     },
     {
@@ -1858,7 +1885,7 @@
      ]
     },
     {
-     "termino": "xolos",
+     "termino": "toros",
      "n": 5,
      "n_previo": 1,
      "momento": 4,
@@ -1871,16 +1898,16 @@
      },
      "un_solo_medio": false,
      "notas": [
-      "196020fed6c03030",
-      "70de044d5bb90173",
-      "95f937ba29f75086",
-      "a19cef18414cab8e",
-      "b003fc2f185af22e"
+      "6a9f311000767f50",
+      "877d309539174225",
+      "8cddc0305ab99ac9",
+      "ad72b916d458e291",
+      "f68d0a6e1a6213fe"
      ],
      "ejemplos": [
-      "Iván Tona sería nuevo jugador del América tras cinco torneos como titular de Xolos",
-      "Xolos quedó fuera de la pelea por la CONCACAF Champions Cup",
-      "Gana Xolos femenil ante Pachuca en la cancha del estadio Caliente"
+      "Errores de Toros regalan el juego 1 de la Serie del Rey ante Olmecas",
+      "Toros de Tijuana pierde el primero de la Serie del Rey",
+      "Toros de Tijuana y Olmecas van por la Serie del Rey"
      ]
     },
     {
@@ -1960,32 +1987,6 @@
       "Aprueban en el Congreso de BC iniciativas de ley para endurecer la rendición de cuentas",
       "Aprueban convocatoria para designar a titular de la Auditoría Superior de BC",
       "Aprueban convocatoria para designar titular de la Auditoría Superior de BC"
-     ]
-    },
-    {
-     "termino": "colonia",
-     "n": 4,
-     "n_previo": 0,
-     "momento": 4,
-     "zonas": {
-      "Tijuana": 4
-     },
-     "fuentes": {
-      "afn": 2,
-      "lavoz": 1,
-      "rosarito": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "1c247148f27b8b5b",
-      "5b8a1ba40ef04a20",
-      "68eb5a50e46c1f76",
-      "c01e4dbedfba35d3"
-     ],
-     "ejemplos": [
-      "Pavimentan calles Francisco Villa y Eulalio Gutiérrez en colonia Reforma",
-      "Hieren de bala a un hombre en la colonia Murúa Martínez",
-      "Muere motociclista al chocar contra una camioneta en la colonia Insurgentes Oeste"
      ]
     }
    ]
@@ -3529,7 +3530,7 @@
    ]
   },
   "San Diego": {
-   "notas_ventana": 154,
+   "notas_ventana": 156,
    "minimo": 3,
    "temas": [
     {
@@ -3731,6 +3732,32 @@
      ]
     },
     {
+     "termino": "back",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "San Diego": 4
+     },
+     "fuentes": {
+      "kpbs": 2,
+      "timessd": 1,
+      "voiceofsd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "30197372fd144c81",
+      "3c8b9b347a5fe2d1",
+      "5e664881109409c7",
+      "630a8cee88e1561f"
+     ],
+     "ejemplos": [
+      "TSA brings back gate access for some people without plane tickets 25 years after 9/11",
+      "Medi-Cal won’t pay for assisted living in most of California. One brother fought back",
+      "California lawmakers push back on Trump’s attack on renters"
+     ]
+    },
+    {
      "termino": "change",
      "n": 4,
      "n_previo": 0,
@@ -3884,7 +3911,7 @@
      ]
     },
     {
-     "termino": "back",
+     "termino": "attacks",
      "n": 3,
      "n_previo": 0,
      "momento": 3,
@@ -3892,20 +3919,18 @@
       "San Diego": 3
      },
      "fuentes": {
-      "kpbs": 1,
-      "timessd": 1,
-      "voiceofsd": 1
+      "kpbs": 3
      },
-     "un_solo_medio": false,
+     "un_solo_medio": true,
      "notas": [
-      "30197372fd144c81",
-      "5e664881109409c7",
-      "630a8cee88e1561f"
+      "1cbc2d140b7892c2",
+      "4279fe070f0c54a4",
+      "9c620e1d4f570bdc"
      ],
      "ejemplos": [
-      "Medi-Cal won’t pay for assisted living in most of California. One brother fought back",
-      "California lawmakers push back on Trump’s attack on renters",
-      "Officials Horrified Ex-Deputy Was Back in Public Life"
+      "U.S. military says it destroyed 5 Iranian oil tankers after attacks on Navy warship",
+      "Houthi attacks on Saudi Arabia ignite fires at oil facilities and wound 73 people",
+      "U.S. and Iran trade attacks on ships as fighting flares up again"
      ]
     },
     {
@@ -4147,30 +4172,6 @@
       "California could be first in the nation to create smoke-damage standards",
       "Live Nation pone la mira en el centro de San Diego. Esto significa para la música en vivo en la región",
       "Concert giant Live Nation has set its sights on downtown. What that means for live music in San Diego"
-     ]
-    },
-    {
-     "termino": "pacific",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "San Diego": 3
-     },
-     "fuentes": {
-      "timessd": 2,
-      "kpbs": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "50a8117ea71180a6",
-      "e485e3594ae1a75c",
-      "ff4a9e298674cce4"
-     ],
-     "ejemplos": [
-      "Pacific Beach Arts Center groundbreaking",
-      "PACIFIC HEARTBEAT: Daughters of The Waves",
-      "Rush Bowls offers a fresh, nutritious alternative in Pacific Beach"
      ]
     }
    ]
