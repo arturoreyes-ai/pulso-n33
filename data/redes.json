@@ -1,79 +1,54 @@
 {
  "esquema": 1,
- "generado": "2026-09-08T21:38:50+00:00",
+ "generado": "2026-09-11T19:43:08+00:00",
  "plataforma": "instagram",
  "retencion_dias": 30,
- "comentarios_vigentes": 600,
- "posts_vigentes": 86,
- "opinion": 522,
- "repetidos": 12,
- "reacciones": 69,
+ "comentarios_vigentes": 317,
+ "posts_vigentes": 37,
+ "opinion": 253,
+ "repetidos": 0,
+ "reacciones": 64,
  "por_zona": {
-  "Tijuana": 595,
-  "estatal": 5
+  "Tijuana": 317
  },
  "por_cuenta": {
-  "afn_ig": 50,
-  "frontera_ig": 43,
-  "siempre_ig": 158,
-  "sintesis_ig": 13,
-  "soltij_ig": 4,
-  "tjnoticias_ig": 136,
-  "tjpublica_ig": 148,
-  "uniradio_ig": 5,
-  "zeta_ig": 43
+  "afn_ig": 42,
+  "eltijuanense_ig": 9,
+  "frontera_ig": 15,
+  "siempre_ig": 62,
+  "soltij_ig": 3,
+  "tijuanainforma_ig": 12,
+  "tjnoticias_ig": 52,
+  "tjpublica_ig": 82,
+  "yoamotijuana_ig": 34,
+  "zeta_ig": 6
  },
  "por_idioma": {
-  "es": 600
+  "es": 317
  },
  "por_tema": [
   {
-   "tema": "morena",
-   "comentarios": 15,
-   "posts": 5
-  },
-  {
-   "tema": "ahora",
-   "comentarios": 9,
-   "posts": 8
-  },
-  {
-   "tema": "agua",
+   "tema": "bajo",
    "comentarios": 6,
-   "posts": 4
+   "posts": 3
   },
   {
-   "tema": "gobierno",
-   "comentarios": 5,
-   "posts": 5
+   "tema": "paso",
+   "comentarios": 4,
+   "posts": 3
   },
   {
    "tema": "casa",
-   "comentarios": 4,
-   "posts": 4
-  },
-  {
-   "tema": "trump",
-   "comentarios": 4,
-   "posts": 2
-  },
-  {
-   "tema": "vida",
    "comentarios": 3,
    "posts": 3
   },
   {
    "tema": "deja",
-   "comentarios": 2,
+   "comentarios": 3,
    "posts": 2
   },
   {
-   "tema": "hospital",
-   "comentarios": 2,
-   "posts": 1
-  },
-  {
-   "tema": "centro",
+   "tema": "calor",
    "comentarios": 1,
    "posts": 1
   },
@@ -83,46 +58,31 @@
    "posts": 1
   },
   {
-   "tema": "detienen",
+   "tema": "clases",
    "comentarios": 1,
    "posts": 1
   },
   {
-   "tema": "garita",
+   "tema": "gobierno",
    "comentarios": 1,
    "posts": 1
   },
   {
-   "tema": "hombre",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
-   "tema": "nacional",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
-   "tema": "tres",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
-   "tema": "visas",
+   "tema": "vivo",
    "comentarios": 1,
    "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 86,
-  "negativo": 222,
-  "neutral": 214,
+  "positivo": 58,
+  "negativo": 92,
+  "neutral": 103,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
   "metodo": "modelo"
  },
- "ventana_dias": 7,
+ "ventana_horas": 24,
  "destacados_maximo": 15,
  "cuentas": [
   {
@@ -136,6 +96,12 @@
    "nombre": "Mexicali — sin cuenta encontrada",
    "zona": "Mexicali",
    "activa": false
+  },
+  {
+   "cuenta": "eltijuanense_ig",
+   "nombre": "El Tijuanense",
+   "zona": "Tijuana",
+   "activa": true
   },
   {
    "cuenta": "elvigia_ig",
@@ -174,6 +140,12 @@
    "activa": true
   },
   {
+   "cuenta": "tijuanainforma_ig",
+   "nombre": "Tijuana Informa",
+   "zona": "Tijuana",
+   "activa": true
+  },
+  {
    "cuenta": "tjnoticias_ig",
    "nombre": "TjNoticias",
    "zona": "Tijuana",
@@ -192,6 +164,12 @@
    "activa": true
   },
   {
+   "cuenta": "yoamotijuana_ig",
+   "nombre": "Yo Amo Tijuana",
+   "zona": "Tijuana",
+   "activa": true
+  },
+  {
    "cuenta": "zeta_ig",
    "nombre": "Semanario ZETA",
    "zona": "Tijuana",
@@ -200,66 +178,205 @@
  ],
  "destacados": [
   {
-   "url": "https://www.instagram.com/p/Dc_pFWKIV5c/",
-   "cuenta": "tjpublica_ig",
+   "url": "https://www.instagram.com/p/DdJ9RllORXN/",
+   "cuenta": "tjnoticias_ig",
    "zona": "Tijuana",
-   "fecha": "2026-09-07",
-   "titulo": "🚨 TIJUANA: CAMIONETA VUELCA TRAS CHOCAR CONTRA UN AUTO EN ZONA RÍO",
+   "fecha": "2026-09-11",
+   "titulo": "De acuerdo con información preliminar, la unidad de Bomberos se dirigía, con sirena y torretas encendidas, a atender un incendio registrado en una bodega ubica…",
    "tipo": "video",
-   "likes": 406,
-   "comentarios": 49,
-   "reproducciones": 22948,
+   "likes": 1340,
+   "comentarios": 47,
+   "reproducciones": 27458,
+   "publicado": "2026-09-11T17:34:34+00:00",
    "cosechados": 30,
-   "opinion": 30,
+   "opinion": 29,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 23,
-    "neutral": 7,
+    "negativo": 18,
+    "neutral": 11,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": [
     {
-     "tema": "vida",
+     "tema": "bajo",
+     "comentarios": 4
+    },
+    {
+     "tema": "deja",
+     "comentarios": 2
+    },
+    {
+     "tema": "choque",
      "comentarios": 1
     }
    ]
   },
   {
-   "url": "https://www.instagram.com/p/DdCo-dHku6c/",
-   "cuenta": "tjnoticias_ig",
+   "url": "https://www.instagram.com/p/DdJ9SOpOx7H/",
+   "cuenta": "yoamotijuana_ig",
    "zona": "Tijuana",
-   "fecha": "2026-09-08",
-   "titulo": "¿Tienes entre 13 y 17 años y practicas boxeo? Una agencia de casting busca jóvenes que quieran participar en una película que se grabará en Tijuana y Bogotá du…",
-   "tipo": "carrusel",
-   "likes": 332,
-   "comentarios": 16,
-   "cosechados": 16,
-   "opinion": 16,
+   "fecha": "2026-09-11",
+   "titulo": "Este viernes se confirmó el fallecimiento de Laura Alicia Caramillo, quien se convirtió en la directora de la Facultad de Derecho de la UABC campus Otay en el…",
+   "tipo": "imagen",
+   "likes": 1236,
+   "comentarios": 22,
+   "publicado": "2026-09-11T17:34:10+00:00",
+   "cosechados": 21,
+   "opinion": 12,
    "sentimiento": {
-    "positivo": 1,
-    "negativo": 0,
-    "neutral": 15,
+    "positivo": 0,
+    "negativo": 7,
+    "neutral": 5,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "deja",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
+   "url": "https://www.instagram.com/p/DdKJX2uh5Vo/",
+   "cuenta": "yoamotijuana_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-11",
+   "titulo": "Luego de 20 años viviendo en el Parque Morelos de Tijuana, el oso Yogi ha fallecido, de acuerdo con información oficial de autoridades municipales.",
+   "tipo": "imagen",
+   "likes": 1035,
+   "comentarios": 15,
+   "publicado": "2026-09-11T19:19:28+00:00",
+   "cosechados": 10,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 3,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/Dc6TSFcoRJf/",
-   "cuenta": "tjpublica_ig",
+   "url": "https://www.instagram.com/p/DdJypECj7qW/",
+   "cuenta": "eltijuanense_ig",
    "zona": "Tijuana",
-   "fecha": "2026-09-05",
-   "titulo": "Así se observa desde distintos puntos de Tijuana la nube de smog que cubre parte de la ciudad. La concentración de contaminantes genera una capa visible sobre…",
+   "fecha": "2026-09-11",
+   "titulo": "CIERRAN POR UN MINUTO LA GARITA DE SAN YSIDRO EN MEMORIA DE LAS VÍCTIMAS DEL 11-S",
    "tipo": "video",
-   "likes": 236,
-   "comentarios": 8,
-   "reproducciones": 14833,
+   "likes": 662,
+   "comentarios": 10,
+   "reproducciones": 15287,
+   "publicado": "2026-09-11T16:01:12+00:00",
+   "cosechados": 6,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdKCVCJmVsZ/",
+   "cuenta": "yoamotijuana_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-11",
+   "titulo": "¿Cómo viviste esta fecha?",
+   "tipo": "carrusel",
+   "likes": 545,
+   "comentarios": 14,
+   "publicado": "2026-09-11T18:17:53+00:00",
+   "cosechados": 8,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 4,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "paso",
+     "comentarios": 2
+    },
+    {
+     "tema": "casa",
+     "comentarios": 1
+    },
+    {
+     "tema": "clases",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
+   "url": "https://www.instagram.com/p/DdJ_3HRz4IK/",
+   "cuenta": "yoamotijuana_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-11",
+   "titulo": "Adiós calor de 30 grados 🥵",
+   "tipo": "imagen",
+   "likes": 375,
+   "comentarios": 9,
+   "publicado": "2026-09-11T17:56:36+00:00",
    "cosechados": 5,
    "opinion": 5,
    "sentimiento": {
+    "positivo": 1,
+    "negativo": 2,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "calor",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
+   "url": "https://www.instagram.com/p/DdKEgApD5NH/",
+   "cuenta": "tjnoticias_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-11",
+   "titulo": "Camión de Settepi sale del camino y termina en un barranco tras percance con pipa de Bomberos",
+   "tipo": "carrusel",
+   "likes": 330,
+   "comentarios": 7,
+   "publicado": "2026-09-11T18:36:51+00:00",
+   "cosechados": 6,
+   "opinion": 6,
+   "sentimiento": {
     "positivo": 0,
-    "negativo": 3,
+    "negativo": 4,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdJ-sRiGt6M/",
+   "cuenta": "yoamotijuana_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-11",
+   "titulo": "Una vecina solicita el apoyo de la comunidad para localizar a los dueños de un perrito encontrado en su domicilio el pasado martes por la tarde. El canino, que…",
+   "tipo": "carrusel",
+   "likes": 301,
+   "comentarios": 6,
+   "publicado": "2026-09-11T17:46:06+00:00",
+   "cosechados": 6,
+   "opinion": 3,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 0,
     "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -272,152 +389,74 @@
    ]
   },
   {
-   "url": "https://www.instagram.com/p/DdCg1ayybnQ/",
-   "cuenta": "siempre_ig",
+   "url": "https://www.instagram.com/p/DdINXfBo9bG/",
+   "cuenta": "tjpublica_ig",
    "zona": "Tijuana",
-   "fecha": "2026-09-08",
-   "titulo": "Motociclistas no están tan contentos con el cambio en la garita de San Ysidro",
+   "fecha": "2026-09-11",
+   "titulo": "Lo que pasa todos los días en Terán y nadie dice nada 👇",
    "tipo": "video",
-   "likes": 208,
-   "comentarios": 30,
-   "reproducciones": 6497,
-   "cosechados": 0,
-   "opinion": 0,
+   "likes": 224,
+   "comentarios": 24,
+   "reproducciones": 15079,
+   "publicado": "2026-09-11T01:16:33+00:00",
+   "cosechados": 18,
+   "opinion": 18,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdCmgo4kp7i/",
-   "cuenta": "tjnoticias_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-08",
-   "titulo": "🐱💔 ¡Buscan a Phoebe! Lleva más de una semana perdida y su familia no deja de buscarla",
-   "tipo": "carrusel",
-   "likes": 159,
-   "comentarios": 1,
-   "cosechados": 1,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 1,
+    "negativo": 12,
+    "neutral": 6,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": [
     {
-     "tema": "casa",
+     "tema": "bajo",
      "comentarios": 1
     }
    ]
   },
   {
-   "url": "https://www.instagram.com/p/DdCkmuGg_Jh/",
-   "cuenta": "sintesis_ig",
+   "url": "https://www.instagram.com/p/DdKJ7ARlt20/",
+   "cuenta": "frontera_ig",
    "zona": "Tijuana",
-   "fecha": "2026-09-08",
-   "titulo": "Jesús Ignacio Osuna, más conocido en redes sociales como \"El Chikilin\", aclaró que la muerte relacionada a la clínica de rehabilitación Jireh en Residencial de…",
-   "tipo": "video",
-   "likes": 134,
-   "comentarios": 6,
-   "reproducciones": 5355,
-   "cosechados": 5,
-   "opinion": 5,
+   "fecha": "2026-09-11",
+   "titulo": "EL BOLETO SE REEMBOLSA… ¿Y EL VIAJE? 🎟️✈️",
+   "tipo": "carrusel",
+   "likes": 154,
+   "comentarios": 16,
+   "publicado": "2026-09-11T19:24:18+00:00",
+   "cosechados": 11,
+   "opinion": 10,
    "sentimiento": {
-    "positivo": 0,
+    "positivo": 2,
     "negativo": 4,
-    "neutral": 1,
+    "neutral": 4,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": [
     {
-     "tema": "hospital",
-     "comentarios": 2
+     "tema": "paso",
+     "comentarios": 1
     }
    ]
   },
   {
-   "url": "https://www.instagram.com/p/DdCltkClqT9/",
-   "cuenta": "frontera_ig",
+   "url": "https://www.instagram.com/p/DdIIL92CN7T/",
+   "cuenta": "tijuanainforma_ig",
    "zona": "Tijuana",
-   "fecha": "2026-09-08",
-   "titulo": "🔥 ¿South Park ahora se llama “South America”? La serie volvió a burlarse de Trump y de los cambios de nombres en los mapas.",
-   "tipo": "imagen",
-   "likes": 133,
-   "comentarios": 1,
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdCpPowEvge/",
-   "cuenta": "tjnoticias_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-08",
-   "titulo": "Un hombre murió y cuatro personas resultaron lesionadas luego de un accidente de tránsito registrado la mañana de este martes en la colonia Las Cumbres, donde…",
-   "tipo": "carrusel",
-   "likes": 120,
-   "comentarios": 0,
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/Dc6ruu2PQaZ/",
-   "cuenta": "tjpublica_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-05",
-   "titulo": "Así se ve Tijuana a 500 metros de altura.",
+   "fecha": "2026-09-11",
+   "titulo": "Marea alta sorprende a visitantes y comerciantes en Playas de Rosarito.",
    "tipo": "video",
-   "likes": 93,
-   "comentarios": 0,
-   "reproducciones": 3949,
-   "cosechados": 0,
-   "opinion": 0,
+   "likes": 137,
+   "comentarios": 3,
+   "reproducciones": 8267,
+   "publicado": "2026-09-11T00:31:04+00:00",
+   "cosechados": 3,
+   "opinion": 2,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdCUrVmEb89/",
-   "cuenta": "zeta_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-08",
-   "titulo": "El cirujano Carlos Adrián Alemán Rodríguez pide justicia por el homicidio de su padre, Narciso Alemán Díaz, asesinado el viernes 4 de septiembre.",
-   "tipo": "imagen",
-   "likes": 54,
-   "comentarios": 1,
-   "cosechados": 1,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
+    "negativo": 1,
     "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -425,38 +464,63 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdCd796mf5Z/",
-   "cuenta": "sintesis_ig",
+   "url": "https://www.instagram.com/p/DdIExCVCBn6/",
+   "cuenta": "tijuanainforma_ig",
    "zona": "Tijuana",
-   "fecha": "2026-09-08",
-   "titulo": "La Embajada de Irán en Sierra Leona causó polémica al publicar en sus redes sociales un mapa de Norteamérica en el que una amplia zona del territorio estadouni…",
+   "fecha": "2026-09-11",
+   "titulo": "Tijuana tiene al único mexicano nominado.",
    "tipo": "imagen",
-   "likes": 50,
-   "comentarios": 0,
-   "cosechados": 0,
-   "opinion": 0,
+   "likes": 119,
+   "comentarios": 5,
+   "publicado": "2026-09-11T00:00:45+00:00",
+   "cosechados": 4,
+   "opinion": 3,
    "sentimiento": {
-    "positivo": 0,
+    "positivo": 1,
     "negativo": 0,
-    "neutral": 0,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdClgzhCNbW/",
-   "cuenta": "frontera_ig",
+   "url": "https://www.instagram.com/p/DdIlEflIWlr/",
+   "cuenta": "tjpublica_ig",
    "zona": "Tijuana",
-   "fecha": "2026-09-08",
-   "titulo": "Lionel Messi y Julián Quiñones aparecen entre los 30 nominados al Balón de Oro 🏆⚽",
-   "tipo": "carrusel",
-   "likes": 44,
-   "comentarios": 0,
-   "cosechados": 0,
-   "opinion": 0,
+   "fecha": "2026-09-11",
+   "titulo": "👀 ¿Has visto estas misteriosas marcas en el piso de Old Town San Diego?",
+   "tipo": "video",
+   "likes": 108,
+   "comentarios": 3,
+   "reproducciones": 5938,
+   "publicado": "2026-09-11T04:43:32+00:00",
+   "cosechados": 2,
+   "opinion": 2,
    "sentimiento": {
     "positivo": 0,
+    "negativo": 1,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdKCRHKB7cH/",
+   "cuenta": "siempre_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-11",
+   "titulo": "Lorena Ochoa habló de su vida tras el golf",
+   "tipo": "video",
+   "likes": 80,
+   "comentarios": 4,
+   "reproducciones": 1399,
+   "publicado": "2026-09-11T18:18:38+00:00",
+   "cosechados": 4,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 2,
     "negativo": 0,
     "neutral": 0,
     "sin_clasificar": 0,
@@ -465,16 +529,17 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdAzvbRMxfJ/",
-   "cuenta": "uniradio_ig",
-   "zona": "estatal",
-   "fecha": "2026-09-08",
-   "titulo": "Siguen los #accidentes #graves en el #ViaductoElevado de #Tijuana.",
+   "url": "https://www.instagram.com/p/DdH9l8GDGTx/",
+   "cuenta": "tijuanainforma_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-10",
+   "titulo": "Finales felices.",
    "tipo": "video",
-   "likes": 40,
-   "comentarios": 3,
-   "reproducciones": 3062,
-   "cosechados": 3,
+   "likes": 78,
+   "comentarios": 4,
+   "reproducciones": 6455,
+   "publicado": "2026-09-10T22:58:20+00:00",
+   "cosechados": 4,
    "opinion": 3,
    "sentimiento": {
     "positivo": 0,
@@ -486,35 +551,16 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdCfXHiERIv/",
-   "cuenta": "zeta_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-08",
-   "titulo": "La pequeña, con apenas 7 meses de gestación, fue localizada en un contenedor el miércoles 19 de agosto. La madre de la bebé se encuentra imputada por estos hec…",
-   "tipo": "imagen",
-   "likes": 33,
-   "comentarios": 2,
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdCqbhRyPwS/",
-   "cuenta": "tjnoticias_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-08",
-   "titulo": "Una violenta volcadura de una unidad pesada dejó a un camionero lesionado, quien tuvo que ser llevado a un hospital para ser atendido.",
+   "url": "https://www.instagram.com/p/DdJtcMUFKn5/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-11",
+   "titulo": "A 25 años del 9/11, la frontera Tijuana - San Diego sigue marcada por el recuerdo",
    "tipo": "video",
-   "likes": 24,
+   "likes": 45,
    "comentarios": 0,
-   "reproducciones": 2612,
+   "reproducciones": 1006,
+   "publicado": "2026-09-11T15:16:25+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -527,36 +573,16 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdCoAUtSjQe/",
-   "cuenta": "siempre_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-08",
-   "titulo": "Así es el nuevo Calimax en la zona de El Lago",
-   "tipo": "video",
-   "likes": 21,
-   "comentarios": 2,
-   "reproducciones": 867,
-   "cosechados": 2,
-   "opinion": 2,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 0,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdCj84ZicvK/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
-   "fecha": "2026-09-08",
-   "titulo": "Inicia juicio contra asesino de hermanos australianos #elvigia #Ensenada #bajacalifornia #mundo",
+   "url": "https://www.instagram.com/p/DdJ9Xy-sjLM/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-11",
+   "titulo": "DR. LUIS SANDOVAL FIGUEROA, Director de la Escuela de Derecho en Cetys Universidad, campus Tijuana.",
    "tipo": "video",
    "likes": 5,
    "comentarios": 0,
-   "reproducciones": 168,
+   "reproducciones": 65,
+   "publicado": "2026-09-11T17:39:15+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -569,98 +595,16 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdAWTP2k4dw/",
-   "cuenta": "uniradio_ig",
-   "zona": "estatal",
-   "fecha": "2026-09-08",
-   "titulo": "Tras accidente fatal de “Azul y Blanco”, IMOS prepara protocolo de atención a víctimas con fiscalía",
-   "tipo": "video",
-   "likes": 4,
-   "comentarios": 0,
-   "reproducciones": 587,
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdBnIbbgnuf/",
-   "cuenta": "uniradio_ig",
-   "zona": "estatal",
-   "fecha": "2026-09-08",
-   "titulo": "Repunta economía de Tijuana impulsada por expansión de empresas y demanda industrial: Sedeti",
-   "tipo": "video",
-   "likes": 2,
-   "comentarios": 0,
-   "reproducciones": 215,
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdCHmhgs4DG/",
-   "cuenta": "uniradio_ig",
-   "zona": "estatal",
-   "fecha": "2026-09-08",
-   "titulo": "ANA PAULINA GONZÁLEZ, Investigadora en datos en Acción Ciudadana Frente a la Pobreza.",
-   "tipo": "video",
-   "likes": 2,
-   "comentarios": 0,
-   "reproducciones": 119,
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdCHvHNs7qr/",
-   "cuenta": "uniradio_ig",
-   "zona": "estatal",
-   "fecha": "2026-09-08",
-   "titulo": "MTRO. JORGE ALBERTO PICKETT CORONA, Abogado Fiscalista, Columnista. Facilidad",
-   "tipo": "video",
-   "likes": 2,
-   "comentarios": 0,
-   "reproducciones": 199,
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdCnFKeCM6n/",
+   "url": "https://www.instagram.com/p/DdKHCMdgPZ_/",
    "cuenta": "elvigia_ig",
    "zona": "Ensenada",
-   "fecha": "2026-09-08",
-   "titulo": "𝗨𝗻 𝗰𝗼𝗻𝗱𝘂𝗰𝘁𝗼𝗿 𝗺𝘂𝗿𝗶ó 𝗰𝗮𝗹𝗰𝗶𝗻𝗮𝗱𝗼 𝗹𝗮 𝗺𝗮ñ𝗮𝗻𝗮 𝗱𝗲𝗹 𝗹𝘂𝗻𝗲𝘀, 𝗹𝘂𝗲𝗴𝗼 𝗱𝗲 𝗾𝘂𝗲 𝘀𝘂 𝗮𝘂𝘁𝗼𝗺ó𝘃𝗶𝗹 𝗰𝗵𝗼𝗰𝗮𝗿𝗮 𝗽𝗼𝗿 𝗮𝗹𝗰𝗮𝗻𝗰𝗲 𝗰𝗼𝗻𝘁𝗿𝗮 𝘂𝗻 𝗰𝗮𝗺𝗶ó𝗻 𝗱𝗲 𝘁𝗿𝗮𝗻𝘀𝗽𝗼𝗿𝘁𝗲 𝗱𝗲 𝗽𝗮𝘀𝗮𝗷𝗲𝗿𝗼𝘀 𝘆 𝗮𝗺𝗯𝗮𝘀 𝘂𝗻𝗶𝗱𝗮𝗱𝗲𝘀 𝘀𝗲…",
-   "tipo": "imagen",
-   "likes": 2,
+   "fecha": "2026-09-11",
+   "titulo": "Hallan grietas en puente Espinoza #elvigia #Ensenada",
+   "tipo": "video",
+   "likes": 5,
    "comentarios": 0,
+   "reproducciones": 411,
+   "publicado": "2026-09-11T18:59:26+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -673,14 +617,38 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdCkyjoFfGf/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
-   "fecha": "2026-09-08",
-   "titulo": "𝗨𝗻 𝗮𝗰𝗰𝗲𝘀𝗼 𝗲𝘅𝗰𝗹𝘂𝘀𝗶𝘃𝗼 𝗽𝗮𝗿𝗮 𝗺𝗼𝘁𝗼𝗰𝗶𝗰𝗹𝗲𝘁𝗮𝘀 𝗰𝗼𝗺𝗲𝗻𝘇ó 𝗮 𝗼𝗽𝗲𝗿𝗮𝗿 𝗲𝘀𝘁𝗲 𝗺𝗮𝗿𝘁𝗲𝘀 𝗲𝗻 𝗹𝗮 𝗴𝗮𝗿𝗶𝘁𝗮 𝗶𝗻𝘁𝗲𝗿𝗻𝗮𝗰𝗶𝗼𝗻𝗮𝗹 𝗱𝗲 𝗦𝗮𝗻 𝗬𝘀𝗶𝗱𝗿𝗼, 𝗰𝗼𝗻 𝗲𝗹 𝗼𝗯𝗷𝗲𝘁𝗶𝘃𝗼 𝗱𝗲 𝗮𝗴𝗶𝗹𝗶𝘇𝗮𝗿 𝗲𝗹 𝗶𝗻𝗴𝗿𝗲𝘀𝗼 𝗮 𝗘𝘀𝘁𝗮𝗱𝗼𝘀 𝗨…",
-   "tipo": "imagen",
+   "url": "https://www.instagram.com/p/DdJnFMJG1nd/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-11",
+   "titulo": "Baja California tiene papel relevante en la definición de políticas económicas en México, dijo de visita por Tijuana el analista político Armando Ríos Piter.",
+   "tipo": "video",
+   "likes": 2,
+   "comentarios": 0,
+   "reproducciones": 191,
+   "publicado": "2026-09-11T14:20:42+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdJ7Gmrsa6w/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-11",
+   "titulo": "ROBERTO MENDÍVIL VILLARREAL, Gerente de Ventas de Funerales Hernández.",
+   "tipo": "video",
    "likes": 1,
    "comentarios": 0,
+   "reproducciones": 37,
+   "publicado": "2026-09-11T17:18:56+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -693,14 +661,16 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdCj07sjxCS/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
-   "fecha": "2026-09-08",
-   "titulo": "#AVANCE 🔎 Cuenta UABC con centro para diagnóstico de enfermedades infecciosas",
-   "tipo": "imagen",
-   "likes": 0,
+   "url": "https://www.instagram.com/p/DdJ8BIeMaW4/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-11",
+   "titulo": "SAMANTHA SESMA, Cofundadora de Colectivo Cesodi",
+   "tipo": "video",
+   "likes": 1,
    "comentarios": 0,
+   "reproducciones": 4,
+   "publicado": "2026-09-11T17:26:44+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -713,14 +683,79 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdCpXpXjxb3/",
+   "url": "https://www.instagram.com/p/DdKGZb_mAOK/",
    "cuenta": "elvigia_ig",
    "zona": "Ensenada",
-   "fecha": "2026-09-08",
-   "titulo": "𝗥𝗲𝗰𝘂𝗽𝗲𝗿𝗮𝗻 𝘃𝗲𝗵í𝗰𝘂𝗹𝗼 𝗿𝗼𝗯𝗮𝗱𝗼 𝘁𝗿𝗮𝘀 𝗮𝗹𝗲𝗿𝘁𝗮 𝗱𝗲 𝗮𝗿𝗰𝗼 𝗹𝗲𝗰𝘁𝗼𝗿: 𝗘𝗹𝗲𝗺𝗲𝗻𝘁𝗼𝘀 𝗱𝗲 𝗹𝗮 𝗣𝗼𝗹𝗶𝗰í𝗮 𝗠𝘂𝗻𝗶𝗰𝗶𝗽𝗮𝗹 𝗿𝗲𝗰𝘂𝗽𝗲𝗿𝗮𝗿𝗼𝗻 𝘂𝗻 𝘃𝗲𝗵í𝗰𝘂𝗹𝗼 𝗰𝗼𝗻 𝗿𝗲𝗽𝗼𝗿𝘁𝗲 𝗱𝗲 𝗿𝗼𝗯𝗼 𝘆 𝗱𝗲𝘁𝘂𝘃𝗶𝗲𝗿𝗼𝗻 𝗮 𝘂𝗻 𝗵𝗼𝗺𝗯𝗿𝗲 𝗱𝗲…",
+   "fecha": "2026-09-11",
+   "titulo": "📰 ¡El Vigía va contigo a donde vayas!",
    "tipo": "imagen",
    "likes": 0,
    "comentarios": 0,
+   "publicado": "2026-09-11T18:53:27+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdKHuv0FFr9/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-11",
+   "titulo": "𝗥𝘂𝗯𝗶𝗼 𝗮𝗳𝗶𝗿𝗺ó 𝗾𝘂𝗲 𝗲𝘀𝘁𝗼𝘀 𝗴𝗿𝘂𝗽𝗼𝘀 𝗻𝗼 𝘀𝗼𝗻 𝗼𝗿𝗴𝗮𝗻𝗶𝘇𝗮𝗰𝗶𝗼𝗻𝗲𝘀 𝗰𝗿𝗶𝗺𝗶𝗻𝗮𝗹𝗲𝘀 “𝗻𝗼𝗿𝗺𝗮𝗹𝗲𝘀”, 𝘀𝗶𝗻𝗼 “𝗼𝗿𝗴𝗮𝗻𝗶𝘇𝗮𝗰𝗶𝗼𝗻𝗲𝘀 𝘁𝗲𝗿𝗿𝗼𝗿𝗶𝘀𝘁𝗮𝘀 𝘃𝗶𝗼𝗹𝗲𝗻𝘁𝗮𝘀 𝘆 𝘀𝗮𝗻𝗴𝘂𝗶𝗻𝗮𝗿𝗶𝗮𝘀”, 𝗽𝗼𝗿 𝗹𝗼 𝗾𝘂𝗲 𝗘𝘀𝘁𝗮𝗱𝗼𝘀 𝗨𝗻𝗶𝗱𝗼…",
+   "tipo": "imagen",
+   "likes": 0,
+   "comentarios": 0,
+   "publicado": "2026-09-11T19:05:05+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdKKBTBERgq/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-11",
+   "titulo": "𝗔𝘂𝘁𝗼𝗿𝗶𝗱𝗮𝗱𝗲𝘀 𝗲𝘀𝘁𝗮𝘁𝗮𝗹𝗲𝘀 𝘆 𝗳𝗲𝗱𝗲𝗿𝗮𝗹𝗲𝘀 𝗮𝗰𝗼𝗿𝗱𝗮𝗿𝗼𝗻 𝗮𝗰𝗰𝗶𝗼𝗻𝗲𝘀 𝗽𝗮𝗿𝗮 𝗼𝗿𝗱𝗲𝗻𝗮𝗿 𝗹𝗮𝘀 𝗮𝗰𝘁𝗶𝘃𝗶𝗱𝗮𝗱𝗲𝘀 𝘁𝘂𝗿í𝘀𝘁𝗶𝗰𝗮𝘀 𝘆 𝗿𝗲𝗱𝘂𝗰𝗶𝗿 𝗲𝗹 𝗶𝗺𝗽𝗮𝗰𝘁𝗼 𝗮𝗺𝗯𝗶𝗲𝗻𝘁𝗮𝗹 𝗲𝗻 𝗹𝗮𝘀 á𝗿𝗲𝗮𝘀 𝗻𝗮𝘁𝘂𝗿𝗮𝗹𝗲𝘀 𝗽𝗿𝗼𝘁𝗲𝗴𝗶𝗱𝗮𝘀 𝗱…",
+   "tipo": "imagen",
+   "likes": 0,
+   "comentarios": 0,
+   "publicado": "2026-09-11T19:25:06+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdKLwCFDd3L/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-11",
+   "titulo": "Difieren otra vez audiencia de vecinos de la Moderna #elvigia #Ensenada",
+   "tipo": "video",
+   "likes": 0,
+   "comentarios": 0,
+   "reproducciones": 10,
+   "publicado": "2026-09-11T19:40:36+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -738,91 +773,111 @@
    "cuenta": "afn_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar"
+   "comentarios": 42,
+   "crudos": 42
+  },
+  {
+   "cuenta": "eltijuanense_ig",
+   "estado": "ok",
+   "posts": 5,
+   "comentarios": 12,
+   "crudos": 16
   },
   {
    "cuenta": "elvigia_ig",
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 3
+   "crudos": 5
   },
   {
    "cuenta": "frontera_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 1,
-   "crudos": 5
+   "comentarios": 15,
+   "crudos": 19
   },
   {
    "cuenta": "siempre_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 2,
-   "crudos": 2
+   "comentarios": 63,
+   "crudos": 64
   },
   {
    "cuenta": "sintesis_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 5,
-   "crudos": 6
+   "comentarios": 0,
+   "crudos": 5
   },
   {
    "cuenta": "soltij_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar"
+   "comentarios": 3,
+   "crudos": 5
+  },
+  {
+   "cuenta": "tijuanainforma_ig",
+   "estado": "ok",
+   "posts": 5,
+   "comentarios": 12,
+   "crudos": 13
   },
   {
    "cuenta": "tjnoticias_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 17,
-   "crudos": 20
+   "comentarios": 55,
+   "crudos": 57
   },
   {
    "cuenta": "tjpublica_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar"
+   "comentarios": 85,
+   "crudos": 86
   },
   {
    "cuenta": "uniradio_ig",
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar"
+   "crudos": 5
+  },
+  {
+   "cuenta": "yoamotijuana_ig",
+   "estado": "ok",
+   "posts": 5,
+   "comentarios": 34,
+   "crudos": 36
   },
   {
    "cuenta": "zeta_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 5,
-   "crudos": 5
+   "comentarios": 6,
+   "crudos": 7
   }
  ],
  "gasto": {
-  "resultados": 2000,
-  "gastado": 91,
+  "resultados": 2600,
+  "gastado": 425,
   "por_concepto": {
-   "afn_ig": 5,
-   "elvigia_ig": 8,
-   "frontera_ig": 10,
-   "siempre_ig": 7,
-   "sintesis_ig": 11,
-   "soltij_ig": 5,
-   "tjnoticias_ig": 25,
-   "tjpublica_ig": 5,
-   "uniradio_ig": 5,
-   "zeta_ig": 10
+   "afn_ig": 47,
+   "eltijuanense_ig": 21,
+   "elvigia_ig": 10,
+   "frontera_ig": 24,
+   "siempre_ig": 69,
+   "sintesis_ig": 10,
+   "soltij_ig": 10,
+   "tijuanainforma_ig": 18,
+   "tjnoticias_ig": 62,
+   "tjpublica_ig": 91,
+   "uniradio_ig": 10,
+   "yoamotijuana_ig": 41,
+   "zeta_ig": 12
   }
  }
 }
