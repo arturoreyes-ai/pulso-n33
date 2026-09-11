@@ -3,7 +3,7 @@
  "generado": "2026-09-11",
  "ventana_dias": 7,
  "minimo": 3,
- "notas_ventana": 1848,
+ "notas_ventana": 1877,
  "notas_previas": 788,
  "temas": [
   {
@@ -305,17 +305,17 @@
   },
   {
    "termino": "trump",
-   "n": 31,
+   "n": 33,
    "n_previo": 11,
-   "momento": 20,
+   "momento": 22,
    "zonas": {
     "nacional": 20,
-    "San Diego": 9,
+    "San Diego": 11,
     "Tijuana": 2
    },
    "fuentes": {
     "imparcial": 13,
-    "kpbs": 6,
+    "kpbs": 8,
     "timessd": 3,
     "uniradio": 3,
     "gn-6ba24bc61c74": 1,
@@ -357,12 +357,14 @@
     "cb4dbda736f826c8",
     "d2fa0919029c33f4",
     "d77c016392d0c258",
+    "e461869decb1ede9",
+    "fe6428ab30fa4498",
     "ff9a436604b3e849"
    ],
    "ejemplos": [
-    "Trump dice que el Congreso no tendría que aprobar su “dividendo” de 5 mil dólares y plantea entregar el dinero a ciudadanos de EU",
-    "After Trump promised to pay $5,000 if Republicans win, here's what to expect Thursday",
-    "Trump ofrece 5 mil dólares a cada adulto estadounidense si los republicanos mantienen el control del Congreso, una promesa que implicaría un gasto de unos 1.35 billones de dólares mientras el partido busca recuperar apoyo antes de las elecciones de noviembre"
+    "Empty seats, socialism and Trump dominate the Republican midterm convention",
+    "Trump administration allows TPS to continue for Salvadorans – for now",
+    "Trump dice que el Congreso no tendría que aprobar su “dividendo” de 5 mil dólares y plantea entregar el dinero a ciudadanos de EU"
    ]
   },
   {
@@ -1470,6 +1472,11 @@
    "porque": "duplica «suspenden clases presenciales»"
   },
   {
+   "termino": "leon",
+   "n": 12,
+   "porque": "duplica «carin leon»"
+  },
+  {
    "termino": "extremo",
    "n": 11,
    "porque": "duplica «calor extremo»"
@@ -1498,16 +1505,11 @@
    "termino": "libre",
    "n": 9,
    "porque": "duplica «mercado libre»"
-  },
-  {
-   "termino": "patrulla",
-   "n": 9,
-   "porque": "duplica «patrulla espiritual»"
   }
  ],
  "por_zona": {
   "Tijuana": {
-   "notas_ventana": 493,
+   "notas_ventana": 495,
    "minimo": 3,
    "temas": [
     {
@@ -2322,7 +2324,7 @@
    ]
   },
   "Mexicali": {
-   "notas_ventana": 188,
+   "notas_ventana": 190,
    "minimo": 3,
    "temas": [
     {
@@ -2965,7 +2967,7 @@
    ]
   },
   "Ensenada": {
-   "notas_ventana": 96,
+   "notas_ventana": 97,
    "minimo": 3,
    "temas": [
     {
@@ -4508,9 +4510,41 @@
    ]
   },
   "San Diego": {
-   "notas_ventana": 204,
+   "notas_ventana": 218,
    "minimo": 3,
    "temas": [
+    {
+     "termino": "trump",
+     "n": 11,
+     "n_previo": 5,
+     "momento": 6,
+     "zonas": {
+      "San Diego": 11
+     },
+     "fuentes": {
+      "kpbs": 8,
+      "timessd": 3
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "06f3854e4f7d4dd9",
+      "231afe57460b1537",
+      "410dbc7ae0222718",
+      "4b143054394f99f2",
+      "630a8cee88e1561f",
+      "67e9b4b0e2b5cbb7",
+      "68adb95ce128b8ac",
+      "d2fa0919029c33f4",
+      "e461869decb1ede9",
+      "fe6428ab30fa4498",
+      "ff9a436604b3e849"
+     ],
+     "ejemplos": [
+      "Empty seats, socialism and Trump dominate the Republican midterm convention",
+      "Trump administration allows TPS to continue for Salvadorans – for now",
+      "After Trump promised to pay $5,000 if Republicans win, here's what to expect Thursday"
+     ]
+    },
     {
      "termino": "city",
      "n": 8,
@@ -4540,6 +4574,38 @@
       "The Encinitas City Council wants to remove a protected bike lane. A state senator is trying to save it.",
       "National City Is Poised to Hire a Towing Company that Got Suspended",
       "San Diego City College students rally to protest ICE arrest near campus"
+     ]
+    },
+    {
+     "termino": "county",
+     "n": 8,
+     "n_previo": 3,
+     "momento": 5,
+     "zonas": {
+      "San Diego": 8,
+      "Tijuana": 1
+     },
+     "fuentes": {
+      "kpbs": 4,
+      "voiceofsd": 2,
+      "gn-46bc88bd6277": 1,
+      "gn-5bad11419dae": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "139503c22934a6de",
+      "62731c452964da36",
+      "81bf75429d2f64f8",
+      "a4205064a598c6cb",
+      "af202f95f12d843a",
+      "c909eb11dea4efd8",
+      "d3275086fed99abd",
+      "ef4c8ea531ceb270"
+     ],
+     "ejemplos": [
+      "Inside the County’s Battle to Keep Misconduct Records Private",
+      "CDC, San Diego County Plan New Survey On Tijuana River Pollution Health Impacts",
+      "Court overturns approval of Imperial County data center, orders environmental review"
      ]
     },
     {
@@ -4655,64 +4721,28 @@
      ]
     },
     {
-     "termino": "trump",
-     "n": 9,
-     "n_previo": 5,
-     "momento": 4,
+     "termino": "trade",
+     "n": 5,
+     "n_previo": 0,
+     "momento": 5,
      "zonas": {
-      "San Diego": 9
+      "San Diego": 5
      },
      "fuentes": {
-      "kpbs": 6,
-      "timessd": 3
+      "kpbs": 5
      },
-     "un_solo_medio": false,
+     "un_solo_medio": true,
      "notas": [
-      "06f3854e4f7d4dd9",
-      "231afe57460b1537",
+      "35ea5ce44c6660bb",
       "410dbc7ae0222718",
-      "4b143054394f99f2",
-      "630a8cee88e1561f",
-      "67e9b4b0e2b5cbb7",
-      "68adb95ce128b8ac",
-      "d2fa0919029c33f4",
-      "ff9a436604b3e849"
+      "4279fe070f0c54a4",
+      "d49530daf9124958",
+      "d7ac9bb929e7c19e"
      ],
      "ejemplos": [
-      "After Trump promised to pay $5,000 if Republicans win, here's what to expect Thursday",
-      "Democrats blast $5,000 payment promise ahead of Trump, Vance speeches in Dallas",
-      "Trump officials propose sweeping changes to the census that would reshape voting maps"
-     ]
-    },
-    {
-     "termino": "county",
-     "n": 7,
-     "n_previo": 3,
-     "momento": 4,
-     "zonas": {
-      "San Diego": 7,
-      "Tijuana": 1
-     },
-     "fuentes": {
-      "kpbs": 4,
-      "gn-46bc88bd6277": 1,
-      "gn-5bad11419dae": 1,
-      "voiceofsd": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "62731c452964da36",
-      "81bf75429d2f64f8",
-      "a4205064a598c6cb",
-      "af202f95f12d843a",
-      "c909eb11dea4efd8",
-      "d3275086fed99abd",
-      "ef4c8ea531ceb270"
-     ],
-     "ejemplos": [
-      "CDC, San Diego County Plan New Survey On Tijuana River Pollution Health Impacts",
-      "Court overturns approval of Imperial County data center, orders environmental review",
-      "How the County Fought to Keep Employee Misconduct Records Under Wraps"
+      "The U.S.-Canada trade war is creating a headache for auto-parts makers",
+      "These Michigan swing voters are bracing for higher prices from trade war with Canada",
+      "What to know about Canada's escalating trade war with the U.S."
      ]
     },
     {
@@ -4737,6 +4767,32 @@
       "San Diego City College students rally to protest ICE arrest near campus",
       "San Diego City College wants to better support students with kids",
       "Agentes de ICE arrestan a conductor mientras el pasajero huyó hacia San Diego City College"
+     ]
+    },
+    {
+     "termino": "inside",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "San Diego": 4
+     },
+     "fuentes": {
+      "voiceofsd": 2,
+      "gn-8bc543d6be79": 1,
+      "timessd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "139503c22934a6de",
+      "40821eb9df2a0b63",
+      "6ebe13b303a7ef18",
+      "a37a25c2b46c8164"
+     ],
+     "ejemplos": [
+      "Inside the County’s Battle to Keep Misconduct Records Private",
+      "Video Inside the sewage crisis impacting border communities in San Diego",
+      "Inside Airbnb’s Fierce Lobbying Against Vacation Home Tax"
      ]
     },
     {
@@ -4817,6 +4873,83 @@
      ]
     },
     {
+     "termino": "prices",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "San Diego": 4
+     },
+     "fuentes": {
+      "kpbs": 3,
+      "timessd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "145ab004b758216c",
+      "35ea5ce44c6660bb",
+      "62b5d9b8f424ca0a",
+      "8d240f01a557776a"
+     ],
+     "ejemplos": [
+      "Why gains by Iran-backed Houthis in Yemen could push gas prices even higher",
+      "New transit program to ‘freeze past prices’ for some low-income riders despite fare increase",
+      "These Michigan swing voters are bracing for higher prices from trade war with Canada"
+     ]
+    },
+    {
+     "termino": "sewage",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "San Diego": 4
+     },
+     "fuentes": {
+      "gn-5bad11419dae": 1,
+      "gn-8bc543d6be79": 1,
+      "gn-a0ec1cdd1d90": 1,
+      "voiceofsd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "4e2896ac50723d69",
+      "6ebe13b303a7ef18",
+      "81bf75429d2f64f8",
+      "8723f116bb0e7bd1"
+     ],
+     "ejemplos": [
+      "Video Inside the sewage crisis impacting border communities in San Diego",
+      "CDC, San Diego leaders to re-evaluate health impacts from TJ sewage",
+      "Coronado shoreline added to county’s beach closures for sewage contamination"
+     ]
+    },
+    {
+     "termino": "voters",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "San Diego": 4
+     },
+     "fuentes": {
+      "kpbs": 2,
+      "timessd": 2
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "35ea5ce44c6660bb",
+      "4b143054394f99f2",
+      "ba1bba888f6139b1",
+      "e4aa227cf7bc9dd6"
+     ],
+     "ejemplos": [
+      "These Michigan swing voters are bracing for higher prices from trade war with Canada",
+      "Mail-in voters weigh flying to vote in person and other backup plans amid uncertainty",
+      "Opinion: Local governments rush tax hikes before voters can change rules"
+     ]
+    },
+    {
      "termino": "garita",
      "n": 6,
      "n_previo": 3,
@@ -4845,6 +4978,31 @@
       "🚨 San Ysidro y Otay registran demoras de más de dos horas para cruzar (Datos actualizados a las 2:00 PM PDT) Los cruces fronterizos entre Baja California y Estados Unidos registran un flujo vehicular muy pesado esta tarde, siendo la garita de San Ysidro l",
       "Garita de San Ysidro registra demoras de hasta tres horas (Datos actualizados a las 2:00 p.m. PDT) Los cruces fronterizos de Baja California registran severas demoras la tarde de este miércoles, siendo la garita de San Ysidro la más saturada con tiempos de",
       "Inicia operaciones carril exclusivo para motocicletas en la garita de San Ysidro"
+     ]
+    },
+    {
+     "termino": "back",
+     "n": 4,
+     "n_previo": 1,
+     "momento": 3,
+     "zonas": {
+      "San Diego": 4
+     },
+     "fuentes": {
+      "kpbs": 3,
+      "timessd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "3c8b9b347a5fe2d1",
+      "5e664881109409c7",
+      "630a8cee88e1561f",
+      "ae88ee81f33ed74c"
+     ],
+     "ejemplos": [
+      "From DOGE to space lasers, Alex Gibney peels back the many layers of Elon Musk",
+      "TSA brings back gate access for some people without plane tickets 25 years after 9/11",
+      "Medi-Cal won’t pay for assisted living in most of California. One brother fought back"
      ]
     },
     {
@@ -5021,153 +5179,6 @@
       "U.S. military says it destroyed 5 Iranian oil tankers after attacks on Navy warship",
       "Houthi attacks on Saudi Arabia ignite fires at oil facilities and wound 73 people",
       "U.S. and Iran trade attacks on ships as fighting flares up again"
-     ]
-    },
-    {
-     "termino": "cargo",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "San Diego": 3
-     },
-     "fuentes": {
-      "kpbs": 3
-     },
-     "un_solo_medio": true,
-     "notas": [
-      "774b526c6ff1552c",
-      "8426d78e9d55c2f7",
-      "cb7c514501a684c0"
-     ],
-     "ejemplos": [
-      "A pilot of the Amazon cargo plane in Miami crash warned it was coming in too fast",
-      "Cargo jet tried to abort unsteady landing before Miami crash, flight data indicates",
-      "Investigators seek answers after Amazon cargo plane crash kills five at Miami airport"
-     ]
-    },
-    {
-     "termino": "centro",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "San Diego": 3
-     },
-     "fuentes": {
-      "afn": 1,
-      "kpbs": 1,
-      "timessd": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "2792921922fbffbb",
-      "5f2fc0590868e754",
-      "a0c03786a0056587"
-     ],
-     "ejemplos": [
-      "Protestan contra el ICE en el centro de San Diego",
-      "Padres de autor del tiroteo en centro islámico demandan a proveedor de servicios de salud mental por negligencia",
-      "Live Nation pone la mira en el centro de San Diego. Esto significa para la música en vivo en la región"
-     ]
-    },
-    {
-     "termino": "dozens reptiles",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "San Diego": 3
-     },
-     "fuentes": {
-      "gn-46bc88bd6277": 1,
-      "gn-4b075bf74df6": 1,
-      "gn-a0ec1cdd1d90": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "68a532ff5a9eae7f",
-      "7e8c81af441a7bbe",
-      "ebdf08635957f2d9"
-     ],
-     "ejemplos": [
-      "Dozens of reptiles seized at U.S.-Mexico border being cared for at San Diego Zoo",
-      "Dozens of reptiles found stuffed in pillowcases being cared for at San Diego Zoo",
-      "8 Lizards Born At San Diego Zoo After Dozens Of Reptiles Seized At Border"
-     ]
-    },
-    {
-     "termino": "exclusivo motocicletas garita",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "San Diego": 3
-     },
-     "fuentes": {
-      "afn": 1,
-      "imparcial": 1,
-      "jornadabc": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "7f29f93c499d3b16",
-      "bb77eebfd2f7be9f",
-      "d8b52ad059c18c29"
-     ],
-     "ejemplos": [
-      "Inicia operaciones carril exclusivo para motocicletas en la garita de San Ysidro",
-      "Habilitan acceso exclusivo para motocicletas en la garita de San Ysidro",
-      "Habilitan acceso exclusivo para motocicletas en la garita de San Ysidro"
-     ]
-    },
-    {
-     "termino": "fight",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "San Diego": 3
-     },
-     "fuentes": {
-      "kpbs": 3
-     },
-     "un_solo_medio": true,
-     "notas": [
-      "5586c8bac71b6fd3",
-      "b428b9ea4ef9efe9",
-      "c9b22d0b9e7bd05f"
-     ],
-     "ejemplos": [
-      "Andrew Tate is denied bail and will remain in jail during his extradition fight",
-      "COMIC: If we fight, is our love doomed? And other honest questions about conflict",
-      "How to fight with the people we care about, illustrated"
-     ]
-    },
-    {
-     "termino": "frontera",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "San Diego": 3,
-      "Tijuana": 2
-     },
-     "fuentes": {
-      "imparcial": 1,
-      "jornadabc": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "39f5b4b239d64b6c",
-      "6b4b588f49f92371",
-      "78276dc79e4acea8"
-     ],
-     "ejemplos": [
-      "El Zoológico de San Diego cuida reptiles incautados en la frontera",
-      "México y EEUU activan operativo antidrones “Águila Alta” en la frontera de Tijuana y San Diego",
-      "México y EU activan operación antidrones en frontera Tijuana – San Diego"
      ]
     }
    ]
