@@ -1,3 +1,6 @@
+import { Suspense } from "react";
+
+import { NavegacionTitulares } from "@/components/chrome/navegacion-titulares";
 import { SelectorZona } from "@/components/chrome/selector-zona";
 import type { Seccion } from "@/lib/dominio/secciones";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
@@ -60,7 +63,13 @@ function Contexto({
   return (
     <>
       <div className="mt-8">
-        <SelectorZona zona={zona} vista={vista} conteos={conteos} />
+        {vista === null ? (
+          <Suspense fallback={<div id="zonas" aria-label="Cargando navegación" className="h-24" />}>
+            <NavegacionTitulares zona={zona} />
+          </Suspense>
+        ) : (
+          <SelectorZona zona={zona} vista={vista} conteos={conteos} />
+        )}
       </div>
       <div className="mt-6">
         <Banda />

@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
 
-import { rotuloDe, type Ambito } from "@/lib/busqueda/ambito";
+import type { Ambito } from "@/lib/busqueda/ambito";
 import { LARGO_MAXIMO_CONSULTA, type Idioma } from "@/lib/busqueda/tipos";
 import { useRoster } from "@/lib/datos/hooks";
 import { nombreDeFiltro } from "@/lib/dominio/delegaciones";
@@ -118,19 +118,6 @@ function BarraFiltros({ m, sujeto }: { m: EstadoMuro; sujeto: string | null }) {
             className="w-56 rounded-full border border-filo md:w-72 bg-vela py-2 pr-3 pl-8 text-cuerpo text-tinta-titulo placeholder:text-tinta-meta"
           />
         </search>
-
-        {/* El alcance, siempre a la vista. Hasta el 11 de septiembre de 2026
-            solo aparecia buscando, y con ?a=mexico sin consulta el muro era
-            una lista vacia con pastillas que no hacian nada. Ahora Mexico e
-            Internacional sin consulta muestran la seccion de Google Noticias
-            de ese momento, asi que la pastilla siempre hace algo. */}
-        <div role="group" aria-label="Alcance" className="flex flex-wrap gap-1">
-          {m.ambitos.map((a) => (
-            <Chip key={a} activo={m.ambito === a} onClick={() => m.elegirAmbito(a)}>
-              {rotuloDe(a, m.zona)}
-            </Chip>
-          ))}
-        </div>
 
         {/* El orden solo cuando la lista es nuestra de ordenar. En actualidad
             no: la seccion viene en el orden de Google y ese orden es la
@@ -437,7 +424,7 @@ export function Muro({ zona }: { zona: ZonaRuta | null }) {
       </p>
     );
   }
-  if (m.cargando) return <MuroEsqueleto conZona={zona !== null} />;
+  if (m.cargando) return <MuroEsqueleto />;
 
   const nombre = zona === null ? null : NOMBRE_CORTO[zona];
   // Con delegacion activa la linea de conteo dice cual; sin ella, la zona.

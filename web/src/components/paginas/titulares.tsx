@@ -55,7 +55,7 @@ export function PaginaTitulares({ zona }: { zona: ZonaRuta | null }) {
             mientras carga, y eso importa mas ahora que el muro es lo primero
             de la pagina: la cascara no se mueve, solo se llenan las filas.
             Los tres parametros cuelgan de este limite. */}
-        <Suspense fallback={<MuroEsqueleto conZona={zona !== null} />}>
+        <Suspense fallback={<MuroEsqueleto />}>
           <Muro zona={zona} />
         </Suspense>
       </Seccion>
