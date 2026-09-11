@@ -2,6 +2,8 @@
 
 import { useSyncExternalStore } from "react";
 
+import { ErrorDatos, leerJson } from "@/lib/datos/fetcher";
+
 /**
  * ¿Hay servidor detras de /api/buscar?
  *
@@ -42,4 +44,25 @@ export function marcarSinServidor() {
 /** False solo cuando ya se comprobo que no hay. */
 export function useHayServidor(): boolean {
   return useSyncExternalStore(suscribir, leer, leerServidor);
+}
+
+/**
+ * Lector de /api/*: leerJson mas la deteccion de "no hay servidor".
+ *
+ * Un 404 con HTML, o un 200 con la cascara de la app, significan que la ruta
+ * no existe; se apunta en la tienda para no volver a preguntar en esta
+ * sesion. Vive aqui y no en cada hook porque /api/buscar y /api/actualidad
+ * comparten exactamente esta regla, y la tienda que escribe es esta.
+ */
+export async function leerApi<T>(ruta: string): Promise<T> {
+  try {
+    return await leerJson<T>(ruta);
+  } catch (e) {
+    if (e instanceof ErrorDatos && (e.status === 404 || e.status === 405)) {
+      marcarSinServidor();
+    } else if (e instanceof ErrorDatos && e.message.includes("no JSON")) {
+      marcarSinServidor();
+    }
+    throw e;
+  }
 }

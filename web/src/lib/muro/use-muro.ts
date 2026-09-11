@@ -12,7 +12,8 @@ import {
 import { plegar } from "@/lib/dominio/formato";
 import type { ZonaRuta } from "@/lib/dominio/zonas";
 import { ambitosDe, usaCorpus, type Ambito } from "@/lib/busqueda/ambito";
-import type { ResultadoExterno } from "@/lib/busqueda/tipos";
+import { MINIMO_CONSULTA, type ResultadoExterno } from "@/lib/busqueda/tipos";
+import { useActualidad } from "@/lib/busqueda/use-actualidad";
 import { useBusquedaViva } from "@/lib/busqueda/use-busqueda";
 import { elegirAmbito as escribirAmbito, useAmbito } from "./filtro-ambito";
 import { elegirDelegacion as escribirDelegacion, useFiltroDelegacion } from "./filtro-delegacion";
@@ -47,6 +48,13 @@ const COMPARADORES = {
 } as const;
 
 export type Orden = keyof typeof COMPARADORES;
+
+/**
+ * Las tres formas del muro. `corpus` agrupa por zona lo cosechado; `busqueda`
+ * aplana y suma lo que llega en vivo; `actualidad` es la seccion de Google
+ * Noticias de un ambito sin corpus, cuando no hay consulta.
+ */
+export type ModoMuro = "corpus" | "busqueda" | "actualidad";
 
 /**
  * El estado del muro. La ZONA ya no vive aqui: es la pagina (app/[zona]) y
@@ -192,17 +200,33 @@ export function useMuro(zona: ZonaRuta | null) {
     [estado],
   );
 
-  // (6d) MODO BUSQUEDA. Con consulta, el muro deja de agrupar por zona: la
-  //      zona ya es el ambito de la busqueda, asi que agrupar por ella daria
-  //      un solo grupo con el titulo repetido. Pasa a ser una lista plana por
-  //      fecha donde el corpus y lo que llega en vivo son el mismo resultado.
-  const buscando = consultaDiferida.trim() !== "";
-
   //      El corpus participa mientras la busqueda siga siendo regional. En
   //      'mexico' e 'internacional' no: es regional por construccion y
   //      mezclarlo volveria la cifra imposible de leer.
+  const conCorpus = usaCorpus(ambito);
+
+  // (6d) LOS TRES MODOS. Con consulta, el muro deja de agrupar por zona: la
+  //      zona ya es el ambito de la busqueda, asi que agrupar por ella daria
+  //      un solo grupo con el titulo repetido. Pasa a ser una lista plana por
+  //      fecha donde el corpus y lo que llega en vivo son el mismo resultado.
+  //
+  //      Dos relojes segun el ambito, y no es descuido. Con corpus, una letra
+  //      ya filtra en memoria (paso 3) y el muro cambia de forma en el render
+  //      diferido. Sin corpus no hay nada que filtrar hasta que la red pueda
+  //      preguntar (MINIMO_CONSULTA), y se mide con el MISMO reloj que dispara
+  //      la peticion: medido con el diferido habria 400 ms de "Sin resultados"
+  //      antes de "Buscando…".
+  const buscando = conCorpus
+    ? consultaDiferida.trim() !== ""
+    : consultaTardia.trim().length >= MINIMO_CONSULTA;
+
+  //      Sin corpus y sin consulta el muro no se queda vacio: muestra la
+  //      seccion de Google Noticias de ese momento (lib/busqueda/actualidad.ts).
+  const enActualidad = !conCorpus && !buscando;
+  const modo: ModoMuro = buscando ? "busqueda" : enActualidad ? "actualidad" : "corpus";
+
   const notasBuscadas = useMemo(() => {
-    if (!buscando || !usaCorpus(ambito)) return SIN_NOTAS;
+    if (!buscando || !conCorpus) return SIN_NOTAS;
     const soloZona: ZonaRuta | null = ambito === "zona" ? zona : null;
     const salida: Nota[] = [];
     for (const n of ordenadas) {
@@ -214,16 +238,20 @@ export function useMuro(zona: ZonaRuta | null) {
       salida.push(n);
     }
     return salida;
-  }, [buscando, ambito, zona, ordenadas, delegacion]);
+  }, [buscando, conCorpus, ambito, zona, ordenadas, delegacion]);
 
   //      Suprimir contra el corpus solo cuando el corpus se esta mostrando: si
   //      no, una nota en vivo desapareceria por empatar con algo que en este
   //      ambito no esta a la vista.
-  const titulosParaVivo = usaCorpus(ambito) ? titulosCorpus : SIN_TITULOS;
+  const titulosParaVivo = conCorpus ? titulosCorpus : SIN_TITULOS;
 
   // (7) Lo que llega en vivo. Mismo ambito y misma zona que el corpus, asi que
   //     las dos mitades contestan la misma pregunta.
   const vivo = useBusquedaViva(consultaTardia, titulosParaVivo, ambito, zona);
+
+  // (7b) La seccion en vivo. Se llama siempre porque es un hook; la llave es
+  //      null cuando no toca, asi que no pide nada.
+  const actualidad = useActualidad(ambito, enActualidad);
 
   const filas = useMemo(() => {
     if (!buscando) return SIN_FILAS;
@@ -253,8 +281,11 @@ export function useMuro(zona: ZonaRuta | null) {
     delegacion === null ? visiblesZona : (conteoDelegaciones?.get(delegacion) ?? 0);
 
   return {
+    modo,
     vivo,
     buscando,
+    enActualidad,
+    actualidad,
     filas,
     /** Cuantas de las filas vienen del corpus. Se dice aparte: no es lo mismo
      *  una nota cosechada y clasificada que un enlace de hace un segundo. */
@@ -262,11 +293,15 @@ export function useMuro(zona: ZonaRuta | null) {
     ambito,
     ambitos: ambitosDe(zona),
     elegirAmbito,
-    usaCorpus: usaCorpus(ambito),
+    usaCorpus: conCorpus,
     zona,
     grupos: gruposFinales,
     conteo: indice.conteo,
-    visibles: buscando ? filas.length : visiblesAgrupado,
+    visibles: buscando
+      ? filas.length
+      : enActualidad
+        ? actualidad.resultados.length
+        : visiblesAgrupado,
     delegacion,
     conteoDelegaciones,
     elegirDelegacion,

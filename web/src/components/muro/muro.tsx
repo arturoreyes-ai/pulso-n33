@@ -3,11 +3,11 @@
 import { useMemo } from "react";
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
 
-import { rotuloDe } from "@/lib/busqueda/ambito";
-import { LARGO_MAXIMO_CONSULTA } from "@/lib/busqueda/tipos";
+import { rotuloDe, type Ambito } from "@/lib/busqueda/ambito";
+import { LARGO_MAXIMO_CONSULTA, type Idioma } from "@/lib/busqueda/tipos";
 import { useRoster } from "@/lib/datos/hooks";
 import { nombreDeFiltro } from "@/lib/dominio/delegaciones";
-import { numero, pluralizar } from "@/lib/dominio/formato";
+import { hora, numero, pluralizar } from "@/lib/dominio/formato";
 import { indexarRoster } from "@/lib/dominio/roster";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 import { limpiarTema } from "@/lib/muro/filtro-tema";
@@ -39,6 +39,11 @@ const PASO = 25;
 
 type EstadoMuro = ReturnType<typeof useMuro>;
 
+/** El sujeto de la cifra en modo actualidad: de que seccion es. */
+function rotuloActualidad(ambito: Ambito): string {
+  return ambito === "mexico" ? "actualidad de México" : "actualidad internacional";
+}
+
 /**
  * La linea de conteo, como una frase y no como cinco interpolaciones.
  *
@@ -47,6 +52,14 @@ type EstadoMuro = ReturnType<typeof useMuro>;
  */
 function textoConteo(m: EstadoMuro, sujeto: string | null): string {
   const puntos = m.desfasado ? "…" : "";
+  // En actualidad la cifra es de enlaces en vivo y nada mas: no hay corpus
+  // con el que compararla ni sumarla.
+  if (m.enActualidad) {
+    const a = m.actualidad;
+    if (a.cargando && a.resultados.length === 0) return "Cargando…";
+    if (a.resultados.length === 0) return "Sin titulares";
+    return `${numero(a.resultados.length)} en vivo · ${rotuloActualidad(m.ambito)}`;
+  }
   // Buscando, la frase dice cuantas de las filas ya estaban cosechadas. Las
   // dos cifras no se suman en una sola: no es lo mismo una nota clasificada
   // por zona, tono y figura que un enlace traido hace un segundo.
@@ -106,17 +119,23 @@ function BarraFiltros({ m, sujeto }: { m: EstadoMuro; sujeto: string | null }) {
           />
         </search>
 
-        {/* El ambito solo aparece buscando: sin consulta no acota nada y
-            seria una fila de controles que no hacen nada. */}
-        {m.buscando ? (
-          <div role="group" aria-label="Hasta dónde buscar" className="flex flex-wrap gap-1">
-            {m.ambitos.map((a) => (
-              <Chip key={a} activo={m.ambito === a} onClick={() => m.elegirAmbito(a)}>
-                {rotuloDe(a, m.zona)}
-              </Chip>
-            ))}
-          </div>
-        ) : (
+        {/* El alcance, siempre a la vista. Hasta el 11 de septiembre de 2026
+            solo aparecia buscando, y con ?a=mexico sin consulta el muro era
+            una lista vacia con pastillas que no hacian nada. Ahora Mexico e
+            Internacional sin consulta muestran la seccion de Google Noticias
+            de ese momento, asi que la pastilla siempre hace algo. */}
+        <div role="group" aria-label="Alcance" className="flex flex-wrap gap-1">
+          {m.ambitos.map((a) => (
+            <Chip key={a} activo={m.ambito === a} onClick={() => m.elegirAmbito(a)}>
+              {rotuloDe(a, m.zona)}
+            </Chip>
+          ))}
+        </div>
+
+        {/* El orden solo cuando la lista es nuestra de ordenar. En actualidad
+            no: la seccion viene en el orden de Google y ese orden es la
+            senal; reordenarla por fecha la borraria. */}
+        {m.enActualidad ? null : (
           <div role="group" aria-label="Orden" className="flex gap-1">
             {ORDENES.map((o) => (
               <Chip
@@ -149,11 +168,12 @@ function BarraFiltros({ m, sujeto }: { m: EstadoMuro; sujeto: string | null }) {
       </div>
 
       {/* Solo Tijuana se subdivide. La fila va junto a la lista que filtra,
-          no en el encabezado, para que el efecto se vea donde se toca.
+          no en el encabezado, para que el efecto se vea donde se toca. Y solo
+          con corpus: en Mexico e Internacional no hay notas que subdividir.
 
           El mapa de poligonos queda fuera POR AHORA: ver
           `mapa-delegaciones.tsx`, que sigue en el arbol sin consumidor. */}
-      {m.conteoDelegaciones === null ? null : (
+      {m.conteoDelegaciones === null || !m.usaCorpus ? null : (
         <div className="mt-3">
           <SelectorDelegacion
             activa={m.delegacion}
@@ -173,6 +193,19 @@ function BarraFiltros({ m, sujeto }: { m: EstadoMuro; sujeto: string | null }) {
  * rellena: si la consulta en vivo se cayo, se dice, porque la cifra de arriba
  * seria mas corta de lo que deberia y no por falta de noticias.
  */
+/**
+ * Cual de las dos ediciones fallo, cuando fallo exactamente una. Con las dos
+ * caidas el aviso es otro (`fallo`), y con ninguna no hay nada que decir.
+ * `que` es el sustantivo: "búsqueda" en el muro buscando, "edición" en la
+ * actualidad, donde no hay consulta que haya fallado.
+ */
+function textoCaidos(caidos: readonly Idioma[], que: string): string | null {
+  if (caidos.length !== 1) return null;
+  return caidos[0] === "en"
+    ? `La ${que} en inglés falló; sólo respondió la de español.`
+    : `La ${que} en español falló; sólo respondió la de inglés.`;
+}
+
 function AvisoBusqueda({ m }: { m: EstadoMuro }) {
   const v = m.vivo;
   const partes: string[] = [];
@@ -181,12 +214,9 @@ function AvisoBusqueda({ m }: { m: EstadoMuro }) {
     partes.push(
       "No se pudo completar la búsqueda en vivo; abajo solo está lo ya cosechado.",
     );
-  } else if (v.caidos.length === 1) {
-    partes.push(
-      v.caidos[0] === "en"
-        ? "La búsqueda en inglés falló; sólo respondió la de español."
-        : "La búsqueda en español falló; sólo respondió la de inglés.",
-    );
+  } else {
+    const caidos = textoCaidos(v.caidos, "búsqueda");
+    if (caidos !== null) partes.push(caidos);
   }
   if (v.suprimidas > 0) {
     partes.push(
@@ -249,7 +279,72 @@ function ListaBusqueda({
 }
 
 /**
- * La lista agrupada.
+ * Lo que hay que decir de la actualidad antes de las filas. Siempre dice de
+ * donde viene y que NO es: PRODUCT.md separa a proposito lo cosechado y
+ * clasificado de lo que devuelve Google, y aqui todo es lo segundo.
+ */
+function AvisoActualidad({ m }: { m: EstadoMuro }) {
+  const a = m.actualidad;
+  const partes: string[] = [
+    "Sección de Google Noticias en este momento, en el orden de Google. No pasa por el pipeline: sin zona, tono ni figura, y no cuenta en las cifras de prensa.",
+  ];
+
+  if (a.fallo) {
+    partes.push("No se pudo traer la actualidad de Google Noticias.");
+  } else {
+    const caidos = textoCaidos(a.caidos, "edición");
+    if (caidos !== null) partes.push(caidos);
+  }
+  if (a.truncada) partes.push(`Se muestran los primeros ${numero(a.resultados.length)}.`);
+  if (a.consultado !== null) partes.push(`Consultado a las ${hora(a.consultado)}.`);
+
+  return <p className="mb-4 text-meta text-tinta-meta">{partes.join(" ")}</p>;
+}
+
+/**
+ * La lista en modo actualidad: la seccion de Google, plana y en su orden.
+ *
+ * Sin `corte`: FilaExterna pone la hora absoluta, porque medir la edad contra
+ * `estado.generado` daria edades negativas a titulares de hace diez minutos.
+ */
+function ListaActualidad({ m }: { m: EstadoMuro }) {
+  const a = m.actualidad;
+  if (!a.activa) {
+    return (
+      <p className="py-16 text-center text-lectura text-tinta-prosa">
+        La actualidad en vivo necesita el servidor del tablero.
+      </p>
+    );
+  }
+  if (a.cargando && a.resultados.length === 0) {
+    return (
+      <p aria-live="polite" className="py-16 text-center text-lectura text-tinta-prosa">
+        Cargando la actualidad…
+      </p>
+    );
+  }
+  if (a.resultados.length === 0) {
+    return (
+      <>
+        <AvisoActualidad m={m} />
+        <p className="py-16 text-center text-lectura text-tinta-prosa">
+          Google no devolvió titulares para esta sección.
+        </p>
+      </>
+    );
+  }
+  return (
+    <>
+      <AvisoActualidad m={m} />
+      {a.resultados.map((r) => (
+        <FilaExterna key={r.url} r={r} />
+      ))}
+    </>
+  );
+}
+
+/**
+ * La lista, en el modo que toque.
  *
  * `pendiente` viene de useTransition: se atenua mientras el render ancho
  * corre, en vez de bloquear el control.
@@ -272,8 +367,10 @@ function Lista({
         m.pendiente ? "opacity-60" : "opacity-100"
       }`}
     >
-      {m.buscando ? (
+      {m.modo === "busqueda" ? (
         <ListaBusqueda m={m} roster={roster} />
+      ) : m.modo === "actualidad" ? (
+        <ListaActualidad m={m} />
       ) : m.grupos.length === 0 ? (
         <p className="py-16 text-center text-lectura text-tinta-prosa">
           {textoVacio(m.totalVentana, sujeto)}
@@ -301,10 +398,11 @@ function Lista({
  * arriba no llega al total de la ventana.
  *
  * Solo en la vista regional: en la pagina de una zona, "fuera de la region"
- * no es una categoria que signifique nada.
+ * no es una categoria que signifique nada. Y solo con corpus: en Mexico e
+ * Internacional las dos exclusiones hablan de una lista que no se esta viendo.
  */
 function PieExclusiones({ m, agrupado }: { m: EstadoMuro; agrupado: boolean }) {
-  if (!agrupado) return null;
+  if (!agrupado || !m.usaCorpus) return null;
   if (m.fuera === 0 && m.nacionales === 0) return null;
   return (
     <p className="mt-10 border-t border-vela pt-5 text-meta text-tinta-prosa">
@@ -339,7 +437,7 @@ export function Muro({ zona }: { zona: ZonaRuta | null }) {
       </p>
     );
   }
-  if (m.cargando) return <MuroEsqueleto />;
+  if (m.cargando) return <MuroEsqueleto conZona={zona !== null} />;
 
   const nombre = zona === null ? null : NOMBRE_CORTO[zona];
   // Con delegacion activa la linea de conteo dice cual; sin ella, la zona.

@@ -1,5 +1,6 @@
 /**
- * Contrato de /api/buscar. El unico modulo que importan los dos lados.
+ * Contrato de /api/buscar y de /api/actualidad. El unico modulo que importan
+ * los dos lados.
  *
  * Es deliberadamente OTRO tipo que `Nota`: un resultado en vivo no paso por el
  * pipeline, asi que no tiene id, ni zona, ni delegacion, ni tono, ni figura.
@@ -8,6 +9,9 @@
  * clasificadas por zona, tono y figura; esta son enlaces sin clasificar que
  * se pidieron hace un segundo. Un solo numero no significaria ninguna.
  */
+
+// Ciclo solo de tipos con ambito.ts: se borra al compilar.
+import type { AmbitoActualidad } from "./ambito";
 
 export type Idioma = "es" | "en";
 
@@ -51,6 +55,29 @@ export interface RespuestaBusqueda {
 
 export interface ErrorBusqueda {
   codigo: "vacia" | "larga" | "invalida";
+  mensaje: string;
+}
+
+/**
+ * Lo que devuelve /api/actualidad: la seccion de Google Noticias de un ambito
+ * sin corpus (Mexico o Internacional) tal como esta en este momento.
+ *
+ * Misma fila que la busqueda (`ResultadoExterno`) y misma salud por locale.
+ * Lo que cambia es el orden: aqui NUNCA se reordena. La seccion viene en el
+ * orden de Google, que no es por fecha (23 inversiones en 45 items el dia que
+ * se midio), y ese orden es la senal de "que esta sonando ahora".
+ */
+export interface RespuestaActualidad {
+  ambito: AmbitoActualidad;
+  /** Hora del servidor al pedirle a Google. Con el CDN puede tener 5 min. */
+  consultado: string;
+  resultados: ResultadoExterno[];
+  fuentes: SaludFeed[];
+  truncada: boolean;
+}
+
+export interface ErrorActualidad {
+  codigo: "ambito";
   mensaje: string;
 }
 

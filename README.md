@@ -486,6 +486,46 @@ el último resultado si falla la actualización. La hora de cada carril, con PDT
 vigencia: después de 90 minutos se excluye del texto de locución. No se
 infieren ceros, longitud de fila ni tiempos para entrar a México.
 
+## Búsqueda en vivo y actualidad de Google Noticias
+
+El muro de titulares busca en dos lugares a la vez: en lo que la última
+corrida cosechó y, en vivo, en el RSS de búsqueda de Google Noticias. Lo
+segundo sale por una route handler del tablero (`/api/buscar`) porque el feed
+de Google no manda CORS y porque así una racha de gente buscando lo mismo es
+una sola llamada río arriba. Cuatro alcances: la zona de la página, la región,
+México e Internacional; el corpus solo participa en los dos primeros.
+
+### La actualidad de México e Internacional
+
+Con México o Internacional y sin consulta, el muro muestra la sección de
+Google Noticias de ese momento por `/api/actualidad?a=mexico|internacional`:
+México es la sección «México» de la edición mexicana; Internacional, la
+sección «Mundo» en español y en inglés, intercaladas. Va **en el orden de
+Google**, sin reordenar: no es por fecha, es su ranking de la sección, y eso
+es lo que se quiere ver. Se refresca cada cinco minutos.
+
+Tres cosas que las dos rutas comparten y no hay que aflojar:
+
+- **Siempre 200.** Un feed caído viaja como `estado: "fallo"` dentro de
+  `fuentes`, para que la página pueda decir qué pasó. Solo un `?a=` inválido
+  o una consulta vacía dan 400.
+- **Al CDN solo cuando todo respondió.** `s-maxage=300` si cada edición vino
+  bien; `private, no-store` si alguna falló. Una falla pasajera clavada cinco
+  minutos en el CDN es peor que la falla.
+- **Solo `news.google.com`.** Las secciones contestan con un 302 al id opaco
+  de la sección y `fetch` lo sigue; si el destino final no es ese host, no se
+  lee un byte.
+
+Nada de esto toca `data/` ni el pipeline: son enlaces sin clasificar, sin
+zona, tono ni figura, y no cuentan en ninguna cifra de prensa. El porqué está
+en [PRODUCT.md](PRODUCT.md#la-columna-búsqueda-mide-otra-cosa-que-la-columna-prensa).
+
+Verificación offline del contrato: `node web/scripts/probar-busqueda.cjs`
+después de instalar las dependencias de `web/`; también la invoca
+`tests/test_busqueda_web.py` y el job web de CI. Lee el mismo
+`tests/fixtures/google-noticias.xml` que las pruebas de Python, para que los
+dos lectores del feed no diverjan en silencio.
+
 Verificación offline del contrato web: `node web/scripts/probar-garitas.cjs`
 después de instalar las dependencias de `web/`; también la invoca
 `python -m unittest discover -s tests -p test_garitas_web.py -v`.

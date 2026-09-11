@@ -3,10 +3,9 @@
 import { useMemo } from "react";
 import useSWRImmutable from "swr/immutable";
 
-import { ErrorDatos, leerJson } from "@/lib/datos/fetcher";
 import { SLUG_DE_ZONA, type ZonaRuta } from "@/lib/dominio/zonas";
 import { ambitoPorOmision, type Ambito } from "./ambito";
-import { marcarSinServidor, useHayServidor } from "./disponible";
+import { leerApi, useHayServidor } from "./disponible";
 import { suprimirConocidas } from "./fusionar";
 import {
   MINIMO_CONSULTA,
@@ -15,21 +14,6 @@ import {
 } from "./tipos";
 
 const SIN_RESULTADOS: readonly ResultadoExterno[] = [];
-
-async function leerBusqueda(ruta: string): Promise<RespuestaBusqueda> {
-  try {
-    return await leerJson<RespuestaBusqueda>(ruta);
-  } catch (e) {
-    // 404 con HTML, o 200 con la cascara de la app: no hay route handler.
-    // Se apunta en la tienda para no volver a preguntar en esta sesion.
-    if (e instanceof ErrorDatos && (e.status === 404 || e.status === 405)) {
-      marcarSinServidor();
-    } else if (e instanceof ErrorDatos && e.message.includes("no JSON")) {
-      marcarSinServidor();
-    }
-    throw e;
-  }
-}
 
 export interface BusquedaViva {
   /** Lo que no esta ya en el muro de arriba. */
@@ -69,7 +53,7 @@ export function useBusquedaViva(
 
   const { data, error, isLoading } = useSWRImmutable<RespuestaBusqueda>(
     activa ? `/api/buscar?${partes.join("&")}` : null,
-    leerBusqueda,
+    (ruta: string) => leerApi<RespuestaBusqueda>(ruta),
   );
 
   const { visibles, suprimidas } = useMemo(() => {

@@ -86,6 +86,11 @@ jobs:
       - name: Contrato de garitas offline
         run: node scripts/probar-garitas.cjs
 
+      # Lo mismo para la busqueda en vivo y /api/actualidad: parseo del RSS de
+      # Google, fusion de locales y la politica de cache del route handler.
+      - name: Contrato de búsqueda offline
+        run: node scripts/probar-busqueda.cjs
+
       # La mitad duradera del barrido de diseno. El navegador probo aquel
       # barrido; esto prueba todos los commits que vienen.
       - name: Escalas de diseno

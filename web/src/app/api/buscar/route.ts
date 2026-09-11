@@ -23,8 +23,9 @@ import {
   esAmbito,
   localesDe,
 } from "@/lib/busqueda/ambito";
-import { traerFeed } from "@/lib/busqueda/google-noticias";
+import { cosecharFeeds, urlDeFeed } from "@/lib/busqueda/google-noticias";
 import { fusionarLocales } from "@/lib/busqueda/fusionar";
+import { CACHE_CDN, SIN_CACHE, json } from "@/lib/busqueda/respuesta";
 import { TOPE_RESULTADOS, type RespuestaBusqueda } from "@/lib/busqueda/tipos";
 import { validarConsulta } from "@/lib/busqueda/validar";
 import { zonaDeSlug } from "@/lib/dominio/zonas";
@@ -35,21 +36,6 @@ import { zonaDeSlug } from "@/lib/dominio/zonas";
  * 'fallo' legible en el cuerpo y no como un 504 del host.
  */
 export const maxDuration = 15;
-
-const SIN_CACHE = "private, no-store";
-
-function json(cuerpo: unknown, status: number, cache: string): Response {
-  return Response.json(cuerpo, {
-    status,
-    headers: {
-      "Cache-Control": cache,
-      "X-Content-Type-Options": "nosniff",
-      // layout.tsx pone robots:noindex para las PAGINAS; un route handler no
-      // queda cubierto por eso.
-      "X-Robots-Tag": "noindex",
-    },
-  });
-}
 
 export async function GET(peticion: NextRequest): Promise<Response> {
   const params = peticion.nextUrl.searchParams;
@@ -67,25 +53,11 @@ export async function GET(peticion: NextRequest): Promise<Response> {
   const q = componerConsulta(veredicto.q, ambito, zona);
   const locales = localesDe(ambito);
 
-  // allSettled y no all: que se caiga un locale no puede tumbar el otro. Es la
-  // misma postura de pulso/fetch.py, "una fuente caida no tumba la corrida".
-  const acuerdos = await Promise.allSettled(
-    locales.map((idioma) => traerFeed(q, idioma, TOPE_RESULTADOS)),
-  );
-
-  const cosechas = acuerdos.map((a, i) =>
-    a.status === "fulfilled"
-      ? a.value
-      : {
-          salud: {
-            idioma: locales[i]!,
-            estado: "fallo" as const,
-            obtenidas: 0,
-            ms: 0,
-            error: String(a.reason).slice(0, 300),
-          },
-          resultados: [],
-        },
+  // Los dos locales en paralelo; que se caiga uno no tumba el otro (ver
+  // cosecharFeeds).
+  const cosechas = await cosecharFeeds(
+    locales.map((idioma) => ({ url: urlDeFeed(q, idioma), idioma })),
+    TOPE_RESULTADOS,
   );
 
   const fusionados = fusionarLocales(cosechas.map((c) => c.resultados));
@@ -104,8 +76,5 @@ export async function GET(peticion: NextRequest): Promise<Response> {
   // Y nunca se cachea un resultado parcial: una falla pasajera de Google
   // clavada cinco minutos en el CDN es peor que la falla.
   const todoBien = cosechas.every((c) => c.salud.estado === "ok");
-  const cache = todoBien
-    ? "public, max-age=0, s-maxage=300, stale-while-revalidate=600"
-    : SIN_CACHE;
-  return json(cuerpo, 200, cache);
+  return json(cuerpo, 200, todoBien ? CACHE_CDN : SIN_CACHE);
 }

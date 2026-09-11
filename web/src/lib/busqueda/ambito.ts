@@ -10,6 +10,12 @@
  * participa: el corpus es regional por construccion, y mezclarlo con una
  * busqueda nacional volveria la cifra de arriba imposible de leer.
  *
+ * Y sin consulta esos dos peldanos NO dejan el muro vacio: muestran la
+ * seccion de Google Noticias de ese momento (lib/busqueda/actualidad.ts).
+ * Antes del 11 de septiembre de 2026 `/?a=mexico` sin consulta era una lista
+ * vacia con pastillas que no hacian nada, porque el corpus no participa y la
+ * busqueda en vivo no tenia que buscar.
+ *
  * Los terminos de lugar de aqui NO salen de pulso/zonas.py::LUGARES. Ese
  * gazetero sirve para DETECTAR y esta plegado -- sin acentos, 'san quintin',
  * 'camalu' -- y ademas trae desambiguadores que no son toponimos: 'xolos' es
@@ -89,6 +95,16 @@ export function localesDe(ambito: Ambito): readonly Idioma[] {
 /** El corpus solo participa mientras la busqueda siga siendo regional. */
 export const usaCorpus = (ambito: Ambito) =>
   ambito === "zona" || ambito === "region";
+
+/**
+ * Los dos peldanos sin corpus. Sin consulta muestran la seccion de Google
+ * Noticias en vivo; es el complemento exacto de `usaCorpus`, escrito como
+ * predicado propio para que el tipo lo estreche.
+ */
+export type AmbitoActualidad = Extract<Ambito, "mexico" | "internacional">;
+
+export const esAmbitoActualidad = (s: string | null): s is AmbitoActualidad =>
+  s === "mexico" || s === "internacional";
 
 /** Sin zona en la ruta no hay peldano 'zona': el primero es 'region'. */
 export const ambitoPorOmision = (zona: ZonaRuta | null): Ambito =>

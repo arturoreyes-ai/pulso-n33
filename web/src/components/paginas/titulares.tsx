@@ -24,6 +24,13 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  * cierra, porque es el resumen en numeros de lo que se acaba de leer y desde
  * ahi se sale hacia las otras tres paginas.
  */
+/**
+ * La frase que cierra la entrada del muro en las tres variantes: es la misma
+ * promesa y se escribe una vez.
+ */
+const EN_VIVO =
+  "Con México o Internacional y sin consulta, muestra la actualidad de Google Noticias en ese momento.";
+
 export function PaginaTitulares({ zona }: { zona: ZonaRuta | null }) {
   const nombre = zona === null ? null : NOMBRE_CORTO[zona];
 
@@ -36,10 +43,10 @@ export function PaginaTitulares({ zona }: { zona: ZonaRuta | null }) {
         titulo={nombre === null ? "Titulares" : `Titulares sobre ${nombre}`}
         entrada={
           nombre === null
-            ? "La zona sale del lugar que nombra el titular, no del medio. Al buscar, la lista se aplana y suma resultados en vivo."
+            ? `La zona sale del lugar que nombra el titular, no del medio. Al buscar, la lista se aplana y suma resultados en vivo. ${EN_VIVO}`
             : zona === "Tijuana"
-              ? "Titulares que mencionan Tijuana. La delegación sale del propio titular, y la mayoría no nombra ninguna."
-              : `Titulares que mencionan ${nombre}. Al buscar, la lista se aplana y suma resultados en vivo.`
+              ? `Titulares que mencionan Tijuana. La delegación sale del propio titular, y la mayoría no nombra ninguna. ${EN_VIVO}`
+              : `Titulares que mencionan ${nombre}. Al buscar, la lista se aplana y suma resultados en vivo. ${EN_VIVO}`
         }
       >
         {/* El muro lee ?d=, ?q= y ?a= con useSearchParams; en una ruta
@@ -48,7 +55,7 @@ export function PaginaTitulares({ zona }: { zona: ZonaRuta | null }) {
             mientras carga, y eso importa mas ahora que el muro es lo primero
             de la pagina: la cascara no se mueve, solo se llenan las filas.
             Los tres parametros cuelgan de este limite. */}
-        <Suspense fallback={<MuroEsqueleto />}>
+        <Suspense fallback={<MuroEsqueleto conZona={zona !== null} />}>
           <Muro zona={zona} />
         </Suspense>
       </Seccion>

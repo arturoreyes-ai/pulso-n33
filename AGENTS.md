@@ -321,10 +321,9 @@ The full command surface — `indicadores`, `conversacion`, `delegaciones`,
 
 ## Testing
 
-- **`unittest` only.** No pytest, no config file. 16 modules, 398 test
-  methods, and the suite is expected fully green. Install `requirements.txt`
+- **`unittest` only.** No pytest, no config file. 21 modules, 588 test methods, and the suite is expected fully green. Install `requirements.txt`
   first: without Scrapy, `tests/test_scraping.py` fails to import and you see
-  394 run with one error, which is an unprovisioned environment and not a
+  587 run with one error, which is an unprovisioned environment and not a
   regression.
 - **Tests are always offline.** `tests/test_pipeline.py` says so in its
   docstring. Never add a test that touches the network.
@@ -452,6 +451,16 @@ Tailwind v4, pnpm.
   are one view (`redes`) with a facet selector, not three sections. They are
   the same question asked in three places, and only one panel mounts at a time
   because each is an island that fetches its own JSON.
+- **Live Google News never becomes a `Nota`.** `/api/buscar` (search) and
+  `/api/actualidad` (the México / World section the wall shows when its
+  scope is `mexico` or `internacional` and nothing is typed) return
+  `ResultadoExterno` rows: no id, zone, tone or figure, never written to
+  `data/`, never summed with press counts. The section feed is rendered in
+  Google's own order on purpose: it is not date-ordered, it is their ranking,
+  and that ranking is the signal. The pipeline deliberately does not harvest
+  it, because `data/` cannot say "right now" and a place-less headline would
+  be `alcance: nacional` and never reach the wall. Both handlers are
+  offline-tested by `web/scripts/probar-busqueda.cjs`.
 - **`web/` is what ships.** The cron builds it on the runner and deploys it
   prebuilt, behind `DESPLEGAR_TABLERO`. It deploys from the runner rather than
   from a host build against git because the comment text lives in `efimero/`,

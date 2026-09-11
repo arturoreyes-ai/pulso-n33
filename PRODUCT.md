@@ -135,6 +135,14 @@ y la banda de salud publica ese número por consulta (`sin_zona`) en vez de
 dejar que se deduzca. Es también la razón de que las consultas se escriban con
 topónimos: para que el lugar caiga en el titular y no solo en el cuerpo.
 
+**Y desde el 11 de septiembre hay una segunda cosa en vivo que tampoco es
+prensa cosechada.** Con el alcance México o Internacional y sin consulta, el
+muro muestra la sección de Google Noticias de ese momento, en el orden de
+Google. Esas filas no pasan por el pipeline: no tienen zona, tono ni figura,
+no entran a `data/`, no se cuentan en ninguna cifra de este documento y van
+marcadas «en vivo». Contestan «qué está sonando ahora», que es otra pregunta
+que «qué cubre la prensa de la región», y por eso no se mezclan.
+
 Consecuencia estructural que hay que decir en voz alta: el tablero
 sobrerrepresenta a Tijuana. No es un defecto del código, es la distribución
 real de la prensa y de la estadística oficial en el estado.
