@@ -31,3 +31,7 @@ efimero/
 .env
 .env.*
 !.env.example
+
+# Lo escribe Finder en cada carpeta que se abre en macOS. No es del proyecto
+# y un `git add -A` lo colaba junto con el trabajo de verdad.
+.DS_Store

@@ -412,6 +412,11 @@ offline completa a una carpeta temporal.
 
 ## Publicar el tablero
 
+> **El tablero publicado es privado.** Se entra con la cuenta de Microsoft
+> de la organización y el rol vive en una tabla `usuarios` en Neon. El
+> registro en Azure, la base de datos, las variables de Vercel y el modo de
+> desarrollo sin Azure están en [docs/acceso.md](docs/acceso.md).
+
 Lo que se publica es **`web/`**, el tablero de Next.js. `sitio/` sigue en el
 repo y en CI, pero ya no es el producto: el cron dejó de armarlo.
 
@@ -431,6 +436,16 @@ fuera de git por la retención de 30 días, así que un host que construya desde
 el repositorio jamás lo vería y publicaría los posts sin comentarios. En el
 cron, en cambio, esa carpeta la acaba de escribir el paso de redes de la
 misma corrida, y `pnpm build` la copia a `web/public/data`.
+
+**Hoy, sin embargo, publica la integración de Git de Vercel**, conectada al
+repo desde el 9 de septiembre de 2026: cada push a `main` construye producción,
+incluidos los cuatro commits diarios del bot, y ese build no ve `efimero/`, así
+que los posts salen sin el texto de sus comentarios y el panel lo dice. Encender
+el despliegue desde el runner sin apagar la integración pondría a los dos a
+competir por producción; cuál se queda es una decisión pendiente, no un
+descuido. El proyecto tiene Root Directory `web`, archivos fuera de la raíz
+incluidos y Framework Preset Next.js; sin el último, Vercel construye y luego
+sirve `web/public/` como sitio estático, y todo es 404 (`docs/acceso.md` §7).
 
 **No es exportación estática y por eso Pages ya no sirve.** `next.config.ts`
 deja `output` sin definir a propósito para conservar las route handlers, y
@@ -471,21 +486,6 @@ Los ejemplos se marcan como prueba; no uses esa salida
 para sustituir los datos reales. Si la fuente falla, el panel conserva la
 última lectura correcta e informa que no se pudo actualizar.
 
-## Garitas para locución
-
-La página Next.js `/garitas` consulta `/api/garitas` para San Ysidro, PedWest
-y Otay Mesa hacia Estados Unidos. Requiere el servidor Next.js; no forma parte
-del sitio estático anterior. El endpoint consulta el XML público de CBP con
-límite de 8 segundos y 2 MiB, sin credenciales ni redirecciones. Las respuestas
-válidas se cachean en el CDN hasta 5 minutos; los errores no se cachean.
-
-El navegador consulta al entrar en la página y después solo al pulsar Actualizar;
-no consulta por intervalo, foco, reconexión ni reintento automático. La fila
-peatonal Ready Lane de Otay se omite en la página. Conserva
-el último resultado si falla la actualización. La hora de cada carril, con PDT/PST explícito, determina su
-vigencia: después de 90 minutos se excluye del texto de locución. No se
-infieren ceros, longitud de fila ni tiempos para entrar a México.
-
 ## Búsqueda en vivo y actualidad de Google Noticias
 
 El muro de titulares busca en dos lugares a la vez: en lo que la última
@@ -525,6 +525,21 @@ después de instalar las dependencias de `web/`; también la invoca
 `tests/test_busqueda_web.py` y el job web de CI. Lee el mismo
 `tests/fixtures/google-noticias.xml` que las pruebas de Python, para que los
 dos lectores del feed no diverjan en silencio.
+
+## Garitas para locución
+
+La página Next.js `/garitas` consulta `/api/garitas` para San Ysidro, PedWest
+y Otay Mesa hacia Estados Unidos. Requiere el servidor Next.js; no forma parte
+del sitio estático anterior. El endpoint consulta el XML público de CBP con
+límite de 8 segundos y 2 MiB, sin credenciales ni redirecciones. Las respuestas
+válidas se cachean en el CDN hasta 5 minutos; los errores no se cachean.
+
+El navegador consulta al entrar en la página y después solo al pulsar Actualizar;
+no consulta por intervalo, foco, reconexión ni reintento automático. La fila
+peatonal Ready Lane de Otay se omite en la página. Conserva
+el último resultado si falla la actualización. La hora de cada carril, con PDT/PST explícito, determina su
+vigencia: después de 90 minutos se excluye del texto de locución. No se
+infieren ceros, longitud de fila ni tiempos para entrar a México.
 
 Verificación offline del contrato web: `node web/scripts/probar-garitas.cjs`
 después de instalar las dependencias de `web/`; también la invoca

@@ -26,10 +26,10 @@ minimumReleaseAge: 10080
 # la cuenta del publicador cambio de manos.
 trustPolicy: no-downgrade
 
-# Una sola excepcion, con nombre y version exactos a proposito: asi cualquier
-# bump de @types/node la vuelve a poner sobre la mesa en vez de heredar un
-# permiso silencioso. Se descarto `trustPolicyIgnoreAfter`, que habria abierto
-# la puerta a CUALQUIER paquete viejo con confianza debil.
+# Excepciones con nombre y version exactos a proposito: asi cualquier bump las
+# vuelve a poner sobre la mesa en vez de heredar un permiso silencioso. Se
+# descarto `trustPolicyIgnoreAfter`, que habria abierto la puerta a CUALQUIER
+# paquete viejo con confianza debil.
 #
 # El caso: pnpm marca undici-types@6.21.0 como TRUST_DOWNGRADE
 # ("possible package takeover"). Lo que pasa de verdad es que la linea 7.x se
@@ -47,6 +47,9 @@ trustPolicy: no-downgrade
 # queda roto para siempre, no hasta el proximo bump.
 trustPolicyExclude:
   - undici-types@6.21.0
+  # next-auth beta.32 es la version que usa la aplicacion; pnpm la marca como
+  # downgrade porque una version anterior tenia attestation de procedencia.
+  - next-auth@5.0.0-beta.32
 
 # Explicito aunque ya sea el valor por omision en pnpm reciente: las
 # dependencias transitivas no pueden venir de git:, file: ni de un tarball

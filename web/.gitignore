@@ -6,3 +6,8 @@ next-env.d.ts
 # versiona git es la de data/ en la raiz del repo.
 public/data/
 tsconfig.tsbuildinfo
+
+# Lo escribe `vercel pull` en el runner, despues del commit de data/. En local
+# aparece al correr el CLI aqui dentro y no hay que versionarlo: el cron no lo
+# lee, identifica el proyecto con VERCEL_ORG_ID y VERCEL_PROJECT_ID.
+.vercel/

@@ -2,11 +2,9 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
-import { preload } from "react-dom";
 
 import { Malla } from "@/components/chrome/malla";
 import { Velo } from "@/components/chrome/velo";
-import { RUTAS } from "@/lib/datos/config";
 
 import "./globals.css";
 
@@ -37,9 +35,10 @@ import "./globals.css";
  * `display: "optional"` y sin preload, en vez de "swap": Archivo a wdth 112
  * es ~20% mas ancha por glifo que el Arial ajustado que hace de respaldo, asi
  * que a 375px el h1 puede CAMBIAR DE NUMERO DE LINEAS al intercambiar, y eso
- * es un salto de layout grande sobre el elemento LCP. Y abajo ya se precarga
- * notas.json con prioridad alta: una segunda peticion prioritaria de 90 KB le
- * quita ancho de banda al dato que la pagina existe para mostrar.
+ * es un salto de layout grande sobre el elemento LCP. Y el tablero ya precarga
+ * notas.json con prioridad alta (components/paginas/pagina.tsx): una segunda
+ * peticion prioritaria de 90 KB le quita ancho de banda al dato que la pagina
+ * existe para mostrar.
  */
 const Archivo = localFont({
   src: "./fonts/archivo-latin-wdth-normal.woff2",
@@ -66,36 +65,6 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // React 19 iza el link al <head> antes de que exista JS de cliente, asi que
-  // el archivo mas grande empieza a bajar sin esperar la hidratacion.
-  //
-  // `as: "fetch"` es quisquilloso: si el modo de CREDENCIALES del preload no
-  // coincide con el del fetch que lo consume, el navegador DESCARTA la
-  // descarga y avisa "preloaded but not used", o sea que se paga dos veces y
-  // no sirve.
-  //
-  // Va SIEMPRE con crossOrigin, tambien en mismo origen. La version anterior
-  // lo omitia cuando el origen coincidia, y Chrome tiraba el preload de
-  // notas.json en cada carga: "A preload for '/data/notas.json' is found, but
-  // is not used because the request credentials mode does not match". Justo el
-  // archivo mas grande y el unico con fetchPriority alto.
-  //
-  // Las reglas no son simetricas, y de ahi el error:
-  //
-  //   <link rel=preload as=fetch> sin crossorigin  -> credenciales "include"
-  //   ...con crossorigin="anonymous"               -> credenciales "same-origin"
-  //   fetch(url) sin opciones                      -> credenciales "same-origin"
-  //
-  // El consumidor es `leerJson`, un fetch pelado (lib/datos/fetcher.ts), asi
-  // que lo que empareja es "anonymous". En mismo origen no cuesta nada: una
-  // peticion al propio origen no pasa por CORS. Un host remoto ya lo queria, y
-  // ademas necesita cabeceras CORS en la respuesta.
-  preload(RUTAS.notas, {
-    as: "fetch",
-    fetchPriority: "high",
-    crossOrigin: "anonymous",
-  });
-
   return (
     // `suppressHydrationWarning` esta aqui por una EXTENSION del navegador, no
     // por un desajuste de este arbol. LanguageTool escribe

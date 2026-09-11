@@ -10,13 +10,16 @@
     "lint": "next lint",
     "tipos": "next typegen && tsc --noEmit",
     "datos": "node scripts/sincronizar-datos.mjs",
-    "tokens": "node scripts/verificar-tokens.mjs"
+    "tokens": "node scripts/verificar-tokens.mjs",
+    "migrar": "node --env-file-if-exists=.env.local scripts/migrar.mjs"
   },
   "dependencies": {
+    "@neondatabase/serverless": "1.1.0",
     "@phosphor-icons/react": "^2.1.10",
     "fast-xml-parser": "^5.11.1",
     "geist": "^1.7.2",
     "next": "^16.3.4",
+    "next-auth": "5.0.0-beta.32",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "recharts": "^3.10.1",

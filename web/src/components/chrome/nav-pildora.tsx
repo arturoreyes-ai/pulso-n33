@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { House } from "@phosphor-icons/react/dist/ssr";
 
+import { cerrarSesion } from "@/lib/acceso/acciones";
 import { SUELTAS, VISTAS, nombreVista, ruta, type Vista } from "@/lib/dominio/secciones";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 
@@ -23,8 +24,8 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  * donde— y la pildora los muestra separados por un filo, en vez de
  * mezclarlos en una sola tira que en movil habia que arrastrar.
  *
- *   [ ⌂ Pulso ] | Titulares  Redes  Indicadores  Cobertura  Garitas | [ Tijuana ]
- *      inicio          la vista, con la actual marcada, y las sueltas   el lugar
+ *   [ ⌂ Pulso ] | Titulares  Redes  Indicadores  Cobertura  Garitas | [ Tijuana ] | Salir
+ *      inicio          la vista, con la actual marcada, y las sueltas   el lugar    la sesion
  *
  * Las cuatro vistas del centro CONSERVAN la zona, y los chips del selector
  * conservan la vista (ver lib/dominio/secciones.ts::ruta). Cruzar de
@@ -38,6 +39,9 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  * carga el selector de zona en cada pagina, asi que el costo marginal es cero
  * y cambiar de vista es instantaneo sobre el cache de SWR: los JSON de la
  * vista anterior siguen ahi.
+ *
+ * "Salir" es un <form> con una accion de servidor (lib/acceso/acciones.ts),
+ * no un boton de cliente: cerrar sesion tampoco necesita JavaScript propio.
  */
 
 const PASTILLA = "block rounded-full px-3 py-2 text-meta transition-colors md:px-4";
@@ -110,6 +114,17 @@ export function NavPildora({ zona, vista }: { zona: ZonaRuta | null; vista: Vist
         >
           {zona === null ? "Toda la región" : NOMBRE_CORTO[zona]}
         </a>
+
+        <Filo />
+
+        <form action={cerrarSesion} className="shrink-0">
+          <button
+            type="submit"
+            className={`${PASTILLA} text-tinta-prosa hover:bg-filo hover:text-tinta-titulo`}
+          >
+            Salir
+          </button>
+        </form>
       </nav>
     </div>
   );

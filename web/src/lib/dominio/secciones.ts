@@ -105,6 +105,14 @@ export function ruta(zona: ZonaRuta | null, vista: Vista): string {
  *
  * Con esto deja de compilar, y `pnpm tipos` corre en CI.
  */
-export const RUTAS_SIN_COLISION: [Extract<Seccion, Slug>] extends [never]
+/**
+ * Todo segmento literal de primer nivel que compite con `[zona]`: las tres
+ * secciones, las sueltas de la nav y la puerta (/entrar, ver proxy.ts). Una
+ * zona llamada "entrar" dejaria a esa zona sin pagina y a la puerta intacta,
+ * el mismo fallo mudo.
+ */
+type SegmentoLiteral = Seccion | "garitas" | "entrar";
+
+export const RUTAS_SIN_COLISION: [Extract<SegmentoLiteral, Slug>] extends [never]
   ? true
-  : "Una seccion no puede llamarse igual que un slug de zona: /<slug> ya es una zona" = true;
+  : "Una pagina literal no puede llamarse igual que un slug de zona: /<slug> ya es una zona" = true;
