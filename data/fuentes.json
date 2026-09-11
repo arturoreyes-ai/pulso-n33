@@ -1,6 +1,6 @@
 {
  "esquema": 1,
- "generado": "2026-09-10T18:27:55+00:00",
+ "generado": "2026-09-11T00:33:35+00:00",
  "fuentes": [
   {
    "id": "zeta",
@@ -10,9 +10,9 @@
    "zona": "Tijuana",
    "estado": "ok",
    "obtenidas": 10,
-   "nuevas": 6,
-   "ms": 126,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "nuevas": 7,
+   "ms": 164,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null
   },
   {
@@ -23,9 +23,9 @@
    "zona": "Tijuana",
    "estado": "ok",
    "obtenidas": 100,
-   "nuevas": 2,
-   "ms": 345,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "nuevas": 7,
+   "ms": 457,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null
   },
   {
@@ -36,9 +36,9 @@
    "zona": "Tijuana",
    "estado": "ok",
    "obtenidas": 10,
-   "nuevas": 9,
-   "ms": 1235,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "nuevas": 10,
+   "ms": 1634,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null
   },
   {
@@ -50,8 +50,8 @@
    "estado": "ok",
    "obtenidas": 10,
    "nuevas": 0,
-   "ms": 184,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "ms": 343,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null
   },
   {
@@ -62,9 +62,9 @@
    "zona": "estatal",
    "estado": "ok",
    "obtenidas": 57,
-   "nuevas": 20,
-   "ms": 137,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "nuevas": 28,
+   "ms": 170,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null
   },
   {
@@ -73,12 +73,12 @@
    "url": "https://www.elimparcial.com/arc/outboundfeeds/rss/?outputType=xml",
    "metodo": "rss",
    "zona": "estatal",
-   "estado": "ok",
-   "obtenidas": 100,
-   "nuevas": 73,
-   "ms": 372,
+   "estado": "fallo",
+   "obtenidas": 0,
+   "nuevas": 0,
+   "ms": 393,
    "ultima_ok": "2026-09-10T18:27:55+00:00",
-   "error": null
+   "error": "ParseError: no element found: line 1, column 38"
   },
   {
    "id": "lavoz",
@@ -88,9 +88,9 @@
    "zona": "Mexicali",
    "estado": "ok",
    "obtenidas": 100,
-   "nuevas": 12,
-   "ms": 250,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "nuevas": 9,
+   "ms": 517,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null
   },
   {
@@ -102,8 +102,8 @@
    "estado": "ok",
    "obtenidas": 10,
    "nuevas": 0,
-   "ms": 1203,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "ms": 1234,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null
   },
   {
@@ -114,9 +114,9 @@
    "zona": "Playas de Rosarito",
    "estado": "ok",
    "obtenidas": 10,
-   "nuevas": 1,
-   "ms": 1202,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "nuevas": 2,
+   "ms": 882,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null
   },
   {
@@ -127,9 +127,9 @@
    "zona": "Ensenada",
    "estado": "ok",
    "obtenidas": 10,
-   "nuevas": 0,
-   "ms": 377,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "nuevas": 1,
+   "ms": 745,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null
   },
   {
@@ -141,7 +141,7 @@
    "estado": "fallo",
    "obtenidas": 0,
    "nuevas": 0,
-   "ms": 1265,
+   "ms": 1349,
    "ultima_ok": "2026-09-08T17:29:00+00:00",
    "error": "Ignoring non-200 response"
   },
@@ -153,9 +153,9 @@
    "zona": "Ensenada",
    "estado": "ok",
    "obtenidas": 10,
-   "nuevas": 1,
-   "ms": 243,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "nuevas": 0,
+   "ms": 388,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null
   },
   {
@@ -166,9 +166,9 @@
    "zona": "San Diego",
    "estado": "ok",
    "obtenidas": 12,
-   "nuevas": 6,
-   "ms": 938,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "nuevas": 10,
+   "ms": 113,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null
   },
   {
@@ -179,9 +179,9 @@
    "zona": "San Diego",
    "estado": "ok",
    "obtenidas": 10,
-   "nuevas": 0,
-   "ms": 85,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "nuevas": 1,
+   "ms": 226,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null
   },
   {
@@ -192,9 +192,9 @@
    "zona": "San Diego",
    "estado": "ok",
    "obtenidas": 10,
-   "nuevas": 4,
-   "ms": 69,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "nuevas": 7,
+   "ms": 109,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null
   },
   {
@@ -205,9 +205,9 @@
    "zona": "San Diego",
    "estado": "ok",
    "obtenidas": 50,
-   "nuevas": 1,
-   "ms": 171,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "nuevas": 0,
+   "ms": 223,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null
   },
   {
@@ -218,9 +218,9 @@
    "zona": "Tijuana",
    "estado": "ok",
    "obtenidas": 30,
-   "nuevas": 20,
-   "ms": 1683,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "nuevas": 18,
+   "ms": 1953,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null
   },
   {
@@ -230,10 +230,10 @@
    "metodo": "scrapy",
    "zona": "estatal",
    "estado": "ok",
-   "obtenidas": 6,
-   "nuevas": 2,
-   "ms": 1328,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "obtenidas": 8,
+   "nuevas": 8,
+   "ms": 1650,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null
   },
   {
@@ -244,21 +244,21 @@
    "zona": "estatal",
    "estado": "ok",
    "obtenidas": 8,
-   "nuevas": 5,
-   "ms": 448,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "nuevas": 6,
+   "ms": 405,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null,
    "detalle": {
-    "items": 46,
+    "items": 44,
     "sin_publicador": 0,
     "sin_fecha": 0,
     "fuera_de_ventana": 0,
     "sin_sufijo": 0,
-    "resueltas": 2,
-    "sinteticas": 6,
-    "recortadas": 38,
-    "notas": 39,
-    "sin_zona": 24
+    "resueltas": 1,
+    "sinteticas": 7,
+    "recortadas": 36,
+    "notas": 44,
+    "sin_zona": 30
    }
   },
   {
@@ -269,20 +269,20 @@
    "zona": "estatal",
    "estado": "ok",
    "obtenidas": 8,
-   "nuevas": 4,
-   "ms": 350,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "nuevas": 2,
+   "ms": 263,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null,
    "detalle": {
-    "items": 27,
+    "items": 14,
     "sin_publicador": 0,
     "sin_fecha": 0,
     "fuera_de_ventana": 0,
     "sin_sufijo": 0,
-    "resueltas": 0,
-    "sinteticas": 8,
-    "recortadas": 19,
-    "notas": 34,
+    "resueltas": 1,
+    "sinteticas": 7,
+    "recortadas": 6,
+    "notas": 37,
     "sin_zona": 10
    }
   },
@@ -294,20 +294,20 @@
    "zona": "estatal",
    "estado": "ok",
    "obtenidas": 8,
-   "nuevas": 2,
-   "ms": 381,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "nuevas": 5,
+   "ms": 357,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null,
    "detalle": {
-    "items": 39,
+    "items": 33,
     "sin_publicador": 0,
     "sin_fecha": 0,
     "fuera_de_ventana": 0,
     "sin_sufijo": 0,
-    "resueltas": 2,
-    "sinteticas": 6,
-    "recortadas": 31,
-    "notas": 26,
+    "resueltas": 1,
+    "sinteticas": 7,
+    "recortadas": 25,
+    "notas": 31,
     "sin_zona": 1
    }
   },
@@ -319,20 +319,20 @@
    "zona": "estatal",
    "estado": "ok",
    "obtenidas": 8,
-   "nuevas": 1,
-   "ms": 378,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "nuevas": 2,
+   "ms": 391,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null,
    "detalle": {
-    "items": 43,
+    "items": 41,
     "sin_publicador": 0,
     "sin_fecha": 0,
     "fuera_de_ventana": 0,
     "sin_sufijo": 0,
     "resueltas": 4,
     "sinteticas": 4,
-    "recortadas": 35,
-    "notas": 27,
+    "recortadas": 33,
+    "notas": 29,
     "sin_zona": 6
    }
   },
@@ -344,20 +344,20 @@
    "zona": "estatal",
    "estado": "ok",
    "obtenidas": 8,
-   "nuevas": 3,
-   "ms": 281,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "nuevas": 4,
+   "ms": 282,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null,
    "detalle": {
-    "items": 12,
+    "items": 11,
     "sin_publicador": 0,
     "sin_fecha": 0,
     "fuera_de_ventana": 0,
     "sin_sufijo": 0,
     "resueltas": 1,
     "sinteticas": 7,
-    "recortadas": 4,
-    "notas": 32,
+    "recortadas": 3,
+    "notas": 36,
     "sin_zona": 18
    }
   },
@@ -368,21 +368,21 @@
    "metodo": "busqueda",
    "zona": "estatal",
    "estado": "ok",
-   "obtenidas": 7,
-   "nuevas": 1,
-   "ms": 251,
-   "ultima_ok": "2026-09-10T18:27:55+00:00",
+   "obtenidas": 8,
+   "nuevas": 3,
+   "ms": 230,
+   "ultima_ok": "2026-09-11T00:33:35+00:00",
    "error": null,
    "detalle": {
-    "items": 7,
+    "items": 9,
     "sin_publicador": 0,
     "sin_fecha": 0,
     "fuera_de_ventana": 0,
     "sin_sufijo": 0,
     "resueltas": 0,
-    "sinteticas": 7,
-    "recortadas": 0,
-    "notas": 11,
+    "sinteticas": 8,
+    "recortadas": 1,
+    "notas": 14,
     "sin_zona": 3
    }
   },
@@ -395,9 +395,9 @@
    "estado": "fallo",
    "obtenidas": 0,
    "nuevas": 0,
-   "ms": 20084,
+   "ms": 11318,
    "ultima_ok": null,
-   "error": "URLError: <urlopen error _ssl.c:999: The handshake operation timed out>",
+   "error": "HTTPError: HTTP Error 429: Too Many Requests",
    "detalle": {
     "candidatos": 0,
     "publisher_pages": 0,
