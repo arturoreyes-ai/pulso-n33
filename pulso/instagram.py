@@ -66,11 +66,31 @@ ingerirse: la pagina muestra el comentario, nunca quien lo escribio.
 
 ## Destacados: el post, no el comentario
 
-`data/redes.json` tambien lleva los posts de la ultima semana con mas likes
-(`destacados`), y de cada uno lo que dice el medio -- la primera linea del pie
-como titular, la URL, likes, comentarios, reproducciones -- mas los conteos de
-sus comentarios. El pie es del medio y no de un particular: es la regla
-"titular, fuente y liga" de la prensa aplicada a Instagram.
+`data/redes.json` tambien lleva los posts de las ultimas 24 horas con mas
+likes (`destacados`), y de cada uno lo que dice el medio -- la primera linea
+del pie como titular, la URL, la hora exacta de publicacion, likes,
+comentarios, reproducciones -- mas los conteos de sus comentarios. El pie es
+del medio y no de un particular: es la regla "titular, fuente y liga" de la
+prensa aplicada a Instagram.
+
+La ventana fue de 7 dias sobre `fecha` hasta el 10 de septiembre de 2026,
+cuando el cliente pidio ver "lo ultimo de las 24 horas" de sus cuentas. Desde
+entonces se mide en horas sobre `publicado`, igual que TikTok, y un corte
+anterior sigue siendo valido para el validador (aviso, no error): data/ lo
+escribe el bot y no se edita a mano. Dos consecuencias que hay que saber:
+
+- El cache que restaura el cron (`actions/cache`) trae registros sin
+  `publicado`. La primera pasada los pisa (`{**viejo, **limpio}`) para los
+  ultimos N posts de cada cuenta, y los demas quedan fuera de la ventana
+  hasta que la retencion los pode. No hay nada que migrar.
+- Con ventana de 24 h, `dias_entre_cosechas` solo deduplica las corridas del
+  dia: un post sale de la ventana antes de volverse a cosechar. `cosechados`
+  y sus conteos son la foto de la primera cosecha; likes, comentarios y
+  reproducciones se refrescan en cada corrida (misma asimetria que TikTok).
+  Y "los de mas likes de 24 horas" son los de mas likes entre los ultimos
+  `posts_por_cuenta` que cada corrida ve de cada cuenta: una cuenta que
+  publica mas de cinco veces entre corridas pierde posts, y subir ese numero
+  encarece las dos pasadas.
 
 `_limpiar_post()` es una LISTA BLANCA y no una resta de IDENTIDAD, porque el
 item de post trae `latestComments[]` y `firstComment` con texto de comentarios
@@ -104,6 +124,8 @@ que devuelve lo que sea. Un hashtag no llevaria zona y por eso no hay
 hashtags en la configuracion.
 """
 
+from datetime import datetime, timezone
+
 from .apify import Presupuesto, SinToken, correr_actor, token
 # El nucleo neutro vive en pulso/redes.py desde que TikTok pidio "lo mismo".
 # Se reexporta aqui para que `instagram.leer_cache`, `instagram.derivar` y
@@ -130,9 +152,16 @@ IDENTIDAD = ("ownerUsername", "ownerProfilePicUrl", "ownerId", "owner",
              "ownerIsVerified", "username", "ownerFullName", "latestComments",
              "firstComment", "taggedUsers")
 
-# Ventana de los posts destacados en data/redes.json, en dias sobre `fecha`.
-# Se calcula con `ahora` inyectado; el tablero nunca la recalcula.
-VENTANA_DIAS = 7
+# Ventana de los posts destacados en data/redes.json, en horas sobre
+# `publicado`, igual que TikTok. Hasta el 10 de septiembre de 2026 fue de 7
+# dias sobre `fecha`; ese dia el cliente pidio "lo ultimo de las 24 horas".
+# Es la omision: manda `cosecha.ventana_horas` en config/instagram.json. Se
+# calcula con `ahora` inyectado; el tablero nunca la recalcula.
+VENTANA_HORAS = 24
+
+# Lo que cruza del registro del post a data/redes.json ademas de lo comun: la
+# hora exacta, que es sobre lo que se mide la ventana y se ordena el dia.
+CAMPOS_EXTRA = ("publicado",)
 
 # El actor devuelve el tipo en ingles; en data/ los valores van en espanol.
 TIPOS = {"Image": "imagen", "Video": "video", "Sidecar": "carrusel"}
@@ -157,21 +186,49 @@ def _limpiar(comentario, post_url, cuenta):
     }
 
 
+def _publicado(item):
+    """Hora exacta de publicacion en UTC, sin microsegundos, en el mismo
+    formato que `ahora` ("2026-09-01T10:00:00+00:00"). Sin timestamp, None.
+
+    El actor la trae como "2026-09-01T10:00:00.000Z". El replace de la Z es
+    el mismo truco del validador: fromisoformat no la acepta en Python 3.9.
+    Una hora sin zona se toma como UTC en vez de pasarla por astimezone(),
+    que en un datetime ingenuo usa la zona de la maquina y haria que el runner
+    y una laptop en Tijuana escribieran archivos distintos.
+    """
+    crudo = item.get("timestamp")
+    if not isinstance(crudo, str) or not crudo.strip():
+        return None
+    try:
+        dt = datetime.fromisoformat(crudo.strip().replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    else:
+        dt = dt.astimezone(timezone.utc)
+    return dt.replace(microsecond=0).isoformat()
+
+
 def _limpiar_post(item, cuenta):
     """Lista blanca del item de post. Ver el encabezado: no es una resta.
 
     `likesCount` viene en -1 cuando la cuenta oculta los likes; se recorta a
     0. `reproducciones` solo existe en video, y solo si es mayor que 0: un
     cero aqui se leeria como "nadie lo vio" y no como "no es video".
+    `publicado` es la hora exacta y va solo si el actor la trajo; `fecha` es
+    su dia y va siempre, aunque vacia, porque es la llave de la retencion del
+    catalogo (redes.guardar_publicaciones poda lo que no tiene fecha).
     """
     url = (item.get("url") or item.get("postUrl") or "").strip()
     if not url:
         return None
+    publicado = _publicado(item)
     salida = {
         "url": url,
         "cuenta": cuenta["id"],
         "zona": cuenta.get("zona") or "estatal",
-        "fecha": (item.get("timestamp") or "")[:10],
+        "fecha": publicado[:10] if publicado else "",
         "titulo": _titulo(item.get("caption")),
         "tipo": TIPOS.get(item.get("type"), "otro"),
         "likes": max(0, int(item.get("likesCount") or 0)),
@@ -180,6 +237,8 @@ def _limpiar_post(item, cuenta):
     vistas = max(int(item.get("videoViewCount") or 0), int(item.get("videoPlayCount") or 0))
     if vistas > 0:
         salida["reproducciones"] = vistas
+    if publicado:
+        salida["publicado"] = publicado
     return salida
 
 
@@ -360,11 +419,17 @@ def cosechar(cuentas, ahora, tok=None, presupuesto=None, cache="cache/instagram"
 # --------------------------------------------------------------- derivados
 
 def derivar(comentarios, ahora, salud, gasto, temas=None, publicaciones=None,
-            cuentas=None):
-    """data/redes.json: conteos y posts destacados de la semana. Ver
-    pulso/redes.py::derivar; aqui solo se fija la plataforma y la ventana."""
+            cuentas=None, ventana_horas=VENTANA_HORAS):
+    """data/redes.json: conteos y posts destacados de las ultimas 24 horas.
+
+    Ver pulso/redes.py::derivar; aqui solo se fijan la plataforma, la ventana
+    (en horas desde el 10 de septiembre de 2026; `cosecha.ventana_horas` del
+    config manda) y que `publicado` cruza al destacado: sin el, el validador
+    no puede medir la ventana ni el tablero ordenar el dia por hora.
+    """
     return _redes.derivar(comentarios, ahora, salud, gasto, temas, publicaciones,
-                          cuentas, plataforma=PLATAFORMA, ventana_dias=VENTANA_DIAS)
+                          cuentas, plataforma=PLATAFORMA, ventana_horas=ventana_horas,
+                          campos_extra=CAMPOS_EXTRA)
 
 
 def publicar_comentarios(comentarios, destacados, ahora,

@@ -1004,8 +1004,12 @@ RE_CREADOR = re.compile(r"^@[A-Za-z0-9_.]{2,24}$")
 PLATAFORMAS_REDES = {
     "instagram": {
         "prefijo": "https://www.instagram.com/",
-        # Ventana en dias sobre `fecha`: los posts de un medio duran una semana.
-        "ventana": "ventana_dias",
+        # Ventana en horas sobre `publicado` desde el 10 de septiembre de 2026,
+        # cuando el cliente pidio "lo ultimo de las 24 horas". Hasta entonces
+        # fue de dias sobre `fecha`, y un corte con esa forma sigue siendo
+        # valido (aviso): data/ lo escribe el bot y no se edita a mano.
+        "ventana": "ventana_horas",
+        "ventana_legado": "ventana_dias",
         "creador": False,
         "prohibidas": frozenset(),
         # Instagram no publica compartidos ni guardados: su ausencia es "sin dato".
@@ -1016,6 +1020,7 @@ PLATAFORMAS_REDES = {
         "prefijo": "https://www.tiktok.com/",
         # Ventana en horas sobre `publicado`: una busqueda de "ultimas 24 horas".
         "ventana": "ventana_horas",
+        "ventana_legado": None,
         "creador": True,
         "prohibidas": CLAVES_PROHIBIDAS_TIKTOK,
         # TikTok si los publica: un 0 es cero medido, y faltar es error.
@@ -1097,7 +1102,9 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
 
     Un corte anterior al campo sigue siendo valido -- el patron de
     _validar_serie -- pero si el bloque esta, se exige entero: ventana, tope,
-    catalogo de cuentas y cada destacado con sus conteos cuadrados.
+    catalogo de cuentas y cada destacado con sus conteos cuadrados. Un corte
+    con la ventana anterior de la plataforma (`ventana_legado`) se valida con
+    la regla que regia cuando se escribio, y se avisa.
     """
     if "destacados" not in datos:
         avisos.append("redes: corte anterior al campo 'destacados'; el panel de "
@@ -1105,9 +1112,18 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
         return
     et = "redes.destacados"
     esp = PLATAFORMAS_REDES[plataforma]
-    # Exactamente UNA ventana por plataforma. Emitir las dos obligaria a un
+    # Exactamente UNA ventana por archivo. Emitir las dos obligaria a un
     # `ventana_dias: 1` que miente: un video de hace 23 horas es de ayer.
     clave_ventana = esp["ventana"]
+    # Un corte anterior al cambio de ventana se valida con la regla que regia
+    # cuando se escribio, y se avisa. Es el caso del data/redes.json commiteado
+    # antes del 10 de septiembre de 2026: el bot lo regenera; a mano no se toca.
+    legado = esp.get("ventana_legado")
+    if clave_ventana not in datos and legado and legado in datos:
+        avisos.append("redes: corte anterior a '{}' (hasta el 10 de septiembre de 2026 "
+                      "{} midio la ventana en dias); se valida con '{}'".format(
+                          clave_ventana, plataforma, legado))
+        clave_ventana = legado
     otra = "ventana_horas" if clave_ventana == "ventana_dias" else "ventana_dias"
     if otra in datos:
         errores.append("redes: '{}' no aplica a {}; la ventana es '{}'".format(

@@ -111,6 +111,16 @@ counts plus the featured posts (URL, the outlet's caption headline, likes,
 comments, plays), and `pulso/validador.py` still rejects comment text or any
 identity key inside `data/`.
 
+On 10 September 2026 the client asked for "the latest 24 hours" of four
+accounts (`@tjnoticias`, `@yoamotijuana`, `@tijuanainforma.mx`,
+`@el.tijuanense`). Since then the Instagram window is **24 hours on
+`publicado`** (`ventana_horas`, like TikTok) and the 8 September "15 most-liked
+posts of the week" is superseded; `docs/PLAN.md` records it. A `data/redes.json`
+written before that date carries `ventana_dias: 7` and no `publicado`;
+`pulso/validador.py` accepts it with an aviso, not an error, because `data/` is
+bot-written and the cron regenerates it. Do not hand-edit it to silence the
+aviso, and do not add `ventana_dias` back to the pipeline.
+
 Why not put it in `data/`: the git history cannot honour a 30-day retention.
 Why this is still legal-adjacent: a comment is personal data under LFPDPPP and
 CPRA once tied to a person, so commenter identity (`ownerUsername`, ids,
@@ -131,7 +141,8 @@ published** (they chose to post; the URL carries it anyway) and the validator
 requires it to match the URL; **commenter identity is never stored**, as
 before. TikTok does publish shares and saves, so `compartidos` and `guardados`
 are required there and forbidden for Instagram. The window is `ventana_horas`
-on `publicado`, never `ventana_dias`. The comments actor costs ~$5 per 1,000
+on `publicado`, never `ventana_dias` (Instagram measures the same way since
+10 September 2026). The comments actor costs ~$5 per 1,000
 results; `cache/tiktok/vistos.json` is what keeps that to once a day.
 
 ### The five product rules, as code constraints

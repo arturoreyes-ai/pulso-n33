@@ -43,9 +43,10 @@ RETENCION_DIAS = 30
 # cuatro veces al dia por los mismos comentarios.
 DIAS_ENTRE_COSECHAS = 3
 
-# Tope de la lista de posts destacados. La ventana la fija cada plataforma
-# (dias en Instagram, horas en TikTok) y se calcula con `ahora` inyectado; el
-# tablero nunca la recalcula.
+# Tope de la lista de posts destacados. La ventana la fija cada plataforma --
+# desde el 10 de septiembre de 2026 las dos la miden en horas sobre
+# `publicado`; Instagram la midio en dias sobre `fecha` hasta entonces -- y se
+# calcula con `ahora` inyectado; el tablero nunca la recalcula.
 DESTACADOS_MAXIMO = 15
 # El pie de un post puede tener parrafos; se publica su primera linea como
 # titular, recortada. 160 es el largo con que ya se leen los titulares.
@@ -336,7 +337,13 @@ def _orden_destacado(p):
 
 
 def _dentro_por_dias(ahora, ventana_dias):
-    """Predicado de ventana en dias sobre `fecha` (Instagram)."""
+    """Predicado de ventana en dias sobre `fecha`.
+
+    Ya no lo usa ninguna plataforma: Instagram paso a horas el 10 de
+    septiembre de 2026. Se queda porque el contrato de derivar() sigue siendo
+    "exactamente una de las dos ventanas" y porque el validador acepta los
+    cortes anteriores a ese dia con la regla de dias.
+    """
     corte = (datetime.fromisoformat(ahora) - timedelta(days=ventana_dias)).date().isoformat()
     hoy = _hoy(ahora)
 
@@ -348,7 +355,8 @@ def _dentro_por_dias(ahora, ventana_dias):
 
 
 def _dentro_por_horas(ahora, ventana_horas):
-    """Predicado de ventana en horas sobre `publicado` (TikTok).
+    """Predicado de ventana en horas sobre `publicado` (TikTok, e Instagram
+    desde el 10 de septiembre de 2026).
 
     `publicado` es ISO con zona, en el mismo formato que `ahora`, asi que se
     compara como fecha-hora y no como texto.
@@ -375,7 +383,8 @@ def _destacados(publicaciones, comentarios, opinion, temas, cuentas, dentro,
 
     `dentro(p)` decide la ventana (dias o horas, segun la plataforma);
     `campos_extra` son claves que se copian del registro cuando existen
-    (creador, publicado, compartidos, guardados en TikTok).
+    (creador, publicado, compartidos, guardados en TikTok; publicado en
+    Instagram).
     """
     conocidas = {c["id"] for c in cuentas}
     por_post, opinion_por_post = {}, {}

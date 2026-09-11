@@ -511,8 +511,10 @@ export interface DocRedes {
     gastado: number;
     por_concepto: Record<string, number>;
   };
-  /** Ventana de los destacados. Instagram la da en días (sobre `fecha`);
-   *  TikTok en horas (sobre `publicado`). Exactamente una de las dos. La
+  /** Ventana de los destacados, en horas sobre `publicado` en las dos
+   *  plataformas desde el 10 de septiembre de 2026. Exactamente una de las dos
+   *  claves por archivo: `ventana_dias` (sobre `fecha`) solo llega en un corte
+   *  de Instagram anterior a esa fecha, y el panel lo describe como días. La
    *  calcula el pipeline con su propio reloj; el cliente nunca la recalcula.
    *  Ausentes en cortes viejos. */
   ventana_dias?: number;
@@ -555,7 +557,9 @@ export interface Destacado {
    *  que cruza a data/, por decisión del cliente (8 sep 2026). La URL ya lo
    *  trae. Quien comenta nunca. */
   creador?: string;
-  /** Solo TikTok: fecha-hora exacta de publicación (ISO, UTC). `fecha` es su día. */
+  /** Fecha-hora exacta de publicación (ISO, UTC); `fecha` es su día. TikTok
+   *  siempre; Instagram desde el corte del 10 de septiembre de 2026 (un corte
+   *  anterior no la trae y la fila sale sin hora). */
   publicado?: string;
   /** Solo TikTok, que sí los publica: un 0 es cero medido. Instagram no los
    *  expone y su ausencia es «sin dato». */

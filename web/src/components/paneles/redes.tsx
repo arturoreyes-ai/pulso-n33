@@ -37,8 +37,10 @@ import { Esqueleto, Hueco } from "@/components/ui/primitivas";
  *
  * Orden de lectura: el dia manda. `destacados` llega ordenado por likes,
  * porque asi se ELIGEN; aqui se agrupan por fecha, del mas reciente al mas
- * antiguo, y dentro del dia si van por likes. Es lo que pidio el cliente para
- * las dos plataformas.
+ * antiguo, y dentro del dia por hora exacta cuando la fila la trae
+ * (`publicado`: TikTok siempre, Instagram desde el corte del 10 de septiembre
+ * de 2026) y por likes cuando no. Es lo que pidio el cliente para las dos
+ * plataformas.
  *
  * Nada aqui calcula un porcentaje. Con ~30 comentarios por post uno solo
  * mueve el numero, y el validador del pipeline rechaza porcentajes en
@@ -76,8 +78,6 @@ interface Plataforma {
    *  TikTok: cualquier busqueda activa, porque la zona la da el video. */
   hayFuente: (cuentas: RedesCuenta[], zona: ZonaRuta | null) => boolean;
   ventana: (data: DocRedes) => string;
-  /** Hora exacta por fila: solo tiene sentido en una ventana de horas. */
-  conHora: boolean;
   cabeza: (v: Vista, data: DocRedes) => string;
   sinFuente: (nombre: string) => string;
   sinFilas: (nombre: string, ventana: string) => string;
@@ -101,8 +101,12 @@ const INSTAGRAM: Plataforma = {
   etiquetaZona: nombreZona,
   hayFuente: (cuentas, zona) =>
     zona === null ? cuentas.some((c) => c.activa) : cuentas.some((c) => c.zona === zona && c.activa),
-  ventana: (data) => `los últimos ${data.ventana_dias ?? 7} días`,
-  conHora: false,
+  // Horas desde el corte del 10 de septiembre de 2026. Un corte anterior trae
+  // `ventana_dias` y se describe como lo que es, no como 24 horas.
+  ventana: (data) =>
+    data.ventana_horas !== undefined
+      ? `las últimas ${data.ventana_horas} horas`
+      : `los últimos ${data.ventana_dias ?? 7} días`,
   cabeza: (v, data) =>
     v.esRegion
       ? `Los ${numero(v.total)} posts con más likes de ${INSTAGRAM.ventana(data)} en las cuentas de noticias de la región, del más reciente al más antiguo.`
@@ -128,7 +132,6 @@ const TIKTOK: Plataforma = {
   // una zona sin filas es "ningun video la nombro", no "sin cuenta".
   hayFuente: (cuentas) => cuentas.some((c) => c.activa),
   ventana: (data) => `las últimas ${data.ventana_horas ?? 24} horas`,
-  conHora: true,
   cabeza: (v, data) =>
     v.esRegion
       ? `Los ${numero(v.total)} videos con más likes de ${TIKTOK.ventana(data)} que TikTok devuelve para «tijuana noticias», del más reciente al más antiguo.`
@@ -158,13 +161,15 @@ interface Vista {
   nombres: Map<string, string>;
 }
 
-/** Del mas reciente al mas antiguo; a igual dia, mas likes primero. Con hora
- *  exacta (TikTok) el orden dentro del dia tambien es por hora. */
-function porDia(posts: Destacado[], conHora: boolean): Dia[] {
+/** Del mas reciente al mas antiguo; dentro del dia, por hora exacta cuando la
+ *  fila trae `publicado` y por likes cuando no. Un corte de Instagram anterior
+ *  al 10 de septiembre de 2026 no la trae: ahi las dos cadenas vacias empatan
+ *  y decide el like. */
+function porDia(posts: Destacado[]): Dia[] {
   const orden = [...posts].sort(
     (a, b) =>
       b.fecha.localeCompare(a.fecha) ||
-      (conHora ? (b.publicado ?? "").localeCompare(a.publicado ?? "") : 0) ||
+      (b.publicado ?? "").localeCompare(a.publicado ?? "") ||
       b.likes - a.likes ||
       a.url.localeCompare(b.url),
   );
@@ -191,7 +196,7 @@ function vistaDeZona(data: DocRedes, zona: ZonaRuta | null, pl: Plataforma): Vis
   return {
     nombre: zona === null ? "la región" : NOMBRE_CORTO[zona],
     esRegion: zona === null,
-    dias: porDia(elegidos, pl.conHora),
+    dias: porDia(elegidos),
     total: elegidos.length,
     hayFuente: pl.hayFuente(cuentas, zona),
     nombres,
@@ -308,7 +313,7 @@ function Post({
     d.guardados === undefined ? null : `${numero(d.guardados)} guardados`,
     d.reproducciones === undefined ? null : `${numero(d.reproducciones)} reproducciones`,
   ].filter((x): x is string => x !== null);
-  const cuando = pl.conHora && d.publicado !== undefined ? hora(d.publicado) : null;
+  const cuando = d.publicado === undefined ? null : hora(d.publicado);
 
   return (
     <li className="py-5">

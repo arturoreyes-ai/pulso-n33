@@ -20,7 +20,8 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  * Las tres NO son la misma fuente y la pagina no finge que lo sean:
  *
  *   Instagram — cuentas de medios verificadas una por una. La zona es la SEDE
- *               de la cuenta. Publica el texto de los comentarios.
+ *               de la cuenta. Publica el texto de los comentarios. Ventana de
+ *               24 horas desde el 10 de septiembre de 2026 (antes, la semana).
  *   TikTok    — una busqueda, «tijuana noticias». La zona sale del PIE del
  *               video, porque una consulta no tiene lugar. Publica el @ del
  *               creador; es la unica que trae compartidos y guardados.
@@ -55,8 +56,8 @@ export function PaginaRedes({ zona }: { zona: ZonaRuta | null }) {
               <>
                 <Intro>
                   {nombre === null
-                    ? "Los posts con más likes de la semana en las cuentas de noticias de la región, y los comentarios más votados en cada uno. La zona de un post es la sede de la cuenta que lo publicó, no el lugar del que habla."
-                    : `Los posts con más likes de la semana en cuentas de noticias con sede en ${nombre}, y los comentarios más votados en cada uno.`}
+                    ? "Los posts con más likes de las últimas 24 horas en las cuentas de noticias de la región, y los comentarios más votados en cada uno. La zona de un post es la sede de la cuenta que lo publicó, no el lugar del que habla."
+                    : `Los posts con más likes de las últimas 24 horas en cuentas de noticias con sede en ${nombre}, y los comentarios más votados en cada uno.`}
                 </Intro>
                 <PanelRedes zona={zona} lectura={<LecturaInstagram />} />
               </>
@@ -103,7 +104,11 @@ function LecturaInstagram() {
         Cuentas públicas de Instagram de medios verificados uno por uno, leídas
         sin iniciar sesión. La zona de un post es la sede de la cuenta que lo
         publicó, no el lugar del que habla. El título es la primera línea del
-        pie que escribió el medio; el resto del pie no se publica.
+        pie que escribió el medio; el resto del pie no se publica. La ventana
+        es de 24 horas sobre la hora exacta de publicación, que se muestra en
+        cada fila. Las cifras de un post se refrescan en cada corrida; sus
+        comentarios se leen una sola vez, así que son la foto de la primera
+        lectura.
       </p>
       <p>
         Los comentarios se muestran tal cual, sin usuario ni foto: la identidad

@@ -298,7 +298,8 @@ def cmd_redes(args):
     temas_doc = _leer(args.temas) if os.path.exists(args.temas) else {}
     vigentes = leer_cache(args.cache)
     panel = derivar(vigentes, ahora, salud, gasto, temas_doc.get("temas") or [],
-                    leer_publicaciones(args.cache), cuentas)
+                    leer_publicaciones(args.cache), cuentas,
+                    ventana_horas=cosecha.get("ventana_horas", 24))
     _escribir(os.path.join(args.salida, "redes.json"), panel)
 
     # El texto de los comentarios va a efimero/, NUNCA a data/: la carpeta
@@ -313,8 +314,8 @@ def cmd_redes(args):
 
     print("comentarios nuevos: {} · vigentes en cache: {} · posts: {}".format(
         len(nuevos), panel["comentarios_vigentes"], panel["posts_vigentes"]))
-    print("destacados: {} en {} días · comentarios publicados: {} ({}, fuera de git)".format(
-        len(panel["destacados"]), panel["ventana_dias"], publicados,
+    print("destacados: {} en las últimas {} horas · comentarios publicados: {} ({}, fuera de git)".format(
+        len(panel["destacados"]), panel["ventana_horas"], publicados,
         args.efimero if not args.sin_texto else "--sin-texto"))
     print("gasto Apify: {} de {} resultados".format(gasto["gastado"], gasto["resultados"]))
     sen = panel["sentimiento"]

@@ -335,11 +335,14 @@ class TestValidadorTikTok(unittest.TestCase):
         d = dict(TD.CON); d["destacados"] = [dict(TD.DESTACADO, creador="@x")]
         self.assertTrue(any("'creador' no se publica" in x for x in validar_redes(d)[0]))
 
-    def test_ventana_dias_no_aplica_a_tiktok_ni_horas_a_instagram(self):
+    def test_ventana_dias_no_aplica_a_tiktok_y_las_dos_juntas_son_error(self):
         e, _ = validar_redes(dict(self.BASE, ventana_dias=7), plataforma="tiktok")
         self.assertTrue(any("no aplica" in x for x in e))
+        # Instagram mide en horas desde el 10 de septiembre de 2026; su
+        # `ventana_dias` solo se acepta SOLA, como corte anterior al cambio, y
+        # nunca junto a la otra.
         from tests.test_instagram import TestValidadorDestacados as TD
-        e, _ = validar_redes(dict(TD.CON, ventana_horas=24))
+        e, _ = validar_redes(dict(TD.CON, ventana_dias=7))
         self.assertTrue(any("no aplica" in x for x in e))
 
     def test_publicado_fuera_de_la_ventana_o_futuro_es_error(self):

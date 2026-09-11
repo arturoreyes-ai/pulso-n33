@@ -772,14 +772,19 @@ comentarios y el deduplicado del caché lo esconde: **los conteos salen bien y
 la factura sale mal.** Ese archivo tiene que sobrevivir entre corridas
 (`actions/cache`), igual que el caché de YouTube y por una razón distinta.
 
-### `destacados`, `cuentas`, `ventana_dias`, `destacados_maximo`
+### `destacados`, `cuentas`, `ventana_horas`, `destacados_maximo`
 
-Desde el 8 de septiembre de 2026 el archivo lleva también los posts de la
-última semana con más likes. Un corte anterior a estos campos sigue siendo
-válido: su ausencia es aviso, no error.
+Desde el 8 de septiembre de 2026 el archivo lleva también los posts con más
+likes de la ventana. Desde el **10 de septiembre de 2026**, a petición del
+cliente, esa ventana es de **24 horas sobre la hora exacta de publicación**
+(`ventana_horas` y `publicado`, igual que TikTok); antes fue de 7 días sobre
+`fecha` (`ventana_dias: 7`, sin `publicado`). Un corte con la forma vieja —el
+commiteado el 8 de septiembre, que el bot regenerará— sigue siendo válido con
+un aviso, y un corte anterior a todos estos campos también: su ausencia es
+aviso, no error.
 
 ```json
-"ventana_dias": 7,
+"ventana_horas": 24,
 "destacados_maximo": 15,
 "cuentas": [
  {"cuenta": "canal66_ig", "nombre": "Mexicali — sin cuenta encontrada", "zona": "Mexicali", "activa": false},
@@ -791,6 +796,7 @@ válido: su ausencia es aviso, no error.
   "cuenta": "tjnoticias_ig",
   "zona": "Tijuana",
   "fecha": "2026-09-06",
+  "publicado": "2026-09-06T17:40:12+00:00",
   "titulo": "Cierran la garita de San Ysidro por obras",
   "tipo": "video",
   "likes": 1834,
@@ -816,7 +822,16 @@ válido: su ausencia es aviso, no error.
   --quiet`) y que ninguna zona pase de `destacados_maximo`; el largo total sí
   puede superarlo.
 - **La ventana se mide contra `generado`**, nunca contra el reloj de quien
-  valida. Una `fecha` posterior a `generado` es reloj roto y es error.
+  valida, y sobre `publicado` (fecha-hora ISO en UTC, mismo formato que
+  `generado`); `fecha` es su día, sirve para agrupar, y el validador exige que
+  coincidan. Un `publicado` posterior a `generado` es reloj roto y es error.
+  Exactamente una clave de ventana por archivo: las dos juntas son error.
+- **Los conteos de comentarios de un post son la foto de su primera cosecha.**
+  Con 24 horas de ventana, `dias_entre_cosechas` solo deduplica las corridas
+  del día y un post sale de la ventana antes de volverse a cosechar; likes,
+  comentarios y reproducciones sí se refrescan en cada corrida. Y cada corrida
+  ve los últimos `posts_por_cuenta` (5) de cada cuenta: una que publica más de
+  cinco veces entre corridas pierde posts.
 - **`comentarios` es el total que reporta Instagram; `cosechados` lo que hay en
   caché** (a lo sumo `comentarios_por_post`). Se publican los dos.
 - **`reproducciones` solo existe en video y solo si es mayor que 0.** Un cero
@@ -893,10 +908,12 @@ cambia, y por qué:
   Hermosillo se descarta y se cuenta en `salud[].fuera`; uno que no nombra
   lugar queda **`nacional`**, el veredicto literal del gacetero, y solo se ve
   en la vista de región. Los comentarios heredan la zona de su video.
-- **`ventana_horas: 24` en vez de `ventana_dias`**, medida sobre `publicado`
-  (fecha-hora ISO en UTC, mismo formato que `generado`); `fecha` es su día y
-  solo sirve para agrupar. Exactamente una de las dos claves por plataforma:
-  emitir las dos obligaría a un `ventana_dias: 1` que miente.
+- **`ventana_horas: 24`**, medida sobre `publicado` (fecha-hora ISO en UTC,
+  mismo formato que `generado`); `fecha` es su día y solo sirve para agrupar.
+  Desde el 10 de septiembre de 2026 Instagram mide igual; `ventana_dias` solo
+  sobrevive en un corte de Instagram anterior a esa fecha. Exactamente una de
+  las dos claves por archivo: emitir las dos obligaría a un `ventana_dias: 1`
+  que miente.
 - **`creador`**: el @handle de quien publicó el video, en minúsculas. Es la
   única identidad que cruza a `data/`, por decisión del cliente del 8 de
   septiembre de 2026 (la URL ya lo trae), y el validador exige que sea el de la
@@ -977,14 +994,21 @@ su propio `Presupuesto`. Lo valida `validar_tiktok_config`.
 ### `config/instagram.json`
 
 Una cuenta se cosecha solo si tiene `activo` **y** `verificado` en `true`.
-Las diez activas se sondearon el 8 de septiembre de 2026 con `--sondear` y cada
-`razon` cita los números del sondeo; `canal66_ig` (Mexicali) y `sanquintin_ig`
+Las trece activas se sondearon con `--sondear` —diez el 8 de septiembre de
+2026 y tres el 10, pedidas por el cliente ese día— y cada `razon` cita los
+números del sondeo; `canal66_ig` (Mexicali) y `sanquintin_ig`
 son huecos registrados a propósito, sin handle. Los handles derivados del
 nombre del medio que fallaron están en `senuelos`. Es la misma trampa que
 documenta la sección `senuelos` de `config/canales.json` —el handle obvio de
 Uniradio es un canal muerto desde 2016— con un agravante: un handle
 equivocado en Instagram no da error, da una cuenta ajena o vacía, y las dos se
 cobran igual.
+
+`cosecha.ventana_horas` (24) es la ventana de los destacados, en horas sobre la
+hora exacta de publicación, desde el 10 de septiembre de 2026;
+`posts_por_cuenta`, `comentarios_por_post` y `dias_entre_cosechas` gobiernan
+las dos pasadas pagadas, y la `nota` del bloque explica por qué con 24 horas
+los comentarios de un post son la foto de su primera cosecha.
 
 No hay hashtags, y no es un olvido. Un hashtag no lleva `zona`, por la misma
 razón que no la lleva una búsqueda de Google Noticias: se la acreditaría a

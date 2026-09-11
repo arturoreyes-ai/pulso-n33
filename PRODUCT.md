@@ -55,7 +55,7 @@ texto completo, y aquí el agregador competiría con ellos.
 | San Diego, valor catastral | funcionando | SANDAG, mediana por ZIP |
 | Conversación (YouTube) | **necesita llave** | canales verificados + hasta 3 búsquedas temáticas por corrida; retención de 30 días |
 | Sentimiento de comentarios | funcionando | modelo local (pysentimiento), publicado como conteos por zona y tema; en YouTube nunca el texto |
-| Redes (Instagram) | **necesita token** | 10 cuentas de medios verificadas, sin sesión; los 15 posts con más likes de la semana y sus comentarios más votados. El texto va fuera de git (`efimero/`), la identidad no se ingiere |
+| Redes (Instagram) | **necesita token** | 13 cuentas verificadas una por una (once de noticias y dos revistas de ciudad), sin sesión; los 15 posts con más likes de las últimas 24 horas, con hora exacta, y sus comentarios más votados. El texto va fuera de git (`efimero/`), la identidad no se ingiere |
 | Redes (TikTok) | **necesita token** | búsqueda «tijuana noticias», relevancia, últimas 24 h, sin sesión; la zona sale del pie del video, se muestra el @ del creador y nunca quien comenta. Mismo canal fuera de git para el texto |
 | Tono de titulares | funcionando | mismo modelo, `--metodo modelo`. Tono de la frase, no postura hacia una persona |
 | Tablero por zona | funcionando | `web/`, Next.js: una página por zona con resumen, indicadores, temas, conversación y muro |

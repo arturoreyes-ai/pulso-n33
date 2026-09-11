@@ -152,7 +152,8 @@ jobs:
           restore-keys: instagram-
 
       # Solo cosecha las cuentas con "verificado": true en
-      # config/instagram.json (diez, sondeadas el 8 de septiembre de 2026).
+      # config/instagram.json (diez sondeadas el 8 de septiembre de 2026 y
+      # tres el 10, pedidas por el cliente; ventana de 24 horas desde ese dia).
       # Ver el aviso en ese archivo: un handle derivado del nombre del medio
       # da una cuenta ajena o vacia, y las dos se cobran igual.
       #

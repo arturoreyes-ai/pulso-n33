@@ -363,6 +363,23 @@ class TestCatalogoCuentas(unittest.TestCase):
                 self.assertIn(c.get("idioma"), ("es", "en"))
                 self.assertTrue((c.get("razon") or "").strip())
 
+    def test_la_ventana_de_cosecha_es_de_horas(self):
+        # No hay validar_instagram_config: esta prueba es lo que fija que la
+        # ventana del config sea de horas (desde el 10 de septiembre de 2026)
+        # y quepa en el tope que el validador exige a la salida.
+        vh = self.cfg["cosecha"].get("ventana_horas")
+        self.assertIsInstance(vh, int)
+        self.assertNotIsInstance(vh, bool)
+        self.assertTrue(1 <= vh <= 720)
+
+    def test_las_cuentas_pedidas_el_10_de_septiembre_estan(self):
+        # Las cuatro que pidio el cliente. Estar no es estar encendida: una
+        # que no resistio el sondeo se queda apagada, con la razon escrita.
+        handles = {c.get("handle") for c in self.cfg["cuentas"]}
+        for h in ("@tjnoticias", "@yoamotijuana", "@tijuanainforma.mx", "@el.tijuanense"):
+            with self.subTest(handle=h):
+                self.assertIn(h, handles)
+
     def test_no_hay_hashtags(self):
         # Un hashtag no lleva zona; se la acreditaria a todo comentario que
         # no nombre lugar. Ver senuelos en el archivo.
@@ -381,15 +398,17 @@ POSTS_RICOS = [
     {"url": "https://www.instagram.com/p/AAA/", "type": "Sidecar",
      "caption": "Cierran la garita de San Ysidro por obras\n\nEl cruce estara "
                 "cerrado toda la noche del domingo, informo CBP. #tijuana",
-     "timestamp": "2026-09-01T10:00:00.000Z", "likesCount": 120, "commentsCount": 40,
+     "timestamp": "2026-09-03T10:00:00.000Z", "likesCount": 120, "commentsCount": 40,
      "ownerUsername": "zeta.tijuana", "ownerFullName": "Semanario ZETA", "ownerId": "1",
      "latestComments": [{"text": "pesimo servicio", "ownerUsername": "vecino_tj"}],
      "firstComment": "primer comentario"},
     {"url": "https://www.instagram.com/p/BBB/", "type": "Video",
      "caption": "x" * 200,
-     "timestamp": "2026-09-02T10:00:00.000Z", "likesCount": -1, "commentsCount": 3,
+     "timestamp": "2026-09-02T20:00:00.000Z", "likesCount": -1, "commentsCount": 3,
      "videoViewCount": 900, "videoPlayCount": 1500},
     # Diez dias antes de AHORA: dentro de la retencion, fuera de la ventana.
+    # (AAA es de hoy y BBB de ayer a las 20:00Z: los dos caben en las 24 h
+    # que terminan a las 18:00Z de AHORA, y caen en dias distintos.)
     {"url": "https://www.instagram.com/p/VIEJO/", "type": "Image",
      "caption": "Nota vieja", "timestamp": "2026-08-24T10:00:00.000Z",
      "likesCount": 9999, "commentsCount": 1},
@@ -411,12 +430,39 @@ class TestPublicaciones(BaseCache):
         # No basta con restar IDENTIDAD: el item trae comentarios ajenos con
         # autor en latestComments y firstComment.
         p = instagram._limpiar_post(POSTS_RICOS[0], CUENTA)
-        self.assertEqual(sorted(p), ["comentarios", "cuenta", "fecha", "likes", "tipo",
-                                     "titulo", "url", "zona"])
+        self.assertEqual(sorted(p), ["comentarios", "cuenta", "fecha", "likes", "publicado",
+                                     "tipo", "titulo", "url", "zona"])
         crudo = json.dumps(p)
         for prohibido in ("vecino_tj", "pesimo servicio", "primer comentario",
                           "zeta.tijuana", "Semanario ZETA"):
             self.assertNotIn(prohibido, crudo)
+
+    def test_publicado_va_en_el_formato_de_ahora_y_fecha_es_su_dia(self):
+        # El actor trae "2026-09-03T10:00:00.000Z"; a data/ va como `ahora`:
+        # UTC, sin milisegundos, con zona. Sin eso la ventana de horas se
+        # compararia entre formatos distintos y el validador no cuadraria
+        # `fecha` con `publicado`.
+        p = instagram._limpiar_post(POSTS_RICOS[0], CUENTA)
+        self.assertEqual(p["publicado"], "2026-09-03T10:00:00+00:00")
+        self.assertEqual(p["fecha"], "2026-09-03")
+
+    def test_una_hora_con_otra_zona_se_lleva_a_utc(self):
+        p = instagram._limpiar_post(
+            dict(POSTS_RICOS[0], timestamp="2026-09-03T03:00:00-07:00"), CUENTA)
+        self.assertEqual(p["publicado"], "2026-09-03T10:00:00+00:00")
+        self.assertEqual(p["fecha"], "2026-09-03")
+
+    def test_sin_timestamp_no_hay_publicado_y_el_catalogo_lo_poda(self):
+        # Sin hora no hay forma honesta de meter un post en una ventana de
+        # horas, y sin fecha el catalogo no lo conserva.
+        for crudo in ({"url": "https://www.instagram.com/p/X/"},
+                      {"url": "https://www.instagram.com/p/X/", "timestamp": "ayer"}):
+            with self.subTest(crudo=crudo):
+                p = instagram._limpiar_post(crudo, CUENTA)
+                self.assertNotIn("publicado", p)
+                self.assertEqual(p["fecha"], "")
+                self.assertEqual(
+                    instagram.guardar_publicaciones({p["url"]: p}, AHORA, self.cache), {})
 
     def test_el_titulo_es_la_primera_linea_del_pie(self):
         p = instagram._limpiar_post(POSTS_RICOS[0], CUENTA)
@@ -492,6 +538,48 @@ class TestDestacados(BaseCache):
         urls = [d["url"] for d in self._panel(self._pubs())["destacados"]]
         self.assertEqual(urls, ["https://www.instagram.com/p/AAA/",
                                 "https://www.instagram.com/p/BBB/"])
+
+    def test_la_ventana_es_de_24_horas_sobre_la_hora_exacta(self):
+        # AHORA es 18:00Z del dia 3: entra lo publicado desde las 18:00Z del 2.
+        # Un post de las 17:00Z del 2 es de hace 25 horas y queda fuera aunque
+        # tenga mas likes que todos.
+        posts = [dict(POSTS_RICOS[0], url="https://www.instagram.com/p/DENTRO/",
+                      timestamp="2026-09-02T19:00:00.000Z"),
+                 dict(POSTS_RICOS[0], url="https://www.instagram.com/p/FUERA/",
+                      timestamp="2026-09-02T17:00:00.000Z", likesCount=9999)]
+        p = self._panel(self._pubs(posts=posts))
+        self.assertEqual([d["url"] for d in p["destacados"]],
+                         ["https://www.instagram.com/p/DENTRO/"])
+        self.assertEqual(p["ventana_horas"], 24)
+        self.assertNotIn("ventana_dias", p)
+
+    def test_publicado_cruza_al_destacado_y_fecha_es_su_dia(self):
+        d = self._panel(self._pubs())["destacados"]
+        self.assertEqual([(x["publicado"], x["fecha"]) for x in d],
+                         [("2026-09-03T10:00:00+00:00", "2026-09-03"),
+                          ("2026-09-02T20:00:00+00:00", "2026-09-02")])
+
+    def test_un_registro_viejo_del_cache_sin_publicado_queda_fuera(self):
+        # El cache que restaura el cron trae registros anteriores al 10 de
+        # septiembre de 2026, con `fecha` y sin `publicado`. Sin hora no hay
+        # forma honesta de meterlos en una ventana de horas: fuera, aunque la
+        # fecha sea la de hoy y los likes muchos.
+        viejo = {"url": "https://www.instagram.com/p/SINHORA/", "cuenta": "zeta_ig",
+                 "zona": "Tijuana", "fecha": "2026-09-03", "titulo": "Viejo",
+                 "tipo": "imagen", "likes": 9999, "comentarios": 1}
+        pubs = {**self._pubs(), viejo["url"]: viejo}
+        self.assertNotIn(viejo["url"],
+                         [d["url"] for d in self._panel(pubs)["destacados"]])
+
+    def test_la_ventana_se_puede_acotar(self):
+        # config/instagram.json manda: con 1 hora solo entra lo de la ultima.
+        posts = [dict(POSTS_RICOS[0], url="https://www.instagram.com/p/RECIEN/",
+                      timestamp="2026-09-03T17:30:00.000Z")] + POSTS_RICOS
+        p = instagram.derivar([], AHORA, [], {}, None, self._pubs(posts=posts), [CUENTA],
+                              ventana_horas=1)
+        self.assertEqual([d["url"] for d in p["destacados"]],
+                         ["https://www.instagram.com/p/RECIEN/"])
+        self.assertEqual(p["ventana_horas"], 1)
 
     def test_una_fecha_posterior_a_ahora_es_reloj_roto_y_queda_fuera(self):
         pubs = self._pubs(posts=[dict(POSTS_RICOS[0], timestamp="2026-09-04T00:00:00Z")])
@@ -658,17 +746,26 @@ class TestComentariosPublicados(BaseCache):
 class TestValidadorDestacados(unittest.TestCase):
     DESTACADO = {
         "url": "https://www.instagram.com/p/AAA/", "cuenta": "tjnoticias_ig",
-        "zona": "Tijuana", "fecha": "2026-09-01", "titulo": "Titular", "tipo": "video",
+        "zona": "Tijuana", "fecha": "2026-09-03", "publicado": "2026-09-03T10:00:00+00:00",
+        "titulo": "Titular", "tipo": "video",
         "likes": 10, "comentarios": 5, "reproducciones": 100, "cosechados": 3,
         "opinion": 2,
         "sentimiento": {"positivo": 1, "negativo": 1, "neutral": 0,
                         "sin_clasificar": 0, "sin_modelo_idioma": 0},
         "temas": [{"tema": "agua", "comentarios": 2}],
     }
-    CON = dict(TestValidadorRedes.BASE, ventana_dias=7, destacados_maximo=15,
+    CON = dict(TestValidadorRedes.BASE, ventana_horas=24, destacados_maximo=15,
                cuentas=[{"cuenta": "tjnoticias_ig", "nombre": "TjNoticias",
                          "zona": "Tijuana", "activa": True}],
                destacados=[DESTACADO])
+    # La forma anterior al 10 de septiembre de 2026: dias sobre `fecha` y sin
+    # hora. Es la del data/redes.json commiteado el 8 de septiembre, que el
+    # validador sigue aceptando (aviso) hasta que el bot lo regenere.
+    DESTACADO_LEGADO = {k: v for k, v in DESTACADO.items() if k != "publicado"}
+    DESTACADO_LEGADO["fecha"] = "2026-09-01"
+    CON_LEGADO = {k: v for k, v in CON.items() if k != "ventana_horas"}
+    CON_LEGADO["ventana_dias"] = 7
+    CON_LEGADO["destacados"] = [DESTACADO_LEGADO]
 
     def _con(self, **cambios):
         d = dict(self.CON)
@@ -688,13 +785,45 @@ class TestValidadorDestacados(unittest.TestCase):
         e, _ = validar_redes(self._con(cuenta="otra_ig"))
         self.assertTrue(any("no esta en 'cuentas'" in x for x in e))
 
-    def test_una_fecha_posterior_a_generado_es_error(self):
-        e, _ = validar_redes(self._con(fecha="2026-09-04"))
+    def test_un_publicado_posterior_a_generado_es_error(self):
+        e, _ = validar_redes(self._con(publicado="2026-09-03T19:00:00+00:00"))
         self.assertTrue(any("reloj roto" in x for x in e))
 
-    def test_una_fecha_fuera_de_la_ventana_es_error(self):
-        e, _ = validar_redes(self._con(fecha="2026-08-20"))
-        self.assertTrue(any("fuera de la ventana" in x for x in e))
+    def test_un_publicado_fuera_de_la_ventana_es_error(self):
+        e, _ = validar_redes(self._con(publicado="2026-09-02T17:00:00+00:00",
+                                       fecha="2026-09-02"))
+        self.assertTrue(any("fuera de la ventana de 24 horas" in x for x in e))
+
+    def test_sin_publicado_es_error(self):
+        # Desde el 10 de septiembre de 2026 la ventana es de horas: sin hora
+        # exacta no hay forma de saber si el post esta dentro.
+        d = self._con()
+        del d["destacados"][0]["publicado"]
+        e, _ = validar_redes(d)
+        self.assertTrue(any("'publicado' debe ser fecha-hora ISO" in x for x in e))
+
+    def test_fecha_distinta_del_dia_de_publicado_es_error(self):
+        e, _ = validar_redes(self._con(fecha="2026-09-02"))
+        self.assertTrue(any("no es el dia de 'publicado'" in x for x in e))
+
+    def test_un_corte_en_dias_es_aviso_no_error(self):
+        # El data/redes.json commiteado el 8 de septiembre de 2026 tiene esta
+        # forma y lo regenera el bot; a mano no se toca. Mientras, valida.
+        e, a = validar_redes(dict(self.CON_LEGADO))
+        self.assertEqual(e, [])
+        self.assertTrue(any("corte anterior a 'ventana_horas'" in x for x in a))
+
+    def test_el_corte_en_dias_conserva_sus_reglas(self):
+        d = dict(self.CON_LEGADO)
+        d["destacados"] = [dict(self.DESTACADO_LEGADO, fecha="2026-08-20")]
+        self.assertTrue(any("fuera de la ventana de 7 dias" in x for x in validar_redes(d)[0]))
+        d = dict(self.CON_LEGADO)
+        d["destacados"] = [dict(self.DESTACADO_LEGADO, fecha="2026-09-04")]
+        self.assertTrue(any("reloj roto" in x for x in validar_redes(d)[0]))
+
+    def test_las_dos_ventanas_juntas_son_error(self):
+        e, _ = validar_redes(dict(self.CON, ventana_dias=7))
+        self.assertTrue(any("no aplica" in x for x in e))
 
     def test_un_titulo_largo_es_error(self):
         e, _ = validar_redes(self._con(titulo="x" * 161))

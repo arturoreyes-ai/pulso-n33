@@ -164,6 +164,96 @@ implementacion se anotan arriba, no editando el texto de abajo. -->
 
 ---
 
+> ### Nota de implementación — Instagram: las últimas 24 horas
+>
+> **El cliente pidió el 10 de septiembre de 2026 ver «lo último de las 24
+> horas» de cuatro cuentas de Instagram:** `@tjnoticias`, `@yoamotijuana`,
+> `@tijuanainforma.mx` y `@el.tijuanense`. Solo la primera estaba en
+> `config/instagram.json`; las otras tres no aparecían en ningún archivo del
+> repositorio y nunca se habían sondeado.
+>
+> **Cambia la ventana del panel, y con eso se revierte parte de la decisión
+> del 8 de septiembre.** Aquella tarde la dirección pidió «los 15 posts con
+> más likes de la semana»; desde el **10 de septiembre de 2026** el panel de
+> Instagram muestra los posts con más likes de las **últimas 24 horas**,
+> medidas sobre la hora exacta de publicación (`publicado`) igual que TikTok,
+> del más reciente al más antiguo y con la hora en cada fila. Es una decisión
+> del cliente y queda aquí para que nadie la vuelva a discutir desde cero. Lo
+> que NO cambia: el texto de los comentarios más votados se sigue publicando
+> (fuera de git, en `efimero/`), la identidad de quien comenta sigue sin
+> ingerirse, y compartidos y guardados siguen siendo «sin dato».
+>
+> **Las tres cuentas nuevas pasaron por `--sondear` antes de encenderse,**
+> como exige el propio archivo, y las tres resistieron: `@yoamotijuana`
+> (572,558 seguidores, 23,999 posts) es una revista de ciudad y no un medio de
+> noticias, la misma salvedad escrita de `tjpublica_ig`; `@el.tijuanense`
+> (115,257 seguidores, 12,597 posts) y `@tijuanainforma.mx` (45,224
+> seguidores, 1,145 posts) son medios digitales tijuanenses nativos de redes.
+> Ninguna tiene equivalente en `config/medios.json`. Con ellas el catálogo pasa
+> de diez a trece cuentas activas, y el tope de Apify sube de 2,000 a 2,600
+> resultados por comando para que el reparto por cuenta no recorte la pasada
+> de comentarios en silencio.
+>
+> **Un corte anterior sigue siendo válido.** `data/redes.json` lo escribe el
+> bot y no se edita a mano; el commiteado el 8 de septiembre trae
+> `ventana_dias: 7` y filas sin `publicado`, y el validador lo acepta con un
+> aviso hasta que el cron lo regenere. El cron solo lo hará con
+> `APIFY_HABILITADO` encendida, que a la fecha de esta nota sigue apagada.
+>
+> **Dos límites del dato, escritos antes de que sorprendan.** Cada corrida ve
+> los últimos cinco posts de cada cuenta, cuatro veces al día: «los de más
+> likes de 24 horas» son los de más likes entre esos, y una cuenta que publica
+> más de cinco veces entre corridas pierde posts (subir el número encarece las
+> dos pasadas de Apify, no una). Y con una ventana de 24 horas los comentarios
+> de un post se leen una sola vez —`dias_entre_cosechas` solo deduplica las
+> corridas del día—, así que sus conteos y su texto son la foto de la primera
+> lectura, mientras likes, comentarios y reproducciones se refrescan en cada
+> corrida.
+
+---
+
+> ### Nota de implementación — Actualidad de México e Internacional en el muro
+>
+> **El cliente pidió el 11 de septiembre de 2026 un filtro de noticias de
+> México y de noticias internacionales que muestre «lo que está sonando en ese
+> momento», con una barra para buscar encima, reutilizando la vía de Google
+> Noticias que ya existía.** Esta nota documenta también la búsqueda en vivo,
+> que se publicó el 8 de septiembre sin nota propia.
+>
+> **Lo que ya había.** Desde el 8 de septiembre el muro de titulares busca en
+> vivo en el RSS de Google Noticias (`/api/buscar`) además de en lo cosechado,
+> con cuatro alcances: la zona de la página, la región, México e Internacional.
+> Pero las pastillas de alcance solo aparecían al escribir, y con México o
+> Internacional sin consulta el muro quedaba vacío: el corpus es regional por
+> construcción y no participa en esos dos, y la búsqueda no tenía qué buscar.
+>
+> **Lo que se construyó.** Las pastillas de alcance están siempre a la vista
+> en la barra del muro (Región · México · Internacional, más la zona en la
+> página de una zona). Con México o Internacional y sin consulta, el muro
+> muestra la sección de Google Noticias de ese momento (`/api/actualidad`):
+> México es la sección «México» de la edición mexicana —decisión del cliente
+> frente a la portada «Noticias destacadas», que mezcla país y mundo—;
+> Internacional es la sección «Mundo» en las ediciones en español y en inglés,
+> intercaladas. Se muestra **en el orden de Google**, que no es por fecha (se
+> midió: 23 inversiones en 45 titulares) sino su ranking de la sección; ese
+> orden es la señal de «qué suena ahora», y por eso en ese modo no hay
+> pastillas de orden. Se refresca cada cinco minutos, lo mismo que vive en el
+> CDN, y al volver a la pestaña. Escribir tres letras o más pasa a la búsqueda
+> en vivo dentro de ese alcance, que ya existía; borrar vuelve a la actualidad.
+> El enlace `/?a=mexico` se comparte.
+>
+> **Lo que NO cambia, dicho antes de que alguien lo proponga.** Nada de esto
+> entra a `data/` ni al pipeline: el cron de seis horas no puede decir «ahora
+> mismo», y un titular nacional que no nombra ningún lugar de la región sería
+> `alcance: nacional` y nunca llegaría al muro. Las filas son enlaces sin
+> clasificar —sin zona, tono ni figura, marcadas «en vivo»— y no se suman con
+> ninguna cifra de prensa. Sigue siendo titular, medio y enlace, y el enlace es
+> el redirector de Google, como en la búsqueda. Si Google redirige fuera de
+> `news.google.com`, no se lee un byte. Si una edición falla, se dice cuál y la
+> respuesta no se guarda en el CDN.
+
+---
+
 # Pulso N33 — Project Plan
 
 Regional intelligence dashboard for the Tijuana–San Diego corridor, Tecate, Rosarito, Ensenada and San Quintín.

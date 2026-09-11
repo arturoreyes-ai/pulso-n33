@@ -1,15 +1,16 @@
 {
- "nota": "Cuentas públicas de Instagram de las que se cosechan comentarios, vía Apify y sin sesión. Una cuenta corre solo si tiene `activo` Y `verificado` en true. Los handles de abajo se sondearon de verdad el 8 de septiembre de 2026 con `python -m pulso redes --sondear`, y los que no resistieron están en `senuelos` con el número que los delató.",
+ "nota": "Cuentas públicas de Instagram de las que se cosechan comentarios, vía Apify y sin sesión. Una cuenta corre solo si tiene `activo` Y `verificado` en true. Los handles de abajo se sondearon de verdad con `python -m pulso redes --sondear` —diez el 8 de septiembre de 2026 y tres más el 10, pedidas por el cliente ese día—, y los que no resistieron están en `senuelos` con el número que los delató.",
 
  "aviso_verificacion": "No enciendas un handle sin sondearlo. Adivinarlo a partir del nombre del medio falla, y falla en silencio: de los seis handles derivados que traía este archivo, CINCO estaban mal. Tres eran cuentas ocupadas con 0 publicaciones, y una era un portal de Tocantins, Brasil. Ninguno habría dado error al cosechar. Dos de los handles buenos (@zeta.tijuana, @afntijuana2) no se adivinan de ninguna forma razonable: salieron del sitio web del propio medio.",
 
  "aviso_retencion": "El texto crudo vive en cache/instagram/ con TTL de 30 días y nunca entra a git. La identidad de quien comenta (ownerUsername, ownerProfilePicUrl, ownerId) no llega ni al cache: se tira al ingerir. Ver el encabezado de pulso/instagram.py.",
 
  "cosecha": {
-  "nota": "Son dos pasadas pagadas: posts por cuenta, luego comentarios por post. `dias_entre_cosechas` evita volver a pagar por los comentarios de un post reciente. Con 50 comentarios por post la mayoría de los cortes queda por encima del mínimo de 30 de PRODUCT.md, pero el pipeline sigue emitiendo conteos y no porcentajes: el que decide si un corte llega a 30 es quien lo pinta, no quien lo cosecha.",
+  "nota": "Son dos pasadas pagadas: posts por cuenta, luego comentarios por post. `dias_entre_cosechas` evita volver a pagar por los comentarios de un post reciente. Con 30 comentarios por post un post llega a lo sumo al mínimo de 30 de PRODUCT.md y muchos se quedan debajo, pero el pipeline sigue emitiendo conteos y no porcentajes: el que decide si un corte llega a 30 es quien lo pinta, no quien lo cosecha. `ventana_horas` es la ventana de los destacados, en horas sobre la hora exacta de publicación, igual que TikTok: fue de 7 días hasta el 10 de septiembre de 2026, cuando el cliente pidió ver lo último de las 24 horas. Tres consecuencias: (1) con 24 horas `dias_entre_cosechas` solo deduplica las corridas del día, así que `cosechados` y los conteos de comentarios son la foto de la primera cosecha, y likes, comentarios y reproducciones se refrescan en cada corrida; (2) «los de más likes de las últimas 24 horas» son los de más likes entre los últimos `posts_por_cuenta` que cada corrida ve de cada cuenta, cuatro veces al día, así que una cuenta que publica más de cinco veces entre corridas pierde posts; (3) subir `posts_por_cuenta` encarece las dos pasadas, no una, y por eso se queda en 5 hasta que alguien mire la factura.",
   "posts_por_cuenta": 5,
   "comentarios_por_post": 30,
-  "dias_entre_cosechas": 3
+  "dias_entre_cosechas": 3,
+  "ventana_horas": 24
  },
 
  "cuentas": [
@@ -122,6 +123,39 @@
    "activo": true,
    "verificado": true,
    "razon": "Sondeada 2026-09-08: 82,821 seguidores, 2,027 posts. Dos salvedades escritas antes de que sorprendan: (1) NO es un medio de noticias, es revista de estilo de vida —«Foodie•Lugares•Eventos•Noticias»— así que su conversación no es comparable con la de un diario; (2) su bio declara «Tijuana BC | San Diego CA», o sea que cubre los dos lados y puede publicar en inglés. Está marcada `es` porque publica sobre todo en español; si aparece inglés, el modelo de tono lo etiquetaría igual sin avisar, y entonces hay que partirla o apagarla."
+  },
+  {
+   "id": "yoamotijuana_ig",
+   "handle": "@yoamotijuana",
+   "nombre": "Yo Amo Tijuana",
+   "medio": null,
+   "zona": "Tijuana",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-10: 572,558 seguidores, 23,999 posts, bio «La revista de Tijuana y mostramos su mejor lado». Pedida por el cliente el 10 de septiembre de 2026. Es la cuenta más grande de todo el catálogo, por encima de @tjnoticias, y trae la misma salvedad escrita que `tjpublica_ig`: NO es un medio de noticias sino una revista de ciudad, así que su conversación no es comparable con la de un diario. Sin medio equivalente en config/medios.json."
+  },
+  {
+   "id": "tijuanainforma_ig",
+   "handle": "@tijuanainforma.mx",
+   "nombre": "Tijuana Informa",
+   "medio": null,
+   "zona": "Tijuana",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-10: 45,224 seguidores, 1,145 posts, bio «Medio Tijuanense. No somos perfectos, somos congruentes; y eso vale más». Pedida por el cliente el 10 de septiembre de 2026. El handle lleva «.mx» y no se adivina a partir del nombre. Medio digital nativo de redes, sin equivalente en config/medios.json."
+  },
+  {
+   "id": "eltijuanense_ig",
+   "handle": "@el.tijuanense",
+   "nombre": "El Tijuanense",
+   "medio": null,
+   "zona": "Tijuana",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-10: 115,257 seguidores, 12,597 posts, bio «Medio de comunicación digital en Tijuana. Informando con actualidad y veracidad desde 2014». Pedida por el cliente el 10 de septiembre de 2026. El handle lleva PUNTO, como @zeta.tijuana, y no se adivina. Medio digital nativo de redes, sin equivalente en config/medios.json."
   },
   {
    "id": "canal66_ig",
