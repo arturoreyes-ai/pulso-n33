@@ -1,52 +1,52 @@
 {
  "esquema": 1,
- "generado": "2026-09-11T20:13:42+00:00",
+ "generado": "2026-09-12T00:43:26+00:00",
  "plataforma": "tiktok",
  "retencion_dias": 30,
- "comentarios_vigentes": 254,
- "posts_vigentes": 33,
- "opinion": 223,
- "repetidos": 16,
- "reacciones": 26,
+ "comentarios_vigentes": 409,
+ "posts_vigentes": 52,
+ "opinion": 363,
+ "repetidos": 19,
+ "reacciones": 41,
  "por_zona": {
-  "Tijuana": 226,
-  "nacional": 28
+  "Tijuana": 236,
+  "nacional": 173
  },
  "por_cuenta": {
-  "tk_tijuana_noticias": 254
+  "tk_tijuana_noticias": 409
  },
  "por_idioma": {
-  "es": 254
+  "es": 409
  },
  "por_tema": [
+  {
+   "tema": "gobierno",
+   "comentarios": 15,
+   "posts": 6
+  },
+  {
+   "tema": "bajo",
+   "comentarios": 5,
+   "posts": 5
+  },
   {
    "tema": "calor",
    "comentarios": 5,
    "posts": 2
   },
   {
-   "tema": "bajo",
-   "comentarios": 4,
+   "tema": "casa",
+   "comentarios": 5,
    "posts": 4
   },
   {
-   "tema": "casa",
-   "comentarios": 4,
-   "posts": 3
-  },
-  {
-   "tema": "gobierno",
+   "tema": "agua",
    "comentarios": 3,
-   "posts": 2
+   "posts": 3
   },
   {
    "tema": "paso",
    "comentarios": 3,
-   "posts": 2
-  },
-  {
-   "tema": "agua",
-   "comentarios": 2,
    "posts": 2
   },
   {
@@ -55,20 +55,45 @@
    "posts": 2
   },
   {
-   "tema": "salud",
+   "tema": "familia",
    "comentarios": 2,
-   "posts": 2
+   "posts": 1
   },
   {
    "tema": "vivo",
    "comentarios": 2,
    "posts": 1
+  },
+  {
+   "tema": "detienen",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
+   "tema": "estados unidos",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
+   "tema": "mayores",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
+   "tema": "proceso",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
+   "tema": "trump",
+   "comentarios": 1,
+   "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 18,
-  "negativo": 106,
-  "neutral": 99,
+  "positivo": 27,
+  "negativo": 186,
+  "neutral": 150,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -116,10 +141,6 @@
     {
      "tema": "casa",
      "comentarios": 1
-    },
-    {
-     "tema": "salud",
-     "comentarios": 1
     }
    ]
   },
@@ -154,39 +175,39 @@
    ]
   },
   {
-   "url": "https://www.tiktok.com/@siempreenlanoticia/video/7684061709262228744",
+   "url": "https://www.tiktok.com/@juliocesarsaona/video/7684246684104215815",
    "cuenta": "tk_tijuana_noticias",
-   "zona": "Tijuana",
+   "zona": "nacional",
    "fecha": "2026-09-11",
-   "titulo": "Llevan cuatro días sin luz en Tijuana 🔌",
+   "titulo": "🚨 27 PERSONAS APREHENDIDAS EN EL NORTE DE GUAYAQUIL",
    "tipo": "video",
-   "likes": 6322,
-   "comentarios": 193,
-   "reproducciones": 145117,
-   "creador": "@siempreenlanoticia",
-   "publicado": "2026-09-11T00:04:03+00:00",
-   "compartidos": 910,
-   "guardados": 307,
-   "cosechados": 30,
-   "opinion": 30,
+   "likes": 4682,
+   "comentarios": 144,
+   "reproducciones": 162731,
+   "creador": "@juliocesarsaona",
+   "publicado": "2026-09-11T12:01:49+00:00",
+   "compartidos": 2024,
+   "guardados": 449,
+   "cosechados": 28,
+   "opinion": 28,
    "sentimiento": {
-    "positivo": 1,
-    "negativo": 20,
-    "neutral": 9,
+    "positivo": 2,
+    "negativo": 13,
+    "neutral": 13,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": [
     {
-     "tema": "calor",
-     "comentarios": 4
+     "tema": "gobierno",
+     "comentarios": 3
     },
     {
-     "tema": "vivo",
-     "comentarios": 2
+     "tema": "bajo",
+     "comentarios": 1
     },
     {
-     "tema": "agua",
+     "tema": "detienen",
      "comentarios": 1
     }
    ]
@@ -226,6 +247,81 @@
    ]
   },
   {
+   "url": "https://www.tiktok.com/@canal33tijuana/video/7684338150289739026",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "Tijuana",
+   "fecha": "2026-09-11",
+   "titulo": "🚨 Camión de Settepi cae a un barranco tras percance con pipa de Bomberos en Otay",
+   "tipo": "video",
+   "likes": 1380,
+   "comentarios": 50,
+   "reproducciones": 44844,
+   "creador": "@canal33tijuana",
+   "publicado": "2026-09-11T17:56:47+00:00",
+   "compartidos": 323,
+   "guardados": 101,
+   "cosechados": 19,
+   "opinion": 14,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 5,
+    "neutral": 9,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@soy.melisa.y.que.ch.ch/video/7684342740251004180",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-11",
+   "titulo": "#LIVEIncentiveProgram #LIVEIsEasy #PaidPartnership",
+   "tipo": "video",
+   "likes": 1364,
+   "comentarios": 20,
+   "reproducciones": 49273,
+   "creador": "@soy.melisa.y.que.ch.ch",
+   "publicado": "2026-09-11T18:14:34+00:00",
+   "compartidos": 162,
+   "guardados": 83,
+   "cosechados": 18,
+   "opinion": 16,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 9,
+    "neutral": 7,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@nmasforo/video/7684273247084498197",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-11",
+   "titulo": "Tome precauciones: se encuentran inundados los carriles centrales de Calzada Ignacio Zaragoza, pasado avenida Guelatao, con dirección hacia el puente de La Con…",
+   "tipo": "video",
+   "likes": 1046,
+   "comentarios": 9,
+   "reproducciones": 31531,
+   "creador": "@nmasforo",
+   "publicado": "2026-09-11T13:44:50+00:00",
+   "compartidos": 193,
+   "guardados": 61,
+   "cosechados": 9,
+   "opinion": 9,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 6,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.tiktok.com/@blancoynegronoticias/video/7684337972287720724",
    "cuenta": "tk_tijuana_noticias",
    "zona": "Tijuana",
@@ -256,33 +352,122 @@
     {
      "tema": "bajo",
      "comentarios": 1
+    },
+    {
+     "tema": "mayores",
+     "comentarios": 1
     }
    ]
   },
   {
-   "url": "https://www.tiktok.com/@canal33tijuana/video/7684338150289739026",
+   "url": "https://www.tiktok.com/@el_noticiero_tc/video/7684092601351392519",
    "cuenta": "tk_tijuana_noticias",
-   "zona": "Tijuana",
+   "zona": "nacional",
    "fecha": "2026-09-11",
-   "titulo": "🚨 Camión de Settepi cae a un barranco tras percance con pipa de Bomberos en Otay",
+   "titulo": "🚨AHORA SE ROBAN HASTA EL ARROZ",
    "tipo": "video",
-   "likes": 428,
-   "comentarios": 26,
-   "reproducciones": 14951,
-   "creador": "@canal33tijuana",
-   "publicado": "2026-09-11T17:56:47+00:00",
-   "compartidos": 97,
-   "guardados": 23,
-   "cosechados": 19,
-   "opinion": 14,
+   "likes": 754,
+   "comentarios": 17,
+   "reproducciones": 29482,
+   "creador": "@el_noticiero_tc",
+   "publicado": "2026-09-11T02:03:59+00:00",
+   "compartidos": 62,
+   "guardados": 33,
+   "cosechados": 14,
+   "opinion": 11,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 5,
-    "neutral": 9,
+    "negativo": 9,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "gobierno",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
+   "url": "https://www.tiktok.com/@jlmn0ticias/video/7684119033024630034",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-11",
+   "titulo": "A las afueras de la 14va Zona Militar, choque desigual entre un coche Atos y una motocicleta 250 CC. El conductor de la motocicleta fue trasladado de emergenci…",
+   "tipo": "video",
+   "likes": 620,
+   "comentarios": 3,
+   "reproducciones": 20267,
+   "creador": "@jlmn0ticias",
+   "publicado": "2026-09-11T03:46:32+00:00",
+   "compartidos": 42,
+   "guardados": 22,
+   "cosechados": 3,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 0,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@carmen_casta3/video/7684097509735664904",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-11",
+   "titulo": "",
+   "tipo": "video",
+   "likes": 502,
+   "comentarios": 6,
+   "reproducciones": 11331,
+   "creador": "@carmen_casta3",
+   "publicado": "2026-09-11T02:22:59+00:00",
+   "compartidos": 21,
+   "guardados": 21,
+   "cosechados": 5,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@christianclip593/video/7684330640866577682",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-11",
+   "titulo": "#greenscreen",
+   "tipo": "video",
+   "likes": 324,
+   "comentarios": 71,
+   "reproducciones": 15335,
+   "creador": "@christianclip593",
+   "publicado": "2026-09-11T17:27:43+00:00",
+   "compartidos": 153,
+   "guardados": 27,
+   "cosechados": 29,
+   "opinion": 28,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 21,
+    "neutral": 6,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "gobierno",
+     "comentarios": 6
+    }
+   ]
   },
   {
    "url": "https://www.tiktok.com/@crealanoticia/video/7684337812967263496",
@@ -338,14 +523,39 @@
      "comentarios": 2
     },
     {
-     "tema": "gobierno",
+     "tema": "familia",
      "comentarios": 2
     },
     {
-     "tema": "bajo",
-     "comentarios": 1
+     "tema": "gobierno",
+     "comentarios": 2
     }
    ]
+  },
+  {
+   "url": "https://www.tiktok.com/@oemnoticias/video/7684319168396561684",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "Tijuana",
+   "fecha": "2026-09-11",
+   "titulo": "México desplegó 800 militares y equipos capaces de inhibir drones en un radio de tres kilómetros como parte de una operación coordinada con Estados Unidos en l…",
+   "tipo": "video",
+   "likes": 265,
+   "comentarios": 8,
+   "reproducciones": 7251,
+   "creador": "@oemnoticias",
+   "publicado": "2026-09-11T17:30:00+00:00",
+   "compartidos": 1,
+   "guardados": 18,
+   "cosechados": 4,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 2,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
   },
   {
    "url": "https://www.tiktok.com/@tvaztecabc/video/7684300530516036885",
@@ -373,49 +583,24 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@tijuanitho/video/7684030803562482952",
+   "url": "https://www.tiktok.com/@noti.atitlan/video/7684327362430881031",
    "cuenta": "tk_tijuana_noticias",
-   "zona": "Tijuana",
-   "fecha": "2026-09-10",
-   "titulo": "La noticia que todo Tijuana estaba esperando. De nada ☺️",
+   "zona": "nacional",
+   "fecha": "2026-09-11",
+   "titulo": "#noti #atitlan #urge Accidente de tránsito a inmediaciones de Pacoc de la Ruta departamental RD-SOL 4 San Lucas Tolimán Santiago Atitlán Diego Simaj perdió el…",
    "tipo": "video",
-   "likes": 234,
-   "comentarios": 14,
-   "reproducciones": 7676,
-   "creador": "@tijuanitho",
-   "publicado": "2026-09-10T22:04:06+00:00",
-   "compartidos": 13,
-   "guardados": 11,
-   "cosechados": 6,
-   "opinion": 5,
+   "likes": 220,
+   "comentarios": 1,
+   "reproducciones": 13641,
+   "creador": "@noti.atitlan",
+   "publicado": "2026-09-11T17:14:56+00:00",
+   "compartidos": 44,
+   "guardados": 45,
+   "cosechados": 1,
+   "opinion": 0,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 1,
-    "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@siempreenlanoticia/video/7684012144572255509",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "Tijuana",
-   "fecha": "2026-09-10",
-   "titulo": "La acción es en protesta para exigir el pago de salarios pendientes",
-   "tipo": "video",
-   "likes": 214,
-   "comentarios": 5,
-   "reproducciones": 25999,
-   "creador": "@siempreenlanoticia",
-   "publicado": "2026-09-10T20:51:42+00:00",
-   "compartidos": 8,
-   "guardados": 2,
-   "cosechados": 5,
-   "opinion": 4,
-   "sentimiento": {
-    "positivo": 2,
-    "negativo": 2,
+    "negativo": 0,
     "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -423,29 +608,42 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@oemnoticias/video/7684319168396561684",
+   "url": "https://www.tiktok.com/@cadenaarednacional/video/7684264037286153480",
    "cuenta": "tk_tijuana_noticias",
-   "zona": "Tijuana",
+   "zona": "nacional",
    "fecha": "2026-09-11",
-   "titulo": "México desplegó 800 militares y equipos capaces de inhibir drones en un radio de tres kilómetros como parte de una operación coordinada con Estados Unidos en l…",
+   "titulo": "DÓLAR BAJA A Bs 12,04 Y ANALISTA ADVIERTE QUE LA COTIZACIÓN SEGUIRÁ EN “MONTAÑA RUSA”",
    "tipo": "video",
-   "likes": 203,
-   "comentarios": 5,
-   "reproducciones": 5307,
-   "creador": "@oemnoticias",
-   "publicado": "2026-09-11T17:30:00+00:00",
-   "compartidos": 1,
-   "guardados": 12,
-   "cosechados": 4,
-   "opinion": 4,
+   "likes": 206,
+   "comentarios": 28,
+   "reproducciones": 19391,
+   "creador": "@cadenaarednacional",
+   "publicado": "2026-09-11T13:09:07+00:00",
+   "compartidos": 37,
+   "guardados": 31,
+   "cosechados": 20,
+   "opinion": 19,
    "sentimiento": {
-    "positivo": 1,
-    "negativo": 2,
-    "neutral": 1,
+    "positivo": 0,
+    "negativo": 10,
+    "neutral": 9,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
-   "temas": []
+   "temas": [
+    {
+     "tema": "gobierno",
+     "comentarios": 2
+    },
+    {
+     "tema": "agua",
+     "comentarios": 1
+    },
+    {
+     "tema": "casa",
+     "comentarios": 1
+    }
+   ]
   },
   {
    "url": "https://www.tiktok.com/@crealanoticia/video/7684349066028797192",
@@ -478,6 +676,56 @@
    ]
   },
   {
+   "url": "https://www.tiktok.com/@tvaztecabc/video/7684316929691028757",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "Tijuana",
+   "fecha": "2026-09-11",
+   "titulo": "¡Ya fue controlado! Fue una bodega la que se incendió en la colonia Mariano Matamoros en #Tijuana la mañana de este viernes.",
+   "tipo": "video",
+   "likes": 139,
+   "comentarios": 1,
+   "reproducciones": 5459,
+   "creador": "@tvaztecabc",
+   "publicado": "2026-09-11T16:34:25+00:00",
+   "compartidos": 24,
+   "guardados": 6,
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@marybuoficial/video/7684338527856889095",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-11",
+   "titulo": "#paratii #fly #paratiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii #lomasviral #lomasvisto",
+   "tipo": "video",
+   "likes": 121,
+   "comentarios": 0,
+   "reproducciones": 3864,
+   "creador": "@marybuoficial",
+   "publicado": "2026-09-11T17:58:15+00:00",
+   "compartidos": 0,
+   "guardados": 2,
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.tiktok.com/@siempreenlanoticia/video/7684318143392550165",
    "cuenta": "tk_tijuana_noticias",
    "zona": "Tijuana",
@@ -508,6 +756,56 @@
    ]
   },
   {
+   "url": "https://www.tiktok.com/@dubaicito1/video/7684295588430482709",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "Tijuana",
+   "fecha": "2026-09-11",
+   "titulo": "Paso el dato",
+   "tipo": "video",
+   "likes": 113,
+   "comentarios": 0,
+   "reproducciones": 7227,
+   "creador": "@dubaicito1",
+   "publicado": "2026-09-11T15:11:32+00:00",
+   "compartidos": 27,
+   "guardados": 8,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@rojascontruction/video/7684289959548833037",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-11",
+   "titulo": "#noticias #univisionnoticias #viral #construction #SATX",
+   "tipo": "video",
+   "likes": 87,
+   "comentarios": 6,
+   "reproducciones": 5527,
+   "creador": "@rojascontruction",
+   "publicado": "2026-09-11T14:50:32+00:00",
+   "compartidos": 10,
+   "guardados": 6,
+   "cosechados": 6,
+   "opinion": 6,
+   "sentimiento": {
+    "positivo": 3,
+    "negativo": 0,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.tiktok.com/@_octaviovaldez/video/7684140723024825618",
    "cuenta": "tk_tijuana_noticias",
    "zona": "nacional",
@@ -525,31 +823,6 @@
    "opinion": 0,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@crealanoticia/video/7684011595424402706",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "Tijuana",
-   "fecha": "2026-09-10",
-   "titulo": "Mil pesos le costaron la libertad: el asalto exprés que fracasó en El Pípila",
-   "tipo": "video",
-   "likes": 85,
-   "comentarios": 1,
-   "reproducciones": 5464,
-   "creador": "@crealanoticia",
-   "publicado": "2026-09-10T20:49:34+00:00",
-   "compartidos": 0,
-   "guardados": 4,
-   "cosechados": 1,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 1,
     "negativo": 0,
     "neutral": 0,
     "sin_clasificar": 0,
@@ -583,52 +856,127 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@elgordo.pilas/video/7684104568027794702",
+   "url": "https://www.tiktok.com/@rupertonews/video/7684308202640493854",
    "cuenta": "tk_tijuana_noticias",
    "zona": "nacional",
    "fecha": "2026-09-11",
-   "titulo": "#Nayarit #documental #noticias #fyp #entretenimiento",
+   "titulo": "#austin #texas #accidente #ayuda #noticiastiktok",
    "tipo": "video",
-   "likes": 41,
-   "comentarios": 2,
-   "reproducciones": 1417,
-   "creador": "@elgordo.pilas",
-   "publicado": "2026-09-11T02:50:37+00:00",
-   "compartidos": 21,
-   "guardados": 4,
-   "cosechados": 2,
-   "opinion": 2,
+   "likes": 79,
+   "comentarios": 1,
+   "reproducciones": 4209,
+   "creador": "@rupertonews",
+   "publicado": "2026-09-11T16:00:52+00:00",
+   "compartidos": 30,
+   "guardados": 5,
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@oye_tijuana/video/7684073805530074388",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "Tijuana",
+   "fecha": "2026-09-11",
+   "titulo": "Localizan dos cabezas humanas dentro de hieleras en San Antonio del Mar",
+   "tipo": "video",
+   "likes": 78,
+   "comentarios": 1,
+   "reproducciones": 2833,
+   "creador": "@oye_tijuana",
+   "publicado": "2026-09-11T00:50:58+00:00",
+   "compartidos": 12,
+   "guardados": 2,
+   "cosechados": 1,
+   "opinion": 0,
    "sentimiento": {
     "positivo": 0,
     "negativo": 0,
-    "neutral": 2,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@migranews8/video/7684328337086401806",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-11",
+   "titulo": "#gasolinera #ICEagents #migración #deportacion #noticias",
+   "tipo": "video",
+   "likes": 71,
+   "comentarios": 5,
+   "reproducciones": 4316,
+   "creador": "@migranews8",
+   "publicado": "2026-09-11T17:19:29+00:00",
+   "compartidos": 9,
+   "guardados": 5,
+   "cosechados": 5,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 2,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": [
     {
-     "tema": "salud",
+     "tema": "proceso",
      "comentarios": 1
     }
    ]
+  },
+  {
+   "url": "https://www.tiktok.com/@cadenapolitica/video/7684121700056845586",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "Tijuana",
+   "fecha": "2026-09-11",
+   "titulo": "Captan a un perrito recostado muy cómodo mientras mira un video en un teléfono celular durante una reunión familiar en Tijuana. La escena causó furor en redes…",
+   "tipo": "video",
+   "likes": 61,
+   "comentarios": 1,
+   "reproducciones": 786,
+   "creador": "@cadenapolitica",
+   "publicado": "2026-09-11T03:56:59+00:00",
+   "compartidos": 10,
+   "guardados": 3,
+   "cosechados": 1,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
   }
  ],
  "salud": [
   {
    "cuenta": "tk_tijuana_noticias",
    "estado": "ok",
-   "posts": 30,
-   "comentarios": 10,
-   "crudos": 10,
-   "fuera": 0,
+   "posts": 28,
+   "comentarios": 155,
+   "crudos": 161,
+   "fuera": 2,
    "descartados": 0
   }
  ],
  "gasto": {
   "resultados": 1000,
-  "gastado": 40,
+  "gastado": 191,
   "por_concepto": {
-   "tk_tijuana_noticias": 40
+   "tk_tijuana_noticias": 191
   }
  }
 }
