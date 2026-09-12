@@ -1,30 +1,30 @@
 {
  "esquema": 1,
- "generado": "2026-09-12T00:36:44+00:00",
+ "generado": "2026-09-12T06:32:56+00:00",
  "plataforma": "instagram",
  "retencion_dias": 30,
- "comentarios_vigentes": 359,
- "posts_vigentes": 47,
- "opinion": 280,
+ "comentarios_vigentes": 422,
+ "posts_vigentes": 61,
+ "opinion": 324,
  "repetidos": 0,
- "reacciones": 79,
+ "reacciones": 98,
  "por_zona": {
-  "Tijuana": 359
+  "Tijuana": 422
  },
  "por_cuenta": {
   "afn_ig": 42,
-  "eltijuanense_ig": 9,
-  "frontera_ig": 24,
-  "siempre_ig": 70,
+  "eltijuanense_ig": 10,
+  "frontera_ig": 31,
+  "siempre_ig": 72,
   "soltij_ig": 3,
-  "tijuanainforma_ig": 12,
-  "tjnoticias_ig": 66,
+  "tijuanainforma_ig": 24,
+  "tjnoticias_ig": 105,
   "tjpublica_ig": 82,
-  "yoamotijuana_ig": 45,
+  "yoamotijuana_ig": 47,
   "zeta_ig": 6
  },
  "por_idioma": {
-  "es": 359
+  "es": 422
  },
  "por_tema": [
   {
@@ -34,18 +34,28 @@
   },
   {
    "tema": "paso",
-   "comentarios": 5,
-   "posts": 4
+   "comentarios": 6,
+   "posts": 5
   },
   {
    "tema": "casa",
+   "comentarios": 4,
+   "posts": 4
+  },
+  {
+   "tema": "familia",
    "comentarios": 3,
-   "posts": 3
+   "posts": 2
+  },
+  {
+   "tema": "gobierno",
+   "comentarios": 3,
+   "posts": 2
   },
   {
    "tema": "agua",
-   "comentarios": 1,
-   "posts": 1
+   "comentarios": 2,
+   "posts": 2
   },
   {
    "tema": "calor",
@@ -54,11 +64,6 @@
   },
   {
    "tema": "carin leon",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
-   "tema": "choque",
    "comentarios": 1,
    "posts": 1
   },
@@ -73,25 +78,15 @@
    "posts": 1
   },
   {
-   "tema": "familia",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
-   "tema": "gobierno",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
    "tema": "vivo",
    "comentarios": 1,
    "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 65,
-  "negativo": 99,
-  "neutral": 116,
+  "positivo": 72,
+  "negativo": 117,
+  "neutral": 135,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -214,6 +209,32 @@
    "temas": []
   },
   {
+   "url": "https://www.instagram.com/p/DdKvSwaGvsS/",
+   "cuenta": "tjnoticias_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-12",
+   "titulo": "DORIAN BUSCA UN HOGAR DONDE PUEDA QUEDARSE PARA SIEMPRE 🐾❤️",
+   "tipo": "carrusel",
+   "likes": 1607,
+   "comentarios": 20,
+   "publicado": "2026-09-12T00:50:47+00:00",
+   "cosechados": 17,
+   "opinion": 9,
+   "sentimiento": {
+    "positivo": 4,
+    "negativo": 2,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "familia",
+     "comentarios": 2
+    }
+   ]
+  },
+  {
    "url": "https://www.instagram.com/p/DdJ9RllORXN/",
    "cuenta": "tjnoticias_ig",
    "zona": "Tijuana",
@@ -237,10 +258,6 @@
     {
      "tema": "bajo",
      "comentarios": 4
-    },
-    {
-     "tema": "choque",
-     "comentarios": 1
     }
    ]
   },
@@ -269,6 +286,27 @@
      "comentarios": 1
     }
    ]
+  },
+  {
+   "url": "https://www.instagram.com/p/DdKz8TtGs0n/",
+   "cuenta": "yoamotijuana_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-12",
+   "titulo": "🇲🇽✨ Mañana Tijuana podrá disfrutar de una fiesta mexicana GRATIS en la explanada del CECUT, con actividades para toda la familia.",
+   "tipo": "carrusel",
+   "likes": 965,
+   "comentarios": 13,
+   "publicado": "2026-09-12T01:31:25+00:00",
+   "cosechados": 12,
+   "opinion": 6,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 1,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
   },
   {
    "url": "https://www.instagram.com/p/DdJypECj7qW/",
@@ -309,6 +347,48 @@
     "positivo": 1,
     "negativo": 1,
     "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdK2OFAmlK7/",
+   "cuenta": "yoamotijuana_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-12",
+   "titulo": "🐾 Dos cachorritas buscan una familia responsable en Tijuana. 🏡❤️",
+   "tipo": "carrusel",
+   "likes": 662,
+   "comentarios": 5,
+   "publicado": "2026-09-12T01:51:19+00:00",
+   "cosechados": 5,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdK9pZbG4R-/",
+   "cuenta": "tjnoticias_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-12",
+   "titulo": "Líderes de diferentes agencias de seguridad en el condado de San Diego hablaron este viernes, sobre los cambios en seguridad, investigación y operaciones tras…",
+   "tipo": "carrusel",
+   "likes": 655,
+   "comentarios": 3,
+   "publicado": "2026-09-12T02:56:12+00:00",
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -417,6 +497,28 @@
    ]
   },
   {
+   "url": "https://www.instagram.com/p/DdLIdD0zzG8/",
+   "cuenta": "yoamotijuana_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-12",
+   "titulo": "Gracias gracias🥳",
+   "tipo": "video",
+   "likes": 393,
+   "comentarios": 2,
+   "reproducciones": 18267,
+   "publicado": "2026-09-12T04:31:16+00:00",
+   "cosechados": 2,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.instagram.com/p/DdJ-sRiGt6M/",
    "cuenta": "yoamotijuana_ig",
    "zona": "Tijuana",
@@ -443,125 +545,20 @@
    ]
   },
   {
-   "url": "https://www.instagram.com/p/DdINXfBo9bG/",
-   "cuenta": "tjpublica_ig",
-   "zona": "Tijuana",
+   "url": "https://www.instagram.com/p/DdJtcMUFKn5/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
    "fecha": "2026-09-11",
-   "titulo": "Lo que pasa todos los días en Terán y nadie dice nada 👇",
+   "titulo": "A 25 años del 9/11, la frontera Tijuana - San Diego sigue marcada por el recuerdo",
    "tipo": "video",
-   "likes": 233,
-   "comentarios": 25,
-   "reproducciones": 15995,
-   "publicado": "2026-09-11T01:16:33+00:00",
-   "cosechados": 18,
-   "opinion": 18,
+   "likes": 84,
+   "comentarios": 0,
+   "reproducciones": 1946,
+   "publicado": "2026-09-11T15:16:25+00:00",
+   "cosechados": 0,
+   "opinion": 0,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 12,
-    "neutral": 6,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "bajo",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/DdKmOyED6nA/",
-   "cuenta": "yoamotijuana_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-11",
-   "titulo": "El CECUT informó que las funciones del Domo IMAX y la Cineteca Tijuana programadas para este 11 de septiembre quedan suspendidas, debido a las constantes falla…",
-   "tipo": "carrusel",
-   "likes": 193,
-   "comentarios": 3,
-   "publicado": "2026-09-11T23:31:36+00:00",
-   "cosechados": 2,
-   "opinion": 2,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "carin leon",
-     "comentarios": 1
-    },
-    {
-     "tema": "paso",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/DdKJ7ARlt20/",
-   "cuenta": "frontera_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-11",
-   "titulo": "EL BOLETO SE REEMBOLSA… ¿Y EL VIAJE? 🎟️✈️",
-   "tipo": "carrusel",
-   "likes": 154,
-   "comentarios": 16,
-   "publicado": "2026-09-11T19:24:18+00:00",
-   "cosechados": 11,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 2,
-    "negativo": 4,
-    "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "paso",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/DdIlEflIWlr/",
-   "cuenta": "tjpublica_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-11",
-   "titulo": "👀 ¿Has visto estas misteriosas marcas en el piso de Old Town San Diego?",
-   "tipo": "video",
-   "likes": 109,
-   "comentarios": 3,
-   "reproducciones": 6233,
-   "publicado": "2026-09-11T04:43:32+00:00",
-   "cosechados": 2,
-   "opinion": 2,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdKCRHKB7cH/",
-   "cuenta": "siempre_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-11",
-   "titulo": "Lorena Ochoa habló de su vida tras el golf",
-   "tipo": "video",
-   "likes": 98,
-   "comentarios": 4,
-   "reproducciones": 1644,
-   "publicado": "2026-09-11T18:18:38+00:00",
-   "cosechados": 4,
-   "opinion": 2,
-   "sentimiento": {
-    "positivo": 2,
     "negativo": 0,
     "neutral": 0,
     "sin_clasificar": 0,
@@ -570,16 +567,15 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdJtcMUFKn5/",
-   "cuenta": "uniradio_ig",
-   "zona": "estatal",
-   "fecha": "2026-09-11",
-   "titulo": "A 25 años del 9/11, la frontera Tijuana - San Diego sigue marcada por el recuerdo",
-   "tipo": "video",
-   "likes": 81,
+   "url": "https://www.instagram.com/p/DdK6GEXk_38/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-12",
+   "titulo": "𝗟𝗮 𝗫𝗩𝗜𝗜𝗜 𝗦𝗲𝗺𝗮𝗻𝗮 𝗱𝗲 𝗧𝗲𝗮𝘁𝗿𝗼 𝗽𝗮𝗿𝗮 𝗡𝗶ñ𝗮𝘀 𝘆 𝗡𝗶ñ𝗼𝘀 𝗕𝗮𝗷𝗮 𝗖𝗮𝗹𝗶𝗳𝗼𝗿𝗻𝗶𝗮 “𝗥𝗮𝘆 𝗚𝗮𝗿𝗱𝘂ñ𝗼” 𝗿𝗲𝘂𝗻𝗶𝗿á 𝗰𝗼𝗺𝗽𝗮ñí𝗮𝘀 𝗱𝗲 𝗕𝗮𝗷𝗮 𝗖𝗮𝗹𝗶𝗳𝗼𝗿𝗻𝗶𝗮, 𝗚𝘂𝗮𝗻𝗮𝗷𝘂𝗮𝘁𝗼, 𝗭𝗮𝗰𝗮𝘁𝗲𝗰𝗮𝘀, 𝗖𝗶𝘂𝗱𝗮𝗱 𝗱𝗲 𝗠é𝘅𝗶𝗰𝗼, 𝗔𝗿𝗴𝗲𝗻…",
+   "tipo": "imagen",
+   "likes": 26,
    "comentarios": 0,
-   "reproducciones": 1817,
-   "publicado": "2026-09-11T15:16:25+00:00",
+   "publicado": "2026-09-12T02:25:11+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -598,7 +594,7 @@
    "fecha": "2026-09-11",
    "titulo": "El Cecut también suspende algunas de sus actividades por los #apagones en #Tijuana",
    "tipo": "imagen",
-   "likes": 10,
+   "likes": 20,
    "comentarios": 0,
    "publicado": "2026-09-11T22:21:14+00:00",
    "cosechados": 0,
@@ -621,7 +617,7 @@
    "tipo": "video",
    "likes": 5,
    "comentarios": 0,
-   "reproducciones": 106,
+   "reproducciones": 141,
    "publicado": "2026-09-11T17:39:15+00:00",
    "cosechados": 0,
    "opinion": 0,
@@ -687,7 +683,7 @@
    "tipo": "video",
    "likes": 1,
    "comentarios": 0,
-   "reproducciones": 72,
+   "reproducciones": 97,
    "publicado": "2026-09-11T17:18:56+00:00",
    "cosechados": 0,
    "opinion": 0,
@@ -709,8 +705,29 @@
    "tipo": "video",
    "likes": 1,
    "comentarios": 0,
-   "reproducciones": 58,
+   "reproducciones": 80,
    "publicado": "2026-09-11T17:26:44+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdK3zXIHMkc/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-12",
+   "titulo": "𝗟𝗮 𝗦𝗲𝗰𝗿𝗲𝘁𝗮𝗿í𝗮 𝗱𝗲 𝗘𝗰𝗼𝗻𝗼𝗺í𝗮 𝗲 𝗜𝗻𝗻𝗼𝘃𝗮𝗰𝗶ó𝗻 𝗽𝗿𝗲𝘀𝗲𝗻𝘁ó 𝘂𝗻 𝗱𝗶𝗽𝗹𝗼𝗺𝗮𝗱𝗼 𝗲𝗻 𝗧𝘂𝗿𝗶𝘀𝗺𝗼 𝗠é𝗱𝗶𝗰𝗼, 𝗰𝗼𝗻 𝗲𝗹 𝗼𝗯𝗷𝗲𝘁𝗶𝘃𝗼 𝗱𝗲 𝗳𝗼𝗿𝗺𝗮𝗿 𝗽𝗲𝗿𝘀𝗼𝗻𝗮𝗹 𝗲𝘀𝗽𝗲𝗰𝗶𝗮𝗹𝗶𝘇𝗮𝗱𝗼 𝘆 𝗳𝗼𝗿𝘁𝗮𝗹𝗲𝗰𝗲𝗿 𝗹𝗮 𝗮𝘁𝗲𝗻𝗰𝗶ó𝗻 𝗮 𝘃𝗶𝘀…",
+   "tipo": "imagen",
+   "likes": 1,
+   "comentarios": 0,
+   "publicado": "2026-09-12T02:05:09+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -774,6 +791,71 @@
    "likes": 1,
    "comentarios": 0,
    "publicado": "2026-09-11T23:45:06+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdK-I_eDdWE/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-12",
+   "titulo": "Policiaca - El Vigía Digital - 11 de Septiembre del 2026",
+   "tipo": "video",
+   "likes": 0,
+   "comentarios": 0,
+   "reproducciones": 291,
+   "publicado": "2026-09-12T03:01:27+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdK1gYpjYcZ/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-12",
+   "titulo": "𝗟𝗮 𝗙𝗲𝗱𝗲𝗿𝗮𝗰𝗶ó𝗻 𝗱𝗲 𝗖𝗼𝗹𝗲𝗴𝗶𝗼𝘀, 𝗕𝗮𝗿𝗿𝗮𝘀 𝘆 𝗔𝘀𝗼𝗰𝗶𝗮𝗰𝗶𝗼𝗻𝗲𝘀 𝗱𝗲 𝗔𝗯𝗼𝗴𝗮𝗱𝗼𝘀 𝗱𝗲 𝗕𝗮𝗷𝗮 𝗖𝗮𝗹𝗶𝗳𝗼𝗿𝗻𝗶𝗮 𝗲𝘅𝗶𝗴𝗶ó 𝗿𝗲𝘀𝘂𝗹𝘁𝗮𝗱𝗼𝘀 𝗲𝗻 𝗹𝗮𝘀 𝗶𝗻𝘃𝗲𝘀𝘁𝗶𝗴𝗮𝗰𝗶𝗼𝗻𝗲𝘀 𝗱𝗲 𝟭𝟴 𝗵𝗼𝗺𝗶𝗰𝗶𝗱𝗶𝗼𝘀 𝗱𝗲 𝗶𝗻𝘁𝗲𝗴𝗿𝗮𝗻𝘁𝗲𝘀 𝗱𝗲𝗹 𝗴𝗿…",
+   "tipo": "imagen",
+   "likes": 0,
+   "comentarios": 0,
+   "publicado": "2026-09-12T01:45:05+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdK8ZDfDKx8/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-12",
+   "titulo": "Busca Toros conquistar la Serie del Rey en Tabasco",
+   "tipo": "video",
+   "likes": 0,
+   "comentarios": 0,
+   "reproducciones": 145,
+   "publicado": "2026-09-12T02:45:51+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -911,48 +993,6 @@
     "sin_modelo_idioma": 0
    },
    "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdKqEM8jLlY/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
-   "fecha": "2026-09-12",
-   "titulo": "𝗟𝗮 𝗕𝗮𝗷𝗮 𝟰𝟬𝟬 𝗱𝗲𝗷𝗮𝗿í𝗮 𝘂𝗻𝗮 𝗱𝗲𝗿𝗿𝗮𝗺𝗮 𝗲𝗰𝗼𝗻ó𝗺𝗶𝗰𝗮 𝗲𝘀𝘁𝗶𝗺𝗮𝗱𝗮 𝗲𝗻 𝟴 𝗺𝗶𝗹𝗹𝗼𝗻𝗲𝘀 𝗱𝗲 𝗱ó𝗹𝗮𝗿𝗲𝘀 𝘆 𝘂𝗻𝗮 𝗼𝗰𝘂𝗽𝗮𝗰𝗶ó𝗻 𝗵𝗼𝘁𝗲𝗹𝗲𝗿𝗮 𝗱𝗲 𝗵𝗮𝘀𝘁𝗮 𝟵𝟮 𝗽𝗼𝗿 𝗰𝗶𝗲𝗻𝘁𝗼 𝗲𝗻 𝗘𝗻𝘀𝗲𝗻𝗮𝗱𝗮 𝘆 𝗹𝗮𝘀 𝗱𝗲𝗹𝗲𝗴𝗮𝗰𝗶𝗼𝗻𝗲𝘀 𝗱𝗲 𝗹…",
-   "tipo": "imagen",
-   "likes": 0,
-   "comentarios": 0,
-   "publicado": "2026-09-12T00:05:07+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdKsW8EEQvv/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
-   "fecha": "2026-09-12",
-   "titulo": "𝗘𝗹 𝗖𝗼𝗻𝗴𝗿𝗲𝘀𝗼 𝗱𝗲 𝗕𝗮𝗷𝗮 𝗖𝗮𝗹𝗶𝗳𝗼𝗿𝗻𝗶𝗮 𝗮𝗽𝗿𝗼𝗯ó 𝘂𝗻 𝗲𝘅𝗵𝗼𝗿𝘁𝗼 𝗽𝗮𝗿𝗮 𝗲𝗹𝗶𝗺𝗶𝗻𝗮𝗿 𝗹𝗮𝘀 𝗰𝘂𝗼𝘁𝗮𝘀 𝗱𝗲 𝗿𝗲𝗰𝘂𝗽𝗲𝗿𝗮𝗰𝗶ó𝗻 𝘆 𝗴𝗮𝗿𝗮𝗻𝘁𝗶𝘇𝗮𝗿 𝘀𝗲𝗿𝘃𝗶𝗰𝗶𝗼𝘀 𝗴𝗿𝗮𝘁𝘂𝗶𝘁𝗼𝘀 𝗱𝗲 𝘀𝗮𝗹𝘂𝗱 𝗺𝗲𝗻𝘁𝗮𝗹, 𝗶𝗻𝗰𝗹𝘂𝗶𝗱𝗼𝘀 𝗰𝗼𝗻𝘀𝘂𝗹𝘁𝗮𝘀…",
-   "tipo": "imagen",
-   "likes": 0,
-   "comentarios": 0,
-   "publicado": "2026-09-12T00:25:09+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
   }
  ],
  "salud": [
@@ -968,8 +1008,8 @@
    "cuenta": "eltijuanense_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 5
+   "comentarios": 1,
+   "crudos": 6
   },
   {
    "cuenta": "elvigia_ig",
@@ -982,15 +1022,15 @@
    "cuenta": "frontera_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 9,
-   "crudos": 12
+   "comentarios": 7,
+   "crudos": 8
   },
   {
    "cuenta": "siempre_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 8,
-   "crudos": 8
+   "comentarios": 2,
+   "crudos": 3
   },
   {
    "cuenta": "sintesis_ig",
@@ -1010,15 +1050,15 @@
    "cuenta": "tijuanainforma_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 2
+   "comentarios": 12,
+   "crudos": 14
   },
   {
    "cuenta": "tjnoticias_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 12,
-   "crudos": 13
+   "comentarios": 40,
+   "crudos": 41
   },
   {
    "cuenta": "tjpublica_ig",
@@ -1033,14 +1073,15 @@
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 1
+   "crudos": 0,
+   "nota": "sin posts nuevos que cosechar"
   },
   {
    "cuenta": "yoamotijuana_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 11,
-   "crudos": 12
+   "comentarios": 2,
+   "crudos": 3
   },
   {
    "cuenta": "zeta_ig",
@@ -1053,20 +1094,20 @@
  ],
  "gasto": {
   "resultados": 2600,
-  "gastado": 130,
+  "gastado": 152,
   "por_concepto": {
    "afn_ig": 5,
-   "eltijuanense_ig": 10,
+   "eltijuanense_ig": 11,
    "elvigia_ig": 10,
-   "frontera_ig": 17,
-   "siempre_ig": 13,
+   "frontera_ig": 13,
+   "siempre_ig": 8,
    "sintesis_ig": 10,
    "soltij_ig": 7,
-   "tijuanainforma_ig": 7,
-   "tjnoticias_ig": 18,
+   "tijuanainforma_ig": 19,
+   "tjnoticias_ig": 46,
    "tjpublica_ig": 5,
-   "uniradio_ig": 6,
-   "yoamotijuana_ig": 17,
+   "uniradio_ig": 5,
+   "yoamotijuana_ig": 8,
    "zeta_ig": 5
   }
  }

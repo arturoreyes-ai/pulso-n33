@@ -1,33 +1,33 @@
 {
  "esquema": 1,
- "generado": "2026-09-12T00:43:26+00:00",
+ "generado": "2026-09-12T06:39:54+00:00",
  "plataforma": "tiktok",
  "retencion_dias": 30,
- "comentarios_vigentes": 409,
- "posts_vigentes": 52,
- "opinion": 363,
- "repetidos": 19,
- "reacciones": 41,
+ "comentarios_vigentes": 496,
+ "posts_vigentes": 65,
+ "opinion": 438,
+ "repetidos": 26,
+ "reacciones": 53,
  "por_zona": {
-  "Tijuana": 236,
-  "nacional": 173
+  "Tijuana": 284,
+  "nacional": 212
  },
  "por_cuenta": {
-  "tk_tijuana_noticias": 409
+  "tk_tijuana_noticias": 496
  },
  "por_idioma": {
-  "es": 409
+  "es": 496
  },
  "por_tema": [
   {
    "tema": "gobierno",
-   "comentarios": 15,
-   "posts": 6
+   "comentarios": 16,
+   "posts": 7
   },
   {
    "tema": "bajo",
-   "comentarios": 5,
-   "posts": 5
+   "comentarios": 6,
+   "posts": 6
   },
   {
    "tema": "calor",
@@ -50,6 +50,11 @@
    "posts": 2
   },
   {
+   "tema": "vivo",
+   "comentarios": 3,
+   "posts": 2
+  },
+  {
    "tema": "centro",
    "comentarios": 2,
    "posts": 2
@@ -60,9 +65,14 @@
    "posts": 1
   },
   {
-   "tema": "vivo",
+   "tema": "proceso",
    "comentarios": 2,
-   "posts": 1
+   "posts": 2
+  },
+  {
+   "tema": "salud",
+   "comentarios": 2,
+   "posts": 2
   },
   {
    "tema": "detienen",
@@ -80,20 +90,15 @@
    "posts": 1
   },
   {
-   "tema": "proceso",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
    "tema": "trump",
    "comentarios": 1,
    "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 27,
-  "negativo": 186,
-  "neutral": 150,
+  "positivo": 33,
+  "negativo": 230,
+  "neutral": 175,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -110,40 +115,6 @@
   }
  ],
  "destacados": [
-  {
-   "url": "https://www.tiktok.com/@blancoynegronoticias/video/7684071930537790741",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "Tijuana",
-   "fecha": "2026-09-11",
-   "titulo": "📱🚨 Ladrón roba estéreo y habría dejado su celular en el vehículo",
-   "tipo": "video",
-   "likes": 34434,
-   "comentarios": 99,
-   "reproducciones": 565987,
-   "creador": "@blancoynegronoticias",
-   "publicado": "2026-09-11T00:43:40+00:00",
-   "compartidos": 1500,
-   "guardados": 1693,
-   "cosechados": 30,
-   "opinion": 30,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 6,
-    "neutral": 24,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "bajo",
-     "comentarios": 1
-    },
-    {
-     "tema": "casa",
-     "comentarios": 1
-    }
-   ]
-  },
   {
    "url": "https://www.tiktok.com/@americanoticias/video/7684233909017545985",
    "cuenta": "tk_tijuana_noticias",
@@ -213,40 +184,6 @@
    ]
   },
   {
-   "url": "https://www.tiktok.com/@siempreenlanoticia/video/7684097804876139794",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "Tijuana",
-   "fecha": "2026-09-11",
-   "titulo": "Ya se instaló el sistema anti neblina en el Aeropuerto de Tijuana.",
-   "tipo": "video",
-   "likes": 1716,
-   "comentarios": 64,
-   "reproducciones": 50749,
-   "creador": "@siempreenlanoticia",
-   "publicado": "2026-09-11T02:24:06+00:00",
-   "compartidos": 440,
-   "guardados": 142,
-   "cosechados": 29,
-   "opinion": 29,
-   "sentimiento": {
-    "positivo": 4,
-    "negativo": 13,
-    "neutral": 12,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "calor",
-     "comentarios": 1
-    },
-    {
-     "tema": "gobierno",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
    "url": "https://www.tiktok.com/@canal33tijuana/video/7684338150289739026",
    "cuenta": "tk_tijuana_noticias",
    "zona": "Tijuana",
@@ -295,6 +232,36 @@
     "sin_modelo_idioma": 0
    },
    "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@redunosur/video/7684430836334185749",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-11",
+   "titulo": "🔶️ #Tarija | Una menor de 14 años terminó en emergencias tras ser detenida y gasificada en la FELCC. La Defensoría aclaró que no existía una denuncia por desap…",
+   "tipo": "video",
+   "likes": 1343,
+   "comentarios": 41,
+   "reproducciones": 89945,
+   "creador": "@redunosur",
+   "publicado": "2026-09-11T23:56:28+00:00",
+   "compartidos": 85,
+   "guardados": 123,
+   "cosechados": 30,
+   "opinion": 30,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 24,
+    "neutral": 6,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "proceso",
+     "comentarios": 1
+    }
+   ]
   },
   {
    "url": "https://www.tiktok.com/@nmasforo/video/7684273247084498197",
@@ -360,80 +327,80 @@
    ]
   },
   {
-   "url": "https://www.tiktok.com/@el_noticiero_tc/video/7684092601351392519",
+   "url": "https://www.tiktok.com/@manuelpedreronoticias/video/7684339522322042120",
    "cuenta": "tk_tijuana_noticias",
-   "zona": "nacional",
-   "fecha": "2026-09-11",
-   "titulo": "🚨AHORA SE ROBAN HASTA EL ARROZ",
+   "zona": "Tijuana",
+   "fecha": "2026-09-12",
+   "titulo": "#SinMáscaras | “Chocolate” el perrito antidr0gas que ayudó a decomisar 76 kilos de cocaína en Tijuana y volvió a demostrar su olfato...",
    "tipo": "video",
-   "likes": 754,
-   "comentarios": 17,
-   "reproducciones": 29482,
-   "creador": "@el_noticiero_tc",
-   "publicado": "2026-09-11T02:03:59+00:00",
-   "compartidos": 62,
-   "guardados": 33,
-   "cosechados": 14,
-   "opinion": 11,
+   "likes": 756,
+   "comentarios": 16,
+   "reproducciones": 4235,
+   "creador": "@manuelpedreronoticias",
+   "publicado": "2026-09-12T00:30:00+00:00",
+   "compartidos": 15,
+   "guardados": 16,
+   "cosechados": 11,
+   "opinion": 8,
    "sentimiento": {
-    "positivo": 0,
-    "negativo": 9,
-    "neutral": 2,
+    "positivo": 3,
+    "negativo": 1,
+    "neutral": 4,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": [
     {
-     "tema": "gobierno",
+     "tema": "bajo",
      "comentarios": 1
     }
    ]
   },
   {
-   "url": "https://www.tiktok.com/@jlmn0ticias/video/7684119033024630034",
+   "url": "https://www.tiktok.com/@n.mas/video/7684461590812445953",
    "cuenta": "tk_tijuana_noticias",
-   "zona": "nacional",
-   "fecha": "2026-09-11",
-   "titulo": "A las afueras de la 14va Zona Militar, choque desigual entre un coche Atos y una motocicleta 250 CC. El conductor de la motocicleta fue trasladado de emergenci…",
+   "zona": "Tijuana",
+   "fecha": "2026-09-12",
+   "titulo": "Una grúa estuvo a punto de volcar cuando realizaba maniobras para sacar un camión de transporte de turismo que había caído a un barranco de 20 metros en Tijuan…",
    "tipo": "video",
-   "likes": 620,
-   "comentarios": 3,
-   "reproducciones": 20267,
-   "creador": "@jlmn0ticias",
-   "publicado": "2026-09-11T03:46:32+00:00",
-   "compartidos": 42,
-   "guardados": 22,
-   "cosechados": 3,
-   "opinion": 2,
+   "likes": 748,
+   "comentarios": 14,
+   "reproducciones": 71855,
+   "creador": "@n.mas",
+   "publicado": "2026-09-12T01:56:06+00:00",
+   "compartidos": 52,
+   "guardados": 55,
+   "cosechados": 7,
+   "opinion": 6,
    "sentimiento": {
     "positivo": 1,
-    "negativo": 0,
-    "neutral": 1,
+    "negativo": 3,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@carmen_casta3/video/7684097509735664904",
+   "url": "https://www.tiktok.com/@tvaztecabc/video/7684300530516036885",
    "cuenta": "tk_tijuana_noticias",
-   "zona": "nacional",
+   "zona": "Tijuana",
    "fecha": "2026-09-11",
-   "titulo": "",
+   "titulo": "¡SE INCENDIA EL MARIANO MATAMOROS! 🔥 Un fuerte incendio que se se puede ver desde varios puntos en #Tijuana la mañana de este viernes 11 de setiembre. Toma pre…",
    "tipo": "video",
-   "likes": 502,
-   "comentarios": 6,
-   "reproducciones": 11331,
-   "creador": "@carmen_casta3",
-   "publicado": "2026-09-11T02:22:59+00:00",
-   "compartidos": 21,
-   "guardados": 21,
-   "cosechados": 5,
-   "opinion": 1,
+   "likes": 642,
+   "comentarios": 18,
+   "reproducciones": 25467,
+   "creador": "@tvaztecabc",
+   "publicado": "2026-09-11T15:30:43+00:00",
+   "compartidos": 164,
+   "guardados": 39,
+   "cosechados": 3,
+   "opinion": 2,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 1,
-    "neutral": 0,
+    "negativo": 0,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -495,44 +462,6 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@noticiaslawuera/video/7684140933083893022",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "Tijuana",
-   "fecha": "2026-09-11",
-   "titulo": "Patrulla espiritual tendría que devolver los 7.2 millones y no se comprueba los gastos#patrullaespiritual #tijuana #😱 #mexico @Patrulla Espiritual Oficial @Cla…",
-   "tipo": "video",
-   "likes": 273,
-   "comentarios": 59,
-   "reproducciones": 13916,
-   "creador": "@noticiaslawuera",
-   "publicado": "2026-09-11T05:11:30+00:00",
-   "compartidos": 13,
-   "guardados": 17,
-   "cosechados": 30,
-   "opinion": 29,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 15,
-    "neutral": 13,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "casa",
-     "comentarios": 2
-    },
-    {
-     "tema": "familia",
-     "comentarios": 2
-    },
-    {
-     "tema": "gobierno",
-     "comentarios": 2
-    }
-   ]
-  },
-  {
    "url": "https://www.tiktok.com/@oemnoticias/video/7684319168396561684",
    "cuenta": "tk_tijuana_noticias",
    "zona": "Tijuana",
@@ -558,25 +487,55 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@tvaztecabc/video/7684300530516036885",
+   "url": "https://www.tiktok.com/@tvaztecaguateoficial/video/7684357330347003152",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-11",
+   "titulo": "#Nacionales | Los bloqueos persisten en la ruta al Atlántico y han provocado un fuerte congestionamiento vehicular, dejando el tránsito prácticamente colapsado…",
+   "tipo": "video",
+   "likes": 229,
+   "comentarios": 6,
+   "reproducciones": 8582,
+   "creador": "@tvaztecaguateoficial",
+   "publicado": "2026-09-11T19:11:43+00:00",
+   "compartidos": 26,
+   "guardados": 14,
+   "cosechados": 5,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 1,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "gobierno",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
+   "url": "https://www.tiktok.com/@tvaztecabc/video/7684316929691028757",
    "cuenta": "tk_tijuana_noticias",
    "zona": "Tijuana",
    "fecha": "2026-09-11",
-   "titulo": "¡SE INCENDIA EL MARIANO MATAMOROS! 🔥 Un fuerte incendio que se se puede ver desde varios puntos en #Tijuana la mañana de este viernes 11 de setiembre. Toma pre…",
+   "titulo": "¡Ya fue controlado! Fue una bodega la que se incendió en la colonia Mariano Matamoros en #Tijuana la mañana de este viernes.",
    "tipo": "video",
-   "likes": 258,
-   "comentarios": 5,
-   "reproducciones": 7957,
+   "likes": 221,
+   "comentarios": 1,
+   "reproducciones": 9719,
    "creador": "@tvaztecabc",
-   "publicado": "2026-09-11T15:30:43+00:00",
-   "compartidos": 37,
-   "guardados": 12,
-   "cosechados": 3,
-   "opinion": 2,
+   "publicado": "2026-09-11T16:34:25+00:00",
+   "compartidos": 45,
+   "guardados": 10,
+   "cosechados": 1,
+   "opinion": 1,
    "sentimiento": {
     "positivo": 0,
     "negativo": 0,
-    "neutral": 2,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -646,6 +605,36 @@
    ]
   },
   {
+   "url": "https://www.tiktok.com/@noticiaslawuera/video/7684488660959366430",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "Tijuana",
+   "fecha": "2026-09-12",
+   "titulo": "Fuertes aclaraciones da la Madre de Richard, el joven asfixiado en Clinica Jireh#patrullaespiritual #mexico #tijuana #usa @Claudia Sheinbaum Pardo @Patrulla Es…",
+   "tipo": "video",
+   "likes": 186,
+   "comentarios": 29,
+   "reproducciones": 14893,
+   "creador": "@noticiaslawuera",
+   "publicado": "2026-09-12T03:40:56+00:00",
+   "compartidos": 2,
+   "guardados": 14,
+   "cosechados": 25,
+   "opinion": 21,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 13,
+    "neutral": 8,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "vivo",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
    "url": "https://www.tiktok.com/@crealanoticia/video/7684349066028797192",
    "cuenta": "tk_tijuana_noticias",
    "zona": "Tijuana",
@@ -674,31 +663,6 @@
      "comentarios": 1
     }
    ]
-  },
-  {
-   "url": "https://www.tiktok.com/@tvaztecabc/video/7684316929691028757",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "Tijuana",
-   "fecha": "2026-09-11",
-   "titulo": "¡Ya fue controlado! Fue una bodega la que se incendió en la colonia Mariano Matamoros en #Tijuana la mañana de este viernes.",
-   "tipo": "video",
-   "likes": 139,
-   "comentarios": 1,
-   "reproducciones": 5459,
-   "creador": "@tvaztecabc",
-   "publicado": "2026-09-11T16:34:25+00:00",
-   "compartidos": 24,
-   "guardados": 6,
-   "cosechados": 1,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
   },
   {
    "url": "https://www.tiktok.com/@marybuoficial/video/7684338527856889095",
@@ -781,6 +745,31 @@
    "temas": []
   },
   {
+   "url": "https://www.tiktok.com/@tjborder/video/7684452673428540692",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "Tijuana",
+   "fecha": "2026-09-12",
+   "titulo": "#tijuana #parati #tjborder @MIGUEL COMANDO",
+   "tipo": "video",
+   "likes": 102,
+   "comentarios": 1,
+   "reproducciones": 1119,
+   "creador": "@tjborder",
+   "publicado": "2026-09-12T01:21:08+00:00",
+   "compartidos": 7,
+   "guardados": 4,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.tiktok.com/@rojascontruction/video/7684289959548833037",
    "cuenta": "tk_tijuana_noticias",
    "zona": "nacional",
@@ -800,31 +789,6 @@
     "positivo": 3,
     "negativo": 0,
     "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@_octaviovaldez/video/7684140723024825618",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "nacional",
-   "fecha": "2026-09-11",
-   "titulo": "SI CRUZAS A EE.UU. ESTE VIERNES, PON MUCHA ATENCIÓN 🇲🇽 🇺🇸",
-   "tipo": "video",
-   "likes": 85,
-   "comentarios": 1,
-   "reproducciones": 5150,
-   "creador": "@_octaviovaldez",
-   "publicado": "2026-09-11T05:10:46+00:00",
-   "compartidos": 17,
-   "guardados": 6,
-   "cosechados": 1,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -881,25 +845,25 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@oye_tijuana/video/7684073805530074388",
+   "url": "https://www.tiktok.com/@kamila17955/video/7684309759700241672",
    "cuenta": "tk_tijuana_noticias",
-   "zona": "Tijuana",
+   "zona": "nacional",
    "fecha": "2026-09-11",
-   "titulo": "Localizan dos cabezas humanas dentro de hieleras en San Antonio del Mar",
+   "titulo": "",
    "tipo": "video",
-   "likes": 78,
-   "comentarios": 1,
-   "reproducciones": 2833,
-   "creador": "@oye_tijuana",
-   "publicado": "2026-09-11T00:50:58+00:00",
-   "compartidos": 12,
-   "guardados": 2,
+   "likes": 73,
+   "comentarios": 2,
+   "reproducciones": 1550,
+   "creador": "@kamila17955",
+   "publicado": "2026-09-11T16:06:32+00:00",
+   "compartidos": 13,
+   "guardados": 10,
    "cosechados": 1,
-   "opinion": 0,
+   "opinion": 1,
    "sentimiento": {
     "positivo": 0,
     "negativo": 0,
-    "neutral": 0,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -936,24 +900,49 @@
    ]
   },
   {
-   "url": "https://www.tiktok.com/@cadenapolitica/video/7684121700056845586",
+   "url": "https://www.tiktok.com/@elcaminodeuntrader/video/7684306809007459605",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-11",
+   "titulo": "Alerta para todos los trabajadores en EEUU !! .",
+   "tipo": "video",
+   "likes": 64,
+   "comentarios": 2,
+   "reproducciones": 1341,
+   "creador": "@elcaminodeuntrader",
+   "publicado": "2026-09-11T15:55:05+00:00",
+   "compartidos": 4,
+   "guardados": 7,
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@noticiaslawuera/video/7684315666962222367",
    "cuenta": "tk_tijuana_noticias",
    "zona": "Tijuana",
    "fecha": "2026-09-11",
-   "titulo": "Captan a un perrito recostado muy cómodo mientras mira un video en un teléfono celular durante una reunión familiar en Tijuana. La escena causó furor en redes…",
+   "titulo": "Se revela la causa de muerte del interno de la Clinica Jireh#patrullaespiritual #tijuana #mexico @Patrulla Espiritual Oficial @Claudia Sheinbaum Pardo",
    "tipo": "video",
-   "likes": 61,
-   "comentarios": 1,
-   "reproducciones": 786,
-   "creador": "@cadenapolitica",
-   "publicado": "2026-09-11T03:56:59+00:00",
-   "compartidos": 10,
-   "guardados": 3,
-   "cosechados": 1,
-   "opinion": 0,
+   "likes": 55,
+   "comentarios": 4,
+   "reproducciones": 5489,
+   "creador": "@noticiaslawuera",
+   "publicado": "2026-09-11T16:29:59+00:00",
+   "compartidos": 5,
+   "guardados": 4,
+   "cosechados": 2,
+   "opinion": 2,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 0,
+    "negativo": 2,
     "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -965,18 +954,18 @@
   {
    "cuenta": "tk_tijuana_noticias",
    "estado": "ok",
-   "posts": 28,
-   "comentarios": 155,
-   "crudos": 161,
-   "fuera": 2,
+   "posts": 29,
+   "comentarios": 88,
+   "crudos": 90,
+   "fuera": 1,
    "descartados": 0
   }
  ],
  "gasto": {
   "resultados": 1000,
-  "gastado": 191,
+  "gastado": 120,
   "por_concepto": {
-   "tk_tijuana_noticias": 191
+   "tk_tijuana_noticias": 120
   }
  }
 }
