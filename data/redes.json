@@ -1,31 +1,33 @@
 {
  "esquema": 1,
- "generado": "2026-09-14T19:26:15+00:00",
+ "generado": "2026-09-14T20:09:17+00:00",
  "plataforma": "instagram",
  "retencion_dias": 30,
- "comentarios_vigentes": 530,
- "posts_vigentes": 83,
- "opinion": 422,
- "repetidos": 0,
- "reacciones": 108,
+ "comentarios_vigentes": 560,
+ "posts_vigentes": 90,
+ "opinion": 445,
+ "repetidos": 3,
+ "reacciones": 115,
  "por_zona": {
-  "Tijuana": 530
+  "Tijuana": 559,
+  "estatal": 1
  },
  "por_cuenta": {
   "afn_ig": 42,
-  "eltijuanense_ig": 10,
-  "frontera_ig": 38,
+  "eltijuanense_ig": 13,
+  "frontera_ig": 41,
   "siempre_ig": 73,
   "sintesis_ig": 3,
   "soltij_ig": 3,
   "tijuanainforma_ig": 24,
-  "tjnoticias_ig": 125,
+  "tjnoticias_ig": 148,
   "tjpublica_ig": 111,
+  "uniradio_ig": 1,
   "yoamotijuana_ig": 77,
   "zeta_ig": 24
  },
  "por_idioma": {
-  "es": 530
+  "es": 560
  },
  "por_tema": [
   {
@@ -45,8 +47,8 @@
   },
   {
    "tema": "gobierno",
-   "comentarios": 4,
-   "posts": 3
+   "comentarios": 6,
+   "posts": 5
   },
   {
    "tema": "agua",
@@ -90,9 +92,9 @@
   }
  ],
  "sentimiento": {
-  "positivo": 78,
-  "negativo": 154,
-  "neutral": 190,
+  "positivo": 82,
+  "negativo": 164,
+  "neutral": 199,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -230,9 +232,9 @@
    "fecha": "2026-09-14",
    "titulo": "DE NEVADA HASTA TIJUANA 🚲",
    "tipo": "video",
-   "likes": 1155,
-   "comentarios": 65,
-   "reproducciones": 72202,
+   "likes": 1344,
+   "comentarios": 73,
+   "reproducciones": 80844,
    "publicado": "2026-09-14T16:33:26+00:00",
    "cosechados": 3,
    "opinion": 3,
@@ -240,6 +242,27 @@
     "positivo": 0,
     "negativo": 1,
     "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdR3PGcmj_K/",
+   "cuenta": "yoamotijuana_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-14",
+   "titulo": "Mañana Tijuana se vuelve a pintar de rojo para apoyar a los Toros en la gran final 🐃⚾",
+   "tipo": "carrusel",
+   "likes": 908,
+   "comentarios": 5,
+   "publicado": "2026-09-14T19:14:52+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -267,15 +290,36 @@
    "temas": []
   },
   {
+   "url": "https://www.instagram.com/p/DdR6oULEgcd/",
+   "cuenta": "tjnoticias_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-14",
+   "titulo": "@kemocion compartió a través de redes sociales un video en el que expone a dos hombres que presuntamente acudieron a comprar un celular, pero habrían realizado…",
+   "tipo": "carrusel",
+   "likes": 650,
+   "comentarios": 20,
+   "publicado": "2026-09-14T19:44:32+00:00",
+   "cosechados": 9,
+   "opinion": 6,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 2,
+    "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.instagram.com/p/DdP9gZxNqFL/",
    "cuenta": "tjpublica_ig",
    "zona": "Tijuana",
    "fecha": "2026-09-14",
    "titulo": "“Fuimos a conocer la Meseta de Natura para disfrutar del atardecer, pero la naturaleza nos tenía preparado este encuentro inesperado”.",
    "tipo": "video",
-   "likes": 559,
+   "likes": 573,
    "comentarios": 30,
-   "reproducciones": 9566,
+   "reproducciones": 9729,
    "publicado": "2026-09-14T01:33:54+00:00",
    "cosechados": 18,
    "opinion": 18,
@@ -315,6 +359,54 @@
    "temas": []
   },
   {
+   "url": "https://www.instagram.com/p/DdR8REMPGTt/",
+   "cuenta": "tjnoticias_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-14",
+   "titulo": "🚨 Un estudiante del CETMAR 05 de Salina Cruz, Oaxaca, exhibió en redes sociales las malas condiciones de los baños del plantel y cuestionó las estrictas reglas…",
+   "tipo": "video",
+   "likes": 525,
+   "comentarios": 13,
+   "reproducciones": 10282,
+   "publicado": "2026-09-14T19:59:51+00:00",
+   "cosechados": 11,
+   "opinion": 9,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 6,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "gobierno",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
+   "url": "https://www.instagram.com/p/DdRx9zlGZaZ/",
+   "cuenta": "yoamotijuana_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-14",
+   "titulo": "Un perrito pastor ovejero necesita urgentemente una familia que pueda darle un hogar y una vida digna. 🥺",
+   "tipo": "carrusel",
+   "likes": 490,
+   "comentarios": 20,
+   "publicado": "2026-09-14T18:28:49+00:00",
+   "cosechados": 3,
+   "opinion": 3,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 2,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.instagram.com/p/DdRvhGcPEqw/",
    "cuenta": "tjnoticias_ig",
    "zona": "Tijuana",
@@ -343,35 +435,14 @@
    "fecha": "2026-09-14",
    "titulo": "🫟 ACTIVIDAD DE DIBUJO Y PINTURA",
    "tipo": "carrusel",
-   "likes": 396,
-   "comentarios": 1,
+   "likes": 451,
+   "comentarios": 2,
    "publicado": "2026-09-14T17:10:12+00:00",
    "cosechados": 1,
    "opinion": 1,
    "sentimiento": {
     "positivo": 0,
     "negativo": 0,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdRx9zlGZaZ/",
-   "cuenta": "yoamotijuana_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "Un perrito pastor ovejero necesita urgentemente una familia que pueda darle un hogar y una vida digna. 🥺",
-   "tipo": "carrusel",
-   "likes": 363,
-   "comentarios": 17,
-   "publicado": "2026-09-14T18:28:49+00:00",
-   "cosechados": 3,
-   "opinion": 3,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 2,
     "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -394,6 +465,27 @@
     "positivo": 0,
     "negativo": 1,
     "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdR4_4TmpL3/",
+   "cuenta": "yoamotijuana_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-14",
+   "titulo": "🐾🚨 TITO SIGUE DESAPARECIDO 🚨🐾",
+   "tipo": "carrusel",
+   "likes": 322,
+   "comentarios": 8,
+   "publicado": "2026-09-14T19:30:16+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -430,101 +522,6 @@
    "likes": 286,
    "comentarios": 3,
    "publicado": "2026-09-14T16:15:41+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdR3PGcmj_K/",
-   "cuenta": "yoamotijuana_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "Mañana Tijuana se vuelve a pintar de rojo para apoyar a los Toros en la gran final 🐃⚾",
-   "tipo": "carrusel",
-   "likes": 271,
-   "comentarios": 1,
-   "publicado": "2026-09-14T19:14:52+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdRjWCum9SP/",
-   "cuenta": "yoamotijuana_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "El clima en Tijuana será una chulada esta semana en comparación al infierno que vivimos la semana pasada, pero eso sí, las temperaturas cálidas seguirán todaví…",
-   "tipo": "imagen",
-   "likes": 258,
-   "comentarios": 0,
-   "publicado": "2026-09-14T16:21:04+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdP7wcFiDEs/",
-   "cuenta": "zeta_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "La Patrulla Espiritual es fiscalizada por el uso de más de siete millones de pesos en becas, mientras autoridades investigan la muerte de un interno, documenta…",
-   "tipo": "video",
-   "likes": 214,
-   "comentarios": 35,
-   "reproducciones": 9549,
-   "publicado": "2026-09-14T01:17:01+00:00",
-   "cosechados": 16,
-   "opinion": 14,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 9,
-    "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "centro",
-     "comentarios": 1
-    },
-    {
-     "tema": "gobierno",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/DdRAFICjIu4/",
-   "cuenta": "eltijuanense_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "NAUFRAGIO DEJA SEIS FALLECIDOS Y 129 DESAPARECIDOS",
-   "tipo": "video",
-   "likes": 166,
-   "comentarios": 0,
-   "reproducciones": 12277,
-   "publicado": "2026-09-14T11:13:17+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -600,16 +597,16 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdPUSzHFV0K/",
+   "url": "https://www.instagram.com/p/DdR4angmGFZ/",
    "cuenta": "uniradio_ig",
    "zona": "estatal",
-   "fecha": "2026-09-13",
-   "titulo": "Baja California fortalece su liderazgo nacional en la industria de semiconductores",
+   "fecha": "2026-09-14",
+   "titulo": "Sin autorización estatal evento de globos en Laguna Salada; autoridades analizan riesgos",
    "tipo": "video",
-   "likes": 4,
+   "likes": 5,
    "comentarios": 0,
-   "reproducciones": 378,
-   "publicado": "2026-09-13T19:31:25+00:00",
+   "reproducciones": 183,
+   "publicado": "2026-09-14T19:25:42+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -654,6 +651,50 @@
    "comentarios": 0,
    "reproducciones": 45,
    "publicado": "2026-09-14T16:51:38+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdR5x4ylEXU/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-14",
+   "titulo": "Acusaciones de campañas negras, porque buscan generar divisiones internas: Gobernadora de Baja California",
+   "tipo": "video",
+   "likes": 1,
+   "comentarios": 1,
+   "reproducciones": 238,
+   "publicado": "2026-09-14T19:38:18+00:00",
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdR4fAnDR_W/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-14",
+   "titulo": "Todo financiamiento y origen para campañas, fue declarado: Marina del Pilar",
+   "tipo": "video",
+   "likes": 1,
+   "comentarios": 0,
+   "reproducciones": 92,
+   "publicado": "2026-09-14T19:26:22+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -836,15 +877,102 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdR4angmGFZ/",
-   "cuenta": "uniradio_ig",
-   "zona": "estatal",
+   "url": "https://www.instagram.com/p/DdR6PtJjX5x/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
    "fecha": "2026-09-14",
-   "titulo": "Sin autorización estatal evento de globos en Laguna Salada; autoridades analizan riesgos",
+   "titulo": "EXIGEN AL ESTADO INTERVENIR POR PARQUE #elvigia #Ensenada",
    "tipo": "video",
    "likes": 0,
    "comentarios": 0,
-   "publicado": "2026-09-14T19:25:42+00:00",
+   "reproducciones": 52,
+   "publicado": "2026-09-14T19:41:39+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdR6sSsGiaw/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-14",
+   "titulo": "𝗟𝗮 𝗙𝗶𝘀𝗰𝗮𝗹í𝗮 𝗚𝗲𝗻𝗲𝗿𝗮𝗹 𝗱𝗲𝗹 𝗘𝘀𝘁𝗮𝗱𝗼 𝘀𝗼𝗹𝗶𝗰𝗶𝘁𝗮 𝗲𝗹 𝗮𝗽𝗼𝘆𝗼 𝗱𝗲 𝗹𝗮 𝗰𝗼𝗺𝘂𝗻𝗶𝗱𝗮𝗱 𝗽𝗮𝗿𝗮 𝗹𝗼𝗰𝗮𝗹𝗶𝘇𝗮𝗿 𝗮 𝗠𝗮𝗻𝘂𝗲𝗹 𝗔𝗻𝘁𝗼𝗻𝗶𝗼 𝗩𝗶𝗹𝗹𝗲𝗴𝗮𝘀 𝗩𝗲𝗴𝗮, 𝗱𝗲 𝟯𝟯 𝗮ñ𝗼𝘀, 𝗾𝘂𝗶𝗲𝗻 𝗳𝘂𝗲 𝘃𝗶𝘀𝘁𝗼 𝗽𝗼𝗿 ú𝗹𝘁𝗶𝗺𝗮 𝘃𝗲𝘇 𝗲𝗹 𝟴…",
+   "tipo": "imagen",
+   "likes": 0,
+   "comentarios": 0,
+   "publicado": "2026-09-14T19:45:05+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdR8-tGDArM/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-14",
+   "titulo": "𝗨𝗻𝗮 𝗺𝘂𝗷𝗲𝗿 𝗳𝘂𝗲 𝗱𝗲𝘁𝗲𝗻𝗶𝗱𝗮 𝗽𝗼𝗿 𝗲𝗹𝗲𝗺𝗲𝗻𝘁𝗼𝘀 𝗱𝗲 𝗹𝗮 𝗗𝗶𝗿𝗲𝗰𝗰𝗶ó𝗻 𝗱𝗲 𝗦𝗲𝗴𝘂𝗿𝗶𝗱𝗮𝗱 𝗣ú𝗯𝗹𝗶𝗰𝗮 𝗠𝘂𝗻𝗶𝗰𝗶𝗽𝗮𝗹 𝘁𝗿𝗮𝘀 𝘀𝗲𝗿 𝘀𝗼𝗿𝗽𝗿𝗲𝗻𝗱𝗶𝗱𝗮 𝗽𝗿𝗲𝘀𝘂𝗻𝘁𝗮𝗺𝗲𝗻𝘁𝗲 𝗶𝗻𝘁𝗲𝗻𝘁𝗮𝗻𝗱𝗼 𝘀𝘂𝘀𝘁𝗿𝗮𝗲𝗿 𝗽𝗿𝗼𝗱𝘂𝗰𝘁𝗼𝘀 𝘀𝗶𝗻 𝗽𝗮𝗴𝗮𝗿𝗹…",
+   "tipo": "imagen",
+   "likes": 0,
+   "comentarios": 0,
+   "publicado": "2026-09-14T20:05:04+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdR8CftCqKG/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-14",
+   "titulo": "Acusaciones de campañas negras, porque buscan generar divisiones internas: Gobernadora de Baja California",
+   "tipo": "video",
+   "likes": 0,
+   "comentarios": 0,
+   "reproducciones": 79,
+   "publicado": "2026-09-14T19:58:23+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdR8El1kZyP/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-14",
+   "titulo": "Será la propia Sheinbaum quien anuncie su gira por Baja California: Ávila Olmeda",
+   "tipo": "video",
+   "likes": 0,
+   "comentarios": 0,
+   "reproducciones": 37,
+   "publicado": "2026-09-14T19:57:32+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -939,27 +1067,6 @@
     "sin_modelo_idioma": 0
    },
    "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdRyr8Wj-ot/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
-   "fecha": "2026-09-14",
-   "titulo": "𝗟𝗮 𝗔𝘂𝗱𝗶𝘁𝗼𝗿í𝗮 𝗦𝘂𝗽𝗲𝗿𝗶𝗼𝗿 𝗱𝗲 𝗹𝗮 𝗙𝗲𝗱𝗲𝗿𝗮𝗰𝗶ó𝗻 (𝗔𝗦𝗙) 𝗱𝗲𝗻𝘂𝗻𝗰𝗶ó 𝗲𝗹 𝗽𝗿𝗲𝘀𝘂𝗻𝘁𝗼 𝘂𝘀𝗼 𝗱𝗲 𝗳𝗶𝗿𝗺𝗮𝘀, 𝗱𝗼𝗰𝘂𝗺𝗲𝗻𝘁𝗼𝘀 𝘆 𝗺𝗲𝗺𝗯𝗿𝗲𝘁𝗲𝘀 𝗳𝗮𝗹𝘀𝗼𝘀 𝗽𝗮𝗿𝗮 𝗲𝘅𝘁𝗼𝗿𝘀𝗶𝗼𝗻𝗮𝗿 𝗮 𝗲𝗻𝘁𝗲𝘀 𝗴𝘂𝗯𝗲𝗿𝗻𝗮𝗺𝗲𝗻𝘁𝗮𝗹𝗲𝘀 𝘆 𝗳𝘂𝗻𝗰𝗶…",
-   "tipo": "imagen",
-   "likes": 0,
-   "comentarios": 0,
-   "publicado": "2026-09-14T18:35:08+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
   }
  ],
  "salud": [
@@ -975,37 +1082,35 @@
    "cuenta": "eltijuanense_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar"
+   "comentarios": 4,
+   "crudos": 4
   },
   {
    "cuenta": "elvigia_ig",
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 2
+   "crudos": 3
   },
   {
    "cuenta": "frontera_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 2
+   "comentarios": 3,
+   "crudos": 6
   },
   {
    "cuenta": "siempre_ig",
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar"
+   "crudos": 1
   },
   {
    "cuenta": "sintesis_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 1,
+   "comentarios": 0,
    "crudos": 2
   },
   {
@@ -1021,15 +1126,14 @@
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar"
+   "crudos": 1
   },
   {
    "cuenta": "tjnoticias_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 1
+   "comentarios": 23,
+   "crudos": 23
   },
   {
    "cuenta": "tjpublica_ig",
@@ -1043,15 +1147,16 @@
    "cuenta": "uniradio_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 4
+   "comentarios": 1,
+   "crudos": 3
   },
   {
    "cuenta": "yoamotijuana_ig",
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 1
+   "crudos": 0,
+   "nota": "sin posts nuevos que cosechar"
   },
   {
    "cuenta": "zeta_ig",
@@ -1064,20 +1169,20 @@
  ],
  "gasto": {
   "resultados": 2600,
-  "gastado": 77,
+  "gastado": 108,
   "por_concepto": {
    "afn_ig": 5,
-   "eltijuanense_ig": 5,
-   "elvigia_ig": 7,
-   "frontera_ig": 7,
-   "siempre_ig": 5,
+   "eltijuanense_ig": 9,
+   "elvigia_ig": 8,
+   "frontera_ig": 11,
+   "siempre_ig": 6,
    "sintesis_ig": 7,
    "soltij_ig": 5,
-   "tijuanainforma_ig": 5,
-   "tjnoticias_ig": 6,
+   "tijuanainforma_ig": 6,
+   "tjnoticias_ig": 28,
    "tjpublica_ig": 5,
-   "uniradio_ig": 9,
-   "yoamotijuana_ig": 6,
+   "uniradio_ig": 8,
+   "yoamotijuana_ig": 5,
    "zeta_ig": 5
   }
  }
