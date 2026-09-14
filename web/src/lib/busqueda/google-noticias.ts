@@ -74,6 +74,24 @@ export function urlDeActualidad(tema: TemaGoogle, idioma: Idioma): string {
   return `${URL_SECCION}/${tema}?${params.toString()}`;
 }
 
+const URL_LUGAR = `https://${HOST_GOOGLE}/rss/headlines/section/geo`;
+
+/**
+ * La seccion LOCAL de Google para un lugar, por su nombre. Google la resuelve
+ * el solo y con el mismo 302 que las tematicas: se le pidio "Playas de
+ * Rosarito" y contesto la seccion "Rosarito - Reciente". El nombre va con
+ * encodeURIComponent porque es un segmento de ruta, no un parametro.
+ */
+export function urlDeLugar(lugar: string, idioma: Idioma): string {
+  const locale = LOCALES[idioma];
+  const params = new URLSearchParams({
+    hl: locale.hl,
+    gl: locale.gl,
+    ceid: locale.ceid,
+  });
+  return `${URL_LUGAR}/${encodeURIComponent(lugar)}?${params.toString()}`;
+}
+
 /**
  * Exactamente news.google.com por https. Nunca `startsWith`:
  * "news.google.com.evil.example" empieza igual.

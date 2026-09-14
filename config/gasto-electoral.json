@@ -1,0 +1,67 @@
+{
+ "nota": "La cifra de cada candidatura sale del Anexo II del dictamen final del INE, no del CSV reportado. El financiamiento 2026 es de partidos y nunca se atribuye a una persona.",
+ "proceso_actual": {
+  "id": "bc-2026-2027",
+  "nombre": "Proceso electoral 2026-2027",
+  "estado": "proceso_federal_iniciado_sin_campana",
+  "inicio_federal": "2026-09-10",
+  "inicio_local": "2026-12-06",
+  "precampana_desde": "2027-01-04",
+  "campana_desde": "2027-04-04",
+  "campana_hasta": "2027-06-02",
+  "eleccion": "2027-06-06",
+  "fuente": "https://portal.ine.mx/voto-y-elecciones/elecciones-2027/baja-california-2027/"
+ },
+ "procesos": [
+  {
+   "id": "pelo-2024",
+   "nombre": "Proceso electoral local 2023-2024",
+   "ambito": "local",
+   "estado": "auditado",
+   "eleccion": "2024-06-02",
+   "dictamen": "INE/CG1934/2024",
+   "dictamen_url": "https://repositoriodocumental.ine.mx/xmlui/bitstream/handle/123456789/175444/CGex202407-22-dp-8-4.pdf",
+   "corte": "2024-07-22",
+   "reporte_candidaturas": "https://fiscalizacion.ine.mx/documents/82565/1268556/PRELO_23-24_CAM_OYG_240624.csv/817a92c4-967c-4471-9a6e-ac983bac9223",
+   "reporte_desglose": "https://fiscalizacion.ine.mx/documents/82565/1268556/PRELO_23-24_CAM_GxR_240624.csv/92b2afab-3cf2-4ffb-a096-7a9176de86ff",
+   "indice_anexos": "https://repositoriodocumental.ine.mx/xmlui/handle/123456789/175444",
+   "patron_zip": "CGex202407-22-dp-8-4-a2-.*\\.zip",
+   "patron_anexo": "^Anexo II_.*\\.xlsx$",
+   "patron_entidad": "(^|[/_ -])(BC|BAJA[ _-]+CALIFORNIA)([/_ .-]|$)",
+   "filas_esperadas": 194
+  },
+  {
+   "id": "pef-2024",
+   "nombre": "Proceso electoral federal 2023-2024",
+   "ambito": "federal",
+   "estado": "auditado",
+   "eleccion": "2024-06-02",
+   "dictamen": "INE/CG1928/2024",
+   "dictamen_url": "https://repositoriodocumental.ine.mx/xmlui/bitstream/handle/123456789/175380/CGex202407-22-dp-7-1.pdf",
+   "corte": "2024-07-22",
+   "reporte_candidaturas": "https://fiscalizacion.ine.mx/documents/82565/1268544/PREFO_23-24_CAM_OYG_240624.csv/1cd2ace9-0d47-40b1-bfc8-9ebce33205da",
+   "reporte_desglose": "https://fiscalizacion.ine.mx/documents/82565/1268544/PREFO_23-24_CAM_GxR_240624.csv/cce0750a-e105-4837-a339-dc581fdbe210",
+   "indice_anexos": "https://repositoriodocumental.ine.mx/xmlui/handle/123456789/175380",
+   "patron_zip": "CGex202407-22-dp-7-1-a2-(?:02-PRI|03-PRD|04-PT|05-PVEM-02|06-MC-01|07-Morena-17|08-01-%20COA-FCXM-13|08-02-COA-SHH-21)\\.zip",
+   "patron_anexo": "^Anexo (?:II|I[-_ ]II)[ _-].*\\.xlsx$",
+   "filas_esperadas": 53
+  }
+ ],
+ "financiamiento": {
+  "ejercicio": 2026,
+  "corte": "2026-07-03",
+  "ordinarias_url": "https://ieebc.mx/archivos/partidos/financiamiento/activord2026.xlsx",
+  "especificas_url": "https://ieebc.mx/archivos/partidos/financiamiento/activesp2026.xlsx",
+  "acuerdos": [
+   {"id": "IEEBC/CGE132/2025", "fecha": "2025-11-18", "url": "https://ieebc.mx/archivos/ConsejoGeneral/Sesiones/Extraordinarias/2025/acuerdo132cge2025.pdf"},
+   {"id": "IEEBC/CGE37/2026", "fecha": "2026-07-03", "url": "https://ieebc.mx/archivos/2026/sesiones/CGE/extra/_aprobados/acuerdo37cge2026.pdf"}
+  ],
+  "ajuste_pesbc": {
+   "partido": "ENCUENTRO SOLIDARIO BAJA CALIFORNIA",
+   "presupuesto_ordinario_vigente": 17082101.12,
+   "ministrado_enero_mayo": 33124092.85,
+   "excedente_ministrado": 16041991.73,
+   "acuerdo_url": "https://ieebc.mx/archivos/2026/sesiones/CGE/extra/_aprobados/acuerdo37cge2026.pdf"
+  }
+ }
+}

@@ -5,13 +5,12 @@ import { Pie } from "@/components/chrome/pie";
 import { RUTAS } from "@/lib/datos/config";
 import type { Vista } from "@/lib/dominio/secciones";
 import type { ZonaRuta } from "@/lib/dominio/zonas";
-import { PaginaCobertura } from "./cobertura";
 import { PaginaIndicadores } from "./indicadores";
 import { PaginaRedes } from "./redes";
 import { PaginaTitulares } from "./titulares";
 
 /**
- * Una celda de la rejilla lugar x vista: 9 lugares por 4 vistas.
+ * Una celda de la rejilla lugar x vista: 9 lugares por 3 vistas.
  *
  * Todas las rutas del tablero terminan aqui, y por eso la nav y el pie se
  * escriben UNA vez. Antes esto era `tablero.tsx`, que componia las nueve
@@ -19,13 +18,12 @@ import { PaginaTitulares } from "./titulares";
  * ~9 pantallas donde el 80% de lo que bajaba no era lo que se venia a ver.
  *
  * El cuerpo se elige por tabla y no por una escalera de ternarios, que es lo
- * que crece mal cuando se agrega la quinta vista.
+ * que crece mal cuando se agrega la cuarta vista.
  */
 const CUERPOS = {
   portada: PaginaTitulares,
   redes: PaginaRedes,
   indicadores: PaginaIndicadores,
-  cobertura: PaginaCobertura,
 } as const;
 
 export function Pagina({ zona, vista }: { zona: ZonaRuta | null; vista: Vista }) {
@@ -73,7 +71,7 @@ export function Pagina({ zona, vista }: { zona: ZonaRuta | null; vista: Vista })
       <Cuerpo zona={zona} />
       {/* El pie se repite en las cuatro paginas a proposito. Es prosa de
           servidor, no pesa un byte de bundle, y es la integridad del producto:
-          recortarlo por pagina obligaria a decidir en cual de las cuatro se
+          recortarlo por pagina obligaria a decidir en cual de las tres se
           puede omitir que esto mide volumen de prensa y no opinion publica.
           Ninguna. */}
       <Pie />

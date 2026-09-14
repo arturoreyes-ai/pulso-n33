@@ -294,6 +294,33 @@ body {
   border-radius: inherit;
 }
 
+/* ------------------------------------------- superficies del navegador */
+
+/* Lo que no dibujamos tambien es del tablero. El anillo de foco de arriba ya
+   estaba tematizado; estas tres no, y sobre #050505 se notan: la seleccion
+   salia azul de sistema encima de un titular, la barra de scroll gris clara
+   sobre negro, y el cursor de texto del buscador del muro blanco puro.
+   Ninguna de las tres pertenece a ninguna paleta.
+
+   Solo propiedades estandar, sin `::-webkit-scrollbar`: las tiras de
+   pastillas que hacen scroll horizontal (nav-pildora, selector-delegacion,
+   navegacion-titulares) apagan su barra con `scrollbar-width: none`, y una
+   regla webkit global volveria a pintarsela encima. */
+::selection {
+  background: rgb(56 189 248 / 0.3); /* chart-3, el mismo del foco */
+  color: var(--color-tinta-titulo);
+}
+
+:root {
+  scrollbar-color: var(--color-realce) transparent;
+  scrollbar-width: thin;
+}
+
+input,
+textarea {
+  caret-color: var(--color-chart-3);
+}
+
 /* --------------------------------------------------------------- revelado */
 
 /* El HTML del servidor sale VISIBLE. El estado que oculta lo pone el JS solo

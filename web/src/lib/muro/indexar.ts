@@ -60,7 +60,7 @@ export function indexar(notas: readonly Nota[]): Indice {
     // nombra ningun lugar de la region, y formaban el grupo mas grande del
     // tablero regional —249 de 828— sin decir nada de una zona, que es
     // justo lo que la seccion promete. `zonasDeNota` sigue devolviendo
-    // 'nacional' y el panel de cobertura sigue reportandolas: esto es un
+    // 'nacional' y el estado de la corrida sigue contandolas: esto es un
     // corte de la VISTA, no una perdida de dato.
     if (n.zonas.length === 0) {
       nacionales++;

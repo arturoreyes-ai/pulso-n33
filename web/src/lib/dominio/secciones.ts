@@ -16,18 +16,28 @@ import { SLUG_DE_ZONA, type Slug, type ZonaRuta } from "./zonas";
  *  3. Todo el JSON del tablero se pedia en cada carga, sin importar que
  *     mirabas.
  *
- * Son TRES secciones y la portada, no ocho. Lo que se fusiono, y por que:
+ * Son DOS secciones y la portada, no ocho. Lo que se fusiono, y por que:
  *
- *  - Instagram, TikTok y YouTube son `redes`. Son la MISMA pregunta —que se
- *    comenta— en tres plataformas, y darle a TikTok su propia entrada en la
+ *  - Instagram, TikTok, YouTube y X son `redes`. Son la MISMA pregunta —de que
+ *    se habla— en cuatro plataformas, y darle a TikTok su propia entrada en la
  *    nav lo convertia en un tema del producto en vez de en una fuente.
  *    Dentro de la pagina se eligen con un selector, como una faceta.
  *  - `temas` y `panorama` bajan a la portada. Temas FILTRA el muro que tiene
  *    encima (ver lib/muro/filtro-tema.ts): en otra pagina el filtro se queda
  *    sin nada que filtrar. Panorama es el resumen de la corrida y se lee
  *    junto a los titulares que resume.
+ *
+ * `cobertura` fue la tercera seccion hasta el 14 de septiembre de 2026. Era la pagina
+ * «Que se cubre y que no»: la matriz de zonas por fuente, el estado de cada
+ * feed y los huecos declarados. Se quito a peticion del cliente.
+ *
+ * Lo que rotula los huecos NO estaba ahi y sigue en pie: cada panel dibuja su
+ * propio `Hueco` («sin cuenta de Instagram con sede en Tecate», «X no publica
+ * lista para Ensenada»), el pie del sitio dice que la cobertura es desigual
+ * por zona, y el resumen de la portada publica cuantas fuentes respondieron.
+ * La regla 4 de PRODUCT.md vive en esos tres sitios, no en una pagina.
  */
-export const SECCIONES = ["redes", "indicadores", "cobertura"] as const;
+export const SECCIONES = ["redes", "indicadores"] as const;
 
 export type Seccion = (typeof SECCIONES)[number];
 
@@ -39,44 +49,45 @@ const NOMBRE = {
   portada: "Titulares",
   redes: "Redes",
   indicadores: "Indicadores",
-  cobertura: "Cobertura",
 } as const satisfies Record<Seccion | "portada", string>;
 
 export const nombreVista = (v: Vista): string => NOMBRE[v ?? "portada"];
 
 /**
  * Como se titula una seccion cuando habla de un lugar. La preposicion no es
- * la misma en las tres —se esta EN una red y se tiene cobertura DE un
+ * la misma en las dos —se esta EN una red y se tienen indicadores DE un
  * municipio— asi que se escribe una vez y la usan el h1 de la pagina y el
- * <title> de la pestana. Separadas, una decia "Cobertura de Ensenada" en la
- * pagina y "Cobertura en Ensenada" en la pestana.
+ * <title> de la pestana. Separadas, una decia "Indicadores de Ensenada" en la
+ * pagina y "Indicadores en Ensenada" en la pestana.
  */
 const TITULO: Record<Seccion, (nombre: string) => string> = {
   redes: (n) => `Redes en ${n}`,
   indicadores: (n) => `Indicadores de ${n}`,
-  cobertura: (n) => `Cobertura de ${n}`,
 };
 
 export const tituloSeccion = (s: Seccion, nombre: string | null): string =>
   nombre === null ? NOMBRE[s] : TITULO[s](nombre);
 
-/** El orden de la nav: la portada primero, y luego las tres secciones. */
+/** El orden de la nav: la portada primero, y luego las dos secciones. */
 export const VISTAS: readonly Vista[] = [null, ...SECCIONES];
 
 /**
  * Paginas que estan en la nav pero NO en la rejilla lugar x vista.
  *
- * Garitas es la unica hasta hoy, y no es una omision: mide las esperas que
- * CBP reporta en San Ysidro y Otay Mesa, que son del CORREDOR y no de un
- * municipio. `/tecate/garitas` no querria decir nada. Tampoco comparte el
- * sistema visual —tiene su propio `main`, su propia hoja de estilos y su
- * propia navegacion de regreso—, asi que la pildora no se pinta ahi y por eso
- * ninguna de estas puede salir marcada como actual.
+ * Garitas mide esperas del corredor, no de un municipio. Gasto electoral
+ * mezcla gubernatura, senadurias, distritos y ayuntamientos: forzarlo al
+ * selector geografico acreditaria toda candidatura a una sola zona. Ninguna
+ * de las dos admite `/tecate/<pagina>`.
  *
  * Se declara aqui, y no como un `<li>` a mano en la pildora, para que la nav
  * siga teniendo una sola lista de la que salen sus elementos.
  */
-export const SUELTAS = [{ ruta: "/garitas", nombre: "Garitas" }] as const;
+export const SUELTAS = [
+  { id: "garitas", ruta: "/garitas", nombre: "Garitas" },
+  { id: "gasto-electoral", ruta: "/gasto-electoral", nombre: "Gasto electoral" },
+] as const;
+
+export type PaginaSuelta = (typeof SUELTAS)[number]["id"];
 
 const SECCION_DE_SLUG = new Map<string, Seccion>(SECCIONES.map((s) => [s, s]));
 
@@ -106,12 +117,12 @@ export function ruta(zona: ZonaRuta | null, vista: Vista): string {
  * Con esto deja de compilar, y `pnpm tipos` corre en CI.
  */
 /**
- * Todo segmento literal de primer nivel que compite con `[zona]`: las tres
+ * Todo segmento literal de primer nivel que compite con `[zona]`: las dos
  * secciones, las sueltas de la nav y la puerta (/entrar, ver proxy.ts). Una
  * zona llamada "entrar" dejaria a esa zona sin pagina y a la puerta intacta,
  * el mismo fallo mudo.
  */
-type SegmentoLiteral = Seccion | "garitas" | "entrar";
+type SegmentoLiteral = Seccion | PaginaSuelta | "entrar";
 
 export const RUTAS_SIN_COLISION: [Extract<SegmentoLiteral, Slug>] extends [never]
   ? true

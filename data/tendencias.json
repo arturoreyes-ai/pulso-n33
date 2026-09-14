@@ -1,0 +1,663 @@
+{
+ "esquema": 1,
+ "generado": "2026-09-12T02:26:05+00:00",
+ "plataforma": "x",
+ "acceso": "sin_sesion",
+ "maximo_por_ubicacion": 20,
+ "ubicaciones": [
+  {
+   "id": "ensenada",
+   "nombre": "Ensenada",
+   "woeid": null,
+   "zona": "Ensenada",
+   "ambito": "zona",
+   "activa": false,
+   "estado": "sin_lista",
+   "corte": null,
+   "tendencias": []
+  },
+  {
+   "id": "mexicali",
+   "nombre": "Mexicali",
+   "woeid": 133475,
+   "zona": "Mexicali",
+   "ambito": "zona",
+   "activa": true,
+   "estado": "ok",
+   "corte": "2026-09-12T02:26:10+00:00",
+   "tendencias": [
+    {
+     "puesto": 1,
+     "nombre": "#SmackDown",
+     "url": "https://x.com/search?q=%23SmackDown"
+    },
+    {
+     "puesto": 2,
+     "nombre": "lady gaga",
+     "url": "https://x.com/search?q=%22lady%20gaga%22"
+    },
+    {
+     "puesto": 3,
+     "nombre": "BRIANDA SE QUEDA",
+     "url": "https://x.com/search?q=%22BRIANDA%20SE%20QUEDA%22"
+    },
+    {
+     "puesto": 4,
+     "nombre": "Sami Zayn",
+     "url": "https://x.com/search?q=%22Sami%20Zayn%22"
+    },
+    {
+     "puesto": 5,
+     "nombre": "#EstoEsChivas",
+     "url": "https://x.com/search?q=%23EstoEsChivas"
+    },
+    {
+     "puesto": 6,
+     "nombre": "Ciudad del Carmen",
+     "url": "https://x.com/search?q=%22Ciudad%20del%20Carmen%22"
+    },
+    {
+     "puesto": 7,
+     "nombre": "#PorLaSupervivencia",
+     "url": "https://x.com/search?q=%23PorLaSupervivencia"
+    },
+    {
+     "puesto": 8,
+     "nombre": "YAHIR CONTIGO SI",
+     "url": "https://x.com/search?q=%22YAHIR%20CONTIGO%20SI%22"
+    },
+    {
+     "puesto": 9,
+     "nombre": "#ConvoyEnChilango",
+     "url": "https://x.com/search?q=%23ConvoyEnChilango"
+    },
+    {
+     "puesto": 10,
+     "nombre": "Penta",
+     "url": "https://x.com/search?q=Penta"
+    },
+    {
+     "puesto": 11,
+     "nombre": "Nia Jax",
+     "url": "https://x.com/search?q=%22Nia%20Jax%22"
+    },
+    {
+     "puesto": 12,
+     "nombre": "AICM",
+     "url": "https://x.com/search?q=AICM"
+    },
+    {
+     "puesto": 13,
+     "nombre": "Golfo de México",
+     "url": "https://x.com/search?q=%22Golfo%20de%20M%C3%A9xico%22"
+    },
+    {
+     "puesto": 14,
+     "nombre": "hoshi",
+     "url": "https://x.com/search?q=hoshi"
+    },
+    {
+     "puesto": 15,
+     "nombre": "Trick Williams",
+     "url": "https://x.com/search?q=%22Trick%20Williams%22"
+    },
+    {
+     "puesto": 16,
+     "nombre": "Aristegui",
+     "url": "https://x.com/search?q=Aristegui"
+    },
+    {
+     "puesto": 17,
+     "nombre": "CM Punk",
+     "url": "https://x.com/search?q=%22CM%20Punk%22"
+    },
+    {
+     "puesto": 18,
+     "nombre": "ENHYPEN HOLDS 7 STARS",
+     "url": "https://x.com/search?q=%22ENHYPEN%20HOLDS%207%20STARS%22"
+    },
+    {
+     "puesto": 19,
+     "nombre": "Puebla",
+     "url": "https://x.com/search?q=Puebla"
+    },
+    {
+     "puesto": 20,
+     "nombre": "Gael",
+     "url": "https://x.com/search?q=Gael"
+    }
+   ]
+  },
+  {
+   "id": "mexico",
+   "nombre": "México",
+   "woeid": 23424900,
+   "zona": null,
+   "ambito": "nacional",
+   "activa": true,
+   "estado": "ok",
+   "corte": "2026-09-12T02:26:12+00:00",
+   "tendencias": [
+    {
+     "puesto": 1,
+     "nombre": "#SmackDown",
+     "url": "https://x.com/search?q=%23SmackDown"
+    },
+    {
+     "puesto": 2,
+     "nombre": "lady gaga",
+     "url": "https://x.com/search?q=%22lady%20gaga%22"
+    },
+    {
+     "puesto": 3,
+     "nombre": "BRIANDA SE QUEDA",
+     "url": "https://x.com/search?q=%22BRIANDA%20SE%20QUEDA%22"
+    },
+    {
+     "puesto": 4,
+     "nombre": "Sami Zayn",
+     "url": "https://x.com/search?q=%22Sami%20Zayn%22"
+    },
+    {
+     "puesto": 5,
+     "nombre": "#EstoEsChivas",
+     "url": "https://x.com/search?q=%23EstoEsChivas"
+    },
+    {
+     "puesto": 6,
+     "nombre": "Ciudad del Carmen",
+     "url": "https://x.com/search?q=%22Ciudad%20del%20Carmen%22"
+    },
+    {
+     "puesto": 7,
+     "nombre": "#PorLaSupervivencia",
+     "url": "https://x.com/search?q=%23PorLaSupervivencia"
+    },
+    {
+     "puesto": 8,
+     "nombre": "YAHIR CONTIGO SI",
+     "url": "https://x.com/search?q=%22YAHIR%20CONTIGO%20SI%22"
+    },
+    {
+     "puesto": 9,
+     "nombre": "#ConvoyEnChilango",
+     "url": "https://x.com/search?q=%23ConvoyEnChilango"
+    },
+    {
+     "puesto": 10,
+     "nombre": "AICM",
+     "url": "https://x.com/search?q=AICM"
+    },
+    {
+     "puesto": 11,
+     "nombre": "Penta",
+     "url": "https://x.com/search?q=Penta"
+    },
+    {
+     "puesto": 12,
+     "nombre": "Nia Jax",
+     "url": "https://x.com/search?q=%22Nia%20Jax%22"
+    },
+    {
+     "puesto": 13,
+     "nombre": "Golfo de México",
+     "url": "https://x.com/search?q=%22Golfo%20de%20M%C3%A9xico%22"
+    },
+    {
+     "puesto": 14,
+     "nombre": "hoshi",
+     "url": "https://x.com/search?q=hoshi"
+    },
+    {
+     "puesto": 15,
+     "nombre": "#Heeseung_TheMissingStar",
+     "url": "https://x.com/search?q=%23Heeseung_TheMissingStar"
+    },
+    {
+     "puesto": 16,
+     "nombre": "Trick Williams",
+     "url": "https://x.com/search?q=%22Trick%20Williams%22"
+    },
+    {
+     "puesto": 17,
+     "nombre": "Aristegui",
+     "url": "https://x.com/search?q=Aristegui"
+    },
+    {
+     "puesto": 18,
+     "nombre": "CM Punk",
+     "url": "https://x.com/search?q=%22CM%20Punk%22"
+    },
+    {
+     "puesto": 19,
+     "nombre": "ENHYPEN HOLDS 7 STARS",
+     "url": "https://x.com/search?q=%22ENHYPEN%20HOLDS%207%20STARS%22"
+    },
+    {
+     "puesto": 20,
+     "nombre": "Puebla",
+     "url": "https://x.com/search?q=Puebla"
+    }
+   ]
+  },
+  {
+   "id": "mundo",
+   "nombre": "Mundo",
+   "woeid": 1,
+   "zona": null,
+   "ambito": "mundial",
+   "activa": true,
+   "estado": "ok",
+   "corte": "2026-09-12T02:26:13+00:00",
+   "tendencias": [
+    {
+     "puesto": 1,
+     "nombre": "Durk",
+     "url": "https://x.com/search?q=Durk"
+    },
+    {
+     "puesto": 2,
+     "nombre": "lady gaga",
+     "url": "https://x.com/search?q=%22lady%20gaga%22"
+    },
+    {
+     "puesto": 3,
+     "nombre": "#SmackDown",
+     "url": "https://x.com/search?q=%23SmackDown"
+    },
+    {
+     "puesto": 4,
+     "nombre": "Brian Steele",
+     "url": "https://x.com/search?q=%22Brian%20Steele%22"
+    },
+    {
+     "puesto": 5,
+     "nombre": "hoshi",
+     "url": "https://x.com/search?q=hoshi"
+    },
+    {
+     "puesto": 6,
+     "nombre": "#PrimerPlanoCHV",
+     "url": "https://x.com/search?q=%23PrimerPlanoCHV"
+    },
+    {
+     "puesto": 7,
+     "nombre": "Sami",
+     "url": "https://x.com/search?q=Sami"
+    },
+    {
+     "puesto": 8,
+     "nombre": "#MindOfTheBride",
+     "url": "https://x.com/search?q=%23MindOfTheBride"
+    },
+    {
+     "puesto": 9,
+     "nombre": "#CalvinKleinSS27xLINGLING",
+     "url": "https://x.com/search?q=%23CalvinKleinSS27xLINGLING"
+    },
+    {
+     "puesto": 10,
+     "nombre": "ヨーロッパモチモチ",
+     "url": "https://x.com/search?q=%E3%83%A8%E3%83%BC%E3%83%AD%E3%83%83%E3%83%91%E3%83%A2%E3%83%81%E3%83%A2%E3%83%81"
+    },
+    {
+     "puesto": 11,
+     "nombre": "Coritiba",
+     "url": "https://x.com/search?q=Coritiba"
+    },
+    {
+     "puesto": 12,
+     "nombre": "LINGLING APAC FACE OF CK",
+     "url": "https://x.com/search?q=%22LINGLING%20APAC%20FACE%20OF%20CK%22"
+    },
+    {
+     "puesto": 13,
+     "nombre": "#心に響くフルバ全話無料",
+     "url": "https://x.com/search?q=%23%E5%BF%83%E3%81%AB%E9%9F%BF%E3%81%8F%E3%83%95%E3%83%AB%E3%83%90%E5%85%A8%E8%A9%B1%E7%84%A1%E6%96%99"
+    },
+    {
+     "puesto": 14,
+     "nombre": "NOT GUILTY",
+     "url": "https://x.com/search?q=%22NOT%20GUILTY%22"
+    },
+    {
+     "puesto": 15,
+     "nombre": "ALWAYS LALISA TIFF DEBUT",
+     "url": "https://x.com/search?q=%22ALWAYS%20LALISA%20TIFF%20DEBUT%22"
+    },
+    {
+     "puesto": 16,
+     "nombre": "hwasa",
+     "url": "https://x.com/search?q=hwasa"
+    },
+    {
+     "puesto": 17,
+     "nombre": "Mizzou",
+     "url": "https://x.com/search?q=Mizzou"
+    },
+    {
+     "puesto": 18,
+     "nombre": "Austin Simmons",
+     "url": "https://x.com/search?q=%22Austin%20Simmons%22"
+    },
+    {
+     "puesto": 19,
+     "nombre": "Kansas",
+     "url": "https://x.com/search?q=Kansas"
+    },
+    {
+     "puesto": 20,
+     "nombre": "Rutgers",
+     "url": "https://x.com/search?q=Rutgers"
+    }
+   ]
+  },
+  {
+   "id": "rosarito",
+   "nombre": "Playas de Rosarito",
+   "woeid": null,
+   "zona": "Playas de Rosarito",
+   "ambito": "zona",
+   "activa": false,
+   "estado": "sin_lista",
+   "corte": null,
+   "tendencias": []
+  },
+  {
+   "id": "sandiego",
+   "nombre": "San Diego",
+   "woeid": 2487889,
+   "zona": "San Diego",
+   "ambito": "zona",
+   "activa": true,
+   "estado": "ok",
+   "corte": "2026-09-12T02:26:14+00:00",
+   "tendencias": [
+    {
+     "puesto": 1,
+     "nombre": "#NeverForget",
+     "url": "https://x.com/search?q=%23NeverForget"
+    },
+    {
+     "puesto": 2,
+     "nombre": "Rutgers",
+     "url": "https://x.com/search?q=Rutgers"
+    },
+    {
+     "puesto": 3,
+     "nombre": "De Paula",
+     "url": "https://x.com/search?q=%22De%20Paula%22"
+    },
+    {
+     "puesto": 4,
+     "nombre": "Blizzcon",
+     "url": "https://x.com/search?q=Blizzcon"
+    },
+    {
+     "puesto": 5,
+     "nombre": "LINGLING APAC FACE OF CK",
+     "url": "https://x.com/search?q=%22LINGLING%20APAC%20FACE%20OF%20CK%22"
+    },
+    {
+     "puesto": 6,
+     "nombre": "#CalvinKleinSS27xLINGLING",
+     "url": "https://x.com/search?q=%23CalvinKleinSS27xLINGLING"
+    },
+    {
+     "puesto": 7,
+     "nombre": "Todd Beamer",
+     "url": "https://x.com/search?q=%22Todd%20Beamer%22"
+    },
+    {
+     "puesto": 8,
+     "nombre": "Afghanistan",
+     "url": "https://x.com/search?q=Afghanistan"
+    },
+    {
+     "puesto": 9,
+     "nombre": "Shana Tova",
+     "url": "https://x.com/search?q=%22Shana%20Tova%22"
+    },
+    {
+     "puesto": 10,
+     "nombre": "Pentagon",
+     "url": "https://x.com/search?q=Pentagon"
+    },
+    {
+     "puesto": 11,
+     "nombre": "Iraq",
+     "url": "https://x.com/search?q=Iraq"
+    },
+    {
+     "puesto": 12,
+     "nombre": "Building 7",
+     "url": "https://x.com/search?q=%22Building%207%22"
+    },
+    {
+     "puesto": 13,
+     "nombre": "New Yorkers",
+     "url": "https://x.com/search?q=%22New%20Yorkers%22"
+    },
+    {
+     "puesto": 14,
+     "nombre": "Twin Towers",
+     "url": "https://x.com/search?q=%22Twin%20Towers%22"
+    },
+    {
+     "puesto": 15,
+     "nombre": "Bin Laden",
+     "url": "https://x.com/search?q=%22Bin%20Laden%22"
+    },
+    {
+     "puesto": 16,
+     "nombre": "namjoon",
+     "url": "https://x.com/search?q=namjoon"
+    },
+    {
+     "puesto": 17,
+     "nombre": "Gayle King",
+     "url": "https://x.com/search?q=%22Gayle%20King%22"
+    },
+    {
+     "puesto": 18,
+     "nombre": "#September11",
+     "url": "https://x.com/search?q=%23September11"
+    },
+    {
+     "puesto": 19,
+     "nombre": "Flight 93",
+     "url": "https://x.com/search?q=%22Flight%2093%22"
+    },
+    {
+     "puesto": 20,
+     "nombre": "Islamophobia",
+     "url": "https://x.com/search?q=Islamophobia"
+    }
+   ]
+  },
+  {
+   "id": "sanfelipe",
+   "nombre": "San Felipe",
+   "woeid": null,
+   "zona": "San Felipe",
+   "ambito": "zona",
+   "activa": false,
+   "estado": "sin_lista",
+   "corte": null,
+   "tendencias": []
+  },
+  {
+   "id": "sanquintin",
+   "nombre": "San Quintín",
+   "woeid": null,
+   "zona": "San Quintín",
+   "ambito": "zona",
+   "activa": false,
+   "estado": "sin_lista",
+   "corte": null,
+   "tendencias": []
+  },
+  {
+   "id": "tecate",
+   "nombre": "Tecate",
+   "woeid": null,
+   "zona": "Tecate",
+   "ambito": "zona",
+   "activa": false,
+   "estado": "sin_lista",
+   "corte": null,
+   "tendencias": []
+  },
+  {
+   "id": "tijuana",
+   "nombre": "Tijuana",
+   "woeid": 149361,
+   "zona": "Tijuana",
+   "ambito": "zona",
+   "activa": true,
+   "estado": "ok",
+   "corte": "2026-09-12T02:26:16+00:00",
+   "tendencias": [
+    {
+     "puesto": 1,
+     "nombre": "#SmackDown",
+     "url": "https://x.com/search?q=%23SmackDown"
+    },
+    {
+     "puesto": 2,
+     "nombre": "lady gaga",
+     "url": "https://x.com/search?q=%22lady%20gaga%22"
+    },
+    {
+     "puesto": 3,
+     "nombre": "BRIANDA SE QUEDA",
+     "url": "https://x.com/search?q=%22BRIANDA%20SE%20QUEDA%22"
+    },
+    {
+     "puesto": 4,
+     "nombre": "Sami Zayn",
+     "url": "https://x.com/search?q=%22Sami%20Zayn%22"
+    },
+    {
+     "puesto": 5,
+     "nombre": "#EstoEsChivas",
+     "url": "https://x.com/search?q=%23EstoEsChivas"
+    },
+    {
+     "puesto": 6,
+     "nombre": "Ciudad del Carmen",
+     "url": "https://x.com/search?q=%22Ciudad%20del%20Carmen%22"
+    },
+    {
+     "puesto": 7,
+     "nombre": "#PorLaSupervivencia",
+     "url": "https://x.com/search?q=%23PorLaSupervivencia"
+    },
+    {
+     "puesto": 8,
+     "nombre": "YAHIR CONTIGO SI",
+     "url": "https://x.com/search?q=%22YAHIR%20CONTIGO%20SI%22"
+    },
+    {
+     "puesto": 9,
+     "nombre": "#ConvoyEnChilango",
+     "url": "https://x.com/search?q=%23ConvoyEnChilango"
+    },
+    {
+     "puesto": 10,
+     "nombre": "Penta",
+     "url": "https://x.com/search?q=Penta"
+    },
+    {
+     "puesto": 11,
+     "nombre": "Nia Jax",
+     "url": "https://x.com/search?q=%22Nia%20Jax%22"
+    },
+    {
+     "puesto": 12,
+     "nombre": "AICM",
+     "url": "https://x.com/search?q=AICM"
+    },
+    {
+     "puesto": 13,
+     "nombre": "Golfo de México",
+     "url": "https://x.com/search?q=%22Golfo%20de%20M%C3%A9xico%22"
+    },
+    {
+     "puesto": 14,
+     "nombre": "hoshi",
+     "url": "https://x.com/search?q=hoshi"
+    },
+    {
+     "puesto": 15,
+     "nombre": "Trick Williams",
+     "url": "https://x.com/search?q=%22Trick%20Williams%22"
+    },
+    {
+     "puesto": 16,
+     "nombre": "Aristegui",
+     "url": "https://x.com/search?q=Aristegui"
+    },
+    {
+     "puesto": 17,
+     "nombre": "CM Punk",
+     "url": "https://x.com/search?q=%22CM%20Punk%22"
+    },
+    {
+     "puesto": 18,
+     "nombre": "ENHYPEN HOLDS 7 STARS",
+     "url": "https://x.com/search?q=%22ENHYPEN%20HOLDS%207%20STARS%22"
+    },
+    {
+     "puesto": 19,
+     "nombre": "Gael",
+     "url": "https://x.com/search?q=Gael"
+    },
+    {
+     "puesto": 20,
+     "nombre": "Campeche",
+     "url": "https://x.com/search?q=Campeche"
+    }
+   ]
+  }
+ ],
+ "salud": [
+  {
+   "ubicacion": "mexicali",
+   "estado": "ok",
+   "tendencias": 20,
+   "promocionadas": 0
+  },
+  {
+   "ubicacion": "mexico",
+   "estado": "ok",
+   "tendencias": 20,
+   "promocionadas": 0
+  },
+  {
+   "ubicacion": "mundo",
+   "estado": "ok",
+   "tendencias": 20,
+   "promocionadas": 0
+  },
+  {
+   "ubicacion": "sandiego",
+   "estado": "ok",
+   "tendencias": 20,
+   "promocionadas": 0
+  },
+  {
+   "ubicacion": "tijuana",
+   "estado": "ok",
+   "tendencias": 20,
+   "promocionadas": 0
+  }
+ ],
+ "gasto": {
+  "resultados": 200,
+  "gastado": 100,
+  "por_concepto": {
+   "automation-lab~twitter-trends-scraper": 100
+  }
+ }
+}

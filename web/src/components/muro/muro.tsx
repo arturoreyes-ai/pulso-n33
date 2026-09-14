@@ -4,27 +4,23 @@ import { useMemo } from "react";
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
 
 import type { Ambito } from "@/lib/busqueda/ambito";
-import { LARGO_MAXIMO_CONSULTA, type Idioma } from "@/lib/busqueda/tipos";
+import { textoCaidos } from "@/lib/busqueda/avisos";
+import { NOMBRE_RUBRO, type Rubro } from "@/lib/busqueda/rubros";
+import { LARGO_MAXIMO_CONSULTA } from "@/lib/busqueda/tipos";
 import { useRoster } from "@/lib/datos/hooks";
 import { nombreDeFiltro } from "@/lib/dominio/delegaciones";
 import { hora, numero, pluralizar } from "@/lib/dominio/formato";
 import { indexarRoster } from "@/lib/dominio/roster";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 import { limpiarTema } from "@/lib/muro/filtro-tema";
-import type { Orden } from "@/lib/muro/use-muro";
 import { useMuro } from "@/lib/muro/use-muro";
 import { Bisel } from "@/components/ui/bisel";
-import { Chip } from "@/components/ui/primitivas";
 import { FilaExterna } from "./fila-externa";
 import { GrupoZona } from "./grupo-zona";
 import { MuroEsqueleto } from "./muro-esqueleto";
 import { NotaFila } from "./nota-fila";
 import { SelectorDelegacion } from "./selector-delegacion";
-
-const ORDENES: { clave: Orden; nombre: string }[] = [
-  { clave: "reciente", nombre: "Recientes" },
-  { clave: "antiguo", nombre: "Antiguas" },
-];
+import { SelectorRubro } from "./selector-rubro";
 
 /**
  * Cuantas filas abre cada grupo.
@@ -39,9 +35,11 @@ const PASO = 25;
 
 type EstadoMuro = ReturnType<typeof useMuro>;
 
-/** El sujeto de la cifra en modo actualidad: de que seccion es. */
-function rotuloActualidad(ambito: Ambito): string {
-  return ambito === "mexico" ? "actualidad de México" : "actualidad internacional";
+/** El sujeto de la cifra en modo actualidad: de que lista es, y de que rubro. */
+function rotuloActualidad(ambito: Ambito, rubro: Rubro | null): string {
+  const mexico = ambito === "mexico";
+  if (rubro === null) return mexico ? "actualidad de México" : "actualidad internacional";
+  return `«${NOMBRE_RUBRO[rubro]}» ${mexico ? "en México" : "en el mundo"}`;
 }
 
 /**
@@ -51,27 +49,28 @@ function rotuloActualidad(ambito: Ambito): string {
  * saber que decia habia que armarla mentalmente.
  */
 function textoConteo(m: EstadoMuro, sujeto: string | null): string {
-  const puntos = m.desfasado ? "…" : "";
-  // En actualidad la cifra es de enlaces en vivo y nada mas: no hay corpus
-  // con el que compararla ni sumarla.
   if (m.enActualidad) {
     const a = m.actualidad;
     if (a.cargando && a.resultados.length === 0) return "Cargando…";
     if (a.resultados.length === 0) return "Sin titulares";
-    return `${numero(a.resultados.length)} en vivo · ${rotuloActualidad(m.ambito)}`;
+    return `${numero(a.resultados.length)} en vivo · ${rotuloActualidad(m.ambito, m.rubro)}`;
   }
-  // Buscando, la frase dice cuantas de las filas ya estaban cosechadas. Las
-  // dos cifras no se suman en una sola: no es lo mismo una nota clasificada
-  // por zona, tono y figura que un enlace traido hace un segundo.
+  // Buscando, la cifra se parte en dos y NO se suma en una sola: no es lo
+  // mismo una nota clasificada por zona, tono y figura que un enlace traido
+  // hace un segundo. Al lector se le dice cuantos son en vivo, que es la
+  // pastilla que ya trae cada fila; antes decia "N del corpus", que es el
+  // complemento y ademas una palabra del pipeline.
   if (m.buscando) {
     const n = numero(m.visibles);
-    if (m.visibles === 0) return `Sin resultados${puntos}`;
-    if (!m.usaCorpus) return `${n}${puntos} en vivo`;
-    return `${n}${puntos} ${m.visibles === 1 ? "resultado" : "resultados"} · ${numero(m.delCorpus)} del corpus`;
+    if (m.visibles === 0) return "Sin resultados";
+    if (!m.usaCorpus) return `${n} en vivo`;
+    const vivos = m.visibles - m.delCorpus;
+    const cuenta = `${n} ${m.visibles === 1 ? "resultado" : "resultados"}`;
+    return vivos > 0 ? `${cuenta} · ${numero(vivos)} en vivo` : cuenta;
   }
   const de = sujeto === null ? " de " : ` notas sobre ${sujeto} de `;
   const ventana = m.ventanaDias === null ? "" : ` en ${m.ventanaDias} días`;
-  return `${numero(m.visibles)}${puntos}${de}${numero(m.totalVentana)}${ventana}`;
+  return `${numero(m.visibles)}${de}${numero(m.totalVentana)}${ventana}`;
 }
 
 /**
@@ -81,7 +80,7 @@ function textoConteo(m: EstadoMuro, sujeto: string | null): string {
  * del archivo: hay que leerlos de adentro hacia afuera para saber cual gana.
  */
 function textoVacio(totalVentana: number, sujeto: string | null): string {
-  if (totalVentana === 0) return "Sin notas todavía. Corre el pipeline.";
+  if (totalVentana === 0) return "Todavía no hay titulares.";
   if (sujeto === null) return "Sin notas que coincidan con este filtro.";
   return `Sin notas sobre ${sujeto} que coincidan con este filtro.`;
 }
@@ -89,7 +88,9 @@ function textoVacio(totalVentana: number, sujeto: string | null): string {
 /**
  * Barra de filtros. Sticky con blur: elemento fijo y area chica, que es el
  * caso donde el blur si esta permitido. Deja de ser sticky en movil porque
- * ocuparia media pantalla. La zona ya no se elige aqui: es la pagina.
+ * ocuparia media pantalla. La zona ya no se elige aqui: es la pagina, y el
+ * alcance vive en el encabezado. Tampoco hay pastillas de orden desde el 11
+ * de septiembre de 2026: "Antiguas" no tenia uso (ver use-muro.ts).
  *
  * `top` es `--nav-alto`, no un 24 a ojo: la barra atraca EXACTAMENTE contra
  * la pildora flotante. Con el 24 quedaba una banda de 20px entre las dos y
@@ -113,28 +114,16 @@ function BarraFiltros({ m, sujeto }: { m: EstadoMuro; sujeto: string | null }) {
             value={m.consulta}
             onChange={(e) => m.setConsulta(e.target.value)}
             placeholder="Buscar titulares"
-            aria-label="Buscar titulares, en el corpus y en vivo"
+            aria-label="Buscar titulares"
             maxLength={LARGO_MAXIMO_CONSULTA}
             className="w-56 rounded-full border border-filo md:w-72 bg-vela py-2 pr-3 pl-8 text-cuerpo text-tinta-titulo placeholder:text-tinta-meta"
           />
         </search>
 
-        {/* El orden solo cuando la lista es nuestra de ordenar. En actualidad
-            no: la seccion viene en el orden de Google y ese orden es la
-            senal; reordenarla por fecha la borraria. */}
-        {m.enActualidad ? null : (
-          <div role="group" aria-label="Orden" className="flex gap-1">
-            {ORDENES.map((o) => (
-              <Chip
-                key={o.clave}
-                activo={m.orden === o.clave}
-                onClick={() => m.elegirOrden(o.clave)}
-              >
-                {o.nombre}
-              </Chip>
-            ))}
-          </div>
-        )}
+        {/* En Mexico e Internacional el muro ES la lista en vivo, y aqui van
+            sus rubros: la misma pastilla que el panel de actualidad de las
+            zonas, para que sea una sola implementacion en todo el tablero. */}
+        {m.enActualidad ? <SelectorRubro activo={m.rubro} onElegir={m.elegirRubro} /> : null}
 
         {m.temaIds.size > 0 ? (
           <button
@@ -180,38 +169,25 @@ function BarraFiltros({ m, sujeto }: { m: EstadoMuro; sujeto: string | null }) {
  * rellena: si la consulta en vivo se cayo, se dice, porque la cifra de arriba
  * seria mas corta de lo que deberia y no por falta de noticias.
  */
-/**
- * Cual de las dos ediciones fallo, cuando fallo exactamente una. Con las dos
- * caidas el aviso es otro (`fallo`), y con ninguna no hay nada que decir.
- * `que` es el sustantivo: "búsqueda" en el muro buscando, "edición" en la
- * actualidad, donde no hay consulta que haya fallado.
- */
-function textoCaidos(caidos: readonly Idioma[], que: string): string | null {
-  if (caidos.length !== 1) return null;
-  return caidos[0] === "en"
-    ? `La ${que} en inglés falló; sólo respondió la de español.`
-    : `La ${que} en español falló; sólo respondió la de inglés.`;
-}
-
 function AvisoBusqueda({ m }: { m: EstadoMuro }) {
   const v = m.vivo;
   const partes: string[] = [];
 
   if (v.fallo) {
     partes.push(
-      "No se pudo completar la búsqueda en vivo; abajo solo está lo ya cosechado.",
+      "No se pudo completar la búsqueda en vivo; abajo solo está lo que ya estaba en la lista.",
     );
   } else {
-    const caidos = textoCaidos(v.caidos, "búsqueda");
+    const caidos = textoCaidos(v.caidos);
     if (caidos !== null) partes.push(caidos);
   }
   if (v.suprimidas > 0) {
     partes.push(
-      `${numero(v.suprimidas)} ${pluralizar(v.suprimidas, "resultado ya estaba", "resultados ya estaban")} en el corpus.`,
+      `${numero(v.suprimidas)} ${pluralizar(v.suprimidas, "resultado ya estaba", "resultados ya estaban")} en la lista.`,
     );
   }
   if (!m.usaCorpus) {
-    partes.push("Fuera de la región no hay corpus: todo esto es en vivo.");
+    partes.push("Fuera de la región, todo esto es en vivo.");
   }
   if (v.truncada) partes.push("Se muestran los más recientes.");
 
@@ -273,17 +249,19 @@ function ListaBusqueda({
 function AvisoActualidad({ m }: { m: EstadoMuro }) {
   const a = m.actualidad;
   const partes: string[] = [
-    "Sección de Google Noticias en este momento, en el orden de Google. No pasa por el pipeline: sin zona, tono ni figura, y no cuenta en las cifras de prensa.",
+    m.rubro === null
+      ? "Titulares en vivo. No tienen zona, tono ni figura, y no cuentan en las cifras de prensa."
+      : `Titulares en vivo de «${NOMBRE_RUBRO[m.rubro]}» ${m.ambito === "mexico" ? "en México" : "en el mundo"}, de los últimos dos días. No tienen zona, tono ni figura, y no cuentan en las cifras de prensa.`,
   ];
 
   if (a.fallo) {
-    partes.push("No se pudo traer la actualidad de Google Noticias.");
+    partes.push("No se pudo traer la actualidad en vivo.");
   } else {
-    const caidos = textoCaidos(a.caidos, "edición");
+    const caidos = textoCaidos(a.caidos);
     if (caidos !== null) partes.push(caidos);
   }
   if (a.truncada) partes.push(`Se muestran los primeros ${numero(a.resultados.length)}.`);
-  if (a.consultado !== null) partes.push(`Consultado a las ${hora(a.consultado)}.`);
+  if (a.consultado !== null) partes.push(`Actualizado a las ${hora(a.consultado)}.`);
 
   return <p className="mb-4 text-meta text-tinta-meta">{partes.join(" ")}</p>;
 }
@@ -299,7 +277,7 @@ function ListaActualidad({ m }: { m: EstadoMuro }) {
   if (!a.activa) {
     return (
       <p className="py-16 text-center text-lectura text-tinta-prosa">
-        La actualidad en vivo necesita el servidor del tablero.
+        Los titulares en vivo no están disponibles en esta vista.
       </p>
     );
   }
@@ -315,7 +293,9 @@ function ListaActualidad({ m }: { m: EstadoMuro }) {
       <>
         <AvisoActualidad m={m} />
         <p className="py-16 text-center text-lectura text-tinta-prosa">
-          Google no devolvió titulares para esta sección.
+          {m.rubro === null
+            ? "Sin titulares destacados en este momento."
+            : `Sin titulares de «${NOMBRE_RUBRO[m.rubro]}» en los últimos dos días.`}
         </p>
       </>
     );
@@ -395,16 +375,12 @@ function PieExclusiones({ m, agrupado }: { m: EstadoMuro; agrupado: boolean }) {
     <p className="mt-10 border-t border-vela pt-5 text-meta text-tinta-prosa">
       {m.fuera > 0 ? (
         <>
-          {numero(m.fuera)} notas de fuera de la región quedaron descartadas. Vienen
-          de cables de grupo: el feed de El Imparcial trae al periódico entero y la
-          mayoría de sus notas son de Sonora.{" "}
+          {numero(m.fuera)} notas de fuera de la región no se muestran aquí.{" "}
         </>
       ) : null}
       {m.nacionales > 0 ? (
         <>
-          {numero(m.nacionales)} notas nacionales quedaron fuera del muro: su titular
-          no nombra ningún lugar de la región. Siguen contadas en «Qué se cubre y qué
-          no».
+          {numero(m.nacionales)} notas nacionales no se muestran aquí.
         </>
       ) : null}
     </p>
@@ -418,10 +394,7 @@ export function Muro({ zona }: { zona: ZonaRuta | null }) {
 
   if (m.error !== undefined) {
     return (
-      <p className="text-lectura text-baja">
-        No se pudo leer notas.json. Corre{" "}
-        <code className="text-tinta-titulo">python -m pulso correr</code>.
-      </p>
+      <p className="text-lectura text-baja">No se pudieron cargar los titulares.</p>
     );
   }
   if (m.cargando) return <MuroEsqueleto />;

@@ -5,6 +5,8 @@
   python -m pulso conversacion [--sentimiento ninguno|modelo]
   python -m pulso redes [--posts N] [--comentarios N]
   python -m pulso tiktok [--videos N] [--comentarios N] [--probar]
+  python -m pulso tendencias [--probar] [--ubicaciones]
+  python -m pulso gasto-electoral [--solo-financiamiento]
   python -m pulso apify [--verificar]
   python -m pulso validar [--config config] [--datos data]
   python -m pulso sitio [--destino _site]
@@ -423,6 +425,83 @@ def cmd_tiktok(args):
     return 0
 
 
+def cmd_tendencias(args):
+    """Tendencias de X por ubicacion: el ranking de X, sin sesion y sin tuits.
+
+    Una sola llamada al actor por corrida cubre todas las ubicaciones activas
+    de config/tendencias.json. Escribe data/tendencias.json con el nombre, el
+    puesto y la liga de cada tendencia; nunca un tuit ni quien lo escribio.
+    Ver el encabezado de pulso/tendencias.py.
+    """
+    from .apify import Presupuesto, SinToken
+    from .tendencias import cosechar, derivar, probar, ubicaciones_disponibles
+    from .pipeline import ahora_utc, _escribir
+
+    cfg = _leer(os.path.join(args.config, "tendencias.json"))
+    ubicaciones = cfg.get("ubicaciones", [])
+    cosecha = cfg.get("cosecha", {})
+    maximo = args.maximo or cosecha.get("maximo_por_ubicacion", 20)
+    ahora = ahora_utc()
+
+    # --ubicaciones es el --sondear de esta seccion: lista lo que X publica
+    # para Mexico, Estados Unidos y el mundo, con su WOEID, y sale. Cuesta una
+    # corrida del actor (~470 resultados) y no escribe nada.
+    if args.ubicaciones:
+        try:
+            filas = ubicaciones_disponibles()
+        except SinToken as e:
+            print("token: {}".format(e), file=sys.stderr)
+            return 1
+        conocidos = {u.get("woeid") for u in ubicaciones}
+        print("  {:>9}  {:<10} {:<28} {}".format("woeid", "tipo", "nombre", "pais"))
+        for f in filas:
+            print("{} {:>9}  {:<10} {:<28} {}".format(
+                "*" if f["woeid"] in conocidos else " ", f["woeid"], f["tipo"],
+                f["nombre"][:28], f["pais"] or "-"))
+        print("\n* = ya esta en config/tendencias.json. Una ubicacion se enciende solo con el "
+              "WOEID visto aqui, y su 'razon' cita la fecha.")
+        return 0
+
+    # --probar: pocas tendencias por ubicacion, para leerlas con ojos humanos
+    # antes de confiar en el cron. No escribe nada.
+    if args.probar:
+        try:
+            filas = probar(ubicaciones, ahora, maximo=5)
+        except SinToken as e:
+            print("token: {}".format(e), file=sys.stderr)
+            return 1
+        for r in filas:
+            print("{}  (corte {}; {} tendencias; descartes: {})".format(
+                r["ubicacion"], r["corte"] or "-", len(r["tendencias"]),
+                ", ".join("{} {}".format(k, v) for k, v in r["descartes"].items()) or "ninguno"))
+            for t in r["tendencias"]:
+                print("  {:>2}. {:<44} {}".format(
+                    t["puesto"], t["nombre"][:44],
+                    "{:,} posts".format(t["volumen"]) if "volumen" in t else "sin dato"))
+        print("\nNo se escribio nada. El ranking es el de X; las promocionadas se descartan.")
+        return 0
+
+    apify_cfg = _leer(os.path.join(args.config, "apify.json"))
+    tope = args.presupuesto or cosecha.get("presupuesto_resultados") or (
+        apify_cfg.get("presupuesto") or {}).get("resultados_por_corrida", 200)
+    por_woeid, salud, gasto = cosechar(ubicaciones, ahora, presupuesto=Presupuesto(tope),
+                                       maximo=maximo)
+    panel = derivar(por_woeid, ahora, salud, gasto, ubicaciones, maximo=maximo)
+    _escribir(os.path.join(args.salida, "tendencias.json"), panel)
+
+    for u in panel["ubicaciones"]:
+        if u["activa"]:
+            print("{:<10} {:<9} {:>3} tendencias  corte {}".format(
+                u["id"], u["estado"], len(u["tendencias"]), u["corte"] or "-"))
+    print("gasto Apify: {} de {} resultados".format(gasto["gastado"], gasto["resultados"]))
+    for s in panel["salud"]:
+        if s["estado"] != "ok":
+            print("  {} · {} · {}".format(
+                s["ubicacion"], s["estado"], (s.get("error") or s.get("nota") or "")[:120]),
+                file=sys.stderr)
+    return 0
+
+
 def cmd_apify(args):
     """Revisa el token y el catalogo de actores. No raspa nada.
 
@@ -463,6 +542,33 @@ def cmd_apify(args):
         codigo = 1
 
     return codigo
+
+
+def cmd_gasto_electoral(args):
+    """Actualiza archivos finales del INE y asignaciones vigentes del IEEBC."""
+    from .gasto_electoral import armar_financiamiento, armar_gasto, leer_config
+    from .pipeline import _escribir
+
+    ruta = os.path.join(args.config, "gasto-electoral.json")
+    config = leer_config(ruta)
+    os.makedirs(args.salida, exist_ok=True)
+
+    # Son dos fuentes y dos contratos independientes. El IEEBC omitio el
+    # certificado intermedio de su servidor en septiembre de 2026; dejarlo
+    # primero impedia publicar los dictamenes del INE aunque estos respondieran.
+    if not args.solo_financiamiento:
+        gasto = armar_gasto(config)
+        _escribir(os.path.join(args.salida, "gasto-electoral.json"), gasto)
+        print("gasto electoral: {} candidaturas conciliadas · {} incidencias".format(
+            len(gasto["candidaturas"]), len(gasto["incidencias"])))
+
+    if not args.solo_gasto:
+        financiamiento = armar_financiamiento(config)
+        _escribir(os.path.join(args.salida, "financiamiento-partidos.json"), financiamiento)
+        print("financiamiento {}: {} partidos · ${:,.2f} asignados".format(
+            financiamiento["ejercicio"], len(financiamiento["partidos"]),
+            financiamiento["totales"]["asignado"]))
+    return 0
 
 
 def cmd_validar(args):
@@ -656,10 +762,35 @@ def main(argv=None):
                          "qué devuelve el filtro de fecha antes de confiar en el cron")
     tk.set_defaults(fn=cmd_tiktok)
 
+    tx = sub.add_parser("tendencias",
+                        help="tendencias de X por ubicación, sin sesión (requiere APIFY_TOKEN)")
+    tx.add_argument("--salida", default="data")
+    tx.add_argument("--maximo", type=int, default=0,
+                    help="tendencias por ubicación (0 usa el config; el tope de X es 50)")
+    tx.add_argument("--presupuesto", type=int, default=0,
+                    help="tope de resultados de esta corrida (0 usa config/tendencias.json)")
+    tx.add_argument("--probar", action="store_true",
+                    help="cinco tendencias por ubicación, sin escribir: para ver qué devuelve "
+                         "el actor antes de confiar en el cron")
+    tx.add_argument("--ubicaciones", action="store_true",
+                    help="lista las ubicaciones que X publica (México, EE. UU. y el mundo) con "
+                         "su WOEID y sale; cuesta una corrida del actor (~470 resultados)")
+    tx.set_defaults(fn=cmd_tendencias)
+
     a = sub.add_parser("apify", help="revisa APIFY_TOKEN y el catálogo de actores")
     a.add_argument("--verificar", action="store_true",
                    help="pregunta a Apify si el token sirve (una llamada, sin costo)")
     a.set_defaults(fn=cmd_apify)
+
+    ge = sub.add_parser("gasto-electoral",
+                        help="gasto final auditado 2024 y financiamiento partidista 2026")
+    ge.add_argument("--salida", default="data")
+    fuente_ge = ge.add_mutually_exclusive_group()
+    fuente_ge.add_argument("--solo-financiamiento", action="store_true",
+                           help="actualiza el IEEBC sin descargar los anexos finales del INE")
+    fuente_ge.add_argument("--solo-gasto", action="store_true",
+                           help="actualiza los dictamenes del INE sin consultar el IEEBC")
+    ge.set_defaults(fn=cmd_gasto_electoral)
 
     v = sub.add_parser("validar", help="valida config/, data/ y efimero/")
     v.add_argument("--datos", default="data")

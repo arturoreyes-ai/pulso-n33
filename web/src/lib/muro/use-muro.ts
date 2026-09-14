@@ -11,7 +11,8 @@ import {
 } from "@/lib/dominio/delegaciones";
 import { plegar } from "@/lib/dominio/formato";
 import type { ZonaRuta } from "@/lib/dominio/zonas";
-import { ambitosDe, usaCorpus, type Ambito } from "@/lib/busqueda/ambito";
+import { ambitosDe, esAmbitoActualidad, usaCorpus, type Ambito } from "@/lib/busqueda/ambito";
+import type { Rubro } from "@/lib/busqueda/rubros";
 import { MINIMO_CONSULTA, type ResultadoExterno } from "@/lib/busqueda/tipos";
 import { useActualidad } from "@/lib/busqueda/use-actualidad";
 import { useBusquedaViva } from "@/lib/busqueda/use-busqueda";
@@ -39,15 +40,14 @@ export type FilaMuro =
 
 const SIN_FILAS: readonly FilaMuro[] = [];
 
+/**
+ * El unico orden del muro: del mas reciente al mas antiguo. Hubo una pastilla
+ * "Antiguas" que lo invertia y se quito el 11 de septiembre de 2026 a peticion
+ * del cliente: un muro de prensa se lee de hoy hacia atras, y en el modo
+ * actualidad el orden ni siquiera es nuestro, es el de Google.
+ */
 const POR_RECIENTE = (a: Nota, b: Nota) =>
   (b.publicado ?? b.fecha ?? "").localeCompare(a.publicado ?? a.fecha ?? "");
-
-const COMPARADORES = {
-  reciente: POR_RECIENTE,
-  antiguo: (a: Nota, b: Nota) => POR_RECIENTE(b, a),
-} as const;
-
-export type Orden = keyof typeof COMPARADORES;
 
 /**
  * Las tres formas del muro. `corpus` agrupa por zona lo cosechado; `busqueda`
@@ -59,13 +59,12 @@ export type ModoMuro = "corpus" | "busqueda" | "actualidad";
 /**
  * El estado del muro. La ZONA ya no vive aqui: es la pagina (app/[zona]) y
  * llega como parametro. Lo que sigue siendo estado local es el texto de
- * busqueda y el orden.
+ * busqueda.
  */
 export function useMuro(zona: ZonaRuta | null) {
   const { data: doc, error, isLoading } = useNotas();
   const { data: estado } = useEstado();
 
-  const [orden, setOrden] = useState<Orden>("reciente");
   // La URL es SEMILLA y no fuente de verdad: el input tiene que responder en
   // el cuadro de la tecla, y escribir el historial en cada una vuelve a
   // renderizar a todos los consumidores de useSearchParams. Ver
@@ -84,6 +83,18 @@ export function useMuro(zona: ZonaRuta | null) {
   // Hasta donde busca (?a=). Se deriva en el render, sin efecto: un valor que
   // no corresponde a esta pagina cae al de omision.
   const ambito = useAmbito(zona);
+
+  // El rubro de la lista en vivo (Mexico, Internacional). Local, como el
+  // texto: es un toque dentro de la lista, no una direccion que se comparta.
+  // Se reinicia al cambiar de ambito ajustando el estado durante el render,
+  // que es mas barato que un efecto (no hay un cuadro con el rubro viejo
+  // sobre la lista nueva); la misma figura que grupo-zona.tsx.
+  const [rubro, setRubro] = useState<Rubro | null>(null);
+  const [ambitoDelRubro, setAmbitoDelRubro] = useState(ambito);
+  if (ambitoDelRubro !== ambito) {
+    setAmbitoDelRubro(ambito);
+    setRubro(null);
+  }
 
   // La tienda de temas es de MODULO y sobrevive a la navegacion entre zonas.
   // Sin esto, un tema tocado en Tijuana (ids de notas de Tijuana) filtraria
@@ -134,8 +145,9 @@ export function useMuro(zona: ZonaRuta | null) {
   //     reaparaceria en el bloque de abajo con otro sombrero.
   const titulosCorpus = useMemo(() => new Set(corpus.map((p) => p.t)), [corpus]);
 
-  // (3) FILTRO de texto y de tema. No depende de `zona` ni de `orden`, asi que
-  //     cambiar el orden no vuelve a filtrar.
+  // (3) FILTRO de texto y de tema. No depende de `zona`, asi que cambiar de
+  //     pagina no vuelve a filtrar. Conserva el orden de la base: la lista
+  //     filtrada sigue siendo del mas reciente al mas antiguo.
   const filtradas = useMemo(() => {
     const q = plegar(consultaDiferida.trim());
     if (q === "" && temaIds.size === 0) return base;
@@ -151,19 +163,13 @@ export function useMuro(zona: ZonaRuta | null) {
     return salida;
   }, [base, corpus, consultaDiferida, temaIds]);
 
-  // (4) ORDEN, en su propio memo. Reordenar nunca vuelve a filtrar.
-  const ordenadas = useMemo(
-    () => (orden === "reciente" ? filtradas : filtradas.toSorted(COMPARADORES[orden])),
-    [filtradas, orden],
-  );
-
-  // (5) LA PASADA UNICA. Llaveada solo por la lista, no por `zona`.
+  // (4) LA PASADA UNICA. Llaveada solo por la lista, no por `zona`.
   const indice = useMemo(
-    () => (ordenadas.length > 0 ? indexar(ordenadas) : INDICE_VACIO),
-    [ordenadas],
+    () => (filtradas.length > 0 ? indexar(filtradas) : INDICE_VACIO),
+    [filtradas],
   );
 
-  // (6) La zona es una BUSQUEDA en el indice, no un recalculo.
+  // (5) La zona es una BUSQUEDA en el indice, no un recalculo.
   const grupos = useMemo(() => {
     if (zona === null) return indice.grupos;
     const g = indice.porZona.get(zona);
@@ -229,7 +235,7 @@ export function useMuro(zona: ZonaRuta | null) {
     if (!buscando || !conCorpus) return SIN_NOTAS;
     const soloZona: ZonaRuta | null = ambito === "zona" ? zona : null;
     const salida: Nota[] = [];
-    for (const n of ordenadas) {
+    for (const n of filtradas) {
       // Las mismas exclusiones del muro agrupado, en una pasada y sin pasar
       // por el indice: aqui una nota de dos zonas tiene que salir UNA vez.
       if (n.alcance === "fuera" || n.zonas.length === 0) continue;
@@ -238,7 +244,7 @@ export function useMuro(zona: ZonaRuta | null) {
       salida.push(n);
     }
     return salida;
-  }, [buscando, conCorpus, ambito, zona, ordenadas, delegacion]);
+  }, [buscando, conCorpus, ambito, zona, filtradas, delegacion]);
 
   //      Suprimir contra el corpus solo cuando el corpus se esta mostrando: si
   //      no, una nota en vivo desapareceria por empatar con algo que en este
@@ -250,8 +256,11 @@ export function useMuro(zona: ZonaRuta | null) {
   const vivo = useBusquedaViva(consultaTardia, titulosParaVivo, ambito, zona);
 
   // (7b) La seccion en vivo. Se llama siempre porque es un hook; la llave es
-  //      null cuando no toca, asi que no pide nada.
-  const actualidad = useActualidad(ambito, enActualidad);
+  //      null cuando no toca, asi que no pide nada. `esAmbitoActualidad` es
+  //      el complemento de `usaCorpus` y solo estrecha el tipo.
+  const actualidad = useActualidad(
+    enActualidad && esAmbitoActualidad(ambito) ? { ambito, rubro } : null,
+  );
 
   const filas = useMemo(() => {
     if (!buscando) return SIN_FILAS;
@@ -262,15 +271,13 @@ export function useMuro(zona: ZonaRuta | null) {
     for (const r of vivo.resultados) {
       salida.push({ clave: r.url, fecha: r.publicado ?? "", externo: r });
     }
-    return orden === "reciente"
-      ? salida.toSorted((a, b) => b.fecha.localeCompare(a.fecha))
-      : salida.toSorted((a, b) => a.fecha.localeCompare(b.fecha));
-  }, [buscando, notasBuscadas, vivo.resultados, orden]);
+    return salida.toSorted((a, b) => b.fecha.localeCompare(a.fecha));
+  }, [buscando, notasBuscadas, vivo.resultados]);
 
-  const elegirOrden = (o: Orden) => iniciar(() => setOrden(o));
   // La escritura va en la transicion para que la lista se atenue en vez de
   // bloquear la pastilla.
   const elegirAmbito = (a: Ambito) => iniciar(() => escribirAmbito(a, zona));
+  const elegirRubro = (r: Rubro | null) => iniciar(() => setRubro(r));
   // Volver a tocar la delegacion activa la limpia. La escritura va en la
   // transicion para que la lista se atenue en vez de bloquear el chip.
   const elegirDelegacion = (f: FiltroDelegacion | null) =>
@@ -286,6 +293,8 @@ export function useMuro(zona: ZonaRuta | null) {
     buscando,
     enActualidad,
     actualidad,
+    rubro,
+    elegirRubro,
     filas,
     /** Cuantas de las filas vienen del corpus. Se dice aparte: no es lo mismo
      *  una nota cosechada y clasificada que un enlace de hace un segundo. */
@@ -309,8 +318,6 @@ export function useMuro(zona: ZonaRuta | null) {
     nacionales: indice.nacionales,
     totalVentana: doc?.total ?? 0,
     ventanaDias: doc?.ventana_dias ?? null,
-    orden,
-    elegirOrden,
     consulta,
     setConsulta,
     temaIds,

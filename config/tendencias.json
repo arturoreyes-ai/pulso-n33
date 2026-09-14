@@ -1,0 +1,112 @@
+{
+ "nota": "Ubicaciones de X de las que se lee la lista de tendencias, vía Apify y sin sesión: el actor usa un guest token, la misma credencial anónima que recibe un navegador sin cuenta, así que nadie inicia sesión y pasa la guardia de pulso/apify.py. X entra al tablero SOLO por tendencias; los tuits siguen fuera porque sus raspadores piden cookies (ver `senuelos` aquí y en config/apify.json). Una ubicación corre solo con `activo: true` y su `woeid` confirmado con `python -m pulso tendencias --ubicaciones`; las zonas para las que X no publica lista van apagadas, como registro deliberado del hueco, y el tablero rotula «sin lista» en vez de mostrar la nacional como si fuera local. La alternativa limpia, si el abogado la prefiere, es la API oficial de X: GET /2/trends/by/woeid cuesta 0.01 USD por llamada (pago por uso, 2026).",
+
+ "plataforma": "x",
+ "actor": "automation-lab~twitter-trends-scraper",
+
+ "cosecha": {
+  "nota": "Una sola llamada al actor por corrida cubre todas las ubicaciones activas. `maximo_por_ubicacion` es cuántas tendencias se piden por ubicación (X y el actor topan en 50); `presupuesto_resultados` tiene que cubrir ubicaciones × máximo, porque el actor recortaría en silencio y `Presupuesto.cobrar` avisa cuando ya se gastó. Con 5 ubicaciones × 20 = 100 tendencias son ~0.015 USD por corrida, ~2 USD al mes a cuatro corridas diarias. Las promocionadas (anuncios) se descartan y se cuentan en `salud`; el volumen va solo cuando X lo da, y lo retiró para casi todas en enero de 2026: ausente es «sin dato», nunca 0.",
+  "maximo_por_ubicacion": 20,
+  "presupuesto_resultados": 200
+ },
+
+ "ubicaciones": [
+  {
+   "id": "tijuana",
+   "nombre": "Tijuana",
+   "woeid": 149361,
+   "zona": "Tijuana",
+   "ambito": "zona",
+   "activo": true,
+   "razon": "Confirmada 2026-09-11 con --ubicaciones: WOEID 149361, «Tijuana», Town, MX. Una de las 24 ciudades mexicanas con lista propia en X; de Baja California solo ésta y Mexicali."
+  },
+  {
+   "id": "mexicali",
+   "nombre": "Mexicali",
+   "woeid": 133475,
+   "zona": "Mexicali",
+   "ambito": "zona",
+   "activo": true,
+   "razon": "Confirmada 2026-09-11 con --ubicaciones: WOEID 133475, «Mexicali», Town, MX."
+  },
+  {
+   "id": "sandiego",
+   "nombre": "San Diego",
+   "woeid": 2487889,
+   "zona": "San Diego",
+   "ambito": "zona",
+   "activo": true,
+   "razon": "Confirmada 2026-09-11 con --ubicaciones: WOEID 2487889, «San Diego», Town, US. El otro lado del corredor. La lista viene en inglés y aquí no pasa por ningún modelo de idioma: son nombres, no frases, y no se les mide tono."
+  },
+  {
+   "id": "mexico",
+   "nombre": "México",
+   "woeid": 23424900,
+   "zona": null,
+   "ambito": "nacional",
+   "activo": true,
+   "razon": "Confirmada 2026-09-11 con --ubicaciones: WOEID 23424900, «Mexico», Country. Es `nacional` y no lleva zona: una lista de país no se le acredita a ninguna ciudad, por la misma razón que una búsqueda no lleva zona (pulso/busquedas.py)."
+  },
+  {
+   "id": "mundo",
+   "nombre": "Mundo",
+   "woeid": 1,
+   "zona": null,
+   "ambito": "mundial",
+   "activo": true,
+   "razon": "Confirmada 2026-09-11 con --ubicaciones: WOEID 1, «Worldwide», Supername. El actor lo recibe como la palabra `worldwide`, no como el número; pulso/tendencias.py hace la traducción. Es `mundial` y no lleva zona."
+  },
+  {
+   "id": "ensenada",
+   "nombre": "Ensenada",
+   "woeid": null,
+   "zona": "Ensenada",
+   "ambito": "zona",
+   "activo": false,
+   "razon": "Registro deliberado de un hueco, no una ubicación: X no publica lista de tendencias para Ensenada. Revisadas las 467 ubicaciones del actor el 2026-09-11; de Baja California solo Tijuana y Mexicali tienen lista. El tablero rotula «sin lista», nunca la nacional en su lugar."
+  },
+  {
+   "id": "rosarito",
+   "nombre": "Playas de Rosarito",
+   "woeid": null,
+   "zona": "Playas de Rosarito",
+   "ambito": "zona",
+   "activo": false,
+   "razon": "Registro deliberado de un hueco: X no publica lista para Rosarito (467 ubicaciones revisadas el 2026-09-11)."
+  },
+  {
+   "id": "tecate",
+   "nombre": "Tecate",
+   "woeid": null,
+   "zona": "Tecate",
+   "ambito": "zona",
+   "activo": false,
+   "razon": "Registro deliberado de un hueco: X no publica lista para Tecate (467 ubicaciones revisadas el 2026-09-11)."
+  },
+  {
+   "id": "sanquintin",
+   "nombre": "San Quintín",
+   "woeid": null,
+   "zona": "San Quintín",
+   "ambito": "zona",
+   "activo": false,
+   "razon": "Registro deliberado de un hueco: X no publica lista para San Quintín (467 ubicaciones revisadas el 2026-09-11). Es municipio nuevo y tampoco tiene medio con RSS ni cuenta de Instagram."
+  },
+  {
+   "id": "sanfelipe",
+   "nombre": "San Felipe",
+   "woeid": null,
+   "zona": "San Felipe",
+   "ambito": "zona",
+   "activo": false,
+   "razon": "Registro deliberado de un hueco: X no publica lista para San Felipe (467 ubicaciones revisadas el 2026-09-11)."
+  }
+ ],
+
+ "senuelos": [
+  {"id": "mikolabs~x-twitter-trends-scraper", "plataforma": "x", "razon": "NO USAR. Pide las cookies de sesión de una cuenta de X («the same ones your browser uses to keep you logged in»): es exactamente el caso que docs/PLAN.md §3 refusa, y pulso/apify.py lo rechazaría al leer la entrada. Además solo da país, no ciudad."},
+  {"id": "karamelo~twitter-trends-scraper", "plataforma": "x", "razon": "Anónimo, pero solo 35 países: no tiene Tijuana, Mexicali ni San Diego, que son la región."},
+  {"id": "data-slayer~twitter-trends-by-location", "plataforma": "x", "razon": "Anónimo, pero solo país y sin WOEID: no llega a la ciudad."},
+  {"id": "apidojo~tweet-scraper", "plataforma": "x", "razon": "Tuits, no tendencias. Sigue de señuelo en config/apify.json: los raspadores de tuits piden cookies porque X cerró la lectura anónima en 2023. Que las tendencias entren no cambia eso."}
+ ]
+}

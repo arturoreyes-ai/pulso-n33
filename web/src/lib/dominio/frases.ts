@@ -110,9 +110,18 @@ export function fraseSentimiento(
 }
 
 /**
- * Los comentarios de UN post de Instagram, siempre en conteos. No tiene
- * umbral a proposito: con ~30 comentarios por post un porcentaje se mueve con
- * uno, y el validador de redes.json rechaza porcentajes en cualquier nivel.
+ * Los comentarios de UN post, siempre en conteos. No tiene umbral a proposito:
+ * con ~30 comentarios por post un porcentaje se mueve con uno, y el validador
+ * de redes.json rechaza porcentajes en cualquier nivel.
+ *
+ * El denominador es el total del post, no lo que se alcanzo a leer. La frase
+ * decia «5 de 7 comentarios leidos; 3 son opinion y suenan: …» y contaba tres
+ * cosas que el lector no necesita —cuantos se leyeron, cuantos traian opinion,
+ * cuantos quedaron sin clasificar—, todas contabilidad de la cosecha. Lo que
+ * si necesita es que las cifras cuadren con los «7 comentarios» que la fila ya
+ * muestra arriba, y por eso la razon se queda: el numero antes de los dos
+ * puntos es `clasificados`, que SIEMPRE suma el desglose. Sin el, el lector ve
+ * tres numeros que dan 3 debajo de un 7 y nada que lo explique.
  */
 export function fraseComentariosPost(
   s: Sentimiento & { sin_clasificar: number },
@@ -120,22 +129,20 @@ export function fraseComentariosPost(
   comentarios: number,
   opinion: number,
 ): string {
-  if (cosechados === 0) return "Sin comentarios leídos en este post.";
-  const leidos =
-    cosechados >= comentarios
-      ? `${numero(cosechados)} ${pluralizar(cosechados, "comentario leído", "comentarios leídos")}`
-      : `${numero(cosechados)} de ${numero(comentarios)} comentarios leídos`;
-  if (opinion === 0) return `${leidos}; ninguno es opinión con palabras.`;
+  // El conteo de la plataforma puede ir atrasado respecto de lo que se leyo.
+  const total = Math.max(cosechados, comentarios);
+  if (total === 0) return "Sin comentarios en este post.";
+  const de = `De ${numero(total)} ${pluralizar(total, "comentario", "comentarios")}`;
+  if (cosechados === 0 || opinion === 0) return `${de}, ninguno con sentimiento.`;
   const clasificados = totalSentimiento(s);
   if (clasificados === 0) {
-    return `${leidos}; ${numero(opinion)} ${pluralizar(opinion, "es opinión", "son opinión")}, sin clasificación de sentimiento en este corte.`;
+    return `${de}, ${numero(opinion)} con sentimiento; sin desglose.`;
   }
-  const cola = s.sin_clasificar > 0 ? ` ${numero(s.sin_clasificar)} sin clasificar.` : "";
   return (
-    `${leidos}; ${numero(opinion)} ${pluralizar(opinion, "es opinión y suena", "son opinión y suenan")}: ` +
+    `${de}, ${numero(clasificados)} ${pluralizar(clasificados, "suena", "suenan")}: ` +
     `${numero(s.negativo)} ${pluralizar(s.negativo, "negativo", "negativos")}, ` +
     `${numero(s.neutral)} ${pluralizar(s.neutral, "neutral", "neutrales")} y ` +
-    `${numero(s.positivo)} ${pluralizar(s.positivo, "positivo", "positivos")}.${cola}`
+    `${numero(s.positivo)} ${pluralizar(s.positivo, "positivo", "positivos")}.`
   );
 }
 
@@ -211,7 +218,7 @@ export function fraseCrimen(m: MunicipioSesnsp, nombre: string): string {
   const ultimo = m.por_mes[n - 1];
   const previo = m.por_mes[n - 2];
   if (ultimo === undefined) {
-    return `${nombre} no tiene serie mensual de delitos en este corte.`;
+    return `${nombre} no tiene serie mensual de delitos.`;
   }
   if (previo === undefined) {
     return `${nombre} reportó ${numero(ultimo)} delitos en ${nombreMes(n - 1)}; sin mes anterior para comparar.`;
@@ -230,7 +237,7 @@ export function fraseCrimenRegion(
   const series = municipios
     .map((z) => panel.municipios[z])
     .filter((m): m is MunicipioSesnsp => m !== undefined && m.por_mes.length > 0);
-  if (series.length === 0) return "Sin serie mensual de delitos en este corte.";
+  if (series.length === 0) return "Sin serie mensual de delitos.";
   const n = Math.min(...series.map((m) => m.por_mes.length));
   const suma = (i: number) => series.reduce((acc, m) => acc + (m.por_mes[i] ?? 0), 0);
   const ultimo = suma(n - 1);
@@ -250,7 +257,7 @@ export function fraseDelitosClave(m: MunicipioSesnsp): string {
   const top = Object.entries(m.delitos_clave)
     .toSorted((a, b) => b[1] - a[1])
     .slice(0, 3);
-  if (top.length === 0) return "Sin desglose por tipo de delito en este corte.";
+  if (top.length === 0) return "Sin desglose por tipo de delito.";
   return `Los más frecuentes en el año: ${enumerar(
     top.map(([d, n]) => `${minuscula(d)} (${numero(n)})`),
   )}.`;
@@ -268,7 +275,7 @@ export function fraseVivienda(
   }
   const v = s.variacion_anual_pct;
   if (v === null) {
-    return `La SHF publica índice para ${nombre}, pero sin variación anual en este corte.`;
+    return `La SHF publica índice para ${nombre}, pero sin variación anual.`;
   }
   const cuando = periodoLegible(periodo ?? s.periodo);
   if (Math.abs(v) < 0.05) {
@@ -283,7 +290,7 @@ export function fraseViviendaRegion(
   periodo: string | null,
 ): string {
   if (estado === undefined || estado.variacion_anual_pct === null) {
-    return "Sin variación anual del índice de vivienda para Baja California en este corte.";
+    return "Sin variación anual del índice de vivienda para Baja California.";
   }
   const v = estado.variacion_anual_pct;
   const dir = v > 0 ? "subió" : v < 0 ? "bajó" : "no cambió";
@@ -343,7 +350,7 @@ export function fraseSanDiego(
       par[1] !== undefined,
     );
   if (presentes.length === 0) {
-    return "Sin datos catastrales para los códigos postales fronterizos en este corte.";
+    return "Sin datos catastrales para los códigos postales fronterizos.";
   }
   const orden = presentes.toSorted((a, b) => a[1].mediana_usd - b[1].mediana_usd);
   const min = orden[0];

@@ -5,11 +5,12 @@ import { Seccion } from "@/components/chrome/seccion";
 import { PanelConversacion } from "@/components/paneles/conversacion";
 import { PanelRedes, PanelTikTok } from "@/components/paneles/redes";
 import { SelectorRed } from "@/components/paneles/selector-red";
+import { PanelTendencias } from "@/components/paneles/tendencias";
 import { tituloSeccion } from "@/lib/dominio/secciones";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 
 /**
- * REDES: las tres plataformas en un solo lugar.
+ * REDES: las cuatro plataformas en un solo lugar.
  *
  * Eran tres secciones seguidas de la pagina unica —Instagram, TikTok y
  * YouTube—, y TikTok ademas tenia pastilla propia en la nav. Se leen como una
@@ -17,7 +18,7 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  * scrolleando. El detalle de por que estan tan separadas por dentro esta en
  * `components/paneles/selector-red.tsx`.
  *
- * Las tres NO son la misma fuente y la pagina no finge que lo sean:
+ * Las cuatro NO son la misma fuente y la pagina no finge que lo sean:
  *
  *   Instagram — cuentas de medios verificadas una por una. La zona es la SEDE
  *               de la cuenta. Publica el texto de los comentarios. Ventana de
@@ -28,10 +29,29 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  *   YouTube   — solo conteos y sentimiento agregado. Nunca el texto de un
  *               comentario: las Politicas para Desarrolladores limitan el
  *               almacenamiento a 30 dias y un repositorio de git no borra.
+ *   X         — el ranking de tendencias de X por ubicacion (Tijuana,
+ *               Mexicali, San Diego, Mexico y el mundo), leido sin sesion
+ *               desde el 11 de septiembre de 2026. Ni tuits ni identidad:
+ *               nombre, puesto y liga. Es lo que X destaca, no la ciudad.
  *
- * Por eso cada plataforma trae su propio parrafo de encabezado y su propio
- * "cómo leer este dato". Un solo texto para las tres tendria que mentir en
- * dos de ellas.
+ * NADA DE ESO SE LE DICE AL LECTOR, y este bloque es el unico lugar donde
+ * vive. El 13 de septiembre de 2026 el cliente pidio que la interfaz dejara de
+ * explicar como obtiene los datos: la faceta de TikTok llegaba a nombrar la
+ * consulta literal («tijuana noticias»), la regla de zona («la da el pie del
+ * video, no el creador») y hasta git. Es la regla del 12 de septiembre —la
+ * interfaz no nombra a Google— extendida del proveedor a todo el mecanismo.
+ *
+ * Lo que el lector si ve: que esta mirando y que NO afirma. La distincion
+ * decide cada cadena de esta pagina. «Es el ranking de X, no una medida de la
+ * ciudad» se queda porque es significado; «leido sin iniciar sesion» se fue
+ * porque es procedimiento. Las cinco reglas de PRODUCT.md siguen enteras y
+ * visibles en cada pagina: las dice el pie (`chrome/pie.tsx`), en HTML de
+ * servidor, no cada panel por su cuenta.
+ *
+ * Por eso ya no hay «Cómo leer este dato» aqui. Lo tenian las cuatro facetas y
+ * era prosa de metodologia; su contenido esta en PRODUCT.md. El panel de
+ * indicadores conserva el suyo, que explica que mide el SHF o la ENSU —el
+ * significado de la fuente, no el de nuestro codigo.
  */
 export function PaginaRedes({ zona }: { zona: ZonaRuta | null }) {
   const nombre = zona === null ? null : NOMBRE_CORTO[zona];
@@ -44,8 +64,8 @@ export function PaginaRedes({ zona }: { zona: ZonaRuta | null }) {
         titulo={tituloSeccion("redes", nombre)}
         entrada={
           nombre === null
-            ? "Lo que publican las cuentas de noticias de la región y lo que la gente comenta debajo, en Instagram, TikTok y YouTube. Se publica lo que se dijo; nunca quién lo dijo."
-            : `Lo que se publica desde ${nombre} o nombra a ${nombre}, y lo que la gente comenta debajo. Se publica lo que se dijo; nunca quién lo dijo.`
+            ? "Lo que publican las cuentas de noticias de la región y lo que la gente comenta debajo, en Instagram, TikTok y YouTube, y lo que X marca como tendencia. Se publica lo que se dijo; nunca quién lo dijo."
+            : `Lo que se publica desde ${nombre} o nombra a ${nombre}, lo que la gente comenta debajo y lo que X marca como tendencia. Se publica lo que se dijo; nunca quién lo dijo.`
         }
       />
 
@@ -56,30 +76,40 @@ export function PaginaRedes({ zona }: { zona: ZonaRuta | null }) {
               <>
                 <Intro>
                   {nombre === null
-                    ? "Los posts con más likes de las últimas 24 horas en las cuentas de noticias de la región, y los comentarios más votados en cada uno. La zona de un post es la sede de la cuenta que lo publicó, no el lugar del que habla."
+                    ? "Los posts con más likes de las últimas 24 horas en las cuentas de noticias de la región, y los comentarios más votados en cada uno."
                     : `Los posts con más likes de las últimas 24 horas en cuentas de noticias con sede en ${nombre}, y los comentarios más votados en cada uno.`}
                 </Intro>
-                <PanelRedes zona={zona} lectura={<LecturaInstagram />} />
+                <PanelRedes zona={zona} />
               </>
             ),
             tiktok: (
               <>
                 <Intro>
                   {nombre === null
-                    ? "Los videos con más likes de las últimas 24 horas que TikTok devuelve para «tijuana noticias», de cualquier creador. Aquí la zona no la da la cuenta: la da el lugar que nombra la descripción."
-                    : `De los videos de las últimas 24 horas para «tijuana noticias», los que nombran ${nombre} en su descripción. La zona la da el pie del video, no el creador.`}
+                    ? "Videos de las últimas 24 horas que hablan de la región, de cualquier creador, y los comentarios más votados en cada uno."
+                    : `Videos de las últimas 24 horas que hablan de ${nombre}, de cualquier creador, y los comentarios más votados en cada uno.`}
                 </Intro>
-                <PanelTikTok zona={zona} lectura={<LecturaTikTok />} />
+                <PanelTikTok zona={zona} />
               </>
             ),
             youtube: (
               <>
                 <Intro>
                   {nombre === null
-                    ? "Comentarios en canales de noticias de YouTube, con su sentimiento. Aquí solo hay conteos: el texto de un comentario de YouTube no se publica ni se guarda."
-                    : `Comentarios en canales de noticias de YouTube atribuidos a ${nombre}, con su sentimiento. Aquí solo hay conteos, nunca el texto.`}
+                    ? "Comentarios en canales de noticias de la región, con su sentimiento. Aquí solo hay cifras, nunca el texto."
+                    : `Comentarios en canales de noticias sobre ${nombre}, con su sentimiento. Aquí solo hay cifras, nunca el texto.`}
                 </Intro>
-                <PanelConversacion zona={zona} lectura={<LecturaYouTube />} />
+                <PanelConversacion zona={zona} />
+              </>
+            ),
+            x: (
+              <>
+                <Intro>
+                  {nombre === null
+                    ? "Lo que X marca como tendencia en Tijuana, Mexicali y San Diego, en México y en el mundo. Es el ranking de X, no una medida de la ciudad: aquí no hay tuits, solo el nombre de cada tendencia y la liga a su búsqueda."
+                    : `Lo que X marca como tendencia en ${nombre}, en México y en el mundo. Es el ranking de X, no una medida de la ciudad: aquí no hay tuits, solo el nombre de cada tendencia y la liga a su búsqueda.`}
+                </Intro>
+                <PanelTendencias zona={zona} />
               </>
             ),
           }}
@@ -93,93 +123,4 @@ export function PaginaRedes({ zona }: { zona: ZonaRuta | null }) {
  *  el sitio donde estaba la entrada de la seccion que cada una tenia. */
 function Intro({ children }: { children: ReactNode }) {
   return <p className="mb-6 max-w-[65ch] text-lectura text-tinta-prosa">{children}</p>;
-}
-
-/* ----------------------------------------------------------------- lecturas */
-
-function LecturaInstagram() {
-  return (
-    <>
-      <p>
-        Cuentas públicas de Instagram de medios verificados uno por uno, leídas
-        sin iniciar sesión. La zona de un post es la sede de la cuenta que lo
-        publicó, no el lugar del que habla. El título es la primera línea del
-        pie que escribió el medio; el resto del pie no se publica. La ventana
-        es de 24 horas sobre la hora exacta de publicación, que se muestra en
-        cada fila. Las cifras de un post se refrescan en cada corrida; sus
-        comentarios se leen una sola vez, así que son la foto de la primera
-        lectura.
-      </p>
-      <p>
-        Los comentarios se muestran tal cual, sin usuario ni foto: la identidad
-        de quien comenta se descarta al leer y no existe en ningún archivo. Se
-        ordenan por likes; los que aparecen al desplegar «ver más» siempre
-        tienen al menos un like. El texto se renueva en cada corrida y nunca
-        se conserva más de 30 días. Los comentarios repetidos en varios posts
-        de la misma cuenta y los de puro emoji se cuentan pero no se muestran.
-      </p>
-      <p>
-        Instagram no publica cuántas veces se compartió o guardó un post de
-        otra cuenta, así que esa cifra no está: es «sin dato», no cero. El
-        sentimiento lo asigna un modelo local y mide el tono de la frase, no la
-        postura hacia una persona. Y todo esto es volumen de conversación en
-        cuentas de noticias, no opinión de la población.
-      </p>
-    </>
-  );
-}
-
-function LecturaTikTok() {
-  return (
-    <>
-      <p>
-        Aquí la fuente no es una lista de cuentas verificadas sino una búsqueda:
-        «tijuana noticias», ordenada por relevancia, sobre las últimas 24 horas,
-        leída sin iniciar sesión. Los videos vienen de cualquier creador que
-        TikTok considere relevante, así que la zona no la da la búsqueda: la da lo
-        que nombra la descripción del video. Uno que nombra Tijuana va a Tijuana;
-        uno que nombra otra ciudad de la región va a esa; uno que no nombra lugar
-        alguno se rotula «sin lugar en la descripción» y solo aparece en la vista
-        de región. Los que hablan de fuera de Baja California se descartan.
-      </p>
-      <p>
-        Se muestra el @ del creador porque es quien decidió publicar y la liga ya lo
-        trae. Los comentarios se muestran tal cual, sin usuario ni foto: esa
-        identidad se descarta al leer y no existe en ningún archivo. Se ordenan por
-        likes; los que aparecen al desplegar «ver más» siempre tienen al menos un
-        like. El texto se renueva en cada corrida y nunca se conserva más de 30
-        días. Los repetidos en varios videos y los de puro emoji se cuentan pero no
-        se muestran.
-      </p>
-      <p>
-        TikTok sí publica compartidos y guardados, así que aquí aparecen; un cero es
-        un cero medido. El título es la descripción del video sin la cola de
-        hashtags. El sentimiento lo asigna un modelo local y mide el tono de la
-        frase, no la postura hacia una persona. Y todo esto es volumen de
-        conversación alrededor de una búsqueda, no opinión de la población.
-      </p>
-    </>
-  );
-}
-
-function LecturaYouTube() {
-  return (
-    <>
-      <p>
-        Comentarios leídos con la API oficial de YouTube en canales de noticias
-        verificados y en búsquedas acotadas por los temas de prensa. Las
-        Políticas para Desarrolladores de YouTube limitan el almacenamiento a 30
-        días y un repositorio de git no puede borrar, así que aquí solo llegan
-        conteos y sentimiento agregado: nunca el texto de un comentario, su
-        identificador ni quién lo escribió. Es la diferencia con las otras dos
-        plataformas de esta página, y es una obligación, no una preferencia.
-      </p>
-      <p>
-        El sentimiento lo asigna un modelo local entrenado en texto de redes.
-        Mide si una frase suena a queja, a celebración o a información; no mide
-        postura hacia una persona. Y esto mide volumen de conversación en canales
-        de noticias, que no es lo mismo que la opinión de la población.
-      </p>
-    </>
-  );
 }

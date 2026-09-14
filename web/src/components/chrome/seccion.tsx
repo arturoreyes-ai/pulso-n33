@@ -18,24 +18,38 @@ import { Revelar } from "./revelar";
  * ahi seria el mismo texto dos veces seguidas. Lo que sigue aportando en ese
  * caso es todo lo demas: la rejilla, el ancla y el revelado.
  *
- * `py-24` es una regla de SECCION. Leida como regla de fila convertiria el
+ * `py-20` es una regla de SECCION. Leida como regla de fila convertiria el
  * muro en sesenta pantallas de alto.
+ *
+ * `pegada` es para la PRIMERA seccion de una pagina, la que sigue al
+ * encabezado: conserva el ritmo abajo y recorta el de arriba. Sin esto, entre
+ * las pastillas de alcance del encabezado y el h2 "Titulares" quedaban los
+ * 24px del encabezado mas los 80px de la seccion, una franja negra de cuatro
+ * dedos que el cliente pidio cerrar el 11 de septiembre de 2026: los titulares
+ * van pegados a la navegacion que los acota.
  */
+const RITMO = "py-12 md:py-20";
+const RITMO_PEGADA = "pt-4 pb-12 md:pt-6 md:pb-20";
+
 export function Seccion({
   id,
   titulo,
   entrada,
+  pegada = false,
   children,
 }: {
   id: string;
   titulo?: string;
   entrada?: ReactNode;
+  pegada?: boolean;
   children: ReactNode;
 }) {
   return (
     <section
       id={id}
-      className="mx-auto w-full max-w-[88rem] scroll-mt-[calc(var(--nav-alto)+1.5rem)] px-4 py-12 md:px-8 md:py-20"
+      className={`mx-auto w-full max-w-[88rem] scroll-mt-[calc(var(--nav-alto)+1.5rem)] px-4 md:px-8 ${
+        pegada ? RITMO_PEGADA : RITMO
+      }`}
     >
       {titulo === undefined ? null : (
         <h2 className="font-titular text-seccion text-tinta-titulo">{titulo}</h2>

@@ -37,10 +37,11 @@ function cargar(relativo) {
 
 const { parsearFeed, quitarSufijoMedio } = cargar('lib/busqueda/rss');
 const { fusionarLocales, suprimirConocidas } = cargar('lib/busqueda/fusionar');
-const { urlDeFeed, urlDeActualidad, esUrlDeGoogle } = cargar('lib/busqueda/google-noticias');
-const { responderActualidad } = cargar('lib/busqueda/actualidad');
+const { urlDeFeed, urlDeActualidad, urlDeLugar, esUrlDeGoogle } = cargar('lib/busqueda/google-noticias');
+const { responderActualidad, consultaDeRubro } = cargar('lib/busqueda/actualidad');
+const { RUBROS, NOMBRE_RUBRO, TERMINOS_RUBRO, VENTANA_RUBRO } = cargar('lib/busqueda/rubros');
 const { AMBITOS, esAmbitoActualidad, usaCorpus } = cargar('lib/busqueda/ambito');
-const { TOPE_RESULTADOS } = cargar('lib/busqueda/tipos');
+const { TOPE_ACTUALIDAD } = cargar('lib/busqueda/tipos');
 
 // El MISMO fixture que tests/test_busquedas.py lee en Python: seis items, uno
 // sin <source>, uno con ' - ' a la mitad del titular. Dos lectores, un XML.
@@ -134,7 +135,7 @@ async function comprobar() {
 
   // --- /api/actualidad: Mexico -----------------------------------------------
   const llamadas = [];
-  const bien = await responderActualidad('mexico', async (url, opciones) => {
+  const bien = await responderActualidad({ a: 'mexico', z: null, t: null }, async (url, opciones) => {
     llamadas.push(url);
     assert.equal(opciones.cache, 'no-store');
     assert.ok(opciones.signal);
@@ -147,7 +148,9 @@ async function comprobar() {
   assert.equal(bien.headers.get('x-robots-tag'), 'noindex');
   assert.equal(bien.headers.get('x-content-type-options'), 'nosniff');
   const cuerpo = await bien.json();
-  assert.equal(cuerpo.ambito, 'mexico');
+  assert.equal(cuerpo.seccion, 'mexico');
+  assert.equal(cuerpo.zona, null);
+  assert.equal(cuerpo.rubro, null);
   assert.equal(cuerpo.consultado, AHORA);
   assert.deepEqual(cuerpo.resultados.map((r) => r.titulo), filas.map((r) => r.titulo), 'en el orden del feed');
   assert.equal(cuerpo.fuentes.length, 1);
@@ -159,7 +162,7 @@ async function comprobar() {
 
   // --- Internacional: dos ediciones intercaladas y SIN reordenar por fecha ---
   const porLocale = (url) => (url.includes('hl=es-419') ? 'es' : url.includes('hl=en-US') ? 'en' : assert.fail('locale desconocido: ' + url));
-  const inter = await responderActualidad('internacional', async (url) => {
+  const inter = await responderActualidad({ a: 'internacional', z: null, t: null }, async (url) => {
     assert.ok(url.includes('/topic/WORLD?'), url);
     return new Response(porLocale(url) === 'es'
       ? feed(item('Viejo primero', VIEJO), item('Nuevo segundo', NUEVO))
@@ -173,7 +176,7 @@ async function comprobar() {
   assert.match(inter.headers.get('cache-control'), /s-maxage=300/);
 
   // --- Fallas rio arriba: siempre 200, la salud dentro, y NUNCA al CDN ------
-  const html = await responderActualidad('mexico', async () => new Response('<!doctype html><html><body>consent</body></html>'), AHORA);
+  const html = await responderActualidad({ a: 'mexico', z: null, t: null }, async () => new Response('<!doctype html><html><body>consent</body></html>'), AHORA);
   assert.equal(html.status, 200);
   const ch = await html.json();
   assert.equal(ch.fuentes[0].estado, 'fallo');
@@ -181,21 +184,21 @@ async function comprobar() {
   assert.deepEqual(ch.resultados, []);
   assert.equal(html.headers.get('cache-control'), 'private, no-store');
 
-  const tarde = await responderActualidad('mexico', async () => { throw new DOMException('timeout', 'TimeoutError'); }, AHORA);
+  const tarde = await responderActualidad({ a: 'mexico', z: null, t: null }, async () => { throw new DOMException('timeout', 'TimeoutError'); }, AHORA);
   assert.match((await tarde.json()).fuentes[0].error, /no respondio en 6 s/);
   assert.equal(tarde.headers.get('cache-control'), 'private, no-store');
 
-  const caido = await responderActualidad('mexico', async () => new Response('x', { status: 503 }), AHORA);
+  const caido = await responderActualidad({ a: 'mexico', z: null, t: null }, async () => new Response('x', { status: 503 }), AHORA);
   assert.match((await caido.json()).fuentes[0].error, /503/);
   assert.equal(caido.headers.get('cache-control'), 'private, no-store');
 
   // Redireccion: la seccion contesta 302 al id opaco y fetch lo sigue solo.
   // Al mismo host, bien; a otro host, ni un byte.
-  const mismoHost = await responderActualidad('mexico',
+  const mismoHost = await responderActualidad({ a: 'mexico', z: null, t: null },
     async () => redirigida(XML, 'https://news.google.com/rss/topics/CAAqKAgKIiJDQkFT?hl=es-419&gl=MX&ceid=MX:es-419'), AHORA);
   assert.equal((await mismoHost.json()).fuentes[0].estado, 'ok');
   assert.match(mismoHost.headers.get('cache-control'), /s-maxage=300/);
-  const otroHost = await responderActualidad('mexico', async () => redirigida(XML, 'https://evil.example/rss'), AHORA);
+  const otroHost = await responderActualidad({ a: 'mexico', z: null, t: null }, async () => redirigida(XML, 'https://evil.example/rss'), AHORA);
   const co = await otroHost.json();
   assert.equal(co.fuentes[0].estado, 'fallo');
   assert.match(co.fuentes[0].error, /fuera de news\.google\.com: evil\.example/);
@@ -203,7 +206,7 @@ async function comprobar() {
   assert.equal(otroHost.headers.get('cache-control'), 'private, no-store');
 
   // Un locale caido no tumba el otro, pero si le quita el cache al conjunto.
-  const parcial = await responderActualidad('internacional', async (url) =>
+  const parcial = await responderActualidad({ a: 'internacional', z: null, t: null }, async (url) =>
     porLocale(url) === 'en' ? new Response('x', { status: 503 }) : new Response(feed(item('Solo español', NUEVO))), AHORA);
   const cp = await parcial.json();
   assert.equal(parcial.status, 200);
@@ -213,22 +216,103 @@ async function comprobar() {
   assert.equal(cp.fuentes[1].error, 'Google respondio 503');
   assert.equal(parcial.headers.get('cache-control'), 'private, no-store');
 
-  // Tope: dos ediciones de 25 pasan de 40 y se dice.
+  // Tope: dos ediciones de 25 pasan de los 15 de la actualidad y se dice.
   const muchos = (prefijo) => feed(...Array.from({ length: 25 }, (_, i) => item(`${prefijo} ${i}`, NUEVO)));
-  const largo = await responderActualidad('internacional', async (url) => new Response(muchos(porLocale(url))), AHORA);
+  const largo = await responderActualidad({ a: 'internacional', z: null, t: null }, async (url) => new Response(muchos(porLocale(url))), AHORA);
   const cl = await largo.json();
-  assert.equal(cl.resultados.length, TOPE_RESULTADOS);
+  assert.equal(cl.resultados.length, TOPE_ACTUALIDAD);
+  assert.equal(TOPE_ACTUALIDAD, 15, 'el cliente pidio quince');
   assert.equal(cl.truncada, true);
 
   // Ambito con corpus o inventado: 400 y NO se toca la red.
-  for (const malo of ['zona', 'region', 'mundo', null]) {
-    const r = await responderActualidad(malo, async () => assert.fail('no debia consultar a Google'), AHORA);
+  for (const malo of ['zona', 'mundo', null]) {
+    const r = await responderActualidad({ a: malo, z: null, t: null }, async () => assert.fail('no debia consultar a Google'), AHORA);
     assert.equal(r.status, 400, String(malo));
     assert.equal(r.headers.get('cache-control'), 'private, no-store');
     assert.equal((await r.json()).codigo, 'ambito');
   }
 
-  console.log('Búsqueda: parseo, fusión, URLs y /api/actualidad verificados offline.');
+  // --- Secciones LOCALES: la zona por z=, el corredor por a=region ------------
+  // El nombre es un segmento de ruta: va con encodeURIComponent, acento incluido.
+  assert.equal(urlDeLugar('San Quintín', 'es'), 'https://news.google.com/rss/headlines/section/geo/San%20Quint%C3%ADn?hl=es-419&gl=MX&ceid=MX%3Aes-419');
+  assert.equal(urlDeLugar('San Diego', 'en'), 'https://news.google.com/rss/headlines/section/geo/San%20Diego?hl=en-US&gl=US&ceid=US%3Aen');
+
+  const pedidasTj = [];
+  const tj = await responderActualidad({ a: null, z: 'tijuana', t: null }, async (url) => {
+    pedidasTj.push(url);
+    return new Response(feed(item(porLocale(url) === 'es' ? 'Local en español' : 'Local in English', NUEVO)));
+  }, AHORA);
+  assert.deepEqual(pedidasTj, [urlDeLugar('Tijuana', 'es'), urlDeLugar('Tijuana', 'en')], 'Tijuana en los dos idiomas');
+  const ctj = await tj.json();
+  assert.equal(ctj.seccion, 'zona');
+  assert.equal(ctj.zona, 'tijuana');
+  assert.deepEqual(ctj.resultados.map((r) => r.idioma), ['es', 'en']);
+  assert.match(tj.headers.get('cache-control'), /s-maxage=300/);
+
+  const pedidasSd = [];
+  await responderActualidad({ a: null, z: 'san-diego', t: null }, async (url) => { pedidasSd.push(url); return new Response(feed()); }, AHORA);
+  assert.deepEqual(pedidasSd, [urlDeLugar('San Diego', 'en')], 'San Diego solo en ingles');
+
+  const pedidasReg = [];
+  const reg = await responderActualidad({ a: 'region', z: null, t: null }, async (url) => { pedidasReg.push(url); return new Response(feed()); }, AHORA);
+  assert.deepEqual(pedidasReg, [urlDeLugar('Tijuana', 'es'), urlDeLugar('San Diego', 'en')],
+    'el corredor son sus dos polos, no la seccion "Baja California", que llega vacia');
+  const creg = await reg.json();
+  assert.equal(creg.seccion, 'region');
+  assert.equal(creg.zona, null);
+  assert.deepEqual(creg.resultados, []);
+  assert.deepEqual(creg.fuentes.map((f) => [f.idioma, f.estado, f.obtenidas]), [['es', 'ok', 0], ['en', 'ok', 0]]);
+
+  // z= manda: una zona inventada es 400 sin tocar la red, aunque a= sea valido.
+  const zonaMala = await responderActualidad({ a: 'mexico', z: 'nada', t: null }, async () => assert.fail('no debia consultar a Google'), AHORA);
+  assert.equal(zonaMala.status, 400);
+  assert.equal((await zonaMala.json()).codigo, 'zona');
+  assert.equal(zonaMala.headers.get('cache-control'), 'private, no-store');
+
+  // --- Rubros: una BUSQUEDA de terminos + lugar, en el idioma de la edicion -----
+  for (const r of RUBROS) {
+    assert.ok(NOMBRE_RUBRO[r], r);
+    for (const idioma of ['es', 'en']) {
+      const t = TERMINOS_RUBRO[r][idioma];
+      assert.ok(t.startsWith('(') && t.endsWith(')'), `${r}/${idioma} entre parentesis, o el OR se come el lugar`);
+    }
+  }
+  const qClima = consultaDeRubro('clima', 'es', 'zona', 'Tijuana');
+  assert.ok(qClima.includes(TERMINOS_RUBRO.clima.es), 'terminos del rubro');
+  assert.ok(qClima.includes(VENTANA_RUBRO), 'ventana');
+  assert.ok(qClima.includes('Tijuana'), 'terminos de lugar de la zona');
+  assert.ok(consultaDeRubro('clima', 'es', 'region', null).includes('Baja California'), 'la region pega sus terminos');
+  assert.equal(consultaDeRubro('clima', 'es', 'mexico', null), `${TERMINOS_RUBRO.clima.es} ${VENTANA_RUBRO}`, 'una edicion no acota por lugar');
+
+  const pedidasRubro = [];
+  const rubroTj = await responderActualidad({ a: null, z: 'tijuana', t: 'clima' }, async (url) => {
+    pedidasRubro.push(url);
+    return new Response(feed(item(porLocale(url) === 'es' ? 'Lluvia en Tijuana' : 'Rain in Tijuana', NUEVO)));
+  }, AHORA);
+  assert.deepEqual(pedidasRubro, [
+    urlDeFeed(consultaDeRubro('clima', 'es', 'zona', 'Tijuana'), 'es'),
+    urlDeFeed(consultaDeRubro('clima', 'en', 'zona', 'Tijuana'), 'en'),
+  ], 'un rubro en Tijuana son dos busquedas, una por edicion');
+  assert.ok(pedidasRubro[0].startsWith('https://news.google.com/rss/search?'), 'busqueda, no seccion');
+  const cr = await rubroTj.json();
+  assert.equal(cr.seccion, 'zona');
+  assert.equal(cr.zona, 'tijuana');
+  assert.equal(cr.rubro, 'clima');
+  assert.deepEqual(cr.resultados.map((x) => x.titulo), ['Lluvia en Tijuana', 'Rain in Tijuana']);
+
+  const pedidasReg2 = [];
+  await responderActualidad({ a: 'region', z: null, t: 'deportes' }, async (url) => { pedidasReg2.push(url); return new Response(feed()); }, AHORA);
+  assert.equal(pedidasReg2.length, 2);
+  assert.ok(pedidasReg2.every((u) => new URL(u).searchParams.get('q').includes('Baja California')), 'el corredor busca con sus terminos de region');
+
+  // Rubro inventado: 400 sin tocar la red. La zona se valida antes que el rubro.
+  const rubroMalo = await responderActualidad({ a: null, z: 'tijuana', t: 'nada' }, async () => assert.fail('no debia consultar a Google'), AHORA);
+  assert.equal(rubroMalo.status, 400);
+  assert.equal((await rubroMalo.json()).codigo, 'rubro');
+  const ambosMalos = await responderActualidad({ a: null, z: 'nada', t: 'nada' }, async () => assert.fail('no debia consultar a Google'), AHORA);
+  assert.equal((await ambosMalos.json()).codigo, 'zona');
+
+  console.log('Búsqueda: parseo, fusión, URLs, /api/actualidad, secciones locales y rubros verificados offline.');
 }
 
 comprobar().catch((error) => { console.error(error); process.exitCode = 1; });

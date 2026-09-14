@@ -82,7 +82,7 @@ function tarjetaTema(d: Datos, zona: ZonaRuta | null, sujeto: string): Tarjeta {
     valor: t === undefined ? "sin tema" : <span className="text-cifra">«{t.termino}»</span>,
     hueco: t === undefined,
     frase:
-      d.temas === undefined ? "Sin temas en este corte." : F.fraseTemaPrincipal(t, sujeto, dias),
+      d.temas === undefined ? "Sin temas por ahora." : F.fraseTemaPrincipal(t, sujeto, dias),
     extra:
       ejemplo === undefined ? undefined : (
         <p className="text-meta text-tinta-prosa">Titular de ejemplo: {ejemplo}</p>
@@ -103,7 +103,7 @@ function tarjetaPrensa(d: Datos, zona: ZonaRuta | null, sujeto: string): Tarjeta
     tono === undefined
       ? n === 0 || d.notas === undefined
         ? ""
-        : " Sin clasificación de tono en este corte."
+        : " Sin desglose de tono."
       : ` ${F.fraseTono(tono, sujeto, dias)}`;
   return {
     etiqueta: `Notas de prensa en ${dias} días`,
@@ -122,7 +122,7 @@ function tarjetaConversacion(d: Datos, zona: ZonaRuta | null, sujeto: string): T
       etiqueta: "Comentarios en YouTube",
       valor: "sin panel",
       hueco: true,
-      frase: "Sin panel de conversación en este corte.",
+      frase: "Sin comentarios por ahora.",
     };
   }
   const dias = conv.retencion_dias;
@@ -134,15 +134,12 @@ function tarjetaConversacion(d: Datos, zona: ZonaRuta | null, sujeto: string): T
   if (n === 0) {
     frase =
       zona === null
-        ? `Sin comentarios vigentes en los últimos ${dias} días.`
+        ? `Sin comentarios en los últimos ${dias} días.`
         : `Sin comentarios atribuidos a ${sujeto} en los últimos ${dias} días.`;
   } else if (s === undefined || clasificados === 0) {
-    frase = `${numero(n)} ${pluralizar(n, "comentario", "comentarios")} sobre ${sujeto} en ${dias} días; sin clasificación de sentimiento en este corte.`;
+    frase = `${numero(n)} ${pluralizar(n, "comentario", "comentarios")} sobre ${sujeto} en ${dias} días, sin desglose de sentimiento.`;
   } else {
     frase = F.fraseSentimiento(s, sujeto, dias);
-    if (zona === null && conv.sentimiento !== undefined && conv.sentimiento.sin_clasificar > 0) {
-      frase += ` ${numero(conv.sentimiento.sin_clasificar)} siguen sin clasificar.`;
-    }
   }
   return {
     etiqueta: `Comentarios en YouTube, ${dias} días`,
@@ -171,7 +168,7 @@ function tarjetasMunicipio(zona: ZonaRuta, d: Datos): Tarjeta[] {
     hueco: serie === undefined,
     frase:
       shf === undefined
-        ? "Sin indicadores oficiales en este corte."
+        ? "Sin indicadores oficiales."
         : F.fraseVivienda(serie, nombre, shf.periodo),
     fuente:
       shf === undefined
@@ -186,7 +183,7 @@ function tarjetasMunicipio(zona: ZonaRuta, d: Datos): Tarjeta[] {
     hueco: m === undefined,
     frase:
       m === undefined
-        ? `Sin dato de predial para ${nombre} en este corte.`
+        ? `Sin dato de predial para ${nombre}.`
         : F.frasePredial(m, nombre),
     fuente:
       predial === undefined
@@ -213,7 +210,7 @@ function tarjetasMunicipio(zona: ZonaRuta, d: Datos): Tarjeta[] {
     hueco: ultimo === undefined,
     frase:
       c === undefined
-        ? `Sin serie de delitos para ${nombre} en este corte.`
+        ? `Sin serie de delitos para ${nombre}.`
         : `${F.fraseCrimen(c, nombre)} ${F.fraseDelitosClave(c)}`,
     fuente:
       sesnsp === undefined
@@ -229,7 +226,7 @@ function tarjetasMunicipio(zona: ZonaRuta, d: Datos): Tarjeta[] {
     hueco: pctInseguro === null,
     frase:
       ensu === undefined
-        ? "Sin ENSU en este corte."
+        ? "Sin dato de la ENSU."
         : F.frasePercepcion(e, nombre, ensu.nacional.pct_inseguro, ensu.periodo),
     fuente:
       ensu === undefined
@@ -264,7 +261,7 @@ function tarjetasRegion(d: Datos): Tarjeta[] {
     hueco: bc === undefined,
     frase:
       shf === undefined
-        ? "Sin indicadores oficiales en este corte."
+        ? "Sin indicadores oficiales."
         : F.fraseViviendaRegion(bc, nac, shf.periodo),
     fuente:
       shf === undefined
@@ -278,7 +275,7 @@ function tarjetasRegion(d: Datos): Tarjeta[] {
       etiqueta: "Delitos reportados",
       valor: "sin dato",
       hueco: true,
-      frase: "Sin serie de delitos en este corte.",
+      frase: "Sin serie de delitos.",
     };
   } else {
     const series = MUNICIPIOS_BC.map((z) => sesnsp.municipios[z]).filter(
@@ -316,7 +313,7 @@ function tarjetasRegion(d: Datos): Tarjeta[] {
       etiqueta: "Se sienten inseguros",
       valor: "sin dato",
       hueco: true,
-      frase: "Sin ENSU en este corte.",
+      frase: "Sin dato de la ENSU.",
     };
   } else {
     const tj = ensu.ciudades["Tijuana"]?.pct_inseguro ?? null;
@@ -327,7 +324,7 @@ function tarjetasRegion(d: Datos): Tarjeta[] {
     if (mx !== null) partes.push(`en Mexicali ${F.decimal(mx)}%`);
     const cuerpo =
       partes.length === 0
-        ? "Sin cifra de percepción en este corte."
+        ? "Sin cifra de percepción."
         : `Se sienten inseguros ${partes.join(" y ")} de quienes tienen 18 años y más${
             nacional === null ? "" : `; el promedio nacional es ${F.decimal(nacional)}%`
           } (ENSU, ${periodoLegible(ensu.periodo)}).`;
@@ -364,7 +361,7 @@ function tarjetasSanDiego(d: Datos): Tarjeta[] {
     hueco: z === undefined,
     frase:
       sd === undefined
-        ? "Sin padrón catastral en este corte."
+        ? "Sin padrón catastral."
         : F.fraseSanDiego(sd.zips, ZIPS_FRONTERA),
     fuente:
       sd === undefined
@@ -451,8 +448,16 @@ export function ResumenZona({ zona }: { zona: ZonaRuta | null }) {
   const { data: notas } = useNotas();
 
   if (estado === undefined) {
-    // Sin estado.json la banda ya lo dice en rojo; aqui no hay nada que resumir.
-    return error === undefined ? <Esqueleto className="h-[360px]" /> : null;
+    if (error === undefined) return <Esqueleto className="h-[360px]" />;
+    // Desde que la banda de salud salio del encabezado (11 de septiembre de
+    // 2026) este es el unico lugar que dice que estado.json no se pudo leer.
+    // Mismo registro que el muro cuando le falta notas.json.
+    return (
+      <p className="text-lectura text-baja">
+        No se pudo leer estado.json. Corre{" "}
+        <code className="text-tinta-titulo">python -m pulso correr</code>.
+      </p>
+    );
   }
 
   const d: Datos = { estado, ind, temas, conv, notas };
@@ -506,10 +511,19 @@ export function ResumenZona({ zona }: { zona: ZonaRuta | null }) {
 
       {zona === null ? <Comparativo d={d} /> : null}
 
+      {/* El pie de la corrida. La banda del encabezado decia esto mismo y se
+          quito; lo que no puede perderse es el aviso de corrida sin red, que
+          es la honestidad del producto sobre su propio estado. */}
       <p className="mt-8 border-t border-vela pt-4 text-meta text-tinta-meta">
-        Corte del {fechaLarga(estado.generado)} a las {hora(estado.generado)}.{" "}
-        {estado.fuentes_ok} de {totalFuentes} fuentes respondieron. Archivo:{" "}
-        {numero(estado.notas_archivadas)} notas en {estado.archivos} meses.
+        {estado.modo === "corpus" ? (
+          <>
+            <b className="font-semibold text-aviso">Datos de prueba.</b> Estos
+            titulares no son prensa real.{" "}
+          </>
+        ) : null}
+        Actualizado el {fechaLarga(estado.generado)} a las {hora(estado.generado)}.{" "}
+        Respondieron {estado.fuentes_ok} de {totalFuentes} fuentes. En el archivo,{" "}
+        {numero(estado.notas_archivadas)} notas de {estado.archivos} meses.
       </p>
     </Bisel>
   );

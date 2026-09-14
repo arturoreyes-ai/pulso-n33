@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 
 import {
   useRedes,
@@ -19,7 +19,6 @@ import { fechaCorta, hora, numero, pluralizar } from "@/lib/dominio/formato";
 import * as F from "@/lib/dominio/frases";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 import { Bisel } from "@/components/ui/bisel";
-import { ComoLeer } from "@/components/ui/como-leer";
 import { Esqueleto, Hueco } from "@/components/ui/primitivas";
 
 /**
@@ -45,6 +44,13 @@ import { Esqueleto, Hueco } from "@/components/ui/primitivas";
  * Nada aqui calcula un porcentaje. Con ~30 comentarios por post uno solo
  * mueve el numero, y el validador del pipeline rechaza porcentajes en
  * cualquier nivel.
+ *
+ * Lo de arriba es para quien mantiene el panel; NO se le dice al lector. Desde
+ * el 13 de septiembre de 2026 las cadenas visibles dicen que se esta mirando y
+ * que no afirma, nunca de donde salio. Las que se fueron llegaban a nombrar la
+ * consulta literal de TikTok, git, el despliegue y a Apify; el caso que lo
+ * disparo es la faceta de TikTok, que explicaba su regla de zona en la primera
+ * linea. Ver `paginas/redes.tsx` para la regla completa.
  */
 
 const TIPO: Record<Destacado["tipo"], string> = {
@@ -82,7 +88,7 @@ interface Plataforma {
   sinFuente: (nombre: string) => string;
   sinFilas: (nombre: string, ventana: string) => string;
   sinToken: string;
-  pie: (retencion: number) => string;
+  pie: string;
 }
 
 /* La zona de un destacado es la sede de la cuenta (Instagram) o lo que nombra
@@ -96,7 +102,7 @@ const INSTAGRAM: Plataforma = {
   usarDatos: useRedes,
   usarTextos: useRedesComentarios,
   unidad: ["post", "posts"],
-  sinPie: "Post sin pie: abrir en Instagram",
+  sinPie: "Abrir en Instagram",
   fuente: (d, nombres) => nombres.get(d.cuenta) ?? d.cuenta,
   etiquetaZona: nombreZona,
   hayFuente: (cuentas, zona) =>
@@ -112,12 +118,11 @@ const INSTAGRAM: Plataforma = {
       ? `Los ${numero(v.total)} posts con más likes de ${INSTAGRAM.ventana(data)} en las cuentas de noticias de la región, del más reciente al más antiguo.`
       : `Los ${numero(v.total)} posts con más likes de ${INSTAGRAM.ventana(data)} en cuentas con sede en ${v.nombre}, del más reciente al más antiguo.`,
   sinFuente: (nombre) =>
-    `Sin cuenta de Instagram verificada con sede en ${nombre}. Es un hueco de cobertura, no un cero.`,
+    `Sin cuenta de Instagram de un medio con sede en ${nombre}. Es un hueco de cobertura, no un cero.`,
   sinFilas: (nombre, ventana) => `Sin posts de cuentas con sede en ${nombre} en ${ventana}.`,
   sinToken:
-    "Sin token de Apify configurado, así que no hay posts ni comentarios que leer. El resto del tablero funciona igual: es degradación esperada, no una falla.",
-  pie: (retencion) =>
-    `Se publican el pie del medio, las cifras del post y el texto de los comentarios más votados, nunca quién los escribió. Instagram no publica compartidos ni guardados de cuentas ajenas: sin dato. El texto se renueva en cada corrida y no se conserva más de ${retencion} días.`,
+    "El panel de Instagram no está disponible en este momento. El resto del tablero funciona igual.",
+  pie: "Se publican el pie del medio, las cifras del post y el texto de los comentarios más votados, nunca quién los escribió. Instagram no publica compartidos ni guardados de cuentas ajenas: es «sin dato», no cero.",
 };
 
 const TIKTOK: Plataforma = {
@@ -125,24 +130,22 @@ const TIKTOK: Plataforma = {
   usarDatos: useTikTok,
   usarTextos: useTikTokComentarios,
   unidad: ["video", "videos"],
-  sinPie: "Video sin descripción: abrir en TikTok",
+  sinPie: "Abrir en TikTok",
   fuente: (d) => d.creador ?? d.cuenta,
-  etiquetaZona: (z) => (z === "nacional" ? "sin lugar en la descripción" : nombreZona(z)),
+  etiquetaZona: (z) => (z === "nacional" ? "sin lugar" : nombreZona(z)),
   // La busqueda no tiene sede: si esta activa, hay fuente para toda zona, y
   // una zona sin filas es "ningun video la nombro", no "sin cuenta".
   hayFuente: (cuentas) => cuentas.some((c) => c.activa),
   ventana: (data) => `las últimas ${data.ventana_horas ?? 24} horas`,
   cabeza: (v, data) =>
     v.esRegion
-      ? `Los ${numero(v.total)} videos con más likes de ${TIKTOK.ventana(data)} que TikTok devuelve para «tijuana noticias», del más reciente al más antiguo.`
-      : `${numero(v.total)} ${pluralizar(v.total, "video", "videos")} de ${TIKTOK.ventana(data)} para «tijuana noticias» que ${pluralizar(v.total, "nombra", "nombran")} ${v.nombre}, del más reciente al más antiguo.`,
-  sinFuente: () => "Sin búsqueda de TikTok activa en la configuración. Es un hueco, no un cero.",
-  sinFilas: (nombre, ventana) =>
-    `Ningún video de «tijuana noticias» nombra ${nombre} en su descripción en ${ventana}.`,
+      ? `${numero(v.total)} ${pluralizar(v.total, "video", "videos")} de ${TIKTOK.ventana(data)} que ${pluralizar(v.total, "habla", "hablan")} de la región, del más reciente al más antiguo.`
+      : `${numero(v.total)} ${pluralizar(v.total, "video", "videos")} de ${TIKTOK.ventana(data)} que ${pluralizar(v.total, "habla", "hablan")} de ${v.nombre}, del más reciente al más antiguo.`,
+  sinFuente: () => "Sin videos de TikTok en el tablero. Es un hueco, no un cero.",
+  sinFilas: (nombre, ventana) => `Ningún video habla de ${nombre} en ${ventana}.`,
   sinToken:
-    "Sin token de Apify configurado, así que no hay videos ni comentarios que leer. El resto del tablero funciona igual: es degradación esperada, no una falla.",
-  pie: (retencion) =>
-    `Se publican la descripción del video, el @ del creador, las cifras y el texto de los comentarios más votados, nunca quién los escribió. TikTok sí publica compartidos y guardados. El texto se renueva en cada corrida y no se conserva más de ${retencion} días.`,
+    "El panel de TikTok no está disponible en este momento. El resto del tablero funciona igual.",
+  pie: "Se publican la descripción del video, el @ del creador, las cifras y el texto de los comentarios más votados, nunca quién los escribió. TikTok sí publica compartidos y guardados.",
 };
 
 interface Dia {
@@ -215,7 +218,7 @@ function ChipSentimiento({ s }: { s: ComentarioPublicado["sentimiento"] }) {
         : "border-filo text-tinta-meta";
   return (
     <span
-      title="Tono de la frase según un modelo local entrenado en texto de redes. No mide postura hacia una persona."
+      title="Cómo suena la frase. No mide la postura hacia una persona."
       className={`inline-block rounded-full border px-2 py-px text-meta whitespace-nowrap ${clase}`}
     >
       {s}
@@ -261,7 +264,7 @@ function Comentarios({
     if (cosechados === 0) return null;
     return (
       <p className="mt-3 text-meta text-tinta-meta">
-        Los comentarios leídos son repetidos en varios posts o de puro emoji; no se muestran.
+        No hay comentarios que mostrar en este post.
       </p>
     );
   }
@@ -282,7 +285,7 @@ function Comentarios({
           onClick={() => setAbierto(true)}
           className="mt-4 text-meta text-tinta-prosa underline-offset-4 hover:text-tinta-titulo hover:underline"
         >
-          ver {ocultos} más con likes
+          ver {ocultos} más
         </button>
       ) : null}
     </div>
@@ -439,16 +442,16 @@ function Cabeza({
   if (data.destacados === undefined) {
     return (
       <p className="max-w-[70ch] text-lectura text-tinta-prosa">
-        Corte anterior al panel de {pl.unidad[1]}: hay {numero(data.comentarios_vigentes)}{" "}
-        comentarios contados sobre {numero(data.posts_vigentes)} {pl.unidad[1]}, pero la lista
-        llega con la siguiente corrida.
+        Todavía no hay lista de {pl.unidad[1]}. Las cifras sí:{" "}
+        {numero(data.comentarios_vigentes)} comentarios sobre {numero(data.posts_vigentes)}{" "}
+        {pl.unidad[1]}.
       </p>
     );
   }
   if (!v.hayFuente) {
     return (
       <p className="text-lectura">
-        <Hueco titulo="Registro deliberado de un hueco en la configuración">{pl.sinFuente(v.nombre)}</Hueco>
+        <Hueco titulo="Hueco de cobertura, registrado a propósito">{pl.sinFuente(v.nombre)}</Hueco>
       </p>
     );
   }
@@ -463,10 +466,10 @@ function Cabeza({
     <>
       <p className="max-w-[70ch] text-lectura text-tinta-titulo">{pl.cabeza(v, data)}</p>
       <p className="mt-2 max-w-[70ch] text-meta text-tinta-prosa">
-        En total hay {numero(data.comentarios_vigentes)} comentarios vigentes sobre{" "}
+        En total, {numero(data.comentarios_vigentes)} comentarios sobre{" "}
         {numero(data.posts_vigentes)} {pl.unidad[1]}.
         {textoError
-          ? " El texto de los comentarios no está disponible en este corte: se publica fuera de git y este despliegue no lo trae. Las cifras sí."
+          ? " El texto de los comentarios no está disponible en esta vista."
           : textos === undefined
             ? " Cargando comentarios…"
             : ""}
@@ -477,22 +480,12 @@ function Cabeza({
 
 /* ----------------------------------------------------------------- panel */
 
-function PanelSocial({
-  zona,
-  lectura,
-  pl,
-}: {
-  zona: ZonaRuta | null;
-  lectura?: ReactNode;
-  pl: Plataforma;
-}) {
+function PanelSocial({ zona, pl }: { zona: ZonaRuta | null; pl: Plataforma }) {
   const { data, error } = pl.usarDatos();
   const { data: textos, error: textoError } = pl.usarTextos();
 
   if (error !== undefined) {
-    return (
-      <p className="text-lectura text-tinta-prosa">No hay panel de {pl.nombre} en este corte.</p>
-    );
+    return <p className="text-lectura text-tinta-prosa">No se pudo mostrar {pl.nombre}.</p>;
   }
   if (data === undefined) return <Esqueleto className="h-[320px]" />;
 
@@ -519,16 +512,15 @@ function PanelSocial({
         </div>
       ) : null}
 
-      <p className="mt-10 text-meta text-tinta-prosa">{pl.pie(data.retencion_dias)}</p>
-      <ComoLeer>{lectura}</ComoLeer>
+      <p className="mt-10 text-meta text-tinta-prosa">{pl.pie}</p>
     </Bisel>
   );
 }
 
-export function PanelRedes({ zona, lectura }: { zona: ZonaRuta | null; lectura?: ReactNode }) {
-  return <PanelSocial zona={zona} lectura={lectura} pl={INSTAGRAM} />;
+export function PanelRedes({ zona }: { zona: ZonaRuta | null }) {
+  return <PanelSocial zona={zona} pl={INSTAGRAM} />;
 }
 
-export function PanelTikTok({ zona, lectura }: { zona: ZonaRuta | null; lectura?: ReactNode }) {
-  return <PanelSocial zona={zona} lectura={lectura} pl={TIKTOK} />;
+export function PanelTikTok({ zona }: { zona: ZonaRuta | null }) {
+  return <PanelSocial zona={zona} pl={TIKTOK} />;
 }

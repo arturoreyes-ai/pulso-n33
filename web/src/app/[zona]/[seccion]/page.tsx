@@ -7,10 +7,10 @@ import { SECCIONES, seccionDeSlug } from "@/lib/dominio/secciones";
 import { SLUGS, zonaDeSlug } from "@/lib/dominio/zonas";
 
 /**
- * Las tres vistas interiores de una zona: /tijuana/redes, /ensenada/cobertura,
- * /san-diego/indicadores y las 21 restantes.
+ * Las dos vistas interiores de una zona: /tijuana/redes, /ensenada/indicadores,
+ * /san-diego/redes y las 13 restantes.
  *
- * Un solo archivo dinamico y no tres carpetas literales bajo `[zona]`: son 24
+ * Un solo archivo dinamico y no dos carpetas literales bajo `[zona]`: son 16
  * paginas identicas salvo por dos segmentos, y `generateStaticParams` las
  * prerenderiza todas igual. La contrapartida es que el slug hay que
  * validarlo, que es exactamente lo que ya hace la zona un nivel arriba.

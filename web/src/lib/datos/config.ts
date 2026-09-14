@@ -25,6 +25,11 @@ export const RUTAS = {
   // TikTok: mismo contrato que redes.json, mismo par de archivos.
   tiktok: `${BASE}/tiktok.json`,
   tiktokComentarios: `${BASE}/tiktok-comentarios.json`,
+  // X: el ranking de tendencias por ubicacion, sin tuits ni identidad. Lo
+  // escribe `pulso tendencias`; un solo archivo, sin par de texto en efimero/.
+  tendencias: `${BASE}/tendencias.json`,
+  gastoElectoral: `${BASE}/gasto-electoral.json`,
+  financiamientoPartidos: `${BASE}/financiamiento-partidos.json`,
 } as const;
 
 /** Un mes del archivo, que solo se pide cuando alguien lo pide. */

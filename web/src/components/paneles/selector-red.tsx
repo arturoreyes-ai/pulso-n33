@@ -30,12 +30,17 @@ import { leerJson } from "@/lib/datos/fetcher";
  *
  * Grupo de `aria-pressed` y no un `tablist`: es el mismo patron que ya usa
  * `Alternar` (lista/grafica) y no inventa un manejo de flechas propio.
+ *
+ * X entro el 11 de septiembre de 2026 como cuarta faceta. No trae comentarios
+ * sino el ranking de tendencias de X por ubicacion, pero es la misma pregunta
+ * -- de que se habla -- en otro lugar, y por eso va aqui y no en una seccion.
  */
 
 const REDES = [
   { id: "instagram", nombre: "Instagram", datos: [RUTAS.redes, RUTAS.redesComentarios] },
   { id: "tiktok", nombre: "TikTok", datos: [RUTAS.tiktok, RUTAS.tiktokComentarios] },
   { id: "youtube", nombre: "YouTube", datos: [RUTAS.conversacion] },
+  { id: "x", nombre: "X", datos: [RUTAS.tendencias] },
 ] as const;
 
 export type Red = (typeof REDES)[number]["id"];
@@ -53,7 +58,13 @@ export function SelectorRed({ paneles }: { paneles: Record<Red, ReactNode> }) {
         {REDES.map((r) => {
           const activa = r.id === red;
           const calentar = () => {
-            for (const ruta of r.datos) preload(ruta, leerJson);
+            // Un 404 aqui es un estado normal que el panel ya rotula -- el
+            // archivo de texto vive fuera de git y el de tendencias llega con
+            // la primera corrida --, no una promesa suelta que deba tumbar el
+            // overlay de desarrollo ni ensuciar la consola. El caso: al
+            // pasar el puntero por «X» antes del primer corte, Next mostraba
+            // «/data/tendencias.json respondio 404» como error de ejecucion.
+            for (const ruta of r.datos) void preload(ruta, leerJson).catch(() => undefined);
           };
           return (
             <button

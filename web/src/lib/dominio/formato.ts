@@ -22,15 +22,32 @@ export function plegar(s: string): string {
 // esto corre por fila.
 //
 // Zona horaria fija en America/Tijuana a proposito. Es lo correcto para un
-// tablero de la frontera, donde "15:24" debe significar 15:24 en Tijuana y no
-// en el huso de quien mira. Y de paso elimina toda diferencia entre el HTML
-// del servidor y el del cliente, o sea el riesgo de hydration.
+// tablero de la frontera, donde "3:24 pm" debe significar 3:24 pm en Tijuana
+// y no en el huso de quien mira. Y de paso elimina toda diferencia entre el
+// HTML del servidor y el del cliente, o sea el riesgo de hydration.
+//
+// Doce horas, a peticion del cliente (12 de septiembre de 2026): "9:36 pm" y
+// no "21:36 h", en todo el tablero. Se arma con formatToParts porque es-MX
+// escribe "p. m." con puntos y espacios, y eso no cabe junto a la hora en la
+// columna de 4rem del muro; "pm" pegado si cabe y se lee igual.
 const HORA = new Intl.DateTimeFormat("es-MX", {
-  hour: "2-digit",
+  hour: "numeric",
   minute: "2-digit",
-  hour12: false,
+  hour12: true,
   timeZone: "America/Tijuana",
 });
+
+function hora12(d: Date): string {
+  let h = "";
+  let m = "";
+  let periodo = "";
+  for (const parte of HORA.formatToParts(d)) {
+    if (parte.type === "hour") h = parte.value;
+    else if (parte.type === "minute") m = parte.value;
+    else if (parte.type === "dayPeriod") periodo = parte.value;
+  }
+  return `${h}:${m} ${/^p/i.test(periodo) ? "pm" : "am"}`;
+}
 
 const DIA_MES = new Intl.DateTimeFormat("es-MX", {
   day: "numeric",
@@ -72,9 +89,10 @@ export function fechaCorta(fecha: string): string {
   return Number.isNaN(d.getTime()) ? "s/f" : DIA_MES.format(d);
 }
 
+/** "9:36 pm", en hora de Tijuana. "s/f" si la fecha no se puede leer. */
 export function hora(iso: string): string {
   const d = new Date(iso);
-  return Number.isNaN(d.getTime()) ? "s/f" : HORA.format(d) + " h";
+  return Number.isNaN(d.getTime()) ? "s/f" : hora12(d);
 }
 
 export const MESES = [
@@ -121,13 +139,13 @@ export function cuando(n: Nota, corte: number): Cuando {
   if (Number.isNaN(d.getTime())) return { principal: "s/f", edad: "", iso: null };
 
   // Si es del mismo dia del corte y trae hora real, se muestra la hora; si no,
-  // la fecha. Una nota de corpus tiene medianoche y "00:00" seria ruido.
+  // la fecha. Una nota de corpus tiene medianoche y "12:00 am" seria ruido.
   const mismoDia =
     Number.isFinite(corte) && DIA_MES.format(d) === DIA_MES.format(new Date(corte));
   const tieneHora = d.getHours() !== 0 || d.getMinutes() !== 0;
 
   return {
-    principal: mismoDia && tieneHora ? HORA.format(d) : DIA_MES.format(d),
+    principal: mismoDia && tieneHora ? hora12(d) : DIA_MES.format(d),
     edad: Number.isFinite(corte) ? edad(d, corte) : "",
     iso: cruda,
   };

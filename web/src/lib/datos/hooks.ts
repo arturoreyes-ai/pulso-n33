@@ -17,6 +17,9 @@ import type {
   DocRedesComentarios,
   DocRoster,
   DocTemas,
+  DocTendencias,
+  DocGastoElectoral,
+  DocFinanciamientoPartidos,
 } from "./tipos";
 
 // Las llaves son las cadenas de RUTAS, identicas en cada consumidor, asi que
@@ -45,6 +48,12 @@ export const useRedesComentarios = () =>
 export const useTikTok = () => useSWRImmutable<DocRedes>(RUTAS.tiktok, leerJson);
 export const useTikTokComentarios = () =>
   useSWRImmutable<DocRedesComentarios>(RUTAS.tiktokComentarios, leerJson);
+/** Tendencias de X por ubicacion: un solo archivo, sin par de texto. */
+export const useTendencias = () => useSWRImmutable<DocTendencias>(RUTAS.tendencias, leerJson);
+export const useGastoElectoral = () =>
+  useSWRImmutable<DocGastoElectoral>(RUTAS.gastoElectoral, leerJson);
+export const useFinanciamientoPartidos = () =>
+  useSWRImmutable<DocFinanciamientoPartidos>(RUTAS.financiamientoPartidos, leerJson);
 
 /** El indice del archivo solo se pide si alguien abre el historico. */
 export const useArchivo = (activo: boolean) =>

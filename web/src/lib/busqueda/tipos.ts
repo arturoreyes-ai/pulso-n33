@@ -10,8 +10,10 @@
  * se pidieron hace un segundo. Un solo numero no significaria ninguna.
  */
 
-// Ciclo solo de tipos con ambito.ts: se borra al compilar.
+// Ciclos solo de tipos con ambito.ts y rubros.ts: se borran al compilar.
 import type { AmbitoActualidad } from "./ambito";
+import type { Rubro } from "./rubros";
+import type { Slug } from "@/lib/dominio/zonas";
 
 export type Idioma = "es" | "en";
 
@@ -59,8 +61,15 @@ export interface ErrorBusqueda {
 }
 
 /**
- * Lo que devuelve /api/actualidad: la seccion de Google Noticias de un ambito
- * sin corpus (Mexico o Internacional) tal como esta en este momento.
+ * Que seccion de Google Noticias se pidio a /api/actualidad: una edicion
+ * (`mexico`, `internacional`), el corredor (`region`: Tijuana y San Diego) o
+ * la seccion LOCAL de una zona (`zona`, con el slug en `zona`).
+ */
+export type SeccionActualidad = AmbitoActualidad | "region" | "zona";
+
+/**
+ * Lo que devuelve /api/actualidad: una seccion de Google Noticias tal como
+ * esta en este momento.
  *
  * Misma fila que la busqueda (`ResultadoExterno`) y misma salud por locale.
  * Lo que cambia es el orden: aqui NUNCA se reordena. La seccion viene en el
@@ -68,7 +77,12 @@ export interface ErrorBusqueda {
  * se midio), y ese orden es la senal de "que esta sonando ahora".
  */
 export interface RespuestaActualidad {
-  ambito: AmbitoActualidad;
+  seccion: SeccionActualidad;
+  /** El slug de la zona cuando `seccion` es "zona"; null en las demas. */
+  zona: Slug | null;
+  /** El rubro pedido con t=, o null si es la seccion tal cual. Con rubro la
+   *  lista es una BUSQUEDA (ver rubros.ts), no la seccion de Google. */
+  rubro: Rubro | null;
   /** Hora del servidor al pedirle a Google. Con el CDN puede tener 5 min. */
   consultado: string;
   resultados: ResultadoExterno[];
@@ -77,7 +91,7 @@ export interface RespuestaActualidad {
 }
 
 export interface ErrorActualidad {
-  codigo: "ambito";
+  codigo: "ambito" | "zona" | "rubro";
   mensaje: string;
 }
 
@@ -88,3 +102,11 @@ export const LARGO_MAXIMO_CONSULTA = 120;
 export const MINIMO_CONSULTA = 3;
 
 export const TOPE_RESULTADOS = 40;
+
+/**
+ * Tope de /api/actualidad, mas corto que el de la busqueda a proposito. El
+ * cliente pidio el 12 de septiembre de 2026 "un maximo de 15" para acortar la
+ * cola: en una lista ordenada por relevancia lo que se aleja del lugar o del
+ * rubro se acumula al final, y quince es donde todavia se sostiene.
+ */
+export const TOPE_ACTUALIDAD = 15;

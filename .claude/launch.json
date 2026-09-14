@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "web",
-      "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["--dir", "web", "dev"],
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "cd web && pnpm dev"],
       "port": 3000,
       "autoPort": true
     },

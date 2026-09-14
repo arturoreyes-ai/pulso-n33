@@ -104,9 +104,9 @@ const FilaBase = function Fila({
                 data-via={f.via}
                 title={`${cargo === null ? "" : cargo + " · "}${
                   f.via === "cargo"
-                    ? "resuelto por el cargo vigente a la fecha"
+                    ? "por el cargo que ocupaba en la fecha de la nota"
                     : "nombrado en el titular"
-                } («${f.clave}»)`}
+                }`}
                 className={`inline-block rounded-full border px-2 py-px text-meta whitespace-nowrap ${
                   f.via === "cargo"
                     ? "border-dashed border-filo text-tinta-meta"
@@ -122,8 +122,8 @@ const FilaBase = function Fila({
             <span
               title={
                 nota.postura.metodo === "modelo"
-                  ? "Tono del titular asignado por un modelo entrenado en texto de redes. Mide el tono de la frase, no la postura hacia una persona."
-                  : "Tono del titular por diccionario de linea base, no publicable."
+                  ? "Cómo suena el titular. No mide la postura hacia una persona."
+                  : "Tono preliminar del titular."
               }
               className={`inline-block rounded-full border px-2 py-px text-meta whitespace-nowrap ${
                 nota.postura.etiqueta === "adversa"

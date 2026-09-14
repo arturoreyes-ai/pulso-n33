@@ -7,7 +7,7 @@ import { fechaLarga, hora } from "@/lib/dominio/formato";
 export function PanelComunicados() {
   const { data: datos, error, isLoading: cargando } = useComunicados();
   if (cargando) return <Esqueleto className="h-[180px]" />;
-  if (error || !datos) return <p role="status" className="text-tinta-meta">Comunicados no disponibles en este corte.</p>;
+  if (error || !datos) return <p role="status" className="text-tinta-meta">Comunicados no disponibles.</p>;
   return (
     <div>
       <p className="mb-4 text-meta text-tinta-meta">
