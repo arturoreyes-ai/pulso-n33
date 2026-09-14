@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { compararPublicaciones, seleccionarPublicaciones } from "@/lib/dominio/publicaciones";
 
 import {
   useRedes,
@@ -169,13 +170,7 @@ interface Vista {
  *  al 10 de septiembre de 2026 no la trae: ahi las dos cadenas vacias empatan
  *  y decide el like. */
 function porDia(posts: Destacado[]): Dia[] {
-  const orden = [...posts].sort(
-    (a, b) =>
-      b.fecha.localeCompare(a.fecha) ||
-      (b.publicado ?? "").localeCompare(a.publicado ?? "") ||
-      b.likes - a.likes ||
-      a.url.localeCompare(b.url),
-  );
+  const orden = [...posts].sort(compararPublicaciones);
   const dias: Dia[] = [];
   for (const p of orden) {
     const ultimo = dias[dias.length - 1];
@@ -186,16 +181,11 @@ function porDia(posts: Destacado[]): Dia[] {
 }
 
 function vistaDeZona(data: DocRedes, zona: ZonaRuta | null, pl: Plataforma): Vista {
-  const destacados = data.destacados ?? [];
   const cuentas = data.cuentas ?? [];
-  const maximo = data.destacados_maximo ?? 15;
   const nombres = new Map(cuentas.map((c) => [c.cuenta, c.nombre] as const));
   // La SELECCION respeta el orden del archivo (por likes); solo despues se
   // reordena por fecha para leer.
-  const elegidos =
-    zona === null
-      ? destacados.slice(0, maximo)
-      : destacados.filter((d) => d.zona === zona).slice(0, maximo);
+  const elegidos = seleccionarPublicaciones(data, zona);
   return {
     nombre: zona === null ? "la región" : NOMBRE_CORTO[zona],
     esRegion: zona === null,

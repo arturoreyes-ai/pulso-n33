@@ -380,3 +380,13 @@ textarea {
 .entrada {
   animation: entrada var(--dur-entrada) var(--ease-firma) both;
 }
+
+/* El documento sigue desplazándose: los posts altos no quedan atrapados en
+   un carrusel de altura fija y el pie continúa al final de la selección. */
+html:has(.recorrido-visual) { scroll-snap-type: y proximity; }
+.publicacion-visual { scroll-snap-align: start; scroll-margin-top: 10rem; }
+.medio-instagram iframe { width: 100% !important; max-width: 100% !important; min-width: 0 !important; }
+.medio-instagram blockquote { max-width: 100%; min-width: 0; }
+@media (prefers-reduced-motion: reduce) {
+  html:has(.recorrido-visual) { scroll-snap-type: none; }
+}

@@ -116,6 +116,9 @@ jobs:
 
       # La mitad duradera del barrido de diseno. El navegador probo aquel
       # barrido; esto prueba todos los commits que vienen.
+      - name: Contrato de publicaciones visuales offline
+        run: node scripts/probar-publicaciones.cjs
+
       - name: Escalas de diseno
         run: pnpm tokens
 

@@ -1,3 +1,5 @@
+> **Implementación · 14 de septiembre de 2026 — Redes visuales.** Se añade Lista / Visual; Lista sigue siendo la entrada inicial. Visual reúne la selección existente de Instagram y TikTok, con filtros por plataforma y zona, mediante publicaciones incrustadas oficiales. Solo un medio permanece montado; los comentarios siguen en Lista. No cambia la ingesta, el límite de selección ni la retención. La disponibilidad de cada publicación depende de su plataforma.
+
 <!-- Documento del cliente, copiado tal cual. Las divergencias de la
 implementacion se anotan arriba, no editando el texto de abajo. -->
 

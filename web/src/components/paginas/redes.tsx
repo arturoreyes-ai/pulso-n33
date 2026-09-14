@@ -71,6 +71,7 @@ export function PaginaRedes({ zona }: { zona: ZonaRuta | null }) {
 
       <Seccion id="redes">
         <SelectorRed
+          zona={zona}
           paneles={{
             instagram: (
               <>

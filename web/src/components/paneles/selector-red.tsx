@@ -2,6 +2,12 @@
 
 import { useState, type ReactNode } from "react";
 import { preload } from "swr";
+import dynamic from "next/dynamic";
+import type { ZonaRuta } from "@/lib/dominio/zonas";
+
+const VisorRedes = dynamic(() => import("./visor-redes"), {
+  loading: () => <p role="status" className="py-8 text-lectura text-tinta-meta">Cargando publicaciones…</p>,
+});
 
 import { clasesChip } from "@/components/ui/clases";
 import { RUTAS } from "@/lib/datos/config";
@@ -49,11 +55,17 @@ export type Red = (typeof REDES)[number]["id"];
  *  apellido, y la unica con cuentas verificadas una por una. */
 const INICIAL: Red = "instagram";
 
-export function SelectorRed({ paneles }: { paneles: Record<Red, ReactNode> }) {
+export function SelectorRed({ paneles, zona }: { paneles: Record<Red, ReactNode>; zona: ZonaRuta | null }) {
+  const [visual, setVisual] = useState(false);
   const [red, setRed] = useState<Red>(INICIAL);
 
   return (
     <>
+      <div role="group" aria-label="Presentación" className="mb-6 flex gap-1.5">
+        <button type="button" aria-pressed={!visual} className={clasesChip(!visual)} onClick={() => setVisual(false)}>Lista</button>
+        <button type="button" aria-pressed={visual} className={clasesChip(visual)} onClick={() => setVisual(true)}>Visual</button>
+      </div>
+      {visual ? <VisorRedes key={zona ?? "region"} zona={zona} /> : <>
       <div role="group" aria-label="Plataforma" className="flex flex-wrap gap-1.5">
         {REDES.map((r) => {
           const activa = r.id === red;
@@ -83,6 +95,7 @@ export function SelectorRed({ paneles }: { paneles: Record<Red, ReactNode> }) {
       </div>
 
       <div className="mt-8">{paneles[red]}</div>
+      </>}
     </>
   );
 }
