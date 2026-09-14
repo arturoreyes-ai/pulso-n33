@@ -556,3 +556,44 @@ One detail that explains the single-workflow design, annotated in the file:
 deploy-on-push workflow would never fire after the cron's commit. The upside is
 that the bot's commit cannot re-trigger the workflow, so there is no loop.
 Don't split these two jobs apart.
+
+---
+
+## Deployment, as it actually is
+
+Worth knowing before debugging "the site is stale", because the answer is not
+the pipeline.
+
+**The runner-side deploy is not configured.** `pulso.yml` has a
+`Construir y desplegar el tablero` step behind `vars.DESPLEGAR_TABLERO`, and
+that variable is unset — but so are `VERCEL_TOKEN`, `VERCEL_ORG_ID` and
+`VERCEL_PROJECT_ID`. The only repo secret is `APIFY_TOKEN` and the only repo
+variable is `APIFY_HABILITADO`, so setting `DESPLEGAR_TABLERO=true` on its own
+would fail that step, not enable it.
+
+**What publishes today is Vercel's Git integration on `main`**, building from
+the repository. Two consequences follow, both visible on the live site:
+
+- **The cron's `data/` commits never redeploy it.** They land as
+  `datos: ingesta … [skip ci]`, and Vercel honours `[skip ci]` by default. The
+  `[skip ci]` is not wrong — it is belt-and-braces against an Actions loop that
+  `GITHUB_TOKEN` already prevents — but the side effect is that the published
+  dashboard refreshes only when a **human** pushes to `main`. Between human
+  pushes the site can sit days behind `data/`.
+- **The comment text is missing from the live site.** This is the failure the
+  deploy design above predicts in so many words: `efimero/` is outside git, so a
+  host building from the repository publishes posts with no comments. The
+  Instagram and TikTok panels degrade to «El texto de los comentarios no está
+  disponible en esta vista», which is the panel reporting a misconfiguration
+  correctly, not a bug.
+
+To publish the current `data/` without waiting for a feature push, commit
+something that matches `pulso.yml`'s `paths-ignore` (`**.md` or `docs/**`).
+Vercel builds it and the pipeline does not re-run. **Never use an empty commit
+for this**: it matches no ignored path, so it starts a full ingest — including
+the paid Apify actors.
+
+Fixing it properly is one of three, and the first is the only one that also
+puts comment text on the site: create the three Vercel secrets and set
+`DESPLEGAR_TABLERO=true`; drop `[skip ci]` from the bot's commit message
+(freshness only); or call a Vercel deploy hook after the data commit.
