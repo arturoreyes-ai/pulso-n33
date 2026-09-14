@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, type ReactNode } from "react";
+import { memo } from "react";
 
 import { useTemas } from "@/lib/datos/hooks";
 import type { DocTemas, Tema } from "@/lib/datos/tipos";
@@ -8,7 +8,6 @@ import { numero, pluralizar } from "@/lib/dominio/formato";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 import { alternarTema, useFiltroTema } from "@/lib/muro/filtro-tema";
 import { Bisel } from "@/components/ui/bisel";
-import { ComoLeer } from "@/components/ui/como-leer";
 import { Esqueleto } from "@/components/ui/primitivas";
 
 /**
@@ -42,11 +41,20 @@ const FilaTema = memo(function FilaTema({
         {indice + 1}
       </span>
 
+      {/* `py-2.5 -my-2.5`: BLANCO DE TOQUE sin mover nada. El termino es el
+          control que filtra el muro y median 25px de alto, el de una linea de
+          texto; con el relleno y el margen negativo que lo cancela el area
+          pulsable queda en 45px y la maqueta no se entera. Se puede porque
+          nada de lo que rodea a este boton es pulsable: la numeracion es un
+          `<span>` absoluto, las zonas un `<p>` y los ejemplos `<li>` de texto
+          plano, asi que el area crecida no le roba el toque a ningun vecino.
+          Las filas van a `gap-7`, 28px, de modo que dos areas crecidas siguen
+          sin tocarse. */}
       <button
         type="button"
         aria-pressed={activo}
         onClick={() => alternarTema(t.notas)}
-        className={`text-left transition-colors ${
+        className={`-my-2.5 py-2.5 text-left transition-colors ${
           activo ? "text-chart-1-texto" : "text-tinta-titulo hover:text-chart-1-texto"
         }`}
       >
@@ -153,17 +161,15 @@ function fraseTemas(v: VistaTemas, dias: number): string {
   if (v.desglosado) {
     return `${numero(v.notasVentana)} notas sobre ${v.nombre} en ${dias} días, mínimo ${v.minimo} por tema.`;
   }
-  return `Temas regionales que mencionan ${v.nombre}; el desglose propio de la zona llega con el siguiente corte del pipeline.`;
+  return `Temas regionales que mencionan ${v.nombre}; todavía no hay un desglose propio de la zona.`;
 }
 
 function SinTemas({
   v,
   dias,
-  lectura,
 }: {
   v: VistaTemas;
   dias: number;
-  lectura?: ReactNode;
 }) {
   return (
     <Bisel interior="p-6 md:p-8">
@@ -181,12 +187,11 @@ function SinTemas({
           </>
         )}
       </p>
-      <ComoLeer>{lectura}</ComoLeer>
     </Bisel>
   );
 }
 
-export function PanelTemas({ zona, lectura }: { zona: ZonaRuta | null; lectura?: ReactNode }) {
+export function PanelTemas({ zona }: { zona: ZonaRuta | null }) {
   const { data, error } = useTemas();
   const temaIds = useFiltroTema();
 
@@ -197,7 +202,7 @@ export function PanelTemas({ zona, lectura }: { zona: ZonaRuta | null; lectura?:
   const dias = data.ventana_dias;
   const hayMomento = data.notas_previas >= MIN_PREVIAS;
 
-  if (v.lista.length === 0) return <SinTemas v={v} dias={dias} lectura={lectura} />;
+  if (v.lista.length === 0) return <SinTemas v={v} dias={dias} />;
 
   return (
     <Bisel interior="p-6 md:p-8">
@@ -223,7 +228,6 @@ export function PanelTemas({ zona, lectura }: { zona: ZonaRuta | null; lectura?:
           ? ""
           : ` La tendencia aparece cuando haya dos ventanas comparables; la anterior tiene ${data.notas_previas} notas.`}
       </p>
-      <ComoLeer>{lectura}</ComoLeer>
     </Bisel>
   );
 }

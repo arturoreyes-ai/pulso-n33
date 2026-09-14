@@ -50,6 +50,12 @@ export function Pie() {
             cobertura es desigual por zona y eso es estructural, no un problema de
             presupuesto.
           </p>
+          <p>
+            Los huecos se rotulan, no se rellenan:{" "}
+            <strong className="text-tinta-titulo">«sin dato»</strong> y{" "}
+            <strong className="text-tinta-titulo">«fuera de muestra»</strong> no son
+            cero. Donde no se mide, se dice.
+          </p>
         </div>
       </div>
 

@@ -2,7 +2,14 @@ import Link from "next/link";
 import { House } from "@phosphor-icons/react/dist/ssr";
 
 import { cerrarSesion } from "@/lib/acceso/acciones";
-import { SUELTAS, VISTAS, nombreVista, ruta, type Vista } from "@/lib/dominio/secciones";
+import {
+  SUELTAS,
+  VISTAS,
+  nombreVista,
+  ruta,
+  type PaginaSuelta,
+  type Vista,
+} from "@/lib/dominio/secciones";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 
 /**
@@ -51,7 +58,15 @@ function Filo() {
   return <span aria-hidden="true" className="mx-1 h-4 w-px shrink-0 bg-filo" />;
 }
 
-export function NavPildora({ zona, vista }: { zona: ZonaRuta | null; vista: Vista }) {
+export function NavPildora({
+  zona,
+  vista,
+  pagina,
+}: {
+  zona: ZonaRuta | null;
+  vista: Vista;
+  pagina?: PaginaSuelta;
+}) {
   return (
     // El contenedor solo centra: mide todo el ancho de la ventana, asi que sin
     // `pointer-events-none` se traga los clics en los ~280px de vacio a cada
@@ -74,7 +89,7 @@ export function NavPildora({ zona, vista }: { zona: ZonaRuta | null; vista: Vist
 
         <ul className="flex shrink-0 items-center gap-1 whitespace-nowrap">
           {VISTAS.map((v) => {
-            const actual = v === vista;
+            const actual = pagina === undefined && v === vista;
             return (
               <li key={v ?? "portada"} className="shrink-0">
                 <Link
@@ -95,7 +110,12 @@ export function NavPildora({ zona, vista }: { zona: ZonaRuta | null; vista: Vist
             <li key={s.ruta} className="shrink-0">
               <Link
                 href={s.ruta}
-                className={`${PASTILLA} text-tinta-prosa hover:bg-filo hover:text-tinta-titulo`}
+                aria-current={pagina === s.id ? "page" : undefined}
+                className={`${PASTILLA} ${
+                  pagina === s.id
+                    ? "bg-realce text-tinta-titulo"
+                    : "text-tinta-prosa hover:bg-filo hover:text-tinta-titulo"
+                }`}
               >
                 {s.nombre}
               </Link>
@@ -103,17 +123,21 @@ export function NavPildora({ zona, vista }: { zona: ZonaRuta | null; vista: Vist
           ))}
         </ul>
 
-        <Filo />
+        {pagina === undefined ? (
+          <>
+            <Filo />
 
-        {/* El otro eje. Es un ancla y no un enlace: el selector de zona esta
-            en el encabezado de ESTA pagina, unas lineas mas abajo, y llevarlo
-            a la pildora significaria repetir nueve chips en cada corte. */}
-        <a
-          href="#zonas"
-          className={`${PASTILLA} shrink-0 whitespace-nowrap text-tinta-dato hover:bg-filo hover:text-tinta-titulo`}
-        >
-          {zona === null ? "Toda la región" : NOMBRE_CORTO[zona]}
-        </a>
+            {/* El otro eje. Es un ancla y no un enlace: el selector de zona esta
+                en el encabezado de ESTA pagina, unas lineas mas abajo, y llevarlo
+                a la pildora significaria repetir nueve chips en cada corte. */}
+            <a
+              href="#zonas"
+              className={`${PASTILLA} shrink-0 whitespace-nowrap text-tinta-dato hover:bg-filo hover:text-tinta-titulo`}
+            >
+              {zona === null ? "Toda la región" : NOMBRE_CORTO[zona]}
+            </a>
+          </>
+        ) : null}
 
         <Filo />
 

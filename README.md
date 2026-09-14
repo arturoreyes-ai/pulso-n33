@@ -72,6 +72,29 @@ Indicadores oficiales: vivienda, suelo, crimen y percepción.
 python -m pulso indicadores
 ```
 
+Gasto electoral final de Baja California (INE 2024) y financiamiento público
+partidista (IEEBC 2026), en archivos separados:
+
+```bash
+python -m pulso gasto-electoral
+```
+
+El comando une por `id_contabilidad`, lee solo los Anexos II dentro de los ZIP
+grandes mediante HTTP Range y falla si las 194 candidaturas locales y 53
+federales no quedan conciliadas o acompañadas por una incidencia. Para
+refrescar únicamente las asignaciones del IEEBC:
+
+```bash
+python -m pulso gasto-electoral --solo-financiamiento
+```
+
+Para actualizar únicamente los dictámenes finales del INE, sin consultar el
+financiamiento del IEEBC:
+
+```bash
+python -m pulso gasto-electoral --solo-gasto
+```
+
 Se salta solo si lo que hay tiene menos de una semana, porque estas fuentes
 son trimestrales o mensuales. `--forzar` para bajarlas de nuevo, `--solo shf`
 para una sola.
@@ -328,10 +351,11 @@ rechaza al leer `config/apify.json` cualquier actor activo cuya entrada traiga
 cookies, credenciales o tokens de sesión. **No basta con cambiar `"activo":
 false`** — hay una prueba que lo fija (`tests/test_apify.py`).
 
-`config/apify.json` trae hoy cuatro actores apagados, cada uno con su razón
+`config/apify.json` trae hoy seis actores apagados, cada uno con su razón
 escrita, y una sección `senuelos` con los que **no** hay que usar y por qué.
-Los raspadores de X están ahí: X cerró la lectura anónima en 2023, así que los
-que sirven piden cookies.
+Los raspadores de tuits de X están ahí: X cerró la lectura anónima en 2023, así
+que los que sirven piden cookies. Las tendencias de X son la excepción, porque
+su endpoint sigue contestando sin cuenta; ver abajo.
 
 ### Lo que sí puede llegar a `data/`
 
@@ -375,6 +399,38 @@ cada video sale de su descripción con el gacetero, nunca de la consulta; el @
 del creador sí se publica, quien comenta no. El actor de comentarios cobra
 ~5 USD por 1,000 resultados: con 30 videos × 30 comentarios son ~4.50 USD la
 primera corrida del día, y `cache/tiktok/vistos.json` evita repetirlos.
+
+### X: tendencias por ubicación, sin sesión
+
+```bash
+python -m pulso tendencias --ubicaciones
+```
+
+Lista las ubicaciones para las que X publica tendencias, filtradas a México,
+Estados Unidos y el mundo, con su WOEID (cuesta una corrida del actor, ~470
+resultados). Es el `--sondear` de esta sección: una ubicación se enciende en
+`config/tendencias.json` solo con el WOEID visto aquí y la fecha en su `razon`.
+Luego:
+
+```bash
+python -m pulso tendencias --probar
+```
+
+Cinco tendencias por ubicación, sin escribir nada, para ver con ojos humanos
+qué devuelve el actor. Y el comando del cron:
+
+```bash
+python -m pulso tendencias
+```
+
+Escribe `data/tendencias.json`: el ranking de X para Tijuana, Mexicali, San
+Diego, México y el mundo, con el nombre, el puesto y la liga de cada tendencia.
+Nunca un tuit ni quién lo escribió; las promocionadas se descartan; el volumen
+va solo cuando X lo publica. El actor lee el endpoint de tendencias de X con un
+guest token —sin cuenta, sin cookies—, que es lo que lo deja pasar por la
+guardia de sesión; los tuits siguen fuera. Una llamada por corrida cubre las
+cinco ubicaciones: ~100 resultados, unos centavos. Para Ensenada, Rosarito,
+Tecate, San Quintín y San Felipe X no publica lista, y el tablero lo dice.
 
 ### El presupuesto es un tope duro
 
@@ -495,7 +551,7 @@ de Google no manda CORS y porque así una racha de gente buscando lo mismo es
 una sola llamada río arriba. Cuatro alcances: la zona de la página, la región,
 México e Internacional; el corpus solo participa en los dos primeros.
 
-### La actualidad de México e Internacional
+### La actualidad: ediciones y secciones locales
 
 Con México o Internacional y sin consulta, el muro muestra la sección de
 Google Noticias de ese momento por `/api/actualidad?a=mexico|internacional`:
@@ -503,6 +559,23 @@ México es la sección «México» de la edición mexicana; Internacional, la
 sección «Mundo» en español y en inglés, intercaladas. Va **en el orden de
 Google**, sin reordenar: no es por fecha, es su ranking de la sección, y eso
 es lo que se quiere ver. Se refresca cada cinco minutos.
+
+La portada trae además la sección «Lo que destaca ahora»: la sección LOCAL
+que Google Noticias arma para la zona de la página
+(`/api/actualidad?z=<zona>`), en el orden de Google y diez filas a la vez. En
+la región van las de Tijuana y San Diego intercaladas (`?a=region`), porque la
+sección «Baja California» de Google existe pero llega vacía. Tijuana va en
+español e inglés, San Diego en inglés y las demás en español. El mapa de
+lugares y el sondeo que lo justifica están en
+`web/src/lib/busqueda/actualidad.ts`.
+Las pastillas de rubro de esa sección (Clima, Seguridad, Deportes, Política,
+Economía) son **búsquedas**, no la clasificación de Google: `&t=<rubro>`
+agrega los términos de `web/src/lib/busqueda/rubros.ts` a los del lugar, en
+el idioma de cada edición y en los últimos dos días. El RSS no trae imágenes.
+Quince titulares como máximo por lista (`TOPE_ACTUALIDAD`), sin «mostrar
+más». En México e Internacional la misma lista, con los mismos rubros, vive en
+el muro de titulares y la sección de abajo se oculta. La interfaz no nombra a
+Google, a petición del cliente; el código y este README sí.
 
 Tres cosas que las dos rutas comparten y no hay que aflojar:
 

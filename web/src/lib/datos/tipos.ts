@@ -638,3 +638,173 @@ export interface DocComunicados {
   error: string | null;
   comunicados: { id: string; titulo: string; url: string; fecha: string | null }[];
 }
+
+// ----------------------------------------------------------- tendencias
+
+/** Una tendencia de X: el puesto que X le dio, el nombre y la liga a su
+ *  búsqueda. `volumen` solo cuando X lo publica y es mayor que 0; ausente es
+ *  «sin dato», nunca cero (X lo retiró para casi todas en enero de 2026). */
+export interface Tendencia {
+  puesto: number;
+  nombre: string;
+  url: string;
+  volumen?: number;
+}
+
+export type AmbitoTendencias = "zona" | "nacional" | "mundial";
+export type EstadoTendencias = "ok" | "fallo" | "sin_token" | "sin_dato" | "sin_lista";
+
+/**
+ * Una ubicación para la que X publica (o no) lista de tendencias. Las
+ * apagadas viajan también, con `estado: "sin_lista"`: son el registro
+ * deliberado de que X no tiene lista para Ensenada, Rosarito, Tecate, San
+ * Quintín ni San Felipe, y permiten rotular el hueco en vez de mostrar la
+ * lista nacional como si fuera local. `zona` es la del producto cuando
+ * `ambito` es «zona»; null para México (`nacional`) y el mundo (`mundial`).
+ */
+export interface UbicacionTendencias {
+  id: string;
+  nombre: string;
+  woeid: number | null;
+  zona: Zona | null;
+  ambito: AmbitoTendencias;
+  activa: boolean;
+  estado: EstadoTendencias;
+  /** Hora en que X refrescó la lista (ISO, UTC); null si no llegó. */
+  corte: string | null;
+  tendencias: Tendencia[];
+}
+
+export interface SaludTendencias {
+  ubicacion: string;
+  estado: Exclude<EstadoTendencias, "sin_lista">;
+  tendencias: number;
+  /** Anuncios descartados: X marca las tendencias promocionadas. */
+  promocionadas: number;
+  error?: string;
+  nota?: string;
+}
+
+/** Tendencias de X por ubicación, leídas sin iniciar sesión (guest token).
+ *  Es el ranking de X, no una medida de la ciudad. Ver docs/datos.md. */
+export interface DocTendencias {
+  esquema: 1;
+  generado: string;
+  plataforma: "x";
+  acceso: "sin_sesion";
+  maximo_por_ubicacion: number;
+  ubicaciones: UbicacionTendencias[];
+  salud: SaludTendencias[];
+  gasto: { resultados: number; gastado: number; por_concepto: Record<string, number> };
+}
+
+// ------------------------------------------------------- gasto electoral
+
+export interface ProcesoGastoElectoral {
+  id: string;
+  nombre: string;
+  ambito: "local" | "federal";
+  estado: "auditado";
+  eleccion: string;
+  dictamen: string;
+  dictamen_url: string;
+  corte: string;
+}
+
+export interface ProcesoElectoralActual {
+  id: string;
+  nombre: string;
+  estado: string;
+  inicio_federal: string;
+  inicio_local: string;
+  precampana_desde: string;
+  campana_desde: string;
+  campana_hasta: string;
+  eleccion: string;
+  fuente: string;
+}
+
+export interface CandidaturaGasto {
+  id: string;
+  proceso: string;
+  id_contabilidad: string;
+  nombre: string;
+  ambito: "local" | "federal";
+  cargo: string;
+  contienda_id: string;
+  contienda: string;
+  partido: string;
+  sujeto_obligado: string;
+  tipo_asociacion: string;
+  gasto_reportado: number;
+  desglose_reportado: Record<
+    | "financieros"
+    | "operativos"
+    | "radio_tv"
+    | "propaganda"
+    | "impresos"
+    | "via_publica"
+    | "cine"
+    | "utilitaria"
+    | "internet",
+    number | null
+  >;
+  diferencia_prorrateo: number | null;
+  auditoria: {
+    no_reportado: number | null;
+    ajustes_reclasificaciones: number | null;
+    quejas: number | null;
+    determinado: number;
+  };
+  gasto_auditado: number;
+  tope: number | null;
+}
+
+export interface DocGastoElectoral {
+  esquema: 1;
+  moneda: "MXN";
+  procesos: ProcesoGastoElectoral[];
+  proceso_actual: ProcesoElectoralActual;
+  resumen: {
+    filas_origen: number;
+    candidaturas: number;
+    sin_conciliar: number;
+    incidencias: number;
+  };
+  candidaturas: CandidaturaGasto[];
+  incidencias: {
+    proceso: string;
+    id_contabilidad: string;
+    nombre: string;
+    razon: string;
+  }[];
+  fuentes: {
+    tipo: "anexo_auditoria" | "reporte_candidaturas" | "reporte_desglose";
+    ambito: "local" | "federal";
+    url: string;
+    archivo?: string;
+  }[];
+}
+
+export interface FinanciamientoPartido {
+  id: string;
+  nombre: string;
+  ordinario_original: number;
+  ordinario_vigente: number;
+  especifico: number;
+  total_asignado: number;
+  ministrado_enero_mayo?: number;
+  excedente_ministrado?: number;
+}
+
+export interface DocFinanciamientoPartidos {
+  esquema: 1;
+  ejercicio: number;
+  moneda: "MXN";
+  corte: string;
+  aviso: string;
+  acuerdos: { id: string; fecha: string; url: string }[];
+  partidos: FinanciamientoPartido[];
+  totales: { ordinario_vigente: number; especifico: number; asignado: number };
+  fuentes: string[];
+}

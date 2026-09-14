@@ -14,11 +14,12 @@ import { NOMBRE_CORTO, type ZonaRuta } from "./zonas";
 /** Lo que la pagina dice de si misma, en una linea. */
 const DESCRIPCION: Record<Seccion | "portada", (lugar: string) => string> = {
   portada: (l) => `Titulares sobre ${l}, con su fuente, su enlace y el tema del que forman parte.`,
+  // Instagram y TikTok publican el texto; YouTube nunca. La linea decia «Se
+  // publica el texto de los comentarios» de las tres y era falsa para una.
   redes: (l) =>
-    `Lo que se publica y lo que se comenta en Instagram, TikTok y YouTube sobre ${l}. Se publica el texto de los comentarios, nunca quién los escribió.`,
+    `Lo que se publica y lo que se comenta en Instagram, TikTok y YouTube sobre ${l}, y lo que X marca como tendencia. Se publica lo que se dijo, nunca quién lo dijo.`,
   indicadores: (l) =>
     `Precios de vivienda, predial, incidencia delictiva y percepción en ${l}, cada cifra con su fuente y su salvedad.`,
-  cobertura: (l) => `Qué se cubre de ${l} y qué no. Los huecos se rotulan; no se rellenan con ceros.`,
 };
 
 /** El titulo, como guardas y no como tres ternarios encajados. */

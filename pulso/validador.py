@@ -66,6 +66,19 @@ def _proporcion(v):
     return isinstance(v, (int, float)) and not isinstance(v, bool) and 0 <= v <= 1
 
 
+def _monto(v, permite_nulo=False):
+    return ((permite_nulo and v is None) or
+            (isinstance(v, (int, float)) and not isinstance(v, bool) and v >= 0))
+
+
+def _cuadra(a, b, tolerancia=0.02):
+    return isinstance(a, (int, float)) and isinstance(b, (int, float)) and abs(a - b) <= tolerancia
+
+
+def _numero(v):
+    return isinstance(v, (int, float)) and not isinstance(v, bool)
+
+
 def _claves_prohibidas(datos, prohibidas, ruta="", encontradas=None):
     """Rutas de todas las claves prohibidas, a cualquier profundidad."""
     encontradas = [] if encontradas is None else encontradas
@@ -1535,6 +1548,310 @@ def validar_redes(datos, plataforma="instagram"):
     return errores, avisos
 
 
+# ------------------------------------------------------------ tendencias
+
+AMBITOS_TENDENCIAS = ("zona", "nacional", "mundial")
+ESTADOS_TENDENCIAS = ("ok", "fallo", "sin_token", "sin_dato", "sin_lista")
+# Las zonas que pueden tener lista de tendencias: todas menos `estatal`, que
+# no es un lugar. Cada una tiene exactamente una fila, activa o hueco escrito.
+ZONAS_CON_LISTA = tuple(z for z in ZONAS if z != "estatal")
+# Campos crudos del actor de tendencias. pulso/tendencias.py::_limpiar es
+# lista blanca y los tira; si uno aparece en data/, la lista blanca se rompio.
+CLAVES_PROHIBIDAS_TENDENCIAS = frozenset(
+    {"tweetVolume", "tweetVolumeAvailable", "isPromoted", "isHashtag", "twitterSearchUrl",
+     "query", "locationsTrendingIn", "bestRank", "scrapedAt", "locationCount",
+     "locationName", "countryCode", "countryName", "locationType", "tweet", "tweets"})
+CLAVES_TENDENCIA = frozenset({"puesto", "nombre", "url", "volumen"})
+# El actor sella `corte` al momento de raspar, o sea SIEMPRE unos segundos
+# despues de que `generado` se tomo (la primera corrida real, 12 de septiembre
+# de 2026, dio entre 5 y 11 segundos en las cinco ubicaciones). Eso no es
+# reloj roto y no puede avisar en cada corrida; mas de quince minutos si.
+TOLERANCIA_CORTE_TENDENCIAS = timedelta(minutes=15)
+RE_ACTOR_APIFY = re.compile(r"^[a-z0-9-]+~[a-z0-9-]+$")
+PREFIJO_BUSQUEDA_X = "https://x.com/search?q="
+
+
+def _validar_ubicacion_tendencias(u, et, errores, zonas_vistas, activa):
+    """Lo comun a config y data: id, nombre, woeid, zona y ambito coherentes."""
+    if not isinstance(u.get("id"), str) or not RE_ID.match(u["id"]):
+        errores.append("{}: 'id' invalido ({!r}); se espera {}".format(et, u.get("id"), RE_ID.pattern))
+    if not _texto(u.get("nombre")):
+        errores.append("{}: falta 'nombre'".format(et))
+    woeid = u.get("woeid")
+    if activa:
+        if not isinstance(woeid, int) or isinstance(woeid, bool) or woeid < 1:
+            errores.append("{}: 'woeid' debe ser entero positivo en una ubicacion activa "
+                           "({!r}); se confirma con `pulso tendencias --ubicaciones`".format(
+                               et, woeid))
+    elif woeid is not None:
+        errores.append("{}: una ubicacion apagada no lleva 'woeid': es el registro de un "
+                       "hueco, no una ubicacion".format(et))
+    ambito, zona = u.get("ambito"), u.get("zona")
+    if ambito not in AMBITOS_TENDENCIAS:
+        errores.append("{}: 'ambito' {!r} desconocido; se espera {}".format(
+            et, ambito, "|".join(AMBITOS_TENDENCIAS)))
+    elif ambito == "zona":
+        if zona not in ZONAS_CON_LISTA:
+            errores.append("{}: zona y ambito no cuadran: 'zona' {!r} desconocida o sin "
+                           "lugar (estatal no tiene lista)".format(et, zona))
+        else:
+            zonas_vistas[zona] = zonas_vistas.get(zona, 0) + 1
+    elif zona is not None:
+        errores.append("{}: zona y ambito no cuadran: una ubicacion {} no lleva zona; una "
+                       "lista de pais o del mundo no se le acredita a ninguna ciudad".format(
+                           et, ambito))
+
+
+def _validar_zonas_con_lista(zonas_vistas, et, errores):
+    for z in ZONAS_CON_LISTA:
+        n = zonas_vistas.get(z, 0)
+        if n != 1:
+            errores.append("{}: la zona {} debe tener exactamente una ubicacion (activa o "
+                           "hueco registrado) y tiene {}; sin fila, el tablero no puede "
+                           "rotular el hueco".format(et, z, n))
+
+
+def validar_tendencias(datos):
+    """tendencias.json: lo que X marca como tendencia, por ubicacion.
+
+    Es el ranking de X, no una medida de la ciudad, y el archivo lleva solo el
+    nombre de cada tendencia, su puesto y la liga a su busqueda: ni tuits ni
+    quien los escribio. Un volumen ausente es "sin dato" (X lo retiro para
+    casi todas en enero de 2026), nunca un cero. Ver pulso/tendencias.py.
+    """
+    errores, avisos = [], []
+    if not isinstance(datos, dict):
+        return ["tendencias: se esperaba un objeto"], avisos
+    if datos.get("esquema") != ESQUEMA:
+        errores.append("tendencias: 'esquema' debe ser {}".format(ESQUEMA))
+    if not _es_iso(datos.get("generado")):
+        errores.append("tendencias: 'generado' no es ISO-8601 ({!r})".format(datos.get("generado")))
+    if datos.get("plataforma") != "x":
+        errores.append("tendencias: 'plataforma' debe ser 'x'")
+    if datos.get("acceso") != "sin_sesion":
+        errores.append("tendencias: 'acceso' debe ser 'sin_sesion'; X entra solo sin iniciar "
+                       "sesion (docs/PLAN.md seccion 3), y un actor con cookies no llega aqui")
+    maximo = datos.get("maximo_por_ubicacion")
+    if not isinstance(maximo, int) or isinstance(maximo, bool) or not 1 <= maximo <= 50:
+        errores.append("tendencias: 'maximo_por_ubicacion' debe ser entero entre 1 y 50")
+        maximo = None
+
+    prohibidas = CLAVES_PROHIBIDAS_CONVERSACION | CLAVES_PROHIBIDAS_REDES | CLAVES_PROHIBIDAS_TENDENCIAS
+    for ruta in _claves_prohibidas(datos, prohibidas):
+        errores.append("tendencias: clave prohibida (campo crudo del actor, texto o identidad): "
+                       "{}. La lista blanca de pulso/tendencias.py::_limpiar se rompio.".format(ruta))
+    for ruta in _claves_prohibidas(datos, frozenset({"porcentaje", "pct"})):
+        errores.append("tendencias: porcentaje prohibido en {} (regla de los 30)".format(ruta))
+
+    generado_dt = None
+    if _es_iso(datos.get("generado")):
+        generado_dt = datetime.fromisoformat(str(datos["generado"]).replace("Z", "+00:00"))
+
+    ubicaciones = datos.get("ubicaciones")
+    if not isinstance(ubicaciones, list):
+        errores.append("tendencias: 'ubicaciones' debe ser una lista")
+        ubicaciones = []
+    ids = [u.get("id") for u in ubicaciones if isinstance(u, dict)]
+    if ids != sorted(ids, key=str):
+        errores.append("tendencias: 'ubicaciones' no esta ordenada por id; un orden distinto "
+                       "ensucia el diff de cada corrida detras de `git diff --cached --quiet`")
+    if len(set(ids)) != len(ids):
+        errores.append("tendencias: id de ubicacion repetido")
+    zonas_vistas, estados = {}, {}
+    for i, u in enumerate(ubicaciones):
+        et = "tendencias.ubicaciones[{}]".format(u.get("id", i) if isinstance(u, dict) else i)
+        if not isinstance(u, dict):
+            errores.append("{}: debe ser objeto".format(et))
+            continue
+        activa = u.get("activa")
+        if not isinstance(activa, bool):
+            errores.append("{}: 'activa' debe ser booleano".format(et))
+            activa = bool(activa)
+        _validar_ubicacion_tendencias(u, et, errores, zonas_vistas, activa)
+        estado = u.get("estado")
+        if estado not in ESTADOS_TENDENCIAS:
+            errores.append("{}: estado {!r} desconocido; se espera {}".format(
+                et, estado, "|".join(ESTADOS_TENDENCIAS)))
+        elif (estado == "sin_lista") != (not activa):
+            errores.append("{}: 'sin_lista' es el estado de una ubicacion apagada, y solo de "
+                           "esa; una activa sin datos es 'sin_dato'".format(et))
+        corte = u.get("corte")
+        if corte is not None:
+            if not _es_iso(corte):
+                errores.append("{}: 'corte' debe ser fecha-hora ISO o null ({!r})".format(et, corte))
+            elif generado_dt is not None and datetime.fromisoformat(
+                    str(corte).replace("Z", "+00:00")) > generado_dt + TOLERANCIA_CORTE_TENDENCIAS:
+                # `generado` se toma ANTES de la llamada y el actor sella el
+                # corte al raspar, asi que unos segundos de diferencia son lo
+                # normal. Mas de la tolerancia es otro reloj o un archivo
+                # editado: aviso, porque tampoco puede tumbar el commit de
+                # todo data/.
+                avisos.append("{}: corte {} mas de {} minutos posterior a generado {} (reloj); "
+                              "no es error".format(et, corte,
+                                                   TOLERANCIA_CORTE_TENDENCIAS.seconds // 60,
+                                                   datos.get("generado")))
+        tendencias = u.get("tendencias")
+        if not isinstance(tendencias, list):
+            errores.append("{}: 'tendencias' debe ser una lista".format(et))
+            continue
+        if maximo and len(tendencias) > maximo:
+            errores.append("{}: {} tendencias, mas de maximo_por_ubicacion ({})".format(
+                et, len(tendencias), maximo))
+        if not activa and tendencias:
+            errores.append("{}: una ubicacion apagada no lleva tendencias".format(et))
+        if estado in ESTADOS_TENDENCIAS and (estado == "ok") != bool(tendencias) and activa:
+            errores.append("{}: estado {!r} con {} tendencias; 'ok' es exactamente tener "
+                           "lista, y sin lista es 'sin_dato', 'fallo' o 'sin_token'".format(
+                               et, estado, len(tendencias)))
+        anterior = 0
+        for j, t in enumerate(tendencias):
+            ett = "{}.tendencias[{}]".format(et, j)
+            if not isinstance(t, dict):
+                errores.append("{}: debe ser objeto".format(ett))
+                continue
+            extra = sorted(set(t) - CLAVES_TENDENCIA)
+            if extra:
+                errores.append("{}: claves inesperadas {}; solo puesto, nombre, url y "
+                               "volumen".format(ett, extra))
+            puesto = t.get("puesto")
+            if isinstance(puesto, bool) or not isinstance(puesto, int) or puesto < 1:
+                errores.append("{}: 'puesto' debe ser entero positivo".format(ett))
+            elif puesto <= anterior:
+                errores.append("{}: 'puesto' debe crecer ({} despues de {}): X ordena y aqui "
+                               "no se reordena ni se renumera".format(ett, puesto, anterior))
+            else:
+                anterior = puesto
+            nombre = t.get("nombre")
+            if not _texto(nombre):
+                errores.append("{}: falta 'nombre'".format(ett))
+            elif len(nombre) > 100:
+                errores.append("{}: 'nombre' de {} caracteres (maximo 100)".format(ett, len(nombre)))
+            elif nombre.strip().startswith("@"):
+                errores.append("{}: 'nombre' es un @usuario: identidad, no tendencia; se "
+                               "descarta al ingerir".format(ett))
+            url = t.get("url")
+            if not isinstance(url, str) or not url.startswith(PREFIJO_BUSQUEDA_X):
+                errores.append("{}: url ajena a la busqueda de X ({!r}); se construye aqui "
+                               "con {}".format(ett, url, PREFIJO_BUSQUEDA_X))
+            if "volumen" in t:
+                v = t["volumen"]
+                if isinstance(v, bool) or not isinstance(v, int) or v <= 0:
+                    errores.append("{}: 'volumen' solo se emite si es mayor que 0 ({!r}); "
+                                   "ausente es sin dato, nunca 0".format(ett, v))
+        estados[u.get("id")] = (estado, len(tendencias), activa)
+    _validar_zonas_con_lista(zonas_vistas, "tendencias", errores)
+
+    salud = datos.get("salud")
+    if not isinstance(salud, list):
+        errores.append("tendencias: 'salud' debe ser una lista")
+    else:
+        ids_salud = [s.get("ubicacion") for s in salud if isinstance(s, dict)]
+        if ids_salud != sorted(ids_salud, key=str):
+            errores.append("tendencias: 'salud' no esta ordenada por ubicacion")
+        activas = sorted(i for i, (_, _, a) in estados.items() if a and isinstance(i, str))
+        if sorted(ids_salud, key=str) != activas:
+            errores.append("tendencias: salud no cuadra con ubicaciones: una fila por ubicacion "
+                           "activa, ni mas ni menos")
+        for s in salud:
+            if not isinstance(s, dict) or not _texto(s.get("ubicacion")):
+                errores.append("tendencias.salud: cada registro necesita 'ubicacion'")
+                continue
+            ets = "tendencias.salud[{}]".format(s["ubicacion"])
+            if s.get("estado") not in ESTADOS_TENDENCIAS or s.get("estado") == "sin_lista":
+                errores.append("{}: estado {!r} desconocido".format(ets, s.get("estado")))
+            for campo in ("tendencias", "promocionadas"):
+                if not _entero_no_negativo(s.get(campo)):
+                    errores.append("{}: '{}' debe ser entero no negativo".format(ets, campo))
+            for campo in ("error", "nota"):
+                if campo in s and not _texto(s[campo]):
+                    errores.append("{}: '{}' debe ser texto".format(ets, campo))
+            e = estados.get(s["ubicacion"])
+            if e and (e[0] != s.get("estado") or e[1] != s.get("tendencias")):
+                errores.append("{}: salud no cuadra con ubicaciones (estado {!r} vs {!r}, "
+                               "tendencias {} vs {})".format(ets, s.get("estado"), e[0],
+                                                              s.get("tendencias"), e[1]))
+
+    gasto = datos.get("gasto")
+    if not isinstance(gasto, dict):
+        errores.append("tendencias: 'gasto' debe ser objeto")
+    else:
+        for campo in ("resultados", "gastado"):
+            if not _entero_no_negativo(gasto.get(campo)):
+                errores.append("tendencias.gasto: '{}' debe ser entero no negativo".format(campo))
+        pc = gasto.get("por_concepto")
+        if not isinstance(pc, dict) or list(pc) != sorted(pc) or not all(
+                _entero_no_negativo(v) for v in pc.values()):
+            errores.append("tendencias.gasto: 'por_concepto' debe ser {concepto: conteo} ordenado")
+    return errores, avisos
+
+
+def validar_tendencias_config(datos):
+    """config/tendencias.json: ubicaciones de X, una por zona, y el presupuesto
+    que cubre la llamada. Un WOEID que falta o un presupuesto corto fallan
+    aqui y no a media cosecha."""
+    errores, avisos = [], []
+    if not isinstance(datos, dict):
+        return ["tendencias: se esperaba un objeto"], avisos
+    if not _texto(datos.get("nota")):
+        avisos.append("tendencias: falta la 'nota' que explica el archivo")
+    if datos.get("plataforma") != "x":
+        errores.append("tendencias: 'plataforma' debe ser 'x'")
+    actor = datos.get("actor")
+    if not isinstance(actor, str) or not RE_ACTOR_APIFY.match(actor):
+        errores.append("tendencias: 'actor' debe ser un id de Apify usuario~actor ({!r})".format(actor))
+    cosecha = datos.get("cosecha")
+    maximo = presupuesto = None
+    if not isinstance(cosecha, dict):
+        errores.append("tendencias: falta 'cosecha'")
+    else:
+        maximo = cosecha.get("maximo_por_ubicacion")
+        if not isinstance(maximo, int) or isinstance(maximo, bool) or not 1 <= maximo <= 50:
+            errores.append("tendencias.cosecha: 'maximo_por_ubicacion' debe ser entero entre 1 "
+                           "y 50 (el tope de X)")
+            maximo = None
+        presupuesto = cosecha.get("presupuesto_resultados")
+        if not isinstance(presupuesto, int) or isinstance(presupuesto, bool) or presupuesto < 1:
+            errores.append("tendencias.cosecha: 'presupuesto_resultados' debe ser entero positivo")
+            presupuesto = None
+    ubicaciones = datos.get("ubicaciones")
+    if not isinstance(ubicaciones, list) or not ubicaciones:
+        errores.append("tendencias: 'ubicaciones' debe ser una lista no vacia")
+        return errores, avisos
+    ids, zonas_vistas, activas = set(), {}, 0
+    for i, u in enumerate(ubicaciones):
+        et = "tendencias.ubicaciones[{}]".format(u.get("id", i) if isinstance(u, dict) else i)
+        if not isinstance(u, dict):
+            errores.append("{}: debe ser objeto".format(et))
+            continue
+        if u.get("id") in ids:
+            errores.append("{}: id repetido".format(et))
+        ids.add(u.get("id"))
+        if not isinstance(u.get("activo"), bool):
+            errores.append("{}: 'activo' debe ser booleano".format(et))
+        if not _texto(u.get("razon")):
+            errores.append("{}: falta 'razon': una ubicacion se enciende con el WOEID "
+                           "confirmado con --ubicaciones y se apaga con el hueco escrito".format(et))
+        _validar_ubicacion_tendencias(u, et, errores, zonas_vistas, bool(u.get("activo")))
+        if u.get("activo"):
+            activas += 1
+    _validar_zonas_con_lista(zonas_vistas, "tendencias", errores)
+    if maximo and presupuesto is not None and activas and presupuesto < maximo * activas:
+        errores.append("tendencias.cosecha: presupuesto_resultados {} no cubre {} ubicaciones x {} "
+                       "tendencias = {}; el actor recortaria en silencio".format(
+                           presupuesto, activas, maximo, maximo * activas))
+    if not activas:
+        avisos.append("tendencias: ninguna ubicacion activa; el panel va a salir vacio")
+    # La guardia de sesion, aunque la entrada la construye pulso/tendencias.py
+    # y no puede traer cookies: si algun dia la construye otro, falla aqui.
+    from .apify import ActorProhibido, revisar_entrada
+    from .tendencias import _entrada
+    try:
+        revisar_entrada(_entrada(ubicaciones, maximo or 20), actor or "?")
+    except ActorProhibido as e:
+        errores.append(str(e))
+    return errores, avisos
+
+
 def validar_indicadores(datos):
     """indicadores.json: cifras oficiales leidas, no calculadas aqui.
 
@@ -1642,6 +1959,324 @@ def validar_indicadores(datos):
                     if not isinstance(v, dict) or not _entero_no_negativo(v.get("mediana_usd"))                             or not _entero_no_negativo(v.get("parcelas")):
                         errores.append("{}.zips[{}]: falta 'mediana_usd' o 'parcelas'".format(et, z))
 
+    return errores, avisos
+
+
+# ------------------------------------------------------- gasto electoral
+
+CATEGORIAS_GASTO = frozenset({
+    "financieros", "operativos", "radio_tv", "propaganda", "impresos",
+    "via_publica", "cine", "utilitaria", "internet",
+})
+RE_PROCESO_ELECTORAL = re.compile(r"^[a-z0-9-]{3,30}$")
+AVISO_FINANCIAMIENTO = (
+    "Financiamiento público asignado; no equivale a gasto ejercido ni a gasto de campaña.")
+
+
+def validar_gasto_electoral_config(datos):
+    """Las fuentes finales se declaran; el nombre nunca funciona como llave."""
+    errores, avisos = [], []
+    if not isinstance(datos, dict):
+        return ["gasto-electoral: se esperaba un objeto"], avisos
+    if not _texto(datos.get("nota")):
+        errores.append("gasto-electoral: falta 'nota' con el limite de la cifra")
+    actual = datos.get("proceso_actual")
+    if not isinstance(actual, dict):
+        errores.append("gasto-electoral: falta 'proceso_actual'")
+    else:
+        for campo in ("id", "nombre", "estado", "fuente"):
+            if not _texto(actual.get(campo)):
+                errores.append("gasto-electoral.proceso_actual: falta '{}'".format(campo))
+        for campo in ("inicio_federal", "inicio_local", "precampana_desde",
+                      "campana_desde", "campana_hasta", "eleccion"):
+            if not _fecha(actual.get(campo)):
+                errores.append("gasto-electoral.proceso_actual: '{}' no es fecha".format(campo))
+        fechas = [_fecha(actual.get(c)) for c in
+                  ("precampana_desde", "campana_desde", "campana_hasta", "eleccion")]
+        if all(fechas) and fechas != sorted(fechas):
+            errores.append("gasto-electoral.proceso_actual: el calendario no esta ordenado")
+
+    procesos = datos.get("procesos")
+    if not isinstance(procesos, list) or not procesos:
+        errores.append("gasto-electoral: 'procesos' debe ser lista no vacia")
+        procesos = []
+    ids = set()
+    esperadas = 0
+    for i, p in enumerate(procesos):
+        et = "gasto-electoral.procesos[{}]".format(i)
+        if not isinstance(p, dict):
+            errores.append("{}: debe ser objeto".format(et))
+            continue
+        pid = p.get("id")
+        if not isinstance(pid, str) or not RE_PROCESO_ELECTORAL.match(pid):
+            errores.append("{}: id invalido ({!r})".format(et, pid))
+        elif pid in ids:
+            errores.append("{}: id repetido".format(et))
+        ids.add(pid)
+        if p.get("ambito") not in ("local", "federal"):
+            errores.append("{}: ambito debe ser local o federal".format(et))
+        if p.get("estado") != "auditado":
+            errores.append("{}: solo se publican procesos con estado 'auditado'".format(et))
+        for campo in ("nombre", "dictamen", "patron_zip", "patron_anexo"):
+            if not _texto(p.get(campo)):
+                errores.append("{}: falta '{}'".format(et, campo))
+        for campo in ("dictamen_url", "reporte_candidaturas", "reporte_desglose",
+                      "indice_anexos"):
+            if not (isinstance(p.get(campo), str) and p[campo].startswith("https://")):
+                errores.append("{}: '{}' debe ser URL https oficial".format(et, campo))
+        for campo in ("eleccion", "corte"):
+            if not _fecha(p.get(campo)):
+                errores.append("{}: '{}' no es fecha".format(et, campo))
+        n = p.get("filas_esperadas")
+        if not isinstance(n, int) or isinstance(n, bool) or n < 1:
+            errores.append("{}: 'filas_esperadas' debe ser entero positivo".format(et))
+        else:
+            esperadas += n
+    if procesos and esperadas != 247:
+        errores.append("gasto-electoral: se esperan 247 filas oficiales de Baja California, no {}"
+                       .format(esperadas))
+
+    f = datos.get("financiamiento")
+    if not isinstance(f, dict):
+        errores.append("gasto-electoral: falta 'financiamiento'")
+    else:
+        if not isinstance(f.get("ejercicio"), int) or f["ejercicio"] < 2024:
+            errores.append("gasto-electoral.financiamiento: ejercicio invalido")
+        if not _fecha(f.get("corte")):
+            errores.append("gasto-electoral.financiamiento: corte invalido")
+        for campo in ("ordinarias_url", "especificas_url"):
+            if not (isinstance(f.get(campo), str) and f[campo].startswith("https://ieebc.mx/")):
+                errores.append("gasto-electoral.financiamiento: '{}' debe ser URL del IEEBC"
+                               .format(campo))
+        ajuste = f.get("ajuste_pesbc")
+        if not isinstance(ajuste, dict):
+            errores.append("gasto-electoral.financiamiento: falta ajuste_pesbc")
+        else:
+            for campo in ("presupuesto_ordinario_vigente", "ministrado_enero_mayo",
+                          "excedente_ministrado"):
+                if not _monto(ajuste.get(campo)):
+                    errores.append("gasto-electoral.ajuste_pesbc: monto '{}' invalido"
+                                   .format(campo))
+            if all(_monto(ajuste.get(c)) for c in
+                   ("presupuesto_ordinario_vigente", "ministrado_enero_mayo",
+                    "excedente_ministrado")) and not _cuadra(
+                        ajuste["ministrado_enero_mayo"] -
+                        ajuste["presupuesto_ordinario_vigente"],
+                        ajuste["excedente_ministrado"]):
+                errores.append("gasto-electoral.ajuste_pesbc: el excedente no concilia")
+    return errores, avisos
+
+
+def validar_gasto_electoral(datos):
+    """TOTAL DE GASTOS del Anexo II es la cifra principal, nunca el CSV."""
+    errores, avisos = [], []
+    if not isinstance(datos, dict):
+        return ["gasto-electoral: se esperaba un objeto"], avisos
+    if datos.get("esquema") != ESQUEMA:
+        errores.append("gasto-electoral: 'esquema' debe ser {}".format(ESQUEMA))
+    if datos.get("moneda") != "MXN":
+        errores.append("gasto-electoral: 'moneda' debe ser MXN")
+    procesos = datos.get("procesos")
+    if not isinstance(procesos, list) or not procesos:
+        errores.append("gasto-electoral: 'procesos' debe ser lista no vacia")
+        procesos = []
+    ids_proceso = {p.get("id") for p in procesos if isinstance(p, dict)}
+    for p in procesos:
+        if isinstance(p, dict) and p.get("estado") != "auditado":
+            errores.append("gasto-electoral.procesos[{}]: no es final auditado".format(p.get("id")))
+
+    candidaturas = datos.get("candidaturas")
+    if not isinstance(candidaturas, list):
+        errores.append("gasto-electoral: 'candidaturas' debe ser lista")
+        candidaturas = []
+    ids = set()
+    orden = []
+    por_proceso = {}
+    for i, c in enumerate(candidaturas):
+        et = "gasto-electoral.candidaturas[{}]".format(i)
+        if not isinstance(c, dict):
+            errores.append("{}: debe ser objeto".format(et))
+            continue
+        cid, pid, cuenta = c.get("id"), c.get("proceso"), c.get("id_contabilidad")
+        if pid not in ids_proceso:
+            errores.append("{}: proceso desconocido ({!r})".format(et, pid))
+        if not isinstance(cuenta, str) or not cuenta.isdigit():
+            errores.append("{}: id_contabilidad invalido".format(et))
+        if cid != "{}-{}".format(pid, cuenta):
+            errores.append("{}: id no deriva de proceso e id_contabilidad".format(et))
+        if cid in ids:
+            errores.append("{}: id repetido".format(et))
+        ids.add(cid)
+        por_proceso[pid] = por_proceso.get(pid, 0) + 1
+        for campo in ("nombre", "cargo", "contienda_id", "contienda", "partido",
+                      "sujeto_obligado", "tipo_asociacion"):
+            if not _texto(c.get(campo)):
+                errores.append("{}: falta '{}'".format(et, campo))
+        if c.get("ambito") not in ("local", "federal"):
+            errores.append("{}: ambito invalido".format(et))
+        orden.append((fold(c.get("nombre", "")), str(cid)))
+        desglose = c.get("desglose_reportado")
+        if not isinstance(desglose, dict) or set(desglose) != CATEGORIAS_GASTO:
+            errores.append("{}: desglose_reportado debe traer las nueve categorias".format(et))
+            desglose = {}
+        for nombre, monto in desglose.items():
+            if not _monto(monto, permite_nulo=True):
+                errores.append("{}.desglose_reportado[{}]: monto invalido".format(et, nombre))
+        for campo in ("gasto_reportado", "gasto_auditado"):
+            if not _monto(c.get(campo)):
+                errores.append("{}: '{}' debe ser monto no negativo".format(et, campo))
+        if not _monto(c.get("tope"), permite_nulo=True):
+            errores.append("{}: 'tope' debe ser monto o null".format(et))
+        if c.get("tope") == 0:
+            errores.append("{}: un tope ausente es null, nunca cero".format(et))
+        auditoria = c.get("auditoria")
+        if not isinstance(auditoria, dict):
+            errores.append("{}: falta auditoria".format(et))
+            auditoria = {}
+        for campo in ("no_reportado", "quejas"):
+            if not _monto(auditoria.get(campo), permite_nulo=True):
+                errores.append("{}.auditoria: '{}' debe ser monto o null".format(et, campo))
+        if auditoria.get("ajustes_reclasificaciones") is not None \
+                and not _numero(auditoria.get("ajustes_reclasificaciones")):
+            errores.append("{}.auditoria: 'ajustes_reclasificaciones' debe ser numero o null"
+                           .format(et))
+        if not _numero(auditoria.get("determinado")):
+            errores.append("{}.auditoria: 'determinado' debe ser numero".format(et))
+        componentes = [auditoria.get(campo) for campo in
+                       ("no_reportado", "ajustes_reclasificaciones", "quejas")]
+        # El PT federal publica gasto no reportado pero deja en blanco las
+        # otras dos columnas y determina cero. Solo una fila completa puede
+        # sostener la suma; el puente final se exige siempre debajo.
+        if all(monto is not None for monto in componentes) and not _cuadra(
+                sum(componentes), auditoria["determinado"]):
+            errores.append("{}: hallazgos y ajustes no concilian con 'determinado'".format(et))
+        if _monto(c.get("gasto_reportado")) and _numero(auditoria.get("determinado")) \
+                and _monto(c.get("gasto_auditado")) and not _cuadra(
+                    c["gasto_reportado"] + auditoria["determinado"], c["gasto_auditado"]):
+            errores.append("{}: reportado + determinado no coincide con gasto_auditado".format(et))
+        conocidos = [m for m in desglose.values() if _monto(m)]
+        diferencia = c.get("diferencia_prorrateo")
+        if not _monto(diferencia, permite_nulo=True):
+            errores.append("{}: diferencia_prorrateo debe ser monto o null".format(et))
+        if len(conocidos) == len(CATEGORIAS_GASTO) and _monto(c.get("gasto_reportado")):
+            if not _cuadra(sum(conocidos) + (diferencia or 0), c["gasto_reportado"], 0.05):
+                errores.append("{}: categorias + prorrateo no concilian con gasto_reportado"
+                               .format(et))
+    if orden != sorted(orden):
+        errores.append("gasto-electoral: candidaturas no estan ordenadas por nombre e id")
+
+    incidencias = datos.get("incidencias")
+    if not isinstance(incidencias, list):
+        errores.append("gasto-electoral: 'incidencias' debe ser lista")
+        incidencias = []
+    llaves_incidencia = set()
+    orden_inc = []
+    for i, x in enumerate(incidencias):
+        et = "gasto-electoral.incidencias[{}]".format(i)
+        if not isinstance(x, dict):
+            errores.append("{}: debe ser objeto".format(et))
+            continue
+        if x.get("proceso") not in ids_proceso or not _texto(x.get("id_contabilidad")) \
+                or not _texto(x.get("razon")):
+            errores.append("{}: proceso, id_contabilidad y razon son obligatorios".format(et))
+        llave = (x.get("proceso"), x.get("id_contabilidad"))
+        if llave in llaves_incidencia:
+            errores.append("{}: candidatura repetida en incidencias".format(et))
+        llaves_incidencia.add(llave)
+        if "{}-{}".format(*llave) in ids:
+            errores.append("{}: una candidatura conciliada no puede ser incidencia".format(et))
+        try:
+            numero = int(x.get("id_contabilidad", ""))
+        except (TypeError, ValueError):
+            numero = -1
+        orden_inc.append((str(x.get("proceso")), numero, str(x.get("razon"))))
+    if orden_inc != sorted(orden_inc):
+        errores.append("gasto-electoral: incidencias no estan ordenadas")
+
+    resumen = datos.get("resumen")
+    if not isinstance(resumen, dict):
+        errores.append("gasto-electoral: falta resumen")
+    else:
+        if resumen.get("candidaturas") != len(candidaturas) \
+                or resumen.get("incidencias") != len(incidencias):
+            errores.append("gasto-electoral: resumen no coincide con las listas")
+        if resumen.get("sin_conciliar") != resumen.get("filas_origen", 0) - len(candidaturas):
+            errores.append("gasto-electoral: toda fila debe conciliar o traer incidencia")
+        if isinstance(resumen.get("sin_conciliar"), int) \
+                and resumen["sin_conciliar"] > len(incidencias):
+            errores.append("gasto-electoral: hay filas sin conciliar y sin incidencia")
+        if resumen.get("filas_origen") != 247:
+            errores.append("gasto-electoral: filas_origen debe ser 247")
+    fuentes = datos.get("fuentes")
+    if not isinstance(fuentes, list) or not fuentes:
+        errores.append("gasto-electoral: fuentes debe ser lista no vacia")
+    elif fuentes != sorted(fuentes, key=lambda x: (
+            x.get("tipo", ""), x.get("ambito", ""), x.get("url", ""), x.get("archivo", ""))):
+        errores.append("gasto-electoral: fuentes no estan en orden determinista")
+    return errores, avisos
+
+
+def validar_financiamiento_partidos(datos):
+    """Una asignacion a un partido no es gasto ejercido ni gasto personal."""
+    errores, avisos = [], []
+    if not isinstance(datos, dict):
+        return ["financiamiento-partidos: se esperaba un objeto"], avisos
+    if datos.get("esquema") != ESQUEMA or datos.get("moneda") != "MXN":
+        errores.append("financiamiento-partidos: esquema o moneda invalidos")
+    if not isinstance(datos.get("ejercicio"), int) or not _fecha(datos.get("corte")):
+        errores.append("financiamiento-partidos: ejercicio o corte invalidos")
+    if datos.get("aviso") != AVISO_FINANCIAMIENTO:
+        errores.append("financiamiento-partidos: el aviso no puede suavizarse")
+    partidos = datos.get("partidos")
+    if not isinstance(partidos, list) or not partidos:
+        errores.append("financiamiento-partidos: 'partidos' debe ser lista no vacia")
+        partidos = []
+    ids = []
+    for i, p in enumerate(partidos):
+        et = "financiamiento-partidos.partidos[{}]".format(i)
+        if not isinstance(p, dict):
+            errores.append("{}: debe ser objeto".format(et))
+            continue
+        ids.append(p.get("id"))
+        for campo in ("id", "nombre"):
+            if not _texto(p.get(campo)):
+                errores.append("{}: falta '{}'".format(et, campo))
+        for campo in ("ordinario_original", "ordinario_vigente", "especifico", "total_asignado"):
+            if not _monto(p.get(campo)):
+                errores.append("{}: monto '{}' invalido".format(et, campo))
+        if _monto(p.get("ordinario_vigente")) and _monto(p.get("especifico")) \
+                and not _cuadra(p["ordinario_vigente"] + p["especifico"],
+                                p.get("total_asignado")):
+            errores.append("{}: total_asignado no concilia".format(et))
+        if "ministrado_enero_mayo" in p:
+            for campo in ("ministrado_enero_mayo", "excedente_ministrado"):
+                if not _monto(p.get(campo)):
+                    errores.append("{}: monto '{}' invalido".format(et, campo))
+            if _monto(p.get("ministrado_enero_mayo")) and _monto(p.get("ordinario_vigente")) \
+                    and not _cuadra(p["ministrado_enero_mayo"] - p["ordinario_vigente"],
+                                    p.get("excedente_ministrado")):
+                errores.append("{}: excedente ministrado no concilia".format(et))
+    if ids != sorted(ids, key=str) or len(ids) != len(set(ids)):
+        errores.append("financiamiento-partidos: ids repetidos o fuera de orden")
+    totales = datos.get("totales")
+    if not isinstance(totales, dict):
+        errores.append("financiamiento-partidos: falta totales")
+    else:
+        esperados = {
+            "ordinario_vigente": sum(p.get("ordinario_vigente", 0) for p in partidos
+                                      if isinstance(p, dict)),
+            "especifico": sum(p.get("especifico", 0) for p in partidos if isinstance(p, dict)),
+            "asignado": sum(p.get("total_asignado", 0) for p in partidos if isinstance(p, dict)),
+        }
+        for campo, esperado in esperados.items():
+            if not _cuadra(totales.get(campo), esperado):
+                errores.append("financiamiento-partidos.totales: '{}' no concilia".format(campo))
+    acuerdos = datos.get("acuerdos")
+    if not isinstance(acuerdos, list) or not acuerdos:
+        errores.append("financiamiento-partidos: acuerdos debe ser lista no vacia")
+    fuentes = datos.get("fuentes")
+    if not isinstance(fuentes, list) or fuentes != sorted(set(fuentes)):
+        errores.append("financiamiento-partidos: fuentes debe ser lista unica y ordenada")
     return errores, avisos
 
 
@@ -1763,6 +2398,34 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None, dir_efimero=No
         if errores:
             return errores, avisos
 
+    # config/tendencias.json es opcional, como el de TikTok. Si esta, se valida
+    # aqui: una zona sin fila, un WOEID que falta o un presupuesto que no cubre
+    # la llamada fallan antes de gastar.
+    ruta_tendencias = os.path.join(dir_config, "tendencias.json")
+    if os.path.exists(ruta_tendencias):
+        try:
+            e, a = validar_tendencias_config(_leer(ruta_tendencias))
+            errores += e
+            avisos += a
+        except (ValueError, OSError) as e:
+            errores.append("tendencias: no se pudo leer {} ({})".format(ruta_tendencias, e))
+        if errores:
+            return errores, avisos
+
+    # El contrato electoral se valida aunque sus archivos historicos todavia
+    # no se hayan materializado. Asi una URL provisional o un proceso no
+    # auditado fallan antes de que el cron publique una cifra.
+    ruta_gasto = os.path.join(dir_config, "gasto-electoral.json")
+    if os.path.exists(ruta_gasto):
+        try:
+            e, a = validar_gasto_electoral_config(_leer(ruta_gasto))
+            errores += e
+            avisos += a
+        except (ValueError, OSError) as e:
+            errores.append("gasto-electoral: no se pudo leer {} ({})".format(ruta_gasto, e))
+        if errores:
+            return errores, avisos
+
     ruta_comunicados = os.path.join(dir_config, "comunicados.json")
     if os.path.exists(ruta_comunicados):
         from .comunicados import leer_fuente
@@ -1795,6 +2458,16 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None, dir_efimero=No
         # con la ventana en horas y el creador visible. Tampoco es error que falte.
         "tiktok": (os.path.join(dir_datos, "tiktok.json"),
                    lambda d: validar_redes(d, plataforma="tiktok")),
+        # tendencias.json lo escribe `pulso tendencias`: el ranking de X por
+        # ubicacion, sin tuits ni identidad. Tampoco es error que falte.
+        "tendencias": (os.path.join(dir_datos, "tendencias.json"), validar_tendencias),
+        # Los dictamenes 2024 no cambian y la asignacion 2026 solo se revisa
+        # semanalmente. Ausentes no significan cero y por eso son opcionales.
+        "gasto-electoral": (os.path.join(dir_datos, "gasto-electoral.json"),
+                            validar_gasto_electoral),
+        "financiamiento-partidos": (
+            os.path.join(dir_datos, "financiamiento-partidos.json"),
+            validar_financiamiento_partidos),
     }
     presentes = [n for n, (ruta, _) in archivos.items() if os.path.exists(ruta)]
     if not presentes:

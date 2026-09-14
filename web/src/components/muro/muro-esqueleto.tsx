@@ -13,7 +13,8 @@
  *
  * Componente de servidor: no tiene estado ni escucha nada.
  *
- * El alcance vive en el encabezado; aquí quedan solo las dos opciones de orden.
+ * La barra real trae solo el buscador y la cifra: el alcance vive en el
+ * encabezado y las pastillas de orden se quitaron (ver use-muro.ts).
  */
 
 const FILAS = [0, 1, 2, 3, 4, 5, 6, 7];
@@ -21,16 +22,11 @@ const FILAS = [0, 1, 2, 3, 4, 5, 6, 7];
 // Anchos que no se repiten, para que no se lea como una tabla.
 const ANCHOS = ["w-11/12", "w-3/4", "w-10/12", "w-2/3", "w-5/6", "w-3/5", "w-11/12", "w-7/12"];
 
-const PASTILLAS = [0, 1];
-
 export function MuroEsqueleto() {
   return (
     <div aria-hidden className="animate-pulse">
       <div className="-mx-4 mb-6 flex flex-wrap items-center gap-3 border-b border-vela px-4 py-3 md:-mx-8 md:px-8">
         <div className="h-9 w-56 rounded-full bg-vela md:w-72" />
-        {PASTILLAS.map((i) => (
-          <div key={i} className="h-9 w-24 rounded-full bg-vela" />
-        ))}
         <div className="ml-auto h-4 w-32 rounded-etiqueta bg-vela" />
       </div>
 

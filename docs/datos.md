@@ -17,6 +17,134 @@ Correr `python -m pulso validar` es la forma de comprobar todo esto.
 
 ---
 
+## Gasto electoral
+
+Tres documentos forman una sola superficie de producto, pero no una sola
+métrica:
+
+- `config/gasto-electoral.json` declara los procesos, el calendario y las
+  fuentes oficiales.
+- `data/gasto-electoral.json` contiene gasto **final auditado por persona** de
+  2024.
+- `data/financiamiento-partidos.json` contiene asignaciones públicas a
+  **partidos** en 2026. Nunca se une con una candidatura.
+
+`python -m pulso gasto-electoral` genera los dos archivos. El trabajo semanal
+lee el directorio central de los ZIP del INE con HTTP Range y descarga solo el
+Anexo II; no baja los expedientes completos. `--solo-financiamiento` actualiza
+únicamente los XLSX y el acuerdo vigente del IEEBC.
+
+### `data/gasto-electoral.json`
+
+```json
+{
+ "esquema": 1,
+ "moneda": "MXN",
+ "procesos": [{
+  "id": "pelo-2024",
+  "estado": "auditado",
+  "dictamen": "INE/CG1934/2024",
+  "dictamen_url": "https://..."
+ }],
+ "resumen": {
+  "filas_origen": 247,
+  "candidaturas": 247,
+  "sin_conciliar": 0,
+  "incidencias": 0
+ },
+ "candidaturas": [{
+  "id": "pelo-2024-18480",
+  "proceso": "pelo-2024",
+  "id_contabilidad": "18480",
+  "nombre": "Julia Andrea Gonzalez Quiroz",
+  "ambito": "local",
+  "cargo": "Diputación Local Mr",
+  "contienda_id": "local-diputacion-10",
+  "contienda": "Distrito local 10",
+  "partido": "MORENA",
+  "gasto_reportado": 246559.97,
+  "desglose_reportado": {
+   "financieros": 27.84,
+   "operativos": 22124.2,
+   "radio_tv": 43.38,
+   "propaganda": 198380.55,
+   "impresos": 0,
+   "via_publica": 25984,
+   "cine": 0,
+   "utilitaria": 0,
+   "internet": 0
+  },
+  "diferencia_prorrateo": null,
+  "auditoria": {
+   "no_reportado": 0,
+   "ajustes_reclasificaciones": 0,
+   "quejas": null,
+   "determinado": 0
+  },
+  "gasto_auditado": 246559.97,
+  "tope": 1910814.66
+ }],
+ "incidencias": [],
+ "fuentes": []
+}
+```
+
+La identidad es determinista: `<proceso>-<id_contabilidad>`. Los nombres son
+solo presentación y búsqueda; nunca participan en el join. Las 194 filas
+locales y 53 federales deben quedar como candidatura conciliada o como
+incidencia explícita. Una incidencia se excluye de todas las métricas.
+
+Reglas aritméticas:
+
+- categorías reportadas + `diferencia_prorrateo` = `gasto_reportado`;
+- `gasto_reportado` + `auditoria.determinado` = `gasto_auditado`;
+- `no_reportado + ajustes_reclasificaciones + quejas = determinado` sólo
+  cuando el anexo publica los tres componentes; un componente vacío sigue
+  siendo `null` y no se infiere una contrapartida;
+- `gasto_auditado` es siempre `TOTAL DE GASTOS` del Anexo II final;
+- `tope` y una categoría ausente son `null`, no cero. Un `$-` explícito en el
+  archivo oficial sí es cero medido.
+
+No hay `generado`: los dictámenes históricos son finales y una hora de
+ejecución produciría diffs artificiales. `proceso_actual` lleva fechas del
+calendario 2026–2027, pero no admite candidaturas provisionales.
+
+### `data/financiamiento-partidos.json`
+
+```json
+{
+ "esquema": 1,
+ "ejercicio": 2026,
+ "moneda": "MXN",
+ "corte": "2026-07-03",
+ "aviso": "Financiamiento público asignado; no equivale a gasto ejercido ni a gasto de campaña.",
+ "partidos": [{
+  "id": "encuentro-solidario-baja-california",
+  "nombre": "Encuentro Solidario Baja California",
+  "ordinario_original": 33124092.85,
+  "ordinario_vigente": 17082101.12,
+  "especifico": 2384934.69,
+  "ministrado_enero_mayo": 33124092.85,
+  "excedente_ministrado": 16041991.73,
+  "total_asignado": 19467035.81
+ }],
+ "totales": {
+  "ordinario_vigente": 89712302.94,
+  "especifico": 4563840.75,
+  "asignado": 94276143.69
+ },
+ "acuerdos": [],
+ "fuentes": []
+}
+```
+
+El XLSX ordinario publicado por el IEEBC conserva para PES BC lo ministrado
+antes del acuerdo correctivo. Por eso se preserva como `ordinario_original` y
+el acuerdo IEEBC/CGE37/2026 fija `ordinario_vigente`; borrar una de las dos
+cifras ocultaría precisamente la diferencia que hay que explicar.
+
+---
+
 ## `config/roster.json`
 
 Entrada mantenida a mano. Es el componente de primera clase del sistema: los
@@ -1014,6 +1142,97 @@ No hay hashtags, y no es un olvido. Un hashtag no lleva `zona`, por la misma
 razón que no la lleva una búsqueda de Google Noticias: se la acreditaría a
 todo comentario que no nombre lugar alguno, que es el bug de El Imparcial y
 Hermosillo con otro disfraz.
+
+## `data/tendencias.json` — tendencias de X por ubicación
+
+Lo escribe `python -m pulso tendencias`, vía Apify y **sin iniciar sesión**: el
+actor `automation-lab~twitter-trends-scraper` lee el endpoint de tendencias de
+X con un guest token, la credencial anónima de un navegador sin cuenta. X entra
+al tablero **solo por tendencias**; los tuits siguen fuera, porque sus
+raspadores piden cookies (ver `senuelos` en `config/apify.json`). Es opcional:
+si falta, el validador no se queja. La alternativa limpia queda escrita: la API
+oficial de X cobra 0.01 USD por llamada a `GET /2/trends/by/woeid` (pago por
+uso, 2026).
+
+```json
+{
+ "esquema": 1,
+ "generado": "2026-09-11T18:17:00+00:00",
+ "plataforma": "x",
+ "acceso": "sin_sesion",
+ "maximo_por_ubicacion": 20,
+ "ubicaciones": [
+  {"id": "ensenada", "nombre": "Ensenada", "woeid": null, "zona": "Ensenada", "ambito": "zona", "activa": false, "estado": "sin_lista", "corte": null, "tendencias": []},
+  {"id": "mexico", "nombre": "México", "woeid": 23424900, "zona": null, "ambito": "nacional", "activa": true, "estado": "ok", "corte": "2026-09-11T18:10:00+00:00",
+   "tendencias": [
+    {"puesto": 1, "nombre": "#GritoDeIndependencia", "url": "https://x.com/search?q=%23GritoDeIndependencia", "volumen": 25400},
+    {"puesto": 3, "nombre": "Garita San Ysidro", "url": "https://x.com/search?q=%22Garita%20San%20Ysidro%22"}
+   ]},
+  {"id": "tijuana", "nombre": "Tijuana", "woeid": 149361, "zona": "Tijuana", "ambito": "zona", "activa": true, "estado": "ok", "corte": "2026-09-11T18:10:00+00:00",
+   "tendencias": [{"puesto": 1, "nombre": "Garita San Ysidro", "url": "https://x.com/search?q=%22Garita%20San%20Ysidro%22"}]}
+ ],
+ "salud": [
+  {"ubicacion": "mexico", "estado": "ok", "tendencias": 2, "promocionadas": 1},
+  {"ubicacion": "tijuana", "estado": "ok", "tendencias": 1, "promocionadas": 0}
+ ],
+ "gasto": {"resultados": 200, "gastado": 101, "por_concepto": {"automation-lab~twitter-trends-scraper": 101}}
+}
+```
+
+Siete reglas que el módulo impone, no sugiere:
+
+1. **El ranking es de X, no nuestro.** `puesto` es el rank que devuelve X y no
+   se renumera al quitar promocionadas: un hueco en la numeración es la huella
+   de un anuncio. El validador exige `puesto` estrictamente creciente. El
+   tablero dice «según X».
+2. **Solo nombre, puesto y liga.** Ni un tuit ni quién lo escribió; un nombre
+   que empieza con `@` se descarta al ingerir y es error en `data/`. Los campos
+   crudos del actor (`tweetVolume`, `isPromoted`, `twitterSearchUrl`…) son
+   claves prohibidas: si uno aparece, la lista blanca de
+   `pulso/tendencias.py::_limpiar` se rompió. La `url` la construye el pipeline
+   (`https://x.com/search?q=`), nunca se copia del actor.
+3. **`volumen` solo cuando X lo da y es mayor que 0.** X retiró el volumen de
+   casi todas las tendencias en enero de 2026; ausente es «sin dato», nunca 0,
+   y un 0 es error.
+4. **Una fila por ubicación del config, activa o hueco.** Cada zona del
+   producto salvo `estatal` aparece exactamente una vez: Tijuana, Mexicali y
+   San Diego con lista; Ensenada, Rosarito, Tecate, San Quintín y San Felipe
+   como `activa: false, estado: "sin_lista"`, porque X no publica lista para
+   ellas y el tablero rotula el hueco en vez de mostrar la nacional como si
+   fuera local. México es `nacional` y el mundo `mundial`; ninguno lleva `zona`.
+5. **`estado`** ∈ `ok | fallo | sin_token | sin_dato | sin_lista`. `ok` si y
+   solo si hay tendencias; `sin_lista` si y solo si la fila está apagada.
+   `salud` lleva una fila por ubicación activa, ordenada por `ubicacion`, con
+   `estado`, `tendencias` (las que quedaron) y `promocionadas` (los anuncios
+   descartados), y tiene que cuadrar con `ubicaciones`.
+6. **`corte`** es la hora en que el actor recibió la lista de X (`asOf`), en
+   UTC y en el formato de `generado`. Llega unos segundos después de
+   `generado`, porque `generado` se toma antes de la llamada: eso es lo normal.
+   Más de quince minutos después es **aviso**, no error: otro reloj o un
+   archivo editado, y tampoco puede tumbar el commit de todo `data/`.
+7. **Determinismo.** `ubicaciones` por `id`, `tendencias` por `puesto`,
+   `salud` por `ubicacion`, `gasto.por_concepto` por clave. Dos corridas sobre
+   la misma respuesta escriben bytes idénticos.
+
+Un límite del dato, visto en el primer sondeo (11 de septiembre de 2026):
+Tijuana, Mexicali y México devolvieron la misma lista en el mismo orden. X
+publica el WOEID de la ciudad pero puede llenarlo con la lista nacional; el
+archivo no lo deduplica —cada ubicación lleva lo que X devolvió— y el tablero
+lo rotula cuando una ciudad coincide exactamente con México.
+
+### `config/tendencias.json`
+
+`ubicaciones[]` con `id` (`^[a-z0-9_]{2,12}$`), `nombre`, `woeid` (entero en
+una activa, `null` en un hueco), `zona` (nombre de zona cuando `ambito` es
+`zona`; `null` para `nacional` y `mundial`), `ambito`, `activo` y `razon`. Una
+activa cita la fecha en que `python -m pulso tendencias --ubicaciones`
+confirmó su WOEID —es el `--sondear` de esta sección—; un hueco cita por qué
+no hay lista. Cada zona del producto salvo `estatal` tiene exactamente una
+fila. `cosecha` trae `maximo_por_ubicacion` (1–50, el tope de X) y
+`presupuesto_resultados`, que tiene que cubrir ubicaciones × máximo porque el
+actor recortaría en silencio. `actor` es el id de Apify. Lo valida
+`validar_tendencias_config`, que además pasa la entrada construida por la
+guardia de sesión de `pulso/apify.py`.
 
 ## `config/canales.json`
 

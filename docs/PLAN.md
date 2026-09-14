@@ -1,6 +1,16 @@
 <!-- Documento del cliente, copiado tal cual. Las divergencias de la
 implementacion se anotan arriba, no editando el texto de abajo. -->
 
+> ### Nota de implementación — Gasto electoral de Baja California
+>
+> Se añadió `/gasto-electoral` como página independiente. El procesamiento
+> une los CSV abiertos y los Anexos II finales del INE por `id_contabilidad`,
+> registra toda fila no conciliada y lee los ZIP por rangos. La vista separa
+> sin ambigüedad gasto auditado por candidatura de las asignaciones públicas
+> a partidos en 2026; estas últimas no se atribuyen a personas ni se presentan
+> como gasto ejercido. La actualización es semanal o manual, no cada seis
+> horas, y los archivos históricos no llevan hora de ejecución.
+
 > ### Nota de implementación — Fase 0
 >
 > Este es el plan de origen, íntegro. Lo que se construyó difiere en cuatro
@@ -251,6 +261,132 @@ implementacion se anotan arriba, no editando el texto de abajo. -->
 > el redirector de Google, como en la búsqueda. Si Google redirige fuera de
 > `news.google.com`, no se lee un byte. Si una edición falla, se dice cuál y la
 > respuesta no se guarda en el CDN.
+>
+> **Ese mismo día, más tarde, el cliente pidió dos cosas más.** Una sección en
+> la portada con «lo que está sonando en las noticias» del lugar que se mira,
+> con el mismo lector de Google Noticias: es «Lo que destaca ahora», debajo de
+> «De qué se habla esta semana», y muestra la sección LOCAL que Google arma
+> para la zona (`/api/actualidad?z=<zona>`), en el orden de Google y con diez
+> filas que se abren de diez en diez. En la región van las de Tijuana y San
+> Diego intercaladas (`?a=region`), porque la sección «Baja California» de
+> Google existe pero llegó vacía en el sondeo del 11 de septiembre. Tijuana va
+> en español e inglés; San Diego en inglés; las demás en español, y las cuatro
+> chicas (Tecate 6, Rosarito 8, San Quintín 5, San Felipe 1 titulares ese día)
+> muestran lo que hay, nunca se rellenan. Y quitar la pastilla «Antiguas» del
+> muro: un muro de prensa se lee de hoy hacia atrás, así que el control de
+> orden desapareció entero y el muro va siempre del más reciente al más
+> antiguo.
+>
+> **Y una tercera, con una captura de Google Noticias en la mano:** la caja
+> «Trending topics» de la página local de Google (Weather, Crime, Sports,
+> Politics, Business, con notas debajo de cada pastilla). El RSS de Google no
+> expone esa clasificación ni las imágenes, así que «Lo que destaca ahora»
+> lleva pastillas de rubro —Clima, Seguridad, Deportes, Política, Economía—
+> que son **búsquedas** en Google Noticias (`/api/actualidad?…&t=<rubro>`):
+> los términos del rubro en el idioma de cada edición más los del lugar, en
+> los últimos dos días y en el orden de Google. El panel dice que no es la
+> clasificación de Google; «Todo» sigue siendo la sección tal cual, y no hay
+> miniaturas porque el feed no las trae.
+>
+> **El 12 de septiembre de 2026 el cliente ajustó cuatro cosas de esa
+> sección.** (1) La interfaz **no nombra a Google**: los títulos y las frases
+> hablan de «lo que destaca ahora» y de «búsqueda en vivo»; el código y estos
+> documentos sí lo nombran, porque de ahí sale el dato, y cada fila sigue
+> nombrando al medio, que es la fuente real. (2) **Quince titulares como
+> máximo** por lista, en vez de cuarenta, «para minimizar el desfase»: en una
+> lista por relevancia lo que se aleja del lugar o del rubro se acumula al
+> final; sin pie de «mostrar más». (3) **Reloj de doce horas** en todo el
+> tablero («9:36 pm», no «21:36 h»), no solo ahí. (4) **La misma
+> implementación en todos los alcances**: en las ocho zonas y en la región
+> vive en la sección «Lo que destaca ahora»; en México e Internacional, donde
+> no hay corpus, vive en el propio muro de titulares, con las mismas
+> pastillas de rubro y el mismo tope, y la sección de abajo se oculta para no
+> mostrar la misma lista dos veces.
+
+---
+
+> ### Nota de implementación — X: tendencias, sin sesión
+>
+> **El cliente preguntó el 11 de septiembre de 2026 si se puede mostrar «qué es
+> tendencia en X» para la región, México y el mundo.** §3 refusa el raspado con
+> cuenta, y la nota de arriba sacó a X porque «todo raspador que sirve pide
+> cookies». Eso sigue siendo cierto para los **tuits**, y por eso
+> `apidojo~tweet-scraper` sigue de señuelo en `config/apify.json`. Las
+> **tendencias** resultaron ser la excepción: el endpoint de tendencias de X
+> sigue contestando a un guest token, la credencial anónima que recibe un
+> navegador sin cuenta, y el actor `automation-lab~twitter-trends-scraper` lo
+> lee así: su entrada son ubicaciones y un tope, sin cookies ni contraseña, y
+> pasa la guardia de `pulso/apify.py`. Nadie inicia sesión. La postura legal es
+> la misma que la del actor de Instagram: deslogueado, pendiente de opinión
+> legal, detrás de `APIFY_HABILITADO`.
+>
+> **La alternativa limpia queda escrita.** La API oficial de X cobra hoy 0.01
+> USD por llamada a `GET /2/trends/by/woeid` (pago por uso; los planes Basic y
+> Pro cerraron en 2026). Cinco ubicaciones cuatro veces al día son unos 6 USD
+> al mes. Se eligió el actor por reutilizar el token, el presupuesto y la
+> compuerta que ya existen; si el abogado prefiere la API, `pulso/tendencias.py`
+> cambia de fuente y el contrato de `data/tendencias.json` no.
+>
+> **Qué se publica y qué no.** De cada tendencia, el nombre, el puesto que X le
+> dio y la liga a su búsqueda en X. Ni un tuit ni quién lo escribió: un nombre
+> que empieza con @ se descarta. Las promocionadas son anuncios y se descartan.
+> El volumen va solo cuando X lo publica —lo retiró para casi todas en enero de
+> 2026—; ausente es «sin dato», nunca cero. Es el ranking de X, no una medida
+> de la ciudad, y el tablero lo dice así.
+>
+> **Dónde hay lista y dónde no.** X publica tendencias por ciudad para Tijuana
+> (WOEID 149361), Mexicali (133475) y San Diego (2487889), más México (23424900)
+> y el mundo (1); los cinco se confirmaron el **11 de septiembre de 2026** con
+> `python -m pulso tendencias --ubicaciones` sobre las 467 ubicaciones del
+> actor. Para Ensenada, Rosarito, Tecate, San Quintín y San Felipe no hay lista:
+> cada una tiene una fila apagada en `config/tendencias.json` y el tablero
+> rotula el hueco en vez de mostrar la lista nacional como si fuera local. Y
+> un límite del dato que salió en el primer sondeo: Tijuana, Mexicali y México
+> devolvieron exactamente las mismas cinco tendencias en el mismo orden. X
+> publica el WOEID de la ciudad pero, al menos ese día, lo llenó con la lista
+> nacional; el panel muestra la lista y lo dice debajo del título.
+>
+> **Cuesta centavos.** Una sola llamada al actor por corrida cubre las cinco
+> ubicaciones: ~100 tendencias, unos 0.015 USD; ~2 USD al mes.
+
+---
+
+> ### Nota de implementación — La interfaz dice qué, no cómo
+>
+> **El 13 de septiembre de 2026 el cliente pidió que la interfaz dejara de
+> explicar cómo obtiene los datos.** El caso que lo disparó es la faceta de
+> TikTok, que abría nombrando la consulta literal —«De los videos de las
+> últimas 24 horas para «tijuana noticias», los que nombran Tijuana en su
+> descripción. La zona la da el pie del video, no el creador»— y seguía con
+> «se publica fuera de git y este despliegue no lo trae» y «5 de 7 comentarios
+> leídos». Un lector del tablero no necesita nada de eso.
+>
+> **Es la regla del 12 de septiembre, generalizada.** Esa nota dejó por escrito
+> que la interfaz no nombra a Google y que este documento sí. La misma frontera
+> se corre ahora del proveedor a todo el mecanismo: **la interfaz dice qué está
+> viendo el lector y qué no afirma; nunca cómo se obtuvo.** Salieron de la
+> pantalla, entre otras, `pipeline`, `corpus`, `corrida`, `corte`, `cosechado`,
+> `vigentes`, Apify, la llave de YouTube, el redirector, las Políticas para
+> Desarrolladores, `notas.json` y un `python -m pulso correr` que el muro le
+> ofrecía al lector cuando no había datos.
+>
+> **Lo que NO cambió, y es lo que hace que esto no sea opacidad.** Las cinco
+> reglas de PRODUCT.md siguen dichas en cada página, completas, en el pie del
+> sitio (`web/src/components/chrome/pie.tsx`), que además ganó la única que le
+> faltaba: los huecos se rotulan, no se rellenan. «Sin dato» y «fuera de
+> muestra» siguen distinguiéndose de cero en cada panel; «Es el ranking de X, no
+> una medida de la ciudad» sigue ahí; las filas en vivo siguen marcadas y
+> siguen diciendo que no cuentan en las cifras de prensa. Lo que se fue es el
+> procedimiento, no la salvedad.
+>
+> **Se quitó «Cómo leer este dato» de seis de los siete paneles** —las cuatro
+> facetas de redes, actualidad y temas—, que era prosa de metodología. El de
+> indicadores se queda: explica qué miden el índice SHF, el predial y la ENSU,
+> que es el significado de la fuente y no el de nuestro código, y es el único
+> lugar donde quitarlo haría que una cifra significara algo falso.
+>
+> **Ningún cambio en el pipeline.** La búsqueda de TikTok sigue siendo «tijuana
+> noticias»; solo dejó de decírsele al lector.
 
 ---
 

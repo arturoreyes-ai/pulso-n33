@@ -1,7 +1,5 @@
 "use client";
 
-import type { ReactNode } from "react";
-
 import { useConversacion, useRoster } from "@/lib/datos/hooks";
 import type { DocConversacion, Sentimiento } from "@/lib/datos/tipos";
 import { numero, pluralizar } from "@/lib/dominio/formato";
@@ -9,7 +7,6 @@ import * as F from "@/lib/dominio/frases";
 import { indexarRoster, nombreCorto } from "@/lib/dominio/roster";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 import { Bisel } from "@/components/ui/bisel";
-import { ComoLeer } from "@/components/ui/como-leer";
 import { Esqueleto, FilaConteo } from "@/components/ui/primitivas";
 import { BarraSentimiento } from "@/components/ui/sentimiento";
 
@@ -38,7 +35,7 @@ function Tema({ fila, dias }: { fila: FilaTema; dias: number }) {
   const frase =
     s !== undefined && clasificados > 0
       ? F.fraseSentimiento(s, `«${fila.tema}»`, dias)
-      : `${numero(fila.comentarios)} ${pluralizar(fila.comentarios, "comentario", "comentarios")} sobre «${fila.tema}», sin clasificación de sentimiento.`;
+      : `${numero(fila.comentarios)} ${pluralizar(fila.comentarios, "comentario", "comentarios")} sobre «${fila.tema}», sin desglose de sentimiento.`;
   const meta = [
     fila.videos === undefined ? null : `${fila.videos} ${pluralizar(fila.videos, "video", "videos")}`,
     fila.interacciones === undefined ? null : `${numero(fila.interacciones)} likes y respuestas`,
@@ -119,15 +116,14 @@ function vistaDeZona(data: DocConversacion, zona: ZonaRuta | null): Vista {
   };
 }
 
-/** La frase de arriba, con el sufijo de sin clasificar si aplica. */
+/** La frase de arriba. El sufijo «N siguen sin clasificar» se fue el 13 de
+ *  septiembre de 2026: era contabilidad del modelo, no del dato. */
 function fraseDeCabeza(v: Vista, dias: number): string {
   const base =
     v.sentimiento !== undefined && v.clasificados > 0
       ? F.fraseSentimiento(v.sentimiento, v.nombre, dias)
-      : `${numero(v.total)} comentarios sobre ${v.nombre} en ${dias} días; sin clasificación de sentimiento en este corte.`;
-  return v.sinClasificar > 0
-    ? `${base} ${numero(v.sinClasificar)} siguen sin clasificar.`
-    : base;
+      : `${numero(v.total)} comentarios sobre ${v.nombre} en ${dias} días, sin desglose de sentimiento.`;
+  return base;
 }
 
 /** Las tres formas que puede tomar el encabezado, como clausulas de guarda. */
@@ -135,9 +131,8 @@ function Cabeza({ v, dias, sinLlave }: { v: Vista; dias: number; sinLlave: boole
   if (sinLlave) {
     return (
       <p className="max-w-[70ch] text-lectura text-tinta-prosa">
-        Sin llave de la API de YouTube configurada, así que no hay comentarios que
-        medir. El resto del tablero funciona igual: es degradación esperada, no una
-        falla.
+        El panel de YouTube no está disponible en este momento. El resto del
+        tablero funciona igual.
       </p>
     );
   }
@@ -145,8 +140,8 @@ function Cabeza({ v, dias, sinLlave }: { v: Vista; dias: number; sinLlave: boole
     return (
       <p className="max-w-[70ch] text-lectura text-tinta-prosa">
         {v.esRegion
-          ? `Sin comentarios vigentes en los últimos ${dias} días.`
-          : `Sin comentarios atribuidos a ${v.nombre} en los últimos ${dias} días.`}
+          ? `Sin comentarios en los últimos ${dias} días.`
+          : `Sin comentarios sobre ${v.nombre} en los últimos ${dias} días.`}
       </p>
     );
   }
@@ -201,25 +196,19 @@ function Figuras({
         ))}
       </ul>
       <p className="mt-2 text-meta text-tinta-meta">
-        Menciones por nombre o cargo. Con volúmenes así de bajos es un conteo, no una
-        tendencia, y nunca se cruza con el sentimiento.
+        Menciones por nombre o cargo. Con volúmenes así de bajos es un conteo, no
+        una tendencia, y nunca se cruza con el sentimiento.
       </p>
     </div>
   );
 }
 
-export function PanelConversacion({
-  zona,
-  lectura,
-}: {
-  zona: ZonaRuta | null;
-  lectura?: ReactNode;
-}) {
+export function PanelConversacion({ zona }: { zona: ZonaRuta | null }) {
   const { data, error } = useConversacion();
   const { data: rosterDoc } = useRoster();
 
   if (error !== undefined) {
-    return <p className="text-lectura text-tinta-prosa">No hay panel de conversación en este corte.</p>;
+    return <p className="text-lectura text-tinta-prosa">No se pudo mostrar YouTube.</p>;
   }
   if (data === undefined) return <Esqueleto className="h-[260px]" />;
 
@@ -234,11 +223,9 @@ export function PanelConversacion({
       <Figuras figuras={v.figuras} roster={indexarRoster(rosterDoc)} />
 
       <p className="mt-8 text-meta text-tinta-prosa">
-        Se publican conteos y sentimiento agregado, nunca el texto de un comentario ni
-        quién lo escribió. Retención de {dias} días por las Políticas para Desarrolladores
-        de YouTube.
+        Se publican cifras y sentimiento agregado, nunca el texto de un comentario ni
+        quién lo escribió.
       </p>
-      <ComoLeer>{lectura}</ComoLeer>
     </Bisel>
   );
 }

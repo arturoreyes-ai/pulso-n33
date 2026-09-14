@@ -418,6 +418,20 @@ already refused on the record in `docs/PLAN.md` §3.
   posts that means the first line of the outlet's caption, never the whole pie.
 - **Instagram comment text goes to `efimero/`, never to `data/` or git**, and
   commenter identity is never stored anywhere (see the invariant above).
+- **X: trends only, never tweets.** X closed anonymous reading in 2023, so
+  the tweet scrapers that work want session cookies and stay refused
+  (`apidojo~tweet-scraper` is a señuelo in `config/apify.json`). On 11
+  September 2026 the client asked for what is trending on X; trends are the
+  exception because X's trends endpoint still answers an anonymous guest
+  token, which is what `automation-lab~twitter-trends-scraper` uses: no login,
+  no cookies, so `pulso/apify.py` accepts its input. `pulso/tendencias.py`
+  reads Tijuana, Mexicali, San Diego, Mexico and worldwide into
+  `data/tendencias.json` with the trend name, X's own rank and a search link,
+  nothing else: no tweet text, no author, promoted trends dropped, `volumen`
+  only when X publishes one. Same legal posture as the Instagram actor
+  (logged-out, pending counsel, behind `APIFY_HABILITADO`). The clean
+  alternative is written down: the official X API charges $0.01 per trends
+  request, pay-per-use. Do not widen this to tweets.
 - **The YouTube panel stays off** behind `YOUTUBE_HABILITADO`.
 - Note that the published site is **public even when the repo is private**,
   and would publish `data/*.json` and `config/roster.json` along with it. That
@@ -438,7 +452,7 @@ Tailwind v4, pnpm.
   ISR stay available.
 - Typecheck with `pnpm --dir web tipos` (`next typegen && tsc --noEmit`).
 - **Routes are a grid of two axes: place x view.** The place is a zone slug
-  (`zonas.ts`); the view is `redes`, `indicadores`, `cobertura`, or the
+  (`zonas.ts`); the view is `redes`, `indicadores`, or the
   portada, which has no segment (`secciones.ts`). Every route is one cell:
   `/`, `/tijuana`, `/redes`, `/tijuana/redes`. Build every internal link with
   `secciones.ts::ruta(zona, vista)` — that is what keeps the two axes
@@ -447,20 +461,76 @@ Tailwind v4, pnpm.
   because the root cannot hold two dynamic segments; a section named like a
   zone slug would silently shadow that zone's page, and `RUTAS_SIN_COLISION`
   in `secciones.ts` is the type-level guard that stops it compiling.
-- **The three social platforms share one page.** Instagram, TikTok and YouTube
-  are one view (`redes`) with a facet selector, not three sections. They are
-  the same question asked in three places, and only one panel mounts at a time
-  because each is an island that fetches its own JSON.
+- **`cobertura` was a third view until 14 September 2026**, removed at the
+  client's request along with `app/cobertura/`, `paginas/cobertura.tsx` and
+  `paneles/cobertura.tsx`. It held the zone-by-source matrix and per-feed
+  health. Rule 4 did not live there and still holds: every panel draws its own
+  `Hueco`, `chrome/pie.tsx` states that coverage is uneven by zone, and the
+  portada's run summary publishes how many sources answered. Do not re-add a
+  view without re-adding it to `SECCIONES`, `NOMBRE`, `TITULO`, the
+  `DESCRIPCION` record in `metadatos.ts` and the `CUERPOS` table in
+  `paginas/pagina.tsx` — the type system catches all five.
+
+- **The four social platforms share one page.** Instagram, TikTok, YouTube
+  and X are one view (`redes`) with a facet selector, not four sections. They
+  are the same question asked in four places, and only one panel mounts at a
+  time because each is an island that fetches its own JSON. X is trends, not
+  comments (`paneles/tendencias.tsx`).
 - **Live Google News never becomes a `Nota`.** `/api/buscar` (search) and
   `/api/actualidad` (the México / World section the wall shows when its
-  scope is `mexico` or `internacional` and nothing is typed) return
+  scope is `mexico` or `internacional` and nothing is typed, and the
+  per-zone local section the portada shows under «Lo que destaca ahora»:
+  `?z=<slug>`, or `?a=region` for Tijuana plus San Diego, because Google's
+  «Baja California» section exists but comes back empty; `&t=<rubro>` turns
+  any of them into a two-day Google News *search* with the terms in
+  `rubros.ts`, because the RSS has no location-plus-topic section, and the
+  panel labels it as a search) return
   `ResultadoExterno` rows: no id, zone, tone or figure, never written to
-  `data/`, never summed with press counts. The section feed is rendered in
+  `data/`, never summed with press counts. Capped at 15 (`TOPE_ACTUALIDAD`)
+  at the client's request, and the UI never names Google (also the client's
+  request, 12 September 2026): code and docs do, the UI says "en vivo" and
+  names the outlet per row. The section feed is rendered in
   Google's own order on purpose: it is not date-ordered, it is their ranking,
   and that ranking is the signal. The pipeline deliberately does not harvest
   it, because `data/` cannot say "right now" and a place-less headline would
   be `alcance: nacional` and never reach the wall. Both handlers are
   offline-tested by `web/scripts/probar-busqueda.cjs`.
+- **The UI says *what*, never *how*.** Since 13 September 2026 no user-facing
+  string may name the mechanism: not `pipeline`, `corpus`, `corrida`, `corte`
+  (as a run), `cosechado`, `vigentes`, Apify, an API key, git, the deploy, a
+  redirector, a filename, or TikTok's literal query. The trigger was the TikTok
+  facet, which opened with «De los videos de las últimas 24 horas para «tijuana
+  noticias», los que nombran Tijuana en su descripción» and went on to explain
+  git. It is the 12 September «the UI never names Google» rule widened from the
+  vendor to the whole mechanism, and `docs/PLAN.md` records it.
+
+  What that does *not* license is opacity. The distinction is meaning versus
+  procedure: «Es el ranking de X, no una medida de la ciudad» stays, «leído sin
+  iniciar sesión» goes. The five PRODUCT.md rules are stated in full on every
+  page by `chrome/pie.tsx` — that footer is what makes the panels' silence
+  affordable, so do not thin it. Gap labels («sin dato», «fuera de muestra», the
+  `Hueco` states) are rule 4 and are not mechanism; keep them. Degraded states
+  say what is missing, never why in infrastructure terms.
+
+  `ui/como-leer.tsx` («Cómo leer este dato») now has exactly one caller, the
+  indicadores panel, because that block explains what the SHF index, the predial
+  and the ENSU measure — the source's meaning, not ours. Do not reintroduce it
+  elsewhere. All the mechanism prose that used to live in those blocks is in
+  PRODUCT.md and in the module docstrings of `paginas/redes.tsx` and
+  `paneles/redes.tsx`.
+
+- **`/garitas` and `/gasto-electoral` are pages, not a separate site.** Both are
+  `SUELTAS` in `secciones.ts`: in the nav, outside the place x view grid. They
+  mount `NavPildora` from their own server `page.tsx` — never from the client
+  tablero, which would drag the nav's server action and `dist/ssr` icon into the
+  client bundle. Garitas was the counter-example until 14 September 2026: it
+  shipped its own `<nav>`, its own `garitas.module.css` and a
+  `margin-top: -88px` at `z-index: var(--z-nav)` that parked it *on top of* the
+  dashboard's pill, which is why the nav appeared to be missing there. It now
+  uses the shared container (`max-w-[88rem]`, `px-4 md:px-8`), `Bisel`, `Barra`
+  and the type tokens. Don't reintroduce a CSS module for a page: the tokens in
+  `globals.css` are the scale, and `pnpm tokens` fails on off-scale values.
+
 - **`web/` is what ships.** The cron builds it on the runner and deploys it
   prebuilt, behind `DESPLEGAR_TABLERO`. It deploys from the runner rather than
   from a host build against git because the comment text lives in `efimero/`,

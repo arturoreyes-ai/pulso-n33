@@ -23,6 +23,10 @@ on:
         description: "Descubrir publishers recientes con GDELT"
         type: boolean
         default: false
+      actualizar_gasto_electoral:
+        description: "Actualizar dictámenes 2024 y financiamiento electoral"
+        type: boolean
+        default: false
   push:
     branches: [main]
     paths-ignore:
@@ -31,6 +35,9 @@ on:
   # Minuto 17 y no 0 porque a la hora en punto GitHub encola miles de crons.
   schedule:
     - cron: "17 */6 * * *"
+    # Los dictamenes son finales y el financiamiento anual: una vez por semana,
+    # sin convertir expedientes enormes en una descarga de cada seis horas.
+    - cron: "41 18 * * 1"
 
 permissions:
   contents: read
@@ -147,7 +154,7 @@ jobs:
         run: python -m pulso conversacion --sentimiento modelo
 
       # Apify (redes sociales). Este paso verifica el token y el catalogo
-      # antes de que Instagram y TikTok, mas abajo, gasten credito: un token
+      # antes de que Instagram, TikTok y X, mas abajo, gasten credito: un token
       # caducado falla con 401 a media cosecha, seis horas despues y sin
       # nadie mirando. Aqui falla en el paso que lleva su nombre. Es una
       # llamada, sin costo. El catalogo trae los actores en `activo: false`
@@ -213,11 +220,30 @@ jobs:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
         run: python -m pulso tiktok --sentimiento modelo
 
+      # X entra SOLO por tendencias (peticion del cliente, 11 sep 2026): el
+      # actor lee el endpoint de tendencias con un guest token, sin cuenta ni
+      # cookies, y una llamada cubre Tijuana, Mexicali, San Diego, Mexico y
+      # el mundo. Escribe data/tendencias.json: nombre, puesto y liga de cada
+      # tendencia, nunca un tuit ni quien lo escribio. Sin cache: no hay texto
+      # personal que retener ni comentarios que deduplicar.
+      - name: Tendencias (X)
+        if: vars.APIFY_HABILITADO == 'true'
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: python -m pulso tendencias
+
       # Vivienda, suelo, crimen y percepcion. Se salta solo si lo que hay
       # tiene menos de una semana: son fuentes trimestrales y mensuales, y
       # bajar 60 MB cada hora seria una groseria sin dato nuevo a cambio.
       - name: Indicadores oficiales
         run: python -m pulso indicadores ${{ inputs.forzar_indicadores && '--forzar' || '' }}
+
+      # Une CSV abiertos y anexos finales por ID de contabilidad. Los ZIP del
+      # INE se leen por HTTP Range: solo directorio central y Anexo II. Nunca
+      # se usa el nombre para unir ni se publica una fila sin conciliacion.
+      - name: Gasto electoral y financiamiento partidista
+        if: github.event.schedule == '41 18 * * 1' || inputs.actualizar_gasto_electoral
+        run: python -m pulso gasto-electoral
 
       - name: Validar lo que acaba de escribir
         run: python -m pulso validar

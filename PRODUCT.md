@@ -57,8 +57,10 @@ texto completo, y aquí el agregador competiría con ellos.
 | Sentimiento de comentarios | funcionando | modelo local (pysentimiento), publicado como conteos por zona y tema; en YouTube nunca el texto |
 | Redes (Instagram) | **necesita token** | 13 cuentas verificadas una por una (once de noticias y dos revistas de ciudad), sin sesión; los 15 posts con más likes de las últimas 24 horas, con hora exacta, y sus comentarios más votados. El texto va fuera de git (`efimero/`), la identidad no se ingiere |
 | Redes (TikTok) | **necesita token** | búsqueda «tijuana noticias», relevancia, últimas 24 h, sin sesión; la zona sale del pie del video, se muestra el @ del creador y nunca quien comenta. Mismo canal fuera de git para el texto |
+| Redes (X, tendencias) | **necesita token** | lo que X marca como tendencia en Tijuana, Mexicali, San Diego, México y el mundo, leído sin sesión (guest token); nombre, puesto y liga, nunca tuits ni identidad; las promocionadas se descartan y el volumen es «sin dato» donde X no lo publica |
 | Tono de titulares | funcionando | mismo modelo, `--metodo modelo`. Tono de la frase, no postura hacia una persona |
 | Tablero por zona | funcionando | `web/`, Next.js: una página por zona con resumen, indicadores, temas, conversación y muro |
+| Gasto electoral | implementado | página independiente para gasto final auditado de candidaturas de Baja California en 2024; financiamiento partidista 2026 aislado y rotulado como asignación, no gasto |
 | Valores unitarios de suelo por zona | pendiente | Periódico Oficial, solo PDF, 5 formatos distintos |
 | Tipo de cambio | pendiente | Banxico; el token exige un CAPTCHA humano |
 | Gasto público | fuera de alcance | ver «Alcance» abajo |
@@ -141,7 +143,12 @@ muro muestra la sección de Google Noticias de ese momento, en el orden de
 Google. Esas filas no pasan por el pipeline: no tienen zona, tono ni figura,
 no entran a `data/`, no se cuentan en ninguna cifra de este documento y van
 marcadas «en vivo». Contestan «qué está sonando ahora», que es otra pregunta
-que «qué cubre la prensa de la región», y por eso no se mezclan.
+que «qué cubre la prensa de la región», y por eso no se mezclan. Desde el 12
+de septiembre la misma lista existe para cada zona y para la región en la
+sección «Lo que destaca ahora», con pastillas de rubro que son búsquedas, y
+con un tope de quince. La interfaz no nombra a Google, a petición del
+cliente; este documento sí, porque la procedencia es parte de lo que el
+producto no puede callar hacia adentro.
 
 Consecuencia estructural que hay que decir en voz alta: el tablero
 sobrerrepresenta a Tijuana. No es un defecto del código, es la distribución
@@ -213,6 +220,37 @@ Y los temas salen de contar repeticiones de frases, sin modelo. Funcionan bien
 para lo que está claramente arriba y mal para lo sutil. Un tema sostenido por
 un solo medio se rotula como tal, porque es la agenda de ese medio.
 
+### Y las cinco se dicen en la página, no en los paneles
+
+El **13 de septiembre de 2026** el cliente pidió que la interfaz dejara de
+explicar cómo obtiene los datos. Es la regla del 12 de septiembre —la interfaz
+no nombra a Google, este documento sí— corrida del proveedor a todo el
+mecanismo: **la interfaz dice qué está viendo el lector y qué no afirma; nunca
+cómo se obtuvo.** El caso que lo disparó: la sección de TikTok abría nombrando
+la consulta literal, seguía con la regla de zona y terminaba diciendo que el
+texto de los comentarios «se publica fuera de git y este despliegue no lo
+trae».
+
+Eso no relaja ninguna de las cinco reglas, y esa es la condición. Las cinco se
+dicen enteras **en cada página**, en el pie del sitio, que es HTML de servidor
+y se lee aunque el bundle nunca llegue. Los huecos se siguen rotulando panel
+por panel: «sin dato» y «fuera de muestra» siguen siendo estados distintos de
+cero, las filas en vivo siguen marcadas y siguen diciendo que no se suman a las
+cifras de prensa, y «es el ranking de X, no una medida de la ciudad» sigue
+donde estaba. Lo que salió de la pantalla es el procedimiento —«pipeline»,
+«corpus», «corrida», «cosechado», Apify, las llaves, el redirector, los nombres
+de archivo—, no la salvedad.
+
+Se quitó también el desplegable «Cómo leer este dato» de seis de los siete
+paneles, que era prosa de metodología y está en este documento. El de
+indicadores se queda: explica qué miden el índice SHF, el predial y la ENSU,
+que es el significado de la fuente y no el del código, y es el único lugar
+donde quitarlo haría que una cifra significara algo falso.
+
+Hacia adentro no cambia nada: este documento, `docs/PLAN.md`, `AGENTS.md` y los
+comentarios del código siguen nombrando cada mecanismo, porque la procedencia
+es parte de lo que el producto no puede callar hacia adentro.
+
 ---
 
 ## Alcance
@@ -283,10 +321,24 @@ La sección de TikTok lee la búsqueda «tijuana noticias» (relevancia, última
 24 horas) sin iniciar sesión. Como los videos vienen de cualquier creador, la
 regla de zona es la de las notas de prensa: la da lo que nombra la descripción,
 nunca la consulta. Un video que nombra otra región se descarta; uno que no
-nombra lugar se rotula «sin lugar en la descripción» y no tiene página de zona.
+nombra lugar se rotula «sin lugar» y no tiene página de zona.
 Se muestra el @ del creador porque es quien publicó y la liga ya lo trae; quien
 comenta sigue anónimo. TikTok sí publica compartidos y guardados, y aquí
 aparecen como cifras medidas.
+
+### X: tendencias, sin sesión y sin tuits
+
+El 11 de septiembre de 2026 el cliente pidió ver qué es tendencia en X. Los
+tuits siguen fuera: sus raspadores piden cookies, y eso es el raspado con
+cuenta que se refusa arriba. Las tendencias entran porque el endpoint de X las
+sigue dando a un navegador sin cuenta, y así las lee el actor de Apify: sin
+iniciar sesión. Lo que se muestra es el ranking de X para Tijuana, Mexicali,
+San Diego, México y el mundo, en su orden, con el nombre de cada tendencia y la
+liga a su búsqueda; nunca un tuit ni quién lo escribió, y las promocionadas se
+descartan. Es lo que X decidió destacar, no de qué habla la ciudad, y el
+tablero lo dice. Para Ensenada, Rosarito, Tecate, San Quintín y San Felipe X no
+publica lista, y eso se rotula, no se rellena con la nacional. El volumen de
+tuits es «sin dato» casi siempre: X lo retiró en enero de 2026.
 
 ---
 

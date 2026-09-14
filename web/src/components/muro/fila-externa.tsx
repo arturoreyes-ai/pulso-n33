@@ -3,6 +3,7 @@
 import { memo } from "react";
 
 import type { ResultadoExterno } from "@/lib/busqueda/tipos";
+import { fechaCorta, hora } from "@/lib/dominio/formato";
 
 /**
  * Una fila que no paso por el pipeline.
@@ -23,33 +24,22 @@ import type { ResultadoExterno } from "@/lib/busqueda/tipos";
  *
  * NO recibe `corte`. El muro mide la edad contra `estado.generado`, que puede
  * tener seis horas, y una nota de hace diez minutos daria una edad negativa
- * que `edad()` devuelve como cadena vacia. Aqui la hora va absoluta.
+ * que `edad()` devuelve como cadena vacia. Aqui la hora va absoluta, con los
+ * mismos formateadores de formato.ts (doce horas, hora de Tijuana) que usa el
+ * resto del tablero.
  */
 
-const DIA = new Intl.DateTimeFormat("es-MX", {
-  day: "numeric",
-  month: "short",
-  timeZone: "America/Tijuana",
-});
-
-const HORA = new Intl.DateTimeFormat("es-MX", {
-  hour: "2-digit",
-  minute: "2-digit",
-  hour12: false,
-  timeZone: "America/Tijuana",
-});
-
 function Fila({ r }: { r: ResultadoExterno }) {
-  const d = r.publicado === null ? null : new Date(r.publicado);
-  const valida = d !== null && !Number.isNaN(d.getTime());
+  const iso = r.publicado;
+  const valida = iso !== null && !Number.isNaN(Date.parse(iso));
 
   return (
     <article className="grid grid-cols-[4rem_1fr] gap-4 border-b border-vela py-3.5 [contain-intrinsic-size:0_104px] [content-visibility:auto]">
       <div className="pt-0.5 font-mono text-meta tabular-nums text-tinta-meta">
-        {valida ? (
+        {iso !== null && valida ? (
           <>
-            <time dateTime={r.publicado ?? undefined}>{DIA.format(d)}</time>
-            <span className="block">{HORA.format(d)}</span>
+            <time dateTime={iso}>{fechaCorta(iso)}</time>
+            <span className="block">{hora(iso)}</span>
           </>
         ) : (
           "s/f"
@@ -72,7 +62,7 @@ function Fila({ r }: { r: ResultadoExterno }) {
         <p className="mt-1.5 flex flex-wrap items-center gap-2 text-meta text-tinta-meta">
           <span>{r.medio}</span>
           <span
-            title="Resultado en vivo: no pasó por el pipeline, así que no tiene zona, tono ni figura."
+            title="Resultado en vivo: no tiene zona, tono ni figura, y no cuenta en las cifras de prensa."
             className="inline-block rounded-full border border-dashed border-filo px-2 py-px text-meta whitespace-nowrap text-tinta-meta"
           >
             en vivo

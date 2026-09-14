@@ -44,7 +44,7 @@ export function SelectorDelegacion({
         ))}
         <span
           className="shrink-0 snap-start"
-          title="Titulares de Tijuana que no nombran ninguna delegación ni un lugar dentro de una"
+          title="Titulares de Tijuana sin delegación en el titular"
         >
           <Chip
             activo={activa === SIN_DELEGACION}

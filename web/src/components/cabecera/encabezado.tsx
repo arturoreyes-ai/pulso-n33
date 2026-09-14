@@ -4,11 +4,17 @@ import { NavegacionTitulares } from "@/components/chrome/navegacion-titulares";
 import { SelectorZona } from "@/components/chrome/selector-zona";
 import type { Seccion } from "@/lib/dominio/secciones";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
-import { Banda } from "./banda";
 
 /**
- * El encabezado: titulo, fechado, entrada, selector de zona y la banda de
- * salud. Nada mas.
+ * El encabezado: titulo, fechado, entrada y la navegacion. Nada mas.
+ *
+ * La banda de salud ("Ingesta automatica. 23 de 25 fuentes respondieron...")
+ * VIVIA aqui, debajo de la navegacion, y se quito el 11 de septiembre de 2026
+ * a peticion del cliente: era una franja entre las pastillas de alcance y el
+ * primer titular, y en una portada de un medio los titulares van pegados a la
+ * navegacion. Lo que decia sigue en la pagina, mas abajo, donde se lee junto a
+ * las cifras que resume: `ResumenZona` cierra con la hora del corte y cuantas
+ * fuentes respondieron.
  *
  * El resumen de cifras VIVIA aqui y se fue a su propia seccion, debajo del
  * muro. Sumaba una rejilla de cuatro tarjetas y, en el indice, la tabla
@@ -49,8 +55,9 @@ function Fechado({ zona }: { zona: ZonaRuta | null }) {
   return <p className="mt-4 text-meta text-tinta-meta">{lugar}</p>;
 }
 
-/** El pie del encabezado: donde estas y como esta la corrida. Igual en las
- *  cuatro vistas, porque las dos preguntas se hacen en las cuatro. */
+/** El pie del encabezado: donde estas. Igual en las cuatro vistas, porque la
+ *  pregunta se hace en las cuatro. Es lo ultimo del encabezado a proposito:
+ *  la primera seccion de la pagina va pegada a estas pastillas. */
 function Contexto({
   zona,
   vista,
@@ -61,20 +68,15 @@ function Contexto({
   conteos: boolean;
 }) {
   return (
-    <>
-      <div className="mt-8">
-        {vista === null ? (
-          <Suspense fallback={<div id="zonas" aria-label="Cargando navegación" className="h-24" />}>
-            <NavegacionTitulares zona={zona} />
-          </Suspense>
-        ) : (
-          <SelectorZona zona={zona} vista={vista} conteos={conteos} />
-        )}
-      </div>
-      <div className="mt-6">
-        <Banda />
-      </div>
-    </>
+    <div className="mt-8">
+      {vista === null ? (
+        <Suspense fallback={<div id="zonas" aria-label="Cargando navegación" className="h-24" />}>
+          <NavegacionTitulares zona={zona} />
+        </Suspense>
+      ) : (
+        <SelectorZona zona={zona} vista={vista} conteos={conteos} />
+      )}
+    </div>
   );
 }
 

@@ -1,12 +1,15 @@
-import { Suspense } from "react";
+import { Suspense, type ReactNode } from "react";
 
 import { Encabezado } from "@/components/cabecera/encabezado";
 import { ResumenZona } from "@/components/cabecera/resumen-zona";
 import { Seccion } from "@/components/chrome/seccion";
 import { Muro } from "@/components/muro/muro";
 import { MuroEsqueleto } from "@/components/muro/muro-esqueleto";
+import { SoloConCorpus } from "@/components/muro/solo-con-corpus";
+import { PanelActualidad } from "@/components/paneles/actualidad";
 import { PanelComunicados } from "@/components/paneles/comunicados";
 import { PanelTemas } from "@/components/paneles/temas";
+import { Esqueleto } from "@/components/ui/primitivas";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 
 /**
@@ -29,7 +32,7 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  * promesa y se escribe una vez.
  */
 const EN_VIVO =
-  "Con México o Internacional y sin consulta, muestra la actualidad de Google Noticias en ese momento.";
+  "En México e Internacional muestra lo que destaca en ese momento, por rubro.";
 
 export function PaginaTitulares({ zona }: { zona: ZonaRuta | null }) {
   const nombre = zona === null ? null : NOMBRE_CORTO[zona];
@@ -38,15 +41,18 @@ export function PaginaTitulares({ zona }: { zona: ZonaRuta | null }) {
     <>
       <Encabezado zona={zona} />
 
+      {/* `pegada`: es la primera seccion y va junto a la navegacion de alcance
+          que la acota (Region, Mexico, Internacional), no una pantalla abajo. */}
       <Seccion
         id="muro"
+        pegada
         titulo={nombre === null ? "Titulares" : `Titulares sobre ${nombre}`}
         entrada={
           nombre === null
-            ? `La zona sale del lugar que nombra el titular, no del medio. Al buscar, la lista se aplana y suma resultados en vivo. ${EN_VIVO}`
+            ? `La zona sale del lugar que nombra el titular, no del medio. Al buscar se añaden resultados en vivo. ${EN_VIVO}`
             : zona === "Tijuana"
               ? `Titulares que mencionan Tijuana. La delegación sale del propio titular, y la mayoría no nombra ninguna. ${EN_VIVO}`
-              : `Titulares que mencionan ${nombre}. Al buscar, la lista se aplana y suma resultados en vivo. ${EN_VIVO}`
+              : `Titulares que mencionan ${nombre}. Al buscar se añaden resultados en vivo. ${EN_VIVO}`
         }
       >
         {/* El muro lee ?d=, ?q= y ?a= con useSearchParams; en una ruta
@@ -75,19 +81,38 @@ export function PaginaTitulares({ zona }: { zona: ZonaRuta | null }) {
         titulo={nombre === null ? "De qué se habla esta semana" : `De qué se habla en ${nombre} esta semana`}
         entrada={
           nombre === null
-            ? "Frases que se repiten en los titulares del periodo, con notas de ejemplo. Sin modelo: es conteo por documento, con el lugar tratado como faceta y no como tema."
-            : `Frases que se repiten en los titulares que mencionan ${nombre}, con las notas de ejemplo. Sin modelo: es conteo por documento.`
+            ? "Frases que se repiten en los titulares del periodo, con notas de ejemplo. El lugar es una faceta, no un tema."
+            : `Frases que se repiten en los titulares que mencionan ${nombre}, con las notas de ejemplo.`
         }
       >
-        <PanelTemas zona={zona} lectura={<LecturaTemas />} />
+        <PanelTemas zona={zona} />
       </Seccion>
+
+      {/* Despues de temas y no antes: temas FILTRA el muro que tiene encima
+          y los dos van juntos. Esto es otra pregunta —que destaca ahora— y no
+          toca el muro. La interfaz no nombra al agregador (peticion del
+          cliente, 12 de septiembre de 2026); el codigo si.
+
+          Solo con corpus: en Mexico e Internacional el muro ya es esta misma
+          lista, con los mismos rubros. El limite de Suspense es por
+          useSearchParams en una ruta prerenderizada; su fallback es la
+          seccion con la lista en esqueleto, para que el HTML del servidor
+          traiga la seccion y no un hueco que aparece al hidratar. */}
+      <Suspense fallback={seccionActualidad(nombre, <Esqueleto className="h-[420px]" />)}>
+        <SoloConCorpus zona={zona}>
+          {seccionActualidad(
+            nombre,
+            <PanelActualidad zona={zona} />,
+          )}
+        </SoloConCorpus>
+      </Suspense>
 
       <Seccion
         id="panorama"
-        titulo={nombre === null ? "El corte de hoy" : `${nombre} en cifras`}
+        titulo={nombre === null ? "Hoy en cifras" : `${nombre} en cifras`}
         entrada={
           nombre === null
-            ? "Las cifras de la última corrida, y a qué distancia están unas de otras. Cada tarjeta dice de dónde sale su número."
+            ? "Las cifras más recientes, y a qué distancia están unas de otras. Cada tarjeta dice de dónde sale su número."
             : `Lo que se puede decir de ${nombre} con las fuentes que sí lo cubren.`
         }
       >
@@ -97,18 +122,25 @@ export function PaginaTitulares({ zona }: { zona: ZonaRuta | null }) {
   );
 }
 
-function LecturaTemas() {
+/**
+ * La seccion de actualidad con el cuerpo que toque: el panel de verdad, o su
+ * esqueleto mientras Suspense resuelve. Una sola funcion para que el titulo y
+ * la entrada no se escriban dos veces y diverjan.
+ */
+function seccionActualidad(nombre: string | null, cuerpo: ReactNode) {
   return (
-    <>
-      <p>
-        Agrupamiento por repetición de frases en los titulares, sin modelo. Se
-        cuentan notas, no porcentajes. Un tema sostenido por un solo medio se
-        rotula como tal, porque es la agenda de ese medio y no de la región.
-      </p>
-      <p>
-        La tendencia contra la semana anterior aparece solo cuando hay dos
-        ventanas comparables. Tocar un tema filtra el muro de arriba.
-      </p>
-    </>
+    <Seccion
+      id="actualidad"
+      titulo={nombre === null ? "Lo que destaca ahora" : `Lo que destaca ahora sobre ${nombre}`}
+      entrada={
+        nombre === null
+          ? "Los titulares que destacan en este momento para Tijuana y San Diego, los dos polos del corredor; cada zona tiene los suyos en su página. Es una lectura en vivo y no cuenta en las cifras de prensa."
+          : `Los titulares que destacan en este momento para ${nombre}. Es una lectura en vivo y no cuenta en las cifras de prensa.`
+      }
+    >
+      {cuerpo}
+    </Seccion>
   );
 }
+
+

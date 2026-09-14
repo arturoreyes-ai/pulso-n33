@@ -66,6 +66,18 @@
    "entrada": {
     "maxItems": 40
    }
+  },
+  {
+   "id": "automation-lab~twitter-trends-scraper",
+   "plataforma": "x",
+   "idioma": "es",
+   "activo": false,
+   "razon": "Tendencias de X por ubicación, sin sesión: lee el endpoint de tendencias con un guest token, la credencial anónima de un navegador sin cuenta, y su entrada son solo ubicaciones y un tope. Desde el 11 de septiembre de 2026 lo corre pulso/tendencias.py con config/tendencias.json (Tijuana, Mexicali, San Diego, México y el mundo). Esta fila sigue en `activo: false` porque este catálogo no es el interruptor —igual que los actores de Instagram y TikTok—; documenta el actor y deja que la guardia de sesión revise su entrada. `idioma` va por la regla del catálogo, pero las tendencias son nombres, no frases: ninguna pasa por el modelo de tono. Cobra ~0.12 USD por 1,000 tendencias más 0.003 USD por corrida; una llamada cubre las cinco ubicaciones.",
+   "cuota": 100,
+   "entrada": {
+    "locations": ["149361", "133475", "2487889", "23424900", "worldwide"],
+    "maxTrendsPerLocation": 20
+   }
   }
  ],
 
@@ -73,7 +85,12 @@
   {
    "id": "apidojo~tweet-scraper",
    "plataforma": "x",
-   "razon": "NO USAR. Los raspadores de X que sirven piden cookies de sesión o una cuenta, porque X cerró la lectura anónima en 2023. Eso es exactamente el caso que docs/PLAN.md §3 refusa, y no cambia porque el login lo ejecute Apify. La alternativa legal es la API oficial de X, que empieza en 200 USD al mes por el nivel con búsqueda."
+   "razon": "NO USAR. Los raspadores de TUITS de X que sirven piden cookies de sesión o una cuenta, porque X cerró la lectura anónima en 2023. Eso es exactamente el caso que docs/PLAN.md §3 refusa, y no cambia porque el login lo ejecute Apify. Las TENDENCIAS son la excepción y entran por automation-lab~twitter-trends-scraper, arriba, que no inicia sesión; los tuits siguen fuera. La alternativa legal para los tuits es la API oficial de X, hoy de pago por uso (0.005 USD por tuit leído, 0.01 USD por llamada de tendencias)."
+  },
+  {
+   "id": "mikolabs~x-twitter-trends-scraper",
+   "plataforma": "x",
+   "razon": "NO USAR. Tendencias, pero con las cookies de sesión de una cuenta de X («the same ones your browser uses to keep you logged in»): es el raspado con sesión que docs/PLAN.md §3 refusa, y pulso/apify.py lo rechazaría al leer su entrada. Además solo da país, no ciudad. El de arriba hace lo mismo sin cuenta."
   },
   {
    "id": "apify~facebook-groups-scraper",

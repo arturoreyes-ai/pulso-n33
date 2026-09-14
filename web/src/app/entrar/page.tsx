@@ -30,11 +30,19 @@ interface Props {
  * tienen texto propio; el resto es "intenta de nuevo", porque el codigo
  * interno (OAuthCallbackError, Configuration...) no le dice nada a quien
  * entra y si a quien lee los logs de Vercel.
+ *
+ * Esa misma regla se aplico al texto de `Configuration` el 13 de septiembre de
+ * 2026: decia "Este despliegue no tiene configurada la entrada con Microsoft.
+ * Revisa docs/acceso.md" y mandaba a un archivo del repo a quien esta parado
+ * en la puerta. Quien lee esto no siempre es quien puede arreglarlo, asi que
+ * la frase dice el estado y a quien acudir; el procedimiento —las variables
+ * AUTH_MICROSOFT_ENTRA_ID_* y docs/acceso.md— vive en este comentario y en el
+ * README, que es donde lo busca quien si puede arreglarlo.
  */
 const MENSAJE: Record<string, string> = {
   AccessDenied: "Tu cuenta está desactivada. Pide a un administrador del tablero que la reactive.",
   Configuration:
-    "Este despliegue no tiene configurada la entrada con Microsoft. Revisa docs/acceso.md.",
+    "La entrada con Microsoft no está disponible. Avisa a un administrador del tablero.",
 };
 
 const MENSAJE_GENERICO = "No se pudo completar la entrada. Intenta de nuevo.";
@@ -84,9 +92,11 @@ export default async function PaginaEntrar({ searchParams }: Props) {
             </button>
           </form>
         ) : (
+          // Faltan AUTH_MICROSOFT_ENTRA_ID_*; ver docs/acceso.md. El nombre de
+          // las variables no sale a pantalla: ver el comentario de MENSAJE.
           <p className="mt-8 rounded-nucleo border border-filo px-4 py-3 text-cuerpo text-tinta-meta">
-            Este despliegue no tiene configurada la entrada con Microsoft. Faltan las variables
-            AUTH_MICROSOFT_ENTRA_ID_* (ver docs/acceso.md).
+            La entrada con Microsoft no está disponible todavía. Avisa a un administrador
+            del tablero.
           </p>
         )}
 

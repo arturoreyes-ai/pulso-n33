@@ -47,7 +47,7 @@ export default function Crimen({
     .toSorted((a, b) => b[1].total - a[1].total);
 
   if (municipios.length === 0) {
-    return <p className="text-meta text-tinta-meta">Sin serie mensual en este corte.</p>;
+    return <p className="text-meta text-tinta-meta">Sin serie mensual.</p>;
   }
 
   const filas = municipios.map(([nombre, m]) => ({
@@ -125,7 +125,7 @@ function CrimenZona({ panel, municipio }: { panel: PanelSesnsp; municipio: strin
   const m = panel.municipios[municipio];
   if (m === undefined || m.por_mes.length === 0) {
     return (
-      <p className="text-meta text-tinta-meta">Sin serie mensual para {municipio} en este corte.</p>
+      <p className="text-meta text-tinta-meta">Sin serie mensual para {municipio}.</p>
     );
   }
   const datos = m.por_mes.map((v, k) => ({ mes: MESES_CORTOS[k] ?? String(k + 1), n: v }));
