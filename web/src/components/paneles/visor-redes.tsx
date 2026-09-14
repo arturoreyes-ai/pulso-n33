@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
 import { BookmarkSimple, ChatCircle, Heart, Play, ShareFat } from "@phosphor-icons/react";
 import { useRedes, useTikTok } from "@/lib/datos/hooks";
 import { reunirPublicaciones, type PublicacionVisual, type RedVisual } from "@/lib/dominio/publicaciones";
 import { fechaCorta, hace, hora, numero } from "@/lib/dominio/formato";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
+import { useEsMovil } from "@/lib/pantalla/movil";
 import { clasesChip } from "@/components/ui/clases";
-import { MedioSocial } from "./medio-social";
+import { EsqueletoMedio, MedioSocial } from "./medio-social";
 
 const FILTROS = [{ id: "todas", nombre: "Todas" }, { id: "instagram", nombre: "Instagram" }, { id: "tiktok", nombre: "TikTok" }] as const;
 
@@ -25,23 +26,42 @@ type Cortes = Partial<Record<RedVisual, string>>;
  * restauran las dos columnas y la barra Anterior / Siguiente; nada se monta
  * dos veces. La altura y el ancho del medio los fija globals.css
  * (`.publicacion-visual`, `.medio-visual`), no clases arbitrarias, porque el
- * numero del margen de ajuste tiene que vivir en un solo lugar. */
+ * numero del margen de ajuste tiene que vivir en un solo lugar.
+ *
+ * Al llegar en el telefono, la primera tarjeta se coloca sola en su sitio en
+ * cuanto hay filas: el lector empieza dentro del recorrido y el encabezado
+ * queda arriba, a un gesto. Una vez por montaje del visor (por zona), nunca al
+ * cambiar de filtro, y nunca si el lector ya se movio mientras cargaba. */
 export default function VisorRedes({ zona }: { zona: ZonaRuta | null }) {
   const instagram = useRedes();
   const tiktok = useTikTok();
   const [filtro, setFiltro] = useState<"todas" | RedVisual>("todas");
+  const llegada = useRef(false);
+  const desplazamientoInicial = useRef(0);
+  useEffect(() => {
+    desplazamientoInicial.current = window.scrollY;
+  }, []);
   const publicaciones = useMemo(() => reunirPublicaciones(instagram.data, tiktok.data, zona), [instagram.data, tiktok.data, zona]);
   const filas = useMemo(() => publicaciones.filter((fila) => filtro === "todas" || fila.red === filtro), [publicaciones, filtro]);
   const cortes: Cortes = { instagram: instagram.data?.generado, tiktok: tiktok.data?.generado };
+  // Una plataforma del filtro actual sin datos y sin error: todavia carga.
+  const cargando =
+    (filtro !== "tiktok" && !instagram.data && !instagram.error) ||
+    (filtro !== "instagram" && !tiktok.data && !tiktok.error);
+  const esqueleto = filas.length === 0 && cargando;
+  const claseEstado = `my-4 text-cuerpo text-tinta-meta ${esqueleto ? "sr-only md:not-sr-only" : ""}`;
   return <>
     <div role="group" aria-label="Plataforma visual" className="flex flex-wrap gap-1.5">
       {FILTROS.map((opcion) => <button key={opcion.id} type="button" className={clasesChip(filtro === opcion.id)} aria-pressed={filtro === opcion.id} onClick={() => setFiltro(opcion.id)}>{opcion.nombre}</button>)}
     </div>
     <p className="my-6 hidden max-w-[65ch] text-lectura text-tinta-prosa md:block">Una selección de publicaciones recientes, de la más nueva a la más antigua.</p>
-    {(filtro === "todas" || filtro === "instagram") && !instagram.data ? <p role="status" className="my-4 text-cuerpo text-tinta-meta">{instagram.error ? "Las publicaciones de Instagram no están disponibles." : "Cargando Instagram…"}</p> : null}
-    {(filtro === "todas" || filtro === "tiktok") && !tiktok.data ? <p role="status" className="my-4 text-cuerpo text-tinta-meta">{tiktok.error ? "Las publicaciones de TikTok no están disponibles." : "Cargando TikTok…"}</p> : null}
-    {filas.length ? <Recorrido key={`${filtro}:${filas.map((fila) => fila.clave).join("|")}`} publicaciones={filas} cortes={cortes} /> :
-      <p className="py-8 text-lectura text-tinta-meta">No hay publicaciones disponibles para esta selección. Es un hueco, no un cero.</p>}
+    {(filtro === "todas" || filtro === "instagram") && !instagram.data ? <p role="status" className={claseEstado}>{instagram.error ? "Las publicaciones de Instagram no están disponibles." : "Cargando Instagram…"}</p> : null}
+    {(filtro === "todas" || filtro === "tiktok") && !tiktok.data ? <p role="status" className={claseEstado}>{tiktok.error ? "Las publicaciones de TikTok no están disponibles." : "Cargando TikTok…"}</p> : null}
+    {filas.length
+      ? <Recorrido key={`${filtro}:${filas.map((fila) => fila.clave).join("|")}`} publicaciones={filas} cortes={cortes} completo={!cargando} llegada={llegada} desplazamientoInicial={desplazamientoInicial} />
+      : esqueleto
+        ? <EsqueletoPublicacion />
+        : <p className="py-8 text-lectura text-tinta-meta">No hay publicaciones disponibles para esta selección. Es un hueco, no un cero.</p>}
   </>;
 }
 
@@ -53,11 +73,41 @@ function margenDeAjuste(raiz: HTMLElement): number {
   return primera ? parseFloat(getComputedStyle(primera).scrollMarginTop) || 0 : 0;
 }
 
-function Recorrido({ publicaciones, cortes }: { publicaciones: PublicacionVisual[]; cortes: Cortes }) {
+/** Indice de la tarjeta cuyo borde superior queda mas cerca del margen de
+ *  ajuste, entre las que tocan la pantalla; null si ninguna la toca. */
+function tarjetaMasCercana(raiz: HTMLElement): number | null {
+  const margen = margenDeAjuste(raiz);
+  const candidatas = [...raiz.querySelectorAll<HTMLElement>("[data-indice]")]
+    .map((elemento) => ({ elemento, rectangulo: elemento.getBoundingClientRect() }))
+    .filter(({ rectangulo }) => rectangulo.bottom > margen && rectangulo.top < window.innerHeight)
+    .sort((a, b) => Math.abs(a.rectangulo.top - margen) - Math.abs(b.rectangulo.top - margen));
+  const primera = candidatas[0];
+  return primera ? Number(primera.elemento.dataset.indice) : null;
+}
+
+/** Sin eventos de scroll durante este tiempo se considera que el gesto
+ *  termino. Safari no emite `scrollend`; donde existe, adelanta el asiento. */
+const RETARDO_ASENTAR = 140;
+
+/** El medio montado cambia cuando el desplazamiento ASIENTA, nunca a mitad
+ *  del gesto: la tarjeta que sale sigue viva mientras el dedo la arrastra y la
+ *  que entra monta su medio ya quieta en su sitio. Antes lo decidia un
+ *  IntersectionObserver en cada umbral, y el medio saliente desaparecia con
+ *  media tarjeta todavia en pantalla. Todo lo que se lee aqui sale del DOM o
+ *  de refs, asi que no hay cierres viejos que arrastrar. */
+function Recorrido({ publicaciones, cortes, completo, llegada, desplazamientoInicial }: {
+  publicaciones: PublicacionVisual[];
+  cortes: Cortes;
+  completo: boolean;
+  llegada: RefObject<boolean>;
+  desplazamientoInicial: RefObject<number>;
+}) {
   const contenedor = useRef<HTMLDivElement>(null);
+  const objetivo = useRef<number | null>(null);
   const [actual, setActual] = useState(0);
   const [visible, setVisible] = useState(true);
   const [enPantalla, setEnPantalla] = useState(false);
+  const esMovil = useEsMovil();
   useEffect(() => {
     const cambiar = () => setVisible(document.visibilityState === "visible");
     cambiar();
@@ -67,25 +117,53 @@ function Recorrido({ publicaciones, cortes }: { publicaciones: PublicacionVisual
   useEffect(() => {
     const raiz = contenedor.current;
     if (!raiz) return;
-    const observador = new IntersectionObserver(() => {
-      // Las entradas de otras filas pueden conservar geometria anterior a un
-      // cambio de altura. Comparar rectangulos actuales evita volver al post
-      // anterior al pulsar Siguiente.
-      const margen = margenDeAjuste(raiz);
-      const visibles = [...raiz.querySelectorAll<HTMLElement>("[data-indice]")]
-        .map((elemento) => ({ elemento, rectangulo: elemento.getBoundingClientRect() }))
-        .filter(({ rectangulo }) => rectangulo.bottom > margen && rectangulo.top < window.innerHeight)
-        .sort((a, b) => Math.abs(a.rectangulo.top - margen) - Math.abs(b.rectangulo.top - margen));
-      const primera = visibles[0];
-      setEnPantalla(!!primera);
-      if (primera) setActual(Number(primera.elemento.dataset.indice));
-    }, { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] });
-    raiz.querySelectorAll("[data-indice]").forEach((elemento) => observador.observe(elemento));
-    return () => observador.disconnect();
+    let temporizador: number | undefined;
+    const asentar = () => {
+      window.clearTimeout(temporizador);
+      let indice = tarjetaMasCercana(raiz);
+      // Si el lector pulso Anterior / Siguiente, ese destino manda mientras
+      // toque la pantalla: la ultima tarjeta puede no alcanzar el margen.
+      if (objetivo.current !== null) {
+        const pedido = raiz.querySelector<HTMLElement>(`[data-indice="${objetivo.current}"]`)?.getBoundingClientRect();
+        if (pedido && pedido.bottom > 0 && pedido.top < window.innerHeight) indice = objetivo.current;
+        objetivo.current = null;
+      }
+      setEnPantalla(indice !== null);
+      if (indice !== null) setActual(indice);
+    };
+    const aplazar = () => {
+      window.clearTimeout(temporizador);
+      temporizador = window.setTimeout(asentar, RETARDO_ASENTAR);
+    };
+    window.addEventListener("scroll", aplazar, { passive: true });
+    window.addEventListener("resize", aplazar);
+    if ("onscrollend" in window) window.addEventListener("scrollend", asentar);
+    asentar();
+    return () => {
+      window.clearTimeout(temporizador);
+      window.removeEventListener("scroll", aplazar);
+      window.removeEventListener("resize", aplazar);
+      window.removeEventListener("scrollend", asentar);
+    };
   }, []);
+  useEffect(() => {
+    if (!esMovil || !completo || llegada.current) return;
+    llegada.current = true; // una vez por montaje del visor, nunca al cambiar de filtro
+    const raiz = contenedor.current;
+    const primera = raiz?.querySelector<HTMLElement>('[data-indice="0"]');
+    if (!raiz || !primera) return;
+    // No pelear con el lector: si ya se desplazo mientras cargaba, o si la
+    // primera tarjeta ya esta en su sitio o mas arriba, la pagina es suya.
+    if (Math.abs(window.scrollY - desplazamientoInicial.current) > 24) return;
+    if (primera.getBoundingClientRect().top <= margenDeAjuste(raiz) + 1) return;
+    // El apagado global de movimiento del CSS no alcanza a un scroll pedido
+    // desde JS, asi que se consulta aqui.
+    const reducido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    primera.scrollIntoView({ block: "start", behavior: reducido ? "instant" : "smooth" });
+  }, [esMovil, completo, llegada, desplazamientoInicial]);
   function ir(indice: number) {
-    const destino = contenedor.current?.querySelector<HTMLElement>(`[data-indice="${indice}"]`);
-    destino?.scrollIntoView({ behavior: "instant", block: "start" });
+    objetivo.current = indice;
+    contenedor.current?.querySelector<HTMLElement>(`[data-indice="${indice}"]`)?.scrollIntoView({ behavior: "instant", block: "start" });
     setActual(indice);
   }
   const total = publicaciones.length;
@@ -124,13 +202,13 @@ function Publicacion({ fila, indice, total, corte, activo }: { fila: Publicacion
   const antiguedad = corte ? hace(iso, corte) : "";
   const cuando = antiguedad ? `hace ${antiguedad}` : `${fechaCorta(iso)}${fila.post.publicado ? ` · ${hora(fila.post.publicado)}` : ""}`;
   return <article data-indice={indice} aria-label={`Publicación ${indice + 1} de ${total}`}
-    className="publicacion-visual relative -mx-4 flex flex-col md:mx-0 md:grid md:grid-cols-2 md:items-start md:gap-12 md:border-b md:border-filo md:py-8">
+    className="publicacion-visual -mx-4 flex flex-col md:mx-0 md:grid md:grid-cols-2 md:items-start md:gap-12 md:border-b md:border-filo md:py-8">
     <EspacioMedio publicacion={fila} activo={activo} />
     {/* La banda del titular va DEBAJO del medio, en flujo, no encima: encima
         taparia el pie propio de Instagram (autor, enlace) y exigiria juegos de
         pointer-events sobre el iframe. En telefono cabe en dos lineas de
         titular; la columna de escritorio lo muestra entero. */}
-    <div className="min-w-0 px-4 pb-6 md:self-center md:px-0 md:pb-0">
+    <div className="relative min-w-0 px-4 pb-6 md:static md:self-center md:px-0 md:pb-0">
       <h2 className="line-clamp-2 break-words text-cuerpo text-tinta-titulo md:line-clamp-none md:text-rotulo">{fila.post.titulo || "Publicación sin título"}</h2>
       <p className="mt-2 text-meta text-tinta-meta md:mt-4 md:text-cuerpo md:text-tinta-prosa">
         {fila.fuente} · {RED_NOMBRE[fila.red]} · <time dateTime={iso}>{cuando}</time> · {lugar(fila)}
@@ -138,8 +216,10 @@ function Publicacion({ fila, indice, total, corte, activo }: { fila: Publicacion
       {/* Cinco cifras siempre, con «sin dato» donde la plataforma no publica
           la cifra: Instagram no expone compartidos ni guardados. Omitir la fila
           esconderia el hueco; un 0 lo mentiria. En telefono es una columna al
-          costado del medio, sobre el margen que EspacioMedio le deja. */}
-      <dl className="absolute right-3 bottom-40 flex w-14 flex-col items-center gap-4 md:static md:my-6 md:grid md:w-auto md:grid-cols-2 md:gap-4">
+          costado del medio, anclada a la banda (`bottom-full`): queda justo
+          encima de ella tenga el titular una o dos lineas, sobre el margen que
+          EspacioMedio le deja al medio. */}
+      <dl className="absolute right-3 bottom-full mb-4 flex w-14 flex-col items-center gap-4 md:static md:my-6 md:grid md:w-auto md:grid-cols-2 md:gap-4">
         {CIFRAS.map(([nombre, campo, Icono]) => {
           const valor = fila.post[campo];
           return <div key={campo} className="flex flex-col items-center md:items-start">
@@ -161,26 +241,47 @@ function Publicacion({ fila, indice, total, corte, activo }: { fila: Publicacion
   </article>;
 }
 
-/** Mantiene la altura ya medida al desmontar el medio. Sin esta reserva,
- * salir de un reel alto desplaza el siguiente post bajo el dedo. */
+const CLASES_MARCO_MEDIO = "flex flex-1 items-center justify-center px-4 pt-4 pr-20 md:block md:px-0 md:pt-0";
+
+/** Mantiene la altura ya medida al desmontar el medio. La reserva parte del
+ * esqueleto, que es la forma esperada, y solo crece con lo medido: asi el
+ * iframe de Instagram, que nace a 24px, no encoge la tarjeta ni la agranda al
+ * aterrizar, y salir de un reel alto no desplaza el siguiente post bajo el
+ * dedo. Las tarjetas inactivas muestran el esqueleto quieto, sin pulso: es una
+ * forma en reposo, no una carga en curso. */
 function EspacioMedio({ publicacion, activo }: { publicacion: PublicacionVisual; activo: boolean }) {
   const espacio = useRef<HTMLDivElement>(null);
   const [altura, setAltura] = useState(0);
   useEffect(() => {
     const elemento = espacio.current;
     if (!elemento || !activo) return;
-    const observador = new ResizeObserver(() => {
-      const medida = Math.ceil(elemento.getBoundingClientRect().height);
+    const observador = new ResizeObserver((entradas) => {
+      const medida = Math.ceil(entradas[0]?.contentRect.height ?? 0);
       setAltura((anterior) => Math.max(anterior, medida));
     });
     observador.observe(elemento);
     return () => observador.disconnect();
   }, [activo]);
-  return <div className="flex flex-1 items-center justify-center px-4 pt-4 pr-20 md:block md:px-0 md:pt-0">
+  return <div className={CLASES_MARCO_MEDIO}>
     <div className="medio-visual mx-auto md:w-full md:max-w-[24rem]" style={{ minHeight: altura || undefined }}>
-      <div ref={espacio} className="min-h-[32rem]">
-        {activo ? <MedioSocial publicacion={publicacion} /> : <div className="flex min-h-[32rem] items-center justify-center bg-carta text-cuerpo text-tinta-meta">{RED_NOMBRE[publicacion.red]}</div>}
+      <div ref={espacio}>
+        {activo ? <MedioSocial publicacion={publicacion} /> : <EsqueletoMedio red={publicacion.red} tipo={publicacion.post.tipo} pulsar={false} />}
       </div>
     </div>
   </div>;
+}
+
+/** Mientras no hay filas, una tarjeta con la geometria de una real, para que
+ *  la primera publicacion sustituya al esqueleto en su sitio y no empuje la
+ *  pagina. Solo en telefono: en escritorio basta la linea de estado. */
+function EsqueletoPublicacion() {
+  return <article aria-hidden className="publicacion-visual -mx-4 flex flex-col md:hidden">
+    <div className={CLASES_MARCO_MEDIO}>
+      <div className="medio-visual mx-auto"><EsqueletoMedio red="instagram" tipo="imagen" /></div>
+    </div>
+    <div className="animate-pulse px-4 pb-6">
+      <div className="h-5 w-10/12 rounded-etiqueta bg-vela" />
+      <div className="mt-3 h-3 w-1/2 rounded-etiqueta bg-vela" />
+    </div>
+  </article>;
 }

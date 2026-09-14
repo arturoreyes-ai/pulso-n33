@@ -390,15 +390,21 @@ textarea {
    En telefono cada tarjeta mide la pantalla menos la pildora y un respiro, y
    el medio se ajusta por ALTO, no por ancho: un 9:16 a todo lo ancho de un
    telefono mide mas que la pantalla. --visor-reserva es lo que no es medio:
-   respiro arriba, banda del titular abajo y el boton de recarga. Se midio, no
-   se deduce; si cambia la banda, se ajusta aqui. `svh` y no `dvh`: `dvh` cambia
-   al esconderse la barra del navegador y recolocaria las tarjetas a mitad del
-   gesto. El observer del visor lee el margen con getComputedStyle, asi que
-   este es el UNICO lugar donde vive ese numero. */
+   respiro arriba y banda del titular abajo. Se midio, no se deduce; si cambia
+   la banda, se ajusta aqui. `svh` y no `dvh`: `dvh` cambia al esconderse la
+   barra del navegador y recolocaria las tarjetas a mitad del gesto.
+
+   `scroll-snap-stop: always` hace que un gesto mueva UNA tarjeta: un impulso
+   fuerte no se salta la siguiente. Convive con `proximity`: solo impide pasar
+   por encima de un punto de ajuste, no obliga a caer en uno. El JS del visor
+   cambia el medio montado al ASENTAR el desplazamiento (scrollend, o 140 ms
+   sin eventos), nunca a mitad del gesto, y lee el margen de ajuste con
+   getComputedStyle: este es el UNICO lugar donde vive ese numero. */
 html:has(.recorrido-visual) { scroll-snap-type: y proximity; }
 .publicacion-visual {
   --visor-reserva: 12.5rem;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
   scroll-margin-top: calc(var(--nav-alto) + 1rem);
   min-height: calc(100svh - var(--nav-alto) - 1rem);
 }
