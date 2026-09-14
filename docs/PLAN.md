@@ -1,3 +1,5 @@
+> **Implementación · 14 de septiembre de 2026 — Visual en el teléfono.** En pantallas angostas la página de redes abre en Visual: cada publicación ocupa la pantalla, se pasa de una a otra con el gesto de desplazar, y debajo van el titular, la antigüedad y el lugar, con las cifras al costado; lo que la plataforma no publica se dice «sin dato», nunca 0. En escritorio Lista sigue siendo la entrada inicial y la disposición a dos columnas no cambia. Sigue montado un solo medio a la vez; la publicación de Instagram conserva su altura propia y puede exceder una pantalla. No cambia la ingesta, el límite de selección ni la retención.
+
 > **Implementación · 14 de septiembre de 2026 — Redes visuales.** Se añade Lista / Visual; Lista sigue siendo la entrada inicial. Visual reúne la selección existente de Instagram y TikTok, con filtros por plataforma y zona, mediante publicaciones incrustadas oficiales. Solo un medio permanece montado; los comentarios siguen en Lista. No cambia la ingesta, el límite de selección ni la retención. La disponibilidad de cada publicación depende de su plataforma.
 
 <!-- Documento del cliente, copiado tal cual. Las divergencias de la

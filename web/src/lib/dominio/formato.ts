@@ -126,6 +126,23 @@ function edad(fecha: Date, corte: number): string {
   return `${Math.floor(d / 30)} me`;
 }
 
+/**
+ * «3 h», «5 d», «2 me» de una publicacion medida contra el corte de SU
+ * plataforma, nunca contra Date.now(): servidor y cliente deben pintar lo
+ * mismo, y una pestana abierta desde ayer no debe envejecer sola. Vacio si
+ * alguna de las dos fechas no se puede leer o la publicacion es posterior al
+ * corte. El visor de redes lo usa con `generado` de cada archivo.
+ */
+export function hace(iso: string, corte: string): string {
+  const fecha = new Date(iso);
+  const limite = new Date(corte).getTime();
+  if (Number.isNaN(fecha.getTime()) || !Number.isFinite(limite)) return "";
+  const texto = edad(fecha, limite);
+  // «hace 0 h» es aritmetica, no lenguaje: lo publicado dentro de la hora del
+  // corte se dice como lo diria una persona.
+  return texto === "0 h" ? "menos de 1 h" : texto;
+}
+
 export interface Cuando {
   principal: string;
   edad: string;

@@ -2,7 +2,6 @@
 
 import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
-import { clasesChip } from "@/components/ui/clases";
 import type { PublicacionVisual } from "@/lib/dominio/publicaciones";
 
 type VentanaInstagram = Window & { instgrm?: { Embeds: { process: () => void } } };
@@ -71,6 +70,6 @@ export function MedioSocial({ publicacion }: { publicacion: PublicacionVisual })
         : <MedioTikTok key={intento} url={publicacion.url} fallar={() => setFallo(true)} />}
     {/* Un iframe cargado puede contener un rechazo del proveedor. El enlace y
         el reintento siguen disponibles aunque el navegador no emita error. */}
-    <button type="button" className={`${clasesChip(false)} mt-4`} onClick={() => { setFallo(false); setIntento((valor) => valor + 1); }}>Volver a cargar</button>
+    <button type="button" className="mt-2 text-meta text-tinta-meta transition-colors hover:text-tinta-titulo" onClick={() => { setFallo(false); setIntento((valor) => valor + 1); }}>Volver a cargar</button>
   </div>;
 }

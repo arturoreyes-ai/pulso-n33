@@ -4,6 +4,7 @@ import { useState, type ReactNode } from "react";
 import { preload } from "swr";
 import dynamic from "next/dynamic";
 import type { ZonaRuta } from "@/lib/dominio/zonas";
+import { useEsMovil } from "@/lib/pantalla/movil";
 
 const VisorRedes = dynamic(() => import("./visor-redes"), {
   loading: () => <p role="status" className="py-8 text-lectura text-tinta-meta">Cargando publicaciones…</p>,
@@ -40,6 +41,14 @@ import { leerJson } from "@/lib/datos/fetcher";
  * X entro el 11 de septiembre de 2026 como cuarta faceta. No trae comentarios
  * sino el ranking de tendencias de X por ubicacion, pero es la misma pregunta
  * -- de que se habla -- en otro lugar, y por eso va aqui y no en una seccion.
+ *
+ * LISTA / VISUAL, 14 de septiembre de 2026. Visual es la entrada del telefono
+ * y Lista la del escritorio: en una pantalla angosta el lector quiere ver las
+ * publicaciones, no leer una tabla de ellas. El servidor pinta siempre Lista
+ * (los dos HTML deben coincidir y la prosa de los paneles tiene que viajar en
+ * el HTML, ver arriba) y el telefono cambia tras la hidratacion con
+ * `useEsMovil`. El toque del lector manda sobre el ancho: `eleccion` es null
+ * hasta que pulsa Lista o Visual, y desde entonces gana al breakpoint.
  */
 
 const REDES = [
@@ -56,14 +65,16 @@ export type Red = (typeof REDES)[number]["id"];
 const INICIAL: Red = "instagram";
 
 export function SelectorRed({ paneles, zona }: { paneles: Record<Red, ReactNode>; zona: ZonaRuta | null }) {
-  const [visual, setVisual] = useState(false);
+  const esMovil = useEsMovil();
+  const [eleccion, setEleccion] = useState<boolean | null>(null);
+  const visual = eleccion ?? esMovil;
   const [red, setRed] = useState<Red>(INICIAL);
 
   return (
     <>
       <div role="group" aria-label="Presentación" className="mb-6 flex gap-1.5">
-        <button type="button" aria-pressed={!visual} className={clasesChip(!visual)} onClick={() => setVisual(false)}>Lista</button>
-        <button type="button" aria-pressed={visual} className={clasesChip(visual)} onClick={() => setVisual(true)}>Visual</button>
+        <button type="button" aria-pressed={!visual} className={clasesChip(!visual)} onClick={() => setEleccion(false)}>Lista</button>
+        <button type="button" aria-pressed={visual} className={clasesChip(visual)} onClick={() => setEleccion(true)}>Visual</button>
       </div>
       {visual ? <VisorRedes key={zona ?? "region"} zona={zona} /> : <>
       <div role="group" aria-label="Plataforma" className="flex flex-wrap gap-1.5">

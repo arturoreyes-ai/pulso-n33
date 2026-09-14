@@ -475,7 +475,14 @@ Tailwind v4, pnpm.
   and X are one view (`redes`) with a facet selector, not four sections. They
   are the same question asked in four places, and only one panel mounts at a
   time because each is an island that fetches its own JSON. X is trends, not
-  comments (`paneles/tendencias.tsx`).
+  comments (`paneles/tendencias.tsx`). Since 14 September 2026 the page also
+  has a Lista / Visual toggle (`paneles/selector-red.tsx`): Visual
+  (`paneles/visor-redes.tsx`, Instagram and TikTok embeds, one mounted at a
+  time, full-viewport snap cards on phones) is the default below `md` and
+  Lista stays the default on desktop. The server always renders Lista and a
+  phone switches after hydration from a `(min-width: 48rem)` media query
+  (`lib/pantalla/movil.ts`), so the two HTMLs match and Lista's prose still
+  ships as HTML; the reader's tap overrides the breakpoint.
 - **Live Google News never becomes a `Nota`.** `/api/buscar` (search) and
   `/api/actualidad` (the México / World section the wall shows when its
   scope is `mexico` or `internacional` and nothing is typed, and the
