@@ -335,8 +335,14 @@ class TestNotasRotas(unittest.TestCase):
 
     def test_fuente_inexistente(self):
         d = copy.deepcopy(self.datos)
-        d["notas"][0]["fuente"] = "elpais"
-        d["notas"][0]["id"] = id_nota("elpais", d["notas"][0]["titulo"])
+        # La primera fila ya puede venir de Google Noticias. Ese contrato
+        # admite una fuente sintetica y no prueba la rama del catalogo; se
+        # altera deliberadamente una nota de un feed conocido.
+        ids_medios = {m["id"] for m in self.medios}
+        nota = next(n for n in d["notas"] if n["fuente"] in ids_medios
+                    and n.get("origen") is None)
+        nota["fuente"] = "elpais"
+        nota["id"] = id_nota("elpais", nota["titulo"])
         errores, _ = validar_notas(d, self.roster, self.medios)
         self.assertTrue(any("no esta en config/medios.json" in e for e in errores))
 
@@ -366,7 +372,10 @@ class TestNotasRotas(unittest.TestCase):
 
     def test_zona_medio_que_no_es_la_del_medio(self):
         d = copy.deepcopy(self.datos)
-        d["notas"][0]["zona_medio"] = "Tecate"
+        zonas = {m["id"]: m["zona"] for m in self.medios}
+        nota = next(n for n in d["notas"] if n["fuente"] in zonas
+                    and n.get("origen") is None and zonas[n["fuente"]] != "Tecate")
+        nota["zona_medio"] = "Tecate"
         errores, _ = validar_notas(d, self.roster, self.medios)
         self.assertTrue(any("no coincide con la del medio" in e for e in errores))
 
