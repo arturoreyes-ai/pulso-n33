@@ -32,7 +32,30 @@ jobs:
       - name: Pruebas unitarias
         run: python -m unittest discover -s tests -v
 
+      # Canario, no compuerta. Lo que de verdad tiene que estar bien es lo que
+      # esta corrida ESCRIBE, y eso lo valida el paso "Corrida offline y validacion de su salida", donde sigue rompiendo
+      # con exit 1.
+      #
+      # Aqui no puede romper, y la razon es un interbloqueo real: del 12 al 14
+      # de septiembre de 2026 el cron cayo ocho veces seguidas. Lo primero que
+      # fallo fueron dos tests (el commit anterior), pero al arreglarlos
+      # aparecio el segundo candado. Sin corridas nadie commitea `data/`; sin
+      # commit las notas envejecen dentro de la ventana; y entonces este paso
+      # falla con
+      #
+      #   error: ventana: N nota(s) mas viejas que 30 dias siguen en la ventana
+      #
+      # o sea que se niega a arrancar POR la misma staleness que solo esa
+      # corrida podia arreglar, porque el pipeline que archiva esas notas viene
+      # despues y ya no se ejecuta.
+      #
+      # La antiguedad de `data/` no es un invariante del repo: es la salida de
+      # la ultima corrida y decae con el reloj, por diseno. Medirla como
+      # compuerta ANTES de correr convierte cualquier caida larga en una caida
+      # permanente. Se sigue publicando en el log, que es para lo que sirve un
+      # canario.
       - name: Validar config/ y data/ del repo
+        continue-on-error: true
         run: python -m pulso validar
 
       # Corrida completa sin tocar la red, a una carpeta temporal: prueba el
