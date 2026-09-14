@@ -593,6 +593,14 @@ Vercel builds it and the pipeline does not re-run. **Never use an empty commit
 for this**: it matches no ignored path, so it starts a full ingest — including
 the paid Apify actors.
 
+And do not let the skip token appear **anywhere in that commit's message**,
+body included. Both GitHub Actions and Vercel scan the whole message, not just
+the subject line, so a commit that merely *quotes* the token in prose is
+skipped by both — which is how the first attempt at writing this very section
+published nothing: no workflow run, no Vercel build, a commit sitting on `main`
+doing exactly what it was describing. Refer to it in prose as "the skip token"
+and keep the literal spelling in files, where it is inert.
+
 Fixing it properly is one of three, and the first is the only one that also
 puts comment text on the site: create the three Vercel secrets and set
 `DESPLEGAR_TABLERO=true`; drop `[skip ci]` from the bot's commit message
