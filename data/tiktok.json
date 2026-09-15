@@ -1,23 +1,23 @@
 {
  "esquema": 1,
- "generado": "2026-09-15T00:46:44+00:00",
+ "generado": "2026-09-15T06:43:54+00:00",
  "plataforma": "tiktok",
  "retencion_dias": 30,
- "comentarios_vigentes": 930,
- "posts_vigentes": 110,
- "opinion": 825,
- "repetidos": 55,
- "reacciones": 98,
+ "comentarios_vigentes": 998,
+ "posts_vigentes": 122,
+ "opinion": 882,
+ "repetidos": 63,
+ "reacciones": 104,
  "por_zona": {
   "Playas de Rosarito": 2,
-  "Tijuana": 544,
-  "nacional": 384
+  "Tijuana": 594,
+  "nacional": 402
  },
  "por_cuenta": {
-  "tk_tijuana_noticias": 930
+  "tk_tijuana_noticias": 998
  },
  "por_idioma": {
-  "es": 930
+  "es": 998
  },
  "por_tema": [
   {
@@ -31,13 +31,13 @@
    "posts": 12
   },
   {
-   "tema": "cambio",
-   "comentarios": 9,
-   "posts": 4
+   "tema": "paso",
+   "comentarios": 10,
+   "posts": 8
   },
   {
-   "tema": "paso",
-   "comentarios": 9,
+   "tema": "casa",
+   "comentarios": 8,
    "posts": 7
   },
   {
@@ -51,17 +51,22 @@
    "posts": 3
   },
   {
-   "tema": "casa",
-   "comentarios": 7,
-   "posts": 6
-  },
-  {
    "tema": "despues",
    "comentarios": 7,
    "posts": 5
   },
   {
+   "tema": "federal",
+   "comentarios": 2,
+   "posts": 2
+  },
+  {
    "tema": "proceso",
+   "comentarios": 2,
+   "posts": 2
+  },
+  {
+   "tema": "trabajadores",
    "comentarios": 2,
    "posts": 2
   },
@@ -86,15 +91,15 @@
    "posts": 1
   },
   {
-   "tema": "federal",
+   "tema": "grito",
    "comentarios": 1,
    "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 86,
-  "negativo": 415,
-  "neutral": 324,
+  "positivo": 89,
+  "negativo": 444,
+  "neutral": 349,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -144,6 +149,31 @@
      "comentarios": 1
     }
    ]
+  },
+  {
+   "url": "https://www.tiktok.com/@soysaidrodriguez/video/7685519494382374162",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "Tijuana",
+   "fecha": "2026-09-14",
+   "titulo": "Última hora: Confirmado, Gilberto Mora NO jugará con Xolos de Tijuana el próximo partido",
+   "tipo": "video",
+   "likes": 4185,
+   "comentarios": 19,
+   "reproducciones": 45816,
+   "creador": "@soysaidrodriguez",
+   "publicado": "2026-09-14T22:20:58+00:00",
+   "compartidos": 130,
+   "guardados": 369,
+   "cosechados": 2,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
   },
   {
    "url": "https://www.tiktok.com/@nmasunivision/video/7685345865451490574",
@@ -273,36 +303,6 @@
    ]
   },
   {
-   "url": "https://www.tiktok.com/@latinanoticias/video/7685217226240052488",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "nacional",
-   "fecha": "2026-09-14",
-   "titulo": "🚨 Nuevas imágenes obtenidas por la Unidad de Investigación de Latina Noticias reconstruyen el recorrido de la camioneta blanca antes y después del múltiple cri…",
-   "tipo": "video",
-   "likes": 3098,
-   "comentarios": 84,
-   "reproducciones": 82903,
-   "creador": "@latinanoticias",
-   "publicado": "2026-09-14T02:48:01+00:00",
-   "compartidos": 78,
-   "guardados": 218,
-   "cosechados": 27,
-   "opinion": 27,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 20,
-    "neutral": 6,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "bajo",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
    "url": "https://www.tiktok.com/@siempreenlanoticia/video/7685432254897802516",
    "cuenta": "tk_tijuana_noticias",
    "zona": "Tijuana",
@@ -326,36 +326,6 @@
     "sin_modelo_idioma": 0
    },
    "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@canal33tijuana/video/7685212523741678855",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "Más de 500 bicicletas abandonadas llegarán a Tijuana para ser donadas",
-   "tipo": "video",
-   "likes": 1191,
-   "comentarios": 128,
-   "reproducciones": 66381,
-   "creador": "@canal33tijuana",
-   "publicado": "2026-09-14T02:29:53+00:00",
-   "compartidos": 84,
-   "guardados": 77,
-   "cosechados": 30,
-   "opinion": 30,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 11,
-    "neutral": 19,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "gobierno",
-     "comentarios": 1
-    }
-   ]
   },
   {
    "url": "https://www.tiktok.com/@limonverdenoticias/video/7685403537995549983",
@@ -383,10 +353,6 @@
    "temas": [
     {
      "tema": "bajo",
-     "comentarios": 1
-    },
-    {
-     "tema": "cambio",
      "comentarios": 1
     },
     {
@@ -421,25 +387,25 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@soysaidrodriguez/video/7685519494382374162",
+   "url": "https://www.tiktok.com/@juanma.x2/video/7685574901092093191",
    "cuenta": "tk_tijuana_noticias",
    "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "Última hora: Confirmado, Gilberto Mora NO jugará con Xolos de Tijuana el próximo partido",
+   "fecha": "2026-09-15",
+   "titulo": "Drop Shop Llega a Tijuana este fin de semana",
    "tipo": "video",
-   "likes": 556,
-   "comentarios": 4,
-   "reproducciones": 6565,
-   "creador": "@soysaidrodriguez",
-   "publicado": "2026-09-14T22:20:58+00:00",
-   "compartidos": 21,
-   "guardados": 63,
-   "cosechados": 2,
-   "opinion": 2,
+   "likes": 452,
+   "comentarios": 15,
+   "reproducciones": 9919,
+   "creador": "@juanma.x2",
+   "publicado": "2026-09-15T01:56:03+00:00",
+   "compartidos": 126,
+   "guardados": 76,
+   "cosechados": 12,
+   "opinion": 10,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 1,
-    "neutral": 1,
+    "negativo": 3,
+    "neutral": 7,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -515,67 +481,50 @@
    "compartidos": 2,
    "guardados": 4,
    "cosechados": 6,
-   "opinion": 6,
+   "opinion": 5,
    "sentimiento": {
     "positivo": 0,
     "negativo": 1,
+    "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@soy.mr.oso.tijian/video/7685438296675159316",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "Tijuana",
+   "fecha": "2026-09-14",
+   "titulo": "#tijuana #rosarito #fyp #fyp #foryoupage❤️❤️",
+   "tipo": "video",
+   "likes": 256,
+   "comentarios": 51,
+   "reproducciones": 6950,
+   "creador": "@soy.mr.oso.tijian",
+   "publicado": "2026-09-14T17:05:53+00:00",
+   "compartidos": 7,
+   "guardados": 12,
+   "cosechados": 28,
+   "opinion": 27,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 20,
     "neutral": 5,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@teconectaradio/video/7685236961065323796",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "Un grupo de jóvenes de entre 20 a 30 que años que se encontraban conviviendo en calles de la colonia Francisco Villa o Barrio 5 de Guadalajara fueron agredidos…",
-   "tipo": "video",
-   "likes": 276,
-   "comentarios": 2,
-   "reproducciones": 12749,
-   "creador": "@teconectaradio",
-   "publicado": "2026-09-14T04:04:34+00:00",
-   "compartidos": 28,
-   "guardados": 16,
-   "cosechados": 2,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@frontera.info/video/7685189611689135368",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "🚲 Bicicletas abandonadas en Nevada llegarán a Tijuana para apoyar a colectivos y albergues 👇",
-   "tipo": "video",
-   "likes": 249,
-   "comentarios": 28,
-   "reproducciones": 17883,
-   "creador": "@frontera.info",
-   "publicado": "2026-09-14T01:00:34+00:00",
-   "compartidos": 27,
-   "guardados": 17,
-   "cosechados": 23,
-   "opinion": 22,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 9,
-    "neutral": 12,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": [
     {
      "tema": "casa",
+     "comentarios": 1
+    },
+    {
+     "tema": "federal",
+     "comentarios": 1
+    },
+    {
+     "tema": "paso",
      "comentarios": 1
     }
    ]
@@ -612,13 +561,13 @@
    "fecha": "2026-09-14",
    "titulo": "Marea baja deja al descubierto estrellas de mar y otras especies en Rosarito 🌊⭐",
    "tipo": "video",
-   "likes": 159,
+   "likes": 189,
    "comentarios": 2,
-   "reproducciones": 4425,
+   "reproducciones": 5334,
    "creador": "@canal33tijuana",
    "publicado": "2026-09-14T13:55:55+00:00",
-   "compartidos": 13,
-   "guardados": 7,
+   "compartidos": 14,
+   "guardados": 8,
    "cosechados": 2,
    "opinion": 2,
    "sentimiento": {
@@ -631,55 +580,50 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@noticiaslawuera/video/7685237124945202462",
+   "url": "https://www.tiktok.com/@tvaztecabc/video/7685610486053948690",
    "cuenta": "tk_tijuana_noticias",
    "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "Junta toda la gente que ya se vengan, todos fueron las palabras del padrino Alexis de patrulla espiritual#patrullaespiritual #mexico #tijuana #🤣 @Patrulla Espi…",
+   "fecha": "2026-09-15",
+   "titulo": "¡Sin luz para entrar a la Feria de Tijuana! Las personas que acuden han denunciado que no hay lámparas que iluminen para llegar al recinto desde donde de estac…",
    "tipo": "video",
-   "likes": 138,
-   "comentarios": 12,
-   "reproducciones": 22434,
-   "creador": "@noticiaslawuera",
-   "publicado": "2026-09-14T04:05:26+00:00",
-   "compartidos": 4,
-   "guardados": 8,
-   "cosechados": 7,
-   "opinion": 6,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 4,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "paso",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
-   "url": "https://www.tiktok.com/@noticiastijuananews/video/7685242442605546759",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "🇲🇽🚴 Isaac del Toro lo vuelve a hacer, ganó el Gran Premio de Montreal",
-   "tipo": "video",
-   "likes": 110,
-   "comentarios": 1,
-   "reproducciones": 2391,
-   "creador": "@noticiastijuananews",
-   "publicado": "2026-09-14T04:25:55+00:00",
-   "compartidos": 4,
-   "guardados": 2,
+   "likes": 155,
+   "comentarios": 2,
+   "reproducciones": 3050,
+   "creador": "@tvaztecabc",
+   "publicado": "2026-09-15T04:14:04+00:00",
+   "compartidos": 2,
+   "guardados": 6,
    "cosechados": 1,
    "opinion": 0,
    "sentimiento": {
     "positivo": 0,
     "negativo": 0,
     "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@katrina.waters3/video/7685544737448693023",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-14",
+   "titulo": "¡Invasión en México! Trump construye muro sin permiso#Shorts",
+   "tipo": "video",
+   "likes": 107,
+   "comentarios": 9,
+   "reproducciones": 7347,
+   "creador": "@katrina.waters3",
+   "publicado": "2026-09-14T23:58:59+00:00",
+   "compartidos": 8,
+   "guardados": 5,
+   "cosechados": 3,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -711,6 +655,61 @@
    "temas": []
   },
   {
+   "url": "https://www.tiktok.com/@tvaztecabc/video/7685615934681206024",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "Tijuana",
+   "fecha": "2026-09-15",
+   "titulo": "Un vehículo terminó dentro de un restaurante de comida en la colonia Cacho en #Tijuana, aunque no hubo personas lesionadas, aún se investiga la causa del accid…",
+   "tipo": "video",
+   "likes": 104,
+   "comentarios": 2,
+   "reproducciones": 2519,
+   "creador": "@tvaztecabc",
+   "publicado": "2026-09-15T04:35:09+00:00",
+   "compartidos": 4,
+   "guardados": 5,
+   "cosechados": 2,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@dafinemendoza/video/7685510708229934359",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-15",
+   "titulo": "#ICE #deportacionesmasivas #operativo #inmigrantes #noticias",
+   "tipo": "video",
+   "likes": 100,
+   "comentarios": 6,
+   "reproducciones": 2731,
+   "creador": "@dafinemendoza",
+   "publicado": "2026-09-15T00:05:00+00:00",
+   "compartidos": 18,
+   "guardados": 12,
+   "cosechados": 5,
+   "opinion": 5,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 1,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "trabajadores",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
    "url": "https://www.tiktok.com/@creeenlanoticia/video/7685283525477534977",
    "cuenta": "tk_tijuana_noticias",
    "zona": "nacional",
@@ -736,15 +735,65 @@
    "temas": []
   },
   {
+   "url": "https://www.tiktok.com/@alerta360bcmx/video/7685449108353453328",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "Tijuana",
+   "fecha": "2026-09-14",
+   "titulo": "🚨 ÚLTIMA HORA | MUJER ES IDENTIFICADA TRAS CAER DE VIADUCTO EN TIJUANA",
+   "tipo": "video",
+   "likes": 80,
+   "comentarios": 6,
+   "reproducciones": 14777,
+   "creador": "@alerta360bcmx",
+   "publicado": "2026-09-14T17:48:20+00:00",
+   "compartidos": 64,
+   "guardados": 24,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@tvaztecabc/video/7685582310510464274",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "Tijuana",
+   "fecha": "2026-09-15",
+   "titulo": "ACCIDENTE en #Tijuana",
+   "tipo": "video",
+   "likes": 77,
+   "comentarios": 0,
+   "reproducciones": 2141,
+   "creador": "@tvaztecabc",
+   "publicado": "2026-09-15T02:24:45+00:00",
+   "compartidos": 0,
+   "guardados": 1,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.tiktok.com/@noticiastj_/video/7685448024872520980",
    "cuenta": "tk_tijuana_noticias",
    "zona": "Tijuana",
    "fecha": "2026-09-14",
    "titulo": "#Tijuana Vecina cansada de estos adolescentes que pasan a exceso de velocidad en el Mariano Matamoros, los grabo para exbirlos.",
    "tipo": "video",
-   "likes": 66,
+   "likes": 69,
    "comentarios": 9,
-   "reproducciones": 2229,
+   "reproducciones": 2363,
    "creador": "@noticiastj_",
    "publicado": "2026-09-14T17:43:37+00:00",
    "compartidos": 3,
@@ -766,45 +815,45 @@
    ]
   },
   {
-   "url": "https://www.tiktok.com/@infobajadirecto/video/7685213971900730642",
+   "url": "https://www.tiktok.com/@_losmejores_videos/video/7685568362457533703",
    "cuenta": "tk_tijuana_noticias",
-   "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "Las aventuras de nuestro querido y afamado Ismael Bergueño.#IsmaelBurgueño",
+   "zona": "nacional",
+   "fecha": "2026-09-15",
+   "titulo": "Chiquilín de la patrulla 🚓 espiritual candidato municipal independiente en octubre 😧😱😨😳🤯😲😯😦😮😧😱😰#noticias",
    "tipo": "video",
-   "likes": 46,
-   "comentarios": 6,
-   "reproducciones": 1199,
-   "creador": "@infobajadirecto",
-   "publicado": "2026-09-14T02:35:24+00:00",
-   "compartidos": 11,
-   "guardados": 1,
-   "cosechados": 4,
-   "opinion": 1,
+   "likes": 61,
+   "comentarios": 18,
+   "reproducciones": 2008,
+   "creador": "@_losmejores_videos",
+   "publicado": "2026-09-15T01:30:44+00:00",
+   "compartidos": 4,
+   "guardados": 2,
+   "cosechados": 12,
+   "opinion": 11,
    "sentimiento": {
-    "positivo": 1,
-    "negativo": 0,
-    "neutral": 0,
+    "positivo": 0,
+    "negativo": 3,
+    "neutral": 8,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@charito_ac/video/7685260490926279956",
+   "url": "https://www.tiktok.com/@ndtnoticiasdetijuana/video/7685564971362798866",
    "cuenta": "tk_tijuana_noticias",
    "zona": "nacional",
-   "fecha": "2026-09-14",
-   "titulo": "#noticia #victorlarcoherrera #trujillo #trujilloperu #trux",
+   "fecha": "2026-09-15",
+   "titulo": "Buscaban una fuga de agua y provocan escape de gas en Lomas de Agua Caliente...",
    "tipo": "video",
-   "likes": 29,
-   "comentarios": 0,
-   "reproducciones": 3582,
-   "creador": "@charito_ac",
-   "publicado": "2026-09-14T05:35:54+00:00",
-   "compartidos": 8,
-   "guardados": 3,
-   "cosechados": 0,
+   "likes": 28,
+   "comentarios": 1,
+   "reproducciones": 668,
+   "creador": "@ndtnoticiasdetijuana",
+   "publicado": "2026-09-15T01:17:36+00:00",
+   "compartidos": 2,
+   "guardados": 0,
+   "cosechados": 1,
    "opinion": 0,
    "sentimiento": {
     "positivo": 0,
@@ -841,59 +890,29 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@katrina.waters3/video/7685544737448693023",
+   "url": "https://www.tiktok.com/@tijuananoticias/video/7685539614450257169",
    "cuenta": "tk_tijuana_noticias",
-   "zona": "nacional",
+   "zona": "Mexicali",
    "fecha": "2026-09-14",
-   "titulo": "¡Invasión en México! Trump construye muro sin permiso#Shorts",
+   "titulo": "¡Edén Muñoz llega a Mexicali para celebrar las Fiestas Patrias! 🤠",
    "tipo": "video",
-   "likes": 11,
-   "comentarios": 3,
-   "reproducciones": 330,
-   "creador": "@katrina.waters3",
-   "publicado": "2026-09-14T23:58:59+00:00",
-   "compartidos": 1,
-   "guardados": 1,
-   "cosechados": 3,
-   "opinion": 2,
+   "likes": 7,
+   "comentarios": 0,
+   "reproducciones": 219,
+   "creador": "@tijuananoticias",
+   "publicado": "2026-09-14T23:39:57+00:00",
+   "compartidos": 0,
+   "guardados": 0,
+   "cosechados": 0,
+   "opinion": 0,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 1,
-    "neutral": 1,
+    "negativo": 0,
+    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@tittaestrada/video/7685273327753006357",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "nacional",
-   "fecha": "2026-09-14",
-   "titulo": "",
-   "tipo": "video",
-   "likes": 8,
-   "comentarios": 1,
-   "reproducciones": 194,
-   "creador": "@tittaestrada",
-   "publicado": "2026-09-14T06:25:41+00:00",
-   "compartidos": 1,
-   "guardados": 0,
-   "cosechados": 1,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "paso",
-     "comentarios": 1
-    }
-   ]
   },
   {
    "url": "https://www.tiktok.com/@jorgemonge58/video/7685489997557910805",
@@ -924,56 +943,6 @@
      "comentarios": 1
     }
    ]
-  },
-  {
-   "url": "https://www.tiktok.com/@tabasco.al.dia.mx/video/7685272368809315604",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "nacional",
-   "fecha": "2026-09-14",
-   "titulo": "#noticias #tiktok #viral",
-   "tipo": "video",
-   "likes": 2,
-   "comentarios": 0,
-   "reproducciones": 98,
-   "creador": "@tabasco.al.dia.mx",
-   "publicado": "2026-09-14T06:21:59+00:00",
-   "compartidos": 0,
-   "guardados": 0,
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@tijuananoticias/video/7685539614450257169",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "Mexicali",
-   "fecha": "2026-09-14",
-   "titulo": "¡Edén Muñoz llega a Mexicali para celebrar las Fiestas Patrias! 🤠",
-   "tipo": "video",
-   "likes": 2,
-   "comentarios": 0,
-   "reproducciones": 51,
-   "creador": "@tijuananoticias",
-   "publicado": "2026-09-14T23:39:57+00:00",
-   "compartidos": 0,
-   "guardados": 0,
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
   }
  ],
  "salud": [
@@ -981,17 +950,17 @@
    "cuenta": "tk_tijuana_noticias",
    "estado": "ok",
    "posts": 30,
-   "comentarios": 16,
-   "crudos": 16,
+   "comentarios": 68,
+   "crudos": 71,
    "fuera": 0,
    "descartados": 0
   }
  ],
  "gasto": {
   "resultados": 1000,
-  "gastado": 46,
+  "gastado": 101,
   "por_concepto": {
-   "tk_tijuana_noticias": 46
+   "tk_tijuana_noticias": 101
   }
  }
 }
