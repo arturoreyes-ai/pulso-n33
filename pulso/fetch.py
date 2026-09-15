@@ -3,23 +3,125 @@
 Una fuente caida no tumba la corrida: se convierte en un registro 'fallo'
 en data/fuentes.json. Scrapy se importa de forma diferida para que una falta de
 dependencia degrade solo esas fuentes y no esconda los RSS disponibles.
+
+MINIATURAS (14 de septiembre de 2026, a peticion del cliente). De cada item se
+saca, si la hay, la URL de la imagen que el medio publica en su propio feed.
+Se sondearon los quince feeds RSS del catalogo ese dia y el resultado decide
+el orden de busqueda de aqui abajo:
+
+  - <enclosure> NUNCA fue una imagen: Zeta manda video/mp4 e inewsource
+    audio/mpeg. Solo se acepta si su 'type' empieza con image/.
+  - <media:thumbnail> y <media:content> los traen El Imparcial, KPBS y
+    Noticias Ensenada.
+  - Lo mas comun (siete feeds) es un <img> dentro de <description> o de
+    <content:encoded>. Se lee ese fragmento HTML SOLO para sacar el src del
+    primer <img> util y se descarta: ni una palabra del texto llega al item.
+  - Trampas: el primer <img> de Tecate Noticias suele ser el sprite de emoji
+    de WordPress (s.w.org, class wp-smiley, 72px), y varios feeds incrustan
+    fotos de stock o de otro medio. Las descarta normalizar.imagen_del_medio.
+
+La URL se guarda tal como viene: los sufijos -WxH de WordPress, el ?fit= de
+Photon y el ?auth= de Arc son derivados estables del original, y reescribirlos
+puede dar 404.
 """
 
 import time
+from html.parser import HTMLParser
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree
 
 from . import VERSION
+from .normalizar import imagen_del_medio
 
 AGENTE = "PulsoN33/{} (+https://github.com/arturoreyes-ai/pulso-n33)".format(VERSION)
 ACEPTA = "application/rss+xml, application/atom+xml, application/xml, text/xml"
 _ATOM = "{http://www.w3.org/2005/Atom}"
 _DC = "{http://purl.org/dc/elements/1.1/}"
+_MEDIA = "{http://search.yahoo.com/mrss/}"
+_CONTENT = "{http://purl.org/rss/1.0/modules/content/}"
+
+# El sprite de emoji de WordPress mide 72px; una miniatura de nota, no.
+IMAGEN_LADO_MINIMO = 100
+IMAGEN_LARGO_MAXIMO = 500
 
 
 def _texto(el, tag):
     hijo = el.find(tag)
     return (hijo.text or "").strip() if hijo is not None and hijo.text else ""
+
+
+class _Imagenes(HTMLParser):
+    """Recoge los <img> de un fragmento HTML. Solo atributos, nunca texto."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.vistas = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag != "img":
+            return
+        a = dict(attrs)
+        self.vistas.append({
+            "src": (a.get("src") or "").strip(),
+            "class": (a.get("class") or "").lower(),
+            "width": a.get("width"), "height": a.get("height"),
+        })
+
+
+def _lado(valor):
+    try:
+        return int(str(valor).strip().rstrip("px"))
+    except (TypeError, ValueError):
+        return None
+
+
+def _imgs_de_html(fragmento):
+    """URLs de <img> utiles de un fragmento: fuera el sprite de emoji y todo
+    lo que declare medir menos de IMAGEN_LADO_MINIMO."""
+    if not fragmento:
+        return []
+    lector = _Imagenes()
+    try:
+        lector.feed(fragmento)
+    except Exception:              # HTML roto: sin imagen, no sin nota
+        return []
+    salida = []
+    for img in lector.vistas:
+        if "wp-smiley" in img["class"] or img["src"].startswith("data:"):
+            continue
+        lados = [_lado(img["width"]), _lado(img["height"])]
+        if any(l is not None and l <= IMAGEN_LADO_MINIMO for l in lados):
+            continue
+        salida.append(img["src"])
+    return salida
+
+
+def _aceptable(url, medio):
+    return (isinstance(url, str) and url.startswith("https://")
+            and not any(c.isspace() for c in url)
+            and len(url) <= IMAGEN_LARGO_MAXIMO
+            and imagen_del_medio(url, medio))
+
+
+def imagen_de(item, medio):
+    """URL de la miniatura del item, o None. Ver el docstring del modulo."""
+    candidatas = []
+    for el in item.iter(_MEDIA + "thumbnail"):
+        candidatas.append(el.get("url"))
+    for el in item.iter(_MEDIA + "content"):
+        tipo = (el.get("type") or "").lower()
+        if (el.get("medium") or "").lower() == "image" or tipo.startswith("image/"):
+            candidatas.append(el.get("url"))
+    for el in item.iter("enclosure"):
+        if (el.get("type") or "").lower().startswith("image/"):
+            candidatas.append(el.get("url"))
+    for tag in ("description", _CONTENT + "encoded", _ATOM + "summary", _ATOM + "content"):
+        candidatas.extend(_imgs_de_html(_texto(item, tag)))
+    for url in candidatas:
+        url = (url or "").strip()
+        if _aceptable(url, medio):
+            return url
+    return None
 
 
 class NoEsFeed(Exception):
@@ -32,8 +134,14 @@ class NoEsFeed(Exception):
     """
 
 
-def fetch_rss(url, timeout=15):
-    """Baja y parsea un feed. Lanza excepcion si falla: la registra el llamador."""
+def fetch_rss(url, timeout=15, medio=None):
+    """Baja y parsea un feed. Lanza excepcion si falla: la registra el llamador.
+
+    Con `medio` (la fila del catalogo) cada item trae ademas 'imagen', la
+    miniatura del propio medio o None. Sin medio no hay contra que comprobar
+    el host, asi que no se busca: es el caso de Google Noticias, cuyo feed
+    tampoco la trae.
+    """
     req = Request(url, headers={"User-Agent": AGENTE, "Accept": ACEPTA})
     with urlopen(req, timeout=timeout) as r:
         crudo = r.read()
@@ -61,6 +169,8 @@ def fetch_rss(url, timeout=15):
             "fuente_texto": _texto(item, "source"),
             "fuente_url": (origen.get("url") or "").strip() if origen is not None else "",
         })
+        if medio is not None:
+            salida[-1]["imagen"] = imagen_de(item, medio)
     for entry in raiz.iter(_ATOM + "entry"):          # Atom 1.0
         enlace = entry.find(_ATOM + "link")
         salida.append({
@@ -69,6 +179,8 @@ def fetch_rss(url, timeout=15):
             "fecha_cruda": (_texto(entry, _ATOM + "published")
                             or _texto(entry, _ATOM + "updated")),
         })
+        if medio is not None:
+            salida[-1]["imagen"] = imagen_de(entry, medio)
     return [s for s in salida if s["titulo"] and s["url"]]
 
 
@@ -82,7 +194,7 @@ def fetch_medios(medios, ahora, timeout=15):
             continue
         t0 = time.monotonic()
         try:
-            items = fetch_rss(m["url"], timeout=timeout)
+            items = fetch_rss(m["url"], timeout=timeout, medio=m)
             estado, error = "ok", None
         except Exception as e:            # red, HTTP, XML mal formado
             items, estado = [], "fallo"

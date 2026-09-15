@@ -72,6 +72,99 @@ class TestFetchSource(unittest.TestCase):
         self.assertEqual(items[0]["fuente_texto"], "")
 
 
+MEDIO_EJEMPLO = {"id": "ejemplo", "nombre": "Ejemplo", "url": "https://www.ejemplo.mx/feed/"}
+MEDIO_CON_CDN = dict(MEDIO_EJEMPLO, imagenes_de=["i0.wp.com"])
+
+
+def _feed(*items):
+    return (b'<?xml version="1.0"?><rss version="2.0" '
+            b'xmlns:media="http://search.yahoo.com/mrss/" '
+            b'xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel>'
+            + b"".join(items) + b"</channel></rss>")
+
+
+def _item(titulo, extra=b""):
+    return (b"<item><title>" + titulo + b"</title><link>https://www.ejemplo.mx/" + titulo
+            + b"</link><pubDate>Wed, 02 Sep 2026 14:00:00 GMT</pubDate>" + extra + b"</item>")
+
+
+def _items(xml, medio=MEDIO_EJEMPLO):
+    with patch.object(fetch, "urlopen", return_value=_Respuesta(xml)):
+        return fetch.fetch_rss("https://www.ejemplo.mx/feed/", medio=medio)
+
+
+class TestImagenDelFeed(unittest.TestCase):
+    """La miniatura sale del feed del propio medio y solo si es del medio.
+
+    Los casos son los del sondeo del 14 de septiembre de 2026 sobre los quince
+    feeds del catalogo: enclosure de video en Zeta, sprite de emoji en Tecate,
+    stock en Noticias Ensenada, Photon en los medios de San Diego.
+    """
+
+    def test_media_thumbnail_del_propio_host(self):
+        xml = _feed(_item(b"a", b'<media:thumbnail url="https://www.ejemplo.mx/f/a.jpg"/>'))
+        self.assertEqual(_items(xml)[0]["imagen"], "https://www.ejemplo.mx/f/a.jpg")
+
+    def test_subdominio_del_medio_vale(self):
+        xml = _feed(_item(b"a", b'<media:content medium="image" url="https://statics.ejemplo.mx/a.jpg"/>'))
+        self.assertEqual(_items(xml)[0]["imagen"], "https://statics.ejemplo.mx/a.jpg")
+
+    def test_enclosure_de_video_no_es_imagen(self):
+        xml = _feed(_item(b"a", b'<enclosure url="https://www.ejemplo.mx/v.mp4" type="video/mp4" length="1"/>'))
+        self.assertIsNone(_items(xml)[0]["imagen"])
+
+    def test_enclosure_de_imagen_si(self):
+        xml = _feed(_item(b"a", b'<enclosure url="https://www.ejemplo.mx/a.jpg" type="image/jpeg" length="1"/>'))
+        self.assertEqual(_items(xml)[0]["imagen"], "https://www.ejemplo.mx/a.jpg")
+
+    def test_salta_el_sprite_de_emoji_y_toma_el_siguiente_img(self):
+        desc = (b'<description>&lt;p&gt;Hola &lt;img class="wp-smiley" src="https://s.w.org/e.png" '
+                b'width="72" height="72"&gt; y &lt;img src="https://www.ejemplo.mx/wp/a-1024x682.jpeg" '
+                b'width="1024"&gt;&lt;/p&gt;</description>')
+        item = _items(_feed(_item(b"a", desc)))[0]
+        self.assertEqual(item["imagen"], "https://www.ejemplo.mx/wp/a-1024x682.jpeg")
+
+    def test_ni_una_palabra_de_la_descripcion_llega_al_item(self):
+        desc = b"<description>Cuerpo de la nota que no debe guardarse</description>"
+        item = _items(_feed(_item(b"a", desc)))[0]
+        self.assertEqual(set(item), {"titulo", "url", "fecha_cruda", "fuente_texto", "fuente_url", "imagen"})
+        self.assertNotIn("Cuerpo", json.dumps(item))
+
+    def test_content_encoded_tambien(self):
+        enc = b'<content:encoded>&lt;img src="https://www.ejemplo.mx/b.jpg"&gt;</content:encoded>'
+        self.assertEqual(_items(_feed(_item(b"a", enc)))[0]["imagen"], "https://www.ejemplo.mx/b.jpg")
+
+    def test_stock_y_otro_medio_se_descartan(self):
+        xml = _feed(
+            _item(b"a", b'<media:content medium="image" url="https://images.pexels.com/x.jpg"/>'),
+            _item(b"b", b'<description>&lt;img src="https://zetatijuana.com/wp/z.jpg"&gt;</description>'),
+        )
+        items = _items(xml)
+        self.assertIsNone(items[0]["imagen"])
+        self.assertIsNone(items[1]["imagen"])
+
+    def test_cdn_solo_si_la_fila_lo_declara(self):
+        xml = _feed(_item(b"a", b'<description>&lt;img src="https://i0.wp.com/ejemplo.mx/a.jpg?fit=640%2C360"&gt;</description>'))
+        self.assertIsNone(_items(xml)[0]["imagen"])
+        self.assertEqual(_items(xml, MEDIO_CON_CDN)[0]["imagen"],
+                         "https://i0.wp.com/ejemplo.mx/a.jpg?fit=640%2C360")
+
+    def test_http_sin_s_y_data_uri_se_rechazan(self):
+        xml = _feed(
+            _item(b"a", b'<media:thumbnail url="http://www.ejemplo.mx/a.jpg"/>'),
+            _item(b"b", b'<description>&lt;img src="data:image/png;base64,AAAA"&gt;</description>'),
+        )
+        items = _items(xml)
+        self.assertIsNone(items[0]["imagen"])
+        self.assertIsNone(items[1]["imagen"])
+
+    def test_sin_medio_no_se_busca(self):
+        xml = _feed(_item(b"a", b'<media:thumbnail url="https://www.ejemplo.mx/a.jpg"/>'))
+        with patch.object(fetch, "urlopen", return_value=_Respuesta(xml)):
+            item = fetch.fetch_rss("https://www.ejemplo.mx/feed/")[0]
+        self.assertNotIn("imagen", item)
+
+
 class TestUrlDeBusqueda(unittest.TestCase):
     def test_locale_es_y_en(self):
         es = busquedas.url_de({"q": "san quintin", "idioma": "es"})

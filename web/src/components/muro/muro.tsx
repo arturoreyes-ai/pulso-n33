@@ -1,5 +1,6 @@
 "use client";
 
+import { ActualizarNoticias } from "./actualizar-noticias";
 import { useMemo } from "react";
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
 
@@ -124,6 +125,8 @@ function BarraFiltros({ m, sujeto }: { m: EstadoMuro; sujeto: string | null }) {
             sus rubros: la misma pastilla que el panel de actualidad de las
             zonas, para que sea una sola implementacion en todo el tablero. */}
         {m.enActualidad ? <SelectorRubro activo={m.rubro} onElegir={m.elegirRubro} /> : null}
+        {m.modo === "busqueda" && m.vivo.activa ? <ActualizarNoticias estado={m.vivo} /> :
+          m.modo === "actualidad" && m.actualidad.activa ? <ActualizarNoticias estado={m.actualidad} /> : null}
 
         {m.temaIds.size > 0 ? (
           <button

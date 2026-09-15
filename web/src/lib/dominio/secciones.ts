@@ -46,7 +46,7 @@ export type Vista = Seccion | null;
 
 /** Como se llama cada vista en la nav y en el titulo de su pagina. */
 const NOMBRE = {
-  portada: "Titulares",
+  portada: "Tendencias",
   redes: "Redes",
   indicadores: "Indicadores",
 } as const satisfies Record<Seccion | "portada", string>;
@@ -79,10 +79,18 @@ export const VISTAS: readonly Vista[] = [null, ...SECCIONES];
  * selector geografico acreditaria toda candidatura a una sola zona. Ninguna
  * de las dos admite `/tecate/<pagina>`.
  *
+ * Ahora (14 de septiembre de 2026) es el recorrido de titulares en vivo a
+ * pantalla completa. Tampoco admite `/tecate/ahora`: el lugar es un parametro
+ * del PRIMER capitulo que el lector cambia dentro del recorrido, y los demas
+ * capitulos —los rubros, Mexico, Internacional— no son de ningun municipio.
+ * Forzarlo a la rejilla dejaria a la URL diciendo un lugar que solo describe
+ * una octava parte de la pagina.
+ *
  * Se declara aqui, y no como un `<li>` a mano en la pildora, para que la nav
  * siga teniendo una sola lista de la que salen sus elementos.
  */
 export const SUELTAS = [
+  { id: "ahora", ruta: "/ahora", nombre: "Ahora" },
   { id: "garitas", ruta: "/garitas", nombre: "Garitas" },
   { id: "gasto-electoral", ruta: "/gasto-electoral", nombre: "Gasto electoral" },
 ] as const;

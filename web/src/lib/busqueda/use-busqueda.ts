@@ -1,5 +1,7 @@
 "use client";
 
+import { useActualizar, type ActualizacionViva } from "./use-actualizar";
+
 import { useMemo } from "react";
 import useSWRImmutable from "swr/immutable";
 
@@ -15,7 +17,7 @@ import {
 
 const SIN_RESULTADOS: readonly ResultadoExterno[] = [];
 
-export interface BusquedaViva {
+export interface BusquedaViva extends ActualizacionViva {
   /** Lo que no esta ya en el muro de arriba. */
   resultados: readonly ResultadoExterno[];
   /** Cuantos se quitaron por estar ya en el muro. Se dice, no se esconde. */
@@ -51,8 +53,11 @@ export function useBusquedaViva(
   if (ambito !== ambitoPorOmision(zona)) partes.push(`a=${ambito}`);
   if (zona !== null) partes.push(`z=${SLUG_DE_ZONA[zona]}`);
 
+  const llave = activa ? `/api/buscar?${partes.join("&")}` : null;
+  const actualizacion = useActualizar<RespuestaBusqueda>(llave);
+
   const { data, error, isLoading } = useSWRImmutable<RespuestaBusqueda>(
-    activa ? `/api/buscar?${partes.join("&")}` : null,
+    llave,
     (ruta: string) => leerApi<RespuestaBusqueda>(ruta),
   );
 
@@ -70,6 +75,7 @@ export function useBusquedaViva(
   );
 
   return {
+    ...actualizacion,
     resultados: visibles,
     suprimidas,
     cargando: activa && isLoading,

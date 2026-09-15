@@ -171,7 +171,16 @@ In code they mean:
   not an error.
 - **Headline, source and link only** — never article body text. The client is
   launching a competing outlet, so this matters more than the usual aggregator
-  norm.
+  norm. Since 14 September 2026 (client decision, counsel pending) a note may
+  also carry `imagen`: the thumbnail the outlet publishes **in its own feed**,
+  hotlinked, never copied, and only when the image host is the outlet's own or
+  a CDN its catalogue row lists in `imagenes_de`. `pulso/fetch.py::imagen_de`
+  reads `media:*`, image enclosures and the first useful `<img>` in the
+  description, keeps nothing but the URL, and `normalizar.imagen_del_medio`
+  drops stock, emoji sprites and other outlets' photos; the validator rejects
+  the rest. First-seen wins on merge, like `capturado`, so a feed resizing its
+  image cannot dirty `data/`. `<enclosure>` is never assumed to be an image:
+  in this catalogue it is video (Zeta) or audio (inewsource).
 
 ### Google News search feeds (`pulso/busquedas.py`)
 
@@ -537,6 +546,29 @@ Tailwind v4, pnpm.
   uses the shared container (`max-w-[88rem]`, `px-4 md:px-8`), `Bisel`, `Barra`
   and the type tokens. Don't reintroduce a CSS module for a page: the tokens in
   `globals.css` are the scale, and `pnpm tokens` fails on off-scale values.
+
+- **`/ahora` is the third SUELTA: a WikiTok-style recorrido of live
+  headlines** (client request, 14 September 2026). One headline per screen,
+  swipe to the next, Anterior / Siguiente on desktop. It chains
+  `/api/actualidad` lists as *chapters* in a fixed order (the chosen entry:
+  a zone, the corredor, México or Internacional → its five rubros → the
+  other two sections) instead of raising `TOPE_ACTUALIDAD`; a rubro on an
+  edition is the same search without place terms;
+  Google's order is kept inside a chapter and a folded title already shown is
+  dropped (`lib/busqueda/capitulos.ts`, pure, pinned by
+  `scripts/probar-capitulos.cjs`). The card is typographic because the RSS
+  carries no image and no extract, and the product is headline, source and
+  link; a failed chapter renders a hueco card and the recorrido continues.
+  `lib/busqueda/use-capitulos.ts` calls `useActualidad` eight times over a
+  tuple, with `null` for chapters not yet reached, and freezes each list once
+  it settles so the five-minute refresh cannot move the card under the
+  reader's finger («Hay titulares nuevos · Recargar» remounts). The
+  scroll-settle and arrival logic is shared with the redes Visual through
+  `lib/pantalla/recorrido.ts`. The entry is client state, so `/tecate/ahora`
+  does not exist. A card shows a figure only when the same headline exists in
+  the corpus with the outlet's own `imagen` (`lib/busqueda/imagenes.ts`, by
+  folded title); live rows never carry an image of their own. Unlike the other two sueltas it mounts `Pie`: a page of
+  external rows must carry the five rules.
 
 - **`web/` is what ships.** The cron builds it on the runner and deploys it
   prebuilt, behind `DESPLEGAR_TABLERO`. It deploys from the runner rather than

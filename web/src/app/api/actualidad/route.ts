@@ -19,5 +19,5 @@ export const maxDuration = 15;
 
 export async function GET(peticion: NextRequest): Promise<Response> {
   const params = peticion.nextUrl.searchParams;
-  return responderActualidad({ a: params.get("a"), z: params.get("z"), t: params.get("t") });
+  return responderActualidad({ actualizar: params.get("actualizar") === "1", a: params.get("a"), z: params.get("z"), t: params.get("t") });
 }

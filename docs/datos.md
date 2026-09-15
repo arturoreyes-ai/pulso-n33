@@ -347,7 +347,10 @@ Salida del pipeline. La escribe el bot; no se edita a mano.
 (30 por omisión); lo más viejo vive en `data/archivo/`. Antes crecía sin
 límite: 561 bytes por nota y unas 200 notas nuevas al día son ~35 MB al año,
 y el tablero se los bajaba todos en cada visita. Con la ventana el pico son
-~3.2 MB en crudo, que el servidor manda como ~470 KB con brotli.
+~3.2 MB en crudo, que el servidor manda como ~470 KB con brotli. La `imagen`
+(desde el 14 de septiembre de 2026) añade unos 100 bytes a las notas que la
+traen, dos de cada tres en los feeds que la publican: del orden de +350 KB en
+crudo, mucho menos comprimido porque los hosts se repiten.
 
 ```json
 {
@@ -380,6 +383,7 @@ y el tablero se los bajaba todos en cada visita. Con la ventana el pico son
 | `id` | `sha256("<fuente>|<título plegado>")[:16]`. Se **recalcula** en cada validación |
 | `fuente` | `id` de un medio del catálogo, o una fuente sintética: `web-<hash12>` (descubrimiento) o `gn-<hash12>` (búsqueda) |
 | `origen`, `descubierta_por` | opcionales. `descubrimiento_web`/`gdelt`, o `busqueda_web`/`<id de la búsqueda>`; nunca contienen el cuerpo del artículo |
+| `imagen` | opcional. URL `https` de la miniatura que el medio publica **en su propio feed**, solo si su host es el del medio (o uno de los `imagenes_de` de su fila en `config/medios.json`). Enlazada, nunca copiada. **Se conserva** la primera vista, como `capturado`. Ausente cuando el medio no la publica o la nota llegó por búsqueda: no es un hueco que rellenar ni un `null` que escribir |
 | `zona_medio` | cobertura declarada del medio; tiene que coincidir con el catálogo |
 | `zonas` | zonas de las que **habla la nota**. Puede traer varias, o ninguna |
 | `delegaciones` | delegaciones de Tijuana que nombra el **titular**. Solo trae algo si `zonas` incluye Tijuana |
@@ -464,7 +468,9 @@ workflow dejaría de servir.
 
 **La identidad es estable y las notas se fusionan por ella.** El mismo titular
 republicado en mayúsculas no es una nota nueva. `capturado` se conserva de la
-primera vez, así que volver a correr no reescribe la historia.
+primera vez, así que volver a correr no reescribe la historia. `imagen`
+también: un feed que cambia el tamaño de su miniatura o la quita no toca una
+nota ya vista, porque si lo hiciera una corrida sin novedad ensuciaría `data/`.
 
 `figuras` y `postura` se **recalculan en cada corrida**. Editar el roster o
 cambiar de clasificador se propaga a todo el histórico sin migración.

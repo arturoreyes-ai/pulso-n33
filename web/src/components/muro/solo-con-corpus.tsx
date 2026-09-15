@@ -10,7 +10,7 @@ import { useAmbito } from "@/lib/muro/filtro-ambito";
  * Pinta a sus hijos solo mientras el alcance de la pagina (?a=) tiene corpus.
  *
  * En Mexico e Internacional el muro de titulares YA es la lista en vivo con
- * sus rubros; la seccion "Lo que destaca ahora" de mas abajo seria la misma
+ * sus rubros; la seccion "En Tendencia" de arriba seria la misma
  * lista dos veces en una pagina. Decision del cliente, 12 de septiembre de
  * 2026: una sola implementacion por alcance, y en esos dos vive en el muro.
  *

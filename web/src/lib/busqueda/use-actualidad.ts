@@ -1,5 +1,7 @@
 "use client";
 
+import { useActualizar, type ActualizacionViva } from "./use-actualizar";
+
 import { useMemo } from "react";
 import useSWR from "swr";
 
@@ -28,7 +30,7 @@ export type PedidoActualidad = (
   | { zona: ZonaRuta }
 ) & { rubro?: Rubro | null };
 
-export interface ActualidadViva {
+export interface ActualidadViva extends ActualizacionViva {
   /** En el orden de Google. No se reordena en ningun punto del camino. */
   resultados: readonly ResultadoExterno[];
   cargando: boolean;
@@ -70,8 +72,11 @@ export function useActualidad(pedido: PedidoActualidad | null): ActualidadViva {
   const hayServidor = useHayServidor();
   const activa = pedido !== null && hayServidor;
 
+  const llave = pedido !== null && hayServidor ? llaveDe(pedido) : null;
+  const actualizacion = useActualizar<RespuestaActualidad>(llave);
+
   const { data, error, isLoading } = useSWR<RespuestaActualidad>(
-    pedido !== null && hayServidor ? llaveDe(pedido) : null,
+    llave,
     (ruta: string) => leerApi<RespuestaActualidad>(ruta),
     { refreshInterval: REFRESCO_MS, revalidateOnFocus: true },
   );
@@ -90,6 +95,7 @@ export function useActualidad(pedido: PedidoActualidad | null): ActualidadViva {
   );
 
   return {
+    ...actualizacion,
     resultados: data?.resultados ?? SIN_RESULTADOS,
     cargando: activa && isLoading,
     caidos,

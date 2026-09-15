@@ -31,7 +31,7 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  * donde— y la pildora los muestra separados por un filo, en vez de
  * mezclarlos en una sola tira que en movil habia que arrastrar.
  *
- *   [ ⌂ Pulso ] | Titulares  Redes  Indicadores  Cobertura  Garitas | [ Tijuana ] | Salir
+ *   [ ⌂ Pulso ] | Tendencias  Redes  Indicadores  Garitas | [ Tijuana ] | Salir
  *      inicio          la vista, con la actual marcada, y las sueltas   el lugar    la sesion
  *
  * Las cuatro vistas del centro CONSERVAN la zona, y los chips del selector
@@ -40,7 +40,7 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  *
  * La casa lleva a `/`, o sea a la region completa y a la portada: es el unico
  * elemento que suelta la zona, y de ahi que no comparta el `aria-current` con
- * "Titulares", que en /tijuana apunta a /tijuana.
+ * "Tendencias", que en /tijuana apunta a /tijuana.
  *
  * Componente de servidor. El unico cliente es next/link, cuyo chunk ya lo
  * carga el selector de zona en cada pagina, asi que el costo marginal es cero

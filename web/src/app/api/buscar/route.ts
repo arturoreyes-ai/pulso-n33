@@ -76,5 +76,5 @@ export async function GET(peticion: NextRequest): Promise<Response> {
   // Y nunca se cachea un resultado parcial: una falla pasajera de Google
   // clavada cinco minutos en el CDN es peor que la falla.
   const todoBien = cosechas.every((c) => c.salud.estado === "ok");
-  return json(cuerpo, 200, todoBien ? CACHE_CDN : SIN_CACHE);
+  return json(cuerpo, 200, todoBien && params.get("actualizar") !== "1" ? CACHE_CDN : SIN_CACHE);
 }

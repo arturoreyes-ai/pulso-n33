@@ -399,7 +399,10 @@ textarea {
    por encima de un punto de ajuste, no obliga a caer en uno. El JS del visor
    cambia el medio montado al ASENTAR el desplazamiento (scrollend, o 140 ms
    sin eventos), nunca a mitad del gesto, y lee el margen de ajuste con
-   getComputedStyle: este es el UNICO lugar donde vive ese numero. */
+   getComputedStyle: este es el UNICO lugar donde vive ese numero.
+
+   Dos consumidores: el visor de redes y el recorrido de titulares de /ahora,
+   cuyas tarjetas son solo texto y no usan .medio-visual. */
 html:has(.recorrido-visual) { scroll-snap-type: y proximity; }
 .publicacion-visual {
   --visor-reserva: 12.5rem;

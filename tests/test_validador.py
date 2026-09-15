@@ -306,6 +306,15 @@ class TestMediosRotos(unittest.TestCase):
         errores, _ = validar_medios(d)
         self.assertTrue(any("'tipo' debe ser" in e for e in errores))
 
+    def test_imagenes_de_son_hosts_sin_esquema(self):
+        d = copy.deepcopy(self.datos)
+        d["medios"][0]["imagenes_de"] = ["https://i0.wp.com"]
+        errores, _ = validar_medios(d)
+        self.assertTrue(any("'imagenes_de'" in e for e in errores))
+        d["medios"][0]["imagenes_de"] = ["i0.wp.com"]
+        errores, _ = validar_medios(d)
+        self.assertFalse(any("'imagenes_de'" in e for e in errores))
+
 
 class TestNotasRotas(unittest.TestCase):
     @classmethod
@@ -319,6 +328,39 @@ class TestNotasRotas(unittest.TestCase):
     def test_datos_publicados_limpios(self):
         errores, _ = validar_notas(self.datos, self.roster, self.medios)
         self.assertEqual(errores, [])
+
+    def _nota_del_catalogo(self, d):
+        ids_medios = {m["id"] for m in self.medios}
+        return next(n for n in d["notas"] if n["fuente"] in ids_medios and n.get("origen") is None)
+
+    def test_imagen_debe_ser_https(self):
+        d = copy.deepcopy(self.datos)
+        self._nota_del_catalogo(d)["imagen"] = "http://zetatijuana.com/a.jpg"
+        errores, _ = validar_notas(d, self.roster, self.medios)
+        self.assertTrue(any("'imagen' debe ser" in e for e in errores))
+
+    def test_imagen_de_otro_host_no_es_del_medio(self):
+        # Una foto de stock o de otro medio acreditaria al medio una imagen que
+        # no hizo (Noticias Ensenada con pexels.com, Radar BC con Zeta).
+        d = copy.deepcopy(self.datos)
+        nota = self._nota_del_catalogo(d)
+        nota["imagen"] = "https://images.pexels.com/x.jpg"
+        errores, _ = validar_notas(d, self.roster, self.medios)
+        self.assertTrue(any("'imagen' no es del medio" in e for e in errores))
+        medio = next(m for m in self.medios if m["id"] == nota["fuente"])
+        propia = "https://" + medio["url"].split("/")[2] + "/wp/a.jpg"
+        nota["imagen"] = propia
+        errores, _ = validar_notas(d, self.roster, self.medios)
+        self.assertFalse(any("'imagen'" in e for e in errores))
+
+    def test_una_nota_de_busqueda_no_lleva_imagen(self):
+        d = copy.deepcopy(self.datos)
+        nota = self._nota_del_catalogo(d)
+        nota["origen"] = "descubrimiento_web"
+        nota["descubierta_por"] = "gdelt"
+        nota["imagen"] = "https://" + nota["dominio"] + "/a.jpg"
+        errores, _ = validar_notas(d, self.roster, self.medios)
+        self.assertTrue(any("'imagen' solo viene del feed" in e for e in errores))
 
     def test_id_alterado_a_mano(self):
         # El hash se recalcula: no se puede editar un titular y dejar el id.

@@ -54,9 +54,9 @@ export function useHayServidor(): boolean {
  * sesion. Vive aqui y no en cada hook porque /api/buscar y /api/actualidad
  * comparten exactamente esta regla, y la tienda que escribe es esta.
  */
-export async function leerApi<T>(ruta: string): Promise<T> {
+export async function leerApi<T>(ruta: string, opciones?: RequestInit): Promise<T> {
   try {
-    return await leerJson<T>(ruta);
+    return await leerJson<T>(ruta, opciones);
   } catch (e) {
     if (e instanceof ErrorDatos && (e.status === 404 || e.status === 405)) {
       marcarSinServidor();

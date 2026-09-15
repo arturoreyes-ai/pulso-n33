@@ -1,5 +1,5 @@
 {
- "nota": "Catálogo de fuentes. 'tipo' puede ser rss (omisión) o scrapy. Scrapy solo lee portadas permitidas por robots.txt y publica titular, fuente y enlace, nunca el cuerpo. 'zona' es la cobertura principal del medio; no es la zona de cada nota. Para apagar un medio sin perder su registro, pon 'activo': false y di por qué en 'nota'. 'idioma' es el del medio (es u en) y decide con que modelo se etiqueta el tono: los cuatro medios de San Diego publican en inglés y el modelo de tono es español, así que sin este campo se les asignaba una etiqueta que no significaba nada.",
+ "nota": "Catálogo de fuentes. 'tipo' puede ser rss (omisión) o scrapy. Scrapy solo lee portadas permitidas por robots.txt y publica titular, fuente y enlace, nunca el cuerpo. La miniatura de una nota se guarda solo si viene en el feed del propio medio y su host es el del medio o uno de los que su fila declara en 'imagenes_de' (sondeo del 14 de septiembre de 2026: los feeds traen fotos de stock y de otros medios, y eso no se acredita). 'zona' es la cobertura principal del medio; no es la zona de cada nota. Para apagar un medio sin perder su registro, pon 'activo': false y di por qué en 'nota'. 'idioma' es el del medio (es u en) y decide con que modelo se etiqueta el tono: los cuatro medios de San Diego publican en inglés y el modelo de tono es español, así que sin este campo se les asignaba una etiqueta que no significaba nada.",
  "medios": [
   {
    "id": "zeta",
@@ -152,7 +152,8 @@
    "idioma": "en",
    "activo": true,
    "verificado": "2026-09-03",
-   "nota": "En inglés."
+   "imagenes_de": ["i0.wp.com"],
+   "nota": "En inglés. Sirve sus miniaturas por Photon (i0.wp.com), el CDN de Jetpack; sin declararlo aquí ninguna imagen suya pasaría la regla de 'es del medio'."
   },
   {
    "id": "inewsource",
@@ -162,7 +163,8 @@
    "idioma": "en",
    "activo": true,
    "verificado": "2026-09-03",
-   "nota": "En inglés. Periodismo de investigación."
+   "imagenes_de": ["i0.wp.com"],
+   "nota": "En inglés. Periodismo de investigación. Miniaturas por Photon (i0.wp.com), como Times of San Diego."
   },
   {
    "id": "psn",

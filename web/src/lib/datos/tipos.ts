@@ -82,6 +82,12 @@ export interface Nota {
    *  Google Noticias. En ese caso la `url` es el redirector de Google y el
    *  `dominio` es el del medio que publico, tomado de su <source>. */
   descubierta_por?: string;
+  /** Miniatura que el medio publica en SU PROPIO feed, enlazada (nunca
+   *  copiada) y solo si su host es del medio o de un CDN que su fila del
+   *  catalogo declara. Se conserva la primera vista, como `capturado`.
+   *  Ausente cuando el medio no la publica: cinco de quince feeds no la
+   *  traen, y las notas de busqueda nunca. No es un hueco que rellenar. */
+  imagen?: string;
   figuras: FiguraEnNota[];
   postura: Postura | null;
 }

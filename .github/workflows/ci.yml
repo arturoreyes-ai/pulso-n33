@@ -119,6 +119,11 @@ jobs:
       - name: Contrato de publicaciones visuales offline
         run: node scripts/probar-publicaciones.cjs
 
+      # El recorrido /ahora encadena las listas en vivo como capitulos: orden,
+      # sin repetidos entre capitulos, huecos dichos y activacion del siguiente.
+      - name: Contrato de capítulos de /ahora offline
+        run: node scripts/probar-capitulos.cjs
+
       - name: Escalas de diseno
         run: pnpm tokens
 

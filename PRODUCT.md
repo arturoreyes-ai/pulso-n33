@@ -38,6 +38,17 @@ decorativa: la agregación se queda en **titular, fuente y enlace**, nunca el
 cuerpo de la nota. Los medios de Baja California persiguen la republicación de
 texto completo, y aquí el agregador competiría con ellos.
 
+Desde el 14 de septiembre de 2026, a petición del cliente, se suma un cuarto
+elemento acotado: la **miniatura que el medio publica en su propio feed**,
+enlazada y nunca copiada, y solo si la imagen es del medio (su dominio o un
+CDN que su fila del catálogo declara). Una foto de stock o de otro medio le
+acreditaría una imagen que no hizo, y por eso se descarta aunque venga en el
+feed. Diez de quince feeds la traen; Zeta, El Sol de Tijuana, La Voz de la
+Frontera, Jornada BC y Síntesis no, y ahí no hay imagen. Al enlazarla, el
+navegador del lector la pide al medio: la página no se presenta (`no-referrer`)
+pero la dirección IP sí llega. La opinión legal que pide el plan sigue
+pendiente; la decisión es del cliente y queda registrada en `docs/PLAN.md`.
+
 ---
 
 ## Qué mide hoy
@@ -118,7 +129,9 @@ rodeos qué cambia y qué no.
 
 **Lo que no cambia.** Sigue siendo titular, fuente y enlace, nunca el cuerpo
 del artículo: el `<description>` de ese feed trae un ancla y el nombre del
-medio, así que no hay cuerpo que guardar aunque se quisiera. Las notas siguen
+medio, así que no hay cuerpo que guardar aunque se quisiera, y tampoco trae
+imagen: la miniatura solo existe para las notas que llegan por el feed del
+propio medio. Las notas siguen
 recibiendo zona por lo que **nombra el titular**, no por quién las publicó, y
 el tono sigue saliendo del idioma declarado, nunca adivinado del texto. Y la
 regla 4 sigue en pie: esto no rellena un hueco con ceros, aporta notas reales.

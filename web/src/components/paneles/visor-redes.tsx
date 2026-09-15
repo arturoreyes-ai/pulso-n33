@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { BookmarkSimple, ChatCircle, Heart, Play, ShareFat } from "@phosphor-icons/react";
 import { useRedes, useTikTok } from "@/lib/datos/hooks";
 import { reunirPublicaciones, type PublicacionVisual, type RedVisual } from "@/lib/dominio/publicaciones";
 import { fechaCorta, hace, hora, numero } from "@/lib/dominio/formato";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
-import { useEsMovil } from "@/lib/pantalla/movil";
+import { useLlegada, useMemoriaLlegada, useRecorrido, type MemoriaLlegada } from "@/lib/pantalla/recorrido";
 import { clasesChip } from "@/components/ui/clases";
 import { EsqueletoMedio, MedioSocial } from "./medio-social";
 
@@ -31,16 +31,14 @@ type Cortes = Partial<Record<RedVisual, string>>;
  * Al llegar en el telefono, la primera tarjeta se coloca sola en su sitio en
  * cuanto hay filas: el lector empieza dentro del recorrido y el encabezado
  * queda arriba, a un gesto. Una vez por montaje del visor (por zona), nunca al
- * cambiar de filtro, y nunca si el lector ya se movio mientras cargaba. */
+ * cambiar de filtro, y nunca si el lector ya se movio mientras cargaba. Eso,
+ * y saber que tarjeta asento, vive en lib/pantalla/recorrido.ts, compartido
+ * con el recorrido de titulares de /ahora. */
 export default function VisorRedes({ zona }: { zona: ZonaRuta | null }) {
   const instagram = useRedes();
   const tiktok = useTikTok();
   const [filtro, setFiltro] = useState<"todas" | RedVisual>("todas");
-  const llegada = useRef(false);
-  const desplazamientoInicial = useRef(0);
-  useEffect(() => {
-    desplazamientoInicial.current = window.scrollY;
-  }, []);
+  const memoria = useMemoriaLlegada();
   const publicaciones = useMemo(() => reunirPublicaciones(instagram.data, tiktok.data, zona), [instagram.data, tiktok.data, zona]);
   const filas = useMemo(() => publicaciones.filter((fila) => filtro === "todas" || fila.red === filtro), [publicaciones, filtro]);
   const cortes: Cortes = { instagram: instagram.data?.generado, tiktok: tiktok.data?.generado };
@@ -58,114 +56,32 @@ export default function VisorRedes({ zona }: { zona: ZonaRuta | null }) {
     {(filtro === "todas" || filtro === "instagram") && !instagram.data ? <p role="status" className={claseEstado}>{instagram.error ? "Las publicaciones de Instagram no están disponibles." : "Cargando Instagram…"}</p> : null}
     {(filtro === "todas" || filtro === "tiktok") && !tiktok.data ? <p role="status" className={claseEstado}>{tiktok.error ? "Las publicaciones de TikTok no están disponibles." : "Cargando TikTok…"}</p> : null}
     {filas.length
-      ? <Recorrido key={`${filtro}:${filas.map((fila) => fila.clave).join("|")}`} publicaciones={filas} cortes={cortes} completo={!cargando} llegada={llegada} desplazamientoInicial={desplazamientoInicial} />
+      ? <Recorrido key={`${filtro}:${filas.map((fila) => fila.clave).join("|")}`} publicaciones={filas} cortes={cortes} completo={!cargando} memoria={memoria} />
       : esqueleto
         ? <EsqueletoPublicacion />
         : <p className="py-8 text-lectura text-tinta-meta">No hay publicaciones disponibles para esta selección. Es un hueco, no un cero.</p>}
   </>;
 }
 
-/** Margen de ajuste de la primera tarjeta, leido del CSS en cada llamada: es
- *  distinto en telefono y en escritorio, y leerlo aqui en vez de repetir el
- *  numero hace que un cambio de ancho se recoja solo. */
-function margenDeAjuste(raiz: HTMLElement): number {
-  const primera = raiz.querySelector<HTMLElement>("[data-indice]");
-  return primera ? parseFloat(getComputedStyle(primera).scrollMarginTop) || 0 : 0;
-}
-
-/** Indice de la tarjeta cuyo borde superior queda mas cerca del margen de
- *  ajuste, entre las que tocan la pantalla; null si ninguna la toca. */
-function tarjetaMasCercana(raiz: HTMLElement): number | null {
-  const margen = margenDeAjuste(raiz);
-  const candidatas = [...raiz.querySelectorAll<HTMLElement>("[data-indice]")]
-    .map((elemento) => ({ elemento, rectangulo: elemento.getBoundingClientRect() }))
-    .filter(({ rectangulo }) => rectangulo.bottom > margen && rectangulo.top < window.innerHeight)
-    .sort((a, b) => Math.abs(a.rectangulo.top - margen) - Math.abs(b.rectangulo.top - margen));
-  const primera = candidatas[0];
-  return primera ? Number(primera.elemento.dataset.indice) : null;
-}
-
-/** Sin eventos de scroll durante este tiempo se considera que el gesto
- *  termino. Safari no emite `scrollend`; donde existe, adelanta el asiento. */
-const RETARDO_ASENTAR = 140;
-
 /** El medio montado cambia cuando el desplazamiento ASIENTA, nunca a mitad
- *  del gesto: la tarjeta que sale sigue viva mientras el dedo la arrastra y la
- *  que entra monta su medio ya quieta en su sitio. Antes lo decidia un
- *  IntersectionObserver en cada umbral, y el medio saliente desaparecia con
- *  media tarjeta todavia en pantalla. Todo lo que se lee aqui sale del DOM o
- *  de refs, asi que no hay cierres viejos que arrastrar. */
-function Recorrido({ publicaciones, cortes, completo, llegada, desplazamientoInicial }: {
+ *  del gesto (useRecorrido): la tarjeta que sale sigue viva mientras el dedo
+ *  la arrastra y la que entra monta su medio ya quieta en su sitio. */
+function Recorrido({ publicaciones, cortes, completo, memoria }: {
   publicaciones: PublicacionVisual[];
   cortes: Cortes;
   completo: boolean;
-  llegada: RefObject<boolean>;
-  desplazamientoInicial: RefObject<number>;
+  memoria: MemoriaLlegada;
 }) {
   const contenedor = useRef<HTMLDivElement>(null);
-  const objetivo = useRef<number | null>(null);
-  const [actual, setActual] = useState(0);
+  const { actual, enPantalla, ir } = useRecorrido(contenedor);
+  useLlegada(contenedor, completo, memoria);
   const [visible, setVisible] = useState(true);
-  const [enPantalla, setEnPantalla] = useState(false);
-  const esMovil = useEsMovil();
   useEffect(() => {
     const cambiar = () => setVisible(document.visibilityState === "visible");
     cambiar();
     document.addEventListener("visibilitychange", cambiar);
     return () => document.removeEventListener("visibilitychange", cambiar);
   }, []);
-  useEffect(() => {
-    const raiz = contenedor.current;
-    if (!raiz) return;
-    let temporizador: number | undefined;
-    const asentar = () => {
-      window.clearTimeout(temporizador);
-      let indice = tarjetaMasCercana(raiz);
-      // Si el lector pulso Anterior / Siguiente, ese destino manda mientras
-      // toque la pantalla: la ultima tarjeta puede no alcanzar el margen.
-      if (objetivo.current !== null) {
-        const pedido = raiz.querySelector<HTMLElement>(`[data-indice="${objetivo.current}"]`)?.getBoundingClientRect();
-        if (pedido && pedido.bottom > 0 && pedido.top < window.innerHeight) indice = objetivo.current;
-        objetivo.current = null;
-      }
-      setEnPantalla(indice !== null);
-      if (indice !== null) setActual(indice);
-    };
-    const aplazar = () => {
-      window.clearTimeout(temporizador);
-      temporizador = window.setTimeout(asentar, RETARDO_ASENTAR);
-    };
-    window.addEventListener("scroll", aplazar, { passive: true });
-    window.addEventListener("resize", aplazar);
-    if ("onscrollend" in window) window.addEventListener("scrollend", asentar);
-    asentar();
-    return () => {
-      window.clearTimeout(temporizador);
-      window.removeEventListener("scroll", aplazar);
-      window.removeEventListener("resize", aplazar);
-      window.removeEventListener("scrollend", asentar);
-    };
-  }, []);
-  useEffect(() => {
-    if (!esMovil || !completo || llegada.current) return;
-    llegada.current = true; // una vez por montaje del visor, nunca al cambiar de filtro
-    const raiz = contenedor.current;
-    const primera = raiz?.querySelector<HTMLElement>('[data-indice="0"]');
-    if (!raiz || !primera) return;
-    // No pelear con el lector: si ya se desplazo mientras cargaba, o si la
-    // primera tarjeta ya esta en su sitio o mas arriba, la pagina es suya.
-    if (Math.abs(window.scrollY - desplazamientoInicial.current) > 24) return;
-    if (primera.getBoundingClientRect().top <= margenDeAjuste(raiz) + 1) return;
-    // El apagado global de movimiento del CSS no alcanza a un scroll pedido
-    // desde JS, asi que se consulta aqui.
-    const reducido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    primera.scrollIntoView({ block: "start", behavior: reducido ? "instant" : "smooth" });
-  }, [esMovil, completo, llegada, desplazamientoInicial]);
-  function ir(indice: number) {
-    objetivo.current = indice;
-    contenedor.current?.querySelector<HTMLElement>(`[data-indice="${indice}"]`)?.scrollIntoView({ behavior: "instant", block: "start" });
-    setActual(indice);
-  }
   const total = publicaciones.length;
   return <>
     <div className="sticky top-[var(--nav-alto)] z-[var(--z-elevado)] mb-6 hidden flex-wrap items-center justify-between gap-3 bg-vanta py-3 md:flex" aria-label="Recorrer publicaciones">

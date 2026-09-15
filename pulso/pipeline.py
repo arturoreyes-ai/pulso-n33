@@ -134,6 +134,10 @@ def _nota(medio, item, capturado):
         nota["origen"] = item["origen"]
     if item.get("descubierta_por"):
         nota["descubierta_por"] = item["descubierta_por"]
+    # Condicional, como 'origen': ausente significa que el medio no publica
+    # miniatura en su feed. No es un hueco que rellenar ni un null que decir.
+    if item.get("imagen"):
+        nota["imagen"] = item["imagen"]
     return nota
 
 
@@ -155,7 +159,7 @@ def _desde_corpus(corpus, medios, capturado):
         if medio is None:
             continue
         item = {"titulo": c.get("titulo"), "url": c.get("url") or medio["url"],
-                "fecha_cruda": c.get("fecha")}
+                "fecha_cruda": c.get("fecha"), "imagen": c.get("imagen")}
         n = _nota(medio, item, capturado)
         if n["fecha"] is None:
             n["fecha"] = c.get("fecha")
@@ -327,6 +331,14 @@ def correr(*, medios, roster, salida="data", sin_red=False, corpus=None,
             # etiqueta sigue vigente, y asi el modelo no repite las ~200
             # notas que siguen en el feed en cada corrida.
             n["postura"] = vieja.get("postura")
+            # La miniatura tambien: manda la primera vista, como 'capturado'.
+            # Un feed que cambia el tamano de su imagen o la quita no debe
+            # ensuciar data/ en una corrida sin novedad.
+            imagen = vieja.get("imagen") or n.get("imagen")
+            if imagen:
+                n["imagen"] = imagen
+            else:
+                n.pop("imagen", None)
             fusionadas[n["id"]] = n
 
     # Zona, delegacion, figuras, alcance y postura se recalculan en cada

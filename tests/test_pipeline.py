@@ -46,14 +46,15 @@ class BasePipeline(unittest.TestCase):
     RETENCION_AMPLIA = 400
 
     def correr_en(self, destino, ahora=AHORA, metodo="ninguno",
-                  retener_dias=RETENCION_AMPLIA, analizador=None, busquedas=None):
+                  retener_dias=RETENCION_AMPLIA, analizador=None, busquedas=None,
+                  corpus=None):
         return correr(
             busquedas=busquedas,
             medios=self.medios,
             roster=self.roster,
             salida=destino,
             sin_red=True,
-            corpus=self.corpus,
+            corpus=self.corpus if corpus is None else corpus,
             ahora=ahora,
             metodo=metodo,
             retener_dias=retener_dias,
@@ -257,6 +258,30 @@ class TestIdempotencia(BasePipeline):
         notas = leer(ruta)["notas"]
         self.assertTrue(notas)
         self.assertTrue(all(isinstance(n.get("delegaciones"), list) for n in notas))
+
+    def test_la_imagen_es_condicional_y_del_corpus(self):
+        # Solo la nota cuyo item trae miniatura lleva la clave; las demas no
+        # llevan null: el medio no la publica y eso no es un hueco.
+        d = tempfile.mkdtemp()
+        self.correr_en(d)
+        notas = leer(os.path.join(d, "notas.json"))["notas"]
+        con = [n for n in notas if "imagen" in n]
+        self.assertEqual(len(con), 1)
+        self.assertEqual(con[0]["fuente"], "uniradio")
+        self.assertTrue(con[0]["imagen"].startswith("https://statics.uniradioinforma.com/"))
+
+    def test_conserva_la_imagen_vista_primero(self):
+        # El feed deja de traer la miniatura (o la cambia de tamano): la nota
+        # conserva la primera y notas.json no cambia ni un byte.
+        d = tempfile.mkdtemp()
+        self.correr_en(d, ahora=AHORA)
+        ruta = os.path.join(d, "notas.json")
+        with open(ruta, "rb") as fh:
+            antes = fh.read()
+        sin_imagen = [dict((k, v) for k, v in c.items() if k != "imagen") for c in self.corpus]
+        self.correr_en(d, ahora=DESPUES, corpus=sin_imagen)
+        with open(ruta, "rb") as fh:
+            self.assertEqual(fh.read(), antes)
 
     def test_segunda_corrida_no_trae_nuevas_ni_pierde_capturado(self):
         d = tempfile.mkdtemp()

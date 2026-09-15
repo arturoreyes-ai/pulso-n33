@@ -14,6 +14,7 @@ const ts = require('typescript');
 
 const SRC = path.resolve(__dirname, '../src');
 const cargados = new Map();
+const sustitutos = new Map();
 
 function cargar(relativo) {
   const ruta = path.join(SRC, relativo + '.ts');
@@ -24,6 +25,7 @@ function cargar(relativo) {
   cargados.set(ruta, modulo);
   const original = modulo.require.bind(modulo);
   modulo.require = (id) => {
+    if (sustitutos.has(id)) return sustitutos.get(id);
     if (id.startsWith('@/')) return cargar(id.slice(2));
     if (id.startsWith('.')) return cargar(path.relative(SRC, path.resolve(path.dirname(ruta), id)));
     return original(id);
@@ -311,6 +313,94 @@ async function comprobar() {
   assert.equal((await rubroMalo.json()).codigo, 'rubro');
   const ambosMalos = await responderActualidad({ a: null, z: 'nada', t: 'nada' }, async () => assert.fail('no debia consultar a Google'), AHORA);
   assert.equal((await ambosMalos.json()).codigo, 'zona');
+
+  // La lectura manual llega al origen, con los mismos filtros y sin cache.
+  const manual = await responderActualidad({ a: null, z: 'tijuana', t: 'clima', actualizar: true }, async (url, opciones) => {
+    assert.equal(opciones.cache, 'no-store');
+    assert.match(new URL(url).searchParams.get('q'), /Tijuana/);
+    return new Response(feed(item('Lluvia en Tijuana', NUEVO)));
+  }, AHORA);
+  assert.equal(manual.headers.get('cache-control'), 'private, no-store');
+  assert.equal((await manual.json()).rubro, 'clima');
+
+  const { GET: buscar } = cargar('app/api/buscar/route');
+  const pedirOriginal = global.fetch;
+  try {
+    global.fetch = async (url, opciones) => {
+      assert.equal(opciones.cache, 'no-store');
+      assert.match(new URL(url).searchParams.get('q'), /lluvia/);
+      return new Response(feed(item('Lluvia en Tijuana', NUEVO)));
+    };
+    for (const actualizar of ['', '&actualizar=1']) {
+      const respuesta = await buscar({ nextUrl: new URL('http://localhost/api/buscar?q=lluvia&z=tijuana' + actualizar) });
+      assert.equal(respuesta.headers.get('cache-control'), actualizar ? 'private, no-store' : 'public, max-age=0, s-maxage=300, stale-while-revalidate=600');
+      assert.equal((await respuesta.json()).consulta, 'lluvia');
+    }
+  } finally { global.fetch = pedirOriginal; }
+
+  const { comprobarActualizacion } = cargar('lib/busqueda/actualizar');
+  const anterior = { resultados: [fila('Uno', 'es'), fila('Dos', 'es')], fuentes: [{ estado: 'ok' }], consultado: AHORA };
+  assert.equal(comprobarActualizacion(anterior, { ...anterior, consultado: 'otra hora' }), 'No hay titulares nuevos.');
+  assert.equal(comprobarActualizacion(anterior, { ...anterior, resultados: [...anterior.resultados].reverse() }), 'Titulares actualizados.');
+  assert.match(comprobarActualizacion(anterior, { ...anterior, fuentes: [{ estado: 'ok' }, { estado: 'fallo' }] }), /parcial/);
+  assert.throws(() => comprobarActualizacion(anterior, { resultados: [], fuentes: [{ estado: 'fallo' }] }));
+  assert.equal(comprobarActualizacion(anterior, { resultados: [], fuentes: [{ estado: 'ok' }] }), 'Titulares actualizados.');
+
+  // El hook usa el mutador real de SWR; solo sustituimos sus lectores React.
+  // Dos islas con la misma llave no duplican la peticion y cambiar de filtro
+  // durante la espera no lleva los titulares viejos al filtro nuevo.
+  const { initCache, SWRGlobalState } = require('swr/_internal');
+  const almacen = new Map();
+  const [cache, mutar] = initCache(almacen);
+  sustitutos.set('swr', {
+    __esModule: true,
+    default: (llave, lector, opciones) => ({ data: almacen.get(llave)?.data ?? opciones.fallbackData }),
+    useSWRConfig: () => ({ cache, mutate: mutar }),
+  });
+  const { useActualizar } = cargar('lib/busqueda/use-actualizar');
+  const llave = '/api/actualidad?z=tijuana&t=clima';
+  const otra = '/api/actualidad?z=mexicali&t=clima';
+  await mutar(llave, anterior, { revalidate: false });
+  await mutar(otra, anterior, { revalidate: false });
+  let resolver;
+  let llamadasManuales = 0;
+  global.fetch = async (url, opciones) => {
+    llamadasManuales++;
+    assert.equal(url, llave + '&actualizar=1');
+    assert.equal(opciones.cache, 'no-store');
+    return await new Promise((terminar) => { resolver = terminar; });
+  };
+  try {
+    const primera = useActualizar(llave).actualizar();
+    await useActualizar(llave).actualizar();
+    await new Promise(setImmediate);
+    assert.equal(llamadasManuales, 1);
+    assert.equal(useActualizar(llave).actualizando, true);
+    assert.equal(useActualizar(otra).actualizando, false);
+    assert.deepEqual(almacen.get(llave).data, anterior, 'la lista sigue visible');
+    // SWR registra la mutacion pendiente para descartar revalidaciones anteriores.
+    const mutacion = SWRGlobalState.get(cache)[1][llave];
+    assert.ok(mutacion[0] > 0);
+    assert.equal(mutacion[1], 0);
+    const nuevo = { ...anterior, resultados: [fila('Tres', 'es')] };
+    resolver(Response.json(nuevo));
+    await primera;
+    assert.deepEqual(almacen.get(llave).data, nuevo);
+    assert.deepEqual(almacen.get(otra).data, anterior);
+    assert.equal(useActualizar(llave).actualizando, false);
+    assert.equal(useActualizar(llave).avisoActualizacion, 'Titulares actualizados.');
+    global.fetch = async () => Response.json({ resultados: [], fuentes: [{ estado: 'fallo' }] });
+    await useActualizar(llave).actualizar();
+    assert.deepEqual(almacen.get(llave).data, nuevo, 'un 200 fallido conserva la lista');
+    assert.match(useActualizar(llave).avisoActualizacion, /No se pudo/);
+    global.fetch = async () => { throw new Error('sin red'); };
+    await useActualizar(llave).actualizar();
+    assert.deepEqual(almacen.get(llave).data, nuevo);
+    assert.equal(useActualizar(llave).actualizando, false);
+    global.fetch = async () => Response.json(nuevo);
+    await useActualizar(llave).actualizar();
+    assert.equal(useActualizar(llave).avisoActualizacion, 'No hay titulares nuevos.');
+  } finally { global.fetch = pedirOriginal; sustitutos.clear(); }
 
   console.log('Búsqueda: parseo, fusión, URLs, /api/actualidad, secciones locales y rubros verificados offline.');
 }

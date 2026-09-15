@@ -17,8 +17,8 @@ export class ErrorDatos extends Error {
  * s-maxage del CDN, y SWR en modo inmutable ya garantiza una sola peticion
  * por sesion.
  */
-export async function leerJson<T>(ruta: string): Promise<T> {
-  const r = await fetch(ruta);
+export async function leerJson<T>(ruta: string, opciones?: RequestInit): Promise<T> {
+  const r = await fetch(ruta, opciones);
   if (!r.ok) {
     throw new ErrorDatos(ruta, r.status, `${ruta} respondio ${r.status}`);
   }

@@ -617,3 +617,20 @@ infieren ceros, longitud de fila ni tiempos para entrar a México.
 Verificación offline del contrato web: `node web/scripts/probar-garitas.cjs`
 después de instalar las dependencias de `web/`; también la invoca
 `python -m unittest discover -s tests -p test_garitas_web.py -v`.
+
+### Ahora: el recorrido de titulares
+
+`/ahora` muestra los titulares en vivo uno por pantalla, al estilo de un
+recorrido de video vertical: se pasa al siguiente con el gesto de desplazar (o
+con Anterior / Siguiente en escritorio). Encadena las listas que ya sirve
+`/api/actualidad` como capítulos —lo que destaca donde se elige empezar (una
+zona, el corredor, México o Internacional), los cinco rubros de ahí y las otras
+dos secciones—, conserva el orden de cada lista y no repite un titular ya
+mostrado. La tarjeta lleva imagen solo cuando la misma nota está en el corpus
+con la miniatura que su medio publica en su propio feed; el RSS de Google no la
+trae y no hay extracto;
+la tarjeta es titular, medio, hora, «en vivo», enlace y Compartir.
+
+Verificación offline del contrato: `node web/scripts/probar-capitulos.cjs`;
+también la invoca `python -m unittest discover -s tests -p test_capitulos_web.py -v`
+y el job web de CI.

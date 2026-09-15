@@ -68,6 +68,26 @@ def dominio(url):
     return host[4:] if host.startswith("www.") else host
 
 
+def imagen_del_medio(url_imagen, medio):
+    """La miniatura es del medio: su host es el dominio del medio, un subdominio
+    suyo, o uno de los CDN que su fila declara en 'imagenes_de'.
+
+    Es la regla que hace honesta la miniatura. El sondeo del 14 de septiembre
+    de 2026 encontro en los feeds del catalogo fotos de stock (pexels.com,
+    ecartelera.com en Noticias Ensenada), el sprite de emoji de WordPress
+    (s.w.org) y fotos de OTRO medio (Radar BC y Tecate Noticias incrustan
+    zetatijuana.com). Guardar cualquiera de esas acreditaria al medio una
+    imagen que no hizo. Sin lista de sufijos publicos: el dominio del medio ya
+    viene en su 'url' y basta con 'es ese o termina en .ese'.
+    """
+    host = dominio(url_imagen)
+    if not host:
+        return False
+    permitidos = [dominio(medio.get("url"))]
+    permitidos += [str(h).lower().strip() for h in (medio.get("imagenes_de") or [])]
+    return any(p and (host == p or host.endswith("." + p)) for p in permitidos)
+
+
 def id_nota(fuente_id, titulo):
     """Identidad estable: mismo medio + mismo titular = mismo id.
 

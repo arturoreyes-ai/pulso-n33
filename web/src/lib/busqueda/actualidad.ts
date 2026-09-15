@@ -143,6 +143,7 @@ export function consultaDeRubro(
 }
 
 export interface ConsultaActualidad {
+  actualizar?: boolean;
   a: string | null;
   z: string | null;
   t: string | null;
@@ -264,5 +265,5 @@ export async function responderActualidad(
   // Nunca un 502: un problema rio arriba viaja como 200 con la salud dentro,
   // para que la pagina pueda DECIR que paso en vez de mostrarse rota.
   const todoBien = cosechas.every((c) => c.salud.estado === "ok");
-  return json(cuerpo, 200, todoBien ? CACHE_CDN : SIN_CACHE);
+  return json(cuerpo, 200, todoBien && !consulta.actualizar ? CACHE_CDN : SIN_CACHE);
 }

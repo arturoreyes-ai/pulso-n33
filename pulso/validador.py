@@ -19,7 +19,7 @@ from datetime import date, datetime, timedelta
 
 from . import DELEGACIONES_TIJUANA, VERSION, ZONAS
 from .clasificar import ETIQUETAS, METODOS
-from .normalizar import fold, id_nota
+from .normalizar import dominio, fold, id_nota, imagen_del_medio
 from .sentimiento import IDIOMA_OMISION, IDIOMAS
 
 RE_ID = re.compile(r"^[a-z0-9_]{2,12}$")
@@ -209,6 +209,18 @@ def validar_roster(datos, hoy=None):
 
 # ----------------------------------------------------------------- medios
 
+RE_HOST = re.compile(r"^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$")
+
+# Las miniaturas se guardan tal como vienen, y el sondeo no vio ninguna de mas
+# de 300 caracteres (las de KPBS son las mas largas). El doble es margen, no
+# permiso para un cuerpo disfrazado de URL.
+IMAGEN_LARGO_MAXIMO = 500
+
+# Desde cuando una nota puede traer 'imagen'. Antes de esta fecha su ausencia
+# es la edad del corte, no un extractor roto.
+IMAGEN_DESDE = "2026-09-14"
+
+
 def validar_medios(datos):
     errores, avisos = [], []
     medios = datos.get("medios")
@@ -251,6 +263,13 @@ def validar_medios(datos):
                 for campo in ("item", "titulo", "url"):
                     if not _texto(cfg.get(campo)):
                         errores.append("{}: scrapy.{} debe ser texto no vacio".format(et, campo))
+        # Los CDN desde los que el medio sirve sus miniaturas (Photon en los
+        # medios de San Diego). Hosts pelados: la regla compara hosts.
+        cdn = m.get("imagenes_de")
+        if cdn is not None:
+            if not isinstance(cdn, list) or not all(
+                    isinstance(h, str) and RE_HOST.match(h) for h in cdn):
+                errores.append("{}: 'imagenes_de' debe ser una lista de hosts sin esquema ni ruta ({!r})".format(et, cdn))
 
     if not any(m.get("activo") for m in medios if isinstance(m.get("id"), str)):
         avisos.append("medios: ningun medio activo; la ingesta no traeria nada")
@@ -374,6 +393,8 @@ def validar_notas(datos, roster=None, medios=None, busquedas=None):
         )
 
     ids_medios = {m["id"] for m in (medios or []) if isinstance(m.get("id"), str)}
+    medios_por_id = {m["id"]: m for m in (medios or []) if isinstance(m.get("id"), str)}
+    con_imagen = 0
     zonas_medios = {m["id"]: m.get("zona") for m in (medios or [])}
     ids_busquedas = {b["id"] for b in (busquedas or []) if isinstance(b.get("id"), str)}
     ids_roster = {f["id"] for f in (roster.figuras if roster else [])}
@@ -515,6 +536,26 @@ def validar_notas(datos, roster=None, medios=None, busquedas=None):
         if not _texto(n.get("dominio")):
             errores.append("{}: falta 'dominio'".format(et))
 
+        # La miniatura es opcional y condicional: ausente es "el medio no la
+        # publica". Presente, tiene que ser https, del propio medio y de una
+        # nota que llego por el feed del medio: el RSS de Google no trae
+        # imagen, y GDELT tampoco, asi que una imagen ahi es un error de
+        # ingesta, no un dato.
+        img = n.get("imagen")
+        if img is not None:
+            medio_n = medios_por_id.get(fuente) if isinstance(fuente, str) else None
+            if not (isinstance(img, str) and img.startswith("https://")
+                    and len(img) <= IMAGEN_LARGO_MAXIMO and not any(c.isspace() for c in img)):
+                errores.append("{}: 'imagen' debe ser una URL https sin espacios de hasta {} caracteres".format(
+                    et, IMAGEN_LARGO_MAXIMO))
+            elif n.get("origen"):
+                errores.append("{}: 'imagen' solo viene del feed del propio medio; una nota de {} no la tiene".format(
+                    et, n["origen"]))
+            elif medio_n is not None and not imagen_del_medio(img, medio_n):
+                errores.append("{}: 'imagen' no es del medio ({})".format(et, dominio(img)))
+            else:
+                con_imagen += 1
+
         figuras = n.get("figuras")
         if not isinstance(figuras, list):
             errores.append("{}: 'figuras' debe ser una lista".format(et))
@@ -556,6 +597,18 @@ def validar_notas(datos, roster=None, medios=None, busquedas=None):
             "notas: {} sin 'delegaciones'; corte anterior al campo, se llena en la "
             "proxima corrida".format(sin_delegaciones)
         )
+    # Un extractor roto no da error: da cero imagenes con la misma cara que un
+    # feed sin imagenes. Si algun medio activo declara un CDN es que se espera
+    # alguna; cero entonces merece una linea. Solo si hay notas de esos medios
+    # capturadas desde que el campo existe: los meses del archivo anteriores
+    # al 14 de septiembre de 2026 no traen imagen y no es un fallo.
+    con_cdn = {m["id"] for m in (medios or [])
+               if m.get("imagenes_de") and m.get("activo", True) and isinstance(m.get("id"), str)}
+    recientes = any(n.get("fuente") in con_cdn and str(n.get("capturado") or "") >= IMAGEN_DESDE
+                    for n in notas if isinstance(n, dict))
+    if recientes and con_imagen == 0:
+        avisos.append("notas: ninguna trae 'imagen' aunque hay medios con 'imagenes_de'; "
+                      "revisa el extractor o los feeds")
     return errores, avisos
 
 

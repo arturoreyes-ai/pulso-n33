@@ -1,5 +1,7 @@
 "use client";
 
+import { ActualizarNoticias } from "@/components/muro/actualizar-noticias";
+
 import { useState } from "react";
 
 import { textoCaidos, textoIdiomas } from "@/lib/busqueda/avisos";
@@ -93,7 +95,10 @@ export function PanelActualidad({ zona }: { zona: ZonaRuta | null }) {
     <Bisel interior="p-6 md:p-8">
       {/* Las pastillas se quedan mientras la lista carga, para que cambiar de
           rubro no mueva el panel entero. */}
-      <SelectorRubro activo={rubro} onElegir={setRubro} />
+      <div className="flex flex-wrap items-center gap-3">
+        <div className="min-w-0 max-w-full"><SelectorRubro activo={rubro} onElegir={setRubro} /></div>
+        <ActualizarNoticias estado={a} />
+      </div>
 
       {a.cargando && total === 0 ? (
         <Esqueleto className="mt-5 h-[360px]" />
