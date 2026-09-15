@@ -1,15 +1,15 @@
 {
  "esquema": 1,
- "generado": "2026-09-15T12:37:49+00:00",
+ "generado": "2026-09-15T16:07:33+00:00",
  "plataforma": "instagram",
  "retencion_dias": 30,
- "comentarios_vigentes": 759,
- "posts_vigentes": 120,
- "opinion": 621,
- "repetidos": 6,
- "reacciones": 138,
+ "comentarios_vigentes": 787,
+ "posts_vigentes": 121,
+ "opinion": 647,
+ "repetidos": 9,
+ "reacciones": 140,
  "por_zona": {
-  "Tijuana": 758,
+  "Tijuana": 786,
   "estatal": 1
  },
  "por_cuenta": {
@@ -20,25 +20,25 @@
   "sintesis_ig": 5,
   "soltij_ig": 3,
   "tijuanainforma_ig": 46,
-  "tjnoticias_ig": 246,
+  "tjnoticias_ig": 274,
   "tjpublica_ig": 120,
   "uniradio_ig": 1,
   "yoamotijuana_ig": 83,
   "zeta_ig": 24
  },
  "por_idioma": {
-  "es": 759
+  "es": 787
  },
  "por_tema": [
+  {
+   "tema": "gobierno",
+   "comentarios": 10,
+   "posts": 9
+  },
   {
    "tema": "bajo",
    "comentarios": 9,
    "posts": 6
-  },
-  {
-   "tema": "gobierno",
-   "comentarios": 9,
-   "posts": 8
   },
   {
    "tema": "casa",
@@ -47,8 +47,8 @@
   },
   {
    "tema": "paso",
-   "comentarios": 7,
-   "posts": 6
+   "comentarios": 8,
+   "posts": 7
   },
   {
    "tema": "despues",
@@ -59,6 +59,11 @@
    "tema": "agua",
    "comentarios": 3,
    "posts": 3
+  },
+  {
+   "tema": "claudia",
+   "comentarios": 2,
+   "posts": 1
   },
   {
    "tema": "calor",
@@ -93,8 +98,8 @@
  ],
  "sentimiento": {
   "positivo": 104,
-  "negativo": 224,
-  "neutral": 293,
+  "negativo": 246,
+  "neutral": 297,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -224,7 +229,7 @@
    "fecha": "2026-09-14",
    "titulo": "🍔🎉 Burger Crib está de aniversario y lo celebra con cheeseburgers a solo $6 pesos. @cribburger",
    "tipo": "carrusel",
-   "likes": 1181,
+   "likes": 1278,
    "comentarios": 10,
    "publicado": "2026-09-14T23:42:10+00:00",
    "cosechados": 2,
@@ -239,6 +244,37 @@
    "temas": []
   },
   {
+   "url": "https://www.instagram.com/p/DdT80ksNQE8/",
+   "cuenta": "tjnoticias_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-15",
+   "titulo": "Gabriel Valladares, supervisor de Bomberos Tijuana, informó que durante las labores de atención al accidente registrado esta mañana sobre el bulevar 2000, fue…",
+   "tipo": "video",
+   "likes": 1023,
+   "comentarios": 43,
+   "reproducciones": 42938,
+   "publicado": "2026-09-15T14:42:55+00:00",
+   "cosechados": 28,
+   "opinion": 26,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 22,
+    "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "gobierno",
+     "comentarios": 1
+    },
+    {
+     "tema": "paso",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
    "url": "https://www.instagram.com/p/DdR3PGcmj_K/",
    "cuenta": "yoamotijuana_ig",
    "zona": "Tijuana",
@@ -248,6 +284,49 @@
    "likes": 908,
    "comentarios": 5,
    "publicado": "2026-09-14T19:14:52+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdTEy3Cj_S6/",
+   "cuenta": "tjnoticias_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-15",
+   "titulo": "Asesinan a joven de 20 años a balazos en Lomas del Porvenir",
+   "tipo": "video",
+   "likes": 731,
+   "comentarios": 5,
+   "reproducciones": 44925,
+   "publicado": "2026-09-15T06:32:59+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdSUEhomEje/",
+   "cuenta": "yoamotijuana_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-14",
+   "titulo": "Tres personas fueron atendidas por paramédicos de Cruz Roja luego de resultar afectadas por inhalación de humo durante un incendio registrado en un departament…",
+   "tipo": "carrusel",
+   "likes": 665,
+   "comentarios": 1,
+   "publicado": "2026-09-14T23:26:50+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -302,6 +381,32 @@
    "temas": []
   },
   {
+   "url": "https://www.instagram.com/p/DdSXlUYRK04/",
+   "cuenta": "yoamotijuana_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-14",
+   "titulo": "El XXV Ayuntamiento de Tijuana, informa que el martes 15 y miércoles 16 de septiembre serán días inhábiles para todo el personal, por tanto, Palacio Municipal,…",
+   "tipo": "imagen",
+   "likes": 623,
+   "comentarios": 15,
+   "publicado": "2026-09-14T23:57:56+00:00",
+   "cosechados": 4,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 2,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "independencia",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
    "url": "https://www.instagram.com/p/DdSswmem9qu/",
    "cuenta": "tjnoticias_ig",
    "zona": "Tijuana",
@@ -323,63 +428,15 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdSUEhomEje/",
-   "cuenta": "yoamotijuana_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "Tres personas fueron atendidas por paramédicos de Cruz Roja luego de resultar afectadas por inhalación de humo durante un incendio registrado en un departament…",
-   "tipo": "carrusel",
-   "likes": 595,
-   "comentarios": 1,
-   "publicado": "2026-09-14T23:26:50+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdSXlUYRK04/",
-   "cuenta": "yoamotijuana_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "El XXV Ayuntamiento de Tijuana, informa que el martes 15 y miércoles 16 de septiembre serán días inhábiles para todo el personal, por tanto, Palacio Municipal,…",
-   "tipo": "imagen",
-   "likes": 577,
-   "comentarios": 14,
-   "publicado": "2026-09-14T23:57:56+00:00",
-   "cosechados": 4,
-   "opinion": 4,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 2,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "independencia",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/DdTEy3Cj_S6/",
+   "url": "https://www.instagram.com/p/DdTI1TzG_lo/",
    "cuenta": "tjnoticias_ig",
    "zona": "Tijuana",
    "fecha": "2026-09-15",
-   "titulo": "Asesinan a joven de 20 años a balazos en Lomas del Porvenir",
-   "tipo": "video",
-   "likes": 545,
+   "titulo": "Un cierre parcial se mantiene en el bulevar Bellas Artes, la calle Josefina Rendón y la avenida López Portillo Poniente, luego de que se reportara un fuerte ol…",
+   "tipo": "carrusel",
+   "likes": 543,
    "comentarios": 1,
-   "reproducciones": 36193,
-   "publicado": "2026-09-15T06:32:59+00:00",
+   "publicado": "2026-09-15T07:07:53+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -486,56 +543,13 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdRvhGcPEqw/",
-   "cuenta": "tjnoticias_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "Un motociclista de alrededor de 30 años perdió la vida la mañana de este lunes 14 de septiembre tras impactarse contra un camión revolvedor de cemento en la co…",
-   "tipo": "video",
-   "likes": 490,
-   "comentarios": 5,
-   "reproducciones": 34819,
-   "publicado": "2026-09-14T18:08:42+00:00",
-   "cosechados": 2,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdRo98tmjOw/",
-   "cuenta": "yoamotijuana_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "🫟 ACTIVIDAD DE DIBUJO Y PINTURA",
-   "tipo": "carrusel",
-   "likes": 451,
-   "comentarios": 2,
-   "publicado": "2026-09-14T17:10:12+00:00",
-   "cosechados": 1,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.instagram.com/p/DdS09urpL0s/",
    "cuenta": "elvigia_ig",
    "zona": "Ensenada",
    "fecha": "2026-09-15",
    "titulo": "#𝗔𝗩𝗔𝗡𝗖𝗘 🚨 𝗘𝘀𝘁𝗮 𝗻𝗼𝗰𝗵𝗲 𝗮𝗿𝗱𝗶ó 𝗲𝗻 𝗹𝗹𝗮𝗺𝗮𝘀 𝗽𝗼𝗿 𝗰𝗮𝘂𝘀𝗮𝘀 𝗮ú𝗻 𝗱𝗲𝘀𝗰𝗼𝗻𝗼𝗰𝗶𝗱𝗮𝘀, 𝘂𝗻 𝘃𝗲𝗵í𝗰𝘂𝗹𝗼 𝗱𝗲𝗯𝗶𝗱𝗮𝗺𝗲𝗻𝘁𝗲 𝗲𝘀𝘁𝗮𝗰𝗶𝗼𝗻𝗮𝗱𝗼 𝘀𝗼𝗯𝗿𝗲 𝗮𝘃𝗲𝗻𝗶𝗱𝗮 𝗗𝗶𝗮𝗺𝗮𝗻𝘁𝗲, 𝗰𝗮𝘀𝗶 𝗲𝘀𝗾𝘂𝗶𝗻𝗮 𝗰𝗼𝗻 𝗣𝗲𝗱𝗿𝗼 𝗟𝗼𝘆𝗼𝗹𝗮, 𝗽𝗼…",
    "tipo": "imagen",
-   "likes": 32,
+   "likes": 37,
    "comentarios": 0,
    "publicado": "2026-09-15T04:14:19+00:00",
    "cosechados": 0,
@@ -572,15 +586,16 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdReGyuGxW7/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
-   "fecha": "2026-09-14",
-   "titulo": "#𝗔𝗩𝗔𝗡𝗖𝗘 🚨 𝗘𝗻 𝗲𝗹 𝗷𝘂𝗶𝗰𝗶𝗼 𝗼𝗿𝗮𝗹 𝗽𝗮𝗿𝗮 𝗮𝗰𝗹𝗮𝗿𝗮𝗿 𝗹𝗮 𝗺𝘂𝗲𝗿𝘁𝗲 𝗱𝗲 𝗹𝗼𝘀 𝗵𝗲𝗿𝗺𝗮𝗻𝗼𝘀 𝗮𝘂𝘀𝘁𝗿𝗮𝗹𝗶𝗮𝗻𝗼𝘀 𝗝𝗮𝗸𝗲 𝘆 𝗖𝗮𝗹𝗹𝘂𝗺 𝗥𝗼𝗯𝗶𝗻𝘀𝗼𝗻, 𝘆 𝗲𝗹 𝗲𝘀𝘁𝗮𝗱𝗼𝘂𝗻𝗶𝗱𝗲𝗻𝘀𝗲 𝗝𝗮𝗰𝗸 𝗖𝗮𝗿𝘁𝗲𝗿 “𝗡”, 𝗶𝗻𝗶𝗰𝗶𝗮𝗱𝗼 𝗰𝗼𝗻𝘁𝗿𝗮 𝗝𝗲…",
-   "tipo": "imagen",
+   "url": "https://www.instagram.com/p/DdTy9FMsXN1/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-15",
+   "titulo": "Las largas #filas también son en la #Sentri de la #garita de #SanYsidro por la Calle Segunda del Centro de #Tijuana",
+   "tipo": "video",
    "likes": 11,
    "comentarios": 0,
-   "publicado": "2026-09-14T15:35:18+00:00",
+   "reproducciones": 1167,
+   "publicado": "2026-09-15T13:16:38+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -599,9 +614,9 @@
    "fecha": "2026-09-14",
    "titulo": "Carga fiscal y cobro de piso asfixian a empresarios en Baja California",
    "tipo": "video",
-   "likes": 7,
+   "likes": 8,
    "comentarios": 0,
-   "reproducciones": 413,
+   "reproducciones": 155,
    "publicado": "2026-09-14T21:47:03+00:00",
    "cosechados": 0,
    "opinion": 0,
@@ -667,8 +682,30 @@
    "tipo": "video",
    "likes": 5,
    "comentarios": 0,
-   "reproducciones": 261,
+   "reproducciones": 77,
    "publicado": "2026-09-14T21:46:36+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdT85JvCCOy/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-15",
+   "titulo": "Calimax abre nueva sucursal en la zona de Verona",
+   "tipo": "video",
+   "likes": 5,
+   "comentarios": 0,
+   "reproducciones": 382,
+   "publicado": "2026-09-15T14:43:28+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -710,7 +747,7 @@
    "tipo": "video",
    "likes": 3,
    "comentarios": 0,
-   "reproducciones": 199,
+   "reproducciones": 214,
    "publicado": "2026-09-15T00:05:37+00:00",
    "cosechados": 0,
    "opinion": 0,
@@ -800,48 +837,6 @@
    "comentarios": 0,
    "reproducciones": 92,
    "publicado": "2026-09-14T19:26:22+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdRgSx6m13Z/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
-   "fecha": "2026-09-14",
-   "titulo": "#𝗔𝗩𝗔𝗡𝗖𝗘 ⚾ 𝗗𝗼𝗺𝗶𝗻𝗴𝗼 𝗿𝗲𝗱𝗼𝗻𝗱𝗼 𝗽𝗮𝗿𝗮 𝗹𝗮 𝗟𝗶𝗴𝗮 𝗠𝘂𝗻𝗶𝗰𝗶𝗽𝗮𝗹 𝗱𝗲 𝗘𝗻𝘀𝗲𝗻𝗮𝗱𝗮",
-   "tipo": "imagen",
-   "likes": 1,
-   "comentarios": 0,
-   "publicado": "2026-09-14T15:54:25+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdRhhRSm-OA/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
-   "fecha": "2026-09-14",
-   "titulo": "𝗘𝗹 𝗱𝗶𝗿𝗶𝗴𝗲𝗻𝘁𝗲 𝗲𝗺𝗽𝗿𝗲𝘀𝗮𝗿𝗶𝗮𝗹 𝘀𝗲ñ𝗮𝗹ó 𝗾𝘂𝗲 𝗲𝘅𝗶𝘀𝘁𝗲 𝘂𝗻 𝗺𝗲𝗿𝗰𝗮𝗱𝗼 𝗿𝗲𝗹𝗮𝗰𝗶𝗼𝗻𝗮𝗱𝗼 𝗰𝗼𝗻 𝗰𝗶𝘂𝗱𝗮𝗱𝗮𝗻𝗼𝘀 𝗲𝘀𝘁𝗮𝗱𝗼𝘂𝗻𝗶𝗱𝗲𝗻𝘀𝗲𝘀 𝗿𝗲𝘁𝗶𝗿𝗮𝗱𝗼𝘀 𝗾𝘂𝗲 𝗲𝗻𝗰𝘂𝗲𝗻𝘁𝗿𝗮𝗻 𝗲𝗻 𝗕𝗖 𝗼𝗽𝗰𝗶𝗼𝗻𝗲𝘀 𝗱𝗲 𝗿𝗲𝘀𝗶𝗱𝗲𝗻𝗰𝗶𝗮, 𝘀𝗲𝗿𝘃𝗶𝗰𝗶…",
-   "tipo": "imagen",
-   "likes": 1,
-   "comentarios": 0,
-   "publicado": "2026-09-14T16:05:07+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -970,7 +965,7 @@
    "tipo": "video",
    "likes": 1,
    "comentarios": 0,
-   "reproducciones": 175,
+   "reproducciones": 199,
    "publicado": "2026-09-15T02:31:02+00:00",
    "cosechados": 0,
    "opinion": 0,
@@ -1112,6 +1107,27 @@
    "temas": []
   },
   {
+   "url": "https://www.instagram.com/p/DdR8-tGDArM/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-14",
+   "titulo": "𝗨𝗻𝗮 𝗺𝘂𝗷𝗲𝗿 𝗳𝘂𝗲 𝗱𝗲𝘁𝗲𝗻𝗶𝗱𝗮 𝗽𝗼𝗿 𝗲𝗹𝗲𝗺𝗲𝗻𝘁𝗼𝘀 𝗱𝗲 𝗹𝗮 𝗗𝗶𝗿𝗲𝗰𝗰𝗶ó𝗻 𝗱𝗲 𝗦𝗲𝗴𝘂𝗿𝗶𝗱𝗮𝗱 𝗣ú𝗯𝗹𝗶𝗰𝗮 𝗠𝘂𝗻𝗶𝗰𝗶𝗽𝗮𝗹 𝘁𝗿𝗮𝘀 𝘀𝗲𝗿 𝘀𝗼𝗿𝗽𝗿𝗲𝗻𝗱𝗶𝗱𝗮 𝗽𝗿𝗲𝘀𝘂𝗻𝘁𝗮𝗺𝗲𝗻𝘁𝗲 𝗶𝗻𝘁𝗲𝗻𝘁𝗮𝗻𝗱𝗼 𝘀𝘂𝘀𝘁𝗿𝗮𝗲𝗿 𝗽𝗿𝗼𝗱𝘂𝗰𝘁𝗼𝘀 𝘀𝗶𝗻 𝗽𝗮𝗴𝗮𝗿𝗹…",
+   "tipo": "imagen",
+   "likes": 0,
+   "comentarios": 0,
+   "publicado": "2026-09-14T20:05:04+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.instagram.com/p/DdR8CftCqKG/",
    "cuenta": "uniradio_ig",
    "zona": "estatal",
@@ -1134,16 +1150,36 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdR8El1kZyP/",
-   "cuenta": "uniradio_ig",
-   "zona": "estatal",
+   "url": "https://www.instagram.com/p/DdRk8uLgXm3/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
    "fecha": "2026-09-14",
-   "titulo": "Será la propia Sheinbaum quien anuncie su gira por Baja California: Ávila Olmeda",
-   "tipo": "video",
+   "titulo": "𝗘𝗹 𝗚𝗼𝗯𝗶𝗲𝗿𝗻𝗼 𝗱𝗲𝗹 𝗘𝘀𝘁𝗮𝗱𝗼 𝗻𝗼 𝗽𝘂𝗲𝗱𝗲 𝘀𝗲𝗿 𝘀𝗼𝗹𝗮𝗺𝗲𝗻𝘁𝗲 𝘂𝗻 𝘁𝗲𝘀𝘁𝗶𝗴𝗼 𝗺𝘂𝗱𝗼; 𝗱𝗲𝗯𝗲 𝗶𝗻𝘁𝗲𝗿𝘃𝗲𝗻𝗶𝗿 𝗽𝗮𝗿𝗮 𝗿𝗲𝘀𝗼𝗹𝘃𝗲𝗿 𝗲𝗹 𝗰𝗼𝗻𝗳𝗹𝗶𝗰𝘁𝗼 𝗽𝗼𝗿 𝗲𝗹 𝗽𝗮𝗿𝗾𝘂𝗲 𝗱𝗲 𝗹𝗮 𝗔𝗺𝗽𝗹𝗶𝗮𝗰𝗶ó𝗻 𝗠𝗼𝗱𝗲𝗿𝗻𝗮. 𝗘𝗻 𝟭𝟵𝟱𝟴, 𝗲𝗿𝗮…",
+   "tipo": "imagen",
    "likes": 0,
    "comentarios": 0,
-   "reproducciones": 37,
-   "publicado": "2026-09-14T19:57:32+00:00",
+   "publicado": "2026-09-14T16:35:05+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdRnIisoDNS/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-14",
+   "titulo": "#𝗔𝗩𝗔𝗡𝗖𝗘 🚨 𝗖𝗼𝗺𝗼 𝗽𝗿𝗼𝗱𝘂𝗰𝘁𝗼 𝗱𝗲𝗹 𝗰𝗮𝘁𝗲𝗼 𝗮 𝘂𝗻𝗮 𝘃𝗶𝘃𝗶𝗲𝗻𝗱𝗮 𝗱𝗲 𝗲𝘀𝘁𝗲 𝗺𝘂𝗻𝗶𝗰𝗶𝗽𝗶𝗼, 𝗹𝗮𝘀 𝗮𝘂𝘁𝗼𝗿𝗶𝗱𝗮𝗱𝗲𝘀 𝗱𝗲𝗰𝗼𝗺𝗶𝘀𝗮𝗿𝗼𝗻 𝟭𝟮𝟬 𝗸𝗶𝗹𝗼𝗴𝗿𝗮𝗺𝗼𝘀 𝗱𝗲 𝗺𝗮𝗿𝗶𝗵𝘂𝗮𝗻𝗮 𝘆 𝗱𝗼𝘀 𝘃𝗲𝗵í𝗰𝘂𝗹𝗼𝘀, 𝘀𝗶𝗻 𝗽𝗲𝗿𝘀𝗼𝗻𝗮𝘀 𝗱𝗲𝘁𝗲𝗻…",
+   "tipo": "imagen",
+   "likes": 0,
+   "comentarios": 0,
+   "publicado": "2026-09-14T16:54:11+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1170,40 +1206,35 @@
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar"
+   "crudos": 3
   },
   {
    "cuenta": "elvigia_ig",
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar"
+   "crudos": 1
   },
   {
    "cuenta": "frontera_ig",
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar"
+   "crudos": 5
   },
   {
    "cuenta": "siempre_ig",
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar"
+   "crudos": 2
   },
   {
    "cuenta": "sintesis_ig",
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar"
+   "crudos": 2
   },
   {
    "cuenta": "soltij_ig",
@@ -1225,8 +1256,8 @@
    "cuenta": "tjnoticias_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 1,
-   "crudos": 2
+   "comentarios": 28,
+   "crudos": 28
   },
   {
    "cuenta": "tjpublica_ig",
@@ -1241,8 +1272,7 @@
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar"
+   "crudos": 2
   },
   {
    "cuenta": "yoamotijuana_ig",
@@ -1263,19 +1293,19 @@
  ],
  "gasto": {
   "resultados": 2600,
-  "gastado": 67,
+  "gastado": 108,
   "por_concepto": {
    "afn_ig": 5,
-   "eltijuanense_ig": 5,
-   "elvigia_ig": 5,
-   "frontera_ig": 5,
-   "siempre_ig": 5,
-   "sintesis_ig": 5,
+   "eltijuanense_ig": 8,
+   "elvigia_ig": 6,
+   "frontera_ig": 10,
+   "siempre_ig": 7,
+   "sintesis_ig": 7,
    "soltij_ig": 5,
    "tijuanainforma_ig": 5,
-   "tjnoticias_ig": 7,
+   "tjnoticias_ig": 33,
    "tjpublica_ig": 5,
-   "uniradio_ig": 5,
+   "uniradio_ig": 7,
    "yoamotijuana_ig": 5,
    "zeta_ig": 5
   }

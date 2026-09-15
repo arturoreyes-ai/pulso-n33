@@ -29,7 +29,13 @@
      "clave": "burgueno"
     }
    ],
-   "postura": null,
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4548,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "delegaciones": []
   },
   {
@@ -58,7 +64,13 @@
      "clave": "burgueno"
     }
    ],
-   "postura": null,
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5164,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "delegaciones": []
   },
   {
@@ -87,7 +99,13 @@
      "clave": "burgueno"
     }
    ],
-   "postura": null,
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7181,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "delegaciones": []
   }
  ]

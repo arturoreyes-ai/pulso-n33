@@ -37,7 +37,13 @@
    "publicado": "2026-08-15T00:00:00",
    "capturado": "2026-09-04T18:18:13+00:00",
    "figuras": [],
-   "postura": null,
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.716,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "delegaciones": []
   },
   {
@@ -72,7 +78,13 @@
    "publicado": "2026-08-14T08:52:00-07:00",
    "capturado": "2026-09-04T00:35:01+00:00",
    "figuras": [],
-   "postura": null,
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5529,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "delegaciones": []
   },
   {
@@ -98,7 +110,13 @@
      "clave": "presidente municipal de tijuana"
     }
    ],
-   "postura": null,
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5027,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "delegaciones": []
   },
   {
