@@ -1,33 +1,33 @@
 {
  "esquema": 1,
- "generado": "2026-09-15T16:07:33+00:00",
+ "generado": "2026-09-15T18:33:48+00:00",
  "plataforma": "instagram",
  "retencion_dias": 30,
- "comentarios_vigentes": 787,
- "posts_vigentes": 121,
- "opinion": 647,
+ "comentarios_vigentes": 826,
+ "posts_vigentes": 131,
+ "opinion": 681,
  "repetidos": 9,
- "reacciones": 140,
+ "reacciones": 145,
  "por_zona": {
-  "Tijuana": 786,
+  "Tijuana": 825,
   "estatal": 1
  },
  "por_cuenta": {
   "afn_ig": 42,
   "eltijuanense_ig": 14,
-  "frontera_ig": 92,
-  "siempre_ig": 83,
-  "sintesis_ig": 5,
+  "frontera_ig": 106,
+  "siempre_ig": 84,
+  "sintesis_ig": 6,
   "soltij_ig": 3,
   "tijuanainforma_ig": 46,
-  "tjnoticias_ig": 274,
+  "tjnoticias_ig": 290,
   "tjpublica_ig": 120,
   "uniradio_ig": 1,
-  "yoamotijuana_ig": 83,
+  "yoamotijuana_ig": 90,
   "zeta_ig": 24
  },
  "por_idioma": {
-  "es": 787
+  "es": 826
  },
  "por_tema": [
   {
@@ -42,8 +42,8 @@
   },
   {
    "tema": "casa",
-   "comentarios": 8,
-   "posts": 8
+   "comentarios": 9,
+   "posts": 9
   },
   {
    "tema": "paso",
@@ -61,13 +61,13 @@
    "posts": 3
   },
   {
-   "tema": "claudia",
+   "tema": "calor",
    "comentarios": 2,
-   "posts": 1
+   "posts": 2
   },
   {
-   "tema": "calor",
-   "comentarios": 1,
+   "tema": "claudia",
+   "comentarios": 2,
    "posts": 1
   },
   {
@@ -86,6 +86,11 @@
    "posts": 1
   },
   {
+   "tema": "grito",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
    "tema": "independencia",
    "comentarios": 1,
    "posts": 1
@@ -97,9 +102,9 @@
   }
  ],
  "sentimiento": {
-  "positivo": 104,
-  "negativo": 246,
-  "neutral": 297,
+  "positivo": 106,
+  "negativo": 268,
+  "neutral": 307,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -200,28 +205,6 @@
   }
  ],
  "destacados": [
-  {
-   "url": "https://www.instagram.com/p/DdRkmFvzUhg/",
-   "cuenta": "yoamotijuana_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "DE NEVADA HASTA TIJUANA 🚲",
-   "tipo": "video",
-   "likes": 1344,
-   "comentarios": 73,
-   "reproducciones": 80844,
-   "publicado": "2026-09-14T16:33:26+00:00",
-   "cosechados": 3,
-   "opinion": 3,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
   {
    "url": "https://www.instagram.com/p/DdSV02mmRlH/",
    "cuenta": "yoamotijuana_ig",
@@ -449,27 +432,6 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdRjOvORG0a/",
-   "cuenta": "tjnoticias_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "El clima en Tijuana será una chulada esta semana en comparación al infierno que vivimos la semana pasada, pero eso sí, las temperaturas cálidas seguirán todaví…",
-   "tipo": "imagen",
-   "likes": 527,
-   "comentarios": 5,
-   "publicado": "2026-09-14T16:20:20+00:00",
-   "cosechados": 2,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.instagram.com/p/DdR8REMPGTt/",
    "cuenta": "tjnoticias_ig",
    "zona": "Tijuana",
@@ -501,6 +463,36 @@
    ]
   },
   {
+   "url": "https://www.instagram.com/p/DdUL6fgGus5/",
+   "cuenta": "yoamotijuana_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-15",
+   "titulo": "Con motivo de las actividades y eventos masivos que se desarrollan durante el mes de septiembre en la ciudad, la Secretaría de Seguridad y Protección Ciudadana…",
+   "tipo": "carrusel",
+   "likes": 517,
+   "comentarios": 8,
+   "publicado": "2026-09-15T16:54:02+00:00",
+   "cosechados": 6,
+   "opinion": 5,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 2,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "casa",
+     "comentarios": 1
+    },
+    {
+     "tema": "grito",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
    "url": "https://www.instagram.com/p/DdSqF-zG8Nm/",
    "cuenta": "tjnoticias_ig",
    "zona": "Tijuana",
@@ -522,20 +514,46 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdRx9zlGZaZ/",
+   "url": "https://www.instagram.com/p/DdUJ9XwmniN/",
    "cuenta": "yoamotijuana_ig",
    "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "Un perrito pastor ovejero necesita urgentemente una familia que pueda darle un hogar y una vida digna. 🥺",
-   "tipo": "carrusel",
-   "likes": 490,
-   "comentarios": 20,
-   "publicado": "2026-09-14T18:28:49+00:00",
-   "cosechados": 3,
-   "opinion": 3,
+   "fecha": "2026-09-15",
+   "titulo": "Las mañanas principalmente tendrá temperaturas mucho más frescas que los días anteriores, por lo que serán perfectas para los amantes de un cafecito caliente.",
+   "tipo": "imagen",
+   "likes": 409,
+   "comentarios": 5,
+   "publicado": "2026-09-15T16:36:58+00:00",
+   "cosechados": 1,
+   "opinion": 1,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 2,
+    "negativo": 1,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "calor",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
+   "url": "https://www.instagram.com/p/DdSqgjbGAcm/",
+   "cuenta": "yoamotijuana_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-15",
+   "titulo": "Una familia de la colonia Guaycura intenta reconstruir su vida después de perder su hogar y todas sus pertenencias en un incendio ocurrido el pasado 5 de septi…",
+   "tipo": "carrusel",
+   "likes": 408,
+   "comentarios": 3,
+   "publicado": "2026-09-15T02:42:54+00:00",
+   "cosechados": 3,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
     "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -552,6 +570,28 @@
    "likes": 37,
    "comentarios": 0,
    "publicado": "2026-09-15T04:14:19+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdTy9FMsXN1/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-15",
+   "titulo": "Las largas #filas también son en la #Sentri de la #garita de #SanYsidro por la Calle Segunda del Centro de #Tijuana",
+   "tipo": "video",
+   "likes": 20,
+   "comentarios": 2,
+   "reproducciones": 1650,
+   "publicado": "2026-09-15T13:16:38+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -586,16 +626,16 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdTy9FMsXN1/",
+   "url": "https://www.instagram.com/p/DdT85JvCCOy/",
    "cuenta": "uniradio_ig",
    "zona": "estatal",
    "fecha": "2026-09-15",
-   "titulo": "Las largas #filas también son en la #Sentri de la #garita de #SanYsidro por la Calle Segunda del Centro de #Tijuana",
+   "titulo": "Calimax abre nueva sucursal en la zona de Verona",
    "tipo": "video",
-   "likes": 11,
+   "likes": 12,
    "comentarios": 0,
-   "reproducciones": 1167,
-   "publicado": "2026-09-15T13:16:38+00:00",
+   "reproducciones": 711,
+   "publicado": "2026-09-15T14:43:28+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -616,7 +656,7 @@
    "tipo": "video",
    "likes": 8,
    "comentarios": 0,
-   "reproducciones": 155,
+   "reproducciones": 478,
    "publicado": "2026-09-14T21:47:03+00:00",
    "cosechados": 0,
    "opinion": 0,
@@ -696,28 +736,6 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdT85JvCCOy/",
-   "cuenta": "uniradio_ig",
-   "zona": "estatal",
-   "fecha": "2026-09-15",
-   "titulo": "Calimax abre nueva sucursal en la zona de Verona",
-   "tipo": "video",
-   "likes": 5,
-   "comentarios": 0,
-   "reproducciones": 382,
-   "publicado": "2026-09-15T14:43:28+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.instagram.com/p/DdSmLXBFCqC/",
    "cuenta": "elvigia_ig",
    "zona": "Ensenada",
@@ -747,52 +765,8 @@
    "tipo": "video",
    "likes": 3,
    "comentarios": 0,
-   "reproducciones": 214,
+   "reproducciones": 223,
    "publicado": "2026-09-15T00:05:37+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdRlMlVM0MU/",
-   "cuenta": "uniradio_ig",
-   "zona": "estatal",
-   "fecha": "2026-09-14",
-   "titulo": "GINA VILLALOBOS, Prosecretaria de la Confederación de Cámaras de Comercio (Concanaco), y coordinadora del Comité Promotor de Inversiones de Baja California.",
-   "tipo": "video",
-   "likes": 2,
-   "comentarios": 0,
-   "reproducciones": 97,
-   "publicado": "2026-09-14T16:47:56+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdRmVziMel2/",
-   "cuenta": "uniradio_ig",
-   "zona": "estatal",
-   "fecha": "2026-09-14",
-   "titulo": "DR. LUIS CARLOS LÓPEZ ULLOA, historiador, escritor y profesor universitario. Divulgador de la historia pública y analista de los procesos sociales y políticas.",
-   "tipo": "video",
-   "likes": 2,
-   "comentarios": 0,
-   "reproducciones": 45,
-   "publicado": "2026-09-14T16:51:38+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -837,49 +811,6 @@
    "comentarios": 0,
    "reproducciones": 92,
    "publicado": "2026-09-14T19:26:22+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdRvQCJDve9/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
-   "fecha": "2026-09-14",
-   "titulo": "𝗘𝗹 𝗰𝗶𝗰𝗹𝗶𝘀𝘁𝗮 𝗲𝗻𝘀𝗲𝗻𝗮𝗱𝗲𝗻𝘀𝗲 𝗳𝗶𝗿𝗺ó 𝘂𝗻𝗮 𝗮𝗰𝘁𝘂𝗮𝗰𝗶ó𝗻 𝗺𝗲𝗺𝗼𝗿𝗮𝗯𝗹𝗲 𝗲𝗻 𝗲𝗹 𝗚𝗿𝗮𝗻 𝗣𝗿𝗲𝗺𝗶𝗼 𝗱𝗲 𝗠𝗼𝗻𝘁𝗿𝗲𝗮𝗹 𝗲𝘀𝘁𝗲 𝗱𝗼𝗺𝗶𝗻𝗴𝗼 𝟭𝟯 𝗱𝗲 𝘀𝗲𝗽𝘁𝗶𝗲𝗺𝗯𝗿𝗲, 𝗮𝗱𝗷𝘂𝗱𝗶𝗰á𝗻𝗱𝗼𝘀𝗲 𝗹𝗮 𝘃𝗶𝗰𝘁𝗼𝗿𝗶𝗮 𝗲𝗻 𝘂𝗻 𝗰𝗶𝗲𝗿𝗿𝗲 𝗲𝘀𝗽𝗲𝗰…",
-   "tipo": "imagen",
-   "likes": 1,
-   "comentarios": 0,
-   "publicado": "2026-09-14T18:05:06+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdRyHXHFEXl/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
-   "fecha": "2026-09-14",
-   "titulo": "Suman otro ejecutado en Valle de la Trinidad #elvigia #Ensenada",
-   "tipo": "video",
-   "likes": 1,
-   "comentarios": 0,
-   "reproducciones": 192,
-   "publicado": "2026-09-14T18:30:33+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -967,6 +898,49 @@
    "comentarios": 0,
    "reproducciones": 199,
    "publicado": "2026-09-15T02:31:02+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdULEvDsd0u/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-15",
+   "titulo": "Jairo Calixto Albarrán, periodista, escritor, humorista político y crítico social mexicano. Escritor de “Haz patria, educa a un derechairo”. Presentacion del l…",
+   "tipo": "video",
+   "likes": 1,
+   "comentarios": 0,
+   "reproducciones": 33,
+   "publicado": "2026-09-15T16:54:56+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdULWXIJvHy/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-15",
+   "titulo": "𝗟𝘂𝗸𝗲 𝗠𝗰𝗠𝗶𝗹𝗹𝗶𝗻 𝗱𝗼𝗺𝗶𝗻ó 𝗹𝗮 𝗿𝘂𝘁𝗮 𝗱𝗲 𝟰𝟮𝟯.𝟰𝟮 𝗺𝗶𝗹𝗹𝗮𝘀 𝗲𝗻 𝗳𝗼𝗿𝗺𝗮 𝗼𝘃𝗲𝗿𝗮𝗹𝗹, 𝘆 𝗲𝗻 𝗹𝗼𝘀 𝗦𝗖𝗢𝗥𝗘 𝗧𝗿𝗼𝗽𝗵𝘆 𝗧𝗿𝘂𝗰𝗸𝘀 𝗰𝗼𝗻 𝘂𝗻 𝘁𝗶𝗲𝗺𝗽𝗼 𝗼𝗳𝗶𝗰𝗶𝗮𝗹 𝗱𝗲 𝟴 𝗵𝗼𝗿𝗮𝘀, 𝟰𝟬 𝗺𝗶𝗻𝘂𝘁𝗼𝘀 𝘆 𝟱𝟬 𝘀𝗲𝗴𝘂𝗻𝗱𝗼𝘀, 𝗽𝗮𝗿𝗮 𝘀…",
+   "tipo": "imagen",
+   "likes": 1,
+   "comentarios": 0,
+   "publicado": "2026-09-15T18:05:05+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1150,15 +1124,16 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdRk8uLgXm3/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
+   "url": "https://www.instagram.com/p/DdR8El1kZyP/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
    "fecha": "2026-09-14",
-   "titulo": "𝗘𝗹 𝗚𝗼𝗯𝗶𝗲𝗿𝗻𝗼 𝗱𝗲𝗹 𝗘𝘀𝘁𝗮𝗱𝗼 𝗻𝗼 𝗽𝘂𝗲𝗱𝗲 𝘀𝗲𝗿 𝘀𝗼𝗹𝗮𝗺𝗲𝗻𝘁𝗲 𝘂𝗻 𝘁𝗲𝘀𝘁𝗶𝗴𝗼 𝗺𝘂𝗱𝗼; 𝗱𝗲𝗯𝗲 𝗶𝗻𝘁𝗲𝗿𝘃𝗲𝗻𝗶𝗿 𝗽𝗮𝗿𝗮 𝗿𝗲𝘀𝗼𝗹𝘃𝗲𝗿 𝗲𝗹 𝗰𝗼𝗻𝗳𝗹𝗶𝗰𝘁𝗼 𝗽𝗼𝗿 𝗲𝗹 𝗽𝗮𝗿𝗾𝘂𝗲 𝗱𝗲 𝗹𝗮 𝗔𝗺𝗽𝗹𝗶𝗮𝗰𝗶ó𝗻 𝗠𝗼𝗱𝗲𝗿𝗻𝗮. 𝗘𝗻 𝟭𝟵𝟱𝟴, 𝗲𝗿𝗮…",
-   "tipo": "imagen",
+   "titulo": "Será la propia Sheinbaum quien anuncie su gira por Baja California: Ávila Olmeda",
+   "tipo": "video",
    "likes": 0,
    "comentarios": 0,
-   "publicado": "2026-09-14T16:35:05+00:00",
+   "reproducciones": 37,
+   "publicado": "2026-09-14T19:57:32+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1171,15 +1146,57 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdRnIisoDNS/",
+   "url": "https://www.instagram.com/p/DdRyr8Wj-ot/",
    "cuenta": "elvigia_ig",
    "zona": "Ensenada",
    "fecha": "2026-09-14",
-   "titulo": "#𝗔𝗩𝗔𝗡𝗖𝗘 🚨 𝗖𝗼𝗺𝗼 𝗽𝗿𝗼𝗱𝘂𝗰𝘁𝗼 𝗱𝗲𝗹 𝗰𝗮𝘁𝗲𝗼 𝗮 𝘂𝗻𝗮 𝘃𝗶𝘃𝗶𝗲𝗻𝗱𝗮 𝗱𝗲 𝗲𝘀𝘁𝗲 𝗺𝘂𝗻𝗶𝗰𝗶𝗽𝗶𝗼, 𝗹𝗮𝘀 𝗮𝘂𝘁𝗼𝗿𝗶𝗱𝗮𝗱𝗲𝘀 𝗱𝗲𝗰𝗼𝗺𝗶𝘀𝗮𝗿𝗼𝗻 𝟭𝟮𝟬 𝗸𝗶𝗹𝗼𝗴𝗿𝗮𝗺𝗼𝘀 𝗱𝗲 𝗺𝗮𝗿𝗶𝗵𝘂𝗮𝗻𝗮 𝘆 𝗱𝗼𝘀 𝘃𝗲𝗵í𝗰𝘂𝗹𝗼𝘀, 𝘀𝗶𝗻 𝗽𝗲𝗿𝘀𝗼𝗻𝗮𝘀 𝗱𝗲𝘁𝗲𝗻…",
+   "titulo": "𝗟𝗮 𝗔𝘂𝗱𝗶𝘁𝗼𝗿í𝗮 𝗦𝘂𝗽𝗲𝗿𝗶𝗼𝗿 𝗱𝗲 𝗹𝗮 𝗙𝗲𝗱𝗲𝗿𝗮𝗰𝗶ó𝗻 (𝗔𝗦𝗙) 𝗱𝗲𝗻𝘂𝗻𝗰𝗶ó 𝗲𝗹 𝗽𝗿𝗲𝘀𝘂𝗻𝘁𝗼 𝘂𝘀𝗼 𝗱𝗲 𝗳𝗶𝗿𝗺𝗮𝘀, 𝗱𝗼𝗰𝘂𝗺𝗲𝗻𝘁𝗼𝘀 𝘆 𝗺𝗲𝗺𝗯𝗿𝗲𝘁𝗲𝘀 𝗳𝗮𝗹𝘀𝗼𝘀 𝗽𝗮𝗿𝗮 𝗲𝘅𝘁𝗼𝗿𝘀𝗶𝗼𝗻𝗮𝗿 𝗮 𝗲𝗻𝘁𝗲𝘀 𝗴𝘂𝗯𝗲𝗿𝗻𝗮𝗺𝗲𝗻𝘁𝗮𝗹𝗲𝘀 𝘆 𝗳𝘂𝗻𝗰𝗶…",
    "tipo": "imagen",
    "likes": 0,
    "comentarios": 0,
-   "publicado": "2026-09-14T16:54:11+00:00",
+   "publicado": "2026-09-14T18:35:08+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdSYcvsEbSm/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-15",
+   "titulo": "𝗟𝗮𝘀 𝗼𝗳𝗶𝗰𝗶𝗻𝗮𝘀 𝗱𝗲 𝗹𝗮 𝗖𝗮𝘀𝗮 𝗠𝘂𝗻𝗶𝗰𝗶𝗽𝗮𝗹 𝗱𝗲 𝗘𝗻𝘀𝗲𝗻𝗮𝗱𝗮 𝗽𝗲𝗿𝗺𝗮𝗻𝗲𝗰𝗲𝗿á𝗻 𝗰𝗲𝗿𝗿𝗮𝗱𝗮𝘀 𝗲𝗹 𝗺𝗮𝗿𝘁𝗲𝘀 𝟭𝟱 𝘆 𝗺𝗶é𝗿𝗰𝗼𝗹𝗲𝘀 𝟭𝟲 𝗱𝗲 𝘀𝗲𝗽𝘁𝗶𝗲𝗺𝗯𝗿𝗲, 𝗰𝗼𝗻 𝗺𝗼𝘁𝗶𝘃𝗼 𝗱𝗲 𝗹𝗮𝘀 𝗙𝗶𝗲𝘀𝘁𝗮𝘀 𝗣𝗮𝘁𝗿𝗶𝗮𝘀.",
+   "tipo": "imagen",
+   "likes": 0,
+   "comentarios": 0,
+   "publicado": "2026-09-15T00:05:06+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdSavS-FAcp/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-15",
+   "titulo": "𝗖𝗼𝗻𝘃𝗼𝗰𝗮𝗻 𝗮 𝗰𝗼𝗺𝘂𝗻𝗶𝗱𝗮𝗱 𝗮𝘂𝘁𝗶𝘀𝘁𝗮 𝗮 𝗶𝗻𝘁𝗲𝗴𝗿𝗮𝗿 𝗰𝗼𝗻𝘀𝗲𝗷𝗼 𝗺𝘂𝗻𝗶𝗰𝗶𝗽𝗮𝗹: 𝗘𝗹 𝗚𝗼𝗯𝗶𝗲𝗿𝗻𝗼 𝗱𝗲 𝗘𝗻𝘀𝗲𝗻𝗮𝗱𝗮 𝗮𝗯𝗿𝗶ó 𝘂𝗻𝗮 𝗰𝗼𝗻𝘃𝗼𝗰𝗮𝘁𝗼𝗿𝗶𝗮 𝗽𝗮𝗿𝗮 𝗾𝘂𝗲 𝗮𝘀𝗼𝗰𝗶𝗮𝗰𝗶𝗼𝗻𝗲𝘀 𝗰𝗶𝘃𝗶𝗹𝗲𝘀, 𝗽𝗲𝗿𝘀𝗼𝗻𝗮𝘀 𝗮𝘂𝘁𝗶𝘀𝘁𝗮𝘀 𝘆 𝗳𝗮…",
+   "tipo": "imagen",
+   "likes": 0,
+   "comentarios": 0,
+   "publicado": "2026-09-15T00:25:07+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1206,35 +1223,35 @@
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 3
+   "crudos": 1
   },
   {
    "cuenta": "elvigia_ig",
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 1
+   "crudos": 5
   },
   {
    "cuenta": "frontera_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 5
+   "comentarios": 14,
+   "crudos": 18
   },
   {
    "cuenta": "siempre_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
+   "comentarios": 1,
    "crudos": 2
   },
   {
    "cuenta": "sintesis_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 2
+   "comentarios": 1,
+   "crudos": 5
   },
   {
    "cuenta": "soltij_ig",
@@ -1256,8 +1273,8 @@
    "cuenta": "tjnoticias_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 28,
-   "crudos": 28
+   "comentarios": 16,
+   "crudos": 17
   },
   {
    "cuenta": "tjpublica_ig",
@@ -1272,15 +1289,14 @@
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 2
+   "crudos": 1
   },
   {
    "cuenta": "yoamotijuana_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar"
+   "comentarios": 7,
+   "crudos": 10
   },
   {
    "cuenta": "zeta_ig",
@@ -1293,20 +1309,20 @@
  ],
  "gasto": {
   "resultados": 2600,
-  "gastado": 108,
+  "gastado": 124,
   "por_concepto": {
    "afn_ig": 5,
-   "eltijuanense_ig": 8,
-   "elvigia_ig": 6,
-   "frontera_ig": 10,
+   "eltijuanense_ig": 6,
+   "elvigia_ig": 10,
+   "frontera_ig": 23,
    "siempre_ig": 7,
-   "sintesis_ig": 7,
+   "sintesis_ig": 10,
    "soltij_ig": 5,
    "tijuanainforma_ig": 5,
-   "tjnoticias_ig": 33,
+   "tjnoticias_ig": 22,
    "tjpublica_ig": 5,
-   "uniradio_ig": 7,
-   "yoamotijuana_ig": 5,
+   "uniradio_ig": 6,
+   "yoamotijuana_ig": 15,
    "zeta_ig": 5
   }
  }
