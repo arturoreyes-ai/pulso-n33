@@ -1,44 +1,49 @@
 {
  "esquema": 1,
- "generado": "2026-09-14T20:09:17+00:00",
+ "generado": "2026-09-15T00:38:44+00:00",
  "plataforma": "instagram",
  "retencion_dias": 30,
- "comentarios_vigentes": 560,
- "posts_vigentes": 90,
- "opinion": 445,
+ "comentarios_vigentes": 669,
+ "posts_vigentes": 107,
+ "opinion": 545,
  "repetidos": 3,
- "reacciones": 115,
+ "reacciones": 124,
  "por_zona": {
-  "Tijuana": 559,
+  "Tijuana": 668,
   "estatal": 1
  },
  "por_cuenta": {
   "afn_ig": 42,
-  "eltijuanense_ig": 13,
-  "frontera_ig": 41,
-  "siempre_ig": 73,
-  "sintesis_ig": 3,
+  "eltijuanense_ig": 14,
+  "frontera_ig": 79,
+  "siempre_ig": 79,
+  "sintesis_ig": 4,
   "soltij_ig": 3,
-  "tijuanainforma_ig": 24,
-  "tjnoticias_ig": 148,
-  "tjpublica_ig": 111,
+  "tijuanainforma_ig": 46,
+  "tjnoticias_ig": 183,
+  "tjpublica_ig": 114,
   "uniradio_ig": 1,
-  "yoamotijuana_ig": 77,
+  "yoamotijuana_ig": 80,
   "zeta_ig": 24
  },
  "por_idioma": {
-  "es": 560
+  "es": 669
  },
  "por_tema": [
   {
-   "tema": "paso",
+   "tema": "bajo",
+   "comentarios": 7,
+   "posts": 4
+  },
+  {
+   "tema": "gobierno",
    "comentarios": 7,
    "posts": 6
   },
   {
-   "tema": "bajo",
-   "comentarios": 6,
-   "posts": 3
+   "tema": "paso",
+   "comentarios": 7,
+   "posts": 6
   },
   {
    "tema": "casa",
@@ -46,22 +51,22 @@
    "posts": 6
   },
   {
-   "tema": "gobierno",
-   "comentarios": 6,
-   "posts": 5
+   "tema": "despues",
+   "comentarios": 4,
+   "posts": 3
   },
   {
    "tema": "agua",
-   "comentarios": 2,
-   "posts": 2
-  },
-  {
-   "tema": "frontera",
-   "comentarios": 2,
-   "posts": 2
+   "comentarios": 3,
+   "posts": 3
   },
   {
    "tema": "calor",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
+   "tema": "cambio",
    "comentarios": 1,
    "posts": 1
   },
@@ -71,30 +76,30 @@
    "posts": 1
   },
   {
-   "tema": "centro",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
    "tema": "clases",
    "comentarios": 1,
    "posts": 1
   },
   {
-   "tema": "exigen",
+   "tema": "federal",
    "comentarios": 1,
    "posts": 1
   },
   {
-   "tema": "vivo",
+   "tema": "independencia",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
+   "tema": "trabajadores",
    "comentarios": 1,
    "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 82,
-  "negativo": 164,
-  "neutral": 199,
+  "positivo": 98,
+  "negativo": 194,
+  "neutral": 253,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -222,6 +227,10 @@
     {
      "tema": "paso",
      "comentarios": 1
+    },
+    {
+     "tema": "trabajadores",
+     "comentarios": 1
     }
    ]
   },
@@ -287,7 +296,12 @@
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
-   "temas": []
+   "temas": [
+    {
+     "tema": "despues",
+     "comentarios": 1
+    }
+   ]
   },
   {
    "url": "https://www.instagram.com/p/DdR6oULEgcd/",
@@ -305,6 +319,27 @@
     "positivo": 0,
     "negativo": 2,
     "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdST65iD19R/",
+   "cuenta": "tjnoticias_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-14",
+   "titulo": "Tres personas fueron atendidas por paramédicos de Cruz Roja luego de resultar afectadas por inhalación de humo durante un incendio registrado en un departament…",
+   "tipo": "carrusel",
+   "likes": 647,
+   "comentarios": 5,
+   "publicado": "2026-09-14T23:25:31+00:00",
+   "cosechados": 5,
+   "opinion": 3,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 0,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -379,6 +414,10 @@
     "sin_modelo_idioma": 0
    },
    "temas": [
+    {
+     "tema": "federal",
+     "comentarios": 1
+    },
     {
      "tema": "gobierno",
      "comentarios": 1
@@ -492,42 +531,21 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdRlMJdm5kN/",
-   "cuenta": "tjnoticias_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-14",
-   "titulo": "Una pareja fue asesinada a balazos durante la madrugada de este lunes en las inmediaciones de un domicilio ubicado en la colonia Florido Segunda Sección, donde…",
-   "tipo": "carrusel",
-   "likes": 293,
-   "comentarios": 6,
-   "publicado": "2026-09-14T16:37:11+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdRiuuGFUUJ/",
+   "url": "https://www.instagram.com/p/DdSV02mmRlH/",
    "cuenta": "yoamotijuana_ig",
    "zona": "Tijuana",
    "fecha": "2026-09-14",
-   "titulo": "🌌✨ El Centro Cultural Tijuana invita a vivir una experiencia astronómica con la conferencia “Una Ventana al Universo: Las noches en vías de extensión”, imparti…",
+   "titulo": "🍔🎉 Burger Crib está de aniversario y lo celebra con cheeseburgers a solo $6 pesos. @cribburger",
    "tipo": "carrusel",
-   "likes": 286,
+   "likes": 318,
    "comentarios": 3,
-   "publicado": "2026-09-14T16:15:41+00:00",
-   "cosechados": 0,
-   "opinion": 0,
+   "publicado": "2026-09-14T23:42:10+00:00",
+   "cosechados": 2,
+   "opinion": 2,
    "sentimiento": {
     "positivo": 0,
     "negativo": 0,
-    "neutral": 0,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -597,6 +615,28 @@
    "temas": []
   },
   {
+   "url": "https://www.instagram.com/p/DdSId-VlXkj/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-14",
+   "titulo": "Jueza advierte en Tijuana por riesgo de nulidad en elecciones por ambigüedad en reforma constitucional",
+   "tipo": "video",
+   "likes": 7,
+   "comentarios": 0,
+   "reproducciones": 349,
+   "publicado": "2026-09-14T21:45:58+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.instagram.com/p/DdR4angmGFZ/",
    "cuenta": "uniradio_ig",
    "zona": "estatal",
@@ -651,6 +691,28 @@
    "comentarios": 0,
    "reproducciones": 45,
    "publicado": "2026-09-14T16:51:38+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdSIls7EQjk/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-14",
+   "titulo": "Carga fiscal y cobro de piso asfixian a empresarios en Baja California",
+   "tipo": "video",
+   "likes": 2,
+   "comentarios": 0,
+   "reproducciones": 236,
+   "publicado": "2026-09-14T21:47:03+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -780,6 +842,71 @@
    "comentarios": 0,
    "reproducciones": 192,
    "publicado": "2026-09-14T18:30:33+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdSW2juIMdC/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-14",
+   "titulo": "Matan en México a estudiante española de intercambio #elvigia #Nacional",
+   "tipo": "video",
+   "likes": 1,
+   "comentarios": 0,
+   "reproducciones": 213,
+   "publicado": "2026-09-14T23:51:43+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdSWS-tm-3o/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-14",
+   "titulo": "𝗠𝘂𝗷𝗲𝗿𝗲𝘀 𝗶𝗻𝗱í𝗴𝗲𝗻𝗮𝘀 𝘆 𝗿𝗲𝘀𝗶𝗱𝗲𝗻𝘁𝗲𝘀 𝗱𝗲 𝗠𝗮𝗻𝗲𝗮𝗱𝗲𝗿𝗼 𝗽𝗮𝗿𝘁𝗶𝗰𝗶𝗽𝗮𝗿𝗼𝗻 𝗲𝗻 𝗲𝗹 𝘁𝗮𝗹𝗹𝗲𝗿 “𝗔𝗰𝗼𝘀𝗼 𝘆 𝗛𝗼𝘀𝘁𝗶𝗴𝗮𝗺𝗶𝗲𝗻𝘁𝗼 𝗦𝗲𝘅𝘂𝗮𝗹 𝗲𝗻 𝗲𝗹 Á𝗺𝗯𝗶𝘁𝗼 𝗟𝗮𝗯𝗼𝗿𝗮𝗹”, 𝗼𝗿𝗴𝗮𝗻𝗶𝘇𝗮𝗱𝗼 𝗽𝗼𝗿 𝗲𝗹 𝗚𝗼𝗯𝗶𝗲𝗿𝗻𝗼 𝗱𝗲 𝗘𝗻𝘀𝗲𝗻𝗮…",
+   "tipo": "imagen",
+   "likes": 1,
+   "comentarios": 0,
+   "publicado": "2026-09-14T23:46:18+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdSbbVaiNil/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-15",
+   "titulo": "Trump anuncia acuerdo energético entre Rusia y Ucrania #elvigia #mundo #Trump",
+   "tipo": "video",
+   "likes": 1,
+   "comentarios": 0,
+   "reproducciones": 19,
+   "publicado": "2026-09-15T00:31:42+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1006,15 +1133,16 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdRnIisoDNS/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
+   "url": "https://www.instagram.com/p/DdSIaGjjqGo/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
    "fecha": "2026-09-14",
-   "titulo": "#𝗔𝗩𝗔𝗡𝗖𝗘 🚨 𝗖𝗼𝗺𝗼 𝗽𝗿𝗼𝗱𝘂𝗰𝘁𝗼 𝗱𝗲𝗹 𝗰𝗮𝘁𝗲𝗼 𝗮 𝘂𝗻𝗮 𝘃𝗶𝘃𝗶𝗲𝗻𝗱𝗮 𝗱𝗲 𝗲𝘀𝘁𝗲 𝗺𝘂𝗻𝗶𝗰𝗶𝗽𝗶𝗼, 𝗹𝗮𝘀 𝗮𝘂𝘁𝗼𝗿𝗶𝗱𝗮𝗱𝗲𝘀 𝗱𝗲𝗰𝗼𝗺𝗶𝘀𝗮𝗿𝗼𝗻 𝟭𝟮𝟬 𝗸𝗶𝗹𝗼𝗴𝗿𝗮𝗺𝗼𝘀 𝗱𝗲 𝗺𝗮𝗿𝗶𝗵𝘂𝗮𝗻𝗮 𝘆 𝗱𝗼𝘀 𝘃𝗲𝗵í𝗰𝘂𝗹𝗼𝘀, 𝘀𝗶𝗻 𝗽𝗲𝗿𝘀𝗼𝗻𝗮𝘀 𝗱𝗲𝘁𝗲𝗻…",
-   "tipo": "imagen",
+   "titulo": "Smart Border Coalition busca medir con exactitud los tiempos de cruce fronterizo Tijuana - San Diego",
+   "tipo": "video",
    "likes": 0,
    "comentarios": 0,
-   "publicado": "2026-09-14T16:54:11+00:00",
+   "reproducciones": 158,
+   "publicado": "2026-09-14T21:45:27+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1027,15 +1155,16 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdRuGt1jvlu/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
+   "url": "https://www.instagram.com/p/DdSIiDkFCdZ/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
    "fecha": "2026-09-14",
-   "titulo": "Escucha nuestro Daily Podcast, de lunes a viernes, un resumen con las noticias más relevantes del día en Ensenada.",
-   "tipo": "imagen",
+   "titulo": "CBX confirma que analiza nuevo cruce peatonal rápido en San Ysidro",
+   "tipo": "video",
    "likes": 0,
    "comentarios": 0,
-   "publicado": "2026-09-14T17:55:06+00:00",
+   "reproducciones": 190,
+   "publicado": "2026-09-14T21:46:36+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1048,15 +1177,16 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdRv01oAg3P/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
-   "fecha": "2026-09-14",
-   "titulo": "Escucha nuestro podcast El Vigía Nacional y Mundo, un resumen de las noticias más relevantes de México y el mundo, de lunes a viernes.",
-   "tipo": "imagen",
+   "url": "https://www.instagram.com/p/DdSYeZ1PAKk/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-15",
+   "titulo": "¡Todo listo para la Fiesta Mexicana 2026 con Edén Muñoz! 🇲🇽🎶 Este 15 de septiembre, a partir de las 7:00 de la tarde, el Centro Cívico de Mexicali será el punt…",
+   "tipo": "video",
    "likes": 0,
    "comentarios": 0,
-   "publicado": "2026-09-14T18:10:10+00:00",
+   "reproducciones": 3,
+   "publicado": "2026-09-15T00:05:37+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1074,89 +1204,85 @@
    "cuenta": "afn_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar"
+   "comentarios": 42,
+   "crudos": 42
   },
   {
    "cuenta": "eltijuanense_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 4,
-   "crudos": 4
+   "comentarios": 1,
+   "crudos": 5
   },
   {
    "cuenta": "elvigia_ig",
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 3
+   "crudos": 5
   },
   {
    "cuenta": "frontera_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 3,
-   "crudos": 6
+   "comentarios": 38,
+   "crudos": 40
   },
   {
    "cuenta": "siempre_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 1
+   "comentarios": 64,
+   "crudos": 65
   },
   {
    "cuenta": "sintesis_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 2
+   "comentarios": 1,
+   "crudos": 5
   },
   {
    "cuenta": "soltij_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar"
+   "comentarios": 2,
+   "crudos": 4
   },
   {
    "cuenta": "tijuanainforma_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 1
+   "comentarios": 22,
+   "crudos": 22
   },
   {
    "cuenta": "tjnoticias_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 23,
-   "crudos": 23
+   "comentarios": 35,
+   "crudos": 42
   },
   {
    "cuenta": "tjpublica_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar"
+   "comentarios": 44,
+   "crudos": 44
   },
   {
    "cuenta": "uniradio_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 1,
-   "crudos": 3
+   "comentarios": 0,
+   "crudos": 5
   },
   {
    "cuenta": "yoamotijuana_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar"
+   "comentarios": 3,
+   "crudos": 5
   },
   {
    "cuenta": "zeta_ig",
@@ -1169,20 +1295,20 @@
  ],
  "gasto": {
   "resultados": 2600,
-  "gastado": 108,
+  "gastado": 349,
   "por_concepto": {
-   "afn_ig": 5,
-   "eltijuanense_ig": 9,
-   "elvigia_ig": 8,
-   "frontera_ig": 11,
-   "siempre_ig": 6,
-   "sintesis_ig": 7,
-   "soltij_ig": 5,
-   "tijuanainforma_ig": 6,
-   "tjnoticias_ig": 28,
-   "tjpublica_ig": 5,
-   "uniradio_ig": 8,
-   "yoamotijuana_ig": 5,
+   "afn_ig": 47,
+   "eltijuanense_ig": 10,
+   "elvigia_ig": 10,
+   "frontera_ig": 45,
+   "siempre_ig": 70,
+   "sintesis_ig": 10,
+   "soltij_ig": 9,
+   "tijuanainforma_ig": 27,
+   "tjnoticias_ig": 47,
+   "tjpublica_ig": 49,
+   "uniradio_ig": 10,
+   "yoamotijuana_ig": 10,
    "zeta_ig": 5
   }
  }
