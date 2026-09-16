@@ -27,18 +27,6 @@ export const ORDEN_ZONA = new Map<string, number>(ORDEN.map((z, i) => [z, i]));
 
 export const rango = (z: string) => ORDEN_ZONA.get(z) ?? 99;
 
-/**
- * Zonas de una nota para efectos de agrupar. Una nota de la garita es de
- * Tijuana Y de San Diego y sale en las dos. Una nota nacional no recibe zona
- * inventada: se agrupa como 'nacional'.
- */
-export function zonasDeNota(n: Nota): readonly string[] {
-  return n.zonas.length > 0 ? n.zonas : [NACIONAL];
-}
-
-export const compararZona = (a: string, b: string) =>
-  rango(a) - rango(b) || a.localeCompare(b, "es");
-
 /* ------------------------------------------------------------------ rutas */
 
 /** Las ocho zonas con pagina propia. 'estatal' no es un lugar: no tiene ruta. */

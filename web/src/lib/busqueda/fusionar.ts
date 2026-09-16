@@ -42,30 +42,3 @@ export function fusionarLocales(
   }
   return salida;
 }
-
-export interface Suprimidas {
-  visibles: ResultadoExterno[];
-  suprimidas: number;
-}
-
-/**
- * Quita lo que el muro ya trae.
- *
- * `titulosCorpus` tiene que venir de TODA la base, no de las filas visibles:
- * si se cruzara contra lo visible, una nota escondida por el filtro de zona o
- * de delegacion reapareceria aqui abajo con otro sombrero.
- *
- * El conteo se devuelve y se dice. Igual que `fuera`, `nacionales` y
- * `descartados`, lo que no se muestra se reporta.
- */
-export function suprimirConocidas(
-  externos: readonly ResultadoExterno[],
-  titulosCorpus: ReadonlySet<string>,
-): Suprimidas {
-  const visibles: ResultadoExterno[] = [];
-  for (const r of externos) {
-    if (titulosCorpus.has(plegar(r.titulo))) continue;
-    visibles.push(r);
-  }
-  return { visibles, suprimidas: externos.length - visibles.length };
-}

@@ -27,11 +27,6 @@ const RAIZ = path.join(import.meta.dirname, "..", "src");
  */
 const EXCEPCIONES = [
   {
-    archivo: "components/cabecera/encabezado.tsx",
-    regla: "rojo-de-texto",
-    nota: "El h1 va a 48-72px: ahi manda el 3:1 de texto grande y #E0342B lo pasa con 4.42.",
-  },
-  {
     archivo: "components/ui/bisel.tsx",
     regla: "radio",
     nota: "Es el unico que puede nombrar un radio: es quien define los niveles.",
@@ -40,11 +35,6 @@ const EXCEPCIONES = [
     archivo: "components/ui/primitivas.tsx",
     regla: "duracion",
     nota: "Barra anima un VALOR DE DATO al cambiar el filtro, no un hover.",
-  },
-  {
-    archivo: "components/muro/muro.tsx",
-    regla: "duracion",
-    nota: "El atenuado de useTransition; mas rapido se lee como parpadeo.",
   },
   {
     archivo: "components/chrome/velo.tsx",

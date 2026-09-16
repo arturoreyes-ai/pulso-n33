@@ -321,6 +321,20 @@ textarea {
   caret-color: var(--color-chart-3);
 }
 
+/* El aspa de `type="search"`. WebKit la pinta dentro del campo en cuanto hay
+   texto, con su propio glifo y su propio tamano, y en el buscador del lector
+   quedaba a un centimetro del aspa que cierra el dialogo: dos aspas juntas
+   que hacen cosas distintas. Se apaga aqui y no cambiando el `type`, porque
+   `search` es lo que da el rol de buscador y la tecla de accion del teclado
+   movil. Es la unica regla webkit del archivo y no choca con nada: a
+   diferencia de `::-webkit-scrollbar`, no hay una propiedad estandar que
+   este haciendo ya este trabajo. */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  appearance: none;
+  display: none;
+}
+
 /* --------------------------------------------------------------- revelado */
 
 /* El HTML del servidor sale VISIBLE. El estado que oculta lo pone el JS solo
@@ -381,46 +395,227 @@ textarea {
   animation: entrada var(--dur-entrada) var(--ease-firma) both;
 }
 
-/* El documento sigue desplazandose: los posts altos no quedan atrapados en un
-   carrusel de altura fija y el pie continua al final de la seleccion.
-   `proximity` y no `mandatory`: arriba de la primera tarjeta estan las
-   pastillas y abajo de la ultima esta el pie, y ninguno es un punto de ajuste;
-   con `mandatory` el navegador los volveria inalcanzables.
+/* ------------------------------------------------------------------ lector */
 
-   En telefono cada tarjeta mide la pantalla menos la pildora y un respiro, y
-   el medio se ajusta por ALTO, no por ancho: un 9:16 a todo lo ancho de un
-   telefono mide mas que la pantalla. --visor-reserva es lo que no es medio:
-   respiro arriba y banda del titular abajo. Se midio, no se deduce; si cambia
-   la banda, se ajusta aqui. `svh` y no `dvh`: `dvh` cambia al esconderse la
-   barra del navegador y recolocaria las tarjetas a mitad del gesto.
+/* Los dos recorridos a pantalla completa —el Visual de redes y los titulares
+   de /ahora— comparten la caja `.lector` (components/lector/lector.tsx) y el
+   hook lib/pantalla/recorrido.ts. La caja es fija y desplaza su propio
+   contenido con ajuste obligatorio, en el telefono y en escritorio: la
+   primera version ajustaba la PAGINA por proximidad bajo la pildora y dejaba
+   medias tarjetas, porque arriba de la primera estaban las pastillas y abajo
+   de la ultima el pie, y ninguno era un punto de ajuste. Su alto se congela
+   durante el gesto (`--alto-lector`, `--alto-tarjeta`) y se vuelve a medir al
+   asentar; ni la barra del navegador ni una miniatura tardia deben mover lo
+   que se esta leyendo. En escritorio la pildora flotante sigue arriba y la
+   caja empieza debajo (`--nav-alto`); en el telefono la caja es toda la
+   pantalla.
 
    `scroll-snap-stop: always` hace que un gesto mueva UNA tarjeta: un impulso
-   fuerte no se salta la siguiente. Convive con `proximity`: solo impide pasar
-   por encima de un punto de ajuste, no obliga a caer en uno. El JS del visor
-   cambia el medio montado al ASENTAR el desplazamiento (scrollend, o 140 ms
-   sin eventos), nunca a mitad del gesto, y lee el margen de ajuste con
-   getComputedStyle: este es el UNICO lugar donde vive ese numero.
+   fuerte no se salta la siguiente. El JS cambia el medio montado al ASENTAR el
+   desplazamiento (scrollend, o 160 ms sin eventos), nunca a mitad del gesto.
 
-   Dos consumidores: el visor de redes y el recorrido de titulares de /ahora,
-   cuyas tarjetas son solo texto y no usan .medio-visual. */
-html:has(.recorrido-visual) { scroll-snap-type: y proximity; }
+   Redes: el medio se ajusta por ALTO, no por ancho: un 9:16 a todo lo ancho
+   de un telefono mide mas que la pantalla. --visor-reserva es lo que no es
+   medio: en el telefono, respiro arriba y banda del titular abajo; en
+   escritorio la banda va al costado y solo queda el respiro. Se midio, no se
+   deduce; si en un dispositivo real el medio queda corto o se desborda, se
+   ajusta aqui. `svh` y no `dvh` en el respaldo: `dvh` cambia al esconderse la
+   barra del navegador y recolocaria las tarjetas a mitad del gesto. */
+html:has(.lector), body:has(.lector) { overflow: hidden; }
+/* Mientras el lector esta arriba, lo demas de la pagina —encabezado, velo,
+   pie y, en el telefono, la pildora— no se ve ni se lee: una sola regla, en
+   vez de que cada pagina envuelva su nav y su pie en `hidden md:block`. La
+   informacion del lector trae su propio Pie. */
+main:has(.lector) > :not(:has(.lector)) { display: none; }
+.lector {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-portal);
+  display: flex;
+  flex-direction: column;
+  height: var(--alto-lector, 100svh);
+  background: var(--color-vanta);
+}
+@media (min-width: 48rem) {
+  main:has(.lector) > .nav-flotante { display: flex; }
+  .lector { top: var(--nav-alto); height: auto; }
+}
+.barra-lector {
+  flex: none;
+  padding-top: env(safe-area-inset-top);
+  border-bottom: 1px solid var(--color-filo);
+}
+
+/* Las pestanas, a la manera de la pagina de tendencias de X: texto, sin
+   pastilla, y un subrayado corto bajo la activa. Es el unico sitio donde el
+   rojo de marca aparece como trazo, no como texto (a tamano de cuerpo no pasa
+   AA). El peso NO cambia al activarse: cambiar de 400 a 500 mueve el ancho de
+   la pestana y toda la fila se recoloca al pulsar. */
+.pestanas-lector {
+  display: flex;
+  gap: 0.25rem;
+  width: 100%;
+  max-width: 88rem;
+  margin: 0 auto;
+  padding: 0 0.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+@media (min-width: 48rem) { .pestanas-lector { padding: 0 1.5rem; } }
+.pestana-lector {
+  position: relative;
+  flex: none;
+  padding: 0.75rem 1rem;
+  color: var(--color-tinta-meta);
+  border-radius: var(--radius-nucleo) var(--radius-nucleo) 0 0;
+  transition: background-color var(--dur-toque) var(--ease-firma), color var(--dur-toque) var(--ease-firma);
+}
+.pestana-lector:hover { background: var(--color-vela); color: var(--color-tinta-prosa); }
+.pestana-lector[aria-pressed="true"] { color: var(--color-tinta-titulo); }
+.pestana-lector[aria-pressed="true"]::after {
+  content: "";
+  position: absolute;
+  inset: auto 1rem 0;
+  height: 2px;
+  border-radius: 9999px;
+  background: var(--color-chart-1);
+}
+
+/* El cuerpo: `.recorrido-lector` ajusta tarjeta por tarjeta; `.hoja-lector`
+   es la misma caja sin ajuste, para las pestanas que son una pagina normal
+   (YouTube, X). */
+.recorrido-lector,
+.hoja-lector {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  outline-offset: -2px;
+}
+.recorrido-lector {
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+  overflow-anchor: none;
+}
+/* El esqueleto NO es un punto de ajuste. El caso: /ahora abria en la ULTIMA
+   tarjeta. Con la caja recien pintada el esqueleto era el unico hijo, y por
+   tanto el objetivo de ajuste vigente; al llegar el primer capitulo sus 31
+   tarjetas se insertan ANTES de el, y Chrome, que tras un cambio de layout
+   vuelve a ajustar al MISMO objetivo, desplazaba la caja hasta el final. Cada
+   capitulo que eso activaba volvia a empujar. Sin objetivo que seguir, el
+   navegador ajusta a la posicion mas cercana, que es la primera tarjeta.
+   (`overflow-anchor: none` arriba cierra la otra via, el anclaje de scroll.) */
+.recorrido-lector .sin-ajuste { scroll-snap-align: none; scroll-snap-stop: normal; }
+
 .publicacion-visual {
   --visor-reserva: 12.5rem;
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  scroll-margin-top: calc(var(--nav-alto) + 1rem);
-  min-height: calc(100svh - var(--nav-alto) - 1rem);
+  min-height: var(--alto-tarjeta, calc(100svh - 4.5rem - env(safe-area-inset-top)));
 }
 .publicacion-visual .medio-visual {
-  width: clamp(16rem, calc((100svh - var(--nav-alto) - var(--visor-reserva)) * 9 / 16), 100%);
+  width: clamp(16rem, calc((var(--alto-tarjeta, 100svh) - var(--visor-reserva)) * 9 / 16), 100%);
+}
+/* El medio no puede medir mas que la caja menos la reserva: el embed de
+   Instagram crece con el pie y la zona de comentarios hasta ~1,500px y dejaba
+   la banda del titular fuera de la pantalla. Se recorta el envoltorio
+   interior, no `.medio-visual`: este lleva un `min-height` en linea con la
+   altura ya medida, y un min-height le gana a cualquier max-height. Lo que se
+   pierde es el pie del embed; el enlace «Ver original» esta en la banda. */
+.publicacion-visual .medio-visual > div {
+  max-height: calc(var(--alto-tarjeta, 100svh) - var(--visor-reserva));
+  overflow: hidden;
 }
 @media (min-width: 48rem) {
-  /* En escritorio la barra Anterior / Siguiente se suma a la pildora. */
-  .publicacion-visual { scroll-margin-top: calc(var(--nav-alto) + 5rem); min-height: 80svh; }
-  .publicacion-visual .medio-visual { width: 100%; }
+  .publicacion-visual { --visor-reserva: 5rem; }
 }
 .medio-instagram iframe { width: 100% !important; max-width: 100% !important; min-width: 0 !important; }
 .medio-instagram blockquote { max-width: 100%; min-width: 0; }
+
+.tarjeta-ahora {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: var(--alto-tarjeta, calc(100svh - 4.5rem - env(safe-area-inset-top)));
+  padding: 1.5rem max(1.25rem, env(safe-area-inset-right)) calc(3rem + env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left));
+  overflow-wrap: anywhere;
+}
+@media (min-width: 48rem) { .tarjeta-ahora { padding: 3rem 2rem; } }
+.figura-ahora {
+  flex: none;
+  width: 100%;
+  height: clamp(0rem, calc(var(--alto-tarjeta, 100svh) - 30rem), 14rem);
+  margin-bottom: 1.5rem;
+}
+.acciones-ahora { position: relative; }
+.aviso-compartir {
+  position: absolute;
+  inset-inline-start: 0;
+  top: calc(100% + 0.5rem);
+}
+.control-lector {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  border-radius: var(--radius-nucleo);
+  color: var(--color-tinta-prosa);
+  transition: background-color var(--dur-toque) var(--ease-firma);
+}
+.control-lector:hover { background: var(--color-vela); }
+.control-lector[data-nuevos] { color: var(--color-chart-3); }
+/* El menu de la barra, solo en el telefono. A partir de 48rem la pildora
+   flotante vuelve a verse sobre el lector (mas abajo, en el bloque .lector) y
+   lleva a las mismas paginas: dos navegaciones identicas a diez pixeles una de
+   otra. Debajo de ese ancho la pildora esta oculta y este boton es la unica
+   salida, asi que se esconde y no se borra.
+
+   La consulta va AQUI y no con una utilidad `md:hidden` en el boton: el
+   `display` de esta clase no esta en la capa de utilidades, asi que le gana a
+   la utilidad y el boton seguia viendose en escritorio. Es el mismo choque que
+   `.tarjeta-ahora` documenta para su relleno. */
+@media (min-width: 48rem) {
+  .control-lector[data-solo-movil] { display: none; }
+}
+.dialogo-lector {
+  position: fixed;
+  inset: auto 0 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 40rem;
+  max-height: calc(100svh - env(safe-area-inset-top) - 1rem);
+  padding: 0 0 env(safe-area-inset-bottom);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--color-carta);
+  color: var(--color-tinta-prosa);
+  border: 1px solid var(--color-filo);
+  border-radius: var(--radius-panel) var(--radius-panel) 0 0;
+}
+@media (min-width: 48rem) {
+  /* En escritorio la hoja no nace del borde: flota centrada. */
+  .dialogo-lector {
+    inset: 0;
+    margin: auto;
+    max-height: min(80svh, 48rem);
+    padding: 0;
+    border-radius: var(--radius-panel);
+  }
+}
+.dialogo-lector::backdrop { background: var(--color-vanta); opacity: 0.85; }
+.cabecera-dialogo-lector {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-elevado);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-carta);
+  border-bottom: 1px solid var(--color-filo);
+}
 @media (prefers-reduced-motion: reduce) {
-  html:has(.recorrido-visual) { scroll-snap-type: none; }
+  .recorrido-lector { scroll-behavior: auto; scroll-snap-type: none; }
 }

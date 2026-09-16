@@ -1,123 +1,242 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { ArrowClockwise as Recargar } from "@phosphor-icons/react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 
-import { clasesChip } from "@/components/ui/clases";
-import { debeActivar, fraseFinal, type Entrada } from "@/lib/busqueda/capitulos";
+import { CONTROL, Lector } from "@/components/lector/lector";
+import { debeActivar, fraseFinal, type Entrada, type Tarjeta } from "@/lib/busqueda/capitulos";
+import { enlaceDelMedio, indiceDeEnlaces } from "@/lib/busqueda/enlaces";
+import { entradaDe } from "@/lib/busqueda/entrada";
 import { imagenPara, indiceDeImagenes } from "@/lib/busqueda/imagenes";
+import { useBusquedaViva } from "@/lib/busqueda/use-busqueda";
 import { useCapitulos } from "@/lib/busqueda/use-capitulos";
+import { plegar } from "@/lib/dominio/formato";
+import { ruta } from "@/lib/dominio/secciones";
+import { BuscadorAhora } from "./buscador-ahora";
 import { useNotas } from "@/lib/datos/hooks";
-import { NOMBRE_CORTO, ZONAS_RUTA } from "@/lib/dominio/zonas";
-import { reiniciarLlegada, useLlegada, useMemoriaLlegada, useRecorrido, type MemoriaLlegada } from "@/lib/pantalla/recorrido";
+import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
+import { teclasDelRecorrido, useRecorrido } from "@/lib/pantalla/recorrido";
+import { nombreDe, OpcionesAhora } from "./controles-ahora";
 import { EsqueletoTitular, TarjetaDivisor, TarjetaFinal, TarjetaHueco, TarjetaTitular } from "./tarjetas-ahora";
 
 /**
- * El recorrido de titulares en vivo: un titular por pantalla.
+ * El recorrido de titulares en vivo: un titular por pantalla. ES la portada
+ * desde el 15 de septiembre de 2026.
  *
- * La entrada —un lugar, Mexico o Internacional— es estado de cliente y no
- * ruta: decide el primer capitulo y acota los cinco rubros; las otras dos
- * secciones vienen despues en todos los casos. Cambiarla remonta el recorrido
- * con otra llave, que es lo que descongela las listas y vuelve a la primera
- * tarjeta.
+ * La entrada —un lugar, Mexico o Internacional— decide el primer capitulo y
+ * acota los cinco rubros; las otras dos secciones vienen despues en todos los
+ * casos. Ya no es estado de cliente: se DERIVA de la ruta y de `?e=`
+ * (lib/busqueda/entrada.ts), asi que se comparte y sobrevive a una recarga.
+ * Cambiarla cambia la llave del recorrido, que es lo que descongela las listas
+ * y vuelve a la primera tarjeta. Esa llave es la que sostiene el caso de la
+ * faceta: `?e=mexico` NO remonta la pagina —es la misma ruta— y sin ella se
+ * verian los capitulos de la region bajo la etiqueta «Mexico».
  *
  * Los capitulos se piden de a uno, con uno adelantado, cuando el lector se
  * acerca al final de lo que hay (capitulos.ts::debeActivar). Es el
  * `rootMargin` de WikiTok, pero sobre una cadena finita y ordenada, no sobre
  * un pozo aleatorio.
  *
- * La barra Anterior / Siguiente y el «n de M» son los del visor de redes; el
- * ajuste al desplazar y la llegada en el telefono son el mismo hook.
+ * Vive dentro del lector (components/lector) en todo ancho: una caja fija con
+ * su barra y su propio desplazamiento, porque ajustar la pagina por proximidad
+ * dejaba medias tarjetas. El Visual de redes usa el mismo lector y el mismo
+ * hook.
  */
 
-/** El corredor, las ocho zonas y las dos ediciones. Las ediciones van al
- *  final y separadas por un filo: son otra escala, no otro municipio. */
-const OPCIONES: readonly Entrada[] = ["region", ...ZONAS_RUTA, "mexico", "internacional"];
+/**
+ * De MODULO, no un `useRef`. Cambiar de zona es cambiar de ruta, y eso
+ * desmonta `FeedAhora` entero: un ref se reinicia y el aviso de devolver el
+ * foco se pierde. El manejador de foco de Next salta lo que es `position:
+ * fixed`, asi que sin esto quien elige otra zona con teclado o lector de
+ * pantalla acaba en `<body>` y sin anuncio. Mismo recurso que `ultimaPestana`
+ * en paneles/lector-redes.tsx.
+ *
+ * Nota para el futuro: esto da por hecho que cambiar de ruta desmonta. Si
+ * algun dia se enciende `cacheComponents`, Next retiene arboles anteriores en
+ * un `<Activity>` oculto y este razonamiento cambia.
+ */
+const restaurarFoco = { current: false };
 
-function nombreDe(entrada: Entrada): string {
-  if (entrada === "region") return "Toda la región";
-  if (entrada === "mexico") return "México";
-  if (entrada === "internacional") return "Internacional";
-  return NOMBRE_CORTO[entrada];
-}
+/** El nombre accesible del recorrido. Aparte de `nombreDe` por la
+ *  contraccion: «Titulares de El corredor» no es espanol. */
+const tituloRecorrido = (entrada: Entrada): string =>
+  entrada === "region" ? "Titulares del corredor" : `Titulares de ${nombreDe(entrada)}`;
 
-export function FeedAhora() {
-  const [entrada, setEntrada] = useState<Entrada>("region");
+/** Donde busca la lupa, dicho como se dice. No es la ENTRADA: la busqueda se
+ *  acota por zona (`z=`), asi que en `/?e=mexico` busca el corredor y no
+ *  Mexico, y el rotulo tiene que decir eso y no lo otro. */
+const lugarDeBusqueda = (zona: ZonaRuta | null): string =>
+  zona === null ? "el corredor" : NOMBRE_CORTO[zona];
+
+export function FeedAhora({ zona, edicion, consulta, menu, informacion, analisis }: {
+  zona: ZonaRuta | null;
+  /** El `?e=` de la URL, ya leido en el servidor. */
+  edicion: string | null;
+  /** El `?q=`. Con consulta el lector deja de recorrer capitulos y muestra
+   *  resultados: es un modo, no un capitulo mas. */
+  consulta: string | null;
+  menu: ReactNode;
+  informacion: ReactNode;
+  /** Si el boton de lectura automatica se pinta. Lo decide el servidor. */
+  analisis: boolean;
+}) {
+  const entrada = entradaDe(zona, edicion);
   const [generacion, setGeneracion] = useState(0);
-  const memoria = useMemoriaLlegada();
   function recargar() {
-    reiniciarLlegada(memoria);
+    restaurarFoco.current = true;
     setGeneracion((g) => g + 1);
   }
+  const q = (consulta ?? "").trim();
+  if (q !== "") {
+    return (
+      <RecorridoBusqueda key={`q:${q}:${zona ?? "region"}`} consulta={q} zona={zona}
+        menu={menu} informacion={informacion} analisis={analisis} />
+    );
+  }
   return (
-    <>
-      <div role="group" aria-label="Por dónde empezar" className="-mx-4 px-4 md:mx-0 md:px-0">
-        <ul className="flex snap-x items-center gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] md:flex-wrap md:overflow-visible">
-          {OPCIONES.map((e) => (
-            <li key={e} className={`shrink-0 snap-start ${e === "mexico" ? "ml-2 border-l border-filo pl-3.5" : ""}`}>
-              <button type="button" className={clasesChip(e === entrada)} aria-pressed={e === entrada} onClick={() => setEntrada(e)}>
-                {nombreDe(e)}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <RecorridoAhora key={`${entrada}:${generacion}`} entrada={entrada} memoria={memoria} onRecargar={recargar} />
-    </>
+    <RecorridoAhora key={`${entrada}:${generacion}`} entrada={entrada} zona={zona} onRecargar={recargar}
+      menu={menu} informacion={informacion} analisis={analisis} />
   );
 }
 
-function RecorridoAhora({ entrada, memoria, onRecargar }: { entrada: Entrada; memoria: MemoriaLlegada; onRecargar: () => void }) {
+/** Las miniaturas y el enlace del propio medio, que salen los dos del corpus
+ *  cruzando por titular plegado. Los usan los dos recorridos. */
+function useCorpus() {
+  // El recorrido no espera a notas.json: las figuras aparecen cuando llega, y
+  // una tarjeta ya mide la pantalla con o sin ellas.
+  const notas = useNotas();
+  const imagenes = useMemo(() => indiceDeImagenes(notas.data?.notas ?? []), [notas.data]);
+  const enlaces = useMemo(() => indiceDeEnlaces(notas.data?.notas ?? []), [notas.data]);
+  return { imagenes, enlaces };
+}
+
+function RecorridoAhora({ entrada, zona, onRecargar, menu, informacion, analisis }: {
+  entrada: Entrada; zona: ZonaRuta | null; onRecargar: () => void;
+  menu: ReactNode; informacion: ReactNode; analisis: boolean;
+}) {
   const [activados, setActivados] = useState(1);
   const { capitulos, hilado, disponible, hayNuevos } = useCapitulos(entrada, activados);
   // Las miniaturas vienen del corpus, no de la fila en vivo. El recorrido no
   // espera a notas.json: las figuras aparecen cuando llega, y una tarjeta ya
   // mide la pantalla con o sin ellas.
-  const notas = useNotas();
-  const imagenes = useMemo(() => indiceDeImagenes(notas.data?.notas ?? []), [notas.data]);
+  const { imagenes, enlaces } = useCorpus();
   const contenedor = useRef<HTMLDivElement>(null);
   const { actual, ir } = useRecorrido(contenedor);
-  useLlegada(contenedor, hilado.tarjetas.length > 0, memoria);
   useEffect(() => {
     // Idempotente a proposito: en desarrollo StrictMode corre el efecto dos
     // veces con el mismo cierre, y `a + 1` dos veces pedia tres capitulos al
     // abrir en vez de dos.
-    if (!debeActivar(hilado, actual, activados)) return;
+    if (!debeActivar(hilado, actual, activados, capitulos.length)) return;
     const siguiente = activados + 1;
     setActivados((a) => Math.max(a, siguiente));
-  }, [hilado, actual, activados]);
-
-  if (!disponible) {
-    return <p className="mt-6 text-lectura text-tinta-prosa">Los titulares en vivo no están disponibles en esta vista.</p>;
-  }
+  }, [hilado, actual, activados, capitulos.length]);
 
   const { tarjetas, completo } = hilado;
   const total = tarjetas.length + (completo ? 1 : 0);
   return (
-    <>
-      {hayNuevos ? (
-        <p role="status" className="mt-4 flex flex-wrap items-center gap-3 text-cuerpo text-tinta-meta">
-          Hay titulares nuevos.
-          <button type="button" className={clasesChip(false)} onClick={onRecargar}>Recargar</button>
-        </p>
-      ) : null}
-      <div className="sticky top-[var(--nav-alto)] z-[var(--z-elevado)] my-6 hidden flex-wrap items-center justify-between gap-3 bg-vanta py-3 md:flex" aria-label="Recorrer titulares">
-        <button type="button" className={`${clasesChip(false)} disabled:opacity-50`} disabled={actual === 0} onClick={() => ir(actual - 1)}>Anterior</button>
-        <p aria-live="polite" className="text-cuerpo tabular-nums text-tinta-meta">{Math.min(actual + 1, Math.max(total, 1))} de {total}</p>
-        <button type="button" className={`${clasesChip(false)} disabled:opacity-50`} disabled={total === 0 || actual >= total - 1} onClick={() => ir(actual + 1)}>Siguiente</button>
-      </div>
-      <div ref={contenedor} className="recorrido-visual">
+    // Sin `volver`: esto ES la portada, no hay pagina detras.
+    <Lector rotulo="En Tendencia" valor={nombreDe(entrada)} tituloOpciones="Por dónde empezar"
+      opciones={<OpcionesAhora entrada={entrada} />}
+      acciones={<>
+        <span role="status" className="sr-only">{hayNuevos ? "Hay titulares nuevos." : ""}</span>
+        {hayNuevos ? (
+          <button type="button" className={CONTROL} data-nuevos aria-label="Hay titulares nuevos. Recargar" title="Hay titulares nuevos · Recargar" onClick={onRecargar}>
+            <Recargar size={20} aria-hidden />
+          </button>
+        ) : null}
+      </>}
+      busqueda={<BuscadorAhora accion={ruta(zona, null)} lugar={lugarDeBusqueda(zona)} consulta={null} />}
+      menu={menu} informacion={informacion} restaurarFoco={restaurarFoco}>
+      <div ref={contenedor} className="recorrido-lector" tabIndex={0} role="region" aria-label={tituloRecorrido(entrada)}
+        onKeyDown={(evento) => teclasDelRecorrido(evento, actual, total, ir)}>
+        {!disponible ? <p className="tarjeta-ahora flex items-center text-lectura text-tinta-prosa">Los titulares en vivo no están disponibles en esta vista.</p> : <>
         {tarjetas.map((t, i) => {
-          if (t.tipo === "titular") return <TarjetaTitular key={t.clave} t={t} titulares={hilado.titulares} indice={i} imagen={imagenPara(t.r, imagenes)} />;
+          if (t.tipo === "titular") return <TarjetaTitular key={t.clave} t={t} titulares={hilado.titulares} indice={i} imagen={imagenPara(t.r, imagenes)} analisis={analisis} enlace={enlaceDelMedio(t.r, enlaces)} />;
           if (t.tipo === "divisor") return <TarjetaDivisor key={`divisor:${t.capitulo}`} t={t} indice={i} />;
           return <TarjetaHueco key={`hueco:${t.capitulo}`} t={t} indice={i} />;
         })}
         {completo
           ? <TarjetaFinal indice={tarjetas.length} frase={fraseFinal(capitulos, hilado)} onInicio={() => ir(0)} />
           : <>
-              <EsqueletoTitular />
+              <EsqueletoTitular indice={tarjetas.length} />
               <p role="status" className="sr-only">Cargando titulares…</p>
             </>}
+        </>}
       </div>
-    </>
+    </Lector>
   );
+}
+
+/**
+ * El mismo lector, recorriendo RESULTADOS en vez de capitulos.
+ *
+ * Una busqueda es una lista plana: no tiene orden de capitulos, ni divisores,
+ * ni cola de secciones. Por eso es un modo y no un capitulo mas — meterla en
+ * la cadena de capitulos.ts obligaria a un tercer tipo de fuente ahi dentro
+ * para nada. Lo que si comparte es todo lo demas: la caja, el ajuste por
+ * tarjeta, las miniaturas y el enlace del propio medio.
+ */
+function RecorridoBusqueda({ consulta, zona, menu, informacion, analisis }: {
+  consulta: string; zona: ZonaRuta | null;
+  menu: ReactNode; informacion: ReactNode; analisis: boolean;
+}) {
+  const viva = useBusquedaViva(consulta, zona);
+  const { imagenes, enlaces } = useCorpus();
+  const contenedor = useRef<HTMLDivElement>(null);
+  const { actual, ir } = useRecorrido(contenedor);
+
+  const tarjetas: Tarjeta[] = useMemo(
+    () =>
+      viva.resultados.map((r, i) => ({
+        tipo: "titular",
+        capitulo: "busqueda",
+        rotulo: `Búsqueda · ${consulta}`,
+        acento: "text-chart-1-texto",
+        r,
+        clave: plegar(r.titulo) || r.url,
+        orden: i + 1,
+      })),
+    [viva.resultados, consulta],
+  );
+  const total = tarjetas.length + 1;
+
+  return (
+    <Lector volver={ruta(zona, null)} rotulo="En Tendencia" rotuloValor="Búsqueda" valor={consulta}
+      tituloOpciones="Por dónde empezar"
+      opciones={<OpcionesAhora entrada={entradaDe(zona, null)} />}
+      busqueda={<BuscadorAhora accion={ruta(zona, null)} lugar={lugarDeBusqueda(zona)} consulta={consulta} />}
+      menu={menu} informacion={informacion} restaurarFoco={restaurarFoco}>
+      <div ref={contenedor} className="recorrido-lector" tabIndex={0} role="region" aria-label={`Resultados para ${consulta}`}
+        onKeyDown={(evento) => teclasDelRecorrido(evento, actual, total, ir)}>
+        {!viva.activa ? (
+          <p className="tarjeta-ahora flex items-center text-lectura text-tinta-prosa">La búsqueda no está disponible en esta vista.</p>
+        ) : viva.cargando ? (
+          <>
+            <EsqueletoTitular indice={0} />
+            <p role="status" className="sr-only">Buscando…</p>
+          </>
+        ) : (
+          <>
+            {tarjetas.map((t, i) =>
+              t.tipo === "titular" ? (
+                <TarjetaTitular key={t.clave} t={t} titulares={tarjetas.length} indice={i}
+                  imagen={imagenPara(t.r, imagenes)} analisis={analisis} enlace={enlaceDelMedio(t.r, enlaces)} />
+              ) : null,
+            )}
+            <TarjetaFinal indice={tarjetas.length} titulo="Llegaste al final de la búsqueda."
+              frase={fraseBusqueda(consulta, tarjetas.length, viva.fallo)} onInicio={() => ir(0)} />
+          </>
+        )}
+      </div>
+    </Lector>
+  );
+}
+
+/** Lo que dice la tarjeta final de una busqueda. Sin nombrar el mecanismo. */
+function fraseBusqueda(consulta: string, n: number, fallo: boolean): string {
+  if (fallo) return `No se pudo completar la búsqueda de «${consulta}».`;
+  if (n === 0) return `Sin titulares para «${consulta}».`;
+  return n === 1
+    ? `Un titular para «${consulta}».`
+    : `${n} titulares para «${consulta}».`;
 }

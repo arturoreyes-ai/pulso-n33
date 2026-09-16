@@ -2,19 +2,25 @@
 
 import { useMemo, useRef } from "react";
 
-import { capitulosDe, hilar, type Capitulos, type Entrada, type EstadoCapitulo, type Hilado } from "./capitulos";
+import { CAPITULOS_MAXIMO, capitulosDe, hilar, type Capitulos, type Entrada, type EstadoCapitulo, type Hilado } from "./capitulos";
 import type { Idioma, ResultadoExterno } from "./tipos";
 import { useActualidad, type ActualidadViva } from "./use-actualidad";
+import { useComunicados } from "@/lib/datos/hooks";
+import type { DocComunicados } from "@/lib/datos/tipos";
 import { plegar } from "@/lib/dominio/formato";
 
 /**
- * Los ocho capitulos de /ahora, en vivo, hilados en tarjetas.
+ * Los capitulos del recorrido, en vivo, hilados en tarjetas.
  *
- * Llama a useActualidad OCHO veces, una por capitulo, siempre, con `null` en
- * los que aun no toca pedir (useActualidad con null no pide nada). El numero
- * es fijo porque `Capitulos` es una tupla, y eso es lo que hace legal el
- * patron: la regla de los hooks es que la cuenta no cambie entre renders, no
- * que no haya varios.
+ * Llama a useActualidad NUEVE veces, siempre, con `null` en las ranuras que no
+ * toca pedir o que no son de la lectura en vivo (useActualidad con null no pide
+ * nada). Nueve y no ocho porque la cadena de Tecate suma los comunicados del
+ * Ayuntamiento; el numero es una constante, `CAPITULOS_MAXIMO`, y eso es lo que
+ * hace legal el patron: la regla de los hooks es que la cuenta no cambie entre
+ * renders, no que no haya varios. Por lo mismo `estados` se arma SIEMPRE con
+ * nueve entradas —rellenando con inactivo— aunque la cadena tenga ocho: el
+ * useMemo de abajo lleva dependencias con spread y React exige que el arreglo
+ * no cambie de tamano entre renders.
  *
  * CONGELA cada capitulo la primera vez que asienta. useActualidad se refresca
  * cada cinco minutos y al volver a la pestana, y una lista que cambia bajo el
@@ -39,6 +45,11 @@ type Congelado =
 const INACTIVO: EstadoCapitulo = { estado: "inactivo" };
 const CARGANDO: EstadoCapitulo = { estado: "cargando" };
 
+/** Cuantos comunicados entran al recorrido. Son boletines, no lo que esta
+ *  pasando: cinco es una seccion del recorrido y no un tercio de el. Vienen
+ *  ordenados por fecha descendente, asi que son los cinco ultimos. */
+export const TOPE_COMUNICADOS = 5;
+
 /** Lo que se congela de una respuesta ya asentada, o null si aun no asento. */
 function asentado(viva: ActualidadViva): Congelado | null {
   if (viva.cargando) return null;
@@ -49,30 +60,85 @@ function asentado(viva: ActualidadViva): Congelado | null {
   return null;
 }
 
+/**
+ * Lo mismo para el documento municipal. Hermano de `asentado` y no el mismo:
+ * aquel distingue «todavia no» de «vino vacio» con `consultado`, un campo que
+ * solo devuelve la lectura en vivo.
+ *
+ * El mapeo a ResultadoExterno es directo porque un comunicado ya es titular,
+ * fuente y enlace. `publicado` lleva una fecha SIN hora, y de eso se entera la
+ * tarjeta por su capitulo: pintarle hora diria medianoche, que es falso.
+ */
+function asentadoComunicados(doc: DocComunicados | undefined, cargando: boolean, fallo: boolean): Congelado | null {
+  if (cargando) return null;
+  if (doc === undefined) return fallo ? { estado: "fallo" } : null;
+  const resultados: ResultadoExterno[] = doc.comunicados.slice(0, TOPE_COMUNICADOS).map((c) => ({
+    titulo: c.titulo,
+    url: c.url,
+    dominio: "tecate.gob.mx",
+    medio: doc.fuente.nombre,
+    publicado: c.fecha,
+    idioma: "es",
+  }));
+  return { estado: "listo", resultados, caidos: [], truncada: false };
+}
+
 const claves = (resultados: readonly ResultadoExterno[]): string =>
   resultados.map((r) => plegar(r.titulo)).join("\n");
 
 export function useCapitulos(entrada: Entrada, activados: number): CapitulosVivos {
   const capitulos = useMemo(() => capitulosDe(entrada), [entrada]);
-  const congelados = useRef<(Congelado | null)[]>(Array.from({ length: capitulos.length }, () => null));
+  const congelados = useRef<(Congelado | null)[]>(Array.from({ length: CAPITULOS_MAXIMO }, () => null));
+
+  /** El pedido de la ranura i, o null si no toca, no existe o no es de la
+   *  lectura en vivo. Se escribe una vez y se usa nueve. */
+  const pedido = (i: number) => {
+    const c = capitulos[i];
+    if (c === undefined || activados <= i || c.fuente !== "actualidad") return null;
+    return c.pedido;
+  };
 
   const vivas = [
-    useActualidad(activados > 0 ? capitulos[0].pedido : null),
-    useActualidad(activados > 1 ? capitulos[1].pedido : null),
-    useActualidad(activados > 2 ? capitulos[2].pedido : null),
-    useActualidad(activados > 3 ? capitulos[3].pedido : null),
-    useActualidad(activados > 4 ? capitulos[4].pedido : null),
-    useActualidad(activados > 5 ? capitulos[5].pedido : null),
-    useActualidad(activados > 6 ? capitulos[6].pedido : null),
-    useActualidad(activados > 7 ? capitulos[7].pedido : null),
+    useActualidad(pedido(0)),
+    useActualidad(pedido(1)),
+    useActualidad(pedido(2)),
+    useActualidad(pedido(3)),
+    useActualidad(pedido(4)),
+    useActualidad(pedido(5)),
+    useActualidad(pedido(6)),
+    useActualidad(pedido(7)),
+    useActualidad(pedido(8)),
   ] as const;
+
+  // El indice del capitulo de comunicados en ESTA cadena, o -1. Solo Tecate.
+  const iComunicados = capitulos.findIndex((c) => c.fuente === "comunicados");
+  const comunicados = useComunicados(iComunicados >= 0);
 
   const estados: EstadoCapitulo[] = [];
   let hayNuevos = false;
-  vivas.forEach((viva, i) => {
+  for (let i = 0; i < CAPITULOS_MAXIMO; i++) {
+    const c = capitulos[i];
+    if (c === undefined) {
+      estados.push(INACTIVO);
+      continue;
+    }
+    if (i === iComunicados) {
+      if (activados <= i) {
+        estados.push(INACTIVO);
+        continue;
+      }
+      let hielo = congelados.current[i] ?? null;
+      if (hielo === null) {
+        hielo = asentadoComunicados(comunicados.data, comunicados.isLoading, comunicados.error !== undefined);
+        congelados.current[i] = hielo;
+      }
+      estados.push(hielo ?? CARGANDO);
+      continue;
+    }
+    const viva = vivas[i]!;
     if (!viva.activa) {
       estados.push(INACTIVO);
-      return;
+      continue;
     }
     // Escritura perezosa del ref durante el render: solo de null a un valor,
     // una vez por capitulo. Es la inicializacion tardia que React permite.
@@ -83,7 +149,7 @@ export function useCapitulos(entrada: Entrada, activados: number): CapitulosVivo
     }
     if (hielo === null) {
       estados.push(CARGANDO);
-      return;
+      continue;
     }
     estados.push(hielo);
     if (hielo.estado === "fallo") {
@@ -91,9 +157,9 @@ export function useCapitulos(entrada: Entrada, activados: number): CapitulosVivo
     } else if (!viva.cargando && viva.resultados.length > 0 && claves(viva.resultados) !== claves(hielo.resultados)) {
       hayNuevos = true;
     }
-  });
+  }
 
   const hilado = useMemo(() => hilar(capitulos, estados), [capitulos, ...estados]);
 
-  return { capitulos, hilado, disponible: vivas[0].activa, hayNuevos };
+  return { capitulos, hilado, disponible: vivas[0]!.activa, hayNuevos };
 }

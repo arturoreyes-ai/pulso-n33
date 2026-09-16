@@ -9,14 +9,12 @@ import type {
   DocComunicados,
   DocArchivoIndice,
   DocConversacion,
-  DocEstado,
   DocFuentes,
   DocIndicadores,
   DocNotas,
   DocRedes,
   DocRedesComentarios,
   DocRoster,
-  DocTemas,
   DocTendencias,
   DocGastoElectoral,
   DocFinanciamientoPartidos,
@@ -31,9 +29,11 @@ import type {
 // horas y no cambia mientras la pestana esta abierta.
 
 export const useNotas = () => useSWRImmutable<DocNotas>(RUTAS.notas, leerJson);
-export const useComunicados = () =>
-  useSWRImmutable<DocComunicados>(RUTAS.comunicados, leerJson);
-export const useTemas = () => useSWRImmutable<DocTemas>(RUTAS.temas, leerJson);
+/** Con llave anulable: los comunicados solo son un capitulo del recorrido de
+ *  Tecate, y en las otras ocho entradas no hay que pedir el archivo. Es el
+ *  mismo recurso que useActualidad(null). */
+export const useComunicados = (activo = true) =>
+  useSWRImmutable<DocComunicados>(activo ? RUTAS.comunicados : null, leerJson);
 export const useIndicadores = () =>
   useSWRImmutable<DocIndicadores>(RUTAS.indicadores, leerJson);
 export const useConversacion = () =>
@@ -59,13 +59,9 @@ export const useFinanciamientoPartidos = () =>
 export const useArchivo = (activo: boolean) =>
   useSWRImmutable<DocArchivoIndice>(activo ? RUTAS.archivoIndice : null, leerJson);
 
-/**
- * estado.json es el unico que se sondea: son 600 bytes y es el reloj. Cuando
- * el cron deja un corte nuevo, esto es lo que mueve la marca de frescura.
- */
-export const useEstado = () =>
-  useSWR<DocEstado>(RUTAS.estado, leerJson, {
-    refreshInterval: 5 * 60_000,
-    revalidateOnFocus: true,
-    keepPreviousData: true,
-  });
+/* `useEstado` y `useTemas` se fueron con el muro el 15 de septiembre de 2026:
+   estado.json era el reloj que sondeaba la marca de frescura y temas.json
+   alimentaba el panel de temas y el resumen de cifras, y ninguna de las dos
+   pantallas existe ya. El pipeline los sigue escribiendo —el historial de git
+   ES el archivo, y estado.json lleva la hora de corrida que hace que cada
+   corrida produzca un commit—, simplemente no los lee nadie en el sitio. */

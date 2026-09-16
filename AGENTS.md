@@ -469,6 +469,27 @@ already refused on the record in `docs/PLAN.md` §3.
 - **`ROBOTSTXT_OBEY` stays on** and per-domain concurrency stays at 1.
 - **Headline, source and link only.** Never article body text. For Instagram
   posts that means the first line of the outlet's caption, never the whole pie.
+  **One carve-out, decided by the client on 15 September 2026:** the reader can
+  press **Analizar** on a card and `/api/analizar` fetches the linked article,
+  sends it to a model and returns a short reading. Nothing of that body is
+  stored or published — not in `data/`, not in `cache/`, and **not in the
+  response**, which carries the reading and never the text read. That last part
+  is what keeps `docs/datos.md`'s "no se guardan cuerpos ni resumenes" true, and
+  it is pinned by `web/scripts/probar-analisis.cjs`, not left to intent. The
+  route is off unless `ANALISIS_HABILITADO=true` **and** `ANTHROPIC_API_KEY` is
+  set, because every press is a paid call and the brief says "without needing AI
+  APIs". Do not widen this to bulk or background analysis, and do not let the
+  prompt cross tone with a figure (rule 5).
+- **The search link does not open the article, and following it is not the
+  pipeline rule breaking.** A live row's `url` is an opaque Google token that
+  **does not HTTP-redirect**: requesting it server-side returns ~580 KB of
+  Google's own page, which resolves the destination in JavaScript. Measured 15
+  September 2026, while testing exactly this. So `Analizar` uses the outlet's
+  real link, recovered from the corpus by folded title
+  (`lib/busqueda/enlaces.ts`, the same join as `imagenes.ts`; 91% of corpus
+  notes carry one) and says so plainly when there is none. The pipeline's
+  "never resolve the redirect" rule is untouched and is about something else:
+  there the token rotates between runs and would dirty `data/`.
 - **Instagram comment text goes to `efimero/`, never to `data/` or git**, and
   commenter identity is never stored anywhere (see the invariant above).
 - **X: trends only, never tweets.** X closed anonymous reading in 2023, so
@@ -524,18 +545,31 @@ Tailwind v4, pnpm.
   `DESCRIPCION` record in `metadatos.ts` and the `CUERPOS` table in
   `paginas/pagina.tsx` — the type system catches all five.
 
-- **The four social platforms share one page.** Instagram, TikTok, YouTube
-  and X are one view (`redes`) with a facet selector, not four sections. They
-  are the same question asked in four places, and only one panel mounts at a
-  time because each is an island that fetches its own JSON. X is trends, not
-  comments (`paneles/tendencias.tsx`). Since 14 September 2026 the page also
-  has a Lista / Visual toggle (`paneles/selector-red.tsx`): Visual
-  (`paneles/visor-redes.tsx`, Instagram and TikTok embeds, one mounted at a
-  time, full-viewport snap cards on phones) is the default below `md` and
-  Lista stays the default on desktop. The server always renders Lista and a
-  phone switches after hydration from a `(min-width: 48rem)` media query
-  (`lib/pantalla/movil.ts`), so the two HTMLs match and Lista's prose still
-  ships as HTML; the reader's tap overrides the breakpoint.
+- **The four social platforms share one page, and the page is a reader.**
+  Instagram, TikTok, YouTube and X are one view (`redes`), not four sections:
+  the same question asked in four places. Since 15 September 2026 the page is
+  the **fixed full-screen reader** shared with `/ahora`
+  (`components/lector/lector.tsx`, settle hook in `lib/pantalla/recorrido.ts`)
+  on every width: a bar (back to the zone's portada, the place as a dialog of
+  links, info carrying the page's entrada and the `Pie`), a row of tabs in the
+  style of X's trending page (`paneles/lector-redes.tsx`: Todas · Instagram ·
+  TikTok · YouTube · X, `aria-pressed` buttons, a 2 px `chart-1` underline,
+  one mounted at a time with SWR preload on hover), and a box below. The
+  first three tabs are `paneles/visor-redes.tsx`: one embedded post per
+  screen, mandatory snap inside the box, one media mounted, heights frozen
+  during the gesture; the most-voted **comment text lives in the card** (a
+  two-comment preview in the desktop column and a «Comentarios» sheet on both
+  sizes, `paneles/comentarios-publicacion.tsx`). YouTube and X are the same
+  box without snap (`.hoja-lector`); X is trends, not comments
+  (`paneles/tendencias.tsx`), in X's row grammar with the #1 trend of each
+  location set in Archivo and the caveat under it. The Instagram / TikTok
+  **lists and the Lista / Visual toggle are gone** (`paneles/redes.tsx`,
+  `paneles/selector-red.tsx`, `lib/pantalla/movil.ts` deleted); `docs/PLAN.md`
+  records the reversal. One CSS rule, `main:has(.lector) > :not(:has(.lector))`,
+  hides header, footer and `Velo` while a reader is up; on `md` the nav pill
+  (`.nav-flotante`) is exempt and the box starts at `--nav-alto`. The section
+  is rendered with `revelar={false}` because `Revelar`'s transform would
+  contain the fixed box.
 - **Live Google News never becomes a `Nota`.** `/api/buscar` (search) and
   `/api/actualidad` (the México / World section the wall shows when its
   scope is `mexico` or `internacional` and nothing is typed, and the
@@ -576,8 +610,8 @@ Tailwind v4, pnpm.
   indicadores panel, because that block explains what the SHF index, the predial
   and the ENSU measure — the source's meaning, not ours. Do not reintroduce it
   elsewhere. All the mechanism prose that used to live in those blocks is in
-  PRODUCT.md and in the module docstrings of `paginas/redes.tsx` and
-  `paneles/redes.tsx`.
+  PRODUCT.md and in the module docstrings of `paginas/redes.tsx`,
+  `paneles/visor-redes.tsx` and `paneles/comentarios-publicacion.tsx`.
 
 - **`/garitas` and `/gasto-electoral` are pages, not a separate site.** Both are
   `SUELTAS` in `secciones.ts`: in the nav, outside the place x view grid. They
@@ -591,28 +625,99 @@ Tailwind v4, pnpm.
   and the type tokens. Don't reintroduce a CSS module for a page: the tokens in
   `globals.css` are the scale, and `pnpm tokens` fails on off-scale values.
 
-- **`/ahora` is the third SUELTA: a WikiTok-style recorrido of live
-  headlines** (client request, 14 September 2026). One headline per screen,
-  swipe to the next, Anterior / Siguiente on desktop. It chains
-  `/api/actualidad` lists as *chapters* in a fixed order (the chosen entry:
-  a zone, the corredor, México or Internacional → its five rubros → the
-  other two sections) instead of raising `TOPE_ACTUALIDAD`; a rubro on an
-  edition is the same search without place terms;
-  Google's order is kept inside a chapter and a folded title already shown is
-  dropped (`lib/busqueda/capitulos.ts`, pure, pinned by
-  `scripts/probar-capitulos.cjs`). The card is typographic because the RSS
-  carries no image and no extract, and the product is headline, source and
-  link; a failed chapter renders a hueco card and the recorrido continues.
-  `lib/busqueda/use-capitulos.ts` calls `useActualidad` eight times over a
-  tuple, with `null` for chapters not yet reached, and freezes each list once
-  it settles so the five-minute refresh cannot move the card under the
-  reader's finger («Hay titulares nuevos · Recargar» remounts). The
-  scroll-settle and arrival logic is shared with the redes Visual through
-  `lib/pantalla/recorrido.ts`. The entry is client state, so `/tecate/ahora`
-  does not exist. A card shows a figure only when the same headline exists in
-  the corpus with the outlet's own `imagen` (`lib/busqueda/imagenes.ts`, by
-  folded title); live rows never carry an image of their own. Unlike the other two sueltas it mounts `Pie`: a page of
-  external rows must carry the five rules.
+- **The portada is `En Tendencia`, and it is the whole product.** A
+  WikiTok-style recorrido of live headlines, one per screen, on every width
+  (client request, 14 September 2026; promoted from `/ahora` to the frontpage
+  on the 15th). The wall lived one afternoon as a third section, `prensa`, and
+  the client removed it the same day: with it went the wall, its tone, the
+  weekly themes, «Hoy en cifras» and the delegación facet. **The pipeline still
+  computes all of it** — the git history *is* the archive, and `estado.json`
+  carries the run time that makes every run commit — so `temas.json` and
+  `estado.json` are written and read by nobody. Putting any of it back on
+  screen is interface work, not data work. `notas.json` still has one reader:
+  the recorrido, for thumbnails (`imagenes.ts`) and the outlet link behind
+  Analizar (`enlaces.ts`), which is why `pagina.tsx` preloads it on the portada
+  only.
+
+  It chains `/api/actualidad` lists as *chapters* in a fixed order (the chosen
+  entry → its five rubros → the other two sections) instead of raising
+  `TOPE_ACTUALIDAD`; Google's order is kept inside a chapter and a folded title
+  already shown is dropped (`lib/busqueda/capitulos.ts`, pure, pinned by
+  `scripts/probar-capitulos.cjs`). `use-capitulos.ts` freezes each list once it
+  settles so the five-minute refresh cannot move the card under the reader's
+  finger.
+
+  **The chain is eight chapters, or NINE in Tecate**, which adds the
+  Ayuntamiento's comunicados after the five rubros. That is why `Capitulos` is
+  a union of two tuple widths, why `CAPITULOS_MAXIMO` (9) is a ceiling on data
+  slots rather than a total, and why `debeActivar` takes the real chain length
+  **as a parameter**. Reading a module constant there is a silent failure, not
+  an error: the ninth chapter is simply never requested and the loading card
+  spins forever. `use-capitulos.ts` therefore calls `useActualidad` nine times
+  with null gates and always pushes nine `estados` — its `useMemo` has spread
+  deps and React requires a constant dep-array size.
+
+  **The comunicados chapter is the only one not fed by the live read.** It
+  comes from the municipal document, which is independent of the press on
+  purpose (`pulso/comunicados.py`). The seam is `EstadoCapitulo`, which is
+  already source-agnostic — it speaks only `ResultadoExterno[]`, `Idioma[]` and
+  `boolean` — so a sibling of `asentado()` adapts the document and nothing
+  downstream knows. Cards render as `tipo: "titular"` (a comunicado *is*
+  headline, source and link) but read `t.capitulo === "comunicados"` to drop
+  three claims that would be false: the «en vivo» chip, the hour (the
+  Ayuntamiento publishes a date, and `hora()` would print midnight), and
+  `nofollow` (that exists because a search engine returned the link; this one
+  is the publisher's own).
+
+  **The entry is half route, half facet, and both halves are load-bearing.** A
+  municipio is a place and already had a segment, so `/tecate` means "start at
+  Tecate"; México and Internacional are not places and would be credited as
+  such by `[zona]`, so they are `?e=` (`lib/busqueda/entrada.ts`). `?e=` and
+  `?q=` are read **on the server** in `app/page.tsx` and passed down as props.
+  Do not "fix" that into `useSearchParams` under a `<Suspense>`, which is what
+  the Next docs describe and what this shipped as first: on this prerendered
+  route the boundary stayed pending forever — the fallback card in place and
+  the real `.lector` parked in a detached holder off `<body>` — so
+  `main:has(.lector)` never matched and the phone kept the nav pill and the
+  footer on top of the reader. It typechecks, passes every `.cjs` contract, and
+  looks right on a laptop.
+
+- **Search is a MODE of the reader, not a chapter** (`?q=`, the magnifier in
+  the bar). A search is a flat list of up to 40 results with no chapter order,
+  no dividers and no tail sections; putting it in the chain would need a third
+  source type there for nothing. The form is a real `<form method="get">` and
+  does not search as you type: in a full-screen reader every keystroke would
+  rebuild the card stack under the reader's finger, and this way it works
+  without JavaScript and stays in the URL. `use-busqueda.ts` lost its
+  `titulosCorpus`/`suprimirConocidas` argument with the wall — there is no
+  longer anything above it to avoid repeating.
+
+- **The reader carries the site's navigation, and on a phone it is the only
+  one.** `globals.css` hides everything but the reader and brings the pill back
+  only at `min-width: 48rem`. The portada has no page behind it, so `Lector`
+  takes an optional `volver` (omitted there) and a required `menu`. `menu` is
+  `chrome/menu-lector.tsx`, a **server** component passed as a ReactNode — the
+  same channel as `informacion` — because it carries the `cerrarSesion` server
+  action, which cannot be rendered from a client module. Build it from
+  `VISTAS` + `SUELTAS` + `ruta()`; never import `NavPildora` into a client
+  component. Place and view stay in **separate dialogs**.
+
+- **`/ahora` is now a 308 to `/`** (`app/ahora/page.tsx`, `permanentRedirect`).
+  The file survives only for that, and `"ahora"` stays in the
+  `SegmentoLiteral` union of `secciones.ts` because the literal segment still
+  competes with `[zona]`.
+
+- **The reader carries the site's navigation, and on a phone it is the only
+  one.** `globals.css` hides everything but the reader and brings the pill back
+  only at `min-width: 48rem`. That was fine while every reader was an interior
+  page reachable by its back arrow; the portada has no page behind it, so
+  `Lector` takes an optional `volver` (omitted on the portada) and a required
+  `menu`. `menu` is `chrome/menu-lector.tsx`, a **server** component passed as
+  a ReactNode — the same channel as `informacion` — because it carries the
+  `cerrarSesion` server action, which cannot be rendered from a client module.
+  Build it from `VISTAS` + `SUELTAS` + `ruta()`; never import `NavPildora` into
+  a client component. Place and view stay in **separate dialogs**: merging them
+  re-mixes the two axes the pill argues in writing that it separated.
 
 - **`web/` is what ships.** The cron builds it on the runner and deploys it
   prebuilt, behind `DESPLEGAR_TABLERO`. It deploys from the runner rather than

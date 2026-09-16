@@ -13,7 +13,9 @@ import { NOMBRE_CORTO, type ZonaRuta } from "./zonas";
 
 /** Lo que la pagina dice de si misma, en una linea. */
 const DESCRIPCION: Record<Seccion | "portada", (lugar: string) => string> = {
-  portada: (l) => `Titulares sobre ${l}, con su fuente, su enlace y el tema del que forman parte.`,
+  // La portada es el recorrido desde el 15 de septiembre de 2026.
+  portada: (l) =>
+    `Los titulares que destacan ahora sobre ${l}, uno por pantalla, con su fuente y su enlace. Es una lectura en vivo y no cuenta en las cifras de prensa.`,
   // Instagram y TikTok publican el texto; YouTube nunca. La linea decia «Se
   // publica el texto de los comentarios» de las tres y era falsa para una.
   redes: (l) =>
@@ -25,7 +27,7 @@ const DESCRIPCION: Record<Seccion | "portada", (lugar: string) => string> = {
 /** El titulo, como guardas y no como tres ternarios encajados. */
 function titulo(nombre: string | null, vista: Vista): string {
   // La portada de la region se queda con el titulo del layout: es "Pulso" a
-  // secas, no "Titulares · Pulso".
+  // secas, no "En Tendencia · Pulso".
   if (vista === null) return nombre === null ? "Pulso" : `${nombre} · Pulso`;
   return `${tituloSeccion(vista, nombre)} · Pulso`;
 }

@@ -5,9 +5,10 @@ import { useState } from "react";
 import { clasesChip } from "@/components/ui/clases";
 import type { Tarjeta } from "@/lib/busqueda/capitulos";
 import { fechaCorta, hora } from "@/lib/dominio/formato";
+import { AnalisisTitular } from "./analisis-titular";
 
 /**
- * Las tarjetas del recorrido /ahora. Todas a pantalla completa.
+ * Las tarjetas del recorrido de la portada. Todas a pantalla completa.
  *
  * Son tipograficas por omision: la fuente en vivo no publica miniatura ni
  * extracto, y el producto es titular, fuente y enlace (PRODUCT.md). Lo que
@@ -18,12 +19,11 @@ import { fechaCorta, hora } from "@/lib/dominio/formato";
  * nota esta en el corpus con la miniatura del propio medio (lib/busqueda/
  * imagenes.ts). Va ARRIBA del titular, acotada y sin texto encima: el texto
  * sigue sobre los tokens de tinta y no sobre una foto de contraste
- * desconocido. Si la imagen no carga, la figura desaparece y la tarjeta queda
- * como las demas; el medio es quien la sirve, y puede dejar de hacerlo.
+ * desconocido. Si la imagen no carga, conserva su espacio: quitar la figura
+ * desplazaba el titular bajo el dedo. El medio puede dejar de servirla.
  *
- * Comparten `.publicacion-visual` con el visor de redes (globals.css): es lo
- * que las hace medir la pantalla y ajustarse al desplazar, y el numero del
- * margen vive solo ahi. Los divisores, los huecos y la tarjeta final miden lo
+ * `.tarjeta-ahora` mide la caja del lector, no la pagina ni el visor de redes.
+ * Los divisores, los huecos y la tarjeta final miden lo
  * mismo que un titular a proposito: un punto de ajuste de otra altura rompe el
  * ritmo de «un gesto, una tarjeta».
  *
@@ -31,56 +31,77 @@ import { fechaCorta, hora } from "@/lib/dominio/formato";
  * letra: es el mismo tipo de dato con la misma salvedad.
  */
 
-const TARJETA = "publicacion-visual flex flex-col justify-center border-b border-filo py-8 md:py-12";
+/* El relleno vive en `.tarjeta-ahora` (globals.css), no aqui: una utilidad
+   `py-*` perderia contra esa regla, que no esta en la capa de utilidades. */
+const TARJETA = "tarjeta-ahora mx-auto flex w-full max-w-[88rem] flex-col justify-center";
 
 type Titular = Extract<Tarjeta, { tipo: "titular" }>;
 type Divisor = Extract<Tarjeta, { tipo: "divisor" }>;
 type Hueco = Extract<Tarjeta, { tipo: "hueco" }>;
 
-export function TarjetaTitular({ t, titulares, indice, imagen = null }: { t: Titular; titulares: number; indice: number; imagen?: string | null }) {
+export function TarjetaTitular({ t, titulares, indice, imagen = null, analisis = false, enlace = null }: { t: Titular; titulares: number; indice: number; imagen?: string | null; analisis?: boolean; enlace?: string | null }) {
   const iso = t.r.publicado;
   const valida = iso !== null && !Number.isNaN(Date.parse(iso));
+  // Un comunicado del Ayuntamiento no es una lectura en vivo ni trae hora: su
+  // `fecha` es solo el dia, y `hora()` pintaria medianoche. Tampoco lleva
+  // `nofollow`, que estaba porque el enlace venia de un buscador; este es el
+  // del propio emisor.
+  const oficial = t.capitulo === "comunicados";
   const [rota, setRota] = useState<string | null>(null);
   const conFigura = imagen !== null && imagen !== rota;
   return (
     <article data-indice={indice} aria-label={`Titular ${t.orden} de ${titulares}`} className={TARJETA}>
-      {conFigura ? (
-        <figure className="mb-6 max-h-[42svh] w-full overflow-hidden rounded-nucleo bg-vela md:max-h-[40svh]">
+        <figure className="figura-ahora overflow-hidden rounded-nucleo" aria-hidden>
+          {conFigura ? <>
           {/* alt vacio y aria-hidden: la imagen no tiene pie propio y el
               titular ya es el texto. no-referrer: el medio la sirve, la
               pagina no se le presenta. */}
           <img src={imagen} alt="" aria-hidden loading="lazy" decoding="async" referrerPolicy="no-referrer"
             className="h-full w-full object-cover" onError={() => setRota(imagen)} />
+          </> : null}
         </figure>
-      ) : null}
       <p className={`text-meta ${t.acento}`}>{t.rotulo}</p>
-      <h2 className={`mt-4 max-w-[24ch] break-words font-titular text-seccion text-tinta-titulo ${conFigura ? "" : "md:text-hero md:[font-stretch:112%]"}`}>
+      <h2 className="mt-4 max-w-[24ch] break-words font-titular text-seccion text-tinta-titulo md:text-hero md:[font-stretch:112%]">
         {t.r.titulo}
       </h2>
       <p className="mt-6 flex flex-wrap items-center gap-2 text-cuerpo text-tinta-meta">
         <span className="text-tinta-dato">{t.r.medio}</span>
         {iso !== null && valida ? (
-          <time dateTime={iso}>{fechaCorta(iso)} · {hora(iso)}</time>
+          <time dateTime={iso}>{fechaCorta(iso)}{oficial ? null : <> · {hora(iso)}</>}</time>
         ) : (
           <span>s/f</span>
         )}
-        <span
-          title="Resultado en vivo: no tiene zona, tono ni figura, y no cuenta en las cifras de prensa."
-          className="inline-block rounded-full border border-dashed border-filo px-2 py-px text-meta whitespace-nowrap text-tinta-meta"
-        >
-          en vivo
-        </span>
+        {oficial ? (
+          <span
+            title="Boletín publicado por el Ayuntamiento. No es prensa y no cuenta en las cifras de prensa."
+            className="inline-block rounded-full border border-dashed border-filo px-2 py-px text-meta whitespace-nowrap text-tinta-meta"
+          >
+            comunicado
+          </span>
+        ) : (
+          <span
+            title="Resultado en vivo: no tiene zona, tono ni figura, y no cuenta en las cifras de prensa."
+            className="inline-block rounded-full border border-dashed border-filo px-2 py-px text-meta whitespace-nowrap text-tinta-meta"
+          >
+            en vivo
+          </span>
+        )}
         {t.r.idioma === "en" ? (
           <span className="inline-block rounded-full border border-filo bg-vela px-2 py-px text-meta whitespace-nowrap text-tinta-dato">
             inglés
           </span>
         ) : null}
       </p>
-      <div className="mt-8 flex flex-wrap items-center gap-3">
-        {/* nofollow: es un enlace que devolvio un buscador, no una cita. */}
-        <a href={t.r.url} target="_blank" rel="noopener nofollow noreferrer" className={clasesChip(true)}>
+      <div className="acciones-ahora mt-8 flex flex-wrap items-center gap-3">
+        {/* nofollow: es un enlace que devolvio un buscador, no una cita. Un
+            comunicado no pasa por ahi: es el enlace del propio emisor. */}
+        <a href={t.r.url} target="_blank" rel={oficial ? "noopener noreferrer" : "noopener nofollow noreferrer"} className={`${clasesChip(true)} min-w-0 break-words`}>
           Leer en {t.r.medio}
         </a>
+        {/* `enlace` es el del propio medio, o null: el de la fila es un token
+            que no abre la nota (lib/busqueda/enlaces.ts). El boton se pinta en
+            las dos, y con null lo dice al abrir. */}
+        {analisis ? <AnalisisTitular titulo={t.r.titulo} url={enlace} medio={t.r.medio} /> : null}
         <Compartir titulo={t.r.titulo} url={t.r.url} />
         <p className="ml-auto text-meta tabular-nums text-tinta-meta">{t.orden} de {titulares}</p>
       </div>
@@ -110,7 +131,7 @@ function Compartir({ titulo, url }: { titulo: string; url: string }) {
   return (
     <>
       <button type="button" className={clasesChip(false)} onClick={compartir}>Compartir</button>
-      <span role="status" className="text-meta text-tinta-meta">{aviso}</span>
+      <span role="status" className="aviso-compartir text-meta text-tinta-meta">{aviso}</span>
     </>
   );
 }
@@ -121,7 +142,7 @@ export function TarjetaDivisor({ t, indice }: { t: Divisor; indice: number }) {
       <p className={`text-meta ${t.acento}`}>{t.rotulo}</p>
       <h2 className="mt-4 max-w-[24ch] font-titular text-seccion text-tinta-titulo">{t.titulo}</h2>
       <p className="mt-4 max-w-[65ch] text-lectura text-tinta-prosa">
-        {t.n === 1 ? "Un titular" : `${t.n} titulares`}
+        {t.n === 1 ? `Un ${t.sustantivo}` : `${t.n} ${t.sustantivo}s`}
         {t.nota === null ? "." : ` · ${t.nota}`}
       </p>
     </article>
@@ -139,10 +160,10 @@ export function TarjetaHueco({ t, indice }: { t: Hueco; indice: number }) {
   );
 }
 
-export function TarjetaFinal({ frase, indice, onInicio }: { frase: string; indice: number; onInicio: () => void }) {
+export function TarjetaFinal({ frase, indice, onInicio, titulo = "Llegaste al final de lo que destaca ahora." }: { frase: string; indice: number; onInicio: () => void; titulo?: string }) {
   return (
     <article data-indice={indice} aria-label="Final del recorrido" className={TARJETA}>
-      <h2 className="max-w-[24ch] font-titular text-seccion text-tinta-titulo">Llegaste al final de lo que destaca ahora.</h2>
+      <h2 className="max-w-[24ch] font-titular text-seccion text-tinta-titulo">{titulo}</h2>
       <p className="mt-4 max-w-[65ch] text-lectura text-tinta-prosa">{frase}</p>
       <div className="mt-8">
         <button type="button" className={clasesChip(false)} onClick={onInicio}>Volver al inicio</button>
@@ -153,10 +174,12 @@ export function TarjetaFinal({ frase, indice, onInicio }: { frase: string; indic
 
 /** Mientras un capitulo carga, una tarjeta con la geometria de una real, para
  *  que el primer titular sustituya al esqueleto en su sitio y no empuje la
- *  pagina. Sin data-indice: no es un destino del recorrido. */
-export function EsqueletoTitular() {
+ *  pagina. Su indice es el que ocupara la siguiente tarjeta al llegar.
+ *  `sin-ajuste`: no es un punto de ajuste (globals.css explica el salto al
+ *  final que provocaba serlo). */
+export function EsqueletoTitular({ indice }: { indice: number }) {
   return (
-    <article aria-hidden className={`${TARJETA} animate-pulse`}>
+    <article data-indice={indice} aria-hidden className={`${TARJETA} sin-ajuste motion-safe:animate-pulse`}>
       <div className="h-3 w-32 rounded-etiqueta bg-vela" />
       <div className="mt-6 h-9 w-11/12 rounded-etiqueta bg-vela" />
       <div className="mt-3 h-9 w-10/12 rounded-etiqueta bg-vela" />

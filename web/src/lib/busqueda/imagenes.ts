@@ -4,9 +4,9 @@
  * Una fila en vivo (ResultadoExterno) nunca trae imagen: el RSS de Google no
  * la publica y su redirector no se sigue. Lo que si puede haber es la MISMA
  * nota en el corpus, llegada por el feed del propio medio con su miniatura.
- * El cruce es por titular plegado, la misma llave que usa `suprimirConocidas`
- * y por la misma razon: las URLs no empatan nunca (redirector contra enlace
- * del medio).
+ * El cruce es por titular plegado, la misma llave que usa `enlaces.ts` y por
+ * la misma razon: las URLs no empatan nunca (redirector contra enlace del
+ * medio).
  *
  * Gana la primera nota del archivo con ese titular e imagen, en su orden: el
  * indice es determinista para el mismo notas.json. Sin empate no hay imagen,

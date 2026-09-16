@@ -49,6 +49,28 @@ navegador del lector la pide al medio: la página no se presenta (`no-referrer`)
 pero la dirección IP sí llega. La opinión legal que pide el plan sigue
 pendiente; la decisión es del cliente y queda registrada en `docs/PLAN.md`.
 
+El 15 de septiembre de 2026, a petición del cliente, el tablero se redujo a lo
+que se lee: el recorrido de titulares, las redes, los indicadores, las garitas y
+el gasto electoral. El muro de titulares con su tono, los temas de la semana y
+el resumen en cifras dejaron de tener pantalla. **Las cinco reglas de abajo no
+cambian**: la ingesta sigue midiendo y archivando lo mismo cada seis horas, y
+siguen gobernando lo que el producto afirma y lo que no —también sobre los
+titulares en vivo, que son lectura y no muestra—. Lo que cambia es cuántas de
+ellas tienen hoy una pantalla que las ilustre.
+
+Desde el 15 de septiembre de 2026, también a petición del cliente, el lector
+puede pedir una **lectura automática** de una nota: el botón «Analizar» de una
+tarjeta abre la nota enlazada, una máquina la lee y devuelve dos o tres frases
+sobre de qué trata y qué **no** establece. Es la única parte del producto que
+toca el cuerpo de una nota, y lo toca sin quedárselo: el cuerpo vive lo que dura
+una petición, no se guarda en ningún archivo ni en el historial, y la respuesta
+lleva la lectura y nunca el texto leído. La lectura se rotula como lo que es
+—la escribe una máquina, puede equivocarse, no sustituye leer la nota— y no
+cuenta en ninguna cifra de prensa. No atribuye postura a ninguna persona, que
+es la regla 5 aplicada a un modelo distinto del de tono. Va apagada salvo que se
+encienda con una clave propia. La opinión legal sigue pendiente; la decisión es
+del cliente y queda registrada en `docs/PLAN.md`.
+
 ---
 
 ## Qué mide hoy

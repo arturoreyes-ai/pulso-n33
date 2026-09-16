@@ -35,9 +35,14 @@ function cargar(relativo) {
 }
 
 const {
-  CAPITULOS_TOTAL, EN_VUELO_MAXIMO, UMBRAL_ACTIVACION,
+  CAPITULOS_MAXIMO, EN_VUELO_MAXIMO, UMBRAL_ACTIVACION,
   capitulosDe, debeActivar, fraseFinal, hilar,
 } = cargar('lib/busqueda/capitulos');
+
+// Ocho capitulos en toda entrada, nueve en Tecate: ahi se suman los
+// comunicados del Ayuntamiento, que llegaron al recorrido el 15 de septiembre
+// de 2026 al quitarse la pagina del muro donde vivian.
+const largoDe = (entrada) => (entrada === 'Tecate' ? 9 : 8);
 const { RUBROS } = cargar('lib/busqueda/rubros');
 const { ZONAS_RUTA } = cargar('lib/dominio/zonas');
 const { TOPE_ACTUALIDAD } = cargar('lib/busqueda/tipos');
@@ -58,14 +63,15 @@ const MECANISMO = /google|rss|feed|api|pipeline|corpus|redirector/i;
 function comprobar() {
   // --- capitulosDe -------------------------------------------------------
   const region = capitulosDe('region');
-  assert.equal(region.length, CAPITULOS_TOTAL);
-  assert.equal(CAPITULOS_TOTAL, 8);
+  assert.equal(region.length, 8);
+  assert.equal(CAPITULOS_MAXIMO, 9, 'el techo de ranuras de datos, no el total');
   assert.deepEqual(region.map((c) => c.id), ['local', ...RUBROS, 'mexico', 'internacional']);
   assert.deepEqual(region[0].pedido, { ambito: 'region', rubro: null });
   assert.deepEqual(region[2].pedido, { ambito: 'region', rubro: 'seguridad' });
   assert.deepEqual(region[6].pedido, { ambito: 'mexico', rubro: null });
   assert.deepEqual(region[7].pedido, { ambito: 'internacional', rubro: null });
-  assert.equal(region[0].rotulo, 'Tijuana y San Diego · ahora');
+  assert.equal(region[0].rotulo, 'El corredor · ahora');
+  assert.equal(region[0].titulo, 'Lo que destaca ahora en el corredor');
   assert.equal(region[2].rotulo, 'Seguridad · últimos dos días');
   assert.equal(region[2].titulo, 'Seguridad en el corredor');
   assert.equal(region[6].rotulo, 'México · ahora');
@@ -91,7 +97,7 @@ function comprobar() {
   assert.deepEqual(mexico[7].pedido, { ambito: 'region', rubro: null });
   assert.equal(mexico[0].rotulo, 'México · ahora');
   assert.equal(mexico[2].titulo, 'Seguridad en México');
-  assert.equal(mexico[7].rotulo, 'Tijuana y San Diego · ahora');
+  assert.equal(mexico[7].rotulo, 'El corredor · ahora');
   const mundo = capitulosDe('internacional');
   assert.deepEqual(mundo.map((c) => c.id), ['internacional', ...RUBROS, 'mexico', 'local']);
   assert.deepEqual(mundo[1].pedido, { ambito: 'internacional', rubro: 'clima' });
@@ -100,13 +106,52 @@ function comprobar() {
 
   for (const e of ['region', ...ZONAS_RUTA, 'mexico', 'internacional']) {
     const cs = capitulosDe(e);
-    assert.equal(cs.length, 8, e);
-    assert.equal(new Set(cs.map((c) => c.id)).size, 8, `${e}: ids sin repetir`);
+    assert.equal(cs.length, largoDe(e), e);
+    assert.equal(new Set(cs.map((c) => c.id)).size, largoDe(e), `${e}: ids sin repetir`);
+    assert.ok(cs.length <= CAPITULOS_MAXIMO, `${e}: cabe en las ranuras de datos`);
     for (const c of cs) {
       assert.ok(c.acento.startsWith('text-'), `${e}/${c.id}: acento es una clase de texto`);
+      // `pedido` es null exactamente en los capitulos que no salen de la
+      // lectura en vivo. Si eso se desincroniza, use-capitulos pide null y el
+      // capitulo se queda cargando para siempre, sin error y sin tarjeta.
+      assert.equal(c.pedido === null, c.fuente !== 'actualidad', `${e}/${c.id}: fuente y pedido de acuerdo`);
       for (const texto of [c.nombre, c.rotulo, c.titulo]) assert.doesNotMatch(texto, MECANISMO, `${e}/${c.id}: «${texto}»`);
     }
   }
+
+  // --- Tecate: el capitulo de comunicados ---------------------------------
+  // Va DESPUES de los cinco rubros y ANTES de las otras ediciones: sigue
+  // siendo de Tecate, pero son boletines publicados y no lo que esta pasando,
+  // asi que no se adelantan a ningun titular reciente.
+  const tecate = capitulosDe('Tecate');
+  assert.deepEqual(tecate.map((c) => c.id), ['local', ...RUBROS, 'comunicados', 'mexico', 'internacional']);
+  const comunicados = tecate[6];
+  assert.equal(comunicados.fuente, 'comunicados');
+  assert.equal(comunicados.pedido, null, 'no se pide a la lectura en vivo');
+  assert.equal(comunicados.titulo, 'Comunicados del Ayuntamiento');
+  assert.equal(comunicados.rotulo, 'Gobierno de Tecate · comunicado');
+  // Ninguna otra entrada lo lleva: es la unica fuente municipal del catalogo.
+  for (const e of ['region', 'mexico', 'internacional', 'Tijuana', 'Mexicali']) {
+    assert.ok(!capitulosDe(e).some((c) => c.fuente === 'comunicados'), `${e} no lleva comunicados`);
+  }
+  // El divisor los cuenta como comunicados, no como titulares.
+  const hTecate = hilar(tecate, [
+    listo(lote('T', 2)), listo([]), listo([]), listo([]), listo([]), listo([]),
+    listo(lote('Boletin', 3)), INACTIVO, INACTIVO,
+  ]);
+  const divisorBoletin = hTecate.tarjetas.find((t) => t.tipo === 'divisor');
+  assert.equal(divisorBoletin.capitulo, 'comunicados');
+  assert.equal(divisorBoletin.sustantivo, 'comunicado');
+  assert.equal(divisorBoletin.n, 3);
+  assert.equal(hilar(region, [listo(lote('A', 2)), listo(lote('B', 2)), ...Array(6).fill(INACTIVO)])
+    .tarjetas.find((t) => t.tipo === 'divisor').sustantivo, 'titular');
+  // Y la cadena de nueve solo esta completa con los nueve asentados.
+  assert.equal(hilar(tecate, Array(8).fill(listo([]))).completo, false, 'ocho de nueve no es completo');
+  assert.equal(hilar(tecate, Array(9).fill(listo([]))).completo, true);
+  // Con ocho activados el noveno no se ha pedido: es el fallo mudo que
+  // motivo pasarle el largo a debeActivar.
+  assert.equal(debeActivar(hilar(tecate, Array(8).fill(listo(lote('X', 1)))), 99, 8, 9), true, 'en Tecate se pide el noveno');
+  assert.equal(debeActivar(hilar(region, Array(8).fill(listo(lote('X', 1)))), 99, 8, 8), false, 'en el resto no hay noveno');
 
   // --- hilar: orden y corte ---------------------------------------------
   // Se para en el primer capitulo no asentado, aunque uno posterior ya llego.
@@ -170,29 +215,32 @@ function comprobar() {
   assert.equal(fraseFinal(region, hilar(region, [listo(lote('A', 1)), ...Array(7).fill(listo([]))])), 'Un titular en este recorrido. Sin titulares nuevos en: Clima, Seguridad, Deportes, Política, Economía, México, Internacional.');
 
   // --- debeActivar ---------------------------------------------------------
+  // El ultimo argumento es el largo REAL de la cadena, no una constante del
+  // modulo: leerla de ahi era lo que dejaba sin pedir el noveno capitulo de
+  // Tecate, sin error y con la tarjeta de carga girando para siempre.
   assert.equal(UMBRAL_ACTIVACION, 3);
   assert.equal(EN_VUELO_MAXIMO, 2);
   const soloCargando = hilar(region, [CARGANDO, ...Array(7).fill(INACTIVO)]);
-  assert.equal(debeActivar(soloCargando, 0, 1), true, 'al montar se adelanta el segundo capitulo');
+  assert.equal(debeActivar(soloCargando, 0, 1, 8), true, 'al montar se adelanta el segundo capitulo');
   const dosEnVuelo = hilar(region, [CARGANDO, CARGANDO, ...Array(6).fill(INACTIVO)]);
-  assert.equal(debeActivar(dosEnVuelo, 0, 2), false, 'nunca mas de dos por delante');
+  assert.equal(debeActivar(dosEnVuelo, 0, 2, 8), false, 'nunca mas de dos por delante');
   // El adelantado llego primero: sigue sin mostrarse, asi que no libera lugar.
   const adelantado = hilar(region, [CARGANDO, listo(lote('B', 5)), ...Array(6).fill(INACTIVO)]);
   assert.equal(adelantado.emitidos, 0);
   assert.equal(adelantado.tarjetas.length, 0);
-  assert.equal(debeActivar(adelantado, 0, 2), false, 'un capitulo adelantado no cuenta como recorrido');
+  assert.equal(debeActivar(adelantado, 0, 2, 8), false, 'un capitulo adelantado no cuenta como recorrido');
   const ambos = hilar(region, [listo(lote('A', 2)), listo(lote('B', 5)), ...Array(6).fill(INACTIVO)]);
   assert.equal(ambos.emitidos, 2);
-  assert.equal(debeActivar(ambos, 0, 2), false, 'al principio de ocho tarjetas no se pide');
-  assert.equal(debeActivar(ambos, 4, 2), true, 'a tres del final si');
+  assert.equal(debeActivar(ambos, 0, 2, 8), false, 'al principio de ocho tarjetas no se pide');
+  assert.equal(debeActivar(ambos, 4, 2, 8), true, 'a tres del final si');
   const quince = hilar(region, [listo(lote('A', TOPE_ACTUALIDAD)), ...Array(7).fill(INACTIVO)]);
-  assert.equal(debeActivar(quince, 0, 1), false, 'al principio de quince no se pide');
-  assert.equal(debeActivar(quince, TOPE_ACTUALIDAD - 1 - UMBRAL_ACTIVACION, 1), true, 'a tres del final si');
-  assert.equal(debeActivar(quince, TOPE_ACTUALIDAD - 2 - UMBRAL_ACTIVACION, 1), false);
+  assert.equal(debeActivar(quince, 0, 1, 8), false, 'al principio de quince no se pide');
+  assert.equal(debeActivar(quince, TOPE_ACTUALIDAD - 1 - UMBRAL_ACTIVACION, 1, 8), true, 'a tres del final si');
+  assert.equal(debeActivar(quince, TOPE_ACTUALIDAD - 2 - UMBRAL_ACTIVACION, 1, 8), false);
   const vacio = hilar(region, [listo([]), ...Array(7).fill(INACTIVO)]);
-  assert.equal(debeActivar(vacio, 0, 1), true, 'un capitulo vacio no detiene la cadena');
+  assert.equal(debeActivar(vacio, 0, 1, 8), true, 'un capitulo vacio no detiene la cadena');
   const completo = hilar(region, todos);
-  assert.equal(debeActivar(completo, completo.tarjetas.length - 1, 8), false, 'con los ocho pedidos no hay mas');
+  assert.equal(debeActivar(completo, completo.tarjetas.length - 1, 8, 8), false, 'con los ocho pedidos no hay mas');
 
   // --- imagenes: del corpus, por titular plegado, nunca de otra nota --------
   const nota = (titulo, imagen) => ({ id: 'x', titulo, url: 'https://medio.example/n', dominio: 'medio.example', fuente: 'medio', zona_medio: 'Tijuana', zonas: [], alcance: 'zona', fecha: null, publicado: null, capturado: '2026-09-14T00:00:00Z', figuras: [], postura: null, ...(imagen ? { imagen } : {}) });
@@ -207,7 +255,7 @@ function comprobar() {
   assert.equal(imagenPara(fila('Sin imagen'), indice), null, 'una nota sin imagen no toma la de otra');
   assert.equal(imagenPara(fila('Otro titular'), indice), null);
 
-  console.log(`Capítulos: ${CAPITULOS_TOTAL} capítulos, orden, repetidos, fallos, activación e imágenes verificados offline.`);
+  console.log('Capítulos: 8 capítulos (9 en Tecate), orden, repetidos, fallos, activación e imágenes verificados offline.');
 }
 
 comprobar();

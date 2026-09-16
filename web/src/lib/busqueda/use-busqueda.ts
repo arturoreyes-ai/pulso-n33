@@ -6,9 +6,7 @@ import { useMemo } from "react";
 import useSWRImmutable from "swr/immutable";
 
 import { SLUG_DE_ZONA, type ZonaRuta } from "@/lib/dominio/zonas";
-import { ambitoPorOmision, type Ambito } from "./ambito";
 import { leerApi, useHayServidor } from "./disponible";
-import { suprimirConocidas } from "./fusionar";
 import {
   MINIMO_CONSULTA,
   type RespuestaBusqueda,
@@ -18,10 +16,7 @@ import {
 const SIN_RESULTADOS: readonly ResultadoExterno[] = [];
 
 export interface BusquedaViva extends ActualizacionViva {
-  /** Lo que no esta ya en el muro de arriba. */
   resultados: readonly ResultadoExterno[];
-  /** Cuantos se quitaron por estar ya en el muro. Se dice, no se esconde. */
-  suprimidas: number;
   cargando: boolean;
   /** Locales que fallaron, para poder decir cual. */
   caidos: ("es" | "en")[];
@@ -31,26 +26,26 @@ export interface BusquedaViva extends ActualizacionViva {
   activa: boolean;
 }
 
-export function useBusquedaViva(
-  consulta: string,
-  titulosCorpus: ReadonlySet<string>,
-  ambito: Ambito,
-  zona: ZonaRuta | null,
-): BusquedaViva {
+/**
+ * Una busqueda en vivo, para el recorrido de la portada.
+ *
+ * Nacio para el muro, y de ahi arrastraba dos cosas que ya no aplican y se
+ * quitaron el 15 de septiembre de 2026 al irse esa pagina: recibia el conjunto
+ * de titulares del corpus para SUPRIMIR los resultados que el muro ya mostraba
+ * arriba —sin muro no hay nada que repetir— y recibia un ambito, que elegian
+ * unas pastillas que tampoco existen. El alcance es ahora el de la ruta: `/`
+ * busca en el corredor y `/tijuana` en Tijuana.
+ */
+export function useBusquedaViva(consulta: string, zona: ZonaRuta | null): BusquedaViva {
   const hayServidor = useHayServidor();
   const q = consulta.trim();
   const activa = hayServidor && q.length >= MINIMO_CONSULTA;
 
   // Llave null: SWR no pide nada. Inmutable, como el resto de hooks de datos:
-  // una peticion por (consulta, ambito, sesion). El ambito y la zona van en la
-  // llave, asi que cambiar de pastilla y volver se sirve del cache -- y el CDN,
-  // que llavea por URL completa, guarda cada ambito por separado gratis.
-  //
-  // El ambito solo viaja cuando NO es el de omision, para que la llave de la
-  // busqueda normal sea la corta y se comparta entre las dos formas de pedir
-  // lo mismo.
+  // una peticion por (consulta, zona, sesion). La zona va en la llave, asi que
+  // volver a una busqueda ya hecha se sirve del cache -- y el CDN, que llavea
+  // por URL completa, guarda cada zona por separado gratis.
   const partes = [`q=${encodeURIComponent(q)}`];
-  if (ambito !== ambitoPorOmision(zona)) partes.push(`a=${ambito}`);
   if (zona !== null) partes.push(`z=${SLUG_DE_ZONA[zona]}`);
 
   const llave = activa ? `/api/buscar?${partes.join("&")}` : null;
@@ -60,11 +55,6 @@ export function useBusquedaViva(
     llave,
     (ruta: string) => leerApi<RespuestaBusqueda>(ruta),
   );
-
-  const { visibles, suprimidas } = useMemo(() => {
-    if (data === undefined) return { visibles: SIN_RESULTADOS, suprimidas: 0 };
-    return suprimirConocidas(data.resultados, titulosCorpus);
-  }, [data, titulosCorpus]);
 
   const caidos = useMemo(
     () =>
@@ -76,8 +66,7 @@ export function useBusquedaViva(
 
   return {
     ...actualizacion,
-    resultados: visibles,
-    suprimidas,
+    resultados: data?.resultados ?? SIN_RESULTADOS,
     cargando: activa && isLoading,
     caidos,
     // Contra cuantas fuentes se pidieron, no contra dos: en ambito 'mexico'

@@ -119,10 +119,17 @@ jobs:
       - name: Contrato de publicaciones visuales offline
         run: node scripts/probar-publicaciones.cjs
 
-      # El recorrido /ahora encadena las listas en vivo como capitulos: orden,
-      # sin repetidos entre capitulos, huecos dichos y activacion del siguiente.
-      - name: Contrato de capítulos de /ahora offline
+      # El recorrido de la portada encadena las listas en vivo como capitulos:
+      # orden, sin repetidos entre capitulos, huecos dichos y activacion del
+      # siguiente.
+      - name: Contrato de capítulos de En Tendencia offline
         run: node scripts/probar-capitulos.cjs
+
+      # La lectura automatica abre la nota del medio, y lo unico que sostiene
+      # la promesa de no publicar cuerpos es que no vuelva en la respuesta.
+      # Eso se prueba aqui, junto con el filtro de URL y el interruptor.
+      - name: Contrato de lectura automática offline
+        run: node scripts/probar-analisis.cjs
 
       - name: Escalas de diseno
         run: pnpm tokens

@@ -5,7 +5,8 @@ import useSWR from "swr";
 
 import { Bisel } from "@/components/ui/bisel";
 import { Barra, Esqueleto } from "@/components/ui/primitivas";
-import { duracion, fechaLocal, horaLocal, resumen, vigente } from "@/lib/garitas/formato";
+import { descargar } from "@/lib/garitas/exportar";
+import { duracion, fechaLocal, guion, horaLocal, nombreCarril, vigente } from "@/lib/garitas/formato";
 import type { Carril, RespuestaGaritas } from "@/lib/garitas/tipos";
 
 /**
@@ -30,14 +31,53 @@ import type { Carril, RespuestaGaritas } from "@/lib/garitas/tipos";
  *
  * Lo que NO cambio es el producto: una consulta al entrar y despues solo el
  * boton (el endpoint de CBP no se golpea en cada foco), la hora de reporte por
- * carril, los reportes de mas de 90 minutos fuera del resumen para locucion, y
- * la distincion entre «sin dato» y cero que rige todo el tablero.
+ * carril, los reportes de mas de 90 minutos fuera del guion, y la distincion
+ * entre «sin dato» y cero que rige todo el tablero.
+ *
+ * «Para leer al aire» es un apuntador, no un parrafo, y da dos lecturas del
+ * mismo dato porque las usan dos personas en dos momentos: la FICHA —todos los
+ * carriles del modo de un vistazo, con los huecos a la vista— la mira el
+ * productor en medio segundo; la LINEA continua debajo la dice el locutor,
+ * tal cual o improvisando encima.
+ *
+ * Y son dos modos, no uno: en coche y a pie. La version anterior solo leia el
+ * carril general de vehiculos, asi que la mitad de la garita —la que cruza
+ * caminando, con dos accesos distintos en San Ysidro— no llegaba al aire.
+ *
+ * La atribucion sale de la frase y sube a una etiqueta, que es donde va en
+ * television: primero el dato, la fuente despues —«Cifras de CBP.» cierra el
+ * bloque hablado—. Antes la frase abria con «Segun CBP, a las 11:00 AM…» y
+ * enterraba la noticia debajo del tramite.
+ *
+ * La forma la decide el orden de lectura, no el adorno. Los dos cruces van en
+ * paralelo —son equivalentes, como sus tarjetas de abajo—; dentro de cada uno
+ * el nombre encabeza con un filete y los dos modos se apilan; y dentro de cada
+ * modo lo que SE DICE es lo unico grande, con la ficha debajo como pie. Antes
+ * era una sola columna de ocho bloques con saltos casi iguales y cinco pasos
+ * tipograficos en los que el nombre del cruce era lo mas pequeno de la
+ * pantalla: la jerarquia iba al reves y no se veia donde acababa un cruce.
+ *
+ * Quedan dos pasos, no cinco —12 para rotulos y ficha, 20 para lo que se
+ * dice— y un ritmo con contraste deliberado: 1.5/2.5 dentro de un modo, 7/9
+ * entre modos y antes del cierre. La cifra resalta por peso y tabular-nums,
+ * nunca por tamano, que es lo que romperia el ritmo de lectura.
+ *
+ * Aqui hubo una regla roja al margen marcando «esto se dice». Era decoracion
+ * haciendo el trabajo de la estructura: con la jerarquia puesta, sobra.
+
+ * «Descargar JSON» guarda el reporte que ya esta en pantalla; no vuelve a
+ * preguntar, por la misma razon que el resto. Lo que guarda es la respuesta
+ * entera, no esta tabla: ver `lib/garitas/exportar.ts`.
  */
 
 const CBP = "https://bwt.cbp.gov/";
 
 /** El ancho de la pagina, identico al de `chrome/seccion.tsx`. */
 const ANCHO = "mx-auto w-full max-w-[88rem] px-4 md:px-8";
+
+/** Los dos botones de la cabecera; se reparten la fila en movil. */
+const BOTON =
+  "inline-flex min-h-11 shrink-0 items-center justify-center rounded-full border border-filo bg-vela px-5 text-cuerpo text-tinta-titulo transition-colors duration-[var(--dur-cambio)] ease-firma hover:bg-filo max-sm:flex-1";
 
 async function consultar(ruta: string): Promise<RespuestaGaritas> {
   const respuesta = await fetch(ruta);
@@ -62,7 +102,7 @@ function minutosDe(carril: Carril): number | null {
 function Fila({ carril, escala, ahora }: { carril: Carril; escala: number; ahora: number }) {
   const minutos = minutosDe(carril);
   const actual = vigente(carril, ahora);
-  const nombre = `${carril.acceso === "PedWest" ? "PedWest · " : ""}${carril.nombre}`;
+  const nombre = nombreCarril(carril);
 
   return (
     <li className="border-b border-vela py-4 last:border-0">
@@ -192,6 +232,16 @@ export function TableroGaritas() {
     }
   }
 
+  // Se guarda lo que ya esta en pantalla: descargar no vuelve a consultar.
+  function descargarReporte() {
+    if (!datos) return;
+    try {
+      fijarConfirmacion(`Se descargó ${descargar(datos)} con el reporte que ves en pantalla.`);
+    } catch {
+      fijarConfirmacion("No se pudo descargar el archivo. Intenta de nuevo.");
+    }
+  }
+
   // El reloj se inyecta desde aqui y no se lee dentro de `vigente`, para que la
   // frescura de un carril no dependa del momento en que React decida repintar.
   useEffect(() => {
@@ -206,7 +256,7 @@ export function TableroGaritas() {
       cruce.carriles.map((c) => Math.ceil((c.minutos ?? 0) / 30) * 30),
     ),
   );
-  const lectura = datos && ahora ? resumen(datos.cruces, ahora) : "";
+  const lectura = datos && ahora ? guion(datos.cruces, ahora) : null;
 
   return (
     <>
@@ -216,15 +266,25 @@ export function TableroGaritas() {
             <h1 className="max-w-[16ch] font-titular text-hero [font-stretch:112%] text-tinta-titulo">
               El pulso de las garitas
             </h1>
-            <button
-              type="button"
-              onClick={() => void actualizarManual()}
-              disabled={consultando}
-              aria-busy={consultando}
-              className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-full border border-filo bg-vela px-5 text-cuerpo text-tinta-titulo transition-colors duration-[var(--dur-cambio)] ease-firma hover:bg-filo disabled:cursor-wait disabled:opacity-60 max-sm:w-full"
-            >
-              {consultando ? "Consultando…" : "Actualizar"}
-            </button>
+            <div className="flex shrink-0 gap-2 max-sm:w-full">
+              <button
+                type="button"
+                onClick={descargarReporte}
+                disabled={!datos}
+                className={`${BOTON} disabled:cursor-not-allowed disabled:opacity-60`}
+              >
+                Descargar JSON
+              </button>
+              <button
+                type="button"
+                onClick={() => void actualizarManual()}
+                disabled={consultando}
+                aria-busy={consultando}
+                className={`${BOTON} disabled:cursor-wait disabled:opacity-60`}
+              >
+                {consultando ? "Consultando…" : "Actualizar"}
+              </button>
+            </div>
           </div>
 
           <p className="mt-6 max-w-[65ch] text-lectura text-tinta-prosa">
@@ -275,16 +335,91 @@ export function TableroGaritas() {
         {datos ? (
           <>
             <Bisel interior="p-6 md:p-8">
-              <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h2 className="text-meta font-semibold text-tinta-titulo">Para leer al aire</h2>
-                <span className="text-meta text-tinta-meta">Vehículos · carriles generales</span>
+                <span className="rounded-full border border-filo bg-vela px-3 py-1 text-meta text-tinta-dato">
+                  {lectura ? lectura.atribucion : "CBP"}
+                </span>
               </div>
-              <p className="mt-3 max-w-[70ch] text-rotulo text-tinta-titulo">
-                {error
-                  ? "Actualización interrumpida. Verifica los reportes antes de leer cifras al aire."
-                  : lectura ||
-                    "No hay reportes vigentes con hora verificable para los carriles generales. Consulta el detalle de cada cruce."}
-              </p>
+
+              {error ? (
+                <div className="mt-6">
+                  <p className="text-meta font-semibold text-aviso">No leer al aire</p>
+                  <p className="mt-2 max-w-[46ch] text-rotulo text-tinta-titulo">
+                    La actualización no se completó. Comprueba la hora de cada reporte antes de dar
+                    cifras.
+                  </p>
+                </div>
+              ) : lectura && lectura.cierre ? (
+                <>
+                  {/* Los dos cruces son equivalentes y van en paralelo, como las
+                      tarjetas de abajo: en una sola columna el bloque medía ocho
+                      alturas y no se veía donde acababa uno y empezaba el otro. */}
+                  <div className="mt-6 grid items-start gap-x-10 gap-y-9 md:grid-cols-2">
+                    {lectura.cues.map((cue) => (
+                      <section key={cue.lugar}>
+                        <h3 className="border-b border-filo pb-2 text-meta font-semibold uppercase text-tinta-prosa">
+                          {cue.lugar}
+                        </h3>
+                        {cue.modos.map((modo) => (
+                          <div key={modo.titulo} className="mt-7 first:mt-4">
+                            <p className="text-meta text-tinta-meta">{modo.titulo}</p>
+
+                            {/* Lo que se dice manda: es lo unico grande del
+                                bloque, y la ficha va debajo como pie. */}
+                            {modo.linea ? (
+                              <p className="mt-1.5 max-w-[46ch] text-rotulo text-tinta-titulo">
+                                {modo.linea}
+                              </p>
+                            ) : modo.horasMezcladas ? (
+                              <p className="mt-1.5 max-w-[46ch] text-cuerpo text-aviso">
+                                Sus carriles no comparten hora de reporte: no hay una línea que los
+                                diga juntos.
+                              </p>
+                            ) : modo.sinLinea ? (
+                              /* Sin esto, un cruce sin cifras vigentes dejaba el
+                                 hueco vacio al lado del que si las tiene, y el
+                                 apuntador no decia por que. Es un hueco
+                                 rotulado, no un cero. */
+                              <p className="mt-1.5 max-w-[46ch] text-cuerpo text-tinta-meta">
+                                {modo.sinLinea}
+                              </p>
+                            ) : null}
+
+                            <ul className="mt-2.5 flex flex-wrap items-baseline gap-x-5 gap-y-1">
+                              {modo.renglones.map((renglon) => (
+                                <li key={renglon.nombre} className="text-meta text-tinta-meta">
+                                  {renglon.nombre}{" "}
+                                  <span
+                                    className={
+                                      renglon.hayCifra
+                                        ? "font-semibold tabular-nums text-tinta-dato"
+                                        : ""
+                                    }
+                                  >
+                                    {renglon.figura}
+                                  </span>
+                                  {renglon.hora ? ` · ${renglon.hora}` : ""}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </section>
+                    ))}
+                  </div>
+                  <p className="mt-9 border-t border-vela pt-5 text-lectura text-tinta-prosa">
+                    {lectura.cierre}
+                  </p>
+                </>
+              ) : (
+                <div className="mt-6">
+                  <p className="text-meta font-semibold text-tinta-meta">Nada que leer</p>
+                  <p className="mt-2 max-w-[46ch] text-rotulo text-tinta-titulo">
+                    Ningún carril tiene hora de reporte confirmada. Revisa cada cruce abajo.
+                  </p>
+                </div>
+              )}
             </Bisel>
 
             <div className="mt-8 flex flex-wrap justify-between gap-x-4 gap-y-1 text-meta text-tinta-meta">

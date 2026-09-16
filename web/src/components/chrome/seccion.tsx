@@ -27,6 +27,13 @@ import { Revelar } from "./revelar";
  * 24px del encabezado mas los 80px de la seccion, una franja negra de cuatro
  * dedos que el cliente pidio cerrar el 11 de septiembre de 2026: los titulares
  * van pegados a la navegacion que los acota.
+ *
+ * `revelar={false}` es para la seccion que contiene un lector a pantalla
+ * completa (la portada, el Visual de redes). `Revelar` anima con `transform` y
+ * `filter`, y cualquiera de los dos convierte al bloque en contenedor de un
+ * hijo `position: fixed`: el lector aparecia desplazado 2.5rem y borroso. Y
+ * como el lector apaga el scroll de la pagina, el IntersectionObserver que
+ * levanta ese estado podia no disparar nunca.
  */
 const RITMO = "py-12 md:py-20";
 const RITMO_PEGADA = "pt-4 pb-12 md:pt-6 md:pb-20";
@@ -36,12 +43,14 @@ export function Seccion({
   titulo,
   entrada,
   pegada = false,
+  revelar = true,
   children,
 }: {
   id: string;
   titulo?: string;
   entrada?: ReactNode;
   pegada?: boolean;
+  revelar?: boolean;
   children: ReactNode;
 }) {
   return (
@@ -58,7 +67,7 @@ export function Seccion({
         <p className="mt-4 max-w-[65ch] text-lectura text-tinta-prosa">{entrada}</p>
       )}
       <div className={titulo === undefined && entrada === undefined ? "" : "mt-8"}>
-        <Revelar>{children}</Revelar>
+        {revelar ? <Revelar>{children}</Revelar> : children}
       </div>
     </section>
   );

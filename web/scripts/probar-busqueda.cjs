@@ -38,7 +38,7 @@ function cargar(relativo) {
 }
 
 const { parsearFeed, quitarSufijoMedio } = cargar('lib/busqueda/rss');
-const { fusionarLocales, suprimirConocidas } = cargar('lib/busqueda/fusionar');
+const { fusionarLocales } = cargar('lib/busqueda/fusionar');
 const { urlDeFeed, urlDeActualidad, urlDeLugar, esUrlDeGoogle } = cargar('lib/busqueda/google-noticias');
 const { responderActualidad, consultaDeRubro } = cargar('lib/busqueda/actualidad');
 const { RUBROS, NOMBRE_RUBRO, TERMINOS_RUBRO, VENTANA_RUBRO } = cargar('lib/busqueda/rubros');
@@ -115,9 +115,6 @@ async function comprobar() {
   assert.equal(repetida.length, 1);
   assert.equal(repetida[0].idioma, 'es', 'gana el espanol: el tablero esta en espanol');
   assert.equal(fusionarLocales([[fila('', 'es')]]).length, 0);
-  const sup = suprimirConocidas([fila('Ya está', 'es'), fila('Nueva', 'es')], new Set(['ya esta']));
-  assert.equal(sup.visibles.length, 1);
-  assert.equal(sup.suprimidas, 1);
 
   // --- URLs: URLSearchParams, nunca concatenacion --------------------------
   const u = urlDeFeed('x&hl=en-US', 'es');

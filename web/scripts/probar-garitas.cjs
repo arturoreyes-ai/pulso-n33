@@ -12,10 +12,11 @@ function cargar(nombre) {
   return modulo.exports;
 }
 const { parsearCbp, fechaObservada, responderGaritas } = cargar('cbp');
-const { duracion, vigente, resumen } = cargar('formato');
+const { duracion, vigente, guion, horaHablada, duracionHablada, duracionFicha } = cargar('formato');
+const { nombreArchivo, serializar } = cargar('exportar');
 const ahora = '2026-09-08T23:30:00.000Z';
-const carril = (valor = '0', estado = 'no delay') => `<standard_lanes><operational_status>${estado}</operational_status><update_time>At 4:00 pm PDT</update_time><delay_minutes>${valor}</delay_minutes><lanes_open>2</lanes_open></standard_lanes>`;
-const puerto = (id, contenido, estado = 'Open') => `<port><port_number>${id}</port_number><date>9/8/2026</date><port_status>${estado}</port_status><passenger_vehicle_lanes>${contenido}</passenger_vehicle_lanes></port>`;
+const carril = (valor = '0', estado = 'no delay', hora = 'At 4:00 pm PDT') => `<standard_lanes><operational_status>${estado}</operational_status><update_time>${hora}</update_time><delay_minutes>${valor}</delay_minutes><lanes_open>2</lanes_open></standard_lanes>`;
+const puerto = (id, contenido, estado = 'Open', pie = '') => `<port><port_number>${id}</port_number><date>9/8/2026</date><port_status>${estado}</port_status><passenger_vehicle_lanes>${contenido}</passenger_vehicle_lanes>${pie ? `<pedestrian_lanes>${pie}</pedestrian_lanes>` : ''}</port>`;
 const envolver = contenido => `<border_wait_time>${contenido}</border_wait_time>`;
 const xml = envolver(puerto('250401', carril()) + puerto('250601', carril('100', 'delay')));
 async function comprobar() {
@@ -41,8 +42,59 @@ async function comprobar() {
   assert.equal(vigente(fila, Date.parse(fila.observado) + 90 * 60000), true);
   assert.equal(vigente(fila, Date.parse(fila.observado) + 90 * 60000 + 1), false);
   assert.equal(vigente(fila, Date.parse(fila.observado) - 1), false);
-  assert.match(resumen(datos.cruces, Date.parse(ahora)), /0 minutos/);
-  assert.equal(resumen(datos.cruces, Date.parse(ahora) + 120 * 60000), '');
+  // El guion. Redondeo: la hora en punto tolera 10 minutos y la media solo 5,
+  // porque «casi dos horas» por 1h50 se dice y «poco mas de dos y media» por
+  // 2h40 no; fuera de eso, la cifra exacta.
+  for (const [minutos, hablado, ficha] of [
+    [25, '25 minutos', '25 min'], [35, 'poco más de media hora', '~30 min'],
+    [55, 'casi una hora', '~1 h'], [110, 'casi dos horas', '~2 h'],
+    [160, '2 horas y 40 minutos', '2 h 40 min'], [175, 'casi tres horas', '~3 h'],
+    [145, 'casi dos horas y media', '~2 h 30 min'], [180, 'tres horas', '3 h 00 min'],
+  ]) { assert.equal(duracionHablada(minutos), hablado); assert.equal(duracionFicha(minutos), ficha); }
+  assert.equal(horaHablada('2026-09-08T19:00:00.000Z'), '12:00 de la tarde');
+  assert.equal(horaHablada('2026-09-09T05:00:00.000Z'), '10:00 de la noche');
+  const leido = guion(datos.cruces, Date.parse(ahora));
+  assert.equal(leido.atribucion, 'CBP · 4:00 de la tarde');
+  assert.equal(leido.cierre, 'Cifras de CBP.');
+  assert.equal(leido.cues[0].modos[0].linea, 'San Ysidro: 0 minutos en carril general.');
+  assert.equal(leido.cues[1].modos[0].linea, 'Otay Mesa: 1 hora y 40 minutos en carril general.');
+  // La ficha muestra los tres carriles de coche: los que no reportan tambien.
+  assert.deepEqual(leido.cues[0].modos[0].renglones.map(r => [r.nombre, r.figura, r.hayCifra]),
+    [['General', '0 min', true], ['Ready Lane', 'sin dato', false], ['SENTRI', 'sin dato', false]]);
+  // Peatones: San Ysidro tiene dos accesos y PedWest se rotula aparte; Otay
+  // uno solo, y ahi el Ready Lane peatonal no entra porque repite al general.
+  const aPie = parsearCbp(envolver(
+    puerto('250401', carril(), 'Open', carril('30', 'delay')) + puerto('250407', carril(), 'Open', carril('20', 'delay')) +
+    puerto('250601', carril('100', 'delay'), 'Open', carril('15', 'delay'))), ahora);
+  const caminando = guion(aPie.cruces, Date.parse(ahora));
+  assert.deepEqual(caminando.cues[0].modos[1].renglones.map(r => r.nombre),
+    ['General', 'Ready Lane', 'PedWest · General', 'PedWest · Ready Lane']);
+  assert.equal(caminando.cues[0].modos[1].linea,
+    'San Ysidro a pie: media hora por la garita principal y 20 minutos por PedWest.');
+  assert.deepEqual(caminando.cues[1].modos[1].renglones.map(r => r.nombre), ['General']);
+  assert.equal(caminando.cues[1].modos[1].linea, 'Otay Mesa a pie: 15 minutos.');
+  const vacio = guion(datos.cruces, Date.parse(ahora) + 120 * 60000);
+  assert.equal(vacio.cierre, '');
+  assert.equal(vacio.cues[0].modos[0].linea, '');
+  assert.equal(vacio.cues[0].modos[0].horasMezcladas, false);
+  // Y DICE POR QUE. Un modo sin linea y sin motivo dejaba un hueco mudo justo
+  // al lado del cruce que si tenia frase, en un bloque que se lee al aire.
+  assert.equal(vacio.cues[0].modos[0].sinLinea, 'Ningún carril tiene un reporte vigente.');
+  assert.ok(vacio.cues.every((c) => c.modos.every((m) => m.linea !== '' || m.sinLinea !== '' || m.horasMezcladas)),
+    'ningun modo se queda sin linea y sin explicacion');
+  assert.deepEqual(vacio.cues[0].modos[0].renglones.map(r => r.figura), ['reporte vencido', 'sin dato', 'sin dato']);
+  // Horas distintas entre cruces: la etiqueta no puede anunciar una sola.
+  const dispar = guion(parsearCbp(envolver(puerto('250401', carril()) + puerto('250601', carril('100', 'delay', 'At 3:30 pm PDT'))), ahora).cruces, Date.parse(ahora));
+  assert.equal(dispar.atribucion, 'CBP');
+  assert.equal(dispar.cues[0].modos[0].linea, 'San Ysidro, a las 4:00 de la tarde: 0 minutos en carril general.');
+  assert.equal(dispar.cues[1].modos[0].linea, 'Otay Mesa, a las 3:30 de la tarde: 1 hora y 40 minutos en carril general.');
+  // Horas distintas DENTRO de un modo: ese modo se queda sin linea y la ficha
+  // pone la hora en cada carril; no hay forma de decir la mezcla sin mentir.
+  const revuelto = guion(parsearCbp(envolver(puerto('250401', carril() + carril('40', 'delay', 'At 3:30 pm PDT').replace(/standard_lanes/g, 'ready_lanes'))), ahora).cruces, Date.parse(ahora));
+  assert.equal(revuelto.cues[0].modos[0].horasMezcladas, true);
+  assert.equal(revuelto.cues[0].modos[0].linea, '');
+  assert.equal(revuelto.cues[0].modos[0].sinLinea, '', 'ahi el motivo lo da horasMezcladas');
+  assert.deepEqual(revuelto.cues[0].modos[0].renglones.map(r => r.hora), ['4:00 de la tarde', '3:30 de la tarde', '']);
   const bien = await responderGaritas(async (url, opciones) => {
     assert.equal(url, 'https://bwt.cbp.gov/xml/bwt.xml'); assert.equal(opciones.redirect, 'error'); assert.ok(opciones.signal);
     return new Response(xml);
@@ -51,6 +103,16 @@ async function comprobar() {
   for (const solicitar of [async () => new Response('error', { status: 503 }), async () => new Response('<html/>'), async () => { throw new DOMException('timeout', 'TimeoutError'); }, async () => new Response('x'.repeat(2 * 1024 * 1024 + 1))]) {
     const fallo = await responderGaritas(solicitar, ahora); assert.equal(fallo.status, 502); assert.equal(fallo.headers.get('cache-control'), 'no-store');
   }
-  console.log('Garitas: contrato, fechas, frescura y API verificados offline.');
+  // La descarga: hora de Tijuana como en pantalla, y los huecos siguen en null.
+  assert.equal(nombreArchivo(ahora), 'garitas-20260908-1630.json');
+  assert.equal(nombreArchivo('2026-09-09T05:00:00.000Z'), 'garitas-20260908-2200.json');
+  assert.equal(nombreArchivo('2026-09-09T07:00:00.000Z'), 'garitas-20260909-0000.json');
+  assert.equal(nombreArchivo('sin fecha'), 'garitas.json');
+  const texto = serializar(datos);
+  assert.ok(texto.endsWith('\n'));
+  assert.deepEqual(JSON.parse(texto), datos);
+  assert.equal(JSON.parse(serializar(parcial)).cruces[0].carriles[0].minutos, null);
+  assert.equal(JSON.parse(serializar(parcial)).cruces[1].carriles[0].abiertos, null);
+  console.log('Garitas: contrato, fechas, frescura, guion, API y descarga verificados offline.');
 }
 comprobar().catch(error => { console.error(error); process.exitCode = 1; });

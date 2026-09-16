@@ -4,6 +4,8 @@ import type { Destacado, DocRedes } from "../datos/tipos";
  * plataforma y zona, después el orden de lectura. Mezclar antes del límite
  * dejaría a la plataforma más numerosa ocupar toda la selección. */
 export type RedVisual = "instagram" | "tiktok";
+/** Como se nombra cada red al lector. */
+export const NOMBRE_RED: Record<RedVisual, string> = { instagram: "Instagram", tiktok: "TikTok" };
 export interface PublicacionVisual {
   post: Destacado;
   red: RedVisual;

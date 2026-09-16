@@ -636,19 +636,59 @@ Verificación offline del contrato web: `node web/scripts/probar-garitas.cjs`
 después de instalar las dependencias de `web/`; también la invoca
 `python -m unittest discover -s tests -p test_garitas_web.py -v`.
 
-### Ahora: el recorrido de titulares
+### En Tendencia: la portada
 
-`/ahora` muestra los titulares en vivo uno por pantalla, al estilo de un
-recorrido de video vertical: se pasa al siguiente con el gesto de desplazar (o
-con Anterior / Siguiente en escritorio). Encadena las listas que ya sirve
-`/api/actualidad` como capítulos —lo que destaca donde se elige empezar (una
-zona, el corredor, México o Internacional), los cinco rubros de ahí y las otras
-dos secciones—, conserva el orden de cada lista y no repite un titular ya
+La página de inicio muestra los titulares en vivo uno por pantalla, al estilo de
+un recorrido de video vertical: se pasa al siguiente con el gesto de desplazar,
+la rueda o Av Pág. Encadena las listas que ya sirve `/api/actualidad` como
+capítulos —lo que destaca donde se elige empezar, los cinco rubros de ahí y las
+otras dos secciones—, conserva el orden de cada lista y no repite un titular ya
 mostrado. La tarjeta lleva imagen solo cuando la misma nota está en el corpus
 con la miniatura que su medio publica en su propio feed; el RSS de Google no la
-trae y no hay extracto;
-la tarjeta es titular, medio, hora, «en vivo», enlace y Compartir.
+trae y no hay extracto; la tarjeta es titular, medio, hora, «en vivo», enlace,
+Analizar y Compartir.
+
+Por dónde empieza el recorrido se reparte entre la ruta y la query: `/` es el
+corredor, `/tecate` empieza en Tecate, y `/?e=mexico` y `/?e=internacional` son
+facetas, no lugares. `/ahora`, que fue esta página el 14 de septiembre de 2026,
+responde un redirect permanente a `/`.
+
+La lupa de la barra **busca**: `?q=` en la misma ruta, así que `/tijuana?q=garita`
+busca en Tijuana. Es un formulario que se envía, no una búsqueda al teclear, y
+queda en el enlace.
+
+En **Tecate** el recorrido lleva un capítulo más: los cinco comunicados más
+recientes del Ayuntamiento, después de los cinco rubros y antes de México. Se
+rotulan «comunicado», llevan día sin hora —el Ayuntamiento no publica hora— y no
+cuentan en ninguna cifra de prensa.
+
+El muro de titulares, «De qué se habla esta semana» y «Hoy en cifras» se
+retiraron del sitio el 15 de septiembre de 2026 a petición del cliente. La
+ingesta los sigue calculando y archivando; sólo dejaron de tener pantalla.
 
 Verificación offline del contrato: `node web/scripts/probar-capitulos.cjs`;
 también la invoca `python -m unittest discover -s tests -p test_capitulos_web.py -v`
+y el job web de CI.
+
+### Analizar: la lectura automática de una nota
+
+El botón «Analizar» de una tarjeta abre la nota enlazada, la manda a un modelo y
+devuelve dos o tres frases sobre de qué trata y qué **no** establece. Nada del
+cuerpo de la nota se guarda ni se devuelve: la respuesta lleva la lectura y
+nunca el texto leído.
+
+Va apagado salvo que estén las dos variables, porque cada pulsación es una
+llamada de pago:
+
+```
+ANALISIS_HABILITADO=true
+ANTHROPIC_API_KEY=sk-ant-...
+```
+
+El enlace que publica el buscador no abre la nota —solo se resuelve dentro de un
+navegador—, así que la lectura usa el enlace del propio medio cuando el mismo
+titular está en el corpus; donde no lo está, el botón lo dice.
+
+Verificación offline del contrato: `node web/scripts/probar-analisis.cjs`;
+también la invoca `python -m unittest discover -s tests -p test_analisis_web.py -v`
 y el job web de CI.

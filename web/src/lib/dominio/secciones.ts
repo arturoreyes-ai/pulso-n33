@@ -22,10 +22,20 @@ import { SLUG_DE_ZONA, type Slug, type ZonaRuta } from "./zonas";
  *    se habla— en cuatro plataformas, y darle a TikTok su propia entrada en la
  *    nav lo convertia en un tema del producto en vez de en una fuente.
  *    Dentro de la pagina se eligen con un selector, como una faceta.
- *  - `temas` y `panorama` bajan a la portada. Temas FILTRA el muro que tiene
- *    encima (ver lib/muro/filtro-tema.ts): en otra pagina el filtro se queda
- *    sin nada que filtrar. Panorama es el resumen de la corrida y se lee
- *    junto a los titulares que resume.
+ *
+ * La PORTADA dejo de ser el muro el 15 de septiembre de 2026, a peticion del
+ * cliente: es el recorrido de titulares en vivo, «En Tendencia», que hasta ese
+ * dia era la suelta /ahora. Las dos superficies decian lo mismo con dos
+ * disenos —la portada abria con una seccion titulada «En Tendencia» y /ahora
+ * recorria esos mismos titulares a pantalla completa—, y esa duplicacion es lo
+ * que se elimino.
+ *
+ * El muro vivio ese mismo dia como una tercera seccion, `prensa`, y el cliente
+ * la quito al verla: el producto es el recorrido. Con ella se fueron el muro,
+ * los temas, «Hoy en cifras», el tono en pantalla y la faceta de delegaciones.
+ * El pipeline los sigue calculando —el historial de git ES el archivo—, asi
+ * que volver a mostrarlos es trabajo de interfaz y no de datos. La BUSQUEDA no
+ * se fue con ellos: vive en la portada, dentro del lector.
  *
  * `cobertura` fue la tercera seccion hasta el 14 de septiembre de 2026. Era la pagina
  * «Que se cubre y que no»: la matriz de zonas por fuente, el estado de cada
@@ -46,7 +56,7 @@ export type Vista = Seccion | null;
 
 /** Como se llama cada vista en la nav y en el titulo de su pagina. */
 const NOMBRE = {
-  portada: "Tendencias",
+  portada: "En Tendencia",
   redes: "Redes",
   indicadores: "Indicadores",
 } as const satisfies Record<Seccion | "portada", string>;
@@ -79,18 +89,18 @@ export const VISTAS: readonly Vista[] = [null, ...SECCIONES];
  * selector geografico acreditaria toda candidatura a una sola zona. Ninguna
  * de las dos admite `/tecate/<pagina>`.
  *
- * Ahora (14 de septiembre de 2026) es el recorrido de titulares en vivo a
- * pantalla completa. Tampoco admite `/tecate/ahora`: el lugar es un parametro
- * del PRIMER capitulo que el lector cambia dentro del recorrido, y los demas
- * capitulos —los rubros, Mexico, Internacional— no son de ningun municipio.
- * Forzarlo a la rejilla dejaria a la URL diciendo un lugar que solo describe
- * una octava parte de la pagina.
+ * `ahora` fue una suelta del 14 al 15 de septiembre de 2026, y el argumento de
+ * entonces era que el lugar no podia estar en la ruta porque solo describe el
+ * primer capitulo. Al volverse la PORTADA deja de aplicar: `/tecate` ya
+ * significaba «el tablero de Tecate», asi que significar «empieza el recorrido
+ * en Tecate» no agrega un eje, usa el que ya estaba. Los capitulos que no son
+ * de ningun municipio —Mexico e Internacional— tampoco ocupan segmento: son
+ * una faceta en `?e=`, como el alcance del muro es `?a=`.
  *
  * Se declara aqui, y no como un `<li>` a mano en la pildora, para que la nav
  * siga teniendo una sola lista de la que salen sus elementos.
  */
 export const SUELTAS = [
-  { id: "ahora", ruta: "/ahora", nombre: "Ahora" },
   { id: "garitas", ruta: "/garitas", nombre: "Garitas" },
   { id: "gasto-electoral", ruta: "/gasto-electoral", nombre: "Gasto electoral" },
 ] as const;
@@ -125,12 +135,13 @@ export function ruta(zona: ZonaRuta | null, vista: Vista): string {
  * Con esto deja de compilar, y `pnpm tipos` corre en CI.
  */
 /**
- * Todo segmento literal de primer nivel que compite con `[zona]`: las dos
- * secciones, las sueltas de la nav y la puerta (/entrar, ver proxy.ts). Una
- * zona llamada "entrar" dejaria a esa zona sin pagina y a la puerta intacta,
- * el mismo fallo mudo.
+ * Todo segmento literal de primer nivel que compite con `[zona]`: las tres
+ * secciones, las sueltas de la nav, la puerta (/entrar, ver proxy.ts) y
+ * /ahora, que ya no es una pagina pero sobrevive como redirect permanente a la
+ * portada y por lo tanto sigue ocupando el segmento. Una zona llamada "entrar"
+ * dejaria a esa zona sin pagina y a la puerta intacta, el mismo fallo mudo.
  */
-type SegmentoLiteral = Seccion | PaginaSuelta | "entrar";
+type SegmentoLiteral = Seccion | PaginaSuelta | "entrar" | "ahora";
 
 export const RUTAS_SIN_COLISION: [Extract<SegmentoLiteral, Slug>] extends [never]
   ? true

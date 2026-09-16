@@ -71,7 +71,11 @@ export function NavPildora({
     // El contenedor solo centra: mide todo el ancho de la ventana, asi que sin
     // `pointer-events-none` se traga los clics en los ~280px de vacio a cada
     // lado de la pastilla. La pastilla los vuelve a aceptar.
-    <div className="pointer-events-none fixed inset-x-0 top-0 z-[var(--z-nav)] mt-4 flex justify-center px-3 md:mt-6 md:px-4">
+    //
+    // `nav-flotante` es el asidero de globals.css: cuando una pagina monta el
+    // lector a pantalla completa, todo lo demas de <main> se oculta y en
+    // escritorio esta pildora es la unica excepcion.
+    <div className="nav-flotante pointer-events-none fixed inset-x-0 top-0 z-[var(--z-nav)] mt-4 flex justify-center px-3 md:mt-6 md:px-4">
       <nav
         aria-label="Tablero"
         className="pointer-events-auto mx-auto flex max-w-full items-center overflow-x-auto rounded-full border border-filo bg-black/40 px-2 py-2 shadow-bisel backdrop-blur-xl [scrollbar-width:none]"
@@ -123,13 +127,17 @@ export function NavPildora({
           ))}
         </ul>
 
-        {pagina === undefined ? (
+        {pagina === undefined && vista !== null ? (
           <>
             <Filo />
 
             {/* El otro eje. Es un ancla y no un enlace: el selector de zona esta
                 en el encabezado de ESTA pagina, unas lineas mas abajo, y llevarlo
-                a la pildora significaria repetir nueve chips en cada corte. */}
+                a la pildora significaria repetir nueve chips en cada corte.
+                En la PORTADA no se pinta: ahi el selector vive dentro de un
+                lector `position: fixed`, donde un ancla no tiene a que
+                desplazarse, y ademas diria «Toda la región» mientras la barra
+                del lector dice «México». */}
             <a
               href="#zonas"
               className={`${PASTILLA} shrink-0 whitespace-nowrap text-tinta-dato hover:bg-filo hover:text-tinta-titulo`}

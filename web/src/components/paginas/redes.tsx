@@ -1,22 +1,26 @@
-import type { ReactNode } from "react";
-
-import { EncabezadoSeccion } from "@/components/cabecera/encabezado";
+import { MenuLector } from "@/components/chrome/menu-lector";
+import { Pie } from "@/components/chrome/pie";
 import { Seccion } from "@/components/chrome/seccion";
 import { PanelConversacion } from "@/components/paneles/conversacion";
-import { PanelRedes, PanelTikTok } from "@/components/paneles/redes";
-import { SelectorRed } from "@/components/paneles/selector-red";
+import { LectorRedes } from "@/components/paneles/lector-redes";
 import { PanelTendencias } from "@/components/paneles/tendencias";
 import { tituloSeccion } from "@/lib/dominio/secciones";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 
 /**
- * REDES: las cuatro plataformas en un solo lugar.
+ * REDES: las cuatro plataformas en un solo lector.
  *
  * Eran tres secciones seguidas de la pagina unica —Instagram, TikTok y
- * YouTube—, y TikTok ademas tenia pastilla propia en la nav. Se leen como una
- * sola pregunta hecha en tres lugares, asi que se eligen con una faceta y no
- * scrolleando. El detalle de por que estan tan separadas por dentro esta en
- * `components/paneles/selector-red.tsx`.
+ * YouTube—, y TikTok ademas tenia pastilla propia en la nav. Luego fueron
+ * facetas de una pagina con encabezado y una pareja Lista / Visual. Desde el
+ * 15 de septiembre de 2026 la pagina ES el lector a pantalla completa
+ * (components/lector, paneles/lector-redes.tsx): barra con el lugar y la
+ * informacion, pestanas para elegir plataforma, y una caja que recorre las
+ * publicaciones una por pantalla. Las listas de Instagram y TikTok se
+ * retiraron; los comentarios mas votados viven en la tarjeta
+ * (paneles/comentarios-publicacion.tsx). En escritorio la pildora flotante
+ * sigue arriba; el encabezado y el pie de la pagina se ocultan y su prosa
+ * viaja en el dialogo de informacion del lector.
  *
  * Las cuatro NO son la misma fuente y la pagina no finge que lo sean:
  *
@@ -53,82 +57,59 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  * ciudad» se queda porque es significado; «leido sin iniciar sesion» se fue
  * porque es procedimiento. Las cinco reglas de PRODUCT.md siguen enteras y
  * visibles en cada pagina: las dice el pie (`chrome/pie.tsx`), en HTML de
- * servidor, no cada panel por su cuenta.
+ * servidor, aqui dentro del dialogo de informacion.
  *
- * Por eso ya no hay «Cómo leer este dato» aqui. Lo tenian las cuatro facetas y
+ * Por eso no hay «Cómo leer este dato» aqui. Lo tenian las cuatro facetas y
  * era prosa de metodologia; su contenido esta en PRODUCT.md. El panel de
  * indicadores conserva el suyo, que explica que mide el SHF o la ENSU —el
  * significado de la fuente, no el de nuestro codigo.
  */
 export function PaginaRedes({ zona }: { zona: ZonaRuta | null }) {
   const nombre = zona === null ? null : NOMBRE_CORTO[zona];
+  const entrada =
+    nombre === null
+      ? "Lo que publican las cuentas de noticias de la región y lo que la gente comenta debajo, en Instagram, TikTok y YouTube, y lo que X marca como tendencia. Se publica lo que se dijo; nunca quién lo dijo."
+      : `Lo que se publica desde ${nombre} o nombra a ${nombre}, lo que la gente comenta debajo y lo que X marca como tendencia. Se publica lo que se dijo; nunca quién lo dijo.`;
 
   return (
-    <>
-      <EncabezadoSeccion
+    // Sin revelado: el lector es fijo y el transform de Revelar lo
+    // desplazaria (ver chrome/seccion.tsx).
+    <Seccion id="redes" revelar={false}>
+      <h1 className="sr-only">{tituloSeccion("redes", nombre)}</h1>
+      <LectorRedes
         zona={zona}
-        vista="redes"
-        titulo={tituloSeccion("redes", nombre)}
-        entrada={
-          nombre === null
-            ? "Lo que publican las cuentas de noticias de la región y lo que la gente comenta debajo, en Instagram, TikTok y YouTube, y lo que X marca como tendencia. Se publica lo que se dijo; nunca quién lo dijo."
-            : `Lo que se publica desde ${nombre} o nombra a ${nombre}, lo que la gente comenta debajo y lo que X marca como tendencia. Se publica lo que se dijo; nunca quién lo dijo.`
-        }
+        menu={<MenuLector zona={zona} vista="redes" />}
+        informacion={<Informacion entrada={entrada} nombre={nombre} />}
+        paneles={{ youtube: <PanelConversacion zona={zona} />, x: <PanelTendencias zona={zona} /> }}
       />
-
-      <Seccion id="redes">
-        <SelectorRed
-          zona={zona}
-          paneles={{
-            instagram: (
-              <>
-                <Intro>
-                  {nombre === null
-                    ? "Los posts con más likes de las últimas 24 horas en las cuentas de noticias de la región, y los comentarios más votados en cada uno."
-                    : `Los posts con más likes de las últimas 24 horas en cuentas de noticias con sede en ${nombre}, y los comentarios más votados en cada uno.`}
-                </Intro>
-                <PanelRedes zona={zona} />
-              </>
-            ),
-            tiktok: (
-              <>
-                <Intro>
-                  {nombre === null
-                    ? "Videos de las últimas 24 horas que hablan de la región, de cualquier creador, y los comentarios más votados en cada uno."
-                    : `Videos de las últimas 24 horas que hablan de ${nombre}, de cualquier creador, y los comentarios más votados en cada uno.`}
-                </Intro>
-                <PanelTikTok zona={zona} />
-              </>
-            ),
-            youtube: (
-              <>
-                <Intro>
-                  {nombre === null
-                    ? "Comentarios en canales de noticias de la región, con su sentimiento. Aquí solo hay cifras, nunca el texto."
-                    : `Comentarios en canales de noticias sobre ${nombre}, con su sentimiento. Aquí solo hay cifras, nunca el texto.`}
-                </Intro>
-                <PanelConversacion zona={zona} />
-              </>
-            ),
-            x: (
-              <>
-                <Intro>
-                  {nombre === null
-                    ? "Lo que X marca como tendencia en Tijuana, Mexicali y San Diego, en México y en el mundo. Es el ranking de X, no una medida de la ciudad: aquí no hay tuits, solo el nombre de cada tendencia y la liga a su búsqueda."
-                    : `Lo que X marca como tendencia en ${nombre}, en México y en el mundo. Es el ranking de X, no una medida de la ciudad: aquí no hay tuits, solo el nombre de cada tendencia y la liga a su búsqueda.`}
-                </Intro>
-                <PanelTendencias zona={zona} />
-              </>
-            ),
-          }}
-        />
-      </Seccion>
-    </>
+    </Seccion>
   );
 }
 
-/** El parrafo que enmarca una plataforma. Va entre la faceta y el panel, en
- *  el sitio donde estaba la entrada de la seccion que cada una tenia. */
-function Intro({ children }: { children: ReactNode }) {
-  return <p className="mb-6 max-w-[65ch] text-lectura text-tinta-prosa">{children}</p>;
+/** El dialogo «Acerca de Redes»: la entrada de la pagina, una frase por
+ *  pestana sobre que se ve y que no se afirma, y el pie con las cinco reglas.
+ *  Todo HTML de servidor. */
+function Informacion({ entrada, nombre }: { entrada: string; nombre: string | null }) {
+  const donde = nombre ?? "la región";
+  return (
+    <>
+      <div className="grid gap-4 px-4 pt-6 pb-6 text-lectura text-tinta-prosa">
+        <p className="max-w-[65ch]">{entrada}</p>
+        <p className="max-w-[65ch]">
+          Instagram y TikTok: publicaciones recientes de las últimas 24 horas, de la más nueva a la más antigua,
+          con el pie del medio o la descripción del video, sus cifras y el texto de los comentarios más votados;
+          nunca quién los escribió. Lo que la plataforma no publica se dice «sin dato», no cero.
+        </p>
+        <p className="max-w-[65ch]">
+          YouTube: comentarios en canales de noticias {nombre === null ? "de la región" : `sobre ${donde}`}, con su
+          sentimiento. Aquí solo hay cifras, nunca el texto.
+        </p>
+        <p className="max-w-[65ch]">
+          X: lo que X marca como tendencia. Es el ranking de X, no una medida de la ciudad: aquí no hay tuits,
+          solo el nombre de cada tendencia y la liga a su búsqueda.
+        </p>
+      </div>
+      <Pie />
+    </>
+  );
 }

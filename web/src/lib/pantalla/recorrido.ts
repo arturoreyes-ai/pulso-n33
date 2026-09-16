@@ -1,151 +1,191 @@
 "use client";
 
-import { useEffect, useRef, useState, type RefObject } from "react";
-
-import { useEsMovil } from "./movil";
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type RefObject } from "react";
 
 /**
- * El recorrido a pantalla completa: que tarjeta esta asentada, y la llegada.
+ * El recorrido a pantalla completa: que tarjeta esta asentada y como ir a otra.
  *
- * Nacio dentro del visor de redes (14 de septiembre de 2026) y salio de ahi
- * el mismo dia, cuando /ahora necesito exactamente lo mismo para titulares:
- * saber que tarjeta esta en pantalla cuando el desplazamiento ASIENTA, pasar
- * con Anterior / Siguiente, y colocar la primera tarjeta al llegar en el
- * telefono. Lo que es del medio —montar un solo iframe— se quedo en el visor.
+ * Nacio dentro del visor de redes (14 de septiembre de 2026) y salio de ahi el
+ * mismo dia, cuando /ahora necesito lo mismo para titulares. La primera version
+ * ajustaba el DOCUMENTO por proximidad, y en el telefono dejaba medias
+ * tarjetas: arriba de la primera estaban las pastillas y abajo de la ultima el
+ * pie, ninguno era un punto de ajuste, y con `mandatory` el navegador los
+ * volvia inalcanzables. /ahora lo resolvio con una caja propia (`.lector`,
+ * globals.css) que ES la pantalla en el telefono; el 15 de septiembre el visor
+ * de redes se monto en la misma caja y la caja paso a ser la pantalla tambien
+ * en escritorio. Desde entonces solo hay un modo: la caja desplaza, la pagina
+ * no.
  *
- * Contrato con el DOM: cada tarjeta lleva `data-indice="n"` y su
- * scroll-margin-top viene del CSS (`.publicacion-visual` en globals.css), que
- * es el UNICO lugar donde vive ese numero.
+ * Contrato con el DOM: el contenedor vive dentro de un `.lector`; cada tarjeta
+ * lleva `data-indice="n"` y mide la caja (`--alto-tarjeta`). Solo se publica
+ * el indice al ASENTAR, nunca en cada cuadro del movimiento: la tarjeta que
+ * sale sigue viva mientras el dedo la arrastra y la que entra monta su medio
+ * ya quieta.
  */
+const RETARDO = 160;
 
-/** Margen de ajuste de la primera tarjeta, leido del CSS en cada llamada: es
- *  distinto en telefono y en escritorio, y leerlo aqui en vez de repetir el
- *  numero hace que un cambio de ancho se recoja solo. */
-function margenDeAjuste(raiz: HTMLElement): number {
-  const primera = raiz.querySelector<HTMLElement>("[data-indice]");
-  return primera ? parseFloat(getComputedStyle(primera).scrollMarginTop) || 0 : 0;
+/** Bajo `md` la barra del navegador cambia el viewport visual durante el
+ *  gesto (iOS); ahi el alto del lector se fija en pixeles al asentar. */
+const CONSULTA_ESCRITORIO = "(min-width: 48rem)";
+
+function desplazar(raiz: HTMLElement, tarjeta: HTMLElement, suave: boolean, interior = 0) {
+  const behavior = suave && !window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "smooth" : "instant";
+  const distancia = tarjeta.getBoundingClientRect().top - raiz.getBoundingClientRect().top + interior;
+  raiz.scrollTo({ top: raiz.scrollTop + distancia, behavior });
 }
-
-/** Indice de la tarjeta cuyo borde superior queda mas cerca del margen de
- *  ajuste, entre las que tocan la pantalla; null si ninguna la toca. */
-function tarjetaMasCercana(raiz: HTMLElement): number | null {
-  const margen = margenDeAjuste(raiz);
-  const candidatas = [...raiz.querySelectorAll<HTMLElement>("[data-indice]")]
-    .map((elemento) => ({ elemento, rectangulo: elemento.getBoundingClientRect() }))
-    .filter(({ rectangulo }) => rectangulo.bottom > margen && rectangulo.top < window.innerHeight)
-    .sort((a, b) => Math.abs(a.rectangulo.top - margen) - Math.abs(b.rectangulo.top - margen));
-  const primera = candidatas[0];
-  return primera ? Number(primera.elemento.dataset.indice) : null;
-}
-
-/** Sin eventos de scroll durante este tiempo se considera que el gesto
- *  termino. Safari no emite `scrollend`; donde existe, adelanta el asiento. */
-const RETARDO_ASENTAR = 140;
 
 export interface Recorrido {
   /** Indice asentado, desde 0. */
   actual: number;
-  /** Alguna tarjeta toca la pantalla. */
+  /** Alguna tarjeta toca la caja. */
   enPantalla: boolean;
-  /** Ir a una tarjeta. Ese destino manda al asentar aunque no alcance el
-   *  margen, que es lo que le pasa a la ultima. */
+  /** Ir a una tarjeta. */
   ir: (indice: number) => void;
 }
 
-/** La tarjeta actual cambia cuando el desplazamiento ASIENTA, nunca a mitad
- *  del gesto: la que sale sigue viva mientras el dedo la arrastra y la que
- *  entra se da por llegada ya quieta en su sitio. Antes lo decidia un
- *  IntersectionObserver en cada umbral, y el medio saliente desaparecia con
- *  media tarjeta todavia en pantalla. Todo lo que se lee aqui sale del DOM o
- *  de refs, asi que no hay cierres viejos que arrastrar. */
 export function useRecorrido(contenedor: RefObject<HTMLElement | null>): Recorrido {
-  const objetivo = useRef<number | null>(null);
   const [actual, setActual] = useState(0);
   const [enPantalla, setEnPantalla] = useState(false);
+  const asentado = useRef(0);
+
   useEffect(() => {
     const raiz = contenedor.current;
-    if (!raiz) return;
+    const lector = raiz?.closest<HTMLElement>(".lector");
+    if (!raiz || !lector) return;
     let temporizador: number | undefined;
+    let tocando = false;
+    let redimensionando = false;
+    let interior = 0;
+    let iniciado = false;
+    let tocaPantalla = false;
+    let ancho = raiz.clientWidth;
+    let alto = raiz.clientHeight;
+    let anchoVentana = window.innerWidth;
+    let mantenerIndice = false;
+
+    const tarjetaActual = () => raiz.querySelector<HTMLElement>(`[data-indice="${asentado.current}"]`);
+    const localizar = () => {
+      const caja = raiz.getBoundingClientRect();
+      const limite = caja.top;
+      const fondo = caja.bottom;
+      let cercana: HTMLElement | null = null;
+      let distancia = Infinity;
+      for (const tarjeta of raiz.querySelectorAll<HTMLElement>("[data-indice]")) {
+        const rectangulo = tarjeta.getBoundingClientRect();
+        if (rectangulo.bottom <= limite || rectangulo.top >= fondo) continue;
+        // Una tarjeta larga sigue siendo actual al leer su parte inferior.
+        const separacion = rectangulo.top <= limite + 1 && rectangulo.bottom >= fondo - 1
+          ? 0 : Math.abs(rectangulo.top - limite);
+        if (separacion < distancia) {
+          cercana = tarjeta;
+          distancia = separacion;
+        }
+      }
+      tocaPantalla = cercana !== null;
+      if (cercana) {
+        asentado.current = Number(cercana.dataset.indice);
+        interior = Math.max(0, limite - cercana.getBoundingClientRect().top);
+        iniciado = true;
+      }
+    };
+    const medir = () => {
+      if (window.matchMedia(CONSULTA_ESCRITORIO).matches) {
+        lector.style.removeProperty("--alto-lector");
+      } else {
+        // La barra del navegador puede cambiar DURANTE un gesto. Aplicamos
+        // su nuevo alto al asentar; el punto de ajuste no huye del dedo.
+        const ventana = window.visualViewport;
+        if (!ventana || ventana.scale === 1) {
+          lector.style.setProperty("--alto-lector", `${ventana?.height ?? window.innerHeight}px`);
+        }
+      }
+      raiz.style.setProperty("--alto-tarjeta", `${raiz.clientHeight}px`);
+    };
     const asentar = () => {
       window.clearTimeout(temporizador);
-      let indice = tarjetaMasCercana(raiz);
-      // Si el lector pulso Anterior / Siguiente, ese destino manda mientras
-      // toque la pantalla: la ultima tarjeta puede no alcanzar el margen.
-      if (objetivo.current !== null) {
-        const pedido = raiz.querySelector<HTMLElement>(`[data-indice="${objetivo.current}"]`)?.getBoundingClientRect();
-        if (pedido && pedido.bottom > 0 && pedido.top < window.innerHeight) indice = objetivo.current;
-        objetivo.current = null;
+      if (tocando) return;
+      if (redimensionando) {
+        redimensionando = false;
+        // Al plegarse la barra del navegador el lector pudo avanzar. Medir
+        // primero su destino evita devolverlo a la tarjeta anterior al gesto.
+        // Un cambio de ANCHO conserva el indice previo al nuevo layout.
+        if (!mantenerIndice) localizar();
+        mantenerIndice = false;
+        medir();
+        const tarjeta = tarjetaActual();
+        if (iniciado && tarjeta) {
+          desplazar(raiz, tarjeta, false, Math.min(interior, Math.max(0, tarjeta.offsetHeight - raiz.clientHeight)));
+        }
       }
-      setEnPantalla(indice !== null);
-      if (indice !== null) setActual(indice);
+      localizar();
+      setEnPantalla(tocaPantalla);
+      setActual(asentado.current);
     };
     const aplazar = () => {
       window.clearTimeout(temporizador);
-      temporizador = window.setTimeout(asentar, RETARDO_ASENTAR);
+      temporizador = window.setTimeout(asentar, RETARDO);
     };
-    window.addEventListener("scroll", aplazar, { passive: true });
-    window.addEventListener("resize", aplazar);
-    if ("onscrollend" in window) window.addEventListener("scrollend", asentar);
+    const redimensionar = () => {
+      mantenerIndice ||= anchoVentana !== window.innerWidth;
+      anchoVentana = window.innerWidth;
+      redimensionando = true;
+      aplazar();
+    };
+    const empezar = () => { tocando = true; };
+    const terminar = () => { tocando = false; aplazar(); };
+    // Observar solo la caja, nunca todas las imagenes o todas las tarjetas.
+    // Tambien su ALTO: la primera medida puede caer antes de que la caja
+    // tenga su tamano (18px, con el CSS aun en camino) y `--alto-tarjeta`
+    // se quedaria ahi hasta un cambio de ancho.
+    const tamano = new ResizeObserver(() => {
+      if (ancho !== raiz.clientWidth || alto !== raiz.clientHeight) {
+        ancho = raiz.clientWidth;
+        alto = raiz.clientHeight;
+        redimensionar();
+      }
+    });
+    const contenido = new MutationObserver(aplazar);
+    medir();
     asentar();
+    tamano.observe(raiz);
+    contenido.observe(raiz, { childList: true });
+    raiz.addEventListener("scroll", aplazar, { passive: true });
+    raiz.addEventListener("scrollend", asentar);
+    raiz.addEventListener("touchstart", empezar, { passive: true });
+    raiz.addEventListener("touchend", terminar, { passive: true });
+    raiz.addEventListener("touchcancel", terminar, { passive: true });
+    window.addEventListener("resize", redimensionar);
+    window.visualViewport?.addEventListener("resize", redimensionar);
     return () => {
       window.clearTimeout(temporizador);
-      window.removeEventListener("scroll", aplazar);
-      window.removeEventListener("resize", aplazar);
-      window.removeEventListener("scrollend", asentar);
+      tamano.disconnect();
+      contenido.disconnect();
+      raiz.removeEventListener("scroll", aplazar);
+      raiz.removeEventListener("scrollend", asentar);
+      raiz.removeEventListener("touchstart", empezar);
+      raiz.removeEventListener("touchend", terminar);
+      raiz.removeEventListener("touchcancel", terminar);
+      window.removeEventListener("resize", redimensionar);
+      window.visualViewport?.removeEventListener("resize", redimensionar);
     };
   }, [contenedor]);
-  function ir(indice: number) {
-    objetivo.current = indice;
-    contenedor.current?.querySelector<HTMLElement>(`[data-indice="${indice}"]`)?.scrollIntoView({ behavior: "instant", block: "start" });
-    setActual(indice);
-  }
+
+  const ir = useCallback((indice: number) => {
+    const raiz = contenedor.current;
+    const tarjeta = raiz?.querySelector<HTMLElement>(`[data-indice="${indice}"]`);
+    if (raiz && tarjeta) desplazar(raiz, tarjeta, true);
+  }, [contenedor]);
+
   return { actual, enPantalla, ir };
 }
 
-/** Lo que la llegada necesita recordar entre remontajes del recorrido: si ya
- *  se llego una vez y donde estaba la pagina al abrir. Vive en el componente
- *  que NO se remonta al cambiar de filtro o de lugar. */
-export interface MemoriaLlegada {
-  llegada: RefObject<boolean>;
-  desplazamientoInicial: RefObject<number>;
-}
-
-export function useMemoriaLlegada(): MemoriaLlegada {
-  const llegada = useRef(false);
-  const desplazamientoInicial = useRef(0);
-  useEffect(() => {
-    desplazamientoInicial.current = window.scrollY;
-  }, []);
-  return { llegada, desplazamientoInicial };
-}
-
-/** Vuelve a permitir la llegada, desde donde este la pagina ahora. Para
- *  cuando el lector pide recargar el recorrido a proposito. */
-export function reiniciarLlegada(memoria: MemoriaLlegada): void {
-  memoria.llegada.current = false;
-  memoria.desplazamientoInicial.current = window.scrollY;
-}
-
-/** Al llegar en el telefono, la primera tarjeta se coloca sola en su sitio en
- *  cuanto hay filas (`listo`): el lector empieza dentro del recorrido y el
- *  encabezado queda arriba, a un gesto. Una vez por memoria, nunca al cambiar
- *  de filtro, y nunca si el lector ya se movio mientras cargaba. */
-export function useLlegada(contenedor: RefObject<HTMLElement | null>, listo: boolean, memoria: MemoriaLlegada): void {
-  const esMovil = useEsMovil();
-  const { llegada, desplazamientoInicial } = memoria;
-  useEffect(() => {
-    if (!esMovil || !listo || llegada.current) return;
-    llegada.current = true; // una vez por memoria, nunca al cambiar de filtro
-    const raiz = contenedor.current;
-    const primera = raiz?.querySelector<HTMLElement>('[data-indice="0"]');
-    if (!raiz || !primera) return;
-    // No pelear con el lector: si ya se desplazo mientras cargaba, o si la
-    // primera tarjeta ya esta en su sitio o mas arriba, la pagina es suya.
-    if (Math.abs(window.scrollY - desplazamientoInicial.current) > 24) return;
-    if (primera.getBoundingClientRect().top <= margenDeAjuste(raiz) + 1) return;
-    // El apagado global de movimiento del CSS no alcanza a un scroll pedido
-    // desde JS, asi que se consulta aqui.
-    const reducido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    primera.scrollIntoView({ block: "start", behavior: reducido ? "instant" : "smooth" });
-  }, [esMovil, listo, contenedor, llegada, desplazamientoInicial]);
+/** Teclado del recorrido, para el contenedor enfocable. Las flechas conservan
+ *  el desplazamiento nativo para leer tarjetas largas; Re Pag / Av Pag, Inicio
+ *  y Fin ofrecen destinos explicitos. */
+export function teclasDelRecorrido(evento: KeyboardEvent<HTMLElement>, actual: number, total: number, ir: (indice: number) => void): void {
+  if (evento.target !== evento.currentTarget || evento.altKey || evento.ctrlKey || evento.metaKey) return;
+  if (evento.key !== "PageDown" && evento.key !== "PageUp" && evento.key !== "Home" && evento.key !== "End") return;
+  evento.preventDefault();
+  const destino = evento.key === "Home" ? 0 : evento.key === "End" ? total - 1 : actual + (evento.key === "PageDown" ? 1 : -1);
+  ir(Math.max(0, Math.min(total - 1, destino)));
 }

@@ -16,12 +16,3 @@ export function periodoLegible(p: string | null | undefined): string {
   return m === null ? p : `${m[2]}T ${m[1]}`;
 }
 
-/** El ultimo mes con dato y el anterior, de una serie enero..ultimo. */
-export function ultimoYPrevio(porMes: readonly number[]): {
-  ultimo: number | undefined;
-  previo: number | undefined;
-  indice: number;
-} {
-  const n = porMes.length;
-  return { ultimo: porMes[n - 1], previo: porMes[n - 2], indice: n - 1 };
-}

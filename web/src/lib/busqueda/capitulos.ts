@@ -1,5 +1,5 @@
 /**
- * Capitulos del recorrido /ahora: las listas en vivo, encadenadas. Puro.
+ * Capitulos del recorrido de la portada: las listas en vivo, encadenadas. Puro.
  *
  * El cliente pidio el 14 de septiembre de 2026 un recorrido de titulares al
  * estilo WikiTok: una tarjeta por titular, a pantalla completa, y el gesto de
@@ -48,12 +48,19 @@ export const esEdicion = (e: Entrada): e is "mexico" | "internacional" =>
   e === "mexico" || e === "internacional";
 
 /** `local` es el capitulo de LUGAR de la cadena, sea la entrada o la cola:
- *  cada cadena tiene uno solo, asi que el id no se repite. */
-export type CapituloId = "local" | Rubro | "mexico" | "internacional";
+ *  cada cadena tiene uno solo, asi que el id no se repite.
+ *
+ *  `comunicados` solo existe en la cadena de Tecate; `busqueda` no esta en
+ *  ninguna cadena —la busqueda es un modo aparte del lector— y vive aqui solo
+ *  para que sus tarjetas tengan un capitulo que no sea el de nadie mas. */
+export type CapituloId = "local" | Rubro | "mexico" | "internacional" | "comunicados" | "busqueda";
 
 export interface Capitulo {
   id: CapituloId;
-  pedido: PedidoActualidad;
+  /** De donde salen sus titulares. `comunicados` no se pide a la fuente en
+   *  vivo, sale del documento municipal, y por eso `pedido` es null ahi. */
+  fuente: "actualidad" | "comunicados";
+  pedido: PedidoActualidad | null;
   /** Nombre corto, para las frases: «Tijuana», «Seguridad», «México». */
   nombre: string;
   /** Cejilla de cada tarjeta: «Tijuana · ahora», «Seguridad · últimos dos días». */
@@ -64,11 +71,24 @@ export interface Capitulo {
   acento: string;
 }
 
-export type Capitulos = readonly [
-  Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo,
-];
+/**
+ * OCHO capitulos, o NUEVE en Tecate, que suma los comunicados del
+ * Ayuntamiento. Union de tuplas y no `Capitulo[]`: con
+ * `noUncheckedIndexedAccess` un arreglo suelto convierte cada `capitulos[n]`
+ * de use-capitulos.ts en "posiblemente undefined".
+ */
+export type Capitulos =
+  | readonly [Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo]
+  | readonly [Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo];
 
-export const CAPITULOS_TOTAL = 8;
+/**
+ * El techo, no el total. Es lo que fija cuantas ranuras de datos se abren en
+ * use-capitulos.ts, que por la regla de los hooks tiene que ser una constante.
+ * El largo REAL de cada cadena es `capitulos.length`, y es lo que hay que
+ * pasarle a `debeActivar`: leer una constante ahi fue lo que dejaba el noveno
+ * capitulo sin pedirse nunca, sin error y con la tarjeta de carga girando.
+ */
+export const CAPITULOS_MAXIMO = 9;
 
 /** Solo chart-1 tiene variante `-texto`; las demas pasan AA a 12px sobre
  *  #050505. Mexico e Internacional van en tinta: son ediciones, no temas. */
@@ -97,12 +117,27 @@ function seccionDe(entrada: Entrada): Seccion {
   if (entrada === "internacional") {
     return { id: "internacional", donde: { ambito: "internacional" }, nombre: "Internacional", en: "en el mundo", titulo: "Lo que destaca ahora en el mundo", acento: "text-tinta-dato" };
   }
-  const lugar = entrada === "region" ? "Tijuana y San Diego" : NOMBRE_CORTO[entrada];
+  // El corredor NO es «toda la región»: son sus dos polos, Tijuana y San
+  // Diego, que es lo unico que trae `ambito: "region"` (ver actualidad.ts).
+  // La cejilla decia «Tijuana y San Diego» mientras la barra decia «Toda la
+  // región», o sea que la misma eleccion se llamaba de dos maneras y ninguna
+  // era la otra. Se nombra por lo que es, en los dos sitios.
+  if (entrada === "region") {
+    return {
+      id: "local",
+      donde: { ambito: "region" },
+      nombre: "El corredor",
+      en: "en el corredor",
+      titulo: "Lo que destaca ahora en el corredor",
+      acento: "text-chart-1-texto",
+    };
+  }
+  const lugar = NOMBRE_CORTO[entrada];
   return {
     id: "local",
-    donde: entrada === "region" ? { ambito: "region" } : { zona: entrada },
+    donde: { zona: entrada },
     nombre: lugar,
-    en: entrada === "region" ? "en el corredor" : `sobre ${lugar}`,
+    en: `sobre ${lugar}`,
     titulo: `Lo que destaca ahora sobre ${lugar}`,
     acento: "text-chart-1-texto",
   };
@@ -110,6 +145,7 @@ function seccionDe(entrada: Entrada): Seccion {
 
 const capituloDeSeccion = (sec: Seccion): Capitulo => ({
   id: sec.id,
+  fuente: "actualidad",
   pedido: { ...sec.donde, rubro: null },
   nombre: sec.nombre,
   rotulo: `${sec.nombre} · ahora`,
@@ -130,6 +166,7 @@ export function capitulosDe(entrada: Entrada): Capitulos {
   const principal = seccionDe(entrada);
   const rubro = (r: Rubro): Capitulo => ({
     id: r,
+    fuente: "actualidad",
     pedido: { ...principal.donde, rubro: r },
     nombre: NOMBRE_RUBRO[r],
     rotulo: `${NOMBRE_RUBRO[r]} · últimos dos días`,
@@ -138,17 +175,40 @@ export function capitulosDe(entrada: Entrada): Capitulos {
   });
   const [clima, seguridad, deportes, politica, economia] = RUBROS;
   const [segunda, tercera] = colaDe(entrada);
-  return [
+  const cabeza = [
     capituloDeSeccion(principal),
     rubro(clima),
     rubro(seguridad),
     rubro(deportes),
     rubro(politica),
     rubro(economia),
-    capituloDeSeccion(segunda),
-    capituloDeSeccion(tercera),
-  ];
+  ] as const;
+  // Los comunicados van DESPUES de los rubros y antes de las otras ediciones:
+  // siguen siendo de Tecate, pero son boletines publicados y no lo que esta
+  // pasando, asi que no se adelantan a ningun titular reciente.
+  return entrada === "Tecate"
+    ? [...cabeza, CAPITULO_COMUNICADOS, capituloDeSeccion(segunda), capituloDeSeccion(tercera)]
+    : [...cabeza, capituloDeSeccion(segunda), capituloDeSeccion(tercera)];
 }
+
+/**
+ * Los boletines del Ayuntamiento de Tecate.
+ *
+ * Es el unico capitulo que no sale de la lectura en vivo: viene del documento
+ * municipal, que es independiente de la prensa a proposito (ver
+ * pulso/comunicados.py). Vivio en una seccion propia de la pagina del muro
+ * hasta que el cliente quito esa pagina el 15 de septiembre de 2026, y entro
+ * aqui para no perderse con ella.
+ */
+export const CAPITULO_COMUNICADOS: Capitulo = {
+  id: "comunicados",
+  fuente: "comunicados",
+  pedido: null,
+  nombre: "Comunicados",
+  rotulo: "Gobierno de Tecate · comunicado",
+  titulo: "Comunicados del Ayuntamiento",
+  acento: "text-tinta-dato",
+};
 
 /** Lo que se sabe de un capitulo en un instante. `inactivo` es que aun no se
  *  pidio; `fallo` es fallo sin ningun titular. */
@@ -172,6 +232,8 @@ export type Tarjeta =
       acento: string;
       /** Titulares del capitulo ya sin repetidos: lo que sigue de verdad. */
       n: number;
+      /** Como se llaman los n. «titulares», salvo en comunicados. */
+      sustantivo: string;
       nota: string | null;
     }
   | { tipo: "hueco"; capitulo: CapituloId; rotulo: string; titulo: string; acento: string }
@@ -201,7 +263,7 @@ export interface Hilado {
   /** Capitulos ya recorridos: asentados Y antes del corte. Un capitulo
    *  adelantado que llego antes que el anterior no cuenta todavia. */
   emitidos: number;
-  /** Los ocho asentados (listo o fallo). */
+  /** Todos los de la cadena asentados (listo o fallo). */
   completo: boolean;
 }
 
@@ -265,6 +327,7 @@ export function hilar(capitulos: Capitulos, estados: readonly EstadoCapitulo[]):
         titulo: c.titulo,
         acento: c.acento,
         n: propios.length,
+        sustantivo: c.fuente === "comunicados" ? "comunicado" : "titular",
         nota: partes.length === 0 ? null : partes.join(" "),
       });
     }
@@ -289,9 +352,9 @@ export const UMBRAL_ACTIVACION = 3;
  *  (visto el 14 de septiembre de 2026: clima llego antes que lo local). */
 export const EN_VUELO_MAXIMO = 2;
 
-export function debeActivar(h: Hilado, actual: number, activados: number): boolean {
+export function debeActivar(h: Hilado, actual: number, activados: number, total: number): boolean {
   return (
-    activados < CAPITULOS_TOTAL &&
+    activados < total &&
     activados - h.emitidos < EN_VUELO_MAXIMO &&
     actual >= h.tarjetas.length - 1 - UMBRAL_ACTIVACION
   );
