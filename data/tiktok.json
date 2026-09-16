@@ -1,67 +1,88 @@
 {
  "esquema": 1,
- "generado": "2026-09-16T00:48:18+00:00",
+ "generado": "2026-09-16T01:16:21+00:00",
  "plataforma": "tiktok",
  "retencion_dias": 30,
- "comentarios_vigentes": 1108,
- "posts_vigentes": 148,
- "opinion": 977,
- "repetidos": 75,
- "reacciones": 118,
+ "comentarios_vigentes": 1488,
+ "posts_vigentes": 206,
+ "opinion": 1317,
+ "repetidos": 78,
+ "reacciones": 158,
  "por_zona": {
-  "Playas de Rosarito": 2,
-  "Tijuana": 701,
-  "nacional": 405
+  "Mexicali": 31,
+  "Playas de Rosarito": 3,
+  "San Diego": 50,
+  "Tijuana": 712,
+  "internacional": 78,
+  "nacional": 614
  },
  "por_cuenta": {
-  "tk_tijuana_noticias": 1108
+  "tk_ensenada_noticias": 51,
+  "tk_mexicali_noticias": 41,
+  "tk_mexico_noticias": 103,
+  "tk_mundo_noticias": 78,
+  "tk_rosarito_noticias": 33,
+  "tk_sandiego_news": 54,
+  "tk_sandiego_noticias": 19,
+  "tk_tijuana_noticias": 1109
  },
  "por_idioma": {
-  "es": 1108
+  "en": 54,
+  "es": 1434
  },
  "por_tema": [
   {
    "tema": "gobierno",
-   "comentarios": 42,
-   "posts": 18
+   "comentarios": 58,
+   "posts": 27
   },
   {
    "tema": "trabajo",
-   "comentarios": 16,
-   "posts": 13
-  },
-  {
-   "tema": "estado",
-   "comentarios": 10,
-   "posts": 10
-  },
-  {
-   "tema": "agua",
-   "comentarios": 8,
-   "posts": 8
-  },
-  {
-   "tema": "casa",
-   "comentarios": 8,
-   "posts": 7
+   "comentarios": 18,
+   "posts": 15
   },
   {
    "tema": "calor",
-   "comentarios": 7,
-   "posts": 3
+   "comentarios": 12,
+   "posts": 4
+  },
+  {
+   "tema": "estado",
+   "comentarios": 12,
+   "posts": 12
   },
   {
    "tema": "morena",
-   "comentarios": 6,
-   "posts": 6
+   "comentarios": 12,
+   "posts": 11
+  },
+  {
+   "tema": "agua",
+   "comentarios": 11,
+   "posts": 10
+  },
+  {
+   "tema": "casa",
+   "comentarios": 9,
+   "posts": 8
   },
   {
    "tema": "federal",
-   "comentarios": 2,
-   "posts": 2
+   "comentarios": 3,
+   "posts": 3
   },
   {
    "tema": "proceso",
+   "comentarios": 3,
+   "posts": 3
+  },
+  {
+   "tema": "sheinbaum",
+   "comentarios": 3,
+   "posts": 3
+  },
+  {
+   "tema": "proteger",
    "comentarios": 2,
    "posts": 2
   },
@@ -81,33 +102,83 @@
    "posts": 1
   },
   {
-   "tema": "proteger",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
    "tema": "servicios",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
-   "tema": "sheinbaum",
    "comentarios": 1,
    "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 95,
-  "negativo": 488,
-  "neutral": 394,
+  "positivo": 122,
+  "negativo": 625,
+  "neutral": 519,
   "sin_clasificar": 0,
-  "sin_modelo_idioma": 0,
+  "sin_modelo_idioma": 51,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
   "metodo": "modelo"
  },
  "ventana_horas": 24,
  "destacados_maximo": 15,
  "cuentas": [
+  {
+   "cuenta": "tk_ensenada_noticias",
+   "nombre": "Ensenada noticias",
+   "zona": "estatal",
+   "activa": true
+  },
+  {
+   "cuenta": "tk_mexicali_noticias",
+   "nombre": "Mexicali noticias",
+   "zona": "estatal",
+   "activa": true
+  },
+  {
+   "cuenta": "tk_mexico_noticias",
+   "nombre": "México noticias",
+   "zona": "estatal",
+   "activa": true
+  },
+  {
+   "cuenta": "tk_mundo_noticias",
+   "nombre": "Noticias del mundo",
+   "zona": "estatal",
+   "activa": true
+  },
+  {
+   "cuenta": "tk_rosarito_noticias",
+   "nombre": "Rosarito noticias",
+   "zona": "estatal",
+   "activa": true
+  },
+  {
+   "cuenta": "tk_sandiego_news",
+   "nombre": "San Diego news",
+   "zona": "estatal",
+   "activa": true
+  },
+  {
+   "cuenta": "tk_sandiego_noticias",
+   "nombre": "San Diego noticias",
+   "zona": "estatal",
+   "activa": true
+  },
+  {
+   "cuenta": "tk_sanfelipe_noticias",
+   "nombre": "San Felipe noticias",
+   "zona": "estatal",
+   "activa": false
+  },
+  {
+   "cuenta": "tk_sanquintin_noticias",
+   "nombre": "San Quintín noticias",
+   "zona": "estatal",
+   "activa": false
+  },
+  {
+   "cuenta": "tk_tecate_noticias",
+   "nombre": "Tecate noticias",
+   "zona": "estatal",
+   "activa": false
+  },
   {
    "cuenta": "tk_tijuana_noticias",
    "nombre": "Tijuana noticias",
@@ -116,6 +187,191 @@
   }
  ],
  "destacados": [
+  {
+   "url": "https://www.tiktok.com/@nbcsandiego/video/7685576035101854990",
+   "cuenta": "tk_sandiego_news",
+   "zona": "San Diego",
+   "fecha": "2026-09-15",
+   "titulo": "A man driving a suspected stolen blue Tesla drove onto the boardwalk in Pacific Beach and struck a woman on Monday afternoon before hopping out and being chase…",
+   "tipo": "video",
+   "likes": 91964,
+   "comentarios": 406,
+   "reproducciones": 1049821,
+   "creador": "@nbcsandiego",
+   "alcance": "zona",
+   "publicado": "2026-09-15T02:00:08+00:00",
+   "compartidos": 2704,
+   "guardados": 4755,
+   "cosechados": 19,
+   "opinion": 19,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 19
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@24horasteleamazonas/video/7685721746640604424",
+   "cuenta": "tk_ensenada_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-15",
+   "titulo": "#24Horas | Violencia en Manabí: Un médico y el conductor de una ambulancia fueron asesinados a tiros en la vía Canoa - Jama. El crimen ocurrió tras dejar a un…",
+   "tipo": "video",
+   "likes": 14651,
+   "comentarios": 559,
+   "reproducciones": 299174,
+   "creador": "@24horasteleamazonas",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T11:25:54+00:00",
+   "compartidos": 5074,
+   "guardados": 906,
+   "cosechados": 19,
+   "opinion": 19,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 16,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "gobierno",
+     "comentarios": 4
+    }
+   ]
+  },
+  {
+   "url": "https://www.tiktok.com/@nmasunivision/video/7685823284612533517",
+   "cuenta": "tk_mexico_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-15",
+   "titulo": "La noticia de la muerte de Claudia Tacoronte, una estudiante española de intercambio de 21 años, ha generado conmoción en México y España. La joven fue atacada…",
+   "tipo": "video",
+   "likes": 6315,
+   "comentarios": 60,
+   "reproducciones": 171354,
+   "creador": "@nmasunivision",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T18:00:30+00:00",
+   "compartidos": 59,
+   "guardados": 364,
+   "cosechados": 19,
+   "opinion": 19,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 13,
+    "neutral": 6,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "gobierno",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
+   "url": "https://www.tiktok.com/@_giozamora/video/7685857936190623007",
+   "cuenta": "tk_mexico_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-15",
+   "titulo": "🚨 General Treviño, Nuevo León, cancela la fiesta patria un día antes del Grito tras un hecho de alto impacto a 110 kilómetros de Monterrey, pegado a Tamaulipas",
+   "tipo": "video",
+   "likes": 5206,
+   "comentarios": 72,
+   "reproducciones": 84333,
+   "creador": "@_giozamora",
+   "alcance": "fuera",
+   "publicado": "2026-09-15T20:14:30+00:00",
+   "compartidos": 171,
+   "guardados": 319,
+   "cosechados": 19,
+   "opinion": 18,
+   "sentimiento": {
+    "positivo": 4,
+    "negativo": 6,
+    "neutral": 8,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "morena",
+     "comentarios": 1
+    },
+    {
+     "tema": "trabajo",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
+   "url": "https://www.tiktok.com/@mexico_noticiero/video/7685761755569507615",
+   "cuenta": "tk_mexico_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-15",
+   "titulo": "Ejército Mexicano Pone a Hacer Ejercicio a Presuntos Punteros",
+   "tipo": "video",
+   "likes": 3462,
+   "comentarios": 68,
+   "reproducciones": 202808,
+   "creador": "@mexico_noticiero",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T14:20:00+00:00",
+   "compartidos": 98,
+   "guardados": 217,
+   "cosechados": 17,
+   "opinion": 17,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 8,
+    "neutral": 7,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "trabajo",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
+   "url": "https://www.tiktok.com/@mariana/video/7685882548332825870",
+   "cuenta": "tk_mundo_noticias",
+   "zona": "internacional",
+   "fecha": "2026-09-15",
+   "titulo": "Alex Saab dijo “culpable”. Pero la palabra que puede preocupar más a quienes estuvieron a su alrededor es otra: “cooperar”.",
+   "tipo": "video",
+   "likes": 2859,
+   "comentarios": 130,
+   "reproducciones": 24912,
+   "creador": "@mariana",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T21:50:04+00:00",
+   "compartidos": 233,
+   "guardados": 127,
+   "cosechados": 20,
+   "opinion": 20,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 8,
+    "neutral": 12,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "casa",
+     "comentarios": 1
+    }
+   ]
+  },
   {
    "url": "https://www.tiktok.com/@giozmedia/video/7685574390485896470",
    "cuenta": "tk_tijuana_noticias",
@@ -147,6 +403,137 @@
    ]
   },
   {
+   "url": "https://www.tiktok.com/@oralequechiquito/video/7685891037662809362",
+   "cuenta": "tk_mexico_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-15",
+   "titulo": "🥶🇲🇽 ¡El frío llega en plena celebración patria! Una masa de aire frío provocará descenso de temperaturas del 15 al 17 de septiembre. ¿Ya estás listo para sacar…",
+   "tipo": "video",
+   "likes": 1217,
+   "comentarios": 25,
+   "reproducciones": 99745,
+   "creador": "@oralequechiquito",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T22:22:49+00:00",
+   "compartidos": 261,
+   "guardados": 92,
+   "cosechados": 19,
+   "opinion": 18,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 9,
+    "neutral": 9,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "calor",
+     "comentarios": 5
+    },
+    {
+     "tema": "agua",
+     "comentarios": 2
+    },
+    {
+     "tema": "gobierno",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
+   "url": "https://www.tiktok.com/@crealanoticia/video/7685852362526690567",
+   "cuenta": "tk_mexicali_noticias",
+   "zona": "Mexicali",
+   "fecha": "2026-09-15",
+   "titulo": "De exigir justicia en medios locales a prisión preventiva por el mismo caso ⛓️",
+   "tipo": "video",
+   "likes": 909,
+   "comentarios": 10,
+   "reproducciones": 62144,
+   "creador": "@crealanoticia",
+   "alcance": "zona",
+   "publicado": "2026-09-15T19:52:39+00:00",
+   "compartidos": 16,
+   "guardados": 79,
+   "cosechados": 11,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 2,
+    "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "proceso",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
+   "url": "https://www.tiktok.com/@noticiasdeldia36/video/7685781945728470304",
+   "cuenta": "tk_mundo_noticias",
+   "zona": "internacional",
+   "fecha": "2026-09-15",
+   "titulo": "🌎📰 Las 5 noticias del día — 15 de septiembre de 2026",
+   "tipo": "video",
+   "likes": 909,
+   "comentarios": 6,
+   "reproducciones": 27250,
+   "creador": "@noticiasdeldia36",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T15:19:21+00:00",
+   "compartidos": 20,
+   "guardados": 51,
+   "cosechados": 3,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "gobierno",
+     "comentarios": 1
+    },
+    {
+     "tema": "morena",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
+   "url": "https://www.tiktok.com/@alex.ferrel4/video/7685597451570531592",
+   "cuenta": "tk_rosarito_noticias",
+   "zona": "Tijuana",
+   "fecha": "2026-09-15",
+   "titulo": "Sobrevivió a fuerte impacto y fue plenamente identificado•",
+   "tipo": "video",
+   "likes": 739,
+   "comentarios": 7,
+   "reproducciones": 31101,
+   "creador": "@alex.ferrel4",
+   "alcance": "zona",
+   "publicado": "2026-09-15T03:23:30+00:00",
+   "compartidos": 368,
+   "guardados": 70,
+   "cosechados": 5,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.tiktok.com/@juanma.x2/video/7685574901092093191",
    "cuenta": "tk_tijuana_noticias",
    "zona": "Tijuana",
@@ -172,6 +559,97 @@
    "temas": []
   },
   {
+   "url": "https://www.tiktok.com/@larevistabo/video/7685726106745359632",
+   "cuenta": "tk_rosarito_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-15",
+   "titulo": "Un incendio de magnitud se registró desde tempranas horas en un restaurante de la calle 25 de Mayo, afectando parte de un edificio donde funcionan oficinas y v…",
+   "tipo": "video",
+   "likes": 560,
+   "comentarios": 32,
+   "reproducciones": 54525,
+   "creador": "@larevistabo",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T12:00:00+00:00",
+   "compartidos": 108,
+   "guardados": 68,
+   "cosechados": 20,
+   "opinion": 20,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 8,
+    "neutral": 12,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@newsnexussa/video/7685711508197625109",
+   "cuenta": "tk_mundo_noticias",
+   "zona": "internacional",
+   "fecha": "2026-09-15",
+   "titulo": "#newsstories #incaseyoumissedit #southafricatiktok #newsnexussa",
+   "tipo": "video",
+   "likes": 543,
+   "comentarios": 6,
+   "reproducciones": 34546,
+   "creador": "@newsnexussa",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T10:46:02+00:00",
+   "compartidos": 15,
+   "guardados": 40,
+   "cosechados": 6,
+   "opinion": 6,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 5,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@aztecanoticias/video/7685758325547453703",
+   "cuenta": "tk_mexico_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-15",
+   "titulo": "“SIN CENSURA”: ¿CASTIGO POR NO PAGAR UN MOCHE? 🙄⁉️",
+   "tipo": "video",
+   "likes": 520,
+   "comentarios": 23,
+   "reproducciones": 8857,
+   "creador": "@aztecanoticias",
+   "alcance": "fuera",
+   "publicado": "2026-09-15T13:47:43+00:00",
+   "compartidos": 27,
+   "guardados": 28,
+   "cosechados": 15,
+   "opinion": 13,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 10,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "gobierno",
+     "comentarios": 3
+    },
+    {
+     "tema": "morena",
+     "comentarios": 2
+    },
+    {
+     "tema": "sheinbaum",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
    "url": "https://www.tiktok.com/@abrilmosh/video/7685836373344947464",
    "cuenta": "tk_tijuana_noticias",
    "zona": "Tijuana",
@@ -191,6 +669,32 @@
     "positivo": 0,
     "negativo": 2,
     "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@buscandocryptodinero/video/7685741071384579335",
+   "cuenta": "tk_mundo_noticias",
+   "zona": "internacional",
+   "fecha": "2026-09-15",
+   "titulo": "Bitcoin cae ante incertidumbre del Clarity Act y la decisión de la Fed",
+   "tipo": "video",
+   "likes": 513,
+   "comentarios": 19,
+   "reproducciones": 13578,
+   "creador": "@buscandocryptodinero",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T12:40:48+00:00",
+   "compartidos": 45,
+   "guardados": 48,
+   "cosechados": 14,
+   "opinion": 13,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 2,
+    "neutral": 10,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -222,16 +726,48 @@
    "temas": []
   },
   {
+   "url": "https://www.tiktok.com/@unidamez/video/7685869171057380622",
+   "cuenta": "tk_ensenada_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-15",
+   "titulo": "🚨 ÚLTIMA HORA: DESPLIEGUE MASIVO DE ICE EN 40 ESTADOS 🚔🇺🇸 ¡Mi gente, mucha atención! Se acaba de reportar un despliegue masivo de cientos de nuevos oficiales d…",
+   "tipo": "video",
+   "likes": 478,
+   "comentarios": 15,
+   "reproducciones": 23325,
+   "creador": "@unidamez",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T20:58:00+00:00",
+   "compartidos": 161,
+   "guardados": 59,
+   "cosechados": 14,
+   "opinion": 8,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 2,
+    "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "estado",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
    "url": "https://www.tiktok.com/@siempreenlanoticia/video/7685807141625646356",
    "cuenta": "tk_tijuana_noticias",
    "zona": "Tijuana",
    "fecha": "2026-09-15",
    "titulo": "Taxis de Altisa vuelven a bloquear IMOS en Tijuana",
    "tipo": "video",
-   "likes": 452,
+   "likes": 465,
    "comentarios": 29,
-   "reproducciones": 15510,
+   "reproducciones": 15820,
    "creador": "@siempreenlanoticia",
+   "alcance": "zona",
    "publicado": "2026-09-15T16:57:12+00:00",
    "compartidos": 53,
    "guardados": 19,
@@ -247,25 +783,226 @@
    "temas": []
   },
   {
+   "url": "https://www.tiktok.com/@yors.houston/video/7685718933311147265",
+   "cuenta": "tk_mundo_noticias",
+   "zona": "internacional",
+   "fecha": "2026-09-15",
+   "titulo": "",
+   "tipo": "video",
+   "likes": 461,
+   "comentarios": 14,
+   "reproducciones": 14887,
+   "creador": "@yors.houston",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T11:15:11+00:00",
+   "compartidos": 78,
+   "guardados": 22,
+   "cosechados": 11,
+   "opinion": 9,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 5,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.tiktok.com/@crealanoticia/video/7685860478144367880",
    "cuenta": "tk_tijuana_noticias",
    "zona": "Tijuana",
    "fecha": "2026-09-15",
    "titulo": "Detienen a \\",
    "tipo": "video",
-   "likes": 304,
-   "comentarios": 4,
-   "reproducciones": 15012,
+   "likes": 341,
+   "comentarios": 6,
+   "reproducciones": 16573,
    "creador": "@crealanoticia",
+   "alcance": "zona",
    "publicado": "2026-09-15T20:24:14+00:00",
-   "compartidos": 37,
-   "guardados": 22,
+   "compartidos": 47,
+   "guardados": 23,
    "cosechados": 3,
    "opinion": 2,
    "sentimiento": {
     "positivo": 0,
     "negativo": 1,
     "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@noticias.sandiego/video/7685577284366978335",
+   "cuenta": "tk_sandiego_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-15",
+   "titulo": "#SEGURIDAD 🚨 Arrestan a dos personas tras fiestas masivas en una vivienda de Bonita, donde se reunieron cientos de menores.",
+   "tipo": "video",
+   "likes": 326,
+   "comentarios": 12,
+   "reproducciones": 13524,
+   "creador": "@noticias.sandiego",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T02:05:17+00:00",
+   "compartidos": 192,
+   "guardados": 35,
+   "cosechados": 9,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 3,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@clickanextvofic/video/7685735901225405714",
+   "cuenta": "tk_ensenada_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-15",
+   "titulo": "‼️😨Un médico y el chofer de una ambulancia fueron asesin4dos a t1ros.",
+   "tipo": "video",
+   "likes": 289,
+   "comentarios": 32,
+   "reproducciones": 14990,
+   "creador": "@clickanextvofic",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T12:20:47+00:00",
+   "compartidos": 59,
+   "guardados": 16,
+   "cosechados": 17,
+   "opinion": 14,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 10,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "gobierno",
+     "comentarios": 3
+    },
+    {
+     "tema": "estado",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
+   "url": "https://www.tiktok.com/@crealanoticia/video/7685825565714025736",
+   "cuenta": "tk_mexicali_noticias",
+   "zona": "Mexicali",
+   "fecha": "2026-09-15",
+   "titulo": "¡Les metió unos trancazos solo por que se recargaron en su carro! 💥",
+   "tipo": "video",
+   "likes": 255,
+   "comentarios": 6,
+   "reproducciones": 14262,
+   "creador": "@crealanoticia",
+   "alcance": "zona",
+   "publicado": "2026-09-15T18:08:44+00:00",
+   "compartidos": 13,
+   "guardados": 13,
+   "cosechados": 6,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 0,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@wanderbeisbol4/video/7685622029147458836",
+   "cuenta": "tk_sandiego_noticias",
+   "zona": "San Diego",
+   "fecha": "2026-09-15",
+   "titulo": "Los padres de San Diego derrotan a los Rockies de colorado .",
+   "tipo": "video",
+   "likes": 241,
+   "comentarios": 8,
+   "reproducciones": 5310,
+   "creador": "@wanderbeisbol4",
+   "alcance": "zona",
+   "publicado": "2026-09-15T04:58:51+00:00",
+   "compartidos": 1,
+   "guardados": 10,
+   "cosechados": 5,
+   "opinion": 5,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 5,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@siempreenlanoticia/video/7685872866885111061",
+   "cuenta": "tk_tijuana_noticias",
+   "zona": "Tijuana",
+   "fecha": "2026-09-15",
+   "titulo": "⚠️ El puente y la Avenida Independencia se encuentran cerrados por los preparativos del Grito 🇲🇽",
+   "tipo": "video",
+   "likes": 235,
+   "comentarios": 3,
+   "reproducciones": 18228,
+   "creador": "@siempreenlanoticia",
+   "alcance": "zona",
+   "publicado": "2026-09-15T21:12:17+00:00",
+   "compartidos": 67,
+   "guardados": 14,
+   "cosechados": 3,
+   "opinion": 3,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 3,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "estado",
+     "comentarios": 1
+    },
+    {
+     "tema": "trabajo",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
+   "url": "https://www.tiktok.com/@pilicabfinanzas/video/7685814286777666834",
+   "cuenta": "tk_mundo_noticias",
+   "zona": "internacional",
+   "fecha": "2026-09-15",
+   "titulo": "La reunión de la Reserva Federal mantiene a los mercados en máxima tensión. Mañana se deciden los tipos de interés y los inversores se preparan para dos camino…",
+   "tipo": "video",
+   "likes": 231,
+   "comentarios": 10,
+   "reproducciones": 8568,
+   "creador": "@pilicabfinanzas",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T17:24:58+00:00",
+   "compartidos": 45,
+   "guardados": 26,
+   "cosechados": 9,
+   "opinion": 8,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 1,
+    "neutral": 6,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -297,38 +1034,30 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@siempreenlanoticia/video/7685872866885111061",
-   "cuenta": "tk_tijuana_noticias",
+   "url": "https://www.tiktok.com/@luznoticias/video/7685580410864225556",
+   "cuenta": "tk_mexicali_noticias",
    "zona": "Tijuana",
    "fecha": "2026-09-15",
-   "titulo": "⚠️ El puente y la Avenida Independencia se encuentran cerrados por los preparativos del Grito 🇲🇽",
+   "titulo": "🚨 Asesin4n a bal4zos a estadounidense en la colonia Francisco Villa, en",
    "tipo": "video",
-   "likes": 212,
-   "comentarios": 3,
-   "reproducciones": 16649,
-   "creador": "@siempreenlanoticia",
-   "publicado": "2026-09-15T21:12:17+00:00",
-   "compartidos": 61,
-   "guardados": 12,
-   "cosechados": 3,
-   "opinion": 3,
+   "likes": 229,
+   "comentarios": 5,
+   "reproducciones": 9918,
+   "creador": "@luznoticias",
+   "alcance": "zona",
+   "publicado": "2026-09-15T02:17:23+00:00",
+   "compartidos": 47,
+   "guardados": 10,
+   "cosechados": 5,
+   "opinion": 4,
    "sentimiento": {
-    "positivo": 0,
-    "negativo": 3,
-    "neutral": 0,
+    "positivo": 1,
+    "negativo": 1,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
-   "temas": [
-    {
-     "tema": "estado",
-     "comentarios": 1
-    },
-    {
-     "tema": "trabajo",
-     "comentarios": 1
-    }
-   ]
+   "temas": []
   },
   {
    "url": "https://www.tiktok.com/@canal33tijuana/video/7685831639150136594",
@@ -337,10 +1066,11 @@
    "fecha": "2026-09-15",
    "titulo": "Transportistas bloquean IMOS en Tijuana; acusan imposición de rutas y favoritismo",
    "tipo": "video",
-   "likes": 174,
-   "comentarios": 11,
-   "reproducciones": 4837,
+   "likes": 182,
+   "comentarios": 13,
+   "reproducciones": 5055,
    "creador": "@canal33tijuana",
+   "alcance": "zona",
    "publicado": "2026-09-15T18:32:20+00:00",
    "compartidos": 3,
    "guardados": 8,
@@ -382,6 +1112,162 @@
     "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@noticias.conexion/video/7685826518857174279",
+   "cuenta": "tk_mexicali_noticias",
+   "zona": "Mexicali",
+   "fecha": "2026-09-15",
+   "titulo": "¡Por fin un respiro! 🥶 Baja la temperatura en Mexicali y se asoma la lluvia",
+   "tipo": "video",
+   "likes": 163,
+   "comentarios": 3,
+   "reproducciones": 5128,
+   "creador": "@noticias.conexion",
+   "alcance": "zona",
+   "publicado": "2026-09-15T22:00:00+00:00",
+   "compartidos": 12,
+   "guardados": 10,
+   "cosechados": 3,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@abcnews/video/7685869716853755167",
+   "cuenta": "tk_sandiego_news",
+   "zona": "San Diego",
+   "fecha": "2026-09-15",
+   "titulo": "Terrifying footage caught on a pair of Meta glasses shows bystanders jumping into action and chasing down a suspect who allegedly struck a woman with a stolen…",
+   "tipo": "video",
+   "likes": 159,
+   "comentarios": 7,
+   "reproducciones": 3681,
+   "creador": "@abcnews",
+   "alcance": "zona",
+   "publicado": "2026-09-15T21:00:09+00:00",
+   "compartidos": 4,
+   "guardados": 10,
+   "cosechados": 6,
+   "opinion": 5,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 5
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@danielexplainsx/video/7685602221752438047",
+   "cuenta": "tk_sandiego_news",
+   "zona": "San Diego",
+   "fecha": "2026-09-15",
+   "titulo": "🚨 Deadly La Jolla Crash Near Torrey Pines Road — Investigation Underway",
+   "tipo": "video",
+   "likes": 158,
+   "comentarios": 20,
+   "reproducciones": 7219,
+   "creador": "@danielexplainsx",
+   "alcance": "zona",
+   "publicado": "2026-09-15T03:42:16+00:00",
+   "compartidos": 70,
+   "guardados": 11,
+   "cosechados": 15,
+   "opinion": 14,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 14
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@jr_riosnoticias/video/7685894585591041310",
+   "cuenta": "tk_mexico_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-15",
+   "titulo": "🚨Noticias México y Estados Unidos México autoriza la entrada de 139 militares 4rmad0s de Estados Unidos",
+   "tipo": "video",
+   "likes": 147,
+   "comentarios": 3,
+   "reproducciones": 14115,
+   "creador": "@jr_riosnoticias",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T22:36:45+00:00",
+   "compartidos": 4,
+   "guardados": 16,
+   "cosechados": 2,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@laprovincia.es/video/7685747084200316192",
+   "cuenta": "tk_rosarito_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-15",
+   "titulo": "📹 Las cámaras de seguridad instaladas en el centro de Cuautla, en el estado mexicano de Morelos, han captado las imágenes del presunto autor del asesinato de C…",
+   "tipo": "video",
+   "likes": 142,
+   "comentarios": 1,
+   "reproducciones": 14917,
+   "creador": "@laprovincia.es",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T13:03:58+00:00",
+   "compartidos": 4,
+   "guardados": 12,
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@johnny.walker.day/video/7685657039829208333",
+   "cuenta": "tk_sandiego_news",
+   "zona": "nacional",
+   "fecha": "2026-09-15",
+   "titulo": "#tesla #daygo #sandiego #johnnydaygo #news",
+   "tipo": "video",
+   "likes": 134,
+   "comentarios": 7,
+   "reproducciones": 8490,
+   "creador": "@johnny.walker.day",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T07:14:48+00:00",
+   "compartidos": 38,
+   "guardados": 14,
+   "cosechados": 6,
+   "opinion": 5,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 5
    },
    "temas": []
   },
@@ -461,20 +1347,125 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@racsotj/video/7685616452476488980",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "Tijuana",
+   "url": "https://www.tiktok.com/@sagitario85090/video/7685837355915316487",
+   "cuenta": "tk_mexicali_noticias",
+   "zona": "nacional",
    "fecha": "2026-09-15",
-   "titulo": "#tijuana #choque #fuga #volteado",
+   "titulo": "🚨 BALACERA EN TECÁMAC 🚨",
    "tipo": "video",
-   "likes": 80,
-   "comentarios": 5,
-   "reproducciones": 6672,
-   "creador": "@racsotj",
-   "publicado": "2026-09-15T04:37:19+00:00",
-   "compartidos": 10,
-   "guardados": 11,
+   "likes": 92,
+   "comentarios": 6,
+   "reproducciones": 8328,
+   "creador": "@sagitario85090",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T18:54:28+00:00",
+   "compartidos": 21,
+   "guardados": 10,
    "cosechados": 3,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 2,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@creeenlanoticia/video/7685923452020133121",
+   "cuenta": "tk_mexicali_noticias",
+   "zona": "Mexicali",
+   "fecha": "2026-09-16",
+   "titulo": "🚨 ASESINAN A PROPIETARIO DE JOYERÍA EN PLAZA DE MEXICALI",
+   "tipo": "video",
+   "likes": 79,
+   "comentarios": 2,
+   "reproducciones": 3960,
+   "creador": "@creeenlanoticia",
+   "alcance": "zona",
+   "publicado": "2026-09-16T00:29:26+00:00",
+   "compartidos": 26,
+   "guardados": 4,
+   "cosechados": 2,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@pulsocanarias/video/7685708476001045793",
+   "cuenta": "tk_rosarito_noticias",
+   "zona": "nacional",
+   "fecha": "2026-09-15",
+   "titulo": "🚨 NUEVAS IMÁGENES PODRÍAN SER CLAVE EN EL CASO DE CLAUDIA TACORONTE 🖤",
+   "tipo": "video",
+   "likes": 77,
+   "comentarios": 3,
+   "reproducciones": 5356,
+   "creador": "@pulsocanarias",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T10:33:54+00:00",
+   "compartidos": 7,
+   "guardados": 10,
+   "cosechados": 3,
+   "opinion": 3,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 2,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@tmxplus/video/7685912693940686087",
+   "cuenta": "tk_mundo_noticias",
+   "zona": "internacional",
+   "fecha": "2026-09-15",
+   "titulo": "PILAS CON ESTO.",
+   "tipo": "video",
+   "likes": 75,
+   "comentarios": 1,
+   "reproducciones": 888,
+   "creador": "@tmxplus",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T23:46:49+00:00",
+   "compartidos": 12,
+   "guardados": 4,
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@thompsondonnarmom4/video/7685757977436933390",
+   "cuenta": "tk_mundo_noticias",
+   "zona": "internacional",
+   "fecha": "2026-09-15",
+   "titulo": "Exploring the complexities of Venezuela's situation, from internal struggles to the implications of potential conflict. What do you think is the best path forw…",
+   "tipo": "video",
+   "likes": 66,
+   "comentarios": 4,
+   "reproducciones": 1084,
+   "creador": "@thompsondonnarmom4",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T13:47:01+00:00",
+   "compartidos": 10,
+   "guardados": 4,
+   "cosechados": 4,
    "opinion": 3,
    "sentimiento": {
     "positivo": 0,
@@ -486,19 +1477,72 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@burke3g/video/7685699404652727566",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "Tijuana",
+   "url": "https://www.tiktok.com/@dieguerindo/video/7685597802625256724",
+   "cuenta": "tk_mexicali_noticias",
+   "zona": "Mexicali",
    "fecha": "2026-09-15",
-   "titulo": "🚨Noticias Estados Unidos y México ¡Cae “El Flaquito”! Golpe al Cártel de Tijuana y alerta máxima en la frontera#noticias",
+   "titulo": "Donaciones a martha termina mal favor de ver todo el video 😭❤️‍🩹 #mexicali #noticias #donaciones #adicciones #perros @Sebadua Patricia",
    "tipo": "video",
-   "likes": 74,
-   "comentarios": 3,
-   "reproducciones": 7019,
-   "creador": "@burke3g",
-   "publicado": "2026-09-15T10:00:33+00:00",
-   "compartidos": 1,
-   "guardados": 4,
+   "likes": 65,
+   "comentarios": 18,
+   "reproducciones": 504,
+   "creador": "@dieguerindo",
+   "alcance": "zona",
+   "publicado": "2026-09-15T03:24:49+00:00",
+   "compartidos": 33,
+   "guardados": 8,
+   "cosechados": 8,
+   "opinion": 8,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 4,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@tori.apodaca/video/7685758861457886478",
+   "cuenta": "tk_sandiego_news",
+   "zona": "San Diego",
+   "fecha": "2026-09-15",
+   "titulo": "One person is in the hospital after someone drove a stolen Tesla onto the Paciric Beach Boardwalk in San Diego Monday afternoon.",
+   "tipo": "video",
+   "likes": 43,
+   "comentarios": 2,
+   "reproducciones": 1891,
+   "creador": "@tori.apodaca",
+   "alcance": "zona",
+   "publicado": "2026-09-15T13:50:35+00:00",
+   "compartidos": 4,
+   "guardados": 1,
+   "cosechados": 2,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 2
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@las2orillas/video/7685901011570986256",
+   "cuenta": "tk_mundo_noticias",
+   "zona": "internacional",
+   "fecha": "2026-09-15",
+   "titulo": "✈️ Momentos de tensión en el aire. Un Boeing 737 de Sepehran Airlines realizó un aterrizaje de emergencia en el Aeropuerto de Mashhad, Irán, tras sufrir la fal…",
+   "tipo": "video",
+   "likes": 42,
+   "comentarios": 1,
+   "reproducciones": 1182,
+   "creador": "@las2orillas",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T23:02:27+00:00",
+   "compartidos": 0,
+   "guardados": 1,
    "cosechados": 1,
    "opinion": 0,
    "sentimiento": {
@@ -511,68 +1555,128 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@marisol.dl.rosa/video/7685610587774012692",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "nacional",
+   "url": "https://www.tiktok.com/@univision34/video/7685878260420398366",
+   "cuenta": "tk_sandiego_noticias",
+   "zona": "San Diego",
    "fecha": "2026-09-15",
-   "titulo": "Las noticias conmigo (o chisme 🤔)",
+   "titulo": "Queda en video un hombre que intentó robar un Tesla en San Diego, y durante su huída atropella a una mujer.",
    "tipo": "video",
-   "likes": 66,
-   "comentarios": 5,
-   "reproducciones": 2890,
-   "creador": "@marisol.dl.rosa",
-   "publicado": "2026-09-15T04:14:29+00:00",
-   "compartidos": 23,
-   "guardados": 10,
-   "cosechados": 3,
-   "opinion": 3,
+   "likes": 41,
+   "comentarios": 0,
+   "reproducciones": 1023,
+   "creador": "@univision34",
+   "alcance": "zona",
+   "publicado": "2026-09-15T23:50:00+00:00",
+   "compartidos": 1,
+   "guardados": 3,
+   "cosechados": 0,
+   "opinion": 0,
    "sentimiento": {
     "positivo": 0,
     "negativo": 0,
-    "neutral": 3,
+    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@_losmejores_videos/video/7685568362457533703",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "nacional",
+   "url": "https://www.tiktok.com/@periodicoelvigia/video/7685889030508121351",
+   "cuenta": "tk_ensenada_noticias",
+   "zona": "Ensenada",
    "fecha": "2026-09-15",
-   "titulo": "Chiquilín de la patrulla 🚓 espiritual candidato municipal independiente en octubre 😧😱😨😳🤯😲😯😦😮😧😱😰#noticias",
+   "titulo": "Califican a “El Kekas” como sicario armado#elvigia",
    "tipo": "video",
-   "likes": 61,
-   "comentarios": 18,
-   "reproducciones": 2008,
-   "creador": "@_losmejores_videos",
-   "publicado": "2026-09-15T01:30:44+00:00",
-   "compartidos": 4,
+   "likes": 36,
+   "comentarios": 0,
+   "reproducciones": 836,
+   "creador": "@periodicoelvigia",
+   "alcance": "zona",
+   "publicado": "2026-09-15T22:15:00+00:00",
+   "compartidos": 3,
    "guardados": 2,
-   "cosechados": 12,
-   "opinion": 11,
+   "cosechados": 0,
+   "opinion": 0,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 3,
-    "neutral": 8,
+    "negativo": 0,
+    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@ndtnoticiasdetijuana/video/7685564971362798866",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "nacional",
+   "url": "https://www.tiktok.com/@ibrahimfarce/video/7685768263246089504",
+   "cuenta": "tk_mundo_noticias",
+   "zona": "internacional",
    "fecha": "2026-09-15",
-   "titulo": "Buscaban una fuga de agua y provocan escape de gas en Lomas de Agua Caliente...",
+   "titulo": "#viral #viralvideo #viral #viralvideo",
+   "tipo": "video",
+   "likes": 33,
+   "comentarios": 3,
+   "reproducciones": 400,
+   "creador": "@ibrahimfarce",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T14:26:16+00:00",
+   "compartidos": 0,
+   "guardados": 6,
+   "cosechados": 3,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@alejandromarcanos/video/7685822201483775246",
+   "cuenta": "tk_mundo_noticias",
+   "zona": "internacional",
+   "fecha": "2026-09-15",
+   "titulo": "Delcy en la ONU y G20: política internacional en su máxima expresión. La 'realpolitik' tiene sus reglas.",
    "tipo": "video",
    "likes": 31,
+   "comentarios": 4,
+   "reproducciones": 1464,
+   "creador": "@alejandromarcanos",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T17:56:02+00:00",
+   "compartidos": 3,
+   "guardados": 3,
+   "cosechados": 4,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 4,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "gobierno",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
+   "url": "https://www.tiktok.com/@crealanoticia/video/7685925340316830983",
+   "cuenta": "tk_mexicali_noticias",
+   "zona": "Mexicali",
+   "fecha": "2026-09-16",
+   "titulo": "Lo pararon por dar lata en la calle y resultó ser el terror de los Oxxos",
+   "tipo": "video",
+   "likes": 29,
    "comentarios": 1,
-   "reproducciones": 806,
-   "creador": "@ndtnoticiasdetijuana",
-   "publicado": "2026-09-15T01:17:36+00:00",
-   "compartidos": 2,
+   "reproducciones": 646,
+   "creador": "@crealanoticia",
+   "alcance": "zona",
+   "publicado": "2026-09-16T00:35:52+00:00",
+   "compartidos": 0,
    "guardados": 0,
    "cosechados": 1,
    "opinion": 0,
@@ -586,19 +1690,20 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@infoagenda_news/video/7685608667198065940",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "nacional",
+   "url": "https://www.tiktok.com/@sasioversi/video/7685707660078943502",
+   "cuenta": "tk_mundo_noticias",
+   "zona": "internacional",
    "fecha": "2026-09-15",
-   "titulo": "🚨📹 ASALTO CAPTADO EN CÁMARAS A UNIDAD DE LA RUTA 14 EN CUERNAVACA 💸🚍",
+   "titulo": "La tensión entre EE. UU. e Irán vuelve a aumentar",
    "tipo": "video",
-   "likes": 23,
+   "likes": 26,
    "comentarios": 0,
-   "reproducciones": 482,
-   "creador": "@infoagenda_news",
-   "publicado": "2026-09-15T04:07:06+00:00",
-   "compartidos": 5,
-   "guardados": 2,
+   "reproducciones": 1124,
+   "creador": "@sasioversi",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T10:31:43+00:00",
+   "compartidos": 3,
+   "guardados": 3,
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -611,18 +1716,45 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@dragonnewsv/video/7685559373774507278",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "nacional",
+   "url": "https://www.tiktok.com/@periodicoelvigia/video/7685895004497267976",
+   "cuenta": "tk_ensenada_noticias",
+   "zona": "Ensenada",
    "fecha": "2026-09-15",
-   "titulo": "Un #vuelo con 192 mexicanos #deportados de EE.UU. llega a #Tapachula : así viven el regreso a su país",
+   "titulo": "Protestan por falta de profes en un preescolar indígena#elvigia",
    "tipo": "video",
-   "likes": 12,
+   "likes": 22,
    "comentarios": 0,
-   "reproducciones": 366,
-   "creador": "@dragonnewsv",
-   "publicado": "2026-09-15T00:55:53+00:00",
-   "compartidos": 3,
+   "reproducciones": 415,
+   "creador": "@periodicoelvigia",
+   "alcance": "zona",
+   "publicado": "2026-09-15T23:30:00+00:00",
+   "compartidos": 0,
+   "guardados": 0,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@tmf.noticias/video/7685825238554152200",
+   "cuenta": "tk_mundo_noticias",
+   "zona": "internacional",
+   "fecha": "2026-09-15",
+   "titulo": "Operación de rescate fallida: dos pilotos heridos, helicópteros derribados y millones en equipo perdido. ¿Héroes o desastre?",
+   "tipo": "video",
+   "likes": 21,
+   "comentarios": 0,
+   "reproducciones": 95,
+   "creador": "@tmf.noticias",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T18:07:01+00:00",
+   "compartidos": 0,
    "guardados": 1,
    "cosechados": 0,
    "opinion": 0,
@@ -636,18 +1768,227 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@periodismonegro.mx/video/7685778874512330004",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "nacional",
+   "url": "https://www.tiktok.com/@argumento_noticias/video/7685565308836334864",
+   "cuenta": "tk_ensenada_noticias",
+   "zona": "Ensenada",
    "fecha": "2026-09-15",
-   "titulo": "#Última hora",
+   "titulo": "Una historia real que supera a la ficción se vive en Playas de Chapultepec, en Ensenada, sin que las autoridades resuelvan de una vez por todas.",
    "tipo": "video",
-   "likes": 7,
+   "likes": 19,
    "comentarios": 0,
-   "reproducciones": 279,
-   "creador": "@periodismonegro.mx",
-   "publicado": "2026-09-15T15:07:30+00:00",
+   "reproducciones": 369,
+   "creador": "@argumento_noticias",
+   "alcance": "zona",
+   "publicado": "2026-09-15T02:10:00+00:00",
    "compartidos": 0,
+   "guardados": 0,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@mundoexplcito/video/7685852304888646919",
+   "cuenta": "tk_mundo_noticias",
+   "zona": "internacional",
+   "fecha": "2026-09-15",
+   "titulo": "El empresario colombiano Alex Saab, de 54 años, señalado durante años como el principal operador financiero del depuesto mandatario venezolano Nicolás Maduro,…",
+   "tipo": "video",
+   "likes": 18,
+   "comentarios": 3,
+   "reproducciones": 1936,
+   "creador": "@mundoexplcito",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T19:52:32+00:00",
+   "compartidos": 2,
+   "guardados": 2,
+   "cosechados": 2,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@user2661139086353/video/7685861418486353182",
+   "cuenta": "tk_sandiego_news",
+   "zona": "San Diego",
+   "fecha": "2026-09-15",
+   "titulo": "Al menos 5 muertos tras tiroteo en una mezquita de San Diego",
+   "tipo": "video",
+   "likes": 17,
+   "comentarios": 0,
+   "reproducciones": 331,
+   "creador": "@user2661139086353",
+   "alcance": "zona",
+   "publicado": "2026-09-15T20:27:57+00:00",
+   "compartidos": 1,
+   "guardados": 0,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@noticias.sandiego/video/7685907395721104670",
+   "cuenta": "tk_sandiego_noticias",
+   "zona": "San Diego",
+   "fecha": "2026-09-15",
+   "titulo": "🚢 San Diego inicia una temporada histórica de cruceros.",
+   "tipo": "video",
+   "likes": 13,
+   "comentarios": 2,
+   "reproducciones": 319,
+   "creador": "@noticias.sandiego",
+   "alcance": "zona",
+   "publicado": "2026-09-15T23:26:20+00:00",
+   "compartidos": 0,
+   "guardados": 0,
+   "cosechados": 2,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 0,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@ksdy50tv/video/7685585477830774030",
+   "cuenta": "tk_sandiego_noticias",
+   "zona": "San Diego",
+   "fecha": "2026-09-15",
+   "titulo": "⚖️🚲 San Diego busca acciones legales contra vendedores de motos disfrazadas de e-bikes",
+   "tipo": "video",
+   "likes": 13,
+   "comentarios": 0,
+   "reproducciones": 337,
+   "creador": "@ksdy50tv",
+   "alcance": "zona",
+   "publicado": "2026-09-15T03:00:00+00:00",
+   "compartidos": 0,
+   "guardados": 1,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@noticias.conexion/video/7685861500136721672",
+   "cuenta": "tk_mexicali_noticias",
+   "zona": "Mexicali",
+   "fecha": "2026-09-16",
+   "titulo": "🚨 ¡ATENCIÓN MEXICALI! Tu celular emitirá una alerta por sismo de 7.1 este sábado 📱⚠️",
+   "tipo": "video",
+   "likes": 13,
+   "comentarios": 0,
+   "reproducciones": 368,
+   "creador": "@noticias.conexion",
+   "alcance": "zona",
+   "publicado": "2026-09-16T00:00:00+00:00",
+   "compartidos": 1,
+   "guardados": 1,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@linderonorte.bc/video/7685807523001142549",
+   "cuenta": "tk_mexicali_noticias",
+   "zona": "Mexicali",
+   "fecha": "2026-09-15",
+   "titulo": "Evento de luces de Cantoya evidencia la corrupción de autoridades y protestas de ambientalistas",
+   "tipo": "video",
+   "likes": 12,
+   "comentarios": 0,
+   "reproducciones": 213,
+   "creador": "@linderonorte.bc",
+   "alcance": "zona",
+   "publicado": "2026-09-15T16:58:40+00:00",
+   "compartidos": 0,
+   "guardados": 0,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@entresamantas.bo/video/7685835848276774165",
+   "cuenta": "tk_mundo_noticias",
+   "zona": "internacional",
+   "fecha": "2026-09-15",
+   "titulo": "⛽ ¿Por qué un litro de diésel importado podría costar hasta Bs 20 en Bolivia? El precio internacional aumenta con el transporte, seguros, logística, impuestos,…",
+   "tipo": "video",
+   "likes": 11,
+   "comentarios": 0,
+   "reproducciones": 550,
+   "creador": "@entresamantas.bo",
+   "alcance": "nacional",
+   "publicado": "2026-09-15T18:48:32+00:00",
+   "compartidos": 0,
+   "guardados": 0,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@periodicoelvigia/video/7685864863247191303",
+   "cuenta": "tk_ensenada_noticias",
+   "zona": "Ensenada",
+   "fecha": "2026-09-15",
+   "titulo": "Arrancan obras del bulevar Maneadero#elvigia",
+   "tipo": "video",
+   "likes": 11,
+   "comentarios": 0,
+   "reproducciones": 361,
+   "creador": "@periodicoelvigia",
+   "alcance": "zona",
+   "publicado": "2026-09-15T20:41:13+00:00",
+   "compartidos": 3,
    "guardados": 0,
    "cosechados": 0,
    "opinion": 0,
@@ -667,10 +2008,11 @@
    "fecha": "2026-09-15",
    "titulo": "La dirigencia nacional de Morena nombró oficialmente a Julieta Andrea Ramírez Padilla como la Coordinadora de la Defensa de la Transformación y la Soberanía Na…",
    "tipo": "video",
-   "likes": 6,
+   "likes": 8,
    "comentarios": 0,
-   "reproducciones": 51,
+   "reproducciones": 57,
    "creador": "@tijuananoticias",
+   "alcance": "estatal",
    "publicado": "2026-09-15T23:45:58+00:00",
    "compartidos": 0,
    "guardados": 0,
@@ -686,17 +2028,96 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@tabasco.al.dia.mx/video/7685663194957761813",
-   "cuenta": "tk_tijuana_noticias",
-   "zona": "nacional",
+   "url": "https://www.tiktok.com/@noticias.sandiego/video/7685839751416515871",
+   "cuenta": "tk_sandiego_noticias",
+   "zona": "San Diego",
    "fecha": "2026-09-15",
-   "titulo": "#noticias #tiktok #viral",
+   "titulo": "#SEGURIDAD 🚨 La Guardia Costera detuvo a 16 personas que viajaban en una panga, a unas 21 millas al oeste de San Diego.",
    "tipo": "video",
-   "likes": 2,
+   "likes": 7,
    "comentarios": 0,
-   "reproducciones": 81,
-   "creador": "@tabasco.al.dia.mx",
-   "publicado": "2026-09-15T07:38:36+00:00",
+   "reproducciones": 272,
+   "creador": "@noticias.sandiego",
+   "alcance": "zona",
+   "publicado": "2026-09-15T19:03:59+00:00",
+   "compartidos": 0,
+   "guardados": 1,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@nickcacoastreport/video/7685844767514660109",
+   "cuenta": "tk_sandiego_news",
+   "zona": "San Diego",
+   "fecha": "2026-09-15",
+   "titulo": "Deadly crash in La Jolla yesterday",
+   "tipo": "video",
+   "likes": 6,
+   "comentarios": 1,
+   "reproducciones": 220,
+   "creador": "@nickcacoastreport",
+   "alcance": "zona",
+   "publicado": "2026-09-15T19:23:35+00:00",
+   "compartidos": 0,
+   "guardados": 0,
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 1
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@mas.noticias/video/7685810892491066645",
+   "cuenta": "tk_rosarito_noticias",
+   "zona": "Playas de Rosarito",
+   "fecha": "2026-09-15",
+   "titulo": "🚨🎤🇲🇽 Hoy se presenta la banda Coloso en Playas de Rosarito donde la alcaldesa @Rocio Adame dará el grito de independencia",
+   "tipo": "video",
+   "likes": 6,
+   "comentarios": 0,
+   "reproducciones": 187,
+   "creador": "@mas.noticias",
+   "alcance": "zona",
+   "publicado": "2026-09-15T17:11:44+00:00",
+   "compartidos": 0,
+   "guardados": 1,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@argumento_noticias/video/7685565877399407889",
+   "cuenta": "tk_ensenada_noticias",
+   "zona": "Ensenada",
+   "fecha": "2026-09-15",
+   "titulo": "Ensenada es la única sede en Baja California y la región que será parte del serial Barbie Run, que se realizará en 7 ciudades importantes del país.",
+   "tipo": "video",
+   "likes": 5,
+   "comentarios": 0,
+   "reproducciones": 140,
+   "creador": "@argumento_noticias",
+   "alcance": "zona",
+   "publicado": "2026-09-15T18:30:00+00:00",
    "compartidos": 0,
    "guardados": 0,
    "cosechados": 0,
@@ -709,24 +2130,250 @@
     "sin_modelo_idioma": 0
    },
    "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@nini.aia/video/7685823409304964366",
+   "cuenta": "tk_sandiego_noticias",
+   "zona": "San Diego",
+   "fecha": "2026-09-15",
+   "titulo": "Relato: Silvanna Moreno, 9 años, y el misterio en un servicio dental de San Diego, ¿qué ocurrió en Dreamtime Dentistry? 2026/9/15",
+   "tipo": "video",
+   "likes": 5,
+   "comentarios": 0,
+   "reproducciones": 185,
+   "creador": "@nini.aia",
+   "alcance": "zona",
+   "publicado": "2026-09-15T18:00:40+00:00",
+   "compartidos": 0,
+   "guardados": 1,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@conde_sas/video/7685876984609770770",
+   "cuenta": "tk_mexicali_noticias",
+   "zona": "Mexicali",
+   "fecha": "2026-09-15",
+   "titulo": "Noticias de Condesa Mexicali y sus alrededores.",
+   "tipo": "video",
+   "likes": 4,
+   "comentarios": 0,
+   "reproducciones": 78,
+   "creador": "@conde_sas",
+   "alcance": "zona",
+   "publicado": "2026-09-15T21:28:17+00:00",
+   "compartidos": 0,
+   "guardados": 0,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@marionoticias1/video/7685925278257810718",
+   "cuenta": "tk_sandiego_news",
+   "zona": "San Diego",
+   "fecha": "2026-09-16",
+   "titulo": "Hombre muere por lesiones traumáticas en casa de Santee; otro detenido🚨#SanDiego",
+   "tipo": "video",
+   "likes": 4,
+   "comentarios": 0,
+   "reproducciones": 233,
+   "creador": "@marionoticias1",
+   "alcance": "zona",
+   "publicado": "2026-09-16T00:35:39+00:00",
+   "compartidos": 0,
+   "guardados": 0,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@argumento_noticias/video/7685566824016088321",
+   "cuenta": "tk_ensenada_noticias",
+   "zona": "Ensenada",
+   "fecha": "2026-09-15",
+   "titulo": "Promueve la alcaldesa de Ensenada, Claudia Agatón, la carrera atlética Barbie Run.",
+   "tipo": "video",
+   "likes": 2,
+   "comentarios": 0,
+   "reproducciones": 171,
+   "creador": "@argumento_noticias",
+   "alcance": "zona",
+   "publicado": "2026-09-15T13:30:00+00:00",
+   "compartidos": 0,
+   "guardados": 1,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@periodicoelvigia/video/7685895911788023048",
+   "cuenta": "tk_ensenada_noticias",
+   "zona": "Ensenada",
+   "fecha": "2026-09-16",
+   "titulo": "Conmoción y repudio por asesinato de Claudia Tacoronte en Cuautla#elvigia",
+   "tipo": "video",
+   "likes": 2,
+   "comentarios": 0,
+   "reproducciones": 80,
+   "creador": "@periodicoelvigia",
+   "alcance": "zona",
+   "publicado": "2026-09-16T00:30:00+00:00",
+   "compartidos": 0,
+   "guardados": 0,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@masnotoiciastj/video/7685810538772696341",
+   "cuenta": "tk_rosarito_noticias",
+   "zona": "Playas de Rosarito",
+   "fecha": "2026-09-15",
+   "titulo": "🚨🎤🇲🇽Hoy se presenta la banda Coloso en Playas de Rosarito donde dará el grito de independencia la alcaldesa rocío adame",
+   "tipo": "video",
+   "likes": 0,
+   "comentarios": 1,
+   "reproducciones": 59,
+   "creador": "@masnotoiciastj",
+   "alcance": "zona",
+   "publicado": "2026-09-15T17:10:24+00:00",
+   "compartidos": 0,
+   "guardados": 0,
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
   }
  ],
  "salud": [
   {
+   "cuenta": "tk_ensenada_noticias",
+   "estado": "ok",
+   "posts": 14,
+   "comentarios": 53,
+   "crudos": 56,
+   "fuera": 1,
+   "descartados": 0
+  },
+  {
+   "cuenta": "tk_mexicali_noticias",
+   "estado": "ok",
+   "posts": 14,
+   "comentarios": 41,
+   "crudos": 41,
+   "fuera": 1,
+   "descartados": 0
+  },
+  {
+   "cuenta": "tk_mexico_noticias",
+   "estado": "ok",
+   "posts": 15,
+   "comentarios": 106,
+   "crudos": 112,
+   "fuera": 0,
+   "descartados": 0
+  },
+  {
+   "cuenta": "tk_mundo_noticias",
+   "estado": "ok",
+   "posts": 15,
+   "comentarios": 79,
+   "crudos": 82,
+   "fuera": 0,
+   "descartados": 0
+  },
+  {
+   "cuenta": "tk_rosarito_noticias",
+   "estado": "ok",
+   "posts": 12,
+   "comentarios": 33,
+   "crudos": 33,
+   "fuera": 3,
+   "descartados": 0
+  },
+  {
+   "cuenta": "tk_sandiego_news",
+   "estado": "ok",
+   "posts": 15,
+   "comentarios": 54,
+   "crudos": 55,
+   "fuera": 0,
+   "descartados": 0
+  },
+  {
+   "cuenta": "tk_sandiego_noticias",
+   "estado": "ok",
+   "posts": 15,
+   "comentarios": 19,
+   "crudos": 20,
+   "fuera": 0,
+   "descartados": 0
+  },
+  {
    "cuenta": "tk_tijuana_noticias",
    "estado": "ok",
-   "posts": 30,
-   "comentarios": 55,
-   "crudos": 56,
+   "posts": 15,
+   "comentarios": 1,
+   "crudos": 1,
    "fuera": 0,
    "descartados": 0
   }
  ],
  "gasto": {
-  "resultados": 1000,
-  "gastado": 86,
+  "resultados": 3600,
+  "gastado": 520,
   "por_concepto": {
-   "tk_tijuana_noticias": 86
+   "tk_ensenada_noticias": 71,
+   "tk_mexicali_noticias": 56,
+   "tk_mexico_noticias": 127,
+   "tk_mundo_noticias": 97,
+   "tk_rosarito_noticias": 48,
+   "tk_sandiego_news": 70,
+   "tk_sandiego_noticias": 35,
+   "tk_tijuana_noticias": 16
   }
  }
 }

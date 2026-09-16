@@ -1,21 +1,36 @@
 {
  "esquema": 1,
- "generado": "2026-09-16T00:39:22+00:00",
+ "generado": "2026-09-16T00:59:02+00:00",
  "plataforma": "instagram",
  "retencion_dias": 30,
- "comentarios_vigentes": 978,
- "posts_vigentes": 155,
- "opinion": 800,
+ "comentarios_vigentes": 1392,
+ "posts_vigentes": 190,
+ "opinion": 1174,
  "repetidos": 13,
- "reacciones": 178,
+ "reacciones": 218,
  "por_zona": {
-  "Tijuana": 977,
-  "estatal": 1
+  "Ensenada": 190,
+  "Mexicali": 119,
+  "San Diego": 101,
+  "Tijuana": 979,
+  "estatal": 1,
+  "nacional": 2
  },
  "por_cuenta": {
   "afn_ig": 42,
+  "canal66_ig": 66,
+  "capitalmxl_ig": 2,
+  "elensenadense_ig": 31,
+  "elmexicano_ig": 2,
   "eltijuanense_ig": 36,
-  "frontera_ig": 134,
+  "ensenadadigna_ig": 74,
+  "frontera_ig": 136,
+  "ksdy50_ig": 6,
+  "lavoz_ig": 6,
+  "mexicali686_ig": 4,
+  "noticiasmxl_ig": 41,
+  "notiens_ig": 85,
+  "sd619_ig": 92,
   "siempre_ig": 103,
   "sintesis_ig": 6,
   "soltij_ig": 3,
@@ -23,17 +38,29 @@
   "tjnoticias_ig": 349,
   "tjpublica_ig": 126,
   "uniradio_ig": 1,
+  "univisionsd_ig": 3,
   "yoamotijuana_ig": 99,
   "zeta_ig": 30
  },
  "por_idioma": {
-  "es": 978
+  "en": 92,
+  "es": 1300
  },
  "por_tema": [
   {
    "tema": "morena",
+   "comentarios": 22,
+   "posts": 9
+  },
+  {
+   "tema": "gobierno",
+   "comentarios": 16,
+   "posts": 13
+  },
+  {
+   "tema": "estado",
    "comentarios": 15,
-   "posts": 7
+   "posts": 12
   },
   {
    "tema": "casa",
@@ -41,37 +68,42 @@
    "posts": 13
   },
   {
-   "tema": "estado",
-   "comentarios": 10,
-   "posts": 9
-  },
-  {
-   "tema": "gobierno",
-   "comentarios": 10,
-   "posts": 9
+   "tema": "agua",
+   "comentarios": 9,
+   "posts": 7
   },
   {
    "tema": "trabajo",
-   "comentarios": 6,
-   "posts": 6
+   "comentarios": 7,
+   "posts": 7
   },
   {
-   "tema": "agua",
+   "tema": "calor",
    "comentarios": 3,
    "posts": 3
   },
   {
-   "tema": "calor",
+   "tema": "federal",
+   "comentarios": 3,
+   "posts": 3
+  },
+  {
+   "tema": "independencia",
    "comentarios": 2,
    "posts": 2
   },
   {
-   "tema": "carin leon",
-   "comentarios": 1,
+   "tema": "proceso",
+   "comentarios": 2,
    "posts": 1
   },
   {
-   "tema": "federal",
+   "tema": "uabc",
+   "comentarios": 2,
+   "posts": 1
+  },
+  {
+   "tema": "carin leon",
    "comentarios": 1,
    "posts": 1
   },
@@ -81,7 +113,12 @@
    "posts": 1
   },
   {
-   "tema": "independencia",
+   "tema": "julieta ramirez",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
+   "tema": "proteger",
    "comentarios": 1,
    "posts": 1
   },
@@ -97,11 +134,11 @@
   }
  ],
  "sentimiento": {
-  "positivo": 113,
-  "negativo": 334,
-  "neutral": 353,
+  "positivo": 147,
+  "negativo": 481,
+  "neutral": 458,
   "sin_clasificar": 0,
-  "sin_modelo_idioma": 0,
+  "sin_modelo_idioma": 88,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
   "metodo": "modelo"
  },
@@ -116,9 +153,27 @@
   },
   {
    "cuenta": "canal66_ig",
-   "nombre": "Mexicali — sin cuenta encontrada",
+   "nombre": "Canal 66",
    "zona": "Mexicali",
-   "activa": false
+   "activa": true
+  },
+  {
+   "cuenta": "capitalmxl_ig",
+   "nombre": "Capital Mexicali",
+   "zona": "Mexicali",
+   "activa": true
+  },
+  {
+   "cuenta": "elensenadense_ig",
+   "nombre": "El Ensenadense",
+   "zona": "Ensenada",
+   "activa": true
+  },
+  {
+   "cuenta": "elmexicano_ig",
+   "nombre": "El Mexicano",
+   "zona": "nacional",
+   "activa": true
   },
   {
    "cuenta": "eltijuanense_ig",
@@ -133,9 +188,57 @@
    "activa": true
   },
   {
+   "cuenta": "ensenadadigna_ig",
+   "nombre": "Ensenada Digna",
+   "zona": "Ensenada",
+   "activa": true
+  },
+  {
    "cuenta": "frontera_ig",
    "nombre": "Frontera",
    "zona": "Tijuana",
+   "activa": true
+  },
+  {
+   "cuenta": "ksdy50_ig",
+   "nombre": "KSDY50 San Diego",
+   "zona": "San Diego",
+   "activa": true
+  },
+  {
+   "cuenta": "lacronica_ig",
+   "nombre": "La Crónica",
+   "zona": "nacional",
+   "activa": true
+  },
+  {
+   "cuenta": "lavoz_ig",
+   "nombre": "La Voz de la Frontera",
+   "zona": "Mexicali",
+   "activa": true
+  },
+  {
+   "cuenta": "mexicali686_ig",
+   "nombre": "Mexicali 686",
+   "zona": "Mexicali",
+   "activa": true
+  },
+  {
+   "cuenta": "noticiasmxl_ig",
+   "nombre": "Noticias Mexicali",
+   "zona": "Mexicali",
+   "activa": true
+  },
+  {
+   "cuenta": "notiens_ig",
+   "nombre": "Noticias Ensenada",
+   "zona": "Ensenada",
+   "activa": true
+  },
+  {
+   "cuenta": "radartecate_ig",
+   "nombre": "Radar Tecate",
+   "zona": "Tecate",
    "activa": true
   },
   {
@@ -143,6 +246,12 @@
    "nombre": "San Quintín — sin cuenta",
    "zona": "San Quintín",
    "activa": false
+  },
+  {
+   "cuenta": "sd619_ig",
+   "nombre": "619 News Media",
+   "zona": "San Diego",
+   "activa": true
   },
   {
    "cuenta": "siempre_ig",
@@ -187,6 +296,12 @@
    "activa": true
   },
   {
+   "cuenta": "univisionsd_ig",
+   "nombre": "Noticias Univision San Diego",
+   "zona": "San Diego",
+   "activa": true
+  },
+  {
    "cuenta": "yoamotijuana_ig",
    "nombre": "Yo Amo Tijuana",
    "zona": "Tijuana",
@@ -200,6 +315,75 @@
   }
  ],
  "destacados": [
+  {
+   "url": "https://www.instagram.com/p/DdTGz19Fpjw/",
+   "cuenta": "lavoz_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-15",
+   "titulo": "Hoy es 15 de septiembre, pero qué raro.. porque ya había sido septiembre. 🥺❤️🇲🇽",
+   "tipo": "carrusel",
+   "likes": 4997,
+   "comentarios": 10,
+   "publicado": "2026-09-15T06:50:12+00:00",
+   "cosechados": 5,
+   "opinion": 5,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 3,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "independencia",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
+   "url": "https://www.instagram.com/p/DdT2TgMG9Ba/",
+   "cuenta": "sd619_ig",
+   "zona": "San Diego",
+   "fecha": "2026-09-15",
+   "titulo": "Hundreds of Teens Pack Bonita Home for Back-to-Back Illegal Parties",
+   "tipo": "carrusel",
+   "likes": 2333,
+   "comentarios": 138,
+   "publicado": "2026-09-15T13:45:02+00:00",
+   "cosechados": 27,
+   "opinion": 27,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 27
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdUzTA7vhmy/",
+   "cuenta": "sd619_ig",
+   "zona": "San Diego",
+   "fecha": "2026-09-15",
+   "titulo": "Man Killed, Second Man Arrested After Violent Incident at Santee Home",
+   "tipo": "video",
+   "likes": 1267,
+   "comentarios": 18,
+   "reproducciones": 35430,
+   "publicado": "2026-09-15T22:41:14+00:00",
+   "cosechados": 12,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 10
+   },
+   "temas": []
+  },
   {
    "url": "https://www.instagram.com/p/DdT80ksNQE8/",
    "cuenta": "tjnoticias_ig",
@@ -351,6 +535,54 @@
    "temas": []
   },
   {
+   "url": "https://www.instagram.com/p/DdVAcJJgEST/",
+   "cuenta": "tjnoticias_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-16",
+   "titulo": "Una representación escolar de los Niños Héroes en Ameca, Jalisco, generó polémica en redes sociales luego de que un menor caracterizado como Juan Escutia fuera…",
+   "tipo": "video",
+   "likes": 441,
+   "comentarios": 18,
+   "reproducciones": 36360,
+   "publicado": "2026-09-16T00:33:32+00:00",
+   "cosechados": 3,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdUwps6gdGc/",
+   "cuenta": "yoamotijuana_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-15",
+   "titulo": "Este miércoles 16 de septiembre, se llevará a cabo un voluntariado especial junto a los perritos de CAM, de 3:45 a 6:00 p.m. 🐶❤️",
+   "tipo": "carrusel",
+   "likes": 417,
+   "comentarios": 4,
+   "publicado": "2026-09-15T22:15:04+00:00",
+   "cosechados": 2,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "casa",
+     "comentarios": 1
+    }
+   ]
+  },
+  {
    "url": "https://www.instagram.com/p/DdUJ9XwmniN/",
    "cuenta": "yoamotijuana_ig",
    "zona": "Tijuana",
@@ -420,32 +652,6 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdUwps6gdGc/",
-   "cuenta": "yoamotijuana_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-15",
-   "titulo": "Este miércoles 16 de septiembre, se llevará a cabo un voluntariado especial junto a los perritos de CAM, de 3:45 a 6:00 p.m. 🐶❤️",
-   "tipo": "carrusel",
-   "likes": 398,
-   "comentarios": 3,
-   "publicado": "2026-09-15T22:15:04+00:00",
-   "cosechados": 2,
-   "opinion": 2,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "casa",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
    "url": "https://www.instagram.com/p/DdS3Yldo9ey/",
    "cuenta": "tjpublica_ig",
    "zona": "Tijuana",
@@ -489,6 +695,10 @@
    "temas": [
     {
      "tema": "casa",
+     "comentarios": 1
+    },
+    {
+     "tema": "julieta ramirez",
      "comentarios": 1
     }
    ]
@@ -550,16 +760,36 @@
    ]
   },
   {
-   "url": "https://www.instagram.com/p/DdS7u40ESOc/",
-   "cuenta": "eltijuanense_ig",
-   "zona": "Tijuana",
+   "url": "https://www.instagram.com/p/DdVCLzgDAs-/",
+   "cuenta": "lacronica_ig",
+   "zona": "nacional",
+   "fecha": "2026-09-16",
+   "titulo": "👑✨ Fátima Bosch sorprende con radical cambio de look antes de entregar la corona de Miss Universo",
+   "tipo": "carrusel",
+   "likes": 196,
+   "comentarios": 3,
+   "publicado": "2026-09-16T00:48:18+00:00",
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdUwGl5GIbq/",
+   "cuenta": "mexicali686_ig",
+   "zona": "Mexicali",
    "fecha": "2026-09-15",
-   "titulo": "SE LE PASARON LAS COPAS EN TEQUILA Y TERMINÓ SIENDO TRANSPORTADO EN UN “DIABLITO”",
-   "tipo": "video",
-   "likes": 295,
-   "comentarios": 5,
-   "reproducciones": 18745,
-   "publicado": "2026-09-15T05:13:49+00:00",
+   "titulo": "Y que tiene 🇲🇽🤭😂",
+   "tipo": "imagen",
+   "likes": 96,
+   "comentarios": 0,
+   "publicado": "2026-09-15T22:10:17+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -570,6 +800,98 @@
     "sin_modelo_idioma": 0
    },
    "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdUQ2WzGma5/",
+   "cuenta": "mexicali686_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-15",
+   "titulo": "😂😂😂",
+   "tipo": "imagen",
+   "likes": 83,
+   "comentarios": 0,
+   "publicado": "2026-09-15T17:37:11+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdUauSbvzG5/",
+   "cuenta": "mexicali686_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-15",
+   "titulo": "Top 15 pt. 2 bandas emo Mexicali",
+   "tipo": "video",
+   "likes": 80,
+   "comentarios": 3,
+   "reproducciones": 3371,
+   "publicado": "2026-09-15T19:03:58+00:00",
+   "cosechados": 3,
+   "opinion": 3,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 1,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdUsqA5ChG2/",
+   "cuenta": "univisionsd_ig",
+   "zona": "San Diego",
+   "fecha": "2026-09-15",
+   "titulo": "#INDEPENDENCIADEMÉXICO🎉 ¡El Grito de Independencia se celebra este martes a ambos lados de la frontera!",
+   "tipo": "video",
+   "likes": 70,
+   "comentarios": 0,
+   "reproducciones": 1555,
+   "publicado": "2026-09-15T21:40:56+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdU57ufvsQ7/",
+   "cuenta": "canal66_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-15",
+   "titulo": "Entre gritos de coordinadora entregan constancia como coordinadora a Julieta Ramírez",
+   "tipo": "video",
+   "likes": 57,
+   "comentarios": 24,
+   "reproducciones": 4641,
+   "publicado": "2026-09-15T23:36:43+00:00",
+   "cosechados": 14,
+   "opinion": 13,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 5,
+    "neutral": 7,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "morena",
+     "comentarios": 3
+    }
+   ]
   },
   {
    "url": "https://www.instagram.com/p/DdS09urpL0s/",
@@ -593,6 +915,54 @@
    "temas": []
   },
   {
+   "url": "https://www.instagram.com/p/DdU5Xagv--v/",
+   "cuenta": "canal66_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-15",
+   "titulo": "Es Julieta Ramírez , Coordinadora de la Defensa de la Transformación y la Soberanía Nacional en Baja California.",
+   "tipo": "imagen",
+   "likes": 32,
+   "comentarios": 35,
+   "publicado": "2026-09-15T23:31:28+00:00",
+   "cosechados": 23,
+   "opinion": 22,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 15,
+    "neutral": 7,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "morena",
+     "comentarios": 4
+    }
+   ]
+  },
+  {
+   "url": "https://www.instagram.com/p/DdUrWOjiKE6/",
+   "cuenta": "univisionsd_ig",
+   "zona": "San Diego",
+   "fecha": "2026-09-15",
+   "titulo": "#TECNOLOGÍA 🤖 El presidente Donald Trump rechazó los llamados de líderes tecnológicos que piden una mayor regulación de la inteligencia artificial.",
+   "tipo": "video",
+   "likes": 31,
+   "comentarios": 0,
+   "reproducciones": 959,
+   "publicado": "2026-09-15T21:29:31+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.instagram.com/p/DdTy9FMsXN1/",
    "cuenta": "uniradio_ig",
    "zona": "estatal",
@@ -601,8 +971,51 @@
    "tipo": "video",
    "likes": 29,
    "comentarios": 3,
-   "reproducciones": 2190,
+   "reproducciones": 2212,
    "publicado": "2026-09-15T13:16:38+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdU0XtDjV2N/",
+   "cuenta": "lavoz_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-15",
+   "titulo": "¡ERES UN ORGULLO, VAMOOOS! 🐂🇲🇽",
+   "tipo": "imagen",
+   "likes": 25,
+   "comentarios": 0,
+   "publicado": "2026-09-15T22:47:33+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdU9zDmxGjp/",
+   "cuenta": "canal66_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-16",
+   "titulo": "“Ninguna irregularidad, yo jamás voy a poner en duda lo que el partido de Morena realice, en cuanto a encuestas internas”, asegura Ismael Burgueño.",
+   "tipo": "video",
+   "likes": 19,
+   "comentarios": 0,
+   "reproducciones": 1757,
+   "publicado": "2026-09-16T00:10:55+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -623,8 +1036,115 @@
    "tipo": "video",
    "likes": 14,
    "comentarios": 0,
-   "reproducciones": 1047,
+   "reproducciones": 1065,
    "publicado": "2026-09-15T14:43:28+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdVCccnDU8j/",
+   "cuenta": "lacronica_ig",
+   "zona": "nacional",
+   "fecha": "2026-09-16",
+   "titulo": "🇺🇸 La Embajada de Estados Unidos en México compartió en su cuenta de X una publicación de N+ que pone la atención en el origen de algunos de los productos que…",
+   "tipo": "imagen",
+   "likes": 13,
+   "comentarios": 3,
+   "publicado": "2026-09-16T00:50:36+00:00",
+   "cosechados": 1,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdU5gC-Ctt0/",
+   "cuenta": "univisionsd_ig",
+   "zona": "San Diego",
+   "fecha": "2026-09-15",
+   "titulo": "🚨 Esta tarde a las 6 en Noticias San Diego.",
+   "tipo": "video",
+   "likes": 13,
+   "comentarios": 0,
+   "reproducciones": 385,
+   "publicado": "2026-09-15T23:33:04+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdVDOifg_2C/",
+   "cuenta": "capitalmxl_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-16",
+   "titulo": "Hey 😍disminuyen las temperaturas:",
+   "tipo": "imagen",
+   "likes": 13,
+   "comentarios": 0,
+   "publicado": "2026-09-16T00:57:29+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdUbpEZmcV9/",
+   "cuenta": "mexicali686_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-15",
+   "titulo": "¡MATUTE ESTA EN LA CASA! ❤️🎶",
+   "tipo": "imagen",
+   "likes": 8,
+   "comentarios": 0,
+   "publicado": "2026-09-15T19:11:29+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdVCr0PFEZp/",
+   "cuenta": "canal66_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-16",
+   "titulo": "DÍAS SOLEADOS CON UNA MÁXIMA DE 41°C PARA #MEXICALI",
+   "tipo": "video",
+   "likes": 8,
+   "comentarios": 0,
+   "reproducciones": 1183,
+   "publicado": "2026-09-16T00:53:00+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -658,6 +1178,50 @@
    "temas": []
   },
   {
+   "url": "https://www.instagram.com/p/DdU97DsgZHR/",
+   "cuenta": "elmexicano_ig",
+   "zona": "nacional",
+   "fecha": "2026-09-16",
+   "titulo": "#Estatal | 📣 “Ninguna irregularidad, yo jamás voy a poner en duda lo que el partido de Morena realice, en cuanto a encuestas internas”, aseguró Ismael Burgueño…",
+   "tipo": "video",
+   "likes": 6,
+   "comentarios": 1,
+   "reproducciones": 543,
+   "publicado": "2026-09-16T00:11:33+00:00",
+   "cosechados": 1,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdVA-cxjWkh/",
+   "cuenta": "elmexicano_ig",
+   "zona": "nacional",
+   "fecha": "2026-09-16",
+   "titulo": "#Estatal | 📣 “Baja California tiene la convicción de continuar por el camino de la 4ta Transformación”, afirmó Julieta Ramírez Padilla durante su discurso, lue…",
+   "tipo": "video",
+   "likes": 5,
+   "comentarios": 1,
+   "reproducciones": 203,
+   "publicado": "2026-09-16T00:38:22+00:00",
+   "cosechados": 1,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.instagram.com/p/DdSmLXBFCqC/",
    "cuenta": "elvigia_ig",
    "zona": "Ensenada",
@@ -667,6 +1231,155 @@
    "likes": 4,
    "comentarios": 0,
    "publicado": "2026-09-15T02:05:04+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdU-CdxGOS_/",
+   "cuenta": "lavoz_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-16",
+   "titulo": "🇲🇽🌮 ¿QUÉ TAN MEXICANO ERES? 👀",
+   "tipo": "carrusel",
+   "likes": 3,
+   "comentarios": 0,
+   "publicado": "2026-09-16T00:12:02+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdUMwzTjVp0/",
+   "cuenta": "lavoz_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-15",
+   "titulo": "🇲🇽 ¿Sabías estos datos sobre el “Llanto de Dolores”?",
+   "tipo": "imagen",
+   "likes": 3,
+   "comentarios": 0,
+   "publicado": "2026-09-15T17:01:28+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdU9D2CqC1w/",
+   "cuenta": "lavoz_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-16",
+   "titulo": "✍🏻 Julieta Ramírez es la nueva coordinadora de Morena en Baja California",
+   "tipo": "video",
+   "likes": 2,
+   "comentarios": 1,
+   "reproducciones": 168,
+   "publicado": "2026-09-16T00:04:33+00:00",
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdU-pglG46X/",
+   "cuenta": "elmexicano_ig",
+   "zona": "nacional",
+   "fecha": "2026-09-16",
+   "titulo": "#Estatal | 📣🎉 Julieta Ramírez Padilla fue nombrada coordinadora estatal de los Comités de Defensa de la Cuarta Transformación en Baja California, luego de conc…",
+   "tipo": "carrusel",
+   "likes": 2,
+   "comentarios": 0,
+   "publicado": "2026-09-16T00:17:22+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdU6S6SEwI3/",
+   "cuenta": "elmexicano_ig",
+   "zona": "nacional",
+   "fecha": "2026-09-15",
+   "titulo": "#Estatal | 🎉 Julieta Ramírez Padilla fue designada coordinadora estatal de Morena en Baja California, posición que forma parte del proceso interno del partido…",
+   "tipo": "video",
+   "likes": 2,
+   "comentarios": 0,
+   "reproducciones": 496,
+   "publicado": "2026-09-15T23:39:42+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdU8RXAER67/",
+   "cuenta": "univisionsd_ig",
+   "zona": "San Diego",
+   "fecha": "2026-09-15",
+   "titulo": "#BAJACALIFORNIA Morena designó a Julieta Ramírez como coordinadora de la Defensa de la Transformación y la Soberanía Nacional en Baja California rumbo a las el…",
+   "tipo": "imagen",
+   "likes": 2,
+   "comentarios": 0,
+   "publicado": "2026-09-15T23:56:36+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdU8udvG_qB/",
+   "cuenta": "radartecate_ig",
+   "zona": "Tecate",
+   "fecha": "2026-09-16",
+   "titulo": "Julieta Ramírez es la coordinadora de la transformación en Baja California.",
+   "tipo": "imagen",
+   "likes": 2,
+   "comentarios": 0,
+   "publicado": "2026-09-16T00:00:35+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -709,7 +1422,7 @@
    "tipo": "video",
    "likes": 1,
    "comentarios": 0,
-   "reproducciones": 58,
+   "reproducciones": 60,
    "publicado": "2026-09-15T16:54:56+00:00",
    "cosechados": 0,
    "opinion": 0,
@@ -732,6 +1445,48 @@
    "likes": 1,
    "comentarios": 0,
    "publicado": "2026-09-15T18:05:05+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdVB2NAm9yd/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-16",
+   "titulo": "𝗟𝗮 𝗗𝗶𝗿𝗲𝗰𝗰𝗶ó𝗻 𝗱𝗲 𝗦𝗲𝗴𝘂𝗿𝗶𝗱𝗮𝗱 𝗣ú𝗯𝗹𝗶𝗰𝗮 𝗠𝘂𝗻𝗶𝗰𝗶𝗽𝗮𝗹 𝗽𝘂𝘀𝗼 𝗲𝗻 𝗺𝗮𝗿𝗰𝗵𝗮 𝘂𝗻 𝗼𝗽𝗲𝗿𝗮𝘁𝗶𝘃𝗼 𝗲𝘀𝗽𝗲𝗰𝗶𝗮𝗹 𝗱𝗲 𝗽𝗿𝗲𝘃𝗲𝗻𝗰𝗶ó𝗻 𝘆 𝘃𝗶𝗴𝗶𝗹𝗮𝗻𝗰𝗶𝗮 𝗽𝗼𝗿 𝗹𝗮𝘀 𝗙𝗶𝗲𝘀𝘁𝗮𝘀 𝗣𝗮𝘁𝗿𝗶𝗮𝘀 𝗲𝗻 𝗹𝗮𝘀 𝗶𝗻𝗺𝗲𝗱𝗶𝗮𝗰𝗶𝗼𝗻𝗲𝘀 𝗱𝗲 𝗹𝗮…",
+   "tipo": "imagen",
+   "likes": 1,
+   "comentarios": 0,
+   "publicado": "2026-09-16T00:45:19+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdVB6B7jno7/",
+   "cuenta": "lacronica_ig",
+   "zona": "nacional",
+   "fecha": "2026-09-16",
+   "titulo": "Desde el GPS hasta los vehículos conectados, los semiconductores",
+   "tipo": "carrusel",
+   "likes": 1,
+   "comentarios": 0,
+   "publicado": "2026-09-16T00:45:50+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -774,6 +1529,27 @@
    "likes": 0,
    "comentarios": 0,
    "publicado": "2026-09-15T02:25:09+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdTBwy-m99B/",
+   "cuenta": "radartecate_ig",
+   "zona": "Tecate",
+   "fecha": "2026-09-15",
+   "titulo": "#política|| La espera terminó. Mañana martes 15 de septiembre a las 19:00 horas (hora centro) se dará a conocer el nombre del o la coordinador de la transforma…",
+   "tipo": "imagen",
+   "likes": 0,
+   "comentarios": 0,
+   "publicado": "2026-09-15T06:06:07+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -934,15 +1710,15 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdU_m5dm8RT/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
+   "url": "https://www.instagram.com/p/DdVADbKG3q_/",
+   "cuenta": "radartecate_ig",
+   "zona": "Tecate",
    "fecha": "2026-09-16",
-   "titulo": "𝗟𝗮 𝗙𝗶𝘀𝗰𝗮𝗹í𝗮 𝗚𝗲𝗻𝗲𝗿𝗮𝗹 𝗱𝗲𝗹 𝗘𝘀𝘁𝗮𝗱𝗼 𝘀𝗼𝗹𝗶𝗰𝗶𝘁𝗮 𝗮𝗽𝗼𝘆𝗼 𝗽𝗮𝗿𝗮 𝗹𝗼𝗰𝗮𝗹𝗶𝘇𝗮𝗿 𝗮 𝗝𝗼𝘀é 𝗗𝗮𝗻𝗶𝗲𝗹 𝗣é𝗿𝗲𝘇 𝗟𝗮𝗿𝗶𝗼𝘀, 𝗱𝗲 𝟯𝟲 𝗮ñ𝗼𝘀, 𝗾𝘂𝗶𝗲𝗻 𝗳𝘂𝗲 𝘃𝗶𝘀𝘁𝗼 𝗽𝗼𝗿 ú𝗹𝘁𝗶𝗺𝗮 𝘃𝗲𝘇 𝗲𝗹 𝟮𝟰 𝗱𝗲 𝗮𝗴𝗼𝘀𝘁𝗼, 𝗮𝗹𝗿𝗲𝗱𝗲𝗱𝗼𝗿…",
-   "tipo": "imagen",
+   "titulo": "ES JULIETA LA COORDINADORA DE LA 4T EN BAJA CALIFORNIA",
+   "tipo": "carrusel",
    "likes": 0,
    "comentarios": 0,
-   "publicado": "2026-09-16T00:25:46+00:00",
+   "publicado": "2026-09-16T00:29:39+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -965,67 +1741,163 @@
    "nota": "sin posts nuevos que cosechar"
   },
   {
+   "cuenta": "canal66_ig",
+   "estado": "ok",
+   "posts": 5,
+   "comentarios": 71,
+   "crudos": 83
+  },
+  {
+   "cuenta": "capitalmxl_ig",
+   "estado": "ok",
+   "posts": 5,
+   "comentarios": 2,
+   "crudos": 6
+  },
+  {
+   "cuenta": "elensenadense_ig",
+   "estado": "ok",
+   "posts": 5,
+   "comentarios": 31,
+   "crudos": 34
+  },
+  {
+   "cuenta": "elmexicano_ig",
+   "estado": "ok",
+   "posts": 5,
+   "comentarios": 2,
+   "crudos": 5
+  },
+  {
    "cuenta": "eltijuanense_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 22,
-   "crudos": 22
+   "comentarios": 0,
+   "crudos": 1
   },
   {
    "cuenta": "elvigia_ig",
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 5
+   "crudos": 2
+  },
+  {
+   "cuenta": "ensenadadigna_ig",
+   "estado": "ok",
+   "posts": 5,
+   "comentarios": 75,
+   "crudos": 75
   },
   {
    "cuenta": "frontera_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 29,
-   "crudos": 34
+   "comentarios": 2,
+   "crudos": 5
+  },
+  {
+   "cuenta": "ksdy50_ig",
+   "estado": "ok",
+   "posts": 5,
+   "comentarios": 6,
+   "crudos": 9
+  },
+  {
+   "cuenta": "lacronica_ig",
+   "estado": "ok",
+   "posts": 5,
+   "comentarios": 0,
+   "crudos": 3
+  },
+  {
+   "cuenta": "lavoz_ig",
+   "estado": "ok",
+   "posts": 5,
+   "comentarios": 6,
+   "crudos": 9
+  },
+  {
+   "cuenta": "mexicali686_ig",
+   "estado": "ok",
+   "posts": 5,
+   "comentarios": 4,
+   "crudos": 7
+  },
+  {
+   "cuenta": "noticiasmxl_ig",
+   "estado": "ok",
+   "posts": 5,
+   "comentarios": 41,
+   "crudos": 43
+  },
+  {
+   "cuenta": "notiens_ig",
+   "estado": "ok",
+   "posts": 5,
+   "comentarios": 87,
+   "crudos": 93
+  },
+  {
+   "cuenta": "radartecate_ig",
+   "estado": "ok",
+   "posts": 5,
+   "comentarios": 0,
+   "crudos": 5
+  },
+  {
+   "cuenta": "sd619_ig",
+   "estado": "ok",
+   "posts": 5,
+   "comentarios": 92,
+   "crudos": 97
   },
   {
    "cuenta": "siempre_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 19,
-   "crudos": 20
+   "comentarios": 0,
+   "crudos": 1
   },
   {
    "cuenta": "sintesis_ig",
    "estado": "ok",
    "posts": 1,
    "comentarios": 0,
-   "crudos": 1
+   "crudos": 0,
+   "nota": "sin posts nuevos que cosechar"
   },
   {
    "cuenta": "soltij_ig",
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 2
+   "crudos": 0,
+   "nota": "sin posts nuevos que cosechar"
   },
   {
    "cuenta": "tijuanainforma_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 3,
-   "crudos": 6
+   "comentarios": 0,
+   "crudos": 0,
+   "nota": "sin posts nuevos que cosechar"
   },
   {
    "cuenta": "tjnoticias_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 59,
-   "crudos": 67
+   "comentarios": 0,
+   "crudos": 0,
+   "nota": "sin posts nuevos que cosechar"
   },
   {
    "cuenta": "tjpublica_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 11,
-   "crudos": 11
+   "comentarios": 0,
+   "crudos": 0,
+   "nota": "sin posts nuevos que cosechar"
   },
   {
    "cuenta": "uniradio_ig",
@@ -1036,37 +1908,60 @@
    "nota": "sin posts nuevos que cosechar"
   },
   {
+   "cuenta": "univisionsd_ig",
+   "estado": "ok",
+   "posts": 5,
+   "comentarios": 3,
+   "crudos": 7
+  },
+  {
    "cuenta": "yoamotijuana_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 9,
-   "crudos": 9
+   "comentarios": 0,
+   "crudos": 0,
+   "nota": "sin posts nuevos que cosechar"
   },
   {
    "cuenta": "zeta_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 6,
-   "crudos": 8
+   "comentarios": 0,
+   "crudos": 0,
+   "nota": "sin posts nuevos que cosechar"
   }
  ],
  "gasto": {
-  "resultados": 2600,
-  "gastado": 246,
+  "resultados": 4400,
+  "gastado": 616,
   "por_concepto": {
    "afn_ig": 5,
-   "eltijuanense_ig": 27,
-   "elvigia_ig": 10,
-   "frontera_ig": 39,
-   "siempre_ig": 25,
-   "sintesis_ig": 2,
-   "soltij_ig": 7,
-   "tijuanainforma_ig": 11,
-   "tjnoticias_ig": 72,
-   "tjpublica_ig": 16,
+   "canal66_ig": 88,
+   "capitalmxl_ig": 11,
+   "elensenadense_ig": 39,
+   "elmexicano_ig": 10,
+   "eltijuanense_ig": 6,
+   "elvigia_ig": 7,
+   "ensenadadigna_ig": 80,
+   "frontera_ig": 10,
+   "ksdy50_ig": 14,
+   "lacronica_ig": 8,
+   "lavoz_ig": 14,
+   "mexicali686_ig": 12,
+   "noticiasmxl_ig": 48,
+   "notiens_ig": 98,
+   "radartecate_ig": 10,
+   "sd619_ig": 102,
+   "siempre_ig": 6,
+   "sintesis_ig": 1,
+   "soltij_ig": 5,
+   "tijuanainforma_ig": 5,
+   "tjnoticias_ig": 5,
+   "tjpublica_ig": 5,
    "uniradio_ig": 5,
-   "yoamotijuana_ig": 14,
-   "zeta_ig": 13
+   "univisionsd_ig": 12,
+   "yoamotijuana_ig": 5,
+   "zeta_ig": 5
   }
  }
 }
