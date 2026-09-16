@@ -52,6 +52,7 @@
 
 import { componerConsulta, esAmbitoActualidad, type Ambito, type AmbitoActualidad } from "./ambito";
 import { fusionarLocales } from "./fusionar";
+import { soloDeLaRegion } from "./region";
 import {
   cosecharFeeds,
   urlDeActualidad,
@@ -90,6 +91,18 @@ export const FEEDS_ACTUALIDAD: Record<
 interface Lugar {
   lugar: string;
   idioma: Idioma;
+  /**
+   * Si este locale ademas pide la SECCION geografica de Google. Por omision si.
+   *
+   * Existe porque la lista cumple dos papeles: de aqui salen las secciones del
+   * capitulo local Y los idiomas en que se buscan los rubros. Para Tijuana eso
+   * dejo de coincidir: la seccion en ingles de «Tijuana» devuelve local del
+   * condado de San Diego sin relacion con Tijuana, pero la BUSQUEDA en ingles
+   * lleva los terminos de lugar pegados y si trae cobertura fronteriza de
+   * verdad. Un solo campo separaba las dos cosas; dos listas paralelas se
+   * habrian desincronizado.
+   */
+  seccion?: boolean;
 }
 
 /**
@@ -105,9 +118,17 @@ interface Lugar {
  * muestra lo que hay y el panel dice cuanto, nunca se rellena.
  */
 export const LUGARES_ACTUALIDAD: Record<ZonaRuta, readonly Lugar[]> = {
+  // Tijuana iba tambien en ingles «porque la prensa de San Diego la cubre», y
+  // eso resulto ser otra cosa: de cuatro filas en ingles, tres eran locales del
+  // condado de San Diego sin relacion con Tijuana (Chula Vista School Board,
+  // un groundbreaking en Imperial Beach, grafiti en South Bay). La seccion en
+  // ingles de «Tijuana» es, en la practica, la del area fronteriza en ingles.
+  // La cobertura en ingles sigue llegando por El corredor —que es Tijuana mas
+  // San Diego a proposito— y por /san-diego. Cada zona en el idioma de su
+  // prensa, como las otras siete.
   Tijuana: [
     { lugar: "Tijuana", idioma: "es" },
-    { lugar: "Tijuana", idioma: "en" },
+    { lugar: "Tijuana", idioma: "en", seccion: false },
   ],
   Mexicali: [{ lugar: "Mexicali", idioma: "es" }],
   Ensenada: [{ lugar: "Ensenada", idioma: "es" }],
@@ -125,7 +146,9 @@ export const CORREDOR_ACTUALIDAD: readonly Lugar[] = [
 ];
 
 const pedidosDeLugares = (lugares: readonly Lugar[]): Pedido[] =>
-  lugares.map(({ lugar, idioma }) => ({ url: urlDeLugar(lugar, idioma), idioma }));
+  lugares
+    .filter((l) => l.seccion !== false)
+    .map(({ lugar, idioma }) => ({ url: urlDeLugar(lugar, idioma), idioma }));
 
 /**
  * La consulta de un rubro para un "donde": terminos del rubro en el idioma
@@ -251,7 +274,12 @@ export async function responderActualidad(
   const cosechas = await cosecharFeeds(r.pedidos, TOPE_ACTUALIDAD, solicitar);
 
   // Intercalados por locale y sin repetir titular. NUNCA ordenados aqui.
-  const fusionados = fusionarLocales(cosechas.map((c) => c.resultados));
+  const crudos = fusionarLocales(cosechas.map((c) => c.resultados));
+
+  // La reja de region SOLO en lo que dice ser de aqui. Mexico e Internacional
+  // existen precisamente para traer lo de fuera: filtrarlos los vaciaria.
+  const fusionados =
+    r.seccion === "zona" || r.seccion === "region" ? soloDeLaRegion(crudos) : crudos;
   const cuerpo: RespuestaActualidad = {
     seccion: r.seccion,
     zona: r.zona === null ? null : SLUG_DE_ZONA[r.zona],

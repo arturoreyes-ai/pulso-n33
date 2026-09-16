@@ -39,6 +39,7 @@ function cargar(relativo) {
 
 const { parsearFeed, quitarSufijoMedio } = cargar('lib/busqueda/rss');
 const { fusionarLocales } = cargar('lib/busqueda/fusionar');
+const { esDeFuera, soloDeLaRegion, esRedSocial } = cargar('lib/busqueda/region');
 const { urlDeFeed, urlDeActualidad, urlDeLugar, esUrlDeGoogle } = cargar('lib/busqueda/google-noticias');
 const { responderActualidad, consultaDeRubro } = cargar('lib/busqueda/actualidad');
 const { RUBROS, NOMBRE_RUBRO, TERMINOS_RUBRO, VENTANA_RUBRO } = cargar('lib/busqueda/rubros');
@@ -115,6 +116,55 @@ async function comprobar() {
   assert.equal(repetida.length, 1);
   assert.equal(repetida[0].idioma, 'es', 'gana el espanol: el tablero esta en espanol');
   assert.equal(fusionarLocales([[fila('', 'es')]]).length, 0);
+
+  // --- la reja de region ---------------------------------------------------
+  // Fixtures REALES del capitulo de seguridad de San Felipe, 16 de septiembre
+  // de 2026: siete de trece filas eran de otro pais porque hay un San Felipe
+  // en Chile y otro en Guanajuato, y el buscador relaja el ancla
+  // `"Baja California"` cuando el match estricto da poco.
+  const fila2 = (titulo, dominio, medio = 'X') => ({ titulo, url: 'https://x/', dominio, medio, publicado: null, idioma: 'es' });
+
+  // Otro pais, por dominio: la senal mas limpia.
+  for (const d of ['publimetro.cl', 'g5noticias.cl', 'canal9.cl', 'lateja.cr', 'fmplus.cl']) {
+    assert.equal(esDeFuera(fila2('Detienen a dos adolescentes por crimen', d)), true, d);
+  }
+  // Otro estado, por titular.
+  assert.equal(esDeFuera(fila2('Clima en Guanajuato: cielo nublado', 'lasillarota.com')), true);
+  assert.equal(esDeFuera(fila2('Detienen en Coahuila a "El Pantera"', 'zonanorte.mx')), true);
+  assert.equal(esDeFuera(fila2('Michoacán refuerza estrategia contra la extorsión', 'tusbuenasnoticias.com')), true);
+  assert.equal(esDeFuera(fila2('Morena Puebla respalda a Armenta', 'sucesospuebla.com')), true);
+  assert.equal(esDeFuera(fila2('Gobernadora destaca a Dolores Hidalgo', 'nwnoticias.com')), true);
+  assert.equal(esDeFuera(fila2('Carabineros detiene a dos menores', 'latercera.com')), true, 'Carabineros no existe en Mexico');
+
+  // El toponimo compartido: un medio chileno que nombra «San Felipe» habla del
+  // suyo. El pais del medio manda sobre el nombre del lugar.
+  assert.equal(esDeFuera(fila2('Crimen en Colina: presunto autor huyó hasta San Felipe', 'publimetro.cl')), true);
+  // Y un titular que nombra un lugar de fuera PERO tambien uno de aqui se
+  // queda: «Detienen en Coahuila a El Pantera y a un policía de Ensenada» es
+  // una nota de Ensenada, no de Coahuila.
+  assert.equal(esDeFuera(fila2('Detienen en Coahuila a "El Pantera" y a un policía de Ensenada', 'zonanorte.mx')), false);
+
+  // Lo de aqui se queda, y MANDA sobre el marcador de fuera: un titular que
+  // nombra los dos lugares es noticia de aqui.
+  assert.equal(esDeFuera(fila2('Cierran puertos en Sonora y Baja California por temporal', 'tvazteca.com')), false);
+  assert.equal(esDeFuera(fila2('Rescatan a tres personas varadas en San Felipe, BC', 'nmas.com.mx')), false);
+  assert.equal(esDeFuera(fila2('Localizan restos humanos en Mexicali', 'nmas.com.mx')), false);
+  assert.equal(esDeFuera(fila2('Chula Vista School Board Candidate Scrubbed ICE', 'voiceofsandiego.org')), false, 'San Diego es zona del producto');
+  // Baja California Sur es otro estado y lleva dentro el nombre del nuestro.
+  assert.equal(esDeFuera(fila2('Huracán se acerca a Baja California Sur', 'x.mx')), true);
+
+  // Sin lugar se CONSERVA: no se puede probar que sea de fuera, y descartar
+  // por sospecha seria rellenar al reves (decision del cliente, 16 sep 2026).
+  assert.equal(esDeFuera(fila2('Se viene la tormenta negra de la semana', 'cronista.com.ar')), true, 'el dominio si lo prueba');
+  assert.equal(esDeFuera(fila2('Se viene la tormenta negra de la semana', 'cronista.com')), false, 'sin dominio ni lugar, se queda');
+
+  // Una red social no es un medio.
+  assert.equal(esRedSocial('facebook.com'), true);
+  assert.equal(esRedSocial('www.facebook.com'), true);
+  assert.equal(esRedSocial('zetatijuana.com'), false);
+  assert.equal(esDeFuera(fila2('MILENIO. Claudia Tacoronte, de 21 años', 'facebook.com')), true);
+
+  assert.equal(soloDeLaRegion([fila2('Clima en Guanajuato', 'a.mx'), fila2('Clima en Tijuana', 'b.mx')]).length, 1);
 
   // --- URLs: URLSearchParams, nunca concatenacion --------------------------
   const u = urlDeFeed('x&hl=en-US', 'es');
@@ -241,11 +291,16 @@ async function comprobar() {
     pedidasTj.push(url);
     return new Response(feed(item(porLocale(url) === 'es' ? 'Local en español' : 'Local in English', NUEVO)));
   }, AHORA);
-  assert.deepEqual(pedidasTj, [urlDeLugar('Tijuana', 'es'), urlDeLugar('Tijuana', 'en')], 'Tijuana en los dos idiomas');
+  // La SECCION de Tijuana, solo en espanol. La de ingles devolvia local del
+  // condado de San Diego sin relacion con Tijuana —Chula Vista, Imperial
+  // Beach, South Bay—, medido el 16 de septiembre de 2026. La BUSQUEDA en
+  // ingles se conserva (mas abajo): lleva los terminos de lugar pegados y si
+  // trae cobertura fronteriza de verdad.
+  assert.deepEqual(pedidasTj, [urlDeLugar('Tijuana', 'es')], 'la seccion de Tijuana, solo en espanol');
   const ctj = await tj.json();
   assert.equal(ctj.seccion, 'zona');
   assert.equal(ctj.zona, 'tijuana');
-  assert.deepEqual(ctj.resultados.map((r) => r.idioma), ['es', 'en']);
+  assert.deepEqual(ctj.resultados.map((r) => r.idioma), ['es']);
   assert.match(tj.headers.get('cache-control'), /s-maxage=300/);
 
   const pedidasSd = [];
