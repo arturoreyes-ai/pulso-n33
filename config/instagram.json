@@ -158,6 +158,17 @@
    "razon": "Sondeada 2026-09-10: 115,257 seguidores, 12,597 posts, bio «Medio de comunicación digital en Tijuana. Informando con actualidad y veracidad desde 2014». Pedida por el cliente el 10 de septiembre de 2026. El handle lleva PUNTO, como @zeta.tijuana, y no se adivina. Medio digital nativo de redes, sin equivalente en config/medios.json."
   },
   {
+   "id": "blanconegro_ig",
+   "handle": "@blancoynegronoticias",
+   "nombre": "Blanco y Negro Noticias",
+   "medio": null,
+   "zona": "Tijuana",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-16: 136,814 seguidores, 5,528 posts, bio «Blanco y Negro · ¿Ya te enteraste de las últimas noticias? ¡Entérate! en Blanco&Negro Noticias!». Pedida por el cliente el 16 de septiembre de 2026. UNICA fila cuya zona NO sale de su propia biografia: la bio no nombra lugar y «Blanco y Negro» no esta en config/medios.json, asi que Tijuana la confirmo el cliente y no el sondeo. Queda escrito porque es exactamente la forma del error que este archivo existe para evitar (@afnoticias tenia 113 mil seguidores y era de Tocantins). Sin equivalente en config/medios.json."
+  },
+  {
    "id": "canal66_ig",
    "handle": "@canal66tv",
    "nombre": "Canal 66",
