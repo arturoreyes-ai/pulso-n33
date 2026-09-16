@@ -23,9 +23,12 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  *   Instagram — cuentas de medios verificadas una por una. La zona es la SEDE
  *               de la cuenta. Publica el texto de los comentarios. Ventana de
  *               24 horas desde el 10 de septiembre de 2026 (antes, la semana).
- *   TikTok    — una busqueda, «tijuana noticias». La zona sale del PIE del
- *               video, porque una consulta no tiene lugar. Publica el @ del
- *               creador; es la unica que trae compartidos y guardados.
+ *   TikTok    — busquedas: una por lugar del corredor mas una de Mexico y
+ *               una del mundo, desde el 15 de septiembre de 2026. La zona
+ *               sale del PIE del video, porque una consulta no tiene lugar;
+ *               el `ambito` de cada busqueda decide SOLO el residuo, nunca la
+ *               zona de un pie que nombra lugar. Publica el @ del creador; es
+ *               la unica que trae compartidos y guardados.
  *   YouTube   — solo conteos y sentimiento agregado. Nunca el texto de un
  *               comentario: las Politicas para Desarrolladores limitan el
  *               almacenamiento a 30 dias y un repositorio de git no borra.
@@ -40,6 +43,10 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  * consulta literal («tijuana noticias»), la regla de zona («la da el pie del
  * video, no el creador») y hasta git. Es la regla del 12 de septiembre —la
  * interfaz no nombra a Google— extendida del proveedor a todo el mecanismo.
+ * De ahi salen los nombres de las pastillas de la vista de region: Corredor,
+ * Mexico y Mundo son LUGARES, no ambitos de una consulta, y el id de una
+ * busqueda no se imprime en ninguna parte — por eso `fuente` ya no cae a
+ * `cuenta` cuando falta el creador.
  *
  * Lo que el lector si ve: que esta mirando y que NO afirma. La distincion
  * decide cada cadena de esta pagina. «Es el ranking de X, no una medida de la

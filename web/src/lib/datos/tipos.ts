@@ -544,13 +544,25 @@ export interface RedesCuenta {
 
 /**
  * Un post destacado. `titulo` es la primera línea del pie del MEDIO, no un
- * comentario: es la regla «titular, fuente y liga» aplicada a Instagram. La
- * `zona` es la sede de la cuenta, no el tema del post.
+ * comentario: es la regla «titular, fuente y liga» aplicada a Instagram.
+ *
+ * En Instagram la `zona` es la sede de la cuenta, no el tema del post. En
+ * TikTok sale del pie del video con el gacetero, y puede valer también
+ * `nacional` (el pie no nombró lugar) o `internacional` (residuo de la
+ * edición del mundo, desde el 15 de septiembre de 2026). Ninguna de las dos
+ * tiene página propia: solo se ven en la vista de región.
  */
 export interface Destacado {
   url: string;
   cuenta: string;
   zona: string;
+  /** Solo TikTok. El veredicto CRUDO del gacetero sobre el pie, al lado de
+   *  `zona` y no en su lugar: con `ambito` los dos dejaron de coincidir, y un
+   *  video de Guadalajara en la edición de México queda `zona: "nacional"`
+   *  igual que uno que no nombró lugar. De aquí sale la etiqueta: `fuera`
+   *  es «fuera del corredor» y `nacional` es «sin lugar». Puede faltar
+   *  en un corte anterior al 15 de septiembre de 2026. */
+  alcance?: "zona" | "estatal" | "fuera" | "nacional";
   fecha: string;
   titulo: string;
   tipo: "imagen" | "video" | "carrusel" | "otro";

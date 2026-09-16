@@ -328,7 +328,12 @@ python -m pulso redes --sondear zeta.tijuana uniradiobaja
 
 Cuesta un resultado por cuenta y evita pagar por la cuenta equivocada.
 **Adivinar el handle a partir del nombre del medio falla, y falla en
-silencio.** De los seis handles derivados con los que nació
+silencio.** Y el sondeo no solo sirve para saber si el handle existe: sirve
+para leer la BIO. El 15 de septiembre de 2026 el cliente pidió `@svnnoticias`
+y el sondeo la mostró viva, con 31 mil seguidores — y con bio de «Sonora
+Visión Noticias». En Instagram la zona no la da el gacetero sino la fila del
+config, así que nada habría descartado sus comentarios de Hermosillo. Quedó
+en `senuelos`. De los seis handles derivados con los que nació
 `config/instagram.json`, cinco estaban mal: tres eran cuentas ocupadas con 0
 publicaciones, `@afnoticias` resultó ser un portal de Tocantins, Brasil con
 113 mil seguidores y bio en portugués, y el de Uniradio repetía exactamente el
@@ -379,7 +384,7 @@ retención de 30 días sigue siendo ejecutable. La identidad de quien comenta
 sigue sin ingerirse. Un despliegue hecho desde git puro sale sin ese archivo y
 el panel lo dice. `--sin-texto` lo omite; `--efimero RUTA` lo mueve.
 
-### TikTok: una búsqueda, con `--probar` antes del cron
+### TikTok: búsquedas, con `--probar` antes del cron
 
 ```bash
 python -m pulso tiktok --probar
@@ -397,8 +402,21 @@ python -m pulso tiktok --sentimiento modelo
 Escribe `data/tiktok.json` y `efimero/tiktok-comentarios.json`. La zona de
 cada video sale de su descripción con el gacetero, nunca de la consulta; el @
 del creador sí se publica, quien comenta no. El actor de comentarios cobra
-~5 USD por 1,000 resultados: con 30 videos × 30 comentarios son ~4.50 USD la
-primera corrida del día, y `cache/tiktok/vistos.json` evita repetirlos.
+~5 USD por 1,000 resultados: con las ocho búsquedas activas a 15 videos × 20
+comentarios son ~12 USD la primera corrida del día, y `cache/tiktok/vistos.json`
+evita repetirlos.
+
+Desde el 15 de septiembre de 2026 hay once búsquedas —una por lugar del
+corredor más México y el mundo— y un campo `ambito`. **`ambito` no es una
+zona**: cuando la descripción nombra un lugar, manda la descripción, igual en
+los tres. Lo único que decide es el residuo: en una búsqueda `regional` un
+video de fuera se descarta, y en las otras dos se conserva como `nacional`; un
+video que no nombra lugar queda `nacional`, salvo en la del mundo, donde queda
+`internacional`. El campo `alcance` publica el veredicto crudo del gacetero al
+lado de la zona, para que «sin lugar» y «fuera del corredor» no se
+confundan. Tres búsquedas están apagadas con la razón escrita —Tecate, San
+Felipe y San Quintín—: se probaron y devuelven falsos positivos, no cobertura.
+Un incendio en Apodaca entró como Tecate porque el pie decía «Tecate Six».
 
 ### X: tendencias por ubicación, sin sesión
 

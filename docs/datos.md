@@ -1038,10 +1038,35 @@ cambia, y por qué:
   sintética de `pulso/busquedas.py`: la fila no lleva zona porque una consulta
   se la acreditaría a todo video que no nombre lugar alguno.
 - **La zona de cada video sale de su pie**, con el gacetero de `pulso/zonas.py`
-  y los hashtags incluidos (`#tijuana` pliega a `tijuana`). Un video que nombra
-  Hermosillo se descarta y se cuenta en `salud[].fuera`; uno que no nombra
-  lugar queda **`nacional`**, el veredicto literal del gacetero, y solo se ve
-  en la vista de región. Los comentarios heredan la zona de su video.
+  y los hashtags incluidos (`#tijuana` pliega a `tijuana`). Los comentarios
+  heredan la zona de su video.
+- **`alcance` es el veredicto crudo del gacetero** (`zona | estatal | fuera |
+  nacional`) y viaja **al lado** de `zona`, no en su lugar. Existe desde el 15
+  de septiembre de 2026, cuando el campo `ambito` de la búsqueda hizo que los
+  dos dejaran de coincidir: en una búsqueda nacional un video de Guadalajara
+  queda `zona: "nacional"` igual que uno que no nombró lugar alguno, y sin el
+  alcance las dos filas serían la misma. El panel rotula «fuera del corredor»
+  para una y «sin lugar» para la otra. Un corte anterior al campo sigue siendo
+  válido (aviso, no error): `data/` lo escribe el bot y el cron lo regenera.
+- **`ambito` decide el residuo, nunca la zona.** Cuando el pie nombra un lugar
+  del gacetero manda el pie, igual en los tres ámbitos; lo único que cambia es
+  qué se hace con el video que no nombra lugar o que nombra uno de fuera:
+
+  | veredicto del gacetero | `regional` | `nacional` | `internacional` |
+  |---|---|---|---|
+  | una zona del producto | esa zona | esa zona | esa zona |
+  | Baja California a secas | `estatal` | `estatal` | `estatal` |
+  | un lugar mexicano de fuera | se descarta, y se cuenta en `salud[].fuera` | `nacional` | `nacional` |
+  | ningún lugar | `nacional` | `nacional` | **`internacional`** |
+
+  `internacional` es la única zona que no está en `ZONAS` de
+  `pulso/__init__.py`: solo existe en TikTok, solo como residuo de la edición
+  del mundo, y no entra a `ZONAS_DE_CONTEO` porque en temas, conversación e
+  Instagram no significa nada. Como `nacional`, no tiene página de zona y solo
+  se ve en la vista de región. Y como `nacional`, la cubeta la da la **edición**
+  de la búsqueda, no una verificación de que el video sea del extranjero: es el
+  mismo trato que `/api/actualidad` le da a la sección «Mundo» de Google
+  Noticias.
 - **`ventana_horas: 24`**, medida sobre `publicado` (fecha-hora ISO en UTC,
   mismo formato que `generado`); `fecha` es su día y solo sirve para agrupar.
   Desde el 10 de septiembre de 2026 Instagram mide igual; `ventana_dias` solo
@@ -1073,6 +1098,7 @@ cambia, y por qué:
    "url": "https://www.tiktok.com/@tjnoticias/video/7301",
    "cuenta": "tk_tijuana_noticias",
    "creador": "@tjnoticias",
+   "alcance": "zona",
    "zona": "Tijuana",
    "publicado": "2026-09-08T10:00:00+00:00",
    "fecha": "2026-09-08",
@@ -1117,8 +1143,22 @@ más solo con likes, menciones enmascaradas, sin id ni usuario.
 
 Búsquedas, no cuentas: `busquedas[]` con `id` (`^tk_[a-z0-9_]{2,20}$`),
 `nombre`, `consulta`, `idioma`, `activo`, `verificado` (fecha del `--probar`,
-informativa) y `nota`. **`zona` es error**, por la misma razón que en
-`config/busquedas.json`. `cosecha` trae `videos_por_busqueda`,
+informativa), `ambito` opcional (`regional | nacional | internacional`; si
+falta, `regional`) y `nota`. **`zona` es error**, por la misma razón que en
+`config/busquedas.json`, y `ambito` no es la puerta de atrás a eso: no acredita
+lugar a nadie, solo decide el residuo (ver `data/tiktok.json` arriba).
+
+Once búsquedas desde el 15 de septiembre de 2026, **ocho activas**. Tecate, San
+Felipe y San Quintín están apagadas con la razón escrita en su fila: se
+probaron de verdad y no devuelven noticia sino falsos positivos —un incendio en
+Apodaca, Nuevo León, zonificado como Tecate porque el pie decía «Tecate Six»;
+una carrera de un club de Manhattan zonificada como San Felipe—. Un falso
+positivo con cara de cobertura es peor que un hueco rotulado. `presupuesto_resultados`
+está calculado sobre las **once** filas y no sobre las ocho activas, a
+propósito: así encender una apagada no recorta los comentarios de las demás en
+silencio, que es como falla `reparto - posts`.
+
+`cosecha` trae `videos_por_busqueda`,
 `comentarios_por_video`, `dias_entre_cosechas`, `ventana_horas`,
 `filtro_fecha` (uno de `ALL_TIME | PAST_24_HOURS | PAST_WEEK | PAST_MONTH |
 LAST_3_MONTHS | LAST_6_MONTHS`), `orden` (`MOST_RELEVANT | MOST_LIKED | LATEST`)
@@ -1128,10 +1168,22 @@ su propio `Presupuesto`. Lo valida `validar_tiktok_config`.
 ### `config/instagram.json`
 
 Una cuenta se cosecha solo si tiene `activo` **y** `verificado` en `true`.
-Las trece activas se sondearon con `--sondear` —diez el 8 de septiembre de
-2026 y tres el 10, pedidas por el cliente ese día— y cada `razon` cita los
-números del sondeo; `canal66_ig` (Mexicali) y `sanquintin_ig`
-son huecos registrados a propósito, sin handle. Los handles derivados del
+Las veintisiete activas se sondearon con `--sondear` —diez el 8 de septiembre
+de 2026, tres el 10 y catorce el 15, pedidas por el cliente ese día— y cada
+`razon` cita los números del sondeo. Con la tanda del 15 el catálogo deja de
+ser de Tijuana: cubre Tijuana, Mexicali, Ensenada, Tecate, San Diego y
+`nacional`, y `sanquintin_ig` es el único hueco que queda, sin handle.
+`canal66_ig` era el otro y se cerró ese día con `@canal66tv`, conservando su
+`id`.
+
+La zona de una cuenta es **su sede declarada**, no el veredicto de un gacetero:
+a diferencia de TikTok, Instagram no consulta `pulso/zonas.py`, así que lo que
+diga esta fila se le estampa a cada comentario y a cada post de la cuenta sin
+corrección posible. Por eso varias filas llevan escrita la instrucción de a qué
+zona pasar si su conversación desmiente la bio, y por eso `@svnnoticias` —viva,
+con 31 mil seguidores, pedida por el cliente— quedó en `senuelos`: es «Sonora
+Visión Noticias», y nada habría descartado sus comentarios de Hermosillo. Los
+handles derivados del
 nombre del medio que fallaron están en `senuelos`. Es la misma trampa que
 documenta la sección `senuelos` de `config/canales.json` —el handle obvio de
 Uniradio es un canal muerto desde 2016— con un agravante: un handle

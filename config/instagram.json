@@ -1,5 +1,5 @@
 {
- "nota": "Cuentas públicas de Instagram de las que se cosechan comentarios, vía Apify y sin sesión. Una cuenta corre solo si tiene `activo` Y `verificado` en true. Los handles de abajo se sondearon de verdad con `python -m pulso redes --sondear` —diez el 8 de septiembre de 2026 y tres más el 10, pedidas por el cliente ese día—, y los que no resistieron están en `senuelos` con el número que los delató.",
+ "nota": "Cuentas públicas de Instagram de las que se cosechan comentarios, vía Apify y sin sesión. Una cuenta corre solo si tiene `activo` Y `verificado` en true. Los handles de abajo se sondearon de verdad con `python -m pulso redes --sondear` —diez el 8 de septiembre de 2026, tres más el 10 y catorce más el 15, todas pedidas por el cliente ese día—, y los que no resistieron están en `senuelos` con el número que los delató. Con la tanda del 15 el catálogo deja de ser de Tijuana: cubre Tijuana, Mexicali, Ensenada, Tecate, San Diego y `nacional`, y el único hueco que queda es San Quintín. Cuidado con una asimetría que no se ve desde aquí: a diferencia de TikTok, en Instagram la zona NO sale del gacetero sino de esta fila, y se le estampa a cada comentario y a cada post de la cuenta sin corrección posible. Por eso varias filas llevan escrita la instrucción de a qué zona pasar si su conversación desmiente la bio.",
 
  "aviso_verificacion": "No enciendas un handle sin sondearlo. Adivinarlo a partir del nombre del medio falla, y falla en silencio: de los seis handles derivados que traía este archivo, CINCO estaban mal. Tres eran cuentas ocupadas con 0 publicaciones, y una era un portal de Tocantins, Brasil. Ninguno habría dado error al cosechar. Dos de los handles buenos (@zeta.tijuana, @afntijuana2) no se adivinan de ninguna forma razonable: salieron del sitio web del propio medio.",
 
@@ -159,14 +159,157 @@
   },
   {
    "id": "canal66_ig",
-   "handle": null,
-   "nombre": "Mexicali — sin cuenta encontrada",
+   "handle": "@canal66tv",
+   "nombre": "Canal 66",
    "medio": null,
    "zona": "Mexicali",
    "idioma": "es",
-   "activo": false,
-   "verificado": false,
-   "razon": "Registro deliberado de un hueco. @canal66 está ocupada (13 seguidores, 0 posts) y @canal66mexicali no existe. Mexicali queda sin cobertura en redes mientras no se encuentre la cuenta buena; el panel tiene que decir «sin dato», nunca 0."
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-15: 163,330 seguidores, 8,311 posts, bio \u00abCanal 66, el Canal de las Noticias, l\u00edder en la televisi\u00f3n regional de Baja California\u00bb. Cierra el hueco que esta misma fila registraba desde el 8 de septiembre de 2026: @canal66 est\u00e1 ocupada (13 seguidores, 0 posts) y @canal66mexicali no existe; el handle bueno lleva \u00abtv\u00bb al final y los dos se\u00f1uelos siguen abajo. El repo ya lo sab\u00eda sin notarlo: la sonda de TikTok del 8 de septiembre trajo un video de @canal66tv hablando de Tijuana. Vigilar, como @frontera: la bio dice \u00abBaja California\u00bb y no Mexicali, as\u00ed que si sus comentarios empiezan a nombrar Tijuana o Ensenada esta zona pasa a `estatal`."
+  },
+  {
+   "id": "noticiasmxl_ig",
+   "handle": "@noticiasmxl",
+   "nombre": "Noticias Mexicali",
+   "medio": null,
+   "zona": "Mexicali",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-15: 21,428 seguidores, 3,027 posts, bio \u00abLas noticias m\u00e1s relevantes en Mexicali\u00bb. Pedida por el cliente el 15 de septiembre de 2026. Medio digital nativo de redes, sin equivalente en config/medios.json."
+  },
+  {
+   "id": "capitalmxl_ig",
+   "handle": "@capitalmexicali",
+   "nombre": "Capital Mexicali",
+   "medio": null,
+   "zona": "Mexicali",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-15: 40,829 seguidores, 2,051 posts, bio \u00abSomos un medio de comunicaci\u00f3n que te mantendr\u00e1 al tanto de todo lo que ocurre en la ciudad de #Mexicali\u00bb. Pedida por el cliente el 15 de septiembre de 2026. Sin equivalente en config/medios.json."
+  },
+  {
+   "id": "lavoz_ig",
+   "handle": "@lavozfrontera",
+   "nombre": "La Voz de la Frontera",
+   "medio": "lavoz",
+   "zona": "Mexicali",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-15: 38,428 seguidores, 10,621 posts, bio \u00abInformando a Baja California desde 1964. Perteneciente a la Organizaci\u00f3n Editorial Mexicana\u00bb. Pedida por el cliente el 15 de septiembre de 2026. Es la cuenta del medio `lavoz`, que config/medios.json ya sit\u00faa en Mexicali: la zona de esta fila no lo contradice aunque la bio diga \u00abBaja California\u00bb. Misma OEM que `soltij_ig`, el grupo que hace que Google Noticias etiquete sus notas como oem.com.mx (ver pulso/busquedas.py)."
+  },
+  {
+   "id": "mexicali686_ig",
+   "handle": "@mexicali686",
+   "nombre": "Mexicali 686",
+   "medio": null,
+   "zona": "Mexicali",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-15: 134,997 seguidores, 10,928 posts, bio \u00abM\u00c1S DE 15 A\u00d1OS MOSTRANDO LO MEJOR \u00b7 Lugares | Cultura | Comida | Eventos\u00bb. Pedida por el cliente el 15 de septiembre de 2026. Trae la misma salvedad escrita que `tjpublica_ig` y `yoamotijuana_ig`: NO es un medio de noticias sino una revista de ciudad, as\u00ed que su conversaci\u00f3n no es comparable con la de un diario. El 686 del nombre es la lada de Mexicali."
+  },
+  {
+   "id": "elensenadense_ig",
+   "handle": "@el.ensenadense",
+   "nombre": "El Ensenadense",
+   "medio": null,
+   "zona": "Ensenada",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-15: 7,304 seguidores, 2,713 posts, bio \u00abNoticias frescas desde Ensenada. Cobertura local con veracidad y cercan\u00eda. Miembro de Grupo Saxum\u00bb. Pedida por el cliente el 15 de septiembre de 2026. El handle lleva PUNTO, como @zeta.tijuana y @el.tijuanense, y no se adivina. Sin equivalente en config/medios.json."
+  },
+  {
+   "id": "notiens_ig",
+   "handle": "@noticiasensenada",
+   "nombre": "Noticias Ensenada",
+   "medio": "notiens",
+   "zona": "Ensenada",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-15: 24,717 seguidores, 3,497 posts, bio \u00abEl portal de noticias de la ciudad de Ensenada\u00bb. Pedida por el cliente el 15 de septiembre de 2026. Es la cuenta del medio `notiens`, que config/medios.json ya trae con zona Ensenada."
+  },
+  {
+   "id": "ensenadadigna_ig",
+   "handle": "@ensenada.digna",
+   "nombre": "Ensenada Digna",
+   "medio": null,
+   "zona": "Ensenada",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-15: 5,780 seguidores, 125 posts, bio \u00abEn defensa de nuestro mar, nuestra ciudad, nuestra gente\u00bb. Pedida por el cliente el 15 de septiembre de 2026. Salvedad escrita antes de que sorprenda: NO es un medio, es una cuenta de causa \u2014la bio es una consigna, no una cabecera\u2014 y 125 publicaciones es el cat\u00e1logo m\u00e1s chico del archivo. Su conversaci\u00f3n no es comparable con la de un diario ni con la de una revista de ciudad: es la de una campa\u00f1a. Se enciende porque el cliente la pidi\u00f3 y porque Ensenada tiene poca cobertura; si resulta ser convocatoria y no noticia, se apaga."
+  },
+  {
+   "id": "radartecate_ig",
+   "handle": "@radartecate",
+   "nombre": "Radar Tecate",
+   "medio": null,
+   "zona": "Tecate",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-15: 2,997 seguidores, 1,418 posts, bio \u00abDesde 1997\u00bb. Pedida por el cliente el 15 de septiembre de 2026. Es la \u00danica cobertura de Tecate en redes. `medio` queda en null a prop\u00f3sito: config/medios.json trae `radarbc` (Radar BC, Ensenada) y `tecate` (Tecate Noticias), y el sondeo no confirma que Radar Tecate sea el mismo emisor que ninguno de los dos."
+  },
+  {
+   "id": "univisionsd_ig",
+   "handle": "@noticiasunivisionsd",
+   "nombre": "Noticias Univision San Diego",
+   "medio": null,
+   "zona": "San Diego",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-15: 88,473 seguidores, 11,066 posts, bio \u00ab\u00a1Ent\u00e9rate de las noticias m\u00e1s importantes de San Diego y tu comunidad!\u00bb. Pedida por el cliente el 15 de septiembre de 2026. Marcada `es` porque la bio y la emisi\u00f3n son en espa\u00f1ol: es la excepci\u00f3n a los cuatro medios de San Diego de config/medios.json, que son todos `en` y por eso quedan sin postura. Sin equivalente en ese cat\u00e1logo."
+  },
+  {
+   "id": "ksdy50_ig",
+   "handle": "@ksdy50tv",
+   "nombre": "KSDY50 San Diego",
+   "medio": null,
+   "zona": "San Diego",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-15: 61,900 seguidores, 26,459 posts, bio \u00abNoticias y entretenimiento para las comunidades de San Diego, Tijuana y el mundo\u00bb. Pedida por el cliente el 15 de septiembre de 2026. Marcada `es` por la bio y la emisi\u00f3n. OJO: el primer sondeo del d\u00eda la reprob\u00f3 con \u00abno_existe\u00bb porque el actor devolvi\u00f3 username, seguidores y posts en nulo; el segundo, sobre el mismo handle, la trajo entera. Es el tropiezo que instagram.sondear() ya documenta para @zeta.tijuana: ante un nulo se vuelve a sondear antes de descartar. Salvedad, como `tjpublica_ig`: la bio declara los dos lados de la frontera, as\u00ed que puede publicar en ingl\u00e9s, y si aparece el modelo de tono lo etiquetar\u00eda igual sin avisar. Ya hab\u00eda salido como creador en la sonda de TikTok del 8 de septiembre de 2026."
+  },
+  {
+   "id": "sd619_ig",
+   "handle": "@619newsmedia",
+   "nombre": "619 News Media",
+   "medio": null,
+   "zona": "San Diego",
+   "idioma": "en",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-15: 200,426 seguidores, 4,180 posts, bio \u00abSan Diego Breaking News / Partnered With @sideotv. Have a news tip?\u00bb. Pedida por el cliente el 15 de septiembre de 2026. Es la cuenta m\u00e1s grande del lado estadounidense. Marcada `en`: su postura queda en null y el conteo entra a `sin_modelo_idioma`, igual que los cuatro medios de San Diego del muro. Segunda salvedad: la bio incluye publicidad legal (\u00abInjured? Need legal help?\u00bb), as\u00ed que parte de lo que publica no es periodismo."
+  },
+  {
+   "id": "elmexicano_ig",
+   "handle": "@mx.elmexicano",
+   "nombre": "El Mexicano",
+   "medio": null,
+   "zona": "nacional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-15: 122,390 seguidores, 20,167 posts, bio \u00abEMX | Peri\u00f3dico El Mexicano \u00b7 El Mexicano.mx es un diario comprometido con la sociedad, con sus trabajadores y sobre todo con la verdad\u00bb. Pedida por el cliente el 15 de septiembre de 2026 dentro del grupo \u00abM\u00e9xico\u00bb, y va `nacional` por decisi\u00f3n suya. Lo que el sondeo NO confirma: la bio no nombra regi\u00f3n alguna, y El Mexicano es un diario con ediciones en Baja California. `nacional` solo se ve en la vista de regi\u00f3n y nunca en una p\u00e1gina de zona, as\u00ed que si sus comentarios resultan ser de Tijuana o Ensenada esta zona pasa a `estatal`."
+  },
+  {
+   "id": "lacronica_ig",
+   "handle": "@lacronica",
+   "nombre": "La Cr\u00f3nica",
+   "medio": null,
+   "zona": "nacional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-15: 165,688 seguidores, 53,102 posts, bio \u00abMedio informativo multiplataforma l\u00edder en el Noroeste de M\u00e9xico\u00bb. Pedida por el cliente el 15 de septiembre de 2026 dentro del grupo \u00abM\u00e9xico\u00bb, y va `nacional` por decisi\u00f3n suya. Dos cosas que el sondeo s\u00ed dice y conviene tener escritas: la bio es ID\u00c9NTICA, palabra por palabra, a la de @frontera, que este mismo archivo tiene como Tijuana; y \u00abNoroeste de M\u00e9xico\u00bb es el encuadre que le meti\u00f3 Hermosillo y Sonora al tablero por El Imparcial. Si sus comentarios nombran Mexicali, esta zona pasa a `Mexicali`; si nombran Sonora, se apaga."
   },
   {
    "id": "sanquintin_ig",
@@ -192,6 +335,8 @@
   {"handle": "@elvigia", "porque": "14 seguidores, 0 publicaciones. Ocupado; el real es @elvigiaensenada."},
   {"handle": "@canal66 / @canal66mexicali", "porque": "13 seguidores y 0 posts el primero; el segundo no existe."},
   {"handle": "@cadenanoticias", "porque": "12 seguidores, 2 publicaciones, pese a que la bio dice «el grupo de medios más completo en el noroeste de México». La bio no verifica nada: los números sí."},
+  {"handle": "@svnnoticias", "porque": "NO USAR pese a estar viva: 31,173 seguidores y 29,344 publicaciones, pero es «Sonora Visión Noticias», con bio «te informamos … las noticias más relevantes de SONORA, México y el Mundo». Se pidió el 15 de septiembre de 2026 dentro del grupo «México» y el sondeo la delató. Es el bug de El Imparcial y Hermosillo con otro disfraz, y aquí sale más caro: en Instagram la zona no la da el gacetero sino la fila, así que nada descartaría sus comentarios de Hermosillo, Ciudad Obregón o Navojoa —los tres están en la lista FUERA de pulso/zonas.py— y todos contarían como conversación del corredor. Encenderla es una decisión del cliente, no un descuido que arreglar."},
+  {"handle": "@ksdy50 / @ksdy", "porque": "1 seguidor y 0 publicaciones el primero; 51 y 0 el segundo. Ocupados los dos; el real es @ksdy50tv, que el primer sondeo del 15 de septiembre reprobó con un nulo del actor y el segundo trajo entero."},
   {"handle": "hashtags", "porque": "NO USAR. Un hashtag no lleva zona, por la misma razón que no la lleva una búsqueda (ver pulso/busquedas.py): se la acreditaría a todo comentario que no nombre lugar alguno. Y en Instagram un hashtag local arrastra cuentas de viaje y de venta que no son conversación de residentes."}
  ]
 }

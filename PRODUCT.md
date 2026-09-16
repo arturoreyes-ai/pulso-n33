@@ -66,8 +66,8 @@ pendiente; la decisión es del cliente y queda registrada en `docs/PLAN.md`.
 | San Diego, valor catastral | funcionando | SANDAG, mediana por ZIP |
 | Conversación (YouTube) | **necesita llave** | canales verificados + hasta 3 búsquedas temáticas por corrida; retención de 30 días |
 | Sentimiento de comentarios | funcionando | modelo local (pysentimiento), publicado como conteos por zona y tema; en YouTube nunca el texto |
-| Redes (Instagram) | **necesita token** | 13 cuentas verificadas una por una (once de noticias y dos revistas de ciudad), sin sesión; los 15 posts con más likes de las últimas 24 horas, con hora exacta, y sus comentarios más votados. El texto va fuera de git (`efimero/`), la identidad no se ingiere |
-| Redes (TikTok) | **necesita token** | búsqueda «tijuana noticias», relevancia, últimas 24 h, sin sesión; la zona sale del pie del video, se muestra el @ del creador y nunca quien comenta. Mismo canal fuera de git para el texto |
+| Redes (Instagram) | **necesita token** | 27 cuentas verificadas una por una, sin sesión, en Tijuana, Mexicali, Ensenada, Tecate, San Diego y `nacional`; los 15 posts con más likes de las últimas 24 horas por zona, con hora exacta, y sus comentarios más votados. El texto va fuera de git (`efimero/`), la identidad no se ingiere |
+| Redes (TikTok) | **necesita token** | ocho búsquedas encendidas —una por lugar del corredor más México y el mundo—, relevancia, últimas 24 h, sin sesión; la zona sale del pie del video, se muestra el @ del creador y nunca quien comenta. Tres apagadas con la razón escrita. Mismo canal fuera de git para el texto |
 | Redes (X, tendencias) | **necesita token** | lo que X marca como tendencia en Tijuana, Mexicali, San Diego, México y el mundo, leído sin sesión (guest token); nombre, puesto y liga, nunca tuits ni identidad; las promocionadas se descartan y el volumen es «sin dato» donde X no lo publica |
 | Tono de titulares | funcionando | mismo modelo, `--metodo modelo`. Tono de la frase, no postura hacia una persona |
 | Tablero por zona | funcionando | `web/`, Next.js: una página por zona con resumen, indicadores, temas, conversación y muro |
@@ -328,16 +328,33 @@ tal cual, no solo contados. Se hace, con tres límites que no son de estilo:
 En YouTube no cambia nada: ahí el «nunca el texto» sale de una política
 escrita, no de una decisión del cliente.
 
-### TikTok: una búsqueda, no cuentas, y lo que eso obliga
+### TikTok: búsquedas, no cuentas, y lo que eso obliga
 
-La sección de TikTok lee la búsqueda «tijuana noticias» (relevancia, últimas
-24 horas) sin iniciar sesión. Como los videos vienen de cualquier creador, la
-regla de zona es la de las notas de prensa: la da lo que nombra la descripción,
-nunca la consulta. Un video que nombra otra región se descarta; uno que no
-nombra lugar se rotula «sin lugar» y no tiene página de zona.
-Se muestra el @ del creador porque es quien publicó y la liga ya lo trae; quien
-comenta sigue anónimo. TikTok sí publica compartidos y guardados, y aquí
-aparecen como cifras medidas.
+La sección de TikTok lee búsquedas (relevancia, últimas 24 horas) sin iniciar
+sesión: una por lugar del corredor más una de México y una del mundo. Como los
+videos vienen de cualquier creador, la regla de zona es la de las notas de
+prensa: la da lo que nombra la descripción, nunca la consulta. Se muestra el @
+del creador porque es quien publicó y la liga ya lo trae; quien comenta sigue
+anónimo. TikTok sí publica compartidos y guardados, y aquí aparecen como
+cifras medidas.
+
+Lo que cambia entre una búsqueda del corredor y las dos nuevas es **solo el
+residuo**, nunca la zona de un video cuya descripción nombra un lugar. En una
+búsqueda del corredor, un video de otra región se descarta; en la de México se
+conserva y se rotula «fuera del corredor», porque es justo lo que esa lista va
+a buscar. Un video que no nombra lugar alguno se rotula «sin lugar», y en la
+lista del mundo va a «Mundo». Ninguna de las dos tiene página de zona: se ven
+en la vista de región, detrás de su propia pastilla, y la página lo dice —
+«Mundo» agrupa lo que no nombra ningún lugar de la región, no es una
+comprobación de que el video sea del extranjero.
+
+**Tres lugares no tienen búsqueda, y eso está escrito, no omitido.** Tecate,
+San Felipe y San Quintín se probaron el 15 de septiembre de 2026 y no devuelven
+noticia: «tecate» es cerveza antes que municipio —un incendio en Apodaca,
+Nuevo León, entró como Tecate— y «san felipe» es topónimo de media
+república. Un falso positivo con cara de cobertura es peor que un hueco
+rotulado. Tecate sí tiene prensa y cuenta de Instagram; San Quintín sigue
+siendo la zona sin cobertura que este documento declara desde el principio.
 
 ### X: tendencias, sin sesión y sin tuits
 

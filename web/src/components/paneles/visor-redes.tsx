@@ -99,9 +99,22 @@ function Recorrido({ publicaciones, cortes, completo, memoria }: {
 const RED_NOMBRE: Record<RedVisual, string> = { instagram: "Instagram", tiktok: "TikTok" };
 
 /** Instagram: la zona es la sede de la cuenta («desde»). TikTok: la zona sale
- *  del texto del video («sobre»). Una preposicion cada una, sin oracion. */
+ *  del texto del video («sobre»). Una preposicion cada una, sin oracion.
+ *
+ *  `fuera` y `nacional` son los dos residuos y NO son lo mismo: uno nombro un
+ *  lugar que este tablero no cubre y el otro no nombro ninguno. El alcance los
+ *  separa; un corte anterior al 15 de septiembre de 2026 no lo trae y los dos
+ *  caen en «un lugar sin precisar», que es lo que se decia antes. */
 function lugar(fila: PublicacionVisual): string {
-  const nombre = NOMBRE_CORTO[fila.post.zona as ZonaRuta] ?? (fila.post.zona === "estatal" ? "Baja California" : "un lugar sin precisar");
+  const { zona, alcance } = fila.post;
+  const nombre = NOMBRE_CORTO[zona as ZonaRuta]
+    ?? (zona === "estatal"
+      ? "Baja California"
+      : zona === "internacional"
+        ? "el mundo"
+        : alcance === "fuera"
+          ? "un lugar fuera del corredor"
+          : "un lugar sin precisar");
   return `${fila.red === "instagram" ? "desde" : "sobre"} ${nombre}`;
 }
 

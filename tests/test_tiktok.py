@@ -103,9 +103,9 @@ class TestIdentidad(BaseCache):
         self.assertEqual(v["creador"], "@tjnoticias")
         self.assertEqual(v["url"], "https://www.tiktok.com/@tjnoticias/video/7301")
         # Del autor no viaja nada mas: ni nickName, ni avatar, ni seguidores.
-        self.assertEqual(sorted(v), ["comentarios", "compartidos", "creador", "cuenta", "fecha",
-                                     "guardados", "likes", "publicado", "reproducciones",
-                                     "tipo", "titulo", "url", "zona"])
+        self.assertEqual(sorted(v), ["alcance", "comentarios", "compartidos", "creador",
+                                     "cuenta", "fecha", "guardados", "likes", "publicado",
+                                     "reproducciones", "tipo", "titulo", "url", "zona"])
 
     def test_las_dos_pasadas_cruzan_por_url_canonica(self):
         # webVideoUrl trae mayusculas y ?lang=es; videoWebUrl no. Sin canonizar,
@@ -141,6 +141,52 @@ class TestLimpiezaVideo(unittest.TestCase):
         # acreditar la zona de la consulta con otro disfraz.
         self.assertEqual(self._limpio(text="Sube el dolar otra vez #noticias")[0]["zona"], "nacional")
         self.assertEqual(self._limpio(text="Baja California estrena ley")[0]["zona"], "estatal")
+
+    def test_el_alcance_viaja_al_lado_de_la_zona(self):
+        # `alcance` es el veredicto crudo del gacetero; `zona` es donde cae
+        # despues del ambito. En una busqueda regional coinciden salvo el
+        # residuo, y aun asi los dos se publican.
+        self.assertEqual(self._limpio()[0]["alcance"], "zona")
+        self.assertEqual(self._limpio(text="Baja California estrena ley")[0]["alcance"],
+                         "estatal")
+        self.assertEqual(self._limpio(text="Sube el dolar otra vez")[0]["alcance"], "nacional")
+
+    def test_la_tabla_de_ambitos(self):
+        """El ambito decide el residuo, NUNCA la zona de un pie que nombra lugar.
+
+        Es la regla entera de pulso/tiktok.py::_zona en una sola prueba: si
+        alguna vez un ambito empieza a mover la primera o la segunda fila, es
+        la acreditacion por consulta que todo el modulo existe para impedir.
+        """
+        pies = {
+            "zona": "Cierran la garita #tijuana",
+            "estatal": "Baja California estrena ley",
+            "fuera": "Balacera en Hermosillo, Sonora",
+            "nacional": "Sube el dolar otra vez",
+        }
+        esperado = {
+            "regional":      {"zona": "Tijuana", "estatal": "estatal",
+                              "fuera": None, "nacional": "nacional"},
+            "nacional":      {"zona": "Tijuana", "estatal": "estatal",
+                              "fuera": "nacional", "nacional": "nacional"},
+            "internacional": {"zona": "Tijuana", "estatal": "estatal",
+                              "fuera": "nacional", "nacional": "internacional"},
+        }
+        for ambito, filas in esperado.items():
+            for alc, zona in filas.items():
+                with self.subTest(ambito=ambito, alcance=alc):
+                    self.assertEqual(tiktok._zona(pies[alc], ambito), (zona, alc))
+
+    def test_el_ambito_llega_desde_la_busqueda_y_omite_regional(self):
+        mundo = dict(BUSQUEDA, ambito="internacional")
+        v, _ = tiktok._limpiar_video(_video(text="Cae un avion en Asturias"), mundo, AHORA)
+        self.assertEqual((v["zona"], v["alcance"]), ("internacional", "nacional"))
+        # Una fila sin el campo se comporta como antes del 15 de septiembre de
+        # 2026: un video de fuera se tira.
+        self.assertNotIn("ambito", BUSQUEDA)
+        self.assertEqual(
+            tiktok._limpiar_video(_video(text="Balacera en Hermosillo"), BUSQUEDA, AHORA)[1],
+            "fuera")
 
     def test_publicado_en_el_formato_de_ahora_y_futuro_fuera(self):
         v, _ = self._limpio()
@@ -295,7 +341,8 @@ class TestProbar(BaseCache):
 class TestValidadorTikTok(unittest.TestCase):
     DESTACADO = {
         "url": "https://www.tiktok.com/@tjnoticias/video/7301", "cuenta": "tk_tijuana_noticias",
-        "creador": "@tjnoticias", "zona": "Tijuana", "publicado": "2026-09-03T10:00:00+00:00",
+        "creador": "@tjnoticias", "zona": "Tijuana", "alcance": "zona",
+        "publicado": "2026-09-03T10:00:00+00:00",
         "fecha": "2026-09-03", "titulo": "Titular", "tipo": "video", "likes": 10,
         "comentarios": 5, "compartidos": 2, "guardados": 1, "cosechados": 2, "opinion": 2,
         "sentimiento": {"positivo": 1, "negativo": 1, "neutral": 0, "sin_clasificar": 0,
@@ -361,6 +408,60 @@ class TestValidadorTikTok(unittest.TestCase):
         d = dict(TD.CON); d["destacados"] = [dict(TD.DESTACADO, compartidos=3)]
         self.assertTrue(any("no existe en instagram" in x for x in validar_redes(d)[0]))
 
+    def test_alcance_y_zona_tienen_que_cuadrar(self):
+        """Un cruce mal hecho aqui es la acreditacion por consulta disfrazada."""
+        e, _ = validar_redes(self._con(alcance="mundial"), plataforma="tiktok")
+        self.assertTrue(any("'alcance' debe ser" in x for x in e))
+        # El pie nombro un lugar del producto: la zona tiene que ser uno.
+        e, _ = validar_redes(self._con(alcance="zona", zona="nacional"), plataforma="tiktok")
+        self.assertTrue(any("alcance 'zona' con zona" in x for x in e))
+        # Un lugar de fuera solo sobrevive como `nacional`, y solo fuera de una
+        # busqueda regional. Nunca como una zona del corredor.
+        e, _ = validar_redes(self._con(alcance="fuera"), plataforma="tiktok")
+        self.assertTrue(any("alcance 'fuera' con zona" in x for x in e))
+        # El gacetero no nombro lugar: ninguna zona se le puede acreditar.
+        e, _ = validar_redes(self._con(alcance="nacional", zona="Mexicali"), plataforma="tiktok")
+        self.assertTrue(any("ninguna zona se le puede acreditar" in x for x in e))
+
+    def test_internacional_es_zona_de_tiktok_y_no_de_instagram(self):
+        d = self._con(zona="internacional", alcance="nacional")
+        self.assertEqual(validar_redes(d, plataforma="tiktok")[0], [])
+        # `internacional` es residuo de la edicion del mundo; una CUENTA de
+        # Instagram no puede tenerlo, porque su zona es una sede declarada.
+        from tests.test_instagram import TestValidadorDestacados as TD
+        d = dict(TD.CON); d["destacados"] = [dict(TD.DESTACADO, zona="internacional")]
+        self.assertTrue(any("zona desconocida" in x for x in validar_redes(d)[0]))
+
+    def test_alcance_no_aplica_a_instagram_y_faltar_solo_avisa(self):
+        from tests.test_instagram import TestValidadorDestacados as TD
+        d = dict(TD.CON); d["destacados"] = [dict(TD.DESTACADO, alcance="zona")]
+        self.assertTrue(any("'alcance' no aplica" in x for x in validar_redes(d)[0]))
+        # Un corte anterior al campo sigue siendo valido: data/ lo escribe el
+        # bot y el cron lo regenera. Mismo trato que `ventana_legado`.
+        d = self._con(); del d["destacados"][0]["alcance"]
+        e, a = validar_redes(d, plataforma="tiktok")
+        self.assertEqual(e, [])
+        self.assertTrue(any("anteriores al campo 'alcance'" in x for x in a))
+
+    def test_config_ambito_es_un_enum_y_no_sustituye_a_zona(self):
+        from pulso.validador import validar_tiktok_config
+        base = {"nota": "x", "cosecha": {"videos_por_busqueda": 15, "comentarios_por_video": 20,
+                                         "dias_entre_cosechas": 3, "ventana_horas": 24,
+                                         "filtro_fecha": "PAST_24_HOURS",
+                                         "presupuesto_resultados": 3600},
+                "busquedas": [{"id": "tk_xx", "nombre": "x", "consulta": "x", "idioma": "es",
+                               "activo": True, "nota": "x"}]}
+        for bueno in tiktok.AMBITOS:
+            b = dict(base); b["busquedas"] = [dict(base["busquedas"][0], ambito=bueno)]
+            with self.subTest(ambito=bueno):
+                self.assertEqual(validar_tiktok_config(b)[0], [])
+        b = dict(base); b["busquedas"] = [dict(base["busquedas"][0], ambito="mundial")]
+        self.assertTrue(any("'ambito'" in x for x in validar_tiktok_config(b)[0]))
+        # Tener ambito NO habilita zona: es la puerta de atras que hay que cerrar.
+        b = dict(base)
+        b["busquedas"] = [dict(base["busquedas"][0], ambito="nacional", zona="Tijuana")]
+        self.assertTrue(any("no lleva 'zona'" in x for x in validar_tiktok_config(b)[0]))
+
     def test_url_ajena_e_identidad_de_tiktok_son_error(self):
         e, _ = validar_redes(self._con(url="https://www.instagram.com/p/x/"), plataforma="tiktok")
         self.assertTrue(any("debe empezar con https://www.tiktok.com/" in x for x in e))
@@ -403,6 +504,36 @@ class TestConfigReal(unittest.TestCase):
 
     def test_el_filtro_de_fecha_es_uno_del_actor(self):
         self.assertIn(self.cfg["cosecha"]["filtro_fecha"], tiktok.FILTROS_FECHA)
+
+    def test_el_ambito_de_cada_busqueda_es_uno_de_los_tres(self):
+        for b in self.cfg["busquedas"]:
+            with self.subTest(busqueda=b["id"]):
+                self.assertIn(b.get("ambito", tiktok.AMBITO), tiktok.AMBITOS)
+
+    def test_una_busqueda_apagada_dice_por_que(self):
+        """Apagar es un registro deliberado, no un pendiente: lleva razon.
+
+        Tecate, San Felipe y San Quintin se probaron de verdad el 15 de
+        septiembre de 2026 y no devolvieron noticia sino falsos positivos --
+        un incendio en Apodaca zonificado como Tecate, una carrera en
+        Manhattan como San Felipe. Es el mismo patron que `sanquintin` en
+        config/medios.json: se registra el hueco con el numero que lo delato.
+        """
+        for b in self.cfg["busquedas"]:
+            if not b["activo"]:
+                with self.subTest(busqueda=b["id"]):
+                    self.assertIn("APAGADA", b["nota"])
+
+    def test_el_tope_alcanza_para_todas_las_filas_no_solo_las_activas(self):
+        """`reparto - posts` recorta la pasada de comentarios EN SILENCIO.
+
+        Por eso el tope se calcula sobre TODAS las busquedas y no sobre las
+        activas: encender una apagada no debe recortar a las demas sin aviso.
+        """
+        c = self.cfg["cosecha"]
+        por_busqueda = c["videos_por_busqueda"] * (1 + c["comentarios_por_video"])
+        self.assertGreaterEqual(c["presupuesto_resultados"],
+                                por_busqueda * len(self.cfg["busquedas"]))
 
 
 if __name__ == "__main__":

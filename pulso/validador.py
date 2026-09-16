@@ -1065,6 +1065,22 @@ CLAVES_PROHIBIDAS_TIKTOK = frozenset(
 # Es la unica identidad que cruza a data/, y solo en esa plataforma.
 RE_CREADOR = re.compile(r"^@[A-Za-z0-9_.]{2,24}$")
 
+# Veredicto crudo del gacetero sobre el pie del video. Se publica AL LADO de la
+# zona, no en su lugar, desde que existen los ambitos (15 de septiembre de
+# 2026): en una busqueda nacional un video de Guadalajara queda
+# `zona: nacional` igual que uno que no nombro lugar alguno, y sin el alcance
+# las dos filas serian la misma. El panel rotula "fuera del corredor" para una
+# y "sin lugar" para la otra. Es la regla de `sin dato` contra `0` aplicada a
+# zonas: dos estados distintos no se colapsan en uno.
+ALCANCES_REDES = ("zona", "estatal", "fuera", "nacional")
+# Las ocho del producto, sin `estatal`: lo que puede significar alcance "zona".
+ZONAS_MUNICIPALES = tuple(z for z in ZONAS if z != "estatal")
+# `internacional` solo existe en TikTok, y solo como residuo de la edicion del
+# mundo. NO entra a ZONAS_DE_CONTEO, que la usan temas, conversacion y el
+# propio Instagram: ahi no significa nada y ampliarla la dejaria pasar.
+ZONAS_REDES_TIKTOK = ZONAS_DE_CONTEO + ("internacional",)
+AMBITOS_TIKTOK = ("regional", "nacional", "internacional")
+
 # Lo que cambia entre plataformas en redes.json y su archivo de texto. Todo
 # lo demas -- conteos, orden, sentimiento, prohibiciones de texto -- es igual.
 PLATAFORMAS_REDES = {
@@ -1080,6 +1096,10 @@ PLATAFORMAS_REDES = {
         "prohibidas": frozenset(),
         # Instagram no publica compartidos ni guardados: su ausencia es "sin dato".
         "cifras": (),
+        # La zona de una cuenta es su sede declarada, no el veredicto de un
+        # gacetero: aqui no hay alcance que publicar, y `internacional` no existe.
+        "alcance": False,
+        "zonas": ZONAS_DE_CONTEO,
         "modulo": "pulso/instagram.py:_limpiar",
     },
     "tiktok": {
@@ -1091,6 +1111,8 @@ PLATAFORMAS_REDES = {
         "prohibidas": CLAVES_PROHIBIDAS_TIKTOK,
         # TikTok si los publica: un 0 es cero medido, y faltar es error.
         "cifras": ("compartidos", "guardados"),
+        "alcance": True,
+        "zonas": ZONAS_REDES_TIKTOK,
         "modulo": "pulso/tiktok.py:_limpiar_comentario",
     },
 }
@@ -1152,12 +1174,18 @@ def validar_tiktok_config(datos):
             errores.append("{}: idioma {!r} desconocido".format(et, b.get("idioma")))
         if not isinstance(b.get("activo"), bool):
             errores.append("{}: 'activo' debe ser booleano".format(et))
+        if "ambito" in b and b.get("ambito") not in AMBITOS_TIKTOK:
+            errores.append("{}: 'ambito' {!r} desconocido; se espera {}".format(
+                et, b.get("ambito"), "|".join(AMBITOS_TIKTOK)))
         if "zona" in b:
             # Misma regla que config/busquedas.json: una consulta le acreditaria
             # su zona a todo video que no nombre lugar alguno. La zona sale del
-            # pie del video, con el gacetero.
+            # pie del video, con el gacetero. `ambito` NO es la puerta de atras
+            # a esto: no acredita lugar a nadie, solo decide que hacer con el
+            # residuo -- el video que no nombra lugar, o que nombra uno de fuera.
             errores.append("{}: una busqueda no lleva 'zona'; la zona de cada video sale "
-                           "de lo que nombra su pie (pulso/zonas.py)".format(et))
+                           "de lo que nombra su pie (pulso/zonas.py). 'ambito' tampoco es "
+                           "una zona: solo decide el residuo".format(et))
     if not any(isinstance(b, dict) and b.get("activo") for b in busquedas):
         avisos.append("tiktok: ninguna busqueda activa; el panel va a salir vacio")
     return errores, avisos
@@ -1216,7 +1244,7 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
             conocidas.add(c["cuenta"])
             if not _texto(c.get("nombre")):
                 errores.append("redes.cuentas[{}]: falta 'nombre'".format(c["cuenta"]))
-            if c.get("zona") not in ZONAS_DE_CONTEO:
+            if c.get("zona") not in esp["zonas"]:
                 errores.append("redes.cuentas[{}]: zona desconocida ({!r})".format(
                     c["cuenta"], c.get("zona")))
             if not isinstance(c.get("activa"), bool):
@@ -1241,6 +1269,7 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
         desde_dt = generado_dt - timedelta(hours=ventana)
 
     urls, por_zona = [], {}
+    sin_alcance = 0
     for i, d in enumerate(lista):
         eti = "{}[{}]".format(et, i)
         if not isinstance(d, dict):
@@ -1263,9 +1292,42 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
         elif "creador" in d:
             errores.append("{}: 'creador' no se publica en {}; la fuente es la cuenta".format(
                 eti, plataforma))
+        # `alcance` es el veredicto del gacetero y `zona` es donde cae despues de
+        # aplicar el ambito de la busqueda. Los dos se emiten y tienen que cuadrar:
+        # un cruce mal hecho aqui es exactamente la acreditacion por consulta que
+        # todo el modulo existe para impedir, y no da error en ninguna otra parte.
+        alc = d.get("alcance")
+        if esp["alcance"]:
+            # Un corte anterior al campo sigue siendo valido, con aviso y una sola
+            # vez al final: es el mismo trato que `ventana_legado`, y por la misma
+            # razon -- data/ lo escribe el bot y no se edita a mano para callar un
+            # aviso. El cron lo regenera y el campo aparece solo.
+            if "alcance" not in d:
+                sin_alcance += 1
+            elif alc not in ALCANCES_REDES:
+                errores.append("{}: 'alcance' debe ser {} ({!r})".format(
+                    eti, "|".join(ALCANCES_REDES), alc))
+            else:
+                z = d.get("zona")
+                if alc == "zona" and z not in ZONAS_MUNICIPALES:
+                    errores.append("{}: alcance 'zona' con zona {!r}; el pie nombro un "
+                                   "lugar del producto y la zona tiene que serlo".format(eti, z))
+                elif alc == "estatal" and z != "estatal":
+                    errores.append("{}: alcance 'estatal' con zona {!r}".format(eti, z))
+                elif alc == "fuera" and z != "nacional":
+                    errores.append("{}: alcance 'fuera' con zona {!r}; un lugar de fuera solo "
+                                   "sobrevive como 'nacional', y solo si la busqueda no es "
+                                   "regional".format(eti, z))
+                elif alc == "nacional" and z not in ("nacional", "internacional"):
+                    errores.append("{}: alcance 'nacional' con zona {!r}; el gacetero no nombro "
+                                   "lugar, asi que ninguna zona se le puede acreditar".format(
+                                       eti, z))
+        elif "alcance" in d:
+            errores.append("{}: 'alcance' no aplica a {}; la zona es la sede declarada de la "
+                           "cuenta y no el veredicto de un gacetero".format(eti, plataforma))
         if conocidas and d.get("cuenta") not in conocidas:
             errores.append("{}: cuenta {!r} no esta en 'cuentas'".format(eti, d.get("cuenta")))
-        if d.get("zona") not in ZONAS_DE_CONTEO:
+        if d.get("zona") not in esp["zonas"]:
             errores.append("{}: zona desconocida ({!r})".format(eti, d.get("zona")))
         else:
             por_zona[d["zona"]] = por_zona.get(d["zona"], 0) + 1
@@ -1352,6 +1414,10 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
             if claves != sorted(claves):
                 errores.append("{}: 'temas' no esta ordenado".format(eti))
 
+    if sin_alcance:
+        avisos.append("redes: {} destacado(s) anteriores al campo 'alcance' (15 de septiembre "
+                      "de 2026); el panel los rotula por 'zona' hasta que el cron los "
+                      "regenere".format(sin_alcance))
     if len(set(urls)) != len(urls):
         errores.append("redes: 'destacados' repite una url")
     claves = [(-d.get("likes", 0), -d.get("comentarios", 0), d.get("url", ""))
@@ -1517,7 +1583,7 @@ def validar_redes(datos, plataforma="instagram"):
             errores.append("redes: '{}' no esta ordenado por clave".format(campo))
     if isinstance(datos.get("por_zona"), dict):
         for z in datos["por_zona"]:
-            if z not in ZONAS_DE_CONTEO:
+            if z not in esp["zonas"]:
                 errores.append("redes: por_zona con zona desconocida ({!r})".format(z))
     if isinstance(datos.get("por_idioma"), dict):
         for i in datos["por_idioma"]:

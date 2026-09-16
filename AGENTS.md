@@ -111,6 +111,20 @@ counts plus the featured posts (URL, the outlet's caption headline, likes,
 comments, plays), and `pulso/validador.py` still rejects comment text or any
 identity key inside `data/`.
 
+On 15 September 2026 the client added fifteen more accounts and the catalogue
+stopped being a Tijuana catalogue: 27 active across Tijuana, Mexicali,
+Ensenada, Tecate, San Diego and `nacional`, with San Quintín the only gap
+left. Two things that tanda taught, both written into the config: an Instagram
+account's zone is **stamped from its row with no correction** — unlike TikTok,
+this module never consults the gazetteer — so several rows carry a standing
+instruction about which zone to move to if their conversation contradicts their
+bio; and `@svnnoticias`, requested by the client and alive with 31k followers,
+went to `senuelos` because the probe showed it is "Sonora Visión Noticias".
+Nothing would have discarded its Hermosillo comments. **Probe before enabling**
+is not a formality: `python -m pulso redes --sondear` costs one result per
+handle, and `tests/test_instagram.py` enforces that every verified row's
+`razon` cites it.
+
 On 10 September 2026 the client asked for "the latest 24 hours" of four
 accounts (`@tjnoticias`, `@yoamotijuana`, `@tijuanainforma.mx`,
 `@el.tijuanense`). Since then the Instagram window is **24 hours on
@@ -131,11 +145,41 @@ no share, repost or save counts for other accounts' posts; those are labelled
 ### TikTok is a search, so the zone comes from the caption
 
 `pulso/tiktok.py` (same architecture, shared core in `pulso/redes.py`) reads
-the query "tijuana noticias" over the last 24 hours. A query carries no zone,
-for the same reason a Google News search does not: it would credit Tijuana to
-every video that names no place. Each video's zone comes from
-`zonas.alcance` over its raw caption; out-of-region videos are dropped,
-no-place videos are `nacional`. Two identity rules differ from Instagram, both
+standing queries from `config/tiktok.json` over the last 24 hours — one per
+corridor place plus one for Mexico and one for the world since 15 September
+2026, eleven rows of which eight are on. A query carries no zone, for the same
+reason a Google News search does not: it would credit Tijuana to every video
+that names no place. Each video's zone comes from `zonas.alcance` over its raw
+caption.
+
+**`ambito` decides the residue, never the zone.** It is the one field that
+looks like a way around the rule and is not. When the caption names a place in
+the gazetteer, the caption wins, identically in all three ámbitos. All
+`ambito` changes is what happens to a video that names *no* place, or one
+outside the region:
+
+| gazetteer verdict | `regional` | `nacional` | `internacional` |
+|---|---|---|---|
+| a product zone | that zone | that zone | that zone |
+| Baja California alone | `estatal` | `estatal` | `estatal` |
+| a Mexican place outside BC | dropped | `nacional` | `nacional` |
+| no place at all | `nacional` | `nacional` | `internacional` |
+
+Hence `alcance`, the raw gazetteer verdict, published **beside** `zona` rather
+than instead of it: without it `nacional` would mean both "named no place" and
+"named Guadalajara", and the panel's «sin lugar» label would be false for half
+the rows. `internacional` is the only zone outside `ZONAS`; it lives in
+`PLATAFORMAS_REDES["tiktok"]["zonas"]` and deliberately **not** in
+`ZONAS_DE_CONTEO`, which temas, conversación and Instagram share.
+
+**Three queries are off with the reason written** (Tecate, San Felipe, San
+Quintín). They were probed for real on 15 September 2026 and return false
+positives, not coverage: an Apodaca fire zoned as Tecate because the caption
+said "Tecate Six", a Manhattan running club zoned as San Felipe. A false
+positive wearing the face of coverage is worse than a labelled gap. Do not turn
+them on without a probe that says otherwise, and note that
+`presupuesto_resultados` is sized for all eleven rows precisely so that turning
+one on cannot truncate the others' comment pass in silence. Two identity rules differ from Instagram, both
 decided by the client on 8 September 2026: the **creator's @handle is
 published** (they chose to post; the URL carries it anyway) and the validator
 requires it to match the URL; **commenter identity is never stored**, as

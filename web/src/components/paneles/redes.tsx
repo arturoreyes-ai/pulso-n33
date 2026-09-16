@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { compararPublicaciones, seleccionarPublicaciones } from "@/lib/dominio/publicaciones";
+import { compararPublicaciones, cubetasConFilas, seleccionarPublicaciones } from "@/lib/dominio/publicaciones";
+import type { CubetaRegion } from "@/lib/dominio/publicaciones";
 
 import {
   useRedes,
@@ -21,6 +22,7 @@ import * as F from "@/lib/dominio/frases";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 import { Bisel } from "@/components/ui/bisel";
 import { Esqueleto, Hueco } from "@/components/ui/primitivas";
+import { clasesChip } from "@/components/ui/clases";
 
 /**
  * El panel de redes: los posts con mas likes de la ventana y lo que la gente
@@ -80,7 +82,7 @@ interface Plataforma {
   sinPie: string;
   /** Quien publico: la cuenta del medio (Instagram) o el @ del creador (TikTok). */
   fuente: (d: Destacado, nombres: Map<string, string>) => string;
-  etiquetaZona: (zona: string) => string;
+  etiquetaZona: (zona: string, alcance?: Destacado["alcance"]) => string;
   /** Hay fuente para esta vista. Instagram: una cuenta con sede en la zona;
    *  TikTok: cualquier busqueda activa, porque la zona la da el video. */
   hayFuente: (cuentas: RedesCuenta[], zona: ZonaRuta | null) => boolean;
@@ -93,10 +95,24 @@ interface Plataforma {
 }
 
 /* La zona de un destacado es la sede de la cuenta (Instagram) o lo que nombra
-   el pie (TikTok). `estatal` y `nacional` no tienen ruta y se rotulan. */
+   el pie (TikTok). `estatal`, `nacional` e `internacional` no tienen ruta y se
+   rotulan. */
 function nombreZona(z: string): string {
   return z in NOMBRE_CORTO ? NOMBRE_CORTO[z as ZonaRuta] : z;
 }
+
+/* «de» + articulo, sin el «de el» que nadie escribe. */
+function deL(nombre: string): string {
+  return nombre.startsWith("el ") ? `del ${nombre.slice(3)}` : `de ${nombre}`;
+}
+
+/* Las tres cubetas de la vista de region, con el nombre que ve el lector.
+   «Corredor» no es un tecnicismo: es lo que este tablero mide. */
+const CUBETAS: { id: CubetaRegion; nombre: string; lugar: string }[] = [
+  { id: "corredor", nombre: "Corredor", lugar: "la región" },
+  { id: "mexico", nombre: "México", lugar: "México" },
+  { id: "mundo", nombre: "Mundo", lugar: "el mundo" },
+];
 
 const INSTAGRAM: Plataforma = {
   nombre: "Instagram",
@@ -116,11 +132,11 @@ const INSTAGRAM: Plataforma = {
       : `los últimos ${data.ventana_dias ?? 7} días`,
   cabeza: (v, data) =>
     v.esRegion
-      ? `Los ${numero(v.total)} posts con más likes de ${INSTAGRAM.ventana(data)} en las cuentas de noticias de la región, del más reciente al más antiguo.`
+      ? `Los ${numero(v.total)} posts con más likes de ${INSTAGRAM.ventana(data)} en las cuentas de noticias ${deL(v.nombre)}, del más reciente al más antiguo.`
       : `Los ${numero(v.total)} posts con más likes de ${INSTAGRAM.ventana(data)} en cuentas con sede en ${v.nombre}, del más reciente al más antiguo.`,
   sinFuente: (nombre) =>
     `Sin cuenta de Instagram de un medio con sede en ${nombre}. Es un hueco de cobertura, no un cero.`,
-  sinFilas: (nombre, ventana) => `Sin posts de cuentas con sede en ${nombre} en ${ventana}.`,
+  sinFilas: (nombre, ventana) => `Sin posts de cuentas de ${nombre} en ${ventana}.`,
   sinToken:
     "El panel de Instagram no está disponible en este momento. El resto del tablero funciona igual.",
   pie: "Se publican el pie del medio, las cifras del post y el texto de los comentarios más votados, nunca quién los escribió. Instagram no publica compartidos ni guardados de cuentas ajenas: es «sin dato», no cero.",
@@ -132,18 +148,32 @@ const TIKTOK: Plataforma = {
   usarTextos: useTikTokComentarios,
   unidad: ["video", "videos"],
   sinPie: "Abrir en TikTok",
-  fuente: (d) => d.creador ?? d.cuenta,
-  etiquetaZona: (z) => (z === "nacional" ? "sin lugar" : nombreZona(z)),
+  // Nunca el id de la busqueda: es el mecanismo, y el mecanismo no se
+  // ensena. El validador exige `creador` en TikTok, asi que la rama de la
+  // derecha no deberia darse.
+  fuente: (d) => d.creador ?? "un creador",
+  // La etiqueta sale del ALCANCE, no de la zona, porque desde que hay ambitos
+  // `nacional` significa dos cosas: «el pie no nombro lugar» y «el pie nombro
+  // un lugar de fuera del corredor». Un corte anterior al campo no lo trae y
+  // cae al rotulo viejo.
+  etiquetaZona: (z, alcance) =>
+    alcance === "fuera"
+      ? "fuera del corredor"
+      : z === "internacional"
+        ? "del mundo"
+        : z === "nacional"
+          ? "sin lugar"
+          : nombreZona(z),
   // La busqueda no tiene sede: si esta activa, hay fuente para toda zona, y
   // una zona sin filas es "ningun video la nombro", no "sin cuenta".
   hayFuente: (cuentas) => cuentas.some((c) => c.activa),
   ventana: (data) => `las últimas ${data.ventana_horas ?? 24} horas`,
   cabeza: (v, data) =>
     v.esRegion
-      ? `${numero(v.total)} ${pluralizar(v.total, "video", "videos")} de ${TIKTOK.ventana(data)} que ${pluralizar(v.total, "habla", "hablan")} de la región, del más reciente al más antiguo.`
+      ? `${numero(v.total)} ${pluralizar(v.total, "video", "videos")} de ${TIKTOK.ventana(data)} que ${pluralizar(v.total, "habla", "hablan")} ${deL(v.nombre)}, del más reciente al más antiguo.`
       : `${numero(v.total)} ${pluralizar(v.total, "video", "videos")} de ${TIKTOK.ventana(data)} que ${pluralizar(v.total, "habla", "hablan")} de ${v.nombre}, del más reciente al más antiguo.`,
   sinFuente: () => "Sin videos de TikTok en el tablero. Es un hueco, no un cero.",
-  sinFilas: (nombre, ventana) => `Ningún video habla de ${nombre} en ${ventana}.`,
+  sinFilas: (nombre, ventana) => `Ningún video habla ${deL(nombre)} en ${ventana}.`,
   sinToken:
     "El panel de TikTok no está disponible en este momento. El resto del tablero funciona igual.",
   pie: "Se publican la descripción del video, el @ del creador, las cifras y el texto de los comentarios más votados, nunca quién los escribió. TikTok sí publica compartidos y guardados.",
@@ -180,14 +210,16 @@ function porDia(posts: Destacado[]): Dia[] {
   return dias;
 }
 
-function vistaDeZona(data: DocRedes, zona: ZonaRuta | null, pl: Plataforma): Vista {
+function vistaDeZona(data: DocRedes, zona: ZonaRuta | null, pl: Plataforma,
+                    cubeta: CubetaRegion): Vista {
   const cuentas = data.cuentas ?? [];
   const nombres = new Map(cuentas.map((c) => [c.cuenta, c.nombre] as const));
   // La SELECCION respeta el orden del archivo (por likes); solo despues se
   // reordena por fecha para leer.
-  const elegidos = seleccionarPublicaciones(data, zona);
+  const elegidos = seleccionarPublicaciones(data, zona, cubeta);
+  const lugar = CUBETAS.find((c) => c.id === cubeta)?.lugar ?? "la región";
   return {
-    nombre: zona === null ? "la región" : NOMBRE_CORTO[zona],
+    nombre: zona === null ? lugar : NOMBRE_CORTO[zona],
     esRegion: zona === null,
     dias: porDia(elegidos),
     total: elegidos.length,
@@ -333,7 +365,7 @@ function Post({
               {" · "}
             </>
           )}
-          {pl.fuente(d, nombres)} · {pl.etiquetaZona(d.zona)} · {TIPO[d.tipo]}
+          {pl.fuente(d, nombres)} · {pl.etiquetaZona(d.zona, d.alcance)} · {TIPO[d.tipo]}
         </span>
         <span className="tabular-nums">{cifras.join(" · ")}</span>
       </p>
@@ -473,6 +505,7 @@ function Cabeza({
 function PanelSocial({ zona, pl }: { zona: ZonaRuta | null; pl: Plataforma }) {
   const { data, error } = pl.usarDatos();
   const { data: textos, error: textoError } = pl.usarTextos();
+  const [cubeta, setCubeta] = useState<CubetaRegion>("corredor");
 
   if (error !== undefined) {
     return <p className="text-lectura text-tinta-prosa">No se pudo mostrar {pl.nombre}.</p>;
@@ -480,11 +513,31 @@ function PanelSocial({ zona, pl }: { zona: ZonaRuta | null; pl: Plataforma }) {
   if (data === undefined) return <Esqueleto className="h-[320px]" />;
 
   const sinToken = data.salud.length > 0 && data.salud.every((s) => s.estado === "sin_token");
-  const v = vistaDeZona(data, zona, pl);
+  // Las cubetas solo existen en la vista de region: en una pagina de zona el
+  // filtro es la zona. Si solo hay una, no hay nada que elegir y no se pintan.
+  const disponibles = zona === null ? cubetasConFilas(data) : [];
+  const activa = disponibles.includes(cubeta) ? cubeta : (disponibles[0] ?? "corredor");
+  const v = vistaDeZona(data, zona, pl, activa);
   const visibles = textos?.visibles ?? 5;
 
   return (
     <Bisel interior="p-6 md:p-8">
+      {disponibles.length > 1 ? (
+        <div role="group" aria-label="Ámbito" className="mb-6 flex flex-wrap gap-1.5">
+          {CUBETAS.filter((c) => disponibles.includes(c.id)).map((c) => (
+            <button
+              key={c.id}
+              type="button"
+              aria-pressed={c.id === activa}
+              onClick={() => setCubeta(c.id)}
+              className={clasesChip(c.id === activa)}
+            >
+              {c.nombre}
+            </button>
+          ))}
+        </div>
+      ) : null}
+
       <Cabeza
         data={data}
         v={v}
@@ -502,7 +555,12 @@ function PanelSocial({ zona, pl }: { zona: ZonaRuta | null; pl: Plataforma }) {
         </div>
       ) : null}
 
-      <p className="mt-10 text-meta text-tinta-prosa">{pl.pie}</p>
+      <p className="mt-10 text-meta text-tinta-prosa">
+        {pl.pie}
+        {activa === "mundo" && zona === null
+          ? " Lo que se agrupa aquí es lo que no nombra ningún lugar de la región; no es una comprobación de que el video sea del extranjero."
+          : ""}
+      </p>
     </Bisel>
   );
 }

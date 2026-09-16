@@ -1,17 +1,17 @@
 {
- "nota": "Búsquedas en TikTok de las que se cosechan videos y comentarios, vía Apify (clockworks~tiktok-scraper para los videos, clockworks~tiktok-comments-scraper para los comentarios) y SIN sesión. A diferencia de config/instagram.json, aquí la fuente es una CONSULTA y no una cuenta verificada: los videos vienen de cualquier creador que TikTok considere relevante. Por eso ninguna búsqueda lleva `zona` (el validador lo rechaza): la zona de cada video sale de lo que nombra su pie, con el mismo gacetero que las notas de prensa (pulso/zonas.py). Un video que nombra Tijuana va a Tijuana; uno que nombra Hermosillo se descarta; uno que no nombra lugar queda `nacional` y solo se ve en la vista de región.",
+ "nota": "Búsquedas en TikTok de las que se cosechan videos y comentarios, vía Apify (clockworks~tiktok-scraper para los videos, clockworks~tiktok-comments-scraper para los comentarios) y SIN sesión. A diferencia de config/instagram.json, aquí la fuente es una CONSULTA y no una cuenta verificada: los videos vienen de cualquier creador que TikTok considere relevante. Por eso ninguna búsqueda lleva `zona` (el validador lo rechaza): la zona de cada video sale de lo que nombra su pie, con el mismo gacetero que las notas de prensa (pulso/zonas.py). Un video que nombra Tijuana va a Tijuana; uno que nombra Hermosillo se descarta; uno que no nombra lugar queda `nacional` y solo se ve en la vista de región. Desde el 15 de septiembre de 2026 hay una búsqueda por lugar del corredor más una de México y una del mundo, y con ellas el campo `ambito` (regional | nacional | internacional; si falta, `regional`). `ambito` NO es una zona y no acredita lugar a nadie: cuando el pie nombra un lugar del gacetero manda el pie, igual en los tres. Lo único que decide es el RESIDUO —el video que no nombra lugar, o que nombra uno que no cubrimos—, porque las dos búsquedas nuevas rompían la regla vieja de dos maneras: «noticias mexico» tiraba Guadalajara y Mazatlán por estar en la lista FUERA, que es justo lo que la consulta iba a buscar, y un video de Ucrania no nombra nada de ningún gacetero y caía en `nacional`, indistinguible de una nota nacional mexicana. De ahí sale también `alcance`, el veredicto crudo del gacetero, que viaja al lado de la zona en data/tiktok.json: sin él `nacional` significaría dos cosas a la vez —«no nombró lugar» y «nombró Guadalajara»— y la etiqueta «sin lugar» del panel sería falsa para la mitad de las filas. Tres búsquedas están APAGADAS con la razón escrita en su propia fila (Tecate, San Felipe y San Quintín): se probaron de verdad y no devuelven noticia, sino falsos positivos con cara de cobertura.",
 
  "aviso_identidad": "Se publica el @handle del CREADOR del video como fuente (la URL del video ya lo trae, y es quien decidió publicar). Quien COMENTA sigue anónimo: uniqueId, uid, avatar y cid se tiran al ingerir y no llegan ni al cache; las @menciones dentro del texto se enmascaran al publicar. Decisión del cliente del 8 de septiembre de 2026.",
 
  "cosecha": {
-  "nota": "Dos pasadas pagadas, como en Instagram: videos por búsqueda y luego comentarios por video. `filtro_fecha` (ALL_TIME | PAST_24_HOURS | PAST_WEEK | PAST_MONTH | LAST_3_MONTHS | LAST_6_MONTHS) y `orden` (MOST_RELEVANT | MOST_LIKED | LATEST) son filtros COBRADOS del actor y solo valen con searchSection /video. Los valores salieron de un 400 del propio actor: su ficha pública solo muestra un ejemplo, y la primera versión de este archivo traía YESTERDAY, copiado de la interfaz de TikTok, que el actor rechazó. La ventana de `ventana_horas` se impone igual en derivar() sobre la hora exacta de publicación; el filtro del actor solo recorta lo que se factura. `presupuesto_resultados` es el tope de ESTE comando, no del cron: cada verbo construye su propio Presupuesto. Costo real: el actor de comentarios cobra ~5 USD por 1,000 resultados, así que 30 videos × 30 comentarios ≈ 4.50 USD en la primera corrida del día; las otras tres del cron recortan por vistos.json.",
-  "videos_por_busqueda": 30,
-  "comentarios_por_video": 30,
+  "nota": "Dos pasadas pagadas, como en Instagram: videos por búsqueda y luego comentarios por video. `filtro_fecha` (ALL_TIME | PAST_24_HOURS | PAST_WEEK | PAST_MONTH | LAST_3_MONTHS | LAST_6_MONTHS) y `orden` (MOST_RELEVANT | MOST_LIKED | LATEST) son filtros COBRADOS del actor y solo valen con searchSection /video. Los valores salieron de un 400 del propio actor: su ficha pública solo muestra un ejemplo, y la primera versión de este archivo traía YESTERDAY, copiado de la interfaz de TikTok, que el actor rechazó. La ventana de `ventana_horas` se impone igual en derivar() sobre la hora exacta de publicación; el filtro del actor solo recorta lo que se factura. `presupuesto_resultados` es el tope de ESTE comando, no del cron: cada verbo construye su propio Presupuesto. Costo real: el actor de comentarios cobra ~5 USD por 1,000 resultados, y ahí está el motivo del recorte del 15 de septiembre de 2026. Con una sola búsqueda, 30 videos × 30 comentarios eran ~4.50 USD en la primera corrida del día; con once serían ~45. Bajando a 15 × 20, las ocho búsquedas activas son 2,400 comentarios ≈ 12 USD en la primera corrida, y las otras tres del cron recortan por vistos.json. Veinte comentarios por video quedan debajo del piso de 30 de PRODUCT.md, y no cambia nada: este panel no emite un solo porcentaje en ningún nivel y el validador los rechaza. Tampoco toca el texto publicado, porque redes.COMENTARIOS_MAXIMO son 10. El tope de 3,600 está calculado para las ONCE filas (11 × 15 × 21 = 3,465) y no para las ocho activas (2,520), a propósito: así encender una de las tres apagadas no recorta los comentarios de las demás EN SILENCIO, que es como falla `reparto - posts`.",
+  "videos_por_busqueda": 15,
+  "comentarios_por_video": 20,
   "dias_entre_cosechas": 3,
   "ventana_horas": 24,
   "filtro_fecha": "PAST_24_HOURS",
   "orden": "MOST_RELEVANT",
-  "presupuesto_resultados": 1000
+  "presupuesto_resultados": 3600
  },
 
  "busquedas": [
@@ -23,6 +23,98 @@
    "activo": true,
    "verificado": "2026-09-08",
    "nota": "La búsqueda que pidió el cliente el 8 de septiembre de 2026. `idioma` es el del modelo de tono y sale de aquí, nunca del texto ni del campo textLanguage del actor. `verificado` es la fecha del primer `--probar` que devolvió videos con zona y título razonables: el 8 de septiembre de 2026 trajo tres videos de las últimas tres horas, los tres con zona Tijuana por su pie, de @ksdy50tv, @notisaid11 y @canal66tv (sí, un medio de Mexicali hablando de Tijuana: la zona la da el pie, no el creador)."
+  },
+  {
+   "id": "tk_mexicali_noticias",
+   "nombre": "Mexicali noticias",
+   "consulta": "mexicali noticias",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-15",
+   "nota": "Pedida por el cliente el 15 de septiembre de 2026. `verificado` es la fecha del primer `--probar` que devolvió videos con zona y título razonables: el 15 de septiembre trajo tres videos de las últimas seis horas, los tres con zona Mexicali por su pie, de @noticias.conexion (dos) y @crealanoticia."
+  },
+  {
+   "id": "tk_ensenada_noticias",
+   "nombre": "Ensenada noticias",
+   "consulta": "ensenada noticias",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-15",
+   "nota": "Pedida por el cliente el 15 de septiembre de 2026. El `--probar` del 15 trajo tres videos, los tres con zona Ensenada y los tres del MISMO creador, @periodicoelvigia, que es el mismo emisor que `elvigia` en config/medios.json y `elvigia_ig` en config/instagram.json: la misma cabecera en tres plataformas. Un solo creador no es una conversación diversa; si con 15 videos sigue siendo uno solo, esta búsqueda mide a El Vigía y no a Ensenada, y hay que decirlo o apagarla."
+  },
+  {
+   "id": "tk_tecate_noticias",
+   "nombre": "Tecate noticias",
+   "consulta": "tecate noticias",
+   "idioma": "es",
+   "activo": false,
+   "verificado": "2026-09-15",
+   "nota": "APAGADA: registro deliberado de un hueco, no una búsqueda pendiente. El 15 de septiembre de 2026 se probaron TRES consultas —«tecate noticias», «tecate baja california» y «tecate bc noticias»— y ninguna devolvió una noticia de Tecate. Lo que devolvieron: un incendio en Apodaca, Nuevo León, que el gacetero zonificó como TECATE porque el pie decía «Tecate Six»; venta de terrenos; una canción; una foto de la garita; y videos de Nuevo León y la Ciudad de México. «Tecate» es cerveza y es carretera antes que municipio, y el gacetero no puede distinguirlo porque el pie nunca nombra Baja California. Encenderla no daría cobertura de Tecate: daría falsos positivos con cara de cobertura, que es peor que el hueco. Tecate sí está cubierto por prensa (`tecate` en config/medios.json) y por @radartecate en config/instagram.json."
+  },
+  {
+   "id": "tk_rosarito_noticias",
+   "nombre": "Rosarito noticias",
+   "consulta": "rosarito noticias",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-15",
+   "nota": "Pedida por el cliente el 15 de septiembre de 2026. El `--probar` del 15 trajo tres videos: dos con zona Playas de Rosarito y uno con zona Tijuana, los tres correctos por su pie. El tercero es el caso que explica la regla: @redespsn hashtagea «#bajacalifornia #tijuana #mexicali #rosarito» a la vez, y el gacetero se queda con el primero del catálogo que empata, que es Tijuana. No hay forma de que un video que nombra cuatro lugares cuente para los cuatro sin inflar los cuatro."
+  },
+  {
+   "id": "tk_sanfelipe_noticias",
+   "nombre": "San Felipe noticias",
+   "consulta": "san felipe baja california",
+   "idioma": "es",
+   "activo": false,
+   "verificado": "2026-09-15",
+   "nota": "APAGADA: registro deliberado de un hueco. El 15 de septiembre de 2026 se probaron «san felipe baja california» y «san felipe bc» y entre las dos no devolvieron una sola noticia: listones escolares, «Te extraño playa», un pie vacío, y una carrera de un club de running con sede en Manhattan que el gacetero zonificó como SAN FELIPE. San Felipe es topónimo repetido en media república y el municipio es el más chico del producto; docs/PLAN.md §6 ya lo tiene como zona de cobertura casi nula. Encenderla daría falsos positivos, no cobertura."
+  },
+  {
+   "id": "tk_sanquintin_noticias",
+   "nombre": "San Quintín noticias",
+   "consulta": "san quintin noticias",
+   "idioma": "es",
+   "activo": false,
+   "verificado": "2026-09-15",
+   "nota": "APAGADA: registro deliberado de un hueco, y es el TERCERO que este repositorio escribe para el mismo municipio —los otros dos son `sanquintin` en config/medios.json y `sanquintin_ig` en config/instagram.json—. El 15 de septiembre de 2026 se probaron «san quintin noticias» y «san quintin baja california»: devolvieron un video de Cusco, Perú; uno de Matlapa, San Luis Potosí; videos personales; y uno que el gacetero mandó a SAN DIEGO por lo que decía su pie. Cero noticia de San Quintín. docs/PLAN.md §6 lo dice desde el principio: es municipio nuevo y todavía no se puede servir con honestidad. Rotularlo, no fingirlo."
+  },
+  {
+   "id": "tk_sandiego_noticias",
+   "nombre": "San Diego noticias",
+   "consulta": "san diego noticias",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-15",
+   "nota": "Pedida por el cliente el 15 de septiembre de 2026. Es la mitad en español de San Diego; la otra es `tk_sandiego_news`. El `--probar` del 15 trajo tres videos y conviene leer lo que enseñan antes de esperar de más: dos eran de Tijuana con «#SanDiego» pegado al final y el gacetero los mandó a Tijuana, que es lo correcto; y el único video de San Diego de verdad —un operativo con 76 arrestos— quedó `nacional`, porque su pie no nombra ningún lugar. O sea que rinde menos de lo que aparenta. Se deja encendida porque el corredor sí tiene medios de San Diego en español (ver `univisionsd_ig` y `ksdy50_ig`); revisar su rendimiento a la semana y apagarla si sigue devolviendo Tijuana."
+  },
+  {
+   "id": "tk_sandiego_news",
+   "nombre": "San Diego news",
+   "consulta": "san diego news",
+   "idioma": "en",
+   "activo": true,
+   "verificado": "2026-09-15",
+   "nota": "Pedida por el cliente el 15 de septiembre de 2026. Es la mitad en inglés de San Diego, y en el `--probar` del 15 fue la que mejor rindió de las dos: tres videos, los tres con zona San Diego por su pie (@abcnews, @nickcacoastreport y @danielexplainsx, dos de ellos sobre el mismo choque mortal en La Jolla). `idioma` en `en` significa que su postura queda en null y el conteo entra a `sin_modelo_idioma`, igual que los cuatro medios de San Diego del muro: el modelo de tono es español y a texto en inglés no devuelve error, devuelve una etiqueta plausible. Es la quinta regla de PRODUCT.md, no una carencia."
+  },
+  {
+   "id": "tk_mexico_noticias",
+   "nombre": "México noticias",
+   "consulta": "noticias mexico",
+   "idioma": "es",
+   "ambito": "nacional",
+   "activo": true,
+   "verificado": "2026-09-15",
+   "nota": "Pedida por el cliente el 15 de septiembre de 2026, y la primera búsqueda con `ambito` distinto de `regional`. Es la que justifica el campo: el `--probar` del 15 trajo refuerzos militares en Mazatlán, una visita a Sinaloa y un feminicidio investigado en el extranjero, y Mazatlán y Sinaloa están los dos en la lista FUERA de pulso/zonas.py. Con `ambito: regional` esos tres videos se habrían TIRADO —justo lo que la consulta fue a buscar— y solo habría sobrevivido el residuo sin lugar. Con `ambito: nacional` quedan en `nacional` y su `alcance` dice `fuera`, que es lo que deja rotular «fuera del corredor» en vez de «sin lugar»."
+  },
+  {
+   "id": "tk_mundo_noticias",
+   "nombre": "Noticias del mundo",
+   "consulta": "noticias internacionales",
+   "idioma": "es",
+   "ambito": "internacional",
+   "activo": true,
+   "verificado": "2026-09-15",
+   "nota": "Pedida por el cliente el 15 de septiembre de 2026. El `--probar` del 15 trajo un Boeing de Sepehran Airlines, una operación de rescate con helicópteros derribados y el aeropuerto de Asturias: ninguno nombra un lugar de ningún gacetero de este repositorio, así que con `ambito: regional` los tres habrían quedado `nacional`, indistinguibles de una nota nacional mexicana. Con `ambito: internacional` quedan en `internacional` y su `alcance` sigue diciendo `nacional`, que es el veredicto crudo. Dicho sin adornos: la cubeta la da la EDICIÓN, no una verificación de que el video sea del extranjero —el mismo trato que /api/actualidad le da a la sección «Mundo» de Google Noticias, que también es una edición y no una zona."
   }
  ]
 }

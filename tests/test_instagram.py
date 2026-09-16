@@ -380,6 +380,42 @@ class TestCatalogoCuentas(unittest.TestCase):
             with self.subTest(handle=h):
                 self.assertIn(h, handles)
 
+    def test_las_cuentas_pedidas_el_15_de_septiembre_estan(self):
+        # La tanda que sacó el catálogo de Tijuana: Mexicali, Ensenada,
+        # Tecate, San Diego y las tres del grupo "México". Estar no es estar
+        # encendida: @svnnoticias esta viva y aun asi quedo en `senuelos`,
+        # porque es "Sonora Vision Noticias" y en Instagram la zona no sale del
+        # gacetero sino de la fila -- nada habria descartado sus comentarios de
+        # Hermosillo.
+        handles = {c.get("handle") for c in self.cfg["cuentas"]}
+        handles |= {s.get("handle") for s in self.cfg["senuelos"]}
+        for h in ("@noticiasmxl", "@canal66tv", "@lavozfrontera", "@capitalmexicali",
+                  "@mexicali686", "@el.ensenadense", "@noticiasensenada", "@ensenada.digna",
+                  "@radartecate", "@mx.elmexicano", "@lacronica", "@svnnoticias",
+                  "@noticiasunivisionsd", "@ksdy50tv", "@619newsmedia"):
+            with self.subTest(handle=h):
+                self.assertIn(h, handles)
+
+    def test_toda_zona_del_catalogo_es_una_que_el_validador_acepta(self):
+        # La zona de una cuenta se le estampa a cada comentario y a cada post
+        # sin correccion: a diferencia de TikTok, Instagram no consulta el
+        # gacetero. Una zona mal escrita aqui no falla hasta que el validador
+        # mira data/redes.json, cuatro horas despues y sin nadie viendo.
+        from pulso.validador import ZONAS_DE_CONTEO
+        for c in self.cfg["cuentas"]:
+            with self.subTest(cuenta=c["id"]):
+                self.assertIn(c.get("zona"), ZONAS_DE_CONTEO)
+
+    def test_el_medio_declarado_existe_en_el_catalogo_de_medios(self):
+        # `medio` es documental -- ningun codigo lo lee -- pero un id
+        # inventado hace que nadie pueda cruzar la cuenta con su feed.
+        with open(os.path.join("config", "medios.json"), encoding="utf-8") as fh:
+            ids = {m["id"] for m in json.load(fh)["medios"]}
+        for c in self.cfg["cuentas"]:
+            if c.get("medio"):
+                with self.subTest(cuenta=c["id"]):
+                    self.assertIn(c["medio"], ids)
+
     def test_no_hay_hashtags(self):
         # Un hashtag no lleva zona; se la acreditaria a todo comentario que
         # no nombre lugar. Ver senuelos en el archivo.

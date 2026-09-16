@@ -1,10 +1,12 @@
 """Videos y comentarios de TikTok por BUSQUEDA, cosechados por Apify y sin sesion.
 
 Es la seccion que la direccion del cliente pidio el 8 de septiembre de 2026
-"igual que la de Instagram": la consulta "tijuana noticias" ordenada por
-relevancia, las ultimas 24 horas, y los cinco comentarios con mas likes de
-cada video. La logica compartida vive en pulso/redes.py; aqui esta lo que solo
-TikTok sabe. Cuatro reglas ordenan el modulo, y ninguna es de estilo.
+"igual que la de Instagram": una consulta ordenada por relevancia, las ultimas
+24 horas, y los cinco comentarios con mas likes de cada video. Empezo con una
+sola busqueda, "tijuana noticias"; desde el 15 de septiembre de 2026 hay una
+por lugar del corredor mas una de Mexico y una del mundo. La logica compartida
+vive en pulso/redes.py; aqui esta lo que solo TikTok sabe. Cinco reglas
+ordenan el modulo, y ninguna es de estilo.
 
 ## Una busqueda no lleva zona: la zona sale del pie del video
 
@@ -14,17 +16,37 @@ consulta llevara zona, se la acreditaria a todo video que no nombre lugar
 alguno: es el bug de El Imparcial y Hermosillo con otro disfraz
 (config/busquedas.json, pulso/apify.py). Asi que cada video pasa por el
 gacetero de pulso/zonas.py con su pie completo -- hashtags incluidos, porque
-"#tijuana" pliega a "tijuana" y ahi suele estar el lugar -- y:
+"#tijuana" pliega a "tijuana" y ahi suele estar el lugar.
 
-    nombra Tijuana / Ensenada / ...   -> esa zona
-    nombra Hermosillo, Sonora, ...    -> FUERA, se descarta y se cuenta
-    nombra Baja California sin ciudad -> "estatal"
-    no nombra lugar alguno            -> "nacional": se ve en la vista de
-                                         region, no tiene pagina de zona
+## El ambito decide el residuo, nunca la zona
 
-`nacional` es el veredicto literal del gacetero; mapearlo a `estatal` seria
-la acreditacion por consulta en un disfraz mas. Los comentarios heredan la
-zona de su video.
+`ambito` entro el 15 de septiembre de 2026, cuando el cliente pidio una
+busqueda de Mexico y una internacional. La regla de arriba las rompia de dos
+maneras: "noticias mexico" tiraba Guadalajara y Monterrey por estar en la
+lista FUERA -- o sea justo lo que la consulta iba a buscar -- y dejaba pasar
+solo el residuo sin lugar; y un video de Ucrania no nombra nada de ningun
+gacetero, asi que caia en "nacional" y quedaba indistinguible de una nota
+nacional mexicana.
+
+`ambito` NO acredita zona, y por eso el validador sigue rechazando un `zona`
+en una busqueda. Cuando el pie nombra un lugar del gacetero manda el pie,
+igual en los tres ambitos. Lo unico que cambia es que hacer con el residuo:
+
+    veredicto del gacetero   regional     nacional      internacional
+    una zona del producto    esa zona     esa zona      esa zona
+    Baja California a secas  estatal      estatal       estatal
+    un lugar de fuera        SE TIRA      nacional      nacional
+    ningun lugar             nacional     nacional      internacional
+
+De ahi sale el campo `alcance`, que es el veredicto crudo y viaja al lado de
+la zona. Sin el, "nacional" significaria dos cosas a la vez -- "no nombro
+lugar" y "nombro Guadalajara" -- y la etiqueta "sin lugar" que el panel ya
+pinta seria falsa para la mitad de las filas. Es la misma disciplina de
+"sin dato" contra "0": dos estados distintos no se colapsan en uno.
+
+`nacional` sigue siendo el veredicto literal del gacetero; mapearlo a
+`estatal` seria la acreditacion por consulta en un disfraz mas. Los
+comentarios heredan la zona de su video.
 
 ## El creador si; quien comenta, no
 
@@ -110,8 +132,16 @@ SIN_DESCARGAS = {
     "shouldDownloadMusicCovers": False,
 }
 
+# Ambitos de una busqueda. `regional` es la omision para que una fila sin el
+# campo se comporte como antes del 15 de septiembre de 2026. NO es una zona:
+# ver _zona() y el encabezado.
+AMBITOS = ("regional", "nacional", "internacional")
+AMBITO = "regional"
+
 # Lo que cruza del registro del video a data/tiktok.json ademas de lo comun.
-CAMPOS_EXTRA = ("creador", "publicado", "compartidos", "guardados")
+# `alcance` es el veredicto literal del gacetero y viaja junto a `zona` porque
+# los dos dejaron de ser lo mismo cuando entraron los ambitos.
+CAMPOS_EXTRA = ("creador", "alcance", "publicado", "compartidos", "guardados")
 
 # Nunca entran al cache. Documental: `_limpiar_comentario` es lista blanca.
 IDENTIDAD_COMENTARIO = ("uniqueId", "uid", "avatarThumbnail", "cid", "user", "nickname")
@@ -188,16 +218,42 @@ def _publicado(item):
     return None
 
 
-def _zona(pie):
-    """Zona del video por lo que nombra su pie. None = fuera de la region."""
+def _zona(pie, ambito=AMBITO):
+    """(zona, alcance) del video por lo que nombra su pie. zona None = se tira.
+
+    `alcance` es el veredicto crudo del gacetero -- "zona", "estatal", "fuera"
+    o "nacional" -- y se publica junto a la zona. Existe porque desde que hay
+    ambitos los dos dejaron de coincidir: en una busqueda nacional un video de
+    Guadalajara queda `zona: nacional`, y sin el alcance esa fila seria
+    indistinguible de una que no nombro lugar alguno. El panel rotula
+    "sin lugar" para una y "fuera del corredor" para la otra, que no es lo
+    mismo; colapsarlas seria la version de zonas del cero que tapa un hueco.
+
+    El ambito NO acredita zona. Cuando el pie nombra un lugar del gacetero
+    manda el pie, igual en los tres; el ambito solo decide el residuo:
+
+        veredicto            regional     nacional     internacional
+        una zona             esa zona     esa zona     esa zona
+        estatal              estatal      estatal      estatal
+        un lugar de fuera    SE TIRA      nacional     nacional
+        ningun lugar         nacional     nacional     internacional
+    """
     alc, zonas = alcance(pie or "", None)
     if alc == "zona":
-        return zonas[0]
-    if alc == "fuera":
-        return None
+        return zonas[0], alc
     if alc == "estatal":
-        return "estatal"
-    return "nacional"
+        return "estatal", alc
+    if alc == "fuera":
+        # Un lugar mexicano fuera de Baja California. En una busqueda regional
+        # es ruido y se tira; en una nacional o internacional es exactamente
+        # lo que la consulta fue a buscar, y tirarlo dejaria pasar solo el
+        # residuo sin lugar.
+        if ambito == "regional":
+            return None, alc
+        return "nacional", alc
+    # El gacetero no nombro nada. En la edicion del mundo eso es el mundo; en
+    # las otras dos sigue siendo el "nacional" literal de siempre.
+    return ("internacional" if ambito == "internacional" else "nacional"), alc
 
 
 def _limpiar_video(item, busqueda, ahora):
@@ -225,7 +281,7 @@ def _limpiar_video(item, busqueda, ahora):
         return None, "futuro"
     pie = _desescapar(item.get("text") or "")
     # La zona se calcula sobre el pie CRUDO, hashtags incluidos.
-    zona = _zona(pie)
+    zona, alc = _zona(pie, busqueda.get("ambito") or AMBITO)
     if zona is None:
         return None, "fuera"
 
@@ -234,6 +290,7 @@ def _limpiar_video(item, busqueda, ahora):
         "cuenta": busqueda["id"],
         "creador": "@" + handle,
         "zona": zona,
+        "alcance": alc,
         "publicado": publicado,
         "fecha": publicado[:10],
         "titulo": _titulo(_quitar_etiquetas_finales(pie)),

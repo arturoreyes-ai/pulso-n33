@@ -209,9 +209,11 @@ jobs:
           key: tiktok-${{ github.run_id }}
           restore-keys: tiktok-
 
-      # Una BUSQUEDA ("tijuana noticias", ultimas 24 horas), no cuentas: la
-      # zona de cada video sale de su pie con el gacetero, y el @ del creador
-      # si se publica (decision del cliente, 8 sep 2026). Escribe
+      # BUSQUEDAS (ultimas 24 horas), no cuentas: la zona de cada video sale
+      # de su pie con el gacetero, y el @ del creador si se publica (decision
+      # del cliente, 8 sep 2026). Empezo con una sola, "tijuana noticias";
+      # desde el 15 de septiembre de 2026 son once filas, ocho encendidas, y
+      # el `ambito` de cada una decide su residuo. Escribe
       # data/tiktok.json (git) y efimero/tiktok-comentarios.json (fuera de
       # git, viaja al sitio al armar _site).
       - name: TikTok (búsqueda)
