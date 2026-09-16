@@ -46,6 +46,28 @@ export function cubetasConFilas(datos: DocRedes): CubetaRegion[] {
     posts.some((post) => EN_CUBETA[c](post.zona)));
 }
 
+/** Los nombres de las cubetas, para quien las pinte. «Corredor» no es un
+ *  tecnicismo: es lo que este tablero mide. */
+export const CUBETAS: { id: CubetaRegion; nombre: string }[] = [
+  { id: "corredor", nombre: "Corredor" },
+  { id: "mexico", nombre: "México" },
+  { id: "mundo", nombre: "Mundo" },
+];
+
+/** La union de las dos plataformas. El visor del lector las recorre juntas,
+ *  asi que una cubeta que solo tiene filas en TikTok tambien se ofrece:
+ *  preguntarle a un solo documento escondia Mundo, que solo existe ahi. */
+export function cubetasDisponibles(
+  instagram: DocRedes | undefined,
+  tiktok: DocRedes | undefined,
+): CubetaRegion[] {
+  const juntas = new Set<CubetaRegion>();
+  for (const datos of [instagram, tiktok]) {
+    if (datos) for (const c of cubetasConFilas(datos)) juntas.add(c);
+  }
+  return CUBETAS.map((c) => c.id).filter((c) => juntas.has(c));
+}
+
 export function seleccionarPublicaciones(
   datos: DocRedes,
   zona: string | null,

@@ -11,6 +11,8 @@ import { RUTAS } from "@/lib/datos/config";
 import { leerJson } from "@/lib/datos/fetcher";
 import { ruta } from "@/lib/dominio/secciones";
 import { NOMBRE_CORTO, ZONAS_RUTA, type ZonaRuta } from "@/lib/dominio/zonas";
+import { CUBETAS, cubetasDisponibles, type CubetaRegion } from "@/lib/dominio/publicaciones";
+import { useRedes, useTikTok } from "@/lib/datos/hooks";
 
 const VisorRedes = dynamic(() => import("./visor-redes"), {
   loading: () => <p role="status" className="p-8 text-lectura text-tinta-meta">Cargando publicaciones…</p>,
@@ -57,6 +59,20 @@ type Pestana = (typeof PESTANAS)[number]["id"];
  *  En una carga completa el modulo nace en «todas» en servidor y cliente. */
 let ultimaPestana: Pestana = "todas";
 
+/**
+ * El AMBITO de la vista de region, con la misma memoria de modulo.
+ *
+ * Un video del mundo trae ordenes de magnitud mas likes que uno de Tecate, asi
+ * que sin separarlos el corredor desaparecia de su propia portada. Vivia en
+ * las pastillas de la Lista; al retirarse esa vista el 15 de septiembre de
+ * 2026 se habria perdido con ella, y baja aqui.
+ *
+ * Va en el dialogo de LUGAR y no sobre el recorrido: la caja ES la pantalla, y
+ * visor-redes.tsx deja por escrito que una linea encima encogeria las
+ * tarjetas. Ademas es el eje de lugar, que es justo lo que ese dialogo elige.
+ */
+let ultimaCubeta: CubetaRegion = "corredor";
+
 /** `null` primero, que es toda la region, y luego las zonas. Local y no
  *  importado de chrome/selector-zona.tsx: ese modulo trae ConteoZona y aqui
  *  entraria al bundle de cliente. */
@@ -72,6 +88,16 @@ export function LectorRedes({ zona, paneles, menu, informacion }: {
   useEffect(() => {
     ultimaPestana = pestana;
   }, [pestana]);
+  const [cubeta, setCubeta] = useState<CubetaRegion>(() => ultimaCubeta);
+  useEffect(() => {
+    ultimaCubeta = cubeta;
+  }, [cubeta]);
+  // Las cubetas solo existen en la vista de region: en una pagina de zona el
+  // filtro ES la zona. Si solo una tiene filas, no hay nada que elegir.
+  const instagram = useRedes();
+  const tiktok = useTikTok();
+  const disponibles = zona === null ? cubetasDisponibles(instagram.data, tiktok.data) : [];
+  const activa = disponibles.includes(cubeta) ? cubeta : (disponibles[0] ?? "corredor");
   const lugar = zona === null ? "Toda la región" : NOMBRE_CORTO[zona];
   return (
     // `volver` va a la PORTADA de esta zona, por decision del cliente. Apunto
@@ -80,7 +106,7 @@ export function LectorRedes({ zona, paneles, menu, informacion }: {
     // salida. Prensa ya no existe y el destino es de nuevo un lector: quien
     // quiera otra pagina la tiene en el menu de la barra.
     <Lector volver={ruta(zona, null)} rotulo="Redes" valor={lugar} tituloOpciones="Lugar"
-      opciones={<OpcionesLugar zona={zona} />} menu={menu}
+      opciones={<OpcionesLugar zona={zona} cubetas={disponibles} activa={activa} onCubeta={setCubeta} />} menu={menu}
       pestanas={
         <div role="group" aria-label="Plataforma" className="pestanas-lector">
           {PESTANAS.map((p) => {
@@ -103,7 +129,7 @@ export function LectorRedes({ zona, paneles, menu, informacion }: {
       informacion={informacion}>
       {pestana === "youtube" || pestana === "x"
         ? <div className="hoja-lector" tabIndex={0}><div className="mx-auto w-full max-w-[88rem] px-4 py-8 md:px-8">{paneles[pestana]}</div></div>
-        : <VisorRedes key={zona ?? "region"} zona={zona} filtro={pestana} />}
+        : <VisorRedes key={`${zona ?? "region"}:${activa}`} zona={zona} filtro={pestana} cubeta={activa} />}
     </Lector>
   );
 }
@@ -111,9 +137,32 @@ export function LectorRedes({ zona, paneles, menu, informacion }: {
 /** El cuerpo del dialogo «Lugar»: enlaces, porque el lugar es el eje de la
  *  ruta y conserva la vista, como el selector del encabezado. El lector cierra
  *  el dialogo al pulsar uno. */
-function OpcionesLugar({ zona }: { zona: ZonaRuta | null }) {
+function OpcionesLugar({ zona, cubetas, activa, onCubeta }: {
+  zona: ZonaRuta | null;
+  cubetas: CubetaRegion[];
+  activa: CubetaRegion;
+  onCubeta: (c: CubetaRegion) => void;
+}) {
   return (
-    <ul className="grid gap-2 p-4">
+    <div className="grid gap-4 p-4">
+      {/* El ambito primero, como en el dialogo de la portada: son tres y
+          siempre caben, y las zonas fluyen debajo. */}
+      {cubetas.length > 1 ? (
+        <div role="group" aria-label="Ámbito" className="grid grid-cols-3 gap-1 rounded-full border border-filo bg-vanta p-1">
+          {CUBETAS.filter((c) => cubetas.includes(c.id)).map((c) => (
+            <button key={c.id} type="button" aria-pressed={c.id === activa}
+              onClick={() => onCubeta(c.id)}
+              className={[
+                "rounded-full px-3 py-2 text-center text-cuerpo",
+                "transition-colors duration-[var(--dur-toque)] ease-firma",
+                c.id === activa ? "bg-realce text-tinta-titulo" : "text-tinta-prosa hover:bg-vela hover:text-tinta-titulo",
+              ].join(" ")}>
+              {c.nombre}
+            </button>
+          ))}
+        </div>
+      ) : null}
+    <ul className="grid gap-2">
       {OPCIONES_ZONA.map((z) => {
         const activo = z === zona;
         return (
@@ -126,5 +175,6 @@ function OpcionesLugar({ zona }: { zona: ZonaRuta | null }) {
         );
       })}
     </ul>
+    </div>
   );
 }

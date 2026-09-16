@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { BookmarkSimple, ChatCircle, Heart, Play, ShareFat, X as Cerrar } from "@phosphor-icons/react";
 import { useRedes, useRedesComentarios, useTikTok, useTikTokComentarios } from "@/lib/datos/hooks";
 import type { ComentarioPublicado } from "@/lib/datos/tipos";
-import { NOMBRE_RED, reunirPublicaciones, type PublicacionVisual, type RedVisual } from "@/lib/dominio/publicaciones";
+import { NOMBRE_RED, reunirPublicaciones, type CubetaRegion, type PublicacionVisual, type RedVisual } from "@/lib/dominio/publicaciones";
 import { fechaCorta, hace, hora, numero } from "@/lib/dominio/formato";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 import { teclasDelRecorrido, useRecorrido } from "@/lib/pantalla/recorrido";
@@ -42,13 +42,13 @@ type Cortes = Partial<Record<RedVisual, string>>;
  * que la direccion pidio ver el 8 de septiembre de 2026. Una sola hoja
  * (`<dialog>`) para todo el recorrido, nunca una por tarjeta; su cuerpo esta
  * en paneles/comentarios-publicacion.tsx. */
-export default function VisorRedes({ zona, filtro }: { zona: ZonaRuta | null; filtro: FiltroVisual }) {
+export default function VisorRedes({ zona, filtro, cubeta = "corredor" }: { zona: ZonaRuta | null; filtro: FiltroVisual; cubeta?: CubetaRegion }) {
   const instagram = useRedes();
   const tiktok = useTikTok();
   const textosInstagram = useRedesComentarios();
   const textosTikTok = useTikTokComentarios();
   const textos: Record<RedVisual, Textos> = { instagram: textosInstagram, tiktok: textosTikTok };
-  const publicaciones = useMemo(() => reunirPublicaciones(instagram.data, tiktok.data, zona), [instagram.data, tiktok.data, zona]);
+  const publicaciones = useMemo(() => reunirPublicaciones(instagram.data, tiktok.data, zona, cubeta), [instagram.data, tiktok.data, zona, cubeta]);
   const filas = useMemo(() => publicaciones.filter((fila) => filtro === "todas" || fila.red === filtro), [publicaciones, filtro]);
   const cortes: Cortes = { instagram: instagram.data?.generado, tiktok: tiktok.data?.generado };
   // Una plataforma del filtro actual sin datos y sin error: todavia carga.
