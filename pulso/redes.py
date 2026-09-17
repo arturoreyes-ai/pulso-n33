@@ -48,6 +48,11 @@ DIAS_ENTRE_COSECHAS = 3
 # `publicado`; Instagram la midio en dias sobre `fecha` hasta entonces -- y se
 # calcula con `ahora` inyectado; el tablero nunca la recalcula.
 DESTACADOS_MAXIMO = 15
+# Cuantas publicaciones de una misma cuenta entran ANTES de que las demas
+# tengan la suya. Con 1: primero la mejor de cada cuenta y lo que sobre del
+# tope se sigue llenando por likes. Subirlo a 2 da mas variedad y cuesta los
+# segundos puestos del que mas suena; es la perilla, y no hay otra.
+VUELTAS_GARANTIZADAS = 1
 # El pie de un post puede tener parrafos; se publica su primera linea como
 # titular, recortada. 160 es el largo con que ya se leen los titulares.
 TITULO_MAXIMO = 160
@@ -336,6 +341,42 @@ def _orden_destacado(p):
     return (-p["likes"], -p["comentarios"], p["url"])
 
 
+def _por_turnos(candidatos, maximo, vueltas=VUELTAS_GARANTIZADAS):
+    """Los `maximo` de `candidatos`, con una vuelta por cuenta antes del merito.
+
+    El caso: entre el 15 y el 17 de septiembre de 2026 tjnoticias_ig encabezo
+    TODAS las corridas de Tijuana con entre siete y diez de los quince lugares,
+    y la zona bajo a entre dos y cuatro cuentas de las doce activas. afn_ig no
+    entro una sola vez en veinte corridas teniendo comentarios cosechados en
+    todas. Una cuenta con mas seguidores gana todos los desempates de likes, y
+    sin repartir la primera vuelta el panel de una ciudad de doce medios es el
+    panel de uno.
+
+    `candidatos` ya viene en `_orden_destacado`, asi que el turno de un post
+    dentro de su cuenta es su posicion en esa cola y la primera vuelta sale en
+    orden de likes: el post mas grande de la zona sigue siendo el primero.
+
+    NO es una cuota por cuenta, y la diferencia es el motivo de `min`: pasada
+    la primera vuelta todos compiten por likes otra vez. Un turno a secas
+    sentaria los tres posts de un medio de diez likes por delante de tres de
+    nueve mil, que es justo lo que el cliente pidio no hacer.
+
+    Tampoco rellena: emite los mismos `min(maximo, len(candidatos))` de
+    siempre. Donde publica una sola cuenta -- Tecate, `estatal`, y elvigia_ig
+    con los catorce de Ensenada -- `min(turno, vueltas)` vale 0 y luego 1 en
+    una lista ya ordenada por likes, asi que la salida es identica a la de
+    antes. Inventar un hueco es el mismo error que rellenarlo (regla 4).
+    """
+    turno, vistos = {}, {}
+    for d in candidatos:
+        n = vistos.get(d["cuenta"], 0)
+        turno[d["url"]] = n
+        vistos[d["cuenta"]] = n + 1
+    orden = sorted(candidatos,
+                   key=lambda d: (min(turno[d["url"]], vueltas),) + _orden_destacado(d))
+    return orden[:maximo]
+
+
 def _dentro_por_dias(ahora, ventana_dias):
     """Predicado de ventana en dias sobre `fecha`.
 
@@ -374,7 +415,7 @@ def _dentro_por_horas(ahora, ventana_horas):
 
 
 def _destacados(publicaciones, comentarios, opinion, temas, cuentas, dentro,
-                maximo=DESTACADOS_MAXIMO, campos_extra=()):
+                maximo=DESTACADOS_MAXIMO, campos_extra=(), turnos=False):
     """Los posts de la ventana con mas likes, con los conteos de sus comentarios.
 
     Es la union del top `maximo` general con el top `maximo` de cada zona,
@@ -385,6 +426,16 @@ def _destacados(publicaciones, comentarios, opinion, temas, cuentas, dentro,
     `campos_extra` son claves que se copian del registro cuando existen
     (creador, publicado, compartidos, guardados en TikTok; publicado en
     Instagram).
+
+    `turnos` arma cada uno de esos dos cortes repartiendo por cuenta en vez de
+    por likes a secas (ver `_por_turnos`). Lo enciende Instagram, donde
+    `cuenta` es un medio. TikTok lo deja apagado a peticion del cliente, y
+    ademas ahi `cuenta` es el id de una busqueda: repartir por busqueda seria
+    repartir por mecanismo, no por voz. Su equivalente seria `creador`.
+
+    Cambia QUE se elige, nunca en que orden se emite: la ultima linea sigue
+    devolviendo en el orden global, que es lo que el validador exige para que
+    dos corridas iguales no ensucien el diff.
     """
     conocidas = {c["id"] for c in cuentas}
     por_post, opinion_por_post = {}, {}
@@ -421,12 +472,15 @@ def _destacados(publicaciones, comentarios, opinion, temas, cuentas, dentro,
         candidatos.append(d)
     candidatos.sort(key=_orden_destacado)
 
-    elegidos = {d["url"] for d in candidatos[:maximo]}
+    def corte(lista):
+        return _por_turnos(lista, maximo) if turnos else lista[:maximo]
+
+    elegidos = {d["url"] for d in corte(candidatos)}
     por_zona = {}
     for d in candidatos:
         por_zona.setdefault(d["zona"], []).append(d)
     for lista in por_zona.values():
-        elegidos.update(d["url"] for d in lista[:maximo])
+        elegidos.update(d["url"] for d in corte(lista))
     return [d for d in candidatos if d["url"] in elegidos]
 
 
@@ -448,7 +502,7 @@ def _catalogo_cuentas(cuentas):
 
 def derivar(comentarios, ahora, salud, gasto, temas=None, publicaciones=None,
             cuentas=None, *, plataforma, ventana_dias=None, ventana_horas=None,
-            campos_extra=()):
+            campos_extra=(), turnos=False):
     """Lo que se commitea: conteos y los posts destacados, sin texto de
     comentarios ni identidad.
 
@@ -517,7 +571,8 @@ def derivar(comentarios, ahora, salud, gasto, temas=None, publicaciones=None,
         "destacados_maximo": DESTACADOS_MAXIMO,
         "cuentas": _catalogo_cuentas(cuentas),
         "destacados": _destacados(publicaciones or {}, comentarios, opinion, temas,
-                                  cuentas or [], dentro, campos_extra=campos_extra),
+                                  cuentas or [], dentro, campos_extra=campos_extra,
+                                  turnos=turnos),
         "salud": sorted(salud, key=lambda s: s["cuenta"]),
         "gasto": gasto,
     }

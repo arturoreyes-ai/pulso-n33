@@ -561,6 +561,10 @@ class TestPublicaciones(BaseCache):
 class TestDestacados(BaseCache):
     OTRA = dict(CUENTA, id="elvigia_ig", handle="@elvigiaensenada", zona="Ensenada",
                 nombre="El Vigía")
+    # Una segunda cuenta de la MISMA zona: es la unica forma de ver el reparto,
+    # porque entre zonas cada una ya tiene su propio top.
+    VECINA = dict(CUENTA, id="tjnoticias_ig", handle="@tjnoticias", zona="Tijuana",
+                  nombre="TJ Noticias")
 
     def _panel(self, publicaciones, comentarios=None, temas=None, cuentas=None):
         vig = [instagram._limpiar(c, c["postUrl"], CUENTA) for c in (comentarios or [])]
@@ -641,6 +645,83 @@ class TestDestacados(BaseCache):
         # 15 de Tijuana (el top general) y 15 de Ensenada (su propio top).
         self.assertEqual(por_zona, {"Ensenada": 15, "Tijuana": 15})
         self.assertEqual([x["likes"] for x in d], sorted((x["likes"] for x in d), reverse=True))
+
+    def _dos_medios_de_tijuana(self, grandes=15, chicas=3):
+        """Una cuenta que publica mucho y pega fuerte, y una chica en la MISMA
+        zona. Sin reparto la chica no sale nunca: el corte es por likes."""
+        grande = [dict(POSTS_RICOS[0], url="https://www.instagram.com/p/G{}/".format(i),
+                       likesCount=9000 - i) for i in range(grandes)]
+        chica = [dict(POSTS_RICOS[0], url="https://www.instagram.com/p/C{}/".format(i),
+                      likesCount=10 - i) for i in range(chicas)]
+        return {**self._pubs(posts=grande),
+                **self._pubs(cuenta=self.VECINA, posts=chica)}
+
+    def _por_cuenta(self, destacados):
+        cuenta = {}
+        for x in destacados:
+            cuenta[x["cuenta"]] = cuenta.get(x["cuenta"], 0) + 1
+        return cuenta
+
+    def test_una_vuelta_por_cuenta_antes_del_merito(self):
+        # El caso: entre el 15 y el 17 de septiembre de 2026 tjnoticias_ig
+        # encabezo TODAS las corridas de Tijuana con entre siete y diez de los
+        # quince lugares, y la zona bajo a entre dos y cuatro cuentas de doce.
+        d = self._panel(self._dos_medios_de_tijuana(),
+                        cuentas=[CUENTA, self.VECINA])["destacados"]
+        # La chica entra: es lo que no pasaba. Una vez, no tres.
+        self.assertEqual(self._por_cuenta(d), {"zeta_ig": 14, "tjnoticias_ig": 1})
+        # Y el que suena no se castiga: su mejor post sigue abriendo la lista.
+        self.assertEqual(d[0]["url"], "https://www.instagram.com/p/G0/")
+
+    def test_pasada_la_primera_vuelta_se_compite_por_likes_otra_vez(self):
+        # La diferencia entre esto y una cuota por cuenta, que es la razon del
+        # `min`: con turnos a secas los tres posts de diez likes de la chica se
+        # sentarian por delante de tres de nueve mil de la grande.
+        d = self._panel(self._dos_medios_de_tijuana(grandes=15, chicas=5),
+                        cuentas=[CUENTA, self.VECINA])["destacados"]
+        self.assertEqual(self._por_cuenta(d)["tjnoticias_ig"], 1)
+
+    def test_el_reparto_no_depende_del_orden_de_entrada(self):
+        # El turno se cuenta iterando un dict, asi que una dependencia del
+        # orden de insercion se colaria por debajo de las otras pruebas: las
+        # dos corridas de `test_..._identico` usan la misma entrada.
+        pubs = self._dos_medios_de_tijuana()
+        alreves = dict(reversed(list(pubs.items())))
+        self.assertEqual(
+            json.dumps(self._panel(pubs, cuentas=[CUENTA, self.VECINA])["destacados"]),
+            json.dumps(self._panel(alreves, cuentas=[CUENTA, self.VECINA])["destacados"]))
+
+    def test_el_reparto_no_inventa_una_fila_para_quien_no_publico(self):
+        # Regla 4: variedad nunca es rellenar. Una cuenta activa sin post en la
+        # ventana sigue sin aparecer, y viaja en `cuentas` para rotular el hueco.
+        p = self._panel(self._pubs(), cuentas=[CUENTA, self.VECINA])
+        self.assertEqual(self._por_cuenta(p["destacados"]), {"zeta_ig": 2})
+        self.assertIn({"cuenta": "tjnoticias_ig", "nombre": "TJ Noticias",
+                       "zona": "Tijuana", "activa": True}, p["cuentas"])
+
+    def test_el_reparto_no_cambia_cuantos_destacados_hay(self):
+        # No rellena ni recorta: emite los mismos que el top de siempre, en otro
+        # orden de prioridad. Es lo que lo hace compatible con la regla 4.
+        pubs = self._dos_medios_de_tijuana()
+        self.assertEqual(len(self._panel(pubs, cuentas=[CUENTA, self.VECINA])["destacados"]),
+                         instagram._redes.DESTACADOS_MAXIMO)
+
+    def test_una_zona_de_un_solo_medio_sale_identica(self):
+        # Tecate y `estatal` tienen una sola cuenta. Repartir entre uno es no
+        # repartir, y la lista tiene que quedar igual que el top por likes.
+        posts = [dict(POSTS_RICOS[0], url="https://www.instagram.com/p/S{}/".format(i),
+                      likesCount=500 - i) for i in range(20)]
+        d = self._panel(self._pubs(posts=posts))["destacados"]
+        self.assertEqual([x["url"].rsplit("/", 2)[1] for x in d],
+                         ["S{}".format(i) for i in range(15)])
+
+    def test_el_reparto_es_determinista_y_el_emitido_sigue_ordenado(self):
+        pubs = self._dos_medios_de_tijuana()
+        uno = self._panel(pubs, cuentas=[CUENTA, self.VECINA])["destacados"]
+        otro = self._panel(pubs, cuentas=[CUENTA, self.VECINA])["destacados"]
+        self.assertEqual(json.dumps(uno), json.dumps(otro))
+        claves = [(-x["likes"], -x["comentarios"], x["url"]) for x in uno]
+        self.assertEqual(claves, sorted(claves))
 
     def test_una_cuenta_que_ya_no_esta_en_config_no_sale(self):
         d = self._panel(self._pubs(), cuentas=[self.OTRA])["destacados"]

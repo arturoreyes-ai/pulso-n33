@@ -424,12 +424,18 @@ def derivar(comentarios, ahora, salud, gasto, temas=None, publicaciones=None,
 
     Ver pulso/redes.py::derivar; aqui solo se fijan la plataforma, la ventana
     (en horas desde el 10 de septiembre de 2026; `cosecha.ventana_horas` del
-    config manda) y que `publicado` cruza al destacado: sin el, el validador
-    no puede medir la ventana ni el tablero ordenar el dia por hora.
+    config manda), que `publicado` cruza al destacado -- sin el, el validador
+    no puede medir la ventana ni el tablero ordenar el dia por hora -- y que
+    los destacados se reparten por turnos entre cuentas.
+
+    El reparto (`turnos`) se enciende AQUI y no en el nucleo porque aqui
+    `cuenta` es un medio con sede declarada, que es lo que se quiere repartir.
+    En TikTok `cuenta` es el id de una busqueda y repartirla seria repartir el
+    mecanismo; ver pulso/redes.py::_por_turnos para el caso que lo motivo.
     """
     return _redes.derivar(comentarios, ahora, salud, gasto, temas, publicaciones,
                           cuentas, plataforma=PLATAFORMA, ventana_horas=ventana_horas,
-                          campos_extra=CAMPOS_EXTRA)
+                          campos_extra=CAMPOS_EXTRA, turnos=True)
 
 
 def publicar_comentarios(comentarios, destacados, ahora,
