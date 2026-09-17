@@ -645,8 +645,8 @@ capítulos —lo que destaca donde se elige empezar, los cinco rubros de ahí y 
 otras dos secciones—, conserva el orden de cada lista y no repite un titular ya
 mostrado. La tarjeta lleva imagen solo cuando la misma nota está en el corpus
 con la miniatura que su medio publica en su propio feed; el RSS de Google no la
-trae y no hay extracto; la tarjeta es titular, medio, hora, «en vivo», enlace,
-Analizar y Compartir.
+trae y no hay extracto; la tarjeta es titular, medio, hora, ícono de tendencia,
+enlace, Analizar y Compartir.
 
 Por dónde empieza el recorrido se reparte entre la ruta y la query: `/` es el
 corredor, `/tecate` empieza en Tecate, y `/?e=mexico` y `/?e=internacional` son
@@ -688,9 +688,14 @@ ANALISIS_HABILITADO=true
 ANTHROPIC_API_KEY=sk-ant-...
 ```
 
-El enlace que publica el buscador no abre la nota —solo se resuelve dentro de un
-navegador—, así que la lectura usa el enlace del propio medio cuando el mismo
-titular está en el corpus; donde no lo está, el botón lo dice.
+Las filas en vivo traen un enlace opaco del buscador, no la dirección editorial.
+La lectura prefiere el enlace del propio medio cuando encuentra el mismo titular
+y dominio en el archivo. Si la nota acaba de aparecer y aún no está allí,
+resuelve el token **bajo demanda y solo después de confirmar**. Esa resolución
+depende de un flujo no documentado del buscador: un límite de tráfico, una
+respuesta cambiada o un dominio que no coincida se rotulan como una nota que no
+se puede abrir, sin llamar al modelo. No se guarda el enlace resuelto ni el
+cuerpo de la nota.
 
 Verificación offline del contrato: `node web/scripts/probar-analisis.cjs`;
 también la invoca `python -m unittest discover -s tests -p test_analisis_web.py -v`

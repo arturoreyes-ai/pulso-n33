@@ -39,15 +39,74 @@ cuerpo de la nota. Los medios de Baja California persiguen la republicación de
 texto completo, y aquí el agregador competiría con ellos.
 
 Desde el 14 de septiembre de 2026, a petición del cliente, se suma un cuarto
-elemento acotado: la **miniatura que el medio publica en su propio feed**,
-enlazada y nunca copiada, y solo si la imagen es del medio (su dominio o un
-CDN que su fila del catálogo declara). Una foto de stock o de otro medio le
-acreditaría una imagen que no hizo, y por eso se descarta aunque venga en el
-feed. Diez de quince feeds la traen; Zeta, El Sol de Tijuana, La Voz de la
-Frontera, Jornada BC y Síntesis no, y ahí no hay imagen. Al enlazarla, el
-navegador del lector la pide al medio: la página no se presenta (`no-referrer`)
-pero la dirección IP sí llega. La opinión legal que pide el plan sigue
-pendiente; la decisión es del cliente y queda registrada en `docs/PLAN.md`.
+elemento acotado: la **miniatura que el medio publica**, enlazada y nunca
+copiada. Al enlazarla, el navegador del lector la pide al medio: la página no
+se presenta (`no-referrer`) pero la dirección IP sí llega. La opinión legal que
+pide el plan sigue pendiente; la decisión es del cliente y queda registrada en
+`docs/PLAN.md`.
+
+Esa miniatura llega por dos caminos, y la regla de qué imagen vale **no es la
+misma en los dos**, a propósito:
+
+- **Lo que se guarda** en el archivo viene del feed o de la portada del propio
+  medio, y solo si la imagen es suya: su dominio, un subdominio, o uno de los
+  que su fila del catálogo declara. Una foto de stock o de otro medio le
+  acreditaría una imagen que no hizo, y por eso se descarta aunque venga en el
+  feed. Noticias Ensenada es el caso vivo: su feed trae fotos de Pexels y de
+  otro medio, así que se queda sin miniatura a propósito.
+- **Lo que se muestra en vivo** en la portada puede venir además del `og:image`
+  de la página de la nota: la misma imagen que cualquier buscador usa para
+  pintarla. Ahí se acepta cualquier host, porque un `og:image` no es una foto
+  sacada del cuerpo de un feed sino la que **el medio eligió y declaró** para
+  esa nota. No se guarda: se pide de a una, solo cuando alguien se detiene en
+  la tarjeta, y si no llega la tarjeta lo dice con su propia placa.
+
+Sondeo del 17 de septiembre de 2026, para que la cifra no envejezca sola: de
+los quince feeds, Zeta, El Sol de Tijuana y La Voz de la Frontera de verdad no
+traen imagen; Jornada BC sí la traía y se estaba tirando porque la sirve desde
+otro dominio suyo. Las tres portadas que se leen sin RSS —AFN, El Vigía y Baja
+News— tampoco daban ninguna, y no porque no la publiquen: nadie la leía.
+
+El 17 de septiembre de 2026 el mismo botón llegó a una **publicación de redes**,
+y ahí lee algo distinto y menos: no abre TikTok ni Instagram, ni nada de nadie.
+Lo único que ve el modelo es lo que la pantalla ya muestra —el pie que el medio
+escribió y el texto de los comentarios más votados—, y el enlace que manda el
+navegador es una llave de búsqueda contra lo publicado, nunca una dirección que
+el servidor visite. La ficha dice qué dice la publicación, qué se repite en los
+comentarios, una idea de contenido para redes y lo que no establece. **Nunca
+describe el video ni la imagen**: no los ha visto y no puede deducirlos.
+
+Esa ficha es el único lugar del producto donde un modelo resume comentarios, y
+por eso dos de las cinco reglas de abajo dejan de ser una instrucción y pasan a
+ser código. La regla 2: son entre uno y veinte comentarios, muy por debajo del
+piso de treinta, así que la ficha **no puede publicar un porcentaje, una
+fracción ni una proporción**. La regla 1: veinte comentarios de cinco mil no son
+una muestra, así que no puede escribir «la mayoría», «la gente», «la opinión
+pública» ni atribuir lo leído a una ciudad. Una respuesta que lo intente se
+descarta entera, y la sección se rotula «En los comentarios». Cuántos se leyeron
+y cuántos reporta la plataforma se dicen **uno al lado del otro y jamás
+divididos**, que es la regla 3. Y como los comentarios son texto público sin
+moderar, alguno está escrito para que un modelo lo lea: son datos, no
+instrucciones, y lo que los contiene no es el prompt sino esa comprobación.
+
+El mismo día se sumó **«De qué se habla»**, la única pieza que mira varias
+publicaciones a la vez: una hoja con los conteos que la ingesta ya calculaba en
+cada corrida y no tenían pantalla —cómo suena cada comentario, y cuántos quedan
+sin clasificar por idioma— y, detrás de otro botón, una lectura automática de
+qué asuntos se repiten. **No se funden en una cifra**: son dos maneras de mirar
+el mismo texto y se ponen lado a lado, que es la regla 3 aplicada fuera de la
+prensa. Cuántos comentarios se leyeron, de cuántas publicaciones de la selección
+y cuántos reportan las plataformas se dicen los tres, **sin dividirse jamás**:
+ese cociente sería una tasa de muestreo que nadie midió.
+
+Y la advertencia de que esto no representa a nadie **la escribe la página, no el
+modelo**. Pedírsela a él lo obligaba a nombrar justo lo que la comprobación
+prohíbe —«la opinión pública», «la mayoría», «la gente»— y la lectura entera se
+descartaba: cuatro de cada seis advertencias correctas caían así, y en pantalla
+solo se veía que no se pudo. La comprobación vigila **afirmaciones**, y una
+advertencia que las niega no cabe bajo la misma prohibición. El modelo dice ahora
+únicamente qué queda sin aclarar en el material; la salvedad es del producto,
+donde no puede omitirse ni suavizarse.
 
 El 15 de septiembre de 2026, a petición del cliente, el tablero se redujo a lo
 que se lee: el recorrido de titulares, las redes, los indicadores, las garitas y
@@ -90,8 +149,8 @@ queda registrada en `docs/PLAN.md`.
 | San Diego, valor catastral | funcionando | SANDAG, mediana por ZIP |
 | Conversación (YouTube) | **necesita llave** | canales verificados + hasta 3 búsquedas temáticas por corrida; retención de 30 días |
 | Sentimiento de comentarios | funcionando | modelo local (pysentimiento), publicado como conteos por zona y tema; en YouTube nunca el texto |
-| Redes (Instagram) | **necesita token** | 27 cuentas verificadas una por una, sin sesión, en Tijuana, Mexicali, Ensenada, Tecate, San Diego y `nacional`; los 15 posts con más likes de las últimas 24 horas por zona, con hora exacta, y sus comentarios más votados. El texto va fuera de git (`efimero/`), la identidad no se ingiere |
-| Redes (TikTok) | **necesita token** | ocho búsquedas encendidas —una por lugar del corredor más México y el mundo—, relevancia, últimas 24 h, sin sesión; la zona sale del pie del video, se muestra el @ del creador y nunca quien comenta. Tres apagadas con la razón escrita. Mismo canal fuera de git para el texto |
+| Redes (Instagram) | **necesita token** | 28 cuentas verificadas una por una, sin sesión, en Tijuana, Mexicali, Ensenada, Tecate, San Diego y `nacional`; las publicaciones de las últimas 24 horas por zona, con hora exacta, y sus comentarios más votados; cada zona se queda con quince y el corte entra primero por la publicación más vista de cada cuenta, para que una con más seguidores no se lleve la lista de su ciudad — entre el 15 y el 17 de septiembre de 2026 una sola tuvo entre siete y diez de los quince de Tijuana. Desde el 17 de septiembre de 2026 la tarjeta no repite las cifras de la plataforma: la publicación incrustada ya las trae, y en vivo. El texto va fuera de git (`efimero/`), la identidad no se ingiere |
+| Redes (TikTok) | **necesita token** | ocho búsquedas encendidas —una por lugar del corredor más México y el mundo—, relevancia, últimas 24 h, sin sesión; la zona sale del pie del video, se muestra el @ del creador y nunca quien comenta. Tres apagadas con la razón escrita. Mismo canal fuera de git para el texto. Desde el 17 de septiembre de 2026 se piden los subtítulos que TikTok ya generó, que no cobran: de ellos solo sale un conteo de para cuántos videos existen, nunca el texto. Cada video trae su duración en segundos, que es lo que permite presupuestar: resumir o transcribir los videos con la IA de Apify cuesta entre 3 y 10 veces el plan y va apagado |
 | Redes (X, tendencias) | **necesita token** | lo que X marca como tendencia en Tijuana, Mexicali, San Diego, México y el mundo, leído sin sesión (guest token); nombre, puesto y liga, nunca tuits ni identidad; las promocionadas se descartan y el volumen es «sin dato» donde X no lo publica |
 | Tono de titulares | funcionando | mismo modelo, `--metodo modelo`. Tono de la frase, no postura hacia una persona |
 | Tablero por zona | funcionando | `web/`, Next.js: una página por zona con resumen, indicadores, temas, conversación y muro |
@@ -179,7 +238,7 @@ prensa cosechada.** Con el alcance México o Internacional y sin consulta, el
 muro muestra la sección de Google Noticias de ese momento, en el orden de
 Google. Esas filas no pasan por el pipeline: no tienen zona, tono ni figura,
 no entran a `data/`, no se cuentan en ninguna cifra de este documento y van
-marcadas «en vivo». Contestan «qué está sonando ahora», que es otra pregunta
+marcadas con el ícono de tendencia. Contestan «qué está sonando ahora», que es otra pregunta
 que «qué cubre la prensa de la región», y por eso no se mezclan. Desde el 12
 de septiembre la misma lista existe para cada zona y para la región en la
 sección «Lo que destaca ahora», con pastillas de rubro que son búsquedas, y

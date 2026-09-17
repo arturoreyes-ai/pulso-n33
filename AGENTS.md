@@ -125,6 +125,40 @@ is not a formality: `python -m pulso redes --sondear` costs one result per
 handle, and `tests/test_instagram.py` enforces that every verified row's
 `razon` cites it.
 
+On 17 September 2026 the client asked for more variety without losing the
+posts that are actually trending. `_destacados` now **gives every account one
+round before merit resumes** (`VUELTAS_GARANTIZADAS = 1`, `redes.py`), in both
+the global and the per-zone cut, and `seleccionarPublicaciones` applies the
+same rule and the same constant to the region cut in `web/`. The case:
+between 15 and 17 September `tjnoticias_ig` led **every** Tijuana run with
+seven to ten of the fifteen slots and the zone fell to two-to-four accounts of
+twelve — while all twelve harvested five posts a run, `estado: ok`. So the
+six that never appeared were being paid for and discarded at the featuring
+step, which is why this costs nothing: the posts and their comments are
+already in `cache/`, and `efimero/` is derived from `destacados`.
+
+Three things it is **not**, each of which was the tempting version:
+
+- **Not a per-account cap.** Past the first round everyone competes on likes
+  again — that is what `min(turno, vueltas)` buys. A plain round-robin seats a
+  10-like post above a 9,000-like one, which is the thing the client ruled out.
+- **Not per-zone.** A zone round would seat a 2-like Tecate post above an
+  1,895-like Tijuana one, asserting a parity the material does not have. An
+  account's zone is its stamped seat, so dividing by account already weights
+  each place by how many outlets it actually has.
+- **Not a reorder.** The emitted array is still globally sorted by
+  `(-likes, -comentarios, url)` and the screen still reads newest-first. The
+  selection changed; the order did not. `validador.py:1461` is why, and the
+  reason is diff noise behind `git diff --cached --quiet`.
+
+Where one outlet is the only publisher — `elvigia_ig` holds all fourteen of
+Ensenada at a median of **1 like** — the round exhausts immediately and the
+output is byte-identical to before. Manufacturing a gap is the same error as
+filling one. **TikTok is deliberately out** (client's call): there `cuenta` is
+a search id, so dividing by it would divide the mechanism; the honest key
+would be `creador`, and `tests/test_tiktok.py` pins that TikTok does not
+divide while proving the switch works.
+
 On 10 September 2026 the client asked for "the latest 24 hours" of four
 accounts (`@tjnoticias`, `@yoamotijuana`, `@tijuanainforma.mx`,
 `@el.tijuanense`). Since then the Instagram window is **24 hours on
@@ -188,6 +222,32 @@ are required there and forbidden for Instagram. The window is `ventana_horas`
 on `publicado`, never `ventana_dias` (Instagram measures the same way since
 10 September 2026). The comments actor costs ~$5 per 1,000
 results; `cache/tiktok/vistos.json` is what keeps that to once a day.
+
+**Nothing the video actor charges per second is on, and `duracion` is how you
+can tell.** Since 17 September 2026 the harvest asks for
+`downloadSubtitlesOptions: DOWNLOAD_SUBTITLES` — the captions **TikTok itself
+already generated**, for the videos that have them, which bills no event at all.
+The three paid options stay off and their prices sit next to the constant in
+`pulso/tiktok.py`: `transcription-minute` is $0.034 per *started minute per
+video*, and `aiVideoSummary` / `aiVideoDescription` are $0.0008 per **second of
+video**, at the Scale plan's Silver tier. At ~232 videos a run and four runs a
+day that is $668–$2,005/month to summarise everything and ~$950 to transcribe
+it — three to ten times the $199 plan. There is no "TikTok AI" summarizer:
+`aiVideoSummary` is **Apify's**, written by a third party, outside
+`web/src/lib/analisis/reglas.ts` and not bound by the five rules, so it does not
+get published even if someone turns it on.
+
+Each featured video therefore carries `duracion` (seconds, optional, never 0 —
+a corte from before the field stays valid with an aviso). It is not a screen
+field; the card has shown no figures since that same day. It exists because
+**every one of those charges is per second or per started minute, so without it
+any budget in that family is a guess** — which is exactly what had to be
+estimated the day the question came up. It arrives free with every result.
+
+**The subtitle text is never stored.** What comes out is a count per search,
+`salud[].con_subtitulos` — for how many videos captions existed — because that
+is the number that decides whether reading them is worth it. A caption track is
+the video's body, and aggregation stays at headline, source and link.
 
 ### The five product rules, as code constraints
 
@@ -480,16 +540,71 @@ already refused on the record in `docs/PLAN.md` §3.
   set, because every press is a paid call and the brief says "without needing AI
   APIs". Do not widen this to bulk or background analysis, and do not let the
   prompt cross tone with a figure (rule 5).
-- **The search link does not open the article, and following it is not the
-  pipeline rule breaking.** A live row's `url` is an opaque Google token that
-  **does not HTTP-redirect**: requesting it server-side returns ~580 KB of
-  Google's own page, which resolves the destination in JavaScript. Measured 15
-  September 2026, while testing exactly this. So `Analizar` uses the outlet's
-  real link, recovered from the corpus by folded title
-  (`lib/busqueda/enlaces.ts`, the same join as `imagenes.ts`; 91% of corpus
-  notes carry one) and says so plainly when there is none. The pipeline's
-  "never resolve the redirect" rule is untouched and is about something else:
-  there the token rotates between runs and would dirty `data/`.
+- **`Analizar` on a social post is a second carve-out, and it is narrower —
+  read it as one, not as a widening.** Since 17 September 2026 the same button
+  sits on an Instagram or TikTok card and calls `/api/analizar-publicacion`,
+  which **fetches nothing**: its only outbound request is to the model. The
+  model sees what the page already shows — the outlet's caption line and the
+  most-voted comment texts from `efimero/` — and the URL the browser sends is a
+  **lookup key** matched against the published `destacados`, never an address
+  the server visits. That is what closes two holes at once: there is no SSRF
+  surface, which is why `urlSegura` is deliberately absent there, and nobody
+  with a session can use the route as a free Claude proxy by sending their own
+  text. `probar-analisis.cjs` asserts the single outbound call and that no URL
+  matched a social host, so the "no social scraping" rule is an assertion here
+  rather than a promise. It reads the four JSON files **from disk**, not over
+  HTTP: `proxy.ts` gates `/data/` behind the session so a self-fetch would 401
+  in production only, and the origin would come from the caller's `Host`
+  header. The price is `next.config.ts`'s `outputFileTracingIncludes`, which
+  fails silently in production if dropped.
+- **`/api/analizar-conversacion` is the same carve-out over a whole selection**,
+  and the only place a model looks at more than one post. Same posture — nothing
+  fetched, disk reads of the published files, one call to the model — plus a
+  floor: under 10 comment texts it returns `pocos` without spending anything,
+  because "what recurs" over three comments is one comment promoted to a
+  pattern. It is a **button, not a cron step**: that is what keeps both "do not
+  widen this to bulk or background analysis" and the brief's "without needing AI
+  APIs" true. Note it costs the same either way — the response caches for six
+  hours (one ingest cycle) per place and ámbito, so the first press pays ~$0.04
+  and the rest of that cycle reads the copy. Measured: ~1,250 input tokens for
+  one post, ~37,000 for a whole run. **Prompt caching is not a lever here** —
+  Haiku 4.5 needs a 4,096-token prefix and ours is ~1,000, so it silently never
+  caches.
+- **The sampling caveat is the page's, never the model's**, in both redes
+  routes. The case: the prompt asked the model to say "this is not what a city
+  thinks", and to say that correctly it has to *name* what `reglas.ts` forbids —
+  «la opinión pública», «la mayoría», «la gente» — so the validator rejected the
+  whole reading and the reader just saw "No se pudo hacer la lectura". Four of
+  six correct caveats died that way. **The validator polices assertions; a
+  disclaimer that negates them cannot live under the same ban.** So the model is
+  now told not to discuss representativeness at all and only says what the
+  material leaves unestablished; `SALVEDAD_FIJA` in each panel says the rest,
+  where it cannot be omitted or softened — the same division as `chrome/pie.tsx`
+  and the five rules. Pinned in `probar-analisis.cjs`. Do not put it back in a
+  prompt.
+- **Two product rules are executable in `web/`, not just prompted.**
+  `web/src/lib/analisis/reglas.ts` rejects a whole model response that carries
+  a percentage or proportion (rule 2 — a post has 1–20 comments, below the 30
+  floor) or that attributes what it read to «la mayoría», «la gente» or «la
+  opinión pública» (rule 1). Comments are unmoderated public text, so some of
+  it is written for a model to read: they are data, never instructions, and the
+  validator is what holds — not the prompt. Do not "simplify" it away. Its
+  numeral branch lives inside a string, so the backslash is doubled; a lost one
+  kills the digit case with nothing to flag it, and the test pins both spellings.
+- **The search link does not open the article, and on-demand resolution is not
+  the pipeline rule breaking.** A live row's `url` is an opaque Google token
+  that **does not HTTP-redirect**: requesting it server-side returns Google's
+  own page, which resolves the destination in JavaScript. `Analizar` first uses
+  the outlet's real link when folded title **and normalized publisher domain**
+  match the archive (`lib/busqueda/enlaces.ts`); title alone can select another
+  publisher's syndicated copy. When there is no match, the confirmed request
+  may resolve the token through Google's undocumented article flow
+  (`lib/analisis/resolver-enlace.ts`). It accepts only exact HTTPS Google News
+  article paths and only a destination whose normalized host equals the row's
+  advertised publisher. A rate limit, malformed response, unsafe URL or domain
+  mismatch fails closed before the paid model call. The pipeline's "never
+  resolve the redirect" rule is untouched: there the token rotates between
+  runs and would dirty `data/`; the on-demand result is never persisted.
 - **Instagram comment text goes to `efimero/`, never to `data/` or git**, and
   commenter identity is never stored anywhere (see the invariant above).
 - **X: trends only, never tweets.** X closed anonymous reading in 2023, so
@@ -559,7 +674,18 @@ Tailwind v4, pnpm.
   screen, mandatory snap inside the box, one media mounted, heights frozen
   during the gesture; the most-voted **comment text lives in the card** (a
   two-comment preview in the desktop column and a «Comentarios» sheet on both
-  sizes, `paneles/comentarios-publicacion.tsx`). YouTube and X are the same
+  sizes, `paneles/comentarios-publicacion.tsx`). **The card carries no platform
+  counts** since 17 September 2026 — no likes, comments, plays, shares or
+  saves, no count on the Comentarios button, no per-comment likes: the embed
+  beside them shows the same figures and shows them live, while ours are up to
+  six hours old, and the client sent a screenshot of a card reading 3,635 next
+  to an embed reading 3,944. That is not rule 4 breaking (it forbids *filling* a
+  gap with a zero, not showing a figure), but it did supersede a written
+  `docs/PLAN.md` note, so it has one of its own. The pipeline still ingests and
+  archives every one of those fields. In their place the chip row carries
+  **Analizar** (`paneles/analisis-publicacion.tsx`), whose sheet is hoisted to
+  `Recorrido` beside the comments one — a `<dialog>` per card would be 98 of
+  them. YouTube and X are the same
   box without snap (`.hoja-lector`); X is trends, not comments
   (`paneles/tendencias.tsx`), in X's row grammar with the #1 trend of each
   location set in Archivo and the caveat under it. The Instagram / TikTok

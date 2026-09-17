@@ -534,7 +534,11 @@ export interface DocRedes {
    *  rotular «sin cuenta» en vez de un cero. */
   cuentas?: RedesCuenta[];
   /** Unión del top general y del top por zona, ordenada por (-likes,
-   *  -comentarios, url). Filtrar por zona y cortar a `destacados_maximo`. */
+   *  -comentarios, url). Cada uno de esos dos cortes reparte una vuelta por
+   *  cuenta antes de volver al mérito, para que una cuenta con más seguidores
+   *  no se lleve los quince de su ciudad. Filtrar por zona y cortar a
+   *  `destacados_maximo` con `seleccionarPublicaciones`, que aplica la misma
+   *  regla al corte de región: un `slice` crudo devuelve doce de Tijuana. */
   destacados?: Destacado[];
 }
 

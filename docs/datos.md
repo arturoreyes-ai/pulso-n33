@@ -383,7 +383,7 @@ crudo, mucho menos comprimido porque los hosts se repiten.
 | `id` | `sha256("<fuente>|<título plegado>")[:16]`. Se **recalcula** en cada validación |
 | `fuente` | `id` de un medio del catálogo, o una fuente sintética: `web-<hash12>` (descubrimiento) o `gn-<hash12>` (búsqueda) |
 | `origen`, `descubierta_por` | opcionales. `descubrimiento_web`/`gdelt`, o `busqueda_web`/`<id de la búsqueda>`; nunca contienen el cuerpo del artículo |
-| `imagen` | opcional. URL `https` de la miniatura que el medio publica **en su propio feed**, solo si su host es el del medio (o uno de los `imagenes_de` de su fila en `config/medios.json`). Enlazada, nunca copiada. **Se conserva** la primera vista, como `capturado`. Ausente cuando el medio no la publica o la nota llegó por búsqueda: no es un hueco que rellenar ni un `null` que escribir |
+| `imagen` | opcional. URL `https` de la miniatura que el medio publica **en su propio feed o en su portada**, solo si su host es el del medio (o uno de los `imagenes_de` de su fila en `config/medios.json`). Enlazada, nunca copiada. **Se conserva** la primera vista, como `capturado`. Ausente cuando el medio no la publica o la nota llegó por búsqueda: no es un hueco que rellenar ni un `null` que escribir |
 | `zona_medio` | cobertura declarada del medio; tiene que coincidir con el catálogo |
 | `zonas` | zonas de las que **habla la nota**. Puede traer varias, o ninguna |
 | `delegaciones` | delegaciones de Tijuana que nombra el **titular**. Solo trae algo si `zonas` incluye Tijuana |
@@ -955,6 +955,18 @@ aviso, no error.
   zona. El validador exige el orden (determinismo del `git diff --cached
   --quiet`) y que ninguna zona pase de `destacados_maximo`; el largo total sí
   puede superarlo.
+- **Cada uno de esos dos cortes reparte una vuelta por cuenta antes de volver
+  al mérito** (`VUELTAS_GARANTIZADAS`, solo Instagram): entra la mejor
+  publicación de cada cuenta que publicó en la ventana, y lo que sobre del
+  tope se llena por likes como siempre. El caso: entre el 15 y el 17 de
+  septiembre de 2026 `tjnoticias_ig` encabezó todas las corridas de Tijuana
+  con entre siete y diez de los quince lugares, y la zona bajó a entre dos y
+  cuatro cuentas de las doce activas, aunque las doce cosechan cinco posts en
+  cada corrida. **No es un tope por cuenta**: pasada la primera vuelta todos
+  vuelven a competir por likes, así que donde publica un solo medio
+  —`elvigia_ig` se lleva los catorce de Ensenada— la selección es idéntica a
+  la de antes. Inventar un hueco es el mismo error que rellenarlo. **Cambia
+  qué se elige, nunca en qué orden se escribe.**
 - **La ventana se mide contra `generado`**, nunca contra el reloj de quien
   valida, y sobre `publicado` (fecha-hora ISO en UTC, mismo formato que
   `generado`); `fecha` es su día, sirve para agrupar, y el validador exige que
@@ -1083,6 +1095,22 @@ cambia, y por qué:
   «sin dato». `reproducciones` conserva la regla compartida (solo si > 0).
 - `titulo` es la descripción del video **sin la cola de hashtags**; si el pie
   era solo hashtags se deja intacto.
+- **`duracion` son segundos de video y es opcional**, desde el 17 de septiembre
+  de 2026. Solo TikTok: el actor de Instagram no la publica y ahí está
+  prohibida. Un corte anterior no la trae y sigue siendo válido (aviso, no
+  error). Nunca se emite un 0, que se leería como «video de duración cero» en
+  vez de «no la trae». Existe por una razón de costo y no de interfaz: todo lo
+  que Apify cobra sobre el video se factura **por segundo empezado**
+  (`aiVideoSummary`, `aiVideoDescription`) o **por minuto empezado**
+  (`transcription-minute`), así que sin ella cualquier presupuesto de esa
+  familia es una suposición —que es exactamente lo que hubo que hacer el día
+  que se preguntó cuánto costaría resumir los videos—.
+- **El texto de los subtítulos no se guarda en ninguna parte.** Desde el 17 de
+  septiembre de 2026 la cosecha pide `downloadSubtitlesOptions:
+  DOWNLOAD_SUBTITLES`, que trae los subtítulos **que TikTok ya generó** cuando
+  el video los tiene y no cobra un evento aparte. De ahí solo sale un conteo:
+  `salud[].con_subtitulos`, cuántos videos de esa búsqueda los traían. El texto
+  es el cuerpo del video y la agregación se queda en titular, fuente y enlace.
 
 ```json
 {
@@ -1105,6 +1133,7 @@ cambia, y por qué:
    "titulo": "Cierran la garita de San Ysidro por obras",
    "tipo": "video",
    "likes": 1834, "comentarios": 212, "compartidos": 41, "guardados": 12, "reproducciones": 90000,
+   "duracion": 47,
    "cosechados": 30, "opinion": 27,
    "sentimiento": {"positivo": 3, "negativo": 18, "neutral": 6, "sin_clasificar": 0, "sin_modelo_idioma": 0},
    "temas": [{"tema": "garita", "comentarios": 9}]
