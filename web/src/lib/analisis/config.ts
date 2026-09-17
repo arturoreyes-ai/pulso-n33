@@ -22,3 +22,11 @@
 export function analisisHabilitado(): boolean {
   return process.env.ANALISIS_HABILITADO === "true" && (process.env.ANTHROPIC_API_KEY ?? "") !== "";
 }
+
+/**
+ * El modelo de las DOS fichas, aqui y no en cada modulo, para que no puedan
+ * derivar a dos ids distintos sin que nadie lo note. probar-analisis.cjs fija
+ * su valor, asi que cambiarlo rompe CI a proposito: es una decision de costo,
+ * no un detalle de implementacion.
+ */
+export const MODELO_ANALISIS = "claude-haiku-4-5-20251001";

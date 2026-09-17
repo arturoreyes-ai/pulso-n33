@@ -1,15 +1,16 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { BookmarkSimple, ChatCircle, Heart, Play, ShareFat, X as Cerrar } from "@phosphor-icons/react";
+import { X as Cerrar } from "@phosphor-icons/react";
 import { useRedes, useRedesComentarios, useTikTok, useTikTokComentarios } from "@/lib/datos/hooks";
 import type { ComentarioPublicado } from "@/lib/datos/tipos";
 import { NOMBRE_RED, reunirPublicaciones, type CubetaRegion, type PublicacionVisual, type RedVisual } from "@/lib/dominio/publicaciones";
-import { fechaCorta, hace, hora, numero } from "@/lib/dominio/formato";
+import { fechaCorta, hace, hora } from "@/lib/dominio/formato";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 import { teclasDelRecorrido, useRecorrido } from "@/lib/pantalla/recorrido";
 import { CONTROL } from "@/components/lector/lector";
 import { clasesChip } from "@/components/ui/clases";
+import { BotonAnalizar, FichaPublicacion } from "./analisis-publicacion";
 import { ComentariosPublicacion, VistaPreviaComentarios, type Textos } from "./comentarios-publicacion";
 import { EsqueletoMedio, MedioSocial } from "./medio-social";
 
@@ -42,7 +43,7 @@ type Cortes = Partial<Record<RedVisual, string>>;
  * que la direccion pidio ver el 8 de septiembre de 2026. Una sola hoja
  * (`<dialog>`) para todo el recorrido, nunca una por tarjeta; su cuerpo esta
  * en paneles/comentarios-publicacion.tsx. */
-export default function VisorRedes({ zona, filtro, cubeta = "corredor" }: { zona: ZonaRuta | null; filtro: FiltroVisual; cubeta?: CubetaRegion }) {
+export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis = false }: { zona: ZonaRuta | null; filtro: FiltroVisual; cubeta?: CubetaRegion; analisis?: boolean }) {
   const instagram = useRedes();
   const tiktok = useTikTok();
   const textosInstagram = useRedesComentarios();
@@ -66,7 +67,7 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor" }: { zona
       {/* El estado se dice pero no ocupa lugar: la caja es la pantalla y una
           linea encima encogeria las tarjetas. */}
       {estados.map((estado) => <p key={estado} role="status" className="sr-only">{estado}</p>)}
-      <Recorrido key={`${filtro}:${filas.map((fila) => fila.clave).join("|")}`} publicaciones={filas} cortes={cortes} cargando={cargando} textos={textos} />
+      <Recorrido key={`${filtro}:${filas.map((fila) => fila.clave).join("|")}`} publicaciones={filas} cortes={cortes} cargando={cargando} textos={textos} analisis={analisis} />
     </>
   );
 }
@@ -79,11 +80,12 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor" }: { zona
  *  esqueleto mientras carga, y si no hay nada, el hueco dicho como hueco. La
  *  caja ES la pantalla, y una linea suelta en su lugar dejaria el lector
  *  vacio. */
-function Recorrido({ publicaciones, cortes, cargando, textos }: {
+function Recorrido({ publicaciones, cortes, cargando, textos, analisis }: {
   publicaciones: PublicacionVisual[];
   cortes: Cortes;
   cargando: boolean;
   textos: Record<RedVisual, Textos>;
+  analisis: boolean;
 }) {
   const contenedor = useRef<HTMLDivElement>(null);
   const { actual, enPantalla, ir } = useRecorrido(contenedor);
@@ -94,11 +96,25 @@ function Recorrido({ publicaciones, cortes, cargando, textos }: {
     document.addEventListener("visibilitychange", cambiar);
     return () => document.removeEventListener("visibilitychange", cambiar);
   }, []);
+  // ABRIR CUENTA TURNOS, NO LA PUBLICACION. El efecto colgaba de la fila y
+  // `onClose` la devolvia a null, asi que abrir, cerrar y volver a pulsar la
+  // MISMA tarjeta escribia el mismo valor dos veces: React no re-renderiza, el
+  // efecto no vuelve a correr y la hoja no abria nunca mas para esa
+  // publicacion. Habia que pasar por otra y volver. El turno siempre cambia.
   const hoja = useRef<HTMLDialogElement>(null);
   const [abierta, setAbierta] = useState<PublicacionVisual | null>(null);
+  const [turnoComentarios, setTurnoComentarios] = useState(0);
   useEffect(() => {
-    if (abierta !== null) hoja.current?.showModal();
-  }, [abierta]);
+    if (turnoComentarios > 0) hoja.current?.showModal();
+  }, [turnoComentarios]);
+  // La ficha de IA: OTRA hoja unica, por el mismo motivo escrito arriba. Una
+  // por tarjeta serian noventa y ocho dialogos montados.
+  const hojaIA = useRef<HTMLDialogElement>(null);
+  const [analizada, setAnalizada] = useState<PublicacionVisual | null>(null);
+  const [turnoIA, setTurnoIA] = useState(0);
+  useEffect(() => {
+    if (turnoIA > 0) hojaIA.current?.showModal();
+  }, [turnoIA]);
   const total = publicaciones.length;
   return <>
     <div ref={contenedor} className="recorrido-lector" tabIndex={0} role="region" aria-label="Publicaciones"
@@ -107,7 +123,9 @@ function Recorrido({ publicaciones, cortes, cargando, textos }: {
         <Publicacion key={fila.clave} fila={fila} indice={indice} total={total} corte={cortes[fila.red]}
           activo={indice === actual && visible && enPantalla}
           comentarios={textos[fila.red].data?.por_post[fila.post.url]}
-          onComentarios={() => setAbierta(fila)} />
+          analisis={analisis}
+          onComentarios={() => { setAbierta(fila); setTurnoComentarios((t) => t + 1); }}
+          onAnalizar={() => { setAnalizada(fila); setTurnoIA((t) => t + 1); }} />
       ))}
       {total === 0
         ? cargando
@@ -121,6 +139,15 @@ function Recorrido({ publicaciones, cortes, cargando, textos }: {
         <button type="button" className={CONTROL} aria-label="Cerrar comentarios" onClick={() => hoja.current?.close()}><Cerrar size={20} aria-hidden /></button>
       </div>
       {abierta === null ? null : <ComentariosPublicacion key={abierta.clave} fila={abierta} textos={textos[abierta.red]} />}
+    </dialog>
+    <dialog ref={hojaIA} className="dialogo-lector" aria-labelledby="titulo-lectura-publicacion" onClose={() => setAnalizada(null)}>
+      <div className="cabecera-dialogo-lector">
+        <h2 id="titulo-lectura-publicacion" className="text-rotulo text-tinta-titulo">Lectura automática</h2>
+        <button type="button" className={CONTROL} aria-label="Cerrar lectura" onClick={() => hojaIA.current?.close()}><Cerrar size={20} aria-hidden /></button>
+      </div>
+      {/* `key` por publicacion: la ficha no debe heredar el estado de la
+          anterior, ni su confirmacion ya pulsada. */}
+      {analizada === null ? null : <FichaPublicacion key={analizada.clave} fila={analizada} />}
     </dialog>
   </>;
 }
@@ -145,22 +172,16 @@ function lugarDe(fila: PublicacionVisual): string {
   return `${fila.red === "instagram" ? "desde" : "sobre"} ${nombre}`;
 }
 
-const CIFRAS = [
-  ["Likes", "likes", Heart],
-  ["Comentarios", "comentarios", ChatCircle],
-  ["Reproducciones", "reproducciones", Play],
-  ["Compartidos", "compartidos", ShareFat],
-  ["Guardados", "guardados", BookmarkSimple],
-] as const;
-
-function Publicacion({ fila, indice, total, corte, activo, comentarios, onComentarios }: {
+function Publicacion({ fila, indice, total, corte, activo, comentarios, analisis, onComentarios, onAnalizar }: {
   fila: PublicacionVisual;
   indice: number;
   total: number;
   corte: string | undefined;
   activo: boolean;
   comentarios: ComentarioPublicado[] | undefined;
+  analisis: boolean;
   onComentarios: () => void;
+  onAnalizar: () => void;
 }) {
   const iso = fila.post.publicado ?? fila.post.fecha;
   const antiguedad = corte ? hace(iso, corte) : "";
@@ -177,33 +198,24 @@ function Publicacion({ fila, indice, total, corte, activo, comentarios, onComent
       <p className="mt-2 text-meta text-tinta-meta md:mt-4 md:text-cuerpo md:text-tinta-prosa">
         {fila.fuente} · {NOMBRE_RED[fila.red]} · <time dateTime={iso}>{cuando}</time> · {lugarDe(fila)}
       </p>
-      {/* Cinco cifras siempre, con «sin dato» donde la plataforma no publica
-          la cifra: Instagram no expone compartidos ni guardados. Omitir la fila
-          esconderia el hueco; un 0 lo mentiria. En telefono es una columna al
-          costado del medio, anclada a la banda (`bottom-full`): queda justo
-          encima de ella tenga el titular una o dos lineas, sobre el margen que
-          EspacioMedio le deja al medio. */}
-      <dl className="absolute right-3 bottom-full mb-4 flex w-14 flex-col items-center gap-4 md:static md:my-6 md:grid md:w-auto md:grid-cols-3 md:gap-4">
-        {CIFRAS.map(([nombre, campo, Icono]) => {
-          const valor = fila.post[campo];
-          return <div key={campo} className="flex flex-col items-center md:items-start">
-            <dt>
-              <Icono aria-hidden size={22} weight="light" className="text-tinta-inerte md:hidden" />
-              <span className="sr-only md:not-sr-only md:text-cuerpo md:text-tinta-meta">{nombre}</span>
-            </dt>
-            <dd className={`text-meta tabular-nums md:text-cuerpo ${valor === undefined ? "text-tinta-meta" : "text-tinta-dato"}`}>{valor === undefined ? "sin dato" : numero(valor)}</dd>
-          </div>;
-        })}
-      </dl>
-      <div className="mt-3 flex flex-wrap items-center gap-3 md:mt-0">
+      {/* AQUI VIVIAN CINCO CIFRAS y se fueron el 17 de septiembre de 2026, a
+          peticion del cliente: el embed las trae al lado y las trae mejor, que
+          las lee en vivo mientras el corte tiene hasta seis horas. En su
+          captura el video decia 3,944 likes y la tarjeta 3,635 -- dos numeros
+          para lo mismo en la misma pantalla, y el nuestro el equivocado.
+          Tampoco queda el contador del boton de comentarios ni el de likes de
+          cada comentario (comentarios-publicacion.tsx).
+
+          No rompe la regla 4: prohibe RELLENAR un hueco con un cero, no obliga
+          a pintar una cifra. Sin la fila no hay afirmacion que matizar, y el
+          «sin dato» de compartidos y guardados de Instagram se va con ella.
+          El pie del sitio sigue diciendo las cinco reglas enteras. */}
+      <div className="mt-3 flex flex-wrap items-center gap-3 md:mt-6">
         {fila.url
           ? <a href={fila.url} target="_blank" rel="noopener noreferrer nofollow" className={clasesChip(true)}>Ver original</a>
           : <p className="text-meta text-tinta-meta md:text-cuerpo">Enlace no disponible.</p>}
-        {/* En el telefono la cifra ya esta en la columna de iconos; repetirla
-            aqui no cabe en una linea con «Ver original» y el contador. */}
-        <button type="button" className={clasesChip(false)} onClick={onComentarios}>
-          Comentarios<span className="hidden md:inline"> · {numero(fila.post.comentarios)}</span>
-        </button>
+        <button type="button" className={clasesChip(false)} onClick={onComentarios}>Comentarios</button>
+        {analisis ? <BotonAnalizar onAbrir={onAnalizar} /> : null}
         <p className="ml-auto text-meta tabular-nums text-tinta-meta">{indice + 1} de {total}</p>
       </div>
       <div className="mt-6 hidden md:block"><VistaPreviaComentarios comentarios={comentarios} /></div>
@@ -214,7 +226,7 @@ function Publicacion({ fila, indice, total, corte, activo, comentarios, onComent
 /* En escritorio la celda se estira (nunca `justify-self-end`: un item que se
    encoge a su contenido deja al medio, que mide en %, con ancho cero) y el
    medio se alinea al borde de la columna de texto con `justify-end`. */
-const CLASES_MARCO_MEDIO = "flex flex-1 items-center justify-center px-4 pt-4 pr-20 md:flex-none md:justify-end md:px-0 md:pt-0";
+const CLASES_MARCO_MEDIO = "flex flex-1 items-center justify-center px-4 pt-4 md:flex-none md:justify-end md:px-0 md:pt-0";
 
 /** Mantiene la altura ya medida al desmontar el medio. La reserva parte del
  * esqueleto, que es la forma esperada, y solo crece con lo medido: asi el

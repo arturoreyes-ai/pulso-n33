@@ -1,4 +1,5 @@
 import { MenuLector } from "@/components/chrome/menu-lector";
+import { analisisHabilitado } from "@/lib/analisis/config";
 import { Pie } from "@/components/chrome/pie";
 import { Seccion } from "@/components/chrome/seccion";
 import { PanelConversacion } from "@/components/paneles/conversacion";
@@ -27,6 +28,12 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  *   Instagram — cuentas de medios verificadas una por una. La zona es la SEDE
  *               de la cuenta. Publica el texto de los comentarios. Ventana de
  *               24 horas desde el 10 de septiembre de 2026 (antes, la semana).
+ *               El corte reparte una vuelta por cuenta antes del merito desde
+ *               el 17: entre el 15 y el 17 una sola cuenta tuvo entre siete y
+ *               diez de los quince de Tijuana. Eso NO se le dice al lector;
+ *               la linea del dialogo solo dice que no caben todas y que
+ *               ninguna cuenta llena la lista sola, que es lo que el lector
+ *               puede comprobar desplazandose.
  *   TikTok    — busquedas: una por lugar del corredor mas una de Mexico y
  *               una del mundo, desde el 15 de septiembre de 2026. La zona
  *               sale del PIE del video, porque una consulta no tiene lugar;
@@ -81,6 +88,7 @@ export function PaginaRedes({ zona }: { zona: ZonaRuta | null }) {
         menu={<MenuLector zona={zona} vista="redes" />}
         informacion={<Informacion entrada={entrada} nombre={nombre} />}
         paneles={{ youtube: <PanelConversacion zona={zona} />, x: <PanelTendencias zona={zona} /> }}
+        analisis={analisisHabilitado()}
       />
     </Seccion>
   );
@@ -96,9 +104,10 @@ function Informacion({ entrada, nombre }: { entrada: string; nombre: string | nu
       <div className="grid gap-4 px-4 pt-6 pb-6 text-lectura text-tinta-prosa">
         <p className="max-w-[65ch]">{entrada}</p>
         <p className="max-w-[65ch]">
-          Instagram y TikTok: publicaciones recientes de las últimas 24 horas, de la más nueva a la más antigua,
-          con el pie del medio o la descripción del video, sus cifras y el texto de los comentarios más votados;
-          nunca quién los escribió. Lo que la plataforma no publica se dice «sin dato», no cero.
+          Instagram y TikTok: publicaciones de las últimas 24 horas, de la más nueva a la más antigua,
+          con el pie del medio o la descripción del video y el texto de los comentarios más votados;
+          nunca quién los escribió. No caben todas, y ninguna cuenta llena la lista por sí sola.
+          Lo que la plataforma no publica se dice «sin dato», no cero.
         </p>
         <p className="max-w-[65ch]">
           YouTube: comentarios en canales de noticias {nombre === null ? "de la región" : `sobre ${donde}`}, con su

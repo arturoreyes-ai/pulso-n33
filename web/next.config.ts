@@ -13,6 +13,32 @@ const nextConfig: NextConfig = {
   // igual (la salida del build debe decir "○ (Static)") y el servidor sigue
   // disponible el dia que cambien los requisitos.
 
+  // /api/analizar-publicacion lee estos cuatro archivos DEL DISCO, no por HTTP
+  // (el motivo esta en lib/analisis/datos-redes.ts). El trazado automatico no
+  // los ve, porque el nombre se arma en tiempo de ejecucion, y sin esto no
+  // viajan al bundle de la funcion.
+  //
+  // FALLA EN SILENCIO Y EN LA DIRECCION MALA: con `next dev` todo funciona, y
+  // en produccion la ruta devuelve `codigo: "datos"` siempre. No hay prueba
+  // que pueda atraparlo. Los dos `*-comentarios.json` vienen de efimero/,
+  // fuera de git, y en un despliegue construido desde el repositorio no
+  // existen; un patron que no empareja nada simplemente no se incluye, que es
+  // el comportamiento que se quiere.
+  outputFileTracingIncludes: {
+    "/api/analizar-conversacion": [
+      "./public/data/redes.json",
+      "./public/data/tiktok.json",
+      "./public/data/redes-comentarios.json",
+      "./public/data/tiktok-comentarios.json",
+    ],
+    "/api/analizar-publicacion": [
+      "./public/data/redes.json",
+      "./public/data/tiktok.json",
+      "./public/data/redes-comentarios.json",
+      "./public/data/tiktok-comentarios.json",
+    ],
+  },
+
   experimental: {
     // CRITICO. Los dos son barriles: sin esto, un solo import de un icono
     // arrastra ~1,500 modulos y un import de Recharts mete la libreria

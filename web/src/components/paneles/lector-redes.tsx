@@ -6,6 +6,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { preload } from "swr";
 
 import { Lector } from "@/components/lector/lector";
+import { ConversacionRedes } from "./conversacion-redes";
 import { clasesChip } from "@/components/ui/clases";
 import { RUTAS } from "@/lib/datos/config";
 import { leerJson } from "@/lib/datos/fetcher";
@@ -78,11 +79,15 @@ let ultimaCubeta: CubetaRegion = "corredor";
  *  entraria al bundle de cliente. */
 const OPCIONES_ZONA: readonly (ZonaRuta | null)[] = [null, ...ZONAS_RUTA];
 
-export function LectorRedes({ zona, paneles, menu, informacion }: {
+export function LectorRedes({ zona, paneles, menu, informacion, analisis = false }: {
   zona: ZonaRuta | null;
   paneles: { youtube: ReactNode; x: ReactNode };
   menu: ReactNode;
   informacion: ReactNode;
+  /** Si se pinta el boton de lectura automatica. Lo decide el servidor
+   *  (`analisisHabilitado`): ANTHROPIC_API_KEY no lleva NEXT_PUBLIC_, asi que
+   *  en cliente valdria "" y la guarda diria que no siempre. */
+  analisis?: boolean;
 }) {
   const [pestana, setPestana] = useState<Pestana>(() => ultimaPestana);
   useEffect(() => {
@@ -107,6 +112,11 @@ export function LectorRedes({ zona, paneles, menu, informacion }: {
     // quiera otra pagina la tiene en el menu de la barra.
     <Lector volver={ruta(zona, null)} rotulo="Redes" valor={lugar} tituloOpciones="Lugar"
       opciones={<OpcionesLugar zona={zona} cubetas={disponibles} activa={activa} onCubeta={setCubeta} />} menu={menu}
+      // «De que se habla» va en la barra y no en una pestana: las pestanas son
+      // plataformas y esta pregunta las cruza. Solo con Instagram o TikTok
+      // delante -- YouTube no publica texto y X son tendencias, no comentarios.
+      acciones={pestana === "youtube" || pestana === "x" ? null
+        : <ConversacionRedes zona={zona} cubeta={activa} analisis={analisis} />}
       pestanas={
         <div role="group" aria-label="Plataforma" className="pestanas-lector">
           {PESTANAS.map((p) => {
@@ -129,7 +139,7 @@ export function LectorRedes({ zona, paneles, menu, informacion }: {
       informacion={informacion}>
       {pestana === "youtube" || pestana === "x"
         ? <div className="hoja-lector" tabIndex={0}><div className="mx-auto w-full max-w-[88rem] px-4 py-8 md:px-8">{paneles[pestana]}</div></div>
-        : <VisorRedes key={`${zona ?? "region"}:${activa}`} zona={zona} filtro={pestana} cubeta={activa} />}
+        : <VisorRedes key={`${zona ?? "region"}:${activa}`} zona={zona} filtro={pestana} cubeta={activa} analisis={analisis} />}
     </Lector>
   );
 }

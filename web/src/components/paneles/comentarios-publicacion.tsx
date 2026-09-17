@@ -3,7 +3,6 @@
 import { useState } from "react";
 
 import type { ComentarioPublicado, DocRedesComentarios } from "@/lib/datos/tipos";
-import { numero, pluralizar } from "@/lib/dominio/formato";
 import * as F from "@/lib/dominio/frases";
 import { NOMBRE_RED, type PublicacionVisual } from "@/lib/dominio/publicaciones";
 
@@ -52,16 +51,19 @@ function ChipSentimiento({ s }: { s: ComentarioPublicado["sentimiento"] }) {
   );
 }
 
+/* Los likes de cada comentario se fueron el 17 de septiembre de 2026 con las
+   cifras de la tarjeta (visor-redes.tsx). Siguen decidiendo el ORDEN -- estos
+   son los mas votados, y el pipeline ya descarto los que no tienen likes
+   despues de los visibles --, pero dejan de pintarse. */
 function Comentario({ c, recortar = false }: { c: ComentarioPublicado; recortar?: boolean }) {
   return (
     <li>
       <blockquote className={`max-w-[65ch] text-cuerpo text-tinta-dato ${recortar ? "line-clamp-2" : ""}`}>{c.texto}</blockquote>
-      <p className="mt-1 flex items-center gap-2 text-meta text-tinta-meta">
-        <span className="tabular-nums">
-          {numero(c.likes)} {pluralizar(c.likes, "like", "likes")}
-        </span>
-        <ChipSentimiento s={c.sentimiento} />
-      </p>
+      {c.sentimiento === null ? null : (
+        <p className="mt-1 flex items-center gap-2 text-meta text-tinta-meta">
+          <ChipSentimiento s={c.sentimiento} />
+        </p>
+      )}
     </li>
   );
 }
