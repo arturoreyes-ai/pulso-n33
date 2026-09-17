@@ -1,8 +1,786 @@
 {
  "esquema": 1,
  "ventana_dias": 30,
- "total": 5355,
+ "total": 5414,
  "notas": [
+  {
+   "id": "0c6ee395064e5863",
+   "titulo": "28 cachanillas van por la gloria en el Nacional Femedees",
+   "url": "https://www.elimparcial.com/mxl/mexicali/2026/09/17/28-cachanillas-van-por-la-gloria-en-el-nacional-femedees/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T16:31:10+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5111,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/BOI35SS2LNCBHLQA7JTVWGB3Q4.jpeg?auth=dd3735d0ed8d517040662cc9420c345d9edbc2330bf9daf9c346f8a213fbcd4d&smart=true&width=1025&height=630"
+  },
+  {
+   "id": "9fc3b49fb5af579b",
+   "titulo": "Sheinbaum Explica por qué no Mencionó a Allende Durante el Grito de Independencia",
+   "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQcWFEZ0daLTZKV0lyQWpXQ3o0MW1TUm1ITmN2UVJiQVN6V1l0ZGl6WmhPZUF4eHFya3Vmc0cxQk1tbFJhNzVTQjZKMENCUmVwMEd6djNHWF8ybHFjQkNRaWxMeFVTRFh3M2QzUW9nQm9seDhGaDNFMHhxc3JVeXRZUU1FMk5GUWN1ejBYNUpnNDBEeG5LLTNmYmFYbVNVcnBuRzhUQm5kQ3ZKSHdLUG9sZ2R5aGMzblJkZnFEbA?oc=5",
+   "dominio": "nmas.com.mx",
+   "fuente": "gn-df1d301d141c",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T16:29:02+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.704,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin"
+  },
+  {
+   "id": "bf0e0eca1c3b06a4",
+   "titulo": "Cabrillo: recordar a quienes llegaron y a quienes los vieron llegar",
+   "url": "https://jornadabc.com.mx/opinion/cabrillo-recordar-a-quienes-llegaron-y-a-quienes-los-vieron-llegar/",
+   "dominio": "jornadabc.com.mx",
+   "fuente": "jornadabc",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T16:27:32+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5401,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "ed3a5ae8ee89e0a1",
+   "titulo": "Programas sociales en Sonora 2026: 200 millones para 16 mil hogares, Beca Terapia para 9 mil 200 personas y dos pagos pendientes de la Tarjeta de Oportunidades",
+   "url": "https://www.elimparcial.com/son/sonora/2026/09/17/programas-sociales-en-sonora-2026-200-millones-para-16-mil-hogares-beca-terapia-para-9-mil-200-personas-y-dos-pagos-pendientes-de-la-tarjeta-de-oportunidades/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T16:18:54+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6031,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/ZKIJDTCRGJEK7FOXH4ZJIFVQAQ.jpg?auth=fa16fdf02a767fb7cb3651805ff0377e699e5916f0005018097de3cbf193a6de&smart=true&width=1182&height=742"
+  },
+  {
+   "id": "ff7bb4b27e01846a",
+   "titulo": "Yeri Mua: Esta sería la cantidad de dinero que tendría que pagar la influencer en caso de resibir sanción por posar semidesnuda con la bandera de México",
+   "url": "https://www.elimparcial.com/espectaculos/2026/09/17/yeri-mua-esta-seria-la-cantidad-de-dinero-que-tendria-que-pagar-la-influencer-en-caso-de-resibir-sancion-por-posar-semidesnuda-con-la-bandera-de-mexico/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T16:15:03+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6211,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/Q2F5JRBWDVEUDFL3ZZDEH2VYI4.jpg?auth=d22a4d6207de8a7bff7f4e53144cccfc9784eac45476a32172722e9ed01e90f6&smart=true&width=1200&height=675"
+  },
+  {
+   "id": "d9cb6534c4decf59",
+   "titulo": "Baja mexicali a los 37 grados este jueves y toma un respiro del calor extremo",
+   "url": "https://www.elimparcial.com/mxl/mexicali/2026/09/17/baja-mexicali-a-los-37-grados-este-jueves-y-toma-un-respiro-del-calor-extremo/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T16:09:43+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5988,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/BHS7WNEECJGNPJXF7LWWFHXBDI.jpeg?auth=6ec4ecea51698568cee33420be19c06b72f9a725cd21bb5d8280bba4e00e84b0&smart=true&width=1200&height=900"
+  },
+  {
+   "id": "30744e5bc7ddeefd",
+   "titulo": "Zona Sísmica",
+   "url": "https://www.elimparcial.com/mxl/columnas/2026/09/17/zona-sismica/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T16:03:31+00:00",
+   "capturado": "2026-09-04T15:24:36+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6929,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "fc4e7032b4719e93",
+   "titulo": "TE VIMOS CON ESTILO EN Estilos",
+   "url": "https://www.elimparcial.com/son/estilosgh/2026/09/17/te-vimos-con-estilo-en-estilos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T16:00:00+00:00",
+   "capturado": "2026-09-10T18:27:55+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5994,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/375D3UELWVEIXGHIM7SXII6VIY.jpg?auth=b78faa1d7f2814d2b86dfd3906b2d26940f847b84ae4fc1b78df657768747865&smart=true&width=592&height=1757"
+  },
+  {
+   "id": "9dbbb44233ed745b",
+   "titulo": "Obras con sentido social",
+   "url": "https://www.elimparcial.com/estilos/2026/09/17/obras-con-sentido-social/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T16:00:00+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.6963,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/HFLNLZKXXVAFPLCRPXVYW7HKRY.jpg?auth=22efc827af569afab14f7d0f23b5c86af022346591073b1341fa8ea0bc975747&smart=true&width=2798&height=1574"
+  },
+  {
+   "id": "247d46dad372f289",
+   "titulo": "Apoyan a jóvenes con 736 mil becas",
+   "url": "https://www.elimparcial.com/estilos/2026/09/17/apoyan-a-jovenes-con-736-mil-becas/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T16:00:00+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5017,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/ZRDWZBXQ65E7RJ74YDYRV3HD7I.JPEG?auth=4dcf28a004507dbf794adc0e082db85acbfb4cc176f6613c9ae418e2b845ea16&smart=true&width=7810&height=4393"
+  },
+  {
+   "id": "208967b2ea6e0c56",
+   "titulo": "Una cascada escondida en Phoenix",
+   "url": "https://www.elimparcial.com/son/arizona/2026/09/17/una-cascada-escondida-en-phoenix/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T16:00:00+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7709,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/MCM3FKA2FNA25BF2CZGDKFD7TY.jpeg?auth=5a1b1afdfa4c039536a11d6ca578a75073a501069f497216a97facd755fc616f&smart=true&width=5198&height=3466"
+  },
+  {
+   "id": "7ecfb651b4b5b36f",
+   "titulo": "Comparecencias sobre seguridad no llegarán al pleno en San Lázaro",
+   "url": "https://jornadabc.com.mx/region/comparecencias-sobre-seguridad-no-llegaran-al-pleno-en-san-lazaro/",
+   "dominio": "jornadabc.com.mx",
+   "fuente": "jornadabc",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:48:41+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6253,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "6d28568dc1bc92df",
+   "titulo": "En respuesta a las críticas de Trump, Sheinbaum responde: ¿Qué hace EU contra el consumo de drogas?",
+   "url": "https://zetatijuana.com/2026/09/en-respuesta-a-las-criticas-de-trump-sheinbaum-responde-que-hace-eu-contra-el-consumo-de-drogas/",
+   "dominio": "zetatijuana.com",
+   "fuente": "zeta",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:45:35+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5994,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "a766166faa84a7ad",
+   "titulo": "Paquete Económico 2027 propone subir 140% el cobro a trenes de carga; especialistas advierten posible impacto en tarifas y precios de mercancías",
+   "url": "https://www.elimparcial.com/dinero/2026/09/17/paquete-economico-2027-propone-subir-140-el-cobro-a-trenes-de-carga-especialistas-advierten-posible-impacto-en-tarifas-y-precios-de-mercancias/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:45:20+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5289,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/YLF34EGF7NGITD3VG2EMSQPHKY.jpg?auth=f88e35b49acbe6c8d7c3881d7bb5fbd045ad5bdb884cda020cb224524cf65c0d&smart=true&width=1200&height=750"
+  },
+  {
+   "id": "4bc49dbf51d5ba02",
+   "titulo": "Carro atropella a dos hombres en Tijuana tras riña en Grito de Independencia",
+   "url": "https://jornadabc.com.mx/bajacalifornia/carro-atropella-a-dos-hombres-en-tijuana-tras-rina-en-grito-de-independencia/",
+   "dominio": "jornadabc.com.mx",
+   "fuente": "jornadabc",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:44:25+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.702,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "ea7999fc814672fa",
+   "titulo": "Carlo de Fornaro: el México del porfiriato",
+   "url": "https://www.elimparcial.com/mxl/columnas/2026/09/17/carlo-de-fornaro-el-mexico-del-porfiriato/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:41:32+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7925,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "e08337aa604e15c9",
+   "titulo": "Historiadora documenta la esencia del son huasteco, forjador de gran cohesión social",
+   "url": "https://jornadabc.com.mx/02_secundarias/historiadora-documenta-la-esencia-del-son-huasteco-forjador-de-gran-cohesion-social/",
+   "dominio": "jornadabc.com.mx",
+   "fuente": "jornadabc",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:39:00+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.8141,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "7f3b08d9a51ac091",
+   "titulo": "Why BKB Is Going All-In On Mexico With Tijuana’s BKB 59 Card",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNRnZCMDdldnNvNkF2QXZuUGFmTUlJaGlKZWJLWW05NmdINVpWZFR5a0s0Rkw5Yzk2UnVqRmh0cE9ibGV1Q1ZYcm4tM1hfZ0kyaUVRSVR3TjA0anJIRUV0c1FSa3JSbHcwY2ZkNHEteHJYa2c2bDFidm92WE1GNVk0NUNZNWwtUWVIa0ZyanpxV1k?oc=5",
+   "dominio": "lowkickmma.com",
+   "fuente": "gn-b856f6c3ab48",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:38:00+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en"
+  },
+  {
+   "id": "5006bca5a844b961",
+   "titulo": "El alcalde morenista Isaac Rodríguez Ochoa, detenido por estar relacionado con asaltos a transportistas en carreteras, regalaba productos robados a la gente y simulaba que venían de programas sociales",
+   "url": "https://www.elimparcial.com/mexico/2026/09/17/el-alcalde-morenista-isaac-rodriguez-ochoa-detenido-por-estar-relacionado-con-asaltos-a-transportistas-en-carreteras-regalaba-productos-robados-a-la-gente-y-simulaba-que-venian-de-programas-sociales/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:37:41+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.868,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/SYHPCYIBSZFN5PFUL5K4MLXRRU.jpg?auth=0459348d71d9f81145dab9b267f40b394a2dfd551c004c16fa88c7fc02ab75a5&smart=true&width=1920&height=1200"
+  },
+  {
+   "id": "085e1111d92d139e",
+   "titulo": "JMAS cerrará la llave a cerca de siete colonias del norponiente",
+   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQX3phX3NhRV9MaS1fME5EaUpIbG14RWVuQUxJcE5aTEZQamlfRUVjRS1wcHNFdkR5RDYyZVlobzhlUlB6VTVJdHY1UUpFYV9QNkZSYnBlQ2p5enNWdE1PdEt3MjF2bjRhU3RHRjRNUEF5aC1uUlRGeXpHM24zN3I5a2thb2FJMHczMFEyNVc2NEpMSkdValA1cGtUekY4T0FWeXFRcHp4VjFzNGoxdE9fQ3FCVjduQQ?oc=5",
+   "dominio": "elsoldetijuana.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:33:45+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7469,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin"
+  },
+  {
+   "id": "6095eccd4b7f7ae7",
+   "titulo": "Sheinbaum reitera: cualquier “pretexto para injerencia debe ser rechazado”",
+   "url": "https://jornadabc.com.mx/principales/sheinbaum-reitera-cualquier-pretexto-para-injerencia-debe-ser-rechazado/",
+   "dominio": "jornadabc.com.mx",
+   "fuente": "jornadabc",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:32:33+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.805,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "07149dd97336beaf",
+   "titulo": "TV Azteca pide protección en EEUU para evitar acciones separadas de sus acreedores",
+   "url": "https://www.elimparcial.com/mexico/2026/09/17/tv-azteca-pide-proteccion-en-eeuu-para-evitar-acciones-separadas-de-sus-acreedores/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:31:37+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4972,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/MCNO4DRKJFH2JHGC2PWIC7JGEQ.jpg?auth=73d79ce7eedd0182b79ecc940a2604cfb7b9cc075cdde3eebddb3663b629828c&smart=true&width=5500&height=3530"
+  },
+  {
+   "id": "36532082ce070d0e",
+   "titulo": "Estas fueron las zonas de Sonora donde más llovió: Empalme encabezó los registros y arroyos incomunicaron poblados de Guaymas",
+   "url": "https://www.elimparcial.com/son/sonora/2026/09/17/estas-fueron-las-zonas-de-sonora-donde-mas-llovio-empalme-encabezo-los-registros-y-arroyos-incomunicaron-poblados-de-guaymas/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:25:36+00:00",
+   "capturado": "2026-09-17T15:07:52+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.638,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/CGE7KCLIZVEOXGGDK4ZZ5GP2WY.jpg?auth=bedc5e010fc10dcf0bd9f1cc3cddc827687c4d420810e13a6f5eaaa36c6a59ba&smart=true&width=3984&height=2656"
+  },
+  {
+   "id": "86979c5714992ec7",
+   "titulo": "Adultos mayores con INAPAM: esta es la condición laboral que define el aguinaldo 2026",
+   "url": "https://www.elimparcial.com/mexico/2026/09/17/adultos-mayores-con-inapam-esta-es-la-condicion-laboral-que-define-el-aguinaldo-2026/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:23:11+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7831,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/C4ZRFH3FKNAKXLY44XQXTHUS6Q.png?auth=56e2095cdf7d0e037e19e8e2deb2b546132c819f729c2745451c7ab89272554e&smart=true&width=1200&height=720"
+  },
+  {
+   "id": "594a227865f090b3",
+   "titulo": "El “Grito” con una sola fórmula",
+   "url": "https://www.elimparcial.com/columnas/2026/09/17/el-grito-con-una-sola-formula/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:22:26+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6969,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "8c012a63ce93241e",
+   "titulo": "Rechazo a la IA",
+   "url": "https://www.elimparcial.com/columnas/2026/09/17/rechazo-a-la-ia/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:20:21+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8097,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "1a79d2008f9cf596",
+   "titulo": "Padres rookie Ethan Salas, 20, becomes youngest catcher in MLB history with a multi-homer game",
+   "url": "https://www.kpbs.org/news/arts-culture/2026/09/17/padres-rookie-ethan-salas-20-becomes-youngest-catcher-in-mlb-history-with-a-multi-homer-game",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:18:01+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/d0deb54/2147483647/strip/false/crop/684x684+87+0/resize/600x600!/quality/90/?url=http%3A%2F%2Fkpbs-brightspot.s3.us-west-2.amazonaws.com%2F42%2F1f%2F35d62dc24b86a380141d04704668%2Fap26260087428683.jpg"
+  },
+  {
+   "id": "9740d8c54649cab2",
+   "titulo": "¿Ganadores? ¡Los gobernadores!",
+   "url": "https://www.elimparcial.com/columnas/2026/09/17/ganadores-los-gobernadores/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:16:20+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5496,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "70ebbab21689d897",
+   "titulo": "A correr en Otay",
+   "url": "https://www.elimparcial.com/tij/columnas/2026/09/17/a-correr-en-otay/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [
+    "Otay Centenario"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:14:15+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6247,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "fa4b59d16693725d",
+   "titulo": "More San Diego Zoo staff members unionize with Teamsters",
+   "url": "https://www.kpbs.org/news/economy/2026/09/17/more-san-diego-zoo-staff-members-unionize-with-teamsters",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:12:12+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/ce9fee2/2147483647/strip/false/crop/1320x1320+541+0/resize/600x600!/quality/90/?url=http%3A%2F%2Fkpbs-brightspot.s3.us-west-2.amazonaws.com%2Fe2%2Ff5%2Fc8a2592d489887e403d27451009e%2Fap21079197037462.jpg"
+  },
+  {
+   "id": "681eed93e9c11200",
+   "titulo": "Sheinbaum afirma que cualquier pretexto para una injerencia extranjera en México debe ser rechazado y defiende la soberanía nacional",
+   "url": "https://www.elimparcial.com/mexico/2026/09/17/sheinbaum-afirma-que-cualquier-pretexto-para-una-injerencia-extranjera-en-mexico-debe-ser-rechazado-y-defiende-la-soberania-nacional/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:10:40+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7851,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/ACPMWR3UQJBYLMOQ3MABRHWONA.jpg?auth=cbb263a22f3b3ffee83881e37d413db23618fbe2df7594dd2ac3d51975b7ccb0&smart=true&width=1600&height=1200"
+  },
+  {
+   "id": "475f1115583bc494",
+   "titulo": "Narcopolíticos, el objetivo",
+   "url": "https://www.elimparcial.com/mxl/columnas/2026/09/17/narcopoliticos-el-objetivo/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:10:31+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6003,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "9b34b6289b77adb3",
+   "titulo": "Average San Diego County gas price rises to highest amount since May 22",
+   "url": "https://www.kpbs.org/news/economy/2026/09/17/average-san-diego-county-gas-price-rises-to-highest-amount-since-may-22",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:07:33+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/eacffa8/2147483647/strip/false/crop/1512x1512+252+0/resize/600x600!/quality/90/?url=http%3A%2F%2Fkpbs-brightspot.s3.us-west-2.amazonaws.com%2F8a%2Fc9%2F752300f84696a1d5b4ac1ff81223%2Fgas-pump-clairemont-san-diego-2.JPG"
+  },
+  {
+   "id": "8940cf1e51a897ad",
+   "titulo": "Horóscopo de hoy: el tarot revela qué le espera a cada signo este 17 de septiembre",
+   "url": "https://www.elimparcial.com/estilos/2026/09/17/horoscopo-de-hoy-el-tarot-revela-que-le-espera-a-cada-signo-este-17-de-septiembre/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:05:37+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7223,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/7L47MTUTFNFEVG6WIKC5YE2UUE.png?auth=74765d6b9c3ee187362b91ad9b70b6fd65dd31e09f81687153322e6db5798105&smart=true&width=1536&height=1024"
+  },
   {
    "id": "d4dea852b368f4c4",
    "titulo": "El Radiador: Marina del Pilar, luz y sombra",
@@ -952,29 +1730,6 @@
    "imagen": "https://www.elimparcial.com/resizer/v2/S4BB7FXHNFDJBB2AHUE7U7ZGWE.jpg?auth=966d3cdd9094954d98bc2e451d458b19353e9a5a60d54f6a99728fd462211bd6&smart=true&width=1920&height=1200"
   },
   {
-   "id": "36532082ce070d0e",
-   "titulo": "Estas fueron las zonas de Sonora donde más llovió: Empalme encabezó los registros y arroyos incomunicaron poblados de Guaymas",
-   "url": "https://www.elimparcial.com/son/sonora/2026/09/17/estas-fueron-las-zonas-de-sonora-donde-mas-llovio-empalme-encabezo-los-registros-y-arroyos-incomunicaron-poblados-de-guaymas/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "fuera",
-   "fecha": "2026-09-17",
-   "publicado": "2026-09-17T14:08:56+00:00",
-   "capturado": "2026-09-17T15:07:52+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.638,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/CGE7KCLIZVEOXGGDK4ZZ5GP2WY.jpg?auth=bedc5e010fc10dcf0bd9f1cc3cddc827687c4d420810e13a6f5eaaa36c6a59ba&smart=true&width=3984&height=2656"
-  },
-  {
    "id": "8122cc1c29db171b",
    "titulo": "T. rex tenía una temperatura corporal similar a la humana: científicos la midieron con dientes fósiles",
    "url": "https://www.elimparcial.com/locurioso/2026/09/17/t-rex-tenia-una-temperatura-corporal-similar-a-la-humana-cientificos-la-midieron-con-dientes-fosiles/",
@@ -1534,7 +2289,7 @@
   {
    "id": "c1976754e5cae859",
    "titulo": "A border surge reshaped America. Now, data shows who 4.5 million migrants were and where they went",
-   "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPdmFhc2hBSUJZTGF1bUtVLWdFNUxubUxvZGVxNXJEclBrMHFuREUyYTVnZUxUdGVLcVlXT0hXc2pOR2NPSUdwSTNfemk2cHVGSF95T19FaEVaek5xcmxpUkxjSWRkOVlfTmhwemZUWjVQcUdqYXJQLXJ1cnJkT3hVQ2ROM2ZlR3FlMDhYOVJVVy1NTjJuX2FUNXJud3hPV3A3OE5hZXhPRTdXS1BLM3R3UmNObEJTWHN0OWRqVXdOVEc4dHpkR1NOUi1TanVPdw?oc=5",
+   "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPQlpNSW1NSGp4a185WFcxVkZ4b0Q3RTVxMF82VjlSOGV0UTlZbEpzYTNhMTFmVW43UVVvdVIzZGd6R2IzbFpoeFFDV3FCZ0tvUmFGX0l1Y0pzc0l2RnAzRUVQTFhrM2hrSk5VbzY1SzZqa3hYeDdFSHF4RHFNbmtsWmdyUU5tOGRPN0tMdVJoMDlXTEhYakp1NzRmVkdwNlpvY3JLOGRteFhFZFpydUhKbUJFYmJrNnF6ckxBa1hxTDlkaktPWjdkVw?oc=5",
    "dominio": "theitem.com",
    "fuente": "gn-8e65bad8d6ac",
    "zona_medio": "estatal",
@@ -1548,6 +2303,126 @@
    "postura": null,
    "origen": "busqueda_web",
    "descubierta_por": "bq_frontera_en"
+  },
+  {
+   "id": "6f9946ef26df34e9",
+   "titulo": "Infonavit vs Fovissste: ¿Cuál de las dos te presta más dinero para comprar una casa en septiembre 2026?",
+   "url": "https://oem.com.mx/lavozdelafrontera/finanzas/infonavit-vs-fovissste-cual-de-las-dos-te-presta-mas-dinero-para-comprar-una-casa-en-septiembre-2026-32125028",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T11:10:21+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7944,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "2dedd19de5e9f3a1",
+   "titulo": "Quién es BoyNextDoor: el grupo de K-pop cuyo concepto HAZE está causando polémica",
+   "url": "https://oem.com.mx/lavozdelafrontera/tendencias/quien-es-boynextdoor-el-grupo-de-k-pop-cuyo-concepto-haze-esta-causando-polemica-32124160",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T11:05:39+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6489,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "b6e3a5caaecaa981",
+   "titulo": "Infonavit 2026: Conoce por qué el descuento en tu nómina podría cambiar sin avisar",
+   "url": "https://oem.com.mx/lavozdelafrontera/finanzas/infonavit-2026-conoce-por-que-el-descuento-en-tu-nomina-podria-cambiar-sin-avisar-32124732",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T10:59:28+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6881,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "8182ae20e956fc49",
+   "titulo": "¿Más cilindros siempre es mejor? Así se diferencian los motores de 3, 4, 6 y 8 cilindros en los autos de hoy",
+   "url": "https://oem.com.mx/lavozdelafrontera/tendencias/mas-cilindros-siempre-es-mejor-asi-se-diferencian-los-motores-de-3-4-6-y-8-cilindros-en-los-autos-de-hoy-32124529",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T10:42:46+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6692,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "3446062e8f511602",
+   "titulo": "Pronostican cielo mayormente nublado para este jueves",
+   "url": "https://oem.com.mx/elsoldetijuana/local/pronostican-cielo-mayormente-nublado-para-este-jueves-32124404",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T10:26:55+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6346,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
   },
   {
    "id": "6fcb7328cff4d025",
@@ -1569,6 +2444,120 @@
    "imagen": "https://cdn.kpbs.org/dims4/default/c541a6c/2147483647/strip/false/crop/3108x3108+724+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F85%2F0d%2Fd9e260f34e04850df7919865151f%2Fgettyimages-2290864774.jpg"
   },
   {
+   "id": "1cafaa51407b0c8e",
+   "titulo": "Pareja agrede a repartidor al no encontrar dirección",
+   "url": "https://www.uniradioinforma.com/viral/pareja-agrede-repartidor-encontrar-direccion-n904094",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T09:33:00-07:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.811,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/01/69693f3a74dd3.jpg"
+  },
+  {
+   "id": "999b6ed7f4c27b63",
+   "titulo": "Presidenta explica por qué omitió a Allende en arengas del Grito",
+   "url": "https://www.uniradioinforma.com/gobierno/presidenta-explica-omitio-allende-arengas-grito-n904091",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T09:31:00-07:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.4996,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "b3907d7c06fcffee",
+   "titulo": "Turista extranjera descubre el legado de KeMonito",
+   "url": "https://www.uniradioinforma.com/viral/turista-extranjera-descubre-legado-kemonito-n904088",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T09:28:00-07:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6473,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aac15cb22075.jpg"
+  },
+  {
+   "id": "1938e83c85f2f20c",
+   "titulo": "Capturan a presunto feminicida de Wendy en Mexicali",
+   "url": "https://www.uniradioinforma.com/policiaca/capturan-presunto-feminicida-wendy-mexicali-n904083",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T09:22:00-07:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6294,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "f1a9b98015bc23ce",
+   "titulo": "El Departamento de Salud Pública del Condado emite una advertencia al centro de detención federal por su reiterada falta de notificación de enfermedad",
+   "url": "https://www.uniradioinforma.com/sociedad/el-departamento-salud-publica-condado-emite-una-advertencia-centro-detencion-federal-su-reiterada-falta-notificacion-enfermedad-n904085",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T09:21:00-07:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7071,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
    "id": "1ddfd45a4fe2f078",
    "titulo": "A Wild Council Race in Southeastern San Diego",
    "url": "https://voiceofsandiego.org/2026/09/17/a-wild-council-race-in-southeastern-san-diego/",
@@ -1586,6 +2575,76 @@
    "figuras": [],
    "postura": null,
    "imagen": "https://voiceofsandiego.org/wp-content/uploads/2026/09/Abraham-vs.-Foster-1024x768.png"
+  },
+  {
+   "id": "7d302af74f67758c",
+   "titulo": "Volcadura en la carretera Hermosillo-Guaymas deja dos personas lesionadas",
+   "url": "https://www.uniradioinforma.com/policiaca/volcadura-carretera-hermosillo-guaymas-deja-dos-personas-lesionadas-n904079",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T09:14:00-07:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8002,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "9182e1cb2501e780",
+   "titulo": "Personal naval recupera torpedo de prácticas en inmediaciones de Ensenada, Baja California",
+   "url": "https://www.uniradioinforma.com/sociedad/personal-naval-recupera-torpedo-practicas-inmediaciones-ensenada-baja-california-n904081",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Ensenada"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T09:13:00-07:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6393,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aac1304130fb.jpg"
+  },
+  {
+   "id": "703a4a318f65f582",
+   "titulo": "Todavía hay tiempo para cumplir con los requisitos laborales",
+   "url": "https://www.uniradioinforma.com/sociedad/todavia-hay-tiempo-cumplir-requisitos-laborales-n904077",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T09:07:00-07:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4974,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aac10e15dd57.jpg"
   },
   {
    "id": "9497b6f63dbd1918",
@@ -1721,6 +2780,77 @@
    "imagen": "https://cdn.kpbs.org/dims4/default/d4ac9a7/2147483647/strip/false/crop/1999x662+0+0/resize/792x262!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F2e%2F99%2F01b3683049b2b5a12f7150ccae8f%2Fhousefall.jpg"
   },
   {
+   "id": "7fbe803e6e7396b3",
+   "titulo": "Incendios de viviendas y choque contra poste entre 48 emergencias atendidas por Bomberos",
+   "url": "https://www.uniradioinforma.com/policiaca/incendios-viviendas-choque-poste-48-emergencias-atendidas-bomberos-n904072",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T08:58:00-07:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5337,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aac0e43146bd.jpg"
+  },
+  {
+   "id": "5ee6feb041ef2d11",
+   "titulo": "\"No necesitamos que nos juzguen desde afuera\": Sheinbaum responde a exigencia de Trump",
+   "url": "https://www.uniradioinforma.com/gobierno/no-necesitamos-nos-juzguen-afuera-sheinbaum-responde-exigencia-trump-n904075",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T08:58:00-07:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.679,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aac0d752b2bf.jpg"
+  },
+  {
+   "id": "6e3195e8239a0f23",
+   "titulo": "Detienen en Mexicali a presunto integrante de \"Los Rusos\" buscado por homicidio",
+   "url": "https://www.uniradioinforma.com/policiaca/detienen-mexicali-presunto-integrante-los-rusos-buscado-homicidio-n904070",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T08:56:00-07:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5304,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aac0ddec3885.jpg"
+  },
+  {
    "id": "1415740959e83972",
    "titulo": "Canada's Carney welcomes the EU's bid for closer ties amid pressure from Trump",
    "url": "https://www.kpbs.org/news/international/2026/09/17/canadas-carney-welcomes-the-eus-bid-for-closer-ties-amid-pressure-from-trump",
@@ -1738,6 +2868,52 @@
    "figuras": [],
    "postura": null,
    "imagen": "https://cdn.kpbs.org/dims4/default/a52cac7/2147483647/strip/false/crop/1980x1980+495+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fb4%2Faa%2Ff6b872cd4267973479c0d1fd36ad%2Fap26260404635474.jpg"
+  },
+  {
+   "id": "12b34c6d91c72889",
+   "titulo": "La pista del short y la playera: vecinos identifican al presunto feminicida de Claudia Tacoronte",
+   "url": "https://www.uniradioinforma.com/sociedad/la-pista-short-playera-vecinos-identifican-presunto-feminicida-claudia-tacoronte-n904066",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T08:35:00-07:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6757,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aac08fa31b48.jpg"
+  },
+  {
+   "id": "b345f005dfa58d39",
+   "titulo": "Capturan a \"El Señor de la T\", coordinador regional del CJNG en Michoacán",
+   "url": "https://www.uniradioinforma.com/sociedad/capturan-el-senor-t-coordinador-regional-cjng-michoacan-n904063",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T08:13:00-07:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5018,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aac04fa016c1.jpg"
   },
   {
    "id": "29fc77a4f91cdb88",
@@ -1853,6 +3029,30 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/H2YTEUEBCRBPVOESR6Y2SHSMNQ.png?auth=1dd54bf8d76bb790a93436712d565d3211fce6c06f30ca6624dd249d9fe8d9d5&smart=true&width=1200&height=780"
+  },
+  {
+   "id": "23bfc5b6af290f6a",
+   "titulo": "Realiza SICT trabajos de conservación en carreteras",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1HTUdGOHZ6Z3VmZnNuTHFvYzFMVHVHbHpHdTdoRWJCaHBrN09Ed1g1a3JKcmRfMXBJbE9ha0xBQXZ5VThVRXNOR1hRVGJBNHIyYzlxVW1ON2JueFU?oc=5",
+   "dominio": "ensenada.net",
+   "fuente": "gn-906741a25e9c",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T06:47:15+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5297,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate"
   },
   {
    "id": "680293f41d82ff83",
@@ -2092,7 +3292,8 @@
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
-   }
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aa85a8f03bca.png"
   },
   {
    "id": "d6ccec7c6d1ce57b",
@@ -3296,6 +4497,30 @@
    }
   },
   {
+   "id": "63a9ace0b4cb4492",
+   "titulo": "Fuga en acueducto deja sin agua a 10 colonias y con intermitencias en otras 63 en Tijuana",
+   "url": "https://oem.com.mx/elsoldetijuana/local/fuga-en-acueducto-a-la-altura-de-plaza-landmark-deja-sin-agua-a-10-colonias-de-tijuana-32120131",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T01:00:29+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9223,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
    "id": "91208cc23c71f325",
    "titulo": "Se registra riña y percance vial la noche del 15 de septiembre en Tijuana",
    "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQR1N5c09DSGRSbFFZNEpfcU9EbGFWczNhSzRYVTJkaVFhUGF6bVBqdkNPbHFwR1pqMDBnNUxNZjFwTzdEa0I4bTcxdEsxTnMwcTc1eHk2TVN6Z3N4bVRmdnJDX2gzYzVMVHNoUHlGOVJLa2pVdlJ6SW1WYk9iaFg5MEhQc09ya3F6WmI0SzBCSmZjb0d4UzBBLXBPQmxRb09pVWxfSWtnZEJpaTM2Ym1fS0xDNzVScnNHa09BdlNxaTNaUHlNeGRNQTg3NDdwdw?oc=5",
@@ -3523,7 +4748,8 @@
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
-   }
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aa845b382634.jpg"
   },
   {
    "id": "caee52f5176e60ac",
@@ -3622,6 +4848,54 @@
    }
   },
   {
+   "id": "9d26ab9af5e3b27c",
+   "titulo": "Salma Hayek dirige su primera película para cine",
+   "url": "https://afntijuana.info/espectaculos/181786_salma_hayek_dirige_su_primera_pelicula_para_cine",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T00:00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6199,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "9c94a0726bb7b21e",
+   "titulo": "Cazzu pospone Guatemala y Costa Rica por influenza: \"Si no hay salud no lo podemos ejecutar",
+   "url": "https://afntijuana.info/espectaculos/181785_cazzu_pospone_guatemala_y_costa_rica_por_influenza_si_no_hay_salud_no_lo_podemos_ejecutar",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T00:00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7982,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
    "id": "865128cadfd9fae2",
    "titulo": "J Balvin y Valentina Ferrer terminan su relación tras casi una década juntos",
    "url": "https://afntijuana.info/espectaculos/181783_j_balvin_y_valentina_ferrer_terminan_su_relacion_tras_casi_una_decada_juntos",
@@ -3670,6 +4944,32 @@
    }
   },
   {
+   "id": "77270fecf8cf451d",
+   "titulo": "Ejecutan a un guardia de seguridad a balazos en billar de Cerro Colorado",
+   "url": "https://afntijuana.info/seguridad/181788_ejecutan_a_un_guardia_de_seguridad_a_balazos_en_billar_de_cerro_colorado",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [
+    "Cerro Colorado"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T00:00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5145,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
    "id": "5f48efcf4025b8e6",
    "titulo": "Entre la estadística oficial y el éxodo silencioso",
    "url": "https://afntijuana.info/editoriales/181780_entre_la_estadistica_oficial_y_el_exodo_silencioso",
@@ -3694,6 +4994,54 @@
    }
   },
   {
+   "id": "5cd5e99008164741",
+   "titulo": "Más deuda puede detonar una situación compleja: M. Escobedo",
+   "url": "https://afntijuana.info/editoriales/181789_mas_deuda_puede_detonar_una_situacion_compleja_m_escobedo",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T00:00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9399,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "3825b6243f1fa307",
+   "titulo": "¿Está enamorado otra vez? Peso Pluma habla de su corazón tras terminar con Kenia Os",
+   "url": "https://afntijuana.info/espectaculos/181787_iesta_enamorado_otra_vez_peso_pluma_habla_de_su_corazon_tras_terminar_con_kenia_os",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T00:00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6885,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
    "id": "355e125fa93a101d",
    "titulo": "Exterminio",
    "url": "https://afntijuana.info/cartones/181778_exterminio",
@@ -3712,6 +5060,30 @@
    "postura": {
     "etiqueta": "neutral",
     "confianza": 0.5353,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "349ab769c25485c8",
+   "titulo": "Sonará alerta en 80 millones de celulares en simulacro del 19 de septiembre",
+   "url": "https://afntijuana.info/nacionales/181784_sonara_alerta_en_80_millones_de_celulares_en_simulacro_del_19_de_septiembre",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T00:00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
@@ -4395,6 +5767,30 @@
    "imagen": "https://www.elimparcial.com/resizer/v2/SZHKCP7B65F3ZBFMELDPQKZ33Q.jpg?auth=92ebb2f6cbbf0c7e37ce661e46272769e23b34909623cda94b46487d611ee409&smart=true&width=864&height=647"
   },
   {
+   "id": "b12b6ae0960d77cb",
+   "titulo": "INE publica fechas para elección de BC: y aunque Morena ya violó los tiempos con Julieta, las precampañas son hasta enero de 2027",
+   "url": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxPdk1DRmN4ck9WM1BWeXVVM1Zzb3hHOHViQWlyR19XSkY1M0ZvZTFmS3BqRWwwU1F6M2t5T2MzUWtFdGNKN09tcWRXNHRKb3hOdzVJQWcwZ25xRkNZUzhOOWUtTEJXZW5MbGhwTDlnZnNDWk55T0NDNVMzd2I5eS1jYjdsaTF3WWdZNkVNS255eVFVelJadnlQSm0yUmlzOXV3Q0tBVHNBVm1EcUlsaW93a1hGX0p3OG5vSXE5dTBYRDV1ZWVQS3RhWkVJYVg2WlNJc1FQMHZQa2tkdkp6NVJ5SDh6MkttSFhhdGJhckMtYzJMOHpXWXc?oc=5",
+   "dominio": "puntonorte.info",
+   "fuente": "gn-088684397099",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-16",
+   "publicado": "2026-09-16T22:32:03+00:00",
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6867,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe"
+  },
+  {
    "id": "65a9fb0a9e11da9d",
    "titulo": "Gobernadora niega fricciones con Julieta Ramírez",
    "url": "https://radarbc.com/general/gobernadora-niega-fricciones-con-julieta-ramirez/",
@@ -4570,7 +5966,8 @@
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
-   }
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aa9922218e1d.jpg"
   },
   {
    "id": "145b53680ff16fe7",
@@ -5727,7 +7124,8 @@
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
-   }
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6a97765f85ffb.jpg"
   },
   {
    "id": "8a288779d7ffc2f6",
@@ -7114,7 +8512,7 @@
   {
    "id": "6a3faf9f77595cd6",
    "titulo": "Entre golpes y banderazos termina festejo patrio en San Felipe Hueyotlipan",
-   "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQMXdjQm41Q2FhWm1ZVEtoQkJsTndhcU1nVWkzaTEyYmE5dUc5aVhPaGdGel9mZnFNTlVpRW53X0FKV3VIeFhPUnVPcVA4bnd5dVdhVmRLdEVyU2kzN2tTS1hFX2NuSzhxdlZQQVN1Z1lLbzlyRkRfcnRTQ1dZSi10NThabGk1S2M0QlJvdGR4MFJxTTVNY1dHd3o1Z29yQW5yeUp2NGJ5WW1MM3J4NkhpR2RWNXNCUWJuZU1PcWJLTk45dw?oc=5",
+   "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPUkxXWVp0Q2dmMUpraXFBZ3dRWmVSOGF3d053R01fM3o2dW1nTW92THlnSDZvVVg3R3lRLXVrLVAydjRDakUwTHlVY29SVXcwZUZHbVdLVjRuRWFqc0dxSXpFMUZOQXJVbW1leDF0YkVXWmwyS2FsYUZuOWMtRzVjRlZhMHBxb2xnaE1QOGxBY2lCQVl4ZjFSemF2aHo0alVyaXFlZUtfVUtBU0FSbGZiNklIdzRYXzE4cERIUmY5cw?oc=5",
    "dominio": "meganoticias.mx",
    "fuente": "gn-e0db246e5666",
    "zona_medio": "estatal",
@@ -8259,28 +9657,6 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/62C4MOU7VRASZCJK5MYQUHTYPQ.jpg?auth=51a13477d62955955da8458d06fb612fa31eb67a00af9cf219eb398b77b0e6b5&smart=true&width=1200&height=630"
-  },
-  {
-   "id": "30744e5bc7ddeefd",
-   "titulo": "Zona Sísmica",
-   "url": "https://www.elimparcial.com/mxl/columnas/2026/09/16/zona-sismica/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-09-16",
-   "publicado": "2026-09-16T15:20:08+00:00",
-   "capturado": "2026-09-04T15:24:36+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.6929,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   }
   },
   {
    "id": "96033975eb84fda1",
@@ -60872,28 +62248,6 @@
    "postura": {
     "etiqueta": "neutral",
     "confianza": 0.4694,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   }
-  },
-  {
-   "id": "fc4e7032b4719e93",
-   "titulo": "TE VIMOS CON ESTILO EN Estilos",
-   "url": "https://www.elimparcial.com/son/estilosgh/2026/09/10/te-vimos-con-estilo-en-estilos/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-09-10",
-   "publicado": "2026-09-10T16:00:00+00:00",
-   "capturado": "2026-09-10T18:27:55+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "favorable",
-    "confianza": 0.5994,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
@@ -120535,7 +121889,7 @@
   {
    "id": "d388440b7cdd7bd9",
    "titulo": "El tiempo de espera en garitas de Tijuana",
-   "url": "https://bajanews.mx/Cali-Baja/60284/El-tiempo-de-espera-en-garitas-de-Tijuana",
+   "url": "https://bajanews.mx/Cali-Baja/60347/El-tiempo-de-espera-en-garitas-de-Tijuana",
    "dominio": "bajanews.mx",
    "fuente": "bajanews",
    "zona_medio": "estatal",
@@ -121224,6 +122578,30 @@
    "postura": {
     "etiqueta": "neutral",
     "confianza": 0.7181,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "81a1432eef1b3c38",
+   "titulo": "Recuperan en costas de Ensenada torpedo de prácticas para guerra antisubmarina",
+   "url": "https://bajanews.mx/Cali-Baja/60349/Recuperan-en-costas-de-Ensenada-torpedo-de-practicas-para-guerra-antisubmarina",
+   "dominio": "bajanews.mx",
+   "fuente": "bajanews",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Ensenada"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": null,
+   "publicado": null,
+   "capturado": "2026-09-17T16:39:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5393,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
