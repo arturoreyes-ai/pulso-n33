@@ -1,8 +1,172 @@
 {
  "esquema": 1,
  "mes": "2026-08",
- "total": 23,
+ "total": 30,
  "notas": [
+  {
+   "id": "f4cd65236d1e86c5",
+   "titulo": "San Diego supervisors to vote on ending ICE, border agents’ use of firing range",
+   "url": "https://inewsource.org/2026/08/17/ice-gun-range-san-diego-facilities-agreements/",
+   "dominio": "inewsource.org",
+   "fuente": "inewsource",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-08-17",
+   "publicado": "2026-08-17T23:15:37+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://i0.wp.com/inewsource.org/wp-content/uploads/2026/08/INS-Press-Conference-3-scaled.jpg?fit=1024%2C683&ssl=1"
+  },
+  {
+   "id": "f4e08bb445a645db",
+   "titulo": "Morena mantiene amplia fortaleza frente a la oposición en Baja California: Ismael Burgueño",
+   "url": "https://www.tecatenoticias.com/morena-mantiene-amplia-fortaleza-frente-a-la-oposicion-en-baja-california-ismael-burgueno/",
+   "dominio": "tecatenoticias.com",
+   "fuente": "tecate",
+   "zona_medio": "Tecate",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-08-17",
+   "publicado": "2026-08-17T23:15:34+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [
+    {
+     "id": "ibr",
+     "via": "nominal",
+     "clave": "ismael burgueno"
+    }
+   ],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4203,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "a044404660defe64",
+   "titulo": "Operativos en Tijuana dejan más de 200 detenidos y vehículos recuperados",
+   "url": "https://www.tecatenoticias.com/operativos-en-tijuana-dejan-mas-de-200-detenidos-y-vehiculos-recuperados/",
+   "dominio": "tecatenoticias.com",
+   "fuente": "tecate",
+   "zona_medio": "Tecate",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-08-17",
+   "publicado": "2026-08-17T21:57:38+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5521,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "9407e7164bcaaa3d",
+   "titulo": "Exigen tramites accesibles y lenguaje de señas en oficinas publicas",
+   "url": "https://www.tecatenoticias.com/exigen-tramites-accesibles-y-lenguaje-de-senas-en-oficinas-publicas/",
+   "dominio": "tecatenoticias.com",
+   "fuente": "tecate",
+   "zona_medio": "Tecate",
+   "zonas": [
+    "Tecate"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-08-17",
+   "publicado": "2026-08-17T21:50:45+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7202,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "cc58709012e80ce6",
+   "titulo": "Pizzatón apoyará tratamiento de niños con cáncer en la región",
+   "url": "https://www.tecatenoticias.com/pizzaton-apoyara-tratamiento-de-ninos-con-cancer-en-la-region/",
+   "dominio": "tecatenoticias.com",
+   "fuente": "tecate",
+   "zona_medio": "Tecate",
+   "zonas": [
+    "Tecate"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-08-17",
+   "publicado": "2026-08-17T21:39:55+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5976,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "46c7244d9ce8ffa9",
+   "titulo": "Tecate reduce delitos en julio y robos caen un 37%",
+   "url": "https://www.tecatenoticias.com/tecate-reduce-delitos-en-julio-y-robos-caen-un-37/",
+   "dominio": "tecatenoticias.com",
+   "fuente": "tecate",
+   "zona_medio": "Tecate",
+   "zonas": [
+    "Tecate"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-08-17",
+   "publicado": "2026-08-17T21:28:55+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5717,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "27204af7c9d47bbb",
+   "titulo": "SDG&E wants to put a powerline through Anza-Borrego State Park. Opposition is mounting.",
+   "url": "https://inewsource.org/2026/08/17/sdge-powerline-san-diego-anza-borrego-state-park/",
+   "dominio": "inewsource.org",
+   "fuente": "inewsource",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-08-17",
+   "publicado": "2026-08-17T15:58:28+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://i0.wp.com/inewsource.org/wp-content/uploads/2026/08/desert-view-1.jpg?fit=1024%2C683&ssl=1"
+  },
   {
    "id": "175e126898389789",
    "titulo": "“La Transformación avanza cuando los beneficios llegan directamente al pueblo”: Ismael Burgueño",
