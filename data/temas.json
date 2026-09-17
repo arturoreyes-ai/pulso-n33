@@ -3,7 +3,7 @@
  "generado": "2026-09-17",
  "ventana_dias": 7,
  "minimo": 3,
- "notas_ventana": 2496,
+ "notas_ventana": 2516,
  "notas_previas": 2092,
  "temas": [
   {
@@ -1780,7 +1780,7 @@
  ],
  "por_zona": {
   "Tijuana": {
-   "notas_ventana": 632,
+   "notas_ventana": 636,
    "minimo": 3,
    "temas": [
     {
@@ -2522,6 +2522,35 @@
      ]
     },
     {
+     "termino": "lopez",
+     "n": 7,
+     "n_previo": 1,
+     "momento": 6,
+     "zonas": {
+      "Tijuana": 7
+     },
+     "fuentes": {
+      "afn": 3,
+      "soltij": 2,
+      "zeta": 2
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "86b510d5d5defb9d",
+      "8b8aab847ba1b14b",
+      "9078ab61f7b2d748",
+      "a354d46ef3ac76ca",
+      "a6e0cc1941cc82b0",
+      "caa71493555c869d",
+      "db50525436e6356f"
+     ],
+     "ejemplos": [
+      "MC denuncia a López Gorosave por actos anticipados de campaña",
+      "MC a denuncia a López Gorosave por actos anticipados de campaña",
+      "Proceso de Morena para definir candidato a gubernatura está fuera de toda norma: Luis Carlos López Ulloa"
+     ]
+    },
+    {
      "termino": "concierto",
      "n": 6,
      "n_previo": 0,
@@ -2642,47 +2671,11 @@
       "San Diego County threatens licensing action after Otay Mesa Detention Center conceals suspected TB case",
       "🚨 Garitas de Tijuana registran filas de hasta 150 minutos este jueves (Datos actualizados a las 10:00 AM) Cruzar hacia Estados Unidos presenta severas complicaciones durante la mañana de este jueves. Las garitas de Otay Mesa y San Ysidro registran la m"
      ]
-    },
-    {
-     "termino": "zona",
-     "n": 11,
-     "n_previo": 6,
-     "momento": 5,
-     "zonas": {
-      "Tijuana": 11,
-      "Mexicali": 1
-     },
-     "fuentes": {
-      "imparcial": 5,
-      "afn": 2,
-      "jornadabc": 2,
-      "soltij": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "59b3310943d1f6a1",
-      "6731a02c15b5999d",
-      "926bd8fd1cadf0fd",
-      "92b1b6b80974e588",
-      "96baa5ad34001f51",
-      "980e7eb83b2952a1",
-      "9a07f495b8407ddd",
-      "a8fc2a5a19150439",
-      "c0c156b187a8d629",
-      "cb13949247261b00",
-      "f9054bfc1dd65c12"
-     ],
-     "ejemplos": [
-      "Tráfico en Tijuana: largas filas hacia garita de Tijuana y cierre en Zona Río",
-      "Cierre del puente Independencia provoca fuerte tráfico en Zona Río",
-      "Cierre del puente Independencia provoca congestionamiento vial en Zona Río"
-     ]
     }
    ]
   },
   "Mexicali": {
-   "notas_ventana": 217,
+   "notas_ventana": 218,
    "minimo": 3,
    "temas": [
     {
@@ -3474,7 +3467,7 @@
    ]
   },
   "Playas de Rosarito": {
-   "notas_ventana": 48,
+   "notas_ventana": 49,
    "minimo": 3,
    "temas": [
     {
@@ -3674,7 +3667,7 @@
    ]
   },
   "Tecate": {
-   "notas_ventana": 17,
+   "notas_ventana": 18,
    "minimo": 2,
    "temas": [
     {
@@ -3718,6 +3711,28 @@
      "ejemplos": [
       "Más de 10 mil voces hacen vibrar Tecate junto a Román Cota en el grito de independencia",
       "Más de 10 mil voces hacen vibrar Tecate junto a Román Cota en el grito de independencia"
+     ]
+    },
+    {
+     "termino": "mayor",
+     "n": 2,
+     "n_previo": 0,
+     "momento": 2,
+     "zonas": {
+      "Tecate": 2
+     },
+     "fuentes": {
+      "imparcial": 1,
+      "soltij": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "19a0c39575627d6b",
+      "4ac5104fa2da51a8"
+     ],
+     "ejemplos": [
+      "La seguridad pública en Tecate representa el mayor reto para los primeros dos años de su administración: Román Cota Muñoz",
+      "Profeco analiza 50 marcas de cerveza y concluye que Michelob Ultra, Tecate 0.0 y Corona Cero son las que tienen menos calorías, mientras que Gouden Carolus Classic, de origen belga, es la que tiene mayor contenido de alcohol"
      ]
     },
     {
@@ -4008,19 +4023,19 @@
    ]
   },
   "San Diego": {
-   "notas_ventana": 317,
+   "notas_ventana": 322,
    "minimo": 3,
    "temas": [
     {
      "termino": "trump",
-     "n": 24,
+     "n": 25,
      "n_previo": 12,
-     "momento": 12,
+     "momento": 13,
      "zonas": {
-      "San Diego": 24
+      "San Diego": 25
      },
      "fuentes": {
-      "kpbs": 21,
+      "kpbs": 22,
       "inewsource": 2,
       "timessd": 1
      },
@@ -4034,6 +4049,7 @@
       "29324660bc06d196",
       "2d702f601b2e0479",
       "393cf427cb75642f",
+      "5043d752b8f5430b",
       "558a51b43ebf7ea1",
       "58ee52902b8f22df",
       "62526d09bb09f31a",
@@ -4654,6 +4670,35 @@
      ]
     },
     {
+     "termino": "people",
+     "n": 8,
+     "n_previo": 4,
+     "momento": 4,
+     "zonas": {
+      "San Diego": 8
+     },
+     "fuentes": {
+      "kpbs": 7,
+      "voiceofsd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "1ae5badef23b4229",
+      "27714cdc6508cf41",
+      "44ac642fe0af343a",
+      "4e63ee8bb205239e",
+      "54c997e1a883ecbe",
+      "8ff3aa3689417b94",
+      "bc3c6ff9a6bec9d2",
+      "cb62ae696541dacd"
+     ],
+     "ejemplos": [
+      "California’s tough-on-crime law promised treatment. Here’s why people are falling through the cracks",
+      "California’s Tough on Crime Law Promised Treatment. Here’s Why People are Falling Through the Cracks",
+      "At this comedy show, people are talking about their hardest experiences and laughing"
+     ]
+    },
+    {
      "termino": "demoras",
      "n": 7,
      "n_previo": 3,
@@ -4731,35 +4776,6 @@
       "Canada's Carney welcomes the EU's bid for closer ties amid pressure from Trump",
       "EU's Ursula von der Leyen says she wants Canada to become an associate member",
       "EU rolls out red carpet to Canada to become its first 'associate member'"
-     ]
-    },
-    {
-     "termino": "condado",
-     "n": 5,
-     "n_previo": 1,
-     "momento": 4,
-     "zonas": {
-      "San Diego": 5,
-      "Tijuana": 1
-     },
-     "fuentes": {
-      "imparcial": 2,
-      "jornadabc": 1,
-      "timessd": 1,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "1d6631344462b60f",
-      "21382c9482b00b9f",
-      "aceea3242a58b4e0",
-      "d7a66e97ed317b9b",
-      "f9bb012dab481bb1"
-     ],
-     "ejemplos": [
-      "CETYS hace historia en California: primera universidad mexicana en recibir Proclama del Condado de San Diego",
-      "Contaminación del Río Tijuana provoca estragos económicos millonarios en condado de San Diego",
-      "Proclaman el Día de Cetys Universidad en el Condado de San Diego"
      ]
     }
    ]
