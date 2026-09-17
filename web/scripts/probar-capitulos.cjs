@@ -47,6 +47,7 @@ const { RUBROS } = cargar('lib/busqueda/rubros');
 const { ZONAS_RUTA } = cargar('lib/dominio/zonas');
 const { TOPE_ACTUALIDAD } = cargar('lib/busqueda/tipos');
 const { indiceDeImagenes, imagenPara } = cargar('lib/busqueda/imagenes');
+const { imagenDeHtml } = cargar('lib/busqueda/og-imagen');
 
 const fila = (titulo, publicado = null, idioma = 'es') =>
   ({ titulo, url: 'https://news.google.com/rss/articles/' + encodeURIComponent(titulo), dominio: 'x.example', medio: 'X', publicado, idioma });
@@ -255,7 +256,68 @@ function comprobar() {
   assert.equal(imagenPara(fila('Sin imagen'), indice), null, 'una nota sin imagen no toma la de otra');
   assert.equal(imagenPara(fila('Otro titular'), indice), null);
 
-  console.log('Capítulos: 8 capítulos (9 en Tecate), orden, repetidos, fallos, activación e imágenes verificados offline.');
+  // --- og:image: la imagen que el propio medio declara en su pagina ---------
+  // Lo que el cruce con el corpus no alcanza (de 503 notas llegadas por
+  // busqueda, cero recuperan miniatura) lo cubre esto. Puro: HTML entra, una
+  // URL sale o null. No pide nada.
+  const BASE = 'https://medio.example/nota';
+  const cabeza = (metas) => `<html><head>${metas}</head><body><img src="https://medio.example/cuerpo.jpg"></body></html>`;
+
+  assert.equal(
+    imagenDeHtml(cabeza('<meta property="og:image" content="https://cdn.example/a.jpg">'), BASE),
+    'https://cdn.example/a.jpg',
+    'og:image en un CDN ajeno SE ACEPTA: es la que el medio declaro para su nota',
+  );
+  assert.equal(
+    imagenDeHtml(cabeza('<meta content="https://cdn.example/b.jpg" name="twitter:image">'), BASE),
+    'https://cdn.example/b.jpg',
+    'twitter:image, y con los atributos al reves',
+  );
+  assert.equal(
+    imagenDeHtml(cabeza('<meta property="og:image" content="https://cdn.example/og.jpg"><meta name="twitter:image" content="https://cdn.example/tw.jpg">'), BASE),
+    'https://cdn.example/og.jpg',
+    'og gana a twitter',
+  );
+  assert.equal(
+    imagenDeHtml(cabeza("<meta property='og:image' content='/img/rel.jpg'>"), BASE),
+    'https://medio.example/img/rel.jpg',
+    'una relativa se resuelve contra la pagina',
+  );
+  assert.equal(
+    imagenDeHtml(cabeza('<meta property="og:image" content="https://cdn.example/a.jpg?w=1&amp;h=2">'), BASE),
+    'https://cdn.example/a.jpg?w=1&h=2',
+    '&amp; en los parametros del CDN se decodifica',
+  );
+  assert.equal(imagenDeHtml(cabeza(''), BASE), null, 'sin meta no se inventa nada');
+  assert.equal(
+    imagenDeHtml(cabeza('<meta property="og:image" content="http://cdn.example/a.jpg">'), BASE),
+    null,
+    'http no: el navegador lo bloquea en una pagina https',
+  );
+  assert.equal(
+    imagenDeHtml(cabeza('<meta property="og:image" content="data:image/png;base64,AAAA">'), BASE),
+    null,
+    'un data: seria COPIAR la imagen en vez de enlazarla',
+  );
+  assert.equal(
+    imagenDeHtml(cabeza(`<meta property="og:image" content="https://cdn.example/${'a'.repeat(600)}.jpg">`), BASE),
+    null,
+    'mismo tope de largo que el pipeline',
+  );
+  assert.equal(
+    imagenDeHtml('<html><head><meta property="og:image" content="https://cdn.example/a.jpg">', BASE),
+    'https://cdn.example/a.jpg',
+    'un <head> truncado a media etiqueta no rompe',
+  );
+  // El cuerpo no se mira: ahi viven las fotos de stock y las de OTRO medio,
+  // que es justo el caso que normalizar.py::imagen_del_medio existe para tirar.
+  assert.equal(
+    imagenDeHtml('<html><head></head><body><meta property="og:image" content="https://cdn.example/cuerpo.jpg"></body></html>', BASE),
+    null,
+    'un og:image fuera del <head> no cuenta',
+  );
+
+  console.log('Capítulos: 8 capítulos (9 en Tecate), orden, repetidos, fallos, activación, imágenes y og:image verificados offline.');
 }
 
 comprobar();

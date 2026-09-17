@@ -260,15 +260,32 @@ class TestIdempotencia(BasePipeline):
         self.assertTrue(all(isinstance(n.get("delegaciones"), list) for n in notas))
 
     def test_la_imagen_es_condicional_y_del_corpus(self):
-        # Solo la nota cuyo item trae miniatura lleva la clave; las demas no
+        # Solo las notas cuyo item trae miniatura llevan la clave; las demas no
         # llevan null: el medio no la publica y eso no es un hueco.
+        #
+        # Son dos y no una desde el 17 de septiembre de 2026: El Imparcial
+        # tiene miniatura en el corpus para que la corrida offline ejercite la
+        # ruta de la imagen DENTRO de la ventana de 30 dias. La de Uniradio cae
+        # en el archivo por su fecha, asi que sin esta segunda el chequeo por
+        # omision del repo no pasaba nunca por las reglas de 'imagen'.
         d = tempfile.mkdtemp()
         self.correr_en(d)
-        notas = leer(os.path.join(d, "notas.json"))["notas"]
-        con = [n for n in notas if "imagen" in n]
-        self.assertEqual(len(con), 1)
-        self.assertEqual(con[0]["fuente"], "uniradio")
-        self.assertTrue(con[0]["imagen"].startswith("https://statics.uniradioinforma.com/"))
+        ventana = leer(os.path.join(d, "notas.json"))["notas"]
+        archivadas = []
+        for mes in leer(os.path.join(d, "archivo", "indice.json"))["meses"]:
+            archivadas += leer(os.path.join(d, "archivo", mes["archivo"]))["notas"]
+        notas = ventana + archivadas
+
+        con = {n["fuente"]: n["imagen"] for n in notas if "imagen" in n}
+        self.assertEqual(sorted(con), ["imparcial", "uniradio"])
+        self.assertTrue(con["uniradio"].startswith("https://statics.uniradioinforma.com/"))
+        self.assertTrue(con["imparcial"].startswith("https://www.elimparcial.com/"))
+        # La ventana es la que valida el chequeo por omision: ahi tiene que
+        # haber al menos una, o las reglas de 'imagen' no se ejercitan.
+        self.assertTrue(any("imagen" in n for n in ventana))
+        # Nunca presente-pero-vacia. 'ausente' y 'sin dato' no son lo mismo que
+        # una cadena vacia, y esa distincion es la regla 4 en miniatura.
+        self.assertFalse([n for n in notas if "imagen" in n and not n["imagen"]])
 
     def test_conserva_la_imagen_vista_primero(self):
         # El feed deja de traer la miniatura (o la cambia de tamano): la nota

@@ -27,7 +27,9 @@
    "zona": "Tijuana",
    "idioma": "es",
    "activo": true,
-   "verificado": "2026-09-03"
+   "verificado": "2026-09-03",
+   "imagenes_de": ["jornadabc.com.mx"],
+   "nota": "Su feed vive en jornadabc.mx y sus fotos en jornadabc.com.mx: el mismo medio con dos dominios. Sin declararlo, las 7 de cada 10 miniaturas que SÍ trae el feed se tiraban por 'no es del medio' y la fila parecía un medio sin foto (sondeo del 17 de septiembre de 2026)."
   },
   {
    "id": "sintesis",
@@ -96,7 +98,7 @@
    "idioma": "es",
    "activo": true,
    "verificado": "2026-09-03",
-   "nota": "Noticias Ensenada sí publica RSS. El Vigía se integra aparte con Scrapy porque /rss es una página HTML, no un feed."
+   "nota": "Noticias Ensenada sí publica RSS. El Vigía se integra aparte con Scrapy porque /rss es una página HTML, no un feed. Su feed SÍ trae media:content, pero son fotos de stock (images.pexels.com) y de otro medio (ecartelera.com), así que no pasan la regla de 'es del medio' y esta fila se queda sin miniatura a propósito: registro de un hueco, no un extractor roto (sondeo del 17 de septiembre de 2026)."
   },
   {
    "id": "elvigia",
@@ -109,6 +111,7 @@
     "item": "article",
     "titulo": "h2.titulo a::text",
     "url": "h2.titulo a::attr(href)",
+    "imagen": "img::attr(src)",
     "fecha_url": "/(?P<ano>\\d{4})/(?P<mes>\\d{1,2})/(?P<dia>\\d{1,2})/"
    },
    "activo": true,
@@ -187,11 +190,13 @@
     "item": ".card",
     "titulo": "h5.card-title a::text",
     "url": "h5.card-title a::attr(href)",
-    "fecha": "h6.card-subtitle::text"
+    "fecha": "h6.card-subtitle::text",
+    "imagen": "img::attr(src)"
    },
    "activo": true,
    "verificado": "2026-09-04",
-   "nota": "No publica RSS. Se lee únicamente Lo último; robots.txt solo excluye /admin/. Conserva zona Tijuana por compatibilidad con su histórico; el gazetero corrige titulares que nombran otra ciudad."
+   "imagenes_de": ["afnbc.com"],
+   "nota": "No publica RSS. Se lee únicamente Lo último; robots.txt solo excluye /admin/. Conserva zona Tijuana por compatibilidad con su histórico; el gazetero corrige titulares que nombran otra ciudad. Sirve sus fotos desde afnbc.com, su propio servidor de imágenes con otro dominio; sin declararlo se tirarían las 30 de la portada."
   },
   {
    "id": "bajanews",
@@ -203,7 +208,8 @@
    "scrapy": {
     "item": "a[href^='/Cali-Baja/']",
     "titulo": "::text",
-    "url": "::attr(href)"
+    "url": "::attr(href)",
+    "imagen": "img::attr(src)"
    },
    "activo": true,
    "verificado": "2026-09-04",
