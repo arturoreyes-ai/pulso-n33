@@ -471,6 +471,9 @@ export interface RedesSalud {
   /** Items facturados por Apify. Mayor que `comentarios` cuando un post no
    *  tiene comentarios: el actor devuelve un item de relleno y lo cobra. */
   crudos?: number;
+  /** Solo TikTok: de cuántos videos de esa búsqueda TikTok ya había generado
+   *  subtítulos. Es un conteo; el texto no se guarda en ninguna parte. */
+  con_subtitulos?: number;
   nota?: string;
   error?: string;
 }
@@ -583,6 +586,17 @@ export interface Destacado {
    *  expone y su ausencia es «sin dato». */
   compartidos?: number;
   guardados?: number;
+  /**
+   * Segundos del video. Solo TikTok, y opcional: un corte anterior al 17 de
+   * septiembre de 2026 no la trae. Nunca 0 —eso se leería como «video de
+   * duración cero» y no como «no la trae»—.
+   *
+   * No es un dato de pantalla: existe para poder presupuestar lo que Apify
+   * cobra por segundo de video (`aiVideoSummary`, `aiVideoDescription`) o por
+   * minuto empezado (`transcription-minute`). La tarjeta no la pinta, como no
+   * pinta ninguna otra cifra desde ese mismo día.
+   */
+  duracion?: number;
   /** Comentarios en el caché para este post (≤ comentarios_por_post). */
   cosechados: number;
   /** Con palabras y no repetidos. Lo único sobre lo que hay tono y temas. */

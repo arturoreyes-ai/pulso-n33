@@ -17,6 +17,7 @@ import unittest
 from datetime import datetime, timedelta, timezone
 from unittest.mock import patch
 
+from pulso import redes as _redes
 from pulso import tiktok
 from pulso.validador import validar_redes, validar_redes_comentarios, validar_tiktok_config
 
@@ -44,6 +45,7 @@ def _video(**cambios):
                        "privateAccount": False},
         "diggCount": 120, "shareCount": 7, "playCount": 5000, "commentCount": 40,
         "collectCount": 3, "isAd": False, "isSponsored": False, "isSlideshow": False,
+        "videoMeta": {"duration": 47},
     }
     base.update(cambios)
     return base
@@ -104,8 +106,9 @@ class TestIdentidad(BaseCache):
         self.assertEqual(v["url"], "https://www.tiktok.com/@tjnoticias/video/7301")
         # Del autor no viaja nada mas: ni nickName, ni avatar, ni seguidores.
         self.assertEqual(sorted(v), ["alcance", "comentarios", "compartidos", "creador",
-                                     "cuenta", "fecha", "guardados", "likes", "publicado",
-                                     "reproducciones", "tipo", "titulo", "url", "zona"])
+                                     "cuenta", "duracion", "fecha", "guardados", "likes",
+                                     "publicado", "reproducciones", "tipo", "titulo", "url",
+                                     "zona"])
 
     def test_las_dos_pasadas_cruzan_por_url_canonica(self):
         # webVideoUrl trae mayusculas y ?lang=es; videoWebUrl no. Sin canonizar,
@@ -226,6 +229,36 @@ class TestLimpiezaVideo(unittest.TestCase):
         self.assertNotIn("reproducciones", v)
         self.assertEqual(self._limpio()[0]["reproducciones"], 5000)
 
+    def test_duracion_en_segundos_solo_si_la_trae_y_es_positiva(self):
+        """Decide el precio de todo lo que Apify cobra por segundo de video."""
+        self.assertEqual(self._limpio()[0]["duracion"], 47)
+        # Sin videoMeta, sin el campo: un 0 se leeria como "duracion cero".
+        self.assertNotIn("duracion", self._limpio(videoMeta={})[0])
+        self.assertNotIn("duracion", self._limpio(videoMeta={"duration": 0})[0])
+        self.assertNotIn("duracion", self._limpio(videoMeta={"duration": "raro"})[0])
+
+    def test_los_subtitulos_se_cuentan_y_no_se_guardan(self):
+        """El texto de unos subtitulos es el cuerpo del video: no entra a data/."""
+        con = _video(videoMeta={"duration": 47, "subtitleLinks": [
+            {"language": "spa-ES", "downloadLink": "https://x.test/s.vtt"}]})
+        self.assertTrue(tiktok._tiene_subtitulos(con))
+        self.assertFalse(tiktok._tiene_subtitulos(_video()))
+        self.assertFalse(tiktok._tiene_subtitulos(_video(videoMeta={"subtitleLinks": []})))
+        # Y de ahi no sale ninguna clave nueva en el registro.
+        limpio, _ = tiktok._limpiar_video(con, BUSQUEDA, AHORA)
+        self.assertEqual(
+            [k for k in limpio if "subtitul" in k or "subtitle" in k.lower()], [])
+
+    def test_la_entrada_pide_los_subtitulos_que_tiktok_ya_genero(self):
+        """La opcion gratuita. Las dos de transcripcion cobran y no se piden."""
+        entrada = tiktok._entrada_videos("tijuana noticias", 15, "PAST_24_HOURS")
+        self.assertEqual(entrada["downloadSubtitlesOptions"], "DOWNLOAD_SUBTITLES")
+        self.assertNotIn(entrada["downloadSubtitlesOptions"],
+                         ("TRANSCRIBE_ALL_VIDEOS",
+                          "DOWNLOAD_AND_TRANSCRIBE_VIDEOS_WITHOUT_SUBTITLES"))
+        # Y las descargas cobradas siguen apagadas.
+        self.assertFalse(any(entrada[k] for k in tiktok.SIN_DESCARGAS))
+
     def test_sin_url_o_sin_creador_no_hay_registro(self):
         self.assertEqual(self._limpio(webVideoUrl="https://www.tiktok.com/foo")[1], "sin_url")
         autor = dict(_video()["authorMeta"], name="")
@@ -282,6 +315,33 @@ class TestDerivar(BaseCache):
         self.assertEqual([d["url"] for d in p["destacados"]], ["https://www.tiktok.com/@a/video/1"])
         self.assertEqual(p["ventana_horas"], 24)
         self.assertNotIn("ventana_dias", p)
+
+    def test_tiktok_no_reparte_sus_destacados_por_cuenta(self):
+        """El reparto por turnos es de Instagram, y esto lo deja pinchado.
+
+        Decision del cliente del 17 de septiembre de 2026. La razon tecnica va
+        en la misma direccion: aqui `cuenta` es el id de una busqueda, no una
+        voz, asi que repartir por cuenta seria repartir el mecanismo. El
+        equivalente honesto seria `creador`, y no se pidio.
+
+        Se prueba contra el nucleo compartido porque una sola busqueda tiene
+        una sola `cuenta` y ahi el reparto seria identidad: hacen falta dos.
+        """
+        pubs = {}
+        for i in range(18):
+            grande = i < 15
+            url = "https://www.tiktok.com/@x/video/{}".format(i)
+            pubs[url] = {"url": url, "cuenta": "tk_a" if grande else "tk_b",
+                         "zona": "Tijuana", "fecha": "2026-09-03", "tipo": "video",
+                         "publicado": "2026-09-03T10:00:00+00:00", "titulo": "t",
+                         "likes": (1000 - i) if grande else (10 - i), "comentarios": 0}
+        cuentas = [{"id": "tk_a"}, {"id": "tk_b"}]
+        elegidas = lambda turnos: {
+            d["cuenta"] for d in _redes._destacados(
+                pubs, [], [], [], cuentas, lambda p: True, turnos=turnos)}
+        self.assertEqual(elegidas(False), {"tk_a"})
+        # Y el interruptor existe de verdad: encendido si entraria la chica.
+        self.assertEqual(elegidas(True), {"tk_a", "tk_b"})
 
     def test_los_campos_de_tiktok_cruzan_al_destacado(self):
         d = self._panel(VIDEOS)["destacados"][0]
@@ -381,6 +441,27 @@ class TestValidadorTikTok(unittest.TestCase):
         from tests.test_instagram import TestValidadorDestacados as TD
         d = dict(TD.CON); d["destacados"] = [dict(TD.DESTACADO, creador="@x")]
         self.assertTrue(any("'creador' no se publica" in x for x in validar_redes(d)[0]))
+
+    def test_duracion_es_opcional_y_nunca_cero(self):
+        """Un corte anterior al campo sigue siendo valido: data/ lo escribe el bot."""
+        # Sin el campo: aviso, nunca error. Mismo trato que `alcance`.
+        errores, avisos = validar_redes(dict(self.BASE), plataforma="tiktok")
+        self.assertEqual(errores, [])
+        self.assertTrue(any("duracion" in a for a in avisos), avisos)
+        # Con el campo: ni error ni aviso.
+        errores, avisos = validar_redes(self._con(duracion=47), plataforma="tiktok")
+        self.assertEqual(errores, [])
+        self.assertFalse(any("duracion" in a for a in avisos), avisos)
+        # Un 0 se leeria como "video de duracion cero" y no como "no la trae".
+        for malo in (0, -1, "47", 1.5, None):
+            e, _ = validar_redes(self._con(duracion=malo), plataforma="tiktok")
+            self.assertTrue(any("duracion" in x for x in e), (malo, e))
+
+    def test_duracion_no_aplica_a_instagram(self):
+        """Su actor no la publica; emitirla seria inventarla."""
+        from tests.test_instagram import TestValidadorDestacados as TD
+        d = dict(TD.CON); d["destacados"] = [dict(TD.DESTACADO, duracion=47)]
+        self.assertTrue(any("'duracion' no aplica" in x for x in validar_redes(d)[0]))
 
     def test_ventana_dias_no_aplica_a_tiktok_y_las_dos_juntas_son_error(self):
         e, _ = validar_redes(dict(self.BASE, ventana_dias=7), plataforma="tiktok")

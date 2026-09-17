@@ -123,6 +123,22 @@ FILTROS_FECHA = ("ALL_TIME", "PAST_24_HOURS", "PAST_WEEK", "PAST_MONTH", "LAST_3
 FILTRO_FECHA = "PAST_24_HOURS"
 VENTANA_HORAS = 24
 
+# Los subtitulos QUE TIKTOK YA GENERO, cuando el video los trae. Es lo unico
+# del actor que se acerca a "lo que se dice en el video" y no cuesta un evento
+# aparte: en la tabla de precios no existe ninguno para esta opcion, y el
+# rotulo ($) de la ficha esta sobre las dos de transcripcion y no sobre esta.
+# Las otras tres opciones, para que no se enciendan por descuido:
+#   NEVER_DOWNLOAD_SUBTITLES  - lo de antes del 17 de septiembre de 2026.
+#   DOWNLOAD_AND_TRANSCRIBE_VIDEOS_WITHOUT_SUBTITLES  ($) speech-to-text.
+#   TRANSCRIBE_ALL_VIDEOS  ($) speech-to-text siempre.
+# Las dos de pago cobran `transcription-minute`: 0.034 USD por minuto EMPEZADO
+# y por video en el plan Scale (nivel Silver). Con ~232 videos por corrida y
+# cuatro corridas al dia serian ~950 USD al mes, casi cinco veces el plan.
+# `aiVideoSummary` y `aiVideoDescription` cobran por SEGUNDO de video
+# (0.0008 USD) y salen aun mas caras; ademas las escribe un tercero, asi que
+# `web/src/lib/analisis/reglas.ts` no puede vigilarlas. Ver docs/PLAN.md.
+SUBTITULOS = "DOWNLOAD_SUBTITLES"
+
 # Descargas cobradas que no hacen falta: aqui solo se lee texto y conteos.
 SIN_DESCARGAS = {
     "shouldDownloadVideos": False,
@@ -141,7 +157,7 @@ AMBITO = "regional"
 # Lo que cruza del registro del video a data/tiktok.json ademas de lo comun.
 # `alcance` es el veredicto literal del gacetero y viaja junto a `zona` porque
 # los dos dejaron de ser lo mismo cuando entraron los ambitos.
-CAMPOS_EXTRA = ("creador", "alcance", "publicado", "compartidos", "guardados")
+CAMPOS_EXTRA = ("creador", "alcance", "publicado", "compartidos", "guardados", "duracion")
 
 # Nunca entran al cache. Documental: `_limpiar_comentario` es lista blanca.
 IDENTIDAD_COMENTARIO = ("uniqueId", "uid", "avatarThumbnail", "cid", "user", "nickname")
@@ -304,7 +320,37 @@ def _limpiar_video(item, busqueda, ahora):
     vistas = max(0, int(item.get("playCount") or 0))
     if vistas > 0:
         salida["reproducciones"] = vistas
+    # La duracion en segundos, solo si el actor la trae y es positiva. Viaja
+    # porque decide el precio de todo lo que se cobre POR SEGUNDO de video
+    # (`aiVideoSummary`, `aiVideoDescription`) y de lo que se cobra por minuto
+    # empezado (`transcription-minute`): sin ella, cualquier presupuesto de esa
+    # familia es una suposicion. No cuesta nada, viene en cada resultado.
+    dur = _duracion(item)
+    if dur:
+        salida["duracion"] = dur
     return salida, None
+
+
+def _duracion(item):
+    """Segundos del video, o 0 si el actor no los trae."""
+    meta = item.get("videoMeta") or {}
+    try:
+        return max(0, int(meta.get("duration") or 0))
+    except (TypeError, ValueError):
+        return 0
+
+
+def _tiene_subtitulos(item):
+    """Si TikTok ya genero subtitulos para este video.
+
+    Se CUENTA, no se guarda: el texto de unos subtitulos es el cuerpo del
+    video, y AGENTS.md deja la agregacion en titular, fuente y enlace. Lo que
+    hace falta hoy es saber para cuantos videos existen, que es lo que decide
+    si vale la pena leerlos; eso es un entero y no acredita nada a nadie.
+    """
+    meta = item.get("videoMeta") or {}
+    enlaces = meta.get("subtitleLinks")
+    return bool(enlaces) if isinstance(enlaces, list) else False
 
 
 def _limpiar_comentario(comentario, url, busqueda, zona):
@@ -351,6 +397,7 @@ def _entrada_videos(consulta, cuantos, filtro_fecha, orden=ORDEN):
         "resultsPerPage": cuantos,
         "videoSearchSorting": orden,
         "videoSearchDateFilter": filtro_fecha,
+        "downloadSubtitlesOptions": SUBTITULOS,
         **SIN_DESCARGAS,
     }
 
@@ -424,7 +471,7 @@ def cosechar(busquedas, ahora, tok=None, presupuesto=None, cache=CACHE,
 
         # El catalogo se actualiza ANTES del freno de costo: un video ya
         # cosechado sigue sumando likes y compartidos.
-        urls, fuera, descartados = [], 0, 0
+        urls, fuera, descartados, con_subtitulos = [], 0, 0, 0
         for it in items:
             limpio, motivo = _limpiar_video(it, b, ahora)
             if limpio is None:
@@ -433,6 +480,8 @@ def cosechar(busquedas, ahora, tok=None, presupuesto=None, cache=CACHE,
                 else:
                     descartados += 1
                 continue
+            if _tiene_subtitulos(it):
+                con_subtitulos += 1
             publicaciones[limpio["url"]] = {**publicaciones.get(limpio["url"], {}), **limpio}
             if limpio["url"] not in urls:
                 urls.append(limpio["url"])
@@ -441,7 +490,8 @@ def cosechar(busquedas, ahora, tok=None, presupuesto=None, cache=CACHE,
         if not toca:
             salud.append({"cuenta": b["id"], "estado": "ok", "posts": len(urls),
                           "comentarios": 0, "crudos": 0, "fuera": fuera,
-                          "descartados": descartados, "nota": "sin videos nuevos que cosechar"})
+                          "descartados": descartados, "con_subtitulos": con_subtitulos,
+                          "nota": "sin videos nuevos que cosechar"})
             continue
 
         entrada_coms = {"postURLs": toca, "commentsPerPost": comentarios_por_video,
@@ -454,7 +504,7 @@ def cosechar(busquedas, ahora, tok=None, presupuesto=None, cache=CACHE,
             salud.append({"cuenta": b["id"], "estado": "fallo",
                           "error": "{}: {}".format(type(e).__name__, e)[:200],
                           "posts": len(urls), "comentarios": 0, "fuera": fuera,
-                          "descartados": descartados})
+                          "descartados": descartados, "con_subtitulos": con_subtitulos})
             continue
 
         ingeridos = 0
@@ -472,7 +522,7 @@ def cosechar(busquedas, ahora, tok=None, presupuesto=None, cache=CACHE,
             vistos[u] = _hoy(ahora)
         salud.append({"cuenta": b["id"], "estado": "ok", "posts": len(urls),
                       "comentarios": ingeridos, "crudos": len(crudos), "fuera": fuera,
-                      "descartados": descartados})
+                      "descartados": descartados, "con_subtitulos": con_subtitulos})
 
     guardar_vistos(vistos, cache)
     guardar_publicaciones(publicaciones, ahora, cache)

@@ -1099,6 +1099,8 @@ PLATAFORMAS_REDES = {
         # La zona de una cuenta es su sede declarada, no el veredicto de un
         # gacetero: aqui no hay alcance que publicar, y `internacional` no existe.
         "alcance": False,
+        # El actor de Instagram no publica la duracion del video.
+        "duracion": False,
         "zonas": ZONAS_DE_CONTEO,
         "modulo": "pulso/instagram.py:_limpiar",
     },
@@ -1112,6 +1114,9 @@ PLATAFORMAS_REDES = {
         # TikTok si los publica: un 0 es cero medido, y faltar es error.
         "cifras": ("compartidos", "guardados"),
         "alcance": True,
+        # Segundos del video, desde el 17 de septiembre de 2026. Opcional: un
+        # corte anterior no lo trae y sigue siendo valido, igual que `alcance`.
+        "duracion": True,
         "zonas": ZONAS_REDES_TIKTOK,
         "modulo": "pulso/tiktok.py:_limpiar_comentario",
     },
@@ -1269,7 +1274,7 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
         desde_dt = generado_dt - timedelta(hours=ventana)
 
     urls, por_zona = [], {}
-    sin_alcance = 0
+    sin_alcance = sin_duracion = 0
     for i, d in enumerate(lista):
         eti = "{}[{}]".format(et, i)
         if not isinstance(d, dict):
@@ -1386,6 +1391,22 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
                 _entero_no_negativo(d["reproducciones"]) and d["reproducciones"] > 0):
             errores.append("{}: 'reproducciones' solo se emite si es mayor que 0; un cero "
                            "se leeria como 'nadie lo vio' y no como 'no es video'".format(eti))
+        # `duracion` son segundos de video y existe por una razon de costo: todo
+        # lo que Apify cobra sobre el video se factura POR SEGUNDO empezado
+        # (`aiVideoSummary`, `aiVideoDescription`) o por minuto empezado
+        # (`transcription-minute`). Sin ella no se puede presupuestar ninguno de
+        # los tres, que es justo lo que hubo que estimar a ciegas el 17 de
+        # septiembre de 2026. Solo TikTok la publica; un cero seria "video de
+        # duracion cero" y no "no la trae", asi que se omite en vez de emitirla.
+        if esp["duracion"]:
+            if "duracion" not in d:
+                sin_duracion += 1
+            elif not (_entero_no_negativo(d["duracion"]) and d["duracion"] > 0):
+                errores.append("{}: 'duracion' son segundos y solo se emite si es mayor "
+                               "que 0 ({!r})".format(eti, d.get("duracion")))
+        elif "duracion" in d:
+            errores.append("{}: 'duracion' no aplica a {}; su actor no la publica".format(
+                eti, plataforma))
         if _entero_no_negativo(d.get("cosechados")):
             if d["cosechados"] == 0:
                 avisos.append("{}: post destacado sin comentarios cosechados".format(eti))
@@ -1418,6 +1439,10 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
         avisos.append("redes: {} destacado(s) anteriores al campo 'alcance' (15 de septiembre "
                       "de 2026); el panel los rotula por 'zona' hasta que el cron los "
                       "regenere".format(sin_alcance))
+    if sin_duracion:
+        avisos.append("redes: {} destacado(s) anteriores al campo 'duracion' (17 de septiembre "
+                      "de 2026); hasta que el cron los regenere no se puede presupuestar lo "
+                      "que Apify cobra por segundo de video".format(sin_duracion))
     if len(set(urls)) != len(urls):
         errores.append("redes: 'destacados' repite una url")
     claves = [(-d.get("likes", 0), -d.get("comentarios", 0), d.get("url", ""))
