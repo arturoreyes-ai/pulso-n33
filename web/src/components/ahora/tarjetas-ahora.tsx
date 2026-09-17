@@ -1,5 +1,6 @@
 "use client";
 
+import { ShareNetwork as IconoCompartir } from "@phosphor-icons/react";
 import { useState } from "react";
 
 import { clasesChip } from "@/components/ui/clases";
@@ -130,7 +131,10 @@ function Compartir({ titulo, url }: { titulo: string; url: string }) {
   }
   return (
     <>
-      <button type="button" className={clasesChip(false)} onClick={compartir}>Compartir</button>
+      <button type="button" className={clasesChip(false)} onClick={compartir}>
+        <IconoCompartir size={16} weight="light" aria-hidden className="shrink-0 self-center" />
+        Compartir
+      </button>
       <span role="status" className="aviso-compartir text-meta text-tinta-meta">{aviso}</span>
     </>
   );

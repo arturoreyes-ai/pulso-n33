@@ -672,13 +672,16 @@ y el job web de CI.
 
 ### Analizar: la lectura automática de una nota
 
-El botón «Analizar» de una tarjeta abre la nota enlazada, la manda a un modelo y
-devuelve dos o tres frases sobre de qué trata y qué **no** establece. Nada del
-cuerpo de la nota se guarda ni se devuelve: la respuesta lleva la lectura y
-nunca el texto leído.
+El botón «Analizar» de una tarjeta abre una confirmación; solo al aceptar abre
+la nota enlazada, la manda a un modelo y devuelve una ficha en español para la
+mesa de noticias: un resumen breve, de
+tres a cinco puntos ordenados por importancia, qué **no** establece la nota y
+una sola idea para redes con formato, enfoque y gancho. No es un guion para
+leer al aire ni un post terminado. Nada del cuerpo de la nota se guarda ni se
+devuelve: la respuesta lleva la ficha y nunca el texto leído.
 
-Va apagado salvo que estén las dos variables, porque cada pulsación es una
-llamada de pago:
+Va apagado salvo que estén las dos variables, porque cada lectura confirmada es
+una llamada de pago:
 
 ```
 ANALISIS_HABILITADO=true

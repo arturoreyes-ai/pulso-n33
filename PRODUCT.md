@@ -60,16 +60,18 @@ ellas tienen hoy una pantalla que las ilustre.
 
 Desde el 15 de septiembre de 2026, también a petición del cliente, el lector
 puede pedir una **lectura automática** de una nota: el botón «Analizar» de una
-tarjeta abre la nota enlazada, una máquina la lee y devuelve dos o tres frases
-sobre de qué trata y qué **no** establece. Es la única parte del producto que
-toca el cuerpo de una nota, y lo toca sin quedárselo: el cuerpo vive lo que dura
-una petición, no se guarda en ningún archivo ni en el historial, y la respuesta
-lleva la lectura y nunca el texto leído. La lectura se rotula como lo que es
-—la escribe una máquina, puede equivocarse, no sustituye leer la nota— y no
-cuenta en ninguna cifra de prensa. No atribuye postura a ninguna persona, que
-es la regla 5 aplicada a un modelo distinto del de tono. Va apagada salvo que se
-encienda con una clave propia. La opinión legal sigue pendiente; la decisión es
-del cliente y queda registrada en `docs/PLAN.md`.
+tarjeta pide confirmación antes de abrir la nota enlazada y preparar una ficha
+breve para la mesa de noticias. Desde el 17 de septiembre esa ficha separa el resumen para cabina,
+entre tres y cinco puntos clave, lo que la nota no establece y una sola idea de
+contenido para redes con formato, enfoque y gancho; no escribe un guion ni el
+post terminado. Es la única parte del producto que toca el cuerpo de una nota,
+y lo toca sin quedárselo: el cuerpo vive lo que dura una petición, no se guarda
+en ningún archivo ni en el historial, y la respuesta lleva la lectura, nunca el
+texto leído. La pantalla la rotula solo «Generado con IA». La ficha no cuenta en
+ninguna cifra de prensa ni atribuye postura a ninguna persona, que es la regla 5
+aplicada a un modelo distinto del de tono. Va apagada salvo que se encienda con
+una clave propia. La opinión legal sigue pendiente; la decisión es del cliente y
+queda registrada en `docs/PLAN.md`.
 
 ---
 

@@ -96,6 +96,10 @@ export interface Renglon {
   nombre: string;
   figura: string;
   hayCifra: boolean;
+  /** La cifra es de hace menos de 90 minutos, o sea que se puede decir al
+   *  aire. Una cifra con `false` sigue siendo una cifra real de CBP: se
+   *  muestra, con su hora, y se queda fuera de la frase. */
+  alDia: boolean;
   /** Solo cuando los carriles de ese modo no comparten hora. */
   hora: string;
 }
@@ -103,12 +107,10 @@ export interface Renglon {
 export interface Modo {
   titulo: string;
   renglones: Renglon[];
-  /** El continuo, listo para decirse. Vacio cuando no hay nada que decir. */
+  /** El continuo, listo para decirse. Vacio solo si no hay ninguna cifra que
+   *  esta linea nombre; nunca por como estan fechadas. */
   linea: string;
-  /** `linea` esta vacia porque las horas no cuadran, no por falta de datos. */
-  horasMezcladas: boolean;
-  /** Por que no hay linea, cuando NO es por horas mezcladas. Vacio cuando si
-   *  hay linea. Un modo sin linea y sin motivo dejaba un hueco mudo en el
+  /** Por que no hay linea. Vacio cuando si hay linea. Un modo sin linea y sin motivo dejaba un hueco mudo en el
    *  bloque: Otay Mesa con su frase al lado y San Ysidro con nada, que es lo
    *  ultimo que se quiere en un apuntador que se lee al aire. */
   sinLinea: string;
@@ -121,6 +123,11 @@ export interface Guion {
   /** La ficha de atribucion: «CBP · 11:00 de la manana», o solo «CBP». */
   atribucion: string;
   cues: Cue[];
+  /** Hay alguna cifra en pantalla, aunque ninguna se pueda decir. Es lo que
+   *  decide si el bloque se dibuja; `cierre` decide otra cosa. */
+  hayCifras: boolean;
+  /** El cierre hablado. Vacio cuando no hay ninguna frase que atribuir: la
+   *  etiqueta ya atribuye lo que se ve, y esto cierra lo que se dice. */
   cierre: string;
 }
 
@@ -133,17 +140,17 @@ export interface Guion {
  * garita; y cuando solo hay una, no se nombra: «Otay Mesa a pie: 15 minutos»
  * no necesita aclarar por cual.
  *
- * A pie solo se dice el carril general de cada acceso. El Ready Lane peatonal
- * es minoritario y alargaria la frase sin cambiar la noticia; su cifra sigue
- * en la ficha, que es donde se comprueba. En coche se dicen los tres, porque
- * los tres mueven volumen.
+ * Se dicen TODOS los carriles de cada modo. A pie se dijeron un tiempo solo
+ * los generales, por no alargar la frase; era la ficha decidiendo por el
+ * locutor, que tiene que dar esos minutos igual. El Ready Lane peatonal de
+ * PedWest lleva su acceso en la etiqueta porque si no se confunde con el de la
+ * garita principal, que es otra fila.
  */
 const MODOS = [
   {
     titulo: "Vehículos",
     viajero: "vehiculo",
     sujeto: (lugar: string) => lugar,
-    seDice: () => true,
     etiqueta: (carril: Carril) =>
       carril.categoria === "general" ? "en carril general" : carril.categoria === "ready" ? "en Ready Lane" : "por SENTRI",
   },
@@ -151,49 +158,122 @@ const MODOS = [
     titulo: "Peatones",
     viajero: "peaton",
     sujeto: (lugar: string) => `${lugar} a pie`,
-    seDice: (carril: Carril) => carril.categoria === "general",
     etiqueta: (carril: Carril, solo: boolean) =>
-      solo ? "" : carril.acceso === "PedWest" ? "por PedWest" : "por la garita principal",
+      solo
+        ? ""
+        : carril.categoria === "ready"
+          ? carril.acceso === "PedWest"
+            ? "en Ready Lane de PedWest"
+            : "en Ready Lane"
+          : carril.acceso === "PedWest"
+            ? "por PedWest"
+            : "por la garita principal",
   },
 ] as const satisfies readonly {
   titulo: string;
   viajero: Carril["viajero"];
   sujeto: (lugar: string) => string;
-  seDice: (carril: Carril) => boolean;
   etiqueta: (carril: Carril, solo: boolean) => string;
 }[];
 
-/** El hueco en palabras. Nunca un cero: un cero se lee como «no hay espera». */
-function sinCifra(carril: Carril, ahora: number): string {
+/**
+ * El hueco en palabras. Nunca un cero: un cero se lee como «no hay espera».
+ *
+ * Tuvo una rama «reporte vencido» para el carril que CBP reporto hace mas de
+ * 90 minutos, y borraba la cifra. Estaba mal dos veces: leia como «no hay
+ * dato» cuando si lo hay —PedWest publicaba 55 minutos a las 7:00 y la ficha
+ * decia «reporte vencido»— y, al sonar a que lo viejo era lo nuestro, invitaba
+ * a pulsar Actualizar, que vuelve a traer las mismas 7:00 porque es la hora a
+ * la que CBP actualizo PedWest. La regla de los 90 minutos es de PRODUCT.md y
+ * es sobre lo que se DICE al aire, no sobre lo que se muestra.
+ */
+function sinCifra(carril: Carril): string {
   if (carril.estado === "cerrado") return "cerrado";
   if (carril.estado === "pendiente") return "actualización pendiente";
-  if (carril.estado === "reportado" && !vigente(carril, ahora)) return "reporte vencido";
   return "sin dato";
 }
 
 /**
- * Por que este modo no tiene linea. Cuatro situaciones distintas y no una:
- * decir «sin reporte vigente» sobre una ficha que muestra un Ready Lane con
- * cifra seria contradecir en pantalla lo que se acaba de escribir al lado.
+ * Por que este modo no tiene linea. Situaciones distintas y no una: decir «sin
+ * reporte» sobre una ficha que muestra cifras al lado seria contradecirse en
+ * pantalla.
+ *
+ * Tuvo una cuarta rama, «solo reportan carriles que esta linea no nombra»,
+ * para cuando a pie se decia unicamente el general. Ahora se dicen todos, asi
+ * que un carril con cifra siempre llega a la frase y esa rama no puede darse.
  */
-function motivoSinLinea(
-  carriles: Carril[],
-  hayLeibles: boolean,
-  ahora: number,
-): string {
+function motivoSinLinea(carriles: Carril[], ultima: string): string {
   if (carriles.length === 0) return "";
-  // Hay carriles con reporte vigente, pero esta linea no los nombra: a pie
-  // solo se dice el carril general (ver MODOS), asi que un Ready Lane fresco
-  // con el general vencido cae aqui.
-  if (hayLeibles) return "Solo reportan carriles que esta línea no nombra; sus cifras están abajo.";
   if (carriles.every((c) => c.estado === "cerrado")) return "Todos sus carriles están cerrados.";
-  return "Ningún carril tiene un reporte vigente.";
+  // Hay cifras, pero ninguna de la ultima hora y media: se muestran arriba y
+  // no se dicen. Decir desde cuando es lo unico que hace entendible por que.
+  if (ultima) return `Sin actualizar desde las ${ultima}; sus cifras están arriba.`;
+  return "CBP no publica un reporte para sus carriles.";
 }
 
 function unir(partes: string[]): string {
   const ultima = partes.at(-1);
   if (ultima === undefined) return "";
   return partes.length === 1 ? ultima : `${partes.slice(0, -1).join(", ")} y ${ultima}`;
+}
+
+interface Leible {
+  carril: Carril;
+  minutos: number;
+  hora: string;
+  alDia: boolean;
+}
+
+/**
+ * La frase de un modo, diciendo una sola vez lo que se repite.
+ *
+ * Dos carriles con la misma espera y la misma hora se dicen juntos —«casi dos
+ * horas en carril general y en Ready Lane»—, y las clausulas que comparten
+ * hora la dicen una vez al final en lugar de arrastrarla cada una. Sin esto,
+ * los cuatro carriles peatonales de San Ysidro salian con «a las 8:00 de la
+ * manana» dos veces y «a las 7:00» otras dos, en una frase de cuarenta y
+ * cinco palabras.
+ *
+ * Las clausulas se separan con punto y coma en cuanto una lleva «y» dentro:
+ * «…y en Ready Lane y media hora por SENTRI» no deja oir donde acaba una cifra
+ * y empieza la siguiente.
+ */
+function frase(
+  sujeto: string,
+  leibles: Leible[],
+  etiquetar: (carril: Carril, solo: boolean) => string,
+  horaAlFrente: string,
+  porCifra: boolean,
+): string {
+  const solo = leibles.length === 1;
+  const clausulas: { espera: string; etiquetas: string[]; hora: string }[] = [];
+  for (const l of leibles) {
+    const espera = duracionHablada(l.minutos);
+    const previa = clausulas.at(-1);
+    if (previa && previa.espera === espera && previa.hora === l.hora) {
+      previa.etiquetas.push(etiquetar(l.carril, solo));
+    } else {
+      clausulas.push({ espera, etiquetas: [etiquetar(l.carril, solo)], hora: l.hora });
+    }
+  }
+
+  const grupos: { textos: string[]; hora: string; compuesta: boolean }[] = [];
+  for (const c of clausulas) {
+    const texto = [c.espera, unir(c.etiquetas.filter(Boolean))].filter(Boolean).join(" ");
+    const previo = grupos.at(-1);
+    if (previo && previo.hora === c.hora) {
+      previo.textos.push(texto);
+      previo.compuesta = previo.compuesta || c.etiquetas.length > 1;
+    } else {
+      grupos.push({ textos: [texto], hora: c.hora, compuesta: c.etiquetas.length > 1 });
+    }
+  }
+
+  const dichos = grupos.map((g) => {
+    const cuerpo = g.compuesta ? g.textos.join("; ") : unir(g.textos);
+    return porCifra ? `${cuerpo}, a las ${g.hora}` : cuerpo;
+  });
+  return `${sujeto}${horaAlFrente ? `, a las ${horaAlFrente}` : ""}: ${dichos.join("; ")}.`;
 }
 
 /**
@@ -214,12 +294,19 @@ function unir(partes: string[]): string {
  * La atribucion sube a una etiqueta y vuelve hablada al final, que es donde va
  * en television: el dato primero, la fuente despues.
  *
- * La hora sube a la etiqueta SOLO si TODOS los carriles leibles la comparten.
- * CBP fecha cada carril por separado, y una etiqueta que anunciara una hora
- * valida para unos y no para otros seria una atribucion falsa dicha al aire.
- * Si los carriles de un modo no comparten hora entre ellos, ese modo se queda
- * sin linea: la ficha las muestra una por una y no hay forma de decir esa
- * mezcla en una frase sin mentir en alguna parte.
+ * La hora se dice UNA vez cuando se puede y una por cifra cuando no. CBP fecha
+ * cada carril por separado, asi que una sola hora al frente de la frase seria
+ * una atribucion falsa en cuanto dos carriles no la compartan. Tres niveles,
+ * del mas barato al mas caro: si coinciden TODOS los carriles de todos los
+ * cruces, la hora vive en la etiqueta y ninguna frase la repite; si coinciden
+ * los de una frase, va delante de esa frase; y si no, cada cifra lleva la suya
+ * —«40 minutos por la garita principal a las 8:00 de la manana y casi una hora
+ * por PedWest a las 7:00 de la manana»—.
+ *
+ * Esa tercera rama callaba la frase entera, y estaba mal: el locutor tiene que
+ * dar esos minutos igual, y callarlos no le quita el problema, lo deja sin
+ * texto delante de la camara. Repetir la hora cuesta unas palabras y no miente
+ * en ninguna.
  */
 export function guion(cruces: Cruce[], ahora: number): Guion {
   const armados = cruces.map((cruce) => ({
@@ -232,51 +319,77 @@ export function guion(cruces: Cruce[], ahora: number): Guion {
           // misma cifra; contarlo seria leer la misma fila dos veces.
           !(cruce.id === "otay_mesa" && c.viajero === "peaton" && c.categoria === "ready"),
       );
-      const leibles = carriles.flatMap((carril) =>
-        carril.estado === "reportado" && carril.minutos !== null && carril.observado !== null && vigente(carril, ahora)
-          ? [{ carril, minutos: carril.minutos, hora: horaHablada(carril.observado) }]
+      // Dos conjuntos distintos, y confundirlos fue el error: TENER cifra es
+      // una cosa y poder DECIRLA al aire es otra. La ficha muestra las que hay;
+      // la frase dice solo las de la ultima hora y media (regla de PRODUCT.md).
+      const conCifra = carriles.flatMap((carril) =>
+        carril.estado === "reportado" && carril.minutos !== null && carril.observado !== null
+          ? [{
+              carril,
+              minutos: carril.minutos,
+              hora: horaHablada(carril.observado),
+              alDia: vigente(carril, ahora),
+            }]
           : [],
       );
-      const [primero] = leibles;
-      const hora = primero && leibles.every((l) => l.hora === primero.hora) ? primero.hora : null;
-      return { modo, carriles, leibles, hora };
+      const leibles = conCifra.filter((l) => l.alDia);
+      const [primero] = conCifra;
+      const hora = primero && conCifra.every((l) => l.hora === primero.hora) ? primero.hora : null;
+      const [primeroDicho] = leibles;
+      const horaDicha =
+        primeroDicho && leibles.every((l) => l.hora === primeroDicho.hora) ? primeroDicho.hora : null;
+      // La mas reciente de las que hay, para poder decir desde cuando no se
+      // actualiza cuando ninguna llega al aire.
+      const ultima = conCifra.reduce<Leible | null>(
+        (mayor, l) =>
+          mayor === null || Date.parse(l.carril.observado ?? "") > Date.parse(mayor.carril.observado ?? "") ? l : mayor,
+        null,
+      );
+      return { modo, carriles, conCifra, leibles, hora, horaDicha, ultima };
     }),
   }));
 
-  const todas = armados.flatMap((a) => a.modos).flatMap((m) => m.leibles);
+  // La etiqueta tiene que describir lo que hay EN PANTALLA, no solo lo que se
+  // dice: con PedWest a las 7:00 en la ficha, un «CBP · 8:00» seria falso.
+  const todas = armados.flatMap((a) => a.modos).flatMap((m) => m.conCifra);
   const [inicial] = todas;
   const horaComun = inicial && todas.every((l) => l.hora === inicial.hora) ? inicial.hora : null;
 
   return {
     atribucion: horaComun ? `CBP · ${horaComun}` : "CBP",
-    cierre: todas.length > 0 ? "Cifras de CBP." : "",
+    hayCifras: todas.length > 0,
+    cierre: todas.some((l) => l.alDia) ? "Cifras de CBP." : "",
     cues: armados.map(({ cruce, modos }) => ({
       lugar: cruce.nombre,
-      modos: modos.map(({ modo, carriles, leibles, hora }) => {
-        const dichos = leibles.filter((l) => modo.seDice(l.carril));
-        const horasMezcladas = leibles.length > 0 && horaComun === null && hora === null;
+      modos: modos.map(({ modo, carriles, conCifra, leibles, hora, horaDicha, ultima }) => {
+        // Cuando los carriles del modo no coinciden, la hora baja a cada cifra:
+        // en la frase y, para los que ni siquiera tienen cifra, en la ficha.
+        const porCifra = horaComun === null && hora === null;
         return {
           titulo: modo.titulo,
-          horasMezcladas,
           renglones: carriles.map((carril) => {
-            const leible = leibles.find((l) => l.carril === carril);
+            const cifra = conCifra.find((l) => l.carril === carril);
             return {
               nombre: nombreCarril(carril),
-              figura: leible ? duracionFicha(leible.minutos) : sinCifra(carril, ahora),
-              hayCifra: leible !== undefined,
-              hora: horasMezcladas && leible ? leible.hora : "",
+              figura: cifra ? duracionFicha(cifra.minutos) : sinCifra(carril),
+              hayCifra: cifra !== undefined,
+              alDia: cifra?.alDia ?? false,
+              // Una cifra que no se dice SIEMPRE lleva hora: es lo unico que
+              // explica por que no esta en la frase de arriba.
+              hora: cifra && (porCifra || !cifra.alDia) ? cifra.hora : "",
             };
           }),
           linea:
-            dichos.length === 0 || horasMezcladas
+            leibles.length === 0
               ? ""
-              : `${modo.sujeto(cruce.nombre)}${horaComun === null ? `, a las ${hora}` : ""}: ${unir(
-                  dichos.map((l) => `${duracionHablada(l.minutos)} ${modo.etiqueta(l.carril, dichos.length === 1)}`.trim()),
-                )}.`,
-          sinLinea:
-            dichos.length > 0 || horasMezcladas
-              ? ""
-              : motivoSinLinea(carriles, leibles.length > 0, ahora),
+              : frase(
+                  modo.sujeto(cruce.nombre),
+                  leibles,
+                  modo.etiqueta,
+                  horaComun === null && horaDicha !== null ? horaDicha : "",
+                  horaComun === null && horaDicha === null,
+                ),
+          sinLinea: leibles.length > 0 ? "" : motivoSinLinea(carriles, ultima ? ultima.hora : ""),
         };
       }),
     })),

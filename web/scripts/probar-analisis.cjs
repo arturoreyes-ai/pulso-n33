@@ -41,6 +41,7 @@ function cargar(relativo) {
 const { urlSegura } = cargar('lib/analisis/url');
 const { extraerTexto, TOPE_TEXTO } = cargar('lib/analisis/extraer');
 const { responderAnalisis, CACHE_ANALISIS } = cargar('lib/analisis/analizar');
+const { VERSION_ANALISIS } = cargar('lib/analisis/contrato');
 const { SIN_CACHE } = cargar('lib/busqueda/respuesta');
 const { entradaDe, rutaDeEntrada, ENTRADAS, PARAM_EDICION } = cargar('lib/busqueda/entrada');
 const { indiceDeEnlaces, enlaceDelMedio, esEnlaceOpaco } = cargar('lib/busqueda/enlaces');
@@ -68,8 +69,10 @@ function respuestaFalsa(cuerpo, ok = true) {
 /** El `solicitar` inyectado: primero el medio, despues el modelo. */
 function conductor({ medio = NOTA_HTML, medioOk = true, modelo, modeloOk = true }) {
   const vistas = [];
+  const peticiones = [];
   const fn = async (url, opciones) => {
     vistas.push(String(url));
+    peticiones.push({ url: String(url), opciones });
     if (String(url).includes('api.anthropic.com')) {
       assert.equal(opciones.method, 'POST', 'al modelo se le habla por POST');
       return respuestaFalsa(modelo, modeloOk);
@@ -77,6 +80,7 @@ function conductor({ medio = NOTA_HTML, medioOk = true, modelo, modeloOk = true 
     return respuestaFalsa(medio, medioOk);
   };
   fn.vistas = vistas;
+  fn.peticiones = peticiones;
   return fn;
 }
 
@@ -85,8 +89,13 @@ const SALIDA_BUENA = JSON.stringify({
     type: 'text',
     text: JSON.stringify({
       lectura: 'La nota reporta esperas largas en el cruce durante un fin de semana.',
-      puntos: ['Se reportan filas prolongadas', 'Ocurrio en un fin de semana largo'],
+      puntos: ['Se reportan filas prolongadas', 'Ocurrió en un fin de semana largo', 'La nota ubica el hecho en San Ysidro'],
       salvedad: 'No establece una tendencia ni compara con otros meses.',
+      sugerenciaSocial: {
+        formato: 'Gráfico informativo',
+        enfoque: 'Ordenar los tiempos y el lugar del cruce en una sola pieza.',
+        gancho: 'Lo esencial sobre las esperas reportadas en San Ysidro.',
+      },
     }),
   }],
 });
@@ -150,14 +159,28 @@ async function comprobar() {
   assert.equal(r.headers.get('x-robots-tag'), 'noindex');
   const cuerpo = await r.json();
   assert.match(cuerpo.lectura, /esperas largas/);
-  assert.equal(cuerpo.puntos.length, 2);
+  assert.equal(cuerpo.puntos.length, 3);
+  assert.equal(cuerpo.sugerenciaSocial.formato, 'Gráfico informativo');
+  assert.match(cuerpo.sugerenciaSocial.enfoque, /tiempos/);
+  assert.match(cuerpo.sugerenciaSocial.gancho, /San Ysidro/);
   assert.equal(cuerpo.medio, 'Zeta');
   assert.equal(ok.vistas.length, 2, 'una al medio y una al modelo');
+
+  const llamadaModelo = ok.peticiones.find((p) => p.url.includes('api.anthropic.com'));
+  assert.ok(llamadaModelo, 'se hizo la llamada al modelo');
+  const pedidoModelo = JSON.parse(llamadaModelo.opciones.body);
+  assert.equal(pedidoModelo.model, 'claude-haiku-4-5-20251001');
+  assert.match(pedidoModelo.system, /Entre 3 y 5 puntos/);
+  assert.match(pedidoModelo.system, /UN solo formato/);
+  assert.match(pedidoModelo.system, /sin escribir el post terminado/);
+  assert.match(pedidoModelo.system, /lenguaje sensacionalista/);
+  assert.match(pedidoModelo.system, /No inventes citas, imágenes, video, reacciones del público/);
 
   // LO IMPORTANTE: el cuerpo de la nota no vuelve al lector.
   const serializado = JSON.stringify(cuerpo);
   assert.doesNotMatch(serializado, new RegExp(SECRETO), 'la respuesta no trae el texto de la nota');
   assert.ok(!serializado.includes(FRASE.trim()), 'ni una frase del original');
+  assert.doesNotMatch(JSON.stringify(cuerpo.sugerenciaSocial), new RegExp(SECRETO), 'la sugerencia tampoco trae el cuerpo');
 
   // --- el medio caido es un estado, nunca un 502 --------------------------
   r = await responderAnalisis({ u: 'https://zeta.example.com/n', m: 'Zeta' }, conductor({ medioOk: false, modelo: SALIDA_BUENA }));
@@ -176,11 +199,33 @@ async function comprobar() {
   r = await responderAnalisis({ u: 'https://zeta.example.com/n', m: 'Zeta' }, conductor({ modelo: JSON.stringify({ content: [{ type: 'text', text: 'lo siento, no puedo' }] }) }));
   assert.equal((await r.json()).codigo, 'modelo');
 
+  // El resumen viejo, sin la recomendacion completa, ya no cumple el contrato.
+  r = await responderAnalisis({ u: 'https://zeta.example.com/n', m: 'Zeta' }, conductor({
+    modelo: JSON.stringify({ content: [{ type: 'text', text: JSON.stringify({
+      lectura: 'Trata de la garita.',
+      puntos: ['Uno', 'Dos', 'Tres'],
+      salvedad: 'No compara periodos.',
+      sugerenciaSocial: { formato: 'Carrusel', enfoque: '', gancho: 'Tres datos.' },
+    }) }] }),
+  }));
+  assert.equal((await r.json()).codigo, 'modelo');
+
   // El modelo envolviendo el JSON en una valla si se acepta.
   r = await responderAnalisis({ u: 'https://zeta.example.com/n', m: 'Zeta' }, conductor({
-    modelo: JSON.stringify({ content: [{ type: 'text', text: '```json\n{"lectura":"Trata de la garita.","puntos":[],"salvedad":""}\n```' }] }),
+    modelo: JSON.stringify({ content: [{ type: 'text', text: '```json\n{"lectura":"Trata de la garita.","puntos":["Uno","Dos","Tres"],"salvedad":"No compara periodos.","sugerenciaSocial":{"formato":"Carrusel","enfoque":"Tres claves del reporte.","gancho":"Qué cambió en la garita."}}\n```' }] }),
   }));
   assert.equal((await r.json()).lectura, 'Trata de la garita.');
+
+  // La version viaja en la URL del cliente para no recibir del CDN el
+  // contrato anterior durante el primer dia del despliegue.
+  assert.equal(VERSION_ANALISIS, '2');
+  const componente = fs.readFileSync(path.join(SRC, 'components/ahora/analisis-titular.tsx'), 'utf8');
+  assert.match(componente, /new URLSearchParams\(\{ v: VERSION_ANALISIS, u: url, m: medio \}\)/);
+  const apertura = componente.match(/function abrir\(\) \{([\s\S]*?)\n  \}\n\n  async function analizar/)?.[1];
+  assert.ok(apertura, 'el cliente separa abrir de confirmar el análisis');
+  assert.match(apertura, /fase: "confirmar"/);
+  assert.doesNotMatch(apertura, /fetch\(/, 'abrir el diálogo no debe iniciar la llamada de pago');
+  assert.match(componente, /async function analizar\(\)[\s\S]*?fetch\(`/);
 
   // --- el enlace del propio medio ------------------------------------------
   // El caso real: la url de una fila en vivo es un token del buscador que no
@@ -229,5 +274,5 @@ async function comprobar() {
 }
 
 comprobar()
-  .then(() => console.log('Análisis: URL, extracción, interruptor, fallos, enlace del medio y la entrada del recorrido verificados offline.'))
+  .then(() => console.log('Análisis: ficha para cabina y redes, privacidad, URL, interruptor, fallos y enlace del medio verificados offline.'))
   .catch((err) => { console.error(err); process.exitCode = 1; });

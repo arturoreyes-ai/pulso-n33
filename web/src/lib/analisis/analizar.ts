@@ -1,5 +1,6 @@
 import { json, SIN_CACHE } from "@/lib/busqueda/respuesta";
 import { analisisHabilitado } from "./config";
+import type { LecturaAnalisis, SugerenciaSocial } from "./contrato";
 import { extraerTexto } from "./extraer";
 import { urlSegura } from "./url";
 
@@ -38,25 +39,22 @@ const MAX_BYTES = 1_500_000;
 const MODELO = "claude-haiku-4-5-20251001";
 const AGENTE = "PulsoN33/1.0 (+lectura automatica de una nota enlazada)";
 
-export interface Analisis {
-  lectura: string;
-  puntos: string[];
-  salvedad: string;
-  medio: string;
-}
-
 const SISTEMA = [
   "Eres un lector de prensa regional del corredor Tijuana-San Diego.",
-  "Recibes el texto de UNA nota y devuelves una lectura breve en ESPANOL, aunque la nota este en ingles.",
+  "Recibes el texto de UNA nota y preparas una ficha breve en ESPAÑOL para una mesa de noticias, aunque la nota esté en inglés.",
   "Reglas que no puedes romper:",
-  "- No afirmes nada que no este en el texto. Si el texto no alcanza, dilo.",
-  "- No atribuyas postura, intencion ni opinion a ninguna persona nombrada. Describe lo que la nota reporta, no lo que sugiere sobre alguien.",
+  "- No afirmes nada que no esté en el texto. Si el texto no alcanza, dilo.",
+  "- No atribuyas postura, intención ni opinión a ninguna persona nombrada. Describe lo que la nota reporta, no lo que sugiere sobre alguien.",
   "- No cites mas de ocho palabras seguidas del original.",
   "- No opines sobre el medio ni sobre su linea editorial.",
-  "- Escribe en prosa llana, sin adjetivos de color.",
+  "- Escribe en prosa llana, sin adjetivos de color ni lenguaje sensacionalista.",
+  "- La lectura es un resumen de mesa, NO un guion para leer al aire.",
+  "- Ordena los puntos por importancia. Incluye quién, qué, dónde, cuándo, cifras y qué sigue solo cuando la nota lo establezca.",
+  "- Sugiere UN solo formato de contenido para redes. Da su enfoque y un gancho factual, sin escribir el post terminado.",
+  "- No inventes citas, imágenes, video, reacciones del público ni material que la nota no diga que existe.",
   "Devuelve SOLO un objeto JSON con esta forma exacta:",
-  '{"lectura": "<2 a 3 frases sobre de que trata>", "puntos": ["<dato concreto de la nota>", "..."], "salvedad": "<que NO establece la nota>"}',
-  "Entre 2 y 4 puntos. Sin texto fuera del JSON.",
+  '{"lectura":"<2 a 3 frases neutrales>","puntos":["<dato prioritario>","..."],"salvedad":"<qué NO establece la nota>","sugerenciaSocial":{"formato":"<un formato>","enfoque":"<ángulo editorial sustentado>","gancho":"<gancho factual, no sensacionalista>"}}',
+  "Entre 3 y 5 puntos. Todos los campos deben tener texto. Sin texto fuera del JSON.",
 ].join("\n");
 
 function fallo(mensaje: string, codigo: string): Response {
@@ -64,18 +62,30 @@ function fallo(mensaje: string, codigo: string): Response {
 }
 
 /** El JSON del modelo, que puede venir envuelto en texto o en una valla. */
-function leerSalida(crudo: string): Analisis | null {
+function leerSalida(crudo: string): LecturaAnalisis | null {
   const limpio = crudo.trim().replace(/^```(?:json)?\s*/i, "").replace(/```$/, "").trim();
   const abre = limpio.indexOf("{");
   const cierra = limpio.lastIndexOf("}");
   if (abre === -1 || cierra <= abre) return null;
   try {
     const o = JSON.parse(limpio.slice(abre, cierra + 1)) as Record<string, unknown>;
-    const lectura = typeof o.lectura === "string" ? o.lectura : "";
-    const salvedad = typeof o.salvedad === "string" ? o.salvedad : "";
-    const puntos = Array.isArray(o.puntos) ? o.puntos.filter((p): p is string => typeof p === "string") : [];
-    if (lectura === "") return null;
-    return { lectura, puntos, salvedad, medio: "" };
+    const lectura = typeof o.lectura === "string" ? o.lectura.trim() : "";
+    const salvedad = typeof o.salvedad === "string" ? o.salvedad.trim() : "";
+    if (!Array.isArray(o.puntos) || !o.puntos.every((p) => typeof p === "string" && p.trim() !== "")) return null;
+    const puntos = o.puntos.map((p) => p.trim());
+    const social = o.sugerenciaSocial;
+    if (social === null || typeof social !== "object" || Array.isArray(social)) return null;
+    const campos = social as Record<string, unknown>;
+    const sugerenciaSocial: SugerenciaSocial = {
+      formato: typeof campos.formato === "string" ? campos.formato.trim() : "",
+      enfoque: typeof campos.enfoque === "string" ? campos.enfoque.trim() : "",
+      gancho: typeof campos.gancho === "string" ? campos.gancho.trim() : "",
+    };
+    if (
+      lectura === "" || salvedad === "" || puntos.length < 3 || puntos.length > 5
+      || sugerenciaSocial.formato === "" || sugerenciaSocial.enfoque === "" || sugerenciaSocial.gancho === ""
+    ) return null;
+    return { lectura, puntos, salvedad, sugerenciaSocial };
   } catch {
     return null;
   }
@@ -133,7 +143,7 @@ export async function responderAnalisis(
       signal: AbortSignal.timeout(MS_LIMITE_MODELO),
       body: JSON.stringify({
         model: MODELO,
-        max_tokens: 700,
+        max_tokens: 900,
         system: SISTEMA,
         messages: [{ role: "user", content: `Medio: ${medio || "sin dato"}\n\n${texto}` }],
       }),

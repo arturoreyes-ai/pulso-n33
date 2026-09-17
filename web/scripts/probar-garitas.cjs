@@ -59,30 +59,39 @@ async function comprobar() {
   assert.equal(leido.cues[0].modos[0].linea, 'San Ysidro: 0 minutos en carril general.');
   assert.equal(leido.cues[1].modos[0].linea, 'Otay Mesa: 1 hora y 40 minutos en carril general.');
   // La ficha muestra los tres carriles de coche: los que no reportan tambien.
-  assert.deepEqual(leido.cues[0].modos[0].renglones.map(r => [r.nombre, r.figura, r.hayCifra]),
-    [['General', '0 min', true], ['Ready Lane', 'sin dato', false], ['SENTRI', 'sin dato', false]]);
+  assert.deepEqual(leido.cues[0].modos[0].renglones.map(r => [r.nombre, r.figura, r.hayCifra, r.alDia]),
+    [['General', '0 min', true, true], ['Ready Lane', 'sin dato', false, false], ['SENTRI', 'sin dato', false, false]]);
   // Peatones: San Ysidro tiene dos accesos y PedWest se rotula aparte; Otay
   // uno solo, y ahi el Ready Lane peatonal no entra porque repite al general.
+  const ready = (valor, hora) => carril(valor, 'delay', hora).replace(/standard_lanes/g, 'ready_lanes');
   const aPie = parsearCbp(envolver(
-    puerto('250401', carril(), 'Open', carril('30', 'delay')) + puerto('250407', carril(), 'Open', carril('20', 'delay')) +
-    puerto('250601', carril('100', 'delay'), 'Open', carril('15', 'delay'))), ahora);
+    puerto('250401', carril(), 'Open', carril('30', 'delay') + ready('10')) +
+    puerto('250407', carril(), 'Open', carril('20', 'delay') + ready('20')) +
+    puerto('250601', carril('100', 'delay'), 'Open', carril('15', 'delay') + ready('15'))), ahora);
   const caminando = guion(aPie.cruces, Date.parse(ahora));
   assert.deepEqual(caminando.cues[0].modos[1].renglones.map(r => r.nombre),
     ['General', 'Ready Lane', 'PedWest · General', 'PedWest · Ready Lane']);
+  // Los cuatro se dicen, y el Ready Lane de PedWest lleva su acceso o se
+  // confundiria con el de la garita principal, que es otra fila.
   assert.equal(caminando.cues[0].modos[1].linea,
-    'San Ysidro a pie: media hora por la garita principal y 20 minutos por PedWest.');
+    'San Ysidro a pie: media hora por la garita principal; 10 minutos en Ready Lane; 20 minutos por PedWest y en Ready Lane de PedWest.');
   assert.deepEqual(caminando.cues[1].modos[1].renglones.map(r => r.nombre), ['General']);
   assert.equal(caminando.cues[1].modos[1].linea, 'Otay Mesa a pie: 15 minutos.');
   const vacio = guion(datos.cruces, Date.parse(ahora) + 120 * 60000);
   assert.equal(vacio.cierre, '');
   assert.equal(vacio.cues[0].modos[0].linea, '');
-  assert.equal(vacio.cues[0].modos[0].horasMezcladas, false);
   // Y DICE POR QUE. Un modo sin linea y sin motivo dejaba un hueco mudo justo
   // al lado del cruce que si tenia frase, en un bloque que se lee al aire.
-  assert.equal(vacio.cues[0].modos[0].sinLinea, 'Ningún carril tiene un reporte vigente.');
-  assert.ok(vacio.cues.every((c) => c.modos.every((m) => m.linea !== '' || m.sinLinea !== '' || m.horasMezcladas)),
+  assert.equal(vacio.cues[0].modos[0].sinLinea, 'Sin actualizar desde las 4:00 de la tarde; sus cifras están arriba.');
+  assert.ok(vacio.cues.every((c) => c.modos.every((m) => m.linea !== '' || m.sinLinea !== '')),
     'ningun modo se queda sin linea y sin explicacion');
-  assert.deepEqual(vacio.cues[0].modos[0].renglones.map(r => r.figura), ['reporte vencido', 'sin dato', 'sin dato']);
+  // Pasada la ventana de 90 minutos la cifra NO desaparece: sigue siendo un
+  // dato real de CBP. Se queda, marcada y con su hora, y no entra a la frase.
+  // Es el caso de PedWest, que CBP actualiza una vez por hora: borrar su cifra
+  // hacia pulsar Actualizar, y Actualizar devuelve la misma hora.
+  assert.equal(vacio.hayCifras, true, 'el bloque se sigue dibujando');
+  assert.deepEqual(vacio.cues[0].modos[0].renglones.map(r => [r.figura, r.hayCifra, r.alDia, r.hora]),
+    [['0 min', true, false, '4:00 de la tarde'], ['sin dato', false, false, ''], ['sin dato', false, false, '']]);
   // Horas distintas entre cruces: la etiqueta no puede anunciar una sola.
   const dispar = guion(parsearCbp(envolver(puerto('250401', carril()) + puerto('250601', carril('100', 'delay', 'At 3:30 pm PDT'))), ahora).cruces, Date.parse(ahora));
   assert.equal(dispar.atribucion, 'CBP');
@@ -91,10 +100,24 @@ async function comprobar() {
   // Horas distintas DENTRO de un modo: ese modo se queda sin linea y la ficha
   // pone la hora en cada carril; no hay forma de decir la mezcla sin mentir.
   const revuelto = guion(parsearCbp(envolver(puerto('250401', carril() + carril('40', 'delay', 'At 3:30 pm PDT').replace(/standard_lanes/g, 'ready_lanes'))), ahora).cruces, Date.parse(ahora));
-  assert.equal(revuelto.cues[0].modos[0].horasMezcladas, true);
-  assert.equal(revuelto.cues[0].modos[0].linea, '');
-  assert.equal(revuelto.cues[0].modos[0].sinLinea, '', 'ahi el motivo lo da horasMezcladas');
+  // Horas distintas DENTRO de una frase: no se calla, cada cifra lleva la suya.
+  assert.equal(revuelto.cues[0].modos[0].linea,
+    'San Ysidro: 0 minutos en carril general, a las 4:00 de la tarde; 40 minutos en Ready Lane, a las 3:30 de la tarde.');
+  // Misma espera y misma hora se dicen juntas, una sola vez.
+  const gemelos = guion(parsearCbp(envolver(puerto('250401', carril('115', 'delay') + carril('115', 'delay').replace(/standard_lanes/g, 'ready_lanes') + carril('30', 'delay').replace(/standard_lanes/g, 'NEXUS_SENTRI_lanes'))), ahora).cruces, Date.parse(ahora));
+  assert.equal(gemelos.cues[0].modos[0].linea,
+    'San Ysidro: casi dos horas en carril general y en Ready Lane; media hora por SENTRI.');
+  assert.equal(revuelto.cues[0].modos[0].sinLinea, '');
   assert.deepEqual(revuelto.cues[0].modos[0].renglones.map(r => r.hora), ['4:00 de la tarde', '3:30 de la tarde', '']);
+  // Una cifra fuera de ventana al lado de una fresca —PedWest todo el dia—:
+  // la etiqueta no puede anunciar una hora que solo vale para una de las dos,
+  // la vieja se ve con la suya, y la frase dice unicamente la fresca.
+  const rezagado = guion(parsearCbp(envolver(puerto('250401', carril('40', 'delay') + carril('55', 'delay', 'At 2:00 pm PDT').replace(/standard_lanes/g, 'ready_lanes'))), ahora).cruces, Date.parse(ahora));
+  assert.equal(rezagado.atribucion, 'CBP');
+  assert.equal(rezagado.cierre, 'Cifras de CBP.');
+  assert.equal(rezagado.cues[0].modos[0].linea, 'San Ysidro, a las 4:00 de la tarde: 40 minutos en carril general.');
+  assert.deepEqual(rezagado.cues[0].modos[0].renglones.map(r => [r.figura, r.alDia, r.hora]),
+    [['40 min', true, '4:00 de la tarde'], ['~1 h', false, '2:00 de la tarde'], ['sin dato', false, '']]);
   const bien = await responderGaritas(async (url, opciones) => {
     assert.equal(url, 'https://bwt.cbp.gov/xml/bwt.xml'); assert.equal(opciones.redirect, 'error'); assert.ok(opciones.signal);
     return new Response(xml);

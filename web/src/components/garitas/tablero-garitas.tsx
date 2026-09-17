@@ -350,7 +350,7 @@ export function TableroGaritas() {
                     cifras.
                   </p>
                 </div>
-              ) : lectura && lectura.cierre ? (
+              ) : lectura && lectura.hayCifras ? (
                 <>
                   {/* Los dos cruces son equivalentes y van en paralelo, como las
                       tarjetas de abajo: en una sola columna el bloque medía ocho
@@ -371,11 +371,6 @@ export function TableroGaritas() {
                               <p className="mt-1.5 max-w-[46ch] text-rotulo text-tinta-titulo">
                                 {modo.linea}
                               </p>
-                            ) : modo.horasMezcladas ? (
-                              <p className="mt-1.5 max-w-[46ch] text-cuerpo text-aviso">
-                                Sus carriles no comparten hora de reporte: no hay una línea que los
-                                diga juntos.
-                              </p>
                             ) : modo.sinLinea ? (
                               /* Sin esto, un cruce sin cifras vigentes dejaba el
                                  hueco vacio al lado del que si las tiene, y el
@@ -390,11 +385,16 @@ export function TableroGaritas() {
                               {modo.renglones.map((renglon) => (
                                 <li key={renglon.nombre} className="text-meta text-tinta-meta">
                                   {renglon.nombre}{" "}
+                                  {/* Tres estados, no dos: cifra que se dice,
+                                      cifra real pero vieja —se ve, atenuada y
+                                      con su hora— y hueco en palabras. */}
                                   <span
                                     className={
-                                      renglon.hayCifra
-                                        ? "font-semibold tabular-nums text-tinta-dato"
-                                        : ""
+                                      !renglon.hayCifra
+                                        ? ""
+                                        : renglon.alDia
+                                          ? "font-semibold tabular-nums text-tinta-dato"
+                                          : "font-semibold tabular-nums text-tinta-prosa"
                                     }
                                   >
                                     {renglon.figura}
@@ -408,9 +408,11 @@ export function TableroGaritas() {
                       </section>
                     ))}
                   </div>
-                  <p className="mt-9 border-t border-vela pt-5 text-lectura text-tinta-prosa">
-                    {lectura.cierre}
-                  </p>
+                  {lectura.cierre ? (
+                    <p className="mt-9 border-t border-vela pt-5 text-lectura text-tinta-prosa">
+                      {lectura.cierre}
+                    </p>
+                  ) : null}
                 </>
               ) : (
                 <div className="mt-6">
