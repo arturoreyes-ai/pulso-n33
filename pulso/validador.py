@@ -220,6 +220,17 @@ IMAGEN_LARGO_MAXIMO = 500
 # es la edad del corte, no un extractor roto.
 IMAGEN_DESDE = "2026-09-14"
 
+# Cuantas notas recientes de medios con CDN hacen falta antes de concluir que
+# el extractor esta roto. Una no es evidencia de nada: el caso que lo motivo
+# es que esta funcion corre TAMBIEN sobre cada mes del archivo, y ahi
+# 'capturado' es la hora de la cosecha y no la de publicacion, asi que una
+# nota publicada en junio y cosechada hoy cae en el archivo de junio con
+# fecha de captura reciente. Un solo AFN asi bastaba para acusar al
+# extractor, y la corrida offline --el chequeo por omision del repo-- salia
+# con el aviso puesto. Es el mismo instinto que la regla 2 del producto:
+# bajo cierta muestra no se concluye, se cuenta.
+IMAGEN_MINIMO_AVISO = 5
+
 
 def validar_medios(datos):
     errores, avisos = [], []
@@ -604,9 +615,10 @@ def validar_notas(datos, roster=None, medios=None, busquedas=None):
     # al 14 de septiembre de 2026 no traen imagen y no es un fallo.
     con_cdn = {m["id"] for m in (medios or [])
                if m.get("imagenes_de") and m.get("activo", True) and isinstance(m.get("id"), str)}
-    recientes = any(n.get("fuente") in con_cdn and str(n.get("capturado") or "") >= IMAGEN_DESDE
-                    for n in notas if isinstance(n, dict))
-    if recientes and con_imagen == 0:
+    recientes = sum(1 for n in notas if isinstance(n, dict)
+                    and n.get("fuente") in con_cdn
+                    and str(n.get("capturado") or "") >= IMAGEN_DESDE)
+    if recientes >= IMAGEN_MINIMO_AVISO and con_imagen == 0:
         avisos.append("notas: ninguna trae 'imagen' aunque hay medios con 'imagenes_de'; "
                       "revisa el extractor o los feeds")
     return errores, avisos

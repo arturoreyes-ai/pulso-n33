@@ -8,42 +8,67 @@
  * descubrio probando la lectura automatica: abria, no encontraba texto y
  * rotulaba «no hay suficiente texto en la nota», que era cierto y engañoso.
  *
- * Lo que si hay es la MISMA nota en el corpus, llegada por el feed del propio
- * medio con su enlace de verdad: 91% del corpus lo trae. El cruce es por
- * titular plegado, la misma llave y la misma razon que imagenes.ts —las URLs
- * no empatan nunca— y se salta las notas del corpus que tambien llegaron por
- * el buscador, porque esas cargan el mismo token que no sirve.
+ * Lo que si suele haber es la MISMA nota en el corpus, llegada por el feed del
+ * propio medio con su enlace de verdad. Ese es el camino rapido. El cruce es
+ * por titular plegado Y dominio: dos medios pueden sindicar el mismo titular
+ * y leer el primero seria leer otra nota con una atribucion falsa.
  *
- * Sin empate no hay enlace, y NUNCA se toma el de otra nota: leer un articulo
- * distinto del que dice el titular es peor que no leer ninguno.
+ * Sin empate se conserva el token para resolverlo bajo demanda, solo despues
+ * de confirmar Analizar. NUNCA se toma el enlace de otro medio.
  */
 
 import type { Nota } from "@/lib/datos/tipos";
+import { dominioDeUrl, normalizarDominio } from "@/lib/analisis/dominio";
 import { plegar } from "@/lib/dominio/formato";
 import type { ResultadoExterno } from "./tipos";
 
 /** El anfitrion del buscador. Un enlace suyo no lleva a la nota. */
 const OPACO = "news.google.com";
 
-export const esEnlaceOpaco = (url: string): boolean => url.includes(OPACO);
+export function esEnlaceOpaco(url: string): boolean {
+  try {
+    const u = new URL(url);
+    return u.protocol === "https:" && u.hostname === OPACO;
+  } catch {
+    return false;
+  }
+}
+
+const claveDeEnlace = (titulo: string, dominio: string): string =>
+  `${plegar(titulo)}\n${dominio}`;
 
 export function indiceDeEnlaces(notas: readonly Nota[]): ReadonlyMap<string, string> {
   const indice = new Map<string, string>();
   for (const n of notas) {
     if (!n.url || esEnlaceOpaco(n.url)) continue;
-    const clave = plegar(n.titulo);
-    if (clave === "" || indice.has(clave)) continue;
+    const dominio = dominioDeUrl(n.url);
+    const clave = dominio === null ? "" : claveDeEnlace(n.titulo, dominio);
+    if (plegar(n.titulo) === "" || clave === "" || indice.has(clave)) continue;
     indice.set(clave, n.url);
   }
   return indice;
 }
 
+export interface ReferenciaAnalisis {
+  url: string;
+  dominio: string;
+}
+
 /**
- * El enlace legible de una fila: el suyo si ya es del medio, y si no el del
- * corpus. `null` cuando no hay ninguno, que es lo que dice «esta nota no se
- * puede abrir desde aqui».
+ * Lo que recibe Analizar: primero el enlace del medio que ya conoce el
+ * archivo y, si la nota acaba de aparecer, el token opaco para resolverlo
+ * solo despues de la confirmacion. El token nunca se abre como si fuera la
+ * nota; esa distincion vive en lib/analisis/resolver-enlace.ts.
  */
-export function enlaceDelMedio(r: ResultadoExterno, indice: ReadonlyMap<string, string>): string | null {
-  if (!esEnlaceOpaco(r.url)) return r.url;
-  return indice.get(plegar(r.titulo)) ?? null;
+export function enlaceParaAnalisis(
+  r: ResultadoExterno,
+  indice: ReadonlyMap<string, string>,
+): ReferenciaAnalisis | null {
+  const dominio = normalizarDominio(r.dominio);
+  if (dominio === null) return null;
+  if (!esEnlaceOpaco(r.url)) {
+    return dominioDeUrl(r.url) === dominio ? { url: r.url, dominio } : null;
+  }
+  const directo = indice.get(claveDeEnlace(r.titulo, dominio));
+  return { url: directo ?? r.url, dominio };
 }

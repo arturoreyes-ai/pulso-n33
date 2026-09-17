@@ -507,8 +507,13 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
    (`overflow-anchor: none` arriba cierra la otra via, el anclaje de scroll.) */
 .recorrido-lector .sin-ajuste { scroll-snap-align: none; scroll-snap-stop: normal; }
 
+/* La reserva es el alto que NO puede ocupar el medio: la banda del titular.
+   Subio de 12.5rem el 17 de septiembre de 2026 al entrar «Analizar»: con tres
+   pastillas y el contador, la fila se parte en dos en un telefono y la banda
+   paso de ~181px a ~205px, asi que la ultima fila se cortaba por abajo. Se
+   mide, no se inventa: es lo que ocupa la banda mas el `pt-4` del medio. */
 .publicacion-visual {
-  --visor-reserva: 12.5rem;
+  --visor-reserva: 15.5rem;
   scroll-snap-align: start;
   scroll-snap-stop: always;
   min-height: var(--alto-tarjeta, calc(100svh - 4.5rem - env(safe-area-inset-top)));
@@ -545,6 +550,40 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
   width: 100%;
   height: clamp(0rem, calc(var(--alto-tarjeta, 100svh) - 30rem), 14rem);
   margin-bottom: 1.5rem;
+}
+/* La placa: lo que lleva una tarjeta cuando NO hay foto.
+
+   Una fila en vivo no trae miniatura y casi nunca la recupera del corpus, asi
+   que hasta el 17 de septiembre de 2026 esta caja se reservaba VACIA y la
+   tarjeta se veia en blanco. Y era la mayoria: de 503 notas llegadas por
+   busqueda, ninguna recupera imagen cruzando el archivo por titular plegado.
+
+   La placa la llena sin afirmar nada —es el nombre del medio sobre un campo
+   tenido con el acento del capitulo— y es tambien el estado mientras se pide
+   el og:image y el estado cuando el medio no contesta, asi que el hueco no se
+   ve nunca. El acento entra por `currentColor`, que es lo que evita tener un
+   token de fondo por rubro: la clase de color la pone la tarjeta. */
+.placa-ahora {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: flex-end;
+  padding: 1rem;
+  border: 1px solid var(--color-filo);
+  border-radius: var(--radius-nucleo);
+  /* Reserva: si color-mix no esta, se descarta la regla larga y queda esta. */
+  background: var(--color-vela);
+  background:
+    linear-gradient(135deg, color-mix(in oklab, currentColor 16%, transparent), transparent 62%),
+    var(--color-vela);
+}
+.placa-ahora-marca {
+  font-family: var(--font-titular);
+  font-size: var(--text-cuerpo);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-tinta-dato);
 }
 .acciones-ahora { position: relative; }
 .aviso-compartir {

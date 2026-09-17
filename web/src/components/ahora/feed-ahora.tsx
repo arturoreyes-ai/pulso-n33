@@ -5,10 +5,11 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 
 import { CONTROL, Lector } from "@/components/lector/lector";
 import { debeActivar, fraseFinal, type Entrada, type Tarjeta } from "@/lib/busqueda/capitulos";
-import { enlaceDelMedio, indiceDeEnlaces } from "@/lib/busqueda/enlaces";
+import { enlaceParaAnalisis, indiceDeEnlaces } from "@/lib/busqueda/enlaces";
 import { entradaDe } from "@/lib/busqueda/entrada";
 import { imagenPara, indiceDeImagenes } from "@/lib/busqueda/imagenes";
 import { useBusquedaViva } from "@/lib/busqueda/use-busqueda";
+import { useImagenesVivas } from "@/lib/busqueda/use-imagen-viva";
 import { useCapitulos } from "@/lib/busqueda/use-capitulos";
 import { plegar } from "@/lib/dominio/formato";
 import { ruta } from "@/lib/dominio/secciones";
@@ -132,6 +133,9 @@ function RecorridoAhora({ entrada, zona, onRecargar, menu, informacion, analisis
   }, [hilado, actual, activados, capitulos.length]);
 
   const { tarjetas, completo } = hilado;
+  // Lo que el corpus no tiene se pide a la pagina del propio medio, solo para
+  // la tarjeta asentada y la siguiente.
+  const vivas = useImagenesVivas(tarjetas, actual, imagenes, enlaces);
   const total = tarjetas.length + (completo ? 1 : 0);
   return (
     // Sin `volver`: esto ES la portada, no hay pagina detras.
@@ -151,7 +155,7 @@ function RecorridoAhora({ entrada, zona, onRecargar, menu, informacion, analisis
         onKeyDown={(evento) => teclasDelRecorrido(evento, actual, total, ir)}>
         {!disponible ? <p className="tarjeta-ahora flex items-center text-lectura text-tinta-prosa">Los titulares en vivo no están disponibles en esta vista.</p> : <>
         {tarjetas.map((t, i) => {
-          if (t.tipo === "titular") return <TarjetaTitular key={t.clave} t={t} titulares={hilado.titulares} indice={i} imagen={imagenPara(t.r, imagenes)} analisis={analisis} enlace={enlaceDelMedio(t.r, enlaces)} />;
+          if (t.tipo === "titular") return <TarjetaTitular key={t.clave} t={t} titulares={hilado.titulares} indice={i} imagen={imagenPara(t.r, imagenes) ?? vivas.get(t.clave) ?? null} analisis={analisis} referencia={enlaceParaAnalisis(t.r, enlaces)} />;
           if (t.tipo === "divisor") return <TarjetaDivisor key={`divisor:${t.capitulo}`} t={t} indice={i} />;
           return <TarjetaHueco key={`hueco:${t.capitulo}`} t={t} indice={i} />;
         })}
@@ -198,6 +202,7 @@ function RecorridoBusqueda({ consulta, zona, menu, informacion, analisis }: {
       })),
     [viva.resultados, consulta],
   );
+  const vivas = useImagenesVivas(tarjetas, actual, imagenes, enlaces);
   const total = tarjetas.length + 1;
 
   return (
@@ -220,7 +225,7 @@ function RecorridoBusqueda({ consulta, zona, menu, informacion, analisis }: {
             {tarjetas.map((t, i) =>
               t.tipo === "titular" ? (
                 <TarjetaTitular key={t.clave} t={t} titulares={tarjetas.length} indice={i}
-                  imagen={imagenPara(t.r, imagenes)} analisis={analisis} enlace={enlaceDelMedio(t.r, enlaces)} />
+                  imagen={imagenPara(t.r, imagenes) ?? vivas.get(t.clave) ?? null} analisis={analisis} referencia={enlaceParaAnalisis(t.r, enlaces)} />
               ) : null,
             )}
             <TarjetaFinal indice={tarjetas.length} titulo="Llegaste al final de la búsqueda."

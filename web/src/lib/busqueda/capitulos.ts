@@ -6,11 +6,23 @@
  * desplazar para pasar a la siguiente. Tres cosas del original no se copian,
  * y ninguna por gusto:
  *
- *  - La imagen no viene de aqui. El RSS de Google Noticias no trae miniatura
- *    y seguir el redirector para leer el og:image esta prohibido (el <link>
- *    no se resuelve, ver pulso/busquedas.py). La que puede haber es la del
- *    corpus: la misma nota llegada por el feed del propio medio, con la
- *    miniatura que ese medio publica (imagenes.ts). Sin empate, tipografica.
+ *  - La imagen no viene de aqui. El RSS de Google Noticias no trae
+ *    miniatura. La primera que se intenta es la del corpus: la misma nota
+ *    llegada por el feed del propio medio, con la miniatura que ese medio
+ *    publica (imagenes.ts).
+ *
+ *    Ese cruce casi nunca empata fuera del capitulo local -- medido el 17
+ *    de septiembre de 2026: de 503 notas llegadas por busqueda, CERO
+ *    recuperan miniatura, y el 95% son de medios que no estan en el
+ *    catalogo. Por eso, desde esa fecha, lo que el corpus no tiene se pide
+ *    al og:image de la pagina del propio medio, de a una tarjeta y solo
+ *    cuando el lector se detiene en ella (lib/busqueda/use-imagen-viva.ts).
+ *    Hasta entonces, y si el medio no contesta, la tarjeta lleva su placa.
+ *
+ *    Esto NO afloja la regla del pipeline, que es sobre otra cosa: alla el
+ *    token del redirector rota entre corridas y cambiaria el `url` de una
+ *    nota ya guardada, ensuciando data/ (ver pulso/busquedas.py). Aqui no
+ *    se guarda ninguna nota.
  *  - No hay extracto. El <description> del feed es un ancla y el nombre del
  *    medio, y el producto es titular, fuente y enlace, nunca el cuerpo.
  *  - No hay cola infinita. TOPE_ACTUALIDAD son quince por lista, decision del

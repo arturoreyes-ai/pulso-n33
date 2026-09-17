@@ -11,7 +11,8 @@ from datetime import date
 
 import scrapy
 
-from pulso.normalizar import fold
+from pulso.fetch import IMAGEN_LARGO_MAXIMO
+from pulso.normalizar import fold, imagen_del_medio
 
 
 _MESES = {
@@ -71,6 +72,38 @@ def _texto(selector, regla):
     return " ".join(" ".join(partes).split()).strip(" \t\r\n\"“”")
 
 
+def _imagen(bloque, response, medio):
+    """La miniatura del bloque, si el medio la publica y es suya.
+
+    El caso: esta ruta nacio sin imagen, asi que AFN, El Vigia y Baja News
+    salian SIEMPRE sin miniatura -- 239 notas recientes, cero imagenes -- y no
+    porque no la publiquen, sino porque nadie la leia. Se veia como un medio
+    que no trae foto y era un extractor que no existia.
+
+    El selector es opcional y puede ser una lista: varias portadas sirven la
+    foto en 'data-src' y dejan en 'src' un pixel de relleno, asi que se prueban
+    en orden y gana la primera aceptable.
+
+    Mismo filtro de forma que fetch.py::_aceptable y la MISMA regla de host que
+    todo lo que entra a data/: imagen_del_medio. La excepcion de og:image que
+    vive en web/ (cualquier host) no aplica aqui, porque esto SI se guarda.
+    """
+    reglas = medio.get("scrapy", {}).get("imagen")
+    if not reglas:
+        return ""
+    if isinstance(reglas, str):
+        reglas = [reglas]
+    for regla in reglas:
+        for crudo in bloque.css(regla).getall():
+            url = response.urljoin((crudo or "").strip())
+            if (url.startswith("https://")
+                    and not any(c.isspace() for c in url)
+                    and len(url) <= IMAGEN_LARGO_MAXIMO
+                    and imagen_del_medio(url, medio)):
+                return url
+    return ""
+
+
 class NoticiasSpider(scrapy.Spider):
     name = "noticias"
 
@@ -119,6 +152,10 @@ class NoticiasSpider(scrapy.Spider):
                 "url": url,
                 "fecha_cruda": fecha,
             }
+            # Condicional, como en fetch.py: ausente significa 'no la publica'.
+            imagen = _imagen(bloque, response, medio)
+            if imagen:
+                por_url[url]["imagen"] = imagen
 
         self.resultados[mid] = list(por_url.values())
         self.ms[mid] = int((time.monotonic() - self._inicio[mid]) * 1000)

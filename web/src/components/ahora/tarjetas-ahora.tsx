@@ -1,9 +1,10 @@
 "use client";
 
-import { ShareNetwork as IconoCompartir } from "@phosphor-icons/react";
+import { ShareNetwork as IconoCompartir, TrendUp as Tendencia } from "@phosphor-icons/react";
 import { useState } from "react";
 
 import { clasesChip } from "@/components/ui/clases";
+import type { ReferenciaAnalisis } from "@/lib/busqueda/enlaces";
 import type { Tarjeta } from "@/lib/busqueda/capitulos";
 import { fechaCorta, hora } from "@/lib/dominio/formato";
 import { AnalisisTitular } from "./analisis-titular";
@@ -23,13 +24,22 @@ import { AnalisisTitular } from "./analisis-titular";
  * desconocido. Si la imagen no carga, conserva su espacio: quitar la figura
  * desplazaba el titular bajo el dedo. El medio puede dejar de servirla.
  *
+ * Desde el 17 de septiembre de 2026 la figura NUNCA va vacia. Antes, sin
+ * miniatura, esta caja reservaba hasta 14rem transparentes y la tarjeta se
+ * veia en blanco —que era el caso comun, no el raro: de 503 notas llegadas
+ * por busqueda, ninguna recupera imagen del corpus—. Ahora lleva una placa
+ * con el nombre del medio (`.placa-ahora` en globals.css), y encima de ella
+ * puede llegar el `og:image` del propio medio (lib/busqueda/use-imagen-viva.ts).
+ * La placa es tambien el estado en vuelo y el de fallo, asi que el lector no
+ * ve el hueco en ningun momento.
+ *
  * `.tarjeta-ahora` mide la caja del lector, no la pagina ni el visor de redes.
  * Los divisores, los huecos y la tarjeta final miden lo
  * mismo que un titular a proposito: un punto de ajuste de otra altura rompe el
  * ritmo de «un gesto, una tarjeta».
  *
- * Las marcas `en vivo` e `inglés` son las de muro/fila-externa.tsx, letra por
- * letra: es el mismo tipo de dato con la misma salvedad.
+ * La flecha de tendencia sustituye el rotulo `en vivo`: el nombre accesible
+ * conserva el significado sin sumar otra palabra a la fila de metadatos.
  */
 
 /* El relleno vive en `.tarjeta-ahora` (globals.css), no aqui: una utilidad
@@ -40,7 +50,14 @@ type Titular = Extract<Tarjeta, { tipo: "titular" }>;
 type Divisor = Extract<Tarjeta, { tipo: "divisor" }>;
 type Hueco = Extract<Tarjeta, { tipo: "hueco" }>;
 
-export function TarjetaTitular({ t, titulares, indice, imagen = null, analisis = false, enlace = null }: { t: Titular; titulares: number; indice: number; imagen?: string | null; analisis?: boolean; enlace?: string | null }) {
+export function TarjetaTitular({ t, titulares, indice, imagen = null, analisis = false, referencia = null }: {
+  t: Titular;
+  titulares: number;
+  indice: number;
+  imagen?: string | null;
+  analisis?: boolean;
+  referencia?: ReferenciaAnalisis | null;
+}) {
   const iso = t.r.publicado;
   const valida = iso !== null && !Number.isNaN(Date.parse(iso));
   // Un comunicado del Ayuntamiento no es una lectura en vivo ni trae hora: su
@@ -53,13 +70,18 @@ export function TarjetaTitular({ t, titulares, indice, imagen = null, analisis =
   return (
     <article data-indice={indice} aria-label={`Titular ${t.orden} de ${titulares}`} className={TARJETA}>
         <figure className="figura-ahora overflow-hidden rounded-nucleo" aria-hidden>
-          {conFigura ? <>
-          {/* alt vacio y aria-hidden: la imagen no tiene pie propio y el
-              titular ya es el texto. no-referrer: el medio la sirve, la
-              pagina no se le presenta. */}
-          <img src={imagen} alt="" aria-hidden loading="lazy" decoding="async" referrerPolicy="no-referrer"
-            className="h-full w-full object-cover" onError={() => setRota(imagen)} />
-          </> : null}
+          {conFigura ? (
+            /* alt vacio y aria-hidden: la imagen no tiene pie propio y el
+               titular ya es el texto. no-referrer: el medio la sirve, la
+               pagina no se le presenta. */
+            <img src={imagen} alt="" aria-hidden loading="lazy" decoding="async" referrerPolicy="no-referrer"
+              className="h-full w-full object-cover" onError={() => setRota(imagen)} />
+          ) : (
+            /* Sin foto la caja NO se deja vacia. El porque, en `.placa-ahora`. */
+            <div className={`placa-ahora ${t.acento}`}>
+              <span className="placa-ahora-marca">{t.r.medio}</span>
+            </div>
+          )}
         </figure>
       <p className={`text-meta ${t.acento}`}>{t.rotulo}</p>
       <h2 className="mt-4 max-w-[24ch] break-words font-titular text-seccion text-tinta-titulo md:text-hero md:[font-stretch:112%]">
@@ -81,10 +103,12 @@ export function TarjetaTitular({ t, titulares, indice, imagen = null, analisis =
           </span>
         ) : (
           <span
-            title="Resultado en vivo: no tiene zona, tono ni figura, y no cuenta en las cifras de prensa."
-            className="inline-block rounded-full border border-dashed border-filo px-2 py-px text-meta whitespace-nowrap text-tinta-meta"
+            role="img"
+            aria-label="Noticia en tendencia."
+            title="Noticia en tendencia."
+            className="inline-flex size-7 shrink-0 items-center justify-center rounded-full border border-dashed border-filo text-tinta-dato"
           >
-            en vivo
+            <Tendencia size={16} weight="light" aria-hidden />
           </span>
         )}
         {t.r.idioma === "en" ? (
@@ -99,10 +123,9 @@ export function TarjetaTitular({ t, titulares, indice, imagen = null, analisis =
         <a href={t.r.url} target="_blank" rel={oficial ? "noopener noreferrer" : "noopener nofollow noreferrer"} className={`${clasesChip(true)} min-w-0 break-words`}>
           Leer en {t.r.medio}
         </a>
-        {/* `enlace` es el del propio medio, o null: el de la fila es un token
-            que no abre la nota (lib/busqueda/enlaces.ts). El boton se pinta en
-            las dos, y con null lo dice al abrir. */}
-        {analisis ? <AnalisisTitular titulo={t.r.titulo} url={enlace} medio={t.r.medio} /> : null}
+        {/* La referencia prefiere el enlace del medio. Si la nota acaba de
+            aparecer conserva el token para resolverlo solo tras confirmar. */}
+        {analisis ? <AnalisisTitular titulo={t.r.titulo} referencia={referencia} medio={t.r.medio} /> : null}
         <Compartir titulo={t.r.titulo} url={t.r.url} />
         <p className="ml-auto text-meta tabular-nums text-tinta-meta">{t.orden} de {titulares}</p>
       </div>

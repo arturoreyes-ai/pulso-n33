@@ -1,5 +1,5 @@
 /** Version en la URL: separa en el CDN la respuesta anterior de esta ficha. */
-export const VERSION_ANALISIS = "2";
+export const VERSION_ANALISIS = "3";
 
 export interface SugerenciaSocial {
   formato: string;

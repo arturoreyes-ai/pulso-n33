@@ -16,9 +16,9 @@ import { responderAnalisis } from "@/lib/analisis/analizar";
  * Sin `dynamic` ni `revalidate`: los GET son dinamicos por omision y esas
  * opciones son legado. proxy.ts ya exige sesion para llegar aqui.
  */
-export const maxDuration = 30;
+export const maxDuration = 60;
 
 export async function GET(peticion: NextRequest): Promise<Response> {
   const params = peticion.nextUrl.searchParams;
-  return responderAnalisis({ u: params.get("u"), m: params.get("m") });
+  return responderAnalisis({ u: params.get("u"), m: params.get("m"), d: params.get("d") });
 }

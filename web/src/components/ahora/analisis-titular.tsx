@@ -6,6 +6,7 @@ import { useId, useRef, useState } from "react";
 import { CONTROL } from "@/components/lector/lector";
 import { clasesChip } from "@/components/ui/clases";
 import { VERSION_ANALISIS, type Analisis, type SugerenciaSocial } from "@/lib/analisis/contrato";
+import type { ReferenciaAnalisis } from "@/lib/busqueda/enlaces";
 
 /**
  * La lectura automatica de un titular, en un dialogo.
@@ -27,7 +28,11 @@ type Estado =
   | { fase: "listo"; analisis: Analisis }
   | { fase: "fallo"; mensaje: string };
 
-export function AnalisisTitular({ titulo, url, medio }: { titulo: string; url: string | null; medio: string }) {
+export function AnalisisTitular({ titulo, referencia, medio }: {
+  titulo: string;
+  referencia: ReferenciaAnalisis | null;
+  medio: string;
+}) {
   const hoja = useRef<HTMLDialogElement>(null);
   const solicitudEnCurso = useRef(false);
   const id = useId();
@@ -36,10 +41,10 @@ export function AnalisisTitular({ titulo, url, medio }: { titulo: string; url: s
   function abrir() {
     hoja.current?.showModal();
     if (estado.fase === "listo" || estado.fase === "cargando") return;
-    // Sin enlace del propio medio no hay nada que abrir, y se dice sin pedir
-    // nada: el enlace de la fila es un token que no lleva a la nota
-    // (lib/busqueda/enlaces.ts).
-    if (url === null) {
+    // `null` solo significa que la fila no trae una referencia verificable.
+    // Un token valido del buscador llega hasta la ruta y se resuelve despues
+    // de esta confirmacion (lib/busqueda/enlaces.ts).
+    if (referencia === null) {
       setEstado({ fase: "fallo", mensaje: `Esta nota de ${medio} no se puede abrir desde aquí.` });
       return;
     }
@@ -49,11 +54,11 @@ export function AnalisisTitular({ titulo, url, medio }: { titulo: string; url: s
   }
 
   async function analizar() {
-    if (url === null || solicitudEnCurso.current) return;
+    if (referencia === null || solicitudEnCurso.current) return;
     solicitudEnCurso.current = true;
     setEstado({ fase: "cargando" });
     try {
-      const params = new URLSearchParams({ v: VERSION_ANALISIS, u: url, m: medio });
+      const params = new URLSearchParams({ v: VERSION_ANALISIS, u: referencia.url, m: medio, d: referencia.dominio });
       const r = await fetch(`/api/analizar?${params}`);
       const cuerpo = (await r.json()) as unknown;
       const analisis = leerAnalisis(cuerpo);

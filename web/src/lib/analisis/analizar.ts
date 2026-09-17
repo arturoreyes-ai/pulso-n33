@@ -1,7 +1,9 @@
 import { json, SIN_CACHE } from "@/lib/busqueda/respuesta";
 import { analisisHabilitado } from "./config";
 import type { LecturaAnalisis, SugerenciaSocial } from "./contrato";
+import { dominioDeUrl } from "./dominio";
 import { extraerTexto } from "./extraer";
+import { resolverEnlace, type ResultadoEnlace } from "./resolver-enlace";
 import { urlSegura } from "./url";
 
 /**
@@ -18,10 +20,10 @@ import { urlSegura } from "./url";
  *    va a data/, no va a cache/, y NO VA A LA RESPUESTA. Lo que vuelve es la
  *    lectura. Que la respuesta no contenga el texto leido es una prueba de
  *    scripts/probar-analisis.cjs, no una intencion.
- *  - SI sigue el redirector, al reves que el pipeline. Parece una violacion de
- *    AGENTS.md y no lo es: alla la regla existe porque el token rota entre
- *    corridas y cambiaria el `url` de una nota ya guardada, ensuciando data/.
- *    Aqui no se guarda ninguna nota.
+ *  - SI resuelve el token opaco bajo demanda cuando el archivo aun no conoce
+ *    el enlace editorial. Es distinto del pipeline: alla el token rota entre
+ *    corridas y resolverlo cambiaria el `url` de una nota ya guardada. Aqui la
+ *    resolucion ocurre despues de confirmar y no se guarda ninguna nota.
  *  - NO cruza tono con figura (regla 5 de PRODUCT.md). El prompt lo prohibe.
  *
  * `solicitar` se inyecta, como en lib/garitas/cbp.ts y lib/busqueda/
@@ -61,6 +63,18 @@ function fallo(mensaje: string, codigo: string): Response {
   return json({ codigo, mensaje }, 200, SIN_CACHE);
 }
 
+function mensajeEnlace(medio: string): string {
+  return medio === ""
+    ? "Esta nota no se puede abrir desde aquí."
+    : `Esta nota de ${medio} no se puede abrir desde aquí.`;
+}
+
+function registrarFalloEnlace(r: Extract<ResultadoEnlace, { ok: false }>): void {
+  console.warn(
+    `[analisis:enlace] etapa=${r.etapa} estado=${r.estado ?? "s/d"} host=${r.host ?? "s/d"}`,
+  );
+}
+
 /** El JSON del modelo, que puede venir envuelto en texto o en una valla. */
 function leerSalida(crudo: string): LecturaAnalisis | null {
   const limpio = crudo.trim().replace(/^```(?:json)?\s*/i, "").replace(/```$/, "").trim();
@@ -92,7 +106,7 @@ function leerSalida(crudo: string): LecturaAnalisis | null {
 }
 
 export async function responderAnalisis(
-  params: { u: string | null; m: string | null },
+  params: { u: string | null; m: string | null; d: string | null },
   solicitar: typeof fetch = fetch,
 ): Promise<Response> {
   if (!analisisHabilitado()) {
@@ -103,11 +117,19 @@ export async function responderAnalisis(
     );
   }
 
-  const url = urlSegura(params.u);
-  if (url === null) {
+  const medio = (params.m ?? "").slice(0, 120);
+  const resuelto = await resolverEnlace(params.u, params.d, solicitar);
+  if (!resuelto.ok) {
+    if (resuelto.codigo === "url") {
+      return json({ codigo: "url", mensaje: "Ese enlace no se puede leer." }, 400, SIN_CACHE);
+    }
+    registrarFalloEnlace(resuelto);
+    return fallo(mensajeEnlace(medio), "enlace");
+  }
+  const url = resuelto.url;
+  if (urlSegura(url.toString()) === null) {
     return json({ codigo: "url", mensaje: "Ese enlace no se puede leer." }, 400, SIN_CACHE);
   }
-  const medio = (params.m ?? "").slice(0, 120);
 
   let texto: string;
   try {
@@ -118,6 +140,19 @@ export async function responderAnalisis(
       signal: AbortSignal.timeout(MS_LIMITE_MEDIO),
     });
     if (!r.ok) return fallo("El medio no entregó la nota.", "medio");
+    if (r.url !== "") {
+      const final = urlSegura(r.url);
+      if (final === null || dominioDeUrl(final) !== resuelto.dominio) {
+        registrarFalloEnlace({
+          ok: false,
+          codigo: "enlace",
+          etapa: "destino",
+          estado: r.status,
+          host: resuelto.dominio,
+        });
+        return fallo(mensajeEnlace(medio), "enlace");
+      }
+    }
     texto = extraerTexto((await r.text()).slice(0, MAX_BYTES));
   } catch {
     return fallo("El medio no entregó la nota.", "medio");
