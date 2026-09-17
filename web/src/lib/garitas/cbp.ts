@@ -2,6 +2,12 @@ import { XMLParser, XMLValidator } from "fast-xml-parser";
 import type { Carril, Cruce, RespuestaGaritas } from "./tipos";
 
 export const FUENTE_CBP = "https://bwt.cbp.gov/xml/bwt.xml";
+const CABECERAS_PUBLICAS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
+  "X-Content-Type-Options": "nosniff",
+  "X-Robots-Tag": "noindex",
+};
 type Nodo = Record<string, unknown>;
 const nodo = (valor: unknown): Nodo => valor !== null && typeof valor === "object" && !Array.isArray(valor) ? valor as Nodo : {};
 const cadena = (valor: unknown): string => typeof valor === "string" ? valor.trim() : "";
@@ -81,7 +87,6 @@ export function parsearCbp(xml: string, ahora: string): RespuestaGaritas {
 }
 
 export async function responderGaritas(solicitar: typeof fetch = fetch, ahora = new Date().toISOString()): Promise<Response> {
-  const cabeceras = { "X-Content-Type-Options": "nosniff", "X-Robots-Tag": "noindex" };
   try {
     const respuesta = await solicitar(FUENTE_CBP, {
       cache: "no-store", redirect: "error", signal: AbortSignal.timeout(8_000),
@@ -102,11 +107,11 @@ export async function responderGaritas(solicitar: typeof fetch = fetch, ahora = 
       xml += decodificador.decode();
     } finally { await lector.cancel(); }
     return Response.json(parsearCbp(xml, ahora), {
-      headers: { ...cabeceras, "Cache-Control": "public, max-age=0, s-maxage=300, must-revalidate" },
+      headers: { ...CABECERAS_PUBLICAS, "Cache-Control": "public, max-age=0, s-maxage=300, must-revalidate" },
     });
   } catch {
     return Response.json({ error: "No fue posible consultar CBP. Intenta de nuevo en un minuto." }, {
-      status: 502, headers: { ...cabeceras, "Cache-Control": "no-store" },
+      status: 502, headers: { ...CABECERAS_PUBLICAS, "Cache-Control": "no-store" },
     });
   }
 }

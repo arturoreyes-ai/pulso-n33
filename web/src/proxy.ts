@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import { auth } from "@/auth";
 import { acceso } from "@/lib/acceso/config";
+import { esRutaPublica } from "@/lib/acceso/rutas-publicas";
 
 /**
  * La puerta del tablero. Corre antes de TODO lo que no sea Auth.js o un
@@ -12,7 +13,8 @@ import { acceso } from "@/lib/acceso/config";
  *     escribir cookies, y sin este paso la sesion caduca a las 8 h contadas
  *     desde la entrada aunque la persona la use todo el dia.
  *
- *  2. Exige sesion. Esto es una DIFERENCIA deliberada respecto a SmartNote,
+ *  2. Exige sesión, salvo en el JSON público de garitas. Esto es una
+ *     DIFERENCIA deliberada respecto a SmartNote,
  *     donde el proxy no impone nada y cada ruta se custodia sola. Ahi la
  *     portada es dinamica y decide en el servidor; aqui las nueve paginas se
  *     prerrenderizan como HTML estatico (`generateStaticParams` en [zona]) y
@@ -28,12 +30,21 @@ import { acceso } from "@/lib/acceso/config";
  * Sin sesion, una pagina redirige a /entrar con la ruta pedida en `volver`;
  * una peticion de datos o de API recibe 401 en JSON, que es lo que su cliente
  * sabe leer. Una redireccion a HTML habria roto el panel con un error de
- * parseo en vez de decir "inicia sesion".
+ * parseo en vez de decir "inicia sesión". `/api/garitas` es la única salida:
+ * publica datos oficiales sin cuenta para que otros sistemas los consuman.
  */
 export const proxy = auth((peticion) => {
   const { pathname, search } = peticion.nextUrl;
   const esPuerta = pathname === "/entrar" || pathname.startsWith("/entrar/");
-  if (esPuerta || acceso.sinEntra || peticion.auth?.user) return NextResponse.next();
+  if (esRutaPublica(pathname)) {
+    const respuesta = NextResponse.next();
+    respuesta.headers.set("Access-Control-Allow-Origin", "*");
+    respuesta.headers.set("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
+    return respuesta;
+  }
+  if (esPuerta || acceso.sinEntra || peticion.auth?.user) {
+    return NextResponse.next();
+  }
 
   if (pathname.startsWith("/api/") || pathname.startsWith("/data/")) {
     return NextResponse.json(

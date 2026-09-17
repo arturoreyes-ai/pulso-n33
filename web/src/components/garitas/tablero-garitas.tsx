@@ -5,7 +5,6 @@ import useSWR from "swr";
 
 import { Bisel } from "@/components/ui/bisel";
 import { Barra, Esqueleto } from "@/components/ui/primitivas";
-import { descargar } from "@/lib/garitas/exportar";
 import { duracion, fechaLocal, guion, horaLocal, nombreCarril, vigente } from "@/lib/garitas/formato";
 import type { Carril, RespuestaGaritas } from "@/lib/garitas/tipos";
 
@@ -64,10 +63,6 @@ import type { Carril, RespuestaGaritas } from "@/lib/garitas/tipos";
  *
  * Aqui hubo una regla roja al margen marcando «esto se dice». Era decoracion
  * haciendo el trabajo de la estructura: con la jerarquia puesta, sobra.
-
- * «Descargar JSON» guarda el reporte que ya esta en pantalla; no vuelve a
- * preguntar, por la misma razon que el resto. Lo que guarda es la respuesta
- * entera, no esta tabla: ver `lib/garitas/exportar.ts`.
  */
 
 const CBP = "https://bwt.cbp.gov/";
@@ -75,7 +70,7 @@ const CBP = "https://bwt.cbp.gov/";
 /** El ancho de la pagina, identico al de `chrome/seccion.tsx`. */
 const ANCHO = "mx-auto w-full max-w-[88rem] px-4 md:px-8";
 
-/** Los dos botones de la cabecera; se reparten la fila en movil. */
+/** El boton de la cabecera ocupa la fila en movil. */
 const BOTON =
   "inline-flex min-h-11 shrink-0 items-center justify-center rounded-full border border-filo bg-vela px-5 text-cuerpo text-tinta-titulo transition-colors duration-[var(--dur-cambio)] ease-firma hover:bg-filo max-sm:flex-1";
 
@@ -232,16 +227,6 @@ export function TableroGaritas() {
     }
   }
 
-  // Se guarda lo que ya esta en pantalla: descargar no vuelve a consultar.
-  function descargarReporte() {
-    if (!datos) return;
-    try {
-      fijarConfirmacion(`Se descargó ${descargar(datos)} con el reporte que ves en pantalla.`);
-    } catch {
-      fijarConfirmacion("No se pudo descargar el archivo. Intenta de nuevo.");
-    }
-  }
-
   // El reloj se inyecta desde aqui y no se lee dentro de `vigente`, para que la
   // frescura de un carril no dependa del momento en que React decida repintar.
   useEffect(() => {
@@ -267,14 +252,6 @@ export function TableroGaritas() {
               El pulso de las garitas
             </h1>
             <div className="flex shrink-0 gap-2 max-sm:w-full">
-              <button
-                type="button"
-                onClick={descargarReporte}
-                disabled={!datos}
-                className={`${BOTON} disabled:cursor-not-allowed disabled:opacity-60`}
-              >
-                Descargar JSON
-              </button>
               <button
                 type="button"
                 onClick={() => void actualizarManual()}

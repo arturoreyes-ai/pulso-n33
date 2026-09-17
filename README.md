@@ -524,7 +524,8 @@ sirve `web/public/` como sitio estático, y todo es 404 (`docs/acceso.md` §7).
 **No es exportación estática y por eso Pages ya no sirve.** `next.config.ts`
 deja `output` sin definir a propósito para conservar las route handlers, y
 `/api/garitas` existe porque CBP no manda cabeceras CORS: hace falta un host
-con Node.
+con Node. Es una ruta JSON pública y de solo lectura; el resto del tablero y
+sus APIs conservan la puerta de sesión.
 
 Ojo con lo mismo que antes: el sitio es **público** aunque el repo sea
 privado, y publica también `data/*.json` y `config/roster.json`.
@@ -624,6 +625,9 @@ y Otay Mesa hacia Estados Unidos. Requiere el servidor Next.js; no forma parte
 del sitio estático anterior. El endpoint consulta el XML público de CBP con
 límite de 8 segundos y 2 MiB, sin credenciales ni redirecciones. Las respuestas
 válidas se cachean en el CDN hasta 5 minutos; los errores no se cachean.
+`GET /api/garitas` es público, devuelve JSON y permite lectura desde otros
+orígenes; los huecos de CBP siguen siendo `null`, nunca cero. No hace falta
+iniciar sesión para consumirlo.
 
 El navegador consulta al entrar en la página y después solo al pulsar Actualizar;
 no consulta por intervalo, foco, reconexión ni reintento automático. La fila

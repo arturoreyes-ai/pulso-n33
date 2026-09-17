@@ -5,15 +5,15 @@ const path = require('node:path');
 const Module = require('node:module');
 const ts = require('typescript');
 function cargar(nombre) {
-  const ruta = path.resolve(__dirname, '../src/lib/garitas', nombre + '.ts');
+  const ruta = path.resolve(__dirname, '../src/lib', nombre + '.ts');
   const modulo = new Module(ruta, module);
   modulo.paths = module.paths;
   modulo._compile(ts.transpileModule(fs.readFileSync(ruta, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2023 } }).outputText, ruta);
   return modulo.exports;
 }
-const { parsearCbp, fechaObservada, responderGaritas } = cargar('cbp');
-const { duracion, vigente, guion, horaHablada, duracionHablada, duracionFicha } = cargar('formato');
-const { nombreArchivo, serializar } = cargar('exportar');
+const { parsearCbp, fechaObservada, responderGaritas } = cargar('garitas/cbp');
+const { duracion, vigente, guion, horaHablada, duracionHablada, duracionFicha } = cargar('garitas/formato');
+const { esRutaPublica } = cargar('acceso/rutas-publicas');
 const ahora = '2026-09-08T23:30:00.000Z';
 const carril = (valor = '0', estado = 'no delay', hora = 'At 4:00 pm PDT') => `<standard_lanes><operational_status>${estado}</operational_status><update_time>${hora}</update_time><delay_minutes>${valor}</delay_minutes><lanes_open>2</lanes_open></standard_lanes>`;
 const puerto = (id, contenido, estado = 'Open', pie = '') => `<port><port_number>${id}</port_number><date>9/8/2026</date><port_status>${estado}</port_status><passenger_vehicle_lanes>${contenido}</passenger_vehicle_lanes>${pie ? `<pedestrian_lanes>${pie}</pedestrian_lanes>` : ''}</port>`;
@@ -123,19 +123,16 @@ async function comprobar() {
     return new Response(xml);
   }, ahora);
   assert.equal(bien.status, 200); assert.match(bien.headers.get('cache-control'), /s-maxage=300/);
+  assert.equal(bien.headers.get('access-control-allow-origin'), '*');
+  assert.equal(bien.headers.get('access-control-allow-methods'), 'GET, HEAD, OPTIONS');
   for (const solicitar of [async () => new Response('error', { status: 503 }), async () => new Response('<html/>'), async () => { throw new DOMException('timeout', 'TimeoutError'); }, async () => new Response('x'.repeat(2 * 1024 * 1024 + 1))]) {
-    const fallo = await responderGaritas(solicitar, ahora); assert.equal(fallo.status, 502); assert.equal(fallo.headers.get('cache-control'), 'no-store');
+    const fallo = await responderGaritas(solicitar, ahora); assert.equal(fallo.status, 502); assert.equal(fallo.headers.get('cache-control'), 'no-store'); assert.equal(fallo.headers.get('access-control-allow-origin'), '*');
   }
-  // La descarga: hora de Tijuana como en pantalla, y los huecos siguen en null.
-  assert.equal(nombreArchivo(ahora), 'garitas-20260908-1630.json');
-  assert.equal(nombreArchivo('2026-09-09T05:00:00.000Z'), 'garitas-20260908-2200.json');
-  assert.equal(nombreArchivo('2026-09-09T07:00:00.000Z'), 'garitas-20260909-0000.json');
-  assert.equal(nombreArchivo('sin fecha'), 'garitas.json');
-  const texto = serializar(datos);
-  assert.ok(texto.endsWith('\n'));
-  assert.deepEqual(JSON.parse(texto), datos);
-  assert.equal(JSON.parse(serializar(parcial)).cruces[0].carriles[0].minutos, null);
-  assert.equal(JSON.parse(serializar(parcial)).cruces[1].carriles[0].abiertos, null);
-  console.log('Garitas: contrato, fechas, frescura, guion, API y descarga verificados offline.');
+  // La excepcion de acceso es exacta: no abre rutas hermanas por accidente.
+  assert.equal(esRutaPublica('/api/garitas'), true);
+  for (const ruta of ['/api/garitas/', '/api/garitas/admin', '/api/buscar', '/data/notas.json']) {
+    assert.equal(esRutaPublica(ruta), false);
+  }
+  console.log('Garitas: contrato, fechas, frescura, guion y API pública verificados offline.');
 }
 comprobar().catch(error => { console.error(error); process.exitCode = 1; });
