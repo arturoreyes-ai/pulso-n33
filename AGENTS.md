@@ -103,10 +103,15 @@ owners, so the whole conversation panel ships **off** behind
 On 8 September 2026 the client's management asked to see the text of the
 most-liked comments on each featured Instagram post. That reverses, **for
 Instagram only**, the earlier "derived counts only" decision. Do not re-open
-it. It does not change the channel: `python -m pulso redes` writes the text to
-`efimero/redes-comentarios.json`, a git-ignored folder regenerated on every run
-from the 30-day cache, and `pulso sitio` plus `web/scripts/sincronizar-datos.mjs`
-copy it into the built site when it exists. `data/redes.json` still carries
+it. It does not change what matters about the channel, which is that the text
+**never reaches git**: `python -m pulso redes` writes it to
+`data/redes-comentarios.json`, regenerated on every run from the 30-day cache,
+and `pulso sitio` plus `web/scripts/sincronizar-datos.mjs` carry it into the
+built site with the rest of `data/`. It lived in a separate git-ignored folder,
+`efimero/`, until 17 September 2026; what replaces that folder is one line of
+`.gitignore` (`data/*-comentarios.json`) that `pulso/validador.py` **checks** as
+soon as the file exists, because the cron runs `git add data/` every six hours
+and what leaks there cannot be taken back. `data/redes.json` still carries
 counts plus the featured posts (URL, the outlet's caption headline, likes,
 comments, plays), and `pulso/validador.py` still rejects comment text or any
 identity key inside `data/`.
@@ -135,7 +140,7 @@ seven to ten of the fifteen slots and the zone fell to two-to-four accounts of
 twelve — while all twelve harvested five posts a run, `estado: ok`. So the
 six that never appeared were being paid for and discarded at the featuring
 step, which is why this costs nothing: the posts and their comments are
-already in `cache/`, and `efimero/` is derived from `destacados`.
+already in `cache/`, and the published text is derived from `destacados`.
 
 Three things it is **not**, each of which was the tempting version:
 
@@ -468,9 +473,12 @@ The full command surface — `indicadores`, `conversacion`, `delegaciones`,
   `node_modules/next/dist/server/lib/generate-agent-files.js`). Removing it
   from a diff only recreates the uncommitted change; commit it with your work.
 - **`cache/`** — never goes into git. See the invariant above.
-- **`efimero/`** — written by `pulso redes` and `pulso tiktok`, git-ignored,
-  copied into the site at build time. The comment text lives here and nowhere
-  else.
+- **`data/*-comentarios.json`** — written by `pulso redes` and `pulso tiktok`,
+  git-ignored **by name**, copied into the site with the rest of `data/`. The
+  comment text lives here and nowhere else. The glob is deliberate: a folder
+  protects whatever lands in it by default and a single filename does not, so a
+  future `youtube-comentarios.json` stays out of git without anyone having to
+  remember.
 
 ---
 
@@ -545,7 +553,8 @@ already refused on the record in `docs/PLAN.md` §3.
   sits on an Instagram or TikTok card and calls `/api/analizar-publicacion`,
   which **fetches nothing**: its only outbound request is to the model. The
   model sees what the page already shows — the outlet's caption line and the
-  most-voted comment texts from `efimero/` — and the URL the browser sends is a
+  most-voted comment texts from the published text file — and the URL the
+  browser sends is a
   **lookup key** matched against the published `destacados`, never an address
   the server visits. That is what closes two holes at once: there is no SSRF
   surface, which is why `urlSegura` is deliberately absent there, and nobody
@@ -605,8 +614,9 @@ already refused on the record in `docs/PLAN.md` §3.
   mismatch fails closed before the paid model call. The pipeline's "never
   resolve the redirect" rule is untouched: there the token rotates between
   runs and would dirty `data/`; the on-demand result is never persisted.
-- **Instagram comment text goes to `efimero/`, never to `data/` or git**, and
-  commenter identity is never stored anywhere (see the invariant above).
+- **Instagram comment text never goes to git**, and commenter identity is never
+  stored anywhere (see the invariant above). It ships in
+  `data/redes-comentarios.json`, which `.gitignore` excludes by name.
 - **X: trends only, never tweets.** X closed anonymous reading in 2023, so
   the tweet scrapers that work want session cookies and stay refused
   (`apidojo~tweet-scraper` is a señuelo in `config/apify.json`). On 11
@@ -761,9 +771,27 @@ Tailwind v4, pnpm.
   carries the run time that makes every run commit — so `temas.json` and
   `estado.json` are written and read by nobody. Putting any of it back on
   screen is interface work, not data work. `notas.json` still has one reader:
-  the recorrido, for thumbnails (`imagenes.ts`) and the outlet link behind
-  Analizar (`enlaces.ts`), which is why `pagina.tsx` preloads it on the portada
+  the recorrido, for thumbnails (`imagenes.ts`), the outlet link behind Analizar
+  (`enlaces.ts`) and, since 17 September 2026, **Notas relacionadas**
+  (`relacionadas.ts`) — which is why `pagina.tsx` preloads it on the portada
   only.
+
+  **Notas relacionadas is a third index over that same array**, so it costs no
+  request and no money: a card's chip opens one hoisted sheet listing archived
+  notes that share rare words with the live headline. Scoring is by rarity
+  (`log(total/df)`), and there is deliberately **no stopword list** — porting
+  `temas.py`'s hand-tuned `VACIAS`/`DEMASIADO_COMUNES`/`LUGARES_PALABRAS` would
+  mean maintaining a second copy of a list nobody re-tunes, and rarity does that
+  job by itself against today's archive. Measured: index in 56 ms, 0.20 ms per
+  query, something to show for 87% of headlines. It compares bags of words, not
+  meaning, so it is offered as a suggestion and never as «the coverage of this
+  topic». The sheet shows no `postura` (rule 5), no percentages (rule 2) and a
+  plain sentence when there is nothing (rule 4).
+
+  The sheet is **hoisted to the recorrido**, not mounted per card, with the turn
+  counter `visor-redes.tsx` documents. `AnalisisTitular` still mounts one
+  `<dialog>` per card, which is the thing that pattern exists to avoid; don't
+  copy it.
 
   It chains `/api/actualidad` lists as *chapters* in a fixed order (the chosen
   entry → its five rubros → the other two sections) instead of raising
@@ -847,9 +875,9 @@ Tailwind v4, pnpm.
 
 - **`web/` is what ships.** The cron builds it on the runner and deploys it
   prebuilt, behind `DESPLEGAR_TABLERO`. It deploys from the runner rather than
-  from a host build against git because the comment text lives in `efimero/`,
-  outside git: a host building from the repo would publish posts with no
-  comments. `sitio/` is the previous flat dashboard — plain HTML, CSS and JS,
+  from a host build against git because the comment text, though it sits in
+  `data/`, is outside git: a host building from the repo would publish posts
+  with no comments. `sitio/` is the previous flat dashboard — plain HTML, CSS and JS,
   no build step. It is still in the repo, still smoke-tested by CI and still
   what `pulso servir` serves, but the cron no longer assembles it.
 
@@ -895,8 +923,8 @@ the repository. Two consequences follow, both visible on the live site:
   dashboard refreshes only when a **human** pushes to `main`. Between human
   pushes the site can sit days behind `data/`.
 - **The comment text is missing from the live site.** This is the failure the
-  deploy design above predicts in so many words: `efimero/` is outside git, so a
-  host building from the repository publishes posts with no comments. The
+  deploy design above predicts in so many words: the comment text is outside
+  git, so a host building from the repository publishes posts with no comments. The
   Instagram and TikTok panels degrade to «El texto de los comentarios no está
   disponible en esta vista», which is the panel reporting a misconfiguration
   correctly, not a bug.
