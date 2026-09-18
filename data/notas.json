@@ -1,8 +1,785 @@
 {
  "esquema": 1,
  "ventana_dias": 30,
- "total": 5652,
+ "total": 5698,
  "notas": [
+  {
+   "id": "581a6da1b83cfb48",
+   "titulo": "San Diego County, CDC launch another Tijuana River health assessment",
+   "url": "https://www.kpbs.org/news/environment/2026/09/17/san-diego-county-cdc-launch-another-tijuana-river-health-assessment",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "Tijuana",
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-18",
+   "publicado": "2026-09-18T00:29:23+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/cee6403/2147483647/strip/false/crop/2712x2712+678+0/resize/600x600!/quality/90/?url=http%3A%2F%2Fkpbs-brightspot.s3.us-west-2.amazonaws.com%2Fcf%2F5b%2F177acc5d4a0a8f79aa531e663086%2Fimg-4860.jpg"
+  },
+  {
+   "id": "0070c0833610a902",
+   "titulo": "Protección Civil Sonora vigila una onda tropical en el Pacífico mientras sube a 80% su probabilidad de desarrollo ciclónico en los próximos 7 días",
+   "url": "https://www.elimparcial.com/son/sonora/2026/09/17/proteccion-civil-sonora-vigila-una-onda-tropical-en-el-pacifico-mientras-sube-a-80-su-probabilidad-de-desarrollo-ciclonico-en-los-proximos-7-dias/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-09-18",
+   "publicado": "2026-09-18T00:29:15+00:00",
+   "capturado": "2026-09-17T22:13:18+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6934,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/5EO6AAGIKRFKJITXQDQDAHHX5Y.png?auth=24eb0809561ce258e6089a8531c5ac3dd43ab5cfd25c7ef0eea55f2e25628d5b&smart=true&width=1536&height=1024"
+  },
+  {
+   "id": "5b9af74fff394b55",
+   "titulo": "El Universal acusó a Amílcar Olán de querer silenciarlo junto a 13 medios más y de presuntamente solicitar amparo para que su actividad empresarial no fuera revelada",
+   "url": "https://www.elimparcial.com/mexico/2026/09/17/el-universal-acuso-a-amilcar-olan-de-querer-silenciarlo-junto-a-13-medios-mas-y-de-presuntamente-solicitar-amparo-para-que-su-actividad-empresarial-no-fuera-revelada/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-18",
+   "publicado": "2026-09-18T00:28:18+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7952,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/JZ3IOEF5DFFHHOTT4QT6FEZ4AA.jpg?auth=1232dbc0b50a409edc3ff3cf409c351474450cbbe23d981bd9fe38732f6b9e94&smart=true&width=1920&height=1080"
+  },
+  {
+   "id": "726601440d7cfd3f",
+   "titulo": "Rescatan a cachorro encerrado dentro de un vehículo en Punta Banda",
+   "url": "https://www.elimparcial.com/tij/ensenada/2026/09/17/rescatan-a-cachorro-encerrado-dentro-de-un-vehiculo-en-punta-banda/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Ensenada"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-18",
+   "publicado": "2026-09-18T00:26:12+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4809,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/BOOTBXWSIZFNFNL3RC5GSHE5TE.jpg?auth=b4a1dfb7b2cd9fe12f5bd2f4ddf9a998808adf87af0f33126f301e06b8fe6405&smart=true&width=985&height=704"
+  },
+  {
+   "id": "091336f1b27cde61",
+   "titulo": "Buscan por feminicidio en tentativa a agente estatal que baleó casa de su expareja",
+   "url": "https://www.elimparcial.com/mxl/mexicali/2026/09/17/buscan-por-feminicidio-en-tentativa-a-agente-estatal-que-baleo-casa-de-su-expareja/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-18",
+   "publicado": "2026-09-18T00:19:34+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6637,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/3NQ23OCRFVBBTJWPXDXCPLZXZM.jpeg?auth=2e986d5c2ddbb996858082297cb2c098fc7e967a4f097697b69e2b262ee53de0&smart=true&width=1600&height=1280"
+  },
+  {
+   "id": "6c2790fe8dfa5902",
+   "titulo": "Guanajuato: aseguran 59 millones de litros de presunto huachicol en La Fragua",
+   "url": "https://zetatijuana.com/2026/09/guanajuato-aseguran-59-millones-de-litros-de-presunto-huachicol-en-la-fragua/",
+   "dominio": "zetatijuana.com",
+   "fuente": "zeta",
+   "zona_medio": "Tijuana",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-09-18",
+   "publicado": "2026-09-18T00:12:34+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5473,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "426e171fc75cd9d4",
+   "titulo": "Maestros municipales mantienen plantón en Tijuana; denuncian retiro de interinatos",
+   "url": "https://www.elimparcial.com/tij/tijuana/2026/09/17/maestros-municipales-mantienen-planton-en-tijuana-denuncian-retiro-de-interinatos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-18",
+   "publicado": "2026-09-18T00:12:17+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7274,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/NNJ2UBN5QJDV7FWGVAGOCGPA6A.png?auth=c53be1424fc3775dfbe7970e4b023be244698014dac10759bcb714abbec3ea40&smart=true&width=456&height=491"
+  },
+  {
+   "id": "8479df6976461f2a",
+   "titulo": "Insuficiencia presupuestal y mantenimiento, los principales pendientes para la UABC",
+   "url": "https://www.elimparcial.com/mxl/mexicali/2026/09/17/insuficiencia-presupuestal-y-mantenimiento-los-principales-pendientes-para-la-uabc/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-18",
+   "publicado": "2026-09-18T00:09:37+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9519,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/6TET2C6PP5HDLGMFNXEL6UUSO4.jpeg?auth=c7a28d02930ffc1f3780aeb503bc9830fc99f586fde7d1c664868ff1117a2a1f&smart=true&width=1600&height=1280"
+  },
+  {
+   "id": "b7bb9f58294a35b8",
+   "titulo": "UABC da la bienvenida a 196 estudiantes en línea",
+   "url": "https://jornadabc.com.mx/bajacalifornia/uabc-da-la-bienvenida-a-196-estudiantes-en-linea/",
+   "dominio": "jornadabc.com.mx",
+   "fuente": "jornadabc",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-18",
+   "publicado": "2026-09-18T00:07:38+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.4922,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "e9d7071f3c862719",
+   "titulo": "Ismael Burgueño retomará la alcaldía de Tijuana este 18 de septiembre",
+   "url": "https://zetatijuana.com/2026/09/ismael-burgueno-retomara-la-alcaldia-de-tijuana-este-18-de-septiembre/",
+   "dominio": "zetatijuana.com",
+   "fuente": "zeta",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-18",
+   "publicado": "2026-09-18T00:03:19+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [
+    {
+     "id": "ibr",
+     "via": "nominal",
+     "clave": "ismael burgueno"
+    }
+   ],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.756,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "d91445767d84c549",
+   "titulo": "Julieta Vengas inaugurará Feria del Libro de Tijuana con presentación de “Norteña”",
+   "url": "https://jornadabc.com.mx/principales/julieta-vengas-inaugurara-feria-del-libro-de-tijuana-con-presentacion-de-nortena/",
+   "dominio": "jornadabc.com.mx",
+   "fuente": "jornadabc",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-18",
+   "publicado": "2026-09-18T00:03:11+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5852,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "1444528ff652ae34",
+   "titulo": "De 2018 a 2026 deuda sube 86.9%",
+   "url": "https://zetatijuana.com/2026/09/de-2018-a-2026-deuda-sube-86-9/",
+   "dominio": "zetatijuana.com",
+   "fuente": "zeta",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-18",
+   "publicado": "2026-09-18T00:00:41+00:00",
+   "capturado": "2026-09-14T20:05:11+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5615,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "a577bf59f04d267f",
+   "titulo": "Opinion: After 190 Years, it’s long past time to return San Pasqual to the tribe",
+   "url": "https://timesofsandiego.com/opinion/2026/09/17/after-190-years-past-time-return-san-pasqual-tribe/",
+   "dominio": "timesofsandiego.com",
+   "fuente": "timessd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-18",
+   "publicado": "2026-09-18T00:00:00+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://i0.wp.com/timesofsandiego.com/wp-content/uploads/2026/09/San-Pasqual-Battlefield-Park.jpg?fit=820%2C527&ssl=1"
+  },
+  {
+   "id": "9853319a5e6ce0e9",
+   "titulo": "En Puebla, SEP analiza cómo podrá aplicarse el uso del celular o dispositivos móviles durante la jornada escolar en estudiantes luego que se reiterara su uso como herramienta",
+   "url": "https://www.elimparcial.com/mexico/2026/09/17/en-puebla-sep-analiza-como-podra-aplicarse-el-uso-del-celular-o-dispositivos-moviles-durante-la-jornada-escolar-en-estudiantes-luego-que-se-reiterara-su-uso-como-herramienta/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T23:51:46+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7978,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/QP6CEG7OYFB6BGYXKTYPHUBGFU.png?auth=e70d90197c8c29f4d525a641162eb80815558016a0da5ab47597c7d9711af40f&smart=true&width=1200&height=750"
+  },
+  {
+   "id": "868e21d65fa62d19",
+   "titulo": "BC celebra temporada cultural con XXV Festival de Octubre y Festival Internacional de Cine del Valle de Guadalupe",
+   "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxPM3dldWI3RWo3WXVlakJwYV85V1QyOUlpbjdxZ3ctLU9ydEdPQUVZclJxWU04Skc4LVNBbXpaRWxnYURubVJMcEdiRnFqN0duQnNzNlloYnQ5NTJvRG5GeXFaM1RNVXpHc19Meml3Q0JaejNOM1A3RkJNd0tLdVVoYkNIZ1NLMldTVEhNRzlBOWtleV9tWFJHbVF4ekdCclgtQjRSWUpxRlQwZ1hiUTBEa2d4c2Q3VVpNVHhBcGY0dzBuT2w0Y29VUDNUU0FKQXZLTW9lTnhGOHB4a0lBM2pEaHpJNkN2V0RJWnc?oc=5",
+   "dominio": "pregonerobaja.com.mx",
+   "fuente": "gn-dabf30bb2bce",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Ensenada"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T23:50:28+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.6084,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate"
+  },
+  {
+   "id": "89bcb4dbffe68bf0",
+   "titulo": "Burgueño Ruiz regresa a la Alcaldía de Tijuana",
+   "url": "https://www.elimparcial.com/tij/tijuana/2026/09/17/burgueno-ruiz-regresa-a-la-alcaldia-de-tijuana/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T23:46:20+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [
+    {
+     "id": "ibr",
+     "via": "nominal",
+     "clave": "burgueno ruiz"
+    }
+   ],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5868,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/BJJZRN7XFRH33CKZAOHJCSW4PQ.jpeg?auth=11c871d8529f83e3bf6431f1729622db473b28f60984464dfc17e84a3337acc1&smart=true&width=1280&height=940"
+  },
+  {
+   "id": "0026732c1676e4c9",
+   "titulo": "CMLL cumple 93 años: de El Santo al Místico, las máscaras que cambiaron la lucha libre mexicana",
+   "url": "https://www.elimparcial.com/deporte/2026/09/17/cmll-cumple-93-anos-de-el-santo-al-mistico-las-mascaras-que-cambiaron-la-lucha-libre-mexicana/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T23:46:00+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4587,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/OASJRVBPOBEGDEQT4IWQ7SOL6U.png?auth=a8f344a7d235fa2ab3807970673acf1b0f0830162a56adcb5b85581f4b1ccc3e&smart=true&width=1672&height=941"
+  },
+  {
+   "id": "aa06e43976f09466",
+   "titulo": "Abandonan a 31 migrantes ocultos en doble fondo de remolque",
+   "url": "https://zetatijuana.com/2026/09/abandonan-a-31-migrantes-ocultos-en-doble-fondo-de-remolque/",
+   "dominio": "zetatijuana.com",
+   "fuente": "zeta",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T23:39:49+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7135,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "6cd28841e7dfe0e9",
+   "titulo": "Traerá “TlaquepArte” artesanías del mundo a Baja California",
+   "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPdjBveGhkRVlrZUt3VEJYdWh1MGFRZU9pR01JNER0MUg1aDhoYVJpbDZzVDctTE1aQjYxMzMtNFZGNTJnemtWLWwyNkM1Y3RoNmczU21vVGF0UElETnFlMGhYaDIxQUFqR3podW1JV1ZlZUdLRm9BZlFBS2tsdnZjS3J5bzQ1Wjkycng2U0gxeWxQa1ZaLTRv?oc=5",
+   "dominio": "elportavoznoticias.com.mx",
+   "fuente": "gn-c1d6f8717505",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T23:39:13+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5887,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito"
+  },
+  {
+   "id": "05f2c6e1fd66715e",
+   "titulo": "TV Azteca solicitó blindaje ante acreedores que acusan de orquestar un prestámo fraudulento con banco en paraíso fiscal mientras las deudas suman cerca de 24 mil millones de pesos",
+   "url": "https://www.elimparcial.com/dinero/2026/09/17/tv-azteca-solicito-blindaje-ante-acreedores-que-acusan-de-orquestar-un-prestamo-fraudulento-con-banco-en-paraiso-fiscal-mientras-las-deudas-suman-cerca-de-24-mil-millones-de-pesos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T23:38:05+00:00",
+   "capturado": "2026-09-17T22:50:14+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7518,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/SYSV42DKMFGPFLJXAZSNGSTU24.jpg?auth=92db94df910367976291c0e2dd9c5b978b2edcdafb92c3d9e0242e828bb7e3fe&smart=true&width=1920&height=1080"
+  },
+  {
+   "id": "7842179490becbe5",
+   "titulo": "Encinitas is another step closer to red-light cameras",
+   "url": "https://timesofsandiego.com/community/2026/09/17/encinitas-red-light-cameras/",
+   "dominio": "timesofsandiego.com",
+   "fuente": "timessd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T23:33:04+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://i0.wp.com/timesofsandiego.com/wp-content/uploads/2023/06/Encinitas-e-Bike.jpg?fit=1024%2C576&ssl=1"
+  },
+  {
+   "id": "24b263170016bdad",
+   "titulo": "“Lo estoy considerando”, Verónica Ruffo sobre propuesta de candidatura del PAN",
+   "url": "https://zetatijuana.com/2026/09/lo-estoy-considerando-veronica-ruffo-sobre-propuesta-de-candidatura-del-pan/",
+   "dominio": "zetatijuana.com",
+   "fuente": "zeta",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T23:30:07+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6195,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "742ccd5994158726",
+   "titulo": "Megafuga de agua genera tráfico en Bulevar Agua Caliente",
+   "url": "https://www.elimparcial.com/tij/tijuana/2026/09/17/megafuga-de-agua-genera-trafico-en-bulevar-agua-caliente/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T23:26:42+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8805,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/K6AUXXQAXRH5PL3LVEJ2YK7T5A.jpeg?auth=da3d7263087b1c99883e2fbe67633f91c2d9c2af63d788a1c63b438f0f340cce&smart=true&width=1600&height=1200"
+  },
+  {
+   "id": "8607ebd298e2d224",
+   "titulo": "Novedosos baños públicos que abrirán sus puertas a los diez minutos de uso y sistema de funcionamiento sin contacto manual, instalarán en calles de Nueva York para ampliar el acceso en zonas de alta afluencia",
+   "url": "https://www.elimparcial.com/mundo/2026/09/17/novedosos-banos-publicos-que-abriran-sus-puertas-a-los-diez-minutos-de-uso-y-sistema-de-funcionamiento-sin-contacto-manual-instalaran-en-calles-de-nueva-york-para-ampliar-el-acceso-en-zonas-de-alta-afluencia/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T23:24:57+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5175,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/OV465TXYABELROB5QTPK44ERRU.jpg?auth=40f786573abd7d43661aaec8aac0797c577a2f44f2fa44df4a75aa38d1ead88d&smart=true&width=1200&height=720"
+  },
+  {
+   "id": "3716109231d2d446",
+   "titulo": "Buscan trabajadores para vivir en la Antártida con alojamiento y comida incluidos a cambio de mantener los equipos y sistemas de comunicación de una base científica",
+   "url": "https://www.elimparcial.com/locurioso/2026/09/17/buscan-trabajadores-para-vivir-en-la-antartida-con-alojamiento-y-comida-incluidos-a-cambio-de-mantener-los-equipos-y-sistemas-de-comunicacion-de-una-base-cientifica/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T23:23:31+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7333,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/VPFQ725TZFCBPHWQWR2N2GC5W4.jpg?auth=8037eda2db0ac1003c131433c6bc154247326b9dca6965718ebbf7101747fe83&smart=true&width=7360&height=4912"
+  },
+  {
+   "id": "25e8c0d886836966",
+   "titulo": "Residentes de Sánchez Taboada mantendrán bloqueo en CESPT ante deslizamientos",
+   "url": "https://zetatijuana.com/2026/09/residentes-de-sanchez-taboada-mantendran-bloqueo-en-cespt-ante-deslizamientos/",
+   "dominio": "zetatijuana.com",
+   "fuente": "zeta",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [
+    "Sánchez Taboada"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T23:21:55+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6776,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "25514927f36c881f",
+   "titulo": "Tijuana Pushes Medical Device Industry Toward Innovation",
+   "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNZ25BN2tUcy1wZXRuQTMyNjljbDRWMGNPMjg4NjRvQUlNRk00aVZRWHRPcWtwR2ZQajc0ZUFfb0d2RGtZcHd5T1NMcExRSUZyS0lhV0RHZ3RTVEVJc1UwaUh6bDRnSkxJU1lOQzN2dHh3VUh2Y1U2cDJ2Vko5dmY5UERyRFVIUXlGa2k4U2RKNXRJQUxSR0pURFFUSF9uVF9CVVFRRE9sU3VRVnRweEdB?oc=5",
+   "dominio": "mexicobusiness.news",
+   "fuente": "gn-650b3326eea9",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T23:19:10+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en"
+  },
+  {
+   "id": "2febc489690e78a6",
+   "titulo": "Opinión: La guerra de las etiquetas: ¿Hispanos, latinos o latinx?",
+   "url": "https://timesofsandiego.com/opinion/2026/09/17/latino-o-hispano-identidad-comunidad-latina-estados-unidos/",
+   "dominio": "timesofsandiego.com",
+   "fuente": "timessd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T23:17:13+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://i0.wp.com/timesofsandiego.com/wp-content/uploads/2026/09/juegan.jpeg?fit=1024%2C768&ssl=1"
+  },
+  {
+   "id": "b699febf86243830",
+   "titulo": "SICT rehabilita carreteras de Baja California con inversión superior a 134 MDP",
+   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQdWNYQmdiZEE0M1haYjVtZkZNMTJ3X3ZUa1NFN2dzLVp5dWtJWnB5TjFyVGFodktxMF8ya2gxQ1FzM21hdXN6NllXTWs4WkhBRG9LV1NDTDVlQnp1N3hnR2p4ZXhTMENXN3g4a29MQl9leURaUmx4MERmNWtBc3F1OE1iSUJ2UW8tdzg2cGt4WEpwWmFaYUJoQk9ocnphelU0OExibjNWXzFvM2h4LWxuMWpkYw?oc=5",
+   "dominio": "elportavoznoticias.com.mx",
+   "fuente": "gn-c1d6f8717505",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T23:08:12+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4961,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate"
+  },
+  {
+   "id": "71fdc904fd1dc98b",
+   "titulo": "Amnistía Internacional condena asesinato en México de joven española",
+   "url": "https://jornadabc.com.mx/principales/amnistia-internacional-condena-asesinato-en-mexico-de-joven-espanola/",
+   "dominio": "jornadabc.com.mx",
+   "fuente": "jornadabc",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T22:58:36+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6113,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "45b678f8819c53ea",
+   "titulo": "Guía del fin de semana en San Diego: la calle toma protagonismo",
+   "url": "https://timesofsandiego.com/san-diego-events/2026/09/17/guia-fin-semana-san-diego-18-20-septiembre-2026/",
+   "dominio": "timesofsandiego.com",
+   "fuente": "timessd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T22:57:36+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://i0.wp.com/timesofsandiego.com/wp-content/uploads/2026/09/image-44.png?fit=1024%2C682&ssl=1"
+  },
+  {
+   "id": "5af5ef68141ef054",
+   "titulo": "Dodgers convierten el Oeste en su reino: 13 títulos divisionales en 14 años y ahora van tras un histórico tricampeonato de la MLB",
+   "url": "https://www.elimparcial.com/deporte/2026/09/17/dodgers-convierten-el-oeste-en-su-reino-13-titulos-divisionales-en-14-anos-y-ahora-van-tras-un-historico-tricampeonato-de-la-mlb/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T22:55:09+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.6242,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/UJV3OXRGOZG47AP67DRDJ4LEMU.jpg?auth=8a6f761ce24f961c0eb9851d75c1c4b95588191ab96fca633802c911a9eee9f3&smart=true&width=1920&height=1080"
+  },
+  {
+   "id": "fb198f90be772a6b",
+   "titulo": "CMIC Ensenada - San Quintín, en Aquatech 2026",
+   "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9PMVhaSEM3RXdoV1pVNUZZVzlGMDdyNzJUX3JzMUZUZnhuQVdXcHg5N3U2V2NYMzl1ZWR4Zk85OEhVRW5DaUFwRUZkaENkSXZRYmZTSDZjTHhzT0hIUHc?oc=5",
+   "dominio": "ensenada.net",
+   "fuente": "gn-906741a25e9c",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Ensenada",
+    "San Quintín"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T22:53:16+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.8461,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin"
+  },
   {
    "id": "2b1e50439c33b6cf",
    "titulo": "Tramita la doble nacionalidad gratis para menores en Rosarito",
@@ -95,6 +872,27 @@
    "descubierta_por": "bq_tecate"
   },
   {
+   "id": "1aa6afd98f73e158",
+   "titulo": "San Diego County & CDC begin another health survey related to the Tijuana River Sewage Crisis",
+   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5CcG1XWW1FT1JfV1hwbXF2SnBaZ1RfS2hQT0loVUxjTzJSU0I2aGg2N0ZJQmZWSkxXR3ExbzJqWWtub1U2bDNMeVhULTZ5MFBBZldzdUxTd3l0c2lsVVJ6ampmS29VaGZrbDE1dEtCN1JlbnJUbnc?oc=5",
+   "dominio": "ca.news.yahoo.com",
+   "fuente": "gn-5e7dd3768c59",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana",
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T22:31:09+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_aguasnegras"
+  },
+  {
    "id": "5b3d354770b5ac4a",
    "titulo": "Sheinbaum responde a Trump por petición de combatir la narcocorrupción en México y pide a EEUU actuar contra consumo de drogas y tráfico de armas",
    "url": "https://www.elimparcial.com/mexico/2026/09/17/sheinbaum-responde-a-trump-por-peticion-de-combatir-la-narcocorrupcion-en-mexico-y-pide-a-eeuu-actuar-contra-consumo-de-drogas-y-trafico-de-armas/",
@@ -139,29 +937,6 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/TZITLKO4NFCUJG26PRCJUUSD3Q.jpg?auth=eab2b46ae3490fdcb3c2925d69f17187faf116239b82ad18c5ccfec22c60e39c&smart=true&width=1920&height=1200"
-  },
-  {
-   "id": "05f2c6e1fd66715e",
-   "titulo": "TV Azteca solicitó blindaje ante acreedores que acusan de orquestar un prestámo fraudulento con banco en paraíso fiscal mientras las deudas suman cerca de 24 mil millones de pesos",
-   "url": "https://www.elimparcial.com/dinero/2026/09/17/tv-azteca-solicito-blindaje-ante-acreedores-que-acusan-de-orquestar-un-prestamo-fraudulento-con-banco-en-paraiso-fiscal-mientras-las-deudas-suman-cerca-de-24-mil-millones-de-pesos/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-09-17",
-   "publicado": "2026-09-17T22:28:08+00:00",
-   "capturado": "2026-09-17T22:50:14+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.7518,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/SYSV42DKMFGPFLJXAZSNGSTU24.jpg?auth=92db94df910367976291c0e2dd9c5b978b2edcdafb92c3d9e0242e828bb7e3fe&smart=true&width=1920&height=1080"
   },
   {
    "id": "44ac642fe0af343a",
@@ -1238,29 +2013,6 @@
    "imagen": "https://www.elimparcial.com/resizer/v2/6NEU3E7YQZA4FCETGZO6CDZUVQ.jpg?auth=55382162d3e81135db3266940644c684afecdd2baa95fa754b17231f7e2634ff&smart=true&width=1200&height=720"
   },
   {
-   "id": "0070c0833610a902",
-   "titulo": "Protección Civil Sonora vigila una onda tropical en el Pacífico mientras sube a 80% su probabilidad de desarrollo ciclónico en los próximos 7 días",
-   "url": "https://www.elimparcial.com/son/sonora/2026/09/17/proteccion-civil-sonora-vigila-una-onda-tropical-en-el-pacifico-mientras-sube-a-80-su-probabilidad-de-desarrollo-ciclonico-en-los-proximos-7-dias/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "fuera",
-   "fecha": "2026-09-17",
-   "publicado": "2026-09-17T20:34:47+00:00",
-   "capturado": "2026-09-17T22:13:18+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.6934,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/5EO6AAGIKRFKJITXQDQDAHHX5Y.png?auth=24eb0809561ce258e6089a8531c5ac3dd43ab5cfd25c7ef0eea55f2e25628d5b&smart=true&width=1536&height=1024"
-  },
-  {
    "id": "dd0e2c5c21fbb559",
    "titulo": "Comerciantes del norte de México están siendo presionados por el crimen organizado e inspectores falsos para vender cigarros ilegales y los amenazan con multas de millones de pesos y la clausura de sus negocios si no obedecen, según investigación de la FGR",
    "url": "https://www.elimparcial.com/mexico/2026/09/17/comerciantes-del-norte-de-mexico-estan-siendo-presionados-por-el-crimen-organizado-e-inspectores-falsos-para-vender-cigarros-ilegales-y-los-amenazan-con-multas-de-millones-de-pesos-y-la-clausura-de-sus-negocios-si-no-obedecen-segun-investigacion-de-la-fgr/",
@@ -1375,6 +2127,35 @@
    "postura": {
     "etiqueta": "adversa",
     "confianza": 0.7837,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate"
+  },
+  {
+   "id": "2c804125f9a9e29d",
+   "titulo": "🚨 Garitas de Tijuana registran filas de casi 3 horas en Otay Mesa (Datos actualizados a las 2:00 PM PDT) Los cruces fronterizos hacia Estados Unidos registran fuerte congestión la tarde de este jueves, registrando la mayor saturación en la garita de Otay Me",
+   "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOeXJDTDNsU25WUWdBSFZ0SmV4RGlBcVJ6V3pjNzMtclQ4dEhLb2FWSkJTcmllTE90Z1IydUVhUGNfMWlBWnZmVXUxbHY0VFVFZWUybWNfTmpCU2lFd0M3X3dwUnZER2l1TDZ5S2VnMW1BOENSWUZKZldoeF9DQjkzU0xMdFRQV254RUt5dHpqVjhJRVVBWndJQV9nUkxjZlhRbVEzNi1CZGhDWThGYy1tQW1Qako?oc=5",
+   "dominio": "tijuanaenlinea.com",
+   "fuente": "gn-f8497491006c",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana",
+    "San Diego"
+   ],
+   "delegaciones": [
+    "Otay Centenario"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T20:30:23+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6176,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
@@ -2008,6 +2789,30 @@
    "imagen": "https://www.rosaritonoticias.com/wp-content/uploads/2026/09/Playas-de-Rosarito-Control-Animal-Rosarito-adopcion-de-perros-colonia-Morelos-bienestar-animal-822x1024.jpeg"
   },
   {
+   "id": "cee054b1bb7d1fd9",
+   "titulo": "“Feliz de estar de regreso”: Adrián Martínez",
+   "url": "https://oem.com.mx/lavozdelafrontera/deportes/feliz-de-estar-de-regreso-adrian-martinez-32132491",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T19:28:39+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.903,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
    "id": "81e81ef3967b6553",
    "titulo": "Lions vs Bills: dónde ver HOY el Thursday Night Football de la NFL y a qué hora empieza",
    "url": "https://www.elimparcial.com/deporte/2026/09/17/lions-vs-bills-donde-ver-hoy-el-thursday-night-football-de-la-nfl-y-a-que-hora-empieza/",
@@ -2408,6 +3213,30 @@
    "imagen": "https://www.elimparcial.com/resizer/v2/KDF5V7KPJZB4RLUE3VI7FGBIII.jpeg?auth=01219f59d4debd914edc3bfff4ae0b5871961289daca2f5bc1f0d80e54b5c08d&smart=true&width=1599&height=899"
   },
   {
+   "id": "5c229db58963631a",
+   "titulo": "Anuncian fecha única para presentar examen de primaria y secundaria en BC",
+   "url": "https://oem.com.mx/elsoldetijuana/local/anuncian-fecha-unica-para-presentar-examen-de-primaria-y-secundaria-en-bc-32132679",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T18:47:11+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7552,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
    "id": "7cbb04e50b0bd9b6",
    "titulo": "Atacan a balazos a profesor triqui y a su hija de tres años en Oaxaca; ambos permanecen graves",
    "url": "https://www.elimparcial.com/mexico/2026/09/17/atacan-a-balazos-a-profesor-triqui-y-a-su-hija-de-tres-anos-en-oaxaca-ambos-permanecen-graves/",
@@ -2546,6 +3375,30 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/AMCNWBTWG5FXNO5MGHF2U5MZ7Q.png?auth=6b067b389f85c98948f6c9c5c3e4494c024b8135586aaa823b93256422cae926&smart=true&width=1200&height=720"
+  },
+  {
+   "id": "84ad50d484eb94d7",
+   "titulo": "Presentan la duodécima edición de la tradicional carrera Prohibido Rendirse",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/presentan-la-duodecima-edicion-de-la-tradicional-carrera-prohibido-rendirse-32132321",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T18:39:39+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5912,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
   },
   {
    "id": "166410b4ffdf3662",
@@ -2798,6 +3651,30 @@
    "imagen": "https://www.elimparcial.com/resizer/v2/YFJN3SZXSZA4XF35575T2JKML4.jpg?auth=bb32612d108a6da57f7e6ccb2777a4fc3a41c3537023fe812e7116956e5584d3&smart=true&width=1200&height=720"
   },
   {
+   "id": "64b9ecb89f4ae777",
+   "titulo": "Emiten recomendaciones ante lluvias y vientos asociados con el fenómeno El Niño en BC",
+   "url": "https://oem.com.mx/elsoldetijuana/local/emiten-recomendaciones-ante-lluvias-y-vientos-asociados-con-el-fenomeno-el-nino-en-bc-32132108",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T18:05:39+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5273,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
    "id": "32cd0d1af24e5384",
    "titulo": "Coordina IMSS traslado aéreo de una paciente de Chiapas al CMN Siglo XXI",
    "url": "https://jornadabc.com.mx/region/coordina-imss-traslado-aereo-de-una-paciente-de-chiapas-al-cmn-siglo-xxi/",
@@ -2965,6 +3842,26 @@
    "figuras": [],
    "postura": null,
    "imagen": "https://cdn.kpbs.org/dims4/default/cb01e10/2147483647/strip/false/crop/1333x1333+394+0/resize/600x600!/quality/90/?url=http%3A%2F%2Fkpbs-brightspot.s3.us-west-2.amazonaws.com%2F83%2F80%2F9b9a4f4f4010ad6dc3acf7c8aa58%2F06222023-child-marriage-presser-rl-01-1.webp"
+  },
+  {
+   "id": "9feb3e5c910f2b3d",
+   "titulo": "Pitbull Cruz and Mono Ramos on the ball in San Diego: Warming Up at the Baja Cup Showdown",
+   "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPY3hZR3M3QUMyZXEwdVNRRWlEZlE2NEpTcUFaMEFPd0pObUxWZjJRUlpidlhJMGdGSmMxRHJ0eXlxUXAwV0l5YWxldTlLTEhyN09uUWNnOTVHd1B3R0NlNGEzbTBpM3VwTUE2M05ha1M3ckRsbUxSWUt5RS1sdGozdy1HaHJpWEpSSmtrYjZodWwtbDB2em5GMERtZWJ5bUljMjgwU2VPV1JnUGNweHUyU3RBQU0?oc=5",
+   "dominio": "wbcboxing.com",
+   "fuente": "gn-f17ae0256cf7",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T17:48:08+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en"
   },
   {
    "id": "0a38ac0cd09a0780",
@@ -3425,6 +4322,98 @@
    "imagen": "https://www.elimparcial.com/resizer/v2/PBIA4W6OPJEFTECDAXZZ5JKFXY.jpg?auth=c178dab99af0359d176a6450045815b234fd2beee8ccd7fb5d56c60a5937b24b&smart=true&width=6000&height=4000"
   },
   {
+   "id": "98f7c347234c820c",
+   "titulo": "¡Cuidado! Alertan a usuarios de iPhone",
+   "url": "https://www.uniradioinforma.com/sociedad/cuidado-alertan-usuarios-iphone-n904191",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T17:10:00-07:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5552,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "d1e78ea37223e868",
+   "titulo": "Arrancará El Trompo próximo domingo exposición \"Van Gogh Dreams\"",
+   "url": "https://www.uniradioinforma.com/sociedad/arrancara-trompo-proximo-domingo-exposicion-van-gogh-dreams-n904193",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T17:09:00-07:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6507,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "7e203b73ed7906ad",
+   "titulo": "Congreso pone sobre la mesa avances y pendientes de Sonora",
+   "url": "https://www.uniradioinforma.com/gobierno/congreso-pone-sobre-mesa-avances-pendientes-sonora-n904185",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T17:06:00-07:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.474,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "604cbc1a339201e1",
+   "titulo": "Avala Cabildo del XXV Ayuntamiento de Tijuana establecer convenios para resolver juicios por multas de alcoholimetría",
+   "url": "https://www.uniradioinforma.com/sociedad/avala-cabildo-xxv-ayuntamiento-tijuana-establecer-convenios-resolver-juicios-multas-alcoholimetria-n904183",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T17:06:00-07:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5686,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
    "id": "87a86e2e173edf7f",
    "titulo": "Estado manipula cifras: 28% menos homicidios, 345% más desaparecidos",
    "url": "https://zetatijuana.com/2026/09/estado-manipula-cifras-28-menos-homicidios-345-mas-desaparecidos/",
@@ -3443,6 +4432,30 @@
    "postura": {
     "etiqueta": "adversa",
     "confianza": 0.6605,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "2bc1d127119182be",
+   "titulo": "Regresa Feria del Libro de Tijuana con histórica programación",
+   "url": "https://www.uniradioinforma.com/sociedad/regresa-feria-libro-tijuana-historica-programacion-n904181",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T17:04:00-07:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.7803,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
@@ -3538,6 +4551,28 @@
    "figuras": [],
    "postura": null,
    "imagen": "https://cdn.kpbs.org/dims4/default/9471bbb/2147483647/strip/false/crop/1333x1333+323+0/resize/600x600!/quality/90/?url=http%3A%2F%2Fkpbs-brightspot.s3.us-west-2.amazonaws.com%2F68%2Fd6%2Fae135d4748ff8877c80db0b9a955%2F010625-limon-senate-pro-tem-mg-cm-13.webp"
+  },
+  {
+   "id": "5875bd7a62668e28",
+   "titulo": "Refuerzan prevención contra dengue tras lluvias",
+   "url": "https://www.uniradioinforma.com/sociedad/refuerzan-prevencion-dengue-tras-lluvias-n904179",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T16:58:00-07:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5611,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
   },
   {
    "id": "ff9e42aa90bf44f9",
@@ -3756,6 +4791,29 @@
    "imagen": "https://www.elimparcial.com/resizer/v2/L5UOG2ETMZBG5NATHC7I4FAQOI.jpeg?auth=9ea6963df34443fb321b4220b60edefadce2d94d38816c15c68a38cb244180f9&smart=true&width=925&height=469"
   },
   {
+   "id": "5c899f4037400e1a",
+   "titulo": "Lluvia derriba 12 árboles en Hermosillo",
+   "url": "https://www.uniradioinforma.com/sociedad/lluvia-derriba-12-arboles-hermosillo-n904175",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T16:39:00-07:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.836,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aac7b6c49eea.jfif"
+  },
+  {
    "id": "9fc3b49fb5af579b",
    "titulo": "Sheinbaum Explica por qué no Mencionó a Allende Durante el Grito de Independencia",
    "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQcWFEZ0daLTZKV0lyQWpXQ3o0MW1TUm1ITmN2UVJiQVN6V1l0ZGl6WmhPZUF4eHFya3Vmc0cxQk1tbFJhNzVTQjZKMENCUmVwMEd6djNHWF8ybHFjQkNRaWxMeFVTRFh3M2QzUW9nQm9seDhGaDNFMHhxc3JVeXRZUU1FMk5GUWN1ejBYNUpnNDBEeG5LLTNmYmFYbVNVcnBuRzhUQm5kQ3ZKSHdLUG9sZ2R5aGMzblJkZnFEbA?oc=5",
@@ -3936,6 +4994,29 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    }
+  },
+  {
+   "id": "0d40ecdf6c773a5b",
+   "titulo": "Las matemáticas salen a jugar en Hermosillo",
+   "url": "https://www.uniradioinforma.com/sociedad/las-matematicas-salen-jugar-hermosillo-n904173",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T16:27:00-07:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.648,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aac77b3d05b2.jpeg"
   },
   {
    "id": "da5b15dbbf3c9f8a",
@@ -4178,6 +5259,31 @@
    "descubierta_por": "bq_tecate"
   },
   {
+   "id": "543e30bbea245044",
+   "titulo": "Piden que los sitios sagrados Yumanos tengan protección legal en Baja California",
+   "url": "https://www.uniradioinforma.com/sociedad/piden-sitios-sagrados-yumanos-tengan-proteccion-legal-baja-california-n903831",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T16:00:00-07:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.623,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aa996fc31c4e.png"
+  },
+  {
    "id": "fc4e7032b4719e93",
    "titulo": "TE VIMOS CON ESTILO EN Estilos",
    "url": "https://www.elimparcial.com/son/estilosgh/2026/09/17/te-vimos-con-estilo-en-estilos/",
@@ -4288,6 +5394,30 @@
    "postura": {
     "etiqueta": "adversa",
     "confianza": 0.7467,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   }
+  },
+  {
+   "id": "28b524cf279a851c",
+   "titulo": "SETEBC mantendrá protestas ante falta de acuerdos con Ayuntamiento de Tijuana",
+   "url": "https://oem.com.mx/elsoldetijuana/local/sete-bc-mantendra-protestas-ante-falta-de-acuerdos-con-ayuntamiento-de-tijuana-32129590",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T15:58:15+00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7813,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
@@ -4432,7 +5562,8 @@
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
-   }
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aac6cfd3b6c3.jpg"
   },
   {
    "id": "5d69a01a73646679",
@@ -5092,7 +6223,8 @@
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
-   }
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aac602e29de4.jpg"
   },
   {
    "id": "d7bdc7160a5a0efa",
@@ -5145,7 +6277,8 @@
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
-   }
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aac5eff902d5.jpg"
   },
   {
    "id": "5c72e8e1b59a46a4",
@@ -5169,7 +6302,8 @@
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
-   }
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aac5ec15ac7b.jpg"
   },
   {
    "id": "959e86c25941b879",
@@ -5237,7 +6371,8 @@
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
-   }
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aac5de394882.jpg"
   },
   {
    "id": "d5c60784f97eef4f",
@@ -10409,6 +11544,31 @@
    "imagen": "https://www.afnbc.com/images.php?src=imagenes/mario-escobedo-20082026.jpg&w=500&h=250"
   },
   {
+   "id": "3b55af13ba1f3519",
+   "titulo": "Hija de Ernesto Ruffo podría buscar ser candidata del PAN a la gubernatura",
+   "url": "https://afntijuana.info/informacion_general/181811_hija_de_ernesto_ruffo_podria_buscar_ser_candidata_del_pan_a_la_gubernatura",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T00:00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5214,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.afnbc.com/images.php?src=imagenes/buscar17926T.jpg&w=500&h=250"
+  },
+  {
    "id": "3825b6243f1fa307",
    "titulo": "¿Está enamorado otra vez? Peso Pluma habla de su corazón tras terminar con Kenia Os",
    "url": "https://afntijuana.info/espectaculos/181787_iesta_enamorado_otra_vez_peso_pluma_habla_de_su_corazon_tras_terminar_con_kenia_os",
@@ -10432,6 +11592,31 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.afnbc.com/images.php?src=imagenes/peso-pluma-15092026.jpg&w=500&h=250"
+  },
+  {
+   "id": "35c04a1727199f55",
+   "titulo": "Estamos listos, dice Margarita; debe ser hombre: Osuna",
+   "url": "https://afntijuana.info/afn_politico/181812_estamos_listos_dice_margarita_debe_ser_hombre_osuna",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-17",
+   "publicado": "2026-09-17T00:00:00",
+   "capturado": "2026-09-18T00:32:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6886,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.afnbc.com/images.php?src=imagenes/afnpolitico17926st.jpg&w=500&h=250"
   },
   {
    "id": "355e125fa93a101d",
@@ -23332,7 +24517,7 @@
   {
    "id": "50590de3c8021383",
    "titulo": "5 películas mexicanas para celebrar el 16 de septiembre desde casa",
-   "url": "https://oem.com.mx/lavozdelafrontera/juegos/quiz-cine-y-tv/5-peliculas-mexicanas-para-celebrar-el-16-de-septiembre-desde-casa-32102191",
+   "url": "https://oem.com.mx/lavozdelafrontera/tendencias/5-peliculas-mexicanas-para-celebrar-el-16-de-septiembre-desde-casa-32102191",
    "dominio": "oem.com.mx",
    "fuente": "lavoz",
    "zona_medio": "Mexicali",
@@ -35751,30 +36936,6 @@
    "postura": {
     "etiqueta": "adversa",
     "confianza": 0.8882,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   }
-  },
-  {
-   "id": "1444528ff652ae34",
-   "titulo": "De 2018 a 2026 deuda sube 86.9%",
-   "url": "https://zetatijuana.com/2026/09/de-2018-a-2026-deuda-sube-86-9/",
-   "dominio": "zetatijuana.com",
-   "fuente": "zeta",
-   "zona_medio": "Tijuana",
-   "zonas": [
-    "Tijuana"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-09-14",
-   "publicado": "2026-09-14T20:00:41+00:00",
-   "capturado": "2026-09-14T20:05:11+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5615,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
@@ -126766,75 +127927,6 @@
    "figuras": [],
    "postura": null,
    "imagen": "https://i0.wp.com/inewsource.org/wp-content/uploads/2026/08/ice-funding-1.jpg?fit=1024%2C683&ssl=1"
-  },
-  {
-   "id": "ee5743e5b26ad0c2",
-   "titulo": "Iconic Balboa Park has a billion-dollar problem",
-   "url": "https://inewsource.org/2026/08/18/san-diego-balboa-park-deferred-maintenance-governance/",
-   "dominio": "inewsource.org",
-   "fuente": "inewsource",
-   "zona_medio": "San Diego",
-   "zonas": [
-    "San Diego"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-08-18",
-   "publicado": "2026-08-18T15:59:54+00:00",
-   "capturado": "2026-09-04T00:35:01+00:00",
-   "figuras": [],
-   "postura": null,
-   "imagen": "https://i0.wp.com/inewsource.org/wp-content/uploads/2026/08/BalboaPark_016-scaled.jpg?fit=1024%2C683&ssl=1"
-  },
-  {
-   "id": "fbb7f5473bf2be22",
-   "titulo": "Arranca justicia oral civil y familiar con juicio rápido en Tecate",
-   "url": "https://www.tecatenoticias.com/arranca-justicia-oral-civil-y-familiar-con-juicio-rapido-en-tecate/",
-   "dominio": "tecatenoticias.com",
-   "fuente": "tecate",
-   "zona_medio": "Tecate",
-   "zonas": [
-    "Tecate"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-08-18",
-   "publicado": "2026-08-18T01:45:51+00:00",
-   "capturado": "2026-09-04T00:35:01+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5993,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.tecatenoticias.com/wp-content/uploads/2026/08/Arranca-justicia-oral-civil-y-familiar-con-juicio-rapido-en-Tecate-2-1024x682.jpeg"
-  },
-  {
-   "id": "cd40775385e61ef7",
-   "titulo": "Controlan incendio en Paso del Águila pero persiste humo en Tecate",
-   "url": "https://www.tecatenoticias.com/controlan-incendio-en-paso-del-aguila-pero-persiste-humo-en-tecate/",
-   "dominio": "tecatenoticias.com",
-   "fuente": "tecate",
-   "zona_medio": "Tecate",
-   "zonas": [
-    "Tecate"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-08-18",
-   "publicado": "2026-08-18T01:38:16+00:00",
-   "capturado": "2026-09-04T00:35:01+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.6502,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.tecatenoticias.com/wp-content/uploads/2026/08/Controlan-incendio-en-Paso-del-Aguila-pero-persiste-humo-en-Tecate-2-1024x669.jpeg"
   },
   {
    "id": "febaabdd7d7c5b62",

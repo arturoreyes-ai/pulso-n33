@@ -1,8 +1,77 @@
 {
  "esquema": 1,
  "mes": "2026-08",
- "total": 31,
+ "total": 34,
  "notas": [
+  {
+   "id": "ee5743e5b26ad0c2",
+   "titulo": "Iconic Balboa Park has a billion-dollar problem",
+   "url": "https://inewsource.org/2026/08/18/san-diego-balboa-park-deferred-maintenance-governance/",
+   "dominio": "inewsource.org",
+   "fuente": "inewsource",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-08-18",
+   "publicado": "2026-08-18T15:59:54+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://i0.wp.com/inewsource.org/wp-content/uploads/2026/08/BalboaPark_016-scaled.jpg?fit=1024%2C683&ssl=1"
+  },
+  {
+   "id": "fbb7f5473bf2be22",
+   "titulo": "Arranca justicia oral civil y familiar con juicio rápido en Tecate",
+   "url": "https://www.tecatenoticias.com/arranca-justicia-oral-civil-y-familiar-con-juicio-rapido-en-tecate/",
+   "dominio": "tecatenoticias.com",
+   "fuente": "tecate",
+   "zona_medio": "Tecate",
+   "zonas": [
+    "Tecate"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-08-18",
+   "publicado": "2026-08-18T01:45:51+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5993,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.tecatenoticias.com/wp-content/uploads/2026/08/Arranca-justicia-oral-civil-y-familiar-con-juicio-rapido-en-Tecate-2-1024x682.jpeg"
+  },
+  {
+   "id": "cd40775385e61ef7",
+   "titulo": "Controlan incendio en Paso del Águila pero persiste humo en Tecate",
+   "url": "https://www.tecatenoticias.com/controlan-incendio-en-paso-del-aguila-pero-persiste-humo-en-tecate/",
+   "dominio": "tecatenoticias.com",
+   "fuente": "tecate",
+   "zona_medio": "Tecate",
+   "zonas": [
+    "Tecate"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-08-18",
+   "publicado": "2026-08-18T01:38:16+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6502,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.tecatenoticias.com/wp-content/uploads/2026/08/Controlan-incendio-en-Paso-del-Aguila-pero-persiste-humo-en-Tecate-2-1024x669.jpeg"
+  },
   {
    "id": "f4cd65236d1e86c5",
    "titulo": "San Diego supervisors to vote on ending ICE, border agents’ use of firing range",
