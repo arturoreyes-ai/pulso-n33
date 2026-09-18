@@ -171,7 +171,8 @@ salgan bien en la consola.
 | `pulso/zonas.py` | gazetero y alcance geográfico: de qué zona habla una nota |
 | `pulso/temas.py` | temas y tendencias por conteo de n-gramas |
 | `pulso/roster.py` | resuelve figuras públicas con ventanas de vigencia |
-| `pulso/youtube.py` | comentarios vía API oficial, con la regla de retención |
+| `pulso/conversacion.py` | comentarios de YouTube vía API oficial, con la regla de retención |
+| `pulso/youtube.py` | Shorts y videos de YouTube por feed público: sin llave, sin cuota y sin costo |
 | `pulso/sentimiento.py` | modelo local de tono y sentimiento; opcional, ver `requirements-modelo.txt` |
 | `pulso/clasificar.py` | `clasificar_lote`: ninguno, diccionario o modelo, en lote y sin reclasificar lo vigente |
 | `pulso/validador.py` | el esquema ejecutable |
@@ -255,9 +256,12 @@ vacío en silencio: `@UniradioInforma` no sube nada desde 2016 (el vivo es
 
 ---
 
-## YouTube: llave y la regla de los 30 días
+## YouTube (API de datos): llave y la regla de los 30 días
 
-Para encender el panel de conversación hacen falta dos cosas:
+Esto es para el panel de **conversación** —comentarios y su tono—, que lee la
+API de datos con llave. Los Shorts y los videos son el otro módulo de YouTube y
+no necesitan nada de esto: ver «YouTube: Shorts y videos por feed público» más
+abajo. Para encender el panel de conversación hacen falta dos cosas:
 
 ```bash
 gh secret set YOUTUBE_API_KEY
@@ -421,6 +425,48 @@ lado de la zona, para que «sin lugar» y «fuera del corredor» no se
 confundan. Tres búsquedas están apagadas con la razón escrita —Tecate, San
 Felipe y San Quintín—: se probaron y devuelven falsos positivos, no cobertura.
 Un incendio en Apodaca entró como Tecate porque el pie decía «Tecate Six».
+
+### YouTube: Shorts y videos por feed público, sin llave y sin costo
+
+```bash
+python -m pulso youtube --probar
+```
+
+Lee unas pocas piezas de cada canal de `config/youtube.json` sin escribir nada,
+para ver cómo quedan zona y formato antes de poner `activo: true` en una fila.
+Como no cuesta nada, es el procedimiento normal y no un ritual previo al gasto:
+los números que cita la `nota` de cada fila salen de aquí. Luego:
+
+```bash
+python -m pulso youtube
+```
+
+Escribe `data/youtube.json`. Son 32 peticiones a feeds Atom públicos —dos
+listas por canal, `UUSH` para Shorts y `UULF` para videos largos— sin llave,
+sin cuota y sin secretos. **No es la API de datos**: ese es el otro módulo de
+YouTube, `pulso conversacion`, que sí necesita `YOUTUBE_API_KEY` y sí vive
+detrás de `YOUTUBE_HABILITADO`. Los datos de los dos no se suman.
+
+**No cosecha comentarios**: el feed no los trae. El documento sale con
+`cosecha_comentarios: false`, que es lo que impide leer sus ceros como una
+medición, y la tarjeta no pinta ni el botón de comentarios ni el de Analizar.
+Encenderlos costaría ~24 USD/mes con las 16 filas activas.
+
+La zona de cada pieza sale de su título y su descripción con el gacetero,
+**nunca de la fila del canal**: la de El Vigía decía Ensenada y nueve de sus
+quince Shorts eran nacionales. Por eso una fila no lleva `zona` y el validador
+la rechaza. `ambito` decide sólo el residuo, igual que en TikTok.
+
+Shorts y videos se cortan **por separado** y el muro emite la unión, porque sus
+vistas no miden lo mismo: desde el 31 de marzo de 2025 una vista de Short es
+cualquier arranque o repetición sin tiempo mínimo. Medido: mediana de 447
+vistas en Shorts contra 7 en videos, así que en un solo ranking los videos no
+entrarían nunca.
+
+**No existe trending por ciudad.** YouTube retiró su página de Trending y desde
+julio de 2025 el chart `mostPopular` de la API sólo devuelve Música, Películas
+y Gaming; toda superficie de tendencia, incluidas las de pago, es por país. Lo
+que se publica es lo más visto de las últimas 24 horas entre estos canales.
 
 ### X: tendencias por ubicación, sin sesión
 

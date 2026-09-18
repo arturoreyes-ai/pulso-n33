@@ -166,22 +166,35 @@ queda registrada en `docs/PLAN.md`.
 
 Esto es lo que hay, medido, no lo que se querría tener.
 
-| Zona | Prensa (catálogo) | Búsqueda | YouTube | Vivienda | Suelo | Crimen | Percepción |
+| Zona | Prensa (catálogo) | Búsqueda | YouTube (video) | Vivienda | Suelo | Crimen | Percepción |
 |---|---|---|---|---|---|---|---|
-| Tijuana | fuerte, 4 medios | — | fuerte, 6 canales | ✅ | ✅ | ✅ | ✅ |
+| Tijuana | fuerte, 4 medios | — | fuerte, 30 piezas al día | ✅ | ✅ | ✅ | ✅ |
 | Mexicali | fuerte | — | adecuado | ✅ | ✅ | ✅ | ✅ |
-| Ensenada | adecuada, 3 medios incluido El Vigía | — | débil | ❌ | ✅ | ✅ | ❌ |
+| Ensenada | adecuada, 3 medios incluido El Vigía | — | adecuado, casi todo Shorts | ❌ | ✅ | ✅ | ❌ |
 | Playas de Rosarito | débil, 1 medio | sí | marginal, 1 canal | ❌ | ✅ | ✅ | ❌ |
-| Tecate | débil, 1 medio | sí | **hueco** | ❌ | ✅ | ✅ | ❌ |
+| Tecate | débil, 1 medio | sí | **hueco**: sin canal propio | ❌ | ✅ | ✅ | ❌ |
 | San Quintín | **sin medio local** | sí | **sin cobertura** | ❌ | ✅ | ✅ | ❌ |
 | San Felipe | **sin medio local** | sí | sin cobertura | ❌ | ✅ | ✅ | ❌ |
-| San Diego | fuerte, 4 medios | sí, en inglés | moderado | catastral | catastral | n/a | n/a |
+| San Diego | fuerte, 4 medios | sí, en inglés | moderado, en español | catastral | catastral | n/a | n/a |
+
+La columna de YouTube mide **lo que publican 16 canales**, Shorts y videos
+largos, en las últimas 24 horas. Es otra cosa que la conversación: ese panel
+—comentarios y su tono— sigue existiendo en el pipeline pero no en pantalla, y
+lo que se ve no tiene comentarios de ninguna clase. Tecate, San Quintín y San
+Felipe salen vacíos algunos días y el panel lo dice: «es un hueco, no un
+cero».
 
 Notas sobre los huecos:
 
 - **El Vigía**, el diario principal de Ensenada, **no publica feed**; ahora se
   lee su portada con Scrapy. Su canal de YouTube tira a Shorts nacionales en
-  vez de nota municipal.
+  vez de nota municipal: medido el 18 de septiembre de 2026, nueve de sus
+  quince Shorts eran nacionales —Trump, Milei, Morelos— y el más visto de toda
+  la corrida, con 3,985 vistas, hablaba de Trump y la Unión Europea. Por eso la
+  zona de cada pieza sale de lo que nombra, no del medio que la publicó.
+- **Canal 33**, dado de alta el 18 de septiembre de 2026, es la mejor fuente
+  medida de Tijuana en este canal: 21 de 30 piezas la nombran y su mediana de
+  vistas cuadruplica la del resto.
 - **Tecate** tiene una radiodifusora con 27 mil suscriptores que sube
   programas de radio, no noticias.
 - **San Quintín** se volvió municipio en 2020 y no se encontró ningún medio

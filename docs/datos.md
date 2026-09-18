@@ -803,7 +803,9 @@ crudo no se archiva nunca.
 Las mismas políticas (III.E.2.a) restringen **agregar** datos de canales de
 distintos dueños. Un tablero que suma comentarios de varios medios roza esa
 línea. Conviene la opinión de un abogado antes de publicar este panel, y por
-eso el paso viene apagado detrás de `YOUTUBE_HABILITADO`.
+eso el paso viene apagado detrás de `YOUTUBE_HABILITADO`. Esa bandera cubre
+**este** módulo y nada más: `pulso/youtube.py` lee feeds Atom públicos, que no
+son datos de la API, y corre sin compuerta.
 
 ### En GitHub Actions
 
@@ -1232,6 +1234,163 @@ No hay hashtags, y no es un olvido. Un hashtag no lleva `zona`, por la misma
 razón que no la lleva una búsqueda de Google Noticias: se la acreditaría a
 todo comentario que no nombre lugar alguno, que es el bug de El Imparcial y
 Hermosillo con otro disfraz.
+
+## `data/youtube.json` — Shorts y videos de YouTube por feed público
+
+Tercera plataforma de la familia `redes`, con el mismo contrato que
+`data/redes.json` y `data/tiktok.json` (`plataforma: "youtube"`) y tres
+diferencias que importan. La escribe `python -m pulso youtube`.
+
+**No sale de la API de datos.** Sale de las dos listas de reproducción
+automáticas que YouTube genera por canal y sirve por Atom, sin llave, sin
+cuota y sin OAuth:
+
+```
+https://www.youtube.com/feeds/videos.xml?playlist_id=UUSH<id del canal sin UC>   Shorts
+https://www.youtube.com/feeds/videos.xml?playlist_id=UULF<id del canal sin UC>   videos largos
+```
+
+Es un documento de sindicación público, del mismo tipo que los quince feeds de
+prensa de `config/medios.json`. Esa distinción no es cosmética: las Políticas
+para Desarrolladores de YouTube (III.E.2.a sobre agregar canales de distintos
+dueños, III.E.4.d sobre los 30 días) atan los datos de la **API**, que es lo
+que lee el otro módulo de YouTube, `pulso/conversacion.py` → `conversacion.json`.
+Por eso aquel viene apagado detrás de `YOUTUBE_HABILITADO` y este no, y por eso
+**los datos de los dos no se suman en un mismo agregado**.
+
+**El prefijo no está documentado, y lo que compra el derecho a usarlo es que la
+lista no clasifica.** Cada entrada trae su propio enlace —`/shorts/` o
+`/watch?v=`— y de ahí sale el formato. La lista es sólo una estrategia de
+lectura barata. Cuando las dos no coinciden manda el enlace y la discrepancia
+se cuenta en `salud[].reclasificados`: el día que YouTube deje de honrar el
+prefijo, el contador lo grita en la banda de salud en vez de callárselo. No es
+hipotético — el 18 de septiembre de 2026 la lista `UULF` de Zeta, la de «solo
+videos largos», traía diez entradas con enlace `/shorts/`.
+
+### Las tres diferencias con Instagram y TikTok
+
+**1. No hay comentarios, y el documento lo dice.** El feed público no los trae.
+Todos los conteos de conversación salen en cero, y para que un cero no se lea
+como medición la raíz lleva:
+
+| campo | tipo | qué dice |
+|---|---|---|
+| `cosecha_comentarios` | bool | `false` aquí. Cuando es `false`, el validador **exige** que `comentarios_vigentes`, `opinion`, `repetidos` y `reacciones` sean 0 y que `por_tema` esté vacío, y calla el aviso «post destacado sin comentarios cosechados», que si no saldría en las ~80 filas de cada corrida y dejaría de ser una señal. Ausente se lee `true`: un corte anterior al 18 de septiembre de 2026 no lo trae y sí cosechaba. |
+
+Sin ese campo, un panel sin cosecha y uno donde nadie comentó serían el mismo
+archivo. Es la distinción entre «sin dato» y «0» aplicada al documento entero.
+La interfaz lo lee para no pintar el botón de comentarios ni el de Analizar.
+
+**2. Las cifras son otras, y las que faltan faltan a propósito.**
+
+| campo | obligatorio en | qué es |
+|---|---|---|
+| `reproducciones` | youtube | `media:statistics@views`. Aquí ordena el corte, así que un 0 es cero medido y no se omite; en Instagram y TikTok sigue siendo opcional y sólo se emite si es mayor que 0. |
+| `valoraciones` | youtube | `media:starRating@count`. **No se llama `likes`** a propósito: de 162 entradas sondeadas el `@average` sólo vale `5.00` o `0.00`, nunca algo intermedio, que es lo que se espera desde que no hay dislikes —o sea que casi seguro son los likes—, pero Google no lo documenta en ninguna parte y bautizarlo así sería una mentira tranquila sobre lo que la fuente publica. Tampoco es campo de pantalla: existe para el archivo y como segundo criterio de orden, la misma categoría que `duracion` en TikTok. |
+| `likes`, `comentarios` | **ausentes** | El feed público no los trae. Su ausencia es «sin dato» y el validador los **rechaza** si aparecen: un `comentarios: 0` se leería como «nadie comentó» cuando lo cierto es que la fuente no lo dice. |
+| `duracion` | ausente | El feed no la trae. |
+| `creador` | ausente | El publicador **es** la `cuenta`, una fila del catálogo con `nombre` impreso. Un `creador` sería el mismo hecho dos veces y la segunda copia es una clave de identidad. |
+
+El orden emitido es `(-reproducciones, -valoraciones, url)`, no el
+`(-likes, -comentarios, url)` de las otras dos. Vive en
+`PLATAFORMAS_REDES["youtube"]["orden"]` del validador y tiene que coincidir con
+`ORDEN` de `pulso/youtube.py` y con `compararPorMerito` de
+`web/src/lib/dominio/publicaciones.ts`: si divergen, `data/` se reescribe en
+cada corrida y el guardia `git diff --cached --quiet` del cron deja de detectar
+«sin cambios».
+
+**3. Hay dos formatos y el corte se hace por separado.**
+
+| campo | tipo | qué dice |
+|---|---|---|
+| `formato` | `"short"` \| `"video"` | Sólo YouTube, y obligatorio ahí. También decide la proporción del embed: 9:16 para un Short, 16:9 para un video largo. |
+
+`_destacados` corta dentro de cada formato y dentro de cada `(formato, zona)`,
+y emite la unión —el mismo patrón con el que ya unía el corte global con el de
+cada zona—. `destacados_maximo` es por `(zona, formato)`.
+
+El motivo no es estético: **las vistas de los dos formatos no miden lo mismo**.
+Desde el 31 de marzo de 2025 YouTube cuenta una vista de Short como *cualquier
+arranque o repetición, sin tiempo mínimo de reproducción*, y la de un video
+largo no. Es el mismo campo `viewCount` contando dos eventos distintos. Medido
+el 18 de septiembre de 2026 sobre los canales del corredor: mediana de **447**
+vistas en Shorts contra **7** en videos. En un solo ranking los videos no
+entran nunca, y el muro no se engrosa nada.
+
+Y engrosarlo es el punto: los dos formatos son complementarios, no redundantes.
+Cuatro de los once canales del corredor publican casi sólo videos largos
+—Uniradio publicó 0 Shorts y 10 videos en siete días— y otros tres casi sólo
+Shorts. Sobre siete días los dos juntos llevan la cobertura de Tecate de 10 a
+16 piezas, la de Playas de Rosarito de 7 a 15 y la de San Quintín de 6 a 15.
+
+### La zona sale del pie, no de la fila del canal
+
+Como en TikTok: `zonas.alcance(titulo + "\n" + descripcion, None)`, con el
+segundo argumento **siempre** `None`. Se publica `alcance` al lado de `zona`,
+con las mismas cuatro etiquetas y la misma tabla de `ambito`.
+
+El caso, medido: la fila de El Vigía dice Ensenada y nueve de sus quince Shorts
+son nacionales —Trump, Milei, las Malvinas, Morelos, Cuautla—, con el más visto
+de toda la corrida, 3,985 vistas, hablando de Trump y la Unión Europea.
+Estamparle la zona de la fila pondría eso al frente del muro de Ensenada. No es
+aislado: PSN dice Tijuana y sus seis Shorts salieron `nacional`; Síntesis dice
+Tijuana y publicó San Diego; AFN dice Tijuana y publicó Ensenada. El feed de
+YouTube de un medio es su canal nacional y viral, no su cobertura municipal.
+
+Por eso `config/youtube.json` **no tiene campo `zona`** y el validador lo
+rechaza: un campo que existe acaba pasándose. La `zona` de cada fila de
+`cuentas[]` es `estatal`, que es como este repo escribe «no reclama un lugar».
+
+### `salud[]`
+
+| campo | qué cuenta |
+|---|---|
+| `entradas` | cuántas `<entry>` devolvió el feed. No hay un conteo facturado que reportar —no se paga nada— y es el denominador honesto de lo de abajo. |
+| `posts` | cuántas entraron al catálogo. |
+| `reclasificados` | cuántas venían en una lista y su enlace decía el otro formato. Ver arriba. |
+| `descartados` | enlace ilegible, sin fecha, o formato apagado en el config. |
+| `fuera` | tiradas por el ámbito: nombran un lugar de fuera de Baja California en una fila `regional`. |
+| `estado` | `ok`, `fallo` o **`sin_lista`**. |
+
+`sin_lista` es el 404 de una lista automática que el canal no tiene —el caso es
+`yt_televisamxl`, que no tiene Shorts—. No es `fallo`, porque nada se rompió, y
+no es `ok` con `posts: 0`, porque eso se lee «hoy no publicó». Es «sin dato»
+contra «0» en la banda de salud.
+
+`crudos`, `comentarios` y `con_subtitulos` no existen aquí.
+
+### `gasto`
+
+Sale en ceros y eso es correcto: este módulo no gasta. Se emite igual para que
+el documento no cambie de forma entre plataformas.
+
+### No hay `data/youtube-comentarios.json`
+
+No se cosechan comentarios, así que no hay archivo de texto. El glob
+`data/*-comentarios.json` de `.gitignore` ya lo cubriría el día que se
+enciendan —es exactamente el caso que ese glob anticipó—, y el validador
+verifica la línea en cuanto el archivo exista.
+
+### `config/youtube.json`
+
+Canales, no búsquedas. Existe aparte de `config/canales.json` —el catálogo del
+módulo de la API— porque los dos leen canales de YouTube y ahí se acaba el
+parecido: allá `zona` es obligatoria y aquí es un error, allá el documento
+explica la cuota de la API y aquí no aplica, y los `activo` de allá responden
+preguntas sobre videos largos que no dicen nada de los Shorts.
+
+| campo | qué es |
+|---|---|
+| `id` | `^yt_[a-z0-9_]{2,20}$` |
+| `canal` | el id `UC…` de 24 caracteres. Las listas se arman **reemplazando** el `UC` por `UUSH` o `UULF`, no anteponiéndolo. |
+| `formatos` | subconjunto no vacío de `["short", "video"]`. Es para apagar un formato que el canal publica y **no sirve** —El Vigía entra como `["short"]` porque sus videos son «Resumen diario», digestos publicados por duplicado—, no uno que no publica. |
+| `ambito` | `regional` \| `nacional` \| `internacional`. Decide el residuo, nunca la zona. |
+| `idioma` | `es` \| `en`. Del config, nunca adivinado del texto. |
+| `activo`, `verificado`, `nota` | La `nota` cita el sondeo con sus números; es de donde salen los porcentajes de este documento. |
+
+**No lleva `zona`**, y el validador lo dice con el caso de El Vigía en el
+mensaje.
+
 
 ## `data/tendencias.json` — tendencias de X por ubicación
 

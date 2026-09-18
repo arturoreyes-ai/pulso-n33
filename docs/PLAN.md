@@ -489,6 +489,67 @@ implementacion se anotan arriba, no editando el texto de abajo. -->
 
 ---
 
+> ### Nota de implementación — YouTube: Shorts y videos, por feed público
+>
+> **El cliente pidió el 18 de septiembre de 2026 ver los Shorts de noticias
+> por ciudad**, «los que están subiendo y los más vistos», y añadir seis
+> canales: `@canal33noticias`, `@imagennoticias`, `@Milenio`, `@UnoTv`,
+> `@NMas` y `@siempreenlanoticia` (este último ya estaba en el catálogo). §3
+> sólo contemplaba YouTube como fuente de **comentarios**, por la API de
+> datos; esto es otra cosa y por eso es un módulo aparte.
+>
+> **Sale gratis, y esa es la noticia.** Los Shorts y los videos se leen de dos
+> listas automáticas que YouTube genera por canal y sirve por Atom (`UUSH` y
+> `UULF`), sin llave, sin cuota y sin OAuth. Son documentos de sindicación
+> públicos, del mismo tipo que los quince feeds de prensa que el pipeline ya
+> lee. No se toca la API de datos, así que la regla de §3 de no llamar nunca a
+> `search.list` sigue intacta —y con ella su presupuesto—, y las Políticas
+> para Desarrolladores que tienen apagado el panel de conversación
+> (III.E.2.a, III.E.4.d) no atan esto: hablan de datos de la API. Son dos
+> módulos de YouTube con fundamentos distintos y sus datos no se suman.
+>
+> **«Trending» significa aquí «lo más visto de las últimas 24 horas», y no
+> puede significar otra cosa.** YouTube retiró su página de Trending y desde
+> el 21 de julio de 2025 el chart `mostPopular` de la API sólo devuelve
+> Música, Películas y Gaming. **No existe trending por ciudad a ningún
+> precio**: toda superficie de tendencia, incluidas las de pago, es por código
+> ISO de país. Lo que hay es el conteo de vistas que YouTube publica por
+> pieza, y la ciudad sale de lo que la pieza nombra.
+>
+> **Entraron los videos largos además de los Shorts, y el corte se hace por
+> separado.** El cliente observó que los Shorts regionales son pocos y que los
+> abundantes son nacionales, y los números le dan la razón: los dos formatos
+> juntos duplican el volumen y llenan justo las zonas delgadas —Tecate de 10 a
+> 16 piezas en siete días, Rosarito de 7 a 15, San Quintín de 6 a 15—, y
+> cuatro de los once canales del corredor publican casi sólo videos largos.
+> Pero no se mezclan en un solo ranking: desde el 31 de marzo de 2025 una
+> vista de Short cuenta cualquier arranque o repetición sin tiempo mínimo y la
+> de un video largo no, así que es el mismo campo contando dos eventos
+> distintos. Medido: mediana de 447 vistas contra 7. Mezclados, los videos no
+> entrarían nunca.
+>
+> **De los cinco canales nuevos, uno es regional y cuatro son nacionales**, y
+> se sondearon uno a uno antes de encenderlos. `@canal33noticias` resolvió 80%
+> a zona del producto —21 de 30 piezas nombran Tijuana— con mediana de 1,856
+> vistas: es la mejor fuente medida del corredor en este canal. `@NMas`,
+> `@Milenio`, `@UnoTv` e `@imagennoticias` resolvieron entre 3% y 13%, así que
+> entraron con `ambito: nacional`: pueblan la cubeta México del lector y nunca
+> se le acreditan a una ciudad.
+>
+> **Quedó pendiente el texto de los comentarios.** El feed no lo trae y
+> cosecharlo cuesta un actor de Apify, ~24 USD/mes con las 16 filas activas al
+> volumen medido. El cliente decidió el mismo día dejarlo apagado por ahora,
+> así que el panel no tiene comentarios de ninguna clase y tampoco el botón
+> **Analizar**. El documento lo dice con `cosecha_comentarios: false` en vez de
+> salir en ceros, que se leerían como «nadie comentó».
+>
+> **La pestaña «YouTube» del lector dejó de ser el panel agregado de
+> comentarios.** Ese panel llevaba congelado desde el 4 de septiembre de 2026
+> porque el cron nunca lo refresca, y salió del lector junto con
+> `paneles/conversacion.tsx`. El pipeline que lo produce sigue intacto.
+
+---
+
 # Pulso N33 — Project Plan
 
 Regional intelligence dashboard for the Tijuana–San Diego corridor, Tecate, Rosarito, Ensenada and San Quintín.

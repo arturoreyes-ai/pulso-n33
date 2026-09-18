@@ -96,7 +96,9 @@ and every prior commit. This is a compliance boundary, not a size optimisation.
 
 Related: III.E.2.a restricts *aggregating* data across channels of different
 owners, so the whole conversation panel ships **off** behind
-`YOUTUBE_HABILITADO`, pending counsel. Do not enable it by default.
+`YOUTUBE_HABILITADO`, pending counsel. Do not enable it by default. None of
+this binds `pulso/youtube.py`, which reads public Atom feeds rather than the
+API — see «YouTube tiene dos módulos» below.
 
 ### Instagram comment text is published, but never committed
 
@@ -253,6 +255,118 @@ estimated the day the question came up. It arrives free with every result.
 `salud[].con_subtitulos` — for how many videos captions existed — because that
 is the number that decides whether reading them is worth it. A caption track is
 the video's body, and aggregation stays at headline, source and link.
+
+### YouTube tiene dos módulos y no comparten fundamento legal
+
+`pulso/conversacion.py` (antes `pulso/youtube.py`) lee la **API de datos** con
+llave y escribe `data/conversacion.json`. `pulso/youtube.py` lee los **feeds
+Atom públicos** de cada canal y escribe `data/youtube.json`. La diferencia
+decide todo lo demás: las Políticas para Desarrolladores (III.E.2.a sobre
+agregar canales de distintos dueños, III.E.4.d sobre los 30 días) atan los
+datos de la API y no un documento de sindicación público, que está en el mismo
+plano que los quince feeds de prensa de `config/medios.json`. Por eso el
+primero vive detrás de `YOUTUBE_HABILITADO` pendiente de opinión legal y el
+segundo corre sin compuerta, y por eso **sus datos no se suman en un mismo
+agregado**. Cada uno tiene su catálogo —`config/canales.json` y
+`config/youtube.json`— y no se fusionan: allá `zona` es obligatoria y aquí es
+un error del validador.
+
+Desde el 18 de septiembre de 2026 la pestaña «YouTube» del lector es el visor
+del segundo. El panel agregado de comentarios que ocupaba ese lugar salió, con
+`paneles/conversacion.tsx`: llevaba congelado desde el 4 de septiembre porque
+el cron nunca lo refresca. El pipeline de `conversacion.py` sigue intacto y
+`data/conversacion.json` se sigue escribiendo cuando se corre a mano —el
+historial de git es el archivo—; lo que cambió es qué se pinta.
+
+**Las listas `UUSH` y `UULF` no están documentadas, y lo que compra el derecho
+a usarlas es que no clasifican.** YouTube genera dos listas automáticas por
+canal, reemplazando el `UC` del id: `UUSH` son los Shorts y `UULF` los videos
+largos. `pulso/conversacion.py` ya había rechazado el atajo hermano (`UC`→`UU`)
+porque «falla en silencio», y aquí no puede: cada entrada del feed trae su
+propio enlace, `/shorts/` o `/watch?v=`, y **el enlace es la clasificación**.
+La lista es sólo una estrategia de lectura barata. Cuando las dos discrepan
+manda el enlace y la discrepancia se cuenta en `salud[].reclasificados`, así
+que el día que el prefijo deje de significar lo que creemos el contador lo
+grita. No es una precaución teórica: el 18 de septiembre la lista `UULF` de
+Zeta —la de «solo videos largos»— traía diez entradas con enlace `/shorts/`.
+
+**La zona sale del pie, como en TikTok, y por un caso medido.** La fila de El
+Vigía decía Ensenada; nueve de sus quince Shorts son nacionales —Trump, Milei,
+las Malvinas, Morelos, Cuautla— y el más visto de toda la corrida, con 3,985
+vistas, hablaba de Trump y la Unión Europea. Estampar la zona de la fila,
+que es el modelo de Instagram, pondría eso al frente del muro de Ensenada. PSN
+dice Tijuana y sus seis Shorts salieron `nacional`; Síntesis dice Tijuana y
+publicó San Diego; AFN dice Tijuana y publicó Ensenada. **El feed de YouTube de
+un medio es su canal nacional y viral, no su cobertura municipal** — el mismo
+diario hace nota de colonia en su portada y Shorts de Trump aquí. Así que
+`alcance(texto, None)`, con el segundo argumento siempre `None`, y
+`config/youtube.json` **sin campo `zona`**: un campo que existe acaba pasándose,
+y que el validador lo rechace sale más barato que un comentario pidiendo que no.
+La tabla de `ambito` se movió a `redes.py::zona_por_ambito` y `tiktok._zona`
+quedó de envoltura: copiada dos veces, una corrección llega a una sola.
+
+**Los dos formatos se cortan por separado porque sus vistas no miden lo
+mismo.** Desde el 31 de marzo de 2025 YouTube cuenta una vista de Short como
+cualquier arranque o repetición, sin tiempo mínimo, y la de un video largo no:
+es el mismo campo `viewCount` contando dos eventos distintos. Medido el 18 de
+septiembre: mediana de **447** vistas en Shorts contra **7** en videos. En un
+solo ranking los videos no entran nunca. `_destacados` corta dentro de cada
+formato y dentro de cada `(formato, zona)` y emite la unión, que es el mismo
+patrón con el que ya unía el corte global con el de cada zona; el orden emitido
+sigue siendo global, porque esa regla existe por ruido de diff. **No es
+decoración: son complementarios.** Cuatro de los once canales del corredor
+publican casi sólo videos largos —Uniradio publicó 0 Shorts y 10 videos en
+siete días— y otros tres casi sólo Shorts; juntos llevan Tecate de 10 a 16
+piezas en siete días, Rosarito de 7 a 15 y San Quintín de 6 a 15.
+
+**Lo que el feed no trae se publica como ausente.** No hay conteo de
+comentarios ni duración, así que `likes` y `comentarios` **no existen** en un
+destacado de YouTube y el validador los rechaza: un `comentarios: 0` se leería
+como «nadie comentó» cuando lo cierto es que la fuente no lo dice. Ordena por
+`reproducciones` con `valoraciones` de desempate. `valoraciones` es
+`media:starRating@count` y **no se llama `likes`** — el sondeo apunta a que lo
+son, pero Google no lo documenta y bautizarlo así sería una mentira tranquila.
+El orden vive en tres sitios que tienen que coincidir: `PLATAFORMAS_REDES` del
+validador, `ORDEN` de `pulso/youtube.py` y `compararPorMerito` de
+`web/src/lib/dominio/publicaciones.ts`.
+
+**No se cosechan comentarios, y el documento lo dice en vez de salir en
+ceros.** `cosecha_comentarios: false` en la raíz obliga a que todos los conteos
+de conversación sean 0 y calla el aviso por post, que si no saldría en las ~80
+filas de cada corrida. Sin ese campo, un panel sin cosecha y uno donde nadie
+comentó serían el mismo archivo. La tarjeta lo lee para no pintar ni el botón
+de comentarios ni el de **Analizar** —no hay texto que leerle a un modelo—, y
+lo decide por el campo y no por la red, para que encenderlos después sea un
+cambio de datos y no de código. Encenderlos costaría ~24 USD/mes con las 16
+filas activas, medido; queda pendiente y **YouTube no entra a `RedAnalizable`**
+mientras tanto.
+
+**El paso del cron va sin compuerta, y las dos candidatas son las
+equivocadas.** `APIFY_HABILITADO` regula gasto y aquí no hay ninguno: colgarlo
+de ahí haría que una decisión de facturación borrara en silencio un panel
+gratuito. `YOUTUBE_HABILITADO` existe por políticas que hablan de datos de la
+API, y colgarlo de ahí afirmaría que la bandera trata de YouTube-como-marca en
+vez de las políticas, congelando una posición legal que nadie tomó.
+
+**No existe trending por ciudad, a ningún precio.** YouTube retiró su página de
+Trending y desde el 21 de julio de 2025 el chart `mostPopular` de la API sólo
+devuelve Música, Películas y Gaming; todas las superficies de tendencia,
+incluidas las de Apify, son por código ISO de **país**. Lo que se publica es
+«lo más visto de las últimas 24 h entre estos canales», zonificado por el pie.
+No es «lo que es tendencia en Tijuana» y el panel no puede decir que lo sea.
+Y `search.list` sigue prohibido por la regla de `docs/PLAN.md`: cubeta propia
+con tope de 100 llamadas al día. Este módulo no toca la API de datos.
+
+**Sondear no cuesta, así que es el procedimiento normal.** `python -m pulso
+youtube --probar` lee unas pocas entradas por canal sin escribir nada, y es lo
+que hay que correr antes de poner `activo: true` en una fila. Los cinco canales
+que el cliente pidió el 18 de septiembre se dieron de alta así, y los números
+de cada sondeo están en la `nota` de su fila: `@canal33noticias` resolvió 80% a
+zona del producto —21 de 30 en Tijuana, mediana de 1,856 vistas— y entró como
+`regional`; `@NMas`, `@Milenio`, `@UnoTv` e `@imagennoticias` resolvieron entre
+3% y 13% y entraron como `nacional`, donde pueblan la cubeta México y nunca se
+le acreditan a una ciudad. `@siempreenlanoticia` ya estaba.
+
 
 ### The five product rules, as code constraints
 
@@ -632,7 +746,10 @@ already refused on the record in `docs/PLAN.md` §3.
   (logged-out, pending counsel, behind `APIFY_HABILITADO`). The clean
   alternative is written down: the official X API charges $0.01 per trends
   request, pay-per-use. Do not widen this to tweets.
-- **The YouTube panel stays off** behind `YOUTUBE_HABILITADO`.
+- **The YouTube *conversation* panel stays off** behind `YOUTUBE_HABILITADO`.
+  That flag covers `pulso/conversacion.py`, the Data API reader, and nothing
+  else. `pulso/youtube.py` reads public Atom feeds, is not API Data, and runs
+  ungated — see the section above on why those are two different questions.
 - Note that the published site is **public even when the repo is private**,
   and would publish `data/*.json` and `config/roster.json` along with it. That
   is why `DESPLEGAR_TABLERO` exists and defaults to off.
