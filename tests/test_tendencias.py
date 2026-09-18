@@ -482,7 +482,6 @@ class TestValidarTodo(unittest.TestCase):
     def _corrida(self, raiz):
         datos = os.path.join(raiz, "data")
         os.makedirs(datos)
-        os.makedirs(os.path.join(raiz, "efimero"))
         for nombre in ("notas", "fuentes", "temas", "estado"):
             shutil.copy(os.path.join("data", nombre + ".json"),
                         os.path.join(datos, nombre + ".json"))

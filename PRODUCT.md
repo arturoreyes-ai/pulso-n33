@@ -30,8 +30,9 @@ en la frontera quedaron inicialmente despriorizados. El 8 de septiembre de
 Estados Unidos en San Ysidro y Otay Mesa, incluidos los peatones y PedWest.
 Es una consulta del servidor Next.js independiente del cron: no crea histórico
 en git ni requiere base de datos. Las barras miden minutos, no longitud de fila.
-Cada carril muestra su hora; reportes de más de 90 minutos quedan fuera del
-resumen para leer al aire. No incluye sentido sur, CBX ni carga comercial.
+Cada carril muestra su hora; si el reporte tiene más de 90 minutos, la cifra se
+conserva y la página marca que los datos no están al día. No incluye sentido
+sur, CBX ni carga comercial.
 
 Que el cliente sea un medio tiene una consecuencia legal directa, no
 decorativa: la agregación se queda en **titular, fuente y enlace**, nunca el
@@ -397,9 +398,9 @@ abogado.
 El 8 de septiembre de 2026 la dirección pidió ver los comentarios de Instagram
 tal cual, no solo contados. Se hace, con tres límites que no son de estilo:
 
-- **El texto no se commitea.** Va a `efimero/redes-comentarios.json`, carpeta
-  ignorada por git que el pipeline regenera en cada corrida desde un caché que
-  se purga a los 30 días. El sitio la copia al construir. Lo que sale del
+- **El texto no se commitea.** Va a `data/redes-comentarios.json`, que git
+  ignora por nombre y que el pipeline regenera en cada corrida desde un caché
+  que se purga a los 30 días. El sitio lo copia al construir. Lo que sale del
   caché desaparece de la página en la siguiente corrida; el historial de git
   nunca lo tuvo.
 - **La identidad no existe en ningún archivo.** Usuario, foto e id de quien

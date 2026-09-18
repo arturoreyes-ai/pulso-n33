@@ -5,7 +5,7 @@ que la de Instagram", y la de Instagram tenia ~800 lineas de las que solo
 `_limpiar`, `_limpiar_post`, `sondear` y `cosechar` hablaban de Instagram. Lo
 demas -- el cache con retencion, la marca de brigada, las cinco cubetas de
 tono, el cruce con temas de prensa, la union de top-15 general y por zona, el
-archivo de texto de efimero/ con la regla del "ver mas" -- es la misma logica
+archivo de texto publicado con la regla del "ver mas" -- es la misma logica
 para cualquier plataforma, y copiarla dos veces era garantizar que una
 correccion llegara a una sola.
 
@@ -23,8 +23,9 @@ Lo que NO vive aqui, a proposito:
 
 Las reglas de fondo estan en el encabezado de pulso/instagram.py y en
 AGENTS.md: el texto crudo vive en cache/ (30 dias, fuera de git), a data/
-llegan conteos y posts destacados, el texto publicado va a efimero/ (fuera de
-git), y la identidad de quien comenta no se guarda en ningun lado.
+llegan conteos y posts destacados, el texto publicado va a data/ pero queda
+fuera de git (.gitignore lo excluye por nombre y el validador lo exige), y la
+identidad de quien comenta no se guarda en ningun lado.
 """
 
 import hashlib
@@ -57,7 +58,7 @@ VUELTAS_GARANTIZADAS = 1
 # titular, recortada. 160 es el largo con que ya se leen los titulares.
 TITULO_MAXIMO = 160
 
-# Comentarios publicados por post en efimero/: los primeros VISIBLES siempre;
+# Comentarios publicados por post: los primeros VISIBLES siempre;
 # del sexto al MAXIMO solo si tienen likes (regla del cliente del 8 de
 # septiembre de 2026). El texto se recorta: la mediana del cache de Instagram
 # es 30 caracteres y el maximo 807.
@@ -591,7 +592,7 @@ def _ordenar_comentarios(lista):
 def publicar_comentarios(comentarios, destacados, ahora,
                          visibles=COMENTARIOS_VISIBLES, maximo=COMENTARIOS_MAXIMO,
                          texto_maximo=TEXTO_MAXIMO, *, plataforma):
-    """El archivo de efimero/: texto de los comentarios mas votados por post.
+    """El archivo de texto publicado: los comentarios mas votados por post.
 
     Es la decision del 8 de septiembre de 2026 (ver pulso/instagram.py).
     Reglas que la acotan y no son de estilo:

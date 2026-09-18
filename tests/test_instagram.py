@@ -762,7 +762,7 @@ class TestDestacados(BaseCache):
 
 
 class TestComentariosPublicados(BaseCache):
-    """El archivo de efimero/: texto sin identidad, y la regla del 'ver mas'."""
+    """El archivo de texto publicado: sin identidad, y la regla del 'ver mas'."""
 
     POST = "https://www.instagram.com/p/AAA/"
 

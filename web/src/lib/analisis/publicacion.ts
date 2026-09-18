@@ -18,8 +18,8 @@ import { reglaRota } from "./reglas";
  *    pantalla: el pie que el medio escribio y el texto de los comentarios mas
  *    votados, que la hoja «Comentarios» ya muestra. Ver datos-redes.ts, que es
  *    donde vive esa frontera.
- *  - NO guarda nada. La ficha vuelve al lector y no va a `data/`, a `cache/`
- *    ni a `efimero/`.
+ *  - NO guarda nada. La ficha vuelve al lector: no se escribe en `data/` ni
+ *    en `cache/`.
  *  - NO publica identidad. No existe en ningun archivo: `ownerUsername`, ids y
  *    avatares se tiran en la ingesta, asi que aqui no hay nada que filtrar.
  *  - NO cruza tono con figura (regla 5). El prompt lo prohibe.
@@ -159,7 +159,7 @@ export async function responderAnalisisPublicacion(
   // septiembre de 2026: el pie, la salvedad y la idea para redes siguen
   // sirviendo, y la seccion de comentarios dice que faltan. Hoy es el caso de
   // casi todas las publicaciones, y en un despliegue construido desde git puro
-  // lo es siempre, porque `efimero/` no esta en git.
+  // lo es siempre, porque el archivo de texto no esta en git.
   const comentarios = hallado.comentarios.slice(0, TOPE_COMENTARIOS);
   const leidos = comentarios.length;
 

@@ -15,8 +15,7 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
 
-def armar(destino="_site", origen="sitio", datos="data", config="config",
-          efimero="efimero"):
+def armar(destino="_site", origen="sitio", datos="data", config="config"):
     """Reconstruye el destino desde cero y devuelve la lista de archivos."""
     if os.path.isdir(destino):
         shutil.rmtree(destino)
@@ -26,14 +25,13 @@ def armar(destino="_site", origen="sitio", datos="data", config="config",
         raise FileNotFoundError("no existe la carpeta del sitio: {}".format(origen))
     shutil.copytree(origen, destino, dirs_exist_ok=True)
 
+    # Esto arrastra tambien el texto de los comentarios: no esta en git (ver
+    # .gitignore) pero si viaja al artefacto publicado, porque el workflow lo
+    # escribe en data/ justo antes de armar, desde el cache restaurado. Hasta
+    # el 17 de septiembre de 2026 vivia en efimero/ y necesitaba un copytree
+    # propio aqui. Si no esta, el sitio sale sin el y lo dice.
     if os.path.isdir(datos):
         shutil.copytree(datos, os.path.join(destino, "data"), dirs_exist_ok=True)
-
-    # El texto de los comentarios de Instagram no esta en git (ver .gitignore)
-    # pero si viaja al artefacto publicado: el workflow lo escribe justo antes
-    # de armar, desde el cache restaurado. Si no esta, el sitio sale sin el.
-    if os.path.isdir(efimero):
-        shutil.copytree(efimero, os.path.join(destino, "data"), dirs_exist_ok=True)
 
     # El roster viaja al sitio para poder mostrar el nombre de la figura, no
     # solo su id, sin duplicarlo en cada nota.
@@ -72,12 +70,6 @@ class Manejador(SimpleHTTPRequestHandler):
         if partes and partes[0] in ("data", "config"):
             base = self.raices[partes[0]]
             partes = partes[1:]
-            # /data/ se sirve desde data/, salvo lo que solo existe en
-            # efimero/ (el texto de comentarios, fuera de git).
-            if (partes and not os.path.exists(os.path.join(base, *partes))
-                    and "efimero" in self.raices
-                    and os.path.exists(os.path.join(self.raices["efimero"], *partes))):
-                base = self.raices["efimero"]
         return os.path.join(base, *partes) if partes else os.path.join(base, "index.html")
 
     def end_headers(self):
@@ -93,8 +85,7 @@ class Manejador(SimpleHTTPRequestHandler):
             print("  {} {}".format(codigo, args[0] if args else ""))
 
 
-def servir(puerto=8000, host="127.0.0.1", origen="sitio", datos="data", config="config",
-           efimero="efimero"):
+def servir(puerto=8000, host="127.0.0.1", origen="sitio", datos="data", config="config"):
     """Levanta el servidor de desarrollo. Bloquea hasta Ctrl+C."""
     raices = {
         "sitio": os.path.abspath(origen),
@@ -104,9 +95,6 @@ def servir(puerto=8000, host="127.0.0.1", origen="sitio", datos="data", config="
     for nombre, ruta in raices.items():
         if not os.path.isdir(ruta):
             raise FileNotFoundError("no existe la carpeta {}: {}".format(nombre, ruta))
-    # Opcional: es lo unico que puede faltar sin que sea un error.
-    if os.path.isdir(efimero):
-        raices["efimero"] = os.path.abspath(efimero)
 
     servidor = ThreadingHTTPServer((host, puerto), partial(Manejador, raices=raices))
     return servidor, raices

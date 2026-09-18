@@ -187,11 +187,13 @@ jobs:
       # Ver el aviso en ese archivo: un handle derivado del nombre del medio
       # da una cuenta ajena o vacia, y las dos se cobran igual.
       #
-      # Escribe dos cosas: data/redes.json (conteos y posts destacados, va a
-      # git) y efimero/redes-comentarios.json (el TEXTO de los comentarios,
-      # fuera de git: la carpeta esta ignorada y `git add data/` no la toca).
-      # El segundo sale del cache restaurado arriba y llega al sitio porque
-      # `pulso sitio` lo copia al armar _site, mas abajo.
+      # Escribe dos cosas, las dos en data/: redes.json (conteos y posts
+      # destacados, va a git) y redes-comentarios.json (el TEXTO de los
+      # comentarios, que NO va a git: .gitignore lo excluye por nombre con
+      # data/*-comentarios.json, asi que el `git add data/` de mas abajo no lo
+      # toca). El segundo sale del cache restaurado arriba y llega al sitio
+      # con el resto de data/. Hasta el 17 de septiembre de 2026 vivia en
+      # efimero/, una carpeta aparte.
       - name: Redes (Instagram)
         if: vars.APIFY_HABILITADO == 'true'
         env:
@@ -213,9 +215,9 @@ jobs:
       # de su pie con el gacetero, y el @ del creador si se publica (decision
       # del cliente, 8 sep 2026). Empezo con una sola, "tijuana noticias";
       # desde el 15 de septiembre de 2026 son once filas, ocho encendidas, y
-      # el `ambito` de cada una decide su residuo. Escribe
-      # data/tiktok.json (git) y efimero/tiktok-comentarios.json (fuera de
-      # git, viaja al sitio al armar _site).
+      # el `ambito` de cada una decide su residuo. Escribe data/tiktok.json
+      # (git) y data/tiktok-comentarios.json (fuera de git por la regla de
+      # .gitignore; viaja al sitio con el resto de data/).
       - name: TikTok (búsqueda)
         if: vars.APIFY_HABILITADO == 'true'
         env:
@@ -255,6 +257,12 @@ jobs:
         run: |
           git config user.name "pulso-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # data/*-comentarios.json NO entra aqui: lo excluye .gitignore, y
+          # esa linea es lo unico que separa el texto de los comentarios de
+          # un historial que no puede cumplir la retencion de 30 dias. Si
+          # alguna vez aparece un *-comentarios.json en un commit, esa linea
+          # es lo primero que hay que mirar; `pulso validar` falla antes de
+          # llegar aqui si falta (pulso/validador.py::_regla_gitignore).
           git add data/
           if git diff --cached --quiet; then
             echo "Sin cambios en data/"
@@ -273,14 +281,14 @@ jobs:
       #
       # SE DESPLIEGA DESDE EL RUNNER, no desde un build del host contra git, y
       # esa no es una preferencia de herramienta: es la unica forma de que el
-      # TEXTO de los comentarios llegue a la pagina. Vive en efimero/, fuera
+      # TEXTO de los comentarios llegue a la pagina. Esta en data/ pero fuera
       # de git por la retencion de 30 dias (ver .gitignore), asi que un host
       # que construya desde el repositorio nunca lo veria y publicaria los
-      # posts sin comentarios. Aqui, en cambio, la carpeta la acaba de
-      # escribir el paso de redes de esta misma corrida.
+      # posts sin comentarios. Aqui, en cambio, los acaba de escribir el paso
+      # de redes de esta misma corrida.
       #
-      # `pnpm build` corre scripts/sincronizar-datos.mjs, que copia data/ y
-      # tambien esos dos archivos de efimero/ a web/public/data.
+      # `pnpm build` corre scripts/sincronizar-datos.mjs, que copia data/
+      # entero a web/public/data, esos dos archivos incluidos.
       #
       # El tablero necesita un host con Node: next.config.ts deja `output` sin
       # definir a proposito para conservar las route handlers, y /api/garitas

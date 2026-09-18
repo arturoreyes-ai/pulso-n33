@@ -56,10 +56,15 @@ comentarios mas votados de cada post en el tablero. Eso revierte, solo para
 Instagram, el "nunca texto literal" que rige en YouTube (ahi hay politica
 escrita; aqui la decision es del cliente y queda registrada en docs/PLAN.md).
 
-Lo que NO cambia es el canal: el texto no entra a data/ ni a git. Va a
-`efimero/redes-comentarios.json`, una carpeta ignorada por git que
-`publicar_comentarios()` regenera en cada corrida desde el cache. El sitio la
-copia al construir. Asi la retencion de 30 dias sigue siendo ejecutable -- lo
+Lo que NO cambia es lo que importa del canal: el texto no entra a GIT. Va a
+`data/redes-comentarios.json`, que `.gitignore` excluye por nombre
+(`data/*-comentarios.json`) y que `publicar_comentarios()` regenera en cada
+corrida desde el cache. El sitio lo copia al construir con el resto de data/.
+Hasta el 17 de septiembre de 2026 vivio en una carpeta aparte, efimero/, que
+costaba un bucle de copia, un copytree, un respaldo en el servidor de
+desarrollo y una derivacion de directorio hermano en el validador; lo que la
+sustituye es una linea de .gitignore que pulso/validador.py verifica en cuanto
+el archivo existe. Asi la retencion de 30 dias sigue siendo ejecutable -- lo
 que se purga del cache desaparece de la pagina en la corrida siguiente -- y
 el historial de git no conserva ni una frase. La identidad sigue sin
 ingerirse: la pagina muestra el comentario, nunca quien lo escribio.
@@ -441,6 +446,6 @@ def derivar(comentarios, ahora, salud, gasto, temas=None, publicaciones=None,
 def publicar_comentarios(comentarios, destacados, ahora,
                          visibles=COMENTARIOS_VISIBLES, maximo=COMENTARIOS_MAXIMO,
                          texto_maximo=TEXTO_MAXIMO):
-    """efimero/redes-comentarios.json. Ver pulso/redes.py::publicar_comentarios."""
+    """data/redes-comentarios.json (fuera de git). Ver pulso/redes.py::publicar_comentarios."""
     return _redes.publicar_comentarios(comentarios, destacados, ahora, visibles, maximo,
                                        texto_maximo, plataforma=PLATAFORMA)

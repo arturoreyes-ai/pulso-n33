@@ -994,13 +994,16 @@ aviso, no error.
 - `sentimiento` y `temas` de cada post se cuentan sobre su `opinion`, con las
   mismas exclusiones que el bloque global.
 
-## `efimero/redes-comentarios.json` — el texto de los comentarios
+## `data/redes-comentarios.json` — el texto de los comentarios
 
 **No está en git, a propósito.** El 8 de septiembre de 2026 la dirección pidió
 ver el texto de los comentarios más votados de cada post destacado. Se
 publica, pero el historial de git no puede cumplir una retención de 30 días,
-así que `python -m pulso redes` lo escribe en `efimero/` —carpeta ignorada,
-ver `.gitignore`— regenerándolo en cada corrida desde el caché. `pulso sitio` y
+así que `python -m pulso redes` lo escribe en `data/` pero `.gitignore` lo
+excluye por nombre (`data/*-comentarios.json`), regenerándolo en cada corrida
+desde el caché. Vivió en una carpeta aparte, `efimero/`, hasta el 17 de
+septiembre de 2026; `pulso validar` da error si el archivo existe y esa línea
+no está. `pulso sitio` y
 `web/scripts/sincronizar-datos.mjs` lo copian al artefacto **si existe**; un
 despliegue desde git puro sale sin él y el panel lo dice. `--sin-texto` lo
 omite.
@@ -1161,7 +1164,7 @@ URL de las dos pasadas se canonizan a `https://www.tiktok.com/@{handle}/video/{i
 porque llegan con distinto caso y query, y sin eso el cruce falla en silencio.
 `textLanguage` se ignora: el idioma sale del config.
 
-## `efimero/tiktok-comentarios.json` — el texto de los comentarios de TikTok
+## `data/tiktok-comentarios.json` — el texto de los comentarios de TikTok
 
 Idéntico a `redes-comentarios.json` (`plataforma: "tiktok"`), validado contra
 `data/tiktok.json` y con las claves de identidad de TikTok además prohibidas.

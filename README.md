@@ -372,17 +372,21 @@ los términos de cada plataforma más la LFPDPPP mexicana y la CPRA californiana
 ya que un comentario con nombre propio es dato personal en las dos. El texto
 crudo vive en `cache/`, ignorado por git y purgado en cada corrida.
 
-### El texto de los comentarios va a `efimero/`, no a git
+### El texto de los comentarios sale a `data/`, pero no a git
 
 El 8 de septiembre de 2026 la dirección pidió ver el texto de los comentarios
 más votados de cada post destacado. Se publica, pero **fuera de git**:
-`python -m pulso redes` escribe `efimero/redes-comentarios.json` (carpeta
-ignorada, ver `.gitignore`) desde el caché, y tanto `pulso sitio` como
-`web/scripts/sincronizar-datos.mjs` lo copian al artefacto si existe. Así la
+`python -m pulso redes` escribe `data/redes-comentarios.json` desde el caché, y
+`.gitignore` lo excluye por nombre (`data/*-comentarios.json`, un glob para que
+cualquier archivo de texto futuro quede fuera sin tener que acordarse). Tanto
+`pulso sitio` como `web/scripts/sincronizar-datos.mjs` lo llevan al artefacto
+con el resto de `data/`. Así la
 página lo muestra y el historial de git no conserva ni una frase, con lo que la
 retención de 30 días sigue siendo ejecutable. La identidad de quien comenta
 sigue sin ingerirse. Un despliegue hecho desde git puro sale sin ese archivo y
-el panel lo dice. `--sin-texto` lo omite; `--efimero RUTA` lo mueve.
+el panel lo dice. `--sin-texto` lo omite. Hasta el 17 de septiembre de 2026
+vivía en una carpeta aparte, `efimero/`; `pulso validar` falla si el archivo
+existe y la línea de `.gitignore` no está.
 
 ### TikTok: búsquedas, con `--probar` antes del cron
 
@@ -399,7 +403,7 @@ comentarios ni escribir nada, para ver con ojos humanos qué devuelve el filtro
 python -m pulso tiktok --sentimiento modelo
 ```
 
-Escribe `data/tiktok.json` y `efimero/tiktok-comentarios.json`. La zona de
+Escribe `data/tiktok.json` y `data/tiktok-comentarios.json` (fuera de git). La zona de
 cada video sale de su descripción con el gacetero, nunca de la consulta; el @
 del creador sí se publica, quien comenta no. El actor de comentarios cobra
 ~5 USD por 1,000 resultados: con las ocho búsquedas activas a 15 videos × 20
@@ -505,15 +509,15 @@ gh secret set VERCEL_PROJECT_ID
 ```
 
 **Se despliega desde el runner**, no desde un build del host contra git, y no
-es un detalle de herramienta. El texto de los comentarios vive en `efimero/`,
+es un detalle de herramienta. El texto de los comentarios está en `data/` pero
 fuera de git por la retención de 30 días, así que un host que construya desde
 el repositorio jamás lo vería y publicaría los posts sin comentarios. En el
-cron, en cambio, esa carpeta la acaba de escribir el paso de redes de la
-misma corrida, y `pnpm build` la copia a `web/public/data`.
+cron, en cambio, lo acaba de escribir el paso de redes de la misma corrida, y
+`pnpm build` lo copia a `web/public/data` con el resto de `data/`.
 
 **Hoy, sin embargo, publica la integración de Git de Vercel**, conectada al
 repo desde el 9 de septiembre de 2026: cada push a `main` construye producción,
-incluidos los cuatro commits diarios del bot, y ese build no ve `efimero/`, así
+incluidos los cuatro commits diarios del bot, y ese build no ve el texto, así
 que los posts salen sin el texto de sus comentarios y el panel lo dice. Encender
 el despliegue desde el runner sin apagar la integración pondría a los dos a
 competir por producción; cuál se queda es una decisión pendiente, no un

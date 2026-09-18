@@ -1057,7 +1057,7 @@ ETIQUETAS_COMENTARIO = ("positivo", "negativo", "neutral")
 # pipeline la sustituye por "@…"; aqui se exige que no quede ninguna.
 RE_MENCION_PUBLICADA = re.compile(r"@[A-Za-z0-9_.]{2,}")
 
-# Lo que si puede llevar efimero/redes-comentarios.json: exactamente estas
+# Lo que si puede llevar redes-comentarios.json: exactamente estas
 # cuatro claves por comentario. Cualquier otra es sospechosa, y las de
 # identidad son error con nombre propio (abajo).
 CLAVES_COMENTARIO_PUBLICADO = frozenset({"texto", "likes", "fecha", "sentimiento"})
@@ -1066,8 +1066,8 @@ CLAVES_PROHIBIDAS_COMENTARIO_PUBLICADO = (
     | frozenset({"id", "commentUrl", "autor", "author", "respuestas"}))
 
 # Campos de identidad que devuelven los actores de TikTok (clockworks). Se
-# tiran al ingerir en pulso/tiktok.py; si uno aparece en data/ o en efimero/,
-# el filtro se rompio antes del cache.
+# tiran al ingerir en pulso/tiktok.py; si uno aparece en cualquier archivo de
+# data/, el filtro se rompio antes del cache.
 CLAVES_PROHIBIDAS_TIKTOK = frozenset(
     {"uniqueId", "uid", "avatarThumbnail", "authorMeta", "nickName", "avatar", "cid",
      "profileUrl"})
@@ -1470,7 +1470,7 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
 
 
 def validar_redes_comentarios(datos, redes=None, plataforma="instagram"):
-    """efimero/redes-comentarios.json: el texto publicado, sin identidad.
+    """redes-comentarios.json: el texto publicado, sin identidad.
 
     Este archivo NO va a git (ver .gitignore) y se regenera en cada corrida.
     Lo que se valida es lo que lo acota: solo posts destacados, la regla del
@@ -2464,30 +2464,58 @@ def validar_estado(datos):
 
 # ------------------------------------------------------------------- todo
 
-def validar_todo(dir_config="config", dir_datos="data", hoy=None, dir_efimero=None):
+# La linea que mantiene el texto de los comentarios fuera de git. Se compara
+# como cadena exacta contra .gitignore: no se interpreta el archivo ni se
+# invoca a git, porque esto tiene que correr igual sin repositorio (CI valida
+# una salida en $RUNNER_TEMP) y porque una regla mas floja aceptaria un patron
+# que no cubre lo que dice cubrir.
+REGLA_GITIGNORE = "data/*-comentarios.json"
+
+
+def _regla_gitignore(dir_datos):
+    """Error si hay texto de comentarios y .gitignore no lo excluye.
+
+    POR QUE ES ERROR Y NO AVISO: el cron hace `git add data/` cada seis horas.
+    Si esa linea falta, el texto entra a git y ya no se puede sacar -- vive en
+    cada clon y en cada commit anterior, que es justo lo que la retencion de 30
+    dias (YouTube III.E.4.d, LFPDPPP, CPRA) prohibe. Un aviso se lee despues
+    del commit; esto tiene que fallar antes.
+
+    Mientras el texto vivio en efimero/ (hasta el 17 de septiembre de 2026) la
+    carpeta entera estaba ignorada y esta comprobacion no hacia falta. Al pasar
+    a data/, lo unico que lo separa de git es una linea de .gitignore, asi que
+    la linea se verifica en vez de confiarse.
+    """
+    raiz = os.path.dirname(os.path.normpath(dir_datos)) or "."
+    ruta = os.path.join(raiz, ".gitignore")
+    if not os.path.exists(ruta):
+        # Sin repositorio no hay nada que proteger: es el caso de CI validando
+        # una salida en un temporal.
+        return []
+    try:
+        with open(ruta, encoding="utf-8") as fh:
+            lineas = [l.strip() for l in fh]
+    except OSError as ex:
+        return ["gitignore: no se pudo leer {} ({})".format(ruta, ex)]
+    if REGLA_GITIGNORE in lineas:
+        return []
+    return ["gitignore: hay texto de comentarios en {} y {} no trae la linea '{}'; "
+            "sin ella el próximo `git add data/` lo mete a git para siempre".format(
+                dir_datos, ruta, REGLA_GITIGNORE)]
+
+
+def validar_todo(dir_config="config", dir_datos="data", hoy=None):
     """Valida todo lo que exista. data/ ausente es aviso, no error.
 
-    efimero/ es el texto de comentarios publicado fuera de git: se valida si
-    esta, contra el redes.json del mismo corte.
+    El texto de comentarios publicado vive en data/ como el resto de la
+    corrida, pero fuera de git: se valida si esta, contra el redes.json del
+    mismo corte. Hasta el 17 de septiembre de 2026 vivia en efimero/, y ese
+    directorio hermano habia que derivarlo de dir_datos para que
+    `validar --datos $RUNNER_TEMP/data` no emparejara el ./efimero del repo
+    contra un data/ ajeno. Al estar los dos archivos dentro de dir_datos, esa
+    clase de error deja de existir.
     """
     errores, avisos = [], []
-
-    # efimero/ y data/ son HERMANOS de una misma corrida: `pulso redes`
-    # escribe data/redes.json y efimero/redes-comentarios.json en el mismo
-    # paso. Por eso el valor por omision se DERIVA de dir_datos en vez de ser
-    # la constante "efimero".
-    #
-    # El caso que lo motivo es el propio comando que la documentacion manda
-    # correr. CI hace `correr --salida $RUNNER_TEMP/data` y luego
-    # `validar --datos $RUNNER_TEMP/data`; con el default fijo, eso emparejaba
-    # el ./efimero del repo -- que en una maquina con corridas reales tiene los
-    # dos archivos de texto -- contra un data/ ajeno que no trae redes.json ni
-    # tiktok.json. Resultado: dos errores de "huerfano" que no lo eran. En CI
-    # no se veia porque ahi no existe ./efimero, o sea que el modo de falla
-    # solo aparecia en local, que es donde nadie lo iba a creer.
-    if dir_efimero is None:
-        dir_efimero = os.path.join(
-            os.path.dirname(os.path.normpath(dir_datos)) or ".", "efimero")
 
     ruta_roster = os.path.join(dir_config, "roster.json")
     ruta_medios = os.path.join(dir_config, "medios.json")
@@ -2661,14 +2689,17 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None, dir_efimero=No
         errores += e
         avisos += a
 
-    # El texto publicado vive fuera de data/ y de git. Si esta, tiene que
-    # corresponder al archivo de conteos de este corte; solo, es huerfano.
+    # El texto publicado vive en data/ pero fuera de git. Si esta, tiene que
+    # corresponder al archivo de conteos de este corte; solo, es huerfano. Y
+    # que no este en git no puede quedar en un comentario: ver _regla_gitignore.
+    hay_texto = False
     for archivo_texto, nombre, plataforma in (
             ("redes-comentarios.json", "redes", "instagram"),
             ("tiktok-comentarios.json", "tiktok", "tiktok")):
-        ruta_texto = os.path.join(dir_efimero, archivo_texto)
+        ruta_texto = os.path.join(dir_datos, archivo_texto)
         if not os.path.exists(ruta_texto):
             continue
+        hay_texto = True
         if nombre not in leidos:
             errores.append("{}: existe {} sin {}.json en {}".format(
                 archivo_texto[:-5], ruta_texto, nombre, dir_datos))
@@ -2680,6 +2711,9 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None, dir_efimero=No
         except (ValueError, OSError) as ex:
             errores.append("{}: no se pudo leer {} ({})".format(
                 archivo_texto[:-5], ruta_texto, ex))
+
+    if hay_texto:
+        errores += _regla_gitignore(dir_datos)
 
     if ventana is not None:
         e, a = validar_archivo(dir_datos, ventana, roster, medios, hoy=hoy,

@@ -85,7 +85,7 @@ class TestComunicados(unittest.TestCase):
     def test_validador_revisa_documento_sin_prensa(self):
         with tempfile.TemporaryDirectory() as carpeta:
             Path(carpeta, "comunicados.json").write_text('{}', encoding="utf-8")
-            errores, _ = validar_todo(dir_datos=carpeta, dir_efimero=carpeta)
+            errores, _ = validar_todo(dir_datos=carpeta)
             self.assertTrue(any("comunicados" in e for e in errores))
 
 

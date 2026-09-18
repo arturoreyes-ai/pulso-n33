@@ -19,14 +19,15 @@ export const RUTAS = {
   roster: `${BASE}/roster.json`,
   archivoIndice: `${BASE}/archivo/indice.json`,
   redes: `${BASE}/redes.json`,
-  // Viene de efimero/, fuera de git (ver .gitignore). Puede no existir en un
-  // despliegue desde git puro; el panel de redes lo dice en vez de fallar.
+  // Fuera de git, aunque salga de data/ como el resto (ver .gitignore, que lo
+  // excluye por nombre). Puede no existir en un despliegue desde git puro; el
+  // panel de redes lo dice en vez de fallar.
   redesComentarios: `${BASE}/redes-comentarios.json`,
   // TikTok: mismo contrato que redes.json, mismo par de archivos.
   tiktok: `${BASE}/tiktok.json`,
   tiktokComentarios: `${BASE}/tiktok-comentarios.json`,
   // X: el ranking de tendencias por ubicacion, sin tuits ni identidad. Lo
-  // escribe `pulso tendencias`; un solo archivo, sin par de texto en efimero/.
+  // escribe `pulso tendencias`; un solo archivo, sin par de texto.
   tendencias: `${BASE}/tendencias.json`,
   gastoElectoral: `${BASE}/gasto-electoral.json`,
   financiamientoPartidos: `${BASE}/financiamiento-partidos.json`,

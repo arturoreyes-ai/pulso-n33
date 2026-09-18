@@ -546,6 +546,6 @@ def derivar(comentarios, ahora, salud, gasto, temas=None, publicaciones=None,
 def publicar_comentarios(comentarios, destacados, ahora,
                          visibles=COMENTARIOS_VISIBLES, maximo=COMENTARIOS_MAXIMO,
                          texto_maximo=TEXTO_MAXIMO):
-    """efimero/tiktok-comentarios.json. Ver pulso/redes.py::publicar_comentarios."""
+    """data/tiktok-comentarios.json (fuera de git). Ver pulso/redes.py::publicar_comentarios."""
     return _redes.publicar_comentarios(comentarios, destacados, ahora, visibles, maximo,
                                        texto_maximo, plataforma=PLATAFORMA)

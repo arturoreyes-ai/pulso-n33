@@ -16,6 +16,7 @@ from datetime import date
 from pulso.normalizar import id_nota
 from pulso.roster import Roster
 from pulso.validador import (
+    REGLA_GITIGNORE,
     validar_busquedas,
     validar_estado,
     validar_fuentes,
@@ -59,48 +60,72 @@ class TestConfigPublicada(unittest.TestCase):
         self.assertEqual(errores, [])
 
 
-class TestEfimeroEmparejado(unittest.TestCase):
-    """efimero/ se empareja con el data/ de SU corrida, no con el del repo.
+class TestTextoDeComentarios(unittest.TestCase):
+    """El texto publicado se juzga contra el data/ de SU corrida, y su linea
+    de .gitignore se verifica en vez de darse por hecha.
 
-    El caso: CI corre `correr --salida $TEMP/data` y luego
-    `validar --datos $TEMP/data`. Con el default fijo en "efimero", eso
-    comparaba el ./efimero del repo -- que en una maquina con corridas reales
-    trae los dos archivos de texto -- contra un data/ que no tiene redes.json
-    ni tiktok.json, y los reportaba como huerfanos. Dos errores falsos en el
-    comando que la propia documentacion manda correr, invisibles en CI porque
-    ahi no existe ./efimero.
+    Desde el 17 de septiembre de 2026 vive en data/, no en efimero/. Eso borra
+    de raiz el caso que motivo la derivacion del directorio hermano -- CI corre
+    `correr --salida $TEMP/data` y luego `validar --datos $TEMP/data`, y con el
+    default fijo en "efimero" eso comparaba el ./efimero del repo contra un
+    data/ ajeno y reportaba huerfanos falsos -- porque ahora los dos archivos
+    salen del mismo directorio que se valida.
+
+    Lo que SI hay que vigilar es lo nuevo: sin carpeta ignorada, lo unico que
+    separa el texto de git es una linea de .gitignore.
     """
 
-    def _corrida(self, raiz):
-        """Un data/ minimo sin redes.json, con un efimero/ hermano vacio."""
+    def _corrida(self, raiz, con_texto=False, gitignore=None):
+        """Un data/ minimo sin redes.json."""
         datos = os.path.join(raiz, "data")
         os.makedirs(datos)
-        os.makedirs(os.path.join(raiz, "efimero"))
         for nombre in ("notas", "fuentes", "temas", "estado"):
             origen = os.path.join("data", nombre + ".json")
             shutil.copy(origen, os.path.join(datos, nombre + ".json"))
         shutil.copytree(os.path.join("data", "archivo"), os.path.join(datos, "archivo"))
+        if con_texto:
+            with open(os.path.join(datos, "redes-comentarios.json"), "w",
+                      encoding="utf-8") as f:
+                json.dump({"visibles": 5, "por_post": {}}, f)
+        if gitignore is not None:
+            with open(os.path.join(raiz, ".gitignore"), "w", encoding="utf-8") as f:
+                f.write(gitignore)
         return datos
 
-    def test_el_efimero_del_repo_no_se_juzga_contra_otro_data(self):
+    def test_un_data_ajeno_no_hereda_el_texto_del_repo(self):
         with tempfile.TemporaryDirectory() as raiz:
             datos = self._corrida(raiz)
             errores, _ = validar_todo("config", datos, hoy=HOY)
         huerfanos = [e for e in errores if "comentarios: existe" in e]
         self.assertEqual(huerfanos, [])
 
-    def test_un_efimero_explicito_si_se_juzga(self):
-        """Pasarlo a mano sigue emparejando: la regla del huerfano no se pierde."""
+    def test_texto_sin_su_archivo_de_conteos_es_huerfano(self):
         with tempfile.TemporaryDirectory() as raiz:
-            datos = self._corrida(raiz)
-            suelto = os.path.join(raiz, "suelto")
-            os.makedirs(suelto)
-            with open(os.path.join(suelto, "redes-comentarios.json"), "w",
-                      encoding="utf-8") as f:
-                json.dump({"visibles": 5, "por_post": {}}, f)
-            errores, _ = validar_todo("config", datos, hoy=HOY, dir_efimero=suelto)
+            datos = self._corrida(raiz, con_texto=True,
+                                  gitignore=REGLA_GITIGNORE + "\n")
+            errores, _ = validar_todo("config", datos, hoy=HOY)
         self.assertTrue([e for e in errores if "redes-comentarios: existe" in e],
                         "un texto sin su redes.json sigue siendo huerfano")
+
+    def test_sin_la_linea_de_gitignore_es_error(self):
+        # Lo que se pierde aqui no se puede deshacer: el cron hace
+        # `git add data/` cada seis horas.
+        with tempfile.TemporaryDirectory() as raiz:
+            datos = self._corrida(raiz, con_texto=True, gitignore="_site/\n")
+            errores, _ = validar_todo("config", datos, hoy=HOY)
+        self.assertTrue([e for e in errores if e.startswith("gitignore:")],
+                        "falta la linea y nadie avisa")
+
+    def test_sin_texto_no_se_exige_la_linea(self):
+        with tempfile.TemporaryDirectory() as raiz:
+            datos = self._corrida(raiz, gitignore="_site/\n")
+            errores, _ = validar_todo("config", datos, hoy=HOY)
+        self.assertEqual([e for e in errores if e.startswith("gitignore:")], [])
+
+    def test_el_repo_trae_la_linea(self):
+        """La regla, contra el .gitignore de verdad."""
+        with open(".gitignore", encoding="utf-8") as fh:
+            self.assertIn(REGLA_GITIGNORE, [l.strip() for l in fh])
 
 
 class TestBusquedasRotas(unittest.TestCase):

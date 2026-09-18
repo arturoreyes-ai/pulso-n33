@@ -304,21 +304,23 @@ def cmd_redes(args):
                     ventana_horas=cosecha.get("ventana_horas", 24))
     _escribir(os.path.join(args.salida, "redes.json"), panel)
 
-    # El texto de los comentarios va a efimero/, NUNCA a data/: la carpeta
-    # esta ignorada por git y se regenera aqui en cada corrida desde el
-    # cache, asi que la retencion de 30 dias sigue siendo ejecutable. Ver el
-    # encabezado de pulso/instagram.py.
+    # El texto de los comentarios sale a data/ junto al resto de la corrida,
+    # pero NUNCA a git: .gitignore lo excluye por nombre
+    # (data/*-comentarios.json) y se regenera aqui en cada corrida desde el
+    # cache, asi que la retencion de 30 dias sigue siendo ejecutable. Hasta el
+    # 17 de septiembre de 2026 vivio en efimero/, una carpeta aparte. Ver el
+    # encabezado de pulso/instagram.py y la regla en pulso/validador.py.
     publicados = 0
     if not args.sin_texto:
         texto = publicar_comentarios(vigentes, panel["destacados"], ahora)
-        _escribir(os.path.join(args.efimero, "redes-comentarios.json"), texto)
+        _escribir(os.path.join(args.salida, "redes-comentarios.json"), texto)
         publicados = sum(len(v) for v in texto["por_post"].values())
 
     print("comentarios nuevos: {} · vigentes en cache: {} · posts: {}".format(
         len(nuevos), panel["comentarios_vigentes"], panel["posts_vigentes"]))
     print("destacados: {} en las últimas {} horas · comentarios publicados: {} ({}, fuera de git)".format(
         len(panel["destacados"]), panel["ventana_horas"], publicados,
-        args.efimero if not args.sin_texto else "--sin-texto"))
+        os.path.join(args.salida, "redes-comentarios.json") if not args.sin_texto else "--sin-texto"))
     print("gasto Apify: {} de {} resultados".format(gasto["gastado"], gasto["resultados"]))
     sen = panel["sentimiento"]
     if sen["metodo"] == "modelo":
@@ -340,7 +342,7 @@ def cmd_tiktok(args):
 
     Espejo de cmd_redes con una fuente distinta: una BUSQUEDA, no cuentas
     verificadas. La zona de cada video sale de su pie (pulso/zonas.py), nunca
-    de la consulta. El texto de los comentarios va a efimero/ (fuera de git);
+    de la consulta. El texto de los comentarios va a data/, fuera de git;
     la identidad de quien comenta no llega ni al cache; el @handle del
     creador si se publica. Ver el encabezado de pulso/tiktok.py.
     """
@@ -400,14 +402,15 @@ def cmd_tiktok(args):
     publicados = 0
     if not args.sin_texto:
         texto = publicar_comentarios(vigentes, panel["destacados"], ahora)
-        _escribir(os.path.join(args.efimero, "tiktok-comentarios.json"), texto)
+        _escribir(os.path.join(args.salida, "tiktok-comentarios.json"), texto)
         publicados = sum(len(v) for v in texto["por_post"].values())
 
     print("comentarios nuevos: {} · vigentes en cache: {} · videos: {}".format(
         len(nuevos), panel["comentarios_vigentes"], panel["posts_vigentes"]))
     print("destacados: {} en las últimas {} horas · comentarios publicados: {} ({}, fuera de git)"
           .format(len(panel["destacados"]), panel["ventana_horas"], publicados,
-                  args.efimero if not args.sin_texto else "--sin-texto"))
+                  os.path.join(args.salida, "tiktok-comentarios.json")
+                  if not args.sin_texto else "--sin-texto"))
     print("gasto Apify: {} de {} resultados".format(gasto["gastado"], gasto["resultados"]))
     sen = panel["sentimiento"]
     if sen["metodo"] == "modelo":
@@ -574,8 +577,7 @@ def cmd_gasto_electoral(args):
 def cmd_validar(args):
     from .validador import resumen, validar_todo
 
-    errores, avisos = validar_todo(args.config, args.datos,
-                                   dir_efimero=args.efimero)
+    errores, avisos = validar_todo(args.config, args.datos)
     for a in avisos:
         print("aviso: {}".format(a))
     for e in errores:
@@ -730,11 +732,8 @@ def main(argv=None):
                         "a data/ solo llegan conteos")
     r.add_argument("--presupuesto", type=int, default=0,
                    help="tope de resultados de esta corrida (0 usa config/apify.json)")
-    r.add_argument("--efimero", default="efimero",
-                   help="carpeta IGNORADA POR GIT donde va el texto de los comentarios "
-                        "publicados (redes-comentarios.json); se regenera en cada corrida")
     r.add_argument("--sin-texto", action="store_true",
-                   help="no escribe el texto de los comentarios; data/ sale igual")
+                   help="no escribe redes-comentarios.json; el resto de data/ sale igual")
     r.add_argument("--sondear", nargs="+", metavar="HANDLE",
                    help="pregunta si esos handles son el medio y sale; "
                         "'*' sondea los del config. Cuesta 1 resultado por cuenta")
@@ -752,11 +751,8 @@ def main(argv=None):
                          "a data/ solo llegan conteos")
     tk.add_argument("--presupuesto", type=int, default=0,
                     help="tope de resultados de esta corrida (0 usa config/tiktok.json)")
-    tk.add_argument("--efimero", default="efimero",
-                    help="carpeta IGNORADA POR GIT donde va el texto de los comentarios "
-                         "publicados (tiktok-comentarios.json); se regenera en cada corrida")
     tk.add_argument("--sin-texto", action="store_true",
-                    help="no escribe el texto de los comentarios; data/ sale igual")
+                    help="no escribe tiktok-comentarios.json; el resto de data/ sale igual")
     tk.add_argument("--probar", action="store_true",
                     help="tres videos por búsqueda, sin comentarios y sin escribir: para ver "
                          "qué devuelve el filtro de fecha antes de confiar en el cron")
@@ -792,11 +788,8 @@ def main(argv=None):
                            help="actualiza los dictamenes del INE sin consultar el IEEBC")
     ge.set_defaults(fn=cmd_gasto_electoral)
 
-    v = sub.add_parser("validar", help="valida config/, data/ y efimero/")
+    v = sub.add_parser("validar", help="valida config/ y data/")
     v.add_argument("--datos", default="data")
-    v.add_argument("--efimero", default=None,
-                   help="carpeta del texto de comentarios publicado; se valida si "
-                        "existe. Por omision, la hermana de --datos")
     v.set_defaults(fn=cmd_validar)
 
     s = sub.add_parser("sitio", help="arma _site/ para publicar en Pages")

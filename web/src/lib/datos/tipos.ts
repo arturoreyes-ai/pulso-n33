@@ -618,7 +618,7 @@ export interface Destacado {
 /**
  * `redes-comentarios.json` — el TEXTO de los comentarios más votados por post.
  *
- * Vive en `efimero/`, fuera de git, y se regenera en cada corrida desde el
+ * Sale a `data/` pero queda fuera de git, y se regenera en cada corrida desde el
  * caché de 30 días (decisión del cliente del 8 de septiembre de 2026; ver el
  * encabezado de `pulso/instagram.py`). Puede faltar en un despliegue hecho
  * desde git puro, y eso no es un error del panel: se dice.

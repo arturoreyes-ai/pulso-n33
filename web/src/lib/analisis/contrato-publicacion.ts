@@ -95,8 +95,8 @@ export interface AnalisisConversacion extends LecturaConversacion {
   /**
    * De cuantas de ellas salio texto de verdad.
    *
-   * Va aparte y se pinta aparte: casi nunca coinciden —`efimero/` solo trae los
-   * mas votados de algunas— y decir «15 comentarios en 30 publicaciones» sugiere
+   * Va aparte y se pinta aparte: casi nunca coinciden —el archivo de texto solo
+   * trae los mas votados de algunas— y decir «15 comentarios en 30 publicaciones» sugiere
    * que se leyo algo de las treinta. El hueco se rotula, no se disimula.
    */
   publicacionesConTexto: number;

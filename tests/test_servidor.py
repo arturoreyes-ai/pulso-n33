@@ -87,30 +87,28 @@ class TestArranque(unittest.TestCase):
         servidor, raices = servir(puerto=0)      # puerto 0 = uno libre
         try:
             self.assertTrue(servidor.server_address[1] > 0)
-            # efimero/ es la unica raiz opcional: el texto de comentarios de
-            # Instagram vive fuera de git y puede no existir en este clon.
-            self.assertEqual(sorted(set(raices) - {"efimero"}), ["config", "data", "sitio"])
-            self.assertEqual("efimero" in raices, os.path.isdir("efimero"))
+            # Tres raices y ninguna opcional. Hubo una cuarta, efimero/, hasta
+            # el 17 de septiembre de 2026: el texto de los comentarios sale
+            # ahora a data/ con el resto de la corrida.
+            self.assertEqual(sorted(raices), ["config", "data", "sitio"])
         finally:
             servidor.server_close()
 
-    def test_efimero_se_sirve_bajo_data_solo_si_existe(self):
-        # Un archivo que solo esta en efimero/ se sirve como /data/…; uno que
-        # esta en data/ gana aunque exista en los dos.
+    def test_el_texto_de_comentarios_se_sirve_bajo_data(self):
+        # Ya no hay respaldo que seguir: esta en data/ como cualquier otro
+        # archivo de la corrida.
         from pulso.sitio import Manejador
         raiz = tempfile.mkdtemp()
-        for carpeta in ("sitio", "data", "config", "efimero"):
+        for carpeta in ("sitio", "data", "config"):
             os.makedirs(os.path.join(raiz, carpeta))
-        with open(os.path.join(raiz, "efimero", "redes-comentarios.json"), "w") as fh:
-            fh.write("{}")
-        with open(os.path.join(raiz, "data", "notas.json"), "w") as fh:
-            fh.write("{}")
+        for nombre in ("redes-comentarios.json", "notas.json"):
+            with open(os.path.join(raiz, "data", nombre), "w") as fh:
+                fh.write("{}")
         m = Manejador.__new__(Manejador)
-        m.raices = {c: os.path.join(raiz, c) for c in ("sitio", "data", "config", "efimero")}
-        self.assertEqual(m.translate_path("/data/redes-comentarios.json"),
-                         os.path.join(raiz, "efimero", "redes-comentarios.json"))
-        self.assertEqual(m.translate_path("/data/notas.json"),
-                         os.path.join(raiz, "data", "notas.json"))
+        m.raices = {c: os.path.join(raiz, c) for c in ("sitio", "data", "config")}
+        for nombre in ("redes-comentarios.json", "notas.json"):
+            self.assertEqual(m.translate_path("/data/" + nombre),
+                             os.path.join(raiz, "data", nombre))
 
 
 if __name__ == "__main__":

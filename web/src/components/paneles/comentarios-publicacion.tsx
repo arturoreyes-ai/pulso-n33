@@ -15,7 +15,7 @@ import { NOMBRE_RED, type PublicacionVisual } from "@/lib/dominio/publicaciones"
  * texto de los comentarios es lo que la direccion pidio ver el 8 de
  * septiembre, asi que se mudo a la tarjeta en vez de irse con la lista.
  *
- * El texto viene de efimero/, fuera de git, con retencion de 30 dias y sin
+ * El texto viene de data/, fuera de git, con retencion de 30 dias y sin
  * identidad: ni usuario, ni id, ni avatar existen en ningun archivo. Un 404
  * del archivo de texto no es un error del panel: un despliegue desde git puro
  * no lo trae, y aqui se dice que falta, no por que.
