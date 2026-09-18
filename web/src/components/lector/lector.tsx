@@ -1,8 +1,10 @@
 "use client";
 
-import { ArrowLeft as FlechaAtras, CaretDown as Desplegar, Info as Informacion, List as Menu, MagnifyingGlass as Lupa, X as Cerrar } from "@phosphor-icons/react";
+import { ArrowLeft as FlechaAtras, CaretDown as Desplegar, List as Menu, MagnifyingGlass as Lupa, X as Cerrar } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useEffect, useRef, type ReactNode, type RefObject } from "react";
+
+import { CINTA, CONTROL, FILA_CINTA, ICONO_CONTROL, ICONO_DESPLEGAR, ICONO_ESTRECHO } from "@/components/chrome/medidas-cinta";
 
 /**
  * El lector: la caja que ES la pantalla.
@@ -14,7 +16,7 @@ import { useEffect, useRef, type ReactNode, type RefObject } from "react";
  * tarjeta que mide "la pantalla menos la pildora" deja medias tarjetas al
  * ajustar. Aqui la caja es fija, mide el viewport visual (`--alto-lector`) y
  * tiene su propia barra arriba: volver, que se esta viendo (abre un dialogo
- * con las opciones), las acciones de cada pagina, y la informacion. Debajo de
+ * con las opciones) y las acciones de cada pagina. Debajo de
  * la barra puede ir una fila de pestanas (`pestanas`), que es como redes
  * cambia de plataforma. En escritorio la pildora flotante sigue arriba y la
  * caja empieza debajo de ella (`--nav-alto`).
@@ -22,9 +24,14 @@ import { useEffect, useRef, type ReactNode, type RefObject } from "react";
  * Lo que se OCULTA mientras el lector esta arriba lo decide una sola regla en
  * globals.css (`main:has(.lector) > :not(:has(.lector))`), no cada pagina.
  *
- * La informacion viaja como HTML de servidor, incluido el Pie completo: las
- * cinco reglas de PRODUCT.md tienen que estar en cada pagina, y en el lector
- * este dialogo es el unico sitio donde caben.
+ * NO hay boton de «Acerca de», ni pie. Los hubo hasta el 18 de septiembre de
+ * 2026: el dialogo traia la entrada de cada pagina y, dentro, el pie del sitio.
+ * El cliente quito los dos ese dia —primero la ficha, luego el pie de todo el
+ * tablero— porque explicarle al lector de donde sale lo que ve no es trabajo de
+ * la pantalla. Lo que NO se fue son las salvedades que viven donde se leen: los
+ * huecos los rotula cada panel («sin dato», «fuera de muestra»), las filas en
+ * vivo dicen que no se suman a las cifras de prensa, y las lecturas del modelo
+ * llevan su SALVEDAD_FIJA. Ver docs/PLAN.md y PRODUCT.md.
  *
  * Dialogos nativos: el resto del lector queda inerte y Escape devuelve el foco
  * al control que abrio, sin desplazar la tarjeta que se estaba leyendo.
@@ -35,13 +42,16 @@ import { useEffect, useRef, type ReactNode, type RefObject } from "react";
  * pagina interior eso bastaba, porque la flecha de volver llevaba a una pagina
  * normal con su nav. Desde que la PORTADA es un lector no hay tal pagina detras,
  * y sin este control un telefono se queda sin manera de salir. Llega como nodo
- * de servidor —igual que `informacion` y el Pie que va dentro— para que la
- * accion de servidor de «Salir» y los iconos no entren al bundle de cliente.
+ * de servidor para que la accion de servidor de «Salir» y los iconos no entren
+ * al bundle de cliente.
  */
 
 /** La clase de un control de la barra, para las acciones que aporta cada
- *  pagina (recargar en la portada). */
-export const CONTROL = "control-lector";
+ *  pagina (recargar en la portada). Se define en chrome/medidas-cinta.ts junto
+ *  al resto de las medidas y se reexporta aqui para no mover a sus cinco
+ *  importadores, y para que chrome/ no tenga que importar de lector/ para
+ *  dibujar la misma barra. */
+export { CONTROL };
 
 /**
  * Los ids de los dialogos salen del rotulo, y un rotulo de dos palabras —«En
@@ -53,7 +63,7 @@ export const CONTROL = "control-lector";
 const babosa = (s: string): string =>
   s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
-export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opciones, acciones, busqueda, menu, pestanas, informacion, restaurarFoco, children }: {
+export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opciones, acciones, busqueda, menu, pestanas, restaurarFoco, children }: {
   /** A donde lleva la flecha de volver. Sin esto no se pinta la flecha: la
    *  portada es un lector y no tiene pagina detras a la que volver. */
   volver?: string;
@@ -78,7 +88,6 @@ export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opc
   menu: ReactNode;
   /** La fila de pestanas bajo la barra, si la pagina tiene facetas. */
   pestanas?: ReactNode;
-  informacion: ReactNode;
   /** Si el lector se remonta al elegir, la pagina lo pone en true para
    *  devolver el foco al selector. */
   restaurarFoco?: RefObject<boolean>;
@@ -86,11 +95,9 @@ export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opc
 }) {
   const selector = useRef<HTMLButtonElement>(null);
   const lugares = useRef<HTMLDialogElement>(null);
-  const detalle = useRef<HTMLDialogElement>(null);
   const navegacion = useRef<HTMLDialogElement>(null);
   const buscador = useRef<HTMLDialogElement>(null);
   const idOpciones = `opciones-${babosa(rotulo)}`;
-  const idInformacion = `informacion-${babosa(rotulo)}`;
   const idMenu = `menu-${babosa(rotulo)}`;
   const idBusqueda = `busqueda-${babosa(rotulo)}`;
   useEffect(() => {
@@ -100,11 +107,11 @@ export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opc
 
   return (
     <div className="lector">
-      <div className="barra-lector">
-        <div className="mx-auto flex w-full max-w-[88rem] items-center gap-1 px-4 py-2 md:px-8" aria-label={`Controles de ${rotulo}`}>
+      <div className={CINTA}>
+        <div className={FILA_CINTA} aria-label={`Controles de ${rotulo}`}>
           {volver === undefined ? null : (
             <Link href={volver} className={`${CONTROL} shrink-0`} aria-label="Volver">
-              <FlechaAtras size={20} aria-hidden />
+              <FlechaAtras size={ICONO_ESTRECHO} aria-hidden />
             </Link>
           )}
           {/* `id="zonas"`: la pastilla del lugar en la pildora flotante apunta a
@@ -115,20 +122,16 @@ export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opc
               <span className="block text-meta text-tinta-meta">{rotuloValor ?? rotulo}</span>
               <span className="block truncate text-cuerpo text-tinta-titulo">{valor}</span>
             </span>
-            <Desplegar size={16} className="shrink-0 text-tinta-meta" aria-hidden />
+            <Desplegar size={ICONO_DESPLEGAR} className="shrink-0 text-tinta-meta" aria-hidden />
           </button>
           <span className="hidden flex-1 md:block" aria-hidden />
           {acciones}
           {busqueda === undefined ? null : (
             <button type="button" className={CONTROL} aria-label="Buscar titulares" aria-haspopup="dialog" aria-controls={idBusqueda}
               onClick={() => buscador.current?.showModal()}>
-              <Lupa size={20} aria-hidden />
+              <Lupa size={ICONO_ESTRECHO} aria-hidden />
             </button>
           )}
-          <button type="button" className={CONTROL} aria-label={`Información de ${rotulo}`} aria-haspopup="dialog" aria-controls={idInformacion}
-            onClick={() => detalle.current?.showModal()}>
-            <Informacion size={22} aria-hidden />
-          </button>
           {/* Solo en el telefono. A partir de 48rem la pildora flotante vuelve
               a verse sobre el lector (globals.css) y lleva a las mismas
               paginas: dos navegaciones identicas a diez pixeles una de otra.
@@ -138,7 +141,7 @@ export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opc
               de la clase, porque una utilidad de Tailwind pierde contra el. */}
           <button type="button" data-solo-movil className={CONTROL} aria-label="Ir a otra página" aria-haspopup="dialog" aria-controls={idMenu}
             onClick={() => navegacion.current?.showModal()}>
-            <Menu size={22} aria-hidden />
+            <Menu size={ICONO_CONTROL} aria-hidden />
           </button>
         </div>
         {pestanas}
@@ -152,14 +155,6 @@ export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opc
           <button type="button" className={CONTROL} aria-label="Cerrar opciones"><Cerrar size={20} aria-hidden /></button>
         </div>
         {opciones}
-      </dialog>
-
-      <dialog ref={detalle} id={idInformacion} className="dialogo-lector" aria-labelledby={`titulo-${idInformacion}`}>
-        <div className="cabecera-dialogo-lector">
-          <h2 id={`titulo-${idInformacion}`} className="text-rotulo text-tinta-titulo">Acerca de {rotulo}</h2>
-          <button type="button" className={CONTROL} aria-label="Cerrar información" onClick={() => detalle.current?.close()}><Cerrar size={20} aria-hidden /></button>
-        </div>
-        {informacion}
       </dialog>
 
       {/* Cierra al pulsar cualquier enlace o boton, como el de lugares: aqui

@@ -96,11 +96,10 @@ let ultimaCubeta: CubetaRegion = "corredor";
  *  entraria al bundle de cliente. */
 const OPCIONES_ZONA: readonly (ZonaRuta | null)[] = [null, ...ZONAS_RUTA];
 
-export function LectorRedes({ zona, paneles, menu, informacion, analisis = false }: {
+export function LectorRedes({ zona, paneles, menu, analisis = false }: {
   zona: ZonaRuta | null;
   paneles: { youtube: ReactNode; x: ReactNode };
   menu: ReactNode;
-  informacion: ReactNode;
   /** Si se pinta el boton de lectura automatica. Lo decide el servidor
    *  (`analisisHabilitado`): ANTHROPIC_API_KEY no lleva NEXT_PUBLIC_, asi que
    *  en cliente valdria "" y la guarda diria que no siempre. */
@@ -152,8 +151,7 @@ export function LectorRedes({ zona, paneles, menu, informacion, analisis = false
             );
           })}
         </div>
-      }
-      informacion={informacion}>
+      }>
       {pestana === "youtube" || pestana === "x"
         ? <div className="hoja-lector" tabIndex={0}><div className="mx-auto w-full max-w-[88rem] px-4 py-8 md:px-8">{paneles[pestana]}</div></div>
         : <VisorRedes key={`${zona ?? "region"}:${activa}`} zona={zona} filtro={pestana} cubeta={activa} analisis={analisis} />}

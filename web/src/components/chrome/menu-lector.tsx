@@ -22,11 +22,11 @@ import type { ZonaRuta } from "@/lib/dominio/zonas";
  * unica salida hacia Prensa, Redes, Indicadores, las sueltas y Salir.
  *
  * Componente de SERVIDOR, y baja al lector como prop `menu`, por el mismo
- * canal que `informacion` y el Pie que va dentro. No es un detalle de estilo:
+ * canal por el que viajaba la informacion. No es un detalle de estilo:
  * el lector es un componente de cliente, y una accion de servidor —la de
  * Salir— no se puede renderizar desde un modulo de cliente. Construir esta
  * lista alli dejaria «Salir» fuera del telefono, que es justo el sitio donde
- * es la unica manera de cerrar sesion. Importar `NavPildora` tampoco vale: es
+ * es la unica manera de cerrar sesion. Importar `Navegacion` tampoco vale: es
  * el error que AGENTS.md documenta para /garitas, y arrastraria sus iconos de
  * `dist/ssr` al bundle.
  *
@@ -34,6 +34,11 @@ import type { ZonaRuta } from "@/lib/dominio/zonas";
  * nav siga saliendo de una sola declaracion. Lo que no trae es el eje de
  * LUGAR: ese se elige en el otro dialogo de la barra, y mezclarlos aqui
  * volveria a juntar los dos ejes que la pildora separa a proposito.
+ *
+ * NO lleva pie, y ya no existe ninguno. Llevo uno unas horas del 18 de
+ * septiembre de 2026, cuando el dialogo «Acerca de» se quito y el pie del sitio
+ * se mudo aqui; ese mismo dia el cliente pidio quitarlo de TODO el tablero, no
+ * mudarlo (ver docs/PLAN.md). Aqui solo hay navegacion.
  */
 const RENGLON = "flex w-full items-center justify-between rounded-nucleo px-4 py-3 text-cuerpo transition-colors";
 
@@ -41,16 +46,26 @@ export function MenuLector({
   zona,
   vista,
   pagina,
+  fuera = false,
 }: {
   zona: ZonaRuta | null;
   vista: Vista;
   pagina?: PaginaSuelta;
+  /**
+   * Esta pagina no es ninguna de la lista; hoy solo la de 404.
+   *
+   * Hace falta una BANDERA y no basta con pasar `vista: null`, porque `null`
+   * no significa «ninguna»: significa la portada, que es una vista de pleno
+   * derecho. Sin esto el menu de un 404 abria con «En Tendencia» palomeada,
+   * diciendole al lector que estaba en una pagina en la que no estaba.
+   */
+  fuera?: boolean;
 }) {
   return (
     <nav aria-label="Páginas" className="p-2 pb-4">
       <ul>
         {VISTAS.map((v) => {
-          const actual = pagina === undefined && v === vista;
+          const actual = !fuera && pagina === undefined && v === vista;
           return (
             <li key={v ?? "portada"}>
               <Link
@@ -85,6 +100,7 @@ export function MenuLector({
           </button>
         </form>
       </div>
+
     </nav>
   );
 }

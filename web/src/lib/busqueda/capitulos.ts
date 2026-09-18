@@ -32,6 +32,13 @@
  *    Dentro de un capitulo el orden es el de Google y no se toca; entre
  *    capitulos, un titular ya mostrado no se repite.
  *
+ *    Desde el 18 de septiembre de 2026 se puede empezar por un RUBRO en vez de
+ *    por la seccion del lugar (`?t=`, lib/busqueda/entrada.ts). Hasta entonces
+ *    los cinco rubros eran los capitulos 2 a 6 y solo se llegaba a ellos
+ *    deslizando por encima de los quince titulares del capitulo local, que es
+ *    otra manera de decir que no se podia pedir un tema. Reordena la cabeza y
+ *    NO la alarga: la seccion del lugar pasa a segunda y sigue ahi.
+ *
  * Mexico e Internacional son entradas y no solo cola desde el 14 de
  * septiembre de 2026, el mismo dia: como cola quedaban a setenta tarjetas de
  * distancia, y el cliente las pidio a la mano. Un rubro en una edicion es la
@@ -174,7 +181,47 @@ function colaDe(entrada: Entrada): [Seccion, Seccion] {
   return [seccionDe("mexico"), seccionDe("internacional")];
 }
 
-export function capitulosDe(entrada: Entrada): Capitulos {
+/** Los seis capitulos de cabeza: la seccion del lugar y sus cinco rubros. */
+type Cabeza = readonly [Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo];
+
+/**
+ * El orden de la cabeza segun el rubro elegido: el elegido primero, la seccion
+ * del lugar detras, y los otros cuatro en el orden de RUBROS.
+ *
+ * Es una tabla escrita a mano, y no un `filter`, porque `Cabeza` es una TUPLA.
+ * Filtrar devuelve `Capitulo[]`, y con eso la cadena deja de ser de largo
+ * conocido: se cae la union de `Capitulos`, y con ella la garantia de que
+ * use-capitulos.ts tiene una ranura por capitulo. Indexar una tupla con un
+ * literal si esta bien tipado —`noUncheckedIndexedAccess` no aplica ahi— asi
+ * que esto no lleva ni una asercion.
+ *
+ * Que sea exhaustiva sobre `Rubro | null` es parte del trato: agregar un rubro
+ * tiene que romper aqui en compilacion, igual que rompe en ACENTO_RUBRO.
+ *
+ * La seccion del lugar va SEGUNDA y no se pierde. Elegir un tema acota por
+ * donde se empieza, no lo que hay: pasado el rubro el recorrido sigue con el
+ * lugar y con los otros cuatro, como siempre.
+ */
+function cabezaDe(elegido: Rubro | null, t: Cabeza): Cabeza {
+  switch (elegido) {
+    case null: return [t[0], t[1], t[2], t[3], t[4], t[5]];
+    case "clima": return [t[1], t[0], t[2], t[3], t[4], t[5]];
+    case "seguridad": return [t[2], t[0], t[1], t[3], t[4], t[5]];
+    case "deportes": return [t[3], t[0], t[1], t[2], t[4], t[5]];
+    case "politica": return [t[4], t[0], t[1], t[2], t[3], t[5]];
+    case "economia": return [t[5], t[0], t[1], t[2], t[3], t[4]];
+  }
+}
+
+/**
+ * La cadena de una entrada, opcionalmente empezando por un rubro.
+ *
+ * Sin rubro devuelve exactamente la cadena de siempre; el parametro por omision
+ * es lo que deja intactas las cadenas ya fijadas en probar-capitulos.cjs. Con
+ * rubro se REORDENA la cabeza, nunca se agrega ni se quita: la cadena sigue
+ * midiendo ocho (nueve en Tecate) y `CAPITULOS_MAXIMO` no se mueve.
+ */
+export function capitulosDe(entrada: Entrada, elegido: Rubro | null = null): Capitulos {
   const principal = seccionDe(entrada);
   const rubro = (r: Rubro): Capitulo => ({
     id: r,
@@ -187,14 +234,14 @@ export function capitulosDe(entrada: Entrada): Capitulos {
   });
   const [clima, seguridad, deportes, politica, economia] = RUBROS;
   const [segunda, tercera] = colaDe(entrada);
-  const cabeza = [
+  const cabeza = cabezaDe(elegido, [
     capituloDeSeccion(principal),
     rubro(clima),
     rubro(seguridad),
     rubro(deportes),
     rubro(politica),
     rubro(economia),
-  ] as const;
+  ]);
   // Los comunicados van DESPUES de los rubros y antes de las otras ediciones:
   // siguen siendo de Tecate, pero son boletines publicados y no lo que esta
   // pasando, asi que no se adelantan a ningun titular reciente.

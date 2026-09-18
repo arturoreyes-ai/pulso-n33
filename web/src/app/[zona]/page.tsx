@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 
 import { Pagina } from "@/components/paginas/pagina";
-import { PARAM_CONSULTA } from "@/lib/busqueda/entrada";
+import { PARAM_CONSULTA, PARAM_RUBRO } from "@/lib/busqueda/entrada";
 import { metadatos } from "@/lib/dominio/metadatos";
 import { SLUGS, zonaDeSlug } from "@/lib/dominio/zonas";
 
@@ -47,7 +47,18 @@ export default async function PaginaZona({ params, searchParams }: Props) {
   const z = zonaDeSlug((await params).zona);
   if (z === null) notFound();
   // La zona NO lee `?e=`: ahi manda el segmento, que es el eje de lugar. La
-  // consulta si, para que se pueda buscar dentro de este lugar.
-  const q = (await searchParams)[PARAM_CONSULTA];
-  return <Pagina zona={z} vista={null} consulta={typeof q === "string" ? q : null} />;
+  // consulta si, para que se pueda buscar dentro de este lugar, y el tema
+  // tambien: un rubro ACOTA el lugar en vez de competir con el, asi que
+  // `/tijuana?t=clima` significa algo y `/tijuana?e=mexico` no.
+  const facetas = await searchParams;
+  const q = facetas[PARAM_CONSULTA];
+  const t = facetas[PARAM_RUBRO];
+  return (
+    <Pagina
+      zona={z}
+      vista={null}
+      consulta={typeof q === "string" ? q : null}
+      rubro={typeof t === "string" ? t : null}
+    />
+  );
 }

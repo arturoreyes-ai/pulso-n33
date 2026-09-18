@@ -1,7 +1,6 @@
 import { preload } from "react-dom";
 
-import { NavPildora } from "@/components/chrome/nav-pildora";
-import { Pie } from "@/components/chrome/pie";
+import { Navegacion } from "@/components/chrome/navegacion";
 import { RUTAS } from "@/lib/datos/config";
 import type { Vista } from "@/lib/dominio/secciones";
 import type { ZonaRuta } from "@/lib/dominio/zonas";
@@ -32,7 +31,7 @@ const CUERPOS = {
  * obligaria a darles a las tres un `edicion` que ninguna lee, que es peor
  * mentira que esta rama.
  */
-export function Pagina({ zona, vista, edicion = null, consulta = null }: { zona: ZonaRuta | null; vista: Vista; edicion?: string | null; consulta?: string | null }) {
+export function Pagina({ zona, vista, edicion = null, consulta = null, rubro = null }: { zona: ZonaRuta | null; vista: Vista; edicion?: string | null; consulta?: string | null; rubro?: string | null }) {
   const Cuerpo = vista === null ? null : CUERPOS[vista];
 
   // React 19 iza el link al <head> antes de que exista JS de cliente, asi que
@@ -82,13 +81,12 @@ export function Pagina({ zona, vista, edicion = null, consulta = null }: { zona:
 
   return (
     <>
-      <NavPildora zona={zona} vista={vista} />
-      {Cuerpo === null ? <PaginaEnTendencia zona={zona} edicion={edicion} consulta={consulta} /> : <Cuerpo zona={zona} />}
+      <Navegacion zona={zona} vista={vista} />
+      {Cuerpo === null ? <PaginaEnTendencia zona={zona} edicion={edicion} consulta={consulta} rubro={rubro} /> : <Cuerpo zona={zona} />}
       {/* El pie se repite en las tres paginas a proposito. Es prosa de
           servidor, no pesa un byte de bundle, y es la integridad del producto:
           recortarlo por pagina obligaria a decidir en cual se puede omitir que
           esto mide volumen de prensa y no opinion publica. Ninguna. */}
-      <Pie />
     </>
   );
 }

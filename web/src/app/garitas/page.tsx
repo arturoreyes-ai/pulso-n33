@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { NavPildora } from "@/components/chrome/nav-pildora";
+import { Navegacion } from "@/components/chrome/navegacion";
 import { TableroGaritas } from "@/components/garitas/tablero-garitas";
 
 /**
@@ -8,7 +8,7 @@ import { TableroGaritas } from "@/components/garitas/tablero-garitas";
  * vista, porque mide esperas del corredor y no de un municipio (ver
  * `lib/dominio/secciones.ts::SUELTAS`).
  *
- * La nav se monta aqui, en el servidor, y no dentro del tablero: `NavPildora`
+ * La nav se monta aqui, en el servidor, y no dentro del tablero: `Navegacion`
  * es un componente de servidor —lleva la accion de cerrar sesion y el icono
  * `dist/ssr`— y meterlo en el arbol de cliente del tablero lo arrastraria al
  * bundle entero. Es la misma forma que `/gasto-electoral`.
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function PaginaGaritas() {
   return (
     <>
-      <NavPildora zona={null} vista={null} pagina="garitas" />
+      <Navegacion zona={null} vista={null} pagina="garitas" />
       <TableroGaritas />
     </>
   );

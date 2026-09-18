@@ -1,6 +1,5 @@
 import { MenuLector } from "@/components/chrome/menu-lector";
 import { analisisHabilitado } from "@/lib/analisis/config";
-import { Pie } from "@/components/chrome/pie";
 import { Seccion } from "@/components/chrome/seccion";
 import { PanelConversacion } from "@/components/paneles/conversacion";
 import { LectorRedes } from "@/components/paneles/lector-redes";
@@ -62,9 +61,16 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  * Lo que el lector si ve: que esta mirando y que NO afirma. La distincion
  * decide cada cadena de esta pagina. «Es el ranking de X, no una medida de la
  * ciudad» se queda porque es significado; «leido sin iniciar sesion» se fue
- * porque es procedimiento. Las cinco reglas de PRODUCT.md siguen enteras y
- * visibles en cada pagina: las dice el pie (`chrome/pie.tsx`), en HTML de
- * servidor, aqui dentro del dialogo de informacion.
+ * porque es procedimiento.
+ *
+ * El dialogo «Acerca de Redes» se fue el 18 de septiembre de 2026, y con el la
+ * entrada de la pagina y las cuatro frases de pestana: el cliente pidio no
+ * explicarle al lector como funciona esto. Ninguna afirmacion se perdio con
+ * ellas. La salvedad de X vivia ADEMAS en su panel, que es donde se lee
+ * (`paneles/tendencias.tsx`: «Es el ranking de X, no una medida...»), y los
+ * huecos los rotula cada panel. Las cinco reglas de PRODUCT.md siguen enteras
+ * en cada pagina: las dice el pie (`chrome/pie.tsx`), en HTML de servidor, y
+ * dentro del lector viaja en el dialogo del menu (chrome/menu-lector.tsx).
  *
  * Por eso no hay «Cómo leer este dato» aqui. Lo tenian las cuatro facetas y
  * era prosa de metodologia; su contenido esta en PRODUCT.md. El panel de
@@ -73,10 +79,6 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  */
 export function PaginaRedes({ zona }: { zona: ZonaRuta | null }) {
   const nombre = zona === null ? null : NOMBRE_CORTO[zona];
-  const entrada =
-    nombre === null
-      ? "Lo que publican las cuentas de noticias de la región y lo que la gente comenta debajo, en Instagram, TikTok y YouTube, y lo que X marca como tendencia. Se publica lo que se dijo; nunca quién lo dijo."
-      : `Lo que se publica desde ${nombre} o nombra a ${nombre}, lo que la gente comenta debajo y lo que X marca como tendencia. Se publica lo que se dijo; nunca quién lo dijo.`;
 
   return (
     // Sin revelado: el lector es fijo y el transform de Revelar lo
@@ -86,39 +88,9 @@ export function PaginaRedes({ zona }: { zona: ZonaRuta | null }) {
       <LectorRedes
         zona={zona}
         menu={<MenuLector zona={zona} vista="redes" />}
-        informacion={<Informacion entrada={entrada} nombre={nombre} />}
         paneles={{ youtube: <PanelConversacion zona={zona} />, x: <PanelTendencias zona={zona} /> }}
         analisis={analisisHabilitado()}
       />
     </Seccion>
-  );
-}
-
-/** El dialogo «Acerca de Redes»: la entrada de la pagina, una frase por
- *  pestana sobre que se ve y que no se afirma, y el pie con las cinco reglas.
- *  Todo HTML de servidor. */
-function Informacion({ entrada, nombre }: { entrada: string; nombre: string | null }) {
-  const donde = nombre ?? "la región";
-  return (
-    <>
-      <div className="grid gap-4 px-4 pt-6 pb-6 text-lectura text-tinta-prosa">
-        <p className="max-w-[65ch]">{entrada}</p>
-        <p className="max-w-[65ch]">
-          Instagram y TikTok: publicaciones de las últimas 24 horas, de la más nueva a la más antigua,
-          con el pie del medio o la descripción del video y el texto de los comentarios más votados;
-          nunca quién los escribió. No caben todas, y ninguna cuenta llena la lista por sí sola.
-          Lo que la plataforma no publica se dice «sin dato», no cero.
-        </p>
-        <p className="max-w-[65ch]">
-          YouTube: comentarios en canales de noticias {nombre === null ? "de la región" : `sobre ${donde}`}, con su
-          sentimiento. Aquí solo hay cifras, nunca el texto.
-        </p>
-        <p className="max-w-[65ch]">
-          X: lo que X marca como tendencia. Es el ranking de X, no una medida de la ciudad: aquí no hay tuits,
-          solo el nombre de cada tendencia y la liga a su búsqueda.
-        </p>
-      </div>
-      <Pie />
-    </>
   );
 }

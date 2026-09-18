@@ -16,7 +16,6 @@ import {
   type ZonaRuta,
 } from "@/lib/dominio/zonas";
 import { GRAFICAS } from "@/lib/graficas/registro";
-import { ComoLeer } from "@/components/ui/como-leer";
 import { Barra, Esqueleto, FilaConteo, Hueco, Signo } from "@/components/ui/primitivas";
 import { Alternar, useVista } from "./alternar";
 import { Tarjeta } from "./tarjeta";
@@ -557,13 +556,7 @@ function SanDiego({ I }: { I: Ind }) {
 
 /* --------------------------------------------------------------- panel */
 
-export function PanelIndicadores({
-  zona,
-  lectura,
-}: {
-  zona: ZonaRuta | null;
-  lectura?: ReactNode;
-}) {
+export function PanelIndicadores({ zona }: { zona: ZonaRuta | null }) {
   const { data, error } = useIndicadores();
 
   if (error !== undefined) {
@@ -600,7 +593,6 @@ export function PanelIndicadores({
           No se pudo actualizar: {fallos.map((f) => f.id).join(", ")}.
         </p>
       ) : null}
-      <ComoLeer>{lectura}</ComoLeer>
     </>
   );
 }

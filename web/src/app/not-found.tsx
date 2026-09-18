@@ -1,10 +1,10 @@
-import { NavPildora } from "@/components/chrome/nav-pildora";
+import { Navegacion } from "@/components/chrome/navegacion";
 import { SelectorZona } from "@/components/chrome/selector-zona";
 
 export default function NoEncontrada() {
   return (
     <>
-      <NavPildora zona={null} vista={null} />
+      <Navegacion zona={null} vista={null} fuera="No encontrada" />
       <div className="mx-auto w-full max-w-[88rem] px-4 pb-24 md:px-8">
         <h1 className="font-titular text-hero text-tinta-titulo">
           Esa zona no está en el tablero.

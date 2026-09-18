@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { clasesChip } from "@/components/ui/clases";
 import { rutaDeEntrada } from "@/lib/busqueda/entrada";
+import type { Rubro } from "@/lib/busqueda/rubros";
 import type { Entrada } from "@/lib/busqueda/capitulos";
 import { NOMBRE_CORTO, ZONAS_RUTA } from "@/lib/dominio/zonas";
 
@@ -59,7 +60,10 @@ const ALCANCES: readonly { entrada: Entrada; nombre: string }[] = [
 /** El corredor primero, que es la region sin municipio, y luego los ocho. */
 const LUGARES: readonly Entrada[] = ["region", ...ZONAS_RUTA];
 
-export function OpcionesAhora({ entrada }: { entrada: Entrada }) {
+/** `rubro` viaja para CONSERVARSE, no para mostrarse: aqui no se elige tema.
+ *  Cambiar de lugar con Seguridad puesta deja Seguridad puesta, que es lo que
+ *  cualquiera espera de dos facetas de la misma pantalla. */
+export function OpcionesAhora({ entrada, rubro }: { entrada: Entrada; rubro: Rubro | null }) {
   // Una zona ES la region, acotada. El segmentado marca Region y la pastilla
   // de abajo dice cual.
   const enRegion = entrada !== "mexico" && entrada !== "internacional";
@@ -72,7 +76,7 @@ export function OpcionesAhora({ entrada }: { entrada: Entrada }) {
           return (
             <Link
               key={alcance}
-              href={rutaDeEntrada(alcance)}
+              href={rutaDeEntrada(alcance, rubro)}
               aria-current={activo ? "page" : undefined}
               className={[
                 "rounded-full px-3 py-2 text-center text-cuerpo",
@@ -96,7 +100,7 @@ export function OpcionesAhora({ entrada }: { entrada: Entrada }) {
             return (
               <li key={lugar}>
                 <Link
-                  href={rutaDeEntrada(lugar)}
+                  href={rutaDeEntrada(lugar, rubro)}
                   aria-current={activo ? "page" : undefined}
                   className={clasesChip(activo)}
                 >

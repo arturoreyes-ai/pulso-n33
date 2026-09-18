@@ -99,7 +99,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main
           id="contenido"
           tabIndex={-1}
-          className="relative z-[var(--z-base)] pt-28 outline-none md:pt-32"
+          // El relleno de arriba es para la PASTILLA FLOTANTE, que es fija y no
+          // ocupa flujo. Desde el 18 de septiembre de 2026 solo flota a partir
+          // de 48rem: debajo de ese ancho la nav es `.cinta-pagina`, que va EN
+          // FLUJO y reserva su propio alto, asi que un relleno aqui la
+          // empujaria hacia abajo y la despegaria de la orilla, que es
+          // justamente lo que la distingue de la pastilla. Con los 112px que
+          // habia, una cinta de 71 dejaba 41px de banda muerta arriba de cada
+          // pagina.
+          //
+          // La unica pagina sin nav es /entrar, y desde hoy pone su respiro
+          // ella misma.
+          className="relative z-[var(--z-base)] outline-none md:pt-32"
         >
           {/* Primero en el DOM a proposito: comparte `--z-elevado` con la
               barra pegajosa del muro y el orden decide quien tapa a quien. */}

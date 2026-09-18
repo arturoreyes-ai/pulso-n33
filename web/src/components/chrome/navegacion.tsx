@@ -1,19 +1,46 @@
 import Link from "next/link";
 import { House } from "@phosphor-icons/react/dist/ssr";
 
+import { MenuLector } from "@/components/chrome/menu-lector";
+import { MenuCinta } from "@/components/chrome/menu-cinta";
+import { Cinta } from "@/components/chrome/cinta";
+import { OpcionesZona } from "@/components/chrome/opciones-zona";
 import { cerrarSesion } from "@/lib/acceso/acciones";
 import {
   SUELTAS,
   VISTAS,
   nombreVista,
   ruta,
+  tituloSeccion,
   type PaginaSuelta,
   type Vista,
 } from "@/lib/dominio/secciones";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 
 /**
- * Nav flotante en pastilla de cristal, despegada de la orilla superior.
+ * La navegacion del sitio: una cinta en el telefono, una pastilla de cristal
+ * en escritorio.
+ *
+ * DEVUELVE DOS NAVEGACIONES, una por ancho, y solo una se ve. A partir de
+ * 48rem, la pastilla de aqui abajo; debajo de ese ancho, la CINTA
+ * (chrome/cinta.tsx), que es la misma barra que llevan la portada y redes. El
+ * caso, medido el 18 de septiembre de 2026 en /tijuana/indicadores a 375px: la
+ * tira pedia 635px de ancho en 350px disponibles, asi que 285px —el 45% de la
+ * nav— vivian detras de un desplazamiento horizontal que nada anuncia.
+ * «Garitas» salia partida por la mitad; «Gasto electoral» y «Salir» no
+ * aparecian, o sea que cerrar sesion desde un telefono no habia forma de
+ * descubrirlo. La primera respuesta fue una pastilla chica y propia para el
+ * telefono, y el cliente señalo lo que eso dejaba: dos gramaticas de barra a un
+ * toque una de otra. Esta es la segunda respuesta.
+ *
+ * Quien decide cual se ve es globals.css, no este archivo: `.nav-flotante`
+ * tiene su `display` alli, junto a la exencion que la devuelve sobre un lector
+ * en escritorio, y `.cinta-pagina` se apaga a partir de 48rem. Las dos reglas
+ * tienen que leerse juntas y por eso viven juntas.
+ *
+ * Las dos salen de la MISMA lista —`VISTAS` y `SUELTAS`—, la pastilla como
+ * tira y la cinta a traves de `MenuLector`, asi que la nav sigue teniendo una
+ * sola declaracion.
  *
  * `backdrop-blur-xl` es legitimo aqui: elemento fijo, area chica, se pinta una
  * vez. Lo que el arquetipo prohibe es blur sobre contenedores que hacen scroll
@@ -58,27 +85,94 @@ function Filo() {
   return <span aria-hidden="true" className="mx-1 h-4 w-px shrink-0 bg-filo" />;
 }
 
-export function NavPildora({
+/** El cristal de la pastilla. Solo existe a partir de 48rem: debajo de ese
+ *  ancho la nav es la cinta (chrome/cinta.tsx). */
+const VIDRIO = "pointer-events-auto flex items-center rounded-full border border-filo bg-black/40 px-2 py-2 shadow-bisel backdrop-blur-xl";
+
+/**
+ * El rotulo y el valor de la cinta: la pagina arriba, el lugar abajo.
+ *
+ * El rotulo sale de `nombreVista`/`SUELTAS` y no de una plantilla nueva, que es
+ * lo que evita que la cinta diga «Indicadores en Tijuana» mientras la pestana
+ * del navegador dice «Indicadores de Tijuana».
+ *
+ * El valor de una suelta no es su nombre repetido: es el LUGAR del que habla.
+ * «El corredor» ya existe en lib/busqueda/capitulos.ts, que ademas deja escrito
+ * que no es «toda la región» sino sus dos polos, Tijuana y San Diego — que es
+ * literalmente lo que /garitas mide. Y el gasto electoral es de Baja
+ * California: decir «toda la región» seria falso, porque la region incluye San
+ * Diego y ahi no hay dictamen del INE.
+ */
+const LUGAR_SUELTA: Record<PaginaSuelta, string> = {
+  garitas: "El corredor",
+  "gasto-electoral": "Baja California",
+};
+
+function rotuloDe(vista: Vista, pagina: PaginaSuelta | undefined, fuera: string | undefined): string {
+  if (fuera !== undefined) return "Pulso";
+  if (pagina !== undefined) return SUELTAS.find((s) => s.id === pagina)?.nombre ?? nombreVista(vista);
+  return nombreVista(vista);
+}
+
+function valorDe(zona: ZonaRuta | null, pagina: PaginaSuelta | undefined, fuera: string | undefined): string {
+  if (fuera !== undefined) return fuera;
+  if (pagina !== undefined) return LUGAR_SUELTA[pagina];
+  return zona === null ? "Toda la región" : NOMBRE_CORTO[zona];
+}
+
+export function Navegacion({
   zona,
   vista,
   pagina,
+  fuera,
 }: {
   zona: ZonaRuta | null;
   vista: Vista;
   pagina?: PaginaSuelta;
+  /**
+   * Una pagina que NO esta en la nav; hoy solo la de 404.
+   *
+   * Sin esto, `vista: null` se lee como la portada: la cinta decia «En
+   * Tendencia» estando en un 404 y la pastilla ponia `aria-current="page"`
+   * sobre el enlace de la portada, o sea que anunciaba al lector que estaba en
+   * una pagina en la que no estaba. Compila, typechequea y se ve bien.
+   */
+  fuera?: string;
 }) {
+  // El eje de LUGAR solo existe en la rejilla: una suelta y la de 404 no
+  // tienen zona que elegir, y un caret que no abre nada seria una mentira
+  // sobre el glifo (ver chrome/lugar-cinta.tsx).
+  const enRejilla = fuera === undefined && pagina === undefined && vista !== null;
   return (
-    // El contenedor solo centra: mide todo el ancho de la ventana, asi que sin
-    // `pointer-events-none` se traga los clics en los ~280px de vacio a cada
-    // lado de la pastilla. La pastilla los vuelve a aceptar.
-    //
-    // `nav-flotante` es el asidero de globals.css: cuando una pagina monta el
-    // lector a pantalla completa, todo lo demas de <main> se oculta y en
-    // escritorio esta pildora es la unica excepcion.
-    <div className="nav-flotante pointer-events-none fixed inset-x-0 top-0 z-[var(--z-nav)] mt-4 flex justify-center px-3 md:mt-6 md:px-4">
+    <>
+      <Cinta
+        // La flecha lleva a la portada de esta zona, que es la pagina padre en
+        // la rejilla. Una suelta no tiene padre: ahi no se pinta, y «En
+        // Tendencia» esta a un renglon dentro del menu.
+        volver={enRejilla ? ruta(zona, null) : undefined}
+        rotulo={rotuloDe(vista, pagina, fuera)}
+        valor={valorDe(zona, pagina, fuera)}
+        tituloLugar="Lugar"
+        lugares={enRejilla ? <OpcionesZona zona={zona} vista={vista} /> : undefined}
+        menu={
+          <MenuCinta>
+            <MenuLector zona={zona} vista={vista} pagina={pagina} fuera={fuera !== undefined} />
+          </MenuCinta>
+        }
+      />
+
+      {/* El contenedor solo centra: mide todo el ancho de la ventana, asi que
+          sin `pointer-events-none` se traga los clics en los ~280px de vacio a
+          cada lado de la pastilla. La pastilla los vuelve a aceptar.
+
+          `nav-flotante` es el asidero de globals.css, y ahi vive su `display`:
+          la pastilla solo flota a partir de 48rem, y cuando una pagina monta el
+          lector a pantalla completa es la unica excepcion a la regla que oculta
+          todo lo demas de <main>. */}
+      <div className="nav-flotante pointer-events-none fixed inset-x-0 top-0 z-[var(--z-nav)] mt-4 justify-center px-3 md:mt-6 md:px-4">
       <nav
         aria-label="Tablero"
-        className="pointer-events-auto mx-auto flex max-w-full items-center overflow-x-auto rounded-full border border-filo bg-black/40 px-2 py-2 shadow-bisel backdrop-blur-xl [scrollbar-width:none]"
+        className={`${VIDRIO} mx-auto max-w-full overflow-x-auto [scrollbar-width:none]`}
       >
         <Link
           href="/"
@@ -93,7 +187,9 @@ export function NavPildora({
 
         <ul className="flex shrink-0 items-center gap-1 whitespace-nowrap">
           {VISTAS.map((v) => {
-            const actual = pagina === undefined && v === vista;
+            // `fuera` tambien: en la de 404 `vista` es null y sin esta
+            // guarda la pastilla marcaba la portada como pagina actual.
+            const actual = fuera === undefined && pagina === undefined && v === vista;
             return (
               <li key={v ?? "portada"} className="shrink-0">
                 <Link
@@ -159,5 +255,6 @@ export function NavPildora({
         </form>
       </nav>
     </div>
+    </>
   );
 }

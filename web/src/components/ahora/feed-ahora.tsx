@@ -5,9 +5,10 @@ import { useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } 
 
 import { CONTROL, Lector } from "@/components/lector/lector";
 import { ListaRelacionadas, TITULO_RELACIONADAS } from "@/components/paneles/relacionadas-titular";
-import { debeActivar, fraseFinal, type Entrada, type Tarjeta } from "@/lib/busqueda/capitulos";
+import { debeActivar, fraseFinal, type Capitulos, type Entrada, type Tarjeta } from "@/lib/busqueda/capitulos";
 import { enlaceParaAnalisis, indiceDeEnlaces } from "@/lib/busqueda/enlaces";
-import { entradaDe } from "@/lib/busqueda/entrada";
+import { entradaDe, rubroDe } from "@/lib/busqueda/entrada";
+import type { Rubro } from "@/lib/busqueda/rubros";
 import { imagenPara, indiceDeImagenes } from "@/lib/busqueda/imagenes";
 import { indiceDeRelacionadas, relacionadasPara, type IndiceRelacionadas } from "@/lib/busqueda/relacionadas";
 import { useBusquedaViva } from "@/lib/busqueda/use-busqueda";
@@ -16,6 +17,7 @@ import { useCapitulos } from "@/lib/busqueda/use-capitulos";
 import { plegar } from "@/lib/dominio/formato";
 import { ruta } from "@/lib/dominio/secciones";
 import { BuscadorAhora } from "./buscador-ahora";
+import { PestanasRubro } from "./pestanas-rubro";
 import { useNotas } from "@/lib/datos/hooks";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 import { teclasDelRecorrido, useRecorrido } from "@/lib/pantalla/recorrido";
@@ -63,9 +65,13 @@ const restaurarFoco = { current: false };
 type Titular = Extract<Tarjeta, { tipo: "titular" }>;
 
 /** El nombre accesible del recorrido. Aparte de `nombreDe` por la
- *  contraccion: «Titulares de El corredor» no es espanol. */
-const tituloRecorrido = (entrada: Entrada): string =>
-  entrada === "region" ? "Titulares del corredor" : `Titulares de ${nombreDe(entrada)}`;
+ *  contraccion: «Titulares de El corredor» no es espanol. Con tema elegido lo
+ *  dice el titulo del primer capitulo, que ya esta escrito para el lugar
+ *  («Seguridad sobre Tijuana») y no hay por que redactarlo dos veces. */
+const tituloRecorrido = (entrada: Entrada, capitulos: Capitulos, rubro: Rubro | null): string => {
+  if (rubro !== null) return capitulos[0].titulo;
+  return entrada === "region" ? "Titulares del corredor" : `Titulares de ${nombreDe(entrada)}`;
+};
 
 /** Donde busca la lupa, dicho como se dice. No es la ENTRADA: la busqueda se
  *  acota por zona (`z=`), asi que en `/?e=mexico` busca el corredor y no
@@ -73,19 +79,22 @@ const tituloRecorrido = (entrada: Entrada): string =>
 const lugarDeBusqueda = (zona: ZonaRuta | null): string =>
   zona === null ? "el corredor" : NOMBRE_CORTO[zona];
 
-export function FeedAhora({ zona, edicion, consulta, menu, informacion, analisis }: {
+export function FeedAhora({ zona, edicion, consulta, rubro, menu, analisis }: {
   zona: ZonaRuta | null;
   /** El `?e=` de la URL, ya leido en el servidor. */
   edicion: string | null;
+  /** El `?t=`, tambien crudo. A diferencia de `?e=`, una zona SI lo trae: el
+   *  tema acota el lugar en vez de competir con el. */
+  rubro: string | null;
   /** El `?q=`. Con consulta el lector deja de recorrer capitulos y muestra
    *  resultados: es un modo, no un capitulo mas. */
   consulta: string | null;
   menu: ReactNode;
-  informacion: ReactNode;
   /** Si el boton de lectura automatica se pinta. Lo decide el servidor. */
   analisis: boolean;
 }) {
   const entrada = entradaDe(zona, edicion);
+  const tema = rubroDe(rubro);
   const [generacion, setGeneracion] = useState(0);
   function recargar() {
     restaurarFoco.current = true;
@@ -95,12 +104,14 @@ export function FeedAhora({ zona, edicion, consulta, menu, informacion, analisis
   if (q !== "") {
     return (
       <RecorridoBusqueda key={`q:${q}:${zona ?? "region"}`} consulta={q} zona={zona}
-        menu={menu} informacion={informacion} analisis={analisis} />
+        menu={menu} analisis={analisis} />
     );
   }
+  // El tema entra en la LLAVE: cambiarlo tiene que descongelar las listas de
+  // use-capitulos.ts y volver a la primera tarjeta, igual que cambiar de lugar.
   return (
-    <RecorridoAhora key={`${entrada}:${generacion}`} entrada={entrada} zona={zona} onRecargar={recargar}
-      menu={menu} informacion={informacion} analisis={analisis} />
+    <RecorridoAhora key={`${entrada}:${tema ?? ""}:${generacion}`} entrada={entrada} rubro={tema} zona={zona} onRecargar={recargar}
+      menu={menu} analisis={analisis} />
   );
 }
 
@@ -164,12 +175,12 @@ function HojaRelacionadas({ hoja, abierta, setAbierta, indice, listo }: {
   );
 }
 
-function RecorridoAhora({ entrada, zona, onRecargar, menu, informacion, analisis }: {
-  entrada: Entrada; zona: ZonaRuta | null; onRecargar: () => void;
-  menu: ReactNode; informacion: ReactNode; analisis: boolean;
+function RecorridoAhora({ entrada, rubro, zona, onRecargar, menu, analisis }: {
+  entrada: Entrada; rubro: Rubro | null; zona: ZonaRuta | null; onRecargar: () => void;
+  menu: ReactNode; analisis: boolean;
 }) {
   const [activados, setActivados] = useState(1);
-  const { capitulos, hilado, disponible, hayNuevos } = useCapitulos(entrada, activados);
+  const { capitulos, hilado, disponible, hayNuevos } = useCapitulos(entrada, rubro, activados);
   // Las miniaturas vienen del corpus, no de la fila en vivo. El recorrido no
   // espera a notas.json: las figuras aparecen cuando llega, y una tarjeta ya
   // mide la pantalla con o sin ellas.
@@ -194,7 +205,8 @@ function RecorridoAhora({ entrada, zona, onRecargar, menu, informacion, analisis
   return (
     // Sin `volver`: esto ES la portada, no hay pagina detras.
     <Lector rotulo="En Tendencia" valor={nombreDe(entrada)} tituloOpciones="Por dónde empezar"
-      opciones={<OpcionesAhora entrada={entrada} />}
+      opciones={<OpcionesAhora entrada={entrada} rubro={rubro} />}
+      pestanas={<PestanasRubro entrada={entrada} rubro={rubro} />}
       acciones={<>
         <span role="status" className="sr-only">{hayNuevos ? "Hay titulares nuevos." : ""}</span>
         {hayNuevos ? (
@@ -204,8 +216,8 @@ function RecorridoAhora({ entrada, zona, onRecargar, menu, informacion, analisis
         ) : null}
       </>}
       busqueda={<BuscadorAhora accion={ruta(zona, null)} lugar={lugarDeBusqueda(zona)} consulta={null} />}
-      menu={menu} informacion={informacion} restaurarFoco={restaurarFoco}>
-      <div ref={contenedor} className="recorrido-lector" tabIndex={0} role="region" aria-label={tituloRecorrido(entrada)}
+      menu={menu} restaurarFoco={restaurarFoco}>
+      <div ref={contenedor} className="recorrido-lector" tabIndex={0} role="region" aria-label={tituloRecorrido(entrada, capitulos, rubro)}
         onKeyDown={(evento) => teclasDelRecorrido(evento, actual, total, ir)}>
         {!disponible ? <p className="tarjeta-ahora flex items-center text-lectura text-tinta-prosa">Los titulares en vivo no están disponibles en esta vista.</p> : <>
         {tarjetas.map((t, i) => {
@@ -236,9 +248,9 @@ function RecorridoAhora({ entrada, zona, onRecargar, menu, informacion, analisis
  * para nada. Lo que si comparte es todo lo demas: la caja, el ajuste por
  * tarjeta, las miniaturas y el enlace del propio medio.
  */
-function RecorridoBusqueda({ consulta, zona, menu, informacion, analisis }: {
+function RecorridoBusqueda({ consulta, zona, menu, analisis }: {
   consulta: string; zona: ZonaRuta | null;
-  menu: ReactNode; informacion: ReactNode; analisis: boolean;
+  menu: ReactNode; analisis: boolean;
 }) {
   const viva = useBusquedaViva(consulta, zona);
   const { imagenes, enlaces, relacionadas, listo } = useCorpus();
@@ -262,12 +274,14 @@ function RecorridoBusqueda({ consulta, zona, menu, informacion, analisis }: {
   const vivas = useImagenesVivas(tarjetas, actual, imagenes, enlaces);
   const total = tarjetas.length + 1;
 
+  // Sin pestanas y con `rubro={null}`: una busqueda es una lista plana, no una
+  // cadena que se pueda empezar por un rubro.
   return (
     <Lector volver={ruta(zona, null)} rotulo="En Tendencia" rotuloValor="Búsqueda" valor={consulta}
       tituloOpciones="Por dónde empezar"
-      opciones={<OpcionesAhora entrada={entradaDe(zona, null)} />}
+      opciones={<OpcionesAhora entrada={entradaDe(zona, null)} rubro={null} />}
       busqueda={<BuscadorAhora accion={ruta(zona, null)} lugar={lugarDeBusqueda(zona)} consulta={consulta} />}
-      menu={menu} informacion={informacion} restaurarFoco={restaurarFoco}>
+      menu={menu} restaurarFoco={restaurarFoco}>
       <div ref={contenedor} className="recorrido-lector" tabIndex={0} role="region" aria-label={`Resultados para ${consulta}`}
         onKeyDown={(evento) => teclasDelRecorrido(evento, actual, total, ir)}>
         {!viva.activa ? (

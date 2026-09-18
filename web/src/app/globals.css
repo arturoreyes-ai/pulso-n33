@@ -236,13 +236,23 @@
   --z-nav: 30;
   --z-portal: 40;
 
-  /* Lo que OCUPA la pildora flotante: su margen de arriba mas su alto
-     medido (53.5px). Dos cosas dependen de este numero —el velo de arriba y
-     el `top` de la barra pegajosa del muro— y antes cada una lo adivinaba
-     por su cuenta. Adivinar dejaba 20px de banda sin tapar entre la pildora
-     y la barra, y por ahi desfilaban los titulares. Si cambia el alto de la
-     pildora, se cambia AQUI. */
-  --nav-alto: 4.5rem;
+  /* Lo que OCUPA la pastilla flotante: su margen de arriba mas su alto medido,
+     24 + 53.5 = 77.5px, redondeado a 5rem. Tres cosas dependen de este numero
+     —el velo, el `top` del lector en escritorio y el `scroll-mt` de las
+     anclas— y antes cada una lo adivinaba por su cuenta: adivinar dejaba 20px
+     de banda sin tapar entre la pastilla y la barra, y por ahi desfilaban los
+     titulares.
+
+     ES UNA MEDIDA DE ESCRITORIO desde el 18 de septiembre de 2026, porque la
+     pastilla solo flota a partir de 48rem. En el telefono la nav es
+     `.cinta-pagina`, que va EN FLUJO: mide 71px y los ocupa, asi que no hay
+     nada que reservarle. El unico consumidor que sigue leyendo esto en un
+     telefono es el `scroll-mt` de las anclas (chrome/seccion.tsx,
+     chrome/selector-zona.tsx), y ahi 80 en vez de 71 son 9px de aire de MAS al
+     aterrizar, nunca un ancla tapada. Partir el token en dos valores por ancho
+     —que es lo que habia aqui hasta ayer— compra esos 9px y devuelve una
+     consulta que no distingue nada. */
+  --nav-alto: 5rem;
 
   /* Tres duraciones, con nombre, y nada fuera de esta lista. Se consumen como
      duration-[var(--dur-toque)] porque Tailwind v4 NO tiene espacio de
@@ -264,16 +274,24 @@
      una cola casi plana que es lo que hace aterrizar un desplazamiento de
      40px sin rebote; a 120ms esa cola es invisible, y a 700ms sobre un color
      es justamente lo que se siente como retraso. */
+  /* El paso de la reticula del panel LED de la puerta. Vive AQUI y no en una
+     de las dos capas que lo usan —el campo del fondo y el recorte de la
+     marca— porque la idea entera es que la marca sean diodos encendidos DEL
+     MISMO panel: dos declaraciones que se puedan separar es dos paneles.
+
+     3px, medido y no elegido. El paso tiene que ser bastante mas fino que el
+     asta del glifo o la letra se deshace: Archivo a peso 760 y 72px tiene un
+     asta de ~13px, o sea cuatro puntos a este paso, y a 48px —lo que da el
+     clamp de --text-hero en un telefono— siguen siendo tres. A 4px ya se ve
+     hueca, a 6px quedan dos puntos por asta y a 8px no se lee. Por debajo el
+     problema se invierte: a 2px los puntos se juntan y la marca se vuelve
+     solida, que es justo lo que este tratamiento existe para no ser. Por eso
+     tampoco hay consulta de medios: el mismo 3px sirve a los dos tamanos. */
+  --paso-led: 3px;
+
   --dur-toque: 120ms;
   --dur-cambio: 260ms;
   --dur-entrada: 620ms;
-}
-
-@media (min-width: 768px) {
-  :root {
-    /* mt-6 en vez de mt-4. */
-    --nav-alto: 5rem;
-  }
 }
 
 html {
@@ -440,10 +458,95 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
   main:has(.lector) > .nav-flotante { display: flex; }
   .lector { top: var(--nav-alto); height: auto; }
 }
-.barra-lector {
+/* La CINTA es la barra superior del sitio en el telefono, y desde el 18 de
+   septiembre de 2026 es la unica. Nacio como `.barra-lector` y la usaban solo
+   los lectores; las paginas que no lo son —indicadores, garitas, gasto
+   electoral y la de 404— llevaban una pastilla flotante distinta, asi que el
+   telefono tenia dos gramaticas de barra a un toque una de otra. El cliente
+   eligio esta. La pastilla sigue viva a partir de 48rem (`.nav-flotante`),
+   donde si cabe entera y donde el dibujo no cambia.
+
+   Aqui viven TODAS las medidas y ninguna decision de contenido: el filo, el
+   respiro de la muesca, el canal y el alto. Lo que cada superficie mete dentro
+   lo decide su JSX (components/lector/lector.tsx y components/chrome/cinta.tsx);
+   lo que no puede decidir por su cuenta es cuanto mide. Los `size` de los
+   iconos, que ninguna hoja de estilos alcanza, estan en
+   components/chrome/medidas-cinta.ts por la misma razon.
+
+   El filo se declara a 1px y el navegador lo pinta a 0.8 en pantallas con DPR
+   fraccionario: es el redondeo del dispositivo, no un valor fuera de escala. */
+.cinta {
   flex: none;
   padding-top: env(safe-area-inset-top);
   border-bottom: 1px solid var(--color-filo);
+}
+
+/* La fila: el mismo canal y el mismo ancho maximo que cualquier seccion
+   (chrome/seccion.tsx), para que el rotulo de la barra caiga sobre la misma
+   vertical que el h1 de abajo.
+
+   `min-height` es un PISO, no la medida. La medida la pone el bloque de dos
+   renglones —rotulo a text-meta (12 x 1.45 = 17.4px) sobre valor a text-cuerpo
+   (14 x 1.5 = 21px), con su py-2— o sea 54.4px, mas los 16px de esta fila:
+   70.4 + el filo = 71px, que es lo que mide la barra del lector desde que
+   existe. El piso esta para que una cinta con un bloque de UN renglon no
+   encoja y devuelva al sitio las dos alturas de barra que este archivo viene
+   a cerrar. */
+.fila-cinta {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+  max-width: 88rem;
+  min-height: 3.375rem;
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+}
+@media (min-width: 48rem) {
+  .fila-cinta { padding-inline: 2rem; }
+}
+
+/* La cinta de una PAGINA que se desplaza, que es la unica diferencia real con
+   la del lector.
+
+   `sticky` y no `fixed`: en flujo ocupa su alto, asi que no hay ningun numero
+   de compensacion que mantener sincronizado con ella. El `pt-28` de <main> era
+   exactamente ese numero, calibrado para una pastilla que terminaba en 78px;
+   una cinta fija de 71px debajo de el dejaba 41px de banda muerta arriba de
+   cada pagina.
+
+   OPACA, y de ahi el fondo. La del lector es transparente y puede serlo porque
+   detras tiene `.lector`, que es vanta y no se desplaza: por debajo de esa
+   barra no pasa nunca nada. Aqui pasa la pagina entera, asi que sin fondo los
+   titulares se leerian a traves —el mismo fallo por el que existe `Velo`—. Se
+   pinta --color-vanta, el fondo de <html>, asi que el resultado es identico al
+   del lector y no introduce una superficie nueva. Sin `backdrop-filter`: el
+   blur de la pastilla es legitimo por ser un elemento fijo de area chica que se
+   pinta una vez, y lo que el arquetipo prohibe es justo esto, una franja que se
+   recompone en cada cuadro del desplazamiento (ver chrome/nav-pildora.tsx).
+
+   El aire de abajo lo pone la cinta y no cada pagina: en el lector debajo del
+   filo empieza una caja que se desplaza, y en una pagina empieza un h1 que
+   pegado al filo se aplasta. Son cuatro cabeceras y ninguna traia relleno
+   superior propio. */
+.cinta-pagina {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  margin-bottom: 1.5rem;
+  background: var(--color-vanta);
+}
+@media (min-width: 48rem) {
+  .cinta-pagina { display: none; }
+}
+
+/* La pastilla flota SOLO en escritorio. Debajo de 48rem la nav es la cinta.
+   La consulta va aqui y no en una utilidad `hidden md:flex` porque la exencion
+   del lector —`main:has(.lector) > .nav-flotante`, mas abajo— esta fuera de la
+   capa de utilidades y le ganaria: las dos reglas tienen que leerse juntas. */
+.nav-flotante { display: none; }
+@media (min-width: 48rem) {
+  .nav-flotante { display: flex; }
 }
 
 /* Las pestanas, a la manera de la pagina de tendencias de X: texto, sin
@@ -471,8 +574,11 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
   transition: background-color var(--dur-toque) var(--ease-firma), color var(--dur-toque) var(--ease-firma);
 }
 .pestana-lector:hover { background: var(--color-vela); color: var(--color-tinta-prosa); }
-.pestana-lector[aria-pressed="true"] { color: var(--color-tinta-titulo); }
-.pestana-lector[aria-pressed="true"]::after {
+/* Dos maneras de estar activa, porque hay dos clases de pestana: redes cambia
+   de plataforma sin cambiar de pagina y marca con `aria-pressed`; los temas del
+   recorrido son enlaces y marcan con `aria-current`. La pinta es la misma. */
+.pestana-lector:is([aria-pressed="true"], [aria-current="page"]) { color: var(--color-tinta-titulo); }
+.pestana-lector:is([aria-pressed="true"], [aria-current="page"])::after {
   content: "";
   position: absolute;
   inset: auto 1rem 0;
@@ -657,4 +763,135 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .recorrido-lector { scroll-behavior: auto; scroll-snap-type: none; }
+}
+
+/* ------------------------------------------------------------- panel led */
+
+/* La puerta ENTERA es un panel LED. La reticula no es una caja dentro de la
+   pagina: es el fondo de la pantalla, y la marca son los diodos encendidos de
+   ese mismo panel. El paso de los dos sale de --paso-led, arriba en :root.
+
+   Una caja con la reticula dentro dice "aqui hay un adorno con forma de
+   pantalla". Esto dice "estas mirando una pantalla", que es lo que hace que
+   la puerta se lea como el tablero de una redaccion y no como el formulario
+   de cualquier producto. */
+
+/* El campo. Fija y sin eventos, igual que Malla y por la misma razon escrita
+   alli: una textura que se recomponga en cada cuadro del desplazamiento es
+   justo lo que el arquetipo prohibe. Fija ademas es lo que la hace parecer
+   una pantalla y no un papel tapiz: el panel se queda quieto y el texto pasa
+   por delante.
+
+   Va DENTRO de <main>, que es `relative z-base` y por tanto un contexto de
+   apilamiento propio: aqui adentro basta con ir primera en el DOM para quedar
+   debajo de lo demas, sin estrenar un z-index suelto. Y como entre punto y
+   punto es transparente, los orbes de Malla —que estan mas atras, fuera de
+   main— se siguen viendo a traves. Los dos efectos se suman en vez de
+   taparse: el lavado de color es de la casa y la reticula es de esta pagina.
+
+   UNIFORME, SIN VINETA, y eso se probo. Llevaba una `mask-image` radial que
+   apagaba la reticula hacia las orillas, con el argumento de que un enrejado
+   a sangre termina en linea recta contra los filos de la ventana. El
+   argumento es falso aqui: una pantalla SI termina en sus filos, y eso es lo
+   que la hace parecer una pantalla. Comparadas las dos en el navegador, la
+   version con mascara devuelve un halo con forma —un bloque de bordes
+   suaves— que es exactamente lo que este rediseno vino a quitar. La reticula
+   pareja de orilla a orilla es la que se lee como un panel encendido. */
+.fondo-led {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background-image: radial-gradient(var(--color-vela) 1px, transparent 1.15px);
+  background-size: var(--paso-led) var(--paso-led);
+}
+
+/* El barrido dice que el panel esta encendido, que es la unica razon por la
+   que aqui se admite un bucle infinito. Solo `transform`, sobre una capa fija
+   y sin eventos: vive en el compositor y no repinta nada.
+
+   `linear` y no --ease-firma: es el tercer caso al lado de los dos que
+   describe el bloque de duraciones. Firma mueve cosas y ease-out cambia
+   cosas; un barrido continuo no hace ninguna de las dos, y una curva con
+   entrada y salida le pone un tropiezo por vuelta a algo que no empieza ni
+   termina. Por lo mismo los 12s no salen de --dur-*: esas tres son tiempos de
+   reaccion y la mas larga son 620ms. Doce y no nueve porque ahora cruza la
+   pantalla entera y no una caja de 720px: a la misma duracion iria mas rapido
+   y una pasada veloz se lee como un destello, no como un panel encendido.
+
+   Con prefers-reduced-motion el bloque global lo deja en una sola iteracion
+   de 0.01ms. Como el relleno es `none` —verificado en el navegador, no
+   supuesto— al terminar vuelve al estilo base, que es el translateX(-100%) de
+   aqui abajo: fuera de la pantalla por la izquierda. Apagado del todo, no
+   congelado a media pasada. Por eso el reposo va en la regla y el keyframe
+   solo trae el `to`: si el reposo estuviera dentro del keyframe, apagar la
+   animacion dejaria la banda parada en medio de la pantalla. */
+.fondo-led::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 42%,
+    color-mix(in oklab, var(--color-chart-1) 10%, transparent) 50%,
+    transparent 58%
+  );
+  transform: translateX(-100%);
+  animation: barrido 12s linear infinite;
+}
+
+@keyframes barrido {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* La marca: los diodos encendidos. Misma reticula que el campo, en el rojo de
+   marca, recortada contra el texto.
+
+   El rojo entra por --color-chart-1-texto y no por --color-chart-1. Los
+   puntos no llenan el glifo, asi que el contraste real es menor que el del
+   color, y #E0342B ya mide 4.42:1 pelado sobre carta. Es el mismo motivo por
+   el que existe ese token, aplicado a un relleno en lugar de a un `text-`.
+
+   El peso, el interlineado y el interletrado van a mano A PROPOSITO.
+   `font-size: var(--text-hero)` toma el tamano y NADA MAS: el 760, el 0.92 y
+   el -0.035em viven en --text-hero--font-weight y sus hermanos, que son
+   metadatos del paso de texto y solo los aplica la utilidad `text-hero`.
+   Pedir la variable suelta y dar por hecho que trae los otros tres deja la
+   marca en peso 400 con interlineado normal, y falla en silencio.
+
+   Archivo por CSS y no con `font-titular`: la familia esta reservada a h1 y
+   h2 y esto es un <p>, asi que la regla es de jerarquia y no de archivo de
+   fuente. Y PUEDE NO LLEGAR, cosa que se asume: se carga con `display:
+   optional` y sin preload (layout.tsx, con su razon escrita), y `optional`
+   significa que si no esta en cache al primer pintado ya no se intercambia en
+   toda esa carga. La puerta es siempre una primera visita. Se deja asi: lo
+   que hace el letrero es la reticula, no la tipografia, y un Arial negro en
+   mayusculas recortado a puntos sigue siendo un letrero.
+
+   Sin `white-space: nowrap`: la marca tiene UN espacio, asi que el unico
+   corte posible es PULSO / N33, que en un panel se lee como un letrero de dos
+   renglones y no como un desborde. */
+.letrero-marca {
+  font-family: var(--font-titular);
+  font-size: var(--text-hero);
+  font-weight: var(--font-weight-marca);
+  font-stretch: 112%;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  /* Respaldo: sin recorte a texto la marca se lee solida. El modo de falla es
+     "sin puntos", nunca "sin marca" — la misma regla aditiva del revelado. */
+  color: var(--color-chart-1-texto);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .letrero-marca {
+    background-image: radial-gradient(var(--color-chart-1-texto) 1px, transparent 1.15px);
+    background-size: var(--paso-led) var(--paso-led);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }

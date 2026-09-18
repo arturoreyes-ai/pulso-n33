@@ -3,6 +3,7 @@
 import { useMemo, useRef } from "react";
 
 import { CAPITULOS_MAXIMO, capitulosDe, hilar, type Capitulos, type Entrada, type EstadoCapitulo, type Hilado } from "./capitulos";
+import type { Rubro } from "./rubros";
 import type { Idioma, ResultadoExterno } from "./tipos";
 import { useActualidad, type ActualidadViva } from "./use-actualidad";
 import { useComunicados } from "@/lib/datos/hooks";
@@ -86,8 +87,8 @@ function asentadoComunicados(doc: DocComunicados | undefined, cargando: boolean,
 const claves = (resultados: readonly ResultadoExterno[]): string =>
   resultados.map((r) => plegar(r.titulo)).join("\n");
 
-export function useCapitulos(entrada: Entrada, activados: number): CapitulosVivos {
-  const capitulos = useMemo(() => capitulosDe(entrada), [entrada]);
+export function useCapitulos(entrada: Entrada, elegido: Rubro | null, activados: number): CapitulosVivos {
+  const capitulos = useMemo(() => capitulosDe(entrada, elegido), [entrada, elegido]);
   const congelados = useRef<(Congelado | null)[]>(Array.from({ length: CAPITULOS_MAXIMO }, () => null));
 
   /** El pedido de la ranura i, o null si no toca, no existe o no es de la

@@ -44,6 +44,7 @@ const {
 // de 2026 al quitarse la pagina del muro donde vivian.
 const largoDe = (entrada) => (entrada === 'Tecate' ? 9 : 8);
 const { RUBROS } = cargar('lib/busqueda/rubros');
+const { rubroDe, rutaDeEntrada } = cargar('lib/busqueda/entrada');
 const { ZONAS_RUTA } = cargar('lib/dominio/zonas');
 const { TOPE_ACTUALIDAD } = cargar('lib/busqueda/tipos');
 const { indiceDeImagenes, imagenPara } = cargar('lib/busqueda/imagenes');
@@ -120,6 +121,77 @@ function comprobar() {
       for (const texto of [c.nombre, c.rotulo, c.titulo]) assert.doesNotMatch(texto, MECANISMO, `${e}/${c.id}: «${texto}»`);
     }
   }
+
+  // --- capitulosDe con un rubro: la cabeza se reordena, la cadena no crece -
+  // El selector de tema (`?t=`, 18 de septiembre de 2026). Hasta entonces los
+  // cinco rubros eran los capitulos 2 a 6 y a un tema solo se llegaba
+  // deslizando por encima de los quince titulares del capitulo local, que es
+  // otra manera de decir que no se podia pedir.
+  const economiaTj = capitulosDe('Tijuana', 'economia');
+  assert.deepEqual(economiaTj.map((c) => c.id),
+    ['economia', 'local', 'clima', 'seguridad', 'deportes', 'politica', 'mexico', 'internacional'],
+    'el elegido primero, el lugar segundo, los otros cuatro en el orden de RUBROS');
+  assert.deepEqual(economiaTj[0].pedido, { zona: 'Tijuana', rubro: 'economia' });
+  assert.deepEqual(economiaTj[1].pedido, { zona: 'Tijuana', rubro: null });
+  assert.equal(economiaTj[0].titulo, 'Economía sobre Tijuana');
+  // El capitulo del LUGAR no se pierde. Elegir tema acota por donde se
+  // empieza, no lo que hay: es el mismo capitulo que encabeza la cadena sin
+  // tema, movido un puesto.
+  assert.deepEqual(economiaTj[1], tijuana[0]);
+  assert.deepEqual(economiaTj.slice(6), tijuana.slice(6), 'la cola no se mueve');
+
+  // Sin rubro, la cadena de siempre. El parametro por omision es lo que deja
+  // verdes todas las aserciones de arriba.
+  for (const e of ['region', ...ZONAS_RUTA, 'mexico', 'internacional']) {
+    assert.deepEqual(capitulosDe(e, null), capitulosDe(e), `${e}: sin tema, la cadena de siempre`);
+  }
+
+  for (const e of ['region', ...ZONAS_RUTA, 'mexico', 'internacional']) {
+    const sinTema = capitulosDe(e);
+    for (const r of RUBROS) {
+      const cs = capitulosDe(e, r);
+      assert.equal(cs.length, largoDe(e), `${e}/${r}: la cadena no cambia de largo`);
+      assert.ok(cs.length <= CAPITULOS_MAXIMO, `${e}/${r}: cabe en las ranuras de datos`);
+      assert.equal(new Set(cs.map((c) => c.id)).size, largoDe(e), `${e}/${r}: ids sin repetir`);
+      assert.equal(cs[0].id, r, `${e}/${r}: empieza por el tema`);
+      // La seccion del lugar queda segunda. Su id no siempre es 'local': en
+      // las ediciones es 'mexico' o 'internacional' (ver seccionDe).
+      assert.equal(cs[1].id, sinTema[0].id, `${e}/${r}: la seccion queda segunda`);
+      // Los MISMOS capitulos en otro orden: ni uno se pierde ni entra uno
+      // nuevo. Es lo que sostiene que CAPITULOS_MAXIMO no se mueva.
+      assert.deepEqual(cs.map((c) => c.id).sort(), sinTema.map((c) => c.id).sort(),
+        `${e}/${r}: los mismos capitulos, reordenados`);
+      for (const c of cs) {
+        assert.equal(c.pedido === null, c.fuente !== 'actualidad', `${e}/${r}/${c.id}: fuente y pedido de acuerdo`);
+        for (const texto of [c.nombre, c.rotulo, c.titulo]) assert.doesNotMatch(texto, MECANISMO, `${e}/${r}/${c.id}: «${texto}»`);
+      }
+    }
+  }
+
+  // Tecate conserva sus nueve con tema puesto, y el boletin sigue detras de
+  // los rubros: no es lo que esta pasando, no se adelanta a un titular.
+  const tecateClima = capitulosDe('Tecate', 'clima');
+  assert.deepEqual(tecateClima.map((c) => c.id),
+    ['clima', 'local', 'seguridad', 'deportes', 'politica', 'economia', 'comunicados', 'mexico', 'internacional']);
+
+  // --- La faceta: leerla de la URL y volver a escribirla -------------------
+  // Un tema inventado cae en «Todo», por la misma razon que una entrada
+  // inventada cae en la region: un enlace viejo muestra la cadena completa, no
+  // una pestana marcada que no existe.
+  for (const r of RUBROS) assert.equal(rubroDe(r), r);
+  for (const basura of [null, '', 'CLIMA', 'weather', 'seguridad ', 'politics']) {
+    assert.equal(rubroDe(basura), null, `«${basura}» no es un rubro`);
+  }
+
+  // Las tres formas de URL. Los dos controles componen la MISMA: cambiar de
+  // lugar conserva el tema y cambiar de tema conserva el lugar.
+  assert.equal(rutaDeEntrada('region'), '/');
+  assert.equal(rutaDeEntrada('region', 'clima'), '/?t=clima');
+  assert.equal(rutaDeEntrada('Tijuana'), '/tijuana');
+  assert.equal(rutaDeEntrada('Tijuana', 'seguridad'), '/tijuana?t=seguridad');
+  assert.equal(rutaDeEntrada('mexico'), '/?e=mexico');
+  assert.equal(rutaDeEntrada('mexico', 'economia'), '/?e=mexico&t=economia');
+  assert.equal(rutaDeEntrada('internacional', null), '/?e=internacional');
 
   // --- Tecate: el capitulo de comunicados ---------------------------------
   // Va DESPUES de los cinco rubros y ANTES de las otras ediciones: sigue
@@ -381,7 +453,7 @@ function comprobar() {
     relacionadasPara('Pirotecnia deja tres heridos en Tijuana', indiceRel).map((n) => n.id),
     relacionadasPara('Pirotecnia deja tres heridos en Tijuana', indiceRel).map((n) => n.id));
 
-  console.log('Capítulos: 8 capítulos (9 en Tecate), orden, repetidos, fallos, activación, imágenes, og:image y relacionadas verificados offline.');
+  console.log('Capítulos: 8 capítulos (9 en Tecate), orden, tema, repetidos, fallos, activación, imágenes, og:image y relacionadas verificados offline.');
 }
 
 comprobar();

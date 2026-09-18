@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
-import { NavPildora } from "@/components/chrome/nav-pildora";
+import { Navegacion } from "@/components/chrome/navegacion";
 import { Seccion } from "@/components/chrome/seccion";
 import { PanelGastoElectoral } from "@/components/paneles/gasto-electoral";
 import { Esqueleto } from "@/components/ui/primitivas";
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function PaginaGastoElectoral() {
   return (
     <>
-      <NavPildora zona={null} vista={null} pagina="gasto-electoral" />
+      <Navegacion zona={null} vista={null} pagina="gasto-electoral" />
       <header className="mx-auto w-full max-w-[88rem] px-4 pb-6 md:px-8">
         <div className="entrada">
           <h1 className="max-w-[18ch] font-titular text-hero [font-stretch:112%] text-tinta-titulo">
@@ -36,19 +36,6 @@ export default function PaginaGastoElectoral() {
         </Suspense>
       </Seccion>
 
-      <footer className="mx-auto w-full max-w-[88rem] border-t border-filo px-4 py-16 md:px-8 md:py-20">
-        <div className="grid gap-8 text-cuerpo text-tinta-prosa md:grid-cols-2">
-          <p className="max-w-[65ch]">
-            La cifra principal es <strong className="text-tinta-titulo">TOTAL DE GASTOS</strong>
-            {" "}del Anexo II del dictamen final del INE. No se estima ni se completa una cifra
-            ausente; una candidatura no conciliada queda fuera de las métricas.
-          </p>
-          <p className="max-w-[65ch]">
-            El financiamiento público 2026 pertenece a partidos y se presenta como asignación.
-            No equivale a gasto ejercido, gasto de campaña ni dinero atribuible a una persona.
-          </p>
-        </div>
-      </footer>
     </>
   );
 }

@@ -23,6 +23,16 @@
  * un borde visible donde el velo se acaba, y sobre negro OLED un degradado
  * de dos paradas hace bandas.
  *
+ * SOLO EN ESCRITORIO desde el 18 de septiembre de 2026. Existe por la pastilla
+ * flotante, y la pastilla dejo de flotar debajo de 48rem: ahi la nav es una
+ * cinta opaca pegada a la orilla, que tapa lo que sube porque es opaca y no
+ * porque apague el contenido. Dejarlo encendido no era neutro: la cinta cubre
+ * su banda solida, pero la COLA del degradado seguia pintando de 71px a 136px,
+ * o sea una bruma gris colgando del filo de una barra que ya no esta debajo.
+ * La consulta va en una utilidad y no en globals.css porque nada sin capa le
+ * fija `display` a este elemento, asi que `md:block` gana; el caso contrario
+ * esta escrito en `.control-lector[data-solo-movil]`.
+ *
  * Va DENTRO de <main>, que es el contexto de apilamiento, y ANTES de las
  * secciones. Con el mismo `--z-elevado` que la barra pegajosa del muro, el
  * orden del DOM decide: el velo tapa las filas, y la barra tapa al velo.
@@ -32,7 +42,7 @@ export function Velo() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed inset-x-0 top-0 z-[var(--z-elevado)] h-[calc(var(--nav-alto)+3.5rem)]"
+      className="pointer-events-none fixed inset-x-0 top-0 z-[var(--z-elevado)] hidden h-[calc(var(--nav-alto)+3.5rem)] md:block"
       style={{
         background: [
           "linear-gradient(to bottom,",

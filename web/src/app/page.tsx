@@ -1,7 +1,7 @@
 import type { Viewport } from "next";
 
 import { Pagina } from "@/components/paginas/pagina";
-import { PARAM_CONSULTA, PARAM_EDICION } from "@/lib/busqueda/entrada";
+import { PARAM_CONSULTA, PARAM_EDICION, PARAM_RUBRO } from "@/lib/busqueda/entrada";
 
 /**
  * La portada: En Tendencia, el recorrido de titulares en vivo del corredor.
@@ -41,12 +41,14 @@ export default async function Portada({ searchParams }: {
   const params = await searchParams;
   const e = params[PARAM_EDICION];
   const q = params[PARAM_CONSULTA];
+  const t = params[PARAM_RUBRO];
   return (
     <Pagina
       zona={null}
       vista={null}
       edicion={typeof e === "string" ? e : null}
       consulta={typeof q === "string" ? q : null}
+      rubro={typeof t === "string" ? t : null}
     />
   );
 }
