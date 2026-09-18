@@ -46,11 +46,15 @@ function MedioTikTok({ url, fallar }: { url: string; fallar: () => void }) {
   const id = url.split("/").at(-1);
   useEffect(() => {
     function recibir(evento: MessageEvent) {
-      if (evento.origin !== "https://www.tiktok.com" || evento.source !== marco.current?.contentWindow) return;
+      const origenPermitido = evento.origin === "https://www.tiktok.com" || evento.origin === "null";
+      if (!origenPermitido || evento.source !== marco.current?.contentWindow) return;
       const dato = evento.data;
       if (!dato || typeof dato !== "object" || dato["x-tiktok-player"] !== true) return;
       if (dato.type === "onPlayerReady") {
-        marco.current?.contentWindow?.postMessage({ type: "mute", "x-tiktok-player": true }, "https://www.tiktok.com");
+        // Un sandbox sin `allow-same-origin` da al iframe un origen opaco;
+        // `source` sigue siendo la defensa que ata el mensaje a este player.
+        const destino = evento.origin === "null" ? "*" : "https://www.tiktok.com";
+        marco.current?.contentWindow?.postMessage({ type: "mute", "x-tiktok-player": true }, destino);
       }
       if (dato.type === "onPlayerError") {
         if (dato.value?.errorCode === 3002) setManual(true);
@@ -61,7 +65,7 @@ function MedioTikTok({ url, fallar }: { url: string; fallar: () => void }) {
     return () => window.removeEventListener("message", recibir);
   }, [fallar]);
   return <>
-    <iframe ref={marco} title="Publicación de TikTok" src={`https://www.tiktok.com/player/v1/${id}?autoplay=1&muted=1&controls=1&description=1`}
+    <iframe ref={marco} title="Publicación de TikTok" sandbox="allow-scripts" src={`https://www.tiktok.com/player/v1/${id}?autoplay=1&muted=1&controls=1&description=1`}
       allow="autoplay; fullscreen" allowFullScreen className="aspect-[9/16] w-full border-0" onError={fallar} />
     {manual ? <p className="text-cuerpo text-tinta-meta">Pulsa reproducir para ver el video.</p> : null}
   </>;

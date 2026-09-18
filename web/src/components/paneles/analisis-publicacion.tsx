@@ -89,14 +89,17 @@ export function FichaPublicacion({ fila }: { fila: PublicacionVisual }) {
     try {
       const params = new URLSearchParams({ v: VERSION_ANALISIS_PUBLICACION, r: fila.red, u: fila.url });
       const r = await fetch(`/api/analizar-publicacion?${params}`);
+      if (!r.ok) {
+        const cuerpo = (await r.json()) as unknown;
+        setEstado({ fase: "fallo", mensaje: mensajeDeError(cuerpo) });
+        return;
+      }
       const cuerpo = (await r.json()) as unknown;
       const analisis = leerAnalisisPublicacion(cuerpo);
       if (analisis !== null) {
         setEstado({ fase: "listo", analisis });
       } else {
-        const mensaje = cuerpo !== null && typeof cuerpo === "object" && "mensaje" in cuerpo
-          && typeof cuerpo.mensaje === "string" ? cuerpo.mensaje : "No se pudo hacer la lectura.";
-        setEstado({ fase: "fallo", mensaje });
+        setEstado({ fase: "fallo", mensaje: mensajeDeError(cuerpo) });
       }
     } catch {
       setEstado({ fase: "fallo", mensaje: "No se pudo hacer la lectura." });
@@ -140,6 +143,13 @@ export function FichaPublicacion({ fila }: { fila: PublicacionVisual }) {
       {estado.fase === "listo" ? <Resultado id={id} a={estado.analisis} /> : null}
     </div>
   );
+}
+
+function mensajeDeError(valor: unknown): string {
+  if (valor !== null && typeof valor === "object" && "mensaje" in valor && typeof valor.mensaje === "string") {
+    return valor.mensaje;
+  }
+  return "No se pudo hacer la lectura.";
 }
 
 function Resultado({ id, a }: { id: string; a: AnalisisPublicacion }) {

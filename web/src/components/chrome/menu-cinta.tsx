@@ -55,20 +55,16 @@ export function MenuCinta({ children }: { children: ReactNode }) {
         <Menu size={ICONO_CONTROL} aria-hidden />
       </button>
 
-      {/* Cierra al pulsar cualquier enlace o boton: aqui dentro todo navega o
-          envia, igual que la hoja de lugares del lector. */}
+      {/* Los enlaces y el formulario navegan; el boton de cierre controla la hoja. */}
       <dialog
         ref={hoja}
         id="menu-navegacion"
         className="dialogo-lector"
         aria-labelledby="titulo-menu-navegacion"
-        onClick={(evento) => {
-          if ((evento.target as HTMLElement).closest("a, button")) hoja.current?.close();
-        }}
       >
         <div className="cabecera-dialogo-lector">
           <h2 id="titulo-menu-navegacion" className="text-rotulo text-tinta-titulo">Ir a</h2>
-          <button type="button" className={CONTROL} aria-label="Cerrar menú">
+          <button type="button" className={CONTROL} aria-label="Cerrar menú" onClick={() => hoja.current?.close()}>
             <Cerrar size={ICONO_ESTRECHO} aria-hidden />
           </button>
         </div>

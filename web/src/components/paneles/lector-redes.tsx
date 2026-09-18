@@ -132,7 +132,7 @@ export function LectorRedes({ zona, paneles, menu, analisis = false }: {
       // plataformas y esta pregunta las cruza. Solo con Instagram o TikTok
       // delante -- YouTube no publica texto y X son tendencias, no comentarios.
       acciones={pestana === "youtube" || pestana === "x" ? null
-        : <ConversacionRedes zona={zona} cubeta={activa} analisis={analisis} />}
+        : <ConversacionRedes key={`${zona ?? "region"}:${activa}`} zona={zona} cubeta={activa} analisis={analisis} />}
       pestanas={
         <div role="group" aria-label="Plataforma" className="pestanas-lector">
           {PESTANAS.map((p) => {
@@ -153,7 +153,7 @@ export function LectorRedes({ zona, paneles, menu, analisis = false }: {
         </div>
       }>
       {pestana === "youtube" || pestana === "x"
-        ? <div className="hoja-lector" tabIndex={0}><div className="mx-auto w-full max-w-[88rem] px-4 py-8 md:px-8">{paneles[pestana]}</div></div>
+        ? <div className="hoja-lector"><div className="mx-auto w-full max-w-[88rem] px-4 py-8 md:px-8">{paneles[pestana]}</div></div>
         : <VisorRedes key={`${zona ?? "region"}:${activa}`} zona={zona} filtro={pestana} cubeta={activa} analisis={analisis} />}
     </Lector>
   );
@@ -168,13 +168,15 @@ function OpcionesLugar({ zona, cubetas, activa, onCubeta }: {
   activa: CubetaRegion;
   onCubeta: (c: CubetaRegion) => void;
 }) {
+  const cubetasConDatos = new Set(cubetas);
+
   return (
     <div className="grid gap-4 p-4">
       {/* El ambito primero, como en el dialogo de la portada: son tres y
           siempre caben, y las zonas fluyen debajo. */}
       {cubetas.length > 1 ? (
         <div role="group" aria-label="Ámbito" className="grid grid-cols-3 gap-1 rounded-full border border-filo bg-vanta p-1">
-          {CUBETAS.filter((c) => cubetas.includes(c.id)).map((c) => (
+          {CUBETAS.filter((c) => cubetasConDatos.has(c.id)).map((c) => (
             <button key={c.id} type="button" aria-pressed={c.id === activa}
               onClick={() => onCubeta(c.id)}
               className={[

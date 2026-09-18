@@ -6,17 +6,8 @@ import { clasesChip } from "@/components/ui/clases";
 import { rutaDeEntrada } from "@/lib/busqueda/entrada";
 import type { Rubro } from "@/lib/busqueda/rubros";
 import type { Entrada } from "@/lib/busqueda/capitulos";
-import { NOMBRE_CORTO, ZONAS_RUTA } from "@/lib/dominio/zonas";
-
-export function nombreDe(entrada: Entrada): string {
-  // «El corredor» y no «Toda la región»: esta entrada trae Tijuana y San
-  // Diego, no las nueve zonas. El SEGMENTO de arriba si se llama Región,
-  // porque ese si agrupa el corredor y los ocho municipios.
-  if (entrada === "region") return "El corredor";
-  if (entrada === "mexico") return "México";
-  if (entrada === "internacional") return "Internacional";
-  return NOMBRE_CORTO[entrada];
-}
+import { ZONAS_RUTA } from "@/lib/dominio/zonas";
+import { nombreDe } from "./nombre-ahora";
 
 /**
  * El cuerpo del dialogo «Por dónde empezar». El lector lo cierra al pulsar

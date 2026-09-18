@@ -69,19 +69,16 @@ export function LugarCinta({
         <Desplegar size={ICONO_DESPLEGAR} className="shrink-0 text-tinta-meta" aria-hidden />
       </button>
 
-      {/* Cierra al elegir: aqui dentro todo navega. */}
+      {/* Los enlaces navegan y desmontan la hoja; el boton de cierre la cierra aqui. */}
       <dialog
         ref={hoja}
         id="lugar-cinta"
         className="dialogo-lector"
         aria-labelledby="titulo-lugar-cinta"
-        onClick={(evento) => {
-          if ((evento.target as HTMLElement).closest("a, button")) hoja.current?.close();
-        }}
       >
         <div className="cabecera-dialogo-lector">
           <h2 id="titulo-lugar-cinta" className="text-rotulo text-tinta-titulo">{titulo ?? "Lugar"}</h2>
-          <button type="button" className={CONTROL} aria-label="Cerrar opciones">
+          <button type="button" className={CONTROL} aria-label="Cerrar opciones" onClick={() => hoja.current?.close()}>
             <Cerrar size={ICONO_ESTRECHO} aria-hidden />
           </button>
         </div>

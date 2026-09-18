@@ -60,14 +60,17 @@ export function AnalisisTitular({ titulo, referencia, medio }: {
     try {
       const params = new URLSearchParams({ v: VERSION_ANALISIS, u: referencia.url, m: medio, d: referencia.dominio });
       const r = await fetch(`/api/analizar?${params}`);
+      if (!r.ok) {
+        const cuerpo = (await r.json()) as unknown;
+        setEstado({ fase: "fallo", mensaje: mensajeDeError(cuerpo) });
+        return;
+      }
       const cuerpo = (await r.json()) as unknown;
       const analisis = leerAnalisis(cuerpo);
       if (analisis !== null) {
         setEstado({ fase: "listo", analisis });
       } else {
-        const mensaje = cuerpo !== null && typeof cuerpo === "object" && "mensaje" in cuerpo
-          && typeof cuerpo.mensaje === "string" ? cuerpo.mensaje : "No se pudo hacer la lectura.";
-        setEstado({ fase: "fallo", mensaje });
+        setEstado({ fase: "fallo", mensaje: mensajeDeError(cuerpo) });
       }
     } catch {
       setEstado({ fase: "fallo", mensaje: "No se pudo hacer la lectura." });
@@ -173,6 +176,13 @@ export function AnalisisTitular({ titulo, referencia, medio }: {
       </dialog>
     </>
   );
+}
+
+function mensajeDeError(valor: unknown): string {
+  if (valor !== null && typeof valor === "object" && "mensaje" in valor && typeof valor.mensaje === "string") {
+    return valor.mensaje;
+  }
+  return "No se pudo hacer la lectura.";
 }
 
 function esSugerenciaSocial(valor: unknown): valor is SugerenciaSocial {

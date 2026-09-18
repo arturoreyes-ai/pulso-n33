@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Bisel } from "@/components/ui/bisel";
 import { Barra, Esqueleto, Hueco, Kpi } from "@/components/ui/primitivas";
 import { useFinanciamientoPartidos, useGastoElectoral } from "@/lib/datos/hooks";
-import type { CandidaturaGasto, FinanciamientoPartido } from "@/lib/datos/tipos";
+import type { CandidaturaGasto, DocFinanciamientoPartidos, DocGastoElectoral, FinanciamientoPartido } from "@/lib/datos/tipos";
 import { plegar } from "@/lib/dominio/formato";
 
 const MONEDA = new Intl.NumberFormat("es-MX", {
@@ -472,6 +472,154 @@ function Partidos({ partidos, totales, aviso, ejercicio, acuerdos }: {
   );
 }
 
+type VistaGasto = "candidaturas" | "partidos";
+
+function SelectorVista({ vista, onChange }: { vista: VistaGasto; onChange: (vista: VistaGasto) => void }) {
+  return (
+    <div className="flex flex-wrap gap-2" role="group" aria-label="Vista de datos electorales">
+      <button type="button" className={`${BOTON} ${vista === "candidaturas" ? "bg-realce text-tinta-titulo" : "text-tinta-prosa"}`} aria-pressed={vista === "candidaturas"} onClick={() => onChange("candidaturas")}>
+        Candidaturas 2024
+      </button>
+      <button type="button" className={`${BOTON} ${vista === "partidos" ? "bg-realce text-tinta-titulo" : "text-tinta-prosa"}`} aria-pressed={vista === "partidos"} onClick={() => onChange("partidos")}>
+        Partidos 2026
+      </button>
+    </div>
+  );
+}
+
+function CandidaturasDisponibles({
+  gasto,
+  seleccionada,
+  alSeleccionar,
+}: {
+  gasto: DocGastoElectoral;
+  seleccionada: CandidaturaGasto | null;
+  alSeleccionar: (candidatura: CandidaturaGasto) => void;
+}) {
+  return (
+    <>
+      <Buscador candidaturas={gasto.candidaturas} seleccionada={seleccionada} alSeleccionar={alSeleccionar} />
+      {seleccionada ? (
+        <Perfil
+          candidatura={seleccionada}
+          pares={gasto.candidaturas.filter((c) => c.contienda_id === seleccionada.contienda_id)}
+          dictamen={gasto.procesos.find((p) => p.id === seleccionada.proceso)?.dictamen ?? "Dictamen final"}
+          dictamenUrl={gasto.procesos.find((p) => p.id === seleccionada.proceso)?.dictamen_url ?? "#"}
+        />
+      ) : (
+        <Bisel as="section" nivel="panel" interior="p-6 md:p-8">
+          <div className="grid gap-8 sm:grid-cols-3">
+            <Kpi etiqueta="Filas oficiales" valor={ENTERO.format(gasto.resumen.filas_origen)} frase="194 locales y 53 federales en Baja California." />
+            <Kpi etiqueta="Perfiles conciliados" valor={ENTERO.format(gasto.resumen.candidaturas)} frase="Con total final del Anexo II." />
+            <Kpi
+              etiqueta="Sin conciliar"
+              valor={gasto.resumen.sin_conciliar === 0 ? "Ninguna" : ENTERO.format(gasto.resumen.sin_conciliar)}
+              frase={gasto.resumen.sin_conciliar === 0 ? "Toda fila tiene respaldo documental." : "Excluidas de métricas y descritas en incidencias."}
+              hueco={gasto.resumen.sin_conciliar > 0}
+            />
+          </div>
+          <p className="mt-8 border-t border-vela pt-5 text-cuerpo text-tinta-prosa">
+            Escribe al menos dos caracteres para elegir una candidatura. El gasto se compara
+            solo con personas del mismo municipio, distrito o elección senatorial.
+          </p>
+        </Bisel>
+      )}
+    </>
+  );
+}
+
+function ContenidoCandidaturas({
+  cargandoGasto,
+  errorGasto,
+  gasto,
+  seleccionada,
+  alSeleccionar,
+}: {
+  cargandoGasto: boolean;
+  errorGasto: unknown;
+  gasto: DocGastoElectoral | undefined;
+  seleccionada: CandidaturaGasto | null;
+  alSeleccionar: (candidatura: CandidaturaGasto) => void;
+}) {
+  if (cargandoGasto) return <Esqueleto className="h-64" />;
+  if (errorGasto || !gasto) {
+    return (
+      <Bisel as="section" nivel="panel" interior="p-6 md:p-8">
+        <h2 className="text-rotulo text-tinta-titulo">Perfiles auditados aún no disponibles</h2>
+        <p className="mt-3 max-w-[65ch] text-cuerpo text-tinta-prosa">
+          Este despliegue no contiene todavía el archivo final conciliado del INE. Es una
+          ausencia de datos, no un gasto de cero. El importador semanal exige que las 247
+          filas oficiales queden conciliadas o registradas como incidencia antes de publicarlas.
+        </p>
+      </Bisel>
+    );
+  }
+  return <CandidaturasDisponibles gasto={gasto} seleccionada={seleccionada} alSeleccionar={alSeleccionar} />;
+}
+
+function ContenidoPartidos({
+  cargandoFinanciamiento,
+  errorFinanciamiento,
+  financiamiento,
+}: {
+  cargandoFinanciamiento: boolean;
+  errorFinanciamiento: unknown;
+  financiamiento: DocFinanciamientoPartidos | undefined;
+}) {
+  return cargandoFinanciamiento ? <Esqueleto className="h-64" /> : errorFinanciamiento || !financiamiento ? (
+    <Bisel as="section" nivel="panel" interior="p-6 md:p-8">
+      <h2 className="text-rotulo text-tinta-titulo">Asignaciones no disponibles</h2>
+      <p className="mt-3 text-cuerpo text-tinta-prosa">El archivo del IEEBC no llegó a este despliegue. No se interpreta como cero.</p>
+    </Bisel>
+  ) : (
+    <Partidos
+      partidos={financiamiento.partidos}
+      totales={financiamiento.totales}
+      aviso={financiamiento.aviso}
+      ejercicio={financiamiento.ejercicio}
+      acuerdos={financiamiento.acuerdos}
+    />
+  );
+}
+
+function ContenidoGasto({
+  vista,
+  cargandoGasto,
+  errorGasto,
+  gasto,
+  seleccionada,
+  alSeleccionar,
+  cargandoFinanciamiento,
+  errorFinanciamiento,
+  financiamiento,
+}: {
+  vista: VistaGasto;
+  cargandoGasto: boolean;
+  errorGasto: unknown;
+  gasto: DocGastoElectoral | undefined;
+  seleccionada: CandidaturaGasto | null;
+  alSeleccionar: (candidatura: CandidaturaGasto) => void;
+  cargandoFinanciamiento: boolean;
+  errorFinanciamiento: unknown;
+  financiamiento: DocFinanciamientoPartidos | undefined;
+}) {
+  return vista === "candidaturas" ? (
+    <ContenidoCandidaturas
+      cargandoGasto={cargandoGasto}
+      errorGasto={errorGasto}
+      gasto={gasto}
+      seleccionada={seleccionada}
+      alSeleccionar={alSeleccionar}
+    />
+  ) : (
+    <ContenidoPartidos
+      cargandoFinanciamiento={cargandoFinanciamiento}
+      errorFinanciamiento={errorFinanciamiento}
+      financiamiento={financiamiento}
+    />
+  );
+}
+
 export function PanelGastoElectoral() {
   const parametros = useSearchParams();
   const router = useRouter();
@@ -493,69 +641,19 @@ export function PanelGastoElectoral() {
     <div className="grid gap-8">
       <Calendario />
 
-      <div className="flex flex-wrap gap-2" role="group" aria-label="Vista de datos electorales">
-        <button type="button" className={`${BOTON} ${vista === "candidaturas" ? "bg-realce text-tinta-titulo" : "text-tinta-prosa"}`} aria-pressed={vista === "candidaturas"} onClick={() => elegirVista("candidaturas")}>
-          Candidaturas 2024
-        </button>
-        <button type="button" className={`${BOTON} ${vista === "partidos" ? "bg-realce text-tinta-titulo" : "text-tinta-prosa"}`} aria-pressed={vista === "partidos"} onClick={() => elegirVista("partidos")}>
-          Partidos 2026
-        </button>
-      </div>
+      <SelectorVista vista={vista} onChange={elegirVista} />
 
-      {vista === "candidaturas" ? (
-        cargandoGasto ? <Esqueleto className="h-64" /> : errorGasto || !gasto ? (
-          <Bisel as="section" nivel="panel" interior="p-6 md:p-8">
-            <h2 className="text-rotulo text-tinta-titulo">Perfiles auditados aún no disponibles</h2>
-            <p className="mt-3 max-w-[65ch] text-cuerpo text-tinta-prosa">
-              Este despliegue no contiene todavía el archivo final conciliado del INE. Es una
-              ausencia de datos, no un gasto de cero. El importador semanal exige que las 247
-              filas oficiales queden conciliadas o registradas como incidencia antes de publicarlas.
-            </p>
-          </Bisel>
-        ) : (
-          <>
-            <Buscador candidaturas={gasto.candidaturas} seleccionada={seleccionada} alSeleccionar={elegirPersona} />
-            {seleccionada ? (
-              <Perfil
-                candidatura={seleccionada}
-                pares={gasto.candidaturas.filter((c) => c.contienda_id === seleccionada.contienda_id)}
-                dictamen={gasto.procesos.find((p) => p.id === seleccionada.proceso)?.dictamen ?? "Dictamen final"}
-                dictamenUrl={gasto.procesos.find((p) => p.id === seleccionada.proceso)?.dictamen_url ?? "#"}
-              />
-            ) : (
-              <Bisel as="section" nivel="panel" interior="p-6 md:p-8">
-                <div className="grid gap-8 sm:grid-cols-3">
-                  <Kpi etiqueta="Filas oficiales" valor={ENTERO.format(gasto.resumen.filas_origen)} frase="194 locales y 53 federales en Baja California." />
-                  <Kpi etiqueta="Perfiles conciliados" valor={ENTERO.format(gasto.resumen.candidaturas)} frase="Con total final del Anexo II." />
-                  <Kpi
-                    etiqueta="Sin conciliar"
-                    valor={gasto.resumen.sin_conciliar === 0 ? "Ninguna" : ENTERO.format(gasto.resumen.sin_conciliar)}
-                    frase={gasto.resumen.sin_conciliar === 0 ? "Toda fila tiene respaldo documental." : "Excluidas de métricas y descritas en incidencias."}
-                    hueco={gasto.resumen.sin_conciliar > 0}
-                  />
-                </div>
-                <p className="mt-8 border-t border-vela pt-5 text-cuerpo text-tinta-prosa">
-                  Escribe al menos dos caracteres para elegir una candidatura. El gasto se compara
-                  solo con personas del mismo municipio, distrito o elección senatorial.
-                </p>
-              </Bisel>
-            )}
-          </>
-        )
-      ) : cargandoFinanciamiento ? <Esqueleto className="h-64" /> : errorFinanciamiento || !financiamiento ? (
-        <Bisel as="section" nivel="panel" interior="p-6 md:p-8">
-          <h2 className="text-rotulo text-tinta-titulo">Asignaciones no disponibles</h2>
-          <p className="mt-3 text-cuerpo text-tinta-prosa">El archivo del IEEBC no llegó a este despliegue. No se interpreta como cero.</p>
-        </Bisel>
-      ) : (
-        <Partidos
-          partidos={financiamiento.partidos}
-          totales={financiamiento.totales}
-          aviso={financiamiento.aviso}
-          ejercicio={financiamiento.ejercicio}
-          acuerdos={financiamiento.acuerdos}
-        />
-      )}
+      <ContenidoGasto
+        vista={vista}
+        cargandoGasto={cargandoGasto}
+        errorGasto={errorGasto}
+        gasto={gasto}
+        seleccionada={seleccionada}
+        alSeleccionar={elegirPersona}
+        cargandoFinanciamiento={cargandoFinanciamiento}
+        errorFinanciamiento={errorFinanciamiento}
+        financiamiento={financiamiento}
+      />
     </div>
   );
 }

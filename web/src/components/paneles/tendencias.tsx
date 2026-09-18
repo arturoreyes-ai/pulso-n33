@@ -47,7 +47,7 @@ import { Esqueleto, Hueco } from "@/components/ui/primitivas";
  * liga.
  */
 
-const SIN_TOKEN =
+const MENSAJE_SIN_DISPONIBILIDAD =
   "El panel de X no está disponible en este momento. El resto del tablero funciona igual.";
 
 const PIE =
@@ -88,6 +88,40 @@ function volumen(t: Tendencia): string {
 
 const porZona = (a: UbicacionTendencias, b: UbicacionTendencias) =>
   rango(a.zona ?? "") - rango(b.zona ?? "") || a.id.localeCompare(b.id);
+
+interface ModeloTendencias {
+  sinToken: boolean;
+  listas: UbicacionTendencias[];
+  conLista: string;
+  huecos: string[];
+  sinVolumen: boolean;
+  nacional: UbicacionTendencias | null;
+  cabeza: string;
+}
+
+function prepararTendencias(data: DocTendencias, zona: ZonaRuta | null): ModeloTendencias {
+  const activas = data.ubicaciones.filter((u) => u.activa);
+  const sinToken = activas.length > 0 && activas.every((u) => u.estado === "sin_token");
+  const listas = elegir(data, zona);
+  const conLista = enumerar(
+    data.ubicaciones.filter((u) => u.ambito === "zona" && u.activa).sort(porZona).map(titulo),
+  );
+  const huecos = data.ubicaciones
+    .filter((u) => u.ambito === "zona" && !u.activa)
+    .sort(porZona)
+    .map(titulo);
+  const sinVolumen = listas.every((u) => u.tendencias.every((t) => t.volumen === undefined));
+  const propia = zona === null ? null : (listas.find((u) => u.zona === zona) ?? null);
+  const nacional = data.ubicaciones.find((u) => u.ambito === "nacional") ?? null;
+  const nombreZona = zona === null ? "la región" : NOMBRE_CORTO[zona];
+  const cabeza =
+    zona === null
+      ? `Lo que X marca como tendencia ahora en ${conLista}, en México y en el mundo, en el orden de X.`
+      : propia !== null && propia.activa
+        ? `Lo que X marca como tendencia ahora en ${nombreZona}, en México y en el mundo, en el orden de X.`
+        : `X no publica una lista de tendencias para ${nombreZona}; abajo, México y el mundo.`;
+  return { sinToken, listas, conLista, huecos, sinVolumen, nacional, cabeza };
+}
 
 /**
  * Que ubicaciones se muestran y en que orden. El archivo va por id para que
@@ -210,51 +244,13 @@ function Lista({
   );
 }
 
-export function PanelTendencias({
-  zona,
-}: {
-  zona: ZonaRuta | null;
-}) {
-  const { data, error } = useTendencias();
-
-  if (error !== undefined) {
-    // El archivo lo escribe `pulso tendencias`, que corre solo con el token
-    // de Apify encendido: antes de la primera corrida no existe. Al lector se
-    // le dice el estado, no la causa.
-    return (
-      <p className="max-w-[70ch] text-lectura text-tinta-prosa">
-        Todavía no hay tendencias de X. El resto del tablero funciona igual.
-      </p>
-    );
-  }
-  if (data === undefined) return <Esqueleto className="h-[320px]" />;
-
-  const activas = data.ubicaciones.filter((u) => u.activa);
-  const sinToken = activas.length > 0 && activas.every((u) => u.estado === "sin_token");
-  const listas = elegir(data, zona);
-  const conLista = enumerar(
-    data.ubicaciones.filter((u) => u.ambito === "zona" && u.activa).sort(porZona).map(titulo),
-  );
-  const huecos = data.ubicaciones
-    .filter((u) => u.ambito === "zona" && !u.activa)
-    .sort(porZona)
-    .map(titulo);
-  const sinVolumen = listas.every((u) => u.tendencias.every((t) => t.volumen === undefined));
-  const propia = zona === null ? null : (listas.find((u) => u.zona === zona) ?? null);
-  const nacional = data.ubicaciones.find((u) => u.ambito === "nacional") ?? null;
-  const nombreZona = zona === null ? "la región" : NOMBRE_CORTO[zona];
-
-  const cabeza =
-    zona === null
-      ? `Lo que X marca como tendencia ahora en ${conLista}, en México y en el mundo, en el orden de X.`
-      : propia !== null && propia.activa
-        ? `Lo que X marca como tendencia ahora en ${nombreZona}, en México y en el mundo, en el orden de X.`
-        : `X no publica una lista de tendencias para ${nombreZona}; abajo, México y el mundo.`;
+function VistaTendencias({ data, zona }: { data: DocTendencias; zona: ZonaRuta | null }) {
+  const { sinToken, listas, conLista, huecos, sinVolumen, nacional, cabeza } = prepararTendencias(data, zona);
 
   return (
     <div>
       {sinToken ? (
-        <p className="max-w-[70ch] text-lectura text-tinta-prosa">{SIN_TOKEN}</p>
+        <p className="max-w-[70ch] text-lectura text-tinta-prosa">{MENSAJE_SIN_DISPONIBILIDAD}</p>
       ) : (
         <>
           <p className="max-w-[70ch] text-lectura text-tinta-titulo">{cabeza}</p>
@@ -291,4 +287,25 @@ export function PanelTendencias({
       <p className="mt-12 text-meta text-tinta-prosa">{PIE}</p>
     </div>
   );
+}
+
+export function PanelTendencias({
+  zona,
+}: {
+  zona: ZonaRuta | null;
+}) {
+  const { data, error } = useTendencias();
+
+  if (error !== undefined) {
+    // El archivo lo escribe `pulso tendencias`, que corre solo con el token
+    // de Apify encendido: antes de la primera corrida no existe. Al lector se
+    // le dice el estado, no la causa.
+    return (
+      <p className="max-w-[70ch] text-lectura text-tinta-prosa">
+        Todavía no hay tendencias de X. El resto del tablero funciona igual.
+      </p>
+    );
+  }
+  if (data === undefined) return <Esqueleto className="h-[320px]" />;
+  return <VistaTendencias data={data} zona={zona} />;
 }

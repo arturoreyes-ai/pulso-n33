@@ -147,23 +147,20 @@ export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opc
         {pestanas}
       </div>
 
-      {/* Cierra al elegir: aqui dentro todo navega. */}
-      <dialog ref={lugares} id={idOpciones} className="dialogo-lector" aria-labelledby={`titulo-${idOpciones}`}
-        onClick={(evento) => { if ((evento.target as HTMLElement).closest("a, button")) lugares.current?.close(); }}>
+      {/* Los enlaces navegan y desmontan la hoja; el boton de cierre la cierra aqui. */}
+      <dialog ref={lugares} id={idOpciones} className="dialogo-lector" aria-labelledby={`titulo-${idOpciones}`}>
         <div className="cabecera-dialogo-lector">
           <h2 id={`titulo-${idOpciones}`} className="text-rotulo text-tinta-titulo">{tituloOpciones}</h2>
-          <button type="button" className={CONTROL} aria-label="Cerrar opciones"><Cerrar size={20} aria-hidden /></button>
+          <button type="button" className={CONTROL} aria-label="Cerrar opciones" onClick={() => lugares.current?.close()}><Cerrar size={20} aria-hidden /></button>
         </div>
         {opciones}
       </dialog>
 
-      {/* Cierra al pulsar cualquier enlace o boton, como el de lugares: aqui
-          todo lo de dentro navega o envia. */}
-      <dialog ref={navegacion} id={idMenu} className="dialogo-lector" aria-labelledby={`titulo-${idMenu}`}
-        onClick={(evento) => { if ((evento.target as HTMLElement).closest("a, button")) navegacion.current?.close(); }}>
+      {/* Los enlaces y el formulario navegan; el boton de cierre controla la hoja. */}
+      <dialog ref={navegacion} id={idMenu} className="dialogo-lector" aria-labelledby={`titulo-${idMenu}`}>
         <div className="cabecera-dialogo-lector">
           <h2 id={`titulo-${idMenu}`} className="text-rotulo text-tinta-titulo">Ir a</h2>
-          <button type="button" className={CONTROL} aria-label="Cerrar menú"><Cerrar size={20} aria-hidden /></button>
+          <button type="button" className={CONTROL} aria-label="Cerrar menú" onClick={() => navegacion.current?.close()}><Cerrar size={20} aria-hidden /></button>
         </div>
         {menu}
       </dialog>

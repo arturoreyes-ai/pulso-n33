@@ -126,11 +126,11 @@ function Fila({ carril, escala, ahora }: { carril: Carril; escala: number; ahora
                 aria-label de arriba lleva la version hablada. */}
             {duracion(minutos)
               .split(" ")
-              .map((parte, i) =>
+              .map((parte) =>
                 /^\d+$/.test(parte) ? (
-                  <span key={i}>{parte}</span>
+                  <span key={parte}>{parte}</span>
                 ) : (
-                  <span key={i} className="text-meta font-normal text-tinta-prosa">
+                  <span key={parte} className="text-meta font-normal text-tinta-prosa">
                     {parte}
                   </span>
                 ),
@@ -195,6 +195,159 @@ function Grupo({
         ))}
       </ul>
     </div>
+  );
+}
+
+function ContenidoGaritas({
+  datos,
+  error,
+  consultando,
+  lectura,
+  escala,
+  ahora,
+}: {
+  datos: RespuestaGaritas | undefined;
+  error: unknown;
+  consultando: boolean;
+  lectura: ReturnType<typeof guion> | null;
+  escala: number;
+  ahora: number;
+}) {
+  return (
+    <section className={`${ANCHO} pt-4 pb-12 md:pt-6 md:pb-20`}>
+      {error && !datos ? (
+        <p
+          role="alert"
+          className="rounded-nucleo border border-aviso/40 bg-aviso/10 px-4 py-3 text-cuerpo text-tinta-dato"
+        >
+          No hay tiempos disponibles. Vuelve a intentar con Actualizar.
+        </p>
+      ) : null}
+
+      {!datos && !error ? (
+        consultando ? (
+          <Esqueleto className="h-[420px]" />
+        ) : (
+          <p className="py-16 text-center text-lectura text-tinta-prosa">
+            Los tiempos aparecerán aquí al consultar.
+          </p>
+        )
+      ) : null}
+
+      {datos ? (
+        <>
+          <Bisel interior="p-6 md:p-8">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+              <h2 className="text-meta font-semibold text-tinta-titulo">Para leer al aire</h2>
+            </div>
+
+            {lectura && lectura.hayCifras ? (
+              <>
+                {/* Los dos cruces son equivalentes y van en paralelo, como las
+                    tarjetas de abajo: en una sola columna el bloque medía ocho
+                    alturas y no se veía donde acababa uno y empezaba el otro. */}
+                <div className="mt-6 grid items-start gap-x-10 gap-y-9 md:grid-cols-2">
+                  {lectura.cues.map((cue) => (
+                    <section key={cue.lugar}>
+                      <h3 className="border-b border-filo pb-2 text-meta font-semibold uppercase text-tinta-prosa">
+                        {cue.lugar}
+                      </h3>
+                      {cue.modos.map((modo) => (
+                        <div key={modo.titulo} className="mt-7 first:mt-4">
+                          <p className="text-meta text-tinta-meta">{modo.titulo}</p>
+
+                          {/* Lo que se dice manda: es lo unico grande del
+                              bloque, y la ficha va debajo como pie. */}
+                          {modo.linea ? (
+                            <p className="mt-1.5 max-w-[46ch] text-rotulo text-tinta-titulo">
+                              {modo.linea}
+                            </p>
+                          ) : modo.sinLinea ? (
+                            /* Sin esto, un cruce sin cifras vigentes dejaba el
+                               hueco vacio al lado del que si las tiene, y el
+                               apuntador no decia por que. Es un hueco
+                               rotulado, no un cero. */
+                            <p className="mt-1.5 max-w-[46ch] text-cuerpo text-tinta-meta">
+                              {modo.sinLinea}
+                            </p>
+                          ) : null}
+
+                          <ul className="mt-2.5 flex flex-wrap items-baseline gap-x-5 gap-y-1">
+                            {modo.renglones.map((renglon) => (
+                              <li key={renglon.nombre} className="text-meta text-tinta-meta">
+                                {renglon.nombre}{" "}
+                                {/* Tres estados, no dos: cifra que se dice,
+                                    cifra real pero vieja —se ve, atenuada— y
+                                    hueco en palabras. */}
+                                <span
+                                  className={
+                                    !renglon.hayCifra
+                                      ? ""
+                                      : renglon.alDia
+                                        ? "font-semibold tabular-nums text-tinta-dato"
+                                        : "font-semibold tabular-nums text-tinta-prosa"
+                                  }
+                                >
+                                  {renglon.figura}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </section>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <div className="mt-6">
+                <p className="text-meta font-semibold text-tinta-meta">Sin tiempos</p>
+                <p className="mt-2 max-w-[46ch] text-rotulo text-tinta-titulo">
+                  No hay un tiempo disponible para los carriles.
+                </p>
+              </div>
+            )}
+          </Bisel>
+
+          <div className="mt-8 flex flex-wrap justify-between gap-x-4 gap-y-1 text-meta text-tinta-meta">
+            <span>Espera estimada</span>
+            <span>Hasta {duracion(escala)}</span>
+          </div>
+
+          <div className="mt-4 grid items-start gap-6 md:grid-cols-2">
+            {datos.cruces.map((cruce) => (
+              <Bisel as="section" nivel="panel" key={cruce.id} interior="p-6 md:p-7">
+                <header className="border-b border-filo pb-5">
+                  <h2 className="font-titular text-seccion text-tinta-titulo">{cruce.nombre}</h2>
+                  <p className="mt-1 text-meta text-tinta-meta">Hacia Estados Unidos</p>
+                </header>
+                <div className="pt-5">
+                  <Grupo
+                    titulo="Vehículos"
+                    carriles={cruce.carriles.filter((c) => c.viajero === "vehiculo")}
+                    escala={escala}
+                    ahora={ahora}
+                  />
+                  <Grupo
+                    titulo="Peatones"
+                    // Otay Mesa publica un carril peatonal Ready Lane que
+                    // duplica al general con la misma cifra; se omite para no
+                    // contar dos veces la misma fila.
+                    carriles={cruce.carriles.filter(
+                      (c) =>
+                        c.viajero === "peaton" &&
+                        !(cruce.id === "otay_mesa" && c.categoria === "ready"),
+                    )}
+                    escala={escala}
+                    ahora={ahora}
+                  />
+                </div>
+              </Bisel>
+            ))}
+          </div>
+        </>
+      ) : null}
+    </section>
   );
 }
 
@@ -294,141 +447,14 @@ export function TableroGaritas() {
         </div>
       </header>
 
-      <section className={`${ANCHO} pt-4 pb-12 md:pt-6 md:pb-20`}>
-        {error && !datos ? (
-          <p
-            role="alert"
-            className="rounded-nucleo border border-aviso/40 bg-aviso/10 px-4 py-3 text-cuerpo text-tinta-dato"
-          >
-            No hay tiempos disponibles. Vuelve a intentar con Actualizar.
-          </p>
-        ) : null}
-
-        {!datos && !error ? (
-          consultando ? (
-            <Esqueleto className="h-[420px]" />
-          ) : (
-            <p className="py-16 text-center text-lectura text-tinta-prosa">
-              Los tiempos aparecerán aquí al consultar.
-            </p>
-          )
-        ) : null}
-
-        {datos ? (
-          <>
-            <Bisel interior="p-6 md:p-8">
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h2 className="text-meta font-semibold text-tinta-titulo">Para leer al aire</h2>
-              </div>
-
-              {lectura && lectura.hayCifras ? (
-                <>
-                  {/* Los dos cruces son equivalentes y van en paralelo, como las
-                      tarjetas de abajo: en una sola columna el bloque medía ocho
-                      alturas y no se veía donde acababa uno y empezaba el otro. */}
-                  <div className="mt-6 grid items-start gap-x-10 gap-y-9 md:grid-cols-2">
-                    {lectura.cues.map((cue) => (
-                      <section key={cue.lugar}>
-                        <h3 className="border-b border-filo pb-2 text-meta font-semibold uppercase text-tinta-prosa">
-                          {cue.lugar}
-                        </h3>
-                        {cue.modos.map((modo) => (
-                          <div key={modo.titulo} className="mt-7 first:mt-4">
-                            <p className="text-meta text-tinta-meta">{modo.titulo}</p>
-
-                            {/* Lo que se dice manda: es lo unico grande del
-                                bloque, y la ficha va debajo como pie. */}
-                            {modo.linea ? (
-                              <p className="mt-1.5 max-w-[46ch] text-rotulo text-tinta-titulo">
-                                {modo.linea}
-                              </p>
-                            ) : modo.sinLinea ? (
-                              /* Sin esto, un cruce sin cifras vigentes dejaba el
-                                 hueco vacio al lado del que si las tiene, y el
-                                 apuntador no decia por que. Es un hueco
-                                 rotulado, no un cero. */
-                              <p className="mt-1.5 max-w-[46ch] text-cuerpo text-tinta-meta">
-                                {modo.sinLinea}
-                              </p>
-                            ) : null}
-
-                            <ul className="mt-2.5 flex flex-wrap items-baseline gap-x-5 gap-y-1">
-                              {modo.renglones.map((renglon) => (
-                                <li key={renglon.nombre} className="text-meta text-tinta-meta">
-                                  {renglon.nombre}{" "}
-                                  {/* Tres estados, no dos: cifra que se dice,
-                                      cifra real pero vieja —se ve, atenuada— y
-                                      hueco en palabras. */}
-                                  <span
-                                    className={
-                                      !renglon.hayCifra
-                                        ? ""
-                                        : renglon.alDia
-                                          ? "font-semibold tabular-nums text-tinta-dato"
-                                          : "font-semibold tabular-nums text-tinta-prosa"
-                                    }
-                                  >
-                                    {renglon.figura}
-                                  </span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </section>
-                    ))}
-                  </div>
-                </>
-              ) : (
-                <div className="mt-6">
-                  <p className="text-meta font-semibold text-tinta-meta">Sin tiempos</p>
-                  <p className="mt-2 max-w-[46ch] text-rotulo text-tinta-titulo">
-                    No hay un tiempo disponible para los carriles.
-                  </p>
-                </div>
-              )}
-            </Bisel>
-
-            <div className="mt-8 flex flex-wrap justify-between gap-x-4 gap-y-1 text-meta text-tinta-meta">
-              <span>Espera estimada</span>
-              <span>Hasta {duracion(escala)}</span>
-            </div>
-
-            <div className="mt-4 grid items-start gap-6 md:grid-cols-2">
-              {datos.cruces.map((cruce) => (
-                <Bisel as="section" nivel="panel" key={cruce.id} interior="p-6 md:p-7">
-                  <header className="border-b border-filo pb-5">
-                    <h2 className="font-titular text-seccion text-tinta-titulo">{cruce.nombre}</h2>
-                    <p className="mt-1 text-meta text-tinta-meta">Hacia Estados Unidos</p>
-                  </header>
-                  <div className="pt-5">
-                    <Grupo
-                      titulo="Vehículos"
-                      carriles={cruce.carriles.filter((c) => c.viajero === "vehiculo")}
-                      escala={escala}
-                      ahora={ahora}
-                    />
-                    <Grupo
-                      titulo="Peatones"
-                      // Otay Mesa publica un carril peatonal Ready Lane que
-                      // duplica al general con la misma cifra; se omite para no
-                      // contar dos veces la misma fila.
-                      carriles={cruce.carriles.filter(
-                        (c) =>
-                          c.viajero === "peaton" &&
-                          !(cruce.id === "otay_mesa" && c.categoria === "ready"),
-                      )}
-                      escala={escala}
-                      ahora={ahora}
-                    />
-                  </div>
-                </Bisel>
-              ))}
-            </div>
-
-          </>
-        ) : null}
-      </section>
+      <ContenidoGaritas
+        datos={datos}
+        error={error}
+        consultando={consultando}
+        lectura={lectura}
+        escala={escala}
+        ahora={ahora}
+      />
     </>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 
 import { CAPITULOS_MAXIMO, capitulosDe, hilar, type Capitulos, type Entrada, type EstadoCapitulo, type Hilado } from "./capitulos";
 import type { Rubro } from "./rubros";
@@ -87,9 +87,67 @@ function asentadoComunicados(doc: DocComunicados | undefined, cargando: boolean,
 const claves = (resultados: readonly ResultadoExterno[]): string =>
   resultados.map((r) => plegar(r.titulo)).join("\n");
 
+function construirEstados(
+  capitulos: Capitulos,
+  activados: number,
+  vivas: readonly ActualidadViva[],
+  iComunicados: number,
+  comunicados: ReturnType<typeof useComunicados>,
+  congelados: (Congelado | null)[],
+): { estados: EstadoCapitulo[]; hayNuevos: boolean } {
+  const estados: EstadoCapitulo[] = [];
+  let hayNuevos = false;
+  for (let i = 0; i < CAPITULOS_MAXIMO; i++) {
+    const c = capitulos[i];
+    if (c === undefined) {
+      estados.push(INACTIVO);
+      continue;
+    }
+    if (i === iComunicados) {
+      if (activados <= i) {
+        estados.push(INACTIVO);
+        continue;
+      }
+      let hielo = congelados[i] ?? null;
+      if (hielo === null) {
+        hielo = asentadoComunicados(comunicados.data, comunicados.isLoading, comunicados.error !== undefined);
+        congelados[i] = hielo;
+      }
+      estados.push(hielo ?? CARGANDO);
+      continue;
+    }
+    const viva = vivas[i]!;
+    if (!viva.activa) {
+      estados.push(INACTIVO);
+      continue;
+    }
+    // Escritura perezosa del ref durante el render: solo de null a un valor,
+    // una vez por capitulo. Es la inicializacion tardia que React permite.
+    let hielo = congelados[i] ?? null;
+    if (hielo === null) {
+      hielo = asentado(viva);
+      congelados[i] = hielo;
+    }
+    if (hielo === null) {
+      estados.push(CARGANDO);
+      continue;
+    }
+    estados.push(hielo);
+    if (hielo.estado === "fallo") {
+      if (viva.resultados.length > 0) hayNuevos = true;
+    } else if (!viva.cargando && viva.resultados.length > 0 && claves(viva.resultados) !== claves(hielo.resultados)) {
+      hayNuevos = true;
+    }
+  }
+  return { estados, hayNuevos };
+}
+
 export function useCapitulos(entrada: Entrada, elegido: Rubro | null, activados: number): CapitulosVivos {
   const capitulos = useMemo(() => capitulosDe(entrada, elegido), [entrada, elegido]);
-  const congelados = useRef<(Congelado | null)[]>(Array.from({ length: CAPITULOS_MAXIMO }, () => null));
+  const congelados = useMemo<(Congelado | null)[]>(
+    () => Array.from({ length: CAPITULOS_MAXIMO }, () => null),
+    [],
+  );
 
   /** El pedido de la ranura i, o null si no toca, no existe o no es de la
    *  lectura en vivo. Se escribe una vez y se usa nueve. */
@@ -115,52 +173,21 @@ export function useCapitulos(entrada: Entrada, elegido: Rubro | null, activados:
   const iComunicados = capitulos.findIndex((c) => c.fuente === "comunicados");
   const comunicados = useComunicados(iComunicados >= 0);
 
-  const estados: EstadoCapitulo[] = [];
-  let hayNuevos = false;
-  for (let i = 0; i < CAPITULOS_MAXIMO; i++) {
-    const c = capitulos[i];
-    if (c === undefined) {
-      estados.push(INACTIVO);
-      continue;
-    }
-    if (i === iComunicados) {
-      if (activados <= i) {
-        estados.push(INACTIVO);
-        continue;
-      }
-      let hielo = congelados.current[i] ?? null;
-      if (hielo === null) {
-        hielo = asentadoComunicados(comunicados.data, comunicados.isLoading, comunicados.error !== undefined);
-        congelados.current[i] = hielo;
-      }
-      estados.push(hielo ?? CARGANDO);
-      continue;
-    }
-    const viva = vivas[i]!;
-    if (!viva.activa) {
-      estados.push(INACTIVO);
-      continue;
-    }
-    // Escritura perezosa del ref durante el render: solo de null a un valor,
-    // una vez por capitulo. Es la inicializacion tardia que React permite.
-    let hielo = congelados.current[i] ?? null;
-    if (hielo === null) {
-      hielo = asentado(viva);
-      congelados.current[i] = hielo;
-    }
-    if (hielo === null) {
-      estados.push(CARGANDO);
-      continue;
-    }
-    estados.push(hielo);
-    if (hielo.estado === "fallo") {
-      if (viva.resultados.length > 0) hayNuevos = true;
-    } else if (!viva.cargando && viva.resultados.length > 0 && claves(viva.resultados) !== claves(hielo.resultados)) {
-      hayNuevos = true;
-    }
-  }
+  const { estados, hayNuevos } = construirEstados(capitulos, activados, vivas, iComunicados, comunicados, congelados);
 
-  const hilado = useMemo(() => hilar(capitulos, estados), [capitulos, ...estados]);
+  const estado0 = estados[0]!;
+  const estado1 = estados[1]!;
+  const estado2 = estados[2]!;
+  const estado3 = estados[3]!;
+  const estado4 = estados[4]!;
+  const estado5 = estados[5]!;
+  const estado6 = estados[6]!;
+  const estado7 = estados[7]!;
+  const estado8 = estados[8]!;
+  const hilado = useMemo(
+    () => hilar(capitulos, [estado0, estado1, estado2, estado3, estado4, estado5, estado6, estado7, estado8]),
+    [capitulos, estado0, estado1, estado2, estado3, estado4, estado5, estado6, estado7, estado8],
+  );
 
   return { capitulos, hilado, disponible: vivas[0]!.activa, hayNuevos };
 }

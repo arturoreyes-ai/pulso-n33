@@ -21,7 +21,8 @@ import { PestanasRubro } from "./pestanas-rubro";
 import { useNotas } from "@/lib/datos/hooks";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 import { teclasDelRecorrido, useRecorrido } from "@/lib/pantalla/recorrido";
-import { nombreDe, OpcionesAhora } from "./controles-ahora";
+import { OpcionesAhora } from "./controles-ahora";
+import { nombreDe } from "./nombre-ahora";
 import { EsqueletoTitular, TarjetaDivisor, TarjetaFinal, TarjetaHueco, TarjetaTitular } from "./tarjetas-ahora";
 
 /**
@@ -189,13 +190,11 @@ function RecorridoAhora({ entrada, rubro, zona, onRecargar, menu, analisis }: {
   const contenedor = useRef<HTMLDivElement>(null);
   const { actual, ir } = useRecorrido(contenedor);
   useEffect(() => {
-    // Idempotente a proposito: en desarrollo StrictMode corre el efecto dos
-    // veces con el mismo cierre, y `a + 1` dos veces pedia tres capitulos al
-    // abrir en vez de dos.
-    if (!debeActivar(hilado, actual, activados, capitulos.length)) return;
-    const siguiente = activados + 1;
-    setActivados((a) => Math.max(a, siguiente));
-  }, [hilado, actual, activados, capitulos.length]);
+    // El estado se consulta dentro del updater, que tambien es el guardia. Si
+    // StrictMode repite este efecto con el mismo cierre, la segunda llamada ve
+    // el valor ya activado y no vuelve a pedir un capitulo.
+    setActivados((a) => debeActivar(hilado, actual, a, capitulos.length) ? a + 1 : a);
+  }, [hilado, actual, capitulos.length]);
 
   const { tarjetas, completo } = hilado;
   // Lo que el corpus no tiene se pide a la pagina del propio medio, solo para

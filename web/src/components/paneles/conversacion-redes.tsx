@@ -112,11 +112,6 @@ export function ConversacionRedes({ zona, cubeta, analisis }: {
     if (turno > 0) hoja.current?.showModal();
   }, [turno]);
 
-  // Cambiar de lugar o de ambito invalida la lectura: hablaba de otra cosa.
-  useEffect(() => {
-    setEstado({ fase: "quieto" });
-  }, [zona, cubeta]);
-
   async function leer() {
     if (solicitudEnCurso.current) return;
     solicitudEnCurso.current = true;
@@ -124,14 +119,17 @@ export function ConversacionRedes({ zona, cubeta, analisis }: {
     try {
       const params = new URLSearchParams({ v: VERSION_ANALISIS_CONVERSACION, z: zona ?? "", c: cubeta });
       const r = await fetch(`/api/analizar-conversacion?${params}`);
+      if (!r.ok) {
+        const cuerpo = (await r.json()) as unknown;
+        setEstado({ fase: "fallo", mensaje: mensajeDeError(cuerpo) });
+        return;
+      }
       const cuerpo = (await r.json()) as unknown;
       const leido = leerAnalisisConversacion(cuerpo);
       if (leido !== null) {
         setEstado({ fase: "listo", analisis: leido });
       } else {
-        const mensaje = cuerpo !== null && typeof cuerpo === "object" && "mensaje" in cuerpo
-          && typeof cuerpo.mensaje === "string" ? cuerpo.mensaje : "No se pudo hacer la lectura.";
-        setEstado({ fase: "fallo", mensaje });
+        setEstado({ fase: "fallo", mensaje: mensajeDeError(cuerpo) });
       }
     } catch {
       setEstado({ fase: "fallo", mensaje: "No se pudo hacer la lectura." });
@@ -172,6 +170,13 @@ export function ConversacionRedes({ zona, cubeta, analisis }: {
       </dialog>
     </>
   );
+}
+
+function mensajeDeError(valor: unknown): string {
+  if (valor !== null && typeof valor === "object" && "mensaje" in valor && typeof valor.mensaje === "string") {
+    return valor.mensaje;
+  }
+  return "No se pudo hacer la lectura.";
 }
 
 /** Los conteos del modelo local. Enteros y nunca un porcentaje: con este

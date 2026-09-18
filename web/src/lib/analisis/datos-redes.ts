@@ -134,16 +134,19 @@ export async function reunirConversacion(
   leer: LeerDatos,
 ): Promise<Conversacion | "sin-datos"> {
   const salida: Conversacion = { bloques: [], publicaciones: 0, leidos: 0, reportados: 0 };
-  let alguno = false;
-  for (const red of ["instagram", "tiktok"] as const) {
+  const lecturas = await Promise.all((["instagram", "tiktok"] as const).map(async (red) => {
     const crudo = await leer(ARCHIVOS[red].datos);
-    if (crudo === null || typeof crudo !== "object") continue;
-    alguno = true;
+    if (crudo === null || typeof crudo !== "object") return { red, datos: null, porPost: undefined };
     const datos = crudo as DocRedes;
     const textos = await leer(ARCHIVOS[red].textos);
     const porPost = textos !== null && typeof textos === "object"
       ? (textos as DocRedesComentarios).por_post
       : undefined;
+    return { red, datos, porPost };
+  }));
+
+  for (const { red, datos, porPost } of lecturas) {
+    if (datos === null) continue;
     for (const post of seleccionarPublicaciones(datos, zona, red, cubeta)) {
       salida.publicaciones += 1;
       salida.reportados += post.comentarios;
@@ -153,5 +156,5 @@ export async function reunirConversacion(
       salida.bloques.push({ red, titulo: post.titulo, comentarios });
     }
   }
-  return alguno ? salida : "sin-datos";
+  return lecturas.some(({ datos }) => datos !== null) ? salida : "sin-datos";
 }
