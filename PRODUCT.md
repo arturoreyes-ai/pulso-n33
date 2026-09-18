@@ -258,11 +258,19 @@ real de la prensa y de la estadística oficial en el estado.
 Ninguna de estas cifras las calcula el tablero: se leen de la fuente oficial y
 se etiquetan. Cada una mide algo distinto y confundirlas es el error fácil.
 
+**Esta tabla es el único sitio donde eso está escrito.** Hasta el 18 de
+septiembre de 2026 el panel de indicadores traía un desplegable «Cómo leer este
+dato» que decía lo mismo en corto; era el último de los siete y se quitó con el
+pie del sitio, el mismo día y por la misma petición del cliente: la pantalla
+enseña el dato, no se explica. Lo que sigue en pantalla es la **etiqueta** de
+cada cifra —de qué fuente es y de cuándo—, porque eso no es metodología: es qué
+es ese número. Lo de abajo es lo que ya no dice ninguna pantalla.
+
 | Fuente | Qué es | Cadencia | La trampa |
 |---|---|---|---|
-| Índice SHF | avalúos de vivienda **con crédito hipotecario** | trimestral | base 2017=100 **rebaseada por serie**: los niveles no se comparan entre ciudades, solo las variaciones. Y no da precios en pesos por municipio |
+| Índice SHF | avalúos de vivienda **con crédito hipotecario** | trimestral | base 2017=100 **rebaseada por serie**: los niveles no se comparan entre ciudades, solo las variaciones. No da precios en pesos por municipio, y **solo existe para Tijuana y Mexicali**: para los otros cinco no hay índice y no se infiere del de al lado |
 | Predial SHCP | **recaudación**, no valuación | anual | contaminado por diferencias de tasa y de eficiencia de cobro; sirve para comparar un municipio consigo mismo, no para rankear |
-| SESNSP | delitos **reportados**, no ocurridos | mensual, ~3 semanas de rezago | la serie RNID 2026 no se concatena con 2015–2025 sin crosswalk: cambió la clasificación |
+| SESNSP | delitos **reportados**, no ocurridos | mensual, ~3 semanas de rezago | la serie RNID 2026 no se concatena con 2015–2025 sin crosswalk: cambió la clasificación. Y es **conteo absoluto, no per cápita**: un municipio grande sale arriba por ser grande |
 | ENSU | percepción, muestra probabilística | trimestral | la única medición real de percepción, y solo cubre dos ciudades |
 | SANDAG | valor **catastral**, no de venta | mensual | la Proposición 13 congela la base gravable hasta que la casa cambia de dueño, así que queda muy por debajo del mercado. No comparable con el SHF |
 
@@ -317,7 +325,7 @@ Y los temas salen de contar repeticiones de frases, sin modelo. Funcionan bien
 para lo que está claramente arriba y mal para lo sutil. Un tema sostenido por
 un solo medio se rotula como tal, porque es la agenda de ese medio.
 
-### Y las cinco se dicen en la página, no en los paneles
+### Y las cinco viven en el código y en este documento, no en la página
 
 El **13 de septiembre de 2026** el cliente pidió que la interfaz dejara de
 explicar cómo obtiene los datos. Es la regla del 12 de septiembre —la interfaz
@@ -328,21 +336,42 @@ la consulta literal, seguía con la regla de zona y terminaba diciendo que el
 texto de los comentarios «se publica fuera de git y este despliegue no lo
 trae».
 
-Eso no relaja ninguna de las cinco reglas, y esa es la condición. Las cinco se
-dicen enteras **en cada página**, en el pie del sitio, que es HTML de servidor
-y se lee aunque el bundle nunca llegue. Los huecos se siguen rotulando panel
-por panel: «sin dato» y «fuera de muestra» siguen siendo estados distintos de
-cero, las filas en vivo siguen marcadas y siguen diciendo que no se suman a las
-cifras de prensa, y «es el ranking de X, no una medida de la ciudad» sigue
-donde estaba. Lo que salió de la pantalla es el procedimiento —«pipeline»,
-«corpus», «corrida», «cosechado», Apify, las llaves, el redirector, los nombres
-de archivo—, no la salvedad.
+Hasta el 18 de septiembre de 2026 las cinco se decían enteras **en cada
+página**, en el pie del sitio. Ese día el cliente pidió quitar el pie del
+tablero completo, con el mismo argumento que había quitado las fichas «Acerca
+de» unas horas antes: el lector no viene a que le expliquen de dónde sale lo
+que ve. **Queda dicho aquí que esa prosa ya no está en pantalla**, y este
+documento pasa a ser el único sitio donde las cinco se leen juntas.
 
-Se quitó también el desplegable «Cómo leer este dato» de seis de los siete
-paneles, que era prosa de metodología y está en este documento. El de
-indicadores se queda: explica qué miden el índice SHF, el predial y la ENSU,
-que es el significado de la fuente y no el del código, y es el único lugar
-donde quitarlo haría que una cifra significara algo falso.
+Lo que **no** cambió es dónde importa, que es junto al dato. Las reglas siguen
+siendo ejecutables y siguen siendo visibles panel por panel: «sin dato» y
+«fuera de muestra» siguen siendo estados distintos de cero y los sigue pintando
+cada panel; por debajo de 30 elementos se siguen emitiendo conteos y no
+porcentajes; prensa y comentarios siguen sin sumarse en una sola cifra; el tono
+sigue sin cruzarse con `figuras`; las filas en vivo siguen marcadas y siguen
+diciendo que no cuentan en las cifras de prensa; «es el ranking de X, no una
+medida de la ciudad» sigue bajo su propio panel; y las lecturas del modelo
+siguen llevando su salvedad fija, que `web/src/lib/analisis/reglas.ts` sigue
+haciendo cumplir sobre la respuesta entera.
+
+Lo que se fue de la pantalla, en los dos pasos, es prosa: primero el
+procedimiento —«pipeline», «corpus», «corrida», «cosechado», Apify, las llaves,
+el redirector, los nombres de archivo— y después el enunciado general de las
+salvedades. Ninguna de las dos cosas era una comprobación; las comprobaciones
+están en `pulso/validador.py` y en `reglas.ts`, y ahí siguen.
+
+El desplegable «Cómo leer este dato» se había quitado ya de seis de los siete
+paneles, por ser prosa de metodología. El de indicadores había sobrevivido con
+el argumento de que explicaba qué miden el índice SHF, el predial y la ENSU —el
+significado de la fuente y no el del código—. El 18 de septiembre de 2026 se fue
+también, a petición del cliente, junto con el pie.
+
+Ese argumento no era falso y por eso hay que decir qué pasó con él: **lo que
+ese desplegable explicaba ahora solo está en este documento**, en la tabla de
+arriba. Un lector que mire el predial de dos municipios lado a lado y no abra
+PRODUCT.md no tiene en pantalla nada que le diga que está viendo recaudación y
+no valor. Lo que sí sigue en pantalla, pegado a cada cifra, es su fuente y su
+fecha; eso no se toca.
 
 Hacia adentro no cambia nada: este documento, `docs/PLAN.md`, `AGENTS.md` y los
 comentarios del código siguen nombrando cada mecanismo, porque la procedencia

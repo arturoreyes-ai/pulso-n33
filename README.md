@@ -661,6 +661,14 @@ corredor, `/tecate` empieza en Tecate, y `/?e=mexico` y `/?e=internacional` son
 facetas, no lugares. `/ahora`, que fue esta página el 14 de septiembre de 2026,
 responde un redirect permanente a `/`.
 
+La fila de temas bajo la barra —Todo, Clima, Seguridad, Deportes, Política,
+Economía— es la faceta `?t=<rubro>`, y son los mismos cinco rubros que ya sirve
+`/api/actualidad`. Elegir uno **reordena** la cadena para empezar por él: el
+capítulo del lugar pasa a segundo y los otros cuatro siguen detrás, así que
+sigue midiendo ocho capítulos (nueve en Tecate). Es ortogonal al lugar y los dos
+se conservan entre sí: `/tijuana?t=seguridad`, `/?e=mexico&t=economia`. Un rubro
+desconocido cae en «Todo»; con `?q=` manda la búsqueda y la fila no se pinta.
+
 La lupa de la barra **busca**: `?q=` en la misma ruta, así que `/tijuana?q=garita`
 busca en Tijuana. Es un formulario que se envía, no una búsqueda al teclear, y
 queda en el enlace.

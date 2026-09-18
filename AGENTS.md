@@ -588,7 +588,8 @@ already refused on the record in `docs/PLAN.md` §3.
   disclaimer that negates them cannot live under the same ban.** So the model is
   now told not to discuss representativeness at all and only says what the
   material leaves unestablished; `SALVEDAD_FIJA` in each panel says the rest,
-  where it cannot be omitted or softened — the same division as `chrome/pie.tsx`
+  where it cannot be omitted or softened — the same division `chrome/pie.tsx`
+  used to draw for the whole site
   and the five rules. Pinned in `probar-analisis.cjs`. Do not put it back in a
   prompt.
 - **Two product rules are executable in `web/`, not just prompted.**
@@ -664,7 +665,7 @@ Tailwind v4, pnpm.
   client's request along with `app/cobertura/`, `paginas/cobertura.tsx` and
   `paneles/cobertura.tsx`. It held the zone-by-source matrix and per-feed
   health. Rule 4 did not live there and still holds: every panel draws its own
-  `Hueco`, `chrome/pie.tsx` states that coverage is uneven by zone, and the
+  `Hueco` and the
   portada's run summary publishes how many sources answered. Do not re-add a
   view without re-adding it to `SECCIONES`, `NOMBRE`, `TITULO`, the
   `DESCRIPCION` record in `metadatos.ts` and the `CUERPOS` table in
@@ -676,7 +677,10 @@ Tailwind v4, pnpm.
   the **fixed full-screen reader** shared with `/ahora`
   (`components/lector/lector.tsx`, settle hook in `lib/pantalla/recorrido.ts`)
   on every width: a bar (back to the zone's portada, the place as a dialog of
-  links, info carrying the page's entrada and the `Pie`), a row of tabs in the
+  links, and — since 18 September 2026 — **no info button and no footer**: the
+  client asked that the UI stop explaining itself, so the «Acerca de» dialog
+  went and took each page's entrada prose with it, and `chrome/pie.tsx` was
+  deleted the same day (see below), a row of tabs in the
   style of X's trending page (`paneles/lector-redes.tsx`: Todas · Instagram ·
   TikTok · YouTube · X, `aria-pressed` buttons, a 2 px `chart-1` underline,
   one mounted at a time with SWR preload on hover), and a box below. The
@@ -736,22 +740,42 @@ Tailwind v4, pnpm.
 
   What that does *not* license is opacity. The distinction is meaning versus
   procedure: «Es el ranking de X, no una medida de la ciudad» stays, «leído sin
-  iniciar sesión» goes. The five PRODUCT.md rules are stated in full on every
-  page by `chrome/pie.tsx` — that footer is what makes the panels' silence
-  affordable, so do not thin it. Gap labels («sin dato», «fuera de muestra», the
+  iniciar sesión» goes.
+
+  **There is no longer a site footer, and that changes what the panels owe.**
+  `chrome/pie.tsx` stated the five PRODUCT.md rules on every page and this file
+  used to say «do not thin it». On 18 September 2026 the client removed it, and
+  the «Acerca de» dialogs with it: a reader does not come to be told where the
+  data comes from. Do not re-add a site-wide footer without them asking.
+
+  What that costs is real and should not be quietly recovered by adding prose
+  somewhere else. The panels' silence was affordable **because** the footer
+  spoke; now nothing states the five rules on screen at all. So the per-panel
+  expressions of them are no longer a courtesy, they are the whole of it:
+  `Hueco` and the «sin dato» / «fuera de muestra» labels (rule 4), counts below
+  30 (rule 2), press and comments never summed (rule 3), tone never joined to a
+  figure (rule 5), and each model reading's `SALVEDAD_FIJA`, which
+  `analisis/reglas.ts` enforces over the whole response. **Thinning any of those
+  is now a product regression with nothing behind it.** The rules themselves are
+  unchanged and still executable in `pulso/validador.py` and `reglas.ts`;
+  PRODUCT.md is now the only place they are written out together. Gap labels («sin dato», «fuera de muestra», the
   `Hueco` states) are rule 4 and are not mechanism; keep them. Degraded states
   say what is missing, never why in infrastructure terms.
 
-  `ui/como-leer.tsx` («Cómo leer este dato») now has exactly one caller, the
-  indicadores panel, because that block explains what the SHF index, the predial
-  and the ENSU measure — the source's meaning, not ours. Do not reintroduce it
-  elsewhere. All the mechanism prose that used to live in those blocks is in
+  `ui/como-leer.tsx` («Cómo leer este dato») is **gone**. It had survived on the
+  indicadores panel alone, on the argument that it explained what the SHF index,
+  the predial and the ENSU measure — the source's meaning, not ours. The client
+  removed it on 18 September 2026 along with the site footer. Do not re-add it.
+  What that argument was protecting now lives only in PRODUCT.md's «Los
+  indicadores y lo que cada uno NO dice» table, which is where to put anything
+  of that kind. Each figure keeps its **source and date label** on screen, which
+  is not methodology — it is what the number is — and that stays. All the mechanism prose that used to live in those blocks is in
   PRODUCT.md and in the module docstrings of `paginas/redes.tsx`,
   `paneles/visor-redes.tsx` and `paneles/comentarios-publicacion.tsx`.
 
 - **`/garitas` and `/gasto-electoral` are pages, not a separate site.** Both are
   `SUELTAS` in `secciones.ts`: in the nav, outside the place x view grid. They
-  mount `NavPildora` from their own server `page.tsx` — never from the client
+  mount `Navegacion` from their own server `page.tsx` — never from the client
   tablero, which would drag the nav's server action and `dist/ssr` icon into the
   client bundle. Garitas was the counter-example until 14 September 2026: it
   shipped its own `<nav>`, its own `garitas.module.css` and a
@@ -795,7 +819,20 @@ Tailwind v4, pnpm.
 
   It chains `/api/actualidad` lists as *chapters* in a fixed order (the chosen
   entry → its five rubros → the other two sections) instead of raising
-  `TOPE_ACTUALIDAD`; Google's order is kept inside a chapter and a folded title
+  `TOPE_ACTUALIDAD`. **Since 18 September 2026 a rubro can be the entry too**
+  (`?t=`, the tab row under the reader bar): the head is **reordered**, never
+  lengthened — chosen rubro, then the place's section, then the other four — so
+  the chain still measures eight (nine in Tecate) and `CAPITULOS_MAXIMO`, the
+  `Capitulos` tuple union and the nine `useActualidad` slots are untouched. The
+  reorder is a hand-written table in `cabezaDe` rather than a `filter` because
+  a filter returns `Capitulo[]` and the chain stops being of known length; it is
+  exhaustive over `Rubro | null` on purpose, so adding a rubro breaks at compile
+  time the way `ACENTO_RUBRO` already does. The place's section is never
+  dropped, only moved: choosing a theme narrows where you start, not what there
+  is. Like `?e=`, it is read on the **server** and choosing is navigating — but
+  unlike `?e=` a zone route reads it too, because a theme narrows a place
+  instead of competing with it. `?q=` still wins over it: search is a mode.
+  Existing chains are unchanged because the parameter defaults to null; Google's order is kept inside a chapter and a folded title
   already shown is dropped (`lib/busqueda/capitulos.ts`, pure, pinned by
   `scripts/probar-capitulos.cjs`). `use-capitulos.ts` freezes each list once it
   settles so the five-minute refresh cannot move the card under the reader's
@@ -853,7 +890,7 @@ Tailwind v4, pnpm.
   `chrome/menu-lector.tsx`, a **server** component passed as a ReactNode — the
   same channel as `informacion` — because it carries the `cerrarSesion` server
   action, which cannot be rendered from a client module. Build it from
-  `VISTAS` + `SUELTAS` + `ruta()`; never import `NavPildora` into a client
+  `VISTAS` + `SUELTAS` + `ruta()`; never import `Navegacion` into a client
   component. Place and view stay in **separate dialogs**.
 
 - **`/ahora` is now a 308 to `/`** (`app/ahora/page.tsx`, `permanentRedirect`).
