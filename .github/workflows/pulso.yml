@@ -56,6 +56,7 @@ jobs:
     # El modelo de sentimiento agrega unos minutos la primera vez (torch CPU
     # y ~430 MB de pesos); con los dos caches de abajo, despues es rapido.
     # Dos actores sincronicos mas (TikTok) pueden sumar ~10 min al peor caso.
+    # YouTube suma 32 peticiones HTTP a feeds publicos, que es ruido al lado.
     timeout-minutes: 35
     permissions:
       contents: write
@@ -133,7 +134,7 @@ jobs:
         run: python -m pulso comunicados ${{ inputs.sin_red && '--sin-red' || '' }}
 
       # El cache de comentarios NO puede ir a git (retencion de 30 dias, ver
-      # pulso/youtube.py), pero sin persistirlo entre corridas la ventana de
+      # pulso/conversacion.py), pero sin persistirlo entre corridas la ventana de
       # 30 dias no existiria: cada corrida derivaria solo de si misma.
       # actions/cache resuelve las dos cosas: no es git, caduca solo, y es
       # privado del repo.
@@ -147,7 +148,7 @@ jobs:
 
       # --sentimiento modelo etiqueta cada comentario EN EL CACHE (que vive 30
       # dias y no entra a git); a data/ solo llegan conteos por zona y tema.
-      - name: Conversación (YouTube)
+      - name: Conversación (API de YouTube)
         if: vars.YOUTUBE_HABILITADO == 'true'
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
@@ -223,6 +224,34 @@ jobs:
         env:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
         run: python -m pulso tiktok --sentimiento modelo
+
+      # cache/youtube: aqui NO hay texto crudo ni freno de costo, porque este
+      # modulo no cosecha comentarios. Guarda solo publicaciones.json, el
+      # catalogo de piezas vistas, y hace falta por una razon distinta: el
+      # feed devuelve 15 entradas y Milenio publica ~29 piezas al dia, asi que
+      # una suya puede salirse del feed DENTRO de la ventana de 24 horas.
+      - name: Restaurar el cache de YouTube
+        uses: actions/cache@v4
+        with:
+          path: cache/youtube
+          key: youtube-${{ github.run_id }}
+          restore-keys: youtube-
+
+      # Shorts y videos largos de los 16 canales de config/youtube.json, por
+      # FEED ATOM PUBLICO: 32 peticiones, sin llave, sin cuota y sin costo.
+      #
+      # Este paso va SIN COMPUERTA, y las dos que podrian ponersele son las
+      # equivocadas. APIFY_HABILITADO regula gasto y aqui no hay ninguno:
+      # colgarlo de ahi haria que una decision de facturacion borrara en
+      # silencio un panel gratuito. YOUTUBE_HABILITADO existe por las
+      # Politicas para Desarrolladores (III.E.2.a, III.E.4.d), que hablan de
+      # datos de la API; este feed no lo es --- es el mismo tipo de documento
+      # que los quince feeds de prensa de config/medios.json --- y colgarlo de
+      # ahi afirmaria que la bandera trata de YouTube-como-marca en vez de las
+      # politicas, congelando una posicion legal que nadie tomo. El otro
+      # modulo de YouTube, `pulso conversacion`, si va detras de ella.
+      - name: YouTube (Shorts y videos)
+        run: python -m pulso youtube
 
       # X entra SOLO por tendencias (peticion del cliente, 11 sep 2026): el
       # actor lee el endpoint de tendencias con un guest token, sin cuenta ni
