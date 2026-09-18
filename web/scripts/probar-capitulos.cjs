@@ -48,6 +48,7 @@ const { ZONAS_RUTA } = cargar('lib/dominio/zonas');
 const { TOPE_ACTUALIDAD } = cargar('lib/busqueda/tipos');
 const { indiceDeImagenes, imagenPara } = cargar('lib/busqueda/imagenes');
 const { imagenDeHtml } = cargar('lib/busqueda/og-imagen');
+const { indiceDeRelacionadas, relacionadasPara, terminos } = cargar('lib/busqueda/relacionadas');
 
 const fila = (titulo, publicado = null, idioma = 'es') =>
   ({ titulo, url: 'https://news.google.com/rss/articles/' + encodeURIComponent(titulo), dominio: 'x.example', medio: 'X', publicado, idioma });
@@ -317,7 +318,70 @@ function comprobar() {
     'un og:image fuera del <head> no cuenta',
   );
 
-  console.log('Capítulos: 8 capítulos (9 en Tecate), orden, repetidos, fallos, activación, imágenes y og:image verificados offline.');
+  // --- notas relacionadas: por rareza, contra el archivo ya descargado -----
+  // No hay lista de palabras vacias a proposito: la rareza hace ese trabajo
+  // sola y con el corpus de hoy. Lo que se fija aqui es que de verdad la haga.
+  const rel = (titulo, extra = {}) => ({
+    id: 'id-' + plegarLocal(titulo).replace(/ /g, '-').slice(0, 24),
+    titulo, url: 'https://medio.example/' + encodeURIComponent(titulo),
+    dominio: 'medio.example', fuente: 'medio', zona_medio: 'Tijuana', zonas: [],
+    alcance: 'zona', fecha: '2026-09-10', publicado: null,
+    capturado: '2026-09-10T00:00:00Z', figuras: [], postura: null, ...extra,
+  });
+  const plegarLocal = (t) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+  assert.deepEqual(terminos('Grito en Tijuana, 2026'), ['grito', 'tijuana'],
+    'menos de 4 letras fuera, y un año no es un tema');
+
+  // A escala de archivo de verdad: la rareza es una PROPORCION, asi que con
+  // cuarenta notas «2 de 40» no es raro y con quinientas si. Un fixture chico
+  // probaria un regimen que el producto nunca ve.
+  // «tijuana» y «gobierno» salen en casi todo el archivo; «pirotecnia» no.
+  const relleno = Array.from({ length: 500 }, (_, i) =>
+    rel('Gobierno de Tijuana anuncia obra numero ' + (i + 1)));
+  const indiceRel = indiceDeRelacionadas([
+    ...relleno,
+    rel('Pirotecnia ilumina el cielo de Tijuana en el Grito'),
+    rel('Aseguran pirotecnia clandestina en una bodega de Tijuana'),
+    rel('Gobierno de Tijuana repavimenta la Vía Rápida'),
+  ]);
+
+  const hallados = relacionadasPara('Pirotecnia deja tres heridos en Tijuana', indiceRel);
+  assert.ok(hallados.length >= 2, 'dos notas comparten un término raro');
+  assert.ok(hallados.every((n) => /Pirotecnia/i.test(n.titulo)),
+    'gana el término raro, no «tijuana», que está en todas');
+
+  // Dos términos comunes compartidos no bastan: es la forma más fácil de que
+  // un panel de relacionadas mienta con cara de acierto.
+  assert.deepEqual(relacionadasPara('Gobierno de Tijuana presenta su informe', indiceRel), [],
+    'sin ningún término raro en común no hay relación');
+
+  // La misma nota no es una nota relacionada.
+  const mismos = relacionadasPara('Pirotecnia ilumina el cielo de Tijuana en el Grito', indiceRel);
+  assert.ok(!mismos.some((n) => plegarLocal(n.titulo) === plegarLocal('Pirotecnia ilumina el cielo de Tijuana en el Grito')),
+    'se descarta por titular plegado, la misma llave que imagenes.ts');
+
+  // `fuera` es lo que el gacetero marcó como ajeno a la región: el caso de
+  // El Imparcial y Hermosillo. No se relaciona.
+  const conFuera = indiceDeRelacionadas([
+    ...relleno,
+    rel('Pirotecnia asegurada en Hermosillo', { alcance: 'fuera' }),
+    rel('Pirotecnia asegurada en Tijuana'),
+  ]);
+  const sinFuera = relacionadasPara('Aseguran pirotecnia en un domicilio', conFuera);
+  assert.ok(!sinFuera.some((n) => /Hermosillo/.test(n.titulo)), 'una nota «fuera» no se relaciona');
+
+  // Archivo vacío y titular sin términos: ni error ni invención.
+  assert.deepEqual(relacionadasPara('Lo que sea', indiceDeRelacionadas([])), []);
+  assert.deepEqual(relacionadasPara('un no si', indiceRel), [],
+    'sin dos términos propios no hay con qué comparar');
+
+  // Determinista: el mismo archivo da el mismo orden.
+  assert.deepEqual(
+    relacionadasPara('Pirotecnia deja tres heridos en Tijuana', indiceRel).map((n) => n.id),
+    relacionadasPara('Pirotecnia deja tres heridos en Tijuana', indiceRel).map((n) => n.id));
+
+  console.log('Capítulos: 8 capítulos (9 en Tecate), orden, repetidos, fallos, activación, imágenes, og:image y relacionadas verificados offline.');
 }
 
 comprobar();

@@ -3,6 +3,7 @@
 import { ShareNetwork as IconoCompartir, TrendUp as Tendencia } from "@phosphor-icons/react";
 import { useState } from "react";
 
+import { BotonRelacionadas } from "@/components/paneles/relacionadas-titular";
 import { clasesChip } from "@/components/ui/clases";
 import type { ReferenciaAnalisis } from "@/lib/busqueda/enlaces";
 import type { Tarjeta } from "@/lib/busqueda/capitulos";
@@ -50,13 +51,15 @@ type Titular = Extract<Tarjeta, { tipo: "titular" }>;
 type Divisor = Extract<Tarjeta, { tipo: "divisor" }>;
 type Hueco = Extract<Tarjeta, { tipo: "hueco" }>;
 
-export function TarjetaTitular({ t, titulares, indice, imagen = null, analisis = false, referencia = null }: {
+export function TarjetaTitular({ t, titulares, indice, imagen = null, analisis = false, referencia = null, onRelacionadas }: {
   t: Titular;
   titulares: number;
   indice: number;
   imagen?: string | null;
   analisis?: boolean;
   referencia?: ReferenciaAnalisis | null;
+  /** Abre la hoja de notas relacionadas, que vive UNA sola en el recorrido. */
+  onRelacionadas?: (() => void) | undefined;
 }) {
   const iso = t.r.publicado;
   const valida = iso !== null && !Number.isNaN(Date.parse(iso));
@@ -126,6 +129,8 @@ export function TarjetaTitular({ t, titulares, indice, imagen = null, analisis =
         {/* La referencia prefiere el enlace del medio. Si la nota acaba de
             aparecer conserva el token para resolverlo solo tras confirmar. */}
         {analisis ? <AnalisisTitular titulo={t.r.titulo} referencia={referencia} medio={t.r.medio} /> : null}
+        {/* Antes del contador, que es quien lleva el `ml-auto`. */}
+        {onRelacionadas ? <BotonRelacionadas onAbrir={onRelacionadas} /> : null}
         <Compartir titulo={t.r.titulo} url={t.r.url} />
         <p className="ml-auto text-meta tabular-nums text-tinta-meta">{t.orden} de {titulares}</p>
       </div>
