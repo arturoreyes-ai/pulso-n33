@@ -12,7 +12,7 @@ import { leerJson } from "@/lib/datos/fetcher";
 import { ruta } from "@/lib/dominio/secciones";
 import { NOMBRE_CORTO, ZONAS_RUTA, type ZonaRuta } from "@/lib/dominio/zonas";
 import { CUBETAS, cubetasDisponibles, type CubetaRegion } from "@/lib/dominio/publicaciones";
-import { useRedes, useTikTok } from "@/lib/datos/hooks";
+import { useRedes, useTikTok, useYouTube } from "@/lib/datos/hooks";
 import VisorRedes from "./visor-redes";
 
 /**
@@ -62,10 +62,15 @@ import VisorRedes from "./visor-redes";
  */
 
 const PESTANAS = [
-  { id: "todas", nombre: "Todas", datos: [RUTAS.redes, RUTAS.tiktok, RUTAS.redesComentarios, RUTAS.tiktokComentarios] },
+  { id: "todas", nombre: "Todas", datos: [RUTAS.redes, RUTAS.tiktok, RUTAS.youtube, RUTAS.redesComentarios, RUTAS.tiktokComentarios] },
   { id: "instagram", nombre: "Instagram", datos: [RUTAS.redes, RUTAS.redesComentarios] },
   { id: "tiktok", nombre: "TikTok", datos: [RUTAS.tiktok, RUTAS.tiktokComentarios] },
-  { id: "youtube", nombre: "YouTube", datos: [RUTAS.conversacion] },
+  // Hasta el 18 de septiembre de 2026 esta pestana era el panel agregado de
+  // comentarios (conversacion.json), congelado desde el 4 de septiembre porque
+  // el cron no lo refresca. Ahora es un visor como los dos de arriba, con los
+  // Shorts y los videos de los canales del corredor. Sin par de comentarios:
+  // el feed publico no los trae.
+  { id: "youtube", nombre: "YouTube", datos: [RUTAS.youtube] },
   { id: "x", nombre: "X", datos: [RUTAS.tendencias] },
 ] as const;
 
@@ -98,7 +103,7 @@ const OPCIONES_ZONA: readonly (ZonaRuta | null)[] = [null, ...ZONAS_RUTA];
 
 export function LectorRedes({ zona, paneles, menu, analisis = false }: {
   zona: ZonaRuta | null;
-  paneles: { youtube: ReactNode; x: ReactNode };
+  paneles: { x: ReactNode };
   menu: ReactNode;
   /** Si se pinta el boton de lectura automatica. Lo decide el servidor
    *  (`analisisHabilitado`): ANTHROPIC_API_KEY no lleva NEXT_PUBLIC_, asi que
@@ -117,7 +122,8 @@ export function LectorRedes({ zona, paneles, menu, analisis = false }: {
   // filtro ES la zona. Si solo una tiene filas, no hay nada que elegir.
   const instagram = useRedes();
   const tiktok = useTikTok();
-  const disponibles = zona === null ? cubetasDisponibles(instagram.data, tiktok.data) : [];
+  const youtube = useYouTube();
+  const disponibles = zona === null ? cubetasDisponibles(instagram.data, tiktok.data, youtube.data) : [];
   const activa = disponibles.includes(cubeta) ? cubeta : (disponibles[0] ?? "corredor");
   const lugar = zona === null ? "Toda la región" : NOMBRE_CORTO[zona];
   return (
@@ -130,7 +136,8 @@ export function LectorRedes({ zona, paneles, menu, analisis = false }: {
       opciones={<OpcionesLugar zona={zona} cubetas={disponibles} activa={activa} onCubeta={setCubeta} />} menu={menu}
       // «De que se habla» va en la barra y no en una pestana: las pestanas son
       // plataformas y esta pregunta las cruza. Solo con Instagram o TikTok
-      // delante -- YouTube no publica texto y X son tendencias, no comentarios.
+      // delante -- YouTube no cosecha comentarios y X son tendencias, no
+      // comentarios.
       acciones={pestana === "youtube" || pestana === "x" ? null
         : <ConversacionRedes key={`${zona ?? "region"}:${activa}`} zona={zona} cubeta={activa} analisis={analisis} />}
       pestanas={
@@ -152,7 +159,10 @@ export function LectorRedes({ zona, paneles, menu, analisis = false }: {
           })}
         </div>
       }>
-      {pestana === "youtube" || pestana === "x"
+      {/* X sigue siendo una hoja de prosa: son tendencias, no publicaciones
+          que se puedan recorrer una por pantalla. Las otras cuatro caen en el
+          visor. */}
+      {pestana === "x"
         ? <div className="hoja-lector"><div className="mx-auto w-full max-w-[88rem] px-4 py-8 md:px-8">{paneles[pestana]}</div></div>
         : <VisorRedes key={`${zona ?? "region"}:${activa}`} zona={zona} filtro={pestana} cubeta={activa} analisis={analisis} />}
     </Lector>

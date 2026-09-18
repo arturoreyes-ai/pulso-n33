@@ -87,7 +87,7 @@ export function TarjetaTitular({ t, titulares, indice, imagen = null, analisis =
           )}
         </figure>
       <p className={`text-meta ${t.acento}`}>{t.rotulo}</p>
-      <h2 className="mt-4 max-w-[24ch] break-words font-titular text-seccion text-tinta-titulo md:text-hero md:[font-stretch:112%]">
+      <h2 className="titular-ahora mt-4 max-w-[40ch] break-words font-titular text-seccion text-tinta-titulo">
         {t.r.titulo}
       </h2>
       <p className="mt-6 flex flex-wrap items-center gap-2 text-cuerpo text-tinta-meta">

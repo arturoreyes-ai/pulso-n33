@@ -651,6 +651,20 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
   overflow-wrap: anywhere;
 }
 @media (min-width: 48rem) { .tarjeta-ahora { padding: 3rem 2rem; } }
+/* El caso: un titular de garitas de nueve renglones hacia crecer la tarjeta y
+   dejaba sus acciones fuera de la primera pantalla. El texto completo sigue en
+   el DOM y en el enlace al medio; aqui se acota la superficie de lectura para
+   que la accion exista en la misma mirada que el titular. */
+.titular-ahora {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  text-wrap: balance;
+}
+@media (min-width: 48rem) {
+  .titular-ahora { -webkit-line-clamp: 4; }
+}
 .figura-ahora {
   flex: none;
   width: 100%;
@@ -691,7 +705,27 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
   text-transform: uppercase;
   color: var(--color-tinta-dato);
 }
-.acciones-ahora { position: relative; }
+.acciones-ahora {
+  position: relative;
+  width: 100%;
+}
+.acciones-ahora > a,
+.acciones-ahora > button {
+  min-width: 0;
+  justify-content: center;
+}
+@media (max-width: 47.999rem) {
+  /* En telefono el enlace principal tiene su propia fila; las acciones
+     secundarias comparten la siguiente y el contador no compite por espacio. */
+  .acciones-ahora { gap: 0.5rem; }
+  .acciones-ahora > a:first-child { flex-basis: 100%; }
+  .acciones-ahora > button { flex: 1 1 auto; }
+  .acciones-ahora > p {
+    flex-basis: 100%;
+    margin-left: 0;
+    text-align: right;
+  }
+}
 .aviso-compartir {
   position: absolute;
   inset-inline-start: 0;

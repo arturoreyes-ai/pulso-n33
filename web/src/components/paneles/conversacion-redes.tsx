@@ -81,7 +81,10 @@ function sumar(
     for (const post of seleccionarPublicaciones(d, zona, red, cubeta)) {
       c.publicaciones += 1;
       c.opinion += post.opinion;
-      c.reportados += post.comentarios;
+// `comentarios` falta en las plataformas cuyo feed no lo publica (YouTube).
+      // Ninguna de ellas llega hasta aqui -- no tienen texto que leer -- y si
+      // alguna llegara, no sumar es mas honesto que afirmar un cero.
+      c.reportados += post.comentarios ?? 0;
       c.positivo += post.sentimiento.positivo;
       c.negativo += post.sentimiento.negativo;
       c.neutral += post.sentimiento.neutral;

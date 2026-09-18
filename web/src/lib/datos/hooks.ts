@@ -36,8 +36,6 @@ export const useComunicados = (activo = true) =>
   useSWRImmutable<DocComunicados>(activo ? RUTAS.comunicados : null, leerJson);
 export const useIndicadores = () =>
   useSWRImmutable<DocIndicadores>(RUTAS.indicadores, leerJson);
-export const useConversacion = () =>
-  useSWRImmutable<DocConversacion>(RUTAS.conversacion, leerJson);
 export const useFuentes = () => useSWRImmutable<DocFuentes>(RUTAS.fuentes, leerJson);
 export const useRoster = () => useSWRImmutable<DocRoster>(RUTAS.roster, leerJson);
 export const useRedes = () => useSWRImmutable<DocRedes>(RUTAS.redes, leerJson);
@@ -46,6 +44,9 @@ export const useRedes = () => useSWRImmutable<DocRedes>(RUTAS.redes, leerJson);
 export const useRedesComentarios = () =>
   useSWRImmutable<DocRedesComentarios>(RUTAS.redesComentarios, leerJson);
 export const useTikTok = () => useSWRImmutable<DocRedes>(RUTAS.tiktok, leerJson);
+/** Shorts y videos largos por feed publico. SIN par de comentarios: este
+ *  modulo no los cosecha, y el documento lo dice con `cosecha_comentarios`. */
+export const useYouTube = () => useSWRImmutable<DocRedes>(RUTAS.youtube, leerJson);
 export const useTikTokComentarios = () =>
   useSWRImmutable<DocRedesComentarios>(RUTAS.tiktokComentarios, leerJson);
 /** Tendencias de X por ubicacion: un solo archivo, sin par de texto. */

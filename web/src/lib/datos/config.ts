@@ -14,7 +14,6 @@ export const RUTAS = {
   fuentes: `${BASE}/fuentes.json`,
   notas: `${BASE}/notas.json`,
   temas: `${BASE}/temas.json`,
-  conversacion: `${BASE}/conversacion.json`,
   indicadores: `${BASE}/indicadores.json`,
   roster: `${BASE}/roster.json`,
   archivoIndice: `${BASE}/archivo/indice.json`,
@@ -26,6 +25,10 @@ export const RUTAS = {
   // TikTok: mismo contrato que redes.json, mismo par de archivos.
   tiktok: `${BASE}/tiktok.json`,
   tiktokComentarios: `${BASE}/tiktok-comentarios.json`,
+  // YouTube: Shorts y videos largos por feed publico. Mismo contrato que
+  // redes.json pero SIN par de texto: este modulo no cosecha comentarios, y
+  // el documento lo dice con `cosecha_comentarios: false`.
+  youtube: `${BASE}/youtube.json`,
   // X: el ranking de tendencias por ubicacion, sin tuits ni identidad. Lo
   // escribe `pulso tendencias`; un solo archivo, sin par de texto.
   tendencias: `${BASE}/tendencias.json`,

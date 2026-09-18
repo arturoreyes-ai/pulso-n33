@@ -254,11 +254,6 @@ function VistaTendencias({ data, zona }: { data: DocTendencias; zona: ZonaRuta |
       ) : (
         <>
           <p className="max-w-[70ch] text-lectura text-tinta-titulo">{cabeza}</p>
-          <p className="mt-2 max-w-[70ch] text-meta text-tinta-prosa">
-            {sinVolumen
-              ? "X no publica el volumen de estas tendencias: es «sin dato», no cero."
-              : "Donde X publica el volumen se muestra; donde no, es «sin dato», no cero."}
-          </p>
         </>
       )}
 

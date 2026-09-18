@@ -312,7 +312,7 @@ export interface DocIndicadores {
 // ------------------------------------------------------------- conversacion
 
 /**
- * NO es `Tema`: `derivar()` en pulso/youtube.py le quita `ejemplos` y `notas`
+ * NO es `Tema`: `derivar()` en pulso/conversacion.py le quita `ejemplos` y `notas`
  * porque son texto literal de comentarios, y eso no se puede almacenar mas de
  * 30 dias ni, por tanto, commitear.
  */
@@ -478,14 +478,24 @@ export interface RedesSalud {
   error?: string;
 }
 
-/** Las dos plataformas comparten contrato; ver `PLATAFORMAS_REDES` en el validador. */
-export type PlataformaRedes = "instagram" | "tiktok";
+/** Las tres plataformas comparten contrato; ver `PLATAFORMAS_REDES` en el
+ *  validador. `youtube` es el módulo del FEED PÚBLICO (`pulso/youtube.py`),
+ *  no el de la API de datos, que escribe `conversacion.json` y tiene otro
+ *  fundamento legal: sus datos no se suman en un mismo agregado. */
+export type PlataformaRedes = "instagram" | "tiktok" | "youtube";
 
 export interface DocRedes {
   esquema: 1;
   generado: string;
   plataforma: PlataformaRedes;
   retencion_dias: 30;
+  /** `false` dice que esta plataforma NO cosecha comentarios, así que los
+   *  conteos de abajo salen en cero por eso y no porque se midiera y no
+   *  hubiera nada. Es la distinción entre «sin dato» y «0» aplicada al
+   *  documento entero. Falta en un corte anterior al 18 de septiembre de
+   *  2026, y entonces se asume `true`. La interfaz lo lee para no pintar el
+   *  botón de comentarios ni el de Analizar. */
+  cosecha_comentarios?: boolean;
   comentarios_vigentes: number;
   posts_vigentes: number;
   /** Comentarios con palabras y no repetidos. Lo único sobre lo que se
@@ -563,7 +573,7 @@ export interface Destacado {
   url: string;
   cuenta: string;
   zona: string;
-  /** Solo TikTok. El veredicto CRUDO del gacetero sobre el pie, al lado de
+  /** TikTok y YouTube. El veredicto CRUDO del gacetero sobre el pie, al lado de
    *  `zona` y no en su lugar: con `ambito` los dos dejaron de coincidir, y un
    *  video de Guadalajara en la edición de México queda `zona: "nacional"`
    *  igual que uno que no nombró lugar. De aquí sale la etiqueta: `fuera`
@@ -573,11 +583,26 @@ export interface Destacado {
   fecha: string;
   titulo: string;
   tipo: "imagen" | "video" | "carrusel" | "otro";
-  likes: number;
-  /** Total que reporta el actor. */
-  comentarios: number;
-  /** Solo en video, y solo si es mayor que 0. */
+  /** Solo YouTube, y obligatorio ahí. Shorts y videos largos se cortan por
+   *  separado porque sus vistas no miden lo mismo: desde el 31 de marzo de
+   *  2025 una vista de Short cuenta cualquier arranque o repetición sin
+   *  tiempo mínimo, y la de un video largo no. Medido el 18 de septiembre de
+   *  2026: mediana de 447 vistas contra 7. También decide la proporción del
+   *  embed, 9:16 contra 16:9. */
+  formato?: "short" | "video";
+  /** Instagram y TikTok. El feed público de YouTube no los publica, y su
+   *  ausencia es «sin dato»: un 0 se leería como «nadie». */
+  likes?: number;
+  /** Total que reporta el actor. Ausente en YouTube, por lo mismo. */
+  comentarios?: number;
+  /** Solo en video. Obligatorio en YouTube, donde ordena el corte; en las
+   *  otras dos, solo si es mayor que 0. */
   reproducciones?: number;
+  /** Solo YouTube: `media:starRating@count` del feed. NO es «likes» —Google
+   *  no documenta qué cuenta— y no es campo de pantalla: existe para el
+   *  archivo y como segundo criterio de orden, igual que `duracion` en
+   *  TikTok. */
+  valoraciones?: number;
   /** Solo TikTok. El @handle de quien publicó el video: la única identidad
    *  que cruza a data/, por decisión del cliente (8 sep 2026). La URL ya lo
    *  trae. Quien comenta nunca. */

@@ -3,9 +3,11 @@ import type { Destacado, DocRedes } from "../datos/tipos";
 /** La vista visual conserva la selección de la lista: primero el límite por
  * plataforma y zona, después el orden de lectura. Mezclar antes del límite
  * dejaría a la plataforma más numerosa ocupar toda la selección. */
-export type RedVisual = "instagram" | "tiktok";
+export type RedVisual = "instagram" | "tiktok" | "youtube";
 /** Como se nombra cada red al lector. */
-export const NOMBRE_RED: Record<RedVisual, string> = { instagram: "Instagram", tiktok: "TikTok" };
+export const NOMBRE_RED: Record<RedVisual, string> = {
+  instagram: "Instagram", tiktok: "TikTok", youtube: "YouTube",
+};
 export interface PublicacionVisual {
   post: Destacado;
   red: RedVisual;
@@ -17,7 +19,8 @@ export interface PublicacionVisual {
 export function compararPublicaciones(a: Destacado, b: Destacado): number {
   return b.fecha.localeCompare(a.fecha) ||
     (b.publicado ?? "").localeCompare(a.publicado ?? "") ||
-    b.likes - a.likes || a.url.localeCompare(b.url);
+    (b.likes ?? b.reproducciones ?? 0) - (a.likes ?? a.reproducciones ?? 0) ||
+    a.url.localeCompare(b.url);
 }
 
 /**
@@ -60,9 +63,10 @@ export const CUBETAS: { id: CubetaRegion; nombre: string }[] = [
 export function cubetasDisponibles(
   instagram: DocRedes | undefined,
   tiktok: DocRedes | undefined,
+  youtube: DocRedes | undefined,
 ): CubetaRegion[] {
   const juntas = new Set<CubetaRegion>();
-  for (const datos of [instagram, tiktok]) {
+  for (const datos of [instagram, tiktok, youtube]) {
     if (datos) for (const c of cubetasConFilas(datos)) juntas.add(c);
   }
   return CUBETAS.map((c) => c.id).filter((c) => juntas.has(c));
@@ -75,8 +79,24 @@ export function cubetasDisponibles(
 const VUELTAS_GARANTIZADAS = 1;
 
 /** El orden del archivo, para desempatar dentro de una misma vuelta. */
-const compararPorLikes = (a: Destacado, b: Destacado): number =>
-  b.likes - a.likes || b.comentarios - a.comentarios || a.url.localeCompare(b.url);
+/**
+ * El orden del corte, por plataforma. TIENE que coincidir con
+ * `PLATAFORMAS_REDES[red].orden` del validador y con `ORDEN` de
+ * `pulso/youtube.py`: si divergen, la página de una zona y la de región
+ * reparten distinto sobre los mismos datos.
+ *
+ * YouTube ordena por vistas porque su feed público no publica likes ni conteo
+ * de comentarios. No se rellenan con cero —eso sería «nadie», no «no lo
+ * medimos»—, así que aquí se leen como ausentes.
+ */
+const compararPorMerito = (red: RedVisual) => (a: Destacado, b: Destacado): number =>
+  red === "youtube"
+    ? (b.reproducciones ?? 0) - (a.reproducciones ?? 0) ||
+      (b.valoraciones ?? 0) - (a.valoraciones ?? 0) ||
+      a.url.localeCompare(b.url)
+    : (b.likes ?? 0) - (a.likes ?? 0) ||
+      (b.comentarios ?? 0) - (a.comentarios ?? 0) ||
+      a.url.localeCompare(b.url);
 
 /**
  * Una vuelta por cuenta antes del merito.
@@ -105,7 +125,8 @@ const compararPorLikes = (a: Destacado, b: Destacado): number =>
  * de diez likes por delante de tres de nueve mil. Y no agrega filas: donde
  * publica una sola cuenta la salida es identica a la de antes.
  */
-function porTurnos(posts: readonly Destacado[], tope: number): Destacado[] {
+function porTurnos(posts: readonly Destacado[], tope: number,
+                   red: RedVisual = "instagram"): Destacado[] {
   if (posts.length <= tope) return [...posts];
   const turno = new Map<string, number>();
   const vistos = new Map<string, number>();
@@ -119,7 +140,7 @@ function porTurnos(posts: readonly Destacado[], tope: number): Destacado[] {
   // que SWR comparte entre el visor, los conteos y la ruta de analisis en el
   // mismo render. Ordenarlo en sitio se lo cambiaria a los tres.
   const elegidos = new Set([...posts]
-    .sort((a, b) => vuelta(a) - vuelta(b) || compararPorLikes(a, b))
+    .sort((a, b) => vuelta(a) - vuelta(b) || compararPorMerito(red)(a, b))
     .slice(0, tope)
     .map((post) => post.url));
   // Se devuelve en el ORDEN DEL ARCHIVO, no en el del reparto: esto elige, no
@@ -135,9 +156,12 @@ function porTurnos(posts: readonly Destacado[], tope: number): Destacado[] {
  * el lector no tiene manera de comprobar. Con omision divergirian en silencio;
  * asi es un error de compilacion.
  *
- * Solo Instagram reparte, por decision del cliente del 17 de septiembre de
- * 2026. En TikTok `cuenta` es el id de una busqueda y no una voz: repartirla
- * seria repartir el mecanismo.
+ * Reparten Instagram y YouTube; TikTok es la EXCEPCION, no la regla. Alli
+ * `cuenta` es el id de una busqueda y no una voz: repartirla seria repartir el
+ * mecanismo, y su equivalente honesto seria `creador`. En las otras dos
+ * `cuenta` es un medio con nombre impreso. Medido en YouTube el 18 de
+ * septiembre de 2026: los quince primeros por vistas salieron de cinco canales
+ * de los ocho que publicaron, con uno solo llevandose seis lugares.
  */
 export function seleccionarPublicaciones(
   datos: DocRedes,
@@ -149,7 +173,7 @@ export function seleccionarPublicaciones(
   const dentro = zona === null ? EN_CUBETA[cubeta] : (z: string) => z === zona;
   const suyos = posts.filter((post) => dentro(post.zona));
   const tope = datos.destacados_maximo ?? 15;
-  return red === "instagram" ? porTurnos(suyos, tope) : suyos.slice(0, tope);
+  return red === "tiktok" ? suyos.slice(0, tope) : porTurnos(suyos, tope, red);
 }
 
 /** Solo enlaces de publicaciones, nunca perfiles, redirecciones ni HTML. */
@@ -157,14 +181,32 @@ export function canonizarPublicacion(valor: string, red: RedVisual): string | nu
   try {
     const url = new URL(valor);
     if (url.protocol !== "https:" || url.username || url.password || url.port) return null;
+    // Tres ramas EXPLICITAS. TikTok era el caso por defecto, y dejarlo asi
+    // haria que una URL de YouTube cayera en su validador y volviera null sin
+    // decir por que.
     if (red === "instagram") {
       if (!["instagram.com", "www.instagram.com"].includes(url.hostname)) return null;
       const partes = /^\/(p|reel)\/([A-Za-z0-9_-]+)\/?$/.exec(url.pathname);
       return partes ? `https://www.instagram.com/p/${partes[2]}/` : null;
     }
-    if (!["tiktok.com", "www.tiktok.com"].includes(url.hostname)) return null;
-    const partes = /^\/@([A-Za-z0-9_.]+)\/video\/(\d+)\/?$/.exec(url.pathname);
-    return partes ? `https://www.tiktok.com/@${partes[1]!.toLowerCase()}/video/${partes[2]}` : null;
+    if (red === "tiktok") {
+      if (!["tiktok.com", "www.tiktok.com"].includes(url.hostname)) return null;
+      const partes = /^\/@([A-Za-z0-9_.]+)\/video\/(\d+)\/?$/.exec(url.pathname);
+      return partes ? `https://www.tiktok.com/@${partes[1]!.toLowerCase()}/video/${partes[2]}` : null;
+    }
+    // YouTube llega en tres formas -- /shorts/, /watch?v= y youtu.be/ -- y las
+    // tres son el mismo video. Se canoniza por id para que el visor no monte
+    // dos veces la misma pieza y para que la clave de busqueda sea una sola.
+    if (["youtu.be"].includes(url.hostname)) {
+      const corto = /^\/([A-Za-z0-9_-]{6,20})$/.exec(url.pathname);
+      return corto ? `https://www.youtube.com/watch?v=${corto[1]}` : null;
+    }
+    if (!["youtube.com", "www.youtube.com", "m.youtube.com"].includes(url.hostname)) return null;
+    const corto = /^\/shorts\/([A-Za-z0-9_-]{6,20})\/?$/.exec(url.pathname);
+    if (corto) return `https://www.youtube.com/watch?v=${corto[1]}`;
+    if (url.pathname !== "/watch") return null;
+    const v = url.searchParams.get("v") ?? "";
+    return /^[A-Za-z0-9_-]{6,20}$/.test(v) ? `https://www.youtube.com/watch?v=${v}` : null;
   } catch { return null; }
 }
 
@@ -189,13 +231,16 @@ export function fuenteDePublicacion(post: Destacado, red: RedVisual, nombres: Ma
   if (red === "tiktok") {
     return post.creador === undefined ? "un creador" : `@${post.creador.replace(/^@/, "")}`;
   }
+  // En Instagram y en YouTube el publicador ES la cuenta: una fila del
+  // catalogo, con nombre impreso. No hay `creador` que publicar.
   return nombres.get(post.cuenta) ?? post.cuenta;
 }
 
-export function reunirPublicaciones(instagram: DocRedes | undefined, tiktok: DocRedes | undefined, zona: string | null, cubeta: CubetaRegion = "corredor"): PublicacionVisual[] {
+export function reunirPublicaciones(instagram: DocRedes | undefined, tiktok: DocRedes | undefined, youtube: DocRedes | undefined, zona: string | null, cubeta: CubetaRegion = "corredor"): PublicacionVisual[] {
   const salida: PublicacionVisual[] = [];
   const vistos = new Set<string>();
-  for (const [red, datos] of [["instagram", instagram], ["tiktok", tiktok]] as const) {
+  for (const [red, datos] of [["instagram", instagram], ["tiktok", tiktok],
+                              ["youtube", youtube]] as const) {
     if (!datos) continue;
     const nombres = nombresDeCuentas(datos);
     for (const post of seleccionarPublicaciones(datos, zona, red, cubeta)) {

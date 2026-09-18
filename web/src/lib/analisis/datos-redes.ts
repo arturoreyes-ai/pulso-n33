@@ -149,7 +149,10 @@ export async function reunirConversacion(
     if (datos === null) continue;
     for (const post of seleccionarPublicaciones(datos, zona, red, cubeta)) {
       salida.publicaciones += 1;
-      salida.reportados += post.comentarios;
+// `comentarios` falta en las plataformas cuyo feed no lo publica (YouTube).
+      // Ninguna de ellas llega hasta aqui -- no tienen texto que leer -- y si
+      // alguna llegara, no sumar es mas honesto que afirmar un cero.
+      salida.reportados += post.comentarios ?? 0;
       const comentarios = (porPost?.[post.url] ?? []).map((c) => c.texto);
       if (comentarios.length === 0) continue;
       salida.leidos += comentarios.length;

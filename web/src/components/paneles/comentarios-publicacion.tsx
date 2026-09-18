@@ -132,7 +132,7 @@ export function ComentariosPublicacion({ fila, textos }: { fila: PublicacionVisu
       <p className="text-meta text-tinta-meta">{fila.fuente} · {NOMBRE_RED[fila.red]}</p>
       <h3 className="mt-1 break-words text-rotulo text-tinta-titulo">{d.titulo || "Publicación sin título"}</h3>
       <p className="mt-4 max-w-[65ch] text-cuerpo text-tinta-prosa">
-        {F.fraseComentariosPost(d.sentimiento, d.cosechados, d.comentarios, d.opinion)}
+        {F.fraseComentariosPost(d.sentimiento, d.cosechados, d.comentarios ?? d.cosechados, d.opinion)}
       </p>
       {d.temas.length === 0 ? null : (
         <p className="mt-2 flex flex-wrap gap-2 text-meta text-tinta-meta">

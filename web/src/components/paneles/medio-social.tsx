@@ -71,6 +71,32 @@ function MedioTikTok({ url, fallar }: { url: string; fallar: () => void }) {
   </>;
 }
 
+/** YouTube: el reproductor incrustado, en su dominio sin cookies.
+ *
+ * `youtube-nocookie.com` por la misma razon por la que el sitio elige siempre
+ * la opcion que menos rastrea: no deja cookies hasta que alguien le da a
+ * reproducir. La proporcion la decide el FORMATO y no la red -- 9:16 para un
+ * Short y 16:9 para un video largo --, que es el unico sitio de la interfaz
+ * donde los dos formatos se comportan distinto.
+ *
+ * La URL canonica es siempre /watch?v=<id> (ver canonizarPublicacion), asi que
+ * el id sale del parametro y no del final de la ruta como en TikTok.
+ */
+function MedioYouTube({ url, formato, fallar }: { url: string; formato: "short" | "video" | undefined; fallar: () => void }) {
+  let id = "";
+  try {
+    id = new URL(url).searchParams.get("v") ?? "";
+  } catch {
+    id = "";
+  }
+  if (!id) return <p className="py-8 text-lectura text-tinta-meta">Esta publicación no se puede mostrar aquí.</p>;
+  const proporcion = formato === "video" ? "aspect-video" : "aspect-[9/16]";
+  return <iframe title="Publicación de YouTube"
+    src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&playsinline=1&rel=0`}
+    allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen
+    className={`${proporcion} w-full border-0`} onError={fallar} />;
+}
+
 /** La forma que tendra el medio antes de tenerlo, para que la tarjeta apenas
  *  se mueva cuando aterrice. TikTok es un 9:16 limpio. Instagram trae su
  *  propio marco (cabecera con la cuenta, pie con acciones y texto), unos
@@ -78,8 +104,13 @@ function MedioTikTok({ url, fallar }: { url: string; fallar: () => void }) {
  *  0.25rem. Los dos numeros se estimaron a 279px de ancho; si en un telefono
  *  real el iframe cae mas alto o mas bajo que el esqueleto, se ajustan aqui y
  *  en ningun otro lugar. Sin rotulo de plataforma: la banda ya la nombra. */
-export function EsqueletoMedio({ red, tipo, pulsar = true }: { red: RedVisual; tipo: Destacado["tipo"]; pulsar?: boolean }) {
-  const proporcion = red === "tiktok" || tipo === "video" ? "aspect-[9/16]" : "aspect-[4/5]";
+export function EsqueletoMedio({ red, tipo, formato, pulsar = true }: { red: RedVisual; tipo: Destacado["tipo"]; formato?: Destacado["formato"]; pulsar?: boolean }) {
+  // En YouTube manda el formato: un video largo es 16:9 y un Short 9:16. Si el
+  // esqueleto no mide lo que va a montar, el congelado de alturas del visor
+  // salta una tarjeta justo al cambiar de formato.
+  const proporcion = red === "youtube"
+    ? (formato === "video" ? "aspect-video" : "aspect-[9/16]")
+    : red === "tiktok" || tipo === "video" ? "aspect-[9/16]" : "aspect-[4/5]";
   return <div aria-hidden data-esqueleto={red} className={`flex w-full flex-col gap-1 ${pulsar ? "animate-pulse" : ""}`}>
     {red === "instagram" ? <div className="h-[3.25rem] rounded-nucleo bg-vela" /> : null}
     <div className={`${proporcion} w-full rounded-nucleo bg-vela`} />
@@ -127,14 +158,16 @@ export function MedioSocial({ publicacion }: { publicacion: PublicacionVisual })
   if (!publicacion.url) return <p className="py-8 text-lectura text-tinta-meta">Esta publicación no se puede mostrar aquí.</p>;
   const ofrecerRecarga = fallo || (tardo && !listo);
   return <div data-medio={publicacion.red} className="grid">
-    {cubierto ? null : <div className="[grid-area:1/1]"><EsqueletoMedio red={publicacion.red} tipo={publicacion.post.tipo} pulsar={!fallo && !listo} /></div>}
+    {cubierto ? null : <div className="[grid-area:1/1]"><EsqueletoMedio red={publicacion.red} tipo={publicacion.post.tipo} formato={publicacion.post.formato} pulsar={!fallo && !listo} /></div>}
     {/* self-start: en una celda apilada el hijo se estira a la altura de la
         fila y el observador mediria el esqueleto, no el medio. */}
     <div ref={medio} onTransitionEnd={(evento) => { if (evento.propertyName === "opacity" && listo) setCubierto(true); }}
       className={`[grid-area:1/1] min-w-0 self-start transition-opacity duration-[var(--dur-cambio)] ease-firma ${listo ? "opacity-100" : "opacity-0"}`}>
       {fallo ? null : publicacion.red === "instagram"
         ? <MedioInstagram key={intento} url={publicacion.url} fallar={fallar} />
-        : <MedioTikTok key={intento} url={publicacion.url} fallar={fallar} />}
+        : publicacion.red === "youtube"
+          ? <MedioYouTube key={intento} url={publicacion.url} formato={publicacion.post.formato} fallar={fallar} />
+          : <MedioTikTok key={intento} url={publicacion.url} fallar={fallar} />}
     </div>
     {ofrecerRecarga ? <div className="[grid-area:1/1] flex flex-col items-center justify-end gap-2 pb-4 text-center">
       {fallo ? <p role="status" className="text-cuerpo text-tinta-meta">La publicación no está disponible en esta vista.</p> : null}

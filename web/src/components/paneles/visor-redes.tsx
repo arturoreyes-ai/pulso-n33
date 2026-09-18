@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { X as Cerrar } from "@phosphor-icons/react";
-import { useRedes, useRedesComentarios, useTikTok, useTikTokComentarios } from "@/lib/datos/hooks";
+import { useRedes, useRedesComentarios, useTikTok, useTikTokComentarios, useYouTube } from "@/lib/datos/hooks";
 import type { ComentarioPublicado } from "@/lib/datos/tipos";
 import { NOMBRE_RED, reunirPublicaciones, type CubetaRegion, type PublicacionVisual, type RedVisual } from "@/lib/dominio/publicaciones";
 import { fechaCorta, hace, hora } from "@/lib/dominio/formato";
@@ -46,28 +46,45 @@ type Cortes = Partial<Record<RedVisual, string>>;
 export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis = false }: { zona: ZonaRuta | null; filtro: FiltroVisual; cubeta?: CubetaRegion; analisis?: boolean }) {
   const instagram = useRedes();
   const tiktok = useTikTok();
+  const youtube = useYouTube();
   const textosInstagram = useRedesComentarios();
   const textosTikTok = useTikTokComentarios();
-  const textos: Record<RedVisual, Textos> = { instagram: textosInstagram, tiktok: textosTikTok };
-  const publicaciones = useMemo(() => reunirPublicaciones(instagram.data, tiktok.data, zona, cubeta), [instagram.data, tiktok.data, zona, cubeta]);
+  // YouTube NO tiene entrada: su feed publico no trae comentarios, asi que no
+  // hay archivo de texto que pedir. El visor lo decide por
+  // `cosecha_comentarios` del documento y no por la red, para que encenderlos
+  // despues sea un cambio de datos y no de codigo.
+  const textos: Partial<Record<RedVisual, Textos>> = { instagram: textosInstagram, tiktok: textosTikTok };
+  const publicaciones = useMemo(() => reunirPublicaciones(instagram.data, tiktok.data, youtube.data, zona, cubeta), [instagram.data, tiktok.data, youtube.data, zona, cubeta]);
   const filas = useMemo(() => publicaciones.filter((fila) => filtro === "todas" || fila.red === filtro), [publicaciones, filtro]);
-  const cortes: Cortes = { instagram: instagram.data?.generado, tiktok: tiktok.data?.generado };
+  const cortes: Cortes = { instagram: instagram.data?.generado, tiktok: tiktok.data?.generado, youtube: youtube.data?.generado };
+  // `cosecha_comentarios` ausente se lee como true: un corte anterior al 18 de
+  // septiembre de 2026 no lo trae y si cosechaba.
+  const conComentarios: Partial<Record<RedVisual, boolean>> = {
+    instagram: instagram.data?.cosecha_comentarios ?? true,
+    tiktok: tiktok.data?.cosecha_comentarios ?? true,
+    youtube: youtube.data?.cosecha_comentarios ?? true,
+  };
   // Una plataforma del filtro actual sin datos y sin error: todavia carga.
+  const pide = (red: RedVisual) => filtro === "todas" || filtro === red;
   const cargando =
-    (filtro !== "tiktok" && !instagram.data && !instagram.error) ||
-    (filtro !== "instagram" && !tiktok.data && !tiktok.error);
-  const estados = [
-    (filtro === "todas" || filtro === "instagram") && !instagram.data
-      ? instagram.error ? "Las publicaciones de Instagram no están disponibles." : "Cargando Instagram…" : null,
-    (filtro === "todas" || filtro === "tiktok") && !tiktok.data
-      ? tiktok.error ? "Las publicaciones de TikTok no están disponibles." : "Cargando TikTok…" : null,
-  ].filter((estado): estado is string => estado !== null);
+    (pide("instagram") && !instagram.data && !instagram.error) ||
+    (pide("tiktok") && !tiktok.data && !tiktok.error) ||
+    (pide("youtube") && !youtube.data && !youtube.error);
+  const estados = ([
+    ["instagram", instagram, "Instagram"],
+    ["tiktok", tiktok, "TikTok"],
+    ["youtube", youtube, "YouTube"],
+  ] as const).map(([red, r, nombre]) =>
+    pide(red) && !r.data
+      ? r.error ? `Las publicaciones de ${nombre} no están disponibles.` : `Cargando ${nombre}…`
+      : null,
+  ).filter((estado): estado is string => estado !== null);
   return (
     <>
       {/* El estado se dice pero no ocupa lugar: la caja es la pantalla y una
           linea encima encogeria las tarjetas. */}
       {estados.map((estado) => <p key={estado} role="status" className="sr-only">{estado}</p>)}
-      <Recorrido key={`${filtro}:${filas.map((fila) => fila.clave).join("|")}`} publicaciones={filas} cortes={cortes} cargando={cargando} textos={textos} analisis={analisis} />
+      <Recorrido key={`${filtro}:${filas.map((fila) => fila.clave).join("|")}`} publicaciones={filas} cortes={cortes} cargando={cargando} textos={textos} conComentarios={conComentarios} analisis={analisis} />
     </>
   );
 }
@@ -80,11 +97,14 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis
  *  esqueleto mientras carga, y si no hay nada, el hueco dicho como hueco. La
  *  caja ES la pantalla, y una linea suelta en su lugar dejaria el lector
  *  vacio. */
-function Recorrido({ publicaciones, cortes, cargando, textos, analisis }: {
+function Recorrido({ publicaciones, cortes, cargando, textos, conComentarios, analisis }: {
   publicaciones: PublicacionVisual[];
   cortes: Cortes;
   cargando: boolean;
-  textos: Record<RedVisual, Textos>;
+  /** Parcial: una plataforma sin cosecha de comentarios no tiene archivo de
+   *  texto que pedir. Ver `conComentarios`. */
+  textos: Partial<Record<RedVisual, Textos>>;
+  conComentarios: Partial<Record<RedVisual, boolean>>;
   analisis: boolean;
 }) {
   const contenedor = useRef<HTMLDivElement>(null);
@@ -122,7 +142,8 @@ function Recorrido({ publicaciones, cortes, cargando, textos, analisis }: {
       {publicaciones.map((fila, indice) => (
         <Publicacion key={fila.clave} fila={fila} indice={indice} total={total} corte={cortes[fila.red]}
           activo={indice === actual && visible && enPantalla}
-          comentarios={textos[fila.red].data?.por_post[fila.post.url]}
+          comentarios={textos[fila.red]?.data?.por_post[fila.post.url]}
+          conComentarios={conComentarios[fila.red] ?? true}
           analisis={analisis}
           onComentarios={() => { setAbierta(fila); setTurnoComentarios((t) => t + 1); }}
           onAnalizar={() => { setAnalizada(fila); setTurnoIA((t) => t + 1); }} />
@@ -138,7 +159,9 @@ function Recorrido({ publicaciones, cortes, cargando, textos, analisis }: {
         <h2 id="titulo-comentarios" className="text-rotulo text-tinta-titulo">Comentarios</h2>
         <button type="button" className={CONTROL} aria-label="Cerrar comentarios" onClick={() => hoja.current?.close()}><Cerrar size={20} aria-hidden /></button>
       </div>
-      {abierta === null ? null : <ComentariosPublicacion key={abierta.clave} fila={abierta} textos={textos[abierta.red]} />}
+      {abierta === null || textos[abierta.red] === undefined
+        ? null
+        : <ComentariosPublicacion key={abierta.clave} fila={abierta} textos={textos[abierta.red]!} />}
     </dialog>
     <dialog ref={hojaIA} className="dialogo-lector" aria-labelledby="titulo-lectura-publicacion" onClose={() => setAnalizada(null)}>
       <div className="cabecera-dialogo-lector">
@@ -172,13 +195,18 @@ function lugarDe(fila: PublicacionVisual): string {
   return `${fila.red === "instagram" ? "desde" : "sobre"} ${nombre}`;
 }
 
-function Publicacion({ fila, indice, total, corte, activo, comentarios, analisis, onComentarios, onAnalizar }: {
+function Publicacion({ fila, indice, total, corte, activo, comentarios, conComentarios, analisis, onComentarios, onAnalizar }: {
   fila: PublicacionVisual;
   indice: number;
   total: number;
   corte: string | undefined;
   activo: boolean;
   comentarios: ComentarioPublicado[] | undefined;
+  /** Si la plataforma cosecha comentarios. Cuando no, la tarjeta no ofrece ni
+   *  la hoja ni Analizar: no hay texto que abrir ni que leerle a un modelo, y
+   *  un boton que abre "no hay comentarios" en TODAS las tarjetas es peor que
+   *  no tenerlo. Sale de `cosecha_comentarios` del documento, no de la red. */
+  conComentarios: boolean;
   analisis: boolean;
   onComentarios: () => void;
   onAnalizar: () => void;
@@ -214,11 +242,15 @@ function Publicacion({ fila, indice, total, corte, activo, comentarios, analisis
         {fila.url
           ? <a href={fila.url} target="_blank" rel="noopener noreferrer nofollow" className={clasesChip(true)}>Ver original</a>
           : <p className="text-meta text-tinta-meta md:text-cuerpo">Enlace no disponible.</p>}
-        <button type="button" className={clasesChip(false)} onClick={onComentarios}>Comentarios</button>
-        {analisis ? <BotonAnalizar onAbrir={onAnalizar} /> : null}
+        {conComentarios
+          ? <button type="button" className={clasesChip(false)} onClick={onComentarios}>Comentarios</button>
+          : null}
+        {analisis && conComentarios ? <BotonAnalizar onAbrir={onAnalizar} /> : null}
         <p className="ml-auto text-meta tabular-nums text-tinta-meta">{indice + 1} de {total}</p>
       </div>
-      <div className="mt-6 hidden md:block"><VistaPreviaComentarios comentarios={comentarios} /></div>
+      {conComentarios
+        ? <div className="mt-6 hidden md:block"><VistaPreviaComentarios comentarios={comentarios} /></div>
+        : null}
     </div>
   </article>;
 }
@@ -250,7 +282,7 @@ function EspacioMedio({ publicacion, activo }: { publicacion: PublicacionVisual;
   return <div className={CLASES_MARCO_MEDIO}>
     <div className="medio-visual mx-auto md:mx-0 md:max-w-[24rem]" style={{ minHeight: altura || undefined }}>
       <div ref={espacio}>
-        {activo ? <MedioSocial publicacion={publicacion} /> : <EsqueletoMedio red={publicacion.red} tipo={publicacion.post.tipo} pulsar={false} />}
+        {activo ? <MedioSocial publicacion={publicacion} /> : <EsqueletoMedio red={publicacion.red} tipo={publicacion.post.tipo} formato={publicacion.post.formato} pulsar={false} />}
       </div>
     </div>
   </div>;

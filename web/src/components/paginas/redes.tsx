@@ -1,7 +1,6 @@
 import { MenuLector } from "@/components/chrome/menu-lector";
 import { analisisHabilitado } from "@/lib/analisis/config";
 import { Seccion } from "@/components/chrome/seccion";
-import { PanelConversacion } from "@/components/paneles/conversacion";
 import { LectorRedes } from "@/components/paneles/lector-redes";
 import { PanelTendencias } from "@/components/paneles/tendencias";
 import { tituloSeccion } from "@/lib/dominio/secciones";
@@ -88,7 +87,7 @@ export function PaginaRedes({ zona }: { zona: ZonaRuta | null }) {
       <LectorRedes
         zona={zona}
         menu={<MenuLector zona={zona} vista="redes" />}
-        paneles={{ youtube: <PanelConversacion zona={zona} />, x: <PanelTendencias zona={zona} /> }}
+        paneles={{ x: <PanelTendencias zona={zona} /> }}
         analisis={analisisHabilitado()}
       />
     </Seccion>
