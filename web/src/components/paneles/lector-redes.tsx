@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
 import { preload } from "swr";
@@ -14,10 +13,7 @@ import { ruta } from "@/lib/dominio/secciones";
 import { NOMBRE_CORTO, ZONAS_RUTA, type ZonaRuta } from "@/lib/dominio/zonas";
 import { CUBETAS, cubetasDisponibles, type CubetaRegion } from "@/lib/dominio/publicaciones";
 import { useRedes, useTikTok } from "@/lib/datos/hooks";
-
-const VisorRedes = dynamic(() => import("./visor-redes"), {
-  loading: () => <p role="status" className="p-8 text-lectura text-tinta-meta">Cargando publicaciones…</p>,
-});
+import VisorRedes from "./visor-redes";
 
 /**
  * La pagina de redes como lector: una barra, cinco pestanas, una caja.
@@ -42,6 +38,27 @@ const VisorRedes = dynamic(() => import("./visor-redes"), {
  *
  * YouTube y X llegan COMO NODOS desde la pagina de servidor: su prosa es la
  * honestidad del producto y viaja en el HTML aunque el bundle tarde.
+ *
+ * EL VISOR SE IMPORTA DERECHO, NUNCA CON next/dynamic. Lo tuvo hasta el 17 de
+ * septiembre de 2026 y colgaba la pagina de una zona: en /tijuana/redes cargada
+ * en frio -- escribiendo la direccion o recargando -- el limite de Suspense que
+ * `dynamic` monta se quedaba pendiente PARA SIEMPRE y la caja se quedaba en su
+ * rotulo de carga. Medido: tres de tres cargas en frio atascadas en /<zona>
+ * /redes, cero de dos en /redes.
+ *
+ * Las dos diferencias que lo explican, y por eso no se arregla con un `ssr`:
+ * entrar por un enlace SI funcionaba -- el chunk ya estaba en memoria, asi que
+ * el limite resolvia en el mismo render y nadie lo veia --, y la ruta de zona
+ * es la unica prerenderizada por `generateStaticParams` con `dynamicParams`
+ * apagado. Es la misma forma del fallo que ya esta escrito en paginas/
+ * en-tendencia.tsx: un limite de Suspense sobre una ruta prerenderizada se
+ * queda colgado, compila y se ve bien en una laptop.
+ *
+ * Y no costaba nada partirlo: la pestana de omision es «todas», que monta el
+ * visor, asi que su chunk se pedia en CADA visita. `dynamic` no ahorraba una
+ * descarga, agregaba una cascada -- primero la pagina, luego el visor -- y un
+ * limite que se podia colgar. Solo YouTube y X viven sin el, y esos llegan
+ * como nodos de servidor.
  */
 
 const PESTANAS = [
