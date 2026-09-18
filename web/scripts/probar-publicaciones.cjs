@@ -8,7 +8,7 @@ const ruta = path.resolve(__dirname, '../src/lib/dominio/publicaciones.ts');
 const modulo = new Module(ruta, module);
 modulo.paths = module.paths;
 modulo._compile(ts.transpileModule(fs.readFileSync(ruta, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2023 } }).outputText, ruta);
-const { canonizarPublicacion, seleccionarPublicaciones, compararPublicaciones, reunirPublicaciones, cubetasConFilas } = modulo.exports;
+const { canonizarPublicacion, seleccionarPublicaciones, compararPublicaciones, reunirPublicaciones, cubetasConFilas, CUBETAS, NOMBRE_CUBETA } = modulo.exports;
 const post = (id, extra = {}) => ({ url: `https://www.instagram.com/p/${id}/`, fecha: '2026-09-14', publicado: '2026-09-14T12:00:00Z', zona: 'tijuana', cuenta: 'medio', likes: 5, ...extra });
 const doc = (posts, maximo = 15) => ({ destacados: posts, destacados_maximo: maximo, cuentas: [{ cuenta: 'medio', nombre: 'El medio' }] });
 assert.equal(canonizarPublicacion('https://instagram.com/reel/ABC_-/??x=1', 'instagram'), 'https://www.instagram.com/p/ABC_-/');
@@ -141,4 +141,22 @@ assert.equal(reunirPublicaciones(undefined, undefined, ytDoc, null)[0].fuente, '
 // Y las cubetas lo ven: sin preguntarle, Mexico saldria sin las filas nacionales.
 assert.deepEqual(cubetasConFilas(docYt([yt('n0000000000', { zona: 'nacional' })])), ['mexico']);
 
-console.log('Publicaciones: selección, orden, enlaces, deduplicación, disponibilidad parcial verificados (tres plataformas) offline.');
+// --- Los nombres de las cubetas --------------------------------------------
+// La barra del lector los lee para decir que se esta viendo (lector-redes.tsx).
+// Antes salian solo de CUBETAS y la barra no los miraba: elegir Mexico dejaba
+// «Toda la región» escrito y el cambio parecia no haber ocurrido. Ahora el
+// rotulo depende de esta tabla, asi que una cubeta sin nombre llega a pantalla.
+for (const c of ['corredor', 'mexico', 'mundo']) {
+  assert.equal(typeof NOMBRE_CUBETA[c], 'string', `${c}: tiene nombre`);
+  assert.ok(NOMBRE_CUBETA[c].length > 0, `${c}: el nombre no va vacio`);
+}
+assert.equal(Object.keys(NOMBRE_CUBETA).length, 3, 'ni una cubeta de mas');
+// CUBETAS deriva de la tabla: un solo sitio para los nombres, y el orden en que
+// se ofrecen es el de la lista.
+assert.deepEqual(CUBETAS.map((c) => c.id), ['corredor', 'mexico', 'mundo']);
+assert.deepEqual(CUBETAS.map((c) => c.nombre), ['Corredor', 'México', 'Mundo']);
+for (const c of CUBETAS) assert.equal(c.nombre, NOMBRE_CUBETA[c.id], `${c.id}: un solo nombre`);
+// Y toda cubeta que cubetasConFilas puede devolver es nombrable.
+assert.deepEqual(cubetasConFilas(mezcla).filter((c) => NOMBRE_CUBETA[c] === undefined), []);
+
+console.log('Publicaciones: selección, orden, enlaces, deduplicación, disponibilidad parcial y nombres de cubeta verificados (tres plataformas) offline.');

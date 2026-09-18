@@ -11,7 +11,7 @@ import { RUTAS } from "@/lib/datos/config";
 import { leerJson } from "@/lib/datos/fetcher";
 import { ruta } from "@/lib/dominio/secciones";
 import { NOMBRE_CORTO, ZONAS_RUTA, type ZonaRuta } from "@/lib/dominio/zonas";
-import { CUBETAS, cubetasDisponibles, type CubetaRegion } from "@/lib/dominio/publicaciones";
+import { CUBETAS, NOMBRE_CUBETA, cubetasDisponibles, type CubetaRegion } from "@/lib/dominio/publicaciones";
 import { useRedes, useTikTok, useYouTube } from "@/lib/datos/hooks";
 import VisorRedes from "./visor-redes";
 
@@ -125,7 +125,15 @@ export function LectorRedes({ zona, paneles, menu, analisis = false }: {
   const youtube = useYouTube();
   const disponibles = zona === null ? cubetasDisponibles(instagram.data, tiktok.data, youtube.data) : [];
   const activa = disponibles.includes(cubeta) ? cubeta : (disponibles[0] ?? "corredor");
-  const lugar = zona === null ? "Toda la región" : NOMBRE_CORTO[zona];
+  // El rotulo de la barra mira las DOS cosas que el dialogo elige. Salia solo
+  // de `zona`, asi que elegir Mexico o Mundo dejaba la barra diciendo «Toda la
+  // región» y el cambio parecia no haber ocurrido. En una pagina de zona
+  // `disponibles` es [] y `activa` colapsa a `corredor`, asi que el primer
+  // caso gana sin necesitar guarda.
+  const lugar =
+    zona !== null ? NOMBRE_CORTO[zona]
+    : activa === "corredor" ? "Toda la región"
+    : NOMBRE_CUBETA[activa];
   return (
     // `volver` va a la PORTADA de esta zona, por decision del cliente. Apunto
     // un dia a Prensa, cuando el muro tenia pagina propia, con el argumento de
@@ -188,7 +196,19 @@ function OpcionesLugar({ zona, cubetas, activa, onCubeta }: {
         <div role="group" aria-label="Ámbito" className="grid grid-cols-3 gap-1 rounded-full border border-filo bg-vanta p-1">
           {CUBETAS.filter((c) => cubetasConDatos.has(c.id)).map((c) => (
             <button key={c.id} type="button" aria-pressed={c.id === activa}
-              onClick={() => onCubeta(c.id)}
+              // Cierra su propia hoja. `lector.tsx` tenia un onClick delegado
+              // que cerraba al pulsar cualquier `a, button`; se quito a
+              // proposito en 4cc0abd con el argumento de que «los enlaces
+              // navegan y desmontan la hoja». Es cierto de todo lo que vive en
+              // esas hojas MENOS de esto: una pastilla de ambito no navega ni
+              // desmonta nada, asi que la hoja se quedaba abierta encima del
+              // contenido que acababa de cambiar y tapaba la unica prueba de
+              // que habia cambiado. La excepcion vive con el boton que la
+              // incumple, no de vuelta en el manejador delegado.
+              onClick={(evento) => {
+                onCubeta(c.id);
+                evento.currentTarget.closest("dialog")?.close();
+              }}
               className={[
                 "rounded-full px-3 py-2 text-center text-cuerpo",
                 "transition-colors duration-[var(--dur-toque)] ease-firma",
@@ -199,6 +219,12 @@ function OpcionesLugar({ zona, cubetas, activa, onCubeta }: {
           ))}
         </div>
       ) : null}
+    {/* Mexico y Mundo no se subdividen por ciudad: no hay nada que listar, y
+        ofrecerlo dejaba las nueve zonas debajo del ambito elegido con «Toda la
+        región» palomeada, que es exactamente lo contrario de lo que acababa de
+        pasar. Misma regla y mismo motivo que `enRegion` en
+        ahora/controles-ahora.tsx; los dos dialogos se leen como parientes. */}
+    {activa === "corredor" ? (
     <ul className="grid gap-2">
       {OPCIONES_ZONA.map((z) => {
         const activo = z === zona;
@@ -212,6 +238,7 @@ function OpcionesLugar({ zona, cubetas, activa, onCubeta }: {
         );
       })}
     </ul>
+    ) : null}
     </div>
   );
 }

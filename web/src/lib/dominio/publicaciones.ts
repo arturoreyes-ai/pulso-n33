@@ -49,13 +49,27 @@ export function cubetasConFilas(datos: DocRedes): CubetaRegion[] {
     posts.some((post) => EN_CUBETA[c](post.zona)));
 }
 
-/** Los nombres de las cubetas, para quien las pinte. «Corredor» no es un
- *  tecnicismo: es lo que este tablero mide. */
-export const CUBETAS: { id: CubetaRegion; nombre: string }[] = [
-  { id: "corredor", nombre: "Corredor" },
-  { id: "mexico", nombre: "México" },
-  { id: "mundo", nombre: "Mundo" },
-];
+/**
+ * Los nombres de las cubetas, para quien las pinte. «Corredor» no es un
+ * tecnicismo: es lo que este tablero mide.
+ *
+ * Un `Record` exhaustivo y no un arreglo de pares, por lo mismo que
+ * ACENTO_RUBRO y NOMBRE_RUBRO: agregar una cubeta tiene que romper en
+ * compilacion en todos los sitios que la nombran, en vez de llegar a la barra
+ * sin nombre. Ademas la barra lo lee por render, y un `find` ahi era una
+ * busqueda lineal para algo que es un acceso directo.
+ */
+export const NOMBRE_CUBETA: Record<CubetaRegion, string> = {
+  corredor: "Corredor",
+  mexico: "México",
+  mundo: "Mundo",
+};
+
+/** Las mismas, en el orden en que se ofrecen. Deriva de NOMBRE_CUBETA para que
+ *  los nombres vivan en un solo sitio. */
+export const CUBETAS: { id: CubetaRegion; nombre: string }[] = (
+  ["corredor", "mexico", "mundo"] as const
+).map((id) => ({ id, nombre: NOMBRE_CUBETA[id] }));
 
 /** La union de las dos plataformas. El visor del lector las recorre juntas,
  *  asi que una cubeta que solo tiene filas en TikTok tambien se ofrece:
