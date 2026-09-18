@@ -31,7 +31,7 @@ bien y la factura sale mal. Por eso un post no se vuelve a cosechar antes de
 
 ## Retencion: 30 dias, y menos derecho a ellos que YouTube
 
-Misma separacion que pulso/youtube.py -- crudo en cache/ ignorado por git,
+Misma separacion que pulso/conversacion.py -- crudo en cache/ ignorado por git,
 derivados en data/ -- pero el fundamento es mas debil, no mas fuerte. YouTube
 al menos CONCEDE 30 dias por politica escrita (III.E.4.d). Meta no concede
 nada: lo que ata aqui son sus terminos mas la LFPDPPP mexicana y la CPRA

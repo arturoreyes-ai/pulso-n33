@@ -1,296 +1,401 @@
-"""Pruebas del modulo de YouTube.
+"""Shorts y videos de YouTube por feed publico. Siempre sin red.
 
-Lo que mas importa aqui no es la ingesta, es el cumplimiento: la retencion de
-30 dias de las Politicas para Desarrolladores (III.E.4.d), que el texto crudo
-no llegue nunca a lo que se commitea, y que la cuota se respete sin descubrir
-el limite a golpes. Nada de esto llama a la red.
+Las fixtures de tests/fixtures/youtube/ son feeds Atom REALES recortados, y se
+parsean con el parser de verdad: el parser es lo que se prueba. La red se
+sustituye parcheando `youtube.leer_feed`, que existe justo para eso.
+
+Los casos con nombre propio, todos medidos el 18 de septiembre de 2026:
+
+- El Vigia: su fila decia Ensenada y nueve de sus quince Shorts son
+  nacionales, con el mas visto del corredor hablando de Trump y la UE.
+- Zeta: su lista UULF, la de "solo videos largos", devolvio diez entradas con
+  enlace /shorts/. Es la prueba de que la lista no clasifica y el enlace si.
+- televisamxl: su lista UUSH devuelve 404 porque el canal no tiene Shorts.
 """
 
 import json
 import os
 import tempfile
 import unittest
+from unittest.mock import patch
+from urllib.error import HTTPError
 
-from pulso.roster import Roster
-from pulso.youtube import (
-    BUSQUEDAS_POR_CORRIDA,
-    COSTO,
-    COSTO_BUSQUEDA,
-    RETENCION_DIAS,
-    CuotaAgotada,
-    Presupuesto,
-    SinLlave,
-    cosechar,
-    derivar,
-    guardar_cache,
-    leer_cache,
-    llave,
-    purgar,
-)
+from pulso import youtube
+from pulso.validador import (PLATAFORMAS_REDES, validar_redes, validar_youtube_config)
 
-CANALES = [
-    {"id": "uno", "nombre": "Canal Uno", "canal": "UCaaa", "zona": "Tijuana", "activo": True},
-    {"id": "dos", "nombre": "Canal Dos", "canal": "UCbbb", "zona": "Mexicali", "activo": True},
-    {"id": "off", "nombre": "Apagado", "canal": "UCccc", "zona": "Tecate", "activo": False},
-]
+AHORA = "2026-09-18T18:00:00+00:00"
+FIXTURES = os.path.join(os.path.dirname(__file__), "fixtures", "youtube")
 
 
-def comentario(cid, texto, fecha, canal="uno", zona="Tijuana", titulo=""):
-    return {"id": cid, "texto": texto, "likes": 0, "respuestas": 0,
-            "publicado": fecha + "T12:00:00Z", "fecha": fecha,
-            "video": "v1", "video_titulo": titulo, "canal": canal,
-            "zona_canal": zona, "capturado": fecha + "T12:00:00Z"}
+def _fixture(nombre):
+    with open(os.path.join(FIXTURES, nombre), "rb") as f:
+        return f.read()
 
 
-class TestLlave(unittest.TestCase):
-    def test_sin_llave_lanza(self):
-        with self.assertRaises(SinLlave):
-            llave({})
-        with self.assertRaises(SinLlave):
-            llave({"YOUTUBE_API_KEY": "   "})
-
-    def test_con_llave(self):
-        self.assertEqual(llave({"YOUTUBE_API_KEY": "abc123"}), "abc123")
+def _canal(cid="yt_prueba", **extra):
+    fila = {"id": cid, "nombre": "Canal de prueba", "canal": "UCIN8fNpieOt_gCE1sKyUylA",
+            "formatos": ["short", "video"], "ambito": "regional", "idioma": "es",
+            "activo": True, "verificado": "2026-09-18", "nota": "fixture"}
+    fila.update(extra)
+    return fila
 
 
-class TestPresupuesto(unittest.TestCase):
-    def test_cobra_y_acumula(self):
-        p = Presupuesto(tope=10)
-        p.cobrar("commentThreads")
-        p.cobrar("commentThreads")
-        self.assertEqual(p.gastado, 2)
-        self.assertEqual(p.resumen()["llamadas"]["commentThreads"], 2)
+class TestListas(unittest.TestCase):
+    """El prefijo de la lista automatica, que es de lo que cuelga todo."""
 
-    def test_se_detiene_antes_de_pasarse(self):
-        # Detenerse solo, sin esperar el 403: la cuota no se libera hasta
-        # medianoche del Pacifico, asi que agotarla cuesta el dia entero.
-        p = Presupuesto(tope=2)
-        p.cobrar("videos")
-        p.cobrar("videos")
-        with self.assertRaises(CuotaAgotada):
-            p.cobrar("videos")
-        self.assertEqual(p.gastado, 2)
+    def test_el_uc_se_reemplaza_no_se_antepone(self):
+        # La unica afirmacion sobre la que descansa la fuente entera. Un
+        # `"UUSH" + canal` daria UUSHUCIN... y el feed devolveria 404 para
+        # todos los canales a la vez.
+        self.assertEqual(youtube._lista("UCIN8fNpieOt_gCE1sKyUylA", "short"),
+                         "UUSHIN8fNpieOt_gCE1sKyUylA")
+        self.assertEqual(youtube._lista("UCIN8fNpieOt_gCE1sKyUylA", "video"),
+                         "UULFIN8fNpieOt_gCE1sKyUylA")
 
-    def test_todo_cuesta_una_unidad(self):
-        # Modelo de cubetas vigente desde el 1 de junio de 2026.
-        self.assertTrue(all(v == 1 for v in COSTO.values()))
-
-    def test_search_usa_presupuesto_separado_y_acotado(self):
-        p = Presupuesto(
-            tope=BUSQUEDAS_POR_CORRIDA,
-            costos=COSTO_BUSQUEDA,
-            cuota_diaria=100,
-            reserva=100 - BUSQUEDAS_POR_CORRIDA,
-        )
-        for _ in range(BUSQUEDAS_POR_CORRIDA):
-            p.cobrar("search")
-        with self.assertRaises(CuotaAgotada):
-            p.cobrar("search")
-        self.assertEqual(p.resumen()["cuota_diaria"], 100)
+    def test_el_enlace_decide_el_formato_no_la_lista(self):
+        self.assertEqual(
+            youtube._formato_del_enlace("https://www.youtube.com/shorts/abc"), "short")
+        self.assertEqual(
+            youtube._formato_del_enlace("https://www.youtube.com/watch?v=abc"), "video")
+        self.assertIsNone(youtube._formato_del_enlace("https://www.youtube.com/playlist?list=x"))
 
 
-class TestRetencion(unittest.TestCase):
-    """La regla de 30 dias, hecha codigo."""
-
+class TestCosecha(unittest.TestCase):
     def setUp(self):
-        self.cache = tempfile.mkdtemp()
+        self.dir = tempfile.mkdtemp()
 
-    def escribir(self, dia, n=1):
-        ruta = os.path.join(self.cache, dia + ".json")
-        with open(ruta, "w", encoding="utf-8") as fh:
-            json.dump([comentario("c%s%d" % (dia, i), "hola", dia) for i in range(n)], fh)
-        return ruta
+    def _cosechar(self, canales, feeds):
+        """feeds: dict {id_de_lista: bytes o excepcion}."""
+        def falso(url, timeout=15):
+            clave = url.rsplit("=", 1)[-1]
+            v = feeds.get(clave)
+            if v is None:
+                raise youtube.SinLista(url)
+            if isinstance(v, Exception):
+                raise v
+            return v
+        with patch.object(youtube, "leer_feed", side_effect=falso):
+            return youtube.cosechar(canales, AHORA, cache=self.dir)
 
-    def test_borra_lo_que_paso_de_30_dias(self):
-        self.escribir("2026-09-01")     # 2 dias
-        self.escribir("2026-08-20")     # 14 dias
-        viejo = self.escribir("2026-07-01")   # 64 dias
-        vivos, borrados = purgar(self.cache, "2026-09-03T00:00:00+00:00")
-        self.assertEqual((vivos, borrados), (2, 1))
-        self.assertFalse(os.path.exists(viejo))
+    def test_la_lista_de_videos_trae_shorts_y_manda_el_enlace(self):
+        # El caso Zeta: diez de las entradas de su lista "solo videos largos"
+        # tienen enlace /shorts/. Descartarlas perderia diez Shorts reales.
+        c = _canal("yt_zeta", canal="UC-NHHkALnId41yENpdCuLKQ")
+        pubs, salud = self._cosechar([c], {"UULF-NHHkALnId41yENpdCuLKQ":
+                                           _fixture("zeta-videos.xml")})
+        formatos = {}
+        for p in pubs.values():
+            formatos[p["formato"]] = formatos.get(p["formato"], 0) + 1
+        # De las diez, seis entran y cuatro nombran lugares de fuera de Baja
+        # California, asi que el ambito regional las tira. Ninguna se pierde
+        # por venir en la lista "equivocada", que es lo que se prueba aqui.
+        self.assertEqual(formatos.get("short"), 6)
+        self.assertEqual(formatos.get("video"), 2)
+        self.assertEqual(salud[0]["fuera"], 4)
+        # Y la discrepancia se cuenta: es el aviso de que el prefijo dejo de
+        # significar lo que creemos.
+        self.assertEqual(salud[0]["reclasificados"], 6)
+        self.assertEqual(salud[0]["descartados"], 0)
 
-    def test_el_limite_es_exactamente_la_retencion(self):
-        justo = self.escribir("2026-08-05")     # 29 dias
-        pasado = self.escribir("2026-08-03")    # 31 dias
-        purgar(self.cache, "2026-09-03T00:00:00+00:00")
-        self.assertTrue(os.path.exists(justo))
-        self.assertFalse(os.path.exists(pasado))
+    def test_un_formato_apagado_en_el_config_manda_sobre_la_lista(self):
+        # El Vigia entra con formatos ["short"] porque sus videos son digestos
+        # diarios. Un Short que aparezca en la lista de videos si entra; un
+        # video, no.
+        c = _canal("yt_zeta", canal="UC-NHHkALnId41yENpdCuLKQ", formatos=["short"])
+        pubs, salud = self._cosechar([c], {"UUSH-NHHkALnId41yENpdCuLKQ":
+                                           _fixture("zeta-videos.xml")})
+        self.assertTrue(pubs)
+        self.assertTrue(all(p["formato"] == "short" for p in pubs.values()))
+        self.assertEqual(salud[0]["descartados"], 2)
 
-    def test_retencion_declarada_es_30(self):
-        self.assertEqual(RETENCION_DIAS, 30)
+    def test_el_404_es_hueco_medido_y_no_falla(self):
+        # televisamxl: el canal no tiene lista de Shorts. Un `fallo` diria que
+        # algo se rompio y un `ok` con posts 0 diria que hoy no publico.
+        c = _canal("yt_televisamxl", canal="UCcmuFsMIIIHO3LBqeBVfm8Q")
+        _, salud = self._cosechar([c], {})
+        self.assertEqual(salud[0]["estado"], "sin_lista")
+        self.assertEqual(salud[0]["posts"], 0)
+        self.assertIn("nota", salud[0])
 
-    def test_archivo_con_nombre_raro_no_se_conserva(self):
-        # Si no se puede fechar, no se puede garantizar la retencion.
-        raro = os.path.join(self.cache, "pendiente.json")
-        with open(raro, "w", encoding="utf-8") as fh:
-            fh.write("[]")
-        purgar(self.cache, "2026-09-03T00:00:00+00:00")
-        self.assertFalse(os.path.exists(raro))
+    def test_un_error_de_red_si_es_falla_y_la_corrida_sigue(self):
+        malo = _canal("yt_malo", canal="UCcmuFsMIIIHO3LBqeBVfm8Q", formatos=["short"])
+        bueno = _canal("yt_bueno", canal="UCIN8fNpieOt_gCE1sKyUylA", formatos=["short"])
+        _, salud = self._cosechar([malo, bueno], {
+            "UUSHcmuFsMIIIHO3LBqeBVfm8Q": HTTPError("u", 500, "boom", None, None),
+            "UUSHIN8fNpieOt_gCE1sKyUylA": _fixture("elvigia-shorts.xml"),
+        })
+        estados = {s["cuenta"]: s["estado"] for s in salud}
+        self.assertEqual(estados["yt_malo"], "fallo")
+        self.assertEqual(estados["yt_bueno"], "ok")
 
-    def test_cache_inexistente_no_truena(self):
-        self.assertEqual(purgar(os.path.join(self.cache, "nada"), "2026-09-03T00:00:00+00:00"),
-                         (0, 0))
+    def test_un_canal_apagado_no_se_lee(self):
+        c = _canal("yt_off", activo=False)
+        pubs, salud = self._cosechar([c], {})
+        self.assertEqual(pubs, {})
+        self.assertEqual(salud, [])
 
-    def test_guardar_y_leer(self):
-        guardar_cache([comentario("a", "hola", "2026-09-03")],
-                      "2026-09-03T12:00:00+00:00", self.cache)
-        self.assertEqual(len(leer_cache(self.cache)), 1)
-
-    def test_guardar_dos_veces_el_mismo_dia_fusiona_por_id(self):
-        ahora = "2026-09-03T12:00:00+00:00"
-        guardar_cache([comentario("a", "hola", "2026-09-03")], ahora, self.cache)
-        guardar_cache([comentario("a", "hola", "2026-09-03"),
-                       comentario("b", "adios", "2026-09-03")], ahora, self.cache)
-        self.assertEqual(len(leer_cache(self.cache)), 2)
-
-    def test_guardar_fusiona_las_etiquetas_de_tema(self):
-        ahora = "2026-09-03T12:00:00+00:00"
-        a = comentario("a", "hola", "2026-09-03")
-        a["temas"] = ["agua"]
-        b = comentario("a", "hola", "2026-09-03")
-        b["temas"] = ["seguridad"]
-        guardar_cache([a], ahora, self.cache)
-        guardar_cache([b], ahora, self.cache)
-        self.assertEqual(leer_cache(self.cache)[0]["temas"], ["agua", "seguridad"])
-
-
-class TestDegradacion(unittest.TestCase):
-    def test_sin_llave_no_lanza_y_lo_reporta(self):
-        # El tablero tiene que poder mostrar prensa sin comentarios.
-        n, salud, cuentas = cosechar(CANALES, "2026-09-03T12:00:00+00:00", entorno={},
-                                    cache=tempfile.mkdtemp())
-        self.assertEqual(n, 0)
-        self.assertEqual([s["estado"] for s in salud], ["sin_llave", "sin_llave"])
-        self.assertIn("YOUTUBE_API_KEY", salud[0]["error"])
-        self.assertEqual(cuentas["presupuesto"]["gastado"], 0)
-
-    def test_omite_canales_apagados(self):
-        _, salud, _ = cosechar(CANALES, "2026-09-03T12:00:00+00:00", entorno={},
-                               cache=tempfile.mkdtemp())
-        self.assertNotIn("off", [s["id"] for s in salud])
+    def test_el_catalogo_conserva_una_pieza_que_salio_del_feed(self):
+        # Milenio publica ~29 piezas al dia y el feed devuelve 15, asi que una
+        # puede salirse DENTRO de la ventana de 24 horas. Sin catalogo
+        # desapareceria del corte a media ventana.
+        c = _canal("yt_elvigia", formatos=["short"])
+        feed = {"UUSHIN8fNpieOt_gCE1sKyUylA": _fixture("elvigia-shorts.xml")}
+        primera, _ = self._cosechar([c], feed)
+        self.assertTrue(primera)
+        vacio = b'<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom"></feed>'
+        segunda, _ = self._cosechar([c], {"UUSHIN8fNpieOt_gCE1sKyUylA": vacio})
+        self.assertEqual(set(primera), set(segunda))
 
 
-class TestDerivados(unittest.TestCase):
-    """Lo unico que se commitea: sin texto literal ni identidad."""
+class TestZona(unittest.TestCase):
+    """La zona sale del pie, nunca de la fila del canal."""
+
+    def test_la_zona_del_canal_nunca_se_consulta(self):
+        # La guardia directa contra el error que documenta el encabezado: la
+        # tercera rama de zonas.alcance cree la zona declarada del medio, y es
+        # justo lo que los nueve Shorts nacionales de El Vigia desmienten.
+        c = _canal(ambito="regional")
+        entrada = _entrada_suelta(_fixture("elvigia-shorts.xml"))
+        with patch.object(youtube, "zona_por_ambito",
+                          return_value=("Tijuana", "zona")) as espia:
+            youtube._limpiar_pieza(entrada, c, "short")
+        self.assertEqual(espia.call_args[0][1], "regional")
+        with patch("pulso.redes.alcance", return_value=("zona", ["Tijuana"])) as gac:
+            youtube._limpiar_pieza(entrada, c, "short")
+        self.assertIsNone(gac.call_args[0][1],
+                          "el segundo argumento de alcance() tiene que ser None: es la zona "
+                          "declarada del medio y creersela es el bug de El Vigia")
+
+    def test_la_tabla_de_ambitos(self):
+        from pulso.redes import zona_por_ambito
+        # (veredicto del gacetero, {ambito: zona esperada}). Lista y no dict
+        # porque el veredicto lleva una lista dentro.
+        casos = [
+            (("zona", ["Tecate"]), {"regional": "Tecate", "nacional": "Tecate",
+                                    "internacional": "Tecate"}),
+            (("estatal", ["estatal"]), {"regional": "estatal", "nacional": "estatal",
+                                        "internacional": "estatal"}),
+            (("fuera", []), {"regional": None, "nacional": "nacional",
+                             "internacional": "nacional"}),
+            (("nacional", []), {"regional": "nacional", "nacional": "nacional",
+                                "internacional": "internacional"}),
+        ]
+        for veredicto, esperado in casos:
+            for ambito, zona in esperado.items():
+                with patch("pulso.redes.alcance", return_value=veredicto):
+                    self.assertEqual(zona_por_ambito("t", ambito)[0], zona,
+                                     "{} con ambito {}".format(veredicto, ambito))
+
+    def test_la_descripcion_zonifica_pero_no_se_publica(self):
+        # Vale 8 puntos de resolucion (65% contra 57%), y es el unico punto del
+        # modulo por donde podria fugarse un cuerpo.
+        entrada = _entrada_suelta(_fixture("canal33-videos.xml"), 1)
+        limpio, _ = youtube._limpiar_pieza(entrada, _canal(), "video")
+        self.assertIsNotNone(limpio)
+        for clave in ("descripcion", "resumen", "cuerpo", "texto"):
+            self.assertNotIn(clave, limpio)
+
+    def test_un_lugar_de_fuera_se_tira_en_ambito_regional(self):
+        entrada = _entrada_suelta(_fixture("elvigia-shorts.xml"))
+        with patch("pulso.redes.alcance", return_value=("fuera", [])):
+            limpio, motivo = youtube._limpiar_pieza(entrada, _canal(ambito="regional"), "short")
+            self.assertIsNone(limpio)
+            self.assertEqual(motivo, "fuera")
+            limpio, _ = youtube._limpiar_pieza(entrada, _canal(ambito="nacional"), "short")
+            self.assertEqual(limpio["zona"], "nacional")
+            self.assertEqual(limpio["alcance"], "fuera")
+
+
+class TestDocumento(unittest.TestCase):
+    def setUp(self):
+        self.dir = tempfile.mkdtemp()
+
+    def _panel(self, canales, feeds):
+        def falso(url, timeout=15):
+            v = feeds.get(url.rsplit("=", 1)[-1])
+            if v is None:
+                raise youtube.SinLista(url)
+            return v
+        with patch.object(youtube, "leer_feed", side_effect=falso):
+            pubs, salud = youtube.cosechar(canales, AHORA, cache=self.dir)
+        return youtube.derivar(AHORA, salud, pubs, canales), pubs, salud
+
+    def _todo(self):
+        canales = [_canal("yt_zeta", canal="UC-NHHkALnId41yENpdCuLKQ"),
+                   _canal("yt_canal33", canal="UCZmZ8OjbrweO1neWu6NJtGA"),
+                   _canal("yt_elvigia", canal="UCIN8fNpieOt_gCE1sKyUylA", ambito="nacional")]
+        return self._panel(canales, {
+            "UULF-NHHkALnId41yENpdCuLKQ": _fixture("zeta-videos.xml"),
+            "UULFZmZ8OjbrweO1neWu6NJtGA": _fixture("canal33-videos.xml"),
+            "UUSHIN8fNpieOt_gCE1sKyUylA": _fixture("elvigia-shorts.xml"),
+        })
+
+    def test_el_documento_valida(self):
+        panel, _, _ = self._todo()
+        errores, _ = validar_redes(panel, plataforma="youtube")
+        self.assertEqual(errores, [])
+
+    def test_no_lleva_las_cifras_que_el_feed_no_publica(self):
+        # Un `likes: 0` o un `comentarios: 0` se leerian como "nadie" cuando lo
+        # cierto es que la fuente no lo dice. Cuarta regla de PRODUCT.md.
+        panel, _, _ = self._todo()
+        self.assertTrue(panel["destacados"])
+        for d in panel["destacados"]:
+            self.assertNotIn("likes", d)
+            self.assertNotIn("comentarios", d)
+            self.assertNotIn("duracion", d)
+            self.assertNotIn("creador", d)
+            self.assertIn("reproducciones", d)
+            self.assertIn("valoraciones", d)
+        self.assertFalse(PLATAFORMAS_REDES["youtube"]["duracion"])
+        self.assertFalse(PLATAFORMAS_REDES["youtube"]["creador"])
+
+    def test_el_validador_rechaza_una_cifra_ajena(self):
+        panel, _, _ = self._todo()
+        panel["destacados"][0]["likes"] = 0
+        errores, _ = validar_redes(panel, plataforma="youtube")
+        self.assertTrue(any("'likes' no existe en youtube" in e for e in errores), errores)
+
+    def test_el_corte_es_por_formato(self):
+        # Sin el, los Shorts se llevan todos los puestos: mediana de 447 vistas
+        # contra 7 de los videos, y encima son vistas que no miden lo mismo.
+        panel, _, _ = self._todo()
+        formatos = {d["formato"] for d in panel["destacados"]}
+        self.assertEqual(formatos, {"short", "video"})
+
+    def test_el_tope_se_respeta_por_zona_y_formato(self):
+        panel, _, _ = self._todo()
+        cuenta = {}
+        for d in panel["destacados"]:
+            clave = (d["zona"], d["formato"])
+            cuenta[clave] = cuenta.get(clave, 0) + 1
+        self.assertTrue(all(n <= panel["destacados_maximo"] for n in cuenta.values()), cuenta)
+
+    def test_el_orden_emitido_es_por_vistas(self):
+        panel, _, _ = self._todo()
+        claves = [(-d["reproducciones"], -d["valoraciones"], d["url"])
+                  for d in panel["destacados"]]
+        self.assertEqual(claves, sorted(claves))
+
+    def test_cosecha_comentarios_es_false_y_obliga_a_los_ceros(self):
+        panel, _, _ = self._todo()
+        self.assertIs(panel["cosecha_comentarios"], False)
+        for campo in ("comentarios_vigentes", "opinion", "repetidos", "reacciones"):
+            self.assertEqual(panel[campo], 0)
+        # Y con el campo en false el aviso por post se calla: si no, saldria en
+        # las ~200 filas de cada corrida y dejaria de ser una senal.
+        _, avisos = validar_redes(panel, plataforma="youtube")
+        self.assertFalse([a for a in avisos if "sin comentarios cosechados" in a])
+        panel["cosecha_comentarios"] = True
+        _, avisos = validar_redes(panel, plataforma="youtube")
+        self.assertTrue([a for a in avisos if "sin comentarios cosechados" in a])
+
+    def test_un_conteo_distinto_de_cero_con_la_cosecha_apagada_es_error(self):
+        panel, _, _ = self._todo()
+        panel["opinion"] = 3
+        errores, _ = validar_redes(panel, plataforma="youtube")
+        self.assertTrue(any("o se cosecho o no se cosecho" in e for e in errores), errores)
+
+    def test_determinismo(self):
+        # El cron commitea data/ detras de `git diff --cached --quiet`: dos
+        # corridas sobre lo mismo tienen que dar los mismos bytes.
+        a, _, _ = self._todo()
+        b, _, _ = self._todo()
+        self.assertEqual(json.dumps(a, ensure_ascii=False, sort_keys=False),
+                         json.dumps(b, ensure_ascii=False, sort_keys=False))
+
+    def test_el_catalogo_de_cuentas_no_reclama_lugar(self):
+        # La fila de un canal NO lleva zona, ni siquiera en la salida: darle
+        # una es el bug de El Vigia con la puerta abierta.
+        panel, _, _ = self._todo()
+        self.assertTrue(panel["cuentas"])
+        self.assertTrue(all(c["zona"] == "estatal" for c in panel["cuentas"]))
+
+    def test_turnos_reparte_y_no_rellena(self):
+        from pulso.redes import _destacados
+        pubs = {}
+        for i in range(20):
+            cuenta = "yt_a" if i < 15 else "yt_b"
+            url = "https://www.youtube.com/shorts/v{}".format(i)
+            pubs[url] = {"url": url, "cuenta": cuenta, "zona": "Tijuana", "formato": "short",
+                         "fecha": "2026-09-18", "titulo": "t", "tipo": "video",
+                         "publicado": "2026-09-18T12:00:00+00:00",
+                         "reproducciones": 1000 - i, "valoraciones": 0}
+        cuentas = [{"id": "yt_a"}, {"id": "yt_b"}]
+        comun = dict(comentarios=[], opinion=[], temas=None, cuentas=cuentas,
+                     dentro=lambda p: True, cifras=youtube.CIFRAS, orden=youtube.ORDEN,
+                     formatos=youtube.FORMATOS)
+        sin = _destacados(pubs, turnos=False, **comun)
+        con = _destacados(pubs, turnos=True, **comun)
+        # Reparte: yt_b no entra sin turnos y si entra con ellos.
+        self.assertNotIn("yt_b", {d["cuenta"] for d in sin})
+        self.assertIn("yt_b", {d["cuenta"] for d in con})
+        # Y no rellena: emite los mismos de siempre.
+        self.assertEqual(len(sin), len(con))
+
+    def test_con_un_solo_canal_los_turnos_no_cambian_nada(self):
+        from pulso.redes import _destacados
+        pubs = {}
+        for i in range(20):
+            url = "https://www.youtube.com/shorts/v{}".format(i)
+            pubs[url] = {"url": url, "cuenta": "yt_a", "zona": "Ensenada", "formato": "short",
+                         "fecha": "2026-09-18", "titulo": "t", "tipo": "video",
+                         "publicado": "2026-09-18T12:00:00+00:00",
+                         "reproducciones": 1000 - i, "valoraciones": 0}
+        comun = dict(comentarios=[], opinion=[], temas=None, cuentas=[{"id": "yt_a"}],
+                     dentro=lambda p: True, cifras=youtube.CIFRAS, orden=youtube.ORDEN,
+                     formatos=youtube.FORMATOS)
+        self.assertEqual(_destacados(pubs, turnos=False, **comun),
+                         _destacados(pubs, turnos=True, **comun))
+
+
+class TestConfigReal(unittest.TestCase):
+    """config/youtube.json de verdad: las pruebas leen el config real."""
 
     @classmethod
     def setUpClass(cls):
-        cls.roster = Roster.desde_archivo("config/roster.json")
+        raiz = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        with open(os.path.join(raiz, "config", "youtube.json"), encoding="utf-8") as f:
+            cls.cfg = json.load(f)
+        with open(os.path.join(raiz, "config", "canales.json"), encoding="utf-8") as f:
+            cls.canales_api = json.load(f)
 
-    def derivar_con(self, coms):
-        return derivar(coms, self.roster, "2026-09-03T12:00:00+00:00", [], {})
+    def test_el_config_valida(self):
+        errores, _ = validar_youtube_config(self.cfg)
+        self.assertEqual(errores, [])
 
-    def test_no_publica_texto_de_comentarios(self):
-        # La prueba central de cumplimiento: el texto vive 30 dias en cache,
-        # nunca en lo que entra a git.
-        coms = [comentario("c%d" % i, "El agua no llega a mi colonia otra vez",
-                           "2026-09-01") for i in range(6)]
-        panel = self.derivar_con(coms)
-        crudo = json.dumps(panel, ensure_ascii=False)
-        self.assertNotIn("El agua no llega", crudo)
-        self.assertNotIn("mi colonia", crudo)
-
-    def test_no_publica_ids_de_comentario(self):
-        coms = [comentario("comentario-unico-%d" % i, "agua potable escasez",
-                           "2026-09-01") for i in range(6)]
-        crudo = json.dumps(self.derivar_con(coms))
-        self.assertNotIn("comentario-unico", crudo)
-
-    def test_si_publica_conteos_derivados(self):
-        coms = [comentario("c%d" % i, "escasez de agua potable en la colonia",
-                           "2026-09-01") for i in range(6)]
-        panel = self.derivar_con(coms)
-        self.assertEqual(panel["comentarios_vigentes"], 6)
-        self.assertEqual(panel["por_zona"].get("Tijuana"), 6)
-        self.assertEqual(panel["por_canal"].get("uno"), 6)
-        self.assertTrue(panel["temas"])
-        self.assertTrue(any("agua" in t["termino"] for t in panel["temas"]))
-
-    def test_los_temas_no_traen_ejemplos(self):
-        # 'ejemplos' es texto literal de comentarios.
-        coms = [comentario("c%d" % i, "escasez de agua potable", "2026-09-01")
-                for i in range(6)]
-        for t in self.derivar_con(coms)["temas"]:
-            self.assertNotIn("ejemplos", t)
-            self.assertNotIn("notas", t)
-
-    def test_cuenta_figuras_mencionadas(self):
-        coms = [comentario("c%d" % i, "Abdiel Gutiérrez no resolvió nada",
-                           "2026-09-01") for i in range(4)]
-        self.assertEqual(self.derivar_con(coms)["por_figura"].get("agc"), 4)
-
-    def test_zona_del_canal_cuando_el_comentario_no_nombra_ciudad(self):
-        # Un comentario suelto rara vez nombra su ciudad.
-        coms = [comentario("c1", "ya basta de esto", "2026-09-01",
-                           canal="dos", zona="Mexicali")]
-        self.assertEqual(self.derivar_con(coms)["por_zona"].get("Mexicali"), 1)
-
-    def test_el_titulo_del_video_da_contexto(self):
-        # El comentario no dice Ensenada, el video si.
-        coms = [comentario("c1", "que barbaridad", "2026-09-01", canal="dos",
-                           zona="Mexicali", titulo="Falta agua en Ensenada")]
-        self.assertEqual(self.derivar_con(coms)["por_zona"].get("Ensenada"), 1)
-
-    def test_lleva_el_aviso_de_retencion(self):
-        panel = self.derivar_con([])
-        self.assertEqual(panel["retencion_dias"], 30)
-        self.assertIn("30", panel["aviso"])
-
-    def test_publica_resumen_derivado_filtrable_por_tema(self):
-        coms = []
-        for i in range(6):
-            c = comentario(
-                "tema-%d" % i,
-                "falta agua potable en la colonia?",
-                "2026-09-01",
-                titulo="Crisis de agua potable en Tijuana",
-            )
-            c.update({"temas": ["agua potable"], "likes": i, "respuestas": 1})
-            coms.append(c)
-        detalle = self.derivar_con(coms)["por_tema"][0]
-        self.assertEqual(detalle["tema"], "agua potable")
-        self.assertEqual(detalle["comentarios"], 6)
-        self.assertEqual(detalle["videos"], 1)
-        self.assertEqual(detalle["preguntas"], 6)
-        self.assertTrue(any("agua" in s["termino"] for s in detalle["subtemas"]))
-
-
-class TestCanalesConfig(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        with open("config/canales.json", encoding="utf-8") as fh:
-            cls.cfg = json.load(fh)
-
-    def test_ids_unicos_y_con_formato(self):
-        import re
-        ids = [c["id"] for c in self.cfg["canales"]]
-        self.assertEqual(len(ids), len(set(ids)))
-        for i in ids:
-            self.assertRegex(i, r"^[a-z0-9_]{2,12}$")
-
-    def test_zonas_conocidas(self):
-        from pulso import ZONAS
+    def test_ninguna_fila_lleva_zona(self):
         for c in self.cfg["canales"]:
-            self.assertIn(c["zona"], ZONAS, c["id"])
+            self.assertNotIn("zona", c, c["id"])
 
-    def test_todos_los_canales_traen_id_de_canal(self):
+    def test_toda_fila_apagada_dice_por_que(self):
         for c in self.cfg["canales"]:
-            self.assertTrue(c["canal"].startswith("UC"), c["id"])
-            self.assertTrue(c.get("verificado"), c["id"])
+            if not c["activo"]:
+                self.assertTrue(c.get("nota"), c["id"])
 
-    def test_los_senuelos_no_estan_entre_los_canales(self):
-        # @UniradioInforma y @afntijuana resuelven a canales muertos. Estan
-        # documentados en 'senuelos' justo para que nadie los reinstale.
-        activos = {c["canal"] for c in self.cfg["canales"]}
-        for s in self.cfg["senuelos"]:
-            self.assertNotIn(s["canal"], activos, s["handle"])
-            self.assertTrue(s["porque"])
+    def test_una_fila_con_zona_es_error_con_el_caso_escrito(self):
+        cfg = json.loads(json.dumps(self.cfg))
+        cfg["canales"][0]["zona"] = "Ensenada"
+        errores, _ = validar_youtube_config(cfg)
+        self.assertTrue(any("no lleva 'zona'" in e for e in errores), errores)
 
-    def test_el_imparcial_no_esta_activo(self):
-        # Su canal es la insignia de Sonora: 190K subs, cero ciudades de BC
-        # en 15 subidas. Es el unico lo bastante grande para torcer todo.
-        senuelos = {s["canal"] for s in self.cfg["senuelos"]}
-        self.assertIn("UCSZpvocAhw_WU5R3wVOxRCg", senuelos)
+    def test_el_id_de_canal_coincide_con_el_catalogo_de_la_api(self):
+        # Los dos modulos de YouTube leen catalogos distintos a proposito, pero
+        # cuando nombran el mismo canal tienen que nombrar el mismo canal.
+        por_nombre = {c["nombre"]: c["canal"] for c in self.canales_api["canales"]}
+        mios = {c["canal"] for c in self.cfg["canales"]}
+        comunes = [n for n, ch in por_nombre.items() if ch in mios]
+        self.assertGreaterEqual(len(comunes), 10)
+
+    def test_ningun_canal_del_catalogo_es_senuelo(self):
+        senuelos = {s["canal"] for s in self.canales_api["senuelos"]}
+        for c in self.cfg["canales"]:
+            self.assertNotIn(c["canal"], senuelos, c["id"])
+
+
+def _entrada_suelta(xml, i=0):
+    import xml.etree.ElementTree as ET
+    return ET.fromstring(xml).findall("a:entry", youtube.NS)[i]
 
 
 if __name__ == "__main__":

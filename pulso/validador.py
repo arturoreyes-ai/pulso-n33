@@ -1090,8 +1090,14 @@ ZONAS_MUNICIPALES = tuple(z for z in ZONAS if z != "estatal")
 # `internacional` solo existe en TikTok, y solo como residuo de la edicion del
 # mundo. NO entra a ZONAS_DE_CONTEO, que la usan temas, conversacion y el
 # propio Instagram: ahi no significa nada y ampliarla la dejaria pasar.
-ZONAS_REDES_TIKTOK = ZONAS_DE_CONTEO + ("internacional",)
-AMBITOS_TIKTOK = ("regional", "nacional", "internacional")
+ZONAS_REDES_AMBITO = ZONAS_DE_CONTEO + ("internacional",)
+AMBITOS_REDES = ("regional", "nacional", "internacional")
+
+# Todas las cifras que alguna plataforma publica en un destacado. Existe para
+# que la comprobacion inversa -- "esta presente y no es de esta plataforma" --
+# sea un bucle y no una lista a mano que se queda corta al agregar la cuarta.
+CIFRAS_REDES = ("likes", "comentarios", "compartidos", "guardados",
+                "reproducciones", "valoraciones")
 
 # Lo que cambia entre plataformas en redes.json y su archivo de texto. Todo
 # lo demas -- conteos, orden, sentimiento, prohibiciones de texto -- es igual.
@@ -1106,8 +1112,14 @@ PLATAFORMAS_REDES = {
         "ventana_legado": "ventana_dias",
         "creador": False,
         "prohibidas": frozenset(),
-        # Instagram no publica compartidos ni guardados: su ausencia es "sin dato".
-        "cifras": (),
+        # Las cifras OBLIGATORIAS de esta plataforma. Instagram no publica
+        # compartidos ni guardados: su ausencia es "sin dato", y por eso no
+        # estan aqui ni en `cifras_opcionales`.
+        "cifras": ("likes", "comentarios"),
+        "cifras_opcionales": ("reproducciones",),
+        "orden": ("likes", "comentarios"),
+        "formatos": (),
+        "estados": ("ok", "fallo", "sin_token"),
         # La zona de una cuenta es su sede declarada, no el veredicto de un
         # gacetero: aqui no hay alcance que publicar, y `internacional` no existe.
         "alcance": False,
@@ -1123,14 +1135,55 @@ PLATAFORMAS_REDES = {
         "ventana_legado": None,
         "creador": True,
         "prohibidas": CLAVES_PROHIBIDAS_TIKTOK,
-        # TikTok si los publica: un 0 es cero medido, y faltar es error.
-        "cifras": ("compartidos", "guardados"),
+        # TikTok si publica compartidos y guardados: un 0 es cero medido, y
+        # faltar es error.
+        "cifras": ("likes", "comentarios", "compartidos", "guardados"),
+        "cifras_opcionales": ("reproducciones",),
+        "orden": ("likes", "comentarios"),
+        "formatos": (),
+        "estados": ("ok", "fallo", "sin_token"),
         "alcance": True,
         # Segundos del video, desde el 17 de septiembre de 2026. Opcional: un
         # corte anterior no lo trae y sigue siendo valido, igual que `alcance`.
         "duracion": True,
-        "zonas": ZONAS_REDES_TIKTOK,
+        "zonas": ZONAS_REDES_AMBITO,
         "modulo": "pulso/tiktok.py:_limpiar_comentario",
+    },
+    "youtube": {
+        # Dos prefijos porque son dos formatos con URL distinta. Ojo: este es
+        # el modulo del FEED PUBLICO (pulso/youtube.py), no el de la API de
+        # datos (pulso/conversacion.py, que escribe conversacion.json). Sus
+        # datos no se suman en un mismo agregado: solo uno de los dos cae bajo
+        # las Politicas para Desarrolladores.
+        "prefijo": ("https://www.youtube.com/shorts/", "https://www.youtube.com/watch?v="),
+        "ventana": "ventana_horas",
+        "ventana_legado": None,
+        # El publicador ES la cuenta, una fila del config con nombre impreso.
+        # Un `creador` seria el mismo hecho dos veces y la segunda copia es
+        # una clave de identidad.
+        "creador": False,
+        "prohibidas": frozenset(),
+        # El feed publico no trae likes ni conteo de comentarios. Ordena por
+        # vistas, con las valoraciones de desempate. `valoraciones` es
+        # media:starRating@count y NO es "likes": ver pulso/youtube.py.
+        "cifras": ("reproducciones", "valoraciones"),
+        "cifras_opcionales": (),
+        "orden": ("reproducciones", "valoraciones"),
+        # Shorts y videos largos se cortan por separado porque sus vistas no
+        # miden lo mismo: desde el 31 de marzo de 2025 una vista de Short es
+        # cualquier arranque o repeticion sin tiempo minimo. Medido el 18 de
+        # septiembre de 2026: mediana de 447 contra 7.
+        "formatos": ("short", "video"),
+        # `sin_lista` es el 404 de una lista automatica que el canal no tiene.
+        # No es `fallo` (nada se rompio) ni `ok` con posts en cero (eso se lee
+        # "hoy no publico"): es "sin dato" contra "0" en la banda de salud.
+        "estados": ("ok", "fallo", "sin_lista"),
+        # La zona sale del titulo y la descripcion con el gacetero, como en
+        # TikTok. El caso esta medido en el encabezado de pulso/youtube.py.
+        "alcance": True,
+        "duracion": False,
+        "zonas": ZONAS_REDES_AMBITO,
+        "modulo": "pulso/youtube.py:_limpiar_pieza",
     },
 }
 
@@ -1191,9 +1244,9 @@ def validar_tiktok_config(datos):
             errores.append("{}: idioma {!r} desconocido".format(et, b.get("idioma")))
         if not isinstance(b.get("activo"), bool):
             errores.append("{}: 'activo' debe ser booleano".format(et))
-        if "ambito" in b and b.get("ambito") not in AMBITOS_TIKTOK:
+        if "ambito" in b and b.get("ambito") not in AMBITOS_REDES:
             errores.append("{}: 'ambito' {!r} desconocido; se espera {}".format(
-                et, b.get("ambito"), "|".join(AMBITOS_TIKTOK)))
+                et, b.get("ambito"), "|".join(AMBITOS_REDES)))
         if "zona" in b:
             # Misma regla que config/busquedas.json: una consulta le acreditaria
             # su zona a todo video que no nombre lugar alguno. La zona sale del
@@ -1208,7 +1261,87 @@ def validar_tiktok_config(datos):
     return errores, avisos
 
 
-def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
+RE_CANAL_YOUTUBE = re.compile(r"^yt_[a-z0-9_]{2,20}$")
+FORMATOS_YOUTUBE = ("short", "video")
+
+
+def validar_youtube_config(datos):
+    """config/youtube.json: canales leidos por feed publico. Una fila no lleva zona.
+
+    Es el catalogo del modulo del FEED (pulso/youtube.py), no el de la API
+    (config/canales.json, que lee pulso/conversacion.py). Los dos listan
+    canales de YouTube y ahi se acaba el parecido: alla `zona` es obligatoria
+    y aqui es un error, porque la zona de cada pieza sale de lo que nombra su
+    titulo y su descripcion.
+    """
+    errores, avisos = [], []
+    if not _texto(datos.get("nota")):
+        avisos.append("youtube: falta la 'nota' que explica el archivo")
+    cosecha = datos.get("cosecha")
+    if not isinstance(cosecha, dict):
+        errores.append("youtube: falta 'cosecha'")
+    else:
+        vh = cosecha.get("ventana_horas")
+        if not isinstance(vh, int) or isinstance(vh, bool) or not 1 <= vh <= 720:
+            errores.append("youtube.cosecha: 'ventana_horas' debe ser entero entre 1 y 720")
+        for campo in ("shorts_por_canal", "videos_por_canal"):
+            v = cosecha.get(campo)
+            if not isinstance(v, int) or isinstance(v, bool) or v < 1:
+                errores.append("youtube.cosecha: '{}' debe ser entero positivo".format(campo))
+    canales = datos.get("canales")
+    if not isinstance(canales, list) or not canales:
+        errores.append("youtube: 'canales' debe ser una lista no vacia")
+        return errores, avisos
+    ids = set()
+    for i, c in enumerate(canales):
+        et = "youtube.canales[{}]".format(c.get("id", i) if isinstance(c, dict) else i)
+        if not isinstance(c, dict):
+            errores.append("{}: debe ser objeto".format(et))
+            continue
+        cid = c.get("id")
+        if not isinstance(cid, str) or not RE_CANAL_YOUTUBE.match(cid):
+            errores.append("{}: 'id' invalido ({!r}); se espera ^yt_[a-z0-9_]{{2,20}}$".format(
+                et, cid))
+        elif cid in ids:
+            errores.append("{}: id repetido".format(et))
+        ids.add(cid)
+        for campo in ("nombre", "nota"):
+            if not _texto(c.get(campo)):
+                errores.append("{}: falta '{}'".format(et, campo))
+        canal = c.get("canal")
+        if not isinstance(canal, str) or not canal.startswith("UC") or len(canal) != 24:
+            errores.append("{}: 'canal' debe ser un id UC... de 24 caracteres ({!r}); de ahi "
+                           "salen las listas UUSH y UULF reemplazando el UC".format(et, canal))
+        if c.get("idioma") not in IDIOMAS:
+            errores.append("{}: idioma {!r} desconocido".format(et, c.get("idioma")))
+        if not isinstance(c.get("activo"), bool):
+            errores.append("{}: 'activo' debe ser booleano".format(et))
+        formatos = c.get("formatos")
+        if (not isinstance(formatos, list) or not formatos
+                or any(f not in FORMATOS_YOUTUBE for f in formatos)):
+            errores.append("{}: 'formatos' debe ser una lista no vacia de {}".format(
+                et, "|".join(FORMATOS_YOUTUBE)))
+        if "ambito" in c and c.get("ambito") not in AMBITOS_REDES:
+            errores.append("{}: 'ambito' {!r} desconocido; se espera {}".format(
+                et, c.get("ambito"), "|".join(AMBITOS_REDES)))
+        if "zona" in c:
+            # El caso, medido el 18 de septiembre de 2026: la fila de El Vigia
+            # dice Ensenada y nueve de sus quince Shorts son nacionales --
+            # Trump, Milei, Morelos. Su pieza mas vista del corredor, con 3,985
+            # vistas, es sobre Trump y la UE. Estamparle esta zona la pondria
+            # al frente del muro de Ensenada. `ambito` tampoco es la puerta de
+            # atras: no acredita lugar a nadie, solo decide el residuo.
+            errores.append("{}: un canal no lleva 'zona'; la zona de cada pieza sale de lo "
+                           "que nombran su titulo y su descripcion (pulso/zonas.py). El feed "
+                           "de YouTube de un medio es su canal nacional y viral, no su "
+                           "cobertura municipal".format(et))
+    if not any(isinstance(c, dict) and c.get("activo") for c in canales):
+        avisos.append("youtube: ningun canal activo; el panel va a salir vacio")
+    return errores, avisos
+
+
+def _validar_destacados(datos, errores, avisos, plataforma="instagram",
+                        cosecha_comentarios=True):
     """El bloque de posts destacados de redes.json. Ausente es aviso.
 
     Un corte anterior al campo sigue siendo valido -- el patron de
@@ -1293,8 +1426,10 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
             errores.append("{}: debe ser objeto".format(eti))
             continue
         url = d.get("url")
-        if not _texto(url) or not url.startswith(esp["prefijo"]):
-            errores.append("{}: 'url' debe empezar con {} ({!r})".format(eti, esp["prefijo"], url))
+        prefijos = esp["prefijo"] if isinstance(esp["prefijo"], tuple) else (esp["prefijo"],)
+        if not _texto(url) or not url.startswith(prefijos):
+            errores.append("{}: 'url' debe empezar con {} ({!r})".format(
+                eti, " o ".join(prefijos), url))
         else:
             urls.append(url)
         # El creador solo cruza a data/ en TikTok, y ahi es obligatorio y
@@ -1304,7 +1439,7 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
         if esp["creador"]:
             if not isinstance(creador, str) or not RE_CREADOR.match(creador):
                 errores.append("{}: 'creador' debe ser un @handle ({!r})".format(eti, creador))
-            elif _texto(url) and not url.startswith(esp["prefijo"] + creador + "/video/"):
+            elif _texto(url) and not url.startswith(prefijos[0] + creador + "/video/"):
                 errores.append("{}: 'creador' {} no es el de la url {}".format(eti, creador, url))
         elif "creador" in d:
             errores.append("{}: 'creador' no se publica en {}; la fuente es la cuenta".format(
@@ -1347,7 +1482,11 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
         if d.get("zona") not in esp["zonas"]:
             errores.append("{}: zona desconocida ({!r})".format(eti, d.get("zona")))
         else:
-            por_zona[d["zona"]] = por_zona.get(d["zona"], 0) + 1
+            # El tope se cuenta como se hizo el corte. Donde hay formatos el
+            # corte fue por (zona, formato), asi que contar solo por zona daria
+            # el doble y fallaria sobre un archivo correcto.
+            clave = (d["zona"], d.get("formato")) if esp.get("formatos") else d["zona"]
+            por_zona[clave] = por_zona.get(clave, 0) + 1
         fecha = d.get("fecha")
         if not _fecha(fecha):
             errores.append("{}: 'fecha' invalida ({!r})".format(eti, fecha))
@@ -1389,18 +1528,33 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
                            "el pie completo (maximo 160)".format(eti, len(titulo)))
         elif not titulo.strip():
             avisos.append("{}: post sin pie; la fila saldra solo con la liga".format(eti))
+        if esp.get("formatos"):
+            if d.get("formato") not in esp["formatos"]:
+                errores.append("{}: 'formato' debe ser {} ({!r})".format(
+                    eti, "|".join(esp["formatos"]), d.get("formato")))
+        elif "formato" in d:
+            errores.append("{}: 'formato' no aplica a {}; solo lo lleva una plataforma "
+                           "cuyos formatos no se pueden comparar entre si".format(
+                               eti, plataforma))
         if d.get("tipo") not in TIPOS_POST:
             errores.append("{}: tipo {!r} desconocido; se espera {}".format(
                 eti, d.get("tipo"), "|".join(TIPOS_POST)))
-        for campo in ("likes", "comentarios", "cosechados", "opinion") + tuple(esp["cifras"]):
+        for campo in ("cosechados", "opinion") + tuple(esp["cifras"]):
             if not _entero_no_negativo(d.get(campo)):
                 errores.append("{}: '{}' debe ser entero no negativo".format(eti, campo))
-        for campo in ("compartidos", "guardados"):
-            if campo in d and campo not in esp["cifras"]:
+        # Lo contrario y por la misma razon: una cifra que esta plataforma no
+        # publica no puede aparecer ni en cero. En YouTube `likes` y
+        # `comentarios` no existen -- el feed publico no los trae -- y un cero
+        # se leeria como "nadie comento" en vez de "no lo medimos".
+        permitidas = frozenset(esp["cifras"]) | frozenset(esp.get("cifras_opcionales", ()))
+        for campo in CIFRAS_REDES:
+            if campo in d and campo not in permitidas:
                 errores.append("{}: '{}' no existe en {}; ausente es 'sin dato', nunca 0".format(
                     eti, campo, plataforma))
-        if "reproducciones" in d and not (
-                _entero_no_negativo(d["reproducciones"]) and d["reproducciones"] > 0):
+        if ("reproducciones" in esp.get("cifras_opcionales", ())
+                and "reproducciones" in d
+                and not (_entero_no_negativo(d["reproducciones"])
+                         and d["reproducciones"] > 0)):
             errores.append("{}: 'reproducciones' solo se emite si es mayor que 0; un cero "
                            "se leeria como 'nadie lo vio' y no como 'no es video'".format(eti))
         # `duracion` son segundos de video y existe por una razon de costo: todo
@@ -1420,7 +1574,9 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
             errores.append("{}: 'duracion' no aplica a {}; su actor no la publica".format(
                 eti, plataforma))
         if _entero_no_negativo(d.get("cosechados")):
-            if d["cosechados"] == 0:
+            # Si la plataforma no cosecha comentarios, este aviso saldria en
+            # TODAS las filas de cada corrida y dejaria de ser una senal.
+            if d["cosechados"] == 0 and cosecha_comentarios:
                 avisos.append("{}: post destacado sin comentarios cosechados".format(eti))
             elif _entero_no_negativo(d.get("comentarios")) and d["cosechados"] > d["comentarios"]:
                 avisos.append("{}: cosechados {} > comentarios {} que reporta el actor".format(
@@ -1457,16 +1613,20 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram"):
                       "que Apify cobra por segundo de video".format(sin_duracion))
     if len(set(urls)) != len(urls):
         errores.append("redes: 'destacados' repite una url")
-    claves = [(-d.get("likes", 0), -d.get("comentarios", 0), d.get("url", ""))
+    orden = tuple(esp["orden"])
+    claves = [tuple(-int(d.get(k) or 0) for k in orden) + (d.get("url", ""),)
               for d in lista if isinstance(d, dict)]
     if claves != sorted(claves):
-        errores.append("redes: 'destacados' no esta ordenado por (-likes, -comentarios, url); "
+        errores.append("redes: 'destacados' no esta ordenado por ({}, url); "
                        "un orden distinto ensucia el diff de cada corrida detras de "
-                       "`git diff --cached --quiet`")
+                       "`git diff --cached --quiet`".format(
+                           ", ".join("-" + k for k in orden)))
     if maximo:
-        for z, n in sorted(por_zona.items()):
+        for clave, n in sorted(por_zona.items()):
             if n > maximo:
-                errores.append("redes: {} destacados de {} y el maximo es {}".format(n, z, maximo))
+                donde = clave if isinstance(clave, str) else "{} en {}".format(clave[1], clave[0])
+                errores.append("redes: {} destacados de {} y el maximo es {}".format(
+                    n, donde, maximo))
 
 
 def validar_redes_comentarios(datos, redes=None, plataforma="instagram"):
@@ -1599,6 +1759,23 @@ def validar_redes(datos, plataforma="instagram"):
         if not _entero_no_negativo(datos.get(campo)):
             errores.append("redes: '{}' debe ser entero no negativo".format(campo))
 
+    # `cosecha_comentarios: false` dice que esta plataforma no cosecha
+    # comentarios, asi que sus ceros no son una medicion. Sin el campo, un
+    # panel sin cosecha y uno donde nadie comento serian el mismo archivo. Se
+    # asume true cuando falta, para que un corte anterior siga siendo valido.
+    cosecha = datos.get("cosecha_comentarios", True)
+    if not isinstance(cosecha, bool):
+        errores.append("redes: 'cosecha_comentarios' debe ser booleano ({!r})".format(cosecha))
+    elif not cosecha:
+        for campo in ("comentarios_vigentes", "opinion", "repetidos", "reacciones"):
+            if datos.get(campo):
+                errores.append(
+                    "redes: 'cosecha_comentarios' es false y '{}' vale {}; o se cosecho "
+                    "o no se cosecho".format(campo, datos.get(campo)))
+        if datos.get("por_tema"):
+            errores.append("redes: 'cosecha_comentarios' es false y hay 'por_tema'; los temas "
+                           "se cuentan sobre comentarios y no hay")
+
     prohibidas = CLAVES_PROHIBIDAS_CONVERSACION | CLAVES_PROHIBIDAS_REDES | esp["prohibidas"]
     for ruta in _claves_prohibidas(datos, prohibidas):
         errores.append(
@@ -1686,14 +1863,15 @@ def validar_redes(datos, plataforma="instagram"):
             if s.get("crudos") is not None and not _entero_no_negativo(s["crudos"]):
                 errores.append("redes.salud[{}]: 'crudos' debe ser entero no negativo".format(
                     s.get("cuenta")))
-            if s.get("estado") not in ("ok", "fallo", "sin_token"):
+            if s.get("estado") not in esp.get("estados", ("ok", "fallo", "sin_token")):
                 errores.append("redes.salud[{}]: estado {!r} desconocido".format(
                     s["cuenta"], s.get("estado")))
         if [s.get("cuenta") for s in salud if isinstance(s, dict)] != sorted(
                 s.get("cuenta") for s in salud if isinstance(s, dict)):
             errores.append("redes: 'salud' no esta ordenada por cuenta")
 
-    _validar_destacados(datos, errores, avisos, plataforma)
+    _validar_destacados(datos, errores, avisos, plataforma,
+                        cosecha_comentarios=bool(cosecha))
 
     # Un panel sin cuentas verificadas no es un error, pero tiene que doler a
     # la vista: un handle derivado del nombre del medio da una cuenta ajena o
@@ -2582,6 +2760,20 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
         if errores:
             return errores, avisos
 
+    # config/youtube.json es opcional igual que el de TikTok, y se valida por
+    # las mismas razones: una fila con zona o un canal sin id UC fallan aqui y
+    # no a media cosecha.
+    ruta_youtube = os.path.join(dir_config, "youtube.json")
+    if os.path.exists(ruta_youtube):
+        try:
+            e, a = validar_youtube_config(_leer(ruta_youtube))
+            errores += e
+            avisos += a
+        except (ValueError, OSError) as e:
+            errores.append("youtube: no se pudo leer {} ({})".format(ruta_youtube, e))
+        if errores:
+            return errores, avisos
+
     # config/tendencias.json es opcional, como el de TikTok. Si esta, se valida
     # aqui: una zona sin fila, un WOEID que falta o un presupuesto que no cubre
     # la llamada fallan antes de gastar.
@@ -2642,6 +2834,12 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
         # con la ventana en horas y el creador visible. Tampoco es error que falte.
         "tiktok": (os.path.join(dir_datos, "tiktok.json"),
                    lambda d: validar_redes(d, plataforma="tiktok")),
+        # youtube.json lo escribe `pulso youtube`: Shorts y videos largos de
+        # los canales de config/youtube.json, leidos por feed publico. Mismo
+        # contrato que redes.json pero sin comentarios, y por eso sale con
+        # `cosecha_comentarios: false`. Tampoco es error que falte.
+        "youtube": (os.path.join(dir_datos, "youtube.json"),
+                    lambda d: validar_redes(d, plataforma="youtube")),
         # tendencias.json lo escribe `pulso tendencias`: el ranking de X por
         # ubicacion, sin tuits ni identidad. Tampoco es error que falte.
         "tendencias": (os.path.join(dir_datos, "tendencias.json"), validar_tendencias),

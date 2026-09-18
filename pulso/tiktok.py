@@ -103,6 +103,7 @@ from .redes import (  # noqa: F401  (reexportados a proposito, como en instagram
     RE_MENCION, REGISTROS, RETENCION_DIAS, TEXTO_MAXIMO, TITULO_MAXIMO, _hoy,
     _id_comentario, _titulo, clasificar_cache, guardar_cache, guardar_publicaciones,
     guardar_vistos, leer_cache, leer_publicaciones, leer_vistos, pendientes, purgar,
+    zona_por_ambito,
 )
 from . import redes as _redes
 from .zonas import alcance
@@ -237,39 +238,12 @@ def _publicado(item):
 def _zona(pie, ambito=AMBITO):
     """(zona, alcance) del video por lo que nombra su pie. zona None = se tira.
 
-    `alcance` es el veredicto crudo del gacetero -- "zona", "estatal", "fuera"
-    o "nacional" -- y se publica junto a la zona. Existe porque desde que hay
-    ambitos los dos dejaron de coincidir: en una busqueda nacional un video de
-    Guadalajara queda `zona: nacional`, y sin el alcance esa fila seria
-    indistinguible de una que no nombro lugar alguno. El panel rotula
-    "sin lugar" para una y "fuera del corredor" para la otra, que no es lo
-    mismo; colapsarlas seria la version de zonas del cero que tapa un hueco.
-
-    El ambito NO acredita zona. Cuando el pie nombra un lugar del gacetero
-    manda el pie, igual en los tres; el ambito solo decide el residuo:
-
-        veredicto            regional     nacional     internacional
-        una zona             esa zona     esa zona     esa zona
-        estatal              estatal      estatal      estatal
-        un lugar de fuera    SE TIRA      nacional     nacional
-        ningun lugar         nacional     nacional     internacional
+    La tabla vive en pulso/redes.py::zona_por_ambito desde que YouTube la
+    necesito igual: copiada dos veces, una correccion llega a una sola. Esta
+    envoltura se queda porque es lo que parchean las pruebas y porque el
+    nombre local dice de que plataforma es el pie.
     """
-    alc, zonas = alcance(pie or "", None)
-    if alc == "zona":
-        return zonas[0], alc
-    if alc == "estatal":
-        return "estatal", alc
-    if alc == "fuera":
-        # Un lugar mexicano fuera de Baja California. En una busqueda regional
-        # es ruido y se tira; en una nacional o internacional es exactamente
-        # lo que la consulta fue a buscar, y tirarlo dejaria pasar solo el
-        # residuo sin lugar.
-        if ambito == "regional":
-            return None, alc
-        return "nacional", alc
-    # El gacetero no nombro nada. En la edicion del mundo eso es el mundo; en
-    # las otras dos sigue siendo el "nacional" literal de siempre.
-    return ("internacional" if ambito == "internacional" else "nacional"), alc
+    return zona_por_ambito(pie, ambito)
 
 
 def _limpiar_video(item, busqueda, ahora):

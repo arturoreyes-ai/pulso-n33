@@ -24,7 +24,7 @@ from pulso.sentimiento import (
     recortar,
 )
 from pulso.validador import validar_conversacion, validar_notas
-from pulso.youtube import clasificar_cache, derivar, guardar_cache, leer_cache
+from pulso.conversacion import clasificar_cache, derivar, guardar_cache, leer_cache
 
 
 def nota(i, titulo, postura=None):

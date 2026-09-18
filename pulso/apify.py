@@ -18,7 +18,7 @@ como comentario:
    prohibe. La lista deja fuera `username` y `user` a proposito, porque en
    casi todos los actores son el perfil OBJETIVO y no una credencial.
 
-2. **El texto crudo no entra a git.** Misma disciplina que pulso/youtube.py,
+2. **El texto crudo no entra a git.** Misma disciplina que pulso/conversacion.py,
    pero mas estricta: YouTube al menos concede 30 dias por politica escrita
    (III.E.4.d) y Meta, TikTok y X no conceden nada. Lo que ata aqui son los
    terminos de cada plataforma mas la LFPDPPP mexicana y la CPRA californiana,

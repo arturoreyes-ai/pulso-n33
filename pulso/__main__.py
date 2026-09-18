@@ -117,10 +117,10 @@ def cmd_conversacion(args):
     """Cosecha comentarios de YouTube y escribe SOLO las metricas derivadas.
 
     El texto crudo queda en cache/ (ignorado por git) con TTL de 30 dias.
-    Ver el encabezado de pulso/youtube.py para el porque.
+    Ver el encabezado de pulso/conversacion.py para el porque.
     """
     from .pipeline import ahora_utc, _escribir
-    from .youtube import cosechar, derivar, leer_cache
+    from .conversacion import cosechar, derivar, leer_cache
 
     roster = Roster.desde_archivo(os.path.join(args.config, "roster.json"))
     canales = _leer(os.path.join(args.config, "canales.json"))["canales"]
@@ -145,7 +145,7 @@ def cmd_conversacion(args):
     etiquetados = 0
     if args.sentimiento == "modelo":
         from .sentimiento import Analizador
-        from .youtube import clasificar_cache
+        from .conversacion import clasificar_cache
         etiquetados = clasificar_cache(args.cache, Analizador())
 
     vigentes = leer_cache(args.cache)
@@ -425,6 +425,64 @@ def cmd_tiktok(args):
         elif s.get("fuera") or s.get("descartados"):
             print("  {} · fuera de la región: {} · descartados: {}".format(
                 s["cuenta"], s.get("fuera", 0), s.get("descartados", 0)), file=sys.stderr)
+    return 0
+
+
+def cmd_youtube(args):
+    """Shorts y videos de YouTube por feed publico. No cuesta nada.
+
+    Tercera plataforma de la familia redes y la unica sin factura: lee dos
+    listas Atom por canal, sin llave y sin cuota. No cosecha comentarios -- el
+    feed no los trae -- asi que el documento sale con `cosecha_comentarios`
+    en false, que es lo que impide leer sus ceros como una medicion. La zona
+    de cada pieza sale de su titulo y su descripcion, nunca de la fila del
+    canal: ver el encabezado de pulso/youtube.py, donde El Vigia lo demuestra
+    con numeros.
+    """
+    from .youtube import cosechar, derivar, probar
+    from .pipeline import ahora_utc, _escribir
+
+    cfg = _leer(os.path.join(args.config, "youtube.json"))
+    canales = cfg.get("canales", [])
+    cosecha = cfg.get("cosecha", {})
+    ventana = cosecha.get("ventana_horas", 24)
+    piezas = args.piezas or max(cosecha.get("shorts_por_canal", 15),
+                                cosecha.get("videos_por_canal", 15))
+    ahora = ahora_utc()
+
+    if args.probar:
+        for fila in probar([c for c in canales if c.get("activo")], ahora):
+            print("\n{} ({}, ámbito {})".format(fila["nombre"], fila["cuenta"], fila["ambito"]))
+            for p in fila["piezas"]:
+                print("  {:>8} vistas · {:<6} · {:<14} · {}".format(
+                    p["reproducciones"], p["formato"], p["zona"], p["titulo"][:56]))
+            if fila["descartes"]:
+                print("  descartes: {}".format(fila["descartes"]))
+        return 0
+
+    publicaciones, salud = cosechar(canales, ahora, cache=args.cache, piezas=piezas)
+    panel = derivar(ahora, salud, publicaciones, canales, ventana_horas=ventana)
+    _escribir(os.path.join(args.salida, "youtube.json"), panel)
+
+    formatos = {}
+    for d in panel["destacados"]:
+        formatos[d["formato"]] = formatos.get(d["formato"], 0) + 1
+    # `posts_vigentes` cuenta los que tienen comentarios, asi que aqui es
+    # siempre 0 y no se imprime: diria "ninguna pieza vigente" sobre un panel
+    # lleno. Lo que informa es cuantas hay en el catalogo y cuantas se cortaron.
+    print("piezas en catálogo: {} · destacados: {} en las últimas {} horas ({})".format(
+        len(publicaciones), len(panel["destacados"]), panel["ventana_horas"],
+        " · ".join("{} {}".format(n, f) for f, n in sorted(formatos.items())) or "ninguno"))
+    print("sin comentarios: el feed público no los trae (cosecha_comentarios: false)")
+    for s in salud:
+        if s["estado"] != "ok":
+            print("  {} · {} · {}".format(s["cuenta"], s["estado"],
+                                          s.get("nota") or s.get("error", "")[:120]),
+                  file=sys.stderr)
+        elif s.get("fuera") or s.get("descartados") or s.get("reclasificados"):
+            print("  {} · fuera de la región: {} · descartados: {} · reclasificados: {}".format(
+                s["cuenta"], s.get("fuera", 0), s.get("descartados", 0),
+                s.get("reclasificados", 0)), file=sys.stderr)
     return 0
 
 
@@ -757,6 +815,17 @@ def main(argv=None):
                     help="tres videos por búsqueda, sin comentarios y sin escribir: para ver "
                          "qué devuelve el filtro de fecha antes de confiar en el cron")
     tk.set_defaults(fn=cmd_tiktok)
+
+    yt = sub.add_parser("youtube",
+                        help="Shorts y videos de YouTube por feed público (sin llave, sin costo)")
+    yt.add_argument("--salida", default="data")
+    yt.add_argument("--cache", default=os.path.join("cache", "youtube"))
+    yt.add_argument("--piezas", type=int, default=0,
+                    help="piezas por lista y canal (0 usa el config)")
+    yt.add_argument("--probar", action="store_true",
+                    help="unas pocas piezas por canal, sin escribir: para ver cómo quedan "
+                         "zona y formato antes de dar de alta una fila")
+    yt.set_defaults(fn=cmd_youtube)
 
     tx = sub.add_parser("tendencias",
                         help="tendencias de X por ubicación, sin sesión (requiere APIFY_TOKEN)")

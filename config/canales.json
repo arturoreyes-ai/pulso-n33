@@ -1,5 +1,5 @@
 {
- "nota": "Canales de YouTube para leer comentarios. Los IDs se verificaron el 3 sep 2026 resolviendo cada handle y confirmando el feed público del canal. NUNCA se usa search.list para descubrir canales: tiene cubeta propia con tope de 100 llamadas al día. Esta lista fija es el diseño, no un atajo. Ver pulso/youtube.py para la regla de retención de 30 días.",
+ "nota": "Canales de YouTube para leer comentarios. Los IDs se verificaron el 3 sep 2026 resolviendo cada handle y confirmando el feed público del canal. NUNCA se usa search.list para descubrir canales: tiene cubeta propia con tope de 100 llamadas al día. Esta lista fija es el diseño, no un atajo. Ver pulso/conversacion.py para la regla de retención de 30 días.",
  "aviso_retencion": "El texto de los comentarios NO se commitea. Vive en cache/comentarios/ (ignorado por git) con TTL de 30 días, por las Políticas para Desarrolladores de YouTube III.E.4.d. Solo data/conversacion.json entra al repo, y solo con métricas derivadas.",
  "canales": [
   {

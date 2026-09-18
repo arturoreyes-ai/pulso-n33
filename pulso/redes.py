@@ -35,6 +35,7 @@ import re
 from datetime import datetime, timedelta
 
 from .normalizar import fold
+from .zonas import alcance
 
 # Mismo plazo que YouTube. Meta y TikTok no conceden ninguno: se aplica el mas
 # corto ya implementado (LFPDPPP y CPRA).
@@ -124,7 +125,7 @@ def _sentimiento_vigente(s, modelo):
 def clasificar_cache(cache, analizador=None):
     """Etiqueta el tono de cada comentario y lo guarda EN EL CACHE.
 
-    Igual que en pulso/youtube.py: la etiqueta vive los mismos 30 dias que el
+    Igual que en pulso/conversacion.py: la etiqueta vive los mismos 30 dias que el
     texto y nunca sale de ahi; a data/ solo llegan conteos. Volver a correr es
     barato porque solo se manda lo que no traiga etiqueta vigente del mismo
     modelo.
@@ -338,11 +339,23 @@ def _contar_temas(opinion, temas, con_posts=True):
     return salida
 
 
-def _orden_destacado(p):
-    return (-p["likes"], -p["comentarios"], p["url"])
+# Las cifras que ordenan el corte, y las que se emiten en cada fila. Son dos
+# tuplas y no una porque YouTube obligo a separarlas: su feed publico no trae
+# ni likes ni conteo de comentarios, asi que ordena por reproducciones y
+# valoraciones, y emitir un `likes: 0` seria rellenar un hueco con un cero --
+# la cuarta regla de PRODUCT.md. El valor por omision es el de Instagram y
+# TikTok, para que su salida no se mueva ni un byte.
+AMBITOS = ("regional", "nacional", "internacional")
+ORDEN_DESTACADO = ("likes", "comentarios")
+CIFRAS_DESTACADO = ("likes", "comentarios")
 
 
-def _por_turnos(candidatos, maximo, vueltas=VUELTAS_GARANTIZADAS):
+def _orden_destacado(p, claves=ORDEN_DESTACADO):
+    return tuple(-int(p.get(k) or 0) for k in claves) + (p["url"],)
+
+
+def _por_turnos(candidatos, maximo, vueltas=VUELTAS_GARANTIZADAS,
+                orden=ORDEN_DESTACADO):
     """Los `maximo` de `candidatos`, con una vuelta por cuenta antes del merito.
 
     El caso: entre el 15 y el 17 de septiembre de 2026 tjnoticias_ig encabezo
@@ -373,9 +386,9 @@ def _por_turnos(candidatos, maximo, vueltas=VUELTAS_GARANTIZADAS):
         n = vistos.get(d["cuenta"], 0)
         turno[d["url"]] = n
         vistos[d["cuenta"]] = n + 1
-    orden = sorted(candidatos,
-                   key=lambda d: (min(turno[d["url"]], vueltas),) + _orden_destacado(d))
-    return orden[:maximo]
+    cola = sorted(candidatos,
+                  key=lambda d: (min(turno[d["url"]], vueltas),) + _orden_destacado(d, orden))
+    return cola[:maximo]
 
 
 def _dentro_por_dias(ahora, ventana_dias):
@@ -415,8 +428,51 @@ def _dentro_por_horas(ahora, ventana_horas):
     return dentro
 
 
+def zona_por_ambito(texto, ambito="regional"):
+    """(zona, alcance) de una pieza por lo que nombra su texto. zona None = se tira.
+
+    `alcance` es el veredicto crudo del gacetero -- "zona", "estatal", "fuera"
+    o "nacional" -- y se publica junto a la zona. Existe porque desde que hay
+    ambitos los dos dejaron de coincidir: en una busqueda nacional un video de
+    Guadalajara queda `zona: nacional`, y sin el alcance esa fila seria
+    indistinguible de una que no nombro lugar alguno. El panel rotula
+    "sin lugar" para una y "fuera del corredor" para la otra, que no es lo
+    mismo; colapsarlas seria la version de zonas del cero que tapa un hueco.
+
+    El ambito NO acredita zona. Cuando el pie nombra un lugar del gacetero
+    manda el pie, igual en los tres; el ambito solo decide el residuo:
+
+        veredicto            regional     nacional     internacional
+        una zona             esa zona     esa zona     esa zona
+        estatal              estatal      estatal      estatal
+        un lugar de fuera    SE TIRA      nacional     nacional
+        ningun lugar         nacional     nacional     internacional
+    """
+    # El segundo argumento es None a proposito y SIEMPRE: es la zona
+    # declarada del medio, y creersela es el error que este modulo existe
+    # para no cometer. Ver el docstring de pulso/youtube.py, donde El Vigia
+    # lo demuestra con numeros.
+    alc, zonas = alcance(texto or "", None)
+    if alc == "zona":
+        return zonas[0], alc
+    if alc == "estatal":
+        return "estatal", alc
+    if alc == "fuera":
+        # Un lugar mexicano fuera de Baja California. En una busqueda regional
+        # es ruido y se tira; en una nacional o internacional es exactamente
+        # lo que la consulta fue a buscar, y tirarlo dejaria pasar solo el
+        # residuo sin lugar.
+        if ambito == "regional":
+            return None, alc
+        return "nacional", alc
+    # El gacetero no nombro nada. En la edicion del mundo eso es el mundo; en
+    # las otras dos sigue siendo el "nacional" literal de siempre.
+    return ("internacional" if ambito == "internacional" else "nacional"), alc
+
+
 def _destacados(publicaciones, comentarios, opinion, temas, cuentas, dentro,
-                maximo=DESTACADOS_MAXIMO, campos_extra=(), turnos=False):
+                maximo=DESTACADOS_MAXIMO, campos_extra=(), turnos=False,
+                cifras=CIFRAS_DESTACADO, orden=ORDEN_DESTACADO, formatos=()):
     """Los posts de la ventana con mas likes, con los conteos de sus comentarios.
 
     Es la union del top `maximo` general con el top `maximo` de cada zona,
@@ -437,6 +493,18 @@ def _destacados(publicaciones, comentarios, opinion, temas, cuentas, dentro,
     Cambia QUE se elige, nunca en que orden se emite: la ultima linea sigue
     devolviendo en el orden global, que es lo que el validador exige para que
     dos corridas iguales no ensucien el diff.
+
+    `cifras` son las claves numericas que lleva cada fila y `orden` las que la
+    ordenan; las dos por omision son las de Instagram y TikTok. `formatos`, si
+    no va vacia, agrega un EJE MAS al corte: se corta dentro de cada formato y
+    dentro de cada (formato, zona), igual que ya se corta dentro de cada zona,
+    y se emite la union. Lo enciende YouTube, y el motivo es que sus dos
+    formatos no se pueden comparar: desde el 31 de marzo de 2025 una vista de
+    Short cuenta cualquier arranque o repeticion sin tiempo minimo y la de un
+    video largo no, asi que es el mismo campo contando dos eventos distintos.
+    Medido el 18 de septiembre de 2026: mediana de 447 vistas en Shorts contra
+    7 en videos, o sea que en un solo ranking los videos no entran nunca y el
+    muro no se engrosa nada.
     """
     conocidas = {c["id"] for c in cuentas}
     por_post, opinion_por_post = {}, {}
@@ -458,9 +526,17 @@ def _destacados(publicaciones, comentarios, opinion, temas, cuentas, dentro,
             "fecha": p.get("fecha") or "",
             "titulo": p.get("titulo") or "",
             "tipo": p.get("tipo") or "otro",
-            "likes": int(p.get("likes") or 0),
-            "comentarios": int(p.get("comentarios") or 0),
         }
+        # Solo las cifras que la plataforma publica de verdad. Una ausente es
+        # "sin dato" y no cero: un `comentarios: 0` en YouTube se leeria como
+        # "nadie comento" y lo cierto es que su feed no lo dice.
+        for k in cifras:
+            d[k] = int(p.get(k) or 0)
+        # El formato no puede depender de `campos_extra`: es lo que parte el
+        # corte, asi que si falta no falla nada -- simplemente ningun candidato
+        # cae en ningun formato y el panel sale vacio sin decir por que.
+        if formatos:
+            d["formato"] = p.get("formato")
         if p.get("reproducciones"):
             d["reproducciones"] = int(p["reproducciones"])
         for k in campos_extra:
@@ -471,17 +547,26 @@ def _destacados(publicaciones, comentarios, opinion, temas, cuentas, dentro,
         d["sentimiento"] = conteo
         d["temas"] = _contar_temas(propia, temas, con_posts=False)[:3]
         candidatos.append(d)
-    candidatos.sort(key=_orden_destacado)
+    candidatos.sort(key=lambda d: _orden_destacado(d, orden))
 
     def corte(lista):
-        return _por_turnos(lista, maximo) if turnos else lista[:maximo]
+        return _por_turnos(lista, maximo, orden=orden) if turnos else lista[:maximo]
 
-    elegidos = {d["url"] for d in corte(candidatos)}
-    por_zona = {}
-    for d in candidatos:
-        por_zona.setdefault(d["zona"], []).append(d)
-    for lista in por_zona.values():
-        elegidos.update(d["url"] for d in corte(lista))
+    def cortar_por_zona(lista):
+        elegidos = {d["url"] for d in corte(lista)}
+        por_zona = {}
+        for d in lista:
+            por_zona.setdefault(d["zona"], []).append(d)
+        for suyos in por_zona.values():
+            elegidos.update(d["url"] for d in corte(suyos))
+        return elegidos
+
+    if formatos:
+        elegidos = set()
+        for f in formatos:
+            elegidos |= cortar_por_zona([d for d in candidatos if d.get("formato") == f])
+    else:
+        elegidos = cortar_por_zona(candidatos)
     return [d for d in candidatos if d["url"] in elegidos]
 
 
@@ -503,7 +588,8 @@ def _catalogo_cuentas(cuentas):
 
 def derivar(comentarios, ahora, salud, gasto, temas=None, publicaciones=None,
             cuentas=None, *, plataforma, ventana_dias=None, ventana_horas=None,
-            campos_extra=(), turnos=False):
+            campos_extra=(), turnos=False, cifras=CIFRAS_DESTACADO,
+            orden=ORDEN_DESTACADO, formatos=(), cosecha_comentarios=True):
     """Lo que se commitea: conteos y los posts destacados, sin texto de
     comentarios ni identidad.
 
@@ -552,6 +638,14 @@ def derivar(comentarios, ahora, salud, gasto, temas=None, publicaciones=None,
         "generado": ahora,
         "plataforma": plataforma,
         "retencion_dias": RETENCION_DIAS,
+        # Si es false, esta plataforma NO cosecha comentarios y todos los
+        # conteos de abajo salen en cero por eso, no porque se midiera y no
+        # hubiera nada. Es la distincion entre "sin dato" y "0" aplicada al
+        # documento entero: sin este campo, un panel sin cosecha y otro donde
+        # nadie comento serian el mismo archivo. Lo lee el validador para
+        # exigir los ceros y callar el aviso por post, y la interfaz para no
+        # pintar el boton de comentarios.
+        "cosecha_comentarios": cosecha_comentarios,
         "comentarios_vigentes": len(comentarios),
         "posts_vigentes": len(posts),
         # Los tres se publican por separado y NO se restan entre si en el
@@ -573,7 +667,8 @@ def derivar(comentarios, ahora, salud, gasto, temas=None, publicaciones=None,
         "cuentas": _catalogo_cuentas(cuentas),
         "destacados": _destacados(publicaciones or {}, comentarios, opinion, temas,
                                   cuentas or [], dentro, campos_extra=campos_extra,
-                                  turnos=turnos),
+                                  turnos=turnos, cifras=cifras, orden=orden,
+                                  formatos=formatos),
         "salud": sorted(salud, key=lambda s: s["cuenta"]),
         "gasto": gasto,
     }

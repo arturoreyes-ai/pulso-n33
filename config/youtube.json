@@ -1,0 +1,233 @@
+{
+ "nota": "Canales de YouTube leidos por FEED ATOM PUBLICO (pulso/youtube.py), no por la API de datos. Ese es el motivo de que este archivo exista aparte de config/canales.json, que es el catalogo del OTRO modulo de YouTube (pulso/conversacion.py, la API con llave). Los dos leen canales y ahi se acaba el parecido: las Politicas para Desarrolladores (III.E.2.a, III.E.4.d) atan los datos de la API y no un documento de sindicacion publico, igual que no atan los quince feeds de prensa de config/medios.json. Una fila de aqui NO lleva zona: la zona de cada pieza sale de lo que nombra su titulo y su descripcion (pulso/zonas.py), y el validador rechaza el campo. Todo lo verificado el 18 de septiembre de 2026 salio de sondear los feeds de verdad; los porcentajes de cada nota son de esa medicion.",
+ "aviso_formatos": "YouTube publica dos listas automaticas por canal: UUSH (solo Shorts) y UULF (solo videos largos). Se sondearon las dos y devuelven conjuntos DISJUNTOS, asi que el prefijo se respeta. Cada entrada trae su propio enlace, /shorts/ o /watch, y de ahi sale el formato: nunca se adivina por duracion, que el feed no trae. El campo 'formatos' de cada fila dice cual de las dos listas se lee, y esta ahi para apagar un formato que el canal publica pero no sirve, no para apagar uno que no publica.",
+ "aviso_comentarios": "Este modulo NO cosecha comentarios. El feed publico no los trae y traerlos costaria un actor de Apify (~24 USD/mes con estas 16 filas, medido el 18 de septiembre de 2026). data/youtube.json sale con 'cosecha_comentarios': false, que es lo que impide leer sus ceros como 'nadie comento'.",
+ "cosecha": {
+  "nota": "El feed devuelve hasta 15 entradas por lista y no se paga por peticion, asi que estos topes son lo que da la fuente, no un presupuesto. La ventana de 24 horas se mide sobre 'publicado', igual que Instagram y TikTok. Con 16 canales activos por dos listas son 32 peticiones HTTP por corrida, sin llave y sin cuota.",
+  "shorts_por_canal": 15,
+  "videos_por_canal": 15,
+  "ventana_horas": 24
+ },
+ "canales": [
+  {
+   "id": "yt_uniradio",
+   "nombre": "Uniradio Informa BC",
+   "canal": "UCmX0ozHGkEFewoIU5WaAyvA",
+   "formatos": ["short", "video"],
+   "ambito": "regional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Sondeo: 0 Shorts en 7 dias (el ultimo es del 27 de agosto) y 10 videos largos. Es el canal que un muro de solo Shorts dejaria fuera entero, y la razon principal de leer las dos listas. OJO: el handle obvio @UniradioInforma es un canal senuelo, sin subir nada desde 2016; el vivo es @uniradiobaja."
+  },
+  {
+   "id": "yt_siempre",
+   "nombre": "Siempre En La Noticia",
+   "canal": "UCqaGC8znrYczX6jURde4Osg",
+   "formatos": ["short", "video"],
+   "ambito": "regional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Sondeo: 15 Shorts en 7 dias, 9 de ellos en 24 horas, y 0 videos largos. El mas prolifico del corredor y el que se llevo 6 de los 15 primeros puestos por vistas, que es la concentracion que obliga a repartir una vuelta por canal (VUELTAS_GARANTIZADAS). Contenido hiperlocal de Tijuana."
+  },
+  {
+   "id": "yt_zeta",
+   "nombre": "Semanario ZETA",
+   "canal": "UC-NHHkALnId41yENpdCuLKQ",
+   "formatos": ["short", "video"],
+   "ambito": "regional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Sondeo: 15 Shorts en 7 dias, 0 videos. El gacetero le resuelve Tijuana, Tecate y Ensenada, o sea que no se le puede estampar una sola zona. No existe handle 'zetatijuana'."
+  },
+  {
+   "id": "yt_canal66",
+   "nombre": "Canal 66 Mexicali",
+   "canal": "UC_PX-j6a_YHoRZAztFqSA_g",
+   "formatos": ["short", "video"],
+   "ambito": "regional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Sondeo: 3 Shorts en 7 dias, 0 videos. La mejor fuente de Mexicali y la que mas facil se zonifica: prefija los titulos con 'TIJUANA:' o 'MEXICALI:', asi que el gacetero acierta sin descripcion."
+  },
+  {
+   "id": "yt_cnr",
+   "nombre": "CNR Noticias BC",
+   "canal": "UCr8eCa3i5h4PGApvmK1IyTw",
+   "formatos": ["short", "video"],
+   "ambito": "regional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Sondeo: 6 Shorts y 15 videos en 7 dias. CUIDADO con sus Shorts: los seis nombran los seis municipios porque son resumenes, y zonas_en devuelve orden de gacetero, asi que todos caen en Tijuana. No hay forma de que una pieza que nombra seis lugares cuente para seis sin inflar seis; queda registrado aqui en vez de inventar un reparto. Sus videos largos si son nota de una sola historia."
+  },
+  {
+   "id": "yt_sintesis",
+   "nombre": "Sintesis TV",
+   "canal": "UCiU0jvbuR6pn9aLznDKRaJQ",
+   "formatos": ["short", "video"],
+   "ambito": "regional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Sondeo: 1 Short y 15 videos en 7 dias. Otro que un muro de solo Shorts dejaria practicamente fuera. Su unico Short de la ventana es de San Diego pese a que el catalogo viejo lo tenia estampado como Tijuana: es uno de los cinco casos que obligan a sacar la zona del pie."
+  },
+  {
+   "id": "yt_infonort",
+   "nombre": "INFONORT Multimedios",
+   "canal": "UCozre3s5D7BaaWkLmMCUmHg",
+   "formatos": ["short", "video"],
+   "ambito": "regional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Sondeo: 1 Short y 0 videos en 7 dias. Poquisimo volumen, pero es el UNICO canal con cobertura municipal real de Playas de Rosarito. Sin el, Rosarito es cero en esta plataforma."
+  },
+  {
+   "id": "yt_psn",
+   "nombre": "PSN Primer Sistema de Noticias",
+   "canal": "UCfXogkQFUci7zRbZiOjxWZA",
+   "formatos": ["short", "video"],
+   "ambito": "nacional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Sondeo: 6 Shorts y 15 videos en 7 dias. Ambito nacional porque los SEIS Shorts salieron 'nacional' (ninguno nombra lugar) y con regional se caerian todos; sus videos largos, en cambio, son hiperlocales y nombran hasta delegaciones ('La delegacion Sanchez Taboada podria quedar incomunicada'), asi que el gacetero les da Tijuana igual. INSTRUCCION PERMANENTE: moverlo a 'regional' si un sondeo posterior devuelve sus Shorts a nota tijuanense. PSN es 'Primer Sistema de Noticias', no 'Periodismo Sin Nombre'."
+  },
+  {
+   "id": "yt_elvigia",
+   "nombre": "Editorial El Vigia",
+   "canal": "UCIN8fNpieOt_gCE1sKyUylA",
+   "formatos": ["short"],
+   "ambito": "nacional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "El caso que da nombre al docstring del modulo. Su fila del catalogo viejo dice Ensenada y el sondeo devolvio 9 Shorts 'nacional', 5 de Ensenada y 1 'fuera': Trump, Milei, las Malvinas, Morelos, Cuautla. Su Short mas visto de la ventana, y el primero de toda la corrida con 3,985 vistas, es 'Trump amenaza cortar comercio con la UE'. Estamparle la zona de la fila pondria eso al frente de Ensenada. Ambito nacional porque con regional se caen nueve de quince y el canal se lee como mudo. SIN videos largos a proposito: los suyos son 'Resumen diario #273' y 'El Vigia Informa #292', digestos del dia y ademas publicados por duplicado con el mismo titulo."
+  },
+  {
+   "id": "yt_afn",
+   "nombre": "Agencia Fronteriza de Noticias",
+   "canal": "UCjlFT_oq-VvAZre23p5kb3A",
+   "formatos": ["short", "video"],
+   "ambito": "regional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Sondeo: 1 Short y 1 video en 7 dias. Sube esporadicamente pero lo que sube es bueno, de Tijuana y Tecate. Su unico Short de la ventana resulto de Ensenada con la fila vieja diciendo Tijuana. OJO: @afntijuana es un senuelo, 2 videos y nada desde 2007."
+  },
+  {
+   "id": "yt_telemundo20",
+   "nombre": "Telemundo 20 San Diego",
+   "canal": "UCpov05QMApjt0BeaMxE1XmQ",
+   "formatos": ["short", "video"],
+   "ambito": "internacional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Sondeo: 15 Shorts y 15 videos en 7 dias, y los videos con las vistas mas altas del corredor (115, 304, 112 contra medianas de un digito en los demas). Ambito internacional, no nacional: sus piezas de San Diego resuelven a la zona del producto de todos modos porque San Diego esta en el gacetero, pero rotular 'nacional' las de Estados Unidos afirmaria nacional MEXICANO, que es falso. idioma 'es' y no 'en': es la fila donde el instinto se equivoca, porque publica en espanol desde el lado de San Diego."
+  },
+  {
+   "id": "yt_canal33",
+   "nombre": "Canal 33 Noticias",
+   "canal": "UCZmZ8OjbrweO1neWu6NJtGA",
+   "formatos": ["short", "video"],
+   "ambito": "regional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Pedido por el cliente el 18 de septiembre de 2026 y el mejor hallazgo del sondeo: 80% de sus piezas resuelven a una zona del producto -- 21 de 30 nombran Tijuana, mas Ensenada, Mexicali y San Diego -- contra el 65% del resto del catalogo, y con mediana de 1,856 vistas en Shorts contra 447. Titulares como 'FESTEJO POR LA INDEPENDENCIA TERMINA EN RINA EN TIJUANA' y un clip de Tijuana con 12,860 vistas. 3 Shorts y 4 videos en 24 horas. Es el que de verdad engrosa el muro regional."
+  },
+  {
+   "id": "yt_nmas",
+   "nombre": "N+",
+   "canal": "UCUsm-fannqOY02PNN67C0KA",
+   "formatos": ["short", "video"],
+   "ambito": "nacional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Pedido por el cliente el 18 de septiembre de 2026. Nacional de verdad: 13% de sus piezas resuelven a zona del producto (3 Tijuana, 2 San Quintin de 30), 20 'nacional' y 6 'fuera'. 15 Shorts y 15 videos en 24 horas, mediana de 4,765 vistas. Con ambito nacional nunca se le acredita una ciudad y cae en la cubeta Mexico; su 'fuera' sobrevive ahi con alcance 'fuera', que es correcto porque una nota de otro estado sigue siendo nota nacional mexicana."
+  },
+  {
+   "id": "yt_milenio",
+   "nombre": "MILENIO",
+   "canal": "UCFxHplbcoJK9m70c4VyTIxg",
+   "formatos": ["short", "video"],
+   "ambito": "nacional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Pedido por el cliente el 18 de septiembre de 2026. El mas grande de los cinco nuevos y el mas ajeno al corredor: 3% de zona (1 Mexicali de 30), 18 'nacional' y 11 'fuera'. 14 Shorts y 15 videos en 24 horas con mediana de 6,960 vistas, o sea que gana todos los desempates de la cubeta Mexico. Es tambien el que hace falta el catalogo de publicaciones: con ~29 piezas al dia y feeds de 15 entradas, una pieza suya puede salirse del feed DENTRO de la ventana de 24 horas."
+  },
+  {
+   "id": "yt_unotv",
+   "nombre": "UnoTV",
+   "canal": "UC-bk3CDvTwt2TqPHykduhcQ",
+   "formatos": ["short", "video"],
+   "ambito": "nacional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Pedido por el cliente el 18 de septiembre de 2026. 3% de zona (1 Ensenada de 30), 21 'nacional' y 8 'fuera'. 11 Shorts y 15 videos en 24 horas, mediana de 2,810 vistas."
+  },
+  {
+   "id": "yt_imagen",
+   "nombre": "Imagen Noticias",
+   "canal": "UCAZoa80ZEVXf17dkobJsyTg",
+   "formatos": ["short", "video"],
+   "ambito": "nacional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Pedido por el cliente el 18 de septiembre de 2026. El mas flojo de los cinco: 4% de zona (1 Tijuana de 23), 20 'nacional', 2 'fuera', y mediana de 42 vistas -- por debajo de la del corredor, asi que ordenara al fondo de la cubeta Mexico. 10 Shorts y 0 videos en 24 horas. Se deja activo porque el cliente lo pidio y porque un canal de bajo trafico no estorba a nadie estando ordenado por vistas."
+  },
+  {
+   "id": "yt_televisatij",
+   "nombre": "Televisa Tijuana",
+   "canal": "UCjwXjnO3BGePtB7gSKEpoqA",
+   "formatos": ["short", "video"],
+   "ambito": "regional",
+   "idioma": "es",
+   "activo": false,
+   "verificado": "2026-09-18",
+   "nota": "Apagado, y por una razon distinta a la del catalogo viejo. Alli esta apagado porque sube programas completos con titulos inservibles, que es un juicio sobre sus videos largos. El sondeo de sus Shorts dice otra cosa y peor: su ultimo Short es del 28 de abril de 2026, casi cinco meses antes de la ventana. No es un canal con contenido malo, es un canal detenido."
+  },
+  {
+   "id": "yt_televisamxl",
+   "nombre": "Televisa Mexicali",
+   "canal": "UCcmuFsMIIIHO3LBqeBVfm8Q",
+   "formatos": ["short", "video"],
+   "ambito": "regional",
+   "idioma": "es",
+   "activo": false,
+   "verificado": "2026-09-18",
+   "nota": "Apagado. Su lista UUSH devuelve HTTP 404 el 18 de septiembre de 2026: el canal no tiene lista de Shorts. Queda registrado porque es el caso que define el estado 'sin_lista' del modulo -- un 404 aqui es un hueco medido y no una falla, y si alguien lo enciende tiene que degradar asi y no a 'fallo'."
+  },
+  {
+   "id": "yt_califmedios",
+   "nombre": "California Medios Tecate",
+   "canal": "UCn0RdFc8EDjQQ1IyCeiASNQ",
+   "formatos": ["short", "video"],
+   "ambito": "regional",
+   "idioma": "es",
+   "activo": false,
+   "verificado": "2026-09-18",
+   "nota": "Apagado: su ultimo Short es del 5 de marzo de 2026. Es la radiodifusora de Tecate y sube programas de radio, no noticias. Tecate queda como hueco de cobertura propia en YouTube, y solo aparece cuando otro canal lo nombra -- Zeta le resuelve dos piezas. Registro deliberado de un hueco, no un medio."
+  },
+  {
+   "id": "yt_sanquintintv",
+   "nombre": "San Quintin TV",
+   "canal": "UCnwETOL3-x_dkQ8tFeeeUqg",
+   "formatos": ["short", "video"],
+   "ambito": "regional",
+   "idioma": "es",
+   "activo": false,
+   "verificado": "2026-09-18",
+   "nota": "Apagado: su ultimo Short es del 25 de julio de 2026 y su contenido era relleno viral, no periodismo local. San Quintin no tiene canal propio en YouTube. Registro deliberado de un hueco, no un medio."
+  }
+ ]
+}
