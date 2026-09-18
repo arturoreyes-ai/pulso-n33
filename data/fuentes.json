@@ -1,6 +1,6 @@
 {
  "esquema": 1,
- "generado": "2026-09-18T18:53:28+00:00",
+ "generado": "2026-09-18T20:26:53+00:00",
  "fuentes": [
   {
    "id": "zeta",
@@ -10,9 +10,9 @@
    "zona": "Tijuana",
    "estado": "ok",
    "obtenidas": 10,
-   "nuevas": 0,
-   "ms": 354,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "nuevas": 10,
+   "ms": 167,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null
   },
   {
@@ -23,9 +23,9 @@
    "zona": "Tijuana",
    "estado": "ok",
    "obtenidas": 100,
-   "nuevas": 0,
-   "ms": 315,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "nuevas": 2,
+   "ms": 250,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null
   },
   {
@@ -36,9 +36,9 @@
    "zona": "Tijuana",
    "estado": "ok",
    "obtenidas": 10,
-   "nuevas": 1,
-   "ms": 1331,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "nuevas": 4,
+   "ms": 1112,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null
   },
   {
@@ -50,8 +50,8 @@
    "estado": "ok",
    "obtenidas": 10,
    "nuevas": 0,
-   "ms": 172,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "ms": 204,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null
   },
   {
@@ -62,9 +62,9 @@
    "zona": "estatal",
    "estado": "ok",
    "obtenidas": 58,
-   "nuevas": 3,
-   "ms": 203,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "nuevas": 10,
+   "ms": 83,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null
   },
   {
@@ -75,9 +75,9 @@
    "zona": "estatal",
    "estado": "ok",
    "obtenidas": 100,
-   "nuevas": 4,
-   "ms": 544,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "nuevas": 30,
+   "ms": 3030,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null
   },
   {
@@ -89,8 +89,8 @@
    "estado": "ok",
    "obtenidas": 100,
    "nuevas": 1,
-   "ms": 384,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "ms": 208,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null
   },
   {
@@ -102,8 +102,8 @@
    "estado": "ok",
    "obtenidas": 10,
    "nuevas": 0,
-   "ms": 1129,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "ms": 1112,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null
   },
   {
@@ -115,8 +115,8 @@
    "estado": "ok",
    "obtenidas": 10,
    "nuevas": 0,
-   "ms": 938,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "ms": 1143,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null
   },
   {
@@ -128,8 +128,8 @@
    "estado": "ok",
    "obtenidas": 10,
    "nuevas": 0,
-   "ms": 629,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "ms": 470,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null
   },
   {
@@ -141,7 +141,7 @@
    "estado": "fallo",
    "obtenidas": 0,
    "nuevas": 0,
-   "ms": 1309,
+   "ms": 866,
    "ultima_ok": "2026-09-15T15:53:34+00:00",
    "error": "Ignoring non-200 response"
   },
@@ -151,12 +151,12 @@
    "url": "https://radarbc.com/feed/",
    "metodo": "rss",
    "zona": "Ensenada",
-   "estado": "ok",
-   "obtenidas": 10,
+   "estado": "fallo",
+   "obtenidas": 0,
    "nuevas": 0,
-   "ms": 212,
+   "ms": 177,
    "ultima_ok": "2026-09-18T18:53:28+00:00",
-   "error": null
+   "error": "HTTPError: HTTP Error 415: Unsupported Media Type"
   },
   {
    "id": "kpbs",
@@ -166,9 +166,9 @@
    "zona": "San Diego",
    "estado": "ok",
    "obtenidas": 12,
-   "nuevas": 0,
-   "ms": 741,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "nuevas": 3,
+   "ms": 695,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null
   },
   {
@@ -180,8 +180,8 @@
    "estado": "ok",
    "obtenidas": 10,
    "nuevas": 0,
-   "ms": 169,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "ms": 248,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null
   },
   {
@@ -192,9 +192,9 @@
    "zona": "San Diego",
    "estado": "ok",
    "obtenidas": 10,
-   "nuevas": 0,
-   "ms": 138,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "nuevas": 2,
+   "ms": 537,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null
   },
   {
@@ -205,9 +205,9 @@
    "zona": "San Diego",
    "estado": "ok",
    "obtenidas": 50,
-   "nuevas": 0,
-   "ms": 119,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "nuevas": 1,
+   "ms": 156,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null
   },
   {
@@ -218,9 +218,9 @@
    "zona": "Tijuana",
    "estado": "ok",
    "obtenidas": 30,
-   "nuevas": 0,
-   "ms": 1659,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "nuevas": 6,
+   "ms": 1712,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null
   },
   {
@@ -230,10 +230,10 @@
    "metodo": "scrapy",
    "zona": "estatal",
    "estado": "ok",
-   "obtenidas": 6,
+   "obtenidas": 3,
    "nuevas": 1,
-   "ms": 1065,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "ms": 1316,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null
   },
   {
@@ -244,9 +244,9 @@
    "zona": "estatal",
    "estado": "ok",
    "obtenidas": 8,
-   "nuevas": 0,
-   "ms": 463,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "nuevas": 1,
+   "ms": 451,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null,
    "detalle": {
     "items": 42,
@@ -257,8 +257,8 @@
     "resueltas": 1,
     "sinteticas": 7,
     "recortadas": 34,
-    "notas": 121,
-    "sin_zona": 86
+    "notas": 122,
+    "sin_zona": 87
    }
   },
   {
@@ -270,8 +270,8 @@
    "estado": "ok",
    "obtenidas": 8,
    "nuevas": 0,
-   "ms": 315,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "ms": 285,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null,
    "detalle": {
     "items": 13,
@@ -294,20 +294,20 @@
    "zona": "estatal",
    "estado": "ok",
    "obtenidas": 8,
-   "nuevas": 0,
-   "ms": 396,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "nuevas": 1,
+   "ms": 389,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null,
    "detalle": {
-    "items": 32,
+    "items": 31,
     "sin_publicador": 0,
     "sin_fecha": 0,
     "fuera_de_ventana": 0,
     "sin_sufijo": 0,
     "resueltas": 2,
     "sinteticas": 6,
-    "recortadas": 24,
-    "notas": 100,
+    "recortadas": 23,
+    "notas": 101,
     "sin_zona": 16
    }
   },
@@ -320,18 +320,18 @@
    "estado": "ok",
    "obtenidas": 8,
    "nuevas": 0,
-   "ms": 435,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "ms": 310,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null,
    "detalle": {
-    "items": 20,
+    "items": 16,
     "sin_publicador": 0,
     "sin_fecha": 0,
     "fuera_de_ventana": 0,
     "sin_sufijo": 0,
-    "resueltas": 1,
-    "sinteticas": 7,
-    "recortadas": 12,
+    "resueltas": 2,
+    "sinteticas": 6,
+    "recortadas": 8,
     "notas": 90,
     "sin_zona": 34
    }
@@ -344,21 +344,21 @@
    "zona": "estatal",
    "estado": "ok",
    "obtenidas": 8,
-   "nuevas": 1,
-   "ms": 352,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "nuevas": 3,
+   "ms": 318,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null,
    "detalle": {
-    "items": 25,
+    "items": 29,
     "sin_publicador": 0,
     "sin_fecha": 0,
     "fuera_de_ventana": 0,
     "sin_sufijo": 0,
     "resueltas": 1,
     "sinteticas": 7,
-    "recortadas": 17,
-    "notas": 104,
-    "sin_zona": 56
+    "recortadas": 21,
+    "notas": 107,
+    "sin_zona": 59
    }
   },
   {
@@ -370,8 +370,8 @@
    "estado": "ok",
    "obtenidas": 8,
    "nuevas": 0,
-   "ms": 312,
-   "ultima_ok": "2026-09-18T18:53:28+00:00",
+   "ms": 224,
+   "ultima_ok": "2026-09-18T20:26:53+00:00",
    "error": null,
    "detalle": {
     "items": 8,
@@ -384,27 +384,6 @@
     "recortadas": 0,
     "notas": 51,
     "sin_zona": 18
-   }
-  },
-  {
-   "id": "descubrimiento-web",
-   "nombre": "Descubrimiento web",
-   "url": "https://api.gdeltproject.org/api/v2/doc/doc",
-   "metodo": "descubrimiento",
-   "zona": "estatal",
-   "estado": "fallo",
-   "obtenidas": 0,
-   "nuevas": 0,
-   "ms": 10301,
-   "ultima_ok": null,
-   "error": "HTTPError: HTTP Error 429: Too Many Requests",
-   "detalle": {
-    "candidatos": 0,
-    "publisher_pages": 0,
-    "aceptadas": 0,
-    "rechazadas": 0,
-    "robots_exclusiones": 0,
-    "fallos": 0
    }
   }
  ]
