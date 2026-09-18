@@ -54,8 +54,8 @@ async function comprobar() {
   assert.equal(horaHablada('2026-09-08T19:00:00.000Z'), '12:00 de la tarde');
   assert.equal(horaHablada('2026-09-09T05:00:00.000Z'), '10:00 de la noche');
   const leido = guion(datos.cruces, Date.parse(ahora));
-  assert.equal(leido.atribucion, 'CBP · 4:00 de la tarde');
-  assert.equal(leido.cierre, 'Cifras de CBP.');
+  assert.equal(leido.atribucion, 'Fuente oficial');
+  assert.equal(leido.cierre, '');
   assert.equal(leido.cues[0].modos[0].linea, 'San Ysidro: 0 minutos en carril general.');
   assert.equal(leido.cues[1].modos[0].linea, 'Otay Mesa: 1 hora y 40 minutos en carril general.');
   // La ficha muestra los tres carriles de coche: los que no reportan tambien.
@@ -79,45 +79,40 @@ async function comprobar() {
   assert.equal(caminando.cues[1].modos[1].linea, 'Otay Mesa a pie: 15 minutos.');
   const vacio = guion(datos.cruces, Date.parse(ahora) + 120 * 60000);
   assert.equal(vacio.cierre, '');
-  assert.equal(vacio.cues[0].modos[0].linea, '');
-  // Y DICE POR QUE. Un modo sin linea y sin motivo dejaba un hueco mudo justo
-  // al lado del cruce que si tenia frase, en un bloque que se lee al aire.
-  assert.equal(vacio.cues[0].modos[0].sinLinea, 'Sin actualizar desde las 4:00 de la tarde; sus cifras están arriba.');
+  // Aunque el reporte tenga mas de 90 minutos, el tiempo sigue visible y
+  // listo para leer. El estado de frescura vive aparte en la pagina.
+  assert.equal(vacio.cues[0].modos[0].linea, 'San Ysidro: 0 minutos en carril general.');
+  assert.equal(vacio.cues[0].modos[0].sinLinea, '');
   assert.ok(vacio.cues.every((c) => c.modos.every((m) => m.linea !== '' || m.sinLinea !== '')),
     'ningun modo se queda sin linea y sin explicacion');
   // Pasada la ventana de 90 minutos la cifra NO desaparece: sigue siendo un
-  // dato real de CBP. Se queda, marcada y con su hora, y no entra a la frase.
-  // Es el caso de PedWest, que CBP actualiza una vez por hora: borrar su cifra
-  // hacia pulsar Actualizar, y Actualizar devuelve la misma hora.
+  // dato real. La etiqueta superior conserva la actualizacion mas reciente.
   assert.equal(vacio.hayCifras, true, 'el bloque se sigue dibujando');
-  assert.deepEqual(vacio.cues[0].modos[0].renglones.map(r => [r.figura, r.hayCifra, r.alDia, r.hora]),
-    [['0 min', true, false, '4:00 de la tarde'], ['sin dato', false, false, ''], ['sin dato', false, false, '']]);
-  // Horas distintas entre cruces: la etiqueta no puede anunciar una sola.
+  assert.deepEqual(vacio.cues[0].modos[0].renglones.map(r => [r.figura, r.hayCifra, r.alDia]),
+    [['0 min', true, false], ['sin dato', false, false], ['sin dato', false, false]]);
+  // La hora se muestra una sola vez en la cabecera, no en cada linea.
   const dispar = guion(parsearCbp(envolver(puerto('250401', carril()) + puerto('250601', carril('100', 'delay', 'At 3:30 pm PDT'))), ahora).cruces, Date.parse(ahora));
-  assert.equal(dispar.atribucion, 'CBP');
-  assert.equal(dispar.cues[0].modos[0].linea, 'San Ysidro, a las 4:00 de la tarde: 0 minutos en carril general.');
-  assert.equal(dispar.cues[1].modos[0].linea, 'Otay Mesa, a las 3:30 de la tarde: 1 hora y 40 minutos en carril general.');
-  // Horas distintas DENTRO de un modo: ese modo se queda sin linea y la ficha
-  // pone la hora en cada carril; no hay forma de decir la mezcla sin mentir.
+  assert.equal(dispar.atribucion, 'Fuente oficial');
+  assert.equal(dispar.cues[0].modos[0].linea, 'San Ysidro: 0 minutos en carril general.');
+  assert.equal(dispar.cues[1].modos[0].linea, 'Otay Mesa: 1 hora y 40 minutos en carril general.');
+  // Horas distintas dentro de un modo tampoco cambian el apuntador.
   const revuelto = guion(parsearCbp(envolver(puerto('250401', carril() + carril('40', 'delay', 'At 3:30 pm PDT').replace(/standard_lanes/g, 'ready_lanes'))), ahora).cruces, Date.parse(ahora));
-  // Horas distintas DENTRO de una frase: no se calla, cada cifra lleva la suya.
   assert.equal(revuelto.cues[0].modos[0].linea,
-    'San Ysidro: 0 minutos en carril general, a las 4:00 de la tarde; 40 minutos en Ready Lane, a las 3:30 de la tarde.');
-  // Misma espera y misma hora se dicen juntas, una sola vez.
+    'San Ysidro: 0 minutos en carril general; 40 minutos en Ready Lane.');
+  // Misma espera se dice junta, una sola vez.
   const gemelos = guion(parsearCbp(envolver(puerto('250401', carril('115', 'delay') + carril('115', 'delay').replace(/standard_lanes/g, 'ready_lanes') + carril('30', 'delay').replace(/standard_lanes/g, 'NEXUS_SENTRI_lanes'))), ahora).cruces, Date.parse(ahora));
   assert.equal(gemelos.cues[0].modos[0].linea,
     'San Ysidro: casi dos horas en carril general y en Ready Lane; media hora por SENTRI.');
   assert.equal(revuelto.cues[0].modos[0].sinLinea, '');
-  assert.deepEqual(revuelto.cues[0].modos[0].renglones.map(r => r.hora), ['4:00 de la tarde', '3:30 de la tarde', '']);
-  // Una cifra fuera de ventana al lado de una fresca —PedWest todo el dia—:
-  // la etiqueta no puede anunciar una hora que solo vale para una de las dos,
-  // la vieja se ve con la suya, y la frase dice unicamente la fresca.
+  // Una cifra fuera de ventana al lado de una fresca: ambas se leen y la hora
+  // de cada reporte queda en el detalle, no en la locucion.
   const rezagado = guion(parsearCbp(envolver(puerto('250401', carril('40', 'delay') + carril('55', 'delay', 'At 2:00 pm PDT').replace(/standard_lanes/g, 'ready_lanes'))), ahora).cruces, Date.parse(ahora));
-  assert.equal(rezagado.atribucion, 'CBP');
-  assert.equal(rezagado.cierre, 'Cifras de CBP.');
-  assert.equal(rezagado.cues[0].modos[0].linea, 'San Ysidro, a las 4:00 de la tarde: 40 minutos en carril general.');
-  assert.deepEqual(rezagado.cues[0].modos[0].renglones.map(r => [r.figura, r.alDia, r.hora]),
-    [['40 min', true, '4:00 de la tarde'], ['~1 h', false, '2:00 de la tarde'], ['sin dato', false, '']]);
+  assert.equal(rezagado.atribucion, 'Fuente oficial');
+  assert.equal(rezagado.cierre, '');
+  assert.equal(rezagado.cues[0].modos[0].linea,
+    'San Ysidro: 40 minutos en carril general; casi una hora en Ready Lane.');
+  assert.deepEqual(rezagado.cues[0].modos[0].renglones.map(r => [r.figura, r.alDia]),
+    [['40 min', true], ['~1 h', false], ['sin dato', false]]);
   const bien = await responderGaritas(async (url, opciones) => {
     assert.equal(url, 'https://bwt.cbp.gov/xml/bwt.xml'); assert.equal(opciones.redirect, 'error'); assert.ok(opciones.signal);
     return new Response(xml);

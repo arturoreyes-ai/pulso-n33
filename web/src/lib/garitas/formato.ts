@@ -96,12 +96,9 @@ export interface Renglon {
   nombre: string;
   figura: string;
   hayCifra: boolean;
-  /** La cifra es de hace menos de 90 minutos, o sea que se puede decir al
-   *  aire. Una cifra con `false` sigue siendo una cifra real de CBP: se
-   *  muestra, con su hora, y se queda fuera de la frase. */
+  /** La cifra es de hace menos de 90 minutos. Una cifra con `false` sigue
+   *  siendo real: se muestra y el detalle conserva su hora de reporte. */
   alDia: boolean;
-  /** Solo cuando los carriles de ese modo no comparten hora. */
-  hora: string;
 }
 /** Un modo de cruce: se va en coche o se va a pie, y son dos noticias. */
 export interface Modo {
@@ -120,14 +117,12 @@ export interface Cue {
   modos: Modo[];
 }
 export interface Guion {
-  /** La ficha de atribucion: «CBP · 11:00 de la manana», o solo «CBP». */
+  /** La fuente que respalda la ficha; el detalle vive en las horas de cada linea. */
   atribucion: string;
   cues: Cue[];
-  /** Hay alguna cifra en pantalla, aunque ninguna se pueda decir. Es lo que
-   *  decide si el bloque se dibuja; `cierre` decide otra cosa. */
+  /** Hay alguna cifra en pantalla y disponible para la ficha hablada. */
   hayCifras: boolean;
-  /** El cierre hablado. Vacio cuando no hay ninguna frase que atribuir: la
-   *  etiqueta ya atribuye lo que se ve, y esto cierra lo que se dice. */
+  /** Se conserva en el contrato por compatibilidad; la fuente ya vive en la pagina. */
   cierre: string;
 }
 
@@ -179,13 +174,8 @@ const MODOS = [
 /**
  * El hueco en palabras. Nunca un cero: un cero se lee como «no hay espera».
  *
- * Tuvo una rama «reporte vencido» para el carril que CBP reporto hace mas de
- * 90 minutos, y borraba la cifra. Estaba mal dos veces: leia como «no hay
- * dato» cuando si lo hay —PedWest publicaba 55 minutos a las 7:00 y la ficha
- * decia «reporte vencido»— y, al sonar a que lo viejo era lo nuestro, invitaba
- * a pulsar Actualizar, que vuelve a traer las mismas 7:00 porque es la hora a
- * la que CBP actualizo PedWest. La regla de los 90 minutos es de PRODUCT.md y
- * es sobre lo que se DICE al aire, no sobre lo que se muestra.
+ * Una espera reportada conserva su cifra y su hora aunque tenga mas de 90
+ * minutos; la cabecera muestra la actualizacion mas reciente del conjunto.
  */
 function sinCifra(carril: Carril): string {
   if (carril.estado === "cerrado") return "cerrado";
@@ -202,13 +192,11 @@ function sinCifra(carril: Carril): string {
  * para cuando a pie se decia unicamente el general. Ahora se dicen todos, asi
  * que un carril con cifra siempre llega a la frase y esa rama no puede darse.
  */
-function motivoSinLinea(carriles: Carril[], ultima: string): string {
+function motivoSinLinea(carriles: Carril[]): string {
   if (carriles.length === 0) return "";
   if (carriles.every((c) => c.estado === "cerrado")) return "Todos sus carriles están cerrados.";
-  // Hay cifras, pero ninguna de la ultima hora y media: se muestran arriba y
-  // no se dicen. Decir desde cuando es lo unico que hace entendible por que.
-  if (ultima) return `Sin actualizar desde las ${ultima}; sus cifras están arriba.`;
-  return "CBP no publica un reporte para sus carriles.";
+  if (carriles.some((c) => c.estado === "pendiente")) return "Actualización pendiente.";
+  return "No hay un tiempo disponible para estos carriles.";
 }
 
 function unir(partes: string[]): string {
@@ -220,19 +208,17 @@ function unir(partes: string[]): string {
 interface Leible {
   carril: Carril;
   minutos: number;
-  hora: string;
   alDia: boolean;
 }
 
 /**
  * La frase de un modo, diciendo una sola vez lo que se repite.
  *
- * Dos carriles con la misma espera y la misma hora se dicen juntos —«casi dos
- * horas en carril general y en Ready Lane»—, y las clausulas que comparten
- * hora la dicen una vez al final en lugar de arrastrarla cada una. Sin esto,
- * los cuatro carriles peatonales de San Ysidro salian con «a las 8:00 de la
- * manana» dos veces y «a las 7:00» otras dos, en una frase de cuarenta y
- * cinco palabras.
+ * La hora no se mezcla con la locucion: se muestra una sola vez arriba como
+ * «Actualización más reciente» y cada tarjeta detallada conserva su reporte.
+ * Dos carriles con la misma espera se dicen juntos —«casi dos horas en carril
+ * general y en Ready Lane»—, sin hacer que el locutor confunda la hora del
+ * reporte con el tiempo que tarda el cruce.
  *
  * Las clausulas se separan con punto y coma en cuanto una lleva «y» dentro:
  * «…y en Ready Lane y media hora por SENTRI» no deja oir donde acaba una cifra
@@ -242,38 +228,23 @@ function frase(
   sujeto: string,
   leibles: Leible[],
   etiquetar: (carril: Carril, solo: boolean) => string,
-  horaAlFrente: string,
-  porCifra: boolean,
 ): string {
   const solo = leibles.length === 1;
-  const clausulas: { espera: string; etiquetas: string[]; hora: string }[] = [];
+  const clausulas: { espera: string; etiquetas: string[] }[] = [];
   for (const l of leibles) {
     const espera = duracionHablada(l.minutos);
     const previa = clausulas.at(-1);
-    if (previa && previa.espera === espera && previa.hora === l.hora) {
+    if (previa && previa.espera === espera) {
       previa.etiquetas.push(etiquetar(l.carril, solo));
     } else {
-      clausulas.push({ espera, etiquetas: [etiquetar(l.carril, solo)], hora: l.hora });
+      clausulas.push({ espera, etiquetas: [etiquetar(l.carril, solo)] });
     }
   }
 
-  const grupos: { textos: string[]; hora: string; compuesta: boolean }[] = [];
-  for (const c of clausulas) {
-    const texto = [c.espera, unir(c.etiquetas.filter(Boolean))].filter(Boolean).join(" ");
-    const previo = grupos.at(-1);
-    if (previo && previo.hora === c.hora) {
-      previo.textos.push(texto);
-      previo.compuesta = previo.compuesta || c.etiquetas.length > 1;
-    } else {
-      grupos.push({ textos: [texto], hora: c.hora, compuesta: c.etiquetas.length > 1 });
-    }
-  }
-
-  const dichos = grupos.map((g) => {
-    const cuerpo = g.compuesta ? g.textos.join("; ") : unir(g.textos);
-    return porCifra ? `${cuerpo}, a las ${g.hora}` : cuerpo;
-  });
-  return `${sujeto}${horaAlFrente ? `, a las ${horaAlFrente}` : ""}: ${dichos.join("; ")}.`;
+  const dichos = clausulas.map((c) =>
+    [c.espera, unir(c.etiquetas.filter(Boolean))].filter(Boolean).join(" "),
+  );
+  return `${sujeto}: ${dichos.join("; ")}.`;
 }
 
 /**
@@ -294,19 +265,10 @@ function frase(
  * La atribucion sube a una etiqueta y vuelve hablada al final, que es donde va
  * en television: el dato primero, la fuente despues.
  *
- * La hora se dice UNA vez cuando se puede y una por cifra cuando no. CBP fecha
- * cada carril por separado, asi que una sola hora al frente de la frase seria
- * una atribucion falsa en cuanto dos carriles no la compartan. Tres niveles,
- * del mas barato al mas caro: si coinciden TODOS los carriles de todos los
- * cruces, la hora vive en la etiqueta y ninguna frase la repite; si coinciden
- * los de una frase, va delante de esa frase; y si no, cada cifra lleva la suya
- * —«40 minutos por la garita principal a las 8:00 de la manana y casi una hora
- * por PedWest a las 7:00 de la manana»—.
- *
- * Esa tercera rama callaba la frase entera, y estaba mal: el locutor tiene que
- * dar esos minutos igual, y callarlos no le quita el problema, lo deja sin
- * texto delante de la camara. Repetir la hora cuesta unas palabras y no miente
- * en ninguna.
+ * La hora del reporte ya no entra en la frase: el apuntador solo dice el tiempo
+ * que tarda el cruce. La pagina muestra la actualizacion mas reciente una vez
+ * en la cabecera y conserva la hora individual en cada tarjeta para quien
+ * necesite revisar el origen del dato.
  */
 export function guion(cruces: Cruce[], ahora: number): Guion {
   const armados = cruces.map((cruce) => ({
@@ -319,52 +281,33 @@ export function guion(cruces: Cruce[], ahora: number): Guion {
           // misma cifra; contarlo seria leer la misma fila dos veces.
           !(cruce.id === "otay_mesa" && c.viajero === "peaton" && c.categoria === "ready"),
       );
-      // Dos conjuntos distintos, y confundirlos fue el error: TENER cifra es
-      // una cosa y poder DECIRLA al aire es otra. La ficha muestra las que hay;
-      // la frase dice solo las de la ultima hora y media (regla de PRODUCT.md).
+      // La cifra visible y la cifra hablada son el mismo conjunto. La hora de
+      // cada carril se conserva para el detalle, no para el apuntador.
       const conCifra = carriles.flatMap((carril) =>
         carril.estado === "reportado" && carril.minutos !== null && carril.observado !== null
           ? [{
               carril,
               minutos: carril.minutos,
-              hora: horaHablada(carril.observado),
               alDia: vigente(carril, ahora),
             }]
           : [],
       );
-      const leibles = conCifra.filter((l) => l.alDia);
-      const [primero] = conCifra;
-      const hora = primero && conCifra.every((l) => l.hora === primero.hora) ? primero.hora : null;
-      const [primeroDicho] = leibles;
-      const horaDicha =
-        primeroDicho && leibles.every((l) => l.hora === primeroDicho.hora) ? primeroDicho.hora : null;
-      // La mas reciente de las que hay, para poder decir desde cuando no se
-      // actualiza cuando ninguna llega al aire.
-      const ultima = conCifra.reduce<Leible | null>(
-        (mayor, l) =>
-          mayor === null || Date.parse(l.carril.observado ?? "") > Date.parse(mayor.carril.observado ?? "") ? l : mayor,
-        null,
-      );
-      return { modo, carriles, conCifra, leibles, hora, horaDicha, ultima };
+      const leibles = conCifra;
+      return { modo, carriles, conCifra, leibles };
     }),
   }));
 
-  // La etiqueta tiene que describir lo que hay EN PANTALLA, no solo lo que se
-  // dice: con PedWest a las 7:00 en la ficha, un «CBP · 8:00» seria falso.
+  // Todas las cifras se mantienen aunque un reporte ya no este fresco: la
+  // etiqueta de actualizacion vive en la pagina y no borra una espera real.
   const todas = armados.flatMap((a) => a.modos).flatMap((m) => m.conCifra);
-  const [inicial] = todas;
-  const horaComun = inicial && todas.every((l) => l.hora === inicial.hora) ? inicial.hora : null;
 
   return {
-    atribucion: horaComun ? `CBP · ${horaComun}` : "CBP",
+    atribucion: "Fuente oficial",
     hayCifras: todas.length > 0,
-    cierre: todas.some((l) => l.alDia) ? "Cifras de CBP." : "",
+    cierre: "",
     cues: armados.map(({ cruce, modos }) => ({
       lugar: cruce.nombre,
-      modos: modos.map(({ modo, carriles, conCifra, leibles, hora, horaDicha, ultima }) => {
-        // Cuando los carriles del modo no coinciden, la hora baja a cada cifra:
-        // en la frase y, para los que ni siquiera tienen cifra, en la ficha.
-        const porCifra = horaComun === null && hora === null;
+      modos: modos.map(({ modo, carriles, conCifra, leibles }) => {
         return {
           titulo: modo.titulo,
           renglones: carriles.map((carril) => {
@@ -374,9 +317,6 @@ export function guion(cruces: Cruce[], ahora: number): Guion {
               figura: cifra ? duracionFicha(cifra.minutos) : sinCifra(carril),
               hayCifra: cifra !== undefined,
               alDia: cifra?.alDia ?? false,
-              // Una cifra que no se dice SIEMPRE lleva hora: es lo unico que
-              // explica por que no esta en la frase de arriba.
-              hora: cifra && (porCifra || !cifra.alDia) ? cifra.hora : "",
             };
           }),
           linea:
@@ -386,10 +326,8 @@ export function guion(cruces: Cruce[], ahora: number): Guion {
                   modo.sujeto(cruce.nombre),
                   leibles,
                   modo.etiqueta,
-                  horaComun === null && horaDicha !== null ? horaDicha : "",
-                  horaComun === null && horaDicha === null,
                 ),
-          sinLinea: leibles.length > 0 ? "" : motivoSinLinea(carriles, ultima ? ultima.hora : ""),
+          sinLinea: leibles.length > 0 ? "" : motivoSinLinea(carriles),
         };
       }),
     })),

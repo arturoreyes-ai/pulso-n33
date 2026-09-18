@@ -16,7 +16,7 @@ import { TableroGaritas } from "@/components/garitas/tablero-garitas";
 export const metadata: Metadata = {
   title: "Garitas · Pulso",
   description:
-    "Esperas reportadas por CBP hacia Estados Unidos en San Ysidro y Otay Mesa, para vehículos y peatones, con la hora de reporte de cada carril.",
+    "Tiempos de espera para cruzar a Estados Unidos por San Ysidro y Otay Mesa.",
 };
 
 export default function PaginaGaritas() {

@@ -5,7 +5,7 @@ import useSWR from "swr";
 
 import { Bisel } from "@/components/ui/bisel";
 import { Barra, Esqueleto } from "@/components/ui/primitivas";
-import { duracion, fechaLocal, guion, horaLocal, nombreCarril, vigente } from "@/lib/garitas/formato";
+import { duracion, fechaLocal, guion, nombreCarril, vigente } from "@/lib/garitas/formato";
 import type { Carril, RespuestaGaritas } from "@/lib/garitas/tipos";
 
 /**
@@ -29,9 +29,8 @@ import type { Carril, RespuestaGaritas } from "@/lib/garitas/tipos";
  * la regla del tablero para no provocar reflow en cada tick del reloj.
  *
  * Lo que NO cambio es el producto: una consulta al entrar y despues solo el
- * boton (el endpoint de CBP no se golpea en cada foco), la hora de reporte por
- * carril, los reportes de mas de 90 minutos fuera del guion, y la distincion
- * entre «sin dato» y cero que rige todo el tablero.
+ * boton (el endpoint no se golpea en cada foco), la hora de reporte por
+ * carril, y la distincion entre «sin dato» y cero que rige todo el tablero.
  *
  * «Para leer al aire» es un apuntador, no un parrafo, y da dos lecturas del
  * mismo dato porque las usan dos personas en dos momentos: la FICHA —todos los
@@ -43,10 +42,9 @@ import type { Carril, RespuestaGaritas } from "@/lib/garitas/tipos";
  * carril general de vehiculos, asi que la mitad de la garita —la que cruza
  * caminando, con dos accesos distintos en San Ysidro— no llegaba al aire.
  *
- * La atribucion sale de la frase y sube a una etiqueta, que es donde va en
- * television: primero el dato, la fuente despues —«Cifras de CBP.» cierra el
- * bloque hablado—. Antes la frase abria con «Segun CBP, a las 11:00 AM…» y
- * enterraba la noticia debajo del tramite.
+ * La frase empieza por el cruce y la espera. La actualizacion mas reciente
+ * queda una sola vez en la cabecera, para no hacer que el locutor confunda el
+ * momento del reporte con el tiempo que tarda el cruce.
  *
  * La forma la decide el orden de lectura, no el adorno. Los dos cruces van en
  * paralelo —son equivalentes, como sus tarjetas de abajo—; dentro de cada uno
@@ -86,6 +84,15 @@ function sinCifra(carril: Carril): string {
   if (carril.estado === "cerrado") return "Cerrado";
   if (carril.estado === "pendiente") return "Actualización pendiente";
   return "Sin dato";
+}
+
+function ultimaActualizacion(datos: RespuestaGaritas): string {
+  const ultimo = datos.cruces
+    .flatMap((cruce) => cruce.carriles)
+    .map((carril) => Date.parse(carril.observado ?? ""))
+    .filter(Number.isFinite)
+    .reduce((mayor, actual) => Math.max(mayor, actual), 0);
+  return ultimo > 0 ? fechaLocal(new Date(ultimo).toISOString()) : "sin dato";
 }
 
 /** Los minutos solo cuando CBP los reporto. Devolver `null` en vez de afirmar
@@ -156,12 +163,12 @@ function Fila({ carril, escala, ahora }: { carril: Carril; escala: number; ahora
 
       {carril.estado === "no_disponible" ? (
         <p className="mt-2 text-meta text-tinta-meta">
-          CBP no publica un reporte para este carril.
+          Sin tiempo publicado para este carril.
         </p>
       ) : null}
 
       {minutos !== null && !carril.observado ? (
-        <p className="mt-2 text-meta text-aviso">Vigencia desconocida · fuera del resumen</p>
+        <p className="mt-2 text-meta text-aviso">Hora del reporte no disponible</p>
       ) : null}
     </li>
   );
@@ -210,20 +217,11 @@ export function TableroGaritas() {
   });
 
   const [ahora, fijarAhora] = useState(0);
-  const [confirmacion, fijarConfirmacion] = useState("");
-
   async function actualizarManual() {
-    fijarConfirmacion("");
     try {
-      const resultado = await actualizar();
-      if (!resultado) return;
-      fijarConfirmacion(
-        `Consulta completada a las ${horaLocal(new Date().toISOString())}. Revisa la hora de reporte de cada carril; CBP puede mantener las mismas cifras.`,
-      );
+      await actualizar();
     } catch {
-      fijarConfirmacion(
-        "No se pudo actualizar. Intenta de nuevo; conservamos el último reporte recibido.",
-      );
+      // SWR conserva el dato anterior y expone el fallo en `error`.
     }
   }
 
@@ -242,14 +240,19 @@ export function TableroGaritas() {
     ),
   );
   const lectura = datos && ahora ? guion(datos.cruces, ahora) : null;
+  const estado = consultando
+    ? "Actualizando…"
+    : datos
+      ? `Actualización más reciente: ${ultimaActualizacion(datos)}`
+      : "Actualización más reciente: sin dato";
 
   return (
     <>
       <header className={`${ANCHO} pb-6`}>
         <div className="entrada">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
-            <h1 className="max-w-[16ch] font-titular text-hero [font-stretch:112%] text-tinta-titulo">
-              El pulso de las garitas
+            <h1 className="max-w-[22ch] font-titular text-hero [font-stretch:112%] text-tinta-titulo">
+              Tiempos de cruce
             </h1>
             <div className="flex shrink-0 gap-2 max-sm:w-full">
               <button
@@ -259,43 +262,45 @@ export function TableroGaritas() {
                 aria-busy={consultando}
                 className={`${BOTON} disabled:cursor-wait disabled:opacity-60`}
               >
-                {consultando ? "Consultando…" : "Actualizar"}
+                {consultando ? "Actualizando…" : "Actualizar"}
               </button>
             </div>
           </div>
 
           <p className="mt-6 max-w-[65ch] text-lectura text-tinta-prosa">
-            San Ysidro y Otay Mesa. Esperas reportadas por CBP para vehículos y peatones.
+            San Ysidro y Otay Mesa, rumbo a Estados Unidos.
           </p>
 
-          <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-meta text-tinta-meta">
-            <span>Hora local de Tijuana</span>
-            <span>Se consulta al abrir; después, con Actualizar</span>
+          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-meta text-tinta-meta">
+            <span
+              role="status"
+              aria-live="polite"
+              className="inline-flex items-center gap-2 rounded-full border border-filo px-3 py-1 text-tinta-meta"
+            >
+              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-current" />
+              {estado}
+            </span>
+            <span>Vehículos y peatones</span>
             <a
               href={CBP}
               target="_blank"
               rel="noreferrer"
               className="text-tinta-dato transition-colors hover:text-tinta-titulo"
+              aria-label="Fuente oficial de tiempos de cruce"
             >
-              Fuente: CBP ↗
+              Fuente oficial ↗
             </a>
           </div>
-
-          <p role="status" className="mt-3 min-h-9 max-w-[65ch] text-meta text-tinta-dato">
-            {consultando ? "Consultando el último reporte disponible…" : confirmacion}
-          </p>
         </div>
       </header>
 
       <section className={`${ANCHO} pt-4 pb-12 md:pt-6 md:pb-20`}>
-        {error ? (
+        {error && !datos ? (
           <p
             role="alert"
             className="rounded-nucleo border border-aviso/40 bg-aviso/10 px-4 py-3 text-cuerpo text-tinta-dato"
           >
-            {datos
-              ? "Falló la actualización. Se conserva el último reporte recibido; comprueba la hora de cada carril."
-              : "No fue posible consultar CBP. Los tiempos no están disponibles. Puedes reintentar con Actualizar."}
+            No hay tiempos disponibles. Vuelve a intentar con Actualizar.
           </p>
         ) : null}
 
@@ -304,7 +309,7 @@ export function TableroGaritas() {
             <Esqueleto className="h-[420px]" />
           ) : (
             <p className="py-16 text-center text-lectura text-tinta-prosa">
-              Pulsa Actualizar para consultar los tiempos de cruce.
+              Los tiempos aparecerán aquí al consultar.
             </p>
           )
         ) : null}
@@ -314,20 +319,9 @@ export function TableroGaritas() {
             <Bisel interior="p-6 md:p-8">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h2 className="text-meta font-semibold text-tinta-titulo">Para leer al aire</h2>
-                <span className="rounded-full border border-filo bg-vela px-3 py-1 text-meta text-tinta-dato">
-                  {lectura ? lectura.atribucion : "CBP"}
-                </span>
               </div>
 
-              {error ? (
-                <div className="mt-6">
-                  <p className="text-meta font-semibold text-aviso">No leer al aire</p>
-                  <p className="mt-2 max-w-[46ch] text-rotulo text-tinta-titulo">
-                    La actualización no se completó. Comprueba la hora de cada reporte antes de dar
-                    cifras.
-                  </p>
-                </div>
-              ) : lectura && lectura.hayCifras ? (
+              {lectura && lectura.hayCifras ? (
                 <>
                   {/* Los dos cruces son equivalentes y van en paralelo, como las
                       tarjetas de abajo: en una sola columna el bloque medía ocho
@@ -363,8 +357,8 @@ export function TableroGaritas() {
                                 <li key={renglon.nombre} className="text-meta text-tinta-meta">
                                   {renglon.nombre}{" "}
                                   {/* Tres estados, no dos: cifra que se dice,
-                                      cifra real pero vieja —se ve, atenuada y
-                                      con su hora— y hueco en palabras. */}
+                                      cifra real pero vieja —se ve, atenuada— y
+                                      hueco en palabras. */}
                                   <span
                                     className={
                                       !renglon.hayCifra
@@ -376,7 +370,6 @@ export function TableroGaritas() {
                                   >
                                     {renglon.figura}
                                   </span>
-                                  {renglon.hora ? ` · ${renglon.hora}` : ""}
                                 </li>
                               ))}
                             </ul>
@@ -385,25 +378,20 @@ export function TableroGaritas() {
                       </section>
                     ))}
                   </div>
-                  {lectura.cierre ? (
-                    <p className="mt-9 border-t border-vela pt-5 text-lectura text-tinta-prosa">
-                      {lectura.cierre}
-                    </p>
-                  ) : null}
                 </>
               ) : (
                 <div className="mt-6">
-                  <p className="text-meta font-semibold text-tinta-meta">Nada que leer</p>
+                  <p className="text-meta font-semibold text-tinta-meta">Sin tiempos</p>
                   <p className="mt-2 max-w-[46ch] text-rotulo text-tinta-titulo">
-                    Ningún carril tiene hora de reporte confirmada. Revisa cada cruce abajo.
+                    No hay un tiempo disponible para los carriles.
                   </p>
                 </div>
               )}
             </Bisel>
 
             <div className="mt-8 flex flex-wrap justify-between gap-x-4 gap-y-1 text-meta text-tinta-meta">
-              <span>Las barras representan tiempo de espera, no longitud de la fila.</span>
-              <span>Escala compartida: 0–{duracion(escala)}</span>
+              <span>Espera estimada</span>
+              <span>Hasta {duracion(escala)}</span>
             </div>
 
             <div className="mt-4 grid items-start gap-6 md:grid-cols-2">
@@ -438,11 +426,6 @@ export function TableroGaritas() {
               ))}
             </div>
 
-            <p className="mt-10 max-w-[80ch] border-t border-vela pt-5 text-meta text-tinta-prosa">
-              Consulta a CBP: {fechaLocal(datos.consultado)}. Cada carril conserva su propia hora
-              de reporte. Los reportes de más de 90 minutos se excluyen del resumen para locución.
-              Las estimaciones no garantizan el tiempo de cruce.
-            </p>
           </>
         ) : null}
       </section>
