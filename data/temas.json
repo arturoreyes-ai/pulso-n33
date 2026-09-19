@@ -3,7 +3,7 @@
  "generado": "2026-09-19",
  "ventana_dias": 7,
  "minimo": 3,
- "notas_ventana": 2462,
+ "notas_ventana": 2483,
  "notas_previas": 2328,
  "temas": [
   {
@@ -1400,6 +1400,64 @@
    ]
   },
   {
+   "termino": "river",
+   "n": 24,
+   "n_previo": 8,
+   "momento": 16,
+   "zonas": {
+    "Tijuana": 21,
+    "San Diego": 8,
+    "nacional": 1
+   },
+   "fuentes": {
+    "kpbs": 5,
+    "gn-5bad11419dae": 3,
+    "gn-65e51224f05e": 3,
+    "gn-4b075bf74df6": 2,
+    "gn-a956e11d03ed": 2,
+    "gn-b33960790a6d": 2,
+    "gn-46bc88bd6277": 1,
+    "gn-5e7dd3768c59": 1,
+    "gn-92b89253d795": 1,
+    "gn-a0ec1cdd1d90": 1,
+    "gn-b5ad07a87e1a": 1,
+    "timessd": 1,
+    "voiceofsd": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "13d573d716be8d00",
+    "166410b4ffdf3662",
+    "1aa6afd98f73e158",
+    "264ac9b03b6af4d0",
+    "2b12b691d7f34765",
+    "2e00bf1a4d6b125e",
+    "388c4d07f5813063",
+    "43ca4bb3cc7a984d",
+    "4d7284250710a8f2",
+    "4f688c6535701056",
+    "5613597df0e1d16e",
+    "581a6da1b83cfb48",
+    "651342a87450bb5e",
+    "6a16e7288fdb3997",
+    "830c253a2f11be25",
+    "847225e6d6c825d3",
+    "8b68e0ccaf210e6c",
+    "9200381bc0d61d57",
+    "9ad8c745f964bc39",
+    "bcc0bf196410546f",
+    "cf829792a4621a5e",
+    "e24f2ec3eca2a41c",
+    "e27f0ff04d9dce13",
+    "fcb617c264002c7d"
+   ],
+   "ejemplos": [
+    "San Diego County, CDC launch another Tijuana River health assessment",
+    "CDC and County of San Diego begin second Tijuana River health survey",
+    "Centers For Disease Control, County, Begin Second Tijuana River Health Survey"
+   ]
+  },
+  {
    "termino": "minutos",
    "n": 22,
    "n_previo": 6,
@@ -1573,70 +1631,6 @@
     "Entregan a su familia el cuerpo de la estudiante española asesinada en Morelos",
     "Detienen a homicida de estudiante española en Morelos"
    ]
-  },
-  {
-   "termino": "county",
-   "n": 30,
-   "n_previo": 15,
-   "momento": 15,
-   "zonas": {
-    "San Diego": 21,
-    "Tijuana": 15,
-    "nacional": 1
-   },
-   "fuentes": {
-    "kpbs": 8,
-    "timessd": 6,
-    "gn-65e51224f05e": 3,
-    "gn-a956e11d03ed": 3,
-    "gn-e5254349f911": 2,
-    "gn-331e59b8f5bc": 1,
-    "gn-46bc88bd6277": 1,
-    "gn-4b075bf74df6": 1,
-    "gn-5bad11419dae": 1,
-    "gn-5e7dd3768c59": 1,
-    "gn-b33960790a6d": 1,
-    "inewsource": 1,
-    "voiceofsd": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "12dd98b7ccba9492",
-    "1aa6afd98f73e158",
-    "2ddba0b99ca7b543",
-    "2e00bf1a4d6b125e",
-    "306964f60ad333a9",
-    "388c4d07f5813063",
-    "4d7284250710a8f2",
-    "4f688c6535701056",
-    "5613597df0e1d16e",
-    "581a6da1b83cfb48",
-    "69fdb86940217bb5",
-    "73ce0db1fe78e843",
-    "778197a821cdc6c5",
-    "7b384ea6a37ccce3",
-    "830c253a2f11be25",
-    "847225e6d6c825d3",
-    "8926372ff282d2d5",
-    "930c616fa337af78",
-    "9b34b6289b77adb3",
-    "9e9167e550ec4fd2",
-    "a0cd66603b9605da",
-    "a23a59c5d51ba4db",
-    "afa63f7ded9b01a7",
-    "bcc0bf196410546f",
-    "bf63cbf13d32c05a",
-    "d174b4354398e92e",
-    "d230b850b49f7f79",
-    "e0d5b03808c9a9bd",
-    "e24f2ec3eca2a41c",
-    "e5c13ff97a0bec46"
-   ],
-   "ejemplos": [
-    "North Park man in custody after allegedly mailing threats to East County campus",
-    "San Diego County, CDC launch another Tijuana River health assessment",
-    "CDC and County of San Diego begin second Tijuana River health survey"
-   ]
   }
  ],
  "descartados": [
@@ -1736,14 +1730,14 @@
    "porque": "duplica «festejos patrios»"
   },
   {
-   "termino": "corte",
-   "n": 12,
-   "porque": "duplica «suprema corte»"
+   "termino": "sismo",
+   "n": 13,
+   "porque": "duplica «sismo magnitud sacude»"
   }
  ],
  "por_zona": {
   "Tijuana": {
-   "notas_ventana": 631,
+   "notas_ventana": 634,
    "minimo": 3,
    "temas": [
     {
@@ -1881,6 +1875,57 @@
      ]
     },
     {
+     "termino": "river",
+     "n": 21,
+     "n_previo": 7,
+     "momento": 14,
+     "zonas": {
+      "Tijuana": 21,
+      "San Diego": 6
+     },
+     "fuentes": {
+      "kpbs": 5,
+      "gn-5bad11419dae": 3,
+      "gn-65e51224f05e": 3,
+      "gn-4b075bf74df6": 2,
+      "gn-a956e11d03ed": 2,
+      "gn-b33960790a6d": 2,
+      "gn-46bc88bd6277": 1,
+      "gn-5e7dd3768c59": 1,
+      "gn-a0ec1cdd1d90": 1,
+      "gn-b5ad07a87e1a": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "13d573d716be8d00",
+      "166410b4ffdf3662",
+      "1aa6afd98f73e158",
+      "264ac9b03b6af4d0",
+      "2b12b691d7f34765",
+      "2e00bf1a4d6b125e",
+      "388c4d07f5813063",
+      "43ca4bb3cc7a984d",
+      "4d7284250710a8f2",
+      "4f688c6535701056",
+      "5613597df0e1d16e",
+      "581a6da1b83cfb48",
+      "6a16e7288fdb3997",
+      "830c253a2f11be25",
+      "847225e6d6c825d3",
+      "8b68e0ccaf210e6c",
+      "9200381bc0d61d57",
+      "bcc0bf196410546f",
+      "cf829792a4621a5e",
+      "e24f2ec3eca2a41c",
+      "e27f0ff04d9dce13"
+     ],
+     "ejemplos": [
+      "San Diego County, CDC launch another Tijuana River health assessment",
+      "CDC and County of San Diego begin second Tijuana River health survey",
+      "Centers For Disease Control, County, Begin Second Tijuana River Health Survey"
+     ]
+    },
+    {
      "termino": "filas",
      "n": 15,
      "n_previo": 1,
@@ -1917,55 +1962,6 @@
       "Garitas de Tijuana sufren congestión con filas de hasta 100 minutos",
       "🚨 Garitas de Tijuana y Mexicali registran filas de hasta 110 minutos (Datos actualizados a las 17:54 EST / 14:54 PDT) Las garitas entre Baja California y California presentan una jornada de alta saturación vehicular esta tarde. El punto con mayor congestiona",
       "Garitas de Tijuana y Mexicali registran filas de hasta 110 minutos"
-     ]
-    },
-    {
-     "termino": "river",
-     "n": 20,
-     "n_previo": 7,
-     "momento": 13,
-     "zonas": {
-      "Tijuana": 20,
-      "San Diego": 6
-     },
-     "fuentes": {
-      "kpbs": 5,
-      "gn-5bad11419dae": 3,
-      "gn-65e51224f05e": 3,
-      "gn-4b075bf74df6": 2,
-      "gn-a956e11d03ed": 2,
-      "gn-b33960790a6d": 2,
-      "gn-46bc88bd6277": 1,
-      "gn-5e7dd3768c59": 1,
-      "gn-a0ec1cdd1d90": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "166410b4ffdf3662",
-      "1aa6afd98f73e158",
-      "264ac9b03b6af4d0",
-      "2b12b691d7f34765",
-      "2e00bf1a4d6b125e",
-      "388c4d07f5813063",
-      "43ca4bb3cc7a984d",
-      "4d7284250710a8f2",
-      "4f688c6535701056",
-      "5613597df0e1d16e",
-      "581a6da1b83cfb48",
-      "6a16e7288fdb3997",
-      "830c253a2f11be25",
-      "847225e6d6c825d3",
-      "8b68e0ccaf210e6c",
-      "9200381bc0d61d57",
-      "bcc0bf196410546f",
-      "cf829792a4621a5e",
-      "e24f2ec3eca2a41c",
-      "e27f0ff04d9dce13"
-     ],
-     "ejemplos": [
-      "San Diego County, CDC launch another Tijuana River health assessment",
-      "CDC and County of San Diego begin second Tijuana River health survey",
-      "Centers For Disease Control, County, Begin Second Tijuana River Health Survey"
      ]
     },
     {
@@ -2670,7 +2666,7 @@
    ]
   },
   "Mexicali": {
-   "notas_ventana": 211,
+   "notas_ventana": 213,
    "minimo": 3,
    "temas": [
     {
@@ -3174,6 +3170,32 @@
      ]
     },
     {
+     "termino": "mercado municipal",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "Mexicali": 4
+     },
+     "fuentes": {
+      "lavoz": 2,
+      "imparcial": 1,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "2af30756c2b00200",
+      "3de48098d7bf4945",
+      "69653f9722bd89d5",
+      "7bed1b1fb4fdfbcf"
+     ],
+     "ejemplos": [
+      "¿Mercado Municipal o un parque? Cronistas y locatarios se disputan el futuro del antiguo inmueble en Centro Histórico de Mexicali",
+      "Exigen reconstruir el mercado municipal",
+      "Piden que cumplan promesa de reconstruir Mercado Municipal"
+     ]
+    },
+    {
      "termino": "musica",
      "n": 4,
      "n_previo": 0,
@@ -3326,36 +3348,11 @@
       "Protestan empleados del Poder Judicial en las instalaciones del Ejecutivo: exigen aumento de sueldo",
       "Protestan empleados del Poder Judicial en las instalaciones del Ejecutivo; exigen aumento de sueldo"
      ]
-    },
-    {
-     "termino": "actividades",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Mexicali": 3
-     },
-     "fuentes": {
-      "imparcial": 1,
-      "jornadabc": 1,
-      "lavoz": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "5461e5b21583cc2e",
-      "74aed789c3c0b145",
-      "c2da43d23a492181"
-     ],
-     "ejemplos": [
-      "Grito de Independencia en Mexicali 2026: conoce el horario, actividades, accesos, cierres viales",
-      "Suspenden actividades este martes y miércoles en Ayuntamiento de Mexicali",
-      "Ayuntamiento de Mexicali suspenderá actividades por festejos patrios"
-     ]
     }
    ]
   },
   "Ensenada": {
-   "notas_ventana": 88,
+   "notas_ventana": 90,
    "minimo": 3,
    "temas": [
     {
@@ -4004,19 +4001,19 @@
    ]
   },
   "San Felipe": {
-   "notas_ventana": 18,
+   "notas_ventana": 19,
    "minimo": 2,
    "temas": [
     {
      "termino": "sismo magnitud sacude",
-     "n": 7,
+     "n": 8,
      "n_previo": 2,
-     "momento": 5,
+     "momento": 6,
      "zonas": {
-      "San Felipe": 7
+      "San Felipe": 8
      },
      "fuentes": {
-      "gn-507c32aa93b3": 7
+      "gn-507c32aa93b3": 8
      },
      "un_solo_medio": true,
      "notas": [
@@ -4025,13 +4022,87 @@
       "1fd9ec50614d710a",
       "535958f2a989d420",
       "70132e26a7241a51",
+      "7c8fb36d49071c75",
+      "d7c5fa26724bc02f",
+      "fa7800766ed367d4"
+     ],
+     "ejemplos": [
+      "Sismo de magnitud 3.9 sacude al sureste de San Felipe, Baja California",
+      "Sismo de magnitud 3.8 sacude las inmediaciones de San Felipe, Baja California",
+      "Sismo de magnitud 3.9 sacude la región al sureste de San Felipe, Baja California"
+     ]
+    },
+    {
+     "termino": "sureste felipe",
+     "n": 8,
+     "n_previo": 2,
+     "momento": 6,
+     "zonas": {
+      "San Felipe": 8
+     },
+     "fuentes": {
+      "gn-507c32aa93b3": 8
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "031b9e374cd9f5da",
+      "1fd9ec50614d710a",
+      "3c8c815bfdbb8113",
+      "51c41aea7bcc1ecb",
+      "535958f2a989d420",
+      "70132e26a7241a51",
       "d7c5fa26724bc02f",
       "fa7800766ed367d4"
      ],
      "ejemplos": [
       "Sismo de magnitud 3.9 sacude al sureste de San Felipe, Baja California",
       "Sismo de magnitud 3.9 sacude la región al sureste de San Felipe, Baja California",
-      "Sismo de magnitud 3.7 sacude la región al sureste de San Felipe, Baja California"
+      "Registran sismo de magnitud 3.7 al sureste de San Felipe, Baja California"
+     ]
+    },
+    {
+     "termino": "felipe",
+     "n": 19,
+     "n_previo": 17,
+     "momento": 2,
+     "zonas": {
+      "San Felipe": 19
+     },
+     "fuentes": {
+      "gn-507c32aa93b3": 12,
+      "imparcial": 2,
+      "gn-d38d8e833ae2": 1,
+      "gn-daac788a7e24": 1,
+      "gn-df1d301d141c": 1,
+      "gn-e0db246e5666": 1,
+      "lavoz": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "0236b53263c571d9",
+      "031b9e374cd9f5da",
+      "07ac990d992653aa",
+      "1686cac004c1e5ab",
+      "1fd9ec50614d710a",
+      "37997eee58002e65",
+      "3c8c815bfdbb8113",
+      "51c41aea7bcc1ecb",
+      "535958f2a989d420",
+      "651012deab44883c",
+      "6a3faf9f77595cd6",
+      "70132e26a7241a51",
+      "7c8fb36d49071c75",
+      "9085705823ae84b5",
+      "a73e92066013adde",
+      "ab75ad6da9ade222",
+      "d7c5fa26724bc02f",
+      "efaeda4c3fdf995a",
+      "fa7800766ed367d4"
+     ],
+     "ejemplos": [
+      "Sismo de magnitud 3.9 sacude al sureste de San Felipe, Baja California",
+      "Registran sismo de magnitud 3.5 al suroeste de San Felipe, Baja California",
+      "Sismo de magnitud 3.8 sacude las inmediaciones de San Felipe, Baja California"
      ]
     },
     {
@@ -4122,55 +4193,11 @@
       "Sismo de magnitud 3.8 sacude la zona sureste de San Felipe, Baja California",
       "Rescatan a Tres Personas Varadas en Zona Desértica de San Felipe, BC"
      ]
-    },
-    {
-     "termino": "felipe",
-     "n": 18,
-     "n_previo": 17,
-     "momento": 1,
-     "zonas": {
-      "San Felipe": 18
-     },
-     "fuentes": {
-      "gn-507c32aa93b3": 11,
-      "imparcial": 2,
-      "gn-d38d8e833ae2": 1,
-      "gn-daac788a7e24": 1,
-      "gn-df1d301d141c": 1,
-      "gn-e0db246e5666": 1,
-      "lavoz": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0236b53263c571d9",
-      "031b9e374cd9f5da",
-      "07ac990d992653aa",
-      "1686cac004c1e5ab",
-      "1fd9ec50614d710a",
-      "37997eee58002e65",
-      "3c8c815bfdbb8113",
-      "51c41aea7bcc1ecb",
-      "535958f2a989d420",
-      "651012deab44883c",
-      "6a3faf9f77595cd6",
-      "70132e26a7241a51",
-      "9085705823ae84b5",
-      "a73e92066013adde",
-      "ab75ad6da9ade222",
-      "d7c5fa26724bc02f",
-      "efaeda4c3fdf995a",
-      "fa7800766ed367d4"
-     ],
-     "ejemplos": [
-      "Sismo de magnitud 3.9 sacude al sureste de San Felipe, Baja California",
-      "Registran sismo de magnitud 3.5 al suroeste de San Felipe, Baja California",
-      "Sismo de magnitud 3.9 sacude la región al sureste de San Felipe, Baja California"
-     ]
     }
    ]
   },
   "San Diego": {
-   "notas_ventana": 321,
+   "notas_ventana": 327,
    "minimo": 3,
    "temas": [
     {
