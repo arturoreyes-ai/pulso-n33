@@ -235,17 +235,6 @@
    "razon": "Sondeada 2026-09-15: 7,304 seguidores, 2,713 posts, bio \u00abNoticias frescas desde Ensenada. Cobertura local con veracidad y cercan\u00eda. Miembro de Grupo Saxum\u00bb. Pedida por el cliente el 15 de septiembre de 2026. El handle lleva PUNTO, como @zeta.tijuana y @el.tijuanense, y no se adivina. Sin equivalente en config/medios.json."
   },
   {
-   "id": "notiens_ig",
-   "handle": "@noticiasensenada",
-   "nombre": "Noticias Ensenada",
-   "medio": "notiens",
-   "zona": "Ensenada",
-   "idioma": "es",
-   "activo": true,
-   "verificado": true,
-   "razon": "Sondeada 2026-09-15: 24,717 seguidores, 3,497 posts, bio \u00abEl portal de noticias de la ciudad de Ensenada\u00bb. Pedida por el cliente el 15 de septiembre de 2026. Es la cuenta del medio `notiens`, que config/medios.json ya trae con zona Ensenada."
-  },
-  {
    "id": "ensenadadigna_ig",
    "handle": "@ensenada.digna",
    "nombre": "Ensenada Digna",
@@ -346,6 +335,7 @@
   {"handle": "@elvigia", "porque": "14 seguidores, 0 publicaciones. Ocupado; el real es @elvigiaensenada."},
   {"handle": "@canal66 / @canal66mexicali", "porque": "13 seguidores y 0 posts el primero; el segundo no existe."},
   {"handle": "@cadenanoticias", "porque": "12 seguidores, 2 publicaciones, pese a que la bio dice «el grupo de medios más completo en el noroeste de México». La bio no verifica nada: los números sí."},
+  {"handle": "@noticiasensenada", "porque": "NO USAR pese a estar viva, y es el señuelo que más tiempo estuvo encendido: es la cuenta de ENSENADA, BUENOS AIRES, no la de Ensenada, Baja California. Estuvo activa del 15 al 21 de septiembre de 2026 y publicó cuatro veces en el muro del corredor; los titulares que quedaron en el historial de data/redes.json la delatan sin margen: «PERSECUCIÓN EN JOSÉ C. PAZ» (partido del Gran Buenos Aires), «TENSIÓN EN RUTA 6» (ruta provincial bonaerense), «INDIGNACIÓN EN VILLA CLELIA» y una sobre el grupo de urbano «de Ensenada». Las cuatro salieron con zona Ensenada porque en Instagram la zona la estampa la fila y no el gacetero. El sondeo NO pudo atraparla, y por eso hay que decirlo aquí: 24,767 seguidores y 3,502 posts de verdad, y una bio —«El portal de noticias de la ciudad de Ensenada»— que no nombra país. Un topónimo que existe en dos países no se verifica leyendo la bio: hay que leer los LUGARES que nombran sus publicaciones. Tampoco era la cuenta del medio `notiens`, como afirmaba su razón: noticiasensenada.com publica listas genéricas («Qué es el omega 3») y no enlaza ninguna cuenta de Instagram."},
   {"handle": "@svnnoticias", "porque": "NO USAR pese a estar viva: 31,173 seguidores y 29,344 publicaciones, pero es «Sonora Visión Noticias», con bio «te informamos … las noticias más relevantes de SONORA, México y el Mundo». Se pidió el 15 de septiembre de 2026 dentro del grupo «México» y el sondeo la delató. Es el bug de El Imparcial y Hermosillo con otro disfraz, y aquí sale más caro: en Instagram la zona no la da el gacetero sino la fila, así que nada descartaría sus comentarios de Hermosillo, Ciudad Obregón o Navojoa —los tres están en la lista FUERA de pulso/zonas.py— y todos contarían como conversación del corredor. Encenderla es una decisión del cliente, no un descuido que arreglar."},
   {"handle": "@ksdy50 / @ksdy", "porque": "1 seguidor y 0 publicaciones el primero; 51 y 0 el segundo. Ocupados los dos; el real es @ksdy50tv, que el primer sondeo del 15 de septiembre reprobó con un nulo del actor y el segundo trajo entero."},
   {"handle": "hashtags", "porque": "NO USAR. Un hashtag no lleva zona, por la misma razón que no la lleva una búsqueda (ver pulso/busquedas.py): se la acreditaría a todo comentario que no nombre lugar alguno. Y en Instagram un hashtag local arrastra cuentas de viaje y de venta que no son conversación de residentes."}

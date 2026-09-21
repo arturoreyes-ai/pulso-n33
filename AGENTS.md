@@ -132,6 +132,23 @@ is not a formality: `python -m pulso redes --sondear` costs one result per
 handle, and `tests/test_instagram.py` enforces that every verified row's
 `razon` cites it.
 
+**And the probe is not enough when the place name exists twice.** On 21
+September 2026 the client spotted an Argentine post on the Ensenada wall.
+`@noticiasensenada` was the news account of **Ensenada, Buenos Aires**, and it
+had been active since the 15th: four posts reached the corridor, all stamped
+Ensenada — «PERSECUCIÓN EN JOSÉ C. PAZ», «TENSIÓN EN RUTA 6», «INDIGNACIÓN EN
+VILLA CLELIA» and one about a cumbia group «de Ensenada». The probe could not
+catch it and that is the point: the account is real (24,767 followers, 3,502
+posts) and its bio — «El portal de noticias de la ciudad de Ensenada» — names
+no country. A **toponym shared between countries is not verified by reading
+the bio; it is verified by reading the places its posts name**, which the
+probe prints. Ensenada, Tecate and Mexicali all have namesakes abroad. The row
+also claimed to be the account of the medio `notiens`, and it was not:
+noticiasensenada.com publishes generic listicles («Qué es el omega 3») and
+links to no Instagram at all. It now sits in `senuelos` with the four
+headlines written down, next to `@svnnoticias` and `@afnoticias`, the same
+failure from Sonora and from Tocantins.
+
 On 17 September 2026 the client asked for more variety without losing the
 posts that are actually trending. `_destacados` now **gives every account one
 round before merit resumes** (`VUELTAS_GARANTIZADAS = 1`, `redes.py`), in both
