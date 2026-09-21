@@ -37,6 +37,28 @@ const nextConfig: NextConfig = {
       "./public/data/redes-comentarios.json",
       "./public/data/tiktok-comentarios.json",
     ],
+    // Las tres rutas que cruzan un titular en vivo contra el archivo
+    // (lib/busqueda/archivo.ts). Sin esto la miniatura y el enlace del propio
+    // medio salen null en toda fila y la hoja de relacionadas dice que no se
+    // pudo consultar: degradado correcto, pero degradado, y solo en
+    // produccion. notas.json SI esta en git, asi que aqui el patron siempre
+    // empareja; si alguna vez no lo hiciera, el sintoma es ese.
+    "/api/actualidad": ["./public/data/notas.json"],
+    "/api/buscar": ["./public/data/notas.json"],
+    "/api/relacionadas": ["./public/data/notas.json"],
+    // El informe en PDF de un termino (lib/informe/informe.ts) lee los dos
+    // archivos de consultas del disco y registra Geist desde node_modules:
+    // el motor de PDF no lee las fuentes del sistema. Sin esto la ruta
+    // devuelve 503 en produccion y solo en produccion; el segundo archivo
+    // vive fuera de git y puede no estar, y entonces el informe lo dice.
+    "/api/informe-consulta": [
+      "./public/data/consultas.json",
+      "./public/data/consultas-comentarios.json",
+      "./node_modules/geist/dist/fonts/geist-sans/Geist-Regular.woff2",
+      "./node_modules/geist/dist/fonts/geist-sans/Geist-Medium.woff2",
+      "./node_modules/geist/dist/fonts/geist-sans/Geist-SemiBold.woff2",
+      "./node_modules/geist/dist/fonts/geist-sans/Geist-Bold.woff2",
+    ],
   },
 
   experimental: {

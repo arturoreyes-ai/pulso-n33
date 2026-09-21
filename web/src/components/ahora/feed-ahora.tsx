@@ -6,19 +6,16 @@ import { useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } 
 import { CONTROL, Lector } from "@/components/lector/lector";
 import { ListaRelacionadas, TITULO_RELACIONADAS } from "@/components/paneles/relacionadas-titular";
 import { debeActivar, fraseFinal, type Capitulos, type Entrada, type Tarjeta } from "@/lib/busqueda/capitulos";
-import { enlaceParaAnalisis, indiceDeEnlaces } from "@/lib/busqueda/enlaces";
 import { entradaDe, rubroDe } from "@/lib/busqueda/entrada";
 import type { Rubro } from "@/lib/busqueda/rubros";
-import { imagenPara, indiceDeImagenes } from "@/lib/busqueda/imagenes";
-import { indiceDeRelacionadas, relacionadasPara, type IndiceRelacionadas } from "@/lib/busqueda/relacionadas";
 import { useBusquedaViva } from "@/lib/busqueda/use-busqueda";
 import { useImagenesVivas } from "@/lib/busqueda/use-imagen-viva";
+import { useRelacionadas, type RelacionadasVivas } from "@/lib/busqueda/use-relacionadas";
 import { useCapitulos } from "@/lib/busqueda/use-capitulos";
 import { plegar } from "@/lib/dominio/formato";
 import { ruta } from "@/lib/dominio/secciones";
 import { BuscadorAhora } from "./buscador-ahora";
 import { PestanasRubro } from "./pestanas-rubro";
-import { useNotas } from "@/lib/datos/hooks";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 import { teclasDelRecorrido, useRecorrido } from "@/lib/pantalla/recorrido";
 import { OpcionesAhora } from "./controles-ahora";
@@ -116,19 +113,6 @@ export function FeedAhora({ zona, edicion, consulta, rubro, menu, analisis }: {
   );
 }
 
-/** Las miniaturas, el enlace del propio medio y las notas relacionadas, que
- *  salen los tres del mismo archivo ya descargado. Los usan los dos recorridos. */
-function useCorpus() {
-  // El recorrido no espera a notas.json: las figuras aparecen cuando llega, y
-  // una tarjeta ya mide la pantalla con o sin ellas.
-  const notas = useNotas();
-  const imagenes = useMemo(() => indiceDeImagenes(notas.data?.notas ?? []), [notas.data]);
-  const enlaces = useMemo(() => indiceDeEnlaces(notas.data?.notas ?? []), [notas.data]);
-  // Un tercer indice sobre el MISMO array: ni una peticion mas.
-  const relacionadas = useMemo(() => indiceDeRelacionadas(notas.data?.notas ?? []), [notas.data]);
-  return { imagenes, enlaces, relacionadas, listo: notas.data !== undefined };
-}
-
 /**
  * La hoja de notas relacionadas: UNA para todo el recorrido.
  *
@@ -137,6 +121,10 @@ function useCorpus() {
  * cerrar y volver a pulsar la MISMA tarjeta escribiria el mismo valor dos
  * veces -- React no re-renderiza, el efecto no corre y la hoja no vuelve a
  * abrir para esa tarjeta. El turno siempre cambia.
+ *
+ * La lista se pide AL ABRIR (use-relacionadas.ts). Antes salia de un indice
+ * que el recorrido armaba con las 6,020 notas que la portada descargaba; de
+ * las ~135 tarjetas que encadena, casi ninguna llega a abrir su hoja.
  */
 function useHojaRelacionadas() {
   const hoja = useRef<HTMLDialogElement>(null);
@@ -149,15 +137,15 @@ function useHojaRelacionadas() {
     setAbierta(t);
     setTurno((n) => n + 1);
   };
-  return { hoja, abierta, setAbierta, abrir };
+  const vivas = useRelacionadas(abierta === null ? null : abierta.r.titulo);
+  return { hoja, abierta, setAbierta, abrir, vivas };
 }
 
-function HojaRelacionadas({ hoja, abierta, setAbierta, indice, listo }: {
+function HojaRelacionadas({ hoja, abierta, setAbierta, vivas }: {
   hoja: RefObject<HTMLDialogElement | null>;
   abierta: Titular | null;
   setAbierta: (t: Titular | null) => void;
-  indice: IndiceRelacionadas;
-  listo: boolean;
+  vivas: RelacionadasVivas;
 }) {
   return (
     <dialog ref={hoja} className="dialogo-lector" aria-labelledby="titulo-relacionadas"
@@ -169,8 +157,8 @@ function HojaRelacionadas({ hoja, abierta, setAbierta, indice, listo }: {
       </div>
       {/* `key` por tarjeta: la lista no hereda la de la anterior. */}
       {abierta === null ? null : (
-        <ListaRelacionadas key={abierta.clave} listo={listo}
-          notas={relacionadasPara(abierta.r.titulo, indice)} />
+        <ListaRelacionadas key={abierta.clave} notas={vivas.notas}
+          cargando={vivas.cargando} fallo={vivas.fallo} />
       )}
     </dialog>
   );
@@ -182,10 +170,6 @@ function RecorridoAhora({ entrada, rubro, zona, onRecargar, menu, analisis }: {
 }) {
   const [activados, setActivados] = useState(1);
   const { capitulos, hilado, disponible, hayNuevos } = useCapitulos(entrada, rubro, activados);
-  // Las miniaturas vienen del corpus, no de la fila en vivo. El recorrido no
-  // espera a notas.json: las figuras aparecen cuando llega, y una tarjeta ya
-  // mide la pantalla con o sin ellas.
-  const { imagenes, enlaces, relacionadas, listo } = useCorpus();
   const rel = useHojaRelacionadas();
   const contenedor = useRef<HTMLDivElement>(null);
   const { actual, ir } = useRecorrido(contenedor);
@@ -197,9 +181,9 @@ function RecorridoAhora({ entrada, rubro, zona, onRecargar, menu, analisis }: {
   }, [hilado, actual, capitulos.length]);
 
   const { tarjetas, completo } = hilado;
-  // Lo que el corpus no tiene se pide a la pagina del propio medio, solo para
+  // Lo que el archivo no tiene se pide a la pagina del propio medio, solo para
   // la tarjeta asentada y la siguiente.
-  const vivas = useImagenesVivas(tarjetas, actual, imagenes, enlaces);
+  const vivas = useImagenesVivas(tarjetas, actual);
   const total = tarjetas.length + (completo ? 1 : 0);
   return (
     // Sin `volver`: esto ES la portada, no hay pagina detras.
@@ -220,7 +204,7 @@ function RecorridoAhora({ entrada, rubro, zona, onRecargar, menu, analisis }: {
         onKeyDown={(evento) => teclasDelRecorrido(evento, actual, total, ir)}>
         {!disponible ? <p className="tarjeta-ahora flex items-center text-lectura text-tinta-prosa">Los titulares en vivo no están disponibles en esta vista.</p> : <>
         {tarjetas.map((t, i) => {
-          if (t.tipo === "titular") return <TarjetaTitular key={t.clave} t={t} titulares={hilado.titulares} indice={i} imagen={imagenPara(t.r, imagenes) ?? vivas.get(t.clave) ?? null} analisis={analisis} referencia={enlaceParaAnalisis(t.r, enlaces)} onRelacionadas={() => rel.abrir(t)} />;
+          if (t.tipo === "titular") return <TarjetaTitular key={t.clave} t={t} titulares={hilado.titulares} indice={i} imagen={t.r.imagen ?? vivas.get(t.clave) ?? null} analisis={analisis} referencia={t.r.referencia} onRelacionadas={() => rel.abrir(t)} />;
           if (t.tipo === "divisor") return <TarjetaDivisor key={`divisor:${t.capitulo}`} t={t} indice={i} />;
           return <TarjetaHueco key={`hueco:${t.capitulo}`} t={t} indice={i} />;
         })}
@@ -233,7 +217,7 @@ function RecorridoAhora({ entrada, rubro, zona, onRecargar, menu, analisis }: {
         </>}
       </div>
       <HojaRelacionadas hoja={rel.hoja} abierta={rel.abierta} setAbierta={rel.setAbierta}
-        indice={relacionadas} listo={listo} />
+        vivas={rel.vivas} />
     </Lector>
   );
 }
@@ -252,7 +236,6 @@ function RecorridoBusqueda({ consulta, zona, menu, analisis }: {
   menu: ReactNode; analisis: boolean;
 }) {
   const viva = useBusquedaViva(consulta, zona);
-  const { imagenes, enlaces, relacionadas, listo } = useCorpus();
   const rel = useHojaRelacionadas();
   const contenedor = useRef<HTMLDivElement>(null);
   const { actual, ir } = useRecorrido(contenedor);
@@ -270,7 +253,7 @@ function RecorridoBusqueda({ consulta, zona, menu, analisis }: {
       })),
     [viva.resultados, consulta],
   );
-  const vivas = useImagenesVivas(tarjetas, actual, imagenes, enlaces);
+  const vivas = useImagenesVivas(tarjetas, actual);
   const total = tarjetas.length + 1;
 
   // Sin pestanas y con `rubro={null}`: una busqueda es una lista plana, no una
@@ -295,7 +278,7 @@ function RecorridoBusqueda({ consulta, zona, menu, analisis }: {
             {tarjetas.map((t, i) =>
               t.tipo === "titular" ? (
                 <TarjetaTitular key={t.clave} t={t} titulares={tarjetas.length} indice={i}
-                  imagen={imagenPara(t.r, imagenes) ?? vivas.get(t.clave) ?? null} analisis={analisis} referencia={enlaceParaAnalisis(t.r, enlaces)}
+                  imagen={t.r.imagen ?? vivas.get(t.clave) ?? null} analisis={analisis} referencia={t.r.referencia}
                   onRelacionadas={() => rel.abrir(t)} />
               ) : null,
             )}
@@ -305,7 +288,7 @@ function RecorridoBusqueda({ consulta, zona, menu, analisis }: {
         )}
       </div>
       <HojaRelacionadas hoja={rel.hoja} abierta={rel.abierta} setAbierta={rel.setAbierta}
-        indice={relacionadas} listo={listo} />
+        vivas={rel.vivas} />
     </Lector>
   );
 }

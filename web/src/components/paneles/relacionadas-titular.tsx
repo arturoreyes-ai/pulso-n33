@@ -3,17 +3,18 @@
 import { ClockCounterClockwise as Historial } from "@phosphor-icons/react";
 
 import { clasesChip } from "@/components/ui/clases";
-import type { Nota } from "@/lib/datos/tipos";
+import type { NotaRelacionada } from "@/lib/busqueda/tipos";
 import { fechaCorta } from "@/lib/dominio/formato";
 
 /**
  * «Notas relacionadas»: lo que el archivo ya publicó sobre lo mismo.
  *
  * EL CASO: una tarjeta del recorrido es titular, fuente y enlace, sin cuerpo
- * ni extracto, y no hay desde donde seguir un tema. El archivo que el navegador
- * ya descarga en la portada -- el mismo que da las miniaturas y el enlace del
- * medio -- tiene las semanas anteriores del corredor, y ahi esta la respuesta.
- * El emparejado vive en lib/busqueda/relacionadas.ts y es puro.
+ * ni extracto, y no hay desde donde seguir un tema. El archivo tiene las
+ * semanas anteriores del corredor, y ahi esta la respuesta. El emparejado vive
+ * en lib/busqueda/relacionadas.ts, es puro, y desde el 18 de septiembre de
+ * 2026 corre en el servidor: la hoja pide /api/relacionadas al abrirse en vez
+ * de que la portada descargue el archivo entero por si acaso.
  *
  * EL BOTON Y EL CUERPO VAN SEPARADOS, como en analisis-publicacion.tsx y por
  * la misma razon: el recorrido monta una sola hoja para todas las tarjetas.
@@ -41,6 +42,16 @@ const SIN_COINCIDENCIAS =
 
 const ESPERANDO = "Buscando notas anteriores…";
 
+/**
+ * El tercer estado, y la razon de que exista.
+ *
+ * SIN_COINCIDENCIAS afirma algo: que se miro y no habia. Cuando lo que pasa es
+ * que no se pudo mirar, esa frase inventa un hueco de cobertura — la regla 4
+ * de PRODUCT.md al reves, que prohibe rellenar un hueco pero tambien fabricarlo.
+ * Dice QUE falta y no por que: nada de rutas, archivos ni despliegues.
+ */
+const SIN_ARCHIVO = "Las notas anteriores no están disponibles en esta vista.";
+
 /** El chip de la fila de acciones. Solo abre la hoja; no calcula nada. */
 export function BotonRelacionadas({ onAbrir }: { onAbrir: () => void }) {
   return (
@@ -53,15 +64,22 @@ export function BotonRelacionadas({ onAbrir }: { onAbrir: () => void }) {
 
 /**
  * El cuerpo de la hoja. Solo se monta cuando ya se abrió, así que no necesita
- * estado propio: recibe la lista ya calculada.
+ * estado propio: recibe la lista ya pedida.
  *
- * `listo` en false es el archivo que todavía no llega — se pide con prioridad
- * baja y el recorrido no lo espera, igual que las miniaturas.
+ * Tres estados, y el orden en que se preguntan importa: primero si falló
+ * —porque entonces la lista vacía no significa nada—, luego si sigue en
+ * camino, y sólo al final «no hay».
  */
-export function ListaRelacionadas({ notas, listo }: { notas: readonly Nota[]; listo: boolean }) {
+export function ListaRelacionadas({ notas, cargando, fallo }: {
+  notas: readonly NotaRelacionada[];
+  cargando: boolean;
+  fallo: boolean;
+}) {
   return (
     <div className="grid gap-4 px-4 pt-6 pb-8 text-lectura text-tinta-prosa">
-      {!listo ? (
+      {fallo ? (
+        <p role="status" className="max-w-[65ch] text-tinta-meta">{SIN_ARCHIVO}</p>
+      ) : cargando ? (
         <p role="status" className="max-w-[65ch] text-tinta-meta">{ESPERANDO}</p>
       ) : notas.length === 0 ? (
         <p role="status" className="max-w-[65ch] text-tinta-meta">{SIN_COINCIDENCIAS}</p>

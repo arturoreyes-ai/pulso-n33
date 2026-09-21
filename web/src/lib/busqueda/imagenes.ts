@@ -1,12 +1,15 @@
 /**
  * Miniaturas para las filas en vivo, por titular plegado. Puro.
  *
- * Una fila en vivo (ResultadoExterno) nunca trae imagen: el RSS de Google no
- * la publica y su redirector no se sigue. Lo que si puede haber es la MISMA
- * nota en el corpus, llegada por el feed del propio medio con su miniatura.
- * El cruce es por titular plegado, la misma llave que usa `enlaces.ts` y por
- * la misma razon: las URLs no empatan nunca (redirector contra enlace del
- * medio).
+ * Una fila en vivo no trae imagen de origen: el RSS de Google no la publica y
+ * su redirector no se sigue. Lo que si puede haber es la MISMA nota en el
+ * archivo, llegada por el feed del propio medio con su miniatura. El cruce es
+ * por titular plegado, la misma llave que usa `enlaces.ts` y por la misma
+ * razon: las URLs no empatan nunca (redirector contra enlace del medio).
+ *
+ * Lo llama el SERVIDOR (lib/busqueda/archivo.ts) y el resultado viaja en el
+ * campo `imagen` de la fila. Hasta el 18 de septiembre de 2026 lo llamaba el
+ * navegador, que para eso descargaba las 6,020 notas enteras.
  *
  * Gana la primera nota del archivo con ese titular e imagen, en su orden: el
  * indice es determinista para el mismo notas.json. Sin empate no hay imagen,

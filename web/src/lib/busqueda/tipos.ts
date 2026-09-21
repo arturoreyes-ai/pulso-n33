@@ -8,6 +8,13 @@
  * y esas dos cifras no se pueden sumar: la de arriba son notas cosechadas y
  * clasificadas por zona, tono y figura; esta son enlaces sin clasificar que
  * se pidieron hace un segundo. Un solo numero no significaria ninguna.
+ *
+ * `imagen` y `referencia` NO rompen eso, y conviene decir por que: las dos las
+ * resuelve el servidor cruzando el titular contra el archivo publicado
+ * (lib/busqueda/archivo.ts), y ninguna es una clasificacion del pipeline. Una
+ * es la miniatura que el propio medio publica; la otra, el enlace de ese medio
+ * cuando el archivo ya lo conocia. Siguen sin traer id, zona, tono ni figura,
+ * asi que la fila sigue sin poder sumarse con nada.
  */
 
 // Ciclos solo de tipos con ambito.ts y rubros.ts: se borran al compilar.
@@ -36,7 +43,59 @@ export interface ResultadoExterno {
    * broken for months and nothing flagged it".
    */
   idioma: Idioma;
+  /**
+   * Miniatura del archivo publicado, o null. Null es «el archivo no la tiene»
+   * y no un hueco que rellenar: la tarjeta se queda con su placa y, si acaso,
+   * la pide a la pagina del propio medio (use-imagen-viva.ts).
+   */
+  imagen: string | null;
+  /** A donde manda Analizar. Null cuando el dominio que anuncia la fila no se
+   *  puede normalizar; si el archivo no conocia la nota, lleva el token opaco,
+   *  que es lo que resolver-enlace.ts sabe abrir despues de confirmar. */
+  referencia: ReferenciaAnalisis | null;
 }
+
+/**
+ * Lo que recibe Analizar: el enlace del medio que ya conoce el archivo o, si
+ * la nota acaba de aparecer, el token opaco. Vive aqui y no en enlaces.ts
+ * porque ahora viaja por el cable; enlaces.ts lo reexporta.
+ */
+export interface ReferenciaAnalisis {
+  url: string;
+  dominio: string;
+}
+
+/**
+ * Una nota del archivo, recortada a lo que la hoja de relacionadas pinta.
+ *
+ * NO es un `Nota` recortado por comodidad: es la regla 5 de PRODUCT.md hecha
+ * tipo. Antes la hoja recibia el `Nota` entero y se limitaba a no pintar
+ * `postura`; ahora el tono no esta en el alcance del panel y no se puede
+ * pintar por descuido. Tampoco viajan `figuras`, `zonas` ni `alcance`.
+ */
+export interface NotaRelacionada {
+  id: string;
+  titulo: string;
+  url: string;
+  dominio: string;
+  fecha: string | null;
+}
+
+/** Lo que devuelve /api/relacionadas: como mucho seis, sin totales. */
+export interface RespuestaRelacionadas {
+  relacionadas: NotaRelacionada[];
+}
+
+/** `datos` es «no se pudo mirar el archivo», que la hoja dice distinto de «no
+ *  hay coincidencias». Mismo vocabulario que analizar-publicacion. */
+export interface ErrorRelacionadas {
+  codigo: "titulo" | "datos";
+  mensaje: string;
+}
+
+/** Cuantas notas relacionadas se ofrecen. Muy por debajo del piso de 30, asi
+ *  que el panel no saca porcentajes de aqui (regla 2). */
+export const TOPE_RELACIONADAS = 6;
 
 /** Salud por locale. Reusa el vocabulario de `Fuente` a proposito. */
 export interface SaludFeed {

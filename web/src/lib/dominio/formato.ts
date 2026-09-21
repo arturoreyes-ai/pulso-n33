@@ -89,6 +89,21 @@ export function fechaCorta(fecha: string): string {
   return Number.isNaN(d.getTime()) ? "s/f" : DIA_MES.format(d);
 }
 
+/**
+ * "8 abr 2026" a partir de una fecha SIN hora. Con el ano, para listas que
+ * cruzan anos: la prensa de una consulta mide seis meses y sus titulares
+ * anteriores pueden ser de 2021, y «19 ago» al lado de «11 mar» se lee como
+ * el mismo ano. Sin Date ni zona horaria: son las tres partes del ISO.
+ */
+export function fechaConAnio(fecha: string): string {
+  const partes = fecha.slice(0, 10).split("-");
+  const [anio, mes, dia] = partes;
+  const indice = Number(mes) - 1;
+  const nombre = MESES_CORTOS[indice];
+  if (partes.length !== 3 || anio === undefined || dia === undefined || nombre === undefined || Number.isNaN(Number(dia))) return "s/f";
+  return `${Number(dia)} ${nombre.toLowerCase()} ${anio}`;
+}
+
 /** "9:36 pm", en hora de Tijuana. "s/f" si la fecha no se puede leer. */
 export function hora(iso: string): string {
   const d = new Date(iso);

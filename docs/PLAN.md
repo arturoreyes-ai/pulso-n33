@@ -18,6 +18,14 @@
 >
 > **Un tema sigue siendo una búsqueda, no una clasificación.** Cada uno es su lista de términos en español e inglés sobre los últimos dos días, no una etiqueta que alguien le puso a la nota: lo único que se afirma es «esto devolvió la búsqueda para estos términos». Nada de esto se guarda ni entra en las cifras de prensa.
 
+> **Implementación · 18 de septiembre de 2026 — La portada deja de descargar el archivo.** Supera, en el mecanismo y no en lo que se ve, a la nota del 17 de septiembre que está justo debajo: donde dice que «Relacionadas» sale «del archivo que el navegador **ya descargó** para las miniaturas» y que «no cuesta una petición», hoy no hay tal descarga y sí hay una petición. Lo demás de esa nota sigue igual —el 87%, el emparejado por palabras poco comunes, lo que no muestra— y nada cambia en pantalla.
+>
+> Lo que había: para resolver la miniatura, el enlace del propio medio y las notas relacionadas de las quince filas visibles, la portada se bajaba el archivo entero de titulares: 4.8 MB, 917 KB comprimidos, 6,020 notas. Era aproximadamente el 95% de todo lo que el tablero descarga, y se pagaba en cada visita aunque nadie abriera una sola hoja de relacionadas.
+>
+> Lo que hay: los tres cruces se resuelven en el servidor, que ya tenía esos titulares al lado. La miniatura y el enlace llegan con cada fila; las notas relacionadas se piden al abrir la hoja. Medido en la portada: **ninguna descarga del archivo**, unos 6 KB por sección y unos 2.6 KB por cada hoja que de verdad se abre. Las tres funciones que hacen el emparejado no cambiaron; cambió quién las llama.
+>
+> Una consecuencia que se decidió a propósito: cuando el archivo no se puede consultar, la hoja lo dice con una frase propia en vez de decir «no encontramos notas anteriores». La segunda afirmaría un hueco de cobertura que nadie midió, y eso es la regla 4 al revés.
+
 > **Implementación · 17 de septiembre de 2026 — Notas relacionadas, y una carpeta menos.** Dos cambios sin relación entre sí, salvo que los dos salen del mismo archivo de titulares.
 >
 > **La tarjeta gana «Relacionadas».** Un titular en vivo es titular, fuente y enlace: no hay desde dónde seguir un tema. El botón abre lo que los medios del corredor ya publicaron sobre lo mismo en las semanas anteriores, tomado del archivo que el navegador **ya descargó** para las miniaturas. No cuesta una petición ni un centavo, no depende de ningún buscador y da resultado en el 87% de los titulares. Empareja por palabras poco comunes: «Tijuana» o «gobierno» no deciden nada, un apellido sí. Compara palabras y no sentido, así que acierta cuando dos notas cuentan el mismo hecho y a veces junta dos que solo comparten vocabulario; por eso se llama «notas relacionadas» y no «la cobertura de este tema». Sin coincidencias lo dice con una frase, no rellena. No muestra el tono de esas notas ni las suma con las cifras de prensa.

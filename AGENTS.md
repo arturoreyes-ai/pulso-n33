@@ -941,15 +941,35 @@ Tailwind v4, pnpm.
   computes all of it** — the git history *is* the archive, and `estado.json`
   carries the run time that makes every run commit — so `temas.json` and
   `estado.json` are written and read by nobody. Putting any of it back on
-  screen is interface work, not data work. `notas.json` still has one reader:
-  the recorrido, for thumbnails (`imagenes.ts`), the outlet link behind Analizar
-  (`enlaces.ts`) and, since 17 September 2026, **Notas relacionadas**
-  (`relacionadas.ts`) — which is why `pagina.tsx` preloads it on the portada
-  only.
+  screen is interface work, not data work.
 
-  **Notas relacionadas is a third index over that same array**, so it costs no
-  request and no money: a card's chip opens one hoisted sheet listing archived
-  notes that share rare words with the live headline. Scoring is by rarity
+  **`notas.json` has no browser reader at all since 18 September 2026, and that
+  is the point.** It had one — the recorrido, for thumbnails (`imagenes.ts`),
+  the outlet link behind Analizar (`enlaces.ts`) and Notas relacionadas
+  (`relacionadas.ts`) — and to serve it the portada preloaded the whole file:
+  **4.8 MB, 917 KB gzipped, 6,020 notes**, to answer three questions about
+  fifteen live rows. That was ~95% of everything the dashboard downloads and
+  93% of what the data history weighs. The three cross-references are keyed on
+  the live headline's folded title, and the server already had the disk beside
+  it, so they moved there (`lib/busqueda/archivo.ts`): `imagen` and
+  `referencia` now ride in each row of `/api/actualidad` and `/api/buscar`, and
+  the sheet asks `/api/relacionadas` when it opens. Measured on the portada:
+  **zero requests to `/data/`**, ~6 KB of enrichment per chapter and ~2.6 KB
+  per sheet actually opened. The three matching functions did not change a
+  line — they were already pure; only the caller did. Do not give `notas.json`
+  a hook again: `lib/datos/config.ts` says so where the route still is.
+
+  Two things that follow, both load-bearing. The three routes need
+  `./public/data/notas.json` in `outputFileTracingIncludes`, which fails only
+  in production and silently. And `/api/relacionadas` answers **503 `datos`**
+  when the corpus is unreadable rather than an empty list, because the sheet
+  reads empty as «no encontramos notas anteriores; la cobertura no es pareja en
+  el corredor» — asserting a gap nobody measured, which is rule 4 inverted.
+  `NotaRelacionada` also makes rule 5 a compiler matter: `postura` no longer
+  reaches that panel instead of merely not being painted.
+
+  **Notas relacionadas** is a card's chip opening one hoisted sheet that lists
+  archived notes sharing rare words with the live headline. Scoring is by rarity
   (`log(total/df)`), and there is deliberately **no stopword list** — porting
   `temas.py`'s hand-tuned `VACIAS`/`DEMASIADO_COMUNES`/`LUGARES_PALABRAS` would
   mean maintaining a second copy of a list nobody re-tunes, and rarity does that

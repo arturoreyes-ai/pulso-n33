@@ -51,6 +51,7 @@
  */
 
 import { componerConsulta, esAmbitoActualidad, type Ambito, type AmbitoActualidad } from "./ambito";
+import { archivoPublicado, atarTodas, type LeerArchivo } from "./archivo";
 import { fusionarLocales } from "./fusionar";
 import { soloDeLaRegion } from "./region";
 import {
@@ -267,6 +268,7 @@ export async function responderActualidad(
   consulta: ConsultaActualidad,
   solicitar: typeof fetch = fetch,
   ahora: string = new Date().toISOString(),
+  leerArchivo: LeerArchivo = archivoPublicado,
 ): Promise<Response> {
   const r = resolverActualidad(consulta);
   if ("error" in r) return json(r.error, 400, SIN_CACHE);
@@ -280,12 +282,18 @@ export async function responderActualidad(
   // existen precisamente para traer lo de fuera: filtrarlos los vaciaria.
   const fusionados =
     r.seccion === "zona" || r.seccion === "region" ? soloDeLaRegion(crudos) : crudos;
+
+  // El cruce contra el archivo va DESPUES del corte: solo se resuelve lo que
+  // de verdad sale. Un archivo ilegible deja las filas como estan —`imagen` y
+  // `referencia` en null—, que es el mismo estado que una fila sin empate y no
+  // uno nuevo que la tarjeta tenga que saber distinguir.
+  const indices = await leerArchivo();
   const cuerpo: RespuestaActualidad = {
     seccion: r.seccion,
     zona: r.zona === null ? null : SLUG_DE_ZONA[r.zona],
     rubro: r.rubro,
     consultado: ahora,
-    resultados: fusionados.slice(0, TOPE_ACTUALIDAD),
+    resultados: atarTodas(fusionados.slice(0, TOPE_ACTUALIDAD), indices),
     fuentes: cosechas.map((c) => c.salud),
     truncada: fusionados.length > TOPE_ACTUALIDAD,
   };

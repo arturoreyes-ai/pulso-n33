@@ -4,7 +4,11 @@ import { useMemo } from "react";
 
 import { CAPITULOS_MAXIMO, capitulosDe, hilar, type Capitulos, type Entrada, type EstadoCapitulo, type Hilado } from "./capitulos";
 import type { Rubro } from "./rubros";
+import { enlaceParaAnalisis } from "./enlaces";
 import type { Idioma, ResultadoExterno } from "./tipos";
+
+/** El capitulo municipal no necesita indice: su enlace ya es el del emisor. */
+const SIN_ENLACES: ReadonlyMap<string, string> = new Map();
 import { useActualidad, type ActualidadViva } from "./use-actualidad";
 import { useComunicados } from "@/lib/datos/hooks";
 import type { DocComunicados } from "@/lib/datos/tipos";
@@ -73,14 +77,26 @@ function asentado(viva: ActualidadViva): Congelado | null {
 function asentadoComunicados(doc: DocComunicados | undefined, cargando: boolean, fallo: boolean): Congelado | null {
   if (cargando) return null;
   if (doc === undefined) return fallo ? { estado: "fallo" } : null;
-  const resultados: ResultadoExterno[] = doc.comunicados.slice(0, TOPE_COMUNICADOS).map((c) => ({
-    titulo: c.titulo,
-    url: c.url,
-    dominio: "tecate.gob.mx",
-    medio: doc.fuente.nombre,
-    publicado: c.fecha,
-    idioma: "es",
-  }));
+  const resultados: ResultadoExterno[] = doc.comunicados.slice(0, TOPE_COMUNICADOS).map((c) => {
+    const fila: ResultadoExterno = {
+      titulo: c.titulo,
+      url: c.url,
+      dominio: "tecate.gob.mx",
+      medio: doc.fuente.nombre,
+      publicado: c.fecha,
+      idioma: "es",
+      // El documento municipal no publica miniatura. Null es lo que hay, no un
+      // hueco que rellenar.
+      imagen: null,
+      referencia: null,
+    };
+    // Este capitulo NO pasa por /api/actualidad, asi que el servidor nunca lo
+    // ata al archivo: la referencia se arma aqui. Con el indice vacio porque
+    // no hace falta ninguno —el enlace del Ayuntamiento es suyo y directo, no
+    // un token opaco que haya que cambiar por otro—, y con la funcion de
+    // siempre para no reescribir la comprobacion de dominio.
+    return { ...fila, referencia: enlaceParaAnalisis(fila, SIN_ENLACES) };
+  });
   return { estado: "listo", resultados, caidos: [], truncada: false };
 }
 

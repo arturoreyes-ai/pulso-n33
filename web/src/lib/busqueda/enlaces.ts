@@ -20,7 +20,11 @@
 import type { Nota } from "@/lib/datos/tipos";
 import { dominioDeUrl, normalizarDominio } from "@/lib/analisis/dominio";
 import { plegar } from "@/lib/dominio/formato";
-import type { ResultadoExterno } from "./tipos";
+import type { ReferenciaAnalisis, ResultadoExterno } from "./tipos";
+
+// Vive en tipos.ts desde que viaja por el cable; se reexporta porque las
+// tarjetas y analisis-titular.tsx lo importan de aqui.
+export type { ReferenciaAnalisis };
 
 /** El anfitrion del buscador. Un enlace suyo no lleva a la nota. */
 const OPACO = "news.google.com";
@@ -49,16 +53,14 @@ export function indiceDeEnlaces(notas: readonly Nota[]): ReadonlyMap<string, str
   return indice;
 }
 
-export interface ReferenciaAnalisis {
-  url: string;
-  dominio: string;
-}
-
 /**
  * Lo que recibe Analizar: primero el enlace del medio que ya conoce el
  * archivo y, si la nota acaba de aparecer, el token opaco para resolverlo
  * solo despues de la confirmacion. El token nunca se abre como si fuera la
  * nota; esa distincion vive en lib/analisis/resolver-enlace.ts.
+ *
+ * La llama el SERVIDOR (lib/busqueda/archivo.ts) y el resultado viaja en la
+ * fila. Antes la llamaba el navegador con el corpus entero en la mano.
  */
 export function enlaceParaAnalisis(
   r: ResultadoExterno,

@@ -14,6 +14,14 @@ export const SIN_CACHE = "private, no-store";
  */
 export const CACHE_CDN = "public, max-age=0, s-maxage=300, stale-while-revalidate=600";
 
+/**
+ * Para lo que sale del archivo publicado y no de un feed: una hora fresca y un
+ * dia de gracia, las mismas que `/data/:archivo*` en next.config.ts. Es el
+ * mismo dato leido del mismo disco, solo que por una funcion, asi que
+ * envejece al ritmo del despliegue y no al de la actualidad.
+ */
+export const CACHE_ARCHIVO = "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400";
+
 export function json(cuerpo: unknown, status: number, cache: string): Response {
   return Response.json(cuerpo, {
     status,

@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { enlaceParaAnalisis } from "./enlaces";
-import { imagenPara } from "./imagenes";
 import { leerApi, useHayServidor } from "./disponible";
 import type { Tarjeta } from "./capitulos";
 
@@ -17,9 +15,11 @@ import type { Tarjeta } from "./capitulos";
  * lib/pantalla/recorrido.ts —que se emite al asentar y no en cada cuadro del
  * gesto—, asi que desplazarse rapido de una punta a otra no dispara nada.
  *
- * EL CORPUS GANA. Si imagenes.ts ya trae la miniatura del feed del propio
- * medio, no se pide nada: esa ya esta, es gratis y no depende de que la pagina
- * del medio conteste.
+ * EL ARCHIVO GANA. Si la fila ya trae `imagen` —el servidor la cruzo contra el
+ * archivo en lib/busqueda/archivo.ts—, no se pide nada: esa ya esta, es gratis
+ * y no depende de que la pagina del medio conteste. Hasta el 18 de septiembre
+ * de 2026 ese cruce se hacia aqui, contra dos Map que el recorrido armaba con
+ * las 6,020 notas descargadas; ahora llega resuelto en la fila.
  *
  * UNA SOLA VEZ POR TARJETA. `pedidas` recuerda las llaves intentadas, con
  * exito o sin el. Un fallo NO se reintenta: la tarjeta se queda con su placa,
@@ -45,8 +45,6 @@ const esTitular = (t: Tarjeta | undefined): t is Titular =>
 export function useImagenesVivas(
   tarjetas: readonly Tarjeta[],
   actual: number,
-  corpus: ReadonlyMap<string, string>,
-  enlaces: ReadonlyMap<string, string>,
 ): ReadonlyMap<string, string> {
   const hayServidor = useHayServidor();
   const [vivas, setVivas] = useState<ReadonlyMap<string, string>>(VACIO);
@@ -68,8 +66,8 @@ export function useImagenesVivas(
       const t = tarjetas[i];
       if (!esTitular(t)) continue;
       if (pedidas.current.has(t.clave)) continue;
-      if (imagenPara(t.r, corpus) !== null) continue;
-      const ref = enlaceParaAnalisis(t.r, enlaces);
+      if (t.r.imagen !== null) continue;
+      const ref = t.r.referencia;
       if (ref === null) continue;
       pedidas.current.add(t.clave);
       const clave = t.clave;
@@ -88,7 +86,7 @@ export function useImagenesVivas(
         // Un medio que no contesta no es un error del lector. La placa queda.
         .catch(() => undefined);
     }
-  }, [hayServidor, tarjetas, actual, corpus, enlaces]);
+  }, [hayServidor, tarjetas, actual]);
 
   return vivas;
 }

@@ -161,6 +161,10 @@ export function parsearFeed(
       medio: medio === "" ? dominio : medio,
       publicado: fechaIso(texto(FECHA.exec(cuerpo)?.[1])),
       idioma,
+      // El feed no trae ninguna de las dos. Las resuelve el servidor cruzando
+      // el titular contra el archivo, ya cortada la lista (archivo.ts).
+      imagen: null,
+      referencia: null,
     });
   }
   return salida;

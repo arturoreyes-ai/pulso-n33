@@ -9,6 +9,9 @@
  * manda CORS, y la llave del cache del CDN es la URL, asi que una racha de
  * gente buscando lo mismo despues de una noticia es UNA llamada rio arriba.
  *
+ * Delgada a proposito desde el 18 de septiembre de 2026: la logica vive en
+ * lib/busqueda/buscar.ts, que scripts/probar-busqueda.cjs prueba sin red.
+ *
  * NO se exporta `dynamic` ni `revalidate`. Desde Next 15 un GET ya es dinamico
  * por omision, leer `nextUrl` lo confirma, y las dos opciones son legado que
  * desaparece si algun dia se enciende Cache Components: escribirlas seria
@@ -17,18 +20,7 @@
 
 import type { NextRequest } from "next/server";
 
-import {
-  ambitoPorOmision,
-  componerConsulta,
-  esAmbito,
-  localesDe,
-} from "@/lib/busqueda/ambito";
-import { cosecharFeeds, urlDeFeed } from "@/lib/busqueda/google-noticias";
-import { fusionarLocales } from "@/lib/busqueda/fusionar";
-import { CACHE_CDN, SIN_CACHE, json } from "@/lib/busqueda/respuesta";
-import { TOPE_RESULTADOS, type RespuestaBusqueda } from "@/lib/busqueda/tipos";
-import { validarConsulta } from "@/lib/busqueda/validar";
-import { zonaDeSlug } from "@/lib/dominio/zonas";
+import { responderBusqueda } from "@/lib/busqueda/buscar";
 
 /**
  * Tope de la plataforma. El presupuesto interno son 6 s por feed y los dos van
@@ -39,42 +31,10 @@ export const maxDuration = 15;
 
 export async function GET(peticion: NextRequest): Promise<Response> {
   const params = peticion.nextUrl.searchParams;
-  const veredicto = validarConsulta(params.get("q"));
-  if (!veredicto.ok) return json(veredicto.error, 400, SIN_CACHE);
-
-  // El ambito se compone AQUI, despues de validar: asi los 120 caracteres que
-  // mide validar.ts son enteros para lo que escribio la persona, y no se los
-  // comen los ocho terminos de lugar de San Diego. Ambos parametros se
-  // relegen contra su lista; cualquier otra cosa cae al valor por omision en
-  // vez de viajar a la consulta.
-  const zona = zonaDeSlug(params.get("z") ?? "");
-  const crudo = params.get("a");
-  const ambito = esAmbito(crudo) ? crudo : ambitoPorOmision(zona);
-  const q = componerConsulta(veredicto.q, ambito, zona);
-  const locales = localesDe(ambito);
-
-  // Los dos locales en paralelo; que se caiga uno no tumba el otro (ver
-  // cosecharFeeds).
-  const cosechas = await cosecharFeeds(
-    locales.map((idioma) => ({ url: urlDeFeed(q, idioma), idioma })),
-    TOPE_RESULTADOS,
-  );
-
-  const fusionados = fusionarLocales(cosechas.map((c) => c.resultados));
-  const cuerpo: RespuestaBusqueda = {
-    // Lo que escribio la persona, no la consulta compuesta: los terminos de
-    // lugar son plomeria y no tienen por que volver al cliente.
-    consulta: veredicto.q,
-    resultados: fusionados.slice(0, TOPE_RESULTADOS),
-    fuentes: cosechas.map((c) => c.salud),
-    truncada: fusionados.length > TOPE_RESULTADOS,
-  };
-
-  // Nunca un 502: un problema rio arriba viaja como 200 con la salud dentro,
-  // para que la pagina pueda DECIR que paso en vez de mostrarse rota.
-  //
-  // Y nunca se cachea un resultado parcial: una falla pasajera de Google
-  // clavada cinco minutos en el CDN es peor que la falla.
-  const todoBien = cosechas.every((c) => c.salud.estado === "ok");
-  return json(cuerpo, 200, todoBien && params.get("actualizar") !== "1" ? CACHE_CDN : SIN_CACHE);
+  return responderBusqueda({
+    q: params.get("q"),
+    z: params.get("z"),
+    a: params.get("a"),
+    actualizar: params.get("actualizar") === "1",
+  });
 }

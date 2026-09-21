@@ -12,6 +12,10 @@ export const RUTAS = {
   comunicados: `${BASE}/comunicados.json`,
   estado: `${BASE}/estado.json`,
   fuentes: `${BASE}/fuentes.json`,
+  // Sigue publicandose y sigue siendo la salida del pipeline, pero el
+  // NAVEGADOR ya no lo pide: son 917 KB comprimidos y lo que hacia falta de el
+  // se resuelve en el servidor (lib/busqueda/archivo.ts), que lo lee del disco
+  // por nombre y no por esta tabla. Volver a colgarle un hook es deshacer eso.
   notas: `${BASE}/notas.json`,
   temas: `${BASE}/temas.json`,
   indicadores: `${BASE}/indicadores.json`,
@@ -32,12 +36,15 @@ export const RUTAS = {
   // X: el ranking de tendencias por ubicacion, sin tuits ni identidad. Lo
   // escribe `pulso tendencias`; un solo archivo, sin par de texto.
   tendencias: `${BASE}/tendencias.json`,
+  // Consultas: que se dice de un termino en 30 dias. Lo escribe `pulso
+  // consultas` a mano, fuera del cron, asi que puede no existir; la busqueda
+  // de Redes lo dice en vez de fallar. Su texto va fuera de git como los
+  // otros dos archivos de comentarios.
+  consultas: `${BASE}/consultas.json`,
+  consultasComentarios: `${BASE}/consultas-comentarios.json`,
   gastoElectoral: `${BASE}/gasto-electoral.json`,
   financiamientoPartidos: `${BASE}/financiamiento-partidos.json`,
 } as const;
-
-/** Un mes del archivo, que solo se pide cuando alguien lo pide. */
-export const rutaMes = (mes: string) => `${BASE}/archivo/notas-${mes}.json`;
 
 // Aqui vivia MISMO_ORIGEN, que decidia si el preload llevaba crossorigin.
 // Se fue porque la respuesta no depende del origen: el preload lo lleva

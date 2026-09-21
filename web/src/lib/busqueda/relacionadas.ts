@@ -1,15 +1,23 @@
 import type { Nota } from "@/lib/datos/tipos";
 import { plegar } from "@/lib/dominio/formato";
+import type { NotaRelacionada } from "./tipos";
 
 /**
  * Notas del archivo que hablan de lo mismo que un titular en vivo. Puro.
  *
  * EL CASO: una tarjeta de En Tendencia es titular, fuente y enlace, sin cuerpo
- * ni extracto, y no hay desde donde seguir un tema. El archivo que el navegador
- * YA descarga en la portada -- para las miniaturas y el enlace del medio -- son
- * miles de titulares de las ultimas semanas, y ahi esta la respuesta a «esto ya
- * se habia contado». No cuesta una peticion ni un centavo: es el mismo array
- * que useCorpus() memoiza en feed-ahora.tsx.
+ * ni extracto, y no hay desde donde seguir un tema. El archivo son miles de
+ * titulares de las ultimas semanas, y ahi esta la respuesta a «esto ya se
+ * habia contado».
+ *
+ * DONDE CORRE, que cambio el 18 de septiembre de 2026: esto lo ejecuta el
+ * SERVIDOR, contra el mismo disco del que salen las miniaturas, y /api/
+ * relacionadas devuelve como mucho seis filas recortadas. Antes lo ejecutaba
+ * el navegador sobre el corpus entero, que para eso se descargaba en la
+ * portada: 917 KB comprimidos por lector para un indice que el 87% de las
+ * veces devuelve seis titulares. Sigue sin costar un centavo —no hay modelo ni
+ * proveedor—, pero ya no es gratis en bytes y por eso se pide al pulsar el
+ * chip y no antes.
  *
  * POR QUE SE PUNTUA POR RAREZA Y NO HAY LISTA DE PALABRAS VACIAS. En
  * `pulso/temas.py` hay tres listas a mano (VACIAS, DEMASIADO_COMUNES,
@@ -147,4 +155,23 @@ export function relacionadasPara(
     || (b.nota.fecha ?? "").localeCompare(a.nota.fecha ?? "")
     || a.nota.id.localeCompare(b.nota.id));
   return candidatos.slice(0, tope).map((c) => c.nota);
+}
+
+/**
+ * Lo que de una nota sale por el cable. Cinco campos, que son los cinco que la
+ * hoja pinta.
+ *
+ * Es donde la regla 5 de PRODUCT.md deja de ser una convencion: `postura` no
+ * se omite al pintar, no llega. Y con ella se quedan fuera `figuras`, `zonas`
+ * y `alcance`, que juntas son lo que convertiria una sugerencia por parecido
+ * de palabras en una afirmacion sobre alguien.
+ */
+export function recortar(notas: readonly Nota[]): NotaRelacionada[] {
+  return notas.map((n) => ({
+    id: n.id,
+    titulo: n.titulo,
+    url: n.url,
+    dominio: n.dominio,
+    fecha: n.fecha,
+  }));
 }

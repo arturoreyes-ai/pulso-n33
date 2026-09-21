@@ -63,7 +63,7 @@ export { CONTROL };
 const babosa = (s: string): string =>
   s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
-export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opciones, acciones, busqueda, menu, pestanas, restaurarFoco, children }: {
+export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opciones, acciones, busqueda, rotuloBusqueda = "Buscar titulares", menu, pestanas, restaurarFoco, children }: {
   /** A donde lleva la flecha de volver. Sin esto no se pinta la flecha: la
    *  portada es un lector y no tiene pagina detras a la que volver. */
   volver?: string;
@@ -81,9 +81,12 @@ export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opc
    *  cualquier enlace o boton de dentro. */
   opciones: ReactNode;
   acciones?: ReactNode;
-  /** El cuerpo del dialogo de busqueda. Sin esto no se pinta la lupa: redes
-   *  no busca, solo la portada. */
+  /** El cuerpo del dialogo de busqueda. Sin esto no se pinta la lupa. La
+   *  portada busca titulares; Redes busca publicaciones y terminos en
+   *  seguimiento desde el 18 de septiembre de 2026. */
   busqueda?: ReactNode;
+  /** El nombre accesible de la lupa: que se busca aqui. */
+  rotuloBusqueda?: string;
   /** La navegacion del sitio, como HTML de servidor. */
   menu: ReactNode;
   /** La fila de pestanas bajo la barra, si la pagina tiene facetas. */
@@ -127,7 +130,7 @@ export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opc
           <span className="hidden flex-1 md:block" aria-hidden />
           {acciones}
           {busqueda === undefined ? null : (
-            <button type="button" className={CONTROL} aria-label="Buscar titulares" aria-haspopup="dialog" aria-controls={idBusqueda}
+            <button type="button" className={CONTROL} aria-label={rotuloBusqueda} aria-haspopup="dialog" aria-controls={idBusqueda}
               onClick={() => buscador.current?.showModal()}>
               <Lupa size={ICONO_ESTRECHO} aria-hidden />
             </button>

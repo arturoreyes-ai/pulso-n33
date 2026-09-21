@@ -37,6 +37,12 @@ function cargar(relativo) {
   return modulo.exports;
 }
 
+// El cruce contra el archivo lee public/data/notas.json del disco. Aqui NO:
+// se sustituye el lector por uno que dice "no hay", que deja las filas tal
+// como salieron del feed y mantiene validas las comprobaciones de siempre. Los
+// casos que si quieren archivo lo inyectan por el cuarto parametro.
+sustitutos.set('@/lib/datos/publicado', { leerDatoPublicado: async () => null });
+
 const { parsearFeed, quitarSufijoMedio } = cargar('lib/busqueda/rss');
 const { fusionarLocales } = cargar('lib/busqueda/fusionar');
 const { esDeFuera, soloDeLaRegion, esRedSocial } = cargar('lib/busqueda/region');
@@ -44,7 +50,10 @@ const { urlDeFeed, urlDeActualidad, urlDeLugar, esUrlDeGoogle } = cargar('lib/bu
 const { responderActualidad, consultaDeRubro } = cargar('lib/busqueda/actualidad');
 const { RUBROS, NOMBRE_RUBRO, TERMINOS_RUBRO, VENTANA_RUBRO } = cargar('lib/busqueda/rubros');
 const { AMBITOS, esAmbitoActualidad, usaCorpus } = cargar('lib/busqueda/ambito');
-const { TOPE_ACTUALIDAD } = cargar('lib/busqueda/tipos');
+const { TOPE_ACTUALIDAD, TOPE_RELACIONADAS } = cargar('lib/busqueda/tipos');
+const { construirIndices } = cargar('lib/busqueda/archivo');
+const { responderRelacionadas } = cargar('lib/busqueda/relacionadas-viva');
+const { responderBusqueda } = cargar('lib/busqueda/buscar');
 
 // El MISMO fixture que tests/test_busquedas.py lee en Python: seis items, uno
 // sin <source>, uno con ' - ' a la mitad del titular. Dos lectores, un XML.
@@ -81,6 +90,9 @@ async function comprobar() {
     medio: 'Zeta Tijuana',
     publicado: '2026-09-02T14:00:00.000Z',
     idioma: 'es',
+    // El feed no las trae; las resuelve el servidor contra el archivo.
+    imagen: null,
+    referencia: null,
   });
   // Diario de grupo: Google rotula con el dominio del grupo. El web no tiene
   // el mapa 'publicadores' de config/busquedas.json, asi que el sufijo NO
@@ -453,6 +465,111 @@ async function comprobar() {
     await useActualizar(llave).actualizar();
     assert.equal(useActualizar(llave).avisoActualizacion, 'No hay titulares nuevos.');
   } finally { global.fetch = pedirOriginal; sustitutos.clear(); }
+
+  // --- Cruce contra el archivo publicado ---------------------------------
+  //
+  // Lo que antes hacia el navegador con las 6,020 notas descargadas y ahora
+  // resuelve el servidor sobre las filas que de verdad salen.
+  const nota = (titulo, extra = {}) => ({
+    id: 'n:' + titulo, titulo,
+    url: 'https://zetatijuana.com/' + encodeURIComponent(titulo),
+    dominio: 'zetatijuana.com', fuente: 'zeta',
+    zona_medio: 'Tijuana', zonas: ['Tijuana'], alcance: 'zona',
+    fecha: '2026-09-10', publicado: null, capturado: '2026-09-10T00:00:00+00:00',
+    postura: 'negativa', figuras: ['Alguien'],
+    ...extra,
+  });
+  const APAGON = 'Reportan apagon en la zona centro';
+  const conArchivo = (notas) => async () => construirIndices(notas);
+  const soloEs = async (url) => new Response(/hl=en/.test(url) ? feed() : XML);
+
+  // 1. Empata por titular plegado Y dominio: llegan miniatura y enlace propio.
+  const atado = await responderActualidad({ a: 'mexico', z: null, t: null }, soloEs, AHORA,
+    conArchivo([nota(APAGON, { imagen: 'https://zetatijuana.com/foto.jpg' })]));
+  const filaAtada = (await atado.json()).resultados.find((r) => r.titulo === APAGON);
+  assert.equal(filaAtada.imagen, 'https://zetatijuana.com/foto.jpg');
+  assert.equal(filaAtada.referencia.dominio, 'zetatijuana.com');
+  assert.ok(!esUrlDeGoogle(filaAtada.referencia.url), 'con empate manda el enlace del medio');
+
+  // 2. El MISMO titular publicado por otro medio no presta su enlace. Es la
+  //    copia sindicada: leerla y atribuirla a Zeta seria una atribucion falsa.
+  const ajeno = await responderActualidad({ a: 'mexico', z: null, t: null }, soloEs, AHORA,
+    conArchivo([nota(APAGON, {
+      url: 'https://otromedio.example/' + encodeURIComponent(APAGON),
+      imagen: 'https://otromedio.example/foto.jpg',
+    })]));
+  const filaAjena = (await ajeno.json()).resultados.find((r) => r.titulo === APAGON);
+  assert.ok(esUrlDeGoogle(filaAjena.referencia.url), 'sin empate de dominio se conserva el token');
+  // La miniatura SI cruza solo por titular (imagenes.ts lo dice y lo razona):
+  // es la foto de la misma nota, no el cuerpo de otra.
+  assert.equal(filaAjena.imagen, 'https://otromedio.example/foto.jpg');
+
+  // 3. Sin archivo legible las filas salen como del feed. Mismo estado que una
+  //    fila sin empate, no uno nuevo: la tarjeta no tiene que distinguirlo.
+  const sinArchivo = await responderActualidad({ a: 'mexico', z: null, t: null }, soloEs, AHORA,
+    async () => null);
+  const filaSuelta = (await sinArchivo.json()).resultados.find((r) => r.titulo === APAGON);
+  assert.equal(filaSuelta.imagen, null);
+  assert.equal(filaSuelta.referencia, null);
+
+  // 4. /api/buscar ata igual que /api/actualidad: el mismo cruce, un solo sitio.
+  const buscada = await responderBusqueda({ q: 'apagon', z: null, a: null, actualizar: false },
+    soloEs, conArchivo([nota(APAGON, { imagen: 'https://zetatijuana.com/foto.jpg' })]));
+  const filaBuscada = (await buscada.json()).resultados.find((r) => r.titulo === APAGON);
+  assert.equal(filaBuscada.imagen, 'https://zetatijuana.com/foto.jpg');
+
+  // --- /api/relacionadas -------------------------------------------------
+  const CONSULTA = 'Detienen a Los Rusos en Mexicali por homicidio del joyero';
+  const ARCHIVO_REL = [
+    nota('Homicidio del joyero de Mexicali sigue sin detenidos'),
+    nota('El joyero de Mexicali y el homicidio que nadie esclarece'),
+    nota(CONSULTA), // la MISMA nota no es una nota relacionada
+    nota('Clima templado en la frontera durante el fin de semana'),
+    nota('Obras del bulevar avanzan segun el Ayuntamiento'),
+    nota('Partido de la jornada en el estadio municipal'),
+    nota('Turistas cruzan la garita sin demoras'),
+    nota('Feria del libro abre sus puertas'),
+    // Relleno: la rareza se mide contra el tamano del archivo, asi que con
+    // ocho notas «homicidio» no es raro y nada pasa el umbral. Con treinta y
+    // tres si, que es la escala a la que esto corre de verdad (6,020).
+    ...Array.from({ length: 25 }, (_, i) =>
+      nota(`Tramite municipal ordinario ${i} del expediente ${i}`)),
+  ];
+
+  const rel = await responderRelacionadas({ t: CONSULTA }, conArchivo(ARCHIVO_REL));
+  assert.equal(rel.status, 200);
+  const cuerpoRel = await rel.json();
+  assert.ok(cuerpoRel.relacionadas.length > 0, 'tres terminos raros compartidos alcanzan');
+  assert.ok(cuerpoRel.relacionadas.length <= TOPE_RELACIONADAS);
+  assert.ok(!cuerpoRel.relacionadas.some((n) => n.titulo === CONSULTA),
+    'la misma nota no es una nota relacionada');
+  // Regla 5 de PRODUCT.md hecha tipo: el tono NO viaja, ni las figuras, ni las
+  // zonas. Antes la hoja recibia el Nota entero y solo se abstenia de pintarlo.
+  for (const clave of ['postura', 'figuras', 'zonas', 'alcance', 'zona_medio']) {
+    assert.ok(!(clave in cuerpoRel.relacionadas[0]), `no viaja ${clave}`);
+  }
+  assert.deepEqual(Object.keys(cuerpoRel.relacionadas[0]).sort(),
+    ['dominio', 'fecha', 'id', 'titulo', 'url']);
+
+  // Sin coincidencias: lista vacia y 200. Es una respuesta, no un fallo.
+  const vacia = await responderRelacionadas({ t: 'Algo completamente distinto y ajeno' },
+    conArchivo(ARCHIVO_REL));
+  assert.equal(vacia.status, 200);
+  assert.deepEqual((await vacia.json()).relacionadas, []);
+
+  // SIN ARCHIVO NO SE CONTESTA VACIO. La hoja dice «no encontramos notas
+  // anteriores; la cobertura no es pareja en el corredor» ante una lista
+  // vacia, y eso afirmaria un hueco que nadie midio (regla 4 al reves).
+  const relSinDatos = await responderRelacionadas({ t: CONSULTA }, async () => null);
+  assert.equal(relSinDatos.status, 503);
+  assert.equal((await relSinDatos.json()).codigo, 'datos');
+
+  const relSinTitulo = await responderRelacionadas({ t: '  ' }, conArchivo(ARCHIVO_REL));
+  assert.equal(relSinTitulo.status, 400);
+  assert.equal((await relSinTitulo.json()).codigo, 'titulo');
+  // Un pegado accidental no se consulta.
+  const relLargo = await responderRelacionadas({ t: 'x'.repeat(301) }, conArchivo(ARCHIVO_REL));
+  assert.equal(relLargo.status, 400);
 
   console.log('Búsqueda: parseo, fusión, URLs, /api/actualidad, secciones locales y rubros verificados offline.');
 }
