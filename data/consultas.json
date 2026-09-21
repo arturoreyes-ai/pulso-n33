@@ -1,6 +1,6 @@
 {
  "esquema": 1,
- "generado": "2026-09-19T04:01:30+00:00",
+ "generado": "2026-09-21T17:14:49+00:00",
  "ventana_dias": 30,
  "ventana_prensa_dias": 180,
  "retencion_dias": 30,
@@ -35,7 +35,7 @@
        "tipo": "video",
        "likes": 4,
        "comentarios": 0,
-       "reproducciones": 272,
+       "reproducciones": 277,
        "cosechados": 0,
        "opinion": 0,
        "sentimiento": {
@@ -59,7 +59,7 @@
        "tipo": "video",
        "likes": 4,
        "comentarios": 0,
-       "reproducciones": 317,
+       "reproducciones": 320,
        "cosechados": 0,
        "opinion": 0,
        "sentimiento": {
@@ -83,7 +83,7 @@
        "tipo": "video",
        "likes": 4,
        "comentarios": 0,
-       "reproducciones": 169,
+       "reproducciones": 175,
        "cosechados": 0,
        "opinion": 0,
        "sentimiento": {
@@ -107,7 +107,7 @@
        "tipo": "video",
        "likes": 1,
        "comentarios": 1,
-       "reproducciones": 227,
+       "reproducciones": 249,
        "cosechados": 1,
        "opinion": 1,
        "sentimiento": {
@@ -131,7 +131,7 @@
        "tipo": "video",
        "likes": 1,
        "comentarios": 0,
-       "reproducciones": 138,
+       "reproducciones": 163,
        "cosechados": 0,
        "opinion": 0,
        "sentimiento": {
@@ -155,7 +155,7 @@
        "tipo": "video",
        "likes": 0,
        "comentarios": 0,
-       "reproducciones": 280,
+       "reproducciones": 284,
        "cosechados": 0,
        "opinion": 0,
        "sentimiento": {
@@ -175,10 +175,11 @@
        "fuente": "@grupoconcordia",
        "estado": "ok",
        "posts": 6,
-       "comentarios": 1,
-       "crudos": 6,
+       "comentarios": 0,
+       "crudos": 0,
        "descartados": 0,
-       "fuera": 0
+       "fuera": 0,
+       "nota": "sin publicaciones nuevas que cosechar"
       }
      ]
     },
@@ -199,15 +200,6 @@
     "estado": "ok",
     "ventana_dias": 180,
     "resultados": [
-     {
-      "titulo": "¡Tremenda cartelera! Conozca los artistas que animarán las dianas del Gran Poder",
-      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNeDlBZW1mbEVDQXg5OVhhNmt4aWhPbHN6RFZNMmJEMWtrSzYtenY0cEg4RVQzTnFpTUpfbUJ3Y3pTei1ZNDdVOGJCZ3hrV3QtZGl1TkI3dXl1anRIaEhNMTdSV3p5anhBLXBxMWZ0UUdxTEhNVDQ0ZThWUlUtZ1QxalpUaHJzY0RmVThjaDRLSVp5VE5CN1hLZ3RuTWVUVW0yRFZUQUYzVnpRNEZ6YTh3bk9UZmk3NnZpZXRBRXkzc3BvTVREZWc?oc=5",
-      "dominio": "reduno.com.bo",
-      "fuente": "Red Uno",
-      "fecha": "2026-07-31",
-      "origen": "noticias",
-      "tono": "favorable"
-     },
      {
       "titulo": "“Dinero seguro”, invertir en un terreno en Tijuana",
       "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxObV85dTIwQ1phT2FMWVowSVFYUUhfUnBtV21VNDJnMExhQVEwTy1MVFVoUk5EelJ5X2V1cG5LWURXSzYwYUZYYWlsM3ItblJ5UmtoUzdJSXpGbklyVElhUTdtTi1Xd0ZxbnpNdlNsUkIwOHhKOTJzemVGM2pLX3c2YmN1UG13UTA?oc=5",
@@ -247,6 +239,15 @@
       "tono": "adversa"
      },
      {
+      "titulo": "Adeuda grupo Concordia 208 mdp por derechos de conexión",
+      "url": "https://saidbetanzos.com/2021/10/27/adeuda-grupo-concordia-208-mdp-por-derechos-de-conexion/",
+      "dominio": "saidbetanzos.com",
+      "fuente": "Said Betanzos",
+      "fecha": "2021-10-28",
+      "origen": "medio",
+      "tono": "neutral"
+     },
+     {
       "titulo": "Grupo concordia adeudo de 101 mdp con CESPT.",
       "url": "https://www.rosaritonoticias.com/2021/08/19/grupo-concordia-adeudo-de-101-mdp-con-cespt/",
       "dominio": "rosaritonoticias.com",
@@ -254,15 +255,25 @@
       "fecha": "2021-08-19",
       "origen": "medio",
       "tono": "neutral"
+     },
+     {
+      "titulo": "Por millonaria deuda en agua, clausuran oficinas de Grupo Concordia",
+      "url": "https://saidbetanzos.com/2021/08/19/por-millonaria-deuda-en-agua-clausuran-oficinas-de-grupo-concordia/",
+      "dominio": "saidbetanzos.com",
+      "fuente": "Said Betanzos",
+      "fecha": "2021-08-19",
+      "origen": "medio",
+      "tono": "adversa"
      }
     ],
+    "excluidos": 1,
     "tono": {
-     "favorable": 1,
+     "favorable": 0,
      "adversa": 0,
      "neutral": 2,
      "sin_clasificar": 0,
      "sin_modelo_idioma": 0,
-     "titulares": 3,
+     "titulares": 2,
      "metodo": "modelo",
      "modelo": "pysentimiento/robertuito-sentiment-analysis"
     },
@@ -274,14 +285,6 @@
       "favorable": 0,
       "adversa": 0,
       "neutral": 1
-     },
-     {
-      "fuente": "Red Uno",
-      "dominio": "reduno.com.bo",
-      "titulares": 1,
-      "favorable": 1,
-      "adversa": 0,
-      "neutral": 0
      },
      {
       "fuente": "Zeta Tijuana",
@@ -322,6 +325,13 @@
       "anteriores": 1
      },
      {
+      "id": "saidbetanzos",
+      "nombre": "Said Betanzos",
+      "estado": "ok",
+      "titulares": 0,
+      "anteriores": 2
+     },
+     {
       "id": "sintesis",
       "nombre": "Síntesis TV",
       "estado": "ok",
@@ -336,7 +346,7 @@
       "anteriores": 0
      }
     ],
-    "muestra": "El buscador de noticias y el buscador propio de 5 medios, titulares de los últimos 180 días",
+    "muestra": "El buscador de noticias y el buscador propio de 6 medios, titulares de los últimos 180 días",
     "archivo": {
      "coincidencias": 0,
      "medios": 18,
@@ -403,6 +413,7 @@
       "tono": "adversa"
      }
     ],
+    "excluidos": 0,
     "tono": {
      "favorable": 0,
      "adversa": 0,
@@ -444,6 +455,13 @@
       "anteriores": 0
      },
      {
+      "id": "saidbetanzos",
+      "nombre": "Said Betanzos",
+      "estado": "ok",
+      "titulares": 0,
+      "anteriores": 0
+     },
+     {
       "id": "sintesis",
       "nombre": "Síntesis TV",
       "estado": "ok",
@@ -458,7 +476,7 @@
       "anteriores": 0
      }
     ],
-    "muestra": "El buscador de noticias y el buscador propio de 5 medios, titulares de los últimos 180 días",
+    "muestra": "El buscador de noticias y el buscador propio de 6 medios, titulares de los últimos 180 días",
     "archivo": {
      "coincidencias": 0,
      "medios": 18,
@@ -481,7 +499,17 @@
     "minimo": 3,
     "comentarios": 0,
     "temas": []
-   }
+   },
+   "agregados": [
+    {
+     "titulo": "¡Sigue la impunidad! Señalan a empresario de Grupo Concordia por presuntos fraudes inmobiliarios",
+     "url": "https://www.facebook.com/TijuanaLineaRoja/posts/sigue-la-impunidad-se%C3%B1alan-a-empresario-de-grupo-concordia-por-presuntos-fraudes/1493856925630886/",
+     "fuente": "Tijuana Línea Roja (Facebook)",
+     "fecha": null,
+     "origen": "manual",
+     "tono": "adversa"
+    }
+   ]
   },
   {
    "id": "cq_vivelabaja",
@@ -546,6 +574,29 @@
        }
       },
       {
+       "url": "https://www.instagram.com/p/DdUg5ezgeCl/",
+       "cuenta": "cq_vivelabaja",
+       "origen": "hashtag",
+       "fuente": "vivelabaja",
+       "zona": "Tijuana",
+       "alcance": "zona",
+       "publicado": "2026-09-15T19:57:24+00:00",
+       "fecha": "2026-09-15",
+       "titulo": "🌿 Hay lugares que simplemente se sienten diferentes.",
+       "tipo": "carrusel",
+       "likes": 3,
+       "comentarios": 1,
+       "cosechados": 1,
+       "opinion": 0,
+       "sentimiento": {
+        "positivo": 0,
+        "negativo": 0,
+        "neutral": 0,
+        "sin_clasificar": 0,
+        "sin_modelo_idioma": 0
+       }
+      },
+      {
        "url": "https://www.instagram.com/p/Dc_73SSkpmc/",
        "cuenta": "cq_vivelabaja",
        "origen": "hashtag",
@@ -582,29 +633,6 @@
        "likes": 3,
        "comentarios": 0,
        "cosechados": 0,
-       "opinion": 0,
-       "sentimiento": {
-        "positivo": 0,
-        "negativo": 0,
-        "neutral": 0,
-        "sin_clasificar": 0,
-        "sin_modelo_idioma": 0
-       }
-      },
-      {
-       "url": "https://www.instagram.com/p/DdUg5ezgeCl/",
-       "cuenta": "cq_vivelabaja",
-       "origen": "hashtag",
-       "fuente": "vivelabaja",
-       "zona": "Tijuana",
-       "alcance": "zona",
-       "publicado": "2026-09-15T19:57:24+00:00",
-       "fecha": "2026-09-15",
-       "titulo": "🌿 Hay lugares que simplemente se sienten diferentes.",
-       "tipo": "carrusel",
-       "likes": 2,
-       "comentarios": 1,
-       "cosechados": 1,
        "opinion": 0,
        "sentimiento": {
         "positivo": 0,
@@ -715,10 +743,11 @@
        "fuente": "vivelabaja",
        "estado": "ok",
        "posts": 9,
-       "comentarios": 3,
-       "crudos": 10,
+       "comentarios": 0,
+       "crudos": 0,
        "descartados": 0,
-       "fuera": 0
+       "fuera": 0,
+       "nota": "sin publicaciones nuevas que cosechar"
       }
      ]
     },
@@ -740,15 +769,6 @@
     "ventana_dias": 180,
     "resultados": [
      {
-      "titulo": "No sabía que necesitaba jugarlo hasta que vi gameplay: este shooter parece sacado literalmente de una pesadilla",
-      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNUHFHQUdCdHRpcjBPVkhkcS1rdmY3R2NCOGpNN3JhUEhfVjJsSGF0VXZDeElUWGl3ajJsbXE2al9PcktFN193QUJhU2l3WWpCcU5lM1ZDWDh1SGpqQUZhdVo0b0FhbHlyeHdraEFQRUpPMVI2UTNieWRpVHRZTVI0NVBHNVAtVldhdjVvZlhIMzY3NHFjZkNFcXdQNzNVUkpFWGlvWWpYZVNZeGFRdTUwNy00cFhaRmZoLUZNR05UMEVNUTFtLWMtU1ZQYU5pZFRINW00Qg?oc=5",
-      "dominio": "es.ign.com",
-      "fuente": "IGN España",
-      "fecha": "2026-09-05",
-      "origen": "noticias",
-      "tono": "adversa"
-     },
-     {
       "titulo": "Playas de Rosarito despega con el 6to Festival del Aire y fortalece su apuesta por el turismo de aventura",
       "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxOZHdtRUFoSzd3Qm1RNkdJaU5XcFllSWdDaXRfd2ZKZXJRcjNaNkp2YTBZSXJfTTZFV0h5TTZ3MnVpeW9pbWxrVDZEeWQzV1IwR29teUYxdHIxcmpka2dhaXZ5cm5lNC1NMWNMOXFGN0tNZ19kbmZReTNFNlhYYnFCeHFxTmFHUTZmTkNKZTFmWHRnUmdhQldrX3lSeFZrbDZ6Tnk3Q3p4VE5weldKRGJhbmY2UWJNRUNIajF0ZUJkdE11RTJVNTNiVlJsOGQ5UzFZRVg3ZzBXRGx2Zw?oc=5",
       "dominio": "sandiegored.com",
@@ -756,51 +776,27 @@
       "fecha": "2026-06-28",
       "origen": "noticias",
       "tono": "favorable"
-     },
-     {
-      "titulo": "Frida Urbina abandona 'Garra vs Veneno: Guerreros Mundiales’ tras fuerte lesión",
-      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxNQ0NkSTJzTF9ZOEF6eGlOWGUyS21DNC0yMjlVQWZGRzdkd3A3ZUNIS3FldHcyckFHeFh5S2pGNTFoRUtLdF9KLWdoNUwySV96dXJJRFJmOVhUMDlrT0Y1V3ZzcGtzazdUM2REZnhZeWlja1RsSlVSekZGSmViTTVteU9Zd3UtMm5UbnVGZEpIN1hyaWM0cWRvTEx4b1NHZEhhOVhkNjNELW5iUFJIeU1OMXM1VWJYazFnRWhENDdLUnFRdUhSbEUyQ0tDdVZGQm83WmhMU3ZrMEtreHdj?oc=5",
-      "dominio": "univision.com",
-      "fuente": "Univision",
-      "fecha": "2026-06-08",
-      "origen": "noticias",
-      "tono": "adversa"
      }
     ],
     "anteriores": [],
+    "excluidos": 2,
     "tono": {
      "favorable": 1,
-     "adversa": 2,
+     "adversa": 0,
      "neutral": 0,
      "sin_clasificar": 0,
      "sin_modelo_idioma": 0,
-     "titulares": 3,
+     "titulares": 1,
      "metodo": "modelo",
      "modelo": "pysentimiento/robertuito-sentiment-analysis"
     },
     "por_medio": [
-     {
-      "fuente": "IGN España",
-      "dominio": "es.ign.com",
-      "titulares": 1,
-      "favorable": 0,
-      "adversa": 1,
-      "neutral": 0
-     },
      {
       "fuente": "SanDiegoRed",
       "dominio": "sandiegored.com",
       "titulares": 1,
       "favorable": 1,
       "adversa": 0,
-      "neutral": 0
-     },
-     {
-      "fuente": "Univision",
-      "dominio": "univision.com",
-      "titulares": 1,
-      "favorable": 0,
-      "adversa": 1,
       "neutral": 0
      }
     ],
@@ -834,6 +830,13 @@
       "anteriores": 0
      },
      {
+      "id": "saidbetanzos",
+      "nombre": "Said Betanzos",
+      "estado": "ok",
+      "titulares": 0,
+      "anteriores": 0
+     },
+     {
       "id": "sintesis",
       "nombre": "Síntesis TV",
       "estado": "ok",
@@ -848,7 +851,7 @@
       "anteriores": 0
      }
     ],
-    "muestra": "El buscador de noticias y el buscador propio de 5 medios, titulares de los últimos 180 días",
+    "muestra": "El buscador de noticias y el buscador propio de 6 medios, titulares de los últimos 180 días",
     "archivo": {
      "coincidencias": 0,
      "medios": 18,
@@ -871,15 +874,33 @@
     "minimo": 3,
     "comentarios": 2,
     "temas": []
-   }
+   },
+   "agregados": [
+    {
+     "titulo": "“Dinero seguro”, invertir en un terreno en Tijuana",
+     "url": "https://zetatijuana.com/2026/05/dinero-seguro-invertir-en-un-terreno-en-tijuana/",
+     "fuente": "Semanario ZETA",
+     "fecha": "2026-05-18",
+     "origen": "manual",
+     "tono": "neutral"
+    },
+    {
+     "titulo": "Denuncian despojo con helicóptero al estilo del ‘Cártel Inmobiliario’; juez retrasa audiencias",
+     "url": "https://saidbetanzos.com/2026/04/22/denuncian-despojo-con-helicoptero-al-estilo-del-cartel-inmobiliario-juez-retrasa-audiencias/",
+     "fuente": "Said Betanzos",
+     "fecha": "2026-04-22",
+     "origen": "manual",
+     "tono": "adversa"
+    }
+   ]
   }
  ],
  "gasto": {
   "resultados": 7000,
-  "gastado": 31,
+  "gastado": 15,
   "por_concepto": {
-   "cq_grupo_concordia": 12,
-   "cq_vivelabaja": 19
+   "cq_grupo_concordia": 6,
+   "cq_vivelabaja": 9
   }
  }
 }
