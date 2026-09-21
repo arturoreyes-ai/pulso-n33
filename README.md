@@ -511,6 +511,46 @@ de subir el timeout.
 
 ---
 
+### Consultas: qué se dice de un término
+
+Desde el 18 de septiembre de 2026, `config/consultas.json` guarda **términos**
+—marcas y personas— de los que se cosecha lo que dicen TikTok (búsqueda),
+Instagram (cuentas y etiquetas) y Facebook (páginas públicas) en los últimos
+30 días, y lo que dice la prensa en los últimos **seis meses**: el buscador de
+noticias y el buscador propio de cada medio de `buscadores`, con el tono de
+cada titular (favorable | adversa | neutral). Todo sin iniciar sesión. Corre
+**a mano y fuera del cron** hasta que la demo se juzgue. La prensa se lee de
+todas las filas y no cuesta nada; las redes solo de una fila encendida, y esa
+parte sí se cobra. El procedimiento, en orden:
+
+```bash
+python -m pulso redes --sondear @vivelabaja @grupoconcordia
+```
+
+```bash
+python -m pulso consultas --probar
+```
+
+```bash
+python -m pulso consultas --sentimiento modelo
+```
+
+`--probar` recorre todas las filas, apagadas incluidas, con tres publicaciones
+por fuente, sin comentarios y sin escribir; lo que devuelve va a la `nota` de
+la fila, y solo entonces se fecha `verificado` y se pone `activo: true` (el
+validador rechaza una fila activa sin fecha). La corrida escribe
+`data/consultas.json` y `data/consultas-comentarios.json` (texto, fuera de git
+por el mismo glob que los demás). Cuesta del orden de 7 USD la primera vez con
+las nueve fuentes configuradas y menos de 0.50 USD las siguientes dentro de
+`dias_entre_cosechas`. YouTube y X salen «sin dato» (el archivo lleva la
+razón; la pantalla no); la búsqueda por palabra en Facebook está apagada
+(`pulso/facebook.py`). Ojo: `APIFY_TOKEN` se lee de `.env`, así que `--probar`
+en una máquina con ese archivo es una llamada real. El tono se publica como
+conteos también para la fila `persona`, por decisión del cliente registrada en
+`docs/PLAN.md`. Con todas las filas apagadas la corrida lee solo la prensa —es
+lo que se corrió para la demo del 18 de septiembre de 2026— y las tres redes
+salen «sin dato».
+
 ## Automatización
 
 `.github/workflows/pulso.yml` corre las pruebas, el pipeline, la conversación

@@ -8,7 +8,7 @@ const ruta = path.resolve(__dirname, '../src/lib/dominio/publicaciones.ts');
 const modulo = new Module(ruta, module);
 modulo.paths = module.paths;
 modulo._compile(ts.transpileModule(fs.readFileSync(ruta, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2023 } }).outputText, ruta);
-const { canonizarPublicacion, seleccionarPublicaciones, compararPublicaciones, reunirPublicaciones, cubetasConFilas, CUBETAS, NOMBRE_CUBETA } = modulo.exports;
+const { canonizarPublicacion, seleccionarPublicaciones, compararPublicaciones, reunirPublicaciones, cubetasConFilas, CUBETAS, NOMBRE_CUBETA, NOMBRE_RED } = modulo.exports;
 const post = (id, extra = {}) => ({ url: `https://www.instagram.com/p/${id}/`, fecha: '2026-09-14', publicado: '2026-09-14T12:00:00Z', zona: 'tijuana', cuenta: 'medio', likes: 5, ...extra });
 const doc = (posts, maximo = 15) => ({ destacados: posts, destacados_maximo: maximo, cuentas: [{ cuenta: 'medio', nombre: 'El medio' }] });
 assert.equal(canonizarPublicacion('https://instagram.com/reel/ABC_-/??x=1', 'instagram'), 'https://www.instagram.com/p/ABC_-/');
@@ -159,4 +159,18 @@ for (const c of CUBETAS) assert.equal(c.nombre, NOMBRE_CUBETA[c.id], `${c.id}: u
 // Y toda cubeta que cubetasConFilas puede devolver es nombrable.
 assert.deepEqual(cubetasConFilas(mezcla).filter((c) => NOMBRE_CUBETA[c] === undefined), []);
 
-console.log('Publicaciones: selección, orden, enlaces, deduplicación, disponibilidad parcial y nombres de cubeta verificados (tres plataformas) offline.');
+// --- Facebook: solo publicaciones de pagina, canonizadas como en pulso/facebook.py ---
+// Aparece solo en las consultas por termino (lib/dominio/consultas.ts), pero
+// la canonizacion vive aqui con las otras tres.
+assert.equal(canonizarPublicacion('https://m.facebook.com/vivelabaja/posts/pfbid0abc?__cft__[0]=x', 'facebook'),
+  'https://www.facebook.com/vivelabaja/posts/pfbid0abc');
+assert.equal(canonizarPublicacion('https://www.facebook.com/permalink.php?story_fbid=1&id=2', 'facebook'),
+  'https://www.facebook.com/permalink.php?story_fbid=1&id=2');
+for (const url of ['https://www.facebook.com/groups/g/posts/1', 'https://www.facebook.com/profile.php?id=1',
+                   'https://www.facebook.com/vivelabaja/', 'http://www.facebook.com/vivelabaja/posts/1']) {
+  assert.equal(canonizarPublicacion(url, 'facebook'), null, url);
+}
+assert.equal(canonizarPublicacion('https://www.facebook.com/vivelabaja/posts/1', 'instagram'), null);
+assert.equal(Object.keys(NOMBRE_RED).length, 4, 'cuatro redes con nombre');
+
+console.log('Publicaciones: selección, orden, enlaces, deduplicación, disponibilidad parcial y nombres de cubeta verificados (cuatro plataformas) offline.');

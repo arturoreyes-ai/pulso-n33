@@ -7,14 +7,11 @@ import { RUTAS } from "./config";
 import { leerJson } from "./fetcher";
 import type {
   DocComunicados,
-  DocArchivoIndice,
-  DocConversacion,
-  DocFuentes,
+  DocConsultas,
+  DocConsultasComentarios,
   DocIndicadores,
-  DocNotas,
   DocRedes,
   DocRedesComentarios,
-  DocRoster,
   DocTendencias,
   DocGastoElectoral,
   DocFinanciamientoPartidos,
@@ -28,7 +25,6 @@ import type {
 // Modo inmutable en todo lo de contenido: el cron lo escribe una vez cada 6
 // horas y no cambia mientras la pestana esta abierta.
 
-export const useNotas = () => useSWRImmutable<DocNotas>(RUTAS.notas, leerJson);
 /** Con llave anulable: los comunicados solo son un capitulo del recorrido de
  *  Tecate, y en las otras ocho entradas no hay que pedir el archivo. Es el
  *  mismo recurso que useActualidad(null). */
@@ -36,8 +32,6 @@ export const useComunicados = (activo = true) =>
   useSWRImmutable<DocComunicados>(activo ? RUTAS.comunicados : null, leerJson);
 export const useIndicadores = () =>
   useSWRImmutable<DocIndicadores>(RUTAS.indicadores, leerJson);
-export const useFuentes = () => useSWRImmutable<DocFuentes>(RUTAS.fuentes, leerJson);
-export const useRoster = () => useSWRImmutable<DocRoster>(RUTAS.roster, leerJson);
 export const useRedes = () => useSWRImmutable<DocRedes>(RUTAS.redes, leerJson);
 /** El texto de los comentarios. Un 404 aqui NO es error del panel: el archivo
  *  vive fuera de git y un despliegue puede no traerlo. */
@@ -51,14 +45,16 @@ export const useTikTokComentarios = () =>
   useSWRImmutable<DocRedesComentarios>(RUTAS.tiktokComentarios, leerJson);
 /** Tendencias de X por ubicacion: un solo archivo, sin par de texto. */
 export const useTendencias = () => useSWRImmutable<DocTendencias>(RUTAS.tendencias, leerJson);
+/** Que se dice de un termino. Un 404 es un estado normal: el archivo se
+ *  escribe a mano y un despliegue puede no traerlo; el buscador de Redes
+ *  simplemente no ofrece terminos. */
+export const useConsultas = () => useSWRImmutable<DocConsultas>(RUTAS.consultas, leerJson);
+export const useConsultasComentarios = () =>
+  useSWRImmutable<DocConsultasComentarios>(RUTAS.consultasComentarios, leerJson);
 export const useGastoElectoral = () =>
   useSWRImmutable<DocGastoElectoral>(RUTAS.gastoElectoral, leerJson);
 export const useFinanciamientoPartidos = () =>
   useSWRImmutable<DocFinanciamientoPartidos>(RUTAS.financiamientoPartidos, leerJson);
-
-/** El indice del archivo solo se pide si alguien abre el historico. */
-export const useArchivo = (activo: boolean) =>
-  useSWRImmutable<DocArchivoIndice>(activo ? RUTAS.archivoIndice : null, leerJson);
 
 /* `useEstado` y `useTemas` se fueron con el muro el 15 de septiembre de 2026:
    estado.json era el reloj que sondeaba la marca de frescura y temas.json
@@ -66,3 +62,10 @@ export const useArchivo = (activo: boolean) =>
    pantallas existe ya. El pipeline los sigue escribiendo —el historial de git
    ES el archivo, y estado.json lleva la hora de corrida que hace que cada
    corrida produzca un commit—, simplemente no los lee nadie en el sitio. */
+
+/* `useNotas` se fue el 18 de septiembre de 2026, y con el los ultimos 917 KB
+   que el navegador bajaba del archivo. Sus tres lectores —miniaturas, enlace
+   del propio medio y notas relacionadas— cruzaban el titular de quince filas
+   en vivo contra 6,020 notas; ese cruce lo hace ahora el servidor contra el
+   mismo disco (lib/busqueda/archivo.ts). Con el se fueron tambien `useFuentes`,
+   `useRoster` y `useArchivo`, que ya no tenian ni un consumidor. */

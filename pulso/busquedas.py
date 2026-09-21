@@ -165,19 +165,27 @@ def _fuente_sintetica(dom):
     return "gn-{}".format(hashlib.sha256(dom.encode("utf-8")).hexdigest()[:12])
 
 
-def _en_ventana(fecha, ahora_dt):
+def _en_ventana(fecha, ahora_dt, dias_atras=DIAS_ATRAS):
+    """Dentro de [ahora - dias_atras, ahora + DIAS_ADELANTE].
+
+    `dias_atras` se inyecta porque la ventana no es una sola: el cron mide 7
+    dias sobre 'when:1d', y pulso/consultas.py pide 30 sobre 'when:30d'. Con
+    los 7 fijos, un renglon con `ventana: when:30d` pedia el mes a Google y
+    tiraba aqui, en silencio, todo lo anterior a la semana: el operador de la
+    URL y el filtro que de verdad manda tienen que ir juntos.
+    """
     if not fecha:
         return False
     try:
         f = datetime.fromisoformat(fecha + "T00:00:00+00:00")
     except ValueError:
         return False
-    return (ahora_dt - timedelta(days=DIAS_ATRAS)) <= f <= (ahora_dt + timedelta(days=DIAS_ADELANTE))
+    return (ahora_dt - timedelta(days=dias_atras)) <= f <= (ahora_dt + timedelta(days=DIAS_ADELANTE))
 
 
 def cosechar(busquedas, medios, *, ahora, alias=None, feed=fetch_rss,
              max_por_busqueda=MAX_POR_BUSQUEDA, max_por_corrida=MAX_POR_CORRIDA,
-             timeout=15):
+             timeout=15, dias_atras=DIAS_ATRAS):
     """Corre las busquedas activas. Devuelve (items, salud).
 
     'items' viene en la MISMA forma que descubrimiento.descubrir, para que el
@@ -188,6 +196,9 @@ def cosechar(busquedas, medios, *, ahora, alias=None, feed=fetch_rss,
     'feed' es la frontera de red inyectada; las pruebas la sustituyen. Una
     busqueda caida no tumba la corrida, igual que un medio caido: se vuelve un
     registro 'fallo' con el motivo.
+
+    'dias_atras' es la ventana real (ver _en_ventana); el pipeline deja la
+    omision y pulso/consultas.py pasa la suya.
     """
     ahora_dt = datetime.fromisoformat(ahora)
     por_dominio, por_nombre = indice_publicadores(medios, alias)
@@ -226,7 +237,7 @@ def cosechar(busquedas, medios, *, ahora, alias=None, feed=fetch_rss,
             if not fecha:
                 detalle["sin_fecha"] += 1
                 continue
-            if not _en_ventana(fecha, ahora_dt):
+            if not _en_ventana(fecha, ahora_dt, dias_atras):
                 detalle["fuera_de_ventana"] += 1
                 continue
 

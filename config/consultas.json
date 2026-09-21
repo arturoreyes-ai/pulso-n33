@@ -1,0 +1,116 @@
+{
+ "nota": "Términos —marcas y personas— de los que se cosecha lo que dicen TikTok, Instagram, Facebook (últimos 30 días, vía Apify SIN sesión) y la prensa (últimos seis meses: el RSS de Google Noticias y el buscador propio de los medios de `buscadores`, sin sesión) — pulso/consultas.py. Es la demo que el cliente pidió el 18 de septiembre de 2026 y corre A MANO, fuera del cron, hasta que se juzgue. Ninguna fila lleva `zona` y el validador lo rechaza: la zona de cada publicación sale de su texto con el gacetero (redes.zona_por_ambito, residuo `nacional`), porque una marca no es un lugar y estamparle uno acreditaría esa zona a todo post que no nombre ninguno. La PRENSA se lee de TODAS las filas, apagadas incluidas —leer titulares no cuesta ni exige sondear un handle—; las REDES solo de una fila con `activo: true` Y `verificado` con fecha: la fecha del primer `python -m pulso consultas --probar` que devolvió publicaciones razonables, anotadas en su `nota`. Encender a ciegas un handle adivinado se cobra igual que uno bueno (config/instagram.json: cinco de seis adivinados estaban mal). El tono se publica como CONTEOS —el de los comentarios en cinco cubetas y el de cada titular de prensa en favorable | adversa | neutral—, también para la fila `persona`, por decisión del cliente registrada en docs/PLAN.md; el JSON lleva la salvedad fija y el validador la exige. YouTube y X salen `sin_dato`: no hay búsqueda por término en YouTube sin la API de datos y de X solo se leen tendencias; la pantalla dice solo «sin dato». Facebook se lee por PÁGINAS; la búsqueda por palabra está apagada (pulso/facebook.py). Costo estimado de la primera corrida con las nueve fuentes de abajo a 20 publicaciones × 20 comentarios: TikTok ~4 USD (los comentarios cobran ~5 USD por 1,000), Instagram ~2 USD (pago por resultado, confirmar la tarifa en la consola), Facebook ~1 USD (2 y 1.40 USD por 1,000); del orden de 7 USD, y las corridas siguientes dentro de `dias_entre_cosechas` solo pagan publicaciones (menos de 0.50 USD). La prensa no cuesta nada.",
+
+ "cosecha": {
+  "nota": "`presupuesto_resultados` cubre TODAS las fuentes configuradas, activas o no, y el validador lo exige: 9 fuentes × 20 × (1 + 20) = 3,780, con margen para seis más. Así encender una fila no recorta los comentarios de las demás en silencio, que es como falla `reparto - posts` (config/tiktok.json). `dias_entre_cosechas` es 7 y no 3: con 30 días de ventana, 3 pagaría los comentarios de cada publicación unas diez veces al mes. `filtro_fecha_tiktok: PAST_MONTH` recorta lo FACTURADO; la ventana de verdad se impone en derivar() sobre la hora exacta de publicación. `ventana_prensa_dias` es OTRA ventana, de la prensa: 180 días porque el cliente pidió seis meses y Google Noticias acepta `when:180d` pero no `when:6m` (devuelve vacío, medido el 18 de septiembre de 2026); un titular no es texto de conversación y no lo ata la retención de 30 días. El archivo propio se cuenta sobre esa misma ventana.",
+  "ventana_dias": 30,
+  "ventana_prensa_dias": 180,
+  "posts_por_fuente": 20,
+  "comentarios_por_post": 20,
+  "dias_entre_cosechas": 7,
+  "presupuesto_resultados": 7000,
+  "prensa_por_consulta": 20,
+  "destacados_maximo": 10,
+  "filtro_fecha_tiktok": "PAST_MONTH",
+  "orden_tiktok": "MOST_RELEVANT"
+ },
+
+ "buscadores": [
+  {
+   "id": "blancoynegro",
+   "nombre": "Blanco y Negro Noticias",
+   "url": "https://blancoynegro.mx/?s={q}&feed=rss2",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "El caso que justifica `buscadores`: el cliente señaló que este medio publica sobre Grupo Concordia y el RSS de Google Noticias no trae ni uno de sus titulares. Sondeado el 18 de septiembre de 2026 con `?s=Grupo Concordia&feed=rss2`: 10 titulares en la primera página, 3 de ellos nombran «Grupo Concordia» dentro de seis meses (11 de marzo ×2, 8 de abril de 2026) y 2 más anteriores (2024); el resto es la Concordia de Sinaloa, que el filtro por titular deja fuera. «Valente Márquez»: 7 resultados del cuerpo, 1 titular que lo nombra (8 de marzo de 2024, anterior a la ventana). No está en config/medios.json: entrar al catálogo del muro es otra decisión (del cliente) y no hace falta para esto. robots.txt: sin restricción para /?s= con el agente del pipeline."
+  },
+  {
+   "id": "zeta",
+   "nombre": "Zeta",
+   "url": "https://zetatijuana.com/?s={q}&feed=rss2",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Mismo host que la fila `zeta` de config/medios.json (el validador lo exige). Sondeado el 18 de septiembre de 2026 con «Grupo Concordia»: 10 titulares por fecha descendente, del 28 de agosto al 13 de febrero de 2026, así que una página cubre la ventana; el filtro por titular decide cuáles nombran el término. robots.txt prohíbe /search/ y no /?s=, y devuelve 403 a un agente genérico y 200 al del pipeline: por eso `permitido_por_robots` usa el nuestro."
+  },
+  {
+   "id": "sintesis",
+   "nombre": "Síntesis TV",
+   "url": "https://sintesistv.com.mx/?s={q}&feed=rss2",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Mismo host que `sintesis` en config/medios.json. Sondeado el 18 de septiembre de 2026 con «Grupo Concordia» SIN comillas: 2 titulares de febrero de 2026 que lo nombran («confirma predio en El Chicote», «Vendedores de Grupo Concordia intentan vender parque»); con comillas devolvió otros dos (2025 y 2022) porque WordPress manda las comillas al LIKE tal cual. De ahí que `url_buscador` no ponga comillas y `_nombra` filtre por titular."
+  },
+  {
+   "id": "jornadabc",
+   "nombre": "La Jornada Baja California",
+   "url": "https://jornadabc.mx/?s={q}&feed=rss2",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Mismo host que `jornadabc` en config/medios.json. Sondeado el 18 de septiembre de 2026: los titulares que nombran «Grupo Concordia» son de 2021 (la deuda con la CESPT) y salen como `anteriores`; en la ventana la primera página es la Concordia de Sinaloa, que el filtro deja fuera. Se deja encendido porque es gratis y porque lo que publique de aquí en adelante entra solo."
+  },
+  {
+   "id": "rosarito",
+   "nombre": "Rosarito Noticias",
+   "url": "https://rosaritonoticias.com/?s={q}&feed=rss2",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "nota": "Mismo host que `rosarito` en config/medios.json. Sondeado el 18 de septiembre de 2026: 2 titulares, «Grupo concordia adeudo de 101 mdp con CESPT» (2021) y uno ajeno; el primero cuenta como `anteriores`. robots.txt devuelve 403 a un agente genérico y 200 al del pipeline."
+  },
+  {
+   "id": "uniradio",
+   "nombre": "Uniradio Informa",
+   "url": "https://www.uniradioinforma.com/?s={q}&feed=rss2",
+   "idioma": "es",
+   "activo": false,
+   "verificado": null,
+   "nota": "APAGADO con razón: sondeado el 18 de septiembre de 2026 devolvió 58 titulares del día, la portada entera, ignorando el término. No es WordPress. El filtro por titular lo dejaría en cero y el archivo diría que Uniradio no nombra el término cuando lo cierto es que no se buscó en Uniradio. Falta encontrar su buscador de verdad."
+  }
+ ],
+
+ "consultas": [
+  {
+   "id": "cq_valente_marquez",
+   "termino": "Valente Márquez",
+   "tipo": "persona",
+   "idioma": "es",
+   "activo": false,
+   "verificado": "2026-09-18",
+   "tiktok": {},
+   "instagram": {"hashtags": [], "cuentas": []},
+   "facebook": {"paginas": []},
+   "prensa": {"q": "\"Valente Márquez\""},
+   "nota": "Dueño del cliente. Sin fuentes en redes, a propósito: `--probar` del 18 de septiembre de 2026 devolvió en TikTok «valente marquez» tres videos de otras personas (una Valentina Márquez, cuentas de apellido Márquez) y la etiqueta #valentemarquez de Instagram devolvió un error (no existe o está vacía). Cosechar eso pagaría ruido, así que la fila queda `activo: false` con la fecha del sondeo y sale solo con PRENSA, que se lee igual. La PRENSA sí se lee: en seis meses el buscador de noticias no trae un solo titular con su nombre y el de Blanco y Negro trae uno, de marzo de 2024, anterior a la ventana. Es la fila `persona`: su tono se publica como conteos con la salvedad fija de pulso/consultas.py, por decisión del cliente del 18 de septiembre de 2026 (docs/PLAN.md); el cruce con `figuras` del roster sigue prohibido. Sin cuenta ni página propias: lo que se busca es lo que otros publican."
+  },
+  {
+   "id": "cq_vivelabaja",
+   "termino": "Vive la Baja",
+   "tipo": "empresa",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "tiktok": {},
+   "instagram": {"hashtags": ["vivelabaja"], "cuentas": []},
+   "facebook": {"paginas": []},
+   "prensa": {"q": "\"Vive la Baja\""},
+   "nota": "Empresa del cliente. `--probar` del 18 de septiembre de 2026: la etiqueta #vivelabaja devuelve las publicaciones de la propia marca (terrenos, Tecate, «la casa de tus sueños»), así que es la fuente que queda. La cuenta @vivelabaja devolvió un error (el handle adivinado no existe o no es público) y la página de Facebook `vivelabaja` también: van fuera hasta que el cliente dé el handle y el slug reales. TikTok «vive la baja» devolvió tres cuentas ajenas con el mismo nombre (comida, trophy trucks), tres de tres, así que la búsqueda se apaga: pagaría ruido. Prensa: la frase con comillas trae 3 titulares en seis meses en el buscador de noticias (18 de septiembre de 2026) y varios son la frase suelta («vive la baja» en otra oración); el filtro por titular no los distingue, así que hay que leer la lista con eso en mente."
+  },
+  {
+   "id": "cq_grupo_concordia",
+   "termino": "Grupo Concordia",
+   "tipo": "empresa",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-18",
+   "tiktok": {},
+   "instagram": {"hashtags": [], "cuentas": ["@grupoconcordia"]},
+   "facebook": {"paginas": []},
+   "prensa": {"q": "\"Grupo Concordia\""},
+   "nota": "`--probar` del 18 de septiembre de 2026: la cuenta @grupoconcordia es la inmobiliaria («un terreno entregado», decisiones, planes; 1 a 4 likes por publicación), así que queda. TikTok «grupo concordia» devolvió tres de tres ajenos (el grupo musical alteño y eventos): la búsqueda se apaga, pagaría ruido. La etiqueta #grupoconcordia y la página de Facebook `grupoconcordia` devolvieron un error (no existen o no son públicas): fuera hasta tener el slug real. En la prensa «Concordia» solo es un municipio de Sinaloa, que el filtro por titular deja fuera. Prensa: el buscador de noticias trae 2 titulares en seis meses (Zeta, 18 de mayo; y uno de Bolivia, homónimo); el buscador de Blanco y Negro trae 3 adversos (marzo y abril de 2026) que Google no indexa."
+  }
+ ]
+}

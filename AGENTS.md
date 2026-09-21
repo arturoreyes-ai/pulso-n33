@@ -398,6 +398,98 @@ zona del producto —21 de 30 en Tijuana, mediana de 1,856 vistas— y entró co
 le acreditan a una ciudad. `@siempreenlanoticia` ya estaba.
 
 
+### Consultas: qué se dice de un término
+
+`pulso/consultas.py` reads `config/consultas.json` — terms, not accounts or
+places: «Valente Márquez», «Vive la Baja», «Grupo Concordia» since 18 September
+2026 — and writes `data/consultas.json` (git) plus `data/consultas-comentarios.json`
+(text, git-ignored by the existing glob). It runs **by hand, off the cron**,
+until the client judges the demo. Social sources are TikTok search, Instagram
+accounts and hashtags and Facebook **pages** (`pulso/facebook.py`), all
+logged-out, over **30 days** (equal to the retention, and the validator caps
+`ventana_dias` there). The press is **another window, six months**
+(`ventana_prensa_dias`, up to 365): the Google News RSS plus the **outlets' own
+WordPress search feeds** listed in `buscadores`, with the **tone of every
+headline** (`favorable | adversa | neutral`, the wall's press vocabulary,
+never the comments'). Rules that look arbitrary and are not:
+
+- **The press is read for every row, active or not.** `activo` gates the paid
+  Apify harvest; reading headlines costs nothing and needs no handle probe. A
+  row that is off ships with its three networks as `sin_dato`, which is what
+  happened to it. The demo run of 18 September 2026 was exactly that: three
+  rows off, press only, zero Apify results.
+- **`buscadores` exist because Google does not index the outlet that matters.**
+  Blanco y Negro Noticias (`blancoynegro.mx`) published three adverse headlines
+  about Grupo Concordia in March–April 2026 and the news RSS returns none of
+  them. A WordPress site answers `/?s=<term>&feed=rss2`; the term goes
+  **unquoted** (WordPress feeds the quotes to the LIKE and only finds posts
+  that contain literal quotes, measured on Síntesis) and `_nombra` keeps only
+  headlines that **name** the term, because the outlet's engine matches the
+  body and no body is read here. robots.txt is checked per run with the
+  pipeline's own agent (`permitido_por_robots`): four outlets answer 403 to a
+  generic agent and 200 to ours, and an unreadable robots.txt counts as
+  disallowed. Each searcher row needs `verificado` before `activo`, same as a
+  term: Uniradio returns its whole front page ignoring the term, and nothing
+  would have flagged it.
+- **Older matches are published, dated, apart.** `anteriores` carries the
+  headlines that name the term but predate the window, from the outlets'
+  searchers only, capped at 10, outside the tone counts and `por_medio`. The
+  case: the two hardest Grupo Concordia headlines are from 11 March 2026, one
+  week outside 180 days, and the only one naming Valente Márquez is from March
+  2024. Hiding them behind a count would have been the report saying less than
+  the harvest knew.
+- **The screen says «sin dato» and nothing more.** The `razon` on a `sin_dato`
+  block stays in the file (the validator still checks its register) but the
+  ficha, the YouTube/X tabs and the PDF no longer print it: the client asked
+  that the UI not explain the mechanism even to say what it does not do.
+- **The summary sentences are counts, never a verdict.**
+  `lib/dominio/consultas.ts::frasesConsulta` opens the ficha and the PDF with
+  sentences built from the document — «3 titulares, 2 adversos; lo adverso viene
+  de Blanco y Negro Noticias (2)», «ningún titular en 6 meses; 1 anterior, de
+  marzo de 2024» — and `probar-consultas.cjs` pins that none says «la
+  mayoría», «la gente», «opinión pública» or a percentage. That is how "the
+  press on Grupo Concordia is negative" and "there is almost nothing recent on
+  Valente Márquez" get said here.
+
+- **`cuenta` is the term id** and every destacado carries `origen` and
+  `fuente`. The zone comes from the text with `ambito="nacional"` in all three
+  platforms, Instagram included: a brand is not a place, and a post naming
+  Guadalajara is what the query went looking for, so it survives as
+  `nacional/fuera` instead of being dropped.
+- **The cache is per term:** `cache/consultas/<cq_id>/<plataforma>/`. A video
+  two terms both find would otherwise reassign `cuenta` to whichever ran last.
+  `dias_entre_cosechas` is 7, not 3: with a 30-day window, 3 re-pays each
+  post's comments about ten times a month.
+- **One generic two-pass loop**, not calls into `tiktok.cosechar` or
+  `instagram.cosechar`: neither takes `dias_entre_cosechas`, each builds its own
+  budget, and tests would need three patch points. `consultas.correr_actor` is
+  the only one.
+- **YouTube and X are `sin_dato` with a `razon`, never 0.** `razon` lives in
+  the file for whoever reads it and stays in product register (the validator
+  rejects Apify, API, token, git, actor, cron, pipeline in it); since 18
+  September 2026 the screen and the PDF print only «sin dato» (see above).
+- **`archivo.coincidencias`, not `notas`**: `notas` is a prohibited key name.
+  `temas` publishes only `{termino, n}` because `temas.temas()` also returns
+  `ejemplos` (comment text) and `n_previo`/`momento` (always-zero filler here).
+- **Tone counts are published for the person too**, by client decision (see
+  `docs/PLAN.md`, 18 September 2026, and the carve-out under rule 5 in
+  PRODUCT.md). `tono.salvedad_tono` must equal `consultas.SALVEDAD_TONO`
+  exactly; the validator compares by equality, same posture as `SALVEDAD_FIJA`.
+- **Facebook keyword search is wired but refused**: `facebook.ACTOR_BUSQUEDA`
+  is `None`, `facebook.busqueda` in a row is a validator error, and the actor
+  sits in `senuelos`. Facebook's search page needs a login, so the vendor
+  searches with its own accounts, and the session rule does not care whose
+  account it is. Turning it on is the client's legal call.
+- **`--probar` before `activo: true`**, and `activo` without a `verificado`
+  date is an error. The probe prints only the field *names* of discarded items
+  (`claves_descartadas`), never their content. The first probe on 18 September
+  2026 showed why: TikTok «grupo concordia» is a music band, «valente marquez»
+  returns noise, and the Facebook pages returned items without a URL.
+- **Pushing `data/consultas.json` starts the paid ingest**: any push touching
+  `data/` outside `paths-ignore` runs `pulso.yml`. For the demo, run locally.
+  `pulso/entorno.py` reads `APIFY_TOKEN` from `.env`, so a "dry" probe on a
+  machine with that file is a real, paid call.
+
 ### The five product rules, as code constraints
 
 These are the claims in [PRODUCT.md](PRODUCT.md#lo-que-este-producto-no-dice).
@@ -617,6 +709,8 @@ The full command surface — `indicadores`, `conversacion`, `delegaciones`,
   `node_modules/next/dist/server/lib/generate-agent-files.js`). Removing it
   from a diff only recreates the uncommitted change; commit it with your work.
 - **`cache/`** — never goes into git. See the invariant above.
+- **`data/consultas.json`** — written by `pulso consultas` by hand; its text
+  file is `data/consultas-comentarios.json`, covered by the glob below.
 - **`data/*-comentarios.json`** — written by `pulso redes` and `pulso tiktok`,
   git-ignored **by name**, copied into the site with the rest of `data/`. The
   comment text lives here and nowhere else. The glob is deliberate: a folder

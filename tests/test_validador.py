@@ -116,6 +116,17 @@ class TestTextoDeComentarios(unittest.TestCase):
         self.assertTrue([e for e in errores if e.startswith("gitignore:")],
                         "falta la linea y nadie avisa")
 
+    def test_el_texto_de_consultas_tambien_se_empareja(self):
+        # El tercer archivo de texto: sus urls son destacados de consultas.json
+        # y sin ese archivo es huerfano, como los otros dos.
+        with tempfile.TemporaryDirectory() as raiz:
+            datos = self._corrida(raiz, gitignore=REGLA_GITIGNORE + "\n")
+            with open(os.path.join(datos, "consultas-comentarios.json"), "w",
+                      encoding="utf-8") as f:
+                json.dump({"visibles": 5, "por_post": {}}, f)
+            errores, _ = validar_todo("config", datos, hoy=HOY)
+        self.assertTrue([e for e in errores if "consultas-comentarios: existe" in e])
+
     def test_sin_texto_no_se_exige_la_linea(self):
         with tempfile.TemporaryDirectory() as raiz:
             datos = self._corrida(raiz, gitignore="_site/\n")

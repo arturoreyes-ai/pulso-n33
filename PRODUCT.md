@@ -329,6 +329,21 @@ plan sigue prefiriendo un clasificador por lotes para postura política. El
 diccionario de `pulso/clasificar.py` sigue siendo la línea base y sigue sin ser
 publicable: lee *toma protesta* como una manifestación.
 
+**Una excepción, decidida por el cliente el 18 de septiembre de 2026.** Las
+**consultas por término** (`data/consultas.json`, sección Redes → búsqueda)
+publican el conteo de tono de los comentarios sobre una marca o una persona,
+incluida la persona. Se publica como **conteos, nunca porcentajes ni una cifra
+de «consenso»**, y siempre junto a una salvedad que el validador exige palabra
+por palabra: mide si cada frase suena a queja, a celebración o a información,
+no lo que quien escribe piensa de la persona o de la marca, y son comentarios
+de quien decidió comentar, no una muestra de nadie. Desde el mismo día la
+consulta publica también el **tono de cada titular de prensa** de los últimos
+seis meses —favorable, adversa o neutral, el vocabulario del muro— con su medio
+y su fecha, y un resumen hecho de conteos («3 titulares, 2 adversos; lo adverso
+viene de tal medio»), nunca de «la mayoría» ni de un porcentaje. El cruce con
+las **figuras** del roster sigue prohibido y la lectura automática sigue sin
+atribuir postura a nadie. Queda registrado en `docs/PLAN.md`.
+
 Y el modelo **solo habla español**. Los cuatro medios de San Diego publican en
 inglés, así que sus notas —98 de 888 en el corte actual— salen con
 `postura: null` en vez de con una etiqueta que un modelo entrenado en tuits en

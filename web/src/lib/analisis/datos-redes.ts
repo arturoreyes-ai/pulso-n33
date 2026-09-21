@@ -1,6 +1,4 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
-
+import { leerDatoPublicado, type LeerDatos } from "@/lib/datos/publicado";
 import type { ComentarioPublicado, Destacado, DocRedes, DocRedesComentarios } from "@/lib/datos/tipos";
 import { canonizarPublicacion, fuenteDePublicacion, nombresDeCuentas, seleccionarPublicaciones, type CubetaRegion } from "@/lib/dominio/publicaciones";
 import type { RedAnalizable } from "./contrato-publicacion";
@@ -21,46 +19,22 @@ import type { RedAnalizable } from "./contrato-publicacion";
  *    mandandole texto propio. El texto de los comentarios lo busca el
  *    servidor; el cliente solo dice cual.
  *
- * SE LEE DEL DISCO Y NO POR HTTP, que es el diseno obvio y el equivocado:
+ * SE LEE DEL DISCO Y NO POR HTTP. El porque —`proxy.ts` daria 401 a una
+ * peticion del servidor a su propio sitio, y el origen saldria de la cabecera
+ * `Host` que pone quien llama— esta en lib/datos/publicado.ts, que es de donde
+ * sale el lector desde que /api/actualidad necesito lo mismo. Aqui importa una
+ * consecuencia que es de este modulo y no de aquel: la afirmacion que sostiene
+ * esta funcion es «el modelo solo ve lo que nuestro sitio publica», y por HTTP
+ * se convertiria en «el modelo ve lo que diga el host que nombre el cliente».
  *
- *  1. `proxy.ts` exige sesion tambien para `/data/`, a proposito y con el
- *     motivo escrito ahi. Una peticion del servidor a su propio sitio no lleva
- *     cookie, asi que recibiria 401 SIEMPRE, en produccion y nunca en la
- *     prueba offline, que es la peor forma de fallar.
- *  2. El origen saldria de la cabecera `Host`, que la pone quien llama. La
- *     afirmacion que sostiene esta funcion —«el modelo solo ve lo que nuestro
- *     sitio publica»— se convertiria en «el modelo ve lo que diga el host que
- *     nombre el cliente».
- *
- * El precio, y queda escrito porque es una excepcion real: `datos/config.ts`
- * dice que mover los datos a otro host es una variable y un redespliegue. Eso
- * sigue siendo cierto para TODOS los lectores menos este. Si algun dia
- * `NEXT_PUBLIC_DATOS_URL` apunta afuera, esta lectura hay que mudarla a HTTP y
- * este parrafo es el aviso.
- *
- * Y una consecuencia que falla en silencio: los cuatro archivos tienen que
- * estar en `outputFileTracingIncludes` de `next.config.ts` o no viajan al
- * bundle de la funcion. Sin eso todo funciona en `next dev` y devuelve
- * `codigo: "datos"` en produccion, sin ninguna prueba que lo atrape.
+ * Y la que falla en silencio: los cuatro archivos tienen que estar en
+ * `outputFileTracingIncludes` de `next.config.ts` o no viajan al bundle de la
+ * funcion. Sin eso todo funciona en `next dev` y devuelve `codigo: "datos"` en
+ * produccion, sin ninguna prueba que lo atrape.
  */
 
-// Importacion con nombre y no `import path from`: probar-analisis.cjs
-// transpila sin `esModuleInterop` y un default de un modulo de Node sale
-// undefined ahi.
-const CARPETA = join(process.cwd(), "public", "data");
-
-/** Un archivo publicado bajo /data, ya parseado, o `null` si no esta. */
-export type LeerDatos = (nombre: string) => Promise<unknown | null>;
-
-export const leerDatoPublicado: LeerDatos = async (nombre) => {
-  try {
-    // Un ENOENT y un JSON roto son el MISMO estado para quien llama: no hay
-    // dato. Distinguirlos solo daria dos mensajes que dicen lo mismo.
-    return JSON.parse(await readFile(join(CARPETA, nombre), "utf8")) as unknown;
-  } catch {
-    return null;
-  }
-};
+// Se reexporta porque publicacion.ts y conversacion.ts lo inyectan por aqui.
+export { leerDatoPublicado, type LeerDatos };
 
 const ARCHIVOS: Record<RedAnalizable, { datos: string; textos: string }> = {
   instagram: { datos: "redes.json", textos: "redes-comentarios.json" },

@@ -3,10 +3,11 @@ import type { Destacado, DocRedes } from "../datos/tipos";
 /** La vista visual conserva la selección de la lista: primero el límite por
  * plataforma y zona, después el orden de lectura. Mezclar antes del límite
  * dejaría a la plataforma más numerosa ocupar toda la selección. */
-export type RedVisual = "instagram" | "tiktok" | "youtube";
-/** Como se nombra cada red al lector. */
+export type RedVisual = "instagram" | "tiktok" | "youtube" | "facebook";
+/** Como se nombra cada red al lector. Facebook solo aparece en las consultas
+ *  por termino (lib/dominio/consultas.ts); el panel de medios no lo lee. */
 export const NOMBRE_RED: Record<RedVisual, string> = {
-  instagram: "Instagram", tiktok: "TikTok", youtube: "YouTube",
+  instagram: "Instagram", tiktok: "TikTok", youtube: "YouTube", facebook: "Facebook",
 };
 export interface PublicacionVisual {
   post: Destacado;
@@ -208,6 +209,31 @@ export function canonizarPublicacion(valor: string, red: RedVisual): string | nu
       const partes = /^\/@([A-Za-z0-9_.]+)\/video\/(\d+)\/?$/.exec(url.pathname);
       return partes ? `https://www.tiktok.com/@${partes[1]!.toLowerCase()}/video/${partes[2]}` : null;
     }
+    if (red === "facebook") {
+      // Las mismas formas que canoniza pulso/facebook.py::_url_post, y solo
+      // esas: un post de pagina, un permalink, un video, un reel o /watch/.
+      // Perfiles, grupos y fotos no son publicaciones de una pagina.
+      if (!["facebook.com", "www.facebook.com", "m.facebook.com", "web.facebook.com"].includes(url.hostname)) return null;
+      const post = /^\/([A-Za-z0-9.\-_]{1,80})\/posts\/([A-Za-z0-9]+)\/?$/.exec(url.pathname);
+      if (post && !["groups", "profile.php", "photo.php", "photo", "events", "watch", "reel"].includes(post[1]!)) {
+        return `https://www.facebook.com/${post[1]}/posts/${post[2]}`;
+      }
+      const video = /^\/([A-Za-z0-9.\-_]{1,80})\/videos\/(?:[^/]+\/)?(\d+)\/?$/.exec(url.pathname);
+      if (video && video[1] !== "groups") return `https://www.facebook.com/${video[1]}/videos/${video[2]}`;
+      const reel = /^\/reel\/(\d+)\/?$/.exec(url.pathname);
+      if (reel) return `https://www.facebook.com/reel/${reel[1]}`;
+      if (/^\/watch\/?$/.test(url.pathname)) {
+        const v = url.searchParams.get("v") ?? "";
+        return /^\d+$/.test(v) ? `https://www.facebook.com/watch/?v=${v}` : null;
+      }
+      if (url.pathname === "/permalink.php") {
+        const historia = url.searchParams.get("story_fbid") ?? "";
+        const id = url.searchParams.get("id") ?? "";
+        return /^[A-Za-z0-9]+$/.test(historia) && /^\d+$/.test(id)
+          ? `https://www.facebook.com/permalink.php?story_fbid=${historia}&id=${id}` : null;
+      }
+      return null;
+    }
     // YouTube llega en tres formas -- /shorts/, /watch?v= y youtu.be/ -- y las
     // tres son el mismo video. Se canoniza por id para que el visor no monte
     // dos veces la misma pieza y para que la clave de busqueda sea una sola.
@@ -245,8 +271,8 @@ export function fuenteDePublicacion(post: Destacado, red: RedVisual, nombres: Ma
   if (red === "tiktok") {
     return post.creador === undefined ? "un creador" : `@${post.creador.replace(/^@/, "")}`;
   }
-  // En Instagram y en YouTube el publicador ES la cuenta: una fila del
-  // catalogo, con nombre impreso. No hay `creador` que publicar.
+  // En Instagram, en YouTube y en Facebook el publicador ES la cuenta: una
+  // fila del catalogo, con nombre impreso. No hay `creador` que publicar.
   return nombres.get(post.cuenta) ?? post.cuenta;
 }
 

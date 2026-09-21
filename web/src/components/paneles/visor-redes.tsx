@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { X as Cerrar } from "@phosphor-icons/react";
 import { useRedes, useRedesComentarios, useTikTok, useTikTokComentarios, useYouTube } from "@/lib/datos/hooks";
 import type { ComentarioPublicado } from "@/lib/datos/tipos";
 import { NOMBRE_RED, reunirPublicaciones, type CubetaRegion, type PublicacionVisual, type RedVisual } from "@/lib/dominio/publicaciones";
+import { filtrarPorTexto, SIN_FILAS_BUSQUEDA } from "@/lib/dominio/consultas";
 import { fechaCorta, hace, hora } from "@/lib/dominio/formato";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 import { teclasDelRecorrido, useRecorrido } from "@/lib/pantalla/recorrido";
@@ -21,7 +22,7 @@ const SIN_FILAS = "No hay publicaciones disponibles para esta selección. Es un 
 
 /** Corte de cada plataforma (`generado` de su archivo). La antiguedad se mide
  *  contra el, nunca contra el reloj del navegador: ver formato.ts::hace. */
-type Cortes = Partial<Record<RedVisual, string>>;
+export type Cortes = Partial<Record<RedVisual, string>>;
 
 /** El visor monta un solo medio: ocultar treinta iframes con CSS deja treinta
  * reproductores vivos. Los metadatos si permanecen para poder recorrerlos.
@@ -43,7 +44,16 @@ type Cortes = Partial<Record<RedVisual, string>>;
  * que la direccion pidio ver el 8 de septiembre de 2026. Una sola hoja
  * (`<dialog>`) para todo el recorrido, nunca una por tarjeta; su cuerpo esta
  * en paneles/comentarios-publicacion.tsx. */
-export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis = false }: { zona: ZonaRuta | null; filtro: FiltroVisual; cubeta?: CubetaRegion; analisis?: boolean }) {
+export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis = false, filtroTexto = null }: {
+  zona: ZonaRuta | null;
+  filtro: FiltroVisual;
+  cubeta?: CubetaRegion;
+  analisis?: boolean;
+  /** La busqueda de Redes cuando lo escrito no es un termino en seguimiento:
+   *  filtra por texto lo que ya esta cargado (pies y comentarios), sin pedir
+   *  nada a nadie. Ver lib/dominio/consultas.ts. */
+  filtroTexto?: string | null;
+}) {
   const instagram = useRedes();
   const tiktok = useTikTok();
   const youtube = useYouTube();
@@ -55,7 +65,11 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis
   // despues sea un cambio de datos y no de codigo.
   const textos: Partial<Record<RedVisual, Textos>> = { instagram: textosInstagram, tiktok: textosTikTok };
   const publicaciones = useMemo(() => reunirPublicaciones(instagram.data, tiktok.data, youtube.data, zona, cubeta), [instagram.data, tiktok.data, youtube.data, zona, cubeta]);
-  const filas = useMemo(() => publicaciones.filter((fila) => filtro === "todas" || fila.red === filtro), [publicaciones, filtro]);
+  const q = (filtroTexto ?? "").trim();
+  const filas = useMemo(() => {
+    const porRed = publicaciones.filter((fila) => filtro === "todas" || fila.red === filtro);
+    return q === "" ? porRed : filtrarPorTexto(porRed, { instagram: textosInstagram.data, tiktok: textosTikTok.data }, q);
+  }, [publicaciones, filtro, q, textosInstagram.data, textosTikTok.data]);
   const cortes: Cortes = { instagram: instagram.data?.generado, tiktok: tiktok.data?.generado, youtube: youtube.data?.generado };
   // `cosecha_comentarios` ausente se lee como true: un corte anterior al 18 de
   // septiembre de 2026 no lo trae y si cosechaba.
@@ -84,7 +98,8 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis
       {/* El estado se dice pero no ocupa lugar: la caja es la pantalla y una
           linea encima encogeria las tarjetas. */}
       {estados.map((estado) => <p key={estado} role="status" className="sr-only">{estado}</p>)}
-      <Recorrido key={`${filtro}:${filas.map((fila) => fila.clave).join("|")}`} publicaciones={filas} cortes={cortes} cargando={cargando} textos={textos} conComentarios={conComentarios} analisis={analisis} />
+      <RecorridoPublicaciones key={`${filtro}:${q}:${filas.map((fila) => fila.clave).join("|")}`} publicaciones={filas} cortes={cortes} cargando={cargando} textos={textos} conComentarios={conComentarios} analisis={analisis}
+        sinFilas={q === "" ? undefined : SIN_FILAS_BUSQUEDA(q)} />
     </>
   );
 }
@@ -97,7 +112,7 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis
  *  esqueleto mientras carga, y si no hay nada, el hueco dicho como hueco. La
  *  caja ES la pantalla, y una linea suelta en su lugar dejaria el lector
  *  vacio. */
-function Recorrido({ publicaciones, cortes, cargando, textos, conComentarios, analisis }: {
+export function RecorridoPublicaciones({ publicaciones, cortes, cargando, textos, conComentarios, analisis, sinFilas = SIN_FILAS, cabecera }: {
   publicaciones: PublicacionVisual[];
   cortes: Cortes;
   cargando: boolean;
@@ -106,7 +121,15 @@ function Recorrido({ publicaciones, cortes, cargando, textos, conComentarios, an
   textos: Partial<Record<RedVisual, Textos>>;
   conComentarios: Partial<Record<RedVisual, boolean>>;
   analisis: boolean;
+  /** El hueco, dicho como hueco. La busqueda por texto trae el suyo. */
+  sinFilas?: string;
+  /** Una PRIMERA tarjeta que no es publicacion: la ficha de un termino en
+   *  seguimiento (paneles/ficha-consulta.tsx). Ocupa el indice 0 del ajuste y
+   *  las publicaciones se corren una; el contador «n de total» sigue contando
+   *  solo publicaciones. */
+  cabecera?: ReactNode;
 }) {
+  const desplazamiento = cabecera === undefined ? 0 : 1;
   const contenedor = useRef<HTMLDivElement>(null);
   const { actual, enPantalla, ir } = useRecorrido(contenedor);
   const [visible, setVisible] = useState(true);
@@ -138,10 +161,15 @@ function Recorrido({ publicaciones, cortes, cargando, textos, conComentarios, an
   const total = publicaciones.length;
   return <>
     <div ref={contenedor} className="recorrido-lector" tabIndex={0} role="region" aria-label="Publicaciones"
-      onKeyDown={(evento) => teclasDelRecorrido(evento, actual, total, ir)}>
+      onKeyDown={(evento) => teclasDelRecorrido(evento, actual, total + desplazamiento, ir)}>
+      {cabecera === undefined ? null : (
+        <article data-indice={0} aria-label="Ficha del término" className="publicacion-visual mx-auto flex w-full max-w-[88rem] flex-col justify-center overflow-y-auto px-4 py-6 md:px-8">
+          {cabecera}
+        </article>
+      )}
       {publicaciones.map((fila, indice) => (
-        <Publicacion key={fila.clave} fila={fila} indice={indice} total={total} corte={cortes[fila.red]}
-          activo={indice === actual && visible && enPantalla}
+        <Publicacion key={fila.clave} fila={fila} indice={indice} posicion={indice + desplazamiento} total={total} corte={cortes[fila.red]}
+          activo={indice + desplazamiento === actual && visible && enPantalla}
           comentarios={textos[fila.red]?.data?.por_post[fila.post.url]}
           conComentarios={conComentarios[fila.red] ?? true}
           analisis={analisis}
@@ -151,7 +179,7 @@ function Recorrido({ publicaciones, cortes, cargando, textos, conComentarios, an
       {total === 0
         ? cargando
           ? <EsqueletoPublicacion />
-          : <div className="publicacion-visual flex items-center px-4 md:px-8"><p className="mx-auto w-full max-w-[88rem] text-lectura text-tinta-meta">{SIN_FILAS}</p></div>
+          : <div className="publicacion-visual flex items-center px-4 md:px-8"><p className="mx-auto w-full max-w-[88rem] text-lectura text-tinta-meta">{sinFilas}</p></div>
         : null}
     </div>
     <dialog ref={hoja} className="dialogo-lector" aria-labelledby="titulo-comentarios" onClose={() => setAbierta(null)}>
@@ -184,6 +212,11 @@ function Recorrido({ publicaciones, cortes, cargando, textos, conComentarios, an
  *  caen en «un lugar sin precisar», que es lo que se decia antes. */
 function lugarDe(fila: PublicacionVisual): string {
   const { zona, alcance } = fila.post;
+  // «desde» cuando la zona es la sede declarada de la cuenta (Instagram en el
+  // panel de medios, que no publica `alcance`); «sobre» cuando salio del texto
+  // con el gacetero: TikTok, YouTube, Facebook y las tres redes de una
+  // consulta por termino. Lo decide el dato, no la red.
+  const porTexto = fila.red !== "instagram" || alcance !== undefined;
   const nombre = NOMBRE_CORTO[zona as ZonaRuta]
     ?? (zona === "estatal"
       ? "Baja California"
@@ -192,12 +225,15 @@ function lugarDe(fila: PublicacionVisual): string {
         : alcance === "fuera"
           ? "un lugar fuera del corredor"
           : "un lugar sin precisar");
-  return `${fila.red === "instagram" ? "desde" : "sobre"} ${nombre}`;
+  return `${porTexto ? "sobre" : "desde"} ${nombre}`;
 }
 
-function Publicacion({ fila, indice, total, corte, activo, comentarios, conComentarios, analisis, onComentarios, onAnalizar }: {
+function Publicacion({ fila, indice, posicion, total, corte, activo, comentarios, conComentarios, analisis, onComentarios, onAnalizar }: {
   fila: PublicacionVisual;
+  /** Lugar entre las publicaciones, para el contador. */
   indice: number;
+  /** Lugar en el ajuste (`data-indice`): el mismo, o uno mas si hay ficha. */
+  posicion: number;
   total: number;
   corte: string | undefined;
   activo: boolean;
@@ -214,7 +250,7 @@ function Publicacion({ fila, indice, total, corte, activo, comentarios, conComen
   const iso = fila.post.publicado ?? fila.post.fecha;
   const antiguedad = corte ? hace(iso, corte) : "";
   const cuando = antiguedad ? `hace ${antiguedad}` : `${fechaCorta(iso)}${fila.post.publicado ? ` · ${hora(fila.post.publicado)}` : ""}`;
-  return <article data-indice={indice} aria-label={`Publicación ${indice + 1} de ${total}`}
+  return <article data-indice={posicion} aria-label={`Publicación ${indice + 1} de ${total}`}
     className="publicacion-visual mx-auto flex w-full max-w-[88rem] flex-col md:grid md:grid-cols-2 md:items-center md:gap-12 md:px-8 md:py-8">
     <EspacioMedio publicacion={fila} activo={activo} />
     {/* La banda del titular va DEBAJO del medio, en flujo, no encima: encima

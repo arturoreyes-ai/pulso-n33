@@ -661,12 +661,195 @@ export interface ComentarioPublicado {
 export interface DocRedesComentarios {
   esquema: 1;
   generado: string;
-  plataforma: PlataformaRedes;
+  /** `consultas` es el archivo de texto de un término: las tres plataformas
+   *  en un solo mapa (`data/consultas-comentarios.json`). */
+  plataforma: PlataformaRedes | "consultas";
   retencion_dias: 30;
   visibles: number;
   maximo: number;
   por_post: Record<string, ComentarioPublicado[]>;
 }
+
+// ---------------------------------------------------------------- consultas
+//
+// Qué se dice de un TÉRMINO —una marca, una persona— en TikTok, Instagram,
+// Facebook y la prensa en 30 días (`data/consultas.json`, `pulso/consultas.py`).
+// Espejo del contrato que `pulso/validador.py::validar_consultas` impone; el
+// validador manda y esto sigue. Suelto donde el contrato es nuevo.
+
+export type RedConsulta = "tiktok" | "instagram" | "facebook";
+export type RedSinDatoConsulta = "youtube" | "x";
+export type EstadoConsulta = "ok" | "fallo" | "sin_token" | "sin_dato";
+export type OrigenConsulta = "busqueda" | "cuenta" | "hashtag" | "pagina";
+export type TipoConsulta = "persona" | "empresa" | "tema";
+
+/** Un destacado de una consulta. `cuenta` es el id del término; `origen` y
+ *  `fuente` dicen por qué camino llegó (la consulta literal, el @handle, la
+ *  etiqueta o el slug de la página). Facebook trae `compartidos` siempre;
+ *  Instagram nunca; TikTok trae además `creador`. */
+export interface DestacadoConsulta extends Destacado {
+  origen: OrigenConsulta;
+  fuente: string;
+}
+
+export interface SaludConsulta {
+  consulta: string;
+  plataforma: RedConsulta;
+  origen: OrigenConsulta;
+  fuente: string;
+  estado: "ok" | "fallo" | "sin_token";
+  posts: number;
+  comentarios: number;
+  error?: string;
+  nota?: string;
+}
+
+/** Un bloque `sin_dato` no trae un solo conteo: un cero se leería como «nadie
+ *  habló» cuando lo cierto es que no se leyó. `razon` se pinta tal cual. */
+export interface BloqueSinDatoConsulta {
+  estado: "sin_dato";
+  razon: string;
+}
+
+export interface BloqueConDatosConsulta {
+  estado: "ok" | "fallo" | "sin_token";
+  razon?: string;
+  publicaciones: number;
+  comentarios_cosechados: number;
+  opinion: number;
+  destacados: DestacadoConsulta[];
+  salud: SaludConsulta[];
+}
+
+export type BloqueRedConsulta = BloqueSinDatoConsulta | BloqueConDatosConsulta;
+
+/** El tono de un TITULAR, en el vocabulario de la prensa del muro. Nunca el de
+ *  los comentarios (positivo | negativo): las dos series no se suman y por eso
+ *  no comparten etiquetas (docs/PLAN.md §6). */
+export type TonoTitular = "favorable" | "adversa" | "neutral";
+
+/** Por qué camino llegó un titular: el buscador de noticias (enlace opaco,
+ *  nunca resuelto) o el buscador propio del medio (enlace del medio). */
+export type OrigenPrensaConsulta = "noticias" | "medio";
+
+export interface ResultadoPrensaConsulta {
+  titulo: string;
+  /** Con `origen: "noticias"`, el enlace opaco tal cual; con `"medio"`, la
+   *  nota en el sitio del medio. */
+  url: string;
+  dominio: string;
+  fuente: string;
+  fecha: string;
+  origen: OrigenPrensaConsulta;
+  /** null = sin tono (no corrió el modelo, o el medio publica en un idioma
+   *  que el modelo no lee). Nunca «neutral» por omisión. */
+  tono: TonoTitular | null;
+}
+
+/** Cuántos titulares del archivo propio nombran el término, y sobre qué
+ *  archivo se contó. La clave es `coincidencias` y no `notas` a propósito. */
+export interface ArchivoConsulta {
+  coincidencias: number;
+  medios: number;
+  busquedas: number;
+  muestra: string;
+}
+
+/** Cinco cubetas que suman `titulares`, SOLO sobre los de la ventana. */
+export interface TonoPrensaConsulta {
+  favorable: number;
+  adversa: number;
+  neutral: number;
+  sin_clasificar: number;
+  sin_modelo_idioma: number;
+  titulares: number;
+  metodo: "modelo" | "ninguno";
+  modelo: string | null;
+}
+
+export interface MedioPrensaConsulta {
+  fuente: string;
+  dominio: string;
+  titulares: number;
+  favorable: number;
+  adversa: number;
+  neutral: number;
+}
+
+export interface BuscadorPrensaConsulta {
+  id: string;
+  nombre: string;
+  estado: "ok" | "fallo" | "robots";
+  titulares: number;
+  anteriores: number;
+  error?: string;
+}
+
+export interface PrensaConsulta {
+  estado: "ok" | "fallo" | "sin_dato";
+  razon?: string;
+  /** La ventana de la PRENSA (seis meses), distinta a la de redes. */
+  ventana_dias?: number;
+  resultados?: ResultadoPrensaConsulta[];
+  /** Titulares que nombran el término pero son anteriores a la ventana,
+   *  publicados aparte con su fecha. Fuera de `tono` y de `por_medio`. */
+  anteriores?: ResultadoPrensaConsulta[];
+  tono?: TonoPrensaConsulta;
+  por_medio?: MedioPrensaConsulta[];
+  buscadores?: BuscadorPrensaConsulta[];
+  muestra?: string;
+  archivo?: ArchivoConsulta;
+}
+
+/** Cinco cubetas que suman `comentarios`. Se publican también para una
+ *  persona (decisión del cliente del 18 de septiembre de 2026), y por eso
+ *  viaja `salvedad_tono`: es el texto exacto de `pulso/consultas.py`, que la
+ *  página y el PDF pintan tal cual y nunca omiten. */
+export interface TonoConsulta {
+  positivo: number;
+  negativo: number;
+  neutral: number;
+  sin_clasificar: number;
+  sin_modelo_idioma: number;
+  comentarios: number;
+  metodo: "modelo" | "ninguno";
+  modelo: string | null;
+  salvedad_tono: string;
+}
+
+export interface TemasConsulta {
+  minimo: number;
+  comentarios: number;
+  temas: { termino: string; n: number }[];
+}
+
+export interface Consulta {
+  id: string;
+  termino: string;
+  tipo: TipoConsulta;
+  idioma: "es" | "en";
+  plataformas: Record<RedConsulta, BloqueRedConsulta> & Record<RedSinDatoConsulta, BloqueSinDatoConsulta>;
+  prensa: PrensaConsulta;
+  tono: TonoConsulta;
+  temas: TemasConsulta;
+}
+
+export interface DocConsultas {
+  esquema: 1;
+  generado: string;
+  /** La ventana de redes (30 días, la retención del texto). */
+  ventana_dias: number;
+  /** La de la prensa: seis meses desde el 18 de septiembre de 2026. Un
+   *  titular no es conversación y no lo ata la retención. */
+  ventana_prensa_dias: number;
+  retencion_dias: 30;
+  destacados_maximo: number;
+  consultas: Consulta[];
+  gasto: { resultados: number; gastado: number; por_concepto: Record<string, number> };
+}
+
+/** El texto de los comentarios de un término: misma forma que el de redes. */
+export type DocConsultasComentarios = DocRedesComentarios;
 
 // ------------------------------------------------------------------- roster
 

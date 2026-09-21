@@ -1340,6 +1340,233 @@ def validar_youtube_config(datos):
     return errores, avisos
 
 
+def _contexto_ventana(datos, clave_ventana, ventana):
+    """Los limites de la ventana de un archivo de destacados, medidos contra
+    'generado' y nunca contra el reloj de quien valida: el archivo tiene que
+    ser valido hoy y en un ano. En dias se compara la fecha; en horas,
+    `publicado` con hora y zona."""
+    generado = str(datos.get("generado") or "")[:10]
+    desde = None
+    if clave_ventana == "ventana_dias" and _fecha(generado) and ventana:
+        desde = (_fecha(generado) - timedelta(days=ventana)).isoformat()
+    generado_dt = desde_dt = None
+    if clave_ventana == "ventana_horas" and _es_iso(datos.get("generado")) and ventana:
+        generado_dt = datetime.fromisoformat(str(datos["generado"]).replace("Z", "+00:00"))
+        desde_dt = generado_dt - timedelta(hours=ventana)
+    return {"clave": clave_ventana, "ventana": ventana, "generado": generado, "desde": desde,
+            "generado_dt": generado_dt, "desde_dt": desde_dt}
+
+
+def _acumulador_destacados():
+    """Lo que se junta a lo largo de la lista para las reglas del final:
+    urls (orden y repeticion), conteo por zona (tope) y los avisos de corte
+    anterior a un campo, que salen una sola vez."""
+    return {"urls": [], "por_zona": {}, "sin_alcance": 0, "sin_duracion": 0}
+
+
+def _validar_destacado(d, eti, esp, plataforma, ctx, conocidas, cosecha_comentarios,
+                       errores, avisos, acum):
+    """UN destacado contra la especificacion de su plataforma.
+
+    Compartido por redes.json (Instagram, TikTok, YouTube) y por
+    consultas.json, que suma sus propias reglas encima. `ctx` viene de
+    _contexto_ventana y `acum` de _acumulador_destacados; `conocidas` es el
+    catalogo de cuentas (vacio = no se comprueba).
+    """
+    url = d.get("url")
+    prefijos = esp["prefijo"] if isinstance(esp["prefijo"], tuple) else (esp["prefijo"],)
+    if not _texto(url) or not url.startswith(prefijos):
+        errores.append("{}: 'url' debe empezar con {} ({!r})".format(
+            eti, " o ".join(prefijos), url))
+    else:
+        acum["urls"].append(url)
+    # El creador solo cruza a data/ en TikTok, y ahi es obligatorio y
+    # tiene que ser el mismo de la URL: una guardia cruzada barata contra
+    # un handle que no corresponde al video.
+    creador = d.get("creador")
+    if esp["creador"]:
+        if not isinstance(creador, str) or not RE_CREADOR.match(creador):
+            errores.append("{}: 'creador' debe ser un @handle ({!r})".format(eti, creador))
+        elif _texto(url) and not url.startswith(prefijos[0] + creador + "/video/"):
+            errores.append("{}: 'creador' {} no es el de la url {}".format(eti, creador, url))
+    elif "creador" in d:
+        errores.append("{}: 'creador' no se publica en {}; la fuente es la cuenta".format(
+            eti, plataforma))
+    # `alcance` es el veredicto del gacetero y `zona` es donde cae despues de
+    # aplicar el ambito de la busqueda. Los dos se emiten y tienen que cuadrar:
+    # un cruce mal hecho aqui es exactamente la acreditacion por consulta que
+    # todo el modulo existe para impedir, y no da error en ninguna otra parte.
+    alc = d.get("alcance")
+    if esp["alcance"]:
+        # Un corte anterior al campo sigue siendo valido, con aviso y una sola
+        # vez al final: es el mismo trato que `ventana_legado`, y por la misma
+        # razon -- data/ lo escribe el bot y no se edita a mano para callar un
+        # aviso. El cron lo regenera y el campo aparece solo.
+        if "alcance" not in d:
+            acum["sin_alcance"] += 1
+        elif alc not in ALCANCES_REDES:
+            errores.append("{}: 'alcance' debe ser {} ({!r})".format(
+                eti, "|".join(ALCANCES_REDES), alc))
+        else:
+            z = d.get("zona")
+            if alc == "zona" and z not in ZONAS_MUNICIPALES:
+                errores.append("{}: alcance 'zona' con zona {!r}; el pie nombro un "
+                               "lugar del producto y la zona tiene que serlo".format(eti, z))
+            elif alc == "estatal" and z != "estatal":
+                errores.append("{}: alcance 'estatal' con zona {!r}".format(eti, z))
+            elif alc == "fuera" and z != "nacional":
+                errores.append("{}: alcance 'fuera' con zona {!r}; un lugar de fuera solo "
+                               "sobrevive como 'nacional', y solo si la busqueda no es "
+                               "regional".format(eti, z))
+            elif alc == "nacional" and z not in ("nacional", "internacional"):
+                errores.append("{}: alcance 'nacional' con zona {!r}; el gacetero no nombro "
+                               "lugar, asi que ninguna zona se le puede acreditar".format(
+                                   eti, z))
+    elif "alcance" in d:
+        errores.append("{}: 'alcance' no aplica a {}; la zona es la sede declarada de la "
+                       "cuenta y no el veredicto de un gacetero".format(eti, plataforma))
+    if conocidas and d.get("cuenta") not in conocidas:
+        errores.append("{}: cuenta {!r} no esta en 'cuentas'".format(eti, d.get("cuenta")))
+    if d.get("zona") not in esp["zonas"]:
+        errores.append("{}: zona desconocida ({!r})".format(eti, d.get("zona")))
+    else:
+        # El tope se cuenta como se hizo el corte. Donde hay formatos el
+        # corte fue por (zona, formato), asi que contar solo por zona daria
+        # el doble y fallaria sobre un archivo correcto.
+        clave = (d["zona"], d.get("formato")) if esp.get("formatos") else d["zona"]
+        acum["por_zona"][clave] = acum["por_zona"].get(clave, 0) + 1
+    fecha = d.get("fecha")
+    if not _fecha(fecha):
+        errores.append("{}: 'fecha' invalida ({!r})".format(eti, fecha))
+    elif ctx["clave"] == "ventana_dias":
+        if fecha > ctx["generado"]:
+            errores.append("{}: fecha {} posterior a generado {}; reloj roto".format(
+                eti, fecha, ctx["generado"]))
+        elif ctx["desde"] and fecha < ctx["desde"]:
+            errores.append("{}: fecha {} fuera de la ventana de {} dias".format(
+                eti, fecha, ctx["ventana"]))
+    if ctx["clave"] == "ventana_horas":
+        # En horas la ventana se mide sobre `publicado`, con hora y zona;
+        # `fecha` es su dia y solo sirve para agrupar en el tablero.
+        publicado = d.get("publicado")
+        if not _es_iso(publicado):
+            errores.append("{}: 'publicado' debe ser fecha-hora ISO ({!r})".format(
+                eti, publicado))
+        else:
+            pub_dt = datetime.fromisoformat(str(publicado).replace("Z", "+00:00"))
+            if _fecha(fecha) and str(publicado)[:10] != fecha:
+                errores.append("{}: 'fecha' {} no es el dia de 'publicado' {}".format(
+                    eti, fecha, publicado))
+            if ctx["generado_dt"] is not None:
+                if pub_dt > ctx["generado_dt"]:
+                    errores.append("{}: publicado {} posterior a generado; reloj roto".format(
+                        eti, publicado))
+                elif pub_dt < ctx["desde_dt"]:
+                    errores.append("{}: publicado {} fuera de la ventana de {} horas".format(
+                        eti, publicado, ctx["ventana"]))
+    elif "publicado" in d:
+        errores.append("{}: 'publicado' no aplica a {}".format(eti, plataforma))
+    titulo = d.get("titulo")
+    if not isinstance(titulo, str):
+        errores.append("{}: 'titulo' debe ser texto".format(eti))
+    elif len(titulo) > 160:
+        errores.append("{}: 'titulo' de {} caracteres; es el titular del pie, no "
+                       "el pie completo (maximo 160)".format(eti, len(titulo)))
+    elif not titulo.strip():
+        avisos.append("{}: post sin pie; la fila saldra solo con la liga".format(eti))
+    if esp.get("formatos"):
+        if d.get("formato") not in esp["formatos"]:
+            errores.append("{}: 'formato' debe ser {} ({!r})".format(
+                eti, "|".join(esp["formatos"]), d.get("formato")))
+    elif "formato" in d:
+        errores.append("{}: 'formato' no aplica a {}; solo lo lleva una plataforma "
+                       "cuyos formatos no se pueden comparar entre si".format(
+                           eti, plataforma))
+    if d.get("tipo") not in TIPOS_POST:
+        errores.append("{}: tipo {!r} desconocido; se espera {}".format(
+            eti, d.get("tipo"), "|".join(TIPOS_POST)))
+    for campo in ("cosechados", "opinion") + tuple(esp["cifras"]):
+        if not _entero_no_negativo(d.get(campo)):
+            errores.append("{}: '{}' debe ser entero no negativo".format(eti, campo))
+    # Lo contrario y por la misma razon: una cifra que esta plataforma no
+    # publica no puede aparecer ni en cero. En YouTube `likes` y
+    # `comentarios` no existen -- el feed publico no los trae -- y un cero
+    # se leeria como "nadie comento" en vez de "no lo medimos".
+    permitidas = frozenset(esp["cifras"]) | frozenset(esp.get("cifras_opcionales", ()))
+    for campo in CIFRAS_REDES:
+        if campo in d and campo not in permitidas:
+            errores.append("{}: '{}' no existe en {}; ausente es 'sin dato', nunca 0".format(
+                eti, campo, plataforma))
+    if ("reproducciones" in esp.get("cifras_opcionales", ())
+            and "reproducciones" in d
+            and not (_entero_no_negativo(d["reproducciones"])
+                     and d["reproducciones"] > 0)):
+        errores.append("{}: 'reproducciones' solo se emite si es mayor que 0; un cero "
+                       "se leeria como 'nadie lo vio' y no como 'no es video'".format(eti))
+    # `duracion` son segundos de video y existe por una razon de costo: todo
+    # lo que Apify cobra sobre el video se factura POR SEGUNDO empezado
+    # (`aiVideoSummary`, `aiVideoDescription`) o por minuto empezado
+    # (`transcription-minute`). Sin ella no se puede presupuestar ninguno de
+    # los tres, que es justo lo que hubo que estimar a ciegas el 17 de
+    # septiembre de 2026. Solo TikTok la publica; un cero seria "video de
+    # duracion cero" y no "no la trae", asi que se omite en vez de emitirla.
+    if esp["duracion"]:
+        if "duracion" not in d:
+            acum["sin_duracion"] += 1
+        elif not (_entero_no_negativo(d["duracion"]) and d["duracion"] > 0):
+            errores.append("{}: 'duracion' son segundos y solo se emite si es mayor "
+                           "que 0 ({!r})".format(eti, d.get("duracion")))
+    elif "duracion" in d:
+        errores.append("{}: 'duracion' no aplica a {}; su actor no la publica".format(
+            eti, plataforma))
+    if _entero_no_negativo(d.get("cosechados")):
+        # Si la plataforma no cosecha comentarios, este aviso saldria en
+        # TODAS las filas de cada corrida y dejaria de ser una senal.
+        if d["cosechados"] == 0 and cosecha_comentarios:
+            avisos.append("{}: post destacado sin comentarios cosechados".format(eti))
+        elif _entero_no_negativo(d.get("comentarios")) and d["cosechados"] > d["comentarios"]:
+            avisos.append("{}: cosechados {} > comentarios {} que reporta el actor".format(
+                eti, d["cosechados"], d["comentarios"]))
+    sen = d.get("sentimiento")
+    _validar_conteo_sentimiento(sen, eti, errores)
+    if isinstance(sen, dict) and isinstance(d.get("opinion"), int):
+        suma = sum(sen.get(k) or 0
+                   for k in SENTIMIENTOS + ("sin_clasificar", "sin_modelo_idioma"))
+        if suma != d["opinion"]:
+            errores.append("{}: sentimiento suma {} y 'opinion' es {}".format(
+                eti, suma, d["opinion"]))
+    if "temas" in d or esp.get("temas", True):
+        temas = d.get("temas")
+        if not isinstance(temas, list) or len(temas) > 3:
+            errores.append("{}: 'temas' debe ser lista de hasta 3".format(eti))
+        else:
+            for t in temas:
+                if not isinstance(t, dict) or not _texto(t.get("tema")) \
+                        or not _entero_no_negativo(t.get("comentarios")):
+                    errores.append("{}: cada tema necesita 'tema' y 'comentarios'".format(eti))
+                    break
+            claves = [(-t.get("comentarios", 0), t.get("tema", ""))
+                      for t in temas if isinstance(t, dict)]
+            if claves != sorted(claves):
+                errores.append("{}: 'temas' no esta ordenado".format(eti))
+
+
+def _validar_orden_destacados(lista, urls, orden, et, errores):
+    """Las reglas de la lista entera: url unica y orden explicito por las
+    cifras de la plataforma. Un orden distinto ensucia el diff de cada
+    corrida detras de `git diff --cached --quiet`."""
+    if len(set(urls)) != len(urls):
+        errores.append("{}: 'destacados' repite una url".format(et))
+    orden = tuple(orden)
+    claves = [tuple(-int(d.get(k) or 0) for k in orden) + (d.get("url", ""),)
+              for d in lista if isinstance(d, dict)]
+    if claves != sorted(claves):
+        errores.append("{}: 'destacados' no esta ordenado por ({}, url); "
+                       "un orden distinto ensucia el diff de cada corrida detras de "
+                       "`git diff --cached --quiet`".format(
+                           et, ", ".join("-" + k for k in orden)))
+
+
 def _validar_destacados(datos, errores, avisos, plataforma="instagram",
                         cosecha_comentarios=True):
     """El bloque de posts destacados de redes.json. Ausente es aviso.
@@ -1409,220 +1636,27 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram",
         errores.append("redes: 'destacados' debe ser una lista")
         return
 
-    generado = str(datos.get("generado") or "")[:10]
-    desde = None
-    if clave_ventana == "ventana_dias" and _fecha(generado) and ventana:
-        desde = (_fecha(generado) - timedelta(days=ventana)).isoformat()
-    generado_dt = desde_dt = None
-    if clave_ventana == "ventana_horas" and _es_iso(datos.get("generado")) and ventana:
-        generado_dt = datetime.fromisoformat(str(datos["generado"]).replace("Z", "+00:00"))
-        desde_dt = generado_dt - timedelta(hours=ventana)
-
-    urls, por_zona = [], {}
-    sin_alcance = sin_duracion = 0
+    ctx = _contexto_ventana(datos, clave_ventana, ventana)
+    acum = _acumulador_destacados()
     for i, d in enumerate(lista):
         eti = "{}[{}]".format(et, i)
         if not isinstance(d, dict):
             errores.append("{}: debe ser objeto".format(eti))
             continue
-        url = d.get("url")
-        prefijos = esp["prefijo"] if isinstance(esp["prefijo"], tuple) else (esp["prefijo"],)
-        if not _texto(url) or not url.startswith(prefijos):
-            errores.append("{}: 'url' debe empezar con {} ({!r})".format(
-                eti, " o ".join(prefijos), url))
-        else:
-            urls.append(url)
-        # El creador solo cruza a data/ en TikTok, y ahi es obligatorio y
-        # tiene que ser el mismo de la URL: una guardia cruzada barata contra
-        # un handle que no corresponde al video.
-        creador = d.get("creador")
-        if esp["creador"]:
-            if not isinstance(creador, str) or not RE_CREADOR.match(creador):
-                errores.append("{}: 'creador' debe ser un @handle ({!r})".format(eti, creador))
-            elif _texto(url) and not url.startswith(prefijos[0] + creador + "/video/"):
-                errores.append("{}: 'creador' {} no es el de la url {}".format(eti, creador, url))
-        elif "creador" in d:
-            errores.append("{}: 'creador' no se publica en {}; la fuente es la cuenta".format(
-                eti, plataforma))
-        # `alcance` es el veredicto del gacetero y `zona` es donde cae despues de
-        # aplicar el ambito de la busqueda. Los dos se emiten y tienen que cuadrar:
-        # un cruce mal hecho aqui es exactamente la acreditacion por consulta que
-        # todo el modulo existe para impedir, y no da error en ninguna otra parte.
-        alc = d.get("alcance")
-        if esp["alcance"]:
-            # Un corte anterior al campo sigue siendo valido, con aviso y una sola
-            # vez al final: es el mismo trato que `ventana_legado`, y por la misma
-            # razon -- data/ lo escribe el bot y no se edita a mano para callar un
-            # aviso. El cron lo regenera y el campo aparece solo.
-            if "alcance" not in d:
-                sin_alcance += 1
-            elif alc not in ALCANCES_REDES:
-                errores.append("{}: 'alcance' debe ser {} ({!r})".format(
-                    eti, "|".join(ALCANCES_REDES), alc))
-            else:
-                z = d.get("zona")
-                if alc == "zona" and z not in ZONAS_MUNICIPALES:
-                    errores.append("{}: alcance 'zona' con zona {!r}; el pie nombro un "
-                                   "lugar del producto y la zona tiene que serlo".format(eti, z))
-                elif alc == "estatal" and z != "estatal":
-                    errores.append("{}: alcance 'estatal' con zona {!r}".format(eti, z))
-                elif alc == "fuera" and z != "nacional":
-                    errores.append("{}: alcance 'fuera' con zona {!r}; un lugar de fuera solo "
-                                   "sobrevive como 'nacional', y solo si la busqueda no es "
-                                   "regional".format(eti, z))
-                elif alc == "nacional" and z not in ("nacional", "internacional"):
-                    errores.append("{}: alcance 'nacional' con zona {!r}; el gacetero no nombro "
-                                   "lugar, asi que ninguna zona se le puede acreditar".format(
-                                       eti, z))
-        elif "alcance" in d:
-            errores.append("{}: 'alcance' no aplica a {}; la zona es la sede declarada de la "
-                           "cuenta y no el veredicto de un gacetero".format(eti, plataforma))
-        if conocidas and d.get("cuenta") not in conocidas:
-            errores.append("{}: cuenta {!r} no esta en 'cuentas'".format(eti, d.get("cuenta")))
-        if d.get("zona") not in esp["zonas"]:
-            errores.append("{}: zona desconocida ({!r})".format(eti, d.get("zona")))
-        else:
-            # El tope se cuenta como se hizo el corte. Donde hay formatos el
-            # corte fue por (zona, formato), asi que contar solo por zona daria
-            # el doble y fallaria sobre un archivo correcto.
-            clave = (d["zona"], d.get("formato")) if esp.get("formatos") else d["zona"]
-            por_zona[clave] = por_zona.get(clave, 0) + 1
-        fecha = d.get("fecha")
-        if not _fecha(fecha):
-            errores.append("{}: 'fecha' invalida ({!r})".format(eti, fecha))
-        elif clave_ventana == "ventana_dias":
-            # La ventana se mide contra 'generado', nunca contra el reloj de
-            # quien valida: el archivo tiene que ser valido hoy y en un ano.
-            if fecha > generado:
-                errores.append("{}: fecha {} posterior a generado {}; reloj roto".format(
-                    eti, fecha, generado))
-            elif desde and fecha < desde:
-                errores.append("{}: fecha {} fuera de la ventana de {} dias".format(
-                    eti, fecha, ventana))
-        if clave_ventana == "ventana_horas":
-            # En horas la ventana se mide sobre `publicado`, con hora y zona;
-            # `fecha` es su dia y solo sirve para agrupar en el tablero.
-            publicado = d.get("publicado")
-            if not _es_iso(publicado):
-                errores.append("{}: 'publicado' debe ser fecha-hora ISO ({!r})".format(
-                    eti, publicado))
-            else:
-                pub_dt = datetime.fromisoformat(str(publicado).replace("Z", "+00:00"))
-                if _fecha(fecha) and str(publicado)[:10] != fecha:
-                    errores.append("{}: 'fecha' {} no es el dia de 'publicado' {}".format(
-                        eti, fecha, publicado))
-                if generado_dt is not None:
-                    if pub_dt > generado_dt:
-                        errores.append("{}: publicado {} posterior a generado; reloj roto".format(
-                            eti, publicado))
-                    elif pub_dt < desde_dt:
-                        errores.append("{}: publicado {} fuera de la ventana de {} horas".format(
-                            eti, publicado, ventana))
-        elif "publicado" in d:
-            errores.append("{}: 'publicado' no aplica a {}".format(eti, plataforma))
-        titulo = d.get("titulo")
-        if not isinstance(titulo, str):
-            errores.append("{}: 'titulo' debe ser texto".format(eti))
-        elif len(titulo) > 160:
-            errores.append("{}: 'titulo' de {} caracteres; es el titular del pie, no "
-                           "el pie completo (maximo 160)".format(eti, len(titulo)))
-        elif not titulo.strip():
-            avisos.append("{}: post sin pie; la fila saldra solo con la liga".format(eti))
-        if esp.get("formatos"):
-            if d.get("formato") not in esp["formatos"]:
-                errores.append("{}: 'formato' debe ser {} ({!r})".format(
-                    eti, "|".join(esp["formatos"]), d.get("formato")))
-        elif "formato" in d:
-            errores.append("{}: 'formato' no aplica a {}; solo lo lleva una plataforma "
-                           "cuyos formatos no se pueden comparar entre si".format(
-                               eti, plataforma))
-        if d.get("tipo") not in TIPOS_POST:
-            errores.append("{}: tipo {!r} desconocido; se espera {}".format(
-                eti, d.get("tipo"), "|".join(TIPOS_POST)))
-        for campo in ("cosechados", "opinion") + tuple(esp["cifras"]):
-            if not _entero_no_negativo(d.get(campo)):
-                errores.append("{}: '{}' debe ser entero no negativo".format(eti, campo))
-        # Lo contrario y por la misma razon: una cifra que esta plataforma no
-        # publica no puede aparecer ni en cero. En YouTube `likes` y
-        # `comentarios` no existen -- el feed publico no los trae -- y un cero
-        # se leeria como "nadie comento" en vez de "no lo medimos".
-        permitidas = frozenset(esp["cifras"]) | frozenset(esp.get("cifras_opcionales", ()))
-        for campo in CIFRAS_REDES:
-            if campo in d and campo not in permitidas:
-                errores.append("{}: '{}' no existe en {}; ausente es 'sin dato', nunca 0".format(
-                    eti, campo, plataforma))
-        if ("reproducciones" in esp.get("cifras_opcionales", ())
-                and "reproducciones" in d
-                and not (_entero_no_negativo(d["reproducciones"])
-                         and d["reproducciones"] > 0)):
-            errores.append("{}: 'reproducciones' solo se emite si es mayor que 0; un cero "
-                           "se leeria como 'nadie lo vio' y no como 'no es video'".format(eti))
-        # `duracion` son segundos de video y existe por una razon de costo: todo
-        # lo que Apify cobra sobre el video se factura POR SEGUNDO empezado
-        # (`aiVideoSummary`, `aiVideoDescription`) o por minuto empezado
-        # (`transcription-minute`). Sin ella no se puede presupuestar ninguno de
-        # los tres, que es justo lo que hubo que estimar a ciegas el 17 de
-        # septiembre de 2026. Solo TikTok la publica; un cero seria "video de
-        # duracion cero" y no "no la trae", asi que se omite en vez de emitirla.
-        if esp["duracion"]:
-            if "duracion" not in d:
-                sin_duracion += 1
-            elif not (_entero_no_negativo(d["duracion"]) and d["duracion"] > 0):
-                errores.append("{}: 'duracion' son segundos y solo se emite si es mayor "
-                               "que 0 ({!r})".format(eti, d.get("duracion")))
-        elif "duracion" in d:
-            errores.append("{}: 'duracion' no aplica a {}; su actor no la publica".format(
-                eti, plataforma))
-        if _entero_no_negativo(d.get("cosechados")):
-            # Si la plataforma no cosecha comentarios, este aviso saldria en
-            # TODAS las filas de cada corrida y dejaria de ser una senal.
-            if d["cosechados"] == 0 and cosecha_comentarios:
-                avisos.append("{}: post destacado sin comentarios cosechados".format(eti))
-            elif _entero_no_negativo(d.get("comentarios")) and d["cosechados"] > d["comentarios"]:
-                avisos.append("{}: cosechados {} > comentarios {} que reporta el actor".format(
-                    eti, d["cosechados"], d["comentarios"]))
-        sen = d.get("sentimiento")
-        _validar_conteo_sentimiento(sen, eti, errores)
-        if isinstance(sen, dict) and isinstance(d.get("opinion"), int):
-            suma = sum(sen.get(k) or 0
-                       for k in SENTIMIENTOS + ("sin_clasificar", "sin_modelo_idioma"))
-            if suma != d["opinion"]:
-                errores.append("{}: sentimiento suma {} y 'opinion' es {}".format(
-                    eti, suma, d["opinion"]))
-        temas = d.get("temas")
-        if not isinstance(temas, list) or len(temas) > 3:
-            errores.append("{}: 'temas' debe ser lista de hasta 3".format(eti))
-        else:
-            for t in temas:
-                if not isinstance(t, dict) or not _texto(t.get("tema")) \
-                        or not _entero_no_negativo(t.get("comentarios")):
-                    errores.append("{}: cada tema necesita 'tema' y 'comentarios'".format(eti))
-                    break
-            claves = [(-t.get("comentarios", 0), t.get("tema", ""))
-                      for t in temas if isinstance(t, dict)]
-            if claves != sorted(claves):
-                errores.append("{}: 'temas' no esta ordenado".format(eti))
+        _validar_destacado(d, eti, esp, plataforma, ctx, conocidas, cosecha_comentarios,
+                           errores, avisos, acum)
 
-    if sin_alcance:
+    if acum["sin_alcance"]:
         avisos.append("redes: {} destacado(s) anteriores al campo 'alcance' (15 de septiembre "
                       "de 2026); el panel los rotula por 'zona' hasta que el cron los "
-                      "regenere".format(sin_alcance))
-    if sin_duracion:
+                      "regenere".format(acum["sin_alcance"]))
+    if acum["sin_duracion"]:
         avisos.append("redes: {} destacado(s) anteriores al campo 'duracion' (17 de septiembre "
                       "de 2026); hasta que el cron los regenere no se puede presupuestar lo "
-                      "que Apify cobra por segundo de video".format(sin_duracion))
-    if len(set(urls)) != len(urls):
-        errores.append("redes: 'destacados' repite una url")
-    orden = tuple(esp["orden"])
-    claves = [tuple(-int(d.get(k) or 0) for k in orden) + (d.get("url", ""),)
-              for d in lista if isinstance(d, dict)]
-    if claves != sorted(claves):
-        errores.append("redes: 'destacados' no esta ordenado por ({}, url); "
-                       "un orden distinto ensucia el diff de cada corrida detras de "
-                       "`git diff --cached --quiet`".format(
-                           ", ".join("-" + k for k in orden)))
+                      "que Apify cobra por segundo de video".format(acum["sin_duracion"]))
+    _validar_orden_destacados(lista, acum["urls"], esp["orden"], "redes", errores)
     if maximo:
-        for clave, n in sorted(por_zona.items()):
+        for clave, n in sorted(acum["por_zona"].items()):
             if n > maximo:
                 donde = clave if isinstance(clave, str) else "{} en {}".format(clave[1], clave[0])
                 errores.append("redes: {} destacados de {} y el maximo es {}".format(
@@ -1676,6 +1710,19 @@ def validar_redes_comentarios(datos, redes=None, plataforma="instagram"):
     if isinstance(redes, dict) and isinstance(redes.get("destacados"), list):
         destacadas = {d.get("url") for d in redes["destacados"] if isinstance(d, dict)}
 
+    _validar_comentarios_publicados(por_post, destacadas, visibles, maximo, et, errores)
+    return errores, avisos
+
+
+def _validar_comentarios_publicados(por_post, destacadas, visibles, maximo, et, errores):
+    """Cada lista de comentarios publicados de un archivo de texto.
+
+    Compartido por redes-comentarios.json, tiktok-comentarios.json y
+    consultas-comentarios.json: las cuatro claves exactas, el recorte, la
+    mencion enmascarada, el orden por likes y la regla del "ver mas".
+    `destacadas` es el conjunto de urls que pueden publicar texto (None = no
+    se comprueba).
+    """
     for url, lista in por_post.items():
         eti = "{}[{}]".format(et, url)
         if destacadas is not None and url not in destacadas:
@@ -1723,6 +1770,858 @@ def validar_redes_comentarios(datos, redes=None, plataforma="instagram"):
             if c["sentimiento"] is not None and c["sentimiento"] not in ETIQUETAS_COMENTARIO:
                 errores.append("{}[{}]: sentimiento {!r} desconocido".format(
                     eti, i, c["sentimiento"]))
+
+
+# ------------------------------------------------------------- consultas
+#
+# data/consultas.json: que se dice de un TERMINO (una marca, una persona) en
+# TikTok, Instagram, Facebook (30 dias) y la prensa (seis meses). Lo escribe
+# `pulso consultas` (pulso/consultas.py). Cuatro reglas mandan sobre las demas:
+#
+# - `cuenta` es el id del termino y cada destacado lleva `origen` y `fuente`:
+#   un termino no es una cuenta ni un lugar, y la zona sale del texto con el
+#   gacetero en las TRES plataformas, con ambito nacional.
+# - YouTube y X van como `sin_dato` con razon y sin un solo conteo: un 0 se
+#   leeria como "nadie hablo" cuando lo cierto es que no se leyo. La razon es
+#   para quien lee el archivo; la pantalla dice solo «sin dato».
+# - El tono se publica como conteos tambien para una persona (decision del
+#   cliente del 18 de septiembre de 2026, docs/PLAN.md), y por eso viaja
+#   `salvedad_tono` con el texto EXACTO de pulso/consultas.py::SALVEDAD_TONO:
+#   se compara por igualdad, en la misma postura que SALVEDAD_FIJA en web/.
+# - La prensa lleva su propia ventana (`ventana_prensa_dias`, hasta 365) y
+#   cada titular su `tono` en el vocabulario de la PRENSA (favorable | adversa
+#   | neutral), nunca el de los comentarios: las dos series no se suman y por
+#   eso no comparten etiquetas (docs/PLAN.md seccion 6). Las cubetas del bloque
+#   tienen que ser exactamente el recuento de los titulares.
+
+RE_CONSULTA = re.compile(r"^cq_[a-z0-9_]{2,20}$")
+RE_BUSCADOR = re.compile(r"^[a-z0-9_]{2,20}$")
+VENTANA_PRENSA_MAXIMA = 365
+TONOS_PRENSA_CONSULTA = ("favorable", "adversa", "neutral")
+ORIGENES_PRENSA_CONSULTA = ("noticias", "medio")
+ESTADOS_BUSCADOR_CONSULTA = ("ok", "fallo", "robots")
+CLAVES_RESULTADO_PRENSA = frozenset({"titulo", "url", "dominio", "fuente", "fecha", "origen", "tono"})
+RE_HASHTAG_IG = re.compile(r"^[a-z0-9_]{2,60}$")
+RE_HANDLE_IG = re.compile(r"^@[A-Za-z0-9_.]{2,30}$")
+RE_PAGINA_FB = re.compile(r"^(https://www\.facebook\.com/)?[A-Za-z0-9.\-_]{1,80}/?$")
+PREFIJO_PRENSA_CONSULTA = "https://news.google.com/"
+TIPOS_CONSULTA = ("persona", "empresa", "tema")
+ESTADOS_CONSULTA = ("ok", "fallo", "sin_token", "sin_dato")
+PLATAFORMAS_CONSULTA_SOCIAL = ("tiktok", "instagram", "facebook")
+PLATAFORMAS_CONSULTA_SIN_DATO = ("youtube", "x")
+ORIGENES_CONSULTA = {
+    "tiktok": ("busqueda",),
+    "instagram": ("cuenta", "hashtag"),
+    "facebook": ("pagina", "busqueda"),
+}
+# Campos de identidad que devuelven los actores de Facebook (apify). Se tiran
+# al ingerir en pulso/facebook.py; si uno aparece en data/, la lista blanca se
+# rompio antes del cache. `user` es el objeto del autor del post.
+CLAVES_PROHIBIDAS_FACEBOOK = frozenset(
+    {"profileName", "profileId", "profileUrl", "profilePicture", "user", "pageId",
+     "pageName", "facebookId", "commentId", "feedbackId"})
+# Lo que temas.temas() devuelve y NO puede publicarse aqui: `ejemplos` es
+# texto de comentarios, `n_previo`/`momento` serian relleno en cero (la
+# ventana anterior nunca esta en un cache de 30 dias). `q` y `consulta_literal`
+# porque la interfaz no nombra el mecanismo.
+CLAVES_PROHIBIDAS_CONSULTAS = (
+    CLAVES_PROHIBIDAS_CONVERSACION | CLAVES_PROHIBIDAS_REDES | CLAVES_PROHIBIDAS_TIKTOK
+    | CLAVES_PROHIBIDAS_FACEBOOK
+    | frozenset({"n_previo", "momento", "ejemplos", "un_solo_medio", "q", "consulta_literal"}))
+# `razon` se pinta tal cual en la pagina y en el PDF, asi que va en registro
+# de producto: dice QUE falta, nunca COMO se obtiene (AGENTS.md, 13 de
+# septiembre de 2026).
+RE_MECANISMO = re.compile(r"\b(apify|api|token|git|actor|cron|pipeline|scraper|actores)\b",
+                          re.IGNORECASE)
+
+PLATAFORMAS_CONSULTA = {
+    # Como en redes.json, salvo que la zona sale del texto con ambito nacional
+    # en las tres, asi que `alcance` viaja siempre e `internacional` no existe.
+    # Sin `temas` por destacado: los temas son del termino.
+    "tiktok": dict(PLATAFORMAS_REDES["tiktok"], zonas=ZONAS_DE_CONTEO, temas=False),
+    "instagram": dict(PLATAFORMAS_REDES["instagram"], alcance=True, temas=False),
+    "facebook": {
+        "prefijo": "https://www.facebook.com/",
+        "ventana": "ventana_horas",
+        "ventana_legado": None,
+        # El publicador es la pagina configurada (`fuente`), como la cuenta en
+        # Instagram; un autor personal de la busqueda por palabra no se publica.
+        "creador": False,
+        "prohibidas": CLAVES_PROHIBIDAS_FACEBOOK,
+        # Facebook SI publica compartidos: un 0 es cero medido y faltar es error.
+        # No publica guardados. `viewsCount` solo en video y solo si > 0.
+        "cifras": ("likes", "comentarios", "compartidos"),
+        "cifras_opcionales": ("reproducciones",),
+        "orden": ("likes", "comentarios"),
+        "formatos": (),
+        "estados": ("ok", "fallo", "sin_token"),
+        "alcance": True,
+        "duracion": False,
+        "zonas": ZONAS_DE_CONTEO,
+        "temas": False,
+        "modulo": "pulso/facebook.py:_limpiar_comentario",
+    },
+}
+
+
+def _razon_de_producto(razon, et, errores):
+    if not _texto(razon):
+        errores.append("{}: falta 'razon'; un bloque sin dato dice por que, en palabras "
+                       "de producto".format(et))
+    elif RE_MECANISMO.search(razon):
+        errores.append("{}: 'razon' nombra el mecanismo ({!r}); se pinta tal cual y la "
+                       "interfaz dice que falta, nunca como se obtiene".format(et, razon))
+
+
+def _fuentes_config_consulta(fila):
+    """{plataforma: {origen: {valores}}} de una fila de config/consultas.json."""
+    salida = {p: {o: set() for o in ORIGENES_CONSULTA[p]} for p in PLATAFORMAS_CONSULTA_SOCIAL}
+    tk = fila.get("tiktok") or {}
+    if _texto(tk.get("consulta")):
+        salida["tiktok"]["busqueda"].add(tk["consulta"].strip())
+    ig = fila.get("instagram") or {}
+    for h in ig.get("cuentas") or []:
+        if isinstance(h, str):
+            salida["instagram"]["cuenta"].add("@" + h.strip().lstrip("@"))
+    for t in ig.get("hashtags") or []:
+        if isinstance(t, str):
+            salida["instagram"]["hashtag"].add(t.strip().lstrip("#").lower())
+    fb = fila.get("facebook") or {}
+    for p in fb.get("paginas") or []:
+        if isinstance(p, str):
+            salida["facebook"]["pagina"].add(p.strip().strip("/").lstrip("@"))
+    if _texto(fb.get("busqueda")):
+        salida["facebook"]["busqueda"].add(fb["busqueda"].strip())
+    return salida
+
+
+def _validar_buscadores_config(buscadores, medios, et0, errores, avisos):
+    """`buscadores`: el buscador propio de cada medio (RSS de busqueda de
+    WordPress) que pulso/consultas.py consulta para TODOS los terminos.
+
+    Misma disciplina que una fila de termino: `activo` sin `verificado` es
+    error, porque un buscador se sondea antes de encenderse (Uniradio devuelve
+    su portada entera ignorando el termino, medido el 18 de septiembre de
+    2026, y nada lo habria delatado). La `url` lleva `{q}` exactamente una vez,
+    es https y su host es fijo; si el `id` es un medio del catalogo, el host
+    tiene que ser el del medio, para que `fuente` no atribuya a un medio lo que
+    publico otro.
+    """
+    if buscadores is None:
+        return
+    et = et0 + ".buscadores"
+    if not isinstance(buscadores, list):
+        errores.append("{}: debe ser una lista".format(et))
+        return
+    hosts_catalogo = {}
+    for m in (medios or {}).get("medios", []) if isinstance(medios, dict) else []:
+        if isinstance(m, dict) and isinstance(m.get("id"), str):
+            hosts_catalogo[m["id"]] = dominio(m.get("url") or "")
+    ids = set()
+    for i, b in enumerate(buscadores):
+        eti = "{}[{}]".format(et, b.get("id", i) if isinstance(b, dict) else i)
+        if not isinstance(b, dict):
+            errores.append("{}: debe ser objeto".format(eti))
+            continue
+        bid = b.get("id")
+        if not isinstance(bid, str) or not RE_BUSCADOR.match(bid) or bid == "noticias":
+            errores.append("{}: 'id' invalido ({!r}); se espera {} y no 'noticias', que es "
+                           "el buscador de noticias".format(eti, bid, RE_BUSCADOR.pattern))
+        elif bid in ids:
+            errores.append("{}: id repetido".format(eti))
+        ids.add(bid)
+        for campo in ("nombre", "nota"):
+            if not _texto(b.get(campo)):
+                errores.append("{}: falta '{}'".format(eti, campo))
+        if b.get("idioma") not in IDIOMAS:
+            errores.append("{}: idioma {!r} desconocido".format(eti, b.get("idioma")))
+        if not isinstance(b.get("activo"), bool):
+            errores.append("{}: 'activo' debe ser booleano".format(eti))
+        verificado = b.get("verificado")
+        if verificado is not None and not _fecha(verificado):
+            errores.append("{}: 'verificado' debe ser null o una fecha".format(eti))
+        if b.get("activo") and not _fecha(verificado):
+            errores.append("{}: activo sin 'verificado'; sondea el buscador con el termino y "
+                           "anota lo que devolvio antes de encenderlo".format(eti))
+        url = b.get("url")
+        if not isinstance(url, str) or url.count("{q}") != 1 or not url.startswith("https://"):
+            errores.append("{}: 'url' debe ser https y llevar '{{q}}' exactamente una vez "
+                           "({!r})".format(eti, url))
+            continue
+        host = dominio(url.replace("{q}", "x"))
+        if not host or "{" in url.split("?")[0]:
+            errores.append("{}: el host de 'url' tiene que ser fijo ({!r})".format(eti, url))
+        elif bid in hosts_catalogo and hosts_catalogo[bid] and hosts_catalogo[bid] != host:
+            errores.append("{}: el host {!r} no es el del medio {!r} del catalogo ({!r}); "
+                           "`fuente` atribuiria a un medio lo que publico otro".format(
+                               eti, host, bid, hosts_catalogo[bid]))
+
+
+def validar_consultas_config(datos, actor_busqueda=None, medios=None):
+    """config/consultas.json: terminos, no cuentas ni lugares.
+
+    `actor_busqueda` es pulso/facebook.py::ACTOR_BUSQUEDA: mientras sea None,
+    una fila con `facebook.busqueda` es error, porque la busqueda por palabra
+    en Facebook exige sesion del proveedor (ver ese modulo). `medios` es
+    config/medios.json si esta a mano, para casar los `buscadores` con el
+    catalogo.
+    """
+    errores, avisos = [], []
+    et0 = "consultas"
+    if not _texto(datos.get("nota")):
+        avisos.append("{}: falta la 'nota' que explica el archivo".format(et0))
+    cosecha = datos.get("cosecha")
+    if not isinstance(cosecha, dict):
+        errores.append("{}: falta 'cosecha'".format(et0))
+        cosecha = {}
+    else:
+        vd = cosecha.get("ventana_dias")
+        if not isinstance(vd, int) or isinstance(vd, bool) or not 1 <= vd <= 30:
+            # 30 es la retencion del cache (LFPDPPP, CPRA): una ventana mas
+            # larga pediria texto que ya se purgo.
+            errores.append("{}.cosecha: 'ventana_dias' debe ser entero entre 1 y 30; la "
+                           "retencion del cache es de 30 dias".format(et0))
+        vp = cosecha.get("ventana_prensa_dias", 180)
+        if not isinstance(vp, int) or isinstance(vp, bool) or not 1 <= vp <= VENTANA_PRENSA_MAXIMA:
+            # Un titular no es texto de conversacion: no lo ata la retencion.
+            # 365 es lo mas que el buscador de noticias acepta como `when:`.
+            errores.append("{}.cosecha: 'ventana_prensa_dias' debe ser entero entre 1 y {}".format(
+                et0, VENTANA_PRENSA_MAXIMA))
+        for campo in ("posts_por_fuente", "comentarios_por_post", "dias_entre_cosechas",
+                      "presupuesto_resultados", "prensa_por_consulta", "destacados_maximo"):
+            v = cosecha.get(campo)
+            if not isinstance(v, int) or isinstance(v, bool) or v < 1:
+                errores.append("{}.cosecha: '{}' debe ser entero positivo".format(et0, campo))
+        if cosecha.get("filtro_fecha_tiktok") not in FILTROS_FECHA_TIKTOK:
+            errores.append("{}.cosecha: 'filtro_fecha_tiktok' {!r} no es un valor del actor; "
+                           "se espera {}".format(et0, cosecha.get("filtro_fecha_tiktok"),
+                                                 "|".join(FILTROS_FECHA_TIKTOK)))
+        elif cosecha.get("ventana_dias") == 30 and cosecha["filtro_fecha_tiktok"] != "PAST_MONTH":
+            avisos.append("{}.cosecha: ventana de 30 dias con filtro {}; PAST_MONTH es el que "
+                          "recorta lo facturado a la ventana".format(
+                              et0, cosecha["filtro_fecha_tiktok"]))
+        if cosecha.get("orden_tiktok", "MOST_RELEVANT") not in ORDENES_TIKTOK:
+            errores.append("{}.cosecha: 'orden_tiktok' {!r} no es un valor del actor".format(
+                et0, cosecha.get("orden_tiktok")))
+
+    _validar_buscadores_config(datos.get("buscadores"), medios, et0, errores, avisos)
+
+    filas = datos.get("consultas")
+    if not isinstance(filas, list) or not filas:
+        errores.append("{}: 'consultas' debe ser una lista no vacia".format(et0))
+        return errores, avisos
+    ids, necesarios = set(), 0
+    for i, f in enumerate(filas):
+        et = "{}[{}]".format(et0, f.get("id", i) if isinstance(f, dict) else i)
+        if not isinstance(f, dict):
+            errores.append("{}: debe ser objeto".format(et))
+            continue
+        cid = f.get("id")
+        if not isinstance(cid, str) or not RE_CONSULTA.match(cid):
+            errores.append("{}: 'id' invalido ({!r}); se espera {}".format(
+                et, cid, RE_CONSULTA.pattern))
+        elif cid in ids:
+            errores.append("{}: id repetido".format(et))
+        ids.add(cid)
+        for campo in ("termino", "nota"):
+            if not _texto(f.get(campo)):
+                errores.append("{}: falta '{}'".format(et, campo))
+        if f.get("tipo") not in TIPOS_CONSULTA:
+            errores.append("{}: 'tipo' {!r} desconocido; se espera {}".format(
+                et, f.get("tipo"), "|".join(TIPOS_CONSULTA)))
+        if f.get("idioma") not in IDIOMAS:
+            errores.append("{}: idioma {!r} desconocido".format(et, f.get("idioma")))
+        if not isinstance(f.get("activo"), bool):
+            errores.append("{}: 'activo' debe ser booleano".format(et))
+        verificado = f.get("verificado")
+        if verificado is not None and not _fecha(verificado):
+            errores.append("{}: 'verificado' debe ser null o una fecha ({!r})".format(
+                et, verificado))
+        if f.get("activo") and not _fecha(verificado):
+            # Es la leccion de config/instagram.json: cinco de seis handles
+            # adivinados estaban mal y ninguno habria dado error al cosechar.
+            errores.append("{}: activa sin 'verificado'; corre `python -m pulso consultas "
+                           "--probar`, anota lo que devolvio en la nota y fecha el campo "
+                           "antes de encenderla".format(et))
+        if "zona" in f:
+            errores.append("{}: un termino no lleva 'zona'; la zona de cada publicacion sale "
+                           "de su texto (pulso/zonas.py). Una marca no es un lugar".format(et))
+        tk = f.get("tiktok") or {}
+        if "consulta" in tk and not _texto(tk.get("consulta")):
+            errores.append("{}: 'tiktok.consulta' vacia".format(et))
+        ig = f.get("instagram") or {}
+        for t in ig.get("hashtags") or []:
+            if not isinstance(t, str) or not RE_HASHTAG_IG.match(t):
+                errores.append("{}: hashtag {!r} invalido; minusculas sin '#'".format(et, t))
+        for h in ig.get("cuentas") or []:
+            if not isinstance(h, str) or not RE_HANDLE_IG.match(h):
+                errores.append("{}: cuenta de Instagram {!r} invalida; se espera @handle".format(
+                    et, h))
+        fb = f.get("facebook") or {}
+        for p in fb.get("paginas") or []:
+            if not isinstance(p, str) or not RE_PAGINA_FB.match(p):
+                errores.append("{}: pagina de Facebook {!r} invalida; slug o URL publica".format(
+                    et, p))
+        if _texto(fb.get("busqueda")) and actor_busqueda is None:
+            errores.append("{}: 'facebook.busqueda' esta apagada: la busqueda por palabra en "
+                           "Facebook exige sesion del proveedor (pulso/facebook.py). Solo "
+                           "paginas".format(et))
+        pr = f.get("prensa") or {}
+        if "q" in pr and not _texto(pr.get("q")):
+            errores.append("{}: 'prensa.q' vacia".format(et))
+        fuentes = sum(len(v) for por in _fuentes_config_consulta(f).values()
+                      for v in por.values())
+        if fuentes == 0 and not _texto(pr.get("q")):
+            errores.append("{}: sin una sola fuente ni busqueda de prensa".format(et))
+        necesarios += fuentes
+    # El tope cubre TODAS las filas, activas o no: encender una no recorta a
+    # las demas en silencio, que es como falla `reparto - posts` (la leccion
+    # de config/tiktok.json).
+    posts = cosecha.get("posts_por_fuente") or 0
+    coms = cosecha.get("comentarios_por_post") or 0
+    tope = cosecha.get("presupuesto_resultados") or 0
+    minimo = necesarios * posts * (1 + coms)
+    if isinstance(tope, int) and tope and minimo and tope < minimo:
+        errores.append("{}.cosecha: 'presupuesto_resultados' {} no cubre las {} fuentes "
+                       "configuradas ({} x {} x (1 + {}) = {}); el reparto recortaria "
+                       "comentarios en silencio".format(et0, tope, necesarios, necesarios,
+                                                        posts, coms, minimo))
+    if not any(isinstance(f, dict) and f.get("activo") for f in filas):
+        avisos.append("{}: ningun termino activo; `pulso consultas` lee solo la prensa y las "
+                      "tres redes salen 'sin_dato'".format(et0))
+    return errores, avisos
+
+
+def _validar_bloque_consulta(bloque, p, cid, doc, config_fuentes, errores, avisos):
+    """Un bloque de plataforma de un termino."""
+    et = "consultas[{}].{}".format(cid, p)
+    if not isinstance(bloque, dict):
+        errores.append("{}: debe ser objeto".format(et))
+        return
+    estado = bloque.get("estado")
+    if estado not in ESTADOS_CONSULTA:
+        errores.append("{}: estado {!r} desconocido; se espera {}".format(
+            et, estado, "|".join(ESTADOS_CONSULTA)))
+        return
+    if p in PLATAFORMAS_CONSULTA_SIN_DATO and estado != "sin_dato":
+        errores.append("{}: {} no se cosecha por termino; el bloque tiene que ser "
+                       "'sin_dato' con su razon".format(et, p))
+        return
+    if estado == "sin_dato":
+        _razon_de_producto(bloque.get("razon"), et, errores)
+        sobrantes = set(bloque) - {"estado", "razon"}
+        if sobrantes:
+            errores.append("{}: un bloque 'sin_dato' no lleva conteos ({}); un cero se "
+                           "leeria como 'nadie hablo'".format(et, ", ".join(sorted(sobrantes))))
+        return
+    esp = PLATAFORMAS_CONSULTA[p]
+    for campo in ("publicaciones", "comentarios_cosechados", "opinion"):
+        if not _entero_no_negativo(bloque.get(campo)):
+            errores.append("{}: '{}' debe ser entero no negativo".format(et, campo))
+    if (_entero_no_negativo(bloque.get("opinion"))
+            and _entero_no_negativo(bloque.get("comentarios_cosechados"))
+            and bloque["opinion"] > bloque["comentarios_cosechados"]):
+        errores.append("{}: 'opinion' {} mayor que 'comentarios_cosechados' {}".format(
+            et, bloque["opinion"], bloque["comentarios_cosechados"]))
+
+    lista = bloque.get("destacados")
+    if not isinstance(lista, list):
+        errores.append("{}: 'destacados' debe ser una lista".format(et))
+    else:
+        maximo = doc.get("destacados_maximo")
+        if isinstance(maximo, int) and len(lista) > maximo:
+            errores.append("{}: {} destacados y el maximo es {}".format(et, len(lista), maximo))
+        if _entero_no_negativo(bloque.get("publicaciones")) and len(lista) > bloque["publicaciones"]:
+            errores.append("{}: {} destacados de {} publicaciones".format(
+                et, len(lista), bloque["publicaciones"]))
+        ventana = doc.get("ventana_dias")
+        ctx = _contexto_ventana(doc, "ventana_horas",
+                                ventana * 24 if isinstance(ventana, int) else None)
+        acum = _acumulador_destacados()
+        for i, d in enumerate(lista):
+            eti = "{}.destacados[{}]".format(et, i)
+            if not isinstance(d, dict):
+                errores.append("{}: debe ser objeto".format(eti))
+                continue
+            _validar_destacado(d, eti, esp, p, ctx, set(), True, errores, avisos, acum)
+            if d.get("cuenta") != cid:
+                errores.append("{}: 'cuenta' {!r} debe ser el id del termino {}".format(
+                    eti, d.get("cuenta"), cid))
+            origen = d.get("origen")
+            if origen not in ORIGENES_CONSULTA[p]:
+                errores.append("{}: 'origen' {!r} desconocido en {}; se espera {}".format(
+                    eti, origen, p, "|".join(ORIGENES_CONSULTA[p])))
+            elif not _texto(d.get("fuente")):
+                errores.append("{}: falta 'fuente' (la consulta, el @handle, la etiqueta o "
+                               "la pagina)".format(eti))
+            elif config_fuentes is not None and d["fuente"] not in config_fuentes[p][origen]:
+                errores.append("{}: fuente {!r} no esta configurada para {} en {}/{}".format(
+                    eti, d["fuente"], cid, p, origen))
+        _validar_orden_destacados(lista, acum["urls"], esp["orden"], et, errores)
+
+    salud = bloque.get("salud")
+    if not isinstance(salud, list):
+        errores.append("{}: 'salud' debe ser una lista".format(et))
+    else:
+        claves = []
+        for i, s in enumerate(salud):
+            eti = "{}.salud[{}]".format(et, i)
+            if not isinstance(s, dict):
+                errores.append("{}: debe ser objeto".format(eti))
+                continue
+            if s.get("consulta") != cid or s.get("plataforma") != p:
+                errores.append("{}: fila de otro termino o plataforma".format(eti))
+            if s.get("origen") not in ORIGENES_CONSULTA[p]:
+                errores.append("{}: 'origen' {!r} desconocido".format(eti, s.get("origen")))
+            if not _texto(s.get("fuente")):
+                errores.append("{}: falta 'fuente'".format(eti))
+            if s.get("estado") not in esp["estados"]:
+                errores.append("{}: estado {!r} desconocido".format(eti, s.get("estado")))
+            for campo in ("posts", "comentarios"):
+                if not _entero_no_negativo(s.get(campo)):
+                    errores.append("{}: '{}' debe ser entero no negativo".format(eti, campo))
+            claves.append((s.get("origen") or "", s.get("fuente") or ""))
+        if claves != sorted(claves):
+            errores.append("{}: 'salud' no esta ordenada por (origen, fuente)".format(et))
+
+
+def _validar_prensa_consulta(prensa, cid, doc, errores, avisos):
+    et = "consultas[{}].prensa".format(cid)
+    if not isinstance(prensa, dict):
+        errores.append("{}: debe ser objeto".format(et))
+        return
+    estado = prensa.get("estado")
+    if estado not in ("ok", "fallo", "sin_dato"):
+        errores.append("{}: estado {!r} desconocido".format(et, estado))
+        return
+    if estado != "ok":
+        _razon_de_producto(prensa.get("razon"), et, errores)
+    resultados = prensa.get("resultados")
+    if estado == "ok":
+        if not isinstance(resultados, list):
+            errores.append("{}: 'resultados' debe ser una lista".format(et))
+            resultados = []
+        ventana = prensa.get("ventana_dias")
+        if not isinstance(ventana, int) or isinstance(ventana, bool) \
+                or not 1 <= ventana <= VENTANA_PRENSA_MAXIMA:
+            errores.append("{}: 'ventana_dias' debe ser entero entre 1 y {}; la prensa tiene su "
+                           "propia ventana".format(et, VENTANA_PRENSA_MAXIMA))
+            ventana = None
+        elif ventana != doc.get("ventana_prensa_dias"):
+            errores.append("{}: 'ventana_dias' {} no es la 'ventana_prensa_dias' de la raiz "
+                           "({!r})".format(et, ventana, doc.get("ventana_prensa_dias")))
+        generado = str(doc.get("generado") or "")[:10]
+        desde = None
+        if _fecha(generado) and ventana:
+            desde = (_fecha(generado) - timedelta(days=ventana)).isoformat()
+        hasta = (_fecha(generado) + timedelta(days=1)).isoformat() if _fecha(generado) else None
+        conteo = {k: 0 for k in TONOS_PRENSA_CONSULTA}
+        sin_tono = 0
+        por_medio_visto = {}
+        for i, r in enumerate(resultados):
+            eti = "{}.resultados[{}]".format(et, i)
+            if not isinstance(r, dict):
+                errores.append("{}: debe ser objeto".format(eti))
+                continue
+            if set(r) != CLAVES_RESULTADO_PRENSA:
+                errores.append("{}: claves exactas {}".format(
+                    eti, ", ".join(sorted(CLAVES_RESULTADO_PRENSA))))
+                continue
+            if not _texto(r["titulo"]) or not _texto(r["fuente"]):
+                errores.append("{}: 'titulo' y 'fuente' son texto".format(eti))
+            if r["origen"] not in ORIGENES_PRENSA_CONSULTA:
+                errores.append("{}: 'origen' {!r} desconocido; se espera {}".format(
+                    eti, r["origen"], "|".join(ORIGENES_PRENSA_CONSULTA)))
+            elif r["origen"] == "noticias":
+                if not isinstance(r["url"], str) \
+                        or not r["url"].startswith(PREFIJO_PRENSA_CONSULTA):
+                    # El enlace es el token opaco de Google tal cual: resolverlo
+                    # cambiaria entre corridas (pulso/busquedas.py).
+                    errores.append("{}: 'url' debe ser el enlace de Google Noticias tal cual "
+                                   "({!r})".format(eti, r["url"]))
+            else:
+                # Del buscador propio del medio: el enlace es del medio, https,
+                # y su host es el `dominio` que se publica al lado.
+                host = dominio(r["url"]) if isinstance(r["url"], str) else None
+                if not isinstance(r["url"], str) or not r["url"].startswith("https://") \
+                        or not host or host != r["dominio"]:
+                    errores.append("{}: un titular del buscador del medio lleva el enlace https "
+                                   "del propio medio y su host como 'dominio' ({!r}, {!r})".format(
+                                       eti, r["url"], r["dominio"]))
+            if not isinstance(r["dominio"], str) or not RE_HOST.match(r["dominio"]):
+                errores.append("{}: 'dominio' invalido ({!r})".format(eti, r["dominio"]))
+            if r["tono"] is None:
+                sin_tono += 1
+            elif r["tono"] not in TONOS_PRENSA_CONSULTA:
+                # El vocabulario de la prensa, nunca positivo/negativo: las dos
+                # series no se suman y por eso no comparten etiquetas.
+                errores.append("{}: 'tono' {!r} no es de prensa; se espera null o {}".format(
+                    eti, r["tono"], "|".join(TONOS_PRENSA_CONSULTA)))
+            else:
+                conteo[r["tono"]] += 1
+            if not _fecha(r["fecha"]):
+                errores.append("{}: 'fecha' invalida ({!r})".format(eti, r["fecha"]))
+            elif hasta and r["fecha"] > hasta:
+                errores.append("{}: fecha {} posterior a generado; reloj roto".format(
+                    eti, r["fecha"]))
+            elif desde and r["fecha"] < desde:
+                errores.append("{}: fecha {} fuera de la ventana de {} dias".format(
+                    eti, r["fecha"], ventana))
+            if _texto(r.get("fuente")):
+                fila = por_medio_visto.setdefault(r["fuente"], {"titulares": 0, "favorable": 0,
+                                                                "adversa": 0, "neutral": 0})
+                fila["titulares"] += 1
+                if r["tono"] in TONOS_PRENSA_CONSULTA:
+                    fila[r["tono"]] += 1
+        validos = [r for r in resultados if isinstance(r, dict) and "fecha" in r]
+        esperado = sorted(sorted(validos, key=lambda r: (str(r.get("titulo")), str(r.get("url")))),
+                          key=lambda r: str(r["fecha"]), reverse=True)
+        if validos != esperado:
+            errores.append("{}: 'resultados' no esta ordenado por (-fecha, titulo, url)".format(
+                et))
+        titulos = [fold(str(r.get("titulo"))) for r in validos]
+        if len(set(titulos)) != len(titulos):
+            errores.append("{}: titular repetido; los dos caminos se deduplican por titulo".format(
+                et))
+        # Los anteriores a la ventana: la misma forma, fecha anterior, aparte.
+        # No entran al conteo de tono ni a por_medio; se publican para no
+        # esconder lo que el buscador del medio devolvio.
+        anteriores = prensa.get("anteriores")
+        eti = et + ".anteriores"
+        if not isinstance(anteriores, list):
+            errores.append("{}: debe ser una lista (los titulares que nombran el termino antes "
+                           "de la ventana, con fecha)".format(eti))
+        else:
+            if len(anteriores) > 10:
+                errores.append("{}: mas de 10; el tope es pulso/consultas.py::ANTERIORES_MAXIMO".format(
+                    eti))
+            for i, r in enumerate(anteriores):
+                if not isinstance(r, dict) or set(r) != CLAVES_RESULTADO_PRENSA:
+                    errores.append("{}[{}]: claves exactas {}".format(
+                        eti, i, ", ".join(sorted(CLAVES_RESULTADO_PRENSA))))
+                    continue
+                if r["origen"] != "medio":
+                    errores.append("{}[{}]: solo el buscador de un medio devuelve anteriores; "
+                                   "el de noticias los filtra antes".format(eti, i))
+                if not _fecha(r["fecha"]):
+                    errores.append("{}[{}]: 'fecha' invalida ({!r})".format(eti, i, r["fecha"]))
+                elif desde and r["fecha"] >= desde:
+                    errores.append("{}[{}]: fecha {} esta dentro de la ventana; va en "
+                                   "'resultados'".format(eti, i, r["fecha"]))
+                if r["tono"] is not None and r["tono"] not in TONOS_PRENSA_CONSULTA:
+                    errores.append("{}[{}]: 'tono' {!r} no es de prensa".format(eti, i, r["tono"]))
+                if fold(str(r["titulo"])) in titulos:
+                    errores.append("{}[{}]: repite un titular de 'resultados'".format(eti, i))
+            validos_viejos = [r for r in anteriores if isinstance(r, dict) and "fecha" in r]
+            esperado_viejos = sorted(sorted(validos_viejos, key=lambda r: (str(r.get("titulo")),
+                                                                            str(r.get("url")))),
+                                     key=lambda r: str(r["fecha"]), reverse=True)
+            if validos_viejos != esperado_viejos:
+                errores.append("{}: no esta ordenado por (-fecha, titulo, url)".format(eti))
+
+        # Las cubetas son el recuento de los titulares publicados, ni mas ni
+        # menos: un conteo que no cuadra con la lista es un conteo inventado.
+        tono = prensa.get("tono")
+        eti = et + ".tono"
+        if not isinstance(tono, dict):
+            errores.append("{}: debe ser objeto".format(eti))
+        else:
+            for campo in TONOS_PRENSA_CONSULTA + ("sin_clasificar", "sin_modelo_idioma",
+                                                  "titulares"):
+                if not _entero_no_negativo(tono.get(campo)):
+                    errores.append("{}: '{}' debe ser entero no negativo".format(eti, campo))
+            if all(_entero_no_negativo(tono.get(k)) for k in TONOS_PRENSA_CONSULTA
+                   + ("sin_clasificar", "sin_modelo_idioma", "titulares")):
+                if tono["titulares"] != len(validos):
+                    errores.append("{}: 'titulares' {} y hay {} resultados".format(
+                        eti, tono["titulares"], len(validos)))
+                for k in TONOS_PRENSA_CONSULTA:
+                    if tono[k] != conteo[k]:
+                        errores.append("{}: '{}' {} y los titulares suman {}".format(
+                            eti, k, tono[k], conteo[k]))
+                if tono["sin_clasificar"] + tono["sin_modelo_idioma"] != sin_tono:
+                    errores.append("{}: sin_clasificar + sin_modelo_idioma = {} y hay {} "
+                                   "titulares sin tono".format(
+                                       eti, tono["sin_clasificar"] + tono["sin_modelo_idioma"],
+                                       sin_tono))
+            if tono.get("metodo") not in ("modelo", "ninguno"):
+                errores.append("{}: 'metodo' debe ser modelo|ninguno".format(eti))
+            elif tono["metodo"] == "ninguno":
+                if tono.get("modelo") is not None:
+                    errores.append("{}: 'modelo' debe ser null cuando el metodo es ninguno".format(
+                        eti))
+                if validos:
+                    avisos.append("{}: titulares sin tono; corre con --sentimiento modelo".format(
+                        eti))
+            elif tono["metodo"] == "modelo" and conteo and sum(conteo.values()) \
+                    and not _texto(tono.get("modelo")):
+                errores.append("{}: 'modelo' debe nombrar el modelo".format(eti))
+
+        por_medio = prensa.get("por_medio")
+        eti = et + ".por_medio"
+        if not isinstance(por_medio, list):
+            errores.append("{}: debe ser una lista".format(eti))
+        else:
+            claves = []
+            fuentes = []
+            for j, m in enumerate(por_medio):
+                if not isinstance(m, dict) or set(m) != {"fuente", "dominio", "titulares",
+                                                         "favorable", "adversa", "neutral"}:
+                    errores.append("{}[{}]: claves exactas fuente, dominio, titulares, favorable, "
+                                   "adversa, neutral".format(eti, j))
+                    continue
+                esperada = por_medio_visto.get(m["fuente"])
+                if esperada is None:
+                    errores.append("{}[{}]: {!r} no publica ningun titular de la lista".format(
+                        eti, j, m["fuente"]))
+                elif any(m[k] != esperada[k] for k in esperada):
+                    errores.append("{}[{}]: los conteos de {!r} no cuadran con sus titulares".format(
+                        eti, j, m["fuente"]))
+                claves.append((-m["titulares"], m["fuente"]))
+                fuentes.append(m["fuente"])
+            if claves != sorted(claves):
+                errores.append("{}: no esta ordenado por (-titulares, fuente)".format(eti))
+            if set(fuentes) != set(por_medio_visto):
+                errores.append("{}: faltan medios que si publicaron ({})".format(
+                    eti, ", ".join(sorted(set(por_medio_visto) - set(fuentes)))))
+
+        buscadores = prensa.get("buscadores")
+        eti = et + ".buscadores"
+        if not isinstance(buscadores, list) or not buscadores:
+            errores.append("{}: debe ser una lista con al menos el buscador de noticias".format(
+                eti))
+        else:
+            for j, b in enumerate(buscadores):
+                if not isinstance(b, dict) or not _texto(b.get("id")) or not _texto(b.get("nombre")):
+                    errores.append("{}[{}]: id y nombre son texto".format(eti, j))
+                    continue
+                if b.get("estado") not in ESTADOS_BUSCADOR_CONSULTA:
+                    errores.append("{}[{}]: estado {!r} desconocido".format(eti, j, b.get("estado")))
+                for campo in ("titulares", "anteriores"):
+                    if not _entero_no_negativo(b.get(campo)):
+                        errores.append("{}[{}]: '{}' debe ser entero no negativo".format(
+                            eti, j, campo))
+                if b.get("error") is not None and RE_MECANISMO.search(str(b["error"])):
+                    avisos.append("{}[{}]: 'error' nombra el mecanismo; no se pinta, pero "
+                                  "cuidado".format(eti, j))
+            if all(isinstance(b, dict) and b.get("estado") != "ok" for b in buscadores):
+                errores.append("{}: ningun buscador respondio y el bloque dice 'ok'".format(eti))
+        if not _texto(prensa.get("muestra")):
+            errores.append("{}: falta 'muestra', que dice sobre que se busco".format(et))
+    elif resultados not in (None, []):
+        errores.append("{}: un bloque {} no lleva resultados".format(et, estado))
+    archivo = prensa.get("archivo")
+    if archivo is not None:
+        eti = et + ".archivo"
+        if not isinstance(archivo, dict):
+            errores.append("{}: debe ser objeto".format(eti))
+        else:
+            for campo in ("coincidencias", "medios", "busquedas"):
+                if not _entero_no_negativo(archivo.get(campo)):
+                    errores.append("{}: '{}' debe ser entero no negativo".format(eti, campo))
+            if not _texto(archivo.get("muestra")):
+                errores.append("{}: falta 'muestra', que dice sobre que archivo se conto".format(
+                    eti))
+
+
+def validar_consultas(datos, config=None):
+    """data/consultas.json. `config` es config/consultas.json si esta a mano:
+    con el, cada `fuente` de un destacado tiene que ser una configurada."""
+    from .consultas import SALVEDAD_TONO
+    errores, avisos = [], []
+    et0 = "consultas"
+    if datos.get("esquema") != ESQUEMA:
+        errores.append("{}: 'esquema' debe ser {}".format(et0, ESQUEMA))
+    if not _es_iso(datos.get("generado")):
+        errores.append("{}: 'generado' no es ISO-8601".format(et0))
+    vd = datos.get("ventana_dias")
+    if not isinstance(vd, int) or isinstance(vd, bool) or not 1 <= vd <= 30:
+        errores.append("{}: 'ventana_dias' debe ser entero entre 1 y 30".format(et0))
+    vp = datos.get("ventana_prensa_dias")
+    if not isinstance(vp, int) or isinstance(vp, bool) or not 1 <= vp <= VENTANA_PRENSA_MAXIMA:
+        # La prensa mide otra ventana que las redes (seis meses desde el 18 de
+        # septiembre de 2026): sin este campo la pagina no sabria rotularla.
+        errores.append("{}: 'ventana_prensa_dias' debe ser entero entre 1 y {}".format(
+            et0, VENTANA_PRENSA_MAXIMA))
+    if datos.get("retencion_dias") != 30:
+        errores.append("{}: 'retencion_dias' debe ser 30".format(et0))
+    maximo = datos.get("destacados_maximo")
+    if not isinstance(maximo, int) or isinstance(maximo, bool) or maximo < 1:
+        errores.append("{}: 'destacados_maximo' debe ser entero positivo".format(et0))
+    for ruta in _claves_prohibidas(datos, CLAVES_PROHIBIDAS_CONSULTAS):
+        errores.append("{}: clave prohibida (texto, identidad o mecanismo) en {}".format(
+            et0, ruta))
+    for ruta in _claves_prohibidas(datos, frozenset({"porcentaje", "pct"})):
+        errores.append("{}: porcentaje prohibido en {}".format(et0, ruta))
+    gasto = datos.get("gasto")
+    if not isinstance(gasto, dict) or not _entero_no_negativo(gasto.get("resultados")) \
+            or not _entero_no_negativo(gasto.get("gastado")) \
+            or not isinstance(gasto.get("por_concepto"), dict):
+        errores.append("{}: 'gasto' necesita resultados, gastado y por_concepto".format(et0))
+
+    filas = datos.get("consultas")
+    if not isinstance(filas, list):
+        errores.append("{}: 'consultas' debe ser una lista".format(et0))
+        return errores, avisos
+    if not filas:
+        avisos.append("{}: ningun termino en el corte; el buscador de Redes no ofrece "
+                      "ninguno".format(et0))
+    por_id = {}
+    if isinstance(config, dict):
+        por_id = {f.get("id"): f for f in config.get("consultas") or [] if isinstance(f, dict)}
+    ids = [f.get("id") for f in filas if isinstance(f, dict)]
+    if ids != sorted(ids):
+        errores.append("{}: no esta ordenado por id".format(et0))
+    if len(set(ids)) != len(ids):
+        errores.append("{}: id repetido".format(et0))
+    for i, f in enumerate(filas):
+        cid = f.get("id") if isinstance(f, dict) else None
+        et = "{}[{}]".format(et0, cid or i)
+        if not isinstance(f, dict):
+            errores.append("{}: debe ser objeto".format(et))
+            continue
+        if not isinstance(cid, str) or not RE_CONSULTA.match(cid):
+            errores.append("{}: 'id' invalido ({!r})".format(et, cid))
+            continue
+        if not _texto(f.get("termino")):
+            errores.append("{}: falta 'termino'".format(et))
+        if f.get("tipo") not in TIPOS_CONSULTA:
+            errores.append("{}: 'tipo' {!r} desconocido".format(et, f.get("tipo")))
+        if f.get("idioma") not in IDIOMAS:
+            errores.append("{}: idioma {!r} desconocido".format(et, f.get("idioma")))
+        if por_id and cid not in por_id:
+            avisos.append("{}: no esta en config/consultas.json; corte de otra "
+                          "configuracion".format(et))
+        config_fuentes = _fuentes_config_consulta(por_id[cid]) if cid in por_id else None
+
+        plataformas = f.get("plataformas")
+        esperadas = set(PLATAFORMAS_CONSULTA_SOCIAL) | set(PLATAFORMAS_CONSULTA_SIN_DATO)
+        if not isinstance(plataformas, dict) or set(plataformas) != esperadas:
+            errores.append("{}: 'plataformas' debe traer exactamente {}".format(
+                et, ", ".join(sorted(esperadas))))
+        else:
+            for p in PLATAFORMAS_CONSULTA_SOCIAL + PLATAFORMAS_CONSULTA_SIN_DATO:
+                _validar_bloque_consulta(plataformas[p], p, cid, datos, config_fuentes,
+                                         errores, avisos)
+            if all(plataformas[p].get("publicaciones", 0) == 0
+                   for p in PLATAFORMAS_CONSULTA_SOCIAL
+                   if isinstance(plataformas[p], dict)):
+                avisos.append("{}: ninguna publicacion en ninguna plataforma; el termino sale "
+                              "solo con prensa".format(et))
+
+        _validar_prensa_consulta(f.get("prensa"), cid, datos, errores, avisos)
+
+        tono = f.get("tono")
+        eti = et + ".tono"
+        if not isinstance(tono, dict):
+            errores.append("{}: debe ser objeto".format(eti))
+        else:
+            _validar_conteo_sentimiento(tono, eti, errores)
+            for campo in ("sin_clasificar", "sin_modelo_idioma", "comentarios"):
+                if not _entero_no_negativo(tono.get(campo)):
+                    errores.append("{}: '{}' debe ser entero no negativo".format(eti, campo))
+            if all(_entero_no_negativo(tono.get(k))
+                   for k in SENTIMIENTOS + ("sin_clasificar", "sin_modelo_idioma", "comentarios")):
+                suma = sum(tono[k] for k in SENTIMIENTOS + ("sin_clasificar", "sin_modelo_idioma"))
+                if suma != tono["comentarios"]:
+                    errores.append("{}: las cubetas suman {} y 'comentarios' es {}".format(
+                        eti, suma, tono["comentarios"]))
+            if tono.get("metodo") not in ("modelo", "ninguno"):
+                errores.append("{}: 'metodo' debe ser modelo|ninguno".format(eti))
+            elif tono["metodo"] == "ninguno" and tono.get("modelo") is not None:
+                errores.append("{}: 'modelo' debe ser null cuando el metodo es ninguno".format(
+                    eti))
+            elif tono["metodo"] == "modelo" and not _texto(tono.get("modelo")):
+                errores.append("{}: 'modelo' debe nombrar el modelo".format(eti))
+            if tono.get("salvedad_tono") != SALVEDAD_TONO:
+                errores.append("{}: 'salvedad_tono' debe ser el texto exacto de "
+                               "pulso/consultas.py::SALVEDAD_TONO; el tono de una persona se "
+                               "publica solo con esa salvedad (docs/PLAN.md, 18 de septiembre "
+                               "de 2026)".format(eti))
+
+        temas = f.get("temas")
+        eti = et + ".temas"
+        if not isinstance(temas, dict):
+            errores.append("{}: debe ser objeto".format(eti))
+        else:
+            minimo = temas.get("minimo")
+            if not isinstance(minimo, int) or isinstance(minimo, bool) or minimo < 2:
+                errores.append("{}: 'minimo' debe ser entero >= 2".format(eti))
+                minimo = None
+            if not _entero_no_negativo(temas.get("comentarios")):
+                errores.append("{}: 'comentarios' debe ser entero no negativo".format(eti))
+            lista = temas.get("temas")
+            if not isinstance(lista, list):
+                errores.append("{}: 'temas' debe ser una lista".format(eti))
+            else:
+                claves = []
+                for j, t in enumerate(lista):
+                    if not isinstance(t, dict) or set(t) != {"termino", "n"}:
+                        errores.append("{}[{}]: claves exactas termino y n".format(eti, j))
+                        continue
+                    if not _texto(t["termino"]) or not _entero_no_negativo(t["n"]):
+                        errores.append("{}[{}]: 'termino' texto y 'n' entero".format(eti, j))
+                        continue
+                    if minimo and t["n"] < minimo:
+                        errores.append("{}[{}]: n {} debajo del minimo {}".format(
+                            eti, j, t["n"], minimo))
+                    claves.append((-t["n"], t["termino"]))
+                if claves != sorted(claves):
+                    errores.append("{}: no esta ordenado por (-n, termino)".format(eti))
+    return errores, avisos
+
+
+def validar_consultas_comentarios(datos, consultas=None):
+    """consultas-comentarios.json: el texto publicado de las tres plataformas.
+
+    Las mismas reglas que redes-comentarios.json; la unica diferencia es que
+    las urls pueden ser de cualquier destacado de cualquier termino y
+    plataforma del consultas.json del mismo corte.
+    """
+    errores, avisos = [], []
+    et = "consultas-comentarios"
+    if datos.get("esquema") != ESQUEMA:
+        errores.append("{}: 'esquema' debe ser {}".format(et, ESQUEMA))
+    if not _es_iso(datos.get("generado")):
+        errores.append("{}: 'generado' no es ISO-8601".format(et))
+    if datos.get("plataforma") != "consultas":
+        errores.append("{}: 'plataforma' debe ser 'consultas' ({!r})".format(
+            et, datos.get("plataforma")))
+    if datos.get("retencion_dias") != 30:
+        errores.append("{}: 'retencion_dias' debe ser 30".format(et))
+    visibles, maximo = datos.get("visibles"), datos.get("maximo")
+    if not (_entero_no_negativo(visibles) and visibles >= 1):
+        errores.append("{}: 'visibles' debe ser entero positivo".format(et))
+        visibles = None
+    if not (_entero_no_negativo(maximo) and maximo >= (visibles or 1)):
+        errores.append("{}: 'maximo' debe ser entero >= visibles".format(et))
+        maximo = None
+    prohibidas = (CLAVES_PROHIBIDAS_COMENTARIO_PUBLICADO | CLAVES_PROHIBIDAS_TIKTOK
+                  | CLAVES_PROHIBIDAS_FACEBOOK)
+    for ruta in _claves_prohibidas(datos, prohibidas):
+        errores.append("{}: clave prohibida (identidad o id) en {}".format(et, ruta))
+    for ruta in _claves_prohibidas(datos, frozenset({"porcentaje", "pct"})):
+        errores.append("{}: porcentaje prohibido en {}".format(et, ruta))
+
+    por_post = datos.get("por_post")
+    if not isinstance(por_post, dict):
+        errores.append("{}: 'por_post' debe ser {{url: [comentarios]}}".format(et))
+        return errores, avisos
+    if list(por_post) != sorted(por_post):
+        errores.append("{}: 'por_post' no esta ordenado por url".format(et))
+
+    destacadas = None
+    if isinstance(consultas, dict) and isinstance(consultas.get("consultas"), list):
+        destacadas = set()
+        for f in consultas["consultas"]:
+            if not isinstance(f, dict):
+                continue
+            for bloque in (f.get("plataformas") or {}).values():
+                if isinstance(bloque, dict):
+                    for d in bloque.get("destacados") or []:
+                        if isinstance(d, dict):
+                            destacadas.add(d.get("url"))
+    _validar_comentarios_publicados(por_post, destacadas, visibles, maximo, et, errores)
     return errores, avisos
 
 
@@ -2774,6 +3673,25 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
         if errores:
             return errores, avisos
 
+    # config/consultas.json es opcional (la demo del 18 de septiembre de 2026
+    # va fuera del cron). Si esta, se valida aqui, y su contenido acompana a
+    # data/consultas.json mas abajo: cada `fuente` publicada tiene que ser una
+    # configurada.
+    ruta_consultas = os.path.join(dir_config, "consultas.json")
+    cfg_consultas = None
+    if os.path.exists(ruta_consultas):
+        try:
+            from .facebook import ACTOR_BUSQUEDA
+            cfg_consultas = _leer(ruta_consultas)
+            e, a = validar_consultas_config(cfg_consultas, actor_busqueda=ACTOR_BUSQUEDA,
+                                            medios=medios_datos)
+            errores += e
+            avisos += a
+        except (ValueError, OSError) as e:
+            errores.append("consultas: no se pudo leer {} ({})".format(ruta_consultas, e))
+        if errores:
+            return errores, avisos
+
     # config/tendencias.json es opcional, como el de TikTok. Si esta, se valida
     # aqui: una zona sin fila, un WOEID que falta o un presupuesto que no cubre
     # la llamada fallan antes de gastar.
@@ -2843,6 +3761,10 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
         # tendencias.json lo escribe `pulso tendencias`: el ranking de X por
         # ubicacion, sin tuits ni identidad. Tampoco es error que falte.
         "tendencias": (os.path.join(dir_datos, "tendencias.json"), validar_tendencias),
+        # consultas.json lo escribe `pulso consultas`, a mano y fuera del cron:
+        # que se dice de un termino en 30 dias. Tampoco es error que falte.
+        "consultas": (os.path.join(dir_datos, "consultas.json"),
+                      lambda d: validar_consultas(d, cfg_consultas)),
         # Los dictamenes 2024 no cambian y la asignacion 2026 solo se revisa
         # semanalmente. Ausentes no significan cero y por eso son opcionales.
         "gasto-electoral": (os.path.join(dir_datos, "gasto-electoral.json"),
@@ -2891,9 +3813,14 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
     # corresponder al archivo de conteos de este corte; solo, es huerfano. Y
     # que no este en git no puede quedar en un comentario: ver _regla_gitignore.
     hay_texto = False
-    for archivo_texto, nombre, plataforma in (
-            ("redes-comentarios.json", "redes", "instagram"),
-            ("tiktok-comentarios.json", "tiktok", "tiktok")):
+    for archivo_texto, nombre, validar_texto in (
+            ("redes-comentarios.json", "redes",
+             lambda t, r: validar_redes_comentarios(t, r, "instagram")),
+            ("tiktok-comentarios.json", "tiktok",
+             lambda t, r: validar_redes_comentarios(t, r, "tiktok")),
+            # El texto de las tres plataformas de un termino en un solo mapa;
+            # sus urls tienen que ser destacados de consultas.json.
+            ("consultas-comentarios.json", "consultas", validar_consultas_comentarios)):
         ruta_texto = os.path.join(dir_datos, archivo_texto)
         if not os.path.exists(ruta_texto):
             continue
@@ -2903,7 +3830,7 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
                 archivo_texto[:-5], ruta_texto, nombre, dir_datos))
             continue
         try:
-            e, a = validar_redes_comentarios(_leer(ruta_texto), leidos[nombre], plataforma)
+            e, a = validar_texto(_leer(ruta_texto), leidos[nombre])
             errores += e
             avisos += a
         except (ValueError, OSError) as ex:

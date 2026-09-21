@@ -5,6 +5,8 @@ import { useEffect, useState, type ReactNode } from "react";
 import { preload } from "swr";
 
 import { Lector } from "@/components/lector/lector";
+import { BuscadorRedes } from "./buscador-redes";
+import { BusquedaRedes } from "./busqueda-redes";
 import { ConversacionRedes } from "./conversacion-redes";
 import { clasesChip } from "@/components/ui/clases";
 import { RUTAS } from "@/lib/datos/config";
@@ -101,7 +103,7 @@ let ultimaCubeta: CubetaRegion = "corredor";
  *  entraria al bundle de cliente. */
 const OPCIONES_ZONA: readonly (ZonaRuta | null)[] = [null, ...ZONAS_RUTA];
 
-export function LectorRedes({ zona, paneles, menu, analisis = false }: {
+interface PropsLector {
   zona: ZonaRuta | null;
   paneles: { x: ReactNode };
   menu: ReactNode;
@@ -109,7 +111,30 @@ export function LectorRedes({ zona, paneles, menu, analisis = false }: {
    *  (`analisisHabilitado`): ANTHROPIC_API_KEY no lleva NEXT_PUBLIC_, asi que
    *  en cliente valdria "" y la guarda diria que no siempre. */
   analisis?: boolean;
+}
+
+/**
+ * La bifurcacion entre el panel de medios y el modo de busqueda, SIN hooks.
+ *
+ * Existe por un error real: la primera version decidia dentro del componente
+ * de abajo, con un `return` entre sus hooks. Al pasar de /redes a /redes?q=…
+ * por navegacion de cliente, React reusa la misma instancia y la ve pintar
+ * menos hooks que la vez anterior («Rendered fewer hooks than expected»).
+ * Cada rama es un componente propio con sus propios hooks, y el `key` hace
+ * que cambiar de termino monte una busqueda nueva.
+ */
+export function LectorRedes({ consulta = null, ...resto }: PropsLector & {
+  /** La busqueda de la lupa (`?q=`), leida en el servidor por la ruta de
+   *  region. Con texto, la pagina entera es el modo de busqueda
+   *  (paneles/busqueda-redes.tsx). */
+  consulta?: string | null;
 }) {
+  const q = (consulta ?? "").trim();
+  if (q !== "") return <BusquedaRedes key={`q:${q}`} consulta={q} menu={resto.menu} />;
+  return <LectorRedesMedios {...resto} />;
+}
+
+function LectorRedesMedios({ zona, paneles, menu, analisis = false }: PropsLector) {
   const [pestana, setPestana] = useState<Pestana>(() => ultimaPestana);
   useEffect(() => {
     ultimaPestana = pestana;
@@ -142,6 +167,10 @@ export function LectorRedes({ zona, paneles, menu, analisis = false }: {
     // quiera otra pagina la tiene en el menu de la barra.
     <Lector volver={ruta(zona, null)} rotulo="Redes" valor={lugar} tituloOpciones="Lugar"
       opciones={<OpcionesLugar zona={zona} cubetas={disponibles} activa={activa} onCubeta={setCubeta} />} menu={menu}
+      // La lupa, tambien en una pagina de zona: el formulario envia siempre a
+      // la vista de region, porque un termino no es un lugar.
+      busqueda={<BuscadorRedes accion={ruta(null, "redes")} consulta={null} />}
+      rotuloBusqueda="Buscar publicaciones"
       // «De que se habla» va en la barra y no en una pestana: las pestanas son
       // plataformas y esta pregunta las cruza. Solo con Instagram o TikTok
       // delante -- YouTube no cosecha comentarios y X son tendencias, no
@@ -180,7 +209,7 @@ export function LectorRedes({ zona, paneles, menu, analisis = false }: {
 /** El cuerpo del dialogo «Lugar»: enlaces, porque el lugar es el eje de la
  *  ruta y conserva la vista, como el selector del encabezado. El lector cierra
  *  el dialogo al pulsar uno. */
-function OpcionesLugar({ zona, cubetas, activa, onCubeta }: {
+export function OpcionesLugar({ zona, cubetas, activa, onCubeta }: {
   zona: ZonaRuta | null;
   cubetas: CubetaRegion[];
   activa: CubetaRegion;

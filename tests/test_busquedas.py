@@ -183,6 +183,15 @@ class TestUrlDeBusqueda(unittest.TestCase):
         self.assertIn("when%3A7d", url)
         self.assertNotIn("when%3A1d", url)
 
+    def test_dias_atras_es_la_ventana_que_manda(self):
+        # `when:30d` en la URL no basta: _en_ventana tiraba en silencio todo lo
+        # anterior a 7 dias. pulso/consultas.py pasa su propia ventana.
+        from datetime import datetime
+        ahora = datetime.fromisoformat("2026-09-03T18:00:00+00:00")
+        self.assertFalse(busquedas._en_ventana("2026-08-14", ahora))
+        self.assertTrue(busquedas._en_ventana("2026-08-14", ahora, dias_atras=30))
+        self.assertFalse(busquedas._en_ventana("2026-07-01", ahora, dias_atras=30))
+
     def test_una_consulta_con_ampersand_no_inyecta_parametros(self):
         # urlencode y no concatenacion: '&hl=en-US' tiene que quedar DENTRO de
         # q, no convertirse en otro parametro que cambie la edicion del feed.

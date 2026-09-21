@@ -97,6 +97,18 @@ function MedioYouTube({ url, formato, fallar }: { url: string; formato: "short" 
     className={`${proporcion} w-full border-0`} onError={fallar} />;
 }
 
+/** Facebook: el plugin de publicacion incrustada de la propia plataforma, que
+ *  es un iframe y no exige su SDK de JavaScript. Sin el SDK no hay ajuste
+ *  automatico de altura, asi que la tarjeta reserva 4:5 y lo que sobre se lee
+ *  en «Ver original»; una publicacion privada o borrada muestra el aviso de
+ *  Facebook DENTRO del iframe sin emitir error, y con cookies de terceros
+ *  bloqueadas puede pedir sesion. Solo aparece en las consultas por termino. */
+function MedioFacebook({ url, fallar }: { url: string; fallar: () => void }) {
+  const params = new URLSearchParams({ href: url, show_text: "true", width: "500" });
+  return <iframe title="Publicación de Facebook" src={`https://www.facebook.com/plugins/post.php?${params.toString()}`}
+    scrolling="no" allow="encrypted-media" className="aspect-[4/5] w-full border-0" onError={fallar} />;
+}
+
 /** La forma que tendra el medio antes de tenerlo, para que la tarjeta apenas
  *  se mueva cuando aterrice. TikTok es un 9:16 limpio. Instagram trae su
  *  propio marco (cabecera con la cuenta, pie con acciones y texto), unos
@@ -110,6 +122,7 @@ export function EsqueletoMedio({ red, tipo, formato, pulsar = true }: { red: Red
   // salta una tarjeta justo al cambiar de formato.
   const proporcion = red === "youtube"
     ? (formato === "video" ? "aspect-video" : "aspect-[9/16]")
+    : red === "facebook" ? "aspect-[4/5]"
     : red === "tiktok" || tipo === "video" ? "aspect-[9/16]" : "aspect-[4/5]";
   return <div aria-hidden data-esqueleto={red} className={`flex w-full flex-col gap-1 ${pulsar ? "animate-pulse" : ""}`}>
     {red === "instagram" ? <div className="h-[3.25rem] rounded-nucleo bg-vela" /> : null}
@@ -167,7 +180,9 @@ export function MedioSocial({ publicacion }: { publicacion: PublicacionVisual })
         ? <MedioInstagram key={intento} url={publicacion.url} fallar={fallar} />
         : publicacion.red === "youtube"
           ? <MedioYouTube key={intento} url={publicacion.url} formato={publicacion.post.formato} fallar={fallar} />
-          : <MedioTikTok key={intento} url={publicacion.url} fallar={fallar} />}
+          : publicacion.red === "facebook"
+            ? <MedioFacebook key={intento} url={publicacion.url} fallar={fallar} />
+            : <MedioTikTok key={intento} url={publicacion.url} fallar={fallar} />}
     </div>
     {ofrecerRecarga ? <div className="[grid-area:1/1] flex flex-col items-center justify-end gap-2 pb-4 text-center">
       {fallo ? <p role="status" className="text-cuerpo text-tinta-meta">La publicación no está disponible en esta vista.</p> : null}

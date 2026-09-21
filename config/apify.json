@@ -13,10 +13,26 @@
    "plataforma": "facebook",
    "idioma": "es",
    "activo": false,
-   "razon": "Páginas públicas de medios y ayuntamientos de BC, sin sesión. Es el candidato más fuerte: el volumen de comentarios locales en Facebook supera al de YouTube. Falta decidir la lista de páginas y confirmar que los comentarios se pueden derivar sin guardar texto ni identidad.",
+   "razon": "Páginas públicas, sin sesión. Desde el 18 de septiembre de 2026 lo corre pulso/consultas.py sobre las páginas de marca de config/consultas.json (`onlyPostsNewerThan` recorta lo facturado a la ventana de 30 días; ~2 USD por 1,000 posts). Esta fila sigue en `activo: false` porque este catálogo no es el interruptor —igual que los actores de Instagram y TikTok—; documenta el actor y deja que la guardia de sesión revise su entrada. Sus comentarios los trae el actor de abajo; la identidad del comentarista se tira al ingerir en pulso/facebook.py. Sigue pendiente la lista de páginas de medios y ayuntamientos de BC, que era la idea original de esta fila.",
    "cuota": 100,
    "entrada": {
-    "resultsLimit": 50
+    "startUrls": [],
+    "resultsLimit": 50,
+    "onlyPostsNewerThan": "30 days"
+   }
+  },
+  {
+   "id": "apify~facebook-comments-scraper",
+   "plataforma": "facebook",
+   "idioma": "es",
+   "activo": false,
+   "razon": "Segunda pasada de Facebook: comentarios por URL de post público, sin sesión (~1.40 USD por 1,000 comentarios). Devuelve por comentario el nombre, el id, el perfil y la foto del comentarista; los cuatro se tiran al ingerir en pulso/facebook.py y no llegan ni al cache. `viewOption: RANKED_UNFILTERED` es la vista más completa que ofrece. Misma nota que arriba: `activo` aquí no enciende nada; lo corre pulso/consultas.py desde el 18 de septiembre de 2026.",
+   "cuota": 60,
+   "entrada": {
+    "startUrls": [],
+    "resultsLimit": 20,
+    "viewOption": "RANKED_UNFILTERED",
+    "onlyCommentsNewerThan": "30 days"
    }
   },
   {
@@ -97,6 +113,11 @@
    "id": "apify~facebook-groups-scraper",
    "plataforma": "facebook",
    "razon": "NO USAR. Los grupos vecinales de Tijuana que valdrían la pena son cerrados, y entrar a uno cerrado es sesión más aceptación de reglas del grupo. Los grupos públicos que quedan son de compraventa."
+  },
+  {
+   "id": "scraper_one~facebook-posts-search",
+   "plataforma": "facebook",
+   "razon": "NO USAR POR AHORA. Es el único actor que busca posts de Facebook por palabra clave (~2 USD por 1,000) y su entrada no pide cookies, así que la guardia de pulso/apify.py lo dejaría pasar; pero la página de búsqueda de Facebook exige sesión a cualquier visitante, o sea que el proveedor casi con certeza busca con cuentas propias. AGENTS.md refusa el raspado logueado sea de quien sea la cuenta. El 18 de septiembre de 2026 el cliente pidió buscar sus términos en Facebook; se hace por PÁGINAS (arriba) y la búsqueda por palabra queda cableada pero apagada en pulso/facebook.py (`ACTOR_BUSQUEDA = None`) hasta que el cliente tome la decisión legal con el proveedor delante."
   }
  ]
 }

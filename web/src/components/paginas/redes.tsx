@@ -76,7 +76,7 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  * indicadores conserva el suyo, que explica que mide el SHF o la ENSU —el
  * significado de la fuente, no el de nuestro codigo.
  */
-export function PaginaRedes({ zona }: { zona: ZonaRuta | null }) {
+export function PaginaRedes({ zona, consulta = null }: { zona: ZonaRuta | null; consulta?: string | null }) {
   const nombre = zona === null ? null : NOMBRE_CORTO[zona];
 
   return (
@@ -86,6 +86,7 @@ export function PaginaRedes({ zona }: { zona: ZonaRuta | null }) {
       <h1 className="sr-only">{tituloSeccion("redes", nombre)}</h1>
       <LectorRedes
         zona={zona}
+        consulta={consulta}
         menu={<MenuLector zona={zona} vista="redes" />}
         paneles={{ x: <PanelTendencias zona={zona} /> }}
         analisis={analisisHabilitado()}

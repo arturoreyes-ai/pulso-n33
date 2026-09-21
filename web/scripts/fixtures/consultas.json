@@ -1,0 +1,511 @@
+{
+ "esquema": 1,
+ "generado": "2026-09-18T18:00:00+00:00",
+ "ventana_dias": 30,
+ "ventana_prensa_dias": 180,
+ "retencion_dias": 30,
+ "destacados_maximo": 10,
+ "consultas": [
+  {
+   "id": "cq_grupo_concordia",
+   "termino": "Grupo Concordia",
+   "tipo": "empresa",
+   "idioma": "es",
+   "plataformas": {
+    "tiktok": {
+     "estado": "sin_dato",
+     "razon": "Esta consulta no tiene búsqueda en TikTok."
+    },
+    "instagram": {
+     "estado": "ok",
+     "publicaciones": 1,
+     "comentarios_cosechados": 3,
+     "opinion": 3,
+     "destacados": [
+      {
+       "url": "https://www.instagram.com/p/GC1/",
+       "cuenta": "cq_grupo_concordia",
+       "origen": "cuenta",
+       "fuente": "@grupoconcordia",
+       "zona": "nacional",
+       "alcance": "nacional",
+       "publicado": "2026-09-13T16:01:00+00:00",
+       "fecha": "2026-09-13",
+       "titulo": "Todo empieza con una decisión.",
+       "tipo": "imagen",
+       "likes": 4,
+       "comentarios": 3,
+       "cosechados": 3,
+       "opinion": 3,
+       "sentimiento": {
+        "positivo": 2,
+        "negativo": 0,
+        "neutral": 1,
+        "sin_clasificar": 0,
+        "sin_modelo_idioma": 0
+       }
+      }
+     ],
+     "salud": [
+      {
+       "consulta": "cq_grupo_concordia",
+       "plataforma": "instagram",
+       "origen": "cuenta",
+       "fuente": "@grupoconcordia",
+       "estado": "ok",
+       "posts": 1,
+       "comentarios": 3
+      }
+     ]
+    },
+    "facebook": {
+     "estado": "sin_dato",
+     "razon": "Esta consulta no sigue páginas en Facebook."
+    },
+    "youtube": {
+     "estado": "sin_dato",
+     "razon": "No se consulta YouTube por término."
+    },
+    "x": {
+     "estado": "sin_dato",
+     "razon": "De X solo se leen tendencias, no publicaciones."
+    }
+   },
+   "prensa": {
+    "estado": "ok",
+    "ventana_dias": 180,
+    "resultados": [
+     {
+      "titulo": "Señalan restricción a la prensa durante audiencia de caso contra Grupo Concordia",
+      "url": "https://blancoynegro.mx/bc/tijuana/senalan-restriccion",
+      "dominio": "blancoynegro.mx",
+      "fuente": "Blanco y Negro Noticias",
+      "fecha": "2026-04-08",
+      "origen": "medio",
+      "tono": "neutral"
+     }
+    ],
+    "anteriores": [
+     {
+      "titulo": "Crecen quejas contra Grupo Concordia; ciudadanos denuncian presuntos fraudes",
+      "url": "https://blancoynegro.mx/bc/crecen-quejas",
+      "dominio": "blancoynegro.mx",
+      "fuente": "Blanco y Negro Noticias",
+      "fecha": "2026-03-11",
+      "origen": "medio",
+      "tono": "adversa"
+     },
+     {
+      "titulo": "Denuncian presunta red de fraudes inmobiliarios ligada a Grupo Concordia",
+      "url": "https://blancoynegro.mx/bc/tijuana/denuncian-red",
+      "dominio": "blancoynegro.mx",
+      "fuente": "Blanco y Negro Noticias",
+      "fecha": "2026-03-11",
+      "origen": "medio",
+      "tono": "adversa"
+     }
+    ],
+    "tono": {
+     "favorable": 0,
+     "adversa": 0,
+     "neutral": 1,
+     "sin_clasificar": 0,
+     "sin_modelo_idioma": 0,
+     "titulares": 1,
+     "metodo": "modelo",
+     "modelo": "pysentimiento/robertuito-sentiment-analysis"
+    },
+    "por_medio": [
+     {
+      "fuente": "Blanco y Negro Noticias",
+      "dominio": "blancoynegro.mx",
+      "titulares": 1,
+      "favorable": 0,
+      "adversa": 0,
+      "neutral": 1
+     }
+    ],
+    "buscadores": [
+     {
+      "id": "noticias",
+      "nombre": "buscador de noticias",
+      "estado": "ok",
+      "titulares": 0,
+      "anteriores": 0
+     },
+     {
+      "id": "blancoynegro",
+      "nombre": "Blanco y Negro Noticias",
+      "estado": "ok",
+      "titulares": 1,
+      "anteriores": 2
+     },
+     {
+      "id": "zeta",
+      "nombre": "Zeta",
+      "estado": "fallo",
+      "titulares": 0,
+      "anteriores": 0
+     }
+    ],
+    "muestra": "El buscador de noticias y el buscador propio de 2 medios, titulares de los últimos 180 días"
+   },
+   "tono": {
+    "positivo": 2,
+    "negativo": 0,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0,
+    "comentarios": 3,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "salvedad_tono": "Conteo del tono de cada comentario según un modelo que lee frases, no posturas: dice si el texto suena a queja, a celebración o a información, no lo que quien escribe piensa de la persona o de la marca. Son comentarios de quien decidió comentar, no una muestra de nadie."
+   },
+   "temas": {
+    "minimo": 3,
+    "comentarios": 3,
+    "temas": []
+   }
+  },
+  {
+   "id": "cq_vivelabaja",
+   "termino": "Vive la Baja",
+   "tipo": "empresa",
+   "idioma": "es",
+   "plataformas": {
+    "tiktok": {
+     "estado": "ok",
+     "publicaciones": 3,
+     "comentarios_cosechados": 12,
+     "opinion": 11,
+     "destacados": [
+      {
+       "url": "https://www.tiktok.com/@vive.la.baja/video/7301",
+       "cuenta": "cq_vivelabaja",
+       "origen": "busqueda",
+       "fuente": "vive la baja",
+       "creador": "@vive.la.baja",
+       "zona": "Ensenada",
+       "alcance": "zona",
+       "publicado": "2026-09-12T21:36:00+00:00",
+       "fecha": "2026-09-12",
+       "titulo": "Ruta del vino en Valle de Guadalupe con Vive la Baja",
+       "tipo": "video",
+       "likes": 345,
+       "comentarios": 12,
+       "compartidos": 9,
+       "guardados": 3,
+       "reproducciones": 12000,
+       "duracion": 41,
+       "cosechados": 8,
+       "opinion": 8,
+       "sentimiento": {
+        "positivo": 5,
+        "negativo": 1,
+        "neutral": 2,
+        "sin_clasificar": 0,
+        "sin_modelo_idioma": 0
+       }
+      },
+      {
+       "url": "https://www.tiktok.com/@viveenlabajamx/video/7302",
+       "cuenta": "cq_vivelabaja",
+       "origen": "busqueda",
+       "fuente": "vive la baja",
+       "creador": "@viveenlabajamx",
+       "zona": "Tijuana",
+       "alcance": "zona",
+       "publicado": "2026-09-05T18:24:00+00:00",
+       "fecha": "2026-09-05",
+       "titulo": "Antojitos en Tijuana",
+       "tipo": "video",
+       "likes": 3,
+       "comentarios": 0,
+       "compartidos": 0,
+       "guardados": 0,
+       "cosechados": 0,
+       "opinion": 0,
+       "sentimiento": {
+        "positivo": 0,
+        "negativo": 0,
+        "neutral": 0,
+        "sin_clasificar": 0,
+        "sin_modelo_idioma": 0
+       }
+      }
+     ],
+     "salud": [
+      {
+       "consulta": "cq_vivelabaja",
+       "plataforma": "tiktok",
+       "origen": "busqueda",
+       "fuente": "vive la baja",
+       "estado": "ok",
+       "posts": 3,
+       "comentarios": 12
+      }
+     ]
+    },
+    "instagram": {
+     "estado": "ok",
+     "publicaciones": 4,
+     "comentarios_cosechados": 9,
+     "opinion": 8,
+     "destacados": [
+      {
+       "url": "https://www.instagram.com/p/VLB2/",
+       "cuenta": "cq_vivelabaja",
+       "origen": "cuenta",
+       "fuente": "@vivelabaja",
+       "zona": "Tecate",
+       "alcance": "zona",
+       "publicado": "2026-09-08T22:14:00+00:00",
+       "fecha": "2026-09-08",
+       "titulo": "Acompáñanos en el proceso. La casa de tus sueños.",
+       "tipo": "video",
+       "likes": 2,
+       "comentarios": 8,
+       "reproducciones": 410,
+       "cosechados": 8,
+       "opinion": 7,
+       "sentimiento": {
+        "positivo": 4,
+        "negativo": 2,
+        "neutral": 1,
+        "sin_clasificar": 0,
+        "sin_modelo_idioma": 0
+       }
+      },
+      {
+       "url": "https://www.instagram.com/p/VLB1/",
+       "cuenta": "cq_vivelabaja",
+       "origen": "hashtag",
+       "fuente": "vivelabaja",
+       "zona": "Tijuana",
+       "alcance": "zona",
+       "publicado": "2026-09-15T19:57:00+00:00",
+       "fecha": "2026-09-15",
+       "titulo": "Hay lugares que simplemente se sienten diferentes.",
+       "tipo": "carrusel",
+       "likes": 2,
+       "comentarios": 1,
+       "cosechados": 1,
+       "opinion": 1,
+       "sentimiento": {
+        "positivo": 1,
+        "negativo": 0,
+        "neutral": 0,
+        "sin_clasificar": 0,
+        "sin_modelo_idioma": 0
+       }
+      }
+     ],
+     "salud": [
+      {
+       "consulta": "cq_vivelabaja",
+       "plataforma": "instagram",
+       "origen": "cuenta",
+       "fuente": "@vivelabaja",
+       "estado": "ok",
+       "posts": 3,
+       "comentarios": 8
+      },
+      {
+       "consulta": "cq_vivelabaja",
+       "plataforma": "instagram",
+       "origen": "hashtag",
+       "fuente": "vivelabaja",
+       "estado": "ok",
+       "posts": 1,
+       "comentarios": 1
+      }
+     ]
+    },
+    "facebook": {
+     "estado": "ok",
+     "publicaciones": 1,
+     "comentarios_cosechados": 2,
+     "opinion": 2,
+     "destacados": [
+      {
+       "url": "https://www.facebook.com/vivelabaja/posts/pfbid0abc",
+       "cuenta": "cq_vivelabaja",
+       "origen": "pagina",
+       "fuente": "vivelabaja",
+       "zona": "Tijuana",
+       "alcance": "zona",
+       "publicado": "2026-09-01T18:00:00+00:00",
+       "fecha": "2026-09-01",
+       "titulo": "Este fin de semana en Tijuana abrimos el nuevo desarrollo",
+       "tipo": "imagen",
+       "likes": 88,
+       "comentarios": 12,
+       "compartidos": 0,
+       "cosechados": 2,
+       "opinion": 2,
+       "sentimiento": {
+        "positivo": 1,
+        "negativo": 1,
+        "neutral": 0,
+        "sin_clasificar": 0,
+        "sin_modelo_idioma": 0
+       }
+      }
+     ],
+     "salud": [
+      {
+       "consulta": "cq_vivelabaja",
+       "plataforma": "facebook",
+       "origen": "pagina",
+       "fuente": "vivelabaja",
+       "estado": "ok",
+       "posts": 1,
+       "comentarios": 2
+      }
+     ]
+    },
+    "youtube": {
+     "estado": "sin_dato",
+     "razon": "No se consulta YouTube por término."
+    },
+    "x": {
+     "estado": "sin_dato",
+     "razon": "De X solo se leen tendencias, no publicaciones."
+    }
+   },
+   "prensa": {
+    "estado": "ok",
+    "ventana_dias": 180,
+    "resultados": [
+     {
+      "titulo": "Vive la Baja abre temporada en Ensenada",
+      "url": "https://news.google.com/rss/articles/CBMiXabc?oc=5",
+      "dominio": "elvigia.net",
+      "fuente": "El Vigía",
+      "fecha": "2026-09-14",
+      "origen": "noticias",
+      "tono": "favorable"
+     },
+     {
+      "titulo": "Vecinos reclaman a Vive la Baja por el ruido del festival",
+      "url": "https://zetatijuana.com/2026/07/vecinos-reclaman-vive-la-baja",
+      "dominio": "zetatijuana.com",
+      "fuente": "Zeta",
+      "fecha": "2026-07-02",
+      "origen": "medio",
+      "tono": "adversa"
+     },
+     {
+      "titulo": "Vive la Baja opens its Rosarito season",
+      "url": "https://news.google.com/rss/articles/CBMiXen?oc=5",
+      "dominio": "kpbs.org",
+      "fuente": "KPBS",
+      "fecha": "2026-06-20",
+      "origen": "noticias",
+      "tono": null
+     }
+    ],
+    "anteriores": [],
+    "tono": {
+     "favorable": 1,
+     "adversa": 1,
+     "neutral": 0,
+     "sin_clasificar": 0,
+     "sin_modelo_idioma": 1,
+     "titulares": 3,
+     "metodo": "modelo",
+     "modelo": "pysentimiento/robertuito-sentiment-analysis"
+    },
+    "por_medio": [
+     {
+      "fuente": "El Vigía",
+      "dominio": "elvigia.net",
+      "titulares": 1,
+      "favorable": 1,
+      "adversa": 0,
+      "neutral": 0
+     },
+     {
+      "fuente": "KPBS",
+      "dominio": "kpbs.org",
+      "titulares": 1,
+      "favorable": 0,
+      "adversa": 0,
+      "neutral": 0
+     },
+     {
+      "fuente": "Zeta",
+      "dominio": "zetatijuana.com",
+      "titulares": 1,
+      "favorable": 0,
+      "adversa": 1,
+      "neutral": 0
+     }
+    ],
+    "buscadores": [
+     {
+      "id": "noticias",
+      "nombre": "buscador de noticias",
+      "estado": "ok",
+      "titulares": 2,
+      "anteriores": 0
+     },
+     {
+      "id": "blancoynegro",
+      "nombre": "Blanco y Negro Noticias",
+      "estado": "ok",
+      "titulares": 0,
+      "anteriores": 0
+     },
+     {
+      "id": "zeta",
+      "nombre": "Zeta",
+      "estado": "ok",
+      "titulares": 1,
+      "anteriores": 0
+     }
+    ],
+    "muestra": "El buscador de noticias y el buscador propio de 2 medios, titulares de los últimos 180 días",
+    "archivo": {
+     "coincidencias": 0,
+     "medios": 18,
+     "busquedas": 6,
+     "muestra": "18 medios del catálogo y 6 búsquedas, titulares de los últimos 180 días"
+    }
+   },
+   "tono": {
+    "positivo": 11,
+    "negativo": 4,
+    "neutral": 6,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0,
+    "comentarios": 21,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "salvedad_tono": "Conteo del tono de cada comentario según un modelo que lee frases, no posturas: dice si el texto suena a queja, a celebración o a información, no lo que quien escribe piensa de la persona o de la marca. Son comentarios de quien decidió comentar, no una muestra de nadie."
+   },
+   "temas": {
+    "minimo": 3,
+    "comentarios": 21,
+    "temas": [
+     {
+      "termino": "valle guadalupe",
+      "n": 5
+     },
+     {
+      "termino": "precios",
+      "n": 3
+     }
+    ]
+   }
+  }
+ ],
+ "gasto": {
+  "resultados": 7000,
+  "gastado": 40,
+  "por_concepto": {
+   "cq_vivelabaja": 37,
+   "cq_grupo_concordia": 3
+  }
+ }
+}

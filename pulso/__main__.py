@@ -5,6 +5,7 @@
   python -m pulso conversacion [--sentimiento ninguno|modelo]
   python -m pulso redes [--posts N] [--comentarios N]
   python -m pulso tiktok [--videos N] [--comentarios N] [--probar]
+  python -m pulso consultas [--consulta ID] [--sentimiento ninguno|modelo] [--probar]
   python -m pulso tendencias [--probar] [--ubicaciones]
   python -m pulso gasto-electoral [--solo-financiamiento]
   python -m pulso apify [--verificar]
@@ -428,6 +429,142 @@ def cmd_tiktok(args):
     return 0
 
 
+def cmd_consultas(args):
+    """Que se dice de un TERMINO en TikTok, Instagram, Facebook y la prensa.
+
+    Corre a mano, fuera del cron: es la demo del 18 de septiembre de 2026.
+    Los terminos vienen de config/consultas.json y una fila cosecha solo con
+    `activo` y `verificado`; `--probar` recorre todas, apagadas incluidas,
+    sin comentarios y sin escribir, y es el paso previo a encender una. El
+    texto de los comentarios va a data/consultas-comentarios.json, fuera de
+    git; la identidad de quien comenta no llega ni al cache. Ver el
+    encabezado de pulso/consultas.py.
+    """
+    from .apify import Presupuesto
+    from .consultas import (COSECHA_OMISION, archivo, clasificar_cache, cosechar, derivar,
+                            prensa, probar, publicar_comentarios)
+    from .pipeline import ahora_utc, _escribir
+
+    cfg = _leer(os.path.join(args.config, "consultas.json"))
+    consultas = cfg.get("consultas", [])
+    cosecha = dict(COSECHA_OMISION, **cfg.get("cosecha", {}))
+    if args.posts:
+        cosecha["posts_por_fuente"] = args.posts
+    if args.comentarios:
+        cosecha["comentarios_por_post"] = args.comentarios
+    solo = set(args.consulta) if args.consulta else None
+    ahora = ahora_utc()
+
+    if solo:
+        desconocidas = solo - {c.get("id") for c in consultas}
+        if desconocidas:
+            print("consultas: no existen en el config: {}".format(", ".join(sorted(desconocidas))),
+                  file=sys.stderr)
+            return 1
+        apagadas = [c["id"] for c in consultas
+                    if c.get("id") in solo and not (c.get("activo") and c.get("verificado"))]
+        if apagadas and not args.probar:
+            print("consultas: apagadas o sin verificar, no se cosechan: {} (corre --probar y "
+                  "fecha 'verificado')".format(", ".join(apagadas)), file=sys.stderr)
+
+    if args.probar:
+        for fila in probar(consultas, ahora, cosecha=cosecha, solo=solo):
+            print("\n{} · {} · {} · {}  [{}{}]".format(
+                fila["consulta"], fila["plataforma"], fila["origen"], fila["fuente"],
+                fila["estado"], " · " + fila["error"][:100] if fila.get("error") else ""))
+            for p in fila.get("publicaciones", []):
+                quien = p.get("creador") or p.get("fuente") or ""
+                print("  {}  {:<22} {:<10} {:>6} likes  {}".format(
+                    p["publicado"], quien[:22], p["zona"], p.get("likes", 0), p["titulo"][:60]))
+            if fila.get("descartes"):
+                print("  descartes: {}".format(fila["descartes"]))
+                # Nombres de campo, no valores: para diagnosticar un actor que
+                # devuelve otra forma sin que una identidad cruce a la consola.
+                print("  campos de lo descartado: {}".format(
+                    ", ".join(fila.get("claves_descartadas", []))[:300]))
+        print("\nAnota en la 'nota' de cada fila qué devolvió y fecha 'verificado' antes de "
+              "poner activo: true. Nada se escribió.")
+        return 0
+
+    apify_cfg = _leer(os.path.join(args.config, "apify.json"))
+    tope = args.presupuesto or cosecha["presupuesto_resultados"] or (
+        apify_cfg.get("presupuesto") or {}).get("resultados_por_corrida", 300)
+    nuevos, salud, gasto = cosechar(consultas, ahora, presupuesto=Presupuesto(tope),
+                                    cache=args.cache, cosecha=cosecha, solo=solo)
+
+    # Un solo analizador para los comentarios del cache y los titulares de la
+    # prensa: el mismo modelo, cargado una vez.
+    analizador = None
+    etiquetados = omitidos = 0
+    if args.sentimiento == "modelo":
+        from .sentimiento import Analizador
+        analizador = Analizador()
+        etiquetados, omitidos = clasificar_cache(args.cache, consultas, analizador, solo=solo)
+
+    prensa_de = None
+    if not args.sin_prensa:
+        medios_cfg = _leer(os.path.join(args.config, "medios.json"))
+        busquedas_cfg = _leer(os.path.join(args.config, "busquedas.json")) \
+            if os.path.exists(os.path.join(args.config, "busquedas.json")) else {}
+        prensa_de = prensa(consultas, medios_cfg.get("medios", []), ahora,
+                           alias=busquedas_cfg.get("publicadores"), cosecha=cosecha, solo=solo,
+                           buscadores=cfg.get("buscadores"), analizador=analizador)
+    else:
+        medios_cfg, busquedas_cfg = {}, {}
+    # El archivo propio se cuenta sobre la ventana de la PRENSA: son las dos
+    # cifras de prensa del termino y tienen que medir lo mismo.
+    archivo_de = archivo(consultas, args.archivo, ahora, medios_cfg, busquedas_cfg,
+                         ventana_dias=cosecha["ventana_prensa_dias"], solo=solo)
+
+    doc = derivar(consultas, ahora, salud, gasto, cache=args.cache, prensa=prensa_de,
+                  archivo=archivo_de, cosecha=cosecha, solo=solo)
+    _escribir(os.path.join(args.salida, "consultas.json"), doc)
+
+    publicados = 0
+    if not args.sin_texto:
+        texto = publicar_comentarios(doc, ahora, cache=args.cache)
+        _escribir(os.path.join(args.salida, "consultas-comentarios.json"), texto)
+        publicados = sum(len(v) for v in texto["por_post"].values())
+
+    print("términos: {} · comentarios nuevos: {} · publicados: {} ({}, fuera de git)".format(
+        len(doc["consultas"]), len(nuevos), publicados,
+        os.path.join(args.salida, "consultas-comentarios.json")
+        if not args.sin_texto else "--sin-texto"))
+    print("gasto Apify: {} de {} resultados".format(gasto["gastado"], gasto["resultados"]))
+    if args.sentimiento == "modelo":
+        print("tono: {} etiquetados ahora · {} sin modelo por idioma".format(etiquetados, omitidos))
+    for c in doc["consultas"]:
+        t = c["tono"]
+        pubs = " · ".join("{} {}".format(p, b.get("publicaciones", "sin dato"))
+                          for p, b in c["plataformas"].items() if b["estado"] != "sin_dato")
+        print("  {}: {} · comentarios {} ({} positivos · {} negativos · {} neutrales)".format(
+            c["termino"], pubs or "sin publicaciones en redes", t["comentarios"],
+            t["positivo"], t["negativo"], t["neutral"]))
+        pr = c["prensa"]
+        if pr["estado"] == "ok":
+            tp = pr["tono"]
+            print("    prensa {} días: {} titulares ({} adversos · {} favorables · {} neutrales"
+                  " · {} sin tono) · {} anteriores a la ventana".format(
+                      pr["ventana_dias"], tp["titulares"], tp["adversa"], tp["favorable"],
+                      tp["neutral"], tp["sin_clasificar"] + tp["sin_modelo_idioma"],
+                      len(pr["anteriores"])))
+            for m in pr["por_medio"]:
+                print("      {:<28} {:>2} titulares · {} adversos · {} favorables".format(
+                    m["fuente"][:28], m["titulares"], m["adversa"], m["favorable"]))
+            for b in pr["buscadores"]:
+                if b["estado"] != "ok":
+                    print("      {} · {} · {}".format(b["nombre"], b["estado"],
+                                                    b.get("error", "")[:100]), file=sys.stderr)
+        else:
+            print("    prensa: {}".format(pr["estado"]))
+    for s in salud:
+        if s["estado"] != "ok":
+            print("  {} · {} · {} · {} · {}".format(s["consulta"], s["plataforma"], s["fuente"],
+                                                  s["estado"], s.get("error", "")[:120]),
+                  file=sys.stderr)
+    return 0
+
+
 def cmd_youtube(args):
     """Shorts y videos de YouTube por feed publico. No cuesta nada.
 
@@ -815,6 +952,34 @@ def main(argv=None):
                     help="tres videos por búsqueda, sin comentarios y sin escribir: para ver "
                          "qué devuelve el filtro de fecha antes de confiar en el cron")
     tk.set_defaults(fn=cmd_tiktok)
+
+    cq = sub.add_parser("consultas",
+                        help="qué se dice de un término en TikTok, Instagram, Facebook y la "
+                             "prensa, 30 días (requiere APIFY_TOKEN; fuera del cron)")
+    cq.add_argument("--salida", default="data")
+    cq.add_argument("--cache", default=os.path.join("cache", "consultas"))
+    cq.add_argument("--archivo", default="data",
+                    help="dónde viven notas.json y archivo/ para contar coincidencias; va "
+                         "aparte de --salida para que una salida temporal no lea un archivo "
+                         "vacío y afirme cero sobre nada")
+    cq.add_argument("--posts", type=int, default=0, help="publicaciones por fuente (0 usa el config)")
+    cq.add_argument("--comentarios", type=int, default=0,
+                    help="comentarios por publicación (0 usa el config)")
+    cq.add_argument("--presupuesto", type=int, default=0,
+                    help="tope de resultados de esta corrida (0 usa config/consultas.json)")
+    cq.add_argument("--sentimiento", default="ninguno", choices=("ninguno", "modelo"),
+                    help="etiqueta el tono de cada comentario con el modelo local; "
+                         "a data/ solo llegan conteos")
+    cq.add_argument("--sin-texto", action="store_true",
+                    help="no escribe consultas-comentarios.json; el resto sale igual")
+    cq.add_argument("--sin-prensa", action="store_true",
+                    help="no consulta Google Noticias; el bloque de prensa lo dice")
+    cq.add_argument("--consulta", action="append", metavar="ID",
+                    help="solo estos términos (repetible)")
+    cq.add_argument("--probar", action="store_true",
+                    help="tres publicaciones por fuente, apagadas incluidas, sin comentarios y "
+                         "sin escribir: el paso previo a poner activo: true")
+    cq.set_defaults(fn=cmd_consultas)
 
     yt = sub.add_parser("youtube",
                         help="Shorts y videos de YouTube por feed público (sin llave, sin costo)")

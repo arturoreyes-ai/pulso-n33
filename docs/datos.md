@@ -1501,6 +1501,248 @@ actor recortaría en silencio. `actor` es el id de Apify. Lo valida
 `validar_tendencias_config`, que además pasa la entrada construida por la
 guardia de sesión de `pulso/apify.py`.
 
+## `data/consultas.json` — qué se dice de un término
+
+Lo escribe `python -m pulso consultas` (`pulso/consultas.py`), a mano y fuera
+del cron, desde el 18 de septiembre de 2026. Por cada **término** de
+`config/consultas.json` —una marca o una persona— junta lo que dicen TikTok
+(búsqueda), Instagram (cuentas y etiquetas) y Facebook (páginas públicas) en
+los últimos **30 días**, y lo que dice la prensa en los últimos **seis meses**
+(`ventana_prensa_dias`): el buscador de noticias más el buscador propio de
+cada medio de `buscadores`, con el tono de cada titular. Lo valida
+`validar_consultas`. La prensa se lee de **todas** las filas, apagadas
+incluidas; una fila apagada sale con sus tres redes en `sin_dato`.
+
+```json
+{
+ "esquema": 1,
+ "generado": "2026-09-18T18:00:00+00:00",
+ "ventana_dias": 30,
+ "ventana_prensa_dias": 180,
+ "retencion_dias": 30,
+ "destacados_maximo": 10,
+ "consultas": [
+  {
+   "id": "cq_vivelabaja",
+   "termino": "Vive la Baja",
+   "tipo": "empresa",
+   "idioma": "es",
+   "plataformas": {
+    "tiktok": {
+     "estado": "ok",
+     "publicaciones": 14,
+     "comentarios_cosechados": 212,
+     "opinion": 190,
+     "destacados": [
+      {"url": "https://www.tiktok.com/@x/video/1", "cuenta": "cq_vivelabaja",
+       "origen": "busqueda", "fuente": "vive la baja", "creador": "@x",
+       "zona": "Ensenada", "alcance": "zona",
+       "publicado": "2026-09-10T15:00:00+00:00", "fecha": "2026-09-10",
+       "titulo": "Ruta del vino en Valle de Guadalupe", "tipo": "video",
+       "likes": 1834, "comentarios": 212, "compartidos": 41, "guardados": 12,
+       "reproducciones": 90000, "duracion": 47,
+       "cosechados": 20, "opinion": 18,
+       "sentimiento": {"positivo": 9, "negativo": 2, "neutral": 7, "sin_clasificar": 0, "sin_modelo_idioma": 0}}
+     ],
+     "salud": [
+      {"consulta": "cq_vivelabaja", "plataforma": "tiktok", "origen": "busqueda",
+       "fuente": "vive la baja", "estado": "ok", "posts": 14, "comentarios": 212,
+       "crudos": 230, "descartados": 1, "fuera": 0}
+     ]
+    },
+    "instagram": {"estado": "ok", "publicaciones": 22, "comentarios_cosechados": 140, "opinion": 121, "destacados": [], "salud": []},
+    "facebook": {"estado": "ok", "publicaciones": 9, "comentarios_cosechados": 60, "opinion": 55, "destacados": [], "salud": []},
+    "youtube": {"estado": "sin_dato", "razon": "No se consulta YouTube por término."},
+    "x": {"estado": "sin_dato", "razon": "De X solo se leen tendencias, no publicaciones."}
+   },
+   "prensa": {
+    "estado": "ok",
+    "ventana_dias": 180,
+    "resultados": [
+     {"titulo": "Vive la Baja abre temporada en Ensenada",
+      "url": "https://news.google.com/rss/articles/CBMiX…",
+      "dominio": "elvigia.net", "fuente": "El Vigía", "fecha": "2026-09-14",
+      "origen": "noticias", "tono": "favorable"},
+     {"titulo": "Vecinos reclaman a Vive la Baja por el ruido del festival",
+      "url": "https://zetatijuana.com/2026/07/vecinos-reclaman…",
+      "dominio": "zetatijuana.com", "fuente": "Zeta", "fecha": "2026-07-02",
+      "origen": "medio", "tono": "adversa"}
+    ],
+    "anteriores": [
+     {"titulo": "Vive la Baja: la primera temporada", "url": "https://zetatijuana.com/2025/…",
+      "dominio": "zetatijuana.com", "fuente": "Zeta", "fecha": "2025-11-02",
+      "origen": "medio", "tono": "neutral"}
+    ],
+    "tono": {"favorable": 1, "adversa": 1, "neutral": 0, "sin_clasificar": 0, "sin_modelo_idioma": 0,
+             "titulares": 2, "metodo": "modelo", "modelo": "pysentimiento/robertuito-sentiment-analysis"},
+    "por_medio": [
+     {"fuente": "El Vigía", "dominio": "elvigia.net", "titulares": 1, "favorable": 1, "adversa": 0, "neutral": 0},
+     {"fuente": "Zeta", "dominio": "zetatijuana.com", "titulares": 1, "favorable": 0, "adversa": 1, "neutral": 0}
+    ],
+    "buscadores": [
+     {"id": "noticias", "nombre": "buscador de noticias", "estado": "ok", "titulares": 1, "anteriores": 0},
+     {"id": "zeta", "nombre": "Zeta", "estado": "ok", "titulares": 1, "anteriores": 1}
+    ],
+    "muestra": "El buscador de noticias y el buscador propio de 5 medios, titulares de los últimos 180 días",
+    "archivo": {"coincidencias": 0, "medios": 18, "busquedas": 6,
+                "muestra": "18 medios del catálogo y 6 búsquedas, titulares de los últimos 180 días"}
+   },
+   "tono": {
+    "positivo": 120, "negativo": 31, "neutral": 160, "sin_clasificar": 0, "sin_modelo_idioma": 0,
+    "comentarios": 311, "metodo": "modelo", "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "salvedad_tono": "Conteo del tono de cada comentario según un modelo que lee frases, no posturas: …"
+   },
+   "temas": {"minimo": 3, "comentarios": 311, "temas": [{"termino": "valle guadalupe", "n": 14}]}
+  }
+ ],
+ "gasto": {"resultados": 7000, "gastado": 1812, "por_concepto": {"cq_vivelabaja": 1812}}
+}
+```
+
+Lo que el esquema decide, y por qué:
+
+- **`cuenta` es el id del término**, y cada destacado lleva `origen`
+  (`busqueda` | `cuenta` | `hashtag` | `pagina`) y `fuente` (la consulta
+  literal, el `@handle`, la etiqueta o el slug de la página). Un término no es
+  una cuenta ni un lugar: la zona sale del texto con el gacetero y `ambito`
+  nacional en las **tres** plataformas —también en Instagram, donde
+  `redes.json` la estampa desde la fila—, así que `alcance` viaja siempre e
+  `internacional` no existe. Un post que nombra Guadalajara queda
+  `nacional/fuera`: es lo que la consulta fue a buscar.
+- **Cada plataforma publica sus cifras y nada más.** TikTok trae `creador`,
+  `compartidos`, `guardados` y `duracion`; Facebook trae `compartidos` (un 0 es
+  cero medido); Instagram no trae ninguno de los tres y su ausencia es «sin
+  dato». `reproducciones` solo si es mayor que 0. Orden explícito
+  `(-likes, -comentarios, url)`, un solo corte global por plataforma —aquí la
+  pregunta es qué se dice del término, no qué pasa en cada ciudad—, tope
+  `destacados_maximo`. Sin `temas` por destacado: los temas son del término.
+- **YouTube y X van como `sin_dato` con `razon` y sin un solo conteo.** Un 0
+  se leería como «nadie habló» cuando lo cierto es que no se leyó. Lo mismo
+  vale para una plataforma en la que el término no tiene fuentes (la persona
+  no tiene cuenta de marca) o cuya fila está apagada. `razon` es para quien lee
+  el archivo y va en registro de producto (el validador rechaza Apify, API,
+  token, git, actor, cron o pipeline dentro); **la página y el PDF dicen solo
+  «sin dato»**, por pedido del cliente del 18 de septiembre de 2026.
+- **La prensa mide seis meses y cada titular lleva `tono`.** `ventana_dias`
+  del bloque es la `ventana_prensa_dias` de la raíz (hasta 365; un titular no
+  es conversación y no lo ata la retención de 30 días). `tono` es `favorable`
+  | `adversa` | `neutral` | `null`, el vocabulario de la prensa del muro y
+  nunca el de los comentarios: las dos series no se suman y por eso no
+  comparten etiquetas (`docs/PLAN.md` §6). `null` es «sin tono» (no corrió el
+  modelo, o el medio publica en un idioma que el modelo no lee), nunca
+  «neutral» por omisión. El bloque `tono` son cinco cubetas que suman
+  `titulares` y tienen que ser exactamente el recuento de `resultados`;
+  `por_medio` reparte lo mismo por medio, ordenado `(-titulares, fuente)`.
+- **Dos caminos, y `origen` dice cuál.** `noticias`: el buscador de noticias;
+  `url` es el enlace opaco tal cual, nunca resuelto (ver
+  `config/busquedas.json`), y nada de esto pasa por `notas.json`. `medio`: el
+  buscador propio de un medio de `buscadores` (`config/consultas.json`), el RSS
+  de búsqueda de WordPress; `url` es la nota en el sitio del medio, https, y su
+  host es el `dominio`. Solo entran los titulares que **nombran** el término:
+  el buscador del medio empareja contra el cuerpo, que aquí no se lee. Los
+  repetidos entre caminos se quedan con el enlace del medio.
+- **`anteriores` son los titulares que nombran el término antes de la
+  ventana**, misma forma, con fecha y tono por fila, hasta 10, solo del
+  buscador de un medio (el de noticias los filtra antes). No entran a `tono`
+  ni a `por_medio`; se publican para no esconder lo que el buscador ya
+  devolvió. El caso: los dos titulares más duros sobre Grupo Concordia son del
+  11 de marzo de 2026, una semana fuera de los 180 días.
+- **`buscadores` y `muestra` dicen qué se buscó**: una fila por buscador
+  (`noticias` primero) con `estado` `ok` | `fallo` | `robots` y sus conteos.
+  `robots` es un robots.txt que no permite la búsqueda con el agente del
+  pipeline, o que no se pudo leer. El bloque es `ok` si al menos uno
+  respondió.
+- **`archivo.coincidencias`** cuenta los titulares del archivo propio que
+  nombran el término dentro de la ventana **de la prensa**, y `muestra` dice
+  sobre qué archivo se contó; la clave no es `notas` porque `notas` es clave
+  prohibida en `data/`. Si el archivo está vacío el bloque se omite en vez de
+  afirmar cero.
+- **`tono` son cinco cubetas que suman `comentarios`**, sobre la opinión del
+  término en las tres plataformas (sin brigada ni reacciones, como en
+  `redes.json`), y **también para la fila `persona`**, por decisión del cliente
+  del 18 de septiembre de 2026 (`docs/PLAN.md`). Por eso viaja `salvedad_tono`
+  con el texto exacto de `pulso/consultas.py::SALVEDAD_TONO`: el validador lo
+  compara por igualdad, en la misma postura que `SALVEDAD_FIJA` en `web/`.
+- **`temas.temas[]` solo trae `{termino, n}`.** `temas.temas()` devuelve
+  además `ejemplos` (texto de comentarios, que no entra a `data/`) y
+  `n_previo`/`momento` (la ventana anterior nunca está en un cache de 30 días:
+  saldrían siempre en cero, relleno). El propio término se quita: que «vive la
+  baja» sea el tema de los comentarios sobre Vive la Baja no dice nada.
+- **`ventana_dias` no puede exceder 30**, la retención del cache: una ventana
+  más larga pediría texto que ya se purgó.
+
+### El cache es por término
+
+`cache/consultas/<cq_id>/<plataforma>/`, con la disciplina de `redes.py`:
+texto crudo con 30 días de retención y fuera de git, `vistos.json` como freno
+de costo (`dias_entre_cosechas: 7`, no 3: con 30 días de ventana, 3 repagaría
+los comentarios de cada publicación unas diez veces al mes) y
+`publicaciones.json` como catálogo. Un video que encuentran dos términos se
+guardaría una sola vez en un cache compartido y su `cuenta` sería la del
+término que corrió al último.
+
+## `data/consultas-comentarios.json` — el texto de los comentarios de un término
+
+Fuera de git por el glob `data/*-comentarios.json`, como los otros dos. Misma
+forma y mismas reglas que `redes-comentarios.json` —las cuatro claves exactas
+por comentario, menciones enmascaradas, «ver más» solo con likes, brigada y
+reacciones fuera, 300 caracteres—, con `plataforma: "consultas"` y las urls de
+las tres plataformas en un solo mapa ordenado. Cada url tiene que ser un
+destacado de `consultas.json` del mismo corte; lo valida
+`validar_consultas_comentarios`.
+
+### `config/consultas.json`
+
+```json
+{
+ "cosecha": {"ventana_dias": 30, "ventana_prensa_dias": 180, "posts_por_fuente": 20, "comentarios_por_post": 20,
+             "dias_entre_cosechas": 7, "presupuesto_resultados": 7000, "prensa_por_consulta": 20,
+             "destacados_maximo": 10, "filtro_fecha_tiktok": "PAST_MONTH", "orden_tiktok": "MOST_RELEVANT"},
+ "buscadores": [
+  {"id": "blancoynegro", "nombre": "Blanco y Negro Noticias",
+   "url": "https://blancoynegro.mx/?s={q}&feed=rss2", "idioma": "es",
+   "activo": true, "verificado": "2026-09-18", "nota": "…"}
+ ],
+ "consultas": [
+  {"id": "cq_vivelabaja", "termino": "Vive la Baja", "tipo": "empresa", "idioma": "es",
+   "activo": false, "verificado": null,
+   "tiktok": {"consulta": "vive la baja"},
+   "instagram": {"hashtags": ["vivelabaja"], "cuentas": ["@vivelabaja"]},
+   "facebook": {"paginas": ["vivelabaja"]},
+   "prensa": {"q": "\"Vive la Baja\""},
+   "nota": "…"}
+ ]
+}
+```
+
+`id` cumple `^cq_[a-z0-9_]{2,20}$`; `tipo` es `persona` | `empresa` | `tema`;
+`zona` en una fila es error. Una fila cosecha **redes** solo con `activo: true`
+**y** `verificado` con fecha —la del primer `python -m pulso consultas --probar`
+que devolvió publicaciones razonables, anotadas en su `nota`—, y una fila
+activa sin fecha es error; la **prensa** se lee de todas las filas, porque no
+cuesta ni exige sondear un handle. `ventana_prensa_dias` va de 1 a 365 (180
+por omisión: seis meses, y el buscador de noticias acepta `when:180d` pero no
+`when:6m`).
+
+`buscadores` son los buscadores propios de los medios (el RSS de búsqueda de
+WordPress, `/?s={q}&feed=rss2`), consultados para **todos** los términos con
+el término sin comillas —WordPress manda las comillas al LIKE tal cual— y el
+filtro por titular del pipeline. Cada fila lleva `id` (`^[a-z0-9_]{2,20}$`, y
+no `noticias`, que es el buscador de noticias), `nombre`, `url` https con
+`{q}` exactamente una vez y host fijo, `idioma`, `activo`, `verificado` y
+`nota`; `activo` sin `verificado` es error, con la misma disciplina que una
+fila de término (Uniradio devuelve su portada entera ignorando el término,
+medido el 18 de septiembre de 2026, y nada lo habría delatado). Si el `id` es
+un medio de `config/medios.json`, el host tiene que ser el del medio, para que
+`fuente` no atribuya a un medio lo que publicó otro. robots.txt se consulta en
+cada corrida con el agente del pipeline. `facebook.busqueda` es error mientras
+`pulso/facebook.py::ACTOR_BUSQUEDA` sea `None`: la búsqueda por palabra en
+Facebook exige sesión del proveedor. `presupuesto_resultados` tiene que cubrir
+**todas** las fuentes configuradas, activas o no —fuentes × `posts_por_fuente`
+× (1 + `comentarios_por_post`)—, para que encender una no recorte a las demás
+en silencio (la lección de `config/tiktok.json`). Lo valida
+`validar_consultas_config`.
+
 ## `config/canales.json`
 
 Lista **fija** de canales de YouTube. No se descubren canales con
