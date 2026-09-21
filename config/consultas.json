@@ -62,6 +62,15 @@
    "nota": "Mismo host que `rosarito` en config/medios.json. Sondeado el 18 de septiembre de 2026: 2 titulares, «Grupo concordia adeudo de 101 mdp con CESPT» (2021) y uno ajeno; el primero cuenta como `anteriores`. robots.txt devuelve 403 a un agente genérico y 200 al del pipeline."
   },
   {
+   "id": "saidbetanzos",
+   "nombre": "Said Betanzos",
+   "url": "https://saidbetanzos.com/?s={q}&feed=rss2",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-21",
+   "nota": "Alta el 21 de septiembre de 2026 al señalar el cliente una de sus notas. Sondeado ese día: «Grupo Concordia» devuelve 7 resultados, de los que «Adeuda grupo Concordia 208 mdp por derechos de conexión» (28 de octubre de 2021) nombra el término en el titular y entra como anterior a la ventana; «Valente Márquez» devuelve 1, la nota del 22 de abril de 2026 sobre el despojo con helicóptero, que lo nombra en el CUERPO y no en el titular —por eso además va en `agregados` de esa fila, porque el filtro por titular la dejaría fuera—. No está en config/medios.json: es un sitio de autor, y entrar al catálogo del muro es otra decisión. robots.txt permite /?s= con el agente del pipeline."
+  },
+  {
    "id": "uniradio",
    "nombre": "Uniradio Informa",
    "url": "https://www.uniradioinforma.com/?s={q}&feed=rss2",
@@ -84,6 +93,15 @@
    "instagram": {"hashtags": [], "cuentas": []},
    "facebook": {"paginas": []},
    "prensa": {"q": "\"Valente Márquez\""},
+   "agregados": [
+    {
+     "url": "https://www.facebook.com/TijuanaLineaRoja/posts/sigue-la-impunidad-se%C3%B1alan-a-empresario-de-grupo-concordia-por-presuntos-fraudes/1493856925630886/",
+     "titulo": "¡Sigue la impunidad! Señalan a empresario de Grupo Concordia por presuntos fraudes inmobiliarios",
+     "fuente": "Tijuana Línea Roja (Facebook)",
+     "fecha": null,
+     "nota": "Señalada por el cliente el 21 de septiembre de 2026. Es un post de una página de Facebook que no está configurada como fuente, y configurarla cosecharía todo lo que publica —la mayoría sin relación— y se cobraría. El titular nombra a Grupo Concordia y no al término; quien nombra a Valente Márquez Amézquita es el cuerpo, que aquí no se lee, así que ninguna búsqueda automática la traería. `fecha` va en null a propósito: el post no publica una que se pueda leer sin sesión, y se pinta «sin fecha» en vez de inventarla."
+    }
+   ],
    "nota": "Dueño del cliente. Sin fuentes en redes, a propósito: `--probar` del 18 de septiembre de 2026 devolvió en TikTok «valente marquez» tres videos de otras personas (una Valentina Márquez, cuentas de apellido Márquez) y la etiqueta #valentemarquez de Instagram devolvió un error (no existe o está vacía). Cosechar eso pagaría ruido, así que la fila queda `activo: false` con la fecha del sondeo y sale solo con PRENSA, que se lee igual. La PRENSA sí se lee: en seis meses el buscador de noticias no trae un solo titular con su nombre y el de Blanco y Negro trae uno, de marzo de 2024, anterior a la ventana. Es la fila `persona`: su tono se publica como conteos con la salvedad fija de pulso/consultas.py, por decisión del cliente del 18 de septiembre de 2026 (docs/PLAN.md); el cruce con `figuras` del roster sigue prohibido. Sin cuenta ni página propias: lo que se busca es lo que otros publican."
   },
   {
@@ -96,7 +114,35 @@
    "tiktok": {},
    "instagram": {"hashtags": ["vivelabaja"], "cuentas": []},
    "facebook": {"paginas": []},
-   "prensa": {"q": "\"Vive la Baja\""},
+   "prensa": {
+    "q": "\"Vive la Baja\"",
+    "excluidos": [
+     {
+      "titulo": "No sabía que necesitaba jugarlo hasta que vi gameplay",
+      "razon": "Descartada por el cliente el 21 de septiembre de 2026: es una nota de videojuegos de IGN España y no trata del término. «Vive la baja» cabe en cualquier oración, y el buscador de noticias empareja contra el cuerpo."
+     },
+     {
+      "titulo": "Frida Urbina abandona",
+      "razon": "Descartada por el cliente el 21 de septiembre de 2026: es un reality de Univision y no trata del término. Mismo caso que la anterior."
+     }
+    ]
+   },
+   "agregados": [
+    {
+     "url": "https://zetatijuana.com/2026/05/dinero-seguro-invertir-en-un-terreno-en-tijuana/",
+     "titulo": "“Dinero seguro”, invertir en un terreno en Tijuana",
+     "fuente": "Semanario ZETA",
+     "fecha": "2026-05-18",
+     "nota": "Señalada por el cliente el 21 de septiembre de 2026. Su titular no nombra el término, así que el filtro por titular la deja fuera de la búsqueda automática; el cuerpo sí, y el cuerpo aquí no se lee."
+    },
+    {
+     "url": "https://saidbetanzos.com/2026/04/22/denuncian-despojo-con-helicoptero-al-estilo-del-cartel-inmobiliario-juez-retrasa-audiencias/",
+     "titulo": "Denuncian despojo con helicóptero al estilo del ‘Cártel Inmobiliario’; juez retrasa audiencias",
+     "fuente": "Said Betanzos",
+     "fecha": "2026-04-22",
+     "nota": "Señalada por el cliente el 21 de septiembre de 2026. Mismo caso: el buscador de ese sitio la devuelve al buscar el término, pero el titular no lo nombra."
+    }
+   ],
    "nota": "Empresa del cliente. `--probar` del 18 de septiembre de 2026: la etiqueta #vivelabaja devuelve las publicaciones de la propia marca (terrenos, Tecate, «la casa de tus sueños»), así que es la fuente que queda. La cuenta @vivelabaja devolvió un error (el handle adivinado no existe o no es público) y la página de Facebook `vivelabaja` también: van fuera hasta que el cliente dé el handle y el slug reales. TikTok «vive la baja» devolvió tres cuentas ajenas con el mismo nombre (comida, trophy trucks), tres de tres, así que la búsqueda se apaga: pagaría ruido. Prensa: la frase con comillas trae 3 titulares en seis meses en el buscador de noticias (18 de septiembre de 2026) y varios son la frase suelta («vive la baja» en otra oración); el filtro por titular no los distingue, así que hay que leer la lista con eso en mente."
   },
   {
@@ -109,7 +155,15 @@
    "tiktok": {},
    "instagram": {"hashtags": [], "cuentas": ["@grupoconcordia"]},
    "facebook": {"paginas": []},
-   "prensa": {"q": "\"Grupo Concordia\""},
+   "prensa": {
+    "q": "\"Grupo Concordia\"",
+    "excluidos": [
+     {
+      "titulo": "Conozca los artistas que animarán las dianas del Gran Poder",
+      "razon": "Descartada por el cliente el 21 de septiembre de 2026: es de Red Uno, de Bolivia, y su «Grupo Concordia» es una banda de la entrada folclórica del Gran Poder. Homónimo, no cobertura."
+     }
+    ]
+   },
    "nota": "`--probar` del 18 de septiembre de 2026: la cuenta @grupoconcordia es la inmobiliaria («un terreno entregado», decisiones, planes; 1 a 4 likes por publicación), así que queda. TikTok «grupo concordia» devolvió tres de tres ajenos (el grupo musical alteño y eventos): la búsqueda se apaga, pagaría ruido. La etiqueta #grupoconcordia y la página de Facebook `grupoconcordia` devolvieron un error (no existen o no son públicas): fuera hasta tener el slug real. En la prensa «Concordia» solo es un municipio de Sinaloa, que el filtro por titular deja fuera. Prensa: el buscador de noticias trae 2 titulares en seis meses (Zeta, 18 de mayo; y uno de Bolivia, homónimo); el buscador de Blanco y Negro trae 3 adversos (marzo y abril de 2026) que Google no indexa."
   }
  ]

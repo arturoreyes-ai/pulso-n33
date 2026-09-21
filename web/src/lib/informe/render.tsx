@@ -43,7 +43,7 @@ export async function renderizarInforme(modelo: DocumentoInforme): Promise<Uint8
       backgroundColor: "#ffffff",
       metadata: {
         title: `Pulso N33 · ${modelo.termino}`,
-        description: `Qué se dice de «${modelo.termino}» en redes y prensa, últimos ${modelo.ventanaDias} días.`,
+        description: `Qué se dice de ${modelo.termino} en redes y prensa, últimos ${modelo.ventanaDias} días.`,
         creator: "Pulso N33",
         creationDate: modelo.corte.slice(0, 19),
       },

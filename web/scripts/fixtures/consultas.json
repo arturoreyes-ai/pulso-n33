@@ -148,7 +148,8 @@
       "anteriores": 0
      }
     ],
-    "muestra": "El buscador de noticias y el buscador propio de 2 medios, titulares de los últimos 180 días"
+    "muestra": "El buscador de noticias y el buscador propio de 2 medios, titulares de los últimos 180 días",
+    "excluidos": 0
    },
    "tono": {
     "positivo": 2,
@@ -406,6 +407,7 @@
      }
     ],
     "anteriores": [],
+    "excluidos": 2,
     "tono": {
      "favorable": 1,
      "adversa": 1,
@@ -473,6 +475,24 @@
      "muestra": "18 medios del catálogo y 6 búsquedas, titulares de los últimos 180 días"
     }
    },
+   "agregados": [
+    {
+     "titulo": "“Dinero seguro”, invertir en un terreno en Tijuana",
+     "url": "https://zetatijuana.com/2026/05/dinero-seguro-invertir-en-un-terreno-en-tijuana/",
+     "fuente": "Semanario ZETA",
+     "fecha": "2026-05-18",
+     "origen": "manual",
+     "tono": "neutral"
+    },
+    {
+     "titulo": "¡Sigue la impunidad! Señalan a empresario por presuntos fraudes inmobiliarios",
+     "url": "https://www.facebook.com/TijuanaLineaRoja/posts/1493856925630886/",
+     "fuente": "Tijuana Línea Roja (Facebook)",
+     "fecha": null,
+     "origen": "manual",
+     "tono": "adversa"
+    }
+   ],
    "tono": {
     "positivo": 11,
     "negativo": 4,

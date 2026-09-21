@@ -441,8 +441,8 @@ def cmd_consultas(args):
     encabezado de pulso/consultas.py.
     """
     from .apify import Presupuesto
-    from .consultas import (COSECHA_OMISION, archivo, clasificar_cache, cosechar, derivar,
-                            prensa, probar, publicar_comentarios)
+    from .consultas import (COSECHA_OMISION, agregados, archivo, clasificar_cache, cosechar,
+                            derivar, prensa, probar, publicar_comentarios)
     from .pipeline import ahora_utc, _escribir
 
     cfg = _leer(os.path.join(args.config, "consultas.json"))
@@ -516,8 +516,11 @@ def cmd_consultas(args):
     archivo_de = archivo(consultas, args.archivo, ahora, medios_cfg, busquedas_cfg,
                          ventana_dias=cosecha["ventana_prensa_dias"], solo=solo)
 
+    # Los enlaces que una fila trae a mano: no cuestan, no tocan la red y van
+    # en su propia lista, fuera de los conteos de prensa.
+    agregados_de = agregados(consultas, ahora, analizador=analizador, solo=solo)
     doc = derivar(consultas, ahora, salud, gasto, cache=args.cache, prensa=prensa_de,
-                  archivo=archivo_de, cosecha=cosecha, solo=solo)
+                  archivo=archivo_de, cosecha=cosecha, solo=solo, agregados=agregados_de)
     _escribir(os.path.join(args.salida, "consultas.json"), doc)
 
     publicados = 0
@@ -548,6 +551,9 @@ def cmd_consultas(args):
                       pr["ventana_dias"], tp["titulares"], tp["adversa"], tp["favorable"],
                       tp["neutral"], tp["sin_clasificar"] + tp["sin_modelo_idioma"],
                       len(pr["anteriores"])))
+            if pr.get("excluidos"):
+                print("      {} descartados a mano (ver 'excluidos' en el config)".format(
+                    pr["excluidos"]))
             for m in pr["por_medio"]:
                 print("      {:<28} {:>2} titulares · {} adversos · {} favorables".format(
                     m["fuente"][:28], m["titulares"], m["adversa"], m["favorable"]))
@@ -557,6 +563,12 @@ def cmd_consultas(args):
                                                     b.get("error", "")[:100]), file=sys.stderr)
         else:
             print("    prensa: {}".format(pr["estado"]))
+        if c.get("agregados"):
+            print("    agregados a mano: {}".format(len(c["agregados"])))
+            for a in c["agregados"]:
+                print("      {} {} | {} | {}".format(a["fecha"] or "sin fecha",
+                                                     a["tono"] or "sin tono",
+                                                     a["fuente"][:24], a["titulo"][:60]))
     for s in salud:
         if s["estado"] != "ok":
             print("  {} · {} · {} · {} · {}".format(s["consulta"], s["plataforma"], s["fuente"],

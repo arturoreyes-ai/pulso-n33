@@ -82,7 +82,9 @@ export interface FuenteInforme {
 export interface TitularInforme {
   titulo: string;
   fuente: string;
-  fecha: string;
+  /** null = sin fecha. Un post de Facebook no publica una legible sin sesión,
+   *  y se pinta «sin fecha» antes que inventarla. */
+  fecha: string | null;
   url: string;
   /** null se pinta «sin tono», nunca «neutral». */
   tono: TonoTitular | null;
@@ -135,6 +137,9 @@ export interface DocumentoInforme {
   /** Las frases de lib/dominio/consultas.ts::frasesConsulta: conteos y fechas,
    *  nunca «la mayoria» ni un porcentaje. Abren el informe. */
   resumen: string[];
+  /** Los enlaces señalados a mano: fuera de los conteos de prensa y dichos
+   *  como lo que son. Vacío cuando nadie agregó nada. */
+  agregados: TitularInforme[];
   fuentes: FuenteInforme[];
   cifras: CifraInforme[];
   /** Publicaciones destacadas por plataforma: son las que el archivo trae con
@@ -261,7 +266,7 @@ export function armarDocumentoInforme(
   }
 
   const prensa = c.prensa;
-  const titular = (r: { titulo: string; fuente: string; fecha: string; url: string; tono: TonoTitular | null }): TitularInforme => ({
+  const titular = (r: { titulo: string; fuente: string; fecha: string | null; url: string; tono: TonoTitular | null }): TitularInforme => ({
     titulo: r.titulo, fuente: r.fuente, fecha: r.fecha, url: r.url, tono: r.tono,
   });
   return {
@@ -271,6 +276,7 @@ export function armarDocumentoInforme(
     ventanaPrensaDias: prensa.estado === "ok" ? (prensa.ventana_dias ?? doc.ventana_prensa_dias) : doc.ventana_prensa_dias,
     corte: doc.generado,
     resumen: frasesConsulta(c, doc),
+    agregados: (c.agregados ?? []).map(titular),
     fuentes,
     cifras,
     destacadosPorRed,

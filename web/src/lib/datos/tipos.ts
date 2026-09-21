@@ -785,6 +785,20 @@ export interface BuscadorPrensaConsulta {
   error?: string;
 }
 
+/** Un enlace que la fila trae A MANO: lo señaló una persona, no lo devolvió
+ *  ninguna búsqueda. Va en su propia lista y nunca dentro de `prensa`, porque
+ *  uno de ellos puede no ser prensa y porque sumarlo allí haría falso el
+ *  conteo de titulares que nombran el término. `fecha` puede faltar (un post
+ *  de Facebook no publica una) y se pinta «sin fecha», nunca inventada. */
+export interface AgregadoConsulta {
+  titulo: string;
+  url: string;
+  fuente: string;
+  fecha: string | null;
+  origen: "manual";
+  tono: TonoTitular | null;
+}
+
 export interface PrensaConsulta {
   estado: "ok" | "fallo" | "sin_dato";
   razon?: string;
@@ -797,6 +811,8 @@ export interface PrensaConsulta {
   tono?: TonoPrensaConsulta;
   por_medio?: MedioPrensaConsulta[];
   buscadores?: BuscadorPrensaConsulta[];
+  /** Cuántos titulares se descartaron a mano, con su razón en el config. */
+  excluidos?: number;
   muestra?: string;
   archivo?: ArchivoConsulta;
 }
@@ -830,6 +846,9 @@ export interface Consulta {
   idioma: "es" | "en";
   plataformas: Record<RedConsulta, BloqueRedConsulta> & Record<RedSinDatoConsulta, BloqueSinDatoConsulta>;
   prensa: PrensaConsulta;
+  /** Ausente cuando nadie agregó nada: una lista vacía se leería como «no hay
+   *  nada que agregar» y lo cierto es que nadie agregó nada. */
+  agregados?: AgregadoConsulta[];
   tono: TonoConsulta;
   temas: TemasConsulta;
 }

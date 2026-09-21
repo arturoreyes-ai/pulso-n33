@@ -551,6 +551,14 @@ conteos también para la fila `persona`, por decisión del cliente registrada en
 lo que se corrió para la demo del 18 de septiembre de 2026— y las tres redes
 salen «sin dato».
 
+Dos listas del config curan a mano lo que la búsqueda no acierta, y las dos se
+justifican por escrito: `prensa.excluidos` descarta un titular que no trata del
+término —se empareja por titular, porque el enlace del buscador de noticias
+cambia entre consultas— y el informe publica cuántos se descartaron;
+`agregados` añade un enlace que ninguna búsqueda devuelve, porque su titular no
+nombra el término, y sale en su propia sección rotulada como tal, fuera de los
+conteos.
+
 ## Automatización
 
 `.github/workflows/pulso.yml` corre las pruebas, el pipeline, la conversación

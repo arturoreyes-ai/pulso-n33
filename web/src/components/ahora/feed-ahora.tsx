@@ -295,9 +295,9 @@ function RecorridoBusqueda({ consulta, zona, menu, analisis }: {
 
 /** Lo que dice la tarjeta final de una busqueda. Sin nombrar el mecanismo. */
 function fraseBusqueda(consulta: string, n: number, fallo: boolean): string {
-  if (fallo) return `No se pudo completar la búsqueda de «${consulta}».`;
-  if (n === 0) return `Sin titulares para «${consulta}».`;
+  if (fallo) return `No se pudo completar la búsqueda de ${consulta}.`;
+  if (n === 0) return `Sin titulares para ${consulta}.`;
   return n === 1
-    ? `Un titular para «${consulta}».`
-    : `${n} titulares para «${consulta}».`;
+    ? `Un titular para ${consulta}.`
+    : `${n} titulares para ${consulta}.`;
 }

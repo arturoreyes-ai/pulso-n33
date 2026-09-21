@@ -1573,6 +1573,7 @@ incluidas; una fila apagada sale con sus tres redes en `sin_dato`.
       "dominio": "zetatijuana.com", "fuente": "Zeta", "fecha": "2025-11-02",
       "origen": "medio", "tono": "neutral"}
     ],
+    "excluidos": 2,
     "tono": {"favorable": 1, "adversa": 1, "neutral": 0, "sin_clasificar": 0, "sin_modelo_idioma": 0,
              "titulares": 2, "metodo": "modelo", "modelo": "pysentimiento/robertuito-sentiment-analysis"},
     "por_medio": [
@@ -1587,6 +1588,14 @@ incluidas; una fila apagada sale con sus tres redes en `sin_dato`.
     "archivo": {"coincidencias": 0, "medios": 18, "busquedas": 6,
                 "muestra": "18 medios del catálogo y 6 búsquedas, titulares de los últimos 180 días"}
    },
+   "agregados": [
+    {"titulo": "“Dinero seguro”, invertir en un terreno en Tijuana",
+     "url": "https://zetatijuana.com/2026/05/dinero-seguro-invertir-en-un-terreno-en-tijuana/",
+     "fuente": "Semanario ZETA", "fecha": "2026-05-18", "origen": "manual", "tono": "neutral"},
+    {"titulo": "¡Sigue la impunidad! Señalan a empresario…",
+     "url": "https://www.facebook.com/TijuanaLineaRoja/posts/1493856925630886/",
+     "fuente": "Tijuana Línea Roja (Facebook)", "fecha": null, "origen": "manual", "tono": "adversa"}
+   ],
    "tono": {
     "positivo": 120, "negativo": 31, "neutral": 160, "sin_clasificar": 0, "sin_modelo_idioma": 0,
     "comentarios": 311, "metodo": "modelo", "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -1647,6 +1656,22 @@ Lo que el esquema decide, y por qué:
   ni a `por_medio`; se publican para no esconder lo que el buscador ya
   devolvió. El caso: los dos titulares más duros sobre Grupo Concordia son del
   11 de marzo de 2026, una semana fuera de los 180 días.
+- **`excluidos` es cuántos titulares se descartaron a mano**, con su razón
+  escrita en `config/consultas.json`. Se publica el conteo porque una lista
+  curada que no dijera que lo fue afirmaría que la búsqueda devolvió justo
+  eso. El emparejado es por **titular** y no por enlace —el del buscador de
+  noticias rota entre corridas y la exclusión dejaría de aplicar sola— y por
+  contención, porque el mismo titular llega con y sin el sufijo « - Medio»
+  según el camino.
+- **`consultas[].agregados` son los enlaces que la fila trae A MANO**, en su
+  propia lista y **nunca dentro de `prensa`**: uno de ellos es un post de
+  Facebook y no prensa, y sumarlos allí haría falso el conteo de al lado, que
+  dice cuántos titulares *nombran* el término en la ventana. Cada uno lleva
+  `titulo`, `url`, `fuente`, `fecha` (o `null`, que se pinta «sin fecha» y no
+  se inventa), `origen: "manual"` y `tono`; van ordenados por fecha
+  descendente con los de fecha ausente al final, y **no llevan cubetas**: dos
+  titulares no hacen un conteo. La clave se omite cuando nadie agregó nada.
+  Su ventana es la del enlace, no la de la prensa: se pidieron por nombre.
 - **`buscadores` y `muestra` dicen qué se buscó**: una fila por buscador
   (`noticias` primero) con `estado` `ok` | `fallo` | `robots` y sus conteos.
   `robots` es un robots.txt que no permite la búsqueda con el agente del
@@ -1709,7 +1734,10 @@ destacado de `consultas.json` del mismo corte; lo valida
    "tiktok": {"consulta": "vive la baja"},
    "instagram": {"hashtags": ["vivelabaja"], "cuentas": ["@vivelabaja"]},
    "facebook": {"paginas": ["vivelabaja"]},
-   "prensa": {"q": "\"Vive la Baja\""},
+   "prensa": {"q": "\"Vive la Baja\"",
+              "excluidos": [{"titulo": "…un fragmento distintivo…", "razon": "…"}]},
+   "agregados": [{"url": "https://…", "titulo": "…", "fuente": "…",
+                  "fecha": "2026-05-18", "nota": "…"}],
    "nota": "…"}
  ]
 }
@@ -1735,7 +1763,18 @@ fila de término (Uniradio devuelve su portada entera ignorando el término,
 medido el 18 de septiembre de 2026, y nada lo habría delatado). Si el `id` es
 un medio de `config/medios.json`, el host tiene que ser el del medio, para que
 `fuente` no atribuya a un medio lo que publicó otro. robots.txt se consulta en
-cada corrida con el agente del pipeline. `facebook.busqueda` es error mientras
+cada corrida con el agente del pipeline.
+
+**La curación a mano vive en el config y se justifica por escrito**, como una
+fila apagada de cualquier catálogo de este repo. `prensa.excluidos` es una
+lista de `{titulo, razon}`: el título tiene que medir al menos 12 caracteres
+—se empareja por contención y uno corto descartaría de más, en silencio— y la
+razón es obligatoria. `agregados` es una lista de `{url, titulo, fuente,
+fecha, nota}`, con `url` https, `fecha` nula o real, y `nota` obligatoria. Los
+tres agregados del 21 de septiembre de 2026 existen porque su **titular no
+nombra el término** —lo nombra el cuerpo, que aquí no se lee—, así que ninguna
+búsqueda automática los traería; una prueba fija esa condición, para que un
+enlace que sí se puede encontrar solo no viva en esta lista. `facebook.busqueda` es error mientras
 `pulso/facebook.py::ACTOR_BUSQUEDA` sea `None`: la búsqueda por palabra en
 Facebook exige sesión del proveedor. `presupuesto_resultados` tiene que cubrir
 **todas** las fuentes configuradas, activas o no —fuentes × `posts_por_fuente`

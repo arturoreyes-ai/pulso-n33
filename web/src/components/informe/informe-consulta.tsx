@@ -89,7 +89,7 @@ function TablaTitulares({ filas }: { filas: TitularInforme[] }) {
       size="compact"
       stripe
       columns={[
-        { key: "fecha", header: "Fecha", width: "14%", render: (v) => <Text variant="xs" noMargin>{fechaConAnio(String(v))}</Text> },
+        { key: "fecha", header: "Fecha", width: "14%", render: (v) => <Text variant="xs" noMargin>{v === null ? "sin fecha" : fechaConAnio(String(v))}</Text> },
         { key: "fuente", header: "Medio", width: "19%", render: (v) => <Text variant="xs" noMargin>{limpiarParaFuente(String(v))}</Text> },
         { key: "titulo", header: "Titular", render: (v) => <Text variant="xs" noMargin>{limpiarParaFuente(String(v))}</Text> },
         {
@@ -291,7 +291,7 @@ export function InformeConsulta({ modelo }: { modelo: DocumentoInforme }) {
                 </KeepTogether>
               )}
               {m.prensa.resultados.length === 0 ? (
-                <Text>Ningún titular nombra «{m.termino}» en los últimos {ventana(m.ventanaPrensaDias)} en las fuentes revisadas.</Text>
+                <Text>Ningún titular nombra {m.termino} en los últimos {ventana(m.ventanaPrensaDias)} en las fuentes revisadas.</Text>
               ) : (
                 <TablaTitulares filas={m.prensa.resultados} />
               )}
@@ -330,6 +330,17 @@ export function InformeConsulta({ modelo }: { modelo: DocumentoInforme }) {
             El mismo modelo que lee los comentarios lee cada titular y dice si suena favorable, adverso o neutral; no mide lo que el medio piensa de la persona o de la marca. Los titulares y los comentarios no se suman en una sola cifra.
           </PdfAlert>
         </Section>
+
+        {/* ------------------------------------------------ agregados a mano */}
+        {m.agregados.length === 0 ? null : (
+          <Section spacing="md">
+            <Heading level={2}>Agregadas a mano</Heading>
+            <Text variant="sm" color={GRIS}>
+              Señaladas una por una. No las devolvió ninguna búsqueda y no entran en los conteos de las secciones anteriores.
+            </Text>
+            <TablaTitulares filas={m.agregados} />
+          </Section>
+        )}
 
         {/* ------------------------------------------------- lo que no dice */}
         <View break>

@@ -66,7 +66,7 @@ assert.deepEqual(modelo.fuentes.map((f) => f.estado), ['ok', 'ok', 'ok', 'sin_da
 assert.ok(!('razon' in modelo.fuentes[3]), 'ninguna fuente lleva razon al documento');
 // El resumen: frases con conteos, nunca «la mayoria» ni la gente.
 assert.ok(modelo.resumen.length >= 2, 'hay resumen');
-assert.match(modelo.resumen[0], /^3 titulares nombran «Vive la Baja» en los últimos 6 meses: 1 adverso, 1 favorable, 0 neutrales, 1 sin tono\.$/);
+assert.match(modelo.resumen[0], /^3 titulares nombran Vive la Baja en los últimos 6 meses: 1 adverso, 1 favorable, 0 neutrales, 1 sin tono\.$/);
 assert.match(modelo.resumen[1], /^Lo adverso viene de Zeta \(1\)\.$/);
 for (const frase of modelo.resumen) {
   for (const prohibida of ['mayoría', 'la gente', 'opinión pública', '%']) assert.ok(!frase.includes(prohibida), `${frase} · ${prohibida}`);
@@ -112,6 +112,16 @@ assert.match(modelo.prensa.muestra, /180 días/);
 assert.equal(modelo.prensa.archivo.coincidencias, 0);
 assert.match(modelo.prensa.archivo.muestra, /18 medios/);
 assert.ok(!('razon' in modelo.prensa), 'la prensa tampoco lleva razon');
+// Lo agregado a mano: lista propia, fuera de la prensa y de sus conteos.
+assert.equal(modelo.agregados.length, 2);
+assert.deepEqual(modelo.agregados.map((a) => a.fecha), ['2026-05-18', null], 'sin fecha se publica como null');
+assert.deepEqual(modelo.agregados.map((a) => a.tono), ['neutral', 'adversa']);
+assert.equal(modelo.prensa.tono.titulares, 3, 'los agregados no entran al conteo de prensa');
+for (const a of modelo.agregados) {
+  assert.ok(!modelo.prensa.resultados.some((r) => r.url === a.url), 'no se cuenta dos veces');
+}
+assert.match(modelo.resumen.at(-1), /^Además, 2 publicaciones agregadas a mano, 1 adversa\.$/);
+assert.equal(armarDocumentoInforme(doc, gc, textos, { estado: 'apagada' }).agregados.length, 0, 'sin agregados, lista vacia');
 // Sin un solo porcentaje en ninguna cadena del modelo ni de las reglas.
 const texto = JSON.stringify(modelo) + REGLAS_PRODUCTO.join(' ');
 assert.ok(!/\d\s?%/.test(texto), 'ningun porcentaje');
@@ -130,7 +140,7 @@ assert.equal(modeloGc.prensa.estado, 'ok');
 assert.equal(modeloGc.prensa.resultados.length, 1);
 assert.deepEqual(modeloGc.prensa.anteriores.map((r) => [r.fecha, r.tono]), [['2026-03-11', 'adversa'], ['2026-03-11', 'adversa']]);
 assert.equal(modeloGc.prensa.tono.titulares, 1, 'los anteriores no entran al conteo');
-assert.match(modeloGc.resumen[0], /^1 titular nombra «Grupo Concordia» en los últimos 6 meses: 0 adversos, 0 favorables, 1 neutral\.$/);
+assert.match(modeloGc.resumen[0], /^1 titular nombra Grupo Concordia en los últimos 6 meses: 0 adversos, 0 favorables, 1 neutral\.$/);
 assert.match(modeloGc.resumen[1], /^Y hay 2 titulares anteriores a ese periodo, del 11 mar 2026, 2 adversos\.$/);
 assert.equal(modeloGc.destacadosPorRed.length, 1);
 

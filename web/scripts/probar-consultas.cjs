@@ -92,7 +92,7 @@ assert.equal(filtrarPorTexto(filas, {}, 'valle').length, 1, 'sin archivo de text
 // --- la ruta y los huecos ----------------------------------------------------
 assert.equal(rutaDeConsulta('Vive la Baja'), '/redes?q=Vive+la+Baja');
 assert.equal(rutaDeConsulta('Valente Márquez'), '/redes?q=Valente+M%C3%A1rquez');
-assert.match(SIN_FILAS_BUSQUEDA('garita'), /«garita»/);
+assert.match(SIN_FILAS_BUSQUEDA('garita'), /garita/);
 for (const frase of [SIN_FILAS_BUSQUEDA('x'), SIN_FILAS_CONSULTA('x', 30)]) {
   for (const mecanismo of ['corte', 'corrida', 'pipeline', 'cosech']) assert.ok(!frase.includes(mecanismo), `${frase} nombra el mecanismo`);
 }
@@ -107,10 +107,13 @@ assert.equal(rotuloVentana(45), '45 días', 'sin inventar meses que no son enter
 // Las frases salen de los conteos y no dicen «la mayoria», «la gente» ni un porcentaje.
 const vlb = buscarConsulta(doc, 'Vive la Baja');
 const frasesVlb = frasesConsulta(vlb, doc);
-assert.match(frasesVlb[0], /^3 titulares nombran «Vive la Baja» en los últimos 6 meses: 1 adverso, 1 favorable, 0 neutrales, 1 sin tono\.$/);
+assert.match(frasesVlb[0], /^3 titulares nombran Vive la Baja en los últimos 6 meses: 1 adverso, 1 favorable, 0 neutrales, 1 sin tono\.$/);
 assert.match(frasesVlb[1], /^Lo adverso viene de Zeta \(1\)\.$/);
 assert.match(frasesVlb[2], /^8 publicaciones en redes en los últimos 30 días; 21 comentarios leídos: /);
+// Lo agregado a mano se cuenta aparte y se dice que lo es.
+assert.match(frasesVlb.at(-1), /^Además, 2 publicaciones agregadas a mano, 1 adversa\.$/);
 const frasesGc = frasesConsulta(gc, doc);
+assert.ok(!frasesGc.some((f) => f.includes('a mano')), 'sin agregados no se menciona');
 assert.match(frasesGc[1], /^Y hay 2 titulares anteriores a ese periodo, del 11 mar 2026, 2 adversos\.$/, 'los anteriores se dicen con fecha y ano');
 assert.match(frasesGc.at(-1), /^2 de las tres redes sin dato\.$/);
 // Un termino sin un solo titular ni red leida dice el hueco, no un cero disfrazado.
@@ -121,7 +124,7 @@ const vacio = {
   prensa: { ...gc.prensa, resultados: [], anteriores: [], tono: { ...gc.prensa.tono, titulares: 0, neutral: 0 }, por_medio: [] },
 };
 assert.deepEqual(frasesConsulta(vacio, doc), [
-  'Ningún titular de los últimos 6 meses nombra «Nadie» en las fuentes revisadas.',
+  'Ningún titular de los últimos 6 meses nombra Nadie en las fuentes revisadas.',
   'Redes: sin dato.',
 ]);
 for (const frase of [...frasesVlb, ...frasesGc]) {

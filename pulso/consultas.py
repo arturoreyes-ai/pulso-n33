@@ -708,6 +708,80 @@ def _por_medio(resultados):
     return sorted(por.values(), key=lambda f: (-f["titulares"], f["fuente"]))
 
 
+def _agujas_excluidas(consulta):
+    """Los titulares que una fila manda descartar, plegados.
+
+    Se empareja por TITULAR y no por enlace porque el enlace del buscador de
+    noticias es un token que rota entre corridas (pulso/busquedas.py): una
+    exclusion por url dejaria de aplicar sola, en silencio, la primera vez que
+    Google rotara el token. Y por contencion y no por igualdad, porque el
+    mismo titular llega con y sin el sufijo « - Medio» segun el camino.
+    """
+    filas = ((consulta.get("prensa") or {}).get("excluidos")) or []
+    return [fold(f.get("titulo") or "") for f in filas if (f.get("titulo") or "").strip()]
+
+
+def _descartar(resultados, agujas):
+    """Quita los titulares excluidos a mano. Devuelve (los que quedan, cuantos
+    se fueron). El conteo se publica: una lista curada que no dice que lo fue
+    afirmaria que la busqueda devolvio justo eso."""
+    if not agujas:
+        return resultados, 0
+    quedan = [r for r in resultados if not any(a in fold(r["titulo"]) for a in agujas)]
+    return quedan, len(resultados) - len(quedan)
+
+
+def agregados(consultas, ahora, analizador=None, solo=None):
+    """Los enlaces que una fila trae A MANO. {cid: [filas]}. No toca la red.
+
+    El 21 de septiembre de 2026 el cliente senalo tres publicaciones que sus
+    fuentes automaticas no devuelven y que quiere en el informe: dos notas
+    cuyo titular no nombra el termino —«"Dinero seguro", invertir en un
+    terreno en Tijuana» y «Denuncian despojo con helicoptero al estilo del
+    "Cartel Inmobiliario"», que lo nombran en el cuerpo, y el cuerpo aqui no
+    se lee— y un post de una pagina de Facebook que no esta configurada.
+
+    Van en su propia lista y NO en `prensa`, por dos razones que son la misma:
+    uno de los tres no es prensa, y sumarlos a `prensa.resultados` haria falso
+    el conteo de al lado, que dice cuantos titulares NOMBRAN el termino en la
+    ventana. Aqui se publican con su fecha —o sin ella, que es lo que pasa con
+    el post de Facebook— y con el tono del mismo modelo, uno por fila y sin
+    cubetas: dos titulares no hacen un conteo.
+
+    Su ventana es la del enlace, no la de la prensa: se pidieron por nombre.
+    """
+    salida = {}
+    for c in _seleccion(consultas, solo):
+        filas = []
+        for a in c.get("agregados") or []:
+            fecha = (a.get("fecha") or "").strip()
+            filas.append({
+                "titulo": (a.get("titulo") or "").strip(),
+                "url": (a.get("url") or "").strip(),
+                "fuente": (a.get("fuente") or "").strip(),
+                "fecha": fecha or None,
+                "origen": "manual",
+                "idioma": a.get("idioma") or c.get("idioma", IDIOMA_OMISION),
+            })
+        if not filas:
+            continue
+        # Sin fecha al final: el post de Facebook no publica una y inventarsela
+        # seria peor que decir «sin fecha».
+        filas.sort(key=lambda r: (r["fecha"] is None, r["fecha"] is not None and _invertir(r["fecha"]),
+                                  r["titulo"]))
+        _tono_titulares(filas, analizador)
+        for r in filas:
+            r.pop("idioma", None)
+        salida[c["id"]] = filas
+    return salida
+
+
+def _invertir(fecha):
+    """Llave de orden descendente por fecha sin `reverse`, para poder mezclar
+    en la misma tupla con «sin fecha al final»."""
+    return tuple(-int(p) for p in fecha.split("-"))
+
+
 def _muestra_prensa(n_buscadores, dias):
     medios = ("el buscador propio de {} {}".format(n_buscadores, "medio" if n_buscadores == 1
                                                    else "medios") if n_buscadores else None)
@@ -745,6 +819,7 @@ def prensa(consultas, medios, ahora, alias=None, feed=fetch_rss, cosecha=None, s
     dias = cosecha["ventana_prensa_dias"]
     desde = (datetime.fromisoformat(ahora) - timedelta(days=dias)).date().isoformat()
     activos = _buscadores_activos(buscadores)
+    excluidos_por_id = {c["id"]: _agujas_excluidas(c) for c in _seleccion(consultas, solo)}
     salida, filas = {}, []
     for c in _seleccion(consultas, solo):
         q = ((c.get("prensa") or {}).get("q") or "").strip()
@@ -819,6 +894,13 @@ def prensa(consultas, medios, ahora, alias=None, feed=fetch_rss, cosecha=None, s
         if all(fb["estado"] != "ok" for fb in buscadores_salud):
             salida[cid] = {"estado": "fallo", "razon": RAZON_PRENSA_FALLO}
             continue
+        # Lo que la fila manda descartar, con su razon escrita en el config.
+        # Un buscador empareja contra el cuerpo y el filtro por titular no
+        # distingue un homonimo: «Grupo Concordia» tambien es una banda, y
+        # «Vive la Baja» es una frase que cabe en cualquier titular.
+        agujas = excluidos_por_id.get(cid) or []
+        resultados, fuera_r = _descartar(resultados, agujas)
+        anteriores, fuera_a = _descartar(anteriores, agujas)
         _ordenar(resultados)
         anteriores = _ordenar(anteriores)[:ANTERIORES_MAXIMO]
         # Un solo paso por el modelo para los dos grupos; el conteo del bloque
@@ -832,6 +914,7 @@ def prensa(consultas, medios, ahora, alias=None, feed=fetch_rss, cosecha=None, s
             "ventana_dias": dias,
             "resultados": resultados,
             "anteriores": anteriores,
+            "excluidos": fuera_r + fuera_a,
             "tono": tono,
             "por_medio": _por_medio(resultados),
             "buscadores": buscadores_salud,
@@ -983,7 +1066,8 @@ def _temas_termino(opinion, termino, ahora, ventana_dias, minimo):
     return {"minimo": minimo, "comentarios": len(opinion), "temas": filas}
 
 
-def _derivar_consulta(c, ahora, salud, cache, prensa_de, archivo_de, cosecha, dentro):
+def _derivar_consulta(c, ahora, salud, cache, prensa_de, archivo_de, cosecha, dentro,
+                      agregados_de=None):
     cid = c["id"]
     con_fuente = {f["plataforma"] for f in _fuentes(c)}
     por_plataforma = {}
@@ -1039,7 +1123,7 @@ def _derivar_consulta(c, ahora, salud, cache, prensa_de, archivo_de, cosecha, de
     if (archivo_de or {}).get(cid):
         bloque_prensa["archivo"] = archivo_de[cid]
 
-    return {
+    fila = {
         "id": cid,
         "termino": c["termino"],
         "tipo": c.get("tipo") or "tema",
@@ -1050,10 +1134,15 @@ def _derivar_consulta(c, ahora, salud, cache, prensa_de, archivo_de, cosecha, de
         "temas": _temas_termino(opinion, c["termino"], ahora, cosecha["ventana_dias"],
                                 TEMAS_MINIMO),
     }
+    # Se omite cuando esta vacia, como `archivo`: una lista vacia se leeria
+    # como «no hay nada que agregar» y lo cierto es que nadie agrego nada.
+    if (agregados_de or {}).get(cid):
+        fila["agregados"] = agregados_de[cid]
+    return fila
 
 
 def derivar(consultas, ahora, salud, gasto, cache=CACHE, prensa=None, archivo=None,
-            cosecha=None, solo=None):
+            cosecha=None, solo=None, agregados=None):
     """data/consultas.json: lo que se commitea. Conteos, destacados, prensa,
     tono y temas por termino; sin texto de comentarios ni identidad.
 
@@ -1074,7 +1163,8 @@ def derivar(consultas, ahora, salud, gasto, cache=CACHE, prensa=None, archivo=No
         "ventana_prensa_dias": cosecha["ventana_prensa_dias"],
         "retencion_dias": RETENCION_DIAS,
         "destacados_maximo": cosecha["destacados_maximo"],
-        "consultas": [_derivar_consulta(c, ahora, salud, cache, prensa, archivo, cosecha, dentro)
+        "consultas": [_derivar_consulta(c, ahora, salud, cache, prensa, archivo, cosecha, dentro,
+                                        agregados)
                       for c in _seleccion(consultas, solo)],
         "gasto": gasto,
     }

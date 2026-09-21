@@ -336,6 +336,31 @@ class TestPrensa(Base):
         return consultas.prensa(filas or [CONSULTA], MEDIOS_PRENSA, AHORA, feed=self._feed,
                                 buscadores=[BUSCADOR, BUSCADOR_APAGADO], **kw)
 
+    def test_lo_excluido_a_mano_no_sale_y_se_cuenta(self):
+        """Un homonimo se descarta por titular, con su razon en el config.
+
+        Por TITULAR y no por enlace: el del buscador de noticias es un token
+        que rota entre corridas, asi que una exclusion por url dejaria de
+        aplicar sola. Y por contencion, porque el mismo titular llega con y
+        sin el sufijo « - Medio» segun el camino.
+        """
+        fila = dict(CONSULTA, prensa={
+            "q": "\"Vive la Baja\"",
+            "excluidos": [{"titulo": "denuncia por falta de agua", "razon": "otro tema"},
+                          {"titulo": "estafa inmobiliaria", "razon": "de 2024, y no es"}]})
+        b = self._prensa([fila])["cq_vivelabaja"]
+        self.assertNotIn("Vive la Baja, denuncia por falta de agua",
+                         [r["titulo"] for r in b["resultados"]])
+        self.assertEqual(b["anteriores"], [], "tambien se descarta entre los anteriores")
+        self.assertEqual(b["excluidos"], 2, "uno de cada lista")
+        self.assertEqual(b["tono"]["titulares"], 3, "el conteo cuadra con lo que queda")
+        errores, _ = validar_consultas(self._doc(prensa=self._prensa([fila])),
+                                       {"consultas": [CONSULTA]})
+        self.assertEqual(errores, [])
+
+    def test_sin_exclusiones_el_conteo_va_en_cero(self):
+        self.assertEqual(self._prensa()["cq_vivelabaja"]["excluidos"], 0)
+
     def test_seis_meses_dos_caminos_y_los_anteriores_se_cuentan(self):
         b = self._prensa()["cq_vivelabaja"]
         self.assertEqual((b["estado"], b["ventana_dias"]), ("ok", 180))
@@ -478,6 +503,64 @@ class TestPrensa(Base):
         self.assertEqual(errores, [])
         self.assertEqual(doc["ventana_prensa_dias"], 180)
         self.assertEqual(doc["consultas"][0]["prensa"]["ventana_dias"], 180)
+
+
+AGREGADOS = [
+    {"url": "https://zetatijuana.com/2026/05/dinero-seguro/",
+     "titulo": "“Dinero seguro”, invertir en un terreno en Tijuana",
+     "fuente": "Semanario ZETA", "fecha": "2026-05-18", "nota": "prueba"},
+    # Sin fecha: un post de Facebook no publica una legible sin sesion.
+    {"url": "https://www.facebook.com/TijuanaLineaRoja/posts/1493856925630886/",
+     "titulo": "¡Sigue la impunidad! Denuncian fraudes inmobiliarios",
+     "fuente": "Tijuana Línea Roja (Facebook)", "fecha": None, "nota": "prueba"},
+    {"url": "https://saidbetanzos.com/2026/04/22/despojo/",
+     "titulo": "Denuncian despojo con helicóptero; el juez retrasa audiencias",
+     "fuente": "Said Betanzos", "fecha": "2026-04-22", "nota": "prueba"},
+]
+
+
+class TestAgregados(Base):
+    """Los enlaces que una fila trae a mano: lista propia, fuera de la prensa."""
+
+    def test_orden_tono_y_forma(self):
+        filas = consultas.agregados([dict(CONSULTA, agregados=AGREGADOS)], AHORA,
+                                    analizador=AnalizadorFalso())["cq_vivelabaja"]
+        self.assertEqual([r["fecha"] for r in filas], ["2026-05-18", "2026-04-22", None],
+                         "por fecha descendente y la que falta al final")
+        for r in filas:
+            self.assertEqual(set(r), {"titulo", "url", "fuente", "fecha", "origen", "tono"})
+            self.assertEqual(r["origen"], "manual")
+            self.assertIn(r["tono"], consultas.TONOS_PRENSA,
+                          "vocabulario de prensa, nunca el de comentarios")
+        duro = dict(AGREGADOS[0], titulo="Crisis y denuncia por el despojo de un predio")
+        fila = consultas.agregados([dict(CONSULTA, agregados=[duro])], AHORA,
+                                   analizador=AnalizadorFalso())["cq_vivelabaja"][0]
+        self.assertEqual(fila["tono"], "adversa")
+
+    def test_sin_analizador_el_tono_es_null(self):
+        filas = consultas.agregados([dict(CONSULTA, agregados=AGREGADOS)], AHORA)["cq_vivelabaja"]
+        self.assertTrue(all(r["tono"] is None for r in filas))
+
+    def test_una_fila_sin_agregados_no_aparece_ni_en_el_documento(self):
+        self.assertEqual(consultas.agregados([CONSULTA], AHORA), {})
+        doc = self._doc(agregados=consultas.agregados([CONSULTA], AHORA))
+        self.assertNotIn("agregados", doc["consultas"][0],
+                         "la clave se omite: una lista vacia diria «no hay nada que agregar»")
+
+    def test_entran_al_documento_y_pasan_el_validador(self):
+        fila = dict(CONSULTA, agregados=AGREGADOS)
+        doc = self._doc([fila], agregados=consultas.agregados([fila], AHORA,
+                                                              analizador=AnalizadorFalso()))
+        c = doc["consultas"][0]
+        self.assertEqual(len(c["agregados"]), 3)
+        errores, _ = validar_consultas(doc, {"consultas": [fila]})
+        self.assertEqual(errores, [])
+        # Y no se cuelan en el conteo de prensa, que mide otra cosa.
+        self.assertNotIn("agregados", json.dumps(c["prensa"]))
+
+    def test_se_leen_tambien_de_una_fila_apagada(self):
+        apagada = dict(CONSULTA, activo=False, verificado=None, agregados=AGREGADOS)
+        self.assertEqual(len(consultas.agregados([apagada], AHORA)["cq_vivelabaja"]), 3)
 
 
 class TestArchivo(Base):
@@ -658,7 +741,9 @@ class TestValidador(Base):
         prensa = consultas.prensa([CONSULTA], MEDIOS_PRENSA, AHORA, feed=_feed_valido,
                                   cosecha=COSECHA, buscadores=[BUSCADOR],
                                   robots=lambda url: True, analizador=AnalizadorFalso())
-        self.doc = self._doc(prensa=prensa)
+        self.doc = self._doc(prensa=prensa,
+                             agregados=consultas.agregados([dict(CONSULTA, agregados=AGREGADOS)],
+                                                           AHORA, analizador=AnalizadorFalso()))
         self.c = self.doc["consultas"][0]
 
     def _errores(self):
@@ -696,6 +781,18 @@ class TestValidador(Base):
             ("prensa: ningun buscador ok", lambda: [b.update(estado="fallo")
                                                     for b in P()["buscadores"]]),
             ("prensa: origen desconocido", lambda: P()["resultados"][0].update(origen="web")),
+            ("prensa: sin excluidos", lambda: P().pop("excluidos")),
+            ("agregado: lista vacia", lambda: self.c.update(agregados=[])),
+            ("agregado: origen no manual", lambda: self.c["agregados"][0].update(origen="medio")),
+            ("agregado: url http", lambda: self.c["agregados"][0].update(url="http://x.mx/a")),
+            ("agregado: repite la prensa", lambda: self.c["agregados"][0].update(
+                url=P()["resultados"][0]["url"])),
+            ("agregado: tono de comentarios", lambda: self.c["agregados"][0].update(
+                tono="negativo")),
+            ("agregado: fecha inventada", lambda: self.c["agregados"][0].update(fecha="mayo")),
+            ("agregado: desordenado", lambda: self.c["agregados"].reverse()),
+            ("agregado: url repetida", lambda: self.c["agregados"].append(
+                dict(self.c["agregados"][0], titulo="otro"))),
             ("raiz sin ventana de prensa", lambda: self.doc.pop("ventana_prensa_dias")),
             ("texto", lambda: self.c["plataformas"]["tiktok"]["destacados"][0].update(texto="x")),
             ("profileName", lambda: self.c["plataformas"]["facebook"].update(profileName="x")),
@@ -822,6 +919,34 @@ class TestConfigReal(unittest.TestCase):
         self.assertLessEqual(self.cfg["cosecha"]["ventana_dias"], consultas.RETENCION_DIAS)
         # La de la prensa es otra, y es la de seis meses que pidio el cliente.
         self.assertEqual(self.cfg["cosecha"]["ventana_prensa_dias"], 180)
+
+    def test_lo_curado_a_mano_lleva_su_razon_escrita(self):
+        """Descartar o agregar a mano se justifica por escrito, como una fila
+        apagada de cualquier catalogo de este repo."""
+        agregados = excluidos = 0
+        for c in self.cfg["consultas"]:
+            for x in (c.get("prensa") or {}).get("excluidos") or []:
+                excluidos += 1
+                with self.subTest(excluido=x["titulo"][:30]):
+                    self.assertGreaterEqual(len(x["titulo"]), 12, "se empareja por contencion")
+                    self.assertIn("2026", x["razon"], "la razon lleva la fecha de la decision")
+            for a in c.get("agregados") or []:
+                agregados += 1
+                with self.subTest(agregado=a["url"][:40]):
+                    self.assertTrue(a["nota"].strip())
+                    self.assertTrue(a["url"].startswith("https://"))
+                    self.assertTrue(a["titulo"].strip() and a["fuente"].strip())
+        self.assertEqual((agregados, excluidos), (3, 3),
+                         "los tres enlaces y los tres descartes del 21 de septiembre de 2026")
+
+    def test_ningun_agregado_lo_traeria_la_busqueda_sola(self):
+        """La razon de existir de `agregados`: su titular NO nombra el termino,
+        asi que el filtro por titular los dejaria fuera. Si alguno lo nombrara,
+        sobra en la lista y su sitio es la busqueda."""
+        for c in self.cfg["consultas"]:
+            for a in c.get("agregados") or []:
+                with self.subTest(agregado=a["titulo"][:40]):
+                    self.assertFalse(consultas._nombra(a["titulo"], c["termino"]))
 
     def test_cada_buscador_trae_nota_y_los_encendidos_fecha(self):
         ids = [b["id"] for b in self.cfg["buscadores"]]

@@ -438,6 +438,28 @@ never the comments'). Rules that look arbitrary and are not:
   week outside 180 days, and the only one naming Valente Márquez is from March
   2024. Hiding them behind a count would have been the report saying less than
   the harvest knew.
+- **Hand curation is config, written down, and labelled on screen** (21
+  September 2026). Two lists, both per term. `prensa.excluidos` drops a
+  headline the search brought back that is not about the term, matched by
+  **folded title** and not by link — the news link is a token that rotates
+  between runs, so a url exclusion would stop applying by itself — and by
+  containment, since the same headline arrives with and without the « - Medio»
+  suffix. Each entry carries its `razon`, the title must be at least 12
+  characters (a short one would over-match in silence), and the count of what
+  was dropped is **published** as `prensa.excluidos`: a curated list that did
+  not say so would claim the search returned exactly that. Three were dropped
+  that day: a Bolivian band's «Gran Poder» billing for Grupo Concordia, and an
+  IGN España videogame piece and a Univision reality-show note for Vive la
+  Baja, all homonyms of a phrase that fits anywhere.
+  `consultas[].agregados` is the opposite: links a person pointed at, in their
+  own list and **never inside `prensa`**, because one of them is a Facebook
+  post rather than press and because folding them into `prensa.resultados`
+  would make the count beside it false — that count says how many headlines
+  *name* the term. They carry `origen: "manual"`, a `tono` each and no
+  buckets, and their `fecha` may be `null`, which prints «sin fecha»: the
+  Facebook post publishes none readable without a session and inventing one is
+  worse. A test pins that **no `agregado`'s headline names its term**: if one
+  did, the search would find it and the list is the wrong home for it.
 - **The screen says «sin dato» and nothing more.** The `razon` on a `sin_dato`
   block stays in the file (the validator still checks its register) but the
   ficha, the YouTube/X tabs and the PDF no longer print it: the client asked

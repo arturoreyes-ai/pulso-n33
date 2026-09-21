@@ -1796,6 +1796,9 @@ def _validar_comentarios_publicados(por_post, destacadas, visibles, maximo, et, 
 
 RE_CONSULTA = re.compile(r"^cq_[a-z0-9_]{2,20}$")
 RE_BUSCADOR = re.compile(r"^[a-z0-9_]{2,20}$")
+# Un titular a descartar se empareja por contencion, asi que tiene que ser
+# distintivo: «Gran Poder» descartaria de mas y en silencio.
+LARGO_MINIMO_EXCLUIDO = 12
 VENTANA_PRENSA_MAXIMA = 365
 TONOS_PRENSA_CONSULTA = ("favorable", "adversa", "neutral")
 ORIGENES_PRENSA_CONSULTA = ("noticias", "medio")
@@ -2069,6 +2072,37 @@ def validar_consultas_config(datos, actor_busqueda=None, medios=None):
         pr = f.get("prensa") or {}
         if "q" in pr and not _texto(pr.get("q")):
             errores.append("{}: 'prensa.q' vacia".format(et))
+        # Lo descartado a mano lleva su razon escrita, como una fila apagada
+        # de cualquier catalogo de este repo. Se empareja por TITULAR porque
+        # el enlace del buscador de noticias rota entre corridas.
+        for j, x in enumerate(pr.get("excluidos") or []):
+            eti = "{}.prensa.excluidos[{}]".format(et, j)
+            if not isinstance(x, dict) or set(x) != {"titulo", "razon"}:
+                errores.append("{}: claves exactas titulo y razon".format(eti))
+                continue
+            if not _texto(x["titulo"]) or len(x["titulo"].strip()) < LARGO_MINIMO_EXCLUIDO:
+                errores.append("{}: 'titulo' debe tener al menos {} caracteres; se empareja por "
+                               "contencion y uno corto descartaria de mas".format(
+                                   eti, LARGO_MINIMO_EXCLUIDO))
+            if not _texto(x["razon"]):
+                errores.append("{}: falta 'razon'; descartar a mano se justifica por "
+                               "escrito".format(eti))
+        for j, a in enumerate(f.get("agregados") or []):
+            eti = "{}.agregados[{}]".format(et, j)
+            if not isinstance(a, dict) or not set(a) <= {"url", "titulo", "fuente", "fecha",
+                                                         "idioma", "nota"}:
+                errores.append("{}: claves url, titulo, fuente, fecha, idioma y nota".format(eti))
+                continue
+            for campo in ("url", "titulo", "fuente", "nota"):
+                if not _texto(a.get(campo)):
+                    errores.append("{}: falta '{}'".format(eti, campo))
+            if not isinstance(a.get("url"), str) or not str(a.get("url")).startswith("https://"):
+                errores.append("{}: 'url' debe ser https".format(eti))
+            if a.get("fecha") is not None and not _fecha(a.get("fecha")):
+                errores.append("{}: 'fecha' debe ser null o una fecha ({!r}); null se publica "
+                               "como «sin fecha» y no se inventa".format(eti, a.get("fecha")))
+            if a.get("idioma") is not None and a.get("idioma") not in IDIOMAS:
+                errores.append("{}: idioma {!r} desconocido".format(eti, a.get("idioma")))
         fuentes = sum(len(v) for por in _fuentes_config_consulta(f).values()
                       for v in por.values())
         if fuentes == 0 and not _texto(pr.get("q")):
@@ -2406,6 +2440,11 @@ def _validar_prensa_consulta(prensa, cid, doc, errores, avisos):
                                   "cuidado".format(eti, j))
             if all(isinstance(b, dict) and b.get("estado") != "ok" for b in buscadores):
                 errores.append("{}: ningun buscador respondio y el bloque dice 'ok'".format(eti))
+        if not _entero_no_negativo(prensa.get("excluidos")):
+            # Se publica el conteo: una lista curada que no dijera que lo fue
+            # afirmaria que la busqueda devolvio justo eso.
+            errores.append("{}: 'excluidos' (titulares descartados a mano) debe ser entero no "
+                           "negativo".format(et))
         if not _texto(prensa.get("muestra")):
             errores.append("{}: falta 'muestra', que dice sobre que se busco".format(et))
     elif resultados not in (None, []):
@@ -2422,6 +2461,71 @@ def _validar_prensa_consulta(prensa, cid, doc, errores, avisos):
             if not _texto(archivo.get("muestra")):
                 errores.append("{}: falta 'muestra', que dice sobre que archivo se conto".format(
                     eti))
+
+
+CLAVES_AGREGADO = frozenset({"titulo", "url", "fuente", "fecha", "origen", "tono"})
+
+
+def _validar_agregados_consulta(agregados, cid, fila, doc, errores):
+    """`consultas[].agregados`: los enlaces que la fila trae A MANO.
+
+    Lista propia y NO dentro de `prensa`, por dos razones que son la misma:
+    uno de ellos es un post de Facebook y no prensa, y sumarlos a
+    `prensa.resultados` haria falso el conteo de al lado, que dice cuantos
+    titulares NOMBRAN el termino en la ventana. No llevan cubetas de tono
+    —dos titulares no hacen un conteo— y su fecha puede faltar: un post de
+    Facebook no publica una, y inventarsela seria peor que decir «sin fecha».
+    """
+    et = "consultas[{}].agregados".format(cid)
+    if not isinstance(agregados, list) or not agregados:
+        errores.append("{}: debe ser una lista no vacia; si no hay nada agregado la clave se "
+                       "omite".format(et))
+        return
+    urls_prensa = {r.get("url") for grupo in ("resultados", "anteriores")
+                   for r in ((fila.get("prensa") or {}).get(grupo) or [])
+                   if isinstance(r, dict)}
+    hasta = None
+    generado = str((doc or {}).get("generado") or "")[:10]
+    if _fecha(generado):
+        hasta = (_fecha(generado) + timedelta(days=1)).isoformat()
+    vistas, claves = set(), []
+    for i, a in enumerate(agregados):
+        eti = "{}[{}]".format(et, i)
+        if not isinstance(a, dict) or set(a) != CLAVES_AGREGADO:
+            errores.append("{}: claves exactas {}".format(eti, ", ".join(sorted(CLAVES_AGREGADO))))
+            continue
+        if not _texto(a["titulo"]) or not _texto(a["fuente"]):
+            errores.append("{}: 'titulo' y 'fuente' son texto".format(eti))
+        if a["origen"] != "manual":
+            errores.append("{}: 'origen' debe ser 'manual' ({!r}); es lo que lo separa de lo "
+                           "que devolvio una busqueda".format(eti, a["origen"]))
+        url = a["url"]
+        if not isinstance(url, str) or not url.startswith("https://") or not dominio(url):
+            errores.append("{}: 'url' debe ser un enlace https publico ({!r})".format(eti, url))
+        elif url in vistas:
+            errores.append("{}: url repetida".format(eti))
+        elif url in urls_prensa:
+            errores.append("{}: {!r} ya esta en la prensa de este termino; se contaria dos "
+                           "veces".format(eti, url))
+        vistas.add(url)
+        if a["fecha"] is not None:
+            if not _fecha(a["fecha"]):
+                errores.append("{}: 'fecha' debe ser null o una fecha ({!r})".format(
+                    eti, a["fecha"]))
+            elif hasta and a["fecha"] > hasta:
+                errores.append("{}: fecha {} posterior a generado; reloj roto".format(
+                    eti, a["fecha"]))
+        if a["tono"] is not None and a["tono"] not in TONOS_PRENSA_CONSULTA:
+            errores.append("{}: 'tono' {!r} no es de prensa; se espera null o {}".format(
+                eti, a["tono"], "|".join(TONOS_PRENSA_CONSULTA)))
+        # Sin fecha al final, y lo demas por fecha descendente.
+        claves.append((a["fecha"] is None,
+                       tuple(-int(p) for p in a["fecha"].split("-")) if _fecha(a["fecha"])
+                       else (0, 0, 0),
+                       str(a["titulo"])))
+    if claves != sorted(claves):
+        errores.append("{}: no esta ordenado por (-fecha, titulo) con las de fecha ausente al "
+                       "final".format(et))
 
 
 def validar_consultas(datos, config=None):
@@ -2510,6 +2614,8 @@ def validar_consultas(datos, config=None):
                               "solo con prensa".format(et))
 
         _validar_prensa_consulta(f.get("prensa"), cid, datos, errores, avisos)
+        if "agregados" in f:
+            _validar_agregados_consulta(f["agregados"], cid, f, datos, errores)
 
         tono = f.get("tono")
         eti = et + ".tono"

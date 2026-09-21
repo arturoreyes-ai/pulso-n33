@@ -97,11 +97,11 @@ export function rutaDeConsulta(termino: string): string {
 /** El hueco del filtro, dicho como hueco. No dice «corte» ni «corrida»: la
  *  interfaz dice que falta, nunca como se obtiene. */
 export const SIN_FILAS_BUSQUEDA = (q: string): string =>
-  `No hay publicaciones que nombren «${q}» entre las que se muestran ahora.`;
+  `No hay publicaciones que nombren ${q} entre las que se muestran ahora.`;
 
 /** El hueco de un termino en seguimiento sin publicaciones en su ventana. */
 export const SIN_FILAS_CONSULTA = (termino: string, dias: number): string =>
-  `No hay publicaciones que nombren «${termino}» en los últimos ${rotuloVentana(dias)}.`;
+  `No hay publicaciones que nombren ${termino} en los últimos ${rotuloVentana(dias)}.`;
 
 /** Lo que se pinta junto a un titular con tono. El vocabulario de la prensa,
  *  nunca el de los comentarios. */
@@ -150,7 +150,7 @@ export function frasesConsulta(c: Consulta, doc: DocConsultas): string[] {
     const viejos = p.anteriores ?? [];
     const tono = p.tono;
     if (filas.length === 0) {
-      frases.push(`Ningún titular de los últimos ${ventana} nombra «${t}» en las fuentes revisadas.`);
+      frases.push(`Ningún titular de los últimos ${ventana} nombra ${t} en las fuentes revisadas.`);
     } else {
       const partes: string[] = [];
       if (tono) {
@@ -161,7 +161,7 @@ export function frasesConsulta(c: Consulta, doc: DocConsultas): string[] {
         if (sinTono > 0) partes.push(`${numero(sinTono)} sin tono`);
       }
       frases.push(
-        `${numero(filas.length)} ${pluralizar(filas.length, "titular nombra", "titulares nombran")} «${t}» en los últimos ${ventana}`
+        `${numero(filas.length)} ${pluralizar(filas.length, "titular nombra", "titulares nombran")} ${t} en los últimos ${ventana}`
         + (partes.length > 0 ? `: ${partes.join(", ")}.` : "."),
       );
       const adversos = (p.por_medio ?? []).filter((m) => m.adversa > 0).sort((a, b) => b.adversa - a.adversa || a.fuente.localeCompare(b.fuente));
@@ -191,7 +191,7 @@ export function frasesConsulta(c: Consulta, doc: DocConsultas): string[] {
     const publicaciones = leidas.reduce((n, b) => n + b.publicaciones, 0);
     const ventana = rotuloVentana(doc.ventana_dias);
     if (publicaciones === 0) {
-      frases.push(`Ninguna publicación en redes nombra «${t}» en los últimos ${ventana}.`);
+      frases.push(`Ninguna publicación en redes nombra ${t} en los últimos ${ventana}.`);
     } else {
       const k = c.tono;
       frases.push(
@@ -204,6 +204,18 @@ export function frasesConsulta(c: Consulta, doc: DocConsultas): string[] {
     if (sinDato > 0) {
       frases.push(`${numero(sinDato)} de las tres redes sin dato.`);
     }
+  }
+
+  // Lo agregado a mano se cuenta aparte y se dice que lo es: son enlaces que
+  // alguien señaló, no lo que devolvió una búsqueda, y mezclarlos con las
+  // cifras de arriba diría que la búsqueda los encontró.
+  const agregados = c.agregados ?? [];
+  if (agregados.length > 0) {
+    const adversos = agregados.filter((a) => a.tono === "adversa").length;
+    frases.push(
+      `Además, ${numero(agregados.length)} ${pluralizar(agregados.length, "publicación agregada", "publicaciones agregadas")} a mano`
+      + (adversos > 0 ? `, ${numero(adversos)} ${pluralizar(adversos, "adversa", "adversas")}.` : "."),
+    );
   }
   return frases;
 }
