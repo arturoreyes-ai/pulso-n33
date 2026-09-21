@@ -107,6 +107,25 @@ FUERA = [
     "michoacan", "morelia", "guanajuato", "leon guanajuato", "queretaro",
     "puebla", "veracruz", "oaxaca", "chiapas", "yucatan", "merida",
     "quintana roo", "cancun", "tulum", "guerrero", "acapulco",
+    # La capital faltaba entera, que es de donde sale la mayor parte de la
+    # nota nacional mexicana. El caso, medido el 21 de septiembre de 2026:
+    # "Hoy No Circula sabado 19 de septiembre: que autos no circulan en CDMX",
+    # leida de un medio de una sola zona, devolvia ('zona', ['Tijuana']) --- la
+    # rama de `zona_medio` dispara cuando no hay veredicto de fuera, asi que el
+    # tablero le acreditaba a Tijuana el programa vehicular de la Ciudad de
+    # Mexico. Es el bug de El Imparcial/Hermosillo por omision del gacetero.
+    # Toca 76 de 6,699 titulares de la ventana: 73 pasan de 'nacional' a
+    # 'fuera' (1.1%) y 3 no cambian porque ademas nombran la region, que gana
+    # sobre nombrar fuera.
+    "ciudad de mexico", "cdmx", "distrito federal",
+    "estado de mexico", "edomex", "toluca", "ecatepec", "naucalpan",
+    "nezahualcoyotl", "cuernavaca", "cuautla", "pachuca", "tlaxcala",
+    "san luis potosi", "aguascalientes", "zacatecas", "nayarit", "tepic",
+    "colima", "tabasco", "villahermosa", "campeche",
+    # NO se agregan "morelos", "hidalgo" ni "durango" aunque sean estados:
+    # Tijuana tiene una colonia con cada uno de esos nombres, y "morelos" esta
+    # ademas en LUGARES. Un estado cuyo nombre es tambien una colonia de la
+    # region no puede vivir aqui: el mismo token significaria dos lugares.
 ]
 
 _LUGARES_PLEGADOS = {z: [fold(t) for t in ts] for z, ts in LUGARES.items()}

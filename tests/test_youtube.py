@@ -230,6 +230,63 @@ class TestDocumento(unittest.TestCase):
             "UUSHIN8fNpieOt_gCE1sKyUylA": _fixture("elvigia-shorts.xml"),
         })
 
+    def test_el_titulo_manda_sobre_la_descripcion(self):
+        # El caso del 18 de septiembre de 2026: "Intocable recorre por primera
+        # vez las calles del centro de CDMX", de N+, salio `zona: Tijuana` con
+        # `alcance: "zona"` y encabezo el muro de Tijuana. El titulo nombra la
+        # capital; la descripcion nombraba Tijuana de paso, en una lista de
+        # fechas de gira. Una descripcion de YouTube trae giras, listas de
+        # ciudades y texto fijo del canal: no puede mover un titular que ya
+        # nombro lugar.
+        titulo = "Intocable recorre por primera vez las calles del centro de CDMX"
+        gira = "Gira 2026: Monterrey, Tijuana y Guadalajara"
+        self.assertEqual(youtube._zona(titulo, gira, "nacional"), ("nacional", "fuera"))
+        self.assertEqual(youtube._zona(titulo, gira, "regional"), (None, "fuera"))
+        # Y el titulo que SI nombra la region tampoco se deja mover.
+        self.assertEqual(youtube._zona("Choque en Tijuana", "ocurrio en Ensenada",
+                                       "regional"), ("Tijuana", "zona"))
+
+    def test_la_descripcion_sigue_desempatando_cuando_el_titulo_calla(self):
+        # Los catorce puntos que la descripcion aporta no se tiran: solo se
+        # limitan al caso para el que se agrego. "Esto exigieron trabajadores
+        # de TELNOR a Sheinbaum" no nombra lugar y es de Tijuana.
+        self.assertEqual(
+            youtube._zona("Esto exigieron trabajadores de TELNOR a Sheinbaum",
+                          "Los trabajadores se manifestaron en Tijuana", "regional"),
+            ("Tijuana", "zona"))
+
+    def test_un_mismo_canal_no_repite_titular_en_los_dos_formatos(self):
+        # El caso del 18 de septiembre de 2026: CNR subio "LOCALIZAN A HOMBRE
+        # SIN VIDA..." como Short y como video largo y las dos entraron --- el
+        # corte es por formato, asi que cada una gano su lugar en su propia
+        # cola y nada las cruzaba. En pantalla eran dos tarjetas seguidas
+        # diciendo lo mismo.
+        from pulso.redes import _destacados
+        pubs = {}
+        for i, (fmt, vistas) in enumerate((("short", 10), ("video", 900))):
+            url = "https://www.youtube.com/x{}".format(i)
+            pubs[url] = {"url": url, "cuenta": "yt_cnr", "zona": "Tijuana", "formato": fmt,
+                         "fecha": "2026-09-18", "titulo": "Localizan a hombre sin vida",
+                         "tipo": "video", "publicado": "2026-09-18T12:00:00+00:00",
+                         "reproducciones": vistas, "valoraciones": 0}
+        # Otra cuenta con el MISMO titular no se toca: dos medios cubriendo lo
+        # mismo es pluralidad de cobertura, no repeticion.
+        otra = "https://www.youtube.com/x9"
+        pubs[otra] = dict(pubs["https://www.youtube.com/x0"], url=otra, cuenta="yt_zeta")
+        comun = dict(comentarios=[], opinion=[], temas=None,
+                     cuentas=[{"id": "yt_cnr"}, {"id": "yt_zeta"}], dentro=lambda p: True,
+                     cifras=youtube.CIFRAS, orden=youtube.ORDEN, formatos=youtube.FORMATOS,
+                     turnos=True)
+        sin = _destacados(pubs, **comun)
+        con = _destacados(pubs, dedupe_titulo=True, **comun)
+        self.assertEqual(len(sin), 3)
+        self.assertEqual(len(con), 2)
+        # Se queda la mas vista, y la otra cuenta sigue ahi.
+        cnr = [d for d in con if d["cuenta"] == "yt_cnr"]
+        self.assertEqual(len(cnr), 1)
+        self.assertEqual(cnr[0]["reproducciones"], 900)
+        self.assertEqual(len([d for d in con if d["cuenta"] == "yt_zeta"]), 1)
+
     def test_el_documento_valida(self):
         panel, _, _ = self._todo()
         errores, _ = validar_redes(panel, plataforma="youtube")

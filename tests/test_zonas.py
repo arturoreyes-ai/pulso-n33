@@ -8,7 +8,7 @@ como temas principales de un tablero de Baja California.
 import unittest
 
 from pulso import DELEGACIONES_TIJUANA
-from pulso.zonas import DELEGACIONES, alcance, delegaciones_en, es_estatal, fuera_en, zonas_en
+from pulso.zonas import DELEGACIONES, alcance, delegaciones_en, es_estatal, fuera_en, zonas_en, FUERA
 
 
 class TestGazetero(unittest.TestCase):
@@ -66,6 +66,27 @@ class TestAlcance(unittest.TestCase):
         # evidencia de Tecate.
         alc, zonas = alcance("Arranca justicia oral civil y familiar", "Tecate")
         self.assertEqual((alc, zonas), ("zona", ["Tecate"]))
+
+    def test_la_capital_es_fuera_de_la_region(self):
+        # Faltaba entera, y de ahi sale la mayor parte de la nota nacional. El
+        # caso, medido el 21 de septiembre de 2026: leido de un medio de una
+        # sola zona, este titular devolvia ('zona', ['Tijuana']) --- sin
+        # veredicto de fuera dispara la rama de `zona_medio` y el tablero le
+        # acreditaba a Tijuana el programa vehicular de la Ciudad de Mexico.
+        titulo = "Hoy No Circula sabado 19 de septiembre: que autos no circulan en CDMX"
+        self.assertEqual(alcance(titulo, "Tijuana"), ("fuera", []))
+        self.assertEqual(alcance("Tren Mexico-Pachuca: conoce las estaciones", "Tijuana"),
+                         ("fuera", []))
+
+    def test_un_estado_que_tambien_es_colonia_de_tijuana_no_esta_en_fuera(self):
+        # Morelos, Hidalgo y Durango son estados Y colonias de Tijuana, y
+        # "morelos" ademas esta en LUGARES. Meterlos en FUERA haria que el
+        # mismo token significara dos lugares. Esta prueba es la razon escrita.
+        alc, zonas = alcance("Balacera en la colonia Morelos", "Tijuana")
+        self.assertEqual(alc, "zona")
+        self.assertIn("Tijuana", zonas)
+        for estado in ("morelos", "hidalgo", "durango"):
+            self.assertNotIn(estado, FUERA)
 
     def test_nota_de_fuera_se_marca_fuera(self):
         alc, zonas = alcance("IMSS concreta donación en Hermosillo", "estatal")

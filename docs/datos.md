@@ -1325,9 +1325,27 @@ Shorts. Sobre siete días los dos juntos llevan la cobertura de Tecate de 10 a
 
 ### La zona sale del pie, no de la fila del canal
 
-Como en TikTok: `zonas.alcance(titulo + "\n" + descripcion, None)`, con el
-segundo argumento **siempre** `None`. Se publica `alcance` al lado de `zona`,
-con las mismas cuatro etiquetas y la misma tabla de `ambito`.
+Como en TikTok, con `zonas.alcance` y el segundo argumento **siempre** `None`.
+Se publica `alcance` al lado de `zona`, con las mismas cuatro etiquetas y la
+misma tabla de `ambito`.
+
+**El título manda; la descripción sólo desempata.** Se lee la descripción
+únicamente cuando el título no nombra lugar alguno. Vale catorce puntos de
+resolución —sobre 462 piezas, 35% con el título solo y 49% con las dos— pero
+una descripción de YouTube no es el pie de un TikTok: trae fechas de gira,
+listas de ciudades y texto fijo del canal, y cualquiera de esas le acredita a
+una ciudad una pieza que no habla de ella, con `alcance: "zona"`, el veredicto
+más fuerte. El caso, del 18 de septiembre de 2026: «Intocable recorre por
+primera vez las calles del centro de CDMX», de N+, salió `zona: Tijuana` y
+encabezó el muro de Tijuana. Limitarla cuesta poco y sobre todo redistribuye:
+el corredor pasa de 228 a 225 piezas, Tijuana de 140 a 125 y Playas de
+Rosarito de 22 a 29.
+
+**Un mismo canal no repite titular.** `_destacados` colapsa por `(cuenta,
+título plegado)` y se queda con la más vista, porque el corte es por formato y
+un Short y un video de la misma nota ganaban su lugar cada uno en su cola sin
+que nada los cruzara. Por cuenta y no globalmente: dos medios con el mismo
+titular es pluralidad de cobertura. El archivo conserva las dos.
 
 El caso, medido: la fila de El Vigía dice Ensenada y nueve de sus quince Shorts
 son nacionales —Trump, Milei, las Malvinas, Morelos, Cuautla—, con el más visto

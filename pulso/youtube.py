@@ -175,6 +175,43 @@ def _formato_del_enlace(url):
     return None
 
 
+def _zona(titulo, descripcion, ambito):
+    """(zona, alcance). El TITULO manda; la descripcion solo desempata.
+
+    La descripcion vale catorce puntos de resolucion --- sobre 462 piezas, el
+    35% resuelve a una zona del producto con el titulo solo y el 49% con las
+    dos ---
+    y la mayoria de lo que aporta es correcto: "Esto exigieron trabajadores de
+    TELNOR a Sheinbaum" no nombra lugar y es de Tijuana, y "Abarrotan la
+    Revolucion por Claudia Sheinbaum" nombra una avenida tijuanense que el
+    gacetero no conoce.
+
+    Pero una descripcion de YouTube no es el pie de un TikTok: trae fechas de
+    gira, listas de ciudades y texto fijo del canal, y cualquiera de esos le
+    acredita a una ciudad una pieza que no habla de ella --- con `alcance:
+    "zona"`, el veredicto mas fuerte. El caso, medido el 18 de septiembre de
+    2026: "Intocable recorre por primera vez las calles del centro de CDMX",
+    de N+, salio `zona: Tijuana` y encabezo el muro de Tijuana; el titulo
+    nombra la capital y la descripcion nombraba Tijuana de paso.
+
+    Asi que la descripcion se lee SOLO cuando el titulo no nombra lugar
+    alguno. Si el titulo nombra uno --- del producto, del estado o de fuera ---
+    ese es el veredicto y la descripcion no puede moverlo. Es la misma regla
+    que zonas.alcance ya aplica entre `zonas` y `fuera`: nombrar gana sobre no
+    nombrar, y lo primero que nombra la pieza es su titular.
+
+    Cuesta poco y sobre todo REDISTRIBUYE. Medido el 21 de septiembre sobre
+    462 piezas: el corredor pasa de 228 a 225, y por dentro Tijuana baja de
+    140 a 125 mientras Playas de Rosarito sube de 22 a 29, Tecate de 5 a 8 y
+    Mexicali de 29 a 31. La ciudad grande es la que mas se nombra de paso, asi
+    que era la que mas se llevaba de mas.
+    """
+    zona, alc = zona_por_ambito(titulo, ambito)
+    if alc != "nacional":
+        return zona, alc
+    return zona_por_ambito(titulo + chr(10) + (descripcion or ""), ambito)
+
+
 def _limpiar_pieza(entrada, canal, formato_pedido):
     """(registro, motivo). registro None = se descarta, con el motivo contado.
 
@@ -200,8 +237,7 @@ def _limpiar_pieza(entrada, canal, formato_pedido):
 
     titulo = _titulo(_texto(entrada, "m:group/m:title") or _texto(entrada, "a:title"))
     descripcion = _texto(entrada, "m:group/m:description")
-    zona, alc = zona_por_ambito("{}\n{}".format(titulo, descripcion),
-                                canal.get("ambito") or AMBITO)
+    zona, alc = _zona(titulo, descripcion, canal.get("ambito") or AMBITO)
     if zona is None:
         return None, "fuera"
 
@@ -342,4 +378,4 @@ def derivar(ahora, salud, publicaciones=None, canales=None, ventana_horas=VENTAN
                           plataforma=PLATAFORMA, ventana_horas=ventana_horas,
                           campos_extra=CAMPOS_EXTRA, turnos=True,
                           cifras=CIFRAS, orden=ORDEN, formatos=FORMATOS,
-                          cosecha_comentarios=False)
+                          dedupe_titulo=True, cosecha_comentarios=False)

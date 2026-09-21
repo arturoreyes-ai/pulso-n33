@@ -305,6 +305,36 @@ y que el validador lo rechace sale más barato que un comentario pidiendo que no
 La tabla de `ambito` se movió a `redes.py::zona_por_ambito` y `tiktok._zona`
 quedó de envoltura: copiada dos veces, una corrección llega a una sola.
 
+**Pero el título manda y la descripción sólo desempata** (21 de septiembre de
+2026). Una descripción de YouTube no es el pie de un TikTok: trae fechas de
+gira, listas de ciudades y texto fijo del canal. El caso: «Intocable recorre
+por primera vez las calles del centro de CDMX», de N+, salió `zona: Tijuana`
+con `alcance: "zona"` —el veredicto más fuerte— y encabezó el muro de Tijuana,
+porque su descripción nombraba Tijuana en una lista de fechas de gira. Así que
+`youtube._zona` lee la descripción **sólo cuando el título no nombra lugar
+alguno**. Cuesta poco y sobre todo redistribuye: sobre 462 piezas el corredor
+pasa de 228 a 225, y por dentro Tijuana baja de 140 a 125 mientras Rosarito
+sube de 22 a 29 y Tecate de 5 a 8 — la ciudad grande es la que más se nombra
+de paso, así que era la que más se llevaba de más.
+
+Ese caso destapó además **un hueco del gacetero que no era de YouTube**: la
+capital faltaba entera de `FUERA`. Leído de un medio de una sola zona, «Hoy No
+Circula: qué autos no circulan en CDMX» devolvía `('zona', ['Tijuana'])`,
+porque sin veredicto de fuera dispara la rama de `zona_medio`. Se agregaron 22
+lugares (CDMX, Edomex, Toluca, Pachuca, SLP…), que tocan 76 de 6,699 titulares
+de la ventana. **No** se agregaron `morelos`, `hidalgo` ni `durango`, que son
+estados y también colonias de Tijuana — `morelos` está además en `LUGARES` —,
+y hay una prueba que fija esa exclusión con la razón escrita.
+
+**Un mismo canal no repite titular en pantalla.** El corte es por formato, así
+que cuando CNR subió «LOCALIZAN A HOMBRE SIN VIDA…» como Short y como video
+largo cada una ganó su lugar en su propia cola y nada las cruzaba: dos tarjetas
+seguidas diciendo lo mismo. `_destacados` acepta `dedupe_titulo`, que colapsa
+por `(cuenta, título plegado)` —la misma llave que `pulso/busquedas.py` usa
+para las notas— y se queda con la más vista. **Por cuenta y no globalmente**:
+dos medios cubriendo lo mismo con el mismo titular es pluralidad de cobertura,
+no repetición. El archivo conserva las dos.
+
 **Los dos formatos se cortan por separado porque sus vistas no miden lo
 mismo.** Desde el 31 de marzo de 2025 YouTube cuenta una vista de Short como
 cualquier arranque o repetición, sin tiempo mínimo, y la de un video largo no:

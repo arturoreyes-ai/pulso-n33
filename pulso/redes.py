@@ -472,7 +472,8 @@ def zona_por_ambito(texto, ambito="regional"):
 
 def _destacados(publicaciones, comentarios, opinion, temas, cuentas, dentro,
                 maximo=DESTACADOS_MAXIMO, campos_extra=(), turnos=False,
-                cifras=CIFRAS_DESTACADO, orden=ORDEN_DESTACADO, formatos=()):
+                cifras=CIFRAS_DESTACADO, orden=ORDEN_DESTACADO, formatos=(),
+                dedupe_titulo=False):
     """Los posts de la ventana con mas likes, con los conteos de sus comentarios.
 
     Es la union del top `maximo` general con el top `maximo` de cada zona,
@@ -549,6 +550,31 @@ def _destacados(publicaciones, comentarios, opinion, temas, cuentas, dentro,
         candidatos.append(d)
     candidatos.sort(key=lambda d: _orden_destacado(d, orden))
 
+    if dedupe_titulo:
+        # Una misma cuenta publicando el MISMO titular dos veces es una sola
+        # nota, y en pantalla son dos tarjetas seguidas que dicen lo mismo. El
+        # caso, del 18 de septiembre de 2026: CNR subio "LOCALIZAN A HOMBRE SIN
+        # VIDA Y CON HUELLAS DE VIOLENCIA EN COLONIA..." como Short y como
+        # video largo, y las dos entraron --- el corte es por formato, asi que
+        # cada una gano su lugar en su propia cola y nada las cruzaba.
+        #
+        # Se deduplica por (cuenta, titulo plegado) y NO globalmente: dos
+        # medios distintos cubriendo lo mismo con el mismo titular es
+        # pluralidad de cobertura, no repeticion. Es la misma llave que
+        # pulso/busquedas.py usa para las notas, `(fuente, titulo plegado)`.
+        #
+        # Se queda la primera, que por el orden de arriba es la de mas
+        # reproducciones; el archivo conserva las dos. Un titulo vacio no
+        # deduplica: serian todas la misma.
+        vistos, unicos = set(), []
+        for d in candidatos:
+            clave = (d["cuenta"], fold(d.get("titulo") or ""))
+            if clave[1] and clave in vistos:
+                continue
+            vistos.add(clave)
+            unicos.append(d)
+        candidatos = unicos
+
     def corte(lista):
         return _por_turnos(lista, maximo, orden=orden) if turnos else lista[:maximo]
 
@@ -589,7 +615,8 @@ def _catalogo_cuentas(cuentas):
 def derivar(comentarios, ahora, salud, gasto, temas=None, publicaciones=None,
             cuentas=None, *, plataforma, ventana_dias=None, ventana_horas=None,
             campos_extra=(), turnos=False, cifras=CIFRAS_DESTACADO,
-            orden=ORDEN_DESTACADO, formatos=(), cosecha_comentarios=True):
+            orden=ORDEN_DESTACADO, formatos=(), dedupe_titulo=False,
+            cosecha_comentarios=True):
     """Lo que se commitea: conteos y los posts destacados, sin texto de
     comentarios ni identidad.
 
@@ -668,7 +695,7 @@ def derivar(comentarios, ahora, salud, gasto, temas=None, publicaciones=None,
         "destacados": _destacados(publicaciones or {}, comentarios, opinion, temas,
                                   cuentas or [], dentro, campos_extra=campos_extra,
                                   turnos=turnos, cifras=cifras, orden=orden,
-                                  formatos=formatos),
+                                  formatos=formatos, dedupe_titulo=dedupe_titulo),
         "salud": sorted(salud, key=lambda s: s["cuenta"]),
         "gasto": gasto,
     }
