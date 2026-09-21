@@ -3,6 +3,9 @@ import localFont from "next/font/local";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
+import { Analytics as Analitica } from "@vercel/analytics/next";
+import { SpeedInsights as Rendimiento } from "@vercel/speed-insights/next";
+
 import { Malla } from "@/components/chrome/malla";
 import { Velo } from "@/components/chrome/velo";
 
@@ -117,6 +120,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Velo />
           {children}
         </main>
+
+        {/* Medicion del propio host, no un rastreador de terceros: las dos
+            vienen de Vercel, que es quien ya sirve el sitio.
+
+            FUERA de <main> a proposito. El lector a pantalla completa se
+            sostiene con `main:has(.lector) > :not(:has(.lector))`, que esconde
+            a TODO hermano directo de <main> mientras hay un lector arriba.
+            Dentro, estas dos quedarian bajo esa regla sin ninguna razon.
+
+            Ninguna reporta fuera de produccion y no hay interruptor que
+            recordar: las dos ramifican sobre NODE_ENV. Ojo con el detalle
+            medido, porque no son iguales: en `next dev` Analitica no carga
+            nada y Rendimiento SI baja su script de depuracion
+            (va.vercel-scripts.com/.../script.debug.js), que registra en
+            consola en vez de mandar. Un script de Vercel en la consola de
+            desarrollo es eso y no una fuga. */}
+        <Analitica />
+        <Rendimiento />
       </body>
     </html>
   );
