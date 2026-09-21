@@ -160,6 +160,12 @@ for await (const abs of archivos(RAIZ)) {
   const texto = await readFile(abs, "utf8");
   // globals.css es donde VIVEN las escalas; se salta entero.
   if (rel === "app/globals.css") continue;
+  // src/pdfcn/ es codigo de terceros (pdfcn, MIT) copiado tal cual por
+  // scripts/sincronizar-pdfcn.mjs para armar el PDF del informe. Sus clases
+  // son las de un documento impreso, no las del tablero, y una sincronizacion
+  // las vuelve a escribir: vigilarlas seria pelear con el proveedor en cada
+  // actualizacion. Lo nuestro (lib/informe/, components/informe/) si se vigila.
+  if (rel.startsWith("pdfcn/")) continue;
 
   const lineas = texto.split(/\r?\n/);
   for (const regla of REGLAS) {

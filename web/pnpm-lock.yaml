@@ -14,6 +14,9 @@ importers:
       '@phosphor-icons/react':
         specifier: ^2.1.10
         version: 2.1.10(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@takumi-rs/helpers':
+        specifier: 2.13.7
+        version: 2.13.7(preact@10.24.3)(react@19.2.8)
       fast-xml-parser:
         specifier: ^5.11.1
         version: 5.11.1
@@ -38,6 +41,9 @@ importers:
       swr:
         specifier: ^2.5.1
         version: 2.5.1(react@19.2.8)
+      takumi-pdf:
+        specifier: 0.14.3
+        version: 0.14.3(preact@10.24.3)(react@19.2.8)
     devDependencies:
       '@tailwindcss/postcss':
         specifier: ^4.3.3
@@ -443,6 +449,18 @@ packages:
   '@tailwindcss/postcss@4.3.3':
     resolution: {integrity: sha512-JTSZZGQi1AyKirbLN3azmjVzef92tcX7h+iSqPdaeStyFpGpDlKvvpxeOE8njhbUanbRwr3z8DyzhICWnMtQeg==}
 
+  '@takumi-rs/helpers@2.13.7':
+    resolution: {integrity: sha512-6AKk/ixuvoCEZD9/LPAz3kxTcwWHeZh15quhHIHYiVxFRl4x2LyKN8j6eZngiepYYsORXAuJ5YlTGA7uIRfeMQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      preact: ^10.0.0
+      react: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      preact:
+        optional: true
+      react:
+        optional: true
+
   '@types/d3-array@3.2.2':
     resolution: {integrity: sha512-hOLWVbm7uRza0BYXpIIW5pxfrKe0W+D5lrFiAEYR+pb6w3N2SwSMaJbXdUfSEv+dT4MfHBLtn5js0LAWaO6otw==}
 
@@ -835,6 +853,15 @@ packages:
   tailwindcss@4.3.3:
     resolution: {integrity: sha512-gOhV3P7ufE62QDGg1zVaTgCR+EtPv92k2nIhVcVKcLmxT1sUBsQGhnZj175j+MqRt4zLF7ic+sCYjfhxMxj7YQ==}
 
+  takumi-pdf@0.14.3:
+    resolution: {integrity: sha512-jmHJAG4+Cc4WTKoIUH+gw/ywxVqD8gRsn0F8pJHlFCrYYGtPUguSuMYMtz1Fcwy+42CY35S2UYB8p34dgZpJhQ==}
+    engines: {node: '>=20.19'}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+
   tapable@2.3.3:
     resolution: {integrity: sha512-uxc/zpqFg6x7C8vOE7lh6Lbda8eEL9zmVm/PLeTPBRhh1xCgdWaQ+J1CUieGpIfm2HdtsUpRv+HshiasBMcc6A==}
     engines: {node: '>=6'}
@@ -1133,6 +1160,11 @@ snapshots:
       '@tailwindcss/oxide': 4.3.3
       postcss: 8.5.26
       tailwindcss: 4.3.3
+
+  '@takumi-rs/helpers@2.13.7(preact@10.24.3)(react@19.2.8)':
+    optionalDependencies:
+      preact: 10.24.3
+      react: 19.2.8
 
   '@types/d3-array@3.2.2': {}
 
@@ -1480,6 +1512,14 @@ snapshots:
       use-sync-external-store: 1.6.0(react@19.2.8)
 
   tailwindcss@4.3.3: {}
+
+  takumi-pdf@0.14.3(preact@10.24.3)(react@19.2.8):
+    dependencies:
+      '@takumi-rs/helpers': 2.13.7(preact@10.24.3)(react@19.2.8)
+    optionalDependencies:
+      react: 19.2.8
+    transitivePeerDependencies:
+      - preact
 
   tapable@2.3.3: {}
 

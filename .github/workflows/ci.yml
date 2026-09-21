@@ -131,6 +131,18 @@ jobs:
       - name: Contrato de lectura automática offline
         run: node scripts/probar-analisis.cjs
 
+      # La busqueda de Redes por termino: como se elige un termino en
+      # seguimiento, como se arman sus filas de tres redes y el filtro por
+      # texto de lo cargado. Sin red.
+      - name: Contrato de consultas offline
+        run: node scripts/probar-consultas.cjs
+
+      # El informe en PDF: el modelo puro (null es «sin dato», ningun
+      # porcentaje), la lectura con UNA salida de red, los codigos de la ruta y
+      # un PDF de verdad con el motor desde su entrada de Node.
+      - name: Contrato del informe en PDF offline
+        run: node scripts/probar-informe.cjs
+
       - name: Escalas de diseno
         run: pnpm tokens
 
