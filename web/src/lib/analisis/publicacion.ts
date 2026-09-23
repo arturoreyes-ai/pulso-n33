@@ -59,7 +59,7 @@ const SISTEMA = [
   "Eres un lector de redes sociales para la mesa de noticias de un medio del corredor Tijuana-San Diego.",
   "Recibes DOS cosas sobre UNA publicación: la primera línea del pie que escribió la cuenta, y el texto de sus comentarios más votados, cuando los hay. Con eso preparas una ficha breve en ESPAÑOL, aunque el pie o los comentarios estén en inglés.",
   "NO has visto el video ni la imagen de la publicación, y no vas a verlos. Nadie te los va a describir.",
-  "Reglas que no puedes romper:",
+  "Reglas:",
   "- No describas lo que se ve ni lo que se oye: ni escenas, ni encuadres, ni personas, ni ropa, ni gestos, ni música, ni voz en off. No sabes qué hay en pantalla y no puedes deducirlo.",
   "- No afirmes nada que no esté en el pie o en los comentarios. Si el pie viene vacío o no establece de qué trata, dilo y no lo supongas.",
   "- Los comentarios NO son una muestra de nadie. Escribe siempre «los comentarios» o «quienes comentaron». Prohibido «la mayoría», «la gente», «la opinión pública», «los ciudadanos», «los tijuanenses», «el sentir», «se percibe», y cualquier frase que atribuya lo leído a una ciudad, a una zona o a la población.",
@@ -74,10 +74,33 @@ const SISTEMA = [
   "- La salvedad dice qué NO establece el material: hechos que el pie y los comentarios dejan sin aclarar. No hables de muestras, de representatividad ni de a quién representa esto: de esa advertencia se encarga la página, no tú.",
   "- Sugiere UN solo formato de contenido para redes, adecuado a esta publicación. Da su enfoque y un gancho factual, sin escribir el post terminado.",
   "- No inventes citas, cifras, reacciones ni material que el pie y los comentarios no traigan.",
-  "Devuelve SOLO un objeto JSON con esta forma exacta:",
+  "Qué va en cada campo de la respuesta:",
   '{"lectura":"<2 a 3 frases sobre lo que dice la publicación>","conversacion":"<qué se repite entre los comentarios, en prosa; null si no recibiste ninguno>","salvedad":"<qué NO se puede saber con esto>","sugerenciaSocial":{"formato":"<un formato>","enfoque":"<ángulo editorial sustentado>","gancho":"<gancho factual, no sensacionalista>"}}',
-  "Todos los campos deben tener texto, salvo «conversacion», que es null cuando no recibiste comentarios. Sin texto fuera del JSON.",
+  "Todos los campos deben tener texto, salvo «conversacion», que es null cuando no recibiste comentarios.",
 ].join("\n");
+
+/**
+ * La forma de la respuesta, impuesta por la API (salidas estructuradas) en vez
+ * de pedida en el prompt y rescatada despues de vallas y texto alrededor. Lo
+ * que un esquema no expresa —texto no vacio, cuantos elementos— lo sigue
+ * revisando `leerSalida`, y las reglas 1 y 2 `reglas.ts`.
+ */
+const ESQUEMA = {
+  type: "object",
+  properties: {
+    lectura: { type: "string" },
+    conversacion: { anyOf: [{ type: "string" }, { type: "null" }] },
+    salvedad: { type: "string" },
+    sugerenciaSocial: {
+      type: "object",
+      properties: { formato: { type: "string" }, enfoque: { type: "string" }, gancho: { type: "string" } },
+      required: ["formato", "enfoque", "gancho"],
+      additionalProperties: false,
+    },
+  },
+  required: ["lectura", "conversacion", "salvedad", "sugerenciaSocial"],
+  additionalProperties: false,
+} as const;
 
 function fallo(mensaje: string, codigo: string): Response {
   return json({ codigo, mensaje }, 200, SIN_CACHE);
@@ -87,14 +110,11 @@ function texto(valor: unknown): string {
   return typeof valor === "string" ? valor.trim() : "";
 }
 
-/** El JSON del modelo, que puede venir envuelto en texto o en una valla. */
+/** El JSON del modelo. La forma la fija `ESQUEMA`; esto revisa lo que el
+ *  esquema no puede: campos vacios y cuando `conversacion` manda. */
 function leerSalida(crudo: string, esperaConversacion: boolean): LecturaPublicacion | null {
-  const limpio = crudo.trim().replace(/^```(?:json)?\s*/i, "").replace(/```$/, "").trim();
-  const abre = limpio.indexOf("{");
-  const cierra = limpio.lastIndexOf("}");
-  if (abre === -1 || cierra <= abre) return null;
   try {
-    const o = JSON.parse(limpio.slice(abre, cierra + 1)) as Record<string, unknown>;
+    const o = JSON.parse(crudo) as Record<string, unknown>;
     const lectura = texto(o.lectura);
     const salvedad = texto(o.salvedad);
     const social = o.sugerenciaSocial;
@@ -196,6 +216,7 @@ export async function responderAnalisisPublicacion(
         model: MODELO_ANALISIS,
         max_tokens: 900,
         system: SISTEMA,
+        output_config: { format: { type: "json_schema", schema: ESQUEMA } },
         messages: [{ role: "user", content: partes.join("\n") }],
       }),
     });

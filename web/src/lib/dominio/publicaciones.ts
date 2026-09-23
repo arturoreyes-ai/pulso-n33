@@ -1,4 +1,5 @@
 import type { Destacado, DocRedes } from "../datos/tipos";
+import { NOMBRE_TODA_REGION } from "./zonas";
 
 /** La vista visual conserva la selección de la lista: primero el límite por
  * plataforma y zona, después el orden de lectura. Mezclar antes del límite
@@ -42,8 +43,9 @@ const EN_CUBETA: Record<CubetaRegion, (zona: string) => boolean> = {
 };
 
 /** Solo las cubetas que TIENEN filas. Una pastilla que siempre sale vacía no
- *  informa de un hueco, estorba: Instagram, por ejemplo, nunca tiene `mundo`
- *  porque la zona de una cuenta es su sede declarada. */
+ *  informa de un hueco, estorba: Instagram, por ejemplo, solo tiene `mundo`
+ *  cuando alguna cuenta con `ambito` publicó del extranjero, porque la zona de
+ *  una cuenta con sede es su sede declarada. */
 export function cubetasConFilas(datos: DocRedes): CubetaRegion[] {
   const posts = datos.destacados ?? [];
   return (["corredor", "mexico", "mundo"] as const).filter((c) =>
@@ -61,10 +63,20 @@ export function cubetasConFilas(datos: DocRedes): CubetaRegion[] {
  * busqueda lineal para algo que es un acceso directo.
  */
 export const NOMBRE_CUBETA: Record<CubetaRegion, string> = {
-  corredor: "Corredor",
+  // Los mismos nombres que el segmentado de la portada (23 de septiembre de
+  // 2026): el alcance se elige en el mismo componente, ui/opciones-lugar.tsx.
+  corredor: "Región",
   mexico: "México",
-  mundo: "Mundo",
+  mundo: "Internacional",
 };
+
+/** Lo que dice la vista de region sobre lo que se esta viendo. Vive aqui y no
+ *  en cada panel porque la barra del lector lo arreglo el 18 de septiembre de
+ *  2026 y «De qué se habla» (retirado el 23), que lo copiaba de antes, siguio diciendo «Toda
+ *  la región» bajo Mundo hasta el 22: dos copias, una correccion. */
+export function rotuloRegion(cubeta: CubetaRegion): string {
+  return cubeta === "corredor" ? NOMBRE_TODA_REGION : NOMBRE_CUBETA[cubeta];
+}
 
 /** Las mismas, en el orden en que se ofrecen. Deriva de NOMBRE_CUBETA para que
  *  los nombres vivan en un solo sitio. */
@@ -72,9 +84,10 @@ export const CUBETAS: { id: CubetaRegion; nombre: string }[] = (
   ["corredor", "mexico", "mundo"] as const
 ).map((id) => ({ id, nombre: NOMBRE_CUBETA[id] }));
 
-/** La union de las dos plataformas. El visor del lector las recorre juntas,
+/** La union de las tres plataformas. El visor del lector las recorre juntas,
  *  asi que una cubeta que solo tiene filas en TikTok tambien se ofrece:
- *  preguntarle a un solo documento escondia Mundo, que solo existe ahi. */
+ *  preguntarle a un solo documento escondia Mundo, que hasta el 22 de
+ *  septiembre de 2026 solo existia ahi. */
 export function cubetasDisponibles(
   instagram: DocRedes | undefined,
   tiktok: DocRedes | undefined,
@@ -165,8 +178,8 @@ function porTurnos(posts: readonly Destacado[], tope: number,
 
 /**
  * `red` es OBLIGATORIO y no tiene omision a proposito. El otro consumidor de
- * esta funcion es analisis/datos-redes.ts::reunirConversacion, que la usa para
- * que «de que se habla» hable exactamente de lo que se puede desplazar en
+ * esta funcion es analisis/datos-redes.ts::reunirVideosTikTok, que la usa para
+ * que el resumen de TikTok hable exactamente de lo que se puede desplazar en
  * pantalla; si divergieran, la lectura afirmaria cosas sobre publicaciones que
  * el lector no tiene manera de comprobar. Con omision divergirian en silencio;
  * asi es un error de compilacion.
@@ -292,4 +305,49 @@ export function reunirPublicaciones(instagram: DocRedes | undefined, tiktok: Doc
     }
   }
   return salida.sort((a, b) => compararPublicaciones(a.post, b.post) || a.clave.localeCompare(b.clave));
+}
+
+/**
+ * Como lee el recorrido: lo mas popular primero, o lo mas reciente.
+ *
+ * `populares` es la omision desde el 23 de septiembre de 2026, a pedido del
+ * cliente, con «Recientes» a un toque. Hasta ese dia la pantalla leia siempre
+ * de lo nuevo a lo viejo (`compararPublicaciones`), que sigue siendo lo que
+ * devuelve `reunirPublicaciones` y lo que usa la busqueda por texto.
+ */
+export type OrdenLectura = "populares" | "recientes";
+
+/** El orden en que se reparten los empates de puesto entre redes. */
+const ORDEN_RED: Record<RedVisual, number> = { instagram: 0, tiktok: 1, youtube: 2, facebook: 3 };
+
+/**
+ * Las mismas filas, en el orden elegido. Ordena una COPIA: `filas` puede venir
+ * de un `useMemo` que otros leen en el mismo render.
+ *
+ * «Populares» NO compara cifras entre redes, y ese es todo el punto. Los likes
+ * de Instagram, los de TikTok y las vistas de YouTube no son la misma unidad:
+ * el 20 de septiembre el video de Mundo menos visto de TikTok tenia 9,256
+ * vistas y la mediana de un Short del corredor 447. Ordenar por el numero
+ * crudo pondria los quince de TikTok delante de todo y el corredor
+ * desapareceria de «Todas», que es la misma falla que obligo a separar las
+ * cubetas. Asi que cada fila se ordena por su PUESTO dentro de su red, con el
+ * merito de esa red (`compararPorMerito`: likes, o vistas en YouTube), y las
+ * redes se intercalan: el primero de cada una, luego el segundo de cada una.
+ * En una pestana de una sola red eso es, sin mas, su orden de merito, que en
+ * TikTok es el mismo del archivo.
+ */
+export function ordenarPublicaciones(filas: readonly PublicacionVisual[], orden: OrdenLectura): PublicacionVisual[] {
+  if (orden === "recientes") {
+    return [...filas].sort((a, b) => compararPublicaciones(a.post, b.post) || a.clave.localeCompare(b.clave));
+  }
+  const puesto = new Map<string, number>();
+  for (const red of Object.keys(ORDEN_RED) as RedVisual[]) {
+    filas.filter((fila) => fila.red === red)
+      .sort((a, b) => compararPorMerito(red)(a.post, b.post) || a.clave.localeCompare(b.clave))
+      .forEach((fila, i) => puesto.set(fila.clave, i));
+  }
+  return [...filas].sort((a, b) =>
+    (puesto.get(a.clave) ?? 0) - (puesto.get(b.clave) ?? 0) ||
+    ORDEN_RED[a.red] - ORDEN_RED[b.red] ||
+    a.clave.localeCompare(b.clave));
 }

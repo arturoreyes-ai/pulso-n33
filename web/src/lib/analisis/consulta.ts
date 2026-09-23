@@ -40,7 +40,7 @@ const SISTEMA = [
   "Eres un lector de redes sociales para la mesa de noticias de un medio del corredor Tijuana-San Diego.",
   "Recibes los comentarios más votados de VARIAS publicaciones de tres redes que nombran a una marca o a una persona, agrupados por publicación, con la primera línea del pie de cada una. Dices en ESPAÑOL qué se repite entre ellos, aunque el material esté en inglés.",
   "NO has visto ningún video ni ninguna imagen, y no vas a verlos.",
-  "Reglas que no puedes romper:",
+  "Reglas:",
   "- No describas lo que se ve ni lo que se oye en ninguna publicación.",
   "- No afirmes nada que no esté en los pies o en los comentarios.",
   "- Estos comentarios NO son una muestra de nadie: son los más votados de unas pocas publicaciones de los últimos 30 días. Escribe siempre «los comentarios» o «quienes comentaron». Prohibido «la mayoría», «la gente», «la opinión pública», «los ciudadanos», «los clientes», «el sentir», «se percibe», y cualquier frase que atribuya lo leído a una ciudad, a un público o a la población.",
@@ -53,18 +53,26 @@ const SISTEMA = [
   "- Escribe en prosa llana, sin adjetivos de color ni lenguaje sensacionalista. Es un resumen de mesa, NO un guion para leer al aire.",
   "- Si los comentarios no comparten ningún asunto, dilo en vez de inventar un hilo común.",
   "- La salvedad dice qué NO establece el material: qué queda sin aclarar en lo que leíste. No hables de muestras, de representatividad ni de a quién representa esto: de esa advertencia se encarga el documento, no tú.",
-  "Devuelve SOLO un objeto JSON con esta forma exacta:",
+  "Qué va en cada campo de la respuesta:",
   '{"lectura":"<3 a 5 frases: qué asuntos reaparecen y en qué términos>","salvedad":"<qué NO se puede saber con esto>"}',
-  "Sin texto fuera del JSON.",
 ].join("\n");
 
+/**
+ * La forma de la respuesta, impuesta por la API (salidas estructuradas) en vez
+ * de pedida en el prompt y rescatada despues de vallas y texto alrededor. Lo
+ * que un esquema no expresa —texto no vacio, cuantos elementos— lo sigue
+ * revisando `leerSalida`, y las reglas 1 y 2 `reglas.ts`.
+ */
+const ESQUEMA = {
+  type: "object",
+  properties: { lectura: { type: "string" }, salvedad: { type: "string" } },
+  required: ["lectura", "salvedad"],
+  additionalProperties: false,
+} as const;
+
 function leerSalida(crudo: string): LecturaConsulta | null {
-  const limpio = crudo.trim().replace(/^```(?:json)?\s*/i, "").replace(/```$/, "").trim();
-  const abre = limpio.indexOf("{");
-  const cierra = limpio.lastIndexOf("}");
-  if (abre === -1 || cierra <= abre) return null;
   try {
-    const o = JSON.parse(limpio.slice(abre, cierra + 1)) as Record<string, unknown>;
+    const o = JSON.parse(crudo) as Record<string, unknown>;
     const lectura = typeof o.lectura === "string" ? o.lectura.trim() : "";
     const salvedad = typeof o.salvedad === "string" ? o.salvedad.trim() : "";
     if (lectura === "" || salvedad === "") return null;
@@ -122,6 +130,7 @@ export async function leerConsulta(
         model: MODELO_ANALISIS,
         max_tokens: 700,
         system: SISTEMA,
+        output_config: { format: { type: "json_schema", schema: ESQUEMA } },
         messages: [{
           role: "user",
           content: `Término: «${c.termino}». Comentarios de sus publicaciones de los últimos 30 días.\n\n${partes.join("\n")}`,

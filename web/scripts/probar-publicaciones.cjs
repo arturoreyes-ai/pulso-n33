@@ -7,8 +7,19 @@ const ts = require('typescript');
 const ruta = path.resolve(__dirname, '../src/lib/dominio/publicaciones.ts');
 const modulo = new Module(ruta, module);
 modulo.paths = module.paths;
+// publicaciones.ts importa `./zonas` (NOMBRE_TODA_REGION), que tambien es TypeScript
+// y solo trae imports de tipo: se transpila igual en vez de pedirselo a node.
+const requerir = modulo.require.bind(modulo);
+modulo.require = (id) => {
+  if (!id.startsWith('./')) return requerir(id);
+  const hijo = path.resolve(path.dirname(ruta), id + '.ts');
+  const m = new Module(hijo, modulo);
+  m.paths = module.paths;
+  m._compile(ts.transpileModule(fs.readFileSync(hijo, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2023 } }).outputText, hijo);
+  return m.exports;
+};
 modulo._compile(ts.transpileModule(fs.readFileSync(ruta, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2023 } }).outputText, ruta);
-const { canonizarPublicacion, seleccionarPublicaciones, compararPublicaciones, reunirPublicaciones, cubetasConFilas, CUBETAS, NOMBRE_CUBETA, NOMBRE_RED } = modulo.exports;
+const { canonizarPublicacion, seleccionarPublicaciones, compararPublicaciones, reunirPublicaciones, ordenarPublicaciones, cubetasConFilas, cubetasDisponibles, rotuloRegion, CUBETAS, NOMBRE_CUBETA, NOMBRE_RED } = modulo.exports;
 const post = (id, extra = {}) => ({ url: `https://www.instagram.com/p/${id}/`, fecha: '2026-09-14', publicado: '2026-09-14T12:00:00Z', zona: 'tijuana', cuenta: 'medio', likes: 5, ...extra });
 const doc = (posts, maximo = 15) => ({ destacados: posts, destacados_maximo: maximo, cuentas: [{ cuenta: 'medio', nombre: 'El medio' }] });
 assert.equal(canonizarPublicacion('https://instagram.com/reel/ABC_-/??x=1', 'instagram'), 'https://www.instagram.com/p/ABC_-/');
@@ -154,7 +165,7 @@ assert.equal(Object.keys(NOMBRE_CUBETA).length, 3, 'ni una cubeta de mas');
 // CUBETAS deriva de la tabla: un solo sitio para los nombres, y el orden en que
 // se ofrecen es el de la lista.
 assert.deepEqual(CUBETAS.map((c) => c.id), ['corredor', 'mexico', 'mundo']);
-assert.deepEqual(CUBETAS.map((c) => c.nombre), ['Corredor', 'México', 'Mundo']);
+assert.deepEqual(CUBETAS.map((c) => c.nombre), ['Región', 'México', 'Internacional']);
 for (const c of CUBETAS) assert.equal(c.nombre, NOMBRE_CUBETA[c.id], `${c.id}: un solo nombre`);
 // Y toda cubeta que cubetasConFilas puede devolver es nombrable.
 assert.deepEqual(cubetasConFilas(mezcla).filter((c) => NOMBRE_CUBETA[c] === undefined), []);
@@ -173,4 +184,66 @@ for (const url of ['https://www.facebook.com/groups/g/posts/1', 'https://www.fac
 assert.equal(canonizarPublicacion('https://www.facebook.com/vivelabaja/posts/1', 'instagram'), null);
 assert.equal(Object.keys(NOMBRE_RED).length, 4, 'cuatro redes con nombre');
 
-console.log('Publicaciones: selección, orden, enlaces, deduplicación, disponibilidad parcial y nombres de cubeta verificados (cuatro plataformas) offline.');
+// --- Mundo en Instagram (22 de septiembre de 2026) ------------------------
+// Una cuenta con `ambito` zonifica por el pie y puede llegar a `internacional`,
+// con su alcance. Antes Mundo solo existia en TikTok y el comentario de
+// cubetasConFilas lo decia; ahora basta Instagram para ofrecer la pastilla.
+const igMundo = doc([post('bbc', { zona: 'internacional', alcance: 'extranjero', cuenta: 'bbcmundo_ig' }),
+                     post('tj', { zona: 'tijuana' })]);
+assert.deepEqual(cubetasDisponibles(igMundo, undefined, undefined), ['corredor', 'mundo']);
+assert.deepEqual(seleccionarPublicaciones(igMundo, null, 'instagram', 'mundo').map((p) => p.url),
+  [post('bbc').url]);
+// `extranjero` y `nacional` caen los dos en Mundo: la cubeta junta lo verificado
+// con la edicion del mundo, y la tarjeta es la que los distingue.
+const mundoMixto = doc([post('v', { zona: 'internacional', alcance: 'extranjero' }),
+                        post('e', { zona: 'internacional', alcance: 'nacional' })]);
+assert.equal(seleccionarPublicaciones(mundoMixto, null, 'tiktok', 'mundo').length, 2);
+
+// --- El rotulo de la vista de region --------------------------------------
+// Uno solo para la barra del lector y para «De qué se habla». La hoja lo
+// copiaba de antes del arreglo de la barra y seguia diciendo «Toda la región»
+// bajo Mundo.
+assert.equal(rotuloRegion('corredor'), 'Toda la región');
+assert.equal(rotuloRegion('mexico'), 'México');
+assert.equal(rotuloRegion('mundo'), 'Internacional');
+
+// --- Populares o recientes (23 de septiembre de 2026) ---------------------
+// El cliente pidio lo mas popular primero, con «Recientes» a un toque. El
+// orden se aplica DESPUES de elegir: seleccionar sigue en el orden del archivo
+// y reunirPublicaciones sigue devolviendo lo nuevo primero.
+const fila = (red, id, extra = {}) => {
+  const url = red === 'tiktok' ? `https://www.tiktok.com/@medio/video/${id}`
+    : red === 'youtube' ? `https://www.youtube.com/watch?v=${id}` : `https://www.instagram.com/p/${id}/`;
+  return { red, clave: `${red}:${url}`, url, fuente: 'x',
+    post: { url, fecha: '2026-09-14', publicado: '2026-09-14T12:00:00Z', zona: 'tijuana', cuenta: 'medio', likes: 5, ...extra } };
+};
+// Recientes es exactamente el orden de antes.
+const reunidas = reunirPublicaciones(ig, tk, ytDoc, null);
+assert.deepEqual(ordenarPublicaciones(reunidas, 'recientes').map((f) => f.clave), reunidas.map((f) => f.clave),
+  'recientes = compararPublicaciones, lo que la pantalla leia');
+// En una sola red, populares es su orden de merito: likes en TikTok e Instagram.
+const soloTk = [fila('tiktok', '1', { likes: 10, publicado: '2026-09-14T20:00:00Z' }),
+                fila('tiktok', '2', { likes: 900 }), fila('tiktok', '3', { likes: 50 })];
+assert.deepEqual(ordenarPublicaciones(soloTk, 'populares').map((f) => f.post.likes), [900, 50, 10]);
+assert.deepEqual(ordenarPublicaciones(soloTk, 'recientes')[0].post.likes, 10, 'el mas nuevo primero');
+// YouTube por vistas: su feed no publica likes.
+const soloYt = [fila('youtube', 'aaaaaaaaaaa', { likes: undefined, reproducciones: 5 }),
+                fila('youtube', 'bbbbbbbbbbb', { likes: undefined, reproducciones: 5000 })];
+assert.equal(ordenarPublicaciones(soloYt, 'populares')[0].post.reproducciones, 5000);
+// En «Todas» NO se comparan cifras entre redes: se intercalan por puesto. Con
+// el numero crudo, los dos de TikTok (miles de likes) irian antes que todo.
+const todas = [fila('instagram', 'i1', { likes: 30 }), fila('instagram', 'i2', { likes: 20 }),
+               fila('tiktok', '1', { likes: 90000 }), fila('tiktok', '2', { likes: 80000 }),
+               fila('youtube', 'yyyyyyyyyyy', { likes: undefined, reproducciones: 400 })];
+assert.deepEqual(ordenarPublicaciones(todas, 'populares').map((f) => f.red),
+  ['instagram', 'tiktok', 'youtube', 'instagram', 'tiktok'], 'el primero de cada red, luego el segundo');
+assert.deepEqual(ordenarPublicaciones(todas, 'populares').slice(0, 2).map((f) => f.post.likes), [30, 90000]);
+// Ordena una copia: `filas` sale de un useMemo que otros leen.
+const antesOrden = JSON.stringify(todas);
+ordenarPublicaciones(todas, 'populares');
+ordenarPublicaciones(todas, 'recientes');
+assert.equal(JSON.stringify(todas), antesOrden);
+// Y reunirPublicaciones no cambio: lo nuevo primero.
+assert.equal(reunirPublicaciones(ig, tk, ytDoc, null)[0].red, 'youtube');
+
+console.log('Publicaciones: selección, orden (populares y recientes), enlaces, deduplicación, disponibilidad parcial y nombres de cubeta verificados (cuatro plataformas) offline.');

@@ -66,40 +66,54 @@ export interface AnalisisPublicacion extends LecturaPublicacion {
   reportados: number;
 }
 
-/** Version de la lectura de conjunto, independiente de la de una publicacion. */
-export const VERSION_ANALISIS_CONVERSACION = "1";
+/** Version del resumen de TikTok, independiente de la de una publicacion. */
+export const VERSION_RESUMEN_TIKTOK = "1";
+
+/** Debajo de esto no hay asuntos que agrupar: hay tres pies repetidos con
+ *  otras palabras. Rosarito tenia tres videos el 20 de septiembre de 2026.
+ *  Vive aqui y no en resumen-tiktok.ts porque la tarjeta decide con el si se
+ *  pinta, y aquel modulo arrastra `node:fs` por datos-redes.ts. */
+export const MINIMO_VIDEOS_RESUMEN = 5;
 
 /**
- * «De que se habla»: lo que se repite en los comentarios de TODAS las
- * publicaciones que el lector tiene delante, no de una.
+ * «Resumen con IA»: de que hablan los videos de TikTok mas vistos de una
+ * seleccion, agrupado por asunto y con la fuente de cada punto.
  *
- * Es la unica pieza del producto que mira varias publicaciones a la vez, asi
- * que las salvedades pesan mas, no menos: son los comentarios MAS VOTADOS de
- * las publicaciones destacadas de una ventana de 24 horas —del orden del 6% de
- * los que las plataformas reportan— y no una muestra de ninguna ciudad. Por eso
- * `leidos`, `publicaciones` y `reportados` los cuenta el codigo y se pintan al
- * lado, nunca divididos.
+ * Es la forma del resumen que TikTok pinta sobre su propia busqueda y que el
+ * cliente mostro el 23 de septiembre de 2026. Ese resumen NO se puede traer: el
+ * actor no lo devuelve, vive en la pagina de busqueda de la app, y publicarlo
+ * seria publicar lo que el modelo de otra empresa resumio de cuerpos de notas.
+ * Este lo escribe un modelo sobre la primera linea del pie de cada video, que
+ * es lo que la tarjeta ya muestra, y nada mas.
+ *
+ * `fuentes` de cada punto son indices en `fuentes` de la respuesta, y los
+ * resuelve EL SERVIDOR. El modelo solo cita numeros de la lista que recibio; un
+ * numero que no existe se tira, y un punto que se queda sin fuente se tira
+ * entero: una afirmacion que no se puede rastrear a un video no se pinta.
  */
-export interface LecturaConversacion {
-  /** Los hilos que se repiten, en prosa. Sin conteos por tema: un conteo que
-   *  el modelo inventa no lo puede verificar nadie. */
-  lectura: string;
+export interface PuntoResumen {
+  texto: string;
+  fuentes: number[];
+}
+
+export interface SeccionResumen {
+  titulo: string;
+  puntos: PuntoResumen[];
+}
+
+export interface LecturaResumen {
+  /** Una o dos frases: de que tratan, en conjunto. */
+  entrada: string;
+  secciones: SeccionResumen[];
+  /** Que NO establece el material. La salvedad de muestreo es de la pagina. */
   salvedad: string;
 }
 
-export interface AnalisisConversacion extends LecturaConversacion {
-  /** Comentarios cuyo texto se mando al modelo. */
-  leidos: number;
-  /** Publicaciones de la seleccion. */
-  publicaciones: number;
-  /**
-   * De cuantas de ellas salio texto de verdad.
-   *
-   * Va aparte y se pinta aparte: casi nunca coinciden —el archivo de texto solo
-   * trae los mas votados de algunas— y decir «15 comentarios en 30 publicaciones» sugiere
-   * que se leyo algo de las treinta. El hueco se rotula, no se disimula.
-   */
-  publicacionesConTexto: number;
-  /** Lo que las plataformas dicen tener en esas mismas publicaciones. */
-  reportados: number;
+export interface ResumenTikTok extends LecturaResumen {
+  /** Los videos citados, en el orden en que se le dieron al modelo (del mas
+   *  popular al menos). `url` es la canonica de `canonizarPublicacion`, la
+   *  misma llave con la que el visor arma `clave`. */
+  fuentes: { url: string; fuente: string }[];
+  /** Videos de la seleccion que el modelo leyo. Lo cuenta el codigo. */
+  videos: number;
 }

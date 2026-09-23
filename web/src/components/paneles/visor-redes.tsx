@@ -1,19 +1,21 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { X as Cerrar } from "@phosphor-icons/react";
+import { ChatCircle as IconoComentarios } from "@phosphor-icons/react";
 import { useRedes, useRedesComentarios, useTikTok, useTikTokComentarios, useYouTube } from "@/lib/datos/hooks";
 import type { ComentarioPublicado } from "@/lib/datos/tipos";
-import { NOMBRE_RED, reunirPublicaciones, type CubetaRegion, type PublicacionVisual, type RedVisual } from "@/lib/dominio/publicaciones";
+import { NOMBRE_RED, ordenarPublicaciones, reunirPublicaciones, type CubetaRegion, type OrdenLectura, type PublicacionVisual, type RedVisual } from "@/lib/dominio/publicaciones";
+import { MINIMO_VIDEOS_RESUMEN } from "@/lib/analisis/contrato-publicacion";
 import { filtrarPorTexto, SIN_FILAS_BUSQUEDA } from "@/lib/dominio/consultas";
 import { fechaCorta, hace, hora } from "@/lib/dominio/formato";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 import { teclasDelRecorrido, useRecorrido } from "@/lib/pantalla/recorrido";
-import { CONTROL } from "@/components/lector/lector";
-import { clasesChip } from "@/components/ui/clases";
+import { clasesBoton } from "@/components/ui/clases";
 import { BotonAnalizar, FichaPublicacion } from "./analisis-publicacion";
 import { ComentariosPublicacion, VistaPreviaComentarios, type Textos } from "./comentarios-publicacion";
 import { EsqueletoMedio, MedioSocial } from "./medio-social";
+import { ResumenTikTokBloque } from "./resumen-tiktok";
+import { Hoja } from "@/components/ui/hoja";
 
 /** Las tres pestanas que caen aqui; YouTube y X son otras hojas del lector. */
 export type FiltroVisual = "todas" | RedVisual;
@@ -24,8 +26,14 @@ const SIN_FILAS = "No hay publicaciones disponibles para esta selección. Es un 
  *  contra el, nunca contra el reloj del navegador: ver formato.ts::hace. */
 export type Cortes = Partial<Record<RedVisual, string>>;
 
-/** El visor monta un solo medio: ocultar treinta iframes con CSS deja treinta
- * reproductores vivos. Los metadatos si permanecen para poder recorrerlos.
+/** El visor reproduce un solo medio: ocultar treinta iframes con CSS deja
+ * treinta reproductores vivos. Los metadatos si permanecen para poder
+ * recorrerlos. Desde el 22 de septiembre de 2026 monta DOS: el asentado y,
+ * si es de Instagram o TikTok, el siguiente, precargado y en pausa (ver
+ * `PRECARGA`). Montar solo el asentado cobraba el arranque entero despues de
+ * cada gesto -- 1.3 a 1.9 s el reproductor de TikTok, 1.5 s solo el documento
+ * del embed de Instagram --; con la siguiente ya cargada, TikTok pasa de
+ * pausa a reproducir en 42 ms, medido.
  *
  * ES UNA TARJETA POR PANTALLA, dentro del lector (components/lector) en todo
  * ancho desde el 15 de septiembre de 2026. El 14 nacio como Visual del
@@ -44,11 +52,14 @@ export type Cortes = Partial<Record<RedVisual, string>>;
  * que la direccion pidio ver el 8 de septiembre de 2026. Una sola hoja
  * (`<dialog>`) para todo el recorrido, nunca una por tarjeta; su cuerpo esta
  * en paneles/comentarios-publicacion.tsx. */
-export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis = false, filtroTexto = null }: {
+export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis = false, filtroTexto = null, orden = "recientes" }: {
   zona: ZonaRuta | null;
   filtro: FiltroVisual;
   cubeta?: CubetaRegion;
   analisis?: boolean;
+  /** Populares o recientes primero (lector-redes.tsx lo elige). Recientes por
+   *  omision, que es lo que la busqueda por texto siempre leyo. */
+  orden?: OrdenLectura;
   /** La busqueda de Redes cuando lo escrito no es un termino en seguimiento:
    *  filtra por texto lo que ya esta cargado (pies y comentarios), sin pedir
    *  nada a nadie. Ver lib/dominio/consultas.ts. */
@@ -67,9 +78,21 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis
   const publicaciones = useMemo(() => reunirPublicaciones(instagram.data, tiktok.data, youtube.data, zona, cubeta), [instagram.data, tiktok.data, youtube.data, zona, cubeta]);
   const q = (filtroTexto ?? "").trim();
   const filas = useMemo(() => {
-    const porRed = publicaciones.filter((fila) => filtro === "todas" || fila.red === filtro);
+    // El orden DESPUES del filtro de pestana: «populares» reparte puestos por
+    // red, y en una pestana de una red eso es su orden de merito.
+    const porRed = ordenarPublicaciones(publicaciones.filter((fila) => filtro === "todas" || fila.red === filtro), orden);
     return q === "" ? porRed : filtrarPorTexto(porRed, { instagram: textosInstagram.data, tiktok: textosTikTok.data }, q);
-  }, [publicaciones, filtro, q, textosInstagram.data, textosTikTok.data]);
+  }, [publicaciones, filtro, q, orden, textosInstagram.data, textosTikTok.data]);
+  // «Resumen con IA», plegado y primero en la pestana TikTok, con los videos
+  // debajo (23 de septiembre de 2026). Cuenta lo mismo que la ruta: videos
+  // con pie y con URL canonica. Debajo del piso no hay resumen ni peticion;
+  // los videos siguen ahi, asi que no hay hueco que rotular. Nunca en la
+  // busqueda por texto.
+  const resumible = filtro === "tiktok" && analisis && q === "" && tiktok.data?.generado !== undefined
+    && filas.filter((fila) => fila.url !== null && fila.post.titulo.trim() !== "").length >= MINIMO_VIDEOS_RESUMEN;
+  const resumen = resumible
+    ? (irA: (clave: string) => boolean) => <ResumenTikTokBloque zona={zona} cubeta={cubeta} generado={tiktok.data!.generado} irA={irA} />
+    : undefined;
   const cortes: Cortes = { instagram: instagram.data?.generado, tiktok: tiktok.data?.generado, youtube: youtube.data?.generado };
   // `cosecha_comentarios` ausente se lee como true: un corte anterior al 18 de
   // septiembre de 2026 no lo trae y si cosechaba.
@@ -99,10 +122,16 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis
           linea encima encogeria las tarjetas. */}
       {estados.map((estado) => <p key={estado} role="status" className="sr-only">{estado}</p>)}
       <RecorridoPublicaciones key={`${filtro}:${q}:${filas.map((fila) => fila.clave).join("|")}`} publicaciones={filas} cortes={cortes} cargando={cargando} textos={textos} conComentarios={conComentarios} analisis={analisis}
-        sinFilas={q === "" ? undefined : SIN_FILAS_BUSQUEDA(q)} />
+        sinFilas={q === "" ? undefined : SIN_FILAS_BUSQUEDA(q)} resumen={resumen} />
     </>
   );
 }
+
+/** Las redes cuya tarjeta siguiente se monta por adelantado. YouTube NO: su
+ *  iframe se reproduce solo y no tiene aqui canal para pausarlo, asi que
+ *  precargarlo seria un segundo video sonando fuera de pantalla. Facebook no
+ *  aparece mas que en las consultas por termino. */
+const PRECARGA: ReadonlySet<RedVisual> = new Set(["instagram", "tiktok"]);
 
 /** El medio montado cambia cuando el desplazamiento ASIENTA, nunca a mitad
  *  del gesto (useRecorrido): la tarjeta que sale sigue viva mientras el dedo
@@ -112,7 +141,7 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis
  *  esqueleto mientras carga, y si no hay nada, el hueco dicho como hueco. La
  *  caja ES la pantalla, y una linea suelta en su lugar dejaria el lector
  *  vacio. */
-export function RecorridoPublicaciones({ publicaciones, cortes, cargando, textos, conComentarios, analisis, sinFilas = SIN_FILAS, cabecera }: {
+export function RecorridoPublicaciones({ publicaciones, cortes, cargando, textos, conComentarios, analisis, sinFilas = SIN_FILAS, cabecera, resumen, lugar = true, vistaPrevia = true }: {
   publicaciones: PublicacionVisual[];
   cortes: Cortes;
   cargando: boolean;
@@ -128,8 +157,23 @@ export function RecorridoPublicaciones({ publicaciones, cortes, cargando, textos
    *  las publicaciones se corren una; el contador «n de total» sigue contando
    *  solo publicaciones. */
   cabecera?: ReactNode;
+  /** El resumen de la pestana TikTok (paneles/resumen-tiktok.tsx): tambien
+   *  el indice 0, pero del alto de su CONTENIDO y no de la caja
+   *  (`.resumen-recorrido`), para que el primer video asome en la misma
+   *  pantalla. Recibe `irA`, que lleva el recorrido a la tarjeta de una
+   *  `clave`: cada fuente del resumen lleva a su video. Se pasa uno u otro,
+   *  nunca los dos; si llegaran ambos, gana `cabecera`. */
+  resumen?: (irA: (clave: string) => boolean) => ReactNode;
+  /** Si la banda dice el lugar («sobre Tijuana»). La consulta por termino lo
+   *  apaga (23 de septiembre de 2026): un termino no es un lugar, la ficha
+   *  nunca lee `zona`, y «sobre un lugar sin precisar» era ruido. */
+  lugar?: boolean;
+  /** Si la columna de escritorio adelanta dos comentarios. La consulta lo
+   *  apaga el mismo dia, a pedido del cliente: los comentarios se abren con
+   *  el boton, cuando quien lee los pide. */
+  vistaPrevia?: boolean;
 }) {
-  const desplazamiento = cabecera === undefined ? 0 : 1;
+  const desplazamiento = cabecera === undefined && resumen === undefined ? 0 : 1;
   const contenedor = useRef<HTMLDivElement>(null);
   const { actual, enPantalla, ir } = useRecorrido(contenedor);
   const [visible, setVisible] = useState(true);
@@ -159,6 +203,12 @@ export function RecorridoPublicaciones({ publicaciones, cortes, cargando, textos
     if (turnoIA > 0) hojaIA.current?.showModal();
   }, [turnoIA]);
   const total = publicaciones.length;
+  const irA = (clave: string): boolean => {
+    const indice = publicaciones.findIndex((fila) => fila.clave === clave);
+    if (indice === -1) return false;
+    ir(indice + desplazamiento);
+    return true;
+  };
   return <>
     <div ref={contenedor} className="recorrido-lector" tabIndex={0} role="region" aria-label="Publicaciones"
       onKeyDown={(evento) => teclasDelRecorrido(evento, actual, total + desplazamiento, ir)}>
@@ -167,9 +217,15 @@ export function RecorridoPublicaciones({ publicaciones, cortes, cargando, textos
           {cabecera}
         </article>
       )}
+      {cabecera !== undefined || resumen === undefined ? null : (
+        <div data-indice={0} className="resumen-recorrido border-b border-filo px-4 pt-6 pb-8 md:px-8">
+          {resumen(irA)}
+        </div>
+      )}
       {publicaciones.map((fila, indice) => (
-        <Publicacion key={fila.clave} fila={fila} indice={indice} posicion={indice + desplazamiento} total={total} corte={cortes[fila.red]}
+        <Publicacion key={fila.clave} lugar={lugar} vistaPrevia={vistaPrevia} fila={fila} indice={indice} posicion={indice + desplazamiento} total={total} corte={cortes[fila.red]}
           activo={indice + desplazamiento === actual && visible && enPantalla}
+          preparado={indice + desplazamiento === actual + 1 && visible && enPantalla && PRECARGA.has(fila.red)}
           comentarios={textos[fila.red]?.data?.por_post[fila.post.url]}
           conComentarios={conComentarios[fila.red] ?? true}
           analisis={analisis}
@@ -182,24 +238,16 @@ export function RecorridoPublicaciones({ publicaciones, cortes, cargando, textos
           : <div className="publicacion-visual flex items-center px-4 md:px-8"><p className="mx-auto w-full max-w-[88rem] text-lectura text-tinta-meta">{sinFilas}</p></div>
         : null}
     </div>
-    <dialog ref={hoja} className="dialogo-lector" aria-labelledby="titulo-comentarios" onClose={() => setAbierta(null)}>
-      <div className="cabecera-dialogo-lector">
-        <h2 id="titulo-comentarios" className="text-rotulo text-tinta-titulo">Comentarios</h2>
-        <button type="button" className={CONTROL} aria-label="Cerrar comentarios" onClick={() => hoja.current?.close()}><Cerrar size={20} aria-hidden /></button>
-      </div>
+    <Hoja ref={hoja} titulo="Comentarios" rotuloCerrar="Cerrar comentarios" onClose={() => setAbierta(null)}>
       {abierta === null || textos[abierta.red] === undefined
         ? null
         : <ComentariosPublicacion key={abierta.clave} fila={abierta} textos={textos[abierta.red]!} />}
-    </dialog>
-    <dialog ref={hojaIA} className="dialogo-lector" aria-labelledby="titulo-lectura-publicacion" onClose={() => setAnalizada(null)}>
-      <div className="cabecera-dialogo-lector">
-        <h2 id="titulo-lectura-publicacion" className="text-rotulo text-tinta-titulo">Lectura automática</h2>
-        <button type="button" className={CONTROL} aria-label="Cerrar lectura" onClick={() => hojaIA.current?.close()}><Cerrar size={20} aria-hidden /></button>
-      </div>
+    </Hoja>
+    <Hoja ref={hojaIA} titulo="Lectura automática" rotuloCerrar="Cerrar lectura" onClose={() => setAnalizada(null)}>
       {/* `key` por publicacion: la ficha no debe heredar el estado de la
           anterior, ni su confirmacion ya pulsada. */}
       {analizada === null ? null : <FichaPublicacion key={analizada.clave} fila={analizada} />}
-    </dialog>
+    </Hoja>
   </>;
 }
 
@@ -209,18 +257,28 @@ export function RecorridoPublicaciones({ publicaciones, cortes, cargando, textos
  *  `fuera` y `nacional` son los dos residuos y NO son lo mismo: uno nombro un
  *  lugar que este tablero no cubre y el otro no nombro ninguno. El alcance los
  *  separa; un corte anterior al 15 de septiembre de 2026 no lo trae y los dos
- *  caen en «un lugar sin precisar», que es lo que se decia antes. */
+ *  caen en «un lugar sin precisar», que es lo que se decia antes.
+ *
+ *  En Mundo pasa lo mismo desde el 22 de septiembre de 2026: la cubeta junta
+ *  lo que nombro el extranjero (`extranjero`) con lo que vino de una fuente
+ *  del mundo sin nombrar nada (`nacional`). Solo lo primero dice «el mundo»;
+ *  lo segundo no se verifico, y decirlo seria afirmar lo que nadie midio. */
 function lugarDe(fila: PublicacionVisual): string {
   const { zona, alcance } = fila.post;
   // «desde» cuando la zona es la sede declarada de la cuenta (Instagram en el
   // panel de medios, que no publica `alcance`); «sobre» cuando salio del texto
-  // con el gacetero: TikTok, YouTube, Facebook y las tres redes de una
-  // consulta por termino. Lo decide el dato, no la red.
+  // con el gacetero: TikTok, YouTube, Facebook, las cuentas de Instagram con
+  // `ambito` y las tres redes de una consulta por termino. Lo decide el dato,
+  // no la red.
   const porTexto = fila.red !== "instagram" || alcance !== undefined;
+  // `estatal` con alcance `nacional` es la pieza de un medio del corredor que
+  // no nombro lugar (22 de septiembre de 2026, pulso/redes.py::
+  // residuo_de_medio): va en Corredor, pero decir «Baja California» seria
+  // afirmar lo que la pieza no dice.
   const nombre = NOMBRE_CORTO[zona as ZonaRuta]
-    ?? (zona === "estatal"
+    ?? (zona === "estatal" && alcance !== "nacional"
       ? "Baja California"
-      : zona === "internacional"
+      : zona === "internacional" && alcance !== "nacional"
         ? "el mundo"
         : alcance === "fuera"
           ? "un lugar fuera del corredor"
@@ -228,7 +286,9 @@ function lugarDe(fila: PublicacionVisual): string {
   return `${porTexto ? "sobre" : "desde"} ${nombre}`;
 }
 
-function Publicacion({ fila, indice, posicion, total, corte, activo, comentarios, conComentarios, analisis, onComentarios, onAnalizar }: {
+function Publicacion({ fila, indice, posicion, total, corte, activo, preparado, comentarios, conComentarios, analisis, onComentarios, onAnalizar, lugar, vistaPrevia }: {
+  lugar: boolean;
+  vistaPrevia: boolean;
   fila: PublicacionVisual;
   /** Lugar entre las publicaciones, para el contador. */
   indice: number;
@@ -237,6 +297,8 @@ function Publicacion({ fila, indice, posicion, total, corte, activo, comentarios
   total: number;
   corte: string | undefined;
   activo: boolean;
+  /** La tarjeta siguiente a la asentada: monta su medio sin reproducirlo. */
+  preparado: boolean;
   comentarios: ComentarioPublicado[] | undefined;
   /** Si la plataforma cosecha comentarios. Cuando no, la tarjeta no ofrece ni
    *  la hoja ni Analizar: no hay texto que abrir ni que leerle a un modelo, y
@@ -252,7 +314,7 @@ function Publicacion({ fila, indice, posicion, total, corte, activo, comentarios
   const cuando = antiguedad ? `hace ${antiguedad}` : `${fechaCorta(iso)}${fila.post.publicado ? ` · ${hora(fila.post.publicado)}` : ""}`;
   return <article data-indice={posicion} aria-label={`Publicación ${indice + 1} de ${total}`}
     className="publicacion-visual mx-auto flex w-full max-w-[88rem] flex-col md:grid md:grid-cols-2 md:items-center md:gap-12 md:px-8 md:py-8">
-    <EspacioMedio publicacion={fila} activo={activo} />
+    <EspacioMedio publicacion={fila} activo={activo} preparado={preparado} />
     {/* La banda del titular va DEBAJO del medio, en flujo, no encima: encima
         taparia el pie propio de Instagram (autor, enlace) y exigiria juegos de
         pointer-events sobre el iframe. En telefono cabe en dos lineas de
@@ -260,7 +322,7 @@ function Publicacion({ fila, indice, posicion, total, corte, activo, comentarios
     <div className="relative min-w-0 px-4 pb-6 md:static md:px-0 md:pb-0">
       <h2 className="line-clamp-2 break-words text-cuerpo text-tinta-titulo md:line-clamp-none md:text-rotulo">{fila.post.titulo || "Publicación sin título"}</h2>
       <p className="mt-2 text-meta text-tinta-meta md:mt-4 md:text-cuerpo md:text-tinta-prosa">
-        {fila.fuente} · {NOMBRE_RED[fila.red]} · <time dateTime={iso}>{cuando}</time> · {lugarDe(fila)}
+        {fila.fuente} · {NOMBRE_RED[fila.red]} · <time dateTime={iso}>{cuando}</time>{lugar ? ` · ${lugarDe(fila)}` : ""}
       </p>
       {/* AQUI VIVIAN CINCO CIFRAS y se fueron el 17 de septiembre de 2026, a
           peticion del cliente: el embed las trae al lado y las trae mejor, que
@@ -276,15 +338,18 @@ function Publicacion({ fila, indice, posicion, total, corte, activo, comentarios
           El pie del sitio sigue diciendo las cinco reglas enteras. */}
       <div className="mt-3 flex flex-wrap items-center gap-3 md:mt-6">
         {fila.url
-          ? <a href={fila.url} target="_blank" rel="noopener noreferrer nofollow" className={clasesChip(true)}>Ver original</a>
+          ? <a href={fila.url} target="_blank" rel="noopener noreferrer nofollow" className={clasesBoton(true)}>Abrir en {NOMBRE_RED[fila.red]}</a>
           : <p className="text-meta text-tinta-meta md:text-cuerpo">Enlace no disponible.</p>}
         {conComentarios
-          ? <button type="button" className={clasesChip(false)} onClick={onComentarios}>Comentarios</button>
+          ? <button type="button" className={clasesBoton(false)} onClick={onComentarios}>
+              <IconoComentarios size={16} aria-hidden />
+              Comentarios
+            </button>
           : null}
         {analisis && conComentarios ? <BotonAnalizar onAbrir={onAnalizar} /> : null}
         <p className="ml-auto text-meta tabular-nums text-tinta-meta">{indice + 1} de {total}</p>
       </div>
-      {conComentarios
+      {conComentarios && vistaPrevia
         ? <div className="mt-6 hidden md:block"><VistaPreviaComentarios comentarios={comentarios} /></div>
         : null}
     </div>
@@ -300,25 +365,32 @@ const CLASES_MARCO_MEDIO = "flex flex-1 items-center justify-center px-4 pt-4 md
  * esqueleto, que es la forma esperada, y solo crece con lo medido: asi el
  * iframe de Instagram, que nace a 24px, no encoge la tarjeta ni la agranda al
  * aterrizar, y salir de un reel alto no desplaza el siguiente post bajo el
- * dedo. Las tarjetas inactivas muestran el esqueleto quieto, sin pulso: es una
- * forma en reposo, no una carga en curso. */
-function EspacioMedio({ publicacion, activo }: { publicacion: PublicacionVisual; activo: boolean }) {
+ * dedo. Las tarjetas sin medio muestran el esqueleto quieto, sin pulso: es una
+ * forma en reposo, no una carga en curso.
+ *
+ * Preparada o asentada, el MISMO `MedioSocial` en la misma posicion del arbol:
+ * asi, al asentarse, React conserva el iframe ya cargado y solo le cambia
+ * `activo`. Un ternario que alternara dos elementos distintos lo recargaria y
+ * la precarga no serviria de nada. Se mide tambien preparada, para que la
+ * reserva de alto ya este puesta cuando la tarjeta llegue. */
+function EspacioMedio({ publicacion, activo, preparado }: { publicacion: PublicacionVisual; activo: boolean; preparado: boolean }) {
   const espacio = useRef<HTMLDivElement>(null);
   const [altura, setAltura] = useState(0);
+  const montado = activo || preparado;
   useEffect(() => {
     const elemento = espacio.current;
-    if (!elemento || !activo) return;
+    if (!elemento || !montado) return;
     const observador = new ResizeObserver((entradas) => {
       const medida = Math.ceil(entradas[0]?.contentRect.height ?? 0);
       setAltura((anterior) => Math.max(anterior, medida));
     });
     observador.observe(elemento);
     return () => observador.disconnect();
-  }, [activo]);
+  }, [montado]);
   return <div className={CLASES_MARCO_MEDIO}>
     <div className="medio-visual mx-auto md:mx-0 md:max-w-[24rem]" style={{ minHeight: altura || undefined }}>
       <div ref={espacio}>
-        {activo ? <MedioSocial publicacion={publicacion} /> : <EsqueletoMedio red={publicacion.red} tipo={publicacion.post.tipo} formato={publicacion.post.formato} pulsar={false} />}
+        {montado ? <MedioSocial publicacion={publicacion} activo={activo} /> : <EsqueletoMedio red={publicacion.red} tipo={publicacion.post.tipo} formato={publicacion.post.formato} pulsar={false} />}
       </div>
     </div>
   </div>;

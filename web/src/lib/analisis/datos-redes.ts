@@ -83,55 +83,39 @@ export async function ubicarPublicacion(
   };
 }
 
-export interface Conversacion {
-  /** Una entrada por publicacion con texto, en el orden en que se leen. */
-  bloques: { red: RedAnalizable; titulo: string; comentarios: string[] }[];
-  /** Publicaciones de la seleccion, tengan texto o no. */
-  publicaciones: number;
-  leidos: number;
-  /** Lo que las plataformas reportan en esas mismas publicaciones. */
-  reportados: number;
+export interface VideoResumible {
+  /** Canonica: la llave con la que el visor arma `clave`. */
+  url: string;
+  fuente: string;
+  titulo: string;
 }
 
 /**
- * Los comentarios de TODA la seleccion que el lector tiene delante.
+ * Los videos de TikTok que el resumen lee: la MISMA seleccion que pinta el
+ * visor en la pestana TikTok, por lo mismo que `reunirConversacion`. En TikTok
+ * `seleccionarPublicaciones` corta en el orden del archivo, que el pipeline ya
+ * escribe por likes, asi que salen del mas popular al menos sin reordenar.
  *
- * Misma seleccion que pinta el visor —`seleccionarPublicaciones`, con su tope
- * por documento— para que «de que se habla» hable exactamente de lo que se
- * puede desplazar en pantalla y no de un conjunto distinto que nadie ve. Si
- * divergieran, la lectura afirmaria cosas sobre publicaciones que el lector no
- * tiene manera de comprobar.
+ * Solo `tiktok.json`: el resumen no lee comentarios. Lo que el modelo ve es el
+ * pie y el creador de cada video, que es lo que la tarjeta ya muestra.
+ * Un pie vacio no aporta nada que resumir y se salta; un video sin URL
+ * canonica no se podria citar y se salta tambien.
  */
-export async function reunirConversacion(
+export async function reunirVideosTikTok(
   zona: string | null,
   cubeta: CubetaRegion,
   leer: LeerDatos,
-): Promise<Conversacion | "sin-datos"> {
-  const salida: Conversacion = { bloques: [], publicaciones: 0, leidos: 0, reportados: 0 };
-  const lecturas = await Promise.all((["instagram", "tiktok"] as const).map(async (red) => {
-    const crudo = await leer(ARCHIVOS[red].datos);
-    if (crudo === null || typeof crudo !== "object") return { red, datos: null, porPost: undefined };
-    const datos = crudo as DocRedes;
-    const textos = await leer(ARCHIVOS[red].textos);
-    const porPost = textos !== null && typeof textos === "object"
-      ? (textos as DocRedesComentarios).por_post
-      : undefined;
-    return { red, datos, porPost };
-  }));
-
-  for (const { red, datos, porPost } of lecturas) {
-    if (datos === null) continue;
-    for (const post of seleccionarPublicaciones(datos, zona, red, cubeta)) {
-      salida.publicaciones += 1;
-// `comentarios` falta en las plataformas cuyo feed no lo publica (YouTube).
-      // Ninguna de ellas llega hasta aqui -- no tienen texto que leer -- y si
-      // alguna llegara, no sumar es mas honesto que afirmar un cero.
-      salida.reportados += post.comentarios ?? 0;
-      const comentarios = (porPost?.[post.url] ?? []).map((c) => c.texto);
-      if (comentarios.length === 0) continue;
-      salida.leidos += comentarios.length;
-      salida.bloques.push({ red, titulo: post.titulo, comentarios });
-    }
+): Promise<VideoResumible[] | "sin-datos"> {
+  const crudo = await leer(ARCHIVOS.tiktok.datos);
+  if (crudo === null || typeof crudo !== "object") return "sin-datos";
+  const datos = crudo as DocRedes;
+  const nombres = nombresDeCuentas(datos);
+  const salida: VideoResumible[] = [];
+  for (const post of seleccionarPublicaciones(datos, zona, "tiktok", cubeta)) {
+    const url = canonizarPublicacion(post.url, "tiktok");
+    const titulo = (post.titulo ?? "").trim();
+    if (url === null || titulo === "") continue;
+    salida.push({ url, titulo, fuente: fuenteDePublicacion(post, "tiktok", nombres) });
   }
-  return lecturas.some(({ datos }) => datos !== null) ? salida : "sin-datos";
+  return salida;
 }

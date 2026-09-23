@@ -44,7 +44,7 @@ const AGENTE = "PulsoN33/1.0 (+lectura automatica de una nota enlazada)";
 const SISTEMA = [
   "Eres un lector de prensa regional del corredor Tijuana-San Diego.",
   "Recibes el texto de UNA nota y preparas una ficha breve en ESPAÑOL para una mesa de noticias, aunque la nota esté en inglés.",
-  "Reglas que no puedes romper:",
+  "Reglas:",
   "- No afirmes nada que no esté en el texto. Si el texto no alcanza, dilo.",
   "- No atribuyas postura, intención ni opinión a ninguna persona nombrada. Describe lo que la nota reporta, no lo que sugiere sobre alguien.",
   "- No cites mas de ocho palabras seguidas del original.",
@@ -54,10 +54,33 @@ const SISTEMA = [
   "- Ordena los puntos por importancia. Incluye quién, qué, dónde, cuándo, cifras y qué sigue solo cuando la nota lo establezca.",
   "- Sugiere UN solo formato de contenido para redes. Da su enfoque y un gancho factual, sin escribir el post terminado.",
   "- No inventes citas, imágenes, video, reacciones del público ni material que la nota no diga que existe.",
-  "Devuelve SOLO un objeto JSON con esta forma exacta:",
+  "Qué va en cada campo de la respuesta:",
   '{"lectura":"<2 a 3 frases neutrales>","puntos":["<dato prioritario>","..."],"salvedad":"<qué NO establece la nota>","sugerenciaSocial":{"formato":"<un formato>","enfoque":"<ángulo editorial sustentado>","gancho":"<gancho factual, no sensacionalista>"}}',
-  "Entre 3 y 5 puntos. Todos los campos deben tener texto. Sin texto fuera del JSON.",
+  "Entre 3 y 5 puntos. Todos los campos deben tener texto.",
 ].join("\n");
+
+/**
+ * La forma de la respuesta, impuesta por la API (salidas estructuradas) en vez
+ * de pedida en el prompt y rescatada despues de vallas y texto alrededor. Lo
+ * que un esquema no expresa —texto no vacio, cuantos elementos— lo sigue
+ * revisando `leerSalida`, y las reglas 1 y 2 `reglas.ts`.
+ */
+const ESQUEMA = {
+  type: "object",
+  properties: {
+    lectura: { type: "string" },
+    puntos: { type: "array", items: { type: "string" } },
+    salvedad: { type: "string" },
+    sugerenciaSocial: {
+      type: "object",
+      properties: { formato: { type: "string" }, enfoque: { type: "string" }, gancho: { type: "string" } },
+      required: ["formato", "enfoque", "gancho"],
+      additionalProperties: false,
+    },
+  },
+  required: ["lectura", "puntos", "salvedad", "sugerenciaSocial"],
+  additionalProperties: false,
+} as const;
 
 function fallo(mensaje: string, codigo: string): Response {
   return json({ codigo, mensaje }, 200, SIN_CACHE);
@@ -75,14 +98,11 @@ function registrarFalloEnlace(r: Extract<ResultadoEnlace, { ok: false }>): void 
   );
 }
 
-/** El JSON del modelo, que puede venir envuelto en texto o en una valla. */
+/** El JSON del modelo. La forma la fija `ESQUEMA`; esto revisa lo que el
+ *  esquema no puede: campos vacios y cuantos puntos. */
 function leerSalida(crudo: string): LecturaAnalisis | null {
-  const limpio = crudo.trim().replace(/^```(?:json)?\s*/i, "").replace(/```$/, "").trim();
-  const abre = limpio.indexOf("{");
-  const cierra = limpio.lastIndexOf("}");
-  if (abre === -1 || cierra <= abre) return null;
   try {
-    const o = JSON.parse(limpio.slice(abre, cierra + 1)) as Record<string, unknown>;
+    const o = JSON.parse(crudo) as Record<string, unknown>;
     const lectura = typeof o.lectura === "string" ? o.lectura.trim() : "";
     const salvedad = typeof o.salvedad === "string" ? o.salvedad.trim() : "";
     if (!Array.isArray(o.puntos) || !o.puntos.every((p) => typeof p === "string" && p.trim() !== "")) return null;
@@ -180,6 +200,7 @@ export async function responderAnalisis(
         model: MODELO,
         max_tokens: 900,
         system: SISTEMA,
+        output_config: { format: { type: "json_schema", schema: ESQUEMA } },
         messages: [{ role: "user", content: `Medio: ${medio || "sin dato"}\n\n${texto}` }],
       }),
     });
