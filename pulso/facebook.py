@@ -34,6 +34,13 @@ pone la cuenta. Por eso `ACTOR_BUSQUEDA` es None y `_entrada_busqueda` lanza
 para que encenderlo sea un cambio de datos, pero encenderlo es una decision
 legal del cliente y queda registrada en docs/PLAN.md sea cual sea.
 
+El 23 de septiembre de 2026 el cliente la tomo, y para UN solo camino: la
+busqueda en vivo de un termino del sitio (web/src/lib/redes-en-vivo/), detras
+de un boton y con topes, sabiendo que el proveedor inicia sesion y sin opinion
+legal todavia. Aqui NO cambia nada: `ACTOR_BUSQUEDA` sigue en None y las
+consultas programadas siguen leyendo solo paginas. Encenderla tambien aqui es
+una linea, y una decision aparte que tiene que quedar escrita igual.
+
 ## Lo que el actor publica y lo que no
 
 Facebook SI publica compartidos (`shares`): un 0 es cero medido y siempre

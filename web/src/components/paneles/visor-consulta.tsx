@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, type ReactNode } from "react";
 
 import type { Consulta, DocConsultas } from "@/lib/datos/tipos";
 import { useConsultasComentarios } from "@/lib/datos/hooks";
@@ -26,13 +26,27 @@ export type FiltroConsulta = "todas" | RedVisual | "x";
  * YouTube y X no tienen publicaciones que recorrer: el documento los trae
  * `sin_dato` con su razon, y la pestana la pinta tal cual.
  */
-export function VisorConsulta({ c, doc, filtro }: { c: Consulta; doc: DocConsultas; filtro: FiltroConsulta }) {
-  const textos = useConsultasComentarios();
+export function VisorConsulta({ c, doc, filtro, textos: textosDados, informe = true, extra, rotuloTipo, sinFilas }: {
+  c: Consulta;
+  doc: DocConsultas;
+  filtro: FiltroConsulta;
+  /** Ver FichaConsulta: la busqueda en vivo trae su propio texto, su boton y
+   *  ningun PDF. */
+  textos?: Textos;
+  informe?: boolean;
+  extra?: ReactNode;
+  rotuloTipo?: string;
+  sinFilas?: string;
+}) {
+  const propios = useConsultasComentarios();
+  const textos = textosDados ?? propios;
   const filas = useMemo(() => {
     const todas = reunirPublicacionesConsulta(c);
     return todas.filter((fila) => filtro === "todas" || fila.red === filtro);
   }, [c, filtro]);
-  if (filtro === "youtube" || filtro === "x") {
+  // YouTube sale como hoja de prosa solo si no se leyo: la busqueda en vivo SI
+  // trae los videos de los canales del panel que nombran el termino.
+  if (filtro === "x" || (filtro === "youtube" && c.plataformas.youtube.estado === "sin_dato")) {
     // Solo «sin dato»: la razon viaja en el archivo para quien lo lea, y la
     // pantalla no explica el mecanismo ni para decir lo que no hace (pedido
     // del cliente del 18 de septiembre de 2026).
@@ -47,7 +61,7 @@ export function VisorConsulta({ c, doc, filtro }: { c: Consulta; doc: DocConsult
   }
   const par: Textos = { data: textos.data, error: textos.error };
   const porRed: Partial<Record<RedVisual, Textos>> = { instagram: par, tiktok: par, facebook: par };
-  const cortes: Cortes = { instagram: doc.generado, tiktok: doc.generado, facebook: doc.generado };
+  const cortes: Cortes = { instagram: doc.generado, tiktok: doc.generado, facebook: doc.generado, youtube: doc.generado };
   return (
     <RecorridoPublicaciones
       key={`${c.id}:${filtro}:${filas.map((fila) => fila.clave).join("|")}`}
@@ -57,8 +71,12 @@ export function VisorConsulta({ c, doc, filtro }: { c: Consulta; doc: DocConsult
       textos={porRed}
       conComentarios={{ instagram: true, tiktok: true, facebook: true }}
       analisis={false}
-      sinFilas={SIN_FILAS_CONSULTA(c.termino, doc.ventana_dias)}
-      cabecera={filtro === "todas" ? <FichaConsulta c={c} doc={doc} /> : undefined}
+      sinFilas={sinFilas ?? SIN_FILAS_CONSULTA(c.termino, doc.ventana_dias)}
+      cabecera={filtro === "todas"
+        ? <FichaConsulta c={c} doc={doc} textos={textosDados} informe={informe} extra={extra} rotuloTipo={rotuloTipo} />
+        : undefined}
+      lugar={false}
+      vistaPrevia={false}
     />
   );
 }

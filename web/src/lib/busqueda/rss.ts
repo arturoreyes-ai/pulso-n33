@@ -1,11 +1,20 @@
 /**
- * Lector minimo del RSS de Google Noticias. Solo servidor.
+ * Lector minimo del RSS de Google Noticias y del RSS de busqueda de WordPress.
+ * Solo servidor.
  *
  * Escrito a mano y sin dependencia, con una asimetria que conviene decir en
  * voz alta en vez de disimularla: en Python el mismo trabajo es gratis porque
  * la stdlib trae xml.etree, y aqui no, asi que la disciplina de
  * "sin dependencias" cuesta estas ~90 lineas de regex fina. Se pagan porque
- * la entrada es UN feed, de UN generador, con CUATRO campos que interesan.
+ * la entrada son feeds RSS 2.0 con CUATRO campos que interesan.
+ *
+ * Desde el 23 de septiembre de 2026 hay un segundo generador: el buscador
+ * propio de los medios de config/consultas.json (`?s=<termino>&feed=rss2`),
+ * que lee lib/busqueda/buscadores.ts para que la busqueda en vivo encuentre lo
+ * que Google no indexa. Las dos razones de abajo siguen siendo ciertas para
+ * WordPress —RSS 2.0, <item> no anida, nada llega a HTML crudo—, asi que la
+ * cuenta no cambio. Lo que si cambia es que ese feed no trae <source>: el
+ * medio lo pone la fila del catalogo, no el feed (parsearFeedMedio).
  *
  * Regex sobre XML esta mal EN GENERAL y bien AQUI, por dos razones concretas:
  *
@@ -165,7 +174,38 @@ export function parsearFeed(
       // el titular contra el archivo, ya cortada la lista (archivo.ts).
       imagen: null,
       referencia: null,
+      origen: "google",
     });
+  }
+  return salida;
+}
+
+/** Un item del buscador de un medio: sin medio, que lo pone su fila. */
+export interface ItemMedio {
+  titulo: string;
+  url: string;
+  publicado: string | null;
+}
+
+/**
+ * Los items de un RSS de WordPress, en el orden del feed (fecha descendente).
+ *
+ * No se descarta nada por falta de <source>, que WordPress no publica: el
+ * medio es el de la fila que se pidio. Tampoco se corta el titular: el
+ * sufijo « - Medio» es cosa de Google. Un item sin fecha si se devuelve, con
+ * `publicado: null`, y lo descarta quien llama, igual que
+ * pulso/consultas.py::_buscar_en_medio.
+ */
+export function parsearFeedMedio(xml: string, tope: number): ItemMedio[] {
+  const salida: ItemMedio[] = [];
+  const items = new RegExp(ITEM.source, "g");
+  let m: RegExpExecArray | null;
+  while ((m = items.exec(xml)) !== null && salida.length < tope) {
+    const cuerpo = m[1] ?? "";
+    const titulo = texto(TITULO.exec(cuerpo)?.[1]);
+    const url = texto(ENLACE.exec(cuerpo)?.[1]);
+    if (titulo === "" || url === "") continue;
+    salida.push({ titulo, url, publicado: fechaIso(texto(FECHA.exec(cuerpo)?.[1])) });
   }
   return salida;
 }

@@ -1,6 +1,9 @@
--- Usuarios del tablero. Es la UNICA tabla de la base: los datos del producto
--- viven en data/*.json y su historial es git (AGENTS.md). Se aplica con
--- `pnpm migrar` (scripts/migrar.mjs) o pegandolo en el editor SQL de Neon.
+-- Usuarios del tablero. Fue la UNICA tabla de la base hasta el 23 de
+-- septiembre de 2026, cuando llego 0002_busquedas_redes.sql, el libro de
+-- gasto de la busqueda pagada en redes. Ninguna de las dos guarda dato del
+-- producto: esos viven en data/*.json y su historial es git (AGENTS.md). Se
+-- aplica con `pnpm migrar` (scripts/migrar.mjs) o pegandolo en el editor SQL
+-- de Neon.
 --
 -- Cada archivo de db/ tiene que ser idempotente (IF NOT EXISTS, ADD COLUMN IF
 -- NOT EXISTS): el runner los ejecuta todos, en orden, en cada corrida. Con

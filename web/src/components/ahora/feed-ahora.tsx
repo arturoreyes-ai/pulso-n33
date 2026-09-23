@@ -1,10 +1,11 @@
 "use client";
 
-import { ArrowClockwise as Recargar, X as Cerrar } from "@phosphor-icons/react";
+import { ArrowClockwise as Recargar } from "@phosphor-icons/react";
 import { useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
 
 import { CONTROL, Lector } from "@/components/lector/lector";
 import { ListaRelacionadas, TITULO_RELACIONADAS } from "@/components/paneles/relacionadas-titular";
+import { EstadoCarga } from "@/components/ui/estado-carga";
 import { debeActivar, fraseFinal, type Capitulos, type Entrada, type Tarjeta } from "@/lib/busqueda/capitulos";
 import { entradaDe, rubroDe } from "@/lib/busqueda/entrada";
 import type { Rubro } from "@/lib/busqueda/rubros";
@@ -12,6 +13,7 @@ import { useBusquedaViva } from "@/lib/busqueda/use-busqueda";
 import { useImagenesVivas } from "@/lib/busqueda/use-imagen-viva";
 import { useRelacionadas, type RelacionadasVivas } from "@/lib/busqueda/use-relacionadas";
 import { useCapitulos } from "@/lib/busqueda/use-capitulos";
+import { rutaDeConsulta } from "@/lib/dominio/consultas";
 import { plegar } from "@/lib/dominio/formato";
 import { ruta } from "@/lib/dominio/secciones";
 import { BuscadorAhora } from "./buscador-ahora";
@@ -21,6 +23,7 @@ import { teclasDelRecorrido, useRecorrido } from "@/lib/pantalla/recorrido";
 import { OpcionesAhora } from "./controles-ahora";
 import { nombreDe } from "./nombre-ahora";
 import { EsqueletoTitular, TarjetaDivisor, TarjetaFinal, TarjetaHueco, TarjetaTitular } from "./tarjetas-ahora";
+import { Hoja } from "@/components/ui/hoja";
 
 /**
  * El recorrido de titulares en vivo: un titular por pantalla. ES la portada
@@ -148,19 +151,13 @@ function HojaRelacionadas({ hoja, abierta, setAbierta, vivas }: {
   vivas: RelacionadasVivas;
 }) {
   return (
-    <dialog ref={hoja} className="dialogo-lector" aria-labelledby="titulo-relacionadas"
-      onClose={() => setAbierta(null)}>
-      <div className="cabecera-dialogo-lector">
-        <h2 id="titulo-relacionadas" className="text-rotulo text-tinta-titulo">{TITULO_RELACIONADAS}</h2>
-        <button type="button" className={CONTROL} aria-label="Cerrar notas relacionadas"
-          onClick={() => hoja.current?.close()}><Cerrar size={20} aria-hidden /></button>
-      </div>
+    <Hoja ref={hoja} titulo={TITULO_RELACIONADAS} rotuloCerrar="Cerrar notas relacionadas" onClose={() => setAbierta(null)}>
       {/* `key` por tarjeta: la lista no hereda la de la anterior. */}
       {abierta === null ? null : (
         <ListaRelacionadas key={abierta.clave} notas={vivas.notas}
           cargando={vivas.cargando} fallo={vivas.fallo} />
       )}
-    </dialog>
+    </Hoja>
   );
 }
 
@@ -269,10 +266,12 @@ function RecorridoBusqueda({ consulta, zona, menu, analisis }: {
         {!viva.activa ? (
           <p className="tarjeta-ahora flex items-center text-lectura text-tinta-prosa">La búsqueda no está disponible en esta vista.</p>
         ) : viva.cargando ? (
-          <>
-            <EsqueletoTitular indice={0} />
-            <p role="status" className="sr-only">Buscando…</p>
-          </>
+          // La rejilla con el tiempo transcurrido (23 de septiembre de 2026):
+          // una busqueda tarda segundos y el esqueleto de un titular no decia
+          // que algo estaba pasando. El `role="status"` va dentro.
+          <div className="tarjeta-ahora flex items-center justify-center">
+            <EstadoCarga etiqueta="Buscando" />
+          </div>
         ) : (
           <>
             {tarjetas.map((t, i) =>
@@ -282,8 +281,12 @@ function RecorridoBusqueda({ consulta, zona, menu, analisis }: {
                   onRelacionadas={() => rel.abrir(t)} />
               ) : null,
             )}
+            {/* «Ver en redes» (23 de septiembre de 2026): la misma pregunta en
+                Redes, donde trae publicaciones y comentarios además de prensa.
+                Espejo del «Ver en la prensa en vivo» de la ficha de un termino. */}
             <TarjetaFinal indice={tarjetas.length} titulo="Llegaste al final de la búsqueda."
-              frase={fraseBusqueda(consulta, tarjetas.length, viva.fallo)} onInicio={() => ir(0)} />
+              frase={fraseBusqueda(consulta, tarjetas.length, viva.fallo)} onInicio={() => ir(0)}
+              redes={rutaDeConsulta(consulta)} />
           </>
         )}
       </div>

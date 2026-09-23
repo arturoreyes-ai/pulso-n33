@@ -89,6 +89,9 @@ function asentadoComunicados(doc: DocComunicados | undefined, cargando: boolean,
       // hueco que rellenar.
       imagen: null,
       referencia: null,
+      // Un comunicado es titular, fuente y enlace del propio emisor, como el
+      // buscador de un medio: no paso por Google ni por el archivo.
+      origen: "medio",
     };
     // Este capitulo NO pasa por /api/actualidad, asi que el servidor nunca lo
     // ata al archivo: la referencia se arma aqui. Con el indice vacio porque

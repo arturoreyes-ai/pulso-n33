@@ -143,6 +143,13 @@ jobs:
       - name: Contrato del informe en PDF offline
         run: node scripts/probar-informe.cjs
 
+      # La busqueda en vivo de un termino: que la identidad no salga, que la
+      # copia de los limpiadores llegue a lo mismo que el pipeline, que los
+      # topes corten antes de pedir nada y que solo una pregunta arranque la
+      # segunda pasada. Sin red, sin Apify, sin base de datos y sin modelo.
+      - name: Contrato de la búsqueda en vivo offline
+        run: node scripts/probar-redes-en-vivo.cjs
+
       - name: Escalas de diseno
         run: pnpm tokens
 

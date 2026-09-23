@@ -38,7 +38,9 @@ export const LOCALES: Record<Idioma, { hl: string; gl: string; ceid: string }> =
  */
 export type TemaGoogle = "NATION" | "WORLD";
 
-const AGENTE = "PulsoN33/web (+https://github.com/arturoreyes-ai/pulso-n33)";
+/** Tambien el de buscadores.ts: robots.txt empareja por el token `PulsoN33`,
+ *  el mismo del pipeline, asi que los dos lectores reciben el mismo veredicto. */
+export const AGENTE = "PulsoN33/web (+https://github.com/arturoreyes-ai/pulso-n33)";
 const ACEPTA =
   "application/rss+xml, application/atom+xml, application/xml, text/xml";
 

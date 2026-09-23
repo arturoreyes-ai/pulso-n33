@@ -1,5 +1,8 @@
 import { leerDatoPublicado } from "@/lib/datos/publicado";
-import type { DocNotas, Nota } from "@/lib/datos/tipos";
+import type { DocNotas, Etiqueta, Nota } from "@/lib/datos/tipos";
+import { plegar } from "@/lib/dominio/formato";
+import type { ZonaRuta } from "@/lib/dominio/zonas";
+import type { CatalogoBusqueda } from "./catalogo";
 import { indiceDeEnlaces, enlaceParaAnalisis } from "./enlaces";
 import { indiceDeImagenes, imagenPara } from "./imagenes";
 import { indiceDeRelacionadas, type IndiceRelacionadas } from "./relacionadas";
@@ -37,6 +40,9 @@ export interface IndicesArchivo {
   readonly imagenes: ReadonlyMap<string, string>;
   readonly enlaces: ReadonlyMap<string, string>;
   readonly relacionadas: IndiceRelacionadas;
+  /** Cada nota con su titular ya plegado, para `delArchivo`. Plegar 6,000
+   *  titulares en cada busqueda costaria mas que la busqueda. */
+  readonly titulares: readonly { plegado: string; nota: Nota }[];
 }
 
 /**
@@ -51,6 +57,7 @@ export function construirIndices(notas: readonly Nota[]): IndicesArchivo {
     imagenes: indiceDeImagenes(notas),
     enlaces: indiceDeEnlaces(notas),
     relacionadas: indiceDeRelacionadas(notas),
+    titulares: notas.map((nota) => ({ plegado: plegar(nota.titulo), nota })),
   };
 }
 
@@ -95,3 +102,59 @@ export const atarTodas = (
   filas: readonly ResultadoExterno[],
   indices: IndicesArchivo | null,
 ): ResultadoExterno[] => filas.map((r) => atarAlArchivo(r, indices));
+
+/** Una nota del archivo que nombra el termino, con su tono de pipeline. El
+ *  tono NO viaja en `ResultadoExterno`: lo lee solo la ficha de Redes, y solo
+ *  cuando el termino no es una figura del roster (regla 5). */
+export interface CoincidenciaArchivo {
+  fila: ResultadoExterno;
+  tono: Etiqueta | null;
+}
+
+/**
+ * Las notas del archivo cuyo titular nombra el termino, mas reciente primero.
+ *
+ * Existe porque la lupa solo le preguntaba a Google, y el archivo tiene quince
+ * feeds propios que Google no siempre indexa: una nota de Zeta que ya estaba
+ * en notas.json no salia al buscarla. `nombre` y `idioma` salen del catalogo
+ * por el id de la fuente; una nota llegada por busqueda (`gn-…`) no tiene
+ * fila y se rotula con su dominio, como la fila de Google que la trajo. Con
+ * zona, solo las notas que HABLAN de esa zona (`zonas`), no las de un medio
+ * de ahi: es la misma distincion que el muro hacia entre `zona_medio` y
+ * `zonas`.
+ */
+export function delArchivo(
+  indices: IndicesArchivo | null,
+  termino: string,
+  catalogo: CatalogoBusqueda | null,
+  opciones: { zona: ZonaRuta | null; desde: string; tope: number },
+): CoincidenciaArchivo[] {
+  if (indices === null) return [];
+  const aguja = plegar(termino);
+  if (aguja === "") return [];
+  const porId = new Map((catalogo?.medios ?? []).map((m) => [m.id, m]));
+  const salida: CoincidenciaArchivo[] = [];
+  for (const { plegado, nota } of indices.titulares) {
+    if (!plegado.includes(aguja)) continue;
+    if (opciones.zona !== null && !nota.zonas.includes(opciones.zona)) continue;
+    const fecha = nota.fecha ?? nota.publicado?.slice(0, 10) ?? null;
+    if (fecha === null || fecha < opciones.desde) continue;
+    const medio = porId.get(nota.fuente);
+    salida.push({
+      fila: {
+        titulo: nota.titulo,
+        url: nota.url,
+        dominio: nota.dominio,
+        medio: medio?.nombre ?? nota.dominio,
+        publicado: nota.publicado ?? nota.fecha,
+        idioma: medio?.idioma ?? "es",
+        imagen: nota.imagen ?? null,
+        referencia: null,
+        origen: "archivo",
+      },
+      tono: nota.postura?.etiqueta ?? null,
+    });
+  }
+  salida.sort((a, b) => (b.fila.publicado ?? "").localeCompare(a.fila.publicado ?? "") || a.fila.url.localeCompare(b.fila.url));
+  return salida.slice(0, opciones.tope);
+}

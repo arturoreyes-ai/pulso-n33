@@ -54,6 +54,7 @@ const { TOPE_ACTUALIDAD, TOPE_RELACIONADAS } = cargar('lib/busqueda/tipos');
 const { construirIndices } = cargar('lib/busqueda/archivo');
 const { responderRelacionadas } = cargar('lib/busqueda/relacionadas-viva');
 const { responderBusqueda } = cargar('lib/busqueda/buscar');
+const { SIN_CACHE: SIN_CACHE_BUSQUEDA } = cargar('lib/busqueda/respuesta');
 
 // El MISMO fixture que tests/test_busquedas.py lee en Python: seis items, uno
 // sin <source>, uno con ' - ' a la mitad del titular. Dos lectores, un XML.
@@ -93,6 +94,7 @@ async function comprobar() {
     // El feed no las trae; las resuelve el servidor contra el archivo.
     imagen: null,
     referencia: null,
+    origen: 'google',
   });
   // Diario de grupo: Google rotula con el dominio del grupo. El web no tiene
   // el mapa 'publicadores' de config/busquedas.json, asi que el sufijo NO
@@ -517,6 +519,59 @@ async function comprobar() {
     soloEs, conArchivo([nota(APAGON, { imagen: 'https://zetatijuana.com/foto.jpg' })]));
   const filaBuscada = (await buscada.json()).resultados.find((r) => r.titulo === APAGON);
   assert.equal(filaBuscada.imagen, 'https://zetatijuana.com/foto.jpg');
+
+  // 5. Desde el 23 de septiembre de 2026 la busqueda de region lee tambien el
+  //    buscador propio de los medios y el archivo, por turnos con Google.
+  const wp = (...items) => `<?xml version="1.0"?><rss version="2.0"><channel>${items.map(([t, l, f]) =>
+    `<item><title>${t}</title><link>${l}</link><pubDate>${f}</pubDate></item>`).join('')}</channel></rss>`;
+  const FEED_MEDIO = wp(
+    ['Otro apagon en la colonia Libertad', 'https://blancoynegro.mx/2026/09/apagon/', 'Wed, 09 Sep 2026 10:00:00 GMT'],
+    ['Sin luz, sin nombrar la palabra', 'https://blancoynegro.mx/2026/09/luz/', 'Wed, 09 Sep 2026 09:00:00 GMT'],
+    ['Apagon copiado en otro sitio', 'https://agregador.example/apagon', 'Wed, 09 Sep 2026 08:00:00 GMT'],
+  );
+  const CATALOGO = { buscadores: [{ id: 'blancoynegro', nombre: 'Blanco y Negro Noticias', url: 'https://blancoynegro.mx/?s={q}&feed=rss2', idioma: 'es' }], medios: [], cuentas: [] };
+  const pedidas = [];
+  const conMedio = async (url) => {
+    pedidas.push(url);
+    return new URL(url).hostname === 'blancoynegro.mx' ? new Response(FEED_MEDIO) : soloEs(url);
+  };
+  const dependencias = { leerCatalogo: async () => CATALOGO, robots: async () => true, ahora: () => new Date(AHORA) };
+  const ARCHIVO_APAGON = conArchivo([nota('El apagon de agosto, un mes despues'), nota('Nota que no nombra nada')]);
+  const region = await (await responderBusqueda({ q: 'apagon', z: null, a: null, actualizar: false },
+    conMedio, ARCHIVO_APAGON, dependencias)).json();
+  const delMedio = region.resultados.filter((r) => r.origen === 'medio');
+  assert.deepEqual(delMedio.map((r) => r.titulo), ['Otro apagon en la colonia Libertad'],
+    'solo lo que NOMBRA el termino y enlaza al propio medio');
+  assert.equal(delMedio[0].medio, 'Blanco y Negro Noticias');
+  assert.equal(delMedio[0].referencia.url, 'https://blancoynegro.mx/2026/09/apagon/', 'Analizar abre la nota del medio');
+  assert.deepEqual(region.resultados.filter((r) => r.origen === 'archivo').map((r) => r.titulo), ['El apagon de agosto, un mes despues']);
+  assert.deepEqual(region.medios.map((m) => m.estado), ['ok']);
+  const url = new URL(pedidas.find((u) => u.includes('blancoynegro')));
+  assert.equal(url.searchParams.get('s'), 'apagon', 'el termino va sin comillas');
+
+  // En la zona no se leen los medios: no son de una zona, y le acreditarian a
+  // Tijuana lo que publico uno de Ensenada. El archivo si, filtrado por zona.
+  pedidas.length = 0;
+  const zona = await (await responderBusqueda({ q: 'apagon', z: 'mexicali', a: null, actualizar: false },
+    conMedio, ARCHIVO_APAGON, dependencias)).json();
+  assert.ok(!pedidas.some((u) => u.includes('blancoynegro')));
+  assert.deepEqual(zona.medios, []);
+  assert.ok(!zona.resultados.some((r) => r.origen === 'archivo'), 'la nota habla de Tijuana, no de Mexicali');
+
+  // Un robots.txt que dice que no es su respuesta, no una falla: se cachea.
+  pedidas.length = 0;
+  const robotsNo = await responderBusqueda({ q: 'apagon', z: null, a: null, actualizar: false },
+    conMedio, ARCHIVO_APAGON, { ...dependencias, robots: async () => false });
+  assert.deepEqual((await robotsNo.clone().json()).medios.map((m) => m.estado), ['robots']);
+  assert.ok(!pedidas.some((u) => u.includes('blancoynegro')), 'ni una peticion al medio');
+  assert.notEqual(robotsNo.headers.get('Cache-Control'), SIN_CACHE_BUSQUEDA);
+  // Un medio que contesta HTML si es una falla y se dice; pero en la portada
+  // no le quita el cache a lo de Google: ahi los medios son de mejor esfuerzo.
+  const medioHtml = await responderBusqueda({ q: 'apagon', z: null, a: null, actualizar: false },
+    async (u) => (new URL(u).hostname === 'blancoynegro.mx' ? new Response('<!doctype html><html></html>') : soloEs(u)),
+    ARCHIVO_APAGON, dependencias);
+  assert.deepEqual((await medioHtml.clone().json()).medios.map((m) => m.estado), ['fallo']);
+  assert.notEqual(medioHtml.headers.get('Cache-Control'), SIN_CACHE_BUSQUEDA);
 
   // --- /api/relacionadas -------------------------------------------------
   const CONSULTA = 'Detienen a Los Rusos en Mexicali por homicidio del joyero';

@@ -24,10 +24,21 @@ import type { Slug } from "@/lib/dominio/zonas";
 
 export type Idioma = "es" | "en";
 
+/**
+ * Por que camino llego una fila. `google`: el RSS de Google Noticias, con el
+ * redirector opaco en `url`. `medio`: el buscador propio de un medio del
+ * catalogo (buscadores.ts), con el enlace del medio. `archivo`: una nota que
+ * el pipeline ya tenia (notas.json), sin su zona, su tono ni sus figuras.
+ * Viaja por el cable pero no se pinta como palabra: la tarjeta solo lo usa
+ * para no rotular «en tendencia» una nota del archivo.
+ */
+export type OrigenResultado = "google" | "medio" | "archivo";
+
 export interface ResultadoExterno {
   titulo: string;
-  /** Redirector opaco de Google (news.google.com/rss/articles/CBM...). NO es
-   *  el enlace del medio; la fila lo dice. */
+  /** Con `origen: "google"`, el redirector opaco de Google
+   *  (news.google.com/rss/articles/CBM...), que NO es el enlace del medio; con
+   *  `medio` y casi siempre con `archivo`, el enlace del propio medio. */
   url: string;
   /** Host real, del atributo url de <source>. Espejo de
    *  pulso/normalizar.py::dominio. */
@@ -53,6 +64,19 @@ export interface ResultadoExterno {
    *  puede normalizar; si el archivo no conocia la nota, lleva el token opaco,
    *  que es lo que resolver-enlace.ts sabe abrir despues de confirmar. */
   referencia: ReferenciaAnalisis | null;
+  origen: OrigenResultado;
+}
+
+/** Salud del buscador propio de un medio. `robots` no es una falla: es el
+ *  sitio diciendo que no, un veredicto estable que no impide cachear. */
+export interface SaludBuscador {
+  id: string;
+  nombre: string;
+  estado: "ok" | "fallo" | "robots";
+  titulares: number;
+  anteriores: number;
+  ms: number;
+  error: string | null;
 }
 
 /**
@@ -110,9 +134,20 @@ export interface RespuestaBusqueda {
   consulta: string;
   resultados: ResultadoExterno[];
   fuentes: SaludFeed[];
+  /** Los buscadores propios de los medios, desde el 23 de septiembre de 2026.
+   *  Vacio fuera del ambito `region`: esos medios no se leen por zona. */
+  medios: SaludBuscador[];
   /** True si se recorto al tope. Se reporta, no se esconde. */
   truncada: boolean;
 }
+
+/**
+ * Ventana de la prensa de la busqueda, la misma que `ventana_prensa_dias` de
+ * config/consultas.json: seis meses, porque el cliente los pidio el 18 de
+ * septiembre de 2026 y Google acepta `when:180d` pero no `when:6m`. Un
+ * titular no es texto de conversacion y no lo ata la retencion de 30 dias.
+ */
+export const VENTANA_PRENSA_DIAS = 180;
 
 export interface ErrorBusqueda {
   codigo: "vacia" | "larga" | "invalida";

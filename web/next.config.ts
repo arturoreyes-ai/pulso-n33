@@ -25,18 +25,14 @@ const nextConfig: NextConfig = {
   // existen; un patron que no empareja nada simplemente no se incluye, que es
   // el comportamiento que se quiere.
   outputFileTracingIncludes: {
-    "/api/analizar-conversacion": [
-      "./public/data/redes.json",
-      "./public/data/tiktok.json",
-      "./public/data/redes-comentarios.json",
-      "./public/data/tiktok-comentarios.json",
-    ],
     "/api/analizar-publicacion": [
       "./public/data/redes.json",
       "./public/data/tiktok.json",
       "./public/data/redes-comentarios.json",
       "./public/data/tiktok-comentarios.json",
     ],
+    // El resumen de la pestana TikTok lee solo los pies: nada de comentarios.
+    "/api/resumen-tiktok": ["./public/data/tiktok.json"],
     // Las tres rutas que cruzan un titular en vivo contra el archivo
     // (lib/busqueda/archivo.ts). Sin esto la miniatura y el enlace del propio
     // medio salen null en toda fila y la hoja de relacionadas dice que no se
@@ -44,8 +40,30 @@ const nextConfig: NextConfig = {
     // produccion. notas.json SI esta en git, asi que aqui el patron siempre
     // empareja; si alguna vez no lo hiciera, el sintoma es ese.
     "/api/actualidad": ["./public/data/notas.json"],
-    "/api/buscar": ["./public/data/notas.json"],
+    // Desde el 23 de septiembre de 2026 la busqueda lee tambien los buscadores
+    // de los medios, que llegan en catalogo-busqueda.json (lo arma
+    // scripts/sincronizar-datos.mjs desde config/). Sin el, la busqueda sigue
+    // con Google y el archivo, sin Blanco y Negro: degradado y en silencio.
+    "/api/buscar": ["./public/data/notas.json", "./public/data/catalogo-busqueda.json"],
     "/api/relacionadas": ["./public/data/notas.json"],
+    // La busqueda de un termino en Redes (lib/busqueda/termino.ts): prensa,
+    // archivo, lo que el panel de redes ya cosecho y su texto de comentarios,
+    // las tendencias de X y el roster, que decide si el tono se puede mostrar
+    // (regla 5). Los *-comentarios.json estan fuera de git: si no viajan, las
+    // publicaciones salen sin texto y la ficha lo dice.
+    "/api/termino": [
+      "./public/data/notas.json",
+      "./public/data/catalogo-busqueda.json",
+      "./public/data/redes.json",
+      "./public/data/tiktok.json",
+      "./public/data/youtube.json",
+      "./public/data/redes-comentarios.json",
+      "./public/data/tiktok-comentarios.json",
+      "./public/data/tendencias.json",
+      "./public/data/roster.json",
+    ],
+    // El pase pagado solo necesita el roster, por la misma regla 5.
+    "/api/redes-en-vivo": ["./public/data/roster.json"],
     // El informe en PDF de un termino (lib/informe/informe.ts) lee los dos
     // archivos de consultas del disco y registra Geist desde node_modules:
     // el motor de PDF no lee las fuentes del sistema. Sin esto la ruta

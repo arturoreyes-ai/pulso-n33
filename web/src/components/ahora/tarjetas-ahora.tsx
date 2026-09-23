@@ -4,7 +4,7 @@ import { ShareNetwork as IconoCompartir, TrendUp as Tendencia } from "@phosphor-
 import { useState } from "react";
 
 import { BotonRelacionadas } from "@/components/paneles/relacionadas-titular";
-import { clasesChip } from "@/components/ui/clases";
+import { clasesBoton, clasesInsignia } from "@/components/ui/clases";
 import type { ReferenciaAnalisis } from "@/lib/busqueda/enlaces";
 import type { Tarjeta } from "@/lib/busqueda/capitulos";
 import { fechaCorta, hora } from "@/lib/dominio/formato";
@@ -69,22 +69,30 @@ export function TarjetaTitular({ t, titulares, indice, imagen = null, analisis =
   // del propio emisor.
   const oficial = t.capitulo === "comunicados";
   const [rota, setRota] = useState<string | null>(null);
+  const [cargada, setCargada] = useState<string | null>(null);
   const conFigura = imagen !== null && imagen !== rota;
   return (
     <article data-indice={indice} aria-label={`Titular ${t.orden} de ${titulares}`} className={TARJETA}>
-        <figure className="figura-ahora overflow-hidden rounded-nucleo" aria-hidden>
+        <figure className="figura-ahora relative overflow-hidden rounded-nucleo" aria-hidden>
+          {/* Sin foto la caja NO se deja vacia. El porque, en `.placa-ahora`.
+              Y la placa se queda DEBAJO mientras la foto baja: hasta el 23 de
+              septiembre de 2026 se quitaba en cuanto llegaba la URL, y una foto
+              de 2560 px desde el sitio del medio dejaba la caja en negro varios
+              segundos, que se leia como «la imagen no carga». */}
+          <div className={`placa-ahora ${t.acento}`}>
+            <span className="placa-ahora-marca">{t.r.medio}</span>
+          </div>
           {conFigura ? (
             /* alt vacio y aria-hidden: la imagen no tiene pie propio y el
                titular ya es el texto. no-referrer: el medio la sirve, la
                pagina no se le presenta. */
             <img src={imagen} alt="" aria-hidden loading="lazy" decoding="async" referrerPolicy="no-referrer"
-              className="h-full w-full object-cover" onError={() => setRota(imagen)} />
-          ) : (
-            /* Sin foto la caja NO se deja vacia. El porque, en `.placa-ahora`. */
-            <div className={`placa-ahora ${t.acento}`}>
-              <span className="placa-ahora-marca">{t.r.medio}</span>
-            </div>
-          )}
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[var(--dur-cambio)] ${cargada === imagen ? "opacity-100" : "opacity-0"}`}
+              /* El ref cubre la foto que ya estaba en cache y termino antes
+                 de que React escuchara `load`: sin el, se quedaria invisible. */
+              ref={(el) => { if (el !== null && el.complete && el.naturalWidth > 0) setCargada(imagen); }}
+              onLoad={() => setCargada(imagen)} onError={() => setRota(imagen)} />
+          ) : null}
         </figure>
       <p className={`text-meta ${t.acento}`}>{t.rotulo}</p>
       <h2 className="titular-ahora mt-4 max-w-[40ch] break-words font-titular text-seccion text-tinta-titulo">
@@ -100,10 +108,15 @@ export function TarjetaTitular({ t, titulares, indice, imagen = null, analisis =
         {oficial ? (
           <span
             title="Boletín publicado por el Ayuntamiento. No es prensa y no cuenta en las cifras de prensa."
-            className="inline-block rounded-full border border-dashed border-filo px-2 py-px text-meta whitespace-nowrap text-tinta-meta"
+            className={clasesInsignia("punteada")}
           >
             comunicado
           </span>
+        ) : t.r.origen === "archivo" ? (
+          /* Una nota que el archivo ya tenia no es una lectura en vivo: la
+             flecha diria «en tendencia» de algo publicado hace semanas. La
+             fecha de al lado ya dice cuando fue. */
+          null
         ) : (
           <span
             role="img"
@@ -115,7 +128,7 @@ export function TarjetaTitular({ t, titulares, indice, imagen = null, analisis =
           </span>
         )}
         {t.r.idioma === "en" ? (
-          <span className="inline-block rounded-full border border-filo bg-vela px-2 py-px text-meta whitespace-nowrap text-tinta-dato">
+          <span className={clasesInsignia()}>
             inglés
           </span>
         ) : null}
@@ -123,8 +136,10 @@ export function TarjetaTitular({ t, titulares, indice, imagen = null, analisis =
       <div className="acciones-ahora mt-8 flex flex-wrap items-center gap-3">
         {/* nofollow: es un enlace que devolvio un buscador, no una cita. Un
             comunicado no pasa por ahi: es el enlace del propio emisor. */}
-        <a href={t.r.url} target="_blank" rel={oficial ? "noopener noreferrer" : "noopener nofollow noreferrer"} className={`${clasesChip(true)} min-w-0 break-words`}>
-          Leer en {t.r.medio}
+        <a href={t.r.url} target="_blank" rel={oficial ? "noopener noreferrer" : "noopener nofollow noreferrer"} className={`${clasesBoton(true)} min-w-0 break-words`}>
+          {/* «Abrir en», el mismo verbo que la tarjeta de Redes («Abrir en
+              Instagram»): antes una decia «Leer en» y la otra «Ver original». */}
+          Abrir en {t.r.medio}
         </a>
         {/* La referencia prefiere el enlace del medio. Si la nota acaba de
             aparecer conserva el token para resolverlo solo tras confirmar. */}
@@ -159,8 +174,8 @@ function Compartir({ titulo, url }: { titulo: string; url: string }) {
   }
   return (
     <>
-      <button type="button" className={clasesChip(false)} onClick={compartir}>
-        <IconoCompartir size={16} weight="light" aria-hidden className="shrink-0 self-center" />
+      <button type="button" className={clasesBoton(false)} onClick={compartir}>
+        <IconoCompartir size={16} aria-hidden />
         Compartir
       </button>
       <span role="status" className="aviso-compartir text-meta text-tinta-meta">{aviso}</span>
@@ -192,13 +207,22 @@ export function TarjetaHueco({ t, indice }: { t: Hueco; indice: number }) {
   );
 }
 
-export function TarjetaFinal({ frase, indice, onInicio, titulo = "Llegaste al final de lo que destaca ahora." }: { frase: string; indice: number; onInicio: () => void; titulo?: string }) {
+export function TarjetaFinal({ frase, indice, onInicio, titulo = "Llegaste al final de lo que destaca ahora.", redes }: {
+  frase: string;
+  indice: number;
+  onInicio: () => void;
+  titulo?: string;
+  /** A donde lleva «Ver en redes»: la misma busqueda en Redes, con sus
+   *  publicaciones y comentarios. Solo al final de una busqueda. */
+  redes?: string;
+}) {
   return (
     <article data-indice={indice} aria-label="Final del recorrido" className={TARJETA}>
       <h2 className="max-w-[24ch] font-titular text-seccion text-tinta-titulo">{titulo}</h2>
       <p className="mt-4 max-w-[65ch] text-lectura text-tinta-prosa">{frase}</p>
-      <div className="mt-8">
-        <button type="button" className={clasesChip(false)} onClick={onInicio}>Volver al inicio</button>
+      <div className="mt-8 flex flex-wrap gap-3">
+        {redes === undefined ? null : <a href={redes} className={clasesBoton(true)}>Ver en redes</a>}
+        <button type="button" className={clasesBoton(false)} onClick={onInicio}>Volver al inicio</button>
       </div>
     </article>
   );
