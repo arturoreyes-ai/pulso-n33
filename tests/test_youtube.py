@@ -154,13 +154,16 @@ class TestZona(unittest.TestCase):
         # La guardia directa contra el error que documenta el encabezado: la
         # tercera rama de zonas.alcance cree la zona declarada del medio, y es
         # justo lo que los nueve Shorts nacionales de El Vigia desmienten.
+        # La regla de titulo y descripcion vive en redes.zona_por_titulo desde
+        # el 22 de septiembre de 2026, asi que el espia va alli; y el
+        # gacetero que se llama al final es zonas.alcance, via alcance_redes.
         c = _canal(ambito="regional")
         entrada = _entrada_suelta(_fixture("elvigia-shorts.xml"))
-        with patch.object(youtube, "zona_por_ambito",
-                          return_value=("Tijuana", "zona")) as espia:
+        with patch("pulso.redes.zona_por_ambito",
+                   return_value=("Tijuana", "zona")) as espia:
             youtube._limpiar_pieza(entrada, c, "short")
         self.assertEqual(espia.call_args[0][1], "regional")
-        with patch("pulso.redes.alcance", return_value=("zona", ["Tijuana"])) as gac:
+        with patch("pulso.zonas.alcance", return_value=("zona", ["Tijuana"])) as gac:
             youtube._limpiar_pieza(entrada, c, "short")
         self.assertIsNone(gac.call_args[0][1],
                           "el segundo argumento de alcance() tiene que ser None: es la zona "
@@ -177,12 +180,14 @@ class TestZona(unittest.TestCase):
                                         "internacional": "estatal"}),
             (("fuera", []), {"regional": None, "nacional": "nacional",
                              "internacional": "nacional"}),
+            (("extranjero", []), {"regional": "internacional", "nacional": "internacional",
+                                  "internacional": "internacional"}),
             (("nacional", []), {"regional": "nacional", "nacional": "nacional",
                                 "internacional": "internacional"}),
         ]
         for veredicto, esperado in casos:
             for ambito, zona in esperado.items():
-                with patch("pulso.redes.alcance", return_value=veredicto):
+                with patch("pulso.redes.alcance_redes", return_value=veredicto):
                     self.assertEqual(zona_por_ambito("t", ambito)[0], zona,
                                      "{} con ambito {}".format(veredicto, ambito))
 
@@ -195,9 +200,62 @@ class TestZona(unittest.TestCase):
         for clave in ("descripcion", "resumen", "cuerpo", "texto"):
             self.assertNotIn(clave, limpio)
 
+    def test_la_firma_del_canal_es_evidencia_debil(self):
+        # El caso del 22 de septiembre de 2026: 17 de 43 titulos de Telemundo
+        # 20 terminan en "| TELEMUNDO SAN DIEGO", y esa firma mandaba al muro
+        # de San Diego un helicoptero caido en Los Angeles.
+        titulo = ("Tres muertos tras caída del helicóptero de Telemundo 52 y NBC4 en "
+                  "Los Ángeles | Telemundo San Diego")
+        firma = ["| TELEMUNDO SAN DIEGO"]
+        self.assertEqual(youtube._zona(titulo, "", "internacional"), ("San Diego", "zona"))
+        self.assertEqual(youtube._zona(titulo, "", "internacional", firma),
+                         ("internacional", "extranjero"))
+        # Pero quitarla sin mas era peor: casi todo lo demas que firma es de San
+        # Diego, en barrios que el gacetero no conoce, y sin la firma se iria a
+        # Mundo. Mientras el texto no nombre otro lugar, la firma cuenta.
+        for local in ("Arrestan a hombre tras persecución en Pacific Beach | TELEMUNDO SAN DIEGO",
+                      "Hombre ataca a agentes tras ser sentenciado | TELEMUNDO SAN DIEGO"):
+            with self.subTest(titulo=local):
+                self.assertEqual(youtube._zona(local, "", "internacional", firma),
+                                 ("San Diego", "zona"))
+        # Una pieza que nombra San Diego de verdad lo sigue siendo.
+        self.assertEqual(
+            youtube._zona("Choque en Chula Vista con un camion de Texas | TELEMUNDO SAN DIEGO",
+                          "", "internacional", firma),
+            ("San Diego", "zona"))
+        # Y el corte es exacto: una firma que no esta al final no es firma.
+        self.assertEqual(
+            youtube._zona("TELEMUNDO SAN DIEGO: lo que paso hoy en Los Angeles", "",
+                          "internacional", firma),
+            ("San Diego", "zona"))
+
+    def test_el_residuo_de_un_canal_del_corredor_es_corredor_sin_precisar(self):
+        # El caso del 22 de septiembre de 2026: 39 de 233 piezas de los canales
+        # regionales caian en la cubeta Mexico, y casi todas eran nota local
+        # que no escribe su ciudad.
+        self.assertEqual(youtube._zona("Sindicatura fiscaliza a jireh", "", "regional"),
+                         ("estatal", "nacional"))
+        # Si nombra a Mexico es nota nacional dicha por un medio local.
+        self.assertEqual(
+            youtube._zona("Comienza la era Rafael Marquez con la seleccion mexicana", "",
+                          "regional"),
+            ("nacional", "nacional"))
+        # Y un canal nacional conserva su residuo nacional, como siempre.
+        self.assertEqual(youtube._zona("Sindicatura fiscaliza a jireh", "", "nacional"),
+                         ("nacional", "nacional"))
+
+    def test_la_firma_se_quita_solo_para_zonificar(self):
+        # Lo publicado sigue siendo el titular del canal, tal cual.
+        entrada = _entrada_suelta(_fixture("canal33-videos.xml"), 1)
+        original, _ = youtube._limpiar_pieza(entrada, _canal(), "video")
+        palabras = original["titulo"].split()
+        firma = " ".join(palabras[-2:])
+        limpio, _ = youtube._limpiar_pieza(entrada, _canal(sufijos_titulo=[firma]), "video")
+        self.assertEqual(limpio["titulo"], original["titulo"])
+
     def test_un_lugar_de_fuera_se_tira_en_ambito_regional(self):
         entrada = _entrada_suelta(_fixture("elvigia-shorts.xml"))
-        with patch("pulso.redes.alcance", return_value=("fuera", [])):
+        with patch("pulso.redes.alcance_redes", return_value=("fuera", [])):
             limpio, motivo = youtube._limpiar_pieza(entrada, _canal(ambito="regional"), "short")
             self.assertIsNone(limpio)
             self.assertEqual(motivo, "fuera")
@@ -291,6 +349,17 @@ class TestDocumento(unittest.TestCase):
         panel, _, _ = self._todo()
         errores, _ = validar_redes(panel, plataforma="youtube")
         self.assertEqual(errores, [])
+
+    def test_el_residuo_del_corredor_valida_en_youtube_y_no_en_tiktok(self):
+        # `estatal` sin lugar es de un medio del corredor. En YouTube vale; el
+        # mismo par en TikTok seria la busqueda acreditando su zona.
+        panel, _, _ = self._todo()
+        panel["destacados"][0]["zona"] = "estatal"
+        panel["destacados"][0]["alcance"] = "nacional"
+        errores, _ = validar_redes(panel, plataforma="youtube")
+        self.assertFalse(any("alcance 'nacional'" in e for e in errores), errores)
+        self.assertTrue(PLATAFORMAS_REDES["youtube"]["residuo_corredor"])
+        self.assertFalse(PLATAFORMAS_REDES["tiktok"]["residuo_corredor"])
 
     def test_no_lleva_las_cifras_que_el_feed_no_publica(self):
         # Un `likes: 0` o un `comentarios: 0` se leerian como "nadie" cuando lo
@@ -429,6 +498,14 @@ class TestConfigReal(unittest.TestCase):
         for c in self.cfg["canales"]:
             if not c["activo"]:
                 self.assertTrue(c.get("nota"), c["id"])
+
+    def test_sufijos_titulo_es_una_lista_de_firmas_largas(self):
+        for malo in ("| TELEMUNDO", [], ["TJ"], [3]):
+            cfg = json.loads(json.dumps(self.cfg))
+            cfg["canales"][0]["sufijos_titulo"] = malo
+            with self.subTest(sufijos=malo):
+                errores, _ = validar_youtube_config(cfg)
+                self.assertTrue(any("'sufijos_titulo'" in e for e in errores), errores)
 
     def test_una_fila_con_zona_es_error_con_el_caso_escrito(self):
         cfg = json.loads(json.dumps(self.cfg))

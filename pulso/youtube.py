@@ -77,7 +77,8 @@ from urllib.request import Request, urlopen
 from . import redes as _redes
 from .redes import (  # noqa: F401  (reexportados a proposito, como en tiktok.py)
     DESTACADOS_MAXIMO, RETENCION_DIAS, TITULO_MAXIMO, _titulo,
-    guardar_publicaciones, leer_publicaciones, zona_por_ambito,
+    guardar_publicaciones, leer_publicaciones, residuo_de_medio, zona_por_ambito,
+    zona_por_titulo,
 )
 
 PLATAFORMA = "youtube"
@@ -175,8 +176,20 @@ def _formato_del_enlace(url):
     return None
 
 
-def _zona(titulo, descripcion, ambito):
+def _zona(titulo, descripcion, ambito, sufijos=()):
     """(zona, alcance). El TITULO manda; la descripcion solo desempata.
+
+    La regla vive en pulso/redes.py::zona_por_titulo desde el 22 de septiembre
+    de 2026, cuando Instagram la necesito igual; lo que sigue es el caso que
+    la motivo, y sigue siendo de YouTube. `sufijos` es la firma del canal al
+    final del titulo (`sufijos_titulo` en config/youtube.json), que el
+    gacetero lee como evidencia DEBIL: cuenta mientras el texto no nombre otro
+    lugar. El caso, del 22 de septiembre de 2026: 17 de 43 titulos de
+    Telemundo 20 en cache terminan en "| TELEMUNDO SAN DIEGO", y esa firma
+    mandaba al muro de San Diego un helicoptero caido "en Los Angeles".
+    Quitarla sin mas era peor: los otros de esos titulos son de Pacific
+    Beach, City Heights o un tribunal del condado, que el gacetero no conoce,
+    y sin la firma se habrian ido a Mundo. Ver zonas.alcance_redes.
 
     La descripcion vale catorce puntos de resolucion --- sobre 462 piezas, el
     35% resuelve a una zona del producto con el titulo solo y el 49% con las
@@ -206,10 +219,11 @@ def _zona(titulo, descripcion, ambito):
     Mexicali de 29 a 31. La ciudad grande es la que mas se nombra de paso, asi
     que era la que mas se llevaba de mas.
     """
-    zona, alc = zona_por_ambito(titulo, ambito)
-    if alc != "nacional":
-        return zona, alc
-    return zona_por_ambito(titulo + chr(10) + (descripcion or ""), ambito)
+    zona, alc = zona_por_titulo(titulo, descripcion, ambito, sufijos)
+    # Un canal regional que no nombra lugar es nota del corredor sin precisar,
+    # no nota nacional: ver redes.residuo_de_medio.
+    return residuo_de_medio(zona, alc, ambito,
+                            (titulo or "") + chr(10) + (descripcion or ""), sufijos)
 
 
 def _limpiar_pieza(entrada, canal, formato_pedido):
@@ -237,7 +251,8 @@ def _limpiar_pieza(entrada, canal, formato_pedido):
 
     titulo = _titulo(_texto(entrada, "m:group/m:title") or _texto(entrada, "a:title"))
     descripcion = _texto(entrada, "m:group/m:description")
-    zona, alc = _zona(titulo, descripcion, canal.get("ambito") or AMBITO)
+    zona, alc = _zona(titulo, descripcion, canal.get("ambito") or AMBITO,
+                      canal.get("sufijos_titulo") or ())
     if zona is None:
         return None, "fuera"
 

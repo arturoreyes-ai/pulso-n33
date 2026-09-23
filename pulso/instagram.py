@@ -127,6 +127,16 @@ zona, por la misma razon que la lleva un canal de YouTube en
 config/canales.json: es un medio identificado y verificable, no una consulta
 que devuelve lo que sea. Un hashtag no llevaria zona y por eso no hay
 hashtags en la configuracion.
+
+Salvo una clase de cuenta: la que lleva `ambito` en vez de `zona` (22 de
+septiembre de 2026). Existe para los medios internacionales, cuya sede no dice
+de que habla cada post: BBC Mundo o CNN en Espanol publican de Ucrania, de
+Sheinbaum y de vez en cuando de Tijuana, y estamparles una zona es el error de
+El Vigia en YouTube (ver pulso/youtube.py). Con `ambito`, cada post se
+zonifica por su pie con la misma tabla que TikTok y YouTube
+(redes.zona_por_titulo: la primera linea manda, el resto desempata), publica
+`alcance`, y sus comentarios heredan la zona de su post. Las cuentas con
+`zona` siguen exactamente como estaban: ninguna consulta el gacetero.
 """
 
 from datetime import datetime, timezone
@@ -141,7 +151,8 @@ from .redes import (  # noqa: F401  (reexportados a proposito)
     TEXTO_MAXIMO, TITULO_MAXIMO, UMBRAL_BRIGADA, _catalogo_cuentas, _conteo_tono,
     _contar_temas, _hoy, _id_comentario, _marcar_repetidos, _sin_palabras, _titulo,
     clasificar_cache, guardar_cache, guardar_publicaciones, guardar_vistos, leer_archivo,
-    leer_cache, leer_publicaciones, leer_vistos, pendientes, purgar,
+    leer_cache, leer_publicaciones, leer_vistos, pendientes, purgar, residuo_de_medio,
+    zona_por_titulo,
 )
 from . import redes as _redes
 
@@ -165,15 +176,21 @@ IDENTIDAD = ("ownerUsername", "ownerProfilePicUrl", "ownerId", "owner",
 VENTANA_HORAS = 24
 
 # Lo que cruza del registro del post a data/redes.json ademas de lo comun: la
-# hora exacta, que es sobre lo que se mide la ventana y se ordena el dia.
-CAMPOS_EXTRA = ("publicado",)
+# hora exacta, que es sobre lo que se mide la ventana y se ordena el dia, y el
+# alcance, que solo traen los posts de una cuenta con `ambito`.
+CAMPOS_EXTRA = ("alcance", "publicado")
 
 # El actor devuelve el tipo en ingles; en data/ los valores van en espanol.
 TIPOS = {"Image": "imagen", "Video": "video", "Sidecar": "carrusel"}
 
 
-def _limpiar(comentario, post_url, cuenta):
-    """Deja solo lo que se puede guardar. La identidad se tira aqui."""
+def _limpiar(comentario, post_url, cuenta, zona=None):
+    """Deja solo lo que se puede guardar. La identidad se tira aqui.
+
+    `zona` es la del post, y solo la pasa una cuenta con `ambito`: ahi el
+    comentario hereda lo que su post nombra, igual que en TikTok. Sin ella
+    manda la sede de la cuenta, como siempre.
+    """
     texto = (comentario.get("text") or "").strip()
     if not texto:
         return None
@@ -182,7 +199,7 @@ def _limpiar(comentario, post_url, cuenta):
         "texto": texto,
         "post": post_url,
         "cuenta": cuenta["id"],
-        "zona_cuenta": cuenta.get("zona") or "estatal",
+        "zona_cuenta": zona or cuenta.get("zona") or "estatal",
         "idioma": cuenta.get("idioma", "es"),
         "fecha": (comentario.get("timestamp") or "")[:10],
         "likes": int(comentario.get("likesCount") or 0),
@@ -229,12 +246,22 @@ def _limpiar_post(item, cuenta):
     if not url:
         return None
     publicado = _publicado(item)
+    titulo = _titulo(item.get("caption"))
+    zona, alc = cuenta.get("zona") or "estatal", None
+    if "ambito" in cuenta:
+        # La primera linea del pie es el titular y manda; el pie entero solo
+        # desempata. Lo que se publica sigue siendo la primera linea: el resto
+        # del pie lo lee el gacetero y no sale de aqui.
+        zona, alc = zona_por_titulo(titulo, item.get("caption") or "", cuenta["ambito"])
+        zona, alc = residuo_de_medio(zona, alc, cuenta["ambito"], item.get("caption") or "")
+        if zona is None:
+            return None
     salida = {
         "url": url,
         "cuenta": cuenta["id"],
-        "zona": cuenta.get("zona") or "estatal",
+        "zona": zona,
         "fecha": publicado[:10] if publicado else "",
-        "titulo": _titulo(item.get("caption")),
+        "titulo": titulo,
         "tipo": TIPOS.get(item.get("type"), "otro"),
         "likes": max(0, int(item.get("likesCount") or 0)),
         "comentarios": max(0, int(item.get("commentsCount") or 0)),
@@ -242,6 +269,8 @@ def _limpiar_post(item, cuenta):
     vistas = max(int(item.get("videoViewCount") or 0), int(item.get("videoPlayCount") or 0))
     if vistas > 0:
         salida["reproducciones"] = vistas
+    if alc is not None:
+        salida["alcance"] = alc
     if publicado:
         salida["publicado"] = publicado
     return salida
@@ -287,7 +316,15 @@ def sondear(handles, tok=None, entorno=None):
         # tiene 49,525 seguidores y es la cuenta real del semanario. Un
         # veredicto falso aqui es caro en las dos direcciones -- descarta el
         # medio bueno y deja pasar el handle ocupado.
-        if it.get("error") or (posts is None and seguidores is None):
+        #
+        # `error: no_items` ("Empty or private data") NO es "no existe": es
+        # Instagram negandole los datos a un visitante sin sesion. El caso, del
+        # 22 de septiembre de 2026: @n.mas salio "no_existe" minutos despues
+        # de que la misma cuenta devolviera sus posts, y @aztecanoticias
+        # tambien, con 18.8M de seguidores en TikTok. Se dice lo que paso.
+        if it.get("error") == "no_items":
+            veredicto = "sin_datos"
+        elif it.get("error") or (posts is None and seguidores is None):
             veredicto = "no_existe"
         elif posts is not None and posts < MINIMO_POSTS:
             veredicto = "ocupado"
@@ -296,7 +333,11 @@ def sondear(handles, tok=None, entorno=None):
         else:
             veredicto = "vivo"
         salida.append({
-            "handle": "@" + (it.get("username") or "?"),
+            # Sin `username` (un item de error) el handle sale de la URL pedida:
+            # "@?" no dice cual de los handles fallo.
+            "handle": "@" + (it.get("username")
+                             or (it.get("inputUrl") or it.get("url") or "").rstrip("/")
+                             .rsplit("/", 1)[-1] or "?"),
             "nombre": it.get("fullName") or "",
             "seguidores": seguidores,
             "posts": posts,
@@ -307,6 +348,30 @@ def sondear(handles, tok=None, entorno=None):
             "bio": (it.get("biography") or "").replace("\n", " ")[:110],
         })
     return sorted(salida, key=lambda s: s["handle"])
+
+
+def muestrear(handles, ambito, posts=3, tok=None, entorno=None):
+    """Los ultimos `posts` de cada handle, zonificados como los zonificaria una
+    fila con ese `ambito`. No escribe nada.
+
+    Existe porque la bio no alcanza. El 21 de septiembre de 2026
+    @noticiasensenada tenia bio de Ensenada y era la de Buenos Aires, y lo
+    delato lo que sus posts nombraban, no lo que decia de si misma. AGENTS.md
+    ya decia que el sondeo imprimia esos lugares, y no lo hacia: esto es lo
+    que lo hace. Cuesta `posts` resultados por handle.
+    """
+    urls = ["https://www.instagram.com/{}/".format(h.lstrip("@")) for h in handles]
+    salida = {"@" + h.lstrip("@").lower(): [] for h in handles}
+    for url, handle in zip(urls, salida):
+        items = correr_actor(ACTOR_POSTS, {"directUrls": [url], "resultsType": "posts",
+                                           "resultsLimit": posts},
+                             tok or token(entorno), posts)
+        fila = {"id": handle, "ambito": ambito}
+        for it in items[:posts]:
+            limpio = _limpiar_post(it, fila)
+            salida[handle].append(limpio or {"zona": None, "alcance": "fuera",
+                                             "titulo": _titulo(it.get("caption"))})
+    return salida
 
 
 # --------------------------------------------------------------- cosecha
@@ -365,17 +430,33 @@ def cosechar(cuentas, ahora, tok=None, presupuesto=None, cache="cache/instagram"
         # El catalogo se actualiza ANTES del freno de costo: una cuenta sin
         # posts nuevos que cosechar sigue teniendo likes que cambian, y sin
         # esto sus destacados se congelarian en la primera lectura.
+        zona_de = {}
         for p in posts:
             limpio = _limpiar_post(p, cuenta)
             if limpio:
-                publicaciones[limpio["url"]] = {**publicaciones.get(limpio["url"], {}), **limpio}
+                junto = {**publicaciones.get(limpio["url"], {}), **limpio}
+                # Una cuenta que pasa de `ambito` a `zona` dejaria en el cache
+                # el alcance de antes junto a su sede, y el validador lo
+                # rechaza: el alcance es del registro nuevo o de nadie.
+                if "alcance" not in limpio:
+                    junto.pop("alcance", None)
+                publicaciones[limpio["url"]] = junto
+                zona_de[limpio["url"]] = limpio["zona"]
+        # Una cuenta con `ambito` regional tira el post que nombra otra region,
+        # como una busqueda de TikTok, y no se pagan sus comentarios. Se cuenta
+        # en `fuera`; en una cuenta con `zona` no existe esa rama.
+        extra = {}
+        if "ambito" in cuenta:
+            fuera = [u for u in urls if u not in zona_de]
+            urls = [u for u in urls if u in zona_de]
+            extra = {"fuera": len(fuera)}
         # El freno de costo: los posts cosechados hace menos de tres dias no
         # se vuelven a pedir. Ver el encabezado.
         toca = pendientes(urls, vistos, ahora)
         if not toca:
             salud.append({"cuenta": cuenta["id"], "estado": "ok", "posts": len(urls),
                           "comentarios": 0, "crudos": 0,
-                          "nota": "sin posts nuevos que cosechar"})
+                          "nota": "sin posts nuevos que cosechar", **extra})
             continue
 
         entrada_coms = {
@@ -390,7 +471,7 @@ def cosechar(cuentas, ahora, tok=None, presupuesto=None, cache="cache/instagram"
         except Exception as e:
             salud.append({"cuenta": cuenta["id"], "estado": "fallo",
                           "error": "{}: {}".format(type(e).__name__, e)[:200],
-                          "posts": len(urls), "comentarios": 0})
+                          "posts": len(urls), "comentarios": 0, **extra})
             continue
 
         # postUrl viene en cada comentario cuando se piden varias URLs de una
@@ -399,7 +480,10 @@ def cosechar(cuentas, ahora, tok=None, presupuesto=None, cache="cache/instagram"
         ingeridos = 0
         for c in crudos:
             url = (c.get("postUrl") or c.get("inputUrl") or toca[0]).strip()
-            limpio = _limpiar(c, url, cuenta)
+            # Sin su post en el mapa cae a "nacional", como en TikTok: la cuenta
+            # no tiene sede que prestarle y "estatal" afirmaria Baja California.
+            limpio = _limpiar(c, url, cuenta,
+                              (zona_de.get(url) or "nacional") if "ambito" in cuenta else None)
             if limpio:
                 nuevos.append(limpio)
                 ingeridos += 1
@@ -413,7 +497,7 @@ def cosechar(cuentas, ahora, tok=None, presupuesto=None, cache="cache/instagram"
         # comentarios cada uno y habian ingerido CERO; los cinco eran relleno.
         # Reportar solo el crudo hacia parecer sana una cuenta muda.
         salud.append({"cuenta": cuenta["id"], "estado": "ok", "posts": len(urls),
-                      "comentarios": ingeridos, "crudos": len(crudos)})
+                      "comentarios": ingeridos, "crudos": len(crudos), **extra})
 
     guardar_vistos(vistos, cache)
     guardar_publicaciones(publicaciones, ahora, cache)

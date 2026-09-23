@@ -139,10 +139,16 @@ class TestLimpiezaVideo(unittest.TestCase):
         self.assertIsNone(v)
         self.assertEqual(motivo, "fuera")
 
-    def test_sin_lugar_es_nacional_y_estatal_es_estatal(self):
-        # `nacional` es el veredicto del gacetero; mapearlo a estatal seria
-        # acreditar la zona de la consulta con otro disfraz.
-        self.assertEqual(self._limpio(text="Sube el dolar otra vez #noticias")[0]["zona"], "nacional")
+    def test_sin_lugar_se_tira_y_estatal_es_estatal(self):
+        # El caso, del 22 de septiembre de 2026: lo que las busquedas de
+        # Rosarito, Ensenada y Mexicali traian sin nombrar lugar llenaba la
+        # cubeta Mexico (una lluvia en Tegucigalpa, un herido en Ancash, pies
+        # vacios). Mapearlo a estatal seria acreditar la zona de la consulta
+        # con otro disfraz, asi que se tira y se cuenta.
+        self.assertEqual(self._limpio(text="Sube el dolar otra vez #noticias"),
+                         (None, "sin_lugar"))
+        # Salvo que nombre a Mexico: eso si es nota nacional.
+        self.assertEqual(self._limpio(text="Sube el dolar en Mexico")[0]["zona"], "nacional")
         self.assertEqual(self._limpio(text="Baja California estrena ley")[0]["zona"], "estatal")
 
     def test_el_alcance_viaja_al_lado_de_la_zona(self):
@@ -152,7 +158,7 @@ class TestLimpiezaVideo(unittest.TestCase):
         self.assertEqual(self._limpio()[0]["alcance"], "zona")
         self.assertEqual(self._limpio(text="Baja California estrena ley")[0]["alcance"],
                          "estatal")
-        self.assertEqual(self._limpio(text="Sube el dolar otra vez")[0]["alcance"], "nacional")
+        self.assertEqual(self._limpio(text="Sube el dolar en Mexico")[0]["alcance"], "nacional")
 
     def test_la_tabla_de_ambitos(self):
         """El ambito decide el residuo, NUNCA la zona de un pie que nombra lugar.
@@ -165,20 +171,64 @@ class TestLimpiezaVideo(unittest.TestCase):
             "zona": "Cierran la garita #tijuana",
             "estatal": "Baja California estrena ley",
             "fuera": "Balacera en Hermosillo, Sonora",
+            "extranjero": "Rusia lanza drones contra Ucrania",
             "nacional": "Sube el dolar otra vez",
         }
+        # La fila `extranjero` (22 de septiembre de 2026) va como la de zona:
+        # igual en los tres. En el regional tambien, por decision de ese dia:
+        # antes caia en la cubeta Mexico, que es peor que Mundo y que tirarlo.
+        # Y el residuo regional se tira desde el 22 de septiembre de 2026:
+        # "Sube el dolar otra vez" no nombra a Mexico (ver
+        # test_sin_lugar_se_tira_y_estatal_es_estatal).
         esperado = {
-            "regional":      {"zona": "Tijuana", "estatal": "estatal",
-                              "fuera": None, "nacional": "nacional"},
-            "nacional":      {"zona": "Tijuana", "estatal": "estatal",
-                              "fuera": "nacional", "nacional": "nacional"},
-            "internacional": {"zona": "Tijuana", "estatal": "estatal",
-                              "fuera": "nacional", "nacional": "internacional"},
+            "regional":      {"zona": "Tijuana", "estatal": "estatal", "fuera": None,
+                              "extranjero": "internacional", "nacional": None},
+            "nacional":      {"zona": "Tijuana", "estatal": "estatal", "fuera": "nacional",
+                              "extranjero": "internacional", "nacional": "nacional"},
+            "internacional": {"zona": "Tijuana", "estatal": "estatal", "fuera": "nacional",
+                              "extranjero": "internacional", "nacional": "internacional"},
         }
         for ambito, filas in esperado.items():
             for alc, zona in filas.items():
                 with self.subTest(ambito=ambito, alcance=alc):
                     self.assertEqual(tiktok._zona(pies[alc], ambito), (zona, alc))
+
+    def test_los_casos_medidos_del_filtro_internacional(self):
+        """Los pies reales que motivaron `extranjero`, con la busqueda de donde salieron."""
+        casos = [
+            # Etiqueta: #tijuana en el pie de un video del mundo. El texto
+            # nombra Iran y el lugar del corredor solo esta en la etiqueta.
+            ("31 Millones de Soldados vs EEUU!! Iran Prepara Su Mayor Fuerza #tijuana",
+             "internacional", ("internacional", "extranjero")),
+            # Y la etiqueta sigue contando cuando el texto no nombra nada de fuera.
+            ("Balacera en la colonia #tijuana", "regional", ("Tijuana", "zona")),
+            # Homonimo de Mexico: El Rosario es de San Quintin y de Sinaloa.
+            ("En El Rosario, Sinaloa, localizan cinco recipientes", "nacional",
+             ("nacional", "fuera")),
+            ("En El Rosario, Sinaloa, localizan cinco recipientes", "regional",
+             (None, "fuera")),
+            # Homonimo del extranjero: "la paz" es BCS, y aqui no.
+            ("Rusia advierte que las sanciones complican la paz", "nacional",
+             ("internacional", "extranjero")),
+            # Mexico nombrado bloquea el extranjero: es nota nacional.
+            ("Mexico vence a Argentina en el Mundial", "nacional", ("nacional", "nacional")),
+            # El corredor nombrado de verdad gana sobre el extranjero.
+            ("Deportados desde Texas llegan a Tijuana", "internacional", ("Tijuana", "zona")),
+            # Una calle con nombre de pais no es el pais (busqueda de Mexicali).
+            ("te veo el lunes en Argentina 1100 colonia Alamitos #mexicali", "regional",
+             ("Mexicali", "zona")),
+            # Una fuente del mundo que habla de Mexico es nota nacional
+            # (Telemundo 20; "morelos" no esta en FUERA porque es colonia de
+            # Tijuana)...
+            ("Hacen anuncio sobre feminicidio de Claudia Tacoronte en Morelos, Mexico",
+             "internacional", ("nacional", "nacional")),
+            # ...pero un #mexico de relleno no la saca de Mundo.
+            ("Cae un avion en Asturias #mexico #noticias", "internacional",
+             ("internacional", "nacional")),
+        ]
+        for pie, ambito, esperado in casos:
+            with self.subTest(pie=pie, ambito=ambito):
+                self.assertEqual(tiktok._zona(pie, ambito), esperado)
 
     def test_el_ambito_llega_desde_la_busqueda_y_omite_regional(self):
         mundo = dict(BUSQUEDA, ambito="internacional")
@@ -366,9 +416,19 @@ class TestDerivar(BaseCache):
             self.assertNotIn(prohibido, crudo)
 
     def test_nacional_es_zona_valida(self):
-        p = self._panel([_video(text="Sube el dolar #noticias")])
+        # Desde el 22 de septiembre de 2026 una busqueda regional solo deja en
+        # `nacional` lo que nombra a Mexico; lo que no nombra nada se tira.
+        p = self._panel([_video(text="Sube el dolar en Mexico #noticias")])
         self.assertEqual(p["destacados"][0]["zona"], "nacional")
         self.assertEqual(validar_redes(p, plataforma="tiktok")[0], [])
+
+    def test_una_busqueda_nunca_publica_residuo_del_corredor(self):
+        # `estatal` sin lugar es de un MEDIO del corredor (YouTube, Instagram).
+        # En TikTok seria la consulta acreditando su zona: el validador lo tira.
+        p = self._panel([_video(text="Baja California estrena ley")])
+        p["destacados"][0]["alcance"] = "nacional"
+        self.assertTrue(any("ninguna zona se le puede acreditar" in e
+                            for e in validar_redes(p, plataforma="tiktok")[0]))
 
 
 class TestPublicar(BaseCache):
@@ -396,6 +456,150 @@ class TestProbar(BaseCache):
         self.assertEqual(salida[0]["descartes"], {"anuncio": 1})
         self.assertEqual(salida[0]["videos"][0]["creador"], "@tjnoticias")
         self.assertFalse(os.path.exists(self.cache))
+
+
+# --- Perfiles: la cuenta del medio (22 de septiembre de 2026) ----------------
+
+PERFIL = {"id": "tk_dwespanol", "nombre": "DW Español", "perfil": "@dw_espanol",
+          "idioma": "es", "ambito": "internacional", "activo": True,
+          "verificado": "2026-09-22", "marca": "dw", "seguidores": 3100000,
+          "nota": "fixture"}
+
+
+def _video_dw(vid, publicado, texto="Rusia lanza drones contra Ucrania", autor="dw_espanol"):
+    return _video(id=vid, text=texto, createTime=_epoch(publicado),
+                  createTimeISO=publicado.replace("+00:00", ".000Z"),
+                  webVideoUrl="https://www.tiktok.com/@{}/video/{}".format(autor, vid),
+                  authorMeta={"id": "2", "name": autor, "fans": 3100000,
+                              "privateAccount": False})
+
+
+class _ActorPerfil(_Actor):
+    """Como _Actor, pero la pasada 1 puede ser de busqueda o de perfil."""
+
+    def __call__(self, actor, entrada, tok, limite, timeout=None):
+        self.llamadas.append((actor, entrada))
+        es_videos = "searchQueries" in entrada or "profiles" in entrada
+        return self.videos if es_videos else self.comentarios
+
+
+class TestPerfiles(BaseCache):
+    def test_la_entrada_es_la_del_actor_y_sin_filtro_cobrado(self):
+        e = tiktok._entrada_perfil("@DW_espanol", 10)
+        self.assertEqual(e["profiles"], ["DW_espanol"])
+        self.assertEqual(e["profileScrapeSections"], ["videos"])
+        self.assertEqual(e["profileSorting"], "latest")
+        self.assertTrue(e["excludePinnedPosts"])
+        self.assertEqual(e["resultsPerPage"], 10)
+        for cobrado in ("searchQueries", "videoSearchDateFilter", "oldestPostDateUnified"):
+            self.assertNotIn(cobrado, e)
+
+    def test_la_ventana_se_impone_antes_de_pagar_comentarios(self):
+        # Un perfil trae lo ultimo que publico la cuenta, sea de hoy o de la
+        # semana pasada. Solo lo de la ventana paga comentarios.
+        actor = _ActorPerfil(videos=[_video_dw("1", "2026-09-03T12:00:00+00:00"),
+                                     _video_dw("2", "2026-08-30T12:00:00+00:00")])
+        with patch.object(tiktok, "correr_actor", actor):
+            _, salud, _ = tiktok.cosechar([], AHORA, tok="t", cache=self.cache,
+                                          perfiles=[PERFIL])
+        coms = [e for _, e in actor.llamadas if "postURLs" in e]
+        self.assertEqual(len(coms), 1)
+        self.assertEqual(coms[0]["postURLs"], ["https://www.tiktok.com/@dw_espanol/video/1"])
+        self.assertEqual(coms[0]["commentsPerPost"], tiktok.COMENTARIOS_POR_VIDEO_PERFIL)
+        self.assertEqual(salud[0]["fuera_de_ventana"], 1)
+        # El viejo igual entra al catalogo: sus likes se refrescan.
+        self.assertIn("https://www.tiktok.com/@dw_espanol/video/2",
+                      tiktok.leer_publicaciones(self.cache))
+
+    def test_un_video_de_otro_autor_se_tira(self):
+        v, motivo = tiktok._limpiar_de_fila(
+            _video_dw("3", "2026-09-03T12:00:00+00:00", autor="otro"), PERFIL, AHORA)
+        self.assertIsNone(v)
+        self.assertEqual(motivo, "otro_creador")
+
+    def test_un_perfil_sin_verificar_no_se_cosecha(self):
+        actor = _ActorPerfil(videos=[_video_dw("1", "2026-09-03T12:00:00+00:00")])
+        with patch.object(tiktok, "correr_actor", actor):
+            tiktok.cosechar([], AHORA, tok="t", cache=self.cache,
+                            perfiles=[dict(PERFIL, verificado=None)])
+        self.assertEqual(actor.llamadas, [])
+
+    def test_el_perfil_es_una_cuenta_del_documento_y_valida(self):
+        actor = _ActorPerfil(videos=[_video_dw("1", "2026-09-03T12:00:00+00:00")],
+                             comentarios=[_comentario(
+                                 "Que tristeza", videoWebUrl="https://www.tiktok.com/@dw_espanol/video/1")])
+        with patch.object(tiktok, "correr_actor", actor):
+            nuevos, salud, gasto = tiktok.cosechar([BUSQUEDA], AHORA, tok="t",
+                                                   cache=self.cache, perfiles=[PERFIL])
+        panel = tiktok.derivar(nuevos, AHORA, salud, gasto, [],
+                               tiktok.leer_publicaciones(self.cache), [BUSQUEDA],
+                               perfiles=[PERFIL])
+        self.assertIn("tk_dwespanol", [c["cuenta"] for c in panel["cuentas"]])
+        dw = [d for d in panel["destacados"] if d["cuenta"] == "tk_dwespanol"]
+        self.assertEqual([(d["creador"], d["zona"], d["alcance"]) for d in dw],
+                         [("@dw_espanol", "internacional", "extranjero")])
+        self.assertEqual(validar_redes(panel, plataforma="tiktok")[0], [])
+
+    def test_probar_una_fila_apagada_y_sus_seguidores(self):
+        actor = _ActorPerfil(videos=[_video_dw("1", "2026-09-03T12:00:00+00:00")])
+        with patch.object(tiktok, "correr_actor", actor):
+            salida = tiktok.probar([BUSQUEDA], AHORA, tok="t",
+                                   perfiles=[dict(PERFIL, activo=False)],
+                                   filas=["tk_dwespanol"])
+        self.assertEqual([s["busqueda"] for s in salida], ["tk_dwespanol"])
+        self.assertEqual(salida[0]["seguidores"], 3100000)
+        self.assertIn("profiles", actor.llamadas[0][1])
+
+
+class TestLineaDeComandos(unittest.TestCase):
+    def test_el_parser_se_construye_con_las_banderas_nuevas(self):
+        # El 22 de septiembre de 2026 un `--posts` nuevo choco con el que ya
+        # tenia `pulso redes` y argparse truena al CONSTRUIR el parser: todo
+        # `python -m pulso`, cron incluido, habria caido, y ninguna prueba lo
+        # construia. Esta si.
+        import contextlib
+        import io
+        from pulso.__main__ import main
+        for argv in (["redes", "--help"], ["tiktok", "--help"], ["youtube", "--help"]):
+            with self.subTest(argv=argv), contextlib.redirect_stdout(io.StringIO()) as salida:
+                with self.assertRaises(SystemExit) as fin:
+                    main(argv)
+                self.assertEqual(fin.exception.code, 0)
+        with contextlib.redirect_stdout(io.StringIO()) as salida:
+            with self.assertRaises(SystemExit):
+                main(["redes", "--help"])
+        self.assertIn("--muestra", salida.getvalue())
+
+
+class TestValidadorPerfiles(unittest.TestCase):
+    BASE = {"nota": "x", "cosecha": {"videos_por_busqueda": 15, "comentarios_por_video": 20,
+                                     "dias_entre_cosechas": 3, "ventana_horas": 24,
+                                     "filtro_fecha": "PAST_24_HOURS",
+                                     "presupuesto_resultados": 3800,
+                                     "videos_por_perfil": 10,
+                                     "comentarios_por_video_perfil": 7},
+            "busquedas": [dict(BUSQUEDA, nota="x")]}
+
+    def _con(self, **cambios):
+        return dict(self.BASE, perfiles=[dict(PERFIL, **cambios)])
+
+    def test_un_perfil_bueno_valida(self):
+        self.assertEqual(validar_tiktok_config(self._con())[0], [])
+
+    def test_reglas_de_un_perfil(self):
+        casos = [
+            ({"ambito": None}, "'ambito' debe ser"),
+            ({"consulta": "dw"}, "no lleva 'consulta'"),
+            ({"zona": "Tijuana"}, "no lleva 'zona'"),
+            ({"perfil": "dw_espanol"}, "'perfil' debe ser un @handle"),
+            ({"verificado": None}, "necesita 'verificado'"),
+            ({"id": "tk_tijuana_noticias"}, "id repetido"),
+            ({"marca": "DW"}, "'marca' invalida"),
+        ]
+        for cambio, mensaje in casos:
+            with self.subTest(cambio=cambio):
+                e, _ = validar_tiktok_config(self._con(**cambio))
+                self.assertTrue(any(mensaje in x for x in e), e)
 
 
 class TestValidadorTikTok(unittest.TestCase):
@@ -503,20 +707,33 @@ class TestValidadorTikTok(unittest.TestCase):
         # El gacetero no nombro lugar: ninguna zona se le puede acreditar.
         e, _ = validar_redes(self._con(alcance="nacional", zona="Mexicali"), plataforma="tiktok")
         self.assertTrue(any("ninguna zona se le puede acreditar" in x for x in e))
+        # Nombrar el extranjero solo puede caer en Mundo.
+        e, _ = validar_redes(self._con(alcance="extranjero", zona="nacional"), plataforma="tiktok")
+        self.assertTrue(any("alcance 'extranjero' con zona" in x for x in e))
+        self.assertEqual(validar_redes(self._con(alcance="extranjero", zona="internacional"),
+                                       plataforma="tiktok")[0], [])
 
-    def test_internacional_es_zona_de_tiktok_y_no_de_instagram(self):
+    def test_internacional_en_instagram_solo_con_alcance(self):
         d = self._con(zona="internacional", alcance="nacional")
         self.assertEqual(validar_redes(d, plataforma="tiktok")[0], [])
-        # `internacional` es residuo de la edicion del mundo; una CUENTA de
-        # Instagram no puede tenerlo, porque su zona es una sede declarada.
+        # Una cuenta de Instagram con `zona` estampa su sede, y ninguna sede es
+        # "el mundo". Solo una cuenta con `ambito` llega a `internacional`, y
+        # entonces trae el alcance del pie que la puso ahi.
         from tests.test_instagram import TestValidadorDestacados as TD
         d = dict(TD.CON); d["destacados"] = [dict(TD.DESTACADO, zona="internacional")]
-        self.assertTrue(any("zona desconocida" in x for x in validar_redes(d)[0]))
+        self.assertTrue(any("sin 'alcance'" in x for x in validar_redes(d)[0]))
+        d = dict(TD.CON)
+        d["destacados"] = [dict(TD.DESTACADO, zona="internacional", alcance="extranjero")]
+        self.assertEqual(validar_redes(d)[0], [])
 
-    def test_alcance_no_aplica_a_instagram_y_faltar_solo_avisa(self):
+    def test_alcance_en_instagram_es_opcional_pero_cuadra_y_faltar_solo_avisa(self):
         from tests.test_instagram import TestValidadorDestacados as TD
-        d = dict(TD.CON); d["destacados"] = [dict(TD.DESTACADO, alcance="zona")]
-        self.assertTrue(any("'alcance' no aplica" in x for x in validar_redes(d)[0]))
+        # Una cuenta estampada no lo trae y no pasa nada...
+        self.assertEqual(validar_redes(dict(TD.CON))[0], [])
+        # ...y cuando lo trae, cuadra igual que en TikTok.
+        d = dict(TD.CON); d["destacados"] = [dict(TD.DESTACADO, alcance="nacional")]
+        self.assertTrue(any("ninguna zona se le puede acreditar" in x
+                            for x in validar_redes(d)[0]))
         # Un corte anterior al campo sigue siendo valido: data/ lo escribe el
         # bot y el cron lo regenera. Mismo trato que `ventana_legado`.
         d = self._con(); del d["destacados"][0]["alcance"]
@@ -613,8 +830,11 @@ class TestConfigReal(unittest.TestCase):
         """
         c = self.cfg["cosecha"]
         por_busqueda = c["videos_por_busqueda"] * (1 + c["comentarios_por_video"])
-        self.assertGreaterEqual(c["presupuesto_resultados"],
-                                por_busqueda * len(self.cfg["busquedas"]))
+        # Los perfiles cuentan como filas enteras: Presupuesto.reparto divide
+        # parejo entre todas, asi que cada una tiene que alcanzar para lo que
+        # pide la mas cara, que es una busqueda (22 de septiembre de 2026).
+        filas = len(self.cfg["busquedas"]) + len(self.cfg.get("perfiles", []))
+        self.assertGreaterEqual(c["presupuesto_resultados"], por_busqueda * filas)
 
 
 if __name__ == "__main__":

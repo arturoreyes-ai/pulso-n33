@@ -35,7 +35,7 @@ import re
 from datetime import datetime, timedelta
 
 from .normalizar import fold
-from .zonas import alcance
+from .zonas import alcance_redes, nombra_mexico, prosa_de
 
 # Mismo plazo que YouTube. Meta y TikTok no conceden ninguno: se aplica el mas
 # corto ya implementado (LFPDPPP y CPRA).
@@ -428,11 +428,15 @@ def _dentro_por_horas(ahora, ventana_horas):
     return dentro
 
 
-def zona_por_ambito(texto, ambito="regional"):
+def zona_por_ambito(texto, ambito="regional", firmas=()):
     """(zona, alcance) de una pieza por lo que nombra su texto. zona None = se tira.
 
-    `alcance` es el veredicto crudo del gacetero -- "zona", "estatal", "fuera"
-    o "nacional" -- y se publica junto a la zona. Existe porque desde que hay
+    `firmas` es la firma del canal al final del titulo (`sufijos_titulo` en
+    config/youtube.json), que el gacetero lee como evidencia debil: ver
+    zonas.alcance_redes.
+
+    `alcance` es el veredicto crudo del gacetero -- "zona", "estatal", "fuera",
+    "extranjero" o "nacional" -- y se publica junto a la zona. Existe porque desde que hay
     ambitos los dos dejaron de coincidir: en una busqueda nacional un video de
     Guadalajara queda `zona: nacional`, y sin el alcance esa fila seria
     indistinguible de una que no nombro lugar alguno. El panel rotula
@@ -442,17 +446,33 @@ def zona_por_ambito(texto, ambito="regional"):
     El ambito NO acredita zona. Cuando el pie nombra un lugar del gacetero
     manda el pie, igual en los tres; el ambito solo decide el residuo:
 
-        veredicto            regional     nacional     internacional
-        una zona             esa zona     esa zona     esa zona
-        estatal              estatal      estatal      estatal
-        un lugar de fuera    SE TIRA      nacional     nacional
-        ningun lugar         nacional     nacional     internacional
+        veredicto            regional       nacional       internacional
+        una zona             esa zona       esa zona       esa zona
+        estatal              estatal        estatal        estatal
+        un lugar de fuera    SE TIRA        nacional       nacional
+        el extranjero        internacional  internacional  internacional
+        ningun lugar         nacional       nacional       internacional (*)
+
+    (*) Salvo que el texto nombre a Mexico mismo: entonces `nacional`. El
+    caso, del feed de Telemundo 20 el 22 de septiembre de 2026: "Hacen anuncio
+    importante sobre feminicidio de Claudia Tacoronte en Morelos", cuya
+    descripcion dice "Morelos, Mexico", caia en Mundo porque "morelos" no esta
+    en FUERA (es colonia de Tijuana) y la edicion era internacional. Una
+    fuente del mundo hablando de Mexico es nota nacional, no del mundo.
+
+    `extranjero` (22 de septiembre de 2026, ver zonas.alcance_redes) se trata
+    como una zona: nombrar Ucrania manda igual en los tres ambitos. Tambien en
+    el regional, por decision del 22 de septiembre: un Short de Uniradio sobre
+    Rusia no es del corredor, pero tirarlo perderia cobertura del mundo que el
+    medio si hizo, y antes caia en la cubeta Mexico, que es peor que las dos.
     """
-    # El segundo argumento es None a proposito y SIEMPRE: es la zona
-    # declarada del medio, y creersela es el error que este modulo existe
-    # para no cometer. Ver el docstring de pulso/youtube.py, donde El Vigia
-    # lo demuestra con numeros.
-    alc, zonas = alcance(texto or "", None)
+    # Sin zona declarada del medio, a proposito y SIEMPRE: creersela es el
+    # error que este modulo existe para no cometer. alcance_redes llama a
+    # zonas.alcance con None; ver el docstring de pulso/youtube.py, donde El
+    # Vigia lo demuestra con numeros.
+    alc, zonas = alcance_redes(texto or "", firmas)
+    if alc == "extranjero":
+        return "internacional", alc
     if alc == "zona":
         return zonas[0], alc
     if alc == "estatal":
@@ -465,9 +485,58 @@ def zona_por_ambito(texto, ambito="regional"):
         if ambito == "regional":
             return None, alc
         return "nacional", alc
-    # El gacetero no nombro nada. En la edicion del mundo eso es el mundo; en
-    # las otras dos sigue siendo el "nacional" literal de siempre.
-    return ("internacional" if ambito == "internacional" else "nacional"), alc
+    # El gacetero no nombro nada. En la edicion del mundo eso es el mundo --
+    # salvo que la prosa nombre a Mexico --; en las otras dos sigue siendo el
+    # "nacional" literal de siempre.
+    if ambito == "internacional" and not nombra_mexico(prosa_de(texto, firmas)):
+        return "internacional", alc
+    return "nacional", alc
+
+
+def zona_por_titulo(titulo, resto, ambito="regional", firmas=()):
+    """(zona, alcance). El TITULO manda; el resto del texto solo desempata.
+
+    Vivia en pulso/youtube.py::_zona, con el caso que la motivo (N+ y
+    "Intocable recorre ... CDMX", zonificado Tijuana por una lista de gira en
+    la descripcion). Se mudo aqui el 22 de septiembre de 2026 porque las
+    cuentas de Instagram con `ambito` la necesitan igual: la primera linea del
+    pie es su titular, y el resto del pie trae etiquetas y texto fijo. Copiada
+    dos veces, una correccion llega a una sola.
+
+    El resto se lee SOLO cuando el titulo no nombra lugar alguno. Si el titulo
+    nombra uno --- del producto, del estado, de fuera o del extranjero --- ese
+    es el veredicto y el resto no puede moverlo.
+    """
+    zona, alc = zona_por_ambito(titulo, ambito, firmas)
+    if alc != "nacional" or not resto:
+        return zona, alc
+    return zona_por_ambito((titulo or "") + chr(10) + resto, ambito, firmas)
+
+
+def residuo_de_medio(zona, alc, ambito, texto, firmas=()):
+    """(zona, alcance) de la pieza de un MEDIO del corredor que no nombra lugar.
+
+    La tabla de zona_por_ambito le da `nacional`, y eso la mandaba a la cubeta
+    Mexico. El caso, medido el 22 de septiembre de 2026: 39 de 233 piezas de
+    los canales regionales de YouTube caian ahi, y casi todas eran nota local
+    que no escribe su ciudad -- "Sindicatura fiscaliza a jireh" (Zeta), "Hija
+    de Ruffo Appel quiere buscar gubernatura por BC", "CENYCA alcanza sold
+    out". Un medio del corredor que no dice donde casi siempre habla de aqui.
+
+    Asi que va a `estatal` con `alcance: nacional`: se ve en Corredor, y en
+    ninguna pagina de ciudad, porque no nombro ninguna. La tarjeta dice "un
+    lugar sin precisar", no "Baja California". Salvo que nombre a Mexico --
+    "la seleccion mexicana", "la mananera de Sheinbaum", 6 de los 39 --, que es
+    nota nacional dicha por un medio local y se queda en Mexico.
+
+    Solo para medios con sede: canales de YouTube y cuentas de Instagram con
+    `ambito`. Una busqueda de TikTok no: ahi el resultado es de cualquier
+    creador, y el residuo se tira (tiktok._zona).
+    """
+    if ambito == "regional" and alc == "nacional" and zona == "nacional" \
+            and not nombra_mexico(prosa_de(texto, firmas)):
+        return "estatal", alc
+    return zona, alc
 
 
 def _destacados(publicaciones, comentarios, opinion, temas, cuentas, dentro,

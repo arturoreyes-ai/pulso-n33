@@ -1084,12 +1084,18 @@ RE_CREADOR = re.compile(r"^@[A-Za-z0-9_.]{2,24}$")
 # las dos filas serian la misma. El panel rotula "fuera del corredor" para una
 # y "sin lugar" para la otra. Es la regla de `sin dato` contra `0` aplicada a
 # zonas: dos estados distintos no se colapsan en uno.
-ALCANCES_REDES = ("zona", "estatal", "fuera", "nacional")
+#
+# `extranjero` (22 de septiembre de 2026, pulso/zonas.py::alcance_redes) nombra
+# un lugar de fuera de Mexico y SOLO puede ser `internacional`. Separa, dentro
+# de Mundo, lo que se verifico del extranjero de lo que cayo ahi porque venia
+# de una fuente internacional y no nombro nada (`alcance: nacional`).
+ALCANCES_REDES = ("zona", "estatal", "fuera", "extranjero", "nacional")
 # Las ocho del producto, sin `estatal`: lo que puede significar alcance "zona".
 ZONAS_MUNICIPALES = tuple(z for z in ZONAS if z != "estatal")
-# `internacional` solo existe en TikTok, y solo como residuo de la edicion del
-# mundo. NO entra a ZONAS_DE_CONTEO, que la usan temas, conversacion y el
-# propio Instagram: ahi no significa nada y ampliarla la dejaria pasar.
+# `internacional` es la cubeta Mundo: en TikTok, YouTube y las cuentas de
+# Instagram con `ambito`, donde la zona sale del texto. NO entra a
+# ZONAS_DE_CONTEO, que la usan temas y conversacion: ahi no significa nada y
+# ampliarla la dejaria pasar.
 ZONAS_REDES_AMBITO = ZONAS_DE_CONTEO + ("internacional",)
 AMBITOS_REDES = ("regional", "nacional", "internacional")
 
@@ -1120,12 +1126,19 @@ PLATAFORMAS_REDES = {
         "orden": ("likes", "comentarios"),
         "formatos": (),
         "estados": ("ok", "fallo", "sin_token"),
-        # La zona de una cuenta es su sede declarada, no el veredicto de un
-        # gacetero: aqui no hay alcance que publicar, y `internacional` no existe.
-        "alcance": False,
+        # La zona de una cuenta con `zona` es su sede declarada, no el
+        # veredicto de un gacetero, y no publica alcance. Una cuenta con
+        # `ambito` (22 de septiembre de 2026) zonifica cada post por su pie,
+        # como TikTok, y SI lo publica: por eso es opcional, y `internacional`
+        # lo exige, porque ninguna sede declarada es "el mundo".
+        "alcance": "opcional",
+        # Una cuenta del corredor con `ambito: regional` que no nombra lugar
+        # cae en `estatal` con alcance `nacional`: Corredor, "sin precisar",
+        # nunca una pagina de ciudad (pulso/redes.py::residuo_de_medio).
+        "residuo_corredor": True,
         # El actor de Instagram no publica la duracion del video.
         "duracion": False,
-        "zonas": ZONAS_DE_CONTEO,
+        "zonas": ZONAS_REDES_AMBITO,
         "modulo": "pulso/instagram.py:_limpiar",
     },
     "tiktok": {
@@ -1143,6 +1156,10 @@ PLATAFORMAS_REDES = {
         "formatos": (),
         "estados": ("ok", "fallo", "sin_token"),
         "alcance": True,
+        # Una busqueda no es un medio: su residuo regional se tira
+        # (`sin_lugar`) y nunca llega como `estatal` sin lugar. Si llega, es la
+        # consulta acreditando su zona.
+        "residuo_corredor": False,
         # Segundos del video, desde el 17 de septiembre de 2026. Opcional: un
         # corte anterior no lo trae y sigue siendo valido, igual que `alcance`.
         "duracion": True,
@@ -1181,6 +1198,9 @@ PLATAFORMAS_REDES = {
         # La zona sale del titulo y la descripcion con el gacetero, como en
         # TikTok. El caso esta medido en el encabezado de pulso/youtube.py.
         "alcance": True,
+        # Un canal del corredor que no nombra lugar: Corredor, "sin precisar"
+        # (22 de septiembre de 2026, 39 de 233 piezas que caian en Mexico).
+        "residuo_corredor": True,
         "duracion": False,
         "zonas": ZONAS_REDES_AMBITO,
         "modulo": "pulso/youtube.py:_limpiar_pieza",
@@ -1256,8 +1276,159 @@ def validar_tiktok_config(datos):
             errores.append("{}: una busqueda no lleva 'zona'; la zona de cada video sale "
                            "de lo que nombra su pie (pulso/zonas.py). 'ambito' tampoco es "
                            "una zona: solo decide el residuo".format(et))
+    perfiles = datos.get("perfiles", [])
+    if not isinstance(perfiles, list):
+        errores.append("tiktok: 'perfiles' debe ser una lista")
+        perfiles = []
+    if perfiles and isinstance(cosecha, dict):
+        for campo in ("videos_por_perfil", "comentarios_por_video_perfil"):
+            v = cosecha.get(campo)
+            if not isinstance(v, int) or isinstance(v, bool) or v < 1:
+                errores.append("tiktok.cosecha: '{}' debe ser entero positivo si hay "
+                               "perfiles".format(campo))
+    for i, p in enumerate(perfiles):
+        et = "tiktok.perfiles[{}]".format(p.get("id", i) if isinstance(p, dict) else i)
+        if not isinstance(p, dict):
+            errores.append("{}: debe ser objeto".format(et))
+            continue
+        pid = p.get("id")
+        if not isinstance(pid, str) or not RE_BUSQUEDA_TIKTOK.match(pid):
+            errores.append("{}: 'id' invalido ({!r}); se espera ^tk_[a-z0-9_]{{2,20}}$".format(
+                et, pid))
+        elif pid in ids:
+            errores.append("{}: id repetido (las busquedas y los perfiles comparten "
+                           "espacio: los dos son `cuenta` en data/tiktok.json)".format(et))
+        ids.add(pid)
+        for campo in ("nombre", "nota"):
+            if not _texto(p.get(campo)):
+                errores.append("{}: falta '{}'".format(et, campo))
+        if not isinstance(p.get("perfil"), str) or not RE_CREADOR.match(p["perfil"]):
+            errores.append("{}: 'perfil' debe ser un @handle ({!r})".format(et, p.get("perfil")))
+        if p.get("idioma") not in IDIOMAS:
+            errores.append("{}: idioma {!r} desconocido".format(et, p.get("idioma")))
+        if not isinstance(p.get("activo"), bool):
+            errores.append("{}: 'activo' debe ser booleano".format(et))
+        if p.get("ambito") not in AMBITOS_REDES:
+            # Obligatorio y no con omision: un perfil es un medio de Mexico o del
+            # mundo, y el residuo de un medio regional no seria el de una busqueda.
+            errores.append("{}: 'ambito' debe ser {} ({!r})".format(
+                et, "|".join(AMBITOS_REDES), p.get("ambito")))
+        for campo in ("zona", "consulta"):
+            if campo in p:
+                errores.append("{}: un perfil no lleva '{}'; la zona sale del pie de cada "
+                               "video, igual que en una busqueda".format(et, campo))
+        if p.get("activo") and not _texto(p.get("verificado")):
+            errores.append("{}: un perfil activo necesita 'verificado' (la fecha del "
+                           "`tiktok --probar --fila`)".format(et))
+        _validar_marca(p, et, errores)
     if not any(isinstance(b, dict) and b.get("activo") for b in busquedas):
         avisos.append("tiktok: ninguna busqueda activa; el panel va a salir vacio")
+    return errores, avisos
+
+
+RE_MARCA = re.compile(r"^[a-z0-9_]{2,20}$")
+
+
+def _validar_marca(fila, et, errores):
+    """`marca` y `seguidores` de una fila de Instagram o de un perfil de TikTok."""
+    if "marca" in fila and not (isinstance(fila["marca"], str) and RE_MARCA.match(fila["marca"])):
+        errores.append("{}: 'marca' invalida ({!r}); se espera ^[a-z0-9_]{{2,20}}$".format(
+            et, fila.get("marca")))
+    s = fila.get("seguidores")
+    if "seguidores" in fila and (not isinstance(s, int) or isinstance(s, bool) or s < 0):
+        errores.append("{}: 'seguidores' debe ser entero no negativo ({!r})".format(et, s))
+    # Solo a la ACTIVA se le exige: una fila que nadie ha sondeado no tiene
+    # cifra, y un 0 en su lugar se leeria como "nadie la sigue".
+    if "marca" in fila and fila.get("activo") and "seguidores" not in fila:
+        errores.append("{}: una fila activa con 'marca' lleva 'seguidores': es la cifra con "
+                       "que se decide en que red se lee el medio".format(et))
+
+
+def validar_marcas(instagram, tiktok):
+    """Un medio, una red: entre Instagram y TikTok, una sola fila activa por marca.
+
+    Decision del 22 de septiembre de 2026. Un medio publica lo mismo en las dos
+    redes, y leerlo en las dos llena el muro con la misma nota dos veces. Se
+    lee donde tiene mas seguidores; la otra fila se queda apagada, con los dos
+    numeros escritos. YouTube queda fuera de esta regla a proposito: ahi el
+    formato cambia (Shorts y videos largos) y la decision fue no tocarlo.
+    """
+    errores, avisos = [], []
+    filas = [("instagram", c) for c in (instagram or {}).get("cuentas", []) if isinstance(c, dict)]
+    filas += [("tiktok", p) for p in (tiktok or {}).get("perfiles", []) if isinstance(p, dict)]
+    por_marca = {}
+    for red, f in filas:
+        if isinstance(f.get("marca"), str):
+            por_marca.setdefault(f["marca"], []).append((red, f))
+    for marca, grupo in sorted(por_marca.items()):
+        activas = [(red, f) for red, f in grupo if f.get("activo")]
+        if len(activas) > 1:
+            errores.append("marca {!r}: {} filas activas ({}); una marca, una red: la de mas "
+                           "seguidores".format(marca, len(activas),
+                                               ", ".join("{}:{}".format(r, f.get("id"))
+                                                         for r, f in activas)))
+        elif activas:
+            red, f = activas[0]
+            mayor = max(grupo, key=lambda rf: rf[1].get("seguidores") or 0)
+            if (mayor[1].get("seguidores") or 0) > (f.get("seguidores") or 0):
+                avisos.append("marca {!r}: activa en {} ({}) pero tiene mas seguidores en {} "
+                              "({})".format(marca, red, f.get("seguidores"), mayor[0],
+                                            mayor[1].get("seguidores")))
+    return errores, avisos
+
+
+def validar_instagram_config(datos):
+    """config/instagram.json: cuentas, cada una con `zona` O con `ambito`.
+
+    `zona` es la sede declarada y se estampa a cada post y comentario sin
+    correccion; `ambito` (22 de septiembre de 2026) zonifica cada post por lo
+    que nombra su pie, como TikTok. Las dos a la vez no significan nada, y
+    ninguna haria que pulso/instagram.py estampara `estatal` en silencio.
+    """
+    errores, avisos = [], []
+    if not _texto(datos.get("nota")):
+        avisos.append("instagram: falta la 'nota' que explica el archivo")
+    cosecha = datos.get("cosecha")
+    if not isinstance(cosecha, dict):
+        errores.append("instagram: falta 'cosecha'")
+    else:
+        vh = cosecha.get("ventana_horas")
+        if not isinstance(vh, int) or isinstance(vh, bool) or not 1 <= vh <= 720:
+            errores.append("instagram.cosecha: 'ventana_horas' debe ser entero entre 1 y 720")
+    cuentas = datos.get("cuentas")
+    if not isinstance(cuentas, list) or not cuentas:
+        errores.append("instagram: 'cuentas' debe ser una lista no vacia")
+        return errores, avisos
+    ids = set()
+    for i, c in enumerate(cuentas):
+        et = "instagram.cuentas[{}]".format(c.get("id", i) if isinstance(c, dict) else i)
+        if not isinstance(c, dict):
+            errores.append("{}: debe ser objeto".format(et))
+            continue
+        if not _texto(c.get("id")):
+            errores.append("{}: falta 'id'".format(et))
+        elif c["id"] in ids:
+            errores.append("{}: id repetido".format(et))
+        ids.add(c.get("id"))
+        if c.get("idioma") not in IDIOMAS:
+            errores.append("{}: idioma {!r} desconocido".format(et, c.get("idioma")))
+        if not isinstance(c.get("activo"), bool):
+            errores.append("{}: 'activo' debe ser booleano".format(et))
+        tiene_zona = c.get("zona") is not None
+        tiene_ambito = "ambito" in c
+        if tiene_zona == tiene_ambito:
+            errores.append("{}: lleva 'zona' (su sede, que se estampa) o 'ambito' (la zona "
+                           "sale del pie), una de las dos y no ambas".format(et))
+        elif tiene_zona and c.get("zona") not in ZONAS_DE_CONTEO:
+            errores.append("{}: zona {!r} desconocida; 'internacional' no es una sede, sale "
+                           "del pie con 'ambito'".format(et, c.get("zona")))
+        elif tiene_ambito and c.get("ambito") not in AMBITOS_REDES:
+            errores.append("{}: 'ambito' {!r} desconocido; se espera {}".format(
+                et, c.get("ambito"), "|".join(AMBITOS_REDES)))
+        if c.get("activo") and not (c.get("handle") and c.get("verificado") is True):
+            errores.append("{}: una cuenta activa necesita 'handle' y 'verificado' true, que "
+                           "es correr --sondear y anotarlo en 'razon'".format(et))
+        _validar_marca(c, et, errores)
     return errores, avisos
 
 
@@ -1324,6 +1495,15 @@ def validar_youtube_config(datos):
         if "ambito" in c and c.get("ambito") not in AMBITOS_REDES:
             errores.append("{}: 'ambito' {!r} desconocido; se espera {}".format(
                 et, c.get("ambito"), "|".join(AMBITOS_REDES)))
+        sufijos = c.get("sufijos_titulo")
+        if "sufijos_titulo" in c and (
+                not isinstance(sufijos, list) or not sufijos
+                or not all(isinstance(s, str) and len(s.strip()) >= 4 for s in sufijos)):
+            # Cuatro caracteres como minimo por lo mismo que prensa.excluidos
+            # pide doce: un sufijo corto cortaria titulos que no lo llevan como
+            # firma, en silencio.
+            errores.append("{}: 'sufijos_titulo' debe ser una lista no vacia de textos de al "
+                           "menos 4 caracteres (la firma del canal al final del titulo)".format(et))
         if "zona" in c:
             # El caso, medido el 18 de septiembre de 2026: la fila de El Vigia
             # dice Ensenada y nueve de sus quince Shorts son nacionales --
@@ -1397,7 +1577,14 @@ def _validar_destacado(d, eti, esp, plataforma, ctx, conocidas, cosecha_comentar
     # un cruce mal hecho aqui es exactamente la acreditacion por consulta que
     # todo el modulo existe para impedir, y no da error en ninguna otra parte.
     alc = d.get("alcance")
-    if esp["alcance"]:
+    if esp["alcance"] == "opcional" and "alcance" not in d:
+        # Instagram: sin alcance, la zona es la sede declarada de la cuenta, y
+        # ninguna sede es "el mundo". Un `internacional` sin alcance seria una
+        # cuenta estampada con una zona que solo puede salir de un texto.
+        if d.get("zona") == "internacional":
+            errores.append("{}: zona 'internacional' sin 'alcance'; solo sale del texto de "
+                           "una cuenta con 'ambito', nunca de una sede".format(eti))
+    elif esp["alcance"]:
         # Un corte anterior al campo sigue siendo valido, con aviso y una sola
         # vez al final: es el mismo trato que `ventana_legado`, y por la misma
         # razon -- data/ lo escribe el bot y no se edita a mano para callar un
@@ -1418,7 +1605,12 @@ def _validar_destacado(d, eti, esp, plataforma, ctx, conocidas, cosecha_comentar
                 errores.append("{}: alcance 'fuera' con zona {!r}; un lugar de fuera solo "
                                "sobrevive como 'nacional', y solo si la busqueda no es "
                                "regional".format(eti, z))
-            elif alc == "nacional" and z not in ("nacional", "internacional"):
+            elif alc == "extranjero" and z != "internacional":
+                errores.append("{}: alcance 'extranjero' con zona {!r}; nombrar un lugar de "
+                               "fuera de Mexico solo puede caer en Mundo".format(eti, z))
+            elif alc == "nacional" and z not in (
+                    ("nacional", "internacional")
+                    + (("estatal",) if esp.get("residuo_corredor") else ())):
                 errores.append("{}: alcance 'nacional' con zona {!r}; el gacetero no nombro "
                                "lugar, asi que ninguna zona se le puede acreditar".format(
                                    eti, z))
@@ -1792,7 +1984,14 @@ def _validar_comentarios_publicados(por_post, destacadas, visibles, maximo, et, 
 #   cada titular su `tono` en el vocabulario de la PRENSA (favorable | adversa
 #   | neutral), nunca el de los comentarios: las dos series no se suman y por
 #   eso no comparten etiquetas (docs/PLAN.md seccion 6). Las cubetas del bloque
-#   tienen que ser exactamente el recuento de los titulares.
+#   tienen que ser exactamente el recuento de los titulares. Las claves del
+#   DATO siguen separadas aunque desde el 23 de septiembre de 2026 la pantalla
+#   y el PDF digan «positivo/negativo» para las dos: cada serie va en su
+#   tarjeta y nada se suma entre ellas (regla 3).
+# - `tono_publicaciones` (23 de septiembre de 2026): el tono del PIE de cada
+#   publicacion de la ventana, en las cinco cubetas de los comentarios, que
+#   suman exactamente las publicaciones de los bloques leidos. Un corte
+#   anterior no lo trae y pasa con aviso: la pantalla dice «sin dato».
 
 RE_CONSULTA = re.compile(r"^cq_[a-z0-9_]{2,20}$")
 RE_BUSCADOR = re.compile(r"^[a-z0-9_]{2,20}$")
@@ -1839,10 +2038,14 @@ RE_MECANISMO = re.compile(r"\b(apify|api|token|git|actor|cron|pipeline|scraper|a
 
 PLATAFORMAS_CONSULTA = {
     # Como en redes.json, salvo que la zona sale del texto con ambito nacional
-    # en las tres, asi que `alcance` viaja siempre e `internacional` no existe.
-    # Sin `temas` por destacado: los temas son del termino.
-    "tiktok": dict(PLATAFORMAS_REDES["tiktok"], zonas=ZONAS_DE_CONTEO, temas=False),
-    "instagram": dict(PLATAFORMAS_REDES["instagram"], alcance=True, temas=False),
+    # en las tres, asi que `alcance` viaja siempre. `internacional` existe
+    # desde el 22 de septiembre de 2026, y solo por `extranjero`: con ambito
+    # nacional, una publicacion que nombra Madrid ya no se confunde con una
+    # nota nacional mexicana. Sin `temas` por destacado: los temas son del
+    # termino. Sin residuo del corredor: una consulta nunca es regional.
+    "tiktok": dict(PLATAFORMAS_REDES["tiktok"], temas=False),
+    "instagram": dict(PLATAFORMAS_REDES["instagram"], alcance=True, temas=False,
+                      residuo_corredor=False),
     "facebook": {
         "prefijo": "https://www.facebook.com/",
         "ventana": "ventana_horas",
@@ -1860,7 +2063,7 @@ PLATAFORMAS_CONSULTA = {
         "estados": ("ok", "fallo", "sin_token"),
         "alcance": True,
         "duracion": False,
-        "zonas": ZONAS_DE_CONTEO,
+        "zonas": ZONAS_REDES_AMBITO,
         "temas": False,
         "modulo": "pulso/facebook.py:_limpiar_comentario",
     },
@@ -2528,6 +2731,47 @@ def _validar_agregados_consulta(agregados, cid, fila, doc, errores):
                        "final".format(et))
 
 
+def _validar_tono_publicaciones(f, et, errores, avisos):
+    """`tono_publicaciones` de un termino: cinco cubetas que suman
+    `publicaciones`, y `publicaciones` igual a lo que dicen los bloques leidos.
+    Si las dos cifras no coincidieran, la tarjeta de publicaciones diria un
+    total y un tono de dos conjuntos distintos."""
+    eti = et + ".tono_publicaciones"
+    tp = f.get("tono_publicaciones")
+    if tp is None:
+        avisos.append("{}: falta; corte anterior al 23 de septiembre de 2026, la pantalla "
+                      "dice «sin dato» para el tono de las publicaciones".format(eti))
+        return
+    if not isinstance(tp, dict):
+        errores.append("{}: debe ser objeto".format(eti))
+        return
+    _validar_conteo_sentimiento(tp, eti, errores)
+    cubetas = SENTIMIENTOS + ("sin_clasificar", "sin_modelo_idioma")
+    for campo in ("sin_clasificar", "sin_modelo_idioma", "publicaciones"):
+        if not _entero_no_negativo(tp.get(campo)):
+            errores.append("{}: '{}' debe ser entero no negativo".format(eti, campo))
+    if all(_entero_no_negativo(tp.get(k)) for k in cubetas + ("publicaciones",)):
+        suma = sum(tp[k] for k in cubetas)
+        if suma != tp["publicaciones"]:
+            errores.append("{}: las cubetas suman {} y 'publicaciones' es {}".format(
+                eti, suma, tp["publicaciones"]))
+        plataformas = f.get("plataformas")
+        if isinstance(plataformas, dict):
+            leidas = sum(b.get("publicaciones", 0) for p, b in plataformas.items()
+                         if p in PLATAFORMAS_CONSULTA_SOCIAL and isinstance(b, dict)
+                         and b.get("estado") != "sin_dato"
+                         and _entero_no_negativo(b.get("publicaciones")))
+            if leidas != tp["publicaciones"]:
+                errores.append("{}: 'publicaciones' es {} y los bloques leidos suman {}".format(
+                    eti, tp["publicaciones"], leidas))
+    if tp.get("metodo") not in ("modelo", "ninguno"):
+        errores.append("{}: 'metodo' debe ser modelo|ninguno".format(eti))
+    elif tp["metodo"] == "ninguno" and tp.get("modelo") is not None:
+        errores.append("{}: 'modelo' debe ser null cuando el metodo es ninguno".format(eti))
+    elif tp["metodo"] == "modelo" and not _texto(tp.get("modelo")):
+        errores.append("{}: 'modelo' debe nombrar el modelo".format(eti))
+
+
 def validar_consultas(datos, config=None):
     """data/consultas.json. `config` es config/consultas.json si esta a mano:
     con el, cada `fuente` de un destacado tiene que ser una configurada."""
@@ -2645,6 +2889,8 @@ def validar_consultas(datos, config=None):
                                "publica solo con esa salvedad (docs/PLAN.md, 18 de septiembre "
                                "de 2026)".format(eti))
 
+        _validar_tono_publicaciones(f, et, errores, avisos)
+
         temas = f.get("temas")
         eti = et + ".temas"
         if not isinstance(temas, dict):
@@ -2727,6 +2973,12 @@ def validar_consultas_comentarios(datos, consultas=None):
                     for d in bloque.get("destacados") or []:
                         if isinstance(d, dict):
                             destacadas.add(d.get("url"))
+            # Un post agregado a mano (23 de septiembre de 2026) tambien puede
+            # traer texto: sus comentarios se importaron a mano y en pantalla
+            # esta en el recorrido como cualquier destacado.
+            for a in f.get("agregados") or []:
+                if isinstance(a, dict):
+                    destacadas.add(a.get("url"))
     _validar_comentarios_publicados(por_post, destacadas, visibles, maximo, et, errores)
     return errores, avisos
 
@@ -3687,6 +3939,268 @@ def _regla_gitignore(dir_datos):
                 dir_datos, ruta, REGLA_GITIGNORE)]
 
 
+def _meta_exigir(condicion, mensaje):
+    if not condicion:
+        raise ValueError("publicidad-meta: " + mensaje)
+
+
+def _meta_objeto(valor, campos):
+    _meta_exigir(isinstance(valor, dict) and set(valor) == set(campos.split()),
+                 "campos inesperados o faltantes: " + campos)
+
+
+def _meta_numero(valor, entero=False, nulo=True):
+    import math
+    if valor is None and nulo:
+        return
+    _meta_exigir(type(valor) in ((int,) if entero else (int, float)) and
+                 math.isfinite(valor) and valor >= 0, "numero invalido")
+
+
+def _meta_url(valor, biblioteca=False):
+    from urllib.parse import urlsplit, parse_qs
+    _meta_exigir(isinstance(valor, str), "URL invalida")
+    partes = urlsplit(valor)
+    _meta_exigir(partes.scheme == "https" and partes.hostname and not partes.username
+                 and not partes.password and partes.port in (None, 443), "URL insegura")
+    _meta_exigir(not any(k.lower() in ("access_token", "token", "cookie", "password")
+                         for k in parse_qs(partes.query)), "credencial en URL")
+    if biblioteca:
+        _meta_exigir(partes.hostname in ("www.facebook.com", "business.facebook.com")
+                     and partes.path.startswith("/ads/library/"), "fuente ajena a biblioteca")
+
+
+def _meta_periodo(valor):
+    _meta_objeto(valor, "desde hasta")
+    _meta_exigir(_fecha(valor["desde"]) is not None and _fecha(valor["hasta"]) is not None
+                 and valor["desde"] <= valor["hasta"], "periodo invalido")
+
+
+def _meta_moneda(valor):
+    _meta_exigir(valor is None or isinstance(valor, str) and re.fullmatch(r"[A-Z]{3}", valor),
+                 "moneda invalida")
+
+
+def _meta_rango(valor):
+    if valor is None:
+        return
+    _meta_objeto(valor, "minimo maximo")
+    for n in valor.values():
+        _meta_numero(n)
+    a, b = valor["minimo"], valor["maximo"]
+    _meta_exigir(a is not None or b is not None, "rango vacio")
+    _meta_exigir(a is None or b is None or a <= b, "rango invertido")
+
+
+def _meta_seccion(valor):
+    _meta_objeto(valor, "estado fuente periodo geografia consultado ultimo_exito completo motivo datos")
+    _meta_exigir(valor["estado"] in ("ok", "parcial", "sin_dato", "fallo", "bloqueado"), "estado invalido")
+    _meta_url(valor["fuente"], True)
+    _meta_exigir(valor["geografia"] in ("MX", "Baja California"), "geografia invalida")
+    _meta_exigir(type(valor["completo"]) is bool, "completo debe ser booleano")
+    for campo in ("consultado", "ultimo_exito"):
+        _meta_exigir(valor[campo] is None or _es_iso(valor[campo]), "fecha de consulta invalida")
+    if valor["periodo"] is not None:
+        _meta_periodo(valor["periodo"])
+    _meta_exigir(valor["motivo"] is None or _texto(valor["motivo"]), "motivo invalido")
+    if valor["datos"] is not None:
+        _meta_exigir(valor["ultimo_exito"] is not None and valor["consultado"] is not None,
+                     "datos sin fecha")
+        _meta_exigir(valor["ultimo_exito"] <= valor["consultado"], "exito posterior a consulta")
+    if valor["estado"] == "ok":
+        _meta_exigir(valor["completo"] and valor["datos"] is not None and
+                     valor["ultimo_exito"] == valor["consultado"], "exito incompleto")
+    else:
+        _meta_exigir(not valor["completo"], "fallo o parcial marcado completo")
+    if valor["estado"] == "sin_dato":
+        _meta_exigir(valor["datos"] is None and valor["ultimo_exito"] is None, "ausencia con datos")
+
+
+def _meta_totales(totales):
+    _meta_exigir(isinstance(totales, list), "totales invalidos")
+    for total in totales:
+        _meta_objeto(total, "etiqueta desde hasta geografia moneda importe")
+        _meta_periodo({k: total[k] for k in ("desde", "hasta")})
+        _meta_exigir(total["geografia"] in ("MX", "Baja California") and _texto(total["etiqueta"]), "total sin alcance")
+        _meta_moneda(total["moneda"])
+        _meta_numero(total["importe"], nulo=False)
+
+
+def _meta_pares(pares):
+    _meta_exigir(isinstance(pares, list), "desglose invalido")
+    for par in pares:
+        _meta_objeto(par, "etiqueta valor")
+        _meta_exigir(_texto(par["etiqueta"]) and _texto(par["valor"]), "desglose vacio")
+
+
+def validar_publicidad_meta_config(datos, roster=None, gasto=None):
+    try:
+        _meta_objeto(datos, "nota desde respetar_robots excepcion_robots personas")
+        _meta_exigir(datos["desde"] == "2024-01-01" and _texto(datos["nota"]), "ventana o nota invalida")
+        _meta_exigir(type(datos["respetar_robots"]) is bool, "politica robots invalida")
+        if not datos["respetar_robots"]:
+            _meta_exigir(_texto(datos["excepcion_robots"]), "excepcion robots sin decision documentada")
+        _meta_exigir(isinstance(datos["personas"], list), "personas invalidas")
+        ids, paginas = set(), set()
+        for p in datos["personas"]:
+            _meta_objeto(p, "id roster_id nombre cargo partido ambito pagina ine nota")
+            _meta_exigir(isinstance(p["id"], str) and RE_ID.fullmatch(p["id"]) and p["id"] not in ids,
+                         "id de persona inseguro o repetido")
+            ids.add(p["id"])
+            _meta_exigir(all(_texto(p[k]) for k in ("nombre", "cargo", "partido", "ambito", "nota")), "persona incompleta")
+            if roster is not None and p["roster_id"] is not None:
+                figura = next((f for f in roster["figuras"] if f["id"] == p["roster_id"]), None)
+                _meta_exigir(figura is not None and figura["nombre"] == p["nombre"], "roster no coincide")
+            for clave in ("pagina", "ine"):
+                relacion = p[clave]
+                if relacion is None:
+                    continue
+                campos = "id nombre url verificado fuentes razon" if clave == "pagina" else "id nombre cargo contienda verificado fuentes razon"
+                _meta_objeto(relacion, campos)
+                _meta_exigir(_fecha(relacion["verificado"]) and _texto(relacion["razon"]) and
+                             isinstance(relacion["fuentes"], list) and relacion["fuentes"], "relacion sin evidencia")
+                for fuente in relacion["fuentes"]:
+                    _meta_url(fuente)
+                if clave == "pagina":
+                    _meta_exigir(isinstance(relacion["id"], str) and relacion["id"].isdigit() and relacion["id"] not in paginas,
+                                 "pagina duplicada o invalida")
+                    paginas.add(relacion["id"])
+                    _meta_url(relacion["url"])
+                    from urllib.parse import urlsplit
+                    _meta_exigir(urlsplit(relacion["url"]).hostname == "www.facebook.com", "perfil ajeno a Facebook")
+                elif gasto is not None:
+                    c = next((c for c in gasto["candidaturas"] if c["id"] == relacion["id"]), None)
+                    _meta_exigir(c is not None and all(c[k] == relacion[k] for k in ("nombre", "cargo", "contienda")),
+                                 "vinculo INE no coincide con nombre, cargo y contienda")
+        _meta_exigir([p["id"] for p in datos["personas"]] == sorted(ids), "catalogo sin ordenar")
+    except (ValueError, TypeError, KeyError, AttributeError) as e:
+        return [str(e)], []
+    return [], []
+
+
+def validar_perfil_meta(datos, config=None):
+    try:
+        _meta_objeto(datos, "esquema persona_id pagina_id anuncios informacion audiencia")
+        _meta_exigir(datos["esquema"] == 1, "version invalida")
+        if config:
+            persona = next((p for p in config["personas"] if p["id"] == datos["persona_id"]), None)
+            _meta_exigir(persona and persona["pagina"] and persona["pagina"]["id"] == datos["pagina_id"], "pagina no verificada")
+        _meta_seccion(datos["anuncios"])
+        anuncios = datos["anuncios"]["datos"]
+        if anuncios is not None:
+            _meta_exigir(isinstance(anuncios, list), "anuncios no es lista")
+            ids = set()
+            for a in anuncios:
+                _meta_objeto(a, "id pagina_id url estado desde hasta texto pagador moneda gasto impresiones tamano_audiencia plataformas formato regiones entrega grupo")
+                _meta_exigir(isinstance(a["id"], str) and a["id"].isdigit() and a["id"] not in ids, "anuncio repetido o invalido")
+                ids.add(a["id"])
+                _meta_exigir(a["pagina_id"] == datos["pagina_id"], "anuncio de otra pagina")
+                _meta_exigir(a["url"] == "https://www.facebook.com/ads/library/?id=" + a["id"], "URL de anuncio incorrecta")
+                _meta_exigir(a["estado"] in ("activo", "inactivo", "desconocido"), "estado de anuncio invalido")
+                for k in ("desde", "hasta"):
+                    _meta_exigir(a[k] is None or _fecha(a[k]), "fecha de anuncio invalida")
+                _meta_exigir(a["hasta"] is None or a["hasta"] >= "2024-01-01", "anuncio fuera de ventana")
+                _meta_exigir(not a["desde"] or not a["hasta"] or a["desde"] <= a["hasta"], "fechas invertidas")
+                for k in ("texto", "pagador"):
+                    _meta_exigir(a[k] is None or _texto(a[k]), "texto invalido")
+                _meta_moneda(a["moneda"])
+                for k in ("gasto", "impresiones", "tamano_audiencia"):
+                    _meta_rango(a[k])
+                _meta_exigir(isinstance(a["plataformas"], list) and all(x in ("Facebook", "Instagram", "Messenger", "Audience Network", "Threads", "WhatsApp") for x in a["plataformas"]), "plataformas invalidas")
+                _meta_exigir(a["formato"] in ("video", "imagen", "texto", "desconocido"), "formato invalido")
+                _meta_exigir(isinstance(a["regiones"], list) and all(_texto(x) for x in a["regiones"]), "regiones invalidas")
+                _meta_pares(a["entrega"])
+                _meta_numero(a["grupo"], entero=True)
+            orden = sorted(anuncios, key=lambda a: (a["desde"] or "", a["id"]), reverse=True)
+            _meta_exigir(orden == anuncios, "anuncios sin ordenar")
+            _meta_exigir(not datos["anuncios"]["completo"] or not any(a["grupo"] for a in anuncios), "grupos pendientes en lista completa")
+        _meta_seccion(datos["informacion"])
+        info = datos["informacion"]["datos"]
+        if info is not None:
+            _meta_objeto(info, "transparencia totales pagadores")
+            _meta_pares(info["transparencia"])
+            _meta_totales(info["totales"])
+            _meta_exigir(isinstance(info["pagadores"], list), "pagadores invalidos")
+            for p in info["pagadores"]:
+                _meta_objeto(p, "nombre importe moneda desde hasta geografia")
+                _meta_totales([dict(etiqueta=p["nombre"], **{k: v for k, v in p.items() if k != "nombre"})])
+        _meta_objeto(datos["audiencia"], "7 30 90")
+        for dias, s in datos["audiencia"].items():
+            _meta_seccion(s)
+            if s["datos"] is not None:
+                _meta_objeto(s["datos"], "importe moneda anuncios selecciones")
+                _meta_exigir(s["periodo"] is not None and (_fecha(s["periodo"]["hasta"]) - _fecha(s["periodo"]["desde"])).days + 1 == int(dias), "ventana audiencia incorrecta")
+                _meta_numero(s["datos"]["importe"])
+                _meta_moneda(s["datos"]["moneda"])
+                _meta_numero(s["datos"]["anuncios"], entero=True)
+                _meta_pares(s["datos"]["selecciones"])
+    except (ValueError, TypeError, KeyError, AttributeError) as e:
+        return [str(e)], []
+    return [], []
+
+
+def validar_publicidad_meta(datos, config=None, detalles=None):
+    try:
+        _meta_objeto(datos, "esquema desde pais tipo actualizado perfiles reporte")
+        _meta_exigir(datos["esquema"] == 1 and datos["desde"] == "2024-01-01" and datos["pais"] == "MX" and datos["tipo"] == "politica", "ambito del documento invalido")
+        _meta_exigir(datos["actualizado"] is None or _es_iso(datos["actualizado"]), "fecha del indice invalida")
+        _meta_exigir(isinstance(datos["perfiles"], list), "perfiles invalidos")
+        ids = []
+        for p in datos["perfiles"]:
+            _meta_objeto(p, "id roster_id nombre cargo partido ambito pagina ine estado anuncios actualizado totales")
+            _meta_exigir(isinstance(p["id"], str) and RE_ID.fullmatch(p["id"]), "id inseguro")
+            ids.append(p["id"])
+            if config:
+                original = next((x for x in config["personas"] if x["id"] == p["id"]), None)
+                _meta_exigir(original and all(p[k] == original[k] for k in ("roster_id", "nombre", "cargo", "partido", "ambito", "pagina", "ine")), "identidad modificada")
+            _meta_exigir(p["estado"] in ("ok", "parcial", "sin_dato"), "estado de perfil invalido")
+            _meta_numero(p["anuncios"], entero=True)
+            _meta_exigir(p["actualizado"] is None or _es_iso(p["actualizado"]), "fecha perfil invalida")
+            _meta_totales(p["totales"])
+            if p["pagina"] is None:
+                _meta_exigir(p["anuncios"] is None and not p["totales"] and p["estado"] == "sin_dato", "pagina no verificada con cifras")
+        _meta_exigir(ids == sorted(set(ids)), "perfiles repetidos o sin ordenar")
+        if config:
+            _meta_exigir(set(ids) == {p["id"] for p in config["personas"]}, "cobertura del catalogo incompleta")
+        if detalles is not None and config:
+            esperados = {p["id"] for p in config["personas"] if p["pagina"]}
+            _meta_exigir(set(detalles) == esperados, "faltan archivos de anunciantes verificados")
+            for ident, detalle in detalles.items():
+                _meta_exigir(detalle["persona_id"] == ident, "archivo de anunciante incorrecto")
+                errores, _ = validar_perfil_meta(detalle, config)
+                _meta_exigir(not errores, "; ".join(errores))
+            from .publicidad_meta import armar
+            reconstruido, _ = armar(config, {}, detalles, datos["reporte"])
+            _meta_exigir(datos["perfiles"] == reconstruido["perfiles"] and datos["actualizado"] == reconstruido["actualizado"],
+                         "indice y archivos de anunciantes no coinciden")
+        _meta_objeto(datos["reporte"], "1 7 30 90 todo")
+        for periodo, s in datos["reporte"].items():
+            _meta_seccion(s)
+            if s["datos"] is None:
+                continue
+            _meta_objeto(s["datos"], "importe anuncios moneda anunciantes regiones")
+            _meta_exigir(s["periodo"] is not None, "reporte sin periodo")
+            if periodo != "todo":
+                _meta_exigir((_fecha(s["periodo"]["hasta"]) - _fecha(s["periodo"]["desde"])).days + 1 == int(periodo), "ventana reporte incorrecta")
+            _meta_numero(s["datos"]["importe"])
+            _meta_numero(s["datos"]["anuncios"], entero=True)
+            _meta_moneda(s["datos"]["moneda"])
+            _meta_exigir(isinstance(s["datos"]["anunciantes"], list) and isinstance(s["datos"]["regiones"], list), "filas de reporte invalidas")
+            for a in s["datos"]["anunciantes"]:
+                _meta_objeto(a, "pagina_id nombre pagador importe anuncios")
+                _meta_exigir(isinstance(a["pagina_id"], str) and a["pagina_id"].isdigit() and _texto(a["nombre"]), "anunciante invalido")
+                _meta_exigir(a["pagador"] is None or _texto(a["pagador"]), "pagador invalido")
+                _meta_numero(a["importe"], nulo=False)
+                _meta_numero(a["anuncios"], entero=True)
+            for region in s["datos"]["regiones"]:
+                _meta_objeto(region, "nombre importe")
+                _meta_exigir(_texto(region["nombre"]), "region sin nombre")
+                _meta_numero(region["importe"], nulo=False)
+    except (ValueError, TypeError, KeyError, AttributeError) as e:
+        return [str(e)], []
+    return [], []
+
+
 def validar_todo(dir_config="config", dir_datos="data", hoy=None):
     """Valida todo lo que exista. data/ ausente es aviso, no error.
 
@@ -3762,6 +4276,33 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
             avisos += a
         except (ValueError, OSError) as e:
             errores.append("tiktok: no se pudo leer {} ({})".format(ruta_tiktok, e))
+        if errores:
+            return errores, avisos
+
+    # config/instagram.json tampoco tenia validador hasta el 22 de septiembre
+    # de 2026: lo que fijaba sus reglas eran pruebas. Desde que una cuenta
+    # puede llevar `ambito` en vez de `zona`, una fila con los dos -- o con
+    # ninguno -- se estamparia `estatal` en silencio, y eso falla aqui.
+    ruta_instagram = os.path.join(dir_config, "instagram.json")
+    if os.path.exists(ruta_instagram):
+        try:
+            e, a = validar_instagram_config(_leer(ruta_instagram))
+            errores += e
+            avisos += a
+        except (ValueError, OSError) as e:
+            errores.append("instagram: no se pudo leer {} ({})".format(ruta_instagram, e))
+        if errores:
+            return errores, avisos
+
+    # Un medio, una red (22 de septiembre de 2026): la misma marca activa en
+    # Instagram y en TikTok repetiria cada nota en el muro. Ver validar_marcas.
+    if os.path.exists(ruta_instagram) and os.path.exists(ruta_tiktok):
+        try:
+            e, a = validar_marcas(_leer(ruta_instagram), _leer(ruta_tiktok))
+            errores += e
+            avisos += a
+        except (ValueError, OSError):
+            pass  # cada archivo ya reporto su error de lectura arriba
         if errores:
             return errores, avisos
 
@@ -3846,7 +4387,29 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
     # siempre estan: conversacion pide llave de YouTube, indicadores se salta
     # solo si lo que hay tiene menos de una semana. Se validan si estan, y no
     # es error que falten.
+    cfg_meta = None
+    detalles_meta = {}
+    ruta_meta = os.path.join(dir_config, "publicidad-meta.json")
+    if os.path.exists(ruta_meta):
+        try:
+            cfg_meta = _leer(ruta_meta)
+            ruta_ine = os.path.join(dir_datos, "gasto-electoral.json")
+            e, a = validar_publicidad_meta_config(cfg_meta, _leer(os.path.join(dir_config, "roster.json")),
+                                                  _leer(ruta_ine) if os.path.exists(ruta_ine) else None)
+            errores += e
+            avisos += a
+            if not e:
+                for persona in cfg_meta["personas"]:
+                    ruta_perfil = os.path.join(dir_datos, "pauta-meta", persona["id"] + ".json")
+                    if os.path.exists(ruta_perfil):
+                        detalle = _leer(ruta_perfil)
+                        detalles_meta[persona["id"]] = detalle
+                        errores += validar_perfil_meta(detalle, cfg_meta)[0]
+        except (OSError, ValueError) as ex:
+            errores.append("publicidad-meta: " + str(ex))
     opcionales = {
+        "pauta-meta": (os.path.join(dir_datos, "pauta-meta.json"),
+                        lambda d: validar_publicidad_meta(d, cfg_meta, detalles_meta)),
         "comunicados": (os.path.join(dir_datos, "comunicados.json"), validar_comunicados),
         "conversacion": (os.path.join(dir_datos, "conversacion.json"), validar_conversacion),
         "indicadores": (os.path.join(dir_datos, "indicadores.json"), validar_indicadores),

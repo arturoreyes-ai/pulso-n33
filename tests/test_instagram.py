@@ -363,10 +363,89 @@ class TestCatalogoCuentas(unittest.TestCase):
                 self.assertIn(c.get("idioma"), ("es", "en"))
                 self.assertTrue((c.get("razon") or "").strip())
 
+    def test_los_dos_diarios_se_zonifican_por_el_pie(self):
+        # 22 de septiembre de 2026: los 15 destacados de Mexico eran de La
+        # Cronica y El Mexicano, estampados `nacional` -- "Aguilas de
+        # Mexicali", "Maxima ... en Tijuana", Corea del Norte. Con `ambito`
+        # cada post va a donde dice.
+        por_id = {c["id"]: c for c in self.cfg["cuentas"]}
+        for cid in ("lacronica_ig", "elmexicano_ig"):
+            with self.subTest(cuenta=cid):
+                self.assertEqual(por_id[cid].get("ambito"), "nacional")
+                self.assertNotIn("zona", por_id[cid])
+        casos = [("Águilas de Mexicali consiguió su primera victoria", "Mexicali"),
+                 ("Corea del Norte lanzó dos misiles balísticos", "internacional"),
+                 ("Sheinbaum presenta su plan de vivienda", "nacional")]
+        for pie, zona in casos:
+            with self.subTest(pie=pie):
+                p = instagram._limpiar_post(dict(POSTS_RICOS[0], caption=pie),
+                                            por_id["lacronica_ig"])
+                self.assertEqual(p["zona"], zona)
+
+    def test_el_presupuesto_alcanza_para_todas_las_cuentas_activas(self):
+        # El reparto es `resultados // cuentas` y la pasada de comentarios se
+        # recorta a `reparto - posts` EN SILENCIO: las cuentas siguen en `ok`.
+        # Esta prueba es lo que convierte ese recorte en un error.
+        with open(os.path.join("config", "apify.json"), encoding="utf-8") as fh:
+            tope = json.load(fh)["presupuesto"]["resultados_por_corrida"]
+        activas = [c for c in self.cfg["cuentas"] if c.get("activo") and c.get("verificado")]
+        c = self.cfg["cosecha"]
+        necesita = c["posts_por_cuenta"] * (1 + c["comentarios_por_post"])
+        self.assertGreaterEqual(tope // len(activas), necesita,
+                                "sube resultados_por_corrida en config/apify.json")
+
+    def test_una_marca_una_red(self):
+        from pulso.validador import validar_marcas
+        ig = {"cuentas": [{"id": "dw_ig", "marca": "dw", "seguidores": 2100000,
+                           "activo": True}]}
+        tk = {"perfiles": [{"id": "tk_dw", "marca": "dw", "seguidores": 3100000,
+                            "activo": True}]}
+        e, _ = validar_marcas(ig, tk)
+        self.assertTrue(any("una marca, una red" in x for x in e), e)
+        # Una sola activa vale, y si no es la de mas seguidores, avisa.
+        e, a = validar_marcas(ig, {"perfiles": [dict(tk["perfiles"][0], activo=False)]})
+        self.assertEqual(e, [])
+        self.assertTrue(any("tiene mas seguidores en tiktok" in x for x in a), a)
+        # Y los configs reales cumplen.
+        with open(os.path.join("config", "tiktok.json"), encoding="utf-8") as fh:
+            e, _ = validar_marcas(self.cfg, json.load(fh))
+        self.assertEqual(e, [])
+
+    def test_sin_datos_no_es_no_existe(self):
+        # 22 de septiembre de 2026: @n.mas salio "no_existe" minutos despues de
+        # devolver sus posts. `no_items` es Instagram sin datos para un
+        # visitante sin sesion, y el handle sale de la URL pedida.
+        items = [{"error": "no_items", "errorDescription": "Empty or private data",
+                  "inputUrl": "https://www.instagram.com/n.mas/"},
+                 {"error": "not_found", "url": "https://www.instagram.com/nadie/"}]
+        with patch.object(instagram, "correr_actor", return_value=items):
+            salida = {s["handle"]: s["veredicto"]
+                      for s in instagram.sondear(["@n.mas", "@nadie"], tok="t")}
+        self.assertEqual(salida, {"@n.mas": "sin_datos", "@nadie": "no_existe"})
+
+    def test_el_config_real_valida(self):
+        # validar_instagram_config existe desde el 22 de septiembre de 2026,
+        # cuando una cuenta pudo llevar `ambito` en vez de `zona`.
+        from pulso.validador import validar_instagram_config
+        self.assertEqual(validar_instagram_config(self.cfg)[0], [])
+
+    def test_zona_o_ambito_nunca_los_dos_ni_ninguno(self):
+        from pulso.validador import validar_instagram_config
+        base = {"nota": "x", "cosecha": {"ventana_horas": 24}}
+        fila = {"id": "x_ig", "handle": "@x", "idioma": "es", "activo": True,
+                "verificado": True, "razon": "Sondeada"}
+        for extra, bueno in [({"zona": "Tijuana"}, True), ({"ambito": "internacional"}, True),
+                             ({"zona": "Tijuana", "ambito": "internacional"}, False),
+                             ({}, False), ({"zona": "internacional"}, False),
+                             ({"ambito": "mundial"}, False)]:
+            with self.subTest(extra=extra):
+                e, _ = validar_instagram_config(dict(base, cuentas=[dict(fila, **extra)]))
+                self.assertEqual(e == [], bueno, e)
+
     def test_la_ventana_de_cosecha_es_de_horas(self):
-        # No hay validar_instagram_config: esta prueba es lo que fija que la
-        # ventana del config sea de horas (desde el 10 de septiembre de 2026)
-        # y quepa en el tope que el validador exige a la salida.
+        # Hasta el 22 de septiembre de 2026 no hubo validar_instagram_config y
+        # esta prueba era lo que fijaba que la ventana del config fuera de
+        # horas (desde el 10 de septiembre) y cupiera en el tope del validador.
         vh = self.cfg["cosecha"].get("ventana_horas")
         self.assertIsInstance(vh, int)
         self.assertNotIsInstance(vh, bool)
@@ -401,10 +480,16 @@ class TestCatalogoCuentas(unittest.TestCase):
         # sin correccion: a diferencia de TikTok, Instagram no consulta el
         # gacetero. Una zona mal escrita aqui no falla hasta que el validador
         # mira data/redes.json, cuatro horas despues y sin nadie viendo.
-        from pulso.validador import ZONAS_DE_CONTEO
+        # Una cuenta con `ambito` no tiene sede que estampar: su zona sale del
+        # pie de cada post (22 de septiembre de 2026).
+        from pulso.validador import AMBITOS_REDES, ZONAS_DE_CONTEO
         for c in self.cfg["cuentas"]:
             with self.subTest(cuenta=c["id"]):
-                self.assertIn(c.get("zona"), ZONAS_DE_CONTEO)
+                if "ambito" in c:
+                    self.assertIn(c["ambito"], AMBITOS_REDES)
+                    self.assertNotIn("zona", c)
+                else:
+                    self.assertIn(c.get("zona"), ZONAS_DE_CONTEO)
 
     def test_el_medio_declarado_existe_en_el_catalogo_de_medios(self):
         # `medio` es documental -- ningun codigo lo lee -- pero un id
@@ -545,6 +630,77 @@ class TestPublicaciones(BaseCache):
         self.assertEqual(list(vivas), ["https://y/"])
         self.assertEqual(list(instagram.leer_publicaciones(self.cache)), ["https://y/"])
 
+    # Una cuenta internacional: sin sede que estampar (22 de septiembre de 2026).
+    MUNDO = {"id": "bbcmundo_ig", "handle": "@bbcmundo", "ambito": "internacional",
+             "idioma": "es", "activo": True, "verificado": True}
+
+    def test_una_cuenta_con_ambito_zonifica_por_el_pie(self):
+        casos = [
+            ("Rusia lanza drones contra Ucrania\n\nMas en el enlace de la bio",
+             ("internacional", "extranjero")),
+            ("Un nuevo estudio sobre el sueno\n\n#ciencia", ("internacional", "nacional")),
+            ("Sheinbaum presenta su plan en Oaxaca", ("nacional", "fuera")),
+            # La primera linea manda; el resto del pie solo desempata.
+            ("Largas filas en la garita\n\nAsi amanecio Tijuana", ("Tijuana", "zona")),
+            ("Cierran la garita en Tijuana\n\nY en Ucrania, otra noche de ataques",
+             ("Tijuana", "zona")),
+        ]
+        for pie, esperado in casos:
+            with self.subTest(pie=pie):
+                p = instagram._limpiar_post(dict(POSTS_RICOS[0], caption=pie), self.MUNDO)
+                self.assertEqual((p["zona"], p["alcance"]), esperado)
+        # El titular publicado sigue siendo la primera linea, nunca el pie.
+        p = instagram._limpiar_post(dict(POSTS_RICOS[0], caption=casos[0][0]), self.MUNDO)
+        self.assertEqual(p["titulo"], "Rusia lanza drones contra Ucrania")
+
+    def test_una_cuenta_con_zona_sigue_estampando_y_sin_alcance(self):
+        pie = "Rusia lanza drones contra Ucrania"
+        p = instagram._limpiar_post(dict(POSTS_RICOS[0], caption=pie), CUENTA)
+        self.assertEqual(p["zona"], "Tijuana")
+        self.assertNotIn("alcance", p)
+
+    def test_los_comentarios_heredan_la_zona_de_su_post(self):
+        posts = [dict(POSTS_RICOS[0], url="https://www.instagram.com/p/AAA/",
+                      caption="Rusia lanza drones contra Ucrania"),
+                 dict(POSTS_RICOS[0], url="https://www.instagram.com/p/BBB/",
+                      caption="Cierran la garita en Tijuana")]
+        coms = [dict(COMENTARIOS[0], postUrl="https://www.instagram.com/p/AAA/"),
+                dict(COMENTARIOS[1], postUrl="https://www.instagram.com/p/BBB/")]
+        with patch.object(instagram, "correr_actor", _Actor(posts=posts, comentarios=coms)):
+            nuevos, salud, _ = instagram.cosechar([self.MUNDO], AHORA, tok="t",
+                                                  cache=self.cache)
+        zonas = {c["post"]: c["zona_cuenta"] for c in nuevos}
+        self.assertEqual(zonas, {"https://www.instagram.com/p/AAA/": "internacional",
+                                 "https://www.instagram.com/p/BBB/": "Tijuana"})
+        self.assertEqual(salud[0]["fuera"], 0)
+
+    def test_el_residuo_de_una_cuenta_regional_es_corredor_sin_precisar(self):
+        # Un medio del corredor que no nombra lugar habla, casi siempre, de
+        # aqui: Corredor con alcance nacional, nunca una pagina de ciudad. Si
+        # nombra a Mexico, se queda en Mexico (pulso/redes.py::residuo_de_medio).
+        regional = dict(self.MUNDO, ambito="regional")
+        p = instagram._limpiar_post(dict(POSTS_RICOS[0], caption="Sindicatura fiscaliza a jireh"),
+                                    regional)
+        self.assertEqual((p["zona"], p["alcance"]), ("estatal", "nacional"))
+        p = instagram._limpiar_post(dict(POSTS_RICOS[0], caption="Sheinbaum presenta su plan"),
+                                    regional)
+        self.assertEqual((p["zona"], p["alcance"]), ("nacional", "nacional"))
+
+    def test_una_cuenta_regional_con_ambito_no_paga_lo_que_tira(self):
+        regional = dict(self.MUNDO, ambito="regional")
+        posts = [dict(POSTS_RICOS[0], url="https://www.instagram.com/p/AAA/",
+                      caption="Balacera en Hermosillo, Sonora"),
+                 dict(POSTS_RICOS[0], url="https://www.instagram.com/p/BBB/",
+                      caption="Cierran la garita en Tijuana")]
+        actor = _Actor(posts=posts, comentarios=[])
+        with patch.object(instagram, "correr_actor", actor):
+            _, salud, _ = instagram.cosechar([regional], AHORA, tok="t", cache=self.cache)
+        pedidas = [e["directUrls"] for e in actor.llamadas if e["resultsType"] == "comments"]
+        self.assertEqual(pedidas, [["https://www.instagram.com/p/BBB/"]])
+        self.assertEqual(salud[0]["fuera"], 1)
+        self.assertNotIn("https://www.instagram.com/p/AAA/",
+                         instagram.leer_publicaciones(self.cache))
+
     def test_los_registros_no_son_cosecha(self):
         # purgar() no los borra, leer_cache() no los lee como comentarios y
         # clasificar_cache() no intenta etiquetarlos.
@@ -573,6 +729,22 @@ class TestDestacados(BaseCache):
 
     def _pubs(self, cuenta=CUENTA, posts=POSTS_RICOS):
         return {p["url"]: p for p in (instagram._limpiar_post(x, cuenta) for x in posts)}
+
+    def test_una_cuenta_internacional_llega_a_mundo_y_valida(self):
+        # El recorrido entero de una cuenta con `ambito`: el post zonificado
+        # por su pie cruza al destacado con su alcance, entra a su propio
+        # corte de zona, y el documento pasa el validador.
+        mundo = dict(TestPublicaciones.MUNDO, nombre="BBC News Mundo")
+        posts = [dict(POSTS_RICOS[0], url="https://www.instagram.com/p/UCR/",
+                      caption="Rusia lanza drones contra Ucrania")]
+        panel = self._panel(self._pubs(mundo, posts), cuentas=[CUENTA, mundo])
+        d = panel["destacados"]
+        self.assertEqual([(x["zona"], x["alcance"]) for x in d],
+                         [("internacional", "extranjero")])
+        self.assertEqual(validar_redes(panel)[0], [])
+        # Y la cuenta estampada sigue sin alcance en el mismo documento.
+        panel = self._panel(self._pubs(), cuentas=[CUENTA])
+        self.assertTrue(all("alcance" not in x for x in panel["destacados"]))
 
     def test_la_ventana_deja_fuera_lo_viejo_aunque_tenga_mas_likes(self):
         urls = [d["url"] for d in self._panel(self._pubs())["destacados"]]

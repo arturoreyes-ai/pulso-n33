@@ -9,6 +9,8 @@ import unittest
 
 from pulso import DELEGACIONES_TIJUANA
 from pulso.zonas import DELEGACIONES, alcance, delegaciones_en, es_estatal, fuera_en, zonas_en, FUERA
+from pulso.zonas import (AMBIGUOS, AMBIGUOS_EXTRANJERO, EXTRANJERO, LUGARES, alcance_redes,
+                         extranjero_en, nombra_mexico, prosa_de)
 
 
 class TestGazetero(unittest.TestCase):
@@ -107,6 +109,155 @@ class TestAlcance(unittest.TestCase):
     def test_sin_figura_y_sin_lugar_es_nacional(self):
         alc, zonas = alcance("Sheinbaum presenta su informe", "estatal", tiene_figura=False)
         self.assertEqual((alc, zonas), ("nacional", []))
+
+
+class TestAlcanceRedes(unittest.TestCase):
+    """El quinto cajon, `extranjero`, que solo ven las piezas de redes.
+
+    El caso, del 22 de septiembre de 2026: el gacetero no conocia el
+    extranjero, asi que "Mas de 280 mil ninos en Gaza regresaron a clases", de
+    N+, caia en la cubeta Mexico, indistinguible de una nota nacional.
+    """
+
+    def test_la_prensa_no_cambia(self):
+        # `alcance` zonifica notas.json y no ve el extranjero: si esto se
+        # mueve, cambia la prensa, que no es lo que se decidio.
+        for titulo, esperado in [
+            ("Rusia ataca Ucrania", ("nacional", [])),
+            ("Congreso pone sobre la mesa avances y pendientes de Sonora", ("zona", ["Tijuana"])),
+            ("Rusia advierte que las sanciones complican la paz", ("fuera", [])),
+        ]:
+            with self.subTest(titulo=titulo):
+                self.assertEqual(alcance(titulo, None), esperado)
+
+    def test_el_extranjero_nombrado(self):
+        self.assertEqual(alcance_redes("Mas de 280 mil ninos en Gaza regresaron a clases"),
+                         ("extranjero", []))
+        self.assertEqual(extranjero_en("Rusia ataca Ucrania"), ["ucrania", "rusia"])
+
+    def test_frase_completa_y_no_subcadena(self):
+        # 'iran' esta dentro de 'tirano', 'roma' de 'aroma', 'peru' de 'perulero'.
+        for texto in ("Un tirano con aroma de perulero", "Suben los chiles serranos"):
+            with self.subTest(texto=texto):
+                self.assertEqual(extranjero_en(texto), [])
+
+    def test_lo_que_no_esta_en_la_lista_y_por_que(self):
+        # Cada exclusion con su caso, escrito junto a EXTRANJERO en zonas.py.
+        # Estados Unidos: "cruzar a Estados Unidos" es nota del corredor.
+        # California: esta dentro de "baja california". Papa: fold() hace del
+        # Papa de un conductor el Vaticano. Chile: la salsa. Quito: el verbo.
+        for termino in ("estados unidos", "eeuu", "usa", "eu", "california", "papa", "chile",
+                        "quito", "kenia", "grecia", "libia", "nevada", "jamaica",
+                        "latinoamerica", "san antonio", "colorado"):
+            with self.subTest(termino=termino):
+                self.assertNotIn(termino, EXTRANJERO)
+        self.assertEqual(alcance_redes("Asi esta la fila para cruzar a Estados Unidos"),
+                         ("nacional", []))
+        self.assertEqual(alcance_redes("Su Papa regresa a pagar la gasolina en Puebla"),
+                         ("fuera", []))
+
+    def test_homonimos_medidos_en_el_archivo(self):
+        # Salieron de medir la lista sobre los 6,699 titulares de notas.json.
+        for texto in ("Proponen ajustar la tarifa de verano de Bahia de los Angeles",
+                      "Kenia Os presume fotografia", "Cruz Azul le quito el invicto al America",
+                      "Iran a audiencia por fusion en octubre",
+                      "Derma Center ya esta disponible en Farmacias Roma",
+                      "Lluvias complican vuelos de Air France; AICM anuncia apoyo",
+                      "Asi se celebro el Festival del Chile en Nogada",
+                      "te veo el lunes en Argentina 1100 colonia Alamitos",
+                      "Vive en la calle Venezuela"):
+            with self.subTest(texto=texto):
+                self.assertEqual(extranjero_en(texto), [])
+        # El pais de verdad sigue contando, y el marcador de un partido tambien.
+        self.assertEqual(extranjero_en("Iran advierte a Corea del Sur"), ["iran", "corea del sur"])
+        self.assertEqual(extranjero_en("Argentina 2, Mexico 1"), ["argentina"])
+
+    def test_nuevo_mexico_es_extranjero_y_mexico_no(self):
+        self.assertEqual(alcance_redes("Incendio en Nuevo Mexico"), ("extranjero", []))
+        self.assertTrue(nombra_mexico("Mexico vence a Argentina"))
+        self.assertFalse(nombra_mexico("Incendio en Nuevo Mexico"))
+        # Nombrar Mexico bloquea el extranjero y NO crea `fuera`.
+        self.assertEqual(alcance_redes("Mexico vence a Argentina en el Mundial"), ("nacional", []))
+        self.assertEqual(alcance_redes("Detienen a mexicanos en Texas"), ("nacional", []))
+
+    def test_precedencia(self):
+        casos = [
+            # 1. El corredor, nombrado de verdad, gana.
+            ("Deportados desde Texas llegan a Tijuana", ("zona", ["Tijuana"])),
+            ("Choque en La Presa Este; el conductor era de Texas", ("zona", ["Tijuana"])),
+            # 2. Baja California a secas gana sobre el extranjero.
+            ("Gobierno del Estado firma convenio con Japon", ("estatal", ["estatal"])),
+            # 3. Un lugar mexicano de fuera gana sobre el extranjero.
+            ("Sheinbaum en Oaxaca recibe al presidente de Francia", ("fuera", [])),
+            # 5. Lo debil cede: un homonimo...
+            ("Congreso pone sobre la mesa avances y pendientes de Sonora", ("fuera", [])),
+            ("Rusia advierte que las sanciones complican la paz", ("extranjero", [])),
+            ("En El Rosario, Sinaloa, localizan cinco recipientes", ("fuera", [])),
+            # ...y una etiqueta, cuando el texto nombra algo de fuera.
+            ("31 Millones de Soldados vs EEUU!! Iran Prepara Su Mayor Fuerza #tijuana",
+             ("extranjero", [])),
+            ("Golpe a los carteles de Jalisco y Sinaloa #mexicali", ("fuera", [])),
+            # Sin nada de fuera en el texto, lo debil sigue contando.
+            ("Balacera en la colonia #tijuana", ("zona", ["Tijuana"])),
+            ("Choque en La Presa", ("zona", ["Tijuana"])),
+            # Una etiqueta del extranjero cuenta cuando el texto no nombra nada.
+            ("#noticias #peru", ("extranjero", [])),
+        ]
+        for texto, esperado in casos:
+            with self.subTest(texto=texto):
+                self.assertEqual(alcance_redes(texto), esperado)
+
+    def test_la_prosa_es_lo_que_la_pieza_dice(self):
+        # Solo la COLA de etiquetas es debil; las del principio son antetitulo
+        # (CNR: "#ROSARITO | ...") y la que sigue a una preposicion es frase.
+        self.assertEqual(prosa_de("Cierran la garita #tijuana #noticias").split(),
+                         ["Cierran", "la", "garita"])
+        self.assertEqual(prosa_de("Migrantes de Haití llegan a #Tijuana #noticias").split(),
+                         ["Migrantes", "de", "Haití", "llegan", "a", "#Tijuana"])
+        self.assertEqual(prosa_de("#TIJUANA | Deportan a hondureño"),
+                         "#TIJUANA | Deportan a hondureño")
+        # Solo etiquetas: son lo unico que la pieza dice, y se quedan.
+        self.assertEqual(prosa_de("#noticias #peru"), "#noticias #peru")
+        # La firma del canal, cortada por texto plegado, solo al final.
+        self.assertEqual(prosa_de("Choque en Los Ángeles | Telemundo San Diego",
+                                  ["| TELEMUNDO SAN DIEGO"]).strip(),
+                         "Choque en Los Ángeles")
+
+    def test_lo_que_la_revision_encontro(self):
+        # Casos de la revision de diseno del 22 de septiembre de 2026, cada uno
+        # un error de la primera version.
+        casos = [
+            # La etiqueta usada como palabra y el antetitulo son prosa.
+            ("Migrantes de Haití llegan a #Tijuana", ("zona", ["Tijuana"])),
+            ("#TIJUANA | Deportan a hondureño desde Texas", ("zona", ["Tijuana"])),
+            # LUGARES empata por subcadena, asi que lo debil se borra igual.
+            ("Hallan tesoros escondidos en Egipto", ("extranjero", [])),
+            # fold() hacia de la canada Canada.
+            ("Choque en la cañada del arroyo", ("nacional", [])),
+            # El verbo, en cualquier lugar de la frase.
+            ("Los alumnos irán a clases el lunes", ("nacional", [])),
+            # Una delegacion de Tijuana no cede ante Sonora, solo ante el extranjero.
+            ("Balacera en La Mesa; el detenido llegó de Sonora", ("zona", ["Tijuana"])),
+            ("Se desborda la presa en Bangladesh, dice Egipto", ("extranjero", [])),
+            # Mexico sin escribir "Mexico".
+            ("El gobierno de Sheinbaum frena el alza pese a la guerra en Medio Oriente",
+             ("nacional", [])),
+            ("Harfuch informa decomiso en AICM; llegó de Colombia", ("nacional", [])),
+        ]
+        for texto, esperado in casos:
+            with self.subTest(texto=texto):
+                self.assertEqual(alcance_redes(texto), esperado)
+
+    def test_los_debiles_son_del_gacetero_y_el_extranjero_no(self):
+        # Un AMBIGUO que no esta en el gacetero no cede nada: es peso muerto.
+        del_gacetero = {t for ts in LUGARES.values() for t in ts} | set(FUERA)
+        for termino in AMBIGUOS + AMBIGUOS_EXTRANJERO:
+            with self.subTest(termino=termino):
+                self.assertIn(termino, del_gacetero)
+        # Y ningun lugar del extranjero es a la vez del gacetero.
+        for termino in EXTRANJERO:
+            with self.subTest(termino=termino):
+                self.assertNotIn(termino, del_gacetero)
 
 
 class TestDelegaciones(unittest.TestCase):

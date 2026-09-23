@@ -3,7 +3,7 @@
  "aviso_formatos": "YouTube publica dos listas automaticas por canal: UUSH (solo Shorts) y UULF (solo videos largos). Se sondearon las dos y devuelven conjuntos DISJUNTOS, asi que el prefijo se respeta. Cada entrada trae su propio enlace, /shorts/ o /watch, y de ahi sale el formato: nunca se adivina por duracion, que el feed no trae. El campo 'formatos' de cada fila dice cual de las dos listas se lee, y esta ahi para apagar un formato que el canal publica pero no sirve, no para apagar uno que no publica.",
  "aviso_comentarios": "Este modulo NO cosecha comentarios. El feed publico no los trae y traerlos costaria un actor de Apify (~24 USD/mes con estas 16 filas, medido el 18 de septiembre de 2026). data/youtube.json sale con 'cosecha_comentarios': false, que es lo que impide leer sus ceros como 'nadie comento'.",
  "cosecha": {
-  "nota": "El feed devuelve hasta 15 entradas por lista y no se paga por peticion, asi que estos topes son lo que da la fuente, no un presupuesto. La ventana de 24 horas se mide sobre 'publicado', igual que Instagram y TikTok. Con 16 canales activos por dos listas son 32 peticiones HTTP por corrida, sin llave y sin cuota.",
+  "nota": "El feed devuelve hasta 15 entradas por lista y no se paga por peticion, asi que estos topes son lo que da la fuente, no un presupuesto. La ventana de 24 horas se mide sobre 'publicado', igual que Instagram y TikTok. Con 16 canales activos por dos listas eran 32 peticiones HTTP por corrida, sin llave y sin cuota; con los seis del mundo del 22 de septiembre de 2026 son 22 canales y 43 peticiones (El Vigia lee una sola lista).",
   "shorts_por_canal": 15,
   "videos_por_canal": 15,
   "ventana_horas": 24
@@ -125,10 +125,11 @@
    "canal": "UCpov05QMApjt0BeaMxE1XmQ",
    "formatos": ["short", "video"],
    "ambito": "internacional",
+   "sufijos_titulo": ["| TELEMUNDO SAN DIEGO"],
    "idioma": "es",
    "activo": true,
    "verificado": "2026-09-18",
-   "nota": "Sondeo: 15 Shorts y 15 videos en 7 dias, y los videos con las vistas mas altas del corredor (115, 304, 112 contra medianas de un digito en los demas). Ambito internacional, no nacional: sus piezas de San Diego resuelven a la zona del producto de todos modos porque San Diego esta en el gacetero, pero rotular 'nacional' las de Estados Unidos afirmaria nacional MEXICANO, que es falso. idioma 'es' y no 'en': es la fila donde el instinto se equivoca, porque publica en espanol desde el lado de San Diego."
+   "nota": "Sondeo: 15 Shorts y 15 videos en 7 dias, y los videos con las vistas mas altas del corredor (115, 304, 112 contra medianas de un digito en los demas). Ambito internacional, no nacional: sus piezas de San Diego resuelven a la zona del producto de todos modos porque San Diego esta en el gacetero, pero rotular 'nacional' las de Estados Unidos afirmaria nacional MEXICANO, que es falso. idioma 'es' y no 'en': es la fila donde el instinto se equivoca, porque publica en espanol desde el lado de San Diego. `sufijos_titulo` desde el 22 de septiembre de 2026: 17 de sus 43 titulos en cache terminan en «| TELEMUNDO SAN DIEGO», y esa firma le ganaba a todo, incluido «Tres muertos tras caida del helicoptero ... en Los Angeles», que iba al muro de San Diego. La firma queda como evidencia DEBIL: cuenta mientras el texto no nombre otro lugar. Quitarla sin mas fue la primera version y era peor: casi todo lo demas que firma es de San Diego, en barrios que el gacetero no conoce (Pacific Beach, City Heights, un tribunal del condado), y se habria ido a Mundo. Sobre el feed de ese dia no cambia ninguna pieza; en cache, el helicoptero pasa a Mundo."
   },
   {
    "id": "yt_canal33",
@@ -184,6 +185,82 @@
    "activo": true,
    "verificado": "2026-09-18",
    "nota": "Pedido por el cliente el 18 de septiembre de 2026. El mas flojo de los cinco: 4% de zona (1 Tijuana de 23), 20 'nacional', 2 'fuera', y mediana de 42 vistas -- por debajo de la del corredor, asi que ordenara al fondo de la cubeta Mexico. 10 Shorts y 0 videos en 24 horas. Se deja activo porque el cliente lo pidio y porque un canal de bajo trafico no estorba a nadie estando ordenado por vistas."
+  },
+  {
+   "id": "yt_bbcmundo",
+   "nombre": "BBC News Mundo",
+   "canal": "UCUBIrDsIVzRpKsClMlSlTpQ",
+   "formatos": ["short", "video"],
+   "ambito": "internacional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-22",
+   "nota": "Sondeado el 22 de septiembre de 2026 con `youtube --probar --canal`: de 10 piezas (5 Shorts y 5 videos), 5 nombran el extranjero y 5 no nombran lugar; ninguna de Mexico ni del corredor. Mediana de 33,765 vistas, la mas alta del catalogo. Primera fila del mundo pedida para la cubeta Mundo."
+  },
+  {
+   "id": "yt_cnnee",
+   "nombre": "CNN en Español",
+   "canal": "UC_lEiu6917IJz03TnntWUaQ",
+   "formatos": ["short", "video"],
+   "ambito": "internacional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-22",
+   "nota": "Sondeado el 22 de septiembre de 2026: de 10 piezas, 5 nombran el extranjero y 5 no nombran lugar. Mediana de 7,645 vistas. Cubre mucho Estados Unidos, y 'EE.UU.' no es extranjero en el gacetero a proposito (ver EXTRANJERO en pulso/zonas.py), asi que 'Agente de ICE dispara a un repartidor venezolano en Austin' queda sin lugar, en Mundo por la edicion y no verificado."
+  },
+  {
+   "id": "yt_dwespanol",
+   "nombre": "DW Español",
+   "canal": "UCT4Jg8h03dD0iN3Pb5L0PMA",
+   "formatos": ["short", "video"],
+   "ambito": "internacional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-22",
+   "nota": "Sondeado el 22 de septiembre de 2026: de 10 piezas, 7 nombran el extranjero y 3 no nombran lugar. Mediana de 6,544 vistas."
+  },
+  {
+   "id": "yt_france24es",
+   "nombre": "FRANCE 24 Español",
+   "canal": "UCUdOoVWuWmgo1wByzcsyKDQ",
+   "formatos": ["short", "video"],
+   "ambito": "internacional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-22",
+   "nota": "Sondeado el 22 de septiembre de 2026: de 10 piezas, 6 nombran el extranjero y 4 no nombran lugar. Mediana de 1,193 vistas. El primer sondeo dio 10 de 10 porque 'FRANCE 24' en el titulo empataba 'france': el nombre del canal quedo en _NO_ES_EXTRANJERO."
+  },
+  {
+   "id": "yt_euronewses",
+   "nombre": "euronews en español",
+   "canal": "UCyoGb3SMlTlB8CLGVH4c8Rw",
+   "formatos": ["short", "video"],
+   "ambito": "internacional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-22",
+   "nota": "Sondeado el 22 de septiembre de 2026: de 10 piezas, 9 nombran el extranjero y 1 no nombra lugar, pero con mediana de 26 vistas. Ordenado por vistas va al fondo de Mundo; entra por la vuelta garantizada por cuenta, que es la regla de variedad del cliente del 17 de septiembre."
+  },
+  {
+   "id": "yt_elpais",
+   "nombre": "EL PAÍS",
+   "canal": "UCnsvJeZO4RigQ898WdDNoBw",
+   "formatos": ["short", "video"],
+   "ambito": "internacional",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-22",
+   "nota": "Sondeado el 22 de septiembre de 2026: de 10 piezas, las 10 nombran el extranjero. Mediana de 390 vistas. Es el de Madrid: sus piezas de la Asamblea de la ONU y de America Latina, no las de Mexico, que El Pais publica en otra edicion."
+  },
+  {
+   "id": "yt_ntn24",
+   "nombre": "NTN24",
+   "canal": "UCEJs1fTF3KszRJGxJY14VrA",
+   "formatos": ["short", "video"],
+   "ambito": "internacional",
+   "idioma": "es",
+   "activo": false,
+   "nota": "Sondeado el 22 de septiembre de 2026 y NO encendido: de 10 piezas, las 10 nombran el extranjero y la mediana es alta (6,809 vistas), pero los titulares llevan el adjetivo de la redaccion ('la dictadora Delcy Rodriguez', 'LAS DOS CARAS DE UNA OPRESORA'). El producto publica titular, fuente y liga, y un titular asi es opinion con cara de nota. Encenderlo es decision del cliente."
   },
   {
    "id": "yt_televisatij",

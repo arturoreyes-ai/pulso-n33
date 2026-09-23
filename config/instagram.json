@@ -1,5 +1,5 @@
 {
- "nota": "Cuentas públicas de Instagram de las que se cosechan comentarios, vía Apify y sin sesión. Una cuenta corre solo si tiene `activo` Y `verificado` en true. Los handles de abajo se sondearon de verdad con `python -m pulso redes --sondear` —diez el 8 de septiembre de 2026, tres más el 10 y catorce más el 15, todas pedidas por el cliente ese día—, y los que no resistieron están en `senuelos` con el número que los delató. Con la tanda del 15 el catálogo deja de ser de Tijuana: cubre Tijuana, Mexicali, Ensenada, Tecate, San Diego y `nacional`, y el único hueco que queda es San Quintín. Cuidado con una asimetría que no se ve desde aquí: a diferencia de TikTok, en Instagram la zona NO sale del gacetero sino de esta fila, y se le estampa a cada comentario y a cada post de la cuenta sin corrección posible. Por eso varias filas llevan escrita la instrucción de a qué zona pasar si su conversación desmiente la bio.",
+ "nota": "Cuentas públicas de Instagram de las que se cosechan comentarios, vía Apify y sin sesión. Una cuenta corre solo si tiene `activo` Y `verificado` en true. Los handles de abajo se sondearon de verdad con `python -m pulso redes --sondear` —diez el 8 de septiembre de 2026, tres más el 10 y catorce más el 15, todas pedidas por el cliente ese día—, y los que no resistieron están en `senuelos` con el número que los delató. Con la tanda del 15 el catálogo deja de ser de Tijuana: cubre Tijuana, Mexicali, Ensenada, Tecate, San Diego y `nacional`, y el único hueco que queda es San Quintín. Cuidado con una asimetría que no se ve desde aquí: a diferencia de TikTok, en Instagram la zona NO sale del gacetero sino de esta fila, y se le estampa a cada comentario y a cada post de la cuenta sin corrección posible. Por eso varias filas llevan escrita la instrucción de a qué zona pasar si su conversación desmiente la bio. La excepción, desde el 22 de septiembre de 2026, son las filas con `ambito` en vez de `zona` —los medios de México y del mundo, y La Crónica y El Mexicano—: ahí cada post se zonifica por su pie. Y un medio se lee en UNA red: `marca` junta su fila de aquí con su perfil de config/tiktok.json, y solo la de más seguidores queda activa.",
 
  "aviso_verificacion": "No enciendas un handle sin sondearlo. Adivinarlo a partir del nombre del medio falla, y falla en silencio: de los seis handles derivados que traía este archivo, CINCO estaban mal. Tres eran cuentas ocupadas con 0 publicaciones, y una era un portal de Tocantins, Brasil. Ninguno habría dado error al cosechar. Dos de los handles buenos (@zeta.tijuana, @afntijuana2) no se adivinan de ninguna forma razonable: salieron del sitio web del propio medio.",
 
@@ -294,22 +294,143 @@
    "handle": "@mx.elmexicano",
    "nombre": "El Mexicano",
    "medio": null,
-   "zona": "nacional",
+   "ambito": "nacional",
    "idioma": "es",
    "activo": true,
    "verificado": true,
-   "razon": "Sondeada 2026-09-15: 122,390 seguidores, 20,167 posts, bio \u00abEMX | Peri\u00f3dico El Mexicano \u00b7 El Mexicano.mx es un diario comprometido con la sociedad, con sus trabajadores y sobre todo con la verdad\u00bb. Pedida por el cliente el 15 de septiembre de 2026 dentro del grupo \u00abM\u00e9xico\u00bb, y va `nacional` por decisi\u00f3n suya. Lo que el sondeo NO confirma: la bio no nombra regi\u00f3n alguna, y El Mexicano es un diario con ediciones en Baja California. `nacional` solo se ve en la vista de regi\u00f3n y nunca en una p\u00e1gina de zona, as\u00ed que si sus comentarios resultan ser de Tijuana o Ensenada esta zona pasa a `estatal`."
+   "razon": "Sondeada 2026-09-15: 122,390 seguidores, 20,167 posts, bio \u00abEMX | Peri\u00f3dico El Mexicano \u00b7 El Mexicano.mx es un diario comprometido con la sociedad, con sus trabajadores y sobre todo con la verdad\u00bb. Pedida por el cliente el 15 de septiembre de 2026 dentro del grupo \u00abM\u00e9xico\u00bb, y va `nacional` por decisi\u00f3n suya. Lo que el sondeo NO confirma: la bio no nombra regi\u00f3n alguna, y El Mexicano es un diario con ediciones en Baja California. `nacional` solo se ve en la vista de regi\u00f3n y nunca en una p\u00e1gina de zona, as\u00ed que si sus comentarios resultan ser de Tijuana o Ensenada esta zona pasa a `estatal`. Desde el 22 de septiembre de 2026 lleva `ambito: nacional` y no `zona: nacional`: cada post se zonifica por su pie. El caso: sus destacados ponian en la cubeta Mexico \u00abM\u00e1xima de 26\u00b0C y m\u00ednima de 20\u00b0C para este domingo en Tijuana\u00bb y el anuncio estatal de Julieta Ram\u00edrez en Mexicali. Lo que nombra el corredor va a su ciudad, lo del mundo a Mundo y lo dem\u00e1s sigue en Mexico, que es lo que el cliente pidi\u00f3 el 15 de septiembre."
   },
   {
    "id": "lacronica_ig",
    "handle": "@lacronica",
    "nombre": "La Cr\u00f3nica",
    "medio": null,
-   "zona": "nacional",
+   "ambito": "nacional",
    "idioma": "es",
    "activo": true,
    "verificado": true,
-   "razon": "Sondeada 2026-09-15: 165,688 seguidores, 53,102 posts, bio \u00abMedio informativo multiplataforma l\u00edder en el Noroeste de M\u00e9xico\u00bb. Pedida por el cliente el 15 de septiembre de 2026 dentro del grupo \u00abM\u00e9xico\u00bb, y va `nacional` por decisi\u00f3n suya. Dos cosas que el sondeo s\u00ed dice y conviene tener escritas: la bio es ID\u00c9NTICA, palabra por palabra, a la de @frontera, que este mismo archivo tiene como Tijuana; y \u00abNoroeste de M\u00e9xico\u00bb es el encuadre que le meti\u00f3 Hermosillo y Sonora al tablero por El Imparcial. Si sus comentarios nombran Mexicali, esta zona pasa a `Mexicali`; si nombran Sonora, se apaga."
+   "razon": "Sondeada 2026-09-15: 165,688 seguidores, 53,102 posts, bio \u00abMedio informativo multiplataforma l\u00edder en el Noroeste de M\u00e9xico\u00bb. Pedida por el cliente el 15 de septiembre de 2026 dentro del grupo \u00abM\u00e9xico\u00bb, y va `nacional` por decisi\u00f3n suya. Dos cosas que el sondeo s\u00ed dice y conviene tener escritas: la bio es ID\u00c9NTICA, palabra por palabra, a la de @frontera, que este mismo archivo tiene como Tijuana; y \u00abNoroeste de M\u00e9xico\u00bb es el encuadre que le meti\u00f3 Hermosillo y Sonora al tablero por El Imparcial. Si sus comentarios nombran Mexicali, esta zona pasa a `Mexicali`; si nombran Sonora, se apaga. Desde el 22 de septiembre de 2026 lleva `ambito: nacional` y no `zona: nacional`: cada post se zonifica por su pie. El caso: 9 de los 15 destacados de Mexico eran suyos, entre ellos \u00abSuspenso en funci\u00f3n de box en Mexicali\u00bb, \u00ab\u00c1guilas de Mexicali consigui\u00f3 su primera victoria\u00bb, un ataque con drones contra Mosc\u00fa y dos misiles de Corea del Norte. Lo que nombra el corredor va a su ciudad, lo del mundo a Mundo y lo dem\u00e1s sigue en Mexico, que es lo que el cliente pidi\u00f3 el 15 de septiembre."
+  },
+  {
+   "id": "bbcmundo_ig",
+   "handle": "@bbcmundo",
+   "nombre": "BBC News Mundo",
+   "medio": null,
+   "ambito": "internacional",
+   "marca": "bbcmundo",
+   "seguidores": 4012335,
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-22 con `redes --sondear --muestra 3`: 4,012,335 seguidores, 16,933 posts, bio \u00abAqu\u00ed puedes leer nuestras historias\u00bb. De 3 posts con \u00e1mbito internacional, los 3 nombran el extranjero (China, Cuba en la ONU). Fuente fija de Mundo pedida ese d\u00eda. Una marca, una red: se lee AQU\u00cd. En TikTok el handle @bbcmundo result\u00f3 una cuenta de 17 seguidores sin videos, no la BBC, as\u00ed que la comparaci\u00f3n con su TikTok real queda por hacer; con 4.0M contra los 3.4M que dio el cliente, gana esta de todos modos."
+  },
+  {
+   "id": "cnnee_ig",
+   "handle": "@cnnee",
+   "nombre": "CNN en Español",
+   "medio": null,
+   "ambito": "internacional",
+   "marca": "cnnee",
+   "seguidores": 8935177,
+   "idioma": "es",
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-22 con `redes --sondear --muestra 3`: 8,935,177 seguidores, 31,311 posts, bio \u00abSomos la cuenta de noticias en espa\u00f1ol m\u00e1s seguida del mundo en Instagram\u00bb. De 3 posts con \u00e1mbito internacional, 2 nombran el extranjero y 1 no nombra lugar (\u00abLa polic\u00eda italiana\u2026\u00bb: un gentilicio no es un lugar del gacetero) y va a Mundo por la edici\u00f3n. Fuente fija de Mundo pedida ese d\u00eda. Una marca, una red: se lee AQU\u00cd, 8.9M contra 2.3M en TikTok (tk_cnnee, sondeado el mismo d\u00eda)."
+  },
+  {
+   "id": "dwespanol_ig",
+   "handle": "@dw_espanol",
+   "nombre": "DW Español",
+   "medio": null,
+   "ambito": "internacional",
+   "marca": "dw",
+   "seguidores": 2126710,
+   "idioma": "es",
+   "activo": false,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-22: 2,126,710 seguidores, 16,930 posts, bio \u00abDesde Alemania para el mundo\u00bb. APAGADA por la regla de una marca, una red: DW se lee en TikTok (tk_dwespanol), 3,200,000 contra 2,126,710 aqu\u00ed."
+  },
+  {
+   "id": "france24es_ig",
+   "handle": "@france24_es",
+   "nombre": "FRANCE 24 Español",
+   "medio": null,
+   "ambito": "internacional",
+   "idioma": "es",
+   "activo": false,
+   "verificado": false,
+   "razon": "Candidata del 22 de septiembre de 2026 para la cubeta Mundo, con `ambito`. Sin sondear."
+  },
+  {
+   "id": "elpais_ig",
+   "handle": "@el_pais",
+   "nombre": "EL PAÍS",
+   "medio": null,
+   "ambito": "internacional",
+   "idioma": "es",
+   "activo": false,
+   "verificado": false,
+   "razon": "Candidata del 22 de septiembre de 2026 para la cubeta Mundo, con `ambito`. Sin sondear."
+  },
+  {
+   "id": "efe_ig",
+   "handle": "@efenoticias",
+   "nombre": "EFE Noticias",
+   "medio": null,
+   "ambito": "internacional",
+   "idioma": "es",
+   "activo": false,
+   "verificado": false,
+   "razon": "Candidata del 22 de septiembre de 2026 para la cubeta Mundo, con `ambito`. Sin sondear; en YouTube la agencia no tiene canal con handle que se resuelva."
+  },
+  {
+   "id": "latinus_ig",
+   "handle": "@latinus_us",
+   "nombre": "Latinus",
+   "medio": null,
+   "ambito": "nacional",
+   "marca": "latinus",
+   "idioma": "es",
+   "activo": false,
+   "verificado": false,
+   "razon": "APAGADA. Pedida el 22 de septiembre de 2026 como fuente fija de M\u00e9xico. El sondeo de ese d\u00eda no obtuvo datos de Instagram sin sesi\u00f3n (`sin_datos`: \u00abEmpty or private data\u00bb), as\u00ed que su cifra aqu\u00ed no est\u00e1 medida. Se lee en TikTok (tk_latinus, 23,900,000 seguidores), que coincide con la cifra que dio el cliente. Volver a sondear para dejar escrita la comparaci\u00f3n; si esta resulta mayor, el validador avisa."
+  },
+  {
+   "id": "aztecanoticias_ig",
+   "handle": "@aztecanoticias",
+   "nombre": "Azteca Noticias",
+   "medio": null,
+   "ambito": "nacional",
+   "marca": "azteca",
+   "idioma": "es",
+   "activo": false,
+   "verificado": false,
+   "razon": "APAGADA. Pedida el 22 de septiembre de 2026 como fuente fija de M\u00e9xico. El sondeo de ese d\u00eda no obtuvo datos de Instagram sin sesi\u00f3n (`sin_datos`: \u00abEmpty or private data\u00bb), as\u00ed que su cifra aqu\u00ed no est\u00e1 medida. Se lee en TikTok (tk_aztecanoticias, 18,800,000 seguidores), que coincide con la cifra que dio el cliente. Volver a sondear para dejar escrita la comparaci\u00f3n; si esta resulta mayor, el validador avisa."
+  },
+  {
+   "id": "heraldo_ig",
+   "handle": "@elheraldodemexico",
+   "nombre": "El Heraldo de M\u00e9xico",
+   "medio": null,
+   "ambito": "nacional",
+   "marca": "heraldo",
+   "idioma": "es",
+   "seguidores": 2258649,
+   "activo": false,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-22: 2,258,649 seguidores, 158,476 posts. APAGADA por la regla de una marca, una red: El Heraldo de M\u00e9xico se lee en TikTok (tk_heraldo), 10,600,000 contra 2,258,649 aqu\u00ed. Los 10.5M que dio el cliente eran los de TikTok."
+  },
+  {
+   "id": "nmas_ig",
+   "handle": "@n.mas",
+   "nombre": "N+",
+   "medio": null,
+   "ambito": "nacional",
+   "marca": "nmas",
+   "idioma": "es",
+   "activo": false,
+   "verificado": false,
+   "razon": "APAGADA. Pedida el 22 de septiembre de 2026 como fuente fija de M\u00e9xico. El sondeo de ese d\u00eda no obtuvo datos de Instagram sin sesi\u00f3n (`sin_datos`: \u00abEmpty or private data\u00bb), as\u00ed que su cifra aqu\u00ed no est\u00e1 medida. Se lee en TikTok (tk_nmas, 6,800,000 seguidores), que coincide con la cifra que dio el cliente. Volver a sondear para dejar escrita la comparaci\u00f3n; si esta resulta mayor, el validador avisa."
   },
   {
    "id": "sanquintin_ig",

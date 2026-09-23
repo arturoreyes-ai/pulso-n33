@@ -32,11 +32,15 @@ nacional mexicana.
 en una busqueda. Cuando el pie nombra un lugar del gacetero manda el pie,
 igual en los tres ambitos. Lo unico que cambia es que hacer con el residuo:
 
-    veredicto del gacetero   regional     nacional      internacional
-    una zona del producto    esa zona     esa zona      esa zona
-    Baja California a secas  estatal      estatal       estatal
-    un lugar de fuera        SE TIRA      nacional      nacional
-    ningun lugar             nacional     nacional      internacional
+    veredicto del gacetero   regional        nacional       internacional
+    una zona del producto    esa zona        esa zona       esa zona
+    Baja California a secas  estatal         estatal        estatal
+    un lugar de fuera        SE TIRA         nacional       nacional
+    el extranjero            internacional   internacional  internacional
+    ningun lugar             SE TIRA (*)     nacional       internacional (*)
+
+    (*) Salvo que nombre a Mexico, que es `nacional`. El residuo regional se
+    tira desde el 22 de septiembre de 2026: ver _zona.
 
 De ahi sale el campo `alcance`, que es el veredicto crudo y viaja al lado de
 la zona. Sin el, "nacional" significaria dos cosas a la vez -- "no nombro
@@ -92,10 +96,34 @@ Dos detalles que muerden si no se escriben:
   reproducciones se refrescan en cada corrida (misma asimetria que Instagram).
 - El actor trae `textLanguage`. Se ignora: el idioma sale del config, nunca
   del texto ni de lo que la plataforma adivine.
+
+## Perfiles: medios con sede, desde el 22 de septiembre de 2026
+
+Ese dia se pidieron fuentes fijas para Mexico y Mundo -- DW Espanol, Noticias
+Telemundo, Latinus, Azteca Noticias, El Heraldo de Mexico, N+ --, y una
+busqueda no es una fuente fija. `perfiles` en config/tiktok.json lee la
+cuenta del medio con el mismo actor (`profiles`, lo mas reciente primero, sin
+fijados) y el mismo limpiador: `cuenta` es el id de la fila, `creador` el
+@handle del medio, y la zona sigue saliendo del pie con el `ambito` de la
+fila. Tres diferencias con una busqueda, las tres por costo:
+
+- El perfil NO trae filtro de fecha: el del actor (`oldestPostDateUnified`)
+  se cobra aparte. Asi que la ventana se impone ANTES de pedir comentarios:
+  pagar los comentarios de los videos de la semana pasada, que ninguna
+  pantalla va a mostrar, seria el gasto silencioso de este modo.
+- Siete comentarios por video y no veinte (decision del 22 de septiembre):
+  alcanza para la vista previa y para Analizar, y es un tercio del costo.
+- Un video cuyo autor no es el del perfil se tira (`otro_creador`): con
+  `profileScrapeSections: videos` no deberia llegar ninguno, y si llega es
+  que el actor cambio.
+
+Un medio no se lee en Instagram Y en TikTok: publica lo mismo en las dos y
+el muro lo repetiria. `marca` junta sus filas de las dos redes y el validador
+exige una sola activa, la de mas seguidores (validador.validar_marcas).
 """
 
 import re
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from .apify import Presupuesto, SinToken, correr_actor, token
 from .redes import (  # noqa: F401  (reexportados a proposito, como en instagram.py)
@@ -106,7 +134,7 @@ from .redes import (  # noqa: F401  (reexportados a proposito, como en instagram
     zona_por_ambito,
 )
 from . import redes as _redes
-from .zonas import alcance
+from .zonas import alcance, nombra_mexico, prosa_de
 
 ACTOR_VIDEOS = "clockworks~tiktok-scraper"
 ACTOR_COMENTARIOS = "clockworks~tiktok-comments-scraper"
@@ -154,6 +182,13 @@ SIN_DESCARGAS = {
 # ver _zona() y el encabezado.
 AMBITOS = ("regional", "nacional", "internacional")
 AMBITO = "regional"
+
+# Perfiles (22 de septiembre de 2026): los diez videos mas recientes de la
+# cuenta y siete comentarios de cada uno que caiga en la ventana. Son la
+# omision; mandan `cosecha.videos_por_perfil` y
+# `cosecha.comentarios_por_video_perfil` del config. Ver el encabezado.
+VIDEOS_POR_PERFIL = 10
+COMENTARIOS_POR_VIDEO_PERFIL = 7
 
 # Lo que cruza del registro del video a data/tiktok.json ademas de lo comun.
 # `alcance` es el veredicto literal del gacetero y viaja junto a `zona` porque
@@ -242,16 +277,32 @@ def _zona(pie, ambito=AMBITO):
     necesito igual: copiada dos veces, una correccion llega a una sola. Esta
     envoltura se queda porque es lo que parchean las pruebas y porque el
     nombre local dice de que plataforma es el pie.
+
+    Y porque aqui difiere de un medio en UNA fila: el video de una busqueda
+    regional que no nombra lugar alguno se tira (22 de septiembre de 2026).
+    La tabla le daba `nacional`, y eso llenaba la cubeta Mexico con lo que
+    la busqueda de Rosarito, Ensenada o Mexicali trajo de relleno: 62
+    destacados desde el 15 de septiembre, entre ellos "una intensa lluvia
+    cubrio Tegucigalpa", un herido de bala en Ancash y dos pies vacios. Un
+    resultado de busqueda es de cualquier creador; darle el corredor seria la
+    consulta acreditando su zona, y darle Mexico, lo que ya se veia. Se queda
+    si nombra a Mexico (3 de los 62): eso si es nota nacional. Un canal o una
+    cuenta del corredor no se tira: ver redes.residuo_de_medio.
     """
-    return zona_por_ambito(pie, ambito)
+    zona, alc = zona_por_ambito(pie, ambito)
+    if ambito == "regional" and zona == "nacional" and alc == "nacional" \
+            and not nombra_mexico(prosa_de(pie)):
+        return None, alc
+    return zona, alc
 
 
 def _limpiar_video(item, busqueda, ahora):
     """Lista blanca del item de video. Devuelve (registro, motivo_de_descarte).
 
     El motivo es None cuando hay registro; si no, dice por que se tiro:
-    'anuncio', 'privado', 'sin_url', 'sin_creador', 'sin_fecha', 'futuro' o
-    'fuera'. `salud` los cuenta para que un cambio del actor se note.
+    'anuncio', 'privado', 'sin_url', 'sin_creador', 'sin_fecha', 'futuro',
+    'fuera' (nombro otra region) o 'sin_lugar' (una busqueda regional que no
+    nombro nada). `salud` los cuenta para que un cambio del actor se note.
     """
     url = _url_video(item.get("webVideoUrl") or item.get("url") or "")
     if not url:
@@ -273,7 +324,7 @@ def _limpiar_video(item, busqueda, ahora):
     # La zona se calcula sobre el pie CRUDO, hashtags incluidos.
     zona, alc = _zona(pie, busqueda.get("ambito") or AMBITO)
     if zona is None:
-        return None, "fuera"
+        return None, "sin_lugar" if alc == "nacional" else "fuera"
 
     salida = {
         "url": url,
@@ -351,15 +402,21 @@ def _limpiar_comentario(comentario, url, busqueda, zona):
     }
 
 
-def _fuentes(busquedas):
-    """Las busquedas con la forma que `redes._catalogo_cuentas` espera.
+def _fuentes(busquedas, perfiles=()):
+    """Las busquedas y los perfiles con la forma que `redes._catalogo_cuentas` espera.
 
     `zona: estatal` es la regla de fuente sintetica de pulso/busquedas.py (la
-    fila de la fuente, no los videos, que traen la suya). `verificado` en una
-    busqueda es una fecha informativa, no un interruptor: activa = activo.
+    fila de la fuente, no los videos, que traen la suya). En una busqueda
+    `verificado` es una fecha informativa, no un interruptor: activa = activo.
+    En un perfil si es interruptor, como en Instagram: no se lee una cuenta que
+    nadie sondeo.
     """
-    return [{"id": b["id"], "nombre": b.get("nombre") or b["id"], "zona": "estatal",
-             "activo": bool(b.get("activo")), "verificado": True} for b in busquedas]
+    salida = [{"id": b["id"], "nombre": b.get("nombre") or b["id"], "zona": "estatal",
+               "activo": bool(b.get("activo")), "verificado": True} for b in busquedas]
+    salida += [{"id": p["id"], "nombre": p.get("nombre") or p["id"], "zona": "estatal",
+                "activo": bool(p.get("activo")), "verificado": bool(p.get("verificado"))}
+               for p in perfiles or ()]
+    return salida
 
 
 # ------------------------------------------------------------------ cosecha
@@ -376,109 +433,165 @@ def _entrada_videos(consulta, cuantos, filtro_fecha, orden=ORDEN):
     }
 
 
+def _entrada_perfil(perfil, cuantos):
+    """Los videos mas recientes de UNA cuenta, sin fijados ni reposts.
+
+    Las llaves salen de la ficha de entrada del actor, leida el 22 de
+    septiembre de 2026: `profiles` va sin @. El filtro de fecha de perfil
+    (`oldestPostDateUnified`) se cobra aparte y no se usa: la ventana se
+    impone en cosechar() antes de pedir comentarios.
+    """
+    return {
+        "profiles": [perfil.lstrip("@")],
+        "profileScrapeSections": ["videos"],
+        "profileSorting": "latest",
+        "excludePinnedPosts": True,
+        "resultsPerPage": cuantos,
+        "downloadSubtitlesOptions": SUBTITULOS,
+        **SIN_DESCARGAS,
+    }
+
+
+def _es_perfil(fila):
+    return "perfil" in fila
+
+
+def _limpiar_de_fila(item, fila, ahora):
+    """_limpiar_video, mas la guardia de autor de un perfil."""
+    limpio, motivo = _limpiar_video(item, fila, ahora)
+    if limpio and _es_perfil(fila) and limpio["creador"] != fila["perfil"].lower():
+        return None, "otro_creador"
+    return limpio, motivo
+
+
+def _dentro(publicado, ahora, ventana_horas):
+    desde = datetime.fromisoformat(ahora) - timedelta(hours=ventana_horas)
+    return datetime.fromisoformat(publicado) >= desde
+
+
 def probar(busquedas, ahora, tok=None, entorno=None, filtro_fecha=FILTRO_FECHA, orden=ORDEN,
-           cuantos=3):
+           cuantos=3, perfiles=(), filas=()):
     """Pasada 1 con tres resultados y sin comentarios. No escribe nada.
 
     Para leer, con ojos humanos, que devuelve el filtro de fecha y como quedan
-    zona y titulo antes de gastar en comentarios. Devuelve, por busqueda, los
-    videos limpios y el conteo de descartes por motivo.
+    zona y titulo antes de gastar en comentarios. Devuelve, por fila, los
+    videos limpios, el conteo de descartes por motivo y los seguidores del
+    creador mas seguido que aparecio (`authorMeta.fans`), que en un perfil es
+    la cifra con la que se decide en que red se lee un medio.
+
+    Sin `filas` se prueban las activas, como siempre. Con `filas`, las pedidas
+    AUNQUE esten apagadas: es la unica forma de sondear antes de encender, que
+    es lo que el config pide (el mismo hueco que cerro `youtube --canal`).
     """
     tok = tok or token(entorno)
+    todas = list(busquedas) + list(perfiles or ())
+    elegidas = [f for f in todas if f["id"] in filas] if filas else \
+        [f for f in todas if f.get("activo")]
     salida = []
-    for b in busquedas:
-        if not b.get("activo"):
-            continue
-        items = correr_actor(ACTOR_VIDEOS,
-                             _entrada_videos(b["consulta"], cuantos, filtro_fecha, orden),
-                             tok, cuantos)
-        videos, descartes = [], {}
+    for f in elegidas:
+        entrada = _entrada_perfil(f["perfil"], cuantos) if _es_perfil(f) else \
+            _entrada_videos(f["consulta"], cuantos, filtro_fecha, orden)
+        items = correr_actor(ACTOR_VIDEOS, entrada, tok, cuantos)
+        videos, descartes, seguidores = [], {}, None
         for it in items:
-            limpio, motivo = _limpiar_video(it, b, ahora)
+            fans = (it.get("authorMeta") or {}).get("fans")
+            if isinstance(fans, int) and (seguidores is None or fans > seguidores):
+                seguidores = fans
+            limpio, motivo = _limpiar_de_fila(it, f, ahora)
             if limpio:
                 videos.append(limpio)
             else:
                 descartes[motivo] = descartes.get(motivo, 0) + 1
-        salida.append({"busqueda": b["id"], "videos": sorted(videos, key=lambda v: v["publicado"],
-                                                             reverse=True),
+        salida.append({"busqueda": f["id"], "perfil": f.get("perfil"), "seguidores": seguidores,
+                       "videos": sorted(videos, key=lambda v: v["publicado"], reverse=True),
                        "descartes": dict(sorted(descartes.items()))})
     return salida
 
 
 def cosechar(busquedas, ahora, tok=None, presupuesto=None, cache=CACHE,
              videos_por_busqueda=30, comentarios_por_video=30, filtro_fecha=FILTRO_FECHA,
-             orden=ORDEN, entorno=None):
+             orden=ORDEN, entorno=None, perfiles=(), videos_por_perfil=VIDEOS_POR_PERFIL,
+             comentarios_por_video_perfil=COMENTARIOS_POR_VIDEO_PERFIL,
+             ventana_horas=VENTANA_HORAS):
     """Dos pasadas contra Apify. Devuelve (nuevos, salud, gasto).
 
-    Sin token no truena: devuelve vacio y lo dice en `salud`. El tablero tiene
-    que poder mostrar prensa sin redes.
+    Primero las busquedas y luego los perfiles, con el mismo limpiador y el
+    mismo freno de costo. Sin token no truena: devuelve vacio y lo dice en
+    `salud`. El tablero tiene que poder mostrar prensa sin redes.
     """
-    activas = [b for b in busquedas if b.get("activo")]
+    filas = [(b, _entrada_videos(b["consulta"], videos_por_busqueda, filtro_fecha, orden),
+              videos_por_busqueda, comentarios_por_video)
+             for b in busquedas if b.get("activo")]
+    filas += [(p, _entrada_perfil(p["perfil"], videos_por_perfil), videos_por_perfil,
+               comentarios_por_video_perfil)
+              for p in perfiles or () if p.get("activo") and p.get("verificado")]
     presupuesto = presupuesto or Presupuesto()
     salud, nuevos = [], []
 
     try:
         tok = tok or token(entorno)
     except SinToken as e:
-        for b in activas:
-            salud.append({"cuenta": b["id"], "estado": "sin_token", "error": str(e),
+        for f, _, _, _ in filas:
+            salud.append({"cuenta": f["id"], "estado": "sin_token", "error": str(e),
                           "posts": 0, "comentarios": 0})
         return [], sorted(salud, key=lambda s: s["cuenta"]), presupuesto.resumen()
 
     purgar(cache, ahora)
     vistos = leer_vistos(cache)
     publicaciones = leer_publicaciones(cache)
-    reparto = presupuesto.reparto(len(activas))
+    reparto = presupuesto.reparto(len(filas))
 
-    for b in activas:
+    for f, entrada, cuantos, por_video in filas:
         try:
-            items = correr_actor(ACTOR_VIDEOS,
-                                 _entrada_videos(b["consulta"], videos_por_busqueda, filtro_fecha,
-                                                 orden),
-                                 tok, min(videos_por_busqueda, reparto))
-            presupuesto.cobrar(b["id"], len(items))
+            items = correr_actor(ACTOR_VIDEOS, entrada, tok, min(cuantos, reparto))
+            presupuesto.cobrar(f["id"], len(items))
         except Exception as e:
-            salud.append({"cuenta": b["id"], "estado": "fallo",
+            salud.append({"cuenta": f["id"], "estado": "fallo",
                           "error": "{}: {}".format(type(e).__name__, e)[:200],
                           "posts": 0, "comentarios": 0})
             continue
 
         # El catalogo se actualiza ANTES del freno de costo: un video ya
         # cosechado sigue sumando likes y compartidos.
-        urls, fuera, descartados, con_subtitulos = [], 0, 0, 0
+        urls, con_subtitulos = [], 0
+        motivos = {"fuera": 0, "sin_lugar": 0, "descartados": 0}
+        viejos = 0
         for it in items:
-            limpio, motivo = _limpiar_video(it, b, ahora)
+            limpio, motivo = _limpiar_de_fila(it, f, ahora)
             if limpio is None:
-                if motivo == "fuera":
-                    fuera += 1
-                else:
-                    descartados += 1
+                motivos[motivo if motivo in ("fuera", "sin_lugar") else "descartados"] += 1
                 continue
             if _tiene_subtitulos(it):
                 con_subtitulos += 1
             publicaciones[limpio["url"]] = {**publicaciones.get(limpio["url"], {}), **limpio}
+            # Un perfil trae lo ultimo que publico la cuenta, sea de hoy o de
+            # la semana pasada: solo lo de la ventana paga comentarios.
+            if _es_perfil(f) and not _dentro(limpio["publicado"], ahora, ventana_horas):
+                viejos += 1
+                continue
             if limpio["url"] not in urls:
                 urls.append(limpio["url"])
+        cifras = dict(motivos, con_subtitulos=con_subtitulos)
+        if _es_perfil(f):
+            cifras["fuera_de_ventana"] = viejos
 
         toca = pendientes(urls, vistos, ahora)
         if not toca:
-            salud.append({"cuenta": b["id"], "estado": "ok", "posts": len(urls),
-                          "comentarios": 0, "crudos": 0, "fuera": fuera,
-                          "descartados": descartados, "con_subtitulos": con_subtitulos,
+            salud.append({"cuenta": f["id"], "estado": "ok", "posts": len(urls),
+                          "comentarios": 0, "crudos": 0, **cifras,
                           "nota": "sin videos nuevos que cosechar"})
             continue
 
-        entrada_coms = {"postURLs": toca, "commentsPerPost": comentarios_por_video,
+        entrada_coms = {"postURLs": toca, "commentsPerPost": por_video,
                         "maxRepliesPerComment": 0}
         try:
             crudos = correr_actor(ACTOR_COMENTARIOS, entrada_coms, tok,
                                   max(1, reparto - len(items)))
-            presupuesto.cobrar(b["id"], len(crudos))
+            presupuesto.cobrar(f["id"], len(crudos))
         except Exception as e:
-            salud.append({"cuenta": b["id"], "estado": "fallo",
+            salud.append({"cuenta": f["id"], "estado": "fallo",
                           "error": "{}: {}".format(type(e).__name__, e)[:200],
-                          "posts": len(urls), "comentarios": 0, "fuera": fuera,
-                          "descartados": descartados, "con_subtitulos": con_subtitulos})
+                          "posts": len(urls), "comentarios": 0, **cifras})
             continue
 
         ingeridos = 0
@@ -487,16 +600,15 @@ def cosechar(busquedas, ahora, tok=None, presupuesto=None, cache=CACHE,
             # con la URL de la pasada 1. Si no parsea, cae a la primera pedida.
             url = _url_video(c.get("videoWebUrl") or c.get("postURL") or "") or toca[0]
             zona = (publicaciones.get(url) or {}).get("zona")
-            limpio = _limpiar_comentario(c, url, b, zona)
+            limpio = _limpiar_comentario(c, url, f, zona)
             if limpio:
                 nuevos.append(limpio)
                 ingeridos += 1
 
         for u in toca:
             vistos[u] = _hoy(ahora)
-        salud.append({"cuenta": b["id"], "estado": "ok", "posts": len(urls),
-                      "comentarios": ingeridos, "crudos": len(crudos), "fuera": fuera,
-                      "descartados": descartados, "con_subtitulos": con_subtitulos})
+        salud.append({"cuenta": f["id"], "estado": "ok", "posts": len(urls),
+                      "comentarios": ingeridos, "crudos": len(crudos), **cifras})
 
     guardar_vistos(vistos, cache)
     guardar_publicaciones(publicaciones, ahora, cache)
@@ -507,13 +619,13 @@ def cosechar(busquedas, ahora, tok=None, presupuesto=None, cache=CACHE,
 # --------------------------------------------------------------- derivados
 
 def derivar(comentarios, ahora, salud, gasto, temas=None, publicaciones=None,
-            busquedas=None, ventana_horas=VENTANA_HORAS):
+            busquedas=None, ventana_horas=VENTANA_HORAS, perfiles=None):
     """data/tiktok.json: conteos y videos destacados de las ultimas horas. Ver
     pulso/redes.py::derivar; aqui se fija la plataforma, la ventana en horas
     y los campos que cruzan del video (creador, publicado, compartidos,
-    guardados)."""
+    guardados). Las busquedas y los perfiles son las cuentas del documento."""
     return _redes.derivar(comentarios, ahora, salud, gasto, temas, publicaciones,
-                          _fuentes(busquedas or []), plataforma=PLATAFORMA,
+                          _fuentes(busquedas or [], perfiles or []), plataforma=PLATAFORMA,
                           ventana_horas=ventana_horas, campos_extra=CAMPOS_EXTRA)
 
 
