@@ -9,7 +9,7 @@ import { Esqueleto } from "@/components/ui/primitivas";
 export const metadata: Metadata = {
   title: "Gasto electoral de Baja California · Pulso",
   description:
-    "Gasto final auditado de candidaturas de Baja California en 2024 y financiamiento público asignado a partidos en 2026.",
+    "Gasto auditado de candidaturas de Baja California, financiamiento a partidos y publicidad política en Meta.",
 };
 
 export default function PaginaGastoElectoral() {
@@ -21,11 +21,11 @@ export default function PaginaGastoElectoral() {
           <h1 className="max-w-[18ch] font-titular text-hero [font-stretch:112%] text-tinta-titulo">
             Gasto electoral de Baja California
           </h1>
-          <p className="mt-4 text-meta text-tinta-meta">Elecciones 2024 · cifras finales auditadas</p>
+          <p className="mt-4 text-meta text-tinta-meta">Candidaturas 2024 · Partidos 2026 · Publicidad Meta</p>
           <p className="mt-6 max-w-[65ch] text-lectura text-tinta-prosa">
-            Busca una candidatura para ver cuánto reportó, qué determinó la auditoría y
-            cómo quedó frente a su tope y a la misma contienda. Las asignaciones a partidos
-            de 2026 viven en una vista separada: no son gasto de campaña.
+            Consulta el gasto auditado de las candidaturas, las asignaciones a partidos
+            y la publicidad de figuras públicas en Meta. Cada vista conserva sus fuentes,
+            periodos y conceptos.
           </p>
         </div>
       </header>

@@ -15,6 +15,8 @@ import type {
   DocTendencias,
   DocGastoElectoral,
   DocFinanciamientoPartidos,
+  DocPublicidadMeta,
+  DocPerfilMeta,
 } from "./tipos";
 
 // Las llaves son las cadenas de RUTAS, identicas en cada consumidor, asi que
@@ -53,6 +55,13 @@ export const useConsultasComentarios = () =>
   useSWRImmutable<DocConsultasComentarios>(RUTAS.consultasComentarios, leerJson);
 export const useGastoElectoral = () =>
   useSWRImmutable<DocGastoElectoral>(RUTAS.gastoElectoral, leerJson);
+// Una peticion interrumpida no debe dejar el piloto en un esqueleto eterno.
+// Compartir este lector conserva la deduplicacion de SWR por URL.
+const leerMeta = <T,>(ruta: string) => leerJson<T>(ruta, { signal: AbortSignal.timeout(15000) });
+export const usePublicidadMeta = () =>
+  useSWRImmutable<DocPublicidadMeta>(RUTAS.publicidadMeta, leerMeta, { shouldRetryOnError: false });
+export const usePerfilMeta = (id: string | null) =>
+  useSWRImmutable<DocPerfilMeta>(id && /^[a-z0-9_]{2,12}$/.test(id) ? `${RUTAS.perfilesMeta}/${id}.json` : null, leerMeta, { shouldRetryOnError: false });
 export const useFinanciamientoPartidos = () =>
   useSWRImmutable<DocFinanciamientoPartidos>(RUTAS.financiamientoPartidos, leerJson);
 

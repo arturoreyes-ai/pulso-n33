@@ -2,12 +2,16 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import dynamic from "next/dynamic";
 
 import { Bisel } from "@/components/ui/bisel";
+import { clasesChip } from "@/components/ui/clases";
+import { Segmentado } from "@/components/ui/segmentado";
 import { Barra, Esqueleto, Hueco, Kpi } from "@/components/ui/primitivas";
 import { useFinanciamientoPartidos, useGastoElectoral } from "@/lib/datos/hooks";
 import type { CandidaturaGasto, DocFinanciamientoPartidos, DocGastoElectoral, FinanciamientoPartido } from "@/lib/datos/tipos";
 import { plegar } from "@/lib/dominio/formato";
+import { EstadoCarga } from "@/components/ui/estado-carga";
 
 const MONEDA = new Intl.NumberFormat("es-MX", {
   style: "currency",
@@ -17,6 +21,12 @@ const MONEDA = new Intl.NumberFormat("es-MX", {
 });
 
 const ENTERO = new Intl.NumberFormat("es-MX");
+const PanelPublicidadMeta = dynamic(() => import("./pauta-meta").then((m) => m.PanelPublicidadMeta), {
+  loading: () => <div className="grid gap-4 rounded-panel border border-filo p-6">
+    <EstadoCarga etiqueta="Abriendo Publicidad Meta" />
+    <a className="text-meta text-tinta-dato underline underline-offset-4" href="/gasto-electoral?vista=meta">Si la carga no avanza, recargar la página</a>
+  </div>,
+});
 
 const pesos = (n: number | null | undefined) =>
   n === null || n === undefined ? "sin dato" : MONEDA.format(n);
@@ -37,8 +47,8 @@ const ETIQUETAS_CATEGORIA: Record<keyof CandidaturaGasto["desglose_reportado"], 
 
 const CAMPO =
   "w-full rounded-nucleo border border-filo bg-vanta px-4 py-3 text-cuerpo text-tinta-titulo placeholder:text-tinta-inerte";
-const BOTON =
-  "rounded-full border border-filo px-4 py-2 text-cuerpo transition-colors hover:bg-realce";
+/** La pastilla del tablero (ui/clases.ts). Era una propia, con borde. */
+const BOTON = clasesChip(false);
 
 function cambiarConsulta(
   actuales: URLSearchParams,
@@ -313,7 +323,7 @@ function Perfil({ candidatura, pares, dictamen, dictamenUrl }: {
               {candidatura.partido} · {candidatura.cargo} · ID contable {candidatura.id_contabilidad}
             </p>
           </div>
-          <a className={`${BOTON} text-tinta-dato`} href={dictamenUrl} target="_blank" rel="noreferrer">
+          <a className={BOTON} href={dictamenUrl} target="_blank" rel="noreferrer">
             {dictamen}
           </a>
         </div>
@@ -462,7 +472,7 @@ function Partidos({ partidos, totales, aviso, ejercicio, acuerdos }: {
         }))} />
         <div className="mt-8 flex flex-wrap gap-3 border-t border-vela pt-5">
           {acuerdos.map((a) => (
-            <a key={a.id} className={`${BOTON} text-tinta-dato`} href={a.url} target="_blank" rel="noreferrer">
+            <a key={a.id} className={BOTON} href={a.url} target="_blank" rel="noreferrer">
               {a.id}
             </a>
           ))}
@@ -472,18 +482,15 @@ function Partidos({ partidos, totales, aviso, ejercicio, acuerdos }: {
   );
 }
 
-type VistaGasto = "candidaturas" | "partidos";
+type VistaGasto = "candidaturas" | "partidos" | "meta";
 
 function SelectorVista({ vista, onChange }: { vista: VistaGasto; onChange: (vista: VistaGasto) => void }) {
+  // El segmentado del tablero (ui/segmentado.tsx), como el alcance de la
+  // portada: eran tres pastillas con borde propias de esta pagina.
   return (
-    <div className="flex flex-wrap gap-2" role="group" aria-label="Vista de datos electorales">
-      <button type="button" className={`${BOTON} ${vista === "candidaturas" ? "bg-realce text-tinta-titulo" : "text-tinta-prosa"}`} aria-pressed={vista === "candidaturas"} onClick={() => onChange("candidaturas")}>
-        Candidaturas 2024
-      </button>
-      <button type="button" className={`${BOTON} ${vista === "partidos" ? "bg-realce text-tinta-titulo" : "text-tinta-prosa"}`} aria-pressed={vista === "partidos"} onClick={() => onChange("partidos")}>
-        Partidos 2026
-      </button>
-    </div>
+    <Segmentado etiqueta="Vista de datos electorales" opciones={([
+      ["candidaturas", "Candidaturas 2024"], ["partidos", "Partidos 2026"], ["meta", "Publicidad Meta"],
+    ] as const).map(([id, nombre]) => ({ id, nombre, activo: vista === id, onElegir: () => onChange(id) }))} />
   );
 }
 
@@ -623,15 +630,15 @@ function ContenidoGasto({
 export function PanelGastoElectoral() {
   const parametros = useSearchParams();
   const router = useRouter();
-  const vista = parametros.get("vista") === "partidos" ? "partidos" : "candidaturas";
+  const vista: VistaGasto = parametros.get("vista") === "meta" ? "meta" : parametros.get("vista") === "partidos" ? "partidos" : "candidaturas";
   const { data: gasto, error: errorGasto, isLoading: cargandoGasto } = useGastoElectoral();
   const { data: financiamiento, error: errorFinanciamiento, isLoading: cargandoFinanciamiento } =
     useFinanciamientoPartidos();
   const personaId = parametros.get("persona");
   const seleccionada = gasto?.candidaturas.find((c) => c.id === personaId) ?? null;
 
-  const elegirVista = (nueva: "candidaturas" | "partidos") => {
-    router.push(cambiarConsulta(parametros, { vista: nueva === "partidos" ? "partidos" : null }));
+  const elegirVista = (nueva: VistaGasto) => {
+    router.push(cambiarConsulta(parametros, { vista: nueva === "candidaturas" ? null : nueva }));
   };
   const elegirPersona = (c: CandidaturaGasto) => {
     router.push(cambiarConsulta(parametros, { persona: c.id, vista: null }));
@@ -639,11 +646,11 @@ export function PanelGastoElectoral() {
 
   return (
     <div className="grid gap-8">
-      <Calendario />
+      {vista !== "meta" ? <Calendario /> : null}
 
       <SelectorVista vista={vista} onChange={elegirVista} />
 
-      <ContenidoGasto
+      {vista === "meta" ? <PanelPublicidadMeta gasto={gasto} /> : <ContenidoGasto
         vista={vista}
         cargandoGasto={cargandoGasto}
         errorGasto={errorGasto}
@@ -653,7 +660,7 @@ export function PanelGastoElectoral() {
         cargandoFinanciamiento={cargandoFinanciamiento}
         errorFinanciamiento={errorFinanciamiento}
         financiamiento={financiamiento}
-      />
+      />}
     </div>
   );
 }
