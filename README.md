@@ -1,3 +1,5 @@
+> **Publicidad Meta:** piloto manual en Gasto electoral. Dos lectores: el navegador (hoy bloqueado por robots) y la API oficial de la Biblioteca de Anuncios (`--api`, requiere token tras verificar identidad en Meta). Sondeo, importación, descubrimiento de páginas y límites de cobertura: [guía de operación](docs/publicidad-meta.md).
+
 # Pulso N33
 
 Inteligencia regional del corredor Tijuana–San Diego: Tijuana, Mexicali,
@@ -422,7 +424,28 @@ video de fuera se descarta, y en las otras dos se conserva como `nacional`; un
 video que no nombra lugar queda `nacional`, salvo en la del mundo, donde queda
 `internacional`. El campo `alcance` publica el veredicto crudo del gacetero al
 lado de la zona, para que «sin lugar» y «fuera del corredor» no se
-confundan. Tres búsquedas están apagadas con la razón escrita —Tecate, San
+confundan. Desde el 22 de septiembre de 2026 hay un quinto veredicto,
+`extranjero`: el video que nombra un lugar de fuera de México va a
+`internacional` en los tres ámbitos, verificado, y lo que nombra México se
+queda en `nacional`. Lo calcula `pulso/zonas.py::alcance_redes`, que solo usan
+las redes; la prensa no cambia.
+
+Desde el 22 de septiembre de 2026 hay también `perfiles`: cuentas de medios de
+México y del mundo, leídas con el mismo actor, 10 videos y 7 comentarios por
+video de la ventana. Una fila apagada se sondea por su id, y el sondeo
+imprime los seguidores del perfil:
+
+```bash
+python -m pulso tiktok --probar --fila tk_dwespanol
+```
+
+En Instagram, `--sondear` acepta `--muestra N` para ver dónde caerían los
+últimos N posts de cada cuenta con un ámbito dado. La bio no alcanza: así se
+coló la Ensenada de Buenos Aires.
+
+```bash
+python -m pulso redes --sondear @latinus_us --muestra 3 --ambito nacional
+``` Tres búsquedas están apagadas con la razón escrita —Tecate, San
 Felipe y San Quintín—: se probaron y devuelven falsos positivos, no cobertura.
 Un incendio en Apodaca entró como Tecate porque el pie decía «Tecate Six».
 
@@ -432,8 +455,15 @@ Un incendio en Apodaca entró como Tecate porque el pie decía «Tecate Six».
 python -m pulso youtube --probar
 ```
 
-Lee unas pocas piezas de cada canal de `config/youtube.json` sin escribir nada,
-para ver cómo quedan zona y formato antes de poner `activo: true` en una fila.
+Lee unas pocas piezas de cada canal activo de `config/youtube.json` sin
+escribir nada, para ver cómo quedan zona, alcance y formato. Una fila todavía
+apagada se sondea por su id, que es como se prueba antes de poner
+`activo: true`:
+
+```bash
+python -m pulso youtube --probar --canal yt_bbcmundo
+```
+
 Como no cuesta nada, es el procedimiento normal y no un ritual previo al gasto:
 los números que cita la `nota` de cada fila salen de aquí. Luego:
 
@@ -441,7 +471,8 @@ los números que cita la `nota` de cada fila salen de aquí. Luego:
 python -m pulso youtube
 ```
 
-Escribe `data/youtube.json`. Son 32 peticiones a feeds Atom públicos —dos
+Escribe `data/youtube.json`. Eran 32 peticiones y son 43 desde los seis canales
+del mundo del 22 de septiembre de 2026, a feeds Atom públicos —dos
 listas por canal, `UUSH` para Shorts y `UULF` para videos largos— sin llave,
 sin cuota y sin secretos. **No es la API de datos**: ese es el otro módulo de
 YouTube, `pulso conversacion`, que sí necesita `YOUTUBE_API_KEY` y sí vive
@@ -715,6 +746,77 @@ después de instalar las dependencias de `web/`; también la invoca
 `tests/test_busqueda_web.py` y el job web de CI. Lee el mismo
 `tests/fixtures/google-noticias.xml` que las pruebas de Python, para que los
 dos lectores del feed no diverjan en silencio.
+
+Desde el 23 de septiembre de 2026 la búsqueda de la región lee también el
+buscador propio de los seis medios verificados de `config/consultas.json`
+(tres segundos cada uno; Zeta tarda diez y ahí no entra) y las notas del
+archivo que nombran el término, y al final ofrece «Ver en redes».
+
+## Búsqueda de un término en Redes
+
+`/redes?q=<término>` arma, para cualquier término que no esté en seguimiento,
+la misma ficha que una consulta: noticias, publicaciones y comentarios, cuántos
+positivos y cuántos negativos. Lo gratuito sale al entrar por `/api/termino`;
+la búsqueda en TikTok, Instagram y Facebook va detrás de un botón por
+`/api/redes-en-vivo`. Medido el 23 de septiembre de 2026 con «Vive la Baja»: 65
+segundos y 0.17 dólares por las tres redes; una búsqueda con muchos comentarios
+llega a unos 0.60. Las reglas y su porqué están en AGENTS.md, «Búsqueda
+en vivo de un término»; los contratos, en [docs/datos.md](docs/datos.md).
+
+El **tono** lo pone el mismo modelo local del pipeline, servido aparte. En
+local, con las dependencias de `requirements-modelo.txt`:
+
+```bash
+python -m pulso tono --servir
+```
+
+y en `web/.env.local` la dirección y un secreto cualquiera, el mismo en los dos
+lados (el servicio lo lee de ahí o del entorno):
+
+```
+TONO_URL=http://127.0.0.1:8765/
+TONO_SECRETO=...
+```
+
+Sin eso, todo sale «sin tono», nunca neutral. En Vercel es el proyecto
+**`pulso-tono`**, aparte del tablero: la función de Python
+`servicio-tono/api/tono.py`, en `https://pulso-tono.vercel.app/api/tono`.
+Empaqueta el modelo con `TONO_EMPAQUETAR=1` y lleva `VERCEL_SUPPORT_LARGE_FUNCTIONS=1`
+y `TONO_SECRETO`; el tablero solo necesita `TONO_URL` y el mismo secreto. Va
+aparte porque dentro de `web/` cada despliegue del sitio instalaría torch. Se
+despliega **desde `servicio-tono/` y nunca desde la raíz**, porque `vercel
+deploy` sube todo lo que ve y la raíz tiene `cache/`:
+
+```bash
+node servicio-tono/empaquetar.mjs
+```
+
+```bash
+vercel deploy --prod --scope areyes-1125
+```
+
+(el segundo, dentro de `servicio-tono/`). `GET /api/tono?salud=1` con el
+secreto dice versiones e importaciones sin cargar el modelo. Medido el 23 de
+septiembre de 2026: arranque en frío ~10 s, ~120 ms por texto, y las mismas
+etiquetas que el pipeline en 109 de 109 titulares.
+
+La **búsqueda pagada** va apagada salvo que estén las cuatro llaves, porque sin
+la base de datos no hay libro de gasto y sin libro no hay topes:
+
+```
+BUSQUEDA_REDES_HABILITADA=true
+APIFY_API_TOKEN=...
+DATABASE_URL=...        # o NEON_DB_DATABASE_URL, la de la integración
+AUTH_SECRET=...         # la de Auth.js; firma la huella del término en el libro
+```
+
+y la tabla del libro, una vez: `pnpm --dir web migrar`. Los topes —50 dólares al
+mes encima de la cosecha programada, diez búsquedas por persona al día— están
+en `web/src/lib/redes-en-vivo/config.ts`.
+
+Verificación offline: `node web/scripts/probar-redes-en-vivo.cjs` (también la
+invoca `tests/test_redes_en_vivo_web.py`) y
+`python -m unittest tests.test_redes_en_vivo_paridad tests.test_tono`.
 
 ## Garitas para locución
 

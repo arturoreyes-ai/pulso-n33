@@ -132,6 +132,36 @@ is not a formality: `python -m pulso redes --sondear` costs one result per
 handle, and `tests/test_instagram.py` enforces that every verified row's
 `razon` cites it.
 
+**One class of Instagram row does consult the gazetteer: a row with `ambito`
+instead of `zona`** (22 September 2026, the international outlets for the
+Mundo bucket). A BBC Mundo or CNN en Español seat says nothing about what each
+post is about — they publish Ukraine, Sheinbaum and now and then Tijuana — so
+stamping it is the El Vigía error from YouTube. Such a row zones each post from
+its caption with `redes.zona_por_titulo` (first line decides, the rest breaks
+ties), publishes `alcance`, and its comments inherit their post's zone. Every
+`zona` row is untouched and still never consults the gazetteer. A row carries
+exactly one of the two; `validar_instagram_config` (new that day) rejects both
+or neither, because either would silently stamp `estatal`.
+
+**La Crónica and El Mexicano moved to `ambito: nacional` the same day.** Their
+pinned `zona: nacional` was the whole México leak on Instagram: all 15 México
+cards were theirs, among them «Águilas de Mexicali», «Máxima … en Tijuana» and
+two North Korean missiles. The client pinned them nacional on 15 September;
+content zoning keeps that as the residue and moves the rest, and docs/PLAN.md
+says so. The fixed sources asked for on 22 September — CNN en Español, BBC
+News Mundo, DW Español, Noticias Telemundo for Mundo; Latinus, Azteca
+Noticias, El Heraldo de México, N+ for México — are all `ambito` rows too, on
+Instagram or as TikTok `perfiles`.
+
+**One outlet, one platform (Instagram vs TikTok).** An outlet posts the same
+news on both, and reading both doubles it on the wall. `marca` ties an
+Instagram row to its TikTok profile; `validador.validar_marcas` makes two
+active rows with the same `marca` an error, and an active row that isn't the
+one with the most `seguidores` an aviso. The losing row stays in config,
+switched off, with both numbers written. YouTube is out of this rule by the
+user's call. `seguidores` is required only on an active row: an unprobed row
+has no number, and a 0 would read as «nobody follows it».
+
 **And the probe is not enough when the place name exists twice.** On 21
 September 2026 the client spotted an Argentine post on the Ensenada wall.
 `@noticiasensenada` was the news account of **Ensenada, Buenos Aires**, and it
@@ -141,8 +171,11 @@ VILLA CLELIA» and one about a cumbia group «de Ensenada». The probe could not
 catch it and that is the point: the account is real (24,767 followers, 3,502
 posts) and its bio — «El portal de noticias de la ciudad de Ensenada» — names
 no country. A **toponym shared between countries is not verified by reading
-the bio; it is verified by reading the places its posts name**, which the
-probe prints. Ensenada, Tecate and Mexicali all have namesakes abroad. The row
+the bio; it is verified by reading the places its posts name**. Until 22
+September 2026 this file said the probe printed them and it did not; since
+then `redes --sondear @h --muestra N --ambito …` fetches N posts per handle
+and prints where each would land (N more results per handle). Ensenada,
+Tecate and Mexicali all have namesakes abroad. The row
 also claimed to be the account of the medio `notiens`, and it was not:
 noticiasensenada.com publishes generic listicles («Qué es el omega 3») and
 links to no Instagram at all. It now sits in `senuelos` with the four
@@ -171,9 +204,12 @@ Three things it is **not**, each of which was the tempting version:
   account's zone is its stamped seat, so dividing by account already weights
   each place by how many outlets it actually has.
 - **Not a reorder.** The emitted array is still globally sorted by
-  `(-likes, -comentarios, url)` and the screen still reads newest-first. The
-  selection changed; the order did not. `validador.py:1461` is why, and the
-  reason is diff noise behind `git diff --cached --quiet`.
+  `(-likes, -comentarios, url)`. The selection changed; the order did not.
+  `validador.py:1461` is why, and the reason is diff noise behind
+  `git diff --cached --quiet`. The screen order is a separate, later step:
+  since 23 September 2026 the reader opens **most popular first** with a
+  «Más recientes» toggle (`publicaciones.ts::ordenarPublicaciones`, see the web
+  section); before that it always read newest-first.
 
 Where one outlet is the only publisher — `elvigia_ig` holds all fourteen of
 Ensenada at a median of **1 like** — the round exhausts immediately and the
@@ -221,14 +257,60 @@ outside the region:
 | a product zone | that zone | that zone | that zone |
 | Baja California alone | `estatal` | `estatal` | `estatal` |
 | a Mexican place outside BC | dropped | `nacional` | `nacional` |
-| no place at all | `nacional` | `nacional` | `internacional` |
+| a place abroad (`extranjero`) | `internacional` | `internacional` | `internacional` |
+| no place at all | see below | `nacional` | `internacional`, or `nacional` if it names Mexico |
+
+**The regional no-place row depends on the source, since 22 September 2026.**
+It used to be `nacional`, and that filled the México bucket with local
+leftovers: 62 TikTok destacados from the Rosarito, Ensenada and Mexicali
+searches (a Tegucigalpa storm, a shooting in Áncash, blank captions) and 39 of
+233 YouTube pieces from local channels. Now, unless it names Mexico (then it
+stays `nacional`):
+
+- **a TikTok search** drops it as `sin_lugar`, counted in `salud`. A search
+  result is any creator; crediting the corridor to it is the query crediting
+  its zone. `tiktok._zona`.
+- **a local outlet** (a YouTube channel, an Instagram `ambito: regional` row)
+  makes it `("estatal", "nacional")`: Corredor, never a city wall, and the card
+  says «un lugar sin precisar». «Sindicatura fiscaliza a jireh» is Tijuana news
+  that doesn't write Tijuana. `redes.residuo_de_medio`; the validator allows
+  `estatal`+`nacional` only where `PLATAFORMAS_REDES[...]["residuo_corredor"]`.
 
 Hence `alcance`, the raw gazetteer verdict, published **beside** `zona` rather
 than instead of it: without it `nacional` would mean both "named no place" and
 "named Guadalajara", and the panel's «sin lugar» label would be false for half
-the rows. `internacional` is the only zone outside `ZONAS`; it lives in
-`PLATAFORMAS_REDES["tiktok"]["zonas"]` and deliberately **not** in
-`ZONAS_DE_CONTEO`, which temas, conversación and Instagram share.
+the rows. `internacional` is the only zone outside `ZONAS` — the Mundo bucket,
+in TikTok, YouTube and Instagram `ambito` rows — and deliberately **not** in
+`ZONAS_DE_CONTEO`, which temas and conversación share.
+
+**`extranjero` exists since 22 September 2026, and only on the social path.**
+The gazetteer knew no foreign places, so «Más de 280 mil niños en Gaza» from
+N+ landed in the México bucket, and all 15 of TikTok's Mundo videos were there
+only because they named nothing. `zonas.alcance_redes` adds the verdict;
+`zonas.alcance`, which zones the press, is untouched and `notas.json` does not
+move — pinned in `tests/test_zonas.py`. The abroad row is the same in all three
+ámbitos by the user's call that day: a local outlet's Russia Short is not
+corridor news, but dropping it loses world coverage the outlet did make, and it
+used to land in México, which is worse than both. What is not obvious in
+`alcance_redes`, each with its measured case in the docstring:
+
+- **Weak evidence yields to what the prose names outside the corridor**: a
+  gazetteer homonym («la paz», «El Rosario, Sinaloa»), the trailing hashtag run
+  of a caption (an Iran video reached the Tijuana wall by its last `#tijuana`),
+  and a channel's own signature (`sufijos_titulo`). A corridor place named in
+  the prose always wins. «La mesa» and «la presa» yield only to a foreign
+  place, never to Sonora, because «Balacera en La Mesa; el detenido llegó de
+  Sonora» is Tijuana.
+- **Naming Mexico blocks `extranjero`** — the country or a federal institution
+  («Sheinbaum», «Pemex», «AICM»), and it also pulls an international source's
+  no-place piece out of Mundo. It never creates `fuera`, which would drop
+  national pieces from regional sources.
+- **«Estados Unidos», «EEUU», «California» and «papá» are not foreign on
+  purpose**, and nor are «chile», «quito», «kenia», «grecia», «libia»: each
+  exclusion is written next to `EXTRANJERO` with the headline that forced it,
+  measured over the 6,699 titles of `notas.json`. Do not "complete" the list
+  without re-running that measurement: a foreign false positive moves a
+  corridor piece to Mundo with the strongest verdict there is.
 
 **Three queries are off with the reason written** (Tecate, San Felipe, San
 Quintín). They were probed for real on 15 September 2026 and return false
@@ -236,8 +318,8 @@ positives, not coverage: an Apodaca fire zoned as Tecate because the caption
 said "Tecate Six", a Manhattan running club zoned as San Felipe. A false
 positive wearing the face of coverage is worse than a labelled gap. Do not turn
 them on without a probe that says otherwise, and note that
-`presupuesto_resultados` is sized for all eleven rows precisely so that turning
-one on cannot truncate the others' comment pass in silence. Two identity rules differ from Instagram, both
+`presupuesto_resultados` is sized for all rows, active or not, precisely so
+that turning one on cannot truncate the others' comment pass in silence. Two identity rules differ from Instagram, both
 decided by the client on 8 September 2026: the **creator's @handle is
 published** (they chose to post; the URL carries it anyway) and the validator
 requires it to match the URL; **commenter identity is never stored**, as
@@ -246,6 +328,23 @@ are required there and forbidden for Instagram. The window is `ventana_horas`
 on `publicado`, never `ventana_dias` (Instagram measures the same way since
 10 September 2026). The comments actor costs ~$5 per 1,000
 results; `cache/tiktok/vistos.json` is what keeps that to once a day.
+
+**TikTok has accounts too since 22 September 2026: `perfiles`.** A search is
+not a fixed source, so the México and Mundo outlets read their own profile
+(`profiles`, latest first, pinned excluded) through the same cleaner: `cuenta`
+is the row id, `creador` the outlet's handle, and the zone still comes from the
+caption with the row's `ambito`. What differs, all for cost:
+- The profile feed has no date filter (the actor's is charged extra), so the
+  24 h window is enforced **before** the comments pass. Paying comments for last
+  week's videos, which no screen shows, is this mode's silent cost.
+- 7 comments per video, not 20 (the user's call).
+- `Presupuesto.reparto` splits evenly per row, so `presupuesto_resultados` must
+  cover 315 per row for searches **and** profiles; the test says so.
+- `tiktok --probar --fila ID` probes a row even when it is off, and prints
+  `alcance` and the profile's followers, which the brand rule needs.
+TikTok still does not divide destacados by account, profiles included. A
+17.7M-follower profile may crowd México or Mundo; measure after its first run
+before deciding otherwise.
 
 **Nothing the video actor charges per second is on, and `duracion` is how you
 can tell.** Since 17 September 2026 the harvest asks for
@@ -320,7 +419,28 @@ diario hace nota de colonia en su portada y Shorts de Trump aquí. Así que
 `config/youtube.json` **sin campo `zona`**: un campo que existe acaba pasándose,
 y que el validador lo rechace sale más barato que un comentario pidiendo que no.
 La tabla de `ambito` se movió a `redes.py::zona_por_ambito` y `tiktok._zona`
-quedó de envoltura: copiada dos veces, una corrección llega a una sola.
+quedó de envoltura: copiada dos veces, una corrección llega a una sola. Por la
+misma razón la regla de título y descripción de abajo vive desde el 22 de
+septiembre de 2026 en `redes.py::zona_por_titulo`, porque las cuentas de
+Instagram con `ambito` la necesitaron igual.
+
+**La firma del canal cuenta, pero cede** (22 de septiembre de 2026).
+`sufijos_titulo` lista la firma que un canal pone al final del título: 17 de
+43 de Telemundo 20 terminan en «| TELEMUNDO SAN DIEGO», y esa firma mandaba al
+muro de San Diego un helicóptero caído «en Los Ángeles». La primera versión la
+quitaba antes de zonificar y era peor: lo demás que firma es de San Diego, en
+barrios que el gacetero no conoce —Pacific Beach, City Heights, un tribunal
+del condado—, y sin la firma se iba a Mundo. Así que es evidencia **débil**,
+como la cola de etiquetas de un pie: cuenta mientras el título no nombre otro
+lugar. El título publicado no se toca. Y `youtube --probar` acepta `--canal`
+para sondear filas APAGADAS: filtraba por `activo`, que hacía imposible
+sondear antes de encender.
+
+**Seis canales del mundo desde el 22 de septiembre de 2026**, para la cubeta
+Mundo, cada uno con su sondeo en la `nota`: BBC News Mundo, CNN en Español, DW
+Español, FRANCE 24 Español, euronews y EL PAÍS, con `ambito: internacional`.
+NTN24 se sondeó y quedó apagado: sus titulares llevan el adjetivo de la
+redacción («la dictadora Delcy Rodríguez»), y encenderlo es del cliente.
 
 **Pero el título manda y la descripción sólo desempata** (21 de septiembre de
 2026). Una descripción de YouTube no es el pie de un TikTok: trae fechas de
@@ -489,12 +609,55 @@ never the comments'). Rules that look arbitrary and are not:
   mayoría», «la gente», «opinión pública» or a percentage. That is how "the
   press on Grupo Concordia is negative" and "there is almost nothing recent on
   Valente Márquez" get said here.
+- **On screen: positive and negative first, in one vocabulary** (client, 22
+  and 23 September 2026). The ficha opens with one card per series —
+  Noticias, Publicaciones, Comentarios, and Agregadas a mano when there are
+  any — each with **two big numbers, positivas/negativas** (▲ green, ▼ red),
+  its tone as **one square per piece** (`ui/tira-tono.tsx`) and neutral /
+  sin tono in gray at the foot so the total still adds up. Never a bar: with
+  two headlines a bar paints a red half and reads «half the press is
+  negative», rule 2 through the back door. Cards, not a total, because rule
+  3: saying «positivo» in all three does not make them one series. **Screen
+  and PDF say positivo/negativo; the data keys stay `favorable|adversa`** for
+  the press, so do not rename them in `data/` or the validator
+  (`NOMBRE_TONO_TITULAR` / `CLASE_DE_TITULAR` map them). The counts come from
+  `consultas.ts::cifrasConsulta`, which `probar-consultas.cjs` ties to the
+  sentences' counts and scans for «advers»/«favorabl». The news card carries
+  the older headlines apart, under a rule: Grupo Concordia's three negative
+  headlines are all outside the window, and a card reading «0 negativas» and
+  nothing more would hide them. Off the screen since 23 September, as
+  mechanism: the tone disclaimer, the «archivo propio» line, the press
+  `muestra` and the per-network «sin dato» rows (the posts card says «en
+  Instagram» instead). **«En resumen» and the «Agregadas a mano» card and
+  section are gone from the screen too** (same day, client): the hand-picked
+  items are listed and counted with the news, unmarked
+  (`consultas.ts::noticiasDeConsulta`). Later that day the news card became
+  **one total** across the window and the older headlines, the cards dropped
+  their windows, and a hand-picked link whose URL `canonizarPublicacion`
+  accepts as a Facebook/Instagram/TikTok post (`redDeAgregado`) counts as a
+  **post**, not news, and joins the posts reader. This is a screen-only
+  merge: in `data/` they stay in `agregados`, never inside `prensa` or a
+  platform block.
+  The rule «no hand-picked headline names its term» exempts social posts,
+  since the press search never reads them (the Tijuana Línea Roja post names
+  Grupo Concordia and sits in that term by the client's request).
+- **Posts carry their own tone since 23 September 2026**
+  (`tono_publicaciones`). `consultas.clasificar_publicaciones` labels each
+  post's `titulo` (first caption line, never the full caption) in the cache's
+  `publicaciones.json`, in the row's config `idioma`, and the label survives a
+  re-harvest unless the caption changed. The five buckets sum to the blocks'
+  `publicaciones`, and the validator checks both sums; a corte without the
+  field passes with an aviso and the screen says «sin dato». It needs
+  `--sentimiento modelo`, as the press tone already did.
 
 - **`cuenta` is the term id** and every destacado carries `origen` and
   `fuente`. The zone comes from the text with `ambito="nacional"` in all three
   platforms, Instagram included: a brand is not a place, and a post naming
   Guadalajara is what the query went looking for, so it survives as
-  `nacional/fuera` instead of being dropped.
+  `nacional/fuera` instead of being dropped. Since 22 September 2026 one naming
+  Madrid is `internacional/extranjero` through the same shared table, and
+  `PLATAFORMAS_CONSULTA` accepts `internacional` for that reason; the ficha
+  never reads `zona`, so it needed no change.
 - **The cache is per term:** `cache/consultas/<cq_id>/<plataforma>/`. A video
   two terms both find would otherwise reassign `cuenta` to whichever ran last.
   `dias_entre_cosechas` is 7, not 3: with a 30-day window, 3 re-pays each
@@ -514,11 +677,15 @@ never the comments'). Rules that look arbitrary and are not:
   `docs/PLAN.md`, 18 September 2026, and the carve-out under rule 5 in
   PRODUCT.md). `tono.salvedad_tono` must equal `consultas.SALVEDAD_TONO`
   exactly; the validator compares by equality, same posture as `SALVEDAD_FIJA`.
-- **Facebook keyword search is wired but refused**: `facebook.ACTOR_BUSQUEDA`
-  is `None`, `facebook.busqueda` in a row is a validator error, and the actor
-  sits in `senuelos`. Facebook's search page needs a login, so the vendor
-  searches with its own accounts, and the session rule does not care whose
-  account it is. Turning it on is the client's legal call.
+  Since 23 September 2026 **the screen no longer prints it** (client's call);
+  the data still carries it word for word, and the validator still demands it.
+- **Facebook keyword search is wired but refused HERE**: `facebook.ACTOR_BUSQUEDA`
+  is `None` and `facebook.busqueda` in a row is a validator error. Facebook's
+  search page needs a login, so the vendor searches with its own accounts,
+  and the session rule does not care whose account it is. On 23 September
+  2026 the client made that legal call **for the live search only** (see
+  «Búsqueda en vivo de un término» below); the pipeline's consultas still
+  read public pages only, and switching them is a separate decision.
 - **`--probar` before `activo: true`**, and `activo` without a `verificado`
   date is an error. The probe prints only the field *names* of discarded items
   (`claves_descartadas`), never their content. The first probe on 18 September
@@ -528,6 +695,247 @@ never the comments'). Rules that look arbitrary and are not:
   `data/` outside `paths-ignore` runs `pulso.yml`. For the demo, run locally.
   `pulso/entorno.py` reads `APIFY_TOKEN` from `.env`, so a "dry" probe on a
   machine with that file is a real, paid call.
+- **`consultas --sin-cosecha` applies config changes for free** (23 September
+  2026). It rebuilds `data/consultas.json` from the cache, the press (free)
+  and the config — new `excluidos`, a hand-given `fecha` — without one Apify
+  call; `salud` is the last harvest's, `gasto` is 0. A normal run re-lists
+  every post and paid 17 results to apply one exclusion. Use it whenever
+  only the config changed.
+- **Comments a person copied by hand go in through `--importar-comentarios`**
+  (23 September 2026): `consultas --importar-comentarios ARCHIVO --consulta ID
+  --post URL [--fecha D]`, one comment per line, no names. They land in the
+  cache as harvested Facebook/Instagram/TikTok comments of that hand-picked
+  post (`consultas.importar_comentarios`), with no identity and the 30-day
+  retention; then `--sin-cosecha --sentimiento modelo` scores them with the
+  same local model and counts them. The text reaches only the git-ignored
+  `consultas-comentarios.json`. The case: the Tijuana Línea Roja post, whose
+  page robots.txt closes to every agent, so Playwright was not an option.
+  Labeling now covers inactive rows too, since it is local and free.
+- **The term reader shows no place and no comment preview** (23 September
+  2026, client): `VisorConsulta` passes `lugar={false}` and
+  `vistaPrevia={false}` to `RecorridoPublicaciones`, so the band drops «sobre
+  un lugar sin precisar» (a term is not a place) and the desktop column no
+  longer previews two comments; they open with the button. The main Redes
+  reader keeps both. A hand-picked post has no counts of its own, so its
+  sheet builds the summary line from the published comments
+  (`ComentariosPublicacion`); before, it said «Sin comentarios en este post»
+  above four comments.
+- **Each card links to its detail; tabs show only networks with posts**
+  (23 September 2026, client). Noticias scrolls to the list, Publicaciones to
+  the reader, Comentarios opens one sheet with every published comment of
+  the term, grouped by post (reusing `ComentariosPublicacion`). The card
+  numbers are `text-hero` and the labels a step up, because the readers are
+  older; on a phone that pushes the third card below the first screen, on
+  purpose. `BusquedaRedes` drops a term's tab when that network has no
+  posts, so YouTube and X no longer appear; «sin dato» stays on the cards.
+  Term destacados carry no `temas`, and the comment sheet reads it
+  defensively: without that the new sheet crashed on the first Instagram
+  post. The Noticias card and list say «Las noticias no incluyen
+  comentarios.» (news keeps headline, source and link only, so none are ever
+  read), and when comment text comes from two or more posts the Comentarios
+  card and its sheet are titled «Comentarios en todas las publicaciones».
+  Later that day the Comentarios card took the Publicaciones card's form,
+  «Comentarios · en Instagram y Facebook» (the sheet keeps the long title),
+  and every icon button uses `ui/clases.ts::clasesBoton`, which centers
+  icon and text: `clasesChip` aligns by baseline, which suits a label with
+  its count and leaves an SVG sitting high.
+- **The PDF is the screen** (23 September 2026, client). `InformeConsulta`
+  renders the same header, the same three cards and then news, posts and
+  comments, from `DocumentoInforme.pantalla`, which is built with the ficha's
+  own functions (`cifrasConsulta`, `noticiasDeConsulta`,
+  `reunirPublicacionesConsulta`, `rotulosConsulta`). The summary sentences,
+  sources, charts, tone disclaimer, topics, automatic reading, «Agregadas a
+  mano» and the «Lo que este informe no dice» page are no longer painted;
+  the model still computes them. `VERSION_INFORME` went to 2 so the CDN
+  does not serve the old document. The arrows are drawn with borders, not
+  «▲»: Geist has no such glyph and the engine fails the whole PDF on an
+  uncovered character, and it paints `transparent` black.
+- **Searches load with `ui/estado-carga.tsx`** (23 September 2026, the
+  client supplied the component): a 3×3 pixel grid, a shimmering label and
+  an elapsed timer, on the homepage search and the Redes search. It was
+  adapted, not pasted: Spanish names, scale tokens, 6px cells for older
+  readers, no «Surfer» variant (a Subway Surfers clip on someone else's
+  storage), the timer `aria-hidden` so the live region does not read a
+  number every 100 ms, and a reduced-motion rule for the shimmer next to
+  the keyframes in `globals.css`. The three «Analizar/Leer con IA» sheets (news, post,
+  comments) use it too while the model reads, and the loader and the
+  reading that replaces it both enter with `.aparicion-suave`, a 6px,
+  `--dur-cambio` version of `.entrada` sized for a change inside an open
+  sheet.
+
+### Búsqueda en vivo de un término
+
+Since 23 September 2026 the Redes magnifier answers **any** term, not only the
+three consultas. A term that is not in `config/consultas.json` used to filter
+what was on screen; now `/redes?q=` opens the consultas ficha for it, built
+live. The client asked for it and decided four things the code enforces:
+a paid pass behind a button, $50/month on top of the scheduled harvest, 10
+paid searches per person per day, and Facebook keyword search included. All
+four are in `docs/PLAN.md`'s 23 September note. Rules that look arbitrary and
+are not:
+
+- **It is a `Consulta`, not a new screen.** `lib/dominio/termino-vivo.ts`
+  assembles a live result into the exact shape of `data/consultas.json`'s
+  rows, and `VisorConsulta`/`FichaConsulta` render it with three injected
+  props (`textos`, `informe={false}`, `extra`). The only type change is
+  `plataformas.youtube`, which in `data/` is always `sin_dato` (validator)
+  and here carries the harvested YouTube videos that name the term. Tone
+  counts are **not** shipped summed: they are counted on the final, deduped
+  list of posts, because the free and paid halves can bring the same video.
+- **Two halves.** `/api/termino` (`lib/busqueda/termino.ts`) is free: Google
+  News with the quoted phrase over 180 days, the six verified outlet
+  searchers (`lib/busqueda/buscadores.ts`, a port of
+  `consultas._buscar_en_medio`, robots.txt with urllib.robotparser's
+  first-match semantics), the archive, the harvested Instagram/TikTok/YouTube
+  posts whose **caption** names the term with their published comments, and
+  the X trends that name it. `/api/redes-en-vivo` (`lib/redes-en-vivo/`) is
+  paid: POST starts TikTok search, Instagram `#etiqueta` and Facebook keyword
+  search; each GET advances the runs. No Google row is filtered by title,
+  like the pipeline; outlet rows and every social post are.
+- **Posts must name the term** (`limpiar.ts::nombraEnPie`, phrase or its
+  hashtag). The 18 September probe returned 3 of 3 unrelated TikToks for each
+  client term. It also means comments are paid only for posts that pass.
+- **Measured on 23 September 2026**, the paid pass for «Vive la Baja» took 65 s
+  and $0.17 over the three networks. TikTok returned 20 videos and 1 named
+  the term; Facebook 22 and 1; Instagram's `#vivelabaja` 11 and 10. At the
+  Silver prices written next to `TOPES` in `responder.ts`, a full search (10
+  posts × 10 comments per network) is ~$0.60. **TikTok's actor rejects any
+  `maxTotalChargeUsd` below $0.50 with a 400** (`minimalMaxTotalChargeUsd` in
+  its pricing), which is why its cap is 0.50 while it costs ~0.06: the first
+  probe, with 0.10, never started. Apify's error `type` now reaches the log.
+- **Async, and stateless apart from the ledger.** Apify's sync endpoint can
+  take 300 s; a Vercel function cannot wait that safely with the run already
+  billed. POST starts runs with `maxTotalChargeUsd` on each (the per-run
+  dollar cap `pulso/apify.py` never had) and returns an id; the browser polls
+  every 5 s. Nothing is stored on our side: every GET re-reads the vendor's
+  datasets and re-cleans them. The GET needs the term too, and the row's
+  `clave` must match: an id alone does not open a search.
+- **The ledger is `web/db/0002_busquedas_redes.sql`, and it holds no text and
+  no term.** `clave` is HMAC-SHA256 of the folded term with `AUTH_SECRET`, so
+  the table alone does not say who was searched. `reservar` checks the month,
+  the day and a 6-hour reuse inside one transaction under an advisory lock;
+  in-flight searches count their reserved worst case (`TOPE_POR_BUSQUEDA`,
+  $2.00), not what they spent so far. `reclamar` is a conditional UPDATE, so
+  only one of two simultaneous polls starts the comments pass.
+  `probar-redes-en-vivo.cjs` pins all three.
+- **The gate has four keys**: `BUSQUEDA_REDES_HABILITADA=true`, an Apify
+  token, a database URL and `AUTH_SECRET`. Without the database there is no
+  ledger, and without the ledger there are no limits, which is exactly what
+  the client did not authorise. Off, the route answers `apagado` and the
+  button is not painted, without saying why.
+- **The cleaners are a TypeScript copy of the pipeline's**, and the copy is
+  held to the original by a shared fixture:
+  `web/scripts/fixtures/redes-en-vivo/{crudos,esperado}.json`, which
+  `tests/test_redes_en_vivo_paridad.py` recomputes with Python and
+  `probar-redes-en-vivo.cjs` with TypeScript. Change a Python cleaner on
+  purpose, regenerate with `python -m tests.test_redes_en_vivo_paridad
+  --escribir`, and the TS test tells you what to port. Two deliberate
+  differences, both tested: an orphan comment is dropped (the pipeline pins
+  it to the first post, which on screen would put one post's text under
+  another), and there is no zone (the gazetteer is Python; `lugar={false}`).
+  Lengths count code points, as Python does.
+- **Facebook search results carry no author.** `author` (name, profile, id,
+  photo) is never copied; `fuente` is the page slug when the URL is a page's
+  and «Facebook» when not. In a keyword search the poster can be a person.
+- **Tone is the same instrument** (`pulso/tono.py`): `sentimiento.Analizador`
+  behind HTTP, `A_TONO`/`A_SENTIMIENTO` for the mapping, no special cases.
+  Locally `python -m pulso tono --servir` with `TONO_URL`/`TONO_SECRETO` in
+  `web/.env.local`; on Vercel `servicio-tono/api/tono.py`, a SEPARATE Vercel
+  project (Root Directory `servicio-tono`), with a build-time copy of the
+  three modules (`servicio-tono/empaquetar.mjs`) and the weights bundled when
+  `TONO_EMPAQUETAR=1`. Separate on purpose: inside `web/`, every site deploy
+  would detect a Python function and install torch, and a bundle over 250 MB
+  breaks that build. **Deployed 23 September 2026 as the Vercel project
+  `pulso-tono`** (scope `areyes-1125`, `https://pulso-tono.vercel.app/api/tono`),
+  and measured there: labels equal the stored pipeline `postura` on 109 of 109
+  headlines; cold start ~10 s, then ~120 ms per text (100 in 12 s), hence
+  batches of 100 and a per-process cache keyed by **hash**, not text. It took
+  five failed deploys, each fix written where it lives:
+  - `.python-version` = 3.12. Vercel's build ran 3.14, and the model's
+    dependencies are only proven on 3.11/3.12.
+  - `installCommand` is a no-op. Vercel's build-phase install ignores
+    `.python-version` and ran 3.14, where a cp312 torch wheel is unsatisfiable;
+    the function's own install is the one that uses 3.12.
+  - `requirements.txt` is the **pinned** closure of the local environment,
+    and torch comes by its CPU wheel URL. uv gives a `--extra-index-url`
+    priority over PyPI (pip does the opposite), and PyTorch's index serves old
+    `requests`/`urllib3`/`certifi`, so the first build resolved
+    `datasets 2.14.4`, which calls the `pyarrow.PyExtensionType` that pyarrow
+    25 removed.
+  - The service labels **one text at a time** (`Analizador.predecir(...,
+    uno_a_uno=True)`, pysentimiento's own `_predict_single`). The batch path
+    goes through `datasets`, and on 3.12 that dies pickling pyarrow's
+    `MonthDayNano`. Same labels on 128 of 128 and half the time.
+  - Caches go to `/tmp` (`api/tono.py`), because the bundle is read-only.
+  - A failure returns 500 with its type and chained cause, and
+    `GET ?salud=1` reports versions and imports. Before that the function
+    died as `FUNCTION_INVOCATION_FAILED` with nothing in the logs.
+  **Deploy from `servicio-tono/` only, never from the repo root**: `vercel
+  deploy` ignores `.gitignore`, and the root holds `cache/` with raw comment
+  text. `node servicio-tono/empaquetar.mjs`, then `vercel deploy --prod
+  --scope areyes-1125` inside `servicio-tono/`; its `.vercelignore` is an
+  allowlist. The secret lives in the project's env and, locally, in the
+  git-ignored `servicio-tono/.env.tono`.
+- **Rule 5 is a check, not a caveat.** `lib/busqueda/figura.ts` withholds
+  every tone (headlines, captions, comments, per-comment chips) when the term
+  names a roster figure: name and aliases both ways, cargo only forward
+  («alcalde de Tecate» yes, «Tecate» no). An unreadable roster also withholds.
+- **Language is declared, never guessed**: an outlet row's `idioma`, the
+  catalogue medium's `idioma` for a Google row (else the edition's), the
+  account row's `idioma` for a harvested post. They reach the web through
+  `public/data/catalogo-busqueda.json`, which `scripts/sincronizar-datos.mjs`
+  projects from `config/` (only `activo` + `verificado` searchers).
+- **The portada search reads the outlets too, with 3 s and not 12.** Measured
+  on «sheinbaum»: Rosarito 1.3 s, Said Betanzos 1.4 s, Blanco y Negro 2.6 s,
+  Jornada BC 5.9 s, Zeta 9.6 s, against 0.5 s for Google. With 6 s the portada
+  went from 0.5 to 6.1 s. There outlets are best effort and do not block the
+  CDN cache; the full list is the Redes ficha. Outlets only at region scope;
+  the archive also at zone scope, filtered by the zones a note NAMES.
+- **Jornada BC moved to `jornadabc.com.mx`** (found 23 September 2026): its
+  searcher 302s there and every link then fails the own-domain rule, in the
+  pipeline too, silently. The row in `config/consultas.json` needs a new probe.
+
+### Publicidad Meta tiene dos lectores y tampoco comparten fundamento legal
+
+Es el mismo reparto que YouTube. `pulso/publicidad_meta_navegador.py` abre un
+navegador contra `business.facebook.com` y **está bloqueado**: el sondeo del 21
+y del 22 de septiembre de 2026 devolvió `bloqueado (robots)` para las dos
+páginas verificadas, así que nueve de las diez figuras del catálogo siguen en
+`sin_dato`. `pulso/publicidad_meta_api.py` lee `ads_archive`, la API oficial de
+la Biblioteca de Anuncios, y no es raspado: token por HTTPS, sin sesión, sin
+navegador, y robots.txt no gobierna una API. Cubre los anuncios políticos
+entregados en cualquier país y acepta `MX`, así que el catálogo cabe entero.
+
+Dos salidas que parecen atajos y no lo son. Apagar `respetar_robots` es la
+frontera de «Legal boundaries» y `validar_publicidad_meta_config` exige
+`excepcion_robots` escrita para aceptarlo; **alquilar un raspador no cambia
+nada**, por el mismo motivo por el que no se alquila para entrar con sesión.
+
+**Sin token el módulo no escribe: levanta error y sale con 1.** No publica
+`sin_dato`, y la razón es mecánica además de honesta: `combinar_seccion`
+conserva los datos anteriores cuando los nuevos son `null`, de modo que una
+sección `sin_dato` con datos heredados llega al validador como «ausencia con
+datos». Faltar una credencial es un problema de operación, no un hallazgo
+sobre el anunciante.
+
+**La captura omite `informacion` y `audiencia` a propósito.** La API da
+anuncios; el bloque de transparencia y el gasto de 7/30/90 días salieron de
+una transcripción manual. Omitir una sección la conserva (`armar`), así que
+correr el lector de API no borra lo que Julieta ya tiene — emitirlas vacías sí
+lo borraría. Por lo mismo `formato` sale `desconocido` y `grupo` sale `null`:
+la fuente no los trae y deducir «imagen» porque no dijo «video» sería una
+afirmación que nadie hizo. La URL del anuncio **se construye**; copiarla de
+`ad_snapshot_url` publicaría el token de acceso pegado.
+
+**`--descubrir` enseña candidatos y no escribe.** Es lo que desbloquea a las
+ocho figuras sin página, porque la vía documental no sirve: el identificador
+**numérico** que exige `validador.py` aparece en resoluciones sobre anuncios
+pagados —el `SRE-PSD` de Julieta— y no en las de espectaculares o propaganda
+gubernamental, que son las que existen para las otras ocho. Aun así, que la
+API devuelva una página llamada como la persona **sigue siendo semejanza de
+nombres**, que el catálogo prohíbe: lo que aporta es `bylines`, la declaración
+legal de quién pagó. La atribución, sus `fuentes` y su `razon` las firma una
+persona en `config/publicidad-meta.json`.
 
 ### The five product rules, as code constraints
 
@@ -714,10 +1122,10 @@ The full command surface — `indicadores`, `conversacion`, `delegaciones`,
 
 ## Testing
 
-- **`unittest` only.** No pytest, no config file. 21 modules, 588 test methods, and the suite is expected fully green. Install `requirements.txt`
+- **`unittest` only.** No pytest, no config file. 37 modules, 922 tests on 23
+  September 2026, and the suite is expected fully green. Install `requirements.txt`
   first: without Scrapy, `tests/test_scraping.py` fails to import and you see
-  587 run with one error, which is an unprovisioned environment and not a
-  regression.
+  one error, which is an unprovisioned environment and not a regression.
 - **Tests are always offline.** `tests/test_pipeline.py` says so in its
   docstring. Never add a test that touches the network.
 - **Tests read the real `config/*.json`** (`BasePipeline.setUpClass`), so a
@@ -740,7 +1148,15 @@ The full command surface — `indicadores`, `conversacion`, `delegaciones`,
 - **`web/public/data/`** — copied from `data/` by
   `web/scripts/sincronizar-datos.mjs`. It exits 1 when `../data` is missing, on
   purpose, so a misconfigured build cannot publish a dashboard where every
-  panel shows an error.
+  panel shows an error. It also writes `catalogo-busqueda.json` there, a
+  projection of `config/` for the live search.
+- **`servicio-tono/api/_pulso/`** and **`servicio-tono/api/_modelo/`** — written by
+  `servicio-tono/empaquetar.mjs` for the tone function: a copy of
+  `pulso/{tono,sentimiento,normalizar}.py` and, with `TONO_EMPAQUETAR=1`,
+  the model weights. Git-ignored; the only copy git keeps is `pulso/`.
+- **`web/scripts/fixtures/redes-en-vivo/esperado.json`** — regenerate with
+  `python -m tests.test_redes_en_vivo_paridad --escribir`, and only after a
+  deliberate change to a pipeline cleaner.
 - **`config/delegaciones-tijuana.json`** and
   `web/src/lib/dominio/delegaciones-mapa.ts` — regenerate with
   `python -m pulso delegaciones --actualizar`.
@@ -811,6 +1227,11 @@ already refused on the record in `docs/PLAN.md` §3.
   actor whose input carries cookies, credentials or a session token, so
   flipping `"activo": true` in `config/apify.json` is not enough to turn on a
   logged-in scrape. `tests/test_apify.py` pins that.
+  **One exception, the client's call on 23 September 2026, counsel pending:**
+  the live search's `scraper_one~facebook-posts-search`, whose input carries
+  no session (so the guard passes it) while the vendor logs in to search. It
+  lives only in `web/src/lib/redes-en-vivo/apify.ts::ACTORES`, with its
+  reason written in the row; do not generalise it to anything else.
 - **`ROBOTSTXT_OBEY` stays on** and per-domain concurrency stays at 1.
 - **Headline, source and link only.** Never article body text. For Instagram
   posts that means the first line of the outlet's caption, never the whole pie.
@@ -843,8 +1264,12 @@ already refused on the record in `docs/PLAN.md` §3.
   in production only, and the origin would come from the caller's `Host`
   header. The price is `next.config.ts`'s `outputFileTracingIncludes`, which
   fails silently in production if dropped.
-- **`/api/analizar-conversacion` is the same carve-out over a whole selection**,
-  and the only place a model looks at more than one post. Same posture — nothing
+- **`/api/analizar-conversacion` is gone** (23 September 2026, client: «a bit
+  unnecessary»), with «De qué se habla» (`paneles/conversacion-redes.tsx`),
+  `lib/analisis/conversacion.ts`, `datos-redes.ts::reunirConversacion`, its
+  contract types and its tests. Comments are read per card. What it was, for
+  whoever brings it back: the same carve-out over a whole selection,
+  and the only place a model looked at more than one post. Same posture — nothing
   fetched, disk reads of the published files, one call to the model — plus a
   floor: under 10 comment texts it returns `pocos` without spending anything,
   because "what recurs" over three comments is one comment promoted to a
@@ -856,8 +1281,51 @@ already refused on the record in `docs/PLAN.md` §3.
   one post, ~37,000 for a whole run. **Prompt caching is not a lever here** —
   Haiku 4.5 needs a 4,096-token prefix and ours is ~1,000, so it silently never
   caches.
+- **`/api/resumen-tiktok` is the one model reading that is NOT a button**, by
+  client decision on 23 September 2026, and the exception is narrow on purpose.
+  The client sent TikTok's own search-page «Resumen con IA» and asked for it on
+  the Mundo, México and Tijuana searches. That summary cannot be fetched (the
+  actor has no such field, it lives on the app's search page) and must not be:
+  it is another company's model summarising article bodies, outside
+  `reglas.ts`, the same reason `aiVideoSummary` stays unpublished. So ours reads
+  **only `[n] @creador · titulo`** of the TikTok tab's selection, most-liked
+  first: no counts, no comments, no subtitles. It
+  loads by itself when the TikTok tab opens (`paneles/resumen-tiktok.tsx`),
+  still never from the cron, cached six hours per place, ámbito and `generado`, and
+  SWR keeps it for the tab so a reorder does not re-ask; `shouldRetryOnError:
+  false` because a retry is an unrequested paid call. About 2,000 input and 600
+  output tokens, half a cent at Haiku 4.5's $1/$5 per MTok. Under
+  `MINIMO_VIDEOS_RESUMEN` (5) there is no card and no request. **Every point
+  must cite a video the model was given**: the server drops out-of-range
+  numbers, then uncited points and empty sections, and answers `modelo` if
+  nothing is left; `reglas.ts` runs over everything the model wrote *before*
+  that pruning. The prompt forbids adding facts from outside the captions and
+  presenting a caption's claim as verified, because many Mundo captions are
+  bait from arbitrary creators. Needs `./public/data/tiktok.json` in
+  `outputFileTracingIncludes`. Do not widen it to the other tabs or to comment
+  text without the client asking: each is a new decision, not a refactor.
+  **It is collapsed, in the flow, TikTok's pattern, and it shows no caveat**,
+  all by client decision later that same day («la prioridad son los
+  TikToks», then a screenshot of TikTok's search page). It is the reader's
+  index 0 but sized to its CONTENT (`RecorridoPublicaciones`' `resumen`,
+  `.resumen-recorrido` in globals.css), not a full-screen card: place,
+  «Resumen con IA de…», the whole `entrada`, then the first topic fading out
+  under `.pliegue-resumen` and «Ver más», with the first video peeking below
+  on the same screen, mounted and paused by `PRECARGA`. «Ver más» expands in
+  place and pushes the videos, like TikTok; what sits under the fold is
+  `inert` so Tab cannot land on a clipped chip. Two shapes came before it the
+  same day and lost: a full-screen first card (the first video a whole swipe
+  away) and a one-line strip above the box with the rest floating over the
+  videos (a mechanism of its own for what the page flow already does). The page's
+  `SALVEDAD_FIJA` and the model's `salvedad` are both off the screen; the
+  model still writes `salvedad`, `reglas.ts` still checks it, the response
+  still carries it. That thins what the section on the missing footer calls
+  the whole of the on-screen rules, and it is written down here as the
+  client's call, not as a precedent: what is left saying what this is, is
+  «Generado con IA» and the attributive wording the prompt forces on every
+  bullet («un video dice…»).
 - **The sampling caveat is the page's, never the model's**, in both redes
-  routes. The case: the prompt asked the model to say "this is not what a city
+  routes (the TikTok summary prints none, by client decision; see above). The case: the prompt asked the model to say "this is not what a city
   thinks", and to say that correctly it has to *name* what `reglas.ts` forbids —
   «la opinión pública», «la mayoría», «la gente» — so the validator rejected the
   whole reading and the reader just saw "No se pudo hacer la lectura". Four of
@@ -892,6 +1360,19 @@ already refused on the record in `docs/PLAN.md` §3.
   mismatch fails closed before the paid model call. The pipeline's "never
   resolve the redirect" rule is untouched: there the token rotates between
   runs and would dirty `data/`; the on-demand result is never persisted.
+- **Live card photos ask the outlet first, Google second** (23 September
+  2026). That day no card had a photo: `/api/imagen` only resolved the
+  Google token, and Google was answering the IP with its «unusual traffic»
+  page. Now, with the row's headline (`t`), it asks the outlet's WordPress
+  REST search (`lib/busqueda/enlace-medio.ts`) for the post whose folded
+  title matches and takes its featured image — one request, no Google;
+  Zeta, inewsource, FOX 5 and the Union-Tribune answer, Arc/Brightspot
+  sites do not and fall back. robots.txt is checked with our agent; only
+  link, title and image are requested (`_fields`). After a Google block the
+  route stops calling Google for 10 minutes, and a miss is cached 15 minutes
+  instead of no-store, because retrying is what keeps the block alive. Do
+  not "fix" a block any other way: behind it is a CAPTCHA. The card keeps
+  its outlet placa under the photo until the photo has loaded.
 - **Instagram comment text never goes to git**, and commenter identity is never
   stored anywhere (see the invariant above). It ships in
   `data/redes-comentarios.json`, which `.gitignore` excludes by name.
@@ -965,8 +1446,14 @@ Tailwind v4, pnpm.
   TikTok · YouTube · X, `aria-pressed` buttons, a 2 px `chart-1` underline,
   one mounted at a time with SWR preload on hover), and a box below. The
   first three tabs are `paneles/visor-redes.tsx`: one embedded post per
-  screen, mandatory snap inside the box, one media mounted, heights frozen
-  during the gesture; the most-voted **comment text lives in the card** (a
+  screen, mandatory snap inside the box, one media playing, heights frozen
+  during the gesture. Since 22 September 2026 the **next** card's embed is
+  mounted too when it is Instagram or TikTok (`PRECARGA`), paused, so a swipe
+  lands on a loaded player: 42 ms from pause to play, measured, against a
+  1.3–1.9 s cold boot. Two embeds, never thirty; YouTube stays out because its
+  iframe autoplays with no pause channel. The TikTok iframe's `sandbox` needs
+  `allow-same-origin`: without it (18–22 September) the player never booted
+  and sat on its logo. The most-voted **comment text lives in the card** (a
   two-comment preview in the desktop column and a «Comentarios» sheet on both
   sizes, `paneles/comentarios-publicacion.tsx`). **The card carries no platform
   counts** since 17 September 2026 — no likes, comments, plays, shares or
@@ -979,7 +1466,18 @@ Tailwind v4, pnpm.
   archives every one of those fields. In their place the chip row carries
   **Analizar** (`paneles/analisis-publicacion.tsx`), whose sheet is hoisted to
   `Recorrido` beside the comments one — a `<dialog>` per card would be 98 of
-  them. YouTube and X are the same
+  them. **The visor reads most popular first** since 23 September 2026 (client),
+  with a «Más recientes» `aria-pressed` toggle in the bar on every tab but X,
+  whose order is X's own ranking. `ordenarPublicaciones` ranks each post
+  **within its network** by `compararPorMerito` and interleaves networks by
+  rank: Instagram likes, TikTok likes and YouTube views are not one unit, and
+  sorting the raw number would bury the corridor under TikTok on «Todas».
+  It sorts after `seleccionarPublicaciones`, which still returns file order,
+  and `reunirPublicaciones` still returns newest-first for search mode. The
+  TikTok tab opens on the **«Resumen con IA»**, collapsed and content-sized,
+  with the first video below it (see `/api/resumen-tiktok` above); its source
+  chips jump to their card through `resumen`'s `irA`.
+  YouTube and X are the same
   box without snap (`.hoja-lector`); X is trends, not comments
   (`paneles/tendencias.tsx`), in X's row grammar with the #1 trend of each
   location set in Archivo and the caveat under it. The Instagram / TikTok
@@ -1053,6 +1551,34 @@ Tailwind v4, pnpm.
   PRODUCT.md and in the module docstrings of `paginas/redes.tsx`,
   `paneles/visor-redes.tsx` and `paneles/comentarios-publicacion.tsx`.
 
+- **One component per gesture; reuse before writing** (client, 23 September
+  2026). The place dialog existed three times — the portada's segmented plus
+  chips, Redes' full-width rows with a check and other names («Corredor /
+  Mundo», «Toda la región»), and the cinta's rows — and the client put two
+  of them side by side. Now `ui/opciones-lugar.tsx` is the only place dialog
+  body (alcance segmented on top, place chips below) and each caller passes
+  only data; the «no municipio» option is `zonas.ts::NOMBRE_TODA_REGION`
+  («Toda la región»; «Todas» lasted hours and read as ambiguous next to the
+  platform tab «Todas») everywhere, and the cubetas are named Región / México / Internacional like
+  the portada. Before building a control, look for the one that already does
+  it in `components/ui/` or another panel; if two screens need the same
+  thing, extract it rather than copy it. The same day an audit unified the
+  rest, and these are now the only implementations: `ui/hoja.tsx` (every
+  sheet: frame, header, close button that names what it closes),
+  `ui/pestanas.tsx` (every tab row, including Publicidad Meta's tablist,
+  which keeps its arrow keys), `ui/segmentado.tsx` (every either/or switch:
+  alcance, Gasto electoral's view, lista/gráfica), `ui/formulario-busqueda.tsx`
+  (both search sheets), `ui/opciones-lugar.tsx::PastillasLugar` (the zone
+  chips in page headers too), and in `ui/clases.ts` `clasesChip`/`clasesBoton`
+  for every pill button (no bordered local variants) and `clasesInsignia`
+  for every small badge. Icon buttons use `clasesBoton` with a regular-weight
+  16 px icon. Loading is `EstadoCarga`; a failure («No se pudo…») is
+  `text-baja`, a gap («no está disponible») is `text-tinta-meta`. The link
+  that leaves for the source reads «Abrir en {medio/red}» on both news and
+  post cards. The city pill left the floating nav the same day: each page
+  picks its place in its own bar. The Redes bar lost «De qué se habla» (the
+  speech-bubble icon; deleted with its route, see above) and its
+  order toggle uses the funnel icon.
 - **`/garitas` and `/gasto-electoral` are pages, not a separate site.** Both are
   `SUELTAS` in `secciones.ts`: in the nav, outside the place x view grid. They
   mount `Navegacion` from their own server `page.tsx` — never from the client

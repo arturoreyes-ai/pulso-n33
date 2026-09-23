@@ -1,3 +1,256 @@
+> **Implementación · 23 de septiembre de 2026 — La lupa de Redes busca cualquier
+> término: noticias, publicaciones y comentarios.** Hasta hoy la lupa solo sabía
+> de los tres términos en seguimiento; cualquier otra palabra filtraba lo que ya
+> estaba en pantalla. El cliente pidió que, busque lo que se busque, el sitio
+> devuelva lo que hay. Ahora un término que no está en seguimiento abre la misma
+> ficha —Noticias, Publicaciones y Comentarios, cuántos positivos y cuántos
+> negativos— con dos mitades:
+>
+> - **Lo que no cuesta, al entrar**: el buscador de noticias con la frase entre
+>   comillas en seis meses, el buscador propio de los seis medios verificados
+>   (Blanco y Negro, Zeta, Síntesis, Jornada BC, Rosarito Noticias, Said
+>   Betanzos), el archivo propio, lo que el tablero ya leyó en Instagram, TikTok
+>   y YouTube que nombra el término, con el texto de sus comentarios, y las
+>   tendencias de X que lo nombran, con la salvedad de siempre: es el ranking de
+>   X, no una medida de la ciudad. La búsqueda de la portada también lee ahora
+>   esos medios y el archivo, y al final ofrece «Ver en redes».
+> - **Lo que cuesta, detrás de un botón**: «Buscar también en TikTok, Instagram
+>   y Facebook». La búsqueda por palabra de TikTok, la etiqueta del término en
+>   Instagram —que no se deja buscar por palabra sin sesión— y la búsqueda por
+>   palabra de Facebook, con los comentarios de las diez publicaciones de más
+>   alcance de cada red. Tarda minutos, y lo que llega se suma a las tarjetas.
+>
+> **Esto invierte dos decisiones, y se dice.** La primera es la del 18 de
+> septiembre, «nunca una búsqueda en vivo pagada desde el navegador». Se paga
+> solo cuando alguien pulsa, como Analizar, y con topes que el cliente fijó hoy:
+> **50 dólares al mes** encima de lo que ya gasta la cosecha programada, y **diez
+> búsquedas por persona al día**. Repetir un término dentro de seis horas reusa
+> la primera búsqueda y no cuesta ni cuenta. El navegador nunca elige qué se
+> corre: manda un término, y el servidor decide contra un libro de gasto.
+> **Medido el mismo día** con «Vive la Baja», las tres redes: 65 segundos y
+> 0.17 dólares. TikTok devolvió 20 videos y solo uno nombraba el término, y
+> solo ese pagó comentarios. Con los precios de cada proveedor, una búsqueda
+> con diez comentarios en cada una de diez publicaciones por red saldría en
+> unos 0.60. Antes de empezar se reserva el peor caso, 2 dólares, porque el
+> proveedor de TikTok no acepta un tope por corrida menor a 0.50.
+>
+> **La segunda es la búsqueda por palabra en Facebook, y es la de fondo.** El §3
+> de abajo rehúsa el raspado con sesión sea de quien sea la cuenta, y la nota
+> del 18 de septiembre la dejó cableada y apagada por eso: la página de búsqueda
+> de Facebook exige sesión, así que el único servicio que la ofrece busca con
+> cuentas propias. En *Meta v. Bright Data* la defensa descansó en no ser un
+> usuario de la plataforma, y un proveedor que inicia sesión la pierde aunque la
+> cuenta no sea nuestra. **El cliente decidió hoy encenderla para la búsqueda en
+> vivo, sabiendo esto y sin opinión legal todavía.** Queda en ese único camino:
+> la consulta programada sigue leyendo solo páginas públicas, y encenderla ahí
+> sería otra decisión.
+>
+> **El tono es el mismo instrumento, no otro.** Lo pone el mismo modelo local
+> que etiqueta la prensa y los comentarios de la cosecha, servido aparte para
+> que el sitio pueda preguntarle; medido hoy, coincide con la etiqueta guardada
+> del pipeline en 109 de 109 titulares. Un Claude o una copia del modelo en
+> otro lenguaje habrían puesto dos medidas distintas bajo la misma palabra
+> «positivo». Si el término nombra a una figura del roster, no se muestra tono:
+> la excepción del 18 de septiembre dejó en pie esa prohibición, y una búsqueda
+> libre la reabriría con solo escribir un nombre.
+>
+> **Lo que se sostiene igual.** Solo cuenta lo que nombra el término: el sondeo
+> del 18 de septiembre trajo tres de tres videos ajenos para cada término del
+> cliente, y sin ese filtro se pagarían los comentarios de una banda boliviana.
+> Nada de esto entra a `data/` ni a git: el texto de los comentarios existe en
+> tránsito y en el conjunto de datos de la corrida del proveedor, como el de la
+> cosecha, y el libro de gasto guarda una huella del término, no el término. No
+> se guarda quién comenta. Una búsqueda en vivo no tiene PDF ni Analizar, y lo
+> que afirma es «lo que devolvió la búsqueda y nombra el término», no la
+> cobertura del término.
+>
+> **Lo que falta.** El servicio de tono ya está publicado, aparte del sitio, y
+> etiqueta igual que el pipeline (109 de 109 titulares, medido en producción).
+> Falta darle al sitio su dirección y su secreto, crear la tabla del libro de
+> gasto y encender la compuerta. Y un
+> hallazgo de paso: Jornada BC se mudó a `jornadabc.com.mx`, así que su
+> buscador redirige y ningún enlace pasa la regla de «del propio medio»; hay
+> que sondear la fila nueva.
+
+> **Implementación · 23 de septiembre de 2026 — Resumen con IA de TikTok y
+> orden por popularidad.** El cliente mandó la captura del «Resumen con IA» que
+> TikTok pinta arriba de su búsqueda «noticias internacionales» —asuntos,
+> viñetas y la fuente de cada una— y lo pidió para las búsquedas que ya
+> corremos: Mundo, México y Tijuana, con las publicaciones por popularidad y la
+> opción de verlas por lo más reciente.
+>
+> - **Ese resumen no se puede traer, así que se escribe aquí.** El actor de
+>   TikTok no lo devuelve, vive en la página de búsqueda de la app, y
+>   publicarlo sería publicar lo que el modelo de otra empresa resumió de los
+>   cuerpos de las notas. Es la misma razón por la que la nota del 17 de
+>   septiembre, más abajo, dejó apagado el resumen de Apify. Lo escribe el
+>   modelo de las otras lecturas y lee **solo la primera línea del pie y el @
+>   de cada video** que la pestaña TikTok muestra: ni conteos, ni comentarios,
+>   ni subtítulos. Cada punto cita los videos de donde sale y lleva a su
+>   tarjeta; un punto que no se ata a un video no se pinta. Lo que un pie
+>   afirma se presenta como afirmado, no como cierto.
+> - **Se pide solo, sin botón, y se muestra plegado, como en TikTok**: lo
+>   primero de la pestaña es el lugar, «Resumen con IA de…», la entrada entera
+>   y el primer asunto desvaneciéndose, con «Ver más»; el primer video asoma
+>   debajo en la misma pantalla. Las otras lecturas automáticas son botones;
+>   esta no, por decisión del cliente. Sigue sin ser un paso de la ingesta
+>   —nadie la pide si nadie abre la pestaña— y se guarda seis horas por lugar,
+>   así que cuesta una llamada por lugar y ciclo, del orden de medio centavo
+>   de dólar. Debajo de cinco videos no aparece. Fue la tercera forma del día:
+>   primero una tarjeta a pantalla completa, que dejaba el primer video a un
+>   gesto («la prioridad son los TikToks», pidió el cliente), luego una franja
+>   de una línea con el resto flotando encima de los videos, y al final el
+>   patrón de la búsqueda de TikTok que el cliente mandó, menos la sección de
+>   usuarios.
+> - **Sin salvedades en pantalla**, también a pedido del cliente ese día: ni
+>   la que escribe el modelo sobre lo que el material no establece, ni la fija
+>   de la página («no verifica lo que afirman ni es una muestra de ninguna
+>   ciudad»). La del modelo se sigue pidiendo y vigilando, y no se pinta.
+>   Queda «Generado con IA» y la forma de cada viñeta, que atribuye lo que
+>   dice a un video.
+> - **El lector abre con lo más popular** (likes; vistas en YouTube), con
+>   «Más recientes» a un toque en la barra. En «Todas» las redes se intercalan
+>   por puesto, porque los likes de una red y las vistas de otra no son la
+>   misma unidad.
+> - **La cosecha no cambia: sigue pidiendo «más relevantes».** Relevante es el
+>   orden de TikTok para la consulta, no el más popular; de esos, el tablero
+>   se queda con los quince con más likes por lugar. Lo que se ve es lo más
+>   popular de lo relevante. Pedir «más gustados» no se hace sin un sondeo:
+>   el riesgo es traer videos virales que no son noticia, falsos positivos con
+>   cara de cobertura como los de Tecate.
+>
+> El resumen es tan bueno como los pies: en Mundo muchos son de creadores
+> cualesquiera y de gancho, y queda a nivel de titular por diseño, mientras el
+> de TikTok lee las notas.
+
+> **Implementación · 23 de septiembre de 2026 — Las consultas dicen positivo o
+> negativo.** Al ver la ficha de un término con sus cifras arriba (22 de
+> septiembre), el cliente pidió que su dirección viera **cuántas noticias,
+> publicaciones y comentarios son positivos y cuántos negativos**, sin
+> tecnicismos y con **un solo vocabulario**: positivo y negativo, no «adversos,
+> favorables, neutrales». Con eso cambian tres cosas de la nota del 18 de
+> septiembre que está más abajo:
+>
+> - **Pantalla y PDF dicen positivo/negativo** en las tres series. El dato no
+>   cambia: la prensa sigue guardando favorable/adversa y el validador lo sigue
+>   exigiendo. Cada serie va en su propia tarjeta y no se suman.
+> - **Las publicaciones llevan tono propio.** Hasta ese día solo lo llevaban los
+>   comentarios. Ahora el mismo modelo local lee la primera línea de cada
+>   publicación, y `tono_publicaciones` lo cuenta sobre todas las de la ventana.
+> - **La salvedad del tono sale de la pantalla.** Sigue en el dato, igual
+>   palabra por palabra, y en el PDF. De la ficha salen también las líneas que
+>   explicaban de dónde salen los datos.
+>
+> Lo neutro se sigue diciendo, en gris y al pie de cada tarjeta, para que las
+> cuentas cuadren con el total. Una serie que no se leyó sigue diciendo «sin
+> dato», nunca cero.
+>
+> Ese mismo día, también a pedido del cliente, salieron de la ficha «En
+> resumen» y la sección y tarjeta «Agregadas a mano». Las noticias señaladas a
+> mano van ahora en la lista de noticias y en su tarjeta, sin marca de cómo
+> llegaron. Una con fecha anterior a los seis meses va con las anteriores; una
+> sin fecha va con las actuales. En el dato y en el PDF siguen aparte.
+>
+> Después, también el 23, la tarjeta de noticias pasó a un **total**, sin
+> separar los seis meses de lo anterior, y las tarjetas dejaron de nombrar su
+> ventana. Un enlace señalado a mano que es un post de Facebook, Instagram o
+> TikTok cuenta como **publicación**, con su tono, y sale en el recorrido de
+> publicaciones: así el post de Tijuana Línea Roja (11 de marzo de 2026) cuenta
+> para Valente Márquez y, a pedido del cliente, también para Grupo Concordia,
+> porque lo nombra.
+
+> **Implementación · 22 de septiembre de 2026 — Fuentes fijas de México y
+> Mundo.** La pastilla México de Redes seguía mostrando Mexicali, Tijuana y
+> Corea del Norte. En Instagram los quince eran de La Crónica y El Mexicano,
+> que el 15 de septiembre se fijaron como «México» por decisión del cliente. Esa
+> decisión cambia en su efecto: sus publicaciones se colocan ahora por lo que
+> dicen. Lo que nombra el corredor va a su ciudad, lo del mundo a Mundo, y lo
+> demás sigue en México.
+>
+> Se agregan fuentes fijas:
+> - para Mundo: CNN en Español, BBC News Mundo, DW Español y Noticias
+>   Telemundo;
+> - para México: Latinus, Azteca Noticias, El Heraldo de México y N+.
+>
+> Cada medio se lee en una sola red, Instagram o TikTok, la de más seguidores,
+> para que la misma nota no salga dos veces. La otra queda anotada y apagada.
+> Se sondearon ese mismo día:
+> - **Instagram**: CNN en Español (8.9M) y BBC News Mundo (4.0M).
+> - **TikTok**: DW Español (3.2M contra 2.1M en Instagram), Noticias Telemundo
+>   (17.8M), Latinus (23.9M), Azteca Noticias (18.8M), El Heraldo de México
+>   (10.6M contra 2.3M) y N+ (6.8M).
+>
+> Las cifras nacionales que dio el cliente eran las de TikTok. Instagram no dio
+> datos sin sesión para Latinus, Azteca y N+, así que esa comparación queda por
+> volver a sondear. En TikTok, «@bbcmundo» resultó ser otra cuenta, de 17
+> seguidores; la BBC gana en Instagram de todos modos. YouTube queda fuera de
+> esta regla.
+>
+> Lo que un medio o una búsqueda local publica sin nombrar lugar deja de caer
+> en México. De una búsqueda de TikTok se descarta. De un medio del corredor
+> queda en Corredor como «un lugar sin precisar», nunca en la página de una
+> ciudad. Si nombra a México, sigue en México.
+>
+> Los temas en Redes, a la manera de la portada, quedan en espera. La portada
+> no clasifica: pregunta a Google por tema, y en redes no hay un buscador
+> equivalente. No cambia la prensa, sus cifras ni la retención.
+
+> **Implementación · 22 de septiembre de 2026 — Mundo en Redes.** La pastilla
+> «Mundo» de Redes vivía de una sola búsqueda de TikTok, y los quince videos
+> que traía estaban ahí porque no nombraban lugar alguno, no porque fueran del
+> extranjero. Al revés, lo que sí era del extranjero se perdía: el gacetero no
+> conocía ningún lugar de fuera de México, así que «Más de 280 mil niños en
+> Gaza regresaron a clases», de N+, salía en la pastilla México como si fuera
+> nota nacional.
+>
+> Ahora las publicaciones de redes reconocen el extranjero. Lo que nombra
+> Gaza, Ucrania o Madrid va a Mundo **venga de donde venga**, también de un
+> medio de Tijuana: antes caía en México, que es peor que Mundo y que perderlo.
+> La tarjeta dice «sobre el mundo» solo para eso. Lo que llega de una fuente
+> del mundo sin nombrar lugar sigue en Mundo, pero con «un lugar sin precisar».
+> Lo que habla de México —el país, sus instituciones— va a México aunque lo
+> publique la BBC. Estados Unidos a secas no cuenta como extranjero, porque la
+> frontera lo nombra todo el día. Un lugar del corredor nombrado de verdad
+> gana siempre, y lo débil cede: un homónimo («la paz», «El Rosario,
+> Sinaloa»), el `#tijuana` suelto al final de un video de Irán, o la firma
+> «| TELEMUNDO SAN DIEGO» en un helicóptero caído en Los Ángeles.
+>
+> Se sumaron seis canales de YouTube del mundo, sondeados antes de encenderse:
+> BBC News Mundo, CNN en Español, DW Español, FRANCE 24 Español, euronews y EL
+> PAÍS. NTN24 se sondeó y quedó apagado: sus titulares llevan el adjetivo de la
+> redacción, y encenderlo es decisión del cliente. Las cuentas de Instagram de
+> esos medios y una búsqueda de TikTok en inglés quedan dadas de alta
+> **apagadas**, porque sondearlas cuesta y falta la autorización.
+>
+> No cambia la prensa, sus cifras ni la retención: la zona de las notas sigue
+> saliendo como salía.
+
+> **Implementación · 22 de septiembre de 2026 — Segundo lector para Publicidad
+> Meta: la API oficial.** El adaptador de navegador quedó bloqueado: el sondeo
+> del 21 y del 22 devolvió «bloqueado (robots)» para las dos páginas
+> verificadas, así que nueve de las diez figuras siguen sin datos. Se agrega
+> `pulso/publicidad_meta_api.py`, que lee la API oficial de la Biblioteca de
+> Anuncios (`--api`) y busca candidatos de página para quien no tiene
+> (`--descubrir`, que no escribe nada). No es raspado y no toca
+> `respetar_robots`. Falta un paso que no es de código: verificar identidad en
+> Meta —identificación oficial y domicilio, de una persona con nombre— y poner
+> el token en `.env`. Hasta entonces el comando sale con error y no escribe, y
+> el catálogo sigue publicando sus ausencias como ausencias.
+
+> **Implementación · 22 de septiembre de 2026 — Publicidad Meta se sirve como
+> `pauta-meta`.** Los archivos publicados pasaron de `publicidad-meta.json` y
+> `publicidad-meta/<id>.json` a `pauta-meta.json` y `pauta-meta/<id>.json`, y el
+> panel y su carpeta en `web/` se renombraron igual. En pantalla el producto
+> sigue diciendo «Publicidad Meta». El motivo: las listas de filtrado en español
+> que traen los bloqueadores de anuncios bloquean cualquier URL con la palabra
+> «publicidad», en el navegador y antes de que la petición salga, así que el
+> panel decía «No se pudo cargar Publicidad Meta» mientras el servidor respondía
+> 200 — y le habría pasado a cualquier visitante con esas listas, no solo en
+> desarrollo. La configuración, el cache y el verbo de línea de comandos
+> conservan el nombre anterior: no se sirven por HTTP.
+
+> **Implementación · 21 de septiembre de 2026 — Publicidad Meta.** Se agrega la tercera vista de Gasto electoral con directorio, anuncios, información, audiencia, comparación y reporte, filtros en URL y vínculos INE verificados. El piloto manual publica 26 tarjetas de Julieta y secciones parciales; las ausencias siguen visibles. El sondeo automático se detuvo por robots.txt, por lo que la paginación automatizada no está validada en vivo. No se añadió cron, gasto, credenciales ni despliegue. [Operación y cobertura](publicidad-meta.md).
+
 > **Implementación · 21 de septiembre de 2026 — Curar a mano lo que la búsqueda no acierta.** El cliente revisó la primera versión de los informes y pidió dos cosas opuestas y del mismo tipo. Quitar tres titulares que no tratan del término: una nota de videojuegos de IGN España y un reality de Univision que salieron en «Vive la Baja» —la frase cabe en cualquier oración— y la cartelera del Gran Poder de un medio boliviano que salió en «Grupo Concordia», donde ese nombre es el de una banda. Y agregar tres publicaciones que sí tratan del término y que ninguna búsqueda devuelve: dos notas —Zeta sobre la inversión en terrenos y Said Betanzos sobre el despojo con helicóptero— cuyo **titular no nombra el término**, porque lo nombra el cuerpo y aquí no se lee ningún cuerpo, y un post de la página Tijuana Línea Roja en Facebook, que no es una fuente configurada.
 >
 > **Se hace en el archivo de configuración y se justifica por escrito**, como cualquier fila apagada de este proyecto: cada descarte lleva su razón y cada enlace agregado lleva su nota. Lo descartado se empareja por titular y no por enlace, porque el enlace del buscador de noticias cambia entre consultas y la regla dejaría de aplicarse sola.

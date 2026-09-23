@@ -1,3 +1,17 @@
+> **Contrato añadido · 21 de septiembre de 2026:** `pauta-meta.json` contiene catálogo, cobertura y reporte; `pauta-meta/<id>.json` contiene anuncios, información y audiencia por anunciante. Secciones con fuente, periodo, geografía, fechas, estado y completitud; valores ausentes como `null`. Autoridad: `validar_publicidad_meta_config`, `validar_publicidad_meta` y `validar_perfil_meta` en `pulso/validador.py`. [Detalle e importación](publicidad-meta.md).
+
+> **Nombre de archivo · 22 de septiembre de 2026:** los datos se llaman
+> `pauta-meta`, no `publicidad-meta`, y el producto sigue diciendo «Publicidad
+> Meta» en pantalla. Las listas de filtrado en español —EasyList Spanish, que
+> uBlock Origin activa sola a quien navega en español— bloquean cualquier URL
+> que contenga «publicidad». El bloqueo ocurre en el navegador: el servidor
+> responde 200 y la petición nunca sale, con `ERR_BLOCKED_BY_CLIENT` en la
+> consola, así que el panel quedaba en «No se pudo cargar Publicidad Meta» sin
+> que fallara nada del lado del servidor, y en producción le pasaría a
+> cualquier visitante con esas listas. `config/publicidad-meta.json`,
+> `cache/publicidad-meta/`, el verbo `pulso publicidad-meta` y los nombres de
+> tipo **no** se renombraron: no se sirven por HTTP y nadie los bloquea.
+
 # Contratos de datos
 
 Este documento **describe**; `pulso/validador.py` **manda**. Si los dos no
@@ -950,7 +964,12 @@ aviso, no error.
   160 caracteres. Es la regla «titular, fuente y liga» de la prensa aplicada a
   un post: el resto del pie no se publica, y un comentario jamás va aquí.
 - **`zona` es la sede de la cuenta**, no el tema del post, igual que
-  `por_zona`. El tablero dice «cuentas con sede en Tijuana».
+  `por_zona`. El tablero dice «cuentas con sede en Tijuana». La excepción es
+  una cuenta con `ambito` (22 de septiembre de 2026, los medios del mundo):
+  ahí cada post se zonifica por su pie con la tabla de TikTok, **publica
+  `alcance`** y puede valer `internacional`; sus comentarios heredan la zona de
+  su post. El validador acepta `alcance` como opcional en Instagram y exige
+  que un `internacional` lo traiga, porque ninguna sede es «el mundo».
 - **`destacados` es la unión del top 15 general y del top 15 de cada zona**,
   sin repetir URL, ordenada por `(-likes, -comentarios, url)`. Así la página
   de una zona tiene sus propios quince sin que el archivo lleve un bloque por
@@ -1058,13 +1077,34 @@ cambia, y por qué:
   y los hashtags incluidos (`#tijuana` pliega a `tijuana`). Los comentarios
   heredan la zona de su video.
 - **`alcance` es el veredicto crudo del gacetero** (`zona | estatal | fuera |
-  nacional`) y viaja **al lado** de `zona`, no en su lugar. Existe desde el 15
-  de septiembre de 2026, cuando el campo `ambito` de la búsqueda hizo que los
-  dos dejaran de coincidir: en una búsqueda nacional un video de Guadalajara
-  queda `zona: "nacional"` igual que uno que no nombró lugar alguno, y sin el
-  alcance las dos filas serían la misma. El panel rotula «fuera del corredor»
-  para una y «sin lugar» para la otra. Un corte anterior al campo sigue siendo
-  válido (aviso, no error): `data/` lo escribe el bot y el cron lo regenera.
+  extranjero | nacional`) y viaja **al lado** de `zona`, no en su lugar. Existe
+  desde el 15 de septiembre de 2026, cuando el campo `ambito` de la búsqueda
+  hizo que los dos dejaran de coincidir: en una búsqueda nacional un video de
+  Guadalajara queda `zona: "nacional"` igual que uno que no nombró lugar
+  alguno, y sin el alcance las dos filas serían la misma. El panel rotula
+  «fuera del corredor» para una y «sin lugar» para la otra. Un corte anterior
+  al campo sigue siendo válido (aviso, no error): `data/` lo escribe el bot y
+  el cron lo regenera.
+- **`extranjero` (22 de septiembre de 2026) nombra un lugar de fuera de
+  México** y solo puede ir con `zona: "internacional"`; el validador lo exige.
+  Lo calcula `pulso/zonas.py::alcance_redes`, que solo usan las redes:
+  `zonas.alcance`, que zonifica la prensa, no cambió, y `notas.json` no se
+  mueve. Existe porque el gacetero no conocía el extranjero y lo llamaba
+  «nacional»: «Más de 280 mil niños en Gaza regresaron a clases», de N+, caía
+  en la cubeta México. Tres reglas que no son obvias:
+  - **Lo débil cede ante lo que la prosa nombra de fuera**: un homónimo del
+    gacetero («la paz», «El Rosario, Sinaloa»), la cola de etiquetas del pie
+    (`#tijuana` al final de un video de Irán) y la firma de un canal
+    (`sufijos_titulo`). Un lugar del corredor nombrado en la prosa gana
+    siempre, y las palabras comunes del corredor («la mesa», «la presa»)
+    ceden solo ante el extranjero, no ante Sonora.
+  - **Nombrar México bloquea `extranjero`**, sea el país o sus instituciones
+    federales («Sheinbaum», «Pemex», «AICM»): «México vence a Argentina» es
+    nacional. Y una fuente del mundo que habla de México también va a
+    `nacional`, no a Mundo.
+  - **Estados Unidos y California no son extranjero** en el gacetero, a
+    propósito: la frontera los nombra todo el día. Los estados y ciudades de
+    Estados Unidos fuera del corredor sí.
 - **`ambito` decide el residuo, nunca la zona.** Cuando el pie nombra un lugar
   del gacetero manda el pie, igual en los tres ámbitos; lo único que cambia es
   qué se hace con el video que no nombra lugar o que nombra uno de fuera:
@@ -1074,16 +1114,27 @@ cambia, y por qué:
   | una zona del producto | esa zona | esa zona | esa zona |
   | Baja California a secas | `estatal` | `estatal` | `estatal` |
   | un lugar mexicano de fuera | se descarta, y se cuenta en `salud[].fuera` | `nacional` | `nacional` |
-  | ningún lugar | `nacional` | `nacional` | **`internacional`** |
+  | un lugar del extranjero | **`internacional`** | **`internacional`** | **`internacional`** |
+  | ningún lugar | se descarta, y se cuenta en `salud[].sin_lugar` (o `nacional` si nombra México) | `nacional` | **`internacional`**, o `nacional` si nombra México |
+
+  La casilla regional sin lugar cambió el 22 de septiembre de 2026: antes era
+  `nacional`, y el relleno de las búsquedas de Rosarito, Ensenada y Mexicali
+  —una lluvia en Tegucigalpa, pies vacíos— llenaba la cubeta México. En YouTube
+  y en una cuenta de Instagram con `ambito: regional`, que son **medios** del
+  corredor y no búsquedas, esa casilla es `zona: "estatal"` con
+  `alcance: "nacional"`: se ve en Corredor, nunca en una página de ciudad, y
+  la tarjeta dice «un lugar sin precisar». El validador acepta ese par solo
+  donde `PLATAFORMAS_REDES[plataforma]["residuo_corredor"]` es cierto.
 
   `internacional` es la única zona que no está en `ZONAS` de
-  `pulso/__init__.py`: solo existe en TikTok, solo como residuo de la edición
-  del mundo, y no entra a `ZONAS_DE_CONTEO` porque en temas, conversación e
-  Instagram no significa nada. Como `nacional`, no tiene página de zona y solo
-  se ve en la vista de región. Y como `nacional`, la cubeta la da la **edición**
-  de la búsqueda, no una verificación de que el video sea del extranjero: es el
-  mismo trato que `/api/actualidad` le da a la sección «Mundo» de Google
-  Noticias.
+  `pulso/__init__.py`: es la cubeta Mundo, existe en TikTok, YouTube y las
+  cuentas de Instagram con `ambito`, y no entra a `ZONAS_DE_CONTEO` porque en
+  temas y conversación no significa nada. Como `nacional`, no tiene página de
+  zona y solo se ve en la vista de región. Junta dos cosas que el `alcance`
+  separa: lo que nombró el extranjero (`extranjero`, verificado) y lo que vino
+  de una edición del mundo sin nombrar nada (`nacional`), que es el mismo trato
+  que `/api/actualidad` le da a la sección «Mundo» de Google Noticias. La
+  tarjeta dice «sobre el mundo» solo para lo primero.
 - **`ventana_horas: 24`**, medida sobre `publicado` (fecha-hora ISO en UTC,
   mismo formato que `generado`); `fecha` es su día y solo sirve para agrupar.
   Desde el 10 de septiembre de 2026 Instagram mide igual; `ventana_dias` solo
@@ -1187,10 +1238,13 @@ Felipe y San Quintín están apagadas con la razón escrita en su fila: se
 probaron de verdad y no devuelven noticia sino falsos positivos —un incendio en
 Apodaca, Nuevo León, zonificado como Tecate porque el pie decía «Tecate Six»;
 una carrera de un club de Manhattan zonificada como San Felipe—. Un falso
-positivo con cara de cobertura es peor que un hueco rotulado. `presupuesto_resultados`
-está calculado sobre las **once** filas y no sobre las ocho activas, a
-propósito: así encender una apagada no recorta los comentarios de las demás en
-silencio, que es como falla `reparto - posts`.
+positivo con cara de cobertura es peor que un hueco rotulado. La duodécima,
+`tk_world_news` («world news», en inglés, para Mundo), entró apagada el 22 de
+septiembre de 2026 hasta su `--probar`, que cuesta. `presupuesto_resultados`
+está calculado sobre **todas** las filas (3,800 para doce: 12 × 15 × 21 =
+3,780) y no sobre las activas, a propósito: así encender una apagada no
+recorta los comentarios de las demás en silencio, que es como falla
+`reparto - posts`.
 
 `cosecha` trae `videos_por_busqueda`,
 `comentarios_por_video`, `dias_entre_cosechas`, `ventana_horas`,
@@ -1198,6 +1252,21 @@ silencio, que es como falla `reparto - posts`.
 LAST_3_MONTHS | LAST_6_MONTHS`), `orden` (`MOST_RELEVANT | MOST_LIKED | LATEST`)
 y `presupuesto_resultados`, el tope de **este comando**: cada verbo construye
 su propio `Presupuesto`. Lo valida `validar_tiktok_config`.
+
+**`perfiles`** (22 de septiembre de 2026) son cuentas de medios de México y del
+mundo, las fuentes fijas de esas dos cubetas. Campos:
+- `id` (`^tk_…`, sin chocar con una búsqueda: los dos son `cuenta` en `data/tiktok.json`);
+- `nombre`, `perfil` (`@handle`), `idioma`;
+- `ambito`: **obligatorio**, `nacional | internacional`;
+- `activo`, `verificado` (fecha del `tiktok --probar --fila`, obligatoria si está activo), `nota`;
+- `marca` y `seguidores` (ver `config/instagram.json`).
+
+No llevan `consulta` ni `zona`: la zona sale del pie de cada video, igual que en una búsqueda.
+
+`cosecha` suma `videos_por_perfil` (10) y `comentarios_por_video_perfil` (7). Tres cosas que difieren de una búsqueda:
+- La ventana de 24 horas se impone **antes** de pedir comentarios, porque el perfil no trae filtro de fecha. En `salud`, el perfil cuenta `fuera_de_ventana`.
+- Un video de otro autor se tira como `otro_creador`.
+- `presupuesto_resultados` cuenta cada perfil como una fila entera, porque el reparto es parejo: 20 × 315 = 6,300.
 
 ### `config/instagram.json`
 
@@ -1210,9 +1279,15 @@ ser de Tijuana: cubre Tijuana, Mexicali, Ensenada, Tecate, San Diego y
 `canal66_ig` era el otro y se cerró ese día con `@canal66tv`, conservando su
 `id`.
 
-La zona de una cuenta es **su sede declarada**, no el veredicto de un gacetero:
-a diferencia de TikTok, Instagram no consulta `pulso/zonas.py`, así que lo que
-diga esta fila se le estampa a cada comentario y a cada post de la cuenta sin
+Cada fila lleva `zona` **o** `ambito`, nunca las dos ni ninguna; lo valida
+`validar_instagram_config` desde el 22 de septiembre de 2026, que además exige
+`handle` y `verificado: true` a toda cuenta activa. Con `ambito` la cuenta es
+de las del mundo y sus posts se zonifican por el pie (ver `redes.json`
+arriba); con `zona` todo sigue como estaba.
+
+La zona de una cuenta con `zona` es **su sede declarada**, no el veredicto de
+un gacetero: a diferencia de TikTok, esa fila no consulta `pulso/zonas.py`, así
+que lo que diga se le estampa a cada comentario y a cada post de la cuenta sin
 corrección posible. Por eso varias filas llevan escrita la instrucción de a qué
 zona pasar si su conversación desmiente la bio, y por eso `@svnnoticias` —viva,
 con 31 mil seguidores, pedida por el cliente— quedó en `senuelos`: es «Sonora
@@ -1229,6 +1304,24 @@ hora exacta de publicación, desde el 10 de septiembre de 2026;
 `posts_por_cuenta`, `comentarios_por_post` y `dias_entre_cosechas` gobiernan
 las dos pasadas pagadas, y la `nota` del bloque explica por qué con 24 horas
 los comentarios de un post son la foto de su primera cosecha.
+
+**Una marca, una red** (22 de septiembre de 2026). Una fila puede llevar
+`marca` (`^[a-z0-9_]{2,20}$`), que la une con el perfil del mismo medio en
+`config/tiktok.json`, y `seguidores`, entero, del sondeo de esa red. Reglas de
+`validar_marcas`:
+- Dos filas activas con la misma `marca` entre las dos redes son **error**: el
+  muro repetiría cada nota.
+- Si la activa no es la de más seguidores, es un **aviso**.
+- `seguidores` solo se exige a la fila activa. Una sin sondear no tiene cifra,
+  y un 0 se leería como «nadie la sigue».
+
+La Crónica y El Mexicano pasaron ese día de `zona: nacional` a
+`ambito: nacional`. Sus 15 destacados de México traían Mexicali, Tijuana y
+Corea del Norte.
+
+`resultados_por_corrida` en `config/apify.json` tiene que dar al menos
+`posts_por_cuenta × (1 + comentarios_por_post)` por cuenta activa, y una prueba
+lo exige. Es la versión ejecutable del recorte silencioso de `reparto - posts`.
 
 No hay hashtags, y no es un olvido. Un hashtag no lleva `zona`, por la misma
 razón que no la lleva una búsqueda de Google Noticias: se la acreditaría a
@@ -1325,9 +1418,16 @@ Shorts. Sobre siete días los dos juntos llevan la cobertura de Tecate de 10 a
 
 ### La zona sale del pie, no de la fila del canal
 
-Como en TikTok, con `zonas.alcance` y el segundo argumento **siempre** `None`.
-Se publica `alcance` al lado de `zona`, con las mismas cuatro etiquetas y la
-misma tabla de `ambito`.
+Como en TikTok, con `zonas.alcance_redes` y la zona del canal **nunca**
+consultada. Se publica `alcance` al lado de `zona`, con las mismas cinco
+etiquetas y la misma tabla de `ambito`.
+
+**La firma del canal es evidencia débil.** `sufijos_titulo` lista la firma que
+el canal pone al final de sus títulos: «| TELEMUNDO SAN DIEGO» en 17 de 43.
+Cuenta mientras el título no nombre otro lugar, y cede cuando lo nombra: el
+caso fue «Tres muertos tras caída del helicóptero … en Los Ángeles», que iba
+al muro de San Diego. Quitarla sin más era peor: casi todo lo demás que firma
+es de San Diego, en barrios que el gacetero no conoce, y se habría ido a Mundo.
 
 **El título manda; la descripción sólo desempata.** Se lee la descripción
 únicamente cuando el título no nombra lugar alguno. Vale catorce puntos de
@@ -1403,6 +1503,7 @@ preguntas sobre videos largos que no dicen nada de los Shorts.
 | `canal` | el id `UC…` de 24 caracteres. Las listas se arman **reemplazando** el `UC` por `UUSH` o `UULF`, no anteponiéndolo. |
 | `formatos` | subconjunto no vacío de `["short", "video"]`. Es para apagar un formato que el canal publica y **no sirve** —El Vigía entra como `["short"]` porque sus videos son «Resumen diario», digestos publicados por duplicado—, no uno que no publica. |
 | `ambito` | `regional` \| `nacional` \| `internacional`. Decide el residuo, nunca la zona. |
+| `sufijos_titulo` | opcional: la firma del canal al final del título, como lista de textos de 4 caracteres o más. Evidencia débil para el gacetero; el título se publica tal cual. |
 | `idioma` | `es` \| `en`. Del config, nunca adivinado del texto. |
 | `activo`, `verificado`, `nota` | La `nota` cita el sondeo con sus números; es de donde salen los porcentajes de este documento. |
 
@@ -1601,6 +1702,10 @@ incluidas; una fila apagada sale con sus tres redes en `sin_dato`.
     "comentarios": 311, "metodo": "modelo", "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "salvedad_tono": "Conteo del tono de cada comentario según un modelo que lee frases, no posturas: …"
    },
+   "tono_publicaciones": {
+    "positivo": 3, "negativo": 0, "neutral": 5, "sin_clasificar": 0, "sin_modelo_idioma": 0,
+    "publicaciones": 8, "metodo": "modelo", "modelo": "pysentimiento/robertuito-sentiment-analysis"
+   },
    "temas": {"minimo": 3, "comentarios": 311, "temas": [{"termino": "valle guadalupe", "n": 14}]}
   }
  ],
@@ -1615,9 +1720,10 @@ Lo que el esquema decide, y por qué:
   literal, el `@handle`, la etiqueta o el slug de la página). Un término no es
   una cuenta ni un lugar: la zona sale del texto con el gacetero y `ambito`
   nacional en las **tres** plataformas —también en Instagram, donde
-  `redes.json` la estampa desde la fila—, así que `alcance` viaja siempre e
-  `internacional` no existe. Un post que nombra Guadalajara queda
-  `nacional/fuera`: es lo que la consulta fue a buscar.
+  `redes.json` la estampa desde la fila—, así que `alcance` viaja siempre. Un
+  post que nombra Guadalajara queda `nacional/fuera`: es lo que la consulta fue
+  a buscar. Desde el 22 de septiembre de 2026 uno que nombra Madrid queda
+  `internacional/extranjero`, en vez de pasar por nota nacional mexicana.
 - **Cada plataforma publica sus cifras y nada más.** TikTok trae `creador`,
   `compartidos`, `guardados` y `duracion`; Facebook trae `compartidos` (un 0 es
   cero medido); Instagram no trae ninguno de los tres y su ausencia es «sin
@@ -1688,6 +1794,18 @@ Lo que el esquema decide, y por qué:
   del 18 de septiembre de 2026 (`docs/PLAN.md`). Por eso viaja `salvedad_tono`
   con el texto exacto de `pulso/consultas.py::SALVEDAD_TONO`: el validador lo
   compara por igualdad, en la misma postura que `SALVEDAD_FIJA` en `web/`.
+  Desde el 23 de septiembre de 2026 la **pantalla** ya no la pinta (pedido del
+  cliente); el dato la sigue trayendo y el PDF la sigue imprimiendo.
+- **`tono_publicaciones` son cinco cubetas que suman `publicaciones`**, el tono
+  del **pie** de cada publicación de la ventana (su `titulo`, nunca el pie
+  entero), con el mismo modelo y las mismas cubetas que los comentarios.
+  `publicaciones` es la suma de las `publicaciones` de los bloques leídos, y el
+  validador exige que coincidan: la tarjeta de publicaciones dice un total y un
+  tono, y tienen que ser del mismo conjunto. El idioma es el de la fila del
+  config, nunca adivinado del pie. Existe desde el 23 de septiembre de 2026,
+  cuando la dirección del cliente pidió contar noticias, publicaciones y
+  comentarios positivos y negativos; un corte anterior no lo trae, pasa con
+  aviso y la pantalla dice «sin dato» para ese tono, nunca cero.
 - **`temas.temas[]` solo trae `{termino, n}`.** `temas.temas()` devuelve
   además `ejemplos` (texto de comentarios, que no entra a `data/`) y
   `n_previo`/`momento` (la ventana anterior nunca está en un cache de 30 días:
@@ -1781,6 +1899,75 @@ Facebook exige sesión del proveedor. `presupuesto_resultados` tiene que cubrir
 × (1 + `comentarios_por_post`)—, para que encender una no recorte a las demás
 en silencio (la lección de `config/tiktok.json`). Lo valida
 `validar_consultas_config`.
+
+## La búsqueda en vivo de un término — dos rutas, ningún archivo
+
+Desde el 23 de septiembre de 2026 la lupa de Redes responde cualquier término
+(ver AGENTS.md, «Búsqueda en vivo de un término»). **No escribe nada en
+`data/`**: lo que sigue es el contrato de dos respuestas, que no valida
+`pulso/validador.py` porque no pasan por él. Su espejo es TypeScript
+(`web/src/lib/busqueda/termino.ts`, `web/src/lib/redes-en-vivo/responder.ts`)
+y lo fija `web/scripts/probar-redes-en-vivo.cjs`.
+
+Las dos traen **piezas** de una consulta y no la consulta armada: la arma el
+navegador con `lib/dominio/termino-vivo.ts::armarConsulta` sobre la lista final
+de publicaciones, sin repetidas, para que una publicación que traigan las dos
+no cuente dos veces. El resultado tiene exactamente la forma de un elemento de
+`consultas[]` de `data/consultas.json`, con una diferencia: `plataformas.youtube`
+puede traer datos (los videos de los canales que el tablero ya lee y nombran el
+término). X es siempre `sin_dato`.
+
+```json
+{
+ "termino": "vive la baja",
+ "generado": "2026-09-23T18:00:00.000Z",
+ "figura": false,
+ "prensa": { "estado": "ok", "ventana_dias": 180, "resultados": [], "anteriores": [], "tono": {}, "por_medio": [], "buscadores": [] },
+ "redes": { "instagram": [], "youtube": [] },
+ "salud": [],
+ "pies": { "https://www.instagram.com/p/…/": "positivo" },
+ "metodo": "modelo",
+ "modelo": "pysentimiento/robertuito-sentiment-analysis"
+}
+```
+
+- `redes` **sin una red** es «esa red no se leyó» (`sin_dato`); una red leída y
+  vacía viaja como lista vacía. La pantalla distingue las dos.
+- `pies` es el tono del pie de cada publicación en el vocabulario de los
+  comentarios, más `sin_modelo_idioma` (la fila declara otro idioma) y
+  `sin_clasificar` (el servicio no respondió). Una url que falta cuenta como
+  `sin_clasificar`, nunca como neutral.
+- `figura: true` cuando el término nombra a alguien del roster, o cuando el
+  roster no se pudo leer: entonces no se pidió ningún tono y todo cae en
+  `sin_clasificar` (regla 5 de PRODUCT.md).
+- Los destacados en vivo llevan `cuenta: "vivo"`, `zona: "nacional"` sin
+  `alcance` (el gacetero es Python y la búsqueda de un término no lo usa),
+  `origen` (`busqueda` o `hashtag`) y `fuente` (el término, la etiqueta, el
+  slug de la página o «Facebook»). **Nunca** el autor de un post de Facebook.
+
+### `GET /api/termino?q=` — la mitad gratuita
+
+`{ consulta, piezas, textos, tendencias, redesEnVivo }`. `textos` tiene la forma
+de `redes-comentarios.json` con los comentarios ya publicados de las
+publicaciones que nombran el término. `tendencias` son las filas de
+`tendencias.json` que lo nombran: `{ lugar, puesto, nombre, url }`, nunca un
+tuit. `redesEnVivo` dice si el botón de la mitad pagada se puede ofrecer.
+`Cache-Control: private`: lleva texto de comentarios.
+
+### `POST /api/redes-en-vivo` y `GET /api/redes-en-vivo?id=&q=` — la pagada
+
+El POST recibe `{ q }` y devuelve `{ id }` (202 si arrancó, 200 si reusó una
+búsqueda del mismo término de las últimas seis horas). Errores con `codigo`:
+`apagado` (400: falta la bandera, el token, la base o `AUTH_SECRET`),
+`limite_dia` y `limite_mes` (429), `no_disponible` (503), más los tres de
+`validar.ts`. El GET necesita el término además del id —el id solo no abre una
+búsqueda— y devuelve `{ id, estado, redes, piezas, textos }`, con `estado`
+`buscando | listo | fallo` y el de cada red `sin_iniciar | buscando |
+comentarios | listo | fallo`. `no-store` siempre.
+
+El libro de gasto (`web/db/0002_busquedas_redes.sql`) no guarda ni el término
+ni texto: una huella HMAC del término, las ids de las corridas y lo que costó
+cada una.
 
 ## `config/canales.json`
 

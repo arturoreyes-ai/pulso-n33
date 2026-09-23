@@ -1,3 +1,5 @@
+> **Publicidad Meta · piloto manual:** el catálogo inicial cubre las nueve figuras del roster más Julieta Ramírez. Los datos parciales se etiquetan; no se infiere cero de una ausencia. El filtro de entrega de Baja California no atribuye todo el gasto al estado. La segmentación elegida y la entrega observada se muestran por separado. Los rangos individuales, totales publicados por Meta y gasto auditado INE conservan sus definiciones y periodos; no se suman ni se usan para calcular gasto no reportado. [Cobertura y operación](docs/publicidad-meta.md).
+
 # Pulso N33 — el producto
 
 Qué es, qué mide, y sobre todo qué **no** dice. Los comandos y el mantenimiento
@@ -90,8 +92,11 @@ divididos**, que es la regla 3. Y como los comentarios son texto público sin
 moderar, alguno está escrito para que un modelo lo lea: son datos, no
 instrucciones, y lo que los contiene no es el prompt sino esa comprobación.
 
-El mismo día se sumó **«De qué se habla»**, la única pieza que mira varias
-publicaciones a la vez: una hoja con los conteos que la ingesta ya calculaba en
+*(«De qué se habla» se retiró el 23 de septiembre de 2026 a pedido del
+cliente; lo que sigue queda como registro de lo que fue y de por qué.)*
+
+El mismo día se sumó **«De qué se habla»**, que fue la única pieza que mira
+varias publicaciones a la vez hasta el resumen de TikTok del 23 de septiembre: una hoja con los conteos que la ingesta ya calculaba en
 cada corrida y no tenían pantalla —cómo suena cada comentario, y cuántos quedan
 sin clasificar por idioma— y, detrás de otro botón, una lectura automática de
 qué asuntos se repiten. **No se funden en una cifra**: son dos maneras de mirar
@@ -108,6 +113,27 @@ solo se veía que no se pudo. La comprobación vigila **afirmaciones**, y una
 advertencia que las niega no cabe bajo la misma prohibición. El modelo dice ahora
 únicamente qué queda sin aclarar en el material; la salvedad es del producto,
 donde no puede omitirse ni suavizarse.
+
+El 23 de septiembre de 2026 la pestaña TikTok ganó un **«Resumen con IA»**,
+plegado y con «Ver más», con los videos justo debajo —la prioridad son los
+videos, pidió el cliente—, con la forma del que TikTok pinta sobre su búsqueda:
+asuntos, viñetas y, bajo cada una, los videos de donde sale. El de TikTok no se
+puede traer, y aunque se pudiera no se publicaría: es lo que el modelo de otra
+empresa resumió de los cuerpos de las notas. Este lee **solo la primera línea del
+pie y quién publicó** cada video que la pestaña muestra; no ve el video, no lee
+comentarios ni conteos, y no agrega nada que los pies no digan. Un pie de TikTok
+es lo que **afirma** quien lo subió, y muchos son gancho, así que el resumen dice
+lo que los videos afirman y nunca lo da por cierto. Un punto que no se puede
+atar a un video no se pinta, y las mismas comprobaciones de las otras
+lecturas descartan la respuesta entera ante un porcentaje o «la mayoría». A
+diferencia de ellas, **no lleva advertencia en pantalla**, por decisión del
+cliente: ni la del modelo ni la de la página; quedan «Generado con IA» y la
+forma de cada viñeta, que atribuye lo que dice a un video. Es la única lectura
+que se pide sin pulsar nada, también por decisión del cliente; se guarda seis horas por lugar, así que
+cuesta una llamada por lugar y ciclo. Ese mismo día el lector de redes pasó a
+abrir con **lo más popular primero**, con «Más recientes» a un toque, y en
+«Todas» intercala las redes por puesto en vez de comparar likes de una con
+vistas de otra.
 
 El 15 de septiembre de 2026, a petición del cliente, el tablero se redujo a lo
 que se lee: el recorrido de titulares, las redes, los indicadores, las garitas y
@@ -344,6 +370,24 @@ viene de tal medio»), nunca de «la mayoría» ni de un porcentaje. El cruce co
 las **figuras** del roster sigue prohibido y la lectura automática sigue sin
 atribuir postura a nadie. Queda registrado en `docs/PLAN.md`.
 
+**El 23 de septiembre de 2026 el cliente simplificó cómo se dice.** La ficha y
+el PDF hablan de noticias, publicaciones y comentarios **positivos y
+negativos**, un solo vocabulario para la dirección; el dato sigue llamando
+favorable/adversa al tono de la prensa. Las publicaciones llevan desde ese día
+el tono de su propio pie. Cada serie va en su tarjeta y no se suman (regla 3).
+La salvedad sigue en el dato y en el PDF, **pero la pantalla dejó de
+pintarla**: sin pie de página ni salvedad, lo que queda en la ficha de esta
+excepción son los conteos, los «sin dato» y la separación de las series.
+
+**Y ese mismo día la excepción se volvió de cualquier término.** La lupa de
+Redes arma la misma ficha para lo que se escriba (ver «La búsqueda en vivo de
+un término», abajo), con el mismo modelo y los mismos conteos. Lo que la
+excepción del 18 de septiembre dejó en pie se hace comprobación: **si el
+término nombra a una figura del roster —su nombre, un alias, su cargo—, la
+ficha no muestra tono en ninguna serie**, ni en la etiqueta de cada comentario.
+Una búsqueda libre reabriría el cruce con solo escribir un nombre, y eso no lo
+decidió nadie.
+
 Y el modelo **solo habla español**. Los cuatro medios de San Diego publican en
 inglés, así que sus notas —98 de 888 en el corte actual— salen con
 `postura: null` en vez de con una etiqueta que un modelo entrenado en tuits en
@@ -435,6 +479,38 @@ iniciada. Ver [docs/PLAN.md](docs/PLAN.md) §3, que cita *Meta v. Bright Data* y
 *Meta v. Voyager Labs* además de la LFPDPPP y la CPRA. No es una limitación
 técnica: es una decisión que no se revisa sin abogado.
 
+**Con una excepción que el cliente tomó el 23 de septiembre de 2026, sin
+abogado todavía:** la búsqueda por palabra en Facebook de la búsqueda en vivo.
+La página de búsqueda de Facebook exige sesión, así que el proveedor busca con
+cuentas propias; eso es exactamente lo que el párrafo de arriba rechaza, y el
+cliente decidió asumirlo para ese único camino. Está escrito con su riesgo en
+[docs/PLAN.md](docs/PLAN.md). Todo lo demás —la cosecha programada, las
+consultas por término— sigue leyendo solo lo público y sin sesión.
+
+### La búsqueda en vivo de un término
+
+Desde el 23 de septiembre de 2026 la lupa de Redes responde cualquier término
+con noticias, publicaciones y comentarios. **Lo que afirma es «esto devolvió la
+búsqueda y nombra el término», no «esta es la cobertura del término».**
+
+- **Solo cuenta lo que nombra el término.** Un titular del buscador de un medio,
+  un video, un post: si no lo nombra en su texto, no entra. Una búsqueda por
+  palabra trae de todo —el 18 de septiembre TikTok devolvió tres de tres videos
+  ajenos para cada término del cliente, uno de ellos una banda boliviana—, y un
+  homónimo contado como mención es un falso positivo con cara de cobertura.
+- **Las redes se buscan cuando alguien lo pide.** Lo que ya leyó el tablero
+  sale al entrar; la búsqueda en TikTok, Instagram y Facebook cuesta, tarda
+  minutos y va detrás de un botón, con topes al mes y por persona. Instagram
+  entra por la etiqueta del término, porque no se deja buscar por palabra sin
+  sesión. YouTube, por los canales que el tablero ya lee: buscar en todo
+  YouTube exige la API de datos, que sigue apagada. De X, solo si el término es
+  tendencia; nunca un tuit.
+- **El tono es el mismo modelo y se dice igual**: conteos, positivos y
+  negativos por serie, sin sumarse. Con un término del roster, sin tono.
+- **Nada de esto se guarda.** No entra a `data/` ni a git, no tiene PDF y no se
+  guarda quién comenta. Es una pregunta que se hace y se responde, como la
+  búsqueda de la portada.
+
 ### La retención de 30 días y por qué el panel viene apagado
 
 Las Políticas para Desarrolladores de YouTube (III.E.4.d) limitan el
@@ -485,9 +561,33 @@ búsqueda del corredor, un video de otra región se descarta; en la de México s
 conserva y se rotula «fuera del corredor», porque es justo lo que esa lista va
 a buscar. Un video que no nombra lugar alguno se rotula «sin lugar», y en la
 lista del mundo va a «Mundo». Ninguna de las dos tiene página de zona: se ven
-en la vista de región, detrás de su propia pastilla, y la página lo dice —
-«Mundo» agrupa lo que no nombra ningún lugar de la región, no es una
-comprobación de que el video sea del extranjero.
+en la vista de región, detrás de su propia pastilla.
+
+**Desde el 22 de septiembre de 2026 «Mundo» junta dos cosas, y la tarjeta
+dice cuál es cuál.** Lo que nombra un lugar del extranjero —Gaza, Ucrania,
+Madrid— va a Mundo venga de donde venga, también de un medio de Tijuana, y la
+tarjeta dice «sobre el mundo»: eso sí está verificado. Lo que viene de una
+fuente del mundo y no nombra lugar alguno también va a Mundo, porque la
+edición lo pone ahí, pero la tarjeta dice «un lugar sin precisar»: no es una
+comprobación de que sea del extranjero. Lo que habla de México —el país o sus
+instituciones— va a México aunque lo publique la BBC. Estados Unidos a secas no
+cuenta como extranjero: la frontera lo nombra todo el día. Además de la
+búsqueda de TikTok, alimentan Mundo seis canales de YouTube del mundo (BBC News
+Mundo, CNN en Español, DW, FRANCE 24, euronews y EL PAÍS) y las cuentas de
+Instagram o TikTok de medios del mundo, cuyas publicaciones se zonifican por
+lo que dicen y no por la sede del medio.
+
+**México y Mundo tienen fuentes fijas desde el 22 de septiembre de 2026**, y
+cada medio se lee en una sola red. Para Mundo, CNN en Español, BBC News Mundo,
+DW Español y Noticias Telemundo; para México, Latinus, Azteca Noticias, El
+Heraldo de México y N+. Cada uno se lee en Instagram o en TikTok, donde tenga
+más seguidores, para que la misma nota no salga dos veces. Sus publicaciones
+se colocan por lo que dicen: una de N+ sobre Tijuana va a Tijuana.
+
+Lo que un medio o una búsqueda del corredor publica sin nombrar lugar ya no
+cae en México. De una búsqueda de TikTok se descarta. De un medio del
+corredor queda en Corredor como «un lugar sin precisar», nunca en la página
+de una ciudad. Si nombra a México, sigue siendo nota nacional.
 
 **Tres lugares no tienen búsqueda, y eso está escrito, no omitido.** Tecate,
 San Felipe y San Quintín se probaron el 15 de septiembre de 2026 y no devuelven
