@@ -1,10 +1,11 @@
 "use client";
 
-import { ArrowLeft as FlechaAtras, CaretDown as Desplegar, List as Menu, MagnifyingGlass as Lupa, X as Cerrar } from "@phosphor-icons/react";
+import { ArrowLeft as FlechaAtras, CaretDown as Desplegar, List as Menu, MagnifyingGlass as Lupa } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useEffect, useRef, type ReactNode, type RefObject } from "react";
 
 import { CINTA, CONTROL, FILA_CINTA, ICONO_CONTROL, ICONO_DESPLEGAR, ICONO_ESTRECHO } from "@/components/chrome/medidas-cinta";
+import { Hoja } from "@/components/ui/hoja";
 
 /**
  * El lector: la caja que ES la pantalla.
@@ -117,9 +118,7 @@ export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opc
               <FlechaAtras size={ICONO_ESTRECHO} aria-hidden />
             </Link>
           )}
-          {/* `id="zonas"`: la pastilla del lugar en la pildora flotante apunta a
-              ese ancla; aqui el lugar se elige con este boton. */}
-          <button ref={selector} id="zonas" type="button" className="flex min-w-0 flex-1 items-center gap-2 rounded-nucleo px-2 py-2 text-left hover:bg-vela md:flex-none"
+          <button ref={selector} type="button" className="flex min-w-0 flex-1 items-center gap-2 rounded-nucleo px-2 py-2 text-left hover:bg-vela md:flex-none"
             aria-haspopup="dialog" aria-controls={idOpciones} onClick={() => lugares.current?.showModal()}>
             <span className="min-w-0">
               <span className="block text-meta text-tinta-meta">{rotuloValor ?? rotulo}</span>
@@ -151,35 +150,21 @@ export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opc
       </div>
 
       {/* Los enlaces navegan y desmontan la hoja; el boton de cierre la cierra aqui. */}
-      <dialog ref={lugares} id={idOpciones} className="dialogo-lector" aria-labelledby={`titulo-${idOpciones}`}>
-        <div className="cabecera-dialogo-lector">
-          <h2 id={`titulo-${idOpciones}`} className="text-rotulo text-tinta-titulo">{tituloOpciones}</h2>
-          <button type="button" className={CONTROL} aria-label="Cerrar opciones" onClick={() => lugares.current?.close()}><Cerrar size={20} aria-hidden /></button>
-        </div>
+      <Hoja ref={lugares} titulo={tituloOpciones} rotuloCerrar="Cerrar opciones" id={idOpciones}>
         {opciones}
-      </dialog>
+      </Hoja>
 
       {/* Los enlaces y el formulario navegan; el boton de cierre controla la hoja. */}
-      <dialog ref={navegacion} id={idMenu} className="dialogo-lector" aria-labelledby={`titulo-${idMenu}`}>
-        <div className="cabecera-dialogo-lector">
-          <h2 id={`titulo-${idMenu}`} className="text-rotulo text-tinta-titulo">Ir a</h2>
-          <button type="button" className={CONTROL} aria-label="Cerrar menú" onClick={() => navegacion.current?.close()}><Cerrar size={20} aria-hidden /></button>
-        </div>
+      <Hoja ref={navegacion} titulo="Ir a" rotuloCerrar="Cerrar menú" id={idMenu}>
         {menu}
-      </dialog>
+      </Hoja>
 
       {busqueda === undefined ? null : (
         // Sin cierre delegado: el campo y el boton de enviar viven aqui, y
         // cerrar al primer clic dentro haria imposible escribir.
-        <dialog ref={buscador} id={idBusqueda} className="dialogo-lector" aria-labelledby={`titulo-${idBusqueda}`}>
-          <div className="cabecera-dialogo-lector">
-            <h2 id={`titulo-${idBusqueda}`} className="text-rotulo text-tinta-titulo">Buscar</h2>
-            <button type="button" className={CONTROL} aria-label="Cerrar búsqueda" onClick={() => buscador.current?.close()}>
-              <Cerrar size={20} aria-hidden />
-            </button>
-          </div>
+        <Hoja ref={buscador} titulo="Buscar" rotuloCerrar="Cerrar búsqueda" id={idBusqueda}>
           {busqueda}
-        </dialog>
+        </Hoja>
       )}
 
       {children}

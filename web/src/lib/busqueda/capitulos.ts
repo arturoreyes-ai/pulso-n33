@@ -58,7 +58,7 @@ import { NOMBRE_RUBRO, RUBROS, type Rubro } from "./rubros";
 import type { Idioma, ResultadoExterno } from "./tipos";
 import type { PedidoActualidad } from "./use-actualidad";
 import { plegar } from "@/lib/dominio/formato";
-import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
+import { NOMBRE_CORTO, NOMBRE_TODA_REGION, type ZonaRuta } from "@/lib/dominio/zonas";
 
 /** Por donde empieza el recorrido: una zona, el corredor o una edicion. */
 export type Entrada = ZonaRuta | "region" | "mexico" | "internacional";
@@ -145,7 +145,8 @@ function seccionDe(entrada: Entrada): Seccion {
     return {
       id: "local",
       donde: { ambito: "region" },
-      nombre: "El corredor",
+      // El nombre de la barra (nombre-ahora.ts, zonas.ts::NOMBRE_TODA_REGION).
+      nombre: NOMBRE_TODA_REGION,
       en: "en el corredor",
       titulo: "Lo que destaca ahora en el corredor",
       acento: "text-chart-1-texto",

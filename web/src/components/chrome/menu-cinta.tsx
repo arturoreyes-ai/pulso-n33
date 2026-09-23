@@ -1,9 +1,10 @@
 "use client";
 
-import { List as Menu, X as Cerrar } from "@phosphor-icons/react";
+import { List as Menu } from "@phosphor-icons/react";
 import { useRef, type ReactNode } from "react";
 
-import { CONTROL, ICONO_CONTROL, ICONO_ESTRECHO } from "@/components/chrome/medidas-cinta";
+import { CONTROL, ICONO_CONTROL } from "@/components/chrome/medidas-cinta";
+import { Hoja } from "@/components/ui/hoja";
 
 /**
  * El boton de menu de la cinta, y su hoja de paginas.
@@ -56,20 +57,9 @@ export function MenuCinta({ children }: { children: ReactNode }) {
       </button>
 
       {/* Los enlaces y el formulario navegan; el boton de cierre controla la hoja. */}
-      <dialog
-        ref={hoja}
-        id="menu-navegacion"
-        className="dialogo-lector"
-        aria-labelledby="titulo-menu-navegacion"
-      >
-        <div className="cabecera-dialogo-lector">
-          <h2 id="titulo-menu-navegacion" className="text-rotulo text-tinta-titulo">Ir a</h2>
-          <button type="button" className={CONTROL} aria-label="Cerrar menú" onClick={() => hoja.current?.close()}>
-            <Cerrar size={ICONO_ESTRECHO} aria-hidden />
-          </button>
-        </div>
+      <Hoja ref={hoja} titulo="Ir a" rotuloCerrar="Cerrar menú" id="menu-navegacion">
         {children}
-      </dialog>
+      </Hoja>
     </>
   );
 }

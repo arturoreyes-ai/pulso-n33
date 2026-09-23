@@ -1,12 +1,13 @@
 "use client";
 
-import { Sparkle as IA, X as Cerrar } from "@phosphor-icons/react";
+import { Sparkle as IA } from "@phosphor-icons/react";
 import { useId, useRef, useState } from "react";
 
-import { CONTROL } from "@/components/lector/lector";
-import { clasesChip } from "@/components/ui/clases";
+import { clasesBoton } from "@/components/ui/clases";
+import { EstadoCarga } from "@/components/ui/estado-carga";
 import { VERSION_ANALISIS, type Analisis, type SugerenciaSocial } from "@/lib/analisis/contrato";
 import type { ReferenciaAnalisis } from "@/lib/busqueda/enlaces";
+import { Hoja } from "@/components/ui/hoja";
 
 /**
  * La lectura automatica de un titular, en un dialogo.
@@ -81,23 +82,12 @@ export function AnalisisTitular({ titulo, referencia, medio }: {
 
   return (
     <>
-      <button type="button" className={clasesChip(false)} onClick={abrir}>
-        <IA size={16} weight="light" aria-hidden className="shrink-0 self-center" />
+      <button type="button" className={clasesBoton(false)} onClick={abrir}>
+        <IA size={16} aria-hidden />
         Analizar
       </button>
 
-      <dialog
-        ref={hoja}
-        className="dialogo-lector"
-        aria-labelledby={`${id}-titulo`}
-        onClose={() => { if (estado.fase === "confirmar") setEstado({ fase: "quieto" }); }}
-      >
-        <div className="cabecera-dialogo-lector">
-          <h2 id={`${id}-titulo`} className="text-rotulo text-tinta-titulo">Lectura automática</h2>
-          <button type="button" className={CONTROL} aria-label="Cerrar lectura" onClick={() => hoja.current?.close()}>
-            <Cerrar size={20} aria-hidden />
-          </button>
-        </div>
+      <Hoja ref={hoja} titulo="Lectura automática" rotuloCerrar="Cerrar lectura" onClose={() => { if (estado.fase === "confirmar") setEstado({ fase: "quieto" }); }}>
 
         <div className="grid gap-4 px-4 pt-6 pb-8 text-lectura text-tinta-prosa">
           <p className="max-w-[65ch] font-titular text-rotulo text-tinta-titulo">{titulo}</p>
@@ -109,11 +99,11 @@ export function AnalisisTitular({ titulo, referencia, medio }: {
                 <p className="text-tinta-meta">Confirma para generar el resumen y la idea para redes.</p>
               </div>
               <div className="flex flex-wrap items-center gap-3">
-                <button type="button" className={clasesChip(true)} onClick={analizar}>
-                  <IA size={16} weight="light" aria-hidden className="shrink-0 self-center" />
+                <button type="button" className={clasesBoton(true)} onClick={analizar}>
+                  <IA size={16} aria-hidden />
                   Analizar con IA
                 </button>
-                <button type="button" className={clasesChip(false)} onClick={() => hoja.current?.close()}>
+                <button type="button" className={clasesBoton(false)} onClick={() => hoja.current?.close()}>
                   Cancelar
                 </button>
               </div>
@@ -121,15 +111,15 @@ export function AnalisisTitular({ titulo, referencia, medio }: {
           ) : null}
 
           {estado.fase === "cargando" ? (
-            <p role="status" className="max-w-[65ch] text-tinta-meta">Leyendo la nota…</p>
+            <div className="aparicion-suave"><EstadoCarga etiqueta="Leyendo la nota" /></div>
           ) : null}
 
           {estado.fase === "fallo" ? (
-            <p role="status" className="max-w-[65ch] text-baja">{estado.mensaje}</p>
+            <p role="status" className="aparicion-suave max-w-[65ch] text-baja">{estado.mensaje}</p>
           ) : null}
 
           {estado.fase === "listo" ? (
-            <>
+            <div className="aparicion-suave grid gap-4">
               <section aria-labelledby={`${id}-resumen`} className="grid max-w-[65ch] gap-2 break-words">
                 <h3 id={`${id}-resumen`} className="text-meta text-tinta-dato">Resumen</h3>
                 <p>{estado.analisis.lectura}</p>
@@ -164,7 +154,7 @@ export function AnalisisTitular({ titulo, referencia, medio }: {
                 <h3 id={`${id}-salvedad`} className="text-meta text-tinta-dato">Lo que no establece</h3>
                 <p>{estado.analisis.salvedad}</p>
               </section>
-            </>
+            </div>
           ) : null}
 
           {estado.fase === "listo" ? (
@@ -173,7 +163,7 @@ export function AnalisisTitular({ titulo, referencia, medio }: {
             </p>
           ) : null}
         </div>
-      </dialog>
+      </Hoja>
     </>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-
+import { FilaPestanas } from "@/components/ui/pestanas";
 import type { Entrada } from "@/lib/busqueda/capitulos";
 import { rutaDeEntrada } from "@/lib/busqueda/entrada";
 import { NOMBRE_RUBRO, RUBROS, type Rubro } from "@/lib/busqueda/rubros";
@@ -40,18 +39,11 @@ const nombre = (r: Rubro | null): string => (r === null ? "Todo" : NOMBRE_RUBRO[
 
 export function PestanasRubro({ entrada, rubro }: { entrada: Entrada; rubro: Rubro | null }) {
   return (
-    <div role="group" aria-label="Tema" className="pestanas-lector">
-      {PESTANAS.map((r) => (
-        <Link
-          key={r ?? "todo"}
-          href={rutaDeEntrada(entrada, r)}
-          scroll={false}
-          aria-current={r === rubro ? "page" : undefined}
-          className="pestana-lector text-cuerpo"
-        >
-          {nombre(r)}
-        </Link>
-      ))}
-    </div>
+    <FilaPestanas etiqueta="Tema" pestanas={PESTANAS.map((r) => ({
+      id: r ?? "todo",
+      nombre: nombre(r),
+      href: rutaDeEntrada(entrada, r),
+      activa: r === rubro,
+    }))} />
   );
 }

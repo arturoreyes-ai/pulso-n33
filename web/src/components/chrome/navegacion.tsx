@@ -15,7 +15,7 @@ import {
   type PaginaSuelta,
   type Vista,
 } from "@/lib/dominio/secciones";
-import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
+import { NOMBRE_CORTO, NOMBRE_TODA_REGION, type ZonaRuta } from "@/lib/dominio/zonas";
 
 /**
  * La navegacion del sitio: una cinta en el telefono, una pastilla de cristal
@@ -117,7 +117,7 @@ function rotuloDe(vista: Vista, pagina: PaginaSuelta | undefined, fuera: string 
 function valorDe(zona: ZonaRuta | null, pagina: PaginaSuelta | undefined, fuera: string | undefined): string {
   if (fuera !== undefined) return fuera;
   if (pagina !== undefined) return LUGAR_SUELTA[pagina];
-  return zona === null ? "Toda la región" : NOMBRE_CORTO[zona];
+  return zona === null ? NOMBRE_TODA_REGION : NOMBRE_CORTO[zona];
 }
 
 export function Navegacion({
@@ -223,25 +223,11 @@ export function Navegacion({
           ))}
         </ul>
 
-        {pagina === undefined && vista !== null ? (
-          <>
-            <Filo />
-
-            {/* El otro eje. Es un ancla y no un enlace: el selector de zona esta
-                en el encabezado de ESTA pagina, unas lineas mas abajo, y llevarlo
-                a la pildora significaria repetir nueve chips en cada corte.
-                En la PORTADA no se pinta: ahi el selector vive dentro de un
-                lector `position: fixed`, donde un ancla no tiene a que
-                desplazarse, y ademas diria «Toda la región» mientras la barra
-                del lector dice «México». */}
-            <a
-              href="#zonas"
-              className={`${PASTILLA} shrink-0 whitespace-nowrap text-tinta-dato hover:bg-filo hover:text-tinta-titulo`}
-            >
-              {zona === null ? "Toda la región" : NOMBRE_CORTO[zona]}
-            </a>
-          </>
-        ) : null}
+        {/* Aqui iba la pastilla del LUGAR, un ancla a #zonas. Salio el 23 de
+            septiembre de 2026 a pedido del cliente: la portada ya no la
+            pintaba, y en Redes repetia en la pildora lo que la barra del
+            lector dice y elige («Tijuana»), con otra forma. Cada pagina de la
+            rejilla elige su lugar en su propia barra (lector o cinta). */}
 
         <Filo />
 

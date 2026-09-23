@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { Segmentado } from "@/components/ui/segmentado";
+
 import { precargar, type ClaveGrafica } from "@/lib/graficas/registro";
 
 export type Vista = "lista" | "grafica";
@@ -22,6 +24,8 @@ export function useVista(clave: ClaveGrafica) {
   return { vista, setVista, intento };
 }
 
+/** El segmentado del tablero (ui/segmentado.tsx) desde el 23 de septiembre
+ *  de 2026; antes era una pareja propia, sin pista y en minusculas. */
 export function Alternar({
   vista,
   onVista,
@@ -32,25 +36,9 @@ export function Alternar({
   onIntento: () => void;
 }) {
   return (
-    <div role="group" aria-label="Vista" className="flex shrink-0 gap-1">
-      {(["lista", "grafica"] as const).map((v) => (
-        <button
-          key={v}
-          type="button"
-          aria-pressed={vista === v}
-          onClick={() => onVista(v)}
-          {...(v === "grafica"
-            ? { onPointerEnter: onIntento, onFocus: onIntento }
-            : {})}
-          className={`rounded-full px-3 py-1 text-meta transition-colors duration-[var(--dur-cambio)] ease-firma ${
-            vista === v
-              ? "bg-realce text-tinta-titulo"
-              : "text-tinta-meta hover:bg-vela hover:text-tinta-dato"
-          }`}
-        >
-          {v === "lista" ? "lista" : "gráfica"}
-        </button>
-      ))}
-    </div>
+    <Segmentado etiqueta="Vista" ancho="justo" opciones={[
+      { id: "lista", nombre: "Lista", activo: vista === "lista", onElegir: () => onVista("lista") },
+      { id: "grafica", nombre: "Gráfica", activo: vista === "grafica", onElegir: () => onVista("grafica"), onCalentar: onIntento },
+    ]} />
   );
 }

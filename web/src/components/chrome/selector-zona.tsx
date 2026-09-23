@@ -1,11 +1,9 @@
-import Link from "next/link";
-
-import { clasesChip } from "@/components/ui/clases";
+import { PastillasLugar } from "@/components/ui/opciones-lugar";
 import { ruta, type Vista } from "@/lib/dominio/secciones";
-import { NOMBRE_CORTO, ZONAS_RUTA, type ZonaRuta } from "@/lib/dominio/zonas";
+import { NOMBRE_CORTO, NOMBRE_TODA_REGION, ZONAS_RUTA, type ZonaRuta } from "@/lib/dominio/zonas";
 
 /**
- * Las opciones del selector: `null` primero, que es "Toda la región", y luego
+ * Las opciones del selector: `null` primero, que es «Todas», y luego
  * las nueve zonas.
  *
  * A nivel de modulo y no dentro del componente: no depende de props ni de
@@ -28,8 +26,6 @@ const OPCIONES_ZONA: readonly (ZonaRuta | null)[] = [null, ...ZONAS_RUTA];
  * separado, y perder la vista al cambiar de lugar obligaba a volver a
  * buscarla. Por eso el selector necesita saber en que pagina esta.
  *
- * En movil la fila hace scroll horizontal con snap; en escritorio envuelve.
- *
  * Llevaba una prop `conteos` que pintaba, junto a cada zona, cuantas notas la
  * mencionaban. Se fue con el muro: el unico que la pedia en `true` era su
  * encabezado, y el conteo sale de estado.json, que ya no lo lee nadie.
@@ -41,31 +37,24 @@ export function SelectorZona({
   zona: ZonaRuta | null;
   vista?: Vista;
 }) {
-  // `scroll-mt` porque la pastilla del LUGAR en la nav apunta a #zonas: sin
+  // `scroll-mt` por si un enlace apunta a #zonas: sin
   // esto el selector aterriza debajo de la pildora flotante, que es fija.
   // Mismo calculo que usa `Seccion` para sus anclas.
+  // Las mismas pastillas que el dialogo de lugar (ui/opciones-lugar.tsx)
+  // desde el 23 de septiembre de 2026: esta era una segunda forma, una fila
+  // con desplazamiento horizontal y otro espaciado.
   return (
     <nav
       id="zonas"
       aria-label="Zona"
-      className="-mx-4 scroll-mt-[calc(var(--nav-alto)+1.5rem)] px-4 md:mx-0 md:px-0"
+      className="scroll-mt-[calc(var(--nav-alto)+1.5rem)]"
     >
-      <ul className="flex snap-x gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] md:flex-wrap md:overflow-visible">
-        {OPCIONES_ZONA.map((z) => {
-          const activo = z === zona;
-          return (
-            <li key={z ?? "region"} className="shrink-0 snap-start">
-              <Link
-                href={ruta(z, vista)}
-                aria-current={activo ? "page" : undefined}
-                className={clasesChip(activo)}
-              >
-                <span>{z === null ? "Toda la región" : NOMBRE_CORTO[z]}</span>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      <PastillasLugar lugares={OPCIONES_ZONA.map((z) => ({
+        id: z ?? "region",
+        nombre: z === null ? NOMBRE_TODA_REGION : NOMBRE_CORTO[z],
+        href: ruta(z, vista),
+        activo: z === zona,
+      }))} />
     </nav>
   );
 }

@@ -1,8 +1,6 @@
-import Link from "next/link";
-
-import { clasesChip } from "@/components/ui/clases";
+import { OpcionesLugar } from "@/components/ui/opciones-lugar";
 import { ruta, type Vista } from "@/lib/dominio/secciones";
-import { NOMBRE_CORTO, ZONAS_RUTA, type ZonaRuta } from "@/lib/dominio/zonas";
+import { NOMBRE_CORTO, NOMBRE_TODA_REGION, ZONAS_RUTA, type ZonaRuta } from "@/lib/dominio/zonas";
 
 /**
  * El cuerpo del dialogo «Lugar» de la cinta: enlaces, nunca botones.
@@ -19,29 +17,26 @@ import { NOMBRE_CORTO, ZONAS_RUTA, type ZonaRuta } from "@/lib/dominio/zonas";
  * contra pastillas en la pagina—, como ya pasa entre `MenuLector` y la
  * pastilla flotante, que salen las dos de `VISTAS` y `SUELTAS`.
  *
+ * Desde el 23 de septiembre de 2026 la forma es la de la portada y Redes
+ * (ui/opciones-lugar.tsx): pastillas, no renglones con palomita.
+ *
  * Componente de SERVIDOR. Baja a `LugarCinta` como nodo, por el mismo canal
  * por el que `MenuLector` baja a la hoja de paginas.
  */
 const OPCIONES: readonly (ZonaRuta | null)[] = [null, ...ZONAS_RUTA];
 
 export function OpcionesZona({ zona, vista }: { zona: ZonaRuta | null; vista: Vista }) {
+  // Sin alcance: fuera de la portada y de Redes no hay México ni
+  // Internacional que elegir, asi que el componente pinta solo las pastillas.
   return (
-    <ul className="grid gap-2 p-4">
-      {OPCIONES.map((z) => {
-        const activo = z === zona;
-        return (
-          <li key={z ?? "region"}>
-            <Link
-              href={ruta(z, vista)}
-              aria-current={activo ? "page" : undefined}
-              className={`${clasesChip(activo)} w-full justify-between`}
-            >
-              {z === null ? "Toda la región" : NOMBRE_CORTO[z]}
-              {activo ? <span aria-hidden>✓</span> : null}
-            </Link>
-          </li>
-        );
-      })}
-    </ul>
+    <OpcionesLugar
+      alcances={[]}
+      lugares={OPCIONES.map((z) => ({
+        id: z ?? "region",
+        nombre: z === null ? NOMBRE_TODA_REGION : NOMBRE_CORTO[z],
+        href: ruta(z, vista),
+        activo: z === zona,
+      }))}
+    />
   );
 }

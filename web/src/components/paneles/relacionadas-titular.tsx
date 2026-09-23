@@ -2,9 +2,10 @@
 
 import { ClockCounterClockwise as Historial } from "@phosphor-icons/react";
 
-import { clasesChip } from "@/components/ui/clases";
+import { clasesBoton } from "@/components/ui/clases";
 import type { NotaRelacionada } from "@/lib/busqueda/tipos";
 import { fechaCorta } from "@/lib/dominio/formato";
+import { EstadoCarga } from "@/components/ui/estado-carga";
 
 /**
  * «Notas relacionadas»: lo que el archivo ya publicó sobre lo mismo.
@@ -40,7 +41,7 @@ export const TITULO_RELACIONADAS = "Notas relacionadas";
 const SIN_COINCIDENCIAS =
   "No encontramos notas anteriores sobre esto. La cobertura no es pareja en todo el corredor.";
 
-const ESPERANDO = "Buscando notas anteriores…";
+const ESPERANDO = "Buscando notas anteriores";
 
 /**
  * El tercer estado, y la razon de que exista.
@@ -55,8 +56,8 @@ const SIN_ARCHIVO = "Las notas anteriores no están disponibles en esta vista.";
 /** El chip de la fila de acciones. Solo abre la hoja; no calcula nada. */
 export function BotonRelacionadas({ onAbrir }: { onAbrir: () => void }) {
   return (
-    <button type="button" className={clasesChip(false)} onClick={onAbrir}>
-      <Historial size={16} weight="light" aria-hidden className="shrink-0 self-center" />
+    <button type="button" className={clasesBoton(false)} onClick={onAbrir}>
+      <Historial size={16} aria-hidden />
       Relacionadas
     </button>
   );
@@ -80,7 +81,7 @@ export function ListaRelacionadas({ notas, cargando, fallo }: {
       {fallo ? (
         <p role="status" className="max-w-[65ch] text-tinta-meta">{SIN_ARCHIVO}</p>
       ) : cargando ? (
-        <p role="status" className="max-w-[65ch] text-tinta-meta">{ESPERANDO}</p>
+        <EstadoCarga etiqueta={ESPERANDO} />
       ) : notas.length === 0 ? (
         <p role="status" className="max-w-[65ch] text-tinta-meta">{SIN_COINCIDENCIAS}</p>
       ) : (

@@ -413,6 +413,26 @@ input[type="search"]::-webkit-search-decoration {
   animation: entrada var(--dur-entrada) var(--ease-firma) both;
 }
 
+/* La version chica de `entrada`, para lo que cambia DENTRO de una hoja: la
+   carga de «Analizar con IA» al empezar y la lectura al llegar (23 de
+   septiembre de 2026). Seis px y el tiempo de un cambio, no de una entrada:
+   en una hoja ya abierta, un salto de 1.5rem en 620ms se leeria como una
+   pagina nueva. El bloque de prefers-reduced-motion la apaga. */
+@keyframes aparicion {
+  from {
+    opacity: 0;
+    transform: translateY(0.375rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.aparicion-suave {
+  animation: aparicion var(--dur-cambio) var(--ease-firma) both;
+}
+
 /* ------------------------------------------------------------------ lector */
 
 /* Los dos recorridos a pantalla completa —el Visual de redes y los titulares
@@ -576,9 +596,10 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
 .pestana-lector:hover { background: var(--color-vela); color: var(--color-tinta-prosa); }
 /* Dos maneras de estar activa, porque hay dos clases de pestana: redes cambia
    de plataforma sin cambiar de pagina y marca con `aria-pressed`; los temas del
-   recorrido son enlaces y marcan con `aria-current`. La pinta es la misma. */
-.pestana-lector:is([aria-pressed="true"], [aria-current="page"]) { color: var(--color-tinta-titulo); }
-.pestana-lector:is([aria-pressed="true"], [aria-current="page"])::after {
+   recorrido son enlaces y marcan con `aria-current`. La pinta es la misma.
+   `aria-selected` es la tercera: Publicidad Meta es un `tablist` de verdad. */
+.pestana-lector:is([aria-pressed="true"], [aria-current="page"], [aria-selected="true"]) { color: var(--color-tinta-titulo); }
+.pestana-lector:is([aria-pressed="true"], [aria-current="page"], [aria-selected="true"])::after {
   content: "";
   position: absolute;
   inset: auto 1rem 0;
@@ -613,6 +634,22 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
    (`overflow-anchor: none` arriba cierra la otra via, el anclaje de scroll.) */
 .recorrido-lector .sin-ajuste { scroll-snap-align: none; scroll-snap-stop: normal; }
 
+/* El resumen de la pestana TikTok: el primer punto de ajuste, del alto de su
+   CONTENIDO y no de la caja, para que el primer video asome debajo en la
+   misma pantalla, como en la busqueda de TikTok. Desplegado puede medir mas
+   que la caja, y entonces se recorre por dentro como la ficha de un termino. */
+.resumen-recorrido { scroll-snap-align: start; scroll-snap-stop: always; }
+/* El pliegue: lo que sigue a la entrada, recortado y desvanecido hacia abajo.
+   Dos renglones y medio de lectura, que es lo que deja ver el titulo del
+   primer asunto y el arranque de su primera vineta, y nada mas. Mascara y no
+   un degradado encima: el fondo del recorrido no es un color que se pueda
+   repetir en una capa sin que se note el borde. */
+.pliegue-resumen {
+  max-height: 5.5rem;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, black 25%, transparent);
+}
+
 /* La reserva es el alto que NO puede ocupar el medio: la banda del titular.
    Subio de 12.5rem el 17 de septiembre de 2026 al entrar «Analizar»: con tres
    pastillas y el contador, la fila se parte en dos en un telefono y la banda
@@ -632,7 +669,7 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
    la banda del titular fuera de la pantalla. Se recorta el envoltorio
    interior, no `.medio-visual`: este lleva un `min-height` en linea con la
    altura ya medida, y un min-height le gana a cualquier max-height. Lo que se
-   pierde es el pie del embed; el enlace «Ver original» esta en la banda. */
+   pierde es el pie del embed; el enlace «Abrir en …» esta en la banda. */
 .publicacion-visual .medio-visual > div {
   max-height: calc(var(--alto-tarjeta, 100svh) - var(--visor-reserva));
   overflow: hidden;
@@ -744,6 +781,9 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
 }
 .control-lector:hover { background: var(--color-vela); }
 .control-lector[data-nuevos] { color: var(--color-chart-3); }
+/* Un control de la barra que es interruptor («Más recientes» en Redes): el
+   estado encendido se ve como la pastilla activa, no solo en el icono. */
+.control-lector[aria-pressed="true"] { background: var(--color-realce); color: var(--color-tinta-titulo); }
 /* El menu de la barra, solo en el telefono. A partir de 48rem la pildora
    flotante vuelve a verse sobre el lector (mas abajo, en el bloque .lector) y
    lleva a las mismas paginas: dos navegaciones identicas a diez pixeles una de
@@ -877,6 +917,37 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
 @keyframes barrido {
   to {
     transform: translateX(100%);
+  }
+}
+
+/* --------------------------------------------------------- estado de carga */
+
+/* La rejilla de ui/estado-carga.tsx (23 de septiembre de 2026). El keyframe
+   solo trae el pico: el reposo tenue (0.15) va en linea en cada celda, asi que
+   cuando el bloque global de prefers-reduced-motion corta la animacion a una
+   pasada de 0.01ms la celda vuelve a su reposo, quieta y tenue, y no queda
+   encendida a medio ciclo. Mismo razonamiento que `barrido`, arriba. */
+@keyframes pixel-encendido {
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes brillo-texto {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+/* El brillo, en cambio, terminaria parado con la franja clara a un lado. Sin
+   movimiento la etiqueta va en un color liso. */
+@media (prefers-reduced-motion: reduce) {
+  .brillo-carga {
+    background-image: none !important;
+    color: var(--color-tinta-meta) !important;
   }
 }
 

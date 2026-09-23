@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import useSWR from "swr";
 
 import { Bisel } from "@/components/ui/bisel";
+import { clasesBoton, clasesInsignia } from "@/components/ui/clases";
 import { Barra, Esqueleto } from "@/components/ui/primitivas";
 import { duracion, fechaLocal, guion, nombreCarril, vigente } from "@/lib/garitas/formato";
 import type { Carril, RespuestaGaritas } from "@/lib/garitas/tipos";
@@ -68,9 +69,9 @@ const CBP = "https://bwt.cbp.gov/";
 /** El ancho de la pagina, identico al de `chrome/seccion.tsx`. */
 const ANCHO = "mx-auto w-full max-w-[88rem] px-4 md:px-8";
 
-/** El boton de la cabecera ocupa la fila en movil. */
-const BOTON =
-  "inline-flex min-h-11 shrink-0 items-center justify-center rounded-full border border-filo bg-vela px-5 text-cuerpo text-tinta-titulo transition-colors duration-[var(--dur-cambio)] ease-firma hover:bg-filo max-sm:flex-1";
+/** La pastilla del tablero (ui/clases.ts); en movil ocupa la fila. Era una
+ *  propia, con borde, hasta el 23 de septiembre de 2026. */
+const BOTON = `${clasesBoton(false)} shrink-0 max-sm:flex-1`;
 
 async function consultar(ruta: string): Promise<RespuestaGaritas> {
   const respuesta = await fetch(ruta);
@@ -428,7 +429,7 @@ export function TableroGaritas() {
             <span
               role="status"
               aria-live="polite"
-              className="inline-flex items-center gap-2 rounded-full border border-filo px-3 py-1 text-tinta-meta"
+              className={clasesInsignia("tenue")}
             >
               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-current" />
               {estado}

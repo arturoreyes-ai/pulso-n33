@@ -1,9 +1,10 @@
 "use client";
 
-import { CaretDown as Desplegar, X as Cerrar } from "@phosphor-icons/react";
+import { CaretDown as Desplegar } from "@phosphor-icons/react";
 import { useRef, type ReactNode } from "react";
 
-import { CONTROL, ICONO_DESPLEGAR, ICONO_ESTRECHO } from "@/components/chrome/medidas-cinta";
+import { ICONO_DESPLEGAR } from "@/components/chrome/medidas-cinta";
+import { Hoja } from "@/components/ui/hoja";
 
 /**
  * El bloque «donde estas» de la cinta, con su hoja de lugares.
@@ -70,20 +71,9 @@ export function LugarCinta({
       </button>
 
       {/* Los enlaces navegan y desmontan la hoja; el boton de cierre la cierra aqui. */}
-      <dialog
-        ref={hoja}
-        id="lugar-cinta"
-        className="dialogo-lector"
-        aria-labelledby="titulo-lugar-cinta"
-      >
-        <div className="cabecera-dialogo-lector">
-          <h2 id="titulo-lugar-cinta" className="text-rotulo text-tinta-titulo">{titulo ?? "Lugar"}</h2>
-          <button type="button" className={CONTROL} aria-label="Cerrar opciones" onClick={() => hoja.current?.close()}>
-            <Cerrar size={ICONO_ESTRECHO} aria-hidden />
-          </button>
-        </div>
+      <Hoja ref={hoja} titulo={titulo ?? "Lugar"} rotuloCerrar="Cerrar opciones" id="lugar-cinta">
         {children}
-      </dialog>
+      </Hoja>
     </>
   );
 }

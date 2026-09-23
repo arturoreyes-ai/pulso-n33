@@ -67,6 +67,17 @@ export const zonaDeSlug = (s: string): ZonaRuta | null => ZONA_DE_SLUG.get(s) ??
  */
 export const rutaDeZona = (z: ZonaRuta | null) => (z === null ? "/" : `/${SLUG_DE_ZONA[z]}`);
 
+/**
+ * Como se llama la opcion «sin municipio» en todo selector de lugar: la
+ * portada, Redes, la cinta y el selector de la pagina. Un solo nombre en un
+ * solo sitio desde el 23 de septiembre de 2026, a pedido del cliente: la
+ * portada decia «El corredor», Redes «Toda la región» y el resto lo mismo con
+ * otra forma. Ese dia fue «Todas» unas horas; el cliente lo encontro ambiguo
+ * —en Redes quedaba encima de la pestaña «Todas», que son las plataformas— y
+ * volvio a «Toda la región».
+ */
+export const NOMBRE_TODA_REGION = "Toda la región";
+
 /** Como se le dice a la zona en una frase corta. */
 export const NOMBRE_CORTO: Record<ZonaRuta, string> = {
   Tijuana: "Tijuana",

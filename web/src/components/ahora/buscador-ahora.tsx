@@ -1,9 +1,6 @@
 "use client";
 
-import { ArrowRight as Flecha } from "@phosphor-icons/react";
-import Link from "next/link";
-
-import { LARGO_MAXIMO_CONSULTA, MINIMO_CONSULTA } from "@/lib/busqueda/tipos";
+import { FormularioBusqueda } from "@/components/ui/formulario-busqueda";
 
 /**
  * El cuerpo del dialogo de busqueda del lector.
@@ -41,49 +38,9 @@ export function BuscadorAhora({ accion, lugar, consulta }: {
   lugar: string;
   consulta: string | null;
 }) {
+  // La forma vive en ui/formulario-busqueda.tsx y la comparte Redes.
   return (
-    <div className="grid gap-5 px-4 pt-5 pb-6">
-      <form method="get" action={accion} className="grid gap-3">
-        <label htmlFor="consulta-lector" className="text-meta text-tinta-meta">
-          En {lugar}
-        </label>
-
-        <input
-          id="consulta-lector"
-          name="q"
-          type="search"
-          defaultValue={consulta ?? ""}
-          required
-          minLength={MINIMO_CONSULTA}
-          maxLength={LARGO_MAXIMO_CONSULTA}
-          autoComplete="off"
-          enterKeyHint="search"
-          placeholder="garita, agua, presupuesto…"
-          className="w-full rounded-nucleo border border-filo bg-vanta px-4 py-3 text-cuerpo text-tinta-titulo placeholder:text-tinta-inerte"
-        />
-
-        {/* El icono va en su propio circulo, a ras del relleno derecho, y no
-            suelto junto al texto. Al pulsar, el boton cede un punto: es la
-            unica animacion aqui y usa las curvas del tablero. */}
-        <button
-          type="submit"
-          className="group inline-flex items-center justify-between gap-3 rounded-full bg-realce py-2 pl-5 pr-2 text-cuerpo text-tinta-titulo transition-[background-color,transform] duration-[var(--dur-toque)] ease-firma hover:bg-filo active:scale-[0.99]"
-        >
-          <span>Buscar</span>
-          <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-vanta transition-transform duration-[var(--dur-cambio)] ease-firma group-hover:translate-x-0.5">
-            <Flecha size={16} weight="light" aria-hidden />
-          </span>
-        </button>
-      </form>
-
-      {consulta === null ? null : (
-        <Link
-          href={accion}
-          className="justify-self-start text-meta text-tinta-meta underline decoration-filo underline-offset-4 transition-colors duration-[var(--dur-toque)] ease-firma hover:text-tinta-titulo"
-        >
-          Volver al recorrido
-        </Link>
-      )}
-    </div>
+    <FormularioBusqueda accion={accion} idCampo="consulta-lector" etiqueta={`En ${lugar}`} consulta={consulta}
+      placeholder="garita, agua, presupuesto…" salida="Volver al recorrido" />
   );
 }

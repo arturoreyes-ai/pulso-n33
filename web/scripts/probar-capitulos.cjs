@@ -73,7 +73,7 @@ function comprobar() {
   assert.deepEqual(region[2].pedido, { ambito: 'region', rubro: 'seguridad' });
   assert.deepEqual(region[6].pedido, { ambito: 'mexico', rubro: null });
   assert.deepEqual(region[7].pedido, { ambito: 'internacional', rubro: null });
-  assert.equal(region[0].rotulo, 'El corredor · ahora');
+  assert.equal(region[0].rotulo, 'Toda la región · ahora');
   assert.equal(region[0].titulo, 'Lo que destaca ahora en el corredor');
   assert.equal(region[2].rotulo, 'Seguridad · últimos dos días');
   assert.equal(region[2].titulo, 'Seguridad en el corredor');
@@ -100,7 +100,7 @@ function comprobar() {
   assert.deepEqual(mexico[7].pedido, { ambito: 'region', rubro: null });
   assert.equal(mexico[0].rotulo, 'México · ahora');
   assert.equal(mexico[2].titulo, 'Seguridad en México');
-  assert.equal(mexico[7].rotulo, 'El corredor · ahora');
+  assert.equal(mexico[7].rotulo, 'Toda la región · ahora');
   const mundo = capitulosDe('internacional');
   assert.deepEqual(mundo.map((c) => c.id), ['internacional', ...RUBROS, 'mexico', 'local']);
   assert.deepEqual(mundo[1].pedido, { ambito: 'internacional', rubro: 'clima' });

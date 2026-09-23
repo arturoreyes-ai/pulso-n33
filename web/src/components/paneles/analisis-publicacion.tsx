@@ -3,7 +3,8 @@
 import { Sparkle as IA } from "@phosphor-icons/react";
 import { useId, useRef, useState } from "react";
 
-import { clasesChip } from "@/components/ui/clases";
+import { clasesBoton } from "@/components/ui/clases";
+import { EstadoCarga } from "@/components/ui/estado-carga";
 import { VERSION_ANALISIS_PUBLICACION, type AnalisisPublicacion } from "@/lib/analisis/contrato-publicacion";
 import type { SugerenciaSocial } from "@/lib/analisis/contrato";
 import { NOMBRE_RED, type PublicacionVisual } from "@/lib/dominio/publicaciones";
@@ -62,8 +63,8 @@ const SALVEDAD_FIJA = "Son los comentarios más votados de una publicación, no 
 /** El chip de la fila de acciones. Solo abre la hoja; no pide nada. */
 export function BotonAnalizar({ onAbrir }: { onAbrir: () => void }) {
   return (
-    <button type="button" className={clasesChip(false)} onClick={onAbrir}>
-      <IA size={16} weight="light" aria-hidden className="shrink-0 self-center" />
+    <button type="button" className={clasesBoton(false)} onClick={onAbrir}>
+      <IA size={16} aria-hidden />
       Analizar
     </button>
   );
@@ -124,23 +125,27 @@ export function FichaPublicacion({ fila }: { fila: PublicacionVisual }) {
             <p className="text-tinta-meta">Confirma para generar la lectura, lo que se repite en los comentarios y una idea para redes.</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <button type="button" className={clasesChip(true)} onClick={analizar}>
-              <IA size={16} weight="light" aria-hidden className="shrink-0 self-center" />
+            <button type="button" className={clasesBoton(true)} onClick={analizar}>
+              <IA size={16} aria-hidden />
               Analizar con IA
+            </button>
+            {/* «Cancelar», como la hoja de una nota (ahora/analisis-titular.tsx). */}
+            <button type="button" className={clasesBoton(false)} onClick={(e) => e.currentTarget.closest("dialog")?.close()}>
+              Cancelar
             </button>
           </div>
         </section>
       ) : null}
 
       {estado.fase === "cargando" ? (
-        <p role="status" className="max-w-[65ch] text-tinta-meta">Leyendo la publicación…</p>
+        <div className="aparicion-suave"><EstadoCarga etiqueta="Leyendo la publicación" /></div>
       ) : null}
 
       {estado.fase === "fallo" ? (
-        <p role="status" className="max-w-[65ch] text-baja">{estado.mensaje}</p>
+        <p role="status" className="aparicion-suave max-w-[65ch] text-baja">{estado.mensaje}</p>
       ) : null}
 
-      {estado.fase === "listo" ? <Resultado id={id} a={estado.analisis} /> : null}
+      {estado.fase === "listo" ? <div className="aparicion-suave grid gap-4"><Resultado id={id} a={estado.analisis} /></div> : null}
     </div>
   );
 }

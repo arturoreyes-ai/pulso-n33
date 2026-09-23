@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
-
-import { clasesChip } from "@/components/ui/clases";
+import { OpcionesLugar } from "@/components/ui/opciones-lugar";
 import { rutaDeEntrada } from "@/lib/busqueda/entrada";
 import type { Rubro } from "@/lib/busqueda/rubros";
 import type { Entrada } from "@/lib/busqueda/capitulos";
@@ -39,6 +37,9 @@ import { nombreDe } from "./nombre-ahora";
  *
  * Sin estado de cliente: elegir un alcance NAVEGA, asi que no hay nada que
  * abrir ni cerrar dentro de la hoja.
+ *
+ * La forma vive en ui/opciones-lugar.tsx desde el 23 de septiembre de 2026 y
+ * la comparten Redes y la cinta: aqui quedan solo los datos de la portada.
  */
 
 /** Los tres alcances, en el orden en que crecen. */
@@ -48,7 +49,7 @@ const ALCANCES: readonly { entrada: Entrada; nombre: string }[] = [
   { entrada: "internacional", nombre: "Internacional" },
 ];
 
-/** El corredor primero, que es la region sin municipio, y luego los ocho. */
+/** «Todas» primero, que es la region sin municipio, y luego los ocho. */
 const LUGARES: readonly Entrada[] = ["region", ...ZONAS_RUTA];
 
 /** `rubro` viaja para CONSERVARSE, no para mostrarse: aqui no se elige tema.
@@ -58,50 +59,18 @@ export function OpcionesAhora({ entrada, rubro }: { entrada: Entrada; rubro: Rub
   // Una zona ES la region, acotada. El segmentado marca Region y la pastilla
   // de abajo dice cual.
   const enRegion = entrada !== "mexico" && entrada !== "internacional";
-
   return (
-    <div className="grid gap-4 p-4">
-      <div role="group" aria-label="Alcance" className="grid grid-cols-3 gap-1 rounded-full border border-filo bg-vanta p-1">
-        {ALCANCES.map(({ entrada: alcance, nombre }) => {
-          const activo = alcance === "region" ? enRegion : alcance === entrada;
-          return (
-            <Link
-              key={alcance}
-              href={rutaDeEntrada(alcance, rubro)}
-              aria-current={activo ? "page" : undefined}
-              className={[
-                "rounded-full px-3 py-2 text-center text-cuerpo",
-                "transition-colors duration-[var(--dur-toque)] ease-firma",
-                activo
-                  ? "bg-realce text-tinta-titulo"
-                  : "text-tinta-prosa hover:bg-vela hover:text-tinta-titulo",
-              ].join(" ")}
-            >
-              {nombre}
-            </Link>
-          );
-        })}
-      </div>
-
-      {/* Mexico e Internacional no se subdividen: no hay nada que listar. */}
-      {enRegion ? (
-        <ul aria-label="Lugares de la región" className="flex flex-wrap gap-2 border-t border-filo pt-4">
-          {LUGARES.map((lugar) => {
-            const activo = lugar === entrada;
-            return (
-              <li key={lugar}>
-                <Link
-                  href={rutaDeEntrada(lugar, rubro)}
-                  aria-current={activo ? "page" : undefined}
-                  className={clasesChip(activo)}
-                >
-                  {nombreDe(lugar)}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      ) : null}
-    </div>
+    <OpcionesLugar
+      alcances={ALCANCES.map(({ entrada: alcance, nombre }) => ({
+        id: alcance,
+        nombre,
+        href: rutaDeEntrada(alcance, rubro),
+        activo: alcance === "region" ? enRegion : alcance === entrada,
+      }))}
+      // Mexico e Internacional no se subdividen: no hay nada que listar.
+      lugares={enRegion
+        ? LUGARES.map((lugar) => ({ id: lugar, nombre: nombreDe(lugar), href: rutaDeEntrada(lugar, rubro), activo: lugar === entrada }))
+        : null}
+    />
   );
 }

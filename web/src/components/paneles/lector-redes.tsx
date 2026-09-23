@@ -1,19 +1,19 @@
 "use client";
 
-import Link from "next/link";
+import { FunnelSimple as Filtro } from "@phosphor-icons/react";
 import { useEffect, useState, type ReactNode } from "react";
 import { preload } from "swr";
 
-import { Lector } from "@/components/lector/lector";
+import { CONTROL, Lector } from "@/components/lector/lector";
 import { BuscadorRedes } from "./buscador-redes";
 import { BusquedaRedes } from "./busqueda-redes";
-import { ConversacionRedes } from "./conversacion-redes";
-import { clasesChip } from "@/components/ui/clases";
+import { OpcionesLugar } from "@/components/ui/opciones-lugar";
+import { FilaPestanas } from "@/components/ui/pestanas";
 import { RUTAS } from "@/lib/datos/config";
 import { leerJson } from "@/lib/datos/fetcher";
 import { ruta } from "@/lib/dominio/secciones";
-import { NOMBRE_CORTO, ZONAS_RUTA, type ZonaRuta } from "@/lib/dominio/zonas";
-import { CUBETAS, NOMBRE_CUBETA, cubetasDisponibles, type CubetaRegion } from "@/lib/dominio/publicaciones";
+import { NOMBRE_CORTO, NOMBRE_TODA_REGION, ZONAS_RUTA, type ZonaRuta } from "@/lib/dominio/zonas";
+import { CUBETAS, cubetasDisponibles, rotuloRegion, type CubetaRegion, type OrdenLectura } from "@/lib/dominio/publicaciones";
 import { useRedes, useTikTok, useYouTube } from "@/lib/datos/hooks";
 import VisorRedes from "./visor-redes";
 
@@ -98,6 +98,18 @@ let ultimaPestana: Pestana = "todas";
  */
 let ultimaCubeta: CubetaRegion = "corredor";
 
+/**
+ * El ORDEN del recorrido, con la misma memoria de modulo y nunca en la URL (la
+ * ruta de zona esta prerenderizada; `useSearchParams` ahi cuelga, ver arriba).
+ *
+ * Lo mas popular primero es la omision desde el 23 de septiembre de 2026, a
+ * pedido del cliente, con «Más recientes» a un toque. Aplica a las cuatro
+ * pestanas del visor y no a X, donde el orden es el ranking de X y ese es el
+ * dato. El cambio remonta el recorrido y lo devuelve a la primera tarjeta,
+ * que es lo correcto: es otra lectura, no la misma desplazada.
+ */
+let ultimoOrden: OrdenLectura = "populares";
+
 /** `null` primero, que es toda la region, y luego las zonas. Local y no
  *  importado de chrome/selector-zona.tsx: ese modulo trae ConteoZona y aqui
  *  entraria al bundle de cliente. */
@@ -143,6 +155,10 @@ function LectorRedesMedios({ zona, paneles, menu, analisis = false }: PropsLecto
   useEffect(() => {
     ultimaCubeta = cubeta;
   }, [cubeta]);
+  const [orden, setOrden] = useState<OrdenLectura>(() => ultimoOrden);
+  useEffect(() => {
+    ultimoOrden = orden;
+  }, [orden]);
   // Las cubetas solo existen en la vista de region: en una pagina de zona el
   // filtro ES la zona. Si solo una tiene filas, no hay nada que elegir.
   const instagram = useRedes();
@@ -155,10 +171,7 @@ function LectorRedesMedios({ zona, paneles, menu, analisis = false }: PropsLecto
   // región» y el cambio parecia no haber ocurrido. En una pagina de zona
   // `disponibles` es [] y `activa` colapsa a `corredor`, asi que el primer
   // caso gana sin necesitar guarda.
-  const lugar =
-    zona !== null ? NOMBRE_CORTO[zona]
-    : activa === "corredor" ? "Toda la región"
-    : NOMBRE_CUBETA[activa];
+  const lugar = zona !== null ? NOMBRE_CORTO[zona] : rotuloRegion(activa);
   return (
     // `volver` va a la PORTADA de esta zona, por decision del cliente. Apunto
     // un dia a Prensa, cuando el muro tenia pagina propia, con el argumento de
@@ -166,108 +179,87 @@ function LectorRedesMedios({ zona, paneles, menu, analisis = false }: PropsLecto
     // salida. Prensa ya no existe y el destino es de nuevo un lector: quien
     // quiera otra pagina la tiene en el menu de la barra.
     <Lector volver={ruta(zona, null)} rotulo="Redes" valor={lugar} tituloOpciones="Lugar"
-      opciones={<OpcionesLugar zona={zona} cubetas={disponibles} activa={activa} onCubeta={setCubeta} />} menu={menu}
+      opciones={<OpcionesLugarRedes zona={zona} cubetas={disponibles} activa={activa} onCubeta={setCubeta} />} menu={menu}
       // La lupa, tambien en una pagina de zona: el formulario envia siempre a
       // la vista de region, porque un termino no es un lugar.
       busqueda={<BuscadorRedes accion={ruta(null, "redes")} consulta={null} />}
       rotuloBusqueda="Buscar publicaciones"
-      // «De que se habla» va en la barra y no en una pestana: las pestanas son
-      // plataformas y esta pregunta las cruza. Solo con Instagram o TikTok
-      // delante -- YouTube no cosecha comentarios y X son tendencias, no
-      // comentarios.
-      acciones={pestana === "youtube" || pestana === "x" ? null
-        : <ConversacionRedes key={`${zona ?? "region"}:${activa}`} zona={zona} cubeta={activa} analisis={analisis} />}
+      // Solo el orden. «De qué se habla» (conversacion-redes.tsx) vivia aqui,
+      // con un icono de globos de dialogo, y salio de la barra el 23 de
+      // septiembre de 2026 a pedido del cliente: los comentarios se leen desde
+      // cada tarjeta. X son tendencias y no tiene orden que elegir.
+      acciones={pestana === "x" ? null : <BotonOrden orden={orden} onCambiar={setOrden} />}
       pestanas={
-        <div role="group" aria-label="Plataforma" className="pestanas-lector">
-          {PESTANAS.map((p) => {
-            const calentar = () => {
-              // Un 404 aqui es un estado normal que el panel ya rotula -- el
-              // archivo de texto vive fuera de git y el de tendencias llega
-              // con la primera corrida --, no una promesa suelta que deba
-              // tumbar el overlay de desarrollo ni ensuciar la consola.
-              for (const archivo of p.datos) void preload(archivo, leerJson).catch(() => undefined);
-            };
-            return (
-              <button key={p.id} type="button" className="pestana-lector text-cuerpo" aria-pressed={p.id === pestana}
-                onClick={() => setPestana(p.id)} onPointerEnter={calentar} onFocus={calentar}>
-                {p.nombre}
-              </button>
-            );
-          })}
-        </div>
+        <FilaPestanas etiqueta="Plataforma" pestanas={PESTANAS.map((p) => ({
+          id: p.id,
+          nombre: p.nombre,
+          activa: p.id === pestana,
+          onElegir: () => setPestana(p.id),
+          // Un 404 aqui es un estado normal que el panel ya rotula -- el
+          // archivo de texto vive fuera de git y el de tendencias llega con la
+          // primera corrida --, no una promesa suelta que deba tumbar el
+          // overlay de desarrollo ni ensuciar la consola.
+          onCalentar: () => { for (const archivo of p.datos) void preload(archivo, leerJson).catch(() => undefined); },
+        }))} />
       }>
       {/* X sigue siendo una hoja de prosa: son tendencias, no publicaciones
           que se puedan recorrer una por pantalla. Las otras cuatro caen en el
           visor. */}
       {pestana === "x"
         ? <div className="hoja-lector"><div className="mx-auto w-full max-w-[88rem] px-4 py-8 md:px-8">{paneles[pestana]}</div></div>
-        : <VisorRedes key={`${zona ?? "region"}:${activa}`} zona={zona} filtro={pestana} cubeta={activa} analisis={analisis} />}
+        : <VisorRedes key={`${zona ?? "region"}:${activa}`} zona={zona} filtro={pestana} cubeta={activa} analisis={analisis} orden={orden} />}
     </Lector>
   );
 }
 
-/** El cuerpo del dialogo «Lugar»: enlaces, porque el lugar es el eje de la
- *  ruta y conserva la vista, como el selector del encabezado. El lector cierra
- *  el dialogo al pulsar uno. */
-export function OpcionesLugar({ zona, cubetas, activa, onCubeta }: {
+/**
+ * «Más recientes»: un interruptor de la barra, `aria-pressed` como todo
+ * selector del tablero. Apagado es la omision, lo mas popular primero; el
+ * nombre accesible dice que hace al encenderlo y el `title` lo dice al pasar
+ * el puntero, porque la barra es de iconos y un icono solo no se explica.
+ * El icono es el embudo de filtro, el comun, desde el 23 de septiembre de
+ * 2026 (cliente); antes era un reloj con flecha.
+ */
+function BotonOrden({ orden, onCambiar }: { orden: OrdenLectura; onCambiar: (o: OrdenLectura) => void }) {
+  const recientes = orden === "recientes";
+  return (
+    <button type="button" className={CONTROL} aria-pressed={recientes} aria-label="Más recientes primero"
+      title={recientes ? "Mostrando lo más reciente primero" : "Mostrando lo más popular primero"}
+      onClick={() => onCambiar(recientes ? "populares" : "recientes")}>
+      <Filtro size={22} weight={recientes ? "fill" : "regular"} aria-hidden />
+    </button>
+  );
+}
+
+/** El cuerpo del dialogo «Lugar». La forma es la de la portada
+ *  (ui/opciones-lugar.tsx): las cubetas son el segmentado de alcance y las
+ *  zonas las pastillas de debajo. Las zonas son enlaces, porque el lugar es el
+ *  eje de la ruta y conserva la vista; las cubetas eligen sin navegar, porque
+ *  son estado del visor. México e Internacional no se subdividen por ciudad:
+ *  ofrecerlas dejaba «Todas» marcada bajo el ambito que se acababa de elegir. */
+export function OpcionesLugarRedes({ zona, cubetas, activa, onCubeta }: {
   zona: ZonaRuta | null;
   cubetas: CubetaRegion[];
   activa: CubetaRegion;
   onCubeta: (c: CubetaRegion) => void;
 }) {
   const cubetasConDatos = new Set(cubetas);
-
   return (
-    <div className="grid gap-4 p-4">
-      {/* El ambito primero, como en el dialogo de la portada: son tres y
-          siempre caben, y las zonas fluyen debajo. */}
-      {cubetas.length > 1 ? (
-        <div role="group" aria-label="Ámbito" className="grid grid-cols-3 gap-1 rounded-full border border-filo bg-vanta p-1">
-          {CUBETAS.filter((c) => cubetasConDatos.has(c.id)).map((c) => (
-            <button key={c.id} type="button" aria-pressed={c.id === activa}
-              // Cierra su propia hoja. `lector.tsx` tenia un onClick delegado
-              // que cerraba al pulsar cualquier `a, button`; se quito a
-              // proposito en 4cc0abd con el argumento de que «los enlaces
-              // navegan y desmontan la hoja». Es cierto de todo lo que vive en
-              // esas hojas MENOS de esto: una pastilla de ambito no navega ni
-              // desmonta nada, asi que la hoja se quedaba abierta encima del
-              // contenido que acababa de cambiar y tapaba la unica prueba de
-              // que habia cambiado. La excepcion vive con el boton que la
-              // incumple, no de vuelta en el manejador delegado.
-              onClick={(evento) => {
-                onCubeta(c.id);
-                evento.currentTarget.closest("dialog")?.close();
-              }}
-              className={[
-                "rounded-full px-3 py-2 text-center text-cuerpo",
-                "transition-colors duration-[var(--dur-toque)] ease-firma",
-                c.id === activa ? "bg-realce text-tinta-titulo" : "text-tinta-prosa hover:bg-vela hover:text-tinta-titulo",
-              ].join(" ")}>
-              {c.nombre}
-            </button>
-          ))}
-        </div>
-      ) : null}
-    {/* Mexico y Mundo no se subdividen por ciudad: no hay nada que listar, y
-        ofrecerlo dejaba las nueve zonas debajo del ambito elegido con «Toda la
-        región» palomeada, que es exactamente lo contrario de lo que acababa de
-        pasar. Misma regla y mismo motivo que `enRegion` en
-        ahora/controles-ahora.tsx; los dos dialogos se leen como parientes. */}
-    {activa === "corredor" ? (
-    <ul className="grid gap-2">
-      {OPCIONES_ZONA.map((z) => {
-        const activo = z === zona;
-        return (
-          <li key={z ?? "region"}>
-            <Link href={ruta(z, "redes")} aria-current={activo ? "page" : undefined} className={`${clasesChip(activo)} w-full justify-between`}>
-              {z === null ? "Toda la región" : NOMBRE_CORTO[z]}
-              {activo ? <span aria-hidden>✓</span> : null}
-            </Link>
-          </li>
-        );
-      })}
-    </ul>
-    ) : null}
-    </div>
+    <OpcionesLugar
+      alcances={CUBETAS.filter((c) => cubetasConDatos.has(c.id)).map((c) => ({
+        id: c.id,
+        nombre: c.nombre,
+        activo: c.id === activa,
+        onElegir: () => onCubeta(c.id),
+      }))}
+      lugares={activa === "corredor"
+        ? OPCIONES_ZONA.map((z) => ({
+          id: z ?? "region",
+          nombre: z === null ? NOMBRE_TODA_REGION : NOMBRE_CORTO[z],
+          href: ruta(z, "redes"),
+          activo: z === zona,
+        }))
+        : null}
+    />
   );
 }
