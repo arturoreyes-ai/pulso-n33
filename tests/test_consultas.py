@@ -657,6 +657,67 @@ class TestDerivar(Base):
         doc = consultas.derivar([en], AHORA, salud, gasto, cache=cache_en, cosecha=COSECHA)
         self.assertEqual(doc["consultas"][0]["tono"]["sin_modelo_idioma"], 6)
 
+    def test_tono_de_las_publicaciones_suma_las_de_los_bloques(self):
+        """23 de septiembre de 2026: la direccion quiere contar publicaciones
+        positivas y negativas. Sin modelo, todas quedan sin clasificar (nunca
+        «neutral»); con el falso, el pie de cada una lleva etiqueta."""
+        _, (_, salud, gasto) = self._cosechar()
+        doc = consultas.derivar([CONSULTA], AHORA, salud, gasto, cache=self.cache, cosecha=COSECHA)
+        c = doc["consultas"][0]
+        tp = c["tono_publicaciones"]
+        leidas = sum(c["plataformas"][p]["publicaciones"] for p in consultas.PLATAFORMAS)
+        self.assertEqual(tp["publicaciones"], leidas)
+        self.assertEqual(tp["sin_clasificar"], leidas)
+        self.assertEqual((tp["metodo"], tp["modelo"]), ("ninguno", None))
+
+        # Un pie negativo para que el conteo no sea todo neutral.
+        ruta = os.path.join(self.cache, "cq_vivelabaja", "instagram", "publicaciones.json")
+        with open(ruta, encoding="utf-8") as fh:
+            posts = json.load(fh)
+        posts["https://www.instagram.com/p/AAA/"]["titulo"] = "Mal servicio en la obra"
+        with open(ruta, "w", encoding="utf-8") as fh:
+            json.dump(posts, fh)
+        consultas.clasificar_cache(self.cache, [CONSULTA], AnalizadorFalso())
+        doc = consultas.derivar([CONSULTA], AHORA, salud, gasto, cache=self.cache, cosecha=COSECHA)
+        tp = doc["consultas"][0]["tono_publicaciones"]
+        self.assertEqual(tp["metodo"], "modelo")
+        self.assertEqual(tp["sin_clasificar"], 0)
+        self.assertEqual(tp["negativo"], 1)
+        self.assertEqual(tp["positivo"] + tp["negativo"] + tp["neutral"], leidas)
+        errores, _ = validar_consultas(doc)
+        self.assertEqual(errores, [])
+
+    def test_el_tono_del_pie_sobrevive_la_recosecha_salvo_que_cambie_el_pie(self):
+        self._cosechar()
+        consultas.clasificar_cache(self.cache, [CONSULTA], AnalizadorFalso())
+        ruta = os.path.join(self.cache, "cq_vivelabaja", "instagram", "publicaciones.json")
+        # Se simula un pie que cambio desde la ultima cosecha.
+        with open(ruta, encoding="utf-8") as fh:
+            posts = json.load(fh)
+        posts["https://www.instagram.com/p/BBB/"]["titulo"] = "Otro pie"
+        with open(ruta, "w", encoding="utf-8") as fh:
+            json.dump(posts, fh)
+        self._cosechar()
+        with open(ruta, encoding="utf-8") as fh:
+            posts = json.load(fh)
+        self.assertIn("sentimiento", posts["https://www.instagram.com/p/AAA/"],
+                      "mismo pie: la etiqueta se queda")
+        self.assertNotIn("sentimiento", posts["https://www.instagram.com/p/BBB/"],
+                         "pie distinto: la etiqueta hablaria de otro texto")
+
+    def test_el_pie_en_otro_idioma_no_pasa_por_el_modelo(self):
+        en = dict(CONSULTA, id="cq_en", idioma="en")
+        cache_en = os.path.join(self.dir, "cache_en")
+        with patch.object(consultas, "correr_actor", _Actor()):
+            _, salud, gasto = consultas.cosechar([en], AHORA, tok="t", cache=cache_en,
+                                                 cosecha=COSECHA)
+        falso = AnalizadorFalso()
+        consultas.clasificar_cache(cache_en, [en], falso)
+        tp = consultas.derivar([en], AHORA, salud, gasto, cache=cache_en,
+                               cosecha=COSECHA)["consultas"][0]["tono_publicaciones"]
+        self.assertEqual(tp["sin_modelo_idioma"], tp["publicaciones"])
+        self.assertEqual(tp["metodo"], "ninguno")
+
     def test_una_fila_apagada_entra_con_sus_redes_sin_dato(self):
         """`activo` gobierna el gasto, no la existencia del termino: la prensa
         se lee de todas, asi que la fila apagada sale con redes `sin_dato`."""
@@ -704,6 +765,82 @@ class TestDerivar(Base):
         for p in consultas.PLATAFORMAS:
             self.assertEqual(a["plataformas"][p]["comentarios_cosechados"],
                              b["plataformas"][p]["comentarios_cosechados"], p)
+
+
+class TestSinCosecha(Base):
+    """`consultas --sin-cosecha` (23 de septiembre de 2026): rehace el documento
+    con el cache y el config sin una sola llamada a Apify. Existe porque aplicar
+    una exclusion o una fecha que el cliente dio pagaba 17 resultados por volver
+    a listar las mismas publicaciones."""
+
+    def test_no_llama_a_apify_y_el_documento_valida(self):
+        import contextlib
+        import io
+        from pulso.__main__ import main
+        self._cosechar()
+        cfg = os.path.join(self.dir, "config")
+        salida = os.path.join(self.dir, "data")
+        os.makedirs(cfg)
+        os.makedirs(salida)
+        with open(os.path.join(cfg, "consultas.json"), "w", encoding="utf-8") as fh:
+            json.dump({"cosecha": COSECHA, "consultas": [CONSULTA]}, fh)
+        with open(os.path.join(cfg, "apify.json"), "w", encoding="utf-8") as fh:
+            json.dump({}, fh)
+
+        def prohibido(*a, **k):
+            raise AssertionError("--sin-cosecha no debe llamar a Apify")
+
+        with patch.object(consultas, "correr_actor", prohibido), \
+                patch("pulso.pipeline.ahora_utc", return_value=AHORA), \
+                contextlib.redirect_stdout(io.StringIO()):
+            codigo = main(["--config", cfg, "consultas", "--salida", salida, "--cache", self.cache,
+                           "--archivo", salida, "--sin-prensa", "--sin-cosecha"])
+        self.assertIn(codigo, (0, None))
+        with open(os.path.join(salida, "consultas.json"), encoding="utf-8") as fh:
+            doc = json.load(fh)
+        c = doc["consultas"][0]
+        self.assertEqual(doc["gasto"]["gastado"], 0, "esta corrida no gasto nada")
+        self.assertEqual(c["plataformas"]["instagram"]["publicaciones"], 2, "sale del cache")
+        self.assertEqual(validar_consultas(doc)[0], [])
+
+
+class TestImportarComentarios(Base):
+    """Comentarios copiados a mano de un post agregado (23 de septiembre de
+    2026): Tijuana Linea Roja no se puede leer sin chocar con su robots.txt."""
+
+    POST = "https://www.facebook.com/TijuanaLineaRoja/posts/1493856925630886"
+
+    def test_entran_al_cache_con_tono_y_se_publican_sin_identidad(self):
+        persona = dict(PERSONA, activo=False, verificado=None, agregados=[{
+            "url": self.POST, "titulo": "Señalan a empresario", "fuente": "Tijuana Línea Roja",
+            "fecha": "2026-03-11", "nota": "x"}])
+        n = consultas.importar_comentarios(self.cache, persona, self.POST, [
+            "Prometen servicios y no cumplen", "  ", "Excelente trato, gracias",
+            "Prometen servicios y no cumplen"], AHORA, fecha="2026-03-18")
+        self.assertEqual(n, 2, "vacios fuera y repetidos colapsados")
+        # La fila esta apagada: se etiqueta igual, es local y no cuesta.
+        consultas.clasificar_cache(self.cache, [persona], AnalizadorFalso())
+        agregados = consultas.agregados([persona], AHORA, analizador=AnalizadorFalso())
+        doc = consultas.derivar([persona], AHORA, [], {"resultados": 1, "gastado": 0, "por_concepto": {}},
+                                cache=self.cache, cosecha=COSECHA, agregados=agregados)
+        t = doc["consultas"][0]["tono"]
+        self.assertEqual((t["comentarios"], t["metodo"]), (2, "modelo"))
+        self.assertEqual(t["negativo"] + t["positivo"] + t["neutral"], 2)
+        self.assertEqual(validar_consultas(doc)[0], [])
+        texto = consultas.publicar_comentarios(doc, AHORA, cache=self.cache)
+        self.assertEqual(len(texto["por_post"][self.POST]), 2)
+        self.assertEqual(validar_consultas_comentarios(texto, doc)[0], [])
+        with open(os.path.join(self.cache, "cq_persona", "facebook", "2026-09-03.json"),
+                  encoding="utf-8") as fh:
+            registros = json.load(fh)
+        for r in registros:
+            self.assertEqual(r["fecha"], "2026-03-18")
+            for clave in ("autor", "usuario", "profileName", "ownerUsername"):
+                self.assertNotIn(clave, r)
+
+    def test_un_enlace_de_prensa_no_se_importa(self):
+        with self.assertRaises(ValueError):
+            consultas.importar_comentarios(self.cache, CONSULTA, "https://zetatijuana.com/x", ["a"], AHORA)
 
 
 class TestPublicar(Base):
@@ -813,6 +950,14 @@ class TestValidador(Base):
             ("creador ajeno", lambda: self.c["plataformas"]["tiktok"]["destacados"][0].update(
                 creador="@otro")),
             ("tono no suma", lambda: self.c["tono"].update(comentarios=99)),
+            ("tono de publicaciones no suma", lambda: self.c["tono_publicaciones"].update(
+                neutral=self.c["tono_publicaciones"]["neutral"] + 1)),
+            ("tono de publicaciones de otro total", lambda: (
+                self.c["tono_publicaciones"].update(
+                    publicaciones=self.c["tono_publicaciones"]["publicaciones"] + 1,
+                    sin_clasificar=self.c["tono_publicaciones"]["sin_clasificar"] + 1))),
+            ("tono de publicaciones con modelo sin nombre", lambda: self.c["tono_publicaciones"]
+                .update(metodo="modelo", modelo=None)),
             ("tema con ejemplos", lambda: self.c["temas"]["temas"].append(
                 {"termino": "z", "n": 5, "ejemplos": []})),
             ("archivo notas", lambda: self.c["prensa"].update(archivo={"notas": 0})),
@@ -828,6 +973,14 @@ class TestValidador(Base):
                 self.assertEqual(self._errores(), [])
                 mutar()
                 self.assertTrue(self._errores(), "la mutacion {!r} paso".format(nombre))
+
+    def test_un_corte_sin_tono_de_publicaciones_pasa_con_aviso(self):
+        """Un consultas.json anterior al 23 de septiembre de 2026 no lo trae: la
+        pantalla dice «sin dato» y el validador avisa, no rompe."""
+        self.c.pop("tono_publicaciones")
+        errores, avisos = validar_consultas(self.doc, {"consultas": [CONSULTA]})
+        self.assertEqual(errores, [])
+        self.assertTrue(any("tono_publicaciones" in a for a in avisos))
 
     def test_prensa_el_enlace_sigue_al_origen(self):
         """Del buscador de noticias, el token opaco tal cual; del buscador del
@@ -936,15 +1089,24 @@ class TestConfigReal(unittest.TestCase):
                     self.assertTrue(a["nota"].strip())
                     self.assertTrue(a["url"].startswith("https://"))
                     self.assertTrue(a["titulo"].strip() and a["fuente"].strip())
-        self.assertEqual((agregados, excluidos), (3, 3),
-                         "los tres enlaces y los tres descartes del 21 de septiembre de 2026")
+        self.assertEqual((agregados, excluidos), (4, 4),
+                         "los tres enlaces y los tres descartes del 21 de septiembre de 2026, "
+                         "mas el descarte y el post de Facebook del 23")
 
     def test_ningun_agregado_lo_traeria_la_busqueda_sola(self):
         """La razon de existir de `agregados`: su titular NO nombra el termino,
         asi que el filtro por titular los dejaria fuera. Si alguno lo nombrara,
-        sobra en la lista y su sitio es la busqueda."""
+        sobra en la lista y su sitio es la busqueda.
+
+        Salvo un post de red social: la busqueda de prensa no lee Facebook,
+        Instagram ni TikTok, asi que uno que nombre el termino tampoco lo
+        traeria. El caso: el post de Tijuana Linea Roja que el cliente pidio el
+        23 de septiembre de 2026 para Grupo Concordia porque lo nombra."""
+        sociales = ("facebook.com", "instagram.com", "tiktok.com")
         for c in self.cfg["consultas"]:
             for a in c.get("agregados") or []:
+                if any(h in a["url"] for h in sociales):
+                    continue
                 with self.subTest(agregado=a["titulo"][:40]):
                     self.assertFalse(consultas._nombra(a["titulo"], c["termino"]))
 

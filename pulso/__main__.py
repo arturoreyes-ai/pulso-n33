@@ -5,13 +5,14 @@
   python -m pulso conversacion [--sentimiento ninguno|modelo]
   python -m pulso redes [--posts N] [--comentarios N]
   python -m pulso tiktok [--videos N] [--comentarios N] [--probar]
-  python -m pulso consultas [--consulta ID] [--sentimiento ninguno|modelo] [--probar]
+  python -m pulso consultas [--consulta ID] [--sentimiento ninguno|modelo] [--probar] [--sin-cosecha]
   python -m pulso tendencias [--probar] [--ubicaciones]
   python -m pulso gasto-electoral [--solo-financiamiento]
   python -m pulso apify [--verificar]
   python -m pulso validar [--config config] [--datos data]
   python -m pulso sitio [--destino _site]
   python -m pulso evaluar [--corpus tests/fixtures/corpus.json]
+  python -m pulso tono --servir [--puerto 8765]
 """
 
 import argparse
@@ -261,9 +262,21 @@ def cmd_redes(args):
                 s["handle"], s["seguidores"] if s["seguidores"] is not None else "-",
                 s["posts"] if s["posts"] is not None else "-",
                 s["veredicto"], s["nombre"], s["bio"]))
-        print("\nvivo = publica de verdad · ocupado = handle apartado sin publicar")
+        print("\nvivo = publica de verdad · ocupado = handle apartado sin publicar · "
+              "sin_datos = Instagram no dio datos sin sesión; no prueba que no exista, "
+              "reintenta más tarde")
         print("Lee la bio antes de marcar verificado: la región no se deduce del "
               "handle (@afnoticias es de Tocantins, Brasil).")
+        # --muestra N: la bio no basta (@noticiasensenada era de Buenos Aires y
+        # lo delataron sus posts). Imprime donde caeria cada post con el ambito
+        # dado. Cuesta N resultados mas por cuenta.
+        if args.muestra:
+            from .instagram import muestrear
+            for handle, posts in muestrear(handles, args.ambito, args.muestra).items():
+                print("\n{} (ámbito {})".format(handle, args.ambito))
+                for p in posts:
+                    print("  {:<14} {:<10} {}".format(
+                        p["zona"] or "se tira", p.get("alcance") or "", p["titulo"][:80]))
         return 0
     cuentas = cfg.get("cuentas", [])
     cosecha = cfg.get("cosecha", {})
@@ -354,6 +367,7 @@ def cmd_tiktok(args):
 
     cfg = _leer(os.path.join(args.config, "tiktok.json"))
     busquedas = cfg.get("busquedas", [])
+    perfiles = cfg.get("perfiles", [])
     cosecha = cfg.get("cosecha", {})
     filtro_fecha = cosecha.get("filtro_fecha", "PAST_24_HOURS")
     orden = cosecha.get("orden", "MOST_RELEVANT")
@@ -361,14 +375,27 @@ def cmd_tiktok(args):
 
     # --probar no cosecha comentarios ni escribe nada: tres videos por
     # busqueda para leer que devuelve el filtro y como quedan zona y titulo.
+    # Con --fila prueba esas filas, apagadas incluidas: es como se sondea un
+    # perfil antes de encenderlo, y de donde salen sus seguidores.
     if args.probar:
-        for r in probar(busquedas, ahora, filtro_fecha=filtro_fecha, orden=orden):
-            print("{}  ({} videos; descartes: {})".format(
-                r["busqueda"], len(r["videos"]),
+        faltan = sorted(set(args.fila) - {f["id"] for f in busquedas + perfiles})
+        if faltan:
+            print("tiktok: no estan en config/tiktok.json: {}".format(", ".join(faltan)),
+                  file=sys.stderr)
+            return 1
+        for r in probar(busquedas, ahora, filtro_fecha=filtro_fecha, orden=orden,
+                        perfiles=perfiles, filas=args.fila):
+            print("{}{}  ({} videos; descartes: {})".format(
+                r["busqueda"],
+                " {} · {} seguidores".format(r["perfil"], "{:,}".format(r["seguidores"])
+                                             if r["seguidores"] is not None else "sin dato")
+                if r["perfil"] else "",
+                len(r["videos"]),
                 ", ".join("{} {}".format(k, v) for k, v in r["descartes"].items()) or "ninguno"))
             for v in r["videos"]:
-                print("  {}  {:<22} {:<9} {:>6} likes  {}".format(
-                    v["publicado"], v["creador"][:22], v["zona"], v["likes"], v["titulo"][:70]))
+                print("  {}  {:<22} {:<13} {:<10} {:>6} likes  {}".format(
+                    v["publicado"], v["creador"][:22], v["zona"][:13], v["alcance"], v["likes"],
+                    v["titulo"][:60]))
         print("\nLa ventana de derivar() recorta a 'ventana_horas' aunque el filtro traiga "
               "mas. Anota la fecha en 'verificado' del config.")
         return 0
@@ -385,6 +412,10 @@ def cmd_tiktok(args):
         comentarios_por_video=args.comentarios or cosecha.get("comentarios_por_video", 30),
         filtro_fecha=filtro_fecha,
         orden=orden,
+        perfiles=perfiles,
+        videos_por_perfil=cosecha.get("videos_por_perfil", 10),
+        comentarios_por_video_perfil=cosecha.get("comentarios_por_video_perfil", 7),
+        ventana_horas=cosecha.get("ventana_horas", 24),
     )
 
     etiquetados = omitidos = 0
@@ -397,7 +428,7 @@ def cmd_tiktok(args):
     vigentes = leer_cache(args.cache)
     panel = derivar(vigentes, ahora, salud, gasto, temas_doc.get("temas") or [],
                     leer_publicaciones(args.cache), busquedas,
-                    ventana_horas=cosecha.get("ventana_horas", 24))
+                    ventana_horas=cosecha.get("ventana_horas", 24), perfiles=perfiles)
     _escribir(os.path.join(args.salida, "tiktok.json"), panel)
 
     publicados = 0
@@ -442,7 +473,8 @@ def cmd_consultas(args):
     """
     from .apify import Presupuesto
     from .consultas import (COSECHA_OMISION, agregados, archivo, clasificar_cache, cosechar,
-                            derivar, prensa, probar, publicar_comentarios)
+                            derivar, importar_comentarios, prensa, probar,
+                            publicar_comentarios)
     from .pipeline import ahora_utc, _escribir
 
     cfg = _leer(os.path.join(args.config, "consultas.json"))
@@ -467,6 +499,20 @@ def cmd_consultas(args):
             print("consultas: apagadas o sin verificar, no se cosechan: {} (corre --probar y "
                   "fecha 'verificado')".format(", ".join(apagadas)), file=sys.stderr)
 
+    if args.importar_comentarios:
+        # Solo escribe al cache; el documento se rehace despues con
+        # `--sin-cosecha --sentimiento modelo`, que les pone tono y los cuenta.
+        if not solo or not args.post:
+            print("consultas: --importar-comentarios pide --consulta y --post", file=sys.stderr)
+            return 1
+        with open(args.importar_comentarios, encoding="utf-8") as fh:
+            textos = [linea for linea in fh.read().splitlines() if linea.strip()]
+        for c in consultas:
+            if c.get("id") in solo:
+                n = importar_comentarios(args.cache, c, args.post, textos, ahora, fecha=args.fecha)
+                print("{}: {} comentarios importados al cache (fuera de git)".format(c["id"], n))
+        return 0
+
     if args.probar:
         for fila in probar(consultas, ahora, cosecha=cosecha, solo=solo):
             print("\n{} · {} · {} · {}  [{}{}]".format(
@@ -489,8 +535,24 @@ def cmd_consultas(args):
     apify_cfg = _leer(os.path.join(args.config, "apify.json"))
     tope = args.presupuesto or cosecha["presupuesto_resultados"] or (
         apify_cfg.get("presupuesto") or {}).get("resultados_por_corrida", 300)
-    nuevos, salud, gasto = cosechar(consultas, ahora, presupuesto=Presupuesto(tope),
-                                    cache=args.cache, cosecha=cosecha, solo=solo)
+    if args.sin_cosecha:
+        # Rehace el documento con lo que ya esta en el cache, sin llamar a
+        # Apify: la prensa (gratis), los agregados y las exclusiones del config
+        # se leen de nuevo. El caso: el 23 de septiembre de 2026 el cliente
+        # descarto un titular y fecho un agregado, y aplicarlo con una corrida
+        # normal habria pagado 17 resultados solo por volver a listar las
+        # mismas publicaciones. La salud es la de la ultima cosecha, tal cual:
+        # es lo ultimo que se supo de cada fuente, no una lectura nueva.
+        previo = _leer(os.path.join(args.salida, "consultas.json"))             if os.path.exists(os.path.join(args.salida, "consultas.json")) else {}
+        nuevos = []
+        salud = sorted((s for c in previo.get("consultas", [])
+                        for b in c.get("plataformas", {}).values()
+                        for s in (b.get("salud") or [])),
+                       key=lambda s: (s["consulta"], s["plataforma"], s["origen"], s["fuente"]))
+        gasto = Presupuesto(tope).resumen()     # esta corrida no gasto nada
+    else:
+        nuevos, salud, gasto = cosechar(consultas, ahora, presupuesto=Presupuesto(tope),
+                                        cache=args.cache, cosecha=cosecha, solo=solo)
 
     # Un solo analizador para los comentarios del cache y los titulares de la
     # prensa: el mismo modelo, cargado una vez.
@@ -600,11 +662,23 @@ def cmd_youtube(args):
     ahora = ahora_utc()
 
     if args.probar:
-        for fila in probar([c for c in canales if c.get("activo")], ahora):
+        # Sin --canal se sondean las activas, como siempre. Con --canal, las
+        # pedidas aunque esten apagadas: AGENTS.md pide sondear ANTES de
+        # encender, y filtrar por `activo` lo hacia imposible (22 de
+        # septiembre de 2026, al dar de alta los canales del mundo).
+        pedidas = [c for c in canales if c.get("id") in args.canal] if args.canal else \
+            [c for c in canales if c.get("activo")]
+        faltan = sorted(set(args.canal) - {c.get("id") for c in canales})
+        if faltan:
+            print("youtube: no estan en config/youtube.json: {}".format(", ".join(faltan)),
+                  file=sys.stderr)
+            return 1
+        for fila in probar(pedidas, ahora):
             print("\n{} ({}, ámbito {})".format(fila["nombre"], fila["cuenta"], fila["ambito"]))
             for p in fila["piezas"]:
-                print("  {:>8} vistas · {:<6} · {:<14} · {}".format(
-                    p["reproducciones"], p["formato"], p["zona"], p["titulo"][:56]))
+                print("  {:>8} vistas · {:<6} · {:<14} · {:<10} · {}".format(
+                    p["reproducciones"], p["formato"], p["zona"], p.get("alcance", ""),
+                    p["titulo"][:56]))
             if fila["descartes"]:
                 print("  descartes: {}".format(fila["descartes"]))
         return 0
@@ -835,6 +909,35 @@ def cmd_servir(args):
     return 0
 
 
+def cmd_tono(args):
+    """El servicio de tono de la busqueda en vivo, en local (pulso/tono.py).
+
+    Es el mismo `Analizador` que etiqueta la prensa y los comentarios del
+    pipeline, detras de HTTP, para que `next dev` le pregunte en
+    TONO_URL=http://127.0.0.1:<puerto>. Exige TONO_SECRETO, leido del entorno o
+    de los .env del repo (pulso/entorno.py), el mismo valor que el sitio.
+    """
+    from . import entorno, sentimiento, tono
+
+    if not sentimiento.disponible():
+        print("pysentimiento no esta instalado; ver requirements-modelo.txt", file=sys.stderr)
+        return 1
+    secreto = entorno.primero("TONO_SECRETO")
+    if not secreto:
+        print("falta TONO_SECRETO (en el entorno o en web/.env.local): sin secreto el "
+              "servicio no atiende a nadie", file=sys.stderr)
+        return 1
+    os.environ.setdefault("TONO_SECRETO", secreto)
+    print("cargando {} ...".format(sentimiento.MODELO))
+    tono.analizador_para("es")._cargar()
+    print("tono en http://127.0.0.1:{}/  (Ctrl+C para detener)".format(args.puerto))
+    try:
+        tono.servir(puerto=args.puerto)
+    except KeyboardInterrupt:
+        print("\ndetenido")
+    return 0
+
+
 def cmd_evaluar(args):
     """Tabla de diagnostico del prototipo: resolucion de figuras + diccionario.
 
@@ -869,6 +972,68 @@ def cmd_evaluar(args):
 
     print("\n" + "=" * 78)
     print("{}/{} titulares con figura resuelta".format(len(corpus) - sin_figura, len(corpus)))
+    return 0
+
+
+def cmd_publicidad_meta(args):
+    from .publicidad_meta import leer, publicar
+    from .validador import validar_publicidad_meta_config
+    config = leer(os.path.join(args.config, "publicidad-meta.json"))
+    if config is None:
+        print("Falta config/publicidad-meta.json", file=sys.stderr)
+        return 1
+    errores, _ = validar_publicidad_meta_config(config, leer(os.path.join(args.config, "roster.json")),
+                                               leer(os.path.join(args.salida, "gasto-electoral.json")))
+    if errores:
+        print("; ".join(errores), file=sys.stderr)
+        return 1
+    if args.persona and not any(p["id"] == args.persona for p in config["personas"]):
+        print("Persona fuera del catalogo", file=sys.stderr)
+        return 1
+    try:
+        if args.descubrir:
+            # Ensena candidatos y no escribe: la atribucion de una pagina la
+            # firma una persona en la config, con fuentes y razon.
+            from .publicidad_meta_api import descubrir
+            hallados = descubrir(config, persona_id=args.persona)
+            for fila in hallados:
+                print("{} ({})".format(fila["nombre"], fila["id"]))
+                for c in fila["candidatos"]:
+                    print("  {}  {}  {} anuncios  pago: {}".format(
+                        c["pagina_id"], c["nombre"] or "sin nombre", c["anuncios"],
+                        "; ".join(c["pagadores"]) or "sin dato"))
+                if not fila["candidatos"]:
+                    print("  sin candidatos")
+            return 0 if any(f["candidatos"] for f in hallados) else 2
+        if args.importar:
+            capturas = leer(args.importar)
+            if not isinstance(capturas, dict) or set(capturas) != {"perfiles", "reporte"}:
+                raise ValueError("La importacion requiere perfiles y reporte")
+        elif args.inicializar:
+            capturas = {"perfiles": {}, "reporte": {}}
+        else:
+            ahora = args.ahora or datetime.now().astimezone().isoformat(timespec="seconds")
+            if args.api:
+                from .publicidad_meta_api import cosechar
+                capturas, sondeos = cosechar(config, ahora, persona_id=args.persona,
+                                             limite=args.max_paginas)
+            else:
+                from .publicidad_meta_navegador import cosechar
+                capturas, sondeos = cosechar(config, ahora, args.cache, args.persona, args.probar, args.max_paginas)
+            for s in sondeos:
+                detalle = " (" + s["motivo"] + ")" if s.get("motivo") else ""
+                if s.get("anuncios") is not None:
+                    detalle = " ({} anuncios{})".format(
+                        s["anuncios"], "" if s.get("completo") else ", parcial")
+                print("{}: {}{}".format(s["id"], s["estado"], detalle))
+            if args.probar:
+                return 0 if sondeos and any(s["estado"] == "ok" for s in sondeos) else 2
+        indice = publicar(config, capturas, args.salida)
+        print("publicidad-meta: {} perfiles, {} con datos".format(len(indice["perfiles"]),
+              sum(p["actualizado"] is not None for p in indice["perfiles"])))
+    except (ValueError, RuntimeError, OSError, KeyError, TypeError) as exc:
+        print("publicidad-meta: " + str(exc), file=sys.stderr)
+        return 1
     return 0
 
 
@@ -944,6 +1109,12 @@ def main(argv=None):
     r.add_argument("--sondear", nargs="+", metavar="HANDLE",
                    help="pregunta si esos handles son el medio y sale; "
                         "'*' sondea los del config. Cuesta 1 resultado por cuenta")
+    r.add_argument("--muestra", type=int, default=0, metavar="N",
+                   help="con --sondear, además los últimos N posts de cada handle y dónde "
+                        "caerían; cuesta N resultados más por cuenta")
+    r.add_argument("--ambito", default="nacional", choices=("regional", "nacional",
+                                                             "internacional"),
+                   help="con --muestra, el ámbito con que se zonifican (omisión: nacional)")
     r.set_defaults(fn=cmd_redes)
 
     tk = sub.add_parser("tiktok", help="videos y comentarios de TikTok por búsqueda (requiere APIFY_TOKEN)")
@@ -963,6 +1134,9 @@ def main(argv=None):
     tk.add_argument("--probar", action="store_true",
                     help="tres videos por búsqueda, sin comentarios y sin escribir: para ver "
                          "qué devuelve el filtro de fecha antes de confiar en el cron")
+    tk.add_argument("--fila", action="append", default=[], metavar="ID",
+                    help="con --probar, solo estas búsquedas o perfiles, APAGADOS INCLUIDOS: "
+                         "es como se sondea una fila antes de ponerle activo: true")
     tk.set_defaults(fn=cmd_tiktok)
 
     cq = sub.add_parser("consultas",
@@ -988,6 +1162,15 @@ def main(argv=None):
                     help="no consulta Google Noticias; el bloque de prensa lo dice")
     cq.add_argument("--consulta", action="append", metavar="ID",
                     help="solo estos términos (repetible)")
+    cq.add_argument("--importar-comentarios", metavar="ARCHIVO",
+                    help="un comentario por linea, copiados a mano de --post, SIN nombres; van "
+                         "al cache (fuera de git) y no llaman a nada")
+    cq.add_argument("--post", help="con --importar-comentarios: la URL del post agregado")
+    cq.add_argument("--fecha", help="con --importar-comentarios: la fecha de los comentarios "
+                                    "(YYYY-MM-DD), si se sabe")
+    cq.add_argument("--sin-cosecha", action="store_true",
+                    help="no llama a Apify: rehace el documento con el cache, la prensa y el "
+                         "config (exclusiones, agregados); la salud es la de la ultima cosecha")
     cq.add_argument("--probar", action="store_true",
                     help="tres publicaciones por fuente, apagadas incluidas, sin comentarios y "
                          "sin escribir: el paso previo a poner activo: true")
@@ -1002,6 +1185,9 @@ def main(argv=None):
     yt.add_argument("--probar", action="store_true",
                     help="unas pocas piezas por canal, sin escribir: para ver cómo quedan "
                          "zona y formato antes de dar de alta una fila")
+    yt.add_argument("--canal", action="append", default=[], metavar="ID",
+                    help="con --probar, solo estas filas, APAGADAS INCLUIDAS: es como se "
+                         "sondea un canal antes de ponerle activo: true")
     yt.set_defaults(fn=cmd_youtube)
 
     tx = sub.add_parser("tendencias",
@@ -1034,6 +1220,24 @@ def main(argv=None):
                            help="actualiza los dictamenes del INE sin consultar el IEEBC")
     ge.set_defaults(fn=cmd_gasto_electoral)
 
+    pm = sub.add_parser("publicidad-meta", help="biblioteca politica publica, piloto manual sin sesion")
+    modo_pm = pm.add_mutually_exclusive_group()
+    modo_pm.add_argument("--probar", action="store_true", help="sondeo sin escribir datos")
+    modo_pm.add_argument("--importar", help="captura normalizada y fechada, fuera de git")
+    modo_pm.add_argument("--inicializar", action="store_true", help="publicar catalogo sin consultar la red")
+    modo_pm.add_argument("--descubrir", action="store_true",
+                         help="candidatos de pagina por la API para quien no la tiene; no escribe")
+    # La API oficial de la Biblioteca de Anuncios en vez del navegador. No es
+    # un modo excluyente: elige el lector de la misma cosecha.
+    pm.add_argument("--api", action="store_true",
+                    help="leer por la API oficial (ads_archive) en vez del navegador")
+    pm.add_argument("--persona", help="id del catalogo; por omision todas las paginas verificadas")
+    pm.add_argument("--salida", default="data")
+    pm.add_argument("--cache", default="cache/publicidad-meta")
+    pm.add_argument("--ahora", help="reloj ISO inyectado para una corrida reproducible")
+    pm.add_argument("--max-paginas", type=int, default=100)
+    pm.set_defaults(fn=cmd_publicidad_meta)
+
     v = sub.add_parser("validar", help="valida config/ y data/")
     v.add_argument("--datos", default="data")
     v.set_defaults(fn=cmd_validar)
@@ -1047,6 +1251,12 @@ def main(argv=None):
     sv.add_argument("--publico", action="store_true",
                     help="escuchar en toda la red local, no solo en localhost")
     sv.set_defaults(fn=cmd_servir)
+
+    to = sub.add_parser("tono", help="servicio local de tono para la busqueda en vivo del sitio")
+    to.add_argument("--servir", action="store_true", required=True,
+                    help="levantar el servicio (es lo unico que hace este verbo)")
+    to.add_argument("--puerto", type=int, default=8765)
+    to.set_defaults(fn=cmd_tono)
 
     e = sub.add_parser("evaluar", help="linea base del diccionario sobre el corpus")
     e.add_argument("--corpus", default=RUTA_CORPUS)

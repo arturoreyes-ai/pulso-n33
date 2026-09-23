@@ -91,6 +91,15 @@ compara por igualdad, en la misma postura que `SALVEDAD_FIJA` en web/ -- y el
 cruce con `figuras` del roster sigue prohibido. Lo que dice la salvedad es lo
 que el modelo mide de verdad: si cada frase suena a queja, a celebracion o a
 informacion, no lo que quien escribe piensa de la persona o de la marca.
+
+El 23 de septiembre de 2026 el cliente pidio que la pantalla dijera solo
+«positivo» o «negativo» y que dejara de pintar la salvedad. La salvedad sigue
+aqui y en el PDF, y el validador la sigue exigiendo: lo que cambio es la
+pantalla, no el dato. El mismo dia las publicaciones pasaron a llevar tono
+propio (`tono_publicaciones`, el de su pie; ver clasificar_publicaciones),
+porque la direccion quiere contar noticias, publicaciones y comentarios
+positivos y negativos, y hasta entonces una publicacion solo tenia el tono de
+sus comentarios.
 """
 
 import json
@@ -428,6 +437,11 @@ def _cosechar_fuente(fuente, ahora, tok, presupuesto, reparto, vistos, publicaci
         for k in ("origen", "fuente"):
             if k in viejo:
                 nuevo[k] = viejo[k]
+        # El tono del pie sobrevive a la recosecha (lo pone clasificar_cache y
+        # una corrida sin modelo no debe perderlo), salvo que el pie cambie:
+        # entonces la etiqueta hablaria de otro texto.
+        if viejo.get("titulo") != limpio.get("titulo"):
+            nuevo.pop("sentimiento", None)
         publicaciones[limpio["url"]] = nuevo
         if limpio["url"] not in urls:
             urls.append(limpio["url"])
@@ -974,6 +988,62 @@ def archivo(consultas, dir_datos, ahora, medios_cfg=None, busquedas_cfg=None,
     return salida
 
 
+# ------------------------------------------------------ importados a mano
+
+def red_de_url(url):
+    """La red de un enlace (facebook | instagram | tiktok), o None si es
+    prensa. El mismo criterio que web/src/lib/dominio/consultas.ts::
+    redDeAgregado: el host decide, nunca el texto."""
+    host = (urlsplit(url or "").hostname or "").lower()
+    for red, raiz in (("facebook", "facebook.com"), ("instagram", "instagram.com"),
+                      ("tiktok", "tiktok.com")):
+        if host == raiz or host.endswith("." + raiz):
+            return red
+    return None
+
+
+def importar_comentarios(cache, consulta, url, textos, ahora, fecha=None):
+    """Guarda en el CACHE comentarios que una persona copio a mano de un post.
+
+    El caso: el 23 de septiembre de 2026 el cliente paso los cuatro
+    comentarios del post de Tijuana Linea Roja sobre Grupo Concordia. Esa
+    pagina no es fuente configurada y leerla con Playwright chocaria con su
+    robots.txt (`User-agent: *` / `Disallow: /`), asi que la unica via limpia
+    era que alguien los copiara. Entran como si se hubieran cosechado: mismo
+    registro que pulso/facebook.py::_limpiar_comentario, sin identidad (solo
+    el texto), con el idioma de la FILA, en el cache de 30 dias y fuera de git.
+    El tono lo pone despues el mismo modelo local que a los demas
+    (clasificar_cache); a data/ solo llegan conteos, y el texto a
+    consultas-comentarios.json, que .gitignore excluye.
+
+    `fecha` es la que la persona sepa del comentario (Facebook solo muestra
+    «27 sem»); sin ella queda vacia, que es «sin fecha», nunca inventada.
+    Devuelve cuantos se guardaron (los repetidos colapsan por id).
+    """
+    red = red_de_url(url)
+    if red is None:
+        raise ValueError("{} no es un post de Facebook, Instagram ni TikTok".format(url))
+    nuevos = []
+    for texto in textos:
+        texto = (texto or "").strip()
+        if not texto:
+            continue
+        nuevos.append({
+            "id": _redes._id_comentario(url, texto),
+            "texto": texto,
+            "post": url,
+            "cuenta": consulta["id"],
+            "zona_cuenta": "nacional",
+            "idioma": consulta.get("idioma", "es"),
+            "fecha": fecha or "",
+            "likes": 0,
+            "respuestas": 0,
+            "plataforma": red,
+        })
+    guardar_cache(nuevos, ahora, _dir_cache(cache, consulta["id"], red))
+    return len({c["id"] for c in nuevos})
+
+
 # ------------------------------------------------------------- sentimiento
 
 def clasificar_cache(cache, consultas, analizador=None, solo=None):
@@ -983,12 +1053,53 @@ def clasificar_cache(cache, consultas, analizador=None, solo=None):
         from .sentimiento import Analizador
         analizador = Analizador()
     etiquetados = omitidos = 0
-    for c in _activas(consultas, solo):
+    # TODAS las filas, apagadas incluidas: una fila apagada no cosecha, pero
+    # puede traer comentarios importados a mano (importar_comentarios), y
+    # etiquetarlos es local y no cuesta. Sin cache no hay nada que hacer.
+    for c in _seleccion(consultas, solo):
         for p in PLATAFORMAS:
-            e, o = _redes.clasificar_cache(_dir_cache(cache, c["id"], p), analizador)
+            d = _dir_cache(cache, c["id"], p)
+            e, o = _redes.clasificar_cache(d, analizador)
+            etiquetados += e
+            omitidos += o
+            e, o = clasificar_publicaciones(d, analizador, c.get("idioma", "es"))
             etiquetados += e
             omitidos += o
     return etiquetados, omitidos
+
+
+def clasificar_publicaciones(cache, analizador, idioma):
+    """Etiqueta el tono del PIE de cada publicacion del catalogo del cache.
+
+    Hasta el 23 de septiembre de 2026 solo los comentarios llevaban tono, y la
+    direccion del cliente pidio ver cuantas publicaciones sobre el termino son
+    positivas o negativas, igual que las noticias y los comentarios. Se lee
+    `titulo` —la primera linea del pie, lo mismo que se publica—, nunca el pie
+    entero, con el mismo modelo y guardado igual que en los comentarios: la
+    etiqueta vive en el cache y a data/ solo llegan conteos.
+
+    El idioma es el de la fila del config (`idioma`), nunca adivinado del
+    texto: un pie en ingles pasado por RoBERTuito devuelve una etiqueta
+    plausible, no un error (la leccion de San Diego). Devuelve
+    (etiquetados, omitidos).
+    """
+    ruta = os.path.join(cache, "publicaciones.json")
+    if not os.path.exists(ruta):
+        return 0, 0
+    publicaciones = leer_publicaciones(cache)
+    if idioma != getattr(analizador, "idioma", IDIOMA_OMISION):
+        return 0, len(publicaciones)
+    modelo = getattr(analizador, "modelo", None)
+    pendientes_ = [p for _, p in sorted(publicaciones.items())
+                   if not _redes._sentimiento_vigente(p.get("sentimiento"), modelo)]
+    if not pendientes_:
+        return 0, 0
+    for p, r in zip(pendientes_, analizador.predecir([p.get("titulo") or "" for p in pendientes_])):
+        p["sentimiento"] = {"etiqueta": r["etiqueta"], "confianza": r["confianza"],
+                            "modelo": r["modelo"]}
+    with open(ruta, "w", encoding="utf-8", newline="\n") as fh:
+        json.dump(dict(sorted(publicaciones.items())), fh, ensure_ascii=False, indent=1)
+    return len(pendientes_), 0
 
 
 # --------------------------------------------------------------- derivados
@@ -1084,6 +1195,7 @@ def _derivar_consulta(c, ahora, salud, cache, prensa_de, archivo_de, cosecha, de
     opinion = [x for x in marcados if not x["brigada"] and not _sin_palabras(x["texto"])]
 
     bloques = {}
+    posts_leidos = []
     for p in PLATAFORMAS:
         comentarios, publicaciones = por_plataforma[p]
         filas = sorted((s for s in salud if s["consulta"] == cid and s["plataforma"] == p),
@@ -1095,6 +1207,7 @@ def _derivar_consulta(c, ahora, salud, cache, prensa_de, archivo_de, cosecha, de
             bloques[p] = {"estado": "sin_dato", "razon": RAZON_SIN_LECTURA}
             continue
         vigentes = {u: pb for u, pb in publicaciones.items() if dentro(pb)}
+        posts_leidos.extend(pb for _, pb in sorted(vigentes.items()))
         propios = [x for x in marcados if x["plataforma"] == p]
         opinion_p = [x for x in opinion if x["plataforma"] == p]
         bloques[p] = {
@@ -1118,6 +1231,20 @@ def _derivar_consulta(c, ahora, salud, cache, prensa_de, archivo_de, cosecha, de
         "salvedad_tono": SALVEDAD_TONO,
     })
 
+    # El tono de los PIES (23 de septiembre de 2026, ver clasificar_publicaciones),
+    # sobre TODAS las publicaciones de la ventana y no solo las destacadas:
+    # la cifra de al lado es `publicaciones`, y tienen que medir lo mismo. El
+    # idioma es el de la fila: la publicacion no lo trae y adivinarlo del pie
+    # es justo lo que no se hace.
+    idioma = c.get("idioma", "es")
+    conteo_p, modelo_p = _conteo_tono([{**pb, "idioma": idioma} for pb in posts_leidos])
+    tono_publicaciones = dict(conteo_p)
+    tono_publicaciones.update({
+        "publicaciones": len(posts_leidos),
+        "metodo": "modelo" if modelo_p else "ninguno",
+        "modelo": modelo_p,
+    })
+
     bloque_prensa = dict((prensa_de or {}).get(cid)
                          or {"estado": "sin_dato", "razon": RAZON_PRENSA_OMITIDA})
     if (archivo_de or {}).get(cid):
@@ -1131,6 +1258,7 @@ def _derivar_consulta(c, ahora, salud, cache, prensa_de, archivo_de, cosecha, de
         "plataformas": bloques,
         "prensa": bloque_prensa,
         "tono": tono,
+        "tono_publicaciones": tono_publicaciones,
         "temas": _temas_termino(opinion, c["termino"], ahora, cosecha["ventana_dias"],
                                 TEMAS_MINIMO),
     }
@@ -1184,10 +1312,17 @@ def publicar_comentarios(doc, ahora, cache=CACHE, visibles=COMENTARIOS_VISIBLES,
     for c in doc.get("consultas", []):
         for p in PLATAFORMAS:
             bloque = c["plataformas"].get(p) or {}
-            if bloque.get("estado") == "sin_dato":
+            # Los posts agregados a mano de esta red tambien publican su texto
+            # (importar_comentarios): en pantalla estan en el recorrido, con
+            # su hoja de comentarios, aunque la fila no tenga fuente en la red.
+            manuales = [{"url": a["url"]} for a in c.get("agregados") or []
+                        if red_de_url(a.get("url")) == p]
+            destacados = ([] if bloque.get("estado") == "sin_dato"
+                          else list(bloque.get("destacados") or [])) + manuales
+            if not destacados:
                 continue
             comentarios = leer_cache(_dir_cache(cache, c["id"], p))
-            parcial = _redes.publicar_comentarios(comentarios, bloque.get("destacados") or [],
+            parcial = _redes.publicar_comentarios(comentarios, destacados,
                                                   ahora, visibles, maximo, texto_maximo,
                                                   plataforma=p)
             por_post.update(parcial["por_post"])
