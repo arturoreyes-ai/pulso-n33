@@ -5,6 +5,8 @@ import { useState } from "react";
 import type { ComentarioPublicado, DocRedesComentarios } from "@/lib/datos/tipos";
 import * as F from "@/lib/dominio/frases";
 import { NOMBRE_RED, type PublicacionVisual } from "@/lib/dominio/publicaciones";
+import { EstadoCarga } from "@/components/ui/estado-carga";
+import { clasesInsignia } from "@/components/ui/clases";
 
 /**
  * Los comentarios mas votados de una publicacion: la hoja «Comentarios» del
@@ -44,7 +46,7 @@ function ChipSentimiento({ s }: { s: ComentarioPublicado["sentimiento"] }) {
   return (
     <span
       title="Cómo suena la frase. No mide la postura hacia una persona."
-      className={`inline-block rounded-full border px-2 py-px text-meta whitespace-nowrap ${clase}`}
+      className={`${clasesInsignia("tono")} ${clase}`}
     >
       {s}
     </span>
@@ -97,7 +99,7 @@ function CuerpoComentarios({ d, textos }: { d: PublicacionVisual["post"]; textos
   const ocultos = (lista?.length ?? 0) - mostrados.length;
 
   if (textos.error !== undefined) return <p className="mt-6 text-cuerpo text-tinta-meta">{SIN_TEXTO}</p>;
-  if (textos.data === undefined) return <p role="status" className="mt-6 text-cuerpo text-tinta-meta">Cargando comentarios…</p>;
+  if (textos.data === undefined) return <div className="mt-6"><EstadoCarga etiqueta="Cargando comentarios" /></div>;
   if (lista === undefined || lista.length === 0) {
     return d.cosechados === 0 ? null : <p className="mt-6 text-cuerpo text-tinta-meta">No hay comentarios que mostrar en este post.</p>;
   }
@@ -126,19 +128,38 @@ function CuerpoComentarios({ d, textos }: { d: PublicacionVisual["post"]; textos
  */
 export function ComentariosPublicacion({ fila, textos }: { fila: PublicacionVisual; textos: Textos }) {
   const d = fila.post;
+  // Un post agregado a mano a una consulta no trae conteos propios: sus
+  // comentarios se importaron a mano y solo existen en el archivo de texto.
+  // Sin esto la hoja decia «Sin comentarios en este post.» encima de los
+  // cuatro comentarios de Tijuana Linea Roja (23 de septiembre de 2026).
+  // Solo cuando el post no trae ninguno: si trae, sus cifras mandan.
+  const publicados = textos.data?.por_post[d.url] ?? [];
+  const frase = d.cosechados === 0 && publicados.length > 0
+    ? F.fraseComentariosPost(
+      {
+        positivo: publicados.filter((c) => c.sentimiento === "positivo").length,
+        negativo: publicados.filter((c) => c.sentimiento === "negativo").length,
+        neutral: publicados.filter((c) => c.sentimiento === "neutral").length,
+        sin_clasificar: publicados.filter((c) => c.sentimiento === null).length,
+      },
+      publicados.length, publicados.length, publicados.length,
+    )
+    : F.fraseComentariosPost(d.sentimiento, d.cosechados, d.comentarios ?? d.cosechados, d.opinion);
 
   return (
     <div className="px-4 pt-4 pb-8">
       <p className="text-meta text-tinta-meta">{fila.fuente} · {NOMBRE_RED[fila.red]}</p>
       <h3 className="mt-1 break-words text-rotulo text-tinta-titulo">{d.titulo || "Publicación sin título"}</h3>
       <p className="mt-4 max-w-[65ch] text-cuerpo text-tinta-prosa">
-        {F.fraseComentariosPost(d.sentimiento, d.cosechados, d.comentarios ?? d.cosechados, d.opinion)}
+        {frase}
       </p>
-      {d.temas.length === 0 ? null : (
+      {/* Un destacado de consulta no trae `temas` (docs/datos.md: los temas
+          son del termino, no del post), y leerlo tumbaba la hoja. */}
+      {(d.temas ?? []).length === 0 ? null : (
         <p className="mt-2 flex flex-wrap gap-2 text-meta text-tinta-meta">
-          {d.temas.map((t) => (
+          {(d.temas ?? []).map((t) => (
             <span key={t.tema} title="Tema de prensa que aparece en los comentarios"
-              className="inline-block rounded-full border border-filo bg-vela px-2 py-px whitespace-nowrap text-tinta-dato">
+              className={clasesInsignia()}>
               «{t.tema}» {t.comentarios}
             </span>
           ))}

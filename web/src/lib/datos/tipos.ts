@@ -474,6 +474,13 @@ export interface RedesSalud {
   /** Solo TikTok: de cuántos videos de esa búsqueda TikTok ya había generado
    *  subtítulos. Es un conteo; el texto no se guarda en ninguna parte. */
   con_subtitulos?: number;
+  /** TikTok: videos tirados porque nombraban otra región (`fuera`) o porque
+   *  una búsqueda regional no nombró lugar alguno (`sin_lugar`, desde el 22
+   *  de septiembre de 2026). En un perfil, además, los que no caían en la
+   *  ventana y por eso no pagaron comentarios (`fuera_de_ventana`). */
+  fuera?: number;
+  sin_lugar?: number;
+  fuera_de_ventana?: number;
   nota?: string;
   error?: string;
 }
@@ -563,23 +570,30 @@ export interface RedesCuenta {
  * Un post destacado. `titulo` es la primera línea del pie del MEDIO, no un
  * comentario: es la regla «titular, fuente y liga» aplicada a Instagram.
  *
- * En Instagram la `zona` es la sede de la cuenta, no el tema del post. En
- * TikTok sale del pie del video con el gacetero, y puede valer también
- * `nacional` (el pie no nombró lugar) o `internacional` (residuo de la
- * edición del mundo, desde el 15 de septiembre de 2026). Ninguna de las dos
- * tiene página propia: solo se ven en la vista de región.
+ * En Instagram la `zona` es la sede de la cuenta, no el tema del post, salvo
+ * en una cuenta con `ambito` (22 de septiembre de 2026), que la saca del pie
+ * como las demás redes. En TikTok y YouTube sale del texto con el gacetero, y
+ * puede valer también `nacional` (el texto no nombró lugar, o nombró uno de
+ * México fuera del corredor) o `internacional`, la cubeta Mundo: nombró el
+ * extranjero, o vino de una fuente del mundo y no nombró nada. Ninguna de las
+ * dos tiene página propia: solo se ven en la vista de región.
  */
 export interface Destacado {
   url: string;
   cuenta: string;
   zona: string;
-  /** TikTok y YouTube. El veredicto CRUDO del gacetero sobre el pie, al lado de
-   *  `zona` y no en su lugar: con `ambito` los dos dejaron de coincidir, y un
-   *  video de Guadalajara en la edición de México queda `zona: "nacional"`
-   *  igual que uno que no nombró lugar. De aquí sale la etiqueta: `fuera`
-   *  es «fuera del corredor» y `nacional` es «sin lugar». Puede faltar
-   *  en un corte anterior al 15 de septiembre de 2026. */
-  alcance?: "zona" | "estatal" | "fuera" | "nacional";
+  /** TikTok, YouTube y las cuentas de Instagram con `ambito`. El veredicto
+   *  CRUDO del gacetero sobre el texto, al lado de `zona` y no en su lugar:
+   *  con `ambito` los dos dejaron de coincidir, y un video de Guadalajara en
+   *  la edición de México queda `zona: "nacional"` igual que uno que no nombró
+   *  lugar. De aquí sale la etiqueta: `fuera` es «fuera del corredor»,
+   *  `extranjero` es el mundo verificado (solo con `zona: "internacional"`) y
+   *  `nacional` es «sin lugar». Con `zona: "estatal"` (YouTube e Instagram,
+   *  desde el 22 de septiembre de 2026) `nacional` es la pieza de un medio del
+   *  corredor que no nombró lugar: va en Corredor y la tarjeta dice «sin
+   *  precisar». Puede faltar en un corte anterior al 15 de septiembre de 2026,
+   *  y falta siempre en una cuenta de Instagram con sede. */
+  alcance?: "zona" | "estatal" | "fuera" | "extranjero" | "nacional";
   fecha: string;
   titulo: string;
   tipo: "imagen" | "video" | "carrusel" | "otro";
@@ -819,8 +833,9 @@ export interface PrensaConsulta {
 
 /** Cinco cubetas que suman `comentarios`. Se publican también para una
  *  persona (decisión del cliente del 18 de septiembre de 2026), y por eso
- *  viaja `salvedad_tono`: es el texto exacto de `pulso/consultas.py`, que la
- *  página y el PDF pintan tal cual y nunca omiten. */
+ *  viaja `salvedad_tono`: es el texto exacto de `pulso/consultas.py`, que el
+ *  PDF pinta tal cual. La pantalla dejó de pintarla el 23 de septiembre de
+ *  2026, a pedido del cliente; el dato la sigue trayendo. */
 export interface TonoConsulta {
   positivo: number;
   negativo: number;
@@ -831,6 +846,20 @@ export interface TonoConsulta {
   metodo: "modelo" | "ninguno";
   modelo: string | null;
   salvedad_tono: string;
+}
+
+/** El tono del PIE de cada publicación de la ventana (23 de septiembre de
+ *  2026): cinco cubetas que suman `publicaciones`, igual a la suma de los
+ *  bloques leídos. */
+export interface TonoPublicacionesConsulta {
+  positivo: number;
+  negativo: number;
+  neutral: number;
+  sin_clasificar: number;
+  sin_modelo_idioma: number;
+  publicaciones: number;
+  metodo: "modelo" | "ninguno";
+  modelo: string | null;
 }
 
 export interface TemasConsulta {
@@ -844,12 +873,19 @@ export interface Consulta {
   termino: string;
   tipo: TipoConsulta;
   idioma: "es" | "en";
-  plataformas: Record<RedConsulta, BloqueRedConsulta> & Record<RedSinDatoConsulta, BloqueSinDatoConsulta>;
+  /** En data/consultas.json YouTube y X son siempre `sin_dato` (el validador
+   *  lo exige). La busqueda en vivo de un termino (lib/dominio/termino-vivo.ts)
+   *  arma una `Consulta` con esta misma forma y SI trae YouTube: los videos de
+   *  los canales que el panel ya lee y nombran el termino. X nunca. */
+  plataformas: Record<RedConsulta, BloqueRedConsulta> & { youtube: BloqueRedConsulta; x: BloqueSinDatoConsulta };
   prensa: PrensaConsulta;
   /** Ausente cuando nadie agregó nada: una lista vacía se leería como «no hay
    *  nada que agregar» y lo cierto es que nadie agregó nada. */
   agregados?: AgregadoConsulta[];
   tono: TonoConsulta;
+  /** Ausente en un corte anterior al 23 de septiembre de 2026: se pinta
+   *  «sin dato», nunca cero. */
+  tono_publicaciones?: TonoPublicacionesConsulta;
   temas: TemasConsulta;
 }
 
@@ -1047,6 +1083,99 @@ export interface DocGastoElectoral {
     url: string;
     archivo?: string;
   }[];
+}
+
+// Publicidad Meta: rangos del anuncio y totales publicados son medidas distintas.
+export type EstadoMeta = "ok" | "parcial" | "sin_dato" | "fallo" | "bloqueado";
+export interface PeriodoMeta { desde: string; hasta: string }
+export interface RangoMeta { minimo: number | null; maximo: number | null }
+export interface ParMeta { etiqueta: string; valor: string }
+export interface SeccionMeta<T> {
+  estado: EstadoMeta;
+  fuente: string;
+  periodo: PeriodoMeta | null;
+  geografia: "MX" | "Baja California";
+  consultado: string | null;
+  ultimo_exito: string | null;
+  completo: boolean;
+  motivo: string | null;
+  datos: T | null;
+}
+export interface TotalMeta extends PeriodoMeta {
+  etiqueta: string;
+  geografia: "MX" | "Baja California";
+  moneda: string | null;
+  importe: number;
+}
+export interface PerfilMeta {
+  id: string;
+  roster_id: string | null;
+  nombre: string;
+  cargo: string;
+  partido: string;
+  ambito: string;
+  pagina: { id: string; nombre: string; url: string; verificado: string; fuentes: string[]; razon: string } | null;
+  ine: { id: string; nombre: string; cargo: string; contienda: string; verificado: string; fuentes: string[]; razon: string } | null;
+  estado: "ok" | "parcial" | "sin_dato";
+  anuncios: number | null;
+  actualizado: string | null;
+  totales: TotalMeta[];
+}
+export interface AnuncioMeta {
+  id: string;
+  pagina_id: string;
+  url: string;
+  estado: "activo" | "inactivo" | "desconocido";
+  desde: string | null;
+  hasta: string | null;
+  texto: string | null;
+  pagador: string | null;
+  moneda: string | null;
+  gasto: RangoMeta | null;
+  impresiones: RangoMeta | null;
+  tamano_audiencia: RangoMeta | null;
+  plataformas: string[];
+  formato: "video" | "imagen" | "texto" | "desconocido";
+  regiones: string[];
+  entrega: ParMeta[];
+  grupo: number | null;
+}
+export interface InformacionMeta {
+  transparencia: ParMeta[];
+  totales: TotalMeta[];
+  pagadores: (Omit<TotalMeta, "etiqueta"> & { nombre: string })[];
+}
+export interface AudienciaMeta {
+  importe: number | null;
+  moneda: string | null;
+  anuncios: number | null;
+  selecciones: ParMeta[];
+}
+export interface ReporteMeta {
+  importe: number | null;
+  anuncios: number | null;
+  moneda: string | null;
+  anunciantes: { pagina_id: string; nombre: string; pagador: string | null; importe: number; anuncios: number | null }[];
+  regiones: { nombre: string; importe: number }[];
+}
+export type VentanaMeta = "7" | "30" | "90";
+export type VentanaReporteMeta = "1" | VentanaMeta | "todo";
+export interface DocPublicidadMeta {
+  esquema: 1;
+  desde: "2024-01-01";
+  pais: "MX";
+  tipo: "politica";
+  actualizado: string | null;
+  perfiles: PerfilMeta[];
+  reporte: Record<VentanaReporteMeta, SeccionMeta<ReporteMeta>>;
+}
+export interface DocPerfilMeta {
+  esquema: 1;
+  persona_id: string;
+  pagina_id: string;
+  anuncios: SeccionMeta<AnuncioMeta[]>;
+  informacion: SeccionMeta<InformacionMeta>;
+  audiencia: Record<VentanaMeta, SeccionMeta<AudienciaMeta>>;
 }
 
 export interface FinanciamientoPartido {

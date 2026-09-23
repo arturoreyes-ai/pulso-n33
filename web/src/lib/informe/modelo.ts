@@ -7,9 +7,20 @@ import type {
   RedSinDatoConsulta,
   TonoConsulta,
   TonoPrensaConsulta,
+  TonoPublicacionesConsulta,
   TonoTitular,
 } from "@/lib/datos/tipos";
-import { frasesConsulta, rotuloVentana } from "@/lib/dominio/consultas";
+import {
+  cifrasConsulta,
+  frasesConsulta,
+  noticiasDeConsulta,
+  publicacionesConComentarios,
+  reunirPublicacionesConsulta,
+  rotuloVentana,
+  rotulosConsulta,
+  type CifrasConsulta,
+} from "@/lib/dominio/consultas";
+import { NOMBRE_RED } from "@/lib/dominio/publicaciones";
 import { MESES_CORTOS } from "@/lib/dominio/formato";
 
 /**
@@ -67,7 +78,7 @@ export const NOTA_DECISION_REGLA_5 =
   "El conteo de tono de este informe se publica también cuando el término es una persona, por decisión del cliente del 18 de septiembre de 2026. Se publica como conteos, nunca como porcentaje ni como una cifra de consenso, y siempre con la salvedad de la sección «Tono de los comentarios». La lectura automática no atribuye postura a nadie.";
 
 /** La salvedad de la lectura automatica es de la pagina, no del modelo:
- *  ver components/paneles/conversacion-redes.tsx para el caso que lo decidio. */
+ *  ver el docstring de AGENTS.md sobre «The sampling caveat is the page's». */
 export const SALVEDAD_FIJA_INFORME =
   "Son los comentarios más votados de las publicaciones destacadas de los últimos 30 días, no una muestra de nadie.";
 
@@ -126,7 +137,29 @@ export interface SerieGrafica {
   data: PuntoGrafica[];
 }
 
+/**
+ * Lo que la ficha de la pantalla muestra, ya contado, para que el PDF diga lo
+ * mismo (pedido del cliente del 23 de septiembre de 2026: «que el PDF sea
+ * igual a la pantalla»). Sale de las MISMAS funciones que la ficha
+ * (lib/dominio/consultas.ts): cifrasConsulta, noticiasDeConsulta,
+ * reunirPublicacionesConsulta y rotulosConsulta, asi que una correccion llega
+ * a las dos.
+ */
+export interface PantallaInforme {
+  cifras: CifrasConsulta;
+  rotulos: { publicaciones: string; comentarios: string; hoja: string };
+  /** Todas juntas: la busqueda en seis meses, las anteriores y las agregadas
+   *  que no son post de red. */
+  noticias: TitularInforme[];
+  porMedio: { fuente: string; titulares: number; favorable: number; adversa: number; neutral: number }[];
+  /** Las del recorrido, con los posts agregados a mano incluidos. */
+  publicaciones: { fecha: string | null; red: string; fuente: string; titulo: string; url: string }[];
+  /** Cada publicacion con texto publicado, con TODOS sus comentarios. */
+  comentarios: PublicacionConTextoInforme[];
+}
+
 export interface DocumentoInforme {
+  pantalla: PantallaInforme;
   termino: string;
   tipo: string;
   /** Redes: 30 dias. */
@@ -147,6 +180,9 @@ export interface DocumentoInforme {
   destacadosPorRed: PuntoGrafica[];
   destacadosPorSemana: SerieGrafica[];
   tono: TonoConsulta;
+  /** El tono de los pies de las publicaciones (23 de septiembre de 2026);
+   *  null en un corte anterior, que el PDF dice «sin dato». */
+  tonoPublicaciones: TonoPublicacionesConsulta | null;
   temas: { termino: string; n: number }[];
   temasMinimo: number;
   lectura: LecturaInforme;
@@ -269,7 +305,29 @@ export function armarDocumentoInforme(
   const titular = (r: { titulo: string; fuente: string; fecha: string | null; url: string; tono: TonoTitular | null }): TitularInforme => ({
     titulo: r.titulo, fuente: r.fuente, fecha: r.fecha, url: r.url, tono: r.tono,
   });
+  const noticias = noticiasDeConsulta(c);
+  const porMedio = new Map<string, PantallaInforme["porMedio"][number]>();
+  for (const r of noticias) {
+    const fila = porMedio.get(r.fuente) ?? { fuente: r.fuente, titulares: 0, favorable: 0, adversa: 0, neutral: 0 };
+    fila.titulares += 1;
+    if (r.tono !== null) fila[r.tono] += 1;
+    porMedio.set(r.fuente, fila);
+  }
+  const pantalla: PantallaInforme = {
+    cifras: cifrasConsulta(c),
+    rotulos: rotulosConsulta(c, textos ?? undefined),
+    noticias: noticias.map(titular),
+    porMedio: [...porMedio.values()].sort((a, b) => b.titulares - a.titulares || a.fuente.localeCompare(b.fuente)),
+    publicaciones: reunirPublicacionesConsulta(c).map((f) => ({
+      fecha: f.post.fecha || null, red: NOMBRE_RED[f.red], fuente: f.fuente, titulo: f.post.titulo, url: f.url ?? f.post.url,
+    })),
+    comentarios: publicacionesConComentarios(c, textos ?? undefined).map((f) => ({
+      red: f.red as RedConsulta, nombre: NOMBRE_RED[f.red], fuente: f.fuente, titulo: f.post.titulo,
+      comentarios: textos?.por_post[f.post.url] ?? [],
+    })),
+  };
   return {
+    pantalla,
     termino: c.termino,
     tipo: NOMBRE_TIPO_INFORME[c.tipo],
     ventanaDias: doc.ventana_dias,
@@ -282,6 +340,7 @@ export function armarDocumentoInforme(
     destacadosPorRed,
     destacadosPorSemana,
     tono: c.tono,
+    tonoPublicaciones: c.tono_publicaciones ?? null,
     temas: c.temas.temas,
     temasMinimo: c.temas.minimo,
     lectura,

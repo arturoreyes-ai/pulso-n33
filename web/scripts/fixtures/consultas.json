@@ -504,6 +504,16 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "salvedad_tono": "Conteo del tono de cada comentario según un modelo que lee frases, no posturas: dice si el texto suena a queja, a celebración o a información, no lo que quien escribe piensa de la persona o de la marca. Son comentarios de quien decidió comentar, no una muestra de nadie."
    },
+   "tono_publicaciones": {
+    "positivo": 3,
+    "negativo": 1,
+    "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0,
+    "publicaciones": 8,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis"
+   },
    "temas": {
     "minimo": 3,
     "comentarios": 21,

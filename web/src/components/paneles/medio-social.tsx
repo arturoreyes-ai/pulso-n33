@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useEffectEvent, useRef, useState } from "react";
 import type { Destacado } from "@/lib/datos/tipos";
 import type { PublicacionVisual, RedVisual } from "@/lib/dominio/publicaciones";
 
@@ -40,22 +40,47 @@ function MedioInstagram({ url, fallar }: { url: string; fallar: () => void }) {
   </>;
 }
 
-function MedioTikTok({ url, fallar }: { url: string; fallar: () => void }) {
+const ORIGEN_TIKTOK = "https://www.tiktok.com";
+
+function ordenar(marco: HTMLIFrameElement | null, tipo: "play" | "pause" | "mute") {
+  marco?.contentWindow?.postMessage({ type: tipo, "x-tiktok-player": true }, ORIGEN_TIKTOK);
+}
+
+/** TikTok: el reproductor v1, gobernado por postMessage.
+ *
+ * EL SANDBOX LLEVA `allow-same-origin` Y NO ES UN DESCUIDO. El 18 de
+ * septiembre de 2026 se endurecio a `sandbox="allow-scripts"` a secas, y el
+ * reproductor no volvio a arrancar: un origen opaco tumba su propio arranque y
+ * la tarjeta se quedaba en el logotipo negro para siempre. Medido el 22: cero
+ * mensajes en 12 s, dos veces, contra `onPlayerReady` en 1.3 s con el permiso.
+ * Ademas, con origen opaco la particion de cache es desechable y los ~1.2 MB de
+ * JS del reproductor se volvian a bajar en cada tarjeta. Dar `allow-same-origin`
+ * a un marco de OTRO origen no le abre esta pagina; lo que el sandbox si sigue
+ * negando es navegar el tablero (no hay `allow-top-navigation`). Los popups
+ * devuelven los enlaces del propio reproductor, que funcionaban antes del 18.
+ *
+ * PRECARGADO Y EN PAUSA. El visor monta tambien la tarjeta siguiente
+ * (visor-redes.tsx) con `activo` en false: arranca con `autoplay=1` y se pausa
+ * al estar listo, y al asentarse recibe `play`. Medido: de pausa a reproducir
+ * en 42 ms, contra 1.3-1.9 s de arranque en frio. `autoplay=0` no sirve para
+ * esto: con el, el reproductor no avisa que esta listo ni obedece `play`. */
+function MedioTikTok({ url, activo, fallar }: { url: string; activo: boolean; fallar: () => void }) {
   const marco = useRef<HTMLIFrameElement>(null);
+  const listo = useRef(false);
   const [manual, setManual] = useState(false);
   const id = url.split("/").at(-1);
+  // Lee `activo` al momento de estar listo sin volver a colgar el oyente.
+  const alEstarListo = useEffectEvent(() => {
+    listo.current = true;
+    ordenar(marco.current, "mute");
+    if (!activo) ordenar(marco.current, "pause");
+  });
   useEffect(() => {
     function recibir(evento: MessageEvent) {
-      const origenPermitido = evento.origin === "https://www.tiktok.com" || evento.origin === "null";
-      if (!origenPermitido || evento.source !== marco.current?.contentWindow) return;
+      if (evento.origin !== ORIGEN_TIKTOK || evento.source !== marco.current?.contentWindow) return;
       const dato = evento.data;
       if (!dato || typeof dato !== "object" || dato["x-tiktok-player"] !== true) return;
-      if (dato.type === "onPlayerReady") {
-        // Un sandbox sin `allow-same-origin` da al iframe un origen opaco;
-        // `source` sigue siendo la defensa que ata el mensaje a este player.
-        const destino = evento.origin === "null" ? "*" : "https://www.tiktok.com";
-        marco.current?.contentWindow?.postMessage({ type: "mute", "x-tiktok-player": true }, destino);
-      }
+      if (dato.type === "onPlayerReady") alEstarListo();
       if (dato.type === "onPlayerError") {
         if (dato.value?.errorCode === 3002) setManual(true);
         else fallar();
@@ -64,8 +89,13 @@ function MedioTikTok({ url, fallar }: { url: string; fallar: () => void }) {
     window.addEventListener("message", recibir);
     return () => window.removeEventListener("message", recibir);
   }, [fallar]);
+  // Antes de estar listo no hay a quien ordenar: `alEstarListo` decide.
+  useEffect(() => {
+    if (listo.current) ordenar(marco.current, activo ? "play" : "pause");
+  }, [activo]);
   return <>
-    <iframe ref={marco} title="Publicación de TikTok" sandbox="allow-scripts" src={`https://www.tiktok.com/player/v1/${id}?autoplay=1&muted=1&controls=1&description=1`}
+    <iframe ref={marco} title="Publicación de TikTok" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+      src={`${ORIGEN_TIKTOK}/player/v1/${id}?autoplay=1&muted=1&controls=1&description=1`}
       allow="autoplay; fullscreen" allowFullScreen className="aspect-[9/16] w-full border-0" onError={fallar} />
     {manual ? <p className="text-cuerpo text-tinta-meta">Pulsa reproducir para ver el video.</p> : null}
   </>;
@@ -136,7 +166,13 @@ export function EsqueletoMedio({ red, tipo, formato, pulsar = true }: { red: Red
  *  bajo el dedo. Las tres capas comparten una celda de cuadricula: el
  *  esqueleto, el medio y, solo si hace falta, el aviso con «Volver a cargar».
  *  Ninguna de las dos ultimas cambia la altura de la tarjeta al aparecer. */
-export function MedioSocial({ publicacion }: { publicacion: PublicacionVisual }) {
+export function MedioSocial({ publicacion, activo = true }: {
+  publicacion: PublicacionVisual;
+  /** False en la tarjeta SIGUIENTE, que el visor monta por adelantado: el
+   *  medio carga igual y solo TikTok, que es el que se reproduce solo, espera
+   *  en pausa. Instagram no arranca nada sin que alguien lo pulse. */
+  activo?: boolean;
+}) {
   const medio = useRef<HTMLDivElement>(null);
   const [intento, setIntento] = useState(0);
   const [fallo, setFallo] = useState(false);
@@ -182,12 +218,12 @@ export function MedioSocial({ publicacion }: { publicacion: PublicacionVisual })
           ? <MedioYouTube key={intento} url={publicacion.url} formato={publicacion.post.formato} fallar={fallar} />
           : publicacion.red === "facebook"
             ? <MedioFacebook key={intento} url={publicacion.url} fallar={fallar} />
-            : <MedioTikTok key={intento} url={publicacion.url} fallar={fallar} />}
+            : <MedioTikTok key={intento} url={publicacion.url} activo={activo} fallar={fallar} />}
     </div>
     {ofrecerRecarga ? <div className="[grid-area:1/1] flex flex-col items-center justify-end gap-2 pb-4 text-center">
       {fallo ? <p role="status" className="text-cuerpo text-tinta-meta">La publicación no está disponible en esta vista.</p> : null}
       {/* Un iframe cargado puede contener un rechazo del proveedor sin que el
-          navegador emita error: ese caso lo cubre «Ver original», que esta
+          navegador emita error: ese caso lo cubre «Abrir en …», que esta
           siempre en la banda. Aqui se ofrece recargar solo cuando la carga
           fallo o cuando en ESPERA_RECARGA no llego altura alguna. */}
       <button type="button" className="text-meta text-tinta-meta transition-colors hover:text-tinta-titulo" onClick={reintentar}>Volver a cargar</button>

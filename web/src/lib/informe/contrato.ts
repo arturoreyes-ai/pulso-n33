@@ -9,7 +9,7 @@
 
 /** Version del informe. Va en el enlace de descarga solo para separar copias
  *  en el CDN cuando cambie el documento; la ruta no la lee. */
-export const VERSION_INFORME = "1";
+export const VERSION_INFORME = "2"; // 23 sep 2026: el PDF pasa a ser igual a la pantalla
 
 /** La ruta de descarga de un termino. */
 export function rutaDeInforme(id: string): string {

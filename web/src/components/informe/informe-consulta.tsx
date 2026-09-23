@@ -1,28 +1,17 @@
 import type { ComentarioPublicado } from "@/lib/datos/tipos";
 import { fechaConAnio, fechaCorta, fechaLarga } from "@/lib/dominio/formato";
+import { NOMBRE_TONO_TITULAR, palabraTono, type ClaseTono, type Genero, type TonoSerie } from "@/lib/dominio/consultas";
 import {
   cifra,
   limpiarParaFuente,
-  NOTA_DECISION_REGLA_5,
-  REGLAS_PRODUCTO,
-  SALVEDAD_FIJA_INFORME,
-  ventana,
   type DocumentoInforme,
-  type FilaDestacadoInforme,
   type TitularInforme,
 } from "@/lib/informe/modelo";
-import { COLORES_GRAFICA } from "@/lib/informe/tema";
-import { PdfAlert } from "@/pdfcn/components/pdf/alert/alert";
 import { Badge } from "@/pdfcn/components/pdf/badge/badge";
 import { DataTable } from "@/pdfcn/components/pdf/data-table/data-table";
-import { Divider } from "@/pdfcn/components/pdf/divider/divider";
-import { PdfGraph } from "@/pdfcn/components/pdf/graph/graph";
 import { Heading } from "@/pdfcn/components/pdf/heading/heading";
 import { KeepTogether } from "@/pdfcn/components/pdf/keep-together/keep-together";
-import { KeyValue } from "@/pdfcn/components/pdf/key-value/key-value";
-import { PdfList } from "@/pdfcn/components/pdf/list/list";
 import { Section } from "@/pdfcn/components/pdf/section/section";
-import { Stack } from "@/pdfcn/components/pdf/stack/stack";
 import { Text } from "@/pdfcn/components/pdf/text/text";
 import { Document, Link, Page, View } from "@/pdfcn/lib/pdf-primitives";
 
@@ -32,56 +21,34 @@ import { Document, Link, Page, View } from "@/pdfcn/lib/pdf-primitives";
  * SOLO SERVIDOR: lo importa lib/informe/render.tsx y nadie mas. No lleva
  * "use client" y no puede llevarlo: nada de esto pinta en el navegador.
  *
- * Lo que dice cada seccion y lo que no, en el orden en que se lee. Es un
- * documento que viaja solo —la direccion del cliente lo abre sin el tablero
- * al lado—, asi que las salvedades que en la pagina viven pegadas al dato aqui
- * van pegadas al dato Y repetidas al final, en «Lo que este informe no dice».
+ * IGUAL A LA PANTALLA desde el 23 de septiembre de 2026, a pedido del
+ * cliente: la direccion abre el PDF sin el tablero al lado y tiene que leer lo
+ * mismo que en la ficha. Cabecera con el termino y la fecha; las tres
+ * tarjetas —noticias, publicaciones, comentarios— con positivos y negativos
+ * en grande y un cuadro por pieza; y debajo la lista de noticias (todas
+ * juntas, con las agregadas a mano sin marca), la de publicaciones y los
+ * comentarios por publicacion. Los numeros salen de DocumentoInforme.pantalla,
+ * que calcula lo mismo que la ficha con las mismas funciones.
  *
- *  - Portada: el termino, la ventana, el corte y de que fuentes sale, con
- *    «sin dato» y su razon donde no se leyo. Nunca un cero.
- *  - En cifras: publicaciones y comentarios leidos por plataforma, lado a
- *    lado, sin dividir. Dos graficas de barras —nunca de pastel: un pastel es
- *    una proporcion (regla 2)— sobre las publicaciones DESTACADAS, que son las
- *    que traen fecha; el rotulo lo dice.
- *  - Tono: cinco conteos y la salvedad que trae el dato, tal cual.
- *  - Lo que se repite: los temas contados y, si la hubo, la lectura automatica
- *    con su salvedad; debajo, la salvedad fija del documento y «Generado con
- *    IA».
- *  - Publicaciones destacadas por plataforma, con «sin dato» en la cifra que
- *    la plataforma no publica.
- *  - Comentarios mas votados de las publicaciones con mas likes, con su tono.
- *    No existe identidad que omitir: no esta en ningun archivo.
- *  - En la prensa: titulares con su enlace tal cual, y cuantos titulares del
- *    archivo propio nombran el termino, con la muestra.
- *  - Lo que este informe no dice: las cinco reglas y la decision sobre la 5.
+ * Lo que se fue con eso, porque la pantalla tampoco lo tiene: «En resumen»,
+ * fuentes consultadas, las graficas, la salvedad del tono, los temas, la
+ * lectura automatica, «Agregadas a mano» y la pagina «Lo que este informe no
+ * dice». El dato sigue trayendo la salvedad (el validador la exige) y el
+ * modelo sigue calculando lo demas; volver a pintarlo es cosa de este archivo.
+ *
+ * Reglas que la forma sigue sosteniendo: conteos y nunca porcentajes; «sin
+ * dato» y nunca cero donde no se leyo; noticias, publicaciones y comentarios
+ * en tarjetas separadas y sin un total.
  */
 
 const GRIS = "#71717a";
 
-type FilaTabla = Record<string, unknown> & FilaDestacadoInforme;
-
-function TablaDestacados({ filas }: { filas: FilaDestacadoInforme[] }) {
-  return (
-    <DataTable<FilaTabla>
-      size="compact"
-      stripe
-      columns={[
-        { key: "fecha", header: "Fecha", width: "13%", render: (v) => <Text variant="xs" noMargin>{fechaCorta(String(v))}</Text> },
-        { key: "fuente", header: "Cuenta", width: "17%", render: (v) => <Text variant="xs" noMargin>{limpiarParaFuente(String(v))}</Text> },
-        { key: "primeraLinea", header: "Primera línea", render: (v) => <Text variant="xs" noMargin>{limpiarParaFuente(String(v)) || "(sin pie)"}</Text> },
-        { key: "likes", header: "Likes", align: "right", width: "10%", render: (v) => <Text variant="xs" noMargin>{cifra(v as number | null)}</Text> },
-        { key: "comentarios", header: "Coment.", align: "right", width: "10%", render: (v) => <Text variant="xs" noMargin>{cifra(v as number | null)}</Text> },
-        { key: "compartidos", header: "Compart.", align: "right", width: "10%", render: (v) => <Text variant="xs" noMargin>{cifra(v as number | null)}</Text> },
-        { key: "url", header: "Enlace", width: "9%", render: (v) => <Link src={String(v)} style={{ color: "#0284c7", fontSize: 9 }}>abrir</Link> },
-      ]}
-      data={filas.map((f) => ({ ...f }))}
-    />
-  );
-}
+const SIN_COMENTARIOS_NOTICIAS = "Las noticias no incluyen comentarios.";
 
 type FilaTitular = Record<string, unknown> & TitularInforme;
 
-/** Titulares con su tono de prensa (favorable | adversa | neutral) y su
+/** Titulares con su tono (positiva | negativa | neutral en pantalla desde el
+ *  23 de septiembre de 2026; el dato sigue diciendo favorable | adversa) y su
  *  enlace tal cual. «sin tono» donde el modelo no corrio o no lee el idioma. */
 function TablaTitulares({ filas }: { filas: TitularInforme[] }) {
   return (
@@ -97,7 +64,7 @@ function TablaTitulares({ filas }: { filas: TitularInforme[] }) {
           render: (v) => {
             const tono = v as TitularInforme["tono"];
             const variante = tono === "adversa" ? "destructive" : tono === "favorable" ? "success" : "outline";
-            return <Badge size="sm" variant={variante} label={tono ?? "sin tono"} />;
+            return <Badge size="sm" variant={variante} label={tono === null ? "sin tono" : NOMBRE_TONO_TITULAR[tono]} />;
           },
         },
         { key: "url", header: "Enlace", width: "9%", render: (v) => <Link src={String(v)} style={{ color: "#0284c7", fontSize: 9 }}>abrir</Link> },
@@ -121,237 +88,205 @@ function Comentario({ c }: { c: ComentarioPublicado }) {
   );
 }
 
+const VERDE = "#059669";
+const ROJO = "#e11d48";
+const NEUTRO = "#a1a1aa";
+const FILO = "#e4e4e7";
+
+const COLOR_CUADRO: Record<ClaseTono, string> = {
+  positivo: VERDE, negativo: ROJO, neutral: NEUTRO, sin_tono: "#ffffff",
+};
+
+/** Un cuadro por pieza, como la tira de la pantalla (ui/tira-tono.tsx). Con
+ *  mas de 60 se deja de pintar: los numeros de arriba ya lo dicen. */
+function Cuadros({ serie }: { serie: TonoSerie }) {
+  if (serie.total === 0 || serie.total > 60) return null;
+  return (
+    <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 3, marginTop: 6 }}>
+      {serie.tramos.flatMap((t) => Array.from({ length: t.n }, (_, i) => (
+        <View key={`${t.clase}-${i}`} style={{
+          width: 9, height: 9, backgroundColor: COLOR_CUADRO[t.clase],
+          borderWidth: t.clase === "sin_tono" ? 1 : 0, borderColor: GRIS, borderStyle: "solid",
+        }} />
+      )))}
+    </View>
+  );
+}
+
+/** El triangulo de la tarjeta, dibujado con bordes y no con «▲»: Geist no
+ *  trae ese glifo y el motor de PDF falla el documento entero ante un
+ *  caracter sin fuente (ver limpiarParaFuente en lib/informe/modelo.ts).
+ *  Los lados van en blanco y no en `transparent`: el motor pinta
+ *  `transparent` en negro y salian relojes de arena. La tarjeta es blanca. */
+function Flecha({ arriba, color }: { arriba: boolean; color: string }) {
+  return (
+    <View style={{
+      width: 0, height: 0, borderStyle: "solid",
+      borderLeftWidth: 6, borderRightWidth: 6, borderLeftColor: "#ffffff", borderRightColor: "#ffffff",
+      ...(arriba
+        ? { borderBottomWidth: 10, borderBottomColor: color, borderTopWidth: 0, borderTopColor: "#ffffff" }
+        : { borderTopWidth: 10, borderTopColor: color, borderBottomWidth: 0, borderBottomColor: "#ffffff" }),
+    }} />
+  );
+}
+
+function Numero({ n, clase, genero }: { n: number; clase: "positivo" | "negativo"; genero: Genero }) {
+  const color = clase === "positivo" ? VERDE : ROJO;
+  return (
+    <View style={{ display: "flex", flexDirection: "column" }}>
+      {/* La flecha siempre en su color y mas chica, el numero en gris si es
+          cero: igual que la tarjeta de la pantalla. */}
+      <View style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 6 }}>
+        <Flecha arriba={clase === "positivo"} color={color} />
+        <Text noMargin weight="bold" color={n === 0 ? GRIS : color} style={{ fontSize: 30, lineHeight: 1 }}>{cifra(n)}</Text>
+      </View>
+      <Text variant="sm" noMargin>{palabraTono(clase, n, genero)}</Text>
+    </View>
+  );
+}
+
+/** Una tarjeta, como en la pantalla: positivos y negativos en grande, un
+ *  cuadro por pieza y el resto en gris. `serie` null es «sin dato». */
+function Tarjeta({ rotulo, serie, genero, unidad, sinTono, nota }: {
+  rotulo: string;
+  serie: TonoSerie | null;
+  genero: Genero;
+  unidad: [string, string, string];
+  sinTono?: number;
+  nota?: string;
+}) {
+  const resto = serie === null ? [] : [
+    serie.neutral > 0 ? `${cifra(serie.neutral)} ${palabraTono("neutral", serie.neutral, genero)}` : null,
+    serie.sinTono > 0 ? `${cifra(serie.sinTono)} sin tono` : null,
+  ].filter((x): x is string => x !== null);
+  return (
+    <View style={{ flex: 1, borderWidth: 1, borderColor: FILO, borderStyle: "solid", borderRadius: 8, padding: 12 }}>
+      <Text variant="sm" weight="medium" color={GRIS} noMargin>{rotulo}</Text>
+      {sinTono !== undefined ? (
+        <View style={{ marginTop: 8 }}>
+          <Text noMargin weight="bold" style={{ fontSize: 30, lineHeight: 1 }}>{cifra(sinTono)}</Text>
+          <Text variant="xs" color={GRIS} noMargin>{sinTono === 1 ? unidad[0] : unidad[1]} · tono sin dato</Text>
+        </View>
+      ) : serie === null ? (
+        <Text variant="lg" italic color="#b45309" style={{ marginTop: 8 }}>Sin dato</Text>
+      ) : (
+        <View style={{ marginTop: 8 }}>
+          <View style={{ display: "flex", flexDirection: "row", gap: 18 }}>
+            <Numero n={serie.positivo} clase="positivo" genero={genero} />
+            <Numero n={serie.negativo} clase="negativo" genero={genero} />
+          </View>
+          <Cuadros serie={serie} />
+          <Text variant="xs" color={GRIS} style={{ marginTop: 6 }} noMargin>
+            {serie.total === 0
+              ? unidad[2]
+              : `de ${cifra(serie.total)} ${serie.total === 1 ? unidad[0] : unidad[1]}${resto.length > 0 ? ` · ${resto.join(" · ")}` : ""}`}
+          </Text>
+        </View>
+      )}
+      {nota === undefined ? null : <Text variant="xs" color={GRIS} style={{ marginTop: 4 }} noMargin>{nota}</Text>}
+    </View>
+  );
+}
+
+type FilaPublicacion = Record<string, unknown> & DocumentoInforme["pantalla"]["publicaciones"][number];
+
+function TablaPublicaciones({ filas }: { filas: DocumentoInforme["pantalla"]["publicaciones"] }) {
+  return (
+    <DataTable<FilaPublicacion>
+      size="compact"
+      stripe
+      columns={[
+        { key: "fecha", header: "Fecha", width: "13%", render: (v) => <Text variant="xs" noMargin>{v === null ? "sin fecha" : fechaCorta(String(v))}</Text> },
+        { key: "red", header: "Red", width: "12%", render: (v) => <Text variant="xs" noMargin>{String(v)}</Text> },
+        { key: "fuente", header: "Cuenta", width: "18%", render: (v) => <Text variant="xs" noMargin>{limpiarParaFuente(String(v))}</Text> },
+        { key: "titulo", header: "Primera línea", render: (v) => <Text variant="xs" noMargin>{limpiarParaFuente(String(v)) || "(sin pie)"}</Text> },
+        { key: "url", header: "Enlace", width: "9%", render: (v) => <Link src={String(v)} style={{ color: "#0284c7", fontSize: 9 }}>abrir</Link> },
+      ]}
+      data={filas.map((f) => ({ ...f }))}
+    />
+  );
+}
+
 export function InformeConsulta({ modelo }: { modelo: DocumentoInforme }) {
   const m = modelo;
-  const t = m.tono;
+  const p = m.pantalla;
+  const { prensa: cp, publicaciones: cpub, comentarios: cc } = p.cifras;
   const corte = fechaLarga(m.corte);
+  const tipo = m.tipo.charAt(0).toUpperCase() + m.tipo.slice(1);
   return (
     <Document title={`Pulso N33 · ${m.termino}`}>
       <Page size="A4">
-        {/* ---------------------------------------------------------- portada */}
+        {/* ------------------------------------------------------- cabecera */}
         <Text variant="xs" color={GRIS} transform="uppercase">Pulso N33 · Informe por término</Text>
         <Heading level={1}>{m.termino}</Heading>
-        <Text variant="base" color={GRIS}>{m.tipo} · qué se dice en prensa y redes · prensa: últimos {ventana(m.ventanaPrensaDias)} · redes: últimos {ventana(m.ventanaDias)} · al {corte}</Text>
+        <Text variant="base" color={GRIS}>{tipo} · al {corte}</Text>
 
-        {/* ------------------------------------------------------- en resumen */}
-        <Section spacing="md">
-          <Heading level={2}>En resumen</Heading>
-          <PdfList variant="bullet" items={m.resumen.map((frase) => ({ text: limpiarParaFuente(frase) }))} />
-          <Text variant="xs" color={GRIS}>Conteos y fechas sacados de este mismo informe. No son una medida de opinión pública ni de la reputación de nadie.</Text>
-        </Section>
+        {/* -------------------------------------------------------- tarjetas */}
+        <KeepTogether>
+          <View style={{ display: "flex", flexDirection: "row", gap: 10, marginTop: 14, marginBottom: 18 }}>
+            <Tarjeta rotulo="Noticias" serie={cp.estado === "ok" ? cp.tono : null} genero="f"
+              unidad={["noticia", "noticias", "Ninguna noticia"]}
+              nota={cp.estado === "ok" ? SIN_COMENTARIOS_NOTICIAS : undefined} />
+            <Tarjeta rotulo={p.rotulos.publicaciones} serie={cpub.estado === "ok" ? cpub.tono : null} genero="f"
+              sinTono={cpub.estado === "ok" && cpub.tono === null ? cpub.total : undefined}
+              unidad={["publicación", "publicaciones", "Ninguna publicación"]} />
+            <Tarjeta rotulo={p.rotulos.comentarios} serie={cc.estado === "ok" ? cc.tono : null} genero="m"
+              unidad={["comentario", "comentarios", "Ningún comentario"]} />
+          </View>
+        </KeepTogether>
 
+        {/* -------------------------------------------------------- noticias */}
         <Section spacing="md">
-          <Heading level={3}>Fuentes consultadas</Heading>
-          <KeyValue
-            divided
-            items={[
-              { key: "Prensa", value: m.prensa.estado === "ok" ? `leída · últimos ${ventana(m.ventanaPrensaDias)}` : "sin dato", valueColor: m.prensa.estado === "ok" ? undefined : GRIS },
-              ...m.fuentes.map((f) => ({
-                key: f.nombre,
-                value: f.estado === "ok" ? `leída · últimos ${ventana(m.ventanaDias)}` : f.estado === "sin_dato" ? "sin dato" : "no disponible esta vez",
-                valueColor: f.estado === "ok" ? undefined : GRIS,
-              })),
-            ]}
-          />
-          <Text variant="xs" color={GRIS}>
-            Titulares, publicaciones y comentarios se leyeron sin iniciar sesión en ninguna red, sobre medios, cuentas, etiquetas, búsquedas y páginas públicas. La identidad de quien comenta no se guarda en ningún archivo.
-          </Text>
-        </Section>
-
-        {/* -------------------------------------------------------- en cifras */}
-        <Section spacing="md">
-          <Heading level={2}>En cifras</Heading>
-          <KeepTogether>
-            <DataTable
-              size="compact"
-              columns={[
-                { key: "nombre", header: "Plataforma" },
-                { key: "publicaciones", header: "Publicaciones", align: "right", render: (v) => <Text variant="xs" noMargin>{cifra(v as number | null)}</Text> },
-                { key: "comentariosLeidos", header: "Comentarios leídos", align: "right", render: (v) => <Text variant="xs" noMargin>{cifra(v as number | null)}</Text> },
-              ]}
-              data={m.cifras.map((c) => ({ ...c }))}
-            />
-            <Text variant="xs" color={GRIS}>«Comentarios leídos» son los que se leyeron de cada publicación; las plataformas reportan más. Van lado a lado y no se dividen.</Text>
-          </KeepTogether>
-          {m.destacadosPorRed.length === 0 ? null : (
+          <Heading level={2}>Noticias</Heading>
+          <Text variant="sm" color={GRIS}>{SIN_COMENTARIOS_NOTICIAS}</Text>
+          {p.porMedio.length < 2 ? null : (
             <KeepTogether>
-              <PdfGraph variant="bar" data={m.destacadosPorRed} title="Publicaciones destacadas por plataforma" subtitle={`Las que entran en este informe · al ${corte}`} showValues legend="none" colors={COLORES_GRAFICA} height={200} />
+              <Heading level={4}>De dónde vienen</Heading>
+              <DataTable
+                size="compact"
+                columns={[
+                  { key: "fuente", header: "Medio" },
+                  { key: "titulares", header: "Noticias", align: "right", render: (v) => <Text variant="xs" noMargin>{cifra(v as number)}</Text> },
+                  { key: "favorable", header: "Positivas", align: "right", render: (v) => <Text variant="xs" noMargin>{cifra(v as number)}</Text> },
+                  { key: "adversa", header: "Negativas", align: "right", render: (v) => <Text variant="xs" noMargin>{cifra(v as number)}</Text> },
+                  { key: "neutral", header: "Neutrales", align: "right", render: (v) => <Text variant="xs" noMargin>{cifra(v as number)}</Text> },
+                ]}
+                data={p.porMedio.map((r) => ({ ...r }))}
+              />
             </KeepTogether>
           )}
-          {m.destacadosPorSemana.length === 0 || (m.destacadosPorSemana[0]?.data.length ?? 0) === 0 ? null : (
-            <KeepTogether>
-              <PdfGraph variant="bar" data={m.destacadosPorSemana} title="Publicaciones destacadas por semana" subtitle="Cuántas de las publicaciones de este informe se publicaron cada semana" showValues legend="bottom" colors={COLORES_GRAFICA} height={220} />
-            </KeepTogether>
-          )}
+          {cp.estado !== "ok"
+            ? <Text color={GRIS}>Sin dato.</Text>
+            : p.noticias.length === 0
+              ? <Text>Ninguna noticia menciona a {m.termino}.</Text>
+              : <TablaTitulares filas={p.noticias} />}
         </Section>
 
-        {/* ------------------------------------------------------------- tono */}
+        {/* --------------------------------------------------- publicaciones */}
         <Section spacing="md">
-          <Heading level={2}>Tono de los comentarios</Heading>
-          {t.comentarios === 0 ? (
-            <Text>Sin comentarios que leer en la ventana.</Text>
-          ) : (
-            <KeyValue
-              divided
-              items={[
-                { key: "Positivo", value: cifra(t.positivo) },
-                { key: "Negativo", value: cifra(t.negativo) },
-                { key: "Neutral", value: cifra(t.neutral) },
-                { key: "Sin clasificar", value: cifra(t.sin_clasificar) },
-                { key: "En un idioma que el modelo no lee", value: cifra(t.sin_modelo_idioma) },
-                { key: "Comentarios leídos", value: cifra(t.comentarios) },
-              ]}
-            />
-          )}
-          <PdfAlert variant="info" title="Cómo leer este conteo" showIcon={false}>
-            {t.salvedad_tono}{t.metodo === "modelo" && t.modelo ? ` Modelo: ${t.modelo}.` : " Esta vez no corrió el modelo de tono."}
-          </PdfAlert>
+          <Heading level={2}>Publicaciones</Heading>
+          {p.publicaciones.length === 0
+            ? <Text color={GRIS}>{cpub.estado === "ok" ? "Ninguna publicación." : "Sin dato."}</Text>
+            : <TablaPublicaciones filas={p.publicaciones} />}
         </Section>
 
-        {/* ------------------------------------------------------ se repite */}
+        {/* ----------------------------------------------------- comentarios */}
         <Section spacing="md">
-          <Heading level={2}>Lo que se repite en los comentarios</Heading>
-          {m.temas.length === 0 ? (
-            <Text>Ninguna frase se repite en al menos {m.temasMinimo} comentarios.</Text>
-          ) : (
-            <PdfList variant="bullet" items={m.temas.map((x) => ({ text: `${limpiarParaFuente(x.termino)} · ${cifra(x.n)} comentarios` }))} />
-          )}
-          {m.lectura.estado === "lista" ? (
-            <Stack gap="sm">
-              <Heading level={4}>Lectura automática</Heading>
-              <Text>{limpiarParaFuente(m.lectura.lectura)}</Text>
-              <Text variant="sm" color={GRIS}>Lo que no establece: {limpiarParaFuente(m.lectura.salvedad)}</Text>
-              <Text variant="xs" color={GRIS}>{SALVEDAD_FIJA_INFORME} Generado con IA.</Text>
-            </Stack>
-          ) : (
-            <Text variant="sm" color={GRIS}>
-              {m.lectura.estado === "pocos"
-                ? "Con menos de diez comentarios no hay una lectura de qué se repite: sería un comentario ascendido a patrón."
-                : m.lectura.estado === "apagada"
-                  ? "La lectura automática no está disponible."
-                  : "La lectura automática no se pudo hacer esta vez."}
-            </Text>
-          )}
-        </Section>
-
-        {/* -------------------------------------------------------- destacados */}
-        <View break>
-          <Heading level={2}>Publicaciones destacadas</Heading>
-          {m.destacados.length === 0 ? <Text>Ninguna plataforma trajo publicaciones en la ventana.</Text> : null}
-          {m.destacados.map((bloque) => (
-            <Section key={bloque.red} spacing="sm">
-              <Heading level={3}>{bloque.nombre}</Heading>
-              {bloque.filas.length === 0
-                ? <Text variant="sm" color={GRIS}>Sin publicaciones que nombren el término en los últimos {m.ventanaDias} días.</Text>
-                : <TablaDestacados filas={bloque.filas} />}
-              <Text variant="xs" color={GRIS}>Cifras al {corte}, como las reportaba la plataforma. «Sin dato» donde la plataforma no publica esa cifra.</Text>
-            </Section>
-          ))}
-        </View>
-
-        {/* ------------------------------------------------------ comentarios */}
-        <Section spacing="md">
-          <Heading level={2}>Comentarios más votados</Heading>
+          <Heading level={2}>{p.rotulos.hoja}</Heading>
           {!m.hayArchivoDeTexto ? (
             <Text variant="sm" color={GRIS}>El texto de los comentarios no está disponible en esta vista.</Text>
-          ) : m.conTexto.length === 0 ? (
-            <Text variant="sm" color={GRIS}>Ninguna publicación destacada trajo comentarios con texto.</Text>
+          ) : p.comentarios.length === 0 ? (
+            <Text variant="sm" color={GRIS}>{cc.estado === "ok" ? "Sin comentarios." : "Sin dato."}</Text>
           ) : (
-            m.conTexto.map((p) => (
-              <KeepTogether key={`${p.red}:${p.titulo}:${p.fuente}`}>
-                <View style={{ marginBottom: 12 }}>
-                  <Text variant="xs" color={GRIS} noMargin>{p.nombre} · {limpiarParaFuente(p.fuente)}</Text>
-                  <Text variant="sm" weight="semibold">{limpiarParaFuente(p.titulo) || "(sin pie)"}</Text>
-                  {p.comentarios.map((c, i) => <Comentario key={i} c={c} />)}
-                </View>
-              </KeepTogether>
+            p.comentarios.map((pub) => (
+              <View key={`${pub.red}:${pub.titulo}:${pub.fuente}`} style={{ marginBottom: 12 }}>
+                <Text variant="xs" color={GRIS} noMargin>{limpiarParaFuente(pub.fuente)} · {pub.nombre}</Text>
+                <Text variant="sm" weight="semibold">{limpiarParaFuente(pub.titulo) || "(sin pie)"}</Text>
+                {pub.comentarios.map((c, i) => <Comentario key={i} c={c} />)}
+              </View>
             ))
           )}
         </Section>
-
-        {/* ----------------------------------------------------------- prensa */}
-        <Section spacing="md">
-          <Heading level={2}>En la prensa · últimos {ventana(m.ventanaPrensaDias)}</Heading>
-          {m.prensa.estado !== "ok" ? (
-            <Text variant="sm" color={GRIS}>Sin dato.</Text>
-          ) : (
-            <>
-              {m.prensa.tono === null || m.prensa.tono.titulares === 0 ? null : (
-                <KeepTogether>
-                  <KeyValue
-                    divided
-                    items={[
-                      { key: "Adversos", value: cifra(m.prensa.tono.adversa) },
-                      { key: "Favorables", value: cifra(m.prensa.tono.favorable) },
-                      { key: "Neutrales", value: cifra(m.prensa.tono.neutral) },
-                      { key: "Sin tono", value: cifra(m.prensa.tono.sin_clasificar + m.prensa.tono.sin_modelo_idioma) },
-                      { key: "Titulares", value: cifra(m.prensa.tono.titulares) },
-                    ]}
-                  />
-                </KeepTogether>
-              )}
-              {m.prensa.resultados.length === 0 ? (
-                <Text>Ningún titular nombra {m.termino} en los últimos {ventana(m.ventanaPrensaDias)} en las fuentes revisadas.</Text>
-              ) : (
-                <TablaTitulares filas={m.prensa.resultados} />
-              )}
-              {m.prensa.porMedio.length < 2 ? null : (
-                <KeepTogether>
-                  <Heading level={4}>Por medio</Heading>
-                  <DataTable
-                    size="compact"
-                    columns={[
-                      { key: "fuente", header: "Medio" },
-                      { key: "titulares", header: "Titulares", align: "right", render: (v) => <Text variant="xs" noMargin>{cifra(v as number)}</Text> },
-                      { key: "adversa", header: "Adversos", align: "right", render: (v) => <Text variant="xs" noMargin>{cifra(v as number)}</Text> },
-                      { key: "favorable", header: "Favorables", align: "right", render: (v) => <Text variant="xs" noMargin>{cifra(v as number)}</Text> },
-                      { key: "neutral", header: "Neutrales", align: "right", render: (v) => <Text variant="xs" noMargin>{cifra(v as number)}</Text> },
-                    ]}
-                    data={m.prensa.porMedio.map((r) => ({ ...r }))}
-                  />
-                </KeepTogether>
-              )}
-              {m.prensa.anteriores.length === 0 ? null : (
-                <Stack gap="sm">
-                  <Heading level={4}>Anteriores a los últimos {ventana(m.ventanaPrensaDias)}</Heading>
-                  <TablaTitulares filas={m.prensa.anteriores} />
-                  <Text variant="xs" color={GRIS}>No entran en el conteo de arriba: son los titulares que el buscador de cada medio devolvió más atrás, con su fecha.</Text>
-                </Stack>
-              )}
-              {m.prensa.muestra === null ? null : <Text variant="xs" color={GRIS}>{m.prensa.muestra}.</Text>}
-            </>
-          )}
-          {m.prensa.archivo === null ? null : (
-            <Text variant="xs" color={GRIS}>
-              {cifra(m.prensa.archivo.coincidencias)} {m.prensa.archivo.coincidencias === 1 ? "titular" : "titulares"} del archivo propio {m.prensa.archivo.coincidencias === 1 ? "nombra" : "nombran"} el término · {m.prensa.archivo.muestra}.
-            </Text>
-          )}
-          <PdfAlert variant="info" title="Cómo leer el tono de un titular" showIcon={false}>
-            El mismo modelo que lee los comentarios lee cada titular y dice si suena favorable, adverso o neutral; no mide lo que el medio piensa de la persona o de la marca. Los titulares y los comentarios no se suman en una sola cifra.
-          </PdfAlert>
-        </Section>
-
-        {/* ------------------------------------------------ agregados a mano */}
-        {m.agregados.length === 0 ? null : (
-          <Section spacing="md">
-            <Heading level={2}>Agregadas a mano</Heading>
-            <Text variant="sm" color={GRIS}>
-              Señaladas una por una. No las devolvió ninguna búsqueda y no entran en los conteos de las secciones anteriores.
-            </Text>
-            <TablaTitulares filas={m.agregados} />
-          </Section>
-        )}
-
-        {/* ------------------------------------------------- lo que no dice */}
-        <View break>
-          <Heading level={2}>Lo que este informe no dice</Heading>
-          <PdfList variant="numbered" gap="md" items={REGLAS_PRODUCTO.map((r) => ({ text: r }))} />
-          <Divider spacing="md" />
-          <PdfAlert variant="warning" title="Sobre el tono de una persona" showIcon={false}>{NOTA_DECISION_REGLA_5}</PdfAlert>
-          <Text variant="xs" color={GRIS}>
-            Pulso N33 mide volumen de prensa y de conversación en el corredor Tijuana–San Diego. Este informe se armó al {corte} a partir de lo publicado en el tablero; el texto de los comentarios se conserva 30 días y la identidad de quien comenta no se guarda.
-          </Text>
-        </View>
       </Page>
     </Document>
   );

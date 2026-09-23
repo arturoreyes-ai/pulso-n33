@@ -66,11 +66,23 @@ assert.deepEqual(modelo.fuentes.map((f) => f.estado), ['ok', 'ok', 'ok', 'sin_da
 assert.ok(!('razon' in modelo.fuentes[3]), 'ninguna fuente lleva razon al documento');
 // El resumen: frases con conteos, nunca «la mayoria» ni la gente.
 assert.ok(modelo.resumen.length >= 2, 'hay resumen');
-assert.match(modelo.resumen[0], /^3 titulares nombran Vive la Baja en los últimos 6 meses: 1 adverso, 1 favorable, 0 neutrales, 1 sin tono\.$/);
-assert.match(modelo.resumen[1], /^Lo adverso viene de Zeta \(1\)\.$/);
+assert.equal(modelo.resumen[0], '3 noticias mencionan a Vive la Baja en los últimos 6 meses: 1 positiva, 1 negativa, 0 neutrales, 1 sin tono.');
+assert.equal(modelo.resumen[1], 'Lo negativo viene de Zeta (1).');
 for (const frase of modelo.resumen) {
-  for (const prohibida of ['mayoría', 'la gente', 'opinión pública', '%']) assert.ok(!frase.includes(prohibida), `${frase} · ${prohibida}`);
+  for (const prohibida of ['mayoría', 'la gente', 'opinión pública', '%', 'advers', 'favorabl']) assert.ok(!frase.includes(prohibida), `${frase} · ${prohibida}`);
 }
+// El tono de los pies viaja al PDF; un corte sin el es null («sin dato»).
+assert.deepEqual([modelo.tonoPublicaciones.positivo, modelo.tonoPublicaciones.negativo, modelo.tonoPublicaciones.publicaciones], [3, 1, 8]);
+assert.equal(armarDocumentoInforme(doc, gc, textos, { estado: 'apagada' }).tonoPublicaciones, null);
+// 23 de septiembre de 2026: el PDF dice lo mismo que la ficha. `pantalla` sale
+// de las mismas funciones (cifrasConsulta, noticiasDeConsulta, rotulosConsulta).
+const pan = modelo.pantalla;
+assert.deepEqual([pan.cifras.prensa.tono.positivo, pan.cifras.prensa.tono.negativo, pan.cifras.prensa.tono.total], [1, 1, 4], 'noticias: un total, sin el post de red');
+assert.deepEqual([pan.cifras.publicaciones.tono.negativo, pan.cifras.publicaciones.total], [2, 9], 'publicaciones: con el post de Facebook agregado');
+assert.equal(pan.noticias.length, 4);
+assert.ok(pan.publicaciones.some((f) => f.red === 'Facebook' && f.url.includes('TijuanaLineaRoja')), 'el post agregado sale en publicaciones');
+assert.match(pan.rotulos.publicaciones, /^Publicaciones · en /);
+assert.match(pan.rotulos.comentarios, /^Comentarios · en /, 'las dos tarjetas gemelas se rotulan igual');
 // Cifras por plataforma, lado a lado y sin dividir.
 assert.deepEqual(modelo.cifras.map((c) => [c.publicaciones, c.comentariosLeidos]), [[4, 9], [3, 12], [1, 2]]);
 // Instagram no publica compartidos: null, que se pinta «sin dato», nunca 0.
@@ -120,7 +132,7 @@ assert.equal(modelo.prensa.tono.titulares, 3, 'los agregados no entran al conteo
 for (const a of modelo.agregados) {
   assert.ok(!modelo.prensa.resultados.some((r) => r.url === a.url), 'no se cuenta dos veces');
 }
-assert.match(modelo.resumen.at(-1), /^Además, 2 publicaciones agregadas a mano, 1 adversa\.$/);
+assert.equal(modelo.resumen.at(-1), 'Además, 2 publicaciones agregadas a mano, 1 negativa.');
 assert.equal(armarDocumentoInforme(doc, gc, textos, { estado: 'apagada' }).agregados.length, 0, 'sin agregados, lista vacia');
 // Sin un solo porcentaje en ninguna cadena del modelo ni de las reglas.
 const texto = JSON.stringify(modelo) + REGLAS_PRODUCTO.join(' ');
@@ -140,8 +152,8 @@ assert.equal(modeloGc.prensa.estado, 'ok');
 assert.equal(modeloGc.prensa.resultados.length, 1);
 assert.deepEqual(modeloGc.prensa.anteriores.map((r) => [r.fecha, r.tono]), [['2026-03-11', 'adversa'], ['2026-03-11', 'adversa']]);
 assert.equal(modeloGc.prensa.tono.titulares, 1, 'los anteriores no entran al conteo');
-assert.match(modeloGc.resumen[0], /^1 titular nombra Grupo Concordia en los últimos 6 meses: 0 adversos, 0 favorables, 1 neutral\.$/);
-assert.match(modeloGc.resumen[1], /^Y hay 2 titulares anteriores a ese periodo, del 11 mar 2026, 2 adversos\.$/);
+assert.equal(modeloGc.resumen[0], '1 noticia menciona a Grupo Concordia en los últimos 6 meses: 0 positivas, 0 negativas, 1 neutral.');
+assert.equal(modeloGc.resumen[1], 'Y hay 2 noticias anteriores a ese periodo, del 11 mar 2026, 2 negativas.');
 assert.equal(modeloGc.destacadosPorRed.length, 1);
 
 // ------------------------------------------------------- la lectura del modelo
