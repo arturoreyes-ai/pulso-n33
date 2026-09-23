@@ -21,5 +21,5 @@ export const maxDuration = 30;
 
 export async function GET(peticion: NextRequest): Promise<Response> {
   const params = peticion.nextUrl.searchParams;
-  return responderImagen({ u: params.get("u"), d: params.get("d") });
+  return responderImagen({ u: params.get("u"), d: params.get("d"), t: params.get("t") });
 }

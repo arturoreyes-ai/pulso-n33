@@ -71,7 +71,9 @@ export function useImagenesVivas(
       if (ref === null) continue;
       pedidas.current.add(t.clave);
       const clave = t.clave;
-      const ruta = `/api/imagen?u=${encodeURIComponent(ref.url)}&d=${encodeURIComponent(ref.dominio)}`;
+      // El titular va para preguntarle primero al propio medio
+      // (lib/busqueda/enlace-medio.ts), sin pasar por Google.
+      const ruta = `/api/imagen?u=${encodeURIComponent(ref.url)}&d=${encodeURIComponent(ref.dominio)}&t=${encodeURIComponent(t.r.titulo)}`;
       void leerApi<{ imagen: string | null }>(ruta)
         .then((r) => {
           const imagen = r.imagen;

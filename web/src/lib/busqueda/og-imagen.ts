@@ -47,7 +47,7 @@ const ATRIBUTO = /([a-zA-Z][a-zA-Z0-9:_-]*)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'
  * viene delimitado, y en la practica lo unico que aparece en una URL es `&amp;`
  * separando parametros de un CDN.
  */
-function decodificar(texto: string): string {
+export function decodificar(texto: string): string {
   return texto
     .replace(/&(?:#(\d{1,7})|#[xX]([0-9a-fA-F]{1,6}));/g, (todo, dec: string | undefined, hex: string | undefined) => {
       const punto = dec !== undefined ? Number.parseInt(dec, 10) : Number.parseInt(hex ?? "", 16);
@@ -104,13 +104,15 @@ export function imagenDeHtml(html: string, base: string | URL): string | null {
   for (const etq of ETIQUETAS) {
     const crudo = encontradas.get(etq);
     if (crudo === undefined) continue;
-    const url = absoluta(decodificar(crudo).trim(), base);
+    const url = imagenAbsoluta(decodificar(crudo).trim(), base);
     if (url !== null) return url;
   }
   return null;
 }
 
-function absoluta(crudo: string, base: string | URL): string | null {
+/** Los limites de forma de una URL de imagen, compartidos con la destacada
+ *  que devuelve WordPress (enlace-medio.ts). */
+export function imagenAbsoluta(crudo: string, base: string | URL): string | null {
   if (crudo === "" || crudo.length > LARGO_MAXIMO) return null;
   let u: URL;
   try {
