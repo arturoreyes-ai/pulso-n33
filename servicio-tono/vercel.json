@@ -1,0 +1,12 @@
+{
+ "$schema": "https://openapi.vercel.sh/vercel.json",
+ "installCommand": "node -e \"console.log('el build solo corre empaquetar.mjs: las dependencias de Python las instala la funcion, con la version de .python-version')\"",
+ "buildCommand": "node empaquetar.mjs",
+ "outputDirectory": "public",
+ "functions": {
+  "api/tono.py": {
+   "memory": 2048,
+   "maxDuration": 60
+  }
+ }
+}

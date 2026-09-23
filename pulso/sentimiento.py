@@ -99,16 +99,31 @@ class Analizador:
             self._analizador = create_analyzer(task="sentiment", lang=self.idioma)
         return self._analizador
 
-    def predecir(self, textos, lote=32):
+    def predecir(self, textos, lote=32, uno_a_uno=False):
         """Una etiqueta por texto, en el mismo orden. Vacios salen NEU sin
-        pasar por el modelo."""
+        pasar por el modelo.
+
+        `uno_a_uno` usa el camino de pysentimiento para UNA frase
+        (`_predict_single`, «without creating dataset»): mismo preprocesado,
+        mismo tokenizador, mismo modelo, sin `datasets`. Lo usa el servicio de
+        tono (pulso/tono.py) porque en Vercel, con Python 3.12, el camino por
+        lote muere en `Dataset.map` con «Can't pickle <class 'MonthDayNano'>»
+        (dill con pyarrow; en local, 3.11, no pasa). Medido el 23 de
+        septiembre de 2026 sobre 128 titulares: las mismas etiquetas en los
+        128, y en la mitad del tiempo. La cosecha sigue por lote.
+        """
         textos = [recortar(t) for t in textos]
         salida = [None] * len(textos)
         indices = [i for i, t in enumerate(textos) if t]
         for i in range(len(textos)):
             if not textos[i]:
                 salida[i] = _resultado("NEU", 0.0, self.modelo)
-        if indices:
+        if indices and uno_a_uno:
+            analizador = self._cargar()
+            for i in indices:
+                r = analizador.predict(textos[i])
+                salida[i] = _resultado(r.output, max(r.probas.values()), self.modelo)
+        elif indices:
             analizador = self._cargar()
             for inicio in range(0, len(indices), lote):
                 bloque = indices[inicio:inicio + lote]
@@ -136,7 +151,7 @@ class AnalizadorFalso:
         self.idioma = idioma
         self.llamadas = 0
 
-    def predecir(self, textos, lote=32):
+    def predecir(self, textos, lote=32, uno_a_uno=False):
         self.llamadas += 1
         salida = []
         for t in textos:

@@ -1,0 +1,11 @@
+# Lista blanca: a Vercel sube SOLO lo que la funcion necesita. `vercel deploy`
+# no lee .gitignore, y esta carpeta es lo unico que se sube (se despliega desde
+# aqui, nunca desde la raiz del repo, donde cache/ guarda texto de comentarios).
+# El modelo (api/_modelo/) no sube: lo baja el build con TONO_EMPAQUETAR=1.
+/*
+!api
+!vercel.json
+!requirements.txt
+!empaquetar.mjs
+!.python-version
+api/_modelo

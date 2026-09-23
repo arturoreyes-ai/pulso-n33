@@ -47,3 +47,13 @@ data/*-comentarios.json
 # Lo escribe Finder en cada carpeta que se abre en macOS. No es del proyecto
 # y un `git add -A` lo colaba junto con el trabajo de verdad.
 .DS_Store
+
+# Generados por servicio-tono/empaquetar.mjs para la funcion de Python del
+# servicio de tono: la copia de pulso/{tono,sentimiento,normalizar}.py y, con
+# TONO_EMPAQUETAR=1, los ~430 MB del modelo. La unica copia que versiona git
+# es la de pulso/.
+servicio-tono/api/_pulso/
+servicio-tono/api/_modelo/
+
+# Lo escribe `vercel link` al vincular servicio-tono/ con su proyecto de Vercel.
+servicio-tono/.vercel/
