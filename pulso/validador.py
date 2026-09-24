@@ -1072,6 +1072,15 @@ CLAVES_PROHIBIDAS_TIKTOK = frozenset(
     {"uniqueId", "uid", "avatarThumbnail", "authorMeta", "nickName", "avatar", "cid",
      "profileUrl"})
 
+# Campos de identidad que devuelven los actores de Facebook, del post (`user`
+# es la pagina, pero en un post compartido es quien lo publico primero) y del
+# comentario (el nombre, id, perfil y foto de quien comento). Se tiran al
+# ingerir en pulso/facebook.py; si uno aparece en data/, el filtro se rompio
+# antes del cache.
+CLAVES_PROHIBIDAS_FACEBOOK = frozenset(
+    {"profileName", "profileId", "profileUrl", "profilePicture", "user", "facebookId",
+     "feedbackId", "sharedPost", "topComments"})
+
 # El @handle del CREADOR del video si se publica en TikTok (decision del
 # cliente del 8 de septiembre de 2026: es quien publico, y la URL ya lo trae).
 # Es la unica identidad que cruza a data/, y solo en esa plataforma.
@@ -1205,6 +1214,32 @@ PLATAFORMAS_REDES = {
         "zonas": ZONAS_REDES_AMBITO,
         "modulo": "pulso/youtube.py:_limpiar_pieza",
     },
+    "facebook": {
+        # Paginas de medios (config/facebook.json, 23 de septiembre de 2026).
+        # Las formas de URL son las que canoniza pulso/facebook.py::_url_post:
+        # todas empiezan por la raiz.
+        "prefijo": "https://www.facebook.com/",
+        "ventana": "ventana_horas",
+        "ventana_legado": None,
+        "creador": False,
+        "prohibidas": CLAVES_PROHIBIDAS_FACEBOOK,
+        # Facebook SI publica compartidos: un 0 es cero medido. `likes` es el
+        # total de reacciones. No publica guardados.
+        "cifras": ("likes", "comentarios", "compartidos"),
+        "cifras_opcionales": ("reproducciones",),
+        "orden": ("likes", "comentarios"),
+        "formatos": (),
+        "estados": ("ok", "fallo", "sin_token"),
+        # Toda fila lleva `ambito`: la zona sale del pie, siempre.
+        "alcance": True,
+        # Solo `comentarios_para` posts por pagina y corrida pagan comentarios;
+        # un destacado sin ellos es lo esperado y no merece aviso.
+        "comentarios_parciales": True,
+        "residuo_corredor": True,
+        "duracion": False,
+        "zonas": ZONAS_REDES_AMBITO,
+        "modulo": "pulso/facebook.py:_limpiar_comentario",
+    },
 }
 
 RE_BUSQUEDA_TIKTOK = re.compile(r"^tk_[a-z0-9_]{2,20}$")
@@ -1337,6 +1372,9 @@ def _validar_marca(fila, et, errores):
     s = fila.get("seguidores")
     if "seguidores" in fila and (not isinstance(s, int) or isinstance(s, bool) or s < 0):
         errores.append("{}: 'seguidores' debe ser entero no negativo ({!r})".format(et, s))
+    if "dos_redes" in fila and not (_texto(fila["dos_redes"]) and "marca" in fila):
+        errores.append("{}: 'dos_redes' es la razon escrita para leer una marca en dos redes; "
+                       "va con 'marca' y no vacia".format(et))
     # Solo a la ACTIVA se le exige: una fila que nadie ha sondeado no tiene
     # cifra, y un 0 en su lugar se leeria como "nadie la sigue".
     if "marca" in fila and fila.get("activo") and "seguidores" not in fila:
@@ -1344,8 +1382,13 @@ def _validar_marca(fila, et, errores):
                        "que se decide en que red se lee el medio".format(et))
 
 
-def validar_marcas(instagram, tiktok):
-    """Un medio, una red: entre Instagram y TikTok, una sola fila activa por marca.
+def validar_marcas(instagram, tiktok, facebook=None):
+    """Un medio, una red: entre Instagram, TikTok y Facebook, una sola fila
+    activa por marca.
+
+    Facebook entra el 23 de septiembre de 2026 con la misma razon: Blanco y
+    Negro publica la misma nota en su pagina (1.14M seguidores) y en
+    @blancoynegronoticias (136,814), y leer las dos la repetiria en «Todas».
 
     Decision del 22 de septiembre de 2026. Un medio publica lo mismo en las dos
     redes, y leerlo en las dos llena el muro con la misma nota dos veces. Se
@@ -1356,12 +1399,19 @@ def validar_marcas(instagram, tiktok):
     errores, avisos = [], []
     filas = [("instagram", c) for c in (instagram or {}).get("cuentas", []) if isinstance(c, dict)]
     filas += [("tiktok", p) for p in (tiktok or {}).get("perfiles", []) if isinstance(p, dict)]
+    filas += [("facebook", p) for p in (facebook or {}).get("paginas", []) if isinstance(p, dict)]
     por_marca = {}
     for red, f in filas:
         if isinstance(f.get("marca"), str):
             por_marca.setdefault(f["marca"], []).append((red, f))
     for marca, grupo in sorted(por_marca.items()):
         activas = [(red, f) for red, f in grupo if f.get("activo")]
+        # La excepcion del 24 de septiembre de 2026: el cliente pidio leer los
+        # medios de Mexico y del mundo en Instagram Y en TikTok «por ahora».
+        # Vale solo si CADA fila activa de la marca la lleva escrita en
+        # `dos_redes`: una sola no puede arrastrar a la otra.
+        if len(activas) > 1 and all(_texto(f.get("dos_redes")) for _, f in activas):
+            continue
         if len(activas) > 1:
             errores.append("marca {!r}: {} filas activas ({}); una marca, una red: la de mas "
                            "seguidores".format(marca, len(activas),
@@ -1429,6 +1479,83 @@ def validar_instagram_config(datos):
             errores.append("{}: una cuenta activa necesita 'handle' y 'verificado' true, que "
                            "es correr --sondear y anotarlo en 'razon'".format(et))
         _validar_marca(c, et, errores)
+    return errores, avisos
+
+
+RE_PAGINA_FACEBOOK_ID = re.compile(r"^[a-z0-9_]{2,20}_fb$")
+# El slug de una pagina, o su id numerico cuando no tiene nombre de usuario.
+# Nunca una URL: la URL la arma pulso/facebook.py, y un `profile.php?id=` o un
+# `/groups/` pegado aqui leeria otra cosa que una pagina.
+RE_PAGINA_FACEBOOK = re.compile(r"^(?:[A-Za-z0-9.\-]{2,80}|\d{5,20})$")
+
+
+def validar_facebook_config(datos):
+    """config/facebook.json: paginas de medios, cada una con `ambito` y sin `zona`.
+
+    Sin `zona` por la leccion de El Vigia (pulso/youtube.py): la pagina de un
+    medio del corredor publica de todo, y estamparle su sede pondria a Sinaloa
+    en el muro de Tijuana. Una fila activa necesita la fecha del sondeo en
+    `verificado` y su `razon`, que es donde queda lo que el sondeo devolvio.
+    """
+    errores, avisos = [], []
+    if not _texto(datos.get("nota")):
+        avisos.append("facebook: falta la 'nota' que explica el archivo")
+    cosecha = datos.get("cosecha")
+    if not isinstance(cosecha, dict):
+        errores.append("facebook: falta 'cosecha'")
+    else:
+        vh = cosecha.get("ventana_horas")
+        if not isinstance(vh, int) or isinstance(vh, bool) or not 1 <= vh <= 720:
+            errores.append("facebook.cosecha: 'ventana_horas' debe ser entero entre 1 y 720")
+        for campo in ("posts_por_pagina", "comentarios_por_post", "comentarios_para",
+                      "dias_entre_cosechas", "presupuesto_resultados"):
+            v = cosecha.get(campo)
+            if not isinstance(v, int) or isinstance(v, bool) or v < 1:
+                errores.append("facebook.cosecha: '{}' debe ser entero positivo".format(campo))
+    paginas = datos.get("paginas")
+    if not isinstance(paginas, list) or not paginas:
+        errores.append("facebook: 'paginas' debe ser una lista no vacia")
+        return errores, avisos
+    ids, slugs = set(), set()
+    for i, p in enumerate(paginas):
+        et = "facebook.paginas[{}]".format(p.get("id", i) if isinstance(p, dict) else i)
+        if not isinstance(p, dict):
+            errores.append("{}: debe ser objeto".format(et))
+            continue
+        pid = p.get("id")
+        if not isinstance(pid, str) or not RE_PAGINA_FACEBOOK_ID.match(pid):
+            errores.append("{}: 'id' invalido ({!r}); se espera ^[a-z0-9_]{{2,20}}_fb$".format(
+                et, pid))
+        elif pid in ids:
+            errores.append("{}: id repetido".format(et))
+        ids.add(pid)
+        slug = p.get("pagina")
+        if not isinstance(slug, str) or not RE_PAGINA_FACEBOOK.match(slug):
+            errores.append("{}: 'pagina' debe ser el nombre de usuario de la pagina o su id "
+                           "numerico, sin URL ({!r})".format(et, slug))
+        elif slug.lower() in slugs:
+            errores.append("{}: pagina repetida ({})".format(et, slug))
+        else:
+            slugs.add(slug.lower())
+        for campo in ("nombre", "razon"):
+            if not _texto(p.get(campo)):
+                errores.append("{}: falta '{}'".format(et, campo))
+        if p.get("idioma") not in IDIOMAS:
+            errores.append("{}: idioma {!r} desconocido".format(et, p.get("idioma")))
+        if not isinstance(p.get("activo"), bool):
+            errores.append("{}: 'activo' debe ser booleano".format(et))
+        if "zona" in p:
+            errores.append("{}: una pagina no lleva 'zona'; la zona de cada post sale de lo "
+                           "que nombra su pie, con 'ambito' para el residuo".format(et))
+        if p.get("ambito") not in AMBITOS_REDES:
+            errores.append("{}: 'ambito' debe ser {} ({!r})".format(
+                et, "|".join(AMBITOS_REDES), p.get("ambito")))
+        if p.get("activo") and not _fecha(p.get("verificado")):
+            errores.append("{}: una pagina activa necesita 'verificado' con la fecha del "
+                           "`facebook --sondear` que la probo".format(et))
+        _validar_marca(p, et, errores)
+    if not any(isinstance(p, dict) and p.get("activo") for p in paginas):
+        avisos.append("facebook: ninguna pagina activa; el panel va a salir vacio")
     return errores, avisos
 
 
@@ -1714,7 +1841,9 @@ def _validar_destacado(d, eti, esp, plataforma, ctx, conocidas, cosecha_comentar
     if _entero_no_negativo(d.get("cosechados")):
         # Si la plataforma no cosecha comentarios, este aviso saldria en
         # TODAS las filas de cada corrida y dejaria de ser una senal.
-        if d["cosechados"] == 0 and cosecha_comentarios:
+        # Facebook paga comentarios solo para algunos posts por pagina y corrida
+        # (pulso/facebook.py::cosechar), asi que ahi tambien es lo esperado.
+        if d["cosechados"] == 0 and cosecha_comentarios and not esp.get("comentarios_parciales"):
             avisos.append("{}: post destacado sin comentarios cosechados".format(eti))
         elif _entero_no_negativo(d.get("comentarios")) and d["cosechados"] > d["comentarios"]:
             avisos.append("{}: cosechados {} > comentarios {} que reporta el actor".format(
@@ -4294,11 +4423,27 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
         if errores:
             return errores, avisos
 
+    # config/facebook.json (23 de septiembre de 2026), opcional como los dos de
+    # arriba: una pagina con zona o activa sin sondeo falla aqui.
+    ruta_facebook = os.path.join(dir_config, "facebook.json")
+    if os.path.exists(ruta_facebook):
+        try:
+            e, a = validar_facebook_config(_leer(ruta_facebook))
+            errores += e
+            avisos += a
+        except (ValueError, OSError) as e:
+            errores.append("facebook: no se pudo leer {} ({})".format(ruta_facebook, e))
+        if errores:
+            return errores, avisos
+
     # Un medio, una red (22 de septiembre de 2026): la misma marca activa en
-    # Instagram y en TikTok repetiria cada nota en el muro. Ver validar_marcas.
+    # Instagram, TikTok o Facebook repetiria cada nota en el muro. Ver
+    # validar_marcas.
     if os.path.exists(ruta_instagram) and os.path.exists(ruta_tiktok):
         try:
-            e, a = validar_marcas(_leer(ruta_instagram), _leer(ruta_tiktok))
+            e, a = validar_marcas(_leer(ruta_instagram), _leer(ruta_tiktok),
+                                  _leer(ruta_facebook) if os.path.exists(ruta_facebook)
+                                  else None)
             errores += e
             avisos += a
         except (ValueError, OSError):
@@ -4427,6 +4572,11 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
         # `cosecha_comentarios: false`. Tampoco es error que falte.
         "youtube": (os.path.join(dir_datos, "youtube.json"),
                     lambda d: validar_redes(d, plataforma="youtube")),
+        # facebook.json lo escribe `pulso facebook`: las paginas de medios de
+        # config/facebook.json, mismo contrato que redes.json con compartidos
+        # y alcance. Tampoco es error que falte.
+        "facebook": (os.path.join(dir_datos, "facebook.json"),
+                     lambda d: validar_redes(d, plataforma="facebook")),
         # tendencias.json lo escribe `pulso tendencias`: el ranking de X por
         # ubicacion, sin tuits ni identidad. Tampoco es error que falte.
         "tendencias": (os.path.join(dir_datos, "tendencias.json"), validar_tendencias),
@@ -4487,6 +4637,8 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
              lambda t, r: validar_redes_comentarios(t, r, "instagram")),
             ("tiktok-comentarios.json", "tiktok",
              lambda t, r: validar_redes_comentarios(t, r, "tiktok")),
+            ("facebook-comentarios.json", "facebook",
+             lambda t, r: validar_redes_comentarios(t, r, "facebook")),
             # El texto de las tres plataformas de un termino en un solo mapa;
             # sus urls tienen que ser destacados de consultas.json.
             ("consultas-comentarios.json", "consultas", validar_consultas_comentarios)):

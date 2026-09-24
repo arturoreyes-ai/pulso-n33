@@ -5,6 +5,7 @@
   python -m pulso conversacion [--sentimiento ninguno|modelo]
   python -m pulso redes [--posts N] [--comentarios N]
   python -m pulso tiktok [--videos N] [--comentarios N] [--probar]
+  python -m pulso facebook [--sondear [ID ...]] [--sentimiento ninguno|modelo]
   python -m pulso consultas [--consulta ID] [--sentimiento ninguno|modelo] [--probar] [--sin-cosecha]
   python -m pulso tendencias [--probar] [--ubicaciones]
   python -m pulso gasto-electoral [--solo-financiamiento]
@@ -457,6 +458,105 @@ def cmd_tiktok(args):
         elif s.get("fuera") or s.get("descartados"):
             print("  {} · fuera de la región: {} · descartados: {}".format(
                 s["cuenta"], s.get("fuera", 0), s.get("descartados", 0)), file=sys.stderr)
+    return 0
+
+
+def cmd_facebook(args):
+    """Paginas de medios en Facebook: posts de 24 horas y sus comentarios.
+
+    Espejo de cmd_redes. La zona de cada post sale de su pie (`ambito`, nunca
+    `zona`); el texto de los comentarios va a data/facebook-comentarios.json,
+    fuera de git; la identidad de quien comenta no llega ni al cache. Ver la
+    ultima seccion del encabezado de pulso/facebook.py.
+    """
+    from .apify import Presupuesto
+    from .facebook import (cosechar, derivar, leer_cache, leer_publicaciones,
+                           publicar_comentarios, sondear)
+    from .pipeline import ahora_utc, _escribir
+
+    cfg = _leer(os.path.join(args.config, "facebook.json"))
+    paginas = cfg.get("paginas", [])
+    cosecha = cfg.get("cosecha", {})
+    ahora = ahora_utc()
+
+    # --sondear no cosecha comentarios ni escribe nada: los ultimos N posts de
+    # cada pagina y donde caeria cada uno. Sin ids, las activas; con ids, esas
+    # AUNQUE esten apagadas, que es como se prueba una antes de encenderla.
+    if args.sondear is not None:
+        faltan = sorted(set(args.sondear) - {p["id"] for p in paginas})
+        if faltan:
+            print("facebook: no estan en config/facebook.json: {}".format(", ".join(faltan)),
+                  file=sys.stderr)
+            return 1
+        elegidas = [p for p in paginas if p["id"] in args.sondear] if args.sondear else \
+            [p for p in paginas if p.get("activo")]
+        for r in sondear(elegidas, ahora, args.muestra):
+            print("{} · {} ({} posts; descartes: {})".format(
+                r["cuenta"], r["nombre"] or "sin nombre", len(r["posts"]),
+                ", ".join("{} {}".format(k, v) for k, v in r["descartes"].items())
+                or "ninguno"))
+            for post in r["posts"]:
+                print("  {}  {:<13} {:<10} {:>6} reacciones  {}".format(
+                    post["publicado"], post["zona"][:13], post["alcance"], post["likes"],
+                    post["titulo"][:70]))
+        print("\nLee lo que nombran los posts antes de encender una fila: la bio no basta "
+              "(@noticiasensenada era de Buenos Aires). Anota la fecha en 'verificado'.")
+        return 0
+
+    apify_cfg = _leer(os.path.join(args.config, "apify.json"))
+    tope = args.presupuesto or cosecha.get("presupuesto_resultados") or (
+        apify_cfg.get("presupuesto") or {}).get("resultados_por_corrida", 300)
+    ventana = cosecha.get("ventana_horas", 24)
+
+    nuevos, salud, gasto = cosechar(
+        paginas, ahora,
+        presupuesto=Presupuesto(tope),
+        cache=args.cache,
+        posts_por_pagina=args.posts or cosecha.get("posts_por_pagina", 8),
+        comentarios_por_post=args.comentarios or cosecha.get("comentarios_por_post", 10),
+        comentarios_para=cosecha.get("comentarios_para", 4),
+        ventana_horas=ventana,
+        dias_entre_cosechas=cosecha.get("dias_entre_cosechas", 3),
+    )
+
+    etiquetados = 0
+    if args.sentimiento == "modelo":
+        from .sentimiento import Analizador
+        from .facebook import clasificar_cache
+        etiquetados, _ = clasificar_cache(args.cache, Analizador())
+
+    temas_doc = _leer(args.temas) if os.path.exists(args.temas) else {}
+    vigentes = leer_cache(args.cache)
+    panel = derivar(vigentes, ahora, salud, gasto, temas_doc.get("temas") or [],
+                    leer_publicaciones(args.cache), paginas, ventana_horas=ventana)
+    _escribir(os.path.join(args.salida, "facebook.json"), panel)
+
+    publicados = 0
+    if not args.sin_texto:
+        texto = publicar_comentarios(vigentes, panel["destacados"], ahora)
+        _escribir(os.path.join(args.salida, "facebook-comentarios.json"), texto)
+        publicados = sum(len(v) for v in texto["por_post"].values())
+
+    print("comentarios nuevos: {} · vigentes en cache: {} · posts: {}".format(
+        len(nuevos), panel["comentarios_vigentes"], panel["posts_vigentes"]))
+    print("destacados: {} en las últimas {} horas · comentarios publicados: {} ({}, fuera de git)"
+          .format(len(panel["destacados"]), panel["ventana_horas"], publicados,
+                  os.path.join(args.salida, "facebook-comentarios.json")
+                  if not args.sin_texto else "--sin-texto"))
+    print("gasto Apify: {} de {} resultados".format(gasto["gastado"], gasto["resultados"]))
+    sen = panel["sentimiento"]
+    if sen["metodo"] == "modelo":
+        print("tono ({}): {} positivos · {} negativos · {} neutrales · {} sin clasificar"
+              " · {} sin modelo por idioma; {} etiquetados ahora".format(
+                  sen["modelo"], sen["positivo"], sen["negativo"], sen["neutral"],
+                  sen["sin_clasificar"], sen["sin_modelo_idioma"], etiquetados))
+    for s in salud:
+        if s["estado"] != "ok":
+            print("  {} · {} · {}".format(s["cuenta"], s["estado"],
+                                          s.get("error", "")[:120]), file=sys.stderr)
+        elif s.get("fuera") or s.get("compartidos"):
+            print("  {} · fuera de la región: {} · compartidos: {}".format(
+                s["cuenta"], s.get("fuera", 0), s.get("compartidos", 0)), file=sys.stderr)
     return 0
 
 
@@ -1138,6 +1238,29 @@ def main(argv=None):
                     help="con --probar, solo estas búsquedas o perfiles, APAGADOS INCLUIDOS: "
                          "es como se sondea una fila antes de ponerle activo: true")
     tk.set_defaults(fn=cmd_tiktok)
+
+    fb = sub.add_parser("facebook", help="páginas de medios en Facebook, 24 horas "
+                                          "(requiere APIFY_TOKEN)")
+    fb.add_argument("--salida", default="data")
+    fb.add_argument("--cache", default=os.path.join("cache", "facebook"))
+    fb.add_argument("--posts", type=int, default=0, help="posts por página (0 usa el config)")
+    fb.add_argument("--comentarios", type=int, default=0,
+                    help="comentarios por post (0 usa el config)")
+    fb.add_argument("--temas", default=os.path.join("data", "temas.json"))
+    fb.add_argument("--sentimiento", default="ninguno", choices=("ninguno", "modelo"),
+                    help="etiqueta el tono de cada comentario con el modelo local; "
+                         "a data/ solo llegan conteos")
+    fb.add_argument("--presupuesto", type=int, default=0,
+                    help="tope de resultados de esta corrida (0 usa config/facebook.json)")
+    fb.add_argument("--sin-texto", action="store_true",
+                    help="no escribe facebook-comentarios.json; el resto de data/ sale igual")
+    fb.add_argument("--sondear", nargs="*", metavar="ID",
+                    help="los últimos posts de esas páginas (sin ids, las activas; con ids, "
+                         "APAGADAS INCLUIDAS) y dónde caería cada uno; no escribe nada. "
+                         "Cuesta --muestra resultados por página")
+    fb.add_argument("--muestra", type=int, default=3, metavar="N",
+                    help="con --sondear, cuántos posts por página (omisión: 3)")
+    fb.set_defaults(fn=cmd_facebook)
 
     cq = sub.add_parser("consultas",
                         help="qué se dice de un término en TikTok, Instagram, Facebook y la "

@@ -139,7 +139,8 @@
    "seguidores": 3200000,
    "verificado": "2026-09-22",
    "activo": true,
-   "nota": "Sondeado el 22 de septiembre de 2026 con `tiktok --probar --fila`: 3,200,000 seguidores. De 3 videos, 2 nombran el extranjero y van a Mundo, y 1 nombra a México («Trump acusa a México de ser \"epicentro\" del narcotráfico») y va a México. Fuente fija de Mundo pedida ese día. Una marca, una red: se lee AQUÍ, 3.2M contra 2,126,710 en Instagram (dwespanol_ig)."
+   "nota": "Sondeado el 22 de septiembre de 2026 con `tiktok --probar --fila`: 3,200,000 seguidores. De 3 videos, 2 nombran el extranjero y van a Mundo, y 1 nombra a México («Trump acusa a México de ser \"epicentro\" del narcotráfico») y va a México. Fuente fija de Mundo pedida ese día. Una marca, una red: se lee AQUÍ, 3.2M contra 2,126,710 en Instagram (dwespanol_ig).",
+   "dos_redes": "Leída en Instagram Y en TikTok por decisión del cliente del 24 de septiembre de 2026 («keep both networks for now»): excepción escrita a la regla de una marca, una red. Cuesta que la misma nota pueda salir dos veces en «Todas»."
   },
   {
    "id": "tk_telemundo",
@@ -151,7 +152,8 @@
    "seguidores": 17800000,
    "verificado": "2026-09-22",
    "activo": true,
-   "nota": "Sondeado el 22 de septiembre de 2026 con `tiktok --probar --fila`: 17,800,000 seguidores. De 3 videos, 1 nombra a México («Una madre mexicana fue deportada…») y va a México, y 2 no nombran lugar (ICE, la policía de Austin) y van a Mundo por la edición, sin verificar. Solo en TikTok por decisión de ese día. OJO: es la cuenta más grande del catálogo y TikTok no reparte por cuenta; si llena Mundo sola, decidirlo con el dato. Ámbito internacional y no nacional, como Telemundo 20 San Diego en YouTube; es otro medio que aquel."
+   "nota": "Sondeado el 22 de septiembre de 2026 con `tiktok --probar --fila`: 17,800,000 seguidores. De 3 videos, 1 nombra a México («Una madre mexicana fue deportada…») y va a México, y 2 no nombran lugar (ICE, la policía de Austin) y van a Mundo por la edición, sin verificar. Solo en TikTok por decisión de ese día. OJO: es la cuenta más grande del catálogo y TikTok no reparte por cuenta; si llena Mundo sola, decidirlo con el dato. Ámbito internacional y no nacional, como Telemundo 20 San Diego en YouTube; es otro medio que aquel.",
+   "dos_redes": "Leída en Instagram Y en TikTok por decisión del cliente del 24 de septiembre de 2026 («keep both networks for now»): excepción escrita a la regla de una marca, una red. Cuesta que la misma nota pueda salir dos veces en «Todas»."
   },
   {
    "id": "tk_cnnee",
@@ -162,18 +164,22 @@
    "marca": "cnnee",
    "seguidores": 2300000,
    "verificado": "2026-09-22",
-   "activo": false,
-   "nota": "APAGADA: una marca, una red. Sondeado el 22 de septiembre de 2026 con `tiktok --probar --fila`: 2,300,000 seguidores; CNN en Español se lee en Instagram (cnnee_ig), 8,935,177 contra 2,300,000 aquí."
+   "activo": true,
+   "nota": "Sondeado el 22 de septiembre de 2026 con `tiktok --probar --fila`: 2,300,000 seguidores. Estuvo apagada del 22 al 24 por la regla de una marca, una red (8,935,177 en Instagram, cnnee_ig); encendida el 24 de septiembre de 2026 a pedido del cliente: ver `dos_redes`.",
+   "dos_redes": "Leída en Instagram Y en TikTok por decisión del cliente del 24 de septiembre de 2026 («keep both networks for now»): excepción escrita a la regla de una marca, una red. Cuesta que la misma nota pueda salir dos veces en «Todas»."
   },
   {
    "id": "tk_bbcmundo",
    "nombre": "BBC News Mundo",
-   "perfil": "@bbcmundo",
+   "perfil": "@bbcnewsmundo",
    "idioma": "es",
    "ambito": "internacional",
    "marca": "bbcmundo",
-   "activo": false,
-   "nota": "APAGADA. Sondeado el 22 de septiembre de 2026 con `tiktok --probar --fila`: @bbcmundo en TikTok es una cuenta de 17 seguidores sin videos, no la BBC: el handle real de BBC News Mundo en TikTok está por confirmar. Sin cifra medida aquí, a propósito: 17 serían los de otra cuenta. BBC News Mundo se lee en Instagram (bbcmundo_ig, 4,012,335)."
+   "activo": true,
+   "nota": "Sondeado el 24 de septiembre de 2026 con `tiktok --probar --fila`: el handle real es @bbcnewsmundo, 3,400,000 seguidores, tres videos del día zonificados `internacional/extranjero` (una ciclista afgana, una equilibrista francesa, EE.UU. y Venezuela). @bbcmundo, el que traía la fila desde el 22, es una cuenta de 17 seguidores sin videos, y @bbc.mundo otra de 1: los dos son señuelos. Se lee también en Instagram (bbcmundo_ig): ver `dos_redes`.",
+   "seguidores": 3400000,
+   "verificado": "2026-09-24",
+   "dos_redes": "Leída en Instagram Y en TikTok por decisión del cliente del 24 de septiembre de 2026 («keep both networks for now»): excepción escrita a la regla de una marca, una red. Cuesta que la misma nota pueda salir dos veces en «Todas»."
   },
   {
    "id": "tk_latinus",
@@ -185,7 +191,8 @@
    "seguidores": 23900000,
    "verificado": "2026-09-22",
    "activo": true,
-   "nota": "Sondeado el 22 de septiembre de 2026 con `tiktok --probar --fila`: 23,900,000 seguidores. De 3 videos, 2 sin lugar y 1 de un lugar mexicano de fuera: los 3 van a México. Fuente fija de México pedida ese día. Una marca, una red: se lee AQUÍ; su Instagram no dio datos sin sesión (latinus_ig)."
+   "nota": "Sondeado el 22 de septiembre de 2026 con `tiktok --probar --fila`: 23,900,000 seguidores. De 3 videos, 2 sin lugar y 1 de un lugar mexicano de fuera: los 3 van a México. Fuente fija de México pedida ese día. Una marca, una red: se lee AQUÍ; su Instagram no dio datos sin sesión (latinus_ig).",
+   "dos_redes": "Leída en Instagram Y en TikTok por decisión del cliente del 24 de septiembre de 2026 («keep both networks for now»): excepción escrita a la regla de una marca, una red. Cuesta que la misma nota pueda salir dos veces en «Todas»."
   },
   {
    "id": "tk_aztecanoticias",
@@ -197,7 +204,8 @@
    "seguidores": 18800000,
    "verificado": "2026-09-22",
    "activo": true,
-   "nota": "Sondeado el 22 de septiembre de 2026 con `tiktok --probar --fila`: 18,800,000 seguidores. De 3 videos, 2 sin lugar y 1 de un lugar mexicano de fuera: los 3 van a México. Fuente fija de México pedida ese día. Una marca, una red: se lee AQUÍ; su Instagram no dio datos sin sesión (aztecanoticias_ig)."
+   "nota": "Sondeado el 22 de septiembre de 2026 con `tiktok --probar --fila`: 18,800,000 seguidores. De 3 videos, 2 sin lugar y 1 de un lugar mexicano de fuera: los 3 van a México. Fuente fija de México pedida ese día. Una marca, una red: se lee AQUÍ; su Instagram no dio datos sin sesión (aztecanoticias_ig).",
+   "dos_redes": "Leída en Instagram Y en TikTok por decisión del cliente del 24 de septiembre de 2026 («keep both networks for now»): excepción escrita a la regla de una marca, una red. Cuesta que la misma nota pueda salir dos veces en «Todas»."
   },
   {
    "id": "tk_heraldo",
@@ -221,7 +229,8 @@
    "seguidores": 6800000,
    "verificado": "2026-09-22",
    "activo": true,
-   "nota": "Sondeado el 22 de septiembre de 2026 con `tiktok --probar --fila`: 6,800,000 seguidores. De 3 videos, 2 nombran el extranjero (un incendio en Rusia; el presidente de Brasil en Nueva York) y van a Mundo, y 1 va a México. Fuente fija de México pedida ese día. Una marca, una red entre Instagram y TikTok: se lee AQUÍ; su Instagram no dio datos sin sesión (nmas_ig). YouTube queda fuera de la regla y yt_nmas sigue como está."
+   "nota": "Sondeado el 22 de septiembre de 2026 con `tiktok --probar --fila`: 6,800,000 seguidores. De 3 videos, 2 nombran el extranjero (un incendio en Rusia; el presidente de Brasil en Nueva York) y van a Mundo, y 1 va a México. Fuente fija de México pedida ese día. Una marca, una red entre Instagram y TikTok: se lee AQUÍ; su Instagram no dio datos sin sesión (nmas_ig). YouTube queda fuera de la regla y yt_nmas sigue como está.",
+   "dos_redes": "Leída en Instagram Y en TikTok por decisión del cliente del 24 de septiembre de 2026 («keep both networks for now»): excepción escrita a la regla de una marca, una red. Cuesta que la misma nota pueda salir dos veces en «Todas»."
   }
  ]
 }

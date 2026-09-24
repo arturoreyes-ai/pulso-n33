@@ -1,7 +1,8 @@
 """Pruebas de la lista blanca de Facebook (pulso/facebook.py), siempre sin red.
 
-No hay cosecha propia que probar: la corre pulso/consultas.py. Lo que se prueba
-aqui es lo que solo Facebook sabe, y la prueba que mas importa es que la
+La cosecha de las consultas la corre pulso/consultas.py; la de las paginas de
+Redes se prueba en tests/test_facebook_paginas.py. Lo que se prueba aqui es lo
+que solo Facebook sabe, y la prueba que mas importa es que la
 identidad del comentarista -- `profileName`, `profileId`, `profileUrl`,
 `profilePicture`, que el actor devuelve POR CADA COMENTARIO -- no sobreviva a
 la ingesta. Los nombres de campo del fixture son los que publican de verdad

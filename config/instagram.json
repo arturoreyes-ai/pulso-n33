@@ -164,9 +164,11 @@
    "medio": null,
    "zona": "Tijuana",
    "idioma": "es",
-   "activo": true,
+   "marca": "blanconegro",
+   "seguidores": 136814,
+   "activo": false,
    "verificado": true,
-   "razon": "Sondeada 2026-09-16: 136,814 seguidores, 5,528 posts, bio «Blanco y Negro · ¿Ya te enteraste de las últimas noticias? ¡Entérate! en Blanco&Negro Noticias!». Pedida por el cliente el 16 de septiembre de 2026. UNICA fila cuya zona NO sale de su propia biografia: la bio no nombra lugar y «Blanco y Negro» no esta en config/medios.json, asi que Tijuana la confirmo el cliente y no el sondeo. Queda escrito porque es exactamente la forma del error que este archivo existe para evitar (@afnoticias tenia 113 mil seguidores y era de Tocantins). Sin equivalente en config/medios.json."
+   "razon": "APAGADA el 23 de septiembre de 2026 por la regla de una marca, una red: el cliente pidió la página de Facebook de Blanco y Negro (1.14M seguidores, blanconegro_fb en config/facebook.json) y el medio se lee donde más lo siguen. Sondeada 2026-09-16: 136,814 seguidores, 5,528 posts, bio «Blanco y Negro · ¿Ya te enteraste de las últimas noticias? ¡Entérate! en Blanco&Negro Noticias!». Pedida por el cliente el 16 de septiembre de 2026. UNICA fila cuya zona NO sale de su propia biografia: la bio no nombra lugar y «Blanco y Negro» no esta en config/medios.json, asi que Tijuana la confirmo el cliente y no el sondeo. Queda escrito porque es exactamente la forma del error que este archivo existe para evitar (@afnoticias tenia 113 mil seguidores y era de Tocantins). Sin equivalente en config/medios.json."
   },
   {
    "id": "canal66_ig",
@@ -322,7 +324,8 @@
    "idioma": "es",
    "activo": true,
    "verificado": true,
-   "razon": "Sondeada 2026-09-22 con `redes --sondear --muestra 3`: 4,012,335 seguidores, 16,933 posts, bio \u00abAqu\u00ed puedes leer nuestras historias\u00bb. De 3 posts con \u00e1mbito internacional, los 3 nombran el extranjero (China, Cuba en la ONU). Fuente fija de Mundo pedida ese d\u00eda. Una marca, una red: se lee AQU\u00cd. En TikTok el handle @bbcmundo result\u00f3 una cuenta de 17 seguidores sin videos, no la BBC, as\u00ed que la comparaci\u00f3n con su TikTok real queda por hacer; con 4.0M contra los 3.4M que dio el cliente, gana esta de todos modos."
+   "razon": "Sondeada 2026-09-22 con `redes --sondear --muestra 3`: 4,012,335 seguidores, 16,933 posts, bio «Aquí puedes leer nuestras historias». De 3 posts con ámbito internacional, los 3 nombran el extranjero (China, Cuba en la ONU). Fuente fija de Mundo pedida ese día. Una marca, una red: se lee AQUÍ. En TikTok el handle @bbcmundo resultó una cuenta de 17 seguidores sin videos, no la BBC, así que la comparación con su TikTok real queda por hacer; con 4.0M contra los 3.4M que dio el cliente, gana esta de todos modos.",
+   "dos_redes": "Leída en Instagram Y en TikTok por decisión del cliente del 24 de septiembre de 2026 («keep both networks for now»): excepción escrita a la regla de una marca, una red. Cuesta que la misma nota pueda salir dos veces en «Todas»."
   },
   {
    "id": "cnnee_ig",
@@ -335,7 +338,8 @@
    "idioma": "es",
    "activo": true,
    "verificado": true,
-   "razon": "Sondeada 2026-09-22 con `redes --sondear --muestra 3`: 8,935,177 seguidores, 31,311 posts, bio \u00abSomos la cuenta de noticias en espa\u00f1ol m\u00e1s seguida del mundo en Instagram\u00bb. De 3 posts con \u00e1mbito internacional, 2 nombran el extranjero y 1 no nombra lugar (\u00abLa polic\u00eda italiana\u2026\u00bb: un gentilicio no es un lugar del gacetero) y va a Mundo por la edici\u00f3n. Fuente fija de Mundo pedida ese d\u00eda. Una marca, una red: se lee AQU\u00cd, 8.9M contra 2.3M en TikTok (tk_cnnee, sondeado el mismo d\u00eda)."
+   "razon": "Sondeada 2026-09-22 con `redes --sondear --muestra 3`: 8,935,177 seguidores, 31,311 posts, bio «Somos la cuenta de noticias en español más seguida del mundo en Instagram». De 3 posts con ámbito internacional, 2 nombran el extranjero y 1 no nombra lugar («La policía italiana…»: un gentilicio no es un lugar del gacetero) y va a Mundo por la edición. Fuente fija de Mundo pedida ese día. Una marca, una red: se lee AQUÍ, 8.9M contra 2.3M en TikTok (tk_cnnee, sondeado el mismo día).",
+   "dos_redes": "Leída en Instagram Y en TikTok por decisión del cliente del 24 de septiembre de 2026 («keep both networks for now»): excepción escrita a la regla de una marca, una red. Cuesta que la misma nota pueda salir dos veces en «Todas»."
   },
   {
    "id": "dwespanol_ig",
@@ -346,9 +350,24 @@
    "marca": "dw",
    "seguidores": 2126710,
    "idioma": "es",
-   "activo": false,
+   "activo": true,
    "verificado": true,
-   "razon": "Sondeada 2026-09-22: 2,126,710 seguidores, 16,930 posts, bio \u00abDesde Alemania para el mundo\u00bb. APAGADA por la regla de una marca, una red: DW se lee en TikTok (tk_dwespanol), 3,200,000 contra 2,126,710 aqu\u00ed."
+   "razon": "Sondeada 2026-09-22: 2,126,710 seguidores, 16,930 posts, bio «Desde Alemania para el mundo». Estuvo apagada del 22 al 24 de septiembre por la regla de una marca, una red (3,200,000 en TikTok, tk_dwespanol); encendida el 24 a pedido del cliente: ver `dos_redes`.",
+   "dos_redes": "Leída en Instagram Y en TikTok por decisión del cliente del 24 de septiembre de 2026 («keep both networks for now»): excepción escrita a la regla de una marca, una red. Cuesta que la misma nota pueda salir dos veces en «Todas»."
+  },
+  {
+   "id": "telemundo_ig",
+   "handle": "@noticiastelemundo",
+   "nombre": "Noticias Telemundo",
+   "medio": null,
+   "ambito": "internacional",
+   "idioma": "es",
+   "marca": "telemundo",
+   "seguidores": 4837832,
+   "activo": true,
+   "verificado": true,
+   "dos_redes": "Leída en Instagram Y en TikTok por decisión del cliente del 24 de septiembre de 2026 («keep both networks for now»): excepción escrita a la regla de una marca, una red. Cuesta que la misma nota pueda salir dos veces en «Todas».",
+   "razon": "Sondeada 2026-09-24: 4,837,832 seguidores, 25,659 posts, veredicto vivo, bio «Cuenta oficial de @noticiastelemundo. Las historias de la comunidad latina en EE.UU. y la actualidad en el 🌎». Pedida por el cliente el 24 de septiembre de 2026 junto a los medios de México; `ambito: internacional` por su instrucción de ese día: lo que nombra un lugar va a ese lugar, lo que nombra México a México y lo que no nombra ninguno a Internacional. La muestra salió `internacional/extranjero` en los tres (Venezuela, Trump y Xi, España). Su perfil de TikTok (17.8M) sigue activo: ver `dos_redes`."
   },
   {
    "id": "france24es_ig",
@@ -391,9 +410,11 @@
    "ambito": "nacional",
    "marca": "latinus",
    "idioma": "es",
-   "activo": false,
-   "verificado": false,
-   "razon": "APAGADA. Pedida el 22 de septiembre de 2026 como fuente fija de M\u00e9xico. El sondeo de ese d\u00eda no obtuvo datos de Instagram sin sesi\u00f3n (`sin_datos`: \u00abEmpty or private data\u00bb), as\u00ed que su cifra aqu\u00ed no est\u00e1 medida. Se lee en TikTok (tk_latinus, 23,900,000 seguidores), que coincide con la cifra que dio el cliente. Volver a sondear para dejar escrita la comparaci\u00f3n; si esta resulta mayor, el validador avisa."
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-24: 2,502,997 seguidores, 26,248 posts, veredicto vivo, bio «Latinus · #InformaciónParaTi». La muestra de tres posts salió `nacional/fuera` en los tres (LEGO, seguridad de mujeres, el huracán Polo): cobertura nacional, como se esperaba. Su perfil de TikTok (23.9M) sigue activo: ver `dos_redes`.",
+   "seguidores": 2502997,
+   "dos_redes": "Leída en Instagram Y en TikTok por decisión del cliente del 24 de septiembre de 2026 («keep both networks for now»): excepción escrita a la regla de una marca, una red. Cuesta que la misma nota pueda salir dos veces en «Todas»."
   },
   {
    "id": "aztecanoticias_ig",
@@ -403,9 +424,11 @@
    "ambito": "nacional",
    "marca": "azteca",
    "idioma": "es",
-   "activo": false,
-   "verificado": false,
-   "razon": "APAGADA. Pedida el 22 de septiembre de 2026 como fuente fija de M\u00e9xico. El sondeo de ese d\u00eda no obtuvo datos de Instagram sin sesi\u00f3n (`sin_datos`: \u00abEmpty or private data\u00bb), as\u00ed que su cifra aqu\u00ed no est\u00e1 medida. Se lee en TikTok (tk_aztecanoticias, 18,800,000 seguidores), que coincide con la cifra que dio el cliente. Volver a sondear para dejar escrita la comparaci\u00f3n; si esta resulta mayor, el validador avisa."
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-24: 2,065,394 seguidores, 76,181 posts, veredicto vivo, bio «Azteca Noticias · 30 años informando a México». El 22 de septiembre había salido `sin_datos`, que es Instagram negando datos sin sesión y no que no exista. OJO con la muestra: «¡TRUMP PONE A MÉXICO BAJO LA LUPA EN LA ONU!» salió zona Tijuana por algo del resto del pie; si se repite en el muro de Tijuana, es el gacetero y no la cuenta. Su perfil de TikTok (18.8M) sigue activo: ver `dos_redes`.",
+   "seguidores": 2065394,
+   "dos_redes": "Leída en Instagram Y en TikTok por decisión del cliente del 24 de septiembre de 2026 («keep both networks for now»): excepción escrita a la regla de una marca, una red. Cuesta que la misma nota pueda salir dos veces en «Todas»."
   },
   {
    "id": "heraldo_ig",
@@ -428,9 +451,11 @@
    "ambito": "nacional",
    "marca": "nmas",
    "idioma": "es",
-   "activo": false,
-   "verificado": false,
-   "razon": "APAGADA. Pedida el 22 de septiembre de 2026 como fuente fija de M\u00e9xico. El sondeo de ese d\u00eda no obtuvo datos de Instagram sin sesi\u00f3n (`sin_datos`: \u00abEmpty or private data\u00bb), as\u00ed que su cifra aqu\u00ed no est\u00e1 medida. Se lee en TikTok (tk_nmas, 6,800,000 seguidores), que coincide con la cifra que dio el cliente. Volver a sondear para dejar escrita la comparaci\u00f3n; si esta resulta mayor, el validador avisa."
+   "activo": true,
+   "verificado": true,
+   "razon": "Sondeada 2026-09-24: 1,838,682 seguidores, 44,944 posts, veredicto vivo, bio «NMás · El referente de noticias en español». El 22 de septiembre había salido `sin_datos` minutos después de devolver posts: Instagram sin sesión, no una cuenta inexistente. Muestra: Delcy Rodríguez en la ONU a Mundo (extranjero), dos notas nacionales sin lugar. Su perfil de TikTok (6.8M) sigue activo: ver `dos_redes`.",
+   "seguidores": 1838682,
+   "dos_redes": "Leída en Instagram Y en TikTok por decisión del cliente del 24 de septiembre de 2026 («keep both networks for now»): excepción escrita a la regla de una marca, una red. Cuesta que la misma nota pueda salir dos veces en «Todas»."
   },
   {
    "id": "sanquintin_ig",

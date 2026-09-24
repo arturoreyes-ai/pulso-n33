@@ -225,6 +225,28 @@ jobs:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
         run: python -m pulso tiktok --sentimiento modelo
 
+      # cache/facebook: mismo papel que cache/instagram (texto crudo 30 dias +
+      # vistos.json, el freno de costo).
+      - name: Restaurar el cache de Facebook
+        if: vars.APIFY_HABILITADO == 'true'
+        uses: actions/cache@v4
+        with:
+          path: cache/facebook
+          key: facebook-${{ github.run_id }}
+          restore-keys: facebook-
+
+      # Paginas de medios del corredor (config/facebook.json, pedidas por el
+      # cliente el 23 de septiembre de 2026), sin sesion. La zona de cada post
+      # sale de su pie. Escribe data/facebook.json (git) y
+      # data/facebook-comentarios.json (fuera de git por la regla de
+      # .gitignore; viaja al sitio con el resto de data/). Los comentarios se
+      # pagan solo para los posts de mas reacciones de cada pagina.
+      - name: Facebook (páginas)
+        if: vars.APIFY_HABILITADO == 'true'
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: python -m pulso facebook --sentimiento modelo
+
       # cache/youtube: aqui NO hay texto crudo ni freno de costo, porque este
       # modulo no cosecha comentarios. Guarda solo publicaciones.json, el
       # catalogo de piezas vistas, y hace falta por una razon distinta: el

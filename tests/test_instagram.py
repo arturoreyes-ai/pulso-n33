@@ -411,6 +411,20 @@ class TestCatalogoCuentas(unittest.TestCase):
             e, _ = validar_marcas(self.cfg, json.load(fh))
         self.assertEqual(e, [])
 
+    def test_dos_redes_es_una_excepcion_escrita_en_las_dos_filas(self):
+        # 24 de septiembre de 2026: el cliente pidio leer los medios de Mexico
+        # y del mundo en las dos redes «por ahora». Vale solo si las dos filas
+        # activas lo dicen; una sola no arrastra a la otra.
+        from pulso.validador import validar_marcas
+        ig = {"cuentas": [{"id": "dw_ig", "marca": "dw", "seguidores": 1, "activo": True,
+                           "dos_redes": "decision del cliente"}]}
+        tk = {"perfiles": [{"id": "tk_dw", "marca": "dw", "seguidores": 2, "activo": True}]}
+        e, _ = validar_marcas(ig, tk)
+        self.assertTrue(e)
+        tk["perfiles"][0]["dos_redes"] = "decision del cliente"
+        e, a = validar_marcas(ig, tk)
+        self.assertEqual((e, a), ([], []))
+
     def test_sin_datos_no_es_no_existe(self):
         # 22 de septiembre de 2026: @n.mas salio "no_existe" minutos despues de
         # devolver sus posts. `no_items` es Instagram sin datos para un

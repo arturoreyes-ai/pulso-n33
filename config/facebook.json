@@ -1,0 +1,74 @@
+{
+ "nota": "Páginas públicas de Facebook de medios del corredor, leídas vía Apify SIN sesión para la pestaña Facebook de Redes — pulso/facebook.py::cosechar, que escribe data/facebook.json. Las cinco las pidió el cliente el 23 de septiembre de 2026, con seguidores y «personas hablando de esto» de su propia tabla. Ninguna fila lleva `zona` y el validador lo rechaza: cada post se zonifica por su primera línea con el gacetero, como un canal de YouTube o una cuenta de Instagram con `ambito`, porque la página de un medio del corredor publica de Tijuana, de Sinaloa y del huracán en la misma hora. Una fila corre solo con `activo: true` Y `verificado` con la fecha del `python -m pulso facebook --sondear` que la probó, y su `razon` cita lo que el sondeo devolvió. Un medio se lee en UNA red: `marca` junta esta fila con su cuenta de config/instagram.json o su perfil de config/tiktok.json, y solo la de más seguidores queda activa.",
+
+ "aviso_retencion": "El texto crudo de los comentarios vive en cache/facebook/ con TTL de 30 días y nunca entra a git; el publicado va a data/facebook-comentarios.json, que .gitignore excluye por nombre. La identidad de quien comenta (profileName, profileId, profileUrl, profilePicture) no llega ni al cache: se tira al ingerir. Ver el encabezado de pulso/facebook.py.",
+
+ "cosecha": {
+  "nota": "Dos pasadas pagadas por página: posts (~2 USD por 1,000) y comentarios (~1.40 USD por 1,000). Estas páginas publican decenas de veces al día, así que los comentarios se pagan solo para los `comentarios_para` posts de más reacciones de cada página y corrida que caen en la ventana y no se cosecharon en los últimos `dias_entre_cosechas`; los demás entran con sus cifras y sin texto. Con cinco páginas, cuatro corridas al día: 5 × 8 posts + 5 × 4 × 10 comentarios = 240 resultados por corrida como máximo, del orden de 1.35 USD al día. `presupuesto_resultados` es ese máximo con holgura, y `Presupuesto.reparto` lo divide parejo entre las filas activas.",
+  "posts_por_pagina": 8,
+  "comentarios_por_post": 10,
+  "comentarios_para": 4,
+  "dias_entre_cosechas": 3,
+  "ventana_horas": 24,
+  "presupuesto_resultados": 250
+ },
+
+ "paginas": [
+  {
+   "id": "blanconegro_fb",
+   "pagina": "NoticiasBlancoyNegro",
+   "nombre": "Blanco y Negro Noticias",
+   "ambito": "regional",
+   "idioma": "es",
+   "marca": "blanconegro",
+   "seguidores": 1140000,
+   "activo": true,
+   "verificado": "2026-09-23",
+   "razon": "Sondeada 2026-09-23: tres posts de las últimas horas, sin sesión — un incendio de viviendas, Protección Civil sobre los huracanes Polo y Odalys en Baja California, y la captura de «Don Flaco» del Cártel de Sinaloa, que es por lo que la fila lleva `ambito` y no `zona`. Seguidores de la tabla del cliente (1.14M, 153K hablando de esto). Es la misma marca que @blancoynegronoticias en Instagram (136,814 seguidores): por la regla de una marca, una red, se lee aquí y la fila de Instagram quedó apagada."
+  },
+  {
+   "id": "ndtijuana_fb",
+   "pagina": "NdTijuana",
+   "nombre": "Noticias de Tijuana",
+   "ambito": "regional",
+   "idioma": "es",
+   "seguidores": 1430000,
+   "activo": true,
+   "verificado": "2026-09-23",
+   "razon": "Sondeada 2026-09-23: tres posts, sin sesión — incendio de un taller en la colonia Arenales, volcadura en el bulevar Federico Benítez, Protección Civil sobre Polo. Firma sus posts «#NDTInforma». Seguidores de la tabla del cliente (1.43M, 87K hablando de esto). Sin cuenta en config/instagram.json ni config/tiktok.json."
+  },
+  {
+   "id": "psn_fb",
+   "pagina": "redespsn",
+   "nombre": "PSN Primer Sistema de Noticias",
+   "ambito": "regional",
+   "idioma": "es",
+   "seguidores": 1830000,
+   "activo": true,
+   "verificado": "2026-09-23",
+   "razon": "Sondeada 2026-09-23: tres posts, sin sesión — ataque armado en Colas del Matamoros, incendio en Lomas de Agua Caliente (los dos de Tijuana) y una nota «#BajaCalifornia». Seguidores de la tabla del cliente (1.83M, solo 2.7K hablando de esto: publica mucho y se comenta poco, así que el reparto por turnos le da su lugar sin que se lleve el corte). Es el mismo PSN de yt_psn en config/youtube.json, que la regla de marca deja fuera por decisión del usuario."
+  },
+  {
+   "id": "aztecabc_fb",
+   "pagina": "aztecabc",
+   "nombre": "TV Azteca Baja California",
+   "ambito": "regional",
+   "idioma": "es",
+   "seguidores": 946000,
+   "activo": true,
+   "verificado": "2026-09-23",
+   "razon": "Sondeada 2026-09-23: tres posts, sin sesión — la alcaldesa de San Quintín en panga, un menor localizado sin vida en el mar de Tijuana y un avión cazahuracanes dentro de Polo. Es la edición de Baja California, no Azteca Noticias nacional (@aztecanoticias en config/tiktok.json, otra redacción y otra marca). Seguidores de la tabla del cliente (946K, 88K hablando de esto)."
+  },
+  {
+   "id": "blancorojo_fb",
+   "pagina": "100086488503408",
+   "nombre": "Blanco y Rojo Noticias Tijuana",
+   "ambito": "regional",
+   "idioma": "es",
+   "seguidores": 514000,
+   "activo": true,
+   "verificado": "2026-09-23",
+   "razon": "Sondeada 2026-09-23 por su id numérico (no tiene nombre de usuario; profile.php?id=): la página responde sin sesión, pero sus TRES posts eran compartidos de La Prensa Baja California, con un enlace facebook.com/share/p/… por todo texto. Esos se descartan como `compartido` (ver pulso/facebook.py) y no se pagan sus comentarios, así que esta fila puede salir en pantalla con muy poco. Si las corridas lo confirman, lo honesto es apagarla y leer La Prensa Baja California, que es quien publica. Seguidores de la tabla del cliente (514K, 98K hablando de esto)."
+  }
+ ]
+}
