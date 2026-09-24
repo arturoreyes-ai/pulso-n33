@@ -1511,6 +1511,57 @@ preguntas sobre videos largos que no dicen nada de los Shorts.
 mensaje.
 
 
+## `data/facebook.json` — páginas de medios en Facebook
+
+Lo escribe `python -m pulso facebook` desde el 23 de septiembre de 2026, con
+las páginas de `config/facebook.json`. Es el contrato de `data/redes.json`
+(`plataforma: "facebook"`, ventana en horas sobre `publicado`, reparto de una
+vuelta por cuenta en el corte), con cuatro diferencias:
+
+- **`compartidos` es obligatorio** en cada destacado, como en TikTok: Facebook
+  sí lo publica, así que un 0 es cero medido. No hay `guardados`.
+- **`likes` es el total de reacciones** (me gusta, me encanta, me asombra…),
+  que es lo que el actor llama `likes` y lo que Facebook muestra junto al post.
+- **`alcance` es obligatorio**: ninguna página lleva `zona`. Cada post se
+  zonifica por su primera línea con `redes.zona_por_titulo` y el residuo de
+  medio del corredor (`estatal` con `alcance: nacional`, «un lugar sin
+  precisar»). Una página `regional` tira el post que nombra un lugar mexicano
+  fuera de Baja California y lo cuenta en `salud[].fuera`.
+- **Los comentarios son parciales a propósito.** Solo `comentarios_para`
+  posts por página y corrida —los de más reacciones dentro de la ventana que
+  no se cosecharon antes— pagan la segunda pasada. Un destacado con
+  `cosechados: 0` es lo esperado y el validador no avisa por él.
+
+`salud[]` suma `compartidos`: los posts que solo comparten otro, con un enlace
+por todo texto, no entran (ver `pulso/facebook.py`). Las claves de identidad
+del actor (`profileName`, `profileId`, `profileUrl`, `profilePicture`, `user`,
+`sharedPost`, `topComments`, `facebookId`, `feedbackId`) son error en
+cualquier parte del archivo.
+
+## `data/facebook-comentarios.json` — el texto de los comentarios de Facebook
+
+Mismo contrato que `data/redes-comentarios.json`, con `plataforma:
+"facebook"`, emparejado con el `data/facebook.json` del mismo corte. Fuera de
+git por el glob `data/*-comentarios.json`; el validador comprueba la línea en
+cuanto el archivo existe.
+
+### `config/facebook.json`
+
+| campo | qué es |
+|---|---|
+| `id` | `^[a-z0-9_]{2,20}_fb$`, el `cuenta` de cada destacado |
+| `pagina` | nombre de usuario de la página, o su id numérico si no tiene; nunca una URL |
+| `nombre` | lo que se imprime como fuente |
+| `ambito` | `regional`, `nacional` o `internacional`; decide el residuo, nunca la zona |
+| `idioma` | `es` o `en`, declarado |
+| `marca`, `seguidores` | la regla de una marca, una red, junto con Instagram y TikTok |
+| `activo`, `verificado` | una fila activa necesita la fecha del `facebook --sondear` que la probó |
+| `razon` | lo que el sondeo devolvió |
+
+`zona` es error. `cosecha` lleva `posts_por_pagina`, `comentarios_por_post`,
+`comentarios_para`, `dias_entre_cosechas`, `ventana_horas` y
+`presupuesto_resultados`, todos enteros positivos.
+
 ## `data/tendencias.json` — tendencias de X por ubicación
 
 Lo escribe `python -m pulso tendencias`, vía Apify y **sin iniciar sesión**: el

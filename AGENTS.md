@@ -162,6 +162,16 @@ switched off, with both numbers written. YouTube is out of this rule by the
 user's call. `seguidores` is required only on an active row: an unprobed row
 has no number, and a 0 would read as «nobody follows it».
 
+**The written exception, 24 September 2026:** the client asked to read the
+Mexico and world outlets (CNN en Español, BBC News Mundo, DW Español, Noticias
+Telemundo, Latinus, Azteca Noticias, N+) on Instagram *and* TikTok «for now».
+Each of those active rows carries `dos_redes` with the reason, and
+`validar_marcas` lets a marca have two active rows only when **every** active
+row says so. The cost is accepted, not solved: the same story can appear twice
+on «Todas». Blanco y Negro is not in the exception. The same day's probe found
+BBC Mundo's TikTok is `@bbcnewsmundo`; `@bbcmundo` (17 followers) and
+`@bbc.mundo` (1) are squatters.
+
 **And the probe is not enough when the place name exists twice.** On 21
 September 2026 the client spotted an Argentine post on the Ensenada wall.
 `@noticiasensenada` was the news account of **Ensenada, Buenos Aires**, and it
@@ -534,6 +544,33 @@ zona del producto —21 de 30 en Tijuana, mediana de 1,856 vistas— y entró co
 3% y 13% y entraron como `nacional`, donde pueblan la cubeta México y nunca se
 le acreditan a una ciudad. `@siempreenlanoticia` ya estaba.
 
+
+### Facebook pages on /redes
+
+Since 23 September 2026 `/redes` has a Facebook tab: the five pages the client
+asked for (`config/facebook.json`), harvested by `pulso facebook` into
+`data/facebook.json` + `data/facebook-comentarios.json` with the Instagram
+contract, logged-out, on the cron behind `APIFY_HABILITADO`. What is not
+obvious:
+
+- **Every row carries `ambito`, never `zona`** (validator error). The zone
+  comes from the post's first line (`redes.zona_por_titulo` +
+  `residuo_de_medio`), because the probe showed TV Azteca BC posting San
+  Quintín, Tijuana and a hurricane in one hour.
+- **A post that only reshares another is dropped** (`compartido`, counted in
+  `salud`). All three probed Blanco y Rojo posts were La Prensa Baja
+  California's, with a `share/p/` link as their whole text; titling them with
+  the other page's caption credits the wrong outlet and may carry a person's
+  post.
+- **Comments are paid only for `comentarios_para` posts per page and run**
+  (the most-reacted in the window not yet harvested). A featured post with
+  `cosechados: 0` is expected; `comentarios_parciales` silences that aviso.
+- **`marca` now spans Facebook too** (`validar_marcas(ig, tk, fb)`): Blanco y
+  Negro is read on Facebook (1.14M) and `blanconegro_ig` (136,814) is off.
+- `likes` is total reactions. The card still shows no counts; Analizar is not
+  offered on Facebook (`RedAnalizable` is unchanged: a new decision, not a
+  refactor). The embed uses Facebook's video plugin for reels and videos and
+  is not preloaded, since without the SDK there is no pause.
 
 ### Consultas: qué se dice de un término
 
@@ -1122,7 +1159,7 @@ The full command surface — `indicadores`, `conversacion`, `delegaciones`,
 
 ## Testing
 
-- **`unittest` only.** No pytest, no config file. 37 modules, 922 tests on 23
+- **`unittest` only.** No pytest, no config file. 38 modules, 943 tests on 23
   September 2026, and the suite is expected fully green. Install `requirements.txt`
   first: without Scrapy, `tests/test_scraping.py` fails to import and you see
   one error, which is an unprovisioned environment and not a regression.

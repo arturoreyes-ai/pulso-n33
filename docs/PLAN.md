@@ -1,3 +1,32 @@
+> **Implementación · 24 de septiembre de 2026 — Medios de México y del mundo en
+> las dos redes.** El cliente pidió CNN en Español, BBC News Mundo y DW Español
+> para Internacional, y Latinus, Azteca Noticias, Noticias Telemundo y N+ para
+> México, en Instagram y en TikTok, «por ahora» en las dos. Se deja escrito
+> como excepción a la regla de un medio en una sola red del 22 de septiembre:
+> la misma nota puede salir dos veces en «Todas». Noticias Telemundo se
+> zonifica por lo que nombra cada publicación, y la que no nombra lugar va a
+> Internacional, por indicación del cliente. El TikTok de BBC News Mundo es
+> @bbcnewsmundo; @bbcmundo es otra cuenta.
+
+> **Implementación · 23 de septiembre de 2026 — Facebook en Redes.** El
+> cliente pidió una pestaña de Facebook con cinco páginas: Blanco y Negro,
+> Noticias de Tijuana, PSN, TV Azteca Baja California y Blanco y Rojo Noticias
+> Tijuana, con lo más destacado del día. Se leen sin sesión, como Instagram:
+> los posts de las últimas 24 horas, ordenados por reacciones y comentarios,
+> con una vuelta por página antes del mérito para que una sola no se lleve la
+> pantalla, y el texto de los comentarios más votados sin la identidad de
+> quien comenta. Tres cosas que el sondeo del mismo día obligó a decidir:
+>
+> - La zona de cada post sale de lo que nombra, no de la página: en una misma
+>   hora TV Azteca Baja California publicó de San Quintín, de Tijuana y de un
+>   huracán.
+> - Los posts que solo comparten el de otra página no se muestran. Los tres
+>   que se sondearon de Blanco y Rojo eran de La Prensa Baja California; si
+>   así sigue, lo honesto es leer La Prensa Baja California.
+> - Blanco y Negro se lee en Facebook (1.14 millones de seguidores) y su
+>   cuenta de Instagram (136,814) queda apagada, por la regla de un medio en
+>   una sola red del 22 de septiembre: leer las dos repetiría cada nota.
+
 > **Implementación · 23 de septiembre de 2026 — La lupa de Redes busca cualquier
 > término: noticias, publicaciones y comentarios.** Hasta hoy la lupa solo sabía
 > de los tres términos en seguimiento; cualquier otra palabra filtraba lo que ya

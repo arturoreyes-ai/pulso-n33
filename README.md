@@ -439,6 +439,26 @@ imprime los seguidores del perfil:
 python -m pulso tiktok --probar --fila tk_dwespanol
 ```
 
+### Facebook: páginas de medios, con `--sondear` antes del cron
+
+```bash
+python -m pulso facebook --sondear
+```
+
+Trae los últimos tres posts de cada página activa de `config/facebook.json`
+(con ids, esas páginas aunque estén apagadas) y dónde caería cada uno, sin
+comentarios ni escribir nada; cuesta tres resultados por página. Luego:
+
+```bash
+python -m pulso facebook --sentimiento modelo
+```
+
+Escribe `data/facebook.json` y `data/facebook-comentarios.json` (fuera de git).
+La zona de cada post sale de su texto, nunca de la página; los posts que solo
+comparten otro no entran; y los comentarios se pagan solo para los cuatro posts
+de más reacciones de cada página y corrida, del orden de 1.35 USD al día con
+cinco páginas.
+
 En Instagram, `--sondear` acepta `--muestra N` para ver dónde caerían los
 últimos N posts de cada cuenta con un ámbito dado. La bio no alcanza: así se
 coló la Ensenada de Buenos Aires.
