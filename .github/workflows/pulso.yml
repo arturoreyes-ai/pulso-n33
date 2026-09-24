@@ -57,7 +57,15 @@ jobs:
     # y ~430 MB de pesos); con los dos caches de abajo, despues es rapido.
     # Dos actores sincronicos mas (TikTok) pueden sumar ~10 min al peor caso.
     # YouTube suma 32 peticiones HTTP a feeds publicos, que es ruido al lado.
-    timeout-minutes: 35
+    #
+    # 60 y no 35 desde el 24 de septiembre de 2026. Con 33 cuentas de
+    # Instagram el paso de redes tarda ~20 min, y las cuatro corridas previas
+    # murieron a los 35 min dentro de TikTok: Instagram ya cobrado, nada
+    # commiteado, y el cache con vistos.json sin guardar, porque un trabajo
+    # cancelado se salta el paso que lo guarda. Asi cada corrida volvia a pagar
+    # los comentarios de Instagram desde cero. Facebook alarga el trabajo otro
+    # poco.
+    timeout-minutes: 60
     permissions:
       contents: write
     outputs:
