@@ -20,11 +20,14 @@
  *
  *  Se sube el relleno y no un `min-h`: con `items-baseline` —que es lo que
  *  alinea la etiqueta con su cuenta, dos tamanos distintos— una altura minima
- *  deja el texto arriba y el aire debajo. */
+ *  deja el texto arriba y el aire debajo.
+ *
+ *  Al pulsar cede a 0.97: en el telefono no hay hover, y sin esto un toque no
+ *  respondia hasta que llegaba lo que abria. */
 export function clasesChip(activo: boolean): string {
   return [
     "inline-flex items-baseline gap-2 rounded-full px-4 py-3 text-cuerpo",
-    "transition-colors duration-[var(--dur-cambio)] ease-firma",
+    "transition-[color,background-color,scale] duration-[var(--dur-toque)] ease-out active:scale-[0.97]",
     activo
       ? "bg-realce text-tinta-titulo"
       : "bg-vela text-tinta-prosa hover:bg-filo hover:text-tinta-titulo",

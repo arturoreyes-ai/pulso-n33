@@ -63,7 +63,7 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  *  no el de la cadena. */
 const CLASES_FUENTE = [
   "inline-flex min-h-11 items-center justify-center rounded-full bg-vela px-4 text-meta text-tinta-prosa",
-  "transition-colors duration-[var(--dur-cambio)] ease-firma hover:bg-filo hover:text-tinta-titulo",
+  "transition-[color,background-color,scale] duration-[var(--dur-toque)] ease-out active:scale-[0.97] hover:bg-filo hover:text-tinta-titulo",
 ].join(" ");
 
 /** Cuantos creadores se nombran junto al titulo antes del «+N». */

@@ -169,6 +169,14 @@ function porMedioDe(noticias: readonly NoticiaConsulta[]) {
   return [...por.values()].sort((a, b) => b.titulares - a.titulares || a.fuente.localeCompare(b.fuente));
 }
 
+/** «smooth» salvo con movimiento reducido. El bloque global de globals.css
+ *  pone `scroll-behavior: auto`, pero eso no alcanza a un `behavior` pedido
+ *  desde JS: sin esto, quien pidio menos movimiento recibia el desplazamiento
+ *  mas largo del tablero. Igual que lib/pantalla/recorrido.ts. */
+function comportamiento(): ScrollBehavior {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth";
+}
+
 /** Lleva a la primera publicacion: la tarjeta que sigue a la ficha en el
  *  mismo recorrido (`data-indice="1"`). El 23 de septiembre de 2026 el cliente
  *  aviso que quien entra no sabe que las publicaciones estan abajo: la ficha
@@ -176,13 +184,13 @@ function porMedioDe(noticias: readonly NoticiaConsulta[]) {
 function irAPublicaciones(evento: MouseEvent<HTMLButtonElement>) {
   evento.currentTarget.closest(".recorrido-lector")
     ?.querySelector<HTMLElement>('[data-indice="1"]')
-    ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    ?.scrollIntoView({ behavior: comportamiento(), block: "start" });
 }
 
 /** Lleva a la lista de noticias de la misma ficha. */
 function irANoticias(evento: MouseEvent<HTMLButtonElement>) {
   evento.currentTarget.closest("article")?.querySelector<HTMLElement>("#ficha-prensa")
-    ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    ?.scrollIntoView({ behavior: comportamiento(), block: "start" });
 }
 
 function Enlace({ onClick, icono, children }: { onClick: (evento: MouseEvent<HTMLButtonElement>) => void; icono: ReactNode; children: ReactNode }) {

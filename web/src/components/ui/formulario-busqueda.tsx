@@ -48,10 +48,10 @@ export function FormularioBusqueda({ accion, idCampo, etiqueta, consulta, placeh
           className="w-full rounded-nucleo border border-filo bg-vanta px-4 py-3 text-cuerpo text-tinta-titulo placeholder:text-tinta-inerte"
         />
         {/* El icono va en su propio circulo, a ras del relleno derecho. Al
-            pulsar, el boton cede un punto: es la unica animacion aqui. */}
+            pulsar, el boton cede como todas las pastillas (ui/clases.ts). */}
         <button
           type="submit"
-          className="group inline-flex items-center justify-between gap-3 rounded-full bg-realce py-2 pl-5 pr-2 text-cuerpo text-tinta-titulo transition-[background-color,transform] duration-[var(--dur-toque)] ease-firma hover:bg-filo active:scale-[0.99]"
+          className="group inline-flex items-center justify-between gap-3 rounded-full bg-realce py-2 pl-5 pr-2 text-cuerpo text-tinta-titulo transition-[color,background-color,scale] duration-[var(--dur-toque)] ease-out hover:bg-filo active:scale-[0.97]"
         >
           <span>Buscar</span>
           <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-vanta transition-transform duration-[var(--dur-cambio)] ease-firma group-hover:translate-x-0.5">
@@ -65,7 +65,7 @@ export function FormularioBusqueda({ accion, idCampo, etiqueta, consulta, placeh
       {consulta === null ? null : (
         <Link
           href={accion}
-          className="justify-self-start text-meta text-tinta-meta underline decoration-filo underline-offset-4 transition-colors duration-[var(--dur-toque)] ease-firma hover:text-tinta-titulo"
+          className="justify-self-start text-meta text-tinta-meta underline decoration-filo underline-offset-4 transition-colors duration-[var(--dur-toque)] ease-out hover:text-tinta-titulo"
         >
           {salida}
         </Link>

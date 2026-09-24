@@ -28,7 +28,7 @@ export type OpcionSegmento = {
   | { onElegir: () => void; href?: never }
 );
 
-const SEGMENTO = "rounded-full px-3 py-2 text-center text-cuerpo transition-colors duration-[var(--dur-toque)] ease-firma";
+const SEGMENTO = "rounded-full px-3 py-2 text-center text-cuerpo transition-[color,background-color,scale] duration-[var(--dur-toque)] ease-out active:scale-[0.97]";
 const clase = (activo: boolean) =>
   `${SEGMENTO} ${activo ? "bg-realce text-tinta-titulo" : "text-tinta-prosa hover:bg-vela hover:text-tinta-titulo"}`;
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { X as Cerrar } from "@phosphor-icons/react";
-import { useId, type ReactNode, type Ref } from "react";
+import { useEffect, useId, useRef, type ReactNode, type Ref, type SyntheticEvent } from "react";
 
 import { CONTROL, ICONO_ESTRECHO } from "@/components/chrome/medidas-cinta";
 
@@ -19,7 +19,16 @@ import { CONTROL, ICONO_ESTRECHO } from "@/components/chrome/medidas-cinta";
  * `ref` para eso; quien la abre si la necesita (`showModal()`), y la pasa por
  * `ref`, que en React 19 es una prop mas. `rotuloCerrar` nombra lo que se
  * cierra: «Cerrar comentarios», no «Cerrar».
+ *
+ * `onClose` llega DESPUES de la salida animada (globals.css, .dialogo-lector),
+ * no al empezar a cerrar. Quien usa la hoja vacia su contenido ahi, y con el
+ * aviso inmediato la hoja bajaba vacia, encogida hasta la cabecera.
  */
+
+/** Un poco mas que --dur-cambio (260ms): si `transitionend` no llega (sin
+ *  transicion, movimiento reducido, pestana oculta), el vaciado ocurre
+ *  igual. */
+const MS_SALIDA = 300;
 export function Hoja({ ref, id, titulo, rotuloCerrar, onClose, children }: {
   ref?: Ref<HTMLDialogElement>;
   id?: string;
@@ -29,8 +38,34 @@ export function Hoja({ ref, id, titulo, rotuloCerrar, onClose, children }: {
   children?: ReactNode;
 }) {
   const idTitulo = `${useId()}-titulo`;
+  const pendiente = useRef<(() => void) | null>(null);
+  useEffect(() => () => pendiente.current?.(), []);
+
+  // Si la hoja se reabrio mientras salia, el contenido ya es otro y no se
+  // toca: eso decide `dialogo.open` al terminar.
+  function alCerrar(evento: SyntheticEvent<HTMLDialogElement>) {
+    if (onClose === undefined) return;
+    const dialogo = evento.currentTarget;
+    pendiente.current?.();
+    const soltar = () => {
+      window.clearTimeout(reloj);
+      dialogo.removeEventListener("transitionend", alTerminar);
+      pendiente.current = null;
+    };
+    const terminar = () => {
+      soltar();
+      if (!dialogo.open) onClose();
+    };
+    const alTerminar = (e: TransitionEvent) => {
+      if (e.target === dialogo && e.propertyName === "transform") terminar();
+    };
+    dialogo.addEventListener("transitionend", alTerminar);
+    const reloj = window.setTimeout(terminar, MS_SALIDA);
+    pendiente.current = soltar;
+  }
+
   return (
-    <dialog ref={ref} id={id} className="dialogo-lector" aria-labelledby={idTitulo} onClose={onClose}>
+    <dialog ref={ref} id={id} className="dialogo-lector" aria-labelledby={idTitulo} onClose={alCerrar}>
       <div className="cabecera-dialogo-lector">
         <h2 id={idTitulo} className="text-rotulo text-tinta-titulo">{titulo}</h2>
         <button type="button" className={CONTROL} aria-label={rotuloCerrar}

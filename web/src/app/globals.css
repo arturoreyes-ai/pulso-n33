@@ -591,9 +591,15 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
   padding: 0.75rem 1rem;
   color: var(--color-tinta-meta);
   border-radius: var(--radius-nucleo) var(--radius-nucleo) 0 0;
-  transition: background-color var(--dur-toque) var(--ease-firma), color var(--dur-toque) var(--ease-firma);
+  transition: background-color var(--dur-toque) var(--ease-out), color var(--dur-toque) var(--ease-out);
 }
-.pestana-lector:hover { background: var(--color-vela); color: var(--color-tinta-prosa); }
+/* Solo con puntero de verdad. En un telefono `:hover` queda pegado despues
+   del toque: la pestana que se dejo seguia con la pastilla gris. Las
+   utilidades `hover:` de Tailwind v4 ya vienen dentro de esta consulta; estas
+   dos reglas, escritas a mano, no. */
+@media (hover: hover) and (pointer: fine) {
+  .pestana-lector:hover { background: var(--color-vela); color: var(--color-tinta-prosa); }
+}
 /* Dos maneras de estar activa, porque hay dos clases de pestana: redes cambia
    de plataforma sin cambiar de pagina y marca con `aria-pressed`; los temas del
    recorrido son enlaces y marcan con `aria-current`. La pinta es la misma.
@@ -777,9 +783,13 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
   min-height: 2.75rem;
   border-radius: var(--radius-nucleo);
   color: var(--color-tinta-prosa);
-  transition: background-color var(--dur-toque) var(--ease-firma);
+  transition: background-color var(--dur-toque) var(--ease-out), transform var(--dur-toque) var(--ease-out);
 }
-.control-lector:hover { background: var(--color-vela); }
+@media (hover: hover) and (pointer: fine) {
+  .control-lector:hover { background: var(--color-vela); }
+}
+/* Al pulsar cede, como las pastillas (ui/clases.ts). */
+.control-lector:active { transform: scale(0.97); }
 .control-lector[data-nuevos] { color: var(--color-chart-3); }
 /* Un control de la barra que es interruptor («Más recientes» en Redes): el
    estado encendido se ve como la pastilla activa, no solo en el icono. */
@@ -811,18 +821,53 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
   color: var(--color-tinta-prosa);
   border: 1px solid var(--color-filo);
   border-radius: var(--radius-panel) var(--radius-panel) 0 0;
+  /* La hoja nace del borde de abajo y vuelve a el. Estado cerrado aqui,
+     abierto en [open], y el de partida en @starting-style: sin JS. `overlay`
+     y `display` con allow-discrete mantienen el dialogo en la capa superior
+     mientras sale; sin ellos desaparece de golpe y la salida no se ve. Donde
+     el navegador no los conoce, la hoja sale seca, como antes. Quien la usa
+     vacia su contenido al cerrar, y por eso ui/hoja.tsx espera a que esta
+     transicion termine antes de avisarle. */
+  transform: translateY(100%);
+  transition:
+    transform var(--dur-cambio) var(--ease-firma),
+    opacity var(--dur-cambio) var(--ease-firma),
+    overlay var(--dur-cambio) allow-discrete,
+    display var(--dur-cambio) allow-discrete;
+}
+.dialogo-lector[open] { transform: none; }
+@starting-style {
+  .dialogo-lector[open] { transform: translateY(100%); }
 }
 @media (min-width: 48rem) {
-  /* En escritorio la hoja no nace del borde: flota centrada. */
+  /* En escritorio la hoja no nace del borde: flota centrada. Por eso aparece
+     en su lugar, desde el centro, y no se desliza. */
   .dialogo-lector {
     inset: 0;
     margin: auto;
     max-height: min(80svh, 48rem);
     padding: 0;
     border-radius: var(--radius-panel);
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  .dialogo-lector[open] { opacity: 1; transform: none; }
+  @starting-style {
+    .dialogo-lector[open] { opacity: 0; transform: scale(0.96); }
   }
 }
-.dialogo-lector::backdrop { background: var(--color-vanta); opacity: 0.85; }
+.dialogo-lector::backdrop {
+  background: var(--color-vanta);
+  opacity: 0;
+  transition:
+    opacity var(--dur-cambio) var(--ease-out),
+    overlay var(--dur-cambio) allow-discrete,
+    display var(--dur-cambio) allow-discrete;
+}
+.dialogo-lector[open]::backdrop { opacity: 0.85; }
+@starting-style {
+  .dialogo-lector[open]::backdrop { opacity: 0; }
+}
 .cabecera-dialogo-lector {
   position: sticky;
   top: 0;
