@@ -1,5 +1,6 @@
 import { json, SIN_CACHE } from "@/lib/busqueda/respuesta";
 import { analisisHabilitado } from "./config";
+import { formatoSocial, NOMBRES_FORMATO, REGLA_FORMATO } from "./formatos";
 import type { LecturaAnalisis, SugerenciaSocial } from "./contrato";
 import { dominioDeUrl } from "./dominio";
 import { extraerTexto } from "./extraer";
@@ -52,10 +53,10 @@ const SISTEMA = [
   "- Escribe en prosa llana, sin adjetivos de color ni lenguaje sensacionalista.",
   "- La lectura es un resumen de mesa, NO un guion para leer al aire.",
   "- Ordena los puntos por importancia. Incluye quién, qué, dónde, cuándo, cifras y qué sigue solo cuando la nota lo establezca.",
-  "- Sugiere UN solo formato de contenido para redes. Da su enfoque y un gancho factual, sin escribir el post terminado.",
+  REGLA_FORMATO,
   "- No inventes citas, imágenes, video, reacciones del público ni material que la nota no diga que existe.",
   "Qué va en cada campo de la respuesta:",
-  '{"lectura":"<2 a 3 frases neutrales>","puntos":["<dato prioritario>","..."],"salvedad":"<qué NO establece la nota>","sugerenciaSocial":{"formato":"<un formato>","enfoque":"<ángulo editorial sustentado>","gancho":"<gancho factual, no sensacionalista>"}}',
+  '{"lectura":"<2 a 3 frases neutrales>","puntos":["<dato prioritario>","..."],"salvedad":"<qué NO establece la nota>","sugerenciaSocial":{"formato":"<uno de la lista>","enfoque":"<ángulo editorial sustentado>","gancho":"<gancho factual, no sensacionalista>"}}',
   "Entre 3 y 5 puntos. Todos los campos deben tener texto.",
 ].join("\n");
 
@@ -73,7 +74,7 @@ const ESQUEMA = {
     salvedad: { type: "string" },
     sugerenciaSocial: {
       type: "object",
-      properties: { formato: { type: "string" }, enfoque: { type: "string" }, gancho: { type: "string" } },
+      properties: { formato: { type: "string", enum: NOMBRES_FORMATO }, enfoque: { type: "string" }, gancho: { type: "string" } },
       required: ["formato", "enfoque", "gancho"],
       additionalProperties: false,
     },
@@ -117,7 +118,7 @@ function leerSalida(crudo: string): LecturaAnalisis | null {
     };
     if (
       lectura === "" || salvedad === "" || puntos.length < 3 || puntos.length > 5
-      || sugerenciaSocial.formato === "" || sugerenciaSocial.enfoque === "" || sugerenciaSocial.gancho === ""
+      || formatoSocial(sugerenciaSocial.formato) === null || sugerenciaSocial.enfoque === "" || sugerenciaSocial.gancho === ""
     ) return null;
     return { lectura, puntos, salvedad, sugerenciaSocial };
   } catch {

@@ -23,7 +23,7 @@ import type { SugerenciaSocial } from "./contrato";
 
 /** Version de ESTA ficha, independiente de la de prensa: los dos contratos
  *  cambian por razones distintas y comparten CDN. */
-export const VERSION_ANALISIS_PUBLICACION = "1";
+export const VERSION_ANALISIS_PUBLICACION = "2";
 
 export type RedAnalizable = "instagram" | "tiktok";
 

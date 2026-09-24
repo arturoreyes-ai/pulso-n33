@@ -1,6 +1,7 @@
 import { json, SIN_CACHE } from "@/lib/busqueda/respuesta";
 import { canonizarPublicacion } from "@/lib/dominio/publicaciones";
 import { analisisHabilitado, MODELO_ANALISIS } from "./config";
+import { formatoSocial, NOMBRES_FORMATO, REGLA_FORMATO } from "./formatos";
 import type { SugerenciaSocial } from "./contrato";
 import type { LecturaPublicacion, RedAnalizable } from "./contrato-publicacion";
 import { leerDatoPublicado, ubicarPublicacion, type LeerDatos } from "./datos-redes";
@@ -72,10 +73,10 @@ const SISTEMA = [
   "- No opines sobre la cuenta, sobre su línea editorial ni sobre la plataforma.",
   "- Escribe en prosa llana, sin adjetivos de color ni lenguaje sensacionalista. La ficha es un resumen de mesa, NO un guion para leer al aire.",
   "- La salvedad dice qué NO establece el material: hechos que el pie y los comentarios dejan sin aclarar. No hables de muestras, de representatividad ni de a quién representa esto: de esa advertencia se encarga la página, no tú.",
-  "- Sugiere UN solo formato de contenido para redes, adecuado a esta publicación. Da su enfoque y un gancho factual, sin escribir el post terminado.",
+  REGLA_FORMATO,
   "- No inventes citas, cifras, reacciones ni material que el pie y los comentarios no traigan.",
   "Qué va en cada campo de la respuesta:",
-  '{"lectura":"<2 a 3 frases sobre lo que dice la publicación>","conversacion":"<qué se repite entre los comentarios, en prosa; null si no recibiste ninguno>","salvedad":"<qué NO se puede saber con esto>","sugerenciaSocial":{"formato":"<un formato>","enfoque":"<ángulo editorial sustentado>","gancho":"<gancho factual, no sensacionalista>"}}',
+  '{"lectura":"<2 a 3 frases sobre lo que dice la publicación>","conversacion":"<qué se repite entre los comentarios, en prosa; null si no recibiste ninguno>","salvedad":"<qué NO se puede saber con esto>","sugerenciaSocial":{"formato":"<uno de la lista>","enfoque":"<ángulo editorial sustentado>","gancho":"<gancho factual, no sensacionalista>"}}',
   "Todos los campos deben tener texto, salvo «conversacion», que es null cuando no recibiste comentarios.",
 ].join("\n");
 
@@ -93,7 +94,7 @@ const ESQUEMA = {
     salvedad: { type: "string" },
     sugerenciaSocial: {
       type: "object",
-      properties: { formato: { type: "string" }, enfoque: { type: "string" }, gancho: { type: "string" } },
+      properties: { formato: { type: "string", enum: NOMBRES_FORMATO }, enfoque: { type: "string" }, gancho: { type: "string" } },
       required: ["formato", "enfoque", "gancho"],
       additionalProperties: false,
     },
@@ -127,7 +128,7 @@ function leerSalida(crudo: string, esperaConversacion: boolean): LecturaPublicac
     };
     if (
       lectura === "" || salvedad === ""
-      || sugerenciaSocial.formato === "" || sugerenciaSocial.enfoque === "" || sugerenciaSocial.gancho === ""
+      || formatoSocial(sugerenciaSocial.formato) === null || sugerenciaSocial.enfoque === "" || sugerenciaSocial.gancho === ""
     ) return null;
     // Sin comentarios que leer, `conversacion` es null pase lo que pase el
     // modelo: si lo decidiera el, podria describir una conversacion que no

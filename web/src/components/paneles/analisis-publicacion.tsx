@@ -4,7 +4,9 @@ import { Sparkle as IA } from "@phosphor-icons/react";
 import { useId, useRef, useState } from "react";
 
 import { clasesBoton } from "@/components/ui/clases";
+import { EsqueletoFicha } from "@/components/ui/esqueleto-ficha";
 import { EstadoCarga } from "@/components/ui/estado-carga";
+import { IdeaRedes } from "@/components/ui/idea-redes";
 import { VERSION_ANALISIS_PUBLICACION, type AnalisisPublicacion } from "@/lib/analisis/contrato-publicacion";
 import type { SugerenciaSocial } from "@/lib/analisis/contrato";
 import { NOMBRE_RED, type PublicacionVisual } from "@/lib/dominio/publicaciones";
@@ -138,7 +140,10 @@ export function FichaPublicacion({ fila }: { fila: PublicacionVisual }) {
       ) : null}
 
       {estado.fase === "cargando" ? (
-        <div className="aparicion-suave"><EstadoCarga etiqueta="Leyendo la publicación" /></div>
+        <div className="aparicion-suave grid gap-6">
+          <EstadoCarga etiqueta="Leyendo la publicación" />
+          <EsqueletoFicha secciones={["Qué dice la publicación", "En los comentarios"]} caja="Idea para redes" />
+        </div>
       ) : null}
 
       {estado.fase === "fallo" ? (
@@ -178,7 +183,7 @@ function Resultado({ id, a }: { id: string; a: AnalisisPublicacion }) {
             </>}
       </section>
 
-      <Idea id={id} s={a.sugerenciaSocial} />
+      <IdeaRedes id={id} s={a.sugerenciaSocial} />
 
       <section aria-labelledby={`${id}-salvedad`} className="grid max-w-[65ch] gap-2 break-words text-tinta-meta">
         <h3 id={`${id}-salvedad`} className="text-meta text-tinta-dato">Lo que no establece</h3>
@@ -190,28 +195,6 @@ function Resultado({ id, a }: { id: string; a: AnalisisPublicacion }) {
         Generado con IA.
       </p>
     </>
-  );
-}
-
-function Idea({ id, s }: { id: string; s: SugerenciaSocial }) {
-  return (
-    <section aria-labelledby={`${id}-redes`} className="grid max-w-[65ch] gap-3 rounded-nucleo border border-filo bg-vela p-4 break-words">
-      <h3 id={`${id}-redes`} className="text-meta text-tinta-dato">Idea para redes</h3>
-      <dl className="grid gap-3">
-        <div>
-          <dt className="text-meta text-tinta-meta">Formato</dt>
-          <dd>{s.formato}</dd>
-        </div>
-        <div>
-          <dt className="text-meta text-tinta-meta">Enfoque</dt>
-          <dd>{s.enfoque}</dd>
-        </div>
-        <div>
-          <dt className="text-meta text-tinta-meta">Gancho</dt>
-          <dd>{s.gancho}</dd>
-        </div>
-      </dl>
-    </section>
   );
 }
 

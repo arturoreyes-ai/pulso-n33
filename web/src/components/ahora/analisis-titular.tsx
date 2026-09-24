@@ -4,7 +4,9 @@ import { Sparkle as IA } from "@phosphor-icons/react";
 import { useId, useRef, useState } from "react";
 
 import { clasesBoton } from "@/components/ui/clases";
+import { EsqueletoFicha } from "@/components/ui/esqueleto-ficha";
 import { EstadoCarga } from "@/components/ui/estado-carga";
+import { IdeaRedes } from "@/components/ui/idea-redes";
 import { VERSION_ANALISIS, type Analisis, type SugerenciaSocial } from "@/lib/analisis/contrato";
 import type { ReferenciaAnalisis } from "@/lib/busqueda/enlaces";
 import { Hoja } from "@/components/ui/hoja";
@@ -90,13 +92,19 @@ export function AnalisisTitular({ titulo, referencia, medio }: {
       <Hoja ref={hoja} titulo="Lectura automática" rotuloCerrar="Cerrar lectura" onClose={() => { if (estado.fase === "confirmar") setEstado({ fase: "quieto" }); }}>
 
         <div className="grid gap-4 px-4 pt-6 pb-8 text-lectura text-tinta-prosa">
-          <p className="max-w-[65ch] font-titular text-rotulo text-tinta-titulo">{titulo}</p>
+          {/* El medio arriba y el titular debajo, como la hoja de una
+              publicacion (paneles/analisis-publicacion.tsx): sin el medio, un
+              titular en ingles sobre un fondo oscuro no decia de donde venia. */}
+          <div className="max-w-[65ch]">
+            {medio === "" ? null : <p className="text-meta text-tinta-meta">{medio}</p>}
+            <p className="mt-1 break-words font-titular text-rotulo text-tinta-titulo">{titulo}</p>
+          </div>
 
           {estado.fase === "confirmar" ? (
             <section aria-labelledby={`${id}-confirmacion`} className="grid max-w-[65ch] gap-4">
               <div className="grid gap-2">
                 <h3 id={`${id}-confirmacion`} className="text-cuerpo text-tinta-dato">¿Analizar esta nota con IA?</h3>
-                <p className="text-tinta-meta">Confirma para generar el resumen y la idea para redes.</p>
+                <p className="text-tinta-meta">Se prepara un resumen, los puntos clave y una idea para redes.</p>
               </div>
               <div className="flex flex-wrap items-center gap-3">
                 <button type="button" className={clasesBoton(true)} onClick={analizar}>
@@ -111,7 +119,10 @@ export function AnalisisTitular({ titulo, referencia, medio }: {
           ) : null}
 
           {estado.fase === "cargando" ? (
-            <div className="aparicion-suave"><EstadoCarga etiqueta="Leyendo la nota" /></div>
+            <div className="aparicion-suave grid gap-6">
+              <EstadoCarga etiqueta="Leyendo la nota" />
+              <EsqueletoFicha secciones={["Resumen", "Puntos clave"]} caja="Idea para redes" />
+            </div>
           ) : null}
 
           {estado.fase === "fallo" ? (
@@ -132,23 +143,7 @@ export function AnalisisTitular({ titulo, referencia, medio }: {
                 </ul>
               </section>
 
-              <section aria-labelledby={`${id}-redes`} className="grid max-w-[65ch] gap-3 rounded-nucleo border border-filo bg-vela p-4 break-words">
-                <h3 id={`${id}-redes`} className="text-meta text-tinta-dato">Idea para redes</h3>
-                <dl className="grid gap-3">
-                  <div>
-                    <dt className="text-meta text-tinta-meta">Formato</dt>
-                    <dd>{estado.analisis.sugerenciaSocial.formato}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-meta text-tinta-meta">Enfoque</dt>
-                    <dd>{estado.analisis.sugerenciaSocial.enfoque}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-meta text-tinta-meta">Gancho</dt>
-                    <dd>{estado.analisis.sugerenciaSocial.gancho}</dd>
-                  </div>
-                </dl>
-              </section>
+              <IdeaRedes id={id} s={estado.analisis.sugerenciaSocial} />
 
               <section aria-labelledby={`${id}-salvedad`} className="grid max-w-[65ch] gap-2 break-words text-tinta-meta">
                 <h3 id={`${id}-salvedad`} className="text-meta text-tinta-dato">Lo que no establece</h3>
