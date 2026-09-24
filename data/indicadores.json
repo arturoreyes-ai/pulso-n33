@@ -1,6 +1,6 @@
 {
  "esquema": 1,
- "generado": "2026-09-14T20:18:03+00:00",
+ "generado": "2026-09-24T21:43:18+00:00",
  "indicadores": {
   "shf": {
    "fuente": "SHF Índice de Precios de la Vivienda",
@@ -1784,7 +1784,7 @@
     }
    },
    "familia": "vivienda",
-   "obtenido": "2026-09-14T20:18:03+00:00"
+   "obtenido": "2026-09-24T21:43:18+00:00"
   },
   "predial": {
    "fuente": "SHCP · Impuesto predial municipal",
@@ -2278,7 +2278,7 @@
     }
    },
    "familia": "suelo",
-   "obtenido": "2026-09-14T20:18:03+00:00"
+   "obtenido": "2026-09-24T21:43:18+00:00"
   },
   "sesnsp": {
    "fuente": "SESNSP · Incidencia delictiva municipal (RNID)",
@@ -2458,7 +2458,7 @@
     }
    },
    "familia": "crimen",
-   "obtenido": "2026-09-14T20:18:03+00:00"
+   "obtenido": "2026-09-24T21:43:18+00:00"
   },
   "ensu": {
    "fuente": "INEGI · ENSU",
@@ -2482,7 +2482,7 @@
     "pct_inseguro": 59.9
    },
    "familia": "percepcion",
-   "obtenido": "2026-09-14T20:18:03+00:00"
+   "obtenido": "2026-09-24T21:43:18+00:00"
   },
   "san_diego": {
    "fuente": "SANDAG · Parcels (valor catastral)",
@@ -2898,42 +2898,42 @@
     }
    },
    "familia": "vivienda",
-   "obtenido": "2026-09-14T20:18:03+00:00"
+   "obtenido": "2026-09-24T21:43:18+00:00"
   }
  },
  "salud": [
   {
    "id": "shf",
    "estado": "ok",
-   "ms": 459,
+   "ms": 552,
    "error": null,
    "periodo": "2026-2T"
   },
   {
    "id": "predial",
    "estado": "ok",
-   "ms": 968,
+   "ms": 1319,
    "error": null,
    "periodo": "2024"
   },
   {
    "id": "sesnsp",
    "estado": "ok",
-   "ms": 1657,
+   "ms": 2439,
    "error": null,
    "periodo": "Julio"
   },
   {
    "id": "ensu",
    "estado": "ok",
-   "ms": 3548,
+   "ms": 4657,
    "error": null,
    "periodo": "2026-2T"
   },
   {
    "id": "san_diego",
    "estado": "ok",
-   "ms": 1145,
+   "ms": 947,
    "error": null,
    "periodo": null
   },
