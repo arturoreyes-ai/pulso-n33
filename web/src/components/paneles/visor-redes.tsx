@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { ChatCircle as IconoComentarios } from "@phosphor-icons/react";
-import { useRedes, useRedesComentarios, useTikTok, useTikTokComentarios, useYouTube } from "@/lib/datos/hooks";
+import { useFacebook, useFacebookComentarios, useRedes, useRedesComentarios, useTikTok, useTikTokComentarios, useYouTube } from "@/lib/datos/hooks";
 import type { ComentarioPublicado } from "@/lib/datos/tipos";
 import { NOMBRE_RED, ordenarPublicaciones, reunirPublicaciones, type CubetaRegion, type OrdenLectura, type PublicacionVisual, type RedVisual } from "@/lib/dominio/publicaciones";
 import { MINIMO_VIDEOS_RESUMEN } from "@/lib/analisis/contrato-publicacion";
@@ -17,7 +17,7 @@ import { EsqueletoMedio, MedioSocial } from "./medio-social";
 import { ResumenTikTokBloque } from "./resumen-tiktok";
 import { Hoja } from "@/components/ui/hoja";
 
-/** Las tres pestanas que caen aqui; YouTube y X son otras hojas del lector. */
+/** Las pestanas que caen aqui: todas menos X, que es otra hoja del lector. */
 export type FiltroVisual = "todas" | RedVisual;
 
 const SIN_FILAS = "No hay publicaciones disponibles para esta selección. Es un hueco, no un cero.";
@@ -68,21 +68,23 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis
   const instagram = useRedes();
   const tiktok = useTikTok();
   const youtube = useYouTube();
+  const facebook = useFacebook();
   const textosInstagram = useRedesComentarios();
   const textosTikTok = useTikTokComentarios();
+  const textosFacebook = useFacebookComentarios();
   // YouTube NO tiene entrada: su feed publico no trae comentarios, asi que no
   // hay archivo de texto que pedir. El visor lo decide por
   // `cosecha_comentarios` del documento y no por la red, para que encenderlos
   // despues sea un cambio de datos y no de codigo.
-  const textos: Partial<Record<RedVisual, Textos>> = { instagram: textosInstagram, tiktok: textosTikTok };
-  const publicaciones = useMemo(() => reunirPublicaciones(instagram.data, tiktok.data, youtube.data, zona, cubeta), [instagram.data, tiktok.data, youtube.data, zona, cubeta]);
+  const textos: Partial<Record<RedVisual, Textos>> = { instagram: textosInstagram, tiktok: textosTikTok, facebook: textosFacebook };
+  const publicaciones = useMemo(() => reunirPublicaciones({ instagram: instagram.data, tiktok: tiktok.data, youtube: youtube.data, facebook: facebook.data }, zona, cubeta), [instagram.data, tiktok.data, youtube.data, facebook.data, zona, cubeta]);
   const q = (filtroTexto ?? "").trim();
   const filas = useMemo(() => {
     // El orden DESPUES del filtro de pestana: «populares» reparte puestos por
     // red, y en una pestana de una red eso es su orden de merito.
     const porRed = ordenarPublicaciones(publicaciones.filter((fila) => filtro === "todas" || fila.red === filtro), orden);
-    return q === "" ? porRed : filtrarPorTexto(porRed, { instagram: textosInstagram.data, tiktok: textosTikTok.data }, q);
-  }, [publicaciones, filtro, q, orden, textosInstagram.data, textosTikTok.data]);
+    return q === "" ? porRed : filtrarPorTexto(porRed, { instagram: textosInstagram.data, tiktok: textosTikTok.data, facebook: textosFacebook.data }, q);
+  }, [publicaciones, filtro, q, orden, textosInstagram.data, textosTikTok.data, textosFacebook.data]);
   // «Resumen con IA», plegado y primero en la pestana TikTok, con los videos
   // debajo (23 de septiembre de 2026). Cuenta lo mismo que la ruta: videos
   // con pie y con URL canonica. Debajo del piso no hay resumen ni peticion;
@@ -93,24 +95,27 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis
   const resumen = resumible
     ? (irA: (clave: string) => boolean) => <ResumenTikTokBloque zona={zona} cubeta={cubeta} generado={tiktok.data!.generado} irA={irA} />
     : undefined;
-  const cortes: Cortes = { instagram: instagram.data?.generado, tiktok: tiktok.data?.generado, youtube: youtube.data?.generado };
+  const cortes: Cortes = { instagram: instagram.data?.generado, tiktok: tiktok.data?.generado, youtube: youtube.data?.generado, facebook: facebook.data?.generado };
   // `cosecha_comentarios` ausente se lee como true: un corte anterior al 18 de
   // septiembre de 2026 no lo trae y si cosechaba.
   const conComentarios: Partial<Record<RedVisual, boolean>> = {
     instagram: instagram.data?.cosecha_comentarios ?? true,
     tiktok: tiktok.data?.cosecha_comentarios ?? true,
     youtube: youtube.data?.cosecha_comentarios ?? true,
+    facebook: facebook.data?.cosecha_comentarios ?? true,
   };
   // Una plataforma del filtro actual sin datos y sin error: todavia carga.
   const pide = (red: RedVisual) => filtro === "todas" || filtro === red;
   const cargando =
     (pide("instagram") && !instagram.data && !instagram.error) ||
     (pide("tiktok") && !tiktok.data && !tiktok.error) ||
-    (pide("youtube") && !youtube.data && !youtube.error);
+    (pide("youtube") && !youtube.data && !youtube.error) ||
+    (pide("facebook") && !facebook.data && !facebook.error);
   const estados = ([
     ["instagram", instagram, "Instagram"],
     ["tiktok", tiktok, "TikTok"],
     ["youtube", youtube, "YouTube"],
+    ["facebook", facebook, "Facebook"],
   ] as const).map(([red, r, nombre]) =>
     pide(red) && !r.data
       ? r.error ? `Las publicaciones de ${nombre} no están disponibles.` : `Cargando ${nombre}…`
@@ -129,8 +134,9 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis
 
 /** Las redes cuya tarjeta siguiente se monta por adelantado. YouTube NO: su
  *  iframe se reproduce solo y no tiene aqui canal para pausarlo, asi que
- *  precargarlo seria un segundo video sonando fuera de pantalla. Facebook no
- *  aparece mas que en las consultas por termino. */
+ *  precargarlo seria un segundo video sonando fuera de pantalla. Facebook
+ *  tampoco: su plugin no expone pausa sin el SDK, y un reel precargado podria
+ *  sonar fuera de pantalla igual. */
 const PRECARGA: ReadonlySet<RedVisual> = new Set(["instagram", "tiktok"]);
 
 /** El medio montado cambia cuando el desplazamiento ASIENTA, nunca a mitad
@@ -346,7 +352,10 @@ function Publicacion({ fila, indice, posicion, total, corte, activo, preparado, 
               Comentarios
             </button>
           : null}
-        {analisis && conComentarios ? <BotonAnalizar onAbrir={onAnalizar} /> : null}
+        {/* Solo Instagram y TikTok (`RedAnalizable`): /api/analizar-publicacion
+            no busca en facebook.json, asi que el boton en Facebook abria una
+            hoja que siempre decia «No se pudo». Ampliarlo es otra decision. */}
+        {analisis && conComentarios && (fila.red === "instagram" || fila.red === "tiktok") ? <BotonAnalizar onAbrir={onAnalizar} /> : null}
         <p className="ml-auto text-meta tabular-nums text-tinta-meta">{indice + 1} de {total}</p>
       </div>
       {conComentarios && vistaPrevia

@@ -132,11 +132,19 @@ function MedioYouTube({ url, formato, fallar }: { url: string; formato: "short" 
  *  automatico de altura, asi que la tarjeta reserva 4:5 y lo que sobre se lee
  *  en «Ver original»; una publicacion privada o borrada muestra el aviso de
  *  Facebook DENTRO del iframe sin emitir error, y con cookies de terceros
- *  bloqueadas puede pedir sesion. Solo aparece en las consultas por termino. */
-function MedioFacebook({ url, fallar }: { url: string; fallar: () => void }) {
-  const params = new URLSearchParams({ href: url, show_text: "true", width: "500" });
-  return <iframe title="Publicación de Facebook" src={`https://www.facebook.com/plugins/post.php?${params.toString()}`}
-    scrolling="no" allow="encrypted-media" className="aspect-[4/5] w-full border-0" onError={fallar} />;
+ *  bloqueadas puede pedir sesion. Lo usan las consultas por termino y, desde
+ *  el 23 de septiembre de 2026, la pestana Facebook de Redes. */
+function MedioFacebook({ url, tipo, fallar }: { url: string; tipo: Destacado["tipo"]; fallar: () => void }) {
+  // Un reel o un video va por el plugin de VIDEO: el de publicacion lo pinta
+  // como una tarjeta con miniatura y texto, y en el recorrido del panel de
+  // medios (23 de septiembre de 2026) la mitad de los posts de estas paginas
+  // son reels. Sin el SDK no hay pausa desde fuera, y por eso Facebook no se
+  // precarga (visor-redes.tsx::PRECARGA).
+  const video = tipo === "video";
+  const params = new URLSearchParams({ href: url, show_text: video ? "false" : "true", width: "500" });
+  return <iframe title="Publicación de Facebook" src={`https://www.facebook.com/plugins/${video ? "video" : "post"}.php?${params.toString()}`}
+    scrolling="no" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen
+    className={`${video ? "aspect-[9/16]" : "aspect-[4/5]"} w-full border-0`} onError={fallar} />;
 }
 
 /** La forma que tendra el medio antes de tenerlo, para que la tarjeta apenas
@@ -152,7 +160,7 @@ export function EsqueletoMedio({ red, tipo, formato, pulsar = true }: { red: Red
   // salta una tarjeta justo al cambiar de formato.
   const proporcion = red === "youtube"
     ? (formato === "video" ? "aspect-video" : "aspect-[9/16]")
-    : red === "facebook" ? "aspect-[4/5]"
+    : red === "facebook" ? (tipo === "video" ? "aspect-[9/16]" : "aspect-[4/5]")
     : red === "tiktok" || tipo === "video" ? "aspect-[9/16]" : "aspect-[4/5]";
   return <div aria-hidden data-esqueleto={red} className={`flex w-full flex-col gap-1 ${pulsar ? "animate-pulse" : ""}`}>
     {red === "instagram" ? <div className="h-[3.25rem] rounded-nucleo bg-vela" /> : null}
@@ -217,7 +225,7 @@ export function MedioSocial({ publicacion, activo = true }: {
         : publicacion.red === "youtube"
           ? <MedioYouTube key={intento} url={publicacion.url} formato={publicacion.post.formato} fallar={fallar} />
           : publicacion.red === "facebook"
-            ? <MedioFacebook key={intento} url={publicacion.url} fallar={fallar} />
+            ? <MedioFacebook key={intento} url={publicacion.url} tipo={publicacion.post.tipo} fallar={fallar} />
             : <MedioTikTok key={intento} url={publicacion.url} activo={activo} fallar={fallar} />}
     </div>
     {ofrecerRecarga ? <div className="[grid-area:1/1] flex flex-col items-center justify-end gap-2 pb-4 text-center">

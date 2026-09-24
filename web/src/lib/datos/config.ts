@@ -33,6 +33,10 @@ export const RUTAS = {
   // redes.json pero SIN par de texto: este modulo no cosecha comentarios, y
   // el documento lo dice con `cosecha_comentarios: false`.
   youtube: `${BASE}/youtube.json`,
+  // Facebook: las paginas de medios de config/facebook.json (23 de
+  // septiembre de 2026). Mismo contrato y mismo par de archivos que redes.json.
+  facebook: `${BASE}/facebook.json`,
+  facebookComentarios: `${BASE}/facebook-comentarios.json`,
   // X: el ranking de tendencias por ubicacion, sin tuits ni identidad. Lo
   // escribe `pulso tendencias`; un solo archivo, sin par de texto.
   tendencias: `${BASE}/tendencias.json`,

@@ -5,8 +5,9 @@ import { NOMBRE_TODA_REGION } from "./zonas";
  * plataforma y zona, después el orden de lectura. Mezclar antes del límite
  * dejaría a la plataforma más numerosa ocupar toda la selección. */
 export type RedVisual = "instagram" | "tiktok" | "youtube" | "facebook";
-/** Como se nombra cada red al lector. Facebook solo aparece en las consultas
- *  por termino (lib/dominio/consultas.ts); el panel de medios no lo lee. */
+/** Como se nombra cada red al lector. Facebook entro al panel de medios el
+ *  23 de septiembre de 2026 (config/facebook.json); antes solo aparecia en las
+ *  consultas por termino (lib/dominio/consultas.ts). */
 export const NOMBRE_RED: Record<RedVisual, string> = {
   instagram: "Instagram", tiktok: "TikTok", youtube: "YouTube", facebook: "Facebook",
 };
@@ -84,17 +85,22 @@ export const CUBETAS: { id: CubetaRegion; nombre: string }[] = (
   ["corredor", "mexico", "mundo"] as const
 ).map((id) => ({ id, nombre: NOMBRE_CUBETA[id] }));
 
-/** La union de las tres plataformas. El visor del lector las recorre juntas,
+/** Los documentos de cada red del visor. Un registro y no argumentos
+ *  posicionales desde que llego la cuarta red: con cuatro `DocRedes |
+ *  undefined` seguidos, pasar Facebook en el lugar de YouTube compila. */
+export type DocsRedes = Partial<Record<RedVisual, DocRedes | undefined>>;
+
+/** El orden en que se recorren las redes, el mismo de `ORDEN_RED`. */
+const REDES_VISOR: readonly RedVisual[] = ["instagram", "tiktok", "youtube", "facebook"];
+
+/** La union de las plataformas. El visor del lector las recorre juntas,
  *  asi que una cubeta que solo tiene filas en TikTok tambien se ofrece:
  *  preguntarle a un solo documento escondia Mundo, que hasta el 22 de
  *  septiembre de 2026 solo existia ahi. */
-export function cubetasDisponibles(
-  instagram: DocRedes | undefined,
-  tiktok: DocRedes | undefined,
-  youtube: DocRedes | undefined,
-): CubetaRegion[] {
+export function cubetasDisponibles(docs: DocsRedes): CubetaRegion[] {
   const juntas = new Set<CubetaRegion>();
-  for (const datos of [instagram, tiktok, youtube]) {
+  for (const red of REDES_VISOR) {
+    const datos = docs[red];
     if (datos) for (const c of cubetasConFilas(datos)) juntas.add(c);
   }
   return CUBETAS.map((c) => c.id).filter((c) => juntas.has(c));
@@ -184,7 +190,7 @@ function porTurnos(posts: readonly Destacado[], tope: number,
  * el lector no tiene manera de comprobar. Con omision divergirian en silencio;
  * asi es un error de compilacion.
  *
- * Reparten Instagram y YouTube; TikTok es la EXCEPCION, no la regla. Alli
+ * Reparten Instagram, YouTube y Facebook; TikTok es la EXCEPCION, no la regla. Alli
  * `cuenta` es el id de una busqueda y no una voz: repartirla seria repartir el
  * mecanismo, y su equivalente honesto seria `creador`. En las otras dos
  * `cuenta` es un medio con nombre impreso. Medido en YouTube el 18 de
@@ -289,11 +295,11 @@ export function fuenteDePublicacion(post: Destacado, red: RedVisual, nombres: Ma
   return nombres.get(post.cuenta) ?? post.cuenta;
 }
 
-export function reunirPublicaciones(instagram: DocRedes | undefined, tiktok: DocRedes | undefined, youtube: DocRedes | undefined, zona: string | null, cubeta: CubetaRegion = "corredor"): PublicacionVisual[] {
+export function reunirPublicaciones(docs: DocsRedes, zona: string | null, cubeta: CubetaRegion = "corredor"): PublicacionVisual[] {
   const salida: PublicacionVisual[] = [];
   const vistos = new Set<string>();
-  for (const [red, datos] of [["instagram", instagram], ["tiktok", tiktok],
-                              ["youtube", youtube]] as const) {
+  for (const red of REDES_VISOR) {
+    const datos = docs[red];
     if (!datos) continue;
     const nombres = nombresDeCuentas(datos);
     for (const post of seleccionarPublicaciones(datos, zona, red, cubeta)) {

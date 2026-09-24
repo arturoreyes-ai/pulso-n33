@@ -14,11 +14,11 @@ import { leerJson } from "@/lib/datos/fetcher";
 import { ruta } from "@/lib/dominio/secciones";
 import { NOMBRE_CORTO, NOMBRE_TODA_REGION, ZONAS_RUTA, type ZonaRuta } from "@/lib/dominio/zonas";
 import { CUBETAS, cubetasDisponibles, rotuloRegion, type CubetaRegion, type OrdenLectura } from "@/lib/dominio/publicaciones";
-import { useRedes, useTikTok, useYouTube } from "@/lib/datos/hooks";
+import { useFacebook, useRedes, useTikTok, useYouTube } from "@/lib/datos/hooks";
 import VisorRedes from "./visor-redes";
 
 /**
- * La pagina de redes como lector: una barra, cinco pestanas, una caja.
+ * La pagina de redes como lector: una barra, seis pestanas, una caja.
  *
  * POR QUE EXISTE. Instagram, TikTok, YouTube y X eran facetas de una pagina
  * con encabezado, pastillas y una pareja Lista / Visual (selector-red.tsx,
@@ -64,7 +64,7 @@ import VisorRedes from "./visor-redes";
  */
 
 const PESTANAS = [
-  { id: "todas", nombre: "Todas", datos: [RUTAS.redes, RUTAS.tiktok, RUTAS.youtube, RUTAS.redesComentarios, RUTAS.tiktokComentarios] },
+  { id: "todas", nombre: "Todas", datos: [RUTAS.redes, RUTAS.tiktok, RUTAS.youtube, RUTAS.facebook, RUTAS.redesComentarios, RUTAS.tiktokComentarios, RUTAS.facebookComentarios] },
   { id: "instagram", nombre: "Instagram", datos: [RUTAS.redes, RUTAS.redesComentarios] },
   { id: "tiktok", nombre: "TikTok", datos: [RUTAS.tiktok, RUTAS.tiktokComentarios] },
   // Hasta el 18 de septiembre de 2026 esta pestana era el panel agregado de
@@ -73,6 +73,10 @@ const PESTANAS = [
   // Shorts y los videos de los canales del corredor. Sin par de comentarios:
   // el feed publico no los trae.
   { id: "youtube", nombre: "YouTube", datos: [RUTAS.youtube] },
+  // Las paginas de medios del corredor (config/facebook.json), pedidas por el
+  // cliente el 23 de septiembre de 2026. Visor como Instagram, con su par de
+  // comentarios.
+  { id: "facebook", nombre: "Facebook", datos: [RUTAS.facebook, RUTAS.facebookComentarios] },
   { id: "x", nombre: "X", datos: [RUTAS.tendencias] },
 ] as const;
 
@@ -164,7 +168,10 @@ function LectorRedesMedios({ zona, paneles, menu, analisis = false }: PropsLecto
   const instagram = useRedes();
   const tiktok = useTikTok();
   const youtube = useYouTube();
-  const disponibles = zona === null ? cubetasDisponibles(instagram.data, tiktok.data, youtube.data) : [];
+  const facebook = useFacebook();
+  const disponibles = zona === null
+    ? cubetasDisponibles({ instagram: instagram.data, tiktok: tiktok.data, youtube: youtube.data, facebook: facebook.data })
+    : [];
   const activa = disponibles.includes(cubeta) ? cubeta : (disponibles[0] ?? "corredor");
   // El rotulo de la barra mira las DOS cosas que el dialogo elige. Salia solo
   // de `zona`, asi que elegir Mexico o Mundo dejaba la barra diciendo «Toda la
@@ -203,7 +210,7 @@ function LectorRedesMedios({ zona, paneles, menu, analisis = false }: PropsLecto
         }))} />
       }>
       {/* X sigue siendo una hoja de prosa: son tendencias, no publicaciones
-          que se puedan recorrer una por pantalla. Las otras cuatro caen en el
+          que se puedan recorrer una por pantalla. Las otras cinco caen en el
           visor. */}
       {pestana === "x"
         ? <div className="hoja-lector"><div className="mx-auto w-full max-w-[88rem] px-4 py-8 md:px-8">{paneles[pestana]}</div></div>

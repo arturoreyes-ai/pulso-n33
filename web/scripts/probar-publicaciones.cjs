@@ -77,21 +77,21 @@ seleccionarPublicaciones(dos, 'tijuana', 'instagram');
 assert.equal(JSON.stringify(dos), intacto);
 // Sin `creador`, la fuente NUNCA cae al id de la busqueda: es el mecanismo.
 const anonimo = doc([post('t', {url:'https://www.tiktok.com/@medio/video/9', cuenta:'tk_mexicali_noticias'})]);
-assert.equal(reunirPublicaciones(undefined, anonimo, undefined, null)[0].fuente, 'un creador');
+assert.equal(reunirPublicaciones({ instagram: undefined, tiktok: anonimo, youtube: undefined }, null)[0].fuente, 'un creador');
 assert.ok(compararPublicaciones(post('a', { publicado: undefined }), post('b')) > 0);
 assert.ok(compararPublicaciones(post('a', { fecha:'2026-09-13', likes:999 }), post('b')) > 0);
 assert.ok(compararPublicaciones(post('a', {likes:10}), post('b')) < 0);
 assert.ok(compararPublicaciones(post('a'), post('b')) < 0);
 const ig = doc([post('a'), post('a', {url:'https://instagram.com/reel/a/?utm=test'}), post('b')]);
 const tk = doc([post('t', {url:'https://www.tiktok.com/@medio/video/1', publicado:'2026-09-14T14:00:00Z', creador:'medio'})]);
-assert.equal(reunirPublicaciones(ig, tk, undefined, null).length, 3);
-assert.equal(reunirPublicaciones(ig, tk, undefined, null)[0].red, 'tiktok');
-assert.equal(reunirPublicaciones(ig, undefined, undefined, null).length, 2);
-assert.equal(reunirPublicaciones(undefined, tk, undefined, null).length, 1);
-assert.equal(reunirPublicaciones(undefined, undefined, undefined, null).length, 0);
-assert.equal(reunirPublicaciones(ig, tk, undefined, 'tecate').length, 0);
+assert.equal(reunirPublicaciones({ instagram: ig, tiktok: tk, youtube: undefined }, null).length, 3);
+assert.equal(reunirPublicaciones({ instagram: ig, tiktok: tk, youtube: undefined }, null)[0].red, 'tiktok');
+assert.equal(reunirPublicaciones({ instagram: ig, tiktok: undefined, youtube: undefined }, null).length, 2);
+assert.equal(reunirPublicaciones({ instagram: undefined, tiktok: tk, youtube: undefined }, null).length, 1);
+assert.equal(reunirPublicaciones({ instagram: undefined, tiktok: undefined, youtube: undefined }, null).length, 0);
+assert.equal(reunirPublicaciones({ instagram: ig, tiktok: tk, youtube: undefined }, 'tecate').length, 0);
 const antes = JSON.stringify(ig);
-reunirPublicaciones(ig, tk, undefined, null);
+reunirPublicaciones({ instagram: ig, tiktok: tk, youtube: undefined }, null);
 assert.equal(JSON.stringify(ig), antes);
 
 // --- YouTube: dos formatos, tres formas de URL y el reparto por canal ---
@@ -144,11 +144,11 @@ assert.deepEqual(seleccionarPublicaciones(dosCanales, 'tijuana', 'tiktok').map(p
 
 // Las tres plataformas se reunen, y una ausente no tumba a las otras.
 const ytDoc = docYt([yt('yyyyyyyyyyy', { publicado: '2026-09-14T15:00:00Z' })]);
-assert.equal(reunirPublicaciones(ig, tk, ytDoc, null).length, 4);
-assert.equal(reunirPublicaciones(ig, tk, ytDoc, null)[0].red, 'youtube');
-assert.equal(reunirPublicaciones(undefined, undefined, ytDoc, null).length, 1);
+assert.equal(reunirPublicaciones({ instagram: ig, tiktok: tk, youtube: ytDoc }, null).length, 4);
+assert.equal(reunirPublicaciones({ instagram: ig, tiktok: tk, youtube: ytDoc }, null)[0].red, 'youtube');
+assert.equal(reunirPublicaciones({ instagram: undefined, tiktok: undefined, youtube: ytDoc }, null).length, 1);
 // La fuente de YouTube es el canal, nunca un creador: el publicador ES la cuenta.
-assert.equal(reunirPublicaciones(undefined, undefined, ytDoc, null)[0].fuente, 'Un canal');
+assert.equal(reunirPublicaciones({ instagram: undefined, tiktok: undefined, youtube: ytDoc }, null)[0].fuente, 'Un canal');
 // Y las cubetas lo ven: sin preguntarle, Mexico saldria sin las filas nacionales.
 assert.deepEqual(cubetasConFilas(docYt([yt('n0000000000', { zona: 'nacional' })])), ['mexico']);
 
@@ -190,7 +190,7 @@ assert.equal(Object.keys(NOMBRE_RED).length, 4, 'cuatro redes con nombre');
 // cubetasConFilas lo decia; ahora basta Instagram para ofrecer la pastilla.
 const igMundo = doc([post('bbc', { zona: 'internacional', alcance: 'extranjero', cuenta: 'bbcmundo_ig' }),
                      post('tj', { zona: 'tijuana' })]);
-assert.deepEqual(cubetasDisponibles(igMundo, undefined, undefined), ['corredor', 'mundo']);
+assert.deepEqual(cubetasDisponibles({ instagram: igMundo, tiktok: undefined, youtube: undefined }), ['corredor', 'mundo']);
 assert.deepEqual(seleccionarPublicaciones(igMundo, null, 'instagram', 'mundo').map((p) => p.url),
   [post('bbc').url]);
 // `extranjero` y `nacional` caen los dos en Mundo: la cubeta junta lo verificado
@@ -218,7 +218,7 @@ const fila = (red, id, extra = {}) => {
     post: { url, fecha: '2026-09-14', publicado: '2026-09-14T12:00:00Z', zona: 'tijuana', cuenta: 'medio', likes: 5, ...extra } };
 };
 // Recientes es exactamente el orden de antes.
-const reunidas = reunirPublicaciones(ig, tk, ytDoc, null);
+const reunidas = reunirPublicaciones({ instagram: ig, tiktok: tk, youtube: ytDoc }, null);
 assert.deepEqual(ordenarPublicaciones(reunidas, 'recientes').map((f) => f.clave), reunidas.map((f) => f.clave),
   'recientes = compararPublicaciones, lo que la pantalla leia');
 // En una sola red, populares es su orden de merito: likes en TikTok e Instagram.
@@ -244,6 +244,24 @@ ordenarPublicaciones(todas, 'populares');
 ordenarPublicaciones(todas, 'recientes');
 assert.equal(JSON.stringify(todas), antesOrden);
 // Y reunirPublicaciones no cambio: lo nuevo primero.
-assert.equal(reunirPublicaciones(ig, tk, ytDoc, null)[0].red, 'youtube');
+assert.equal(reunirPublicaciones({ instagram: ig, tiktok: tk, youtube: ytDoc }, null)[0].red, 'youtube');
 
 console.log('Publicaciones: selección, orden (populares y recientes), enlaces, deduplicación, disponibilidad parcial y nombres de cubeta verificados (cuatro plataformas) offline.');
+
+// Facebook en el panel de medios (23 de septiembre de 2026): la cuarta red se
+// reune con las otras, su fuente es la pagina del catalogo, reparte una vuelta
+// por pagina como Instagram, y un permalink de pagina sin usuario se conserva.
+const fbDoc = { destacados: [
+  post('f1', { url: 'https://www.facebook.com/NdTijuana/posts/pfbid0aaa', cuenta: 'ndtijuana_fb', likes: 900 }),
+  post('f2', { url: 'https://www.facebook.com/NdTijuana/posts/pfbid0bbb', cuenta: 'ndtijuana_fb', likes: 800 }),
+  post('f3', { url: 'https://www.facebook.com/permalink.php?story_fbid=pfbid0ccc&id=100086488503408', cuenta: 'blancorojo_fb', likes: 2 }),
+], destacados_maximo: 2, cuentas: [{ cuenta: 'ndtijuana_fb', nombre: 'Noticias de Tijuana' }, { cuenta: 'blancorojo_fb', nombre: 'Blanco y Rojo' }] };
+const conFb = reunirPublicaciones({ facebook: fbDoc }, 'tijuana');
+assert.equal(conFb.length, 2, 'dos de tope');
+assert.deepEqual(conFb.map((p) => p.fuente).sort(), ['Blanco y Rojo', 'Noticias de Tijuana'],
+  'Facebook reparte una vuelta por pagina antes del merito');
+assert.ok(conFb.every((p) => p.red === 'facebook' && p.url !== null));
+assert.equal(reunirPublicaciones({ instagram: ig, tiktok: tk, youtube: ytDoc, facebook: fbDoc }, null).length, 6);
+assert.equal(canonizarPublicacion('https://www.facebook.com/reel/1576537187486560/', 'facebook'), 'https://www.facebook.com/reel/1576537187486560');
+assert.deepEqual(cubetasDisponibles({ facebook: fbDoc }), ['corredor']);
+assert.equal(NOMBRE_RED.facebook, 'Facebook');

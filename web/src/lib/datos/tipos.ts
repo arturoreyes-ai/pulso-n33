@@ -485,11 +485,14 @@ export interface RedesSalud {
   error?: string;
 }
 
-/** Las tres plataformas comparten contrato; ver `PLATAFORMAS_REDES` en el
+/** Las cuatro plataformas comparten contrato; ver `PLATAFORMAS_REDES` en el
  *  validador. `youtube` es el módulo del FEED PÚBLICO (`pulso/youtube.py`),
  *  no el de la API de datos, que escribe `conversacion.json` y tiene otro
- *  fundamento legal: sus datos no se suman en un mismo agregado. */
-export type PlataformaRedes = "instagram" | "tiktok" | "youtube";
+ *  fundamento legal: sus datos no se suman en un mismo agregado. `facebook`
+ *  son las páginas de medios de `config/facebook.json` (23 de septiembre de
+ *  2026): trae `compartidos` y `alcance` siempre, y `likes` es el total de
+ *  reacciones. */
+export type PlataformaRedes = "instagram" | "tiktok" | "youtube" | "facebook";
 
 export interface DocRedes {
   esquema: 1;

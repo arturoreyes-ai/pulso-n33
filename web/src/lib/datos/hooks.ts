@@ -45,6 +45,10 @@ export const useTikTok = () => useSWRImmutable<DocRedes>(RUTAS.tiktok, leerJson)
 export const useYouTube = () => useSWRImmutable<DocRedes>(RUTAS.youtube, leerJson);
 export const useTikTokComentarios = () =>
   useSWRImmutable<DocRedesComentarios>(RUTAS.tiktokComentarios, leerJson);
+/** Paginas de medios en Facebook, con su par de texto como Instagram. */
+export const useFacebook = () => useSWRImmutable<DocRedes>(RUTAS.facebook, leerJson);
+export const useFacebookComentarios = () =>
+  useSWRImmutable<DocRedesComentarios>(RUTAS.facebookComentarios, leerJson);
 /** Tendencias de X por ubicacion: un solo archivo, sin par de texto. */
 export const useTendencias = () => useSWRImmutable<DocTendencias>(RUTAS.tendencias, leerJson);
 /** Que se dice de un termino. Un 404 es un estado normal: el archivo se
