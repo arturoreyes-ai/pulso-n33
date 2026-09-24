@@ -559,7 +559,14 @@ def alcance_redes(texto, firmas=()):
         # vuelve a leer la prosa sin lo que cede ante eso.
         if lejos:
             leida = _sin_debiles(prosa, _DEBILES_EXTRANJERO, _LARGOS_EXTRANJERO)
-        elif fuera_en(sin_homonimos):
+        elif fuera_en(sin_homonimos) or nombra_mexico(prosa):
+            # Mexico mismo es el nivel 3 de arriba y la cola de etiquetas el 5.
+            # Hasta el 24 de septiembre de 2026 solo cedia ante un lugar de
+            # fuera, asi que nombrar Mexico no pesaba: «Donald Trump volvio a
+            # referirse a Mexico… ante la Asamblea General» (N+) y «La
+            # designacion de coordinadores estatales por parte de Morena»
+            # llegaron al muro de Tijuana por una etiqueta del pie, con otros
+            # dos de N+ y Azteca Noticias, el primer dia de sus perfiles.
             leida = sin_homonimos
         else:
             return alc, zonas

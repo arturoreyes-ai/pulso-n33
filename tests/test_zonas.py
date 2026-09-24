@@ -180,6 +180,19 @@ class TestAlcanceRedes(unittest.TestCase):
         self.assertEqual(alcance_redes("Mexico vence a Argentina en el Mundial"), ("nacional", []))
         self.assertEqual(alcance_redes("Detienen a mexicanos en Texas"), ("nacional", []))
 
+    def test_nombrar_mexico_le_gana_a_la_cola_de_etiquetas(self):
+        # 24 de septiembre de 2026, primer dia de los perfiles de N+ y Azteca
+        # Noticias: cuatro notas nacionales llegaron al muro de Tijuana por un
+        # #tijuana al final del pie. Mexico es el nivel 3 y la etiqueta el 5.
+        self.assertEqual(alcance_redes(
+            "Donald Trump volvio a referirse a Mexico ante la ONU\n#nmas #noticias #tijuana"),
+            ("nacional", []))
+        # Lo que nombra el corredor en la prosa sigue siendo del corredor, y
+        # la etiqueta sigue contando cuando la prosa no nombra nada.
+        self.assertEqual(alcance_redes("Deportados llegan a Tijuana; Sheinbaum promete apoyo"),
+                         ("zona", ["Tijuana"]))
+        self.assertEqual(alcance_redes("Balacera deja un herido\n#tijuana"), ("zona", ["Tijuana"]))
+
     def test_precedencia(self):
         casos = [
             # 1. El corredor, nombrado de verdad, gana.
