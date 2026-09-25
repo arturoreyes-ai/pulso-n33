@@ -8,8 +8,8 @@ como temas principales de un tablero de Baja California.
 import unittest
 
 from pulso import DELEGACIONES_TIJUANA
-from pulso.zonas import DELEGACIONES, alcance, delegaciones_en, es_estatal, fuera_en, zonas_en, FUERA
-from pulso.zonas import (AMBIGUOS, AMBIGUOS_EXTRANJERO, CALLES_HOMONIMAS, EXTRANJERO, LUGARES,
+from pulso.zonas import DELEGACION_HOMONIMA, DELEGACIONES, alcance, delegaciones_en, es_estatal, fuera_en, zonas_en, FUERA
+from pulso.zonas import (AMBIGUOS, AMBIGUOS_EXTRANJERO, AMBIGUOS_LUGAR, EXTRANJERO, LUGARES,
                          alcance_redes, extranjero_en, nombra_mexico, prosa_de)
 
 
@@ -119,12 +119,14 @@ class TestAlcanceRedes(unittest.TestCase):
     N+, caia en la cubeta Mexico, indistinguible de una nota nacional.
     """
 
-    def test_la_prensa_no_cambia(self):
+    def test_la_prensa_no_ve_el_extranjero(self):
         # `alcance` zonifica notas.json y no ve el extranjero: si esto se
-        # mueve, cambia la prensa, que no es lo que se decidio.
+        # mueve, cambia la prensa, que no es lo que se decidio. «Sobre la mesa
+        # ... de Sonora» salia Tijuana hasta el 24 de septiembre de 2026, cuando
+        # lo debil empezo a ceder tambien en la prensa ante un lugar de fuera.
         for titulo, esperado in [
             ("Rusia ataca Ucrania", ("nacional", [])),
-            ("Congreso pone sobre la mesa avances y pendientes de Sonora", ("zona", ["Tijuana"])),
+            ("Congreso pone sobre la mesa avances y pendientes de Sonora", ("fuera", [])),
             ("Rusia advierte que las sanciones complican la paz", ("fuera", [])),
         ]:
             with self.subTest(titulo=titulo):
@@ -192,6 +194,30 @@ class TestAlcanceRedes(unittest.TestCase):
         self.assertEqual(alcance_redes("Deportados llegan a Tijuana; Sheinbaum promete apoyo"),
                          ("zona", ["Tijuana"]))
         self.assertEqual(alcance_redes("Balacera deja un herido\n#tijuana"), ("zona", ["Tijuana"]))
+
+    def test_avenida_revolucion_cede_ante_un_lugar_de_fuera(self):
+        # 24 de septiembre de 2026, Uno TV por la busqueda de Ensenada: la
+        # capital, por la avenida del mismo nombre, llego al muro de Tijuana.
+        pie = ("Agreden a automovilistas en Mixcoac, cerca de Av. Revolución; la "
+               "agresión ocurrió frente a la policía capitalina.\n"
+               "La SSC abrió una carpeta de investigación.\n#PortalUnoTV")
+        self.assertEqual(alcance_redes(pie), ("fuera", []))
+        # Pero NO cede ante el mero nombre de Mexico: las once apariciones del
+        # archivo son de Tijuana y casi todas nombran a Sheinbaum.
+        self.assertEqual(alcance_redes(
+            "Mantienen cierre en Avenida Revolución por visita de Claudia Sheinbaum"),
+            ("zona", ["Tijuana"]))
+        self.assertEqual(alcance_redes("Protección civil en Avenida Revolución"),
+                         ("zona", ["Tijuana"]))
+
+    def test_alcaldias_de_la_capital_son_fuera(self):
+        self.assertEqual(alcance("Lluvias dejan bajo el agua a 12 colonias de Iztapalapa", None),
+                         ("fuera", []))
+        for alcaldia in ("iztapalapa", "tlahuac", "coyoacan", "tlalpan", "xochimilco"):
+            with self.subTest(alcaldia=alcaldia):
+                self.assertIn(alcaldia, FUERA)
+        # «Insurgentes» no: sus siete apariciones son el bulevar de Tijuana.
+        self.assertNotIn("insurgentes", FUERA)
 
     def test_precedencia(self):
         casos = [
@@ -278,25 +304,26 @@ class TestAlcanceRedes(unittest.TestCase):
         self.assertEqual(alcance_redes("Balacera en Av. Revolución"), ("zona", ["Tijuana"]))
         self.assertEqual(alcance_redes("Turistas llenan la Avenida Revolución #tijuana"),
                          ("zona", ["Tijuana"]))
-        # Y no cede ante Mexico nombrado ni ante el extranjero. El primero es
-        # un titulo real en cache que la primera version mando a la cubeta
-        # Mexico; la visita fue a la avenida de Tijuana.
+        # Y no cede ante Mexico nombrado: es un titulo real en cache que una
+        # version que cedia mando a la cubeta Mexico; la visita fue a la
+        # avenida de Tijuana. Ante un lugar del extranjero SI cede
+        # (AMBIGUOS_LUGAR): la avenida existe tambien en otras capitales.
         self.assertEqual(alcance_redes("Avenida Revolución se prepara para recibir a "
                                        "Claudia Sheinbaum 🇲🇽"), ("zona", ["Tijuana"]))
         self.assertEqual(alcance_redes("Migrantes de Honduras llegan a la Avenida Revolución"),
-                         ("zona", ["Tijuana"]))
+                         ("extranjero", []))
 
-    def test_la_prensa_no_ve_la_calle_homonima(self):
-        # CALLES_HOMONIMAS es solo de redes: en `alcance` la avenida sigue
-        # siendo Tijuana aunque la nota nombre la capital, como antes. Los dos
-        # primeros son titulares de notas.json.
+    def test_la_avenida_en_la_prensa(self):
+        # En `alcance` la avenida cede ante un lugar de fuera igual que en redes
+        # (AMBIGUOS_LUGAR, desde el 24 de septiembre de 2026), y sigue siendo
+        # Tijuana con Sheinbaum. Los dos primeros son titulares de notas.json.
         for titulo, esperado in [
             ("Convoca Sheinbaum a ciudadanos, funcionarios y personajes públicos que "
              "abarrotan la avenida Revolución en Tijuana", ("zona", ["Tijuana"])),
             ("Cierres por informe de Sheinbaum afectan ventas de comerciantes en la "
              "Avenida Revolución", ("zona", ["Tijuana"])),
             ("Asaltan a automovilistas en la Avenida Revolución, en la Ciudad de México",
-             ("zona", ["Tijuana"])),
+             ("fuera", [])),
         ]:
             with self.subTest(titulo=titulo):
                 self.assertEqual(alcance(titulo, None), esperado)
@@ -313,13 +340,71 @@ class TestAlcanceRedes(unittest.TestCase):
                 self.assertIn(termino, del_gacetero)
         # Las calles viven en las delegaciones de Tijuana.
         de_delegaciones = {t for ts in DELEGACIONES.values() for t in ts}
-        for termino in CALLES_HOMONIMAS:
+        for termino in AMBIGUOS_LUGAR:
             with self.subTest(termino=termino):
                 self.assertIn(termino, de_delegaciones)
         # Y ningun lugar del extranjero es a la vez del gacetero.
         for termino in EXTRANJERO:
             with self.subTest(termino=termino):
                 self.assertNotIn(termino, del_gacetero)
+
+
+class TestHomonimosDeLaPrensa(unittest.TestCase):
+    """Dos titulares de notas.json del 24 de septiembre de 2026 que `alcance`
+    ponia en el corredor por un nombre que otro lugar tambien tiene."""
+
+    def test_vicente_guerrero_cede_ante_la_capital(self):
+        titulo = ("Lluvias dejan bajo el agua a 12 colonias de Iztapalapa; "
+                  "Vicente Guerrero, la zona más afectada")
+        self.assertEqual(alcance(titulo, None), ("fuera", []))
+        # Ni el medio local lo rescata: nombrar fuera gana sobre `zona_medio`.
+        self.assertEqual(alcance(titulo, "Tijuana"), ("fuera", []))
+        self.assertEqual(alcance_redes(titulo), ("fuera", []))
+        # Sin un lugar de fuera, sigue contando. El «guerrero» del estado esta
+        # dentro de «vicente guerrero» y no es un lugar de fuera por si solo.
+        self.assertEqual(alcance("Incendio en la colonia Vicente Guerrero", None),
+                         ("zona", ["San Quintín"]))
+        # Y cede ante el estado nombrado aparte.
+        self.assertEqual(alcance("Guerrero estuvo presente en el Grito con Vicente Guerrero",
+                                 None), ("fuera", []))
+
+    def test_lo_debil_cede_pero_no_lo_nombrado(self):
+        # Sin lo debil tiene que quedar algo de fuera: el unico «fuera» de este
+        # es «la paz», que es a la vez lo debil, y sigue `fuera` como siempre.
+        self.assertEqual(alcance("Rusia advierte que las sanciones complican la paz", None),
+                         ("fuera", []))
+        # Un lugar del corredor nombrado de verdad gana, como antes.
+        self.assertEqual(alcance("Cruce Tijuana-San Diego supera a Sonora en aforo", None),
+                         ("zona", ["Tijuana", "San Diego"]))
+        self.assertEqual(alcance("Agreden en Mixcoac, cerca de Av. Revolución", None),
+                         ("fuera", []))
+
+    def test_calle_homonima_no_hace_tijuana_si_nombra_otro_municipio(self):
+        for titulo, esperado in [
+            ("Cierran la Av. Revolución en Tecate por obras: tramos y horarios",
+             ("zona", ["Tecate"])),
+            ("Asesinan a hombre frente a pescadería en zona Centro de Ensenada",
+             ("zona", ["Ensenada"])),
+            ("Pausa CBP cruce en Garita Zona Centro de Mexicali", ("zona", ["Mexicali"])),
+            # Sin otro municipio la calle sigue siendo Tijuana...
+            ("Mantienen cierre en Avenida Revolución por visita de Claudia Sheinbaum",
+             ("zona", ["Tijuana"])),
+            # ...y San Diego no es otro municipio con avenida Revolucion.
+            ("Turistas de San Diego vuelven a la Avenida Revolución",
+             ("zona", ["Tijuana", "San Diego"])),
+            # Una delegacion que no es homonima sigue sumando Tijuana: el
+            # campus de la UABC en Valle de las Palmas es de La Presa Este.
+            ("Atenderá UABC falta de refrigeración en aulas de Valle de las Palmas",
+             ("zona", ["Tijuana", "Tecate"])),
+        ]:
+            with self.subTest(titulo=titulo):
+                self.assertEqual(alcance(titulo, "estatal"), esperado)
+
+    def test_los_homonimos_son_terminos_de_delegacion(self):
+        del_catalogo = {t for ts in DELEGACIONES.values() for t in ts}
+        for termino in DELEGACION_HOMONIMA:
+            with self.subTest(termino=termino):
+                self.assertIn(termino, del_catalogo)
 
 
 class TestDelegaciones(unittest.TestCase):
