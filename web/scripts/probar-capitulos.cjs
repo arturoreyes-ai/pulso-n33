@@ -43,8 +43,9 @@ const {
 // comunicados del Ayuntamiento, que llegaron al recorrido el 15 de septiembre
 // de 2026 al quitarse la pagina del muro donde vivian.
 const largoDe = (entrada) => (entrada === 'Tecate' ? 9 : 8);
-const { RUBROS } = cargar('lib/busqueda/rubros');
+const { RUBROS, RUBROS_CADENA, RUBROS_PROGRAMA } = cargar('lib/busqueda/rubros');
 const { rubroDe, rutaDeEntrada } = cargar('lib/busqueda/entrada');
+const { nombraRubro } = cargar('lib/busqueda/tema-publicacion');
 const { ZONAS_RUTA } = cargar('lib/dominio/zonas');
 const { TOPE_ACTUALIDAD } = cargar('lib/busqueda/tipos');
 const { indiceDeImagenes, imagenPara } = cargar('lib/busqueda/imagenes');
@@ -67,8 +68,8 @@ function comprobar() {
   // --- capitulosDe -------------------------------------------------------
   const region = capitulosDe('region');
   assert.equal(region.length, 8);
-  assert.equal(CAPITULOS_MAXIMO, 9, 'el techo de ranuras de datos, no el total');
-  assert.deepEqual(region.map((c) => c.id), ['local', ...RUBROS, 'mexico', 'internacional']);
+  assert.equal(CAPITULOS_MAXIMO, 10, 'el techo de ranuras de datos, no el total');
+  assert.deepEqual(region.map((c) => c.id), ['local', ...RUBROS_CADENA, 'mexico', 'internacional']);
   assert.deepEqual(region[0].pedido, { ambito: 'region', rubro: null });
   assert.deepEqual(region[2].pedido, { ambito: 'region', rubro: 'seguridad' });
   assert.deepEqual(region[6].pedido, { ambito: 'mexico', rubro: null });
@@ -93,7 +94,7 @@ function comprobar() {
   // Mexico e Internacional como ENTRADA: la edicion, sus rubros sin terminos
   // de lugar, la otra edicion y el corredor al final.
   const mexico = capitulosDe('mexico');
-  assert.deepEqual(mexico.map((c) => c.id), ['mexico', ...RUBROS, 'internacional', 'local']);
+  assert.deepEqual(mexico.map((c) => c.id), ['mexico', ...RUBROS_CADENA, 'internacional', 'local']);
   assert.deepEqual(mexico[0].pedido, { ambito: 'mexico', rubro: null });
   assert.deepEqual(mexico[2].pedido, { ambito: 'mexico', rubro: 'seguridad' });
   assert.deepEqual(mexico[6].pedido, { ambito: 'internacional', rubro: null });
@@ -102,7 +103,7 @@ function comprobar() {
   assert.equal(mexico[2].titulo, 'Seguridad en México');
   assert.equal(mexico[7].rotulo, 'Toda la región · ahora');
   const mundo = capitulosDe('internacional');
-  assert.deepEqual(mundo.map((c) => c.id), ['internacional', ...RUBROS, 'mexico', 'local']);
+  assert.deepEqual(mundo.map((c) => c.id), ['internacional', ...RUBROS_CADENA, 'mexico', 'local']);
   assert.deepEqual(mundo[1].pedido, { ambito: 'internacional', rubro: 'clima' });
   assert.equal(mundo[1].titulo, 'Clima en el mundo');
   assert.deepEqual(mundo[7].pedido, { ambito: 'region', rubro: null });
@@ -148,7 +149,7 @@ function comprobar() {
 
   for (const e of ['region', ...ZONAS_RUTA, 'mexico', 'internacional']) {
     const sinTema = capitulosDe(e);
-    for (const r of RUBROS) {
+    for (const r of RUBROS_CADENA) {
       const cs = capitulosDe(e, r);
       assert.equal(cs.length, largoDe(e), `${e}/${r}: la cadena no cambia de largo`);
       assert.ok(cs.length <= CAPITULOS_MAXIMO, `${e}/${r}: cabe en las ranuras de datos`);
@@ -168,11 +169,56 @@ function comprobar() {
     }
   }
 
+  // --- Rubros de la programacion: van delante, la cadena sigue entera ------
+  // El 24 de septiembre de 2026 el cliente pidio los temas de sus programas
+  // en la fila. No son de la cadena: elegido uno, va primero y la cadena sin
+  // tema sigue detras, igual, y mide uno mas.
+  assert.deepEqual([...RUBROS].sort(), [...RUBROS_CADENA, ...RUBROS_PROGRAMA].sort(), 'la fila son los ocho');
+  for (const e of ['region', ...ZONAS_RUTA, 'mexico', 'internacional']) {
+    const sinTema = capitulosDe(e);
+    for (const r of RUBROS_PROGRAMA) {
+      const cs = capitulosDe(e, r);
+      assert.equal(cs.length, largoDe(e) + 1, `${e}/${r}: uno mas`);
+      assert.ok(cs.length <= CAPITULOS_MAXIMO, `${e}/${r}: cabe en las ranuras de datos`);
+      assert.equal(cs[0].id, r, `${e}/${r}: empieza por el tema`);
+      assert.deepEqual(cs.slice(1), [...sinTema], `${e}/${r}: detras, la cadena de siempre`);
+      assert.equal(new Set(cs.map((c) => c.id)).size, cs.length, `${e}/${r}: ids sin repetir`);
+      for (const texto of [cs[0].nombre, cs[0].rotulo, cs[0].titulo]) assert.doesNotMatch(texto, MECANISMO, `${e}/${r}: «${texto}»`);
+    }
+  }
+  const iaTj = capitulosDe('Tijuana', 'ia');
+  assert.equal(iaTj[0].titulo, 'Inteligencia artificial sobre Tijuana');
+  assert.equal(iaTj[0].rotulo, 'IA · última semana');
+  assert.deepEqual(iaTj[0].pedido, { zona: 'Tijuana', rubro: 'ia' });
+  assert.equal(capitulosDe('Tecate', 'turismo').length, 10, 'Tecate con tema de programa llena el techo');
+  assert.equal(debeActivar(hilar(capitulosDe('Tecate', 'turismo'), Array(9).fill(listo(lote('X', 1)))), 99, 9, 10), true, 'se pide el decimo');
+
   // Tecate conserva sus nueve con tema puesto, y el boletin sigue detras de
   // los rubros: no es lo que esta pasando, no se adelanta a un titular.
   const tecateClima = capitulosDe('Tecate', 'clima');
   assert.deepEqual(tecateClima.map((c) => c.id),
     ['clima', 'local', 'seguridad', 'deportes', 'politica', 'economia', 'comunicados', 'mexico', 'internacional']);
+
+  // --- El tema en Redes: los terminos del rubro sobre el titulo ------------
+  // 24 de septiembre de 2026. Palabra entera, siglas con mayusculas, frases
+  // tambien como etiqueta pegada, y sin acentos a los dos lados.
+  assert.ok(nombraRubro('Lanzan herramienta de IA para maquilas', 'ia'));
+  assert.ok(nombraRubro('Así cambia el trabajo #InteligenciaArtificial', 'ia'));
+  assert.ok(nombraRubro('San Diego startup bets on AI', 'ia'));
+  assert.ok(!nombraRubro('La guía de la feria', 'ia'), 'ia dentro de una palabra no');
+  assert.ok(!nombraRubro('ela ia para casa', 'ia'), 'ia en minusculas es otra palabra');
+  assert.ok(!nombraRubro('Sube el precio del pan', 'politica'), 'pan no es el PAN');
+  assert.ok(nombraRubro('El PAN presenta iniciativa', 'politica'));
+  assert.ok(nombraRubro('Lo que dijo la presidenta en la mañanera', 'politica'), 'la mañanera va en Política');
+  assert.ok(nombraRubro('MAÑANERA DE HOY', 'politica'), 'mayusculas y acentos del medio');
+  assert.ok(nombraRubro('Nuevo restaurante en el Valle de Guadalupe', 'turismo'));
+  assert.ok(!nombraRubro('Un factor clave', 'espectaculos'), 'actor dentro de factor no');
+  assert.ok(nombraRubro('Concierto gratis en la playa', 'espectaculos'));
+  assert.ok(nombraRubro('🌧️ Huracanes Polo y Odalys no representan riesgo', 'clima'), 'plural');
+  assert.ok(nombraRubro('#Comonfort | 🚔 Emboscan a elementos de las FSPE.', 'seguridad'));
+  assert.ok(nombraRubro('La #Presidenta recibió en Palacio Nacional al presidente de Corea', 'politica'));
+  assert.ok(!nombraRubro('Festival en Playas de Rosarito', 'turismo'), 'el nombre de una zona no es turismo');
+  for (const r of RUBROS) assert.equal(typeof nombraRubro('', r), 'boolean', r);
 
   // --- La faceta: leerla de la URL y volver a escribirla -------------------
   // Un tema inventado cae en «Todo», por la misma razon que una entrada
@@ -198,7 +244,7 @@ function comprobar() {
   // siendo de Tecate, pero son boletines publicados y no lo que esta pasando,
   // asi que no se adelantan a ningun titular reciente.
   const tecate = capitulosDe('Tecate');
-  assert.deepEqual(tecate.map((c) => c.id), ['local', ...RUBROS, 'comunicados', 'mexico', 'internacional']);
+  assert.deepEqual(tecate.map((c) => c.id), ['local', ...RUBROS_CADENA, 'comunicados', 'mexico', 'internacional']);
   const comunicados = tecate[6];
   assert.equal(comunicados.fuente, 'comunicados');
   assert.equal(comunicados.pedido, null, 'no se pide a la lectura en vivo');

@@ -73,7 +73,7 @@ import {
 } from "./google-noticias";
 import { CACHE_CDN, SIN_CACHE, json } from "./respuesta";
 import { titularVencido } from "./fecha-titular";
-import { consultaDeTerminos, esRubro, nombraRubro, VENTANA_RUBRO, type Rubro } from "./rubros";
+import { consultaDeTerminos, esRubro, nombraRubro, VENTANA_DE, type Rubro } from "./rubros";
 import {
   TOPE_ACTUALIDAD,
   type ErrorActualidad,
@@ -173,7 +173,7 @@ export function consultaDeRubro(
   ambito: Ambito,
   zona: ZonaRuta | null,
 ): string {
-  return componerConsulta(`${consultaDeTerminos(rubro, idioma)} ${VENTANA_RUBRO}`, ambito, zona);
+  return componerConsulta(`${consultaDeTerminos(rubro, idioma)} ${VENTANA_DE[rubro].consulta}`, ambito, zona);
 }
 
 /**

@@ -709,6 +709,14 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
   scrollbar-width: none;
 }
 @media (min-width: 48rem) { .pestanas-lector { padding: 0 1.5rem; } }
+/* Los bordes se desvanecen donde la fila sigue fuera de vista. La barra de
+   desplazamiento esta oculta, y con los ocho temas de la portada (24 de
+   septiembre de 2026) un telefono ve cinco: sin esto nada decia que habia mas.
+   `data-mas` lo pone ui/pestanas.tsx solo cuando de verdad desborda, asi que
+   una fila que cabe no pierde tinta en sus orillas. */
+.pestanas-lector[data-mas="fin"] { mask-image: linear-gradient(to right, #000 calc(100% - 3rem), transparent); }
+.pestanas-lector[data-mas="inicio"] { mask-image: linear-gradient(to left, #000 calc(100% - 3rem), transparent); }
+.pestanas-lector[data-mas="ambos"] { mask-image: linear-gradient(to right, transparent, #000 3rem, #000 calc(100% - 3rem), transparent); }
 .pestana-lector {
   position: relative;
   flex: none;

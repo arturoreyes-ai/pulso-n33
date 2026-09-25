@@ -6,8 +6,8 @@ import { rutaDeEntrada } from "@/lib/busqueda/entrada";
 import { NOMBRE_RUBRO, RUBROS, type Rubro } from "@/lib/busqueda/rubros";
 
 /**
- * La fila de temas del recorrido: Todo, Clima, Seguridad, Deportes, Politica y
- * Economia.
+ * La fila de temas del recorrido: Todo y los ocho rubros, en el orden de la
+ * programacion del canal (rubros.ts::RUBROS).
  *
  * Existe porque los cinco rubros llevaban desde el 15 de septiembre de 2026
  * encerrados en mitad de la cadena —capitulos 2 a 6, detras de los quince

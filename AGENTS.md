@@ -1717,7 +1717,18 @@ Tailwind v4, pnpm.
   exhaustive over `Rubro | null` on purpose, so adding a rubro breaks at compile
   time the way `ACENTO_RUBRO` already does. The place's section is never
   dropped, only moved: choosing a theme narrows where you start, not what there
-  is. Like `?e=`, it is read on the **server** and choosing is navigating — but
+  is. **Since 24 September 2026 there are two kinds of rubro** (`rubros.ts`):
+  the five of the chain (`RUBROS_CADENA`) and three from the client's programme
+  lineup plus AI news (`RUBROS_PROGRAMA`: Espectáculos, Turismo, IA). Left out
+  on purpose, the client's call the same day: El Reflector (a format, not a
+  theme), Garitas (that is `/garitas`), California (that is the San Diego
+  zone) and the mañanera, whose terms live inside Política.
+  A programme rubro is entry-only: chosen, it goes **in front of** the
+  unchanged chain, the one case where the chain grows, by one. Hence
+  `CAPITULOS_MAXIMO` 10 and ten `useActualidad` slots. Never swap one in for a
+  chain rubro: dropping Deportes would say there is none. IA searches a week
+  (`VENTANA_DE`), because two days of AI news about one place came back empty.
+  Like `?e=`, it is read on the **server** and choosing is navigating — but
   unlike `?e=` a zone route reads it too, because a theme narrows a place
   instead of competing with it. `?q=` still wins over it: search is a mode.
   Existing chains are unchanged because the parameter defaults to null; Google's order is kept inside a chapter and a folded title

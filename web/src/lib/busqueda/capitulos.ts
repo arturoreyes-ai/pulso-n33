@@ -48,13 +48,18 @@
  * razon que fusionar.ts: el redirector es distinto para la misma nota en cada
  * consulta.
  *
- * Son OCHO capitulos siempre, escritos como tupla. Es lo que le permite a
- * use-capitulos.ts llamar a useActualidad ocho veces sin condicion, con
- * `null` en los que todavia no toca pedir.
+ * Son OCHO capitulos, escritos como tupla. Es lo que le permite a
+ * use-capitulos.ts llamar a useActualidad un numero fijo de veces sin
+ * condicion, con `null` en los que todavia no toca pedir.
+ *
+ * Desde el 24 de septiembre de 2026 hay rubros que NO son de la cadena, los
+ * de la programacion del canal (rubros.ts::RUBROS_PROGRAMA). Elegir uno lo
+ * pone PRIMERO y deja detras la cadena de siempre, entera y en su orden: es
+ * la unica manera en que la cadena crece, y crece en uno.
  */
 
 import { textoCaidos } from "./avisos";
-import { NOMBRE_RUBRO, RUBROS, type Rubro } from "./rubros";
+import { esRubroCadena, NOMBRE_RUBRO, RUBROS_CADENA, TITULO_RUBRO, VENTANA_DE, type Rubro, type RubroCadena } from "./rubros";
 import type { Idioma, ResultadoExterno } from "./tipos";
 import type { PedidoActualidad } from "./use-actualidad";
 import { plegar } from "@/lib/dominio/formato";
@@ -92,13 +97,15 @@ export interface Capitulo {
 
 /**
  * OCHO capitulos, o NUEVE en Tecate, que suma los comunicados del
- * Ayuntamiento. Union de tuplas y no `Capitulo[]`: con
+ * Ayuntamiento; uno mas en cada caso cuando se eligio un rubro de la
+ * programacion. Union de tuplas y no `Capitulo[]`: con
  * `noUncheckedIndexedAccess` un arreglo suelto convierte cada `capitulos[n]`
  * de use-capitulos.ts en "posiblemente undefined".
  */
 export type Capitulos =
   | readonly [Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo]
-  | readonly [Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo];
+  | readonly [Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo]
+  | readonly [Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitulo];
 
 /**
  * El techo, no el total. Es lo que fija cuantas ranuras de datos se abren en
@@ -107,7 +114,7 @@ export type Capitulos =
  * pasarle a `debeActivar`: leer una constante ahi fue lo que dejaba el noveno
  * capitulo sin pedirse nunca, sin error y con la tarjeta de carga girando.
  */
-export const CAPITULOS_MAXIMO = 9;
+export const CAPITULOS_MAXIMO = 10;
 
 /** Solo chart-1 tiene variante `-texto`; las demas pasan AA a 12px sobre
  *  #050505. Mexico e Internacional van en tinta: son ediciones, no temas. */
@@ -117,6 +124,11 @@ const ACENTO_RUBRO: Record<Rubro, string> = {
   deportes: "text-chart-2",
   politica: "text-chart-5",
   economia: "text-chart-6",
+  // Siete colores para ocho rubros: se repiten, pero nunca entre vecinos de
+  // la fila de temas, y el nombre va siempre al lado.
+  espectaculos: "text-chart-6",
+  turismo: "text-chart-2",
+  ia: "text-chart-3",
 };
 
 interface Seccion {
@@ -203,7 +215,7 @@ type Cabeza = readonly [Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitu
  * donde se empieza, no lo que hay: pasado el rubro el recorrido sigue con el
  * lugar y con los otros cuatro, como siempre.
  */
-function cabezaDe(elegido: Rubro | null, t: Cabeza): Cabeza {
+function cabezaDe(elegido: RubroCadena | null, t: Cabeza): Cabeza {
   switch (elegido) {
     case null: return [t[0], t[1], t[2], t[3], t[4], t[5]];
     case "clima": return [t[1], t[0], t[2], t[3], t[4], t[5]];
@@ -220,7 +232,12 @@ function cabezaDe(elegido: Rubro | null, t: Cabeza): Cabeza {
  * Sin rubro devuelve exactamente la cadena de siempre; el parametro por omision
  * es lo que deja intactas las cadenas ya fijadas en probar-capitulos.cjs. Con
  * rubro se REORDENA la cabeza, nunca se agrega ni se quita: la cadena sigue
- * midiendo ocho (nueve en Tecate) y `CAPITULOS_MAXIMO` no se mueve.
+ * midiendo ocho (nueve en Tecate).
+ *
+ * Un rubro de la programacion es lo unico que alarga: va delante de la cadena
+ * sin tema, que sigue entera detras. No sustituye a nadie porque ninguno de
+ * los de la cadena es menos que el: quitar Deportes para meter Turismo diria
+ * que en ese recorrido no hay deportes.
  */
 export function capitulosDe(entrada: Entrada, elegido: Rubro | null = null): Capitulos {
   const principal = seccionDe(entrada);
@@ -229,13 +246,13 @@ export function capitulosDe(entrada: Entrada, elegido: Rubro | null = null): Cap
     fuente: "actualidad",
     pedido: { ...principal.donde, rubro: r },
     nombre: NOMBRE_RUBRO[r],
-    rotulo: `${NOMBRE_RUBRO[r]} · últimos dos días`,
-    titulo: `${NOMBRE_RUBRO[r]} ${principal.en}`,
+    rotulo: `${NOMBRE_RUBRO[r]} · ${VENTANA_DE[r].rotulo}`,
+    titulo: `${TITULO_RUBRO[r]} ${principal.en}`,
     acento: ACENTO_RUBRO[r],
   });
-  const [clima, seguridad, deportes, politica, economia] = RUBROS;
+  const [clima, seguridad, deportes, politica, economia] = RUBROS_CADENA;
   const [segunda, tercera] = colaDe(entrada);
-  const cabeza = cabezaDe(elegido, [
+  const cabeza = cabezaDe(elegido !== null && esRubroCadena(elegido) ? elegido : null, [
     capituloDeSeccion(principal),
     rubro(clima),
     rubro(seguridad),
@@ -246,9 +263,14 @@ export function capitulosDe(entrada: Entrada, elegido: Rubro | null = null): Cap
   // Los comunicados van DESPUES de los rubros y antes de las otras ediciones:
   // siguen siendo de Tecate, pero son boletines publicados y no lo que esta
   // pasando, asi que no se adelantan a ningun titular reciente.
+  const cola = [capituloDeSeccion(segunda), capituloDeSeccion(tercera)] as const;
+  if (elegido === null || esRubroCadena(elegido)) {
+    return entrada === "Tecate" ? [...cabeza, CAPITULO_COMUNICADOS, ...cola] : [...cabeza, ...cola];
+  }
+  const delante = rubro(elegido);
   return entrada === "Tecate"
-    ? [...cabeza, CAPITULO_COMUNICADOS, capituloDeSeccion(segunda), capituloDeSeccion(tercera)]
-    : [...cabeza, capituloDeSeccion(segunda), capituloDeSeccion(tercera)];
+    ? [delante, ...cabeza, CAPITULO_COMUNICADOS, ...cola]
+    : [delante, ...cabeza, ...cola];
 }
 
 /**

@@ -1,8 +1,8 @@
 /**
  * Una seccion de Google Noticias en vivo: una edicion (a=mexico,
  * a=internacional), el corredor (a=region) o la seccion local de una zona
- * (z=<slug>), y encima un rubro opcional (t=clima|seguridad|deportes|
- * politica|economia) que la convierte en busqueda. Delgada a proposito: la
+ * (z=<slug>), y encima un rubro opcional (t=, uno de rubros.ts::RUBROS) que
+ * la convierte en busqueda. Delgada a proposito: la
  * logica vive en lib/busqueda/actualidad.ts, que scripts/probar-busqueda.cjs
  * prueba sin red.
  *

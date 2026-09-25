@@ -17,13 +17,13 @@ import { plegar } from "@/lib/dominio/formato";
 /**
  * Los capitulos del recorrido, en vivo, hilados en tarjetas.
  *
- * Llama a useActualidad NUEVE veces, siempre, con `null` en las ranuras que no
+ * Llama a useActualidad DIEZ veces, siempre, con `null` en las ranuras que no
  * toca pedir o que no son de la lectura en vivo (useActualidad con null no pide
- * nada). Nueve y no ocho porque la cadena de Tecate suma los comunicados del
- * Ayuntamiento; el numero es una constante, `CAPITULOS_MAXIMO`, y eso es lo que
+ * nada). Diez y no ocho porque la cadena de Tecate suma los comunicados del
+ * Ayuntamiento y un rubro de la programacion suma uno delante; el numero es una constante, `CAPITULOS_MAXIMO`, y eso es lo que
  * hace legal el patron: la regla de los hooks es que la cuenta no cambie entre
  * renders, no que no haya varios. Por lo mismo `estados` se arma SIEMPRE con
- * nueve entradas —rellenando con inactivo— aunque la cadena tenga ocho: el
+ * diez entradas —rellenando con inactivo— aunque la cadena tenga ocho: el
  * useMemo de abajo lleva dependencias con spread y React exige que el arreglo
  * no cambie de tamano entre renders.
  *
@@ -169,7 +169,7 @@ export function useCapitulos(entrada: Entrada, elegido: Rubro | null, activados:
   );
 
   /** El pedido de la ranura i, o null si no toca, no existe o no es de la
-   *  lectura en vivo. Se escribe una vez y se usa nueve. */
+   *  lectura en vivo. Se escribe una vez y se usa diez. */
   const pedido = (i: number) => {
     const c = capitulos[i];
     if (c === undefined || activados <= i || c.fuente !== "actualidad") return null;
@@ -186,6 +186,7 @@ export function useCapitulos(entrada: Entrada, elegido: Rubro | null, activados:
     useActualidad(pedido(6)),
     useActualidad(pedido(7)),
     useActualidad(pedido(8)),
+    useActualidad(pedido(9)),
   ] as const;
 
   // El indice del capitulo de comunicados en ESTA cadena, o -1. Solo Tecate.
@@ -203,9 +204,10 @@ export function useCapitulos(entrada: Entrada, elegido: Rubro | null, activados:
   const estado6 = estados[6]!;
   const estado7 = estados[7]!;
   const estado8 = estados[8]!;
+  const estado9 = estados[9]!;
   const hilado = useMemo(
-    () => hilar(capitulos, [estado0, estado1, estado2, estado3, estado4, estado5, estado6, estado7, estado8]),
-    [capitulos, estado0, estado1, estado2, estado3, estado4, estado5, estado6, estado7, estado8],
+    () => hilar(capitulos, [estado0, estado1, estado2, estado3, estado4, estado5, estado6, estado7, estado8, estado9]),
+    [capitulos, estado0, estado1, estado2, estado3, estado4, estado5, estado6, estado7, estado8, estado9],
   );
 
   return { capitulos, hilado, disponible: vivas[0]!.activa, hayNuevos };

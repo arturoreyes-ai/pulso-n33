@@ -1,6 +1,6 @@
 /**
- * Los rubros de la actualidad: Clima, Seguridad, Deportes, Politica y
- * Economia. Puro: solo cadenas.
+ * Los rubros de la actualidad: los cinco de la cadena y los seis de la
+ * programacion (ver RUBROS_PROGRAMA). Puro: solo cadenas.
  *
  * Existe porque el cliente mostro, el 11 de septiembre de 2026, la caja
  * "Trending topics" de la pagina local de Google Noticias -- Weather, Crime,
@@ -45,9 +45,47 @@
 import { plegar } from "@/lib/dominio/formato";
 import type { Idioma } from "./tipos";
 
-export const RUBROS = ["clima", "seguridad", "deportes", "politica", "economia"] as const;
+/**
+ * Los cinco rubros de la CADENA: los que el recorrido encadena por su cuenta
+ * detras de la seccion del lugar (capitulos.ts), elegidos o no.
+ */
+export const RUBROS_CADENA = ["clima", "seguridad", "deportes", "politica", "economia"] as const;
 
-export type Rubro = (typeof RUBROS)[number];
+/**
+ * Los rubros de la PROGRAMACION, desde el 24 de septiembre de 2026: el
+ * cliente mando la lista de programas del canal y pidio los mismos temas en
+ * la fila, mas noticias de inteligencia artificial. De Red en Red da
+ * espectaculos, Ruta Exclusiva turismo; Minuta Politica y Estado de Alerta ya
+ * eran Politica y Seguridad. El Reflector no entra: es un formato,
+ * entrevistas, y una busqueda de «entrevista» trae entrevistas de cualquier
+ * tema. Noticias 33 no da ninguno, por decision del cliente el mismo dia: sus
+ * garitas ya son /garitas, su California es la zona San Diego, y su mañanera
+ * va dentro de Politica (ver TERMINOS_RUBRO).
+ *
+ * Son solo ENTRADA. No se encadenan sin pedirlos: tres capitulos mas en cada
+ * recorrido serian noventa titulares de busqueda antes de Mexico y el mundo.
+ * Elegido uno, va primero y la cadena de siempre sigue detras entera, asi que
+ * la cadena mide uno mas (capitulos.ts::CAPITULOS_MAXIMO).
+ */
+export const RUBROS_PROGRAMA = ["espectaculos", "turismo", "ia"] as const;
+
+export type RubroCadena = (typeof RUBROS_CADENA)[number];
+export type RubroPrograma = (typeof RUBROS_PROGRAMA)[number];
+
+/**
+ * El orden de la fila de temas: el de la programacion del canal, con los de
+ * la cadena intercalados donde estan sus programas (Minuta Politica, Estado
+ * de Alerta), y los tres que ningun programa cubre al final.
+ */
+export const RUBROS = [
+  "espectaculos", "politica", "seguridad", "turismo", "ia",
+  "clima", "deportes", "economia",
+] as const satisfies readonly (RubroCadena | RubroPrograma)[];
+
+export type Rubro = RubroCadena | RubroPrograma;
+
+export const esRubroCadena = (r: Rubro): r is RubroCadena =>
+  (RUBROS_CADENA as readonly string[]).includes(r);
 
 export const esRubro = (s: string | null): s is Rubro =>
   (RUBROS as readonly string[]).includes(s ?? "");
@@ -58,6 +96,16 @@ export const NOMBRE_RUBRO: Record<Rubro, string> = {
   deportes: "Deportes",
   politica: "Política",
   economia: "Economía",
+  espectaculos: "Espectáculos",
+  turismo: "Turismo",
+  ia: "IA",
+};
+
+/** El nombre largo, para el titulo de la tarjeta divisoria: «IA» en una
+ *  pastilla se entiende, «IA sobre Tijuana» en un titulo no tanto. */
+export const TITULO_RUBRO: Record<Rubro, string> = {
+  ...NOMBRE_RUBRO,
+  ia: "Inteligencia artificial",
 };
 
 /**
@@ -67,6 +115,22 @@ export const NOMBRE_RUBRO: Record<Rubro, string> = {
  * fecha-titular.ts cubre el caso en que el titular mismo dice otra fecha.
  */
 export const VENTANA_RUBRO = "when:2d";
+
+/**
+ * La ventana de cada rubro. Dos dias para todos salvo IA: la inteligencia
+ * artificial acotada a un lugar del corredor es noticia de semana, no de dia,
+ * y con dos dias la pestana abria vacia en casi todas las zonas.
+ */
+export const VENTANA_DE: Record<Rubro, { consulta: string; rotulo: string }> = {
+  clima: { consulta: VENTANA_RUBRO, rotulo: "últimos dos días" },
+  seguridad: { consulta: VENTANA_RUBRO, rotulo: "últimos dos días" },
+  deportes: { consulta: VENTANA_RUBRO, rotulo: "últimos dos días" },
+  politica: { consulta: VENTANA_RUBRO, rotulo: "últimos dos días" },
+  economia: { consulta: VENTANA_RUBRO, rotulo: "últimos dos días" },
+  espectaculos: { consulta: VENTANA_RUBRO, rotulo: "últimos dos días" },
+  turismo: { consulta: VENTANA_RUBRO, rotulo: "últimos dos días" },
+  ia: { consulta: "when:7d", rotulo: "última semana" },
+};
 
 /**
  * Cuantas palabras lee Google de una consulta, contando cada OR. Medido el 25
@@ -123,15 +187,47 @@ export const TERMINOS_RUBRO: Record<Rubro, Record<Idioma, readonly string[]>> = 
     es: ["Xolos", "Liga MX", "Toros", "futbol", "boxeo", "Águilas", "Zonkeys"],
     en: ["Padres", "San Diego FC", "Aztecs", "soccer", "baseball", "sports", "Xolos"],
   },
+  // La mañanera va aqui desde el 24 de septiembre de 2026 (Noticias 33 la
+  // sigue; el cliente no la quiso en pestana propia). «La presidenta» y no
+  // su nombre: el cargo no caduca en una sucesion.
   politica: {
-    es: ["alcalde", "alcaldesa", "gobernadora", "gobernador", "cabildo", "diputado", "Morena",
-      "elecciones"],
-    en: ["mayor", "city council", "governor", "election", "Congress", "supervisors", "ballot"],
+    // Quince palabras con sus OR: «mañanera» y «presidenta» entraron y
+    // salieron «gobernador», «elecciones», «diputada», «regidor», «INE» y
+    // «conferencia matutina» (siguen en tema-publicacion.ts::DEL_PIE para
+    // las publicaciones, donde no hay tope). «presidenta» y no «la
+    // presidenta»: la frase gasta dos.
+    es: ["alcalde", "alcaldesa", "gobernadora", "cabildo", "diputado", "Morena", "mañanera",
+      "presidenta"],
+    en: ["mayor", "city council", "governor", "election", "Congress", "supervisors",
+      "Mexican president"],
   },
   economia: {
     es: ["empresas", "inversión", "empleo", "maquiladora", "aranceles", "precios", "turismo",
       "economía"],
     en: ["business", "economy", "tariffs", "jobs", "housing", "trade", "tourism", "prices"],
+  },
+  // De Red en Red: espectaculo, farandula y lo que se vuelve tendencia.
+  espectaculos: {
+    // Sin «redes sociales»: de los 303 destacados de redes del 25 de
+    // septiembre de 2026 la nombraban dos, y uno era el asalto de Mixcoac
+    // («Circula en redes sociales el video...»). «viral» sale por el tope.
+    es: ["farándula", "famosos", "concierto", "cantante", "actriz", "actor", "influencer",
+      "festival"],
+    en: ["celebrity", "concert", "singer", "actress", "actor", "influencer", "festival"],
+  },
+  // Ruta Exclusiva: hoteles, Valle de Guadalupe, restaurantes, desarrollos
+  // residenciales.
+  turismo: {
+    // Sin «vino»: es tambien el verbo, y el unico destacado que lo nombraba
+    // el 25 de septiembre de 2026 era «lo peor vino al revisar la cajuela».
+    es: ["turismo", "hotel", "hoteles", "restaurante", "gastronomía", "vinícola",
+      "Valle de Guadalupe"],
+    en: ["tourism", "hotel", "resort", "restaurant", "winery", "dining", "Valle de Guadalupe"],
+  },
+  // Pedido aparte de la programacion. Marcas de modelos si: no son figuras.
+  ia: {
+    es: ["inteligencia artificial", "IA", "ChatGPT", "OpenAI", "Gemini", "chatbot", "robótica"],
+    en: ["artificial intelligence", "AI", "ChatGPT", "OpenAI", "Gemini", "chatbot", "robotics"],
   },
 };
 
