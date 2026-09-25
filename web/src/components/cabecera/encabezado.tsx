@@ -57,7 +57,7 @@ export function EncabezadoSeccion({
 }) {
   return (
     <header className={MARCO}>
-      <div className="entrada">
+      <div>
         <h1 className="font-titular text-seccion text-tinta-titulo">{titulo}</h1>
 
         <Fechado zona={zona} />

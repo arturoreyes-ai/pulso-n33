@@ -17,7 +17,7 @@ export default function PaginaGastoElectoral() {
     <>
       <Navegacion zona={null} vista={null} pagina="gasto-electoral" />
       <header className="mx-auto w-full max-w-[88rem] px-4 pb-6 md:px-8">
-        <div className="entrada">
+        <div>
           <h1 className="max-w-[18ch] font-titular text-hero [font-stretch:112%] text-tinta-titulo">
             Gasto electoral de Baja California
           </h1>

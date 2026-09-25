@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { House } from "@phosphor-icons/react/dist/ssr";
+import { ViewTransition, type ReactNode } from "react";
 
 import { MenuLector } from "@/components/chrome/menu-lector";
 import { MenuCinta } from "@/components/chrome/menu-cinta";
 import { Cinta } from "@/components/chrome/cinta";
 import { OpcionesZona } from "@/components/chrome/opciones-zona";
+import { CuentaPastilla } from "@/components/chrome/quien-mira";
 import { cerrarSesion } from "@/lib/acceso/acciones";
 import {
   SUELTAS,
@@ -53,21 +55,33 @@ import { NOMBRE_CORTO, NOMBRE_TODA_REGION, type ZonaRuta } from "@/lib/dominio/z
  * bajos que las pastillas, asi que no lo mueven.
  *
  * LLEVABA DIEZ PASTILLAS y ocho de ellas eran anclas a secciones de la misma
- * pagina. Ahora son siete y la unica ancla es la del lugar. Lo que cambio no
+ * pagina. Hoy son cinco enlaces y ninguno es ancla. Lo que cambio no
  * es el recorte sino la estructura: el tablero tiene DOS EJES —que miras y
  * donde— y la pildora los muestra separados por un filo, en vez de
  * mezclarlos en una sola tira que en movil habia que arrastrar.
  *
- *   [ ⌂ Pulso ] | Tendencias  Redes  Indicadores  Garitas | [ Tijuana ] | Salir
- *      inicio          la vista, con la actual marcada, y las sueltas   el lugar    la sesion
+ *   [ ⌂ Pulso | Redes  Indicadores | Garitas  Gasto electoral  (AR) ]
+ *     inicio    las vistas            las sueltas               la cuenta
+ *
+ * El segundo filo separa las VISTAS, que viven en la rejilla lugar x vista,
+ * de las SUELTAS, que no: sin el, la tira decia en una sola fila dos cosas
+ * que el resto del tablero trata distinto.
+ *
+ * (AR) son las iniciales de quien mira; al pulsarlas la pastilla crece con su
+ * nombre y «Salir» (chrome/quien-mira.tsx). Salir sin decir QUIEN sale era la
+ * mitad de la informacion.
  *
  * Las cuatro vistas del centro CONSERVAN la zona, y los chips del selector
  * conservan la vista (ver lib/dominio/secciones.ts::ruta). Cruzar de
  * /ensenada/redes a /tecate/redes es un clic, no tres.
  *
- * La casa lleva a `/`, o sea a la region completa y a la portada: es el unico
- * elemento que suelta la zona, y de ahi que no comparta el `aria-current` con
- * "Tendencias", que en /tijuana apunta a /tijuana.
+ * La casa ES la portada. Hasta el 24 de septiembre de 2026 la pastilla
+ * llevaba la casa, que iba a `/`, y ademas «En Tendencia», que iba a la
+ * portada de la zona: dos enlaces a casi lo mismo en una tira de siete. Salio
+ * «En Tendencia» a pedido del cliente, y la casa heredo lo suyo: CONSERVA la
+ * zona (`ruta(zona, null)`) y lleva el `aria-current` en la portada. Cambiar
+ * de zona ya es un toque en la barra de cada pagina. En el menu del telefono
+ * «En Tendencia» sigue como renglon, porque alli no hay casa.
  *
  * Componente de servidor. El unico cliente es next/link, cuyo chunk ya lo
  * carga el selector de zona en cada pagina, asi que el costo marginal es cero
@@ -78,11 +92,47 @@ import { NOMBRE_CORTO, NOMBRE_TODA_REGION, type ZonaRuta } from "@/lib/dominio/z
  * no un boton de cliente: cerrar sesion tampoco necesita JavaScript propio.
  */
 
-const PASTILLA = "block rounded-full px-3 py-2 text-meta transition-colors md:px-4";
+const PASTILLA =
+  "block rounded-full px-3 py-2 text-meta transition-[color,background-color,scale] duration-[var(--dur-toque)] ease-out active:scale-[0.97] md:px-4";
 
 /** El filo que separa los dos ejes. Decorativo: no va al arbol accesible. */
 function Filo() {
   return <span aria-hidden="true" className="mx-1 h-4 w-px shrink-0 bg-filo" />;
+}
+
+/**
+ * El fondo de la pestana activa, compartido entre paginas.
+ *
+ * Cada pagina monta su propia `Navegacion`, asi que una transicion de CSS no
+ * tiene de donde partir: la pestana nueva es otro nodo. Con el mismo `name`
+ * en la pagina vieja y en la nueva, `<ViewTransition>` de React empareja los
+ * dos fondos y el navegador desliza uno hasta el otro durante la navegacion.
+ * `default="none"` con `share` explicito es la pareja que dice la guia de
+ * Next: sin `share`, con `none`, deja de morfear en silencio. Donde no hay
+ * View Transitions, o la pagina de destino suspende antes de pintarse, el
+ * fondo aparece en su lugar, como antes.
+ */
+function Realce() {
+  return (
+    <ViewTransition name="pestana-activa" share="pestana-activa" default="none">
+      <span aria-hidden className="absolute inset-0 rounded-full bg-realce" />
+    </ViewTransition>
+  );
+}
+
+function Pestana({ href, actual, children }: { href: string; actual: boolean; children: ReactNode }) {
+  return (
+    <Link
+      href={href}
+      aria-current={actual ? "page" : undefined}
+      className={`${PASTILLA} relative ${
+        actual ? "text-tinta-titulo" : "text-tinta-prosa hover:bg-filo hover:text-tinta-titulo"
+      }`}
+    >
+      {actual ? <Realce /> : null}
+      <span className="relative">{children}</span>
+    </Link>
+  );
 }
 
 /** El cristal de la pastilla. Solo existe a partir de 48rem: debajo de ese
@@ -143,6 +193,7 @@ export function Navegacion({
   // tienen zona que elegir, y un caret que no abre nada seria una mentira
   // sobre el glifo (ver chrome/lugar-cinta.tsx).
   const enRejilla = fuera === undefined && pagina === undefined && vista !== null;
+  const enPortada = fuera === undefined && pagina === undefined && vista === null;
   return (
     <>
       <Cinta
@@ -175,70 +226,55 @@ export function Navegacion({
         className={`${VIDRIO} mx-auto max-w-full overflow-x-auto [scrollbar-width:none]`}
       >
         <Link
-          href="/"
-          aria-label="Pulso, toda la región"
-          className={`${PASTILLA} inline-flex shrink-0 items-center gap-1.5 font-medium text-tinta-titulo hover:bg-filo`}
+          href={ruta(zona, null)}
+          aria-label={zona === null ? "Pulso, inicio" : `Pulso, inicio en ${NOMBRE_CORTO[zona]}`}
+          aria-current={enPortada ? "page" : undefined}
+          className={`${PASTILLA} relative inline-flex shrink-0 items-center gap-1.5 font-medium ${
+            enPortada ? "text-tinta-titulo" : "text-tinta-titulo hover:bg-filo"
+          }`}
         >
-          <House size={14} weight="light" aria-hidden />
-          <span className="max-sm:sr-only">Pulso</span>
+          {enPortada ? <Realce /> : null}
+          <House size={14} weight="light" aria-hidden className="relative" />
+          <span className="relative max-sm:sr-only">Pulso</span>
         </Link>
 
         <Filo />
 
         <ul className="flex shrink-0 items-center gap-1 whitespace-nowrap">
-          {VISTAS.map((v) => {
-            // `fuera` tambien: en la de 404 `vista` es null y sin esta
-            // guarda la pastilla marcaba la portada como pagina actual.
-            const actual = fuera === undefined && pagina === undefined && v === vista;
+          {VISTAS.filter((v) => v !== null).map((v) => {
+            const actual = enRejilla && v === vista;
             return (
-              <li key={v ?? "portada"} className="shrink-0">
-                <Link
-                  href={ruta(zona, v)}
-                  aria-current={actual ? "page" : undefined}
-                  className={`${PASTILLA} ${
-                    actual
-                      ? "bg-realce text-tinta-titulo"
-                      : "text-tinta-prosa hover:bg-filo hover:text-tinta-titulo"
-                  }`}
-                >
+              <li key={v} className="shrink-0">
+                <Pestana href={ruta(zona, v)} actual={actual}>
                   {nombreVista(v)}
-                </Link>
+                </Pestana>
               </li>
             );
           })}
+        </ul>
+
+        <Filo />
+
+        <ul className="flex shrink-0 items-center gap-1 whitespace-nowrap">
           {SUELTAS.map((s) => (
             <li key={s.ruta} className="shrink-0">
-              <Link
-                href={s.ruta}
-                aria-current={pagina === s.id ? "page" : undefined}
-                className={`${PASTILLA} ${
-                  pagina === s.id
-                    ? "bg-realce text-tinta-titulo"
-                    : "text-tinta-prosa hover:bg-filo hover:text-tinta-titulo"
-                }`}
-              >
+              <Pestana href={s.ruta} actual={pagina === s.id}>
                 {s.nombre}
-              </Link>
+              </Pestana>
             </li>
           ))}
         </ul>
 
-        {/* Aqui iba la pastilla del LUGAR, un ancla a #zonas. Salio el 23 de
-            septiembre de 2026 a pedido del cliente: la portada ya no la
-            pintaba, y en Redes repetia en la pildora lo que la barra del
-            lector dice y elige («Tijuana»), con otra forma. Cada pagina de la
-            rejilla elige su lugar en su propia barra (lector o cinta). */}
-
-        <Filo />
-
-        <form action={cerrarSesion} className="shrink-0">
-          <button
-            type="submit"
-            className={`${PASTILLA} text-tinta-prosa hover:bg-filo hover:text-tinta-titulo`}
-          >
-            Salir
-          </button>
-        </form>
+        <CuentaPastilla>
+          <form action={cerrarSesion} className="shrink-0">
+            <button
+              type="submit"
+              className={`${PASTILLA} text-tinta-prosa hover:bg-filo hover:text-tinta-titulo`}
+            >
+              Salir
+            </button>
+          </form>
+        </CuentaPastilla>
       </nav>
     </div>
     </>

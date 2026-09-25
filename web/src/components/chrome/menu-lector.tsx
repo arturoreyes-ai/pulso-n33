@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { RenglonCuenta } from "@/components/chrome/quien-mira";
 import { cerrarSesion } from "@/lib/acceso/acciones";
 import {
   SUELTAS,
@@ -93,7 +94,10 @@ export function MenuLector({
         ))}
       </ul>
 
+      {/* La cuenta y su salida van juntas, como en la pastilla de escritorio:
+          «Salir» sin decir quien sale era la mitad de la informacion. */}
       <div className="mt-2 border-t border-filo pt-2">
+        <RenglonCuenta className="px-4 pt-2 pb-3" />
         <form action={cerrarSesion}>
           <button type="submit" className={`${RENGLON} text-tinta-prosa hover:bg-vela hover:text-tinta-titulo`}>
             Salir

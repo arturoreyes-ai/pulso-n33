@@ -569,6 +569,130 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
   .nav-flotante { display: flex; }
 }
 
+/* Nombres de View Transition del cromo (ver el bloque de navegacion entre
+   paginas). Un nombre repetido en la misma pagina ABORTA la transicion
+   entera, y solo cuenta lo que se pinta: la cinta de pagina esta en
+   `display: none` en escritorio y sobre un lector, asi que nunca coincide
+   con la del lector. */
+.nav-flotante > nav { view-transition-name: nav-pastilla; }
+.cinta { view-transition-name: barra; }
+
+/* La cuenta (chrome/quien-mira.tsx). Las iniciales van en el mismo lavado
+   que la pastilla activa y sin borde propio: es una pastilla mas, redonda,
+   no un avatar pegado encima. */
+.inicial-cuenta {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  background: var(--color-vela);
+  box-shadow: var(--shadow-bisel);
+  color: var(--color-tinta-titulo);
+  font-size: var(--text-meta);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: background-color var(--dur-toque) var(--ease-out);
+}
+.cuenta-pastilla {
+  display: flex;
+  flex: none;
+  align-items: center;
+  margin-inline-start: 0.25rem;
+}
+.boton-cuenta {
+  transition: background-color var(--dur-toque) var(--ease-out), transform var(--dur-toque) var(--ease-out);
+}
+.boton-cuenta:active { transform: scale(0.97); }
+.cuenta-pastilla[data-abierta] .boton-cuenta .inicial-cuenta { background: var(--color-realce); }
+
+/* El tramo que crece DENTRO de la pastilla. Se anima `grid-template-columns`
+   de 0fr a 1fr, que es lo unico que lleva un ancho de 0 a «lo que mida el
+   contenido» sin medirlo en JavaScript. Es layout, si, pero de un elemento
+   de 30px de alto en una barra fija; el precio es chico y el ancho no se
+   inventa. Abre con la curva de firma y cierra mas rapido: al cerrar el
+   sistema responde y nadie mira. Cierra en --dur-toque, que es la escala:
+   150ms no estaba en ella. */
+.tramo-cuenta {
+  display: grid;
+  grid-template-columns: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-columns var(--dur-toque) var(--ease-firma),
+    opacity var(--dur-toque) var(--ease-out);
+}
+.cuenta-pastilla[data-abierta] .tramo-cuenta {
+  grid-template-columns: 1fr;
+  opacity: 1;
+  transition:
+    grid-template-columns var(--dur-cambio) var(--ease-firma),
+    opacity var(--dur-cambio) var(--ease-firma);
+}
+.nombre-cuenta { max-width: 14rem; }
+/* Sin bloque propio de movimiento reducido: el global (mas arriba, «No es
+   opcional») ya pone a cero estas transiciones con !important, y uno local
+   no llegaria a aplicarse nunca. */
+
+/* La navegacion entre paginas (View Transitions, disparadas por el `Realce`
+   de chrome/navegacion.tsx). Tres capas:
+
+   - la PAGINA (`root`): la vieja se va en un toque y la nueva llega con la
+     `aparicion` de las hojas, 6px en el tiempo de un cambio. Es la unica
+     llegada de pagina que hay: los encabezados ya no traen `.entrada`
+     propia, que subia 1.5rem en 620ms en cada navegacion mientras los
+     paneles de abajo aparecian quietos.
+   - el CROMO (`nav-pastilla`, `barra`): no se mueve. Se muestra la copia
+     nueva de inmediato; si se fundiera con la pagina, la barra parpadearia
+     en cada clic.
+   - la PESTANA ACTIVA: se desliza, y se PINTA en el grupo en vez de estirar
+     su captura (abajo).
+
+   Movimiento reducido: nada. El bloque global de prefers-reduced-motion lo
+   apaga todo a proposito, pero su `*` no alcanza estos pseudoelementos. */
+::view-transition-old(root) {
+  animation: desvanecer var(--dur-toque) var(--ease-out) both;
+}
+::view-transition-new(root) {
+  animation: aparicion var(--dur-cambio) var(--ease-firma) both;
+}
+::view-transition-old(nav-pastilla),
+::view-transition-old(barra) {
+  animation: none;
+  opacity: 0;
+}
+::view-transition-new(nav-pastilla),
+::view-transition-new(barra),
+::view-transition-group(nav-pastilla),
+::view-transition-group(barra) {
+  animation: none;
+}
+/* La pestana activa se PINTA en el grupo en vez de estirar su captura. Por
+   omision el navegador escala dos imagenes del fondo entre el ancho de
+   «Redes» y el de «Indicadores» y las funde: a medio camino los extremos se
+   vuelven ovalos y el 16% de blanco se ve doble. El grupo anima su ancho y
+   su alto de verdad, asi que el radio se mantiene redondo en cada cuadro. */
+::view-transition-group(.pestana-activa) {
+  animation-duration: var(--dur-cambio);
+  animation-timing-function: var(--ease-firma);
+  background: var(--color-realce);
+  border-radius: 9999px;
+}
+::view-transition-old(.pestana-activa),
+::view-transition-new(.pestana-activa) {
+  animation: none;
+  opacity: 0;
+}
+@keyframes desvanecer {
+  to { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-group(.pestana-activa) { animation: none; }
+}
+
 /* Las pestanas, a la manera de la pagina de tendencias de X: texto, sin
    pastilla, y un subrayado corto bajo la activa. Es el unico sitio donde el
    rojo de marca aparece como trazo, no como texto (a tamano de cuerpo no pasa

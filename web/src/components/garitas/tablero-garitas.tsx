@@ -403,7 +403,7 @@ export function TableroGaritas() {
   return (
     <>
       <header className={`${ANCHO} pb-6`}>
-        <div className="entrada">
+        <div>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
             <h1 className="max-w-[22ch] font-titular text-hero [font-stretch:112%] text-tinta-titulo">
               Tiempos de cruce
