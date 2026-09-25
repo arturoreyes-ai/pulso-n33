@@ -120,6 +120,11 @@ class TestIdentidad(BaseCache):
         self.assertEqual(panel["destacados"][0]["cosechados"], 2)
 
 
+MIXCOAC = ("Circula en redes sociales el video del momento en que un grupo de sujetos "
+           "agrede a automovilistas y les rompen los cristales del coche en Mixcoac, "
+           "cerca de Av. Revolución")
+
+
 class TestLimpiezaVideo(unittest.TestCase):
     def _limpio(self, **k):
         return tiktok._limpiar_video(_video(**k), BUSQUEDA, AHORA)
@@ -225,6 +230,13 @@ class TestLimpiezaVideo(unittest.TestCase):
             # ...pero un #mexico de relleno no la saca de Mundo.
             ("Cae un avion en Asturias #mexico #noticias", "internacional",
              ("internacional", "nacional")),
+            # Uno TV en la busqueda de Ensenada, 24 de septiembre de 2026: salio
+            # `zona: Tijuana` por la avenida, que es alias de la Zona Centro, y
+            # el guion de locucion la ofrecio como informacion de Tijuana. El
+            # pie completo no se guarda; la cola es la de su primera linea.
+            (MIXCOAC, "regional", (None, "fuera")),
+            (MIXCOAC + "\n#noticias #unotv #tijuana", "regional", (None, "fuera")),
+            (MIXCOAC, "nacional", ("nacional", "fuera")),
         ]
         for pie, ambito, esperado in casos:
             with self.subTest(pie=pie, ambito=ambito):

@@ -127,6 +127,17 @@ FUERA = [
     "nezahualcoyotl", "cuernavaca", "cuautla", "pachuca", "tlaxcala",
     "san luis potosi", "aguascalientes", "zacatecas", "nayarit", "tepic",
     "colima", "tabasco", "villahermosa", "campeche",
+    # Mixcoac, barrio de la capital, entra por un caso de redes: "...les rompen
+    # los cristales del coche en Mixcoac, cerca de Av. Revolucion" (Uno TV,
+    # busqueda de Ensenada, 24 de septiembre de 2026) no nombraba nada de fuera
+    # que el gacetero conociera, y su avenida lo hizo Tijuana (ver
+    # CALLES_HOMONIMAS). Toca 0 de 7,167 titulares de notas.json, asi que la
+    # prensa no se mueve. Las alcaldias de la capital NO entran con el: medidas
+    # el mismo dia, "iztapalapa" y "tlahuac" tocan 5 titulares cada una y uno
+    # de ellos esta hoy en San Quintin ("12 colonias de Iztapalapa; Vicente
+    # Guerrero, la zona mas afectada"). Eso es un cambio de la prensa, no de
+    # este caso.
+    "mixcoac",
     # NO se agregan "morelos", "hidalgo" ni "durango" aunque sean estados:
     # Tijuana tiene una colonia con cada uno de esos nombres, y "morelos" esta
     # ademas en LUGARES. Un estado cuyo nombre es tambien una colonia de la
@@ -355,6 +366,26 @@ AMBIGUOS = ["el rosario", "la paz", "merida"]
 # el detenido llego de Sonora" es de Tijuana. "Se rompe la presa en..." y "un
 # tesoro escondido en Egipto" son el caso.
 AMBIGUOS_EXTRANJERO = ["la mesa", "la presa", "escondido", "el cajon"]
+# Calles del corredor que existen en media republica. Ceden SOLO ante un lugar
+# mexicano de fuera, al reves que AMBIGUOS_EXTRANJERO: cada ciudad del pais
+# tiene su Avenida Revolucion y ninguna del extranjero. Viven en DELEGACIONES
+# y no en LUGARES, pero `alcance` las cuenta igual: un alias directo de
+# delegacion le da Tijuana a la pieza con el veredicto mas fuerte, 'zona'. El
+# caso, del 24 de septiembre de 2026: "Circula en redes sociales el video del
+# momento en que un grupo de sujetos agrede a automovilistas y les rompen los
+# cristales del coche en Mixcoac, cerca de Av. Revolucion" (Uno TV, en la
+# busqueda de Ensenada) salio `zona: Tijuana` y el guion de locucion se lo
+# ofrecio al conductor como informacion de Tijuana. La Avenida Revolucion de
+# Mixcoac es de la capital. Lo que cuesta: "Balacera en Av. Revolucion; el
+# detenido llego de Sonora" deja de ser Tijuana en redes. "La Mesa" no cede
+# ante Sonora porque es nombre de delegacion; esta avenida si, porque la tiene
+# cada ciudad del pais. Ante Mexico nombrado a secas NO cede: la primera
+# version si, y medida sobre los 978 titulos de redes en cache se llevo
+# "Avenida Revolucion se prepara para recibir a Claudia Sheinbaum" a la cubeta
+# Mexico, y esa visita fue a la de Tijuana. Ante el extranjero tampoco:
+# "Migrantes de Honduras llegan a la Avenida Revolucion" es Tijuana. La prensa
+# no lo ve: `alcance` sigue contandola.
+CALLES_HOMONIMAS = ["avenida revolucion", "av. revolucion"]
 # Y la palabra comun en su frase, que no es lugar ante nadie: "Congreso pone
 # sobre la mesa avances y pendientes de Sonora" no es Tijuana. Se borra en las
 # dos lecturas; sin nada de fuera en el texto, `alcance` la sigue contando.
@@ -415,12 +446,17 @@ def _largos(debiles):
             if t not in debiles and any(d in t for d in debiles)]
 
 
-# Lo que cede ante un lugar mexicano de fuera, y lo que cede ante el
-# extranjero, que es eso mas las palabras comunes del corredor.
-_DEBILES_FUERA = tuple(AMBIGUOS + _FRASES_COMUNES)
-_DEBILES_EXTRANJERO = _DEBILES_FUERA + tuple(AMBIGUOS_EXTRANJERO)
+# Lo que cede ante Mexico nombrado; ante un lugar mexicano de fuera, que es
+# eso mas las calles; ante el extranjero, que es eso mas las palabras comunes
+# del corredor; y ante los dos a la vez.
+_DEBILES_MEXICO = tuple(AMBIGUOS + _FRASES_COMUNES)
+_DEBILES_FUERA = _DEBILES_MEXICO + tuple(CALLES_HOMONIMAS)
+_DEBILES_EXTRANJERO = _DEBILES_MEXICO + tuple(AMBIGUOS_EXTRANJERO)
+_DEBILES_AMBOS = _DEBILES_EXTRANJERO + tuple(CALLES_HOMONIMAS)
+_LARGOS_MEXICO = _largos(_DEBILES_MEXICO)
 _LARGOS_FUERA = _largos(_DEBILES_FUERA)
 _LARGOS_EXTRANJERO = _largos(_DEBILES_EXTRANJERO)
+_LARGOS_AMBOS = _largos(_DEBILES_AMBOS)
 
 # La cola de etiquetas de una linea: "... anuncio #tijuana #noticias".
 _COLA_ETIQUETAS = re.compile(r"(?:#\w+[^\w#]*)+$")
@@ -533,8 +569,11 @@ def alcance_redes(texto, firmas=()):
          tiraria la nota nacional de una fuente regional.
       4. Un lugar del extranjero.
       5. Lo debil, que cuenta mientras nada mas fuerte hable:
-         - un homonimo (AMBIGUOS, que cede ante cualquier lugar de fuera, y
-           AMBIGUOS_EXTRANJERO, que solo ante el extranjero);
+         - un homonimo (AMBIGUOS, que cede ante cualquier lugar de fuera;
+           AMBIGUOS_EXTRANJERO, que solo ante el extranjero; y
+           CALLES_HOMONIMAS, que solo ante un lugar mexicano de fuera: "...en
+           Mixcoac, cerca de Av. Revolucion" es de la capital, no de la Zona
+           Centro de Tijuana);
          - un lugar en la cola de etiquetas del pie. "31 millones de soldados
            vs EEUU, Iran prepara su mayor fuerza" llego al muro de Tijuana por
            un #tijuana al final;
@@ -554,12 +593,17 @@ def alcance_redes(texto, firmas=()):
     prosa = prosa_de(texto, firmas)
     lejos = extranjero_en(prosa)
     sin_homonimos = _sin_debiles(prosa, _DEBILES_FUERA, _LARGOS_FUERA)
+    fuera_mx = fuera_en(sin_homonimos)
     if alc == "zona":
         # La zona descansaba en lo debil y la prosa nombra algo de fuera: se
         # vuelve a leer la prosa sin lo que cede ante eso.
-        if lejos:
+        if lejos and fuera_mx:
+            leida = _sin_debiles(prosa, _DEBILES_AMBOS, _LARGOS_AMBOS)
+        elif lejos:
             leida = _sin_debiles(prosa, _DEBILES_EXTRANJERO, _LARGOS_EXTRANJERO)
-        elif fuera_en(sin_homonimos) or nombra_mexico(prosa):
+        elif fuera_mx:
+            leida = sin_homonimos
+        elif nombra_mexico(prosa):
             # Mexico mismo es el nivel 3 de arriba y la cola de etiquetas el 5.
             # Hasta el 24 de septiembre de 2026 solo cedia ante un lugar de
             # fuera, asi que nombrar Mexico no pesaba: «Donald Trump volvio a
@@ -567,7 +611,7 @@ def alcance_redes(texto, firmas=()):
             # designacion de coordinadores estatales por parte de Morena»
             # llegaron al muro de Tijuana por una etiqueta del pie, con otros
             # dos de N+ y Azteca Noticias, el primer dia de sus perfiles.
-            leida = sin_homonimos
+            leida = _sin_debiles(prosa, _DEBILES_MEXICO, _LARGOS_MEXICO)
         else:
             return alc, zonas
         alc, zonas = alcance(leida, None)

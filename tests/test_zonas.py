@@ -9,8 +9,8 @@ import unittest
 
 from pulso import DELEGACIONES_TIJUANA
 from pulso.zonas import DELEGACIONES, alcance, delegaciones_en, es_estatal, fuera_en, zonas_en, FUERA
-from pulso.zonas import (AMBIGUOS, AMBIGUOS_EXTRANJERO, EXTRANJERO, LUGARES, alcance_redes,
-                         extranjero_en, nombra_mexico, prosa_de)
+from pulso.zonas import (AMBIGUOS, AMBIGUOS_EXTRANJERO, CALLES_HOMONIMAS, EXTRANJERO, LUGARES,
+                         alcance_redes, extranjero_en, nombra_mexico, prosa_de)
 
 
 class TestGazetero(unittest.TestCase):
@@ -261,12 +261,61 @@ class TestAlcanceRedes(unittest.TestCase):
             with self.subTest(texto=texto):
                 self.assertEqual(alcance_redes(texto), esperado)
 
+    def test_la_avenida_revolucion_de_mixcoac_no_es_tijuana(self):
+        # Uno TV, busqueda de Ensenada, 24 de septiembre de 2026: la avenida es
+        # alias directo de la Zona Centro, asi que `alcance` le daba Tijuana
+        # con 'zona', el veredicto mas fuerte, y Mixcoac no estaba en FUERA.
+        pie = ("Circula en redes sociales el video del momento en que un grupo de "
+               "sujetos agrede a automovilistas y les rompen los cristales del coche "
+               "en Mixcoac, cerca de Av. Revolución")
+        self.assertEqual(alcance_redes(pie), ("fuera", []))
+        self.assertEqual(alcance_redes(pie + "\n#noticias #tijuana"), ("fuera", []))
+        self.assertEqual(alcance_redes("Asaltan a automovilistas en la Avenida Revolución, "
+                                       "en la Ciudad de México"), ("fuera", []))
+        self.assertEqual(alcance_redes("Balacera en Av. Revolución; el detenido llegó de "
+                                       "Sonora"), ("fuera", []))
+        # Sin nada de fuera, la avenida sigue siendo la de Tijuana.
+        self.assertEqual(alcance_redes("Balacera en Av. Revolución"), ("zona", ["Tijuana"]))
+        self.assertEqual(alcance_redes("Turistas llenan la Avenida Revolución #tijuana"),
+                         ("zona", ["Tijuana"]))
+        # Y no cede ante Mexico nombrado ni ante el extranjero. El primero es
+        # un titulo real en cache que la primera version mando a la cubeta
+        # Mexico; la visita fue a la avenida de Tijuana.
+        self.assertEqual(alcance_redes("Avenida Revolución se prepara para recibir a "
+                                       "Claudia Sheinbaum 🇲🇽"), ("zona", ["Tijuana"]))
+        self.assertEqual(alcance_redes("Migrantes de Honduras llegan a la Avenida Revolución"),
+                         ("zona", ["Tijuana"]))
+
+    def test_la_prensa_no_ve_la_calle_homonima(self):
+        # CALLES_HOMONIMAS es solo de redes: en `alcance` la avenida sigue
+        # siendo Tijuana aunque la nota nombre la capital, como antes. Los dos
+        # primeros son titulares de notas.json.
+        for titulo, esperado in [
+            ("Convoca Sheinbaum a ciudadanos, funcionarios y personajes públicos que "
+             "abarrotan la avenida Revolución en Tijuana", ("zona", ["Tijuana"])),
+            ("Cierres por informe de Sheinbaum afectan ventas de comerciantes en la "
+             "Avenida Revolución", ("zona", ["Tijuana"])),
+            ("Asaltan a automovilistas en la Avenida Revolución, en la Ciudad de México",
+             ("zona", ["Tijuana"])),
+        ]:
+            with self.subTest(titulo=titulo):
+                self.assertEqual(alcance(titulo, None), esperado)
+        # Mixcoac si entro a FUERA, y lo ve la prensa; no toca ningun titular
+        # de notas.json del 24 de septiembre de 2026.
+        self.assertEqual(alcance("Asaltan a automovilistas en Mixcoac", "Tijuana"),
+                         ("fuera", []))
+
     def test_los_debiles_son_del_gacetero_y_el_extranjero_no(self):
         # Un AMBIGUO que no esta en el gacetero no cede nada: es peso muerto.
         del_gacetero = {t for ts in LUGARES.values() for t in ts} | set(FUERA)
         for termino in AMBIGUOS + AMBIGUOS_EXTRANJERO:
             with self.subTest(termino=termino):
                 self.assertIn(termino, del_gacetero)
+        # Las calles viven en las delegaciones de Tijuana.
+        de_delegaciones = {t for ts in DELEGACIONES.values() for t in ts}
+        for termino in CALLES_HOMONIMAS:
+            with self.subTest(termino=termino):
+                self.assertIn(termino, de_delegaciones)
         # Y ningun lugar del extranjero es a la vez del gacetero.
         for termino in EXTRANJERO:
             with self.subTest(termino=termino):
