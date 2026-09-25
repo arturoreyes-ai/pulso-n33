@@ -1,137 +1,118 @@
 {
  "esquema": 1,
- "generado": "2026-09-24T16:29:15+00:00",
+ "generado": "2026-09-25T23:43:49+00:00",
  "plataforma": "instagram",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 1724,
- "posts_vigentes": 169,
- "opinion": 1470,
- "repetidos": 15,
- "reacciones": 245,
+ "comentarios_vigentes": 4067,
+ "posts_vigentes": 573,
+ "opinion": 3404,
+ "repetidos": 132,
+ "reacciones": 649,
  "por_zona": {
-  "Ensenada": 108,
-  "Mexicali": 125,
-  "San Diego": 127,
-  "Tijuana": 710,
-  "estatal": 5,
-  "internacional": 389,
-  "nacional": 260
+  "Ensenada": 252,
+  "Mexicali": 254,
+  "San Diego": 355,
+  "Tecate": 1,
+  "Tijuana": 2624,
+  "estatal": 14,
+  "internacional": 391,
+  "nacional": 176
  },
  "por_cuenta": {
-  "afn_ig": 50,
-  "aztecanoticias_ig": 91,
-  "bbcmundo_ig": 134,
-  "canal66_ig": 57,
-  "capitalmxl_ig": 13,
-  "cnnee_ig": 76,
-  "dwespanol_ig": 98,
+  "afn_ig": 42,
+  "aztecanoticias_ig": 25,
+  "bbcmundo_ig": 110,
+  "blanconegro_ig": 248,
+  "canal66_ig": 125,
+  "capitalmxl_ig": 11,
+  "cnnee_ig": 59,
+  "dwespanol_ig": 94,
   "elensenadense_ig": 31,
-  "eltijuanense_ig": 11,
-  "elvigia_ig": 3,
-  "ensenadadigna_ig": 74,
-  "frontera_ig": 56,
-  "ksdy50_ig": 26,
-  "lacronica_ig": 1,
-  "latinus_ig": 113,
-  "mexicali686_ig": 14,
-  "nmas_ig": 66,
+  "elmexicano_ig": 10,
+  "eltijuanense_ig": 176,
+  "elvigia_ig": 6,
+  "ensenadadigna_ig": 76,
+  "frontera_ig": 269,
+  "ksdy50_ig": 80,
+  "lacronica_ig": 71,
+  "latinus_ig": 66,
+  "lavoz_ig": 45,
+  "mexicali686_ig": 32,
+  "nmas_ig": 36,
   "noticiasmxl_ig": 41,
-  "sd619_ig": 67,
-  "siempre_ig": 162,
-  "sintesis_ig": 13,
-  "soltij_ig": 10,
-  "telemundo_ig": 124,
-  "tijuanainforma_ig": 4,
-  "tjnoticias_ig": 140,
-  "tjpublica_ig": 185,
-  "uniradio_ig": 5,
-  "univisionsd_ig": 8,
-  "yoamotijuana_ig": 2,
-  "zeta_ig": 49
+  "notiens_ig": 139,
+  "radartecate_ig": 1,
+  "sd619_ig": 229,
+  "siempre_ig": 180,
+  "sintesis_ig": 69,
+  "soltij_ig": 15,
+  "telemundo_ig": 107,
+  "tijuanainforma_ig": 89,
+  "tjnoticias_ig": 982,
+  "tjpublica_ig": 191,
+  "uniradio_ig": 13,
+  "univisionsd_ig": 36,
+  "yoamotijuana_ig": 282,
+  "zeta_ig": 81
  },
  "por_idioma": {
-  "en": 67,
-  "es": 1657
+  "en": 229,
+  "es": 3838
  },
  "por_tema": [
   {
-   "tema": "morena",
-   "comentarios": 30,
-   "posts": 11
-  },
-  {
-   "tema": "trump",
-   "comentarios": 26,
-   "posts": 13
-  },
-  {
-   "tema": "hombre",
+   "tema": "playas",
    "comentarios": 10,
-   "posts": 8
+   "posts": 7
   },
   {
-   "tema": "claudia",
-   "comentarios": 7,
+   "tema": "policias",
+   "comentarios": 8,
+   "posts": 7
+  },
+  {
+   "tema": "cartel",
+   "comentarios": 6,
    "posts": 5
   },
   {
-   "tema": "campana",
-   "comentarios": 4,
-   "posts": 4
+   "tema": "primera",
+   "comentarios": 5,
+   "posts": 5
   },
   {
-   "tema": "nacional",
-   "comentarios": 4,
-   "posts": 4
-  },
-  {
-   "tema": "marina",
+   "tema": "ruffo",
    "comentarios": 3,
    "posts": 2
   },
   {
-   "tema": "tres",
-   "comentarios": 3,
-   "posts": 3
-  },
-  {
-   "tema": "burgueno",
+   "tema": "construccion",
    "comentarios": 2,
    "posts": 2
   },
   {
-   "tema": "federal",
+   "tema": "desaladora",
    "comentarios": 1,
    "posts": 1
   },
   {
-   "tema": "filas",
+   "tema": "juchitan",
    "comentarios": 1,
    "posts": 1
   },
   {
-   "tema": "independencia",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
-   "tema": "minutos",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
-   "tema": "trabajadores",
+   "tema": "primaria",
    "comentarios": 1,
    "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 182,
-  "negativo": 683,
-  "neutral": 550,
+  "positivo": 374,
+  "negativo": 1508,
+  "neutral": 1312,
   "sin_clasificar": 0,
-  "sin_modelo_idioma": 55,
+  "sin_modelo_idioma": 210,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
   "metodo": "modelo"
  },
@@ -364,7 +345,7 @@
    "cuenta": "yoamotijuana_ig",
    "nombre": "Yo Amo Tijuana",
    "zona": "Tijuana",
-   "activa": true
+   "activa": false
   },
   {
    "cuenta": "zeta_ig",
@@ -375,886 +356,225 @@
  ],
  "destacados": [
   {
-   "url": "https://www.instagram.com/p/DdpTjbcm1dp/",
+   "url": "https://www.instagram.com/p/DduSpGcFNIF/",
    "cuenta": "bbcmundo_ig",
    "zona": "internacional",
-   "fecha": "2026-09-23",
-   "titulo": "Una triste historia personal que refleja la crisis de la vivienda en España",
+   "fecha": "2026-09-25",
+   "titulo": "Un secreto siniestro.",
    "tipo": "carrusel",
-   "likes": 13139,
-   "comentarios": 795,
-   "alcance": "extranjero",
-   "publicado": "2026-09-23T21:44:51+00:00",
+   "likes": 9131,
+   "comentarios": 1100,
+   "alcance": "nacional",
+   "publicado": "2026-09-25T20:13:05+00:00",
    "cosechados": 29,
-   "opinion": 29,
-   "sentimiento": {
-    "positivo": 2,
-    "negativo": 21,
-    "neutral": 6,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "nacional",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/DdqrI0CAVUF/",
-   "cuenta": "bbcmundo_ig",
-   "zona": "internacional",
-   "fecha": "2026-09-24",
-   "titulo": "El presidente de Estados Unidos, Donald Trump, recibió a su homólogo chino, Xi Jinping, en la Base Conjunta Andrews con una alfombra roja y un desfile aéreo mi…",
-   "tipo": "video",
-   "likes": 4567,
-   "comentarios": 208,
-   "reproducciones": 227077,
-   "alcance": "extranjero",
-   "publicado": "2026-09-24T10:30:30+00:00",
-   "cosechados": 28,
    "opinion": 27,
    "sentimiento": {
-    "positivo": 2,
-    "negativo": 7,
-    "neutral": 18,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "trump",
-     "comentarios": 6
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/DdqAEW3oANL/",
-   "cuenta": "latinus_ig",
-   "zona": "nacional",
-   "fecha": "2026-09-24",
-   "titulo": "Sam Altman, CEO de OpenAI, advierte sobre el riesgo de perder el control del futuro ante una IA que avance más rápido de lo que las personas puedan comprender…",
-   "tipo": "carrusel",
-   "likes": 4174,
-   "comentarios": 71,
-   "alcance": "nacional",
-   "publicado": "2026-09-24T04:13:49+00:00",
-   "cosechados": 26,
-   "opinion": 23,
-   "sentimiento": {
     "positivo": 0,
-    "negativo": 14,
+    "negativo": 18,
     "neutral": 9,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
-   "temas": [
-    {
-     "tema": "hombre",
-     "comentarios": 1
-    },
-    {
-     "tema": "trump",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/Ddq1fAOhf4g/",
-   "cuenta": "telemundo_ig",
-   "zona": "internacional",
-   "fecha": "2026-09-24",
-   "titulo": "Tres meses después de los terremotos que sacudieron Venezuela, la tragedia sigue presente entre las ruinas de La Guaira.",
-   "tipo": "video",
-   "likes": 4128,
-   "comentarios": 116,
-   "reproducciones": 53505,
-   "alcance": "extranjero",
-   "publicado": "2026-09-24T12:00:06+00:00",
-   "cosechados": 26,
-   "opinion": 16,
-   "sentimiento": {
-    "positivo": 3,
-    "negativo": 7,
-    "neutral": 6,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdpStpYCrCt/",
-   "cuenta": "bbcmundo_ig",
-   "zona": "internacional",
-   "fecha": "2026-09-23",
-   "titulo": "La equilibrista francesa Tatiana-Mosio Bongonga cruzó un cable tendido entre las escombreras más altas de Europa, situadas en la localidad industrial francesa…",
-   "tipo": "video",
-   "likes": 4020,
-   "comentarios": 73,
-   "reproducciones": 169338,
-   "alcance": "extranjero",
-   "publicado": "2026-09-23T21:37:57+00:00",
-   "cosechados": 27,
-   "opinion": 23,
-   "sentimiento": {
-    "positivo": 2,
-    "negativo": 9,
-    "neutral": 12,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/Ddq0R2FiTVz/",
-   "cuenta": "bbcmundo_ig",
-   "zona": "internacional",
-   "fecha": "2026-09-24",
-   "titulo": "🚴🏼‍♀️Fariba Hashimi, una ciclista afgana, ganó la medalla de plata en la prueba femenina de ciclismo de ruta de los Juegos Asiáticos.",
-   "tipo": "video",
-   "likes": 3437,
-   "comentarios": 55,
-   "reproducciones": 94687,
-   "alcance": "extranjero",
-   "publicado": "2026-09-24T11:50:28+00:00",
-   "cosechados": 25,
-   "opinion": 12,
-   "sentimiento": {
-    "positivo": 6,
-    "negativo": 5,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrPMPQlpMU/",
-   "cuenta": "latinus_ig",
-   "zona": "nacional",
-   "fecha": "2026-09-24",
-   "titulo": "La empresa danesa de juguetes LEGO anunció este jueves la inversión de 8 mil 600 millones de pesos (400 millones de dólares) para ampliar sus operaciones en su…",
-   "tipo": "carrusel",
-   "likes": 3135,
-   "comentarios": 72,
-   "alcance": "fuera",
-   "publicado": "2026-09-24T15:45:13+00:00",
-   "cosechados": 29,
-   "opinion": 29,
-   "sentimiento": {
-    "positivo": 4,
-    "negativo": 14,
-    "neutral": 11,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "morena",
-     "comentarios": 2
-    },
-    {
-     "tema": "independencia",
-     "comentarios": 1
-    },
-    {
-     "tema": "trabajadores",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrJGP7jp1A/",
-   "cuenta": "telemundo_ig",
-   "zona": "internacional",
-   "fecha": "2026-09-24",
-   "titulo": "Causa indignación el desalojo de una mujer discapacitada de 87 años en España.",
-   "tipo": "video",
-   "likes": 1917,
-   "comentarios": 152,
-   "reproducciones": 87714,
-   "alcance": "extranjero",
-   "publicado": "2026-09-24T14:52:47+00:00",
-   "cosechados": 28,
-   "opinion": 26,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 19,
-    "neutral": 6,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrBY3HE8IK/",
-   "cuenta": "dwespanol_ig",
-   "zona": "internacional",
-   "fecha": "2026-09-24",
-   "titulo": "Cálida bienvenida de Trump a Xi Jinping en EE. UU.",
-   "tipo": "video",
-   "likes": 1892,
-   "comentarios": 138,
-   "reproducciones": 31972,
-   "alcance": "extranjero",
-   "publicado": "2026-09-24T13:45:06+00:00",
-   "cosechados": 30,
-   "opinion": 29,
-   "sentimiento": {
-    "positivo": 6,
-    "negativo": 11,
-    "neutral": 12,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "trump",
-     "comentarios": 4
-    },
-    {
-     "tema": "hombre",
-     "comentarios": 1
-    },
-    {
-     "tema": "nacional",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/Ddp9UUBj6eN/",
-   "cuenta": "tjnoticias_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-24",
-   "titulo": "La ciudad cerró este miércoles con un colorido atardecer y una luna creciente que apareció sobre el cielo tijuanense, después de una día cálido y con cielo des…",
-   "tipo": "carrusel",
-   "likes": 1665,
-   "comentarios": 3,
-   "publicado": "2026-09-24T03:49:47+00:00",
-   "cosechados": 2,
-   "opinion": 2,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 2,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrTSx9HH6F/",
-   "cuenta": "bbcmundo_ig",
-   "zona": "nacional",
-   "fecha": "2026-09-24",
-   "titulo": "Son 9 delfines sobreviviendo en Cancún. 🐬🇲🇽",
-   "tipo": "carrusel",
-   "likes": 1494,
-   "comentarios": 84,
-   "alcance": "fuera",
-   "publicado": "2026-09-24T16:21:03+00:00",
-   "cosechados": 25,
-   "opinion": 17,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 11,
-    "neutral": 5,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "claudia",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/Ddp3S8fAL9B/",
-   "cuenta": "telemundo_ig",
-   "zona": "San Diego",
-   "fecha": "2026-09-24",
-   "titulo": "Una familia guatemalteca pide respuestas tras la muerte de Mario David Coronado Juárez, de 36 años, quien chocó contra un árbol mientras intentaba huir de ICE,…",
-   "tipo": "video",
-   "likes": 1351,
-   "comentarios": 76,
-   "reproducciones": 94948,
-   "alcance": "zona",
-   "publicado": "2026-09-24T02:57:48+00:00",
-   "cosechados": 26,
-   "opinion": 12,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 9,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrJmopla9H/",
-   "cuenta": "nmas_ig",
-   "zona": "nacional",
-   "fecha": "2026-09-24",
-   "titulo": "El presidente de Meta, Mark Zuckerberg, anunció el Muse Charm, un dispositivo con el que promete “todo el conjunto de funciones de voz y avatares” de Muse en t…",
-   "tipo": "video",
-   "likes": 1323,
-   "comentarios": 108,
-   "reproducciones": 61798,
-   "alcance": "nacional",
-   "publicado": "2026-09-24T14:56:54+00:00",
-   "cosechados": 29,
-   "opinion": 25,
-   "sentimiento": {
-    "positivo": 2,
-    "negativo": 13,
-    "neutral": 10,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrF_W4EjaK/",
-   "cuenta": "nmas_ig",
-   "zona": "nacional",
-   "fecha": "2026-09-24",
-   "titulo": "Avistaron a los flamencos durante su cortejo en Celestún, Yucatán. Se trata de una estrategia biológica necesaria para su supervivencia.",
-   "tipo": "video",
-   "likes": 1292,
-   "comentarios": 22,
-   "reproducciones": 13060,
-   "alcance": "fuera",
-   "publicado": "2026-09-24T14:25:14+00:00",
-   "cosechados": 19,
-   "opinion": 12,
-   "sentimiento": {
-    "positivo": 6,
-    "negativo": 2,
-    "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/Ddp_Q1fDSKl/",
-   "cuenta": "telemundo_ig",
-   "zona": "internacional",
-   "fecha": "2026-09-24",
-   "titulo": "El congresista Greg Casar visitó a Wilber Garcés en el centro de detención de Pearsall, Texas, para conocer su condición física y mental. Tras el encuentro, cu…",
-   "tipo": "video",
-   "likes": 1257,
-   "comentarios": 41,
-   "reproducciones": 94481,
-   "alcance": "extranjero",
-   "publicado": "2026-09-24T04:07:24+00:00",
-   "cosechados": 25,
-   "opinion": 24,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 18,
-    "neutral": 5,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrNtiSAqx4/",
+   "url": "https://www.instagram.com/p/Ddt9Shkgv-f/",
    "cuenta": "cnnee_ig",
    "zona": "internacional",
-   "fecha": "2026-09-24",
-   "titulo": "Meta reveló en su conferencia Meta Connect nuevas gafas VR que, según la compañía, pesan aproximadamente lo mismo que una baraja de cartas, además de un llaver…",
+   "fecha": "2026-09-25",
+   "titulo": "Alleigha Botner, la examante del exconcursante de \"American Idol\" Caleb Flynn, testificó en su juicio por homicidio sobre los mensajes de texto que intercambia…",
    "tipo": "video",
-   "likes": 1179,
-   "comentarios": 38,
-   "reproducciones": 73128,
+   "likes": 4907,
+   "comentarios": 433,
+   "reproducciones": 580571,
    "alcance": "nacional",
-   "publicado": "2026-09-24T15:33:04+00:00",
-   "cosechados": 29,
-   "opinion": 27,
+   "publicado": "2026-09-25T17:07:17+00:00",
+   "cosechados": 30,
+   "opinion": 28,
    "sentimiento": {
-    "positivo": 3,
-    "negativo": 14,
-    "neutral": 10,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrJw7GDnY6/",
-   "cuenta": "latinus_ig",
-   "zona": "nacional",
-   "fecha": "2026-09-24",
-   "titulo": "Grupo Chespirito se deslinda de la campaña que utiliza su marca para promover a Citlalli Hernández en la contienda por la alcaldía Cuauhtémoc, en la CDMX. Mien…",
-   "tipo": "video",
-   "likes": 1156,
-   "comentarios": 260,
-   "reproducciones": 29937,
-   "alcance": "fuera",
-   "publicado": "2026-09-24T14:58:27+00:00",
-   "cosechados": 28,
-   "opinion": 27,
-   "sentimiento": {
-    "positivo": 2,
+    "positivo": 1,
     "negativo": 17,
-    "neutral": 8,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "morena",
-     "comentarios": 3
-    },
-    {
-     "tema": "campana",
-     "comentarios": 1
-    },
-    {
-     "tema": "hombre",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrKH_Qis1V/",
-   "cuenta": "dwespanol_ig",
-   "zona": "internacional",
-   "fecha": "2026-09-24",
-   "titulo": "Múnich celebra hasta el 4 de octubre su famoso festival de la cerveza: el Oktoberfest. 🍻El multitudinario evento cuenta este año con un nuevo concepto de segur…",
-   "tipo": "video",
-   "likes": 995,
-   "comentarios": 10,
-   "reproducciones": 24308,
-   "alcance": "nacional",
-   "publicado": "2026-09-24T15:02:37+00:00",
-   "cosechados": 8,
-   "opinion": 8,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 5,
-    "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "hombre",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrLs6Tj_Ef/",
-   "cuenta": "aztecanoticias_ig",
-   "zona": "nacional",
-   "fecha": "2026-09-24",
-   "titulo": "¡HALLAN MIL 600 DIENTES DE LECHE EN FOSAS DE MICHOACÁN! 💔⁣",
-   "tipo": "video",
-   "likes": 948,
-   "comentarios": 92,
-   "reproducciones": 14693,
-   "alcance": "fuera",
-   "publicado": "2026-09-24T15:15:36+00:00",
-   "cosechados": 30,
-   "opinion": 25,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 18,
-    "neutral": 6,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "claudia",
-     "comentarios": 3
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrRQEBkmVo/",
-   "cuenta": "cnnee_ig",
-   "zona": "internacional",
-   "fecha": "2026-09-24",
-   "titulo": "Ha comenzado el juicio por el asesinato, ocurrido en 2023, de Abby Choi, figura de la alta sociedad e influente de la moda. Kristie Lu Stout, de CNN, repasa su…",
-   "tipo": "video",
-   "likes": 814,
-   "comentarios": 25,
-   "reproducciones": 43413,
-   "alcance": "extranjero",
-   "publicado": "2026-09-24T16:05:01+00:00",
-   "cosechados": 17,
-   "opinion": 12,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 5,
-    "neutral": 6,
+    "neutral": 10,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdrOis4Fu_N/",
-   "cuenta": "latinus_ig",
-   "zona": "nacional",
-   "fecha": "2026-09-24",
-   "titulo": "Compartir su ubicación, aprender a desplazarse solas y avisar constantemente de que están a salvo se ha convertido en parte de la rutina durante el intercambio…",
-   "tipo": "imagen",
-   "likes": 693,
-   "comentarios": 28,
-   "alcance": "fuera",
-   "publicado": "2026-09-24T15:39:32+00:00",
-   "cosechados": 26,
+   "url": "https://www.instagram.com/p/DduNrJdDh1P/",
+   "cuenta": "telemundo_ig",
+   "zona": "internacional",
+   "fecha": "2026-09-25",
+   "titulo": "Tras más de un mes en un centro de detención en Louisiana, Ángel fue deportado y como Blondie no se podía imaginar viviendo alejada de su esposo empacó sus cos…",
+   "tipo": "video",
+   "likes": 3294,
+   "comentarios": 121,
+   "reproducciones": 183031,
+   "alcance": "extranjero",
+   "publicado": "2026-09-25T19:30:33+00:00",
+   "cosechados": 29,
    "opinion": 25,
    "sentimiento": {
-    "positivo": 2,
-    "negativo": 16,
+    "positivo": 10,
+    "negativo": 8,
     "neutral": 7,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
-   "temas": [
-    {
-     "tema": "hombre",
-     "comentarios": 1
-    },
-    {
-     "tema": "nacional",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/DdpofU1GPwm/",
-   "cuenta": "sd619_ig",
-   "zona": "San Diego",
-   "fecha": "2026-09-24",
-   "titulo": "Stolen Vehicle CHP Pursuit Ends With Gun Recovered",
-   "tipo": "carrusel",
-   "likes": 693,
-   "comentarios": 19,
-   "publicado": "2026-09-24T00:47:47+00:00",
-   "cosechados": 13,
-   "opinion": 12,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 12
-   },
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdrTI31jedq/",
-   "cuenta": "telemundo_ig",
+   "url": "https://www.instagram.com/p/Ddt-IQfjhUp/",
+   "cuenta": "bbcmundo_ig",
    "zona": "internacional",
-   "fecha": "2026-09-24",
-   "titulo": "El presidente Trump recibe con pompa a Xi Jinping en la Casa Blanca.",
-   "tipo": "carrusel",
-   "likes": 497,
-   "comentarios": 24,
-   "alcance": "extranjero",
-   "publicado": "2026-09-24T16:19:42+00:00",
-   "cosechados": 19,
+   "fecha": "2026-09-25",
+   "titulo": "🧠🚺Factores como los cambios hormonales, dormir mal y el estrés contribuyen a que las mujeres sean más propensas a sufrir migraña.",
+   "tipo": "video",
+   "likes": 2532,
+   "comentarios": 47,
+   "reproducciones": 73387,
+   "alcance": "nacional",
+   "publicado": "2026-09-25T17:14:20+00:00",
+   "cosechados": 23,
    "opinion": 18,
    "sentimiento": {
-    "positivo": 4,
-    "negativo": 6,
-    "neutral": 8,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "trump",
-     "comentarios": 2
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrO7baj0J5/",
-   "cuenta": "latinus_ig",
-   "zona": "nacional",
-   "fecha": "2026-09-24",
-   "titulo": "#LatinusDiario. “Polo” toma nuevamente fuerza, cambia la trayectoria y se enfila hacia Baja California Sur, cerca de tocar tierra. Después de degradarse a cate…",
-   "tipo": "video",
-   "likes": 492,
-   "comentarios": 4,
-   "reproducciones": 8056,
-   "alcance": "fuera",
-   "publicado": "2026-09-24T15:43:33+00:00",
-   "cosechados": 4,
-   "opinion": 4,
-   "sentimiento": {
     "positivo": 1,
-    "negativo": 2,
-    "neutral": 1,
+    "negativo": 12,
+    "neutral": 5,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdpTdDwB3d8/",
-   "cuenta": "canal66_ig",
-   "zona": "Mexicali",
-   "fecha": "2026-09-23",
-   "titulo": "#Mexicali | Más de 200 balas fueron disparadas contra el subcomandante Ramón Bajaras, ejecutado el pasado martes.",
-   "tipo": "video",
-   "likes": 469,
+   "url": "https://www.instagram.com/p/DduQh9KmXQP/",
+   "cuenta": "latinus_ig",
+   "zona": "San Diego",
+   "fecha": "2026-09-25",
+   "titulo": "La Administración de Control de Drogas (DEA, por sus siglas en inglés) de Estados Unidos volvió a publicar la ficha de búsqueda de Ismael Zambada Sicairos alia…",
+   "tipo": "imagen",
+   "likes": 2411,
    "comentarios": 34,
-   "reproducciones": 18802,
-   "publicado": "2026-09-23T21:45:00+00:00",
+   "alcance": "zona",
+   "publicado": "2026-09-25T19:54:38+00:00",
+   "cosechados": 10,
+   "opinion": 9,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 2,
+    "neutral": 7,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduemUiDCeT/",
+   "cuenta": "nmas_ig",
+   "zona": "internacional",
+   "fecha": "2026-09-25",
+   "titulo": "El zoológico de Nuseirat, en Gaza, volvió a recibir visitantes. Entre los animales que sobrevivieron, se encontraba un burro, el cuál decidieron pintarlo para…",
+   "tipo": "video",
+   "likes": 2127,
+   "comentarios": 42,
+   "reproducciones": 30597,
+   "alcance": "extranjero",
+   "publicado": "2026-09-25T21:58:02+00:00",
+   "cosechados": 25,
+   "opinion": 18,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 18,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/Ddt3P1XAlDZ/",
+   "cuenta": "bbcmundo_ig",
+   "zona": "internacional",
+   "fecha": "2026-09-25",
+   "titulo": "¿Una inteligencia artificial capaz de planificar, tomar decisiones e interactuar sin que una persona le dé instrucciones a cada paso?",
+   "tipo": "video",
+   "likes": 1723,
+   "comentarios": 33,
+   "reproducciones": 59636,
+   "alcance": "extranjero",
+   "publicado": "2026-09-25T16:15:35+00:00",
    "cosechados": 24,
-   "opinion": 20,
+   "opinion": 21,
    "sentimiento": {
     "positivo": 1,
     "negativo": 14,
-    "neutral": 5,
+    "neutral": 6,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
-   "temas": [
-    {
-     "tema": "morena",
-     "comentarios": 2
-    }
-   ]
+   "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdrTZ93jMbv/",
-   "cuenta": "cnnee_ig",
+   "url": "https://www.instagram.com/p/DdubhWJsu74/",
+   "cuenta": "telemundo_ig",
    "zona": "internacional",
-   "fecha": "2026-09-24",
-   "titulo": "María del Carmen Abascal, una vecina de 87 años del distrito de Retiro que, hasta este miércoles, habitaba desde hace 70 años en un departamento situado en la…",
-   "tipo": "imagen",
-   "likes": 427,
-   "comentarios": 21,
-   "alcance": "extranjero",
-   "publicado": "2026-09-24T16:22:13+00:00",
-   "cosechados": 12,
-   "opinion": 12,
+   "fecha": "2026-09-25",
+   "titulo": "El gobernador Gavin Newsom destacó la diversidad de California y recordó que cerca del 39% de su población es hispana, algo que aseguró es motivo de orgullo.",
+   "tipo": "video",
+   "likes": 1485,
+   "comentarios": 108,
+   "reproducciones": 46200,
+   "alcance": "nacional",
+   "publicado": "2026-09-25T21:32:19+00:00",
+   "cosechados": 30,
+   "opinion": 22,
    "sentimiento": {
-    "positivo": 0,
-    "negativo": 11,
-    "neutral": 1,
+    "positivo": 5,
+    "negativo": 10,
+    "neutral": 7,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
-   "temas": [
-    {
-     "tema": "tres",
-     "comentarios": 1
-    }
-   ]
+   "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/Ddp9ZJ0DWSp/",
-   "cuenta": "yoamotijuana_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-24",
-   "titulo": "La ciudad cerró este miércoles con un colorido atardecer y una luna creciente que apareció sobre el cielo tijuanense, después de una día cálido y con cielo des…",
+   "url": "https://www.instagram.com/p/Ddug13roJrt/",
+   "cuenta": "bbcmundo_ig",
+   "zona": "internacional",
+   "fecha": "2026-09-25",
+   "titulo": "La catedral de 860 años recibió al Papa. 🇫🇷",
    "tipo": "carrusel",
-   "likes": 342,
-   "comentarios": 1,
-   "publicado": "2026-09-24T03:50:27+00:00",
-   "cosechados": 1,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdqLFYBI_WW/",
-   "cuenta": "tjpublica_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-24",
-   "titulo": "Captan extrañas luces en el cielo de Tijuana. Usuarios de redes reportan luces extrañas en tijuana #tijuana #bajacalifornia #sandiego #california #mexico",
-   "tipo": "video",
-   "likes": 329,
-   "comentarios": 33,
-   "reproducciones": 15082,
-   "publicado": "2026-09-24T05:50:44+00:00",
-   "cosechados": 25,
-   "opinion": 23,
-   "sentimiento": {
-    "positivo": 3,
-    "negativo": 8,
-    "neutral": 12,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "tres",
-     "comentarios": 1
-    },
-    {
-     "tema": "trump",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/DdoyDn8GJng/",
-   "cuenta": "mexicali686_ig",
-   "zona": "Mexicali",
-   "fecha": "2026-09-23",
-   "titulo": "🏙️🌟 Extrañar Mexicali es inevitable cuando te mudas a otro lugar por trabajo. A pesar de la distancia, siempre llevamos un pedacito de nuestra ciudad en el cor…",
-   "tipo": "imagen",
-   "likes": 322,
-   "comentarios": 9,
-   "publicado": "2026-09-23T16:52:09+00:00",
-   "cosechados": 7,
-   "opinion": 4,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdqKKcizXUZ/",
-   "cuenta": "yoamotijuana_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-24",
-   "titulo": "Siempre las mejores vistas✨🌕",
-   "tipo": "video",
-   "likes": 308,
-   "comentarios": 0,
-   "reproducciones": 13574,
-   "publicado": "2026-09-24T05:42:42+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/Ddo7FdrGKNl/",
-   "cuenta": "mexicali686_ig",
-   "zona": "Mexicali",
-   "fecha": "2026-09-23",
-   "titulo": "Dicen que en esta calle de Mexicali el verano ni se siente con tremendos árboles 🌳 que brindan sombra 24/7 ❤️☀️",
-   "tipo": "imagen",
-   "likes": 255,
-   "comentarios": 6,
-   "publicado": "2026-09-23T18:11:03+00:00",
-   "cosechados": 6,
-   "opinion": 5,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 3,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrG0sQEw19/",
-   "cuenta": "cnnee_ig",
-   "zona": "internacional",
-   "fecha": "2026-09-24",
-   "titulo": "El Servicio Meteorológico Nacional de EE.UU. calificó como \"particularmente peligrosa\" la emergencia por inundaciones en Nuevo México, donde cayeron casi 15 ce…",
-   "tipo": "video",
-   "likes": 249,
-   "comentarios": 0,
-   "reproducciones": 41251,
+   "likes": 1333,
+   "comentarios": 5,
    "alcance": "extranjero",
-   "publicado": "2026-09-24T14:32:58+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrK3hCAebN/",
-   "cuenta": "eltijuanense_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-24",
-   "titulo": "EXHIBEN A VENDEDOR DE TIANGUIS POR SUPUESTO “TRUCO” AL PESAR LA FRUTA",
-   "tipo": "video",
-   "likes": 191,
-   "comentarios": 15,
-   "reproducciones": 12690,
-   "publicado": "2026-09-24T15:07:46+00:00",
-   "cosechados": 11,
-   "opinion": 11,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 6,
-    "neutral": 5,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdpGXwKmNF3/",
-   "cuenta": "mexicali686_ig",
-   "zona": "Mexicali",
-   "fecha": "2026-09-23",
-   "titulo": "🔥 ¡ESTE SÁBADO, EL PALENQUE SE PRENDE! 🔥 Mexicali, prepárate para una noche de música y mucha fiesta con Herencia de Grandes 🤠🎶",
-   "tipo": "imagen",
-   "likes": 176,
-   "comentarios": 1,
-   "publicado": "2026-09-23T19:49:40+00:00",
-   "cosechados": 1,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/Ddo-cJ5h5lS/",
-   "cuenta": "canal66_ig",
-   "zona": "Mexicali",
-   "fecha": "2026-09-23",
-   "titulo": "#Mexicali | Asesinan al subcomandante José Ramón Barajas Félix, adscrito al Grupo de Reacción Inmediata de la policía municipal de Mexicali.",
-   "tipo": "video",
-   "likes": 174,
-   "comentarios": 4,
-   "reproducciones": 8845,
-   "publicado": "2026-09-23T18:42:41+00:00",
-   "cosechados": 3,
+   "publicado": "2026-09-25T22:17:10+00:00",
+   "cosechados": 5,
    "opinion": 3,
    "sentimiento": {
-    "positivo": 1,
+    "positivo": 2,
     "negativo": 1,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduYHDMs_CC/",
+   "cuenta": "nmas_ig",
+   "zona": "internacional",
+   "fecha": "2026-09-25",
+   "titulo": "Un perro labrador bosteza al participar en un estudio realizado por investigadores en Hungría, publicado en la revista Science, que revela que los perros puede…",
+   "tipo": "imagen",
+   "likes": 1231,
+   "comentarios": 1,
+   "alcance": "extranjero",
+   "publicado": "2026-09-25T21:02:23+00:00",
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
     "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -1262,16 +582,39 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdpwzzVDWAh/",
-   "cuenta": "zeta_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-24",
-   "titulo": "Colectivos han encontrado restos humanos en distintos puntos de Ensenada, mientras las familias de desaparecidos reclaman a personal de la FGE que se dedique a…",
+   "url": "https://www.instagram.com/p/DdsQ5z_xTZu/",
+   "cuenta": "sd619_ig",
+   "zona": "San Diego",
+   "fecha": "2026-09-25",
+   "titulo": "Father Arrested After 7-Month-Old Daughter Dies With Significant Trauma",
    "tipo": "imagen",
-   "likes": 149,
-   "comentarios": 5,
-   "publicado": "2026-09-24T02:00:30+00:00",
-   "cosechados": 4,
+   "likes": 982,
+   "comentarios": 53,
+   "publicado": "2026-09-25T01:19:43+00:00",
+   "cosechados": 30,
+   "opinion": 27,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 27
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduROenCuZW/",
+   "cuenta": "nmas_ig",
+   "zona": "internacional",
+   "fecha": "2026-09-25",
+   "titulo": "Durante un discurso pronunciado en la sede de la UNESCO en París, el papa León XIV advirtió que las Naciones Unidas y otros organismos se encuentran en crisis…",
+   "tipo": "video",
+   "likes": 919,
+   "comentarios": 3,
+   "reproducciones": 11992,
+   "alcance": "extranjero",
+   "publicado": "2026-09-25T20:01:23+00:00",
+   "cosechados": 2,
    "opinion": 2,
    "sentimiento": {
     "positivo": 0,
@@ -1280,78 +623,47 @@
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
-   "temas": [
-    {
-     "tema": "marina",
-     "comentarios": 1
-    }
-   ]
+   "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdqBNv-xL1Y/",
-   "cuenta": "siempre_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-24",
-   "titulo": "🚨🔥 INCENDIO EN LA PRIMARIA AMADO NERVO DE TIJUANA",
-   "tipo": "video",
-   "likes": 139,
-   "comentarios": 4,
-   "reproducciones": 11048,
-   "publicado": "2026-09-24T04:24:32+00:00",
-   "cosechados": 4,
-   "opinion": 4,
+   "url": "https://www.instagram.com/p/DduntQPn_Oc/",
+   "cuenta": "bbcmundo_ig",
+   "zona": "internacional",
+   "fecha": "2026-09-25",
+   "titulo": "Vehículos calcinados, poblaciones confinadas y miles de militares en las calles",
+   "tipo": "carrusel",
+   "likes": 820,
+   "comentarios": 98,
+   "alcance": "extranjero",
+   "publicado": "2026-09-25T23:17:09+00:00",
+   "cosechados": 29,
+   "opinion": 28,
    "sentimiento": {
-    "positivo": 0,
-    "negativo": 3,
-    "neutral": 1,
+    "positivo": 2,
+    "negativo": 18,
+    "neutral": 8,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdrLTbxjlJs/",
-   "cuenta": "nmas_ig",
+   "url": "https://www.instagram.com/p/Ddtxr7yFUxn/",
+   "cuenta": "cnnee_ig",
    "zona": "internacional",
-   "fecha": "2026-09-24",
-   "titulo": "Mientras Delcy Rodríguez entra a la ONU, conversa con Trump y negocia con organismos financieros, María Corina Machado sigue sin poder regresar a Venezuela. @e…",
-   "tipo": "carrusel",
-   "likes": 137,
-   "comentarios": 8,
-   "alcance": "extranjero",
-   "publicado": "2026-09-24T15:11:14+00:00",
-   "cosechados": 8,
-   "opinion": 8,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 4,
-    "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "trump",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrO6x2IKdJ/",
-   "cuenta": "frontera_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-24",
-   "titulo": "🎤🇲🇽 La presidenta Claudia Sheinbaum informó que la banda surcoreana de K-pop Stray Kids visitará México para ofrecer un concierto.",
+   "fecha": "2026-09-25",
+   "titulo": "El papa León XIV expresó su apoyo a una \"buena cobertura\" cuando Christopher Lamb, corresponsal de CNN en el Vaticano, le preguntó sobre la decisión de la Casa…",
    "tipo": "video",
-   "likes": 109,
-   "comentarios": 10,
-   "reproducciones": 1940,
-   "publicado": "2026-09-24T15:43:31+00:00",
+   "likes": 820,
+   "comentarios": 17,
+   "reproducciones": 63632,
+   "alcance": "extranjero",
+   "publicado": "2026-09-25T15:25:37+00:00",
    "cosechados": 8,
-   "opinion": 4,
+   "opinion": 7,
    "sentimiento": {
-    "positivo": 1,
-    "negativo": 1,
+    "positivo": 2,
+    "negativo": 3,
     "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -1359,16 +671,107 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdpOekkDSNX/",
-   "cuenta": "mexicali686_ig",
-   "zona": "Mexicali",
-   "fecha": "2026-09-23",
-   "titulo": "APRENDE INGLÉS EN MEXICALI 🇺🇸",
+   "url": "https://www.instagram.com/p/Ddt1oEjDaXQ/",
+   "cuenta": "telemundo_ig",
+   "zona": "internacional",
+   "fecha": "2026-09-25",
+   "titulo": "La Corte Suprema levantó este viernes las restricciones a una controversial base de datos federal de votantes antes de las elecciones de noviembre.",
+   "tipo": "imagen",
+   "likes": 798,
+   "comentarios": 140,
+   "alcance": "nacional",
+   "publicado": "2026-09-25T15:59:33+00:00",
+   "cosechados": 25,
+   "opinion": 16,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 7,
+    "neutral": 9,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdtrE8-jk5F/",
+   "cuenta": "telemundo_ig",
+   "zona": "nacional",
+   "fecha": "2026-09-25",
+   "titulo": "🌊 El huracán Polo ya deja sentir sus efectos en la costa mexicana.",
+   "tipo": "video",
+   "likes": 685,
+   "comentarios": 6,
+   "reproducciones": 66903,
+   "alcance": "fuera",
+   "publicado": "2026-09-25T14:27:53+00:00",
+   "cosechados": 6,
+   "opinion": 3,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 0,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduXiLPCESe/",
+   "cuenta": "latinus_ig",
+   "zona": "nacional",
+   "fecha": "2026-09-25",
+   "titulo": "El gobernador del estado de Oaxaca, Salomón Jara Cruz, pidió al secretario de gobierno estatal que solicitara formalmente al Congreso la desaparición del Ayunt…",
    "tipo": "carrusel",
-   "likes": 104,
-   "comentarios": 0,
-   "publicado": "2026-09-23T21:00:30+00:00",
-   "cosechados": 0,
+   "likes": 656,
+   "comentarios": 94,
+   "alcance": "fuera",
+   "publicado": "2026-09-25T20:55:50+00:00",
+   "cosechados": 30,
+   "opinion": 28,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 20,
+    "neutral": 8,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduViuQmZNL/",
+   "cuenta": "latinus_ig",
+   "zona": "nacional",
+   "fecha": "2026-09-25",
+   "titulo": "Un juez de control le concedió prisión domiciliaria al exgobernador panista Ernesto Ruffo Appel, quien enfrenta un proceso por “huachicol” fiscal y delincuenci…",
+   "tipo": "imagen",
+   "likes": 510,
+   "comentarios": 20,
+   "alcance": "nacional",
+   "publicado": "2026-09-25T20:38:26+00:00",
+   "cosechados": 16,
+   "opinion": 13,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 6,
+    "neutral": 6,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduiIvPDi3W/",
+   "cuenta": "dwespanol_ig",
+   "zona": "nacional",
+   "fecha": "2026-09-25",
+   "titulo": "Así se ve el interior del devastador huracán Polo tras cruzarlo por dentro un avión",
+   "tipo": "video",
+   "likes": 489,
+   "comentarios": 1,
+   "reproducciones": 15277,
+   "alcance": "nacional",
+   "publicado": "2026-09-25T22:28:55+00:00",
+   "cosechados": 1,
    "opinion": 0,
    "sentimiento": {
     "positivo": 0,
@@ -1380,16 +783,82 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/Ddp0BQigNfr/",
-   "cuenta": "zeta_ig",
+   "url": "https://www.instagram.com/p/Dduf0JcEhxC/",
+   "cuenta": "tjnoticias_ig",
    "zona": "Tijuana",
-   "fecha": "2026-09-24",
-   "titulo": "Lamentaron el caso y dicen que ayudarán a la familia, pero no tienen contemplada una indemnización pese a que desde 2024 sabían que la escuela Amado Nervo requ…",
+   "fecha": "2026-09-25",
+   "titulo": "Peanuts tiene aproximadamente 4 meses y fue rescatado hace un mes, luego de ser atropellado. Desde entonces ha estado en recuperación, pero actualmente present…",
+   "tipo": "carrusel",
+   "likes": 477,
+   "comentarios": 8,
+   "publicado": "2026-09-25T22:08:11+00:00",
+   "cosechados": 8,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 2,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/Ddul_0BtRll/",
+   "cuenta": "dwespanol_ig",
+   "zona": "internacional",
+   "fecha": "2026-09-25",
+   "titulo": "Venezolanos piden que se permita el retorno de la opositora María Corina Machado",
    "tipo": "video",
-   "likes": 102,
+   "likes": 467,
+   "comentarios": 84,
+   "reproducciones": 7717,
+   "alcance": "extranjero",
+   "publicado": "2026-09-25T23:03:10+00:00",
+   "cosechados": 30,
+   "opinion": 29,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 21,
+    "neutral": 8,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduR6Y_MWkv/",
+   "cuenta": "telemundo_ig",
+   "zona": "internacional",
+   "fecha": "2026-09-25",
+   "titulo": "Josefina es una madre guatemalteca que vive en Florida y que, por temor, prefirió mantener su identidad en reserva. Su esposo fue deportado cuando su bebé tení…",
+   "tipo": "video",
+   "likes": 410,
+   "comentarios": 27,
+   "reproducciones": 21824,
+   "alcance": "extranjero",
+   "publicado": "2026-09-25T20:10:36+00:00",
+   "cosechados": 17,
+   "opinion": 15,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 8,
+    "neutral": 6,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/Ddud_kDko79/",
+   "cuenta": "tjnoticias_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-25",
+   "titulo": "Una fuga de hidrocarburo fue detectada el jueves 24 de septiembre en una línea subterránea ubicada dentro de la presa Abelardo L. Rodríguez.",
+   "tipo": "carrusel",
+   "likes": 410,
    "comentarios": 1,
-   "reproducciones": 2180,
-   "publicado": "2026-09-24T02:29:02+00:00",
+   "publicado": "2026-09-25T21:52:16+00:00",
    "cosechados": 1,
    "opinion": 1,
    "sentimiento": {
@@ -1402,17 +871,103 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdrOP_GAP-_/",
+   "url": "https://www.instagram.com/p/DduhoRAk93D/",
+   "cuenta": "aztecanoticias_ig",
+   "zona": "nacional",
+   "fecha": "2026-09-25",
+   "titulo": "#IMPORTANTE 🔴 Scarlet Virginia Ochoa Magaña, de 13 años, fue localizada con vida.⁣⁣",
+   "tipo": "imagen",
+   "likes": 331,
+   "comentarios": 14,
+   "alcance": "fuera",
+   "publicado": "2026-09-25T22:24:18+00:00",
+   "cosechados": 8,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 3,
+    "negativo": 1,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduK4mskQu6/",
+   "cuenta": "canal66_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-25",
+   "titulo": "La noche del pasado jueves 24 de septiembre, se registró un ataque armado dentro del restaurante de comida china TaiPak, ubicado en el sector Tres Ríos de Culi…",
+   "tipo": "imagen",
+   "likes": 287,
+   "comentarios": 1,
+   "publicado": "2026-09-25T19:05:18+00:00",
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduagXQjUic/",
+   "cuenta": "aztecanoticias_ig",
+   "zona": "nacional",
+   "fecha": "2026-09-25",
+   "titulo": "#SinJusticia | ¡INADMISIBLE! Es un atropello que las fiscalías ataquen a quienes buscan a sus desaparecidos⁣",
+   "tipo": "video",
+   "likes": 272,
+   "comentarios": 13,
+   "reproducciones": 2337,
+   "alcance": "fuera",
+   "publicado": "2026-09-25T21:23:02+00:00",
+   "cosechados": 8,
+   "opinion": 6,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 5,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdueN0DSMJ2/",
+   "cuenta": "tjnoticias_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-25",
+   "titulo": "Agentes de la Secretaría de Seguridad y Protección Ciudadana Municipal (SSPCM) detuvieron a un hombre en la colonia Corona del Rosal, luego de atender un repor…",
+   "tipo": "imagen",
+   "likes": 267,
+   "comentarios": 7,
+   "publicado": "2026-09-25T21:54:27+00:00",
+   "cosechados": 5,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdumyT8RVPD/",
    "cuenta": "nmas_ig",
    "zona": "nacional",
-   "fecha": "2026-09-24",
-   "titulo": "Luego de una reunión con directivos del Instituto, padres de los recién nacidos que murieron en el Hospital 1 del IMSS en Durango señalaron que están frente a…",
-   "tipo": "video",
-   "likes": 98,
-   "comentarios": 9,
-   "reproducciones": 3481,
+   "fecha": "2026-09-25",
+   "titulo": "La contaminación ambiental no solo provoca contingencias ambientales, también puede tener serias afectaciones en la salud, ya que respiramos partículas conocid…",
+   "tipo": "imagen",
+   "likes": 261,
+   "comentarios": 8,
    "alcance": "nacional",
-   "publicado": "2026-09-24T15:38:10+00:00",
+   "publicado": "2026-09-25T23:09:41+00:00",
    "cosechados": 8,
    "opinion": 7,
    "sentimiento": {
@@ -1425,87 +980,45 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdrPa00kRaA/",
-   "cuenta": "frontera_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-24",
-   "titulo": "Meta presentó Muse Charm, un pequeño dispositivo portátil que funciona con su asistente de inteligencia artificial Muse. 🤖",
-   "tipo": "carrusel",
-   "likes": 96,
-   "comentarios": 1,
-   "publicado": "2026-09-24T15:47:16+00:00",
-   "cosechados": 0,
-   "opinion": 0,
+   "url": "https://www.instagram.com/p/DdudISYiMEr/",
+   "cuenta": "latinus_ig",
+   "zona": "nacional",
+   "fecha": "2026-09-25",
+   "titulo": "#ObjetivoCiudadano. Chofer de ambulancia del IMSS provoca choque múltiple en Azcapotzalco. Presuntamente ebrio y a exceso de velocidad, el conductor arrolló a…",
+   "tipo": "video",
+   "likes": 258,
+   "comentarios": 8,
+   "reproducciones": 16358,
+   "alcance": "fuera",
+   "publicado": "2026-09-25T21:45:38+00:00",
+   "cosechados": 8,
+   "opinion": 7,
    "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
+    "positivo": 1,
+    "negativo": 3,
+    "neutral": 3,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdrOpQ1D-6d/",
+   "url": "https://www.instagram.com/p/DduZGOdgO6C/",
    "cuenta": "aztecanoticias_ig",
    "zona": "nacional",
-   "fecha": "2026-09-24",
-   "titulo": "¡ESTUDIAR SE VOLVIÓ UN RIESGO EN MORELOS! 🎓⚠️⁣",
+   "fecha": "2026-09-25",
+   "titulo": "¡EXIGEN JUSTICIA! Localizan sin vida al joven Mateo Hernández tras ser secuestrado en #Puebla⁣",
    "tipo": "video",
-   "likes": 65,
-   "comentarios": 4,
-   "reproducciones": 1845,
-   "alcance": "nacional",
-   "publicado": "2026-09-24T15:41:46+00:00",
-   "cosechados": 2,
-   "opinion": 2,
+   "likes": 222,
+   "comentarios": 8,
+   "reproducciones": 6182,
+   "alcance": "fuera",
+   "publicado": "2026-09-25T21:10:14+00:00",
+   "cosechados": 6,
+   "opinion": 3,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 0,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdpGuoOiKGE/",
-   "cuenta": "univisionsd_ig",
-   "zona": "San Diego",
-   "fecha": "2026-09-23",
-   "titulo": "🏥 #SALUD La administración de Donald Trump canceló aproximadamente 315 mil inscripciones de Obamacare, una medida que afecta a unas 760 mil personas.",
-   "tipo": "video",
-   "likes": 57,
-   "comentarios": 0,
-   "reproducciones": 1890,
-   "publicado": "2026-09-23T19:54:35+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdpMYJsq7ay/",
-   "cuenta": "canal66_ig",
-   "zona": "Mexicali",
-   "fecha": "2026-09-23",
-   "titulo": "Adriana y Luis Ramiro acudieron a Entrevistas con el Público para solicitar apoyo para su familia.",
-   "tipo": "video",
-   "likes": 44,
-   "comentarios": 1,
-   "reproducciones": 6018,
-   "publicado": "2026-09-23T20:43:20+00:00",
-   "cosechados": 1,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
+    "negativo": 2,
     "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -1513,49 +1026,129 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdrS4OPDLEh/",
+   "url": "https://www.instagram.com/p/Ddum8INvTPB/",
+   "cuenta": "tjnoticias_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-25",
+   "titulo": "Un león fue localizado en la zona de Valle Redondo, en Tijuana, luego de que ciudadanos reportaran su presencia al 9-1-1.",
+   "tipo": "imagen",
+   "likes": 201,
+   "comentarios": 0,
+   "publicado": "2026-09-25T23:10:35+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdumebBobaF/",
+   "cuenta": "tjpublica_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-25",
+   "titulo": "A través de redes sociales transeúntes de la zona centro en Mexicali captaron como un individuo se vio afectado por un artefacto balístico se encontraba corrie…",
+   "tipo": "video",
+   "likes": 196,
+   "comentarios": 5,
+   "reproducciones": 11948,
+   "publicado": "2026-09-25T23:07:24+00:00",
+   "cosechados": 4,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 2,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/Ddt5KYijXYM/",
+   "cuenta": "mexicali686_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-25",
+   "titulo": "Jajajaja buenos días 😃☀️ ❤️",
+   "tipo": "imagen",
+   "likes": 161,
+   "comentarios": 3,
+   "publicado": "2026-09-25T16:30:27+00:00",
+   "cosechados": 2,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduVh-GH-j6/",
+   "cuenta": "nmas_ig",
+   "zona": "nacional",
+   "fecha": "2026-09-25",
+   "titulo": "El poder en el futbol también se disputa fuera de la cancha. México respalda a Infantino y busca recuperar influencia en la Concacaf, mientras los conflictos i…",
+   "tipo": "carrusel",
+   "likes": 111,
+   "comentarios": 0,
+   "alcance": "nacional",
+   "publicado": "2026-09-25T20:38:20+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduSjZWGCeA/",
+   "cuenta": "mexicali686_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-25",
+   "titulo": "Y el invierno también 🤣🤣🤣",
+   "tipo": "imagen",
+   "likes": 77,
+   "comentarios": 0,
+   "publicado": "2026-09-25T20:12:19+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduZn3JDgjd/",
    "cuenta": "aztecanoticias_ig",
    "zona": "nacional",
-   "fecha": "2026-09-24",
-   "titulo": "¡GRECIA QUIROZ EXIGE QUE LA FGR (@fgrmexico) ATRAIGA EL CASO DE CARLOS MANZO! ⚖️⁣",
+   "fecha": "2026-09-25",
+   "titulo": "Una denuncia pesa sobre el Hospital General de Zona Número Uno del @imss_mx en Durango, donde madres y padres de familia alzan la voz para exigir justicia tras…",
    "tipo": "video",
-   "likes": 43,
-   "comentarios": 2,
-   "reproducciones": 2245,
+   "likes": 73,
+   "comentarios": 3,
+   "reproducciones": 870,
    "alcance": "nacional",
-   "publicado": "2026-09-24T16:18:29+00:00",
-   "cosechados": 2,
-   "opinion": 2,
+   "publicado": "2026-09-25T21:14:47+00:00",
+   "cosechados": 3,
+   "opinion": 1,
    "sentimiento": {
     "positivo": 0,
     "negativo": 1,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": [
-    {
-     "tema": "morena",
-     "comentarios": 1
-    }
-   ]
-  },
-  {
-   "url": "https://www.instagram.com/p/DdpSaarKIOi/",
-   "cuenta": "univisionsd_ig",
-   "zona": "San Diego",
-   "fecha": "2026-09-23",
-   "titulo": "📢 #COMUNIDAD ¡Escondido, nos vemos esta tarde!",
-   "tipo": "video",
-   "likes": 42,
-   "comentarios": 3,
-   "reproducciones": 1770,
-   "publicado": "2026-09-23T21:38:50+00:00",
-   "cosechados": 3,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
     "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -1563,21 +1156,21 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/Ddpo3IviOsa/",
-   "cuenta": "univisionsd_ig",
-   "zona": "San Diego",
-   "fecha": "2026-09-24",
-   "titulo": "¡Ya estamos en Escondido!",
+   "url": "https://www.instagram.com/p/DduDvoRPwUD/",
+   "cuenta": "canal66_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-25",
+   "titulo": "#Tijuana | El cuerpo sin vida de un hombre no identificado fue hallado envuelto en cobijas y amarrado dentro de un vehículo en un callejón de terracería de la…",
    "tipo": "video",
-   "likes": 41,
-   "comentarios": 2,
-   "reproducciones": 1521,
-   "publicado": "2026-09-24T00:52:07+00:00",
-   "cosechados": 2,
-   "opinion": 0,
+   "likes": 71,
+   "comentarios": 1,
+   "reproducciones": 5694,
+   "publicado": "2026-09-25T18:03:33+00:00",
+   "cosechados": 1,
+   "opinion": 1,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 0,
+    "negativo": 1,
     "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -1585,37 +1178,38 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/Ddp5L3aFGye/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
-   "fecha": "2026-09-24",
-   "titulo": "#AVANCE 🚨 Prevén lluvias y vientos para este jueves en Baja California",
-   "tipo": "carrusel",
-   "likes": 39,
-   "comentarios": 2,
-   "publicado": "2026-09-24T03:13:41+00:00",
-   "cosechados": 2,
-   "opinion": 2,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdpOb-6icS4/",
-   "cuenta": "ksdy50_ig",
-   "zona": "San Diego",
-   "fecha": "2026-09-23",
-   "titulo": "🌟🌟 ¡TENEMOS GANADORES! 🌟🌟⁠",
+   "url": "https://www.instagram.com/p/Ddua-EVjdOf/",
+   "cuenta": "mexicali686_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-25",
+   "titulo": "HOY HOY HOY Los Tucanes de Tijuana en el Palenque 2026 en Mexicali 🎶🤠❤️",
    "tipo": "imagen",
-   "likes": 25,
-   "comentarios": 2,
-   "publicado": "2026-09-23T21:00:19+00:00",
-   "cosechados": 2,
+   "likes": 59,
+   "comentarios": 0,
+   "publicado": "2026-09-25T21:25:52+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdsjUnKO2oc/",
+   "cuenta": "lavoz_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-25",
+   "titulo": "📰 De comenzar limpiando las instalaciones a ocupar cargos gerenciales dentro de La Voz de la Frontera.",
+   "tipo": "video",
+   "likes": 51,
+   "comentarios": 3,
+   "reproducciones": 844,
+   "publicado": "2026-09-25T04:05:33+00:00",
+   "cosechados": 3,
    "opinion": 1,
    "sentimiento": {
     "positivo": 1,
@@ -1627,42 +1221,20 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/Ddo9TPcmfqH/",
-   "cuenta": "soltij_ig",
+   "url": "https://www.instagram.com/p/DdulM68Pnj1/",
+   "cuenta": "tjnoticias_ig",
    "zona": "Tijuana",
-   "fecha": "2026-09-23",
-   "titulo": "La tortuga laúd enfrenta una disminución en sus anidaciones en Los Cabos y especialistas alertan sobre la pérdida de nidos y la falta de un manejo adecuado de…",
-   "tipo": "video",
-   "likes": 24,
-   "comentarios": 0,
-   "reproducciones": 978,
-   "publicado": "2026-09-23T18:31:01+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdpipMrIBQF/",
-   "cuenta": "mexicali686_ig",
-   "zona": "Mexicali",
-   "fecha": "2026-09-23",
-   "titulo": "Pura sabrosura 😮‍💨",
+   "fecha": "2026-09-25",
+   "titulo": "El presidente municipal de Tijuana, Ismael Burgueño Ruiz, atestiguó la colocación de la primera piedra de la Planta Desaladora de Agua en Playas de Rosarito, e…",
    "tipo": "imagen",
-   "likes": 24,
-   "comentarios": 0,
-   "publicado": "2026-09-23T23:56:43+00:00",
-   "cosechados": 0,
-   "opinion": 0,
+   "likes": 51,
+   "comentarios": 2,
+   "publicado": "2026-09-25T22:55:47+00:00",
+   "cosechados": 2,
+   "opinion": 1,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 0,
+    "negativo": 1,
     "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -1670,16 +1242,16 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdplRqLgq_J/",
-   "cuenta": "univisionsd_ig",
-   "zona": "San Diego",
-   "fecha": "2026-09-24",
-   "titulo": "Nota en desarrollo: Rotura de tubería en Seaport Village",
+   "url": "https://www.instagram.com/p/DduMpqLlU-c/",
+   "cuenta": "eltijuanense_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-25",
+   "titulo": "¡¡EXPERIENCIA VAN GOGH DENTRO DEL MUSEO DEL TROMPO!!",
    "tipo": "video",
-   "likes": 20,
+   "likes": 51,
    "comentarios": 0,
-   "reproducciones": 1792,
-   "publicado": "2026-09-24T00:20:09+00:00",
+   "reproducciones": 1019,
+   "publicado": "2026-09-25T19:21:19+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1692,63 +1264,43 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdpzGtUFC2x/",
-   "cuenta": "lavoz_ig",
-   "zona": "Mexicali",
-   "fecha": "2026-09-24",
-   "titulo": "🚨 Precaución en bulevar Manuel Gómez Morín",
-   "tipo": "carrusel",
-   "likes": 17,
-   "comentarios": 0,
-   "publicado": "2026-09-24T02:20:33+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrJXK6G8bX/",
-   "cuenta": "uniradio_ig",
-   "zona": "estatal",
-   "fecha": "2026-09-24",
-   "titulo": "¡Insólito! Una calafia rojo con crema perdió su eje trasero, esto sobre la calle Rafaela López en el Mariano Matamoros #Tijuana",
-   "tipo": "carrusel",
-   "likes": 16,
-   "comentarios": 0,
-   "publicado": "2026-09-24T14:54:16+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdphaS5vt4Q/",
-   "cuenta": "lavoz_ig",
-   "zona": "Mexicali",
-   "fecha": "2026-09-23",
-   "titulo": "🚨 Huelga de hambre por los “recibos locos” de la CFE",
+   "url": "https://www.instagram.com/p/Dduf4qpO__E/",
+   "cuenta": "sintesis_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-25",
+   "titulo": "¿Listos para vivir la pasión del futbol en el Estadio Caliente? 🐕🔥",
    "tipo": "video",
-   "likes": 13,
-   "comentarios": 0,
-   "reproducciones": 711,
-   "publicado": "2026-09-23T23:47:51+00:00",
-   "cosechados": 0,
-   "opinion": 0,
+   "likes": 35,
+   "comentarios": 107,
+   "reproducciones": 1488,
+   "publicado": "2026-09-25T22:09:49+00:00",
+   "cosechados": 22,
+   "opinion": 21,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 0,
+    "neutral": 20,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/Ddufdr0EQVA/",
+   "cuenta": "frontera_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-25",
+   "titulo": "🚨💧 ¡Detectan hidrocarburo en la presa Abelardo L. Rodríguez! Autoridades aseguran que la fuga ya está controlada",
+   "tipo": "video",
+   "likes": 31,
+   "comentarios": 3,
+   "reproducciones": 4136,
+   "publicado": "2026-09-25T22:05:48+00:00",
+   "cosechados": 3,
+   "opinion": 2,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 0,
+    "negativo": 2,
     "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -1756,15 +1308,16 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdrRFUbJ3Up/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
-   "fecha": "2026-09-24",
-   "titulo": "𝗔𝘀𝗶𝗺𝗶𝘀𝗺𝗼, 𝗽𝗶𝗱𝗶𝗲𝗿𝗼𝗻 𝗹𝗮 𝘀𝗮𝗹𝗶𝗱𝗮 𝗱𝗲 𝗹𝗮 𝘀𝗲𝗰𝗿𝗲𝘁𝗮𝗿𝗶𝗮 𝗱𝗲 𝗖𝘂𝗹𝘁𝘂𝗿𝗮 𝗱𝗲 𝗕𝗮𝗷𝗮 𝗖𝗮𝗹𝗶𝗳𝗼𝗿𝗻𝗶𝗮, 𝗔𝗹𝗺𝗮 𝗗𝗲𝗹𝗶𝗮 Á𝗯𝗿𝗲𝗴𝗼, 𝗽𝗼𝗿 𝗰𝗼𝗻𝘀𝗶𝗱𝗲𝗿𝗮𝗿 𝗾𝘂𝗲 𝗻𝗼 𝗵𝗮 𝗱𝗲𝗳𝗲𝗻𝗱𝗶𝗱𝗼 𝗲𝗹 𝗽𝗮𝘁𝗿𝗶𝗺𝗼𝗻𝗶𝗼 𝗱𝗲𝗹 𝗖𝗲𝗮𝗿𝘁𝗲 𝗻𝗶…",
-   "tipo": "imagen",
-   "likes": 12,
+   "url": "https://www.instagram.com/p/DdukKSCyWZn/",
+   "cuenta": "siempre_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-25",
+   "titulo": "🚨🦁 MOVILIZACIÓN POR LEÓN EN TIJUANA",
+   "tipo": "video",
+   "likes": 30,
    "comentarios": 1,
-   "publicado": "2026-09-24T16:05:19+00:00",
+   "reproducciones": 1860,
+   "publicado": "2026-09-25T22:47:48+00:00",
    "cosechados": 1,
    "opinion": 0,
    "sentimiento": {
@@ -1777,36 +1330,188 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/Ddo-x6tnxfc/",
-   "cuenta": "tijuanainforma_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-23",
-   "titulo": "Comentario del periodista Carlos Loret de Mola.",
+   "url": "https://www.instagram.com/p/DduJqLOGNbZ/",
+   "cuenta": "mexicali686_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-25",
+   "titulo": "El domingo perfecto existe y te está esperando en ELEV8TION ❤️🍳🥂☕️",
    "tipo": "imagen",
-   "likes": 11,
-   "comentarios": 4,
-   "publicado": "2026-09-23T18:43:20+00:00",
-   "cosechados": 4,
-   "opinion": 3,
+   "likes": 30,
+   "comentarios": 0,
+   "publicado": "2026-09-25T18:54:36+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/Ddup5RGjClU/",
+   "cuenta": "aztecanoticias_ig",
+   "zona": "nacional",
+   "fecha": "2026-09-25",
+   "titulo": "¡Momento de ver el cielo! 🌙🌃 La Luna, planetas y las estrellas protagonizan eventos únicos ⁣",
+   "tipo": "video",
+   "likes": 30,
+   "comentarios": 0,
+   "reproducciones": 205,
+   "alcance": "nacional",
+   "publicado": "2026-09-25T23:36:59+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdudOBemFGi/",
+   "cuenta": "zeta_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-25",
+   "titulo": "Aún se desconoce la mecánica que se seguirá ante esta resolución en cuanto al tiempo y formas del abandono del Centro Federal de Readaptación Social (Cefereso)…",
+   "tipo": "imagen",
+   "likes": 21,
+   "comentarios": 0,
+   "publicado": "2026-09-25T21:45:31+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdulzhEBzCW/",
+   "cuenta": "sintesis_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-25",
+   "titulo": "Verónica Ruffo sobre la prisión domiciliaria de Ernesto Ruffo Appel",
+   "tipo": "video",
+   "likes": 19,
+   "comentarios": 1,
+   "reproducciones": 247,
+   "publicado": "2026-09-25T23:01:13+00:00",
+   "cosechados": 1,
+   "opinion": 1,
    "sentimiento": {
     "positivo": 1,
     "negativo": 0,
-    "neutral": 2,
+    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/Ddp4M39Gy3P/",
+   "url": "https://www.instagram.com/p/Ddulzg2koNv/",
    "cuenta": "elvigia_ig",
    "zona": "Ensenada",
-   "fecha": "2026-09-24",
-   "titulo": "𝗘𝗹 𝗰𝘂𝗲𝗿𝗽𝗼 𝘀𝗶𝗻 𝘃𝗶𝗱𝗮 𝗱𝗲 𝘂𝗻 𝗺𝗲𝗻𝗼𝗿 𝗾𝘂𝗲 𝗵𝗮𝗯í𝗮 𝘀𝗶𝗱𝗼 𝗮𝗿𝗿𝗮𝘀𝘁𝗿𝗮𝗱𝗼 𝗽𝗼𝗿 𝗲𝗹 𝗺𝗮𝗿 𝗲𝗻 𝗣𝗹𝗮𝘆𝗮𝘀 𝗱𝗲 𝗧𝗶𝗷𝘂𝗮𝗻𝗮 𝗳𝘂𝗲 𝗹𝗼𝗰𝗮𝗹𝗶𝘇𝗮𝗱𝗼 𝗹𝗮 𝗺𝗮ñ𝗮𝗻𝗮 𝗱𝗲 𝗲𝘀𝘁𝗲 𝗺𝗶é𝗿𝗰𝗼𝗹𝗲𝘀, 𝗮 𝗹𝗮 𝗮𝗹𝘁𝘂𝗿𝗮 𝗱𝗲 𝗹𝗮 𝗽𝗹𝗮𝘆𝗮 𝗘𝗹…",
+   "fecha": "2026-09-25",
+   "titulo": "🏐🏆 ¡Pibes A se corona campeón de Intermedia Femenil!",
+   "tipo": "carrusel",
+   "likes": 18,
+   "comentarios": 2,
+   "publicado": "2026-09-25T23:00:04+00:00",
+   "cosechados": 2,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduoRogEQKd/",
+   "cuenta": "lacronica_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-25",
+   "titulo": "🐾 223 perros y gatos rescatados esperan hogar en Mexicali 🏠",
+   "tipo": "imagen",
+   "likes": 17,
+   "comentarios": 0,
+   "alcance": "zona",
+   "publicado": "2026-09-25T23:22:12+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduQa1diu8A/",
+   "cuenta": "univisionsd_ig",
+   "zona": "San Diego",
+   "fecha": "2026-09-25",
+   "titulo": "🚨 #TIJUANA La muerte de Christopher, un estudiante de 15 años, genera reclamos por la seguridad en las escuelas de Tijuana.",
+   "tipo": "video",
+   "likes": 16,
+   "comentarios": 1,
+   "reproducciones": 1176,
+   "publicado": "2026-09-25T19:56:05+00:00",
+   "cosechados": 1,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduDmC1hXvS/",
+   "cuenta": "lavoz_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-25",
+   "titulo": "Si te consideras un fanático de romper récords a lo grande, ese lugar es para ti. El festival Almejazo 2026 🦪 buscará superar la marca de 2025 con un cóctel mo…",
+   "tipo": "imagen",
+   "likes": 13,
+   "comentarios": 0,
+   "publicado": "2026-09-25T18:06:20+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduBpZ-mME6/",
+   "cuenta": "mexicali686_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-25",
+   "titulo": "🔥🎶 ¡CUMBIA FEST ESTÁ POR LLEGAR! 🎶🔥",
    "tipo": "imagen",
    "likes": 10,
-   "comentarios": 0,
-   "publicado": "2026-09-24T03:05:05+00:00",
+   "comentarios": 1,
+   "publicado": "2026-09-25T17:44:35+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1819,16 +1524,16 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdpQ7Hfu54Z/",
-   "cuenta": "canal66_ig",
-   "zona": "Mexicali",
-   "fecha": "2026-09-23",
-   "titulo": "Prepárate para algo muy nuestro",
+   "url": "https://www.instagram.com/p/DduWQL5yf7Z/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-25",
+   "titulo": "¡COLOCAN LA PRIMERA PIEDRA DE LA DESALADORA DE ROSARITO!",
    "tipo": "video",
-   "likes": 9,
+   "likes": 10,
    "comentarios": 0,
-   "reproducciones": 1084,
-   "publicado": "2026-09-23T21:22:29+00:00",
+   "reproducciones": 501,
+   "publicado": "2026-09-25T20:45:07+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1841,65 +1546,22 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdpfNWdhSuY/",
-   "cuenta": "lavoz_ig",
-   "zona": "Mexicali",
-   "fecha": "2026-09-23",
-   "titulo": "🎀 Preparan carrera Octubre Rosa 2026 en Mexicali",
-   "tipo": "video",
-   "likes": 9,
-   "comentarios": 0,
-   "reproducciones": 380,
-   "publicado": "2026-09-23T23:27:20+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdpuX_kGgPU/",
-   "cuenta": "lavoz_ig",
-   "zona": "Mexicali",
-   "fecha": "2026-09-24",
-   "titulo": "🌴 Arranca la temporada del dátil en Mexicali",
-   "tipo": "carrusel",
-   "likes": 6,
-   "comentarios": 0,
-   "publicado": "2026-09-24T01:39:13+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdpCl47Dzlu/",
+   "url": "https://www.instagram.com/p/DduicjNj4TU/",
    "cuenta": "elmexicano_ig",
    "zona": "nacional",
-   "fecha": "2026-09-23",
-   "titulo": "#Nacional | Cárteles, APEC y población destacaron en la mañanera.",
+   "fecha": "2026-09-25",
+   "titulo": "#Nacional l Una explosión de pirotecnia durante una procesión de fiestas patronales en San Francisco Tepojaco, Cuautitlán Izcalli, dejó un joven de 15 años fal…",
    "tipo": "video",
-   "likes": 5,
-   "comentarios": 0,
-   "reproducciones": 619,
-   "alcance": "nacional",
-   "publicado": "2026-09-23T19:17:17+00:00",
-   "cosechados": 0,
-   "opinion": 0,
+   "likes": 9,
+   "comentarios": 2,
+   "reproducciones": 1758,
+   "alcance": "fuera",
+   "publicado": "2026-09-25T22:31:36+00:00",
+   "cosechados": 1,
+   "opinion": 1,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 0,
+    "negativo": 1,
     "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -1907,232 +1569,39 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/Ddq0Z_sieL9/",
-   "cuenta": "uniradio_ig",
-   "zona": "estatal",
-   "fecha": "2026-09-24",
-   "titulo": "Con 15 mil 600 millones de pesos, iniciará construcción de la planta desaladora en Playas de Rosarito",
-   "tipo": "video",
-   "likes": 5,
-   "comentarios": 0,
-   "reproducciones": 284,
-   "publicado": "2026-09-24T11:52:23+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdqEyzKFX8y/",
-   "cuenta": "elmexicano_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-24",
-   "titulo": "#Tijuana l 🌇 Un atardecer de colores y una luna creciente cerraron el día en la ciudad",
-   "tipo": "carrusel",
-   "likes": 4,
-   "comentarios": 0,
-   "alcance": "zona",
-   "publicado": "2026-09-24T04:55:07+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrQ_POIPWU/",
-   "cuenta": "ksdy50_ig",
-   "zona": "San Diego",
-   "fecha": "2026-09-24",
-   "titulo": "🔴 Coronado se convierte en zona de alta actividad de mosquitos y prepara fumigación.⁠",
-   "tipo": "imagen",
-   "likes": 4,
-   "comentarios": 0,
-   "publicado": "2026-09-24T16:01:09+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/Ddp3pkOladB/",
-   "cuenta": "elvigia_ig",
-   "zona": "Ensenada",
-   "fecha": "2026-09-24",
-   "titulo": "Policiaca - El Vigía Digital - 23 de Septiembre del 2026",
-   "tipo": "video",
-   "likes": 3,
-   "comentarios": 0,
-   "reproducciones": 378,
-   "publicado": "2026-09-24T03:01:26+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrFKLkAhCs/",
-   "cuenta": "uniradio_ig",
-   "zona": "estatal",
-   "fecha": "2026-09-24",
-   "titulo": "Cetys Universidad celebra su 65 Aniversario",
-   "tipo": "video",
-   "likes": 3,
-   "comentarios": 0,
-   "reproducciones": 217,
-   "publicado": "2026-09-24T14:18:50+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrIOZysprY/",
-   "cuenta": "uniradio_ig",
-   "zona": "estatal",
-   "fecha": "2026-09-24",
-   "titulo": "Frente al Auditorio de #Tijuana se registró un #choque entre un #vehículo particular y un #camión del corredor Aguacaliente",
-   "tipo": "imagen",
-   "likes": 3,
-   "comentarios": 0,
-   "publicado": "2026-09-24T14:45:09+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrQ_I0AchG/",
-   "cuenta": "ksdy50_ig",
-   "zona": "San Diego",
-   "fecha": "2026-09-24",
-   "titulo": "¿Puedes cruzar la frontera con más de $10,000? ¿Es por persona o por familia? ¿Te cobran impuestos si declaras el dinero?",
-   "tipo": "video",
-   "likes": 3,
-   "comentarios": 0,
-   "reproducciones": 131,
-   "publicado": "2026-09-24T16:00:09+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdpxwaIlLxW/",
-   "cuenta": "lavoz_ig",
-   "zona": "Mexicali",
-   "fecha": "2026-09-24",
-   "titulo": "🩺 ¿ITS o ETS? No son exactamente lo mismo",
-   "tipo": "carrusel",
-   "likes": 2,
-   "comentarios": 0,
-   "publicado": "2026-09-24T02:08:46+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/Ddq8JKviQwS/",
-   "cuenta": "uniradio_ig",
-   "zona": "estatal",
-   "fecha": "2026-09-24",
-   "titulo": "México, segundo lugar en Latinoamérica en número de estudiantes universitarios",
-   "tipo": "video",
-   "likes": 2,
-   "comentarios": 0,
-   "reproducciones": 126,
-   "publicado": "2026-09-24T12:59:24+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrQ7IiDMl4/",
+   "url": "https://www.instagram.com/p/Dduncm_mznR/",
    "cuenta": "lacronica_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-24",
-   "titulo": "Aprovecha las 𝗚𝗥𝗔𝗡𝗗𝗘𝗦 𝗢𝗙𝗘𝗥𝗧𝗔𝗦 de los 𝗝𝗨𝗘𝗩𝗘𝗦 𝗗𝗘 𝗗𝗘𝗦𝗖𝗢𝗡𝗧𝗢𝗡𝗘𝗦 🥊 Sólo en @elfloridoabarrotesycarnes , Que Barato, Ahhh!",
-   "tipo": "carrusel",
-   "likes": 2,
-   "comentarios": 0,
-   "alcance": "zona",
-   "publicado": "2026-09-24T16:00:21+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.instagram.com/p/DdrRcpVGCLo/",
-   "cuenta": "sintesis_ig",
-   "zona": "Tijuana",
-   "fecha": "2026-09-24",
-   "titulo": "Un nuevo informe de investigadores de la University of Chicago Climate Impact Lab estima que el actual fenómeno de El Niño podría estar relacionado con hasta 4…",
+   "zona": "estatal",
+   "fecha": "2026-09-25",
+   "titulo": "🚗 Si tus placas están dañadas, su reposición tendrá un 80% de descuento en Baja California.",
    "tipo": "imagen",
-   "likes": 2,
+   "likes": 7,
+   "comentarios": 1,
+   "alcance": "estatal",
+   "publicado": "2026-09-25T23:14:59+00:00",
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdupOjigskE/",
+   "cuenta": "lacronica_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-25",
+   "titulo": "🚑 La falta de cultura vial complica la llegada de ambulancias y Bomberos en Mexicali",
+   "tipo": "video",
+   "likes": 7,
    "comentarios": 0,
-   "publicado": "2026-09-24T16:04:56+00:00",
+   "reproducciones": 345,
+   "alcance": "zona",
+   "publicado": "2026-09-25T23:31:24+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -2145,15 +1614,37 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdpJ2HOGO5T/",
+   "url": "https://www.instagram.com/p/DduJk-PTdBs/",
+   "cuenta": "tijuanainforma_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-25",
+   "titulo": "Casa en venta en Burdeos Residencial📍",
+   "tipo": "video",
+   "likes": 6,
+   "comentarios": 0,
+   "reproducciones": 305,
+   "publicado": "2026-09-25T18:56:04+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdtMBZzm8nk/",
    "cuenta": "radartecate_ig",
    "zona": "Tecate",
-   "fecha": "2026-09-23",
-   "titulo": "🩷 ¡Ponte la camiseta y camina por una gran causa! 🩷",
+   "fecha": "2026-09-25",
+   "titulo": "#Tecate|| Se registra ataque armado en contra de tres personas del sexo masculino. Los hechos ocurrieron en el bordo del río a la altura de la colonia Cuauhtém…",
    "tipo": "imagen",
-   "likes": 0,
+   "likes": 4,
    "comentarios": 0,
-   "publicado": "2026-09-23T20:20:02+00:00",
+   "publicado": "2026-09-25T09:56:00+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -2166,16 +1657,81 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdrO31qpZ41/",
+   "url": "https://www.instagram.com/p/DduIqpjhPVy/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-25",
+   "titulo": "💧🌊 Conoce más sobre la próxima Planta Desaladora de Playas de Rosarito y descubre cómo será el proceso para convertir el agua del mar en agua potable. 🚰",
+   "tipo": "video",
+   "likes": 4,
+   "comentarios": 0,
+   "reproducciones": 174,
+   "publicado": "2026-09-25T18:46:41+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdueZ1Jy6Ni/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-25",
+   "titulo": "FGE ASEGURA A 12 CANINOS DURANTE CATEO POR PRESUNTO MALTRATO ANIMAL EN TIJUANA",
+   "tipo": "video",
+   "likes": 4,
+   "comentarios": 0,
+   "reproducciones": 237,
+   "publicado": "2026-09-25T21:56:28+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdujB05SrWO/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-25",
+   "titulo": "La #desaladora más grande de América Latina, acaba de dar su primer gran paso, aquí en #BajaCalifornia",
+   "tipo": "video",
+   "likes": 4,
+   "comentarios": 0,
+   "reproducciones": 177,
+   "publicado": "2026-09-25T22:37:50+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdukCcviFcd/",
    "cuenta": "elvigia_ig",
    "zona": "Ensenada",
-   "fecha": "2026-09-24",
-   "titulo": "𝗘𝗡 𝗩𝗜𝗩𝗢 🚨 𝗦𝗘 𝗥𝗘𝗣𝗢𝗥𝗧𝗔𝗡 𝗗𝗘𝗧𝗢𝗡𝗔𝗖𝗜𝗢𝗡𝗘𝗦 𝗗𝗘 𝗔𝗥𝗠𝗔 𝗗𝗘 𝗙𝗨𝗘𝗚𝗢 𝗘𝗡 𝗖𝗔𝗟𝗟𝗘 𝗥𝗜𝗩𝗘𝗥𝗢𝗟𝗟 𝗬 𝟭𝟮.",
-   "tipo": "video",
-   "likes": 0,
+   "fecha": "2026-09-25",
+   "titulo": "𝗟𝗮 𝗨𝗻𝗶𝘃𝗲𝗿𝘀𝗶𝗱𝗮𝗱 𝗔𝘂𝘁ó𝗻𝗼𝗺𝗮 𝗱𝗲 𝗕𝗮𝗷𝗮 𝗖𝗮𝗹𝗶𝗳𝗼𝗿𝗻𝗶𝗮 𝗿𝗲𝗮𝗹𝗶𝘇𝗮𝗿á 𝗲𝘀𝘁𝗲 𝗱𝗼𝗺𝗶𝗻𝗴𝗼 𝟮𝟳 𝗱𝗲 𝘀𝗲𝗽𝘁𝗶𝗲𝗺𝗯𝗿𝗲 𝗹𝗮 𝗲𝗱𝗶𝗰𝗶ó𝗻 𝟮𝟭 𝗱𝗲𝗹 𝗙𝗲𝘀𝘁𝗶𝘃𝗮𝗹 𝗜𝗻𝘁𝗲𝗿𝗻𝗮𝗰𝗶𝗼𝗻𝗮𝗹 𝗱𝗲 𝗝𝗮𝘇𝘇, 𝗲𝗻 𝗲𝗹 𝗝𝗮𝗿𝗱í𝗻 𝗥𝗼𝘁𝗼𝗻𝗱𝗮 𝗱𝗲𝗹 𝗖…",
+   "tipo": "imagen",
+   "likes": 4,
    "comentarios": 0,
-   "reproducciones": 102,
-   "publicado": "2026-09-24T15:43:11+00:00",
+   "publicado": "2026-09-25T22:45:07+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -2188,16 +1744,404 @@
    "temas": []
   },
   {
-   "url": "https://www.instagram.com/p/DdrRGptFgM0/",
+   "url": "https://www.instagram.com/p/Ddum9UFDcTN/",
+   "cuenta": "elmexicano_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-25",
+   "titulo": "#Estatal l 🗳️ Julieta Ramírez adelantó que su estrategia parte de escuchar a todos los sectores: ganaderos, agricultores, jornaleros, estudiantes y mujeres, co…",
+   "tipo": "video",
+   "likes": 4,
+   "comentarios": 0,
+   "reproducciones": 127,
+   "alcance": "estatal",
+   "publicado": "2026-09-25T23:11:07+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduSCJemE0m/",
+   "cuenta": "radartecate_ig",
+   "zona": "Tecate",
+   "fecha": "2026-09-25",
+   "titulo": "#Tecate|| Todo listo para la cabalgata Pink Ride. Aquí todos los detalles.",
+   "tipo": "imagen",
+   "likes": 3,
+   "comentarios": 0,
+   "publicado": "2026-09-25T20:07:47+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdubddXjJfR/",
+   "cuenta": "elmexicano_ig",
+   "zona": "Playas de Rosarito",
+   "fecha": "2026-09-25",
+   "titulo": "#Estatal l La gobernadora Marina del Pilar Ávila Olmeda encabezó este viernes la colocación de la primera piedra de la planta desaladora en Playas de Rosarito,…",
+   "tipo": "carrusel",
+   "likes": 3,
+   "comentarios": 0,
+   "alcance": "zona",
+   "publicado": "2026-09-25T21:30:08+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/Ddupdi8gXiE/",
+   "cuenta": "ksdy50_ig",
+   "zona": "San Diego",
+   "fecha": "2026-09-25",
+   "titulo": "PADRES FESTEJAN SU PASE A POSTEMPORADA",
+   "tipo": "video",
+   "likes": 3,
+   "comentarios": 0,
+   "reproducciones": 79,
+   "publicado": "2026-09-25T23:33:07+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduXaxpkiMj/",
+   "cuenta": "radartecate_ig",
+   "zona": "Tecate",
+   "fecha": "2026-09-25",
+   "titulo": "#Tecate|| La Calle Arturo Guerra fue cerrada temporalmente a la altura de la bajada de Los Encinos o ferrerías Durán por un socavón que se hizo en uno de los c…",
+   "tipo": "carrusel",
+   "likes": 2,
+   "comentarios": 1,
+   "publicado": "2026-09-25T20:54:49+00:00",
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdsO-9RAB1x/",
+   "cuenta": "soltij_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-25",
+   "titulo": "En esta entrevista para el Sol de Tijuana ☀️ Iván Garza, miembro del grupo Mariachi Vargas de Tecalitlán habló sobre la emoción de compartir escenario con Majo…",
+   "tipo": "video",
+   "likes": 2,
+   "comentarios": 0,
+   "reproducciones": 90,
+   "publicado": "2026-09-25T01:03:16+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduAcfDM5q2/",
+   "cuenta": "uniradio_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-25",
+   "titulo": "PARTE II:",
+   "tipo": "video",
+   "likes": 2,
+   "comentarios": 0,
+   "reproducciones": 59,
+   "publicado": "2026-09-25T17:36:17+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdubhP4DAQP/",
+   "cuenta": "lavoz_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-25",
+   "titulo": "⭕🚗 Guía rápida para circular glorieta, por ejemplo la de Lázaro Cárdenas",
+   "tipo": "carrusel",
+   "likes": 2,
+   "comentarios": 0,
+   "publicado": "2026-09-25T21:30:39+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/Ddumqi8mLns/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-25",
+   "titulo": "𝗔𝘂𝘁𝗼𝗿𝗶𝗱𝗮𝗱𝗲𝘀 𝗱𝗲 𝗹𝗼𝘀 𝘁𝗿𝗲𝘀 ó𝗿𝗱𝗲𝗻𝗲𝘀 𝗱𝗲 𝗴𝗼𝗯𝗶𝗲𝗿𝗻𝗼 𝗿𝗲𝘀𝗰𝗮𝘁𝗮𝗿𝗼𝗻 𝗲𝘀𝘁𝗲 𝘃𝗶𝗲𝗿𝗻𝗲𝘀 𝗮 𝘂𝗻 𝗳𝗲𝗹𝗶𝗻𝗼 𝗹𝗼𝗰𝗮𝗹𝗶𝘇𝗮𝗱𝗼 𝗲𝗻 𝗹𝗼𝘀 𝗮𝗹𝗿𝗲𝗱𝗲𝗱𝗼𝗿𝗲𝘀 𝗱𝗲 𝗩𝗮𝗹𝗹𝗲 𝗥𝗲𝗱𝗼𝗻𝗱𝗼, 𝗲𝗻 𝗧𝗶𝗷𝘂𝗮𝗻𝗮, 𝘁𝗿𝗮𝘀 𝘂𝗻 𝗿𝗲𝗽𝗼𝗿𝘁𝗲 𝗰𝗶𝘂…",
+   "tipo": "imagen",
+   "likes": 2,
+   "comentarios": 0,
+   "publicado": "2026-09-25T23:08:03+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdungDSHSvv/",
+   "cuenta": "lacronica_ig",
+   "zona": "estatal",
+   "fecha": "2026-09-25",
+   "titulo": "💬Julieta Ramírez reúne a liderazgos de Morena para fortalecer la unidad en Baja California",
+   "tipo": "imagen",
+   "likes": 2,
+   "comentarios": 0,
+   "alcance": "estatal",
+   "publicado": "2026-09-25T23:15:27+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/Ddtu25tiWHr/",
+   "cuenta": "canal66_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-25",
+   "titulo": "¡Tus favoritos al mejor precio! 👛✨Ven por ofertas especiales y comprueba porque somos los más baratos todos los días #Quebaratoahhh",
+   "tipo": "imagen",
+   "likes": 1,
+   "comentarios": 0,
+   "publicado": "2026-09-25T15:00:25+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DdtzcLEmG6d/",
+   "cuenta": "radartecate_ig",
+   "zona": "Tecate",
+   "fecha": "2026-09-25",
+   "titulo": "#Tecate|| La mañana de este viernes 25 de septiembre entre la calle Gardenias de la colonia conocida como Nido de las Aguilas fueron hallados dos cuerpos sin v…",
+   "tipo": "imagen",
+   "likes": 1,
+   "comentarios": 0,
+   "publicado": "2026-09-25T15:40:27+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduHkGQmLsT/",
+   "cuenta": "lavoz_ig",
+   "zona": "Mexicali",
+   "fecha": "2026-09-25",
+   "titulo": "🤔 El periodismo de verdad necesita apoyo real.",
+   "tipo": "imagen",
+   "likes": 1,
+   "comentarios": 0,
+   "publicado": "2026-09-25T18:36:18+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduqTmCFwn4/",
    "cuenta": "lacronica_ig",
    "zona": "Mexicali",
-   "fecha": "2026-09-24",
-   "titulo": "🚧 ¡Precaución en Río Nuevo!",
+   "fecha": "2026-09-25",
+   "titulo": "🧡 Buscan a Ana Paola, de 15 años; salió de la escuela y no regresó a casa",
+   "tipo": "imagen",
+   "likes": 1,
+   "comentarios": 0,
+   "alcance": "zona",
+   "publicado": "2026-09-25T23:39:57+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/Ddt6Eb9GBAb/",
+   "cuenta": "radartecate_ig",
+   "zona": "Tecate",
+   "fecha": "2026-09-25",
+   "titulo": "#Tecate|| Vehículo de la empresa Panadería Tijuana que se dirigía esta mañana a la ciudad de Tecate chocó contra los muros centrales de la carretera en el puen…",
    "tipo": "carrusel",
    "likes": 0,
    "comentarios": 0,
+   "publicado": "2026-09-25T16:38:22+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/Ddue5mxj7LP/",
+   "cuenta": "elmexicano_ig",
+   "zona": "Tijuana",
+   "fecha": "2026-09-25",
+   "titulo": "#Policiaca l Un hombre identificado como Román Daniel \"N\" fue detenido en la colonia Natura por agentes de la Policía Municipal al ser sorprendido con dosis de…",
+   "tipo": "imagen",
+   "likes": 0,
+   "comentarios": 0,
    "alcance": "zona",
-   "publicado": "2026-09-24T16:01:55+00:00",
+   "publicado": "2026-09-25T22:00:13+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DduotUjmDjs/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-25",
+   "titulo": "𝗘𝗹 𝗖𝗼𝗻𝗴𝗿𝗲𝘀𝗼 𝗱𝗲𝗹 𝗘𝘀𝘁𝗮𝗱𝗼 𝗮𝗽𝗿𝗼𝗯ó 𝗽𝗼𝗿 𝟮𝟬 𝘃𝗼𝘁𝗼𝘀 𝗮 𝗳𝗮𝘃𝗼𝗿 𝘆 𝗻𝗶𝗻𝗴𝘂𝗻𝗼 𝗲𝗻 𝗰𝗼𝗻𝘁𝗿𝗮 𝘂𝗻𝗮 𝗿𝗲𝗳𝗼𝗿𝗺𝗮 𝗮 𝗹𝗮 𝗟𝗲𝘆 𝗱𝗲𝗹 𝗣𝗲𝗿𝗶ó𝗱𝗶𝗰𝗼 𝗢𝗳𝗶𝗰𝗶𝗮𝗹 𝗱𝗲𝗹 𝗘𝘀𝘁𝗮𝗱𝗼 𝗱𝗲 𝗕𝗮𝗷𝗮 𝗖𝗮𝗹𝗶𝗳𝗼𝗿𝗻𝗶𝗮, 𝗽𝗮𝗿𝗮 𝗮𝗿𝗺𝗼𝗻𝗶𝘇𝗮𝗿…",
+   "tipo": "imagen",
+   "likes": 0,
+   "comentarios": 0,
+   "publicado": "2026-09-25T23:25:55+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/Dduotd_GCaE/",
+   "cuenta": "elvigia_ig",
+   "zona": "Ensenada",
+   "fecha": "2026-09-25",
+   "titulo": "Destituyen a delegado tras caso de huachicol #elvigia #Nacional #Guanajuato",
+   "tipo": "video",
+   "likes": 0,
+   "comentarios": 0,
+   "reproducciones": 31,
+   "publicado": "2026-09-25T23:26:30+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.instagram.com/p/Ddupu8HTUX0/",
+   "cuenta": "ksdy50_ig",
+   "zona": "San Diego",
+   "fecha": "2026-09-25",
+   "titulo": "¿Podría una inteligencia artificial decidir tu despido?",
+   "tipo": "video",
+   "likes": 0,
+   "comentarios": 0,
+   "reproducciones": 81,
+   "publicado": "2026-09-25T23:35:55+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -2222,46 +2166,46 @@
    "cuenta": "aztecanoticias_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 91,
-   "crudos": 94,
+   "comentarios": 25,
+   "crudos": 26,
    "fuera": 0
   },
   {
    "cuenta": "bbcmundo_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 144,
-   "crudos": 150,
+   "comentarios": 111,
+   "crudos": 119,
    "fuera": 0
   },
   {
    "cuenta": "canal66_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 58,
-   "crudos": 60
+   "comentarios": 32,
+   "crudos": 34
   },
   {
    "cuenta": "capitalmxl_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 13,
-   "crudos": 15
+   "comentarios": 5,
+   "crudos": 8
   },
   {
    "cuenta": "cnnee_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 77,
-   "crudos": 84,
+   "comentarios": 59,
+   "crudos": 59,
    "fuera": 0
   },
   {
    "cuenta": "dwespanol_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 99,
-   "crudos": 99,
+   "comentarios": 95,
+   "crudos": 95,
    "fuera": 0
   },
   {
@@ -2275,7 +2219,7 @@
    "cuenta": "elmexicano_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
+   "comentarios": 1,
    "crudos": 5,
    "fuera": 0
   },
@@ -2283,73 +2227,73 @@
    "cuenta": "eltijuanense_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 11,
-   "crudos": 16
+   "comentarios": 1,
+   "crudos": 10
   },
   {
    "cuenta": "elvigia_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 3,
+   "comentarios": 2,
    "crudos": 6
   },
   {
    "cuenta": "ensenadadigna_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 75,
-   "crudos": 75
+   "comentarios": 76,
+   "crudos": 76
   },
   {
    "cuenta": "frontera_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 13,
-   "crudos": 16
+   "comentarios": 3,
+   "crudos": 7
   },
   {
    "cuenta": "ksdy50_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 26,
-   "crudos": 29
+   "comentarios": 56,
+   "crudos": 58
   },
   {
    "cuenta": "lacronica_ig",
    "estado": "ok",
    "posts": 5,
    "comentarios": 1,
-   "crudos": 5,
+   "crudos": 4,
    "fuera": 0
   },
   {
    "cuenta": "latinus_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 115,
-   "crudos": 120,
+   "comentarios": 67,
+   "crudos": 68,
    "fuera": 0
   },
   {
    "cuenta": "lavoz_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
-   "crudos": 5
+   "comentarios": 3,
+   "crudos": 6
   },
   {
    "cuenta": "mexicali686_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 14,
-   "crudos": 16
+   "comentarios": 3,
+   "crudos": 7
   },
   {
    "cuenta": "nmas_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 68,
-   "crudos": 69,
+   "comentarios": 38,
+   "crudos": 39,
    "fuera": 0
   },
   {
@@ -2363,65 +2307,65 @@
    "cuenta": "radartecate_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 0,
+   "comentarios": 1,
    "crudos": 5
   },
   {
    "cuenta": "sd619_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 69,
-   "crudos": 71
+   "comentarios": 81,
+   "crudos": 81
   },
   {
    "cuenta": "siempre_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 62,
-   "crudos": 64
+   "comentarios": 59,
+   "crudos": 61
   },
   {
    "cuenta": "sintesis_ig",
+   "estado": "ok",
+   "posts": 5,
+   "comentarios": 31,
+   "crudos": 34
+  },
+  {
+   "cuenta": "soltij_ig",
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
    "crudos": 5
   },
   {
-   "cuenta": "soltij_ig",
-   "estado": "ok",
-   "posts": 5,
-   "comentarios": 6,
-   "crudos": 11
-  },
-  {
    "cuenta": "telemundo_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 134,
-   "crudos": 135,
+   "comentarios": 110,
+   "crudos": 118,
    "fuera": 0
   },
   {
    "cuenta": "tijuanainforma_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 4,
-   "crudos": 8
+   "comentarios": 14,
+   "crudos": 20
   },
   {
    "cuenta": "tjnoticias_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 4,
-   "crudos": 9
+   "comentarios": 16,
+   "crudos": 17
   },
   {
    "cuenta": "tjpublica_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 97,
-   "crudos": 99
+   "comentarios": 104,
+   "crudos": 105
   },
   {
    "cuenta": "uniradio_ig",
@@ -2433,62 +2377,54 @@
   {
    "cuenta": "univisionsd_ig",
    "estado": "ok",
-   "posts": 5,
-   "comentarios": 8,
-   "crudos": 10
-  },
-  {
-   "cuenta": "yoamotijuana_ig",
-   "estado": "ok",
-   "posts": 5,
-   "comentarios": 2,
-   "crudos": 4
+   "posts": 4,
+   "comentarios": 4,
+   "crudos": 6
   },
   {
    "cuenta": "zeta_ig",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 7,
-   "crudos": 9
+   "comentarios": 0,
+   "crudos": 5
   }
  ],
  "gasto": {
   "resultados": 5300,
-  "gastado": 1583,
+  "gastado": 1367,
   "por_concepto": {
    "afn_ig": 47,
-   "aztecanoticias_ig": 99,
-   "bbcmundo_ig": 155,
-   "canal66_ig": 65,
-   "capitalmxl_ig": 20,
-   "cnnee_ig": 89,
-   "dwespanol_ig": 104,
+   "aztecanoticias_ig": 31,
+   "bbcmundo_ig": 124,
+   "canal66_ig": 39,
+   "capitalmxl_ig": 13,
+   "cnnee_ig": 64,
+   "dwespanol_ig": 100,
    "elensenadense_ig": 39,
    "elmexicano_ig": 10,
-   "eltijuanense_ig": 21,
+   "eltijuanense_ig": 15,
    "elvigia_ig": 11,
-   "ensenadadigna_ig": 80,
-   "frontera_ig": 21,
-   "ksdy50_ig": 34,
-   "lacronica_ig": 10,
-   "latinus_ig": 125,
-   "lavoz_ig": 10,
-   "mexicali686_ig": 21,
-   "nmas_ig": 74,
+   "ensenadadigna_ig": 81,
+   "frontera_ig": 12,
+   "ksdy50_ig": 63,
+   "lacronica_ig": 9,
+   "latinus_ig": 73,
+   "lavoz_ig": 11,
+   "mexicali686_ig": 12,
+   "nmas_ig": 44,
    "noticiasmxl_ig": 48,
    "radartecate_ig": 10,
-   "sd619_ig": 76,
-   "siempre_ig": 69,
-   "sintesis_ig": 10,
-   "soltij_ig": 16,
-   "telemundo_ig": 140,
-   "tijuanainforma_ig": 13,
-   "tjnoticias_ig": 14,
-   "tjpublica_ig": 104,
+   "sd619_ig": 86,
+   "siempre_ig": 66,
+   "sintesis_ig": 39,
+   "soltij_ig": 10,
+   "telemundo_ig": 123,
+   "tijuanainforma_ig": 25,
+   "tjnoticias_ig": 22,
+   "tjpublica_ig": 110,
    "uniradio_ig": 10,
-   "univisionsd_ig": 15,
-   "yoamotijuana_ig": 9,
-   "zeta_ig": 14
+   "univisionsd_ig": 10,
+   "zeta_ig": 10
   }
  }
 }
