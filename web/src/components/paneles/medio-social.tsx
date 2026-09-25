@@ -8,7 +8,12 @@ import type { PublicacionVisual, RedVisual } from "@/lib/dominio/publicaciones";
 type VentanaInstagram = Window & { instgrm?: { Embeds: { process: () => void } } };
 
 /** Altura por debajo de la cual el iframe de Instagram todavia no tiene
- *  contenido: embed.js lo inserta a 24px y crece cuando el post responde. */
+ *  contenido: embed.js lo inserta a 24px y crece cuando el post responde.
+ *  Solo vale para los medios que CRECEN al cargar (Instagram, TikTok).
+ *  YouTube y Facebook nacen con su proporcion y avisan con `onLoad`: un video
+ *  largo de YouTube a 16:9 en la columna de escritorio mide ~277x156, nunca
+ *  llegaba a 200 y se quedaba oculto tras el esqueleto con «Volver a cargar»
+ *  (captura del cliente, 24 de septiembre de 2026, un video de CNR). */
 const UMBRAL_ALTURA = 200;
 
 /** Sin altura real tras esta espera, se ofrece recargar. */
@@ -112,7 +117,7 @@ function MedioTikTok({ url, activo, fallar }: { url: string; activo: boolean; fa
  * La URL canonica es siempre /watch?v=<id> (ver canonizarPublicacion), asi que
  * el id sale del parametro y no del final de la ruta como en TikTok.
  */
-function MedioYouTube({ url, formato, fallar }: { url: string; formato: "short" | "video" | undefined; fallar: () => void }) {
+function MedioYouTube({ url, formato, cargar, fallar }: { url: string; formato: "short" | "video" | undefined; cargar: () => void; fallar: () => void }) {
   let id = "";
   try {
     id = new URL(url).searchParams.get("v") ?? "";
@@ -124,7 +129,7 @@ function MedioYouTube({ url, formato, fallar }: { url: string; formato: "short" 
   return <iframe title="Publicación de YouTube"
     src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&playsinline=1&rel=0`}
     allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen
-    className={`${proporcion} w-full border-0`} onError={fallar} />;
+    className={`${proporcion} w-full border-0`} onLoad={cargar} onError={fallar} />;
 }
 
 /** Facebook: el plugin de publicacion incrustada de la propia plataforma, que
@@ -134,7 +139,7 @@ function MedioYouTube({ url, formato, fallar }: { url: string; formato: "short" 
  *  Facebook DENTRO del iframe sin emitir error, y con cookies de terceros
  *  bloqueadas puede pedir sesion. Lo usan las consultas por termino y, desde
  *  el 23 de septiembre de 2026, la pestana Facebook de Redes. */
-function MedioFacebook({ url, tipo, fallar }: { url: string; tipo: Destacado["tipo"]; fallar: () => void }) {
+function MedioFacebook({ url, tipo, cargar, fallar }: { url: string; tipo: Destacado["tipo"]; cargar: () => void; fallar: () => void }) {
   // Un reel o un video va por el plugin de VIDEO: el de publicacion lo pinta
   // como una tarjeta con miniatura y texto, y en el recorrido del panel de
   // medios (23 de septiembre de 2026) la mitad de los posts de estas paginas
@@ -144,7 +149,7 @@ function MedioFacebook({ url, tipo, fallar }: { url: string; tipo: Destacado["ti
   const params = new URLSearchParams({ href: url, show_text: video ? "false" : "true", width: "500" });
   return <iframe title="Publicación de Facebook" src={`https://www.facebook.com/plugins/${video ? "video" : "post"}.php?${params.toString()}`}
     scrolling="no" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen
-    className={`${video ? "aspect-[9/16]" : "aspect-[4/5]"} w-full border-0`} onError={fallar} />;
+    className={`${video ? "aspect-[9/16]" : "aspect-[4/5]"} w-full border-0`} onLoad={cargar} onError={fallar} />;
 }
 
 /** La forma que tendra el medio antes de tenerlo, para que la tarjeta apenas
@@ -205,6 +210,7 @@ export function MedioSocial({ publicacion, activo = true }: {
     return () => window.clearTimeout(temporizador);
   }, [listo, fallo, intento]);
   const fallar = useCallback(() => setFallo(true), []);
+  const cargar = useCallback(() => setListo(true), []);
   const reintentar = () => {
     setFallo(false);
     setListo(false);
@@ -223,9 +229,9 @@ export function MedioSocial({ publicacion, activo = true }: {
       {fallo ? null : publicacion.red === "instagram"
         ? <MedioInstagram key={intento} url={publicacion.url} fallar={fallar} />
         : publicacion.red === "youtube"
-          ? <MedioYouTube key={intento} url={publicacion.url} formato={publicacion.post.formato} fallar={fallar} />
+          ? <MedioYouTube key={intento} url={publicacion.url} formato={publicacion.post.formato} cargar={cargar} fallar={fallar} />
           : publicacion.red === "facebook"
-            ? <MedioFacebook key={intento} url={publicacion.url} tipo={publicacion.post.tipo} fallar={fallar} />
+            ? <MedioFacebook key={intento} url={publicacion.url} tipo={publicacion.post.tipo} cargar={cargar} fallar={fallar} />
             : <MedioTikTok key={intento} url={publicacion.url} activo={activo} fallar={fallar} />}
     </div>
     {ofrecerRecarga ? <div className="[grid-area:1/1] flex flex-col items-center justify-end gap-2 pb-4 text-center">
