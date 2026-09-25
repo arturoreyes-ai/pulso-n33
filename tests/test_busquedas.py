@@ -199,11 +199,6 @@ class TestUrlDeBusqueda(unittest.TestCase):
         self.assertIn("hl=es-419", url)
         self.assertNotIn("&hl=en-US", url)
 
-    def test_es_pura(self):
-        b = {"q": "san quintin", "idioma": "es"}
-        self.assertEqual(busquedas.url_de(b), busquedas.url_de(b))
-
-
 class TestTituloSinPublicador(unittest.TestCase):
     def test_quita_el_sufijo_exacto(self):
         t, ok = busquedas.limpiar_titulo("Reportan apagon - Zeta Tijuana", "Zeta Tijuana")

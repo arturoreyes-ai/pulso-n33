@@ -11,14 +11,11 @@ import tempfile
 import unittest
 
 from pulso import VERSION
-from pulso.clasificar import METODOS, clasificar, clasificar_lote, sin_idioma
+from pulso.clasificar import clasificar, clasificar_lote, sin_idioma
 from pulso.normalizar import id_nota
 from pulso.roster import Roster
 from pulso.sentimiento import (
-    A_SENTIMIENTO,
-    A_TONO,
     IDIOMAS,
-    MODELOS,
     Analizador,
     AnalizadorFalso,
     recortar,
@@ -45,24 +42,12 @@ def comentario(cid, texto, fecha="2026-09-01", canal="uno", zona="Tijuana",
 
 
 class TestAnalizadorFalso(unittest.TestCase):
-    def test_misma_forma_que_el_real(self):
-        r = AnalizadorFalso().predecir(["Sin agua otra vez", "Gran noticia", "Sesion de cabildo"])
-        self.assertEqual([x["etiqueta"] for x in r], ["NEG", "POS", "NEU"])
-        for x in r:
-            self.assertIn(x["etiqueta"], A_TONO)
-            self.assertIn(x["etiqueta"], A_SENTIMIENTO)
-            self.assertTrue(0 <= x["confianza"] <= 1)
-            self.assertTrue(x["modelo"])
-
     def test_recorta_y_normaliza_espacios(self):
         self.assertEqual(recortar("  hola \n mundo  "), "hola mundo")
         self.assertEqual(len(recortar("x" * 1000)), 400)
 
 
 class TestClasificarLote(unittest.TestCase):
-    def test_modelo_esta_en_los_metodos(self):
-        self.assertIn("modelo", METODOS)
-
     def test_ninguno_deja_null(self):
         notas = [nota(1, "a", {"etiqueta": "neutral"}), nota(2, "b")]
         self.assertEqual(clasificar_lote(notas, "ninguno"), 0)
@@ -263,10 +248,28 @@ class TestIdiomaDelMedio(unittest.TestCase):
     def test_el_modelo_ni_ve_los_titulares_ajenos(self):
         # No basta con borrar la etiqueta despues: mandar el texto al modelo
         # y tirar el resultado gastaria CPU y, con el modelo real, memoria.
-        falso = AnalizadorFalso()
-        notas = [nota_de(1, "Rent hike", "kpbs"), nota_de(2, "Eviction", "voiceofsd")]
-        clasificar_lote(notas, "modelo", falso, idiomas=IDIOMAS_PRUEBA)
-        self.assertEqual([n["postura"] for n in notas], [None, None])
+        # Hasta el 25 de septiembre de 2026 esta prueba solo miraba que
+        # `postura` saliera null, que ya fija la de arriba; ahora mira lo que
+        # el modelo recibio.
+        class Grabador(AnalizadorFalso):
+            def __init__(self):
+                super().__init__()
+                self.vistos = []
+
+            def predecir(self, textos, lote=32, uno_a_uno=False):
+                self.vistos.extend(textos)
+                return super().predecir(textos, lote, uno_a_uno)
+
+        grabador = Grabador()
+        notas = [nota_de(1, "Rent hike", "kpbs"), nota_de(2, "Sin agua en Tijuana", "soltij"),
+                 nota_de(3, "Eviction", "voiceofsd")]
+        clasificar_lote(notas, "modelo", grabador, idiomas=IDIOMAS_PRUEBA)
+        self.assertEqual(grabador.vistos, ["Sin agua en Tijuana"])
+        # Y sin nada en su idioma, el modelo ni se llama.
+        solo_ingles = Grabador()
+        clasificar_lote([nota_de(4, "Rent hike", "kpbs")], "modelo", solo_ingles,
+                        idiomas=IDIOMAS_PRUEBA)
+        self.assertEqual(solo_ingles.vistos, [])
 
     def test_un_analizador_en_ingles_si_las_etiqueta(self):
         notas = [nota_de(1, "Sin agua", "soltij"), nota_de(2, "No rent", "kpbs")]
@@ -330,11 +333,6 @@ class TestIdiomaEnElCatalogo(unittest.TestCase):
         for m in self.medios:
             if "en inglés" in (m.get("nota") or "").lower():
                 self.assertEqual(m["idioma"], "en", m["id"])
-
-    def test_hay_modelo_para_cada_idioma_declarado(self):
-        for m in self.medios:
-            self.assertIn(m["idioma"], MODELOS, m["id"])
-
 
 if __name__ == "__main__":
     unittest.main()

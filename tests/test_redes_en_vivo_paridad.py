@@ -55,7 +55,8 @@ def calcular(crudos):
     busqueda = {"id": "vivo-tiktok", "ambito": "nacional", "idioma": "es"}
     posts, urls = [], []
     for item in crudos["tiktok"]["videos"]:
-        registro, motivo = tiktok._limpiar_video(item, busqueda, ahora)
+        # Como consultas.py: un termino, no un lugar.
+        registro, motivo = tiktok._limpiar_video(item, busqueda, ahora, tirar_sin_lugar=False)
         if registro is None:
             posts.append({"descarte": motivo})
             continue

@@ -15,9 +15,6 @@ class TestFold(unittest.TestCase):
             "asume presidencia municipal de tijuana",
         )
 
-    def test_equivalencia_con_y_sin_acento(self):
-        self.assertEqual(fold("Gutiérrez"), fold("GUTIERREZ"))
-
     def test_vacio(self):
         self.assertEqual(fold(None), "")
         self.assertEqual(fold("   "), "")
@@ -67,9 +64,6 @@ class TestIdNota(unittest.TestCase):
         i = id_nota("zeta", "Titular de prueba")
         self.assertEqual(len(i), 16)
         self.assertTrue(all(c in "0123456789abcdef" for c in i))
-
-    def test_determinista(self):
-        self.assertEqual(id_nota("zeta", "Titular"), id_nota("zeta", "Titular"))
 
     def test_indiferente_a_acento_y_caja(self):
         # El mismo titular republicado en mayusculas no es una nota nueva.

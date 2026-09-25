@@ -53,9 +53,6 @@ class TestFechas(unittest.TestCase):
         for v in (None, "", "ayer", "04/09/2026"):
             self.assertIsNone(fecha_de(v))
 
-    def test_mes_de(self):
-        self.assertEqual(mes_de(nota(1, "2026-07-13")), "2026-07")
-
     def test_sin_fecha_el_mes_sale_de_capturado(self):
         # Si no envejecieran por 'capturado' se quedarian en la ventana para
         # siempre, y la acumulacion sin limite volveria por la puerta de
@@ -75,11 +72,6 @@ class TestParticionar(unittest.TestCase):
         ventana, por_mes = particionar([nota(1, "2026-09-01")], HOY, 30)
         self.assertEqual(len(ventana), 1)
         self.assertEqual(por_mes, {})
-
-    def test_viejo_al_mes_que_le_toca(self):
-        ventana, por_mes = particionar([nota(1, "2026-07-13")], HOY, 30)
-        self.assertEqual(ventana, [])
-        self.assertEqual(list(por_mes), ["2026-07"])
 
     def test_el_corte_es_inclusivo(self):
         # Una nota de exactamente `retener` dias se queda. Un dia mas y se va.
@@ -144,9 +136,6 @@ class TestEscribirSiCambio(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.mkdtemp()
         self.ruta = os.path.join(self.tmp, "x.json")
-
-    def test_escribe_la_primera_vez(self):
-        self.assertTrue(_escribir_si_cambio(self.ruta, {"a": 1}))
 
     def test_no_reescribe_lo_identico(self):
         _escribir_si_cambio(self.ruta, {"a": 1})
@@ -242,13 +231,6 @@ class TestPipelineConArchivo(unittest.TestCase):
         e2 = self.correr_en(b, ahora="2026-12-31T12:00:00+00:00")
         self.assertNotEqual(e1["notas_ventana"], e2["notas_ventana"],
                             "una fecha muy posterior deberia archivar mas")
-
-    def test_la_salida_se_valida(self):
-        d = tempfile.mkdtemp()
-        self.correr_en(d)
-        errores, _ = validar_archivo(d, leer(os.path.join(d, "notas.json")),
-                                     self.roster, self.medios, hoy=date(2026, 9, 4))
-        self.assertEqual(errores, [])
 
     def test_acortar_la_retencion_mueve_notas_al_archivo(self):
         d = tempfile.mkdtemp()

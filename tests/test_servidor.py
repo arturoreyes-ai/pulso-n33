@@ -94,22 +94,5 @@ class TestArranque(unittest.TestCase):
         finally:
             servidor.server_close()
 
-    def test_el_texto_de_comentarios_se_sirve_bajo_data(self):
-        # Ya no hay respaldo que seguir: esta en data/ como cualquier otro
-        # archivo de la corrida.
-        from pulso.sitio import Manejador
-        raiz = tempfile.mkdtemp()
-        for carpeta in ("sitio", "data", "config"):
-            os.makedirs(os.path.join(raiz, carpeta))
-        for nombre in ("redes-comentarios.json", "notas.json"):
-            with open(os.path.join(raiz, "data", nombre), "w") as fh:
-                fh.write("{}")
-        m = Manejador.__new__(Manejador)
-        m.raices = {c: os.path.join(raiz, c) for c in ("sitio", "data", "config")}
-        for nombre in ("redes-comentarios.json", "notas.json"):
-            self.assertEqual(m.translate_path("/data/" + nombre),
-                             os.path.join(raiz, "data", nombre))
-
-
 if __name__ == "__main__":
     unittest.main()

@@ -50,7 +50,7 @@ Each of these has a reason. Breaking one is not a style regression.
 ### Determinism
 
 Two runs over the same input must produce **byte-identical** files.
-Pinned by `TestDeterminismo` in `tests/test_pipeline.py:197`.
+Pinned by `TestDeterminismo` in `tests/test_pipeline.py:177`.
 
 Why: the cron commits `data/` every six hours behind a
 `git diff --cached --quiet` guard. Any nondeterminism — a set iteration order,
@@ -68,7 +68,7 @@ the other five.
 ### Idempotence
 
 Re-running preserves `capturado` and does not inflate `nuevas`.
-Pinned by `TestIdempotencia` in `tests/test_pipeline.py:216`.
+Pinned by `TestIdempotencia` in `tests/test_pipeline.py:196`.
 
 ### `notas.json` carries no run timestamp
 
@@ -1166,7 +1166,7 @@ The full command surface — `indicadores`, `conversacion`, `delegaciones`,
 
 ## Testing
 
-- **`unittest` only.** No pytest, no config file. 38 modules, 943 tests on 23
+- **`unittest` only.** No pytest, no config file. 30 modules, 887 tests on 25
   September 2026, and the suite is expected fully green. Install `requirements.txt`
   first: without Scrapy, `tests/test_scraping.py` fails to import and you see
   one error, which is an unprovisioned environment and not a regression.

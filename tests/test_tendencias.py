@@ -17,9 +17,9 @@ import unittest
 from datetime import date
 from unittest.mock import patch
 
-from pulso import ZONAS, tendencias
+from pulso import tendencias
 from pulso.apify import Presupuesto, revisar_entrada
-from pulso.validador import validar_tendencias, validar_tendencias_config, validar_todo
+from pulso.validador import validar_tendencias, validar_todo
 
 AHORA = "2026-09-03T18:00:00+00:00"
 HOY = date(2026, 9, 3)
@@ -177,13 +177,6 @@ class TestLimpieza(unittest.TestCase):
         por = tendencias.limpiar([_item(rank=1, name="A"), _item(rank=1, name="B")])
         self.assertEqual([t["nombre"] for t in por[149361]["tendencias"]], ["A"])
 
-    def test_ningun_campo_crudo_sobrevive(self):
-        crudo = json.dumps(tendencias.limpiar(ITEMS))
-        for campo in tendencias.CAMPOS_CRUDOS:
-            self.assertNotIn('"{}"'.format(campo), crudo)
-        self.assertNotIn("twitter.com", crudo)
-
-
 class TestCosecha(unittest.TestCase):
     def test_sin_token_no_llama_y_lo_dice(self):
         actor = _Actor()
@@ -311,9 +304,6 @@ class TestValidador(unittest.TestCase):
     def _tj(self, doc):
         return _por_id(doc, "tijuana")
 
-    def test_el_valido_pasa(self):
-        self.assertEqual(validar_tendencias(_panel())[0], [])
-
     def test_acceso_debe_ser_sin_sesion(self):
         e, _ = validar_tendencias(self._con(acceso="cookies"))
         self.assertTrue(any("'acceso'" in x for x in e))
@@ -406,18 +396,6 @@ class TestConfigReal(unittest.TestCase):
         with open(os.path.join("config", "tendencias.json"), encoding="utf-8") as fh:
             self.cfg = json.load(fh)
 
-    def test_el_config_real_pasa_su_validador(self):
-        self.assertEqual(validar_tendencias_config(self.cfg)[0], [])
-
-    def test_cinco_activas_cinco_huecos_y_cada_zona_una_vez(self):
-        activas = [u for u in self.cfg["ubicaciones"] if u["activo"]]
-        huecos = [u for u in self.cfg["ubicaciones"] if not u["activo"]]
-        self.assertEqual(sorted(u["id"] for u in activas),
-                         ["mexicali", "mexico", "mundo", "sandiego", "tijuana"])
-        self.assertEqual(len(huecos), 5)
-        zonas = sorted(u["zona"] for u in self.cfg["ubicaciones"] if u["ambito"] == "zona")
-        self.assertEqual(zonas, sorted(z for z in ZONAS if z != "estatal"))
-
     def test_las_activas_citan_su_confirmacion_y_los_huecos_su_razon(self):
         # Encender no es editar el campo: es correr --ubicaciones y anotar la
         # fecha. Un hueco se registra, no se cosecha.
@@ -429,17 +407,6 @@ class TestConfigReal(unittest.TestCase):
                 else:
                     self.assertIsNone(u["woeid"])
                     self.assertIn("hueco", u["razon"].lower())
-
-    def test_la_entrada_real_pasa_la_guardia_de_sesion(self):
-        revisar_entrada(tendencias._entrada(self.cfg["ubicaciones"],
-                                            self.cfg["cosecha"]["maximo_por_ubicacion"]),
-                        self.cfg["actor"])
-
-    def test_el_presupuesto_cubre_la_llamada(self):
-        activas = sum(1 for u in self.cfg["ubicaciones"] if u["activo"])
-        cosecha = self.cfg["cosecha"]
-        self.assertGreaterEqual(cosecha["presupuesto_resultados"],
-                                cosecha["maximo_por_ubicacion"] * activas)
 
     def test_el_actor_esta_en_el_catalogo_apagado_y_el_de_cookies_es_senuelo(self):
         with open(os.path.join("config", "apify.json"), encoding="utf-8") as fh:

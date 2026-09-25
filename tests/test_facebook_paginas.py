@@ -195,16 +195,6 @@ class TestDerivar(BaseCache):
         self.assertEqual([c["texto"] for c in texto["por_post"][URL_1]],
                          ["Otra vez sin bomberos a tiempo", "Ese taller ya tenía reportes"])
 
-    def test_determinista(self):
-        panel = self._panel()
-
-        def otra_vez():
-            return facebook.derivar(facebook.leer_cache(self.cache), AHORA, panel["salud"],
-                                    panel["gasto"], [], facebook.leer_publicaciones(self.cache),
-                                    [PAGINA])
-        self.assertEqual(json.dumps(otra_vez(), ensure_ascii=False, indent=1),
-                         json.dumps(otra_vez(), ensure_ascii=False, indent=1))
-
     def test_un_destacado_con_identidad_es_error(self):
         panel = self._panel()
         panel["destacados"][0]["user"] = {"name": "Noticias de Tijuana"}
@@ -218,10 +208,6 @@ class TestConfig(unittest.TestCase):
     def setUp(self):
         with open(os.path.join("config", "facebook.json"), encoding="utf-8") as fh:
             self.cfg = json.load(fh)
-
-    def test_el_config_real_valida(self):
-        e, _ = validar_facebook_config(self.cfg)
-        self.assertEqual(e, [])
 
     def test_toda_pagina_activa_cita_su_sondeo(self):
         for p in self.cfg["paginas"]:

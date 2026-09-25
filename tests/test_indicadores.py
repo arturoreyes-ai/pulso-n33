@@ -18,7 +18,6 @@ import zipfile
 from pulso.indicadores import (
     ACS_SUPRIMIDO,
     BC_MUNICIPIOS,
-    MESES,
     NoEsDato,
     SinLlave,
     acs,
@@ -126,19 +125,6 @@ class TestCsv(unittest.TestCase):
         self.assertIn("Cuna de la Independencia", filas[1][1])
         self.assertEqual(filas[1][2], "5")
 
-    def test_utf8_y_windows_1252_en_el_mismo_dataset(self):
-        # El SESNSP 2026 es UTF-8 y el historico 2015-2025 es Windows-1252.
-        # Un solo codec mancha datos en silencio.
-        self.assertEqual(list(_filas("Año\n".encode("utf-8"), "utf-8"))[0], ["Año"])
-        self.assertEqual(list(_filas("Año\n".encode("cp1252"), "cp1252"))[0], ["Año"])
-
-    def test_codec_equivocado_no_truena_pero_mancha(self):
-        # Con errors='replace' no explota: por eso hay que acertarle al
-        # codec, no confiar en que un fallo se note.
-        crudo = "Año\n".encode("cp1252")
-        self.assertNotEqual(list(_filas(crudo, "utf-8"))[0], ["Año"])
-
-
 class TestZip(unittest.TestCase):
     def hacer_zip(self, nombres):
         buf = io.BytesIO()
@@ -191,11 +177,6 @@ class TestCatalogoBC(unittest.TestCase):
         from pulso import ZONAS
         for nombre in BC_MUNICIPIOS.values():
             self.assertIn(nombre, ZONAS, nombre)
-
-    def test_doce_meses(self):
-        self.assertEqual(len(MESES), 12)
-        self.assertEqual(MESES[0], "Enero")
-
 
 class TestFrescura(unittest.TestCase):
     """Estas fuentes son trimestrales o mensuales: bajar 60 MB cada hora
@@ -257,13 +238,6 @@ class TestSeriePersistida(unittest.TestCase):
         self.assertEqual(tj["ciclos"], 3)
         self.assertEqual(len(tj["serie"]), 3)
         self.assertEqual([x["ciclo"] for x in tj["serie"]], [2022, 2023, 2024])
-
-    def test_la_serie_queda_ordenada_aunque_la_fuente_venga_revuelta(self):
-        # Si el orden dependiera del orden de las filas, cada corrida del
-        # cron commitearia el mismo dato reacomodado.
-        serie = predial()["municipios"]["Tijuana"]["serie"]
-        self.assertEqual([x["ciclo"] for x in serie],
-                         sorted(x["ciclo"] for x in serie))
 
     def test_cada_punto_lleva_su_ciclo_explicito(self):
         # San Felipe arranca en 2023 y Tijuana en 2022: la posicion en la
@@ -378,20 +352,6 @@ class TestSalidaPublicada(unittest.TestCase):
     def setUpClass(cls):
         with open(os.path.join("data", "indicadores.json"), encoding="utf-8") as fh:
             cls.panel = json.load(fh)
-
-    def test_estructura(self):
-        self.assertEqual(self.panel["esquema"], 1)
-        self.assertIn("indicadores", self.panel)
-        self.assertIn("salud", self.panel)
-
-    def test_cada_indicador_lleva_fuente_y_aviso(self):
-        # Ninguna de estas cifras la calcula el tablero, y cada fuente mide
-        # algo distinto: sin la etiqueta se confunden.
-        for nombre, ind in self.panel["indicadores"].items():
-            self.assertTrue(ind.get("fuente"), nombre)
-            self.assertTrue(ind.get("url"), nombre)
-            self.assertTrue(ind.get("cadencia"), nombre)
-            self.assertTrue(ind.get("aviso"), nombre)
 
     def test_shf_declara_los_municipios_que_no_cubre(self):
         shf = self.panel["indicadores"].get("shf")

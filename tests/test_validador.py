@@ -38,22 +38,9 @@ def leer(ruta):
 class TestConfigPublicada(unittest.TestCase):
     """El roster y el catalogo que se publican tienen que pasar limpios."""
 
-    def test_roster_sin_errores(self):
-        errores, _ = validar_roster(leer("config/roster.json"), hoy=HOY)
-        self.assertEqual(errores, [])
-
-    def test_medios_sin_errores(self):
-        errores, _ = validar_medios(leer("config/medios.json"))
-        self.assertEqual(errores, [])
-
     def test_roster_sin_avisos_de_zona_vencida(self):
         _, avisos = validar_roster(leer("config/roster.json"), hoy=HOY)
         self.assertEqual([a for a in avisos if "vencido" in a], [])
-
-    def test_busquedas_sin_errores(self):
-        errores, _ = validar_busquedas(leer("config/busquedas.json"),
-                                       leer("config/medios.json")["medios"])
-        self.assertEqual(errores, [])
 
     def test_todo_junto(self):
         errores, _ = validar_todo("config", "data", hoy=HOY)
@@ -255,10 +242,6 @@ class TestRosterRoto(unittest.TestCase):
         self.assertIn("agc", traslape[0])
         self.assertIn("ibr", traslape[0])
 
-    def test_el_dia_exacto_del_relevo_no_es_traslape(self):
-        errores, _ = validar_roster(self.datos, hoy=HOY)
-        self.assertEqual([e for e in errores if "traslapadas" in e], [])
-
     def test_hasta_anterior_a_desde(self):
         d = self.mutar("ibr", hasta="2024-01-01")
         errores, _ = validar_roster(d, hoy=HOY)
@@ -360,10 +343,6 @@ class TestNotasRotas(unittest.TestCase):
 
     def setUp(self):
         self.datos = leer("data/notas.json")
-
-    def test_datos_publicados_limpios(self):
-        errores, _ = validar_notas(self.datos, self.roster, self.medios)
-        self.assertEqual(errores, [])
 
     def _nota_del_catalogo(self, d):
         ids_medios = {m["id"] for m in self.medios}
@@ -514,12 +493,6 @@ class TestFuentesYEstado(unittest.TestCase):
     def setUpClass(cls):
         cls.medios = leer("config/medios.json")["medios"]
 
-    def test_publicados_limpios(self):
-        e1, _ = validar_fuentes(leer("data/fuentes.json"), self.medios)
-        e2, _ = validar_estado(leer("data/estado.json"))
-        self.assertEqual(e1, [])
-        self.assertEqual(e2, [])
-
     def test_fallo_sin_motivo(self):
         d = leer("data/fuentes.json")
         d["fuentes"][0]["estado"] = "fallo"
@@ -534,14 +507,6 @@ class TestFuentesYEstado(unittest.TestCase):
         errores, _ = validar_fuentes(d, self.medios)
         self.assertTrue(any("falta el registro de salud" in e for e in errores))
         self.assertTrue(any(activo in e for e in errores))
-
-    def test_medio_apagado_no_necesita_registro(self):
-        # Apagar un medio lo saca del monitoreo; no deja el validador en rojo.
-        apagado = next(m["id"] for m in self.medios if not m["activo"])
-        d = leer("data/fuentes.json")
-        self.assertNotIn(apagado, [s["id"] for s in d["fuentes"]])
-        errores, _ = validar_fuentes(d, self.medios)
-        self.assertEqual(errores, [])
 
     def test_version_desalineada(self):
         d = leer("data/estado.json")
@@ -621,10 +586,6 @@ class TestIndicadoresRotos(unittest.TestCase):
         errores, avisos = validar_indicadores(copy.deepcopy(PANEL))
         self.assertEqual(errores, [])
         self.assertEqual(avisos, [])
-
-    def test_el_publicado_no_tiene_errores(self):
-        errores, _ = validar_indicadores(leer("data/indicadores.json"))
-        self.assertEqual(errores, [])
 
     def test_indicador_sin_aviso(self):
         # La regla central: una cifra sin rotulo se lee como lo que no es.

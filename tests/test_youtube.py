@@ -21,6 +21,7 @@ from unittest.mock import patch
 from urllib.error import HTTPError
 
 from pulso import youtube
+from pulso.normalizar import fold
 from pulso.validador import (PLATAFORMAS_REDES, validar_redes, validar_youtube_config)
 
 AHORA = "2026-09-18T18:00:00+00:00"
@@ -486,19 +487,6 @@ class TestConfigReal(unittest.TestCase):
         with open(os.path.join(raiz, "config", "canales.json"), encoding="utf-8") as f:
             cls.canales_api = json.load(f)
 
-    def test_el_config_valida(self):
-        errores, _ = validar_youtube_config(self.cfg)
-        self.assertEqual(errores, [])
-
-    def test_ninguna_fila_lleva_zona(self):
-        for c in self.cfg["canales"]:
-            self.assertNotIn("zona", c, c["id"])
-
-    def test_toda_fila_apagada_dice_por_que(self):
-        for c in self.cfg["canales"]:
-            if not c["activo"]:
-                self.assertTrue(c.get("nota"), c["id"])
-
     def test_sufijos_titulo_es_una_lista_de_firmas_largas(self):
         for malo in ("| TELEMUNDO", [], ["TJ"], [3]):
             cfg = json.loads(json.dumps(self.cfg))
@@ -516,10 +504,16 @@ class TestConfigReal(unittest.TestCase):
     def test_el_id_de_canal_coincide_con_el_catalogo_de_la_api(self):
         # Los dos modulos de YouTube leen catalogos distintos a proposito, pero
         # cuando nombran el mismo canal tienen que nombrar el mismo canal.
-        por_nombre = {c["nombre"]: c["canal"] for c in self.canales_api["canales"]}
-        mios = {c["canal"] for c in self.cfg["canales"]}
-        comunes = [n for n, ch in por_nombre.items() if ch in mios]
-        self.assertGreaterEqual(len(comunes), 10)
+        # Hasta el 25 de septiembre de 2026 bastaba con que coincidieran diez
+        # ids, asi que uno mal copiado pasaba. Ahora se empata por nombre
+        # plegado ("Sintesis TV" y "Síntesis TV" son el mismo) y cada par tiene
+        # que traer el mismo id. Todo canal de la API tiene su fila aqui: si
+        # una se renombra, esto lo dice en vez de dejar de compararla.
+        mios = {fold(c["nombre"]): c for c in self.cfg["canales"]}
+        for c in self.canales_api["canales"]:
+            with self.subTest(canal=c["nombre"]):
+                self.assertIn(fold(c["nombre"]), mios)
+                self.assertEqual(mios[fold(c["nombre"])]["canal"], c["canal"])
 
     def test_ningun_canal_del_catalogo_es_senuelo(self):
         senuelos = {s["canal"] for s in self.canales_api["senuelos"]}

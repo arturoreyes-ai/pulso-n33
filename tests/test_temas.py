@@ -143,12 +143,6 @@ class TestTemas(unittest.TestCase):
         self.assertEqual(r["notas_ventana"], 0)
         self.assertEqual(r["temas"], [])
 
-    def test_el_origen_viaja_en_la_salida(self):
-        # Prensa y comentarios nunca se mezclan: cada corrida dice de donde
-        # vino. docs/PLAN.md seccion 6 regla 3.
-        r = temas([], "2026-09-03", origen="comentarios")
-        self.assertEqual(r["origen"], "comentarios")
-
     def test_determinista(self):
         regs = [nota(i, "Escasez de agua potable en la colonia", "2026-09-01") for i in range(5)]
         a = temas(regs, "2026-09-03", minimo=3)

@@ -762,8 +762,8 @@ zona, tono ni figura, y no cuentan en ninguna cifra de prensa. El porqué está
 en [PRODUCT.md](PRODUCT.md#la-columna-búsqueda-mide-otra-cosa-que-la-columna-prensa).
 
 Verificación offline del contrato: `node web/scripts/probar-busqueda.cjs`
-después de instalar las dependencias de `web/`; también la invoca
-`tests/test_busqueda_web.py` y el job web de CI. Lee el mismo
+después de instalar las dependencias de `web/`; también la corre el job web
+de CI. Lee el mismo
 `tests/fixtures/google-noticias.xml` que las pruebas de Python, para que los
 dos lectores del feed no diverjan en silencio.
 
@@ -835,7 +835,7 @@ mes encima de la cosecha programada, diez búsquedas por persona al día— est�
 en `web/src/lib/redes-en-vivo/config.ts`.
 
 Verificación offline: `node web/scripts/probar-redes-en-vivo.cjs` (también la
-invoca `tests/test_redes_en_vivo_web.py`) y
+corre el job web de CI) y
 `python -m unittest tests.test_redes_en_vivo_paridad tests.test_tono`.
 
 ## Garitas para locución
@@ -857,8 +857,8 @@ vigencia: después de 90 minutos se excluye del texto de locución. No se
 infieren ceros, longitud de fila ni tiempos para entrar a México.
 
 Verificación offline del contrato web: `node web/scripts/probar-garitas.cjs`
-después de instalar las dependencias de `web/`; también la invoca
-`python -m unittest discover -s tests -p test_garitas_web.py -v`.
+después de instalar las dependencias de `web/`; también la corre el job web
+de CI.
 
 ### En Tendencia: la portada
 
@@ -899,8 +899,7 @@ retiraron del sitio el 15 de septiembre de 2026 a petición del cliente. La
 ingesta los sigue calculando y archivando; sólo dejaron de tener pantalla.
 
 Verificación offline del contrato: `node web/scripts/probar-capitulos.cjs`;
-también la invoca `python -m unittest discover -s tests -p test_capitulos_web.py -v`
-y el job web de CI.
+también la corre el job web de CI.
 
 ### Analizar: la lectura automática de una nota
 
@@ -930,5 +929,4 @@ se puede abrir, sin llamar al modelo. No se guarda el enlace resuelto ni el
 cuerpo de la nota.
 
 Verificación offline del contrato: `node web/scripts/probar-analisis.cjs`;
-también la invoca `python -m unittest discover -s tests -p test_analisis_web.py -v`
-y el job web de CI.
+también la corre el job web de CI.

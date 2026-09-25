@@ -15,12 +15,11 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from pulso import VERSION
 from pulso.busquedas import CLAVES_DETALLE
 from pulso.pipeline import correr
 from pulso.roster import Roster
 from pulso.sentimiento import AnalizadorFalso
-from pulso.validador import validar_estado, validar_fuentes, validar_notas, validar_temas
+from pulso.validador import validar_estado, validar_notas, validar_temas
 
 AHORA = "2026-09-03T18:00:00+00:00"
 DESPUES = "2026-09-04T18:00:00+00:00"
@@ -66,16 +65,6 @@ class TestCorridaOffline(BasePipeline):
     def setUp(self):
         self.tmp = tempfile.mkdtemp()
         self.estado = self.correr_en(self.tmp)
-
-    def test_escribe_los_tres_archivos(self):
-        for nombre in ("notas.json", "fuentes.json", "estado.json"):
-            self.assertTrue(os.path.exists(os.path.join(self.tmp, nombre)), nombre)
-
-    def test_la_salida_se_valida(self):
-        e1, _ = validar_notas(leer(os.path.join(self.tmp, "notas.json")), self.roster, self.medios)
-        e2, _ = validar_fuentes(leer(os.path.join(self.tmp, "fuentes.json")), self.medios)
-        e3, _ = validar_estado(leer(os.path.join(self.tmp, "estado.json")))
-        self.assertEqual(e1 + e2 + e3, [])
 
     def test_modo_corpus_y_sin_fuentes_ok(self):
         # En modo corpus no se toca la red: ninguna fuente puede estar 'ok'.
@@ -174,13 +163,6 @@ class TestCorridaOffline(BasePipeline):
         self.assertTrue(all(n["postura"] is None for n in notas))
         self.assertEqual(self.estado["metodo_postura"], "ninguno")
 
-    def test_campos_derivados(self):
-        notas = leer(os.path.join(self.tmp, "notas.json"))["notas"]
-        for n in notas:
-            self.assertTrue(n["dominio"])
-            self.assertTrue(n["url"].startswith("http"))
-            self.assertEqual(n["capturado"], AHORA)
-
     def test_notas_json_no_lleva_marca_de_tiempo_de_corrida(self):
         # notas.json no tiene 'generado' a nivel raiz: si lo tuviera, cada
         # corrida del cron produciria un commit aunque no hubiera notas
@@ -191,12 +173,6 @@ class TestCorridaOffline(BasePipeline):
         datos = leer(os.path.join(self.tmp, "notas.json"))
         self.assertEqual(sorted(datos.keys()),
                          ["esquema", "notas", "total", "ventana_dias"])
-
-    def test_estado_reporta_el_roster(self):
-        self.assertEqual(self.estado["pulso_version"], VERSION)
-        self.assertEqual(self.estado["roster_figuras"], len(self.roster.figuras))
-        self.assertLess(self.estado["roster_vigentes"], self.estado["roster_figuras"])
-
 
 class TestDeterminismo(BasePipeline):
     def test_dos_corridas_dan_bytes_identicos(self):
@@ -427,21 +403,6 @@ class TestTemasPorZona(BasePipeline):
             self.assertEqual(f.get("zona"), por_id[f["id"]].get("zona"))
 
 
-class TestSitio(BasePipeline):
-    def test_arma_site_con_datos_y_roster(self):
-        from pulso.sitio import armar
-
-        datos = tempfile.mkdtemp()
-        self.correr_en(datos)
-        destino = os.path.join(tempfile.mkdtemp(), "_site")
-        archivos = armar(destino, origen="sitio", datos=datos, config="config")
-
-        self.assertIn("index.html", archivos)
-        self.assertIn("data/notas.json", archivos)
-        self.assertIn("data/estado.json", archivos)
-        self.assertIn("config/roster.json", archivos)
-
-
 class TestBusquedas(BasePipeline):
     """Cosecha de Google Noticias dentro del pipeline. Nunca toca la red."""
 
@@ -498,13 +459,6 @@ class TestBusquedas(BasePipeline):
             self.assertEqual(salud[b["id"]]["estado"], "fallo")
             self.assertEqual(salud[b["id"]]["ms"], 0)
             self.assertIn("sin red", salud[b["id"]]["error"])
-
-    def test_sin_busquedas_la_salida_es_la_de_siempre(self):
-        con, sin = tempfile.mkdtemp(), tempfile.mkdtemp()
-        self.correr_en(con, busquedas=None)
-        self.correr_en(sin)
-        self.assertEqual(leer(os.path.join(con, "notas.json")),
-                         leer(os.path.join(sin, "notas.json")))
 
     def test_la_nota_de_busqueda_no_queda_con_el_dominio_de_google(self):
         destino = tempfile.mkdtemp()

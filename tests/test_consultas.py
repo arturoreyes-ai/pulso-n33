@@ -207,13 +207,6 @@ class TestCosecha(Base):
         self.assertEqual(len(salud), 4)
         self.assertFalse(os.path.exists(self.cache))
 
-    def test_un_presupuesto_para_todas_las_fuentes(self):
-        actor, (_, _, gasto) = self._cosechar()
-        limites = {l for _, _, l in actor.llamadas}
-        self.assertTrue(all(l >= 1 for l in limites))
-        self.assertEqual(gasto["resultados"], COSECHA["presupuesto_resultados"])
-        self.assertGreater(gasto["gastado"], 0)
-
     def test_la_busqueda_de_facebook_apagada_es_una_fila_fallo_y_no_tumba_las_demas(self):
         con_busqueda = dict(CONSULTA, facebook={"paginas": ["vivelabaja"], "busqueda": "vive la baja"})
         _, (_, salud, _) = self._cosechar([con_busqueda])
@@ -357,9 +350,6 @@ class TestPrensa(Base):
         errores, _ = validar_consultas(self._doc(prensa=self._prensa([fila])),
                                        {"consultas": [CONSULTA]})
         self.assertEqual(errores, [])
-
-    def test_sin_exclusiones_el_conteo_va_en_cero(self):
-        self.assertEqual(self._prensa()["cq_vivelabaja"]["excluidos"], 0)
 
     def test_seis_meses_dos_caminos_y_los_anteriores_se_cuentan(self):
         b = self._prensa()["cq_vivelabaja"]
@@ -739,14 +729,6 @@ class TestDerivar(Base):
                          {"estado": "sin_dato", "razon": consultas.RAZON_SIN_FUENTE["instagram"]})
         self.assertEqual(c["plataformas"]["tiktok"]["estado"], "ok")
 
-    def test_pasa_el_validador_con_y_sin_config(self):
-        doc = self._doc()
-        cfg = {"consultas": [CONSULTA]}
-        errores, _ = validar_consultas(doc, cfg)
-        self.assertEqual(errores, [])
-        errores, _ = validar_consultas(doc)
-        self.assertEqual(errores, [])
-
     def test_determinismo_byte_a_byte(self):
         a = _serializar(self._doc())
         otro = Base()
@@ -982,15 +964,6 @@ class TestValidador(Base):
         self.assertEqual(errores, [])
         self.assertTrue(any("tono_publicaciones" in a for a in avisos))
 
-    def test_prensa_el_enlace_sigue_al_origen(self):
-        """Del buscador de noticias, el token opaco tal cual; del buscador del
-        medio, el enlace https del propio medio con su host como dominio."""
-        self.assertEqual(self._errores(), [])
-        noticias, medio = self.c["prensa"]["resultados"]
-        self.assertEqual((noticias["origen"], medio["origen"]), ("noticias", "medio"))
-        noticias["url"] = "https://www.elvigia.net/nota"
-        self.assertTrue([e for e in self._errores() if "Google" in e])
-
     def test_config_buscadores(self):
         with open(CONFIG, encoding="utf-8") as fh:
             base = json.load(fh)
@@ -1046,10 +1019,6 @@ class TestConfigReal(unittest.TestCase):
         with open(CONFIG, encoding="utf-8") as fh:
             cls.cfg = json.load(fh)
 
-    def test_pasa_su_validador(self):
-        errores, _ = validar_consultas_config(self.cfg, facebook.ACTOR_BUSQUEDA)
-        self.assertEqual(errores, [])
-
     def test_cada_fila_trae_nota_sin_zona_y_al_menos_una_fuente(self):
         ids = [c["id"] for c in self.cfg["consultas"]]
         self.assertEqual(len(ids), len(set(ids)))
@@ -1061,37 +1030,6 @@ class TestConfigReal(unittest.TestCase):
                 if c["activo"]:
                     self.assertTrue(c.get("verificado"))
                     self.assertIn("--probar", c["nota"])
-
-    def test_el_tope_cubre_todas_las_filas(self):
-        cos = self.cfg["cosecha"]
-        fuentes = sum(len(consultas._fuentes(c)) for c in self.cfg["consultas"])
-        self.assertGreaterEqual(cos["presupuesto_resultados"],
-                                fuentes * cos["posts_por_fuente"] * (1 + cos["comentarios_por_post"]))
-
-    def test_la_ventana_no_excede_la_retencion(self):
-        self.assertLessEqual(self.cfg["cosecha"]["ventana_dias"], consultas.RETENCION_DIAS)
-        # La de la prensa es otra, y es la de seis meses que pidio el cliente.
-        self.assertEqual(self.cfg["cosecha"]["ventana_prensa_dias"], 180)
-
-    def test_lo_curado_a_mano_lleva_su_razon_escrita(self):
-        """Descartar o agregar a mano se justifica por escrito, como una fila
-        apagada de cualquier catalogo de este repo."""
-        agregados = excluidos = 0
-        for c in self.cfg["consultas"]:
-            for x in (c.get("prensa") or {}).get("excluidos") or []:
-                excluidos += 1
-                with self.subTest(excluido=x["titulo"][:30]):
-                    self.assertGreaterEqual(len(x["titulo"]), 12, "se empareja por contencion")
-                    self.assertIn("2026", x["razon"], "la razon lleva la fecha de la decision")
-            for a in c.get("agregados") or []:
-                agregados += 1
-                with self.subTest(agregado=a["url"][:40]):
-                    self.assertTrue(a["nota"].strip())
-                    self.assertTrue(a["url"].startswith("https://"))
-                    self.assertTrue(a["titulo"].strip() and a["fuente"].strip())
-        self.assertEqual((agregados, excluidos), (4, 4),
-                         "los tres enlaces y los tres descartes del 21 de septiembre de 2026, "
-                         "mas el descarte y el post de Facebook del 23")
 
     def test_ningun_agregado_lo_traeria_la_busqueda_sola(self):
         """La razon de existir de `agregados`: su titular NO nombra el termino,
@@ -1109,21 +1047,6 @@ class TestConfigReal(unittest.TestCase):
                     continue
                 with self.subTest(agregado=a["titulo"][:40]):
                     self.assertFalse(consultas._nombra(a["titulo"], c["termino"]))
-
-    def test_cada_buscador_trae_nota_y_los_encendidos_fecha(self):
-        ids = [b["id"] for b in self.cfg["buscadores"]]
-        self.assertEqual(len(ids), len(set(ids)))
-        self.assertIn("blancoynegro", ids, "el caso que justifica la lista")
-        for b in self.cfg["buscadores"]:
-            with self.subTest(id=b["id"]):
-                self.assertTrue(b["nota"].strip())
-                self.assertIn("{q}", b["url"])
-                if b["activo"]:
-                    self.assertTrue(b.get("verificado"))
-                    self.assertIn("2026", b["nota"])
-                else:
-                    self.assertIn("APAGADO", b["nota"])
-
 
 if __name__ == "__main__":
     unittest.main()

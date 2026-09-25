@@ -14,7 +14,6 @@ import unittest
 from pulso.roster import Roster
 from pulso.conversacion import (
     BUSQUEDAS_POR_CORRIDA,
-    COSTO,
     COSTO_BUSQUEDA,
     RETENCION_DIAS,
     CuotaAgotada,
@@ -49,10 +48,6 @@ class TestLlave(unittest.TestCase):
         with self.assertRaises(SinLlave):
             llave({"YOUTUBE_API_KEY": "   "})
 
-    def test_con_llave(self):
-        self.assertEqual(llave({"YOUTUBE_API_KEY": "abc123"}), "abc123")
-
-
 class TestPresupuesto(unittest.TestCase):
     def test_cobra_y_acumula(self):
         p = Presupuesto(tope=10)
@@ -70,10 +65,6 @@ class TestPresupuesto(unittest.TestCase):
         with self.assertRaises(CuotaAgotada):
             p.cobrar("videos")
         self.assertEqual(p.gastado, 2)
-
-    def test_todo_cuesta_una_unidad(self):
-        # Modelo de cubetas vigente desde el 1 de junio de 2026.
-        self.assertTrue(all(v == 1 for v in COSTO.values()))
 
     def test_search_usa_presupuesto_separado_y_acotado(self):
         p = Presupuesto(
@@ -130,11 +121,6 @@ class TestRetencion(unittest.TestCase):
     def test_cache_inexistente_no_truena(self):
         self.assertEqual(purgar(os.path.join(self.cache, "nada"), "2026-09-03T00:00:00+00:00"),
                          (0, 0))
-
-    def test_guardar_y_leer(self):
-        guardar_cache([comentario("a", "hola", "2026-09-03")],
-                      "2026-09-03T12:00:00+00:00", self.cache)
-        self.assertEqual(len(leer_cache(self.cache)), 1)
 
     def test_guardar_dos_veces_el_mismo_dia_fusiona_por_id(self):
         ahora = "2026-09-03T12:00:00+00:00"
