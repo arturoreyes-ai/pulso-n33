@@ -20,6 +20,7 @@ from datetime import date, datetime, timedelta
 from . import DELEGACIONES_TIJUANA, VERSION, ZONAS
 from .clasificar import ETIQUETAS, METODOS
 from .normalizar import dominio, fold, id_nota, imagen_del_medio
+from .rubros import RUBROS
 from .sentimiento import IDIOMA_OMISION, IDIOMAS
 
 RE_ID = re.compile(r"^[a-z0-9_]{2,12}$")
@@ -1172,6 +1173,10 @@ PLATAFORMAS_REDES = {
         # Segundos del video, desde el 17 de septiembre de 2026. Opcional: un
         # corte anterior no lo trae y sigue siendo valido, igual que `alcance`.
         "duracion": True,
+        # El corte por rubro, desde el 25 de septiembre de 2026: `rubro_maximo`
+        # en la raiz, `rubros` en cada destacado y `rubro` en las cuentas que
+        # son busquedas por tema (pulso/redes.py::_destacados). Solo TikTok.
+        "rubros": True,
         "zonas": ZONAS_REDES_AMBITO,
         "modulo": "pulso/tiktok.py:_limpiar_comentario",
     },
@@ -1311,6 +1316,20 @@ def validar_tiktok_config(datos):
             errores.append("{}: una busqueda no lleva 'zona'; la zona de cada video sale "
                            "de lo que nombra su pie (pulso/zonas.py). 'ambito' tampoco es "
                            "una zona: solo decide el residuo".format(et))
+        if "rubro" in b:
+            # Uno de la fila «Tema» del sitio (pulso/rubros.py copia sus
+            # terminos). Un rubro inventado no tendria pestana donde verse: sus
+            # videos no entrarian a «Todo» ni a ningun tema, y sus comentarios
+            # se pagarian para nadie.
+            if b.get("rubro") not in RUBROS:
+                errores.append("{}: 'rubro' {!r} no es de la fila de temas; se espera {}".format(
+                    et, b.get("rubro"), "|".join(RUBROS)))
+    if any(isinstance(b, dict) and "rubro" in b for b in busquedas) and isinstance(cosecha, dict):
+        for campo in ("videos_por_rubro", "comentarios_por_video_rubro"):
+            v = cosecha.get(campo)
+            if not isinstance(v, int) or isinstance(v, bool) or v < 1:
+                errores.append("tiktok.cosecha: '{}' debe ser entero positivo si hay "
+                               "busquedas por rubro".format(campo))
     perfiles = datos.get("perfiles", [])
     if not isinstance(perfiles, list):
         errores.append("tiktok: 'perfiles' debe ser una lista")
@@ -1929,9 +1948,21 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram",
     if not isinstance(maximo, int) or isinstance(maximo, bool) or maximo < 1:
         errores.append("redes: 'destacados_maximo' debe ser entero positivo")
         maximo = None
+    # El corte por rubro (25 de septiembre de 2026). Un corte anterior no lo
+    # trae y sigue siendo valido: su tope por zona es el de siempre.
+    rubro_maximo = datos.get("rubro_maximo")
+    con_rubros = esp.get("rubros") and "rubro_maximo" in datos
+    if "rubro_maximo" in datos and not esp.get("rubros"):
+        errores.append("redes: 'rubro_maximo' no aplica a {}; solo TikTok corta por "
+                       "rubro".format(plataforma))
+    elif con_rubros and (not isinstance(rubro_maximo, int) or isinstance(rubro_maximo, bool)
+                         or rubro_maximo < 1):
+        errores.append("redes: 'rubro_maximo' debe ser entero positivo")
+        rubro_maximo = None
 
     cuentas = datos.get("cuentas")
     conocidas = set()
+    de_rubro = set()
     if not isinstance(cuentas, list):
         errores.append("redes: 'cuentas' debe ser una lista (catalogo sin handle)")
     else:
@@ -1948,6 +1979,15 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram",
             if not isinstance(c.get("activa"), bool):
                 errores.append("redes.cuentas[{}]: 'activa' debe ser booleano".format(
                     c["cuenta"]))
+            if "rubro" in c:
+                if not esp.get("rubros"):
+                    errores.append("redes.cuentas[{}]: 'rubro' no aplica a {}".format(
+                        c["cuenta"], plataforma))
+                elif c["rubro"] not in RUBROS:
+                    errores.append("redes.cuentas[{}]: rubro {!r} desconocido".format(
+                        c["cuenta"], c["rubro"]))
+                else:
+                    de_rubro.add(c["cuenta"])
         ids = [c.get("cuenta") for c in cuentas if isinstance(c, dict)]
         if ids != sorted(ids):
             errores.append("redes: 'cuentas' no esta ordenado por cuenta")
@@ -1966,6 +2006,7 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram",
             continue
         _validar_destacado(d, eti, esp, plataforma, ctx, conocidas, cosecha_comentarios,
                            errores, avisos, acum)
+        _validar_rubros_destacado(d, eti, esp, plataforma, con_rubros, de_rubro, errores)
 
     if acum["sin_alcance"]:
         avisos.append("redes: {} destacado(s) anteriores al campo 'alcance' (15 de septiembre "
@@ -1976,12 +2017,74 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram",
                       "de 2026); hasta que el cron los regenere no se puede presupuestar lo "
                       "que Apify cobra por segundo de video".format(acum["sin_duracion"]))
     _validar_orden_destacados(lista, acum["urls"], esp["orden"], "redes", errores)
-    if maximo:
+    if maximo and con_rubros:
+        _validar_topes_rubro(lista, maximo, rubro_maximo, errores)
+    elif maximo:
         for clave, n in sorted(acum["por_zona"].items()):
             if n > maximo:
                 donde = clave if isinstance(clave, str) else "{} en {}".format(clave[1], clave[0])
                 errores.append("redes: {} destacados de {} y el maximo es {}".format(
                     n, donde, maximo))
+
+
+def _validar_rubros_destacado(d, eti, esp, plataforma, con_rubros, de_rubro, errores):
+    """`rubros` de un destacado: los que su titulo nombra (pulso/rubros.py).
+
+    No se recalcula contra la lista de terminos de hoy, a proposito: el
+    archivo dice lo que decidio el corte cuando se escribio, y un cambio de
+    terminos no puede volver invalido un data/ que el bot ya commiteo. Lo que
+    si se exige es la forma y la regla de las busquedas por rubro.
+    """
+    if not esp.get("rubros"):
+        if "rubros" in d:
+            errores.append("{}: 'rubros' no aplica a {}".format(eti, plataforma))
+        return
+    if not con_rubros:
+        if "rubros" in d:
+            errores.append("{}: 'rubros' sin 'rubro_maximo' en la raiz".format(eti))
+        return
+    rub = d.get("rubros")
+    if not isinstance(rub, list) or any(r not in RUBROS for r in rub):
+        errores.append("{}: 'rubros' debe ser lista de {} ({!r})".format(
+            eti, "|".join(RUBROS), rub))
+        return
+    if rub != [r for r in RUBROS if r in rub]:
+        errores.append("{}: 'rubros' repetidos o fuera del orden de la fila de temas".format(eti))
+    if d.get("cuenta") in de_rubro and not rub:
+        # Un video de una busqueda por rubro solo entra por el corte de un
+        # rubro que su titulo nombra. Sin rubros, lo metio el corte general:
+        # justo lo que el cliente pidio no hacer el 25 de septiembre de 2026.
+        errores.append("{}: video de la busqueda por rubro {} sin 'rubros'; esas busquedas "
+                       "no entran al corte general".format(eti, d.get("cuenta")))
+
+
+def _validar_topes_rubro(lista, maximo, rubro_maximo, errores):
+    """Los topes por zona cuando hay corte por rubro.
+
+    Lo que no nombra rubro alguno solo pudo entrar por el corte general, asi
+    que eso sigue topado en `destacados_maximo` por zona, exacto. El total de
+    una zona ya no: cada rubro suma su propio corte. Ahi el tope es una cota
+    (el general mas un corte entero por rubro), que atrapa un corte desbocado
+    pero no reproduce la seleccion; el orden y la regla de las busquedas por
+    rubro son lo que la vigila de verdad.
+    """
+    sin_rubro, total = {}, {}
+    for d in lista:
+        if not isinstance(d, dict) or not isinstance(d.get("zona"), str):
+            continue
+        total[d["zona"]] = total.get(d["zona"], 0) + 1
+        if isinstance(d.get("rubros"), list) and not d["rubros"]:
+            sin_rubro[d["zona"]] = sin_rubro.get(d["zona"], 0) + 1
+    for zona, n in sorted(sin_rubro.items()):
+        if n > maximo:
+            errores.append("redes: {} destacados sin rubro de {} y el maximo es {}".format(
+                n, zona, maximo))
+    if rubro_maximo:
+        cota = maximo + rubro_maximo * len(RUBROS)
+        for zona, n in sorted(total.items()):
+            if n > cota:
+                errores.append("redes: {} destacados de {}; con el corte por rubro la cota es "
+                               "{}".format(n, zona, cota))
 
 
 def validar_redes_comentarios(datos, redes=None, plataforma="instagram"):
@@ -2172,7 +2275,7 @@ PLATAFORMAS_CONSULTA = {
     # nacional, una publicacion que nombra Madrid ya no se confunde con una
     # nota nacional mexicana. Sin `temas` por destacado: los temas son del
     # termino. Sin residuo del corredor: una consulta nunca es regional.
-    "tiktok": dict(PLATAFORMAS_REDES["tiktok"], temas=False),
+    "tiktok": dict(PLATAFORMAS_REDES["tiktok"], temas=False, rubros=False),
     "instagram": dict(PLATAFORMAS_REDES["instagram"], alcance=True, temas=False,
                       residuo_corredor=False),
     "facebook": {

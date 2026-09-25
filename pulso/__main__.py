@@ -417,6 +417,8 @@ def cmd_tiktok(args):
         videos_por_perfil=cosecha.get("videos_por_perfil", 10),
         comentarios_por_video_perfil=cosecha.get("comentarios_por_video_perfil", 7),
         ventana_horas=cosecha.get("ventana_horas", 24),
+        videos_por_rubro=cosecha.get("videos_por_rubro", 20),
+        comentarios_por_video_rubro=cosecha.get("comentarios_por_video_rubro", 7),
     )
 
     etiquetados = omitidos = 0

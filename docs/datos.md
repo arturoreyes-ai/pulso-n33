@@ -1176,6 +1176,28 @@ cambia, y por qué:
   el video los tiene y no cobra un evento aparte. De ahí solo sale un conteo:
   `salud[].con_subtitulos`, cuántos videos de esa búsqueda los traían. El texto
   es el cuerpo del video y la agregación se queda en titular, fuente y enlace.
+- **El corte por rubro** (25 de septiembre de 2026): además del top general y
+  del de cada zona, se emite el top **`rubro_maximo`** (10) de cada rubro de la
+  fila «Tema» de Redes y de cada (rubro, zona). Cada destacado lleva
+  **`rubros`**, los que su `titulo` nombra, en el orden de la fila de temas
+  (`espectaculos, politica, seguridad, turismo, ia, clima, deportes,
+  economia`), y puede ir vacío. Lo calcula `pulso/rubros.py`, copia de
+  `web/src/lib/busqueda/tema-publicacion.ts` fijada contra el fixture
+  `web/scripts/fixtures/rubros/esperado.json`; el sitio lee el campo en vez de
+  recalcularlo. El validador no lo recalcula contra la lista de hoy, a
+  propósito: un cambio de términos no puede volver inválido un corte ya
+  commiteado. Un corte anterior no trae ni `rubro_maximo` ni `rubros` y sigue
+  siendo válido.
+- **Las búsquedas por rubro no entran al corte general.** Su fila de `cuentas`
+  lleva `rubro`, y sus videos solo llegan por el corte de un rubro que su título
+  nombra: el validador rechaza uno sin `rubros`. El sitio las deja fuera de
+  «Todo» con esa misma marca, así que «Todo» corta exactamente lo de antes.
+  Por lo mismo el tope por zona cambia de forma: lo que no nombra rubro sigue
+  topado en `destacados_maximo`, exacto; el total de una zona tiene una cota,
+  `destacados_maximo + rubro_maximo × 8`.
+- `salud[].sin_rubro`, solo en una búsqueda por rubro: los videos tirados
+  porque su título no nombraba el rubro o no decía nada fuera de sus
+  etiquetas. No pagaron comentarios.
 
 ```json
 {
@@ -1271,6 +1293,18 @@ mundo, las fuentes fijas de esas dos cubetas. Campos:
 - `marca` y `seguidores` (ver `config/instagram.json`).
 
 No llevan `consulta` ni `zona`: la zona sale del pie de cada video, igual que en una búsqueda.
+
+**`rubro`** (25 de septiembre de 2026, opcional) hace de una búsqueda una
+búsqueda por TEMA: uno de `pulso/rubros.py::RUBROS`, que son los de la fila
+«Tema» de Redes. Se cosecha como cualquier búsqueda —la zona sale del pie, lo
+que no nombra lugar se tira— y además un video cuyo título no nombra el rubro,
+o no dice nada fuera de sus etiquetas, se tira como `sin_rubro` antes de pagar
+comentarios. Un video que una búsqueda general ya encontró sigue siendo de
+ella. Con una sola fila de rubro, `cosecha` exige `videos_por_rubro` (20) y
+`comentarios_por_video_rubro` (7). Hay ocho, una por tema, sondeadas el 25 de
+septiembre de 2026; Política, Economía e IA están apagadas con el sondeo
+escrito en su fila. `presupuesto_resultados` sube a 8,820 (28 filas × 315)
+por la regla de siempre.
 
 `cosecha` suma `videos_por_perfil` (10) y `comentarios_por_video_perfil` (7). Tres cosas que difieren de una búsqueda:
 - La ventana de 24 horas se impone **antes** de pedir comentarios, porque el perfil no trae filtro de fecha. En `salud`, el perfil cuenta `fuera_de_ventana`.

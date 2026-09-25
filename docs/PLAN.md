@@ -18,6 +18,47 @@
 > ningún lugar se queda, porque no se puede probar que sea de fuera. La tarjeta
 > que separa los capítulos decía «15 titulars»; ya dice «titulares».
 
+> **Implementación · 25 de septiembre de 2026 — Un top 10 de TikTok por tema.**
+> El cliente pidió que cada pestaña de la fila «Tema» de Redes tuviera sus diez
+> videos de TikTok. Lo que ya se cosechaba no alcanzaba: de los 80 videos del
+> corte de ese día, Espectáculos tenía 0, Turismo 1, IA 1, Deportes 2, Clima y
+> Economía 3, Política 6 y Seguridad 13. Se hicieron dos cosas.
+>
+> **Primero, cada tema corta su propio top 10** de todo lo que ya se cosecha, y
+> no de lo que sobrevivía a los quince videos de más likes del lugar. No cuesta
+> nada, porque esos comentarios ya estaban pagados, y sobre el mismo corte llevó
+> Política de 6 a 15 videos, Seguridad de 13 a 22 y Economía de 3 a 9.
+>
+> **Después, una búsqueda por tema**, una para todo el corredor, con tres
+> reglas que decidió el cliente o que salen de lo medido. Un video solo cuenta
+> si su **título** nombra el tema con la misma lista de términos de la pestaña,
+> y si el título dice algo más que etiquetas; lo demás se descarta antes de
+> pagar sus comentarios, porque la búsqueda de TikTok devuelve de más. Sus
+> videos **solo se ven en la pestaña de su tema**, nunca en «Todo», para que un
+> video de espectáculos, con órdenes de magnitud más likes que uno de
+> noticias, no desplace a las noticias del lugar. Y se pagan **siete
+> comentarios por video** y no veinte, como en los medios de México y del
+> mundo.
+>
+> **Lo que dijo el sondeo, y lo que se encendió.** Se probaron veintitrés
+> consultas, diez videos cada una. Rinden Deportes («deportes tijuana», 5 de
+> 10), Espectáculos («concierto tijuana», 4), Seguridad («detienen tijuana», 3)
+> y Turismo («valle de guadalupe», 2), y esas quedan encendidas; Clima («clima
+> tijuana») trae poco pero bien, y se enciende para los días de lluvia.
+> **Política, Economía e IA quedan apagadas con el sondeo escrito:** tres
+> consultas de política y tres de economía no devolvieron ningún video del
+> corredor cuyo título nombrara el tema más allá de una etiqueta, y la IA del
+> corredor fue 1 de 20. «Inteligencia artificial México» sí trae videos, pero
+> caen en la cubeta México y no en el corredor; encenderla es decisión del
+> cliente. Esas tres pestañas siguen con lo que traen las búsquedas generales
+> y los medios fijos. Una pestaña con pocos videos dice lo que hay: no se
+> rellena.
+>
+> **Costo.** Con lo que rindió el sondeo, del orden de 40 a 70 dólares al mes
+> para las cinco encendidas: unos 20 videos por búsqueda y corrida, y siete
+> comentarios de cada video que pasa el título. La cifra buena sale de la
+> primera semana de corridas.
+
 > **Implementación · 24 de septiembre de 2026 — Guion para locución en la
 > pestaña TikTok.** El cliente cambió el foco del «Resumen con IA» del 23 de
 > septiembre: ahora es un guion que un conductor memoriza y dice, pedido con un

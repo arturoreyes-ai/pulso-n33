@@ -196,18 +196,34 @@ function porTurnos(posts: readonly Destacado[], tope: number,
  * `cuenta` es un medio con nombre impreso. Medido en YouTube el 18 de
  * septiembre de 2026: los quince primeros por vistas salieron de cinco canales
  * de los ocho que publicaron, con uno solo llevandose seis lugares.
+ *
+ * `tema`, desde el 25 de septiembre de 2026, solo cambia TikTok, que es la
+ * unica red que el pipeline corta tambien por rubro (`rubro_maximo`). Alli el
+ * tema elige ANTES del corte y el corte es el del rubro: el top 10 del tema
+ * en el lugar, que el pipeline emitio por (rubro, zona). Filtrar despues del
+ * corte general, como hasta ese dia, dejaba al tema con lo que sobrevivia a
+ * las quince de mas likes: 0 videos de Espectaculos de 80. Sin tema, TikTok
+ * deja fuera las busquedas por rubro (`cuentas[].rubro`): sus videos solo
+ * llegan por su pestana, decision del cliente ese dia, y asi «Todo» corta
+ * exactamente lo de antes. En las otras redes el tema sigue filtrando lo que
+ * el corte general eligio (visor-redes.tsx), y aqui se ignora.
  */
 export function seleccionarPublicaciones(
   datos: DocRedes,
   zona: string | null,
   red: RedVisual,
   cubeta: CubetaRegion = "corredor",
+  tema: ((post: Destacado) => boolean) | null = null,
 ): Destacado[] {
   const posts = datos.destacados ?? [];
   const dentro = zona === null ? EN_CUBETA[cubeta] : (z: string) => z === zona;
-  const suyos = posts.filter((post) => dentro(post.zona));
   const tope = datos.destacados_maximo ?? 15;
-  return red === "tiktok" ? suyos.slice(0, tope) : porTurnos(suyos, tope, red);
+  if (red !== "tiktok") return porTurnos(posts.filter((post) => dentro(post.zona)), tope, red);
+  if (tema !== null) {
+    return posts.filter((post) => dentro(post.zona) && tema(post)).slice(0, datos.rubro_maximo ?? tope);
+  }
+  const deRubro = new Set((datos.cuentas ?? []).filter((c) => c.rubro !== undefined).map((c) => c.cuenta));
+  return posts.filter((post) => dentro(post.zona) && !deRubro.has(post.cuenta)).slice(0, tope);
 }
 
 /** Solo enlaces de publicaciones, nunca perfiles, redirecciones ni HTML. */
@@ -295,14 +311,18 @@ export function fuenteDePublicacion(post: Destacado, red: RedVisual, nombres: Ma
   return nombres.get(post.cuenta) ?? post.cuenta;
 }
 
-export function reunirPublicaciones(docs: DocsRedes, zona: string | null, cubeta: CubetaRegion = "corredor"): PublicacionVisual[] {
+/** `tema` es el de `seleccionarPublicaciones`: un predicado y no un rubro,
+ *  porque este modulo no puede importar lib/busqueda en tiempo de ejecucion
+ *  (ver `porTurnos`). */
+export function reunirPublicaciones(docs: DocsRedes, zona: string | null, cubeta: CubetaRegion = "corredor",
+                                    tema: ((post: Destacado) => boolean) | null = null): PublicacionVisual[] {
   const salida: PublicacionVisual[] = [];
   const vistos = new Set<string>();
   for (const red of REDES_VISOR) {
     const datos = docs[red];
     if (!datos) continue;
     const nombres = nombresDeCuentas(datos);
-    for (const post of seleccionarPublicaciones(datos, zona, red, cubeta)) {
+    for (const post of seleccionarPublicaciones(datos, zona, red, cubeta, tema)) {
       const url = canonizarPublicacion(post.url, red);
       const clave = `${red}:${url ?? post.url}`;
       if (vistos.has(clave)) continue;

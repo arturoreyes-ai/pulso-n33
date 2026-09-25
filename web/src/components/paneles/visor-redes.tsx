@@ -7,7 +7,7 @@ import type { ComentarioPublicado } from "@/lib/datos/tipos";
 import { NOMBRE_RED, ordenarPublicaciones, reunirPublicaciones, type CubetaRegion, type OrdenLectura, type PublicacionVisual, type RedVisual } from "@/lib/dominio/publicaciones";
 import { filtrarPorTexto, SIN_FILAS_BUSQUEDA } from "@/lib/dominio/consultas";
 import { TITULO_RUBRO, type Rubro } from "@/lib/busqueda/rubros";
-import { nombraRubro } from "@/lib/busqueda/tema-publicacion";
+import { publicacionNombraRubro } from "@/lib/busqueda/tema-publicacion";
 import { fechaCorta, hace, hora } from "@/lib/dominio/formato";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 import { teclasDelRecorrido, useRecorrido } from "@/lib/pantalla/recorrido";
@@ -66,7 +66,9 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis
    *  nada a nadie. Ver lib/dominio/consultas.ts. */
   filtroTexto?: string | null;
   /** La fila de temas (lector-redes.tsx, 24 de septiembre de 2026): quedan
-   *  las publicaciones cuyo titulo nombra un termino del rubro. */
+   *  las publicaciones cuyo titulo nombra un termino del rubro. En TikTok,
+   *  desde el 25, el tema elige antes del corte y el corte es su top 10
+   *  (publicaciones.ts::seleccionarPublicaciones). */
   tema?: Rubro | null;
 }) {
   const instagram = useRedes();
@@ -81,13 +83,14 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis
   // `cosecha_comentarios` del documento y no por la red, para que encenderlos
   // despues sea un cambio de datos y no de codigo.
   const textos: Partial<Record<RedVisual, Textos>> = { instagram: textosInstagram, tiktok: textosTikTok, facebook: textosFacebook };
-  const publicaciones = useMemo(() => reunirPublicaciones({ instagram: instagram.data, tiktok: tiktok.data, youtube: youtube.data, facebook: facebook.data }, zona, cubeta), [instagram.data, tiktok.data, youtube.data, facebook.data, zona, cubeta]);
+  const publicaciones = useMemo(() => reunirPublicaciones({ instagram: instagram.data, tiktok: tiktok.data, youtube: youtube.data, facebook: facebook.data }, zona, cubeta,
+    tema === null ? null : (post) => publicacionNombraRubro(post, tema)), [instagram.data, tiktok.data, youtube.data, facebook.data, zona, cubeta, tema]);
   const q = (filtroTexto ?? "").trim();
   const filas = useMemo(() => {
     // El orden DESPUES del filtro de pestana: «populares» reparte puestos por
     // red, y en una pestana de una red eso es su orden de merito.
     const porRed = ordenarPublicaciones(publicaciones.filter((fila) =>
-      (filtro === "todas" || fila.red === filtro) && (tema === null || nombraRubro(fila.post.titulo, tema))), orden);
+      (filtro === "todas" || fila.red === filtro) && (tema === null || publicacionNombraRubro(fila.post, tema))), orden);
     return q === "" ? porRed : filtrarPorTexto(porRed, { instagram: textosInstagram.data, tiktok: textosTikTok.data, facebook: textosFacebook.data }, q);
   }, [publicaciones, filtro, q, orden, tema, textosInstagram.data, textosTikTok.data, textosFacebook.data]);
   // «Guion para locución», primero en la pestana TikTok, con los videos

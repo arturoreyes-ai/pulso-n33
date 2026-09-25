@@ -44,8 +44,9 @@ const {
 // de 2026 al quitarse la pagina del muro donde vivian.
 const largoDe = (entrada) => (entrada === 'Tecate' ? 9 : 8);
 const { RUBROS, RUBROS_CADENA, RUBROS_PROGRAMA } = cargar('lib/busqueda/rubros');
+const { TERMINOS_RUBRO, nombraRubro: nombraTitular } = cargar('lib/busqueda/rubros');
 const { rubroDe, rutaDeEntrada } = cargar('lib/busqueda/entrada');
-const { nombraRubro } = cargar('lib/busqueda/tema-publicacion');
+const { nombraRubro, terminosDeRubro } = cargar('lib/busqueda/tema-publicacion');
 const { ZONAS_RUTA } = cargar('lib/dominio/zonas');
 const { TOPE_ACTUALIDAD } = cargar('lib/busqueda/tipos');
 const { indiceDeImagenes, imagenPara } = cargar('lib/busqueda/imagenes');
@@ -231,6 +232,41 @@ function comprobar() {
   assert.ok(nombraRubro('La #Presidenta recibió en Palacio Nacional al presidente de Corea', 'politica'));
   assert.ok(!nombraRubro('Festival en Playas de Rosarito', 'turismo'), 'el nombre de una zona no es turismo');
   for (const r of RUBROS) assert.equal(typeof nombraRubro('', r), 'boolean', r);
+
+  // --- La copia del pipeline: pulso/rubros.py ------------------------------
+  // 25 de septiembre de 2026. El top 10 de TikTok por rubro lo corta el
+  // pipeline con una copia de esta regla, y lo que la pagina no reconozca como
+  // del rubro son comentarios pagados que nadie ve. Este fixture fija lo que
+  // el sitio decide; tests/test_rubros.py fija que la copia decida lo mismo.
+  // Tras un cambio DELIBERADO de terminos aqui:
+  //   node scripts/probar-capitulos.cjs --escribir-rubros
+  // y porta a pulso/rubros.py lo que la prueba de Python diga.
+  //
+  // `titulares` es la OTRA regla, la de rubros.ts::nombraRubro, con una lista
+  // por idioma: la que la portada aplica a sus titulares en vivo. Desde el 25
+  // de septiembre de 2026 pulso/tema_nota.py la copia para poner rubro a las
+  // notas de prensa (tests/test_tema_nota.py), y por el idioma no es la de
+  // arriba: «mayor» y «Padres» son de ingles aqui.
+  const FIXTURE_RUBROS = path.resolve(__dirname, 'fixtures/rubros/esperado.json');
+  const guardado = JSON.parse(fs.readFileSync(FIXTURE_RUBROS, 'utf8'));
+  const calculado = {
+    nota: guardado.nota,
+    rubros: [...RUBROS],
+    terminos: Object.fromEntries(RUBROS.map((r) => [r, terminosDeRubro(r)])),
+    casos: guardado.casos.map(({ titulo }) => ({ titulo, rubros: RUBROS.filter((r) => nombraRubro(titulo, r)) })),
+    titulares: {
+      terminos: Object.fromEntries(RUBROS.map((r) => [r, TERMINOS_RUBRO[r]])),
+      casos: (guardado.titulares?.casos ?? []).map(({ titulo, idioma }) =>
+        ({ titulo, idioma, rubros: RUBROS.filter((r) => nombraTitular(titulo, r, idioma)) })),
+    },
+  };
+  if (process.argv.includes('--escribir-rubros')) {
+    fs.writeFileSync(FIXTURE_RUBROS, JSON.stringify(calculado, null, 1) + '\n');
+    console.log(`Escrito ${path.relative(process.cwd(), FIXTURE_RUBROS)}; corre tests/test_rubros.py.`);
+  } else {
+    assert.deepEqual(calculado, guardado,
+      'los rubros cambiaron sin regenerar el fixture: node scripts/probar-capitulos.cjs --escribir-rubros');
+  }
 
   // --- La faceta: leerla de la URL y volver a escribirla -------------------
   // Un tema inventado cae en «Todo», por la misma razon que una entrada

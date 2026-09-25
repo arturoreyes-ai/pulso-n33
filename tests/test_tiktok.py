@@ -794,6 +794,179 @@ class TestValidadorTikTok(unittest.TestCase):
         self.assertTrue(any("'orden'" in x for x in validar_tiktok_config(malo)[0]))
 
 
+# --- Busquedas por rubro: el top 10 de cada tema (25 de septiembre de 2026) ---
+
+RUBRO = {"id": "tk_rubro_deportes", "nombre": "Tema: Deportes", "consulta": "deportes tijuana",
+         "rubro": "deportes", "idioma": "es", "activo": True, "verificado": "2026-09-25",
+         "nota": "fixture"}
+
+
+def _pub(i, cuenta, titulo, likes, zona="Tijuana"):
+    url = "https://www.tiktok.com/@xx/video/{}".format(i)
+    return url, {"url": url, "cuenta": cuenta, "creador": "@xx", "zona": zona, "alcance": "zona",
+                 "fecha": "2026-09-03", "publicado": "2026-09-03T10:00:00+00:00",
+                 "tipo": "video", "titulo": titulo, "likes": likes, "comentarios": 0,
+                 "compartidos": 0, "guardados": 0}
+
+
+class TestRubros(BaseCache):
+    def _cosechar_filas(self, filas, actor, **kw):
+        with patch.object(tiktok, "correr_actor", actor):
+            return tiktok.cosechar(filas, AHORA, tok="t", cache=self.cache, **kw)
+
+    def test_el_titulo_decide_y_la_nube_de_etiquetas_no_dice_nada(self):
+        """El sondeo del 25 de septiembre de 2026: la busqueda de TikTok empata
+        de mas, y «famosos tijuana» traia «#tijuana #viral» por `#viral`."""
+        videos = [
+            _video(id="1", text="Xolos de Tijuana gana 2-0 en casa",
+                   webVideoUrl="https://www.tiktok.com/@a/video/1"),
+            _video(id="2", webVideoUrl="https://www.tiktok.com/@a/video/2"),  # la garita
+            _video(id="3", text="#tijuana #xolos", webVideoUrl="https://www.tiktok.com/@a/video/3"),
+        ]
+        actor = _Actor(videos=videos, comentarios=[])
+        _, salud, _ = self._cosechar_filas([RUBRO], actor)
+        self.assertEqual(salud[0]["sin_rubro"], 2)
+        self.assertEqual(salud[0]["posts"], 1)
+        pedidos = [e for a, e in actor.llamadas if a == tiktok.ACTOR_COMENTARIOS]
+        self.assertEqual(pedidos[0]["postURLs"], ["https://www.tiktok.com/@a/video/1"],
+                         "solo paga comentarios lo que pasa el titulo")
+        self.assertEqual(pedidos[0]["commentsPerPost"], tiktok.COMENTARIOS_POR_VIDEO_RUBRO)
+        entrada = [e for a, e in actor.llamadas if a == tiktok.ACTOR_VIDEOS][0]
+        self.assertEqual(entrada["resultsPerPage"], tiktok.VIDEOS_POR_RUBRO)
+
+    def test_una_busqueda_general_no_cuenta_sin_rubro(self):
+        # Un cero ahi seria un cero que nadie midio.
+        _, salud, _ = self._cosechar_filas([BUSQUEDA], _Actor(comentarios=[]))
+        self.assertNotIn("sin_rubro", salud[0])
+
+    def test_la_zona_sigue_saliendo_del_pie(self):
+        # El rubro no es la puerta de atras a la zona: lo que no nombra lugar se
+        # tira. Ojo con «Xolos», que el gacetero lee como Tijuana.
+        v, motivo = tiktok._limpiar_video(_video(text="Boxeo: gana por nocaut"), RUBRO, AHORA)
+        self.assertIsNone(v)
+        self.assertEqual(motivo, "sin_lugar")
+
+    def test_la_busqueda_general_conserva_el_video_que_el_rubro_vuelve_a_traer(self):
+        """Si pasara a la fila del rubro saldria de «Todo» sin que nada lo dijera."""
+        video = _video(text="Xolos de Tijuana gana en casa")
+        self._cosechar_filas([BUSQUEDA, RUBRO], _Actor(videos=[video], comentarios=[]))
+        url = "https://www.tiktok.com/@tjnoticias/video/7301"
+        self.assertEqual(tiktok.leer_publicaciones(self.cache)[url]["cuenta"], BUSQUEDA["id"])
+        # Y en otra corrida en la que solo la del rubro lo trae, tampoco cambia.
+        self._cosechar_filas([dict(BUSQUEDA, activo=False), RUBRO],
+                             _Actor(videos=[dict(video, diggCount=999)], comentarios=[]))
+        pub = tiktok.leer_publicaciones(self.cache)[url]
+        self.assertEqual(pub["cuenta"], BUSQUEDA["id"])
+        self.assertEqual(pub["likes"], 999, "las cifras si se refrescan")
+
+    def test_el_rubro_no_entra_al_corte_general_y_tiene_su_top(self):
+        pubs = dict(_pub(i, "tk_tijuana_noticias", "Nota {}".format(i), 1000 - i)
+                    for i in range(20))
+        # Diez del rubro con MAS likes que cualquier nota: en el corte general
+        # se quedarian con todo, que es lo que el cliente pidio no hacer.
+        pubs.update(_pub(100 + i, "tk_rubro_deportes", "Xolos gol {}".format(i), 50000 - i)
+                    for i in range(12))
+        # Una nota general que nombra Deportes, fuera de las quince por likes.
+        pubs.update([_pub(200, "tk_tijuana_noticias", "Los Toros ganan", 5)])
+        panel = tiktok.derivar([], AHORA, [], {}, [], pubs, [BUSQUEDA, RUBRO])
+        cuentas = {d["url"]: d for d in panel["destacados"]}
+        generales = [d for d in panel["destacados"] if d["cuenta"] == "tk_tijuana_noticias"
+                     and not d["rubros"]]
+        self.assertEqual(len(generales), 15)
+        self.assertEqual(max(d["likes"] for d in generales), 1000, "el general es el de siempre")
+        deportes = [d for d in panel["destacados"] if "deportes" in d["rubros"]]
+        self.assertEqual(len(deportes), tiktok._redes.RUBRO_MAXIMO)
+        self.assertNotIn("https://www.tiktok.com/@xx/video/200", cuentas,
+                         "quinto lugar de nada: ni general ni del top de Deportes")
+        self.assertEqual(panel["rubro_maximo"], 10)
+        fila = [c for c in panel["cuentas"] if c["cuenta"] == "tk_rubro_deportes"][0]
+        self.assertEqual(fila["rubro"], "deportes")
+        self.assertEqual(validar_redes(panel, plataforma="tiktok")[0], [])
+
+    def test_el_top_del_rubro_incluye_lo_de_las_busquedas_generales(self):
+        # El corte por rubro corre sobre TODO lo cosechado: un video de
+        # «tijuana noticias» que nombra una balacera es de Seguridad, y sus
+        # comentarios ya estan pagados.
+        pubs = dict(_pub(i, "tk_tijuana_noticias", "Nota {}".format(i), 1000 - i)
+                    for i in range(20))
+        pubs.update([_pub(300, "tk_tijuana_noticias", "Balacera en la Zona Norte", 3)])
+        panel = tiktok.derivar([], AHORA, [], {}, [], pubs, [BUSQUEDA])
+        d = [d for d in panel["destacados"] if d["url"].endswith("/300")]
+        self.assertEqual(d[0]["rubros"], ["seguridad"])
+
+    def test_instagram_sale_igual_sin_rubros(self):
+        from pulso import instagram
+        pubs = dict([_pub(1, "tk_tijuana_noticias", "Balacera", 3)])
+        panel = instagram.derivar([], AHORA, [], {}, [], pubs,
+                                  [{"id": "tk_tijuana_noticias", "zona": "Tijuana",
+                                    "activo": True, "verificado": True}])
+        self.assertNotIn("rubro_maximo", panel)
+        self.assertNotIn("rubros", panel["destacados"][0])
+
+
+class TestValidadorRubros(unittest.TestCase):
+    def setUp(self):
+        base = TestValidadorTikTok.BASE
+        self.doc = json.loads(json.dumps(base))
+        self.doc["rubro_maximo"] = 10
+        self.doc["destacados"][0]["rubros"] = []
+        # Primero: `cuentas` va ordenado por cuenta.
+        self.doc["cuentas"].insert(0, {"cuenta": "tk_rubro_deportes", "nombre": "Tema: Deportes",
+                                       "zona": "estatal", "activa": True, "rubro": "deportes"})
+
+    def _errores(self, doc=None, plataforma="tiktok"):
+        return validar_redes(doc or self.doc, plataforma=plataforma)[0]
+
+    def test_el_valido_pasa(self):
+        self.assertEqual(self._errores(), [])
+
+    def test_un_video_de_rubro_sin_rubros_es_el_corte_general_colandose(self):
+        self.doc["destacados"][0]["cuenta"] = "tk_rubro_deportes"
+        self.assertTrue(any("no entran al corte general" in e for e in self._errores()))
+        self.doc["destacados"][0]["rubros"] = ["deportes"]
+        self.assertEqual(self._errores(), [])
+
+    def test_rubros_conocidos_en_su_orden(self):
+        self.doc["destacados"][0]["rubros"] = ["futbol"]
+        self.assertTrue(any("'rubros' debe ser lista" in e for e in self._errores()))
+        self.doc["destacados"][0]["rubros"] = ["deportes", "seguridad"]
+        self.assertTrue(any("fuera del orden" in e for e in self._errores()))
+
+    def test_rubros_sin_rubro_maximo_o_en_otra_red_es_error(self):
+        del self.doc["rubro_maximo"]
+        self.assertTrue(any("sin 'rubro_maximo'" in e for e in self._errores()))
+        from tests.test_instagram import TestValidadorDestacados as TD
+        ig = json.loads(json.dumps(TD.CON))
+        ig["rubro_maximo"] = 10
+        self.assertTrue(any("solo TikTok corta por rubro" in e for e in validar_redes(ig)[0]))
+
+    def test_sin_rubro_sigue_topado_por_zona(self):
+        muchos = []
+        for i in range(16):
+            muchos.append(dict(self.doc["destacados"][0],
+                               url="https://www.tiktok.com/@tjnoticias/video/{}".format(9000 - i),
+                               likes=100 - i))
+        self.doc["destacados"] = muchos
+        self.assertTrue(any("sin rubro de Tijuana" in e for e in self._errores()))
+        # Con rubro no cuentan contra ese tope: tienen el suyo.
+        for d in muchos[:3]:
+            d["rubros"] = ["deportes"]
+        self.assertEqual(self._errores(), [])
+
+    def test_config_rubro_de_la_fila_de_temas_y_sus_topes(self):
+        cfg = {"nota": "x", "cosecha": {"videos_por_busqueda": 15, "comentarios_por_video": 20,
+                                       "dias_entre_cosechas": 3, "ventana_horas": 24,
+                                       "filtro_fecha": "PAST_24_HOURS", "presupuesto_resultados": 1000,
+                                       "videos_por_rubro": 20, "comentarios_por_video_rubro": 7},
+               "busquedas": [dict(RUBRO)]}
+        self.assertEqual(validar_tiktok_config(cfg)[0], [])
+        malo = json.loads(json.dumps(cfg)); malo["busquedas"][0]["rubro"] = "farandula"
+        self.assertTrue(any("no es de la fila de temas" in e for e in validar_tiktok_config(malo)[0]))
+        malo = json.loads(json.dumps(cfg)); del malo["cosecha"]["comentarios_por_video_rubro"]
+        self.assertTrue(any("comentarios_por_video_rubro" in e
+                            for e in validar_tiktok_config(malo)[0]))
+
+
 class TestConfigReal(unittest.TestCase):
     """Lee el config/tiktok.json real, como el resto de la suite."""
 
@@ -814,6 +987,22 @@ class TestConfigReal(unittest.TestCase):
             if not b["activo"]:
                 with self.subTest(busqueda=b["id"]):
                     self.assertIn("APAGADA", b["nota"])
+
+    def test_una_busqueda_por_rubro_cita_su_sondeo(self):
+        """Probe before enabling: una fila de rubro activa dice que se quedo del
+        sondeo, con numeros. «famosos tijuana» parecia rendir seis de diez y
+        cinco eran nubes de etiquetas; solo el sondeo lo dijo."""
+        from pulso.rubros import RUBROS
+        filas = [b for b in self.cfg["busquedas"] if "rubro" in b]
+        self.assertEqual(sorted({b["rubro"] for b in filas}), sorted(RUBROS),
+                         "una busqueda por cada pestana de la fila de temas")
+        for b in filas:
+            with self.subTest(busqueda=b["id"]):
+                self.assertIn(b["rubro"], RUBROS)
+                self.assertRegex(b["verificado"], r"^\d{4}-\d{2}-\d{2}$")
+                self.assertRegex(b["nota"], r"[Ss]onde")
+                self.assertIn("«{}»".format(b["consulta"]), b["nota"],
+                              "la nota cita lo que midio su propia consulta")
 
     def test_el_tope_alcanza_para_todas_las_filas_no_solo_las_activas(self):
         """`reparto - posts` recorta la pasada de comentarios EN SILENCIO.

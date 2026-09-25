@@ -120,6 +120,31 @@ fila. Tres diferencias con una busqueda, las tres por costo:
 Un medio no se lee en Instagram Y en TikTok: publica lo mismo en las dos y
 el muro lo repetiria. `marca` junta sus filas de las dos redes y el validador
 exige una sola activa, la de mas seguidores (validador.validar_marcas).
+
+## Busquedas por rubro: el top 10 de cada tema, desde el 25 de septiembre de 2026
+
+El cliente pidio un top 10 de TikTok por cada pestana de la fila «Tema» de
+Redes. Lo cosechado no alcanzaba: de los 80 videos publicados ese dia,
+Espectaculos tenia 0, Turismo 1, IA 1 y Deportes 2. Asi que una busqueda de
+config/tiktok.json puede llevar `rubro` (uno de pulso/rubros.py::RUBROS) y se
+cosecha como cualquier otra -- la zona sigue saliendo del pie, lo que no
+nombra lugar se sigue tirando --, con tres diferencias:
+
+- Un video cuyo TITULO no nombra el rubro se tira (`sin_rubro` en salud),
+  antes de pagar sus comentarios. La busqueda de TikTok empata de mas: el 18
+  de septiembre devolvio tres de tres videos ajenos por cada termino del
+  cliente. La busqueda trae candidatos; el titulo decide, con la misma regla
+  que la pestana (pulso/rubros.py es su copia, fijada contra el sitio).
+- Siete comentarios por video y no veinte (`comentarios_por_video_rubro`),
+  como los perfiles: decision del cliente del 25 de septiembre, por costo.
+- Sus videos no entran al corte general: solo al de su rubro
+  (redes._destacados), y el sitio los deja fuera de «Todo». Tambien por
+  decision de ese dia: un video de espectaculos junta ordenes de magnitud mas
+  likes que uno de noticias, y en el corte general se quedaba con todo.
+
+Un video que una busqueda general YA encontro sigue siendo de ella aunque la
+de un rubro lo vuelva a traer (`cuenta` no cambia): si pasara al rubro,
+saldria de «Todo» sin que nada lo dijera.
 """
 
 import re
@@ -134,6 +159,7 @@ from .redes import (  # noqa: F401  (reexportados a proposito, como en instagram
     zona_por_ambito,
 )
 from . import redes as _redes
+from .rubros import nombra_rubro, rubros_de
 from .zonas import alcance, nombra_mexico, prosa_de
 
 ACTOR_VIDEOS = "clockworks~tiktok-scraper"
@@ -190,6 +216,15 @@ AMBITO = "regional"
 VIDEOS_POR_PERFIL = 10
 COMENTARIOS_POR_VIDEO_PERFIL = 7
 
+# Busquedas por rubro (25 de septiembre de 2026): veinte videos y siete
+# comentarios de cada uno que pase el titulo. Mas videos que una busqueda
+# general porque el titulo tira casi todo -- en el sondeo de ese dia se quedaron
+# de 0 a 5 de cada 10 -- y un video que no pasa cuesta un resultado de la
+# primera pasada, diez veces mas barato que un comentario. Son la omision;
+# mandan `cosecha.videos_por_rubro` y `cosecha.comentarios_por_video_rubro`.
+VIDEOS_POR_RUBRO = 20
+COMENTARIOS_POR_VIDEO_RUBRO = 7
+
 # Lo que cruza del registro del video a data/tiktok.json ademas de lo comun.
 # `alcance` es el veredicto literal del gacetero y viaja junto a `zona` porque
 # los dos dejaron de ser lo mismo cuando entraron los ambitos.
@@ -200,6 +235,7 @@ IDENTIDAD_COMENTARIO = ("uniqueId", "uid", "avatarThumbnail", "cid", "user", "ni
 
 RE_URL_VIDEO = re.compile(r"/@([^/?#]+)/video/(\d+)")
 RE_ETIQUETAS_FINALES = re.compile(r"(?:\s+#\S+)+\s*$")
+RE_ETIQUETA_O_MENCION = re.compile(r"[#@]\S+")
 
 # El actor de videos devuelve algunos emoji del pie como TEXTO escapado:
 # la cadena literal '🚦' (doce caracteres) en vez del semaforo. No
@@ -249,6 +285,22 @@ def _quitar_etiquetas_finales(texto):
     if not re.sub(r"#\S+", "", limpio).strip():
         return texto or ""
     return limpio
+
+
+def _dice_algo(titulo):
+    """Si al titulo le queda una letra fuera de sus #etiquetas y @menciones.
+
+    Solo lo pregunta una busqueda por rubro. El caso, del sondeo del 25 de
+    septiembre de 2026: «famosos tijuana» devolvio seis videos que nombraban
+    Espectaculos, y cinco eran nubes de etiquetas -- «#tijuana #viral»,
+    «#foryou #tijuana #fyp #parati #viral» -- que entraban por `#viral`. Un pie
+    solo de etiquetas se deja entero como titulo (_quitar_etiquetas_finales),
+    asi que ahi la etiqueta ES el titulo y no dice de que trata el video.
+    Pagar sus comentarios para ponerlo bajo un tema seria acreditarle el tema
+    por una etiqueta. Un video de una busqueda general no pasa por aqui: la
+    pestana lo filtra con la regla del sitio, que no distingue.
+    """
+    return re.search(r"[^\W\d_]", RE_ETIQUETA_O_MENCION.sub("", titulo or "")) is not None
 
 
 def _publicado(item):
@@ -316,8 +368,10 @@ def _limpiar_video(item, busqueda, ahora, tirar_sin_lugar=None):
 
     El motivo es None cuando hay registro; si no, dice por que se tiro:
     'anuncio', 'privado', 'sin_url', 'sin_creador', 'sin_fecha', 'futuro',
-    'fuera' (nombro otra region) o 'sin_lugar' (una busqueda que no nombro
-    nada). `salud` los cuenta para que un cambio del actor se note.
+    'fuera' (nombro otra region), 'sin_lugar' (una busqueda que no nombro
+    nada) o 'sin_rubro' (la busqueda de un rubro trajo un video cuyo titulo no
+    lo nombra; ver el encabezado). `salud` los cuenta para que un cambio del
+    actor se note.
     """
     url = _url_video(item.get("webVideoUrl") or item.get("url") or "")
     if not url:
@@ -359,6 +413,12 @@ def _limpiar_video(item, busqueda, ahora, tirar_sin_lugar=None):
         "compartidos": max(0, int(item.get("shareCount") or 0)),
         "guardados": max(0, int(item.get("collectCount") or 0)),
     }
+    # Sobre el titulo, que es lo que la pestana compara: un rubro nombrado solo
+    # en la cola de hashtags no se veria en ella, y sus comentarios serian
+    # dinero tirado. Y el titulo tiene que DECIR algo: ver _dice_algo.
+    if busqueda.get("rubro") and not (_dice_algo(salida["titulo"])
+                                      and nombra_rubro(salida["titulo"], busqueda["rubro"])):
+        return None, "sin_rubro"
     vistas = max(0, int(item.get("playCount") or 0))
     if vistas > 0:
         salida["reproducciones"] = vistas
@@ -428,8 +488,10 @@ def _fuentes(busquedas, perfiles=()):
     En un perfil si es interruptor, como en Instagram: no se lee una cuenta que
     nadie sondeo.
     """
-    salida = [{"id": b["id"], "nombre": b.get("nombre") or b["id"], "zona": "estatal",
-               "activo": bool(b.get("activo")), "verificado": True} for b in busquedas]
+    salida = [dict({"id": b["id"], "nombre": b.get("nombre") or b["id"], "zona": "estatal",
+                    "activo": bool(b.get("activo")), "verificado": True},
+                   **({"rubro": b["rubro"]} if b.get("rubro") else {}))
+              for b in busquedas]
     salida += [{"id": p["id"], "nombre": p.get("nombre") or p["id"], "zona": "estatal",
                 "activo": bool(p.get("activo")), "verificado": bool(p.get("verificado"))}
                for p in perfiles or ()]
@@ -529,16 +591,24 @@ def cosechar(busquedas, ahora, tok=None, presupuesto=None, cache=CACHE,
              videos_por_busqueda=30, comentarios_por_video=30, filtro_fecha=FILTRO_FECHA,
              orden=ORDEN, entorno=None, perfiles=(), videos_por_perfil=VIDEOS_POR_PERFIL,
              comentarios_por_video_perfil=COMENTARIOS_POR_VIDEO_PERFIL,
-             ventana_horas=VENTANA_HORAS):
+             ventana_horas=VENTANA_HORAS, videos_por_rubro=VIDEOS_POR_RUBRO,
+             comentarios_por_video_rubro=COMENTARIOS_POR_VIDEO_RUBRO):
     """Dos pasadas contra Apify. Devuelve (nuevos, salud, gasto).
 
     Primero las busquedas y luego los perfiles, con el mismo limpiador y el
     mismo freno de costo. Sin token no truena: devuelve vacio y lo dice en
     `salud`. El tablero tiene que poder mostrar prensa sin redes.
     """
-    filas = [(b, _entrada_videos(b["consulta"], videos_por_busqueda, filtro_fecha, orden),
-              videos_por_busqueda, comentarios_por_video)
-             for b in busquedas if b.get("activo")]
+    def de_busqueda(b):
+        if b.get("rubro"):
+            return videos_por_rubro, comentarios_por_video_rubro
+        return videos_por_busqueda, comentarios_por_video
+
+    filas = [(b, _entrada_videos(b["consulta"], de_busqueda(b)[0], filtro_fecha, orden))
+             + de_busqueda(b) for b in busquedas if b.get("activo")]
+    # Las filas de rubro, para no quitarle un video a la busqueda general que
+    # ya lo encontro (ver el encabezado).
+    de_rubro = {b["id"] for b in busquedas if b.get("rubro")}
     filas += [(p, _entrada_perfil(p["perfil"], videos_por_perfil), videos_por_perfil,
                comentarios_por_video_perfil)
               for p in perfiles or () if p.get("activo") and p.get("verificado")]
@@ -581,15 +651,22 @@ def cosechar(busquedas, ahora, tok=None, presupuesto=None, cache=CACHE,
         # cosechado sigue sumando likes y compartidos.
         urls, con_subtitulos = [], 0
         motivos = {"fuera": 0, "sin_lugar": 0, "descartados": 0}
+        # Solo en una fila de rubro, como `fuera_de_ventana` solo en un perfil:
+        # en las demas seria un cero que nadie midio.
+        if f.get("rubro"):
+            motivos["sin_rubro"] = 0
         viejos = 0
         for it in items:
             limpio, motivo = _limpiar_de_fila(it, f, ahora)
             if limpio is None:
-                motivos[motivo if motivo in ("fuera", "sin_lugar") else "descartados"] += 1
+                motivos[motivo if motivo in motivos else "descartados"] += 1
                 continue
             if _tiene_subtitulos(it):
                 con_subtitulos += 1
-            publicaciones[limpio["url"]] = {**publicaciones.get(limpio["url"], {}), **limpio}
+            previo = publicaciones.get(limpio["url"], {})
+            if f["id"] in de_rubro and previo.get("cuenta") and previo["cuenta"] not in de_rubro:
+                limpio = dict(limpio, cuenta=previo["cuenta"])
+            publicaciones[limpio["url"]] = {**previo, **limpio}
             # Un perfil trae lo ultimo que publico la cuenta, sea de hoy o de
             # la semana pasada: solo lo de la ventana paga comentarios.
             if _es_perfil(f) and not _dentro(limpio["publicado"], ahora, ventana_horas):
@@ -661,12 +738,14 @@ def cosechar(busquedas, ahora, tok=None, presupuesto=None, cache=CACHE,
 def derivar(comentarios, ahora, salud, gasto, temas=None, publicaciones=None,
             busquedas=None, ventana_horas=VENTANA_HORAS, perfiles=None):
     """data/tiktok.json: conteos y videos destacados de las ultimas horas. Ver
-    pulso/redes.py::derivar; aqui se fija la plataforma, la ventana en horas
-    y los campos que cruzan del video (creador, publicado, compartidos,
-    guardados). Las busquedas y los perfiles son las cuentas del documento."""
+    pulso/redes.py::derivar; aqui se fija la plataforma, la ventana en horas,
+    los campos que cruzan del video (creador, publicado, compartidos,
+    guardados) y el corte por rubro. Las busquedas y los perfiles son las
+    cuentas del documento."""
     return _redes.derivar(comentarios, ahora, salud, gasto, temas, publicaciones,
                           _fuentes(busquedas or [], perfiles or []), plataforma=PLATAFORMA,
-                          ventana_horas=ventana_horas, campos_extra=CAMPOS_EXTRA)
+                          ventana_horas=ventana_horas, campos_extra=CAMPOS_EXTRA,
+                          rubros_de=rubros_de)
 
 
 def publicar_comentarios(comentarios, destacados, ahora,

@@ -114,9 +114,33 @@ function patrones(rubro: Rubro): RegExp[] {
   return lista;
 }
 
+/**
+ * Todos los terminos que decide un rubro aqui: los de la consulta en los dos
+ * idiomas y los de `DEL_PIE`, sin repetir y ordenados. Existe para la
+ * paridad con pulso/rubros.py, que corta el top de cada rubro de TikTok con
+ * una COPIA de esta regla (25 de septiembre de 2026): si la copia se
+ * quedara atras, el pipeline pagaria videos que esta pagina no muestra.
+ * scripts/probar-capitulos.cjs escribe y comprueba el fixture que las dos
+ * leen.
+ */
+export function terminosDeRubro(rubro: Rubro): string[] {
+  return [...new Set([...terminos(rubro), ...(DEL_PIE[rubro] ?? [])])].sort();
+}
+
 export function nombraRubro(titulo: string, rubro: Rubro): boolean {
   const texto = sinAcentos(titulo);
   return patrones(rubro).some((p) => p.test(texto));
+}
+
+/**
+ * Si una PUBLICACION es del rubro. Un video de TikTok trae `rubros` desde el
+ * 25 de septiembre de 2026, que es lo que el pipeline decidio con su copia de
+ * esta regla y con lo que corto el top de cada tema: se lee eso, para que la
+ * pestana muestre exactamente lo que se corto. Sin el campo (Instagram,
+ * Facebook, YouTube, o un corte anterior de TikTok) se aplica la regla aqui.
+ */
+export function publicacionNombraRubro(post: { titulo: string; rubros?: readonly string[] }, rubro: Rubro): boolean {
+  return post.rubros !== undefined ? post.rubros.includes(rubro) : nombraRubro(post.titulo, rubro);
 }
 
 /**

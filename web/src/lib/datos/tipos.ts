@@ -492,6 +492,10 @@ export interface RedesSalud {
   fuera?: number;
   sin_lugar?: number;
   fuera_de_ventana?: number;
+  /** Solo una búsqueda por rubro de TikTok (25 de septiembre de 2026): los
+   *  videos tirados porque su título no nombraba el rubro, o no decía nada
+   *  fuera de sus etiquetas. No pagaron comentarios. */
+  sin_rubro?: number;
   nota?: string;
   error?: string;
 }
@@ -560,6 +564,10 @@ export interface DocRedes {
   ventana_dias?: number;
   ventana_horas?: number;
   destacados_maximo?: number;
+  /** Solo TikTok, desde el 25 de septiembre de 2026: el tope del corte por
+   *  rubro, el top de cada pestaña de «Tema» (10). Con él cada destacado trae
+   *  `rubros`; un corte anterior no lo trae y el tema filtra como antes. */
+  rubro_maximo?: number;
   /** Catálogo de cuentas, sin handle. Las apagadas viajan también: son el
    *  registro deliberado de un hueco (Mexicali, San Quintín) y permiten
    *  rotular «sin cuenta» en vez de un cero. */
@@ -578,6 +586,11 @@ export interface RedesCuenta {
   nombre: string;
   zona: string;
   activa: boolean;
+  /** Solo TikTok: la cuenta es una búsqueda por TEMA (25 de septiembre de
+   *  2026), uno de `lib/busqueda/rubros.ts::RUBROS`. Sus videos no van a
+   *  «Todo»: solo llegan por la pestaña de su tema
+   *  (`seleccionarPublicaciones`). */
+  rubro?: string;
 }
 
 /**
@@ -611,6 +624,12 @@ export interface Destacado {
   fecha: string;
   titulo: string;
   tipo: "imagen" | "video" | "carrusel" | "otro";
+  /** Solo TikTok, con `rubro_maximo`: los rubros que nombra el `titulo`,
+   *  en el orden de la fila de temas. Lo decidió el pipeline con su copia de
+   *  `lib/busqueda/tema-publicacion.ts` (`pulso/rubros.py`, fijada por un
+   *  fixture) y es con lo que cortó el top de cada tema; el sitio lo lee en
+   *  vez de recalcularlo (`publicacionNombraRubro`). */
+  rubros?: string[];
   /** Solo YouTube, y obligatorio ahí. Shorts y videos largos se cortan por
    *  separado porque sus vistas no miden lo mismo: desde el 31 de marzo de
    *  2025 una vista de Short cuenta cualquier arranque o repetición sin

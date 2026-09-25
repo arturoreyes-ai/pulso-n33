@@ -363,6 +363,41 @@ TikTok still does not divide destacados by account, profiles included. A
 17.7M-follower profile may crowd México or Mundo; measure after its first run
 before deciding otherwise.
 
+**TikTok cuts a top 10 per theme, and has theme searches (`rubro`), since 25
+September 2026.** The client asked for ten TikTok videos under each tab of the
+Redes «Tema» row; that day's 80 videos gave Espectáculos 0, Turismo and IA 1,
+Deportes 2. What is not obvious:
+- **The pipeline copies the site's theme rule.** `pulso/rubros.py` is a copy of
+  `lib/busqueda/tema-publicacion.ts` (terms from `rubros.ts` plus `DEL_PIE`),
+  pinned by `web/scripts/fixtures/rubros/esperado.json`: change a term on the
+  site, run `node web/scripts/probar-capitulos.cjs --escribir-rubros`, and port
+  what `tests/test_rubros.py` then says. If the copies drift, the pipeline pays
+  for videos the tab does not show. Zero differences over 427 real titles.
+- **`_destacados(rubros_de=…)` adds the top `rubro_maximo` (10) per rubro and
+  per (rubro, zona)**, over everything harvested, and each TikTok destacado
+  carries `rubros`. That part is free: on the 24 September cut it took
+  Política 6→15 and Seguridad 13→22. On the site the TikTok tab selects by
+  theme **before** the cut (`seleccionarPublicaciones(…, tema)`); the other
+  networks still filter after it, as since 24 September.
+- **A theme search never reaches «Todo».** Its `cuentas[]` row carries `rubro`;
+  its videos are kept out of the general cut and the site drops them from
+  «Todo» (client's call: a concert clip out-likes the news by orders of
+  magnitude). «Todo» is byte-identical to before, checked over every view. A
+  video a general search already found keeps that `cuenta`, or it would leave
+  «Todo» in silence.
+- **The title decides, as with Google.** A theme row drops a video whose title
+  does not name its rubro, or says nothing outside its hashtags and mentions
+  (`tiktok._dice_algo`: «#tijuana #viral» entered Espectáculos by `#viral`),
+  before paying comments (`sin_rubro`). 20 videos, 7 comments per video.
+- **Probed on 25 September 2026, 23 queries × 10 videos: 0 to 5 of 10 survive.**
+  Política, Economía and IA are off with the numbers in their rows; corridor
+  IA was 1 of 20, and «inteligencia artificial mexico» would fill the México
+  bucket instead, which is the client's call. Do not turn them on without a
+  probe that says otherwise.
+- The guion's Noticias 33 picks Tijuana and California partly **by zone** over
+  the whole `tiktok.json`, so theme-search videos reach those two axes; the
+  other programmes pick by theme and are meant to.
+
 **Nothing the video actor charges per second is on, and `duracion` is how you
 can tell.** Since 17 September 2026 the harvest asks for
 `downloadSubtitlesOptions: DOWNLOAD_SUBTITLES` — the captions **TikTok itself

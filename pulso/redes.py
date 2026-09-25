@@ -35,6 +35,7 @@ import re
 from datetime import datetime, timedelta
 
 from .normalizar import fold
+from .rubros import RUBROS
 from .zonas import alcance_redes, nombra_mexico, prosa_de
 
 # Mismo plazo que YouTube. Meta y TikTok no conceden ninguno: se aplica el mas
@@ -50,6 +51,10 @@ DIAS_ENTRE_COSECHAS = 3
 # `publicado`; Instagram la midio en dias sobre `fecha` hasta entonces -- y se
 # calcula con `ahora` inyectado; el tablero nunca la recalcula.
 DESTACADOS_MAXIMO = 15
+# Tope del corte por RUBRO (25 de septiembre de 2026): el top 10 de cada
+# pestana de la fila «Tema», que el cliente pidio para TikTok. Solo lo usa la
+# plataforma que pasa `rubros_de` a derivar(); ver _destacados.
+RUBRO_MAXIMO = 10
 # Cuantas publicaciones de una misma cuenta entran ANTES de que las demas
 # tengan la suya. Con 1: primero la mejor de cada cuenta y lo que sobre del
 # tope se sigue llenando por likes. Subirlo a 2 da mas variedad y cuesta los
@@ -563,7 +568,7 @@ def residuo_de_medio(zona, alc, ambito, texto, firmas=()):
 def _destacados(publicaciones, comentarios, opinion, temas, cuentas, dentro,
                 maximo=DESTACADOS_MAXIMO, campos_extra=(), turnos=False,
                 cifras=CIFRAS_DESTACADO, orden=ORDEN_DESTACADO, formatos=(),
-                dedupe_titulo=False):
+                dedupe_titulo=False, rubros_de=None, rubro_maximo=RUBRO_MAXIMO):
     """Los posts de la ventana con mas likes, con los conteos de sus comentarios.
 
     Es la union del top `maximo` general con el top `maximo` de cada zona,
@@ -596,8 +601,25 @@ def _destacados(publicaciones, comentarios, opinion, temas, cuentas, dentro,
     Medido el 18 de septiembre de 2026: mediana de 447 vistas en Shorts contra
     7 en videos, o sea que en un solo ranking los videos no entran nunca y el
     muro no se engrosa nada.
+
+    `rubros_de(titulo)`, si viene, agrega el eje de los RUBROS (25 de
+    septiembre de 2026, TikTok): cada fila lleva `rubros`, los que su titulo
+    nombra (pulso/rubros.py), y se emite ademas el top `rubro_maximo` de cada
+    rubro y de cada (rubro, zona), con el mismo `cortar_por_zona`. Es lo que
+    la pestana «Tema» del sitio corta despues: sin este corte el rubro se
+    quedaba con lo que el corte general dejara, y el 25 de septiembre eso eran
+    0 videos de Espectaculos de 80.
+
+    Las cuentas con `rubro` -- las busquedas por tema -- NO entran al corte
+    general: sus videos solo llegan por el de su rubro. Fue decision del
+    cliente ese dia, y la razon es de volumen: un video de espectaculos junta
+    ordenes de magnitud mas likes que uno de noticias, y en el corte general
+    se habria quedado con los quince de cada zona. Asi el corte general sale
+    identico al de antes de que existieran, que es lo que deja al sitio
+    ensenar «Todo» sin cambios con solo excluir esas cuentas.
     """
     conocidas = {c["id"] for c in cuentas}
+    de_rubro = {c["id"] for c in cuentas if c.get("rubro")}
     por_post, opinion_por_post = {}, {}
     for c in comentarios:
         por_post.setdefault(c["post"], []).append(c)
@@ -618,6 +640,10 @@ def _destacados(publicaciones, comentarios, opinion, temas, cuentas, dentro,
             "titulo": p.get("titulo") or "",
             "tipo": p.get("tipo") or "otro",
         }
+        # Del titulo publicado, no del pie: es lo unico contra lo que la
+        # pestana compara, y lo que decide que se vea.
+        if rubros_de is not None:
+            d["rubros"] = rubros_de(d["titulo"])
         # Solo las cifras que la plataforma publica de verdad. Una ausente es
         # "sin dato" y no cero: un `comentarios: 0` en YouTube se leeria como
         # "nadie comento" y lo cierto es que su feed no lo dice.
@@ -666,24 +692,33 @@ def _destacados(publicaciones, comentarios, opinion, temas, cuentas, dentro,
             unicos.append(d)
         candidatos = unicos
 
-    def corte(lista):
-        return _por_turnos(lista, maximo, orden=orden) if turnos else lista[:maximo]
+    def corte(lista, tope):
+        return _por_turnos(lista, tope, orden=orden) if turnos else lista[:tope]
 
-    def cortar_por_zona(lista):
-        elegidos = {d["url"] for d in corte(lista)}
+    def cortar_por_zona(lista, tope=maximo):
+        elegidos = {d["url"] for d in corte(lista, tope)}
         por_zona = {}
         for d in lista:
             por_zona.setdefault(d["zona"], []).append(d)
         for suyos in por_zona.values():
-            elegidos.update(d["url"] for d in corte(suyos))
+            elegidos.update(d["url"] for d in corte(suyos, tope))
         return elegidos
 
+    generales = [d for d in candidatos if d["cuenta"] not in de_rubro]
     if formatos:
         elegidos = set()
         for f in formatos:
-            elegidos |= cortar_por_zona([d for d in candidatos if d.get("formato") == f])
+            elegidos |= cortar_por_zona([d for d in generales if d.get("formato") == f])
     else:
-        elegidos = cortar_por_zona(candidatos)
+        elegidos = cortar_por_zona(generales)
+    if rubros_de is not None:
+        # Sobre TODOS los candidatos, los de las busquedas generales y los
+        # perfiles incluidos: un video de «tijuana noticias» que nombra una
+        # balacera es de Seguridad aunque no lo haya traido la busqueda del
+        # rubro, y sus comentarios ya estan pagados.
+        for r in RUBROS:
+            elegidos |= cortar_por_zona([d for d in candidatos if r in d["rubros"]],
+                                        rubro_maximo)
     return [d for d in candidatos if d["url"] in elegidos]
 
 
@@ -694,12 +729,17 @@ def _catalogo_cuentas(cuentas):
     Quintin) y permiten rotular "sin cuenta" en vez de un cero."""
     salida = []
     for c in cuentas or []:
-        salida.append({
+        fila = {
             "cuenta": c["id"],
             "nombre": c.get("nombre") or c["id"],
             "zona": c.get("zona") or "estatal",
             "activa": bool(c.get("activo") and c.get("verificado")),
-        })
+        }
+        # Solo las busquedas por tema de TikTok. El sitio lo lee para dejar sus
+        # videos fuera de «Todo»: llegan solo por su pestana (ver _destacados).
+        if c.get("rubro"):
+            fila["rubro"] = c["rubro"]
+        salida.append(fila)
     return sorted(salida, key=lambda c: c["cuenta"])
 
 
@@ -707,7 +747,7 @@ def derivar(comentarios, ahora, salud, gasto, temas=None, publicaciones=None,
             cuentas=None, *, plataforma, ventana_dias=None, ventana_horas=None,
             campos_extra=(), turnos=False, cifras=CIFRAS_DESTACADO,
             orden=ORDEN_DESTACADO, formatos=(), dedupe_titulo=False,
-            cosecha_comentarios=True):
+            cosecha_comentarios=True, rubros_de=None, rubro_maximo=RUBRO_MAXIMO):
     """Lo que se commitea: conteos y los posts destacados, sin texto de
     comentarios ni identidad.
 
@@ -717,6 +757,10 @@ def derivar(comentarios, ahora, salud, gasto, temas=None, publicaciones=None,
     Exactamente UNA ventana: `ventana_dias` (sobre `fecha`) o `ventana_horas`
     (sobre `publicado`). Se emite con la clave de la que se uso, en la misma
     posicion, para que el archivo de cada plataforma no cambie de forma.
+
+    Con `rubros_de` se corta tambien por rubro (ver _destacados) y se emite
+    `rubro_maximo` al lado de `destacados_maximo`; sin el, el archivo sale
+    como antes, byte por byte.
     """
     if (ventana_dias is None) == (ventana_horas is None):
         raise ValueError("derivar: exactamente una de ventana_dias o ventana_horas")
@@ -782,11 +826,13 @@ def derivar(comentarios, ahora, salud, gasto, temas=None, publicaciones=None,
                             metodo="modelo" if modelo_usado else "ninguno"),
         ventana[0]: ventana[1],
         "destacados_maximo": DESTACADOS_MAXIMO,
+        **({"rubro_maximo": rubro_maximo} if rubros_de is not None else {}),
         "cuentas": _catalogo_cuentas(cuentas),
         "destacados": _destacados(publicaciones or {}, comentarios, opinion, temas,
                                   cuentas or [], dentro, campos_extra=campos_extra,
                                   turnos=turnos, cifras=cifras, orden=orden,
-                                  formatos=formatos, dedupe_titulo=dedupe_titulo),
+                                  formatos=formatos, dedupe_titulo=dedupe_titulo,
+                                  rubros_de=rubros_de, rubro_maximo=rubro_maximo),
         "salud": sorted(salud, key=lambda s: s["cuenta"]),
         "gasto": gasto,
     }

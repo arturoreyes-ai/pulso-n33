@@ -1,19 +1,21 @@
 {
- "nota": "Búsquedas en TikTok de las que se cosechan videos y comentarios, vía Apify (clockworks~tiktok-scraper para los videos, clockworks~tiktok-comments-scraper para los comentarios) y SIN sesión. A diferencia de config/instagram.json, aquí la fuente es una CONSULTA y no una cuenta verificada: los videos vienen de cualquier creador que TikTok considere relevante. Por eso ninguna búsqueda lleva `zona` (el validador lo rechaza): la zona de cada video sale de lo que nombra su pie, con el mismo gacetero que las notas de prensa (pulso/zonas.py). Un video que nombra Tijuana va a Tijuana; uno que nombra Hermosillo se descarta; uno que no nombra lugar se descarta también desde el 22 de septiembre de 2026 (`sin_lugar` en salud), salvo que nombre a México, porque ese relleno llenaba la cubeta México con lluvias en Tegucigalpa y pies vacíos. Los `perfiles`, del mismo día, son cuentas de medios de México y del mundo: fuentes fijas cuya zona sigue saliendo del pie. Desde el 15 de septiembre de 2026 hay una búsqueda por lugar del corredor más una de México y una del mundo, y con ellas el campo `ambito` (regional | nacional | internacional; si falta, `regional`). `ambito` NO es una zona y no acredita lugar a nadie: cuando el pie nombra un lugar del gacetero manda el pie, igual en los tres. Lo único que decide es el RESIDUO —el video que no nombra lugar, o que nombra uno que no cubrimos—, porque las dos búsquedas nuevas rompían la regla vieja de dos maneras: «noticias mexico» tiraba Guadalajara y Mazatlán por estar en la lista FUERA, que es justo lo que la consulta iba a buscar, y un video de Ucrania no nombra nada de ningún gacetero y caía en `nacional`, indistinguible de una nota nacional mexicana. De ahí sale también `alcance`, el veredicto crudo del gacetero, que viaja al lado de la zona en data/tiktok.json: sin él `nacional` significaría dos cosas a la vez —«no nombró lugar» y «nombró Guadalajara»— y la etiqueta «sin lugar» del panel sería falsa para la mitad de las filas. Tres búsquedas están APAGADAS con la razón escrita en su propia fila (Tecate, San Felipe y San Quintín): se probaron de verdad y no devuelven noticia, sino falsos positivos con cara de cobertura.",
+ "nota": "Búsquedas en TikTok de las que se cosechan videos y comentarios, vía Apify (clockworks~tiktok-scraper para los videos, clockworks~tiktok-comments-scraper para los comentarios) y SIN sesión. A diferencia de config/instagram.json, aquí la fuente es una CONSULTA y no una cuenta verificada: los videos vienen de cualquier creador que TikTok considere relevante. Por eso ninguna búsqueda lleva `zona` (el validador lo rechaza): la zona de cada video sale de lo que nombra su pie, con el mismo gacetero que las notas de prensa (pulso/zonas.py). Un video que nombra Tijuana va a Tijuana; uno que nombra Hermosillo se descarta; uno que no nombra lugar se descarta también desde el 22 de septiembre de 2026 (`sin_lugar` en salud), salvo que nombre a México, porque ese relleno llenaba la cubeta México con lluvias en Tegucigalpa y pies vacíos. Los `perfiles`, del mismo día, son cuentas de medios de México y del mundo: fuentes fijas cuya zona sigue saliendo del pie. Desde el 15 de septiembre de 2026 hay una búsqueda por lugar del corredor más una de México y una del mundo, y con ellas el campo `ambito` (regional | nacional | internacional; si falta, `regional`). `ambito` NO es una zona y no acredita lugar a nadie: cuando el pie nombra un lugar del gacetero manda el pie, igual en los tres. Lo único que decide es el RESIDUO —el video que no nombra lugar, o que nombra uno que no cubrimos—, porque las dos búsquedas nuevas rompían la regla vieja de dos maneras: «noticias mexico» tiraba Guadalajara y Mazatlán por estar en la lista FUERA, que es justo lo que la consulta iba a buscar, y un video de Ucrania no nombra nada de ningún gacetero y caía en `nacional`, indistinguible de una nota nacional mexicana. De ahí sale también `alcance`, el veredicto crudo del gacetero, que viaja al lado de la zona en data/tiktok.json: sin él `nacional` significaría dos cosas a la vez —«no nombró lugar» y «nombró Guadalajara»— y la etiqueta «sin lugar» del panel sería falsa para la mitad de las filas. Tres búsquedas están APAGADAS con la razón escrita en su propia fila (Tecate, San Felipe y San Quintín): se probaron de verdad y no devuelven noticia, sino falsos positivos con cara de cobertura. Las filas con `rubro` (25 de septiembre de 2026) son búsquedas por TEMA, una por pestaña de la fila «Tema» de Redes: el título de cada video tiene que nombrar el rubro con la regla del sitio (pulso/rubros.py) o se tira antes de pagar comentarios, y sus videos solo se ven en la pestaña de su tema, nunca en «Todo». Tres de las ocho están apagadas con el sondeo escrito: Política, Economía e IA no devolvieron video del corredor que nombrara su tema.",
 
  "aviso_identidad": "Se publica el @handle del CREADOR del video como fuente (la URL del video ya lo trae, y es quien decidió publicar). Quien COMENTA sigue anónimo: uniqueId, uid, avatar y cid se tiran al ingerir y no llegan ni al cache; las @menciones dentro del texto se enmascaran al publicar. Decisión del cliente del 8 de septiembre de 2026.",
 
  "cosecha": {
-  "nota": "Dos pasadas pagadas, como en Instagram: videos por búsqueda y luego comentarios por video. `filtro_fecha` (ALL_TIME | PAST_24_HOURS | PAST_WEEK | PAST_MONTH | LAST_3_MONTHS | LAST_6_MONTHS) y `orden` (MOST_RELEVANT | MOST_LIKED | LATEST) son filtros COBRADOS del actor y solo valen con searchSection /video. Los valores salieron de un 400 del propio actor: su ficha pública solo muestra un ejemplo, y la primera versión de este archivo traía YESTERDAY, copiado de la interfaz de TikTok, que el actor rechazó. La ventana de `ventana_horas` se impone igual en derivar() sobre la hora exacta de publicación; el filtro del actor solo recorta lo que se factura. `presupuesto_resultados` es el tope de ESTE comando, no del cron: cada verbo construye su propio Presupuesto. Costo real: el actor de comentarios cobra ~5 USD por 1,000 resultados, y ahí está el motivo del recorte del 15 de septiembre de 2026. Con una sola búsqueda, 30 videos × 30 comentarios eran ~4.50 USD en la primera corrida del día; con once serían ~45. Bajando a 15 × 20, las ocho búsquedas activas son 2,400 comentarios ≈ 12 USD en la primera corrida, y las otras tres del cron recortan por vistos.json. Veinte comentarios por video quedan debajo del piso de 30 de PRODUCT.md, y no cambia nada: este panel no emite un solo porcentaje en ningún nivel y el validador los rechaza. Tampoco toca el texto publicado, porque redes.COMENTARIOS_MAXIMO son 10. El tope de 3,600 estaba calculado para las ONCE filas (11 × 15 × 21 = 3,465) y no para las ocho activas (2,520), a propósito: así encender una de las tres apagadas no recorta los comentarios de las demás EN SILENCIO, que es como falla `reparto - posts`. Con la duodécima del 22 de septiembre de 2026 (`tk_world_news`, apagada) subió a 3,800 por la misma regla: 12 × 15 × 21 = 3,780. Y con los ocho `perfiles` de ese mismo día sube a 6,300: `Presupuesto.reparto` divide PAREJO entre filas, así que cada perfil cuenta como una fila entera aunque pida menos (10 videos × 8 = 80), y 20 × 315 = 6,300. Es un tope, no un gasto: un perfil activo paga 10 videos y 7 comentarios por video de la ventana, unos 0.35 USD al día. `videos_por_perfil` y `comentarios_por_video_perfil` son los de un perfil; siete comentarios y no veinte fue decisión del 22 de septiembre.",
+  "nota": "Dos pasadas pagadas, como en Instagram: videos por búsqueda y luego comentarios por video. `filtro_fecha` (ALL_TIME | PAST_24_HOURS | PAST_WEEK | PAST_MONTH | LAST_3_MONTHS | LAST_6_MONTHS) y `orden` (MOST_RELEVANT | MOST_LIKED | LATEST) son filtros COBRADOS del actor y solo valen con searchSection /video. Los valores salieron de un 400 del propio actor: su ficha pública solo muestra un ejemplo, y la primera versión de este archivo traía YESTERDAY, copiado de la interfaz de TikTok, que el actor rechazó. La ventana de `ventana_horas` se impone igual en derivar() sobre la hora exacta de publicación; el filtro del actor solo recorta lo que se factura. `presupuesto_resultados` es el tope de ESTE comando, no del cron: cada verbo construye su propio Presupuesto. Costo real: el actor de comentarios cobra ~5 USD por 1,000 resultados, y ahí está el motivo del recorte del 15 de septiembre de 2026. Con una sola búsqueda, 30 videos × 30 comentarios eran ~4.50 USD en la primera corrida del día; con once serían ~45. Bajando a 15 × 20, las ocho búsquedas activas son 2,400 comentarios ≈ 12 USD en la primera corrida, y las otras tres del cron recortan por vistos.json. Veinte comentarios por video quedan debajo del piso de 30 de PRODUCT.md, y no cambia nada: este panel no emite un solo porcentaje en ningún nivel y el validador los rechaza. Tampoco toca el texto publicado, porque redes.COMENTARIOS_MAXIMO son 10. El tope de 3,600 estaba calculado para las ONCE filas (11 × 15 × 21 = 3,465) y no para las ocho activas (2,520), a propósito: así encender una de las tres apagadas no recorta los comentarios de las demás EN SILENCIO, que es como falla `reparto - posts`. Con la duodécima del 22 de septiembre de 2026 (`tk_world_news`, apagada) subió a 3,800 por la misma regla: 12 × 15 × 21 = 3,780. Y con los ocho `perfiles` de ese mismo día sube a 6,300: `Presupuesto.reparto` divide PAREJO entre filas, así que cada perfil cuenta como una fila entera aunque pida menos (10 videos × 8 = 80), y 20 × 315 = 6,300. Es un tope, no un gasto: un perfil activo paga 10 videos y 7 comentarios por video de la ventana, unos 0.35 USD al día. `videos_por_perfil` y `comentarios_por_video_perfil` son los de un perfil; siete comentarios y no veinte fue decisión del 22 de septiembre. Las ocho búsquedas por rubro del 25 de septiembre de 2026 suben el tope a 8,820 por la misma regla (28 filas × 315), aunque una fila de rubro pida menos: `videos_por_rubro` son 20, porque el título tira casi todo lo que la búsqueda trae y un video descartado cuesta un resultado de la primera pasada, y `comentarios_por_video_rubro` son 7, como un perfil, por decisión del cliente ese día. Solo paga comentarios un video cuyo título nombra su rubro.",
   "videos_por_busqueda": 15,
   "comentarios_por_video": 20,
   "dias_entre_cosechas": 3,
   "ventana_horas": 24,
   "filtro_fecha": "PAST_24_HOURS",
   "orden": "MOST_RELEVANT",
-  "presupuesto_resultados": 6300,
+  "presupuesto_resultados": 8820,
   "videos_por_perfil": 10,
-  "comentarios_por_video_perfil": 7
+  "comentarios_por_video_perfil": 7,
+  "videos_por_rubro": 20,
+  "comentarios_por_video_rubro": 7
  },
 
  "busquedas": [
@@ -126,6 +128,86 @@
    "ambito": "internacional",
    "activo": false,
    "nota": "APAGADA hasta su `--probar`, que cuesta. Candidata del 22 de septiembre de 2026 para la cubeta Mundo, en inglés: `idioma: en` deja su postura en null, como los medios de San Diego, porque el modelo de tono es español. Encenderla es pedir su sondeo primero; el tope de `presupuesto_resultados` ya la cuenta."
+  },
+  {
+   "id": "tk_rubro_espectaculos",
+   "nombre": "Tema: Espectáculos",
+   "consulta": "concierto tijuana",
+   "rubro": "espectaculos",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-25",
+   "nota": "Búsqueda por rubro, pedida por el cliente el 25 de septiembre de 2026 (un top 10 de TikTok por cada pestaña de «Tema»). Espectáculos tenía 0 de los 80 videos del corte vigente ese día. Sondeo del 25 con 10 videos por consulta: «concierto tijuana» se quedó con 4, los cuatro de Tijuana y del concierto de Edén Muñoz de esa noche; «espectaculos tijuana» con 1 («Centro de espectáculos Casa Blanca»), y «famosos tijuana» con 6 de los que 5 eran nubes de etiquetas («#tijuana #viral») que entraban por `#viral`. Eso último es por qué una búsqueda por rubro exige que al título le quede texto fuera de sus etiquetas (tiktok._dice_algo). Es la cantera de De Red en Red, que lee Espectáculos."
+  },
+  {
+   "id": "tk_rubro_politica",
+   "nombre": "Tema: Política",
+   "consulta": "politica tijuana",
+   "rubro": "politica",
+   "idioma": "es",
+   "activo": false,
+   "verificado": "2026-09-25",
+   "nota": "APAGADA: registro deliberado de un hueco. El 25 de septiembre de 2026 se sondearon tres consultas con 10 videos cada una —«politica tijuana», «alcaldesa tijuana» y «diputado baja california»— y ninguna devolvió un solo video cuyo título nombre un término de Política: 16 sin rubro, 11 sin lugar y 3 de fuera. La pestaña Política de TikTok sigue teniendo lo que las búsquedas generales y los perfiles traen (15 en la última cosecha local, del 24 de septiembre: doce de los perfiles de México y del mundo y tres del corredor), que el corte por rubro ya publica sin costo."
+  },
+  {
+   "id": "tk_rubro_seguridad",
+   "nombre": "Tema: Seguridad",
+   "consulta": "detienen tijuana",
+   "rubro": "seguridad",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-25",
+   "nota": "Búsqueda por rubro del 25 de septiembre de 2026. Sondeo de ese día, 10 videos por consulta: «detienen tijuana» se quedó con 3, los tres de Tijuana (Blanco y Negro con «Hallan sin vida a Juan Omar», una detención con un fusil y un abogado contando su propia detención); «seguridad tijuana» con 1, porque los títulos no dicen «seguridad»; «balacera tijuana» con 0 (5 sin lugar, 3 de fuera). Seguridad ya era el rubro mejor cubierto por las búsquedas generales (13 de los 80 videos del corte vigente), así que esta fila suma poco y cuesta poco: solo paga comentarios de lo que pasa el título."
+  },
+  {
+   "id": "tk_rubro_turismo",
+   "nombre": "Tema: Turismo",
+   "consulta": "valle de guadalupe",
+   "rubro": "turismo",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-25",
+   "nota": "Búsqueda por rubro del 25 de septiembre de 2026. Sondeo de ese día, 10 videos por consulta: «valle de guadalupe» se quedó con 2 (una tienda de vinos del aeropuerto de Tijuana y un recorrido por el Valle, zonificado Ensenada), y «turismo baja california» con 2, de los que uno era una nube de etiquetas de Los Cabos y La Paz; los otros 8 eran de fuera o sin lugar. Rinde poco: la pestaña Turismo de TikTok va a salir corta la mayoría de los días, y eso es lo que hay, no un hueco que rellenar."
+  },
+  {
+   "id": "tk_rubro_ia",
+   "nombre": "Tema: IA",
+   "consulta": "inteligencia artificial tijuana",
+   "rubro": "ia",
+   "idioma": "es",
+   "activo": false,
+   "verificado": "2026-09-25",
+   "nota": "APAGADA: registro deliberado de un hueco. En el sondeo del 25 de septiembre de 2026, «inteligencia artificial tijuana» devolvió 1 video del corredor de 10 (con 1 like; 8 no nombraban lugar) e «IA tijuana» 0 de 10. «inteligencia artificial mexico» sí trajo 6 de 10, pero los seis caen en México o Mundo, no en el corredor, y el alcance que el cliente eligió ese día es el corredor. Encender esa consulta es decisión suya: llenaría la pestaña IA de la cubeta México, no la de Tijuana."
+  },
+  {
+   "id": "tk_rubro_clima",
+   "nombre": "Tema: Clima",
+   "consulta": "clima tijuana",
+   "rubro": "clima",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-25",
+   "nota": "Búsqueda por rubro del 25 de septiembre de 2026. Sondeo de ese día, 10 videos por consulta: «clima tijuana» se quedó con 1 («Norte intenso y lluvias azotan el Golfo de México», bien zonificado en México); «calor tijuana» con 1 y «lluvia tijuana» con 0. No trae falsos positivos, trae poco: el clima es noticia el día que llueve, y esta fila existe para ese día. Si a la semana sigue en cero, apagarla con el dato."
+  },
+  {
+   "id": "tk_rubro_deportes",
+   "nombre": "Tema: Deportes",
+   "consulta": "deportes tijuana",
+   "rubro": "deportes",
+   "idioma": "es",
+   "activo": true,
+   "verificado": "2026-09-25",
+   "nota": "Búsqueda por rubro del 25 de septiembre de 2026, la que mejor rindió del sondeo de ese día: «deportes tijuana» se quedó con 5 de 10, los cinco de Tijuana (la Copa Zonkeys, los Xolos convocados a la selección, los Toros). «xolos tijuana» se quedó con 4, pero dos eran una venta de jerseys y una nube de etiquetas: se prefirió la genérica."
+  },
+  {
+   "id": "tk_rubro_economia",
+   "nombre": "Tema: Economía",
+   "consulta": "economia tijuana",
+   "rubro": "economia",
+   "idioma": "es",
+   "activo": false,
+   "verificado": "2026-09-25",
+   "nota": "APAGADA: registro deliberado de un hueco. El 25 de septiembre de 2026 se sondearon «economia tijuana» (0 de 10), «maquiladora tijuana» (0 de 10) y «empleo tijuana» (2 de 10: una nube de etiquetas de Mexicali y una feria de empleo que el gacetero mandó al extranjero). Ninguna trae noticia de economía del corredor. La pestaña Economía de TikTok sigue con lo que traen las búsquedas generales (9 en la última cosecha local, del 24 de septiembre: siete de México y del mundo)."
   }
  ],
  "perfiles": [

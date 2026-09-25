@@ -1,0 +1,675 @@
+{
+ "nota": "Lo escribe web/scripts/probar-capitulos.cjs --escribir-rubros y lo leen las dos copias de la regla de tema: web/src/lib/busqueda/tema-publicacion.ts, que manda, y pulso/rubros.py, que corta el top de TikTok por rubro (tests/test_rubros.py). `titulares` fija la otra regla, rubros.ts::nombraRubro con una lista por idioma, que pulso/tema_nota.py copia para el rubro de las notas de prensa (tests/test_tema_nota.py). Los titulos de `casos` se editan a mano; `rubros` y `terminos` los calcula el sitio. No se edita lo demas a mano.",
+ "rubros": [
+  "politica",
+  "seguridad",
+  "economia",
+  "clima",
+  "deportes",
+  "espectaculos",
+  "turismo",
+  "ia"
+ ],
+ "terminos": {
+  "politica": [
+   "Congress",
+   "INE",
+   "Mexican president",
+   "Morena",
+   "PAN",
+   "alcalde",
+   "alcaldesa",
+   "ballot",
+   "cabildo",
+   "city council",
+   "conferencia matutina",
+   "diputada",
+   "diputado",
+   "elecciones",
+   "election",
+   "gobernador",
+   "gobernadora",
+   "governor",
+   "legislature",
+   "mayor",
+   "mañanera",
+   "presidenta",
+   "regidor",
+   "senado",
+   "senador",
+   "senadora",
+   "senator",
+   "supervisors"
+  ],
+  "seguridad": [
+   "arrested",
+   "asesinada",
+   "asesinado",
+   "asesinan",
+   "asesinato",
+   "ataque armado",
+   "balacera",
+   "balean",
+   "border patrol",
+   "crime",
+   "crimen organizado",
+   "cuerpo",
+   "desaparecida",
+   "desaparecido",
+   "detenido",
+   "detienen",
+   "ejecutado",
+   "emboscan",
+   "extorsión",
+   "feminicidio",
+   "fiscalía",
+   "fosa",
+   "hallan cuerpos",
+   "homicide",
+   "homicidio",
+   "murder",
+   "narco",
+   "police",
+   "policía",
+   "robbery",
+   "secuestro",
+   "sheriff",
+   "shooting",
+   "sicarios",
+   "sin vida",
+   "smuggling",
+   "stabbing",
+   "suspect"
+  ],
+  "economia": [
+   "aranceles",
+   "business",
+   "cruce fronterizo",
+   "economy",
+   "economía",
+   "empleo",
+   "empresas",
+   "housing",
+   "inflación",
+   "inversión",
+   "jobs",
+   "layoffs",
+   "maquiladora",
+   "precios",
+   "prices",
+   "tariffs",
+   "tourism",
+   "trade",
+   "turismo",
+   "vivienda"
+  ],
+  "clima": [
+   "Santa Ana winds",
+   "calor",
+   "clima",
+   "earthquake",
+   "flooding",
+   "frente frío",
+   "granizo",
+   "heat wave",
+   "huracán",
+   "hurricane",
+   "lluvia",
+   "lluvias",
+   "rain",
+   "sismo",
+   "storm",
+   "temblor",
+   "tormenta",
+   "vientos",
+   "weather",
+   "wildfire"
+  ],
+  "deportes": [
+   "Aztecs",
+   "Club Tijuana",
+   "Gulls",
+   "Liga MX",
+   "Padres",
+   "San Diego FC",
+   "Toros",
+   "Xolos",
+   "Zonkeys",
+   "baseball",
+   "boxeo",
+   "boxing",
+   "béisbol",
+   "futbol",
+   "marathon",
+   "maratón",
+   "soccer",
+   "sports",
+   "Águilas"
+  ],
+  "espectaculos": [
+   "K-pop",
+   "actor",
+   "actress",
+   "actriz",
+   "cantante",
+   "celebrity",
+   "concert",
+   "concierto",
+   "espectáculos",
+   "famosos",
+   "farándula",
+   "festival",
+   "influencer",
+   "movie",
+   "película",
+   "reality show",
+   "singer",
+   "viral"
+  ],
+  "turismo": [
+   "Valle de Guadalupe",
+   "brewery",
+   "cervecería",
+   "desarrollo inmobiliario",
+   "desarrollo residencial",
+   "dining",
+   "gastronomía",
+   "hotel",
+   "hoteles",
+   "real estate development",
+   "resort",
+   "restaurant",
+   "restaurante",
+   "tourism",
+   "turismo",
+   "vinos",
+   "vinícola",
+   "winery"
+  ],
+  "ia": [
+   "AI",
+   "Anthropic",
+   "ChatGPT",
+   "Gemini",
+   "IA",
+   "OpenAI",
+   "artificial intelligence",
+   "chatbot",
+   "inteligencia artificial",
+   "robotics",
+   "robótica"
+  ]
+ },
+ "casos": [
+  {
+   "titulo": "Lanzan herramienta de IA para maquilas",
+   "rubros": [
+    "ia"
+   ]
+  },
+  {
+   "titulo": "Así cambia el trabajo #InteligenciaArtificial",
+   "rubros": [
+    "ia"
+   ]
+  },
+  {
+   "titulo": "San Diego startup bets on AI",
+   "rubros": [
+    "ia"
+   ]
+  },
+  {
+   "titulo": "La guía de la feria",
+   "rubros": []
+  },
+  {
+   "titulo": "ela ia para casa",
+   "rubros": []
+  },
+  {
+   "titulo": "Sube el precio del pan",
+   "rubros": []
+  },
+  {
+   "titulo": "El PAN presenta iniciativa",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "titulo": "Lo que dijo la presidenta en la mañanera",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "titulo": "MAÑANERA DE HOY",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "titulo": "La #Presidenta recibió en Palacio Nacional al presidente de Corea",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "titulo": "Nuevo restaurante en el Valle de Guadalupe",
+   "rubros": [
+    "turismo"
+   ]
+  },
+  {
+   "titulo": "Un factor clave",
+   "rubros": []
+  },
+  {
+   "titulo": "El actor2 del año",
+   "rubros": []
+  },
+  {
+   "titulo": "Concierto gratis en la playa",
+   "rubros": [
+    "espectaculos"
+   ]
+  },
+  {
+   "titulo": "Festival en Playas de Rosarito",
+   "rubros": [
+    "espectaculos"
+   ]
+  },
+  {
+   "titulo": "🌧️ Huracanes Polo y Odalys no representan riesgo",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "titulo": "Lluvia y frente frío llegan a Tijuana",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "titulo": "Hurricane season: what San Diego should know",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "titulo": "#Comonfort | 🚔 Emboscan a elementos de las FSPE.",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "titulo": "Balacera en la Zona Norte deja un muerto",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "titulo": "Hallan sin vida a hombre en Otay; la fiscalía investiga",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "titulo": "Police arrest suspect in La Jolla stabbing",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "titulo": "Xolos vence a Toluca en el Estadio Caliente",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "titulo": "ÁGUILAS DE MEXICALI GANAN EN CASA",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "titulo": "Aranceles golpean a la maquiladora",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "titulo": "Crece el turismo en Rosarito",
+   "rubros": [
+    "economia",
+    "turismo"
+   ]
+  },
+  {
+   "titulo": "Nuevas empresas en Otay y más empleos",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "titulo": "Nuevo hotel_boutique en la costa",
+   "rubros": [
+    "turismo"
+   ]
+  },
+  {
+   "titulo": "Robótica en la escuela",
+   "rubros": [
+    "ia"
+   ]
+  },
+  {
+   "titulo": "K-pop llega a Tijuana",
+   "rubros": [
+    "espectaculos"
+   ]
+  },
+  {
+   "titulo": "#Viral: el video del día",
+   "rubros": [
+    "espectaculos"
+   ]
+  },
+  {
+   "titulo": "El Congreso Nacional de Posgrado",
+   "rubros": []
+  },
+  {
+   "titulo": "Mexican presidents meet in Tijuana",
+   "rubros": []
+  },
+  {
+   "titulo": "Así se vive la #LigaMX en Tijuana",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "titulo": "Tijuana hoy",
+   "rubros": []
+  },
+  {
+   "titulo": "",
+   "rubros": []
+  }
+ ],
+ "titulares": {
+  "terminos": {
+   "politica": {
+    "es": [
+     "alcalde",
+     "alcaldesa",
+     "gobernadora",
+     "cabildo",
+     "diputado",
+     "Morena",
+     "mañanera",
+     "presidenta"
+    ],
+    "en": [
+     "mayor",
+     "city council",
+     "governor",
+     "election",
+     "Congress",
+     "supervisors",
+     "Mexican president"
+    ]
+   },
+   "seguridad": {
+    "es": [
+     "detienen",
+     "homicidio",
+     "asesinan",
+     "balacera",
+     "balean",
+     "desaparecida",
+     "sin vida"
+    ],
+    "en": [
+     "shooting",
+     "homicide",
+     "arrested",
+     "police",
+     "sheriff",
+     "crime",
+     "border patrol"
+    ]
+   },
+   "economia": {
+    "es": [
+     "empresas",
+     "inversión",
+     "empleo",
+     "maquiladora",
+     "aranceles",
+     "precios",
+     "turismo",
+     "economía"
+    ],
+    "en": [
+     "business",
+     "economy",
+     "tariffs",
+     "jobs",
+     "housing",
+     "trade",
+     "tourism",
+     "prices"
+    ]
+   },
+   "clima": {
+    "es": [
+     "clima",
+     "lluvia",
+     "lluvias",
+     "tormenta",
+     "huracán",
+     "calor",
+     "frente frío"
+    ],
+    "en": [
+     "weather",
+     "rain",
+     "storm",
+     "hurricane",
+     "flooding",
+     "wildfire",
+     "Santa Ana winds"
+    ]
+   },
+   "deportes": {
+    "es": [
+     "Xolos",
+     "Liga MX",
+     "Toros",
+     "futbol",
+     "boxeo",
+     "Águilas",
+     "Zonkeys"
+    ],
+    "en": [
+     "Padres",
+     "San Diego FC",
+     "Aztecs",
+     "soccer",
+     "baseball",
+     "sports",
+     "Xolos"
+    ]
+   },
+   "espectaculos": {
+    "es": [
+     "farándula",
+     "famosos",
+     "concierto",
+     "cantante",
+     "actriz",
+     "actor",
+     "influencer",
+     "festival"
+    ],
+    "en": [
+     "celebrity",
+     "concert",
+     "singer",
+     "actress",
+     "actor",
+     "influencer",
+     "festival"
+    ]
+   },
+   "turismo": {
+    "es": [
+     "turismo",
+     "hotel",
+     "hoteles",
+     "restaurante",
+     "gastronomía",
+     "vinícola",
+     "Valle de Guadalupe"
+    ],
+    "en": [
+     "tourism",
+     "hotel",
+     "resort",
+     "restaurant",
+     "winery",
+     "dining",
+     "Valle de Guadalupe"
+    ]
+   },
+   "ia": {
+    "es": [
+     "inteligencia artificial",
+     "IA",
+     "ChatGPT",
+     "OpenAI",
+     "Gemini",
+     "chatbot",
+     "robótica"
+    ],
+    "en": [
+     "artificial intelligence",
+     "AI",
+     "ChatGPT",
+     "OpenAI",
+     "Gemini",
+     "chatbot",
+     "robotics"
+    ]
+   }
+  },
+  "casos": [
+   {
+    "titulo": "Mujer mayor de 65 años perdió su pensión, de la que dependía económicamente",
+    "idioma": "es",
+    "rubros": []
+   },
+   {
+    "titulo": "Hieren de bala a Víctor Valverde, cantante de \"El Mayor de los Ranas\"",
+    "idioma": "es",
+    "rubros": [
+     "espectaculos"
+    ]
+   },
+   {
+    "titulo": "San Diego mayor unveils budget for homeless shelters",
+    "idioma": "en",
+    "rubros": [
+     "politica"
+    ]
+   },
+   {
+    "titulo": "Asignan docente en preescolar de Mexicali, tras protestas de padres de familia",
+    "idioma": "es",
+    "rubros": []
+   },
+   {
+    "titulo": "Padres beat Dodgers in extra innings",
+    "idioma": "en",
+    "rubros": [
+     "deportes"
+    ]
+   },
+   {
+    "titulo": "Cae Xolos femenil en casa y vuelve a ligar derrotas en el Apertura 2026",
+    "idioma": "es",
+    "rubros": [
+     "deportes"
+    ]
+   },
+   {
+    "titulo": "Huracanes Polo y Odalys no representan riesgo para Baja California",
+    "idioma": "es",
+    "rubros": [
+     "clima"
+    ]
+   },
+   {
+    "titulo": "Detienen a hombre por arrojar escombro en plena calle de Ensenada",
+    "idioma": "es",
+    "rubros": [
+     "seguridad"
+    ]
+   },
+   {
+    "titulo": "Recuperación de turismo de negocios empuja ocupación hotelera en Tijuana",
+    "idioma": "es",
+    "rubros": [
+     "economia",
+     "turismo"
+    ]
+   },
+   {
+    "titulo": "MAÑANERA DE HOY: lo que dijo la presidenta",
+    "idioma": "es",
+    "rubros": [
+     "politica"
+    ]
+   },
+   {
+    "titulo": "Google is helping write AI chatbot safety laws",
+    "idioma": "en",
+    "rubros": [
+     "ia"
+    ]
+   },
+   {
+    "titulo": "La guía de la feria",
+    "idioma": "es",
+    "rubros": []
+   },
+   {
+    "titulo": "Un factor clave para la economía",
+    "idioma": "es",
+    "rubros": [
+     "economia"
+    ]
+   },
+   {
+    "titulo": "Sube el precio del pan",
+    "idioma": "es",
+    "rubros": []
+   },
+   {
+    "titulo": "El PAN presenta iniciativa en el Congreso",
+    "idioma": "es",
+    "rubros": []
+   },
+   {
+    "titulo": "The driver who slammed into an LA bus is charged with murder",
+    "idioma": "en",
+    "rubros": []
+   }
+  ]
+ }
+}

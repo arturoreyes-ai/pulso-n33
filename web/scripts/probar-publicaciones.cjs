@@ -268,3 +268,41 @@ assert.equal(reunirPublicaciones({ instagram: ig, tiktok: tk, youtube: ytDoc, fa
 assert.equal(canonizarPublicacion('https://www.facebook.com/reel/1576537187486560/', 'facebook'), 'https://www.facebook.com/reel/1576537187486560');
 assert.deepEqual(cubetasDisponibles({ facebook: fbDoc }), ['corredor']);
 assert.equal(NOMBRE_RED.facebook, 'Facebook');
+
+// El tema en TikTok (25 de septiembre de 2026): el pipeline corta un top 10
+// por rubro y marca las busquedas por tema en `cuentas[].rubro`. «Todo» las
+// deja fuera y corta sus quince de siempre; un tema elige ANTES del corte y
+// corta a `rubro_maximo`. En Instagram el tema se ignora aqui (lo filtra el
+// visor despues del corte, como desde el 24).
+{
+  const tkUrl = (i) => `https://www.tiktok.com/@medio/video/${i}`;
+  const general = Array.from({ length: 16 }, (_, i) => post(`g${i}`, { url: tkUrl(i), cuenta: 'tk_tijuana_noticias', likes: 1000 - i, rubros: [] }));
+  const deTema = Array.from({ length: 12 }, (_, i) => post(`r${i}`, { url: tkUrl(100 + i), cuenta: 'tk_rubro_deportes', likes: 50000 - i, rubros: ['deportes'] }));
+  const noticiaDeportiva = post('nd', { url: tkUrl(200), cuenta: 'tk_tijuana_noticias', likes: 60000, rubros: ['deportes'] });
+  const tkTema = {
+    destacados: [...deTema, noticiaDeportiva, ...general].sort((a, b) => b.likes - a.likes),
+    destacados_maximo: 15, rubro_maximo: 10,
+    cuentas: [{ cuenta: 'tk_rubro_deportes', nombre: 'Tema: Deportes', zona: 'estatal', activa: true, rubro: 'deportes' },
+      { cuenta: 'tk_tijuana_noticias', nombre: 'Tijuana noticias', zona: 'estatal', activa: true }],
+  };
+  const todo = seleccionarPublicaciones(tkTema, 'tijuana', 'tiktok');
+  assert.equal(todo.length, 15);
+  assert.ok(todo.every((p) => p.cuenta === 'tk_tijuana_noticias'), 'las busquedas por tema no van a «Todo»');
+  assert.equal(todo[0].url, tkUrl(200), 'una noticia deportiva de la busqueda general si');
+  const esDeportes = (p) => (p.rubros ?? []).includes('deportes');
+  const deportes = seleccionarPublicaciones(tkTema, 'tijuana', 'tiktok', 'corredor', esDeportes);
+  assert.equal(deportes.length, 10, 'el tope del tema es rubro_maximo');
+  assert.ok(deportes.every(esDeportes));
+  assert.ok(deportes.some((p) => p.cuenta === 'tk_rubro_deportes') && deportes.some((p) => p.cuenta === 'tk_tijuana_noticias'));
+  // Un corte anterior, sin rubro_maximo: el tema filtra y corta a destacados_maximo.
+  const viejo = { ...tkTema, rubro_maximo: undefined, cuentas: [] };
+  assert.equal(seleccionarPublicaciones(viejo, 'tijuana', 'tiktok', 'corredor', esDeportes).length, 13);
+  // En Instagram el predicado no cambia nada.
+  const igDoc = doc([post('a', { rubros: undefined }), post('b')]);
+  assert.deepEqual(seleccionarPublicaciones(igDoc, 'tijuana', 'instagram', 'corredor', () => false).map((p) => p.url),
+    seleccionarPublicaciones(igDoc, 'tijuana', 'instagram').map((p) => p.url));
+  // Y reunir lo pasa: con tema, la pestana TikTok trae el top del tema.
+  assert.equal(reunirPublicaciones({ tiktok: tkTema }, 'tijuana', 'corredor', esDeportes).length, 10);
+  assert.equal(reunirPublicaciones({ tiktok: tkTema }, 'tijuana').length, 15);
+}
+console.log('Publicaciones: el tema de TikTok corta su top y deja las busquedas por tema fuera de «Todo».');
