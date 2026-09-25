@@ -141,7 +141,7 @@ zonifica por su pie con la misma tabla que TikTok y YouTube
 
 from datetime import datetime, timezone
 
-from .apify import Presupuesto, SinToken, correr_actor, token
+from .apify import Presupuesto, SinToken, correr_actor, en_paralelo, token
 # El nucleo neutro vive en pulso/redes.py desde que TikTok pidio "lo mismo".
 # Se reexporta aqui para que `instagram.leer_cache`, `instagram.derivar` y
 # compania sigan siendo la puerta de este modulo (y de sus pruebas).
@@ -410,15 +410,27 @@ def cosechar(cuentas, ahora, tok=None, presupuesto=None, cache="cache/instagram"
     publicaciones = leer_publicaciones(cache)
     reparto = presupuesto.reparto(len(activas))
 
-    for cuenta in activas:
-        entrada_posts = {
+    # Cuatro fases y no un solo bucle, para que la red vaya en paralelo y
+    # todo lo demas no (apify.en_paralelo explica el caso). 1) los posts de
+    # todas las cuentas a la vez; 2) en orden de cuenta, catalogo, cobro y que
+    # comentarios tocan; 3) esos comentarios a la vez; 4) en orden de cuenta,
+    # ingesta y vistos. Salida identica a la del bucle en serie.
+    def pedir_posts(cuenta):
+        entrada = {
             "directUrls": ["https://www.instagram.com/{}/".format(cuenta["handle"].lstrip("@"))],
             "resultsType": "posts",
             "resultsLimit": posts_por_cuenta,
         }
+        return lambda: correr_actor(ACTOR_POSTS, entrada, tok, min(posts_por_cuenta, reparto))
+
+    pedidos = en_paralelo([pedir_posts(c) for c in activas])
+
+    tareas = []
+    reclamados = set()
+    for cuenta, (posts, error) in zip(activas, pedidos):
         try:
-            posts = correr_actor(ACTOR_POSTS, entrada_posts, tok,
-                                 min(posts_por_cuenta, reparto))
+            if error is not None:
+                raise error
             presupuesto.cobrar(cuenta["id"], len(posts))
         except Exception as e:
             salud.append({"cuenta": cuenta["id"], "estado": "fallo",
@@ -451,22 +463,31 @@ def cosechar(cuentas, ahora, tok=None, presupuesto=None, cache="cache/instagram"
             urls = [u for u in urls if u in zona_de]
             extra = {"fuera": len(fuera)}
         # El freno de costo: los posts cosechados hace menos de tres dias no
-        # se vuelven a pedir. Ver el encabezado.
-        toca = pendientes(urls, vistos, ahora)
+        # se vuelven a pedir. Ver el encabezado. `reclamados` hace lo que en
+        # serie hacia `vistos` entre dos cuentas que traen el mismo post (una
+        # colaboracion): solo la primera paga sus comentarios.
+        toca = [u for u in pendientes(urls, vistos, ahora) if u not in reclamados]
         if not toca:
             salud.append({"cuenta": cuenta["id"], "estado": "ok", "posts": len(urls),
                           "comentarios": 0, "crudos": 0,
                           "nota": "sin posts nuevos que cosechar", **extra})
             continue
+        reclamados.update(toca)
+        tareas.append({"cuenta": cuenta, "toca": toca, "urls": urls, "extra": extra,
+                       "zona_de": zona_de, "limite": max(1, reparto - len(posts))})
 
-        entrada_coms = {
-            "directUrls": toca,
-            "resultsType": "comments",
-            "resultsLimit": comentarios_por_post,
-        }
+    def pedir_comentarios(t):
+        entrada = {"directUrls": t["toca"], "resultsType": "comments",
+                   "resultsLimit": comentarios_por_post}
+        return lambda: correr_actor(ACTOR_COMENTARIOS, entrada, tok, t["limite"])
+
+    respuestas = en_paralelo([pedir_comentarios(t) for t in tareas])
+
+    for t, (crudos, error) in zip(tareas, respuestas):
+        cuenta, toca, urls, extra, zona_de = t["cuenta"], t["toca"], t["urls"], t["extra"], t["zona_de"]
         try:
-            crudos = correr_actor(ACTOR_COMENTARIOS, entrada_coms, tok,
-                                  max(1, reparto - len(posts)))
+            if error is not None:
+                raise error
             presupuesto.cobrar(cuenta["id"], len(crudos))
         except Exception as e:
             salud.append({"cuenta": cuenta["id"], "estado": "fallo",

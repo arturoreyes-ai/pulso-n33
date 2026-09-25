@@ -332,9 +332,12 @@ def _limpiar_post(item, fuente, ahora):
     """
     p = fuente["plataforma"]
     if p == "tiktok":
+        # tirar_sin_lugar=False: la consulta busca un termino, no un lugar, y
+        # un video que lo nombra sin nombrar sitio es el resultado. La regla
+        # del 24 de septiembre de 2026 es para las busquedas del corredor.
         v, motivo = tiktok._limpiar_video(
             item, {"id": fuente["cuenta"], "ambito": "nacional", "idioma": fuente["idioma"]},
-            ahora)
+            ahora, tirar_sin_lugar=False)
         if v is None:
             return None, motivo
         salida = {"url": v["url"], "cuenta": v["cuenta"], "origen": fuente["origen"],

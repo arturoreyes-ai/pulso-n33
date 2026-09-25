@@ -125,7 +125,7 @@ exige una sola activa, la de mas seguidores (validador.validar_marcas).
 import re
 from datetime import datetime, timedelta, timezone
 
-from .apify import Presupuesto, SinToken, correr_actor, token
+from .apify import Presupuesto, SinToken, correr_actor, en_paralelo, token
 from .redes import (  # noqa: F401  (reexportados a proposito, como en instagram.py)
     COMENTARIOS_MAXIMO, COMENTARIOS_VISIBLES, DESTACADOS_MAXIMO, DIAS_ENTRE_COSECHAS,
     RE_MENCION, REGISTROS, RETENCION_DIAS, TEXTO_MAXIMO, TITULO_MAXIMO, _hoy,
@@ -270,7 +270,7 @@ def _publicado(item):
     return None
 
 
-def _zona(pie, ambito=AMBITO):
+def _zona(pie, ambito=AMBITO, tirar_sin_lugar=True):
     """(zona, alcance) del video por lo que nombra su pie. zona None = se tira.
 
     La tabla vive en pulso/redes.py::zona_por_ambito desde que YouTube la
@@ -288,21 +288,36 @@ def _zona(pie, ambito=AMBITO):
     consulta acreditando su zona, y darle Mexico, lo que ya se veia. Se queda
     si nombra a Mexico (3 de los 62): eso si es nota nacional. Un canal o una
     cuenta del corredor no se tira: ver redes.residuo_de_medio.
+
+    Desde el 24 de septiembre de 2026 la misma fila se tira tambien en las
+    busquedas de Mexico y del mundo, por la misma razon. El caso: la busqueda
+    «noticias internacionales» llevo a Mundo a @rhoizz, un meme en portugues
+    titulado «NOTÍCIA DE ÚLTIMA HORA», con 18 comentarios en portugues a los
+    que el modelo en espanol les puso tono. Sus dos videos sin lugar de esa
+    corrida eran eso y «Tres noticias que debes saber hoy». Lo que cuesta es
+    el caso bueno, «Cae un avion en Asturias», que no nombra un lugar que el
+    gacetero conozca; eso ya lo traen los perfiles del mundo (DW, Telemundo,
+    CNN, BBC Mundo, desde el 22 de septiembre), que SI conservan su residuo:
+    un perfil es un medio fijo, y para ellos `tirar_sin_lugar` es False.
+    Tambien para la busqueda de un TERMINO (consultas.py): alli lo que la
+    consulta fue a buscar es el termino, no un lugar, y un pie sin lugar que
+    lo nombra es justo el resultado.
     """
     zona, alc = zona_por_ambito(pie, ambito)
-    if ambito == "regional" and zona == "nacional" and alc == "nacional" \
+    if (ambito == "regional" or tirar_sin_lugar) and alc == "nacional" \
+            and zona in ("nacional", "internacional") \
             and not nombra_mexico(prosa_de(pie)):
         return None, alc
     return zona, alc
 
 
-def _limpiar_video(item, busqueda, ahora):
+def _limpiar_video(item, busqueda, ahora, tirar_sin_lugar=None):
     """Lista blanca del item de video. Devuelve (registro, motivo_de_descarte).
 
     El motivo es None cuando hay registro; si no, dice por que se tiro:
     'anuncio', 'privado', 'sin_url', 'sin_creador', 'sin_fecha', 'futuro',
-    'fuera' (nombro otra region) o 'sin_lugar' (una busqueda regional que no
-    nombro nada). `salud` los cuenta para que un cambio del actor se note.
+    'fuera' (nombro otra region) o 'sin_lugar' (una busqueda que no nombro
+    nada). `salud` los cuenta para que un cambio del actor se note.
     """
     url = _url_video(item.get("webVideoUrl") or item.get("url") or "")
     if not url:
@@ -322,7 +337,9 @@ def _limpiar_video(item, busqueda, ahora):
         return None, "futuro"
     pie = _desescapar(item.get("text") or "")
     # La zona se calcula sobre el pie CRUDO, hashtags incluidos.
-    zona, alc = _zona(pie, busqueda.get("ambito") or AMBITO)
+    if tirar_sin_lugar is None:
+        tirar_sin_lugar = not _es_perfil(busqueda)
+    zona, alc = _zona(pie, busqueda.get("ambito") or AMBITO, tirar_sin_lugar=tirar_sin_lugar)
     if zona is None:
         return None, "sin_lugar" if alc == "nacional" else "fuera"
 
@@ -541,9 +558,18 @@ def cosechar(busquedas, ahora, tok=None, presupuesto=None, cache=CACHE,
     publicaciones = leer_publicaciones(cache)
     reparto = presupuesto.reparto(len(filas))
 
-    for f, entrada, cuantos, por_video in filas:
+    # Cuatro fases, como instagram.cosechar: la red en paralelo, lo demas en
+    # orden de fila (apify.en_paralelo explica el caso).
+    pedidos = en_paralelo([
+        (lambda entrada=entrada, cuantos=cuantos: correr_actor(ACTOR_VIDEOS, entrada, tok, min(cuantos, reparto)))
+        for _, entrada, cuantos, _ in filas])
+
+    tareas = []
+    reclamados = set()
+    for (f, _, _, por_video), (items, error) in zip(filas, pedidos):
         try:
-            items = correr_actor(ACTOR_VIDEOS, entrada, tok, min(cuantos, reparto))
+            if error is not None:
+                raise error
             presupuesto.cobrar(f["id"], len(items))
         except Exception as e:
             salud.append({"cuenta": f["id"], "estado": "fallo",
@@ -575,18 +601,32 @@ def cosechar(busquedas, ahora, tok=None, presupuesto=None, cache=CACHE,
         if _es_perfil(f):
             cifras["fuera_de_ventana"] = viejos
 
-        toca = pendientes(urls, vistos, ahora)
+        # Dos busquedas traen a menudo el mismo video (Tijuana y Rosarito): en
+        # serie la segunda lo encontraba ya en `vistos` y no lo pagaba otra
+        # vez. `reclamados` conserva eso ahora que los comentarios se piden
+        # juntos.
+        toca = [u for u in pendientes(urls, vistos, ahora) if u not in reclamados]
         if not toca:
             salud.append({"cuenta": f["id"], "estado": "ok", "posts": len(urls),
                           "comentarios": 0, "crudos": 0, **cifras,
                           "nota": "sin videos nuevos que cosechar"})
             continue
+        reclamados.update(toca)
+        tareas.append({"fila": f, "toca": toca, "urls": urls, "cifras": cifras,
+                       "por_video": por_video, "limite": max(1, reparto - len(items))})
 
-        entrada_coms = {"postURLs": toca, "commentsPerPost": por_video,
-                        "maxRepliesPerComment": 0}
+    def pedir_comentarios(t):
+        entrada = {"postURLs": t["toca"], "commentsPerPost": t["por_video"],
+                   "maxRepliesPerComment": 0}
+        return lambda: correr_actor(ACTOR_COMENTARIOS, entrada, tok, t["limite"])
+
+    respuestas = en_paralelo([pedir_comentarios(t) for t in tareas])
+
+    for t, (crudos, error) in zip(tareas, respuestas):
+        f, toca, urls, cifras = t["fila"], t["toca"], t["urls"], t["cifras"]
         try:
-            crudos = correr_actor(ACTOR_COMENTARIOS, entrada_coms, tok,
-                                  max(1, reparto - len(items)))
+            if error is not None:
+                raise error
             presupuesto.cobrar(f["id"], len(crudos))
         except Exception as e:
             salud.append({"cuenta": f["id"], "estado": "fallo",

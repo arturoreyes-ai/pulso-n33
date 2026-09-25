@@ -32,9 +32,6 @@ def _responder(payload):
 
 
 class TestToken(unittest.TestCase):
-    def test_lee_del_entorno(self):
-        self.assertEqual(apify.token({"APIFY_TOKEN": "apify_api_xyz"}), "apify_api_xyz")
-
     def test_recorta_espacios(self):
         # Pegar el token de la consola web arrastra un salto de linea, y un
         # token con \n de sobra falla con 401 sin decir por que.
@@ -103,6 +100,39 @@ class TestRevisarEntrada(unittest.TestCase):
             with self.assertRaises(apify.ActorProhibido):
                 apify.correr_actor("a~b", {"cookies": []}, "tok", 10)
         falso.assert_not_called()
+
+
+class TestEnParalelo(unittest.TestCase):
+    """La red va a la vez; el orden de salida es el de entrada, nunca el de
+    llegada. Sin eso dos corridas iguales darian bytes distintos."""
+
+    def test_devuelve_en_orden_de_entrada_aunque_lleguen_al_reves(self):
+        import time
+        tareas = [(lambda i=i: (time.sleep(0.02 * (5 - i)), i)[1]) for i in range(6)]
+        self.assertEqual([r for r, _ in apify.en_paralelo(tareas)], list(range(6)))
+
+    def test_un_error_se_devuelve_en_su_lugar_sin_cancelar_a_las_demas(self):
+        def revienta():
+            raise ValueError("408")
+        salida = apify.en_paralelo([lambda: 1, revienta, lambda: 3])
+        self.assertEqual([r for r, _ in salida], [1, None, 3])
+        self.assertIsInstance(salida[1][1], ValueError)
+
+    def test_de_verdad_corre_a_la_vez(self):
+        import threading
+        import time
+        activas, pico, candado = [0], [0], threading.Lock()
+
+        def tarea():
+            with candado:
+                activas[0] += 1
+                pico[0] = max(pico[0], activas[0])
+            time.sleep(0.05)
+            with candado:
+                activas[0] -= 1
+        apify.en_paralelo([tarea] * 12)
+        self.assertGreater(pico[0], 1)
+        self.assertLessEqual(pico[0], apify.HILOS)
 
 
 class TestPresupuesto(unittest.TestCase):

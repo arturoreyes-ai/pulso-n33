@@ -64,7 +64,9 @@ jobs:
     # commiteado, y el cache con vistos.json sin guardar, porque un trabajo
     # cancelado se salta el paso que lo guarda. Asi cada corrida volvia a pagar
     # los comentarios de Instagram desde cero. Facebook alarga el trabajo otro
-    # poco.
+    # poco. Con 60 tambien murio (Instagram 30 min, TikTok 18+): la cura fue
+    # pedir a Apify en paralelo (pulso/apify.py::en_paralelo). Los 60 quedan
+    # de holgura, no de presupuesto.
     timeout-minutes: 60
     permissions:
       contents: write

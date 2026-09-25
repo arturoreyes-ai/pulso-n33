@@ -67,6 +67,7 @@ YouTube sin llave. El tablero tiene que poder mostrar prensa sin redes.
 
 import json
 import os
+from concurrent.futures import ThreadPoolExecutor
 from urllib.error import HTTPError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -79,6 +80,15 @@ AGENTE = "PulsoN33/{}".format(VERSION)
 
 # Tope de la plataforma para run-sync-get-dataset-items. No es configurable.
 TOPE_SINCRONO = 300
+
+# Corridas de actor a la vez. Cada llamada sincrona espera a que Apify arranque
+# un contenedor, corra y devuelva: ~25 s aunque traiga cinco items. En serie,
+# las 33 cuentas de Instagram eran 66 llamadas y ~28 min, y el trabajo del cron
+# murio por tiempo cinco veces seguidas el 24 de septiembre de 2026 (con 35 y
+# con 60 min), cobrado Instagram y sin commitear nada. Seis y no mas: el plan
+# de Apify limita la memoria total de las corridas simultaneas, y pasado ese
+# tope una corrida no arranca a tiempo dentro de los 300 s del modo sincrono.
+HILOS = 6
 
 # Claves de entrada que significan 'esto corre logueado'. Una entrada que
 # traiga cualquiera de estas es un error de configuracion, no un aviso.
@@ -174,6 +184,28 @@ class Presupuesto:
             "gastado": self.gastado,
             "por_concepto": dict(sorted(self.por_concepto.items())),
         }
+
+
+def en_paralelo(tareas, hilos=HILOS):
+    """Corre funciones sin argumentos a la vez. Devuelve [(resultado, error)]
+    en el ORDEN DE ENTRADA, nunca en el de llegada.
+
+    Solo la red va en paralelo. Quien llama aplica los resultados en su propio
+    orden y en un solo hilo -- el presupuesto, el cache, los vistos -- asi que
+    dos corridas sobre la misma entrada siguen dando los mismos bytes. Un
+    error no cancela a las demas: se devuelve en su lugar para que la cuenta
+    quede como `fallo` en salud, igual que en serie.
+    """
+    def uno(tarea):
+        try:
+            return tarea(), None
+        except Exception as e:  # noqa: BLE001 -- se reporta por cuenta
+            return None, e
+    tareas = list(tareas)
+    if len(tareas) <= 1:
+        return [uno(t) for t in tareas]
+    with ThreadPoolExecutor(max_workers=min(hilos, len(tareas))) as grupo:
+        return list(grupo.map(uno, tareas))
 
 
 def _pedir(metodo, ruta, tok, cuerpo=None, params=None, timeout=30):

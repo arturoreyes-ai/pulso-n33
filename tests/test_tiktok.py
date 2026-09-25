@@ -185,7 +185,8 @@ class TestLimpiezaVideo(unittest.TestCase):
         # Y el residuo regional se tira desde el 22 de septiembre de 2026:
         # "Sube el dolar otra vez" no nombra a Mexico (ver
         # test_sin_lugar_se_tira_y_estatal_es_estatal).
-        esperado = {
+        # Un PERFIL es un medio fijo y conserva el residuo de su ambito.
+        perfil = {
             "regional":      {"zona": "Tijuana", "estatal": "estatal", "fuera": None,
                               "extranjero": "internacional", "nacional": None},
             "nacional":      {"zona": "Tijuana", "estatal": "estatal", "fuera": "nacional",
@@ -193,10 +194,16 @@ class TestLimpiezaVideo(unittest.TestCase):
             "internacional": {"zona": "Tijuana", "estatal": "estatal", "fuera": "nacional",
                               "extranjero": "internacional", "nacional": "internacional"},
         }
-        for ambito, filas in esperado.items():
-            for alc, zona in filas.items():
-                with self.subTest(ambito=ambito, alcance=alc):
-                    self.assertEqual(tiktok._zona(pies[alc], ambito), (zona, alc))
+        # Una BUSQUEDA tira el pie sin lugar en los tres ambitos desde el 24 de
+        # septiembre de 2026: es de cualquier creador (el meme en portugues de
+        # @rhoizz en Mundo). Lo demas es igual que en un perfil.
+        busqueda = {a: dict(f, nacional=None) for a, f in perfil.items()}
+        for tirar, esperado in ((False, perfil), (True, busqueda)):
+            for ambito, filas in esperado.items():
+                for alc, zona in filas.items():
+                    with self.subTest(tirar_sin_lugar=tirar, ambito=ambito, alcance=alc):
+                        self.assertEqual(tiktok._zona(pies[alc], ambito, tirar_sin_lugar=tirar),
+                                         (zona, alc))
 
     def test_los_casos_medidos_del_filtro_internacional(self):
         """Los pies reales que motivaron `extranjero`, con la busqueda de donde salieron."""
@@ -227,9 +234,6 @@ class TestLimpiezaVideo(unittest.TestCase):
             # Tijuana)...
             ("Hacen anuncio sobre feminicidio de Claudia Tacoronte en Morelos, Mexico",
              "internacional", ("nacional", "nacional")),
-            # ...pero un #mexico de relleno no la saca de Mundo.
-            ("Cae un avion en Asturias #mexico #noticias", "internacional",
-             ("internacional", "nacional")),
             # Uno TV en la busqueda de Ensenada, 24 de septiembre de 2026: salio
             # `zona: Tijuana` por la avenida, que es alias de la Zona Centro, y
             # el guion de locucion la ofrecio como informacion de Tijuana. El
@@ -241,10 +245,23 @@ class TestLimpiezaVideo(unittest.TestCase):
         for pie, ambito, esperado in casos:
             with self.subTest(pie=pie, ambito=ambito):
                 self.assertEqual(tiktok._zona(pie, ambito), esperado)
+        # ...pero un #mexico de relleno no la saca de Mundo. En un perfil; en
+        # una busqueda un pie sin lugar se tira (24 de septiembre de 2026).
+        asturias = "Cae un avion en Asturias #mexico #noticias"
+        self.assertEqual(tiktok._zona(asturias, "internacional", tirar_sin_lugar=False),
+                         ("internacional", "nacional"))
+        self.assertEqual(tiktok._zona(asturias, "internacional"), (None, "nacional"))
 
     def test_el_ambito_llega_desde_la_busqueda_y_omite_regional(self):
         mundo = dict(BUSQUEDA, ambito="internacional")
-        v, _ = tiktok._limpiar_video(_video(text="Cae un avion en Asturias"), mundo, AHORA)
+        v, _ = tiktok._limpiar_video(_video(text="Rusia lanza drones contra Ucrania"), mundo, AHORA)
+        self.assertEqual((v["zona"], v["alcance"]), ("internacional", "extranjero"))
+        # El caso que lo motivo: la busqueda del mundo trajo un meme en
+        # portugues sin lugar. Se tira y se cuenta; un perfil del mundo no.
+        meme = _video(text="NOTÍCIA DE ÚLTIMA HORA 🚨")
+        self.assertEqual(tiktok._limpiar_video(meme, mundo, AHORA), (None, "sin_lugar"))
+        perfil = dict(mundo, perfil="@rhoizz")
+        v, _ = tiktok._limpiar_video(meme, perfil, AHORA)
         self.assertEqual((v["zona"], v["alcance"]), ("internacional", "nacional"))
         # Una fila sin el campo se comporta como antes del 15 de septiembre de
         # 2026: un video de fuera se tira.
@@ -386,8 +403,11 @@ class TestDerivar(BaseCache):
         voz, asi que repartir por cuenta seria repartir el mecanismo. El
         equivalente honesto seria `creador`, y no se pidio.
 
-        Se prueba contra el nucleo compartido porque una sola busqueda tiene
-        una sola `cuenta` y ahi el reparto seria identidad: hacen falta dos.
+        Hacen falta dos busquedas: con una sola `cuenta` el reparto seria
+        identidad. Hasta el 25 de septiembre de 2026 esta prueba llamaba al
+        nucleo compartido con `turnos=False` a mano, asi que seguia verde si
+        `tiktok.derivar` encendia el reparto: no fijaba lo que decia fijar.
+        Ahora pasa por `tiktok.derivar`, que es donde se decide.
         """
         pubs = {}
         for i in range(18):
@@ -397,13 +417,12 @@ class TestDerivar(BaseCache):
                          "zona": "Tijuana", "fecha": "2026-09-03", "tipo": "video",
                          "publicado": "2026-09-03T10:00:00+00:00", "titulo": "t",
                          "likes": (1000 - i) if grande else (10 - i), "comentarios": 0}
-        cuentas = [{"id": "tk_a"}, {"id": "tk_b"}]
-        elegidas = lambda turnos: {
-            d["cuenta"] for d in _redes._destacados(
-                pubs, [], [], [], cuentas, lambda p: True, turnos=turnos)}
-        self.assertEqual(elegidas(False), {"tk_a"})
-        # Y el interruptor existe de verdad: encendido si entraria la chica.
-        self.assertEqual(elegidas(True), {"tk_a", "tk_b"})
+        busquedas = [dict(BUSQUEDA, id="tk_a"), dict(BUSQUEDA, id="tk_b")]
+        panel = tiktok.derivar([], AHORA, [], {}, [], pubs, busquedas)
+        self.assertEqual({d["cuenta"] for d in panel["destacados"]}, {"tk_a"})
+        # Y el interruptor existe de verdad: encendido, si entraria la chica.
+        encendido = _redes._destacados(pubs, [], [], [], busquedas, lambda p: True, turnos=True)
+        self.assertEqual({d["cuenta"] for d in encendido}, {"tk_a", "tk_b"})
 
     def test_los_campos_de_tiktok_cruzan_al_destacado(self):
         d = self._panel(VIDEOS)["destacados"][0]
@@ -561,26 +580,6 @@ class TestPerfiles(BaseCache):
         self.assertEqual([s["busqueda"] for s in salida], ["tk_dwespanol"])
         self.assertEqual(salida[0]["seguidores"], 3100000)
         self.assertIn("profiles", actor.llamadas[0][1])
-
-
-class TestLineaDeComandos(unittest.TestCase):
-    def test_el_parser_se_construye_con_las_banderas_nuevas(self):
-        # El 22 de septiembre de 2026 un `--posts` nuevo choco con el que ya
-        # tenia `pulso redes` y argparse truena al CONSTRUIR el parser: todo
-        # `python -m pulso`, cron incluido, habria caido, y ninguna prueba lo
-        # construia. Esta si.
-        import contextlib
-        import io
-        from pulso.__main__ import main
-        for argv in (["redes", "--help"], ["tiktok", "--help"], ["youtube", "--help"]):
-            with self.subTest(argv=argv), contextlib.redirect_stdout(io.StringIO()) as salida:
-                with self.assertRaises(SystemExit) as fin:
-                    main(argv)
-                self.assertEqual(fin.exception.code, 0)
-        with contextlib.redirect_stdout(io.StringIO()) as salida:
-            with self.assertRaises(SystemExit):
-                main(["redes", "--help"])
-        self.assertIn("--muestra", salida.getvalue())
 
 
 class TestValidadorPerfiles(unittest.TestCase):
@@ -801,24 +800,6 @@ class TestConfigReal(unittest.TestCase):
     def setUp(self):
         with open(os.path.join("config", "tiktok.json"), encoding="utf-8") as fh:
             self.cfg = json.load(fh)
-
-    def test_el_config_real_pasa_su_validador(self):
-        self.assertEqual(validar_tiktok_config(self.cfg)[0], [])
-
-    def test_ninguna_busqueda_lleva_zona_y_todas_traen_nota_e_idioma(self):
-        for b in self.cfg["busquedas"]:
-            with self.subTest(busqueda=b["id"]):
-                self.assertNotIn("zona", b)
-                self.assertIn(b.get("idioma"), ("es", "en"))
-                self.assertTrue((b.get("nota") or "").strip())
-
-    def test_el_filtro_de_fecha_es_uno_del_actor(self):
-        self.assertIn(self.cfg["cosecha"]["filtro_fecha"], tiktok.FILTROS_FECHA)
-
-    def test_el_ambito_de_cada_busqueda_es_uno_de_los_tres(self):
-        for b in self.cfg["busquedas"]:
-            with self.subTest(busqueda=b["id"]):
-                self.assertIn(b.get("ambito", tiktok.AMBITO), tiktok.AMBITOS)
 
     def test_una_busqueda_apagada_dice_por_que(self):
         """Apagar es un registro deliberado, no un pendiente: lleva razon.

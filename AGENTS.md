@@ -270,7 +270,7 @@ outside the region:
 | a place abroad (`extranjero`) | `internacional` | `internacional` | `internacional` |
 | no place at all | see below | `nacional` | `internacional`, or `nacional` if it names Mexico |
 
-**The regional no-place row depends on the source, since 22 September 2026.**
+**The no-place row depends on the source, since 22 September 2026.**
 It used to be `nacional`, and that filled the México bucket with local
 leftovers: 62 TikTok destacados from the Rosarito, Ensenada and Mexicali
 searches (a Tegucigalpa storm, a shooting in Áncash, blank captions) and 39 of
@@ -279,7 +279,14 @@ stays `nacional`):
 
 - **a TikTok search** drops it as `sin_lugar`, counted in `salud`. A search
   result is any creator; crediting the corridor to it is the query crediting
-  its zone. `tiktok._zona`.
+  its zone. `tiktok._zona`. **Since 24 September 2026 this holds for the
+  México and Mundo searches too**, overriding the `nacional`/`internacional`
+  columns of the table above for searches only: «noticias internacionales»
+  put @rhoizz's Portuguese meme «NOTÍCIA DE ÚLTIMA HORA» in Mundo, with its
+  Portuguese comments scored by the Spanish model. A TikTok **profile** row
+  (`perfiles`) is a fixed outlet and keeps the table's residue, and so does a
+  consultas term search (`tirar_sin_lugar=False`): there the query looked
+  for a term, not a place.
 - **a local outlet** (a YouTube channel, an Instagram `ambito: regional` row)
   makes it `("estatal", "nacional")`: Corredor, never a city wall, and the card
   says «un lugar sin precisar». «Sindicatura fiscaliza a jireh» is Tijuana news
@@ -1810,6 +1817,15 @@ build. No model dependencies. Get this green before asking for review.
 `.github/workflows/pulso.yml` runs the cron at `17 */6 * * *` — minute 17, not
 0, because thousands of crons queue on the hour. It commits `data/` as
 `pulso-bot` with `[skip ci]` when the content changed.
+
+**The paid harvests call Apify in parallel** (`pulso/apify.py::en_paralelo`,
+six at a time) and apply results in account order on one thread, so output
+stays byte-identical. On 24 September 2026 the serial version took ~28 min
+for Instagram's 33 accounts alone, and the job died on its timeout five runs in
+a row, with Instagram already billed and nothing committed. A cancelled job
+also skips the post-step that saves `cache/`, so `vistos.json` never persisted
+and every run re-paid the same comments. If a harvest grows slow again, look
+there before raising `timeout-minutes`.
 
 One detail that explains the single-workflow design, annotated in the file:
 **commits made with `GITHUB_TOKEN` do not trigger `on: push`**. A separate

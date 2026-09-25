@@ -95,7 +95,7 @@ import re
 from datetime import datetime, timezone
 from urllib.parse import parse_qsl, urlencode, urlsplit
 
-from .apify import ActorProhibido, Presupuesto, SinToken, correr_actor, token
+from .apify import ActorProhibido, Presupuesto, SinToken, correr_actor, en_paralelo, token
 from .redes import (_dentro_por_horas, _hoy, _id_comentario, _titulo, guardar_cache,
                     guardar_publicaciones, guardar_vistos, leer_publicaciones, leer_vistos,
                     pendientes, purgar, residuo_de_medio, zona_por_ambito, zona_por_titulo)
@@ -477,12 +477,20 @@ def cosechar(cuentas, ahora, tok=None, presupuesto=None, cache=CACHE, posts_por_
     reparto = presupuesto.reparto(len(activas))
     dentro = _dentro_por_horas(ahora, ventana_horas)
 
-    for cuenta in activas:
+    # Cuatro fases, como instagram.cosechar: la red en paralelo, lo demas en
+    # orden de pagina (apify.en_paralelo explica el caso).
+    def pedir_posts(cuenta):
+        entrada = _entrada_pagina(_url_de_pagina(cuenta), posts_por_pagina, _dias(ventana_horas))
+        return lambda: correr_actor(ACTOR_POSTS, entrada, tok, min(posts_por_pagina, reparto))
+
+    pedidos = en_paralelo([pedir_posts(c) for c in activas])
+
+    tareas = []
+    reclamados = set()
+    for cuenta, (items, error) in zip(activas, pedidos):
         try:
-            items = correr_actor(ACTOR_POSTS,
-                                 _entrada_pagina(_url_de_pagina(cuenta), posts_por_pagina,
-                                                 _dias(ventana_horas)),
-                                 tok, min(posts_por_pagina, reparto))
+            if error is not None:
+                raise error
             presupuesto.cobrar(cuenta["id"], len(items))
         except Exception as e:
             salud.append({"cuenta": cuenta["id"], "estado": "fallo",
@@ -502,24 +510,35 @@ def cosechar(cuentas, ahora, tok=None, presupuesto=None, cache=CACHE, posts_por_
 
         # Solo lo que esta en la ventana y no se cosecho hace poco, y de eso
         # los de mas reacciones: es el orden del corte, asi que se paga por lo
-        # que tiene mas probabilidad de salir en pantalla.
+        # que tiene mas probabilidad de salir en pantalla. `reclamados` hace
+        # entre dos paginas lo que en serie hacia `vistos`.
         en_ventana = sorted((p for p in limpios if dentro(p)),
                             key=lambda p: (-p["likes"], -p["comentarios"], p["url"]))
-        toca = pendientes([p["url"] for p in en_ventana], vistos, ahora,
-                      dias_entre_cosechas)[:comentarios_para]
+        toca = [u for u in pendientes([p["url"] for p in en_ventana], vistos, ahora,
+                                      dias_entre_cosechas)
+                if u not in reclamados][:comentarios_para]
         zona_de = {p["url"]: p["zona"] for p in limpios}
         if not toca:
             salud.append({"cuenta": cuenta["id"], "estado": "ok", "posts": len(limpios),
                           "comentarios": 0, "crudos": 0,
                           "nota": "sin posts nuevos que cosechar", **extra})
             continue
+        reclamados.update(toca)
+        tareas.append({"cuenta": cuenta, "toca": toca, "limpios": limpios, "extra": extra,
+                       "zona_de": zona_de,
+                       "limite": max(1, min(comentarios_por_post * len(toca), reparto - len(items)))})
 
+    def pedir_comentarios(t):
+        entrada = _entrada_comentarios(t["toca"], comentarios_por_post, _dias(ventana_horas))
+        return lambda: correr_actor(ACTOR_COMENTARIOS, entrada, tok, t["limite"])
+
+    respuestas = en_paralelo([pedir_comentarios(t) for t in tareas])
+
+    for t, (crudos, error) in zip(tareas, respuestas):
+        cuenta, toca, limpios, extra, zona_de = t["cuenta"], t["toca"], t["limpios"], t["extra"], t["zona_de"]
         try:
-            crudos = correr_actor(ACTOR_COMENTARIOS,
-                                  _entrada_comentarios(toca, comentarios_por_post,
-                                                       _dias(ventana_horas)),
-                                  tok, max(1, min(comentarios_por_post * len(toca),
-                                                  reparto - len(items))))
+            if error is not None:
+                raise error
             presupuesto.cobrar(cuenta["id"], len(crudos))
         except Exception as e:
             salud.append({"cuenta": cuenta["id"], "estado": "fallo",

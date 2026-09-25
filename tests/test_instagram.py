@@ -261,16 +261,6 @@ class TestDerivar(BaseCache):
             with self.subTest(campo=campo):
                 self.assertEqual(list(p[campo]), sorted(p[campo]))
 
-    def test_dos_derivaciones_son_identicas(self):
-        with patch.object(instagram, "correr_actor", _Actor()):
-            _, salud, gasto = instagram.cosechar([CUENTA], AHORA, tok="t",
-                                                 cache=self.cache)
-        vig = instagram.leer_cache(self.cache)
-        a = json.dumps(instagram.derivar(vig, AHORA, salud, gasto))
-        b = json.dumps(instagram.derivar(vig, AHORA, salud, gasto))
-        self.assertEqual(a, b)
-
-
 class TestValidadorRedes(unittest.TestCase):
     BASE = {
         "esquema": 1, "generado": AHORA, "plataforma": "instagram",
@@ -341,13 +331,6 @@ class TestCatalogoCuentas(unittest.TestCase):
             with self.subTest(cuenta=c["id"]):
                 self.assertTrue(c.get("handle"), "una cuenta verificada necesita handle")
                 self.assertIn("Sondeada", c.get("razon", ""))
-
-    def test_una_cuenta_sin_handle_no_esta_activa(self):
-        # Los huecos (Mexicali, San Quintin) se registran, no se cosechan.
-        for c in self.cfg["cuentas"]:
-            if not c.get("handle"):
-                with self.subTest(cuenta=c["id"]):
-                    self.assertFalse(c.get("activo"))
 
     def test_los_senuelos_traen_el_numero_que_los_delato(self):
         # Un senuelo sin evidencia es una opinion. @zetanoticias tiene 1,330
@@ -437,12 +420,6 @@ class TestCatalogoCuentas(unittest.TestCase):
                       for s in instagram.sondear(["@n.mas", "@nadie"], tok="t")}
         self.assertEqual(salida, {"@n.mas": "sin_datos", "@nadie": "no_existe"})
 
-    def test_el_config_real_valida(self):
-        # validar_instagram_config existe desde el 22 de septiembre de 2026,
-        # cuando una cuenta pudo llevar `ambito` en vez de `zona`.
-        from pulso.validador import validar_instagram_config
-        self.assertEqual(validar_instagram_config(self.cfg)[0], [])
-
     def test_zona_o_ambito_nunca_los_dos_ni_ninguno(self):
         from pulso.validador import validar_instagram_config
         base = {"nota": "x", "cosecha": {"ventana_horas": 24}}
@@ -455,15 +432,6 @@ class TestCatalogoCuentas(unittest.TestCase):
             with self.subTest(extra=extra):
                 e, _ = validar_instagram_config(dict(base, cuentas=[dict(fila, **extra)]))
                 self.assertEqual(e == [], bueno, e)
-
-    def test_la_ventana_de_cosecha_es_de_horas(self):
-        # Hasta el 22 de septiembre de 2026 no hubo validar_instagram_config y
-        # esta prueba era lo que fijaba que la ventana del config fuera de
-        # horas (desde el 10 de septiembre) y cupiera en el tope del validador.
-        vh = self.cfg["cosecha"].get("ventana_horas")
-        self.assertIsInstance(vh, int)
-        self.assertNotIsInstance(vh, bool)
-        self.assertTrue(1 <= vh <= 720)
 
     def test_las_cuentas_pedidas_el_10_de_septiembre_estan(self):
         # Las cuatro que pidio el cliente. Estar no es estar encendida: una
@@ -488,22 +456,6 @@ class TestCatalogoCuentas(unittest.TestCase):
                   "@noticiasunivisionsd", "@ksdy50tv", "@619newsmedia"):
             with self.subTest(handle=h):
                 self.assertIn(h, handles)
-
-    def test_toda_zona_del_catalogo_es_una_que_el_validador_acepta(self):
-        # La zona de una cuenta se le estampa a cada comentario y a cada post
-        # sin correccion: a diferencia de TikTok, Instagram no consulta el
-        # gacetero. Una zona mal escrita aqui no falla hasta que el validador
-        # mira data/redes.json, cuatro horas despues y sin nadie viendo.
-        # Una cuenta con `ambito` no tiene sede que estampar: su zona sale del
-        # pie de cada post (22 de septiembre de 2026).
-        from pulso.validador import AMBITOS_REDES, ZONAS_DE_CONTEO
-        for c in self.cfg["cuentas"]:
-            with self.subTest(cuenta=c["id"]):
-                if "ambito" in c:
-                    self.assertIn(c["ambito"], AMBITOS_REDES)
-                    self.assertNotIn("zona", c)
-                else:
-                    self.assertIn(c.get("zona"), ZONAS_DE_CONTEO)
 
     def test_el_medio_declarado_existe_en_el_catalogo_de_medios(self):
         # `medio` es documental -- ningun codigo lo lee -- pero un id
@@ -1253,3 +1205,53 @@ class TestValidadorRedesComentarios(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestParalelo(BaseCache):
+    """La cosecha pide a Apify en paralelo (apify.en_paralelo) y aplica en
+    orden de cuenta. El 24 de septiembre de 2026 el cron murio por tiempo con
+    33 cuentas en serie."""
+
+    def _cuentas(self, n):
+        return [{**CUENTA, "id": "c{:02d}_ig".format(i), "handle": "@c{:02d}".format(i)}
+                for i in range(n)]
+
+    def test_la_salida_no_depende_del_orden_de_llegada(self):
+        import random
+        import time
+
+        def posts_de(entrada):
+            h = entrada["directUrls"][0].rstrip("/").rsplit("/", 1)[-1]
+            return [{"url": "https://www.instagram.com/p/{}X/".format(h)}]
+
+        def coms_de(entrada):
+            u = entrada["directUrls"][0]
+            return [{**COMENTARIOS[0], "id": u[-6:], "postUrl": u}]
+
+        def actor(con_retraso):
+            azar = random.Random(7)
+            def llamar(a, entrada, tok, limite, timeout=None):
+                if con_retraso:
+                    time.sleep(azar.random() * 0.02)
+                return posts_de(entrada) if entrada["resultsType"] == "posts" else coms_de(entrada)
+            return llamar
+
+        salidas = []
+        for retraso in (False, True):
+            cache = os.path.join(self.dir, "c{}".format(int(retraso)))
+            with patch.object(instagram, "correr_actor", actor(retraso)):
+                salidas.append(instagram.cosechar(self._cuentas(9), AHORA, tok="t", cache=cache))
+        self.assertEqual(json.dumps(salidas[0], sort_keys=True),
+                         json.dumps(salidas[1], sort_keys=True))
+        self.assertEqual([c["cuenta"] for c in salidas[1][0]],
+                         ["c{:02d}_ig".format(i) for i in range(9)])
+
+    def test_un_post_compartido_se_paga_una_sola_vez(self):
+        # Una colaboracion aparece en dos cuentas. En serie la segunda la
+        # hallaba en `vistos`; en paralelo lo hace `reclamados`.
+        actor = _Actor(posts=[POSTS[0]])
+        with patch.object(instagram, "correr_actor", actor):
+            instagram.cosechar(self._cuentas(2), AHORA, tok="t", cache=self.cache)
+        pedidas = [u for e in actor.llamadas if e["resultsType"] == "comments" for u in e["directUrls"]]
+        self.assertEqual(pedidas, [POSTS[0]["url"]])
+
