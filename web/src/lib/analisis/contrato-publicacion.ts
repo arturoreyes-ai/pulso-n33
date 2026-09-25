@@ -66,54 +66,78 @@ export interface AnalisisPublicacion extends LecturaPublicacion {
   reportados: number;
 }
 
-/** Version del resumen de TikTok, independiente de la de una publicacion. */
-export const VERSION_RESUMEN_TIKTOK = "1";
-
-/** Debajo de esto no hay asuntos que agrupar: hay tres pies repetidos con
- *  otras palabras. Rosarito tenia tres videos el 20 de septiembre de 2026.
- *  Vive aqui y no en resumen-tiktok.ts porque la tarjeta decide con el si se
- *  pinta, y aquel modulo arrastra `node:fs` por datos-redes.ts. */
-export const MINIMO_VIDEOS_RESUMEN = 5;
+/** Version del guion de TikTok, independiente de la de una publicacion. */
+export const VERSION_GUION_TIKTOK = "2";
 
 /**
- * «Resumen con IA»: de que hablan los videos de TikTok mas vistos de una
- * seleccion, agrupado por asunto y con la fuente de cada punto.
+ * Los programas que tienen guion, desde el 24 de septiembre de 2026. El
+ * cliente mando la programacion del canal y las reglas de extraccion de la
+ * hora de edicion, y pidio que el «Resumen con IA» de la pestana TikTok
+ * pasara a ser eso: un guion que un conductor memoriza y dice.
  *
- * Es la forma del resumen que TikTok pinta sobre su propia busqueda y que el
- * cliente mostro el 23 de septiembre de 2026. Ese resumen NO se puede traer: el
- * actor no lo devuelve, vive en la pagina de busqueda de la app, y publicarlo
- * seria publicar lo que el modelo de otra empresa resumio de cuerpos de notas.
- * Este lo escribe un modelo sobre la primera linea del pie de cada video, que
- * es lo que la tarjeta ya muestra, y nada mas.
- *
- * `fuentes` de cada punto son indices en `fuentes` de la respuesta, y los
- * resuelve EL SERVIDOR. El modelo solo cita numeros de la lista que recibio; un
- * numero que no existe se tira, y un punto que se queda sin fuente se tira
- * entero: una afirmacion que no se puede rastrear a un video no se pinta.
+ *  - Noticias 33: exactamente cinco clips, uno por eje (garitas, informacion
+ *    de Tijuana, la mañanera de la presidenta, informacion de California) y
+ *    el quinto libre, el de mas interes entre los cuatro ejes.
+ *  - De Red en Red: un clip por cada tema de espectaculos que se desarrolle.
  */
-export interface PuntoResumen {
-  texto: string;
-  fuentes: number[];
-}
+export const PROGRAMAS_GUION = ["noticias33", "deredenred"] as const;
+export type ProgramaGuion = (typeof PROGRAMAS_GUION)[number];
 
-export interface SeccionResumen {
-  titulo: string;
-  puntos: PuntoResumen[];
-}
+export const NOMBRE_PROGRAMA: Record<ProgramaGuion, string> = {
+  noticias33: "Noticias 33",
+  deredenred: "De Red en Red",
+};
 
-export interface LecturaResumen {
-  /** Una o dos frases: de que tratan, en conjunto. */
+export const EJES_NOTICIAS33 = ["garitas", "tijuana", "mananera", "california"] as const;
+export type EjeNoticias33 = (typeof EJES_NOTICIAS33)[number];
+
+export const NOMBRE_EJE: Record<EjeNoticias33, string> = {
+  garitas: "Garitas",
+  tijuana: "Información de Tijuana",
+  mananera: "Mañanera de la presidenta",
+  california: "Información de California",
+};
+
+/**
+ * Un clip: el video que se extrae y lo que el conductor dice sobre el.
+ *
+ * `eje` es el nombre impreso: un eje de Noticias 33, o el tema de
+ * espectaculos que el modelo nombro en De Red en Red. `fuente` la resuelve EL
+ * SERVIDOR desde el numero que el modelo cito; un clip que cita un video que
+ * no estaba en la lista de su eje no llega aqui.
+ */
+export interface ClipGuion {
+  eje: string;
+  /** El quinto clip de Noticias 33, fuera de la regla de uno por eje. */
+  libre: boolean;
+  /** Para la escaleta, no se dice. */
+  titular: string;
+  /** Lo que el conductor dice a camara ANTES del clip. */
   entrada: string;
-  secciones: SeccionResumen[];
-  /** Que NO establece el material. La salvedad de muestreo es de la pagina. */
-  salvedad: string;
+  /** La frase que da paso al clip. No describe el video. */
+  pase: string;
+  /** Lo que dice DESPUES del clip: remata o enlaza con el siguiente. */
+  salida: string;
+  fuente: { url: string; fuente: string };
 }
 
-export interface ResumenTikTok extends LecturaResumen {
-  /** Los videos citados, en el orden en que se le dieron al modelo (del mas
-   *  popular al menos). `url` es la canonica de `canonizarPublicacion`, la
-   *  misma llave con la que el visor arma `clave`. */
-  fuentes: { url: string; fuente: string }[];
-  /** Videos de la seleccion que el modelo leyo. Lo cuenta el codigo. */
+/**
+ * Un guion de verdad y no un resumen, desde la segunda version del mismo 24
+ * de septiembre de 2026: la primera traia un titular y dos frases por clip, y
+ * el cliente dijo con razon que eso es un resumen. Un guion de locucion abre
+ * el segmento, entra a cada nota a camara, da paso al clip, sale de el y
+ * cierra.
+ */
+export interface GuionTikTok {
+  programa: ProgramaGuion;
+  /** Con lo que el conductor abre el segmento. */
+  apertura: string;
+  clips: ClipGuion[];
+  /** Con lo que lo cierra. */
+  cierre: string;
+  /** Ejes sin un solo video en la ventana. Lo cuenta el codigo, no el
+   *  modelo, y se dice: un eje vacio no se rellena con otro. */
+  faltantes: string[];
+  /** Videos que el modelo leyo. */
   videos: number;
 }

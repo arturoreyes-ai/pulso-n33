@@ -1,3 +1,18 @@
+> **Implementación · 24 de septiembre de 2026 — Guion para locución en la
+> pestaña TikTok.** El cliente cambió el foco del «Resumen con IA» del 23 de
+> septiembre: ahora es un guion que un conductor memoriza y dice, pedido con un
+> botón por programa. Noticias 33 saca exactamente cinco clips, uno por eje
+> (garitas, información de Tijuana, mañanera de la presidenta, información de
+> California) y un quinto libre; De Red en Red, un clip por cada tema de
+> espectáculos. El resumen automático se retira, así que ninguna lectura con
+> modelo se pide sola. Un eje sin videos del día se dice y no se rellena con
+> otro.
+>
+> El mismo día el guion pasó a tener forma de guion (apertura, entrada a
+> cámara, pase, clip, salida y cierre) y, por decisión del cliente tras
+> comparar dos modelos, se escribe con Sonnet 5: cuesta unos 2 centavos de
+> dólar por guion en lugar de medio, y fue el que atribuyó bien cada clip.
+
 > **Implementación · 24 de septiembre de 2026 — Medios de México y del mundo en
 > las dos redes.** El cliente pidió CNN en Español, BBC News Mundo y DW Español
 > para Internacional, y Latinus, Azteca Noticias, Noticias Telemundo y N+ para

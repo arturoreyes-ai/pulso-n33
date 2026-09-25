@@ -5,8 +5,9 @@ import { ChatCircle as IconoComentarios } from "@phosphor-icons/react";
 import { useFacebook, useFacebookComentarios, useRedes, useRedesComentarios, useTikTok, useTikTokComentarios, useYouTube } from "@/lib/datos/hooks";
 import type { ComentarioPublicado } from "@/lib/datos/tipos";
 import { NOMBRE_RED, ordenarPublicaciones, reunirPublicaciones, type CubetaRegion, type OrdenLectura, type PublicacionVisual, type RedVisual } from "@/lib/dominio/publicaciones";
-import { MINIMO_VIDEOS_RESUMEN } from "@/lib/analisis/contrato-publicacion";
 import { filtrarPorTexto, SIN_FILAS_BUSQUEDA } from "@/lib/dominio/consultas";
+import { TITULO_RUBRO, type Rubro } from "@/lib/busqueda/rubros";
+import { nombraRubro } from "@/lib/busqueda/tema-publicacion";
 import { fechaCorta, hace, hora } from "@/lib/dominio/formato";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 import { teclasDelRecorrido, useRecorrido } from "@/lib/pantalla/recorrido";
@@ -14,7 +15,7 @@ import { clasesBoton } from "@/components/ui/clases";
 import { BotonAnalizar, FichaPublicacion } from "./analisis-publicacion";
 import { ComentariosPublicacion, VistaPreviaComentarios, type Textos } from "./comentarios-publicacion";
 import { EsqueletoMedio, MedioSocial } from "./medio-social";
-import { ResumenTikTokBloque } from "./resumen-tiktok";
+import { GuionTikTokBloque } from "./guion-tiktok";
 import { Hoja } from "@/components/ui/hoja";
 
 /** Las pestanas que caen aqui: todas menos X, que es otra hoja del lector. */
@@ -52,7 +53,7 @@ export type Cortes = Partial<Record<RedVisual, string>>;
  * que la direccion pidio ver el 8 de septiembre de 2026. Una sola hoja
  * (`<dialog>`) para todo el recorrido, nunca una por tarjeta; su cuerpo esta
  * en paneles/comentarios-publicacion.tsx. */
-export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis = false, filtroTexto = null, orden = "recientes" }: {
+export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis = false, filtroTexto = null, orden = "recientes", tema = null }: {
   zona: ZonaRuta | null;
   filtro: FiltroVisual;
   cubeta?: CubetaRegion;
@@ -64,6 +65,9 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis
    *  filtra por texto lo que ya esta cargado (pies y comentarios), sin pedir
    *  nada a nadie. Ver lib/dominio/consultas.ts. */
   filtroTexto?: string | null;
+  /** La fila de temas (lector-redes.tsx, 24 de septiembre de 2026): quedan
+   *  las publicaciones cuyo titulo nombra un termino del rubro. */
+  tema?: Rubro | null;
 }) {
   const instagram = useRedes();
   const tiktok = useTikTok();
@@ -82,18 +86,18 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis
   const filas = useMemo(() => {
     // El orden DESPUES del filtro de pestana: «populares» reparte puestos por
     // red, y en una pestana de una red eso es su orden de merito.
-    const porRed = ordenarPublicaciones(publicaciones.filter((fila) => filtro === "todas" || fila.red === filtro), orden);
+    const porRed = ordenarPublicaciones(publicaciones.filter((fila) =>
+      (filtro === "todas" || fila.red === filtro) && (tema === null || nombraRubro(fila.post.titulo, tema))), orden);
     return q === "" ? porRed : filtrarPorTexto(porRed, { instagram: textosInstagram.data, tiktok: textosTikTok.data, facebook: textosFacebook.data }, q);
-  }, [publicaciones, filtro, q, orden, textosInstagram.data, textosTikTok.data, textosFacebook.data]);
-  // «Resumen con IA», plegado y primero en la pestana TikTok, con los videos
-  // debajo (23 de septiembre de 2026). Cuenta lo mismo que la ruta: videos
-  // con pie y con URL canonica. Debajo del piso no hay resumen ni peticion;
-  // los videos siguen ahi, asi que no hay hueco que rotular. Nunca en la
-  // busqueda por texto.
-  const resumible = filtro === "tiktok" && analisis && q === "" && tiktok.data?.generado !== undefined
-    && filas.filter((fila) => fila.url !== null && fila.post.titulo.trim() !== "").length >= MINIMO_VIDEOS_RESUMEN;
+  }, [publicaciones, filtro, q, orden, tema, textosInstagram.data, textosTikTok.data, textosFacebook.data]);
+  // «Guion para locución», primero en la pestana TikTok, con los videos
+  // debajo (24 de septiembre de 2026; reemplazo al «Resumen con IA» del 23).
+  // No depende del lugar ni del tema: un programa del canal lee el archivo
+  // entero (lib/analisis/guion-tiktok.ts). Nunca en la busqueda por texto, y
+  // nada se pide hasta pulsar un programa.
+  const resumible = filtro === "tiktok" && analisis && q === "" && tiktok.data?.generado !== undefined;
   const resumen = resumible
-    ? (irA: (clave: string) => boolean) => <ResumenTikTokBloque zona={zona} cubeta={cubeta} generado={tiktok.data!.generado} irA={irA} />
+    ? (irA: (clave: string) => boolean) => <GuionTikTokBloque generado={tiktok.data!.generado} irA={irA} />
     : undefined;
   const cortes: Cortes = { instagram: instagram.data?.generado, tiktok: tiktok.data?.generado, youtube: youtube.data?.generado, facebook: facebook.data?.generado };
   // `cosecha_comentarios` ausente se lee como true: un corte anterior al 18 de
@@ -126,11 +130,16 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis
       {/* El estado se dice pero no ocupa lugar: la caja es la pantalla y una
           linea encima encogeria las tarjetas. */}
       {estados.map((estado) => <p key={estado} role="status" className="sr-only">{estado}</p>)}
-      <RecorridoPublicaciones key={`${filtro}:${q}:${filas.map((fila) => fila.clave).join("|")}`} publicaciones={filas} cortes={cortes} cargando={cargando} textos={textos} conComentarios={conComentarios} analisis={analisis}
-        sinFilas={q === "" ? undefined : SIN_FILAS_BUSQUEDA(q)} resumen={resumen} />
+      <RecorridoPublicaciones key={`${filtro}:${q}:${tema ?? ""}:${filas.map((fila) => fila.clave).join("|")}`} publicaciones={filas} cortes={cortes} cargando={cargando} textos={textos} conComentarios={conComentarios} analisis={analisis}
+        sinFilas={q !== "" ? SIN_FILAS_BUSQUEDA(q) : tema !== null ? sinFilasTema(tema) : undefined} resumen={resumen} />
     </>
   );
 }
+
+/** Con tema, el vacio es medido: se leyeron los titulos y ninguno nombra el
+ *  rubro. No es el hueco de SIN_FILAS, y decirlo asi seria falso. */
+const sinFilasTema = (tema: Rubro) =>
+  `Ninguna publicación de esta selección habla de ${TITULO_RUBRO[tema].toLowerCase()}.`;
 
 /** Las redes cuya tarjeta siguiente se monta por adelantado. YouTube NO: su
  *  iframe se reproduce solo y no tiene aqui canal para pausarlo, asi que
@@ -163,11 +172,11 @@ export function RecorridoPublicaciones({ publicaciones, cortes, cargando, textos
    *  las publicaciones se corren una; el contador «n de total» sigue contando
    *  solo publicaciones. */
   cabecera?: ReactNode;
-  /** El resumen de la pestana TikTok (paneles/resumen-tiktok.tsx): tambien
-   *  el indice 0, pero del alto de su CONTENIDO y no de la caja
-   *  (`.resumen-recorrido`), para que el primer video asome en la misma
-   *  pantalla. Recibe `irA`, que lleva el recorrido a la tarjeta de una
-   *  `clave`: cada fuente del resumen lleva a su video. Se pasa uno u otro,
+  /** El guion de la pestana TikTok (paneles/guion-tiktok.tsx; hasta el 24 de
+   *  septiembre de 2026, el resumen): tambien el indice 0, pero del alto de
+   *  su CONTENIDO y no de la caja (`.resumen-recorrido`), para que el primer
+   *  video asome en la misma pantalla. Recibe `irA`, que lleva el recorrido a
+   *  la tarjeta de una `clave`: el video de cada clip lleva a su tarjeta. Se pasa uno u otro,
    *  nunca los dos; si llegaran ambos, gana `cabecera`. */
   resumen?: (irA: (clave: string) => boolean) => ReactNode;
   /** Si la banda dice el lugar («sobre Tijuana»). La consulta por termino lo

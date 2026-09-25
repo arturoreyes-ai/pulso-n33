@@ -31,8 +31,8 @@ const nextConfig: NextConfig = {
       "./public/data/redes-comentarios.json",
       "./public/data/tiktok-comentarios.json",
     ],
-    // El resumen de la pestana TikTok lee solo los pies: nada de comentarios.
-    "/api/resumen-tiktok": ["./public/data/tiktok.json"],
+    // El guion de la pestana TikTok lee solo los pies: nada de comentarios.
+    "/api/guion-tiktok": ["./public/data/tiktok.json"],
     // Las tres rutas que cruzan un titular en vivo contra el archivo
     // (lib/busqueda/archivo.ts). Sin esto la miniatura y el enlace del propio
     // medio salen null en toda fila y la hoja de relacionadas dice que no se

@@ -30,3 +30,18 @@ export function analisisHabilitado(): boolean {
  * no un detalle de implementacion.
  */
 export const MODELO_ANALISIS = "claude-haiku-4-5-20251001";
+
+/**
+ * El modelo del guion de locucion (lib/analisis/guion-tiktok.ts), aparte de
+ * las fichas desde el 24 de septiembre de 2026. El guion se dice al aire y es
+ * escritura, no lectura, asi que el cliente puede querer otro modelo solo para
+ * el; separado, cambiarlo no mueve el costo de ninguna otra ruta. Igual que
+ * MODELO_ANALISIS, probar-analisis.cjs lo fija.
+ *
+ * Sonnet 5 desde el mismo dia, por decision del cliente, despues de comparar
+ * los dos modelos dos veces sobre el mismo tiktok.json: Haiku 4.5 le
+ * acredito a Latinus un video de @elheraldodemexico; Sonnet 5 atribuyo bien
+ * todos los clips. Cuesta ~$0.017 por guion contra ~$0.005, unos $4 al mes en
+ * el peor caso (dos programas, cuatro ciclos al dia).
+ */
+export const MODELO_GUION = "claude-sonnet-5";

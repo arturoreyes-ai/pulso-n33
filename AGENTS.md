@@ -1325,51 +1325,84 @@ already refused on the record in `docs/PLAN.md` §3.
   one post, ~37,000 for a whole run. **Prompt caching is not a lever here** —
   Haiku 4.5 needs a 4,096-token prefix and ours is ~1,000, so it silently never
   caches.
-- **`/api/resumen-tiktok` is the one model reading that is NOT a button**, by
-  client decision on 23 September 2026, and the exception is narrow on purpose.
-  The client sent TikTok's own search-page «Resumen con IA» and asked for it on
-  the Mundo, México and Tijuana searches. That summary cannot be fetched (the
-  actor has no such field, it lives on the app's search page) and must not be:
-  it is another company's model summarising article bodies, outside
-  `reglas.ts`, the same reason `aiVideoSummary` stays unpublished. So ours reads
-  **only `[n] @creador · titulo`** of the TikTok tab's selection, most-liked
-  first: no counts, no comments, no subtitles. It
-  loads by itself when the TikTok tab opens (`paneles/resumen-tiktok.tsx`),
-  still never from the cron, cached six hours per place, ámbito and `generado`, and
-  SWR keeps it for the tab so a reorder does not re-ask; `shouldRetryOnError:
-  false` because a retry is an unrequested paid call. About 2,000 input and 600
-  output tokens, half a cent at Haiku 4.5's $1/$5 per MTok. Under
-  `MINIMO_VIDEOS_RESUMEN` (5) there is no card and no request. **Every point
-  must cite a video the model was given**: the server drops out-of-range
-  numbers, then uncited points and empty sections, and answers `modelo` if
-  nothing is left; `reglas.ts` runs over everything the model wrote *before*
-  that pruning. The prompt forbids adding facts from outside the captions and
-  presenting a caption's claim as verified, because many Mundo captions are
-  bait from arbitrary creators. Needs `./public/data/tiktok.json` in
-  `outputFileTracingIncludes`. Do not widen it to the other tabs or to comment
-  text without the client asking: each is a new decision, not a refactor.
-  **It is collapsed, in the flow, TikTok's pattern, and it shows no caveat**,
-  all by client decision later that same day («la prioridad son los
-  TikToks», then a screenshot of TikTok's search page). It is the reader's
-  index 0 but sized to its CONTENT (`RecorridoPublicaciones`' `resumen`,
-  `.resumen-recorrido` in globals.css), not a full-screen card: place,
-  «Resumen con IA de…», the whole `entrada`, then the first topic fading out
-  under `.pliegue-resumen` and «Ver más», with the first video peeking below
-  on the same screen, mounted and paused by `PRECARGA`. «Ver más» expands in
-  place and pushes the videos, like TikTok; what sits under the fold is
-  `inert` so Tab cannot land on a clipped chip. Two shapes came before it the
-  same day and lost: a full-screen first card (the first video a whole swipe
-  away) and a one-line strip above the box with the rest floating over the
-  videos (a mechanism of its own for what the page flow already does). The page's
-  `SALVEDAD_FIJA` and the model's `salvedad` are both off the screen; the
-  model still writes `salvedad`, `reglas.ts` still checks it, the response
-  still carries it. That thins what the section on the missing footer calls
-  the whole of the on-screen rules, and it is written down here as the
-  client's call, not as a precedent: what is left saying what this is, is
-  «Generado con IA» and the attributive wording the prompt forces on every
-  bullet («un video dice…»).
+- **`/api/guion-tiktok` writes a newscaster's script, per programme, behind a
+  button** (client, 24 September 2026). It replaced `/api/resumen-tiktok`,
+  which for one day (23–24 September) was the only model reading that loaded
+  by itself; that exception is gone, and every model reading is a button
+  again. The client sent the channel's lineup and the edit-hour extraction
+  rules, and the card (`paneles/guion-tiktok.tsx`) has one button per
+  programme (`PROGRAMAS_GUION`):
+  - **Noticias 33**: exactly five clips, one per axis (garitas, información de
+    Tijuana, mañanera de la presidenta, información de California) and a fifth
+    «libre», the most newsworthy unused candidate of any axis.
+  - **De Red en Red**: one clip per espectáculos topic developed, up to six,
+    one video each.
+  **It is a script, not a summary** (second version, same day: the first
+  asked for a headline and «two to four sentences» per clip, and the client
+  rightly called that a summary; the prompt had set the shape, not the
+  model). The schema demands `apertura`, then per clip `entrada` (said to
+  camera before it), `pase` (the hand-off line, never describing the video),
+  the clip marker and `salida` (after it), then `cierre`; the card sets what
+  is said in reading type and the directions in meta type, and «Copiar guion»
+  copies it with bracketed directions. What the model reads is still **only
+  `[n] @creador · titulo`**: no counts, comments or subtitles, so what the
+  script adds is structure and broadcast craft, never data. Rules that look
+  arbitrary:
+  - **The code picks the candidates, the model only chooses and writes.**
+    Garitas, mañanera and California by title terms (`TERMINOS_*` in
+    `lib/analisis/guion-tiktok.ts`, through `tema-publicacion.ts::nombraAlguno`;
+    these are the three rubros the client took off the tab row that day),
+    Tijuana by the video's zone, California also by the San Diego zone,
+    espectáculos by the rubro. Six candidates per axis, twelve for
+    espectáculos, most-liked first, over the **whole** `tiktok.json` and not
+    the tab's place: a programme's axes do not change with the page it is
+    asked from.
+  - **An axis with no candidate is said, never filled** (`faltantes`, printed
+    «Sin videos hoy: Garitas»). Filling it from another axis would break the
+    client's rule in a worse way. An axis that HAD candidates but got no valid
+    clip, a clip citing a video outside its axis's list, a repeated libre, or
+    a missing fifth when unused candidates remain: all answer `modelo`, not a
+    shorter script.
+  - `reglas.ts` runs over every eje, titular and guion the model wrote, before
+    pruning: this text is said on air.
+  - Cached six hours per programme and `generado`; SWR keeps it per programme
+    so switching between the two does not re-pay, and `shouldRetryOnError:
+    false`. Needs `./public/data/tiktok.json` in `outputFileTracingIncludes`.
+  - «Copiar guion» puts the whole script, with each video's URL, on the
+    clipboard for the editing team.
+  - **`MODELO_GUION` is Sonnet 5**, its own constant in `config.ts`, pinned
+    by the test like `MODELO_ANALISIS`, so it moves no other route's cost
+    (client's call, 24 September 2026). Measured side by side twice on the
+    same `tiktok.json`: Haiku 4.5 ~$0.005 and 7–9 s, Sonnet 5 ~$0.017–0.020
+    and 12–16 s (more input tokens for the same text, plus 200–400 thinking
+    tokens). With the tightened prompt Haiku credited a @elheraldodemexico
+    video to «Latinus»; Sonnet 5 attributed every clip. **Generation-5 models
+    think by default**: at the first attempt Sonnet 5 spent 3,998 of 4,000
+    output tokens thinking and came back truncated, so non-Haiku models get
+    `effort: "low"` and 12,000 tokens (`sinEsfuerzo`); Haiku 4.5 rejects
+    `effort`.
+  - **Two checks in code, because the prompt did not hold**
+    (`guionFalsea`, answering `reglas`). A clip that says «mañanera» or
+    «conferencia» when its video's caption does not; and a clip that names
+    the account of ANOTHER video in the list (whole handle, or a part of five
+    letters or more that is not a common word or a demonym: «tijuanense» from
+    @el_tijuanense_bc rejected a clean clip until the demonyms joined
+    `PARTES_COMUNES`). Replayed over the four real outputs of that day, they
+    reject exactly the three wrong clips and nothing else.
+  - **The mañanera axis is `presidenta` to the model** (`EJE_MODELO`): with
+    the key `mananera` Sonnet 5 wrote «En la mañanera…» over a state-visit
+    caption in both runs, prompt rule or not. The screen still says
+    «Mañanera de la presidenta».
+  - The axes trust the pipeline's zone, so a zoning error reaches the anchor:
+    on 24 September a @unotv video about Mixcoac (CDMX) sat in «Información
+    de Tijuana» with `alcance: zona`.
+  Measured on the first real run that day: Tijuana, mañanera, California and a
+  Tijuana libre, garitas «sin videos». The mañanera axis matches «presidenta»
+  and «Palacio Nacional», so a state visit counts; tighten `TERMINOS_MANANERA`
+  if the client wants the conference only, knowing the axis will then be empty
+  most days.
 - **The sampling caveat is the page's, never the model's**, in both redes
-  routes (the TikTok summary prints none, by client decision; see above). The case: the prompt asked the model to say "this is not what a city
+  routes (the TikTok guion prints none, as the summary it replaced; see above). The case: the prompt asked the model to say "this is not what a city
   thinks", and to say that correctly it has to *name* what `reglas.ts` forbids —
   «la opinión pública», «la mayoría», «la gente» — so the validator rejected the
   whole reading and the reader just saw "No se pudo hacer la lectura". Four of
@@ -1486,8 +1519,12 @@ Tailwind v4, pnpm.
   client asked that the UI stop explaining itself, so the «Acerca de» dialog
   went and took each page's entrada prose with it, and `chrome/pie.tsx` was
   deleted the same day (see below), a row of tabs in the
-  style of X's trending page (`paneles/lector-redes.tsx`: Todas · Instagram ·
-  TikTok · YouTube · X, `aria-pressed` buttons, a 2 px `chart-1` underline,
+  style of X's trending page (`paneles/lector-redes.tsx`: Todas · TikTok ·
+  Instagram · Facebook · YouTube · X, ordered by what each network brings,
+  measured 24 September 2026, except Facebook ahead of YouTube by the client's
+  call that day; X last because it is trends and not posts;
+  `ORDEN_RED` in `publicaciones.ts` breaks «Todas» ties in the same order;
+  `aria-pressed` buttons, a 2 px `chart-1` underline,
   one mounted at a time with SWR preload on hover), and a box below. The
   first three tabs are `paneles/visor-redes.tsx`: one embedded post per
   screen, mandatory snap inside the box, one media playing, heights frozen
@@ -1510,7 +1547,19 @@ Tailwind v4, pnpm.
   archives every one of those fields. In their place the chip row carries
   **Analizar** (`paneles/analisis-publicacion.tsx`), whose sheet is hoisted to
   `Recorrido` beside the comments one — a `<dialog>` per card would be 98 of
-  them. **The visor reads most popular first** since 23 September 2026 (client),
+  them. **A second tab row, Tema, sits under the platforms** since 24 September 2026
+  (client): Todo plus the eight rubros of En Tendencia, hidden on X, state in
+  module memory like the order. There a rubro is a live search; here it keeps
+  the harvested posts whose **title** names one of the rubro's terms
+  (`lib/busqueda/tema-publicacion.ts`: whole words, case-sensitive acronyms,
+  plurals, a phrase also as a joined hashtag, plus a short caption-only list
+  `DEL_PIE` kept out of `rubros.ts` so the portada's queries don't move). It
+  claims what the list says and no more; no model, no classifier. The TikTok
+  guion does not depend on the theme or the place (see `/api/guion-tiktok`).
+  Measured over 303 posts that day:
+  Seguridad 34, Clima 19, Política 16, the rest 0–8 per network, so an empty
+  theme is common, and its message says the titles were read (not «hueco»).
+  **The visor reads most popular first** since 23 September 2026 (client),
   with a «Más recientes» `aria-pressed` toggle in the bar on every tab but X,
   whose order is X's own ranking. `ordenarPublicaciones` ranks each post
   **within its network** by `compararPorMerito` and interleaves networks by
@@ -1518,9 +1567,9 @@ Tailwind v4, pnpm.
   sorting the raw number would bury the corridor under TikTok on «Todas».
   It sorts after `seleccionarPublicaciones`, which still returns file order,
   and `reunirPublicaciones` still returns newest-first for search mode. The
-  TikTok tab opens on the **«Resumen con IA»**, collapsed and content-sized,
-  with the first video below it (see `/api/resumen-tiktok` above); its source
-  chips jump to their card through `resumen`'s `irA`.
+  TikTok tab opens on the **«Guion para locución»** card, content-sized, with
+  the first video below it (see `/api/guion-tiktok` above); each clip's video
+  chip jumps to its card through `resumen`'s `irA`.
   YouTube and X are the same
   box without snap (`.hoja-lector`); X is trends, not comments
   (`paneles/tendencias.tsx`), in X's row grammar with the #1 trend of each

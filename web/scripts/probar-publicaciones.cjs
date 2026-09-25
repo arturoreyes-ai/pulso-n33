@@ -236,8 +236,11 @@ const todas = [fila('instagram', 'i1', { likes: 30 }), fila('instagram', 'i2', {
                fila('tiktok', '1', { likes: 90000 }), fila('tiktok', '2', { likes: 80000 }),
                fila('youtube', 'yyyyyyyyyyy', { likes: undefined, reproducciones: 400 })];
 assert.deepEqual(ordenarPublicaciones(todas, 'populares').map((f) => f.red),
-  ['instagram', 'tiktok', 'youtube', 'instagram', 'tiktok'], 'el primero de cada red, luego el segundo');
-assert.deepEqual(ordenarPublicaciones(todas, 'populares').slice(0, 2).map((f) => f.post.likes), [30, 90000]);
+  ['tiktok', 'instagram', 'youtube', 'tiktok', 'instagram'], 'el primero de cada red, luego el segundo');
+// El segundo de TikTok (80,000) va DETRAS del primero de Instagram (30): el
+// puesto manda, no la cifra. El empate entre redes lo decide ORDEN_RED, que
+// desde el 24 de septiembre de 2026 pone TikTok primero, como las pestanas.
+assert.deepEqual(ordenarPublicaciones(todas, 'populares').slice(0, 4).map((f) => f.post.likes), [90000, 30, undefined, 80000]);
 // Ordena una copia: `filas` sale de un useMemo que otros leen.
 const antesOrden = JSON.stringify(todas);
 ordenarPublicaciones(todas, 'populares');

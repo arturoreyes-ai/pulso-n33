@@ -772,21 +772,12 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
    (`overflow-anchor: none` arriba cierra la otra via, el anclaje de scroll.) */
 .recorrido-lector .sin-ajuste { scroll-snap-align: none; scroll-snap-stop: normal; }
 
-/* El resumen de la pestana TikTok: el primer punto de ajuste, del alto de su
+/* El guion de la pestana TikTok: el primer punto de ajuste, del alto de su
    CONTENIDO y no de la caja, para que el primer video asome debajo en la
-   misma pantalla, como en la busqueda de TikTok. Desplegado puede medir mas
-   que la caja, y entonces se recorre por dentro como la ficha de un termino. */
+   misma pantalla. Con un guion abierto mide mas que la caja, y entonces se
+   recorre por dentro como la ficha de un termino. La clase conserva el nombre
+   del resumen al que reemplazo el 24 de septiembre de 2026. */
 .resumen-recorrido { scroll-snap-align: start; scroll-snap-stop: always; }
-/* El pliegue: lo que sigue a la entrada, recortado y desvanecido hacia abajo.
-   Dos renglones y medio de lectura, que es lo que deja ver el titulo del
-   primer asunto y el arranque de su primera vineta, y nada mas. Mascara y no
-   un degradado encima: el fondo del recorrido no es un color que se pueda
-   repetir en una capa sin que se note el borde. */
-.pliegue-resumen {
-  max-height: 5.5rem;
-  overflow: hidden;
-  mask-image: linear-gradient(to bottom, black 25%, transparent);
-}
 
 /* La reserva es el alto que NO puede ocupar el medio: la banda del titular.
    Subio de 12.5rem el 17 de septiembre de 2026 al entrar «Analizar»: con tres

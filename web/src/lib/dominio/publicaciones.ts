@@ -91,7 +91,7 @@ export const CUBETAS: { id: CubetaRegion; nombre: string }[] = (
 export type DocsRedes = Partial<Record<RedVisual, DocRedes | undefined>>;
 
 /** El orden en que se recorren las redes, el mismo de `ORDEN_RED`. */
-const REDES_VISOR: readonly RedVisual[] = ["instagram", "tiktok", "youtube", "facebook"];
+const REDES_VISOR: readonly RedVisual[] = ["tiktok", "instagram", "facebook", "youtube"];
 
 /** La union de las plataformas. El visor del lector las recorre juntas,
  *  asi que una cubeta que solo tiene filas en TikTok tambien se ofrece:
@@ -323,8 +323,10 @@ export function reunirPublicaciones(docs: DocsRedes, zona: string | null, cubeta
  */
 export type OrdenLectura = "populares" | "recientes";
 
-/** El orden en que se reparten los empates de puesto entre redes. */
-const ORDEN_RED: Record<RedVisual, number> = { instagram: 0, tiktok: 1, youtube: 2, facebook: 3 };
+/** El orden en que se reparten los empates de puesto entre redes: el de las
+ *  pestanas (paneles/lector-redes.tsx), por lo que cada red trae. En «Todas»
+ *  el primero de cada red va TikTok, Instagram, Facebook, YouTube. */
+const ORDEN_RED: Record<RedVisual, number> = { tiktok: 0, instagram: 1, facebook: 2, youtube: 3 };
 
 /**
  * Las mismas filas, en el orden elegido. Ordena una COPIA: `filas` puede venir

@@ -15,6 +15,7 @@ import { ruta } from "@/lib/dominio/secciones";
 import { NOMBRE_CORTO, NOMBRE_TODA_REGION, ZONAS_RUTA, type ZonaRuta } from "@/lib/dominio/zonas";
 import { CUBETAS, cubetasDisponibles, rotuloRegion, type CubetaRegion, type OrdenLectura } from "@/lib/dominio/publicaciones";
 import { useFacebook, useRedes, useTikTok, useYouTube } from "@/lib/datos/hooks";
+import { NOMBRE_RUBRO, RUBROS, type Rubro } from "@/lib/busqueda/rubros";
 import VisorRedes from "./visor-redes";
 
 /**
@@ -64,19 +65,25 @@ import VisorRedes from "./visor-redes";
  */
 
 const PESTANAS = [
-  { id: "todas", nombre: "Todas", datos: [RUTAS.redes, RUTAS.tiktok, RUTAS.youtube, RUTAS.facebook, RUTAS.redesComentarios, RUTAS.tiktokComentarios, RUTAS.facebookComentarios] },
-  { id: "instagram", nombre: "Instagram", datos: [RUTAS.redes, RUTAS.redesComentarios] },
+  { id: "todas", nombre: "Todas", datos: [RUTAS.tiktok, RUTAS.redes, RUTAS.facebook, RUTAS.youtube, RUTAS.tiktokComentarios, RUTAS.redesComentarios, RUTAS.facebookComentarios] },
+  // El orden es el de lo que cada red trae, medido el 24 de septiembre de
+  // 2026: TikTok 80 destacados y 5.9M de vistas, Instagram 78 de 28 cuentas y
+  // todas las zonas. Facebook va antes que YouTube por decision del cliente
+  // ese mismo dia, aunque por volumen quedaba despues (39 destacados de cinco
+  // paginas contra 41 y 656k vistas). X al final porque son tendencias, no
+  // publicaciones. Es el mismo de ORDEN_RED en lib/dominio/publicaciones.ts.
   { id: "tiktok", nombre: "TikTok", datos: [RUTAS.tiktok, RUTAS.tiktokComentarios] },
-  // Hasta el 18 de septiembre de 2026 esta pestana era el panel agregado de
-  // comentarios (conversacion.json), congelado desde el 4 de septiembre porque
-  // el cron no lo refresca. Ahora es un visor como los dos de arriba, con los
-  // Shorts y los videos de los canales del corredor. Sin par de comentarios:
-  // el feed publico no los trae.
-  { id: "youtube", nombre: "YouTube", datos: [RUTAS.youtube] },
+  { id: "instagram", nombre: "Instagram", datos: [RUTAS.redes, RUTAS.redesComentarios] },
   // Las paginas de medios del corredor (config/facebook.json), pedidas por el
   // cliente el 23 de septiembre de 2026. Visor como Instagram, con su par de
   // comentarios.
   { id: "facebook", nombre: "Facebook", datos: [RUTAS.facebook, RUTAS.facebookComentarios] },
+  // Hasta el 18 de septiembre de 2026 esta pestana era el panel agregado de
+  // comentarios (conversacion.json), congelado desde el 4 de septiembre porque
+  // el cron no lo refresca. Ahora es un visor como los de arriba, con los
+  // Shorts y los videos de los canales del corredor. Sin par de comentarios:
+  // el feed publico no los trae.
+  { id: "youtube", nombre: "YouTube", datos: [RUTAS.youtube] },
   { id: "x", nombre: "X", datos: [RUTAS.tendencias] },
 ] as const;
 
@@ -113,6 +120,17 @@ let ultimaCubeta: CubetaRegion = "corredor";
  * que es lo correcto: es otra lectura, no la misma desplazada.
  */
 let ultimoOrden: OrdenLectura = "populares";
+
+/**
+ * El TEMA, la fila de En Tendencia traida a Redes el 24 de septiembre de 2026
+ * (cliente), con la misma memoria de modulo que el orden y por la misma
+ * razon fuera de la URL. Alli un tema es una busqueda en vivo; aqui filtra lo
+ * cosechado por los mismos terminos (lib/busqueda/tema-publicacion.ts). No
+ * aplica a X, que son tendencias y no publicaciones con titulo.
+ */
+let ultimoTema: Rubro | null = null;
+
+const TEMAS: readonly (Rubro | null)[] = [null, ...RUBROS];
 
 /** `null` primero, que es toda la region, y luego las zonas. Local y no
  *  importado de chrome/selector-zona.tsx: ese modulo trae ConteoZona y aqui
@@ -163,6 +181,10 @@ function LectorRedesMedios({ zona, paneles, menu, analisis = false }: PropsLecto
   useEffect(() => {
     ultimoOrden = orden;
   }, [orden]);
+  const [tema, setTema] = useState<Rubro | null>(() => ultimoTema);
+  useEffect(() => {
+    ultimoTema = tema;
+  }, [tema]);
   // Las cubetas solo existen en la vista de region: en una pagina de zona el
   // filtro ES la zona. Si solo una tiene filas, no hay nada que elegir.
   const instagram = useRedes();
@@ -196,7 +218,7 @@ function LectorRedesMedios({ zona, paneles, menu, analisis = false }: PropsLecto
       // septiembre de 2026 a pedido del cliente: los comentarios se leen desde
       // cada tarjeta. X son tendencias y no tiene orden que elegir.
       acciones={pestana === "x" ? null : <BotonOrden orden={orden} onCambiar={setOrden} />}
-      pestanas={
+      pestanas={<>
         <FilaPestanas etiqueta="Plataforma" pestanas={PESTANAS.map((p) => ({
           id: p.id,
           nombre: p.nombre,
@@ -208,13 +230,23 @@ function LectorRedesMedios({ zona, paneles, menu, analisis = false }: PropsLecto
           // overlay de desarrollo ni ensuciar la consola.
           onCalentar: () => { for (const archivo of p.datos) void preload(archivo, leerJson).catch(() => undefined); },
         }))} />
-      }>
+        {/* La misma fila que la portada, debajo de la de plataformas: dos
+            ejes que se componen, como lugar y tema alla. */}
+        {pestana === "x" ? null : (
+          <FilaPestanas etiqueta="Tema" pestanas={TEMAS.map((t) => ({
+            id: t ?? "todo",
+            nombre: t === null ? "Todo" : NOMBRE_RUBRO[t],
+            activa: t === tema,
+            onElegir: () => setTema(t),
+          }))} />
+        )}
+      </>}>
       {/* X sigue siendo una hoja de prosa: son tendencias, no publicaciones
           que se puedan recorrer una por pantalla. Las otras cinco caen en el
           visor. */}
       {pestana === "x"
         ? <div className="hoja-lector"><div className="mx-auto w-full max-w-[88rem] px-4 py-8 md:px-8">{paneles[pestana]}</div></div>
-        : <VisorRedes key={`${zona ?? "region"}:${activa}`} zona={zona} filtro={pestana} cubeta={activa} analisis={analisis} orden={orden} />}
+        : <VisorRedes key={`${zona ?? "region"}:${activa}`} zona={zona} filtro={pestana} cubeta={activa} analisis={analisis} orden={orden} tema={tema} />}
     </Lector>
   );
 }

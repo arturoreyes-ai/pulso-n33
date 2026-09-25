@@ -1,6 +1,6 @@
 import { leerDatoPublicado, type LeerDatos } from "@/lib/datos/publicado";
 import type { ComentarioPublicado, Destacado, DocRedes, DocRedesComentarios } from "@/lib/datos/tipos";
-import { canonizarPublicacion, fuenteDePublicacion, nombresDeCuentas, seleccionarPublicaciones, type CubetaRegion } from "@/lib/dominio/publicaciones";
+import { canonizarPublicacion, fuenteDePublicacion, nombresDeCuentas } from "@/lib/dominio/publicaciones";
 import type { RedAnalizable } from "./contrato-publicacion";
 
 /**
@@ -83,39 +83,39 @@ export async function ubicarPublicacion(
   };
 }
 
-export interface VideoResumible {
+export interface VideoGuion {
   /** Canonica: la llave con la que el visor arma `clave`. */
   url: string;
   fuente: string;
   titulo: string;
+  zona: string;
 }
 
 /**
- * Los videos de TikTok que el resumen lee: la MISMA seleccion que pinta el
- * visor en la pestana TikTok, por lo mismo que `reunirConversacion`. En TikTok
- * `seleccionarPublicaciones` corta en el orden del archivo, que el pipeline ya
- * escribe por likes, asi que salen del mas popular al menos sin reordenar.
+ * Los videos de TikTok que el guion de locucion lee: el ARCHIVO ENTERO, no la
+ * seleccion de un lugar. Un programa del canal no cambia de ejes segun la
+ * pantalla desde la que se pida: Noticias 33 lleva California y la mañanera
+ * aunque se pulse desde /tecate/redes. Del mas popular al menos, por likes y
+ * luego por URL para que el orden no dependa del archivo.
  *
- * Solo `tiktok.json`: el resumen no lee comentarios. Lo que el modelo ve es el
- * pie y el creador de cada video, que es lo que la tarjeta ya muestra.
- * Un pie vacio no aporta nada que resumir y se salta; un video sin URL
- * canonica no se podria citar y se salta tambien.
+ * Solo `tiktok.json`: el guion no lee comentarios. Un pie vacio no aporta
+ * nada que decir y se salta; un video sin URL canonica no se podria citar.
+ * Una URL repetida (la misma nota por dos busquedas) entra una vez.
  */
-export async function reunirVideosTikTok(
-  zona: string | null,
-  cubeta: CubetaRegion,
-  leer: LeerDatos,
-): Promise<VideoResumible[] | "sin-datos"> {
+export async function videosTikTokParaGuion(leer: LeerDatos): Promise<VideoGuion[] | "sin-datos"> {
   const crudo = await leer(ARCHIVOS.tiktok.datos);
   if (crudo === null || typeof crudo !== "object") return "sin-datos";
   const datos = crudo as DocRedes;
   const nombres = nombresDeCuentas(datos);
-  const salida: VideoResumible[] = [];
-  for (const post of seleccionarPublicaciones(datos, zona, "tiktok", cubeta)) {
+  const vistos = new Set<string>();
+  const posts = [...(datos.destacados ?? [])].sort((a, b) => (b.likes ?? 0) - (a.likes ?? 0) || a.url.localeCompare(b.url));
+  const salida: VideoGuion[] = [];
+  for (const post of posts) {
     const url = canonizarPublicacion(post.url, "tiktok");
     const titulo = (post.titulo ?? "").trim();
-    if (url === null || titulo === "") continue;
-    salida.push({ url, titulo, fuente: fuenteDePublicacion(post, "tiktok", nombres) });
+    if (url === null || titulo === "" || vistos.has(url)) continue;
+    vistos.add(url);
+    salida.push({ url, titulo, fuente: fuenteDePublicacion(post, "tiktok", nombres), zona: post.zona });
   }
   return salida;
 }
