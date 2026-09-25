@@ -158,6 +158,27 @@ export function hace(iso: string, corte: string): string {
   return texto === "0 h" ? "menos de 1 h" : texto;
 }
 
+/** Horas que una cosecha puede quedarse atras de la ultima corrida.
+ *  Igual que pulso/validador.py::FRESCURA_HORAS: dos corridas seguidas. */
+export const FRESCURA_HORAS = 12;
+
+/**
+ * Si el corte de una red sirve para decir «hace 3 h». Solo si no se quedo mas
+ * de FRESCURA_HORAS atras de la ultima corrida (`estado.json.generado`).
+ *
+ * EL CASO, 25 de septiembre de 2026: con las cosechas pagadas apagadas desde
+ * el jueves, un TikTok de las 10 am del jueves decia «hace 2 h» el viernes,
+ * porque `hace` mide contra el corte, y el corte era del jueves. Se compara
+ * contra la corrida y no contra el reloj por la misma razon que `hace`:
+ * servidor y cliente pintan lo mismo. Sin hora de corrida, se conserva el
+ * comportamiento de siempre.
+ */
+export function corteVigente(corte: string, ultimaCorrida: string | undefined): boolean {
+  if (ultimaCorrida === undefined) return true;
+  const atraso = new Date(ultimaCorrida).getTime() - new Date(corte).getTime();
+  return !(atraso > FRESCURA_HORAS * 3_600_000);
+}
+
 export interface Cuando {
   principal: string;
   edad: string;

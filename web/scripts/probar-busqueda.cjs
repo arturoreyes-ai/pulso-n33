@@ -887,6 +887,17 @@ async function comprobar() {
   const relLargo = await responderRelacionadas({ t: 'x'.repeat(301) }, conArchivo(ARCHIVO_REL));
   assert.equal(relLargo.status, 400);
 
+  // --- Una cosecha atrasada no dice «hace 2 h» ---------------------------
+  // 25 de septiembre de 2026: TikTok del jueves se leia como de hoy el viernes.
+  const { corteVigente, hace, FRESCURA_HORAS } = cargar('lib/dominio/formato');
+  const CORRIDA = '2026-09-25T23:01:00+00:00';
+  assert.equal(FRESCURA_HORAS, 12, 'igual que pulso/validador.py::FRESCURA_HORAS');
+  assert.equal(corteVigente('2026-09-25T22:58:00+00:00', CORRIDA), true);
+  assert.equal(corteVigente('2026-09-25T11:01:00+00:00', CORRIDA), true, '12 h exactas todavia sirven');
+  assert.equal(corteVigente('2026-09-24T17:49:28+00:00', CORRIDA), false);
+  assert.equal(corteVigente('2026-09-24T17:49:28+00:00', undefined), true, 'sin corrida, como antes');
+  assert.equal(hace('2026-09-24T15:49:28+00:00', '2026-09-24T17:49:28+00:00'), '2 h', 'la cuenta de siempre, contra el corte');
+
   console.log('Búsqueda: parseo, fusión, URLs, /api/actualidad, secciones locales y rubros verificados offline.');
 }
 

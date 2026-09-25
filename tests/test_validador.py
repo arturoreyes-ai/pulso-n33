@@ -661,5 +661,31 @@ class TestIndicadoresRotos(unittest.TestCase):
         self.assertTrue(any("esquema" in e for e in errores))
 
 
+class TestFrescura(unittest.TestCase):
+    """El caso del 24 y 25 de septiembre de 2026: cosechas pagadas apagadas,
+    corridas verdes y redes del jueves en pantalla el viernes."""
+
+    ESTADO = {"generado": "2026-09-25T23:01:00+00:00"}
+
+    def test_avisa_el_panel_atrasado_y_calla_el_fresco(self):
+        from pulso.validador import FRESCURA_HORAS, validar_frescura
+        leidos = {
+            "tiktok": {"generado": "2026-09-24T17:49:28+00:00"},
+            "youtube": {"generado": "2026-09-25T22:58:00+00:00"},
+            "tendencias": {"generado": "2026-09-20T18:56:07+00:00"},
+            "notas": {"generado": "2020-01-01T00:00:00+00:00"},   # no es de cosecha
+        }
+        avisos = validar_frescura(self.ESTADO, leidos)
+        self.assertEqual([a.split(":")[0] for a in avisos], ["tiktok", "tendencias"])
+        self.assertIn("29 h", avisos[0])
+        justo = {"redes": {"generado": "2026-09-25T11:01:00+00:00"}}   # 12 h exactas
+        self.assertEqual(FRESCURA_HORAS, 12)
+        self.assertEqual(validar_frescura(self.ESTADO, justo), [])
+
+    def test_sin_hora_de_corrida_no_avisa(self):
+        from pulso.validador import validar_frescura
+        self.assertEqual(validar_frescura({}, {"tiktok": {"generado": "2026-09-01T00:00:00+00:00"}}), [])
+
+
 if __name__ == "__main__":
     unittest.main()

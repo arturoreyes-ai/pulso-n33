@@ -3,9 +3,9 @@
 import type { ReactNode } from "react";
 import { ArrowSquareOut as Abrir } from "@phosphor-icons/react";
 
-import { useTendencias } from "@/lib/datos/hooks";
+import { useEstado, useTendencias } from "@/lib/datos/hooks";
 import type { DocTendencias, Tendencia, UbicacionTendencias } from "@/lib/datos/tipos";
-import { hora, numero } from "@/lib/dominio/formato";
+import { corteVigente, fechaCorta, hora, numero } from "@/lib/dominio/formato";
 import { NOMBRE_CORTO, rango, type ZonaRuta } from "@/lib/dominio/zonas";
 import { Esqueleto, Hueco } from "@/components/ui/primitivas";
 
@@ -157,6 +157,7 @@ function Lista({
   igualANacional: boolean;
 }) {
   const nombre = titulo(u);
+  const ultimaCorrida = useEstado().data?.generado;
   let cuerpo: ReactNode;
   if (u.estado === "sin_lista") {
     cuerpo = (
@@ -235,7 +236,9 @@ function Lista({
         <span aria-hidden="true" className="h-px flex-1 self-center bg-vela" />
         {u.corte === null ? null : (
           <time dateTime={u.corte} className="tabular-nums">
-            según X, {hora(u.corte)}
+            {/* Solo la hora se leia como de hoy: el 25 de septiembre de 2026
+                decia «según X, 11:56 am» de una lectura del domingo. */}
+            según X, {corteVigente(u.corte, ultimaCorrida) ? hora(u.corte) : `${fechaCorta(u.corte)} · ${hora(u.corte)}`}
           </time>
         )}
       </h3>

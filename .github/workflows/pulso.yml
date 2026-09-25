@@ -67,7 +67,11 @@ jobs:
     # poco. Con 60 tambien murio (Instagram 30 min, TikTok 18+): la cura fue
     # pedir a Apify en paralelo (pulso/apify.py::en_paralelo). Los 60 quedan
     # de holgura, no de presupuesto.
-    timeout-minutes: 60
+    #
+    # 75 desde el 25 de septiembre de 2026, y no para gastar mas: cada cosecha
+    # pagada tiene ya su propio tope (ver abajo), y este tiene que quedar por
+    # encima de su suma para que nunca sea el que dispare.
+    timeout-minutes: 75
     permissions:
       contents: write
     outputs:
@@ -143,6 +147,9 @@ jobs:
       - name: Comunicados del Ayuntamiento de Tecate
         run: python -m pulso comunicados ${{ inputs.sin_red && '--sin-red' || '' }}
 
+      # Va antes que todos los caches de redes: restaura cache/ entero, y
+      # despues de uno mas especifico (cache/youtube) lo pisaria con una
+      # copia vieja.
       # El cache de comentarios NO puede ir a git (retencion de 30 dias, ver
       # pulso/conversacion.py), pero sin persistirlo entre corridas la ventana de
       # 30 dias no existiria: cada corrida derivaria solo de si misma.
@@ -160,102 +167,11 @@ jobs:
       # dias y no entra a git); a data/ solo llegan conteos por zona y tema.
       - name: Conversación (API de YouTube)
         if: vars.YOUTUBE_HABILITADO == 'true'
+        timeout-minutes: 10
+        continue-on-error: true
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: python -m pulso conversacion --sentimiento modelo
-
-      # Apify (redes sociales). Este paso verifica el token y el catalogo
-      # antes de que Instagram, TikTok y X, mas abajo, gasten credito: un token
-      # caducado falla con 401 a media cosecha, seis horas despues y sin
-      # nadie mirando. Aqui falla en el paso que lleva su nombre. Es una
-      # llamada, sin costo. El catalogo trae los actores en `activo: false`
-      # a proposito: no es el interruptor (cada modulo fija su actor), es el
-      # registro que la guardia de sesion revisa (pulso/apify.py, docs/PLAN.md
-      # seccion 3).
-      - name: Apify — token y catálogo
-        if: vars.APIFY_HABILITADO == 'true'
-        env:
-          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
-        run: python -m pulso apify --verificar
-
-      # cache/instagram guarda dos cosas que NO pueden ir a git: el texto
-      # crudo (30 dias, LFPDPPP y CPRA) y vistos.json, el registro de posts
-      # ya cosechados. Sin persistir el segundo, el freno de costo no existe:
-      # cada corrida volveria a pagarle a Apify por los comentarios de los
-      # mismos posts, y el deduplicado del cache lo escondería -- los conteos
-      # saldrian bien y la factura saldria mal.
-      - name: Restaurar el cache de Instagram
-        if: vars.APIFY_HABILITADO == 'true'
-        uses: actions/cache@v4
-        with:
-          path: cache/instagram
-          key: instagram-${{ github.run_id }}
-          restore-keys: instagram-
-
-      # Solo cosecha las cuentas con "verificado": true en
-      # config/instagram.json (diez sondeadas el 8 de septiembre de 2026 y
-      # tres el 10, pedidas por el cliente; ventana de 24 horas desde ese dia).
-      # Ver el aviso en ese archivo: un handle derivado del nombre del medio
-      # da una cuenta ajena o vacia, y las dos se cobran igual.
-      #
-      # Escribe dos cosas, las dos en data/: redes.json (conteos y posts
-      # destacados, va a git) y redes-comentarios.json (el TEXTO de los
-      # comentarios, que NO va a git: .gitignore lo excluye por nombre con
-      # data/*-comentarios.json, asi que el `git add data/` de mas abajo no lo
-      # toca). El segundo sale del cache restaurado arriba y llega al sitio
-      # con el resto de data/. Hasta el 17 de septiembre de 2026 vivia en
-      # efimero/, una carpeta aparte.
-      - name: Redes (Instagram)
-        if: vars.APIFY_HABILITADO == 'true'
-        env:
-          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
-        run: python -m pulso redes --sentimiento modelo
-
-      # cache/tiktok: mismo papel que cache/instagram (texto crudo 30 dias +
-      # vistos.json, el freno de costo). El actor de comentarios de TikTok
-      # cobra diez veces el de videos, asi que aqui el freno pesa mas.
-      - name: Restaurar el cache de TikTok
-        if: vars.APIFY_HABILITADO == 'true'
-        uses: actions/cache@v4
-        with:
-          path: cache/tiktok
-          key: tiktok-${{ github.run_id }}
-          restore-keys: tiktok-
-
-      # BUSQUEDAS (ultimas 24 horas), no cuentas: la zona de cada video sale
-      # de su pie con el gacetero, y el @ del creador si se publica (decision
-      # del cliente, 8 sep 2026). Empezo con una sola, "tijuana noticias";
-      # desde el 15 de septiembre de 2026 son once filas, ocho encendidas, y
-      # el `ambito` de cada una decide su residuo. Escribe data/tiktok.json
-      # (git) y data/tiktok-comentarios.json (fuera de git por la regla de
-      # .gitignore; viaja al sitio con el resto de data/).
-      - name: TikTok (búsqueda)
-        if: vars.APIFY_HABILITADO == 'true'
-        env:
-          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
-        run: python -m pulso tiktok --sentimiento modelo
-
-      # cache/facebook: mismo papel que cache/instagram (texto crudo 30 dias +
-      # vistos.json, el freno de costo).
-      - name: Restaurar el cache de Facebook
-        if: vars.APIFY_HABILITADO == 'true'
-        uses: actions/cache@v4
-        with:
-          path: cache/facebook
-          key: facebook-${{ github.run_id }}
-          restore-keys: facebook-
-
-      # Paginas de medios del corredor (config/facebook.json, pedidas por el
-      # cliente el 23 de septiembre de 2026), sin sesion. La zona de cada post
-      # sale de su pie. Escribe data/facebook.json (git) y
-      # data/facebook-comentarios.json (fuera de git por la regla de
-      # .gitignore; viaja al sitio con el resto de data/). Los comentarios se
-      # pagan solo para los posts de mas reacciones de cada pagina.
-      - name: Facebook (páginas)
-        if: vars.APIFY_HABILITADO == 'true'
-        env:
-          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
-        run: python -m pulso facebook --sentimiento modelo
 
       # cache/youtube: aqui NO hay texto crudo ni freno de costo, porque este
       # modulo no cosecha comentarios. Guarda solo publicaciones.json, el
@@ -285,18 +201,6 @@ jobs:
       - name: YouTube (Shorts y videos)
         run: python -m pulso youtube
 
-      # X entra SOLO por tendencias (peticion del cliente, 11 sep 2026): el
-      # actor lee el endpoint de tendencias con un guest token, sin cuenta ni
-      # cookies, y una llamada cubre Tijuana, Mexicali, San Diego, Mexico y
-      # el mundo. Escribe data/tendencias.json: nombre, puesto y liga de cada
-      # tendencia, nunca un tuit ni quien lo escribio. Sin cache: no hay texto
-      # personal que retener ni comentarios que deduplicar.
-      - name: Tendencias (X)
-        if: vars.APIFY_HABILITADO == 'true'
-        env:
-          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
-        run: python -m pulso tendencias
-
       # Vivienda, suelo, crimen y percepcion. Se salta solo si lo que hay
       # tiene menos de una semana: son fuentes trimestrales y mensuales, y
       # bajar 60 MB cada hora seria una groseria sin dato nuevo a cambio.
@@ -310,11 +214,173 @@ jobs:
         if: github.event.schedule == '41 18 * * 1' || inputs.actualizar_gasto_electoral
         run: python -m pulso gasto-electoral
 
+      # LO GRATUITO SE COMMITEA AQUI, antes de pagar nada (25 de septiembre de
+      # 2026). Hasta ese dia el unico commit era el ultimo paso, y del domingo
+      # 21 a las 00:31Z al jueves 24 a las 18:29Z las 22 corridas del cron
+      # murieron por tiempo dentro del paso de TikTok: cada una tenia la prensa
+      # ya recalculada y la tiro con lo demas. Tres dias y medio sin notas por
+      # una cosecha lenta de redes. Ahora la prensa, los comunicados, YouTube y
+      # los indicadores llegan a main pase lo que pase despues.
+      - name: Validar lo gratuito
+        run: python -m pulso validar
+
+      - name: Commit de lo gratuito
+        id: commit_libre
+        run: |
+          git config user.name "pulso-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Mismo git add que el commit final: ver ahi por que
+          # data/*-comentarios.json nunca entra.
+          git add data/
+          if git diff --cached --quiet; then
+            echo "Sin cambios en data/"
+            echo "cambios=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "datos: ingesta $(date -u +'%Y-%m-%d %H:%MZ') [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+            echo "cambios=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Sin esto, apagar las cosechas pagadas no se ve en ningun lado: las
+      # corridas salen verdes y redes se queda en la ultima cosecha. Paso del 24
+      # al 25 de septiembre de 2026, con TikTok, Instagram y Facebook del jueves
+      # en pantalla el viernes y X del domingo. La anotacion sale en el resumen
+      # de la corrida; `pulso validar` avisa ademas la antiguedad de cada panel.
+      - name: Aviso de cosechas pagadas apagadas
+        if: vars.APIFY_HABILITADO != 'true'
+        run: echo "::warning title=Cosechas pagadas apagadas::APIFY_HABILITADO no es 'true'. Instagram, TikTok, Facebook y las tendencias de X no se actualizan en esta corrida."
+
+      # Apify (redes sociales). Este paso verifica el token y el catalogo
+      # antes de que Instagram, TikTok y X, mas abajo, gasten credito: un token
+      # caducado falla con 401 a media cosecha, seis horas despues y sin
+      # nadie mirando. Aqui falla en el paso que lleva su nombre. Es una
+      # llamada, sin costo. El catalogo trae los actores en `activo: false`
+      # a proposito: no es el interruptor (cada modulo fija su actor), es el
+      # registro que la guardia de sesion revisa (pulso/apify.py, docs/PLAN.md
+      # seccion 3).
+      - name: Apify — token y catálogo
+        if: vars.APIFY_HABILITADO == 'true'
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: python -m pulso apify --verificar
+
+      # CADA COSECHA PAGADA TIENE SU TOPE y `continue-on-error` (25 de
+      # septiembre de 2026). Un tope de paso deja correr lo que sigue: los
+      # post-pasos que guardan cache/ (vistos.json, el freno de costo) y el
+      # commit final. El tope del trabajo no: cancela todo, y asi se perdieron
+      # comentarios ya pagados en cada corrida muerta. Por eso la suma de los
+      # topes (45 min) mas lo gratuito (~15) queda bajo los 75 del trabajo: que
+      # siempre dispare primero el del paso.
+      #
+      # cache/instagram guarda dos cosas que NO pueden ir a git: el texto
+      # crudo (30 dias, LFPDPPP y CPRA) y vistos.json, el registro de posts
+      # ya cosechados. Sin persistir el segundo, el freno de costo no existe:
+      # cada corrida volveria a pagarle a Apify por los comentarios de los
+      # mismos posts, y el deduplicado del cache lo escondería -- los conteos
+      # saldrian bien y la factura saldria mal.
+      - name: Restaurar el cache de Instagram
+        if: vars.APIFY_HABILITADO == 'true'
+        uses: actions/cache@v4
+        with:
+          path: cache/instagram
+          key: instagram-${{ github.run_id }}
+          restore-keys: instagram-
+
+      # Solo cosecha las cuentas con "verificado": true en
+      # config/instagram.json (diez sondeadas el 8 de septiembre de 2026 y
+      # tres el 10, pedidas por el cliente; ventana de 24 horas desde ese dia).
+      # Ver el aviso en ese archivo: un handle derivado del nombre del medio
+      # da una cuenta ajena o vacia, y las dos se cobran igual.
+      #
+      # Escribe dos cosas, las dos en data/: redes.json (conteos y posts
+      # destacados, va a git) y redes-comentarios.json (el TEXTO de los
+      # comentarios, que NO va a git: .gitignore lo excluye por nombre con
+      # data/*-comentarios.json, asi que el `git add data/` de mas abajo no lo
+      # toca). El segundo sale del cache restaurado arriba y llega al sitio
+      # con el resto de data/. Hasta el 17 de septiembre de 2026 vivia en
+      # efimero/, una carpeta aparte.
+      - name: Redes (Instagram)
+        if: vars.APIFY_HABILITADO == 'true'
+        timeout-minutes: 15
+        continue-on-error: true
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: python -m pulso redes --sentimiento modelo
+
+      # cache/tiktok: mismo papel que cache/instagram (texto crudo 30 dias +
+      # vistos.json, el freno de costo). El actor de comentarios de TikTok
+      # cobra diez veces el de videos, asi que aqui el freno pesa mas.
+      - name: Restaurar el cache de TikTok
+        if: vars.APIFY_HABILITADO == 'true'
+        uses: actions/cache@v4
+        with:
+          path: cache/tiktok
+          key: tiktok-${{ github.run_id }}
+          restore-keys: tiktok-
+
+      # BUSQUEDAS (ultimas 24 horas), no cuentas: la zona de cada video sale
+      # de su pie con el gacetero, y el @ del creador si se publica (decision
+      # del cliente, 8 sep 2026). Empezo con una sola, "tijuana noticias";
+      # desde el 15 de septiembre de 2026 son once filas, ocho encendidas, y
+      # el `ambito` de cada una decide su residuo. Escribe data/tiktok.json
+      # (git) y data/tiktok-comentarios.json (fuera de git por la regla de
+      # .gitignore; viaja al sitio con el resto de data/).
+      - name: TikTok (búsqueda)
+        if: vars.APIFY_HABILITADO == 'true'
+        timeout-minutes: 15
+        continue-on-error: true
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: python -m pulso tiktok --sentimiento modelo
+
+      # cache/facebook: mismo papel que cache/instagram (texto crudo 30 dias +
+      # vistos.json, el freno de costo).
+      - name: Restaurar el cache de Facebook
+        if: vars.APIFY_HABILITADO == 'true'
+        uses: actions/cache@v4
+        with:
+          path: cache/facebook
+          key: facebook-${{ github.run_id }}
+          restore-keys: facebook-
+
+      # Paginas de medios del corredor (config/facebook.json, pedidas por el
+      # cliente el 23 de septiembre de 2026), sin sesion. La zona de cada post
+      # sale de su pie. Escribe data/facebook.json (git) y
+      # data/facebook-comentarios.json (fuera de git por la regla de
+      # .gitignore; viaja al sitio con el resto de data/). Los comentarios se
+      # pagan solo para los posts de mas reacciones de cada pagina.
+      - name: Facebook (páginas)
+        if: vars.APIFY_HABILITADO == 'true'
+        timeout-minutes: 10
+        continue-on-error: true
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: python -m pulso facebook --sentimiento modelo
+
+      # X entra SOLO por tendencias (peticion del cliente, 11 sep 2026): el
+      # actor lee el endpoint de tendencias con un guest token, sin cuenta ni
+      # cookies, y una llamada cubre Tijuana, Mexicali, San Diego, Mexico y
+      # el mundo. Escribe data/tendencias.json: nombre, puesto y liga de cada
+      # tendencia, nunca un tuit ni quien lo escribio. Sin cache: no hay texto
+      # personal que retener ni comentarios que deduplicar.
+      - name: Tendencias (X)
+        if: vars.APIFY_HABILITADO == 'true'
+        timeout-minutes: 5
+        continue-on-error: true
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: python -m pulso tendencias
+
       - name: Validar lo que acaba de escribir
         run: python -m pulso validar
 
+      # Lo que las cosechas pagadas escribieron. Lo gratuito ya se commiteo
+      # arriba; `cambios` dice si hubo commit en cualquiera de los dos.
       - name: Commit de data/ si cambio
         id: commit
+        env:
+          CAMBIOS_LIBRE: ${{ steps.commit_libre.outputs.cambios }}
         run: |
           git config user.name "pulso-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -327,9 +393,9 @@ jobs:
           git add data/
           if git diff --cached --quiet; then
             echo "Sin cambios en data/"
-            echo "cambios=false" >> "$GITHUB_OUTPUT"
+            echo "cambios=${CAMBIOS_LIBRE:-false}" >> "$GITHUB_OUTPUT"
           else
-            git commit -m "datos: ingesta $(date -u +'%Y-%m-%d %H:%MZ') [skip ci]"
+            git commit -m "datos: redes $(date -u +'%Y-%m-%d %H:%MZ') [skip ci]"
             git pull --rebase origin main
             git push origin HEAD:main
             echo "cambios=true" >> "$GITHUB_OUTPUT"

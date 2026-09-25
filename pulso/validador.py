@@ -4829,12 +4829,60 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
     if hay_texto:
         errores += _regla_gitignore(dir_datos)
 
+    ruta_estado = os.path.join(dir_datos, "estado.json")
+    if os.path.exists(ruta_estado):
+        try:
+            avisos += validar_frescura(_leer(ruta_estado), leidos)
+        except (ValueError, OSError):
+            pass                  # ya lo reporto el recorrido de `archivos`
+
     if ventana is not None:
         e, a = validar_archivo(dir_datos, ventana, roster, medios, hoy=hoy,
                                busquedas=busquedas)
         errores += e
         avisos += a
     return errores, avisos
+
+
+# Cuanto puede quedarse atras un panel de cosecha antes de avisar: con cuatro
+# corridas al dia, 12 h son dos corridas seguidas sin cosechar.
+FRESCURA_HORAS = 12
+PANELES_COSECHA = ("redes", "tiktok", "facebook", "youtube", "tendencias")
+
+
+def validar_frescura(estado, leidos):
+    """Un aviso por cada panel de cosecha que se quedo atras de la ultima corrida.
+
+    Existe por el 24 y 25 de septiembre de 2026: APIFY_HABILITADO se apago para
+    que el cron dejara de morir por tiempo, las corridas salieron verdes, y
+    redes siguio mostrando TikTok, Instagram y Facebook del jueves el viernes, y
+    X del domingo. Nada lo decia. Se compara contra `estado.json.generado`, la
+    hora de la ultima corrida, y no contra el reloj: el validador no lee la hora
+    (la misma entrada valida igual cualquier dia) y un repo sin corridas no es
+    un panel atrasado. Aviso y no error: apagar las cosechas pagadas puede ser
+    una decision de gasto, y data/ lo escribe el bot.
+    """
+    try:
+        corrida = datetime.fromisoformat(str(estado.get("generado")))
+    except ValueError:
+        return []
+    avisos = []
+    for nombre in PANELES_COSECHA:
+        datos = leidos.get(nombre)
+        if not isinstance(datos, dict):
+            continue
+        try:
+            cosecha = datetime.fromisoformat(str(datos.get("generado")))
+        except ValueError:
+            continue
+        horas = (corrida - cosecha).total_seconds() / 3600
+        if horas > FRESCURA_HORAS:
+            avisos.append(
+                "{}: la ultima cosecha es de {}, {:.0f} h antes de la ultima corrida ({}); "
+                "el panel sigue mostrando eso. Si las cosechas pagadas estan apagadas "
+                "(APIFY_HABILITADO), se queda asi".format(
+                    nombre, datos.get("generado"), horas, estado.get("generado")))
+    return avisos
 
 
 def validar_comunicados(datos):

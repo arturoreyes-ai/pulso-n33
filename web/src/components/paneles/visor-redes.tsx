@@ -2,13 +2,13 @@
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { ChatCircle as IconoComentarios } from "@phosphor-icons/react";
-import { useFacebook, useFacebookComentarios, useRedes, useRedesComentarios, useTikTok, useTikTokComentarios, useYouTube } from "@/lib/datos/hooks";
+import { useEstado, useFacebook, useFacebookComentarios, useRedes, useRedesComentarios, useTikTok, useTikTokComentarios, useYouTube } from "@/lib/datos/hooks";
 import type { ComentarioPublicado } from "@/lib/datos/tipos";
 import { NOMBRE_RED, ordenarPublicaciones, reunirPublicaciones, type CubetaRegion, type OrdenLectura, type PublicacionVisual, type RedVisual } from "@/lib/dominio/publicaciones";
 import { filtrarPorTexto, SIN_FILAS_BUSQUEDA } from "@/lib/dominio/consultas";
 import { TITULO_RUBRO, type Rubro } from "@/lib/busqueda/rubros";
 import { publicacionNombraRubro } from "@/lib/busqueda/tema-publicacion";
-import { fechaCorta, hace, hora } from "@/lib/dominio/formato";
+import { corteVigente, fechaCorta, hace, hora } from "@/lib/dominio/formato";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 import { teclasDelRecorrido, useRecorrido } from "@/lib/pantalla/recorrido";
 import { clasesBoton } from "@/components/ui/clases";
@@ -328,7 +328,9 @@ function Publicacion({ fila, indice, posicion, total, corte, activo, preparado, 
   onAnalizar: () => void;
 }) {
   const iso = fila.post.publicado ?? fila.post.fecha;
-  const antiguedad = corte ? hace(iso, corte) : "";
+  // Con la cosecha atrasada, «hace 2 h» se leeria como de hoy: va la fecha.
+  const ultimaCorrida = useEstado().data?.generado;
+  const antiguedad = corte && corteVigente(corte, ultimaCorrida) ? hace(iso, corte) : "";
   const cuando = antiguedad ? `hace ${antiguedad}` : `${fechaCorta(iso)}${fila.post.publicado ? ` · ${hora(fila.post.publicado)}` : ""}`;
   return <article data-indice={posicion} aria-label={`Publicación ${indice + 1} de ${total}`}
     className="publicacion-visual mx-auto flex w-full max-w-[88rem] flex-col md:grid md:grid-cols-2 md:items-center md:gap-12 md:px-8 md:py-8">

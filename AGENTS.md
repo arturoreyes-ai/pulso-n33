@@ -2165,7 +2165,15 @@ build. No model dependencies. Get this green before asking for review.
 
 `.github/workflows/pulso.yml` runs the cron at `17 */6 * * *` — minute 17, not
 0, because thousands of crons queue on the hour. It commits `data/` as
-`pulso-bot` with `[skip ci]` when the content changed.
+`pulso-bot` with `[skip ci]` when the content changed, **twice**: once after
+the free steps (press, comunicados, YouTube, indicators) and once after the
+paid harvests. Until 25 September 2026 the only commit was the last step, and
+from 21 to 24 September all 22 runs died by time inside the TikTok step, each
+throwing away a press ingest it had already computed: three and a half days
+with no notes because a social harvest was slow. Each paid step now has its own
+`timeout-minutes` and `continue-on-error`, and the job's 75 sit above their sum
+so a step cap always fires first: a step cap lets the cache post-steps and the
+final commit run; the job cap cancels everything.
 
 **The paid harvests call Apify in parallel** (`pulso/apify.py::en_paralelo`,
 six at a time) and apply results in account order on one thread, so output
@@ -2186,47 +2194,45 @@ Don't split these two jobs apart.
 
 ## Deployment, as it actually is
 
-Worth knowing before debugging "the site is stale", because the answer is not
-the pipeline.
+Worth knowing before debugging "the site is stale". Measured on 25 September
+2026, when the client saw Wednesday's posts on Friday, and the answer was
+neither the deploy nor the press pipeline.
 
-**The runner-side deploy is not configured.** `pulso.yml` has a
-`Construir y desplegar el tablero` step behind `vars.DESPLEGAR_TABLERO`, and
-that variable is unset — but so are `VERCEL_TOKEN`, `VERCEL_ORG_ID` and
-`VERCEL_PROJECT_ID`. The only repo secret is `APIFY_TOKEN` and the only repo
-variable is `APIFY_HABILITADO`, so setting `DESPLEGAR_TABLERO=true` on its own
-would fail that step, not enable it.
+**Vercel's Git integration builds every commit on `main`, the bot's
+included.** That day: seven production deploys, one per ingest, each Ready in
+24–48 s, each running `sincronizar-datos.mjs` over the new `data/`. This
+section used to say Vercel honours the skip token and the site refreshes only
+on human pushes; `vercel ls` said otherwise, and the wrong premise cost a
+diagnosis. Check before assuming, with the CLI that is logged in on this
+machine: `vercel ls pulso --scope areyes-1125`, then `vercel inspect <url>
+--logs --scope areyes-1125`.
 
-**What publishes today is Vercel's Git integration on `main`**, building from
-the repository. Two consequences follow, both visible on the live site:
+**When a panel is stale, look at its file, not the site.** Per file,
+`git log origin/main -1 -- data/<file>` and its `generado`. That day press was
+twenty minutes old and Instagram, TikTok and Facebook a day old, X five:
+`APIFY_HABILITADO` had been set to `false` on the 24th so the cron could
+finish, and nothing turned it back on. Nothing said so either. Since then the
+cron writes a warning annotation when it is off, `pulso validar` warns per
+panel when its `generado` trails `estado.json` by more than 12 h
+(`validador.py::validar_frescura`), and the Redes cards and the X panel print
+the date instead of «hace 2 h» in that case (`formato.ts::corteVigente`): the
+age was measured against the harvest, so a Thursday post read as fresh.
 
-- **The cron's `data/` commits never redeploy it.** They land as
-  `datos: ingesta … [skip ci]`, and Vercel honours `[skip ci]` by default. The
-  `[skip ci]` is not wrong — it is belt-and-braces against an Actions loop that
-  `GITHUB_TOKEN` already prevents — but the side effect is that the published
-  dashboard refreshes only when a **human** pushes to `main`. Between human
-  pushes the site can sit days behind `data/`.
-- **The comment text is missing from the live site.** This is the failure the
-  deploy design above predicts in so many words: the comment text is outside
-  git, so a host building from the repository publishes posts with no comments. The
-  Instagram and TikTok panels degrade to «El texto de los comentarios no está
-  disponible en esta vista», which is the panel reporting a misconfiguration
-  correctly, not a bug.
+**The comment text is missing from the live site.** This is the failure the
+deploy design predicts in so many words: the comment text is outside git, so a
+host building from the repository publishes posts with no comments. The panels
+degrade to «El texto de los comentarios no está disponible en esta vista»,
+which is the panel reporting a misconfiguration correctly, not a bug.
 
-To publish the current `data/` without waiting for a feature push, commit
-something that matches `pulso.yml`'s `paths-ignore` (`**.md` or `docs/**`).
-Vercel builds it and the pipeline does not re-run. **Never use an empty commit
-for this**: it matches no ignored path, so it starts a full ingest — including
-the paid Apify actors.
+**The runner-side deploy is not configured, and it is the only fix for that.**
+`pulso.yml` has a `Construir y desplegar el tablero` step behind
+`vars.DESPLEGAR_TABLERO`, unset, and so are `VERCEL_TOKEN`, `VERCEL_ORG_ID` and
+`VERCEL_PROJECT_ID`: setting the variable alone would fail that step. With all
+four set, the runner deploys with the comment text it just wrote.
 
-And do not let the skip token appear **anywhere in that commit's message**,
-body included. Both GitHub Actions and Vercel scan the whole message, not just
-the subject line, so a commit that merely *quotes* the token in prose is
-skipped by both — which is how the first attempt at writing this very section
-published nothing: no workflow run, no Vercel build, a commit sitting on `main`
-doing exactly what it was describing. Refer to it in prose as "the skip token"
-and keep the literal spelling in files, where it is inert.
-
-Fixing it properly is one of three, and the first is the only one that also
-puts comment text on the site: create the three Vercel secrets and set
-`DESPLEGAR_TABLERO=true`; drop `[skip ci]` from the bot's commit message
-(freshness only); or call a Vercel deploy hook after the data commit.
+**Never push an empty commit to redeploy**: it matches no `paths-ignore`, so
+it starts a full ingest, paid actors included. And do not let the skip token
+appear anywhere in a commit message you want the workflow to run on, body
+included: GitHub Actions scans the whole message, so a commit that merely
+*quotes* the token in prose is skipped. Refer to it in prose as "the skip
+token" and keep the literal spelling in files, where it is inert.
