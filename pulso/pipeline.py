@@ -33,6 +33,7 @@ from .descubrimiento import descubrir
 from .fetch import fetch_medios
 from .normalizar import dedup, dominio, fecha_iso, fold, id_nota, url_canonica
 from .sentimiento import IDIOMA_OMISION
+from .tema_nota import idioma_de_nota, rubros_de_categorias, rubros_de_nota
 from .temas import temas
 from .validador import ESQUEMA
 from .zonas import alcance
@@ -138,6 +139,12 @@ def _nota(medio, item, capturado):
     # miniatura en su feed. No es un hueco que rellenar ni un null que decir.
     if item.get("imagen"):
         nota["imagen"] = item["imagen"]
+    # Lo que dijeron las <category> del feed, pasado por el mapa del medio.
+    # Se guarda porque es lo unico que no se puede recalcular despues: el
+    # feed no vuelve a mandar el item cuando sale de el (pulso/tema_nota.py).
+    categoria = rubros_de_categorias(medio, item.get("categorias"))
+    if categoria:
+        nota["rubros_categoria"] = categoria
     return nota
 
 
@@ -339,6 +346,13 @@ def correr(*, medios, roster, salida="data", sin_red=False, corpus=None,
                 n["imagen"] = imagen
             else:
                 n.pop("imagen", None)
+            # La seccion va al reves que la miniatura: manda el feed cuando
+            # habla, porque es el medio reclasificando su nota. Cuando calla
+            # -- el item llego sin <category>, o por Scrapy -- se conserva lo
+            # que dijo antes, que no se puede volver a preguntar.
+            categoria = n.get("rubros_categoria") or vieja.get("rubros_categoria")
+            if categoria:
+                n["rubros_categoria"] = categoria
             fusionadas[n["id"]] = n
 
     # Zona, delegacion, figuras, alcance y postura se recalculan en cada
@@ -392,6 +406,21 @@ def correr(*, medios, roster, salida="data", sin_red=False, corpus=None,
         idi = idioma_por_busqueda.get(n.get("descubierta_por"))
         if idi:
             idioma_por_fuente[n["fuente"]] = idi
+
+    # Rubros: seccion del medio (la guardada y la de la ruta) mas el titular
+    # en su idioma. Se recalculan sobre todo el historico, como la zona, asi
+    # que editar un mapa `rutas` o una lista de terminos se propaga sin
+    # migracion. Las dos claves van siempre al final de la nota: una nota
+    # vieja que vuelve a salir en el feed no cambia de bytes por el orden.
+    medio_por_id = {m["id"]: m for m in medios_runtime}
+    for n in fusionadas.values():
+        categoria = n.pop("rubros_categoria", None)
+        n.pop("rubros", None)
+        if categoria:
+            n["rubros_categoria"] = categoria
+        idioma = idioma_de_nota(n, medio_por_id, idioma_por_busqueda)
+        n["rubros"] = rubros_de_nota(n, medio_por_id.get(n["fuente"]), idioma)
+
     clasificar_lote(fusionadas.values(), metodo, analizador,
                     idiomas=idioma_por_fuente)
     if metodo == "ninguno":

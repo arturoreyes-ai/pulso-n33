@@ -1089,6 +1089,58 @@ The per-run budget is **shared out, not raced for**. The first version spent it
 in file order and the first two queries took all 40, leaving the other four at
 zero with everything in `recortadas`.
 
+### The theme of a press note (`pulso/tema_nota.py`)
+
+Since 25 September 2026 every note carries `rubros`, the press counterpart of
+`zonas`: which of the eight rubros the **outlet's own section** or the
+**headline** says. The question was how to organize news by theme and place;
+the place was already the gazetteer's, and no new scraper was needed because
+the section already arrives in what we scrape. Rules that look arbitrary:
+
+- **Three pieces of evidence, none a classifier.** `rubros_categoria` (the
+  feed's `<category>` at harvest, through the row's hand-written `secciones`
+  map), the URL path (`rutas` map: El Imparcial `/deporte/`, La Voz
+  `/lavozdelafrontera/policiaca/`), and the headline. Fourteen of sixteen RSS
+  feeds send `<category>`; seven outlets put the section in the path.
+- **The headline rule is the portada's, per language**
+  (`rubros.ts::nombraRubro`), not the social one in `pulso/rubros.py`. The
+  social rule merges languages because a caption declares none, and over the
+  week of 18–25 September «mayor» was 33 of 112 Política notes («Mujer mayor
+  de 65 años») and «Padres» 19 of 43 Deportes («padres de familia»). The copy
+  is pinned by `titulares` in `web/scripts/fixtures/rubros/esperado.json`.
+  `SIN_TOPE` adds back what those lists lost **only** to Google's 31-word
+  budget (San Felipe's nine Clima notes that week were earthquakes); every
+  term must already be in the site's social list, and the test says so.
+- **`rubros_categoria` is stored, everything else is recomputed.** The feed
+  never resends an item that left it, so what `<category>` said is kept; the
+  feed wins when it speaks and the stored value stays when it is silent.
+  `rubros` is recomputed every run and every validation, like `zonas`; the
+  validator rejects one that does not match. Both keys always go last in the
+  note, so an old note reappearing in the feed does not change bytes.
+- **Only sections that state a theme go in a map**, written by hand against
+  each section's titles. «Local», «Noticias del día», «General» say nothing;
+  El Vigía's `/el-valle/` is the San Quintín valley, not Guadalupe. WordPress
+  sends free tags as `<category>` too (person names among them), which is why
+  only the mapped rubro reaches the note and never the label.
+- **Measured over that week:** 709 of 1,851 notes (38%) with a rubro from path
+  and headline alone, against 498 (27%) with the social rule, before
+  `<category>` counts. An empty `rubros` is not «no theme».
+
+The portada uses it: a rubro chapter of a **zone or the region** interleaves
+Google's rows with the archive's notes of that rubro and place
+(`archivo.ts::delArchivoPorRubro`), inside the rubro's window, the same way
+`buscar.ts` already interleaves the archive. They travel as `origen:
+"archivo"` (no «en tendencia» arrow, no tone) and skip the headline and region
+gates, since the pipeline decided both. México and Internacional do not read
+the archive. **On the published site this only shows once `data/` redeploys
+with the cron** (see «Deployment, as it actually is»): against a stale
+`notas.json` the window leaves nothing and the chapter is what it was.
+
+`notiens` (noticiasensenada.com) was switched off the same day: all 54 of its
+window notes were generic listicles stamped Ensenada, the same decoy already
+in Instagram's `senuelos`. The catalogue projection now carries `activo`, so a
+switched-off outlet stops feeding the chapters on the next deploy.
+
 ---
 
 ## Language and naming
@@ -1201,7 +1253,7 @@ The full command surface — `indicadores`, `conversacion`, `delegaciones`,
 
 ## Testing
 
-- **`unittest` only.** No pytest, no config file. 30 modules, 887 tests on 25
+- **`unittest` only.** No pytest, no config file. 32 modules, 925 tests on 25
   September 2026, and the suite is expected fully green. Install `requirements.txt`
   first: without Scrapy, `tests/test_scraping.py` fails to import and you see
   one error, which is an unprovisioned environment and not a regression.

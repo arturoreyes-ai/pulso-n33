@@ -1,5 +1,5 @@
 {
- "nota": "Catálogo de fuentes. 'tipo' puede ser rss (omisión) o scrapy. Scrapy solo lee portadas permitidas por robots.txt y publica titular, fuente y enlace, nunca el cuerpo. La miniatura de una nota se guarda solo si viene en el feed del propio medio y su host es el del medio o uno de los que su fila declara en 'imagenes_de' (sondeo del 14 de septiembre de 2026: los feeds traen fotos de stock y de otros medios, y eso no se acredita). 'zona' es la cobertura principal del medio; no es la zona de cada nota. Para apagar un medio sin perder su registro, pon 'activo': false y di por qué en 'nota'. 'idioma' es el del medio (es u en) y decide con que modelo se etiqueta el tono: los cuatro medios de San Diego publican en inglés y el modelo de tono es español, así que sin este campo se les asignaba una etiqueta que no significaba nada.",
+ "nota": "Catálogo de fuentes. 'tipo' puede ser rss (omisión) o scrapy. Scrapy solo lee portadas permitidas por robots.txt y publica titular, fuente y enlace, nunca el cuerpo. La miniatura de una nota se guarda solo si viene en el feed del propio medio y su host es el del medio o uno de los que su fila declara en 'imagenes_de' (sondeo del 14 de septiembre de 2026: los feeds traen fotos de stock y de otros medios, y eso no se acredita). 'zona' es la cobertura principal del medio; no es la zona de cada nota. Para apagar un medio sin perder su registro, pon 'activo': false y di por qué en 'nota'. 'idioma' es el del medio (es u en) y decide con que modelo se etiqueta el tono: los cuatro medios de San Diego publican en inglés y el modelo de tono es español, así que sin este campo se les asignaba una etiqueta que no significaba nada. 'secciones' mapea una <category> del feed a un rubro y 'rutas' un prefijo de la ruta de la URL a un rubro (pulso/tema_nota.py): solo las secciones que dicen tema, escritas a mano del sondeo del 25 de septiembre de 2026 contra los títulos de cada sección. Las genéricas («Local», «Noticias del día», «General») no dicen tema y no van, ni las que lo parecen sin serlo: /el-valle/ de El Vigía es el valle de San Quintín.",
  "medios": [
   {
    "id": "zeta",
@@ -8,6 +8,14 @@
    "zona": "Tijuana",
    "idioma": "es",
    "activo": true,
+   "secciones": {
+    "Deportez": "deportes",
+    "Toroz": "deportes",
+    "Espectáculoz": "espectaculos",
+    "Cinemazcopio": "espectaculos",
+    "Negocioz": "economia",
+    "Zoom Político": "politica"
+   },
    "verificado": "2026-09-03"
   },
   {
@@ -17,6 +25,12 @@
    "zona": "Tijuana",
    "idioma": "es",
    "activo": true,
+   "rutas": {
+    "/elsoldetijuana/deportes/": "deportes",
+    "/elsoldetijuana/gossip/": "espectaculos",
+    "/elsoldetijuana/policiaca/": "seguridad",
+    "/elsoldetijuana/finanzas/": "economia"
+   },
    "verificado": "2026-09-03",
    "nota": "OEM. Feed largo, 100 notas por lectura."
   },
@@ -27,6 +41,12 @@
    "zona": "Tijuana",
    "idioma": "es",
    "activo": true,
+   "secciones": {
+    "Deportes": "deportes",
+    "Economía": "economia",
+    "Ayuntamientos": "politica",
+    "Congreso de BC": "politica"
+   },
    "verificado": "2026-09-03",
    "imagenes_de": ["jornadabc.com.mx"],
    "nota": "Su feed vive en jornadabc.mx y sus fotos en jornadabc.com.mx: el mismo medio con dos dominios. Sin declararlo, las 7 de cada 10 miniaturas que SÍ trae el feed se tiraban por 'no es del medio' y la fila parecía un medio sin foto (sondeo del 17 de septiembre de 2026)."
@@ -38,6 +58,22 @@
    "zona": "Tijuana",
    "idioma": "es",
    "activo": true,
+   "secciones": {
+    "Policiaca": "seguridad",
+    "Deportes": "deportes",
+    "Síntesis Deportes": "deportes",
+    "Futbol": "deportes",
+    "Fútbol en Síntesis": "deportes",
+    "Beisbol": "deportes",
+    "Basquetbol": "deportes",
+    "Futbol Americano": "deportes",
+    "Otros Deportes": "deportes",
+    "Box": "deportes",
+    "Espectáculos": "espectaculos",
+    "Cine": "espectaculos",
+    "Clima": "clima",
+    "Gastronomía": "turismo"
+   },
    "verificado": "2026-09-03"
   },
   {
@@ -47,6 +83,13 @@
    "zona": "estatal",
    "idioma": "es",
    "activo": true,
+   "rutas": {
+    "/deportes/": "deportes",
+    "/fama/": "espectaculos",
+    "/policiaca/": "seguridad",
+    "/negocios/": "economia",
+    "/gobierno/": "politica"
+   },
    "verificado": "2026-09-03",
    "nota": "El prototipo apuntaba a uniradiobaja.com/rss, que da 404. El dominio correcto es uniradioinforma.com."
   },
@@ -57,6 +100,14 @@
    "zona": "estatal",
    "idioma": "es",
    "activo": true,
+   "rutas": {
+    "/deporte/": "deportes",
+    "/dinero/": "economia",
+    "/espectaculos/": "espectaculos",
+    "/tij/policiaca/": "seguridad",
+    "/mxl/policiaca/": "seguridad",
+    "/son/policiaca/": "seguridad"
+   },
    "verificado": "2026-09-03",
    "nota": "El prototipo apuntaba a /rss/portada.xml, que responde 200 con una página HTML, no con RSS. Este es el feed de Arc, su plataforma. OJO: trae el grupo entero y la mayoría de las notas son de Sonora (Hermosillo), no de BC. Es el medio que más volumen aporta y el que menos relevancia regional tiene. Los slugs /category/tijuana/, /mexicali/ y /bajacalifornia/ responden 200 con feed vacío, así que el slug correcto existe pero es otro."
   },
@@ -67,6 +118,12 @@
    "zona": "Mexicali",
    "idioma": "es",
    "activo": true,
+   "rutas": {
+    "/lavozdelafrontera/deportes/": "deportes",
+    "/lavozdelafrontera/gossip/": "espectaculos",
+    "/lavozdelafrontera/policiaca/": "seguridad",
+    "/lavozdelafrontera/finanzas/": "economia"
+   },
    "verificado": "2026-09-03",
    "nota": "OEM Mexicali. Feed largo, 100 notas por lectura. Es la fuente principal de Mexicali."
   },
@@ -77,6 +134,12 @@
    "zona": "Tecate",
    "idioma": "es",
    "activo": true,
+   "secciones": {
+    "Policiaca": "seguridad",
+    "A FGE": "seguridad",
+    "Política": "politica",
+    "Legislativo": "politica"
+   },
    "verificado": "2026-09-03",
    "nota": "Único feed de Tecate que se encontró funcionando."
   },
@@ -87,6 +150,19 @@
    "zona": "Playas de Rosarito",
    "idioma": "es",
    "activo": true,
+   "secciones": {
+    "Policiaca": "seguridad",
+    "Seguridad": "seguridad",
+    "A FGE": "seguridad",
+    "A SSPCM": "seguridad",
+    "Política": "politica",
+    "Legislativo": "politica",
+    "Gobierno": "politica",
+    "Economía": "economia",
+    "Deportes": "deportes",
+    "Entretenimiento": "espectaculos",
+    "El tiempo hoy": "clima"
+   },
    "verificado": "2026-09-03",
    "nota": "Único feed de Rosarito que se encontró funcionando."
   },
@@ -96,9 +172,9 @@
    "url": "https://noticiasensenada.com/feed/",
    "zona": "Ensenada",
    "idioma": "es",
-   "activo": true,
+   "activo": false,
    "verificado": "2026-09-03",
-   "nota": "Noticias Ensenada sí publica RSS. El Vigía se integra aparte con Scrapy porque /rss es una página HTML, no un feed. Su feed SÍ trae media:content, pero son fotos de stock (images.pexels.com) y de otro medio (ecartelera.com), así que no pasan la regla de 'es del medio' y esta fila se queda sin miniatura a propósito: registro de un hueco, no un extractor roto (sondeo del 17 de septiembre de 2026)."
+   "nota": "Apagado el 25 de septiembre de 2026: es un señuelo, no un medio de Ensenada. Sus 54 notas de la ventana eran listas genéricas («Comparativa de seguros contra robos de autos en Guatemala: qué debes saber», «Scotiabank Costa Rica impulsa soluciones digitales para potenciar el crecimiento de emprendedores», «Los 10 fenómenos naturales que la ciencia aún no logra explicar completamente») y todas salían con zona Ensenada, porque el titular sin lugar de un medio de una sola zona se acredita a esa zona: 11 de las 54 notas de Ensenada de la semana del 18 al 25. Sus propias <category> lo decían («Responsabilidad Social», «Inversiones y negocios», «Ciencia y tecnología»). Es el mismo sitio que @noticiasensenada, que pasó a señuelos en Instagram el 21 de septiembre. Nota anterior: Noticias Ensenada sí publica RSS. El Vigía se integra aparte con Scrapy porque /rss es una página HTML, no un feed. Su feed SÍ trae media:content, pero son fotos de stock (images.pexels.com) y de otro medio (ecartelera.com), así que no pasan la regla de 'es del medio' y esta fila se queda sin miniatura a propósito: registro de un hueco, no un extractor roto (sondeo del 17 de septiembre de 2026)."
   },
   {
    "id": "elvigia",
@@ -115,6 +191,11 @@
     "fecha_url": "/(?P<ano>\\d{4})/(?P<mes>\\d{1,2})/(?P<dia>\\d{1,2})/"
    },
    "activo": true,
+   "rutas": {
+    "/deportes/": "deportes",
+    "/espectaculos/": "espectaculos",
+    "/911/": "seguridad"
+   },
    "verificado": "2026-09-04",
    "nota": "Portada HTML sin RSS util. robots.txt permite la portada; Scrapy no sigue los artículos."
   },
@@ -125,6 +206,9 @@
    "zona": "Ensenada",
    "idioma": "es",
    "activo": true,
+   "secciones": {
+    "Seguridad": "seguridad"
+   },
    "verificado": "2026-09-03"
   },
   {
@@ -144,6 +228,22 @@
    "zona": "San Diego",
    "idioma": "en",
    "activo": true,
+   "secciones": {
+    "Public Safety": "seguridad",
+    "Police": "seguridad",
+    "Politics": "politica",
+    "Elections": "politica",
+    "Government": "politica",
+    "City Council": "politica",
+    "Politics Report": "politica",
+    "Sacramento Report": "politica",
+    "State Government": "politica",
+    "Economy": "economia",
+    "Business": "economia",
+    "Housing": "economia",
+    "Sports": "deportes",
+    "Tourism Economy": "turismo"
+   },
    "verificado": "2026-09-03",
    "nota": "En inglés."
   },
@@ -154,6 +254,20 @@
    "zona": "San Diego",
    "idioma": "en",
    "activo": true,
+   "secciones": {
+    "Crime": "seguridad",
+    "Politics": "politica",
+    "Sports": "deportes",
+    "Business": "economia",
+    "Housing": "economia",
+    "Weather": "clima"
+   },
+   "rutas": {
+    "/crime/": "seguridad",
+    "/politics/": "politica",
+    "/sports/": "deportes",
+    "/business/": "economia"
+   },
    "verificado": "2026-09-03",
    "imagenes_de": ["i0.wp.com"],
    "nota": "En inglés. Sirve sus miniaturas por Photon (i0.wp.com), el CDN de Jetpack; sin declararlo aquí ninguna imagen suya pasaría la regla de 'es del medio'."
@@ -194,6 +308,12 @@
     "imagen": "img::attr(src)"
    },
    "activo": true,
+   "rutas": {
+    "/seguridad/": "seguridad",
+    "/espectaculos/": "espectaculos",
+    "/empresarial/": "economia",
+    "/afn_politico/": "politica"
+   },
    "verificado": "2026-09-04",
    "imagenes_de": ["afnbc.com"],
    "nota": "No publica RSS. Se lee únicamente Lo último; robots.txt solo excluye /admin/. Conserva zona Tijuana por compatibilidad con su histórico; el gazetero corrige titulares que nombran otra ciudad. Sirve sus fotos desde afnbc.com, su propio servidor de imágenes con otro dominio; sin declararlo se tirarían las 30 de la portada."

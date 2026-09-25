@@ -127,7 +127,11 @@ class TestImagenDelFeed(unittest.TestCase):
     def test_ni_una_palabra_de_la_descripcion_llega_al_item(self):
         desc = b"<description>Cuerpo de la nota que no debe guardarse</description>"
         item = _items(_feed(_item(b"a", desc)))[0]
-        self.assertEqual(set(item), {"titulo", "url", "fecha_cruda", "fuente_texto", "fuente_url", "imagen"})
+        # 'categorias' son las etiquetas de seccion del medio (25 de
+        # septiembre de 2026, pulso/tema_nota.py): metadato, no texto.
+        self.assertEqual(set(item), {"titulo", "url", "fecha_cruda", "fuente_texto", "fuente_url",
+                                     "imagen", "categorias"})
+        self.assertEqual(item["categorias"], [])
         self.assertNotIn("Cuerpo", json.dumps(item))
 
     def test_content_encoded_tambien(self):

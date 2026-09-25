@@ -277,6 +277,32 @@ publica en `estado.json` como `notas_sin_modelo_idioma`. El idioma **no se
 adivina del texto**: adivinar falla justo en los titulares cortos y con
 nombres propios, que son casi todos. Lo declara el catálogo.
 
+#### `secciones` y `rutas`: la sección del medio como rubro
+
+Opcionales, desde el 25 de septiembre de 2026. Dos mapas de la sección en que
+el medio archiva la nota a uno de los rubros de `pulso/rubros.py::RUBROS`, y
+de ahí sale parte de `rubros` en cada nota (`pulso/tema_nota.py`):
+
+```json
+{"id": "uniradio", "rutas": {"/deportes/": "deportes", "/policiaca/": "seguridad"}},
+{"id": "rosarito", "secciones": {"Policiaca": "seguridad", "El tiempo hoy": "clima"}}
+```
+
+- `secciones` empata una `<category>` del feed, plegada. WordPress manda ahí
+  sus etiquetas libres también, así que lo que no está en el mapa no dice nada
+  y no se guarda: entre esas etiquetas van nombres de personas.
+- `rutas` empata un prefijo de la ruta de la URL, en minúsculas, que empieza y
+  termina con `/` (`/deporte/` no empata `/deportes-extremos/`). La ruta se
+  guarda con la nota, así que se recalcula sobre todo el histórico; la
+  `<category>` solo existe al cosechar.
+- Solo van las secciones que dicen tema, escritas a mano del sondeo contra los
+  títulos de cada una. «Local», «Noticias del día» o «General» no dicen tema y
+  no van, y tampoco `/el-valle/` de El Vigía, que es el valle de San Quintín y
+  no el de Guadalupe.
+
+El validador exige que cada valor sea un rubro: uno mal escrito no truena en
+la ingesta, la nota sale sin él en silencio.
+
 ## `config/busquedas.json`
 
 Consultas permanentes contra el RSS de búsqueda de Google Noticias. Se
@@ -407,6 +433,8 @@ crudo, mucho menos comprimido porque los hosts se repiten.
 | `capturado` | cuándo lo vio el pipeline por primera vez. **Se conserva** entre corridas |
 | `figuras` | `via` es `nominal` o `cargo`; `clave` es el alias plegado que empató |
 | `postura` | `null`, o `{etiqueta, puntaje, metodo, version}` |
+| `rubros` | rubros de `RUBROS` que dicen la sección del medio o el titular, en ese orden y sin repetir. Lista vacía si ninguno lo dice, que no es «nota sin tema». Siempre al final de la nota. Se **recalcula** en cada corrida y en cada validación |
+| `rubros_categoria` | opcional. Lo que dijo la `<category>` del feed al cosecharla, pasado por el mapa `secciones` del medio. Solo en notas del feed del propio medio; ausente cuando el feed no la trae o no dice tema. Manda el feed cuando habla y se conserva cuando calla |
 
 ### `zona_medio` no es `zonas`, y la diferencia importa
 
@@ -455,6 +483,31 @@ que la delegación es una faceta del muro de prensa y nada más. Se recalcula
 en cada corrida, igual que `zonas`. Los cortes anteriores al campo no traen
 la clave: el validador lo avisa, no lo rechaza.
 
+### `rubros`: el tema, con la misma cautela que la zona
+
+`zonas` dice de qué lugar habla una nota; `rubros` dice de qué tema, con tres
+evidencias y ninguna es un clasificador (`pulso/tema_nota.py`):
+
+1. `rubros_categoria`, la sección que el feed mandó al cosecharla;
+2. la ruta de la URL según `rutas` del medio (El Imparcial: `/deporte/`,
+   `/dinero/`, `/tij/policiaca/`);
+3. el titular, con la regla de la portada (`rubros.ts::nombraRubro`, una lista
+   por idioma, el de la fila del medio) más los términos que esa lista perdió
+   solo por el tope de palabras de Google.
+
+La regla de las publicaciones de redes no sirve aquí y la razón está medida:
+junta los dos idiomas porque un pie no declara el suyo, y sobre los 1,851
+titulares del 18 al 25 de septiembre de 2026 «mayor» era 33 de las 112 notas
+de Política («Mujer mayor de 65 años…») y «Padres» 19 de las 43 de Deportes
+(«padres de familia»). Con la sección y el titular por idioma, 709 notas de
+esa semana (38%) llevan rubro, contra 498 (27%), sin esos dos errores y antes
+de contar la `<category>`, que empieza con la primera cosecha.
+
+El rubro se lee igual que `zonas`: afirma lo que la sección o el titular dice
+y nada más. Los cortes anteriores al campo no traen la clave; el validador lo
+avisa y la corrida siguiente la llena. Como es derivado, el validador lo
+recalcula nota por nota y rechaza el que no cuadra.
+
 `etiqueta` es `favorable`, `neutral` o `adversa`; `metodo` nunca es
 `ninguno` (si el paso está apagado, `postura` es `null` y no un objeto).
 
@@ -486,8 +539,12 @@ primera vez, así que volver a correr no reescribe la historia. `imagen`
 también: un feed que cambia el tamaño de su miniatura o la quita no toca una
 nota ya vista, porque si lo hiciera una corrida sin novedad ensuciaría `data/`.
 
-`figuras` y `postura` se **recalculan en cada corrida**. Editar el roster o
-cambiar de clasificador se propaga a todo el histórico sin migración.
+`figuras`, `postura` y `rubros` se **recalculan en cada corrida**. Editar el
+roster, un mapa `rutas` o cambiar de clasificador se propaga a todo el
+histórico sin migración. `rubros_categoria` no se puede recalcular (el feed
+no vuelve a mandar un item que ya salió de él), así que se guarda; y
+`rubros_categoria` y `rubros` van siempre al final de la nota, para que una
+nota vieja que reaparece en el feed no cambie de bytes por el orden.
 
 La deduplicación es **por medio**. Dos medios que publican el mismo titular
 son dos notas: cruzarlos necesita *shingles* y es de la Fase 1.

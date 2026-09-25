@@ -22,6 +22,7 @@ from .clasificar import ETIQUETAS, METODOS
 from .normalizar import dominio, fold, id_nota, imagen_del_medio
 from .rubros import RUBROS
 from .sentimiento import IDIOMA_OMISION, IDIOMAS
+from .tema_nota import idioma_de_nota, ordenar as ordenar_rubros, rubros_de_nota
 
 RE_ID = re.compile(r"^[a-z0-9_]{2,12}$")
 RE_WEB_SOURCE = re.compile(r"^web-[a-f0-9]{12}$")
@@ -282,6 +283,26 @@ def validar_medios(datos):
             if not isinstance(cdn, list) or not all(
                     isinstance(h, str) and RE_HOST.match(h) for h in cdn):
                 errores.append("{}: 'imagenes_de' debe ser una lista de hosts sin esquema ni ruta ({!r})".format(et, cdn))
+        # Seccion del medio -> rubro (pulso/tema_nota.py). Un rubro que no
+        # existe no truena en la ingesta: la nota sale sin el, en silencio.
+        for campo in ("secciones", "rutas"):
+            mapa = m.get(campo)
+            if mapa is None:
+                continue
+            if not isinstance(mapa, dict) or not mapa:
+                errores.append("{}: '{}' debe ser un objeto no vacio".format(et, campo))
+                continue
+            for k, v in mapa.items():
+                if not _texto(k):
+                    errores.append("{}: {} con una clave vacia".format(et, campo))
+                if v not in RUBROS:
+                    errores.append("{}: {}[{!r}] debe ser uno de {} ({!r})".format(
+                        et, campo, k, "|".join(RUBROS), v))
+                # Prefijo con las dos diagonales: «/deporte» empataria
+                # «/deportes-extremos/» y «/deporte/» no.
+                if campo == "rutas" and isinstance(k, str) and not (
+                        k.startswith("/") and k.endswith("/") and len(k) > 2):
+                    errores.append("{}: rutas[{!r}] debe empezar y terminar con '/'".format(et, k))
 
     if not any(m.get("activo") for m in medios if isinstance(m.get("id"), str)):
         avisos.append("medios: ningun medio activo; la ingesta no traeria nada")
@@ -410,10 +431,13 @@ def validar_notas(datos, roster=None, medios=None, busquedas=None):
     zonas_medios = {m["id"]: m.get("zona") for m in (medios or [])}
     ids_busquedas = {b["id"] for b in (busquedas or []) if isinstance(b.get("id"), str)}
     ids_roster = {f["id"] for f in (roster.figuras if roster else [])}
+    idioma_por_busqueda = {b["id"]: b.get("idioma", IDIOMA_OMISION)
+                           for b in (busquedas or []) if isinstance(b.get("id"), str)}
 
     vistos = set()
     por_url = {}
     sin_delegaciones = 0
+    sin_rubros = 0
     for i, n in enumerate(notas):
         et = "notas[{}]".format(n.get("id", i))
         nid, fuente, titulo = n.get("id"), n.get("fuente"), n.get("titulo")
@@ -540,6 +564,43 @@ def validar_notas(datos, roster=None, medios=None, busquedas=None):
                 errores.append("{}: 'delegaciones' repetida".format(et))
             if dele and not (isinstance(zonas, list) and "Tijuana" in zonas):
                 errores.append("{}: 'delegaciones' exige 'Tijuana' en zonas".format(et))
+
+        # Rubros (pulso/tema_nota.py). 'rubros_categoria' es lo unico que no
+        # se recalcula -- lo dijo el <category> del feed al cosechar --, asi
+        # que solo puede venir del feed del propio medio. 'rubros' se
+        # recalcula entero: si no cuadra, alguien lo edito a mano o el
+        # pipeline y esta regla ya no leen lo mismo.
+        cat = n.get("rubros_categoria")
+        if cat is not None:
+            if not (isinstance(cat, list) and cat and cat == ordenar_rubros(cat)
+                    and all(r in RUBROS for r in cat)):
+                errores.append("{}: 'rubros_categoria' debe ser una lista no vacia de {} "
+                               "en ese orden y sin repetir ({!r})".format(et, "|".join(RUBROS), cat))
+                cat = None
+            elif n.get("origen"):
+                errores.append("{}: 'rubros_categoria' solo viene del feed del propio medio; "
+                               "una nota de {} no la tiene".format(et, n["origen"]))
+        rub = n.get("rubros")
+        if rub is None:
+            sin_rubros += 1
+        elif not (isinstance(rub, list) and rub == ordenar_rubros(rub)
+                  and all(r in RUBROS for r in rub)):
+            errores.append("{}: 'rubros' debe ser una lista de {} en ese orden y sin "
+                           "repetir ({!r})".format(et, "|".join(RUBROS), rub))
+        elif cat and not set(cat) <= set(rub):
+            errores.append("{}: 'rubros' no incluye 'rubros_categoria'".format(et))
+        elif medios_por_id and (
+                fuente in medios_por_id or not es_busqueda
+                or n.get("descubierta_por") in idioma_por_busqueda):
+            # Solo cuando el idioma se puede saber: una fuente sintetica de
+            # busqueda lo toma de config/busquedas.json, y el archivo mensual
+            # se valida a veces sin ella.
+            idioma = idioma_de_nota(n, medios_por_id, idioma_por_busqueda)
+            esperado = rubros_de_nota(n, medios_por_id.get(fuente), idioma)
+            if rub != esperado:
+                errores.append("{}: 'rubros' {!r} no es lo que dicen la seccion y el titular "
+                               "({!r})".format(et, rub, esperado))
+
         if n.get("fecha") is not None and _fecha(n.get("fecha")) is None:
             errores.append("{}: 'fecha' invalida ({!r})".format(et, n.get("fecha")))
         for campo in ("publicado", "capturado"):
@@ -609,6 +670,10 @@ def validar_notas(datos, roster=None, medios=None, busquedas=None):
             "notas: {} sin 'delegaciones'; corte anterior al campo, se llena en la "
             "proxima corrida".format(sin_delegaciones)
         )
+    if sin_rubros:
+        avisos.append(
+            "notas: {} sin 'rubros'; corte anterior al 25 de septiembre de 2026, se "
+            "llena en la proxima corrida".format(sin_rubros))
     # Un extractor roto no da error: da cero imagenes con la misma cara que un
     # feed sin imagenes. Si algun medio activo declara un CDN es que se espera
     # alguna; cero entonces merece una linea. Solo si hay notas de esos medios
@@ -687,7 +752,7 @@ def validar_archivo(dir_datos, ventana, roster=None, medios=None, hoy=None,
             errores.append("archivo[{}]: no se pudo leer ({})".format(mes, e))
             continue
 
-        e_notas, a_notas = validar_notas(datos, roster, medios)
+        e_notas, a_notas = validar_notas(datos, roster, medios, busquedas)
         errores += ["archivo[{}] {}".format(mes, x) for x in e_notas]
         avisos += a_notas
 

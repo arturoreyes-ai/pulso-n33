@@ -23,6 +23,13 @@ el orden de busqueda de aqui abajo:
 La URL se guarda tal como viene: los sufijos -WxH de WordPress, el ?fit= de
 Photon y el ?auth= de Arc son derivados estables del original, y reescribirlos
 puede dar 404.
+
+SECCIONES (25 de septiembre de 2026). Cada item trae tambien 'categorias', los
+<category> del feed tal como vienen: la seccion en que el medio archivo la nota
+y, en WordPress, sus etiquetas libres. Es metadato del medio, no texto de la
+nota. No se guarda asi: pulso/tema_nota.py lo pasa por el mapa `secciones` del
+medio y solo el rubro resultante llega a la nota, porque entre las etiquetas
+van nombres de personas. El Imparcial y KPBS no mandan ninguna.
 """
 
 import time
@@ -48,6 +55,16 @@ IMAGEN_LARGO_MAXIMO = 500
 def _texto(el, tag):
     hijo = el.find(tag)
     return (hijo.text or "").strip() if hijo is not None and hijo.text else ""
+
+
+def _categorias(item):
+    """Los <category> del item (RSS: el texto; Atom: 'term'), sin repetir."""
+    vistas = []
+    for el in item.findall("category"):
+        vistas.append((el.text or "").strip())
+    for el in item.findall(_ATOM + "category"):
+        vistas.append((el.get("term") or el.get("label") or "").strip())
+    return list(dict.fromkeys(c for c in vistas if c))
 
 
 class _Imagenes(HTMLParser):
@@ -168,6 +185,7 @@ def fetch_rss(url, timeout=15, medio=None):
             # dice de que medio es la nota: su <link> es un redirector propio.
             "fuente_texto": _texto(item, "source"),
             "fuente_url": (origen.get("url") or "").strip() if origen is not None else "",
+            "categorias": _categorias(item),
         })
         if medio is not None:
             salida[-1]["imagen"] = imagen_de(item, medio)
@@ -178,6 +196,7 @@ def fetch_rss(url, timeout=15, medio=None):
             "url": (enlace.get("href") or "").strip() if enlace is not None else "",
             "fecha_cruda": (_texto(entry, _ATOM + "published")
                             or _texto(entry, _ATOM + "updated")),
+            "categorias": _categorias(entry),
         })
         if medio is not None:
             salida[-1]["imagen"] = imagen_de(entry, medio)
