@@ -36,7 +36,7 @@ export const LOCALES: Record<Idioma, { hl: string; gl: string; ceid: string }> =
  * solo. Se pide por el alias y no por el id porque el alias es el documentado
  * y el id no promete nada.
  */
-export type TemaGoogle = "NATION" | "WORLD";
+export type TemaGoogle = "NATION" | "WORLD" | "ENTERTAINMENT" | "SPORTS" | "BUSINESS";
 
 /** Tambien el de buscadores.ts: robots.txt empareja por el token `PulsoN33`,
  *  el mismo del pipeline, asi que los dos lectores reciben el mismo veredicto. */

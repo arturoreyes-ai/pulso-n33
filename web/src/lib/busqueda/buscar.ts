@@ -31,6 +31,21 @@ import { zonaDeSlug } from "@/lib/dominio/zonas";
  * Google (fusionarLocales), asi que ninguno se come el tope de los demas, y el
  * titular repetido se queda con el primero que salio.
  *
+ * Y desde el 25 de septiembre de 2026, en el corredor, la cabeza es la de
+ * Google Noticias TAL CUAL (CABEZA_GOOGLE). El cliente busco «mañanera» y
+ * no obtuvo lo que Google Noticias le daba: la consulta salia como
+ * `mañanera ("Baja California" OR Tijuana OR ...)`, y medido ese dia los
+ * primeros resultados eran notas de hace 9 a 45 dias sobre una alerta en
+ * Mexicali, con uno en ingles en el segundo lugar y los medios y el archivo en
+ * el tercero y el cuarto, por los turnos. La misma palabra sin lugar, en la
+ * edicion mexicana, devolvia exactamente la lista de Google Noticias: El
+ * Universal, Infobae, Milenio, El Informador, Sin Embargo, todas de ese dia.
+ * Asi que primero va eso, y despues, por turnos, lo acotado al corredor, el
+ * ingles, los medios y el archivo: lo local sigue apareciendo, debajo de lo
+ * que cualquiera veria en Google. Una ZONA sigue acotada (/tijuana busca en
+ * Tijuana: lo dice la etiqueta), y Mexico e Internacional no llevan lugar,
+ * que es lo mismo que Google.
+ *
  * Los buscadores de los medios solo en el ambito `region`: son medios del
  * corredor que no se leen por zona, y mezclarlos en /tijuana?q= le acreditaria
  * a Tijuana lo que un medio de Ensenada publico. El archivo si entra en la
@@ -61,6 +76,11 @@ export interface DependenciasBusqueda {
  */
 const MS_MEDIO_PORTADA = 3_000;
 
+/** La primera pagina de Google Noticias: diez, que es lo que muestra antes de
+ *  «mas resultados». Con la lista entera, un termino con mucha cobertura
+ *  llenaria los cuarenta y lo del corredor no saldria nunca. */
+export const CABEZA_GOOGLE = 10;
+
 /** La fecha AAAA-MM-DD que abre la ventana de la prensa. */
 export function desdeVentana(ahora: Date, dias = VENTANA_PRENSA_DIAS): string {
   return new Date(ahora.getTime() - dias * 86_400_000).toISOString().slice(0, 10);
@@ -88,11 +108,16 @@ export async function responderBusqueda(
   const desde = desdeVentana((dependencias.ahora ?? (() => new Date()))());
 
   // Los locales y los medios en paralelo; que se caiga uno no tumba los demas
-  // (ver cosecharFeeds y buscarEnMedios).
+  // (ver cosecharFeeds y buscarEnMedios). En el corredor, primero la consulta
+  // tal cual en la edicion mexicana: es la cabeza (ver el docstring).
+  const talCual = ambito === "region";
   const catalogo = await leerCatalogo();
   const [cosechas, medios, indices] = await Promise.all([
     cosecharFeeds(
-      locales.map((idioma) => ({ url: urlDeFeed(q, idioma), idioma })),
+      [
+        ...(talCual ? [{ url: urlDeFeed(veredicto.q, "es"), idioma: "es" as const }] : []),
+        ...locales.map((idioma) => ({ url: urlDeFeed(q, idioma), idioma })),
+      ],
       TOPE_RESULTADOS,
       solicitar,
     ),
@@ -110,11 +135,16 @@ export async function responderBusqueda(
       }).map((c) => c.fila)
     : [];
 
-  const fusionados = fusionarLocales([
-    ...cosechas.map((c) => c.resultados),
-    medios.flatMap((m) => m.resultados).sort((a, b) => (b.publicado ?? "").localeCompare(a.publicado ?? "")),
+  const deMedios = medios.flatMap((m) => m.resultados).sort((a, b) => (b.publicado ?? "").localeCompare(a.publicado ?? ""));
+  const [primera, ...acotadas] = cosechas;
+  const cabeza = talCual && primera !== undefined ? primera.resultados.slice(0, CABEZA_GOOGLE) : [];
+  const resto = fusionarLocales([
+    ...(talCual && primera !== undefined ? [primera.resultados.slice(CABEZA_GOOGLE), ...acotadas.map((c) => c.resultados)] : cosechas.map((c) => c.resultados)),
+    deMedios,
     deArchivo,
   ]);
+  // Un solo lote: la cabeza en su orden y el resto detras, sin repetir titular.
+  const fusionados = fusionarLocales([[...cabeza, ...resto]]);
 
   // Como en actualidad.ts: el cruce contra el archivo va despues del corte.
   const cuerpo: RespuestaBusqueda = {

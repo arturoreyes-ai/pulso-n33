@@ -76,6 +76,11 @@ const FUERA = [
   "los cabos", "cabo san lucas", "dolores hidalgo", "irapuato", "celaya",
   // Carabineros es la policia de Chile. En un titular mexicano no aparece.
   "carabineros",
+  // «Presunta falla mecanica provoca incendio de trailer en Apodaca, NL», de
+  // N+, paso la reja el 25 de septiembre de 2026 en la busqueda de hechos de
+  // impacto del corredor: «NL» no es «nuevo leon». «nl» suelto no entra: es
+  // la Liga Nacional de los Padres («NL West»).
+  "apodaca",
 ];
 
 const contiene = (texto: string, marcas: readonly string[]): boolean =>
@@ -84,7 +89,7 @@ const contiene = (texto: string, marcas: readonly string[]): boolean =>
 export const esRedSocial = (dominio: string): boolean =>
   SOCIALES.has(dominio.replace(/^www\./, "").toLowerCase());
 
-const esDominioExtranjero = (dominio: string): boolean => {
+export const esDominioExtranjero = (dominio: string): boolean => {
   const tld = dominio.toLowerCase().split(".").at(-1) ?? "";
   return CCTLD_FUERA.has(tld);
 };
@@ -116,6 +121,15 @@ export function esDeFuera(r: ResultadoExterno): boolean {
   if (contiene(sinBcs, DENTRO)) return false;
   return contiene(titulo, FUERA);
 }
+
+/**
+ * Si el titular nombra un lugar de aqui: de Mexico, dentro o fuera de la
+ * region, o del corredor, San Diego incluido. Lo usa la reja de Mexico
+ * (extranjero.ts), para la que «Culiacan» o «Tijuana» es tan de aqui como
+ * «Mexico». Carabineros esta en FUERA y no es un lugar.
+ */
+const DE_AQUI = [...DENTRO, ...FUERA.filter((t) => t !== "carabineros")];
+export const nombraLugarDeAqui = (titulo: string): boolean => contiene(plegar(titulo), DE_AQUI);
 
 /** Las filas que se quedan. El orden no se toca: es el del buscador, y ese
  *  orden ES la senal (ver lib/busqueda/actualidad.ts). */

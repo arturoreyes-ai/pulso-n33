@@ -43,13 +43,15 @@
  */
 
 import { plegar } from "@/lib/dominio/formato";
+import type { Ambito } from "./ambito";
 import type { Idioma } from "./tipos";
 
 /**
  * Los cinco rubros de la CADENA: los que el recorrido encadena por su cuenta
- * detras de la seccion del lugar (capitulos.ts), elegidos o no.
+ * detras de la seccion del lugar (capitulos.ts), elegidos o no. En el orden de
+ * la fila (ver RUBROS): la cadena y la fila no se contradicen.
  */
-export const RUBROS_CADENA = ["clima", "seguridad", "deportes", "politica", "economia"] as const;
+export const RUBROS_CADENA = ["politica", "seguridad", "economia", "clima", "deportes"] as const;
 
 /**
  * Los rubros de la PROGRAMACION, desde el 24 de septiembre de 2026: el
@@ -73,13 +75,23 @@ export type RubroCadena = (typeof RUBROS_CADENA)[number];
 export type RubroPrograma = (typeof RUBROS_PROGRAMA)[number];
 
 /**
- * El orden de la fila de temas: el de la programacion del canal, con los de
- * la cadena intercalados donde estan sus programas (Minuta Politica, Estado
- * de Alerta), y los tres que ningun programa cubre al final.
+ * El orden de la fila de temas, por relevancia informativa desde el 25 de
+ * septiembre de 2026: primero la nota dura (Politica, Seguridad, Economia),
+ * luego el servicio (Clima), y al final lo blando y lo de nicho. Hasta ese dia
+ * era el de la programacion del canal, con Espectaculos primero, y el cliente
+ * lo vio revuelto.
+ *
+ * No sale de contar titulares, y se midio antes de decidirlo: en dos dias de
+ * busqueda del corredor Deportes trajo 117, Seguridad 115, Clima 94 (la semana
+ * del huracan Polo), Politica 62, Economia 51, Entretenimiento 33, Turismo 31
+ * e IA 19. Clima sube y baja con el tiempo que hace y Deportes lo inflan las
+ * paginas de partido, y una fila que se reordena sola cada semana no se
+ * aprende. Es tambien el orden en que el pipeline emite los `rubros` de un
+ * video (pulso/rubros.py, que lo copia).
  */
 export const RUBROS = [
-  "espectaculos", "politica", "seguridad", "turismo", "ia",
-  "clima", "deportes", "economia",
+  "politica", "seguridad", "economia", "clima", "deportes",
+  "espectaculos", "turismo", "ia",
 ] as const satisfies readonly (RubroCadena | RubroPrograma)[];
 
 export type Rubro = RubroCadena | RubroPrograma;
@@ -96,7 +108,11 @@ export const NOMBRE_RUBRO: Record<Rubro, string> = {
   deportes: "Deportes",
   politica: "Política",
   economia: "Economía",
-  espectaculos: "Espectáculos",
+  // «Entretenimiento» desde el 25 de septiembre de 2026, a peticion del
+  // cliente. La llave sigue siendo `espectaculos`: va en las URL (?t=), en
+  // config/tiktok.json y en la copia del pipeline, y cambiarla no cambia nada
+  // de lo que se lee.
+  espectaculos: "Entretenimiento",
   turismo: "Turismo",
   ia: "IA",
 };
@@ -131,6 +147,41 @@ export const VENTANA_DE: Record<Rubro, { consulta: string; rotulo: string }> = {
   turismo: { consulta: VENTANA_RUBRO, rotulo: "últimos dos días" },
   ia: { consulta: "when:7d", rotulo: "última semana" },
 };
+
+/**
+ * Los rubros que Google YA CLASIFICA en la edicion mexicana: su seccion
+ * tematica, y no una busqueda, cuando se piden para Mexico. Desde el 25 de
+ * septiembre de 2026.
+ *
+ * El caso: Espectaculos con la entrada Mexico abria con «Soda Stereo en
+ * Madrid» (EL PAIS) y «Susan Sarandon es arrestada en Nueva York»
+ * (Univision). Una busqueda de «concierto OR actriz OR famosos...» sin lugar
+ * trae lo que cualquier medio en espanol del mundo escriba con esas palabras,
+ * en el orden en que las empata, no en el de lo que importa. La seccion
+ * ENTERTAINMENT de la edicion MX es el ranking de Google de lo que importa en
+ * entretenimiento en Mexico, que es lo que el cliente pidio ver, y lo mismo
+ * vale para SPORTS y BUSINESS. Medido ese dia: 70 titulares en
+ * ENTERTAINMENT, con Joy Huerta, Aleks Syntek, Maribel Guardia y La Casa de
+ * los Famosos arriba.
+ *
+ * Solo para Mexico. Un lugar no tiene seccion por tema en el RSS (la razon de
+ * que un rubro sea busqueda, arriba), y el mundo tampoco: la seccion de una
+ * edicion es la de ese pais, asi que en Internacional seria Mexico otra vez.
+ * Los otros cinco rubros no tienen seccion en Google y siguen siendo busqueda.
+ */
+export const SECCION_DE_RUBRO: Partial<Record<Rubro, "ENTERTAINMENT" | "SPORTS" | "BUSINESS">> = {
+  espectaculos: "ENTERTAINMENT",
+  deportes: "SPORTS",
+  economia: "BUSINESS",
+};
+
+export const esSeccionDeRubro = (rubro: Rubro, ambito: Ambito): boolean =>
+  ambito === "mexico" && SECCION_DE_RUBRO[rubro] !== undefined;
+
+/** La cejilla de un capitulo de rubro: la ventana de la busqueda, o «ahora»
+ *  cuando es la seccion de Google, como la de un lugar. */
+export const rotuloDeRubro = (rubro: Rubro, ambito: Ambito): string =>
+  esSeccionDeRubro(rubro, ambito) ? "ahora" : VENTANA_DE[rubro].rotulo;
 
 /**
  * Cuantas palabras lee Google de una consulta, contando cada OR. Medido el 25

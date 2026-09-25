@@ -85,9 +85,12 @@ function comprobar() {
 
   const tijuana = capitulosDe('Tijuana');
   assert.deepEqual(tijuana[0].pedido, { zona: 'Tijuana', rubro: null });
-  assert.deepEqual(tijuana[1].pedido, { zona: 'Tijuana', rubro: 'clima' });
+  assert.deepEqual(tijuana[1].pedido, { zona: 'Tijuana', rubro: 'politica' });
   assert.equal(tijuana[0].rotulo, 'Tijuana · ahora');
-  assert.equal(tijuana[1].titulo, 'Clima sobre Tijuana');
+  assert.equal(tijuana[1].titulo, 'Política sobre Tijuana');
+  // El orden por relevancia (25 de septiembre de 2026): la nota dura primero.
+  assert.deepEqual([...RUBROS_CADENA], ['politica', 'seguridad', 'economia', 'clima', 'deportes']);
+  assert.deepEqual([...RUBROS], [...RUBROS_CADENA, 'espectaculos', 'turismo', 'ia'], 'la fila y la cadena no se contradicen');
   // Mexico e Internacional no dependen del lugar elegido.
   assert.deepEqual(tijuana[6].pedido, region[6].pedido);
   assert.deepEqual(tijuana[7].pedido, region[7].pedido);
@@ -101,11 +104,20 @@ function comprobar() {
   assert.deepEqual(mexico[7].pedido, { ambito: 'region', rubro: null });
   assert.equal(mexico[0].rotulo, 'México · ahora');
   assert.equal(mexico[2].titulo, 'Seguridad en México');
+  // Los rubros que Google clasifica son su seccion en Mexico, y la cejilla lo
+  // dice como en una seccion: «ahora», no «ultimos dos dias».
+  assert.equal(mexico[3].id, 'economia');
+  assert.equal(mexico[3].rotulo, 'Economía · ahora');
+  assert.equal(mexico[2].rotulo, 'Seguridad · últimos dos días', 'Seguridad no tiene seccion: sigue siendo busqueda');
+  assert.equal(capitulosDe('mexico', 'espectaculos')[0].rotulo, 'Entretenimiento · ahora');
+  assert.equal(capitulosDe('mexico', 'espectaculos')[0].titulo, 'Entretenimiento en México');
+  assert.equal(capitulosDe('region', 'espectaculos')[0].rotulo, 'Entretenimiento · últimos dos días', 'un lugar no tiene seccion por tema');
+  assert.equal(capitulosDe('internacional')[5].rotulo, 'Deportes · últimos dos días', 'ni el mundo');
   assert.equal(mexico[7].rotulo, 'Toda la región · ahora');
   const mundo = capitulosDe('internacional');
   assert.deepEqual(mundo.map((c) => c.id), ['internacional', ...RUBROS_CADENA, 'mexico', 'local']);
-  assert.deepEqual(mundo[1].pedido, { ambito: 'internacional', rubro: 'clima' });
-  assert.equal(mundo[1].titulo, 'Clima en el mundo');
+  assert.deepEqual(mundo[1].pedido, { ambito: 'internacional', rubro: 'politica' });
+  assert.equal(mundo[1].titulo, 'Política en el mundo');
   assert.deepEqual(mundo[7].pedido, { ambito: 'region', rubro: null });
 
   for (const e of ['region', ...ZONAS_RUTA, 'mexico', 'internacional']) {
@@ -130,7 +142,7 @@ function comprobar() {
   // otra manera de decir que no se podia pedir.
   const economiaTj = capitulosDe('Tijuana', 'economia');
   assert.deepEqual(economiaTj.map((c) => c.id),
-    ['economia', 'local', 'clima', 'seguridad', 'deportes', 'politica', 'mexico', 'internacional'],
+    ['economia', 'local', 'politica', 'seguridad', 'clima', 'deportes', 'mexico', 'internacional'],
     'el elegido primero, el lugar segundo, los otros cuatro en el orden de RUBROS');
   assert.deepEqual(economiaTj[0].pedido, { zona: 'Tijuana', rubro: 'economia' });
   assert.deepEqual(economiaTj[1].pedido, { zona: 'Tijuana', rubro: null });
@@ -197,7 +209,7 @@ function comprobar() {
   // los rubros: no es lo que esta pasando, no se adelanta a un titular.
   const tecateClima = capitulosDe('Tecate', 'clima');
   assert.deepEqual(tecateClima.map((c) => c.id),
-    ['clima', 'local', 'seguridad', 'deportes', 'politica', 'economia', 'comunicados', 'mexico', 'internacional']);
+    ['clima', 'local', 'politica', 'seguridad', 'economia', 'deportes', 'comunicados', 'mexico', 'internacional']);
 
   // --- El tema en Redes: los terminos del rubro sobre el titulo ------------
   // 24 de septiembre de 2026. Palabra entera, siglas con mayusculas, frases
@@ -262,9 +274,15 @@ function comprobar() {
   const divisorBoletin = hTecate.tarjetas.find((t) => t.tipo === 'divisor');
   assert.equal(divisorBoletin.capitulo, 'comunicados');
   assert.equal(divisorBoletin.sustantivo, 'comunicado');
+  assert.equal(divisorBoletin.plural, 'comunicados');
   assert.equal(divisorBoletin.n, 3);
-  assert.equal(hilar(region, [listo(lote('A', 2)), listo(lote('B', 2)), ...Array(6).fill(INACTIVO)])
-    .tarjetas.find((t) => t.tipo === 'divisor').sustantivo, 'titular');
+  const divisorTitulares = hilar(region, [listo(lote('A', 2)), listo(lote('B', 2)), ...Array(6).fill(INACTIVO)])
+    .tarjetas.find((t) => t.tipo === 'divisor');
+  assert.equal(divisorTitulares.sustantivo, 'titular');
+  // «15 titulars» salio al aire el 25 de septiembre de 2026: el plural se
+  // escribe, no se arma con una «s».
+  assert.equal(divisorTitulares.plural, 'titulares');
+  assert.match(fs.readFileSync(path.resolve(__dirname, '../src/components/ahora/tarjetas-ahora.tsx'), 'utf8'), /\$\{t\.n\} \$\{t\.plural\}/);
   // Y la cadena de nueve solo esta completa con los nueve asentados.
   assert.equal(hilar(tecate, Array(8).fill(listo([]))).completo, false, 'ocho de nueve no es completo');
   assert.equal(hilar(tecate, Array(9).fill(listo([]))).completo, true);
@@ -284,7 +302,7 @@ function comprobar() {
   // Divisor antes del segundo capitulo con titulares, con su cuenta.
   h = hilar(region, [listo(lote('A', 3)), listo(lote('B', 2)), INACTIVO, INACTIVO, INACTIVO, INACTIVO, INACTIVO, INACTIVO]);
   assert.deepEqual(h.tarjetas.map((t) => t.tipo), ['titular', 'titular', 'titular', 'divisor', 'titular', 'titular']);
-  assert.equal(h.tarjetas[3].capitulo, 'clima');
+  assert.equal(h.tarjetas[3].capitulo, 'politica');
   assert.equal(h.tarjetas[3].n, 2);
   assert.equal(h.tarjetas[3].nota, null);
   assert.deepEqual(h.tarjetas.filter((t) => t.tipo === 'titular').map((t) => t.orden), [1, 2, 3, 4, 5]);
@@ -307,7 +325,7 @@ function comprobar() {
   h = hilar(region, [listo([fila('Uno')]), listo([fila('UNO')]), listo([fila('Dos')]), INACTIVO, INACTIVO, INACTIVO, INACTIVO, INACTIVO]);
   assert.deepEqual(h.tarjetas.map((t) => t.tipo), ['titular', 'divisor', 'titular']);
   assert.equal(h.tarjetas[1].capitulo, 'seguridad');
-  assert.deepEqual(h.vacios, ['clima']);
+  assert.deepEqual(h.vacios, ['politica']);
 
   // --- hilar: fallos -----------------------------------------------------
   h = hilar(region, [FALLO, listo(lote('B', 2)), INACTIVO, INACTIVO, INACTIVO, INACTIVO, INACTIVO, INACTIVO]);
@@ -320,19 +338,19 @@ function comprobar() {
   h = hilar(region, todos);
   assert.equal(h.completo, true);
   assert.equal(h.enVuelo, 0);
-  const divisor = h.tarjetas.find((t) => t.tipo === 'divisor' && t.capitulo === 'clima');
-  assert.equal(divisor.nota, `Faltan los titulares en inglés. Se muestran los primeros ${TOPE_ACTUALIDAD}.`);
+  const divisor = h.tarjetas.find((t) => t.tipo === 'divisor' && t.capitulo === 'politica');
+  assert.equal(divisor.nota, 'Faltan los titulares en inglés. Hay más; se muestran los primeros.', 'sin un numero que contradiga la cuenta');
   assert.deepEqual(h.vacios, ['seguridad']);
-  assert.deepEqual(h.faltantes, ['politica']);
+  assert.deepEqual(h.faltantes, ['clima']);
   assert.equal(h.titulares, 1 + TOPE_ACTUALIDAD + 1 + 1 + 1 + 1);
   h = hilar(region, [...todos.slice(0, 7), CARGANDO]);
   assert.equal(h.completo, false, 'completo solo con los ocho asentados');
 
   // --- fraseFinal ----------------------------------------------------------
   const frase = fraseFinal(region, hilar(region, todos));
-  assert.equal(frase, `${1 + TOPE_ACTUALIDAD + 4} titulares en este recorrido. No se pudo traer: Política. Sin titulares nuevos en: Seguridad.`);
+  assert.equal(frase, `${1 + TOPE_ACTUALIDAD + 4} titulares en este recorrido. No se pudo traer: Clima. Sin titulares nuevos en: Seguridad.`);
   assert.doesNotMatch(frase, MECANISMO);
-  assert.equal(fraseFinal(region, hilar(region, [listo(lote('A', 1)), ...Array(7).fill(listo([]))])), 'Un titular en este recorrido. Sin titulares nuevos en: Clima, Seguridad, Deportes, Política, Economía, México, Internacional.');
+  assert.equal(fraseFinal(region, hilar(region, [listo(lote('A', 1)), ...Array(7).fill(listo([]))])), 'Un titular en este recorrido. Sin titulares nuevos en: Política, Seguridad, Economía, Clima, Deportes, México, Internacional.');
 
   // --- debeActivar ---------------------------------------------------------
   // El ultimo argumento es el largo REAL de la cadena, no una constante del

@@ -1,3 +1,23 @@
+> **Implementación · 25 de septiembre de 2026 — La búsqueda da lo que da Google
+> Noticias, Entretenimiento, y los temas por relevancia.** El cliente buscó
+> «mañanera» y no obtuvo lo mismo que en Google Noticias. La búsqueda pegaba los
+> lugares del corredor a la palabra, también desde México, y eso traía notas de
+> semanas atrás. Ahora la búsqueda respeta desde dónde se hace: desde México y
+> desde Internacional busca la palabra tal cual, y da la misma lista que Google
+> Noticias; desde el corredor, los primeros diez resultados son esos mismos y
+> debajo siguen los del corredor y los de sus medios; desde un municipio sigue
+> buscando en ese municipio.
+>
+> «Espectáculos» se llama ahora **Entretenimiento**, y los temas van por
+> relevancia informativa: Política, Seguridad, Economía, Clima, Deportes,
+> Entretenimiento, Turismo e IA, en la fila y en el recorrido. Con la entrada
+> México, Entretenimiento, Deportes y Economía son la sección de Google para
+> México y no una búsqueda: es su propia selección de lo más relevante del día.
+> Y todos los temas de México quitan lo que es de otro país, como «Soda Stereo
+> en Madrid» o «Susan Sarandon es arrestada en Nueva York»; lo que no nombra
+> ningún lugar se queda, porque no se puede probar que sea de fuera. La tarjeta
+> que separa los capítulos decía «15 titulars»; ya dice «titulares».
+
 > **Implementación · 24 de septiembre de 2026 — Guion para locución en la
 > pestaña TikTok.** El cliente cambió el foco del «Resumen con IA» del 23 de
 > septiembre: ahora es un guion que un conductor memoriza y dice, pedido con un

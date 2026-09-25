@@ -1,6 +1,8 @@
 "use client";
 
 import { FormularioBusqueda } from "@/components/ui/formulario-busqueda";
+import { esEdicion, type Entrada } from "@/lib/busqueda/capitulos";
+import { PARAM_EDICION, rutaDeEntrada } from "@/lib/busqueda/entrada";
 
 /**
  * El cuerpo del dialogo de busqueda del lector.
@@ -12,8 +14,10 @@ import { FormularioBusqueda } from "@/components/ui/formulario-busqueda";
  * que la hace compartible y la conserva al recargar.
  *
  * `accion` es la ruta del lugar donde se esta leyendo, asi que enviar desde
- * /tijuana busca en Tijuana. Enviar tambien suelta la faceta `?e=`: una
- * busqueda sustituye a la edicion, no se suma a ella.
+ * /tijuana busca en Tijuana. La edicion (`?e=mexico`) viaja en un campo
+ * oculto desde el 25 de septiembre de 2026: hasta entonces enviar la soltaba
+ * y buscar desde Mexico buscaba en el corredor, que es por lo que «mañanera»
+ * no daba lo que da Google Noticias.
  *
  * TRES ARREGLOS de la primera version, los tres visibles en pantalla:
  *
@@ -32,8 +36,10 @@ import { FormularioBusqueda } from "@/components/ui/formulario-busqueda";
  *     se esta leyendo— asi que ahora solo hay UN boton, y la salida es un
  *     enlace discreto que nombra su destino en vez de nombrar la accion.
  */
-export function BuscadorAhora({ accion, lugar, consulta }: {
+export function BuscadorAhora({ accion, entrada, lugar, consulta }: {
   accion: string;
+  /** La entrada del recorrido: su edicion se conserva al buscar. */
+  entrada: Entrada;
   /** Donde se busca, para decirlo en vez de hacerlo adivinar. */
   lugar: string;
   consulta: string | null;
@@ -41,6 +47,7 @@ export function BuscadorAhora({ accion, lugar, consulta }: {
   // La forma vive en ui/formulario-busqueda.tsx y la comparte Redes.
   return (
     <FormularioBusqueda accion={accion} idCampo="consulta-lector" etiqueta={`En ${lugar}`} consulta={consulta}
+      ocultos={esEdicion(entrada) ? { [PARAM_EDICION]: entrada } : {}} destinoSalida={rutaDeEntrada(entrada)}
       placeholder="garita, agua, presupuesto…" salida="Volver al recorrido" />
   );
 }

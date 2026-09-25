@@ -59,7 +59,7 @@
  */
 
 import { textoCaidos } from "./avisos";
-import { esRubroCadena, NOMBRE_RUBRO, RUBROS_CADENA, TITULO_RUBRO, VENTANA_DE, type Rubro, type RubroCadena } from "./rubros";
+import { esRubroCadena, NOMBRE_RUBRO, rotuloDeRubro, RUBROS_CADENA, TITULO_RUBRO, type Rubro, type RubroCadena } from "./rubros";
 import type { Idioma, ResultadoExterno } from "./tipos";
 import type { PedidoActualidad } from "./use-actualidad";
 import { plegar } from "@/lib/dominio/formato";
@@ -218,11 +218,11 @@ type Cabeza = readonly [Capitulo, Capitulo, Capitulo, Capitulo, Capitulo, Capitu
 function cabezaDe(elegido: RubroCadena | null, t: Cabeza): Cabeza {
   switch (elegido) {
     case null: return [t[0], t[1], t[2], t[3], t[4], t[5]];
-    case "clima": return [t[1], t[0], t[2], t[3], t[4], t[5]];
+    case "politica": return [t[1], t[0], t[2], t[3], t[4], t[5]];
     case "seguridad": return [t[2], t[0], t[1], t[3], t[4], t[5]];
-    case "deportes": return [t[3], t[0], t[1], t[2], t[4], t[5]];
-    case "politica": return [t[4], t[0], t[1], t[2], t[3], t[5]];
-    case "economia": return [t[5], t[0], t[1], t[2], t[3], t[4]];
+    case "economia": return [t[3], t[0], t[1], t[2], t[4], t[5]];
+    case "clima": return [t[4], t[0], t[1], t[2], t[3], t[5]];
+    case "deportes": return [t[5], t[0], t[1], t[2], t[3], t[4]];
   }
 }
 
@@ -246,19 +246,19 @@ export function capitulosDe(entrada: Entrada, elegido: Rubro | null = null): Cap
     fuente: "actualidad",
     pedido: { ...principal.donde, rubro: r },
     nombre: NOMBRE_RUBRO[r],
-    rotulo: `${NOMBRE_RUBRO[r]} · ${VENTANA_DE[r].rotulo}`,
+    rotulo: `${NOMBRE_RUBRO[r]} · ${rotuloDeRubro(r, "ambito" in principal.donde ? principal.donde.ambito : "zona")}`,
     titulo: `${TITULO_RUBRO[r]} ${principal.en}`,
     acento: ACENTO_RUBRO[r],
   });
-  const [clima, seguridad, deportes, politica, economia] = RUBROS_CADENA;
+  const [politica, seguridad, economia, clima, deportes] = RUBROS_CADENA;
   const [segunda, tercera] = colaDe(entrada);
   const cabeza = cabezaDe(elegido !== null && esRubroCadena(elegido) ? elegido : null, [
     capituloDeSeccion(principal),
-    rubro(clima),
-    rubro(seguridad),
-    rubro(deportes),
     rubro(politica),
+    rubro(seguridad),
     rubro(economia),
+    rubro(clima),
+    rubro(deportes),
   ]);
   // Los comunicados van DESPUES de los rubros y antes de las otras ediciones:
   // siguen siendo de Tecate, pero son boletines publicados y no lo que esta
@@ -314,8 +314,11 @@ export type Tarjeta =
       acento: string;
       /** Titulares del capitulo ya sin repetidos: lo que sigue de verdad. */
       n: number;
-      /** Como se llaman los n. «titulares», salvo en comunicados. */
+      /** Como se llama uno: «titular», salvo en comunicados. */
       sustantivo: string;
+      /** Y varios. Escrito y no armado con una «s»: «15 titulars» salio al
+       *  aire el 25 de septiembre de 2026, que es lo que da «titular» + s. */
+      plural: string;
       nota: string | null;
     }
   | { tipo: "hueco"; capitulo: CapituloId; rotulo: string; titulo: string; acento: string }
@@ -401,7 +404,10 @@ export function hilar(capitulos: Capitulos, estados: readonly EstadoCapitulo[]):
       const partes: string[] = [];
       const caidos = textoCaidos(e.caidos);
       if (caidos !== null) partes.push(caidos);
-      if (e.truncada) partes.push(`Se muestran los primeros ${e.resultados.length}.`);
+      // Sin numero: `n` cuenta DESPUES de quitar lo que otro capitulo ya
+      // mostro y la lista trae los quince de antes, y el 25 de septiembre de
+      // 2026 la tarjeta decia «14 titulares · Se muestran los primeros 15».
+      if (e.truncada) partes.push("Hay más; se muestran los primeros.");
       tarjetas.push({
         tipo: "divisor",
         capitulo: c.id,
@@ -410,6 +416,7 @@ export function hilar(capitulos: Capitulos, estados: readonly EstadoCapitulo[]):
         acento: c.acento,
         n: propios.length,
         sustantivo: c.fuente === "comunicados" ? "comunicado" : "titular",
+        plural: c.fuente === "comunicados" ? "comunicados" : "titulares",
         nota: partes.length === 0 ? null : partes.join(" "),
       });
     }

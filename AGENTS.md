@@ -1618,6 +1618,27 @@ Tailwind v4, pnpm.
   budget at an irregular rate, so the full lists lost the place and the
   window (Tijuana's Seguridad came back as Houston shootings), and it matches
   the « - Medio» suffix, so «… - FOX Sports Radio» entered Deportes.
+
+  **For México, a rubro Google already classifies is Google's section, not a
+  search** (25 September 2026, `rubros.ts::SECCION_DE_RUBRO`): Entretenimiento
+  reads ENTERTAINMENT, Deportes SPORTS and Economía BUSINESS of the MX
+  edition, with no title-term gate (Google classified it) and a «Cultura»
+  guard (`actualidad.ts::esTitular`: a section page is not a note). The case:
+  the México Espectáculos tab opened with «Soda Stereo en Madrid» and «Susan
+  Sarandon es arrestada en Nueva York», because a place-less search ranks by
+  term match; the section is Google's ranking of what matters in Mexico. A
+  place has no topic section in the RSS and the world neither (an edition's
+  section is that country's), so everywhere else a rubro stays a search, and
+  the cejilla says «ahora» only on a section. **Every México rubro chapter
+  also passes the México gate** (`lib/busqueda/extranjero.ts::soloDeMexico`):
+  out if the source is a social network or a foreign ccTLD, or the headline
+  names a foreign place and neither Mexico nor a place of here. Its lists are
+  a **copy of `pulso/zonas.py`** (`EXTRANJERO`, `_NO_ES_EXTRANJERO`,
+  `_MARCAS_MEXICO`), and `probar-busqueda.cjs` reads the `.py` and fails if
+  they drift; add a place there, with its measurement, never only here. Known
+  gaps that day: «Milán», «Madison», and foreign items that name no place
+  («Charles Spencer, tío del príncipe Harry»). NATION without a rubro is not
+  gated: it is Google's national section.
 - **The UI says *what*, never *how*.** Since 13 September 2026 no user-facing
   string may name the mechanism: not `pipeline`, `corpus`, `corrida`, `corte`
   (as a run), `cosechado`, `vigentes`, Apify, an API key, git, the deploy, a
@@ -1766,9 +1787,19 @@ Tailwind v4, pnpm.
   exhaustive over `Rubro | null` on purpose, so adding a rubro breaks at compile
   time the way `ACENTO_RUBRO` already does. The place's section is never
   dropped, only moved: choosing a theme narrows where you start, not what there
-  is. **Since 24 September 2026 there are two kinds of rubro** (`rubros.ts`):
+  is. **The tab row and the chain are in relevance order since 25 September
+  2026** (client: «the order seems very messy»): Política, Seguridad,
+  Economía, Clima, Deportes, then Entretenimiento, Turismo, IA. It is
+  editorial, not counted: two days of corridor search gave Deportes 117,
+  Seguridad 115, Clima 94 (hurricane Polo's week), Política 62, and a row that
+  reorders itself weekly cannot be learned. `pulso/rubros.py` copies `RUBROS`
+  in order (it is the order a video's `rubros` are emitted and validated), so
+  changing it means `probar-capitulos.cjs --escribir-rubros` and porting the
+  tuple. «Espectáculos» is displayed **Entretenimiento** since the same day;
+  the key stays `espectaculos` (URLs, `config/tiktok.json`, the pipeline copy).
+  **Since 24 September 2026 there are two kinds of rubro** (`rubros.ts`):
   the five of the chain (`RUBROS_CADENA`) and three from the client's programme
-  lineup plus AI news (`RUBROS_PROGRAMA`: Espectáculos, Turismo, IA). Left out
+  lineup plus AI news (`RUBROS_PROGRAMA`: Entretenimiento, Turismo, IA). Left out
   on purpose, the client's call the same day: El Reflector (a format, not a
   theme), Garitas (that is `/garitas`), California (that is the San Diego
   zone) and the mañanera, whose terms live inside Política.
@@ -1830,6 +1861,21 @@ Tailwind v4, pnpm.
   without JavaScript and stays in the URL. `use-busqueda.ts` lost its
   `titulosCorpus`/`suprimirConocidas` argument with the wall — there is no
   longer anything above it to avoid repeating.
+  **The search follows the ENTRY and opens with Google's own first page**
+  (25 September 2026, client: «mañanera» did not return what Google News
+  does). Measured that day: the query went out as `mañanera ("Baja
+  California" OR Tijuana …)` even from `?e=mexico`, and its first results
+  were 9 to 45 days old, with an English one second and the outlets and the
+  archive third and fourth by the turns; the bare word in the MX edition
+  returned Google News's list exactly. Now `?e=` rides in a hidden field and
+  as `a=`, so México and Internacional search place-less (México: one MX
+  query, no corridor outlets); at the corridor root the first
+  `buscar.ts::CABEZA_GOOGLE` (10) are the bare word's MX results in Google's
+  order, and then, by turns, the corridor-scoped es and en, the outlets'
+  searchers and the archive, so local coverage still appears below what
+  anyone would see on Google. A zone page stays scoped («En Tijuana»). The
+  label says «En las noticias» at the root because «el corredor» would now
+  say less than what comes back.
 
 - **The reader carries the site's navigation, and on a phone it is the only
   one.** `globals.css` hides everything but the reader and brings the pill back

@@ -49,14 +49,15 @@ const { fusionarLocales } = cargar('lib/busqueda/fusionar');
 const { esDeFuera, soloDeLaRegion, esRedSocial } = cargar('lib/busqueda/region');
 const { urlDeFeed, urlDeActualidad, urlDeLugar, esUrlDeGoogle } = cargar('lib/busqueda/google-noticias');
 const { responderActualidad, consultaDeRubro } = cargar('lib/busqueda/actualidad');
-const { RUBROS, NOMBRE_RUBRO, TERMINOS_RUBRO, VENTANA_RUBRO, PALABRAS_MAXIMAS_GOOGLE, consultaDeTerminos, nombraRubro } = cargar('lib/busqueda/rubros');
+const { RUBROS, NOMBRE_RUBRO, TERMINOS_RUBRO, VENTANA_RUBRO, PALABRAS_MAXIMAS_GOOGLE, SECCION_DE_RUBRO, consultaDeTerminos, nombraRubro } = cargar('lib/busqueda/rubros');
+const { EXTRANJERO, NO_ES_EXTRANJERO, MARCAS_MEXICO, esDeOtroPais, nombraExtranjero, nombraMexico, soloDeMexico } = cargar('lib/busqueda/extranjero');
 const { ZONAS_RUTA } = cargar('lib/dominio/zonas');
 const { fechaDelTitular, titularVencido } = cargar('lib/busqueda/fecha-titular');
 const { AMBITOS, esAmbitoActualidad, usaCorpus } = cargar('lib/busqueda/ambito');
 const { TOPE_ACTUALIDAD, TOPE_RELACIONADAS } = cargar('lib/busqueda/tipos');
 const { construirIndices } = cargar('lib/busqueda/archivo');
 const { responderRelacionadas } = cargar('lib/busqueda/relacionadas-viva');
-const { responderBusqueda } = cargar('lib/busqueda/buscar');
+const { responderBusqueda, CABEZA_GOOGLE } = cargar('lib/busqueda/buscar');
 const { SIN_CACHE: SIN_CACHE_BUSQUEDA } = cargar('lib/busqueda/respuesta');
 
 // El MISMO fixture que tests/test_busquedas.py lee en Python: seis items, uno
@@ -82,6 +83,11 @@ function redirigida(cuerpo, urlFinal) {
 
 const VIEJO = 'Mon, 01 Sep 2026 10:00:00 GMT';
 const NUEVO = 'Thu, 10 Sep 2026 10:00:00 GMT';
+
+// Un rubro de zona suma el archivo (actualidad.ts). Las pruebas que miden lo
+// que hace Google con las filas lo apagan: si no, leerian public/data del
+// disco y su resultado dependeria de la ultima ingesta.
+const SIN_ARCHIVO = async () => null;
 
 async function comprobar() {
   // --- Parseo del fixture real -------------------------------------------
@@ -179,6 +185,8 @@ async function comprobar() {
   assert.equal(esDeFuera(fila2('Morena Puebla respalda a Armenta', 'sucesospuebla.com')), true);
   assert.equal(esDeFuera(fila2('Gobernadora destaca a Dolores Hidalgo', 'nwnoticias.com')), true);
   assert.equal(esDeFuera(fila2('Carabineros detiene a dos menores', 'latercera.com')), true, 'Carabineros no existe en Mexico');
+  assert.equal(esDeFuera(fila2('Presunta Falla Mecánica Provoca Incendio de Tráiler en Apodaca, NL', 'nmas.com.mx')), true, 'NL no dice Nuevo León');
+  assert.equal(esDeFuera(fila2('Padres clinch the NL West in San Diego', 'fox5sandiego.com')), false, 'la Liga Nacional no es Nuevo León');
 
   // El toponimo compartido: un medio chileno que nombra «San Felipe» habla del
   // suyo. El pais del medio manda sobre el nombre del lugar.
@@ -440,7 +448,7 @@ async function comprobar() {
   // pagina vieja; la seccion, solo la pagina vieja.
   const rejas = await responderActualidad({ a: null, z: 'tijuana', t: 'deportes' }, async (url) => new Response(porLocale(url) === 'es'
     ? feed(item('Xolos de Tijuana enfrenta hoy al Atlas', NUEVO), item('Atl. San Luis 0-0 Tijuana (31 de Jul., 2026) Resultado Final', NUEVO, 'ESPN México'))
-    : feed(item('San Diego Tijuana International Jazz Festival to celebrate third year', NUEVO), item('Hurricane Polo Heading To Baja California', NUEVO, 'FOX Sports Radio'), item('Padres beat Dodgers in Tijuana exhibition', NUEVO))), HOY);
+    : feed(item('San Diego Tijuana International Jazz Festival to celebrate third year', NUEVO), item('Hurricane Polo Heading To Baja California', NUEVO, 'FOX Sports Radio'), item('Padres beat Dodgers in Tijuana exhibition', NUEVO))), HOY, SIN_ARCHIVO);
   assert.deepEqual((await rejas.json()).resultados.map((x) => x.titulo), ['Xolos de Tijuana enfrenta hoy al Atlas', 'Padres beat Dodgers in Tijuana exhibition']);
   const seccionVieja = await responderActualidad({ a: null, z: 'tijuana', t: null }, async () => new Response(feed(
     item('Guadalajara 5-2 Tijuana (22 de Ago., 2026) Resultado Final', NUEVO, 'ESPN México'), item('Cierran la garita de Tijuana', NUEVO))), HOY);
@@ -450,7 +458,7 @@ async function comprobar() {
   const rubroTj = await responderActualidad({ a: null, z: 'tijuana', t: 'clima' }, async (url) => {
     pedidasRubro.push(url);
     return new Response(feed(item(porLocale(url) === 'es' ? 'Lluvia en Tijuana' : 'Rain in Tijuana', NUEVO)));
-  }, AHORA);
+  }, AHORA, SIN_ARCHIVO);
   assert.deepEqual(pedidasRubro, [
     urlDeFeed(consultaDeRubro('clima', 'es', 'zona', 'Tijuana'), 'es'),
     urlDeFeed(consultaDeRubro('clima', 'en', 'zona', 'Tijuana'), 'en'),
@@ -473,6 +481,117 @@ async function comprobar() {
   assert.equal((await rubroMalo.json()).codigo, 'rubro');
   const ambosMalos = await responderActualidad({ a: null, z: 'nada', t: 'nada' }, async () => assert.fail('no debia consultar a Google'), AHORA);
   assert.equal((await ambosMalos.json()).codigo, 'zona');
+
+  // --- Mexico: la seccion de Google para lo que Google clasifica ------------
+  // 25 de septiembre de 2026. Espectaculos con la entrada Mexico abria con
+  // «Soda Stereo en Madrid» y «Susan Sarandon es arrestada en Nueva York»: una
+  // busqueda sin lugar trae cualquier medio en espanol del mundo.
+  assert.equal(NOMBRE_RUBRO.espectaculos, 'Entretenimiento', 'el nombre del cliente; la llave no cambia');
+  assert.deepEqual(SECCION_DE_RUBRO, { espectaculos: 'ENTERTAINMENT', deportes: 'SPORTS', economia: 'BUSINESS' });
+  const pedidasTema = [];
+  const entretenimiento = await responderActualidad({ a: 'mexico', z: null, t: 'espectaculos' }, async (url) => {
+    pedidasTema.push(url);
+    return new Response(feed(
+      item('Aleks Syntek arremete contra la prensa de espectáculos', NUEVO, 'El Informador'),
+      item('Soda Stereo en Madrid: el concierto del holograma consigue emocionar a casi todos', NUEVO, 'EL PAÍS', 'elpais.com'),
+      item('Susan Sarandon es arrestada en Nueva York: esto hizo la actriz de 79 años', NUEVO, 'Univision'),
+      item('Bad Bunny anuncia gira por México y España', NUEVO, 'Infobae'),
+      item('Cultura', NUEVO, 'jornada.com.mx'),
+      item('Luto en Televisa: muere actor de telenovelas', NUEVO, 'Infobae'),
+    ));
+  }, AHORA);
+  assert.deepEqual(pedidasTema, [urlDeActualidad('ENTERTAINMENT', 'es')], 'la seccion de la edicion MX, una sola, no una busqueda');
+  assert.deepEqual((await entretenimiento.json()).resultados.map((x) => x.titulo), [
+    'Aleks Syntek arremete contra la prensa de espectáculos',
+    'Bad Bunny anuncia gira por México y España',
+    'Luto en Televisa: muere actor de telenovelas',
+  ], 'sin reja de terminos (la clasifico Google), con la reja de Mexico, y sin la pagina de seccion «Cultura»');
+  // Un lugar no tiene seccion por tema, y el mundo tampoco: siguen buscando.
+  const pedidasOtro = [];
+  await responderActualidad({ a: 'internacional', z: null, t: 'espectaculos' }, async (url) => { pedidasOtro.push(url); return new Response(feed()); }, AHORA);
+  await responderActualidad({ a: null, z: 'tijuana', t: 'espectaculos' }, async (url) => { pedidasOtro.push(url); return new Response(feed()); }, AHORA);
+  assert.ok(pedidasOtro.every((u) => u.startsWith('https://news.google.com/rss/search?')), 'Internacional y una zona: busqueda');
+  // Un rubro sin seccion sigue siendo busqueda en Mexico, y pasa la reja.
+  const seguridadMx = await responderActualidad({ a: 'mexico', z: null, t: 'seguridad' }, async (url) => {
+    assert.ok(url.startsWith('https://news.google.com/rss/search?'), url);
+    return new Response(feed(
+      item('Detienen a ocho presuntos integrantes del Cártel de Sinaloa', NUEVO),
+      item('Detienen a líderes de fraternidad en Nueva York', NUEVO, 'Univision'),
+    ));
+  }, AHORA);
+  assert.deepEqual((await seguridadMx.json()).resultados.map((x) => x.titulo), ['Detienen a ocho presuntos integrantes del Cártel de Sinaloa']);
+  // La seccion NATION sin rubro no pasa la reja: es la nacional de Google.
+  const nation = await responderActualidad({ a: 'mexico', z: null, t: null }, async () => new Response(feed(item('Trump recibe a Xi Jinping en Washington', NUEVO))), AHORA);
+  assert.equal((await nation.json()).resultados.length, 1);
+
+  // --- La reja de Mexico: la lista del pipeline, copiada y vigilada ---------
+  // pulso/zonas.py se midio sobre 6,699 titulares; esta es su copia. Si alla
+  // cambia, aqui se rompe.
+  const zonasPy = fs.readFileSync(path.resolve(__dirname, '../../pulso/zonas.py'), 'utf8');
+  const listaPy = (nombre) => {
+    const cuerpo = zonasPy.slice(zonasPy.indexOf(`\n${nombre} = [`) + nombre.length + 5);
+    return [...cuerpo.slice(0, cuerpo.indexOf('\n]')).replace(/#.*$/gm, '').matchAll(/"([^"]+)"/g)].map((m) => m[1]);
+  };
+  assert.deepEqual([...EXTRANJERO], listaPy('EXTRANJERO'), 'EXTRANJERO es la copia de pulso/zonas.py');
+  assert.deepEqual([...NO_ES_EXTRANJERO], listaPy('_NO_ES_EXTRANJERO'));
+  assert.deepEqual([...MARCAS_MEXICO], listaPy('_MARCAS_MEXICO'));
+  assert.ok(EXTRANJERO.length > 150, 'la lectura del .py no puede pasar por vacia');
+  const filaMx = (titulo, dominio = 'medio.example') => ({ titulo, dominio });
+  for (const [titulo, fuera, porque] of [
+    ['Soda Stereo en Madrid: el concierto del holograma', true, 'el caso'],
+    ['Susan Sarandon es arrestada en Nueva York', true, 'el caso'],
+    ['Bad Bunny anuncia gira por México y España', false, 'nombrar a Mexico gana'],
+    ['Balacera en Culiacán deja a un cantante herido; lo trasladan a Houston', false, 'un lugar de Mexico gana'],
+    ['Festival del Chile en Nogada en Rosarito', false, 'el platillo no es el pais'],
+    ['Van a la Colonia Roma a comer', false, 'la colonia no es Roma'],
+    ['Los alumnos irán a clases el lunes', false, 'el verbo, no Iran'],
+    ['Sheinbaum habla de aranceles con Washington', false, 'una institucion federal es Mexico'],
+    ['Maribel Guardia demanda a Imelda', false, 'sin lugar no se puede probar que sea de fuera'],
+    ['Detienen a sospechoso en la cañada del arroyo', false, 'la cañada no es Canada'],
+    ['Taylor Swift llena el estadio de Londres', true, 'Londres'],
+  ]) {
+    assert.equal(esDeOtroPais(filaMx(titulo)), fuera, `${porque}: ${titulo}`);
+  }
+  assert.equal(esDeOtroPais(filaMx('Concierto en el Zócalo', 'lanacion.com.ar')), true, 'un medio de otro pais');
+  assert.equal(esDeOtroPais(filaMx('Concierto en el Zócalo', 'facebook.com')), true, 'una red social no es un medio');
+  assert.equal(nombraMexico('Llueve en Nuevo México'), false, 'Nuevo Mexico es de Estados Unidos');
+  assert.equal(nombraExtranjero('Llueve en Nuevo México'), true);
+  assert.deepEqual(soloDeMexico([filaMx('Uno en Madrid'), filaMx('Otro en Tijuana')]).map((x) => x.titulo), ['Otro en Tijuana']);
+
+  // --- La busqueda: Google tal cual a la cabeza, y la entrada manda ---------
+  // 25 de septiembre de 2026: «mañanera» salia como
+  // `mañanera ("Baja California" OR Tijuana ...)` y no daba lo que Google
+  // Noticias. Sin lugar, en la edicion MX, daba exactamente eso.
+  const cabezaGoogle = Array.from({ length: 12 }, (_, i) => item(`Mañanera nacional ${i + 1}`, NUEVO, `Medio ${i}`));
+  const pedidasQ = [];
+  const enCorredor = await (await responderBusqueda({ q: 'mañanera', z: null, a: null, actualizar: false }, async (url) => {
+    pedidasQ.push(url);
+    const q = new URL(url).searchParams.get('q');
+    if (q === 'mañanera') return new Response(feed(...cabezaGoogle));
+    return new Response(feed(item(porLocale(url) === 'es' ? 'Mañanera sobre Tijuana' : 'Mañanera in San Diego', NUEVO)));
+  }, async () => null, { leerCatalogo: async () => null })).json();
+  assert.equal(new URL(pedidasQ[0]).searchParams.get('q'), 'mañanera', 'primero, la palabra tal cual');
+  assert.equal(new URL(pedidasQ[0]).searchParams.get('hl'), 'es-419', 'en la edicion mexicana');
+  assert.equal(CABEZA_GOOGLE, 10);
+  assert.deepEqual(enCorredor.resultados.slice(0, 10).map((x) => x.titulo), cabezaGoogle.slice(0, 10).map((_, i) => `Mañanera nacional ${i + 1}`),
+    'la primera pagina de Google, en su orden y sin turnos');
+  assert.ok(enCorredor.resultados.slice(10).some((x) => x.titulo === 'Mañanera sobre Tijuana'), 'lo del corredor sigue, debajo');
+  assert.ok(pedidasQ.some((u) => new URL(u).searchParams.get('q').includes('Baja California')), 'y se sigue buscando en el corredor');
+  // Desde Mexico: una sola busqueda, sin lugar, sin medios del corredor.
+  const pedidasMx = [];
+  await responderBusqueda({ q: 'mañanera', z: null, a: 'mexico', actualizar: false }, async (url) => { pedidasMx.push(url); return new Response(feed()); },
+    async () => null, { leerCatalogo: async () => ({ buscadores: [{ id: 'bn', nombre: 'BN', url: 'https://blancoynegro.mx/?s={q}&feed=rss2', idioma: 'es' }], medios: [], cuentas: [] }), robots: async () => true });
+  assert.deepEqual(pedidasMx.map((u) => new URL(u).searchParams.get('q')), ['mañanera'], 'una busqueda, sin lugar, y ningun medio del corredor');
+  // Una zona sigue acotada y sin la consulta tal cual.
+  const pedidasZona = [];
+  await responderBusqueda({ q: 'bacheo', z: 'tijuana', a: null, actualizar: false }, async (url) => { pedidasZona.push(url); return new Response(feed()); },
+    async () => null, { leerCatalogo: async () => null });
+  assert.ok(pedidasZona.every((u) => new URL(u).searchParams.get('q').includes('Tijuana')), '/tijuana busca en Tijuana');
+  // Y el cliente manda la entrada: el campo oculto y el parametro.
+  const buscador = fs.readFileSync(path.resolve(__dirname, '../src/components/ahora/buscador-ahora.tsx'), 'utf8');
+  assert.match(buscador, /ocultos=\{esEdicion\(entrada\) \? \{ \[PARAM_EDICION\]: entrada \} : \{\}\}/);
+  const gancho = fs.readFileSync(path.resolve(__dirname, '../src/lib/busqueda/use-busqueda.ts'), 'utf8');
+  assert.match(gancho, /if \(esEdicion\(entrada\)\) partes\.push\(`a=\$\{entrada\}`\)/);
 
   // La lectura manual llega al origen, con los mismos filtros y sin cache.
   const manual = await responderActualidad({ a: null, z: 'tijuana', t: 'clima', actualizar: true }, async (url, opciones) => {
@@ -666,6 +785,54 @@ async function comprobar() {
     ARCHIVO_APAGON, dependencias);
   assert.deepEqual((await medioHtml.clone().json()).medios.map((m) => m.estado), ['fallo']);
   assert.notEqual(medioHtml.headers.get('Cache-Control'), SIN_CACHE_BUSQUEDA);
+
+  // 6. Un capitulo de rubro de una zona suma, por turnos con Google, el
+  //    archivo de ese rubro y ese lugar (25 de septiembre de 2026). El caso es
+  //    real: la semana del 18 al 25, 18 de las 19 notas de Deportes de Mexicali
+  //    eran de la seccion de La Voz, y solo tres titulares decian el rubro.
+  const VOZ = (slug) => ({ fuente: 'lavoz', dominio: 'oem.com.mx', url: `https://oem.com.mx/lavozdelafrontera/deportes/${slug}` });
+  const HACE_UN_DIA = '2026-09-10T20:00:00+00:00';
+  const CAT_RUBRO = { buscadores: [], cuentas: [], medios: [
+    { id: 'lavoz', nombre: 'La Voz de la Frontera', dominio: 'oem.com.mx', idioma: 'es', activo: true },
+    { id: 'notiens', nombre: 'Noticias Ensenada', dominio: 'noticiasensenada.com', idioma: 'es', activo: false },
+  ] };
+  const ARCHIVO_RUBRO = conArchivo([
+    nota('Tavo Vildósola no correrá la BAJA 1000', { ...VOZ('tavo'), zonas: ['Mexicali'], publicado: HACE_UN_DIA, rubros: ['deportes'] }),
+    nota('Se termina la racha de Soles en casa', { ...VOZ('soles'), zonas: ['Mexicali'], publicado: '2026-09-01T10:00:00+00:00', rubros: ['deportes'] }),
+    nota('Cabildo de Mexicali aprueba presupuesto', { ...VOZ('cabildo'), zonas: ['Mexicali'], publicado: HACE_UN_DIA, rubros: ['politica'] }),
+    nota('Xolos gana en casa ante el Atlas', { zonas: ['Tijuana'], publicado: HACE_UN_DIA, rubros: ['deportes'] }),
+    nota('Torneo de pesca en la bahía', { fuente: 'notiens', zonas: ['Mexicali'], publicado: HACE_UN_DIA, rubros: ['deportes'] }),
+    nota('Nota de un corte sin el campo', { zonas: ['Mexicali'], publicado: HACE_UN_DIA }),
+  ]);
+  const googleMxl = async () => new Response(feed(item('Águilas de Mexicali gana la serie de la Liga MX', NUEVO)));
+  const mxl = await (await responderActualidad({ a: null, z: 'mexicali', t: 'deportes' }, googleMxl, AHORA,
+    ARCHIVO_RUBRO, async () => CAT_RUBRO)).json();
+  assert.deepEqual(mxl.resultados.map((r) => r.titulo),
+    ['Águilas de Mexicali gana la serie de la Liga MX', 'Tavo Vildósola no correrá la BAJA 1000'],
+    'por turnos, Google primero; fuera lo viejo, otro rubro, otro lugar, un medio apagado y un corte sin rubros');
+  const delArchivoMxl = mxl.resultados[1];
+  assert.equal(delArchivoMxl.origen, 'archivo', 'la tarjeta no la rotula «en tendencia»');
+  assert.equal(delArchivoMxl.medio, 'La Voz de la Frontera');
+  assert.equal(delArchivoMxl.referencia.url, 'https://oem.com.mx/lavozdelafrontera/deportes/tavo', 'Analizar abre la nota del medio');
+  assert.ok(!('tono' in delArchivoMxl) && !('postura' in delArchivoMxl), 'sin tono, como cualquier fila');
+  // Scrapy fecha por la URL y deja medianoche sin zona: viaja solo el dia.
+  const afn = await (await responderActualidad({ a: null, z: 'tijuana', t: 'seguridad' }, async () => new Response(feed()), AHORA,
+    conArchivo([nota('Lesionan a balazos a un hombre en Jardín Dorado', { fuente: 'afn', dominio: 'afntijuana.info', url: 'https://afntijuana.info/seguridad/1_x',
+      fecha: '2026-09-11', publicado: '2026-09-11T00:00:00', rubros: ['seguridad'] })]), async () => CAT_RUBRO)).json();
+  assert.equal(afn.resultados[0].publicado, '2026-09-11', 'sin hora conocida no se inventa medianoche');
+  // La region es cualquier zona del producto; Mexico no lee el archivo.
+  const regionRubro = await (await responderActualidad({ a: 'region', z: null, t: 'deportes' }, async () => new Response(feed()), AHORA,
+    ARCHIVO_RUBRO, async () => CAT_RUBRO)).json();
+  assert.deepEqual(regionRubro.resultados.map((r) => r.titulo).sort(),
+    ['Tavo Vildósola no correrá la BAJA 1000', 'Xolos gana en casa ante el Atlas']);
+  const mxRubro = await (await responderActualidad({ a: 'mexico', z: null, t: 'seguridad' }, async () => new Response(feed()), AHORA,
+    conArchivo([nota('Detienen a dos en Mexicali', { zonas: ['Mexicali'], publicado: HACE_UN_DIA, rubros: ['seguridad'] })]),
+    async () => assert.fail('Mexico no lee el catalogo para el archivo'))).json();
+  assert.deepEqual(mxRubro.resultados, []);
+  // Un archivo publicado viejo no da filas viejas: da ninguna.
+  const viejo = await (await responderActualidad({ a: null, z: 'mexicali', t: 'deportes' }, async () => new Response(feed()), '2026-09-20T18:00:00.000Z',
+    ARCHIVO_RUBRO, async () => CAT_RUBRO)).json();
+  assert.deepEqual(viejo.resultados, []);
 
   // --- /api/relacionadas -------------------------------------------------
   const CONSULTA = 'Detienen a Los Rusos en Mexicali por homicidio del joyero';

@@ -39,7 +39,11 @@ const nextConfig: NextConfig = {
     // pudo consultar: degradado correcto, pero degradado, y solo en
     // produccion. notas.json SI esta en git, asi que aqui el patron siempre
     // empareja; si alguna vez no lo hiciera, el sintoma es ese.
-    "/api/actualidad": ["./public/data/notas.json"],
+    // Y desde el 25 de septiembre de 2026 los capitulos de rubro de una zona
+    // suman las notas del archivo de ese rubro; el catalogo pone el nombre del
+    // medio y deja fuera a los apagados. Sin el, las filas salen con el
+    // dominio y un senuelo apagado sigue entrando: degradado y en silencio.
+    "/api/actualidad": ["./public/data/notas.json", "./public/data/catalogo-busqueda.json"],
     // Desde el 23 de septiembre de 2026 la busqueda lee tambien los buscadores
     // de los medios, que llegan en catalogo-busqueda.json (lo arma
     // scripts/sincronizar-datos.mjs desde config/). Sin el, la busqueda sigue

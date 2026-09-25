@@ -68,7 +68,10 @@ if ((await existe(CONSULTAS)) && (await existe(MEDIOS))) {
       .sort((a, b) => a.id.localeCompare(b.id)),
     medios: (medios.medios ?? [])
       .filter((m) => typeof m.url === "string" && m.url !== "")
-      .map((m) => ({ id: m.id, nombre: m.nombre, dominio: dominio(m.url), idioma: m.idioma ?? "es" })),
+      // `activo`: un medio apagado por senuelo deja de alimentar los capitulos
+      // de rubro en cuanto se despliega, no cuando sus notas salen de la
+      // ventana (Noticias Ensenada, 25 de septiembre de 2026).
+      .map((m) => ({ id: m.id, nombre: m.nombre, dominio: dominio(m.url), idioma: m.idioma ?? "es", activo: m.activo !== false })),
     // El idioma DECLARADO de cada fila de redes (cuenta de Instagram,
     // busqueda o perfil de TikTok, canal de YouTube), por su id, que es el
     // `cuenta` de cada destacado. Decide que pies pasan por el modelo de tono.

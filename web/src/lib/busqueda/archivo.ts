@@ -2,7 +2,8 @@ import { leerDatoPublicado } from "@/lib/datos/publicado";
 import type { DocNotas, Etiqueta, Nota } from "@/lib/datos/tipos";
 import { plegar } from "@/lib/dominio/formato";
 import type { ZonaRuta } from "@/lib/dominio/zonas";
-import type { CatalogoBusqueda } from "./catalogo";
+import type { CatalogoBusqueda, MedioCatalogo } from "./catalogo";
+import type { Rubro } from "./rubros";
 import { indiceDeEnlaces, enlaceParaAnalisis } from "./enlaces";
 import { indiceDeImagenes, imagenPara } from "./imagenes";
 import { indiceDeRelacionadas, type IndiceRelacionadas } from "./relacionadas";
@@ -139,22 +140,76 @@ export function delArchivo(
     if (opciones.zona !== null && !nota.zonas.includes(opciones.zona)) continue;
     const fecha = nota.fecha ?? nota.publicado?.slice(0, 10) ?? null;
     if (fecha === null || fecha < opciones.desde) continue;
-    const medio = porId.get(nota.fuente);
-    salida.push({
-      fila: {
-        titulo: nota.titulo,
-        url: nota.url,
-        dominio: nota.dominio,
-        medio: medio?.nombre ?? nota.dominio,
-        publicado: nota.publicado ?? nota.fecha,
-        idioma: medio?.idioma ?? "es",
-        imagen: nota.imagen ?? null,
-        referencia: null,
-        origen: "archivo",
-      },
-      tono: nota.postura?.etiqueta ?? null,
-    });
+    salida.push({ fila: filaDeNota(nota, porId.get(nota.fuente)), tono: nota.postura?.etiqueta ?? null });
   }
   salida.sort((a, b) => (b.fila.publicado ?? "").localeCompare(a.fila.publicado ?? "") || a.fila.url.localeCompare(b.fila.url));
+  return salida.slice(0, opciones.tope);
+}
+
+/** Un `publicado` con zona horaria sabe la hora; uno sin ella es el dia que
+ *  Scrapy leyo de la URL (AFN, El Vigia) puesto a medianoche. */
+const conHora = (iso: string): boolean => /(?:Z|[+-]\d\d:\d\d)$/.test(iso);
+
+/** Una nota como fila de la portada: sin zona, tono ni figura, como cualquier
+ *  fila en vivo. `nombre` e `idioma` del catalogo por el id de la fuente; una
+ *  fuente sintetica (`gn-…`) no tiene fila y se rotula con su dominio.
+ *
+ *  Sin hora conocida viaja solo el dia, y la tarjeta no pinta hora: con la
+ *  medianoche de Scrapy decia «25 sep · 12:00 am» de una nota de AFN, una hora
+ *  que nadie publico (25 de septiembre de 2026). */
+function filaDeNota(nota: Nota, medio: MedioCatalogo | undefined): ResultadoExterno {
+  return {
+    titulo: nota.titulo,
+    url: nota.url,
+    dominio: nota.dominio,
+    medio: medio?.nombre ?? nota.dominio,
+    publicado: nota.publicado !== null && conHora(nota.publicado) ? nota.publicado : (nota.fecha ?? nota.publicado),
+    idioma: medio?.idioma ?? "es",
+    imagen: nota.imagen ?? null,
+    referencia: null,
+    origen: "archivo",
+  };
+}
+
+/**
+ * Las notas del archivo de un rubro y un lugar, mas reciente primero: lo que
+ * el pipeline cosecho de los feeds propios y ya organizo por tema
+ * (`rubros`, pulso/tema_nota.py) y por lugar (`zonas`, el gacetero).
+ *
+ * EL CASO, 25 de septiembre de 2026: el capitulo de un rubro era solo una
+ * busqueda de Google, que empata el cuerpo del articulo y fecha la pagina el
+ * dia que la releyo, y ese dia el cliente mando Deportes con el festival de
+ * jazz y partidos de julio. Las rejas de actualidad.ts restan lo que sobra;
+ * esto suma lo que faltaba. En la semana del 18 al 25, Mexicali tenia 19
+ * notas de Deportes en el archivo, 18 de La Voz de la Frontera y casi todas
+ * por su seccion /deportes/; solo tres titulares nombraban un termino del
+ * rubro («Tavo Vildósola no correrá la BAJA 1000» no nombra ninguno).
+ *
+ * `zona: null` es la region: una nota con alguna zona del producto, no una
+ * nacional ni una de fuera. Solo notas de medios encendidos: uno apagado por
+ * senuelo deja de alimentar la portada con el despliegue, no una semana
+ * despues. La ventana se mide con `publicado` (o el dia, sin hora) contra
+ * `desde`, asi que un archivo publicado viejo no da filas viejas: da ninguna,
+ * y el capitulo queda como era antes de esto.
+ */
+export function delArchivoPorRubro(
+  indices: IndicesArchivo | null,
+  catalogo: CatalogoBusqueda | null,
+  opciones: { rubro: Rubro; zona: ZonaRuta | null; desde: string; tope: number },
+): ResultadoExterno[] {
+  if (indices === null) return [];
+  const desde = Date.parse(opciones.desde);
+  const porId = new Map((catalogo?.medios ?? []).map((m) => [m.id, m]));
+  const salida: ResultadoExterno[] = [];
+  for (const { nota } of indices.titulares) {
+    if (!(nota.rubros ?? []).includes(opciones.rubro)) continue;
+    if (opciones.zona === null ? nota.zonas.length === 0 : !nota.zonas.includes(opciones.zona)) continue;
+    const medio = porId.get(nota.fuente);
+    if (medio?.activo === false) continue;
+    const cuando = Date.parse(nota.publicado ?? nota.fecha ?? "");
+    if (Number.isNaN(cuando) || cuando < desde) continue;
+    salida.push(filaDeNota(nota, medio));
+  }
+  salida.sort((a, b) => (b.publicado ?? "").localeCompare(a.publicado ?? "") || a.url.localeCompare(b.url));
   return salida.slice(0, opciones.tope);
 }

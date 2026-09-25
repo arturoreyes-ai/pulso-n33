@@ -7,7 +7,7 @@ import { CONTROL, Lector } from "@/components/lector/lector";
 import { ListaRelacionadas, TITULO_RELACIONADAS } from "@/components/paneles/relacionadas-titular";
 import { EstadoCarga } from "@/components/ui/estado-carga";
 import { debeActivar, fraseFinal, type Capitulos, type Entrada, type Tarjeta } from "@/lib/busqueda/capitulos";
-import { entradaDe, rubroDe } from "@/lib/busqueda/entrada";
+import { entradaDe, rubroDe, rutaDeEntrada } from "@/lib/busqueda/entrada";
 import type { Rubro } from "@/lib/busqueda/rubros";
 import { useBusquedaViva } from "@/lib/busqueda/use-busqueda";
 import { useImagenesVivas } from "@/lib/busqueda/use-imagen-viva";
@@ -74,11 +74,13 @@ const tituloRecorrido = (entrada: Entrada, capitulos: Capitulos, rubro: Rubro | 
   return entrada === "region" ? "Titulares del corredor" : `Titulares de ${nombreDe(entrada)}`;
 };
 
-/** Donde busca la lupa, dicho como se dice. No es la ENTRADA: la busqueda se
- *  acota por zona (`z=`), asi que en `/?e=mexico` busca el corredor y no
- *  Mexico, y el rotulo tiene que decir eso y no lo otro. */
-const lugarDeBusqueda = (zona: ZonaRuta | null): string =>
-  zona === null ? "el corredor" : NOMBRE_CORTO[zona];
+/** Donde busca la lupa, dicho como se dice. Es la ENTRADA desde el 25 de
+ *  septiembre de 2026 (use-busqueda.ts): antes era solo la zona, y en
+ *  `/?e=mexico` buscaba el corredor. En el corredor la cabeza es lo que da
+ *  Google Noticias para el termino, sin lugar (buscar.ts), asi que ahi el
+ *  rotulo no dice «el corredor»: diria menos de lo que sale. */
+const lugarDeBusqueda = (entrada: Entrada): string =>
+  entrada === "region" ? "las noticias" : entrada === "mexico" ? "México" : entrada === "internacional" ? "el mundo" : NOMBRE_CORTO[entrada];
 
 export function FeedAhora({ zona, edicion, consulta, rubro, menu, analisis }: {
   zona: ZonaRuta | null;
@@ -104,7 +106,7 @@ export function FeedAhora({ zona, edicion, consulta, rubro, menu, analisis }: {
   const q = (consulta ?? "").trim();
   if (q !== "") {
     return (
-      <RecorridoBusqueda key={`q:${q}:${zona ?? "region"}`} consulta={q} zona={zona}
+      <RecorridoBusqueda key={`q:${q}:${entrada}`} consulta={q} zona={zona} entrada={entrada}
         menu={menu} analisis={analisis} />
     );
   }
@@ -195,7 +197,7 @@ function RecorridoAhora({ entrada, rubro, zona, onRecargar, menu, analisis }: {
           </button>
         ) : null}
       </>}
-      busqueda={<BuscadorAhora accion={ruta(zona, null)} lugar={lugarDeBusqueda(zona)} consulta={null} />}
+      busqueda={<BuscadorAhora accion={ruta(zona, null)} entrada={entrada} lugar={lugarDeBusqueda(entrada)} consulta={null} />}
       menu={menu} restaurarFoco={restaurarFoco}>
       <div ref={contenedor} className="recorrido-lector" tabIndex={0} role="region" aria-label={tituloRecorrido(entrada, capitulos, rubro)}
         onKeyDown={(evento) => teclasDelRecorrido(evento, actual, total, ir)}>
@@ -228,11 +230,11 @@ function RecorridoAhora({ entrada, rubro, zona, onRecargar, menu, analisis }: {
  * para nada. Lo que si comparte es todo lo demas: la caja, el ajuste por
  * tarjeta, las miniaturas y el enlace del propio medio.
  */
-function RecorridoBusqueda({ consulta, zona, menu, analisis }: {
-  consulta: string; zona: ZonaRuta | null;
+function RecorridoBusqueda({ consulta, zona, entrada, menu, analisis }: {
+  consulta: string; zona: ZonaRuta | null; entrada: Entrada;
   menu: ReactNode; analisis: boolean;
 }) {
-  const viva = useBusquedaViva(consulta, zona);
+  const viva = useBusquedaViva(consulta, zona, entrada);
   const rel = useHojaRelacionadas();
   const contenedor = useRef<HTMLDivElement>(null);
   const { actual, ir } = useRecorrido(contenedor);
@@ -256,10 +258,10 @@ function RecorridoBusqueda({ consulta, zona, menu, analisis }: {
   // Sin pestanas y con `rubro={null}`: una busqueda es una lista plana, no una
   // cadena que se pueda empezar por un rubro.
   return (
-    <Lector volver={ruta(zona, null)} rotulo="En Tendencia" rotuloValor="Búsqueda" valor={consulta}
+    <Lector volver={rutaDeEntrada(entrada)} rotulo="En Tendencia" rotuloValor="Búsqueda" valor={consulta}
       tituloOpciones="Por dónde empezar"
-      opciones={<OpcionesAhora entrada={entradaDe(zona, null)} rubro={null} />}
-      busqueda={<BuscadorAhora accion={ruta(zona, null)} lugar={lugarDeBusqueda(zona)} consulta={consulta} />}
+      opciones={<OpcionesAhora entrada={entrada} rubro={null} />}
+      busqueda={<BuscadorAhora accion={ruta(zona, null)} entrada={entrada} lugar={lugarDeBusqueda(entrada)} consulta={consulta} />}
       menu={menu} restaurarFoco={restaurarFoco}>
       <div ref={contenedor} className="recorrido-lector" tabIndex={0} role="region" aria-label={`Resultados para ${consulta}`}
         onKeyDown={(evento) => teclasDelRecorrido(evento, actual, total, ir)}>

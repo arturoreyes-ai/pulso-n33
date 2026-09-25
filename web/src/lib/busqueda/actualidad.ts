@@ -50,9 +50,27 @@
  *    Deportes partidos de ESPN de julio con hora de ese dia. Por eso un rubro
  *    se lee con TOPE_CRUDO_RUBRO y no con quince: lo que las rejas quitan no
  *    puede dejar el capitulo corto.
+ *  - Un rubro de MEXICO que Google ya clasifica (Entretenimiento, Deportes,
+ *    Economia) es la seccion tematica de la edicion MX, no una busqueda
+ *    (rubros.ts::SECCION_DE_RUBRO), y ahi no hay reja de titular: la
+ *    clasificacion es de Google y el orden es su ranking, como en cualquier
+ *    seccion. Y todo capitulo de rubro con la entrada Mexico pasa la reja de
+ *    Mexico (extranjero.ts), por «Soda Stereo en Madrid» y «Susan Sarandon es
+ *    arrestada en Nueva York», que abrian Espectaculos el 25 de septiembre de
+ *    2026. La seccion NATION sin rubro no: es la seccion nacional de Google.
+ *  - Un rubro de una ZONA o de la REGION suma, por turnos con Google, las
+ *    notas del archivo de ese rubro y ese lugar (archivo.ts::delArchivoPorRubro,
+ *    25 de septiembre de 2026): lo que los feeds propios publicaron y el
+ *    pipeline organizo por seccion del medio y por gacetero. Es el patron de
+ *    buscar.ts, que ya intercala el archivo con los locales de Google; el orden
+ *    de Google dentro de lo suyo no se toca. Esas filas no pasan la reja del
+ *    titular, porque su rubro lo decidio la seccion del medio o el titular en
+ *    el pipeline, ni la de region, porque su lugar lo decidio el gacetero; la
+ *    fecha si. Mexico e Internacional no: el archivo es del corredor.
  *  - Nada de esto toca `data/` ni el pipeline. Son `ResultadoExterno`, no
  *    `Nota`: sin id, zona, tono ni figura, y no cuentan en ninguna cifra de
- *    prensa. PRODUCT.md separa a proposito esas dos clases de afirmacion.
+ *    prensa. PRODUCT.md separa a proposito esas dos clases de afirmacion. Las
+ *    del archivo tambien: viajan como `origen: "archivo"`, sin su tono.
  *
  * Sobre el nombre: `destacados` ya es otra cosa en este repo (los posts de
  * Instagram de data/redes.json), `portada` es la vista de inicio del tablero
@@ -60,7 +78,9 @@
  */
 
 import { componerConsulta, esAmbitoActualidad, type Ambito, type AmbitoActualidad } from "./ambito";
-import { archivoPublicado, atarTodas, type LeerArchivo } from "./archivo";
+import { archivoPublicado, atarTodas, delArchivoPorRubro, type LeerArchivo } from "./archivo";
+import { catalogoPublicado, type LeerCatalogo } from "./catalogo";
+import { soloDeMexico } from "./extranjero";
 import { fusionarLocales } from "./fusionar";
 import { soloDeLaRegion } from "./region";
 import {
@@ -73,7 +93,7 @@ import {
 } from "./google-noticias";
 import { CACHE_CDN, SIN_CACHE, json } from "./respuesta";
 import { titularVencido } from "./fecha-titular";
-import { consultaDeTerminos, esRubro, nombraRubro, VENTANA_DE, type Rubro } from "./rubros";
+import { consultaDeTerminos, esRubro, esSeccionDeRubro, nombraRubro, SECCION_DE_RUBRO, VENTANA_DE, type Rubro } from "./rubros";
 import {
   TOPE_ACTUALIDAD,
   type ErrorActualidad,
@@ -204,6 +224,8 @@ interface Resuelta {
   seccion: SeccionActualidad;
   zona: ZonaRuta | null;
   rubro: Rubro | null;
+  /** El rubro se lee de la seccion tematica de Google y no de una busqueda. */
+  seccionDeRubro: boolean;
   pedidos: Pedido[];
 }
 
@@ -265,16 +287,21 @@ export function resolverActualidad(consulta: ConsultaActualidad): Resuelta | Err
   const donde = resolverDonde(consulta);
   if ("error" in donde) return donde;
   if (consulta.t === null) {
-    return { seccion: donde.seccion, zona: donde.zona, rubro: null, pedidos: donde.pedidosSeccion };
+    return { seccion: donde.seccion, zona: donde.zona, rubro: null, seccionDeRubro: false, pedidos: donde.pedidosSeccion };
   }
   if (!esRubro(consulta.t)) {
     return { error: { codigo: "rubro", mensaje: "Rubro desconocido." } };
   }
   const rubro = consulta.t;
+  const tema = SECCION_DE_RUBRO[rubro];
+  if (esSeccionDeRubro(rubro, donde.ambito) && tema !== undefined) {
+    return { seccion: donde.seccion, zona: donde.zona, rubro, seccionDeRubro: true, pedidos: [{ url: urlDeActualidad(tema, "es"), idioma: "es" }] };
+  }
   return {
     seccion: donde.seccion,
     zona: donde.zona,
     rubro,
+    seccionDeRubro: false,
     pedidos: donde.idiomas.map((idioma) => ({
       url: urlDeFeed(consultaDeRubro(rubro, idioma, donde.ambito, donde.zona), idioma),
       idioma,
@@ -282,37 +309,71 @@ export function resolverActualidad(consulta: ConsultaActualidad): Resuelta | Err
   };
 }
 
+/**
+ * Una seccion de Google trae a veces la PAGINA de una seccion del medio y no
+ * una nota: «Cultura», de jornada.com.mx, en ENTERTAINMENT el 25 de
+ * septiembre de 2026. Un titular de una o dos palabras no es un titular.
+ */
+export const esTitular = (titulo: string): boolean => titulo.trim().split(/\s+/).length >= 3;
+
+/** Los dias de la ventana de un rubro, de su `when:` (2, o 7 en IA). */
+const diasDe = (rubro: Rubro): number => Number(/^when:(\d+)d$/.exec(VENTANA_DE[rubro].consulta)?.[1] ?? 2);
+
 export async function responderActualidad(
   consulta: ConsultaActualidad,
   solicitar: typeof fetch = fetch,
   ahora: string = new Date().toISOString(),
   leerArchivo: LeerArchivo = archivoPublicado,
+  leerCatalogo: LeerCatalogo = catalogoPublicado,
 ): Promise<Response> {
   const r = resolverActualidad(consulta);
   if ("error" in r) return json(r.error, 400, SIN_CACHE);
 
   const tope = r.rubro === null ? TOPE_ACTUALIDAD : TOPE_CRUDO_RUBRO;
-  const cosechas = await cosecharFeeds(r.pedidos, tope, solicitar);
+  const conArchivo = r.rubro !== null && (r.seccion === "zona" || r.seccion === "region");
+  const [cosechas, indices, catalogo] = await Promise.all([
+    cosecharFeeds(r.pedidos, tope, solicitar),
+    leerArchivo(),
+    conArchivo ? leerCatalogo() : Promise.resolve(null),
+  ]);
 
   // Intercalados por locale y sin repetir titular. NUNCA ordenados aqui.
   const crudos = fusionarLocales(cosechas.map((c) => c.resultados));
 
   // La reja de region SOLO en lo que dice ser de aqui. Mexico e Internacional
-  // existen precisamente para traer lo de fuera: filtrarlos los vaciaria.
+  // existen precisamente para traer lo de fuera del CORREDOR: filtrarlos por
+  // region los vaciaria. Lo que Mexico si filtra es lo de fuera del PAIS, y
+  // solo en sus rubros (ver el docstring).
   const deAqui =
-    r.seccion === "zona" || r.seccion === "region" ? soloDeLaRegion(crudos) : crudos;
-  // Las dos rejas del docstring. `idioma` es el de la edicion que devolvio la
-  // fila, que es el idioma en que se pidieron los terminos.
+    r.seccion === "zona" || r.seccion === "region" ? soloDeLaRegion(crudos)
+      : r.seccion === "mexico" && r.rubro !== null ? soloDeMexico(crudos) : crudos;
+  // Las rejas del docstring. `idioma` es el de la edicion que devolvio la
+  // fila, que es el idioma en que se pidieron los terminos. En la seccion de
+  // un rubro no hay terminos que nombrar: la clasifico Google.
   const rubro = r.rubro;
-  const fusionados = deAqui.filter(
-    (f) => !titularVencido(f.titulo, ahora) && (rubro === null || nombraRubro(f.titulo, rubro, f.idioma)),
+  const deGoogle = deAqui.filter(
+    (f) => !titularVencido(f.titulo, ahora)
+      && (rubro === null || r.seccionDeRubro || nombraRubro(f.titulo, rubro, f.idioma))
+      && (!r.seccionDeRubro || esTitular(f.titulo)),
   );
+  // El archivo del rubro y el lugar, por turnos con Google (ver el docstring).
+  // Un archivo ilegible no quita nada: el capitulo queda como era.
+  const fusionados = conArchivo && rubro !== null
+    ? fusionarLocales([
+        deGoogle,
+        delArchivoPorRubro(indices, catalogo, {
+          rubro,
+          zona: r.zona,
+          desde: new Date(Date.parse(ahora) - diasDe(rubro) * 86_400_000).toISOString(),
+          tope: TOPE_ACTUALIDAD,
+        }).filter((f) => !titularVencido(f.titulo, ahora)),
+      ])
+    : deGoogle;
 
   // El cruce contra el archivo va DESPUES del corte: solo se resuelve lo que
   // de verdad sale. Un archivo ilegible deja las filas como estan —`imagen` y
   // `referencia` en null—, que es el mismo estado que una fila sin empate y no
   // uno nuevo que la tarjeta tenga que saber distinguir.
-  const indices = await leerArchivo();
   const cuerpo: RespuestaActualidad = {
     seccion: r.seccion,
     zona: r.zona === null ? null : SLUG_DE_ZONA[r.zona],

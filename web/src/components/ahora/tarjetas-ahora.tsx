@@ -68,6 +68,9 @@ export function TarjetaTitular({ t, titulares, indice, imagen = null, analisis =
   // `nofollow`, que estaba porque el enlace venia de un buscador; este es el
   // del propio emisor.
   const oficial = t.capitulo === "comunicados";
+  // Un dia sin hora (el comunicado, o una nota del archivo que Scrapy fecho
+  // por su URL) no pinta hora: `hora()` diria medianoche.
+  const sinHora = oficial || (iso !== null && iso.length === 10);
   const [rota, setRota] = useState<string | null>(null);
   const [cargada, setCargada] = useState<string | null>(null);
   const conFigura = imagen !== null && imagen !== rota;
@@ -101,7 +104,7 @@ export function TarjetaTitular({ t, titulares, indice, imagen = null, analisis =
       <p className="mt-6 flex flex-wrap items-center gap-2 text-cuerpo text-tinta-meta">
         <span className="text-tinta-dato">{t.r.medio}</span>
         {iso !== null && valida ? (
-          <time dateTime={iso}>{fechaCorta(iso)}{oficial ? null : <> · {hora(iso)}</>}</time>
+          <time dateTime={iso}>{fechaCorta(iso)}{sinHora ? null : <> · {hora(iso)}</>}</time>
         ) : (
           <span>s/f</span>
         )}
@@ -189,7 +192,7 @@ export function TarjetaDivisor({ t, indice }: { t: Divisor; indice: number }) {
       <p className={`text-meta ${t.acento}`}>{t.rotulo}</p>
       <h2 className="mt-4 max-w-[24ch] font-titular text-seccion text-tinta-titulo">{t.titulo}</h2>
       <p className="mt-4 max-w-[65ch] text-lectura text-tinta-prosa">
-        {t.n === 1 ? `Un ${t.sustantivo}` : `${t.n} ${t.sustantivo}s`}
+        {t.n === 1 ? `Un ${t.sustantivo}` : `${t.n} ${t.plural}`}
         {t.nota === null ? "." : ` · ${t.nota}`}
       </p>
     </article>

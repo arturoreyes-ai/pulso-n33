@@ -23,6 +23,9 @@ export interface MedioCatalogo {
   nombre: string;
   dominio: string;
   idioma: Idioma;
+  /** `activo` de config/medios.json. Un catalogo de antes del campo no lo
+   *  trae y se lee como encendido: la proyeccion no apagaba nada. */
+  activo: boolean;
 }
 
 /** Una fila de config/instagram.json, tiktok.json o youtube.json: su id es el
@@ -58,12 +61,13 @@ export function leerFormaCatalogo(crudo: unknown): CatalogoBusqueda | null {
     && typeof (b as BuscadorMedio).url === "string" && (b as BuscadorMedio).url.startsWith("https://")
     && (b as BuscadorMedio).url.includes("{q}")
     && esIdioma((b as BuscadorMedio).idioma));
-  const medios = c.medios.filter((m): m is MedioCatalogo =>
+  const medios = c.medios.filter((m): m is Omit<MedioCatalogo, "activo"> & { activo?: unknown } =>
     typeof m === "object" && m !== null
     && typeof (m as MedioCatalogo).id === "string"
     && typeof (m as MedioCatalogo).nombre === "string"
     && typeof (m as MedioCatalogo).dominio === "string"
-    && esIdioma((m as MedioCatalogo).idioma));
+    && esIdioma((m as MedioCatalogo).idioma))
+    .map((m) => ({ id: m.id, nombre: m.nombre, dominio: m.dominio, idioma: m.idioma, activo: m.activo !== false }));
   return { buscadores, medios, cuentas };
 }
 

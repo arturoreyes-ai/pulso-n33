@@ -6,6 +6,7 @@ import { useMemo } from "react";
 import useSWRImmutable from "swr/immutable";
 
 import { SLUG_DE_ZONA, type ZonaRuta } from "@/lib/dominio/zonas";
+import { esEdicion, type Entrada } from "./capitulos";
 import { leerApi, useHayServidor } from "./disponible";
 import {
   MINIMO_CONSULTA,
@@ -33,10 +34,13 @@ export interface BusquedaViva extends ActualizacionViva {
  * quitaron el 15 de septiembre de 2026 al irse esa pagina: recibia el conjunto
  * de titulares del corpus para SUPRIMIR los resultados que el muro ya mostraba
  * arriba —sin muro no hay nada que repetir— y recibia un ambito, que elegian
- * unas pastillas que tampoco existen. El alcance es ahora el de la ruta: `/`
- * busca en el corredor y `/tijuana` en Tijuana.
+ * unas pastillas que tampoco existen. El alcance es el de la ENTRADA: `/`
+ * busca en el corredor (con Google tal cual a la cabeza, ver buscar.ts),
+ * `/tijuana` en Tijuana, y `?e=mexico` en Mexico. La edicion no se mandaba
+ * hasta el 25 de septiembre de 2026, y buscar desde Mexico buscaba en el
+ * corredor.
  */
-export function useBusquedaViva(consulta: string, zona: ZonaRuta | null): BusquedaViva {
+export function useBusquedaViva(consulta: string, zona: ZonaRuta | null, entrada: Entrada = zona ?? "region"): BusquedaViva {
   const hayServidor = useHayServidor();
   const q = consulta.trim();
   const activa = hayServidor && q.length >= MINIMO_CONSULTA;
@@ -46,7 +50,8 @@ export function useBusquedaViva(consulta: string, zona: ZonaRuta | null): Busque
   // volver a una busqueda ya hecha se sirve del cache -- y el CDN, que llavea
   // por URL completa, guarda cada zona por separado gratis.
   const partes = [`q=${encodeURIComponent(q)}`];
-  if (zona !== null) partes.push(`z=${SLUG_DE_ZONA[zona]}`);
+  if (esEdicion(entrada)) partes.push(`a=${entrada}`);
+  else if (zona !== null) partes.push(`z=${SLUG_DE_ZONA[zona]}`);
 
   const llave = activa ? `/api/buscar?${partes.join("&")}` : null;
   const actualizacion = useActualizar<RespuestaBusqueda>(llave);

@@ -19,7 +19,7 @@ import { LARGO_MAXIMO_CONSULTA, MINIMO_CONSULTA } from "@/lib/busqueda/tipos";
  * solo filo, un solo boton y la salida como enlace) estan escritas en el
  * docstring de buscador-ahora.tsx.
  */
-export function FormularioBusqueda({ accion, idCampo, etiqueta, consulta, placeholder, salida, children }: {
+export function FormularioBusqueda({ accion, idCampo, etiqueta, consulta, placeholder, salida, ocultos = {}, destinoSalida = accion, children }: {
   accion: string;
   idCampo: string;
   etiqueta: string;
@@ -27,12 +27,18 @@ export function FormularioBusqueda({ accion, idCampo, etiqueta, consulta, placeh
   placeholder: string;
   /** El texto del enlace que sale de la busqueda; solo se pinta con consulta. */
   salida: string;
+  /** Parametros que la busqueda conserva al enviarse: la edicion de la
+   *  portada (`e=mexico`), que no es parte de la ruta. */
+  ocultos?: Readonly<Record<string, string>>;
+  /** A donde lleva la salida; la ruta del formulario si no se dice. */
+  destinoSalida?: string;
   /** Lo que va entre el formulario y la salida (los terminos de Redes). */
   children?: ReactNode;
 }) {
   return (
     <div className="grid gap-5 px-4 pt-5 pb-6">
       <form method="get" action={accion} className="grid gap-3">
+        {Object.entries(ocultos).map(([nombre, valor]) => <input key={nombre} type="hidden" name={nombre} value={valor} />)}
         <label htmlFor={idCampo} className="text-meta text-tinta-meta">{etiqueta}</label>
         <input
           id={idCampo}
@@ -64,7 +70,7 @@ export function FormularioBusqueda({ accion, idCampo, etiqueta, consulta, placeh
 
       {consulta === null ? null : (
         <Link
-          href={accion}
+          href={destinoSalida}
           className="justify-self-start text-meta text-tinta-meta underline decoration-filo underline-offset-4 transition-colors duration-[var(--dur-toque)] ease-out hover:text-tinta-titulo"
         >
           {salida}

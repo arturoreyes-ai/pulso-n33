@@ -1,5 +1,7 @@
 // Espejo de los contratos de docs/datos.md. La ley es pulso/validador.py.
 
+import type { Rubro } from "@/lib/busqueda/rubros";
+
 /** Las nueve zonas. Igual que ZONAS en pulso/__init__.py. */
 export type Zona =
   | "estatal"
@@ -90,6 +92,15 @@ export interface Nota {
   imagen?: string;
   figuras: FiguraEnNota[];
   postura: Postura | null;
+  /** Lo que dijo la <category> del feed al cosecharla, pasado por el mapa
+   *  `secciones` del medio (pulso/tema_nota.py). Solo en notas del feed del
+   *  propio medio; se guarda porque el feed no la vuelve a mandar. */
+  rubros_categoria?: Rubro[];
+  /** Los rubros que dicen la seccion del medio (esa categoria o la ruta de la
+   *  URL) o el titular, en el orden de RUBROS. Vacio no es «sin tema»: es que
+   *  ni la seccion ni el titular lo dicen. Opcional porque los cortes
+   *  anteriores al 25 de septiembre de 2026 no lo traen. */
+  rubros?: Rubro[];
 }
 
 /**
