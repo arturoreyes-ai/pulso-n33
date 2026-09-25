@@ -291,6 +291,15 @@ class TestIdentidadDelPublicador(unittest.TestCase):
         self.assertNotIn(fold("Zeta Tijuana"), por_dominio)
         self.assertIn(fold("Zeta Tijuana"), por_nombre)
 
+    def test_el_origen_de_arc_es_el_imparcial(self):
+        # 25 de septiembre de 2026: Google rotulo una nota de El Imparcial con
+        # el host de su servidor de origen, en la url y en el nombre. Sin la
+        # llave se acunaba gn-<hash> y no deduplicaba contra el feed propio.
+        por_dominio, por_nombre = busquedas.indice_publicadores(self.medios, self.alias)
+        host = "elimparcial-elimparcial-prod.web.arc-cdn.net"
+        self.assertEqual(por_dominio[host], "imparcial")
+        self.assertEqual(por_nombre[fold(host)], "imparcial")
+
 
 class TestCosecha(unittest.TestCase):
     @classmethod

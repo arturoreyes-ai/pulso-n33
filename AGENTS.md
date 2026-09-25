@@ -1544,6 +1544,24 @@ Tailwind v4, pnpm.
   it, because `data/` cannot say "right now" and a place-less headline would
   be `alcance: nacional` and never reach the wall. Both handlers are
   offline-tested by `web/scripts/probar-busqueda.cjs`.
+
+  **A rubro keeps only headlines that name one of its terms**
+  (`rubros.ts::nombraRubro`), and every `/api/actualidad` row whose headline
+  states an old date in parentheses is dropped (`fecha-titular.ts`). Both
+  only subtract, and both exist because of what the client sent on 25
+  September 2026: Deportes showing the San Diego Tijuana Jazz Festival and
+  ESPN match pages from July and August stamped «25 sep». Google matches the
+  search against the article body, which we never read, and dates a page by
+  when it last re-read it. Two things about the query that look arbitrary and
+  are not. **Google reads 31 words and drops the rest in silence**, counting
+  every `OR`, and the place and the `when:` go last — so the old term lists
+  had been quietly cutting the corridor's place group down to «Baja
+  California OR Tijuana…». `probar-busqueda.cjs` measures every rubro against
+  every place; a longer list fails there, not in production. And
+  **`intitle:` was tried and refused**: each operator costs more of that
+  budget at an irregular rate, so the full lists lost the place and the
+  window (Tijuana's Seguridad came back as Houston shootings), and it matches
+  the « - Medio» suffix, so «… - FOX Sports Radio» entered Deportes.
 - **The UI says *what*, never *how*.** Since 13 September 2026 no user-facing
   string may name the mechanism: not `pipeline`, `corpus`, `corrida`, `corte`
   (as a run), `cosechado`, `vigentes`, Apify, an API key, git, the deploy, a

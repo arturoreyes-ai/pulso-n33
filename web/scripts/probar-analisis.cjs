@@ -997,6 +997,20 @@ async function comprobarImagen() {
   assert.equal(conductorImg.vistas.length, 3, 'dos al resolver el enlace y una a la pagina del medio');
   assert.equal(conductorImg.vistas[2], URL_IMPARCIAL, 'la tercera es ya la pagina del propio medio');
 
+  // --- Google resuelve al servidor de origen de Arc ------------------------
+  // 25 de septiembre de 2026: el token de una nota de El Imparcial llevaba a
+  // elimparcial-elimparcial-prod.web.arc-cdn.net, que ES elimparcial.com
+  // (lib/analisis/dominio.ts). La fila ya dice elimparcial.com, asi que sin
+  // el alterno el resolvedor rechazaria el destino y no habria foto.
+  const ARC = 'https://elimparcial-elimparcial-prod.web.arc-cdn.net/tij/tijuana/2026/09/24/nota/';
+  const conArc = await responderImagen({ u: TOKEN_RESOLVER, d: 'elimparcial.com' },
+    conductorResolucion({ resuelta: ARC, medio: CON_OG }), { estado: { googleHasta: 0, sinWordpress: new Map() } });
+  assert.deepEqual(await conArc.json(), { imagen: 'https://cdn.elimparcial.com/foto.jpg' }, 'el origen de Arc es El Imparcial');
+  // Y sigue siendo exacto: otro medio no acepta ese destino.
+  const ajeno = await responderImagen({ u: TOKEN_RESOLVER, d: 'zetatijuana.com' },
+    conductorResolucion({ resuelta: ARC, medio: CON_OG }), { estado: { googleHasta: 0, sinWordpress: new Map() } });
+  assert.deepEqual(await ajeno.json(), { imagen: null }, 'el alterno no abre el destino para otro medio');
+
   // --- una pagina sin og:image es un hueco, no un error -------------------
   const sinOg = await responderImagen(
     { u: TOKEN_RESOLVER, d: 'elimparcial.com' },

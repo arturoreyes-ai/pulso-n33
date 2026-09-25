@@ -44,11 +44,14 @@ function cargar(relativo) {
 sustitutos.set('@/lib/datos/publicado', { leerDatoPublicado: async () => null });
 
 const { parsearFeed, quitarSufijoMedio } = cargar('lib/busqueda/rss');
+const { DOMINIOS_ALTERNOS, normalizarDominio, dominioDeUrl } = cargar('lib/analisis/dominio');
 const { fusionarLocales } = cargar('lib/busqueda/fusionar');
 const { esDeFuera, soloDeLaRegion, esRedSocial } = cargar('lib/busqueda/region');
 const { urlDeFeed, urlDeActualidad, urlDeLugar, esUrlDeGoogle } = cargar('lib/busqueda/google-noticias');
 const { responderActualidad, consultaDeRubro } = cargar('lib/busqueda/actualidad');
-const { RUBROS, NOMBRE_RUBRO, TERMINOS_RUBRO, VENTANA_RUBRO } = cargar('lib/busqueda/rubros');
+const { RUBROS, NOMBRE_RUBRO, TERMINOS_RUBRO, VENTANA_RUBRO, PALABRAS_MAXIMAS_GOOGLE, consultaDeTerminos, nombraRubro } = cargar('lib/busqueda/rubros');
+const { ZONAS_RUTA } = cargar('lib/dominio/zonas');
+const { fechaDelTitular, titularVencido } = cargar('lib/busqueda/fecha-titular');
 const { AMBITOS, esAmbitoActualidad, usaCorpus } = cargar('lib/busqueda/ambito');
 const { TOPE_ACTUALIDAD, TOPE_RELACIONADAS } = cargar('lib/busqueda/tipos');
 const { construirIndices } = cargar('lib/busqueda/archivo');
@@ -110,6 +113,33 @@ async function comprobar() {
   const dos = parsearFeed(XML, 'en', 2);
   assert.equal(dos.length, 2);
   assert.equal(dos[0].idioma, 'en', 'idioma es el locale que lo devolvio, no el del texto');
+
+  // --- Un host que ES otro medio --------------------------------------------
+  // 25 de septiembre de 2026: Google rotulo una nota de El Imparcial con el
+  // origen de Arc XP, en la url y en el nombre, y la tarjeta decia «Abrir en
+  // elimparcial-elimparcial-prod.web.arc-cdn.net».
+  const ARC = 'elimparcial-elimparcial-prod.web.arc-cdn.net';
+  const itemArc = (rotulo) => `<item><title>Inteligencia artificial comienza a utilizarse en Tijuana - ${rotulo}</title><link>https://news.google.com/rss/articles/CBMarc?oc=5</link><pubDate>Thu, 24 Sep 2026 20:00:00 GMT</pubDate><source url="https://${ARC}">${rotulo}</source></item>`;
+  const [arc] = parsearFeed(`<rss><channel>${itemArc(ARC)}</channel></rss>`, 'es', 5);
+  assert.deepEqual([arc.titulo, arc.dominio, arc.medio], ['Inteligencia artificial comienza a utilizarse en Tijuana', 'elimparcial.com', 'El Imparcial']);
+  // Si Google SI dio un nombre, se queda el suyo; el dominio se corrige igual.
+  const [conNombre] = parsearFeed(`<rss><channel>${itemArc('El Imparcial de Sonora')}</channel></rss>`, 'es', 5);
+  assert.deepEqual([conNombre.titulo, conNombre.dominio, conNombre.medio], ['Inteligencia artificial comienza a utilizarse en Tijuana', 'elimparcial.com', 'El Imparcial de Sonora']);
+  // Todas las comparaciones de host lo ven como elimparcial.com: el resolvedor
+  // de Analizar, la foto y el cruce con el archivo.
+  assert.equal(normalizarDominio(ARC), 'elimparcial.com');
+  assert.equal(dominioDeUrl(`https://${ARC}/tij/tijuana/2026/09/24/x/`), 'elimparcial.com');
+  assert.equal(normalizarDominio('constructor'), 'constructor', 'una llave heredada no es un alterno');
+  assert.equal(normalizarDominio('evil-elimparcial-prod.web.arc-cdn.net'), 'evil-elimparcial-prod.web.arc-cdn.net', 'exacto, nunca por parecido');
+  // La tabla, el pipeline y el catalogo dicen lo mismo.
+  const publicadores = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../config/busquedas.json'), 'utf8')).publicadores;
+  const catalogoMedios = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../config/medios.json'), 'utf8')).medios;
+  for (const [host, { dominio, medio }] of Object.entries(DOMINIOS_ALTERNOS)) {
+    const fila = catalogoMedios.find((m) => m.id === publicadores[host]);
+    assert.ok(fila, `${host}: sin llave en publicadores de config/busquedas.json`);
+    assert.equal(normalizarDominio(new URL(fila.url).hostname), dominio, `${host}: el dominio de ${fila.id}`);
+    assert.equal(fila.nombre, medio, `${host}: el nombre de ${fila.id}`);
+  }
 
   // --- Sufijo del publicador ---------------------------------------------
   assert.equal(quitarSufijoMedio('A - Zeta', 'Zeta'), 'A');
@@ -341,16 +371,80 @@ async function comprobar() {
   for (const r of RUBROS) {
     assert.ok(NOMBRE_RUBRO[r], r);
     for (const idioma of ['es', 'en']) {
-      const t = TERMINOS_RUBRO[r][idioma];
+      const t = consultaDeTerminos(r, idioma);
       assert.ok(t.startsWith('(') && t.endsWith(')'), `${r}/${idioma} entre parentesis, o el OR se come el lugar`);
+      for (const termino of TERMINOS_RUBRO[r][idioma]) {
+        assert.ok(t.includes(/\s/.test(termino) ? `"${termino}"` : termino), `${r}/${idioma}: ${termino}`);
+      }
+      // Google lee 32 palabras contando cada OR y tira el resto sin avisar:
+      // el lugar y la ventana van al final y serian lo primero en caerse.
+      for (const [ambito, zona] of [['region', null], ['mexico', null], ['internacional', null], ...ZONAS_RUTA.map((z) => ['zona', z])]) {
+        const q = consultaDeRubro(r, idioma, ambito, zona);
+        const palabras = q.split(/\s+/).length;
+        assert.ok(palabras <= PALABRAS_MAXIMAS_GOOGLE, `${r}/${idioma}/${zona ?? ambito}: ${palabras} palabras, Google lee ${PALABRAS_MAXIMAS_GOOGLE}: ${q}`);
+      }
     }
   }
   const qClima = consultaDeRubro('clima', 'es', 'zona', 'Tijuana');
-  assert.ok(qClima.includes(TERMINOS_RUBRO.clima.es), 'terminos del rubro');
+  assert.ok(qClima.includes(consultaDeTerminos('clima', 'es')), 'terminos del rubro');
+  assert.ok(qClima.includes('"frente frío"'), 'una frase va entre comillas');
   assert.ok(qClima.includes(VENTANA_RUBRO), 'ventana');
   assert.ok(qClima.includes('Tijuana'), 'terminos de lugar de la zona');
   assert.ok(consultaDeRubro('clima', 'es', 'region', null).includes('Baja California'), 'la region pega sus terminos');
-  assert.equal(consultaDeRubro('clima', 'es', 'mexico', null), `${TERMINOS_RUBRO.clima.es} ${VENTANA_RUBRO}`, 'una edicion no acota por lugar');
+  assert.equal(consultaDeRubro('clima', 'es', 'mexico', null), `${consultaDeTerminos('clima', 'es')} ${VENTANA_RUBRO}`, 'una edicion no acota por lugar');
+
+  // --- El titular tiene que nombrar lo que se busco -----------------------------
+  // Casos del 25 de septiembre de 2026. `intitle:` de Google ve el titulo con
+  // el sufijo del medio, y rss.ts ya lo quito: aqui llega sin el.
+  for (const [titulo, rubro, idioma, esperado] of [
+    ['Hurricane Polo Heading To Baja California Region Of Mexico', 'deportes', 'en', false], // - FOX Sports Radio
+    ['San Diego Tijuana International Jazz Festival to celebrate third year with four concerts, three of them free', 'deportes', 'en', false],
+    ['Heat wave hits San Diego County', 'deportes', 'en', false],
+    ['Padres de familia protestan frente a escuela de Tijuana', 'deportes', 'es', false],
+    ['Tijuana vs Atlas: Pronóstico y posibles alineaciones del partido de la Liga MX', 'clima', 'es', false],
+    ['Realizan Congreso Internacional de Bomberos de Tijuana', 'politica', 'es', false],
+    ['Venden pan de muerto en Tijuana', 'politica', 'es', false],
+    ['Xolos de Tijuana enfrenta hoy al Atlas', 'deportes', 'es', true],
+    ['Justin Turner, campeón con TOROS de Tijuana, quiere seguir en LMB', 'deportes', 'es', true],
+    ['Padres Homestand Release #14 (September 25-27)', 'deportes', 'en', true],
+    ['Clima en Tijuana: viernes 25 de septiembre con calor persistente', 'clima', 'es', true],
+    ['Warning issued for American travelers near Hurricane Polo', 'clima', 'en', true],
+    ['Hallan sin vida a hombre de familia desaparecida en Tijuana', 'seguridad', 'es', true],
+    ['Aprueban diputados reforma en el Congreso del Estado', 'politica', 'es', true],
+    ['Balean a dos mujeres en Playas de Tijuana', 'seguridad', 'es', true],
+  ]) {
+    assert.equal(nombraRubro(titulo, rubro, idioma), esperado, `${rubro}/${idioma}: ${titulo}`);
+  }
+
+  // --- Un titular que dice, entre parentesis, una fecha vieja --------------------
+  const HOY = '2026-09-25T15:00:00.000Z';
+  for (const titulo of [
+    'Atl. San Luis 0-0 Tijuana (31 de Jul., 2026) Resultado Final',
+    'Guadalajara 5-2 Tijuana (22 de Ago., 2026) Resultado Final',
+    'Tijuana 2-1 Cruz Azul (Aug 16, 2026) Final Score',
+  ]) {
+    assert.ok(titularVencido(titulo, HOY), titulo);
+  }
+  assert.equal(fechaDelTitular('Tijuana 2-1 Cruz Azul (Aug 16, 2026) Final Score').toISOString(), '2026-08-16T00:00:00.000Z');
+  for (const titulo of [
+    'Tijuana vs. Atlas (25 Sep., 2026) Resultados en Vivo', // la de hoy
+    'Recuerdan el sismo del 19 de septiembre de 1985', // fecha en la prosa
+    'Resumen de la semana (del 1 al 7)', // sin fecha completa
+    'Garita de San Ysidro se satura (Datos actualizados a las 8:00 AM PDT)',
+    'Posada (20 de diciembre, 2026)', // futura
+  ]) {
+    assert.equal(titularVencido(titulo, HOY), false, titulo);
+  }
+
+  // Las dos rejas en la respuesta: el rubro quita lo que no lo nombra y la
+  // pagina vieja; la seccion, solo la pagina vieja.
+  const rejas = await responderActualidad({ a: null, z: 'tijuana', t: 'deportes' }, async (url) => new Response(porLocale(url) === 'es'
+    ? feed(item('Xolos de Tijuana enfrenta hoy al Atlas', NUEVO), item('Atl. San Luis 0-0 Tijuana (31 de Jul., 2026) Resultado Final', NUEVO, 'ESPN México'))
+    : feed(item('San Diego Tijuana International Jazz Festival to celebrate third year', NUEVO), item('Hurricane Polo Heading To Baja California', NUEVO, 'FOX Sports Radio'), item('Padres beat Dodgers in Tijuana exhibition', NUEVO))), HOY);
+  assert.deepEqual((await rejas.json()).resultados.map((x) => x.titulo), ['Xolos de Tijuana enfrenta hoy al Atlas', 'Padres beat Dodgers in Tijuana exhibition']);
+  const seccionVieja = await responderActualidad({ a: null, z: 'tijuana', t: null }, async () => new Response(feed(
+    item('Guadalajara 5-2 Tijuana (22 de Ago., 2026) Resultado Final', NUEVO, 'ESPN México'), item('Cierran la garita de Tijuana', NUEVO))), HOY);
+  assert.deepEqual((await seccionVieja.json()).resultados.map((x) => x.titulo), ['Cierran la garita de Tijuana']);
 
   const pedidasRubro = [];
   const rubroTj = await responderActualidad({ a: null, z: 'tijuana', t: 'clima' }, async (url) => {

@@ -13,7 +13,8 @@
  * y, encima de cualquiera, un rubro opcional:
  *
  *   &t=<rubro>         una BUSQUEDA de los terminos del rubro (rubros.ts) mas
- *                      los terminos de lugar de ese "donde", ultimos dos dias
+ *                      los terminos de lugar de ese "donde", ultimos dos dias,
+ *                      de la que queda lo que NOMBRA el rubro en el titular
  *
  * Las dos primeras existen por un hueco concreto: hasta el 11 de septiembre
  * de 2026, elegir Mexico o Internacional en el muro sin escribir nada dejaba
@@ -41,6 +42,14 @@
  *    relevancia lo que se aleja del lugar o del rubro se junta al final.
  *  - La interfaz NO nombra al agregador, tambien a peticion del cliente ese
  *    dia; el codigo y los docs si, porque de ahi sale el dato.
+ *  - Dos rejas que solo restan, despues de la de region y antes del corte.
+ *    En un rubro, el titular tiene que nombrar lo que se busco
+ *    (rubros.ts::nombraRubro). En todo, un titular que dice entre
+ *    parentesis una fecha vieja se va (fecha-titular.ts): Google fecha el dia
+ *    en que releyo la pagina, y el 25 de septiembre de 2026 eso metia en
+ *    Deportes partidos de ESPN de julio con hora de ese dia. Por eso un rubro
+ *    se lee con TOPE_CRUDO_RUBRO y no con quince: lo que las rejas quitan no
+ *    puede dejar el capitulo corto.
  *  - Nada de esto toca `data/` ni el pipeline. Son `ResultadoExterno`, no
  *    `Nota`: sin id, zona, tono ni figura, y no cuentan en ninguna cifra de
  *    prensa. PRODUCT.md separa a proposito esas dos clases de afirmacion.
@@ -63,7 +72,8 @@ import {
   type TemaGoogle,
 } from "./google-noticias";
 import { CACHE_CDN, SIN_CACHE, json } from "./respuesta";
-import { esRubro, TERMINOS_RUBRO, VENTANA_RUBRO, type Rubro } from "./rubros";
+import { titularVencido } from "./fecha-titular";
+import { consultaDeTerminos, esRubro, nombraRubro, VENTANA_RUBRO, type Rubro } from "./rubros";
 import {
   TOPE_ACTUALIDAD,
   type ErrorActualidad,
@@ -163,8 +173,16 @@ export function consultaDeRubro(
   ambito: Ambito,
   zona: ZonaRuta | null,
 ): string {
-  return componerConsulta(`${TERMINOS_RUBRO[rubro][idioma]} ${VENTANA_RUBRO}`, ambito, zona);
+  return componerConsulta(`${consultaDeTerminos(rubro, idioma)} ${VENTANA_RUBRO}`, ambito, zona);
 }
+
+/**
+ * Cuantas filas se leen de cada feed de un rubro antes de las rejas: las cien
+ * que Google contesta. Su busqueda empata el cuerpo y la reja del titular
+ * quita mucho -- 16 de 20 en Deportes del corredor en ingles, el dia que se
+ * midio --, asi que leer quince dejaria el capitulo en tres.
+ */
+export const TOPE_CRUDO_RUBRO = 100;
 
 export interface ConsultaActualidad {
   actualizar?: boolean;
@@ -273,15 +291,22 @@ export async function responderActualidad(
   const r = resolverActualidad(consulta);
   if ("error" in r) return json(r.error, 400, SIN_CACHE);
 
-  const cosechas = await cosecharFeeds(r.pedidos, TOPE_ACTUALIDAD, solicitar);
+  const tope = r.rubro === null ? TOPE_ACTUALIDAD : TOPE_CRUDO_RUBRO;
+  const cosechas = await cosecharFeeds(r.pedidos, tope, solicitar);
 
   // Intercalados por locale y sin repetir titular. NUNCA ordenados aqui.
   const crudos = fusionarLocales(cosechas.map((c) => c.resultados));
 
   // La reja de region SOLO en lo que dice ser de aqui. Mexico e Internacional
   // existen precisamente para traer lo de fuera: filtrarlos los vaciaria.
-  const fusionados =
+  const deAqui =
     r.seccion === "zona" || r.seccion === "region" ? soloDeLaRegion(crudos) : crudos;
+  // Las dos rejas del docstring. `idioma` es el de la edicion que devolvio la
+  // fila, que es el idioma en que se pidieron los terminos.
+  const rubro = r.rubro;
+  const fusionados = deAqui.filter(
+    (f) => !titularVencido(f.titulo, ahora) && (rubro === null || nombraRubro(f.titulo, rubro, f.idioma)),
+  );
 
   // El cruce contra el archivo va DESPUES del corte: solo se resuelve lo que
   // de verdad sale. Un archivo ilegible deja las filas como estan —`imagen` y

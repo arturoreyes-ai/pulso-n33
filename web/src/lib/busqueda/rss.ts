@@ -30,6 +30,7 @@
  * parser de verdad.
  */
 
+import { alternoDe } from "@/lib/analisis/dominio";
 import type { Idioma, ResultadoExterno } from "./tipos";
 
 /**
@@ -154,12 +155,20 @@ export function parsearFeed(
     // Sin <source> no hay forma de saber de que medio es la nota, y
     // atribuirla a news.google.com seria mentir. Se descarta.
     if (fuente === null) continue;
-    const medio = texto(fuente[2]);
+    const rotulo = texto(fuente[2]);
     const fuenteUrl = texto(FUENTE_URL.exec(fuente[1] ?? "")?.[1]);
-    const dominio = dominioDe(fuenteUrl);
-    if (dominio === "") continue;
+    const crudo = dominioDe(fuenteUrl);
+    if (crudo === "") continue;
+    // Un host que ES otro medio (lib/analisis/dominio.ts) se rotula como ese
+    // medio. El nombre solo se cambia si Google no dio uno y puso el host.
+    const alterno = alternoDe(crudo);
+    const dominio = alterno?.dominio ?? crudo;
+    const medio = alterno !== null && (rotulo === "" || rotulo.toLowerCase() === crudo)
+      ? alterno.medio
+      : rotulo;
 
-    const titulo = quitarSufijoMedio(texto(TITULO.exec(cuerpo)?.[1]), medio);
+    // El sufijo se quita con el rotulo de Google, que es el que trae <title>.
+    const titulo = quitarSufijoMedio(texto(TITULO.exec(cuerpo)?.[1]), rotulo);
     const url = texto(ENLACE.exec(cuerpo)?.[1]);
     if (titulo === "" || url === "") continue;
 
