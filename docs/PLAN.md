@@ -1,3 +1,29 @@
+> **Implementación · 25 de septiembre de 2026 (tarde) — El guion: las garitas
+> desde la fuente oficial, sin citar a nadie, para descargar, y con «Ampliar».**
+> Corrige la nota del guion de ese mismo día, más abajo. Las garitas de
+> Noticias 33 ya no salen de un titular ni de un video: salían de lo que
+> publicaba otro sitio («según datos... publicados por tijuanaenlinea.com»)
+> teniendo los tiempos oficiales en la página de Garitas. Ahora la primera nota
+> son esos tiempos, con la hora del reporte y solo con cifras de la última hora
+> y media, en las noticias y en TikTok; si no hay una reciente, el guion lo dice
+> aparte. En TikTok eso deja cuatro clips y la nota de garitas, como aceptó el
+> cliente. El guion ya no dice de qué medio ni de qué cuenta sale cada pieza:
+> el cliente lo pidió fuera porque al aire no aporta. Se sigue diciendo como lo
+> que se informa, no como hechos comprobados, y el enlace de cada pieza sigue
+> en la tarjeta para el equipo. Se quitó el relleno del tipo «El medio no da
+> más detalles sobre el caso», y el guion se puede **descargar** en un archivo
+> de texto para que cada conductor le dé su propio giro.
+>
+> Para dar más datos de una nota, el cliente eligió, de tres opciones con su
+> costo, un botón **«Ampliar»** en cada nota de las noticias: lee esa nota
+> completa y la reescribe para decirse, con las reglas del programa, a uno o
+> dos centavos de dólar por nota. Es la misma excepción que el botón Analizar:
+> una nota cada vez, pedida con el botón, sin guardar nada de lo leído. Leer
+> todas las notas al escribir el guion costaba de tres a siete veces más y se
+> descartó. Una nota ampliada no dice el nombre de víctimas, menores ni
+> detenidos en ningún programa, porque la nota completa los trae y el titular
+> casi nunca.
+
 > **Implementación · 25 de septiembre de 2026 — La búsqueda da lo que da Google
 > Noticias, Entretenimiento, y los temas por relevancia.** El cliente buscó
 > «mañanera» y no obtuvo lo mismo que en Google Noticias. La búsqueda pegaba los
@@ -17,6 +43,26 @@
 > en Madrid» o «Susan Sarandon es arrestada en Nueva York»; lo que no nombra
 > ningún lugar se queda, porque no se puede probar que sea de fuera. La tarjeta
 > que separa los capítulos decía «15 titulars»; ya dice «titulares».
+
+> **Implementación · 25 de septiembre de 2026 — El guion para locución, también
+> sobre las noticias, y con Minuta Política y Estado de Alerta.** El cliente
+> pidió el guion también para las noticias y dos programas más, con lo que hace
+> cada uno. En la portada, un botón con un micrófono abre el guion sobre los
+> titulares en vivo; en la pestaña TikTok sigue sobre los videos. Los dos tienen
+> ya los cuatro programas: Noticias 33, De Red en Red, **Minuta Política**
+> (análisis político con Soledad Martínez: hasta cuatro temas de la coyuntura
+> local y nacional, cada uno con una pregunta abierta para la mesa, sin tomar
+> partido) y **Estado de Alerta** (nota roja nocturna con Jocelin Martínez:
+> hasta seis hechos del corredor, con presunción de inocencia, sin nombres de
+> víctimas, menores ni detenidos, y sin morbo).
+>
+> Sobre las noticias el guion lee solo el titular y el nombre del medio, igual
+> que en TikTok lee solo el pie: no abre ninguna nota. Por eso cada nota es una
+> nota leída, sin clip, y el guion dice lo que publica cada medio, atribuido.
+> Lee las últimas 24 horas y se guarda una hora: pedir el mismo programa en esa
+> hora no vuelve a pagar. Si alguna fuente no se pudo leer, el guion lo dice
+> aparte y no la da por vacía. Cada guion cuesta lo mismo que el de TikTok,
+> unos 2 centavos de dólar.
 
 > **Implementación · 25 de septiembre de 2026 — Un top 10 de TikTok por tema.**
 > El cliente pidió que cada pestaña de la fila «Tema» de Redes tuviera sus diez

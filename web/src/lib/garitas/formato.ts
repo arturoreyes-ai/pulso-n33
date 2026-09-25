@@ -270,17 +270,21 @@ function frase(
  * en la cabecera y conserva la hora individual en cada tarjeta para quien
  * necesite revisar el origen del dato.
  */
+function carrilesDe(cruce: Cruce, viajero: Carril["viajero"]): Carril[] {
+  return cruce.carriles.filter(
+    (c) =>
+      c.viajero === viajero &&
+      // Otay publica un Ready Lane peatonal que repite al general con la
+      // misma cifra; contarlo seria leer la misma fila dos veces.
+      !(cruce.id === "otay_mesa" && c.viajero === "peaton" && c.categoria === "ready"),
+  );
+}
+
 export function guion(cruces: Cruce[], ahora: number): Guion {
   const armados = cruces.map((cruce) => ({
     cruce,
     modos: MODOS.map((modo) => {
-      const carriles = cruce.carriles.filter(
-        (c) =>
-          c.viajero === modo.viajero &&
-          // Otay publica un Ready Lane peatonal que repite al general con la
-          // misma cifra; contarlo seria leer la misma fila dos veces.
-          !(cruce.id === "otay_mesa" && c.viajero === "peaton" && c.categoria === "ready"),
-      );
+      const carriles = carrilesDe(cruce, modo.viajero);
       // La cifra visible y la cifra hablada son el mismo conjunto. La hora de
       // cada carril se conserva para el detalle, no para el apuntador.
       const conCifra = carriles.flatMap((carril) =>
@@ -332,4 +336,53 @@ export function guion(cruces: Cruce[], ahora: number): Guion {
       }),
     })),
   };
+}
+
+/** La nota de garitas del guion para locucion: la hora del reporte, dicha, y
+ *  una linea por cruce y modo. */
+export interface NotaGaritas {
+  hora: string;
+  lineas: string[];
+}
+
+/**
+ * Las esperas como nota del guion para locucion de la portada
+ * (lib/analisis/guion-prensa.ts), desde el 25 de septiembre de 2026. El caso:
+ * el eje Garitas de Noticias 33 leia un titular de tijuanaenlinea.com
+ * («San Ysidro con demoras de hasta 90 minutos... a la 1:00 de la tarde»)
+ * teniendo esta fuente al lado, y el cliente lo pidio desde aqui.
+ *
+ * Las mismas frases que la ficha de /garitas, con una diferencia: aqui solo
+ * entran cifras al dia (`vigente`, 90 minutos). La ficha muestra cada cifra con
+ * su hora al lado; el guion dice UNA hora, la del reporte mas reciente, y se
+ * dice despues de escrito. Ese mismo dia PedWest reportaba a las 12:00 y el
+ * resto de San Ysidro a las 2:00: decir sus 10 minutos «con el reporte de las
+ * 2:00» habria sido falso. Un modo que se queda sin cifra lo dice; nunca un
+ * cero.
+ *
+ * Null si no queda ninguna cifra al dia: una nota que solo dice huecos no es
+ * una nota de garitas.
+ */
+export function notaGaritas(cruces: readonly Cruce[], ahora: number): NotaGaritas | null {
+  let reciente: string | null = null;
+  const lineas: string[] = [];
+  for (const cruce of cruces) {
+    for (const modo of MODOS) {
+      const carriles = carrilesDe(cruce, modo.viajero);
+      if (carriles.length === 0) continue;
+      const leibles = carriles.flatMap((carril) =>
+        carril.estado === "reportado" && carril.minutos !== null && carril.observado !== null && vigente(carril, ahora)
+          ? [{ carril, minutos: carril.minutos, alDia: true, observado: carril.observado }]
+          : [],
+      );
+      const sujeto = modo.sujeto(cruce.nombre);
+      if (leibles.length === 0) {
+        lineas.push(`${sujeto}: ${carriles.every((c) => c.estado === "cerrado") ? "cerrado" : "sin un tiempo reciente"}.`);
+        continue;
+      }
+      for (const l of leibles) if (reciente === null || l.observado > reciente) reciente = l.observado;
+      lineas.push(frase(sujeto, leibles, modo.etiqueta));
+    }
+  }
+  return reciente === null ? null : { hora: horaHablada(reciente), lineas };
 }

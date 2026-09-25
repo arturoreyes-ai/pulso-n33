@@ -126,6 +126,69 @@ function leerSalida(crudo: string): LecturaAnalisis | null {
   }
 }
 
+/**
+ * La nota enlazada, leida: el token resuelto, el destino verificado contra el
+ * dominio del medio, el texto extraido y el minimo de texto. Todo lo que hace
+ * esta excepcion antes del modelo, en un solo lugar: lo usan Analizar y
+ * «Ampliar» del guion de prensa (ampliar.ts), y una guarda copiada dos veces
+ * se corrige en una sola. El texto vive en memoria y quien lo recibe no lo
+ * devuelve.
+ */
+export async function leerNotaEnlazada(
+  params: { u: string | null; m: string | null; d: string | null },
+  solicitar: typeof fetch = fetch,
+): Promise<{ ok: true; texto: string; medio: string } | { ok: false; respuesta: Response }> {
+  const no = (respuesta: Response) => ({ ok: false as const, respuesta });
+  const medio = (params.m ?? "").slice(0, 120);
+  const resuelto = await resolverEnlace(params.u, params.d, solicitar);
+  if (!resuelto.ok) {
+    if (resuelto.codigo === "url") {
+      return no(json({ codigo: "url", mensaje: "Ese enlace no se puede leer." }, 400, SIN_CACHE));
+    }
+    registrarFalloEnlace(resuelto);
+    return no(fallo(mensajeEnlace(medio), "enlace"));
+  }
+  const url = resuelto.url;
+  if (urlSegura(url.toString()) === null) {
+    return no(json({ codigo: "url", mensaje: "Ese enlace no se puede leer." }, 400, SIN_CACHE));
+  }
+
+  let texto: string;
+  try {
+    const r = await solicitar(url.toString(), {
+      headers: { "User-Agent": AGENTE, Accept: "text/html,application/xhtml+xml" },
+      cache: "no-store",
+      redirect: "follow",
+      signal: AbortSignal.timeout(MS_LIMITE_MEDIO),
+    });
+    if (!r.ok) return no(fallo("El medio no entregó la nota.", "medio"));
+    if (r.url !== "") {
+      const final = urlSegura(r.url);
+      if (final === null || dominioDeUrl(final) !== resuelto.dominio) {
+        registrarFalloEnlace({
+          ok: false,
+          codigo: "enlace",
+          etapa: "destino",
+          estado: r.status,
+          host: resuelto.dominio,
+        });
+        return no(fallo(mensajeEnlace(medio), "enlace"));
+      }
+    }
+    texto = extraerTexto((await r.text()).slice(0, MAX_BYTES));
+  } catch {
+    return no(fallo("El medio no entregó la nota.", "medio"));
+  }
+
+  // Menos que esto no es una nota: es un muro de suscripcion, una pagina de
+  // consentimiento o un video sin transcripcion. Decirlo es mas util que
+  // mandarselo al modelo y publicar lo que invente con tres frases.
+  if (texto.length < 400) {
+    return no(fallo("No hay suficiente texto en la nota para leerla.", "corta"));
+  }
+  return { ok: true, texto, medio };
+}
+
 export async function responderAnalisis(
   params: { u: string | null; m: string | null; d: string | null },
   solicitar: typeof fetch = fetch,
@@ -138,53 +201,9 @@ export async function responderAnalisis(
     );
   }
 
-  const medio = (params.m ?? "").slice(0, 120);
-  const resuelto = await resolverEnlace(params.u, params.d, solicitar);
-  if (!resuelto.ok) {
-    if (resuelto.codigo === "url") {
-      return json({ codigo: "url", mensaje: "Ese enlace no se puede leer." }, 400, SIN_CACHE);
-    }
-    registrarFalloEnlace(resuelto);
-    return fallo(mensajeEnlace(medio), "enlace");
-  }
-  const url = resuelto.url;
-  if (urlSegura(url.toString()) === null) {
-    return json({ codigo: "url", mensaje: "Ese enlace no se puede leer." }, 400, SIN_CACHE);
-  }
-
-  let texto: string;
-  try {
-    const r = await solicitar(url.toString(), {
-      headers: { "User-Agent": AGENTE, Accept: "text/html,application/xhtml+xml" },
-      cache: "no-store",
-      redirect: "follow",
-      signal: AbortSignal.timeout(MS_LIMITE_MEDIO),
-    });
-    if (!r.ok) return fallo("El medio no entregó la nota.", "medio");
-    if (r.url !== "") {
-      const final = urlSegura(r.url);
-      if (final === null || dominioDeUrl(final) !== resuelto.dominio) {
-        registrarFalloEnlace({
-          ok: false,
-          codigo: "enlace",
-          etapa: "destino",
-          estado: r.status,
-          host: resuelto.dominio,
-        });
-        return fallo(mensajeEnlace(medio), "enlace");
-      }
-    }
-    texto = extraerTexto((await r.text()).slice(0, MAX_BYTES));
-  } catch {
-    return fallo("El medio no entregó la nota.", "medio");
-  }
-
-  // Menos que esto no es una nota: es un muro de suscripcion, una pagina de
-  // consentimiento o un video sin transcripcion. Decirlo es mas util que
-  // mandarselo al modelo y publicar lo que invente con tres frases.
-  if (texto.length < 400) {
-    return fallo("No hay suficiente texto en la nota para leerla.", "corta");
-  }
+  const leida = await leerNotaEnlazada(params, solicitar);
+  if (!leida.ok) return leida.respuesta;
+  const { texto, medio } = leida;
 
   let cuerpo: unknown;
   try {

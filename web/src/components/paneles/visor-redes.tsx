@@ -15,7 +15,7 @@ import { clasesBoton } from "@/components/ui/clases";
 import { BotonAnalizar, FichaPublicacion } from "./analisis-publicacion";
 import { ComentariosPublicacion, VistaPreviaComentarios, type Textos } from "./comentarios-publicacion";
 import { EsqueletoMedio, MedioSocial } from "./medio-social";
-import { GuionTikTokBloque } from "./guion-tiktok";
+import { GuionLocucion } from "./guion-locucion";
 import { Hoja } from "@/components/ui/hoja";
 
 /** Las pestanas que caen aqui: todas menos X, que es otra hoja del lector. */
@@ -100,7 +100,7 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis
   // nada se pide hasta pulsar un programa.
   const resumible = filtro === "tiktok" && analisis && q === "" && tiktok.data?.generado !== undefined;
   const resumen = resumible
-    ? (irA: (clave: string) => boolean) => <GuionTikTokBloque generado={tiktok.data!.generado} irA={irA} />
+    ? (irA: (clave: string) => boolean) => <GuionLocucion origen="tiktok" corte={tiktok.data!.generado} irA={irA} />
     : undefined;
   const cortes: Cortes = { instagram: instagram.data?.generado, tiktok: tiktok.data?.generado, youtube: youtube.data?.generado, facebook: facebook.data?.generado };
   // `cosecha_comentarios` ausente se lee como true: un corte anterior al 18 de
@@ -175,7 +175,7 @@ export function RecorridoPublicaciones({ publicaciones, cortes, cargando, textos
    *  las publicaciones se corren una; el contador «n de total» sigue contando
    *  solo publicaciones. */
   cabecera?: ReactNode;
-  /** El guion de la pestana TikTok (paneles/guion-tiktok.tsx; hasta el 24 de
+  /** El guion de la pestana TikTok (paneles/guion-locucion.tsx; hasta el 24 de
    *  septiembre de 2026, el resumen): tambien el indice 0, pero del alto de
    *  su CONTENIDO y no de la caja (`.resumen-recorrido`), para que el primer
    *  video asome en la misma pantalla. Recibe `irA`, que lleva el recorrido a

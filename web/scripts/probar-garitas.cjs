@@ -12,7 +12,7 @@ function cargar(nombre) {
   return modulo.exports;
 }
 const { parsearCbp, fechaObservada, responderGaritas } = cargar('garitas/cbp');
-const { duracion, vigente, guion, horaHablada, duracionHablada, duracionFicha } = cargar('garitas/formato');
+const { duracion, vigente, guion, notaGaritas, horaHablada, duracionHablada, duracionFicha } = cargar('garitas/formato');
 const { esRutaPublica } = cargar('acceso/rutas-publicas');
 const ahora = '2026-09-08T23:30:00.000Z';
 const carril = (valor = '0', estado = 'no delay', hora = 'At 4:00 pm PDT') => `<standard_lanes><operational_status>${estado}</operational_status><update_time>${hora}</update_time><delay_minutes>${valor}</delay_minutes><lanes_open>2</lanes_open></standard_lanes>`;
@@ -113,6 +113,16 @@ async function comprobar() {
     'San Ysidro: 40 minutos en carril general; casi una hora en Ready Lane.');
   assert.deepEqual(rezagado.cues[0].modos[0].renglones.map(r => [r.figura, r.alDia]),
     [['40 min', true], ['~1 h', false], ['sin dato', false]]);
+  // La nota del guion para locucion de la portada: las mismas frases, pero
+  // solo con cifras al dia, porque ahi se dice UNA hora. El Ready Lane de las
+  // 2:00 no se dice «con el reporte de las 4:00», y un modo sin cifra lo dice.
+  assert.deepEqual(notaGaritas(parsearCbp(envolver(puerto('250401', carril('40', 'delay') + carril('55', 'delay', 'At 2:00 pm PDT').replace(/standard_lanes/g, 'ready_lanes'))), ahora).cruces, Date.parse(ahora)), {
+    hora: '4:00 de la tarde',
+    lineas: ['San Ysidro: 40 minutos en carril general.', 'San Ysidro a pie: sin un tiempo reciente.', 'Otay Mesa: sin un tiempo reciente.', 'Otay Mesa a pie: sin un tiempo reciente.'],
+  });
+  assert.equal(notaGaritas(datos.cruces, Date.parse(ahora) + 120 * 60000), null, 'sin una cifra al dia no hay nota');
+  const cerrada = notaGaritas(parsearCbp(envolver(puerto('250401', carril('50'), 'Closed') + puerto('250601', carril('20', 'delay'))), ahora).cruces, Date.parse(ahora));
+  assert.deepEqual(cerrada.lineas.slice(0, 3), ['San Ysidro: cerrado.', 'San Ysidro a pie: sin un tiempo reciente.', 'Otay Mesa: 20 minutos en carril general.'], 'cerrado no es «sin tiempo», ni un cero');
   const bien = await responderGaritas(async (url, opciones) => {
     assert.equal(url, 'https://bwt.cbp.gov/xml/bwt.xml'); assert.equal(opciones.redirect, 'error'); assert.ok(opciones.signal);
     return new Response(xml);

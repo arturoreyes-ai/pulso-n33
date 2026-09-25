@@ -33,6 +33,10 @@ const nextConfig: NextConfig = {
     ],
     // El guion de la pestana TikTok lee solo los pies: nada de comentarios.
     "/api/guion-tiktok": ["./public/data/tiktok.json"],
+    // El de la portada lee los titulares en vivo y cruza cada uno con el
+    // archivo para dar el enlace del propio medio, como /api/actualidad, y
+    // con el catalogo para decir «Zeta Tijuana» y no «zetatijuana.com».
+    "/api/guion-prensa": ["./public/data/notas.json", "./public/data/catalogo-busqueda.json"],
     // Las tres rutas que cruzan un titular en vivo contra el archivo
     // (lib/busqueda/archivo.ts). Sin esto la miniatura y el enlace del propio
     // medio salen null en toda fila y la hoja de relacionadas dice que no se

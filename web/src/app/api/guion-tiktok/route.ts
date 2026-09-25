@@ -4,7 +4,7 @@ import { responderGuionTikTok } from "@/lib/analisis/guion-tiktok";
 
 /**
  * Guion para locucion de la pestana TikTok: los clips de un programa del canal
- * (`p=noticias33|deredenred`) sobre los videos del dia.
+ * (`p=noticias33|deredenred|minutapolitica|estadodealerta`) sobre los videos del dia.
  *
  * Delgada como las demas. GET para que la respuesta se cachee por programa
  * durante un ciclo del cron: se pide con un boton, y el cache es lo que hace

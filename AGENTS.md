@@ -1376,7 +1376,15 @@ already refused on the record in `docs/PLAN.md` §3.
   route is off unless `ANALISIS_HABILITADO=true` **and** `ANTHROPIC_API_KEY` is
   set, because every press is a paid call and the brief says "without needing AI
   APIs". Do not widen this to bulk or background analysis, and do not let the
-  prompt cross tone with a figure (rule 5).
+  prompt cross tone with a figure (rule 5). **«Ampliar» in the press guion is
+  this same carve-out, not a new one** (client, 25 September 2026):
+  `/api/ampliar-nota` reads ONE note of the script through the same
+  `analizar.ts::leerNotaEnlazada` (resolve, verify the destination's domain,
+  extract, 400-character floor) and returns only the rewritten `entrada`,
+  never the text read (pinned in the same test). One button per note, never
+  all of them: the client was shown that reading every note while writing the
+  script costs 3–7× more and is the bulk analysis this paragraph forbids, and
+  chose the button.
 - **`Analizar` on a social post is a second carve-out, and it is narrower —
   read it as one, not as a widening.** Since 17 September 2026 the same button
   sits on an Instagram or TikTok card and calls `/api/analizar-publicacion`,
@@ -1412,18 +1420,44 @@ already refused on the record in `docs/PLAN.md` §3.
   one post, ~37,000 for a whole run. **Prompt caching is not a lever here** —
   Haiku 4.5 needs a 4,096-token prefix and ours is ~1,000, so it silently never
   caches.
-- **`/api/guion-tiktok` writes a newscaster's script, per programme, behind a
-  button** (client, 24 September 2026). It replaced `/api/resumen-tiktok`,
-  which for one day (23–24 September) was the only model reading that loaded
-  by itself; that exception is gone, and every model reading is a button
-  again. The client sent the channel's lineup and the edit-hour extraction
-  rules, and the card (`paneles/guion-tiktok.tsx`) has one button per
-  programme (`PROGRAMAS_GUION`):
-  - **Noticias 33**: exactly five clips, one per axis (garitas, información de
+- **`/api/guion-tiktok` and `/api/guion-prensa` write a newscaster's script,
+  per programme, behind a button** (client, 24 and 25 September 2026). The
+  first replaced `/api/resumen-tiktok`, which for one day (23–24 September)
+  was the only model reading that loaded by itself; that exception is gone,
+  and every model reading is a button again. The client sent the channel's
+  lineup and the edit-hour extraction rules, and on the 25th asked for the
+  same over the news and for two more programmes, with what each does. One
+  card (`paneles/guion-locucion.tsx`), one button per programme
+  (`PROGRAMAS_GUION` in `contrato-guion.ts`), in two places: first in the
+  TikTok tab over the videos, and in a sheet behind a microphone in the
+  portada's bar over the live headlines (the recorrido, not the search; a
+  card would shift the chapter chain's indices). Each programme has its own
+  prompt block in `lib/analisis/guion.ts`, shared by both origins:
+  - **Noticias 33**: exactly five pieces, one per axis (garitas, información de
     Tijuana, mañanera de la presidenta, información de California) and a fifth
-    «libre», the most newsworthy unused candidate of any axis.
-  - **De Red en Red**: one clip per espectáculos topic developed, up to six,
-    one video each.
+    «libre», the most newsworthy unused candidate of any axis. **The garitas
+    piece is not the model's** since 25 September 2026, in either origin: the
+    card builds it (see «Garitas is not a headline» below), so on TikTok
+    that is four clips plus a read note, which the client accepted.
+  - **De Red en Red**: one piece per entertainment topic developed, up to six.
+    Light tone, but a romance or a rumour is what someone published; nothing
+    on anyone's body, health or private life; sober for a death or an attack.
+  - **Minuta Política** (Soledad Martínez): political analysis, local and
+    national coyuntura, controversies and debate. Up to four topics, at least
+    one per axis that has candidates: `local` (the corridor and the state) and
+    `nacional` (México); international is out, the client said «local y
+    nacional». Each topic ends in `pregunta`, one open question the host puts
+    to the panel: about the issue, never a person's motives, guilt or whether
+    they are right, and it must carry «¿…?» or the topic is dropped. Its
+    `salida` hands over to the panel. The analysis is the panel's, never the
+    script's: no side taken, no government or party graded, «polémica» only
+    if the source says so.
+  - **Estado de Alerta** (Jocelin Martínez): nightly nota roja. One piece per
+    event, up to six, **local only** (on 24 September four of the thirteen
+    Seguridad videos were Michoacán or Guanajuato), from Seguridad plus
+    `TERMINOS_IMPACTO` («Se incendia primaria Amado Nervo» named no Seguridad
+    term). No names or nicknames of victims, minors or detainees; no morbo;
+    no speculation on motives; the only programme allowed «buenas noches».
   **It is a script, not a summary** (second version, same day: the first
   asked for a headline and «two to four sentences» per clip, and the client
   rightly called that a summary; the prompt had set the shape, not the
@@ -1431,32 +1465,41 @@ already refused on the record in `docs/PLAN.md` §3.
   camera before it), `pase` (the hand-off line, never describing the video),
   the clip marker and `salida` (after it), then `cierre`; the card sets what
   is said in reading type and the directions in meta type, and «Copiar guion»
-  copies it with bracketed directions. What the model reads is still **only
-  `[n] @creador · titulo`**: no counts, comments or subtitles, so what the
-  script adds is structure and broadcast craft, never data. Rules that look
-  arbitrary:
+  copies it with bracketed directions. What the model reads is **only
+  `[n] titulo`**: no counts, comments or subtitles, and since 25 September
+  2026 not the @creador either (client: the script credits no one; see
+  «No sources on air» below), so what the script adds is structure and
+  broadcast craft, never data. Rules that look arbitrary:
   - **The code picks the candidates, the model only chooses and writes.**
-    Garitas, mañanera and California by title terms (`TERMINOS_*` in
-    `lib/analisis/guion-tiktok.ts`, through `tema-publicacion.ts::nombraAlguno`;
-    these are the three rubros the client took off the tab row that day),
-    Tijuana by the video's zone, California also by the San Diego zone,
-    espectáculos by the rubro. Six candidates per axis, twelve for
-    espectáculos, most-liked first, over the **whole** `tiktok.json` and not
-    the tab's place: a programme's axes do not change with the page it is
-    asked from.
+    Mañanera and California by title terms (`TERMINOS_*` in
+    `lib/analisis/guion.ts`, through `tema-publicacion.ts::nombraAlguno`;
+    rubros the client took off the tab row that day),
+    Tijuana by the video's zone, California also by the San Diego zone but
+    never by «Baja California» (`nombraCalifornia`: a Tijuana hurricane video
+    «para Baja California» sat in the California axis on 24 September),
+    the rest by the rubro, and Minuta's two axes by zone. Six candidates per
+    axis, twelve for a programme by topic, most-liked first, over the
+    **whole** `tiktok.json` and not the tab's place: a programme's axes do
+    not change with the page it is asked from. The same holds for the press.
   - **An axis with no candidate is said, never filled** (`faltantes`, printed
-    «Sin videos hoy: Garitas»). Filling it from another axis would break the
+    «Sin videos hoy: California»). Filling it from another axis would break the
     client's rule in a worse way. An axis that HAD candidates but got no valid
     clip, a clip citing a video outside its axis's list, a repeated libre, or
     a missing fifth when unused candidates remain: all answer `modelo`, not a
     shorter script.
   - `reglas.ts` runs over every eje, titular and guion the model wrote, before
     pruning: this text is said on air.
-  - Cached six hours per programme and `generado`; SWR keeps it per programme
-    so switching between the two does not re-pay, and `shouldRetryOnError:
-    false`. Needs `./public/data/tiktok.json` in `outputFileTracingIncludes`.
-  - «Copiar guion» puts the whole script, with each video's URL, on the
-    clipboard for the editing team.
+  - TikTok caches six hours per programme and `generado`; SWR keeps it per
+    programme so switching between them does not re-pay, and
+    `shouldRetryOnError: false`. Needs `./public/data/tiktok.json` in
+    `outputFileTracingIncludes`.
+  - «Copiar guion» puts the whole script, with each piece's URL, on the
+    clipboard for the editing team, and «Descargar» (25 September, client:
+    so the anchors can put their own spin on it) saves the same text as
+    `guion-<programa>-<fecha>.txt`, UTF-8 with a BOM because without one
+    Word on Windows can take it for Windows-1252 and split the «ñ» of
+    «mañanera». Plain text and not .docx: it opens anywhere and costs no
+    dependency.
   - **`MODELO_GUION` is Sonnet 5**, its own constant in `config.ts`, pinned
     by the test like `MODELO_ANALISIS`, so it moves no other route's cost
     (client's call, 24 September 2026). Measured side by side twice on the
@@ -1483,6 +1526,119 @@ already refused on the record in `docs/PLAN.md` §3.
   - The axes trust the pipeline's zone, so a zoning error reaches the anchor:
     on 24 September a @unotv video about Mixcoac (CDMX) sat in «Información
     de Tijuana» with `alcance: zona`.
+  - **The libre's axis is the code's**, the list its piece is on: on 25
+    September Sonnet 5 labelled a Tijuana video's libre `california` and the
+    whole script was lost to an escaleta label.
+  - **Grouping is choosing, not merging.** In the first real runs of 25
+    September Sonnet 5 merged sister items into one piece («BajaNews reporta…
+    SanDiegoRed añade…», «EL PAÍS informa… La Jornada añade…») in two of the
+    three programmes by topic, and `guionFalsea` rejected both, each a paid
+    call with no script. The prompt now says it twice and says what happens.
+  - Common since that day, each for a measured slip: presumption of innocence
+    in every programme (Minuta said «preso por extorsión»), no time-of-day
+    greeting outside Estado de Alerta («Buenos días» on Noticias 33), no
+    remarks about the source («el medio no detalla más»), no balances («suma
+    un caso más», «se consolida como»), and a source publishes, never
+    «confirma» («La cuenta confirma que el ataque… dejó a un hombre sin
+    vida»).
+  - **The press guion reads the portada's live headlines, not `notas.json`**,
+    which on the published site ages until the next human deploy (see
+    «Deployment, as it actually is»). The model reads `[n] Titular` and
+    nothing else: fetching five to twelve bodies per script is the bulk
+    analysis the Analizar carve-out forbids. So a press piece is a **nota
+    leída**: `pase: null`, and its `salida` is the hand-off to the next note
+    (with «remata», four of five repeated the attribution and the rest drew a
+    balance). **No sources on air** (evening of 25 September, client): the
+    script said «de acuerdo con El Imparcial», «publicados por
+    tijuanaenlinea.com» or «según un video publicado por @cuenta» in every
+    piece, the client called it irrelevant on air, first for the press and
+    then for TikTok, and neither model reads the outlet or the @ any more:
+    what it does not read it cannot say. A headline or a caption is still not
+    a proven fact, so the prompt keeps the reporting register («se informa
+    que», «circula en redes que» on TikTok) and what it attributes to an
+    authority stays attributed. The outlet, the @ and the link stay on each
+    piece for the team («Abrir en …», «Clip: @…», and `[ENLACE: …]` /
+    `[CLIP: …]` in the copied and downloaded text), never in what is said.
+    The rules of saying are one list, `guion.ts::dicho`, shared with Ampliar
+    through a third material, `texto`. Candidates come from the
+    portada's own pieces (`guion-prensa.ts::feedsDe`): Tijuana and San Diego by their local
+    sections; the presidenta by search; California by the San Diego section
+    plus «California OR Caltrans OR CHP» («Los Ángeles» and «Sacramento»
+    brought sports pages); the rest by the rubros' own queries, local at
+    region scope and national at México scope, read exactly as the portada
+    reads them (Google's section where there is one, and the México gate). Every row passes the
+    portada's gates (region, a stale date in the headline, the headline names
+    what was searched), no social network is a source, and `publicado` is
+    within 24 h. Measured on 25 September: presidenta 51,
+    Tijuana 23, San Diego 36, Política 14 + 5 local and 93 national,
+    Seguridad 70 + 3, Espectáculos 10 local and 88 national.
+  - **Garitas is not a headline, nor a clip** (same evening, client, both
+    origins). The press axis read Google's search, and the note came out
+    «según datos actualizados a la 1:00 de la tarde publicados por
+    tijuanaenlinea.com» with CBP one route away (`/api/garitas`); the TikTok
+    axis read a creator's caption. Now **the card** builds the note from
+    `/api/garitas` when the script is shown (`lib/analisis/nota-garitas.ts`,
+    on `garitas/formato.ts::notaGaritas`, the /garitas ficha's own phrases),
+    first, with the hour of the latest report said. Not the route, and that
+    is the point: the paid script caches one hour (press) or six (TikTok),
+    and a wait said with that delay is false, while `/api/garitas` is free
+    and caches five minutes. So the guion routes never call CBP. The model
+    only announces it in the apertura and its schema has no `garitas` axis
+    (`guion.ts::EJES_DEL_MODELO_N33`). Only figures under 90 minutes old
+    (`vigente`, against CBP's `consultado`) are said, because the note says
+    ONE hour: that day PedWest reported at 12:00 and the rest of San Ysidro
+    at 2:00. CBP down, or no current figure, prints «No se pudieron leer:
+    Garitas». Copy and download take the note as shown.
+  - **«Ampliar» on each press note** (same evening, client): the note's
+    reference (`ampliable`: the archive's link or the Google token, the
+    outlet's domain, and the ORIGINAL headline, which is not the escaleta
+    `titular`) goes to `/api/ampliar-nota`, which reads the article through
+    Analizar's carve-out (see «Legal boundaries») and rewrites that one
+    `entrada` with the programme's rules (`guion.ts::sistemaAmpliar`: `dicho`
+    and `tono` with the `texto` material). Same checks in code as the guion:
+    `reglas.ts`, the filler, the mañanera (against the headline AND the
+    article, which here is at hand), and not naming the outlet. The expanded
+    note replaces the short one on screen, in the copy and in the download;
+    SWR plus a module `Set` keep it when switching programmes. Sonnet 5
+    (`MODELO_GUION`, it is said on air), ~1 to 2 cents a press, cached a day
+    per note and programme without stale-while-revalidate. **No names of
+    victims, minors or people detained or accused, in every programme**, in
+    Ampliar only: the first real expansion said «un hombre identificado como
+    Oscar David» in Noticias 33, a name the headline never carried. The
+    headline-only script keeps the client's rule as it was (Estado de Alerta
+    alone). TikTok clips are not expandable: there is no article.
+  - **Filler is stripped, not rejected** (`guion.ts::quitarRelleno`). With
+    the rule already in the prompt, the Tijuana note of 25 September ended in
+    «El medio no da más detalles sobre el caso.»: the entrada asked for «two
+    or three sentences» of a one-fact headline. It asks for one or two now, on both origins,
+    and a sentence about the source or about what it did not say is dropped
+    after the paid call, since removing only subtracts. «La Fiscalía no
+    precisó la causa» is news and stays; so is «el medio tiempo».
+  - **A dead feed is not an empty axis**: the axis goes to `sinLeer` («No se
+    pudieron leer: Información de California», `text-baja`), never to `faltantes`, and any dead
+    feed means no cache. Press caches one hour per programme and hour (`g` is
+    the hour the button was pressed), with no stale-while-revalidate:
+    revalidating in the background would pay for a script nobody asked for.
+    Needs `notas.json` (the outlet's own link) and `catalogo-busqueda.json`
+    in `outputFileTracingIncludes`.
+  - **A headline whose point is a proportion never reaches the model**
+    (`guion.ts::decible`): «Señalan que Sentri concentra casi la mitad de los
+    cruces» was picked as the libre and `reglas.ts` rejected the paid script.
+    Only the rule-2 family: «la gente» can be said another way, a proportion
+    cannot.
+  - **Press attribution is still checked by outlet name, case-sensitively**
+    (`marcasDeMedio`), though the model no longer reads the outlets: it
+    knows them, and naming one of the list in another's note credits it with
+    what it did not publish. «El Imparcial» is the paper and «un análisis
+    imparcial» is not; «Frontera» and «la frontera». Words the script
+    capitalizes by itself (Política, Estado, Alerta, Reforma) are no outlet's
+    mark, and a name with no distinctive word (N+) is not checked.
+  - An outlet Google names by its domain («nmas.com.mx») takes the
+    catalogue's name on the «Abrir en» chip when the catalogue knows that
+    domain (`guion-prensa.ts::nombreDeMedio`) and shows as it comes otherwise:
+    oem.com.mx is two papers. Known and not solved: Google News indexes
+    non-press sources, and a law firm's blog reached Estado de Alerta on 25
+    September.
   Measured on the first real run that day: Tijuana, mañanera, California and a
   Tijuana libre, garitas «sin videos». The mañanera axis matches «presidenta»
   and «Palacio Nacional», so a state visit counts; tighten `TERMINOS_MANANERA`

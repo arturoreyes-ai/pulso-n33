@@ -1,9 +1,10 @@
 "use client";
 
-import { ArrowClockwise as Recargar } from "@phosphor-icons/react";
+import { ArrowClockwise as Recargar, Microphone as Locucion } from "@phosphor-icons/react";
 import { useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
 
 import { CONTROL, Lector } from "@/components/lector/lector";
+import { GuionLocucion } from "@/components/paneles/guion-locucion";
 import { ListaRelacionadas, TITULO_RELACIONADAS } from "@/components/paneles/relacionadas-titular";
 import { EstadoCarga } from "@/components/ui/estado-carga";
 import { debeActivar, fraseFinal, type Capitulos, type Entrada, type Tarjeta } from "@/lib/busqueda/capitulos";
@@ -170,6 +171,7 @@ function RecorridoAhora({ entrada, rubro, zona, onRecargar, menu, analisis }: {
   const [activados, setActivados] = useState(1);
   const { capitulos, hilado, disponible, hayNuevos } = useCapitulos(entrada, rubro, activados);
   const rel = useHojaRelacionadas();
+  const guion = useRef<HTMLDialogElement>(null);
   const contenedor = useRef<HTMLDivElement>(null);
   const { actual, ir } = useRecorrido(contenedor);
   useEffect(() => {
@@ -196,6 +198,16 @@ function RecorridoAhora({ entrada, rubro, zona, onRecargar, menu, analisis }: {
             <Recargar size={20} aria-hidden />
           </button>
         ) : null}
+        {/* El guion para locucion de las noticias (25 de septiembre de 2026),
+            en una hoja y no como tarjeta del recorrido: una tarjeta del alto
+            de su contenido correria los indices de la cadena de capitulos
+            (debeActivar, las teclas). Lo decide el servidor, como Analizar. */}
+        {analisis ? (
+          <button type="button" className={CONTROL} aria-label="Guion para locución" title="Guion para locución"
+            aria-haspopup="dialog" onClick={() => guion.current?.showModal()}>
+            <Locucion size={22} aria-hidden />
+          </button>
+        ) : null}
       </>}
       busqueda={<BuscadorAhora accion={ruta(zona, null)} entrada={entrada} lugar={lugarDeBusqueda(entrada)} consulta={null} />}
       menu={menu} restaurarFoco={restaurarFoco}>
@@ -217,6 +229,15 @@ function RecorridoAhora({ entrada, rubro, zona, onRecargar, menu, analisis }: {
       </div>
       <HojaRelacionadas hoja={rel.hoja} abierta={rel.abierta} setAbierta={rel.setAbierta}
         vivas={rel.vivas} />
+      {analisis ? (
+        <Hoja ref={guion} titulo="Guion para locución" rotuloCerrar="Cerrar guion para locución">
+          {/* El margen de las otras hojas (analisis-titular.tsx): la hoja no
+              trae relleno propio, y sin el el guion tocaba el borde. */}
+          <div className="px-4 pt-6 pb-8">
+            <GuionLocucion origen="prensa" encabezado={false} />
+          </div>
+        </Hoja>
+      ) : null}
     </Lector>
   );
 }
