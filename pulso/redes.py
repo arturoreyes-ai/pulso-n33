@@ -317,16 +317,37 @@ def _conteo_tono(opinion):
     return conteo, modelo_usado
 
 
-def _contar_temas(opinion, temas, con_posts=True):
+# Cuantos comentarios necesita un tema para salir como insignia de UN post.
+# Es la regla 3 de pulso/temas.py ("un tema con pocos documentos no es un
+# tema", minimo=3), que el cruce con los comentarios se saltaba. El caso, 25 de
+# septiembre de 2026: 42 de las 52 insignias publicadas descansaban en UN
+# comentario --- "hombre" en siete posts, "tres" en seis ---, y la hoja las
+# rotula "Tema de prensa que aparece en los comentarios", que con uno es un
+# comentario ascendido a tema. Con el piso quedan trump, morena y claudia,
+# donde varios comentarios si hablan de eso. El agregado `por_tema` no lo usa:
+# ahi `posts` ya dice cuanto lo sostiene.
+MINIMO_TEMA_POST = 3
+
+
+def _patron_tema(termino):
+    """Palabra completa, plegada, con plural opcional. Hasta el 25 de
+    septiembre de 2026 era subcadena, y de 52 insignias cuatro no nombraban el
+    tema: "nacional" salia de "nacionalidad" y "transnacionales", "tres" de
+    "extraterrestres" y "marina" de "#esmarinadelpilar". La etiqueta si cuenta:
+    "#morena" nombra morena."""
+    return re.compile(r"(?<![a-z0-9])" + re.escape(fold(termino)) + r"(?:e?s)?(?![a-z0-9])")
+
+
+def _contar_temas(opinion, temas, con_posts=True, minimo=1):
     """Cruza los temas de prensa con la opinion. Solo opinion: ver derivar()."""
     salida = []
     for t in (temas or []):
         termino = t.get("termino") if isinstance(t, dict) else None
         if not termino:
             continue
-        aguja = fold(termino)
-        casos = [c for c in opinion if aguja in fold(c["texto"])]
-        if not casos:
+        patron = _patron_tema(termino)
+        casos = [c for c in opinion if patron.search(fold(c["texto"]))]
+        if not casos or len(casos) < minimo:
             continue
         fila = {"tema": termino, "comentarios": len(casos)}
         if con_posts:
@@ -615,7 +636,8 @@ def _destacados(publicaciones, comentarios, opinion, temas, cuentas, dentro,
         d["cosechados"] = len(por_post.get(url, []))
         d["opinion"] = len(propia)
         d["sentimiento"] = conteo
-        d["temas"] = _contar_temas(propia, temas, con_posts=False)[:3]
+        d["temas"] = _contar_temas(propia, temas, con_posts=False,
+                                   minimo=MINIMO_TEMA_POST)[:3]
         candidatos.append(d)
     candidatos.sort(key=lambda d: _orden_destacado(d, orden))
 

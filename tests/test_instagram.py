@@ -926,6 +926,34 @@ class TestDestacados(BaseCache):
         self.assertNotIn("texto", json.dumps(p))
         self.assertNotIn("comentario numero", json.dumps(p))
 
+    def test_una_insignia_de_tema_necesita_tres_comentarios(self):
+        # 25 de septiembre de 2026: 42 de 52 insignias descansaban en UN
+        # comentario ("hombre" en siete posts). Es la regla 3 de temas.py.
+        dos = _comentarios("https://www.instagram.com/p/AAA/", [3, 1])
+        p = self._panel(self._pubs(), dos, temas=[{"termino": "agua"}])
+        self.assertEqual(p["destacados"][0]["temas"], [])
+        # El agregado no lleva piso: ahi `posts` dice cuanto lo sostiene.
+        self.assertEqual(p["por_tema"], [{"tema": "agua", "comentarios": 2, "posts": 1}])
+        tres = _comentarios("https://www.instagram.com/p/AAA/", [3, 1, 0])
+        p = self._panel(self._pubs(), tres, temas=[{"termino": "agua"}])
+        self.assertEqual(p["destacados"][0]["temas"], [{"tema": "agua", "comentarios": 3}])
+
+    def test_el_tema_es_palabra_completa_y_no_subcadena(self):
+        # Las cuatro insignias falsas del 25 de septiembre de 2026.
+        url = "https://www.instagram.com/p/AAA/"
+        textos = ["de una mujer blanca y de nacionalidad espanola",
+                  "son las grandes transnacionales", "son extraterrestres vinieron",
+                  "#esmarinadelpilar #larusa"]
+        coms = [dict(c, text=t) for c, t in zip(_comentarios(url, [4, 3, 2, 1]), textos)]
+        p = self._panel(self._pubs(), coms,
+                        temas=[{"termino": "nacional"}, {"termino": "tres"}, {"termino": "marina"}])
+        self.assertEqual(p["por_tema"], [])
+        # La etiqueta y el plural si nombran el tema.
+        coms = [dict(c, text=t) for c, t in zip(
+            _comentarios(url, [3, 2, 1]), ["#Morena otra vez", "los de morena", "Morenas no"])]
+        p = self._panel(self._pubs(), coms, temas=[{"termino": "morena"}])
+        self.assertEqual(p["destacados"][0]["temas"], [{"tema": "morena", "comentarios": 3}])
+
     def test_el_catalogo_de_cuentas_va_sin_handle(self):
         apagada = {"id": "canal66_ig", "handle": None, "nombre": "Mexicali — sin cuenta",
                    "zona": "Mexicali", "activo": False, "verificado": False}

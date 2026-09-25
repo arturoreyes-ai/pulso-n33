@@ -1014,6 +1014,15 @@ aviso, no error.
   cuenta» en Mexicali y San Quintín en vez de un cero.
 - `sentimiento` y `temas` de cada post se cuentan sobre su `opinion`, con las
   mismas exclusiones que el bloque global.
+- Un tema de prensa **nombra** un comentario si aparece como palabra completa
+  (plural y etiqueta incluidos: «#Morena», «morenas»), nunca como subcadena, y
+  entra en los `temas` de un post solo con **3 comentarios o más**
+  (`redes.MINIMO_TEMA_POST`, la regla 3 de `pulso/temas.py`). Desde el 25 de
+  septiembre de 2026: antes «tres» salía de «extraterrestres» y 42 de 52
+  insignias descansaban en un solo comentario. El agregado `por_tema` usa la
+  misma palabra completa y no lleva piso, porque su `posts` ya dice cuánto lo
+  sostiene. Un corte anterior puede traer temas de 1 o 2 comentarios; el
+  cron los regenera.
 
 ## `data/redes-comentarios.json` — el texto de los comentarios
 
