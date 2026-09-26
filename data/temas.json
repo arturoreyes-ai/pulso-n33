@@ -3,7 +3,7 @@
  "generado": "2026-09-26",
  "ventana_dias": 7,
  "minimo": 3,
- "notas_ventana": 1294,
+ "notas_ventana": 1331,
  "notas_previas": 2572,
  "temas": [
   {
@@ -328,6 +328,46 @@
    ]
   },
   {
+   "termino": "prision domiciliaria",
+   "n": 11,
+   "n_previo": 0,
+   "momento": 11,
+   "zonas": {
+    "Tijuana": 3,
+    "nacional": 3,
+    "Ensenada": 2,
+    "Mexicali": 2,
+    "estatal": 1
+   },
+   "fuentes": {
+    "imparcial": 3,
+    "afn": 2,
+    "lavoz": 2,
+    "uniradio": 2,
+    "jornadabc": 1,
+    "zeta": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "1bc2d5da72e0275e",
+    "5608c30c88a77dda",
+    "6c02464785b9db3b",
+    "776b66333538026e",
+    "7dce32a7558c835b",
+    "94e23e48e31e87be",
+    "b2c3133862bef81b",
+    "b3f757449e8d117f",
+    "e8dadd7701cf17c2",
+    "ee708d348123c22e",
+    "fc6f9b6778eabfb0"
+   ],
+   "ejemplos": [
+    "Conceden a Ernesto N la prisión domiciliaria",
+    "La prisión domiciliaria",
+    "Ernesto Ruffo podría dejar el Altiplano: este viernes definirán si tendrá prisión domiciliaria"
+   ]
+  },
+  {
    "termino": "policias",
    "n": 16,
    "n_previo": 6,
@@ -412,42 +452,6 @@
     "Colocan primera piedra de la desaladora de Rosarito",
     "Colocan la primera piedra de la desaladora en Playas de Rosarito",
     "Colocan primera piedra de la Desaladora Rosarito para garantizar agua en Tijuana y Ensenada"
-   ]
-  },
-  {
-   "termino": "prision domiciliaria",
-   "n": 9,
-   "n_previo": 0,
-   "momento": 9,
-   "zonas": {
-    "Tijuana": 3,
-    "nacional": 3,
-    "Ensenada": 2,
-    "estatal": 1
-   },
-   "fuentes": {
-    "imparcial": 3,
-    "afn": 2,
-    "uniradio": 2,
-    "jornadabc": 1,
-    "zeta": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "1bc2d5da72e0275e",
-    "5608c30c88a77dda",
-    "776b66333538026e",
-    "7dce32a7558c835b",
-    "94e23e48e31e87be",
-    "b2c3133862bef81b",
-    "b3f757449e8d117f",
-    "e8dadd7701cf17c2",
-    "fc6f9b6778eabfb0"
-   ],
-   "ejemplos": [
-    "Ernesto Ruffo podría dejar el Altiplano: este viernes definirán si tendrá prisión domiciliaria",
-    "Ernesto Ruffo continuará su proceso en prisión domiciliaria en Ensenada",
-    "Jueza federal concede en audiencia la prisión domiciliaria a Ernesto Ruffo"
    ]
   },
   {
@@ -728,6 +732,33 @@
    ]
   },
   {
+   "termino": "psicologia",
+   "n": 7,
+   "n_previo": 0,
+   "momento": 7,
+   "zonas": {
+    "nacional": 7
+   },
+   "fuentes": {
+    "imparcial": 7
+   },
+   "un_solo_medio": true,
+   "notas": [
+    "08016a918ea39c51",
+    "1a4a0ffcb4d45d5c",
+    "52131eb93167c755",
+    "56e81655ac2e0eef",
+    "8eef35207a69cb95",
+    "8fb41b89a536c3ca",
+    "aa11d4ee881a817f"
+   ],
+   "ejemplos": [
+    "Si lloras cuando estás molesto, la psicología señala que tu reacción puede surgir de una mezcla de rabia, frustración e impotencia que el cuerpo intenta regular mediante las lágrimas cuando las palabras ya no bastan para expresar lo que sientes",
+    "Qué colores usa una persona manipuladora, según la psicología",
+    "Las personas que evitan las cajas de autopago no es que rechacen la tecnología, sino que buscan, sin saberlo, un contacto humano breve que la psicología vincula con mejor estado de ánimo y menor sensación de soledad"
+   ]
+  },
+  {
    "termino": "subcomandante",
    "n": 7,
    "n_previo": 0,
@@ -759,50 +790,60 @@
    ]
   },
   {
-   "termino": "prision",
-   "n": 16,
-   "n_previo": 10,
+   "termino": "playas",
+   "n": 21,
+   "n_previo": 15,
    "momento": 6,
    "zonas": {
-    "nacional": 6,
-    "Tijuana": 3,
-    "Ensenada": 2,
-    "Mexicali": 2,
+    "Playas de Rosarito": 13,
+    "Tijuana": 6,
     "estatal": 2,
-    "Playas de Rosarito": 1
+    "nacional": 1
    },
    "fuentes": {
-    "imparcial": 6,
+    "imparcial": 3,
+    "rosarito": 3,
     "uniradio": 3,
-    "afn": 2,
-    "zeta": 2,
-    "jornadabc": 1,
-    "lavoz": 1,
-    "soltij": 1
+    "soltij": 2,
+    "afn": 1,
+    "gn-01e4fd06574f": 1,
+    "gn-291a95aaf8ce": 1,
+    "gn-36bce513f849": 1,
+    "gn-697535cb0694": 1,
+    "gn-a96a3aaee9d9": 1,
+    "gn-c215d2d62dbf": 1,
+    "gn-dc1580cd9943": 1,
+    "gn-dc5a4d87b215": 1,
+    "lavoz": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "0535106ff0166182",
-    "0912e1a1641a7f7a",
-    "1bc2d5da72e0275e",
+    "1600802d9abb7c5a",
+    "221520991ba1dcb5",
+    "2fea72a3d4f7403d",
+    "30167eb11ec99a3b",
     "36e24044e3234b26",
-    "4a722b92d4473b8a",
-    "5608c30c88a77dda",
-    "7650a75da5318d49",
-    "776b66333538026e",
-    "7dce32a7558c835b",
-    "82f4c4433e676202",
-    "94e23e48e31e87be",
-    "9def7b2dfbf0c827",
-    "b2c3133862bef81b",
-    "b3f757449e8d117f",
-    "e8dadd7701cf17c2",
-    "fc6f9b6778eabfb0"
+    "4dc9529385555b69",
+    "5864e0f591f67aee",
+    "6f24cc8a5563d9ee",
+    "7675856e44db2aa1",
+    "80e22747046ca444",
+    "a109aac07a69100e",
+    "a435978787586390",
+    "af4ee4dfb4b0de2c",
+    "afd772134565f1f3",
+    "b5e163ccbdad22d2",
+    "cc827355210fe5f6",
+    "da65eb556bcdc791",
+    "dff38df3f0849c9f",
+    "ebcdb63c3d3e59d1",
+    "f3010ee07ee242ae",
+    "fc0fafe7ccb16453"
    ],
    "ejemplos": [
-    "Prisión preventiva para tres acusados de asesinar a joyero en Mexicali",
-    "Ernesto Ruffo podría dejar el Altiplano: este viernes definirán si tendrá prisión domiciliaria",
-    "Ernesto Ruffo continuará su proceso en prisión domiciliaria en Ensenada"
+    "Inicia la construcción de la megadesalinizadora en Playas de Rosarito",
+    "Atestigua Ismael Burgueño Ruiz colocación de primera piedra de Planta Desaladora en Playas de Rosarito",
+    "Colocan la primera piedra de la desaladora en Playas de Rosarito"
    ]
   },
   {
@@ -997,38 +1038,6 @@
     "Huracán Polo alcanza categoría 4; no representa riesgo para Baja California",
     "De nuevo, huracán \"Polo\" se intensificó a categoría 5 este viernes"
    ]
-  },
-  {
-   "termino": "ciudadana",
-   "n": 6,
-   "n_previo": 0,
-   "momento": 6,
-   "zonas": {
-    "nacional": 3,
-    "Mexicali": 1,
-    "Tecate": 1,
-    "Tijuana": 1
-   },
-   "fuentes": {
-    "imparcial": 2,
-    "uniradio": 2,
-    "jornadabc": 1,
-    "lavoz": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "1a4153cf748ee3a0",
-    "232856d9fd0608d3",
-    "35f8631b43ff572b",
-    "809661af70ba58e5",
-    "aac1b8c43193416d",
-    "deed8c90193d7aab"
-   ],
-   "ejemplos": [
-    "Policía de Tecate separa de atención ciudadana a agente captado en video recibiendo dinero",
-    "Busca diputada formar solo una reforma a la Ley de Participación Ciudadana",
-    "Cetys lanza programa de formación ciudadana"
-   ]
   }
  ],
  "descartados": [
@@ -1058,6 +1067,11 @@
    "porque": "duplica «huracan polo»"
   },
   {
+   "termino": "prision",
+   "n": 18,
+   "porque": "duplica «prision domiciliaria»"
+  },
+  {
    "termino": "unidos",
    "n": 15,
    "porque": "duplica «estados unidos»"
@@ -1078,17 +1092,37 @@
    "porque": "duplica «planta desaladora»"
   },
   {
+   "termino": "proteccion",
+   "n": 13,
+   "porque": "duplica «proteccion civil»"
+  },
+  {
+   "termino": "unidad",
+   "n": 12,
+   "porque": "duplica «julieta ramirez»"
+  },
+  {
+   "termino": "civil",
+   "n": 11,
+   "porque": "duplica «proteccion civil»"
+  },
+  {
    "termino": "colocan",
    "n": 11,
    "porque": "duplica «colocan primera piedra»"
   },
   {
-   "termino": "proteccion",
+   "termino": "domiciliaria",
    "n": 11,
-   "porque": "duplica «proteccion civil»"
+   "porque": "duplica «prision domiciliaria»"
   },
   {
-   "termino": "unidad",
+   "termino": "julieta",
+   "n": 11,
+   "porque": "duplica «julieta ramirez»"
+  },
+  {
+   "termino": "ramirez",
    "n": 11,
    "porque": "duplica «julieta ramirez»"
   },
@@ -1098,44 +1132,19 @@
    "porque": "duplica «colocan primera piedra»"
   },
   {
-   "termino": "julieta",
-   "n": 10,
-   "porque": "duplica «julieta ramirez»"
-  },
-  {
-   "termino": "ramirez",
-   "n": 10,
-   "porque": "duplica «julieta ramirez»"
-  },
-  {
    "termino": "artificial",
    "n": 9,
    "porque": "duplica «inteligencia artificial»"
   },
   {
-   "termino": "civil",
+   "termino": "ernesto",
    "n": 9,
-   "porque": "duplica «proteccion civil»"
-  },
-  {
-   "termino": "domiciliaria",
-   "n": 9,
-   "porque": "duplica «prision domiciliaria»"
-  },
-  {
-   "termino": "inteligencia",
-   "n": 9,
-   "porque": "duplica «inteligencia artificial»"
-  },
-  {
-   "termino": "lobito",
-   "n": 9,
-   "porque": "duplica «lobito torres»"
+   "porque": "duplica «ernesto ruffo»"
   }
  ],
  "por_zona": {
   "Tijuana": {
-   "notas_ventana": 333,
+   "notas_ventana": 345,
    "minimo": 3,
    "temas": [
     {
@@ -1422,6 +1431,34 @@
      ]
     },
     {
+     "termino": "madre",
+     "n": 5,
+     "n_previo": 1,
+     "momento": 4,
+     "zonas": {
+      "Tijuana": 5
+     },
+     "fuentes": {
+      "afn": 2,
+      "gn-5e7dd3768c59": 1,
+      "jornadabc": 1,
+      "soltij": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "0fb84e75110aff47",
+      "7f54fc23aaf010e3",
+      "980be0dcdc3e557f",
+      "a0b6a36798cf5936",
+      "d00a4144c99a8492"
+     ],
+     "ejemplos": [
+      "Dina Ramos, seen at the Madre Asunta shelter in Tijuana, Mexico, on Sept. 16, was caught days earlier trying to cross the Mexican border to get back to her six children who were all born in the U.S.",
+      "El Cojo Feliz y Ricardo Pérez llevan su humor al cine con ‘A Toda Madre’",
+      "Hallan cuerpo de hombre que desapareció junto a su madre y esposa en Tijuana"
+     ]
+    },
+    {
      "termino": "piedra",
      "n": 5,
      "n_previo": 1,
@@ -1449,6 +1486,31 @@
       "Colocan primera piedra de la Desaladora Rosarito para garantizar agua en Tijuana y Ensenada",
       "Conflicto vecinal en la colonia Del Río termina con una menor golpeada con una piedra",
       "Sheinbaum anuncia primera piedra de desaladora en Rosarito durante su visita a Tijuana"
+     ]
+    },
+    {
+     "termino": "atlas",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "Tijuana": 4
+     },
+     "fuentes": {
+      "imparcial": 2,
+      "soltij": 2
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "1cf920bed4f518b4",
+      "291269f538a57d70",
+      "729f48c1b5c36cdd",
+      "94ff32035f3164e7"
+     ],
+     "ejemplos": [
+      "Xolos pierde ante Atlas tras recibir dos goles en el cierre",
+      "Sin Gil Mora, cae Xolos de último minuto en casa ante Atlas",
+      "Xolos vs Atlas: ¿A qué hora y dónde ver EN VIVO la Jornada 10 de Liga MX?"
      ]
     },
     {
@@ -1654,6 +1716,33 @@
      ]
     },
     {
+     "termino": "xolos",
+     "n": 6,
+     "n_previo": 3,
+     "momento": 3,
+     "zonas": {
+      "Tijuana": 6
+     },
+     "fuentes": {
+      "soltij": 4,
+      "imparcial": 2
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "1cf920bed4f518b4",
+      "35cc65c8a0c2c545",
+      "64b176c906f34c20",
+      "729f48c1b5c36cdd",
+      "94ff32035f3164e7",
+      "ec3eb307fcd0d820"
+     ],
+     "ejemplos": [
+      "Xolos pierde ante Atlas tras recibir dos goles en el cierre",
+      "Sin Gil Mora, cae Xolos de último minuto en casa ante Atlas",
+      "Xolos vs Atlas: ¿A qué hora y dónde ver EN VIVO la Jornada 10 de Liga MX?"
+     ]
+    },
+    {
      "termino": "congreso",
      "n": 5,
      "n_previo": 2,
@@ -1792,90 +1881,11 @@
       "Localizan en Tijuana a Rosa María y Lilia Elena tras 6 días de búsqueda; Juan Omar fue hallado sin vida dentro del vehículo",
       "Hallan sin vida a Juan Omar; él y su familia habían desaparecido"
      ]
-    },
-    {
-     "termino": "gira",
-     "n": 4,
-     "n_previo": 1,
-     "momento": 3,
-     "zonas": {
-      "Tijuana": 4,
-      "Playas de Rosarito": 1
-     },
-     "fuentes": {
-      "soltij": 2,
-      "gn-a96a3aaee9d9": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "1cb30f4ecf31496b",
-      "504fe1277510eb77",
-      "8a7f900305c8a80f",
-      "c09f58dcc6766c8e"
-     ],
-     "ejemplos": [
-      "Una mala salida de Michael King y Padres arranca su última gira de la campaña con derrota ante Dodgers",
-      "FGE gira órdenes de aprehensión contra funcionarios del Registro Público",
-      "Cientos en riesgo por falta de protección civil durante gira de Sheinbaum"
-     ]
-    },
-    {
-     "termino": "laboral",
-     "n": 4,
-     "n_previo": 1,
-     "momento": 3,
-     "zonas": {
-      "Tijuana": 4
-     },
-     "fuentes": {
-      "soltij": 2,
-      "rosarito": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "130f7c37503c4bac",
-      "1a1b0e80069c3157",
-      "21ed5e27f77a8642",
-      "deb6ace0ac91b266"
-     ],
-     "ejemplos": [
-      "Reducción de jornada laboral en Tijuana: Maquilas evalúan impacto",
-      "Pequeños comercios deberán realizar ajustes ante reducción de la jornada laboral",
-      "Denuncian presunto acoso laboral en el Tribunal de Disciplina Judicial en Tijuana"
-     ]
-    },
-    {
-     "termino": "madre",
-     "n": 4,
-     "n_previo": 1,
-     "momento": 3,
-     "zonas": {
-      "Tijuana": 4
-     },
-     "fuentes": {
-      "afn": 2,
-      "jornadabc": 1,
-      "soltij": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0fb84e75110aff47",
-      "7f54fc23aaf010e3",
-      "980be0dcdc3e557f",
-      "a0b6a36798cf5936"
-     ],
-     "ejemplos": [
-      "El Cojo Feliz y Ricardo Pérez llevan su humor al cine con ‘A Toda Madre’",
-      "Hallan cuerpo de hombre que desapareció junto a su madre y esposa en Tijuana",
-      "Conductora atropelló a un niño y a su madre frente a escuela primaria"
-     ]
     }
    ]
   },
   "Mexicali": {
-   "notas_ventana": 168,
+   "notas_ventana": 171,
    "minimo": 3,
    "temas": [
     {
@@ -2045,6 +2055,31 @@
       "Cobros elevados de luz preocupan a comerciantes de Mexicali: Canaco",
       "Han bajado 30% extorsiones a comerciantes, según la Canaco de Mexicali",
       "Abierta la Canaco de Mexicali a rentar viejas instalaciones de la cámara en el Centro Histórico"
+     ]
+    },
+    {
+     "termino": "prision",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "Mexicali": 4
+     },
+     "fuentes": {
+      "lavoz": 3,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "4a722b92d4473b8a",
+      "6c02464785b9db3b",
+      "82f4c4433e676202",
+      "ee708d348123c22e"
+     ],
+     "ejemplos": [
+      "Conceden a Ernesto N la prisión domiciliaria",
+      "Prisión preventiva para tres acusados de asesinar a joyero en Mexicali",
+      "La prisión domiciliaria"
      ]
     },
     {
@@ -2483,41 +2518,11 @@
       "Muere hombre en hospital tras ataque armado en zona Centro de Mexicali",
       "Asesinan a balazos a un hombre en la zona Centro de Mexicali"
      ]
-    },
-    {
-     "termino": "hombre",
-     "n": 6,
-     "n_previo": 4,
-     "momento": 2,
-     "zonas": {
-      "Mexicali": 6,
-      "San Felipe": 1
-     },
-     "fuentes": {
-      "lavoz": 3,
-      "afn": 1,
-      "imparcial": 1,
-      "sintesis": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "16784013db75244f",
-      "2bce7e6524db2bc8",
-      "3826f1f19e0a7b4d",
-      "3e3e558a546d2946",
-      "88ecb7f74e87e0d9",
-      "d635c66bf945845b"
-     ],
-     "ejemplos": [
-      "Muere hombre en hospital tras ataque armado en zona Centro de Mexicali",
-      "Muere hombre tras chocar con tráiler en la carretera Mexicali-San Felipe",
-      "Llega un hombre herido de bala a un comercio a pedir ayuda; fallece en el hospital"
-     ]
     }
    ]
   },
   "Ensenada": {
-   "notas_ventana": 35,
+   "notas_ventana": 37,
    "minimo": 3,
    "temas": [
     {
@@ -2543,6 +2548,30 @@
       "Harán juzgados del Poder Judicial en predio del CEART Ensenada",
       "Asignan una quinta parte del predio del CEART Ensenada para nuevos juzgados",
       "Protesta comunidad cultural por conservar terreno de Ceart Ensenada"
+     ]
+    },
+    {
+     "termino": "proceso",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Ensenada": 3
+     },
+     "fuentes": {
+      "imparcial": 2,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "207d88a038dbbd1e",
+      "7dce32a7558c835b",
+      "e8dadd7701cf17c2"
+     ],
+     "ejemplos": [
+      "Vinculan a proceso a Jonathan Paul “N” por feminicidio en Ensenada",
+      "Ernesto Ruffo continuará su proceso en prisión domiciliaria en Ensenada",
+      "Ernesto Ruffo dejará el Altiplano; llevará su proceso en prisión domiciliaria en Ensenada"
      ]
     },
     {
@@ -2598,7 +2627,7 @@
    ]
   },
   "Playas de Rosarito": {
-   "notas_ventana": 66,
+   "notas_ventana": 67,
    "minimo": 3,
    "temas": [
     {
@@ -3188,7 +3217,7 @@
    ]
   },
   "Tecate": {
-   "notas_ventana": 21,
+   "notas_ventana": 22,
    "minimo": 2,
    "temas": [
     {
@@ -3541,7 +3570,7 @@
    ]
   },
   "San Diego": {
-   "notas_ventana": 141,
+   "notas_ventana": 145,
    "minimo": 3,
    "temas": [
     {
@@ -3717,6 +3746,29 @@
       "Two years after flooding at Bancroft Elementary, school district prepares for El Niño",
       "Hurricane Nolo, a zig-zagging storm, threatens Hawaii with flooding rains",
       "Hurricane Nolo, a zig-zagging storm, threatens Hawaii with flooding rain"
+     ]
+    },
+    {
+     "termino": "france",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "San Diego": 3
+     },
+     "fuentes": {
+      "kpbs": 3
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "2fb374042e337e81",
+      "c45d1fb84bc38da0",
+      "d84259d9c8c47670"
+     ],
+     "ejemplos": [
+      "Pope warns a 'paradise of machines' could undermine humanity as he opens France trip",
+      "Pope Leo warns a 'paradise of machines' could undermine humanity on his France visit",
+      "San Diego artist Fredo Gillis finds a new perspective after France residency"
      ]
     },
     {
@@ -4141,30 +4193,6 @@
       "City Threatens to Cut Ties with Gaslamp Quarter Association Over Alleged Involvement With Illegal Comic-Con Ad",
       "Hurricane Nolo, a zig-zagging storm, threatens Hawaii with flooding rains",
       "Hurricane Nolo, a zig-zagging storm, threatens Hawaii with flooding rain"
-     ]
-    },
-    {
-     "termino": "mayor",
-     "n": 3,
-     "n_previo": 7,
-     "momento": -4,
-     "zonas": {
-      "San Diego": 3
-     },
-     "fuentes": {
-      "voiceofsd": 2,
-      "gn-f8497491006c": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "72b4e2fa42f1a1c7",
-      "9578201b83b27f34",
-      "b44c6d0ad455dae1"
-     ],
-     "ejemplos": [
-      "San Ysidro registra filas de hasta 95 minutos esta mañana (Datos actualizados a las 06:00 AM PDT) Los cruces fronterizos entre Baja California y Estados Unidos registran su mayor saturación en el puerto de San Ysidro, con demoras que alcanzan 95 minuto",
-      "Mayor Stretched Too Thin?",
-      "Two Opposite Cities, One Similar Battle for Mayor"
      ]
     }
    ]
