@@ -1,8 +1,454 @@
 {
  "esquema": 1,
  "ventana_dias": 30,
- "total": 8262,
+ "total": 8290,
  "notas": [
+  {
+   "id": "899afa07ed8dae5d",
+   "titulo": "ASF detecta más de 105 mdp por aclarar en Juchitán, Oaxaca, durante el gobierno de Miguel Sánchez Altamirano",
+   "url": "https://www.elimparcial.com/mexico/2026/09/27/asf-detecta-mas-de-105-mdp-por-aclarar-en-juchitan-oaxaca-durante-el-gobierno-de-miguel-sanchez-altamirano/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T11:46:09+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5232,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/P76SN4LILFHA7D7OA4G2U6PUKU.png?auth=05acb9f31bda6445fa54711f8483dba42905068dc975181cc24e64d4b62af96f&smart=true&width=1200&height=720",
+   "rubros": []
+  },
+  {
+   "id": "f5882cc9f9279a31",
+   "titulo": "Advierten por lluvias y alto oleaje en las costas en las próximas horas",
+   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQZ2dJVnRXQmVMUGFZSEtfQTYtMHVyeXJUSFpJUnYycWZ1c2w5MXVMSE8tbVZWMUlwaFV1bXA5MTNTNEIwRlZIam1EbVZRbGhhVjhJQUo0Zm5jakxsZ3lHSGJFOG8ydFoyeVNmSFlGYUo1VE9hc3FvUkpGMlhVTlBCTktiSUo5WGJydElydEw4Rm1mODFyMUZSLXpwSWM3MHczSVhOcFdTOF95YlhJdVc5TFpXMEpYSkk?oc=5",
+   "dominio": "grupoanimal.mx",
+   "fuente": "gn-208187d76ea7",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T11:01:44+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4782,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "3412ba7fde03eb2d",
+   "titulo": "Filtros de confianza y baja participación estancan crecimiento de Policía en Tecate",
+   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOMGVmMW9RMDJNbWU5amJ4dlVWMFRiQU9NN2pKdW1BZjFCT01jbl85QnNEMklhSmx5azlVVU02TkttNzBvdXhZeXdmLTNJdjFhMlZCeFFRc2lVOGIwMl9LSERPLTRfdUUxckhzODdkd2hmQ09BN3ZCb0NhcUdBU191SldXaDlfSk1TWWI3RmtJUGpUTFJpdWhUaWg2TzUzNERMYkRRam9BbVlOS081WmhCUQ?oc=5",
+   "dominio": "grupoanimal.mx",
+   "fuente": "gn-208187d76ea7",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tecate"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T11:01:37+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8876,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "856ce0a8ee38e2d1",
+   "titulo": "Multiple arrests on suspicion of explosives offenses near U.K. base used by U.S. forces",
+   "url": "https://www.kpbs.org/news/international/2026/09/27/multiple-arrests-on-suspicion-of-explosives-offenses-near-u-k-base-used-by-u-s-forces",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T10:49:36+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/aac114e/2147483647/strip/false/crop/1467x1467+367+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F87%2F5a%2F1f5228364c83bd096fa574d4952c%2Fap26270349850586.jpg",
+   "rubros": []
+  },
+  {
+   "id": "16a816fc19f36553",
+   "titulo": "Isaac del Toro EN VIVO: Mundial de Ciclismo 2026, prueba de ruta y resultados",
+   "url": "https://www.elimparcial.com/deporte/2026/09/27/isaac-del-toro-en-vivo-mundial-de-ciclismo-2026-prueba-de-ruta-y-resultados/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T10:47:21+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.606,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/ASDO3PBBYBHPBAMTFU4O6A6G3U.png?auth=dcbfc81009ed355f91d1c235a809eead824673ff34a22941a95eb9c2f6ffe30c&smart=true&width=1672&height=941",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "9284a93973c9d8a7",
+   "titulo": "These Democrats are running for Congress on Christian faith. Will it pay off?",
+   "url": "https://www.kpbs.org/news/politics/2026/09/27/these-democrats-are-running-for-congress-on-christian-faith-will-it-pay-off",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T10:00:00+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/b6e591d/2147483647/strip/false/crop/3105x3105+1208+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Faf%2Fa4%2F7423c1034e3caaf95a455ede05cc%2Fdiptych-7.jpg",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "3380420ef1280520",
+   "titulo": "Justin Verlander se retiró de la MLB: su hija lo sorprendió en el montículo durante su último juego",
+   "url": "https://www.elimparcial.com/deporte/2026/09/27/justin-verlander-se-retiro-de-la-mlb-su-hija-lo-sorprendio-en-el-monticulo-durante-su-ultimo-juego/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T08:28:20+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6645,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/5YQMXXQJ6BHOHNQGJFQXXNZMRA.jpg?auth=a2dcddc2844ed0d5ca19f2d80dbb7ed716b79f6660c3b89fa95474ab198a5782&smart=true&width=1920&height=1080",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "119c5479a10e5b01",
+   "titulo": "México dejó en el terreno a República Dominicana y sigue invicto en el Mundial de Beisbol Sub-15",
+   "url": "https://www.elimparcial.com/deporte/2026/09/26/mexico-dejo-en-el-terreno-a-republica-dominicana-y-sigue-invicto-en-el-mundial-de-beisbol-sub-15/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T06:42:00+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5693,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/HDT76INLOZCBBHIXRXOYZBHRSI.jpg?auth=83324e3a806f01ab24baaaf3590536ffa7f12373f7087d660402e5727b49f8bf&smart=true&width=1920&height=1080",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "35b716c66d75bf4d",
+   "titulo": "Puedes buscar a tus antepasados y construir tu árbol familiar de manera gratuita gracias a una base de datos mundial que conserva millones de actas, censos y registros familiares",
+   "url": "https://www.elimparcial.com/mundo/2026/09/26/puedes-buscar-a-tus-antepasados-y-construir-tu-arbol-familiar-de-manera-gratuita-gracias-a-una-base-de-datos-mundial-que-conserva-millones-de-actas-censos-y-registros-familiares/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T06:35:33+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5497,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/XORTDJMBRREWHIWGMICZ4DIIGE.jpg?auth=eee438d15e4aaac1964395486e3d0c686772fa6d6e8e29351603564f383ead12&smart=true&width=1024&height=746",
+   "rubros": []
+  },
+  {
+   "id": "b32c338826fee143",
+   "titulo": "La historia y significado del apellido González: del linaje guerrero medieval a su expansión por España, América y México",
+   "url": "https://www.elimparcial.com/mexico/2026/09/26/la-historia-y-significado-del-apellido-gonzalez-del-linaje-guerrero-medieval-a-su-expansion-por-espana-america-y-mexico/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T06:34:51+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6559,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/KYY52B2R6VGPJBTL5Z6FWCB7MM.jpg?auth=8e9a8ff183abce3332a759c745f3acfa90eb5c9cf67b089d30bafa4bbf52db36&smart=true&width=1024&height=680",
+   "rubros": []
+  },
+  {
+   "id": "1d9d64831d3405f5",
+   "titulo": "¿Debes guardar el perfume en el refrigerador? Esto pasa con su aroma",
+   "url": "https://www.elimparcial.com/estilos/2026/09/26/debes-guardar-el-perfume-en-el-refrigerador-esto-pasa-con-su-aroma/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T06:33:45+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.8038,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/YF6G7REAARCR5OZNVYAMGFVW54.jpg?auth=afcd6216bf0df559b8666707f9e2715a60c4038760eff0342fa08f0a4246a42c&smart=true&width=1920&height=1080",
+   "rubros": []
+  },
+  {
+   "id": "f0ee36da1d8cd875",
+   "titulo": "Transforman estiércol de vaca en un acolchado agrícola biodegradable que permite cultivar maíz con 30% menos fertilizante al mejorar la disponibilidad de nutrientes y la actividad microbiana del suelo",
+   "url": "https://www.elimparcial.com/locurioso/2026/09/26/transforman-estiercol-de-vaca-en-un-acolchado-agricola-biodegradable-que-permite-cultivar-maiz-con-30-menos-fertilizante-al-mejorar-la-disponibilidad-de-nutrientes-y-la-actividad-microbiana-del-suelo/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T06:25:56+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5047,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/H5U5JB4LT5HGRGLELM3UHMYTDQ.jpeg?auth=8339bba839a4496f2285e7906de1f07e4e65c7cea29d94de819e0069dc24757a&smart=true&width=1376&height=768",
+   "rubros": []
+  },
+  {
+   "id": "9ae302c897598462",
+   "titulo": "Los Padres de San Diego terminaron como el mejor sembrado en el Comodín de la Liga Nacional",
+   "url": "https://www.elimparcial.com/deporte/2026/09/26/los-padres-de-san-diego-terminaron-como-el-mejor-sembrado-en-el-comodin-de-la-liga-nacional/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T06:20:51+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.7408,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/MM7IRMG425GH5FRH7Z3AQXYRII.jpg?auth=30d751466c3f3fcdfeff09fc863ee10c6940b177be26e0874ee30640d502cdf3&smart=true&width=1920&height=1080",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "831f28c05618631c",
+   "titulo": "Álamos cancela todos sus eventos públicos durante tres días ante el avance del huracán Polo y los posibles efectos que dejará en Sonora entre el lunes y el miércoles",
+   "url": "https://www.elimparcial.com/son/sonora/2026/09/26/alamos-cancela-todos-sus-eventos-publicos-durante-tres-dias-ante-el-avance-del-huracan-polo-y-los-posibles-efectos-que-dejara-en-sonora-entre-el-lunes-y-el-miercoles/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T06:12:44+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7214,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/2XLJM424CNG5BOUKIMLDSLTOFM.png?auth=e19d4d93a87eebdf497dbdc705afeca8d819b00389bbd70131ec5787492094a4&smart=true&width=1200&height=780",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "49c92f887c47b0a4",
+   "titulo": "Solo la mitad de las viviendas de Ciudad de México son propias mientras casi tres de cada 10 se encuentran en renta, según datos de la Encuesta Intercensal 2025 del Inegi",
+   "url": "https://www.elimparcial.com/mexico/2026/09/26/solo-la-mitad-de-las-viviendas-de-ciudad-de-mexico-son-propias-mientras-casi-tres-de-cada-10-se-encuentran-en-renta-segun-datos-de-la-encuesta-intercensal-2025-del-inegi/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T06:01:35+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6263,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/F7IXWG6DBFBQVGZWVJBNALHQHQ.png?auth=6d35a9721be2f075a8841210f916fcd6f39587dedbdededb35f3b391dcdd22d2&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "6f4e7aa8f5d8a9de",
+   "titulo": "Turista mexicano de 66 años falleció en Machu Picchu después de sufrir una descompensación mientras realizaba fotografías durante su recorrido por los antiguos andenes de la ciudadela inca",
+   "url": "https://www.elimparcial.com/mexico/2026/09/26/turista-mexicano-de-66-anos-fallecio-en-machu-picchu-despues-de-sufrir-una-descompensacion-mientras-realizaba-fotografias-durante-su-recorrido-por-los-antiguos-andenes-de-la-ciudadela-inca/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T05:46:36+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.4872,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/S63TKGZEUBHCJBFSUY2FAOU5HQ.jpg?auth=4ceb5e0f82d8bf6c84017430326f8ecc7e32b63ca581c4b17da428e12accaf2e&smart=true&width=1440&height=700",
+   "rubros": []
+  },
+  {
+   "id": "c4179b85cb3330ce",
+   "titulo": "Científicos descubren que 10 minutos de trote suave pueden mejorar el estado de ánimo y la concentración al aumentar la actividad de la corteza prefrontal, una zona del cerebro relacionada con la atención y el autocontrol",
+   "url": "https://www.elimparcial.com/estilos/2026/09/26/cientificos-descubren-que-10-minutos-de-trote-suave-pueden-mejorar-el-estado-de-animo-y-la-concentracion-al-aumentar-la-actividad-de-la-corteza-prefrontal-una-zona-del-cerebro-relacionada-con-la-atencion-y-el-autocontrol/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T05:25:13+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5442,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/FQQYDCEXOREFZMQ7AFY52RHSOY.jpeg?auth=3248187a2af4627e8352aa919226ef55f18250f49d5db5726da4adc453d2e457&smart=true&width=1376&height=768",
+   "rubros": []
+  },
+  {
+   "id": "313b04da2dfeaea3",
+   "titulo": "IMSS reconoce entrega equivocada de dos recién nacidas a familias distintas de las que correspondían mientras continúa la investigación por la muerte de cinco bebés ocurrida días antes en un hospital de Durango",
+   "url": "https://www.elimparcial.com/mexico/2026/09/26/imss-reconoce-entrega-equivocada-de-dos-recien-nacidas-a-familias-distintas-de-las-que-correspondian-mientras-continua-la-investigacion-por-la-muerte-de-cinco-bebes-ocurrida-dias-antes-en-un-hospital-de-durango/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T05:17:21+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.4785,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/5AFRJFST2RAZVNKCNFJSIIYHSQ.jpg?auth=2f7578d29752198d96e4263a3f2d86b1a0be01cd4a83cbbd1f622910bc760523&smart=true&width=1920&height=1280",
+   "rubros": []
+  },
   {
    "id": "2ebee7adc181f2bb",
    "titulo": "Homeland Security Reports 16 Straight Months of Zero Border Releases – The Epoch Times",
@@ -627,6 +1073,32 @@
    ]
   },
   {
+   "id": "5bd48b249c5dea23",
+   "titulo": "México vs Colombia: Minuto a minuto, goles del empate en el debut de Rafael Márquez como DT del Tri",
+   "url": "https://www.elimparcial.com/deporte/2026/09/26/mexico-vs-colombia-en-vivo-minuto-a-minuto-goles-y-resultado-del-debut-de-rafael-marquez-como-dt-del-tri/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T02:59:41+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.719,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/KE5IN7FQK5HUJA7BR4XXNOYBWU.png?auth=99de1b6d39b773e58a875d7adcb51469ffccdef891bbb6727cb5464c0d098061&smart=true&width=1672&height=941",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
    "id": "f2cca7f86f9380d0",
    "titulo": "Toma protesta Ismael Burgueño Ruiz a 226 ‘Comisarios Sociales Juveniles’ de la Sindicatura Procuradora",
    "url": "https://jornadabc.com.mx/bajacalifornia/toma-protesta-ismael-burgueno-ruiz-a-226-comisarios-sociales-juveniles-de-la-sindicatura-procuradora/",
@@ -736,6 +1208,33 @@
    "rubros": []
   },
   {
+   "id": "eca331e235553365",
+   "titulo": "San Quintín requiere unidad y madurez política: Julieta Ramírez",
+   "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQN3NSYW1lclItbTVNamJlY3dmSFctSkpjVFVyRW4yS3hGUlBrQUZqUXQzTTJyUTNOb2g3c3BKZDRxYTdycFdNZkdsSkNoaG56SUQ4RHF5MXJWUzBzUE53NGdjS0c0Q3VYd3NCWmM2dDRZaElHUEdvdHdwRU5KMXdWaW0yVFgwZFdhdUVlWTN3UnJjM0dZTjRhdEg0eER1dTM2UW1qc1VYSmFyeW9aYUlSY2stVzhLT3FpSE9PZ0p3bXU3UDIzaXc?oc=5",
+   "dominio": "el-mexicano.com.mx",
+   "fuente": "gn-d33696b00d82",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Quintín"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T02:22:45+00:00",
+   "capturado": "2026-09-26T21:08:56+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5199,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
    "id": "28cd2048e6d61bb3",
    "titulo": "Usuarios exigen a IMOS mejorar transporte público y tarifas",
    "url": "https://www.elimparcial.com/tij/tijuana/2026/09/26/usuarios-exigen-a-imos-mejorar-transporte-publico-y-tarifas/",
@@ -757,33 +1256,6 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/757AP7EBXFECHATCFPNYW6YZHY.jpg?auth=7fcf225e0ea0fc9c2352de0e38e8af4d23a48be5fee9b0c409ec0376c95e5db0&smart=true&width=1146&height=720",
-   "rubros": []
-  },
-  {
-   "id": "eca331e235553365",
-   "titulo": "San Quintín requiere unidad y madurez política: Julieta Ramírez",
-   "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQN3NSYW1lclItbTVNamJlY3dmSFctSkpjVFVyRW4yS3hGUlBrQUZqUXQzTTJyUTNOb2g3c3BKZDRxYTdycFdNZkdsSkNoaG56SUQ4RHF5MXJWUzBzUE53NGdjS0c0Q3VYd3NCWmM2dDRZaElHUEdvdHdwRU5KMXdWaW0yVFgwZFdhdUVlWTN3UnJjM0dZTjRhdEg0eER1dTM2UW1qc1VYSmFyeW9aYUlSY2stVzhLT3FpSE9PZ0p3bXU3UDIzaXc?oc=5",
-   "dominio": "el-mexicano.com.mx",
-   "fuente": "gn-d33696b00d82",
-   "zona_medio": "estatal",
-   "zonas": [
-    "San Quintín"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-09-27",
-   "publicado": "2026-09-27T02:15:00+00:00",
-   "capturado": "2026-09-26T21:08:56+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5199,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_sanquintin",
    "rubros": []
   },
   {
@@ -880,6 +1352,56 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/EQ7II7ENMRCIZEYW6WQHMYBY7E.jpeg?auth=1b064d8799db708c79464dd89252eedaceef12d2804d09bbcdf6bd868c5b100c&smart=true&width=1200&height=925",
+   "rubros": []
+  },
+  {
+   "id": "b318b68ef806e927",
+   "titulo": "La salida",
+   "url": "https://oem.com.mx/lavozdelafrontera/analisis/la-salida-32293534",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T02:00:00+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5546,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "1e972746bbfeed24",
+   "titulo": "La Espiga / Estatua de Álvaro Obregón",
+   "url": "https://oem.com.mx/lavozdelafrontera/analisis/la-espiga-estatua-de-alvaro-obregon-32290972",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T02:00:00+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5612,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "rubros": []
   },
   {
@@ -1058,6 +1580,33 @@
    "rubros": []
   },
   {
+   "id": "967293f920556c96",
+   "titulo": "Localizan muerto a un hombre dentro del canal Reforma",
+   "url": "https://oem.com.mx/lavozdelafrontera/policiaca/localizan-muerto-a-un-hombre-dentro-del-canal-reforma-32294515",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T00:19:16+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5465,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
    "id": "09fdd787cc21abbe",
    "titulo": "Trabajos del muro fronterizo dañan el geóglifo fechado más antiguo de América",
    "url": "https://www.elimparcial.com/mexico/2026/09/26/trabajos-del-muro-fronterizo-danan-el-geoglifo-fechado-mas-antiguo-de-america/",
@@ -1079,6 +1628,31 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/HXL5VPG53ZEFHLGGUPZT6FHZMQ.jpeg?auth=3e8b9939f8ee20b76cdcf7e9b47f0d06ec5e6f22e6fdfa2265212fcfefaf0157&smart=true&width=1385&height=1136",
+   "rubros": []
+  },
+  {
+   "id": "82a4caa21da2d34b",
+   "titulo": "Secretaría de Salud de Baja California llama a cuidar la salud cerebral y detectar oportunamente el Alzheimer",
+   "url": "https://www.uniradioinforma.com/salud/secretaria-salud-baja-california-llama-cuidar-salud-cerebral-detectar-oportunamente-alzheimer-n904861",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-09-27",
+   "publicado": "2026-09-27T00:00:00-07:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6439,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "rubros": []
   },
   {
@@ -1208,31 +1782,6 @@
    "rubros": []
   },
   {
-   "id": "7096be067749d119",
-   "titulo": "Inafed arranca en Chalco el programa rutas mágicas de color",
-   "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOeEthcXdRRDJtSERaZUVqbTZwQ214cXdReGNWdWI1RHA2a1V3WVVmTG9nOTRhQlQ1SjRfUHRpVFJ5ZHZzWjF6S0w0SkthcVVRdC1FdVlCU0xxbi1vUjg4Ri1qNndSRmtob1JUaTZydVpsZFdRMHpVT2JEX21tMUNTZXBrMExkRThyck8ybUVGZWx2OHlpUEVnMjdJSjF0bFYw?oc=5",
-   "dominio": "enfoquenoticias.com.mx",
-   "fuente": "gn-0eb8580afef6",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-09-26",
-   "publicado": "2026-09-26T23:32:04+00:00",
-   "capturado": "2026-09-27T05:17:39+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "favorable",
-    "confianza": 0.5892,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_rosarito",
-   "rubros": []
-  },
-  {
    "id": "47f677f700251ee1",
    "titulo": "Garitas de Tijuana registran filas de casi dos horas de espera (Datos actualizados a las 4:00 PM PDT) Los cruces fronterizos entre Tijuana y San Diego presentan severa congestión durante la tarde de este sábado, registrándose en las garitas de San Ysidro",
    "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPT0UxSE5xWkZ2NW5nZ2RyRlJyTVRYTjJhYjZaRHRYYUtKMDFFYmVWdHBUYXpXMXhLRnhUOWZMMXZOdDN2Rk1HRXpNdWlhZHBxLXUwUS1jeGZKS01vMVIyZ2h4b2wzWTdFdFpFNS0tY3o0eWo3OVZad0h4QjBDUnhhNFBadklNZU9pV2ZRakdnQ3lsRlBMa3d6TXMzc0tzUUpISk0zSVZic0ZNWTNCb3RoSFBMVQ?oc=5",
@@ -1258,6 +1807,31 @@
    },
    "origen": "busqueda_web",
    "descubierta_por": "bq_tecate",
+   "rubros": []
+  },
+  {
+   "id": "7096be067749d119",
+   "titulo": "Inafed arranca en Chalco el programa rutas mágicas de color",
+   "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOeEthcXdRRDJtSERaZUVqbTZwQ214cXdReGNWdWI1RHA2a1V3WVVmTG9nOTRhQlQ1SjRfUHRpVFJ5ZHZzWjF6S0w0SkthcVVRdC1FdVlCU0xxbi1vUjg4Ri1qNndSRmtob1JUaTZydVpsZFdRMHpVT2JEX21tMUNTZXBrMExkRThyck8ybUVGZWx2OHlpUEVnMjdJSjF0bFYw?oc=5",
+   "dominio": "enfoquenoticias.com.mx",
+   "fuente": "gn-0eb8580afef6",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-26",
+   "publicado": "2026-09-26T23:24:00+00:00",
+   "capturado": "2026-09-27T05:17:39+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5892,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
    "rubros": []
   },
   {
@@ -1698,7 +2272,7 @@
     "version": "0.2.0"
    },
    "origen": "busqueda_web",
-   "descubierta_por": "bq_sanfelipe",
+   "descubierta_por": "bq_tecate",
    "rubros": [
     "clima"
    ]
@@ -1727,6 +2301,31 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/P3EE6EEGGJGQNP3LVASCBW2OCE.jpeg?auth=93ec3b9843a4ebb22ec68f14b10510a39bcc8703442fed2bbe4ae6cf2cddebd3&smart=true&width=1600&height=1110",
+   "rubros": []
+  },
+  {
+   "id": "8fedeecd462604a6",
+   "titulo": "Coepris Baja California recomienda limpiar y desinfectar tinacos y piletas para prevenir riesgos sanitarios",
+   "url": "https://www.uniradioinforma.com/sociedad/coepris-baja-california-recomienda-limpiar-desinfectar-tinacos-piletas-prevenir-riesgos-sanitarios-n904857",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-09-26",
+   "publicado": "2026-09-26T22:05:00-07:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6527,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "rubros": []
   },
   {
@@ -2068,7 +2667,7 @@
     "version": "0.2.0"
    },
    "origen": "busqueda_web",
-   "descubierta_por": "bq_rosarito",
+   "descubierta_por": "bq_sanfelipe",
    "rubros": [
     "clima"
    ]
@@ -3397,6 +3996,29 @@
    "rubros": []
   },
   {
+   "id": "4551d6471538be47",
+   "titulo": "5 Must-Visit Restaurants for the Best Chilaquiles in Tijuana",
+   "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQMnBwcF9NMUZtcVVhNHk1SXhSRUdtdS1tbGhSdDlJZkREQ0xPbkRiZVQ4dF9RalRhVGlna0Jyc0w0b0FZX19ybDdRazVlcUEyZnU3bXVoSWZOM2NyUmhRdDY4eHd5djBjZ21JaFZGWWY5bjlnTmhVQVBCd3FtTXAwc0dFYXh5Z1pDRXlLM0FJS0R6aklPTERhQXZMMVVTWk1ucmlheW4tVDJlZTNkaXRZSGQtZHUzbWlfRlh3d3VXalc?oc=5",
+   "dominio": "sandiegored.com",
+   "fuente": "gn-dc1580cd9943",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-26",
+   "publicado": "2026-09-26T18:18:00+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": [
+    "turismo"
+   ]
+  },
+  {
    "id": "fb9a7866d57475c4",
    "titulo": "IMSS reconoce que entregaron a dos recién nacidos a familias equivocadas en hospital de Mexicali",
    "url": "https://jornadabc.com.mx/principales/imss-reconoce-que-entregaron-a-dos-recien-nacidos-a-familias-equivocadas-en-hospital-de-mexicali/",
@@ -3544,6 +4166,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6ab86b3ae1c6b.jpg",
    "rubros": []
   },
   {
@@ -4060,6 +4683,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6ab85e6d764a7.jpg",
    "rubros": [
     "seguridad"
    ]
@@ -4116,6 +4740,35 @@
    ],
    "rubros": [
     "espectaculos"
+   ]
+  },
+  {
+   "id": "3faf065f8a67bdc8",
+   "titulo": "Lluvias aisladas y chubascos en Baja California este fin de semana",
+   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxON1hkYTNvam9DY0xxZnBOM1hVZDFfYUtUTnRLRnlreGRaekwyejh1cHpRWWxDZkJVMDYyQnJtOFZSNU5TMktsa0duU2lPbkJNMXJwcVN5TW9MVkdWQkhFdEstenhDai1DWmg5Z2s3MjlHb3U0bU94bnpKclBxMnJhY3VRcnZZV28?oc=5",
+   "dominio": "elcongresista.mx",
+   "fuente": "gn-65052a9c3141",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-09-26",
+   "publicado": "2026-09-26T17:03:17+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.667,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": [
+    "clima"
    ]
   },
   {
@@ -4225,6 +4878,29 @@
    },
    "imagen": "https://statics.uniradioinforma.com/2026/09/6ab85d0a7864a.jpeg",
    "rubros": []
+  },
+  {
+   "id": "2dd3bf024196bd56",
+   "titulo": "Scandal in Liga MX! Former Xolos Star Reveals He Was Paid in 'Tiny Installments' at the Oxxo",
+   "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQdTgxbW1SNllGZGtiM0tkcUNWem5jaXRYejUtSTZjeURkWW9YeklZZzloNlZneEhDVnl0M19ZY3dJV2dTZ0FZM1FCMnVaenBmbUV0MzRQR09Rc1lsdkxES2ZHRm1CVjBpWTFERUR5MGM5cUtPYm9iZmM3RGQwY0Ffdk9aVVBiM19CbUdxWFFQdjN3NzhQNlFJdS1XaGtjUHpzMmlxN29GNzN5YUdYLUNmbDlJSF94N2lIcWY3SklfZHB0by1UWWlfSk5fTmJRT3JIMkFSZ1d2SWdMQdIB2gFBVV95cUxQdTgxbW1SNllGZGtiM0tkcUNWem5jaXRYejUtSTZjeURkWW9YeklZZzloNlZneEhDVnl0M19ZY3dJV2dTZ0FZM1FCMnVaenBmbUV0MzRQR09Rc1lsdkxES2ZHRm1CVjBpWTFERUR5MGM5cUtPYm9iZmM3RGQwY0Ffdk9aVVBiM19CbUdxWFFQdjN3NzhQNlFJdS1XaGtjUHpzMmlxN29GNzN5YUdYLUNmbDlJSF94N2lIcWY3SklfZHB0by1UWWlfSk5fTmJRT3JIMkFSZ1d2SWdMQQ?oc=5",
+   "dominio": "en.albat.com",
+   "fuente": "gn-769c65421af0",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-26",
+   "publicado": "2026-09-26T17:00:29+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": [
+    "deportes"
+   ]
   },
   {
    "id": "cac0bc2f8b0883cd",
@@ -6776,6 +7452,31 @@
    "postura": {
     "etiqueta": "adversa",
     "confianza": 0.8482,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "145503e1176f8984",
+   "titulo": "Puntean periferia y el valle en rickettsiosis",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/tienen-periferias-y-el-valle-de-mexicali-mayor-incidencia-de-rickettsia-32282590",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-26",
+   "publicado": "2026-09-26T10:54:17+00:00",
+   "capturado": "2026-09-27T12:00:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6227,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
@@ -133753,7 +134454,7 @@
     {
      "id": "ram",
      "via": "nominal",
-     "clave": "rocio adame"
+     "clave": "adame munoz"
     }
    ],
    "postura": {
