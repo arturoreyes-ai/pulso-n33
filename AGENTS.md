@@ -1070,10 +1070,33 @@ and are not:
   for a page on our behalf. The canonical URL is `UNIQUE`, so the same post
   pasted twice is one row.
 - **Language is declared when adding** (Español / Inglés), never guessed; in
-  English no tone is asked and every comment counts as «sin tono». **Rule 5 is
-  checked on the post's title** with `busqueda/figura.ts`, at harvest and
-  again on every read: a roster figure in the title withholds every label and
-  the card says «Sin dato». An unreadable roster withholds too.
+  English no tone is asked and every comment counts as «sin tono».
+- **Rule 5 has an exception here** (client, 29 September 2026): tone shows
+  even when the post's title names a roster figure. Until that day the title
+  went through `busqueda/figura.ts` and the first real post, Ismael Burgueño's
+  annual report, read «Sin dato» with 11 comments unlabeled. Now nothing in
+  `lib/seguimiento/` reads the roster, and the card carries `SALVEDAD_TONO`
+  («Mide cómo suena cada comentario, no la postura hacia una persona»), which
+  is not optional: without a footer it is the only place that says so. The
+  live search keeps the check. Comments stored without a label (that post, or
+  a read when the tone service was down) are labeled on the next visit with no
+  open update (`etiquetarPendientes`): it is the local model, which costs
+  nothing, so it does not wait for a button.
+- **«Lo que dicen los comentarios»** (client, 29 September 2026, with Amazon's
+  «Customers say» as the model): `lib/analisis/seguimiento.ts`, a deliberate
+  twin of `consulta.ts`, writes one paragraph over the stored comments —
+  what recurs, where comments agree and where they don't. It runs **after each
+  update's save**, on the same paid press, and is stored in
+  `seguimiento_actualizaciones.resumen` (`db/0004`); if it did not come (an
+  update from before, the model failed) the page offers «Resumir comentarios»,
+  `POST /api/seguimiento/[id]/resumen`, and never asks by itself. Below 10
+  comments there is no call. The model gets text only, never the local tone
+  labels; `reglas.ts` rejects a count, «la mayoría» or «predomina»; the prompt
+  lets it say comments praise or criticise a named person's work but forbids
+  concluding anything about that person. The page adds «Generado con IA…» and
+  `SALVEDAD_RESUMEN`. Being derived from the text, it is nulled with it after
+  15 days (`almacen.ts::purgar`). Needs `ANALISIS_HABILITADO` and the key, like
+  Analizar; off, the card is not painted.
 - **Counts appear here, dated.** The /redes card dropped platform counts on 17
   September 2026 because the live embed beside it contradicted them; here each
   figure carries the time of its read, which is what a follow-up compares.

@@ -1,7 +1,6 @@
-import type { DocRoster } from "@/lib/datos/tipos";
 import { hayBaseDeDatos } from "@/lib/acceso/bd";
-import { leerDatoPublicado, type LeerDatos } from "@/lib/datos/publicado";
-import { nombraFigura } from "@/lib/busqueda/figura";
+import { analisisHabilitado } from "@/lib/analisis/config";
+import { MINIMO_COMENTARIOS_RESUMEN, resumirComentarios, type Resumen } from "@/lib/analisis/seguimiento";
 import { SIN_CACHE, json } from "@/lib/busqueda/respuesta";
 import {
   ActorProhibido,
@@ -74,7 +73,10 @@ import {
 export interface DependenciasSeguimiento {
   almacen?: Almacen;
   tono?: ServicioTono;
-  leer?: LeerDatos;
+  /** El resumen de los comentarios (lib/analisis/seguimiento.ts). */
+  resumir?: (entrada: Parameters<typeof resumirComentarios>[0]) => Promise<Resumen>;
+  /** Si la lectura automatica esta encendida: decide si se ofrece resumir. */
+  analisis?: () => boolean;
   usuario?: () => Promise<{ id: number }>;
   entorno?: NodeJS.ProcessEnv;
   ahora?: () => Date;
@@ -93,7 +95,8 @@ function dependencias(d: DependenciasSeguimiento) {
     entorno,
     almacen: d.almacen ?? almacenNeon,
     tono: d.tono ?? servicioTono(entorno),
-    leer: d.leer ?? leerDatoPublicado,
+    resumir: d.resumir ?? ((entrada: Parameters<typeof resumirComentarios>[0]) => resumirComentarios(entrada)),
+    analisis: d.analisis ?? analisisHabilitado,
     usuario: d.usuario ?? usuarioDeSesion,
     ahora: d.ahora ?? (() => new Date()),
     solicitar: d.solicitar ?? fetch,
@@ -112,11 +115,12 @@ const MENSAJES: Record<CodigoErrorSeguimiento, string> = {
   limite_dia: "Llegaste al límite de actualizaciones de hoy.",
   limite_mes: "Las actualizaciones no están disponibles por ahora.",
   reciente: "Se actualizó hace poco. Vuelve a intentarlo en unos minutos.",
+  pocos: "Hacen falta al menos diez comentarios para resumirlos.",
   no_disponible: "La publicación no respondió. Vuelve a intentarlo más tarde.",
 };
 
 const ESTADO: Record<CodigoErrorSeguimiento, number> = {
-  apagado: 400, url: 400, no_existe: 404, limite_dia: 429, limite_mes: 429, reciente: 409, no_disponible: 503,
+  apagado: 400, url: 400, no_existe: 404, limite_dia: 429, limite_mes: 429, reciente: 409, pocos: 409, no_disponible: 503,
 };
 
 const error = (codigo: CodigoErrorSeguimiento) =>
@@ -198,11 +202,40 @@ async function borrarConjuntos(corridas: Corridas, d: Deps): Promise<void> {
 }
 
 /**
+ * Cuanto se espera a que Apify escriba el costo de una corrida terminada.
+ *
+ * EL CASO. La primera lectura real, el 29 de septiembre de 2026, guardo 0 USD
+ * en el libro: la corrida de comentarios termino a las 18:12:42, esta funcion
+ * la leyo a las :46 con `usageTotalUsd` todavia vacio, y Apify reportaba
+ * 0.0228 USD y 12 eventos cobrados minutos despues. Con ceros asi el tope del
+ * mes solo contaba lo que estaba en curso, o sea nada.
+ */
+const ESPERA_MINIMA_COSTO_MS = 15_000;
+const ESPERA_MAXIMA_COSTO_MS = 120_000;
+
+/** Si una corrida terminada todavia no dice lo que cobro. Un cero es cero de
+ *  verdad solo cuando ya paso la espera minima y no registro eventos. */
+function costoPendiente(e: Corrida, ahora: Date): boolean {
+  if (e.usd !== null && e.usd > 0) return false;
+  const desde = e.terminada === null ? Number.POSITIVE_INFINITY : ahora.getTime() - Date.parse(e.terminada);
+  if (desde >= ESPERA_MAXIMA_COSTO_MS) return false;
+  return desde < ESPERA_MINIMA_COSTO_MS || e.eventos > 0;
+}
+
+/** Lo que se anota en el libro por una corrida. Si pasada la espera sigue sin
+ *  costo y cobro eventos, se anota su tope: el peor caso, que es el que el
+ *  tope del mes tiene que cubrir. */
+function costoDe(e: Corrida, tope: number): number {
+  if (e.usd !== null && e.usd > 0) return e.usd;
+  return e.eventos > 0 ? tope : 0;
+}
+
+/**
  * Lleva una lectura abierta tan lejos como se pueda en esta peticion: si sus
  * corridas terminaron, la reclama, lee, limpia, etiqueta y guarda. Si no,
  * no hace nada y la siguiente pregunta vuelve a mirar.
  */
-async function avanzar(seg: FilaSeguimiento, act: FilaActualizacion, d: Deps, roster: DocRoster | null): Promise<void> {
+async function avanzar(seg: FilaSeguimiento, act: FilaActualizacion, d: Deps): Promise<void> {
   if (act.estado === "listo" || act.estado === "fallo") return;
   const ahora = d.ahora();
   const edad = ahora.getTime() - Date.parse(act.creado);
@@ -226,9 +259,13 @@ async function avanzar(seg: FilaSeguimiento, act: FilaActualizacion, d: Deps, ro
     return;
   }
   if (estados.some((e) => e !== null && !TERMINADAS.has(e.estado))) return;
+  // El costo tambien tiene que haber llegado: la pagina vuelve a preguntar en
+  // cinco segundos, y guardar antes deja el gasto en cero (ver costoPendiente).
+  if (estados.some((e) => e !== null && costoPendiente(e, ahora))) return;
   if (!(await d.almacen.reclamar(act.id, ahora.toISOString()))) return;
 
-  const usd = estados.reduce((n, e) => n + (e?.usd ?? 0), 0);
+  const topes = [TOPES[seg.red].publicacion.usd, TOPES[seg.red].comentarios.usd];
+  const usd = estados.reduce((n, e, i) => n + (e === null ? 0 : costoDe(e, topes[i]!)), 0);
   try {
     const [itemsPub, itemsCom] = await Promise.all([
       pub && estados[0]?.estado === "SUCCEEDED" ? itemsDe(pub.dataset, 5, token, d.solicitar) : Promise.resolve([]),
@@ -244,13 +281,14 @@ async function avanzar(seg: FilaSeguimiento, act: FilaActualizacion, d: Deps, ro
       return;
     }
 
-    // Regla 5: con una figura del roster en el titulo no se pide tono. Sin
-    // roster legible, tampoco: no se puede comprobar.
-    const titulo = publicacion?.titulo || seg.titulo || "";
-    const figura = roster === null || nombraFigura(titulo, roster);
+    // Sin comprobacion de figura desde el 29 de septiembre de 2026: en esta
+    // pagina el tono se muestra aunque el titulo nombre a alguien del roster,
+    // por decision del cliente y con la salvedad fija en pantalla. Hasta ese
+    // dia se retenia, y la publicacion del informe de Burgueño salia «Sin
+    // dato». La busqueda en vivo conserva la regla (busqueda/figura.ts).
     const conocidas = await d.almacen.conocidas(seg.id, comentarios.map((c) => c.huella));
     const etiquetas = new Map<string, TonoComentario | null>();
-    if (!figura && seg.idioma === "es") {
+    if (seg.idioma === "es") {
       // Solo lo que no tiene etiqueta todavia: lo ya leido conserva la suya.
       const faltan = comentarios.filter((c) => (conocidas.get(c.huella) ?? null) === null);
       const r = faltan.length === 0 ? [] : await d.tono.etiquetar(faltan.map((c) => c.crudo), "comentarios", "es");
@@ -261,7 +299,7 @@ async function avanzar(seg: FilaSeguimiento, act: FilaActualizacion, d: Deps, ro
       texto: c.texto,
       likes: c.likes,
       escrito: c.escrito,
-      sentimiento: figura || seg.idioma !== "es" ? null : etiquetas.get(c.huella) ?? conocidas.get(c.huella) ?? null,
+      sentimiento: seg.idioma !== "es" ? null : etiquetas.get(c.huella) ?? conocidas.get(c.huella) ?? null,
     }));
     await d.almacen.guardar({
       actualizacion: act,
@@ -269,7 +307,7 @@ async function avanzar(seg: FilaSeguimiento, act: FilaActualizacion, d: Deps, ro
       metricas: publicacion?.metricas ?? null,
       comentarios: filas,
       nuevos: filas.filter((f) => !conocidas.has(f.huella)).length,
-      tono: figura ? null : contarTono(filas.map((f) => f.sentimiento)),
+      tono: contarTono(filas.map((f) => f.sentimiento)),
       usd,
     });
   } catch (e) {
@@ -281,6 +319,50 @@ async function avanzar(seg: FilaSeguimiento, act: FilaActualizacion, d: Deps, ro
     throw e;
   }
   await borrarConjuntos(act.corridas, d);
+  // El resumen va con la lectura que el boton pago, sobre todo lo guardado.
+  // Si falla, la lectura queda igual y la pagina ofrece pedirlo.
+  await resumir(seg.id, act.id, d);
+}
+
+/**
+ * «Lo que dicen los comentarios» sobre lo guardado, pegado a una lectura.
+ * Nunca lanza: un resumen que no salio no tumba la lectura que lo pidio.
+ */
+async function resumir(seguimientoId: string, actualizacionId: string, d: Deps): Promise<Resumen["estado"]> {
+  try {
+    const seg = await d.almacen.leer(seguimientoId);
+    if (seg === null) return "fallo";
+    const { filas } = await d.almacen.comentarios(seguimientoId, RETENCION_DIAS, 300);
+    const r = await d.resumir({ red: seg.red, titulo: seg.titulo, comentarios: filas });
+    if (r.estado !== "ok") return r.estado;
+    await d.almacen.guardarResumen(actualizacionId, { texto: r.texto, leidos: r.leidos, generado: d.ahora().toISOString() });
+    return "ok";
+  } catch {
+    return "fallo";
+  }
+}
+
+/**
+ * Pone tono a lo guardado que no lo tiene: los comentarios de una lectura en
+ * que el servicio no respondio, y los de las publicaciones que nombraban a una
+ * figura antes del 29 de septiembre de 2026. Es el modelo local, que no cobra,
+ * asi que no espera a un boton. Solo espanol, como siempre.
+ */
+async function etiquetarPendientes(seg: FilaSeguimiento, d: Deps): Promise<void> {
+  if (seg.idioma !== "es") return;
+  try {
+    const faltan = await d.almacen.sinTono(seg.id, RETENCION_DIAS, 500);
+    if (faltan.length === 0) return;
+    const r = await d.tono.etiquetar(faltan.map((c) => c.texto), "comentarios", "es");
+    if (r === null) return;
+    const tonos = faltan.flatMap((c, i) => {
+      const e = r[i];
+      return esTono(e) ? [{ huella: c.huella, sentimiento: e }] : [];
+    });
+    await d.almacen.guardarTonos(seg.id, tonos);
+  } catch {
+    // Sin servicio de tono se queda «sin tono», que es lo que es.
+  }
 }
 
 // ---------------------------------------------------------------- piezas
@@ -292,7 +374,7 @@ const publicacionDe = (s: FilaSeguimiento): PublicacionSeguida => ({
 
 const abierta = (a: FilaActualizacion) => a.estado === "leyendo" || a.estado === "guardando";
 
-function actualizacionDe(a: FilaActualizacion, figura: boolean): Actualizacion {
+function actualizacionDe(a: FilaActualizacion): Actualizacion {
   return {
     id: a.id,
     fecha: a.creado,
@@ -300,7 +382,7 @@ function actualizacionDe(a: FilaActualizacion, figura: boolean): Actualizacion {
     metricas: a.metricas,
     leidos: a.leidos,
     nuevos: a.nuevos,
-    tono: figura ? null : a.tono,
+    tono: a.tono,
   };
 }
 
@@ -309,10 +391,6 @@ function proximaDe(ultima: FilaActualizacion | undefined, ahora: Date): string |
   if (ultima === undefined) return null;
   const desde = Date.parse(ultima.creado) + MINUTOS_ENTRE_ACTUALIZACIONES * 60_000;
   return desde > ahora.getTime() ? new Date(desde).toISOString() : null;
-}
-
-async function leerRoster(d: Deps): Promise<DocRoster | null> {
-  return (await d.leer("roster.json")) as DocRoster | null;
 }
 
 // ---------------------------------------------------------------- rutas
@@ -359,16 +437,17 @@ export async function responderFicha(id: string, deps: DependenciasSeguimiento =
   const seg = await d.almacen.leer(id);
   if (seg === null) return error("no_existe");
 
-  const roster = await leerRoster(d);
   let acts = await d.almacen.actualizaciones(id, 60);
   const abiertas = acts.filter(abierta);
   if (abiertas.length > 0 && tokenApify(d.entorno) !== "") {
-    for (const a of abiertas) await avanzar(seg, a, d, roster);
+    for (const a of abiertas) await avanzar(seg, a, d);
     acts = await d.almacen.actualizaciones(id, 60);
   }
+  // Con una lectura en curso la pagina pregunta cada cinco segundos; el tono
+  // pendiente espera a que termine para no alargar cada pregunta.
+  if (!acts.some(abierta)) await etiquetarPendientes(seg, d);
   // La publicacion pudo estrenar titulo en esta misma peticion.
   const actual = (await d.almacen.leer(id)) ?? seg;
-  const figura = roster === null || nombraFigura(actual.titulo ?? "", roster);
   const { filas, conteo } = await d.almacen.comentarios(id, RETENCION_DIAS, 500);
   // «Nuevo» es lo que trajo la ultima lectura y no estaba antes. En la
   // primera lectura todo seria nuevo, y marcarlo todo no dice nada.
@@ -379,15 +458,17 @@ export async function responderFicha(id: string, deps: DependenciasSeguimiento =
     disponible: seguimientoHabilitado(d.entorno),
     publicacion: publicacionDe(actual),
     enCurso: acts.some(abierta),
-    actualizaciones: acts.map((a) => actualizacionDe(a, figura)),
+    actualizaciones: acts.map(actualizacionDe),
     comentarios: filas.map((c) => ({
       huella: c.huella,
       texto: c.texto,
       escrito: c.escrito,
       nuevo: marcarNuevos && Date.parse(c.primeraVez) >= Date.parse(ultima.creado),
-      sentimiento: figura ? null : c.sentimiento,
+      sentimiento: c.sentimiento,
     })),
-    tono: { mostrado: !figura, conteo },
+    tono: { conteo },
+    resumen: ultima?.resumen ? { texto: ultima.resumen.texto, leidos: ultima.resumen.leidos, fecha: ultima.resumen.generado } : null,
+    resumible: d.analisis() && ultima !== undefined && !ultima.resumen && filas.length >= MINIMO_COMENTARIOS_RESUMEN,
     retencionDias: RETENCION_DIAS,
     proxima: proximaDe(ultima, d.ahora()),
   };
@@ -408,6 +489,29 @@ export async function responderActualizar(id: string, deps: DependenciasSeguimie
     return json({ codigo: inicio.codigo, mensaje: MENSAJES[inicio.codigo], ...(inicio.fecha === undefined ? {} : { fecha: inicio.fecha }) }, ESTADO[inicio.codigo], SIN_CACHE);
   }
   return json({ id: inicio.id }, 202, SIN_CACHE);
+}
+
+/**
+ * POST /api/seguimiento/[id]/resumen: el resumen de la ultima lectura, cuando
+ * no salio con ella (una lectura de antes del 29 de septiembre de 2026, o el
+ * modelo no respondio). Es un boton, como toda lectura con IA: la pagina no lo
+ * pide sola.
+ */
+export async function responderResumir(id: string, deps: DependenciasSeguimiento = {}): Promise<Response> {
+  const d = dependencias(deps);
+  if (!esIdSeguimiento(id)) return error("no_existe");
+  if (!d.hayBase() || !d.analisis()) return error("apagado");
+  const usuario = await sesion(d);
+  if (usuario instanceof Response) return usuario;
+  const seg = await d.almacen.leer(id);
+  if (seg === null) return error("no_existe");
+  const ultima = (await d.almacen.actualizaciones(id, 60)).find((a) => a.estado === "listo");
+  if (ultima === undefined) return error("pocos");
+  if (ultima.resumen) return json({ resumen: true }, 200, SIN_CACHE);
+  const estado = await resumir(id, ultima.id, d);
+  if (estado === "ok") return json({ resumen: true }, 200, SIN_CACHE);
+  if (estado === "pocos") return error("pocos");
+  return json({ codigo: "no_disponible", mensaje: "No se pudo resumir. Vuelve a intentarlo más tarde." } satisfies ErrorSeguimiento, 503, SIN_CACHE);
 }
 
 /**
@@ -436,7 +540,8 @@ export async function responderBorrar(id: string, deps: DependenciasSeguimiento 
       // La que ya termino dice lo que cobro; la que sigue viva se detiene.
       const estado = token === "" ? null : await estadoCorrida(p.id, token, d.solicitar).catch(() => null);
       const corrida = estado !== null && !TERMINADAS.has(estado.estado) ? await abortarCorrida(p.id, token, d.solicitar) : estado;
-      if (corrida === null || corrida.usd === null) sabido = false;
+      // Un cero con eventos cobrados es un costo que Apify aun no escribe.
+      if (corrida === null || corrida.usd === null || (corrida.usd === 0 && corrida.eventos > 0)) sabido = false;
       else usd += corrida.usd;
     }
     await d.almacen.cerrarGasto(a.gastoId, sabido ? usd : a.topeUsd);

@@ -178,7 +178,7 @@ queda registrada en `docs/PLAN.md`.
 | Sentimiento de comentarios | funcionando | modelo local (pysentimiento), publicado como conteos por zona y tema; en YouTube nunca el texto |
 | Redes (Instagram) | **necesita token** | 28 cuentas verificadas una por una, sin sesión, en Tijuana, Mexicali, Ensenada, Tecate, San Diego y `nacional`; las publicaciones de las últimas 24 horas por zona, con hora exacta, y sus comentarios más votados; cada zona se queda con quince y el corte entra primero por la publicación más vista de cada cuenta, para que una con más seguidores no se lleve la lista de su ciudad — entre el 15 y el 17 de septiembre de 2026 una sola tuvo entre siete y diez de los quince de Tijuana. Desde el 17 de septiembre de 2026 la tarjeta no repite las cifras de la plataforma: la publicación incrustada ya las trae, y en vivo. El texto va fuera de git (`efimero/`), la identidad no se ingiere |
 | Redes (TikTok) | **necesita token** | ocho búsquedas encendidas —una por lugar del corredor más México y el mundo—, relevancia, últimas 24 h, sin sesión; la zona sale del pie del video, se muestra el @ del creador y nunca quien comenta. Tres apagadas con la razón escrita. Mismo canal fuera de git para el texto. Desde el 17 de septiembre de 2026 se piden los subtítulos que TikTok ya generó, que no cobran: de ellos solo sale un conteo de para cuántos videos existen, nunca el texto. Cada video trae su duración en segundos, que es lo que permite presupuestar: resumir o transcribir los videos con la IA de Apify cuesta entre 3 y 10 veces el plan y va apagado |
-| Seguimiento de publicaciones | **necesita token y base** | una publicación de Instagram, TikTok o Facebook que el equipo agrega por su enlace; cada «Actualizar», pagado y con tope propio, lee sus cifras y sus cien comentarios más recientes, con la hora. Tono en conteos, nunca junto a una figura del catálogo; el texto vive 15 días en la base, sin identidad y nunca en git, y «Dejar de seguir» lo borra en el acto |
+| Seguimiento de publicaciones | **necesita token y base** | una publicación de Instagram, TikTok o Facebook que el equipo agrega por su enlace; cada «Actualizar», pagado y con tope propio, lee sus cifras y sus cien comentarios más recientes, con la hora, y un párrafo con IA de lo que dicen. Tono en conteos, también junto a una figura del catálogo por decisión del cliente, con su salvedad; el texto vive 15 días en la base, sin identidad y nunca en git, y «Dejar de seguir» lo borra en el acto |
 | Redes (X, tendencias) | **necesita token** | lo que X marca como tendencia en Tijuana, Mexicali, San Diego, México y el mundo, leído sin sesión (guest token); nombre, puesto y liga, nunca tuits ni identidad; las promocionadas se descartan y el volumen es «sin dato» donde X no lo publica |
 | Tono de titulares | funcionando | mismo modelo, `--metodo modelo`. Tono de la frase, no postura hacia una persona |
 | Tablero por zona | funcionando | `web/`, Next.js: una página por zona con resumen, indicadores, temas, conversación y muro |
@@ -392,6 +392,17 @@ término nombra a una figura del roster —su nombre, un alias, su cargo—, la
 ficha no muestra tono en ninguna serie**, ni en la etiqueta de cada comentario.
 Una búsqueda libre reabriría el cruce con solo escribir un nombre, y eso no lo
 decidió nadie.
+
+**Una segunda excepción, decidida por el cliente el 29 de septiembre de
+2026: el seguimiento de publicaciones.** Ahí el tono de los comentarios se
+muestra **aunque la publicación nombre a una figura del roster**: la primera
+publicación en seguimiento fue el informe de Ismael Burgueño, y su tarjeta decía
+«Sin dato». Se muestra en conteos, nunca en porcentajes, con la salvedad fija
+debajo: mide cómo suena cada comentario, no la postura hacia una persona. La
+búsqueda en vivo conserva la comprobación. El mismo día la página ganó «Lo que
+dicen los comentarios», un párrafo escrito con IA sobre los comentarios
+guardados, que dice en qué coinciden y en qué no, sin contar, sin «la
+mayoría» y sin concluir nada sobre la persona nombrada.
 
 Y el modelo **solo habla español**. Los cuatro medios de San Diego publican en
 inglés, así que sus notas —98 de 888 en el corte actual— salen con

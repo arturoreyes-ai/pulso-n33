@@ -100,6 +100,10 @@ export interface Corrida {
   estado: EstadoCorrida;
   /** Lo que de verdad se cobra (`usageTotalUsd`), o null si aun no se sabe. */
   usd: number | null;
+  /** Cuantos eventos cobrables registro (`chargedEventCounts`, sumados). */
+  eventos: number;
+  /** Cuando termino (`finishedAt`), o null si sigue. */
+  terminada: string | null;
 }
 
 export const TERMINADAS: ReadonlySet<EstadoCorrida> = new Set(["SUCCEEDED", "FAILED", "TIMED-OUT", "ABORTED"]);
@@ -121,7 +125,14 @@ function comoCorrida(crudo: unknown): Corrida {
     throw new ErrorApify(502, "Apify devolvio una corrida sin id");
   }
   const usd = typeof d.usageTotalUsd === "number" && Number.isFinite(d.usageTotalUsd) ? d.usageTotalUsd : null;
-  return { id, dataset, estado: (typeof d.status === "string" ? d.status : "READY") as EstadoCorrida, usd };
+  // `usageTotalUsd` llega unos segundos DESPUES de `SUCCEEDED`: el 29 de
+  // septiembre de 2026 una lectura del seguimiento guardo 0 USD en el libro y
+  // Apify reportaba 0.0228 minutos despues, con sus 12 eventos. Quien cierra
+  // un gasto mira `eventos` para saber si ese 0 es de verdad.
+  const cuentas = d.chargedEventCounts !== null && typeof d.chargedEventCounts === "object" ? Object.values(d.chargedEventCounts as Record<string, unknown>) : [];
+  const eventos = cuentas.reduce<number>((n, x) => n + (typeof x === "number" && Number.isFinite(x) ? x : 0), 0);
+  const terminada = typeof d.finishedAt === "string" ? d.finishedAt : null;
+  return { id, dataset, estado: (typeof d.status === "string" ? d.status : "READY") as EstadoCorrida, usd, eventos, terminada };
 }
 
 async function pedir(url: string, init: RequestInit, token: string, solicitar: typeof fetch): Promise<unknown> {

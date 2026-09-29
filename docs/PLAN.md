@@ -1,3 +1,22 @@
+> **Implementación · 29 de septiembre de 2026 — Seguimiento: el tono con una
+> figura pública, y «Lo que dicen los comentarios».** La primera publicación en
+> seguimiento fue el informe del presidente municipal Ismael Burgueño, y el tono
+> de sus comentarios decía «Sin dato»: el tablero no pone tono junto al nombre
+> de una figura pública, porque el modelo mide cómo suena una frase y no qué
+> piensa alguien de una persona. El cliente decidió que en Seguimiento el tono
+> **sí se muestre**, con una línea fija debajo que lo dice: «Mide cómo suena
+> cada comentario, no la postura hacia una persona». La búsqueda en redes sigue
+> sin mostrarlo.
+>
+> Y pidió un resumen de los comentarios como el «Lo que dicen los clientes» de
+> Amazon. Arriba de cada publicación aparece **«Lo que dicen los
+> comentarios»**: un párrafo, escrito con IA, sobre en qué coinciden y en qué no
+> los comentarios guardados. Se escribe con cada actualización, sin costo
+> aparte en Apify y por unos centavos de dólar en IA; si una publicación no lo
+> tiene, un botón lo pide. No cuenta ni da porcentajes, no dice «la mayoría», y
+> no saca conclusiones sobre la persona nombrada. Hacen falta al menos diez
+> comentarios, y se borra a los 15 días junto con ellos.
+
 > **Implementación · 29 de septiembre de 2026 — Redes: lo más visto vuelve a
 > entrar siempre.** Se reportó que Redes no enseñaba las publicaciones con
 > más me gusta. Tenía razón, y la causa era la regla del 17 de septiembre

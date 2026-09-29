@@ -88,7 +88,10 @@ const agregar = (url: string, idioma: IdiomaSeguido) =>
   enviar(LISTA, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url, idioma }) });
 const actualizar = (id: string) => enviar(rutaFicha(id), { method: "POST" });
 const borrar = (id: string) => enviar(rutaFicha(id), { method: "DELETE" });
+/** El resumen de los comentarios, cuando no salio con la ultima lectura. */
+const resumir = (id: string) => enviar(`${rutaFicha(id)}/resumen`, { method: "POST" });
 
 export const useAgregar = () => useAccion(agregar);
 export const useActualizar = () => useAccion(actualizar);
 export const useBorrar = () => useAccion(borrar);
+export const useResumir = () => useAccion(resumir);

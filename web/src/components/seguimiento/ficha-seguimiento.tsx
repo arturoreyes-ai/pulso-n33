@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowClockwise as Actualizar, ArrowLeft as Volver, ArrowSquareOut as Abrir, Trash as Papelera } from "@phosphor-icons/react";
+import { ArrowClockwise as Actualizar, ArrowLeft as Volver, ArrowSquareOut as Abrir, Sparkle as IA, Trash as Papelera } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
@@ -22,14 +22,16 @@ import { fechaLarga, hora, numero, pluralizar } from "@/lib/dominio/formato";
 import { NOMBRE_RED } from "@/lib/dominio/publicaciones";
 import type { Actualizacion, ComentarioSeguido, RespuestaSeguimiento, TonoComentario } from "@/lib/seguimiento/contrato";
 import { diferencia, metricasDe, momento, publicacionVisual } from "@/lib/seguimiento/formato";
-import { useActualizar, useBorrar, useFichaSeguimiento } from "@/lib/seguimiento/use-seguimiento";
+import { useActualizar, useBorrar, useFichaSeguimiento, useResumir } from "@/lib/seguimiento/use-seguimiento";
 
 /**
  * /seguimiento/[id]: una publicacion y todo lo que se sabe de ella.
  *
- * El orden es el de la pregunta del cliente (28 de septiembre de 2026): como
- * suena lo que se comenta, como se movio la publicacion entre una lectura y
- * otra, y los comentarios mas recientes, que son los que se vienen a leer. El
+ * El orden es el de la pregunta del cliente (28 de septiembre de 2026): lo que
+ * dicen los comentarios en un parrafo (el «Customers say» de Amazon que pidio
+ * el 29), como suena lo que se comenta, como se movio la publicacion entre una
+ * lectura y otra, y los comentarios mas recientes, que son los que se vienen a
+ * leer. El
  * embed va al lado en escritorio y al final en el telefono, donde mide mas que
  * una pantalla y empujaria todo lo demas.
  *
@@ -38,8 +40,13 @@ import { useActualizar, useBorrar, useFichaSeguimiento } from "@/lib/seguimiento
  *    termino (ui/cifra-tono.tsx), un cuadro por comentario.
  *  - «Sin dato» donde la red no dio la cifra, nunca cero: una cuenta que oculta
  *    sus likes, o una lectura que fallo.
- *  - Sin tono junto a una figura del roster (regla 5): la API no manda ninguna
- *    etiqueta y la tarjeta dice «Sin dato».
+ *  - El tono se muestra aunque el titulo nombre a una figura del roster: es la
+ *    excepcion a la regla 5 que el cliente decidio para esta pagina el 29 de
+ *    septiembre de 2026, y por eso la tarjeta lleva SALVEDAD_TONO, que no se
+ *    quita: sin pie de pagina es lo unico que dice que el modelo lee como
+ *    suena una frase y no la postura hacia nadie.
+ *  - El resumen es de IA y lo dice, con su salvedad fija (SALVEDAD_RESUMEN),
+ *    como las fichas de Analizar.
  *
  * A diferencia de la tarjeta de /redes, aqui SI hay cifras de la plataforma.
  * Alla se quitaron el 17 de septiembre de 2026 porque el embed de al lado
@@ -51,6 +58,12 @@ import { useActualizar, useBorrar, useFichaSeguimiento } from "@/lib/seguimiento
 const ANCHO = "mx-auto w-full max-w-[88rem] px-4 md:px-8";
 
 const TOPE_INICIAL = 50;
+
+/** Fijas, en pantalla y no en el prompt: lo que el modelo no puede decir
+ *  bien sin nombrar lo que reglas.ts le prohibe (ver AGENTS.md, «The sampling
+ *  caveat is the page's»). */
+const SALVEDAD_TONO = "Mide cómo suena cada comentario, no la postura hacia una persona.";
+const SALVEDAD_RESUMEN = "Son los comentarios que se leyeron de esta publicación, no una muestra de nadie.";
 
 type Filtro = "todos" | TonoComentario;
 
@@ -115,7 +128,7 @@ function Ahora({ datos }: { datos: RespuestaSeguimiento }) {
   );
 }
 
-function Lectura({ a, previa, p, tonoMostrado }: { a: Actualizacion; previa: Actualizacion | undefined; p: RespuestaSeguimiento["publicacion"]; tonoMostrado: boolean }) {
+function Lectura({ a, previa, p }: { a: Actualizacion; previa: Actualizacion | undefined; p: RespuestaSeguimiento["publicacion"] }) {
   return (
     <li className="grid gap-2 border-b border-vela py-4 first:pt-0 last:border-0 last:pb-0">
       <p className="text-meta text-tinta-meta">{momento(a.fecha)}</p>
@@ -131,7 +144,7 @@ function Lectura({ a, previa, p, tonoMostrado }: { a: Actualizacion; previa: Act
               ? "Ningún comentario con texto."
               : `${numero(a.leidos)} ${pluralizar(a.leidos, "comentario leído", "comentarios leídos")}${a.nuevos !== null && previa !== undefined ? `, ${numero(a.nuevos)} ${pluralizar(a.nuevos, "nuevo", "nuevos")}` : ""}`}
           </p>
-          {tonoMostrado && a.tono !== null ? <TiraTono tramos={serieTono(a.tono, "m").tramos} tamano="chico" /> : null}
+          {a.tono !== null ? <TiraTono tramos={serieTono(a.tono, "m").tramos} tamano="chico" /> : null}
         </>
       )}
     </li>
@@ -161,7 +174,7 @@ function Comentarios({ datos }: { datos: RespuestaSeguimiento }) {
     <section aria-labelledby="seguimiento-comentarios" className="border-t border-filo pt-8">
       <h2 id="seguimiento-comentarios" className="text-rotulo text-tinta-titulo">Comentarios más recientes</h2>
       <p className="mt-1 text-cuerpo text-tinta-meta">Se borran {datos.retencionDias} días después de la última actualización que los trajo.</p>
-      {datos.tono.mostrado && datos.comentarios.length > 0 ? (
+      {datos.comentarios.length > 0 ? (
         <div className="mt-4">
           <Segmentado etiqueta="Tono de los comentarios" ancho="justo"
             opciones={[opcion("todos", "Todos"), opcion("positivo", "Positivos"), opcion("negativo", "Negativos"), opcion("neutral", "Neutrales")]} />
@@ -187,6 +200,46 @@ function Comentarios({ datos }: { datos: RespuestaSeguimiento }) {
           ) : null}
         </>
       )}
+    </section>
+  );
+}
+
+/**
+ * «Lo que dicen los comentarios»: un parrafo sobre lo guardado, hecho con la
+ * ultima actualizacion. Si esa actualizacion no lo trajo (una de antes de que
+ * existiera, o el modelo no respondio) se ofrece el boton; nunca se pide solo.
+ */
+function ResumenComentarios({ datos, alResumir }: { datos: RespuestaSeguimiento; alResumir: () => Promise<unknown> }) {
+  const resumir = useResumir();
+  const r = datos.resumen;
+  if (r === null && !datos.resumible) return null;
+  async function pedir() {
+    if ((await resumir.correr(datos.publicacion.id)) !== null) await alResumir();
+  }
+  return (
+    <section aria-labelledby="seguimiento-resumen">
+      <Bisel nivel="panel" interior="grid gap-3 p-4 sm:p-6">
+        <h2 id="seguimiento-resumen" className="text-cuerpo font-medium text-tinta-prosa">Lo que dicen los comentarios</h2>
+        {r !== null ? (
+          <>
+            <p className="max-w-[70ch] break-words text-lectura text-tinta-titulo aparicion-suave">{r.texto}</p>
+            <p className="flex items-start gap-2 text-meta text-tinta-meta">
+              <IA size={14} aria-hidden className="mt-px shrink-0" />
+              <span>Generado con IA a partir del texto de {numero(r.leidos)} {pluralizar(r.leidos, "comentario", "comentarios")} · {momento(r.fecha)}</span>
+            </p>
+            <p className="text-meta text-tinta-meta">{SALVEDAD_RESUMEN}</p>
+          </>
+        ) : resumir.enviando ? (
+          <EstadoCarga etiqueta="Resumiendo comentarios" />
+        ) : (
+          <div className="grid justify-items-start gap-3">
+            <button type="button" onClick={() => void pedir()} className={clasesBoton(false)}>
+              <IA size={16} aria-hidden /> Resumir comentarios
+            </button>
+            {resumir.fallo === null ? null : <p role="alert" className="text-cuerpo text-baja">{resumir.fallo.mensaje}</p>}
+          </div>
+        )}
+      </Bisel>
     </section>
   );
 }
@@ -231,6 +284,11 @@ function Acciones({ datos, alActualizar }: { datos: RespuestaSeguimiento; alActu
           <Papelera size={16} aria-hidden /> Dejar de seguir
         </button>
       </div>
+      {/* Con la compuerta apagada el boton no se pinta, y se dice. Hasta el 29
+          de septiembre de 2026 solo desaparecia: en un servidor local contra
+          la base de produccion, sin SEGUIMIENTO_HABILITADO, se leyo como que
+          el boton se habia quitado. Es la misma frase de la lista. */}
+      {!datos.disponible ? <p className="text-cuerpo text-tinta-meta">Las actualizaciones no están disponibles por ahora.</p> : null}
       {datos.enCurso ? <p className="text-cuerpo text-tinta-meta">Puede tardar unos minutos.</p> : null}
       {!datos.enCurso && datos.proxima !== null && datos.disponible ? (
         <p className="text-cuerpo text-tinta-meta">Se podrá actualizar de nuevo a las {hora(datos.proxima)}.</p>
@@ -286,16 +344,21 @@ export function FichaSeguimiento({ id }: { id: string }) {
         <h1 className="max-w-[40ch] break-words font-titular text-seccion text-tinta-titulo">{p.titulo || "Publicación sin título"}</h1>
       </header>
       <Acciones datos={data} alActualizar={() => mutate()} />
+      <ResumenComentarios datos={data} alResumir={() => mutate()} />
 
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-16">
         <div className="grid min-w-0 content-start gap-10">
           <ul className="grid gap-3 md:grid-cols-2">
             <CifraTono
               rotulo="Tono de los comentarios"
-              serie={data.tono.mostrado ? serieTono(data.tono.conteo, "m") : null}
+              serie={serieTono(data.tono.conteo, "m")}
               genero="m"
               unidad={["comentario", "comentarios", "Ningún comentario"]}
-            />
+            >
+              {data.tono.conteo.positivo + data.tono.conteo.negativo + data.tono.conteo.neutral + data.tono.conteo.sinTono === 0
+                ? null
+                : <p className="text-meta text-tinta-meta">{SALVEDAD_TONO}</p>}
+            </CifraTono>
             <Ahora datos={data} />
           </ul>
 
@@ -305,7 +368,7 @@ export function FichaSeguimiento({ id }: { id: string }) {
               <p className="mt-4 text-cuerpo text-tinta-meta">Todavía no se ha leído esta publicación.</p>
             ) : (
               <ul className="mt-6">
-                {listas.map((a, i) => <Lectura key={a.id} a={a} previa={previaDe(i)} p={p} tonoMostrado={data.tono.mostrado} />)}
+                {listas.map((a, i) => <Lectura key={a.id} a={a} previa={previaDe(i)} p={p} />)}
               </ul>
             )}
           </section>

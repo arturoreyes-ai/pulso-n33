@@ -10,8 +10,11 @@
 //  2. Los topes: con el dia o el mes llenos no sale ni una peticion a Apify.
 //  3. Solo UNA peticion guarda una lectura, aunque pregunten dos.
 //  4. El conjunto crudo se borra de Apify en cuanto se guardo.
-//  5. Una figura del roster en el titulo no pide tono (regla 5), y el ingles
-//     tampoco: el modelo solo habla espanol.
+//  5. El ingles no pide tono: el modelo solo habla espanol. Una figura del
+//     roster en el titulo SI lo pide desde el 29 de septiembre de 2026 (la
+//     excepcion del cliente a la regla 5 para esta pagina).
+//  8. El resumen: sale con la lectura, no se pide con menos de diez
+//     comentarios, y las reglas 1 y 2 rechazan uno que cuente.
 //  6. Sin la compuerta no se paga nada; la purga sin CRON_SECRET no abre.
 //  7. «Sin dato» es null, nunca cero (los likes ocultos de Instagram).
 const assert = require('node:assert/strict');
@@ -58,6 +61,7 @@ const R = cargar('lib/seguimiento/responder');
 const { conNombres } = cargar('lib/seguimiento/almacen');
 const { LLAVES_DE_SESION, ACTORES, revisarEntrada } = cargar('lib/redes-en-vivo/apify');
 const F = cargar('lib/seguimiento/formato');
+const S = cargar('lib/analisis/seguimiento');
 
 const AHORA = new Date('2026-09-28T18:00:00Z');
 const ENTORNO = { SEGUIMIENTO_HABILITADO: 'true', APIFY_API_TOKEN: 'token-de-prueba', CRON_SECRET: 'cron-de-prueba' };
@@ -154,7 +158,7 @@ function almacenFalso({ dia = 0, mes = 0, reciente = null } = {}) {
       if (mes + topeUsd > topeMensual) return { ok: false, motivo: 'mes' };
       const gastoId = uuid();
       s.gastos.set(gastoId, { usuarioId, tope: topeUsd, usd: 0, terminado: false });
-      const a = { id: uuid(), seguimientoId, gastoId, topeUsd, estado: 'leyendo', corridas: {}, reclamada: null, metricas: null, leidos: null, nuevos: null, tono: null, creado: AHORA.toISOString(), terminado: null };
+      const a = { id: uuid(), seguimientoId, gastoId, topeUsd, estado: 'leyendo', corridas: {}, reclamada: null, metricas: null, leidos: null, nuevos: null, tono: null, resumen: null, creado: AHORA.toISOString(), terminado: null };
       s.acts.push(a);
       return { ok: true, actualizacion: copia(a), enCurso: false };
     },
@@ -190,6 +194,14 @@ function almacenFalso({ dia = 0, mes = 0, reciente = null } = {}) {
       return { abiertas };
     },
     async cerrarGasto(gastoId, usd) { Object.assign(s.gastos.get(gastoId), { usd, terminado: true }); },
+    async guardarResumen(id, resumen) { s.acts.find((a) => a.id === id).resumen = copia(resumen); },
+    async sinTono(id) {
+      return [...(s.comentarios.get(id)?.values() ?? [])].filter((c) => c.sentimiento === null).map((c) => ({ huella: c.huella, texto: c.texto }));
+    },
+    async guardarTonos(id, tonos) {
+      const m = s.comentarios.get(id);
+      for (const x of tonos) if (m?.has(x.huella)) m.get(x.huella).sentimiento = x.sentimiento;
+    },
     async purgar() { s.purgas += 1; return 3; },
   };
   return s;
@@ -210,8 +222,23 @@ function tonoFalso() {
 
 const USUARIO = async () => ({ id: 7 });
 
+/** El resumen, sin modelo: cuenta cuantas veces se pidio y sobre que. */
+function resumenFalso() {
+  const r = {
+    pedidos: [],
+    async resumir(entrada) {
+      r.pedidos.push(entrada);
+      return entrada.comentarios.length < S.MINIMO_COMENTARIOS_RESUMEN
+        ? { estado: 'pocos' }
+        : { estado: 'ok', texto: 'Hay comentarios que agradecen la información y otros que reclaman por el tráfico.', leidos: entrada.comentarios.length };
+    },
+  };
+  return r;
+}
+
 function deps(almacen, apify, tono, extra = {}) {
-  return { almacen: almacen.api, solicitar: apify.solicitar, tono, entorno: ENTORNO, usuario: USUARIO, ahora: () => AHORA, leer: async (n) => (n === 'roster.json' ? ROSTER : null), hayBase: () => true, ...extra };
+  const resumen = extra.resumen ?? resumenFalso();
+  return { almacen: almacen.api, solicitar: apify.solicitar, tono, entorno: ENTORNO, usuario: USUARIO, ahora: () => AHORA, hayBase: () => true, resumir: resumen.resumir, analisis: () => true, ...extra };
 }
 
 async function comprobar() {
@@ -338,7 +365,7 @@ async function comprobar() {
   assert.equal(ficha.publicacion.creador, '@noticias_tj');
   assert.equal(ficha.actualizaciones[0].estado, 'listo');
   assert.equal(ficha.actualizaciones[0].metricas.likes, 1200);
-  assert.deepEqual(ficha.tono, { mostrado: true, conteo: { positivo: 1, negativo: 1, neutral: 0, sinTono: 0 } });
+  assert.deepEqual(ficha.tono, { conteo: { positivo: 1, negativo: 1, neutral: 0, sinTono: 0 } });
   assert.deepEqual(ficha.comentarios.map((c) => c.texto), ['Qué bueno que no hubo heridos', '@… mira esto, qué caro está todo'], 'lo mas reciente primero');
   assert.ok(ficha.comentarios.every((c) => c.nuevo === false), 'en la primera lectura no se marca nada como nuevo');
   assert.deepEqual(api2.borrados.sort(), [corr.publicacion.dataset, corr.comentarios.dataset].sort(), 'el crudo se borra de Apify');
@@ -348,6 +375,9 @@ async function comprobar() {
   assert.equal(alm.gastos.get(alm.acts[0].gastoId).usd, 0.08, 'el gasto es lo que cobraron las dos corridas');
   assert.equal(ficha.proxima, '2026-09-28T18:30:00.000Z', 'media hora hasta la siguiente');
   assert.equal(tono.textos.some((x) => x.includes('@…')), false, 'el modelo lee el texto sin mascara, como el pipeline');
+  // Dos comentarios: por debajo de diez no hay resumen, ni boton para pedirlo.
+  assert.equal(ficha.resumen, null);
+  assert.equal(ficha.resumible, false, 'con menos de diez comentarios no se ofrece resumir');
 
   // Una segunda lectura no vuelve a etiquetar lo ya etiquetado.
   const llamadasAntes = tono.textos.length;
@@ -366,10 +396,30 @@ async function comprobar() {
     const figura = { ...VIDEO_TK, text: 'Marina del Pilar inaugura el puente' };
     const apiF2 = apifyFalso({ items: { [c.publicacion.dataset]: [figura], [c.comentarios.dataset]: COMENTARIOS_TK } });
     const fichaF = await (await R.responderFicha(idF, { ...dF, solicitar: apiF2.solicitar })).json();
-    assert.equal(tonoF.llamadas, 0, 'con una figura en el titulo no se pide tono');
-    assert.equal(fichaF.tono.mostrado, false);
-    assert.ok(fichaF.comentarios.every((x) => x.sentimiento === null));
-    assert.equal(fichaF.actualizaciones[0].tono, null);
+    assert.equal(tonoF.llamadas, 1, 'con una figura en el titulo se pide tono: la excepcion del 29 de septiembre');
+    assert.deepEqual(fichaF.tono, { conteo: { positivo: 1, negativo: 1, neutral: 0, sinTono: 0 } });
+    assert.ok(fichaF.comentarios.every((x) => x.sentimiento !== null));
+    assert.notEqual(fichaF.actualizaciones[0].tono, null);
+  }
+
+  // --- Lo guardado sin tono se etiqueta al abrir, gratis ------------------
+  {
+    const almP = almacenFalso();
+    const tonoP = tonoFalso();
+    const apiP = apifyFalso({ estado: 'RUNNING' });
+    // El servicio de tono cae en la lectura: todo queda «sin tono».
+    const caido = { ...tonoFalso(), etiquetar: async () => null };
+    const dP = deps(almP, apiP, caido);
+    const { id: idP } = await (await R.responderAgregar({ url: URL_TK }, dP)).json();
+    const c = almP.acts[0].corridas;
+    const apiP2 = apifyFalso({ items: { [c.publicacion.dataset]: [VIDEO_TK], [c.comentarios.dataset]: COMENTARIOS_TK } });
+    const sinTono = await (await R.responderFicha(idP, { ...dP, solicitar: apiP2.solicitar })).json();
+    assert.equal(sinTono.tono.conteo.sinTono, 2);
+    // Vuelve el servicio: la siguiente visita etiqueta lo pendiente sin pagar nada.
+    const conTono = await (await R.responderFicha(idP, { ...dP, tono: tonoP, solicitar: apiP2.solicitar })).json();
+    assert.equal(tonoP.llamadas, 1);
+    assert.equal(conTono.tono.conteo.sinTono, 0);
+    assert.equal(apiP2.arranques.length, 0, 'etiquetar lo guardado no arranca nada en Apify');
   }
   {
     const almE = almacenFalso();
@@ -383,6 +433,113 @@ async function comprobar() {
     assert.equal(tonoE.llamadas, 0, 'en ingles no se pide tono');
     assert.equal(fichaE.tono.conteo.sinTono, 2);
     assert.equal(fichaE.publicacion.idioma, 'en');
+  }
+
+  // --- El resumen de los comentarios ---------------------------------------
+  {
+    const muchos = Array.from({ length: 12 }, (_, i) => ({ videoWebUrl: URL_TK, text: `Comentario número ${i} sobre el choque`, diggCount: i, createTimeISO: `2026-09-28T1${i % 10}:00:00.000Z` }));
+    const almR = almacenFalso();
+    const apiR = apifyFalso({ estado: 'RUNNING' });
+    const resumen = resumenFalso();
+    const dR = deps(almR, apiR, tonoFalso(), { resumen, resumir: resumen.resumir });
+    const { id: idR } = await (await R.responderAgregar({ url: URL_TK }, dR)).json();
+    const c = almR.acts[0].corridas;
+    const apiR2 = apifyFalso({ items: { [c.publicacion.dataset]: [VIDEO_TK], [c.comentarios.dataset]: muchos } });
+    const fichaR = await (await R.responderFicha(idR, { ...dR, solicitar: apiR2.solicitar })).json();
+    assert.equal(resumen.pedidos.length, 1, 'el resumen sale con la lectura');
+    assert.equal(resumen.pedidos[0].comentarios.length, 12, 'sobre todo lo guardado');
+    assert.ok(resumen.pedidos[0].comentarios.every((x) => Object.keys(x).every((k) => ['huella', 'texto', 'likes', 'escrito', 'sentimiento', 'primeraVez'].includes(k))));
+    assert.equal(fichaR.resumen.leidos, 12);
+    assert.match(fichaR.resumen.texto, /reclaman por el tráfico/);
+    assert.equal(fichaR.resumible, false, 'con resumen no se ofrece otro');
+    // Volver a abrir no vuelve a pedirlo.
+    await R.responderFicha(idR, { ...dR, solicitar: apiR2.solicitar });
+    assert.equal(resumen.pedidos.length, 1);
+
+    // Sin resumen (el modelo no respondio): se ofrece el boton, y el boton lo pide.
+    almR.acts[0].resumen = null;
+    const sinResumen = await (await R.responderFicha(idR, { ...dR, solicitar: apiR2.solicitar })).json();
+    assert.equal(sinResumen.resumible, true);
+    const boton = await R.responderResumir(idR, { ...dR, solicitar: apiR2.solicitar });
+    assert.equal(boton.status, 200);
+    assert.equal(resumen.pedidos.length, 2);
+    assert.notEqual(almR.acts[0].resumen, null);
+    // Con la lectura automatica apagada, ni boton ni resumen.
+    assert.equal((await R.responderResumir(idR, { ...dR, analisis: () => false })).status, 400);
+    almR.acts[0].resumen = null;
+    const apagada = await (await R.responderFicha(idR, { ...dR, analisis: () => false, solicitar: apiR2.solicitar })).json();
+    assert.equal(apagada.resumible, false);
+  }
+
+  // El modulo del resumen, con un modelo de mentira.
+  {
+    const ENCENDIDA = { ANALISIS_HABILITADO: 'true', ANTHROPIC_API_KEY: 'clave-de-prueba' };
+    const diez = Array.from({ length: 10 }, (_, i) => ({ texto: `comentario ${i}` }));
+    const modelo = (resumen) => {
+      const m = { llamadas: 0, cuerpos: [] };
+      m.solicitar = async (url, init) => {
+        assert.equal(new URL(url).hostname, 'api.anthropic.com', 'la unica salida es al modelo');
+        m.llamadas += 1;
+        m.cuerpos.push(JSON.parse(init.body));
+        return new Response(JSON.stringify({ content: [{ type: 'text', text: JSON.stringify({ resumen }) }] }), { headers: { 'content-type': 'application/json' } });
+      };
+      return m;
+    };
+    const bien = modelo('Hay comentarios que felicitan por el informe y otros que piden bacheo.');
+    assert.deepEqual(await S.resumirComentarios({ red: 'instagram', titulo: 'Informe', comentarios: diez.slice(0, 9) }, bien.solicitar, ENCENDIDA), { estado: 'pocos' });
+    assert.equal(bien.llamadas, 0, 'debajo de diez no se llama al modelo');
+    const ok = await S.resumirComentarios({ red: 'instagram', titulo: 'Informe', comentarios: diez }, bien.solicitar, ENCENDIDA);
+    assert.deepEqual(ok, { estado: 'ok', texto: 'Hay comentarios que felicitan por el informe y otros que piden bacheo.', leidos: 10 });
+    const enviado = bien.cuerpos[0].messages[0].content;
+    assert.ok(!/positivo|negativo|neutral/.test(enviado), 'no se le manda el tono del modelo local');
+    for (const malo of ['La mayoría de los comentarios critica el informe.', 'El 60% pide bacheo.', 'Predominan las quejas.', 'La gente está molesta.']) {
+      assert.deepEqual(await S.resumirComentarios({ red: 'tiktok', titulo: null, comentarios: diez }, modelo(malo).solicitar, ENCENDIDA), { estado: 'reglas' }, malo);
+    }
+    assert.deepEqual(await S.resumirComentarios({ red: 'tiktok', titulo: null, comentarios: diez }, bien.solicitar, {}), { estado: 'apagada' });
+  }
+
+  // --- El costo llega despues de terminar -----------------------------------
+  // El 29 de septiembre de 2026 la primera lectura real guardo 0 USD: Apify
+  // escribe `usageTotalUsd` unos segundos despues de SUCCEEDED.
+  {
+    const almC = almacenFalso();
+    const apiC = apifyFalso({ estado: 'RUNNING' });
+    const dC = deps(almC, apiC, tonoFalso());
+    const { id: idC } = await (await R.responderAgregar({ url: URL_TK }, dC)).json();
+    const c = almC.acts[0].corridas;
+    const items = { [c.publicacion.dataset]: [VIDEO_TK], [c.comentarios.dataset]: COMENTARIOS_TK };
+    let costo = null;
+    const terminada = new Date(AHORA.getTime() - 4000).toISOString();
+    const base = apifyFalso({ items });
+    const solicitar = async (url, init = {}) => {
+      const m = /^\/v2\/actor-runs\/([^/]+)$/.exec(new URL(url).pathname);
+      if (m) return new Response(JSON.stringify({ data: { id: m[1], defaultDatasetId: `datos${m[1]}`, status: 'SUCCEEDED', usageTotalUsd: costo, chargedEventCounts: { result: 6 }, finishedAt: terminada } }), { headers: { 'content-type': 'application/json' } });
+      return base.solicitar(url, init);
+    };
+    const pronto = await (await R.responderFicha(idC, { ...dC, solicitar })).json();
+    assert.equal(pronto.enCurso, true, 'terminada pero sin costo: todavia no se guarda');
+    assert.equal(almC.guardados, 0);
+    costo = 0.03;
+    const luego = await (await R.responderFicha(idC, { ...dC, solicitar })).json();
+    assert.equal(luego.enCurso, false);
+    assert.equal(almC.gastos.get(almC.acts[0].gastoId).usd, 0.06, 'el libro anota lo que Apify cobro');
+
+    // Si pasada la espera sigue sin costo y cobro eventos, se anota el tope.
+    const almT = almacenFalso();
+    const apiT = apifyFalso({ estado: 'RUNNING' });
+    const dT = deps(almT, apiT, tonoFalso());
+    const { id: idT } = await (await R.responderAgregar({ url: URL_TK }, dT)).json();
+    const cT = almT.acts[0].corridas;
+    const baseT = apifyFalso({ items: { [cT.publicacion.dataset]: [VIDEO_TK], [cT.comentarios.dataset]: COMENTARIOS_TK } });
+    const viejo = new Date(AHORA.getTime() - 5 * 60_000).toISOString();
+    const solicitarT = async (url, init = {}) => {
+      const m = /^\/v2\/actor-runs\/([^/]+)$/.exec(new URL(url).pathname);
+      if (m) return new Response(JSON.stringify({ data: { id: m[1], defaultDatasetId: `datos${m[1]}`, status: 'SUCCEEDED', usageTotalUsd: 0, chargedEventCounts: { result: 3 }, finishedAt: viejo } }), { headers: { 'content-type': 'application/json' } });
+      return baseT.solicitar(url, init);
+    };
+    await R.responderFicha(idT, { ...dT, solicitar: solicitarT });
+    assert.equal(almT.guardados, 1);
+    assert.equal(almT.gastos.get(almT.acts[0].gastoId).usd, C.topeDe('tiktok'), 'sin costo tras la espera: el peor caso');
   }
 
   // --- Una publicacion borrada o privada no es «cero comentarios» ---------

@@ -10,9 +10,11 @@
  *  - El tono se cuenta, no se promedia: `ConteoTono` son cuatro cubetas que
  *    suman el total, y la pantalla no saca porcentajes de ellas (una
  *    publicacion rara vez pasa de 30 comentarios con palabras).
- *  - Sin tono junto a una figura (regla 5): `tono.mostrado` en false cuando el
- *    titulo de la publicacion nombra a alguien del roster, y entonces no viaja
- *    ninguna etiqueta, ni la general ni la de cada comentario.
+ *  - El tono se muestra tambien cuando el titulo nombra a una figura del
+ *    roster: es la excepcion a la regla 5 que el cliente decidio para esta
+ *    pagina el 29 de septiembre de 2026, con su salvedad fija en pantalla
+ *    (docs/PLAN.md). Hasta ese dia viajaba `tono.mostrado` en false y la
+ *    tarjeta decia «Sin dato» en la publicacion del informe de Burgueño.
  */
 
 export type RedSeguida = "instagram" | "tiktok" | "facebook";
@@ -62,7 +64,8 @@ export interface Actualizacion {
   metricas: Metricas | null;
   leidos: number | null;
   nuevos: number | null;
-  /** null: no hubo lectura de tono (fallo, o la regla 5). */
+  /** null: no hubo lectura de tono (fallo, o una lectura de antes del 29 de
+   *  septiembre de 2026 sobre una publicacion que nombra a una figura). */
   tono: ConteoTono | null;
 }
 
@@ -98,7 +101,12 @@ export interface RespuestaSeguimiento {
   actualizaciones: Actualizacion[];
   /** Los mas recientes primero, todos los que siguen dentro de la retencion. */
   comentarios: ComentarioSeguido[];
-  tono: { mostrado: boolean; conteo: ConteoTono };
+  tono: { conteo: ConteoTono };
+  /** «Lo que dicen los comentarios» de la ultima lectura, o null. */
+  resumen: { texto: string; leidos: number; fecha: string } | null;
+  /** Sin resumen, si se puede pedir uno: la lectura automatica encendida y al
+   *  menos diez comentarios guardados. La pagina pinta el boton con esto. */
+  resumible: boolean;
   retencionDias: number;
   /** Desde cuando se puede volver a actualizar, si la ultima lectura es de
    *  hace muy poco; null si ya se puede. Lo decide el servidor, que es quien
@@ -113,6 +121,7 @@ export type CodigoErrorSeguimiento =
   | "limite_dia"
   | "limite_mes"
   | "reciente"
+  | "pocos"
   | "no_disponible";
 
 export interface ErrorSeguimiento {

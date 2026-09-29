@@ -77,10 +77,6 @@ const nextConfig: NextConfig = {
     ],
     // El pase pagado solo necesita el roster, por la misma regla 5.
     "/api/redes-en-vivo": ["./public/data/roster.json"],
-    // El seguimiento de una publicacion, por lo mismo: sin el roster no se
-    // puede comprobar la regla 5 y el tono sale retenido en toda ficha. Los
-    // corchetes van escapados porque la llave es un glob de picomatch.
-    "/api/seguimiento/\\[id\\]": ["./public/data/roster.json"],
     // El informe en PDF de un termino (lib/informe/informe.ts) lee los dos
     // archivos de consultas del disco y registra Geist desde node_modules:
     // el motor de PDF no lee las fuentes del sistema. Sin esto la ruta

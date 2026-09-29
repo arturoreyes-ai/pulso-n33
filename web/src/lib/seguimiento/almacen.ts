@@ -58,8 +58,18 @@ export interface FilaActualizacion {
   leidos: number | null;
   nuevos: number | null;
   tono: ConteoTono | null;
+  /** «Lo que dicen los comentarios» de esta lectura (lib/analisis/
+   *  seguimiento.ts). Derivado del texto, asi que se borra con el. */
+  resumen: ResumenGuardado | null;
   creado: string;
   terminado: string | null;
+}
+
+export interface ResumenGuardado {
+  texto: string;
+  /** Cuantos comentarios leyo el modelo. Lo cuenta el codigo. */
+  leidos: number;
+  generado: string;
 }
 
 export interface FilaComentario {
@@ -119,7 +129,14 @@ export interface Almacen {
    *  que no habian terminado, para cerrar su gasto. */
   borrar(id: string): Promise<{ abiertas: FilaActualizacion[] } | null>;
   cerrarGasto(gastoId: string, usd: number): Promise<void>;
-  /** Borra el texto vencido. Devuelve cuantos comentarios se fueron. */
+  guardarResumen(actualizacionId: string, resumen: ResumenGuardado): Promise<void>;
+  /** Los comentarios guardados que no tienen tono: los de una lectura en que
+   *  el servicio no respondio, o los de antes del 29 de septiembre de 2026,
+   *  cuando una figura del roster en el titulo lo retenia. */
+  sinTono(id: string, retencionDias: number, limite: number): Promise<{ huella: string; texto: string }[]>;
+  guardarTonos(id: string, tonos: readonly { huella: string; sentimiento: TonoComentario }[]): Promise<void>;
+  /** Borra el texto vencido y los resumenes que salieron de el. Devuelve
+   *  cuantos comentarios se fueron. */
   purgar(retencionDias: number): Promise<number>;
 }
 
@@ -154,7 +171,7 @@ const deSeguimiento = (f: SqlSeguimiento): FilaSeguimiento => ({
 interface SqlActualizacion {
   id: string; seguimiento_id: string; gasto_id: string; tope_usd: string | number; estado: FilaActualizacion["estado"];
   corridas: Corridas | null; reclamada_en: string | Date | null; metricas: Metricas | null; leidos: number | null;
-  nuevos: number | null; tono: ConteoTono | null; creado_en: string | Date; terminado_en: string | Date | null;
+  nuevos: number | null; tono: ConteoTono | null; resumen: ResumenGuardado | null; creado_en: string | Date; terminado_en: string | Date | null;
 }
 
 const deActualizacion = (f: SqlActualizacion): FilaActualizacion => ({
@@ -169,6 +186,7 @@ const deActualizacion = (f: SqlActualizacion): FilaActualizacion => ({
   leidos: f.leidos,
   nuevos: f.nuevos,
   tono: f.tono,
+  resumen: f.resumen ?? null,
   creado: iso(f.creado_en),
   terminado: isoONulo(f.terminado_en),
 });
@@ -245,7 +263,7 @@ export const almacenNeon: Almacen = {
   async actualizaciones(id, limite) {
     const filas = (await sql().query(`
       SELECT a.id, a.seguimiento_id, a.gasto_id, g.tope_usd, a.estado, a.corridas, a.reclamada_en, a.metricas,
-             a.leidos, a.nuevos, a.tono, a.creado_en, a.terminado_en
+             a.leidos, a.nuevos, a.tono, a.resumen, a.creado_en, a.terminado_en
         FROM seguimiento_actualizaciones a JOIN gasto_seguimiento g ON g.id = a.gasto_id
        WHERE a.seguimiento_id = $1
        ORDER BY a.creado_en DESC
@@ -339,7 +357,7 @@ export const almacenNeon: Almacen = {
       q(`SELECT EXISTS (SELECT 1 FROM seguimientos WHERE id = $seguimiento) AS existe`),
       q(`
         SELECT a.id, a.seguimiento_id, a.gasto_id, g.tope_usd, a.estado, a.corridas, a.reclamada_en, a.metricas,
-               a.leidos, a.nuevos, a.tono, a.creado_en, a.terminado_en
+               a.leidos, a.nuevos, a.tono, a.resumen, a.creado_en, a.terminado_en
           FROM seguimiento_actualizaciones a JOIN gasto_seguimiento g ON g.id = a.gasto_id
          WHERE a.seguimiento_id = $seguimiento AND a.estado IN ('leyendo', 'guardando')
            AND a.creado_en > now() - make_interval(mins => ${MINUTOS_EN_CURSO})
@@ -361,7 +379,7 @@ export const almacenNeon: Almacen = {
           INSERT INTO gasto_seguimiento (usuario_id, tope_usd) SELECT $usuario, $tope FROM permitido RETURNING id, tope_usd
         ), nueva AS (
           INSERT INTO seguimiento_actualizaciones (seguimiento_id, gasto_id) SELECT $seguimiento, gasto.id FROM gasto
-          RETURNING id, seguimiento_id, gasto_id, estado, corridas, reclamada_en, metricas, leidos, nuevos, tono, creado_en, terminado_en
+          RETURNING id, seguimiento_id, gasto_id, estado, corridas, reclamada_en, metricas, leidos, nuevos, tono, resumen, creado_en, terminado_en
         )
         SELECT nueva.*, gasto.tope_usd FROM nueva JOIN gasto ON gasto.id = nueva.gasto_id`),
     ])) as [unknown, { existe: boolean }[], SqlActualizacion[], { creado_en: string | Date }[], { mes: number; dia: number }[], SqlActualizacion[]];
@@ -432,7 +450,7 @@ export const almacenNeon: Almacen = {
     const [abiertas, borradas] = (await bd.transaction([
       bd.query(`
         SELECT a.id, a.seguimiento_id, a.gasto_id, g.tope_usd, a.estado, a.corridas, a.reclamada_en, a.metricas,
-               a.leidos, a.nuevos, a.tono, a.creado_en, a.terminado_en
+               a.leidos, a.nuevos, a.tono, a.resumen, a.creado_en, a.terminado_en
           FROM seguimiento_actualizaciones a JOIN gasto_seguimiento g ON g.id = a.gasto_id
          WHERE a.seguimiento_id = $1 AND a.terminado_en IS NULL
       `, [id]),
@@ -446,11 +464,43 @@ export const almacenNeon: Almacen = {
     await sql().query(`UPDATE gasto_seguimiento SET usd = $2, terminado_en = now() WHERE id = $1 AND terminado_en IS NULL`, [gastoId, usd]);
   },
 
+  async guardarResumen(actualizacionId, resumen) {
+    await sql().query(`UPDATE seguimiento_actualizaciones SET resumen = $2::jsonb WHERE id = $1`, [actualizacionId, JSON.stringify(resumen)]);
+  },
+
+  async sinTono(id, retencionDias, limite) {
+    const filas = (await sql().query(`
+      SELECT huella, texto FROM seguimiento_comentarios
+       WHERE seguimiento_id = $1 AND sentimiento IS NULL AND cosechado_en >= now() - make_interval(days => $2::int)
+       ORDER BY escrito_en DESC NULLS LAST, huella
+       LIMIT $3
+    `, [id, retencionDias, limite])) as { huella: string; texto: string }[];
+    return filas.map((f) => ({ huella: f.huella.trim(), texto: f.texto }));
+  },
+
+  async guardarTonos(id, tonos) {
+    if (tonos.length === 0) return;
+    await sql().query(`
+      UPDATE seguimiento_comentarios AS c SET sentimiento = x.sentimiento
+        FROM jsonb_to_recordset($2::jsonb) AS x(huella text, sentimiento text)
+       WHERE c.seguimiento_id = $1 AND c.huella = x.huella
+    `, [id, JSON.stringify(tonos)]);
+  },
+
   async purgar(retencionDias) {
-    const filas = (await sql().query(
-      `DELETE FROM seguimiento_comentarios WHERE cosechado_en < now() - make_interval(days => $1::int) RETURNING 1`,
-      [retencionDias],
-    )) as unknown[];
+    const bd = sql();
+    // El resumen se escribio con el texto de esos comentarios: si el texto se
+    // va a los 15 dias, lo que se dijo de el tambien.
+    const [filas] = (await bd.transaction([
+      bd.query(
+        `DELETE FROM seguimiento_comentarios WHERE cosechado_en < now() - make_interval(days => $1::int) RETURNING 1`,
+        [retencionDias],
+      ),
+      bd.query(
+        `UPDATE seguimiento_actualizaciones SET resumen = NULL WHERE resumen IS NOT NULL AND creado_en < now() - make_interval(days => $1::int)`,
+        [retencionDias],
+      ),
+    ])) as [unknown[], unknown];
     return filas.length;
   },
 };
