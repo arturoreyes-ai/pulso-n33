@@ -602,6 +602,21 @@ conteos también para la fila `persona`, por decisión del cliente registrada en
 lo que se corrió para la demo del 18 de septiembre de 2026— y las tres redes
 salen «sin dato».
 
+Para saber si un índice web encuentra mejor las publicaciones que la búsqueda
+por palabra de Apify, hay un sondeo que no cosecha nada:
+
+```bash
+python -m pulso consultas --sondear-web
+```
+
+Hace cuatro consultas por término a Brave Search (`"término" site:tiktok.com`,
+lo mismo en Instagram y Facebook, y la web sin esas tres), en los últimos 30
+días, e imprime cuántos resultados son publicaciones que Apify sabría leer por
+URL, cuántas nombran el término y qué medios del catálogo aparecen. Pide
+`BRAVE_API_KEY` en `.env` o `web/.env`; no llama a Apify y no escribe. Doce
+consultas cuestan ~0.06 USD, dentro del crédito mensual de 5 USD de Brave. Por
+qué Brave y no Google está en el encabezado de `pulso/brave.py`.
+
 Dos listas del config curan a mano lo que la búsqueda no acierta, y las dos se
 justifican por escrito: `prensa.excluidos` descarta un titular que no trata del
 término —se empareja por titular, porque el enlace del buscador de noticias

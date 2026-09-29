@@ -6,7 +6,7 @@
   python -m pulso redes [--posts N] [--comentarios N]
   python -m pulso tiktok [--videos N] [--comentarios N] [--probar]
   python -m pulso facebook [--sondear [ID ...]] [--sentimiento ninguno|modelo]
-  python -m pulso consultas [--consulta ID] [--sentimiento ninguno|modelo] [--probar] [--sin-cosecha]
+  python -m pulso consultas [--consulta ID] [--sentimiento ninguno|modelo] [--probar] [--sin-cosecha] [--sondear-web]
   python -m pulso tendencias [--probar] [--ubicaciones]
   python -m pulso gasto-electoral [--solo-financiamiento]
   python -m pulso apify [--verificar]
@@ -562,6 +562,78 @@ def cmd_facebook(args):
     return 0
 
 
+DONDE_NOMBRA = {"titulo": "título", "extracto": "extracto", "ambos": "ambos", None: "no nombra"}
+
+
+def _sondear_web(args, consultas, ahora, solo, cosecha):
+    """`consultas --sondear-web`: que tiene Brave de cada termino. Ver pulso/brave.py.
+
+    Imprime y sale: no escribe, no llama a Apify. De los perfiles solo se da
+    el conteo, porque en Facebook un perfil puede ser el de una persona.
+    """
+    from .brave import (NOMBRES_LLAVE, REDES, USD_POR_CONSULTA, LlaveRechazada, dominios_de,
+                        sondear)
+    from .entorno import primero
+
+    llave = primero(*NOMBRES_LLAVE)
+    if not llave:
+        print("consultas: falta {} (en .env o web/.env); no se llamó a nada".format(
+            NOMBRES_LLAVE[0]), file=sys.stderr)
+        return 1
+    medios = _leer(os.path.join(args.config, "medios.json")).get("medios", [])
+    try:
+        filas = sondear(consultas, ahora, llave, dominios=dominios_de(medios), solo=solo,
+                        ventana_dias=cosecha["ventana_dias"])
+    except LlaveRechazada as e:
+        print("consultas: Brave rechazó la llave ({}); revisa {} y el plan".format(
+            e, NOMBRES_LLAVE[0]), file=sys.stderr)
+        return 1
+
+    totales = {}
+    for f in filas:
+        print("\n{} · {} · {}".format(f["termino"], f["fuente"], f["q"]))
+        if f["estado"] != "ok":
+            print("  error: {}".format(f["error"]))
+            continue
+        tipos = {}
+        for e in f["enlaces"]:
+            tipos.setdefault(e["tipo"], []).append(e)
+        if f["fuente"] in REDES:
+            pubs = tipos.get("publicacion", [])
+            nombran = sum(1 for e in pubs if e["nombra"])
+            t = totales.setdefault(f["fuente"], [0, 0])
+            t[0] += len(pubs)
+            t[1] += nombran
+            print("  {} resultados{} · {} publicaciones, {} nombran el término · {} perfiles"
+                  " · {} otros".format(f["resultados"], " (hay más)" if f["mas"] else "",
+                                       len(pubs), nombran, len(tipos.get("perfil", [])),
+                                       len(tipos.get("otro", []))))
+            mostrar = pubs
+        else:
+            print("  {} resultados{} · {} de medios del catálogo · {} de YouTube · {} de otros "
+                  "sitios".format(f["resultados"], " (hay más)" if f["mas"] else "",
+                                  len(tipos.get("prensa", [])), len(tipos.get("youtube", [])),
+                                  len(tipos.get("web", []))))
+            mostrar = [e for e in f["enlaces"] if e["tipo"] in ("prensa", "youtube", "web")]
+        for e in mostrar:
+            print("  {:<10} {:<9} {}{}  {}".format(
+                e["fecha"] or "sin fecha", DONDE_NOMBRA[e["nombra"]],
+                "{:<8} ".format(e["tipo"]) if f["fuente"] == "web" else "", e["url"],
+                e["titulo"][:60]))
+
+    hechas = len(filas)
+    print("\nPublicaciones que Apify sabría leer por URL, y cuántas nombran el término:")
+    for red in REDES:
+        n, nombran = totales.get(red, (0, 0))
+        print("  {:<10} {} ({} nombran)".format(red, n, nombran))
+    print("\n{} consultas a Brave ≈ {:.3f} USD (el crédito mensual es de 5 USD). Apify: 0. "
+          "Nada se escribió.".format(hechas, hechas * USD_POR_CONSULTA))
+    print("«nombra» mira el título y el extracto del resultado; un título de Instagram lleva "
+          "el nombre de la cuenta, así que una cuenta llamada como el término lo nombra "
+          "siempre. La fecha es la que Brave le conoce a la página.")
+    return 0
+
+
 def cmd_consultas(args):
     """Que se dice de un TERMINO en TikTok, Instagram, Facebook y la prensa.
 
@@ -597,9 +669,12 @@ def cmd_consultas(args):
             return 1
         apagadas = [c["id"] for c in consultas
                     if c.get("id") in solo and not (c.get("activo") and c.get("verificado"))]
-        if apagadas and not args.probar:
+        if apagadas and not (args.probar or args.sondear_web):
             print("consultas: apagadas o sin verificar, no se cosechan: {} (corre --probar y "
                   "fecha 'verificado')".format(", ".join(apagadas)), file=sys.stderr)
+
+    if args.sondear_web:
+        return _sondear_web(args, consultas, ahora, solo, cosecha)
 
     if args.importar_comentarios:
         # Solo escribe al cache; el documento se rehace despues con
@@ -1310,6 +1385,10 @@ def main(argv=None):
     cq.add_argument("--probar", action="store_true",
                     help="tres publicaciones por fuente, apagadas incluidas, sin comentarios y "
                          "sin escribir: el paso previo a poner activo: true")
+    cq.add_argument("--sondear-web", action="store_true",
+                    help="cuenta qué publicaciones de TikTok, Instagram y Facebook y qué "
+                         "páginas web que nombran cada término encuentra Brave Search, 30 "
+                         "días; requiere BRAVE_API_KEY, no llama a Apify y no escribe")
     cq.set_defaults(fn=cmd_consultas)
 
     yt = sub.add_parser("youtube",

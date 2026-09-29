@@ -799,6 +799,19 @@ never the comments'). Rules that look arbitrary and are not:
   (`claves_descartadas`), never their content. The first probe on 18 September
   2026 showed why: TikTok «grupo concordia» is a music band, «valente marquez»
   returns noise, and the Facebook pages returned items without a URL.
+- **`--sondear-web` measures web discovery, and the web is Brave, not Google**
+  (29 September 2026, `pulso/brave.py`). The idea being measured: a web index
+  finds the post URLs that name a term, and Apify reads only those, by URL
+  and logged out, like /seguimiento. It prints and exits: no Apify, no
+  writes. Google is not an option at any price: its robots.txt disallows
+  `/search` to every agent, so its SERP scrapers (Apify's, SerpAPI, Serper)
+  are the rented-scraper mistake again, and Custom Search JSON is closed to
+  new customers and shuts down on 1 January 2027. The key rides in the
+  `X-Subscription-Token` header, never the URL. A post is recognised by the
+  harvest's own rules (`tiktok._url_video`, `facebook._url_post`, and for
+  Instagram a copy of `canonizarPublicacion` that also accepts
+  `/<user>/p/<code>/`). Profiles are counted, never printed. Turning discovery
+  into a source is the client's call: it puts term harvests on a schedule.
 - **Pushing `data/consultas.json` starts the paid ingest**: any push touching
   `data/` outside `paths-ignore` runs `pulso.yml`. For the demo, run locally.
   `pulso/entorno.py` reads `APIFY_TOKEN` from `.env`, so a "dry" probe on a
