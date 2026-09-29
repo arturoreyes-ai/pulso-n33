@@ -10,7 +10,6 @@ import type {
   DocConsultas,
   DocConsultasComentarios,
   DocEstado,
-  DocIndicadores,
   DocRedes,
   DocRedesComentarios,
   DocTendencias,
@@ -33,8 +32,6 @@ import type {
  *  mismo recurso que useActualidad(null). */
 export const useComunicados = (activo = true) =>
   useSWRImmutable<DocComunicados>(activo ? RUTAS.comunicados : null, leerJson);
-export const useIndicadores = () =>
-  useSWRImmutable<DocIndicadores>(RUTAS.indicadores, leerJson);
 /** La hora de la ultima corrida. Redes la lee para saber si la cosecha de una
  *  red se quedo atras (formato.ts::corteVigente). Son ~2 KB. */
 export const useEstado = () => useSWRImmutable<DocEstado>(RUTAS.estado, leerJson);

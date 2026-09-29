@@ -4,11 +4,10 @@ import { Navegacion } from "@/components/chrome/navegacion";
 import type { Seccion, Vista } from "@/lib/dominio/secciones";
 import type { ZonaRuta } from "@/lib/dominio/zonas";
 import { PaginaEnTendencia } from "./en-tendencia";
-import { PaginaIndicadores } from "./indicadores";
 import { PaginaRedes } from "./redes";
 
 /**
- * Una celda de la rejilla lugar x vista: 9 lugares por 3 vistas.
+ * Una celda de la rejilla lugar x vista: 9 lugares por 2 vistas.
  *
  * Todas las rutas del tablero terminan aqui, y por eso la nav y el pie se
  * escriben UNA vez. Antes esto era `tablero.tsx`, que componia las nueve
@@ -19,10 +18,9 @@ import { PaginaRedes } from "./redes";
  * que crece mal cuando se agrega otra vista.
  */
 const CUERPOS: Record<Seccion, (props: { zona: ZonaRuta | null; consulta: string | null }) => ReactNode> = {
-  // Redes lee `consulta` (la busqueda de la lupa, `?q=`); Indicadores toma
-  // solo `zona`, y una funcion que recibe menos props sigue siendo asignable.
+  // Redes lee `consulta` (la busqueda de la lupa, `?q=`). Indicadores, que
+  // tomaba solo `zona`, se fue el 28 de septiembre de 2026 (secciones.ts).
   redes: PaginaRedes,
-  indicadores: PaginaIndicadores,
 };
 
 /**

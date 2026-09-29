@@ -18,7 +18,6 @@ export const RUTAS = {
   // por nombre y no por esta tabla. Volver a colgarle un hook es deshacer eso.
   notas: `${BASE}/notas.json`,
   temas: `${BASE}/temas.json`,
-  indicadores: `${BASE}/indicadores.json`,
   roster: `${BASE}/roster.json`,
   archivoIndice: `${BASE}/archivo/indice.json`,
   redes: `${BASE}/redes.json`,

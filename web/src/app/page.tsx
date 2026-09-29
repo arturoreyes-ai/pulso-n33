@@ -6,9 +6,10 @@ import { PARAM_CONSULTA, PARAM_EDICION, PARAM_RUBRO } from "@/lib/busqueda/entra
 /**
  * La portada: En Tendencia, el recorrido de titulares en vivo del corredor.
  *
- * El titulo y la descripcion los pone el layout. Las otras tres vistas de la
- * region viven en `prensa/`, `redes/` e `indicadores/`, hermanas de `[zona]/`:
- * Next resuelve primero el segmento literal, asi que `/prensa` es siempre la
+ * El titulo y la descripcion los pone el layout. La otra vista de la region
+ * vive en `redes/`, hermana de `[zona]/` (`prensa/` e `indicadores/` lo
+ * fueron hasta que el cliente las quito): Next resuelve primero el segmento
+ * literal, asi que `/redes` es siempre la
  * seccion. Que ninguna zona pueda llamarse como una seccion lo sostiene una
  * guardia de tipos en lib/dominio/secciones.ts.
  *

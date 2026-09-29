@@ -7,11 +7,12 @@ import { SECCIONES, seccionDeSlug } from "@/lib/dominio/secciones";
 import { SLUGS, zonaDeSlug } from "@/lib/dominio/zonas";
 
 /**
- * Las dos vistas interiores de una zona: /tijuana/redes, /ensenada/indicadores,
- * /san-diego/redes y las 13 restantes.
+ * Las vistas interiores de una zona: /tijuana/redes, /san-diego/redes y las
+ * seis restantes. Eran dos por zona hasta el 28 de septiembre de 2026, cuando
+ * salio /<zona>/indicadores.
  *
  * Un solo archivo dinamico y no dos carpetas literales bajo `[zona]`: son 16
- * paginas identicas salvo por dos segmentos, y `generateStaticParams` las
+ * paginas identicas salvo por un segmento, y `generateStaticParams` las
  * prerenderiza todas igual. La contrapartida es que el slug hay que
  * validarlo, que es exactamente lo que ya hace la zona un nivel arriba.
  *
@@ -23,7 +24,7 @@ interface Props {
   params: Promise<{ zona: string; seccion: string }>;
 }
 
-/** Solo las 24 combinaciones conocidas; cualquier otra es 404. */
+/** Solo las combinaciones conocidas; cualquier otra es 404. */
 export const dynamicParams = false;
 
 export function generateStaticParams() {

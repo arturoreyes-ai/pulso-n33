@@ -1,13 +1,5 @@
-import type {
-  PanelEnsu,
-  PanelPredial,
-  PanelSanDiego,
-  PanelSesnsp,
-  PanelShf,
-  Tema,
-} from "@/lib/datos/tipos";
-import { dolares, nombreMes, numero, pesos, pluralizar } from "./formato";
-import { periodoLegible } from "./indicadores";
+import type { Tema } from "@/lib/datos/tipos";
+import { numero, pluralizar } from "./formato";
 
 /**
  * Todas las frases del tablero salen de aqui. Funciones puras, sin React, para
@@ -37,45 +29,12 @@ export interface Tono {
   adversa: number;
 }
 
-export type SerieShf = PanelShf["series"][string];
-export type MunicipioPredial = PanelPredial["municipios"][string];
-export type MunicipioSesnsp = PanelSesnsp["municipios"][string];
-export type CiudadEnsu = PanelEnsu["ciudades"][string];
-
-const DECIMAL = new Intl.NumberFormat("es-MX", { maximumFractionDigits: 1 });
-
-export const decimal = (v: number) => DECIMAL.format(v);
-
 export const totalSentimiento = (s: Sentimiento) => s.positivo + s.negativo + s.neutral;
 export const totalTono = (t: Tono) => t.favorable + t.neutral + t.adversa;
 
 export function porcentaje(n: number, base: number): string {
   return base <= 0 ? "0%" : `${Math.round((n / base) * 100)}%`;
 }
-
-export function variacionPct(
-  actual: number | undefined,
-  previo: number | undefined,
-): number | null {
-  if (actual === undefined || previo === undefined || previo <= 0) return null;
-  return ((actual - previo) / previo) * 100;
-}
-
-/** "4.5% más que en junio", "igual que en junio", "sin dato para comparar con junio". */
-export function comparado(v: number | null, contra: string): string {
-  if (v === null || Number.isNaN(v)) return `sin dato para comparar con ${contra}`;
-  const abs = Math.abs(v);
-  if (abs < 0.05) return `igual que ${contra}`;
-  return `${decimal(abs)}% ${v > 0 ? "más" : "menos"} que ${contra}`;
-}
-
-function enumerar(partes: readonly string[]): string {
-  if (partes.length === 0) return "";
-  if (partes.length === 1) return partes[0] ?? "";
-  return `${partes.slice(0, -1).join(", ")} y ${partes[partes.length - 1] ?? ""}`;
-}
-
-const minuscula = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
 
 // ------------------------------------------------------------ sentimiento
 
@@ -211,118 +170,6 @@ export function fraseBrecha(
   return `La prensa escribe sobre ${sujeto} ${p}; quien comenta lo hace ${g}.`;
 }
 
-// ------------------------------------------------------------------ crimen
-
-export function fraseCrimen(m: MunicipioSesnsp, nombre: string): string {
-  const n = m.por_mes.length;
-  const ultimo = m.por_mes[n - 1];
-  const previo = m.por_mes[n - 2];
-  if (ultimo === undefined) {
-    return `${nombre} no tiene serie mensual de delitos.`;
-  }
-  if (previo === undefined) {
-    return `${nombre} reportó ${numero(ultimo)} delitos en ${nombreMes(n - 1)}; sin mes anterior para comparar.`;
-  }
-  return (
-    `${nombre} reportó ${numero(ultimo)} delitos en ${nombreMes(n - 1)}, ` +
-    `${comparado(variacionPct(ultimo, previo), `en ${nombreMes(n - 2)}`)}; ` +
-    `${numero(m.total)} en lo que va del año.`
-  );
-}
-
-export function fraseCrimenRegion(
-  panel: PanelSesnsp,
-  municipios: readonly string[],
-): string {
-  const series = municipios
-    .map((z) => panel.municipios[z])
-    .filter((m): m is MunicipioSesnsp => m !== undefined && m.por_mes.length > 0);
-  if (series.length === 0) return "Sin serie mensual de delitos.";
-  const n = Math.min(...series.map((m) => m.por_mes.length));
-  const suma = (i: number) => series.reduce((acc, m) => acc + (m.por_mes[i] ?? 0), 0);
-  const ultimo = suma(n - 1);
-  const total = series.reduce((acc, m) => acc + m.total, 0);
-  const cuantos = `${series.length === 7 ? "Los siete" : `Los ${series.length}`} municipios`;
-  if (n < 2) {
-    return `${cuantos} reportaron ${numero(ultimo)} delitos en ${nombreMes(n - 1)}; ${numero(total)} en lo que va del año.`;
-  }
-  return (
-    `${cuantos} reportaron ${numero(ultimo)} delitos en ${nombreMes(n - 1)}, ` +
-    `${comparado(variacionPct(ultimo, suma(n - 2)), `en ${nombreMes(n - 2)}`)}; ` +
-    `${numero(total)} en lo que va del año.`
-  );
-}
-
-export function fraseDelitosClave(m: MunicipioSesnsp): string {
-  const top = Object.entries(m.delitos_clave)
-    .toSorted((a, b) => b[1] - a[1])
-    .slice(0, 3);
-  if (top.length === 0) return "Sin desglose por tipo de delito.";
-  return `Los más frecuentes en el año: ${enumerar(
-    top.map(([d, n]) => `${minuscula(d)} (${numero(n)})`),
-  )}.`;
-}
-
-// ---------------------------------------------------------------- vivienda
-
-export function fraseVivienda(
-  s: SerieShf | undefined,
-  nombre: string,
-  periodo: string | null,
-): string {
-  if (s === undefined) {
-    return `La SHF no publica índice de precios de vivienda para ${nombre}: no hay precio de vivienda medido para esta zona.`;
-  }
-  const v = s.variacion_anual_pct;
-  if (v === null) {
-    return `La SHF publica índice para ${nombre}, pero sin variación anual.`;
-  }
-  const cuando = periodoLegible(periodo ?? s.periodo);
-  if (Math.abs(v) < 0.05) {
-    return `En ${nombre}, la vivienda comprada con crédito hipotecario no cambió de precio en un año (SHF, ${cuando}).`;
-  }
-  return `En ${nombre}, la vivienda comprada con crédito hipotecario ${v > 0 ? "subió" : "bajó"} ${decimal(Math.abs(v))}% en un año (SHF, ${cuando}).`;
-}
-
-export function fraseViviendaRegion(
-  estado: SerieShf | undefined,
-  nacional: SerieShf | undefined,
-  periodo: string | null,
-): string {
-  if (estado === undefined || estado.variacion_anual_pct === null) {
-    return "Sin variación anual del índice de vivienda para Baja California.";
-  }
-  const v = estado.variacion_anual_pct;
-  const dir = v > 0 ? "subió" : v < 0 ? "bajó" : "no cambió";
-  const pais =
-    nacional === undefined || nacional.variacion_anual_pct === null
-      ? ""
-      : `; en el país, ${decimal(Math.abs(nacional.variacion_anual_pct))}%`;
-  return `En Baja California, la vivienda con crédito hipotecario ${dir} ${decimal(Math.abs(v))}% en un año${pais} (SHF, ${periodoLegible(periodo ?? estado.periodo)}).`;
-}
-
-export function frasePredial(m: MunicipioPredial, nombre: string): string {
-  return (
-    `En ${nombre} se pagaron ${pesos(m.por_cuenta_mxn)} de predial por cuenta en ${m.ciclo}, ` +
-    `${comparado(m.variacion_anual_pct, "el ciclo anterior")}.`
-  );
-}
-
-// -------------------------------------------------------------- percepcion
-
-export function frasePercepcion(
-  c: CiudadEnsu | undefined,
-  nombre: string,
-  nacional: number | null,
-  periodo: string | null,
-): string {
-  if (c === undefined || c.pct_inseguro === null) {
-    return `La ENSU nunca ha muestreado ${nombre}: no hay medición de percepción de inseguridad, y no se infiere de otras ciudades.`;
-  }
-  const pais = nacional === null ? "" : ` El promedio nacional es ${decimal(nacional)}%.`;
-  return `En ${nombre}, ${decimal(c.pct_inseguro)}% de las personas de 18 años y más se sienten inseguras (ENSU, ${periodoLegible(periodo)}).${pais}`;
-}
-
 // ------------------------------------------------------------------ prensa
 
 export function frasePrensa(n: number, dias: number, nombre: string): string {
@@ -336,29 +183,4 @@ export function fraseTemaPrincipal(t: Tema | undefined, nombre: string, dias: nu
     return `Ningún tema alcanzó el mínimo de notas sobre ${nombre} en ${dias} días.`;
   }
   return `El tema con más notas sobre ${nombre} fue «${t.termino}», con ${numero(t.n)} ${pluralizar(t.n, "nota", "notas")} en ${dias} días.`;
-}
-
-// --------------------------------------------------------------- san diego
-
-export function fraseSanDiego(
-  zips: PanelSanDiego["zips"],
-  codigos: readonly string[],
-): string {
-  const presentes = codigos
-    .map((c) => [c, zips[c]] as const)
-    .filter((par): par is readonly [string, { mediana_usd: number; parcelas: number }] =>
-      par[1] !== undefined,
-    );
-  if (presentes.length === 0) {
-    return "Sin datos catastrales para los códigos postales fronterizos.";
-  }
-  const orden = presentes.toSorted((a, b) => a[1].mediana_usd - b[1].mediana_usd);
-  const min = orden[0];
-  const max = orden[orden.length - 1];
-  if (min === undefined || max === undefined) return "";
-  return (
-    `La mediana del valor catastral en los ${orden.length} códigos postales fronterizos va de ` +
-    `${dolares(min[1].mediana_usd)} (${min[0]}) a ${dolares(max[1].mediana_usd)} (${max[0]}). ` +
-    `Es valor catastral, no de venta.`
-  );
 }

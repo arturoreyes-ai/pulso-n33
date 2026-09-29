@@ -6,8 +6,8 @@ import { NOMBRE_CORTO, NOMBRE_TODA_REGION, ZONAS_RUTA, type ZonaRuta } from "@/l
  * El cuerpo del dialogo «Lugar» de la cinta: enlaces, nunca botones.
  *
  * El lugar es un eje de la RUTA, asi que elegirlo es navegar, y conserva la
- * vista igual que `chrome/selector-zona.tsx`: desde /tijuana/indicadores se
- * sale a /ensenada/indicadores y no a /ensenada. Perder la vista al cambiar de
+ * vista igual que `chrome/selector-zona.tsx`: desde /tijuana/redes se sale a
+ * /ensenada/redes y no a /ensenada. Perder la vista al cambiar de
  * lugar obliga a volver a buscarla, que es lo que la rejilla de dos ejes
  * existe para evitar.
  *

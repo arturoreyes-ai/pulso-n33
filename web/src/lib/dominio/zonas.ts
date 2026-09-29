@@ -34,11 +34,6 @@ export type ZonaRuta = Exclude<Zona, "estatal">;
 
 export const ZONAS_RUTA = ZONAS_PRODUCTO.filter((z): z is ZonaRuta => z !== "estatal");
 
-/** Los siete municipios de Baja California, para los indicadores mexicanos. */
-export const MUNICIPIOS_BC = ZONAS_RUTA.filter((z) => z !== "San Diego");
-
-export const esMunicipio = (z: ZonaRuta) => z !== "San Diego";
-
 export const SLUG_DE_ZONA = {
   Tijuana: "tijuana",
   Mexicali: "mexicali",

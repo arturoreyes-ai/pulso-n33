@@ -6,7 +6,7 @@ import { NOMBRE_CORTO, type ZonaRuta } from "./zonas";
 /**
  * El titulo y la descripcion de cada celda de la rejilla lugar x vista.
  *
- * Vive aqui y no en cada `page.tsx` porque son 36 combinaciones y la mayoria
+ * Vive aqui y no en cada `page.tsx` porque son 18 combinaciones y la mayoria
  * se generan: escribirlas a mano es como se llega a que /ensenada/redes se
  * anuncie como "Pulso" a secas en la pestana y en un enlace compartido.
  */
@@ -20,8 +20,6 @@ const DESCRIPCION: Record<Seccion | "portada", (lugar: string) => string> = {
   // publica el texto de los comentarios» de las tres y era falsa para una.
   redes: (l) =>
     `Lo que se publica y lo que se comenta en Instagram, TikTok y YouTube sobre ${l}, y lo que X marca como tendencia. Se publica lo que se dijo, nunca quién lo dijo.`,
-  indicadores: (l) =>
-    `Precios de vivienda, predial, incidencia delictiva y percepción en ${l}, cada cifra con su fuente y su salvedad.`,
 };
 
 /** El titulo, como guardas y no como tres ternarios encajados. */

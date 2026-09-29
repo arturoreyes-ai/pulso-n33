@@ -20,8 +20,8 @@ import { Hoja } from "@/components/ui/hoja";
  * de lugar —garitas, gasto electoral, la de 404— dice donde esta y no ofrece
  * nada que desplegar, asi que se pinta como texto y no como control. Un caret
  * que no abre un menu es una mentira sobre el glifo, y es una que se descubre
- * enseguida: /tijuana/redes y /tijuana/indicadores son paginas hermanas y estan
- * a un toque una de la otra.
+ * enseguida: /tijuana/redes y /garitas estan a un toque una de la otra, y en
+ * la primera el caret si abre algo.
  *
  * Es de CLIENTE por `showModal()`, y por eso las opciones entran como
  * `children`: se construyen en el servidor (chrome/opciones-zona.tsx), igual
@@ -33,7 +33,7 @@ export function LugarCinta({
   titulo,
   children,
 }: {
-  /** La pagina: «Indicadores», «Garitas». */
+  /** La pagina: «Redes», «Garitas». */
   rotulo: string;
   /** Lo que se esta viendo: «Tijuana», «El corredor». */
   valor: string;
