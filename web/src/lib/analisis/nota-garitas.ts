@@ -40,5 +40,6 @@ export function piezaDeGaritas(cruces: readonly Cruce[], ahora: number): ClipGui
     pregunta: null,
     fuente: { url: GARITAS.ruta, fuente: GARITAS.nombre },
     ampliable: null,
+    nota: null,
   };
 }

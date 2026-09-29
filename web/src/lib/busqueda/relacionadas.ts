@@ -56,7 +56,7 @@ const LARGO_MINIMO = 4;
  * nombren la misma ciudad, que es la forma mas facil de que un panel de
  * «relacionadas» mienta con cara de acierto.
  */
-const TERMINOS_MINIMOS = 2;
+export const TERMINOS_MINIMOS = 2;
 
 /**
  * Y que juntos digan algo. El puntaje se mide en la misma escala que el peso
@@ -72,7 +72,7 @@ const TERMINOS_MINIMOS = 2;
  * Va en proporciones y no en un numero de notas a proposito: un tope fijo
  * cambia de significado cuando el archivo crece.
  */
-const UMBRAL_PUNTAJE = Math.log(50);
+export const UMBRAL_PUNTAJE = Math.log(50);
 
 export interface IndiceRelacionadas {
   readonly notas: readonly Nota[];

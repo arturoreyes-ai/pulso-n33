@@ -2,6 +2,7 @@ import { json, SIN_CACHE } from "@/lib/busqueda/respuesta";
 import { nombraAlguno } from "@/lib/busqueda/tema-publicacion";
 import { leerNotaEnlazada } from "./analizar";
 import { analisisHabilitado, MODELO_GUION } from "./config";
+import { pedirAlModeloGuion } from "./modelo-guion";
 import { PROGRAMAS_GUION, type NotaAmpliada } from "./contrato-guion";
 import { fallo, marcasDeMedio, quitarRelleno, sinEsfuerzo, sistemaAmpliar, TERMINOS_CONFERENCIA } from "./guion";
 import { reglaRota } from "./reglas";
@@ -39,7 +40,7 @@ export const CACHE_AMPLIAR = "public, max-age=0, s-maxage=86400";
 
 const MS_LIMITE_MODELO = 40000;
 const TOPE_TITULO = 300;
-const NO_SE_PUDO = "No se pudo ampliar la nota.";
+const NO_SE_PUDO = "No se pudo desarrollar la nota.";
 
 const ESQUEMA = {
   type: "object",
@@ -55,7 +56,7 @@ export async function responderAmpliar(
   modelo: string = MODELO_GUION,
 ): Promise<Response> {
   if (!analisisHabilitado()) {
-    return json({ codigo: "apagado", mensaje: "La nota ampliada no está disponible." }, 400, SIN_CACHE);
+    return json({ codigo: "apagado", mensaje: "Desarrollar la nota no está disponible." }, 400, SIN_CACHE);
   }
   const programa = PROGRAMAS_GUION.find((p) => p === params.p);
   if (programa === undefined) return json({ codigo: "programa", mensaje: "Programa desconocido." }, 400, SIN_CACHE);
@@ -65,37 +66,22 @@ export async function responderAmpliar(
   const leida = await leerNotaEnlazada({ u: params.u, m: params.m, d: params.d }, solicitar);
   if (!leida.ok) return leida.respuesta;
 
-  let cuerpo: unknown;
-  try {
-    const r = await solicitar("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "x-api-key": process.env.ANTHROPIC_API_KEY ?? "",
-        "anthropic-version": "2023-06-01",
-      },
-      cache: "no-store",
-      signal: AbortSignal.timeout(MS_LIMITE_MODELO),
-      body: JSON.stringify({
-        model: modelo,
-        max_tokens: sinEsfuerzo(modelo) ? 1200 : 6000,
-        system: sistemaAmpliar(programa),
-        output_config: {
-          format: { type: "json_schema", schema: ESQUEMA },
-          ...(sinEsfuerzo(modelo) ? {} : { effort: "low" }),
-        },
-        // Sin el medio: el guion no lo cita, y lo que no se lee no se dice. El
-        // texto lo trae a veces igual, y para eso esta la comprobacion de abajo.
-        messages: [{ role: "user", content: `Titular: ${titulo}\n\nTexto de la nota:\n${leida.texto}` }],
-      }),
-    });
-    if (!r.ok) return fallo(NO_SE_PUDO, "modelo");
-    cuerpo = await r.json();
-  } catch {
-    return fallo(NO_SE_PUDO, "modelo");
-  }
+  // La misma llamada del guion, con su respaldo si el modelo se niega
+  // (modelo-guion.ts): una nota roja ampliada es donde mas puede pasar.
+  const respuesta = await pedirAlModeloGuion(solicitar, {
+    max_tokens: sinEsfuerzo(modelo) ? 1200 : 6000,
+    system: sistemaAmpliar(programa),
+    output_config: {
+      format: { type: "json_schema", schema: ESQUEMA },
+      ...(sinEsfuerzo(modelo) ? {} : { effort: "low" }),
+    },
+    // Sin el medio: el guion no lo cita, y lo que no se lee no se dice. El
+    // texto lo trae a veces igual, y para eso esta la comprobacion de abajo.
+    messages: [{ role: "user", content: `Titular: ${titulo}\n\nTexto de la nota:\n${leida.texto}` }],
+  }, { modelo, limiteMs: MS_LIMITE_MODELO });
+  if (!respuesta.ok) return fallo(NO_SE_PUDO, "modelo");
 
-  const bloques = (cuerpo as { content?: { type?: string; text?: string }[] }).content ?? [];
+  const bloques = respuesta.bloques;
   const crudo = bloques.filter((b) => b.type === "text").map((b) => b.text ?? "").join("");
   let dicho = "";
   try {

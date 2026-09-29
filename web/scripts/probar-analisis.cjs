@@ -50,6 +50,8 @@ const { VERSION_GUION, PROGRAMAS_GUION, EJES_NOTICIAS33, EJES_MINUTA } = cargar(
 const { responderGuionTikTok, CACHE_GUION_TIKTOK, candidatosNoticias33, candidatosDeRedEnRed, candidatosMinuta, candidatosAlerta, CANDIDATOS_POR_EJE, guionFalsea } = cargar('lib/analisis/guion-tiktok');
 const { sistemaDe, sistemaAmpliar, esquemaDe, marcasDeMedio, nombraCalifornia, quitarRelleno } = cargar('lib/analisis/guion');
 const { responderGuionPrensa, CACHE_GUION_PRENSA, feedsDe, reciente, nombreDeMedio } = cargar('lib/analisis/guion-prensa');
+const { rutaGuion, leerRutaGuion } = cargar('lib/analisis/ruta-guion');
+const { SUELTAS, sueltasVisibles } = cargar('lib/dominio/secciones');
 const { piezaDeGaritas } = cargar('lib/analisis/nota-garitas');
 const { responderAmpliar, CACHE_AMPLIAR } = cargar('lib/analisis/ampliar');
 const { parsearCbp } = cargar('lib/garitas/cbp');
@@ -888,12 +890,62 @@ async function comprobar() {
   // Un guion, no un resumen: apertura, entrada / pase / salida por clip, cierre.
   assert.equal(g33.apertura, MARCO.apertura);
   assert.equal(g33.cierre, MARCO.cierre);
-  assert.deepEqual(Object.keys(g33.clips[0]).sort(), ['ampliable', 'eje', 'entrada', 'fuente', 'libre', 'pase', 'pregunta', 'salida', 'titular']);
+  assert.deepEqual(Object.keys(g33.clips[0]).sort(), ['ampliable', 'eje', 'entrada', 'fuente', 'libre', 'nota', 'pase', 'pregunta', 'salida', 'titular']);
+  assert.ok(g33.clips.every((c) => c.nota === null), 'solo el mixto respalda un clip con un titular');
   assert.equal(g33.clips[0].pregunta, null, 'la pregunta a la mesa es solo de Minuta Política');
 
   const pedido33 = JSON.parse(okN33.peticiones[0].opciones.body);
   assert.equal(pedido33.model, MODELO_GUION);
-  assert.equal(MODELO_GUION, 'claude-sonnet-5', 'el modelo del guion es decision de costo: cambiarlo rompe aqui a proposito');
+  assert.equal(MODELO_GUION, 'claude-sonnet-5-5', 'el modelo del guion es decision de costo: cambiarlo rompe aqui a proposito');
+  // Sonnet 5.5 (28 de septiembre de 2026): el respaldo del servidor va en
+  // cada peticion, con su cabecera, y solo para el modelo que lo acepta.
+  assert.equal(pedido33.fallbacks, 'default');
+  assert.equal(okN33.peticiones[0].opciones.headers['anthropic-beta'], 'server-side-fallback-2026-07-01');
+  assert.ok(!('thinking' in pedido33), 'sin `thinking`: el mismo cuerpo vale para el modelo de respaldo');
+
+  // --- una negativa del modelo se reintenta en el de respaldo ------------------
+  // Sonnet 5.5 puede negarse en «general_harms», que el respaldo del servidor
+  // no cubre; Estado de Alerta es nota roja. Se pide una vez a Sonnet 5.
+  const { MODELO_RESPALDO_GUION } = cargar('lib/analisis/config');
+  assert.equal(MODELO_RESPALDO_GUION, 'claude-sonnet-5');
+  const negativa = (categoria) => JSON.stringify({ content: [], stop_reason: 'refusal', stop_details: { type: 'refusal', category: categoria } });
+  function conductorNegativa(respuestas) {
+    const peticiones = [];
+    const fn = async (url, opciones) => {
+      assert.equal(String(url), 'https://api.anthropic.com/v1/messages');
+      peticiones.push(opciones);
+      const texto = respuestas[peticiones.length - 1] ?? assert.fail('una llamada de mas');
+      return respuestaFalsa(texto.startsWith('{"content":[],"stop_reason":"refusal"') ? texto : JSON.stringify({ content: [{ type: 'text', text: texto }], stop_reason: 'end_turn' }), true);
+    };
+    fn.peticiones = peticiones;
+    return fn;
+  }
+  const cNeg = conductorNegativa([negativa('general_harms'), SALIDA_N33]);
+  const rNeg = await responderGuionTikTok({ p: 'noticias33' }, cNeg, archivosGuion());
+  assert.equal(rNeg.status, 200);
+  assert.equal(rNeg.headers.get('cache-control'), CACHE_GUION_TIKTOK, 'el guion del respaldo es un guion: se guarda');
+  assert.equal((await rNeg.json()).clips.length, 3);
+  assert.equal(cNeg.peticiones.length, 2);
+  const [primeraNeg, segundaNeg] = cNeg.peticiones.map((o) => ({ cuerpo: JSON.parse(o.body), cabeceras: o.headers }));
+  assert.deepEqual([primeraNeg.cuerpo.model, segundaNeg.cuerpo.model], ['claude-sonnet-5-5', 'claude-sonnet-5']);
+  assert.ok(!('fallbacks' in segundaNeg.cuerpo) && !('anthropic-beta' in segundaNeg.cabeceras), 'Sonnet 5 no lleva el respaldo del servidor');
+  const { model: _m1, fallbacks: _f1, ...restoPrimera } = primeraNeg.cuerpo;
+  const { model: _m2, ...restoSegunda } = segundaNeg.cuerpo;
+  assert.deepEqual(restoSegunda, restoPrimera, 'el mismo pedido, palabra por palabra');
+  // Lo que el servidor ya reintento no se paga dos veces.
+  const cCyber = conductorNegativa([negativa('cyber')]);
+  assert.equal((await (await responderGuionTikTok({ p: 'noticias33' }, cCyber, archivosGuion())).json()).codigo, 'modelo');
+  assert.equal(cCyber.peticiones.length, 1);
+  // Si se niegan los dos, es un fallo, sin guardar.
+  const rDos = await responderGuionTikTok({ p: 'noticias33' }, conductorNegativa([negativa('general_harms'), negativa('general_harms')]), archivosGuion());
+  assert.equal((await rDos.json()).codigo, 'modelo');
+  assert.equal(rDos.headers.get('cache-control'), SIN_CACHE);
+  // Pedido directamente a Sonnet 5 (comparar modelos a mano), una negativa no
+  // se reintenta en si mismo.
+  const cDirecto = conductorNegativa([negativa('general_harms')]);
+  assert.equal((await (await responderGuionTikTok({ p: 'noticias33' }, cDirecto, archivosGuion(), 'claude-sonnet-5')).json()).codigo, 'modelo');
+  assert.equal(cDirecto.peticiones.length, 1);
+  assert.ok(!('anthropic-beta' in cDirecto.peticiones[0].headers));
   // La generacion 5 piensa por omision: sin esfuerzo bajo y techo alto, el
   // primer intento gasto 3,998 de 4,000 tokens pensando y salio cortado.
   assert.equal(pedido33.output_config.effort, 'low');
@@ -1438,16 +1490,42 @@ async function comprobar() {
   // --- la tarjeta y la hoja ---------------------------------------------------
   const guionTsx = fs.readFileSync(path.join(SRC, 'components/paneles/guion-locucion.tsx'), 'utf8');
   const codigoGuion = guionTsx.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
-  assert.equal(VERSION_GUION, '4', 'la copia de prensa anterior citaba medios y leia las garitas de un titular: el CDN no la sirve');
-  // Nada se pide sin pulsar: el programa nace en null y el guion solo monta
-  // con uno elegido. SWR no reintenta sola una llamada de pago.
-  assert.match(guionTsx, /useState<\{ programa: ProgramaGuion; corte: string \} \| null>\(null\)/);
-  assert.match(guionTsx, /pedido === null \? null : <GuionPrograma/);
+  assert.equal(VERSION_GUION, '5', 'cada pieza trae `nota` desde el guion mixto: la copia anterior no la tenia');
+  // Nada se pide sin elegir: sin `?p=` el programa es null y el guion solo
+  // monta con uno. SWR no reintenta sola una llamada de pago.
+  // Sin programa la pagina es la parrilla, que solo lleva enlaces: el guion
+  // no se monta y no se pide nada.
+  assert.match(guionTsx, /if \(programa === null\) return <Parrilla \/>;/);
+  const parrilla = codigoGuion.slice(codigoGuion.indexOf('function Parrilla('), codigoGuion.indexOf('function GuionMixto('));
+  assert.ok(parrilla.includes('<Link href={rutaGuion(p)}') && !parrilla.includes('GuionMixto'), 'la parrilla elige, no pide');
   assert.match(guionTsx, /shouldRetryOnError: false/);
   assert.match(guionTsx, /new URLSearchParams\(\{ v: VERSION_GUION, p: programa, g: corte \}\)/);
   assert.match(guionTsx, /`\/api\/guion-\$\{origen\}\?\$\{params\}`/);
-  assert.match(guionTsx, /corte \?\? horaActual\(\)/, 'en prensa la llave es la hora');
-  assert.ok(guionTsx.includes('Generado con IA.'));
+  // Que lo escribio una IA, arriba del guion y antes de lo que se dice
+  // (cliente, 28 de septiembre de 2026), y al pie junto a Copiar y Descargar.
+  const { ROTULO_IA, CONSEJO_IA, MATERIAL_GUION } = cargar('lib/analisis/contrato-guion');
+  assert.equal(ROTULO_IA, 'Generado con IA');
+  assert.equal(CONSEJO_IA, 'Revísalo antes de salir al aire: puede equivocarse.');
+  assert.match(MATERIAL_GUION, /^Lo escribe una IA /, 'la pagina lo dice antes de elegir programa');
+  assert.match(guionTsx, /<div className="aparicion-suave guion">[\s\S]{0,200}<div role="note"[^>]*>\s*<p[^>]*>\s*<IA size=\{16\} aria-hidden \/>\s*\{ROTULO_IA\}\s*<\/p>\s*<p[^>]*>\{CONSEJO_IA\}<\/p>\s*<\/div>\s*<Parlamento rotulo="Apertura"/, 'el aviso va antes de la apertura');
+  assert.match(guionTsx, /<footer className="guion-pie">[\s\S]*<p>\{ROTULO_IA\}\.<\/p>[\s\S]*Descargar en Word[\s\S]*<\/footer>/, 'al pie, junto a Copiar y Descargar');
+
+  // --- el pulido del 28 de septiembre de 2026 (cliente) ----------------------
+  // Sin cursivas; «Desarrollar con IA», con los destellos, en vez de
+  // «Ampliar»; las fuentes son enlaces de texto y no pastillas.
+  assert.doesNotMatch(guionTsx, /\bitalic\b/, 'el pase ya no va en cursivas');
+  assert.match(guionTsx, /<button type="button" className="guion-accion-ia" onClick=\{ampliada\.pedir\}\s*title="La IA lee la nota completa y reescribe esta entrada con más detalle">\s*<IA size=\{16\} aria-hidden \/>\s*Desarrollar con IA\s*<\/button>/);
+  assert.doesNotMatch(guionTsx, />\s*Ampliar\s*</, 'el boton ya no dice «Ampliar»');
+  assert.ok(guionTsx.includes('" · desarrollada con IA"'));
+  assert.ok(guionTsx.includes('<EstadoCarga etiqueta="La IA está leyendo la nota completa" />'));
+  assert.match(guionTsx, /const CLASES_FUENTE = "guion-enlace";/);
+  assert.match(guionTsx, /<span className="guion-numero" aria-hidden>\{String\(n\)\.padStart\(2, "0"\)\}<\/span>/, 'el numero de la escaleta, en su columna');
+  assert.ok(fs.readFileSync(path.join(SRC, 'lib/analisis/ampliar.ts'), 'utf8').includes('const NO_SE_PUDO = "No se pudo desarrollar la nota.";'), 'el servidor dice la misma palabra');
+  const cssGuion = fs.readFileSync(path.join(SRC, 'app/globals.css'), 'utf8');
+  assert.match(cssGuion, /\.guion-pieza \{[^}]*grid-template-columns: 2rem minmax\(0, 1fr\);/);
+  assert.match(cssGuion, /\.guion-dicho \{[^}]*max-width: 65ch;/, 'lo dicho a medida de lectura');
+  assert.match(cssGuion, /\.guion-accion-ia \{[^}]*min-height: 2\.75rem;/, '44px de blanco de toque');
+  assert.ok(guionTsx.includes('<EstadoCarga etiqueta="La IA está escribiendo el guion" />'));
   assert.match(guionTsx, /rotulo="Apertura"/);
   assert.match(guionTsx, /rotulo="Cierre"/);
   assert.match(guionTsx, /rotulo="A la mesa"/);
@@ -1463,37 +1541,540 @@ async function comprobar() {
   // Ampliar: una nota por pulsacion, nunca sola, sin reintentos, y la ampliada
   // es la que se copia y se descarga.
   assert.match(guionTsx, /useSWRImmutable<RespuestaAmpliada>\(\s*pedida \? llave : null, pedirAmpliada, \{ shouldRetryOnError: false \}\)/);
-  assert.match(guionTsx, /`\/api\/ampliar-nota\?\$\{new URLSearchParams\(\{ v: VERSION_GUION, p: programa, u: a\.url, d: a\.dominio, m: clip\.fuente\.fuente, t: a\.titulo \}\)\}`/);
+  assert.match(guionTsx, /`\/api\/ampliar-nota\?\$\{new URLSearchParams\(\{ v: VERSION_GUION, p: programa, u: a\.url, d: a\.dominio, m: clip\.nota\?\.fuente \?\? clip\.fuente\.fuente, t: a\.titulo \}\)\}`/);
   assert.match(guionTsx, /clip\.ampliable === null \|\| ampliada\.estado === "listo" \|\| ampliada\.estado === "cargando" \? null/);
   assert.match(guionTsx, /const entrada = ampliada\.entrada \?\? clip\.entrada;/);
-  // Descargar: el mismo texto que Copiar, en un .txt con BOM, sin el nombre del
-  // medio, y con lo que se ve: la nota de garitas y las ampliadas.
+  // Copiar y Descargar: la misma estructura, sin el nombre del medio, y con
+  // lo que se ve: la nota de garitas y las ampliadas. Descargar es un Word
+  // desde el 28 de septiembre de 2026 (cliente); hasta entonces, un .txt.
   assert.match(guionTsx, /onClick=\{\(\) => descargar\(compuesto\(\)\)\}/);
-  assert.match(guionTsx, /<BotonCopiar texto=\{\(\) => textoPlano\(compuesto\(\)\)\} \/>/);
-  assert.match(guionTsx, /new Blob\(\["\\uFEFF", textoPlano\(guion\)/);
-  assert.match(guionTsx, /\.download = `guion-\$\{nombre\}-/);
-  assert.match(codigoGuion, /\[ENLACE: \$\{enlaceEntero\(c\.fuente\.url\)\}\]/);
+  assert.match(guionTsx, /<BotonCopiar texto=\{\(\) => textoPlano\(seccionesDelGuion\(compuesto\(\), enlaceEntero\)\)\} \/>/);
+  assert.match(guionTsx, /new Blob\(\[documentoWord\(seccionesDelGuion\(guion, enlaceEntero\), FECHA_DOCUMENTO\.format\(hoy\)\)\], \{ type: TIPO_DOCX \}\)/);
+  assert.match(guionTsx, /\.download = `guion-\$\{nombre\}-\$\{FECHA_ARCHIVO\.format\(hoy\)\}\.docx`/);
+  assert.match(guionTsx, /Descargar en Word/);
+  assert.doesNotMatch(codigoGuion, /\\uFEFF|text\/plain|\.txt`/, 'ya no es un .txt');
+  assert.doesNotMatch(codigoGuion, /function textoPlano/, 'una sola estructura, en documento-guion.ts');
   assert.doesNotMatch(codigoGuion, /\[FUENTE:/, 'el texto de prensa no cita medios');
-  assert.ok(!/%|por ciento/.test(guionTsx.replace(/max-w-\[\d+ch\]/g, '')), 'la tarjeta no imprime porcentajes');
+
+  // --- el documento: una estructura, dos formas ------------------------------
+  const { seccionesDelGuion, textoPlano, documentoWord, TIPO_DOCX, VACIO_GUION } = cargar('lib/analisis/documento-guion');
+  const { XMLValidator } = require('fast-xml-parser');
+  const zlib = require('node:zlib');
+  assert.equal(TIPO_DOCX, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+  const piezaDoc = (extra) => ({ eje: 'Coyuntura local · Agua', libre: false, titular: 'Tandeos de agua & obras', entrada: 'Se informa que habrá tandeos.',
+    pase: 'Veamos lo que se publicó.', salida: 'Lo llevamos a la mesa.', pregunta: null, fuente: { url: 'https://www.tiktok.com/@creador/video/7001', fuente: '@creador' },
+    ampliable: null, nota: null, ...extra });
+  const GUION_DOC = { origen: 'mixto', programa: 'minutapolitica', apertura: 'Bienvenidos a Minuta Política.', cierre: 'Gracias.', faltantes: ['Coyuntura nacional'], sinLeer: ['Facebook'], leidos: 9,
+    clips: [
+      piezaDoc({ eje: 'Garitas', titular: 'Tiempos de espera', entrada: 'Así están los cruces.', pase: null, salida: 'Pasamos a otras noticias.', fuente: { url: '/garitas', fuente: 'Garitas' } }),
+      piezaDoc({ pregunta: '¿A quién afectan?', nota: { url: 'https://www.elimparcial.com/n?id=1&x=2', fuente: 'El Imparcial' } }),
+      piezaDoc({ eje: 'Coyuntura local · Tráfico', libre: true, titular: 'Choque', entrada: 'Circula en redes que hubo un choque.', fuente: { url: 'https://www.facebook.com/reel/1', fuente: 'Blanco y Negro Noticias' } }),
+    ] };
+  const seccionesDoc = seccionesDelGuion(GUION_DOC, (u) => new URL(u, 'https://pulso.test').href);
+  // El texto de Copiar no cambio de forma al mudarse: corchetes, rayas entre
+  // secciones, el enlace sin el nombre del medio.
+  assert.equal(textoPlano(seccionesDoc), [
+    'Minuta Política\n\n[Generado con IA. Revísalo antes de salir al aire: puede equivocarse.]',
+    '[APERTURA]\n\nBienvenidos a Minuta Política.',
+    'NOTA 1 · Garitas · Tiempos de espera\n\nAsí están los cruces.\n\nPasamos a otras noticias.\n\n[ENLACE: https://pulso.test/garitas]',
+    'CLIP 2 · Coyuntura local · Agua · Tandeos de agua & obras\n\nSe informa que habrá tandeos.\n\nVeamos lo que se publicó.\n\n[CLIP: @creador https://www.tiktok.com/@creador/video/7001]\n\nLo llevamos a la mesa.\n\n[A LA MESA]\n\n¿A quién afectan?\n\n[ENLACE: https://www.elimparcial.com/n?id=1&x=2]',
+    'CLIP 3 · Coyuntura local · Tráfico · libre · Choque\n\n[SIN NOTA DE PRENSA]\n\nCircula en redes que hubo un choque.\n\nVeamos lo que se publicó.\n\n[CLIP: Blanco y Negro Noticias https://www.facebook.com/reel/1]\n\nLo llevamos a la mesa.',
+    '[CIERRE]\n\nGracias.',
+    'Sin publicaciones ni notas hoy: Coyuntura nacional.',
+    'No se pudieron leer: Facebook.',
+  ].join('\n\n---\n\n'));
+  assert.equal(VACIO_GUION.mixto, 'Sin publicaciones ni notas hoy');
+  assert.match(guionTsx, /\{VACIO_GUION\[guion\.origen\]\}: \{guion\.faltantes\.join\(", "\)\}\./, 'la pantalla dice el hueco con las mismas palabras');
+  assert.doesNotMatch(textoPlano(seccionesDelGuion({ ...GUION_DOC, origen: 'redes' }, (u) => u)), /SIN NOTA DE PRENSA/, 'solo el mixto tiene notas que faltar');
+
+  // El Word: un zip sin comprimir de cinco XML. Se abre aqui a mano, como lo
+  // abre Word, y se verifica cada CRC y cada XML.
+  function abrirZip(bytes) {
+    const b = Buffer.from(bytes);
+    const archivos = new Map();
+    let i = 0;
+    while (b.readUInt32LE(i) === 0x04034b50) {
+      assert.equal(b.readUInt16LE(i + 8), 0, 'sin comprimir');
+      const crc = b.readUInt32LE(i + 14), largo = b.readUInt32LE(i + 18), largoNombre = b.readUInt16LE(i + 26);
+      const nombre = b.subarray(i + 30, i + 30 + largoNombre).toString('utf8');
+      const datos = b.subarray(i + 30 + largoNombre, i + 30 + largoNombre + largo);
+      assert.equal(zlib.crc32(datos), crc, `CRC de ${nombre}`);
+      archivos.set(nombre, datos.toString('utf8'));
+      i += 30 + largoNombre + largo;
+    }
+    const fin = b.length - 22;
+    assert.equal(b.readUInt32LE(fin), 0x06054b50, 'el fin del directorio central');
+    assert.equal(b.readUInt16LE(fin + 10), archivos.size);
+    assert.equal(b.readUInt32LE(fin + 16), i, 'el directorio central empieza donde terminan los archivos');
+    return archivos;
+  }
+  const word = documentoWord(seccionesDoc, '28 de septiembre de 2026');
+  assert.ok(word instanceof Uint8Array);
+  const partesWord = abrirZip(word);
+  assert.deepEqual([...partesWord.keys()], ['[Content_Types].xml', '_rels/.rels', 'word/document.xml', 'word/_rels/document.xml.rels', 'word/styles.xml']);
+  for (const [nombre, contenido] of partesWord) assert.equal(XMLValidator.validate(contenido), true, `${nombre} es XML valido`);
+  const docXml = partesWord.get('word/document.xml');
+  const relXml = partesWord.get('word/_rels/document.xml.rels');
+  assert.match(docXml, /<w:pStyle w:val="Title"\/><\/w:pPr><w:r><w:t xml:space="preserve">Minuta Política<\/w:t>/);
+  assert.match(docXml, /Minuta Política<\/w:t><\/w:r><\/w:p><w:p><w:pPr><w:pStyle w:val="NotaEquipo"\/><\/w:pPr><w:r><w:t xml:space="preserve">Guion para locución · 28 de septiembre de 2026<\/w:t><\/w:r><\/w:p><w:p><w:pPr><w:pStyle w:val="AvisoIA"\/><\/w:pPr><w:r><w:t xml:space="preserve">Generado con IA\. Revísalo antes de salir al aire: puede equivocarse\.<\/w:t>/, 'bajo el titulo, la fecha y despues el aviso de IA, en su estilo');
+  assert.match(partesWord.get('word/styles.xml'), /w:styleId="AvisoIA"><w:name w:val="Aviso de IA"\/>[\s\S]*?<w:rPr><w:b\/>/, 'el aviso va en negritas');
+  assert.ok(docXml.includes('Tandeos de agua &amp; obras'), 'el & escapado');
+  assert.match(docXml, /<w:pStyle w:val="Heading2"\/><\/w:pPr><w:r><w:t xml:space="preserve">CLIP 2 · Coyuntura local/, 'la escaleta es «Título 2»: el panel de navegacion lista las piezas');
+  assert.match(docXml, /<w:pStyle w:val="Pase"\/><\/w:pPr><w:r><w:t xml:space="preserve">Veamos lo que se publicó\.<\/w:t>/);
+  assert.match(docXml, /<w:pStyle w:val="Acotacion"\/><\/w:pPr><w:r><w:t xml:space="preserve">\[SIN NOTA DE PRENSA\]<\/w:t>/);
+  assert.match(docXml, /<w:p><w:r><w:t xml:space="preserve">Se informa que habrá tandeos\.<\/w:t><\/w:r><\/w:p>/, 'lo dicho va en Normal');
+  const enlacesDoc = [...docXml.matchAll(/<w:hyperlink r:id="(rIdEnlace\d+)"/g)].map((m) => m[1]);
+  assert.equal(enlacesDoc.length, 4, 'garitas, el clip, su nota y el otro clip');
+  for (const id of enlacesDoc) assert.ok(relXml.includes(`Id="${id}"`), `${id} tiene relacion`);
+  assert.ok(relXml.includes('Target="https://www.elimparcial.com/n?id=1&amp;x=2" TargetMode="External"'), 'el & del enlace, escapado en la relacion');
+  assert.ok(relXml.includes('Target="https://pulso.test/garitas"'), 'la ruta nuestra, entera');
+  assert.match(partesWord.get('word/styles.xml'), /<w:lang w:val="es-MX"/, 'Word revisa la ortografia en español');
+  assert.deepEqual(documentoWord(seccionesDoc, '28 de septiembre de 2026'), word, 'la misma entrada da los mismos bytes');
+  const sucio = documentoWord([[{ tipo: 'dicho', texto: 'Un pie con \u0007 control y <etiqueta>' }]], 'x');
+  const sucioXml = abrirZip(sucio).get('word/document.xml');
+  assert.equal(XMLValidator.validate(sucioXml), true, 'un control que XML no admite se quita');
+  assert.ok(sucioXml.includes('Un pie con  control y &lt;etiqueta&gt;'));
+  assert.ok(!/%|por ciento/.test(guionTsx.replace(/max-w-\[\d+ch\]|\[font-stretch:\d+%\]/g, '')), 'la tarjeta no imprime porcentajes');
   assert.doesNotMatch(codigoGuion, /Claude|Anthropic|Apify|Google|noticias internacionales/);
-  // En la pestana TikTok, nunca en la busqueda por texto, primero y del alto
-  // de su contenido.
+  // === /api/guion-redes: el guion de /redes ================================
+  //
+  // 25 de septiembre de 2026: el cliente pidio en /redes el boton de la
+  // portada, «para TikTok, Instagram, Facebook, y YouTube solo si tiene muchas
+  // vistas». Reemplazo a la tarjeta de la pestana TikTok. Lo que se fija: el
+  // umbral de YouTube por formato, el orden de «populares» entre redes, que el
+  // modelo lee solo la primera linea, y que una red sin leer se dice.
+  const { responderGuionRedes, publicacionesParaGuion, muyVisto, MINIMO_VISTAS, CACHE_GUION_REDES, ritmo, cosechaVigente, HORAS_GUION_REDES, GRAVEDAD_RITMO } = cargar('lib/analisis/guion-redes');
+  assert.deepEqual(MINIMO_VISTAS, { video: 5000, short: 10000 }, 'un Short cuenta cualquier arranque: su umbral es otro');
+  assert.equal(muyVisto({ formato: 'short', reproducciones: 9999 }), false);
+  assert.equal(muyVisto({ formato: 'short', reproducciones: 10000 }), true);
+  assert.equal(muyVisto({ formato: 'video', reproducciones: 5000 }), true);
+  assert.equal(muyVisto({ formato: 'video' }), false, 'sin vistas no se afirma que se vio');
+  assert.equal(muyVisto({ reproducciones: 99999 }), false, 'sin formato no hay umbral');
+
+  const base = { fecha: '2026-09-25', publicado: '2026-09-25T12:00:00Z', tipo: 'video', comentarios: 3, cosechados: 0, opinion: 0,
+    sentimiento: { positivo: 0, negativo: 0, neutral: 0, sin_clasificar: 0, sin_modelo_idioma: 0 }, temas: [] };
+  const DOCS_REDES = {
+    'tiktok.json': { plataforma: 'tiktok', generado: '2026-09-25T14:00:00+00:00', cuentas: [], destacados: [
+      { ...base, url: 'https://www.tiktok.com/@creador/video/7001/', cuenta: 'tk_tj', creador: '@creador', zona: 'Tijuana', likes: 900, titulo: 'Choque en el bulevar Agua Caliente' },
+      { ...base, url: 'https://www.tiktok.com/@creador/video/7002/', cuenta: 'tk_mx', creador: '@creador', zona: 'nacional', likes: 800, titulo: 'La presidenta recibe al presidente de Corea en Palacio Nacional' },
+      { ...base, url: 'https://www.tiktok.com/@creador/video/7003/', cuenta: 'tk_mx', creador: '@creador', zona: 'nacional', likes: 100, titulo: 'Nueva ley de California sobre rentas' },
+    ] },
+    'redes.json': { plataforma: 'instagram', generado: '2026-09-25T14:00:00+00:00', cuentas: [{ cuenta: 'ig_tj', nombre: 'Tijuana Informa' }], destacados: [
+      { ...base, url: 'https://www.instagram.com/p/POSTA1/', cuenta: 'ig_tj', zona: 'Tijuana', likes: 500, titulo: 'Tiroteo en la Zona Norte' },
+      { ...base, url: 'https://www.instagram.com/p/POSTA2/', cuenta: 'ig_tj', zona: 'nacional', likes: 50, titulo: 'Concierto gratis en el estadio' },
+      { ...base, url: 'https://www.instagram.com/p/POSTA3/', cuenta: 'ig_tj', zona: 'Tijuana', likes: 40, titulo: '   ' },
+    ] },
+    'facebook.json': { plataforma: 'facebook', generado: '2026-09-25T14:00:00+00:00', cuentas: [{ cuenta: 'fb_tj', nombre: 'Noticias de Tijuana' }], destacados: [
+      { ...base, url: 'https://www.facebook.com/noticiastj/posts/9001', cuenta: 'fb_tj', zona: 'Tijuana', likes: 300, titulo: 'Bacheo en la colonia Otay' },
+    ] },
+    'youtube.json': { plataforma: 'youtube', generado: '2026-09-25T14:00:00+00:00', cuentas: [{ cuenta: 'yt_nmas', nombre: 'N+' }], destacados: [
+      { ...base, url: 'https://www.youtube.com/shorts/SHORT000001', cuenta: 'yt_nmas', zona: 'estatal', formato: 'short', reproducciones: 20000, valoraciones: 10, titulo: 'Huracán avanza hacia Baja California' },
+      { ...base, url: 'https://www.youtube.com/watch?v=VIDEO000002', cuenta: 'yt_nmas', zona: 'Tijuana', formato: 'video', reproducciones: 4000, valoraciones: 10, titulo: 'Video poco visto en Tijuana' },
+      { ...base, url: 'https://www.youtube.com/shorts/SHORT000003', cuenta: 'yt_nmas', zona: 'Tijuana', formato: 'short', reproducciones: 9000, valoraciones: 10, titulo: 'Short poco visto en Tijuana' },
+    ] },
+    // Los archivos de texto AL LADO, para probar que el guion no los lee.
+    'tiktok-comentarios.json': { por_post: {} }, 'redes-comentarios.json': { por_post: {} },
+  };
+  function archivosRedes(faltan = []) {
+    const leidos = [];
+    const fn = async (nombre) => { leidos.push(nombre); return faltan.includes(nombre) ? null : DOCS_REDES[nombre] ?? null; };
+    fn.leidos = leidos;
+    return fn;
+  }
+
+  // El orden de «populares»: el puesto dentro de cada red, intercalado, y
+  // TikTok, Instagram, Facebook, YouTube para desempatar. No las cifras: 900
+  // likes de TikTok no le ganan a 20,000 vistas de YouTube ni al reves.
+  const { videos: poolRedes, leidas, hasta: hastaRedes } = await publicacionesParaGuion(archivosRedes(), AHORA_G);
+  assert.deepEqual(leidas, ['tiktok', 'instagram', 'facebook', 'youtube']);
+  assert.equal(hastaRedes, '2026-09-25T14:00:00+00:00');
+  assert.deepEqual(poolRedes.map((v) => v.titulo), [
+    'Choque en el bulevar Agua Caliente', 'Tiroteo en la Zona Norte', 'Bacheo en la colonia Otay', 'Huracán avanza hacia Baja California',
+    'La presidenta recibe al presidente de Corea en Palacio Nacional', 'Concierto gratis en el estadio',
+    'Nueva ley de California sobre rentas',
+  ], 'primeros de cada red, luego segundos; sin YouTube poco visto y sin pie vacio');
+  assert.deepEqual(poolRedes.map((v) => v.fuente).slice(0, 4), ['@creador', 'Tijuana Informa', 'Noticias de Tijuana', 'N+']);
+  assert.equal(poolRedes[3].url, 'https://www.youtube.com/watch?v=SHORT000001', 'canonica: el Short por su id');
+  // Un pie que reglas.ts no deja decir no llega al modelo, sea la regla 2 o la
+  // 1: el primer guion real copio «llama a la ciudadanía a denunciar».
+  const { decible } = cargar('lib/analisis/guion');
+  assert.equal(decible({ titulo: 'Alcalde de Tecate llama a la ciudadanía a denunciar extorsiones' }), false);
+  assert.equal(decible({ titulo: 'Sentri concentra casi la mitad de los cruces' }), false);
+  assert.equal(decible({ titulo: 'Alcalde de Tecate llama a denunciar extorsiones' }), true);
+
+  // --- lo de hoy, contado desde ahora ---------------------------------------
+  // 28 de septiembre de 2026: a las 3:05 pm el guion leia la cosecha de las
+  // 6:56 am, y las mas votadas eran de anoche. Una publicacion de hace mas de
+  // 24 horas no entra; una red con la cosecha de hace mas de 12, tampoco.
+  assert.equal(HORAS_GUION_REDES, 24);
+  assert.equal(cosechaVigente('2026-09-25T06:00:00Z', AHORA_G), true, 'doce horas justas: vigente');
+  assert.equal(cosechaVigente('2026-09-25T05:59:00Z', AHORA_G), false);
+  assert.equal(cosechaVigente('g-tk', AHORA_G), false, 'un generado ilegible no se afirma vigente');
+  assert.equal(cosechaVigente(undefined, AHORA_G), false);
+  const conFechas = (cambios) => {
+    const docs = JSON.parse(JSON.stringify(DOCS_REDES));
+    cambios(docs);
+    return async (nombre) => docs[nombre] ?? null;
+  };
+  const viejas = await publicacionesParaGuion(conFechas((d) => {
+    d['tiktok.json'].destacados[0].publicado = '2026-09-24T17:59:00Z';
+    delete d['redes.json'].destacados[0].publicado;
+    d['facebook.json'].generado = '2026-09-25T05:00:00Z';
+  }), AHORA_G);
+  assert.deepEqual(viejas.leidas, ['tiktok', 'instagram', 'youtube'], 'Facebook de hace 13 horas no se lee');
+  assert.ok(!viejas.videos.some((v) => v.titulo === 'Choque en el bulevar Agua Caliente'), 'de hace 24 horas y un minuto: fuera');
+  assert.ok(!viejas.videos.some((v) => v.titulo === 'Tiroteo en la Zona Norte'), 'sin publicado no se afirma que sea de hoy');
+  assert.ok(!viejas.videos.some((v) => v.titulo === 'Bacheo en la colonia Otay'));
+  const soloViejas = await publicacionesParaGuion(conFechas((d) => {
+    for (const doc of Object.values(d)) if (doc.generado) doc.generado = '2026-09-24T18:00:00Z';
+  }), AHORA_G);
+  assert.deepEqual([soloViejas.leidas, soloViejas.videos, soloViejas.hasta], [[], [], null], 'ninguna red vigente: nada que leer');
+  // `hasta` es la cosecha mas vieja de las leidas.
+  const hastaMezcla = await publicacionesParaGuion(conFechas((d) => { d['redes.json'].generado = '2026-09-25T13:00:00Z'; }), AHORA_G);
+  assert.equal(hastaMezcla.hasta, '2026-09-25T13:00:00Z');
+
+  // --- el ritmo: merito por hora al cosecharse -------------------------------
+  assert.equal(GRAVEDAD_RITMO, 1.5);
+  assert.equal(ritmo(80, 0), 80 / Math.pow(2, 1.5), 'dos horas de gracia');
+  assert.equal(ritmo(80, -1), ritmo(80, 0), 'publicado despues de la cosecha cuenta como recien salido');
+  assert.ok(ritmo(300, 2) > ritmo(900, 20), '300 likes en dos horas le ganan a 900 en veinte');
+  assert.ok(ritmo(9000, 20) > ritmo(300, 2), 'lo muy votado de anoche sigue arriba si de verdad se movio');
+  const porRitmo = await publicacionesParaGuion(conFechas((d) => {
+    d['tiktok.json'].destacados[0].publicado = '2026-09-25T02:00:00Z';
+    d['tiktok.json'].destacados[1].publicado = '2026-09-25T13:00:00Z';
+  }), AHORA_G);
+  assert.deepEqual(porRitmo.videos.filter((v) => v.fuente === '@creador').map((v) => v.titulo), [
+    'La presidenta recibe al presidente de Corea en Palacio Nacional', 'Choque en el bulevar Agua Caliente', 'Nueva ley de California sobre rentas',
+  ], '800 likes en una hora le ganan a 900 en doce');
+  assert.equal(porRitmo.videos[0].titulo, 'La presidenta recibe al presidente de Corea en Palacio Nacional', 'el primero de TikTok sigue abriendo el intercalado');
+
+  // --- el camino bueno ------------------------------------------------------
+  // Numeracion de Noticias 33 sobre el pool: [1] choque (tijuana), [2] tiroteo
+  // (tijuana), [3] bacheo (tijuana), [4] la presidenta, [5] la ley de
+  // California. El huracan dice Baja California: no es California.
+  const pieza = (eje, video, entrada, libre = false) =>
+    ({ eje, libre, video, titular: 'Escaleta', entrada, pase: 'Veamos lo que circula.', salida: 'Seguimos.' });
+  const SALIDA_REDES = guionDe([
+    pieza('tijuana', 2, 'Se reporta un tiroteo en la Zona Norte.'),
+    pieza('presidenta', 4, 'La presidenta recibe al presidente de Corea en Palacio Nacional.'),
+    pieza('california', 5, 'Se informa de una nueva ley de rentas en California.'),
+    pieza('tijuana', 3, 'Se reporta bacheo en la colonia Otay.', true),
+  ]);
+  const okRedes = conductorGuion(SALIDA_REDES);
+  const archRedes = archivosRedes();
+  r = await responderGuionRedes({ p: 'noticias33' }, okRedes, AHORA_G, archRedes);
+  assert.equal(r.status, 200);
+  assert.equal(r.headers.get('cache-control'), CACHE_GUION_REDES);
+  assert.match(CACHE_GUION_REDES, /s-maxage=21600/, 'seis horas: el ciclo del cron');
+  assert.equal(okRedes.peticiones.length, 1, 'UNA sola salida de red, y es el modelo');
+  assert.deepEqual([...archRedes.leidos].sort(), ['facebook.json', 'redes.json', 'tiktok.json', 'youtube.json'], 'las cuatro redes, y ningun archivo de comentarios');
+  const gRedes = await r.json();
+  assert.equal(gRedes.origen, 'redes');
+  assert.equal(gRedes.hasta, '2026-09-25T14:00:00+00:00', 'la pagina dice hasta cuando llegan las publicaciones');
+  assert.deepEqual(gRedes.clips.map((c) => [c.eje, c.libre, c.fuente.fuente]), [
+    ['Información de Tijuana', false, 'Tijuana Informa'], ['Mañanera de la presidenta', false, '@creador'],
+    ['Información de California', false, '@creador'], ['Información de Tijuana', true, 'Noticias de Tijuana'],
+  ], 'el clip lleva su cuenta para el equipo, aunque el guion no la diga');
+  assert.equal(gRedes.clips[0].fuente.url, 'https://www.instagram.com/p/POSTA1/');
+  assert.ok(gRedes.clips.every((c) => c.pase !== null), 'en redes las piezas son clips');
+  assert.deepEqual(gRedes.sinLeer, []);
+  const pedRedes = JSON.parse(okRedes.peticiones[0].opciones.body);
+  const contRedes = pedRedes.messages[0].content;
+  assert.ok(contRedes.startsWith('Publicaciones, de la más popular a la menos popular:\n[1] Choque en el bulevar Agua Caliente\n[2] Tiroteo en la Zona Norte'), contRedes);
+  assert.ok(contRedes.includes('- tijuana: 1, 2, 3\n- presidenta: 4\n- california: 5'), 'los candidatos de cada eje');
+  assert.doesNotMatch(contRedes, /https?:\/\/|@creador|Tijuana Informa|Noticias de Tijuana|N\+/, 'ni enlaces ni cuentas: lo que no lee no lo dice');
+  assert.ok(!contRedes.includes('poco visto'), 'YouTube poco visto no llega');
+  assert.match(pedRedes.system, /clips de publicaciones de redes sociales/);
+  assert.match(pedRedes.system, /NO has visto ninguna publicación/);
+  assert.match(pedRedes.system, /`video` es el número de la publicación/);
+  assert.match(pedRedes.system, /`pase`: una sola frase corta que da paso al clip/);
+  // «la ciudadania» esta en reglas.ts y faltaba en el prompt: el primer guion
+  // real de /redes la copio de un pie y se perdio despues de pagarlo.
+  assert.match(pedRedes.system, /«la ciudadanía»/);
+  assert.doesNotMatch(pedRedes.system, /videos de TikTok, numerados/, 'no es el prompt de solo TikTok');
+  assert.ok('video' in pedRedes.output_config.format.schema.properties.clips.items.properties);
+
+  // --- una red sin leer se dice, y no se guarda seis horas ------------------
+  // Sin Facebook la lista se corre: [1] choque, [2] tiroteo, [3] la
+  // presidenta, [4] la ley de California.
+  const SALIDA_SIN_FB = guionDe([
+    pieza('tijuana', 2, 'Se reporta un tiroteo en la Zona Norte.'),
+    pieza('presidenta', 3, 'La presidenta recibe al presidente de Corea en Palacio Nacional.'),
+    pieza('california', 4, 'Se informa de una nueva ley de rentas en California.'),
+    pieza('tijuana', 1, 'Se reporta un choque en el bulevar Agua Caliente.', true),
+  ]);
+  r = await responderGuionRedes({ p: 'noticias33' }, conductorGuion(SALIDA_SIN_FB), AHORA_G, archivosRedes(['facebook.json']));
+  const gSinFb = await r.json();
+  assert.deepEqual(gSinFb.sinLeer, ['Facebook'], '«No se pudieron leer: Facebook», no un eje vacio');
+  assert.equal(r.headers.get('cache-control'), SIN_CACHE);
+  assert.equal((await (await responderGuionRedes({ p: 'noticias33' }, nunca, AHORA_G,
+    archivosRedes(['tiktok.json', 'redes.json', 'facebook.json', 'youtube.json']))).json()).codigo, 'datos');
+  // Todas vencidas es lo mismo que todas sin leer: nada de hace dias al aire.
+  assert.equal((await (await responderGuionRedes({ p: 'noticias33' }, nunca, '2026-09-27T18:00:00.000Z', archivosRedes())).json()).codigo, 'datos');
+  delete process.env.ANALISIS_HABILITADO;
+  assert.equal((await (await responderGuionRedes({ p: 'noticias33' }, nunca, AHORA_G, archivosRedes())).json()).codigo, 'apagado');
+  process.env.ANALISIS_HABILITADO = 'true';
+  assert.equal((await (await responderGuionRedes({ p: 'otro' }, nunca, AHORA_G, async () => assert.fail('no debia leer'))).json()).codigo, 'programa');
+  // Entretenimiento: el concierto de Instagram es el unico candidato.
+  const okEntretenimiento = conductorGuion(guionDe([{ tema: 'Concierto', video: 1, titular: 'Concierto gratis', entrada: 'Se anuncia un concierto gratis en el estadio.', pase: 'Veamos.', salida: 'Y seguimos.' }]));
+  const gRedRed = await (await responderGuionRedes({ p: 'deredenred' }, okEntretenimiento, AHORA_G, archivosRedes())).json();
+  assert.deepEqual(gRedRed.clips.map((c) => [c.eje, c.fuente.url]), [['Concierto', 'https://www.instagram.com/p/POSTA2/']]);
+
+  // === /api/guion-mixto: las redes con los titulares que cuentan lo mismo ===
+  //
+  // Del 28 de septiembre de 2026, el unico guion que pide la pantalla. Lo que
+  // se fija: que el emparejamiento por palabras solo PROPONE (y propone pares
+  // falsos, que es por lo que no decide); que el modelo solo puede juntar un
+  // titular propuesto para esa publicacion y dejar solo un titular que el
+  // programa eligio; que un clip sin nota entra marcado; que la unica salida
+  // de red son Google y el modelo; y que el prompt dice EL MISMO HECHO y no
+  // deja decir que la prensa confirma.
+  const { responderGuionMixto, parejasDe, armarPlanMixto, archivoReciente, CACHE_GUION_MIXTO, PAREJAS_POR_PUBLICACION, HORAS_PAREJA } = cargar('lib/analisis/guion-mixto');
+  assert.equal(PAREJAS_POR_PUBLICACION, 3);
+  assert.equal(HORAS_PAREJA, 48);
+  assert.equal(CACHE_GUION_MIXTO, 'public, max-age=0, s-maxage=3600', 'una hora, como prensa, y sin revalidar en segundo plano');
+
+  // --- el emparejamiento propone, y propone mal -------------------------------
+  // El caso medido: «transporte público» empareja el tiroteo de Macro Plaza con
+  // una nota de tarifas. Las dos pasan el umbral; decidir es del modelo.
+  const pz = (url, titulo, fuente = 'Medio') => ({ url, fuente, titulo });
+  const frecuenciasFalsas = { total: 1000, df: (t) => ({ tijuana: 300, contra: 80, publico: 60, transporte: 40, lluvias: 20 })[t] ?? 1 };
+  const MACRO = pz('https://t/macro', 'Dispara contra cafetería en Macro Plaza y termina detenido en transporte público', 'Blanco y Negro Noticias');
+  const POOL_P = [
+    pz('https://n/tarifas', 'Usuarios exigen a IMOS mejorar transporte público y tarifas'),
+    pz('https://n/cafeteria', 'Detienen a hombre tras ataque armado contra cafetería en Tijuana'),
+    pz('https://n/lluvia', 'Lluvias en Tijuana este lunes'),
+  ];
+  assert.deepEqual(parejasDe([MACRO], POOL_P, frecuenciasFalsas)[MACRO.url], ['https://n/cafeteria', 'https://n/tarifas'],
+    'las dos pasan, la verdadera primero: el par falso tambien se propone');
+  assert.deepEqual(parejasDe([pz('https://t/l', 'Lluvias fuertes')], POOL_P, frecuenciasFalsas)['https://t/l'], [], 'un termino en comun no alcanza');
+  const muchos = Array.from({ length: 6 }, (_, i) => pz(`https://n/${i}`, `Cafetería Macro Plaza, versión ${i}`));
+  assert.equal(parejasDe([MACRO], muchos, frecuenciasFalsas)[MACRO.url].length, 3, 'tres posibles, no mas');
+
+  // --- el archivo cuenta como cobertura 48 horas, y solo lo que se puede decir -
+  const notaArchivo = (id, titulo, horas, extra = {}) => ({
+    id, titulo, url: `https://www.elimparcial.com/tijuana/${id}/`, dominio: 'elimparcial.com', fuente: 'imparcial',
+    capturado: AHORA_G, publicado: new Date(Date.parse(AHORA_G) - horas * 3600e3).toISOString(), fecha: AHORA_G.slice(0, 10),
+    zonas: ['Tijuana'], alcance: 'zona', figuras: [], postura: null, imagen: null, ...extra,
+  });
+  // Relleno para que la rareza se mida sobre un archivo de verdad: «tijuana»
+  // esta en todas y no empareja nada.
+  const RELLENO_ARCHIVO = Array.from({ length: 60 }, (_, i) => notaArchivo(`r${i}`, `Obras de pavimentación número ${i} en Tijuana`, 200));
+  const ARCHIVO_MIXTO = [
+    notaArchivo('choque', 'Choque en el bulevar Agua Caliente deja dos heridos', 5),
+    notaArchivo('viejo', 'Choque en el bulevar Agua Caliente, hace tres días', 72),
+    notaArchivo('ciudadania', 'Piden a la ciudadanía evitar el bulevar Agua Caliente', 3),
+    ...RELLENO_ARCHIVO,
+  ];
+  const indicesMixto = construirIndices(ARCHIVO_MIXTO);
+  const recientes = archivoReciente(indicesMixto, null, AHORA_G);
+  assert.deepEqual(recientes.map((p) => p.titulo), ['Choque en el bulevar Agua Caliente deja dos heridos'], 'ni la de hace tres dias ni la que no se puede decir');
+  assert.deepEqual(recientes[0].ampliable, { url: 'https://www.elimparcial.com/tijuana/choque/', dominio: 'elimparcial.com', titulo: 'Choque en el bulevar Agua Caliente deja dos heridos' });
+  assert.equal(recientes[0].fuente, 'elimparcial.com', 'sin catalogo, el dominio: no se dice al aire');
+  const archivoMixto = async () => indicesMixto;
+
+  // --- apagado, programa, y sin nada que leer --------------------------------
+  delete process.env.ANALISIS_HABILITADO;
+  assert.equal((await (await responderGuionMixto({ p: 'noticias33' }, nunca, AHORA_G, archivosRedes(), archivoMixto, sinCatalogo)).json()).codigo, 'apagado');
+  process.env.ANALISIS_HABILITADO = 'true';
+  assert.equal((await (await responderGuionMixto({ p: 'otro' }, nunca, AHORA_G, async () => assert.fail('no debia leer'), archivoMixto, sinCatalogo)).json()).codigo, 'programa');
+  const todoCaido = ['tijuana', 'presidenta', 'sandiego', 'californiaEs', 'californiaEn', 'vacio'];
+  const rNada = await responderGuionMixto({ p: 'noticias33' }, conductorPrensa(guionDe([]), { caidos: todoCaido }), AHORA_G, async () => null, archivoMixto, sinCatalogo);
+  assert.equal((await rNada.json()).codigo, 'datos', 'ni redes ni titulares: no se puede leer, no «no hay»');
+
+  // --- el camino bueno ----------------------------------------------------------
+  // Publicaciones de Noticias 33 sobre DOCS_REDES (las reglas de redes): [P1]
+  // choque, [P2] tiroteo, [P3] bacheo (Tijuana), [P4] la presidenta, [P5] la
+  // ley de California. Titulares sobre FEEDS_G, primero los que pueden ir
+  // solos por eje: [T1] Sentri y [T2] la huelga (Tijuana), [T3] la mañanera y
+  // [T4] China, [T5] el barco (Sentri en San Diego es el mismo, T1); despues
+  // los que solo acompanan: [T6] el choque del archivo, posible de P1.
+  const pm = (eje, video, nota, entrada, extra = {}) =>
+    ({ eje, libre: false, video, nota, titular: 'Escaleta', entrada, pase: video === 0 ? '' : 'Veamos lo que circula.', salida: 'Seguimos.', ...extra });
+  const SALIDA_MIXTO = guionDe([
+    pm('tijuana', 1, 6, 'Se informa de un choque en el bulevar Agua Caliente que deja dos heridos.'),
+    pm('presidenta', 0, 4, 'Se informa que la presidenta anuncia una visita a China.', { pase: 'Este pase sobra.' }),
+    pm('california', 5, 0, 'Circula en redes que hay una nueva ley de rentas en California.'),
+    pm('tijuana', 0, 2, 'Se informa que un hombre inicia una huelga afuera de la Fiscalía.', { libre: true }),
+  ]);
+  const cMixto = conductorPrensa(SALIDA_MIXTO);
+  const archMixto = archivosRedes();
+  r = await responderGuionMixto({ p: 'noticias33' }, cMixto, AHORA_G, archMixto, archivoMixto, sinCatalogo);
+  assert.equal(r.status, 200);
+  assert.equal(r.headers.get('cache-control'), CACHE_GUION_MIXTO);
+  assert.equal(cMixto.modelo().length, 1, 'una llamada al modelo');
+  assert.deepEqual([...new Set(archMixto.leidos)].sort(), ['facebook.json', 'redes.json', 'tiktok.json', 'youtube.json'], 'las cuatro redes, y ningun archivo de comentarios');
+  const gMixto = await r.json();
+  assert.equal(gMixto.origen, 'mixto');
+  assert.equal(gMixto.hasta, '2026-09-25T14:00:00+00:00');
+  assert.match(guionTsx, /\{guion\.hasta == null \? null : \(/, 'la linea sale solo cuando hay hora');
+  assert.match(guionTsx, /`Publicaciones de redes hasta \$\{h\.startsWith\("1:"\) \? "la" : "las"\} \$\{h\}\$\{ayer \? " de ayer" : ""\}\.`/);
+  assert.deepEqual(gMixto.clips.map((c) => [c.eje, c.libre, c.pase !== null, c.fuente.fuente, c.nota?.fuente ?? null]), [
+    ['Información de Tijuana', false, true, '@creador', 'elimparcial.com'],
+    ['Mañanera de la presidenta', false, false, 'La Jornada', null],
+    ['Información de California', false, true, '@creador', null],
+    ['Información de Tijuana', true, false, 'Semanario ZETA', null],
+  ], 'clip con nota, nota leida, clip sin nota, y la libre');
+  assert.equal(gMixto.clips[0].fuente.url, 'https://www.tiktok.com/@creador/video/7001', 'el clip es la publicacion, canonica');
+  assert.equal(gMixto.clips[0].nota.url, 'https://www.elimparcial.com/tijuana/choque/', 'y la nota, la del medio');
+  assert.equal(gMixto.clips[0].ampliable.url, 'https://www.elimparcial.com/tijuana/choque/', 'Ampliar abre la nota, no la publicacion');
+  assert.equal(gMixto.clips[1].pase, null, 'un titular solo no tiene pase, aunque el modelo escriba uno');
+  assert.equal(gMixto.clips[2].ampliable, null, 'un clip sin nota no tiene que ampliar');
+  assert.deepEqual([gMixto.faltantes, gMixto.sinLeer], [[], []]);
+  const pedMixto = JSON.parse(cMixto.modelo()[0].opciones.body);
+  const contMixto = pedMixto.messages[0].content;
+  assert.ok(contMixto.startsWith('Publicaciones, de la más popular a la menos popular:\n[P1] Choque en el bulevar Agua Caliente\n    titulares que podrían contar lo mismo: T6\n[P2] Tiroteo en la Zona Norte\n    titulares que podrían contar lo mismo: ninguno'), contMixto);
+  assert.ok(contMixto.includes('\n\nTitulares:\n[T1] Señalan que Sentri concentra los cruces vehiculares\n[T2] Hombre inicia huelga afuera de la FGE'), contMixto);
+  assert.ok(contMixto.includes('[T6] Choque en el bulevar Agua Caliente deja dos heridos'));
+  assert.ok(contMixto.includes('Candidatos por eje:\n- tijuana: publicaciones P1, P2, P3; titulares T1, T2\n- presidenta: publicaciones P4; titulares T3, T4\n- california: publicaciones P5; titulares T1, T5'), contMixto);
+  assert.doesNotMatch(contMixto, /https?:\/\/|@creador|Tijuana Informa|Imparcial|imparcial|La Jornada|ZETA/, 'ni enlaces, ni cuentas, ni medios');
+  assert.doesNotMatch(contMixto, /Piden a la ciudadanía|hace tres días/, 'el archivo que no se puede decir o es viejo no llega');
+  assert.match(pedMixto.system, /EL MISMO HECHO/);
+  assert.match(pedMixto.system, /Dos tiroteos en dos ciudades no son el mismo hecho/);
+  assert.match(pedMixto.system, /nunca digas que la prensa confirma, verifica, respalda o corrobora/);
+  assert.match(pedMixto.system, /lo que dice EL TITULAR: del pie, nada que el titular no diga/);
+  assert.match(pedMixto.system, /«circula en redes que»/);
+  assert.match(pedMixto.system, /la salida tampoco dice como hecho lo que solo trae el pie/, 'medido: el detalle del pie salia como hecho');
+  // Lo medido en las primeras corridas de Sonnet 5.5: la apertura nombraba los
+  // ejes, la salida repetia la entrada y un pase tuteaba al publico.
+  assert.match(pedMixto.system, /nunca las secciones ni los ejes/);
+  assert.match(pedMixto.system, /Algunos pies y titulares están en inglés\. El guion va siempre en español, palabra por palabra/);
+  assert.match(pedMixto.system, /No repite ni resume la entrada, ni empieza con «Es decir», «Así» o «Es lo que circula»/);
+  assert.doesNotMatch(pedMixto.system, /remata con otras palabras/, 'la salida del mixto ya no remata: pasa a la siguiente');
+  for (const p of PROGRAMAS_GUION) for (const o of ['mixto', 'prensa', 'redes']) assert.match(sistemaDe(p, o), /nunca de «tú»/, `${p}/${o}: no se tutea al publico`);
+  const propsMixto = pedMixto.output_config.format.schema.properties.clips.items.properties;
+  assert.ok('video' in propsMixto && 'nota' in propsMixto && 'pase' in propsMixto, 'los dos numeros y el pase');
+
+  // --- el par lo decide el modelo, pero solo entre los propuestos ----------------
+  // T6 es posible de P1 (el choque), no de P2 (el tiroteo): juntarlos diria al
+  // aire un choque sobre el clip de un tiroteo. Y T6 solo acompana: no va solo.
+  for (const [cual, pieza] of [['par no propuesto', pm('tijuana', 2, 6, 'Se informa de un choque.')], ['solo acompanaba', pm('tijuana', 0, 6, 'Se informa de un choque.')]]) {
+    const salida = guionDe([pieza, pm('presidenta', 0, 4, 'Se informa de la visita.'), pm('california', 5, 0, 'Circula una ley.'), pm('tijuana', 0, 2, 'Se informa de una huelga.', { libre: true })]);
+    const resp = await responderGuionMixto({ p: 'noticias33' }, conductorPrensa(salida), AHORA_G, archivosRedes(), archivoMixto, sinCatalogo);
+    assert.equal((await resp.json()).codigo, 'modelo', cual);
+  }
+  // Los dos en 0 no es una pieza.
+  const vacia = guionDe([pm('tijuana', 0, 0, 'Nada.'), pm('presidenta', 0, 4, 'Se informa de la visita.'), pm('california', 5, 0, 'Circula una ley.')]);
+  assert.equal((await (await responderGuionMixto({ p: 'noticias33' }, conductorPrensa(vacia), AHORA_G, archivosRedes(), archivoMixto, sinCatalogo)).json()).codigo, 'modelo');
+  // Nombrar el medio de OTRA pieza sigue rechazando el guion.
+  const ajenaMixto = SALIDA_MIXTO.replace('que deja dos heridos.', 'que deja dos heridos, según La Jornada.');
+  assert.equal((await (await responderGuionMixto({ p: 'noticias33' }, conductorPrensa(ajenaMixto), AHORA_G, archivosRedes(), archivoMixto, sinCatalogo)).json()).codigo, 'reglas');
+
+  // --- lo que no se pudo leer se dice, y el hueco solo si se leyo ---------------
+  const soloTj = { origen: 'prensa', programa: 'noticias33', lista: [pz('https://n/tj', 'Algo en Tijuana')], faltantes: [], sinLeer: [],
+    candidatos: { tijuana: [pz('https://n/tj', 'Algo en Tijuana')], mananera: [], california: [] } };
+  const planHuecos = armarPlanMixto('noticias33', {
+    social: null, leidas: ['tiktok'], archivo: [], frecuencias: frecuenciasFalsas,
+    prensa: { plan: soloTj, todas: soloTj.lista, noLeidos: new Set(['california']), todoCaido: false },
+  });
+  assert.deepEqual(planHuecos.faltantes, ['Mañanera de la presidenta'], 'sin publicaciones ni titulares, y leido');
+  assert.deepEqual(planHuecos.sinLeer, ['Instagram', 'Facebook', 'YouTube', 'los titulares de Información de California']);
+  const planCaido = armarPlanMixto('deredenred', {
+    social: { origen: 'redes', programa: 'deredenred', lista: [pz('https://t/c', 'Concierto gratis')], candidatos: null, faltantes: [], sinLeer: [] },
+    leidas: ['tiktok', 'instagram', 'facebook', 'youtube'], archivo: [], frecuencias: frecuenciasFalsas,
+    prensa: { plan: null, todas: [], noLeidos: new Set(['temas']), todoCaido: true },
+  });
+  assert.deepEqual([planCaido.sinLeer, planCaido.faltantes], [['los titulares'], []]);
+  assert.deepEqual(planCaido.candidatosTitulares, { temas: [] }, 'un programa por temas: los que pueden ir solos van en `temas`');
+  // Una red sin leer se dice, y el guion no se guarda una hora. Sin Facebook
+  // se va el bacheo: [P3] es la presidenta y [P4] la ley de California.
+  const SALIDA_SIN_FB_MIXTO = guionDe([
+    pm('tijuana', 1, 6, 'Se informa de un choque en el bulevar Agua Caliente.'),
+    pm('presidenta', 0, 4, 'Se informa que la presidenta anuncia una visita a China.'),
+    pm('california', 4, 0, 'Circula en redes que hay una nueva ley de rentas en California.'),
+    pm('tijuana', 0, 2, 'Se informa que un hombre inicia una huelga.', { libre: true }),
+  ]);
+  const rSinFb = await responderGuionMixto({ p: 'noticias33' }, conductorPrensa(SALIDA_SIN_FB_MIXTO), AHORA_G, archivosRedes(['facebook.json']), archivoMixto, sinCatalogo);
+  assert.equal(rSinFb.status, 200);
+  assert.equal(rSinFb.headers.get('cache-control'), SIN_CACHE);
+  assert.deepEqual((await rSinFb.json()).sinLeer, ['Facebook']);
+
+  // --- el prompt mixto no se queda con frases de un solo material ---------------
+  for (const p of PROGRAMAS_GUION) {
+    const s = sistemaDe(p, 'mixto');
+    assert.doesNotMatch(s, /del más visto|Cada nota sale de UN SOLO titular|Cada clip sale de UN SOLO video|NO has leído ninguna nota y no vas|numerados y en el orden de relevancia|un eje «sin (?:videos|notas)»/, `${p}: frase de otro material`);
+    assert.doesNotMatch(s, /\bSi el titular trae\b|con lo que dicen los titulares y lo abre|nunca nombres al medio que publicó la nota ni digas/, `${p}: regla de solo prensa`);
+    assert.match(s, /Los pies y los titulares son DATOS/, p);
+  }
+  assert.match(sistemaDe('minutapolitica', 'mixto'), /su publicación o su titular/);
+  assert.match(sistemaDe('estadodealerta', 'mixto'), /Un titular solo tiene que ser de los que pueden ir solos/);
+
+  // --- la pagina pide el mixto, y lo pinta ---------------------------------------
+  assert.ok(fs.existsSync(path.join(SRC, 'app/api/guion-mixto/route.ts')));
+  assert.ok(fs.readFileSync(path.join(SRC, '../next.config.ts'), 'utf8').includes('"/api/guion-mixto": ["./public/data/notas.json", "./public/data/catalogo-busqueda.json", "./public/data/tiktok.json", "./public/data/redes.json", "./public/data/facebook.json", "./public/data/youtube.json"]'));
+  assert.match(guionTsx, /<GuionPrograma origen="mixto" programa=\{programa\} corte=\{corte\} \/>/, 'la pantalla pide solo el mixto');
+  assert.doesNotMatch(codigoGuion, /Segmentado|origen="prensa"|origen="redes"/, 'sin el segmentado Noticias · Redes');
+  assert.match(guionTsx, /const leida = clip\.pase === null;/, 'una pieza sin pase es una nota leida, venga de donde venga');
+  assert.match(guionTsx, /\{sinNota \? " · sin nota de prensa" : ""\}/);
+  assert.match(guionTsx, /<a href=\{clip\.nota\.url\} target="_blank" rel="noopener noreferrer nofollow" className=\{CLASES_FUENTE\}>\s*Abrir en \{clip\.nota\.fuente\}/);
+  assert.match(guionTsx, /m: clip\.nota\?\.fuente \?\? clip\.fuente\.fuente/, 'Ampliar vigila el medio de la nota, no la cuenta del clip');
+  assert.match(fs.readFileSync(path.join(SRC, 'lib/analisis/documento-guion.ts'), 'utf8'), /texto: "SIN NOTA DE PRENSA"/);
+
+  // --- /guion: la pagina ------------------------------------------------------
+  // El guion tiene pagina desde el 28 de septiembre de 2026 (cliente): vivia
+  // en dos hojas detras de un icono solo, y el programa elegido no se podia
+  // guardar ni mandar. El estado va en la URL, `?p=`. Tuvo `?f=` (noticias o
+  // redes) unas horas, hasta el guion mixto: un enlace guardado con el abre el
+  // mismo programa.
+  assert.equal(rutaGuion(), '/guion');
+  assert.equal(rutaGuion('minutapolitica'), '/guion?p=minutapolitica');
+  for (const programa of [null, ...PROGRAMAS_GUION]) {
+    const url = new URL(rutaGuion(programa), 'https://pulso.test');
+    assert.deepEqual(leerRutaGuion(Object.fromEntries(url.searchParams)), { programa }, 'ida y vuelta');
+  }
+  // Un valor desconocido es ninguno, no un guion: un enlace mal copiado no
+  // pide nada que no se eligio.
+  assert.deepEqual(leerRutaGuion({}), { programa: null });
+  assert.deepEqual(leerRutaGuion({ p: 'otro' }), { programa: null });
+  assert.deepEqual(leerRutaGuion({ f: 'redes', p: 'noticias33' }), { programa: 'noticias33' }, 'el `?f=` de unas horas se ignora');
+  assert.deepEqual(leerRutaGuion({ p: ['noticias33'] }), { programa: null }, 'un parametro repetido no es una eleccion');
+  // En la nav solo con la lectura encendida: sin ella la pagina es un 404.
+  assert.ok(SUELTAS.some((s) => s.id === 'guion' && s.ruta === '/guion'));
+  assert.ok(!sueltasVisibles(false).some((s) => s.id === 'guion'));
+  assert.ok(sueltasVisibles(true).some((s) => s.id === 'guion'));
+  assert.deepEqual(sueltasVisibles(false).map((s) => s.id), SUELTAS.filter((s) => s.id !== 'guion').map((s) => s.id), 'las otras sueltas no dependen de nada');
+  // El riel y la hoja «Más» del telefono (chrome/riel.tsx, desde el 28 de
+  // septiembre de 2026 en lugar de la pastilla de navegacion.tsx).
+  for (const nav of ['components/chrome/riel.tsx', 'components/chrome/menu-lector.tsx']) {
+    const codigo = fs.readFileSync(path.join(SRC, nav), 'utf8');
+    assert.match(codigo, /sueltasVisibles\(analisisHabilitado\(\)\)/, `${nav} pinta las sueltas visibles`);
+    assert.doesNotMatch(codigo, /SUELTAS\.map\(|of SUELTAS/, `${nav} no pinta la lista entera`);
+  }
+  const paginaGuion = fs.readFileSync(path.join(SRC, 'app/guion/page.tsx'), 'utf8');
+  assert.match(paginaGuion, /if \(!analisisHabilitado\(\)\) notFound\(\);/);
+  assert.match(paginaGuion, /leerRutaGuion\(await searchParams\)/, 'el parametro se lee en el servidor, como ?e= en la portada');
+  assert.match(paginaGuion, /<Navegacion zona=\{null\} vista=\{null\} pagina="guion" \/>/);
+  assert.doesNotMatch(paginaGuion.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, ''), /useSearchParams/);
+  // Cada programa es un enlace.
+  assert.match(guionTsx, /<Link href=\{rutaGuion\(p\)\} aria-current=\{activo \? "page" : undefined\}/);
+  // El mixto espera a los cuatro archivos de redes y fija su llave una vez,
+  // con la hora; si no, la llave cambiaria al llegar el ultimo y cada llave es
+  // otra llamada.
+  assert.match(guionTsx, /const docs = \[useTikTok\(\), useRedes\(\), useFacebook\(\), useYouTube\(\)\];/);
+  assert.match(guionTsx, /if \(listos && corte === null\) setCorte\(`\$\{horaActual\(\)\}~\$\{docs\.map\(\(d\) => d\.data\?\.generado \?\? ""\)\.join\(","\)\}`\);/, 'la hora y el corte de las cuatro redes, una sola vez');
+  assert.match(guionTsx, /if \(corte === null\) return <EstadoCarga/);
+  // El clip es un ENLACE, y su nombre es lo que se lee: sin recorrido al que
+  // saltar, el boton solo abria una URL, sin clic central ni «copiar enlace»,
+  // y se anunciaba «Ir al video de…» con «Clip: …» en pantalla.
+  assert.match(guionTsx, /<a href=\{clip\.fuente\.url\} target="_blank" rel="noopener noreferrer" className=\{CLASES_FUENTE\}>\s*<Clip size=\{12\} weight="fill" aria-hidden className="guion-cue-marca" \/>\s*Clip: \{clip\.fuente\.fuente\}\s*<Salir size=\{14\} aria-hidden \/>\s*<\/a>/, 'el nombre accesible sigue siendo «Clip: @cuenta»: los iconos van ocultos');
+  assert.doesNotMatch(codigoGuion, /window\.open|\birA\b|redDeEnlace|Ir al video de/);
+  assert.doesNotMatch(codigoGuion, /<Hoja|encabezado/, 'el guion ya no vive en una hoja');
+
+  // --- las barras ya no llevan el guion -----------------------------------------
+  // Fue un microfono, luego unos destellos que enlazaban a /guion, y el 28 de
+  // septiembre de 2026 el cliente los quito de la portada y de /redes: el
+  // guion tiene su pagina en la navegacion. Ni hoja, ni tarjeta en la pestana
+  // TikTok, ni el hueco `resumen`.
+  const lectorRedes = fs.readFileSync(path.join(SRC, 'components/paneles/lector-redes.tsx'), 'utf8');
+  assert.doesNotMatch(lectorRedes, /Microphone|GuionLocucion|<Hoja|rutaGuion|Sparkle|Guion para locución/);
   const visorGuion = fs.readFileSync(path.join(SRC, 'components/paneles/visor-redes.tsx'), 'utf8');
-  assert.match(visorGuion, /filtro === "tiktok" && analisis && q === ""/);
-  assert.match(visorGuion, /<GuionLocucion origen="tiktok" corte=\{tiktok\.data!\.generado\} irA=\{irA\} \/>/);
-  assert.match(visorGuion, /resumen=\{resumen\}/);
-  assert.match(visorGuion, /className="resumen-recorrido /);
+  assert.doesNotMatch(visorGuion, /GuionLocucion|resumen=\{|resumen-recorrido/, 'la tarjeta de la pestana TikTok se fue con su hueco');
+  assert.doesNotMatch(fs.readFileSync(path.join(SRC, 'app/globals.css'), 'utf8'), /\.resumen-recorrido/);
+  assert.ok(fs.readFileSync(path.join(SRC, '../next.config.ts'), 'utf8').includes('"/api/guion-redes": ["./public/data/tiktok.json", "./public/data/redes.json", "./public/data/facebook.json", "./public/data/youtube.json"]'));
   assert.ok(!fs.existsSync(path.join(SRC, 'app/api/resumen-tiktok')), 'el resumen se fue con su ruta');
   assert.ok(!fs.existsSync(path.join(SRC, 'components/paneles/guion-tiktok.tsx')), 'una sola tarjeta para los dos origenes');
-  // En la portada: un boton de la barra que abre una hoja, solo con la
-  // lectura encendida, y solo en el recorrido, no en la busqueda.
   const feedAhora = fs.readFileSync(path.join(SRC, 'components/ahora/feed-ahora.tsx'), 'utf8');
-  const recorrido = feedAhora.slice(feedAhora.indexOf('function RecorridoAhora'), feedAhora.indexOf('function RecorridoBusqueda'));
-  assert.match(recorrido, /analisis \? \(\s*<button type="button" className=\{CONTROL\} aria-label="Guion para locución"/);
-  assert.match(recorrido, /<Hoja ref=\{guion\} titulo="Guion para locución"[\s\S]*<GuionLocucion origen="prensa" encabezado=\{false\} \/>/);
-  // El margen de las otras hojas: sin el, el guion tocaba el borde.
-  assert.match(recorrido, /<Hoja ref=\{guion\}[\s\S]*?<div className="px-4 pt-6 pb-8">\s*<GuionLocucion origen="prensa"/);
-  assert.ok(!feedAhora.slice(feedAhora.indexOf('function RecorridoBusqueda')).includes('GuionLocucion'));
+  assert.doesNotMatch(feedAhora, /Microphone|GuionLocucion|rutaGuion|Sparkle|Guion para locución/);
   assert.ok(fs.readFileSync(path.join(SRC, '../next.config.ts'), 'utf8').includes('"/api/guion-prensa": ["./public/data/notas.json", "./public/data/catalogo-busqueda.json"]'));
 
 }
@@ -1662,5 +2243,5 @@ async function comprobarImagen() {
 
 comprobar()
   .then(comprobarImagen)
-  .then(() => console.log('Análisis: ficha de nota, ficha de publicación, guion de TikTok y de prensa, nota ampliada y miniatura en vivo; privacidad, reglas 1 y 2, URL, interruptor y fallos verificados offline.'))
+  .then(() => console.log('Análisis: ficha de nota, ficha de publicación, guion de TikTok, de redes, de prensa y mixto, la página del guion, el guion en Word, nota ampliada y miniatura en vivo; privacidad, reglas 1 y 2, URL, interruptor y fallos verificados offline.'))
   .catch((err) => { console.error(err); process.exitCode = 1; });

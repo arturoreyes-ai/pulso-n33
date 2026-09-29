@@ -15,7 +15,6 @@ import { clasesBoton } from "@/components/ui/clases";
 import { BotonAnalizar, FichaPublicacion } from "./analisis-publicacion";
 import { ComentariosPublicacion, VistaPreviaComentarios, type Textos } from "./comentarios-publicacion";
 import { EsqueletoMedio, MedioSocial } from "./medio-social";
-import { GuionLocucion } from "./guion-locucion";
 import { Hoja } from "@/components/ui/hoja";
 
 /** Las pestanas que caen aqui: todas menos X, que es otra hoja del lector. */
@@ -93,15 +92,9 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis
       (filtro === "todas" || fila.red === filtro) && (tema === null || publicacionNombraRubro(fila.post, tema))), orden);
     return q === "" ? porRed : filtrarPorTexto(porRed, { instagram: textosInstagram.data, tiktok: textosTikTok.data, facebook: textosFacebook.data }, q);
   }, [publicaciones, filtro, q, orden, tema, textosInstagram.data, textosTikTok.data, textosFacebook.data]);
-  // «Guion para locución», primero en la pestana TikTok, con los videos
-  // debajo (24 de septiembre de 2026; reemplazo al «Resumen con IA» del 23).
-  // No depende del lugar ni del tema: un programa del canal lee el archivo
-  // entero (lib/analisis/guion-tiktok.ts). Nunca en la busqueda por texto, y
-  // nada se pide hasta pulsar un programa.
-  const resumible = filtro === "tiktok" && analisis && q === "" && tiktok.data?.generado !== undefined;
-  const resumen = resumible
-    ? (irA: (clave: string) => boolean) => <GuionLocucion origen="tiktok" corte={tiktok.data!.generado} irA={irA} />
-    : undefined;
+  // El guion para locucion vivio aqui, al frente de la pestana TikTok, del 24
+  // al 25 de septiembre de 2026. Ahora es un boton de la barra que lee las
+  // cuatro redes (lector-redes.tsx).
   const cortes: Cortes = { instagram: instagram.data?.generado, tiktok: tiktok.data?.generado, youtube: youtube.data?.generado, facebook: facebook.data?.generado };
   // `cosecha_comentarios` ausente se lee como true: un corte anterior al 18 de
   // septiembre de 2026 no lo trae y si cosechaba.
@@ -134,7 +127,7 @@ export default function VisorRedes({ zona, filtro, cubeta = "corredor", analisis
           linea encima encogeria las tarjetas. */}
       {estados.map((estado) => <p key={estado} role="status" className="sr-only">{estado}</p>)}
       <RecorridoPublicaciones key={`${filtro}:${q}:${tema ?? ""}:${filas.map((fila) => fila.clave).join("|")}`} publicaciones={filas} cortes={cortes} cargando={cargando} textos={textos} conComentarios={conComentarios} analisis={analisis}
-        sinFilas={q !== "" ? SIN_FILAS_BUSQUEDA(q) : tema !== null ? sinFilasTema(tema) : undefined} resumen={resumen} />
+        sinFilas={q !== "" ? SIN_FILAS_BUSQUEDA(q) : tema !== null ? sinFilasTema(tema) : undefined} />
     </>
   );
 }
@@ -159,7 +152,7 @@ const PRECARGA: ReadonlySet<RedVisual> = new Set(["instagram", "tiktok"]);
  *  esqueleto mientras carga, y si no hay nada, el hueco dicho como hueco. La
  *  caja ES la pantalla, y una linea suelta en su lugar dejaria el lector
  *  vacio. */
-export function RecorridoPublicaciones({ publicaciones, cortes, cargando, textos, conComentarios, analisis, sinFilas = SIN_FILAS, cabecera, resumen, lugar = true, vistaPrevia = true }: {
+export function RecorridoPublicaciones({ publicaciones, cortes, cargando, textos, conComentarios, analisis, sinFilas = SIN_FILAS, cabecera, lugar = true, vistaPrevia = true }: {
   publicaciones: PublicacionVisual[];
   cortes: Cortes;
   cargando: boolean;
@@ -175,13 +168,6 @@ export function RecorridoPublicaciones({ publicaciones, cortes, cargando, textos
    *  las publicaciones se corren una; el contador «n de total» sigue contando
    *  solo publicaciones. */
   cabecera?: ReactNode;
-  /** El guion de la pestana TikTok (paneles/guion-locucion.tsx; hasta el 24 de
-   *  septiembre de 2026, el resumen): tambien el indice 0, pero del alto de
-   *  su CONTENIDO y no de la caja (`.resumen-recorrido`), para que el primer
-   *  video asome en la misma pantalla. Recibe `irA`, que lleva el recorrido a
-   *  la tarjeta de una `clave`: el video de cada clip lleva a su tarjeta. Se pasa uno u otro,
-   *  nunca los dos; si llegaran ambos, gana `cabecera`. */
-  resumen?: (irA: (clave: string) => boolean) => ReactNode;
   /** Si la banda dice el lugar («sobre Tijuana»). La consulta por termino lo
    *  apaga (23 de septiembre de 2026): un termino no es un lugar, la ficha
    *  nunca lee `zona`, y «sobre un lugar sin precisar» era ruido. */
@@ -191,7 +177,7 @@ export function RecorridoPublicaciones({ publicaciones, cortes, cargando, textos
    *  el boton, cuando quien lee los pide. */
   vistaPrevia?: boolean;
 }) {
-  const desplazamiento = cabecera === undefined && resumen === undefined ? 0 : 1;
+  const desplazamiento = cabecera === undefined ? 0 : 1;
   const contenedor = useRef<HTMLDivElement>(null);
   const { actual, enPantalla, ir } = useRecorrido(contenedor);
   const [visible, setVisible] = useState(true);
@@ -221,12 +207,6 @@ export function RecorridoPublicaciones({ publicaciones, cortes, cargando, textos
     if (turnoIA > 0) hojaIA.current?.showModal();
   }, [turnoIA]);
   const total = publicaciones.length;
-  const irA = (clave: string): boolean => {
-    const indice = publicaciones.findIndex((fila) => fila.clave === clave);
-    if (indice === -1) return false;
-    ir(indice + desplazamiento);
-    return true;
-  };
   return <>
     <div ref={contenedor} className="recorrido-lector" tabIndex={0} role="region" aria-label="Publicaciones"
       onKeyDown={(evento) => teclasDelRecorrido(evento, actual, total + desplazamiento, ir)}>
@@ -234,11 +214,6 @@ export function RecorridoPublicaciones({ publicaciones, cortes, cargando, textos
         <article data-indice={0} aria-label="Ficha del término" className="publicacion-visual mx-auto flex w-full max-w-[88rem] flex-col justify-center overflow-y-auto px-4 py-6 md:px-8">
           {cabecera}
         </article>
-      )}
-      {cabecera !== undefined || resumen === undefined ? null : (
-        <div data-indice={0} className="resumen-recorrido border-b border-filo px-4 pt-6 pb-8 md:px-8">
-          {resumen(irA)}
-        </div>
       )}
       {publicaciones.map((fila, indice) => (
         <Publicacion key={fila.clave} lugar={lugar} vistaPrevia={vistaPrevia} fila={fila} indice={indice} posicion={indice + desplazamiento} total={total} corte={cortes[fila.red]}

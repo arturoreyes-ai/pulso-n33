@@ -11,16 +11,25 @@
  * portada (lib/analisis/guion-prensa.ts) y cada pieza es una NOTA LEIDA, sin
  * clip: el conductor la lee a camara. Por eso `pase` es null en prensa, y no
  * una frase de relleno: no hay a que darle paso.
+ *
+ * Y un tercero el mismo dia, `redes`: el de TikTok con Instagram, Facebook y lo
+ * muy visto de YouTube (lib/analisis/guion-redes.ts), el que abre el boton de
+ * la barra de /redes. Sus piezas son clips, como en TikTok.
+ *
+ * Y `mixto` desde el 28 de septiembre de 2026, el unico que la pantalla pide
+ * (lib/analisis/guion-mixto.ts): lo mas popular de las cuatro redes con los
+ * titulares que cuentan lo mismo, en un solo guion. Una pieza es un clip con
+ * su nota de prensa (`nota`), una nota leida sola, o un clip sin nota.
  */
 
 /** Separa copias en el CDN y en SWR. 3 desde el 25 de septiembre de 2026:
  *  `origen`, `pregunta`, `sinLeer` y `leidos` cambiaron la forma. 4 el mismo
  *  dia: el guion ya no cita medios ni cuentas, garitas ya no es una pieza del
  *  modelo, y cada pieza trae `ampliable`; la copia de la hora anterior decia
- *  todo eso al reves. */
-export const VERSION_GUION = "4";
+ *  todo eso al reves. 5 el 28 de septiembre: cada pieza trae `nota`. */
+export const VERSION_GUION = "5";
 
-export const ORIGENES_GUION = ["tiktok", "prensa"] as const;
+export const ORIGENES_GUION = ["tiktok", "prensa", "redes", "mixto"] as const;
 export type OrigenGuion = (typeof ORIGENES_GUION)[number];
 
 /**
@@ -48,6 +57,42 @@ export const NOMBRE_PROGRAMA: Record<ProgramaGuion, string> = {
   minutapolitica: "Minuta Política",
   estadodealerta: "Estado de Alerta",
 };
+
+/** Temas por guion, en los programas que se arman por tema. Aqui y no en
+ *  guion.ts (que lo reexporta) porque /guion lo dice en pantalla, y el cliente
+ *  no debe cargar el prompt para leer un numero. */
+export const MAXIMO_TEMAS: Record<Exclude<ProgramaGuion, "noticias33">, number> = {
+  deredenred: 6,
+  // Un programa de debate desarrolla pocos temas y los desarrolla con la mesa.
+  minutapolitica: 4,
+  estadodealerta: 6,
+};
+
+/** Lo que trae cada guion, en una linea, para elegir en /guion. Dice la forma
+ *  que guion.ts exige a cada programa: los maximos salen de MAXIMO_TEMAS, y
+ *  las cinco de Noticias 33 son sus cuatro ejes mas la libre, en letra porque
+ *  un lector de pantalla junta el nombre y la linea: «Noticias 33 5 notas». */
+export const DESCRIPCION_PROGRAMA: Record<ProgramaGuion, string> = {
+  noticias33: "Cinco notas: garitas, Tijuana, la mañanera, California y una libre.",
+  deredenred: `Entretenimiento en tono ligero, hasta ${MAXIMO_TEMAS.deredenred} temas.`,
+  minutapolitica: `Política local y nacional, hasta ${MAXIMO_TEMAS.minutapolitica} temas, cada uno con una pregunta para la mesa.`,
+  estadodealerta: `Nota roja local, de noche, hasta ${MAXIMO_TEMAS.estadodealerta} sucesos.`,
+};
+
+/** De que sale el guion, en una linea, bajo el titulo de /guion. Aqui y no en
+ *  el panel porque la cabecera es de servidor (app/guion/page.tsx). */
+export const MATERIAL_GUION = "Lo escribe una IA con lo más popular de TikTok, Instagram, Facebook y YouTube y los titulares de prensa que cuentan lo mismo, de las últimas 24 horas.";
+
+/**
+ * Que el guion lo escribio un modelo, dicho donde el equipo lo va a ver
+ * (cliente, 28 de septiembre de 2026): arriba del guion en pantalla, en el
+ * texto copiado y bajo el titulo del Word. Hasta ese dia solo lo decia una
+ * linea gris al pie de la pantalla y del subtitulo del Word, y el texto
+ * copiado no lo decia en ninguna parte: pegado en un chat del equipo, un
+ * guion escrito por un modelo se leia como escrito por una persona.
+ */
+export const ROTULO_IA = "Generado con IA";
+export const CONSEJO_IA = "Revísalo antes de salir al aire: puede equivocarse.";
 
 export const EJES_NOTICIAS33 = ["garitas", "tijuana", "mananera", "california"] as const;
 export type EjeNoticias33 = (typeof EJES_NOTICIAS33)[number];
@@ -103,8 +148,14 @@ export interface ClipGuion {
   /** Prensa: con que se abre la nota entera para «Ampliar»
    *  (lib/analisis/ampliar.ts): el enlace verificable, el dominio del medio y
    *  el titular original, que no es `titular` (ese es de la escaleta). Null en
-   *  TikTok, en la nota de garitas y en una fila sin enlace verificable. */
+   *  TikTok, en la nota de garitas y en una fila sin enlace verificable. En
+   *  `mixto`, el del titular que acompana al clip, si lo hay. */
   ampliable: { url: string; dominio: string; titulo: string } | null;
+  /** Solo `mixto`: el titular que cuenta el mismo hecho que el clip, con el
+   *  que se dijo la entrada; `fuente` es el medio, para el equipo, y no se
+   *  dice. Null en un clip sin nota de prensa, en una nota leida (su titular
+   *  es `fuente`) y en los otros origenes. */
+  nota: { url: string; fuente: string } | null;
 }
 
 /** La respuesta de /api/ampliar-nota: la nota reescrita con la nota entera, y
@@ -136,4 +187,9 @@ export interface Guion {
   sinLeer: string[];
   /** Piezas que el modelo leyo. */
   leidos: number;
+  /** Solo `redes` y `mixto`: hasta cuando llegan las publicaciones, la
+   *  cosecha mas vieja de las redes leidas (ISO), o null si no se leyo
+   *  ninguna. Ausente en los demas origenes y en un guion guardado antes del
+   *  28 de septiembre de 2026. */
+  hasta?: string | null;
 }

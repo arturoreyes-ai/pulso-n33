@@ -368,10 +368,27 @@ export function ordenarPublicaciones(filas: readonly PublicacionVisual[], orden:
   if (orden === "recientes") {
     return [...filas].sort((a, b) => compararPublicaciones(a.post, b.post) || a.clave.localeCompare(b.clave));
   }
+  return intercalarPorPuesto(filas, (red) => (a, b) => compararPorMerito(red)(a.post, b.post));
+}
+
+/** La cifra con que cada red mide el merito: vistas en YouTube, likes (o
+ *  reacciones) en las demas. La misma de `compararPorMerito`, como numero. */
+export const meritoDe = (post: Destacado, red: RedVisual): number =>
+  (red === "youtube" ? post.reproducciones : post.likes) ?? 0;
+
+/**
+ * El intercalado de «populares» con el merito que se le pase: cada fila por su
+ * PUESTO dentro de su red, y las redes turnandose. La pantalla lo usa con las
+ * cifras; el guion, con el ritmo (analisis/guion-redes.ts::ritmo).
+ */
+export function intercalarPorPuesto(
+  filas: readonly PublicacionVisual[],
+  comparar: (red: RedVisual) => (a: PublicacionVisual, b: PublicacionVisual) => number,
+): PublicacionVisual[] {
   const puesto = new Map<string, number>();
   for (const red of Object.keys(ORDEN_RED) as RedVisual[]) {
     filas.filter((fila) => fila.red === red)
-      .sort((a, b) => compararPorMerito(red)(a.post, b.post) || a.clave.localeCompare(b.clave))
+      .sort((a, b) => comparar(red)(a, b) || a.clave.localeCompare(b.clave))
       .forEach((fila, i) => puesto.set(fila.clave, i));
   }
   return [...filas].sort((a, b) =>

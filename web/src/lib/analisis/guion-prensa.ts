@@ -241,7 +241,7 @@ export async function planPrensa(
   ahora: string,
   leerArchivo: LeerArchivo,
   leerCatalogo: LeerCatalogo = async () => null,
-): Promise<{ plan: Plan | null; caido: boolean; todoCaido: boolean; noLeidos: Set<string> }> {
+): Promise<{ plan: Plan | null; caido: boolean; todoCaido: boolean; noLeidos: Set<string>; todas: Pieza[] }> {
   const grupos = Object.entries(feedsDe(programa));
   const todos = grupos.flatMap(([, feeds]) => feeds);
   const tope = programa === "noticias33" || programa === "minutapolitica" ? CANDIDATOS_POR_EJE_PRENSA : CANDIDATOS_POR_TEMA_PRENSA;
@@ -251,6 +251,10 @@ export async function planPrensa(
   const okDe = new Map(todos.map((f, i) => [f, cosechas[i]!.salud.estado === "ok"]));
 
   const porEje: Record<string, ResultadoExterno[]> = {};
+  // Todo lo que paso las rejas, sin el tope por eje: el guion mixto busca ahi
+  // el titular que cuenta lo mismo que una publicacion (guion-mixto.ts), y el
+  // de un video de Tijuana puede ser el septimo de su seccion.
+  const completas: ResultadoExterno[] = [];
   const noLeidos = new Set<string>();
   let i = 0;
   for (const [eje, feeds] of grupos) {
@@ -258,7 +262,9 @@ export async function planPrensa(
       const filas = cosechas[i++]!.resultados.filter((r) => !esRedSocial(r.dominio) && !titularVencido(r.titulo, ahora) && reciente(r, ahora) && decible(r));
       return (f.region ? soloDeLaRegion(filas) : f.mexico === true ? soloDeMexico(filas) : filas).filter(f.nombra);
     });
-    porEje[eje] = fusionarLocales(lotes).slice(0, tope);
+    const fusion = fusionarLocales(lotes);
+    completas.push(...fusion);
+    porEje[eje] = fusion.slice(0, tope);
     if (feeds.every((f) => okDe.get(f) === false)) noLeidos.add(eje);
   }
   const caido = [...okDe.values()].some((ok) => !ok);
@@ -281,18 +287,19 @@ export async function planPrensa(
   };
   const candidatos: Record<string, Pieza[]> = {};
   for (const [eje, filas] of Object.entries(porEje)) candidatos[eje] = atarTodas(filas, indices).map(aPieza);
+  const todas = [...new Set(atarTodas(completas, indices).map(aPieza))];
 
   const base = { origen: "prensa" as const, programa };
   const conEjes = programa === "noticias33" || programa === "minutapolitica";
   const listaDe = (): Pieza[] => [...new Map(Object.values(candidatos).flat().map((p) => [p.url, p])).values()];
   if (!conEjes) {
     const lista = candidatos.temas ?? [];
-    return { plan: lista.length === 0 ? null : { ...base, lista, candidatos: null, faltantes: [], sinLeer: [] }, caido, todoCaido, noLeidos };
+    return { plan: lista.length === 0 ? null : { ...base, lista, candidatos: null, faltantes: [], sinLeer: [] }, caido, todoCaido, noLeidos, todas };
   }
   const lista = listaDe();
-  if (lista.length === 0) return { plan: null, caido, todoCaido, noLeidos };
+  if (lista.length === 0) return { plan: null, caido, todoCaido, noLeidos, todas };
   const { faltantes, sinLeer } = huecosDe(programa, candidatos, noLeidos);
-  return { plan: { ...base, lista, candidatos, faltantes, sinLeer }, caido, todoCaido, noLeidos };
+  return { plan: { ...base, lista, candidatos, faltantes, sinLeer }, caido, todoCaido, noLeidos, todas };
 }
 
 export async function responderGuionPrensa(

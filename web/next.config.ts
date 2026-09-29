@@ -33,6 +33,11 @@ const nextConfig: NextConfig = {
     ],
     // El guion de la pestana TikTok lee solo los pies: nada de comentarios.
     "/api/guion-tiktok": ["./public/data/tiktok.json"],
+    // El de /redes lee las cuatro redes; sin una, la dice «no se pudo leer».
+    "/api/guion-redes": ["./public/data/tiktok.json", "./public/data/redes.json", "./public/data/facebook.json", "./public/data/youtube.json"],
+    // El mixto (28 de septiembre de 2026) lee los dos: el archivo y el catalogo del de prensa, y
+    // las cuatro redes del de redes. Sin esto falla solo en produccion y en silencio.
+    "/api/guion-mixto": ["./public/data/notas.json", "./public/data/catalogo-busqueda.json", "./public/data/tiktok.json", "./public/data/redes.json", "./public/data/facebook.json", "./public/data/youtube.json"],
     // El de la portada lee los titulares en vivo y cruza cada uno con el
     // archivo para dar el enlace del propio medio, como /api/actualidad, y
     // con el catalogo para decir «Zeta Tijuana» y no «zetatijuana.com».
@@ -72,6 +77,10 @@ const nextConfig: NextConfig = {
     ],
     // El pase pagado solo necesita el roster, por la misma regla 5.
     "/api/redes-en-vivo": ["./public/data/roster.json"],
+    // El seguimiento de una publicacion, por lo mismo: sin el roster no se
+    // puede comprobar la regla 5 y el tono sale retenido en toda ficha. Los
+    // corchetes van escapados porque la llave es un glob de picomatch.
+    "/api/seguimiento/\\[id\\]": ["./public/data/roster.json"],
     // El informe en PDF de un termino (lib/informe/informe.ts) lee los dos
     // archivos de consultas del disco y registra Geist desde node_modules:
     // el motor de PDF no lee las fuentes del sistema. Sin esto la ruta

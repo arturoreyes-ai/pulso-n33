@@ -43,5 +43,15 @@ export const MODELO_ANALISIS = "claude-haiku-4-5-20251001";
  * acredito a Latinus un video de @elheraldodemexico; Sonnet 5 atribuyo bien
  * todos los clips. Cuesta ~$0.017 por guion contra ~$0.005, unos $4 al mes en
  * el peor caso (dos programas, cuatro ciclos al dia).
+ *
+ * Sonnet 5.5 desde el 28 de septiembre de 2026, tambien del cliente: el mismo
+ * precio ($2 / $10 por millon) y el mismo tokenizador, asi que un guion cuesta
+ * lo mismo. Lo que cambia es que puede negarse en mas categorias; la llamada
+ * y sus respaldos viven en modelo-guion.ts.
  */
-export const MODELO_GUION = "claude-sonnet-5";
+export const MODELO_GUION = "claude-sonnet-5-5";
+
+/** A quien se le vuelve a pedir un guion que MODELO_GUION se nego a escribir
+ *  (modelo-guion.ts). Sonnet 5, el anterior: no tiene los clasificadores
+ *  nuevos, y el cuerpo de la peticion vale igual para los dos. */
+export const MODELO_RESPALDO_GUION = "claude-sonnet-5";
