@@ -32,6 +32,7 @@ ni una copia cacheada de `notas.json` se sirve sin sesión.
 | Qué | Dónde |
 |---|---|
 | Configuración de Auth.js, proveedor Entra, `callbacks.signIn` (alta al entrar) | `web/src/auth.ts` |
+| Correo a los admins cuando alguien pide acceso (§3.1) | `web/src/lib/acceso/aviso-solicitud.ts` |
 | Ruta de Auth.js | `web/src/app/api/auth/[...nextauth]/route.ts` |
 | La puerta: exige sesión y refresca la cookie | `web/src/proxy.ts` |
 | Quién pregunta y con qué rol: `requerirUsuario`, `requerirAdmin`, `requerirRol` | `web/src/lib/acceso/sesion.ts` |
@@ -134,6 +135,40 @@ Dos cosas que no son obvias:
   emergencia: pon tu correo, vuelve a entrar, arregla el resto por la API.
 
 `web/.env.example` tiene las mismas variables comentadas una a una.
+
+### 3.1 Aviso por correo de cada solicitud (opcional)
+
+Desde el 29 de septiembre de 2026, la primera vez que un correo desconocido
+entra y queda pendiente, `lib/acceso/aviso-solicitud.ts` manda un correo con
+nombre, correo y hora del Pacífico (PST/PDT) y un enlace a Accesos. Sale por
+Microsoft Graph con **la misma app de Entra**, así que no hay proveedor nuevo
+ni DNS. Sin las dos variables no hace nada, y si Graph falla la entrada sigue
+igual (el error queda en los logs de la función como `aviso de solicitud no
+enviado`).
+
+| Variable | Valor |
+|---|---|
+| `AVISO_SOLICITUD_REMITENTE` | Buzón de Microsoft 365 desde el que sale, p. ej. `areyes@vivelabaja.com` |
+| `AVISO_SOLICITUD_PARA` | Destinatarios separados por coma, p. ej. `areyes@vivelabaja.com` |
+
+En Azure, una vez:
+
+1. Registros de aplicaciones > la app > Permisos de API > Agregar un permiso >
+   Microsoft Graph > **Permisos de aplicación** (no delegados) > `Mail.Send`.
+2. **Conceder consentimiento de administrador** para el inquilino. Sin esto
+   Graph responde `403 ErrorAccessDenied`.
+3. Acotarlo. `Mail.Send` de aplicación deja a la app enviar como *cualquier*
+   buzón del inquilino. En Exchange Online PowerShell, con un grupo de
+   seguridad habilitado para correo que contenga solo al remitente:
+
+   ```powershell
+   New-ApplicationAccessPolicy -AppId <Id. de aplicación> -PolicyScopeGroupId <grupo> -AccessRight RestrictAccess -Description "Pulso: solo avisos de acceso"
+   Test-ApplicationAccessPolicy -Identity <remitente> -AppId <Id. de aplicación>
+   ```
+
+Solo avisa en el INSERT: reintentar una cuenta pendiente no es otra
+solicitud, y una fila dada de alta a mano antes de que la persona entre
+tampoco lo es.
 
 ## 4. Desarrollo local
 

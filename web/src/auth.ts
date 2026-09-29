@@ -58,7 +58,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   session: { strategy: "jwt", maxAge: 8 * 60 * 60 },
   pages: { signIn: "/entrar", signOut: "/entrar", error: "/entrar" },
   callbacks: {
-    /** Registra la solicitud y solo crea sesion para cuentas activas y aprobadas. */
+    /**
+     * Registra la solicitud y solo crea sesion para cuentas activas y
+     * aprobadas. Una solicitud nueva avisa por correo (aviso-solicitud.ts).
+     */
     async signIn({ user, profile }) {
       const correo = (user.email || "").trim().toLowerCase();
       if (!correo) return false;
@@ -69,7 +72,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         entraOid: typeof profile?.oid === "string" ? profile.oid : null,
       });
       if (!fila.activo) return false;
-      if (!fila.aprobado) return "/entrar?error=ApprovalRequired";
+      if (!fila.aprobado) {
+        if (fila.nueva) {
+          const { avisarSolicitud } = await import("@/lib/acceso/aviso-solicitud");
+          await avisarSolicitud({ nombre: fila.nombre, correo: fila.correo, creadoEn: fila.creadoEn });
+        }
+        return "/entrar?error=ApprovalRequired";
+      }
       return true;
     },
     jwt({ token, profile }) {

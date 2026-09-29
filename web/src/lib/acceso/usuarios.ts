@@ -107,8 +107,14 @@ export async function buscarUsuarioPorId(id: number): Promise<Usuario | null> {
  * ACCESO_PRIMER_ADMIN) y se respeta despues... salvo para ese correo, que
  * vuelve a admin, activo y aprobado en cada entrada: es la puerta de emergencia
  * documentada en roles.ts.
+ *
+ * `nueva` dice si esta llamada creo la fila, y decide el correo de
+ * aviso-solicitud.ts. `xmax = 0` es la forma de Postgres de distinguir en un
+ * upsert el INSERT del UPDATE: una fila recien insertada no tiene transaccion
+ * que la haya reemplazado. Una fila dada de alta a mano antes de que la persona
+ * entre (como se hizo con arivera el 29 de septiembre) no es solicitud.
  */
-export async function registrarAcceso(identidad: Identidad): Promise<Usuario> {
+export async function registrarAcceso(identidad: Identidad): Promise<Usuario & { nueva: boolean }> {
   const esPrimerAdmin = acceso.primerAdmin !== "" && identidad.correo === acceso.primerAdmin;
   const rolInicial: Rol = esPrimerAdmin ? "admin" : ROL_POR_OMISION;
   const bd = sql();
@@ -125,7 +131,7 @@ export async function registrarAcceso(identidad: Identidad): Promise<Usuario> {
       WHERE entra_oid = ${identidad.entraOid}
       RETURNING id, entra_oid, correo, nombre, rol, activo, aprobado, creado_en, ultimo_acceso_en`;
     const fila = porOid[0];
-    if (fila) return aUsuario(fila);
+    if (fila) return { ...aUsuario(fila), nueva: false };
   }
 
   const filas = await bd`
@@ -138,10 +144,11 @@ export async function registrarAcceso(identidad: Identidad): Promise<Usuario> {
       activo = CASE WHEN ${esPrimerAdmin} THEN true ELSE usuarios.activo END,
       aprobado = CASE WHEN ${esPrimerAdmin} THEN true ELSE usuarios.aprobado END,
       ultimo_acceso_en = now()
-    RETURNING id, entra_oid, correo, nombre, rol, activo, aprobado, creado_en, ultimo_acceso_en`;
+    RETURNING id, entra_oid, correo, nombre, rol, activo, aprobado, creado_en, ultimo_acceso_en,
+      (xmax = 0) AS insertado`;
   const fila = filas[0];
   if (!fila) throw new Error("usuarios: el upsert no devolvió fila");
-  return aUsuario(fila);
+  return { ...aUsuario(fila), nueva: fila.insertado === true };
 }
 
 export async function listarUsuarios(): Promise<Usuario[]> {
