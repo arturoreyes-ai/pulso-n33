@@ -124,6 +124,7 @@ export const SUELTAS = [
   { id: "gasto-electoral", ruta: "/gasto-electoral", nombre: "Gasto electoral", descripcion: "Campañas de Baja California, 2024" },
   { id: "seguimiento", ruta: "/seguimiento", nombre: "Seguimiento", descripcion: "Publicaciones que sigue el equipo" },
   { id: "guion", ruta: "/guion", nombre: "Guion", descripcion: "El guion de cada programa del canal", requiereAnalisis: true },
+  { id: "reportes", ruta: "/reportes", nombre: "Reportes", descripcion: "Términos en seguimiento y búsqueda de noticias y publicaciones" },
 ] as const;
 
 export type PaginaSuelta = (typeof SUELTAS)[number]["id"];

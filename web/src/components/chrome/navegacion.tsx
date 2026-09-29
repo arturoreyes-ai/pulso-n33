@@ -51,6 +51,7 @@ const LUGAR_SUELTA: Record<PaginaSuelta, string> = {
   // Tampoco: un programa no es de un lugar. Rotulo y valor dicen el nombre
   // entero, «Guion / Para locución».
   guion: "Para locución",
+  reportes: "Términos en seguimiento",
 };
 
 function rotuloDe(vista: Vista, pagina: PaginaSuelta | undefined, fuera: string | undefined): string {

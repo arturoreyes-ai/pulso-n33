@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Binoculars, Megaphone, PiggyBank, TrendUp } from "@phosphor-icons/react/dist/ssr";
+import { Binoculars, Files, Megaphone, PiggyBank, TrendUp } from "@phosphor-icons/react/dist/ssr";
 import { ViewTransition } from "react";
 
 import { IconoAutos, IconoGuion } from "@/components/chrome/iconos-nav";
@@ -93,6 +93,7 @@ function Icono({ clave, actual, superficie }: { clave: Clave; actual: boolean; s
     case "garitas": return <IconoAutos {...props} id={`${superficie}-garitas`} />;
     case "guion": return <IconoGuion {...props} id={`${superficie}-guion`} />;
     case "seguimiento": return <Binoculars {...props} aria-hidden />;
+    case "reportes": return <Files {...props} aria-hidden />;
     case "gasto-electoral": return <PiggyBank {...props} aria-hidden />;
   }
 }
@@ -106,7 +107,7 @@ interface Destino {
 
 /** Los dos grupos, en su orden de pantalla. */
 const LEER: readonly Clave[] = ["portada", "redes", "garitas"];
-const PRODUCIR: readonly Clave[] = ["guion", "seguimiento", "gasto-electoral"];
+const PRODUCIR: readonly Clave[] = ["reportes", "guion", "seguimiento", "gasto-electoral"];
 /** Lo que el telefono tiene como pestana; el resto va en «Más». */
 const PESTANAS: readonly Clave[] = ["portada", "redes", "garitas"];
 
