@@ -236,17 +236,26 @@ jobs:
 
       - name: Commit de lo gratuito
         id: commit_libre
+        env:
+          DESPLEGAR_TABLERO: ${{ vars.DESPLEGAR_TABLERO }}
         run: |
           git config user.name "pulso-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # Mismo git add que el commit final: ver ahi por que
           # data/*-comentarios.json nunca entra.
           git add data/
+          # «Despliegue: runner» le dice a web/vercel.json (ignoreCommand) que
+          # no construya este commit desde git: lo publica el paso «Construir y
+          # desplegar el tablero» con el texto de los comentarios, y un build de
+          # git sin el texto podria quedar en produccion encima de ese. Solo va
+          # cuando ese paso esta encendido; si no, git sigue publicando.
+          mensaje=(-m "datos: ingesta $(date -u +'%Y-%m-%d %H:%MZ') [skip ci]")
+          if [ "$DESPLEGAR_TABLERO" = "true" ]; then mensaje+=(-m "Despliegue: runner"); fi
           if git diff --cached --quiet; then
             echo "Sin cambios en data/"
             echo "cambios=false" >> "$GITHUB_OUTPUT"
           else
-            git commit -m "datos: ingesta $(date -u +'%Y-%m-%d %H:%MZ') [skip ci]"
+            git commit "${mensaje[@]}"
             git pull --rebase origin main
             git push origin HEAD:main
             echo "cambios=true" >> "$GITHUB_OUTPUT"
@@ -391,6 +400,7 @@ jobs:
         id: commit
         env:
           CAMBIOS_LIBRE: ${{ steps.commit_libre.outputs.cambios }}
+          DESPLEGAR_TABLERO: ${{ vars.DESPLEGAR_TABLERO }}
         run: |
           git config user.name "pulso-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -401,11 +411,14 @@ jobs:
           # es lo primero que hay que mirar; `pulso validar` falla antes de
           # llegar aqui si falta (pulso/validador.py::_regla_gitignore).
           git add data/
+          # Ver «Despliegue: runner» en el commit de lo gratuito.
+          mensaje=(-m "datos: redes $(date -u +'%Y-%m-%d %H:%MZ') [skip ci]")
+          if [ "$DESPLEGAR_TABLERO" = "true" ]; then mensaje+=(-m "Despliegue: runner"); fi
           if git diff --cached --quiet; then
             echo "Sin cambios en data/"
             echo "cambios=${CAMBIOS_LIBRE:-false}" >> "$GITHUB_OUTPUT"
           else
-            git commit -m "datos: redes $(date -u +'%Y-%m-%d %H:%MZ') [skip ci]"
+            git commit "${mensaje[@]}"
             git pull --rebase origin main
             git push origin HEAD:main
             echo "cambios=true" >> "$GITHUB_OUTPUT"
@@ -452,9 +465,21 @@ jobs:
 
       # Construye contra el entorno del host para que las variables de
       # produccion (NEXT_PUBLIC_*) sean las mismas que en el despliegue.
+      #
+      # Desde la RAIZ del repo, no desde web/: el proyecto de Vercel tiene
+      # Root Directory `web`, y la CLI construye en join(cwd, rootDirectory)
+      # (vercel 59.11.2, `const workPath = join(cwd,
+      # project.settings.rootDirectory || ".")`). Con `working-directory: web`
+      # buscaba web/web, y este paso habria fallado la primera vez que alguien
+      # lo encendiera; nunca habia corrido. Lo que construye es el mismo web/.
+      #
+      # Los commits de esta corrida llevan «Despliegue: runner» cuando este
+      # paso esta encendido, y web/vercel.json (ignoreCommand) le dice a la
+      # integracion de git de Vercel que no los construya: un build de git no
+      # trae el texto de los comentarios y podria quedar en produccion encima
+      # de este.
       - name: Construir y desplegar el tablero
         if: vars.DESPLEGAR_TABLERO == 'true'
-        working-directory: web
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}

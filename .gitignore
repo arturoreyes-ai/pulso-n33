@@ -57,3 +57,8 @@ servicio-tono/api/_modelo/
 
 # Lo escribe `vercel link` al vincular servicio-tono/ con su proyecto de Vercel.
 servicio-tono/.vercel/
+
+# Lo escribe `vercel pull` en el paso «Construir y desplegar el tablero» de
+# pulso.yml, que corre desde la raiz porque el proyecto tiene Root Directory
+# web. Trae las variables de produccion en claro: nunca a git.
+/.vercel/

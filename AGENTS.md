@@ -2470,7 +2470,22 @@ which is the panel reporting a misconfiguration correctly, not a bug.
 `pulso.yml` has a `Construir y desplegar el tablero` step behind
 `vars.DESPLEGAR_TABLERO`, unset, and so are `VERCEL_TOKEN`, `VERCEL_ORG_ID` and
 `VERCEL_PROJECT_ID`: setting the variable alone would fail that step. With all
-four set, the runner deploys with the comment text it just wrote.
+four set, the runner deploys with the comment text it just wrote. Measured on
+28 September 2026: the production build logged «sin texto de comentarios», and
+locally 0 of 277 featured posts had text, because a local `*-comentarios.json`
+is whatever the last LOCAL harvest wrote while `git pull` keeps moving the
+post lists. Two things were fixed that day, before it was ever switched on:
+- **The step ran from `web/` and would have failed.** The project's Root
+  Directory is `web`, and the CLI builds in `join(cwd, rootDirectory)`, so it
+  looked for `web/web`. It runs from the repo root now; `/.vercel/` is
+  git-ignored there because `vercel pull` writes the production env into it.
+- **Vercel's git build would have raced it.** Both bot commits trigger a git
+  build without comment text, which could land in production on top of the
+  runner's. When `DESPLEGAR_TABLERO` is `true` the bot adds a
+  `Despliegue: runner` line to its commit messages, and `web/vercel.json`'s
+  `ignoreCommand` skips exactly those. With the variable off nothing changes
+  and git keeps publishing the data. A human push is still built by git
+  (without comments) until that push's own cron run redeploys from the runner.
 
 **Never push an empty commit to redeploy**: it matches no `paths-ignore`, so
 it starts a full ingest, paid actors included. And do not let the skip token
