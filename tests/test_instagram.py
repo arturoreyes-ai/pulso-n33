@@ -588,6 +588,18 @@ class TestPublicaciones(BaseCache):
         pubs = instagram.leer_publicaciones(self.cache)
         self.assertEqual(pubs["https://www.instagram.com/p/AAA/"]["likes"], 500)
 
+    def test_cosechar_sella_leido_solo_en_lo_que_vio(self):
+        # La segunda corrida ya no ve BBB entre los ultimos de la cuenta: sus
+        # likes son los de la primera, y `leido` lo dice.
+        antes = "2026-09-03T12:00:00+00:00"
+        with patch.object(instagram, "correr_actor", _Actor(posts=POSTS_RICOS)):
+            instagram.cosechar([CUENTA], antes, tok="t", cache=self.cache)
+        with patch.object(instagram, "correr_actor", _Actor(posts=POSTS_RICOS[:1])):
+            instagram.cosechar([CUENTA], AHORA, tok="t", cache=self.cache)
+        pubs = instagram.leer_publicaciones(self.cache)
+        self.assertEqual(pubs["https://www.instagram.com/p/AAA/"]["leido"], AHORA)
+        self.assertEqual(pubs["https://www.instagram.com/p/BBB/"]["leido"], antes)
+
     def test_el_catalogo_se_poda_a_la_retencion(self):
         viejo = {"https://x/": {"url": "https://x/", "fecha": "2026-07-01", "likes": 1},
                  "https://y/": {"url": "https://y/", "fecha": "2026-09-01", "likes": 1},
@@ -853,6 +865,72 @@ class TestDestacados(BaseCache):
         self.assertEqual([x["url"].rsplit("/", 2)[1] for x in d],
                          ["S{}".format(i) for i in range(15)])
 
+    def _muchas_cuentas(self, chicas=20):
+        """Una cuenta grande y `chicas` cuentas de UN post en la misma zona:
+        mas cuentas que puestos, como la region de Instagram desde el 15 de
+        septiembre de 2026 (21 cuentas para quince puestos)."""
+        cuentas = [CUENTA] + [dict(CUENTA, id="chica{:02d}_ig".format(i),
+                                   handle="@chica{}".format(i), nombre="Chica {}".format(i))
+                              for i in range(chicas)]
+        grande = [dict(POSTS_RICOS[0], url="https://www.instagram.com/p/G{}/".format(i),
+                       likesCount=9000 - i) for i in range(15)]
+        pubs = self._pubs(posts=grande)
+        for i, cuenta in enumerate(cuentas[1:]):
+            pubs.update(self._pubs(cuenta=cuenta, posts=[dict(
+                POSTS_RICOS[0], url="https://www.instagram.com/p/C{}/".format(i),
+                likesCount=100 + i)]))
+        return pubs, cuentas
+
+    def test_con_mas_cuentas_que_puestos_un_tercio_va_por_likes(self):
+        # El caso del 29 de septiembre de 2026: la vuelta sola llenaba los
+        # quince puestos y la region escondia cinco posts de tjnoticias_ig de
+        # 505 a 1,635 likes para ensenar uno de 50.
+        pubs, cuentas = self._muchas_cuentas()
+        panel = self._panel(pubs, cuentas=cuentas)
+        d = panel["destacados"]
+        # Diez puestos de vuelta -- la grande y las nueve chicas con mas likes
+        # -- y cinco de merito, que son los cinco siguientes de la grande.
+        self.assertEqual(self._por_cuenta(d)["zeta_ig"], 6)
+        self.assertEqual(len(self._por_cuenta(d)), 10)
+        self.assertEqual(sorted(x["likes"] for x in d if x["cuenta"] == "zeta_ig"),
+                         list(range(8995, 9001)))
+        self.assertEqual(min(x["likes"] for x in d), 111)
+        self.assertEqual(validar_redes(panel)[0], [])
+
+    def test_donde_la_vuelta_cabe_la_seleccion_es_la_de_antes(self):
+        # Diez cuentas caben en los diez puestos de vuelta: el tercio de merito
+        # no cambia nada, y el corte es el del 17 de septiembre, calculado aqui
+        # con la formula de entonces.
+        from pulso.redes import _orden_destacado, _por_turnos
+        candidatos = sorted(({"url": "u{:02d}{:02d}".format(c, i), "cuenta": "c{}".format(c),
+                              "likes": (c * 37 + i * 11) % 97, "comentarios": 0}
+                             for c in range(10) for i in range(4)), key=_orden_destacado)
+        turno, vistos = {}, {}
+        for x in candidatos:
+            turno[x["url"]] = vistos.get(x["cuenta"], 0)
+            vistos[x["cuenta"]] = turno[x["url"]] + 1
+        antes = sorted(candidatos, key=lambda x: (min(turno[x["url"]], 1),) + _orden_destacado(x))
+        self.assertEqual({x["url"] for x in _por_turnos(candidatos, 15)},
+                         {x["url"] for x in antes[:15]})
+        # Con una cuenta mas ya no cabe, y ahi si cambia.
+        once = candidatos + [{"url": "u9900", "cuenta": "c99", "likes": 0, "comentarios": 0}]
+        self.assertNotEqual({x["url"] for x in _por_turnos(once, 15)},
+                            {x["url"] for x in sorted(
+                                once, key=lambda x: (min(turno.get(x["url"], 0), 1),)
+                                + _orden_destacado(x))[:15]})
+
+    def test_releidos_cuenta_solo_lo_leido_en_esta_corrida(self):
+        # Un post que salio de los ultimos cinco de su cuenta conserva los
+        # likes de su ultima lectura; `releidos` es cuantos no (29 de
+        # septiembre de 2026). `leido` vive en el cache y no llega a data/.
+        pubs = self._pubs()
+        pubs["https://www.instagram.com/p/AAA/"]["leido"] = AHORA
+        pubs["https://www.instagram.com/p/BBB/"]["leido"] = "2026-09-03T12:00:00+00:00"
+        panel = self._panel(pubs)
+        self.assertEqual(panel["releidos"], 1)
+        self.assertNotIn('"leido"', json.dumps(panel))
+        self.assertEqual(validar_redes(panel)[0], [])
+
     def test_el_reparto_es_determinista_y_el_emitido_sigue_ordenado(self):
         pubs = self._dos_medios_de_tijuana()
         uno = self._panel(pubs, cuentas=[CUENTA, self.VECINA])["destacados"]
@@ -1054,6 +1132,12 @@ class TestValidadorDestacados(unittest.TestCase):
         d = dict(self.CON)
         d["destacados"] = [dict(self.DESTACADO, **cambios)]
         return d
+
+    def test_releidos_no_puede_pasar_de_los_destacados(self):
+        self.assertEqual(validar_redes(dict(self.CON, releidos=1))[0], [])
+        for malo in (2, -1, "1", True):
+            e, _ = validar_redes(dict(self.CON, releidos=malo))
+            self.assertTrue(any("'releidos'" in x for x in e), malo)
 
     def test_ausencia_es_aviso_no_error(self):
         e, a = validar_redes(dict(TestValidadorRedes.BASE))

@@ -957,12 +957,23 @@ def cmd_gasto_electoral(args):
     return 0
 
 
+def anotacion(texto):
+    """Un aviso como anotacion de GitHub Actions. `%`, CR y LF se escapan: la
+    orden de flujo corta ahi."""
+    return "::warning title=Pulso::" + (
+        texto.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A"))
+
+
 def cmd_validar(args):
-    from .validador import resumen, validar_todo
+    from .validador import avisos_de_pantalla, resumen, validar_todo
 
     errores, avisos = validar_todo(args.config, args.datos)
+    # Con --anotaciones, los avisos de lo que ensena el lector (paneles
+    # atrasados, lo mas visto escondido, cifras sin releer) salen en la pagina
+    # de la corrida: en el log, con el cron en verde, no los leia nadie.
+    pantalla = set(avisos_de_pantalla(args.datos)) if args.anotaciones else set()
     for a in avisos:
-        print("aviso: {}".format(a))
+        print(anotacion(a) if a in pantalla else "aviso: {}".format(a))
     for e in errores:
         print("error: {}".format(e), file=sys.stderr)
     if errores:
@@ -1365,6 +1376,9 @@ def main(argv=None):
 
     v = sub.add_parser("validar", help="valida config/ y data/")
     v.add_argument("--datos", default="data")
+    v.add_argument("--anotaciones", action="store_true",
+                   help="imprime los avisos de lo que ensena el lector como anotaciones "
+                        "de GitHub Actions (::warning::), para que salgan en la corrida")
     v.set_defaults(fn=cmd_validar)
 
     s = sub.add_parser("sitio", help="arma _site/ para publicar en Pages")

@@ -111,6 +111,10 @@ export function cubetasDisponibles(docs: DocsRedes): CubetaRegion[] {
  *  (pulso/redes.py::VUELTAS_GARANTIZADAS): si divergieran, la pagina de una
  *  zona y la de region repartirian distinto sobre los mismos datos. */
 const VUELTAS_GARANTIZADAS = 1;
+/** `Math.floor(tope / DIVISOR_MERITO)` puestos, cinco de quince, van SOLO por
+ *  merito (pulso/redes.py::DIVISOR_MERITO, 29 de septiembre de 2026). Ver
+ *  `porTurnos`. scripts/probar-publicaciones.cjs lee los dos del .py. */
+const DIVISOR_MERITO = 3;
 
 /** El orden del archivo, para desempatar dentro de una misma vuelta. */
 /**
@@ -158,6 +162,12 @@ const compararPorMerito = (red: RedVisual) => (a: Destacado, b: Destacado): numb
  * lo que lo separa de una cuota: una cuota sentaria los tres posts de un medio
  * de diez likes por delante de tres de nueve mil. Y no agrega filas: donde
  * publica una sola cuenta la salida es identica a la de antes.
+ *
+ * La vuelta toma a lo sumo `tope - Math.floor(tope / DIVISOR_MERITO)` puestos
+ * (29 de septiembre de 2026). Con 21 cuentas de Instagram en la region la
+ * vuelta sola llenaba los quince y el merito no volvia nunca: ese dia la
+ * region escondia cinco posts de tjnoticias de 505 a 1,635 likes y ensenaba
+ * uno de 50. Donde la vuelta cabe, la seleccion es la de siempre.
  */
 function porTurnos(posts: readonly Destacado[], tope: number,
                    red: RedVisual = "instagram"): Destacado[] {
@@ -175,8 +185,13 @@ function porTurnos(posts: readonly Destacado[], tope: number,
   // mismo render. Ordenarlo en sitio se lo cambiaria a los tres.
   const elegidos = new Set([...posts]
     .sort((a, b) => vuelta(a) - vuelta(b) || compararPorMerito(red)(a, b))
-    .slice(0, tope)
+    .filter((post) => (turno.get(post.url) ?? 0) < VUELTAS_GARANTIZADAS)
+    .slice(0, tope - Math.floor(tope / DIVISOR_MERITO))
     .map((post) => post.url));
+  for (const post of [...posts].sort(compararPorMerito(red))) {
+    if (elegidos.size >= tope) break;
+    elegidos.add(post.url);
+  }
   // Se devuelve en el ORDEN DEL ARCHIVO, no en el del reparto: esto elige, no
   // ordena. Quien pinta ordena por fecha y quien suma no mira el orden.
   return posts.filter((post) => elegidos.has(post.url));

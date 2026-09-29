@@ -502,7 +502,9 @@ def cosechar(cuentas, ahora, tok=None, presupuesto=None, cache=CACHE, posts_por_
         for it in items:
             limpio, motivo = _limpiar_de_pagina(it, cuenta, ahora)
             if limpio:
-                publicaciones[limpio["url"]] = {**publicaciones.get(limpio["url"], {}), **limpio}
+                # `leido`: ver redes.derivar (`releidos`). Solo en el cache.
+                publicaciones[limpio["url"]] = {**publicaciones.get(limpio["url"], {}), **limpio,
+                                                "leido": ahora}
                 limpios.append(limpio)
             else:
                 motivos[motivo] = motivos.get(motivo, 0) + 1

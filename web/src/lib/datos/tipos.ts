@@ -572,12 +572,18 @@ export interface DocRedes {
    *  registro deliberado de un hueco (Mexicali, San Quintín) y permiten
    *  rotular «sin cuenta» en vez de un cero. */
   cuentas?: RedesCuenta[];
+  /** Cuántos `destacados` traen cifras leídas en esta corrida (29 de
+   *  septiembre de 2026). El resto conserva las de su última lectura: la
+   *  cosecha lee solo lo último de cada cuenta. Lo vigila `pulso validar`; la
+   *  pantalla no lo pinta. Ausente en cortes anteriores. */
+  releidos?: number;
   /** Unión del top general y del top por zona, ordenada por (-likes,
    *  -comentarios, url). Cada uno de esos dos cortes reparte una vuelta por
    *  cuenta antes de volver al mérito, para que una cuenta con más seguidores
-   *  no se lleve los quince de su ciudad. Filtrar por zona y cortar a
-   *  `destacados_maximo` con `seleccionarPublicaciones`, que aplica la misma
-   *  regla al corte de región: un `slice` crudo devuelve doce de Tijuana. */
+   *  no se lleve los quince de su ciudad, y guarda un tercio de los puestos
+   *  para el mérito solo. Filtrar por zona y cortar a `destacados_maximo` con
+   *  `seleccionarPublicaciones`, que aplica la misma regla al corte de región:
+   *  un `slice` crudo devuelve doce de Tijuana. */
   destacados?: Destacado[];
 }
 

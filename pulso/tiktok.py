@@ -666,7 +666,8 @@ def cosechar(busquedas, ahora, tok=None, presupuesto=None, cache=CACHE,
             previo = publicaciones.get(limpio["url"], {})
             if f["id"] in de_rubro and previo.get("cuenta") and previo["cuenta"] not in de_rubro:
                 limpio = dict(limpio, cuenta=previo["cuenta"])
-            publicaciones[limpio["url"]] = {**previo, **limpio}
+            # `leido`: ver redes.derivar (`releidos`). Solo en el cache.
+            publicaciones[limpio["url"]] = {**previo, **limpio, "leido": ahora}
             # Un perfil trae lo ultimo que publico la cuenta, sea de hoy o de
             # la semana pasada: solo lo de la ventana paga comentarios.
             if _es_perfil(f) and not _dentro(limpio["publicado"], ahora, ventana_horas):

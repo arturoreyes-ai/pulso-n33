@@ -58,8 +58,12 @@ RUBRO_MAXIMO = 10
 # Cuantas publicaciones de una misma cuenta entran ANTES de que las demas
 # tengan la suya. Con 1: primero la mejor de cada cuenta y lo que sobre del
 # tope se sigue llenando por likes. Subirlo a 2 da mas variedad y cuesta los
-# segundos puestos del que mas suena; es la perilla, y no hay otra.
+# segundos puestos del que mas suena.
 VUELTAS_GARANTIZADAS = 1
+# Y la otra perilla (29 de septiembre de 2026): `maximo // DIVISOR_MERITO`
+# puestos del corte -- cinco de quince -- van SOLO por merito, pase lo que
+# pase con la vuelta. Ver _por_turnos para el caso.
+DIVISOR_MERITO = 3
 # El pie de un post puede tener parrafos; se publica su primera linea como
 # titular, recortada. 160 es el largo con que ya se leen los titulares.
 TITULO_MAXIMO = 160
@@ -381,8 +385,9 @@ def _orden_destacado(p, claves=ORDEN_DESTACADO):
 
 
 def _por_turnos(candidatos, maximo, vueltas=VUELTAS_GARANTIZADAS,
-                orden=ORDEN_DESTACADO):
-    """Los `maximo` de `candidatos`, con una vuelta por cuenta antes del merito.
+                orden=ORDEN_DESTACADO, divisor=DIVISOR_MERITO):
+    """Los `maximo` de `candidatos`, con una vuelta por cuenta antes del merito,
+    y un tercio de los puestos que la vuelta no puede tomar.
 
     El caso: entre el 15 y el 17 de septiembre de 2026 tjnoticias_ig encabezo
     TODAS las corridas de Tijuana con entre siete y diez de los quince lugares,
@@ -406,15 +411,35 @@ def _por_turnos(candidatos, maximo, vueltas=VUELTAS_GARANTIZADAS,
     con los catorce de Ensenada -- `min(turno, vueltas)` vale 0 y luego 1 en
     una lista ya ordenada por likes, asi que la salida es identica a la de
     antes. Inventar un hueco es el mismo error que rellenarlo (regla 4).
+
+    El tercio de merito (29 de septiembre de 2026). Todo lo de arriba suponia
+    que la vuelta cabe en el corte: se diseno con doce cuentas en Tijuana y
+    quince puestos. Con 21 cuentas de Instagram en la region la vuelta sola
+    llenaba los quince, el merito no volvia nunca, y eso ES el turno a secas
+    que el cliente descarto: ese dia la region escondia cinco posts de
+    tjnoticias_ig de 505 a 1,635 likes y ensenaba uno de 50, y YouTube Mexico
+    uno de 38,631 vistas por uno de 19. Medido sobre 13 corridas, el peor
+    hueco entre lo escondido y lo visible bajo de 84 veces a menos de 6 en la
+    region de Instagram. Asi que la vuelta toma a lo sumo `maximo - maximo //
+    divisor` puestos, los de las cuentas con mejor post, y el resto se llena
+    por merito entre todo lo que quedo. Donde la vuelta cabe -- dos cuentas,
+    diez -- la salida es la de siempre, byte por byte.
     """
     turno, vistos = {}, {}
     for d in candidatos:
         n = vistos.get(d["cuenta"], 0)
         turno[d["url"]] = n
         vistos[d["cuenta"]] = n + 1
+    por_merito = sorted(candidatos, key=lambda d: _orden_destacado(d, orden))
     cola = sorted(candidatos,
                   key=lambda d: (min(turno[d["url"]], vueltas),) + _orden_destacado(d, orden))
-    return cola[:maximo]
+    vuelta = [d for d in cola if turno[d["url"]] < vueltas][:maximo - maximo // divisor]
+    elegidos = {d["url"] for d in vuelta}
+    for d in por_merito:
+        if len(elegidos) >= maximo:
+            break
+        elegidos.add(d["url"])
+    return [d for d in por_merito if d["url"] in elegidos]
 
 
 def _dentro_por_dias(ahora, ventana_dias):
@@ -795,6 +820,24 @@ def derivar(comentarios, ahora, salud, gasto, temas=None, publicaciones=None,
                if not c["brigada"] and not _sin_palabras(c["texto"])]
     conteo, modelo_usado = _conteo_tono(opinion)
 
+    destacados = _destacados(publicaciones or {}, comentarios, opinion, temas,
+                             cuentas or [], dentro, campos_extra=campos_extra,
+                             turnos=turnos, cifras=cifras, orden=orden,
+                             formatos=formatos, dedupe_titulo=dedupe_titulo,
+                             rubros_de=rubros_de, rubro_maximo=rubro_maximo)
+    # Cuantos destacados traen cifras leidas EN ESTA corrida. Cada cosecha lee
+    # solo lo ultimo de cada cuenta (5 posts en Instagram), y un post que salio
+    # de esa lista conserva los likes de su ultima lectura. Medido el 29 de
+    # septiembre de 2026 sobre 12 corridas: de los posts de 200 likes o mas que
+    # seguian en la ventana, el 62% tenia exactamente la misma cifra seis horas
+    # despues, en Instagram, TikTok y Facebook, y el ultimo dato real era de
+    # cuando el post tenia unas 12 horas. Sin este conteo el ranking de "lo mas
+    # likeado" se ve igual de fresco este bien o no. `leido` vive en el
+    # catalogo del cache y no en data/: sellarlo por post cambiaria cada
+    # destacado en cada corrida.
+    releidos = sum(1 for d in destacados
+                   if ((publicaciones or {}).get(d["url"]) or {}).get("leido") == ahora)
+
     return {
         "esquema": 1,
         "generado": ahora,
@@ -828,11 +871,8 @@ def derivar(comentarios, ahora, salud, gasto, temas=None, publicaciones=None,
         "destacados_maximo": DESTACADOS_MAXIMO,
         **({"rubro_maximo": rubro_maximo} if rubros_de is not None else {}),
         "cuentas": _catalogo_cuentas(cuentas),
-        "destacados": _destacados(publicaciones or {}, comentarios, opinion, temas,
-                                  cuentas or [], dentro, campos_extra=campos_extra,
-                                  turnos=turnos, cifras=cifras, orden=orden,
-                                  formatos=formatos, dedupe_titulo=dedupe_titulo,
-                                  rubros_de=rubros_de, rubro_maximo=rubro_maximo),
+        "releidos": releidos,
+        "destacados": destacados,
         "salud": sorted(salud, key=lambda s: s["cuenta"]),
         "gasto": gasto,
     }

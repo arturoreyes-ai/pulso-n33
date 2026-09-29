@@ -391,8 +391,12 @@ jobs:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
         run: python -m pulso tendencias
 
+      # --anotaciones: los avisos de lo que ensena el lector (un panel
+      # atrasado, lo mas visto escondido por la vuelta por cuenta, likes sin
+      # releer) suben a la pagina de la corrida. Van en este paso y no en los
+      # de arriba porque este es el que ve todas las cosechas.
       - name: Validar lo que acaba de escribir
-        run: python -m pulso validar
+        run: python -m pulso validar --anotaciones
 
       # Lo que las cosechas pagadas escribieron. Lo gratuito ya se commiteo
       # arriba; `cambios` dice si hubo commit en cualquiera de los dos.

@@ -221,6 +221,21 @@ Three things it is **not**, each of which was the tempting version:
   «Más recientes» toggle (`publicaciones.ts::ordenarPublicaciones`, see the web
   section); before that it always read newest-first.
 
+**The round takes at most two thirds of the cut** (29 September 2026,
+`DIVISOR_MERITO = 3`, same file and the same constant in `web/`): at least
+five of the fifteen go by merit alone. The round was sized for Tijuana's
+twelve accounts; with 21 in the region it filled all fifteen slots by
+itself, merit never came back, and that *is* the plain round-robin ruled out
+below. That day the region hid five `tjnoticias_ig` posts of 505–1,635 likes
+and showed one of 50; YouTube México hid 38,631 views for 19. Replayed over
+13 runs, the worst hidden-to-shown gap on Instagram's region fell from 84×
+to under 6×. Where the round fits, the selection is byte-identical to
+before. `probar-publicaciones.cjs` reads both constants from `redes.py`.
+`pulso validar` now warns when a reader view hides a post with 30× the
+merit of the lowest one shown (`validar_pantalla`); YouTube still trips it,
+because twelve channels a thousand times apart share fifteen slots, and
+that is the next decision, not a bug.
+
 Where one outlet is the only publisher — `elvigia_ig` holds all fourteen of
 Ensenada at a median of **1 like** — the round exhausts immediately and the
 output is byte-identical to before. Manufacturing a gap is the same error as
@@ -238,6 +253,20 @@ written before that date carries `ventana_dias: 7` and no `publicado`;
 `pulso/validador.py` accepts it with an aviso, not an error, because `data/` is
 bot-written and the cron regenerates it. Do not hand-edit it to silence the
 aviso, and do not add `ventana_dias` back to the pipeline.
+
+**Counts freeze once a post leaves the latest few of its account.** Each run
+lists only the last `posts_por_cuenta` (5) per Instagram account, 8 per
+Facebook page and 15 per TikTok search, and a post that dropped off keeps the
+likes of its last read. Measured on 29 September 2026 over 12 runs: 62% of
+posts with 200+ likes still in the window showed the identical figure six
+hours later, on all three networks, so the most-liked ranking was mostly the
+morning's numbers. Not fixed yet (it costs Apify results); what exists is the
+measurement. Each harvester stamps `leido` on the cache record it read, never
+in `data/` (a per-post timestamp would change every row every run), and
+`redes.derivar` publishes `releidos`, how many destacados were read this run.
+`pulso validar` warns above half, and `--anotaciones`, which the cron's last
+validation step passes, prints that warning, the hidden-post one and the
+freshness ones as annotations on the run page.
 
 Why not put it in `data/`: the git history cannot honour a 30-day retention.
 Why this is still legal-adjacent: a comment is personal data under LFPDPPP and

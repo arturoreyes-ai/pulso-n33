@@ -62,6 +62,28 @@ assert.deepEqual(seleccionarPublicaciones(dos, 'tijuana', 'tiktok').map(p => p.c
 // No agrega filas ni recorta, y un lugar de un solo medio sale identico.
 assert.equal(seleccionarPublicaciones(dos, 'tijuana', 'instagram').length,
   seleccionarPublicaciones(dos, 'tijuana', 'tiktok').length);
+// Con mas cuentas que puestos, un tercio va SOLO por merito (29 de septiembre
+// de 2026): la vuelta sola llenaba los quince y la region escondia cinco posts
+// de tjnoticias de 505 a 1,635 likes para ensenar uno de 50. Diez de vuelta
+// (la grande y las nueve chicas mayores) y los cinco siguientes de la grande.
+const muchas = doc([
+  ...Array.from({ length: 15 }, (_, i) => post(`M${i}`, { cuenta: 'grande', likes: 9000 - i })),
+  ...Array.from({ length: 20 }, (_, i) => post(`N${i}`, { cuenta: `chica${i}`, likes: 100 + i })),
+]);
+const deMuchas = seleccionarPublicaciones(muchas, 'tijuana', 'instagram');
+assert.equal(deMuchas.filter((p) => p.cuenta === 'grande').length, 6);
+assert.equal(new Set(deMuchas.map((p) => p.cuenta)).size, 10);
+assert.equal(Math.min(...deMuchas.map((p) => p.likes)), 111);
+// Las dos perillas son las del pipeline: si divergieran, la pagina de una zona
+// (cortada alla) y la de region (cortada aqui) repartirian distinto.
+const redesPy = fs.readFileSync(path.resolve(__dirname, '../../pulso/redes.py'), 'utf8');
+const fuenteTs = fs.readFileSync(ruta, 'utf8');
+for (const nombre of ['VUELTAS_GARANTIZADAS', 'DIVISOR_MERITO']) {
+  const py = new RegExp(`^${nombre} = (\\d+)$`, 'm').exec(redesPy);
+  const tsv = new RegExp(`^const ${nombre} = (\\d+);$`, 'm').exec(fuenteTs);
+  assert.ok(py && tsv, `${nombre} existe en los dos lados`);
+  assert.equal(tsv[1], py[1], `${nombre} es el de pulso/redes.py`);
+}
 const unica = doc(grande, 2);
 assert.deepEqual(seleccionarPublicaciones(unica, 'tijuana', 'instagram').map(p => p.url),
   seleccionarPublicaciones(unica, 'tijuana', 'tiktok').map(p => p.url));

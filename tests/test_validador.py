@@ -687,5 +687,58 @@ class TestFrescura(unittest.TestCase):
         self.assertEqual(validar_frescura({}, {"tiktok": {"generado": "2026-09-01T00:00:00+00:00"}}), [])
 
 
+class TestPantalla(unittest.TestCase):
+    """El caso del 29 de septiembre de 2026: la vuelta por cuenta escondia lo
+    mas likeado y los likes se congelaban, con el cron en verde."""
+
+    @staticmethod
+    def _doc(chicas, likes_chica, grandes=15):
+        """Una cuenta grande y `chicas` cuentas de un post, todas en Tijuana."""
+        filas = [{"url": "https://www.instagram.com/p/G{}/".format(i), "cuenta": "grande",
+                  "zona": "Tijuana", "likes": 9000 - i, "comentarios": 0}
+                 for i in range(grandes)]
+        filas += [{"url": "https://www.instagram.com/p/C{}/".format(i),
+                   "cuenta": "chica{}".format(i), "zona": "Tijuana",
+                   "likes": likes_chica, "comentarios": 0} for i in range(chicas)]
+        return {"destacados_maximo": 15, "destacados": filas}
+
+    def test_avisa_cuando_la_vuelta_esconde_lo_mas_likeado(self):
+        from pulso.validador import VECES_ESCONDIDO, validar_pantalla
+        # Diez chicas de 10 likes toman nueve puestos de vuelta: el septimo
+        # post de la grande, de 8,994, queda fuera frente a uno de 10.
+        avisos = validar_pantalla(None, {"redes": self._doc(10, 10)})
+        self.assertEqual(len(avisos), 1)
+        self.assertIn("8994 likes", avisos[0])
+        self.assertIn("uno de 10", avisos[0])
+        self.assertIn("2 vista(s): Region, Tijuana", avisos[0])
+        self.assertEqual(VECES_ESCONDIDO, 30)
+
+    def test_calla_debajo_del_umbral_y_donde_todo_cabe(self):
+        from pulso.validador import validar_pantalla
+        # 8,994 contra 400 son 22 veces: el reparto funcionando, como las
+        # cinco paginas de Facebook.
+        self.assertEqual(validar_pantalla(None, {"redes": self._doc(10, 400)}), [])
+        self.assertEqual(validar_pantalla(None, {"redes": self._doc(0, 1, grandes=15)}), [])
+
+    def test_tiktok_no_reparte_y_no_avisa(self):
+        from pulso.validador import validar_pantalla
+        self.assertEqual(validar_pantalla(None, {"tiktok": self._doc(10, 10)}), [])
+
+    def test_avisa_si_mas_de_la_mitad_no_se_releyo(self):
+        from pulso.validador import validar_pantalla
+        diez = [{}] * 10
+        avisos = validar_pantalla(None, {"facebook": {"releidos": 3, "destacados": diez}})
+        self.assertEqual(len(avisos), 1)
+        self.assertTrue(avisos[0].startswith("facebook: 7 de 10 destacados"))
+        # La mitad justa no avisa, y un corte sin el campo tampoco.
+        self.assertEqual(validar_pantalla(None, {"facebook": {"releidos": 5, "destacados": diez}}), [])
+        self.assertEqual(validar_pantalla(None, {"facebook": {"destacados": diez}}), [])
+
+    def test_las_anotaciones_escapan_lo_que_corta_la_orden(self):
+        from pulso.__main__ import anotacion
+        self.assertEqual(anotacion("50% de\nlo visto"),
+                         "::warning title=Pulso::50%25 de%0Alo visto")
+
+
 if __name__ == "__main__":
     unittest.main()

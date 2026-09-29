@@ -336,7 +336,8 @@ def cosechar(canales, ahora, cache, piezas=PIEZAS_POR_LISTA, timeout=15):
                     continue
                 if limpio["formato"] != formato:
                     fila["reclasificados"] += 1
-                publicaciones[limpio["url"]] = limpio
+                # `leido`: ver redes.derivar (`releidos`). Solo en el cache.
+                publicaciones[limpio["url"]] = {**limpio, "leido": ahora}
                 fila["posts"] += 1
         if faltantes and fila["estado"] == "ok" and fila["entradas"] == 0:
             # Ninguna de las listas que pide existe. Ver el encabezado: es un

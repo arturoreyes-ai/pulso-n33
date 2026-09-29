@@ -1,3 +1,25 @@
+> **Implementación · 29 de septiembre de 2026 — Redes: lo más visto vuelve a
+> entrar siempre.** Se reportó que Redes no enseñaba las publicaciones con
+> más me gusta. Tenía razón, y la causa era la regla del 17 de septiembre
+> (más abajo): cada cuenta entra con su mejor publicación antes de que
+> ninguna repita. Se pensó para las doce cuentas de Tijuana y quince lugares;
+> con 21 cuentas en la región esa primera vuelta llenaba los quince sola, y el
+> alcance ya no decidía ninguno. Ese día la región escondía cinco
+> publicaciones de TJ Noticias de entre 505 y 1,635 me gusta para enseñar una
+> de 50. Ahora **cinco de los quince lugares van siempre a lo que más me gusta
+> tiene**, y los otros diez siguen repartiéndose una por cuenta. Donde las
+> cuentas caben, como en Tijuana antes del 15, la selección es la misma de
+> siempre. Aplica a Instagram, Facebook y YouTube; TikTok nunca repartió.
+>
+> Quedan dos cosas medidas y sin resolver, que ahora avisan en cada corrida en
+> vez de pasar en silencio. **Los me gusta se congelan**: cada corrida lee lo
+> último de cada cuenta (cinco publicaciones en Instagram), y la que salió de
+> esa lista conserva la cifra de su última lectura; el 62% de las
+> publicaciones grandes tenía la misma cifra seis horas después, así que lo
+> que despega por la tarde se ordena con los números de la mañana. Y **en
+> YouTube la vuelta sigue escondiendo lo más visto**, porque doce canales de
+> tamaños que difieren mil veces comparten quince lugares.
+>
 > **Implementación · 28 de septiembre de 2026 — Fuera Indicadores, y una
 > página para dar seguimiento a una publicación.** El cliente pidió quitar la
 > página de Indicadores por ahora. Se quitó de la navegación y de las rutas;

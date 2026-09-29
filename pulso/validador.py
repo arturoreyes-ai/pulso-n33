@@ -1215,6 +1215,10 @@ PLATAFORMAS_REDES = {
         "duracion": False,
         "zonas": ZONAS_REDES_AMBITO,
         "modulo": "pulso/instagram.py:_limpiar",
+        # El lector reparte una vuelta por cuenta antes del merito
+        # (redes.py::_por_turnos, publicaciones.ts::porTurnos). Lo lee
+        # validar_pantalla para medir lo que esa regla esconde.
+        "reparte": True,
     },
     "tiktok": {
         "prefijo": "https://www.tiktok.com/",
@@ -1244,6 +1248,8 @@ PLATAFORMAS_REDES = {
         "rubros": True,
         "zonas": ZONAS_REDES_AMBITO,
         "modulo": "pulso/tiktok.py:_limpiar_comentario",
+        # No reparte: `cuenta` es el id de una busqueda (decision del cliente).
+        "reparte": False,
     },
     "youtube": {
         # Dos prefijos porque son dos formatos con URL distinta. Ojo: este es
@@ -1283,6 +1289,7 @@ PLATAFORMAS_REDES = {
         "duracion": False,
         "zonas": ZONAS_REDES_AMBITO,
         "modulo": "pulso/youtube.py:_limpiar_pieza",
+        "reparte": True,
     },
     "facebook": {
         # Paginas de medios (config/facebook.json, 23 de septiembre de 2026).
@@ -1309,6 +1316,7 @@ PLATAFORMAS_REDES = {
         "duracion": False,
         "zonas": ZONAS_REDES_AMBITO,
         "modulo": "pulso/facebook.py:_limpiar_comentario",
+        "reparte": True,
     },
 }
 
@@ -2082,6 +2090,13 @@ def _validar_destacados(datos, errores, avisos, plataforma="instagram",
                       "de 2026); hasta que el cron los regenere no se puede presupuestar lo "
                       "que Apify cobra por segundo de video".format(acum["sin_duracion"]))
     _validar_orden_destacados(lista, acum["urls"], esp["orden"], "redes", errores)
+    # Cuantos destacados traen cifras leidas en esta corrida (29 de septiembre
+    # de 2026, pulso/redes.py::derivar). Opcional: un corte anterior no lo
+    # trae. Lo que avisa si son pocos es validar_pantalla.
+    if "releidos" in datos and not (_entero_no_negativo(datos["releidos"])
+                                    and datos["releidos"] <= len(lista)):
+        errores.append("redes: 'releidos' debe ser entero entre 0 y los {} destacados "
+                       "({!r})".format(len(lista), datos["releidos"]))
     if maximo and con_rubros:
         _validar_topes_rubro(lista, maximo, rubro_maximo, errores)
     elif maximo:
@@ -4830,11 +4845,13 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
         errores += _regla_gitignore(dir_datos)
 
     ruta_estado = os.path.join(dir_datos, "estado.json")
+    estado = None
     if os.path.exists(ruta_estado):
         try:
-            avisos += validar_frescura(_leer(ruta_estado), leidos)
+            estado = _leer(ruta_estado)
         except (ValueError, OSError):
             pass                  # ya lo reporto el recorrido de `archivos`
+    avisos += validar_pantalla(estado, leidos)
 
     if ventana is not None:
         e, a = validar_archivo(dir_datos, ventana, roster, medios, hoy=hoy,
@@ -4883,6 +4900,126 @@ def validar_frescura(estado, leidos):
                 "(APIFY_HABILITADO), se queda asi".format(
                     nombre, datos.get("generado"), horas, estado.get("generado")))
     return avisos
+
+
+# Los archivos de redes que pinta el lector, con su plataforma.
+ARCHIVOS_REDES = (("redes", "instagram"), ("tiktok", "tiktok"),
+                  ("facebook", "facebook"), ("youtube", "youtube"))
+# Cuantas veces mas merito (likes, o vistas en YouTube) tiene que tener un post
+# escondido que el menor visible para avisar. Medido el 29 de septiembre de
+# 2026 sobre 13 corridas: con la vuelta por cuenta llenando el corte, la region
+# de Instagram escondia en la mediana 50 veces lo que ensenaba, y en 11 de 13
+# corridas mas de 30; con el tercio de merito, nunca mas de 6. Facebook llega a
+# 25 con cinco paginas y quince puestos, que es el reparto funcionando.
+VECES_ESCONDIDO = 30
+
+
+def _vistas_lector(lista):
+    """(nombre, filas) de cada vista del lector de Redes: las tres cubetas de
+    la region (publicaciones.ts::EN_CUBETA) y cada zona con pagina."""
+    yield "Region", [d for d in lista if d["zona"] not in ("nacional", "internacional")]
+    yield "Mexico", [d for d in lista if d["zona"] == "nacional"]
+    yield "Internacional", [d for d in lista if d["zona"] == "internacional"]
+    for zona in ZONAS:
+        if zona != "estatal":
+            yield zona, [d for d in lista if d["zona"] == zona]
+
+
+def _escondidos(datos, nombre, plataforma):
+    """Aviso si el lector esconde un post con VECES_ESCONDIDO veces el merito
+    del menor que ensena.
+
+    Existe por el 29 de septiembre de 2026: la vuelta por cuenta se diseno con
+    doce cuentas en Tijuana, el catalogo crecio a 21 en la region y la vuelta
+    lleno sola los quince puestos. Nada lo dijo; el cliente lo noto como «no
+    salen los posts con mas likes». Se recalcula con la MISMA regla que usa el
+    sitio (redes._por_turnos, espejo de publicaciones.ts::porTurnos, las dos
+    atadas por web/scripts/probar-publicaciones.cjs) sobre cada vista.
+    """
+    from .redes import _orden_destacado, _por_turnos
+
+    esp = PLATAFORMAS_REDES[plataforma]
+    maximo = datos.get("destacados_maximo")
+    if not esp.get("reparte") or not isinstance(maximo, int) or maximo < 1:
+        return []
+    merito = esp["orden"][0]
+    lista = [d for d in datos.get("destacados") or []
+             if isinstance(d, dict) and _texto(d.get("url")) and _texto(d.get("cuenta"))
+             and isinstance(d.get("zona"), str)]
+    lista.sort(key=lambda d: _orden_destacado(d, esp["orden"]))
+    peor, vistas = None, []
+    for vista, filas in _vistas_lector(lista):
+        if len(filas) <= maximo:
+            continue
+        elegidos = {d["url"] for d in _por_turnos(filas, maximo, orden=esp["orden"])}
+        piso = min(int(d.get(merito) or 0) for d in filas if d["url"] in elegidos)
+        tapado = max(int(d.get(merito) or 0) for d in filas if d["url"] not in elegidos)
+        if tapado >= VECES_ESCONDIDO * max(piso, 1):
+            vistas.append(vista)
+            veces = tapado / max(piso, 1)
+            if peor is None or veces > peor[0]:
+                peor = (veces, vista, tapado, piso)
+    if peor is None:
+        return []
+    return ["{}: el lector esconde un post de {} {} y ensena uno de {} en {} ({:.0f} veces "
+            "menos); la vuelta por cuenta le gana al merito en {} vista(s): {}".format(
+                nombre, peor[2], merito, peor[3], peor[1], peor[0], len(vistas),
+                ", ".join(vistas))]
+
+
+def _sin_releer(datos, nombre, plataforma):
+    """Aviso si mas de la mitad de los destacados trae cifras de una corrida
+    anterior. Ver `releidos` en pulso/redes.py::derivar para el caso medido."""
+    releidos = datos.get("releidos")
+    total = len(datos.get("destacados") or [])
+    if not _entero_no_negativo(releidos) or not total or releidos > total:
+        return []
+    viejos = total - releidos
+    if viejos * 2 <= total:
+        return []
+    return ["{}: {} de {} destacados llevan cifras de una corrida anterior: el post ya no "
+            "estaba entre lo ultimo que la cosecha lee, y sus {} no se actualizan desde "
+            "entonces".format(nombre, viejos, total,
+                              PLATAFORMAS_REDES[plataforma]["orden"][0])]
+
+
+def validar_pantalla(estado, leidos):
+    """Los avisos sobre lo que el lector de Redes ensena: si cada panel esta al
+    dia (validar_frescura), si la vuelta por cuenta esconde lo mas visto, y si
+    las cifras que ordenan la lista se leyeron en esta corrida.
+
+    Van juntos porque son los que `pulso validar --anotaciones` sube a la
+    pagina de la corrida: los tres fallaron alguna vez en silencio, con el cron
+    en verde. Avisos y no errores: data/ lo escribe el bot, y ninguno de los
+    tres hace invalido el archivo.
+    """
+    avisos = validar_frescura(estado, leidos) if isinstance(estado, dict) else []
+    for nombre, plataforma in ARCHIVOS_REDES:
+        datos = leidos.get(nombre)
+        if isinstance(datos, dict):
+            avisos += _escondidos(datos, nombre, plataforma)
+            avisos += _sin_releer(datos, nombre, plataforma)
+    return avisos
+
+
+def avisos_de_pantalla(dir_datos="data"):
+    """validar_pantalla sobre lo que haya en `dir_datos`. Un archivo ilegible
+    se salta: validar_todo ya lo reporta como error."""
+    leidos, estado = {}, None
+    for nombre in PANELES_COSECHA:
+        ruta = os.path.join(dir_datos, nombre + ".json")
+        if os.path.exists(ruta):
+            try:
+                leidos[nombre] = _leer(ruta)
+            except (ValueError, OSError):
+                pass
+    ruta_estado = os.path.join(dir_datos, "estado.json")
+    if os.path.exists(ruta_estado):
+        try:
+            estado = _leer(ruta_estado)
+        except (ValueError, OSError):
+            pass
+    return validar_pantalla(estado, leidos)
 
 
 def validar_comunicados(datos):

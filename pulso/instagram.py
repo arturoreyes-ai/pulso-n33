@@ -446,7 +446,9 @@ def cosechar(cuentas, ahora, tok=None, presupuesto=None, cache="cache/instagram"
         for p in posts:
             limpio = _limpiar_post(p, cuenta)
             if limpio:
-                junto = {**publicaciones.get(limpio["url"], {}), **limpio}
+                # `leido`: esta corrida si vio sus cifras (redes.derivar
+                # cuenta `releidos` con eso). Solo en el cache.
+                junto = {**publicaciones.get(limpio["url"], {}), **limpio, "leido": ahora}
                 # Una cuenta que pasa de `ambito` a `zona` dejaria en el cache
                 # el alcance de antes junto a su sede, y el validador lo
                 # rechaza: el alcance es del registro nuevo o de nadie.

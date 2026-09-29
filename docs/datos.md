@@ -979,7 +979,7 @@ comentarios y el deduplicado del caché lo esconde: **los conteos salen bien y
 la factura sale mal.** Ese archivo tiene que sobrevivir entre corridas
 (`actions/cache`), igual que el caché de YouTube y por una razón distinta.
 
-### `destacados`, `cuentas`, `ventana_horas`, `destacados_maximo`
+### `destacados`, `cuentas`, `ventana_horas`, `destacados_maximo`, `releidos`
 
 Desde el 8 de septiembre de 2026 el archivo lleva también los posts con más
 likes de la ventana. Desde el **10 de septiembre de 2026**, a petición del
@@ -997,6 +997,7 @@ aviso, no error.
  {"cuenta": "canal66_ig", "nombre": "Mexicali — sin cuenta encontrada", "zona": "Mexicali", "activa": false},
  {"cuenta": "tjnoticias_ig", "nombre": "TjNoticias", "zona": "Tijuana", "activa": true}
 ],
+"releidos": 1,
 "destacados": [
  {
   "url": "https://www.instagram.com/p/DdB_XeDm0S6/",
@@ -1045,6 +1046,15 @@ aviso, no error.
   —`elvigia_ig` se lleva los catorce de Ensenada— la selección es idéntica a
   la de antes. Inventar un hueco es el mismo error que rellenarlo. **Cambia
   qué se elige, nunca en qué orden se escribe.**
+- **Y un tercio de cada corte va solo por mérito** (`DIVISOR_MERITO`, 29 de
+  septiembre de 2026): la vuelta toma a lo sumo diez de los quince puestos, los
+  de las cuentas con mejor publicación, y los otros cinco se llenan por likes
+  entre todo lo que quedó. La vuelta se pensó con doce cuentas; con 21 en la
+  región llenaba sola los quince, el mérito no volvía nunca, y la región
+  escondía cinco posts de `tjnoticias_ig` de 505 a 1,635 likes para enseñar
+  uno de 50. Donde la vuelta cabe, la selección es la de siempre. El sitio
+  aplica la misma regla (`publicaciones.ts::porTurnos`) y
+  `probar-publicaciones.cjs` ata sus dos constantes a las del pipeline.
 - **La ventana se mide contra `generado`**, nunca contra el reloj de quien
   valida, y sobre `publicado` (fecha-hora ISO en UTC, mismo formato que
   `generado`); `fecha` es su día, sirve para agrupar, y el validador exige que
@@ -1052,10 +1062,23 @@ aviso, no error.
   Exactamente una clave de ventana por archivo: las dos juntas son error.
 - **Los conteos de comentarios de un post son la foto de su primera cosecha.**
   Con 24 horas de ventana, `dias_entre_cosechas` solo deduplica las corridas
-  del día y un post sale de la ventana antes de volverse a cosechar; likes,
-  comentarios y reproducciones sí se refrescan en cada corrida. Y cada corrida
-  ve los últimos `posts_por_cuenta` (5) de cada cuenta: una que publica más de
-  cinco veces entre corridas pierde posts.
+  del día y un post sale de la ventana antes de volverse a cosechar. Likes,
+  comentarios y reproducciones se refrescan en cada corrida **solo mientras
+  el post siga entre los últimos `posts_por_cuenta` (5) de su cuenta**; el que
+  salió de esa lista conserva los de su última lectura, y una cuenta que
+  publica más de cinco veces entre corridas pierde posts. Medido el 29 de
+  septiembre de 2026 sobre 12 corridas: de los posts de 200 likes o más que
+  seguían en la ventana, el 62% tenía la misma cifra seis horas después, en
+  Instagram, TikTok y Facebook.
+- **`releidos` es cuántos `destacados` traen cifras leídas en esta corrida**
+  (29 de septiembre de 2026, las cuatro redes). Entero entre 0 y el largo de
+  `destacados`; ausente en un corte anterior. La hora de cada lectura vive en
+  el catálogo del caché (`leido`) y nunca en `data/`: sellarla por post
+  cambiaría cada destacado en cada corrida. `pulso validar` avisa cuando más
+  de la mitad trae cifras de una corrida anterior, y avisa también cuando la
+  vuelta por cuenta esconde en alguna vista del lector un post con 30 veces
+  el mérito del menor que enseña (`validar_pantalla`); con `--anotaciones`,
+  como corre el cron, esos avisos suben a la página de la corrida.
 - **`comentarios` es el total que reporta Instagram; `cosechados` lo que hay en
   caché** (a lo sumo `comentarios_por_post`). Se publican los dos.
 - **`reproducciones` solo existe en video y solo si es mayor que 0.** Un cero
