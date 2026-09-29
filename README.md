@@ -838,6 +838,36 @@ Verificación offline: `node web/scripts/probar-redes-en-vivo.cjs` (también la
 corre el job web de CI) y
 `python -m unittest tests.test_redes_en_vivo_paridad tests.test_tono`.
 
+## Seguimiento de publicaciones
+
+`/seguimiento` sigue publicaciones sueltas de Instagram, TikTok y Facebook que
+el equipo agrega pegando su enlace. Cada **Actualizar** lee de nuevo la
+publicación (sus cifras y sus cien comentarios más recientes), las guarda con la
+hora y les pone tono con el mismo modelo de la búsqueda en vivo. La lista es del
+equipo, no de cada persona. Va apagado salvo que estén las tres llaves:
+
+```
+SEGUIMIENTO_HABILITADO=true
+APIFY_API_TOKEN=...
+DATABASE_URL=...        # o NEON_DB_DATABASE_URL, la de la integración
+```
+
+y las tablas, una vez: `pnpm --dir web migrar` (aplica `web/db/0003_seguimiento.sql`).
+Sin la bandera la lista se sigue viendo y se puede dejar de seguir, pero no se
+agrega ni se actualiza nada. El tono necesita `TONO_URL` y `TONO_SECRETO`, como
+la búsqueda en vivo; sin ellos los comentarios salen «sin tono».
+
+El texto de los comentarios vive **solo en la base**, sin identidad, y se borra
+15 días después de la última actualización que lo trajo; «Dejar de seguir» lo
+borra en el acto junto con la historia. El borrado corre en cada visita y en el
+cron diario de `web/vercel.json`, que llama a `/api/seguimiento/purgar` y solo
+abre con `CRON_SECRET` definido en el proyecto de Vercel. El tope es propio,
+aparte de los 50 dólares de la búsqueda en vivo: 20 dólares al mes y diez
+actualizaciones por persona al día, en `web/src/lib/seguimiento/config.ts`.
+
+Verificación offline: `node web/scripts/probar-seguimiento.cjs` (también la
+corre el job web de CI).
+
 ## Garitas para locución
 
 La página Next.js `/garitas` consulta `/api/garitas` para San Ysidro, PedWest

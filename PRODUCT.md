@@ -178,6 +178,7 @@ queda registrada en `docs/PLAN.md`.
 | Sentimiento de comentarios | funcionando | modelo local (pysentimiento), publicado como conteos por zona y tema; en YouTube nunca el texto |
 | Redes (Instagram) | **necesita token** | 28 cuentas verificadas una por una, sin sesión, en Tijuana, Mexicali, Ensenada, Tecate, San Diego y `nacional`; las publicaciones de las últimas 24 horas por zona, con hora exacta, y sus comentarios más votados; cada zona se queda con quince y el corte entra primero por la publicación más vista de cada cuenta, para que una con más seguidores no se lleve la lista de su ciudad — entre el 15 y el 17 de septiembre de 2026 una sola tuvo entre siete y diez de los quince de Tijuana. Desde el 17 de septiembre de 2026 la tarjeta no repite las cifras de la plataforma: la publicación incrustada ya las trae, y en vivo. El texto va fuera de git (`efimero/`), la identidad no se ingiere |
 | Redes (TikTok) | **necesita token** | ocho búsquedas encendidas —una por lugar del corredor más México y el mundo—, relevancia, últimas 24 h, sin sesión; la zona sale del pie del video, se muestra el @ del creador y nunca quien comenta. Tres apagadas con la razón escrita. Mismo canal fuera de git para el texto. Desde el 17 de septiembre de 2026 se piden los subtítulos que TikTok ya generó, que no cobran: de ellos solo sale un conteo de para cuántos videos existen, nunca el texto. Cada video trae su duración en segundos, que es lo que permite presupuestar: resumir o transcribir los videos con la IA de Apify cuesta entre 3 y 10 veces el plan y va apagado |
+| Seguimiento de publicaciones | **necesita token y base** | una publicación de Instagram, TikTok o Facebook que el equipo agrega por su enlace; cada «Actualizar», pagado y con tope propio, lee sus cifras y sus cien comentarios más recientes, con la hora. Tono en conteos, nunca junto a una figura del catálogo; el texto vive 15 días en la base, sin identidad y nunca en git, y «Dejar de seguir» lo borra en el acto |
 | Redes (X, tendencias) | **necesita token** | lo que X marca como tendencia en Tijuana, Mexicali, San Diego, México y el mundo, leído sin sesión (guest token); nombre, puesto y liga, nunca tuits ni identidad; las promocionadas se descartan y el volumen es «sin dato» donde X no lo publica |
 | Tono de titulares | funcionando | mismo modelo, `--metodo modelo`. Tono de la frase, no postura hacia una persona |
 | Tablero por zona | funcionando | `web/`, Next.js: una página por zona con resumen, indicadores, temas, conversación y muro |
@@ -293,6 +294,10 @@ real de la prensa y de la estadística oficial en el estado.
 ---
 
 ## Los indicadores y lo que cada uno NO dice
+
+Desde el 28 de septiembre de 2026 no tienen pantalla: el cliente quitó la
+página de Indicadores por ahora. El pipeline las sigue leyendo y archivando, y
+esta tabla sigue valiendo para el día que vuelvan.
 
 Ninguna de estas cifras las calcula el tablero: se leen de la fuente oficial y
 se etiquetan. Cada una mide algo distinto y confundirlas es el error fácil.

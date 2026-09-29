@@ -974,6 +974,76 @@ are not:
   searcher 302s there and every link then fails the own-domain rule, in the
   pipeline too, silently. The row in `config/consultas.json` needs a new probe.
 
+### Seguimiento: one post, followed over time
+
+Since 28 September 2026 `/seguimiento` (a SUELTA in the nav) follows single
+posts of Instagram, TikTok or Facebook that the team pastes by URL: each
+**Actualizar** re-reads the post's counts and its 100 most recent comments,
+stores them with the time, and scores their tone. The client decided four
+things, in `docs/PLAN.md`'s note of that day: a paid pass **behind a button,
+never on a schedule**; a cap **of its own**, apart from the live search's $50;
+a list **shared by the team**, not per person; and comment text **kept 15 days
+in the database**, with a button to delete it at once. The code is
+`lib/seguimiento/` and `components/seguimiento/`. Rules that look arbitrary
+and are not:
+
+- **It is the first product data in Neon, and that is the decision, not an
+  accident.** Everything else on screen comes from `data/` with git as the
+  archive; this list is written from a button, and the pipeline takes no input
+  from the screen. `web/db/0003_seguimiento.sql` holds the posts, their updates
+  (counts and tone counts, kept forever: they are numbers, not what anyone
+  wrote), the comment text, and `gasto_seguimiento`, the spend ledger. Comment
+  text **never reaches git or `data/`**, same boundary as the Instagram
+  invariant above.
+- **No identity, and the vendor's raw copy is deleted.** Comments go through
+  the live search's `limpiarComentario` (whitelist; parity with the pipeline),
+  mentions are masked with `enmascarar` before storing, reactions-only are
+  dropped, and `huella` is the pipeline's `sha256(url|fold(texto))[:16]`.
+  Unlike the live search, whose Apify datasets ARE its store, this one calls
+  `apify.ts::borrarDataset` on both datasets as soon as the clean copy is
+  saved: they carry name, handle and photo of every commenter.
+- **15 days from the LAST update that read a comment**, not the first: a
+  comment the network still shows is re-read and its copy is today's, like
+  `cache/`. Purged on every visit and by the daily Vercel cron
+  (`web/vercel.json` → `/api/seguimiento/purgar`, public by exact path in
+  `rutas-publicas.ts`, 401 without `CRON_SECRET`). Reads also filter by the
+  window, so nothing expired reaches the screen even if a purge is late.
+  «Dejar de seguir» deletes the post, its updates and its text for good.
+- **The ledger is its own table so deleting cannot free the cap.** Deleting a
+  post cascades its updates and text but never `gasto_seguimiento`; an update
+  still running is aborted in Apify and closed with what it charged, or with
+  its reserved worst case when Apify does not say.
+- **The cap is $20/month «for starters»** (client, same day) and 10 updates
+  per person per day (`lib/seguimiento/config.ts`), counted like the
+  live search (reserved worst case while in flight, advisory lock, day in
+  America/Tijuana). Pressing again while an update runs returns that update;
+  within 30 minutes of the last one it answers `reciente` and pays nothing.
+- **Both runs start together.** The URL is known, so there is no first pass
+  deciding what gets comments. Every GET of the post advances an open update;
+  `reclamar` makes exactly one request save it, and a claim older than two
+  minutes is retaken. TikTok's post run carries the actor's $0.50 minimum cap
+  and costs ~$0.0023. Facebook comments ask for `RECENT_ACTIVITY`.
+- **Only URLs `canonizarPublicacion` accepts.** Short links (`vm.tiktok.com`,
+  `facebook.com/share/…`) are refused: resolving them is asking the network
+  for a page on our behalf. The canonical URL is `UNIQUE`, so the same post
+  pasted twice is one row.
+- **Language is declared when adding** (Español / Inglés), never guessed; in
+  English no tone is asked and every comment counts as «sin tono». **Rule 5 is
+  checked on the post's title** with `busqueda/figura.ts`, at harvest and
+  again on every read: a roster figure in the title withholds every label and
+  the card says «Sin dato». An unreadable roster withholds too.
+- **Counts appear here, dated.** The /redes card dropped platform counts on 17
+  September 2026 because the live embed beside it contradicted them; here each
+  figure carries the time of its read, which is what a follow-up compares.
+  «Sin dato» where a network publishes the figure and it did not come (hidden
+  Instagram likes are `-1`, stored `null`); a figure the network never
+  publishes (Instagram shares) is not painted at all (`formato.ts::metricasDe`).
+- **The gate is `SEGUIMIENTO_HABILITADO=true` + Apify token + database.** It
+  gates spending, not reading: with the flag off the list and every post still
+  show, and delete still works. `probar-seguimiento.cjs` pins identity,
+  caps, the single save, the dataset deletion, rule 5, language and the purge
+  secret.
+
 ### Publicidad Meta tiene dos lectores y tampoco comparten fundamento legal
 
 Es el mismo reparto que YouTube. `pulso/publicidad_meta_navegador.py` abre un
@@ -1420,19 +1490,104 @@ already refused on the record in `docs/PLAN.md` §3.
   one post, ~37,000 for a whole run. **Prompt caching is not a lever here** —
   Haiku 4.5 needs a 4,096-token prefix and ours is ~1,000, so it silently never
   caches.
-- **`/api/guion-tiktok` and `/api/guion-prensa` write a newscaster's script,
-  per programme, behind a button** (client, 24 and 25 September 2026). The
+- **`/api/guion-mixto`, `/api/guion-redes`, `/api/guion-prensa` and
+  `/api/guion-tiktok` write a newscaster's script, per programme, behind a
+  button** (client, 24, 25 and 28 September 2026); the screen calls only the
+  first (see «The merged guion» below). The
   first replaced `/api/resumen-tiktok`, which for one day (23–24 September)
   was the only model reading that loaded by itself; that exception is gone,
   and every model reading is a button again. The client sent the channel's
   lineup and the edit-hour extraction rules, and on the 25th asked for the
-  same over the news and for two more programmes, with what each does. One
-  card (`paneles/guion-locucion.tsx`), one button per programme
-  (`PROGRAMAS_GUION` in `contrato-guion.ts`), in two places: first in the
-  TikTok tab over the videos, and in a sheet behind a microphone in the
-  portada's bar over the live headlines (the recorrido, not the search; a
-  card would shift the chapter chain's indices). Each programme has its own
-  prompt block in `lib/analisis/guion.ts`, shared by both origins:
+  same over the news and for two more programmes, with what each does. **It
+  has its own page, `/guion`** (client, 28 September 2026), a suelta in the
+  nav (`secciones.ts::SUELTAS`): one link per programme (`PROGRAMAS_GUION`
+  and `DESCRIPCION_PROGRAMA` in `contrato-guion.ts`) and the merged script,
+  rendered by `paneles/guion-locucion.tsx::PaginaGuion`. What is not obvious:
+  - **The state is the URL** (`lib/analisis/ruta-guion.ts`): `?p=` for the
+    programme, read on the server like the portada's `?e=`. That is why the
+    guion left the sheets it lived in from the 25th to the 28th: there the
+    chosen programme lived in memory and «the Minuta Política script» could
+    not be bookmarked or sent to the team. A `?f=` (Noticias or Redes)
+    lived a few hours that day, until the merge; an old link with it opens
+    the same programme.
+  - **Opening a URL with `?p=` requests its script: the link is the press.**
+    Without `?p=` the page requests nothing. A `<Link>` prefetch pays nothing,
+    since the client requests the script on mount. This is not the
+    «loads by itself» exception coming back: the URL asks for exactly that
+    script and nothing else opens it on the way to something else.
+  - **Off, the page is a 404 and the nav does not paint it**
+    (`sueltasVisibles(analisisHabilitado())` in the pill and the phone menu;
+    the one suelta with `requiereAnalisis`). A page saying the guion is not
+    available would explain the mechanism.
+  - **The page waits for the four social files** before requesting and
+    fixes the key once (`GuionMixto`): the key is the hour plus their
+    `generado`, and one arriving late, or a failed one SWR retries, would
+    change it, and every key is another paid call. Coming from /redes, SWR
+    already holds them.
+  - **The bars carry no shortcut** (client, evening of 28 September 2026:
+    the guion has its own page). The portada's and Redes' bars held a
+    microphone until that morning, which beside the magnifier read as voice
+    search, and then an AI sparkle linking to `/guion`, which was also
+    Analizar's glyph on every card and so did not say what it did. The nav
+    is the only way in; `probar-analisis.cjs` pins both bars clean.
+  - **A clip is a link** (`<a target="_blank">` with «Clip: @cuenta» as its
+    name): it was a button that looked for its card in a recorrido, and
+    without one it only opened a URL, with no middle-click or «copy link»,
+    announced as «Ir al video de…» over «Clip: …» on screen.
+  - **The merged guion** (`lib/analisis/guion-mixto.ts`, origin `mixto`, the
+    evening of 28 September 2026). The client asked to merge Noticias and
+    Redes: «what's trending on social media, corroborated with actual news
+    about it, instead of making the user click twice». Posts and their axes
+    come from the redes rules (`planRedes`), headlines that can stand alone
+    from the press ones (`planPrensa`, live), and a piece is a clip with its
+    headline (`nota` on the clip), a read note alone, or a clip alone, which
+    goes on air as what circulates and is marked «sin nota de prensa» for
+    the team (client's call). What is not obvious:
+    - **The code proposes, the model decides.** Measured that day over the
+      real cut (321 posts, 670 archive headlines in 48 h), word overlap finds
+      a headline for 199 posts, but of the pairs among the 30 most popular
+      only ~8 of ~20 were the same event: «Cristiano Ronaldo» paired a fan
+      photo with an NFL game at 16.5 points, above the true Macro Plaza pair
+      at 12.7, so no threshold separates them. `parejasDe` proposes up to
+      three per post with «Notas relacionadas»'s rarity rule, the prompt
+      demands EL MISMO HECHO, and `guion.ts::resolverDe` rejects a pair that
+      was not proposed for that post, or a headline standing alone that was
+      only proposed as a pair.
+    - **The spoken intro comes from the headline**, the post only picks the
+      clip, and the closing line may not state as fact what only the post
+      says (the first real run said «detenido en el transporte público» from
+      a caption). If a pair is wrong, what is said is what the press
+      published. «La prensa confirma» is forbidden: nobody verified anything.
+    - **The pool of possible headlines is wider than the stand-alone one**:
+      everything that passed the press gates (`planPrensa().todas`, not the
+      six per axis) plus the archive of the last `HORAS_PAREJA` (48) hours,
+      because a video goes viral after the note. The model reads posts as
+      `[P1]` and headlines as `[T1]`, two lists, with each post's possibles
+      under it.
+    - One hour of cache per programme and hour, none if a network, a feed or
+      the archive failed; `sinLeer` names the network or «los titulares de»
+      the axis. Needs six files in `outputFileTracingIncludes`. First real
+      run: Noticias 33 in 17 s, ~5,500 input tokens.
+    - **«Today» is counted from now, and posts rank by pace** (evening of
+      28 September 2026, client asked whether the script shows the day's
+      trending news). Measured at 3:05 pm Tijuana: the last harvest was
+      from 6:56 am and the old top 20 had 9 posts over 24 hours old and none
+      under 12; headlines passed `reciente` and posts passed nothing.
+      `guion-redes.ts::publicacionesParaGuion` now drops a post published
+      more than 24 h before the request (or with no `publicado`), treats a
+      network whose `generado` is over `FRESCURA_HORAS` (12) old as unread
+      (`sinLeer`, never filled with old posts), and ranks within each network
+      by `ritmo`, likes (views on YouTube) per hour of age at harvest with
+      gravity 1.5, still interleaved as «populares». Same cut: top 20 none
+      over 24 h, 4 under 12. The page prints «Publicaciones de redes hasta
+      las …» (`Guion.hasta`, the oldest harvest read). What is left is the
+      harvest's own age: only a more frequent cron closes that, and it costs.
+  It lived one day as a card at the head of the TikTok tab, reading TikTok
+  only; `/api/guion-tiktok` still answers but nothing on screen calls it,
+  and since the merge neither do `/api/guion-prensa` nor `/api/guion-redes`,
+  whose planners the merged one reuses. Each
+  programme has its own prompt block in `lib/analisis/guion.ts`, shared by
+  every origin:
   - **Noticias 33**: exactly five pieces, one per axis (garitas, información de
     Tijuana, mañanera de la presidenta, información de California) and a fifth
     «libre», the most newsworthy unused candidate of any axis. **The garitas
@@ -1494,15 +1649,46 @@ already refused on the record in `docs/PLAN.md` §3.
     `shouldRetryOnError: false`. Needs `./public/data/tiktok.json` in
     `outputFileTracingIncludes`.
   - «Copiar guion» puts the whole script, with each piece's URL, on the
-    clipboard for the editing team, and «Descargar» (25 September, client:
-    so the anchors can put their own spin on it) saves the same text as
-    `guion-<programa>-<fecha>.txt`, UTF-8 with a BOM because without one
-    Word on Windows can take it for Windows-1252 and split the «ñ» of
-    «mañanera». Plain text and not .docx: it opens anywhere and costs no
-    dependency.
-  - **`MODELO_GUION` is Sonnet 5**, its own constant in `config.ts`, pinned
-    by the test like `MODELO_ANALISIS`, so it moves no other route's cost
-    (client's call, 24 September 2026). Measured side by side twice on the
+    clipboard for the editing team, and «Descargar en Word» (25 September,
+    client: so the anchors can put their own spin on it) saves it as
+    `guion-<programa>-<fecha>.docx`. It was a .txt with a BOM until 28
+    September 2026, when the client asked for an editable Word file. Both
+    come from ONE structure, `lib/analisis/documento-guion.ts::
+    seccionesDelGuion`, rendered as bracketed text or as Word styles (spoken
+    lines in Normal at 13 pt, the handoff in italics, directions small and
+    gray, each piece a «Título 2» so Word's navigation pane lists them,
+    language es-MX so Word spellchecks in Spanish, links clickable). **No
+    dependency**: a .docx is a zip of five XML parts, written stored
+    (uncompressed) by hand with a fixed 1980 date so the same script gives
+    the same bytes, the same stance as opening XLSX as zip-of-XML in
+    `pulso/`. Word needs no compression, docProps or settings to open and
+    edit it; checked in Word 365 the day it shipped.
+  - **It says it was written by AI wherever the script goes** (client,
+    28 September 2026): a bordered note above the Apertura on screen
+    («Generado con IA» + «Revísalo antes de salir al aire: puede
+    equivocarse.»), the second line of the copied text in brackets, and a
+    bold paragraph with a rule under the Word title (style «Aviso de IA»).
+    One source, `contrato-guion.ts::ROTULO_IA`/`CONSEJO_IA`, through the
+    `aviso` block of `seccionesDelGuion`. Before, only a gray line at the
+    foot said so, and the copied text said nothing: pasted into a team chat,
+    a model's script read as a person's. The loader says «La IA está
+    escribiendo el guion» and the page intro «Lo escribe una IA…».
+  - **`MODELO_GUION` is Sonnet 5.5** since 28 September 2026 (client), Sonnet
+    5 before; its own constant in `config.ts`, pinned by the test like
+    `MODELO_ANALISIS`, so it moves no other route's cost. Same price per token
+    and tokenizer, and on that day's real material it wrote the four scripts
+    in 6–7 s each for $0.019–0.024, where Sonnet 5 took 22.7 s and $0.034 for
+    the same Estado de Alerta (half the output tokens). **It can refuse**
+    (`stop_reason: "refusal"`) in five categories, `general_harms` among them,
+    and nightly nota roja is the obvious risk, so every call goes through
+    `lib/analisis/modelo-guion.ts`: server-side `fallbacks: "default"` (beta
+    `server-side-fallback-2026-07-01`), which on Sonnet 5.5 only retries
+    `cyber` and `frontier_llm`, plus one client-side retry of any other
+    refusal on `MODELO_RESPALDO_GUION` (Sonnet 5) with the same body and the
+    same deadline. The body carries no `thinking`, which is what keeps it
+    valid on both models; do not add `between_tools` or `display` without
+    stripping them on the retry. No refusal in the first five real runs.
+    Before that: Sonnet 5 was the client's call on 24 September 2026. Measured side by side twice on the
     same `tiktok.json`: Haiku 4.5 ~$0.005 and 7–9 s, Sonnet 5 ~$0.017–0.020
     and 12–16 s (more input tokens for the same text, plus 200–400 thinking
     tokens). With the tightened prompt Haiku credited a @elheraldodemexico
@@ -1589,6 +1775,18 @@ already refused on the record in `docs/PLAN.md` §3.
     ONE hour: that day PedWest reported at 12:00 and the rest of San Ysidro
     at 2:00. CBP down, or no current figure, prints «No se pudieron leer:
     Garitas». Copy and download take the note as shown.
+  - **The script reads as a rundown** (client, 28 September 2026: «the
+    italics look unprofessional and the layout feels very raw»). Each piece
+    has its number in a column, one label style (`.guion-rotulo`: Apertura,
+    Cierre, A la mesa; only the type is in capitals on a piece's line), the
+    headline in the titular face, spoken text at 65ch, the pase in plain
+    type (it was italic), the clip as one bordered cue row with the red play
+    mark, and sources as underlined text links, not pills. Download is the
+    primary button. CSS is under `.guion-` at the end of `globals.css`.
+    The Ampliar button now reads **«Desarrollar con IA»** with the sparkle
+    (client: «ampliar» did not say what it does), its `title` spells it
+    out, and the server says «No se pudo desarrollar la nota.». The code
+    keeps the `ampliar` identifiers and route.
   - **«Ampliar» on each press note** (same evening, client): the note's
     reference (`ampliable`: the archive's link or the Google token, the
     outlet's domain, and the ORIGINAL headline, which is not the escaleta
@@ -1621,11 +1819,33 @@ already refused on the record in `docs/PLAN.md` §3.
     revalidating in the background would pay for a script nobody asked for.
     Needs `notas.json` (the outlet's own link) and `catalogo-busqueda.json`
     in `outputFileTracingIncludes`.
-  - **A headline whose point is a proportion never reaches the model**
+  - **A piece whose title `reglas.ts` would reject never reaches the model**
     (`guion.ts::decible`): «Señalan que Sentri concentra casi la mitad de los
     cruces» was picked as the libre and `reglas.ts` rejected the paid script.
-    Only the rule-2 family: «la gente» can be said another way, a proportion
-    cannot.
+    It was the rule-2 family only, on the theory that «la gente» can be said
+    another way; the first /redes script copied «llama a la ciudadanía a
+    denunciar» from a PSN post, and with «la ciudadanía» added to the prompt's
+    list it copied it again in one run of two. So it is the whole list now,
+    measured to cost little: 3 of 242 posts and 14 of 7,706 headlines, two of
+    the three being a census where «la población» was the fact.
+  - **The /redes guion** (`lib/analisis/guion-redes.ts`, origin `redes`, 25
+    September 2026, client: the portada's button «for TikTok, Instagram,
+    Facebook, and YouTube only if it has a lot of views»). It is the TikTok
+    guion with more material: `planTikTok`'s candidate rules and the `pie`
+    prompt, with three sentences of its own saying where the pieces come
+    from (a clip may be a post with an image put on screen). The pool is every
+    network's whole file, ordered as «populares» orders the page
+    (`ordenarPublicaciones`: rank within each network, interleaved), because
+    likes, reactions and views are not one unit. **YouTube enters only with
+    `guion-redes.ts::MINIMO_VISTAS`**, per format since a Short counts any
+    start: 5,000 for a long video and 10,000 for a Short. Measured that day
+    over 104 pieces (medians 1,760 and 8,048), that keeps 27 of 62 and 18 of
+    42, the same share, and from the corridor exactly the three that moved.
+    The model reads first lines only; the account and link ride on each clip
+    for the editors, and the clip chip is a link to the post. A network that could not be read goes to `sinLeer`
+    by name and the response is not cached. Needs the four JSON files in
+    `outputFileTracingIncludes`. Measured on its first real runs: ~3,900
+    input tokens, the same cost as TikTok.
   - **Press attribution is still checked by outlet name, case-sensitively**
     (`marcasDeMedio`), though the model no longer reads the outlets: it
     knows them, and naming one of the list in another's note credits it with
@@ -1733,7 +1953,7 @@ Tailwind v4, pnpm.
   ISR stay available.
 - Typecheck with `pnpm --dir web tipos` (`next typegen && tsc --noEmit`).
 - **Routes are a grid of two axes: place x view.** The place is a zone slug
-  (`zonas.ts`); the view is `redes`, `indicadores`, or the
+  (`zonas.ts`); the view is `redes` or the
   portada, which has no segment (`secciones.ts`). Every route is one cell:
   `/`, `/tijuana`, `/redes`, `/tijuana/redes`. Build every internal link with
   `secciones.ts::ruta(zona, vista)` — that is what keeps the two axes
@@ -1751,6 +1971,17 @@ Tailwind v4, pnpm.
   view without re-adding it to `SECCIONES`, `NOMBRE`, `TITULO`, the
   `DESCRIPCION` record in `metadatos.ts` and the `CUERPOS` table in
   `paginas/pagina.tsx` — the type system catches all five.
+- **`indicadores` was the second view until 28 September 2026**, removed «for
+  now» at the client's request with `app/indicadores/`, `paginas/` and
+  `paneles/indicadores.tsx`, and what only it used: `paneles/alternar.tsx`,
+  `paneles/tarjeta.tsx`, `components/graficas/`, `lib/graficas/`,
+  `lib/dominio/indicadores.ts`, `useIndicadores` and the SHF, predial, SESNSP,
+  ENSU and San Diego sentences of `frases.ts`. `/indicadores` and
+  `/<zona>/indicadores` are 404. **The pipeline still writes
+  `data/indicadores.json`** and the cron still runs `pulso indicadores`, so
+  bringing it back is interface work: restore those files from git. Nothing in
+  `web/src` imports Recharts any more; the dependency and its
+  `optimizePackageImports` entry stay for that day.
 
 - **The four social platforms share one page, and the page is a reader.**
   Instagram, TikTok, YouTube and X are one view (`redes`), not four sections:
@@ -1797,8 +2028,8 @@ Tailwind v4, pnpm.
   (`lib/busqueda/tema-publicacion.ts`: whole words, case-sensitive acronyms,
   plurals, a phrase also as a joined hashtag, plus a short caption-only list
   `DEL_PIE` kept out of `rubros.ts` so the portada's queries don't move). It
-  claims what the list says and no more; no model, no classifier. The TikTok
-  guion does not depend on the theme or the place (see `/api/guion-tiktok`).
+  claims what the list says and no more; no model, no classifier. The guion
+  does not depend on the tab, the theme or the place (see `/api/guion-redes`).
   Measured over 303 posts that day:
   Seguridad 34, Clima 19, Política 16, the rest 0–8 per network, so an empty
   theme is common, and its message says the titles were read (not «hueco»).
@@ -1810,9 +2041,9 @@ Tailwind v4, pnpm.
   sorting the raw number would bury the corridor under TikTok on «Todas».
   It sorts after `seleccionarPublicaciones`, which still returns file order,
   and `reunirPublicaciones` still returns newest-first for search mode. The
-  TikTok tab opens on the **«Guion para locución»** card, content-sized, with
-  the first video below it (see `/api/guion-tiktok` above); each clip's video
-  chip jumps to its card through `resumen`'s `irA`.
+  «Guion para locución» is not in this bar any more: it is `/guion`, in the
+  nav (see the guion bullet above); the TikTok-tab card, the recorrido's
+  `resumen` slot and the bar's sparkle that held it are gone.
   YouTube and X are the same
   box without snap (`.hoja-lector`); X is trends, not comments
   (`paneles/tendencias.tsx`), in X's row grammar with the #1 trend of each
@@ -1820,8 +2051,9 @@ Tailwind v4, pnpm.
   **lists and the Lista / Visual toggle are gone** (`paneles/redes.tsx`,
   `paneles/selector-red.tsx`, `lib/pantalla/movil.ts` deleted); `docs/PLAN.md`
   records the reversal. One CSS rule, `main:has(.lector) > :not(:has(.lector))`,
-  hides header, footer and `Velo` while a reader is up; on `md` the nav pill
-  (`.nav-flotante`) is exempt and the box starts at `--nav-alto`. The section
+  hides header and footer while a reader is up; the site navigation is exempt
+  (`.riel` on `md`, `.barra-inferior` below) and the box sits beside the rail
+  (`--riel-ancho`) or above the tab bar (`--barra-alto`). The section
   is rendered with `revelar={false}` because `Revelar`'s transform would
   contain the fixed box.
 - **Live Google News never becomes a `Nota`.** `/api/buscar` (search) and
@@ -1942,8 +2174,8 @@ Tailwind v4, pnpm.
   sheet: frame, header, close button that names what it closes),
   `ui/pestanas.tsx` (every tab row, including Publicidad Meta's tablist,
   which keeps its arrow keys), `ui/segmentado.tsx` (every either/or switch:
-  alcance, Gasto electoral's view, lista/gráfica), `ui/formulario-busqueda.tsx`
-  (both search sheets), `ui/opciones-lugar.tsx::PastillasLugar` (the zone
+  alcance, Gasto electoral's view, lista/gráfica), `ui/busqueda-en-barra.tsx`
+  (both searches, inline in the reader bar), `ui/opciones-lugar.tsx::PastillasLugar` (the zone
   chips in page headers too), and in `ui/clases.ts` `clasesChip`/`clasesBoton`
   for every pill button (no bordered local variants) and `clasesInsignia`
   for every small badge. Icon buttons use `clasesBoton` with a regular-weight
@@ -2095,8 +2327,16 @@ Tailwind v4, pnpm.
   footer on top of the reader. It typechecks, passes every `.cjs` contract, and
   looks right on a laptop.
 
-- **Search is a MODE of the reader, not a chapter** (`?q=`, the magnifier in
-  the bar). A search is a flat list of up to 40 results with no chapter order,
+- **Search is a MODE of the reader, not a chapter** (`?q=`, the «Buscar»
+  pill in the bar: a bordered button with the word on every width since 28
+  September 2026, client, because the magnifier alone read as one more icon;
+  on a 375 px phone it leaves /redes' place selector at «Toda la…»). **It
+  opens in the bar, not in a dialog** (client, same day: a modal sheet to type
+  one word was unnecessary): `ui/busqueda-en-barra.tsx` draws the field over
+  the bar row from the pill's edge with `clip-path`, so nothing in the bar
+  moves, and during a search the field stays open with the query and its ×
+  is the way out. Redes' tracked terms ride in a tray under the field while
+  typing. A search is a flat list of up to 40 results with no chapter order,
   no dividers and no tail sections; putting it in the chain would need a third
   source type there for nothing. The form is a real `<form method="get">` and
   does not search as you type: in a full-screen reader every keystroke would
@@ -2120,32 +2360,32 @@ Tailwind v4, pnpm.
   label says «En las noticias» at the root because «el corredor» would now
   say less than what comes back.
 
-- **The reader carries the site's navigation, and on a phone it is the only
-  one.** `globals.css` hides everything but the reader and brings the pill back
-  only at `min-width: 48rem`. The portada has no page behind it, so `Lector`
-  takes an optional `volver` (omitted there) and a required `menu`. `menu` is
-  `chrome/menu-lector.tsx`, a **server** component passed as a ReactNode — the
-  same channel as `informacion` — because it carries the `cerrarSesion` server
-  action, which cannot be rendered from a client module. Build it from
-  `VISTAS` + `SUELTAS` + `ruta()`; never import `Navegacion` into a client
-  component. Place and view stay in **separate dialogs**.
+- **The site navigation is a left rail on desktop and a bottom tab bar on the
+  phone** (`chrome/riel.tsx`, a server component, 28 September 2026). It replaced the
+  floating top pill, which with six destinations and the account no longer
+  fit, and a same-day hamburger the client rejected because it hid the daily
+  tools. The real reason is height: both main pages are vertical
+  one-item-per-screen readers, and a top bar takes the height they need
+  while the desktop has width to spare. The rail groups by job: En Tendencia,
+  Redes and Garitas (read what is happening now), then Guion, Seguimiento and
+  Gasto electoral, with the LED «Pulso» mark on top and the account at the
+  foot, which reveals Accesos and Salir under the name in place (space
+  reserved, so nothing moves under the pointer). The phone has four tabs: En Tendencia, Redes,
+  Garitas and «Más», a `Hoja` with the rest and the account
+  (`menu-lector.tsx` with `excepto`). En Tendencia leads because it is the
+  one the team uses every day. **Readers no longer carry a menu button** and
+  `Lector` has no `menu` prop; the phone `Cinta` keeps the page name, the
+  place and the back arrow. `main:has(> .riel)` reserves the rail's width or
+  the tab bar's height, so /entrar, which mounts no nav, gets no gap. `Velo`,
+  `menu-cinta.tsx`, `--nav-alto` and the pill are gone; sticky offsets use
+  `--respiro-superior`. Build destinations from `VISTAS` + `SUELTAS` +
+  `ruta()`, and never import `Navegacion` into a client component: «Salir» is
+  a server action.
 
 - **`/ahora` is now a 308 to `/`** (`app/ahora/page.tsx`, `permanentRedirect`).
   The file survives only for that, and `"ahora"` stays in the
   `SegmentoLiteral` union of `secciones.ts` because the literal segment still
   competes with `[zona]`.
-
-- **The reader carries the site's navigation, and on a phone it is the only
-  one.** `globals.css` hides everything but the reader and brings the pill back
-  only at `min-width: 48rem`. That was fine while every reader was an interior
-  page reachable by its back arrow; the portada has no page behind it, so
-  `Lector` takes an optional `volver` (omitted on the portada) and a required
-  `menu`. `menu` is `chrome/menu-lector.tsx`, a **server** component passed as
-  a ReactNode — the same channel as `informacion` — because it carries the
-  `cerrarSesion` server action, which cannot be rendered from a client module.
-  Build it from `VISTAS` + `SUELTAS` + `ruta()`; never import `NavPildora` into
-  a client component. Place and view stay in **separate dialogs**: merging them
-  re-mixes the two axes the pill argues in writing that it separated.
 
 - **`web/` is what ships.** The cron builds it on the runner and deploys it
   prebuilt, behind `DESPLEGAR_TABLERO`. It deploys from the runner rather than
@@ -2173,7 +2413,9 @@ throwing away a press ingest it had already computed: three and a half days
 with no notes because a social harvest was slow. Each paid step now has its own
 `timeout-minutes` and `continue-on-error`, and the job's 75 sit above their sum
 so a step cap always fires first: a step cap lets the cache post-steps and the
-final commit run; the job cap cancels everything.
+final commit run; the job cap cancels everything. The weekly gasto electoral
+step is `continue-on-error` too since 28 September 2026, when a certificate
+failure there cost that run its press and social commit.
 
 **The paid harvests call Apify in parallel** (`pulso/apify.py::en_paralelo`,
 six at a time) and apply results in account order on one thread, so output

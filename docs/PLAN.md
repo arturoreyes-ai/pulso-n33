@@ -1,3 +1,98 @@
+> **Implementación · 28 de septiembre de 2026 — Fuera Indicadores, y una
+> página para dar seguimiento a una publicación.** El cliente pidió quitar la
+> página de Indicadores por ahora. Se quitó de la navegación y de las rutas;
+> los datos se siguen calculando, así que volver a mostrarla es trabajo de
+> pantalla y no de datos.
+>
+> Y pidió una página para seguir una publicación de redes a lo largo del
+> tiempo: ver sus comentarios más recientes y el tono general de lo que se
+> comenta. La página es **Seguimiento**: se pega el enlace de una publicación
+> de Instagram, TikTok o Facebook, y cada vez que alguien pulsa
+> **Actualizar** se vuelven a leer sus cifras y sus cien comentarios más
+> recientes, con la hora. La pantalla muestra cuántos comentarios suenan
+> positivos y cuántos negativos, cómo cambiaron los likes, los comentarios y
+> las reproducciones desde la lectura anterior, y los comentarios del más
+> nuevo al más viejo, con los que llegaron en la última lectura marcados como
+> nuevos. El cliente decidió cuatro cosas:
+>
+> - Cada actualización se paga **solo al pulsar el botón**, nunca sola.
+> - El tope es **propio**, aparte de los 50 dólares de la búsqueda en vivo:
+>   **20 dólares al mes para empezar**, y diez actualizaciones por persona al
+>   día. Una actualización cuesta de 8 a 20 centavos de dólar según la red.
+> - La lista es **del equipo**: lo que una persona agrega lo ven todos.
+> - El texto de los comentarios se guarda **15 días** y se borra solo. Si la
+>   publicación ya no interesa, **Dejar de seguir** la borra en el acto, con su
+>   historia y sus comentarios, para siempre.
+>
+> Como en todo el tablero, no se guarda quién comentó: ni su nombre ni su
+> usuario. Si el título de la publicación nombra a una figura pública del
+> catálogo, el tono no se muestra, por la misma regla que en la búsqueda. Y el
+> idioma se elige al agregarla: en inglés no se mide el tono, porque el modelo
+> solo lee español.
+
+> **Implementación · 28 de septiembre de 2026 (noche) — El guion con Sonnet
+> 5.5.** El cliente pidió cambiar el modelo del guion a Sonnet 5.5. El precio
+> por palabra es el mismo que el de Sonnet 5, pero sobre el material real de
+> ese día escribió cada guion en unos 7 segundos en lugar de 23, y por menos
+> (unos 2 centavos contra 3.4), porque escribe más corto. El modelo nuevo
+> puede negarse a escribir sobre ciertos temas; si lo hace con una nota roja,
+> el sistema vuelve a pedirle el guion al modelo anterior sin que nadie tenga
+> que hacer nada. En las primeras cinco pruebas no se negó ninguna vez.
+
+> **Implementación · 28 de septiembre de 2026 (noche) — El guion se descarga
+> en Word.** El cliente pidió que el botón de descarga entregue un documento
+> de Word editable. Ahora «Descargar en Word» guarda un .docx con la forma
+> de un guion de televisión: lo que se dice en letra de lectura, las
+> acotaciones en gris y pequeño, cada pieza como título para moverse por el
+> documento, los enlaces listos para abrir y la revisión de ortografía en
+> español. «Copiar guion» sigue dejando el mismo texto en el portapapeles.
+
+> **Implementación · 28 de septiembre de 2026 (noche) — Un solo guion: las
+> redes y las noticias juntas.** El cliente pidió juntar las noticias y las
+> redes en un solo guion por programa: lo que es tendencia en las redes,
+> respaldado con las noticias que cuentan lo mismo, sin tener que pedir dos
+> guiones. Ahora cada programa tiene un guion. Cada pieza puede ser un clip
+> de redes con la nota de prensa que cuenta el mismo hecho (lo que se dice al
+> aire sale de la nota; el clip es lo que se ve), una nota leída sola, o un
+> clip sin nota, que se dice como lo que circula en redes y lleva la marca
+> «sin nota de prensa» para el equipo, por decisión del cliente. Se midió
+> antes de construirlo: la coincidencia de palabras propone la nota de más
+> de la mitad de las publicaciones, pero menos de la mitad de esas parejas
+> son el mismo hecho, así que el sistema solo propone y el modelo decide, y
+> una pareja que no se propuso se rechaza. La opción Noticias · Redes de la
+> página se retiró el mismo día.
+
+> **Implementación · 28 de septiembre de 2026 — El guion para locución tiene
+> página propia.** El cliente pidió cambiar el micrófono de la barra por los
+> destellos de IA y preguntó si convenía un texto junto al ícono o una página
+> para el guion, que escribe los guiones de varios programas del canal. Se
+> eligió la página: «Guion» aparece en el menú, con las noticias o las redes
+> como material y un enlace por programa, cada uno con una línea que dice lo
+> que trae. El programa elegido queda en la dirección de la página, así que un
+> guion se puede guardar o mandar al equipo; antes vivía en una hoja y se
+> perdía al cerrarla. En la barra de la portada y en la de Redes, los destellos
+> llevan a esa página con su material ya elegido. En el teléfono no cabía un
+> texto junto al ícono sin cortar el nombre del lugar, y los destellos son
+> también los de «Analizar» en cada tarjeta; el menú, en cambio, dice «Guion»
+> con todas sus letras. Cada clip abre su publicación como un enlace normal,
+> que ahora se puede abrir en otra pestaña o copiar. Sin la lectura con IA, la
+> página no aparece.
+
+> **Implementación · 25 de septiembre de 2026 (noche) — El guion para locución
+> en Redes, con las cuatro redes.** El cliente pidió en Redes el mismo botón de
+> la portada, y que el guion no leyera solo TikTok. Ahora un botón en la
+> barra de Redes abre el guion, con los cuatro programas, sobre TikTok,
+> Instagram y Facebook de las últimas 24 horas, y sobre YouTube solo cuando el
+> video se vio mucho: 5 mil reproducciones o más un video largo y 10 mil un
+> Short, porque un Short cuenta cualquier reproducción, aunque dure un
+> segundo. Con ese corte entra algo menos de la mitad de YouTube, y del
+> corredor entran los videos que de verdad se movieron (el huracán Polo, la
+> familia desaparecida en Tijuana). Las publicaciones se ordenan como en la
+> pantalla, por lo más popular de cada red, sin comparar los likes de una red
+> con las vistas de otra. El guion sigue sin citar cuentas, y cada clip lleva
+> un botón para abrir la publicación. La tarjeta que vivía al frente de la
+> pestaña TikTok se retira: ese guion es ahora el botón.
+
 > **Implementación · 25 de septiembre de 2026 (tarde) — El guion: las garitas
 > desde la fuente oficial, sin citar a nadie, para descargar, y con «Ampliar».**
 > Corrige la nota del guion de ese mismo día, más abajo. Las garitas de
