@@ -11,7 +11,7 @@
     "tipos": "next typegen && tsc --noEmit",
     "datos": "node scripts/sincronizar-datos.mjs",
     "tokens": "node scripts/verificar-tokens.mjs",
-    "migrar": "node --env-file-if-exists=.env.local scripts/migrar.mjs"
+    "migrar": "node --env-file-if-exists=.env --env-file-if-exists=.env.local scripts/migrar.mjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "1.1.0",

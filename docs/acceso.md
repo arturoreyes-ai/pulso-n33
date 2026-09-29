@@ -15,10 +15,10 @@ aquí solo lo que hay que hacer con las manos fuera del repositorio.
 | Sí | No |
 |---|---|
 | Entrada con Entra ID (OIDC), sesión JWT de 8 h con cookie rodante | Contraseñas, registro, "olvidé mi contraseña" |
-| Fila en `usuarios` creada al primer inicio de sesión | Cola de aprobación: quien entra, entra (como `lector`) |
+| Solicitud pendiente creada al primer intento de entrada | Acceso automático por tener cuenta Microsoft |
 | Dos roles, `lector` y `admin`, comprobados por ruta en la API | Tablas `accounts`/`sessions` de Auth.js: no hay adaptador |
-| La puerta en `proxy.ts` cubre HTML estático, `/data/*.json` y `/api/*` | Comprobación de rol en el proxy: ahí solo hay un JWT |
-| Alta y baja de usuarios por API (`PATCH /api/admin/usuarios/:id`) | Interfaz de administración |
+| La puerta en `proxy.ts` comprueba aprobación para HTML, JSON y API | Permisos guardados únicamente en el JWT |
+| Aprobación en `/admin/usuarios` y administración por API | Autoaprobación |
 
 Lo que cambia respecto a SmartNote, de donde viene el diseño: el proxy **sí
 exige sesión**. Allí la portada es dinámica y decide en el servidor; aquí las
@@ -146,6 +146,7 @@ está dada de alta) y `DATABASE_URL`. `pnpm dev` y entra.
 ```
 ACCESO_SIN_ENTRA=true
 ACCESO_DEV_CORREO=dev@pulso.local
+ACCESO_DEV_NOMBRE=Nombre Apellido
 ACCESO_DEV_ROL=admin
 ```
 
@@ -159,8 +160,14 @@ abrir el tablero.
 
 ## 5. Administrar usuarios
 
-No hay interfaz; son dos rutas y `curl` con la cookie del navegador, o
-cualquier cliente que la envíe. Todas responden `Cache-Control: no-store`.
+Abre **Accesos** en el menú de tu cuenta, o `/admin/usuarios`. Solo los
+administradores aprobados pueden ver la lista y aprobar o revocar a otra
+persona. La primera entrada con Microsoft registra la solicitud y muestra
+un aviso pendiente. Tras la aprobación, la persona vuelve a entrar.
+
+La API acepta `{ "aprobado": true }` para aprobar y `{ "aprobado": false }`
+para revocar. Cambiar el rol o reactivar una cuenta no la aprueba.
+Todas las respuestas de la API llevan `Cache-Control: no-store`.
 
 ```bash
 # Quién soy
@@ -176,12 +183,20 @@ curl -b "authjs.session-token=..." -X PATCH -H "content-type: application/json" 
   -d '{"activo":false}' https://<dominio>/api/admin/usuarios/7
 ```
 
-Qué hace una baja (`activo=false`): la persona **no puede volver a entrar**
-(`callbacks.signIn` la rechaza y `/entrar` le dice que su cuenta está
-desactivada) y la API le responde 403 en la siguiente petición. La sesión que
-ya tenga abierta sigue viendo el HTML estático hasta ocho horas, porque el
-proxy solo ve el JWT. Si eso no basta en un caso concreto, rota `AUTH_SECRET`:
-invalida todas las sesiones a la vez.
+Una baja o revocación bloquea la siguiente petición a páginas, JSON y API,
+con cualquier sesión ya abierta. No retira contenido ya descargado.
+Si la base no está disponible, el proxy devuelve 503 sin servir el tablero.
+
+Antes de desplegar, aplica `pnpm --dir web migrar`: `0004_aprobacion.sql`
+agrega la aprobación sin borrar usuarios. Los administradores activos existentes
+conservan acceso; los demás usuarios existentes quedan pendientes. Repetir la
+migración conserva las decisiones. `ACCESO_PRIMER_ADMIN` sigue siendo la cuenta
+administradora de recuperación y queda aprobada al entrar. El modo de desarrollo
+sin Entra conserva su excepción, nunca habilitada en producción.
+
+El servidor y las migraciones aceptan `DATABASE_URL`, `NEON_DB_DATABASE_URL`
+o `NEON_DATABASE_URL` (en ese orden). `pnpm migrar` carga `web/.env` y después
+`web/.env.local`; el segundo puede sobrescribir los valores del primero.
 
 ## 6. Lista de verificación
 
@@ -190,13 +205,14 @@ En orden, la primera vez:
 1. El proyecto de Vercel dice Framework Preset **Next.js**, Root Directory
    **web** e "Include source files outside of the Root Directory" activado.
    Sin lo primero todo es `404` aunque el build pase (ver §7).
-2. `pnpm migrar` terminó con `0001_usuarios.sql: 1 sentencia(s) aplicada(s)`.
+2. `pnpm migrar` terminó sin errores, incluida `0004_aprobacion.sql`.
 3. Abrir `/` sin sesión redirige a `/entrar?volver=%2F`; abrir
    `/data/notas.json` sin sesión responde `401` en JSON, no HTML.
 4. Entrar con el correo de `ACCESO_PRIMER_ADMIN` crea la fila con
    `rol=admin`; `/api/yo` lo confirma.
-5. Entrar con un segundo correo crea una fila `lector`; para esa persona,
-   `/api/admin/usuarios` responde `403`.
+5. Entrar con un segundo correo crea una fila `lector` pendiente y muestra
+   el aviso de aprobación. Aprobarla desde **Accesos** permite entrar;
+   `/api/admin/usuarios` sigue respondiendo `403` para ese lector.
 6. "Salir" en la pastilla lleva a `/entrar?salida=1` y `/` vuelve a pedir
    sesión.
 7. A las ocho horas sin actividad la sesión caduca; con actividad, el proxy

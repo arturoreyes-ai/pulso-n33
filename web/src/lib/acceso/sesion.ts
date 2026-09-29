@@ -37,11 +37,15 @@ interface IdentidadDeSesion extends Identidad {
 }
 
 async function identidadDeSesion(): Promise<IdentidadDeSesion> {
-  const sesion = await auth();
   const dev = acceso.sinEntra;
+  // Este modo no usa cookies ni proveedores: tampoco debe inicializar Auth.js.
+  if (dev) {
+    return { correo: acceso.devCorreo, nombre: acceso.devNombre, entraOid: null, dev: true };
+  }
+  const sesion = await auth();
   const correo = (sesion?.user?.email || (dev ? acceso.devCorreo : "")).trim().toLowerCase();
   if (!correo) throw new ErrorApi(401, "Inicia sesión con Microsoft Entra");
-  const nombre = sesion?.user?.name?.trim() || (dev ? "Usuario de desarrollo" : correo);
+  const nombre = sesion?.user?.name?.trim() || (dev ? acceso.devNombre : correo);
   const usuario = sesion?.user as { entraOid?: unknown } | undefined;
   const entraOid = typeof usuario?.entraOid === "string" ? usuario.entraOid : null;
   return { correo, nombre, entraOid, dev: dev && !sesion?.user };
@@ -55,6 +59,7 @@ function usuarioSintetico(identidad: Identidad): Usuario {
     nombre: identidad.nombre,
     rol: acceso.devRol,
     activo: true,
+    aprobado: true,
     creadoEn: "1970-01-01T00:00:00.000Z",
     ultimoAccesoEn: null,
   };
@@ -75,7 +80,7 @@ export async function usuarioActual(): Promise<Usuario> {
     const fila = hayBaseDeDatos()
       ? await registrarAcceso(identidad)
       : usuarioSintetico(identidad);
-    return { ...fila, rol: acceso.devRol, activo: true };
+    return { ...fila, rol: acceso.devRol, activo: true, aprobado: true };
   }
   return (await buscarUsuarioPorCorreo(identidad.correo)) ?? registrarAcceso(identidad);
 }
@@ -83,6 +88,7 @@ export async function usuarioActual(): Promise<Usuario> {
 export async function requerirUsuario(): Promise<Usuario> {
   const usuario = await usuarioActual();
   if (!usuario.activo) throw new ErrorApi(403, "Tu cuenta está desactivada");
+  if (!usuario.aprobado) throw new ErrorApi(403, "Tu acceso requiere aprobación de un administrador");
   return usuario;
 }
 

@@ -36,11 +36,12 @@ let cliente: Cliente | null = null;
  * `DATABASE_URL` en local y en la documentacion de Neon; `NEON_DB_DATABASE_URL`
  * es lo que la integracion de Vercel Marketplace exporta de verdad al proyecto
  * (verificado el 10 sep 2026: las 16 variables llegan con el prefijo
- * NEON_DB_, y ninguna sin el). Se aceptan las dos para que el despliegue no
+ * NEON_DB_, y ninguna sin el). Tambien se acepta NEON_DATABASE_URL en local.
+ * Se aceptan los alias para que el despliegue no
  * dependa de renombrar a mano una variable que la integracion volveria a crear.
  */
 export function urlBaseDeDatos(): string | undefined {
-  return process.env.DATABASE_URL || process.env.NEON_DB_DATABASE_URL || undefined;
+  return process.env.DATABASE_URL || process.env.NEON_DB_DATABASE_URL || process.env.NEON_DATABASE_URL || undefined;
 }
 
 export function hayBaseDeDatos(): boolean {
@@ -51,7 +52,7 @@ export function sql(): Cliente {
   if (cliente === null) {
     const url = urlBaseDeDatos();
     if (!url) {
-      throw new Error("Ni DATABASE_URL ni NEON_DB_DATABASE_URL están configuradas (ver docs/acceso.md)");
+      throw new Error("Configura DATABASE_URL, NEON_DB_DATABASE_URL o NEON_DATABASE_URL (ver docs/acceso.md)");
     }
     cliente = neon(url);
   }

@@ -24,9 +24,9 @@ import { neon } from "@neondatabase/serverless";
 
 // El mismo par que lee src/lib/acceso/bd.ts: la integracion de Vercel exporta
 // la cadena como NEON_DB_DATABASE_URL, no como DATABASE_URL.
-const url = process.env.DATABASE_URL || process.env.NEON_DB_DATABASE_URL;
+const url = process.env.DATABASE_URL || process.env.NEON_DB_DATABASE_URL || process.env.NEON_DATABASE_URL;
 if (!url) {
-  console.error("Ni DATABASE_URL ni NEON_DB_DATABASE_URL están definidas. Ver docs/acceso.md.");
+  console.error("Configura DATABASE_URL, NEON_DB_DATABASE_URL o NEON_DATABASE_URL. Ver docs/acceso.md.");
   process.exit(1);
 }
 

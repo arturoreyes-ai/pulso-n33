@@ -13,7 +13,7 @@ import MicrosoftEntraID from "next-auth/providers/microsoft-entra-id";
  *
  *  - Identidad SOLO de Entra. No hay contrasenas, registro ni recuperacion de
  *    cuenta: Microsoft es el dueno de la identidad y el tablero solo la lee.
- *    Puede entrar quien tenga cuenta en el inquilino; el rol lo pone la tabla
+ *    La cuenta requiere aprobacion ademas de identidad; el rol lo pone la tabla
  *    `usuarios` (lib/acceso/usuarios.ts).
  *  - Sesion en JWT firmado con AUTH_SECRET, sin adaptador de base de datos:
  *    no existen las tablas accounts/sessions/verification_tokens de Auth.js.
@@ -58,17 +58,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   session: { strategy: "jwt", maxAge: 8 * 60 * 60 },
   pages: { signIn: "/entrar", signOut: "/entrar", error: "/entrar" },
   callbacks: {
-    /**
-     * Una vez por inicio de sesion, en la ruta [...nextauth] (Node): da de
-     * alta o refresca la fila de `usuarios` y niega la entrada si la cuenta
-     * esta desactivada. Negar aqui es lo que hace que una baja tenga efecto:
-     * el proxy solo ve el JWT y no puede consultar la tabla en cada peticion.
-     * Una sesion ya abierta dura hasta 8 h; las rutas de la API la cortan en
-     * la siguiente peticion (requerirUsuario).
-     *
-     * El import es dinamico para que el bundle del proxy no arrastre el
-     * driver: el callback nunca corre ahi.
-     */
+    /** Registra la solicitud y solo crea sesion para cuentas activas y aprobadas. */
     async signIn({ user, profile }) {
       const correo = (user.email || "").trim().toLowerCase();
       if (!correo) return false;
@@ -78,7 +68,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         nombre: user.name?.trim() || correo,
         entraOid: typeof profile?.oid === "string" ? profile.oid : null,
       });
-      return fila.activo;
+      if (!fila.activo) return false;
+      if (!fila.aprobado) return "/entrar?error=ApprovalRequired";
+      return true;
     },
     jwt({ token, profile }) {
       if (profile && typeof profile.oid === "string") token.entraOid = profile.oid;

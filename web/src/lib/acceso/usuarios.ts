@@ -19,6 +19,7 @@ export interface Usuario {
   nombre: string;
   rol: Rol;
   activo: boolean;
+  aprobado: boolean;
   creadoEn: string;
   ultimoAccesoEn: string | null;
 }
@@ -66,6 +67,7 @@ function aUsuario(fila: Record<string, unknown>): Usuario {
     nombre: texto(fila, "nombre"),
     rol,
     activo: fila.activo === true,
+    aprobado: fila.aprobado === true,
     creadoEn,
     ultimoAccesoEn: fecha(fila, "ultimo_acceso_en"),
   };
@@ -73,7 +75,7 @@ function aUsuario(fila: Record<string, unknown>): Usuario {
 
 export async function buscarUsuarioPorCorreo(correo: string): Promise<Usuario | null> {
   const filas = await sql()`
-    SELECT id, entra_oid, correo, nombre, rol, activo, creado_en, ultimo_acceso_en
+    SELECT id, entra_oid, correo, nombre, rol, activo, aprobado, creado_en, ultimo_acceso_en
     FROM usuarios WHERE correo = ${correo}`;
   const fila = filas[0];
   return fila ? aUsuario(fila) : null;
@@ -81,7 +83,7 @@ export async function buscarUsuarioPorCorreo(correo: string): Promise<Usuario | 
 
 export async function buscarUsuarioPorId(id: number): Promise<Usuario | null> {
   const filas = await sql()`
-    SELECT id, entra_oid, correo, nombre, rol, activo, creado_en, ultimo_acceso_en
+    SELECT id, entra_oid, correo, nombre, rol, activo, aprobado, creado_en, ultimo_acceso_en
     FROM usuarios WHERE id = ${id}`;
   const fila = filas[0];
   return fila ? aUsuario(fila) : null;
@@ -103,7 +105,7 @@ export async function buscarUsuarioPorId(id: number): Promise<Usuario | null> {
  *
  * El rol solo se fija al insertar (`lector`, o `admin` para
  * ACCESO_PRIMER_ADMIN) y se respeta despues... salvo para ese correo, que
- * vuelve a admin y activo en cada entrada: es la puerta de emergencia
+ * vuelve a admin, activo y aprobado en cada entrada: es la puerta de emergencia
  * documentada en roles.ts.
  */
 export async function registrarAcceso(identidad: Identidad): Promise<Usuario> {
@@ -118,23 +120,25 @@ export async function registrarAcceso(identidad: Identidad): Promise<Usuario> {
         nombre = ${identidad.nombre},
         rol = CASE WHEN ${esPrimerAdmin} THEN 'admin' ELSE rol END,
         activo = CASE WHEN ${esPrimerAdmin} THEN true ELSE activo END,
+        aprobado = CASE WHEN ${esPrimerAdmin} THEN true ELSE aprobado END,
         ultimo_acceso_en = now()
       WHERE entra_oid = ${identidad.entraOid}
-      RETURNING id, entra_oid, correo, nombre, rol, activo, creado_en, ultimo_acceso_en`;
+      RETURNING id, entra_oid, correo, nombre, rol, activo, aprobado, creado_en, ultimo_acceso_en`;
     const fila = porOid[0];
     if (fila) return aUsuario(fila);
   }
 
   const filas = await bd`
-    INSERT INTO usuarios (correo, nombre, entra_oid, rol, activo, ultimo_acceso_en)
-    VALUES (${identidad.correo}, ${identidad.nombre}, ${identidad.entraOid}, ${rolInicial}, true, now())
+    INSERT INTO usuarios (correo, nombre, entra_oid, rol, activo, aprobado, ultimo_acceso_en)
+    VALUES (${identidad.correo}, ${identidad.nombre}, ${identidad.entraOid}, ${rolInicial}, true, ${esPrimerAdmin}, now())
     ON CONFLICT (correo) DO UPDATE SET
       nombre = EXCLUDED.nombre,
       entra_oid = COALESCE(EXCLUDED.entra_oid, usuarios.entra_oid),
       rol = CASE WHEN ${esPrimerAdmin} THEN 'admin' ELSE usuarios.rol END,
       activo = CASE WHEN ${esPrimerAdmin} THEN true ELSE usuarios.activo END,
+      aprobado = CASE WHEN ${esPrimerAdmin} THEN true ELSE usuarios.aprobado END,
       ultimo_acceso_en = now()
-    RETURNING id, entra_oid, correo, nombre, rol, activo, creado_en, ultimo_acceso_en`;
+    RETURNING id, entra_oid, correo, nombre, rol, activo, aprobado, creado_en, ultimo_acceso_en`;
   const fila = filas[0];
   if (!fila) throw new Error("usuarios: el upsert no devolvió fila");
   return aUsuario(fila);
@@ -142,7 +146,7 @@ export async function registrarAcceso(identidad: Identidad): Promise<Usuario> {
 
 export async function listarUsuarios(): Promise<Usuario[]> {
   const filas = await sql()`
-    SELECT id, entra_oid, correo, nombre, rol, activo, creado_en, ultimo_acceso_en
+    SELECT id, entra_oid, correo, nombre, rol, activo, aprobado, creado_en, ultimo_acceso_en
     FROM usuarios ORDER BY (rol = 'admin') DESC, correo ASC`;
   return filas.map(aUsuario);
 }
@@ -150,15 +154,17 @@ export async function listarUsuarios(): Promise<Usuario[]> {
 export interface CambioUsuario {
   rol?: Rol;
   activo?: boolean;
+  aprobado?: boolean;
 }
 
 export async function actualizarUsuario(id: number, cambio: CambioUsuario): Promise<Usuario> {
   const filas = await sql()`
     UPDATE usuarios SET
       rol = COALESCE(${cambio.rol ?? null}, rol),
-      activo = COALESCE(${cambio.activo ?? null}, activo)
+      activo = COALESCE(${cambio.activo ?? null}, activo),
+      aprobado = COALESCE(${cambio.aprobado ?? null}, aprobado)
     WHERE id = ${id}
-    RETURNING id, entra_oid, correo, nombre, rol, activo, creado_en, ultimo_acceso_en`;
+    RETURNING id, entra_oid, correo, nombre, rol, activo, aprobado, creado_en, ultimo_acceso_en`;
   const fila = filas[0];
   if (!fila) throw new ErrorApi(404, "Usuario no encontrado");
   return aUsuario(fila);

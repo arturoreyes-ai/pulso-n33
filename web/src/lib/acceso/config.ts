@@ -9,6 +9,11 @@ import { esRol, type Rol } from "./roles";
  * comporta como si hubiera entrado ACCESO_DEV_CORREO con rol ACCESO_DEV_ROL,
  * lo que permite probar la matriz lector/admin sin inquilino.
  *
+ * `devNombre` (ACCESO_DEV_NOMBRE) es el nombre de esa persona. Sin el, el riel
+ * decia «Usuario de desarrollo» y el rotulo de la cuenta, que desde el 28 de
+ * septiembre de 2026 es el primer nombre, «Usuario»: no se podia ver como se
+ * ve con un nombre de verdad sin entrar por Entra.
+ *
  * NUNCA se honra fuera de `next dev`. La condicion es NODE_ENV y no una
  * variable propia porque `next build` y `next start` la fijan a "production"
  * solos: no hay forma de que un despliegue en Vercel quede abierto por
@@ -20,6 +25,7 @@ const rolDevPedido = process.env.ACCESO_DEV_ROL;
 export const acceso = {
   sinEntra: process.env.ACCESO_SIN_ENTRA === "true" && enDesarrollo,
   devCorreo: (process.env.ACCESO_DEV_CORREO || "dev@pulso.local").trim().toLowerCase(),
+  devNombre: (process.env.ACCESO_DEV_NOMBRE || "").trim() || "Usuario de desarrollo",
   devRol: (esRol(rolDevPedido) ? rolDevPedido : "admin") as Rol,
   // Correo que entra como admin SIEMPRE, no solo la primera vez: es tambien la
   // puerta de emergencia si el ultimo admin se pierde.

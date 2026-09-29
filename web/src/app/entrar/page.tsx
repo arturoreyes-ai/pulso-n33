@@ -7,6 +7,8 @@ import { Letrero } from "@/components/acceso/letrero";
 import { entrarConMicrosoft } from "@/lib/acceso/acciones";
 import { acceso } from "@/lib/acceso/config";
 import { rutaDeRegreso } from "@/lib/acceso/regreso";
+import { buscarUsuarioPorCorreo } from "@/lib/acceso/usuarios";
+import { cerrarSesion } from "@/lib/acceso/acciones";
 
 /**
  * La puerta. Es la unica pagina que proxy.ts deja pasar sin sesion, y la
@@ -56,6 +58,7 @@ interface Props {
  * README, que es donde lo busca quien si puede arreglarlo.
  */
 const MENSAJE: Record<string, string> = {
+  ApprovalRequired: "Tu solicitud de acceso está pendiente. Un administrador debe aprobarla antes de que puedas entrar.",
   AccessDenied: "Tu cuenta está desactivada. Pide a un administrador del tablero que la reactive.",
   Configuration:
     "La entrada con Microsoft no está disponible. Avisa a un administrador del tablero.",
@@ -67,10 +70,22 @@ export default async function PaginaEntrar({ searchParams }: Props) {
   const { volver, error, salida } = await searchParams;
   const destino = rutaDeRegreso(volver);
 
+  if (acceso.sinEntra) redirect(destino);
   const sesion = await auth();
-  if (sesion?.user || acceso.sinEntra) redirect(destino);
+  let errorAcceso = error;
+  if (sesion?.user) {
+    try {
+      const correo = sesion.user.email?.trim().toLowerCase();
+      const usuario = correo ? await buscarUsuarioPorCorreo(correo) : null;
+      if (usuario?.activo && usuario.aprobado) errorAcceso = undefined;
+      else errorAcceso = usuario?.activo ? "ApprovalRequired" : "AccessDenied";
+    } catch {
+      errorAcceso = "Configuration";
+    }
+    if (!errorAcceso) redirect(destino);
+  }
 
-  const aviso = error ? MENSAJE[error] ?? MENSAJE_GENERICO : null;
+  const aviso = errorAcceso ? MENSAJE[errorAcceso] ?? MENSAJE_GENERICO : null;
 
   return (
     // Tres medidas con motivo, porque ninguna se deduce del resto del sitio.
@@ -140,7 +155,11 @@ export default async function PaginaEntrar({ searchParams }: Props) {
           </p>
         )}
 
-        {hayEntra ? (
+        {sesion?.user ? (
+          <form action={cerrarSesion} className="mt-8">
+            <button className="rounded-full border border-filo px-6 py-3 text-cuerpo">Cerrar sesión</button>
+          </form>
+        ) : hayEntra ? (
           <form action={entrarConMicrosoft} className="mt-8">
             <input type="hidden" name="volver" value={destino} />
             <button

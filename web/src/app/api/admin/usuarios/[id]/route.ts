@@ -8,8 +8,8 @@ interface Props {
 }
 
 /**
- * Cambiar rol o dar de alta/baja a un usuario. Cuerpo: `{ "rol": "admin" }`,
- * `{ "activo": false }`, o ambos. Sin Zod a proposito: son dos campos y la
+ * Cambiar rol, aprobar o dar de alta/baja a un usuario. Cuerpo con rol,
+ * activo y/o aprobado. Sin Zod a proposito: son tres campos y la
  * validacion a mano se lee entera.
  */
 export async function PATCH(peticion: Request, { params }: Props) {
@@ -26,9 +26,9 @@ export async function PATCH(peticion: Request, { params }: Props) {
 
     const cuerpo = await cuerpoJson(peticion);
     if (typeof cuerpo !== "object" || cuerpo === null) {
-      throw new ErrorApi(422, "Se esperaba un objeto con rol y/o activo");
+      throw new ErrorApi(422, "Se esperaba un objeto con rol, activo y/o aprobado");
     }
-    const { rol, activo } = cuerpo as Record<string, unknown>;
+    const { rol, activo, aprobado } = cuerpo as Record<string, unknown>;
     const cambio: CambioUsuario = {};
     if (rol !== undefined) {
       if (!esRol(rol)) throw new ErrorApi(422, "Rol desconocido: usa lector o admin");
@@ -38,8 +38,12 @@ export async function PATCH(peticion: Request, { params }: Props) {
       if (typeof activo !== "boolean") throw new ErrorApi(422, "activo debe ser true o false");
       cambio.activo = activo;
     }
-    if (cambio.rol === undefined && cambio.activo === undefined) {
-      throw new ErrorApi(422, "Nada que cambiar: envía rol y/o activo");
+    if (aprobado !== undefined) {
+      if (typeof aprobado !== "boolean") throw new ErrorApi(422, "aprobado debe ser true o false");
+      cambio.aprobado = aprobado;
+    }
+    if (cambio.rol === undefined && cambio.activo === undefined && cambio.aprobado === undefined) {
+      throw new ErrorApi(422, "Nada que cambiar: envía rol, activo y/o aprobado");
     }
 
     return jsonSinCache(await actualizarUsuario(id, cambio));
