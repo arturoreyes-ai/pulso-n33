@@ -1,32 +1,32 @@
 {
  "esquema": 1,
- "generado": "2026-09-29T06:07:44+00:00",
+ "generado": "2026-09-29T13:07:54+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 897,
- "posts_vigentes": 145,
- "opinion": 844,
- "repetidos": 19,
+ "comentarios_vigentes": 946,
+ "posts_vigentes": 152,
+ "opinion": 892,
+ "repetidos": 20,
  "reacciones": 37,
  "por_zona": {
   "Ensenada": 45,
-  "Mexicali": 40,
+  "Mexicali": 47,
   "Playas de Rosarito": 3,
   "Tecate": 20,
   "Tijuana": 373,
-  "estatal": 398,
-  "nacional": 18
+  "estatal": 432,
+  "nacional": 26
  },
  "por_cuenta": {
   "aztecabc_fb": 49,
-  "blanconegro_fb": 343,
-  "blancorojo_fb": 239,
-  "ndtijuana_fb": 261,
-  "psn_fb": 5
+  "blanconegro_fb": 371,
+  "blancorojo_fb": 249,
+  "ndtijuana_fb": 269,
+  "psn_fb": 8
  },
  "por_idioma": {
-  "es": 897
+  "es": 946
  },
  "por_tema": [
   {
@@ -41,8 +41,8 @@
   },
   {
    "tema": "sera",
-   "comentarios": 7,
-   "posts": 7
+   "comentarios": 8,
+   "posts": 8
   },
   {
    "tema": "final",
@@ -70,6 +70,11 @@
    "posts": 3
   },
   {
+   "tema": "muere",
+   "comentarios": 3,
+   "posts": 3
+  },
+  {
    "tema": "nino",
    "comentarios": 3,
    "posts": 3
@@ -87,11 +92,6 @@
   {
    "tema": "zona",
    "comentarios": 3,
-   "posts": 2
-  },
-  {
-   "tema": "muere",
-   "comentarios": 2,
    "posts": 2
   },
   {
@@ -126,9 +126,9 @@
   }
  ],
  "sentimiento": {
-  "positivo": 70,
-  "negativo": 440,
-  "neutral": 334,
+  "positivo": 74,
+  "negativo": 461,
+  "neutral": 357,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -200,10 +200,10 @@
    "fecha": "2026-09-28",
    "titulo": "¿Fallaron en ejecutarlo o se trató de un aviso?, adulto mayor queda herido en este ataque, su hijo sale ileso…",
    "tipo": "video",
-   "likes": 847,
-   "comentarios": 53,
-   "compartidos": 76,
-   "reproducciones": 114862,
+   "likes": 934,
+   "comentarios": 57,
+   "compartidos": 82,
+   "reproducciones": 126164,
    "alcance": "nacional",
    "publicado": "2026-09-28T23:20:38+00:00",
    "cosechados": 10,
@@ -241,29 +241,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid035WXY1x2wEkeGEyYZ5omf5UC9gdNmRFynZ1vGbAemoBD3DrwpEVGXEdPTr2C12ytsl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "estatal",
-   "fecha": "2026-09-28",
-   "titulo": "Polo cambia su trayectoria hacia la costas de Baja California Norte",
-   "tipo": "imagen",
-   "likes": 468,
-   "comentarios": 17,
-   "compartidos": 39,
-   "alcance": "estatal",
-   "publicado": "2026-09-28T11:05:48+00:00",
-   "cosechados": 10,
-   "opinion": 9,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 5,
-    "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02MqGf26jLhrtHauHae7m9nxqJbn8Wsrsu6pEcCQZzCsfzKfiq1eTJXawkhyFsYMxfl&id=100086488503408",
    "cuenta": "blancorojo_fb",
    "zona": "estatal",
@@ -293,8 +270,8 @@
    "fecha": "2026-09-29",
    "titulo": "?Que opinan déjanos tus comentarios",
    "tipo": "imagen",
-   "likes": 363,
-   "comentarios": 21,
+   "likes": 439,
+   "comentarios": 24,
    "compartidos": 4,
    "alcance": "nacional",
    "publicado": "2026-09-29T01:11:06+00:00",
@@ -304,6 +281,29 @@
     "positivo": 3,
     "negativo": 3,
     "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid036EntbckpMgRAniVrE2CBK4SwA8Pj33Nh9yAr5K6JLSxakrnXQWr4FZHKKcw8kE1jl",
+   "cuenta": "blanconegro_fb",
+   "zona": "Mexicali",
+   "fecha": "2026-09-29",
+   "titulo": "🥊🕊️ Entre lágrimas y aplausos, despiden a “Lobito” Torres en Mexicali",
+   "tipo": "imagen",
+   "likes": 351,
+   "comentarios": 25,
+   "compartidos": 33,
+   "alcance": "zona",
+   "publicado": "2026-09-29T00:36:13+00:00",
+   "cosechados": 7,
+   "opinion": 6,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 4,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -327,6 +327,29 @@
     "positivo": 0,
     "negativo": 3,
     "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02wXUavdxWxDfn1YJ2h2ymqUj2zmimYEWKXq4YcRxCiarUrtS1GU2HYGinT3UAFe8kl",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-09-29",
+   "titulo": "🚨 Suspenden fiesta clandestina con más de 30 menores de edad en Tijuana",
+   "tipo": "imagen",
+   "likes": 299,
+   "comentarios": 61,
+   "compartidos": 35,
+   "alcance": "zona",
+   "publicado": "2026-09-29T04:34:37+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 4,
+    "neutral": 5,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -403,13 +426,37 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/931435879648608",
+   "cuenta": "blanconegro_fb",
+   "zona": "estatal",
+   "fecha": "2026-09-29",
+   "titulo": "Mujer trans lesionada por arma blanca",
+   "tipo": "video",
+   "likes": 229,
+   "comentarios": 18,
+   "compartidos": 7,
+   "reproducciones": 14902,
+   "alcance": "nacional",
+   "publicado": "2026-09-29T09:33:55+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 4,
+    "neutral": 6,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/NdTijuana/posts/pfbid02Kj4j6YpdhbGS5DXkM5efMwcyiWMfGnz4PCLtaTZc1D3ji6ZqFwxJLxCCAM6REtqCl",
    "cuenta": "ndtijuana_fb",
    "zona": "Tijuana",
    "fecha": "2026-09-28",
    "titulo": "#NDTInforma Camión cargado con piedras deja dos muertos y dos lesionados en Valle de San Pedro",
    "tipo": "imagen",
-   "likes": 194,
+   "likes": 202,
    "comentarios": 7,
    "compartidos": 11,
    "alcance": "zona",
@@ -426,37 +473,14 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02wXUavdxWxDfn1YJ2h2ymqUj2zmimYEWKXq4YcRxCiarUrtS1GU2HYGinT3UAFe8kl",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-09-29",
-   "titulo": "🚨 Suspenden fiesta clandestina con más de 30 menores de edad en Tijuana",
-   "tipo": "imagen",
-   "likes": 174,
-   "comentarios": 34,
-   "compartidos": 22,
-   "alcance": "zona",
-   "publicado": "2026-09-29T04:34:37+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 4,
-    "neutral": 5,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NdTijuana/posts/pfbid0j1tLUa3A8kXUNC813uq6NqMyAKcfY6xZo1iXyjuEcYmuuY18zMMtg9SoCrH5WMvul",
    "cuenta": "ndtijuana_fb",
    "zona": "Tijuana",
    "fecha": "2026-09-28",
    "titulo": "#NDTInforma Ofreció dinero a policías y terminó detenido",
    "tipo": "imagen",
-   "likes": 165,
-   "comentarios": 148,
+   "likes": 177,
+   "comentarios": 155,
    "compartidos": 8,
    "alcance": "zona",
    "publicado": "2026-09-28T21:17:18+00:00",
@@ -478,9 +502,9 @@
    "fecha": "2026-09-28",
    "titulo": "#NDTInforma Asesinan a hombre a balazos frente a Plaza La Mesa",
    "tipo": "imagen",
-   "likes": 141,
-   "comentarios": 11,
-   "compartidos": 9,
+   "likes": 162,
+   "comentarios": 13,
+   "compartidos": 10,
    "alcance": "zona",
    "publicado": "2026-09-28T23:40:06+00:00",
    "cosechados": 4,
@@ -512,6 +536,29 @@
     "positivo": 0,
     "negativo": 1,
     "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0kxvDgLBtzqey9ChiYKhZSrHfHEbPgKR6f4mJSEDSB9Z79Sg283zyvs1nu9S5KoGvl",
+   "cuenta": "blanconegro_fb",
+   "zona": "estatal",
+   "fecha": "2026-09-29",
+   "titulo": "Cierran puertos en el Pacífico por el paso de la tormenta tropical “Rachel” y el huracán “Polo”",
+   "tipo": "imagen",
+   "likes": 120,
+   "comentarios": 15,
+   "compartidos": 17,
+   "alcance": "nacional",
+   "publicado": "2026-09-29T02:21:18+00:00",
+   "cosechados": 7,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 2,
+    "neutral": 5,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -564,6 +611,53 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02RhUjvBCeebrnJzFFJV4En2uKsiao4NXLxUibmE5tPgdwTL4HoYRXY6EQGJaZSxJdl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-09-29",
+   "titulo": "En Tijuana las propiedades están por los cielos, una casa como la de la foto se cotiza por más de 1M de pesos.",
+   "tipo": "imagen",
+   "likes": 106,
+   "comentarios": 39,
+   "compartidos": 10,
+   "alcance": "zona",
+   "publicado": "2026-09-29T00:34:02+00:00",
+   "cosechados": 5,
+   "opinion": 5,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 2,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/3541943302628552",
+   "cuenta": "blanconegro_fb",
+   "zona": "estatal",
+   "fecha": "2026-09-29",
+   "titulo": "🌳 Árbol se rompe y cae sobre un vehículo",
+   "tipo": "video",
+   "likes": 106,
+   "comentarios": 17,
+   "compartidos": 36,
+   "reproducciones": 24395,
+   "alcance": "nacional",
+   "publicado": "2026-09-29T01:35:57+00:00",
+   "cosechados": 7,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 2,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02wRgu58bZb6B4szuRyf3Q9rU1onJPx4CNGynahxquqvYkJCYfQufSbapYFKkA928Kl&id=100086488503408",
    "cuenta": "blancorojo_fb",
    "zona": "Tijuana",
@@ -592,70 +686,23 @@
    ]
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0kxvDgLBtzqey9ChiYKhZSrHfHEbPgKR6f4mJSEDSB9Z79Sg283zyvs1nu9S5KoGvl",
-   "cuenta": "blanconegro_fb",
-   "zona": "estatal",
-   "fecha": "2026-09-29",
-   "titulo": "Cierran puertos en el Pacífico por el paso de la tormenta tropical “Rachel” y el huracán “Polo”",
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid026SG3G7uKGZbMNoFaD2wHZt29i8kGXdniQBZi5WQNR36LzWLe8eGRn94jAK7VdhLPl",
+   "cuenta": "ndtijuana_fb",
+   "zona": "nacional",
+   "fecha": "2026-09-28",
+   "titulo": "#NDTInforma Una carrera de 5K con una meta que va más allá de correr",
    "tipo": "imagen",
-   "likes": 99,
-   "comentarios": 8,
-   "compartidos": 10,
+   "likes": 82,
+   "comentarios": 9,
+   "compartidos": 4,
    "alcance": "nacional",
-   "publicado": "2026-09-29T02:21:18+00:00",
-   "cosechados": 7,
-   "opinion": 7,
+   "publicado": "2026-09-28T23:30:36+00:00",
+   "cosechados": 8,
+   "opinion": 8,
    "sentimiento": {
     "positivo": 0,
     "negativo": 2,
-    "neutral": 5,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02RhUjvBCeebrnJzFFJV4En2uKsiao4NXLxUibmE5tPgdwTL4HoYRXY6EQGJaZSxJdl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-09-29",
-   "titulo": "En Tijuana las propiedades están por los cielos, una casa como la de la foto se cotiza por más de 1M de pesos.",
-   "tipo": "imagen",
-   "likes": 96,
-   "comentarios": 38,
-   "compartidos": 9,
-   "alcance": "zona",
-   "publicado": "2026-09-29T00:34:02+00:00",
-   "cosechados": 5,
-   "opinion": 5,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 2,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/3541943302628552",
-   "cuenta": "blanconegro_fb",
-   "zona": "estatal",
-   "fecha": "2026-09-29",
-   "titulo": "🌳 Árbol se rompe y cae sobre un vehículo",
-   "tipo": "video",
-   "likes": 92,
-   "comentarios": 10,
-   "compartidos": 24,
-   "reproducciones": 21963,
-   "alcance": "nacional",
-   "publicado": "2026-09-29T01:35:57+00:00",
-   "cosechados": 7,
-   "opinion": 4,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 2,
-    "neutral": 2,
+    "neutral": 6,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -713,6 +760,29 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid028m8m2QzyoXpDbn8iHfPUcQgERMCitJ7h8Kn9oXgXCagUxtrQzhgKEoD1SEmWQoujl",
+   "cuenta": "blanconegro_fb",
+   "zona": "estatal",
+   "fecha": "2026-09-28",
+   "titulo": "🏆 Hacer del arte y la cultura una política pública para escuchar, reconocer y acompañar el talento de las nuevas generaciones es una prioridad en Baja Californ…",
+   "tipo": "imagen",
+   "likes": 37,
+   "comentarios": 20,
+   "compartidos": 30,
+   "alcance": "estatal",
+   "publicado": "2026-09-28T23:28:55+00:00",
+   "cosechados": 7,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 0,
+    "neutral": 5,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/reel/1891974455123397",
    "cuenta": "blanconegro_fb",
    "zona": "Tijuana",
@@ -754,6 +824,53 @@
     "positivo": 0,
     "negativo": 2,
     "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/reel/1888100859217819",
+   "cuenta": "psn_fb",
+   "zona": "Tecate",
+   "fecha": "2026-09-29",
+   "titulo": "#LoVisteEnPSN | Fallece Evelyn Janitza Germán Delgado, delegada de La Rumorosa, tras trágica volcadura de RZR en Tecate.",
+   "tipo": "video",
+   "likes": 35,
+   "comentarios": 0,
+   "compartidos": 1,
+   "reproducciones": 4282,
+   "alcance": "zona",
+   "publicado": "2026-09-29T01:30:18+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02BEdrbV5jqmAvTrJrVoAhTwRC9qPkR65rvYEpq2e8kcxXh39kv2y9MChMLDUs4sStl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "estatal",
+   "fecha": "2026-09-29",
+   "titulo": "Kennedy quiso bajarse del barco de la Patrulla Espiritual y ya no quiere continuar en la clínica. 🥺",
+   "tipo": "imagen",
+   "likes": 32,
+   "comentarios": 12,
+   "compartidos": 1,
+   "alcance": "nacional",
+   "publicado": "2026-09-29T10:10:36+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 8,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -829,24 +946,23 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/reel/1888100859217819",
-   "cuenta": "psn_fb",
-   "zona": "Tecate",
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02NrTnVwoBtAsB94Yx7vUMLfL9LXmGVLGWZXP5GzT7REDb5C1yww4cvai2mxYA4hE5l&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "nacional",
    "fecha": "2026-09-29",
-   "titulo": "#LoVisteEnPSN | Fallece Evelyn Janitza Germán Delgado, delegada de La Rumorosa, tras trágica volcadura de RZR en Tecate.",
-   "tipo": "video",
-   "likes": 25,
-   "comentarios": 0,
-   "compartidos": 1,
-   "reproducciones": 2735,
-   "alcance": "zona",
-   "publicado": "2026-09-29T01:30:18+00:00",
-   "cosechados": 0,
-   "opinion": 0,
+   "titulo": "Los de México Yo después de un buen fin de semana lleno de alcohol y chichifly",
+   "tipo": "imagen",
+   "likes": 26,
+   "comentarios": 1,
+   "compartidos": 4,
+   "alcance": "nacional",
+   "publicado": "2026-09-29T01:17:09+00:00",
+   "cosechados": 1,
+   "opinion": 1,
    "sentimiento": {
     "positivo": 0,
     "negativo": 0,
-    "neutral": 0,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -871,75 +987,6 @@
     "positivo": 0,
     "negativo": 2,
     "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid07cdGvydJ2ANC3QApA7u7DebVvJdbAjNe2aVPkcY76GUFhzmUzzxQYhbqjA2en797l",
-   "cuenta": "blanconegro_fb",
-   "zona": "estatal",
-   "fecha": "2026-09-28",
-   "titulo": "A los mamíferos carnívoros y semiacuáticos de cuerpo alargado los crían principalmente por su piel; son especialmente susceptibles a infecciones respiratorias",
-   "tipo": "otro",
-   "likes": 24,
-   "comentarios": 14,
-   "compartidos": 32,
-   "alcance": "nacional",
-   "publicado": "2026-09-28T22:22:15+00:00",
-   "cosechados": 8,
-   "opinion": 8,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 4,
-    "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02NrTnVwoBtAsB94Yx7vUMLfL9LXmGVLGWZXP5GzT7REDb5C1yww4cvai2mxYA4hE5l&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "nacional",
-   "fecha": "2026-09-29",
-   "titulo": "Los de México Yo después de un buen fin de semana lleno de alcohol y chichifly",
-   "tipo": "imagen",
-   "likes": 24,
-   "comentarios": 1,
-   "compartidos": 3,
-   "alcance": "nacional",
-   "publicado": "2026-09-29T01:17:09+00:00",
-   "cosechados": 1,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/aztecabc/posts/pfbid02PSKMjY8DqTddEFSuZX9AECoFedK4QN67LDt53fnRD61dKjSE9dsDAnM7uWHAjd6Ul",
-   "cuenta": "aztecabc_fb",
-   "zona": "estatal",
-   "fecha": "2026-09-28",
-   "titulo": "¡Retiran azúcar del mercado! Detectan presencia de ingrediente peligroso ⚠️",
-   "tipo": "imagen",
-   "likes": 21,
-   "comentarios": 1,
-   "compartidos": 6,
-   "alcance": "nacional",
-   "publicado": "2026-09-28T22:43:30+00:00",
-   "cosechados": 1,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -1039,18 +1086,18 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/reel/1127818403104022",
+   "url": "https://www.facebook.com/reel/1058071733723163",
    "cuenta": "psn_fb",
    "zona": "Tijuana",
    "fecha": "2026-09-29",
-   "titulo": "#LoVisteEnPSN | Conato de incendio en un motel de Tijuana deja a un sujeto detenido.",
+   "titulo": "#LoVisteEnPSN | Protocolo “Muerte Digna” busca evitar que personas en situación de calle mueran solas en Tijuana.",
    "tipo": "video",
    "likes": 2,
    "comentarios": 0,
    "compartidos": 0,
-   "reproducciones": 929,
+   "reproducciones": 1005,
    "alcance": "zona",
-   "publicado": "2026-09-29T02:30:40+00:00",
+   "publicado": "2026-09-29T05:00:49+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1072,7 +1119,7 @@
    "likes": 2,
    "comentarios": 0,
    "compartidos": 0,
-   "reproducciones": 963,
+   "reproducciones": 980,
    "alcance": "zona",
    "publicado": "2026-09-28T21:55:24+00:00",
    "cosechados": 0,
@@ -1091,18 +1138,18 @@
   {
    "cuenta": "aztecabc_fb",
    "estado": "ok",
-   "posts": 7,
-   "comentarios": 10,
-   "crudos": 13,
-   "fuera": 1,
+   "posts": 8,
+   "comentarios": 0,
+   "crudos": 4,
+   "fuera": 0,
    "compartidos": 0
   },
   {
    "cuenta": "blanconegro_fb",
    "estado": "ok",
    "posts": 7,
-   "comentarios": 36,
-   "crudos": 38,
+   "comentarios": 29,
+   "crudos": 34,
    "fuera": 1,
    "compartidos": 0
   },
@@ -1110,8 +1157,8 @@
    "cuenta": "blancorojo_fb",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 21,
-   "crudos": 21,
+   "comentarios": 10,
+   "crudos": 10,
    "fuera": 1,
    "compartidos": 2
   },
@@ -1119,8 +1166,8 @@
    "cuenta": "ndtijuana_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 19,
-   "crudos": 19,
+   "comentarios": 8,
+   "crudos": 8,
    "fuera": 0,
    "compartidos": 0
   },
@@ -1128,21 +1175,21 @@
    "cuenta": "psn_fb",
    "estado": "ok",
    "posts": 7,
-   "comentarios": 0,
-   "crudos": 4,
+   "comentarios": 3,
+   "crudos": 3,
    "fuera": 1,
    "compartidos": 0
   }
  ],
  "gasto": {
   "resultados": 250,
-  "gastado": 135,
+  "gastado": 99,
   "por_concepto": {
-   "aztecabc_fb": 21,
-   "blanconegro_fb": 46,
-   "blancorojo_fb": 29,
-   "ndtijuana_fb": 27,
-   "psn_fb": 12
+   "aztecabc_fb": 12,
+   "blanconegro_fb": 42,
+   "blancorojo_fb": 18,
+   "ndtijuana_fb": 16,
+   "psn_fb": 11
   }
  }
 }
