@@ -1,10 +1,10 @@
 "use client";
 
-import { ArrowLeft as FlechaAtras, CaretDown as Desplegar, List as Menu, MagnifyingGlass as Lupa } from "@phosphor-icons/react";
+import { ArrowLeft as FlechaAtras, CaretDown as Desplegar } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useEffect, useRef, type ReactNode, type RefObject } from "react";
 
-import { CINTA, CONTROL, FILA_CINTA, ICONO_CONTROL, ICONO_DESPLEGAR, ICONO_ESTRECHO } from "@/components/chrome/medidas-cinta";
+import { CINTA, CONTROL, FILA_CINTA, ICONO_DESPLEGAR, ICONO_ESTRECHO } from "@/components/chrome/medidas-cinta";
 import { Hoja } from "@/components/ui/hoja";
 
 /**
@@ -19,8 +19,9 @@ import { Hoja } from "@/components/ui/hoja";
  * tiene su propia barra arriba: volver, que se esta viendo (abre un dialogo
  * con las opciones) y las acciones de cada pagina. Debajo de
  * la barra puede ir una fila de pestanas (`pestanas`), que es como redes
- * cambia de plataforma. En escritorio la pildora flotante sigue arriba y la
- * caja empieza debajo de ella (`--nav-alto`).
+ * cambia de plataforma. En escritorio la caja empieza a la derecha del riel
+ * (`--riel-ancho`); en el telefono termina encima de la barra de pestanas
+ * (`--barra-alto`). Las dos medidas viven en globals.css.
  *
  * Lo que se OCULTA mientras el lector esta arriba lo decide una sola regla en
  * globals.css (`main:has(.lector) > :not(:has(.lector))`), no cada pagina.
@@ -37,14 +38,12 @@ import { Hoja } from "@/components/ui/hoja";
  * Dialogos nativos: el resto del lector queda inerte y Escape devuelve el foco
  * al control que abrio, sin desplazar la tarjeta que se estaba leyendo.
  *
- * El MENU de la barra es la navegacion del sitio, y en el telefono es la
- * unica. La regla de globals.css oculta todo lo que no sea el lector, y la
- * pildora flotante vuelve solo a partir de 48rem; mientras el lector fue una
- * pagina interior eso bastaba, porque la flecha de volver llevaba a una pagina
- * normal con su nav. Desde que la PORTADA es un lector no hay tal pagina detras,
- * y sin este control un telefono se queda sin manera de salir. Llega como nodo
- * de servidor para que la accion de servidor de «Salir» y los iconos no entren
- * al bundle de cliente.
+ * La barra NO lleva menu desde el 28 de septiembre de 2026. Lo llevo mientras
+ * fue la unica salida del telefono hacia las otras paginas y hacia «Salir»,
+ * porque la regla de globals.css oculta todo lo que no sea el lector. Hoy la
+ * navegacion del sitio es un riel en escritorio y una barra de pestanas en el
+ * telefono (chrome/riel.tsx), las dos exentas de esa regla, y el boton de menu
+ * aqui arriba seria la misma lista a un pulgar de distancia.
  */
 
 /** La clase de un control de la barra, para las acciones que aporta cada
@@ -64,7 +63,7 @@ export { CONTROL };
 const babosa = (s: string): string =>
   s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
-export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opciones, acciones, busqueda, rotuloBusqueda = "Buscar titulares", menu, pestanas, restaurarFoco, children }: {
+export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opciones, acciones, busqueda, pestanas, restaurarFoco, children }: {
   /** A donde lleva la flecha de volver. Sin esto no se pinta la flecha: la
    *  portada es un lector y no tiene pagina detras a la que volver. */
   volver?: string;
@@ -82,14 +81,11 @@ export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opc
    *  cualquier enlace o boton de dentro. */
   opciones: ReactNode;
   acciones?: ReactNode;
-  /** El cuerpo del dialogo de busqueda. Sin esto no se pinta la lupa. La
-   *  portada busca titulares; Redes busca publicaciones y terminos en
-   *  seguimiento desde el 18 de septiembre de 2026. */
+  /** La busqueda EN la barra (ui/busqueda-en-barra.tsx): la pastilla
+   *  «Buscar» que se abre en su sitio. Sin esto no se pinta. La portada busca
+   *  titulares; Redes busca publicaciones y terminos en seguimiento desde el
+   *  18 de septiembre de 2026. Hasta el 28 era el cuerpo de una hoja modal. */
   busqueda?: ReactNode;
-  /** El nombre accesible de la lupa: que se busca aqui. */
-  rotuloBusqueda?: string;
-  /** La navegacion del sitio, como HTML de servidor. */
-  menu: ReactNode;
   /** La fila de pestanas bajo la barra, si la pagina tiene facetas. */
   pestanas?: ReactNode;
   /** Si el lector se remonta al elegir, la pagina lo pone en true para
@@ -99,11 +95,7 @@ export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opc
 }) {
   const selector = useRef<HTMLButtonElement>(null);
   const lugares = useRef<HTMLDialogElement>(null);
-  const navegacion = useRef<HTMLDialogElement>(null);
-  const buscador = useRef<HTMLDialogElement>(null);
   const idOpciones = `opciones-${babosa(rotulo)}`;
-  const idMenu = `menu-${babosa(rotulo)}`;
-  const idBusqueda = `busqueda-${babosa(rotulo)}`;
   useEffect(() => {
     if (restaurarFoco?.current) selector.current?.focus({ preventScroll: true });
     if (restaurarFoco) restaurarFoco.current = false;
@@ -128,23 +120,15 @@ export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opc
           </button>
           <span className="hidden flex-1 md:block" aria-hidden />
           {acciones}
-          {busqueda === undefined ? null : (
-            <button type="button" className={CONTROL} aria-label={rotuloBusqueda} aria-haspopup="dialog" aria-controls={idBusqueda}
-              onClick={() => buscador.current?.showModal()}>
-              <Lupa size={ICONO_ESTRECHO} aria-hidden />
-            </button>
-          )}
-          {/* Solo en el telefono. A partir de 48rem la pildora flotante vuelve
-              a verse sobre el lector (globals.css) y lleva a las mismas
-              paginas: dos navegaciones identicas a diez pixeles una de otra.
-              Debajo de ese ancho la pildora esta oculta y esto es la UNICA
-              salida hacia las otras paginas y hacia Salir, asi que se esconde,
-              no se borra. La consulta vive en globals.css, junto al `display`
-              de la clase, porque una utilidad de Tailwind pierde contra el. */}
-          <button type="button" data-solo-movil className={CONTROL} aria-label="Ir a otra página" aria-haspopup="dialog" aria-controls={idMenu}
-            onClick={() => navegacion.current?.showModal()}>
-            <Menu size={ICONO_CONTROL} aria-hidden />
-          </button>
+          {/* La busqueda dice «Buscar», con borde y fondo, en todos los
+              anchos (cliente, 28 de septiembre de 2026): una lupa sola entre
+              los iconos de la barra no se distinguia de ellos. El nombre
+              accesible empieza con la palabra visible («Buscar titulares»),
+              que es lo que pide quien la dicta por voz. Cabe en el telefono
+              porque los destellos del guion salieron de la barra ese dia.
+              Al abrirse, el campo se dibuja encima de esta fila (`.fila-cinta`
+              es `position: relative`), asi que nada de la barra se mueve. */}
+          {busqueda}
         </div>
         {pestanas}
       </div>
@@ -153,19 +137,6 @@ export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opc
       <Hoja ref={lugares} titulo={tituloOpciones} rotuloCerrar="Cerrar opciones" id={idOpciones}>
         {opciones}
       </Hoja>
-
-      {/* Los enlaces y el formulario navegan; el boton de cierre controla la hoja. */}
-      <Hoja ref={navegacion} titulo="Ir a" rotuloCerrar="Cerrar menú" id={idMenu}>
-        {menu}
-      </Hoja>
-
-      {busqueda === undefined ? null : (
-        // Sin cierre delegado: el campo y el boton de enviar viven aqui, y
-        // cerrar al primer clic dentro haria imposible escribir.
-        <Hoja ref={buscador} titulo="Buscar" rotuloCerrar="Cerrar búsqueda" id={idBusqueda}>
-          {busqueda}
-        </Hoja>
-      )}
 
       {children}
     </div>

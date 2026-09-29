@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { Lector } from "@/components/lector/lector";
 import { EstadoCarga } from "@/components/ui/estado-carga";
@@ -55,7 +55,7 @@ const PESTANAS_CONSULTA: readonly { id: FiltroConsulta; nombre: string }[] = [
 /** La pestana sobrevive a cambiar de termino, como en el panel de medios. */
 let ultimaPestana: FiltroConsulta = "todas";
 
-export function BusquedaRedes({ consulta, menu }: { consulta: string; menu: ReactNode }) {
+export function BusquedaRedes({ consulta }: { consulta: string }) {
   const consultas = useConsultas();
   const [pestana, setPestana] = useState<FiltroConsulta>(() => ultimaPestana);
   useEffect(() => {
@@ -89,9 +89,7 @@ export function BusquedaRedes({ consulta, menu }: { consulta: string; menu: Reac
   return (
     <Lector volver={accion} rotulo="Redes" rotuloValor="Búsqueda" valor={consulta} tituloOpciones="Lugar"
       opciones={<OpcionesLugarRedes zona={null} cubetas={[]} activa="corredor" onCubeta={() => undefined} />}
-      menu={menu}
       busqueda={<BuscadorRedes accion={accion} consulta={consulta} />}
-      rotuloBusqueda="Buscar publicaciones"
       pestanas={
         <FilaPestanas etiqueta="Plataforma" pestanas={pestanas.map((p) => ({
           id: p.id, nombre: p.nombre, activa: p.id === activa, onElegir: () => setPestana(p.id),

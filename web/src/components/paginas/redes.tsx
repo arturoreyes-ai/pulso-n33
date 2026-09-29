@@ -1,4 +1,3 @@
-import { MenuLector } from "@/components/chrome/menu-lector";
 import { analisisHabilitado } from "@/lib/analisis/config";
 import { Seccion } from "@/components/chrome/seccion";
 import { LectorRedes } from "@/components/paneles/lector-redes";
@@ -68,13 +67,11 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  * ellas. La salvedad de X vivia ADEMAS en su panel, que es donde se lee
  * (`paneles/tendencias.tsx`: «Es el ranking de X, no una medida...»), y los
  * huecos los rotula cada panel. Las cinco reglas de PRODUCT.md siguen enteras
- * en cada pagina: las dice el pie (`chrome/pie.tsx`), en HTML de servidor, y
- * dentro del lector viaja en el dialogo del menu (chrome/menu-lector.tsx).
+ * en PRODUCT.md; el pie del sitio (`chrome/pie.tsx`) se retiro el 18 de
+ * septiembre de 2026.
  *
  * Por eso no hay «Cómo leer este dato» aqui. Lo tenian las cuatro facetas y
- * era prosa de metodologia; su contenido esta en PRODUCT.md. El panel de
- * indicadores conserva el suyo, que explica que mide el SHF o la ENSU —el
- * significado de la fuente, no el de nuestro codigo.
+ * era prosa de metodologia; su contenido esta en PRODUCT.md.
  */
 export function PaginaRedes({ zona, consulta = null }: { zona: ZonaRuta | null; consulta?: string | null }) {
   const nombre = zona === null ? null : NOMBRE_CORTO[zona];
@@ -87,7 +84,6 @@ export function PaginaRedes({ zona, consulta = null }: { zona: ZonaRuta | null; 
       <LectorRedes
         zona={zona}
         consulta={consulta}
-        menu={<MenuLector zona={zona} vista="redes" />}
         paneles={{ x: <PanelTendencias zona={zona} /> }}
         analisis={analisisHabilitado()}
       />

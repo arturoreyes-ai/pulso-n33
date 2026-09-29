@@ -3,17 +3,19 @@
 import Link from "next/link";
 
 import { clasesChip } from "@/components/ui/clases";
-import { FormularioBusqueda } from "@/components/ui/formulario-busqueda";
+import { BusquedaEnBarra } from "@/components/ui/busqueda-en-barra";
 import { useConsultas } from "@/lib/datos/hooks";
 import { plegar } from "@/lib/dominio/formato";
 import { rutaDeConsulta } from "@/lib/dominio/consultas";
 
 /**
- * El cuerpo del dialogo de busqueda de Redes.
+ * La busqueda de Redes, en la barra del lector.
  *
  * Era un gemelo copiado de ahora/buscador-ahora.tsx; desde el 23 de
- * septiembre de 2026 los dos montan ui/formulario-busqueda.tsx y aqui queda
- * solo lo propio: la etiqueta, la salida y los terminos en seguimiento.
+ * septiembre de 2026 los dos montan la misma forma (desde el 28,
+ * ui/busqueda-en-barra.tsx, sin dialogo) y aqui queda solo lo propio: la
+ * etiqueta, la salida y los terminos en seguimiento, que van en la bandeja
+ * bajo el campo mientras se escribe.
  *
  * Debajo del campo van los TERMINOS EN SEGUIMIENTO (data/consultas.json), como
  * enlaces: la direccion del cliente no tiene que saber como se escribe
@@ -28,9 +30,9 @@ export function BuscadorRedes({ accion, consulta }: { accion: string; consulta: 
   // «En todas las publicaciones» y no «de toda la región»: un termino no es un
   // lugar, asi que la busqueda no se acota a la zona que se este viendo.
   return (
-    <FormularioBusqueda accion={accion} idCampo="consulta-redes" etiqueta="En todas las publicaciones" consulta={consulta}
-      placeholder="Vive la Baja, garita, agua…" salida="Volver a las publicaciones">
-      {terminos.length === 0 ? null : (
+    <BusquedaEnBarra accion={accion} rotulo="Buscar publicaciones" etiqueta="En todas las publicaciones" consulta={consulta}
+      salida="Volver a las publicaciones"
+      sugerencias={terminos.length === 0 ? undefined : (
         <div className="grid gap-3">
           <p className="text-meta text-tinta-meta">Términos en seguimiento</p>
           <ul className="flex flex-wrap gap-2">
@@ -46,7 +48,6 @@ export function BuscadorRedes({ accion, consulta }: { accion: string; consulta: 
             })}
           </ul>
         </div>
-      )}
-    </FormularioBusqueda>
+      )} />
   );
 }

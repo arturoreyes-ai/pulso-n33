@@ -56,7 +56,7 @@ export function Seccion({
   return (
     <section
       id={id}
-      className={`mx-auto w-full max-w-[88rem] scroll-mt-[calc(var(--nav-alto)+1.5rem)] px-4 md:px-8 ${
+      className={`mx-auto w-full max-w-[88rem] scroll-mt-[var(--respiro-superior)] px-4 md:px-8 ${
         pegada ? RITMO_PEGADA : RITMO
       }`}
     >

@@ -140,7 +140,6 @@ const OPCIONES_ZONA: readonly (ZonaRuta | null)[] = [null, ...ZONAS_RUTA];
 interface PropsLector {
   zona: ZonaRuta | null;
   paneles: { x: ReactNode };
-  menu: ReactNode;
   /** Si se pinta el boton de lectura automatica. Lo decide el servidor
    *  (`analisisHabilitado`): ANTHROPIC_API_KEY no lleva NEXT_PUBLIC_, asi que
    *  en cliente valdria "" y la guarda diria que no siempre. */
@@ -164,11 +163,11 @@ export function LectorRedes({ consulta = null, ...resto }: PropsLector & {
   consulta?: string | null;
 }) {
   const q = (consulta ?? "").trim();
-  if (q !== "") return <BusquedaRedes key={`q:${q}`} consulta={q} menu={resto.menu} />;
+  if (q !== "") return <BusquedaRedes key={`q:${q}`} consulta={q} />;
   return <LectorRedesMedios {...resto} />;
 }
 
-function LectorRedesMedios({ zona, paneles, menu, analisis = false }: PropsLector) {
+function LectorRedesMedios({ zona, paneles, analisis = false }: PropsLector) {
   const [pestana, setPestana] = useState<Pestana>(() => ultimaPestana);
   useEffect(() => {
     ultimaPestana = pestana;
@@ -206,18 +205,22 @@ function LectorRedesMedios({ zona, paneles, menu, analisis = false }: PropsLecto
     // un dia a Prensa, cuando el muro tenia pagina propia, con el argumento de
     // que salir de un lector para caer en otro se lee como un callejon sin
     // salida. Prensa ya no existe y el destino es de nuevo un lector: quien
-    // quiera otra pagina la tiene en el menu de la barra.
+    // quiera otra pagina la tiene en la navegacion del sitio (chrome/riel.tsx).
     <Lector volver={ruta(zona, null)} rotulo="Redes" valor={lugar} tituloOpciones="Lugar"
-      opciones={<OpcionesLugarRedes zona={zona} cubetas={disponibles} activa={activa} onCubeta={setCubeta} />} menu={menu}
+      opciones={<OpcionesLugarRedes zona={zona} cubetas={disponibles} activa={activa} onCubeta={setCubeta} />}
       // La lupa, tambien en una pagina de zona: el formulario envia siempre a
       // la vista de region, porque un termino no es un lugar.
       busqueda={<BuscadorRedes accion={ruta(null, "redes")} consulta={null} />}
-      rotuloBusqueda="Buscar publicaciones"
       // Solo el orden. «De qué se habla» (conversacion-redes.tsx) vivia aqui,
       // con un icono de globos de dialogo, y salio de la barra el 23 de
       // septiembre de 2026 a pedido del cliente: los comentarios se leen desde
       // cada tarjeta. X son tendencias y no tiene orden que elegir.
-      acciones={pestana === "x" ? null : <BotonOrden orden={orden} onCambiar={setOrden} />}
+      acciones={<>
+        {pestana === "x" ? null : <BotonOrden orden={orden} onCambiar={setOrden} />}
+        {/* El atajo al guion para locucion salio de aqui el 28 de septiembre
+            de 2026 (cliente): el guion tiene su pagina, /guion, en la
+            navegacion. */}
+      </>}
       pestanas={<>
         <FilaPestanas etiqueta="Plataforma" pestanas={PESTANAS.map((p) => ({
           id: p.id,

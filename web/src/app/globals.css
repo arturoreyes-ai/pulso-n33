@@ -236,23 +236,22 @@
   --z-nav: 30;
   --z-portal: 40;
 
-  /* Lo que OCUPA la pastilla flotante: su margen de arriba mas su alto medido,
-     24 + 53.5 = 77.5px, redondeado a 5rem. Tres cosas dependen de este numero
-     —el velo, el `top` del lector en escritorio y el `scroll-mt` de las
-     anclas— y antes cada una lo adivinaba por su cuenta: adivinar dejaba 20px
-     de banda sin tapar entre la pastilla y la barra, y por ahi desfilaban los
-     titulares.
+  /* La navegacion (chrome/riel.tsx) y lo que reserva. Hasta el 28 de
+     septiembre de 2026 habia un solo token, `--nav-alto`, lo que ocupaba la
+     pastilla flotante arriba en escritorio; con la pastilla se fueron el velo
+     que la acompanaba y el `top` del lector.
 
-     ES UNA MEDIDA DE ESCRITORIO desde el 18 de septiembre de 2026, porque la
-     pastilla solo flota a partir de 48rem. En el telefono la nav es
-     `.cinta-pagina`, que va EN FLUJO: mide 71px y los ocupa, asi que no hay
-     nada que reservarle. El unico consumidor que sigue leyendo esto en un
-     telefono es el `scroll-mt` de las anclas (chrome/seccion.tsx,
-     chrome/selector-zona.tsx), y ahi 80 en vez de 71 son 9px de aire de MAS al
-     aterrizar, nunca un ancla tapada. Partir el token en dos valores por ancho
-     —que es lo que habia aqui hasta ayer— compra esos 9px y devuelve una
-     consulta que no distingue nada. */
-  --nav-alto: 5rem;
+     --riel-ancho: el riel de escritorio. 6rem = 96px, lo justo para que
+       «En Tendencia» quepa en una linea a 12px con su relleno; «Gasto
+       electoral» parte en dos y se deja.
+     --barra-alto: la barra de pestanas del telefono, SIN el area segura de
+       abajo, que se suma aparte (`env(safe-area-inset-bottom)`): 64px es el
+       blanco de toque de 44 mas icono y rotulo.
+     --respiro-superior: donde se pega lo que es `sticky` y donde aterriza un
+       ancla. Ya no hay barra flotante que esquivar, solo aire. */
+  --riel-ancho: 6rem;
+  --barra-alto: 4rem;
+  --respiro-superior: 2rem;
 
   /* Tres duraciones, con nombre, y nada fuera de esta lista. Se consumen como
      duration-[var(--dur-toque)] porque Tailwind v4 NO tiene espacio de
@@ -444,9 +443,9 @@ input[type="search"]::-webkit-search-decoration {
    de la ultima el pie, y ninguno era un punto de ajuste. Su alto se congela
    durante el gesto (`--alto-lector`, `--alto-tarjeta`) y se vuelve a medir al
    asentar; ni la barra del navegador ni una miniatura tardia deben mover lo
-   que se esta leyendo. En escritorio la pildora flotante sigue arriba y la
-   caja empieza debajo (`--nav-alto`); en el telefono la caja es toda la
-   pantalla.
+   que se esta leyendo. En escritorio la caja empieza a la derecha del riel
+   (`--riel-ancho`); en el telefono termina encima de la barra de pestanas
+   (`--barra-alto` mas el area segura).
 
    `scroll-snap-stop: always` hace que un gesto mueva UNA tarjeta: un impulso
    fuerte no se salta la siguiente. El JS cambia el medio montado al ASENTAR el
@@ -465,26 +464,33 @@ html:has(.lector), body:has(.lector) { overflow: hidden; }
    vez de que cada pagina envuelva su nav y su pie en `hidden md:block`. La
    informacion del lector trae su propio Pie. */
 main:has(.lector) > :not(:has(.lector)) { display: none; }
+/* La navegacion del sitio es la excepcion: el riel en escritorio y la barra
+   de pestanas en el telefono siguen a la vista sobre un lector, y la caja del
+   lector se hace a un lado. Misma especificidad que la regla de arriba, asi
+   que gana por ir despues. */
+main:has(.lector) > .barra-inferior { display: block; }
 .lector {
   position: fixed;
-  inset: 0;
+  inset: 0 0 auto 0;
   z-index: var(--z-portal);
   display: flex;
   flex-direction: column;
-  height: var(--alto-lector, 100svh);
+  height: calc(var(--alto-lector, 100svh) - var(--barra-alto) - env(safe-area-inset-bottom));
   background: var(--color-vanta);
 }
 @media (min-width: 48rem) {
-  main:has(.lector) > .nav-flotante { display: flex; }
-  .lector { top: var(--nav-alto); height: auto; }
+  main:has(.lector) > .riel { display: flex; }
+  main:has(.lector) > .barra-inferior { display: none; }
+  .lector { inset: 0 0 0 var(--riel-ancho); height: auto; }
 }
 /* La CINTA es la barra superior del sitio en el telefono, y desde el 18 de
    septiembre de 2026 es la unica. Nacio como `.barra-lector` y la usaban solo
    los lectores; las paginas que no lo son —indicadores, garitas, gasto
    electoral y la de 404— llevaban una pastilla flotante distinta, asi que el
    telefono tenia dos gramaticas de barra a un toque una de otra. El cliente
-   eligio esta. La pastilla sigue viva a partir de 48rem (`.nav-flotante`),
-   donde si cabe entera y donde el dibujo no cambia.
+   eligio esta. Desde el 28 de septiembre de 2026 ya no lleva la navegacion:
+   dice donde se esta y elige el lugar, y moverse entre paginas es la barra de
+   pestanas de abajo (chrome/riel.tsx).
 
    Aqui viven TODAS las medidas y ninguna decision de contenido: el filo, el
    respiro de la muesca, el canal y el alto. Lo que cada superficie mete dentro
@@ -513,6 +519,9 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
    encoja y devuelva al sitio las dos alturas de barra que este archivo viene
    a cerrar. */
 .fila-cinta {
+  /* Relativa para que el campo de busqueda se dibuje encima de ella
+     (ui/busqueda-en-barra.tsx). */
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0.25rem;
@@ -538,12 +547,11 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
    OPACA, y de ahi el fondo. La del lector es transparente y puede serlo porque
    detras tiene `.lector`, que es vanta y no se desplaza: por debajo de esa
    barra no pasa nunca nada. Aqui pasa la pagina entera, asi que sin fondo los
-   titulares se leerian a traves —el mismo fallo por el que existe `Velo`—. Se
+   titulares se leerian a traves. Se
    pinta --color-vanta, el fondo de <html>, asi que el resultado es identico al
-   del lector y no introduce una superficie nueva. Sin `backdrop-filter`: el
-   blur de la pastilla es legitimo por ser un elemento fijo de area chica que se
-   pinta una vez, y lo que el arquetipo prohibe es justo esto, una franja que se
-   recompone en cada cuadro del desplazamiento (ver chrome/nav-pildora.tsx).
+   del lector y no introduce una superficie nueva. Sin `backdrop-filter`: lo
+   que el arquetipo prohibe es justo esto, una franja ancha que se recompone
+   en cada cuadro del desplazamiento.
 
    El aire de abajo lo pone la cinta y no cada pagina: en el lector debajo del
    filo empieza una caja que se desplaza, y en una pagina empieza un h1 que
@@ -560,26 +568,266 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
   .cinta-pagina { display: none; }
 }
 
-/* La pastilla flota SOLO en escritorio. Debajo de 48rem la nav es la cinta.
-   La consulta va aqui y no en una utilidad `hidden md:flex` porque la exencion
-   del lector —`main:has(.lector) > .nav-flotante`, mas abajo— esta fuera de la
-   capa de utilidades y le ganaria: las dos reglas tienen que leerse juntas. */
-.nav-flotante { display: none; }
-@media (min-width: 48rem) {
-  .nav-flotante { display: flex; }
-}
-
 /* Nombres de View Transition del cromo (ver el bloque de navegacion entre
    paginas). Un nombre repetido en la misma pagina ABORTA la transicion
    entera, y solo cuenta lo que se pinta: la cinta de pagina esta en
    `display: none` en escritorio y sobre un lector, asi que nunca coincide
    con la del lector. */
-.nav-flotante > nav { view-transition-name: nav-pastilla; }
+.riel { view-transition-name: riel; }
+.barra-inferior { view-transition-name: barra-inferior; }
 .cinta { view-transition-name: barra; }
 
-/* La cuenta (chrome/quien-mira.tsx). Las iniciales van en el mismo lavado
-   que la pastilla activa y sin borde propio: es una pastilla mas, redonda,
-   no un avatar pegado encima. */
+/* ------------------------------------------------------------ navegacion */
+
+/* El RIEL de escritorio y la BARRA DE PESTANAS del telefono
+   (chrome/riel.tsx; el porque de la forma esta alli). Cada una existe en su
+   ancho y la otra es `display: none`, que tambien es lo que evita que sus
+   nombres de View Transition choquen.
+
+   Las dos reservan su sitio en <main> (`main:has(> .riel)`), y no en el
+   layout: /entrar no monta navegacion y no debe heredar un hueco. */
+.riel { display: none; }
+@media (max-width: 47.99rem) {
+  main:has(> .barra-inferior) {
+    padding-bottom: calc(var(--barra-alto) + env(safe-area-inset-bottom) + 1.5rem);
+  }
+}
+@media (min-width: 48rem) {
+  .barra-inferior { display: none; }
+  .riel {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: var(--z-nav);
+    width: var(--riel-ancho);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1.25rem 0.375rem 1rem;
+    border-right: 1px solid var(--color-filo);
+    /* Vanta traslucido: deja pasar el tono de la malla del fondo, que es lo
+       que ata el riel a la pagina y no a una caja pegada encima. Detras no se
+       desplaza nada (el contenido empieza a su derecha), asi que no hace
+       falta blur. */
+    background: rgb(5 5 5 / 0.55);
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  main:has(> .riel) {
+    padding-left: var(--riel-ancho);
+    padding-top: 3.5rem;
+  }
+}
+
+/* La marca: el letrero de diodos de /entrar (acceso/letrero.tsx), con el
+   nombre de la aplicacion, «Pulso». Es la unica pieza grafica de marca que
+   existe, y aqui es tambien el enlace a la portada de la zona. Llevo «N33»
+   unas horas del 28 de septiembre de 2026 porque cabia; el cliente pidio el
+   nombre, y cabe si la letra no se ensancha (`font-stretch: 100%`) y los
+   diodos van a 2px: a 3px, cinco letras de 20px quedan con trazos de un solo
+   punto y no se leen. */
+.marca-riel {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  padding-block: 0.5rem;
+  border-radius: var(--radius-nucleo);
+  transition: background-color var(--dur-toque) var(--ease-out);
+}
+.marca-riel .letrero-marca {
+  font-size: var(--text-rotulo);
+  font-stretch: 100%;
+  letter-spacing: 0.04em;
+}
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .marca-riel .letrero-marca {
+    background-image: radial-gradient(var(--color-chart-1-texto) 0.8px, transparent 0.95px);
+    background-size: 2px 2px;
+  }
+}
+
+.grupo-riel { display: grid; gap: 0.25rem; }
+.filo-riel {
+  flex: none;
+  height: 1px;
+  margin: 0.75rem 1.25rem;
+  background: var(--color-filo);
+}
+
+/* Un destino: icono sobre rotulo, centrados. El rotulo a 12px y en dos lineas
+   si hace falta; truncarlo diria «Gasto elec…», que no es un nombre. Sin
+   relleno lateral: con 4px por lado «En Tendencia» partia en dos por 3px, y
+   el renglon activo, el mas visitado, era el mas alto. */
+.renglon-riel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.75rem 0;
+  border-radius: var(--radius-nucleo);
+  color: var(--color-tinta-prosa);
+  font-size: var(--text-meta);
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: center;
+  text-wrap: balance;
+  transition:
+    color var(--dur-toque) var(--ease-out),
+    background-color var(--dur-toque) var(--ease-out),
+    transform var(--dur-toque) var(--ease-out);
+}
+.renglon-riel[aria-current="page"] { color: var(--color-tinta-titulo); }
+.renglon-riel:active { transform: scale(0.97); }
+.realce-riel,
+.realce-barra {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-realce);
+}
+@media (hover: hover) and (pointer: fine) {
+  .renglon-riel:not([aria-current="page"]):hover,
+  .marca-riel:hover { background: var(--color-vela); }
+  .renglon-riel:hover { color: var(--color-tinta-titulo); }
+}
+
+/* La cuenta, al pie: las iniciales sobre el primer nombre, como los demas
+   renglones del riel. Al pulsarla aparecen «Accesos» y «Salir» DEBAJO del
+   nombre, en su sitio (28 de septiembre de 2026, cliente: el panel flotante a
+   la derecha era una segunda superficie para una sola cosa y repetia las
+   iniciales, lo mismo que se rechazo el 24 de septiembre).
+
+   El hueco de los enlaces esta SIEMPRE reservado y solo se animan opacidad y
+   transform. Si el pie creciera al abrir, creceria hacia ARRIBA (esta pegado
+   abajo con `margin-top: auto`): las iniciales se irian 80px de debajo del
+   puntero y el segundo clic caeria en «Salir». Cerrado es `visibility:
+   hidden` e `inert`. Abre con la curva de firma en --dur-cambio y cierra en
+   --dur-toque; `visibility` cambia al final del cierre y al principio de la
+   apertura. */
+.pie-riel {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+.cuenta-riel {
+  display: grid;
+  gap: 0.25rem;
+}
+.boton-cuenta-riel {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0;
+  border-radius: var(--radius-nucleo);
+  color: var(--color-tinta-prosa);
+  font-size: var(--text-meta);
+  font-weight: 500;
+  line-height: 1.2;
+  transition:
+    color var(--dur-toque) var(--ease-out),
+    background-color var(--dur-toque) var(--ease-out),
+    transform var(--dur-toque) var(--ease-out);
+}
+.boton-cuenta-riel .inicial-cuenta { width: 2.25rem; height: 2.25rem; }
+.boton-cuenta-riel:active { transform: scale(0.97); }
+.nombre-cuenta-riel {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cuenta-riel[data-abierta] .boton-cuenta-riel { color: var(--color-tinta-titulo); }
+.cuenta-riel[data-abierta] .inicial-cuenta { background: var(--color-realce); }
+
+.tramo-cuenta-riel {
+  display: grid;
+  gap: 0.125rem;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity var(--dur-toque) var(--ease-out),
+    transform var(--dur-toque) var(--ease-out),
+    visibility 0s linear var(--dur-toque);
+}
+.cuenta-riel[data-abierta] .tramo-cuenta-riel {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--dur-cambio) var(--ease-firma),
+    transform var(--dur-cambio) var(--ease-firma),
+    visibility 0s;
+}
+.renglon-cuenta {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0;
+  border-radius: var(--radius-nucleo);
+  color: var(--color-tinta-prosa);
+  font-size: var(--text-meta);
+  font-weight: 500;
+  text-align: center;
+  transition:
+    color var(--dur-toque) var(--ease-out),
+    background-color var(--dur-toque) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .boton-cuenta-riel:hover,
+  .renglon-cuenta:hover { background: var(--color-vela); color: var(--color-tinta-titulo); }
+}
+
+/* La barra de pestanas: fija abajo, opaca, con el area segura del telefono
+   debajo de los rotulos y no encima. Cuatro columnas iguales: el pulgar no
+   tiene que apuntar a un blanco mas angosto que otro. */
+.barra-inferior {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: var(--z-nav);
+  padding-bottom: env(safe-area-inset-bottom);
+  border-top: 1px solid var(--color-filo);
+  background: var(--color-vanta);
+}
+.barra-inferior > ul {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  height: var(--barra-alto);
+}
+.pestana-barra {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  color: var(--color-tinta-meta);
+  font-size: var(--text-meta);
+  font-weight: 500;
+  line-height: 1;
+  transition: color var(--dur-toque) var(--ease-out);
+}
+.pestana-barra[aria-current="page"],
+.pestana-barra[data-actual] { color: var(--color-tinta-titulo); }
+/* El icono lleva su pastilla detras cuando la pestana es la actual, a la
+   manera de las barras de Android: el rotulo queda limpio y la seleccion se ve
+   aun sin leerlo. */
+.icono-barra {
+  position: relative;
+  display: flex;
+  width: 3.5rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  transition: transform var(--dur-toque) var(--ease-out);
+}
+.pestana-barra:active .icono-barra { transform: scale(0.94); }
+
+/* Las iniciales de quien mira (chrome/quien-mira.tsx), en el boton del menu
+   y en el renglon de la cuenta. Mismo lavado que la pastilla activa y sin
+   borde propio: una pastilla mas, redonda, no un avatar pegado encima. */
 .inicial-cuenta {
   display: inline-flex;
   flex: none;
@@ -596,54 +844,19 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
   letter-spacing: 0.02em;
   transition: background-color var(--dur-toque) var(--ease-out);
 }
-.cuenta-pastilla {
-  display: flex;
-  flex: none;
-  align-items: center;
-  margin-inline-start: 0.25rem;
-}
-.boton-cuenta {
-  transition: background-color var(--dur-toque) var(--ease-out), transform var(--dur-toque) var(--ease-out);
-}
-.boton-cuenta:active { transform: scale(0.97); }
-.cuenta-pastilla[data-abierta] .boton-cuenta .inicial-cuenta { background: var(--color-realce); }
-
-/* El tramo que crece DENTRO de la pastilla. Se anima `grid-template-columns`
-   de 0fr a 1fr, que es lo unico que lleva un ancho de 0 a «lo que mida el
-   contenido» sin medirlo en JavaScript. Es layout, si, pero de un elemento
-   de 30px de alto en una barra fija; el precio es chico y el ancho no se
-   inventa. Abre con la curva de firma y cierra mas rapido: al cerrar el
-   sistema responde y nadie mira. Cierra en --dur-toque, que es la escala:
-   150ms no estaba en ella. */
-.tramo-cuenta {
-  display: grid;
-  grid-template-columns: 0fr;
-  opacity: 0;
-  transition:
-    grid-template-columns var(--dur-toque) var(--ease-firma),
-    opacity var(--dur-toque) var(--ease-out);
-}
-.cuenta-pastilla[data-abierta] .tramo-cuenta {
-  grid-template-columns: 1fr;
-  opacity: 1;
-  transition:
-    grid-template-columns var(--dur-cambio) var(--ease-firma),
-    opacity var(--dur-cambio) var(--ease-firma);
-}
-.nombre-cuenta { max-width: 14rem; }
 /* Sin bloque propio de movimiento reducido: el global (mas arriba, «No es
    opcional») ya pone a cero estas transiciones con !important, y uno local
    no llegaria a aplicarse nunca. */
 
 /* La navegacion entre paginas (View Transitions, disparadas por el `Realce`
-   de chrome/navegacion.tsx). Tres capas:
+   de chrome/riel.tsx). Tres capas:
 
    - la PAGINA (`root`): la vieja se va en un toque y la nueva llega con la
      `aparicion` de las hojas, 6px en el tiempo de un cambio. Es la unica
      llegada de pagina que hay: los encabezados ya no traen `.entrada`
      propia, que subia 1.5rem en 620ms en cada navegacion mientras los
      paneles de abajo aparecian quietos.
-   - el CROMO (`nav-pastilla`, `barra`): no se mueve. Se muestra la copia
+   - el CROMO (`riel`, `barra-inferior`, `barra`): no se mueve. Se muestra la copia
      nueva de inmediato; si se fundiera con la pagina, la barra parpadearia
      en cada clic.
    - la PESTANA ACTIVA: se desliza, y se PINTA en el grupo en vez de estirar
@@ -657,14 +870,17 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
 ::view-transition-new(root) {
   animation: aparicion var(--dur-cambio) var(--ease-firma) both;
 }
-::view-transition-old(nav-pastilla),
+::view-transition-old(riel),
+::view-transition-old(barra-inferior),
 ::view-transition-old(barra) {
   animation: none;
   opacity: 0;
 }
-::view-transition-new(nav-pastilla),
+::view-transition-new(riel),
+::view-transition-new(barra-inferior),
 ::view-transition-new(barra),
-::view-transition-group(nav-pastilla),
+::view-transition-group(riel),
+::view-transition-group(barra-inferior),
 ::view-transition-group(barra) {
   animation: none;
 }
@@ -679,8 +895,17 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
   background: var(--color-realce);
   border-radius: 9999px;
 }
+/* En el riel el fondo es un renglon, con el radio de una tarjeta interior. */
+::view-transition-group(.renglon-activo) {
+  animation-duration: var(--dur-cambio);
+  animation-timing-function: var(--ease-firma);
+  background: var(--color-realce);
+  border-radius: var(--radius-nucleo);
+}
 ::view-transition-old(.pestana-activa),
-::view-transition-new(.pestana-activa) {
+::view-transition-new(.pestana-activa),
+::view-transition-old(.renglon-activo),
+::view-transition-new(.renglon-activo) {
   animation: none;
   opacity: 0;
 }
@@ -690,7 +915,8 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
   ::view-transition-new(root),
-  ::view-transition-group(.pestana-activa) { animation: none; }
+  ::view-transition-group(.pestana-activa),
+  ::view-transition-group(.renglon-activo) { animation: none; }
 }
 
 /* Las pestanas, a la manera de la pagina de tendencias de X: texto, sin
@@ -777,7 +1003,6 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
    misma pantalla. Con un guion abierto mide mas que la caja, y entonces se
    recorre por dentro como la ficha de un termino. La clase conserva el nombre
    del resumen al que reemplazo el 24 de septiembre de 2026. */
-.resumen-recorrido { scroll-snap-align: start; scroll-snap-stop: always; }
 
 /* La reserva es el alto que NO puede ocupar el medio: la banda del titular.
    Subio de 12.5rem el 17 de septiembre de 2026 al entrar «Analizar»: con tres
@@ -917,18 +1142,144 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
 /* Un control de la barra que es interruptor («Más recientes» en Redes): el
    estado encendido se ve como la pastilla activa, no solo en el icono. */
 .control-lector[aria-pressed="true"] { background: var(--color-realce); color: var(--color-tinta-titulo); }
-/* El menu de la barra, solo en el telefono. A partir de 48rem la pildora
-   flotante vuelve a verse sobre el lector (mas abajo, en el bloque .lector) y
-   lleva a las mismas paginas: dos navegaciones identicas a diez pixeles una de
-   otra. Debajo de ese ancho la pildora esta oculta y este boton es la unica
-   salida, asi que se esconde y no se borra.
+/* La busqueda, con su palabra (components/lector/lector.tsx): una pastilla
+   con borde, que se lee como el control principal de la barra y no como un
+   icono mas. Misma altura de 44 que sus vecinos. */
+.control-lector[data-buscar] {
+  gap: 0.5rem;
+  padding-inline: 0.875rem 1rem;
+  border: 1px solid var(--color-filo);
+  border-radius: 9999px;
+  background: var(--color-vela);
+  color: var(--color-tinta-titulo);
+  font-size: var(--text-cuerpo);
+  line-height: var(--text-cuerpo--line-height);
+}
+@media (hover: hover) and (pointer: fine) {
+  .control-lector[data-buscar]:hover { background: var(--color-realce); }
+}
+/* La busqueda EN la barra (ui/busqueda-en-barra.tsx), sin dialogo desde el 28
+   de septiembre de 2026 (cliente: la hoja modal para escribir una palabra
+   sobraba).
 
-   La consulta va AQUI y no con una utilidad `md:hidden` en el boton: el
-   `display` de esta clase no esta en la capa de utilidades, asi que le gana a
-   la utilidad y el boton seguia viendose en escritorio. Es el mismo choque que
-   `.tarjeta-ahora` documenta para su relleno. */
+   La pastilla se queda en su sitio, con su ancho, y el campo se dibuja ENCIMA
+   de la fila, anclado a su borde derecho, que es donde esta la pastilla: en el
+   telefono cubre la fila entera y en escritorio mide 28rem sobre el hueco que
+   la fila ya deja. Nada de la barra se mueve. Se revela con `clip-path` de
+   derecha a izquierda, asi que sale de la pastilla: abre con la curva de firma
+   en --dur-cambio, cierra en --dur-toque, y `visibility` cambia al final del
+   cierre y al principio de la apertura. El anillo de foco va en la pastilla
+   entera (`:has`), no en el campo de adentro: nunca se quita, se muda. */
+.busqueda-barra { display: contents; }
+.busqueda-barra[data-abierta] > .control-lector[data-buscar] {
+  opacity: 0;
+  pointer-events: none;
+}
+.campo-busqueda-barra {
+  position: absolute;
+  z-index: 1;
+  inset-block: 0;
+  left: 1rem;
+  right: 1rem;
+  height: 2.75rem;
+  margin-block: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.25rem 0 0.875rem;
+  border: 1px solid var(--color-filo);
+  border-radius: 9999px;
+  background: var(--color-carta);
+  visibility: hidden;
+  opacity: 0;
+  clip-path: inset(0 0 0 100% round 9999px);
+  transition:
+    clip-path var(--dur-toque) var(--ease-out),
+    opacity var(--dur-toque) var(--ease-out),
+    visibility 0s linear var(--dur-toque);
+}
+.busqueda-barra[data-abierta] .campo-busqueda-barra {
+  visibility: visible;
+  opacity: 1;
+  clip-path: inset(0 0 0 0 round 9999px);
+  transition:
+    clip-path var(--dur-cambio) var(--ease-firma),
+    opacity var(--dur-toque) var(--ease-out),
+    visibility 0s;
+}
+.campo-busqueda-barra:has(input:focus-visible) {
+  outline: 2px solid var(--color-chart-3);
+  outline-offset: 2px;
+}
+.campo-busqueda-barra input:focus-visible { outline: none; }
 @media (min-width: 48rem) {
-  .control-lector[data-solo-movil] { display: none; }
+  .campo-busqueda-barra {
+    left: auto;
+    right: 2rem;
+    width: min(28rem, calc(100% - 4rem));
+  }
+}
+/* La × y la flecha, dentro de la pastilla. 36px y no 44: van dentro de un
+   blanco de 44 que ya las rodea, y a 44 la pastilla creceria. */
+.boton-campo-busqueda,
+.enviar-busqueda {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  color: var(--color-tinta-meta);
+  transition:
+    color var(--dur-toque) var(--ease-out),
+    background-color var(--dur-toque) var(--ease-out),
+    transform var(--dur-toque) var(--ease-out);
+}
+.enviar-busqueda { background: var(--color-realce); color: var(--color-tinta-titulo); }
+.boton-campo-busqueda:active,
+.enviar-busqueda:active { transform: scale(0.94); }
+@media (hover: hover) and (pointer: fine) {
+  .boton-campo-busqueda:hover { background: var(--color-vela); color: var(--color-tinta-titulo); }
+  .enviar-busqueda:hover { background: var(--color-filo); }
+}
+/* Lo que va debajo mientras se escribe (los terminos en seguimiento de
+   Redes): una bandeja pegada al campo, con su mismo ancho, sin velo. Solo con
+   el foco dentro; entra 4px desde arriba. */
+.bandeja-busqueda {
+  position: absolute;
+  z-index: 1;
+  top: calc(100% + 0.25rem);
+  left: 1rem;
+  right: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--color-filo);
+  border-radius: var(--radius-panel);
+  background: var(--color-carta);
+  box-shadow: var(--shadow-bisel), 0 24px 48px -12px rgb(0 0 0 / 0.6);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity var(--dur-toque) var(--ease-out),
+    transform var(--dur-toque) var(--ease-out),
+    visibility 0s linear var(--dur-toque);
+}
+.bandeja-busqueda[data-visible] {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--dur-cambio) var(--ease-firma),
+    transform var(--dur-cambio) var(--ease-firma),
+    visibility 0s;
+}
+@media (min-width: 48rem) {
+  .bandeja-busqueda {
+    left: auto;
+    right: 2rem;
+    width: min(28rem, calc(100% - 4rem));
+  }
 }
 .dialogo-lector {
   position: fixed;
@@ -1167,4 +1518,213 @@ main:has(.lector) > :not(:has(.lector)) { display: none; }
     background-clip: text;
     color: transparent;
   }
+}
+
+/* /guion (app/guion/page.tsx, components/paneles/guion-locucion.tsx).
+
+   El piloto: el punto de una camara junto a «Guion». Apagado es un aro de
+   tinta inerte; encendido, el rojo de la marca con su halo. Cambia al elegir
+   un programa, que es una navegacion a la misma ruta con otro `?p=`: React
+   reusa el nodo y la transicion corre. Es el unico movimiento de la cabecera.
+   `em` para que crezca con el clamp del titulo. */
+.piloto-guion {
+  flex: none;
+  width: 0.2em;
+  height: 0.2em;
+  margin-top: 0.08em;
+  border-radius: 9999px;
+  background: transparent;
+  box-shadow: inset 0 0 0 0.03em var(--color-tinta-inerte);
+  transition:
+    background-color var(--dur-entrada) var(--ease-out),
+    box-shadow var(--dur-entrada) var(--ease-out);
+}
+.piloto-guion[data-encendido] {
+  background: var(--color-chart-1);
+  box-shadow: inset 0 0 0 0.03em var(--color-chart-1), 0 0 0.35em rgb(224 52 43 / 0.55);
+}
+
+/* Un renglon de la parrilla. En el telefono, nombre y linea uno sobre otro;
+   desde 48rem, nombre a la izquierda, linea a la derecha y la flecha al final.
+   El lavado de hover sale de los filos hacia afuera (margen negativo y el
+   mismo relleno) para que el texto no se mueva y el filo siga recto. */
+.renglon-parrilla {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 1.5rem;
+  row-gap: 0.25rem;
+  margin-inline: -1rem;
+  padding: 1.5rem 1rem;
+  border-radius: var(--radius-nucleo);
+  transition:
+    background-color var(--dur-toque) var(--ease-out),
+    transform var(--dur-toque) var(--ease-out);
+}
+.renglon-parrilla > :nth-child(2) { grid-column: 1; }
+.renglon-parrilla > .flecha-parrilla { grid-column: 2; grid-row: 1 / span 2; }
+@media (min-width: 48rem) {
+  .renglon-parrilla {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    column-gap: 2.5rem;
+    padding-block: 2rem;
+  }
+  .renglon-parrilla > :nth-child(2) { grid-column: 2; }
+  .renglon-parrilla > .flecha-parrilla { grid-column: 3; grid-row: 1; }
+}
+.renglon-parrilla:active { transform: scale(0.99); }
+.flecha-parrilla {
+  color: var(--color-tinta-meta);
+  transition:
+    color var(--dur-toque) var(--ease-out),
+    transform var(--dur-cambio) var(--ease-firma);
+}
+@media (hover: hover) and (pointer: fine) {
+  .renglon-parrilla:hover { background: var(--color-vela); }
+  .renglon-parrilla:hover .flecha-parrilla { color: var(--color-tinta-titulo); transform: translateX(4px); }
+}
+.renglon-parrilla:focus-visible .flecha-parrilla { color: var(--color-tinta-titulo); }
+
+/* === El guion para locucion (paneles/guion-locucion.tsx) ====================
+   Pulido el 28 de septiembre de 2026 a pedido del cliente: el pase iba en
+   cursivas, cada renglon tenia el mismo gris chico encima, y las fuentes eran
+   tres pastillas sueltas entre dos parlamentos. Ahora es una escaleta: numero
+   en su columna, un solo estilo de rotulo, lo dicho a medida de lectura, el
+   clip como una franja y las fuentes como enlaces. */
+.guion {
+  display: grid;
+  gap: 2.5rem;
+}
+.guion-rotulo {
+  font-size: var(--text-meta);
+  line-height: var(--text-meta--line-height);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-tinta-meta);
+}
+/* La linea de la pieza: el tipo en el rotulo de arriba, el eje en letra
+   normal. */
+.guion-meta {
+  font-size: var(--text-meta);
+  line-height: var(--text-meta--line-height);
+  color: var(--color-tinta-meta);
+}
+.guion-tipo {
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-tinta-dato);
+}
+.guion-dicho {
+  max-width: 65ch;
+  font-size: var(--text-lectura);
+  line-height: 1.65;
+  letter-spacing: var(--text-lectura--letter-spacing);
+  color: var(--color-tinta-titulo);
+  text-wrap: pretty;
+  overflow-wrap: anywhere;
+}
+/* El pase se dice como lo demas; un punto mas tenue lo ata a la franja que
+   sigue, sin cursivas. */
+.guion-pase { color: var(--color-tinta-dato); }
+.guion-parlamento {
+  display: grid;
+  gap: 0.5rem;
+}
+.guion-escaleta {
+  display: grid;
+  border-bottom: 1px solid var(--color-filo);
+}
+.guion-pieza {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  column-gap: 1rem;
+  padding-block: 2rem;
+  border-top: 1px solid var(--color-filo);
+}
+@media (min-width: 48rem) {
+  .guion-pieza { grid-template-columns: 3rem minmax(0, 1fr); column-gap: 1.25rem; }
+}
+.guion-numero {
+  font-family: var(--font-titular);
+  font-size: var(--text-rotulo);
+  line-height: var(--text-rotulo--line-height);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-tinta-inerte);
+}
+.guion-cuerpo {
+  display: grid;
+  gap: 1.25rem;
+  min-width: 0;
+}
+.guion-titular {
+  font-family: var(--font-titular);
+  font-size: var(--text-rotulo);
+  line-height: var(--text-rotulo--line-height);
+  letter-spacing: var(--text-rotulo--letter-spacing);
+  font-weight: 600;
+  color: var(--color-tinta-titulo);
+  text-wrap: balance;
+}
+/* La franja del clip: donde entra el video. El triangulo en el rojo de la
+   marca, el mismo del piloto de la cabecera. */
+.guion-cue {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1rem;
+  padding: 0.25rem 0.5rem 0.25rem 1rem;
+  border: 1px solid var(--color-filo);
+  border-radius: var(--radius-nucleo);
+  background: var(--color-vela);
+}
+.guion-enlace .guion-cue-marca { flex: none; color: var(--color-chart-1); }
+.guion-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 1rem;
+}
+/* La accion de IA va al final de su fila, a la derecha cuando cabe. */
+.guion-cue > .guion-accion-ia,
+.guion-acciones > .guion-accion-ia { margin-inline-start: auto; }
+.guion-enlace {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 2.75rem;
+  font-size: var(--text-cuerpo);
+  color: var(--color-tinta-dato);
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-filo);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+  transition: color var(--dur-toque) var(--ease-out), text-decoration-color var(--dur-toque) var(--ease-out);
+}
+.guion-enlace svg { color: var(--color-tinta-meta); }
+.guion-accion-ia {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding-inline: 0.875rem 1rem;
+  border: 1px solid var(--color-filo);
+  border-radius: 9999px;
+  font-size: var(--text-cuerpo);
+  color: var(--color-tinta-titulo);
+  transition: background-color var(--dur-toque) var(--ease-out), transform var(--dur-toque) var(--ease-out);
+}
+.guion-accion-ia:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .guion-enlace:hover { color: var(--color-tinta-titulo); text-decoration-color: var(--color-tinta-meta); }
+  .guion-accion-ia:hover { background: var(--color-filo); }
+}
+.guion-pie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
 }

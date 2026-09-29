@@ -47,7 +47,7 @@ export function SelectorZona({
     <nav
       id="zonas"
       aria-label="Zona"
-      className="scroll-mt-[calc(var(--nav-alto)+1.5rem)]"
+      className="scroll-mt-[var(--respiro-superior)]"
     >
       <PastillasLugar lugares={OPCIONES_ZONA.map((z) => ({
         id: z ?? "region",

@@ -7,7 +7,6 @@ import { Analytics as Analitica } from "@vercel/analytics/next";
 import { SpeedInsights as Rendimiento } from "@vercel/speed-insights/next";
 
 import { Malla } from "@/components/chrome/malla";
-import { Velo } from "@/components/chrome/velo";
 
 import "./globals.css";
 
@@ -102,22 +101,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main
           id="contenido"
           tabIndex={-1}
-          // El relleno de arriba es para la PASTILLA FLOTANTE, que es fija y no
-          // ocupa flujo. Desde el 18 de septiembre de 2026 solo flota a partir
-          // de 48rem: debajo de ese ancho la nav es `.cinta-pagina`, que va EN
-          // FLUJO y reserva su propio alto, asi que un relleno aqui la
-          // empujaria hacia abajo y la despegaria de la orilla, que es
-          // justamente lo que la distingue de la pastilla. Con los 112px que
-          // habia, una cinta de 71 dejaba 41px de banda muerta arriba de cada
-          // pagina.
-          //
-          // La unica pagina sin nav es /entrar, y desde hoy pone su respiro
-          // ella misma.
-          className="relative z-[var(--z-base)] outline-none md:pt-32"
+          // Sin relleno propio: lo pone la navegacion. Con la navegacion
+          // montada (`main:has(> .riel)` en globals.css), el riel reserva su
+          // ancho a la izquierda en escritorio y la barra de pestanas su alto
+          // abajo en el telefono. Hasta el 28 de septiembre de 2026 aqui iban
+          // 128px arriba para la pastilla flotante. /entrar no monta nav y
+          // pone su respiro ella misma.
+          className="relative z-[var(--z-base)] outline-none"
         >
-          {/* Primero en el DOM a proposito: comparte `--z-elevado` con la
-              barra pegajosa del muro y el orden decide quien tapa a quien. */}
-          <Velo />
           {children}
         </main>
 

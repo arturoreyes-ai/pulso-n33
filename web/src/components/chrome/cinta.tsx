@@ -29,13 +29,14 @@ import { LugarCinta } from "@/components/chrome/lugar-cinta";
  *
  * SIN CASA Y SIN LUPA, que es lo que la hace la misma barra y no una parecida.
  * El control de la izquierda del lector es «volver» en una pagina interior y
- * nada en la portada: indicadores ES interior, asi que lleva flecha; las
- * sueltas y la de 404 no tienen pagina padre y no llevan ninguna, con «En
- * Tendencia» a un renglon dentro del menu.
+ * nada en la portada: /tijuana/redes ES interior, asi que lleva flecha; las
+ * sueltas y la de 404 no tienen pagina padre y no llevan ninguna: «En
+ * Tendencia» es la primera pestana de la barra de abajo.
  *
- * Tampoco hay info, y desde el 18 de septiembre de 2026 el lector tampoco la
- * tiene: se quito con su prosa, y el mismo dia se quito el pie de todo el
- * tablero. No hay nada que este menu tenga que llevar aparte de la navegacion.
+ * SIN MENU desde el 28 de septiembre de 2026: la navegacion del sitio es la
+ * barra de pestanas (chrome/riel.tsx), y un boton de menu aqui repetiria su
+ * lista a un pulgar de distancia. Tampoco hay info: se quito el 18 de
+ * septiembre de 2026 con su prosa y con el pie de todo el tablero.
  */
 export function Cinta({
   volver,
@@ -43,19 +44,16 @@ export function Cinta({
   valor,
   tituloLugar,
   lugares,
-  menu,
 }: {
   /** A donde lleva la flecha. Sin esto no se pinta: una suelta no tiene padre. */
   volver?: string;
-  /** La pagina: «Indicadores», «Garitas». */
+  /** La pagina: «Redes», «Garitas». */
   rotulo: string;
   /** Lo que se esta viendo: «Tijuana», «El corredor». */
   valor: string;
   tituloLugar?: string;
   /** Las opciones de lugar. Sin esto el bloque es inerte y no lleva caret. */
   lugares?: ReactNode;
-  /** La navegacion del sitio, como nodo de servidor. */
-  menu: ReactNode;
 }) {
   return (
     <div className={`${CINTA} ${CINTA_PAGINA}`}>
@@ -68,7 +66,6 @@ export function Cinta({
         <LugarCinta rotulo={rotulo} valor={valor} titulo={tituloLugar}>
           {lugares}
         </LugarCinta>
-        {menu}
       </div>
     </div>
   );

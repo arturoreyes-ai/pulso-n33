@@ -1,11 +1,11 @@
 "use client";
 
-import { FormularioBusqueda } from "@/components/ui/formulario-busqueda";
+import { BusquedaEnBarra } from "@/components/ui/busqueda-en-barra";
 import { esEdicion, type Entrada } from "@/lib/busqueda/capitulos";
 import { PARAM_EDICION, rutaDeEntrada } from "@/lib/busqueda/entrada";
 
 /**
- * El cuerpo del dialogo de busqueda del lector.
+ * La busqueda de la portada, en la barra del lector (ui/busqueda-en-barra.tsx).
  *
  * Es un `<form method="get">` de verdad y no un campo que busca al teclear.
  * Dos razones, y la segunda es la que manda: en un lector a pantalla completa
@@ -23,18 +23,17 @@ import { PARAM_EDICION, rutaDeEntrada } from "@/lib/busqueda/entrada";
  *
  *  1. El campo era `bg-vela` CON borde, y encima cae el anillo de foco de
  *     globals.css (2px de chart-3 con 2px de separacion). Tres lineas
- *     concentricas alrededor de una caja de texto. Ahora el campo es un hueco
- *     —`bg-vanta`, mas hondo que la hoja— con un solo filo de pelo, y el
- *     anillo de foco es lo unico que se suma al enfocarlo.
+ *     concentricas alrededor de una caja de texto. Desde el 28 de septiembre
+ *     de 2026 el anillo va en la pastilla entera (`:focus-within`) y el campo
+ *     de adentro no pinta el suyo.
  *  2. El aspa: `type="search"` pinta la suya en WebKit en cuanto hay texto, y
  *     quedaban dos maneras de vaciar el campo que no eran la misma. Se apaga
  *     en globals.css; el campo se vacia seleccionando, como cualquier otro.
  *  3. «Salir de la búsqueda» era una pastilla del mismo ancho y peso que
- *     «Buscar», debajo de ella y al lado del aspa de cerrar el dialogo: tres
- *     controles que parecian el mismo. Cerrar el dialogo y salir de la
- *     busqueda son cosas distintas —una tapa la hoja, la otra cambia lo que
- *     se esta leyendo— asi que ahora solo hay UN boton, y la salida es un
- *     enlace discreto que nombra su destino en vez de nombrar la accion.
+ *     «Buscar», al lado del aspa de cerrar el dialogo: tres controles que
+ *     parecian el mismo. El dialogo ya no existe; durante una busqueda la ×
+ *     del campo ES la salida, y su nombre accesible dice a donde lleva
+ *     («Volver al recorrido»), no la accion.
  */
 export function BuscadorAhora({ accion, entrada, lugar, consulta }: {
   accion: string;
@@ -44,10 +43,10 @@ export function BuscadorAhora({ accion, entrada, lugar, consulta }: {
   lugar: string;
   consulta: string | null;
 }) {
-  // La forma vive en ui/formulario-busqueda.tsx y la comparte Redes.
+  // La forma vive en ui/busqueda-en-barra.tsx y la comparte Redes.
   return (
-    <FormularioBusqueda accion={accion} idCampo="consulta-lector" etiqueta={`En ${lugar}`} consulta={consulta}
+    <BusquedaEnBarra accion={accion} rotulo="Buscar titulares" etiqueta={`En ${lugar}`} consulta={consulta}
       ocultos={esEdicion(entrada) ? { [PARAM_EDICION]: entrada } : {}} destinoSalida={rutaDeEntrada(entrada)}
-      placeholder="garita, agua, presupuesto…" salida="Volver al recorrido" />
+      salida="Volver al recorrido" />
   );
 }

@@ -23,6 +23,11 @@ import { SLUG_DE_ZONA, type Slug, type ZonaRuta } from "./zonas";
  *    nav lo convertia en un tema del producto en vez de en una fuente.
  *    Dentro de la pagina se eligen con un selector, como una faceta.
  *
+ * `indicadores` fue la segunda seccion hasta el 28 de septiembre de 2026: las
+ * cifras oficiales de vivienda, predial, SESNSP y ENSU. El cliente la quito
+ * «por ahora». El pipeline sigue escribiendo data/indicadores.json, asi que
+ * volver a pintarla es trabajo de interfaz y no de datos, como el muro.
+ *
  * La PORTADA dejo de ser el muro el 15 de septiembre de 2026, a peticion del
  * cliente: es el recorrido de titulares en vivo, «En Tendencia», que hasta ese
  * dia era la suelta /ahora. Las dos superficies decian lo mismo con dos
@@ -47,7 +52,7 @@ import { SLUG_DE_ZONA, type Slug, type ZonaRuta } from "./zonas";
  * por zona, y el resumen de la portada publica cuantas fuentes respondieron.
  * La regla 4 de PRODUCT.md vive en esos tres sitios, no en una pagina.
  */
-export const SECCIONES = ["redes", "indicadores"] as const;
+export const SECCIONES = ["redes"] as const;
 
 export type Seccion = (typeof SECCIONES)[number];
 
@@ -58,27 +63,24 @@ export type Vista = Seccion | null;
 const NOMBRE = {
   portada: "En Tendencia",
   redes: "Redes",
-  indicadores: "Indicadores",
 } as const satisfies Record<Seccion | "portada", string>;
 
 export const nombreVista = (v: Vista): string => NOMBRE[v ?? "portada"];
 
 /**
- * Como se titula una seccion cuando habla de un lugar. La preposicion no es
- * la misma en las dos —se esta EN una red y se tienen indicadores DE un
- * municipio— asi que se escribe una vez y la usan el h1 de la pagina y el
- * <title> de la pestana. Separadas, una decia "Indicadores de Ensenada" en la
- * pagina y "Indicadores en Ensenada" en la pestana.
+ * Como se titula una seccion cuando habla de un lugar. Se escribe una vez y la
+ * usan el h1 de la pagina y el <title> de la pestana: cuando habia dos
+ * secciones, separadas, una decia "Indicadores de Ensenada" en la pagina y
+ * "Indicadores en Ensenada" en la pestana.
  */
 const TITULO: Record<Seccion, (nombre: string) => string> = {
   redes: (n) => `Redes en ${n}`,
-  indicadores: (n) => `Indicadores de ${n}`,
 };
 
 export const tituloSeccion = (s: Seccion, nombre: string | null): string =>
   nombre === null ? NOMBRE[s] : TITULO[s](nombre);
 
-/** El orden de la nav: la portada primero, y luego las dos secciones. */
+/** El orden de la nav: la portada primero, y luego las secciones. */
 export const VISTAS: readonly Vista[] = [null, ...SECCIONES];
 
 /**
@@ -97,15 +99,39 @@ export const VISTAS: readonly Vista[] = [null, ...SECCIONES];
  * de ningun municipio —Mexico e Internacional— tampoco ocupan segmento: son
  * una faceta en `?e=`, como el alcance del muro es `?a=`.
  *
+ * Seguimiento sigue publicaciones sueltas que el equipo elige, de cualquier
+ * lugar y de tres redes (28 de septiembre de 2026): la zona no es de la
+ * publicacion sino de quien la agrego, y ninguna tiene `/tijuana/seguimiento`.
+ *
+ * Guion es el guion para locucion de cada programa del canal (28 de
+ * septiembre de 2026, a pedido del cliente): vivia en dos hojas, una en la
+ * barra de la portada y otra en la de Redes, y un programa no es de un lugar
+ * ni de una pagina (lib/analisis/guion.ts). Es la unica suelta que depende de
+ * algo: `requiereAnalisis`, porque sin la lectura con IA la pagina no existe
+ * (app/guion/page.tsx) y un enlace a ella seria un 404 en la nav.
+ *
  * Se declara aqui, y no como un `<li>` a mano en la pildora, para que la nav
  * siga teniendo una sola lista de la que salen sus elementos.
+ *
+ * `descripcion` es la linea bajo el nombre en el menu (chrome/menu-lector.tsx)
+ * desde el 28 de septiembre de 2026, cuando las sueltas salieron de la pildora
+ * al menu: dentro de un menu el nombre solo no dice que hay detras, y
+ * «Seguimiento» a secas se leia como una cifra de seguidores. Dice QUE es,
+ * nunca como se hace.
  */
 export const SUELTAS = [
-  { id: "garitas", ruta: "/garitas", nombre: "Garitas" },
-  { id: "gasto-electoral", ruta: "/gasto-electoral", nombre: "Gasto electoral" },
+  { id: "garitas", ruta: "/garitas", nombre: "Garitas", descripcion: "Esperas en San Ysidro y Otay Mesa" },
+  { id: "gasto-electoral", ruta: "/gasto-electoral", nombre: "Gasto electoral", descripcion: "Campañas de Baja California, 2024" },
+  { id: "seguimiento", ruta: "/seguimiento", nombre: "Seguimiento", descripcion: "Publicaciones que sigue el equipo" },
+  { id: "guion", ruta: "/guion", nombre: "Guion", descripcion: "El guion de cada programa del canal", requiereAnalisis: true },
 ] as const;
 
 export type PaginaSuelta = (typeof SUELTAS)[number]["id"];
+
+/** Las sueltas que la nav pinta. Pura: quien la llama (la pildora y el menu,
+ *  los dos de servidor) le pasa `analisisHabilitado()`, que lee el entorno. */
+export const sueltasVisibles = (analisis: boolean) =>
+  SUELTAS.filter((s) => analisis || !("requiereAnalisis" in s));
 
 const SECCION_DE_SLUG = new Map<string, Seccion>(SECCIONES.map((s) => [s, s]));
 

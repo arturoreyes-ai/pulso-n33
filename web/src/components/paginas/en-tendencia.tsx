@@ -1,5 +1,4 @@
 import { FeedAhora } from "@/components/ahora/feed-ahora";
-import { MenuLector } from "@/components/chrome/menu-lector";
 import { Seccion } from "@/components/chrome/seccion";
 import { analisisHabilitado } from "@/lib/analisis/config";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
@@ -40,7 +39,6 @@ export function PaginaEnTendencia({ zona, edicion, consulta, rubro }: { zona: Zo
         consulta={consulta}
         rubro={rubro}
         analisis={analisisHabilitado()}
-        menu={<MenuLector zona={zona} vista={null} />}
       />
     </Seccion>
   );

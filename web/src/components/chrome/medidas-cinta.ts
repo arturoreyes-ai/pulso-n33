@@ -29,18 +29,21 @@ export const FILA_CINTA = "fila-cinta";
 export const CINTA_PAGINA = "cinta-pagina";
 
 /**
- * Los glifos. Son dos tamanos de control y no uno, y la diferencia es OPTICA,
- * no de caja: los tres controles miden 44x44 igual.
+ * Los glifos. La diferencia es OPTICA, no de caja: los controles miden 44x44.
  *
- *   22  el glifo que llena su cuadro -- el menu;
  *   20  el que se dibuja estrecho y a 22 pesaria mas que sus vecinos aun
- *       midiendo lo mismo la caja: la flecha de volver y la lupa;
+ *       midiendo lo mismo la caja: la flecha de volver;
  *   16  el caret, que acompana a un texto y no a un blanco de toque.
+ *
+ * El de 22 era el del menu, que salio de la cinta y del lector el 28 de
+ * septiembre de 2026 con la barra de pestanas (chrome/riel.tsx).
  *
  * La casa NO esta aqui: solo existe en la pastilla de escritorio, donde va
  * junto a un texto de 12px y mide 14. La de 18 de la rama de telefono murio
  * con esa rama -- se habia dimensionado para un blanco de toque sin texto.
  */
-export const ICONO_CONTROL = 22;
 export const ICONO_ESTRECHO = 20;
 export const ICONO_DESPLEGAR = 16;
+/** El glifo junto a su palabra dentro de un control: la lupa de «Buscar»,
+ *  al tamano de los botones con icono de ui/clases.ts::clasesBoton. */
+export const ICONO_CON_TEXTO = 16;

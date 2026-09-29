@@ -37,11 +37,6 @@ const EXCEPCIONES = [
     nota: "Barra anima un VALOR DE DATO al cambiar el filtro, no un hover.",
   },
   {
-    archivo: "components/chrome/velo.tsx",
-    regla: "rgb-crudo",
-    nota: "El degradado ES --color-vanta a distintos alfas; un token por parada seria peor.",
-  },
-  {
     archivo: "components/chrome/malla.tsx",
     regla: "rgb-crudo",
     nota: "Los orbes se consumen como rgb(var(--color-orbe-x) / a), que es el patron correcto.",

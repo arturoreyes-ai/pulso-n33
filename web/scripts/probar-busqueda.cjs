@@ -898,6 +898,25 @@ async function comprobar() {
   assert.equal(corteVigente('2026-09-24T17:49:28+00:00', undefined), true, 'sin corrida, como antes');
   assert.equal(hace('2026-09-24T15:49:28+00:00', '2026-09-24T17:49:28+00:00'), '2 h', 'la cuenta de siempre, contra el corte');
 
+  // --- El boton de la barra dice «Buscar» -----------------------------------
+  // 28 de septiembre de 2026 (cliente): la lupa sola no se distinguia de los
+  // iconos vecinos. La palabra se ve en todos los anchos y el nombre accesible
+  // empieza con ella.
+  // Y desde el mismo dia no abre un dialogo: la pastilla se abre en la barra
+  // (ui/busqueda-en-barra.tsx) y el lector ya no monta una hoja para buscar.
+  const lector = fs.readFileSync(path.join(SRC, 'components/lector/lector.tsx'), 'utf8');
+  assert.doesNotMatch(lector, /titulo="Buscar"|buscador\.current|rotuloBusqueda/, 'la busqueda no es una hoja');
+  const enBarra = fs.readFileSync(path.join(SRC, 'components/ui/busqueda-en-barra.tsx'), 'utf8');
+  assert.match(enBarra, /data-buscar\s+className="control-lector"\s+aria-label=\{rotulo\}/);
+  assert.match(enBarra, /<Lupa size=\{ICONO_CON_TEXTO\} aria-hidden \/>\s*<span>Buscar<\/span>/);
+  assert.match(enBarra, /<form id=\{id\} role="search" method="get" action=\{accion\}/, 'sigue siendo un form GET');
+  for (const [archivo, rotulo] of [['components/ahora/buscador-ahora.tsx', 'Buscar titulares'], ['components/paneles/buscador-redes.tsx', 'Buscar publicaciones']]) {
+    assert.match(fs.readFileSync(path.join(SRC, archivo), 'utf8'), new RegExp(`rotulo="${rotulo}"`), `${archivo}: el nombre empieza con «Buscar»`);
+  }
+  const css = fs.readFileSync(path.join(SRC, 'app/globals.css'), 'utf8');
+  assert.match(css, /\.control-lector\[data-buscar\] \{[^}]*border: 1px solid var\(--color-filo\);[^}]*background: var\(--color-vela\);/);
+  assert.doesNotMatch(css, /\.control-lector\[data-buscar\][^{]*\{[^}]*display: none/, 'la palabra no se esconde en el telefono');
+
   console.log('Búsqueda: parseo, fusión, URLs, /api/actualidad, secciones locales y rubros verificados offline.');
 }
 

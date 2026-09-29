@@ -1,10 +1,9 @@
 "use client";
 
-import { ArrowClockwise as Recargar, Microphone as Locucion } from "@phosphor-icons/react";
-import { useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
+import { ArrowClockwise as Recargar } from "@phosphor-icons/react";
+import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
 
 import { CONTROL, Lector } from "@/components/lector/lector";
-import { GuionLocucion } from "@/components/paneles/guion-locucion";
 import { ListaRelacionadas, TITULO_RELACIONADAS } from "@/components/paneles/relacionadas-titular";
 import { EstadoCarga } from "@/components/ui/estado-carga";
 import { debeActivar, fraseFinal, type Capitulos, type Entrada, type Tarjeta } from "@/lib/busqueda/capitulos";
@@ -83,7 +82,7 @@ const tituloRecorrido = (entrada: Entrada, capitulos: Capitulos, rubro: Rubro | 
 const lugarDeBusqueda = (entrada: Entrada): string =>
   entrada === "region" ? "las noticias" : entrada === "mexico" ? "México" : entrada === "internacional" ? "el mundo" : NOMBRE_CORTO[entrada];
 
-export function FeedAhora({ zona, edicion, consulta, rubro, menu, analisis }: {
+export function FeedAhora({ zona, edicion, consulta, rubro, analisis }: {
   zona: ZonaRuta | null;
   /** El `?e=` de la URL, ya leido en el servidor. */
   edicion: string | null;
@@ -93,7 +92,6 @@ export function FeedAhora({ zona, edicion, consulta, rubro, menu, analisis }: {
   /** El `?q=`. Con consulta el lector deja de recorrer capitulos y muestra
    *  resultados: es un modo, no un capitulo mas. */
   consulta: string | null;
-  menu: ReactNode;
   /** Si el boton de lectura automatica se pinta. Lo decide el servidor. */
   analisis: boolean;
 }) {
@@ -108,14 +106,14 @@ export function FeedAhora({ zona, edicion, consulta, rubro, menu, analisis }: {
   if (q !== "") {
     return (
       <RecorridoBusqueda key={`q:${q}:${entrada}`} consulta={q} zona={zona} entrada={entrada}
-        menu={menu} analisis={analisis} />
+        analisis={analisis} />
     );
   }
   // El tema entra en la LLAVE: cambiarlo tiene que descongelar las listas de
   // use-capitulos.ts y volver a la primera tarjeta, igual que cambiar de lugar.
   return (
     <RecorridoAhora key={`${entrada}:${tema ?? ""}:${generacion}`} entrada={entrada} rubro={tema} zona={zona} onRecargar={recargar}
-      menu={menu} analisis={analisis} />
+      analisis={analisis} />
   );
 }
 
@@ -164,14 +162,13 @@ function HojaRelacionadas({ hoja, abierta, setAbierta, vivas }: {
   );
 }
 
-function RecorridoAhora({ entrada, rubro, zona, onRecargar, menu, analisis }: {
+function RecorridoAhora({ entrada, rubro, zona, onRecargar, analisis }: {
   entrada: Entrada; rubro: Rubro | null; zona: ZonaRuta | null; onRecargar: () => void;
-  menu: ReactNode; analisis: boolean;
+  analisis: boolean;
 }) {
   const [activados, setActivados] = useState(1);
   const { capitulos, hilado, disponible, hayNuevos } = useCapitulos(entrada, rubro, activados);
   const rel = useHojaRelacionadas();
-  const guion = useRef<HTMLDialogElement>(null);
   const contenedor = useRef<HTMLDivElement>(null);
   const { actual, ir } = useRecorrido(contenedor);
   useEffect(() => {
@@ -198,19 +195,13 @@ function RecorridoAhora({ entrada, rubro, zona, onRecargar, menu, analisis }: {
             <Recargar size={20} aria-hidden />
           </button>
         ) : null}
-        {/* El guion para locucion de las noticias (25 de septiembre de 2026),
-            en una hoja y no como tarjeta del recorrido: una tarjeta del alto
-            de su contenido correria los indices de la cadena de capitulos
-            (debeActivar, las teclas). Lo decide el servidor, como Analizar. */}
-        {analisis ? (
-          <button type="button" className={CONTROL} aria-label="Guion para locución" title="Guion para locución"
-            aria-haspopup="dialog" onClick={() => guion.current?.showModal()}>
-            <Locucion size={22} aria-hidden />
-          </button>
-        ) : null}
+        {/* Aqui estuvo el atajo al guion para locucion: una hoja del 25 al
+            28 de septiembre de 2026 y despues unos destellos que enlazaban a
+            /guion. Salio de la barra el 28 de septiembre (cliente): el guion
+            tiene su pagina en la navegacion. */}
       </>}
       busqueda={<BuscadorAhora accion={ruta(zona, null)} entrada={entrada} lugar={lugarDeBusqueda(entrada)} consulta={null} />}
-      menu={menu} restaurarFoco={restaurarFoco}>
+      restaurarFoco={restaurarFoco}>
       <div ref={contenedor} className="recorrido-lector" tabIndex={0} role="region" aria-label={tituloRecorrido(entrada, capitulos, rubro)}
         onKeyDown={(evento) => teclasDelRecorrido(evento, actual, total, ir)}>
         {!disponible ? <p className="tarjeta-ahora flex items-center text-lectura text-tinta-prosa">Los titulares en vivo no están disponibles en esta vista.</p> : <>
@@ -229,15 +220,6 @@ function RecorridoAhora({ entrada, rubro, zona, onRecargar, menu, analisis }: {
       </div>
       <HojaRelacionadas hoja={rel.hoja} abierta={rel.abierta} setAbierta={rel.setAbierta}
         vivas={rel.vivas} />
-      {analisis ? (
-        <Hoja ref={guion} titulo="Guion para locución" rotuloCerrar="Cerrar guion para locución">
-          {/* El margen de las otras hojas (analisis-titular.tsx): la hoja no
-              trae relleno propio, y sin el el guion tocaba el borde. */}
-          <div className="px-4 pt-6 pb-8">
-            <GuionLocucion origen="prensa" encabezado={false} />
-          </div>
-        </Hoja>
-      ) : null}
     </Lector>
   );
 }
@@ -251,9 +233,9 @@ function RecorridoAhora({ entrada, rubro, zona, onRecargar, menu, analisis }: {
  * para nada. Lo que si comparte es todo lo demas: la caja, el ajuste por
  * tarjeta, las miniaturas y el enlace del propio medio.
  */
-function RecorridoBusqueda({ consulta, zona, entrada, menu, analisis }: {
+function RecorridoBusqueda({ consulta, zona, entrada, analisis }: {
   consulta: string; zona: ZonaRuta | null; entrada: Entrada;
-  menu: ReactNode; analisis: boolean;
+  analisis: boolean;
 }) {
   const viva = useBusquedaViva(consulta, zona, entrada);
   const rel = useHojaRelacionadas();
@@ -283,7 +265,7 @@ function RecorridoBusqueda({ consulta, zona, entrada, menu, analisis }: {
       tituloOpciones="Por dónde empezar"
       opciones={<OpcionesAhora entrada={entrada} rubro={null} />}
       busqueda={<BuscadorAhora accion={ruta(zona, null)} entrada={entrada} lugar={lugarDeBusqueda(entrada)} consulta={consulta} />}
-      menu={menu} restaurarFoco={restaurarFoco}>
+      restaurarFoco={restaurarFoco}>
       <div ref={contenedor} className="recorrido-lector" tabIndex={0} role="region" aria-label={`Resultados para ${consulta}`}
         onKeyDown={(evento) => teclasDelRecorrido(evento, actual, total, ir)}>
         {!viva.activa ? (
