@@ -1662,6 +1662,22 @@ already refused on the record in `docs/PLAN.md` §3.
   - **De Red en Red**: one piece per entertainment topic developed, up to six.
     Light tone, but a romance or a rumour is what someone published; nothing
     on anyone's body, health or private life; sober for a death or an attack.
+    **Since 29 September 2026 it is what trends on social media** (client:
+    «just one note»): in the mixed guion every piece comes from a post, in
+    the list's pace order, and **at most one headline stands alone**, last,
+    six pieces in total counting it. The prompt says so and
+    `guion.ts::NOTAS_SOLAS_MAXIMO` rejects a script with two (dropping the
+    extra would leave the apertura announcing it). The tone got concrete
+    («chispa»: hooks, playful handoffs, one exclamation per piece at most,
+    never at anyone's expense), «Circula en redes que» at most once per
+    segment, and a death, illness or sentence neither opens nor closes it.
+    Measured over three real runs that day (~$0.024 each): the first
+    announced a seventh piece that the six-piece cap cut, which is why the
+    total now includes the headline; the third was clean. Also that day,
+    `publicacionesParaGuion` keeps one post per folded caption across
+    networks: DW's Iran story held three of De Red en Red's twelve slots
+    (the `dos_redes` outlets post the same caption twice), and the pool of
+    every programme went from 318 to 295.
   - **Minuta Política** (Soledad Martínez): political analysis, local and
     national coyuntura, controversies and debate. Up to four topics, at least
     one per axis that has candidates: `local` (the corridor and the state) and
@@ -1678,6 +1694,26 @@ already refused on the record in `docs/PLAN.md` §3.
     `TERMINOS_IMPACTO` («Se incendia primaria Amado Nervo» named no Seguridad
     term). No names or nicknames of victims, minors or detainees; no morbo;
     no speculation on motives; the only programme allowed «buenas noches».
+    **Clips at the centre since 29 September 2026** (client: it «shows no
+    clips just news articles… a central theme for these sections is clips
+    from social media»). The general rule prefers a headline alone to a
+    post alone, and in nota roja few posts have a headline that surely tells
+    THE SAME EVENT, so the model read headlines while twelve local Seguridad
+    posts sat unused (Plaza La Mesa, the Plaza Río explosion, the rollover).
+    It now shares De Red en Red's rules (`guion.ts::redesAlCentro`): a post,
+    with its headline or alone, before a headline alone; at most one
+    headline alone (`NOTAS_SOLAS_MAXIMO`), last, six pieces in total. First
+    real run after: five clips with their headline and one alone, $0.025.
+  - **A post alone is always attributed, in every programme of the mixed
+    guion** (same day). With the rule already in the prompt, De Red en Red
+    said «Una fan le regaló rosas a Alfredo Olivas y él la dejó cantar» and
+    «A nueve años del fallecimiento de Hiromi, Fernando Santana vuelve a
+    recordar…» as facts. The prompt now demands the phrase in the entrada
+    (the pase does not count), and `guion.ts::sinAtribuir` rejects a clip
+    without a headline whose entrada has none of `ATRIBUCION_REDES`
+    («circula», «redes», «comparte», «video», «usuarios»…): the whole script
+    answers `reglas`. The list is open on purpose; it checks that there is
+    SOME attribution, not a formula.
   **It is a script, not a summary** (second version, same day: the first
   asked for a headline and «two to four sentences» per clip, and the client
   rightly called that a summary; the prompt had set the shape, not the

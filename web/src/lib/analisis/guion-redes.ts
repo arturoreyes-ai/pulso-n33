@@ -1,6 +1,6 @@
 import { json, SIN_CACHE } from "@/lib/busqueda/respuesta";
 import type { Destacado, DocRedes } from "@/lib/datos/tipos";
-import { FRESCURA_HORAS } from "@/lib/dominio/formato";
+import { FRESCURA_HORAS, plegar } from "@/lib/dominio/formato";
 import {
   canonizarPublicacion,
   fuenteDePublicacion,
@@ -54,6 +54,13 @@ import { planTikTok } from "./guion-tiktok";
  *    si su archivo faltara, en vez de rellenar con lo viejo;
  *  - `hasta` es la cosecha mas vieja de las redes leidas, y la pagina dice
  *    hasta que hora llegan las publicaciones.
+ *
+ * UNA PUBLICACION POR PIE (29 de septiembre de 2026). Los medios de Mexico y
+ * del mundo se leen en dos redes a la vez, por decision del cliente (AGENTS.md,
+ * `dos_redes`), y publican el mismo pie en las dos. Ese dia «Irán confirma la
+ * condena a 74 latigazos de una cantante...» de DW ocupaba tres de los doce
+ * lugares de De Red en Red. Se queda la primera por ritmo; las demas no le
+ * dicen nada nuevo al modelo, que no ve el video.
  *
  * YOUTUBE, SOLO LO MUY VISTO (`MINIMO_VISTAS`), y con un umbral por formato,
  * porque las vistas de un Short y las de un video largo no cuentan lo mismo
@@ -164,9 +171,15 @@ export async function publicacionesParaGuion(leer: LeerDatos, ahora: string): Pr
     }
   }
   const porRitmo = () => (a: PublicacionVisual, b: PublicacionVisual) => (ritmos.get(b.clave) ?? 0) - (ritmos.get(a.clave) ?? 0);
-  const videos = intercalarPorPuesto(filas, porRitmo).map((f) => ({
-    url: f.url!, fuente: f.fuente, titulo: f.post.titulo.trim(), zona: f.post.zona,
-  }));
+  const pies = new Set<string>();
+  const videos = intercalarPorPuesto(filas, porRitmo)
+    .filter((f) => {
+      const pie = plegar(f.post.titulo);
+      if (pies.has(pie)) return false;
+      pies.add(pie);
+      return true;
+    })
+    .map((f) => ({ url: f.url!, fuente: f.fuente, titulo: f.post.titulo.trim(), zona: f.post.zona }));
   const hasta = cosechas.length === 0 ? null : cosechas.reduce((a, b) => (Date.parse(b) < Date.parse(a) ? b : a));
   return { videos, leidas, hasta };
 }

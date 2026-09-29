@@ -272,6 +272,12 @@ function marcoMixto(): string[] {
     // salida dijo «El presunto responsable fue detenido en el transporte
     // publico», un detalle que solo traia el pie, dicho como hecho.
     "- En una publicación con su titular, la salida tampoco dice como hecho lo que solo trae el pie: un detalle que solo está en el pie se dice como lo que circula en redes o no se dice.",
+    // «Una fan le regaló rosas a Alfredo Olivas y él la dejó cantar en pleno
+    // concierto» y «A nueve años del fallecimiento de Hiromi, Fernando Santana
+    // vuelve a recordar...»: dos entradas sin atribucion en la tercera corrida
+    // de De Red en Red, 29 de septiembre de 2026, con la regla ya en el
+    // prompt. guion.ts::sinAtribuir lo comprueba.
+    "- Una publicación sola lleva SIEMPRE, en su entrada, la frase que dice que viene de redes («circula en redes», «se comparte en redes», «anda circulando», «nos llega de redes», «en un video que circula»), aunque el hecho parezca inofensivo o de todos conocido. Sin esa frase, lo que dice un pie se oye como un hecho confirmado. El pase no cuenta: la atribución va en la entrada.",
     "- En cada pieza, `titular`: para la escaleta, no se dice al aire. De tres a diez palabras, sin punto final.",
     "- `cierre`: una o dos frases que cierran el segmento.",
     "Cómo se escribe para decirse:",
@@ -475,8 +481,14 @@ function tono(p: ProgramaGuion, m: Material): string[] {
           undefined,
           "El tono es ligero y cercano, de plática, pero la cautela no se relaja: un romance, una ruptura, una pelea o un rumor se dice como lo que se informa o circula («se informa que», «circula en redes que»), nunca como un hecho.",
         ),
+        // Mas ligero desde el 29 de septiembre de 2026 (cliente: «keep a lighter
+        // tone given that's an entertainment segment»). Con solo «ligero y
+        // cercano», los guiones sonaban al noticiero: «Se informa que...» en
+        // cada pieza y «En otro tema» entre todas.
+        "- Aquí el conductor tiene chispa: frases cortas, un gancho al empezar cada pieza, pases con gracia («Miren nada más.», «Esto es lo que circula.») y salidas que brincan de un tema a otro con juego («Y de los palenques nos vamos a París.»). La gracia está en cómo se cuenta, nunca a costa de alguien: sin burlas, sin apodos y sin adjetivos sobre nadie.",
+        "- Signos de admiración con medida, uno por pieza como mucho, y sin jerga de redes ni anglicismos que el público no use («hype», «crush», «trend»).",
         "- No opines sobre el físico, la salud, la vida privada ni las relaciones de nadie, ni adivines lo que siente; di solo lo que " + el + " dice que pasó.",
-        "- Si el tema es una muerte, un ataque o un accidente, cambia el tono: sobrio y sin bromas.",
+        "- Si el tema es una muerte, un ataque, un accidente, una enfermedad o una condena, cambia el tono: sobrio y sin bromas.",
       ];
     case "minutapolitica":
       return [
@@ -554,6 +566,10 @@ function forma(p: ProgramaGuion, origen: OrigenGuion): string[] {
           undefined,
           `- Agrupa por tema (una persona, un estreno, un concierto, una polémica) y escribe una pieza por tema, hasta ${MAXIMO_TEMAS.deredenred}. Agrupar es ELEGIR, no juntar: de dos publicaciones o dos titulares del mismo tema tomas UNO, el que mejor lo cuente, y el otro no se menciona.`,
         ),
+        ...(materialDe(origen) === "mixto" ? [
+          ...redesAlCentro("deredenred"),
+          "- Sigue el orden de la lista: la publicación P1 es la que más se mueve, así que abre con la más popular que sea de espectáculos y sigue hacia abajo. Un tema grave (una muerte, una enfermedad, una condena) no abre ni cierra el segmento: se corre al medio.",
+        ] : []),
         "- `tema` nombra el tema en pocas palabras.",
         d(
           "- Si un video no es de espectáculos, farándula ni tendencias, déjalo fuera.",
@@ -596,9 +612,41 @@ function forma(p: ProgramaGuion, origen: OrigenGuion): string[] {
           undefined,
           `- Escribe una pieza por hecho, hasta ${MAXIMO_TEMAS.estadodealerta}. Agrupar es ELEGIR, no juntar: de dos publicaciones o dos titulares del mismo hecho tomas UNO, el que mejor lo cuente, y el otro no se menciona. Un titular solo tiene que ser de los que pueden ir solos.`,
         ),
+        ...(materialDe(origen) === "mixto" ? [
+          ...redesAlCentro("estadodealerta"),
+          "- Sigue el orden de la lista: la publicación P1 es la que más se mueve, así que abre con la más compartida y sigue hacia abajo.",
+        ] : []),
         "- `tema` nombra el hecho en pocas palabras y sin adjetivos: «Ataque armado en Rosarito», no «Brutal ataque en Rosarito».",
       ];
   }
+}
+
+/**
+ * Los programas cuyo centro son los clips de redes, en el guion mixto
+ * (cliente, 29 de septiembre de 2026). Primero De Red en Red («give a focus on
+ * what's trending on social media, just one note») y el mismo dia Estado de
+ * Alerta, que salia sin un solo clip: «a central theme for these sections is
+ * clips from social media». La regla general del marco prefiere un titular
+ * solo a una publicacion sola, y en la nota roja casi ninguna publicacion
+ * tiene un titular que cuente EL MISMO HECHO sin dudas: ese dia habia doce
+ * publicaciones locales de seguridad (el ataque frente a Plaza La Mesa, la
+ * explosion de Plaza Rio, la volcadura) y el guion leyo titulares. Aqui una
+ * publicacion sola va antes que un titular solo, y titular solo hay uno como
+ * mucho (guion.ts::NOTAS_SOLAS_MAXIMO lo comprueba).
+ */
+function redesAlCentro(p: "deredenred" | "estadodealerta"): string[] {
+  const que = p === "deredenred" ? "tema" : "hecho";
+  return [
+    `- Este programa es de lo que circula en redes: cada pieza sale de una publicación, con su titular si cuenta EL MISMO HECHO, o sola si ninguno lo cuenta. Esto manda sobre la preferencia general de arriba: aquí una publicación sola va antes que un titular solo.`,
+    // Medido en la primera corrida de De Red en Red, el mismo dia: la apertura
+    // anuncio «una noticia sobre el hijo de Emiliano Aguilar» y el guion no
+    // la traia. Con «hasta seis» y «ademas un titular al final», el modelo
+    // escribio seis mas uno y el tope corto el septimo.
+    `- Un titular solo (\`video\`: 0), a lo más UNO en todo el segmento, y solo si es de lo más notable del día y ninguna publicación de la lista cuenta ese ${que}. Va al final, después de las publicaciones. El segmento tiene como máximo ${MAXIMO_TEMAS[p]} piezas EN TOTAL, contando ese titular.`,
+    // Las dos primeras corridas de De Red en Red: «Circula en redes que»
+    // abria cinco de seis entradas.
+    "- «Circula en redes que» va una vez en el segmento como mucho. Varía la atribución («En redes se comparte que», «Anda circulando que», «Nos llega de redes que», «En un video que circula»), sin quitarla.",
+  ];
 }
 
 /** La forma de la salida, como ejemplo al final del prompt. */
@@ -958,6 +1006,32 @@ function armarPorTemas(p: Exclude<ProgramaGuion, "noticias33">, clips: ClipCrudo
  */
 export const TERMINOS_CONFERENCIA: readonly string[] = ["mañanera", "conferencia matutina", "conferencia del pueblo"];
 
+/**
+ * Cuantas notas leidas sin publicacion puede llevar un programa en el guion
+ * mixto. De Red en Red es de lo que circula en redes (cliente, 29 de
+ * septiembre de 2026: «just one note»), y el prompt lo pide; si el modelo
+ * escribe dos, el guion no sale, como con cualquier pieza fuera de su lista.
+ * Quitar la sobrante no alcanza: la apertura ya la anuncio.
+ */
+export const NOTAS_SOLAS_MAXIMO: Partial<Record<ProgramaGuion, number>> = { deredenred: 1, estadodealerta: 1 };
+
+/**
+ * Las palabras con que una entrada dice que lo suyo viene de redes. Lista
+ * abierta a proposito: lo que se comprueba es que haya ALGUNA, no una formula.
+ */
+export const ATRIBUCION_REDES = /\b(circula|circulan|circulando|redes|comparte|comparten|compartido|video|videos|publicación|publicaciones|publicó|publicaron|difunde|difunden|usuarios|internautas|viral)/i;
+
+/** Una publicacion sola del mixto (con clip y sin titular) cuya entrada no dice
+ *  de donde viene: lo que solo trae un pie, dicho como hecho. */
+export function sinAtribuir(plan: Pick<Plan, "origen">, clip: ClipGuion): boolean {
+  return plan.origen === "mixto" && clip.pase !== null && clip.nota === null && !ATRIBUCION_REDES.test(clip.entrada);
+}
+
+/** Las piezas del mixto que son un titular solo: sin pase, porque no hay clip. */
+export function notasSolasDe(plan: Pick<Plan, "origen">, clips: readonly ClipGuion[]): number {
+  return plan.origen === "mixto" ? clips.filter((c) => c.pase === null).length : 0;
+}
+
 const PARTES_COMUNES = new Set([
   "noticias", "noticia", "news", "oficial", "informa", "informativo", "diario", "canal", "radio",
   "tijuana", "mexicali", "ensenada", "tecate", "rosarito", "sandiego", "mexico", "mundo", "baja", "california",
@@ -1151,7 +1225,9 @@ export async function escribirGuion(plan: Plan, opciones: {
     ? porEje === null ? null : armarNoticias33(limpia.clips, resolver, porEje)
     : armarPorTemas(plan.programa, limpia.clips, resolver, porEje);
   if (armados === null) return fallo("No se pudo preparar el guion.", "modelo");
+  if (notasSolasDe(plan, armados) > (NOTAS_SOLAS_MAXIMO[plan.programa] ?? Infinity)) return fallo("No se pudo preparar el guion.", "modelo");
   if (guionFalsea(armados, [...plan.lista, ...(plan.titulares ?? [])], plan.origen)) return fallo("No se pudo preparar el guion.", "reglas");
+  if (armados.some((c) => sinAtribuir(plan, c))) return fallo("No se pudo preparar el guion.", "reglas");
 
   const guion: Guion = {
     origen: plan.origen,

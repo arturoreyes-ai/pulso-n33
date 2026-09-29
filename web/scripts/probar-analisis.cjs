@@ -1733,6 +1733,78 @@ async function comprobar() {
   const hastaMezcla = await publicacionesParaGuion(conFechas((d) => { d['redes.json'].generado = '2026-09-25T13:00:00Z'; }), AHORA_G);
   assert.equal(hastaMezcla.hasta, '2026-09-25T13:00:00Z');
 
+  // --- una publicacion por pie -----------------------------------------------
+  // 29 de septiembre de 2026: el mismo pie de DW en tres redes ocupaba tres de
+  // los doce lugares de De Red en Red. Se queda la primera por ritmo.
+  const repetido = await publicacionesParaGuion(conFechas((d) => {
+    d['facebook.json'].destacados[0].titulo = 'TIROTEO en la zona norte ';
+  }), AHORA_G);
+  assert.equal(repetido.videos.filter((v) => /tiroteo en la zona norte/i.test(v.titulo)).length, 1, 'el mismo pie plegado, una vez');
+  assert.equal(repetido.videos.find((v) => /tiroteo/i.test(v.titulo)).fuente, 'Tijuana Informa', 'gana la de mas ritmo');
+
+  // --- De Red en Red: lo que circula en redes, a lo mas un titular solo -------
+  // 29 de septiembre de 2026 (cliente): «focus on what's trending on social
+  // media, just one note», y un tono mas ligero.
+  const { NOTAS_SOLAS_MAXIMO, notasSolasDe } = cargar('lib/analisis/guion');
+  const sisRedMixto = sistemaDe('deredenred', 'mixto');
+  assert.match(sisRedMixto, /Un titular solo \(`video`: 0\), a lo más UNO en todo el segmento/);
+  assert.match(sisRedMixto, /Va al final, después de las publicaciones\. El segmento tiene como máximo 6 piezas EN TOTAL, contando ese titular\./, 'seis mas uno se corto y la apertura anuncio lo que no estaba');
+  assert.match(sisRedMixto, /Un tema grave \(una muerte, una enfermedad, una condena\) no abre ni cierra el segmento/);
+  assert.match(sisRedMixto, /«Circula en redes que» va una vez en el segmento como mucho/);
+  assert.match(sisRedMixto, /«En un video que circula»\), sin quitarla\./, 'variar la formula no quita la atribucion');
+  assert.match(sisRedMixto, /abre con la más popular que sea de espectáculos/);
+  assert.match(sisRedMixto, /Esto manda sobre la preferencia general de arriba: aquí una publicación sola va antes que un titular solo\./);
+  assert.ok(sisRedMixto.indexOf('Entre dos piezas igual de noticiosas') < sisRedMixto.indexOf('Esto manda sobre la preferencia general'), 'la regla del programa va despues de la general que corrige');
+  for (const s of [sistemaDe('noticias33', 'mixto'), sistemaDe('minutapolitica', 'mixto'), sistemaDe('deredenred', 'prensa'), sistemaDe('estadodealerta', 'prensa')]) {
+    assert.doesNotMatch(s, /a lo más UNO en todo el segmento/, 'solo De Red en Red y Estado de Alerta, y solo en el mixto');
+  }
+  for (const s of [sisRedMixto, sistemaDe('deredenred', 'tiktok')]) {
+    assert.match(s, /Aquí el conductor tiene chispa: frases cortas, un gancho/);
+    assert.match(s, /nunca a costa de alguien: sin burlas, sin apodos y sin adjetivos sobre nadie/);
+    assert.match(s, /una muerte, un ataque, un accidente, una enfermedad o una condena, cambia el tono/);
+    assert.match(s, /nunca de «tú»/, 'ligero no es tutear');
+  }
+  assert.doesNotMatch(sistemaDe('estadodealerta', 'mixto'), /tiene chispa/);
+  assert.deepEqual(NOTAS_SOLAS_MAXIMO, { deredenred: 1, estadodealerta: 1 });
+
+  // --- Estado de Alerta: los clips al centro ----------------------------------
+  // El mismo dia salia sin un solo clip: la regla general prefiere un titular
+  // solo a una publicacion sola, y habia doce publicaciones locales de
+  // seguridad. «A central theme for these sections is clips from social media.»
+  const sisAlerta = sistemaDe('estadodealerta', 'mixto');
+  assert.match(sisAlerta, /Este programa es de lo que circula en redes: cada pieza sale de una publicación, con su titular si cuenta EL MISMO HECHO, o sola si ninguno lo cuenta\. Esto manda sobre la preferencia general de arriba: aquí una publicación sola va antes que un titular solo\./);
+  assert.match(sisAlerta, /a lo más UNO en todo el segmento, y solo si es de lo más notable del día y ninguna publicación de la lista cuenta ese hecho\. Va al final, después de las publicaciones\. El segmento tiene como máximo 6 piezas EN TOTAL/);
+  assert.match(sisAlerta, /abre con la más compartida y sigue hacia abajo/);
+  assert.doesNotMatch(sisAlerta, /tiene chispa|Un tema grave/, 'el tono ligero y su regla son solo de De Red en Red');
+  assert.match(sisAlerta, /Sin morbo/, 'el tono de la nota roja sigue');
+
+  // --- la atribucion de una publicacion sola, en todo el mixto ----------------
+  const { sinAtribuir, ATRIBUCION_REDES } = cargar('lib/analisis/guion');
+  for (const s of [sisRedMixto, sisAlerta, sistemaDe('noticias33', 'mixto'), sistemaDe('minutapolitica', 'mixto')]) {
+    assert.match(s, /Una publicación sola lleva SIEMPRE, en su entrada, la frase que dice que viene de redes/);
+  }
+  const sola = (entrada) => ({ pase: 'Miren esto.', nota: null, entrada });
+  // Las dos entradas de la tercera corrida de De Red en Red, que la regla en
+  // el prompt no detuvo.
+  assert.equal(sinAtribuir({ origen: 'mixto' }, sola('Una fan le regaló rosas a Alfredo Olivas y él la dejó cantar en pleno concierto.')), true);
+  assert.equal(sinAtribuir({ origen: 'mixto' }, sola('A nueve años del fallecimiento de Hiromi, Fernando Santana vuelve a recordar a la cantante y a su hija Julieta.')), true);
+  for (const bien of ['Anda circulando que a Eden Muñoz le tocó sacar la chamba.', 'Nos llega de redes que Paopao cantó bajo la lluvia.',
+    'En un video que se comparte se ve el choque.', 'Usuarios reportan un incendio en la Zona Este.', '¡Qué momento! Circula en redes que Alfredo dejó cantar a una fan.']) {
+    assert.equal(sinAtribuir({ origen: 'mixto' }, sola(bien)), false, bien);
+  }
+  assert.equal(sinAtribuir({ origen: 'mixto' }, { pase: 'Veamos.', nota: { url: 'u', fuente: 'El Imparcial' }, entrada: 'Se informa que hubo un choque.' }), false, 'con su titular lo dice la prensa');
+  assert.equal(sinAtribuir({ origen: 'mixto' }, { pase: null, nota: null, entrada: 'Se informa que hubo un choque.' }), false, 'un titular solo no es una publicacion');
+  assert.equal(sinAtribuir({ origen: 'redes' }, sola('Hubo un choque.')), false, 'solo en el mixto');
+  assert.ok(ATRIBUCION_REDES.test('SE COMPARTE EN REDES'), 'sin importar mayusculas');
+  assert.match(fs.readFileSync(path.join(SRC, 'lib/analisis/guion.ts'), 'utf8'),
+    /if \(armados\.some\(\(c\) => sinAtribuir\(plan, c\)\)\) return fallo\("No se pudo preparar el guion\.", "reglas"\);/);
+  const solas = (n) => [...Array(n)].map(() => ({ pase: null })).concat([{ pase: 'Miren.' }]);
+  assert.equal(notasSolasDe({ origen: 'mixto' }, solas(2)), 2);
+  assert.equal(notasSolasDe({ origen: 'prensa' }, solas(3)), 0, 'en prensa toda pieza es nota leida: no cuenta');
+  assert.match(fs.readFileSync(path.join(SRC, 'lib/analisis/guion.ts'), 'utf8'),
+    /if \(notasSolasDe\(plan, armados\) > \(NOTAS_SOLAS_MAXIMO\[plan\.programa\] \?\? Infinity\)\) return fallo\("No se pudo preparar el guion\.", "modelo"\);/,
+    'dos titulares solos en De Red en Red: el guion no sale');
+
   // --- el ritmo: merito por hora al cosecharse -------------------------------
   assert.equal(GRAVEDAD_RITMO, 1.5);
   assert.equal(ritmo(80, 0), 80 / Math.pow(2, 1.5), 'dos horas de gracia');
@@ -2038,7 +2110,7 @@ async function comprobar() {
   for (const nav of ['components/chrome/riel.tsx', 'components/chrome/menu-lector.tsx']) {
     const codigo = fs.readFileSync(path.join(SRC, nav), 'utf8');
     assert.match(codigo, /sueltasVisibles\(analisisHabilitado\(\)\)/, `${nav} pinta las sueltas visibles`);
-    assert.doesNotMatch(codigo, /SUELTAS\.map\(|of SUELTAS/, `${nav} no pinta la lista entera`);
+    assert.doesNotMatch(codigo, /SUELTAS\.map\(|of SUELTAS\b/, `${nav} no pinta la lista entera`);
   }
   const paginaGuion = fs.readFileSync(path.join(SRC, 'app/guion/page.tsx'), 'utf8');
   assert.match(paginaGuion, /if \(!analisisHabilitado\(\)\) notFound\(\);/);
