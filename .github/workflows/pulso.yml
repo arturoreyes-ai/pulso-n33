@@ -210,8 +210,18 @@ jobs:
       # Une CSV abiertos y anexos finales por ID de contabilidad. Los ZIP del
       # INE se leen por HTTP Range: solo directorio central y Anexo II. Nunca
       # se usa el nombre para unir ni se publica una fila sin conciliacion.
+      #
+      # `continue-on-error` desde el 28 de septiembre de 2026: ese lunes la
+      # corrida de las 18:53Z murio aqui (certificates.godaddy.com paso detras
+      # de Sucuri y fallo el nombre del certificado) y se llevo consigo la
+      # prensa y las cuatro redes, ya calculadas: nada se commiteo y el guion
+      # de la tarde leyo la cosecha de las 6:56 am. Es una fuente semanal de
+      # dictamenes finales; si falla, sus datos se quedan como estaban y la
+      # siguiente semana se reintenta. El paso sale en rojo en el resumen.
       - name: Gasto electoral y financiamiento partidista
         if: github.event.schedule == '41 18 * * 1' || inputs.actualizar_gasto_electoral
+        timeout-minutes: 15
+        continue-on-error: true
         run: python -m pulso gasto-electoral
 
       # LO GRATUITO SE COMMITEA AQUI, antes de pagar nada (25 de septiembre de

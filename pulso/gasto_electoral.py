@@ -34,7 +34,44 @@ from .normalizar import fold
 
 
 AGENTE = "PulsoN33/{}".format(VERSION)
-CERTIFICADO_INTERMEDIO_IEEBC = "https://certificates.godaddy.com/repository/gdig2.crt"
+# La CA intermedia de ieebc.mx, fijada aqui y no descargada: ver _contexto_ieebc.
+# "Go Daddy Secure Certificate Authority - G2", firmada por "Go Daddy Root
+# Certificate Authority - G2" (que si esta en el almacen del sistema), valida
+# del 3 de mayo de 2011 al 3 de mayo de 2031. SHA-256 del DER:
+# 97:3A:41:27:6F:FD:01:E0:27:A2:AA:D4:9E:34:C3:78:46:D3:E9:76:FF:6A:62:0B:67:12:E3:38:32:04:1A:A6
+# Es la de la URL AIA del certificado de ieebc.mx
+# (http://certificates.godaddy.com/repository/gdig2.crt); el 28 de septiembre de
+# 2026 se bajo de ahi, `openssl verify` la valido contra esa raiz y la huella
+# coincidio con la que GoDaddy publica.
+CERTIFICADO_INTERMEDIO_IEEBC = """-----BEGIN CERTIFICATE-----
+MIIE0DCCA7igAwIBAgIBBzANBgkqhkiG9w0BAQsFADCBgzELMAkGA1UEBhMCVVMx
+EDAOBgNVBAgTB0FyaXpvbmExEzARBgNVBAcTClNjb3R0c2RhbGUxGjAYBgNVBAoT
+EUdvRGFkZHkuY29tLCBJbmMuMTEwLwYDVQQDEyhHbyBEYWRkeSBSb290IENlcnRp
+ZmljYXRlIEF1dGhvcml0eSAtIEcyMB4XDTExMDUwMzA3MDAwMFoXDTMxMDUwMzA3
+MDAwMFowgbQxCzAJBgNVBAYTAlVTMRAwDgYDVQQIEwdBcml6b25hMRMwEQYDVQQH
+EwpTY290dHNkYWxlMRowGAYDVQQKExFHb0RhZGR5LmNvbSwgSW5jLjEtMCsGA1UE
+CxMkaHR0cDovL2NlcnRzLmdvZGFkZHkuY29tL3JlcG9zaXRvcnkvMTMwMQYDVQQD
+EypHbyBEYWRkeSBTZWN1cmUgQ2VydGlmaWNhdGUgQXV0aG9yaXR5IC0gRzIwggEi
+MA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC54MsQ1K92vdSTYuswZLiBCGzD
+BNliF44v/z5lz4/OYuY8UhzaFkVLVat4a2ODYpDOD2lsmcgaFItMzEUz6ojcnqOv
+K/6AYZ15V8TPLvQ/MDxdR/yaFrzDN5ZBUY4RS1T4KL7QjL7wMDge87Am+GZHY23e
+cSZHjzhHU9FGHbTj3ADqRay9vHHZqm8A29vNMDp5T19MR/gd71vCxJ1gO7GyQ5HY
+pDNO6rPWJ0+tJYqlxvTV0KaudAVkV4i1RFXULSo6Pvi4vekyCgKUZMQWOlDxSq7n
+eTOvDCAHf+jfBDnCaQJsY1L6d8EbyHSHyLmTGFBUNUtpTrw700kuH9zB0lL7AgMB
+AAGjggEaMIIBFjAPBgNVHRMBAf8EBTADAQH/MA4GA1UdDwEB/wQEAwIBBjAdBgNV
+HQ4EFgQUQMK9J47MNIMwojPX+2yz8LQsgM4wHwYDVR0jBBgwFoAUOpqFBxBnKLbv
+9r0FQW4gwZTaD94wNAYIKwYBBQUHAQEEKDAmMCQGCCsGAQUFBzABhhhodHRwOi8v
+b2NzcC5nb2RhZGR5LmNvbS8wNQYDVR0fBC4wLDAqoCigJoYkaHR0cDovL2NybC5n
+b2RhZGR5LmNvbS9nZHJvb3QtZzIuY3JsMEYGA1UdIAQ/MD0wOwYEVR0gADAzMDEG
+CCsGAQUFBwIBFiVodHRwczovL2NlcnRzLmdvZGFkZHkuY29tL3JlcG9zaXRvcnkv
+MA0GCSqGSIb3DQEBCwUAA4IBAQAIfmyTEMg4uJapkEv/oV9PBO9sPpyIBslQj6Zz
+91cxG7685C/b+LrTW+C05+Z5Yg4MotdqY3MxtfWoSKQ7CC2iXZDXtHwlTxFWMMS2
+RJ17LJ3lXubvDGGqv+QqG+6EnriDfcFDzkSnE3ANkR/0yBOtg2DZ2HKocyQetawi
+DsoXiWJYRBuriSUBAA/NxBti21G00w9RKpv0vHP8ds42pM3Z2Czqrpv1KrKQ0U11
+GIo/ikGQI31bS/6kA1ibRrLDYGCD+H1QQc7CoZDDu+8CL9IVVO5EFdkKrqeKM+2x
+LXY2JtwE65/3YR8V3Idv7kaWKK2hJn0KCacuBKONvPi8BDAB
+-----END CERTIFICATE-----
+"""
 FIRMA_CENTRAL = b"PK\x01\x02"
 FIRMA_FINAL = b"PK\x05\x06"
 FIRMA_LOCAL = b"PK\x03\x04"
@@ -57,18 +94,30 @@ class Enlaces(HTMLParser):
             self.enlaces.append(href)
 
 
-def _contexto_ieebc(timeout=30):
+def _contexto_ieebc():
+    """El contexto TLS de ieebc.mx: el almacen normal mas su CA intermedia.
+
+    ieebc.mx entrega solo su certificado final, sin la intermedia (asi desde
+    el 13 de septiembre de 2026), y sin ella no hay cadena hasta la raiz. La
+    intermedia se agrega al almacen de ESTE contexto; nunca se desactiva
+    CERT_REQUIRED ni la comprobacion del nombre.
+
+    Hasta el 28 de septiembre de 2026 se bajaba en cada corrida, por HTTPS, de
+    certificates.godaddy.com. Ese dia GoDaddy puso ese host detras de Sucuri,
+    que responde HTTPS con un certificado de *.sucuri.net: fallo de nombre, y
+    el cron se cayo en el paso de gasto electoral sin conciliar el
+    financiamiento. Ahora va fijada en CERTIFICADO_INTERMEDIO_IEEBC, que
+    ademas quita una descarga de confianza en cada corrida.
+
+    Si ieebc.mx renueva con otra intermedia (su certificado vence el 29 de
+    diciembre de 2026), esto falla con "unable to get local issuer
+    certificate": bajar la de la URL AIA de su certificado nuevo, verificarla
+    con `openssl verify` contra la raiz del sistema y reemplazar la constante.
+    """
     global _CONTEXTO_IEEBC
     if _CONTEXTO_IEEBC is None:
-        # ieebc.mx entregaba solo el certificado final el 13 de septiembre de
-        # 2026. La CA intermedia se obtiene por HTTPS de la URL AIA de GoDaddy
-        # y se agrega al almacen normal; nunca se desactiva CERT_REQUIRED.
-        with urlopen(Request(CERTIFICADO_INTERMEDIO_IEEBC, headers={
-                "Accept": "application/pkix-cert", "User-Agent": AGENTE,
-        }), timeout=timeout) as r:
-            der = r.read()
         contexto = ssl.create_default_context()
-        contexto.load_verify_locations(cadata=ssl.DER_cert_to_PEM_cert(der))
+        contexto.load_verify_locations(cadata=CERTIFICADO_INTERMEDIO_IEEBC)
         _CONTEXTO_IEEBC = contexto
     return _CONTEXTO_IEEBC
 
