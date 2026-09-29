@@ -172,6 +172,39 @@ export async function estadoCorrida(id: string, token: string, solicitar: typeof
   return comoCorrida(await pedir(`${API_APIFY}/actor-runs/${id}`, { method: "GET" }, token, solicitar));
 }
 
+/**
+ * Borra el conjunto de datos de una corrida en Apify. Lo usa el seguimiento
+ * de publicaciones (lib/seguimiento/) en cuanto guardo lo limpio: el conjunto
+ * crudo trae nombre, usuario y foto de quien comento, y sin esto seguiria en
+ * Apify hasta que su retencion lo venza. La busqueda en vivo no lo llama
+ * porque sus conjuntos SON su almacen: cada pregunta los vuelve a leer.
+ * Nunca lanza: si falla, Apify lo vence solo.
+ */
+export async function borrarDataset(dataset: string, token: string, solicitar: typeof fetch = fetch): Promise<boolean> {
+  if (!/^[A-Za-z0-9]{8,40}$/.test(dataset)) return false;
+  try {
+    const r = await solicitar(`${API_APIFY}/datasets/${dataset}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+      cache: "no-store",
+      signal: AbortSignal.timeout(MS_LIMITE),
+    });
+    return r.ok || r.status === 404;
+  } catch {
+    return false;
+  }
+}
+
+/** Detiene una corrida que sigue viva. Nunca lanza. */
+export async function abortarCorrida(id: string, token: string, solicitar: typeof fetch = fetch): Promise<Corrida | null> {
+  if (!/^[A-Za-z0-9]{8,40}$/.test(id)) return null;
+  try {
+    return comoCorrida(await pedir(`${API_APIFY}/actor-runs/${id}/abort`, { method: "POST" }, token, solicitar));
+  } catch {
+    return null;
+  }
+}
+
 /** Los items de una corrida. Leerlos no cuesta: el cobro fue al producirlos. */
 export async function itemsDe(dataset: string, limite: number, token: string, solicitar: typeof fetch = fetch): Promise<Record<string, unknown>[]> {
   if (!/^[A-Za-z0-9]{8,40}$/.test(dataset)) throw new ErrorApify(400, "id de dataset invalido");

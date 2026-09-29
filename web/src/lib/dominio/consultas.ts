@@ -385,6 +385,10 @@ function serie(n: Conteo, genero: Genero): TonoSerie {
   return { ...n, total, tramos };
 }
 
+/** La misma serie, para quien cuenta tono fuera de una consulta: el
+ *  seguimiento de publicaciones (components/seguimiento/). */
+export const serieTono = serie;
+
 function contarTitulares(filas: readonly { tono: TonoTitular | null }[]): Conteo {
   return {
     positivo: filas.filter((r) => r.tono === "favorable").length,

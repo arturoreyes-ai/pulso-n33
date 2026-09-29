@@ -340,6 +340,21 @@ export function esOpinion(c: ComentarioLimpio, deBrigada: ReadonlySet<string>): 
   return !deBrigada.has(c.id) && !sinPalabras(c.texto);
 }
 
+/** Lo que se publica del texto de un comentario: las menciones enmascaradas y
+ *  recortado a TEXTO_MAXIMO puntos de codigo. Es el ultimo paso de
+ *  `publicarComentarios`, y lo usa tambien el seguimiento de publicaciones
+ *  (lib/seguimiento/cosecha.ts) antes de guardar: una mencion es la identidad
+ *  de un tercero. */
+export function enmascarar(texto: string): string {
+  const conMascara = texto.replace(RE_MENCION, MENCION_ENMASCARADA);
+  const p = puntos(conMascara);
+  return p.length > TEXTO_MAXIMO ? p.slice(0, TEXTO_MAXIMO - 1).join("").trimEnd() + "…" : conMascara;
+}
+
+/** Sin palabras una vez quitadas las menciones: una reaccion o solo un @. No
+ *  se publica. */
+export const soloReaccion = (texto: string): boolean => sinPalabras(texto.replace(RE_MENCION, ""));
+
 /** pulso/redes.py::_ordenar_comentarios: likes, luego lo mas reciente, luego
  *  el id, que es lo que hace el orden estable. */
 function ordenar(lista: ComentarioLimpio[]): ComentarioLimpio[] {
@@ -363,19 +378,19 @@ export function publicarComentarios(
   const deBrigada = brigadas(comentarios);
   const porPost = new Map<string, ComentarioLimpio[]>();
   for (const c of comentarios) {
-    if (!urls.has(c.post) || deBrigada.has(c.id) || sinPalabras(c.texto.replace(RE_MENCION, ""))) continue;
+    if (!urls.has(c.post) || deBrigada.has(c.id) || soloReaccion(c.texto)) continue;
     porPost.set(c.post, [...(porPost.get(c.post) ?? []), c]);
   }
   const salida: Record<string, ComentarioPublicado[]> = {};
   for (const url of [...porPost.keys()].sort()) {
     const lista = ordenar(porPost.get(url)!);
     const elegidos = [...lista.slice(0, visibles), ...lista.slice(visibles).filter((c) => c.likes > 0)].slice(0, maximo);
-    salida[url] = elegidos.map((c) => {
-      let texto = c.texto.replace(RE_MENCION, MENCION_ENMASCARADA);
-      const p = puntos(texto);
-      if (p.length > TEXTO_MAXIMO) texto = p.slice(0, TEXTO_MAXIMO - 1).join("").trimEnd() + "…";
-      return { texto, likes: c.likes, fecha: c.fecha, sentimiento: c.idioma === "es" ? tono.get(c.id) ?? null : null };
-    });
+    salida[url] = elegidos.map((c) => ({
+      texto: enmascarar(c.texto),
+      likes: c.likes,
+      fecha: c.fecha,
+      sentimiento: c.idioma === "es" ? tono.get(c.id) ?? null : null,
+    }));
   }
   return salida;
 }

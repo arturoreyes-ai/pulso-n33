@@ -6,6 +6,7 @@ import type { ComentarioPublicado, DocRedesComentarios } from "@/lib/datos/tipos
 import * as F from "@/lib/dominio/frases";
 import { NOMBRE_RED, type PublicacionVisual } from "@/lib/dominio/publicaciones";
 import { EstadoCarga } from "@/components/ui/estado-carga";
+import { ChipSentimiento } from "@/components/ui/chip-sentimiento";
 import { clasesInsignia } from "@/components/ui/clases";
 
 /**
@@ -34,24 +35,6 @@ export interface Textos {
 }
 
 const SIN_TEXTO = "El texto de los comentarios no está disponible en esta vista.";
-
-function ChipSentimiento({ s }: { s: ComentarioPublicado["sentimiento"] }) {
-  if (s === null) return null;
-  const clase =
-    s === "negativo"
-      ? "border-baja/30 text-baja/80"
-      : s === "positivo"
-        ? "border-sube/30 text-sube/80"
-        : "border-filo text-tinta-meta";
-  return (
-    <span
-      title="Cómo suena la frase. No mide la postura hacia una persona."
-      className={`${clasesInsignia("tono")} ${clase}`}
-    >
-      {s}
-    </span>
-  );
-}
 
 /* Los likes de cada comentario se fueron el 17 de septiembre de 2026 con las
    cifras de la tarjeta (visor-redes.tsx). Siguen decidiendo el ORDEN -- estos

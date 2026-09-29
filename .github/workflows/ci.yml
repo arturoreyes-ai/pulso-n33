@@ -106,6 +106,9 @@ jobs:
       - name: Tipos
         run: pnpm tipos
 
+      - name: Aprobación de acceso offline
+        run: node scripts/probar-aprobacion.cjs
+
       - name: Contrato de garitas offline
         run: node scripts/probar-garitas.cjs
 
@@ -149,6 +152,13 @@ jobs:
       # segunda pasada. Sin red, sin Apify, sin base de datos y sin modelo.
       - name: Contrato de la búsqueda en vivo offline
         run: node scripts/probar-redes-en-vivo.cjs
+
+      # El seguimiento de publicaciones: que lo guardado no traiga identidad,
+      # que los topes corten antes de pedir nada, que una sola pregunta guarde
+      # cada lectura, que el crudo se borre de Apify y que la regla 5 y el
+      # idioma apaguen el tono. Sin red, sin Apify, sin base y sin modelo.
+      - name: Contrato del seguimiento de publicaciones offline
+        run: node scripts/probar-seguimiento.cjs
 
       - name: Escalas de diseno
         run: pnpm tokens
