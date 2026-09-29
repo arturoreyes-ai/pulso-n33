@@ -1,8 +1,694 @@
 {
  "esquema": 1,
  "ventana_dias": 30,
- "total": 9047,
+ "total": 9084,
  "notas": [
+  {
+   "id": "097f1c4266235274",
+   "titulo": "Lista de albergues disponibles en Hermosillo ante posibles efectos del huracán “Polo”",
+   "url": "https://www.elimparcial.com/son/hermosillo/2026/09/28/lista-de-albergues-disponibles-en-hermosillo-ante-posibles-efectos-del-huracan-polo/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T12:47:56+00:00",
+   "capturado": "2026-09-29T05:43:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6225,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/MXYSNMI52NCUPBD2T6REAOBL3Q.jpg?auth=469d169e79cfd2fb5acf626dbefc316f39846d80aab65695bc0378044ee5a01d&smart=true&width=1620&height=1080",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "cdb7b552011b8eb4",
+   "titulo": "Vacaciones de invierno 2026: estas son las fechas de salida y regreso a clases, según la SEP",
+   "url": "https://www.elimparcial.com/mexico/2026/09/29/vacaciones-de-invierno-2026-estas-son-las-fechas-de-salida-y-regreso-a-clases-segun-la-sep/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T12:43:45+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7448,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/SH762R2CW5ASTBB5HYSW47HWOA.png?auth=c897564ea7ac542506217af48d03c00c668fa6645d1472b8e3186790408b6ff1&smart=true&width=1200&height=720",
+   "rubros": []
+  },
+  {
+   "id": "2d9ca9c5fb0e1b3d",
+   "titulo": "¿Quiénes son los 17 coordinadores de la Defensa de la 4T definidos por Morena?",
+   "url": "https://www.elimparcial.com/mexico/2026/09/28/quienes-son-los-17-coordinadores-de-la-defensa-de-la-4t-definidos-por-morena/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T12:41:45+00:00",
+   "capturado": "2026-09-29T05:43:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6451,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/AVPPNPLYKFEXXCLHOZRVAIIEW4.jpg?auth=88518a2ec0e31b7c4b65450d66ee287bac985ea9c13a45fe1f6a9565882558c5&smart=true&width=1920&height=1200",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "ef37367fd46c6f51",
+   "titulo": "Amílcar Olán: Quién es el amigo de Andy López Beltrán localizado en Suiza, por qué lo investigan y esto dijo Sheinbaum sobre su caso",
+   "url": "https://www.elimparcial.com/mexico/2026/09/28/amilcar-olan-quien-es-el-amigo-de-andy-lopez-beltran-localizado-en-suiza-por-que-lo-investigan-y-esto-dijo-sheinbaum-sobre-su-caso/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T12:41:21+00:00",
+   "capturado": "2026-09-28T23:17:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5712,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/WPO22X7KSZBE5PKFE4W3LI5LTQ.jpg?auth=fd6890cf2bf45ec51124055dd29cbed88f122af4236380e7b016b052a154b11a&smart=true&width=1200&height=720",
+   "rubros": []
+  },
+  {
+   "id": "6e99e0bb92e6c7db",
+   "titulo": "La Sosa Nostra: qué es el grupo de Gerardo Sosa y por qué detuvieron a su hija",
+   "url": "https://www.elimparcial.com/mundo/2026/09/29/la-sosa-nostra-que-es-el-grupo-de-gerardo-sosa-y-por-que-detuvieron-a-su-hija/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T12:40:59+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6199,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/ETDMEEUP2FEQ5HGKUWXBRXS4AE.png?auth=a4bb255cde3984f2f80381bf979fbd65127bd1fc1e691622b665ce5b11107b1f&smart=true&width=1200&height=720",
+   "rubros": []
+  },
+  {
+   "id": "f4d5a05e1a33483e",
+   "titulo": "Huracán Polo EN VIVO hoy 29 de septiembre: trayectoria, lluvias y afectaciones",
+   "url": "https://www.elimparcial.com/mexico/2026/09/29/huracan-polo-en-vivo-hoy-29-de-septiembre-trayectoria-lluvias-y-afectaciones/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T12:22:31+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7373,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/UPLKHFGXDBGADADOFUIQW5YSKA.png?auth=4b77acbeb19ee3e9f7e4e892997bffd7a6134d47a9d2875df28fd70d2c5b61a9&smart=true&width=1200&height=720",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "4e35769e66b9ed87",
+   "titulo": "Efemérides del 29 de septiembre: ¿qué pasó un día como hoy en México y el mundo?",
+   "url": "https://www.elimparcial.com/mundo/2026/09/29/efemerides-del-29-de-septiembre-que-paso-un-dia-como-hoy-en-mexico-y-el-mundo/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T12:22:03+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7334,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/SYCXUGSJXBH2THK324EPZHY6XE.jpg?auth=452a98c84d838a5aa9e5ea1f51e898211b715dd05156491418bc19ab9505f576&smart=true&width=7952&height=5304",
+   "rubros": []
+  },
+  {
+   "id": "ff83a28b0fcf8c26",
+   "titulo": "Whistleblower Alleges Millions of Driscoll’s Berries Sent to Canada With Excess Chemical Levels + More",
+   "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNR2V5RmREOUFXSkNGdzU5WTJ4T3Q0RGFhTF9nYXJLRW0tUGlqT05pY20yVFE1MlZNQUMxcTNaVHpHbUZTMjNNUl80S1RONHM1dkpnZnZ2MWJNNG1QdE5BS2hEUUNXZGdjNzVfc0s1T3F0b1JqdVFZQnJiS09nbFRyMFp4QmVjaDB0cWltRDRVUTdsRVBEaV9jM3dFN3ZEblBvam5ULXBDSGJpZVVNWTUxQ1g2US1mcWJ3RmROR3RpeEZnZGV4NmZwSmUxbC1NdkwtTThfUg?oc=5",
+   "dominio": "publichealthpolicyjournal.com",
+   "fuente": "gn-a091738e547f",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T12:21:41+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_aguasnegras",
+   "rubros": []
+  },
+  {
+   "id": "401de014c695af6d",
+   "titulo": "Maricarmen, de 87 años, da sus primeras palabras tras ser desalojada de la casa donde vivió 71 años: “No he logrado defender mi casa, pero sí he luchado para que los demás aprendan a luchar por la suya”",
+   "url": "https://www.elimparcial.com/mundo/2026/09/29/maricarmen-de-87-anos-da-sus-primeras-palabras-tras-ser-desalojada-de-la-casa-donde-vivio-71-anos-no-he-logrado-defender-mi-casa-pero-si-he-luchado-para-que-los-demas-aprendan-a-luchar-por-la-suya/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T11:56:32+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5115,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/6RO44KXZM5CQNNUXHBO2GYX7LM.png?auth=e962971f0e2b411bb392c5e5a43a20f3ecb8d89f90b41f17a85b3f031f85e8bf&smart=true&width=1200&height=720",
+   "rubros": []
+  },
+  {
+   "id": "943ded392c7af6db",
+   "titulo": "México vs Perú: A qué hora y dónde ver EN VIVO el segundo juego de la era Rafael Márquez",
+   "url": "https://www.elimparcial.com/deporte/2026/09/29/mexico-vs-peru-a-que-hora-y-donde-ver-en-vivo-el-segundo-juego-de-la-era-rafael-marquez/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T11:04:00+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.8028,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/3QVFJTFVZNCQPGAEKZWJJ2WOUM.jpg?auth=2309df4fc473dc09b8abd8a4186fa718d3c15551246cc29a527a6f2e651001ee&smart=true&width=1920&height=1080",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "cef8da16ca7a63b8",
+   "titulo": "Logra FGE vincular a proceso a mujer por secuestro agravado en San Quintín",
+   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOZzlndlctekdrLWVIaVJvN2Q2NFFEVzh2WnZkY0dfWXdzSF8wanlBY0tmZnJfbl9pX0dIQ0VacWw2SjlQcXEtWWJ0djBibUFBUy1adzNLdHpiRWFKSVdxT3NRRGFCUnlqLXF6eENWMWpjeDhKaUY1ZlhIWDlDd3JiMV9sX0tFcGFub3BDU3BSTEg4V1kyTFhnV2w0c2x2MXp2OU93dzZ4eTJLcURJZE83TDF3?oc=5",
+   "dominio": "encontrastenews.com",
+   "fuente": "gn-b69697f8b5c8",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Quintín"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T10:26:11+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.4038,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "cb26d12a6992900e",
+   "titulo": "Sandra’s Restaurant: dónde comer langosta en Puerto Nuevo, Baja California",
+   "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOUHlfMGF1RGYxVDJvb2FscG9mN1NjWHUwTWRBMWk0VWQ4eVVSTUxreXFMVkh0OFNTdjVKalg0YjQwaU1EcS0ybEplQll1dmZlMHp6akhPeU9wMFo5WlNiX01vUWlhdXNtQXNNZlkxVW85RWQ5VDdQYVdhY1hSUldaWkR3cUk3SXNNWE12Q2NpdWd1Um1hMjhsN2pEdDctZXlRRkN3Nzhkd3hxbXJqWnhOeTRGeThnOElZNjVOWk1XMA?oc=5",
+   "dominio": "travelandleisure-es.com",
+   "fuente": "gn-f4e2e15e1bf4",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Playas de Rosarito"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T10:21:14+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6855,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
+   "rubros": []
+  },
+  {
+   "id": "3b5d00442a42834f",
+   "titulo": "Aún no reciben ayuda por los daños que dejó Polo, señalan en Puerto Vicente Guerrero",
+   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQTlhKcnlMcktUaDR1QzVQbFluVDR1Q0N1bXA2SXFmcmowOEhWdU5WVXdFY0luRnMySVhJempVQkRzMi0yRm1ZQ01Nd0dZNmlodDVBbDFLQTZlUnJsemFhT0dISjFZZXhhMHNJRTVlbHFncnBHMkxvOHB6aEpEZEFsbHBqamY0RkhadXVCV0Y2T1pTcGluSW9RS0ozT0V0VDcxbXpyS0xxbWJJVTA?oc=5",
+   "dominio": "suracapulco.mx",
+   "fuente": "gn-2c2bd8511d76",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Quintín"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T10:19:00+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9083,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
+   "id": "ed2b604dad6d8893",
+   "titulo": "Regresa Semana de Teatro XVIII para Niñas y Niños Baja California “Ray Garduño”",
+   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPaWJObWt5VkpLQ3IzT2dObk9DT3p6NVo0UHRLdDc2N0dSbTJ3RVloVWwxN1UzMUY2aDkzQTQ3anNhTW1HQXpoOUg2UTZRU2lBSzkyOURiZkp0QVgxZGFfRlVuUlB2ZGVDTGdPSEE4aFo4MHllUjYtakhJOU4ybFNNVE5UdUtLN1VFS0NuMUlHYUFPSnc5U1o1M0JHc2ZUOHpsbVVwWTBsdEx6UGRmMDFZbkZGMjlrQQ?oc=5",
+   "dominio": "encontrastenews.com",
+   "fuente": "gn-b69697f8b5c8",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T09:56:12+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5608,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate",
+   "rubros": []
+  },
+  {
+   "id": "0068cea07d401986",
+   "titulo": "SAT: ¿no encuentras citas disponibles? Estas son tus alternativas",
+   "url": "https://www.elimparcial.com/mexico/2026/09/29/sat-no-encuentras-citas-disponibles-estas-son-tus-alternativas/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T09:50:36+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5308,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/AJLZMHOFVRDR3P6QJ2VO54UAXM.png?auth=ade9ae1a52d036ec0ba6dcd0ebd72f754569a5bf63cb532f1d08514450368c5e&smart=true&width=1200&height=720",
+   "rubros": []
+  },
+  {
+   "id": "0be1109cb6c81f9a",
+   "titulo": "Clases en Sonora: ¿qué escuelas no tendrán clases hoy 29 de septiembre por el Huracán Polo?",
+   "url": "https://www.elimparcial.com/son/sonora/2026/09/29/clases-en-sonora-que-escuelas-no-tendran-clases-hoy-29-de-septiembre-por-el-huracan-polo/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T09:27:12+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.4906,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/K6BVSXSTQFGIVKBPH3CEYHTYHQ.png?auth=ba2060b2d4629b44557bc43faa4d71f170427593386c426c6605e5972fe367e5&smart=true&width=1200&height=720",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "be0282a3cf22580e",
+   "titulo": "Landlords Allegedly Breaking Renter Transparency Law",
+   "url": "https://voiceofsandiego.org/2026/09/29/landlords-allegedly-breaking-renter-transparency-law/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T09:15:00+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2026/07/vito-di-stefano-7-8-26-32-1024x684.jpg",
+   "rubros": []
+  },
+  {
+   "id": "494723b9ff73f5cc",
+   "titulo": "4 ways to avoid getting ripped off, according to a pricing expert",
+   "url": "https://www.kpbs.org/news/economy/2026/09/29/4-ways-to-avoid-getting-ripped-off-according-to-a-pricing-expert",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T09:01:00+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/62f068b/2147483647/strip/false/crop/3000x3000+1167+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F21%2F67%2Fe0fa205a497d986d61027f5d0672%2Ff80f28ba-6862-4a9d-8920-821c9f2417eb.jpg",
+   "rubros": []
+  },
+  {
+   "id": "a674fd7e0277cb9a",
+   "titulo": "Imperial Beach and Tijuana Slough Shorelines Closed Over Sewage as Five More San Diego Beaches Carry Bacteria Advisories",
+   "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPLXdSbFBQQkRXb3UzTlljam1BWjhheExpMllFbTU4c21RTmJ5UkJaaXNWWGdrSTd1VlpBUmNaQnFfOWJOTXFqS0ljSF9SZGphOUxBcElCaDRHR01WNlpzbklwTnNTVmtRbTN6WHRSSWNQSVNBMFlGNi1UeXlSWnhjM3dsVkdkeUg1UjdlaW9JcDVLdVZLUFE?oc=5",
+   "dominio": "medicaldaily.com",
+   "fuente": "gn-f27bb48e0b18",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana",
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T09:00:12+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
+  },
+  {
+   "id": "9868e37970ae0dcd",
+   "titulo": "As the U.S. signals a smaller Middle East footprint, Turkey is ready to step in",
+   "url": "https://www.kpbs.org/news/international/2026/09/29/as-the-u-s-signals-a-smaller-middle-east-footprint-turkey-is-ready-to-step-in",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T09:00:00+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/92f418f/2147483647/strip/false/crop/3756x3756+939+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F89%2F70%2F23eeab59427cb164218e9b77c20b%2Fap26265582716871.jpg",
+   "rubros": []
+  },
+  {
+   "id": "547b05cd8e9f4cea",
+   "titulo": "San Diego Passed New Renter Protections Last Year. Tenants Say Landlords Are Already Breaking Them.",
+   "url": "https://voiceofsandiego.org/2026/09/29/san-diego-passed-new-renter-protections-last-year-tenants-say-landlords-are-already-breaking-them/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T09:00:00+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2026/09/vito-di-stefano-9-16-26-16-1024x684.jpg",
+   "rubros_categoria": [
+    "politica"
+   ],
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "59d1d639d8a4948b",
+   "titulo": "News organizations ask court to bar White House enforcement of access ban",
+   "url": "https://www.kpbs.org/news/politics/2026/09/29/news-organizations-ask-court-to-bar-white-house-enforcement-of-access-ban",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T08:13:11+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/0263fa7/2147483647/strip/false/crop/4128x4128+1032+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Ffb%2F39%2F65c7ab674292a366b64a2ffb7bad%2Fap26269461154343.jpg",
+   "rubros": []
+  },
+  {
+   "id": "589fa1ed91c9f2b0",
+   "titulo": "California to overhaul decades-old air safety limit for foul, toxic gas",
+   "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxNMzM0Mm0yUjlPaUJFc21Ccjk5T0pkMmRkZHMyM2FEYzhEd2tiWDBuWllGakJsQURmRmUxWDlTa2VOS3l3Q05tX0l6OUNwZ2VadnFaTE1ia3Fkd3BITS02MTFhVEY1bWt2S1VMejhDUXp6Yk9sN051dktPcnRYT0RPQVRaZlhTX2p1SkpjeklsWlVFLU04bUtnM3IycTJyV1NNQnd3MVd2YmprWVgtb2JsZ2RzOXNTVHRxYTZLMHBxN0xXWmlyVzBiM3ZpanJETlNLWUVhd1F2Z3UyOERkYnhaRnJsNlVPMHZsdWQ0?oc=5",
+   "dominio": "ivpressonline.com",
+   "fuente": "gn-70815d93ef01",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T07:00:00+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_aguasnegras",
+   "rubros": []
+  },
+  {
+   "id": "71a6636f6100e800",
+   "titulo": "OpenAI delays latest model over security concerns, as industry faces pressure",
+   "url": "https://www.kpbs.org/news/science-technology/2026/09/28/openai-delays-latest-model-over-security-concerns-as-industry-faces-pressure",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T06:34:43+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/ff7bba6/2147483647/strip/false/crop/2667x2667+667+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Ffd%2Fbe%2Fae7a5c144cc79a5b256b06dbca7a%2Fap26260139104766.jpg",
+   "rubros": [
+    "ia"
+   ]
+  },
+  {
+   "id": "6743b89264f7dee8",
+   "titulo": "Agroexportaciones estarán respaldadas por Certificado laboral: Sheinbaum",
+   "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOODB5UHg3Sk9mLV9hUFhPaDZMZmY2YkJSUGVwUE5ieXpVU2liMUV5ZHBwQjZ4cGZ5WWYySExPRkVJS1ZzQl92S2xMdlljUTh4SE5TQlNZem05RlpHcXVwbURsRXVSOHk5bjZ6RlUxRTV2cF9XcUdiaGY3ZlVBcGNKd3lMVDc4bkk5RGFDUzRxYTB2bkJIMkhsYl8wVV92Z05DbDFIWXByN3pBYUIxdmVnZ09qSjRxcmt2WVUwTm00V29kdWEtQi12Rk1UNlZFQdIBzgFBVV95cUxOODB5UHg3Sk9mLV9hUFhPaDZMZmY2YkJSUGVwUE5ieXpVU2liMUV5ZHBwQjZ4cGZ5WWYySExPRkVJS1ZzQl92S2xMdlljUTh4SE5TQlNZem05RlpHcXVwbURsRXVSOHk5bjZ6RlUxRTV2cF9XcUdiaGY3ZlVBcGNKd3lMVDc4bkk5RGFDUzRxYTB2bkJIMkhsYl8wVV92Z05DbDFIWXByN3pBYUIxdmVnZ09qSjRxcmt2WVUwTm00V29kdWEtQi12Rk1UNlZFQQ?oc=5",
+   "dominio": "eleconomista.com.mx",
+   "fuente": "gn-307344280fcb",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T06:23:02+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6191,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
+   "id": "993cfcb70f0a324a",
+   "titulo": "Meet the candidate for County Assessor/Recorder/Clerk",
+   "url": "https://www.kpbs.org/news/politics/2026/09/28/meet-the-candidates-for-county-assessor-recorder-clerk-race-explainer-2026-general-election-san-diego",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T06:22:34+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/26f1e0a/2147483647/strip/false/crop/400x400+1042+0/resize/600x600!/quality/90/?url=http%3A%2F%2Fkpbs-brightspot.s3.us-west-2.amazonaws.com%2F11%2F18%2Fb1163cc44c4e9d1c2358e5b37d3c%2Fvoterhub-main-1240x200-2x.jpg",
+   "rubros": []
+  },
+  {
+   "id": "882d16d4b25dbc43",
+   "titulo": "Tennessee is set to execute a woman for the first time in 200 years",
+   "url": "https://www.kpbs.org/news/national/2026/09/28/tennessee-is-set-to-execute-a-woman-for-the-first-time-in-200-years",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T05:59:18+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/1f03a08/2147483647/strip/false/crop/3778x3778+944+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F95%2Fea%2Fe04a2cef4c16b86029fb26b49d81%2Fap26271028154861.jpg",
+   "rubros": []
+  },
+  {
+   "id": "68d2c3d6e071946d",
+   "titulo": "Así funciona Kraaken, la plataforma que aprovecha la energía térmica del océano para producir 30 millones de litros de agua al día y operar centros de inteligencia artificial sin depender de la red eléctrica convencional",
+   "url": "https://www.elimparcial.com/locurioso/2026/09/28/asi-funciona-kraaken-la-plataforma-que-aprovecha-la-energia-termica-del-oceano-para-producir-30-millones-de-litros-de-agua-al-dia-y-operar-centros-de-inteligencia-artificial-sin-depender-de-la-red-electrica-convencional/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T05:53:42+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4974,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/I7NX5FNGRJC5ZHGRUA7PN6L2J4.jfif?auth=f893e0d103bc39bbb24ee0b99d8294811f3ec7996fb11291bcb729895db216ae&smart=true&width=1365&height=768",
+   "rubros": [
+    "ia"
+   ]
+  },
+  {
+   "id": "bd2f178e7f720456",
+   "titulo": "El Olinia 1 tendrá baterías fabricadas en Puebla y podrá recorrer más de 125 kilómetros por carga, con un costo de operación anunciado de 49 centavos por kilómetro y una meta para elevar de 50 a 75% sus componentes de origen mexicano hacia 2030",
+   "url": "https://www.elimparcial.com/mexico/2026/09/28/el-olinia-1-tendra-baterias-fabricadas-en-puebla-y-podra-recorrer-mas-de-125-kilometros-por-carga-con-un-costo-de-operacion-anunciado-de-49-centavos-por-kilometro-y-una-meta-para-elevar-de-50-a-75-sus-componentes-de-origen-mexicano-hacia-2030/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T05:40:03+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5828,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/FOH2ETWBUFHMBCUGXYHT3QT6DE.png?auth=54c079524a672952e13eb1bf30994838e2896017f0697d627a81291e58a98ee6&smart=true&width=1920&height=1080",
+   "rubros": []
+  },
   {
    "id": "8dc0e7f8dc670653",
    "titulo": "Condenan a falso médico de Texas que facturó más de 26 millones de dólares al seguro militar de EEUU por tratamientos que no eran necesarios y gastó parte del dinero en una Cybertruck dorada",
@@ -228,6 +914,30 @@
    "rubros": []
   },
   {
+   "id": "89d96c1425eae8b1",
+   "titulo": "Muere una persona en volcadura y 46 fueron atendidas",
+   "url": "https://www.elimparcial.com/son/hermosillo/2026/09/28/muere-una-persona-en-volcadura-y-hay-46-lesionados/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T04:46:21+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5234,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/SC5UFIFKCJECXC7PBIZFDIBB6E.jpeg?auth=38015afa5f4126d3546ffc3de168e23d6db31da496f41278b2acb00741bd3071&smart=true&width=1024&height=682",
+   "rubros": []
+  },
+  {
    "id": "c33cdbb7d5fcbb14",
    "titulo": "Niega Recursos Hidráulicos manejo a modo de la Vicente Guerrero",
    "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNVm5Tc0kzSnBtYTJ2a0l2SVBiUzVCTlc3dzd5d05id08yUXIyOU5qaXBKbFQ4dk5fUHFQZzR4OXBaUS1LNzlCeUR5dy1TbFc2Tk02c2hjRzVKOWI2bnRjN3NxUzRuX2JOOXR3dzVMdXNPWFRMR0ZHLXR3VGVuNkJ0bGdaajlMV2pxc1Z1QjBZQ3l1dkx3dGlGV0pFbWt4eW9GUEJWVVdB?oc=5",
@@ -432,32 +1142,6 @@
    ]
   },
   {
-   "id": "2d9ca9c5fb0e1b3d",
-   "titulo": "¿Quiénes son los 17 coordinadores de la Defensa de la 4T definidos por Morena?",
-   "url": "https://www.elimparcial.com/mexico/2026/09/28/quienes-son-los-17-coordinadores-de-la-defensa-de-la-4t-definidos-por-morena/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-09-29",
-   "publicado": "2026-09-29T04:04:25+00:00",
-   "capturado": "2026-09-29T05:43:25+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.6451,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/AVPPNPLYKFEXXCLHOZRVAIIEW4.jpg?auth=88518a2ec0e31b7c4b65450d66ee287bac985ea9c13a45fe1f6a9565882558c5&smart=true&width=1920&height=1200",
-   "rubros": [
-    "politica"
-   ]
-  },
-  {
    "id": "ebddded00049adab",
    "titulo": "“Lo cachan” tirando basura en la vía pública y es detenido",
    "url": "https://www.elimparcial.com/mxl/policiaca/2026/09/28/lo-cachan-tirando-basura-en-la-via-publica-y-es-detenido/",
@@ -482,6 +1166,31 @@
    "rubros": [
     "seguridad"
    ]
+  },
+  {
+   "id": "f5be90e22898103e",
+   "titulo": "Baja California, lugar 14 del país en venta de autos híbridos y eléctricos: suma 6,300 unidades en el sexenio",
+   "url": "https://www.uniradioinforma.com/sociedad/baja-california-lugar-14-pais-venta-autos-hibridos-electricos-suma-6300-unidades-sexenio-n905212",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T04:00:00-07:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5887,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
   },
   {
    "id": "91873ef401928786",
@@ -728,7 +1437,7 @@
    "delegaciones": [],
    "alcance": "nacional",
    "fecha": "2026-09-29",
-   "publicado": "2026-09-29T03:13:57+00:00",
+   "publicado": "2026-09-29T03:14:00+00:00",
    "capturado": "2026-09-29T05:43:25+00:00",
    "figuras": [],
    "postura": {
@@ -1104,6 +1813,83 @@
    "rubros": []
   },
   {
+   "id": "9ca783fa9ef1e988",
+   "titulo": "Día del corazón",
+   "url": "https://oem.com.mx/lavozdelafrontera/analisis/dia-del-corazon-32333449",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T02:00:00+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5002,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "86bddba13c6d7d40",
+   "titulo": "Entre Teclas / Gusano destructor",
+   "url": "https://oem.com.mx/lavozdelafrontera/analisis/entre-teclas-gusano-destructor-32329371",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T02:00:00+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6655,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "f8ff2ea4b89e2a16",
+   "titulo": "Cierran puertos del Pacífico por el paso de la tormenta tropical 'Rachel' y el huracán 'Polo'",
+   "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxONVZ2dUxHQV8wMUFsSXdSSUFUZ3cxRTlEbW9xalMwMmxIeHJmZmx1UEVkR3RwQmFjeTZRZC1HOGNFbkJ1SDE4bkRmdWpSanBOUzJuN3hNbkxyUTVEdEQwd0FSUW81LTFRdzFaUTlqTVJzZ1RzXzBkSEFqaTU3Z0xLQnh6NlJsbFZpM0Qtd3dncVBJRHFSX2hLWXk5OXNRT0dPT0dFZjN0c3dDMEphOFBPcjJlWUZ5X1lmNm9CRnRhVTZvTlU?oc=5",
+   "dominio": "xeva.com.mx",
+   "fuente": "gn-a7e59bbb2dd8",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T01:54:00+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5599,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
    "id": "5c5db1c1129cb1d5",
    "titulo": "Fingía ser cliente para asaltar tiendas a punta de pistola en Mexicali",
    "url": "https://www.elimparcial.com/mxl/policiaca/2026/09/28/fingia-ser-cliente-para-asaltar-tiendas-a-punta-de-pistola-en-mexicali/",
@@ -1182,32 +1968,6 @@
    "rubros": []
   },
   {
-   "id": "097f1c4266235274",
-   "titulo": "Lista de albergues disponibles en Hermosillo ante posibles efectos del huracán “Polo”",
-   "url": "https://www.elimparcial.com/son/hermosillo/2026/09/28/lista-de-albergues-disponibles-en-hermosillo-ante-posibles-efectos-del-huracan-polo/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "fuera",
-   "fecha": "2026-09-29",
-   "publicado": "2026-09-29T01:38:16+00:00",
-   "capturado": "2026-09-29T05:43:25+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.6225,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/MXYSNMI52NCUPBD2T6REAOBL3Q.jpg?auth=469d169e79cfd2fb5acf626dbefc316f39846d80aab65695bc0378044ee5a01d&smart=true&width=1620&height=1080",
-   "rubros": [
-    "clima"
-   ]
-  },
-  {
    "id": "acd4066f1e80f607",
    "titulo": "Adulto mayor recibe balazo en la mandíbula mientras estaba en una llantera",
    "url": "https://jornadabc.com.mx/bajacalifornia/adulto-mayor-recibe-balazo-en-la-mandibula-mientras-estaba-en-una-llantera/",
@@ -1230,6 +1990,33 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "rubros": []
+  },
+  {
+   "id": "81e21b06769aec77",
+   "titulo": "REGRESA EL LIBROBÚS A LAS ESCUELAS DEL VALLE DE SAN QUINTÍN",
+   "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE8xcUJaVDRhY0dGWC0tUFIySEpqdFZhZGoySV95dEtEQ2pOUUZfQ2VaWjJxSVF2Qy11ZlBQMXdQZGlsTjExSlBNNFZWNnBLbE1LU0xVTE5MVFB5MzNJaWtWRjhzWDZRRHhLNGJzMlZVQS1QbF9GSi1OTG53?oc=5",
+   "dominio": "bajacalifornia.gob.mx",
+   "fuente": "gn-01e4fd06574f",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Quintín"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T01:33:44+00:00",
+   "capturado": "2026-09-28T23:17:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.525,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
    "rubros": []
   },
   {
@@ -1329,6 +2116,25 @@
    "rubros": [
     "politica"
    ]
+  },
+  {
+   "id": "288d3196052c913b",
+   "titulo": "Organics Unlimited Releases 2026 GROW Impact Report",
+   "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPT3lmYXdxWExSV004MEZEUy03aGswUjVfS0ZabzhRN0RaQ3ltQ0lhVnpTYVRWYXRaUEhHLTFiUkU3ZjV2MFpkS1BFbC1mWldqU2JjQUdIbHIyMDBnRzNJVXBaOU96Rm9ZWXVBS0J0TVNNcHlaSDA4R2VuX040U2JwM25JemFOMFlBTllkRlNR?oc=5",
+   "dominio": "producebusiness.com",
+   "fuente": "gn-56aaf57c2f67",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T01:26:34+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
   },
   {
    "id": "09a4057de51c1b53",
@@ -1507,6 +2313,36 @@
    "rubros": [
     "politica"
    ]
+  },
+  {
+   "id": "10d1b5fc46f32c43",
+   "titulo": "🚨 Garitas de San Ysidro y Otay registran esperas de hasta 160 minutos (Datos actualizados a las 6:00 pm PDT) El tráfico fronterizo hacia Estados Unidos registra alta saturación esta tarde, siendo la garita de San Ysidro la más afectada con tiempos de espera",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOTnpmMU15Z2FGaXo4c2Q2VTRWMnlSdFhDbEJ0bVVBNUV5dmw2Y1VQY2t6TW9sSXJCSGIzRTNqYU1JM29ENDZpX0NWc1ROZGVuam92ZEx3X3pRb2VsZDZPYTgxX181b2xCbzl1T0ZicmtLaWM1eXpmZHNrQ2h3S0dMSXdzM2tSVi02Ym9BSGJzM28yQWhYNzVSSU5lU1BFN3ZzQXllZHVwTzE5RUY2S0FCUGJyT1p6dE9WeUE?oc=5",
+   "dominio": "tijuanaenlinea.com",
+   "fuente": "gn-f8497491006c",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana",
+    "San Diego"
+   ],
+   "delegaciones": [
+    "Otay Centenario"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T01:00:27+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5286,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate",
+   "rubros": []
   },
   {
    "id": "9a10666c86117a48",
@@ -2038,6 +2874,29 @@
    "rubros": [
     "clima"
    ]
+  },
+  {
+   "id": "42e622e4af74dae6",
+   "titulo": "Concientiza SSCBC sobre prevención y denuncia contra el maltrato animal",
+   "url": "https://www.uniradioinforma.com/sociedad/concientiza-sscbc-sobre-prevencion-denuncia-maltrato-animal-n905736",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-29",
+   "publicado": "2026-09-29T00:00:00-07:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5716,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
   },
   {
    "id": "96078e4fcf5d6867",
@@ -2590,27 +3449,30 @@
    ]
   },
   {
-   "id": "ef37367fd46c6f51",
-   "titulo": "Amílcar Olán: Quién es el amigo de Andy López Beltrán localizado en Suiza, por qué lo investigan y esto dijo Sheinbaum sobre su caso",
-   "url": "https://www.elimparcial.com/mexico/2026/09/28/amilcar-olan-quien-es-el-amigo-de-andy-lopez-beltran-localizado-en-suiza-por-que-lo-investigan-y-esto-dijo-sheinbaum-sobre-su-caso/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
+   "id": "0cef3b4af817dd4a",
+   "titulo": "Edad mediana en BC es de 31 años - La Voz de la Frontera",
+   "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPQll3VndvMzdEQzBtMkljckRreTY5NUMwc1lhb3A0bERlS3JZSjN3amVCdzluUVkySzdDNk96RXFFUjBjSkdQLW9qWFpJcUZJZW9Ec3ljZ0J1aUgyeFBwczhnQmtaTzNaeUx2aEdmdF9zcWozbHQ1dnhGSDZJX2M1Z1BKWnRxRkJpVWM0TA?oc=5",
+   "dominio": "elsoldetijuana.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
    "delegaciones": [],
-   "alcance": "nacional",
+   "alcance": "zona",
    "fecha": "2026-09-28",
-   "publicado": "2026-09-28T22:57:11+00:00",
-   "capturado": "2026-09-28T23:17:19+00:00",
+   "publicado": "2026-09-28T22:49:53+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
    "figuras": [],
    "postura": {
     "etiqueta": "neutral",
-    "confianza": 0.5712,
+    "confianza": 0.6801,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
-   "imagen": "https://www.elimparcial.com/resizer/v2/WPO22X7KSZBE5PKFE4W3LI5LTQ.jpg?auth=fd6890cf2bf45ec51124055dd29cbed88f122af4236380e7b016b052a154b11a&smart=true&width=1200&height=720",
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
    "rubros": []
   },
   {
@@ -2874,6 +3736,33 @@
    ]
   },
   {
+   "id": "63098b1e34ca0dcf",
+   "titulo": "VIDEO.- Sector de la construcción en Tijuana apuesta por la Inteligencia Artificial en proyectos",
+   "url": "https://www.uniradioinforma.com/reportajes-especiales/video-sector-construccion-tijuana-apuesta-inteligencia-artificial-proyectos-n905498",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-28",
+   "publicado": "2026-09-28T22:05:00-07:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4605,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "ia"
+   ]
+  },
+  {
    "id": "681894b4cdd68bcf",
    "titulo": "Denuncian violencia y acoso contra estudiantes de Secundaria 14",
    "url": "https://radarbc.com/general/denuncian-violencia-y-acoso-contra-estudiantes-de-secundaria-14/",
@@ -2922,33 +3811,6 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
-   "rubros": []
-  },
-  {
-   "id": "81e21b06769aec77",
-   "titulo": "REGRESA EL LIBROBÚS A LAS ESCUELAS DEL VALLE DE SAN QUINTÍN",
-   "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1xTm5DZDIwWEYwdVlKY3hJZHk2OTNDTzhCRGNHRmNkeVB5cmd6M2lJV0ZFRVFXUk5SdHhKQnVKZzEzblEzeEhWQWFJVXhvXzdmY18tM0xzeTV6WkJicDFnWlhiRQ?oc=5",
-   "dominio": "bajacalifornia.gob.mx",
-   "fuente": "gn-01e4fd06574f",
-   "zona_medio": "estatal",
-   "zonas": [
-    "San Quintín"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-09-28",
-   "publicado": "2026-09-28T21:58:06+00:00",
-   "capturado": "2026-09-28T23:17:19+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.525,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_sanquintin",
    "rubros": []
   },
   {
@@ -3165,7 +4027,7 @@
    "delegaciones": [],
    "alcance": "estatal",
    "fecha": "2026-09-28",
-   "publicado": "2026-09-28T21:36:07+00:00",
+   "publicado": "2026-09-28T21:36:08+00:00",
    "capturado": "2026-09-08T17:24:53+00:00",
    "figuras": [],
    "postura": {
@@ -4968,6 +5830,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6abb226b74e8b.jpeg",
    "rubros": [
     "politica"
    ]
@@ -5326,7 +6189,7 @@
   {
    "id": "45af89d3ac3716e0",
    "titulo": "San Quintín cambia dinámica migratoria de jornaleros: CS...",
-   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNTHp4RzFwbkhzRnFIN3ZIc25mNkJidC1vUkRNd2RSZC02cVZRYzJFNS1mZjh0Q1FEdTRHX3dlemZOLW5sWHFWWjVVNW5lYXFnbVdwQVBhS0VUVENBWllZdmtvOW5pOVVGMG5QT1ZQQXFzRC03anVKTHp4ajRvLVFvUVZuYmh2MDRucXlfc2prRzZHam1jNlh5U2QxN1QzbVlNVEhiLV9wSXBYRnZzZk5MdFQyNnhpRWExeUVz?oc=5",
+   "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOWnVueG0yUkRvNEdSVURUcXZjZC1EcXM1Y0lRVnlQczh5UWhza19GejN6S0RaeFBGdEdsam9LMXcweldLdkF0SElNajQ2WUQyVTRONEJPeDRnZVE3Mk0yU0pBdE94eFJjb2tUODVONW14Uk1mX0tlSTBUY1pqUURxRnVadm4yT09Ib1REMFZOamdnMHlTTFpKeG5ZVHZZUzBjQzcta2Fwd0JWS3djNHFIejNrWXMzUUpZ?oc=5",
    "dominio": "el-mexicano.com.mx",
    "fuente": "gn-d33696b00d82",
    "zona_medio": "estatal",
@@ -7108,7 +7971,7 @@
    "figuras": [],
    "postura": null,
    "origen": "busqueda_web",
-   "descubierta_por": "bq_aguasnegras",
+   "descubierta_por": "bq_frontera_en",
    "rubros": []
   },
   {
@@ -7857,6 +8720,27 @@
    "origen": "busqueda_web",
    "descubierta_por": "bq_rosarito",
    "rubros": []
+  },
+  {
+   "id": "b1ac18f39fff35e4",
+   "titulo": "Hurricane Polo makes landfall in Baja California Sur",
+   "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPLTZ2TVI4ZHoxcWMteEowWmZDY3hSUzJRR193U2Z5NmZsR0V5TzNRcVlna1pTa2FtWHVFLVBoYUVZSFd6YVFkNTdGOEhBOEpqRlcxXzNsaTdsV0p1TVozSGxtRElHbDduS005b042a1Zmd0YxVVgtYlN4eTY1UGphUU1LSGpsNVVRbkZaSkpiUm53Z3lLcGRZ0gGcAUFVX3lxTE5iVS1mMkhvZWxhSTNtdmZiLTlBUmZoZzU3VE55c0pnZi1femJnWE1Ba2wxR0V6TmRGYVpyLTYyODhNaTRvZTY2d3lmT3J0cm1UbEpzVmtzc01JWE1tLXZqdTlLU3NiODh3OERzbFdhUmVtNm8zaFlIaUM0R1NJNmswU2VuU0E0Vk5NZWJEWWtEU2szNi1oU0l5WUE4bg?oc=5",
+   "dominio": "fox5sandiego.com",
+   "fuente": "gn-4b075bf74df6",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-09-28",
+   "publicado": "2026-09-28T14:59:04+00:00",
+   "capturado": "2026-09-29T12:50:40+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": [
+    "clima"
+   ]
   },
   {
    "id": "bdccc2d4c6153d87",
@@ -153690,7 +154574,7 @@
     {
      "id": "ram",
      "via": "nominal",
-     "clave": "rocio adame"
+     "clave": "adame munoz"
     }
    ],
    "postura": {
