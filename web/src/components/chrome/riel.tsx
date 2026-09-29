@@ -53,8 +53,11 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  * la pagina no existe, asi que una pestana que aparece y desaparece segun el
  * entorno cambiaria la posicion de las demas.
  *
- * El marcador activo es el fondo `Realce`, compartido entre paginas por View
- * Transitions: al navegar se desliza de un renglon del riel al siguiente. Dos
+ * El marcador activo es una pastilla detras del ICONO, no un bloque detras del
+ * renglon entero (29 de septiembre de 2026): el bloque de 84x66 pesaba mas que
+ * todo lo que tenia al lado y era otra gramatica que la de la barra del
+ * telefono, que ya marcaba asi. Es el fondo `Realce`, compartido entre paginas
+ * por View Transitions: al navegar se desliza de un icono al siguiente. Dos
  * nombres, uno por superficie, porque React avisa si dos `<ViewTransition>`
  * montados a la vez comparten nombre, aunque uno este en `display: none`.
  *
@@ -80,7 +83,10 @@ type Clave = "portada" | "redes" | PaginaSuelta;
  * mascaras: el riel y la barra pintan el mismo icono en la misma pagina.
  */
 function Icono({ clave, actual, superficie }: { clave: Clave; actual: boolean; superficie: "riel" | "barra" }) {
-  const props = { size: 22, weight: actual ? ("fill" as const) : ("regular" as const), className: "relative" };
+  // 20 en el riel y 22 en la barra del telefono (28 de septiembre de 2026,
+  // cliente: a 22 el riel se veia pesado junto a rotulos de 12px). En el
+  // telefono el icono es lo que se apunta con el pulgar y se queda en 22.
+  const props = { size: superficie === "riel" ? 20 : 22, weight: actual ? ("fill" as const) : ("regular" as const), className: "relative" };
   switch (clave) {
     case "portada": return <TrendUp {...props} aria-hidden />;
     case "redes": return <Megaphone {...props} aria-hidden />;
@@ -124,7 +130,9 @@ const de = (mapa: Map<Clave, Destino>, claves: readonly Clave[]) =>
 
 /** El fondo activo. `nombre` empareja la copia vieja con la nueva entre
  *  paginas; `clase` es la de View Transitions, que globals.css usa para
- *  pintar el grupo con su radio (`::view-transition-group(.renglon-activo)`). */
+ *  pintar el grupo con su radio (`::view-transition-group(.pestana-activa)`).
+ *  El riel y la barra usan la misma desde que los dos marcan con una pastilla
+ *  detras del icono (29 de septiembre de 2026). */
 function Realce({ nombre, clase, className }: { nombre: string; clase: string; className: string }) {
   return (
     <ViewTransition name={nombre} share={clase} default="none">
@@ -137,9 +145,13 @@ function RenglonRiel({ d }: { d: Destino }) {
   return (
     <li>
       <Link href={d.href} aria-current={d.actual ? "page" : undefined} className="renglon-riel">
-        {d.actual ? <Realce nombre="activa-riel" clase="renglon-activo" className="realce-riel" /> : null}
-        <Icono clave={d.clave} actual={d.actual} superficie="riel" />
-        <span className="relative">{d.nombre}</span>
+        {/* La pastilla detras del icono, como en la barra del telefono: una
+            sola gramatica de «estas aqui» en los dos anchos. */}
+        <span className="icono-riel">
+          {d.actual ? <Realce nombre="activa-riel" clase="pestana-activa" className="realce-riel" /> : null}
+          <Icono clave={d.clave} actual={d.actual} superficie="riel" />
+        </span>
+        <span>{d.nombre}</span>
       </Link>
     </li>
   );

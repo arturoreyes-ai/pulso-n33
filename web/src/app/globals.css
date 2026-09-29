@@ -476,9 +476,19 @@ main:has(.lector) > .barra-inferior { display: block; }
   display: flex;
   flex-direction: column;
   height: calc(var(--alto-lector, 100svh) - var(--barra-alto) - env(safe-area-inset-bottom));
-  background: var(--color-vanta);
+  /* TRANSPARENTE, sobre la malla del sitio (chrome/malla.tsx), como cualquier
+     otra pagina. Hasta el 29 de septiembre de 2026 la caja era vanta opaco y
+     tapaba los orbes: la portada y /redes se veian negras planas y /garitas,
+     /guion o /seguimiento con su brillo, y el cliente lo vio al cambiar de
+     pagina. Detras de la caja no hay nada que leer: la regla de arriba apaga
+     todo lo demas de <main>, y la malla es fija, asi que el recorrido se
+     desplaza por encima sin repintarla. Lo que es dato va en su tarjeta, que
+     es opaca, que es la condicion que pone la malla. */
+  background: transparent;
 }
 @media (min-width: 48rem) {
+  /* Junto a un lector el riel sigue transparente: los dos estan sobre la
+     misma malla, asi que no hay costura que tapar. */
   main:has(.lector) > .riel { display: flex; }
   main:has(.lector) > .barra-inferior { display: none; }
   .lector { inset: 0 0 0 var(--riel-ancho); height: auto; }
@@ -505,6 +515,22 @@ main:has(.lector) > .barra-inferior { display: block; }
   flex: none;
   padding-top: env(safe-area-inset-top);
   border-bottom: 1px solid var(--color-filo);
+}
+/* En escritorio el filo del LECTOR no va de orilla a orilla: va a la medida
+   del contenido, desde donde empiezan el rotulo de la barra y la primera
+   pestana (2.5rem, los 2rem de la fila mas los 0.5rem del selector). A sangre
+   terminaba en seco contra el riel y lo hacia leer como una columna aparte
+   que cortaba la cabecera; a la medida es el filo del contenido y el riel
+   queda en la misma superficie (29 de septiembre de 2026, cliente: «tosco»).
+   `border-bottom` se queda transparente para no mover nada un pixel; el filo
+   lo pinta un degradado en su lugar, y el subrayado de la pestana activa cae
+   sobre el como antes. En el telefono la barra sigue a sangre, que es lo
+   correcto en un borde de pantalla. */
+@media (min-width: 48rem) {
+  .lector .cinta {
+    border-bottom-color: transparent;
+    background: linear-gradient(var(--color-filo), var(--color-filo)) center bottom / min(83rem, calc(100% - 5rem)) 1px no-repeat;
+  }
 }
 
 /* La fila: el mismo canal y el mismo ancho maximo que cualquier seccion
@@ -602,13 +628,19 @@ main:has(.lector) > .barra-inferior { display: block; }
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-    padding: 1.25rem 0.375rem 1rem;
-    border-right: 1px solid var(--color-filo);
-    /* Vanta traslucido: deja pasar el tono de la malla del fondo, que es lo
-       que ata el riel a la pagina y no a una caja pegada encima. Detras no se
-       desplaza nada (el contenido empieza a su derecha), asi que no hace
-       falta blur. */
-    background: rgb(5 5 5 / 0.55);
+    /* 13px arriba: centra el letrero de 44px en la fila de 70px de la barra
+       de los lectores (`.fila-cinta`: 54 de alto minimo mas 8 y 8), medido en
+       35px contra 35px. Con 20 quedaba 7px mas abajo que los controles de al
+       lado, y las dos filas de arriba no se leian como una sola. */
+    padding: 0.8125rem 0.375rem 1rem;
+    /* SIN FONDO NI FILO (29 de septiembre de 2026, cliente: se veia «muy
+       tosco»). Tenia vanta al 55% y un filo de 1px a la derecha: una losa
+       pegada encima que cortaba la malla del fondo y chocaba en T con el filo
+       inferior de la barra del lector. Transparente, el riel es la misma
+       pagina, sobre la misma malla que los lectores, que tambien son
+       transparentes. Detras no se desplaza nada: el contenido empieza a su
+       derecha. */
+    background: transparent;
     overflow-y: auto;
     scrollbar-width: none;
   }
@@ -618,31 +650,65 @@ main:has(.lector) > .barra-inferior { display: block; }
   }
 }
 
-/* La marca: el letrero de diodos de /entrar (acceso/letrero.tsx), con el
-   nombre de la aplicacion, «Pulso». Es la unica pieza grafica de marca que
-   existe, y aqui es tambien el enlace a la portada de la zona. Llevo «N33»
-   unas horas del 28 de septiembre de 2026 porque cabia; el cliente pidio el
-   nombre, y cabe si la letra no se ensancha (`font-stretch: 100%`) y los
-   diodos van a 2px: a 3px, cinco letras de 20px quedan con trazos de un solo
-   punto y no se leen. */
+/* La marca: un panel LED chico, el de /entrar (acceso/fondo-led.tsx y
+   acceso/letrero.tsx) en miniatura. El recuadro entero es una reticula de
+   diodos apagados y «Pulso» son los diodos ENCENDIDOS de esa misma reticula,
+   en el rojo de marca (29 de septiembre de 2026, cliente: el nombre suelto en
+   puntos rojos no se leia como el panel de la puerta). Es la unica pieza
+   grafica de marca que existe, y aqui es tambien el enlace a la portada de la
+   zona.
+
+   LAS DOS RETICULAS COINCIDEN, y es lo que la hace un panel y no un texto
+   sobre una textura: el campo va en el recuadro y las letras en un hijo con
+   `inset: 0`, o sea en la MISMA caja, con el mismo paso y la misma posicion,
+   asi que cada punto encendido cae sobre un punto apagado. Con el letrero
+   centrado en su propio ancho los dos enrejados quedaban corridos medio paso
+   y se veia doble.
+
+   A 2px y no a --paso-led (3px): a 3px cinco letras que quepan en 76px
+   quedan con trazos de un punto y no se leen. Por lo mismo la letra no se
+   ensancha (`font-stretch: 100%`). A 16px y con 8% de interletrado, y no a
+   20, para que alrededor de las letras quede panel apagado: a 20 llenaban el
+   recuadro de orilla a orilla y se leia un boton rojo, no una pantalla. Los
+   puntos apagados van en `--color-filo` y mas chicos que el paso, para que en
+   una pantalla de densidad 1 se vean separados y no como una trama.
+   Sin el barrido de /entrar a proposito: la puerta se ve una vez y el riel en
+   cada pagina, y un bucle en la orilla de la vista es movimiento que nadie
+   pidio mirar. */
 .marca-riel {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1rem;
-  padding-block: 0.5rem;
-  border-radius: var(--radius-nucleo);
-  transition: background-color var(--dur-toque) var(--ease-out);
+  position: relative;
+  display: block;
+  flex: none;
+  height: 2.75rem;
+  margin: 0 0.25rem 1rem;
+  border-radius: var(--radius-etiqueta);
+  background-color: var(--color-carta);
+  background-image: radial-gradient(var(--color-filo) 0.55px, transparent 0.7px);
+  background-size: 2px 2px;
+  /* Sin contorno en reposo: con el filo de 1px el recuadro se leia como una
+     calcomania pegada al riel. El campo de diodos basta para dibujar el panel;
+     el contorno aparece al pasar el puntero, que es la respuesta de un enlace. */
+  box-shadow: var(--shadow-bisel);
+  transition: box-shadow var(--dur-toque) var(--ease-out);
 }
 .marca-riel .letrero-marca {
-  font-size: var(--text-rotulo);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-lectura);
   font-stretch: 100%;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
 }
 @supports (background-clip: text) or (-webkit-background-clip: text) {
   .marca-riel .letrero-marca {
-    background-image: radial-gradient(var(--color-chart-1-texto) 0.8px, transparent 0.95px);
+    background-image: radial-gradient(var(--color-chart-1-texto) 0.7px, transparent 0.85px);
     background-size: 2px 2px;
   }
+}
+@media (hover: hover) and (pointer: fine) {
+  .marca-riel:hover { box-shadow: var(--shadow-bisel), inset 0 0 0 1px var(--color-realce); }
 }
 
 .grupo-riel { display: grid; gap: 0.25rem; }
@@ -653,31 +719,41 @@ main:has(.lector) > .barra-inferior { display: block; }
   background: var(--color-filo);
 }
 
-/* Un destino: icono sobre rotulo, centrados. El rotulo a 12px y en dos lineas
-   si hace falta; truncarlo diria «Gasto elec…», que no es un nombre. Sin
-   relleno lateral: con 4px por lado «En Tendencia» partia en dos por 3px, y
-   el renglon activo, el mas visitado, era el mas alto. */
+/* Un destino: la pastilla del icono sobre el rotulo, como en la barra de
+   pestanas del telefono (`.icono-barra`). La pastilla es lo que se enciende:
+   `--color-realce` en la pagina actual y `--color-vela` al pasar el puntero;
+   el renglon no pinta fondo. Hasta el 29 de septiembre de 2026 el fondo era
+   el renglon entero, un bloque de 84x66 que pesaba mas que el icono y el
+   rotulo juntos. El rotulo a 12px y en dos lineas si hace falta; truncarlo
+   diria «Gasto elec…», que no es un nombre. */
 .renglon-riel {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.375rem;
-  padding: 0.75rem 0;
-  border-radius: var(--radius-nucleo);
+  gap: 0.25rem;
+  padding: 0.5rem 0;
   color: var(--color-tinta-prosa);
   font-size: var(--text-meta);
   font-weight: 500;
   line-height: 1.2;
   text-align: center;
   text-wrap: balance;
+  transition: color var(--dur-toque) var(--ease-out);
+}
+.renglon-riel[aria-current="page"] { color: var(--color-tinta-titulo); }
+.icono-riel {
+  position: relative;
+  display: flex;
+  width: 3.5rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
   transition:
-    color var(--dur-toque) var(--ease-out),
     background-color var(--dur-toque) var(--ease-out),
     transform var(--dur-toque) var(--ease-out);
 }
-.renglon-riel[aria-current="page"] { color: var(--color-tinta-titulo); }
-.renglon-riel:active { transform: scale(0.97); }
+.renglon-riel:active .icono-riel { transform: scale(0.94); }
 .realce-riel,
 .realce-barra {
   position: absolute;
@@ -686,8 +762,7 @@ main:has(.lector) > .barra-inferior { display: block; }
   background: var(--color-realce);
 }
 @media (hover: hover) and (pointer: fine) {
-  .renglon-riel:not([aria-current="page"]):hover,
-  .marca-riel:hover { background: var(--color-vela); }
+  .renglon-riel:not([aria-current="page"]):hover .icono-riel { background: var(--color-vela); }
   .renglon-riel:hover { color: var(--color-tinta-titulo); }
 }
 
@@ -729,7 +804,8 @@ main:has(.lector) > .barra-inferior { display: block; }
     background-color var(--dur-toque) var(--ease-out),
     transform var(--dur-toque) var(--ease-out);
 }
-.boton-cuenta-riel .inicial-cuenta { width: 2.25rem; height: 2.25rem; }
+/* 32px: a 36 pesaban mas que los iconos de 20 del riel. */
+.boton-cuenta-riel .inicial-cuenta { width: 2rem; height: 2rem; }
 .boton-cuenta-riel:active { transform: scale(0.97); }
 .nombre-cuenta-riel {
   max-width: 100%;
@@ -774,7 +850,9 @@ main:has(.lector) > .barra-inferior { display: block; }
     background-color var(--dur-toque) var(--ease-out);
 }
 @media (hover: hover) and (pointer: fine) {
-  .boton-cuenta-riel:hover,
+  /* Como los renglones: lo que se enciende es el circulo, no el bloque. */
+  .boton-cuenta-riel:hover { color: var(--color-tinta-titulo); }
+  .boton-cuenta-riel:hover .inicial-cuenta { background: var(--color-filo); }
   .renglon-cuenta:hover { background: var(--color-vela); color: var(--color-tinta-titulo); }
 }
 
@@ -895,17 +973,8 @@ main:has(.lector) > .barra-inferior { display: block; }
   background: var(--color-realce);
   border-radius: 9999px;
 }
-/* En el riel el fondo es un renglon, con el radio de una tarjeta interior. */
-::view-transition-group(.renglon-activo) {
-  animation-duration: var(--dur-cambio);
-  animation-timing-function: var(--ease-firma);
-  background: var(--color-realce);
-  border-radius: var(--radius-nucleo);
-}
 ::view-transition-old(.pestana-activa),
-::view-transition-new(.pestana-activa),
-::view-transition-old(.renglon-activo),
-::view-transition-new(.renglon-activo) {
+::view-transition-new(.pestana-activa) {
   animation: none;
   opacity: 0;
 }
@@ -915,8 +984,7 @@ main:has(.lector) > .barra-inferior { display: block; }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
   ::view-transition-new(root),
-  ::view-transition-group(.pestana-activa),
-  ::view-transition-group(.renglon-activo) { animation: none; }
+  ::view-transition-group(.pestana-activa) { animation: none; }
 }
 
 /* Las pestanas, a la manera de la pagina de tendencias de X: texto, sin
