@@ -1,32 +1,32 @@
 {
  "esquema": 1,
- "generado": "2026-09-28T23:39:50+00:00",
+ "generado": "2026-09-29T00:48:49+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 771,
- "posts_vigentes": 123,
- "opinion": 737,
- "repetidos": 9,
- "reacciones": 25,
+ "comentarios_vigentes": 815,
+ "posts_vigentes": 133,
+ "opinion": 771,
+ "repetidos": 12,
+ "reacciones": 32,
  "por_zona": {
   "Ensenada": 45,
-  "Mexicali": 37,
+  "Mexicali": 40,
   "Playas de Rosarito": 3,
   "Tecate": 20,
-  "Tijuana": 316,
-  "estatal": 337,
-  "nacional": 13
+  "Tijuana": 335,
+  "estatal": 355,
+  "nacional": 17
  },
  "por_cuenta": {
-  "aztecabc_fb": 37,
-  "blanconegro_fb": 283,
-  "blancorojo_fb": 213,
-  "ndtijuana_fb": 233,
+  "aztecabc_fb": 39,
+  "blanconegro_fb": 311,
+  "blancorojo_fb": 218,
+  "ndtijuana_fb": 242,
   "psn_fb": 5
  },
  "por_idioma": {
-  "es": 771
+  "es": 815
  },
  "por_tema": [
   {
@@ -40,6 +40,11 @@
    "posts": 3
   },
   {
+   "tema": "sera",
+   "comentarios": 7,
+   "posts": 7
+  },
+  {
    "tema": "final",
    "comentarios": 6,
    "posts": 6
@@ -51,6 +56,11 @@
   },
   {
    "tema": "huracan polo",
+   "comentarios": 3,
+   "posts": 3
+  },
+  {
+   "tema": "imss",
    "comentarios": 3,
    "posts": 3
   },
@@ -80,11 +90,6 @@
    "posts": 2
   },
   {
-   "tema": "bajo",
-   "comentarios": 2,
-   "posts": 2
-  },
-  {
    "tema": "muere",
    "comentarios": 2,
    "posts": 2
@@ -105,15 +110,20 @@
    "posts": 1
   },
   {
+   "tema": "proceso",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
    "tema": "proteccion civil",
    "comentarios": 1,
    "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 64,
-  "negativo": 392,
-  "neutral": 281,
+  "positivo": 65,
+  "negativo": 408,
+  "neutral": 298,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -155,40 +165,16 @@
  ],
  "destacados": [
   {
-   "url": "https://www.facebook.com/reel/1509221137629027",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-09-27",
-   "titulo": "🚨 Dispara contra cafetería en Macro Plaza y termina detenido en transporte público",
-   "tipo": "video",
-   "likes": 7105,
-   "comentarios": 317,
-   "compartidos": 512,
-   "reproducciones": 810043,
-   "alcance": "zona",
-   "publicado": "2026-09-27T23:55:55+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 5,
-    "neutral": 5,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/1631879454950661",
    "cuenta": "blanconegro_fb",
    "zona": "estatal",
    "fecha": "2026-09-28",
    "titulo": "🚨 Atacan a balazos a hombre de aproximadamente 60 años",
    "tipo": "video",
-   "likes": 1134,
-   "comentarios": 122,
-   "compartidos": 109,
-   "reproducciones": 107140,
+   "likes": 1458,
+   "comentarios": 148,
+   "compartidos": 126,
+   "reproducciones": 150564,
    "alcance": "nacional",
    "publicado": "2026-09-28T22:13:53+00:00",
    "cosechados": 10,
@@ -273,6 +259,53 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/NdTijuana/videos/1815458989466218",
+   "cuenta": "ndtijuana_fb",
+   "zona": "estatal",
+   "fecha": "2026-09-28",
+   "titulo": "¿Fallaron en ejecutarlo o se trató de un aviso?, adulto mayor queda herido en este ataque, su hijo sale ileso…",
+   "tipo": "video",
+   "likes": 484,
+   "comentarios": 28,
+   "compartidos": 41,
+   "reproducciones": 54535,
+   "alcance": "nacional",
+   "publicado": "2026-09-28T23:20:38+00:00",
+   "cosechados": 10,
+   "opinion": 9,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 6,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02JatAFGB1RsNS26LcvAsbss9bztgfpVEpEeXH1gtzx9MDctz53p3k2WQmNYiqL63cl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-09-28",
+   "titulo": "11 am: #Polo se mantiene como un súper huracán cat. 3 con vientos máximos sostenidos de 185 km/h.",
+   "tipo": "imagen",
+   "likes": 475,
+   "comentarios": 33,
+   "compartidos": 38,
+   "alcance": "zona",
+   "publicado": "2026-09-28T18:21:36+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 9,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid035WXY1x2wEkeGEyYZ5omf5UC9gdNmRFynZ1vGbAemoBD3DrwpEVGXEdPTr2C12ytsl&id=100086488503408",
    "cuenta": "blancorojo_fb",
    "zona": "estatal",
@@ -290,29 +323,6 @@
     "positivo": 0,
     "negativo": 5,
     "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02JatAFGB1RsNS26LcvAsbss9bztgfpVEpEeXH1gtzx9MDctz53p3k2WQmNYiqL63cl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-09-28",
-   "titulo": "11 am: #Polo se mantiene como un súper huracán cat. 3 con vientos máximos sostenidos de 185 km/h.",
-   "tipo": "imagen",
-   "likes": 464,
-   "comentarios": 32,
-   "compartidos": 36,
-   "alcance": "zona",
-   "publicado": "2026-09-28T18:21:36+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 9,
-    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -438,6 +448,29 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02e4E1GHXXYBydAJ2DoK78S9BZ4boVs7xEj7qdKoyxDZMig4U1hW24aEQKZSk7o5zel&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "estatal",
+   "fecha": "2026-09-28",
+   "titulo": "Ahora si vamos a tener agua hasta para bañarnos todos los dias con las lluvias que vienen las rafagas del Huracan polo estaran causando lluvias en baja califor…",
+   "tipo": "imagen",
+   "likes": 259,
+   "comentarios": 24,
+   "compartidos": 12,
+   "alcance": "estatal",
+   "publicado": "2026-09-28T19:36:26+00:00",
+   "cosechados": 9,
+   "opinion": 8,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 6,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/1759784311971596",
    "cuenta": "blanconegro_fb",
    "zona": "estatal",
@@ -486,29 +519,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02e4E1GHXXYBydAJ2DoK78S9BZ4boVs7xEj7qdKoyxDZMig4U1hW24aEQKZSk7o5zel&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "estatal",
-   "fecha": "2026-09-28",
-   "titulo": "Ahora si vamos a tener agua hasta para bañarnos todos los dias con las lluvias que vienen las rafagas del Huracan polo estaran causando lluvias en baja califor…",
-   "tipo": "imagen",
-   "likes": 242,
-   "comentarios": 23,
-   "compartidos": 12,
-   "alcance": "estatal",
-   "publicado": "2026-09-28T19:36:26+00:00",
-   "cosechados": 9,
-   "opinion": 8,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 6,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0ei82ZqKV7cRK7T4ZP7LiERA2hhLrLcqE8apFxgNtgSA8iFiAdWW4b2ieeYBUivjSl&id=100086488503408",
    "cuenta": "blancorojo_fb",
    "zona": "estatal",
@@ -526,29 +536,6 @@
     "positivo": 0,
     "negativo": 5,
     "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NdTijuana/videos/1815458989466218",
-   "cuenta": "ndtijuana_fb",
-   "zona": "estatal",
-   "fecha": "2026-09-28",
-   "titulo": "¿Fallaron en ejecutarlo o se trató de un aviso?, adulto mayor queda herido en este ataque, su hijo sale ileso…",
-   "tipo": "video",
-   "likes": 221,
-   "comentarios": 19,
-   "compartidos": 20,
-   "alcance": "nacional",
-   "publicado": "2026-09-28T23:20:38+00:00",
-   "cosechados": 10,
-   "opinion": 9,
-   "sentimiento": {
-    "positivo": 2,
-    "negativo": 6,
-    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -601,38 +588,15 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02o3V3xPEiofj3PskiiSY2B4hFqS4Ve32vVbSxERZ6fEBmkBbb98hJHz1FQTWGiqX5l",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-09-28",
-   "titulo": "#NDTInforma Ofreció dinero a policías y terminó detenido",
-   "tipo": "imagen",
-   "likes": 98,
-   "comentarios": 90,
-   "compartidos": 6,
-   "alcance": "zona",
-   "publicado": "2026-09-28T21:17:18+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 5,
-    "neutral": 5,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NdTijuana/posts/pfbid0GMaYUXU1fsYqA2sjaGY64RSHv1ZLaBcKvVqma5zcoifqRaNSkszwKgSptHuyb4zfl",
    "cuenta": "ndtijuana_fb",
    "zona": "Tijuana",
    "fecha": "2026-09-28",
    "titulo": "#NDTInforma Camión cargado con piedras deja dos muertos y dos lesionados en Valle de San Pedro",
    "tipo": "imagen",
-   "likes": 95,
+   "likes": 132,
    "comentarios": 4,
-   "compartidos": 7,
+   "compartidos": 8,
    "alcance": "zona",
    "publicado": "2026-09-28T22:25:22+00:00",
    "cosechados": 5,
@@ -641,6 +605,52 @@
     "positivo": 0,
     "negativo": 1,
     "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid08ayiTZ514M42bUv1fHVU6iu1pRLuge3zeSaJwYPTZUufcP4wpzCz2Gr3dWyjnjfBl",
+   "cuenta": "blanconegro_fb",
+   "zona": "Mexicali",
+   "fecha": "2026-09-28",
+   "titulo": "Muere adolescente de 15 años tras sufrir descarga eléctrica en Mexicali",
+   "tipo": "imagen",
+   "likes": 119,
+   "comentarios": 15,
+   "compartidos": 29,
+   "alcance": "zona",
+   "publicado": "2026-09-28T22:13:48+00:00",
+   "cosechados": 10,
+   "opinion": 8,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 4,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02o3V3xPEiofj3PskiiSY2B4hFqS4Ve32vVbSxERZ6fEBmkBbb98hJHz1FQTWGiqX5l",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-09-28",
+   "titulo": "#NDTInforma Ofreció dinero a policías y terminó detenido",
+   "tipo": "imagen",
+   "likes": 115,
+   "comentarios": 103,
+   "compartidos": 7,
+   "alcance": "zona",
+   "publicado": "2026-09-28T21:17:18+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 5,
+    "neutral": 5,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -670,38 +680,15 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid08ayiTZ514M42bUv1fHVU6iu1pRLuge3zeSaJwYPTZUufcP4wpzCz2Gr3dWyjnjfBl",
-   "cuenta": "blanconegro_fb",
-   "zona": "Mexicali",
-   "fecha": "2026-09-28",
-   "titulo": "Muere adolescente de 15 años tras sufrir descarga eléctrica en Mexicali",
-   "tipo": "imagen",
-   "likes": 88,
-   "comentarios": 13,
-   "compartidos": 27,
-   "alcance": "zona",
-   "publicado": "2026-09-28T22:13:48+00:00",
-   "cosechados": 10,
-   "opinion": 9,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 5,
-    "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0t4CiT7EwZEbnM15LYLpsBmaTJYvaSEy8qn5SAe9oJN89ePXAytnhmfZgxVMGGVTFl&id=100086488503408",
    "cuenta": "blancorojo_fb",
    "zona": "Tijuana",
    "fecha": "2026-09-28",
    "titulo": "Bienvenidas las lluvias a Tijuana solo hay que tomar precauciones",
    "tipo": "otro",
-   "likes": 67,
-   "comentarios": 10,
-   "compartidos": 1,
+   "likes": 79,
+   "comentarios": 11,
+   "compartidos": 2,
    "alcance": "zona",
    "publicado": "2026-09-28T21:21:14+00:00",
    "cosechados": 10,
@@ -719,6 +706,52 @@
      "comentarios": 4
     }
    ]
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02VEMg4P5rGiXWkwnJEJp4pF9L8ydropQdtDyF1FufeeXPkcbTLpjx4aK6L2e1xfzXl",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-09-28",
+   "titulo": "#NDTInforma Asesinan a hombre a balazos frente a Plaza La Mesa",
+   "tipo": "imagen",
+   "likes": 62,
+   "comentarios": 3,
+   "compartidos": 6,
+   "alcance": "zona",
+   "publicado": "2026-09-28T23:40:06+00:00",
+   "cosechados": 4,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 2,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid022PMBQwpzWEtLj9Fjzk7h7pdSWzHex3opoFQR7u6PQc7rQCaYYBrQHdLiVLJkwccLl",
+   "cuenta": "blanconegro_fb",
+   "zona": "Mexicali",
+   "fecha": "2026-09-29",
+   "titulo": "🥊🕊️ Entre lágrimas y aplausos, despiden a “Lobito” Torres en Mexicali",
+   "tipo": "imagen",
+   "likes": 41,
+   "comentarios": 2,
+   "compartidos": 3,
+   "alcance": "zona",
+   "publicado": "2026-09-29T00:36:13+00:00",
+   "cosechados": 3,
+   "opinion": 3,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 3,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
   },
   {
    "url": "https://www.facebook.com/reel/1891974455123397",
@@ -768,6 +801,30 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/reel/27668277202845544",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-09-28",
+   "titulo": "🚨 “Solo 12% de efectividad para detener a responsables tras cometer un delito”: CONCAM",
+   "tipo": "video",
+   "likes": 24,
+   "comentarios": 16,
+   "compartidos": 32,
+   "reproducciones": 3664,
+   "alcance": "zona",
+   "publicado": "2026-09-28T21:55:08+00:00",
+   "cosechados": 9,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 2,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/NdTijuana/posts/pfbid0Q42hP2pgqwFHwtZ9b7qbaEuxosR1UhyWTGivHNze3FC7mFhmbR7kstcuXJBAsRzEl",
    "cuenta": "ndtijuana_fb",
    "zona": "Tijuana",
@@ -791,24 +848,46 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/reel/27668277202845544",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02apL5SyVR6eXhkmhFDipUe6JQT4eykEA6SASLM8LpHMpHuyaVZQcXXtZ8wrrk6Ckl",
+   "cuenta": "ndtijuana_fb",
+   "zona": "nacional",
    "fecha": "2026-09-28",
-   "titulo": "🚨 “Solo 12% de efectividad para detener a responsables tras cometer un delito”: CONCAM",
-   "tipo": "video",
+   "titulo": "#NDTInforma Una carrera de 5K con una meta que va más allá de correr",
+   "tipo": "imagen",
    "likes": 19,
-   "comentarios": 12,
-   "compartidos": 30,
-   "reproducciones": 2634,
-   "alcance": "zona",
-   "publicado": "2026-09-28T21:55:08+00:00",
-   "cosechados": 0,
-   "opinion": 0,
+   "comentarios": 2,
+   "compartidos": 1,
+   "alcance": "nacional",
+   "publicado": "2026-09-28T23:30:36+00:00",
+   "cosechados": 2,
+   "opinion": 2,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
+    "negativo": 1,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02RhUjvBCeebrnJzFFJV4En2uKsiao4NXLxUibmE5tPgdwTL4HoYRXY6EQGJaZSxJdl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-09-29",
+   "titulo": "En Tijuana las propiedades están por los cielos, una casa como la de la foto se cotiza por más de 1M de pesos.",
+   "tipo": "imagen",
+   "likes": 17,
+   "comentarios": 3,
+   "compartidos": 2,
+   "alcance": "zona",
+   "publicado": "2026-09-29T00:34:02+00:00",
+   "cosechados": 5,
+   "opinion": 5,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 2,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -821,10 +900,10 @@
    "fecha": "2026-09-28",
    "titulo": "#primersistemadenoticias #bajacalifornia #tijuana #mexicali #rosarito #ensenada #sanquintin #sanfelipe #tecate #marinadelpilar #marinadelpilaravila #gobierno #…",
    "tipo": "video",
-   "likes": 10,
+   "likes": 11,
    "comentarios": 0,
    "compartidos": 1,
-   "reproducciones": 1540,
+   "reproducciones": 1549,
    "alcance": "zona",
    "publicado": "2026-09-28T01:01:01+00:00",
    "cosechados": 0,
@@ -845,17 +924,17 @@
    "fecha": "2026-09-28",
    "titulo": "#NDTInforma │ Últimos días para aprovechar campaña ‘Soy México’",
    "tipo": "imagen",
-   "likes": 8,
+   "likes": 10,
    "comentarios": 2,
    "compartidos": 3,
    "alcance": "nacional",
    "publicado": "2026-09-28T20:52:29+00:00",
-   "cosechados": 0,
-   "opinion": 0,
+   "cosechados": 2,
+   "opinion": 2,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
+    "negativo": 1,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -868,9 +947,9 @@
    "fecha": "2026-09-28",
    "titulo": "El cartón del día, por Abraham",
    "tipo": "otro",
-   "likes": 6,
-   "comentarios": 1,
-   "compartidos": 1,
+   "likes": 10,
+   "comentarios": 2,
+   "compartidos": 4,
    "alcance": "nacional",
    "publicado": "2026-09-28T17:19:31+00:00",
    "cosechados": 1,
@@ -891,57 +970,11 @@
    "fecha": "2026-09-28",
    "titulo": "#Ensenada Ernesto Ruffo Appel regresó la mañana de este lunes 28 de septiembre a su domicilio en Ensenada.",
    "tipo": "otro",
-   "likes": 3,
+   "likes": 5,
    "comentarios": 0,
    "compartidos": 0,
    "alcance": "zona",
    "publicado": "2026-09-28T17:13:09+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0rydE6yn5bpqvewGD7N2DxGZ1n7WcMqYvvy39HvzN2N823gGaJ3uroEtGcKw39Skyl",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-09-28",
-   "titulo": "#NDTInforma │ El agua recorre más de 2 mil kilómetros antes de llegar a tu casa",
-   "tipo": "imagen",
-   "likes": 2,
-   "comentarios": 1,
-   "compartidos": 0,
-   "alcance": "zona",
-   "publicado": "2026-09-28T22:06:39+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02apL5SyVR6eXhkmhFDipUe6JQT4eykEA6SASLM8LpHMpHuyaVZQcXXtZ8wrrk6Ckl",
-   "cuenta": "ndtijuana_fb",
-   "zona": "nacional",
-   "fecha": "2026-09-28",
-   "titulo": "#NDTInforma Una carrera de 5K con una meta que va más allá de correr",
-   "tipo": "imagen",
-   "likes": 1,
-   "comentarios": 1,
-   "compartidos": 1,
-   "alcance": "nacional",
-   "publicado": "2026-09-28T23:30:36+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -963,7 +996,7 @@
    "likes": 1,
    "comentarios": 0,
    "compartidos": 0,
-   "reproducciones": 415,
+   "reproducciones": 520,
    "alcance": "zona",
    "publicado": "2026-09-28T21:55:24+00:00",
    "cosechados": 0,
@@ -983,7 +1016,7 @@
    "cuenta": "aztecabc_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 3,
+   "comentarios": 2,
    "crudos": 5,
    "fuera": 0,
    "compartidos": 0
@@ -991,18 +1024,18 @@
   {
    "cuenta": "blanconegro_fb",
    "estado": "ok",
-   "posts": 8,
-   "comentarios": 39,
-   "crudos": 40,
-   "fuera": 0,
+   "posts": 7,
+   "comentarios": 30,
+   "crudos": 33,
+   "fuera": 1,
    "compartidos": 0
   },
   {
    "cuenta": "blancorojo_fb",
    "estado": "ok",
    "posts": 4,
-   "comentarios": 39,
-   "crudos": 40,
+   "comentarios": 5,
+   "crudos": 5,
    "fuera": 3,
    "compartidos": 1
   },
@@ -1010,8 +1043,8 @@
    "cuenta": "ndtijuana_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 25,
-   "crudos": 26,
+   "comentarios": 9,
+   "crudos": 9,
    "fuera": 0,
    "compartidos": 0
   },
@@ -1019,21 +1052,21 @@
    "cuenta": "psn_fb",
    "estado": "ok",
    "posts": 6,
-   "comentarios": 2,
-   "crudos": 4,
+   "comentarios": 0,
+   "crudos": 1,
    "fuera": 1,
    "compartidos": 0
   }
  ],
  "gasto": {
   "resultados": 250,
-  "gastado": 154,
+  "gastado": 92,
   "por_concepto": {
    "aztecabc_fb": 13,
-   "blanconegro_fb": 48,
-   "blancorojo_fb": 48,
-   "ndtijuana_fb": 34,
-   "psn_fb": 11
+   "blanconegro_fb": 41,
+   "blancorojo_fb": 13,
+   "ndtijuana_fb": 17,
+   "psn_fb": 8
   }
  }
 }
