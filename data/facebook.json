@@ -1,33 +1,33 @@
 {
  "esquema": 1,
- "generado": "2026-09-30T05:55:19+00:00",
+ "generado": "2026-09-30T12:58:52+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 1191,
- "posts_vigentes": 192,
- "opinion": 1121,
- "repetidos": 35,
- "reacciones": 50,
+ "comentarios_vigentes": 1242,
+ "posts_vigentes": 200,
+ "opinion": 1167,
+ "repetidos": 37,
+ "reacciones": 55,
  "por_zona": {
   "Ensenada": 55,
   "Mexicali": 47,
   "Playas de Rosarito": 3,
   "Tecate": 20,
-  "Tijuana": 532,
-  "estatal": 490,
+  "Tijuana": 558,
+  "estatal": 515,
   "internacional": 4,
   "nacional": 40
  },
  "por_cuenta": {
   "aztecabc_fb": 58,
-  "blanconegro_fb": 486,
-  "blancorojo_fb": 288,
-  "ndtijuana_fb": 340,
+  "blanconegro_fb": 516,
+  "blancorojo_fb": 289,
+  "ndtijuana_fb": 360,
   "psn_fb": 19
  },
  "por_idioma": {
-  "es": 1191
+  "es": 1242
  },
  "por_tema": [
   {
@@ -42,6 +42,11 @@
   },
   {
    "tema": "nino",
+   "comentarios": 11,
+   "posts": 10
+  },
+  {
+   "tema": "policias",
    "comentarios": 10,
    "posts": 9
   },
@@ -49,11 +54,6 @@
    "tema": "leon",
    "comentarios": 9,
    "posts": 3
-  },
-  {
-   "tema": "policias",
-   "comentarios": 9,
-   "posts": 8
   },
   {
    "tema": "morena",
@@ -91,12 +91,12 @@
    "posts": 4
   },
   {
-   "tema": "estados unidos",
-   "comentarios": 3,
-   "posts": 3
+   "tema": "huracan polo",
+   "comentarios": 4,
+   "posts": 4
   },
   {
-   "tema": "huracan polo",
+   "tema": "estados unidos",
    "comentarios": 3,
    "posts": 3
   },
@@ -142,9 +142,9 @@
   }
  ],
  "sentimiento": {
-  "positivo": 101,
-  "negativo": 573,
-  "neutral": 447,
+  "positivo": 110,
+  "negativo": 599,
+  "neutral": 458,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -184,7 +184,7 @@
    "activa": true
   }
  ],
- "releidos": 19,
+ "releidos": 16,
  "destacados": [
   {
    "url": "https://www.facebook.com/reel/1043037808730908",
@@ -193,10 +193,10 @@
    "fecha": "2026-09-30",
    "titulo": "🚨 Así fue la volcadura de un tráiler cargado con 25 toneladas de croquetas en Tijuana",
    "tipo": "video",
-   "likes": 5319,
-   "comentarios": 438,
-   "compartidos": 463,
-   "reproducciones": 498147,
+   "likes": 6581,
+   "comentarios": 509,
+   "compartidos": 590,
+   "reproducciones": 654538,
    "alcance": "zona",
    "publicado": "2026-09-30T02:23:02+00:00",
    "cosechados": 10,
@@ -265,10 +265,10 @@
    "fecha": "2026-09-30",
    "titulo": "Días de balaceras en la 5y10, organizaciones criminales se disputan la plaza…",
    "tipo": "video",
-   "likes": 2073,
-   "comentarios": 293,
-   "compartidos": 329,
-   "reproducciones": 187573,
+   "likes": 2590,
+   "comentarios": 338,
+   "compartidos": 405,
+   "reproducciones": 236023,
    "alcance": "nacional",
    "publicado": "2026-09-30T01:12:16+00:00",
    "cosechados": 10,
@@ -283,39 +283,15 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/videos/1644667120659284",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-09-29",
-   "titulo": "🚨 EN VIVO: Evacúan facultades de la UABC Otay por presuntas amenazas; activan protocolo de seguridad",
-   "tipo": "video",
-   "likes": 571,
-   "comentarios": 49,
-   "compartidos": 65,
-   "reproducciones": 84946,
-   "alcance": "zona",
-   "publicado": "2026-09-29T22:18:08+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 5,
-    "neutral": 5,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0RDCJ7NuPJxra1hTSSsYo5ojmikjWtGCCmVzYGjku5DkwewHw2FDetCrufCHu2JEZl",
    "cuenta": "blanconegro_fb",
    "zona": "Tijuana",
    "fecha": "2026-09-30",
    "titulo": "Detienen a dos presuntos responsables del asesinato de dos mujeres frente a primaria en Tijuana",
    "tipo": "imagen",
-   "likes": 534,
-   "comentarios": 37,
-   "compartidos": 22,
+   "likes": 621,
+   "comentarios": 52,
+   "compartidos": 39,
    "alcance": "zona",
    "publicado": "2026-09-30T02:46:52+00:00",
    "cosechados": 9,
@@ -324,6 +300,53 @@
     "positivo": 1,
     "negativo": 4,
     "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0UPejfgejKv6FcmxvLuZaLdi9JVf7Pm5Z4aTEXz68DUFMsaCS8wrVZ4xo32NTp6f3l",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-09-30",
+   "titulo": "#NDTInforma │ Detienen a presuntos responsables del asesinato de dos mujeres en Tijuana; uno manifestó ser menor de edad.",
+   "tipo": "imagen",
+   "likes": 606,
+   "comentarios": 41,
+   "compartidos": 40,
+   "alcance": "zona",
+   "publicado": "2026-09-30T01:27:25+00:00",
+   "cosechados": 10,
+   "opinion": 9,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 6,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/videos/1644667120659284",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-09-29",
+   "titulo": "🚨 EN VIVO: Evacúan facultades de la UABC Otay por presuntas amenazas; activan protocolo de seguridad",
+   "tipo": "video",
+   "likes": 595,
+   "comentarios": 50,
+   "compartidos": 68,
+   "reproducciones": 90120,
+   "alcance": "zona",
+   "publicado": "2026-09-29T22:18:08+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 5,
+    "neutral": 5,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -359,9 +382,9 @@
    "fecha": "2026-09-29",
    "titulo": "#NDTInforma Una falta de tránsito termina con la detención de Miguel en Santa Fe",
    "tipo": "imagen",
-   "likes": 416,
-   "comentarios": 117,
-   "compartidos": 23,
+   "likes": 488,
+   "comentarios": 128,
+   "compartidos": 24,
    "alcance": "zona",
    "publicado": "2026-09-29T22:31:59+00:00",
    "cosechados": 10,
@@ -423,29 +446,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid07gzfgKTNzetwQfyfVc6pMLBfEvwrbCrchTySa155rfZ3YxvDjmL9woJGuXg5rwPCl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "estatal",
-   "fecha": "2026-09-29",
-   "titulo": "Kennedy quiso bajarse del barco de la Patrulla Espiritual y ya no quiere continuar en la clínica. 🥺",
-   "tipo": "imagen",
-   "likes": 314,
-   "comentarios": 110,
-   "compartidos": 5,
-   "alcance": "nacional",
-   "publicado": "2026-09-29T10:10:36+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 8,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NdTijuana/videos/28752998244360797",
    "cuenta": "ndtijuana_fb",
    "zona": "estatal",
@@ -493,24 +493,24 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/931435879648608",
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/935612599196099",
    "cuenta": "blanconegro_fb",
    "zona": "estatal",
-   "fecha": "2026-09-29",
-   "titulo": "Mujer trans lesionada por arma blanca",
+   "fecha": "2026-09-30",
+   "titulo": "Accidente vehículo vs revolvedora",
    "tipo": "video",
-   "likes": 229,
-   "comentarios": 18,
-   "compartidos": 7,
-   "reproducciones": 14902,
+   "likes": 265,
+   "comentarios": 8,
+   "compartidos": 6,
+   "reproducciones": 14131,
    "alcance": "nacional",
-   "publicado": "2026-09-29T09:33:55+00:00",
-   "cosechados": 10,
-   "opinion": 9,
+   "publicado": "2026-09-30T11:59:00+00:00",
+   "cosechados": 8,
+   "opinion": 8,
    "sentimiento": {
-    "positivo": 0,
-    "negativo": 4,
-    "neutral": 5,
+    "positivo": 4,
+    "negativo": 3,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -546,9 +546,9 @@
    "fecha": "2026-09-30",
    "titulo": "Resguardan a menor en Ensenada tras detectar golpes y posibles señales de violencia",
    "tipo": "imagen",
-   "likes": 138,
-   "comentarios": 11,
-   "compartidos": 14,
+   "likes": 173,
+   "comentarios": 22,
+   "compartidos": 23,
    "alcance": "zona",
    "publicado": "2026-09-30T01:15:36+00:00",
    "cosechados": 10,
@@ -569,9 +569,9 @@
    "fecha": "2026-09-30",
    "titulo": "Por motivos de fuerza mayor se cancelan las lluvias en Tijuana hasta nuevo aviso",
    "tipo": "otro",
-   "likes": 127,
-   "comentarios": 14,
-   "compartidos": 6,
+   "likes": 151,
+   "comentarios": 15,
+   "compartidos": 8,
    "alcance": "zona",
    "publicado": "2026-09-30T02:05:23+00:00",
    "cosechados": 9,
@@ -579,6 +579,30 @@
    "sentimiento": {
     "positivo": 2,
     "negativo": 6,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/videos/2892956197736577",
+   "cuenta": "ndtijuana_fb",
+   "zona": "estatal",
+   "fecha": "2026-09-30",
+   "titulo": "Accidente Blvd Libramiento sur",
+   "tipo": "video",
+   "likes": 109,
+   "comentarios": 7,
+   "compartidos": 5,
+   "reproducciones": 6693,
+   "alcance": "nacional",
+   "publicado": "2026-09-30T11:53:49+00:00",
+   "cosechados": 6,
+   "opinion": 6,
+   "sentimiento": {
+    "positivo": 3,
+    "negativo": 2,
     "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -603,30 +627,6 @@
     "positivo": 0,
     "negativo": 4,
     "neutral": 6,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/reel/1117060374099458",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-09-29",
-   "titulo": "🚨 Piden retirar basura y devolver contenedores en Cerro Colorado",
-   "tipo": "video",
-   "likes": 88,
-   "comentarios": 27,
-   "compartidos": 30,
-   "reproducciones": 15203,
-   "alcance": "zona",
-   "publicado": "2026-09-29T20:14:12+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 8,
-    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -662,9 +662,9 @@
    "fecha": "2026-09-30",
    "titulo": "La noticia fue compartida por la Asociación Nacional de Intérpretes.",
    "tipo": "otro",
-   "likes": 63,
+   "likes": 65,
    "comentarios": 17,
-   "compartidos": 16,
+   "compartidos": 17,
    "alcance": "nacional",
    "publicado": "2026-09-30T00:15:08+00:00",
    "cosechados": 10,
@@ -673,6 +673,52 @@
     "positivo": 3,
     "negativo": 3,
     "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0QQ1vjprkFvQCveLqcVTT8CAFUWxk9B9bNKe1Qx65PCUu8K9BXUB2Yc6jPEPZLtWyl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "estatal",
+   "fecha": "2026-09-30",
+   "titulo": "⚠️ Así de enorme se el Gran Huracán Rachel, categoría 4 increíble, Rachel esta alterada por el cambio climático. Su trayectoria hacía Baja California Sir",
+   "tipo": "imagen",
+   "likes": 47,
+   "comentarios": 1,
+   "compartidos": 4,
+   "alcance": "estatal",
+   "publicado": "2026-09-30T10:10:43+00:00",
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid01MW8YLmm2mBYQvRtwYKapA3rPyb2vjLCJswyvZhZwHMhVVgWWkfw3uwmAWLDWYzgl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "internacional",
+   "fecha": "2026-09-30",
+   "titulo": "MIENTRAS TANTO EN COLOMBIA",
+   "tipo": "imagen",
+   "likes": 46,
+   "comentarios": 8,
+   "compartidos": 1,
+   "alcance": "extranjero",
+   "publicado": "2026-09-30T02:21:46+00:00",
+   "cosechados": 4,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 2,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -702,46 +748,23 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid01MW8YLmm2mBYQvRtwYKapA3rPyb2vjLCJswyvZhZwHMhVVgWWkfw3uwmAWLDWYzgl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "internacional",
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0kYTPNAmUtBEaXNXteYNmLmncwzLMn2sfyv448rWrWZauUUBw8Nt4shYuBXJxVe5Wl",
+   "cuenta": "blanconegro_fb",
+   "zona": "estatal",
    "fecha": "2026-09-30",
-   "titulo": "MIENTRAS TANTO EN COLOMBIA",
-   "tipo": "imagen",
-   "likes": 39,
-   "comentarios": 6,
-   "compartidos": 1,
-   "alcance": "extranjero",
-   "publicado": "2026-09-30T02:21:46+00:00",
-   "cosechados": 4,
-   "opinion": 4,
+   "titulo": "Negó cualquier relación con actividades criminales tras los señalamientos difundidos por la Oficina de Control de Activos Extranjeros (OFAC) del Departamento d…",
+   "tipo": "otro",
+   "likes": 38,
+   "comentarios": 23,
+   "compartidos": 17,
+   "alcance": "nacional",
+   "publicado": "2026-09-30T02:07:49+00:00",
+   "cosechados": 6,
+   "opinion": 3,
    "sentimiento": {
     "positivo": 0,
     "negativo": 2,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02BEdrbV5jqmAvTrJrVoAhTwRC9qPkR65rvYEpq2e8kcxXh39kv2y9MChMLDUs4sStl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "estatal",
-   "fecha": "2026-09-29",
-   "titulo": "Kennedy quiso bajarse del barco de la Patrulla Espiritual y ya no quiere continuar en la clínica. 🥺",
-   "tipo": "imagen",
-   "likes": 32,
-   "comentarios": 12,
-   "compartidos": 1,
-   "alcance": "nacional",
-   "publicado": "2026-09-29T10:10:36+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 8,
-    "neutral": 2,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -754,8 +777,8 @@
    "fecha": "2026-09-30",
    "titulo": "Déjanos tus comentarios",
    "tipo": "imagen",
-   "likes": 23,
-   "comentarios": 78,
+   "likes": 30,
+   "comentarios": 91,
    "compartidos": 2,
    "alcance": "nacional",
    "publicado": "2026-09-30T02:36:28+00:00",
@@ -840,29 +863,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0kYTPNAmUtBEaXNXteYNmLmncwzLMn2sfyv448rWrWZauUUBw8Nt4shYuBXJxVe5Wl",
-   "cuenta": "blanconegro_fb",
-   "zona": "estatal",
-   "fecha": "2026-09-30",
-   "titulo": "Negó cualquier relación con actividades criminales tras los señalamientos difundidos por la Oficina de Control de Activos Extranjeros (OFAC) del Departamento d…",
-   "tipo": "otro",
-   "likes": 15,
-   "comentarios": 8,
-   "compartidos": 3,
-   "alcance": "nacional",
-   "publicado": "2026-09-30T02:07:49+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/aztecabc/posts/pfbid0KprVrWirLSRn7tu5PfjC2ybPSfGfjnXP46aK6ptiG7HhFb2pN5VbarTaqUGaG9m6l",
    "cuenta": "aztecabc_fb",
    "zona": "estatal",
@@ -918,7 +918,7 @@
    "likes": 12,
    "comentarios": 0,
    "compartidos": 1,
-   "reproducciones": 1087,
+   "reproducciones": 1137,
    "alcance": "zona",
    "publicado": "2026-09-29T23:00:54+00:00",
    "cosechados": 0,
@@ -1053,18 +1053,18 @@
   {
    "cuenta": "aztecabc_fb",
    "estado": "ok",
-   "posts": 8,
-   "comentarios": 2,
+   "posts": 7,
+   "comentarios": 0,
    "crudos": 4,
-   "fuera": 0,
+   "fuera": 1,
    "compartidos": 0
   },
   {
    "cuenta": "blanconegro_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 39,
-   "crudos": 40,
+   "comentarios": 34,
+   "crudos": 38,
    "fuera": 0,
    "compartidos": 0
   },
@@ -1072,8 +1072,8 @@
    "cuenta": "blancorojo_fb",
    "estado": "ok",
    "posts": 4,
-   "comentarios": 23,
-   "crudos": 25,
+   "comentarios": 1,
+   "crudos": 1,
    "fuera": 1,
    "compartidos": 0
   },
@@ -1081,8 +1081,8 @@
    "cuenta": "ndtijuana_fb",
    "estado": "ok",
    "posts": 7,
-   "comentarios": 30,
-   "crudos": 30,
+   "comentarios": 20,
+   "crudos": 20,
    "fuera": 1,
    "compartidos": 0
   },
@@ -1090,21 +1090,22 @@
    "cuenta": "psn_fb",
    "estado": "ok",
    "posts": 7,
-   "comentarios": 1,
-   "crudos": 3,
+   "comentarios": 0,
+   "crudos": 0,
+   "nota": "sin posts nuevos que cosechar",
    "fuera": 0,
    "compartidos": 1
   }
  ],
  "gasto": {
   "resultados": 250,
-  "gastado": 139,
+  "gastado": 100,
   "por_concepto": {
    "aztecabc_fb": 12,
-   "blanconegro_fb": 48,
-   "blancorojo_fb": 30,
-   "ndtijuana_fb": 38,
-   "psn_fb": 11
+   "blanconegro_fb": 46,
+   "blancorojo_fb": 6,
+   "ndtijuana_fb": 28,
+   "psn_fb": 8
   }
  }
 }
