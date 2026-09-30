@@ -3,17 +3,17 @@
  "generado": "2026-09-30",
  "ventana_dias": 7,
  "minimo": 3,
- "notas_ventana": 2317,
+ "notas_ventana": 2352,
  "notas_previas": 1529,
  "temas": [
   {
    "termino": "lluvias",
-   "n": 58,
+   "n": 59,
    "n_previo": 9,
-   "momento": 49,
+   "momento": 50,
    "zonas": {
+    "nacional": 20,
     "estatal": 19,
-    "nacional": 19,
     "Tijuana": 11,
     "Mexicali": 5,
     "Ensenada": 4,
@@ -23,7 +23,7 @@
     "Tecate": 1
    },
    "fuentes": {
-    "imparcial": 19,
+    "imparcial": 20,
     "uniradio": 7,
     "afn": 5,
     "soltij": 5,
@@ -56,6 +56,7 @@
     "244a33ae5d041010",
     "2d624c0b0c58199a",
     "2d8936793d3c3571",
+    "2d93df61f8b70e10",
     "37e46361a3032164",
     "3b52cdc2ff38485c",
     "3ba54ba71760562c",
@@ -106,8 +107,8 @@
    ],
    "ejemplos": [
     "Huracán Polo EN VIVO hoy 29 de septiembre: trayectoria, lluvias y afectaciones",
-    "Cierran carretera Tesopaco-Yécora por lluvias",
-    "Un sistema frontal provocará fuertes lluvias y vientos intensos el miércoles y jueves"
+    "Huracán Rachel se intensifica y amenaza a cuatro estados con lluvias de 150 mm",
+    "Cierran carretera Tesopaco-Yécora por lluvias"
    ]
   },
   {
@@ -188,11 +189,11 @@
   },
   {
    "termino": "morena",
-   "n": 42,
+   "n": 43,
    "n_previo": 10,
-   "momento": 32,
+   "momento": 33,
    "zonas": {
-    "nacional": 20,
+    "nacional": 21,
     "Tijuana": 16,
     "estatal": 3,
     "Mexicali": 1,
@@ -208,6 +209,7 @@
     "rosarito": 3,
     "tecate": 3,
     "soltij": 2,
+    "gn-8ec0afb4cc26": 1,
     "lavoz": 1
    },
    "un_solo_medio": false,
@@ -241,6 +243,7 @@
     "9c5f681f66d7c704",
     "9f44abcc707e9f91",
     "a975a0892fcf036f",
+    "b31d9e2f523e1951",
     "b3b6cf9df3276fbc",
     "b41da7a1aa552ef7",
     "b4ede1b3e541f68e",
@@ -256,9 +259,9 @@
     "fb54faa11ed8fbbd"
    ],
    "ejemplos": [
+    "Las perlas de Morena: investigación en tierra ajena",
     "Hubo mucha unidad en proceso interno de Morena: Sheinbaum",
-    "Sheinbaum ve \"mucha unidad\" en proceso interno de Morena",
-    "Lorenia Valles tuvo mayor puntaje en la encuesta: Morena"
+    "Sheinbaum ve \"mucha unidad\" en proceso interno de Morena"
    ]
   },
   {
@@ -321,6 +324,70 @@
     "Huracán Polo EN VIVO hoy 29 de septiembre: trayectoria, lluvias y afectaciones",
     "Huracán Polo causa daños en caminos y afectaciones en la energía en Suaqui",
     "Cierran puertos del Pacífico por el paso de la tormenta tropical 'Rachel' y el huracán 'Polo'"
+   ]
+  },
+  {
+   "termino": "policias",
+   "n": 28,
+   "n_previo": 1,
+   "momento": 27,
+   "zonas": {
+    "nacional": 10,
+    "Tijuana": 9,
+    "Mexicali": 3,
+    "Tecate": 3,
+    "estatal": 2,
+    "San Diego": 1
+   },
+   "fuentes": {
+    "imparcial": 8,
+    "afn": 6,
+    "gn-f3b3977c449c": 3,
+    "zeta": 3,
+    "gn-906741a25e9c": 1,
+    "gn-df1d301d141c": 1,
+    "gn-f8497491006c": 1,
+    "lavoz": 1,
+    "soltij": 1,
+    "tecate": 1,
+    "timessd": 1,
+    "uniradio": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "0427c10c882fb3e3",
+    "0d1e12adc2fd7bea",
+    "1476e0eeba80dfca",
+    "14e241f474761013",
+    "24265a869fe24a27",
+    "2e9d9eb442a7bd26",
+    "3b4303991e9bdee2",
+    "40ffcb87f376ed8e",
+    "5e1e62b9fd66d9cf",
+    "5ff683f92238e7df",
+    "6badca566fe091df",
+    "89c4f775c8ef81e9",
+    "8ef4d615215d3e66",
+    "9852a4d990696f8b",
+    "9ae129801c8f6c88",
+    "a0f292fae63b29ed",
+    "a4e077a4a8ace2bb",
+    "ad5bd8bbea9add85",
+    "bd9e9e02c6f46150",
+    "be4a815921a940e4",
+    "bf8e5ac8558c1632",
+    "c77e1bda52b6d87d",
+    "c8cbbb8499a8926a",
+    "d0916bedb32cb4a2",
+    "d1bc98909c9f1d9d",
+    "dcea766c73e28fe7",
+    "fbd4c9e5f2bdde0d",
+    "fe897ad19b0de1ae"
+   ],
+   "ejemplos": [
+    "Se suman 18 nuevos policías municipales a la DSPM",
+    "Newsom firma ley que prohíbe a policías e ICE usar guantes que aplican descargas eléctricas",
+    "Montachoques operan con policías"
    ]
   },
   {
@@ -388,74 +455,12 @@
    ]
   },
   {
-   "termino": "policias",
-   "n": 27,
-   "n_previo": 1,
-   "momento": 26,
-   "zonas": {
-    "Tijuana": 9,
-    "nacional": 9,
-    "Mexicali": 3,
-    "Tecate": 3,
-    "estatal": 2,
-    "San Diego": 1
-   },
-   "fuentes": {
-    "imparcial": 8,
-    "afn": 6,
-    "gn-f3b3977c449c": 3,
-    "zeta": 3,
-    "gn-df1d301d141c": 1,
-    "gn-f8497491006c": 1,
-    "lavoz": 1,
-    "soltij": 1,
-    "tecate": 1,
-    "timessd": 1,
-    "uniradio": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "0427c10c882fb3e3",
-    "0d1e12adc2fd7bea",
-    "1476e0eeba80dfca",
-    "14e241f474761013",
-    "24265a869fe24a27",
-    "2e9d9eb442a7bd26",
-    "3b4303991e9bdee2",
-    "40ffcb87f376ed8e",
-    "5e1e62b9fd66d9cf",
-    "5ff683f92238e7df",
-    "6badca566fe091df",
-    "89c4f775c8ef81e9",
-    "8ef4d615215d3e66",
-    "9852a4d990696f8b",
-    "9ae129801c8f6c88",
-    "a0f292fae63b29ed",
-    "a4e077a4a8ace2bb",
-    "ad5bd8bbea9add85",
-    "bd9e9e02c6f46150",
-    "be4a815921a940e4",
-    "c77e1bda52b6d87d",
-    "c8cbbb8499a8926a",
-    "d0916bedb32cb4a2",
-    "d1bc98909c9f1d9d",
-    "dcea766c73e28fe7",
-    "fbd4c9e5f2bdde0d",
-    "fe897ad19b0de1ae"
-   ],
-   "ejemplos": [
-    "Newsom firma ley que prohíbe a policías e ICE usar guantes que aplican descargas eléctricas",
-    "Montachoques operan con policías",
-    "Arrestan a motociclista con navaja y radio; presuntamente vigilaba a policías"
-   ]
-  },
-  {
    "termino": "imss",
-   "n": 29,
+   "n": 30,
    "n_previo": 5,
-   "momento": 24,
+   "momento": 25,
    "zonas": {
-    "nacional": 10,
+    "nacional": 11,
     "Mexicali": 8,
     "Tijuana": 8,
     "Playas de Rosarito": 1,
@@ -463,7 +468,7 @@
     "estatal": 1
    },
    "fuentes": {
-    "imparcial": 9,
+    "imparcial": 10,
     "soltij": 4,
     "uniradio": 4,
     "jornadabc": 3,
@@ -500,15 +505,16 @@
     "adc3e082b63d467c",
     "af9e78f814dce8ee",
     "b3667cdfebd9f57a",
+    "baf5d8d618f5e4dd",
     "c54e30c8f9b051e4",
     "d61178dcc2dc5080",
     "f6534372ffe1d852",
     "fb9a7866d57475c4"
    ],
    "ejemplos": [
+    "La Fundación Carlos Slim impulsa junto con IMSS-Bienestar una estrategia nacional para fortalecer la atención durante el embarazo, parto y puerperio, con un modelo de salud materna que busca consolidarse en 23 estados de México hacia 2027",
     "IMSS proyecta sumar más de 10 mil camas hospitalarias para 2030",
-    "Retraso de 4 meses en pago del IMSS Bienestar a proveedores generó desabasto en HGT",
-    "Salud reporta expansión del ISSSTE y avances de IMSS Bienestar"
+    "Retraso de 4 meses en pago del IMSS Bienestar a proveedores generó desabasto en HGT"
    ]
   },
   {
@@ -904,6 +910,67 @@
    ]
   },
   {
+   "termino": "estados unidos",
+   "n": 33,
+   "n_previo": 14,
+   "momento": 19,
+   "zonas": {
+    "nacional": 27,
+    "San Diego": 4,
+    "Tijuana": 4,
+    "Mexicali": 1,
+    "estatal": 1
+   },
+   "fuentes": {
+    "imparcial": 22,
+    "uniradio": 5,
+    "gn-f8497491006c": 4,
+    "afn": 1,
+    "gn-208187d76ea7": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "02e7c1a8dc8f877c",
+    "0886a6509b787dda",
+    "10d1b5fc46f32c43",
+    "2a26c64cc4fa10af",
+    "2ca8842be895f4e3",
+    "3c620fe21c1d5e9b",
+    "3ce0de4f6d8a8003",
+    "409fb327a3a2e6a1",
+    "4542ef1e44df170f",
+    "48379dcf6119955e",
+    "5417bb596e3c1d80",
+    "5c2fcdc735007878",
+    "5ea19384c65683d2",
+    "5ecaa17629f44d61",
+    "68896203bc06ca0a",
+    "7709858c3b3fd4dd",
+    "781ee9e2fac2c8a1",
+    "8872f76cd2f3da56",
+    "8e3c0416251f8124",
+    "a367ee837a5fd0d8",
+    "a4d6de1dd19feeb8",
+    "a5a98b7641328ddd",
+    "a954ec8827b2b117",
+    "af9b5531f6a644a4",
+    "b44c6d0ad455dae1",
+    "be7b4c087b8401c5",
+    "cd83b6eb9257e165",
+    "da9e5b23cad2168b",
+    "dee212d26590e5e8",
+    "df62fc22643568a0",
+    "e380c1bb53b2e9ab",
+    "ec8f74db70c2bebb",
+    "fd551d6b64ffdc3c"
+   ],
+   "ejemplos": [
+    "Denuncian que Estados Unidos ha expulsado a unos 23,000 migrantes a terceros países",
+    "Los CDs regresan con fuerza entre los jóvenes de América con un aumento de 16% en sus ventas en Estados Unidos durante 2026, mientras México, Chile y Argentina también registran una nueva demanda por la música física impulsada por la nostalgia, el coleccionismo y precios más accesibles",
+    "Agencias de Estados Unidos analizan presuntos vínculos de ‘Andy’ López Beltrán con crimen organizado y presiona al gobierno de Sheinbaum, reporta The New York Times"
+   ]
+  },
+  {
    "termino": "proceso",
    "n": 29,
    "n_previo": 11,
@@ -1122,65 +1189,6 @@
     "El equipo del Papa León XIV va tras un milagro en los playoffs de la MLB",
     "Investigan origen de león herido localizado en Valle Redondo",
     "El papa León XIV se reunió con siete personas que sufrieron abusos dentro de la Iglesia católica en Francia y expresó su compromiso para evitar que estos hechos vuelvan a ocurrir"
-   ]
-  },
-  {
-   "termino": "estados unidos",
-   "n": 31,
-   "n_previo": 14,
-   "momento": 17,
-   "zonas": {
-    "nacional": 25,
-    "San Diego": 4,
-    "Tijuana": 4,
-    "Mexicali": 1,
-    "estatal": 1
-   },
-   "fuentes": {
-    "imparcial": 21,
-    "gn-f8497491006c": 4,
-    "uniradio": 4,
-    "afn": 1,
-    "gn-208187d76ea7": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "02e7c1a8dc8f877c",
-    "0886a6509b787dda",
-    "10d1b5fc46f32c43",
-    "2a26c64cc4fa10af",
-    "2ca8842be895f4e3",
-    "3c620fe21c1d5e9b",
-    "3ce0de4f6d8a8003",
-    "409fb327a3a2e6a1",
-    "4542ef1e44df170f",
-    "48379dcf6119955e",
-    "5417bb596e3c1d80",
-    "5c2fcdc735007878",
-    "5ea19384c65683d2",
-    "5ecaa17629f44d61",
-    "68896203bc06ca0a",
-    "7709858c3b3fd4dd",
-    "781ee9e2fac2c8a1",
-    "a367ee837a5fd0d8",
-    "a4d6de1dd19feeb8",
-    "a5a98b7641328ddd",
-    "a954ec8827b2b117",
-    "af9b5531f6a644a4",
-    "b44c6d0ad455dae1",
-    "be7b4c087b8401c5",
-    "cd83b6eb9257e165",
-    "da9e5b23cad2168b",
-    "dee212d26590e5e8",
-    "df62fc22643568a0",
-    "e380c1bb53b2e9ab",
-    "ec8f74db70c2bebb",
-    "fd551d6b64ffdc3c"
-   ],
-   "ejemplos": [
-    "Agencias de Estados Unidos analizan presuntos vínculos de ‘Andy’ López Beltrán con crimen organizado y presiona al gobierno de Sheinbaum, reporta The New York Times",
-    "UIF incluye a sancionados por Estados Unidos en lista de personas bloqueadas",
-    "Carlos Torres niega vínculos criminales tras señalamientos de Estados Unidos"
    ]
   },
   {
@@ -1632,19 +1640,24 @@
  ],
  "descartados": [
   {
+   "termino": "estados",
+   "n": 45,
+   "porque": "duplica «estados unidos»"
+  },
+  {
    "termino": "polo",
-   "n": 43,
+   "n": 44,
    "porque": "duplica «huracan polo»"
   },
   {
-   "termino": "estados",
-   "n": 41,
+   "termino": "unidos",
+   "n": 34,
    "porque": "duplica «estados unidos»"
   },
   {
-   "termino": "unidos",
-   "n": 32,
-   "porque": "duplica «estados unidos»"
+   "termino": "huracan",
+   "n": 31,
+   "porque": "duplica «huracan polo»"
   },
   {
    "termino": "marina",
@@ -1655,11 +1668,6 @@
    "termino": "prision",
    "n": 31,
    "porque": "duplica «prision domiciliaria»"
-  },
-  {
-   "termino": "huracan",
-   "n": 30,
-   "porque": "duplica «huracan polo»"
   },
   {
    "termino": "pilar",
@@ -1698,7 +1706,7 @@
   },
   {
    "termino": "carlos",
-   "n": 18,
+   "n": 19,
    "porque": "duplica «carlos torres»"
   },
   {
@@ -1734,7 +1742,7 @@
  ],
  "por_zona": {
   "Tijuana": {
-   "notas_ventana": 577,
+   "notas_ventana": 581,
    "minimo": 3,
    "temas": [
     {
@@ -2567,7 +2575,7 @@
    ]
   },
   "Mexicali": {
-   "notas_ventana": 213,
+   "notas_ventana": 215,
    "minimo": 3,
    "temas": [
     {
@@ -2894,6 +2902,30 @@
       "Registra Mexicali 4 mil 700 hogares con desplazamiento forzado por violencia: INEGI",
       "Exigen padres de familia de la Secundaria 14 alto al bullying y violencia",
       "Mexicali atiende a más de 3 mil mujeres con programas de prevención de violencia"
+     ]
+    },
+    {
+     "termino": "diputados",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "Mexicali": 4
+     },
+     "fuentes": {
+      "lavoz": 4
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "0f5383ddebd7bed9",
+      "303e01054253c15c",
+      "636405ee559fb735",
+      "8eb2ef589d0db566"
+     ],
+     "ejemplos": [
+      "Avalan diputados dictamen contra doble nacionalidad",
+      "Diputados con licencia no solicitaron regresar al cargo",
+      "Cuestiona Molina a diputados que no declararon propiedades"
      ]
     },
     {
@@ -3228,31 +3260,6 @@
       "Estado debe subsidiar el servicio del transporte público: UABC",
       "Reconoce rector reacreditación de 2 programas en la Facultad de Pedagogía de UABC",
       "Reconocen a 45 medallistas cimarrones en UABC"
-     ]
-    },
-    {
-     "termino": "verano",
-     "n": 4,
-     "n_previo": 1,
-     "momento": 3,
-     "zonas": {
-      "Mexicali": 4
-     },
-     "fuentes": {
-      "imparcial": 3,
-      "lavoz": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "25990ec87fda70e7",
-      "6e306a110e3f2804",
-      "eb2562bb8793f379",
-      "fc7551c593e69fef"
-     ],
-     "ejemplos": [
-      "¿Se te quemaron plantas este verano en Mexicali? Estas son algunas de las cinco especies resisten mejor el calor",
-      "¿Cuándo termina el subsidio de verano para Mexicali?",
-      "Mexicali después del verano: el calor también dañó fachadas, anuncios, autos y árboles"
      ]
     }
    ]
@@ -4572,7 +4579,7 @@
    ]
   },
   "Tecate": {
-   "notas_ventana": 38,
+   "notas_ventana": 39,
    "minimo": 3,
    "temas": [
     {
@@ -5414,7 +5421,7 @@
    ]
   },
   "San Diego": {
-   "notas_ventana": 277,
+   "notas_ventana": 290,
    "minimo": 3,
    "temas": [
     {
@@ -5526,6 +5533,39 @@
      ]
     },
     {
+     "termino": "candidates",
+     "n": 8,
+     "n_previo": 0,
+     "momento": 8,
+     "zonas": {
+      "San Diego": 8,
+      "Tijuana": 1
+     },
+     "fuentes": {
+      "gn-ac8cc2613314": 2,
+      "kpbs": 2,
+      "voiceofsd": 2,
+      "inewsource": 1,
+      "timessd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "69d308f24e1b3ed4",
+      "93fb3a30a983f887",
+      "a91b774684f01a71",
+      "bc7d708706e9600b",
+      "cc0096b2c17d0979",
+      "d639775f614c7351",
+      "e41417b50183898f",
+      "fb211546d72da3df"
+     ],
+     "ejemplos": [
+      "Candidates Call on Mayor to Hire COO",
+      "Council Candidates Say It’s Time for Mayor to Hire a COO",
+      "D2 candidates Bailey, Crosby spar over city budget, homelessness and ALPRs"
+     ]
+    },
+    {
      "termino": "imperial beach",
      "n": 8,
      "n_previo": 1,
@@ -5615,36 +5655,6 @@
       "Governor signs Midway Rising bill, clears path for final approval of embattled housing, retail project",
       "Newsom vetoes Delta levees bill as El Niño winter looms",
       "The Senate passes the Protect College Sports Act, but the bill's future is unclear"
-     ]
-    },
-    {
-     "termino": "candidates",
-     "n": 6,
-     "n_previo": 0,
-     "momento": 6,
-     "zonas": {
-      "San Diego": 6,
-      "Tijuana": 1
-     },
-     "fuentes": {
-      "gn-ac8cc2613314": 2,
-      "kpbs": 2,
-      "inewsource": 1,
-      "timessd": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "69d308f24e1b3ed4",
-      "93fb3a30a983f887",
-      "a91b774684f01a71",
-      "cc0096b2c17d0979",
-      "d639775f614c7351",
-      "e41417b50183898f"
-     ],
-     "ejemplos": [
-      "D2 candidates Bailey, Crosby spar over city budget, homelessness and ALPRs",
-      "Meet the candidates for all school board races in San Diego County",
-      "Meet the candidates for the Imperial Beach mayoral race"
      ]
     },
     {
