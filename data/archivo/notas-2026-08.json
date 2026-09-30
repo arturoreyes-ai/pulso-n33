@@ -1,8 +1,862 @@
 {
  "esquema": 1,
  "mes": "2026-08",
- "total": 68,
+ "total": 101,
  "notas": [
+  {
+   "id": "dbbed6684bc4318c",
+   "titulo": "Jesús Gómez quiere llegar a selección en nuevo proceso que encabeza Rafa Márquez",
+   "url": "https://oem.com.mx/elsoldetijuana/deportes/jesus-gomez-quiere-llegar-a-seleccion-en-nuevo-proceso-que-encabeza-rafa-marquez-31823244",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T23:58:31+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.681,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "edfa30b0f329683c",
+   "titulo": "Vecinos de La Morita exigen pavimentación ante riesgo de incendios por basurero clandestino",
+   "url": "https://oem.com.mx/elsoldetijuana/local/vecinos-de-la-morita-exigen-pavimentacion-ante-riesgo-de-incendios-por-basurero-clandestino-31822456",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T22:58:04+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4886,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [
+    "La Presa Este"
+   ],
+   "rubros": []
+  },
+  {
+   "id": "6d0911f9e63462f6",
+   "titulo": "Conmemoran el día Internacional de las Víctimas de Desaparición Forzada",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/conmemoran-el-dia-internacional-de-las-victimas-de-desaparicion-forzada-31822576",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T22:19:09+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4665,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "cc755cc0aa6b2acb",
+   "titulo": "Industria pide facilitar trámites para conservar inversiones y empleos en Baja California",
+   "url": "https://oem.com.mx/elsoldetijuana/local/industria-pide-facilitar-tramites-para-conservar-inversiones-y-empleos-en-baja-california-31822073",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "estatal"
+   ],
+   "alcance": "estatal",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T21:46:25+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5915,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "63db31a260aaa001",
+   "titulo": "El Calor de Mexicali pesó más; Soles derrotó a Cancún",
+   "url": "https://oem.com.mx/lavozdelafrontera/deportes/el-calor-de-mexicali-peso-mas-soles-derroto-a-cancun-31822066",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T21:21:02+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6252,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": [
+    "clima",
+    "deportes"
+   ]
+  },
+  {
+   "id": "bcbba985a60982bf",
+   "titulo": "CEDHBC ha emitido 29 recomendaciones en los últimos 35 meses",
+   "url": "https://oem.com.mx/elsoldetijuana/local/cedhbc-ha-emitido-29-recomendaciones-en-los-ultimos-35-meses-31820658",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T20:55:30+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6929,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "2d1b42e5342303e3",
+   "titulo": "Regresan a clases más de 700 mil estudiantes",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/regresan-a-clases-mas-de-mas-de-700-mil-estudiantes-31821515",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T20:42:40+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5363,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "0868929af2b5be62",
+   "titulo": "El “gran problema” en materia de personas desaparecidas es la identificación de cuerpos y restos, dice Ocegueda Flores",
+   "url": "https://oem.com.mx/elsoldetijuana/local/el-gran-problema-en-materia-de-personas-desaparecidas-es-la-identificacion-de-cuerpos-y-restos-dice-ocegueda-flores-31819897",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T20:31:38+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9325,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "4a945c21874b21fa",
+   "titulo": "Bloquean carretera Mexicali-Tijuana por falta de energía eléctrica en el ejido Heriberto Jara",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/bloquean-carretera-mexicali-tijuana-por-falta-de-energia-electrica-en-el-ejido-heriberto-jara-31821379",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Tijuana",
+    "Mexicali"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T20:20:17+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8593,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "a55edec7d61f8307",
+   "titulo": "Cae Xolos Femenil ante el América en Ciudad de México",
+   "url": "https://oem.com.mx/elsoldetijuana/deportes/cae-xolos-femenil-ante-el-america-en-ciudad-de-mexico-31820575",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T19:25:13+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5497,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "3c5886243caab9d8",
+   "titulo": "Menos migrantes, pero persisten necesidades de atención: ONU Mujeres",
+   "url": "https://oem.com.mx/elsoldetijuana/local/menos-migrantes-pero-persisten-necesidades-de-atencion-onu-mujeres-31820284",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T19:08:53+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5747,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "efc9c93c33d7621d",
+   "titulo": "Ordenan desclasificar reserva de proyecto de Bypass",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/ordenan-desclasificar-reserva-de-proyecto-de-bypass-31820043",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T18:54:52+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6811,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "59097d438e3042e2",
+   "titulo": "Jauregui volverá a la jaula",
+   "url": "https://oem.com.mx/lavozdelafrontera/deportes/jauregui-volvera-a-la-jaula-31818989",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T18:47:58+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.8074,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "1c983d1e04540c75",
+   "titulo": "Considera Coparmex Mexicali que faltan condiciones para facilitar incorporación de informales a sector formal",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/considera-coparmex-mexicali-que-faltan-condiciones-para-facilitar-incorporacion-de-informales-a-sector-formal-31819378",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T18:44:54+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7801,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "56a70f3a1c9aeb1b",
+   "titulo": "Monitorean durante la noche tanques y equipos para mantener estable distribución del agua",
+   "url": "https://oem.com.mx/elsoldetijuana/local/monitorean-durante-la-noche-tanques-y-equipos-para-mantener-estable-distribucion-del-agua-31819739",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T18:17:02+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6735,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "d262be101ea8954a",
+   "titulo": "Pérdidas de hasta 100 MDP a la semana por paros eléctricos en Tijuana: AIMO",
+   "url": "https://oem.com.mx/elsoldetijuana/local/perdidas-de-hasta-100-mdp-a-la-semana-por-paros-electricos-en-tijuana-aimo-31818855",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T17:03:45+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8823,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "7d16a7af90c0b9d4",
+   "titulo": "Cae Padres en juego caótico ante Rays y se va barrido de Tampa",
+   "url": "https://oem.com.mx/elsoldetijuana/deportes/cae-padres-en-juego-caotico-ante-rays-y-se-va-barrido-de-tampa-31818588",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T16:48:03+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7361,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "f618e1d830d9de4b",
+   "titulo": "Crónicas Tijuanenses / Apagones, tandeos y recibos locos",
+   "url": "https://oem.com.mx/elsoldetijuana/analisis/cronicas-tijuanenses-apagones-tandeos-y-recibos-locos-31817495",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T15:51:08+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7647,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "8097722b25e511bc",
+   "titulo": "Alista BC 5 mil mdp y licitaciones para obras de interconexión de la desaladora de Rosarito",
+   "url": "https://oem.com.mx/elsoldetijuana/local/alista-bc-5-mil-mdp-y-licitaciones-para-obras-de-interconexion-de-la-desaladora-de-rosarito-31817141",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Playas de Rosarito"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T15:44:28+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5043,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "fd2f6a935749ac08",
+   "titulo": "Trabajadores de Baja California enfrentan una brecha cada vez mayor para acceder a vivienda digna",
+   "url": "https://oem.com.mx/elsoldetijuana/local/trabajadores-de-baja-california-enfrentan-brecha-cada-vez-mayor-para-acceder-a-vivienda-digna-31816985",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "estatal"
+   ],
+   "alcance": "estatal",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T15:27:04+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8931,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "e6ed6687cddb2e87",
+   "titulo": "Capturan a dos implicados en el homicidio en un centro de rehabilitación en Tijuana",
+   "url": "https://oem.com.mx/elsoldetijuana/local/capturan-a-dos-implicados-en-el-homicidio-en-un-centro-de-rehabilitacion-en-tijuana-31816558",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T15:09:38+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4754,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "6c96025bdb3144a1",
+   "titulo": "Tres niveles de gobierno alistan alianza para restaurar la Casa de la Cultura de Tijuana",
+   "url": "https://oem.com.mx/elsoldetijuana/local/tres-niveles-de-gobierno-alistan-alianza-para-restaurar-la-casa-de-la-cultura-de-tijuana-31814911",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T13:58:15+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4986,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "0cf8d022025dd65f",
+   "titulo": "Empresas Immex evalúan dejar el programa por complejidad y fuertes sanciones",
+   "url": "https://oem.com.mx/elsoldetijuana/local/empresas-immex-evaluan-dejar-el-programa-por-complejidad-y-fuertes-sanciones-31814981",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T13:47:01+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6318,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "4f671a67a9385b18",
+   "titulo": "Nicolás Maduro reaparece sonriente en redes sociales",
+   "url": "https://www.uniradioinforma.com/mundo/nicolas-maduro-reaparece-sonriente-redes-sociales-n901263",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "alcance": "nacional",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T13:41:00-07:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.6042,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "9dab4fcb903d16e3",
+   "titulo": "Realizan caravana en Tijuana para conmemorar el Día Internacional de las Víctimas de Desapariciones Forzadas",
+   "url": "https://oem.com.mx/elsoldetijuana/local/realizan-caravana-en-tijuana-por-el-dia-internacional-de-las-victimas-de-desapariciones-forzadas-31814020",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T12:55:26+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4427,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "8417f89d452b9e99",
+   "titulo": "Turistas de Mexicali se refugian del calor en Rosarito durante la temporada vacacional",
+   "url": "https://oem.com.mx/elsoldetijuana/local/turistas-de-mexicali-se-refugian-del-calor-en-rosarito-durante-la-temporada-vacacional-31813574",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Mexicali",
+    "Playas de Rosarito"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T12:38:50+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5433,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "4e4be244ee24641b",
+   "titulo": "Falta de mantenimiento urbano genera percepción de inseguridad en Baja California: CCSPBC",
+   "url": "https://oem.com.mx/elsoldetijuana/local/falta-de-mantenimiento-urbano-genera-percepcion-de-inseguridad-en-baja-california-ccspbc-31812732",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "estatal"
+   ],
+   "alcance": "estatal",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T11:39:35+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9293,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "c5b82ee00b22ee1b",
+   "titulo": "Pronostican cielo despejado y altas temperaturas para este domingo",
+   "url": "https://oem.com.mx/elsoldetijuana/local/pronostican-cielo-despejado-y-altas-temperaturas-para-este-domingo-31811180",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T09:43:54+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6279,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "07229895daf2f1c3",
+   "titulo": "Innovación y sostenibilidad integral en Grupo Bimbo para fortalecer su presencia global",
+   "url": "https://noticiasensenada.com/innovacion-y-sostenibilidad-integral-en-grupo-bimbo-para-fortalecer-su-presencia-global/",
+   "dominio": "noticiasensenada.com",
+   "fuente": "notiens",
+   "zona_medio": "Ensenada",
+   "zonas": [
+    "Ensenada"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T05:15:15+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.6401,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "9f579eeeecaa79f2",
+   "titulo": "Cae Toros ante Sultanes en el juego 2 de la final de la zona norte",
+   "url": "https://oem.com.mx/elsoldetijuana/deportes/cae-toros-ante-sultanes-en-el-juego-2-de-la-final-de-la-zona-norte-31808471",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T01:15:43+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.484,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "0c70bdd10d0576cf",
+   "titulo": "“Quiero seguir demostrando dentro del campo para ayudar a mi equipo a ganar” Gilberto Mora",
+   "url": "https://oem.com.mx/elsoldetijuana/deportes/quiero-seguir-demostrando-dentro-del-campo-para-ayudar-a-mi-equipo-a-ganar-gilberto-mora-31808451",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T01:09:29+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.7185,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "e541c589cb8b7379",
+   "titulo": "Estados Unidos: RSE tecnológica que apoya educación STEM y conectividad en escuelas",
+   "url": "https://noticiasensenada.com/estados-unidos-rse-tecnologica-que-apoya-educacion-stem-y-conectividad-en-escuelas/",
+   "dominio": "noticiasensenada.com",
+   "fuente": "notiens",
+   "zona_medio": "Ensenada",
+   "zonas": [
+    "Ensenada"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T00:52:18+00:00",
+   "capturado": "2026-09-04T15:24:36+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4835,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": []
+  },
+  {
+   "id": "7b83b12528af5ce4",
+   "titulo": "San Diego FC le ganó al Galaxy y liga 5 victorias en casa",
+   "url": "https://oem.com.mx/elsoldetijuana/deportes/san-diego-fc-le-gano-al-galaxy-y-liga-5-victorias-en-casa-31808162",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "San Diego"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-08-30",
+   "publicado": "2026-08-30T00:37:02+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.7483,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "delegaciones": [],
+   "rubros": [
+    "deportes"
+   ]
+  },
   {
    "id": "44962ae13f16f09d",
    "titulo": "Las batallas legales más largas por justicia ambiental en la Amazonía ecuatoriana",
