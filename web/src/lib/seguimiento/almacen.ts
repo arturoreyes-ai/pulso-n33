@@ -70,6 +70,16 @@ export interface ResumenGuardado {
   /** Cuantos comentarios leyo el modelo. Lo cuenta el codigo. */
   leidos: number;
   generado: string;
+  /** Los temas que reaparecen, con las huellas de sus comentarios. No existe
+   *  en los resumenes de antes del 30 de septiembre de 2026, que eran un solo
+   *  parrafo: la pagina los ofrece rehacer (responder.ts::resumible). */
+  temas?: TemaGuardado[];
+}
+
+export interface TemaGuardado {
+  nombre: string;
+  detalle: string;
+  huellas: string[];
 }
 
 export interface FilaComentario {

@@ -24,7 +24,7 @@ export type ClaveMetrica = keyof Metricas;
  */
 export function metricasDe(p: Pick<PublicacionSeguida, "red" | "tipo">): { clave: ClaveMetrica; nombre: [string, string] }[] {
   const video = p.tipo === "video";
-  const likes = { clave: "likes" as const, nombre: p.red === "facebook" ? ["reacción", "reacciones"] as [string, string] : ["like", "likes"] as [string, string] };
+  const likes = { clave: "likes" as const, nombre: nombreLikes(p.red) };
   const comentarios = { clave: "comentarios" as const, nombre: ["comentario", "comentarios"] as [string, string] };
   const vistas = { clave: "reproducciones" as const, nombre: ["reproducción", "reproducciones"] as [string, string] };
   const compartidos = { clave: "compartidos" as const, nombre: ["compartido", "compartidos"] as [string, string] };
@@ -32,6 +32,25 @@ export function metricasDe(p: Pick<PublicacionSeguida, "red" | "tipo">): { clave
   if (p.red === "tiktok") return [likes, comentarios, vistas, compartidos, guardados];
   if (p.red === "instagram") return video ? [likes, comentarios, vistas] : [likes, comentarios];
   return video ? [likes, comentarios, vistas, compartidos] : [likes, comentarios, compartidos];
+}
+
+/** Como se llaman los likes en cada red: Facebook cuenta reacciones. */
+export function nombreLikes(red: PublicacionSeguida["red"]): [string, string] {
+  return red === "facebook" ? ["reacción", "reacciones"] : ["like", "likes"];
+}
+
+export type OrdenComentarios = "recientes" | "likes";
+
+/**
+ * Los comentarios en el orden elegido. «Más likes» lo pidio el cliente el 29
+ * de septiembre de 2026, el mismo dia que los likes de cada comentario: ordena
+ * por los de la ultima lectura que lo trajo y, entre iguales, conserva el orden
+ * de llegada, que es el mas reciente primero (el `sort` de JS es estable). Los
+ * de 0 quedan al final en ese mismo orden: 0 puede ser «la red no lo dijo»
+ * (contrato.ts), y no hay con que ordenarlos entre si.
+ */
+export function ordenarComentarios<T extends { likes: number }>(lista: readonly T[], orden: OrdenComentarios): T[] {
+  return orden === "recientes" ? [...lista] : [...lista].sort((a, b) => b.likes - a.likes);
 }
 
 /** Lo que cambio una cifra desde la lectura anterior, o null si alguna de las

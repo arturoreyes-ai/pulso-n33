@@ -75,6 +75,10 @@ export interface ComentarioSeguido {
   texto: string;
   /** Cuando se escribio, segun la red. */
   escrito: string | null;
+  /** Los likes del comentario en la ultima lectura que lo trajo (en Facebook,
+   *  sus reacciones). Un 0 puede ser «la red no lo dijo»: la pantalla no lo
+   *  pinta. */
+  likes: number;
   /** Llego con la ultima lectura y no estaba antes. */
   nuevo: boolean;
   sentimiento: TonoComentario | null;
@@ -93,6 +97,14 @@ export interface RespuestaListaSeguimiento {
   publicaciones: ResumenSeguimiento[];
 }
 
+/** Un tema de «Lo que dicen los comentarios»: su nombre, lo que se dice de el
+ *  y los comentarios que lo tratan, por huella, solo los que la pagina tiene. */
+export interface TemaComentarios {
+  nombre: string;
+  detalle: string;
+  huellas: string[];
+}
+
 export interface RespuestaSeguimiento {
   disponible: boolean;
   publicacion: PublicacionSeguida;
@@ -102,10 +114,13 @@ export interface RespuestaSeguimiento {
   /** Los mas recientes primero, todos los que siguen dentro de la retencion. */
   comentarios: ComentarioSeguido[];
   tono: { conteo: ConteoTono };
-  /** «Lo que dicen los comentarios» de la ultima lectura, o null. */
-  resumen: { texto: string; leidos: number; fecha: string } | null;
-  /** Sin resumen, si se puede pedir uno: la lectura automatica encendida y al
-   *  menos diez comentarios guardados. La pagina pinta el boton con esto. */
+  /** «Lo que dicen los comentarios» de la ultima lectura, o null. `temas` es
+   *  null en un resumen de antes del 30 de septiembre de 2026, que era un solo
+   *  parrafo; una lista vacia es que ningun asunto reaparecia. */
+  resumen: { texto: string; leidos: number; fecha: string; temas: TemaComentarios[] | null } | null;
+  /** Si se puede pedir uno: la lectura automatica encendida, al menos diez
+   *  comentarios guardados, y la ultima lectura sin resumen o con uno de la
+   *  forma vieja. La pagina pinta el boton con esto. */
   resumible: boolean;
   retencionDias: number;
   /** Desde cuando se puede volver a actualizar, si la ultima lectura es de

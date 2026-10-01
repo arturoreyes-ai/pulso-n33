@@ -1,6 +1,6 @@
 import { hayBaseDeDatos } from "@/lib/acceso/bd";
 import { analisisHabilitado } from "@/lib/analisis/config";
-import { MINIMO_COMENTARIOS_RESUMEN, resumirComentarios, type Resumen } from "@/lib/analisis/seguimiento";
+import { MINIMO_COMENTARIOS_RESUMEN, MINIMO_POR_TEMA, resumirComentarios, type Resumen } from "@/lib/analisis/seguimiento";
 import { SIN_CACHE, json } from "@/lib/busqueda/respuesta";
 import {
   ActorProhibido,
@@ -15,7 +15,7 @@ import {
 } from "@/lib/redes-en-vivo/apify";
 import { tokenApify } from "@/lib/redes-en-vivo/config";
 import { servicioTono, type ServicioTono } from "@/lib/tono/servicio";
-import { almacenNeon, RECLAMO_VENCE_MS, type Almacen, type Corridas, type FilaActualizacion, type FilaSeguimiento } from "./almacen";
+import { almacenNeon, RECLAMO_VENCE_MS, type Almacen, type Corridas, type FilaActualizacion, type FilaSeguimiento, type ResumenGuardado } from "./almacen";
 import {
   MINUTOS_ENTRE_ACTUALIZACIONES,
   RETENCION_DIAS,
@@ -32,6 +32,7 @@ import type {
   PublicacionSeguida,
   RespuestaListaSeguimiento,
   RespuestaSeguimiento,
+  TemaComentarios,
   TonoComentario,
 } from "./contrato";
 import {
@@ -324,6 +325,22 @@ async function avanzar(seg: FilaSeguimiento, act: FilaActualizacion, d: Deps): P
   await resumir(seg.id, act.id, d);
 }
 
+/** Un resumen con temas. Uno de antes del 30 de septiembre de 2026 era un
+ *  solo parrafo, y el cliente lo leyo como mal redactado: la pagina ofrece
+ *  rehacerlo, una vez, con el boton de siempre. */
+const resumenVigente = (r: ResumenGuardado | null): boolean => r !== null && r.temas !== undefined;
+
+/** Los temas con solo los comentarios que la pagina tiene: uno que vencio a
+ *  los 15 dias, o que ya no vino, no se puede abrir. Un tema que se queda con
+ *  menos de dos deja de ser un asunto que reaparece. */
+function temasPresentes(r: ResumenGuardado, filas: readonly { huella: string }[]): TemaComentarios[] | null {
+  if (r.temas === undefined) return null;
+  const hay = new Set(filas.map((f) => f.huella));
+  return r.temas
+    .map((t) => ({ nombre: t.nombre, detalle: t.detalle, huellas: t.huellas.filter((h) => hay.has(h)) }))
+    .filter((t) => t.huellas.length >= MINIMO_POR_TEMA);
+}
+
 /**
  * «Lo que dicen los comentarios» sobre lo guardado, pegado a una lectura.
  * Nunca lanza: un resumen que no salio no tumba la lectura que lo pidio.
@@ -335,7 +352,10 @@ async function resumir(seguimientoId: string, actualizacionId: string, d: Deps):
     const { filas } = await d.almacen.comentarios(seguimientoId, RETENCION_DIAS, 300);
     const r = await d.resumir({ red: seg.red, titulo: seg.titulo, comentarios: filas });
     if (r.estado !== "ok") return r.estado;
-    await d.almacen.guardarResumen(actualizacionId, { texto: r.texto, leidos: r.leidos, generado: d.ahora().toISOString() });
+    // El modelo cita por posicion en la lista que recibio; se guardan huellas,
+    // que siguen valiendo cuando la lista cambia con la siguiente lectura.
+    const temas = r.temas.map((t) => ({ nombre: t.nombre, detalle: t.detalle, huellas: t.indices.flatMap((i) => (filas[i] === undefined ? [] : [filas[i].huella])) }));
+    await d.almacen.guardarResumen(actualizacionId, { texto: r.texto, leidos: r.leidos, generado: d.ahora().toISOString(), temas });
     return "ok";
   } catch {
     return "fallo";
@@ -463,12 +483,13 @@ export async function responderFicha(id: string, deps: DependenciasSeguimiento =
       huella: c.huella,
       texto: c.texto,
       escrito: c.escrito,
+      likes: c.likes,
       nuevo: marcarNuevos && Date.parse(c.primeraVez) >= Date.parse(ultima.creado),
       sentimiento: c.sentimiento,
     })),
     tono: { conteo },
-    resumen: ultima?.resumen ? { texto: ultima.resumen.texto, leidos: ultima.resumen.leidos, fecha: ultima.resumen.generado } : null,
-    resumible: d.analisis() && ultima !== undefined && !ultima.resumen && filas.length >= MINIMO_COMENTARIOS_RESUMEN,
+    resumen: ultima?.resumen ? { texto: ultima.resumen.texto, leidos: ultima.resumen.leidos, fecha: ultima.resumen.generado, temas: temasPresentes(ultima.resumen, filas) } : null,
+    resumible: d.analisis() && ultima !== undefined && !resumenVigente(ultima.resumen) && filas.length >= MINIMO_COMENTARIOS_RESUMEN,
     retencionDias: RETENCION_DIAS,
     proxima: proximaDe(ultima, d.ahora()),
   };
@@ -507,7 +528,7 @@ export async function responderResumir(id: string, deps: DependenciasSeguimiento
   if (seg === null) return error("no_existe");
   const ultima = (await d.almacen.actualizaciones(id, 60)).find((a) => a.estado === "listo");
   if (ultima === undefined) return error("pocos");
-  if (ultima.resumen) return json({ resumen: true }, 200, SIN_CACHE);
+  if (resumenVigente(ultima.resumen)) return json({ resumen: true }, 200, SIN_CACHE);
   const estado = await resumir(id, ultima.id, d);
   if (estado === "ok") return json({ resumen: true }, 200, SIN_CACHE);
   if (estado === "pocos") return error("pocos");

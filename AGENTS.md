@@ -1097,12 +1097,38 @@ and are not:
   `SALVEDAD_RESUMEN`. Being derived from the text, it is nulled with it after
   15 days (`almacen.ts::purgar`). Needs `ANALISIS_HABILITADO` and the key, like
   Analizar; off, the card is not painted.
+  **Since 30 September 2026 it is two parts, not one paragraph** (client: «it's
+  redacted pretty bad»; the first real one was 108 words in four 25-word
+  sentences). A 2–3 sentence overview, then **themes** (`temas`): name, one
+  sentence, and the `[n]` of every comment that treats it. The code keeps a
+  theme only with two or more existing comments, sorts them by that count and
+  stores **huellas**, not positions; the page shows only the comments it has,
+  so a theme left with one after the purge disappears. Its chips open the
+  three most-liked comments of the theme in place and «Ver los N» filters the
+  list. The model now gets each comment's likes, to lead where the backing is,
+  and a local check (`MAS_QUE_NADIE`) rejects «lo que más se reclama» and
+  «principalmente», which is «predomina» said another way: it wrote exactly
+  that about potholes cited 7 times against 10 for lamp quality. **It is
+  written by `MODELO_RESUMEN`, Sonnet 5.5, not Haiku** (a cost decision,
+  pinned in `probar-seguimiento.cjs`): ~$0.013 against ~$0.005 per summary;
+  with the new prompt Haiku still wrote «Otras necesidades infraestructura».
+  A stored summary without `temas` is the old paragraph: it still shows, and
+  `resumible` offers «Rehacer el resumen» once.
 - **Counts appear here, dated.** The /redes card dropped platform counts on 17
   September 2026 because the live embed beside it contradicted them; here each
   figure carries the time of its read, which is what a follow-up compares.
   «Sin dato» where a network publishes the figure and it did not come (hidden
   Instagram likes are `-1`, stored `null`); a figure the network never
   publishes (Instagram shares) is not painted at all (`formato.ts::metricasDe`).
+  **Each comment carries its likes too** (reactions on Facebook; client, 29
+  September 2026), from the last read that brought it, and **«Más likes»**
+  sorts by them (`formato.ts::ordenarComentarios`, ties newest first); since
+  30 September 2026 the list **opens** that way, with 8 comments and 20 more
+  per press, in a likes column, and comes before the history of updates. A 0 is
+  not painted and sorts last: the actors return 0 when they did not bring the
+  field, so it can mean «unknown». A control that would change nothing is not
+  offered: a tone with no comments, the tone filter when all fall in one (an
+  English post), the sort when no comment has likes.
 - **The gate is `SEGUIMIENTO_HABILITADO=true` + Apify token + database.** It
   gates spending, not reading: with the flag off the list and every post still
   show, and delete still works. `probar-seguimiento.cjs` pins identity,

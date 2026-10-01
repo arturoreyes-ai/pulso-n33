@@ -230,7 +230,7 @@ function resumenFalso() {
       r.pedidos.push(entrada);
       return entrada.comentarios.length < S.MINIMO_COMENTARIOS_RESUMEN
         ? { estado: 'pocos' }
-        : { estado: 'ok', texto: 'Hay comentarios que agradecen la información y otros que reclaman por el tráfico.', leidos: entrada.comentarios.length };
+        : { estado: 'ok', texto: 'Hay comentarios que agradecen la información y otros que reclaman por el tráfico.', leidos: entrada.comentarios.length, temas: [{ nombre: 'Tráfico', detalle: 'Reclaman por el tráfico.', indices: [0, 2, 99] }, { nombre: 'Gracias', detalle: 'Agradecen el aviso.', indices: [1, 3] }] };
     },
   };
   return r;
@@ -367,6 +367,7 @@ async function comprobar() {
   assert.equal(ficha.actualizaciones[0].metricas.likes, 1200);
   assert.deepEqual(ficha.tono, { conteo: { positivo: 1, negativo: 1, neutral: 0, sinTono: 0 } });
   assert.deepEqual(ficha.comentarios.map((c) => c.texto), ['Qué bueno que no hubo heridos', '@… mira esto, qué caro está todo'], 'lo mas reciente primero');
+  assert.deepEqual(ficha.comentarios.map((c) => c.likes), [11, 2], 'los likes de cada comentario llegan a la pagina');
   assert.ok(ficha.comentarios.every((c) => c.nuevo === false), 'en la primera lectura no se marca nada como nuevo');
   assert.deepEqual(api2.borrados.sort(), [corr.publicacion.dataset, corr.comentarios.dataset].sort(), 'el crudo se borra de Apify');
   const guardado = JSON.stringify(alm.ultimoGuardado);
@@ -452,9 +453,28 @@ async function comprobar() {
     assert.equal(fichaR.resumen.leidos, 12);
     assert.match(fichaR.resumen.texto, /reclaman por el tráfico/);
     assert.equal(fichaR.resumible, false, 'con resumen no se ofrece otro');
+    // Los temas se guardan por huella, no por posicion, y solo con lo que existe.
+    const pedidos = resumen.pedidos[0].comentarios;
+    assert.deepEqual(almR.acts[0].resumen.temas[0].huellas, [pedidos[0].huella, pedidos[2].huella], 'una posicion que no existe no se guarda');
+    assert.deepEqual(fichaR.resumen.temas.map((x) => [x.nombre, x.huellas.length]), [['Tráfico', 2], ['Gracias', 2]]);
+    assert.ok(fichaR.resumen.temas.every((x) => x.huellas.every((h) => fichaR.comentarios.some((c) => c.huella === h))), 'cada tema abre comentarios que la pagina tiene');
+    // Un tema que se queda con un solo comentario (el otro vencio) deja de pintarse.
+    const temasGuardados = almR.acts[0].resumen.temas;
+    almR.acts[0].resumen.temas = [{ ...temasGuardados[0], huellas: [temasGuardados[0].huellas[0], 'no-existe'] }, temasGuardados[1]];
+    const conVencido = await (await R.responderFicha(idR, { ...dR, solicitar: apiR2.solicitar })).json();
+    assert.deepEqual(conVencido.resumen.temas.map((x) => x.nombre), ['Gracias']);
+    // Un resumen de la forma vieja (un parrafo, sin temas) se pinta y se ofrece rehacer.
+    almR.acts[0].resumen = { texto: 'Un parrafo viejo.', leidos: 12, generado: AHORA.toISOString() };
+    const vieja = await (await R.responderFicha(idR, { ...dR, solicitar: apiR2.solicitar })).json();
+    assert.equal(vieja.resumen.temas, null);
+    assert.equal(vieja.resumible, true, 'el parrafo viejo se puede rehacer');
+    assert.equal((await R.responderResumir(idR, { ...dR, solicitar: apiR2.solicitar })).status, 200);
+    assert.equal(resumen.pedidos.length, 2, 'rehacerlo pide otro');
+    assert.notEqual(almR.acts[0].resumen.temas, undefined);
+    assert.equal((await (await R.responderFicha(idR, { ...dR, solicitar: apiR2.solicitar })).json()).resumible, false);
     // Volver a abrir no vuelve a pedirlo.
     await R.responderFicha(idR, { ...dR, solicitar: apiR2.solicitar });
-    assert.equal(resumen.pedidos.length, 1);
+    assert.equal(resumen.pedidos.length, 2);
 
     // Sin resumen (el modelo no respondio): se ofrece el boton, y el boton lo pide.
     almR.acts[0].resumen = null;
@@ -462,7 +482,7 @@ async function comprobar() {
     assert.equal(sinResumen.resumible, true);
     const boton = await R.responderResumir(idR, { ...dR, solicitar: apiR2.solicitar });
     assert.equal(boton.status, 200);
-    assert.equal(resumen.pedidos.length, 2);
+    assert.equal(resumen.pedidos.length, 3);
     assert.notEqual(almR.acts[0].resumen, null);
     // Con la lectura automatica apagada, ni boton ni resumen.
     assert.equal((await R.responderResumir(idR, { ...dR, analisis: () => false })).status, 400);
@@ -474,14 +494,14 @@ async function comprobar() {
   // El modulo del resumen, con un modelo de mentira.
   {
     const ENCENDIDA = { ANALISIS_HABILITADO: 'true', ANTHROPIC_API_KEY: 'clave-de-prueba' };
-    const diez = Array.from({ length: 10 }, (_, i) => ({ texto: `comentario ${i}` }));
-    const modelo = (resumen) => {
+    const diez = Array.from({ length: 10 }, (_, i) => ({ texto: `comentario ${i}`, likes: i === 3 ? 40 : 0 }));
+    const modelo = (resumen, temas = []) => {
       const m = { llamadas: 0, cuerpos: [] };
       m.solicitar = async (url, init) => {
         assert.equal(new URL(url).hostname, 'api.anthropic.com', 'la unica salida es al modelo');
         m.llamadas += 1;
         m.cuerpos.push(JSON.parse(init.body));
-        return new Response(JSON.stringify({ content: [{ type: 'text', text: JSON.stringify({ resumen }) }] }), { headers: { 'content-type': 'application/json' } });
+        return new Response(JSON.stringify({ content: [{ type: 'text', text: JSON.stringify({ resumen, temas }) }] }), { headers: { 'content-type': 'application/json' } });
       };
       return m;
     };
@@ -489,9 +509,32 @@ async function comprobar() {
     assert.deepEqual(await S.resumirComentarios({ red: 'instagram', titulo: 'Informe', comentarios: diez.slice(0, 9) }, bien.solicitar, ENCENDIDA), { estado: 'pocos' });
     assert.equal(bien.llamadas, 0, 'debajo de diez no se llama al modelo');
     const ok = await S.resumirComentarios({ red: 'instagram', titulo: 'Informe', comentarios: diez }, bien.solicitar, ENCENDIDA);
-    assert.deepEqual(ok, { estado: 'ok', texto: 'Hay comentarios que felicitan por el informe y otros que piden bacheo.', leidos: 10 });
+    assert.deepEqual(ok, { estado: 'ok', texto: 'Hay comentarios que felicitan por el informe y otros que piden bacheo.', leidos: 10, temas: [] });
     const enviado = bien.cuerpos[0].messages[0].content;
     assert.ok(!/positivo|negativo|neutral/.test(enviado), 'no se le manda el tono del modelo local');
+    assert.match(enviado, /^\[4\] \(40 likes\) comentario 3$/m, 'numerados, con sus likes cuando los tienen');
+    assert.match(enviado, /^\[1\] comentario 0$/m, 'sin likes no se dice «0 likes»');
+    assert.equal(bien.cuerpos[0].model, 'claude-sonnet-5-5', 'el modelo del resumen es decision de costo: cambiarlo rompe aqui a proposito');
+    assert.equal(bien.cuerpos[0].output_config.effort, 'low', 'la generacion 5 piensa por omision');
+    // Los temas: numeros que existen, sin repetir, al menos dos, del que mas cita al que menos.
+    const conTemas = await S.resumirComentarios({ red: 'instagram', titulo: 'Informe', comentarios: diez }, modelo('Piden bacheo y felicitan por el informe.', [
+      { nombre: 'Felicitaciones', detalle: 'Felicitan por el informe.', comentarios: [1, 2] },
+      { nombre: 'Bacheo', detalle: 'Piden tapar baches.', comentarios: [3, 4, 5, 5, 0, 11] },
+      { nombre: 'Uno solo', detalle: 'Un comentario no es un tema.', comentarios: [6] },
+      { nombre: 'bacheo', detalle: 'Repetido con otra mayuscula.', comentarios: [7, 8] },
+    ]).solicitar, ENCENDIDA);
+    assert.deepEqual(conTemas.temas, [
+      { nombre: 'Bacheo', detalle: 'Piden tapar baches.', indices: [2, 3, 4] },
+      { nombre: 'Felicitaciones', detalle: 'Felicitan por el informe.', indices: [0, 1] },
+    ]);
+    // Las reglas valen tambien dentro de un tema, y «lo que mas se reclama» es «predomina».
+    for (const [resumenMalo, temasMalos] of [
+      ['Piden bacheo.', [{ nombre: 'Bacheo', detalle: 'La mayoría pide bacheo.', comentarios: [1, 2] }]],
+      ['Los baches son lo que más se reclama.', []],
+      ['Piden bacheo.', [{ nombre: 'Tema principal', detalle: 'Principalmente piden bacheo.', comentarios: [1, 2] }]],
+    ]) {
+      assert.deepEqual(await S.resumirComentarios({ red: 'instagram', titulo: null, comentarios: diez }, modelo(resumenMalo, temasMalos).solicitar, ENCENDIDA), { estado: 'reglas' }, resumenMalo);
+    }
     for (const malo of ['La mayoría de los comentarios critica el informe.', 'El 60% pide bacheo.', 'Predominan las quejas.', 'La gente está molesta.']) {
       assert.deepEqual(await S.resumirComentarios({ red: 'tiktok', titulo: null, comentarios: diez }, modelo(malo).solicitar, ENCENDIDA), { estado: 'reglas' }, malo);
     }
@@ -591,6 +634,16 @@ async function comprobar() {
   assert.equal(F.metricasDe({ red: 'facebook', tipo: 'otro' })[0].nombre[1], 'reacciones');
   assert.equal(F.diferencia({ likes: 10 }, { likes: 4 }, 'likes'), 6);
   assert.equal(F.diferencia({ likes: null }, { likes: 4 }, 'likes'), null, 'sin dato de un lado no hay diferencia');
+  assert.deepEqual(F.nombreLikes('facebook'), ['reacción', 'reacciones'], 'Facebook cuenta reacciones');
+  assert.deepEqual(F.nombreLikes('tiktok'), ['like', 'likes']);
+  {
+    // «Mas likes»: por likes y, entre iguales, el orden de llegada (el mas
+    // reciente primero); los de 0 al final, porque 0 puede ser «no se sabe».
+    const recientes = [{ h: 'a', likes: 0 }, { h: 'b', likes: 3 }, { h: 'c', likes: 0 }, { h: 'd', likes: 3 }, { h: 'e', likes: 9 }];
+    assert.deepEqual(F.ordenarComentarios(recientes, 'likes').map((c) => c.h), ['e', 'b', 'd', 'a', 'c']);
+    assert.deepEqual(F.ordenarComentarios(recientes, 'recientes').map((c) => c.h), ['a', 'b', 'c', 'd', 'e']);
+    assert.deepEqual(recientes.map((c) => c.h), ['a', 'b', 'c', 'd', 'e'], 'ordenar no toca la lista original');
+  }
 
   console.log('probar-seguimiento: ok');
 }

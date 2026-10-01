@@ -51,6 +51,21 @@ export const MODELO_ANALISIS = "claude-haiku-4-5-20251001";
  */
 export const MODELO_GUION = "claude-sonnet-5-5";
 
+/**
+ * El modelo de «Lo que dicen los comentarios» del seguimiento
+ * (lib/analisis/seguimiento.ts), aparte desde el 30 de septiembre de 2026.
+ * Hasta ese dia era MODELO_ANALISIS, y el cliente leyo el resumen como mal
+ * redactado. Con el prompt nuevo y sobre los mismos 52 comentarios del informe
+ * de Burgueno, Haiku 4.5 todavia escribio «Otras necesidades infraestructura»
+ * y «la calidad del equipamiento»; Sonnet 5.5 abrio con «Reclaman que el
+ * gobierno presuma lamparas mientras siguen los baches sin tapar». Es un texto
+ * que se lee como redaccion, igual que el guion. Cuesta ~$0.013 por resumen
+ * contra ~$0.005, y sale uno por actualizacion: con el tope de 20 USD de
+ * lecturas, unos $3 al mes en el peor caso. Decision de costo como los otros
+ * dos: probar-seguimiento.cjs fija el valor.
+ */
+export const MODELO_RESUMEN = "claude-sonnet-5-5";
+
 /** A quien se le vuelve a pedir un guion que MODELO_GUION se nego a escribir
  *  (modelo-guion.ts). Sonnet 5, el anterior: no tiene los clasificadores
  *  nuevos, y el cuerpo de la peticion vale igual para los dos. */

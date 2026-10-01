@@ -32,9 +32,11 @@ export function Chip({
  * Un hueco de cobertura, rotulado. Nunca un cero: un cero se lee como "aqui
  * no pasa nada" en vez de "aqui no medimos", y son cosas distintas.
  */
-export function Hueco({ children, titulo }: { children: ReactNode; titulo?: string }) {
+/** `tamano` es la clase de texto: por omision la de metadato; una cifra
+ *  grande que no llego dice «sin dato» al tamano de la cifra. */
+export function Hueco({ children, titulo, tamano = "text-meta" }: { children: ReactNode; titulo?: string; tamano?: string }) {
   return (
-    <span title={titulo} className="text-meta text-aviso/80 italic">
+    <span title={titulo} className={`${tamano} text-aviso/80 italic`}>
       {children}
     </span>
   );
