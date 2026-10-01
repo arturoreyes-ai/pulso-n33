@@ -1,47 +1,55 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
+import { Buscador } from "@/components/busqueda/buscador";
+import { LectorBusqueda } from "@/components/busqueda/lector-busqueda";
 import { Lector } from "@/components/lector/lector";
 import { EstadoCarga } from "@/components/ui/estado-carga";
 import { FilaPestanas } from "@/components/ui/pestanas";
-import { useRedesEnVivo, useTermino } from "@/lib/busqueda/use-termino";
 import { useConsultas } from "@/lib/datos/hooks";
-import type { Consulta } from "@/lib/datos/tipos";
 import { buscarConsulta, reunirPublicacionesConsulta } from "@/lib/dominio/consultas";
 import { ruta } from "@/lib/dominio/secciones";
-import { armarConsulta, documentoDe, fundirPiezas, fundirTextos } from "@/lib/dominio/termino-vivo";
-import { AccionesEnVivo } from "./busqueda-en-vivo";
-import { BuscadorRedes } from "./buscador-redes";
-import { OpcionesLugarRedes } from "./lector-redes";
 import { VisorConsulta, type FiltroConsulta } from "./visor-consulta";
 
 /**
- * Redes en modo BUSQUEDA (`/redes?q=`): un termino en seguimiento o la
- * busqueda en vivo de cualquier otro. Es un modo del lector, no una pestana:
- * la misma barra con «Búsqueda» como rotulo del valor, para no mover los ids
- * de sus dialogos.
+ * Redes en modo BUSQUEDA (`/redes?q=`) y el REPORTE de un termino en
+ * seguimiento (`/redes?reporte=`).
  *
- * Dos casos, decididos por lib/dominio/consultas.ts::buscarConsulta:
+ * La busqueda es la misma de la portada (busqueda/lector-busqueda.tsx):
+ * noticias y publicaciones en una lista, como /reportes. Hasta el 30 de
+ * septiembre de 2026 la lupa de Redes abria la FICHA de lo escrito —las
+ * tarjetas de tono de un termino en seguimiento, o la de una busqueda en vivo
+ * con el boton de la pasada pagada—, y ese dia el cliente pidio que buscar
+ * hiciera en las dos paginas lo que hace /reportes, sin la ficha. La pasada
+ * pagada ya no tiene boton en pantalla; sus rutas (/api/termino,
+ * /api/redes-en-vivo) y su libro siguen y nadie las llama.
  *
- *  - Lo escrito ES un termino de data/consultas.json: se muestra su cosecha de
- *    30 dias con la ficha del termino de primera tarjeta (VisorConsulta).
- *  - No lo es: la BUSQUEDA EN VIVO, desde el 23 de septiembre de 2026. Hasta
- *    ese dia lo escrito solo filtraba las publicaciones que el lector ya tenia
- *    delante; el cliente pidio que la lupa trajera, de cualquier termino,
- *    noticias, publicaciones y comentarios. Se arma una `Consulta` con la
- *    misma forma (lib/dominio/termino-vivo.ts) y se pinta con el MISMO visor y
- *    la MISMA ficha, sin PDF: la mitad gratuita al entrar (/api/termino) y la
- *    pagada detras del boton de la ficha (/api/redes-en-vivo).
+ * La ficha de un termino en seguimiento sigue existiendo porque /reportes la
+ * abre («Ver reporte», lib/dominio/consultas.ts::rutaDeConsulta), con su PDF
+ * al lado. Es otro parametro y no `?q=` a proposito: una busqueda no se
+ * convierte en un reporte por coincidir con un termino. Un `?reporte=` que no
+ * es un termino en seguimiento cae en la busqueda de lo escrito.
  *
- * Las pestanas son las redes que traen publicaciones, en los dos casos
- * (pedido del cliente del 23 de septiembre de 2026): una pestana que abre
- * «sin dato» no sirve de nada, y «sin dato» sigue en la tarjeta de la ficha.
- *
- * Sin «De que se habla» en la barra: ese boton suma los documentos del panel de
- * medios, no los de un termino. Y sin Analizar en las tarjetas de un termino,
- * por lo escrito en visor-consulta.tsx.
+ * Las pestanas del reporte son las redes que traen publicaciones (pedido del
+ * cliente del 23 de septiembre de 2026): una pestana que abre «sin dato» no
+ * sirve de nada, y «sin dato» sigue en la tarjeta de la ficha.
  */
+
+const accion = ruta(null, "redes");
+
+// Sin dialogo de lugar en ninguno de los dos (30 de septiembre de 2026): ni
+// la busqueda ni el reporte dependen del lugar, y elegir una zona desde ahi
+// salia de lo buscado sin decirlo. La barra muestra el termino como rotulo.
+
+export function BusquedaRedes({ consulta }: { consulta: string }) {
+  // «En noticias y redes» y no «de toda la región»: un termino no es un
+  // lugar, asi que la busqueda no se acota a la zona que se este viendo.
+  return (
+    <LectorBusqueda rotulo="Redes" consulta={consulta} volver={accion} accion={accion}
+      etiqueta="En noticias y redes" salida="Volver a las publicaciones" />
+  );
+}
 
 const PESTANAS_CONSULTA: readonly { id: FiltroConsulta; nombre: string }[] = [
   { id: "todas", nombre: "Todas" },
@@ -55,71 +63,39 @@ const PESTANAS_CONSULTA: readonly { id: FiltroConsulta; nombre: string }[] = [
 /** La pestana sobrevive a cambiar de termino, como en el panel de medios. */
 let ultimaPestana: FiltroConsulta = "todas";
 
-export function BusquedaRedes({ consulta }: { consulta: string }) {
+export function ReporteRedes({ termino }: { termino: string }) {
   const consultas = useConsultas();
   const [pestana, setPestana] = useState<FiltroConsulta>(() => ultimaPestana);
   useEffect(() => {
     ultimaPestana = pestana;
   }, [pestana]);
-  const hallada = buscarConsulta(consultas.data, consulta);
-  const cargandoConsultas = consultas.data === undefined && consultas.error === undefined;
-  // La busqueda en vivo solo cuando ya se sabe que NO es un termino en
-  // seguimiento: si no, cada termino del cliente pediria las dos cosas.
-  const enVivo = !cargandoConsultas && hallada === null;
-  const termino = useTermino(enVivo ? consulta : "");
-  const vivo = useRedesEnVivo(consulta);
-  const viva = useMemo(() => {
-    if (termino.data === undefined) return null;
-    const piezas = fundirPiezas(termino.data.piezas, vivo.respuesta?.piezas ?? null);
-    const c = armarConsulta(piezas);
-    return {
-      c,
-      doc: documentoDe(c, piezas.generado),
-      textos: fundirTextos(termino.data.textos, vivo.respuesta?.textos ?? null, piezas.figura, piezas.generado),
-    };
-  }, [termino.data, vivo.respuesta]);
-  const cargando = cargandoConsultas || (enVivo && termino.cargando);
+  const hallada = buscarConsulta(consultas.data, termino);
+  const cargando = consultas.data === undefined && consultas.error === undefined;
+  if (!cargando && hallada === null) return <BusquedaRedes consulta={termino} />;
 
-  const actual: Consulta | null = hallada ?? viva?.c ?? null;
-  const conPublicaciones = new Set<string>(actual === null ? [] : reunirPublicacionesConsulta(actual).map((f) => f.red));
+  const conPublicaciones = new Set<string>(hallada === null ? [] : reunirPublicacionesConsulta(hallada).map((f) => f.red));
   const pestanas = PESTANAS_CONSULTA.filter((p) => p.id === "todas" || conPublicaciones.has(p.id));
   const activa: FiltroConsulta = pestanas.some((p) => p.id === pestana) ? pestana : "todas";
-  const accion = ruta(null, "redes");
 
   return (
-    <Lector volver={accion} rotulo="Redes" rotuloValor="Búsqueda" valor={consulta} tituloOpciones="Lugar"
-      opciones={<OpcionesLugarRedes zona={null} cubetas={[]} activa="corredor" onCubeta={() => undefined} />}
-      busqueda={<BuscadorRedes accion={accion} consulta={consulta} />}
+    <Lector volver={accion} rotulo="Redes" rotuloValor="Reporte" valor={termino}
+      busqueda={<Buscador accion={accion} etiqueta="En noticias y redes" consulta={null} salida="Volver a las publicaciones" />}
       pestanas={
         <FilaPestanas etiqueta="Plataforma" pestanas={pestanas.map((p) => ({
           id: p.id, nombre: p.nombre, activa: p.id === activa, onElegir: () => setPestana(p.id),
         }))} />
       }>
-      {cargando
-        ? <div className="hoja-lector flex items-center justify-center py-16"><EstadoCarga etiqueta="Buscando" /></div>
-        : hallada !== null && consultas.data !== undefined
-          ? <VisorConsulta key={`${hallada.id}:${activa}`} c={hallada} doc={consultas.data} filtro={activa} />
-          : viva !== null && termino.data !== undefined
-            ? (
-              <VisorConsulta
-                key={`vivo:${consulta}:${activa}`}
-                c={viva.c}
-                doc={viva.doc}
-                filtro={activa}
-                textos={{ data: viva.textos, error: undefined }}
-                informe={false}
-                rotuloTipo="Búsqueda"
-                sinFilas={`No hay publicaciones que nombren ${consulta} entre las que se leyeron.`}
-                extra={<AccionesEnVivo disponible={termino.data.redesEnVivo} vivo={vivo} tendencias={termino.data.tendencias} />}
-              />
-            )
-            : (
-              <div className="hoja-lector">
-                <div className="mx-auto w-full max-w-[88rem] px-4 py-8 md:px-8">
-                  <p className="text-lectura text-tinta-meta">La búsqueda no está disponible en esta vista.</p>
-                </div>
+      {hallada !== null && consultas.data !== undefined
+        ? <VisorConsulta key={`${hallada.id}:${activa}`} c={hallada} doc={consultas.data} filtro={activa} />
+        : cargando
+          ? <div className="hoja-lector flex items-center justify-center py-16"><EstadoCarga etiqueta="Cargando reporte" /></div>
+          : (
+            <div className="hoja-lector">
+              <div className="mx-auto w-full max-w-[88rem] px-4 py-8 md:px-8">
+                <p className="text-lectura text-tinta-meta">El reporte no está disponible en esta vista.</p>
               </div>
-            )}
+            </div>
+          )}
     </Lector>
   );
 }

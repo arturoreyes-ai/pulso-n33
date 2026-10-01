@@ -886,6 +886,21 @@ never the comments'). Rules that look arbitrary and are not:
 
 ### Búsqueda en vivo de un término
 
+**Off the screen since 30 September 2026.** The client asked that the
+portada and Redes searches do what /reportes' search does, and chose to drop
+the ficha from search: `/?q=` and `/redes?q=` now mount the same
+`components/busqueda/lector-busqueda.tsx` (news from `/api/buscar` beside
+every harvested post whose title names the term, `use-publicaciones-busqueda.ts`,
+never summed), and /reportes mounts the same `ResultadosBusqueda`. Nothing
+paid starts from a search any more. What went: `busqueda-en-vivo.tsx`,
+`use-termino.ts`, `buscador-ahora.tsx`, `buscador-redes.tsx`. What stays and
+nothing calls: `/api/termino`, `/api/redes-en-vivo`, its ledger,
+`lib/redes-en-vivo/`, `termino-vivo.ts` and their tests, so bringing the paid
+pass back is interface work. A tracked term's ficha is `/redes?reporte=`
+(`rutaDeConsulta`, «Ver reporte» on /reportes), deliberately not `?q=`: a
+search does not turn into a report by matching one. The rest of this section
+describes the live ficha as it was.
+
 Since 23 September 2026 the Redes magnifier answers **any** term, not only the
 three consultas. A term that is not in `config/consultas.json` used to filter
 what was on screen; now `/redes?q=` opens the consultas ficha for it, built
@@ -2578,6 +2593,16 @@ Tailwind v4, pnpm.
   footer on top of the reader. It typechecks, passes every `.cjs` contract, and
   looks right on a laptop.
 
+- **Search is ONE mode shared by the portada and Redes** since 30 September
+  2026 (`components/busqueda/`): one bar (`buscador.tsx`, «Buscar noticias y
+  publicaciones», with no tray of tracked terms under the field: the client
+  found it confusing the same day, and the terms live on /reportes), one
+  reader (`lector-busqueda.tsx`, tabs Todo · Noticias · Publicaciones, a
+  `.hoja-lector` list instead of one card per screen, so no Analizar or
+  Relacionadas on a search), one results view that /reportes mounts too. News
+  still follow the entry (`?e=` in a hidden field, zone by route); posts are
+  every harvested post, not cut by place. What follows is the portada's
+  search as it was before that day; its query rules still hold.
 - **Search is a MODE of the reader, not a chapter** (`?q=`, the «Buscar»
   pill in the bar: a bordered button with the word on every width since 28
   September 2026, client, because the magnifier alone read as one more icon;

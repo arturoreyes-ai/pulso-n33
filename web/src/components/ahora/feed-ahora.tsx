@@ -5,18 +5,15 @@ import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
 
 import { CONTROL, Lector } from "@/components/lector/lector";
 import { ListaRelacionadas, TITULO_RELACIONADAS } from "@/components/paneles/relacionadas-titular";
-import { EstadoCarga } from "@/components/ui/estado-carga";
-import { debeActivar, fraseFinal, type Capitulos, type Entrada, type Tarjeta } from "@/lib/busqueda/capitulos";
-import { entradaDe, rubroDe, rutaDeEntrada } from "@/lib/busqueda/entrada";
+import { Buscador } from "@/components/busqueda/buscador";
+import { LectorBusqueda } from "@/components/busqueda/lector-busqueda";
+import { debeActivar, esEdicion, fraseFinal, type Capitulos, type Entrada, type Tarjeta } from "@/lib/busqueda/capitulos";
+import { entradaDe, PARAM_EDICION, rubroDe, rutaDeEntrada } from "@/lib/busqueda/entrada";
 import type { Rubro } from "@/lib/busqueda/rubros";
-import { useBusquedaViva } from "@/lib/busqueda/use-busqueda";
 import { useImagenesVivas } from "@/lib/busqueda/use-imagen-viva";
 import { useRelacionadas, type RelacionadasVivas } from "@/lib/busqueda/use-relacionadas";
 import { useCapitulos } from "@/lib/busqueda/use-capitulos";
-import { rutaDeConsulta } from "@/lib/dominio/consultas";
-import { plegar } from "@/lib/dominio/formato";
 import { ruta } from "@/lib/dominio/secciones";
-import { BuscadorAhora } from "./buscador-ahora";
 import { PestanasRubro } from "./pestanas-rubro";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 import { teclasDelRecorrido, useRecorrido } from "@/lib/pantalla/recorrido";
@@ -78,9 +75,15 @@ const tituloRecorrido = (entrada: Entrada, capitulos: Capitulos, rubro: Rubro | 
  *  septiembre de 2026 (use-busqueda.ts): antes era solo la zona, y en
  *  `/?e=mexico` buscaba el corredor. En el corredor la cabeza es lo que da
  *  Google Noticias para el termino, sin lugar (buscar.ts), asi que ahi el
- *  rotulo no dice «el corredor»: diria menos de lo que sale. */
+ *  rotulo no dice «el corredor»: diria menos de lo que sale. Y desde el 30 de
+ *  septiembre de 2026 dice «redes» tambien: la busqueda trae publicaciones. */
 const lugarDeBusqueda = (entrada: Entrada): string =>
-  entrada === "region" ? "las noticias" : entrada === "mexico" ? "México" : entrada === "internacional" ? "el mundo" : NOMBRE_CORTO[entrada];
+  entrada === "region" ? "noticias y redes" : entrada === "mexico" ? "México" : entrada === "internacional" ? "el mundo" : NOMBRE_CORTO[entrada];
+
+/** La edicion viaja en un campo oculto (25 de septiembre de 2026): sin ella
+ *  enviar desde Mexico buscaba en el corredor. */
+const ocultosDe = (entrada: Entrada): Record<string, string> =>
+  esEdicion(entrada) ? { [PARAM_EDICION]: entrada } : {};
 
 export function FeedAhora({ zona, edicion, consulta, rubro, analisis }: {
   zona: ZonaRuta | null;
@@ -105,8 +108,7 @@ export function FeedAhora({ zona, edicion, consulta, rubro, analisis }: {
   const q = (consulta ?? "").trim();
   if (q !== "") {
     return (
-      <RecorridoBusqueda key={`q:${q}:${entrada}`} consulta={q} zona={zona} entrada={entrada}
-        analisis={analisis} />
+      <RecorridoBusqueda key={`q:${q}:${entrada}`} consulta={q} zona={zona} entrada={entrada} />
     );
   }
   // El tema entra en la LLAVE: cambiarlo tiene que descongelar las listas de
@@ -200,7 +202,8 @@ function RecorridoAhora({ entrada, rubro, zona, onRecargar, analisis }: {
             /guion. Salio de la barra el 28 de septiembre (cliente): el guion
             tiene su pagina en la navegacion. */}
       </>}
-      busqueda={<BuscadorAhora accion={ruta(zona, null)} entrada={entrada} lugar={lugarDeBusqueda(entrada)} consulta={null} />}
+      busqueda={<Buscador accion={ruta(zona, null)} etiqueta={`En ${lugarDeBusqueda(entrada)}`} consulta={null}
+        salida="Volver al recorrido" ocultos={ocultosDe(entrada)} />}
       restaurarFoco={restaurarFoco}>
       <div ref={contenedor} className="recorrido-lector" tabIndex={0} role="region" aria-label={tituloRecorrido(entrada, capitulos, rubro)}
         onKeyDown={(evento) => teclasDelRecorrido(evento, actual, total, ir)}>
@@ -225,87 +228,21 @@ function RecorridoAhora({ entrada, rubro, zona, onRecargar, analisis }: {
 }
 
 /**
- * El mismo lector, recorriendo RESULTADOS en vez de capitulos.
+ * El lector en modo BUSQUEDA: la misma de Redes (busqueda/lector-busqueda.tsx).
  *
- * Una busqueda es una lista plana: no tiene orden de capitulos, ni divisores,
- * ni cola de secciones. Por eso es un modo y no un capitulo mas — meterla en
- * la cadena de capitulos.ts obligaria a un tercer tipo de fuente ahi dentro
- * para nada. Lo que si comparte es todo lo demas: la caja, el ajuste por
- * tarjeta, las miniaturas y el enlace del propio medio.
+ * Hasta el 30 de septiembre de 2026 era un recorrido de titulares, uno por
+ * pantalla, con Analizar y Relacionadas en cada tarjeta; desde ese dia la
+ * portada busca noticias Y publicaciones en una lista, como /reportes, por
+ * pedido del cliente. Las noticias siguen buscando donde se entro: `/tijuana`
+ * en Tijuana y `?e=mexico` en Mexico.
  */
-function RecorridoBusqueda({ consulta, zona, entrada, analisis }: {
+function RecorridoBusqueda({ consulta, zona, entrada }: {
   consulta: string; zona: ZonaRuta | null; entrada: Entrada;
-  analisis: boolean;
 }) {
-  const viva = useBusquedaViva(consulta, zona, entrada);
-  const rel = useHojaRelacionadas();
-  const contenedor = useRef<HTMLDivElement>(null);
-  const { actual, ir } = useRecorrido(contenedor);
-
-  const tarjetas: Tarjeta[] = useMemo(
-    () =>
-      viva.resultados.map((r, i) => ({
-        tipo: "titular",
-        capitulo: "busqueda",
-        rotulo: `Búsqueda · ${consulta}`,
-        acento: "text-chart-1-texto",
-        r,
-        clave: plegar(r.titulo) || r.url,
-        orden: i + 1,
-      })),
-    [viva.resultados, consulta],
-  );
-  const vivas = useImagenesVivas(tarjetas, actual);
-  const total = tarjetas.length + 1;
-
-  // Sin pestanas y con `rubro={null}`: una busqueda es una lista plana, no una
-  // cadena que se pueda empezar por un rubro.
   return (
-    <Lector volver={rutaDeEntrada(entrada)} rotulo="En Tendencia" rotuloValor="Búsqueda" valor={consulta}
-      tituloOpciones="Por dónde empezar"
-      opciones={<OpcionesAhora entrada={entrada} rubro={null} />}
-      busqueda={<BuscadorAhora accion={ruta(zona, null)} entrada={entrada} lugar={lugarDeBusqueda(entrada)} consulta={consulta} />}
-      restaurarFoco={restaurarFoco}>
-      <div ref={contenedor} className="recorrido-lector" tabIndex={0} role="region" aria-label={`Resultados para ${consulta}`}
-        onKeyDown={(evento) => teclasDelRecorrido(evento, actual, total, ir)}>
-        {!viva.activa ? (
-          <p className="tarjeta-ahora flex items-center text-lectura text-tinta-prosa">La búsqueda no está disponible en esta vista.</p>
-        ) : viva.cargando ? (
-          // La rejilla con el tiempo transcurrido (23 de septiembre de 2026):
-          // una busqueda tarda segundos y el esqueleto de un titular no decia
-          // que algo estaba pasando. El `role="status"` va dentro.
-          <div className="tarjeta-ahora flex items-center justify-center">
-            <EstadoCarga etiqueta="Buscando" />
-          </div>
-        ) : (
-          <>
-            {tarjetas.map((t, i) =>
-              t.tipo === "titular" ? (
-                <TarjetaTitular key={t.clave} t={t} titulares={tarjetas.length} indice={i}
-                  imagen={t.r.imagen ?? vivas.get(t.clave) ?? null} analisis={analisis} referencia={t.r.referencia}
-                  onRelacionadas={() => rel.abrir(t)} />
-              ) : null,
-            )}
-            {/* «Ver en redes» (23 de septiembre de 2026): la misma pregunta en
-                Redes, donde trae publicaciones y comentarios además de prensa.
-                Espejo del «Ver en la prensa en vivo» de la ficha de un termino. */}
-            <TarjetaFinal indice={tarjetas.length} titulo="Llegaste al final de la búsqueda."
-              frase={fraseBusqueda(consulta, tarjetas.length, viva.fallo)} onInicio={() => ir(0)}
-              redes={rutaDeConsulta(consulta)} />
-          </>
-        )}
-      </div>
-      <HojaRelacionadas hoja={rel.hoja} abierta={rel.abierta} setAbierta={rel.setAbierta}
-        vivas={rel.vivas} />
-    </Lector>
+    <LectorBusqueda rotulo="En Tendencia" consulta={consulta} volver={rutaDeEntrada(entrada)}
+      accion={ruta(zona, null)} etiqueta={`En ${lugarDeBusqueda(entrada)}`} salida="Volver al recorrido"
+      ocultos={ocultosDe(entrada)} zona={zona} entrada={entrada}
+      tituloOpciones="Por dónde empezar" opciones={<OpcionesAhora entrada={entrada} rubro={null} />} />
   );
-}
-
-/** Lo que dice la tarjeta final de una busqueda. Sin nombrar el mecanismo. */
-function fraseBusqueda(consulta: string, n: number, fallo: boolean): string {
-  if (fallo) return `No se pudo completar la búsqueda de ${consulta}.`;
-  if (n === 0) return `Sin titulares para ${consulta}.`;
-  return n === 1
-    ? `Un titular para ${consulta}.`
-    : `${n} titulares para ${consulta}.`;
 }

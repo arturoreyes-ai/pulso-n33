@@ -588,8 +588,9 @@ async function comprobar() {
     async () => null, { leerCatalogo: async () => null });
   assert.ok(pedidasZona.every((u) => new URL(u).searchParams.get('q').includes('Tijuana')), '/tijuana busca en Tijuana');
   // Y el cliente manda la entrada: el campo oculto y el parametro.
-  const buscador = fs.readFileSync(path.resolve(__dirname, '../src/components/ahora/buscador-ahora.tsx'), 'utf8');
-  assert.match(buscador, /ocultos=\{esEdicion\(entrada\) \? \{ \[PARAM_EDICION\]: entrada \} : \{\}\}/);
+  const buscador = fs.readFileSync(path.resolve(__dirname, '../src/components/ahora/feed-ahora.tsx'), 'utf8');
+  assert.match(buscador, /esEdicion\(entrada\) \? \{ \[PARAM_EDICION\]: entrada \} : \{\}/);
+  assert.equal((buscador.match(/ocultos=\{ocultosDe\(entrada\)\}/g) ?? []).length, 2, 'la barra del recorrido y la de la busqueda conservan la edicion');
   const gancho = fs.readFileSync(path.resolve(__dirname, '../src/lib/busqueda/use-busqueda.ts'), 'utf8');
   assert.match(gancho, /if \(esEdicion\(entrada\)\) partes\.push\(`a=\$\{entrada\}`\)/);
 
@@ -910,9 +911,25 @@ async function comprobar() {
   assert.match(enBarra, /data-buscar\s+className="control-lector"\s+aria-label=\{rotulo\}/);
   assert.match(enBarra, /<Lupa size=\{ICONO_CON_TEXTO\} aria-hidden \/>\s*<span>Buscar<\/span>/);
   assert.match(enBarra, /<form id=\{id\} role="search" method="get" action=\{accion\}/, 'sigue siendo un form GET');
-  for (const [archivo, rotulo] of [['components/ahora/buscador-ahora.tsx', 'Buscar titulares'], ['components/paneles/buscador-redes.tsx', 'Buscar publicaciones']]) {
-    assert.match(fs.readFileSync(path.join(SRC, archivo), 'utf8'), new RegExp(`rotulo="${rotulo}"`), `${archivo}: el nombre empieza con «Buscar»`);
+  assert.match(fs.readFileSync(path.join(SRC, 'components/busqueda/buscador.tsx'), 'utf8'), /rotulo="Buscar noticias y publicaciones"/, 'el nombre empieza con «Buscar»');
+
+  // --- Una sola busqueda en la portada, en Redes y en /reportes -------------
+  // 30 de septiembre de 2026 (cliente): las tres buscan lo que buscaba
+  // /reportes, noticias y publicaciones, y Redes ya no abre la ficha al buscar.
+  for (const archivo of ['components/ahora/buscador-ahora.tsx', 'components/paneles/buscador-redes.tsx', 'components/paneles/busqueda-en-vivo.tsx']) {
+    assert.ok(!fs.existsSync(path.join(SRC, archivo)), `${archivo}: un solo buscador`);
   }
+  for (const archivo of ['components/ahora/feed-ahora.tsx', 'components/paneles/busqueda-redes.tsx']) {
+    const fuente = fs.readFileSync(path.join(SRC, archivo), 'utf8');
+    assert.match(fuente, /<LectorBusqueda /, `${archivo}: busca con el lector comun`);
+    assert.doesNotMatch(fuente, /useTermino|useRedesEnVivo|AccionesEnVivo|BuscadorAhora|BuscadorRedes/, `${archivo}: sin la busqueda en vivo ni los buscadores viejos`);
+  }
+  assert.match(fs.readFileSync(path.join(SRC, 'components/reportes/resultados-reportes.tsx'), 'utf8'), /<ResultadosBusqueda /);
+  // Y sin la bandeja de terminos en seguimiento bajo el campo (cliente, mismo
+  // dia: «muy confuso»). Los terminos estan en /reportes.
+  assert.doesNotMatch(fs.readFileSync(path.join(SRC, 'components/busqueda/buscador.tsx'), 'utf8'), /useConsultas|sugerencias=/);
+  assert.doesNotMatch(enBarra, /sugerencias\?:|className="bandeja-busqueda"/);
+  assert.doesNotMatch(fs.readFileSync(path.join(SRC, 'app/globals.css'), 'utf8'), /\.bandeja-busqueda/);
   const css = fs.readFileSync(path.join(SRC, 'app/globals.css'), 'utf8');
   assert.match(css, /\.control-lector\[data-buscar\] \{[^}]*border: 1px solid var\(--color-filo\);[^}]*background: var\(--color-vela\);/);
   assert.doesNotMatch(css, /\.control-lector\[data-buscar\][^{]*\{[^}]*display: none/, 'la palabra no se esconde en el telefono');

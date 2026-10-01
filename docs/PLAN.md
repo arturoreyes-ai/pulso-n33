@@ -1,3 +1,29 @@
+> **Implementación · 30 de septiembre de 2026 — Una sola búsqueda en la
+> portada y en Redes.** La lupa de la portada buscaba solo titulares, uno por
+> pantalla, y la de Redes abría la ficha de tono del término, con la búsqueda
+> pagada en redes detrás de un botón. Se pidió que las dos hicieran lo que hace
+> la búsqueda de Reportes, y que Redes dejara la ficha. Ahora las dos, y
+> Reportes, muestran lo mismo: las **noticias** y las **publicaciones** ya
+> leídas que nombran lo buscado, lado a lado y nunca sumadas, con las pestañas
+> Todo · Noticias · Publicaciones. En la portada las noticias siguen buscando
+> donde se entró (Tijuana, México); las publicaciones son las de toda la
+> región. Buscar ya **no gasta**: el botón de la búsqueda pagada en redes
+> (nota del 23 de septiembre) salió de la pantalla. La ficha de los términos
+> en seguimiento sigue, con su PDF, y se abre desde «Ver reporte» en Reportes.
+
+> **Implementación · 30 de septiembre de 2026 — Seguimiento: el resumen por
+> temas y los comentarios más votados primero.** El cliente leyó el resumen de
+> los comentarios como mal redactado: era un párrafo de más de cien palabras.
+> Ahora son dos o tres frases de conjunto y, debajo, **los temas que se
+> repiten** («Calidad de las lámparas», «Baches»…), cada uno con cuántos
+> comentarios lo tratan; al tocarlo se ven sus tres comentarios con más likes,
+> y un botón lleva a todos. Un tema tiene que aparecer en al menos dos
+> comentarios, y la cuenta la hace el sistema, no la IA. Lo escribe un modelo
+> de IA más capaz que el de antes, por cerca de un centavo de dólar más por
+> actualización. Los comentarios abren **por los de más likes**, ocho a la
+> vista y veinte más con cada «Ver más», y van antes de la historia de
+> actualizaciones.
+
 > **Implementación · 29 de septiembre de 2026 — Seguimiento: el tono con una
 > figura pública, y «Lo que dicen los comentarios».** La primera publicación en
 > seguimiento fue el informe del presidente municipal Ismael Burgueño, y el tono

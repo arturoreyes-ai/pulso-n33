@@ -73,7 +73,7 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  * Por eso no hay «Cómo leer este dato» aqui. Lo tenian las cuatro facetas y
  * era prosa de metodologia; su contenido esta en PRODUCT.md.
  */
-export function PaginaRedes({ zona, consulta = null }: { zona: ZonaRuta | null; consulta?: string | null }) {
+export function PaginaRedes({ zona, consulta = null, reporte = null }: { zona: ZonaRuta | null; consulta?: string | null; reporte?: string | null }) {
   const nombre = zona === null ? null : NOMBRE_CORTO[zona];
 
   return (
@@ -84,6 +84,7 @@ export function PaginaRedes({ zona, consulta = null }: { zona: ZonaRuta | null; 
       <LectorRedes
         zona={zona}
         consulta={consulta}
+        reporte={reporte}
         paneles={{ x: <PanelTendencias zona={zona} /> }}
         analisis={analisisHabilitado()}
       />

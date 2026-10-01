@@ -5,8 +5,8 @@ import { useEffect, useState, type ReactNode } from "react";
 import { preload } from "swr";
 
 import { CONTROL, Lector } from "@/components/lector/lector";
-import { BuscadorRedes } from "./buscador-redes";
-import { BusquedaRedes } from "./busqueda-redes";
+import { Buscador } from "@/components/busqueda/buscador";
+import { BusquedaRedes, ReporteRedes } from "./busqueda-redes";
 import { OpcionesLugar } from "@/components/ui/opciones-lugar";
 import { FilaPestanas } from "@/components/ui/pestanas";
 import { RUTAS } from "@/lib/datos/config";
@@ -156,12 +156,16 @@ interface PropsLector {
  * Cada rama es un componente propio con sus propios hooks, y el `key` hace
  * que cambiar de termino monte una busqueda nueva.
  */
-export function LectorRedes({ consulta = null, ...resto }: PropsLector & {
+export function LectorRedes({ consulta = null, reporte = null, ...resto }: PropsLector & {
   /** La busqueda de la lupa (`?q=`), leida en el servidor por la ruta de
    *  region. Con texto, la pagina entera es el modo de busqueda
    *  (paneles/busqueda-redes.tsx). */
   consulta?: string | null;
+  /** El reporte de un termino en seguimiento (`?reporte=`). Gana a `?q=`. */
+  reporte?: string | null;
 }) {
+  const r = (reporte ?? "").trim();
+  if (r !== "") return <ReporteRedes key={`r:${r}`} termino={r} />;
   const q = (consulta ?? "").trim();
   if (q !== "") return <BusquedaRedes key={`q:${q}`} consulta={q} />;
   return <LectorRedesMedios {...resto} />;
@@ -210,7 +214,8 @@ function LectorRedesMedios({ zona, paneles, analisis = false }: PropsLector) {
       opciones={<OpcionesLugarRedes zona={zona} cubetas={disponibles} activa={activa} onCubeta={setCubeta} />}
       // La lupa, tambien en una pagina de zona: el formulario envia siempre a
       // la vista de region, porque un termino no es un lugar.
-      busqueda={<BuscadorRedes accion={ruta(null, "redes")} consulta={null} />}
+      busqueda={<Buscador accion={ruta(null, "redes")} etiqueta="En noticias y redes" consulta={null}
+        salida="Volver a las publicaciones" />}
       // Solo el orden. «De qué se habla» (conversacion-redes.tsx) vivia aqui,
       // con un icono de globos de dialogo, y salio de la barra el 23 de
       // septiembre de 2026 a pedido del cliente: los comentarios se leen desde

@@ -8,7 +8,7 @@ import {
   type RedVisual,
 } from "./publicaciones";
 import { ruta } from "./secciones";
-import { PARAM_CONSULTA } from "../busqueda/entrada";
+import { PARAM_CONSULTA, PARAM_REPORTE } from "../busqueda/entrada";
 
 /**
  * La busqueda de Redes: un TERMINO en seguimiento o un filtro sobre lo que ya
@@ -23,6 +23,11 @@ import { PARAM_CONSULTA } from "../busqueda/entrada";
  * como primera tarjeta. Si no, lo escrito filtra las publicaciones que el
  * lector ya tiene delante (`filtrarPorTexto`): pies y comentarios que lo
  * nombran. Ninguna de las dos cosas pide nada a ninguna red.
+ *
+ * Desde el 30 de septiembre de 2026 la lupa ya no abre la ficha: busca
+ * noticias y publicaciones como /reportes (busqueda/resultados-busqueda.tsx,
+ * que usa `filtrarPorTexto` sobre todo lo cosechado), y la ficha se abre desde
+ * /reportes con `rutaDeConsulta`.
  *
  * Puro y sin React: lo prueba scripts/probar-consultas.cjs.
  */
@@ -123,11 +128,13 @@ export function filtrarPorTexto(
   });
 }
 
-/** A donde lleva elegir un termino en seguimiento. Siempre la vista de
- *  region: un termino no es un lugar, y /tijuana/redes?q= no significa nada. */
+/** A donde lleva elegir un termino en seguimiento: su REPORTE, la ficha. Siempre
+ *  la vista de region: un termino no es un lugar. Es `?reporte=` y no `?q=`
+ *  desde el 30 de septiembre de 2026, cuando `?q=` paso a ser la busqueda de
+ *  noticias y publicaciones y dejo de abrir la ficha (paneles/busqueda-redes.tsx). */
 export function rutaDeConsulta(termino: string): string {
   const params = new URLSearchParams();
-  params.set(PARAM_CONSULTA, termino);
+  params.set(PARAM_REPORTE, termino);
   return `${ruta(null, "redes")}?${params.toString()}`;
 }
 

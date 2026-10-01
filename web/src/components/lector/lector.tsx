@@ -76,10 +76,13 @@ export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opc
   rotuloValor?: string;
   /** Lo que se esta viendo («Tijuana», «Toda la región»). */
   valor: string;
-  tituloOpciones: string;
+  tituloOpciones?: string;
   /** El cuerpo del dialogo de opciones. El lector lo cierra al pulsar
-   *  cualquier enlace o boton de dentro. */
-  opciones: ReactNode;
+   *  cualquier enlace o boton de dentro. Sin esto el valor es un rotulo y no
+   *  un boton: la busqueda de Redes no depende del lugar, y un dialogo de
+   *  lugar alli solo servia para salir de ella sin decirlo (30 de septiembre
+   *  de 2026). */
+  opciones?: ReactNode;
   acciones?: ReactNode;
   /** La busqueda EN la barra (ui/busqueda-en-barra.tsx): la pastilla
    *  «Buscar» que se abre en su sitio. Sin esto no se pinta. La portada busca
@@ -110,14 +113,21 @@ export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opc
               <FlechaAtras size={ICONO_ESTRECHO} aria-hidden />
             </Link>
           )}
-          <button ref={selector} type="button" className="flex min-w-0 flex-1 items-center gap-2 rounded-nucleo px-2 py-2 text-left hover:bg-vela md:flex-none"
-            aria-haspopup="dialog" aria-controls={idOpciones} onClick={() => lugares.current?.showModal()}>
-            <span className="min-w-0">
+          {opciones === undefined ? (
+            <p className="min-w-0 flex-1 px-2 py-2 md:flex-none">
               <span className="block text-meta text-tinta-meta">{rotuloValor ?? rotulo}</span>
               <span className="block truncate text-cuerpo text-tinta-titulo">{valor}</span>
-            </span>
-            <Desplegar size={ICONO_DESPLEGAR} className="shrink-0 text-tinta-meta" aria-hidden />
-          </button>
+            </p>
+          ) : (
+            <button ref={selector} type="button" className="flex min-w-0 flex-1 items-center gap-2 rounded-nucleo px-2 py-2 text-left hover:bg-vela md:flex-none"
+              aria-haspopup="dialog" aria-controls={idOpciones} onClick={() => lugares.current?.showModal()}>
+              <span className="min-w-0">
+                <span className="block text-meta text-tinta-meta">{rotuloValor ?? rotulo}</span>
+                <span className="block truncate text-cuerpo text-tinta-titulo">{valor}</span>
+              </span>
+              <Desplegar size={ICONO_DESPLEGAR} className="shrink-0 text-tinta-meta" aria-hidden />
+            </button>
+          )}
           <span className="hidden flex-1 md:block" aria-hidden />
           {acciones}
           {/* La busqueda dice «Buscar», con borde y fondo, en todos los
@@ -134,9 +144,11 @@ export function Lector({ volver, rotulo, rotuloValor, valor, tituloOpciones, opc
       </div>
 
       {/* Los enlaces navegan y desmontan la hoja; el boton de cierre la cierra aqui. */}
-      <Hoja ref={lugares} titulo={tituloOpciones} rotuloCerrar="Cerrar opciones" id={idOpciones}>
-        {opciones}
-      </Hoja>
+      {opciones === undefined ? null : (
+        <Hoja ref={lugares} titulo={tituloOpciones ?? rotulo} rotuloCerrar="Cerrar opciones" id={idOpciones}>
+          {opciones}
+        </Hoja>
+      )}
 
       {children}
     </div>

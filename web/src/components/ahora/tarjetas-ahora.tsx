@@ -210,21 +210,17 @@ export function TarjetaHueco({ t, indice }: { t: Hueco; indice: number }) {
   );
 }
 
-export function TarjetaFinal({ frase, indice, onInicio, titulo = "Llegaste al final de lo que destaca ahora.", redes }: {
+export function TarjetaFinal({ frase, indice, onInicio, titulo = "Llegaste al final de lo que destaca ahora." }: {
   frase: string;
   indice: number;
   onInicio: () => void;
   titulo?: string;
-  /** A donde lleva «Ver en redes»: la misma busqueda en Redes, con sus
-   *  publicaciones y comentarios. Solo al final de una busqueda. */
-  redes?: string;
 }) {
   return (
     <article data-indice={indice} aria-label="Final del recorrido" className={TARJETA}>
       <h2 className="max-w-[24ch] font-titular text-seccion text-tinta-titulo">{titulo}</h2>
       <p className="mt-4 max-w-[65ch] text-lectura text-tinta-prosa">{frase}</p>
       <div className="mt-8 flex flex-wrap gap-3">
-        {redes === undefined ? null : <a href={redes} className={clasesBoton(true)}>Ver en redes</a>}
         <button type="button" className={clasesBoton(false)} onClick={onInicio}>Volver al inicio</button>
       </div>
     </article>

@@ -2,7 +2,7 @@
 
 import { ArrowRight as Flecha, MagnifyingGlass as Lupa, X as Cerrar } from "@phosphor-icons/react";
 import Link from "next/link";
-import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 import { ICONO_CON_TEXTO } from "@/components/chrome/medidas-cinta";
 import { LARGO_MAXIMO_CONSULTA, MINIMO_CONSULTA } from "@/lib/busqueda/tipos";
@@ -39,13 +39,13 @@ import { LARGO_MAXIMO_CONSULTA, MINIMO_CONSULTA } from "@/lib/busqueda/tipos";
  * rehace las tarjetas bajo el dedo. `ocultos` conserva la edicion de la
  * portada (`e=mexico`).
  *
- * `sugerencias` es lo que va debajo mientras se escribe: los terminos en
- * seguimiento de Redes. Una bandeja pegada al campo, sin velo, que solo se ve
- * con el foco dentro.
+ * Hasta el 30 de septiembre de 2026 llevaba `sugerencias`, una bandeja bajo
+ * el campo con los terminos en seguimiento de Redes; el cliente la quito por
+ * confusa (busqueda/buscador.tsx).
  *
  * Reemplaza a ui/formulario-busqueda.tsx, que era el cuerpo de las dos hojas.
  */
-export function BusquedaEnBarra({ accion, rotulo, etiqueta, consulta, salida, ocultos = {}, destinoSalida = accion, sugerencias }: {
+export function BusquedaEnBarra({ accion, rotulo, etiqueta, consulta, salida, ocultos = {}, destinoSalida = accion }: {
   accion: string;
   /** El nombre accesible de la pastilla: «Buscar titulares». */
   rotulo: string;
@@ -56,12 +56,10 @@ export function BusquedaEnBarra({ accion, rotulo, etiqueta, consulta, salida, oc
   salida: string;
   ocultos?: Readonly<Record<string, string>>;
   destinoSalida?: string;
-  sugerencias?: ReactNode;
 }) {
   const enBusqueda = consulta !== null;
   const [abiertaAqui, setAbiertaAqui] = useState(false);
   const abierta = enBusqueda || abiertaAqui;
-  const [enfoque, setEnfoque] = useState(false);
   const caja = useRef<HTMLDivElement>(null);
   const campo = useRef<HTMLInputElement>(null);
   const pastilla = useRef<HTMLButtonElement>(null);
@@ -93,10 +91,6 @@ export function BusquedaEnBarra({ accion, rotulo, etiqueta, consulta, salida, oc
       ref={caja}
       className="busqueda-barra"
       data-abierta={abierta || undefined}
-      onFocus={() => setEnfoque(true)}
-      onBlur={(e) => {
-        if (!caja.current?.contains(e.relatedTarget as Node | null)) setEnfoque(false);
-      }}
       onKeyDown={(e) => {
         if (e.key !== "Escape") return;
         if (enBusqueda) campo.current?.blur();
@@ -131,8 +125,8 @@ export function BusquedaEnBarra({ accion, rotulo, etiqueta, consulta, salida, oc
           maxLength={LARGO_MAXIMO_CONSULTA}
           autoComplete="off"
           enterKeyHint="search"
-          aria-label={`${rotulo} ${donde}`}
-          placeholder={`Buscar ${donde}`}
+          aria-label={`Buscar ${donde}`}
+          placeholder={`Buscar ${donde}…`}
           className="min-w-0 flex-1 bg-transparent text-cuerpo text-tinta-titulo outline-none placeholder:text-tinta-inerte"
         />
         {enBusqueda ? (
@@ -148,12 +142,6 @@ export function BusquedaEnBarra({ accion, rotulo, etiqueta, consulta, salida, oc
           <Flecha size={16} aria-hidden />
         </button>
       </form>
-
-      {sugerencias === undefined ? null : (
-        <div className="bandeja-busqueda" data-visible={(abierta && enfoque) || undefined} inert={!(abierta && enfoque)}>
-          {sugerencias}
-        </div>
-      )}
     </div>
   );
 }

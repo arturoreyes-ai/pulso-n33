@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { Pagina } from "@/components/paginas/pagina";
-import { PARAM_CONSULTA } from "@/lib/busqueda/entrada";
+import { PARAM_CONSULTA, PARAM_REPORTE } from "@/lib/busqueda/entrada";
 import { metadatos } from "@/lib/dominio/metadatos";
 
 /**
@@ -9,8 +9,9 @@ import { metadatos } from "@/lib/dominio/metadatos";
  * vista por zona esta en `[zona]/[seccion]`.
  *
  * Desde el 18 de septiembre de 2026 ESTA ruta lee `?q=`: la busqueda de la lupa
- * de Redes, que muestra un termino en seguimiento (data/consultas.json) o filtra
- * las publicaciones cargadas. Se lee en el SERVIDOR y baja como prop, igual que
+ * de Redes, desde el 30 de septiembre la misma de la portada (noticias y
+ * publicaciones), y `?reporte=`, la ficha de un termino en seguimiento que
+ * abre /reportes. Se lee en el SERVIDOR y baja como prop, igual que
  * en la portada y por la misma razon escrita en paginas/en-tendencia.tsx: un
  * `useSearchParams` bajo Suspense se queda colgado en una ruta prerrenderizada.
  * Leer `searchParams` vuelve esta pagina dinamica, como ya lo es `/`; el HTML
@@ -27,5 +28,7 @@ export default async function PaginaRedesRegion({ searchParams }: {
 }) {
   const params = await searchParams;
   const q = params[PARAM_CONSULTA];
-  return <Pagina zona={null} vista="redes" consulta={typeof q === "string" ? q : null} />;
+  const reporte = params[PARAM_REPORTE];
+  return <Pagina zona={null} vista="redes" consulta={typeof q === "string" ? q : null}
+    reporte={typeof reporte === "string" ? reporte : null} />;
 }
