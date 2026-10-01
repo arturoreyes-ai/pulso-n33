@@ -1,8 +1,719 @@
 {
  "esquema": 1,
  "ventana_dias": 30,
- "total": 9983,
+ "total": 10018,
  "notas": [
+  {
+   "id": "d4e1c161794ceec5",
+   "titulo": "Investigadores integran un hongo vivo en un robot y logran que camine y se desplace sobre ruedas al transformar su actividad eléctrica en movimientos",
+   "url": "https://www.elimparcial.com/locurioso/2026/10/01/investigadores-integran-un-hongo-vivo-en-un-robot-y-logran-que-camine-y-se-desplace-sobre-ruedas-al-transformar-su-actividad-electrica-en-movimientos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T13:00:01+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5896,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/Q2Q45V6BYFA3LKLEOM4SLMXG4I.png?auth=ed787fe6604a9cbc58ea461c1495adbe275780f1fc804aebe7f18a7d9c48af8a&smart=true&width=1620&height=1080",
+   "rubros": []
+  },
+  {
+   "id": "934cae3ba67a05e3",
+   "titulo": "Padres clinch Wild Card Series win — and the team’s new owners are enjoying the ride",
+   "url": "https://timesofsandiego.com/sports/2026/10/01/padres-clinch-wild-card-cubs-petco-owners-feliciano-kwanza-jones/",
+   "dominio": "timesofsandiego.com",
+   "fuente": "timessd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T12:42:51+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://i0.wp.com/timesofsandiego.com/wp-content/uploads/2026/10/AP26274202527278-scaled.jpg?fit=1024%2C683&ssl=1",
+   "rubros_categoria": [
+    "deportes"
+   ],
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "897c577828ee2cfe",
+   "titulo": "Huracán Rachel avanza hacia el Pacífico mexicano; Cabo San Lucas cierra playas y puerto",
+   "url": "https://www.elimparcial.com/mexico/2026/10/01/huracan-rachel-avanza-hacia-el-pacifico-mexicano-cabo-san-lucas-cierra-playas-y-puerto/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T12:22:31+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6733,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/OSUJ6WZCJ5AVJHQDKVODTGZXLA.png?auth=c30b58659b66073ccf72aba6c17ba8eb3cae8212677a2c30f31132c08ff522bf&smart=true&width=1200&height=720",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "7607f2c91890c794",
+   "titulo": "POLL: San Diego County voters back ethics reforms but balk at extending supervisor term limits",
+   "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQTUkzZDJxNXNGRmNtWHUwQnRzTl8wWVZnTE04YWQ2czF5ZUtXbm1ndlVrbi1jU1U0RlExdDM2X2lvRHRZRlZ5WEFmN09HTW1sOXRSTkxFZGVMZlpEbnlXUUYxNGZPRFd5ZVZNS3lZal9teXhmbEc1ZkJmTWhtV3dIbWhwYy12a1VhazVoSmN6OEdON2w4c3VPLWwwYkhtb2NXUjIxbk52YW41WUhSQm9pMm1PZDlTNmt1aFdmcFlOTXp5OXJFYlRkcg?oc=5",
+   "dominio": "10news.com",
+   "fuente": "gn-65e51224f05e",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T12:03:20+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_aguasnegras",
+   "rubros": []
+  },
+  {
+   "id": "ea4279b30b8be6bc",
+   "titulo": "Vio a dos niños tomando agua de un charco en Ghana y decidió crear un proyecto solar que ha entregado 126 millones de litros de agua limpia a más de 380 mil personas",
+   "url": "https://www.elimparcial.com/locurioso/2026/10/01/vio-a-dos-ninos-tomando-agua-de-un-charco-en-ghana-y-decidio-crear-un-proyecto-solar-que-ha-entregado-126-millones-de-litros-de-agua-limpia-a-mas-de-380-mil-personas/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T12:00:00+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.6364,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/A5NII6U72NDXBO3EOT5EUFDKK4.jpg?auth=5e3fd6bbee12ef95b598d2ea06c6764008dddafc99e4c9ee37a60c921e213528&smart=true&width=6000&height=4000",
+   "rubros": []
+  },
+  {
+   "id": "8c157d6e849cec97",
+   "titulo": "Vicente Fox menciona a Ricardo Salinas Pliego como posible figura del PAN mientras una reforma aprobada por el Senado plantea exigir nacionalidad mexicana única para llegar a la Presidencia, una medida que contrasta con las dudas surgidas sobre la nacionalidad del empresario",
+   "url": "https://www.elimparcial.com/mexico/2026/09/30/vicente-fox-menciona-a-ricardo-salinas-pliego-como-posible-figura-del-pan-mientras-una-reforma-aprobada-por-el-senado-plantea-exigir-nacionalidad-mexicana-unica-para-llegar-a-la-presidencia-una-medida-que-contrasta-con-las-dudas-surgidas-sobre-la-nacionalidad-del-empresario/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T11:59:38+00:00",
+   "capturado": "2026-10-01T05:50:33+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5573,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/6DPX34XCCFHS3A5H4P5VVOULNM.png?auth=902d72aa5d746f604ac5d0946aea10f4423386834fde5e4fbbfd1a8289813af7&smart=true&width=1200&height=675",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "5c9d9c4e9dfd2b5c",
+   "titulo": "La Suprema Corte mantiene las sanciones para los narcocorridos cuando hagan apología de delitos o induzcan públicamente a cometerlos, pero elimina de la legislación la referencia a “algún tipo de vicio” porque permite sancionar conductas que no necesariamente están prohibidas por la ley",
+   "url": "https://www.elimparcial.com/mexico/2026/09/30/la-suprema-corte-mantiene-las-sanciones-para-los-narcocorridos-en-jalisco-cuando-hagan-apologia-de-delitos-o-induzcan-publicamente-a-cometerlos-pero-elimina-de-la-legislacion-la-referencia-a-algun-tipo-de-vicio-porque-permite-sancionar-conductas-que-no-necesariamente-estan-prohibidas-por-la-ley/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T11:59:11+00:00",
+   "capturado": "2026-10-01T05:50:33+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4775,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/X7YSZAJR5VCNJAK6PEQIVOY3QY.png?auth=b5d9c6408b800c4d1cd4ad3dd19d0299ce9e0131c07699833e6437dc0f5ee778&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "a21c8d8a3bc9233d",
+   "titulo": "¿Cómo es la vida de AMLO en “La Chingada”? El expresidente reaparece y cuenta cómo es su vida ahora",
+   "url": "https://www.elimparcial.com/mexico/2026/10/01/como-es-la-vida-de-amlo-en-la-chingada-el-expresidente-reaparece-y-cuenta-como-es-su-vida-ahora/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T11:53:59+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5184,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/JFO5QDFGZ5HJRAXIQLEUTLTHYI.png?auth=995f3f6c2cbd267727151d1a97610091f30579e668268eb81812587a3b8d80b3&smart=true&width=1200&height=720",
+   "rubros": []
+  },
+  {
+   "id": "af8c5a7da6cb1d68",
+   "titulo": "IMPULSA SECRETARÍA DE MEDIO AMBIENTE LA AGROECOLOGÍA EN SAN QUINTÍN PARA RECUPERAR EL SUELO AGRÍCOLA",
+   "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOWURoaWd4ejJVWDNUMThOTjZ1T2pJVVpFUGRSZ2otMmF2QnRxTUZqLVMwODFuUWxja2FiLWRHcmo0cjlRYUFRQXhjQU1nRERKU2gzSklBbWFQR3BKb2hLX0dzVEtiVU1PT3RUdHF5RG9sRHZYNXRDb1lIRnFwZERONWpVby1JTzIwWHc2bGhR?oc=5",
+   "dominio": "bajacalifornia.gob.mx",
+   "fuente": "gn-01e4fd06574f",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Quintín"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T10:20:53+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5488,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
+   "id": "14258dca229d96df",
+   "titulo": "Picanha, prices and politics: What Brazil's favorite steak says about the election",
+   "url": "https://www.kpbs.org/news/international/2026/10/01/picanha-prices-and-politics-what-brazils-favorite-steak-says-about-the-election",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T10:00:00+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/6e459c0/2147483647/strip/false/crop/3744x3744+936+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F78%2Fc7%2Fb698faa9412ba675ccc14a722726%2Fap26272666310914.jpg",
+   "rubros": [
+    "politica",
+    "economia"
+   ]
+  },
+  {
+   "id": "5122d8e3f8cea41c",
+   "titulo": "Los KURRAK Film Awards: cine hecho desde el Valle de Guadalupe",
+   "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPSVloNVhITFo4SkJaMTBHMWttNVdSOVd1c28wamJRMFRxSi14YzRQNGU2WE4tRHJfTnJkNjZ6R0NnZWlvdW5uWndLdWFtZXdsbHNrM0cyVDA1LW4zYkxwTHluakZXLWh3YmMtdGJjVXBXaVphb2VxYWVTNEY1T0JibVh6OFBIbHB3UHRhTnBtVVVDaWlib0E?oc=5",
+   "dominio": "hojaderutadigital.mx",
+   "fuente": "gn-29632c8487f6",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Ensenada"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T09:34:02+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.6624,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
+   "rubros": [
+    "turismo"
+   ]
+  },
+  {
+   "id": "e3c8c6306f0c7083",
+   "titulo": "Activists Sue City to Block Flock",
+   "url": "https://voiceofsandiego.org/2026/10/01/activists-sue-city-to-block-flock/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T09:15:00+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2019/04/Streetlight-cameras-2.jpg",
+   "rubros": []
+  },
+  {
+   "id": "dad038e96b0d3aae",
+   "titulo": "Egg prices have tumbled since Trump returned to office. Here's why",
+   "url": "https://www.kpbs.org/news/national/2026/10/01/egg-prices-have-tumbled-since-trump-returned-to-office-heres-why",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T09:00:00+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/88a67a5/2147483647/strip/false/crop/4000x4000+1000+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F79%2F1d%2Fff02cb1e41378ce30b85ff55b8e7%2Fgettyimages-2206233652.jpg",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "d71f5f3217574a71",
+   "titulo": "SNAP's funding model is starting to change. Here's what that means for the program",
+   "url": "https://www.kpbs.org/news/national/2026/10/01/snaps-funding-model-is-starting-to-change-heres-what-that-means-for-the-program",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T09:00:00+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/dfa73fd/2147483647/strip/false/crop/5768x5768+1450+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F67%2F9b%2F55c86cf3412485ff8dd66f7676b1%2Fgettyimages-2275677247.jpg",
+   "rubros": []
+  },
+  {
+   "id": "c5167f0203262aec",
+   "titulo": "Along U.S. Route 1, Maine voters worry about heating oil, gas and Canadian tariffs",
+   "url": "https://www.kpbs.org/news/politics/2026/10/01/along-u-s-route-1-maine-voters-worry-about-heating-oil-gas-and-canadian-tariffs",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T09:00:00+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/4850f99/2147483647/strip/false/crop/3024x3024+504+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F20%2F98%2F5b4d98c9464f980365e485fea0f3%2Fimg-6909-1.jpg",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "bf88d68d3393d27b",
+   "titulo": "Do AI and air traffic control mix? CEO addresses anxiety about new FAA tool",
+   "url": "https://www.kpbs.org/news/national/2026/10/01/do-ai-and-air-traffic-control-mix-ceo-addresses-anxiety-about-new-faa-tool",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T09:00:00+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/45e46d6/2147483647/strip/false/crop/647x647+189+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fcb%2Fb2%2Ffda48d6c4030a777955ebbf22b96%2Fgettyimages-2271640316.jpg",
+   "rubros": [
+    "ia"
+   ]
+  },
+  {
+   "id": "69498ce760a6b97b",
+   "titulo": "Trump administration reverses stance on integration of people with disabilities",
+   "url": "https://www.kpbs.org/news/education/2026/10/01/trump-administration-reverses-stance-on-integration-of-people-with-disabilities",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T09:00:00+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/9c22369/2147483647/strip/false/crop/2067x2067+517+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fb5%2F73%2F9e95bb6d4c2caf2b39d6a3e72de8%2Fgettyimages-2226522782.jpg",
+   "rubros": []
+  },
+  {
+   "id": "6860e831cd55f640",
+   "titulo": "Studying this super El Niño could save lives. NOAA is scaling back research",
+   "url": "https://www.kpbs.org/news/national/2026/10/01/studying-this-super-el-nino-could-save-lives-noaa-is-scaling-back-research",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T09:00:00+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/3357b4b/2147483647/strip/false/crop/684x684+170+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fa4%2F59%2F43a6794845898cfbd28d8b07e7ee%2Fgettyimages-491455124.jpg",
+   "rubros": []
+  },
+  {
+   "id": "5b8eb600dae7de46",
+   "titulo": "COMIC: How the census gives your state power (and what Trump wants to change)",
+   "url": "https://www.kpbs.org/news/politics/2026/10/01/comic-how-the-census-gives-your-state-power-and-what-trump-wants-to-change",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T09:00:00+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/1bab991/2147483647/strip/false/crop/2048x2560+0+0/resize/422x528!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F1d%2F82%2F2973bb804932be960368b73714dd%2F1.png",
+   "rubros": []
+  },
+  {
+   "id": "3d98ed5c19bbe42d",
+   "titulo": "Trade tensions mean fewer Canadians flocking to South Florida",
+   "url": "https://www.kpbs.org/news/economy/2026/10/01/trade-tensions-mean-fewer-canadians-flocking-to-south-florida",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T09:00:00+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/89807c3/2147483647/strip/false/crop/1878x1878+561+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F87%2Fa2%2Fac4a701f40c68b6c7fa69e4ae6b8%2Fgettyimages-2209642133.jpg",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "02a599ef7bbc68fd",
+   "titulo": "San Diego’s District 2 City Council Race Is a Big Test",
+   "url": "https://voiceofsandiego.org/2026/10/01/san-diegos-district-2-city-council-race-is-a-big-test/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T09:00:00+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2026/09/Bailey-vs-Crosby-1024x768.png",
+   "rubros_categoria": [
+    "politica"
+   ],
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "70f2f6840af7b6eb",
+   "titulo": "Gobierno Municipal atiende socavón en la carretera libre Tijuana-Rosarito",
+   "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNR1FQQkItUGxNOU83Y0Y3VVdIYU04ZVlJM2dwTHN4dnFCNC1iS0tCR01Mbk1VYjBnT1Facy1QSVRJeVE2alNjQ3ZyOXRBazdmVHlIbnNqdmxtSXJYQ3BEUWI4NGdfNUdLdXBVTTFBZkpheXIwbWMzSzNfMm1pUnI5MHJjTmZTNzMzekN5blJJeFoxek0zZEstMmoyOU45Zy11NExNRWhqcFYxSTV1TW5qd3ItSHhWbHphQndyckQtRHg3aHNkaXI4c1lKY3Q1QQ?oc=5",
+   "dominio": "sandiegored.com",
+   "fuente": "gn-dc1580cd9943",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana",
+    "Playas de Rosarito"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T07:04:00+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
+   "rubros": []
+  },
+  {
+   "id": "36c7a024690c40d0",
+   "titulo": "Atienden daños en Álamos tras el paso del huracán Polo y realizan trabajos de limpieza y reparación",
+   "url": "https://www.elimparcial.com/son/sonora/2026/09/30/atienden-danos-en-alamos-tras-el-paso-del-huracan-polo-y-realizan-trabajos-de-limpieza-y-reparacion/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T06:33:12+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7039,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/HUZPDVPORZCIFNSS2ZKEWTQOLM.jpg?auth=7359f01c35400ee982dc42eee0d291ddf3d4a35778d1789d2f67e5fe2db546c7&smart=true&width=1600&height=900",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "948c691074eba498",
+   "titulo": "Esta noche Rachel ocasiona lluvias intensas en Jalisco, Colima, Michoacán y Guerrero, y muy fuertes en Nayarit",
+   "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxNTFhFV3lhaGF5MjVCTFRBT2dSR256RW1VLTNDSXd4cXVGTUN2RlFMVTRXeHVFcVp4elNIXzRfNTU0WFlZSmFUUlZLb3lqSEJ3c2xSSHl5QzdsVXRyeHpUV1Y4dVZ4NzMtRm1mbllBRHRMX05UVGM3b3YyQVBwdmliY0dZRXJKUURuLUFJRGVVWDIyVVNTcHpoWGUzRVQ1WWRjLWI2MXFQWnBseVQyMlZWSEpCZXFYNXFqN0l6bS1SOUszZjN1ejdLdFA4OF9US3NpZG5jUF9ybFpRZkhRbEtaOWdDTXo?oc=5",
+   "dominio": "gob.mx",
+   "fuente": "gn-86d59fc60ccb",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T06:28:26+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7106,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "8cb15a05bfcf927d",
+   "titulo": "“La mayor riqueza de México es la honestidad de su pueblo”, dice AMLO al reaparecer en video y presentar “Pueblo”, mientras sostiene que la corrupción aún existe porque estuvo arraigada durante años y hace un balance de la transformación que, según afirma, comenzó durante su gobierno",
+   "url": "https://www.elimparcial.com/mexico/2026/09/30/la-mayor-riqueza-de-mexico-es-la-honestidad-de-su-pueblo-dice-amlo-al-reaparecer-en-video-y-presentar-pueblo-mientras-sostiene-que-la-corrupcion-aun-existe-porque-estuvo-arraigada-durante-anos-y-hace-un-balance-de-la-transformacion-que-segun-afirma-comenzo-durante-su-gobierno/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T06:26:18+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.6388,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/EPQSEHZPBNCL7PR54ZUOBTW2RY.png?auth=68ccc8b608ccdb32adb0f1bef04257b537b66ee0061eb22282440825fb537b82&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "5fd9a75637fd9fee",
+   "titulo": "Álamos encabeza las lluvias en Sonora y registra la mayor acumulación del estado",
+   "url": "https://www.elimparcial.com/son/sonora/2026/09/30/alamos-encabeza-las-lluvias-en-sonora-y-registra-la-mayor-acumulacion-del-estado/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T06:24:46+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5236,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/KECZIC44NRH45H5PGQLXINGDXY.jpg?auth=9589c094a2a278e5e9d28884f5725286e1f56171ca437c98c283611af8674936&smart=true&width=1080&height=810",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "72531360d0cec0f3",
+   "titulo": "Imágenes satelitales Google Earth muestran la destrucción de Gaza con barrios enteros reducidos a escombros, la ONU estima que 8 de cada 10 estructuras del territorio han sufrido daños tras casi tres años de guerra",
+   "url": "https://www.elimparcial.com/mundo/2026/09/30/imagenes-satelitales-google-earth-muestran-la-destruccion-de-gaza-con-barrios-enteros-reducidos-a-escombros-la-onu-estima-que-8-de-cada-10-estructuras-del-territorio-han-sufrido-danos-tras-casi-tres-anos-de-guerra/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T06:08:07+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8049,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/GSQNOH4NM5D5VLIQK5A3X3OC7A.png?auth=147c119b58b2447ea080c473e6b020b938369c7c448afaa868ca1b9df7114737&smart=true&width=1200&height=780",
+   "rubros": []
+  },
+  {
+   "id": "51c2a26a3d5ddeee",
+   "titulo": "Lo que comenzó en 1946 con 20 castores canadienses introducidos en Tierra del Fuego para crear una industria de pieles terminó con más de 100 mil animales, 206 mil diques y unas 30 mil hectáreas de bosque nativo afectadas por una invasión que Argentina y Chile intentan erradicar",
+   "url": "https://www.elimparcial.com/locurioso/2026/09/30/lo-que-comenzo-en-1946-con-20-castores-canadienses-introducidos-en-tierra-del-fuego-para-crear-una-industria-de-pieles-termino-con-mas-de-100-mil-animales-206-mil-diques-y-unas-30-mil-hectareas-de-bosque-nativo-afectadas-por-una-invasion-que-argentina-y-chile-intentan-erradicar/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T06:02:21+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7389,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/CUCLNZRV6JEZBMC6MDJTQNJBD4.jpeg?auth=5ea96ffa903eaa669a9c4ced2fcef55a633c8c9e310690c7aad487b987c54645&smart=true&width=1376&height=768",
+   "rubros": []
+  },
+  {
+   "id": "d5218a9d67d57ba7",
+   "titulo": "Baja California llevará su gastronomía al San Diego Food & Wine Festival.",
+   "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOWmVFVUI2U1M1NmxqeE1KTGl3MDVrQUVzczI3QzIxcDhlV1BxTURqSWxxX1dEeGxORkFBYnpVWVZQTmxWX3lpVjRSVnN6NGRrV3FCZUZ0RU1uUC1Tcm1jc3dBOVBlRlNVdU8waFNmN0FERk5iNFNKS2dnLWFvaWZrZkFnTkxSdzFOUzUzZ0FTYjBpemEzMzQyR3lKQVdvMXlRbkhGZdIBqgFBVV95cUxPUVliellGMHNxcF8yaWgwS1JlSHZDZkg0cUgteFF3Vk1QMFloZ3lkRTZwMV9QQVFOYWlUTWFUWG5jajdKYzFCb0lncFFaSkJQZk5QcXRJM3B2bE1Tekk5Zl9ZRGNvQVI2NkJ3eTdIdjhFMzMzTUdNYmNoc3g4Y2Z4TGVrYldUNWJLdkRmWjlCTVMwSXpoQm5ZMzNqeWdEcXJHTlBtRzVmT2VUdw?oc=5",
+   "dominio": "siempreenlanoticia.com",
+   "fuente": "gn-8b479637ed46",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T06:00:28+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.6804,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": [
+    "espectaculos",
+    "turismo"
+   ]
+  },
+  {
+   "id": "f9a386c0e4232b02",
+   "titulo": "Tennessee governor halts executions after Christa Gail Pike survives lethal injection",
+   "url": "https://www.kpbs.org/news/national/2026/09/30/tennessee-governor-halts-executions-after-christa-gail-pike-survives-lethal-injection",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T05:43:24+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/5a4eeee/2147483647/strip/false/crop/5760x5760+1440+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F3b%2Ff3%2F120df3d342878c8c9ae39c616c09%2Fap26274087312825.jpg",
+   "rubros": [
+    "politica"
+   ]
+  },
   {
    "id": "40dcdb04a5f81162",
    "titulo": "Padres de San Diego gana el Wildcard ante Chicago Cubs",
@@ -83,6 +794,53 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/646MJO4IP5H7PEDSQWSTKDJ6JM.jpg?auth=947016b59541c6eb215cdf0b106fe21421e3c6cad616eba03fdddf6697f6535e&smart=true&width=980&height=550",
+   "rubros": []
+  },
+  {
+   "id": "82316aff7ad23da9",
+   "titulo": "Otay Mesa border crossing reopens after ‘suspicious package’ prompted shutdown",
+   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOX1lZMGtGblVIaWlxdktBV2gwLWFHLWNwVDFJdUpPMHZwZm9HUWFpWlc2MDFQZ0NNQ3Y5M2hFWXcxU05ZNDVnQWpwRk4wc21kZ2tLeG0tcUNXLUVfaWtIak5JY19mNjFkWWlMMnoxYThwNC1FQm9hQlFKRXlGSGlOT1BnNGZOVUZVZUVoUno1MllORGgwUlpQNFlyZHc4cGYydWdlVERPa3hBc2E0STl4RjBaR2l0UFNUblJv?oc=5",
+   "dominio": "sandiegouniontribune.com",
+   "fuente": "gn-5bad11419dae",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana",
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T05:06:41+00:00",
+   "capturado": "2026-09-30T22:16:01+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
+  },
+  {
+   "id": "ea57090cb9a9f923",
+   "titulo": "Suena en Europa",
+   "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPaDFJQUhMUUVIOEJCSFFkWENhRFZ4ZjRCeUk1WTlvWUNRMFdEMnNjS1R2d2JJWEtOY09SbHFORjVuQlJHTmdaamI0RmtDZ1c3QXB0UmI3eWpyaHY4T0RjWHN0QVRmSFRCMU9XRURDQ2hrNk15RnhicGp6VHhxd25HVnNPQmlXSlI2VkhESWQ3d29NTFpUNGVYLUE4VTjSAZwBQVVfeXFMT2gxSUFITFFFSDhCQkhRZFhDYURWeGY0QnlJNVk5b1lDUTBXRDJzY0tUdndiSVhLTmNPUmxxTkY1bkJSR05nWmpiNEZrQ2dXN0FwdFJiN3lqcmh2OE9EY1hzdEFUZkhUQjFPV0VEQ0NoazZNeUZ4YnBqelR4cXduR1ZzT0JpV0pSNlZIRElkN3dvTUxaVDRlWC1BOFU4?oc=5",
+   "dominio": "elmanana.com",
+   "fuente": "gn-8b98899846dc",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T05:00:00+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6684,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate",
    "rubros": []
   },
   {
@@ -335,6 +1093,29 @@
    "rubros": []
   },
   {
+   "id": "1d842b5d99552917",
+   "titulo": "Robo de autopartes en BC: de 47 denuncias en 2020 a 161 en lo que va del sexenio; ocupa el lugar 11 nacional",
+   "url": "https://www.uniradioinforma.com/sociedad/robo-autopartes-bc-47-denuncias-2020-161-lo-va-sexenio-ocupa-lugar-11-nacional-n905402",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T04:00:00-07:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5799,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
    "id": "60e20d20ee7af62a",
    "titulo": "Instala INE Consejo Local para elecciones de 2027 en Baja California",
    "url": "https://jornadabc.com.mx/principales/instala-ine-consejo-local-para-elecciones-de-2027-en-baja-california/",
@@ -385,32 +1166,6 @@
     "version": "0.2.0"
    },
    "rubros": []
-  },
-  {
-   "id": "8c157d6e849cec97",
-   "titulo": "Vicente Fox menciona a Ricardo Salinas Pliego como posible figura del PAN mientras una reforma aprobada por el Senado plantea exigir nacionalidad mexicana única para llegar a la Presidencia, una medida que contrasta con las dudas surgidas sobre la nacionalidad del empresario",
-   "url": "https://www.elimparcial.com/mexico/2026/09/30/vicente-fox-menciona-a-ricardo-salinas-pliego-como-posible-figura-del-pan-mientras-una-reforma-aprobada-por-el-senado-plantea-exigir-nacionalidad-mexicana-unica-para-llegar-a-la-presidencia-una-medida-que-contrasta-con-las-dudas-surgidas-sobre-la-nacionalidad-del-empresario/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-01",
-   "publicado": "2026-10-01T03:39:24+00:00",
-   "capturado": "2026-10-01T05:50:33+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.5573,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/6DPX34XCCFHS3A5H4P5VVOULNM.png?auth=902d72aa5d746f604ac5d0946aea10f4423386834fde5e4fbbfd1a8289813af7&smart=true&width=1200&height=675",
-   "rubros": [
-    "politica"
-   ]
   },
   {
    "id": "a71edac7efec1204",
@@ -483,30 +1238,6 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
-   "rubros": []
-  },
-  {
-   "id": "5c9d9c4e9dfd2b5c",
-   "titulo": "La Suprema Corte mantiene las sanciones para los narcocorridos cuando hagan apología de delitos o induzcan públicamente a cometerlos, pero elimina de la legislación la referencia a “algún tipo de vicio” porque permite sancionar conductas que no necesariamente están prohibidas por la ley",
-   "url": "https://www.elimparcial.com/mexico/2026/09/30/la-suprema-corte-mantiene-las-sanciones-para-los-narcocorridos-en-jalisco-cuando-hagan-apologia-de-delitos-o-induzcan-publicamente-a-cometerlos-pero-elimina-de-la-legislacion-la-referencia-a-algun-tipo-de-vicio-porque-permite-sancionar-conductas-que-no-necesariamente-estan-prohibidas-por-la-ley/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-01",
-   "publicado": "2026-10-01T03:08:11+00:00",
-   "capturado": "2026-10-01T05:50:33+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.4775,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/X7YSZAJR5VCNJAK6PEQIVOY3QY.png?auth=b5d9c6408b800c4d1cd4ad3dd19d0299ce9e0131c07699833e6437dc0f5ee778&smart=true&width=1200&height=675",
    "rubros": []
   },
   {
@@ -671,7 +1402,7 @@
    "delegaciones": [],
    "alcance": "estatal",
    "fecha": "2026-10-01",
-   "publicado": "2026-10-01T02:09:00+00:00",
+   "publicado": "2026-10-01T02:09:52+00:00",
    "capturado": "2026-10-01T05:50:33+00:00",
    "figuras": [],
    "postura": {
@@ -682,7 +1413,7 @@
     "version": "0.2.0"
    },
    "origen": "busqueda_web",
-   "descubierta_por": "bq_rosarito",
+   "descubierta_por": "bq_tecate",
    "rubros": []
   },
   {
@@ -780,6 +1511,33 @@
    "rubros": []
   },
   {
+   "id": "ce20b5e970ca67fe",
+   "titulo": "Gobierno de Baja California",
+   "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE0wSjUwQXdkdTI2VV9leFp1WUxJOUgtQTZ4UWlQRG1kdFVMd01UN2lYamMxSl9EZ01uNHpmTkJtRHdiZlRYODR3dXRLbVJJTWo2WjhfUkRoVjd6dmRxNkRDRW13UQ?oc=5",
+   "dominio": "bajacalifornia.gob.mx",
+   "fuente": "gn-01e4fd06574f",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T02:03:23+00:00",
+   "capturado": "2026-09-08T17:24:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6598,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate",
+   "rubros": []
+  },
+  {
    "id": "612c604a76ab7ced",
    "titulo": "Trabajadores de Telnor se irán a huelga el 5 de octubre si no los reinstalan",
    "url": "https://jornadabc.com.mx/principales/trabajadores-de-telnor-se-iran-a-huelga-el-5-de-octubre-si-no-los-reinstalan/",
@@ -798,6 +1556,31 @@
    "postura": {
     "etiqueta": "adversa",
     "confianza": 0.7667,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "9ed7939964234cfa",
+   "titulo": "Retiran a municipales tras robo en despacho",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/retiran-a-municipales-tras-robo-en-despacho-32369326",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T02:00:00+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4822,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
@@ -991,7 +1774,7 @@
   {
    "id": "edeab5efeb37c6a4",
    "titulo": "Morena abre registro para coordinaciones distritales en Baja California",
-   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPVW1vSFlBejdnVzQzcTZtV0xCOU1fMkhiTGlyY2g0ZTBDWFRUZG5vN3JsZXlRNlJQb1ZHb09BQXViVjJ0cmlFbmhySlplcFkxOTQwM2FPU2VQVV9fY3ZWVTZMalF1VU5zWllfQzY5RmI3VGttc0hxSFB1LXlfLVdiTllteGlwYnlmUkotb3l4UGNiXy1kR3AxcTczVEx1akpBZS00M0JPcVNJbm8?oc=5",
+   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQNnNka2Jja2FPNjZKeHRUTDZQVVBIX0haak1DUHcyM2JCNVowWmlfVXNEOEpZN0sxOEdZTjh4R2g5T0Q4VkJ4NGw0aWhaa2Y5cXprRlV4OEJnYWNvT2Y4Q0MwdDFNQUc4a0ZQTEc4aGx6VGN4RVg5ZmFSdW9SckZMWUNUemFZUkZCMnFtUmNQMFJfQ1I2bEMwd3BpaURVeGRXWUJ5OUtvTkd4dw?oc=5",
    "dominio": "bajanews.mx",
    "fuente": "bajanews",
    "zona_medio": "estatal",
@@ -1681,6 +2464,31 @@
    "rubros": []
   },
   {
+   "id": "3a344495e5144b2b",
+   "titulo": "FGE detiene a dos personas por caso de Yasmín N. en Tehuacán; investigación sigue abierta",
+   "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxOazRNNV81V2RqY29iNXFkMF9ZWS14RXJ6eUpURzVhVmdHOWNfVmx0b2hud2FFNlR0Szkzd3c4SVp2d2dXdGhJWWMxTUh3cGt5dm9WdEtxZHRsdGxpRUI4aGE3Ujh1dGtreTQtSkVSZ1RTNnF2Z0l0U1BZQlhzSy1zZzZrRWp2emotLW9yYUZjLWkwX2ZMZ2JJdC1CZjFBczIwSUJTUW0xNzl0T1hSWnJRdEhDdmpIUk1WdTRSOXNBN1pYZnh5bUh4Q0xPUXg5bUFqamtFYUZ5MUlzV2o0TEtUSmFDV0drbC13dkY3N2gyRQ?oc=5",
+   "dominio": "diarioelmundo.com.mx",
+   "fuente": "gn-4e984a804dd0",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T00:31:49+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5067,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
    "id": "7b305d926ed67f39",
    "titulo": "Los Padres le pegan a los Cachorros y sellan su boleto a la ronda divisional",
    "url": "https://oem.com.mx/elsoldetijuana/deportes/los-padres-le-pegan-a-los-cachorros-y-sellan-su-boleto-a-la-ronda-divisional-32370613",
@@ -1955,6 +2763,31 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/PAZF7BJI35EGFKGJM7D3HWG5IM.jpg?auth=bf47dbdd3c6ffed4a01e5d163dafef2217dc05a45c182e23fba95f254f5b3a46&smart=true&width=1200&height=720",
+   "rubros": []
+  },
+  {
+   "id": "a0381899dcb9ba7f",
+   "titulo": "Personal de Protección Civil Baja California recibe capacitación en rescate en aguas rápidas",
+   "url": "https://www.uniradioinforma.com/sociedad/personal-proteccion-civil-baja-california-recibe-capacitacion-rescate-aguas-rapidas-n905861",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-01",
+   "publicado": "2026-10-01T00:00:00-07:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.574,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "rubros": []
   },
   {
@@ -2874,7 +3707,34 @@
     "version": "0.2.0"
    },
    "origen": "busqueda_web",
-   "descubierta_por": "bq_sanquintin",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": []
+  },
+  {
+   "id": "cbc06497221fde09",
+   "titulo": "Extienden campaña del Mes del Testamento hasta octubre en Baja California",
+   "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNcTJyNmhmT0lta3Ezb29KUlRwSElTYUM0Y3BkUEs5eVBRU3dHa0ViSkFKWDJxdkFMMUNjZU4wSUNHYUEtZ1FGbHVIZ0tFMk1jVU9nOWQ3RzU5dGZ1eU5HMFR2MnR5TWtYQkdzN0FUZGhTZ0lTb1doSlA1U0tRdllaSzRBQ2RYX3ltQkdsYjAzRUV4MXBxMlN3STJnNWFzWEVjNUE?oc=5",
+   "dominio": "alfredoalvarez.mx",
+   "fuente": "gn-a96a3aaee9d9",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-09-30",
+   "publicado": "2026-09-30T22:16:58+00:00",
+   "capturado": "2026-10-01T05:50:33+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5524,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
    "rubros": []
   },
   {
@@ -2905,6 +3765,35 @@
    ],
    "rubros": [
     "seguridad"
+   ]
+  },
+  {
+   "id": "5edb28bf16283419",
+   "titulo": "El IEEPCO lleva Elecciones Escolares 2026 a la Secundaria Vicente Guerrero",
+   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNMHFoT0pRaDVxRkFZWVBoaG1NaFNPNDYwa1oxQjdYTUxrWFgzRFVFQ3loaHNfZ2ZqMVhtSDZDM19iOG83dDhoYTJtYXlXbUdYQml1LXFpd3ZWTEw3M280OTFyektWdUs5Y08tV0JtZDRNWFJCeTJIVXFraUxIeFdjbUZybWtkVTBuR21yQW5LLVFEM3lrVWh5SDdSdEZvbUZVYTA3am9GT3lfN1YtNE8tOFlR?oc=5",
+   "dominio": "ieepco.org.mx",
+   "fuente": "gn-1c37fe9db89e",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Quintín"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-30",
+   "publicado": "2026-09-30T22:11:29+00:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6177,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": [
+    "politica"
    ]
   },
   {
@@ -2978,33 +3867,6 @@
    "rubros": []
   },
   {
-   "id": "ce20b5e970ca67fe",
-   "titulo": "Gobierno de Baja California",
-   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE14VXc5NzdCSHAwMG0zOGJDSWZfMzB1RXVqNS1uUjQzeDdTc2c1eTA0eGlQYzdzbUdXWUxCcjdZWjVDQlczQVRSTDQyektJLTJ3UUlRRHlETUgtZWJfZTBXSkhIc0E?oc=5",
-   "dominio": "bajacalifornia.gob.mx",
-   "fuente": "gn-01e4fd06574f",
-   "zona_medio": "estatal",
-   "zonas": [
-    "estatal"
-   ],
-   "delegaciones": [],
-   "alcance": "estatal",
-   "fecha": "2026-09-30",
-   "publicado": "2026-09-30T22:02:21+00:00",
-   "capturado": "2026-09-08T17:24:53+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.6598,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_sanquintin",
-   "rubros": []
-  },
-  {
    "id": "429f73cc174e78d0",
    "titulo": "Red Sox vs Yankees: A qué hora y dónde ver EN VIVO; Boston busca evitar la eliminación",
    "url": "https://www.elimparcial.com/deporte/2026/09/30/red-sox-vs-yankees-a-que-hora-y-donde-ver-en-vivo-boston-busca-evitar-la-eliminacion/",
@@ -3052,6 +3914,31 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/ZU66J7IDDBB6DDHNLWOZVJAMGY.jpeg?auth=fbb0079f89a4fe84895cda1475fbcf897e0c746f569b5467ae73fce88e3a002f&smart=true&width=1200&height=677",
+   "rubros": []
+  },
+  {
+   "id": "719cf32061a7ccdc",
+   "titulo": "Alertan por licencias de conducir falsas en Baja California",
+   "url": "https://www.uniradioinforma.com/sociedad/alertan-licencias-conducir-falsas-baja-california-n905706",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-09-30",
+   "publicado": "2026-09-30T22:00:00-07:00",
+   "capturado": "2026-10-01T13:09:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8171,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "rubros": []
   },
   {
@@ -3661,33 +4548,6 @@
    "rubros": [
     "seguridad"
    ]
-  },
-  {
-   "id": "cbc06497221fde09",
-   "titulo": "Extienden campaña del Mes del Testamento hasta octubre en Baja California",
-   "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNcTJyNmhmT0lta3Ezb29KUlRwSElTYUM0Y3BkUEs5eVBRU3dHa0ViSkFKWDJxdkFMMUNjZU4wSUNHYUEtZ1FGbHVIZ0tFMk1jVU9nOWQ3RzU5dGZ1eU5HMFR2MnR5TWtYQkdzN0FUZGhTZ0lTb1doSlA1U0tRdllaSzRBQ2RYX3ltQkdsYjAzRUV4MXBxMlN3STJnNWFzWEVjNUE?oc=5",
-   "dominio": "alfredoalvarez.mx",
-   "fuente": "gn-a96a3aaee9d9",
-   "zona_medio": "estatal",
-   "zonas": [
-    "estatal"
-   ],
-   "delegaciones": [],
-   "alcance": "estatal",
-   "fecha": "2026-09-30",
-   "publicado": "2026-09-30T21:19:57+00:00",
-   "capturado": "2026-10-01T05:50:33+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5524,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_sanfelipe",
-   "rubros": []
   },
   {
    "id": "dd0871dcefda1d1a",
@@ -4497,6 +5357,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6abdcef85b63d.jpg",
    "rubros": [
     "politica"
    ]
@@ -4568,6 +5429,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6abdcd6327ebc.jpg",
    "rubros": []
   },
   {
@@ -4620,6 +5482,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6abd832bee4ac.jpg",
    "rubros": []
   },
   {
@@ -5172,28 +6035,6 @@
    "figuras": [],
    "postura": null,
    "imagen": "https://i0.wp.com/timesofsandiego.com/wp-content/uploads/2026/09/0.arch_.jpg?fit=1024%2C754&ssl=1",
-   "rubros": []
-  },
-  {
-   "id": "82316aff7ad23da9",
-   "titulo": "Otay Mesa border crossing reopens after ‘suspicious package’ prompted shutdown",
-   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOX1lZMGtGblVIaWlxdktBV2gwLWFHLWNwVDFJdUpPMHZwZm9HUWFpWlc2MDFQZ0NNQ3Y5M2hFWXcxU05ZNDVnQWpwRk4wc21kZ2tLeG0tcUNXLUVfaWtIak5JY19mNjFkWWlMMnoxYThwNC1FQm9hQlFKRXlGSGlOT1BnNGZOVUZVZUVoUno1MllORGgwUlpQNFlyZHc4cGYydWdlVERPa3hBc2E0STl4RjBaR2l0UFNUblJv?oc=5",
-   "dominio": "sandiegouniontribune.com",
-   "fuente": "gn-5bad11419dae",
-   "zona_medio": "estatal",
-   "zonas": [
-    "Tijuana",
-    "San Diego"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-09-30",
-   "publicado": "2026-09-30T19:29:44+00:00",
-   "capturado": "2026-09-30T22:16:01+00:00",
-   "figuras": [],
-   "postura": null,
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_frontera_en",
    "rubros": []
   },
   {
@@ -6163,7 +7004,7 @@
    "delegaciones": [],
    "alcance": "zona",
    "fecha": "2026-09-30",
-   "publicado": "2026-09-30T18:15:27+00:00",
+   "publicado": "2026-09-30T18:15:28+00:00",
    "capturado": "2026-09-30T22:16:01+00:00",
    "figuras": [],
    "postura": {
@@ -179140,7 +179981,7 @@
     {
      "id": "ram",
      "via": "nominal",
-     "clave": "adame munoz"
+     "clave": "rocio adame"
     }
    ],
    "postura": {
