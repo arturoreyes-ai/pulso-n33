@@ -311,6 +311,14 @@ body {
   border-radius: inherit;
 }
 
+/* Sin la espera del doble toque (que el navegador guarda para hacer zoom) y
+   sin el destello gris de iOS: cada control ya tiene su `:active`, y el
+   destello se pintaba encima. El zoom con dos dedos sigue intacto. */
+a, button, summary, label, [role="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* ------------------------------------------- superficies del navegador */
 
 /* Lo que no dibujamos tambien es del tablero. El anillo de foco de arriba ya

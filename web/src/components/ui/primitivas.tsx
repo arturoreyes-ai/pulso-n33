@@ -19,6 +19,10 @@ export function Chip({
   return (
     <button type="button" aria-pressed={activo} onClick={onClick} className={clasesChip(activo)}>
       <span>{children}</span>
+      {/* El espacio no se ve (una caja flex ignora el texto en blanco entre
+          sus hijos) pero separa el nombre accesible: sin el, un lector de
+          pantalla decia «Todos52». */}
+      {cuenta === undefined ? null : " "}
       {cuenta === undefined ? null : (
         <span className="text-meta tabular-nums text-tinta-meta">{cuenta}</span>
       )}
