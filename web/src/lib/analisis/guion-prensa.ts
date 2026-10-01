@@ -15,13 +15,20 @@ import { enlaceParaAnalisis } from "@/lib/busqueda/enlaces";
 import { plegar } from "@/lib/dominio/formato";
 import { analisisHabilitado, MODELO_GUION } from "./config";
 import { normalizarDominio } from "./dominio";
-import { PROGRAMAS_GUION, type EjeMinuta, type EjeNoticias33, type ProgramaGuion } from "./contrato-guion";
+import { PROGRAMAS_GUION, type EjeDeportes, type EjeMinuta, type EjeNoticias33, type EjeRedEnRed, type ProgramaGuion } from "./contrato-guion";
 import {
   decible,
+  EJES_DE,
+  esDeporteDeFuera,
+  esDeMexico,
+  esDeporteDeMexico,
+  esEspectaculoDeFuera,
   escribirGuion,
   fallo,
   huecosDe,
   nombraCalifornia,
+  noEsFarandula,
+  soloLoGrave,
   TERMINOS_IMPACTO,
   TERMINOS_MANANERA,
   type Pieza,
@@ -168,8 +175,44 @@ export function feedsDe(programa: ProgramaGuion): Record<string, Feed[]> {
           { pedido: busqueda(TERMINOS_CALIFORNIA_PRENSA, "en", "internacional"), nombra: (r) => nombraCalifornia(r.titulo, TERMINOS_CALIFORNIA_PRENSA), region: false },
         ],
       } satisfies Record<Exclude<EjeNoticias33, "garitas">, Feed[]>;
-    case "deredenred":
-      return { temas: [deRubro("espectaculos", "es", "region"), deRubro("espectaculos", "es", "mexico"), deRubro("espectaculos", "en", "region")] };
+    case "deredenred": {
+      // Como Deportes: la seccion de espectaculos de Google Mexico trae
+      // Hollywood junto a la farandula de aqui, en el orden de Mexico. Lo de
+      // fuera va a Internacional, delante de la busqueda sin lugar, y de esa
+      // busqueda no entra lo que nombra a Mexico.
+      const seccion = deRubro("espectaculos", "es", "mexico");
+      const mundo = deRubro("espectaculos", "es", "internacional");
+      // Y nada que no sea farandula aunque la seccion lo traiga: la condena
+      // de una cantante en Iran (guion.ts::noEsFarandula).
+      const chisme = (f: Feed): Feed => ({ ...f, nombra: (r) => f.nombra(r) && !noEsFarandula(r.titulo) });
+      return {
+        mexico: ([deRubro("espectaculos", "es", "region"), { ...seccion, nombra: (r) => seccion.nombra(r) && !esEspectaculoDeFuera(r.titulo) }, deRubro("espectaculos", "en", "region")] satisfies Feed[]).map(chisme),
+        internacional: ([
+          { ...seccion, nombra: (r) => seccion.nombra(r) && esEspectaculoDeFuera(r.titulo), mexico: false },
+          { ...mundo, nombra: (r) => mundo.nombra(r) && !esDeMexico(r.titulo) },
+        ] satisfies Feed[]).map(chisme),
+      } satisfies Record<EjeRedEnRed, Feed[]>;
+    }
+    case "deportes": {
+      // La seccion de deportes de Google Mexico trae la Premier League y la
+      // NFL junto a la Liga MX: es lo que importa en Mexico, en su orden. Lo
+      // de fuera (esDeporteDeFuera) va a Internacional, delante de la
+      // busqueda sin lugar; lo demas, a Mexico por la reja de Mexico.
+      const seccion = deRubro("deportes", "es", "mexico");
+      // La busqueda sin lugar trae lo de Mexico visto desde fuera: «Rafa
+      // Marquez modifica el 11 inicial, pero no puede con Peru» y «Jacques
+      // Passy, el DT mexicano...» caian en Internacional ese dia. Lo que es
+      // de Mexico (esDeporteDeMexico: el pais, una liga o un club) no entra.
+      const mundo = deRubro("deportes", "es", "internacional");
+      return {
+        region: [deRubro("deportes", "es", "region"), deRubro("deportes", "en", "region")],
+        mexico: [{ ...seccion, nombra: (r) => seccion.nombra(r) && !esDeporteDeFuera(r.titulo) }],
+        internacional: [
+          { ...seccion, nombra: (r) => seccion.nombra(r) && esDeporteDeFuera(r.titulo), mexico: false },
+          { ...mundo, nombra: (r) => mundo.nombra(r) && !esDeporteDeMexico(r.titulo) },
+        ],
+      } satisfies Record<EjeDeportes, Feed[]>;
+    }
     case "minutapolitica":
       return {
         local: [deRubro("politica", "es", "region"), deRubro("politica", "en", "region")],
@@ -225,6 +268,7 @@ const SIN_ENLACES: ReadonlyMap<string, string> = new Map();
 const MENSAJE_POCOS: Record<ProgramaGuion, string> = {
   noticias33: "No hay notas de hoy para los ejes de Noticias 33.",
   deredenred: "No hay notas de entretenimiento de hoy.",
+  deportes: "No hay notas de deportes de hoy.",
   minutapolitica: "No hay notas de política de hoy.",
   estadodealerta: "No hay notas de nota roja de hoy.",
 };
@@ -244,7 +288,7 @@ export async function planPrensa(
 ): Promise<{ plan: Plan | null; caido: boolean; todoCaido: boolean; noLeidos: Set<string>; todas: Pieza[] }> {
   const grupos = Object.entries(feedsDe(programa));
   const todos = grupos.flatMap(([, feeds]) => feeds);
-  const tope = programa === "noticias33" || programa === "minutapolitica" ? CANDIDATOS_POR_EJE_PRENSA : CANDIDATOS_POR_TEMA_PRENSA;
+  const tope = EJES_DE[programa] !== undefined ? CANDIDATOS_POR_EJE_PRENSA : CANDIDATOS_POR_TEMA_PRENSA;
   // Cien filas por feed, como un rubro: las rejas quitan mucho y leer quince
   // dejaria el eje en dos (actualidad.ts::TOPE_CRUDO_RUBRO).
   const cosechas = await cosecharFeeds(todos.map((f) => f.pedido), 100, solicitar);
@@ -264,7 +308,8 @@ export async function planPrensa(
     });
     const fusion = fusionarLocales(lotes);
     completas.push(...fusion);
-    porEje[eje] = fusion.slice(0, tope);
+    // Estado de Alerta: lo mas grave primero tambien en los titulares.
+    porEje[eje] = (programa === "estadodealerta" ? soloLoGrave(fusion, (r) => r.titulo) : fusion).slice(0, tope);
     if (feeds.every((f) => okDe.get(f) === false)) noLeidos.add(eje);
   }
   const caido = [...okDe.values()].some((ok) => !ok);
@@ -290,7 +335,7 @@ export async function planPrensa(
   const todas = [...new Set(atarTodas(completas, indices).map(aPieza))];
 
   const base = { origen: "prensa" as const, programa };
-  const conEjes = programa === "noticias33" || programa === "minutapolitica";
+  const conEjes = EJES_DE[programa] !== undefined;
   const listaDe = (): Pieza[] => [...new Map(Object.values(candidatos).flat().map((p) => [p.url, p])).values()];
   if (!conEjes) {
     const lista = candidatos.temas ?? [];

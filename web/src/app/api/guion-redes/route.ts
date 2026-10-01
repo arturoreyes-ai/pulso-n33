@@ -4,7 +4,7 @@ import { responderGuionRedes } from "@/lib/analisis/guion-redes";
 
 /**
  * Guion para locucion de /redes: las piezas de un programa del canal
- * (`p=noticias33|deredenred|minutapolitica|estadodealerta`) sobre TikTok,
+ * (`p=noticias33|deredenred|deportes|minutapolitica|estadodealerta`) sobre TikTok,
  * Instagram, Facebook y lo muy visto de YouTube.
  *
  * Delgada como las demas. GET para que la respuesta se cachee por programa y

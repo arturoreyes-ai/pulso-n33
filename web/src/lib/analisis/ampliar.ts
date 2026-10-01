@@ -40,7 +40,7 @@ export const CACHE_AMPLIAR = "public, max-age=0, s-maxage=86400";
 
 const MS_LIMITE_MODELO = 40000;
 const TOPE_TITULO = 300;
-const NO_SE_PUDO = "No se pudo desarrollar la nota.";
+const NO_SE_PUDO = "No se pudo detallar la nota.";
 
 const ESQUEMA = {
   type: "object",
@@ -56,7 +56,7 @@ export async function responderAmpliar(
   modelo: string = MODELO_GUION,
 ): Promise<Response> {
   if (!analisisHabilitado()) {
-    return json({ codigo: "apagado", mensaje: "Desarrollar la nota no está disponible." }, 400, SIN_CACHE);
+    return json({ codigo: "apagado", mensaje: "Detallar la nota no está disponible." }, 400, SIN_CACHE);
   }
   const programa = PROGRAMAS_GUION.find((p) => p === params.p);
   if (programa === undefined) return json({ codigo: "programa", mensaje: "Programa desconocido." }, 400, SIN_CACHE);

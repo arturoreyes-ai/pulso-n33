@@ -1,15 +1,23 @@
 import { json, SIN_CACHE } from "@/lib/busqueda/respuesta";
 import { nombraAlguno, nombraRubro } from "@/lib/busqueda/tema-publicacion";
 import { analisisHabilitado, MODELO_GUION } from "./config";
-import { EJES_MINUTA, PROGRAMAS_GUION, type EjeMinuta } from "./contrato-guion";
+import { EJES_DEPORTES, EJES_MINUTA, EJES_REDENRED, PROGRAMAS_GUION, type EjeDeportes, type EjeMinuta, type EjeRedEnRed } from "./contrato-guion";
 import { leerDatoPublicado, videosTikTokParaGuion, type LeerDatos, type VideoGuion } from "./datos-redes";
 import {
   decible,
   EJES_DEL_MODELO_N33,
+  desofuscar,
+  esDeDeporte,
+  esViolento,
+  esDeporteDeFuera,
+  esEspectaculoDeFuera,
   escribirGuion,
   fallo,
   huecosDe,
   nombraCalifornia,
+  pieConcreto,
+  soloLoGrave,
+  esFarandula,
   TERMINOS_IMPACTO,
   TERMINOS_MANANERA,
   type Plan,
@@ -108,8 +116,25 @@ export function candidatosNoticias33(videos: readonly VideoGuion[]): Record<EjeD
   return salida;
 }
 
-export function candidatosDeRedEnRed(videos: readonly VideoGuion[]): VideoGuion[] {
-  return videos.filter((v) => nombraRubro(v.titulo, "espectaculos")).slice(0, CANDIDATOS_POR_TEMA);
+/**
+ * La farandula de De Red en Red (cliente, 30 de septiembre de 2026), en dos
+ * listas. Un pie entra si es de espectaculos (la lista de la fila de temas
+ * mas guion.ts::TERMINOS_FARANDULA), no es ya nota roja («novia» tambien sale
+ * en un crimen) y da algo concreto (guion.ts::pieConcreto: el video de una
+ * fan en el concierto de Carin Leon entraba como nota). `internacional` es la
+ * cubeta de fuera o lo nacional que habla de fuera (esEspectaculoDeFuera);
+ * `mexico`, lo demas. La primera version de ese dia quitaba lo internacional
+ * entero, y el cliente pidio de vuelta UNA pieza de fuera, la mas comentada.
+ */
+export function candidatosDeRedEnRed(videos: readonly VideoGuion[]): Record<EjeRedEnRed, VideoGuion[]> {
+  const farandula = videos.filter((v) => esFarandula(v.titulo) && pieConcreto(v.titulo));
+  const deFuera = (v: VideoGuion) => v.zona === "internacional" || (!esLocal(v) && esEspectaculoDeFuera(v.titulo));
+  const salida = {} as Record<EjeRedEnRed, VideoGuion[]>;
+  for (const eje of EJES_REDENRED) {
+    const suyos = farandula.filter((v) => (eje === "internacional") === deFuera(v));
+    salida[eje] = suyos.slice(0, eje === "mexico" ? CANDIDATOS_POR_TEMA : CANDIDATOS_POR_EJE);
+  }
+  return salida;
 }
 
 /**
@@ -128,6 +153,22 @@ export function candidatosMinuta(videos: readonly VideoGuion[]): Record<EjeMinut
 }
 
 /**
+ * Los pies de deportes (guion.ts::esDeDeporte), repartidos en los tres
+ * alcances: la region por la zona; lo internacional por la zona o
+ * porque nombra un lugar o una competencia de fuera (guion.ts::
+ * esDeporteDeFuera: la Premier League de @elheraldodemexico salia
+ * `nacional`); Mexico, lo nacional que queda.
+ */
+export function candidatosDeportes(videos: readonly VideoGuion[]): Record<EjeDeportes, VideoGuion[]> {
+  const deportivos = videos.filter((v) => esDeDeporte(v.titulo));
+  const ejeDe = (v: VideoGuion): EjeDeportes =>
+    esLocal(v) ? "region" : v.zona === "internacional" || esDeporteDeFuera(v.titulo) ? "internacional" : "mexico";
+  const salida = {} as Record<EjeDeportes, VideoGuion[]>;
+  for (const eje of EJES_DEPORTES) salida[eje] = deportivos.filter((v) => ejeDe(v) === eje).slice(0, CANDIDATOS_POR_EJE);
+  return salida;
+}
+
+/**
  * Seguridad (la lista de la fila de temas) o un hecho de impacto, y solo lo
  * local. Estado de Alerta es la nota roja de un canal de Tijuana: medido el 24
  * de septiembre de 2026, cuatro de los trece videos de Seguridad eran de fuera
@@ -135,9 +176,11 @@ export function candidatosMinuta(videos: readonly VideoGuion[]): Record<EjeMinut
  * pais es justo la que satura cualquier lista.
  */
 export function candidatosAlerta(videos: readonly VideoGuion[]): VideoGuion[] {
-  return videos
-    .filter((v) => esLocal(v) && (nombraRubro(v.titulo, "seguridad") || nombraAlguno(v.titulo, TERMINOS_IMPACTO)))
-    .slice(0, CANDIDATOS_POR_TEMA);
+  // Lo violento primero (30 de septiembre de 2026, guion.ts::porGravedad): por
+  // likes solos, los doce lugares se llenaban de choques y detenciones.
+  const locales = videos.filter((v) => esLocal(v)
+    && (esViolento(v.titulo) || nombraRubro(desofuscar(v.titulo), "seguridad") || nombraAlguno(v.titulo, TERMINOS_IMPACTO)));
+  return soloLoGrave(locales, (v) => v.titulo).slice(0, CANDIDATOS_POR_TEMA);
 }
 
 /** La lista numerada que lee el modelo: cada video una vez, del mas visto al
@@ -149,6 +192,7 @@ function numerar(videos: readonly VideoGuion[], usados: ReadonlySet<string>): Vi
 const MENSAJE_POCOS: Record<(typeof PROGRAMAS_GUION)[number], string> = {
   noticias33: "No hay videos de hoy para los ejes de Noticias 33.",
   deredenred: "No hay videos de entretenimiento de hoy.",
+  deportes: "No hay videos de deportes de hoy.",
   minutapolitica: "No hay videos de política de hoy.",
   estadodealerta: "No hay videos de nota roja de hoy.",
 };
@@ -157,14 +201,16 @@ const MENSAJE_POCOS: Record<(typeof PROGRAMAS_GUION)[number], string> = {
  *  que escribir. Puro y exportado. */
 export function planTikTok(programa: (typeof PROGRAMAS_GUION)[number], videos: readonly VideoGuion[]): Plan | null {
   const base = { origen: "tiktok" as const, programa, sinLeer: [] };
-  if (programa === "noticias33" || programa === "minutapolitica") {
-    const candidatos: Record<string, VideoGuion[]> = programa === "noticias33" ? candidatosNoticias33(videos) : candidatosMinuta(videos);
+  if (programa !== "estadodealerta") {
+    const candidatos: Record<string, VideoGuion[]> = programa === "noticias33" ? candidatosNoticias33(videos)
+      : programa === "deportes" ? candidatosDeportes(videos)
+        : programa === "deredenred" ? candidatosDeRedEnRed(videos) : candidatosMinuta(videos);
     const todos = Object.values(candidatos).flat();
     if (todos.length === 0) return null;
     const lista = numerar(videos, new Set(todos.map((v) => v.url)));
     return { ...base, lista, candidatos, faltantes: huecosDe(programa, candidatos).faltantes };
   }
-  const lista = programa === "deredenred" ? candidatosDeRedEnRed(videos) : candidatosAlerta(videos);
+  const lista = candidatosAlerta(videos);
   return lista.length === 0 ? null : { ...base, lista, candidatos: null, faltantes: [] };
 }
 

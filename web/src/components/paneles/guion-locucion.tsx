@@ -278,6 +278,13 @@ function GuionPrograma({ origen, programa, corte }: {
         </p>
         <p className="text-meta text-tinta-prosa">{CONSEJO_IA}</p>
       </div>
+      {/* Arriba y no al pie (30 de septiembre de 2026): un guion de Deportes
+          salio con tres notas y ningun clip porque las cuatro redes estaban
+          vencidas, y la linea que lo decia quedaba debajo del cierre, donde
+          nadie la vio. Lo que falto del material se lee antes del guion. */}
+      {sinLeer.length === 0 ? null : (
+        <p role="status" className="text-meta text-baja">No se pudieron leer: {sinLeer.join(", ")}.</p>
+      )}
       <Parlamento rotulo="Apertura" texto={guion.apertura} />
       <ol className="guion-escaleta">
         {leyendoGaritas ? <li><EstadoCarga etiqueta="Leyendo las garitas" /></li> : null}
@@ -292,9 +299,6 @@ function GuionPrograma({ origen, programa, corte }: {
         <div className="grid gap-1 text-meta text-tinta-meta">
           {guion.faltantes.length === 0 ? null : (
             <p>{VACIO_GUION[guion.origen]}: {guion.faltantes.join(", ")}.</p>
-          )}
-          {sinLeer.length === 0 ? null : (
-            <p className="text-baja">No se pudieron leer: {sinLeer.join(", ")}.</p>
           )}
           {guion.hasta == null ? null : (
             <p>{hastaCuando(guion.hasta)}</p>
@@ -332,16 +336,17 @@ function Pieza({ n, origen, programa, clip }: { n: number; origen: OrigenGuion; 
   // mixto, un titular solo. Las demas son clips.
   const leida = clip.pase === null;
   const sinNota = origen === "mixto" && !leida && clip.nota === null;
-  // «Desarrollar con IA» y no «Ampliar» (28 de septiembre de 2026, cliente):
-  // «ampliar» se leia como agrandar la letra o abrir la nota. Lo que hace es
-  // que la IA lea la nota completa y reescriba ESTA entrada con mas detalle;
-  // el `title` lo dice entero. «Desarrollar una nota» es la palabra de la
-  // redaccion. Los destellos son el glifo de IA de todo el tablero.
+  // «Detallar» (30 de septiembre de 2026, cliente), antes «Desarrollar con
+  // IA» (28 de septiembre) y antes «Ampliar», que se leia como agrandar la
+  // letra. Lo que hace es que la IA lea la nota completa y reescriba ESTA
+  // entrada con mas detalle; el `title` lo dice entero. Los destellos dicen
+  // que es IA a la vista, y el nombre accesible lo dice en palabras
+  // («Detallar con IA»), porque el icono va oculto.
   const ampliar = clip.ampliable === null || ampliada.estado === "listo" || ampliada.estado === "cargando" ? null : (
-    <button type="button" className="guion-accion-ia" onClick={ampliada.pedir}
-      title="La IA lee la nota completa y reescribe esta entrada con más detalle">
+    <button type="button" className="guion-accion-ia" onClick={ampliada.pedir} aria-label="Detallar con IA"
+      title="La IA lee la nota completa y agrega detalles a esta entrada">
       <IA size={16} aria-hidden />
-      Desarrollar con IA
+      Detallar
     </button>
   );
   return (
@@ -354,7 +359,7 @@ function Pieza({ n, origen, programa, clip }: { n: number; origen: OrigenGuion; 
           {/* Solo el tipo va en versalitas: el eje entero en mayusculas pesaba
               mas que el titular que viene debajo. */}
           <p className="guion-meta">
-            <span className="guion-tipo">{leida ? "Nota" : "Clip"}</span> · {clip.eje}{clip.libre ? " · libre" : ""}{sinNota ? " · sin nota de prensa" : ""}{ampliada.entrada === null ? "" : " · desarrollada con IA"}
+            <span className="guion-tipo">{leida ? "Nota" : "Clip"}</span> · {clip.eje}{clip.libre ? " · libre" : ""}{sinNota ? " · sin nota de prensa" : ""}{ampliada.entrada === null ? "" : " · detallada con IA"}
           </p>
           <h3 className="guion-titular">{clip.titular}</h3>
         </div>
@@ -449,7 +454,7 @@ function useAmpliada(programa: ProgramaGuion, clip: ClipGuion) {
   return {
     estado,
     entrada: estado === "listo" && data?.fase === "listo" ? data.entrada : null,
-    mensaje: data?.fase === "fallo" ? data.mensaje : "No se pudo desarrollar la nota.",
+    mensaje: data?.fase === "fallo" ? data.mensaje : "No se pudo detallar la nota.",
     pedir: () => {
       if (llave === null) return;
       PEDIDAS.add(llave);
@@ -472,7 +477,7 @@ async function pedirAmpliada(url: string): Promise<RespuestaAmpliada> {
   if (cuerpo !== null && typeof cuerpo === "object" && "entrada" in cuerpo && typeof cuerpo.entrada === "string" && cuerpo.entrada !== "") {
     return { fase: "listo", entrada: cuerpo.entrada };
   }
-  return { fase: "fallo", mensaje: mensajeDeError(cuerpo, "No se pudo desarrollar la nota.") };
+  return { fase: "fallo", mensaje: mensajeDeError(cuerpo, "No se pudo detallar la nota.") };
 }
 
 function BotonCopiar({ texto }: { texto: () => string }) {

@@ -209,6 +209,7 @@ export function armarPlanMixto(programa: ProgramaGuion, material: {
 const MENSAJE_POCOS: Record<ProgramaGuion, string> = {
   noticias33: "No hay publicaciones ni notas de hoy para los ejes de Noticias 33.",
   deredenred: "No hay publicaciones ni notas de entretenimiento de hoy.",
+  deportes: "No hay publicaciones ni notas de deportes de hoy.",
   minutapolitica: "No hay publicaciones ni notas de política de hoy.",
   estadodealerta: "No hay publicaciones ni notas de nota roja de hoy.",
 };

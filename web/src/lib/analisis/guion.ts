@@ -1,13 +1,18 @@
 import { json, SIN_CACHE } from "@/lib/busqueda/respuesta";
-import { nombraAlguno } from "@/lib/busqueda/tema-publicacion";
+import { nombraAlguno, nombraRubro } from "@/lib/busqueda/tema-publicacion";
 import { MODELO_GUION } from "./config";
 import { pedirAlModeloGuion } from "./modelo-guion";
+import { nombraExtranjero, nombraMexico } from "@/lib/busqueda/extranjero";
 import {
+  EJES_DEPORTES,
   EJES_MINUTA,
+  EJES_REDENRED,
   EJES_NOTICIAS33,
   MAXIMO_TEMAS,
   NOMBRE_EJE,
+  NOMBRE_EJE_DEPORTES,
   NOMBRE_EJE_MINUTA,
+  NOMBRE_EJE_REDENRED,
   type ClipGuion,
   type EjeNoticias33,
   type Guion,
@@ -122,6 +127,235 @@ export const nombraCalifornia = (titulo: string, lista: readonly string[] = TERM
  * incendia primaria Amado Nervo tras muerte de estudiante», de Tijuana, no
  * nombraba ninguno de los terminos de Seguridad.
  */
+/**
+ * Las competencias de fuera, para repartir Deportes entre Mexico e
+ * Internacional. El lugar no alcanza: medido el 30 de septiembre de 2026,
+ * «La Premier League... declaro culpable al Manchester City», de
+ * @elheraldodemexico, salio `zona: nacional` (el perfil es de Mexico y el
+ * pie no nombra un pais), y «NBA» o «Champions» no son lugares. La MLB esta
+ * porque un partido de los Padres ya es de la region por su zona, antes de
+ * llegar aqui. Los clubes, por los titulares de la seccion de deportes de
+ * Google Mexico ese mismo dia: «Guardiola habla de cargos al Manchester City»
+ * y «Phillies vs Braves por la Ronda de Comodines» caian en Mexico. Pocos y
+ * grandes: la lista no pretende estar completa, y lo que se escape queda en
+ * Mexico, donde el modelo todavia lo ve.
+ */
+export const COMPETENCIAS_DE_FUERA: readonly string[] = [
+  "Premier League", "LaLiga", "La Liga", "Serie A", "Bundesliga", "Ligue 1", "Champions League", "Champions",
+  "Europa League", "Copa Libertadores", "NBA", "WNBA", "NFL", "NHL", "MLB", "Super Bowl", "Serie Mundial",
+  "World Series", "Wimbledon", "Roland Garros", "Fórmula 1", "F1",
+  "Manchester City", "Manchester United", "Real Madrid", "Barça", "PSG", "Bayern", "Juventus",
+  "Phillies", "Braves", "Yankees", "Dodgers", "Lakers", "Celtics",
+];
+
+/**
+ * Lo que hace de un pie un pie de deportes, mas alla de la lista de la fila
+ * de temas (rubros.ts), que es del corredor: Xolos, Toros, Padres, Zonkeys.
+ * Medido el 30 de septiembre de 2026, esa lista encontraba cuatro
+ * publicaciones de la region, tres de Mexico y ninguna de fuera. Fuera a
+ * proposito: «partido» (el politico), «América» (el continente, «Estados
+ * Unidos de America») y «Mundial» solo (la guerra); el Mundial 2026 va entero.
+ */
+export const TERMINOS_DEPORTE: readonly string[] = [
+  "Selección Mexicana", "el Tri", "Chivas", "Cruz Azul", "Pumas", "Tigres", "Rayados", "Club América",
+  "gol", "golazo", "goles", "futbolista", "jugador", "jugadora", "campeón", "campeona", "torneo", "estadio",
+  "béisbol", "beisbol", "basquetbol", "tenis", "boxeador", "Canelo", "Checo Pérez", "Mundial 2026", "goleador",
+];
+
+/** Si un pie es de deportes para el guion de Deportes: la lista de la fila de
+ *  temas, el vocabulario de arriba o una competencia de fuera. */
+export const esDeDeporte = (titulo: string): boolean =>
+  nombraRubro(titulo, "deportes") || nombraAlguno(titulo, TERMINOS_DEPORTE) || nombraAlguno(titulo, COMPETENCIAS_DE_FUERA);
+
+/**
+ * Las ligas y los clubes de Mexico: nombrar uno es nombrar a Mexico en un
+ * titulo de deportes. «Cruz Azul se desinfla en Liga MX, tres años despues»,
+ * de AS Mexico, caia en Internacional el 30 de septiembre de 2026 porque
+ * nombraMexico solo conoce el pais y sus instituciones. «América» sola no:
+ * es tambien el continente.
+ */
+export const DEPORTE_DE_MEXICO: readonly string[] = [
+  "Liga MX", "Liga de Expansión", "LMB", "Cruz Azul", "Chivas", "Pumas", "Tigres", "Rayados", "Club América",
+  "Toluca", "Santos Laguna", "Necaxa", "Xolos", "el Tri", "Selección Mexicana",
+];
+
+/** Si un titulo de deportes es de Mexico: nombra al pais, una institucion
+ *  federal, o una liga o un club de aqui. */
+export const esDeporteDeMexico = (titulo: string): boolean => esDeMexico(titulo) || nombraAlguno(titulo, DEPORTE_DE_MEXICO);
+
+/** Si un titulo de deporte es de fuera de Mexico: nombra un lugar del
+ *  extranjero o una competencia de fuera, y no es de Mexico («El Tri ante
+ *  Peru» es de Mexico). */
+export function esDeporteDeFuera(titulo: string): boolean {
+  return !esDeporteDeMexico(titulo) && (nombraExtranjero(titulo) || nombraAlguno(titulo, COMPETENCIAS_DE_FUERA));
+}
+
+/**
+ * Lo que hace de un pie farandula, mas alla de la lista de la fila de temas
+ * (rubros.ts), que solo encontraba «cantante», «pelicula», «viral»: el 30 de
+ * septiembre de 2026 se quedaban fuera los conciertos de Eden Muñoz y Carin
+ * Leon en el palenque de Tijuana. Sin «serie» (la Serie de Wild Card de los
+ * Padres entraba), ni «banda», ni «famosa» sola («¿Te subiste a la famosa
+ * X2?», una montaña rusa de Six Flags).
+ *
+ * Y los nombres que la farandula de aqui sigue a diario, porque un pie de
+ * chisme muchas veces no dice mas que el nombre: el mismo dia, por la tarde,
+ * «Jennifer Lopez pidio a los fotografos que dejaran de seguirla», «Lo que
+ * parecia el epilogo de una historia de amor termino en … un escandalo» y
+ * «Raul Hernandez Jr. pone a bailar a los cachanillas en la Isla de las
+ * Estrellas» se quedaban fuera mientras entraba una condena en Iran. La
+ * lista de nombres es corta a proposito y envejece: agregar, con su caso.
+ */
+export const TERMINOS_FARANDULA: readonly string[] = [
+  "concierto", "conciertos", "gira", "palenque", "festival", "película", "películas", "estreno", "taquilla",
+  "Netflix", "telenovela", "cantante", "actor", "actriz", "influencer", "influencers", "youtuber", "tiktoker",
+  "reality", "La Casa de los Famosos", "famosos", "farándula", "chisme", "novio", "novia",
+  "boda", "divorcio", "ruptura", "romance", "premios", "Grammy", "Latin Grammy", "Premio Lo Nuestro",
+  "escándalo", "historia de amor", "paparazzi", "fotógrafos", "alfombra roja", "álbum", "canción", "sencillo",
+  "videoclip", "rapero", "reguetonero", "mariachi", "cantautor", "bailar", "jaripeo", "Big Brother",
+  "Fiestas del Sol", "Isla de las Estrellas",
+  "Jennifer Lopez", "Shakira", "Bad Bunny", "Taylor Swift", "Karol G", "Peso Pluma", "Christian Nodal",
+  "Ángela Aguilar", "Belinda", "Luis Miguel", "Thalía", "Gloria Trevi", "Kim Kardashian", "Selena Gomez",
+  "Sean Combs", "Diddy", "Georgina Rodríguez", "Carín León", "Carin Leon", "Eden Muñoz", "Grupo Firme",
+];
+
+/**
+ * La primera persona de un pie: quien lo escribe cuenta lo suyo. «Video que
+ * grabe en el concierto de Tijuana» y «Se nos hizo miel la luna y un
+ * concierto pa Tijuana @Carin Leon» entraron a De Red en Red el 30 de
+ * septiembre de 2026 como notas de conciertos. Y el imperativo con «me»
+ * pegado («Acompañenme a abrirle el concierto a @Eden Muñoz», «siganme»),
+ * que es la misma persona pidiendo que la vean.
+ */
+const PRIMERA_PERSONA = /(?<!\p{L})(grabé|grabe|fui|fuimos|estuve|estuvimos|me|mi|mis|yo|nos|nuestro|nuestra|nuestros|nuestras|\p{L}+[ae]nme)(?!\p{L})/iu;
+
+/**
+ * Si un pie da algo concreto que contar: cinco palabras o mas fuera de
+ * etiquetas y menciones, ninguna en primera persona, y un nombre propio
+ * despues de la primera palabra (o el pie en mayusculas). «Lastima que
+ * termino, el festival de hoy...», de @latinus_us, cerro un guion ese dia
+ * sin decir de que festival. Es para De Red en Red, donde un pie de fan con
+ * un artista etiquetado parece nota; en nota roja un «me asaltaron» si lo es.
+ */
+export function pieConcreto(titulo: string): boolean {
+  const texto = titulo.replace(/[#@][\p{L}\p{N}_.]+/gu, " ").replace(/[^\p{L}\p{N}\s'’-]/gu, " ");
+  const palabras = texto.split(/\s+/).filter((w) => /\p{L}/u.test(w));
+  if (palabras.length < 5 || PRIMERA_PERSONA.test(texto)) return false;
+  return palabras.slice(1).some((w) => /^\p{Lu}/u.test(w));
+}
+
+/**
+ * Los estados de Mexico y sus ciudades grandes: nombrar uno es ser de Mexico
+ * para repartir entre Mexico e Internacional. nombraMexico solo conoce el
+ * pais y sus instituciones, y la busqueda de espectaculos sin lugar metia en
+ * Internacional el Festival Barroco de Zacatecas, el de cine aleman de
+ * Monterrey y uno de cuerdas en Mazatlan (30 de septiembre de 2026). Solo
+ * resta de lo de fuera; no zonifica nada, asi que «Durango» o «Morelos»
+ * (colonias de Tijuana) no hacen dano aqui.
+ */
+export const LUGARES_DE_MEXICO: readonly string[] = [
+  "Aguascalientes", "Campeche", "Chiapas", "Chihuahua", "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero",
+  "Hidalgo", "Jalisco", "Michoacán", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro",
+  "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz",
+  "Yucatán", "Zacatecas", "CDMX", "Ciudad de México", "Monterrey", "Guadalajara", "Mazatlán", "Acapulco",
+  "Cancún", "Mérida", "Toluca", "León", "Hermosillo", "Culiacán", "Morelia", "Tijuana", "Mexicali", "Ensenada",
+];
+
+/** Si un titulo es de Mexico: el pais, una institucion federal, o un estado o
+ *  una ciudad grande de aqui. */
+export const esDeMexico = (titulo: string): boolean => nombraMexico(titulo) || nombraAlguno(titulo, LUGARES_DE_MEXICO);
+
+/** Lo de fuera en espectaculos: un lugar del extranjero, o las marcas que no
+ *  son lugares (Hollywood, los Oscar), y que no nombre a Mexico. «Tom Cruise»
+ *  solo no alcanza: queda en Mexico, donde el modelo todavia lo ve. */
+export const ESPECTACULO_DE_FUERA: readonly string[] = [
+  "Hollywood", "Oscar", "Óscar", "Emmy", "Emmys", "Globos de Oro", "Met Gala", "K-pop", "Broadway",
+];
+export const esEspectaculoDeFuera = (titulo: string): boolean =>
+  !esDeMexico(titulo) && (nombraExtranjero(titulo) || nombraAlguno(titulo, ESPECTACULO_DE_FUERA));
+
+/**
+ * Lo violento, para ordenar Estado de Alerta de lo mas grave a lo menos. Ese
+ * dia los doce lugares se llenaban por likes con choques y detenciones, y el
+ * ataque armado frente a una primaria de Tijuana quedaba en el trece.
+ */
+export const TERMINOS_VIOLENCIA: readonly string[] = [
+  "asesinan", "asesinado", "asesinada", "asesinato", "asesinatos", "balacera", "balaceras", "balean", "baleado",
+  "baleada", "ataque armado", "disparos", "ejecutan", "ejecutado", "ejecutada", "sin vida", "cuerpo", "cuerpos",
+  "restos", "fosa", "homicidio", "homicidios", "feminicidio", "secuestro", "secuestran", "levantón", "apuñalado",
+  "apuñalada", "enfrentamiento", "sicarios", "emboscada", "linchamiento", "masacre", "matan", "muertos", "muerto",
+  "shooting", "homicide", "murder", "stabbing", "killed",
+];
+
+/**
+ * Deshace la escritura con que los medios esquivan la moderacion de las
+ * redes: «Ataque arm4d0 frente a una primaria», de @tvaztecabc, y «VIOLENCIA
+ * SEXU@L» no nombraban ningun termino. Solo dentro de una palabra que mezcla
+ * letras con numeros o @, para que un «4-0» o un «24 horas» no cambien, y solo
+ * para comparar: lo que se dice es el pie como vino.
+ */
+export function desofuscar(texto: string): string {
+  return texto.replace(/[\p{L}0-9@]+/gu, (palabra) =>
+    /\p{L}/u.test(palabra) && /[0-9@]/.test(palabra)
+      ? palabra.replace(/[4@]/g, "a").replace(/0/g, "o").replace(/3/g, "e").replace(/1/g, "i")
+      : palabra);
+}
+
+/** Si un pie o un titular cuenta un hecho violento. */
+export const esViolento = (titulo: string): boolean => nombraAlguno(desofuscar(titulo), TERMINOS_VIOLENCIA);
+
+/** Lo violento primero, sin cambiar el orden de merito dentro de cada grupo. */
+export function porGravedad<T>(piezas: readonly T[], titulo: (p: T) => string): T[] {
+  return [...piezas.filter((p) => esViolento(titulo(p))), ...piezas.filter((p) => !esViolento(titulo(p)))];
+}
+
+/**
+ * Solo lo violento cuando alcanza para el segmento entero; si no, lo violento
+ * primero y lo menor detras. El cliente lo repitio el 30 de septiembre de 2026
+ * («show the most shocking and violent news»): con lo violento solo delante,
+ * el modelo todavia podia elegir el choque de Costco teniendo seis hechos
+ * violentos sin usar. Lo que no se le da no lo puede elegir.
+ */
+export function soloLoGrave<T>(piezas: readonly T[], titulo: (p: T) => string, minimo = MAXIMO_TEMAS.estadodealerta): T[] {
+  const graves = piezas.filter((p) => esViolento(titulo(p)));
+  return graves.length >= minimo ? graves : porGravedad(piezas, titulo);
+}
+
+/**
+ * Lo que no es farandula aunque nombre a una cantante. Ese dia la cubeta
+ * internacional puso en De Red en Red «Un tribunal de apelaciones de Iran
+ * confirmo la condena de 74 latigazos impuesta a una reconocida cantante que
+ * actuo sin tener el hiyab», y el cliente: «i don't know if a note about
+ * iranian singer receiving a punishment needs to be there». Un tribunal no es
+ * chisme; la vida en prision de un famoso si (Sean Combs), por eso no esta
+ * «prision».
+ *
+ * Y el deporte, que desde ese dia tiene su segmento: la pieza internacional
+ * de la primera corrida fue Cristiano Ronaldo dejando la seleccion de
+ * Portugal («el epilogo de una historia de amor»). Salvo un concierto en un
+ * estadio, que sigue siendo concierto.
+ */
+export const TERMINOS_NO_FARANDULA: readonly string[] = [
+  "tribunal", "latigazos", "hiyab", "régimen", "pena de muerte", "derechos humanos", "guerra", "Irán", "Gaza",
+  "Israel", "Ucrania", "talibán", "talibanes",
+];
+
+/**
+ * Si un pie o un titular es farandula: lo dice la lista de la fila de temas o
+ * TERMINOS_FARANDULA, leidas en el texto sin etiquetas («#viral» metia un
+ * reten, «#concierto» el video de una fan), y no es nota roja, ni politica, ni
+ * lo de TERMINOS_NO_FARANDULA. Los pies de De Red en Red y, solo con la
+ * segunda mitad, sus titulares.
+ */
+export const noEsFarandula = (titulo: string): boolean =>
+  nombraRubro(titulo, "seguridad") || nombraRubro(titulo, "politica") || esViolento(titulo)
+  || nombraAlguno(titulo, TERMINOS_NO_FARANDULA)
+  || (esDeDeporte(titulo) && !nombraAlguno(titulo, ["concierto", "conciertos", "palenque", "festival"]));
+export function esFarandula(titulo: string): boolean {
+  const texto = titulo.replace(/#[\p{L}\p{N}_]+/gu, " ");
+  return (nombraRubro(texto, "espectaculos") || nombraAlguno(texto, TERMINOS_FARANDULA)) && !noEsFarandula(titulo);
+}
+
 export const TERMINOS_IMPACTO: readonly string[] = [
   "incendio", "incendia", "choque", "chocan", "accidente", "volcadura", "atropella", "atropellan",
   "atropellado", "atropellada", "explosión", "derrumbe", "rescatan", "rescate",
@@ -188,6 +422,19 @@ interface Eje {
 export const EJES_DE: Partial<Record<ProgramaGuion, readonly Eje[]>> = {
   noticias33: EJES_DEL_MODELO_N33.map((e) => ({ id: e, modelo: EJE_MODELO[e], nombre: NOMBRE_EJE[e] })),
   minutapolitica: EJES_MINUTA.map((e) => ({ id: e, modelo: e, nombre: NOMBRE_EJE_MINUTA[e] })),
+  deportes: EJES_DEPORTES.map((e) => ({ id: e, modelo: e, nombre: NOMBRE_EJE_DEPORTES[e] })),
+  deredenred: EJES_REDENRED.map((e) => ({ id: e, modelo: e, nombre: NOMBRE_EJE_REDENRED[e] })),
+};
+
+/**
+ * Cuantas piezas puede llevar un eje, donde el programa pone un tope. De Red
+ * en Red lleva UNA internacional (cliente, 30 de septiembre de 2026: «add
+ * one International article/clip, the most talked about one for the day»):
+ * como el eje tiene candidatos, armarPorTemas ya exige al menos una, y esto
+ * que no sea mas. Solo en el mixto, que es el que arma estricto.
+ */
+export const MAXIMO_POR_EJE: Partial<Record<ProgramaGuion, Readonly<Record<string, number>>>> = {
+  deredenred: { internacional: 1 },
 };
 
 /**
@@ -250,7 +497,7 @@ function marcoMixto(): string[] {
     "Debajo de cada publicación van los titulares que PODRÍAN contar el mismo hecho. Los propuso un programa por palabras en común, sin leerlos: muchos hablan de otra cosa.",
     "NO has visto ninguna publicación ni has leído ninguna nota. Solo tienes esos pies y esos titulares.",
     "Cada pieza es de una de tres clases:",
-    "- Publicación con su titular (`video` y `nota`): solo si el titular cuenta EL MISMO HECHO que el pie —el mismo suceso, en el mismo lugar, con las mismas personas—, no solo el mismo tema. Dos tiroteos en dos ciudades no son el mismo hecho, ni dos partidos del mismo torneo, ni dos noticias de la misma persona. Si dudas, no los juntes. El titular tiene que ser uno de los que van debajo de ESA publicación.",
+    "- Publicación con su titular (`video` y `nota`): solo si el titular cuenta EL MISMO HECHO que el pie —el mismo suceso, en el mismo lugar, con las mismas personas—, no solo el mismo tema. Dos tiroteos en dos ciudades no son el mismo hecho, ni dos partidos del mismo torneo, ni dos noticias de la misma persona. Si dudas, no los juntes. El titular tiene que ser uno de los que van debajo de ESA publicación: si el que cuenta el hecho no está debajo de ella, escribe la publicación sola (atribuida a redes) o el titular solo. Una pieza con un titular de fuera de su lista hace que el guion entero no salga.",
     "- Titular solo (`video`: 0 y `nota`): una nota leída, sin clip. Su `pase` va vacío.",
     "- Publicación sola (`video` y `nota`: 0): cuando ningún titular de su lista cuenta su hecho. Se dice como lo que circula en redes, nunca como algo que informó la prensa.",
     "Entre dos piezas igual de noticiosas, prefiere una publicación con su titular; después, un titular solo; al final, una publicación sola.",
@@ -259,7 +506,7 @@ function marcoMixto(): string[] {
     // 2026: Noticias 33 abrio con «lo que ocurre en Tijuana, lo relacionado
     // con la presidenta y lo que se informa desde California», que son los
     // ejes y no las noticias.
-    "- `apertura`: dos o tres frases con que el conductor abre el segmento y anuncia qué notas vienen, nombrando los hechos concretos (qué pasó y dónde: «un ataque armado contra una cafetería en Tijuana»), nunca las secciones ni los ejes («lo que ocurre en Tijuana», «lo relacionado con la presidenta»). Sin adelantar nada que no esté en los pies o los titulares.",
+    "- `apertura`: dos o tres frases con que el conductor abre el segmento y anuncia qué notas vienen, nombrando los hechos concretos (qué pasó y dónde: «un ataque armado contra una cafetería en Tijuana»), nunca las secciones ni los ejes («lo que ocurre en Tijuana», «lo relacionado con la presidenta»). Sin adelantar nada que no esté en los pies o los titulares. Escríbela DESPUÉS de las piezas (en la salida van primero) y anúncialas en el mismo orden en que van en `clips`: la primera pieza, primero.",
     "- En cada pieza, `entrada`: lo que el conductor dice a cámara, en una o dos frases. En una publicación con su titular, lo que dice EL TITULAR: del pie, nada que el titular no diga, porque el pie solo decide qué clip se muestra. En un titular solo, la nota entera. En una publicación sola, lo que dice el pie, como lo que circula. Si da un solo hecho, una frase basta: no la alargues.",
     "- En cada pieza con publicación, `pase`: una sola frase corta que da paso al clip, del tipo «Veamos lo que se publicó.» o «Esto es lo que circula en redes.». No describe lo que se ve. En un titular solo, `pase` va vacío.",
     // Con «remata con otras palabras lo esencial», Sonnet 5.5 repitio la
@@ -315,7 +562,7 @@ function marco(origen: OrigenGuion): string[] {
     ),
     ...(origen === "prensa" ? ["Algunos titulares están en inglés. El guion va siempre en español: di en español lo que dice el titular, sin agregar nada."] : []),
     "Estructura del guion, campo por campo:",
-    "- `apertura`: dos o tres frases con que el conductor abre el segmento y anuncia qué notas vienen, nombrando los hechos concretos (qué pasó y dónde), nunca las secciones ni los ejes («lo que ocurre en Tijuana»), sin adelantar nada que no esté en los " + d("pies.", "titulares."),
+    "- `apertura`: dos o tres frases con que el conductor abre el segmento y anuncia qué notas vienen, nombrando los hechos concretos (qué pasó y dónde), nunca las secciones ni los ejes («lo que ocurre en Tijuana»), sin adelantar nada que no esté en los " + d("pies.", "titulares.") + " Escríbela DESPUÉS de las piezas (en la salida van primero) y anúncialas en el mismo orden en que van en `clips`: la primera pieza, primero.",
     // Eran «dos o tres frases», y un pie o un titular dan un hecho: la segunda
     // frase salia de relleno. El 25 de septiembre de 2026 la de Tijuana acabo
     // en «El medio no da mas detalles sobre el caso.»
@@ -490,6 +737,18 @@ function tono(p: ProgramaGuion, m: Material): string[] {
         "- No opines sobre el físico, la salud, la vida privada ni las relaciones de nadie, ni adivines lo que siente; di solo lo que " + el + " dice que pasó.",
         "- Si el tema es una muerte, un ataque, un accidente, una enfermedad o una condena, cambia el tono: sobrio y sin bromas.",
       ];
+    case "deportes":
+      // 30 de septiembre de 2026 (cliente): «a new Sports segment that shows
+      // the most popular and trending topics across Baja California, Mexico
+      // and International Sports».
+      return [
+        "Programa: Deportes, el segmento deportivo del canal: lo más popular y comentado del deporte en Baja California, en México y en el mundo.",
+        "El tono es enérgico y cercano, con ritmo de transmisión deportiva, pero exacto: un marcador, un resultado o una cifra se dice solo como viene en " + el + ", nunca redondeado ni completado.",
+        "- Un fichaje, una lesión o un rumor de vestidor se dice como lo que se reporta o circula, nunca como un hecho.",
+        "- No pronostiques resultados ni hables de apuestas o momios, aunque " + el + " los traiga.",
+        "- Sin burlas a jugadores, equipos ni aficiones, y sin apodos despectivos. El apodo de un equipo que usa la prensa («los Xolos», «el Tri», «los Padres») sí vale.",
+        "- Si el tema es una lesión grave, una muerte o violencia en un estadio, cambia el tono: sobrio y sin bromas.",
+      ];
     case "minutapolitica":
       return [
         "Programa: Minuta Política, programa diario en vivo conducido por Soledad Martínez. Es un espacio dedicado al análisis político: la coyuntura local y nacional, los casos controversiales y el debate con una mesa de analistas.",
@@ -547,10 +806,17 @@ function forma(p: ProgramaGuion, origen: OrigenGuion): string[] {
           "- Escribe además UN clip con `libre: true`: el de mayor interés informativo entre los candidatos de cualquiera de tus ejes que no hayas usado ya. Su `eje` es el eje de cuya lista sale. Si no queda ningún candidato sin usar, no lo escribas.",
           "- Escribe además UNA nota con `libre: true`: la de mayor interés informativo entre los candidatos de cualquiera de tus ejes que no hayas usado ya. Su `eje` es el eje de cuya lista sale. Si no queda ningún candidato sin usar, no la escribas.",
           undefined,
-          "- Escribe además UNA pieza con `libre: true`: la de mayor interés informativo entre los candidatos de cualquiera de tus ejes que no hayas usado ya. Su `eje` es el eje de cuya lista sale. Si no queda ningún candidato sin usar, no la escribas.",
+          "- Escribe además UNA pieza con `libre: true`: la de mayor interés informativo entre los candidatos de cualquiera de tus ejes que no hayas usado ya, y entre dos parecidas, la más comentada (el número P más bajo). Su `eje` es el eje de cuya lista sale. Si no queda ningún candidato sin usar, no la escribas.",
         ),
         d("- No uses el mismo video en dos clips si el eje tiene otro candidato.", "- No uses el mismo titular en dos notas si el eje tiene otro candidato.", undefined,
           "- No uses la misma publicación ni el mismo titular en dos piezas si el eje tiene otro candidato."),
+        // 30 de septiembre de 2026 (cliente: «always the trending and most
+        // talked about news about certain topic»). De Red en Red, Deportes y
+        // Estado de Alerta ya lo decian; aqui la lista llegaba en ese orden y
+        // nada pedia preferir la de arriba.
+        ...(materialDe(origen) === "mixto" ? [
+          "- Lo más comentado va primero: en cada eje, elige entre las publicaciones empezando por la de más arriba (la de número P más bajo es la que más se mueve) y baja solo si no sirve: no es del eje, no da un dato concreto o repite un tema ya usado.",
+        ] : []),
       ];
     case "deredenred":
       return [
@@ -566,6 +832,23 @@ function forma(p: ProgramaGuion, origen: OrigenGuion): string[] {
           undefined,
           `- Agrupa por tema (una persona, un estreno, un concierto, una polémica) y escribe una pieza por tema, hasta ${MAXIMO_TEMAS.deredenred}. Agrupar es ELEGIR, no juntar: de dos publicaciones o dos titulares del mismo tema tomas UNO, el que mejor lo cuente, y el otro no se menciona.`,
         ),
+        "- `eje` es la lista de donde sale la pieza: mexico (México y Baja California) o internacional. Escribe EXACTAMENTE UNA pieza internacional, la más comentada del día entre las internacionales (la de más arriba de su lista que sea de espectáculos y dé un dato concreto), y el resto de México y Baja.",
+        // Ese dia, en el primer guion con estas reglas: «Se nos hizo miel la
+        // luna y un concierto pa Tijuana @Carin Leon», el video de una
+        // persona, salio como la nota de un concierto, y el ultimo clip
+        // decia solo «Lastima que termino, el festival de hoy...». La lista ya
+        // llega filtrada (guion-tiktok.ts::candidatosDeRedEnRed); esto es
+        // para lo que se cuela.
+        "- Cada pieza da al menos un dato concreto: quién, qué, dónde o cuándo. La publicación de una persona que cuenta lo suyo (el video que grabó en un concierto, «se nos hizo», «fui a…») no es nota aunque nombre a un artista, ni lo es un pie que no dice de qué habla («Lástima que terminó, el festival de hoy»): déjalas fuera.",
+        // 30 de septiembre de 2026 (cliente): «more gossip news, concerts,
+        // movies that are trending and getting heavy traction in Mexico or
+        // Baja». Ese dia el guion traia la condena de una cantante en Iran,
+        // una influencer britanica y una ucraniana, y dejaba fuera los
+        // conciertos del palenque de Tijuana.
+        "- Lo que va primero: la farándula y el chisme (romances, rupturas, pleitos y polémicas entre famosos), los conciertos y las giras, y las películas, series y realities que están en boca de todos, de México y de Baja California.",
+        // El mismo dia, por la tarde: la condena a latigazos de una cantante
+        // en Iran volvio por la pieza internacional.
+        "- Solo farándula y chisme, también en la pieza internacional: un romance, una polémica, un estreno, un concierto o la vida de un famoso. Un artista en una nota de tribunales, de política, de guerra o de derechos humanos no es farándula (la condena de una cantante en Irán no va aquí).",
         ...(materialDe(origen) === "mixto" ? [
           ...redesAlCentro("deredenred"),
           "- Sigue el orden de la lista: la publicación P1 es la que más se mueve, así que abre con la más popular que sea de espectáculos y sigue hacia abajo. Un tema grave (una muerte, una enfermedad, una condena) no abre ni cierra el segmento: se corre al medio.",
@@ -577,6 +860,27 @@ function forma(p: ProgramaGuion, origen: OrigenGuion): string[] {
           undefined,
           "- Si una publicación o un titular no es de espectáculos, farándula ni tendencias, déjalo fuera. Un titular solo tiene que ser de los que pueden ir solos; los demás solo acompañan a una publicación.",
         ),
+      ];
+    case "deportes":
+      return [
+        d(
+          `- Agrupa los videos por tema y escribe hasta ${MAXIMO_TEMAS.deportes} temas, un video por tema, al menos uno por cada eje que tenga candidatos (region, mexico, internacional), con un video de SU lista. Un eje «sin candidatos» no lleva tema: no lo rellenes con otro.`,
+          `- Agrupa los titulares por tema y escribe hasta ${MAXIMO_TEMAS.deportes} temas, un titular por tema, al menos uno por cada eje que tenga candidatos (region, mexico, internacional), con un titular de SU lista. Un eje «sin candidatos» no lleva tema: no lo rellenes con otro.`,
+          undefined,
+          `- Agrupa por tema y escribe hasta ${MAXIMO_TEMAS.deportes} piezas, una por tema, al menos una por cada eje que tenga candidatos (region, mexico, internacional), con una publicación o un titular de SU lista; el titular que acompaña a una publicación sale de los que van debajo de ella. Un eje «sin candidatos» no lleva pieza: no lo rellenes con otro.`,
+        ),
+        "- `eje` es la lista de donde sale la pieza: region (Baja California y San Diego), mexico o internacional. `tema` nombra el tema en pocas palabras («Los Padres en la postemporada»).",
+        "- Agrupar es ELEGIR, no juntar: de dos publicaciones o dos titulares del mismo partido o del mismo tema tomas UNO, el que mejor lo cuente, y el otro no se menciona.",
+        d(
+          "- Si un video no es de deportes, déjalo fuera aunque esté en la lista.",
+          "- Si un titular no es de deportes, déjalo fuera aunque esté en la lista.",
+          undefined,
+          "- Si una publicación o un titular no es de deportes, déjalo fuera aunque esté en la lista.",
+        ),
+        ...(materialDe(origen) === "mixto" ? [
+          ...redesAlCentro("deportes"),
+          "- Dentro de cada lista, la publicación de más arriba es la que más se mueve: elige empezando por ella, y abre el segmento con la más comentada de todas.",
+        ] : []),
       ];
     case "minutapolitica":
       return [
@@ -596,6 +900,13 @@ function forma(p: ProgramaGuion, origen: OrigenGuion): string[] {
           "- Recibes los candidatos de cada eje, publicaciones y titulares: `local` (Baja California y el corredor Tijuana-San Diego) y `nacional` (México). Cada tema lleva el `eje` de cuya lista sale su publicación o su titular. Escribe al menos un tema de cada eje que tenga candidatos; un eje «sin candidatos» no lleva tema.",
         ),
         "- `tema` nombra el asunto en pocas palabras y sin adjetivos.",
+        // 30 de septiembre de 2026 (cliente: «always the trending and most
+        // talked about news about certain topic»). De Red en Red, Deportes y
+        // Estado de Alerta ya lo decian; aqui la lista llegaba en ese orden y
+        // nada pedia preferir la de arriba.
+        ...(materialDe(origen) === "mixto" ? [
+          "- Lo más comentado va primero: en cada eje, elige entre las publicaciones empezando por la de más arriba (la de número P más bajo es la que más se mueve) y baja solo si no sirve: no es del eje, no da un dato concreto o repite un tema ya usado.",
+        ] : []),
         // «El reacomodo interno de Morena queda, segun ese reporte, en manos
         // de Ramirez»: una lectura de la coyuntura que el titular no hacia. Y
         // en prensa, con la regla comun de la salida, «Pasamos a otro tema.»
@@ -612,9 +923,15 @@ function forma(p: ProgramaGuion, origen: OrigenGuion): string[] {
           undefined,
           `- Escribe una pieza por hecho, hasta ${MAXIMO_TEMAS.estadodealerta}. Agrupar es ELEGIR, no juntar: de dos publicaciones o dos titulares del mismo hecho tomas UNO, el que mejor lo cuente, y el otro no se menciona. Un titular solo tiene que ser de los que pueden ir solos.`,
         ),
+        // 30 de septiembre de 2026 (cliente): «more news that are actually
+        // violent and shocking». Ese dia el guion llevaba «montachoques», una
+        // pelea por un cajon en Costco y un paquete sospechoso, y fuera
+        // quedaban el ataque armado frente a una primaria y el de Tecate.
+        "- Lo que va primero: los hechos más graves e impactantes, ataques armados, homicidios, feminicidios, hallazgos de cuerpos, enfrentamientos, secuestros, y explosiones, incendios o accidentes con víctimas. Lo menor (un choque sin heridos, una riña, una detención por soborno, un paquete sospechoso) entra solo si no alcanzan los graves.",
+        "- La gravedad se dice con el hecho, no con adjetivos: «un ataque armado dejó dos muertos frente a una primaria» ya impacta; las reglas de arriba sobre morbo y nombres siguen.",
         ...(materialDe(origen) === "mixto" ? [
           ...redesAlCentro("estadodealerta"),
-          "- Sigue el orden de la lista: la publicación P1 es la que más se mueve, así que abre con la más compartida y sigue hacia abajo.",
+          "- La lista viene de lo más grave a lo menos, y dentro de eso de lo que más se mueve: abre con el hecho más grave y sigue hacia abajo.",
         ] : []),
         "- `tema` nombra el hecho en pocas palabras y sin adjetivos: «Ataque armado en Rosarito», no «Brutal ataque en Rosarito».",
       ];
@@ -634,15 +951,26 @@ function forma(p: ProgramaGuion, origen: OrigenGuion): string[] {
  * publicacion sola va antes que un titular solo, y titular solo hay uno como
  * mucho (guion.ts::NOTAS_SOLAS_MAXIMO lo comprueba).
  */
-function redesAlCentro(p: "deredenred" | "estadodealerta"): string[] {
-  const que = p === "deredenred" ? "tema" : "hecho";
+function redesAlCentro(p: "deredenred" | "estadodealerta" | "deportes"): string[] {
+  const que = p === "estadodealerta" ? "hecho" : "tema";
   return [
     `- Este programa es de lo que circula en redes: cada pieza sale de una publicación, con su titular si cuenta EL MISMO HECHO, o sola si ninguno lo cuenta. Esto manda sobre la preferencia general de arriba: aquí una publicación sola va antes que un titular solo.`,
     // Medido en la primera corrida de De Red en Red, el mismo dia: la apertura
     // anuncio «una noticia sobre el hijo de Emiliano Aguilar» y el guion no
     // la traia. Con «hasta seis» y «ademas un titular al final», el modelo
     // escribio seis mas uno y el tope corto el septimo.
-    `- Un titular solo (\`video\`: 0), a lo más UNO en todo el segmento, y solo si es de lo más notable del día y ninguna publicación de la lista cuenta ese ${que}. Va al final, después de las publicaciones. El segmento tiene como máximo ${MAXIMO_TEMAS[p]} piezas EN TOTAL, contando ese titular.`,
+    p === "deportes"
+      // Tres ejes y poco material de redes: el 30 de septiembre de 2026 habia
+      // cuatro publicaciones deportivas de la region, tres de Mexico y
+      // ninguna internacional. Un titular solo por eje, donde ninguna
+      // publicacion sirva, para que un eje sin clips no quede fuera.
+      ? `- Un titular solo (\`video\`: 0), a lo más UNO POR EJE, y solo en un eje donde ninguna publicación de su lista sirva. El segmento tiene como máximo ${MAXIMO_TEMAS[p]} piezas EN TOTAL, contando esos titulares.`
+      : p === "deredenred"
+      // La internacional casi nunca tiene clip: las cuentas de fuera
+      // publican mundo, no farandula. Puede ser titular solo, y el tope
+      // (NOTAS_SOLAS_MAXIMO 2) cuenta los dos.
+      ? `- Un titular solo (\`video\`: 0): a lo más UNO de México y Baja, al final de las de su eje, y solo si es de lo más notable del día y ninguna publicación cuenta ese tema; la pieza internacional puede ser un titular solo si ninguna publicación internacional sirve. El segmento tiene como máximo ${MAXIMO_TEMAS[p]} piezas EN TOTAL, contando esos titulares.`
+      : `- Un titular solo (\`video\`: 0), a lo más UNO en todo el segmento, y solo si es de lo más notable del día y ninguna publicación de la lista cuenta ese ${que}. Va al final, después de las publicaciones. El segmento tiene como máximo ${MAXIMO_TEMAS[p]} piezas EN TOTAL, contando ese titular.`,
     // Las dos primeras corridas de De Red en Red: «Circula en redes que»
     // abria cinco de seis entradas.
     "- «Circula en redes que» va una vez en el segmento como mucho. Varía la atribución («En redes se comparte que», «Anda circulando que», «Nos llega de redes que», «En un video que circula»), sin quitarla.",
@@ -657,11 +985,12 @@ function ejemplo(p: ProgramaGuion, origen: OrigenGuion): string {
   const partes = `"titular":"<escaleta>",${dicho}${pase},"salida":"<${conClip(origen) ? "después del clip" : "cierre de la nota"}>"`;
   const clip = {
     noticias33: `{"eje":"tijuana","libre":false,${numero},${partes}}`,
-    deredenred: `{"tema":"<tema>",${numero},${partes}}`,
+    deredenred: `{"eje":"mexico","tema":"<tema>",${numero},${partes}}`,
+    deportes: `{"eje":"region","tema":"<tema>",${numero},${partes}}`,
     minutapolitica: `{"eje":"local","tema":"<asunto>",${numero},${partes},"pregunta":"¿<para la mesa>?"}`,
     estadodealerta: `{"tema":"<hecho>",${numero},${partes}}`,
   }[p];
-  return `{"apertura":"<...>","clips":[${clip}],"cierre":"<...>"}`;
+  return `{"clips":[${clip}],"apertura":"<...>","cierre":"<...>"}`;
 }
 
 export function sistemaDe(p: ProgramaGuion, origen: OrigenGuion): string {
@@ -702,17 +1031,22 @@ export function esquemaDe(p: ProgramaGuion, origen: OrigenGuion): object {
     salida: TEXTO,
     ...(p === "minutapolitica" ? { pregunta: TEXTO } : {}),
   };
+  // Las piezas ANTES que la apertura (30 de septiembre de 2026): la salida se
+  // genera en el orden del esquema, y con la apertura primero el modelo
+  // anunciaba un orden y escribia otro. El guion de Deportes de ese dia abrio
+  // con «los Padres… y el empate de la Seleccion Mexicana» y las piezas iban
+  // al reves. Escrita al final, la apertura resume lo que ya esta escrito.
   return {
     type: "object",
     properties: {
-      apertura: TEXTO,
       clips: {
         type: "array",
         items: { type: "object", properties: propias, required: Object.keys(propias), additionalProperties: false },
       },
+      apertura: TEXTO,
       cierre: TEXTO,
     },
-    required: ["apertura", "clips", "cierre"],
+    required: ["clips", "apertura", "cierre"],
     additionalProperties: false,
   };
 }
@@ -959,19 +1293,39 @@ function armarNoticias33(clips: ClipCrudo[], resolver: (c: ClipCrudo) => Resuelt
  * eje que declara, y cada eje con candidatos tiene que tener al menos un tema:
  * el cliente pidio coyuntura local Y nacional.
  */
-function armarPorTemas(p: Exclude<ProgramaGuion, "noticias33">, clips: ClipCrudo[], resolver: (c: ClipCrudo) => Resuelta | null, porEje: Readonly<Record<string, readonly string[]>> | null): ClipGuion[] | null {
+/**
+ * `estricto` (el mixto, desde el 30 de septiembre de 2026): una pieza que no
+ * se puede armar tumba el guion en vez de caerse sola. El caso: el segundo
+ * guion real de Deportes junto el empate de Mexico con Peru con «Mexico se
+ * pierde en New Jersey», el mismo partido pero no un titular propuesto para
+ * esa publicacion; la pieza se cayo en silencio y la apertura ya la habia
+ * anunciado («el partido de la Seleccion Mexicana en Nueva Jersey»), igual
+ * que el septimo de De Red en Red el dia antes. Desde que la apertura nombra
+ * los hechos, quitar una pieza deja al conductor anunciando lo que no viene.
+ * Una etiqueta de eje equivocada si se corrige: el eje es el de la lista de
+ * donde sale la pieza, como la libre de Noticias 33.
+ */
+function armarPorTemas(p: Exclude<ProgramaGuion, "noticias33">, clips: ClipCrudo[], resolver: (c: ClipCrudo) => Resuelta | null, porEje: Readonly<Record<string, readonly string[]>> | null, estricto = false): ClipGuion[] | null {
   const ejes = EJES_DE[p];
   const usados = new Set<string>();
   const salida: ClipGuion[] = [];
   const cubiertos = new Set<string>();
+  const porEjeUsado = new Map<string, number>();
+  if (estricto && clips.length > MAXIMO_TEMAS[p]) return null;
   for (const c of clips) {
     const r = resolver(c);
-    if (r === null || r.claves.some((k) => usados.has(k))) continue;
+    if (r === null || r.claves.some((k) => usados.has(k))) {
+      if (estricto) return null;
+      continue;
+    }
     let eje = c.tema;
     if (ejes !== undefined) {
-      if (!r.ejes.includes(c.eje)) continue;
-      cubiertos.add(c.eje);
-      eje = `${ejes.find((e) => e.id === c.eje)!.nombre} · ${c.tema}`;
+      const id = r.ejes.includes(c.eje) ? c.eje : estricto ? r.ejes[0] : undefined;
+      if (id === undefined) continue;
+      porEjeUsado.set(id, (porEjeUsado.get(id) ?? 0) + 1);
+      if (estricto && porEjeUsado.get(id)! > (MAXIMO_POR_EJE[p]?.[id] ?? Infinity)) return null;
+      cubiertos.add(id);
+      eje = `${ejes.find((e) => e.id === id)!.nombre} · ${c.tema}`;
     }
     for (const k of r.claves) usados.add(k);
     salida.push(r.clip(eje, false));
@@ -1013,7 +1367,7 @@ export const TERMINOS_CONFERENCIA: readonly string[] = ["mañanera", "conferenci
  * escribe dos, el guion no sale, como con cualquier pieza fuera de su lista.
  * Quitar la sobrante no alcanza: la apertura ya la anuncio.
  */
-export const NOTAS_SOLAS_MAXIMO: Partial<Record<ProgramaGuion, number>> = { deredenred: 1, estadodealerta: 1 };
+export const NOTAS_SOLAS_MAXIMO: Partial<Record<ProgramaGuion, number>> = { deredenred: 2, estadodealerta: 1, deportes: EJES_DEPORTES.length };
 
 /**
  * Las palabras con que una entrada dice que lo suyo viene de redes. Lista
@@ -1039,6 +1393,13 @@ const PARTES_COMUNES = new Set([
   // rechazar «la institucion educativa tijuanense» de un video de otra cuenta.
   "tijuanense", "tijuanenses", "mexicalense", "ensenadense", "tecatense", "rosaritense", "sandieguino",
   "mexicano", "mexicana", "bajacaliforniano", "cachanilla",
+  // Y las palabras con que se habla de lo que circula: @_losmejores_videos
+  // hacia rechazar el primer guion de Deportes (30 de septiembre de 2026)
+  // por un pase que decia «videos». La regla de atribucion pide justo esas
+  // palabras, asi que la cuenta que las lleva en el nombre no puede
+  // volverlas ajenas.
+  "video", "videos", "clips", "mejores", "momentos", "viral", "virales", "redes", "tendencia", "tendencias",
+  "deportes", "deportiva", "deportivo", "sports", "futbol",
 ]);
 
 const plano = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
@@ -1223,7 +1584,7 @@ export async function escribirGuion(plan: Plan, opciones: {
   const porEje = urlsPorEje(plan);
   const armados = plan.programa === "noticias33"
     ? porEje === null ? null : armarNoticias33(limpia.clips, resolver, porEje)
-    : armarPorTemas(plan.programa, limpia.clips, resolver, porEje);
+    : armarPorTemas(plan.programa, limpia.clips, resolver, porEje, plan.origen === "mixto");
   if (armados === null) return fallo("No se pudo preparar el guion.", "modelo");
   if (notasSolasDe(plan, armados) > (NOTAS_SOLAS_MAXIMO[plan.programa] ?? Infinity)) return fallo("No se pudo preparar el guion.", "modelo");
   if (guionFalsea(armados, [...plan.lista, ...(plan.titulares ?? [])], plan.origen)) return fallo("No se pudo preparar el guion.", "reglas");

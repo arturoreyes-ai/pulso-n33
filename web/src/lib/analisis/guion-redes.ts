@@ -187,6 +187,7 @@ export async function publicacionesParaGuion(leer: LeerDatos, ahora: string): Pr
 const MENSAJE_POCOS: Record<(typeof PROGRAMAS_GUION)[number], string> = {
   noticias33: "No hay publicaciones de hoy para los ejes de Noticias 33.",
   deredenred: "No hay publicaciones de entretenimiento de hoy.",
+  deportes: "No hay publicaciones de deportes de hoy.",
   minutapolitica: "No hay publicaciones de política de hoy.",
   estadodealerta: "No hay publicaciones de nota roja de hoy.",
 };

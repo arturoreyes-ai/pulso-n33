@@ -4,7 +4,7 @@ import { responderGuionPrensa } from "@/lib/analisis/guion-prensa";
 
 /**
  * Guion para locucion de la portada: las notas de un programa del canal
- * (`p=noticias33|deredenred|minutapolitica|estadodealerta`) sobre los
+ * (`p=noticias33|deredenred|deportes|minutapolitica|estadodealerta`) sobre los
  * titulares en vivo.
  *
  * Delgada como las demas. GET para que la respuesta se cachee por programa y

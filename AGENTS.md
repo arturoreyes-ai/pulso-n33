@@ -1688,6 +1688,41 @@ already refused on the record in `docs/PLAN.md` §3.
     `salida` hands over to the panel. The analysis is the panel's, never the
     script's: no side taken, no government or party graded, «polémica» only
     if the source says so.
+  - **Deportes** (client, 30 September 2026: «the most popular and trending
+    topics across Baja California, Mexico and International Sports»). Up
+    to six topics, at least one per axis with candidates: `region` (the
+    corridor, so the Padres are local), `mexico` and `internacional`, named
+    like the site's buckets (`EJES_DEPORTES`). Clips at the centre as in De
+    Red en Red, but **one headline alone per axis** (`NOTAS_SOLAS_MAXIMO` 3):
+    that day the corridor list found four sports posts, three national and
+    no international one. What is not obvious:
+    - **The place does not sort sports.** «La Premier League… declaró
+      culpable al Manchester City», from @elheraldodemexico, was zoned
+      `nacional`, and «NBA» or «Champions» name no country. So
+      `guion.ts::esDeporteDeFuera` = not `esDeporteDeMexico` (the country, or
+      a Mexican league or club: «Cruz Azul se desinfla en Liga MX» fell in
+      Internacional) and a foreign place or one of `COMPETENCIAS_DE_FUERA`.
+      Posts: region by zone, then outside, then México. Press: region by
+      the rubro at region scope; Google México's SPORTS section split by the
+      same rule (it carries the Premier and the NFL beside Liga MX, in
+      Mexico's order); and the place-less search, minus what is Mexican.
+      The lists are short and big on purpose; what escapes stays in México,
+      where the model still sees it.
+    - **A sports post is more than the tab row's terms**, which are the
+      corridor's (Xolos, Toros, Padres): `esDeDeporte` adds
+      `TERMINOS_DEPORTE` and the foreign competitions, without «partido»,
+      «América» or «Mundial» alone.
+    - **Two general fixes came out of its first runs.** @_losmejores_videos
+      made «videos» an outlet mark, and a pase saying it rejected the whole
+      script (`reglas`): `PARTES_COMUNES` now holds the words attribution
+      asks for. And **the mixed guion no longer drops a piece in silence**
+      (`armarPorTemas(…, estricto)`): a headline outside its post's list, a
+      reused post or a seventh piece answers `modelo`, because the apertura
+      had already announced the piece («el partido de la Selección Mexicana
+      en Nueva Jersey»); a wrong axis label is corrected from the list the
+      piece came from. The prompt says what happens.
+    Measured: four real runs on 30 September, ~$0.021 each, the last clean
+    with three clips, one per axis.
   - **Estado de Alerta** (Jocelin Martínez): nightly nota roja. One piece per
     event, up to six, **local only** (on 24 September four of the thirteen
     Seguridad videos were Michoacán or Guanajuato), from Seguridad plus
@@ -1704,6 +1739,85 @@ already refused on the record in `docs/PLAN.md` §3.
     with its headline or alone, before a headline alone; at most one
     headline alone (`NOTAS_SOLAS_MAXIMO`), last, six pieces in total. First
     real run after: five clips with their headline and one alone, $0.025.
+    **The worst first since 30 September 2026** (client: «more news that
+    are actually violent and shocking»). By likes alone the twelve slots
+    filled with «montachoques», a Costco parking fight and a suspicious
+    package, and the armed attack outside a Tijuana primary school sat
+    thirteenth. `candidatosAlerta` and the press list now go through
+    `guion.ts::porGravedad` (anything naming `TERMINOS_VIOLENCIA` first,
+    merit order kept inside each group), and matching runs over
+    `desofuscar`, because outlets write «arm4d0» and «rest0s óseos» to get
+    past the networks' moderation. The prompt ranks the gravest events
+    first and says gravity comes from the fact, not adjectives: the morbo,
+    names and presumption rules are unchanged. **That evening the client
+    repeated it**, and ordering was not enough: with the violent items
+    first the model could still pick the Costco fight. `soloLoGrave` hands
+    over ONLY violent posts and stand-alone headlines when there are at
+    least `MAXIMO_TEMAS.estadodealerta` (6) of them, and falls back to
+    `porGravedad` below that. That day: 10 of 10 posts violent, script
+    with five violent events.
+  - **De Red en Red is Mexico's and Baja's gossip** (same day, client:
+    «more gossip news, concerts, movies… heavy traction in Mexico or
+    Baja»). The guion carried an Iran sentence from BBC Mundo and two
+    foreign influencers while the palenque concerts stayed out.
+    `candidatosDeRedEnRed` drops anything that is already Seguridad and
+    adds `TERMINOS_FARANDULA` (concerts, tours, films, realities, romances,
+    breakups; not «serie», «banda» or «famosa» alone: the Padres' Wild Card
+    series and a Six Flags ride walked in), matched on the caption WITHOUT
+    its hashtags («#viral» let in a checkpoint video, «#concierto» a fan's
+    clip). The prompt puts gossip, concerts and trending films first.
+    **Later that day it got two axes** (`EJES_REDENRED`: `mexico`, «México
+    y Baja», and `internacional`) and **exactly one international piece**,
+    the day's most talked-about (client: «add one International
+    article/clip»): the axis having candidates makes it at least one,
+    `guion.ts::MAXIMO_POR_EJE` makes it at most one (strict mixto only),
+    and it may be a headline alone (`NOTAS_SOLAS_MAXIMO` 2: one from here,
+    plus that one). International is the `internacional` bucket or what
+    talks about abroad (`esEspectaculoDeFuera`: a foreign place, Hollywood,
+    the Oscars, and not `esDeMexico`, which adds the states and big cities
+    to `nombraMexico`: the place-less search sent a Zacatecas festival to
+    Internacional). Press splits Google México's ENTERTAINMENT section the
+    same way, like Deportes.
+    **And a caption has to say something** (`pieConcreto`): five words or
+    more outside tags, none in the first person (a fan's «Se nos hizo miel
+    la luna y un concierto pa Tijuana @Carin Leon» went on air as concert
+    news; «siganme»-style imperatives count too) and a proper name after
+    the first word («Lástima que terminó, el festival de hoy…» closed a
+    script without saying which festival). De Red en Red only: in nota
+    roja «me asaltaron» is news.
+    **Gossip, and only gossip, international piece included** (that
+    evening, client: «i don't know if a note about iranian singer
+    receiving a punishment needs to be there»). «Cantante» had let in an
+    Iranian appeals court confirming 74 lashes, while Jennifer Lopez, Sean
+    Combs and a Raúl Hernández Jr. show in Mexicali named no term.
+    `guion.ts::esFarandula` is now the one test for posts: the theme row
+    or `TERMINOS_FARANDULA` (which gained gossip words and a short,
+    ageing list of names; add with the case) on the caption without
+    hashtags, and not `noEsFarandula`: Seguridad, Política, violence,
+    `TERMINOS_NO_FARANDULA` (tribunal, latigazos, hiyab, guerra, Irán…;
+    «prisión» stays out because a celebrity's prison life is gossip) or
+    sport, which has its own segment, unless it is a concert in a stadium
+    (Cristiano leaving Portugal's national team came out as the
+    international piece). Press rows of both axes pass `noEsFarandula` too.
+    That day's run: five candidates in Mexico and Baja became eight, the
+    international list went from the Iran sentence to J.Lo, Sean Combs and
+    Tom Cruise, ~$0.04 a script with the longer lists.
+  - **The most talked-about first, in every programme** (same evening,
+    client: «always the trending and most talked about news about certain
+    topic»). The posts already reach the model ranked by `ritmo`, and De
+    Red en Red, Deportes and Estado de Alerta (after gravity) already said
+    to start from the top. Noticias 33 and Minuta Política did not; in the
+    mixed guion they now pick each axis's post from the top down and skip
+    one only if it does not fit. Noticias 33's libre breaks ties by the
+    lowest P number. In those two a headline alone still beats a post
+    alone (`redesAlCentro` is only for the other three).
+  - **The apertura follows the pieces** (same day). The schema now lists
+    `clips` before `apertura`, and structured output is generated in schema
+    order, so the apertura is written last, over pieces that already exist;
+    the prompt says to announce them in the order of `clips`. Deportes that
+    day announced the Padres before the Mexico match and ran them the other
+    way round. First runs after, De Red en Red and Estado de Alerta: both in
+    order.
   - **A post alone is always attributed, in every programme of the mixed
     guion** (same day). With the rule already in the prompt, De Red en Red
     said «Una fan le regaló rosas a Alfredo Olivas y él la dejó cantar» and
@@ -1884,10 +1998,20 @@ already refused on the record in `docs/PLAN.md` §3.
     type (it was italic), the clip as one bordered cue row with the red play
     mark, and sources as underlined text links, not pills. Download is the
     primary button. CSS is under `.guion-` at the end of `globals.css`.
-    The Ampliar button now reads **«Desarrollar con IA»** with the sparkle
-    (client: «ampliar» did not say what it does), its `title` spells it
-    out, and the server says «No se pudo desarrollar la nota.». The code
-    keeps the `ampliar` identifiers and route.
+    The Ampliar button reads **«Detallar»** with the sparkle since 30
+    September 2026 (client; «Desarrollar con IA» for two days before that,
+    and «ampliar» did not say what it does). Its accessible name is
+    «Detallar con IA», since the icon is hidden; its `title` spells it out,
+    and the server says «No se pudo detallar la nota.». The code keeps the
+    `ampliar` identifiers and route.
+  - **What could not be read is said above the Apertura**, not at the
+    foot (same day). A Deportes script came out as three headlines and no
+    clip because every network was past `FRESCURA_HORAS`, and the line
+    saying so sat under the cierre where nobody saw it. The cause was
+    local: `web/public/data` is copied from `data/` only when `pnpm dev` or
+    `pnpm build` starts (`sincronizar-datos.mjs`), and a dev server started
+    the day before serves yesterday's harvest. `pnpm datos` refreshes it;
+    production rebuilds on every data commit.
   - **«Ampliar» on each press note** (same evening, client): the note's
     reference (`ampliable`: the archive's link or the Google token, the
     outlet's domain, and the ORIGINAL headline, which is not the escaleta

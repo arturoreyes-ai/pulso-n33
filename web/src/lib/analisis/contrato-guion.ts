@@ -47,13 +47,17 @@ export type OrigenGuion = (typeof ORIGENES_GUION)[number];
  *    cierra con una pregunta para la mesa.
  *  - Estado de Alerta (el mismo dia): nota roja nocturna, sucesos policiacos,
  *    seguridad y hechos de impacto.
+ *  - Deportes (30 de septiembre de 2026): lo mas popular y comentado del
+ *    deporte en Baja California, Mexico y el mundo, con los clips de redes al
+ *    centro como De Red en Red y Estado de Alerta.
  */
-export const PROGRAMAS_GUION = ["noticias33", "deredenred", "minutapolitica", "estadodealerta"] as const;
+export const PROGRAMAS_GUION = ["noticias33", "deredenred", "deportes", "minutapolitica", "estadodealerta"] as const;
 export type ProgramaGuion = (typeof PROGRAMAS_GUION)[number];
 
 export const NOMBRE_PROGRAMA: Record<ProgramaGuion, string> = {
   noticias33: "Noticias 33",
   deredenred: "De Red en Red",
+  deportes: "Deportes",
   minutapolitica: "Minuta Política",
   estadodealerta: "Estado de Alerta",
 };
@@ -63,6 +67,7 @@ export const NOMBRE_PROGRAMA: Record<ProgramaGuion, string> = {
  *  no debe cargar el prompt para leer un numero. */
 export const MAXIMO_TEMAS: Record<Exclude<ProgramaGuion, "noticias33">, number> = {
   deredenred: 6,
+  deportes: 6,
   // Un programa de debate desarrolla pocos temas y los desarrolla con la mesa.
   minutapolitica: 4,
   estadodealerta: 6,
@@ -74,7 +79,8 @@ export const MAXIMO_TEMAS: Record<Exclude<ProgramaGuion, "noticias33">, number> 
  *  un lector de pantalla junta el nombre y la linea: «Noticias 33 5 notas». */
 export const DESCRIPCION_PROGRAMA: Record<ProgramaGuion, string> = {
   noticias33: "Cinco notas: garitas, Tijuana, la mañanera, California y una libre.",
-  deredenred: `Entretenimiento en tono ligero, hasta ${MAXIMO_TEMAS.deredenred} temas.`,
+  deredenred: `Farándula, conciertos y estrenos de México y Baja, y lo más comentado de fuera; hasta ${MAXIMO_TEMAS.deredenred} temas.`,
+  deportes: `Lo más comentado del deporte en la región, México y el mundo, hasta ${MAXIMO_TEMAS.deportes} temas.`,
   minutapolitica: `Política local y nacional, hasta ${MAXIMO_TEMAS.minutapolitica} temas, cada uno con una pregunta para la mesa.`,
   estadodealerta: `Nota roja local, de noche, hasta ${MAXIMO_TEMAS.estadodealerta} sucesos.`,
 };
@@ -112,6 +118,29 @@ export type EjeMinuta = (typeof EJES_MINUTA)[number];
 export const NOMBRE_EJE_MINUTA: Record<EjeMinuta, string> = {
   local: "Coyuntura local",
   nacional: "Coyuntura nacional",
+};
+
+/** Los dos alcances de De Red en Red (cliente, 30 de septiembre de 2026): la
+ *  farandula que se mueve en Mexico y Baja, y UNA pieza de fuera, la mas
+ *  comentada del dia (guion.ts::MAXIMO_POR_EJE). */
+export const EJES_REDENRED = ["mexico", "internacional"] as const;
+export type EjeRedEnRed = (typeof EJES_REDENRED)[number];
+
+export const NOMBRE_EJE_REDENRED: Record<EjeRedEnRed, string> = {
+  mexico: "México y Baja",
+  internacional: "Internacional",
+};
+
+/** Los tres alcances de Deportes, con los nombres de las cubetas del sitio
+ *  (Region / Mexico / Internacional). La region es el corredor: Baja
+ *  California y San Diego, asi que los Padres son de aqui. */
+export const EJES_DEPORTES = ["region", "mexico", "internacional"] as const;
+export type EjeDeportes = (typeof EJES_DEPORTES)[number];
+
+export const NOMBRE_EJE_DEPORTES: Record<EjeDeportes, string> = {
+  region: "Región",
+  mexico: "México",
+  internacional: "Internacional",
 };
 
 /**
