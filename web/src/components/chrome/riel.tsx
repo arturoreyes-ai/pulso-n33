@@ -4,10 +4,11 @@ import { ViewTransition } from "react";
 
 import { IconoAutos, IconoGuion } from "@/components/chrome/iconos-nav";
 import { MenuLector } from "@/components/chrome/menu-lector";
+import { SoloAdmin } from "@/components/chrome/quien-mira";
 import { CuentaRiel, PestanaMas } from "@/components/chrome/riel-cliente";
 import { cerrarSesion } from "@/lib/acceso/acciones";
 import { analisisHabilitado } from "@/lib/analisis/config";
-import { nombreVista, ruta, sueltasVisibles, type PaginaSuelta, type Vista } from "@/lib/dominio/secciones";
+import { esSoloAdmin, nombreVista, ruta, sueltasVisibles, type PaginaSuelta, type Vista } from "@/lib/dominio/secciones";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 
 /**
@@ -47,11 +48,13 @@ import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
  * lo que cambia es como se AGRUPA en pantalla.
  *
  * EN EL TELEFONO, cuatro pestanas al alcance del pulgar: En Tendencia, Redes,
- * Garitas y «Más», que abre la hoja con Guion, Seguimiento, Gasto electoral y
- * la cuenta. Guion no es pestana aunque el primer boceto la pusiera: escribir
- * un guion y bajarlo en Word es trabajo de escritorio, y sin la lectura con IA
- * la pagina no existe, asi que una pestana que aparece y desaparece segun el
- * entorno cambiaria la posicion de las demas.
+ * Guion y «Más», que abre la hoja con Garitas, Seguimiento, Gasto electoral y
+ * la cuenta. Hasta el 30 de septiembre de 2026 la tercera era Garitas y Guion
+ * iba en «Más»; ese dia el cliente pidio cambiarlas. Sin la lectura con IA la
+ * pagina de Guion no existe, y entonces Garitas vuelve a su lugar
+ * (`pestanasDe`): la barra es una rejilla de cuatro columnas
+ * (`.barra-inferior`), y una pestana que simplemente desapareciera dejaria un
+ * hueco y moveria «Más».
  *
  * El marcador activo es una pastilla detras del ICONO, no un bloque detras del
  * renglon entero (29 de septiembre de 2026): el bloque de 84x66 pesaba mas que
@@ -103,13 +106,17 @@ interface Destino {
   href: string;
   nombre: string;
   actual: boolean;
+  /** Solo lo ve un administrador (`SoloAdmin`); la pagina se protege sola. */
+  soloAdmin?: boolean;
 }
 
 /** Los dos grupos, en su orden de pantalla. */
 const LEER: readonly Clave[] = ["portada", "redes", "garitas"];
 const PRODUCIR: readonly Clave[] = ["reportes", "guion", "seguimiento", "gasto-electoral"];
-/** Lo que el telefono tiene como pestana; el resto va en «Más». */
-const PESTANAS: readonly Clave[] = ["portada", "redes", "garitas"];
+/** Lo que el telefono tiene como pestana; el resto va en «Más». Guion si
+ *  existe en este entorno, y si no Garitas, para que sean siempre tres. */
+const pestanasDe = (mapa: Map<Clave, Destino>): readonly Clave[] =>
+  ["portada", "redes", mapa.has("guion") ? "guion" : "garitas"];
 
 function destinos(zona: ZonaRuta | null, vista: Vista, pagina: PaginaSuelta | undefined, fuera: boolean): Map<Clave, Destino> {
   const enVista = !fuera && pagina === undefined;
@@ -118,7 +125,7 @@ function destinos(zona: ZonaRuta | null, vista: Vista, pagina: PaginaSuelta | un
     ["redes", { clave: "redes", href: ruta(zona, "redes"), nombre: nombreVista("redes"), actual: enVista && vista === "redes" }],
   ]);
   for (const s of sueltasVisibles(analisisHabilitado())) {
-    mapa.set(s.id, { clave: s.id, href: s.ruta, nombre: s.nombre, actual: pagina === s.id });
+    mapa.set(s.id, { clave: s.id, href: s.ruta, nombre: s.nombre, actual: pagina === s.id, soloAdmin: esSoloAdmin(s) });
   }
   return mapa;
 }
@@ -143,7 +150,7 @@ function Realce({ nombre, clase, className }: { nombre: string; clase: string; c
 }
 
 function RenglonRiel({ d }: { d: Destino }) {
-  return (
+  const renglon = (
     <li>
       <Link href={d.href} aria-current={d.actual ? "page" : undefined} className="renglon-riel">
         {/* La pastilla detras del icono, como en la barra del telefono: una
@@ -156,10 +163,11 @@ function RenglonRiel({ d }: { d: Destino }) {
       </Link>
     </li>
   );
+  return d.soloAdmin ? <SoloAdmin>{renglon}</SoloAdmin> : renglon;
 }
 
 function PestanaBarra({ d }: { d: Destino }) {
-  return (
+  const pestana = (
     <li>
       <Link href={d.href} aria-current={d.actual ? "page" : undefined} className="pestana-barra">
         <span className="icono-barra">
@@ -170,6 +178,7 @@ function PestanaBarra({ d }: { d: Destino }) {
       </Link>
     </li>
   );
+  return d.soloAdmin ? <SoloAdmin>{pestana}</SoloAdmin> : pestana;
 }
 
 export function Riel({
@@ -185,7 +194,8 @@ export function Riel({
   fuera?: boolean;
 }) {
   const mapa = destinos(zona, vista, pagina, fuera);
-  const enMas = pagina !== undefined && !PESTANAS.includes(pagina);
+  const pestanas = pestanasDe(mapa);
+  const enMas = pagina !== undefined && !pestanas.includes(pagina);
   const salir = (
     <form action={cerrarSesion}>
       <button type="submit" className="renglon-cuenta">Salir</button>
@@ -218,10 +228,10 @@ export function Riel({
 
       <nav aria-label="Tablero" className="barra-inferior">
         <ul>
-          {de(mapa, PESTANAS).map((d) => <PestanaBarra key={d.clave} d={d} />)}
+          {de(mapa, pestanas).map((d) => <PestanaBarra key={d.clave} d={d} />)}
           <li>
             <PestanaMas actual={enMas}>
-              <MenuLector zona={zona} vista={vista} pagina={pagina} fuera={fuera} conVistas={false} excepto={PESTANAS} />
+              <MenuLector zona={zona} vista={vista} pagina={pagina} fuera={fuera} conVistas={false} excepto={pestanas} />
             </PestanaMas>
           </li>
         </ul>

@@ -2647,8 +2647,11 @@ Tailwind v4, pnpm.
   Gasto electoral, with the LED «Pulso» mark on top and the account at the
   foot, which reveals Accesos and Salir under the name in place (space
   reserved, so nothing moves under the pointer). The phone has four tabs: En Tendencia, Redes,
-  Garitas and «Más», a `Hoja` with the rest and the account
-  (`menu-lector.tsx` with `excepto`). En Tendencia leads because it is the
+  Guion and «Más», a `Hoja` with the rest and the account
+  (`menu-lector.tsx` with `excepto`). Guion replaced Garitas there on 30
+  September 2026 (client); without `analisisHabilitado` Guion does not exist
+  and Garitas takes the slot back (`riel.tsx::pestanasDe`), because the bar
+  is a fixed four-column grid. En Tendencia leads because it is the
   one the team uses every day. **Readers no longer carry a menu button** and
   `Lector` has no `menu` prop; the phone `Cinta` keeps the page name, the
   place and the back arrow. `main:has(> .riel)` reserves the rail's width or

@@ -110,6 +110,12 @@ export const VISTAS: readonly Vista[] = [null, ...SECCIONES];
  * algo: `requiereAnalisis`, porque sin la lectura con IA la pagina no existe
  * (app/guion/page.tsx) y un enlace a ella seria un 404 en la nav.
  *
+ * Reportes es `soloAdmin` «por ahora» (cliente, 29 de septiembre de 2026):
+ * la pagina responde 404 a quien no es administrador (app/reportes/page.tsx)
+ * y la nav la envuelve en `SoloAdmin` (chrome/quien-mira.tsx). La nav no lee
+ * el rol en el servidor porque leer cookies ahi volveria dinamica cada pagina
+ * que la monta; lo que la protege es el 404, no el renglon escondido.
+ *
  * Se declara aqui, y no como un `<li>` a mano en la pildora, para que la nav
  * siga teniendo una sola lista de la que salen sus elementos.
  *
@@ -124,7 +130,7 @@ export const SUELTAS = [
   { id: "gasto-electoral", ruta: "/gasto-electoral", nombre: "Gasto electoral", descripcion: "Campañas de Baja California, 2024" },
   { id: "seguimiento", ruta: "/seguimiento", nombre: "Seguimiento", descripcion: "Publicaciones que sigue el equipo" },
   { id: "guion", ruta: "/guion", nombre: "Guion", descripcion: "El guion de cada programa del canal", requiereAnalisis: true },
-  { id: "reportes", ruta: "/reportes", nombre: "Reportes", descripcion: "Términos en seguimiento y búsqueda de noticias y publicaciones" },
+  { id: "reportes", ruta: "/reportes", nombre: "Reportes", descripcion: "Términos en seguimiento y búsqueda de noticias y publicaciones", soloAdmin: true },
 ] as const;
 
 export type PaginaSuelta = (typeof SUELTAS)[number]["id"];
@@ -133,6 +139,9 @@ export type PaginaSuelta = (typeof SUELTAS)[number]["id"];
  *  los dos de servidor) le pasa `analisisHabilitado()`, que lee el entorno. */
 export const sueltasVisibles = (analisis: boolean) =>
   SUELTAS.filter((s) => analisis || !("requiereAnalisis" in s));
+
+/** Si la nav solo la pinta a un administrador (ver arriba). */
+export const esSoloAdmin = (s: (typeof SUELTAS)[number]): boolean => "soloAdmin" in s && s.soloAdmin;
 
 const SECCION_DE_SLUG = new Map<string, Seccion>(SECCIONES.map((s) => [s, s]));
 

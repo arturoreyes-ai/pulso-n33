@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import type { ReactNode } from "react";
 import useSWR from "swr";
 
 /**
@@ -90,6 +92,17 @@ export function useCuentaRiel(): { corto: string; titulo: string; admin: boolean
   return { corto, titulo, admin: cuenta.admin };
 }
 
+/**
+ * Lo que solo un administrador ve en la nav: hoy el renglon de Reportes
+ * (lib/dominio/secciones.ts, `soloAdmin`). Esconder un enlace no protege
+ * nada; la pagina responde 404 por su cuenta. Mientras `/api/yo` no responde
+ * no se pinta, asi que para un administrador el renglon aparece un instante
+ * despues que los demas.
+ */
+export function SoloAdmin({ children }: { children: ReactNode }) {
+  return useCuenta()?.admin ? children : null;
+}
+
 export function RenglonCuenta({ className = "" }: { className?: string }) {
   const cuenta = useCuenta();
   if (!cuenta) return null;
@@ -104,7 +117,7 @@ export function RenglonCuenta({ className = "" }: { className?: string }) {
           <span className="block truncate text-meta text-tinta-meta">{cuenta.correo}</span>
         ) : null}
       </span>
-      {cuenta.admin ? <a href="/admin/usuarios" className="ml-auto text-meta text-tinta-titulo">Accesos</a> : null}
+      {cuenta.admin ? <Link href="/admin/usuarios" className="ml-auto text-meta text-tinta-titulo underline decoration-filo underline-offset-4 hover:decoration-tinta-titulo">Accesos</Link> : null}
     </div>
   );
 }

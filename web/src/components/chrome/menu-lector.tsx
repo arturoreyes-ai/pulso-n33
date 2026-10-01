@@ -2,11 +2,12 @@ import Link from "next/link";
 import { Check } from "@phosphor-icons/react/dist/ssr";
 import type { ReactNode } from "react";
 
-import { RenglonCuenta } from "@/components/chrome/quien-mira";
+import { RenglonCuenta, SoloAdmin } from "@/components/chrome/quien-mira";
 import { cerrarSesion } from "@/lib/acceso/acciones";
 import { analisisHabilitado } from "@/lib/analisis/config";
 import {
   VISTAS,
+  esSoloAdmin,
   nombreVista,
   ruta,
   sueltasVisibles,
@@ -114,7 +115,7 @@ export function MenuLector({
       <Grupo titulo="Herramientas">
         {sueltasVisibles(analisisHabilitado()).filter((s) => !excepto.includes(s.id)).map((s) => {
           const actual = pagina === s.id;
-          return (
+          const renglon = (
             <li key={s.ruta}>
               <Link href={s.ruta} aria-current={actual ? "page" : undefined} className={claseRenglon(actual)}>
                 <span className="grid min-w-0 gap-0.5">
@@ -125,6 +126,7 @@ export function MenuLector({
               </Link>
             </li>
           );
+          return esSoloAdmin(s) ? <SoloAdmin key={s.ruta}>{renglon}</SoloAdmin> : renglon;
         })}
       </Grupo>
 
