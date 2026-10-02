@@ -1,8 +1,201 @@
 {
  "esquema": 1,
  "ventana_dias": 30,
- "total": 10658,
+ "total": 10673,
  "notas": [
+  {
+   "id": "bd9dbccadc3a32b9",
+   "titulo": "Testigo del tiempo: ¿Víctimas o culpables?: La geopolítica suicida de los líderes europeos",
+   "url": "https://timesofsandiego.com/opinion/2026/10/02/testigo-del-tiempo-victimas-o-culpables-la-geopolitica-suicida-de-los-lideres-europeos/",
+   "dominio": "timesofsandiego.com",
+   "fuente": "timessd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T22:48:09+00:00",
+   "capturado": "2026-10-02T22:52:04+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://i0.wp.com/timesofsandiego.com/wp-content/uploads/2022/09/Ukraine-Survivor.jpg?fit=1024%2C576&ssl=1",
+   "rubros": []
+  },
+  {
+   "id": "25d57afe989f691d",
+   "titulo": "¡El Nido se pinta de rosa! Arranca en Mexicali el mes de prevención contra el cáncer de mama",
+   "url": "https://www.elimparcial.com/mxl/mexicali/2026/10/02/el-nido-se-pinta-de-rosa-arranca-en-mexicali-el-mes-de-prevencion-contra-el-cancer-de-mama/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T22:45:50+00:00",
+   "capturado": "2026-10-02T22:52:04+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5318,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/IHTZBKDOCJACBON6RQUARB57BQ.jpeg?auth=f7abb35a3a8136812d3667278f81fe6bc9cd6476c54dceddb5ad62f8a4c65e4b&smart=true&width=1600&height=1280",
+   "rubros": []
+  },
+  {
+   "id": "093c8a8452ca07c3",
+   "titulo": "La FAO confirma que los precios mundiales de los alimentos alcanzaron su punto más alto en casi cuatro años por bloqueos marítimos y el impacto del fenómeno de El Niño",
+   "url": "https://www.elimparcial.com/dinero/2026/10/02/la-fao-confirma-que-los-precios-mundiales-de-los-alimentos-alcanzaron-su-punto-mas-alto-en-casi-cuatro-anos-por-bloqueos-maritimos-y-el-impacto-del-fenomeno-de-el-nino/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T22:42:08+00:00",
+   "capturado": "2026-10-02T22:52:04+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8238,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/P5OHVDHLKBAYHJFDOZCRAJEK7E.jpg?auth=c7cfeed79654a23dd6849379107ecc2a517a4403bf8c0e105efb4df686c96dfd&smart=true&width=1920&height=1152",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "6c7f7405ba9217e7",
+   "titulo": "Multihomicidio en Montemorelos toma giro por menor que presenció cuando Cinthia Tamez habría atacado a su familia y salió vivo del lugar",
+   "url": "https://www.elimparcial.com/mexico/2026/10/02/multihomicidio-en-montemorelos-toma-giro-por-menor-que-presencio-cuando-cinthia-tamez-ataco-a-su-familia-y-salio-vivo-del-lugar/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T22:41:01+00:00",
+   "capturado": "2026-10-02T22:52:04+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6994,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/B4A357FYTNHBRFOCWI2UCFRCUQ.jpg?auth=d7680852eae6440388e154b97303fce268c09f4f95df2360e937216db2e47984&smart=true&width=1920&height=1200",
+   "rubros": []
+  },
+  {
+   "id": "8c6f8fe690a4845b",
+   "titulo": "¿Infonavit te puede quitar tu casa si te atrasas en los pagos? Todo lo que debes saber",
+   "url": "https://www.elimparcial.com/dinero/2026/10/02/infonavit-te-puede-quitar-tu-casa-si-te-atrasas-en-los-pagos-todo-lo-que-debes-saber/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T22:37:59+00:00",
+   "capturado": "2026-10-02T22:52:04+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7634,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/DAZD3WTX4ZGJPJHBBXGACTP4JI.jpg?auth=c9eaec0d1100ab82be0f99b7546c0020e259b5d59bda7dcbfff35bbbf55b6170&smart=true&width=1200&height=700",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "094eaee66ab5f20a",
+   "titulo": "Sai: el hombre que llega cuando la desgracia ya está adentro",
+   "url": "https://timesofsandiego.com/arts/2026/10/02/sai-el-hombre-que-llega-cuando-la-desgracia-ya-esta-adentro/",
+   "dominio": "timesofsandiego.com",
+   "fuente": "timessd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T22:37:33+00:00",
+   "capturado": "2026-10-02T22:52:04+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://i0.wp.com/timesofsandiego.com/wp-content/uploads/2026/03/Thomas-Murphy-Bathroom-Access-12.jpg?fit=1024%2C640&ssl=1",
+   "rubros": []
+  },
+  {
+   "id": "ad524b843545b3d0",
+   "titulo": "Crece el tráfico de personas por el corredor marítimo del Pacífico",
+   "url": "https://timesofsandiego.com/crime/2026/10/02/crece-el-trafico-de-personas-por-el-corredor-maritimo-del-pacifico/",
+   "dominio": "timesofsandiego.com",
+   "fuente": "timessd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T22:29:17+00:00",
+   "capturado": "2026-10-02T22:52:04+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://i0.wp.com/timesofsandiego.com/wp-content/uploads/2016/11/Nils-B-cargo-ship.jpg?fit=800%2C450&ssl=1",
+   "rubros_categoria": [
+    "seguridad"
+   ],
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "209b3a7dccd7c612",
+   "titulo": "México vs Estados Unidos: A qué hora y dónde ver EN VIVO el clásico de la Concacaf",
+   "url": "https://www.elimparcial.com/deporte/2026/10/02/mexico-vs-estados-unidos-a-que-hora-y-donde-ver-en-vivo-el-clasico-de-la-concacaf/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T22:08:39+00:00",
+   "capturado": "2026-10-02T22:52:04+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.8125,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/6B2ILES65JHOVHGSX2XE2S2VKY.jpg?auth=d0ace16ca998ff8ef6201524a9d0205407634a288c0ba14ad1c61a531ae89c99&smart=true&width=1920&height=1080",
+   "rubros": [
+    "deportes"
+   ]
+  },
   {
    "id": "fb6d58d24bcdf6b3",
    "titulo": "Garitas de Tijuana y Mexicali registran demoras de hasta dos horas (Datos actualizados a las 3:00 PM PDT) Este viernes se registran demoras severas en los cruces hacia Estados Unidos, siendo la garita de Calexico West en Mexicali la más saturada con fil",
@@ -3033,6 +3226,56 @@
    ]
   },
   {
+   "id": "bfbd8e61fd450cc2",
+   "titulo": "Expediente Confidencial / 4T decapitadora... Amílcar... Maru... Coahuila... Pike...",
+   "url": "https://oem.com.mx/elsoldetijuana/analisis/expediente-confidencial-4t-decapitadora-amilcar-maru-coahuila-pike-32401298",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T17:44:07+00:00",
+   "capturado": "2026-10-02T22:52:04+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5172,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "33d9da7c9ce963d9",
+   "titulo": "Mía Rosales prepara su camino a Los Ángeles 2028",
+   "url": "https://oem.com.mx/lavozdelafrontera/deportes/mia-rosales-prepara-su-camino-a-los-angeles-2028-32399566",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T17:43:50+00:00",
+   "capturado": "2026-10-02T22:52:04+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6517,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
    "id": "fa7d587fc7b63309",
    "titulo": "Platon, filósofo griego: “El hombre sabio querrá estar siempre con el que es mejor que él”",
    "url": "https://www.elimparcial.com/estilos/2026/10/02/platon-filosofo-griego-el-hombre-sabio-querra-estar-siempre-con-el-que-es-mejor-que-el/",
@@ -3054,6 +3297,31 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/AAX6M6ILPZGGHO2J2ZEYSOQ3W4.jpg?auth=8bf22226595ff76ebc8bcf26d0434fa4d51607a215473d48e048e5c5d8ac0c52&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "8a2b3011144acf05",
+   "titulo": "Tienen pescadores de San Felipe buena expectativa para la próxima temporada de camarón",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/tienen-pescadores-de-san-felipe-buena-expectativa-para-la-proxima-temporada-de-camaron-32401184",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "San Felipe"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T17:37:49+00:00",
+   "capturado": "2026-10-02T22:52:04+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6329,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "rubros": []
   },
   {
@@ -8156,6 +8424,32 @@
    "rubros": []
   },
   {
+   "id": "dd2aa576514ea6f0",
+   "titulo": "Critica MC que en México no se investigue a los señalados por EU",
+   "url": "https://afntijuana.info/informacion_general/182432_critica_mc_que_en_mexico_no_se_investigue_a_los_senalados_por_eu",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T00:00:00",
+   "capturado": "2026-10-02T22:52:04+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9079,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.afnbc.com/images.php?src=imagenes/perosna-14520541.jpg&w=500&h=250",
+   "rubros": []
+  },
+  {
    "id": "d1c35913ae9e1f4b",
    "titulo": "Rebasa el dólar la barrera de los 17 pesos en octubre",
    "url": "https://afntijuana.info/informacion_general/182420_rebasa_el_dolar_la_barrera_de_los_17_pesos_en_octubre",
@@ -8317,6 +8611,34 @@
    "imagen": "https://www.afnbc.com/images.php?src=imagenes/BC-68-912-personas-ocupan-legalmente-Estados-Unidos.jpeg&w=500&h=250",
    "rubros": [
     "economia"
+   ]
+  },
+  {
+   "id": "99ab68015320d49f",
+   "titulo": "Investigan a policías de Mexicali por fallas en atención a reporte de robo",
+   "url": "https://afntijuana.info/informacion_general/182433_investigan_a_policias_de_mexicali_por_fallas_en_atencion_a_reporte_de_robo",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T00:00:00",
+   "capturado": "2026-10-02T22:52:04+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6103,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.afnbc.com/images.php?src=imagenes/persona-1540284151.jpg&w=500&h=250",
+   "rubros": [
+    "seguridad"
    ]
   },
   {
@@ -8536,6 +8858,32 @@
    "rubros": []
   },
   {
+   "id": "38023f40f5d83ffa",
+   "titulo": "Exigen que se esclarezcan señalamientos de EU contra Carlos Torres",
+   "url": "https://afntijuana.info/informacion_general/182430_exigen_que_se_esclarezcan_senalamientos_de_eu_contra_carlos_torres",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T00:00:00",
+   "capturado": "2026-10-02T22:52:04+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5516,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.afnbc.com/images.php?src=imagenes/diputados-10250455781.jpg&w=500&h=250",
+   "rubros": []
+  },
+  {
    "id": "376060f56a88cc36",
    "titulo": "Desalanizar resalinizar",
    "url": "https://afntijuana.info/editoriales/182411_desalanizar_resalinizar",
@@ -8666,6 +9014,34 @@
    },
    "imagen": "https://www.afnbc.com/images.php?src=imagenes/carlos-valle-13-julio-2023.jpg&w=500&h=250",
    "rubros": []
+  },
+  {
+   "id": "09b15be5872a73b4",
+   "titulo": "No hay empresas afiliadas al CCE en la \"lista negra\" de la OFAC",
+   "url": "https://afntijuana.info/informacion_general/182431_no_hay_empresas_afiliadas_al_cce_en_la_lista_negra_de_la_ofac",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T00:00:00",
+   "capturado": "2026-10-02T22:52:04+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8907,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.afnbc.com/images.php?src=imagenes/persona-1450451.jpg&w=500&h=250",
+   "rubros": [
+    "economia"
+   ]
   },
   {
    "id": "002ba5b5e94a38a6",
@@ -197444,7 +197820,7 @@
     {
      "id": "ram",
      "via": "nominal",
-     "clave": "rocio adame"
+     "clave": "adame munoz"
     }
    ],
    "postura": {
