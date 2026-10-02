@@ -79,10 +79,10 @@ export const MAXIMO_TEMAS: Record<Exclude<ProgramaGuion, "noticias33">, number> 
  *  un lector de pantalla junta el nombre y la linea: «Noticias 33 5 notas». */
 export const DESCRIPCION_PROGRAMA: Record<ProgramaGuion, string> = {
   noticias33: "Cinco notas: garitas, Tijuana, la mañanera, California y una libre.",
-  deredenred: `Farándula, conciertos y estrenos de México y Baja, y lo más comentado de fuera; hasta ${MAXIMO_TEMAS.deredenred} temas.`,
-  deportes: `Lo más comentado del deporte en la región, México y el mundo, hasta ${MAXIMO_TEMAS.deportes} temas.`,
-  minutapolitica: `Política local y nacional, hasta ${MAXIMO_TEMAS.minutapolitica} temas, cada uno con una pregunta para la mesa.`,
-  estadodealerta: `Nota roja local, de noche, hasta ${MAXIMO_TEMAS.estadodealerta} sucesos.`,
+  deredenred: `Farándula, conciertos y estrenos de México y Baja, y lo más comentado de fuera; ${MAXIMO_TEMAS.deredenred} temas.`,
+  deportes: `Lo más comentado del deporte en la región, México y el mundo, ${MAXIMO_TEMAS.deportes} temas.`,
+  minutapolitica: `Política local y nacional, ${MAXIMO_TEMAS.minutapolitica} temas, cada uno con una pregunta para la mesa.`,
+  estadodealerta: `Nota roja local, de noche, ${MAXIMO_TEMAS.estadodealerta} sucesos.`,
 };
 
 /** De que sale el guion, en una linea, bajo el titulo de /guion. Aqui y no en

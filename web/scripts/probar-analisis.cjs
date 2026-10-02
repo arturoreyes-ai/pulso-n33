@@ -1759,8 +1759,11 @@ async function comprobar() {
   const sisRedMixto = sistemaDe('deredenred', 'mixto');
   // Desde el 30 de septiembre de 2026, con el eje internacional: uno solo de
   // Mexico y Baja, y la internacional puede ser titular solo.
-  assert.match(sisRedMixto, /Un titular solo \(`video`: 0\): a lo más UNO de México y Baja, al final de las de su eje/);
-  assert.match(sisRedMixto, /la pieza internacional puede ser un titular solo si ninguna publicación internacional sirve\. El segmento tiene como máximo 6 piezas EN TOTAL, contando esos titulares\./, 'seis mas uno se corto y la apertura anuncio lo que no estaba');
+  // Desde el 2 de octubre de 2026 el tope de titulares solos va en el pedido
+  // («Titulares solos permitidos») y el segmento lleva EXACTAMENTE seis.
+  assert.match(sisRedMixto, /Titulares solos \(`video`: 0\): como máximo los que dice «Titulares solos permitidos» al final de tus listas, solo para un tema que ninguna publicación cuente, al final de las piezas de su eje/);
+  assert.match(sisRedMixto, /la pieza internacional puede ser un titular solo si ninguna publicación internacional sirve\./);
+  assert.match(sisRedMixto, /El segmento lleva EXACTAMENTE 6 piezas EN TOTAL, contando los titulares solos\. Si las publicaciones no dan para 6 temas distintos, complétalo con titulares de los que pueden ir solos/, 'seis mas uno se corto y la apertura anuncio lo que no estaba; cuatro tampoco');
   assert.match(sisRedMixto, /Un tema grave \(una muerte, una enfermedad, una condena\) no abre ni cierra el segmento/);
   assert.match(sisRedMixto, /«Circula en redes que» va una vez en el segmento como mucho/);
   assert.match(sisRedMixto, /«En un video que circula»\), sin quitarla\./, 'variar la formula no quita la atribucion');
@@ -1768,7 +1771,7 @@ async function comprobar() {
   assert.match(sisRedMixto, /Esto manda sobre la preferencia general de arriba: aquí una publicación sola va antes que un titular solo\./);
   assert.ok(sisRedMixto.indexOf('Entre dos piezas igual de noticiosas') < sisRedMixto.indexOf('Esto manda sobre la preferencia general'), 'la regla del programa va despues de la general que corrige');
   for (const s of [sistemaDe('noticias33', 'mixto'), sistemaDe('minutapolitica', 'mixto'), sistemaDe('deredenred', 'prensa'), sistemaDe('estadodealerta', 'prensa')]) {
-    assert.doesNotMatch(s, /a lo más UNO en todo el segmento/, 'solo De Red en Red y Estado de Alerta, y solo en el mixto');
+    assert.doesNotMatch(s, /Titulares solos permitidos/, 'solo los programas de redes, y solo en el mixto');
   }
   for (const s of [sisRedMixto, sistemaDe('deredenred', 'tiktok')]) {
     assert.match(s, /Aquí el conductor tiene chispa: frases cortas, un gancho/);
@@ -1785,7 +1788,7 @@ async function comprobar() {
   const { NOMBRE_PROGRAMA: NOMBRES_P, DESCRIPCION_PROGRAMA: DESCRIPCIONES_P, MAXIMO_TEMAS: MAXIMOS_P, EJES_DEPORTES, NOMBRE_EJE_DEPORTES } = cargar('lib/analisis/contrato-guion');
   assert.equal(NOMBRES_P.deportes, 'Deportes');
   assert.equal(MAXIMOS_P.deportes, 6);
-  assert.equal(DESCRIPCIONES_P.deportes, 'Lo más comentado del deporte en la región, México y el mundo, hasta 6 temas.');
+  assert.equal(DESCRIPCIONES_P.deportes, 'Lo más comentado del deporte en la región, México y el mundo, 6 temas.');
   assert.deepEqual([...EJES_DEPORTES], ['region', 'mexico', 'internacional']);
   assert.deepEqual(NOMBRE_EJE_DEPORTES, { region: 'Región', mexico: 'México', internacional: 'Internacional' }, 'los nombres de las cubetas del sitio');
   const { esDeporteDeFuera, EJES_DE: EJES_PROGRAMA } = cargar('lib/analisis/guion');
@@ -1821,13 +1824,13 @@ async function comprobar() {
   assert.match(sisDep, /Programa: Deportes, el segmento deportivo del canal: lo más popular y comentado del deporte en Baja California, en México y en el mundo\./);
   assert.match(sisDep, /al menos una por cada eje que tenga candidatos \(region, mexico, internacional\)/);
   assert.match(sisDep, /region \(Baja California y San Diego\), mexico o internacional/);
-  assert.match(sisDep, /a lo más UNO POR EJE, y solo en un eje donde ninguna publicación de su lista sirva/);
+  assert.match(sisDep, /solo para un tema que ninguna publicación cuente, y primero en los ejes donde ninguna publicación de su lista sirva/);
   assert.match(sisDep, /aquí una publicación sola va antes que un titular solo/, 'los clips al centro, como De Red en Red y Estado de Alerta');
   assert.match(sisDep, /un marcador, un resultado o una cifra se dice solo como viene/);
   assert.match(sisDep, /No pronostiques resultados ni hables de apuestas o momios/);
   assert.match(sisDep, /Una publicación sola lleva SIEMPRE, en su entrada, la frase que dice que viene de redes/);
   assert.doesNotMatch(sisDep, /tiene chispa|pregunta para la mesa|buenas noches/i);
-  assert.equal(sistemaDe('deportes', 'prensa').includes('UNO POR EJE'), false, 'solo en el mixto');
+  assert.equal(sistemaDe('deportes', 'prensa').includes('Titulares solos permitidos'), false, 'solo en el mixto');
   const esquemaDep = esquemaDe('deportes', 'mixto').properties.clips.items;
   assert.deepEqual(esquemaDep.properties.eje.enum, ['region', 'mexico', 'internacional']);
   assert.ok(!('pregunta' in esquemaDep.properties) && !('libre' in esquemaDep.properties));
@@ -1890,7 +1893,8 @@ async function comprobar() {
   // seguridad. «A central theme for these sections is clips from social media.»
   const sisAlerta = sistemaDe('estadodealerta', 'mixto');
   assert.match(sisAlerta, /Este programa es de lo que circula en redes: cada pieza sale de una publicación, con su titular si cuenta EL MISMO HECHO, o sola si ninguno lo cuenta\. Esto manda sobre la preferencia general de arriba: aquí una publicación sola va antes que un titular solo\./);
-  assert.match(sisAlerta, /a lo más UNO en todo el segmento, y solo si es de lo más notable del día y ninguna publicación de la lista cuenta ese hecho\. Va al final, después de las publicaciones\. El segmento tiene como máximo 6 piezas EN TOTAL/);
+  assert.match(sisAlerta, /solo para un hecho que ninguna publicación cuente, y van al final, después de las publicaciones\./);
+  assert.match(sisAlerta, /El segmento lleva EXACTAMENTE 6 piezas EN TOTAL, contando los titulares solos\. Si las publicaciones no dan para 6 hechos distintos/);
   assert.match(sisAlerta, /La lista viene de lo más grave a lo menos, y dentro de eso de lo que más se mueve: abre con el hecho más grave/);
 
   // --- 30 de septiembre de 2026: lo violento primero en Estado de Alerta, la
@@ -1947,12 +1951,45 @@ async function comprobar() {
   assert.equal(noEsFarandula('Se confirma la ruptura de Karla Díaz y Jorge Ruiz'), false);
   assert.deepEqual(redEnRedDe([vt('Jennifer Lopez pidió a los fotógrafos que dejaran de seguirla al salir de un restaurante', 'internacional')]).internacional.length, 1);
   // Estado de Alerta: con seis hechos violentos o mas, solo esos.
-  const violentos = Array.from({ length: 6 }, (_, i) => vt(`Balacera número ${i + 1} en la colonia Libertad ${'y'.repeat(i)}`));
+  const violentos = ['Libertad', 'Otay Universidad', 'Cacho', 'Hipódromo', 'Sánchez Taboada', 'Mariano Matamoros']
+    .map((colonia, i) => vt(`Balacera en la colonia ${colonia} ${'y'.repeat(i)}`));
   const soloGraves = alertaDe([...menores, ...violentos]);
   assert.equal(soloGraves.length, 6);
   assert.ok(soloGraves.every((v) => /Balacera/.test(v.titulo)), 'ni un choque mientras alcance lo violento');
   assert.deepEqual(soloLoGrave(['choque', 'balacera'], (x) => x), ['balacera', 'choque'], 'si no alcanza, lo violento primero y lo menor detras');
   assert.match(sisRedMixto, /Solo farándula y chisme, también en la pieza internacional/);
+  // --- 2 de octubre de 2026: seis, no cuatro ------------------------------------
+  // «It's generating 4 clips/articles sometimes… they need to be six unless
+  // stated otherwise.» Ese dia la lista de De Red en Red traia diez
+  // publicaciones y veintisiete titulares.
+  const { temasEstimados, notasSolasPermitidas, pedidoDe } = cargar('lib/analisis/guion');
+  assert.equal(temasEstimados([
+    'Ataque arm4d0 frente a una primaria en Tijuana dejó a dos mujeres sin vida este martes',
+    'Detienen a dos presuntos responsables del asesinato de dos mujeres frente a primaria en Tijuana',
+    '🚨 ¡ATAQUE ARMADO FRENTE A UNA PRIMARIA EN TIJUANA! MATAN A DOS MUJERES',
+    'Ataque armado deja dos muertos en Tecate#elvigia#ensenada',
+    '#LatinusDiario. Murió el actor Otto Sirgo, tenía 79 años',
+    'El actor de cine, teatro y televisión de origen cubano Otto Sirgo falleció este martes',
+    'La fecha del concierto de Beéle en Tijuana cambió',
+  ]), 4, 'la primaria es un hecho, Tecate otro, Otto Sirgo uno, Beéle uno');
+  const planSeis = (titulos, programa = 'deredenred') => ({ origen: 'mixto', programa, lista: titulos.map((t, i) => ({ url: `https://t/${i}`, titulo: t })),
+    titulares: [], candidatos: { mexico: [], internacional: [] }, candidatosTitulares: {}, pares: {}, sinLeer: [], faltantes: [] });
+  const diez = ['Yahir sexto lugar de La Casa de los Famosos', 'Rick Ross arrestado en Miami Beach', 'Caloncho pone su sello en las Fiestas del Sol',
+    'Alejandra Guzmán regresa a los escenarios', 'Davis Flow sorprendió a Emma Coronel con flores', 'Congelan el dinero de la promotora de Christian Nodal',
+    'Javier Rosas comparte escenario con Lenin Ramírez', 'Álvaro Díaz trae el espectáculo del año'];
+  assert.equal(notasSolasPermitidas(planSeis(diez)), 2, 'con ocho temas de redes, el tope del programa');
+  assert.equal(notasSolasPermitidas(planSeis(diez.slice(0, 3))), 3, 'con tres temas, tres titulares solos para llegar a seis');
+  assert.equal(notasSolasPermitidas(planSeis([], 'estadodealerta')), 6, 'sin publicaciones, seis titulares');
+  assert.equal(notasSolasPermitidas({ ...planSeis(diez), origen: 'redes' }), Infinity, 'solo el mixto');
+  assert.equal(notasSolasPermitidas(planSeis(diez, 'minutapolitica')), Infinity);
+  assert.match(pedidoDe(planSeis(diez.slice(0, 3))), /\n\nTitulares solos permitidos: 3$/, 'el numero va en lo que lee el modelo');
+  assert.doesNotMatch(pedidoDe(planSeis(diez, 'minutapolitica')), /Titulares solos permitidos/);
+  for (const prog of ['deredenred', 'deportes', 'estadodealerta']) {
+    for (const origen of ['mixto', 'tiktok', 'prensa']) assert.doesNotMatch(sistemaDe(prog, origen), /hasta 6/, `${prog} ${origen}: seis, no «hasta seis»`);
+  }
+  assert.match(sistemaDe('minutapolitica', 'mixto'), /escribe EXACTAMENTE 4 temas \(menos solo si no hay 4 asuntos distintos\)/, 'Minuta son cuatro, como pidio el cliente');
+  const { DESCRIPCION_PROGRAMA: DESC_SEIS } = cargar('lib/analisis/contrato-guion');
+  for (const d of Object.values(DESC_SEIS)) assert.doesNotMatch(d, /hasta/);
   // Lo mas comentado primero en todos los programas del guion mixto.
   for (const prog of ['noticias33', 'minutapolitica']) {
     assert.match(sistemaDe(prog, 'mixto'), /Lo más comentado va primero: en cada eje, elige entre las publicaciones empezando por la de más arriba/, prog);
@@ -2009,7 +2046,36 @@ async function comprobar() {
   const unaFuera = [rr('mexico', 1, 'Circula en redes que los Padres ganan.'), rr('internacional', 2, 'En redes se comparte un golazo.')];
   assert.equal((await (await escribir(planRed, { solicitar: conductorGuion(guionDe(unaFuera)), cache: SIN_CACHE })).json()).clips.length, 2);
   const dosFuera = [...unaFuera, rr('internacional', 3, 'Circula en redes que Taylor Swift anuncia gira.')];
-  assert.equal((await (await escribir(planRed, { solicitar: conductorGuion(guionDe(dosFuera)), cache: SIN_CACHE })).json()).codigo, 'modelo', 'una internacional, no dos');
+  const cDosFuera = conductorGuion(guionDe(dosFuera));
+  assert.equal((await (await escribir(planRed, { solicitar: cDosFuera, cache: SIN_CACHE })).json()).codigo, 'modelo', 'una internacional, no dos');
+  // --- 2 de octubre de 2026: una segunda vuelta con el motivo ------------------
+  // Un guion que no pasa la revision vuelve al modelo UNA vez, con su respuesta
+  // y lo que fallo; si falla otra vez, el mismo codigo de antes.
+  assert.equal(cDosFuera.peticiones.length, 2, 'una vuelta mas, no dos');
+  const segunda = JSON.parse(cDosFuera.peticiones[1].opciones.body);
+  assert.equal(segunda.messages.length, 3);
+  assert.equal(segunda.messages[1].role, 'assistant');
+  assert.equal(segunda.messages[1].content, guionDe(dosFuera), 'el modelo ve lo que escribio');
+  assert.match(segunda.messages[2].content, /^Ese guion no se puede usar: una pieza usa un titular que no estaba debajo de su publicación .* hay más piezas de un eje de las permitidas\. Escríbelo completo otra vez/);
+  assert.deepEqual(segunda.messages[0], JSON.parse(cDosFuera.peticiones[0].opciones.body).messages[0], 'el mismo pedido');
+  const enSecuencia = (...salidas) => {
+    const peticiones = [];
+    const fn = async (url, opciones) => { peticiones.push({ url: String(url), opciones }); return respuestaFalsa(JSON.stringify({ content: [{ type: 'text', text: salidas[peticiones.length - 1] ?? assert.fail('una llamada de mas') }] }), true); };
+    fn.peticiones = peticiones;
+    return fn;
+  };
+  const cArreglo = enSecuencia(guionDe(dosFuera), guionDe(unaFuera));
+  const arreglado = await (await escribir(planRed, { solicitar: cArreglo, cache: SIN_CACHE })).json();
+  assert.equal(arreglado.clips.length, 2, 'la segunda vuelta corrigio y el guion sale');
+  assert.equal(cArreglo.peticiones.length, 2);
+  const cBueno = enSecuencia(guionDe(unaFuera));
+  await escribir(planRed, { solicitar: cBueno, cache: SIN_CACHE });
+  assert.equal(cBueno.peticiones.length, 1, 'un guion bueno no paga otra vuelta');
+  const cCaido = conductorGuion(guionDe(unaFuera), false);
+  assert.equal((await (await escribir(planRed, { solicitar: cCaido, cache: SIN_CACHE })).json()).codigo, 'modelo');
+  assert.equal(cCaido.peticiones.length, 1, 'sin respuesta no hay que corregir: no se reintenta');
+  const fuenteGuion = fs.readFileSync(path.join(SRC, 'lib/analisis/guion.ts'), 'utf8');
+  assert.match(fuenteGuion, /const resta = MS_LIMITE_MODELO - \(Date\.now\(\) - inicio\);\s*if \(intento > 0 && resta < MS_MINIMO_REINTENTO\) break;/, 'un solo plazo para las dos vueltas');
 
   assert.doesNotMatch(sisAlerta, /tiene chispa|Un tema grave/, 'el tono ligero y su regla son solo de De Red en Red');
   assert.match(sisAlerta, /Sin morbo/, 'el tono de la nota roja sigue');
@@ -2033,12 +2099,12 @@ async function comprobar() {
   assert.equal(sinAtribuir({ origen: 'redes' }, sola('Hubo un choque.')), false, 'solo en el mixto');
   assert.ok(ATRIBUCION_REDES.test('SE COMPARTE EN REDES'), 'sin importar mayusculas');
   assert.match(fs.readFileSync(path.join(SRC, 'lib/analisis/guion.ts'), 'utf8'),
-    /if \(armados\.some\(\(c\) => sinAtribuir\(plan, c\)\)\) return fallo\("No se pudo preparar el guion\.", "reglas"\);/);
+    /if \(armados\.some\(\(c\) => sinAtribuir\(plan, c\)\)\) \{\s*return \{ ok: false, codigo: "reglas"/);
   const solas = (n) => [...Array(n)].map(() => ({ pase: null })).concat([{ pase: 'Miren.' }]);
   assert.equal(notasSolasDe({ origen: 'mixto' }, solas(2)), 2);
   assert.equal(notasSolasDe({ origen: 'prensa' }, solas(3)), 0, 'en prensa toda pieza es nota leida: no cuenta');
   assert.match(fs.readFileSync(path.join(SRC, 'lib/analisis/guion.ts'), 'utf8'),
-    /if \(notasSolasDe\(plan, armados\) > \(NOTAS_SOLAS_MAXIMO\[plan\.programa\] \?\? Infinity\)\) return fallo\("No se pudo preparar el guion\.", "modelo"\);/,
+    /if \(solas > permitidas\) return \{ ok: false, codigo: "modelo", motivo: `tiene \$\{solas\} titulares solos y el máximo de este guion es \$\{permitidas\}\.` \};/,
     'dos titulares solos en De Red en Red: el guion no sale');
 
   // --- el ritmo: merito por hora al cosecharse -------------------------------

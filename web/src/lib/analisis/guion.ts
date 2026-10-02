@@ -1,5 +1,6 @@
 import { json, SIN_CACHE } from "@/lib/busqueda/respuesta";
 import { nombraAlguno, nombraRubro } from "@/lib/busqueda/tema-publicacion";
+import { plegar } from "@/lib/dominio/formato";
 import { MODELO_GUION } from "./config";
 import { pedirAlModeloGuion } from "./modelo-guion";
 import { nombraExtranjero, nombraMexico } from "@/lib/busqueda/extranjero";
@@ -83,6 +84,9 @@ export interface Plan {
 
 /** Un guion completo son ~2,000 tokens de salida: mas que una ficha. */
 const MS_LIMITE_MODELO = 50000;
+/** Lo minimo que tiene que quedar del plazo para reintentar un guion que no
+ *  paso la revision: un guion tarda de 6 a 17 s. */
+const MS_MINIMO_REINTENTO = 20000;
 
 /**
  * Haiku 4.5 no acepta `effort` (la API lo rechaza) y no piensa si no se le
@@ -318,7 +322,48 @@ export function porGravedad<T>(piezas: readonly T[], titulo: (p: T) => string): 
  */
 export function soloLoGrave<T>(piezas: readonly T[], titulo: (p: T) => string, minimo = MAXIMO_TEMAS.estadodealerta): T[] {
   const graves = piezas.filter((p) => esViolento(titulo(p)));
-  return graves.length >= minimo ? graves : porGravedad(piezas, titulo);
+  // Hechos, no publicaciones (2 de octubre de 2026): cuatro publicaciones del
+  // ataque frente a la primaria son un hecho, y con seis publicaciones
+  // violentas de tres hechos el guion salia de cuatro piezas.
+  return temasEstimados(graves.map(titulo)) >= minimo ? graves : porGravedad(piezas, titulo);
+}
+
+/**
+ * Palabras que no distinguen un tema de otro: lugares del corredor, dias,
+ * relleno, y el vocabulario de cada programa («ataque armado» esta en dos
+ * ataques distintos, «concierto» en dos conciertos).
+ */
+const VACIAS_TEMA = new Set([
+  "tijuana", "mexicali", "ensenada", "tecate", "rosarito", "mexico", "california", "diego", "estados", "unidos",
+  "lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo", "septiembre", "octubre", "noviembre",
+  "sobre", "entre", "hasta", "desde", "donde", "cuando", "porque", "durante", "despues", "frente", "tras", "luego",
+  "video", "videos", "noticias", "noticia", "numero", "presunto", "presuntos", "presunta", "personas", "colonia",
+  "ataque", "armado", "armada", "balacera", "balaceras", "muertos", "muerto", "asesinato", "homicidio", "disparos",
+  "detienen", "hallan", "localizan", "accidente", "choque", "incendio", "concierto", "conciertos", "festival",
+  "famosos", "actor", "actriz", "cantante", "influencer", "presentacion", "partido", "equipo", "torneo",
+  "para", "esta", "este", "estos", "estas", "como", "hace", "anos", "dias", "ante", "cada", "sera", "gran", "nuevo",
+  "nueva", "tiene", "toda", "todo", "todos", "solo", "pero", "deja", "dejo", "vida", "otra", "otro", "aqui", "ahora",
+]);
+
+/**
+ * Cuantos temas distintos hay en una lista de pies, a ojo: dos pies son el
+ * mismo tema si comparten dos palabras de cuatro letras o mas que no esten en
+ * VACIAS_TEMA (cuatro y no cinco: los dos pies de la muerte de Otto Sirgo solo
+ * compartian «otto» y «sirgo»). Es una
+ * estimacion para topes, nunca un filtro: el 2 de octubre de 2026 el guion
+ * salia de cuatro piezas porque las doce publicaciones eran siete temas y el
+ * tope de titulares solos no dejaba completar seis.
+ */
+export function temasEstimados(titulos: readonly string[]): number {
+  const palabras = (t: string) => new Set(
+    plegar(t.replace(/[#@][\p{L}\p{N}_.]+/gu, " ")).split(/[^a-z0-9]+/).filter((w) => w.length >= 4 && !VACIAS_TEMA.has(w)));
+  const grupos: Set<string>[][] = [];
+  for (const t of titulos) {
+    const p = palabras(t);
+    const suyo = grupos.find((g) => g.some((q) => [...p].filter((w) => q.has(w)).length >= 2));
+    if (suyo) suyo.push(p); else grupos.push([p]);
+  }
+  return grupos.length;
 }
 
 /**
@@ -827,10 +872,10 @@ function forma(p: ProgramaGuion, origen: OrigenGuion): string[] {
           "- Se escribe OBLIGATORIAMENTE una pieza por cada tema que se desarrolle, con clip siempre que el tema tenga una publicación.",
         ),
         d(
-          `- Agrupa los videos por tema (una persona, un estreno, un concierto, una polémica) y escribe un clip por tema, hasta ${MAXIMO_TEMAS.deredenred}. Dos videos del mismo tema son un solo clip; elige el que mejor lo cuente.`,
-          `- Agrupa los titulares por tema (una persona, un estreno, un concierto, una polémica) y escribe una nota por tema, hasta ${MAXIMO_TEMAS.deredenred}. Agrupar es ELEGIR, no juntar: de dos titulares del mismo tema tomas UNO, el que mejor lo cuente, y el otro no se menciona.`,
+          `- Agrupa los videos por tema (una persona, un estreno, un concierto, una polémica) y escribe un clip por tema: EXACTAMENTE ${MAXIMO_TEMAS.deredenred}, o menos solo si no hay ${MAXIMO_TEMAS.deredenred} temas distintos. Dos videos del mismo tema son un solo clip; elige el que mejor lo cuente.`,
+          `- Agrupa los titulares por tema (una persona, un estreno, un concierto, una polémica) y escribe una nota por tema: EXACTAMENTE ${MAXIMO_TEMAS.deredenred}, o menos solo si no hay ${MAXIMO_TEMAS.deredenred} temas distintos. Agrupar es ELEGIR, no juntar: de dos titulares del mismo tema tomas UNO, el que mejor lo cuente, y el otro no se menciona.`,
           undefined,
-          `- Agrupa por tema (una persona, un estreno, un concierto, una polémica) y escribe una pieza por tema, hasta ${MAXIMO_TEMAS.deredenred}. Agrupar es ELEGIR, no juntar: de dos publicaciones o dos titulares del mismo tema tomas UNO, el que mejor lo cuente, y el otro no se menciona.`,
+          `- Agrupa por tema (una persona, un estreno, un concierto, una polémica) y escribe una pieza por tema: EXACTAMENTE ${MAXIMO_TEMAS.deredenred}, o menos solo si no hay ${MAXIMO_TEMAS.deredenred} temas distintos. Agrupar es ELEGIR, no juntar: de dos publicaciones o dos titulares del mismo tema tomas UNO, el que mejor lo cuente, y el otro no se menciona.`,
         ),
         "- `eje` es la lista de donde sale la pieza: mexico (México y Baja California) o internacional. Escribe EXACTAMENTE UNA pieza internacional, la más comentada del día entre las internacionales (la de más arriba de su lista que sea de espectáculos y dé un dato concreto), y el resto de México y Baja.",
         // Ese dia, en el primer guion con estas reglas: «Se nos hizo miel la
@@ -864,10 +909,10 @@ function forma(p: ProgramaGuion, origen: OrigenGuion): string[] {
     case "deportes":
       return [
         d(
-          `- Agrupa los videos por tema y escribe hasta ${MAXIMO_TEMAS.deportes} temas, un video por tema, al menos uno por cada eje que tenga candidatos (region, mexico, internacional), con un video de SU lista. Un eje «sin candidatos» no lleva tema: no lo rellenes con otro.`,
-          `- Agrupa los titulares por tema y escribe hasta ${MAXIMO_TEMAS.deportes} temas, un titular por tema, al menos uno por cada eje que tenga candidatos (region, mexico, internacional), con un titular de SU lista. Un eje «sin candidatos» no lleva tema: no lo rellenes con otro.`,
+          `- Agrupa los videos por tema y escribe EXACTAMENTE ${MAXIMO_TEMAS.deportes} temas (menos solo si no hay ${MAXIMO_TEMAS.deportes} distintos), un video por tema, al menos uno por cada eje que tenga candidatos (region, mexico, internacional), con un video de SU lista. Un eje «sin candidatos» no lleva tema: no lo rellenes con otro.`,
+          `- Agrupa los titulares por tema y escribe EXACTAMENTE ${MAXIMO_TEMAS.deportes} temas (menos solo si no hay ${MAXIMO_TEMAS.deportes} distintos), un titular por tema, al menos uno por cada eje que tenga candidatos (region, mexico, internacional), con un titular de SU lista. Un eje «sin candidatos» no lleva tema: no lo rellenes con otro.`,
           undefined,
-          `- Agrupa por tema y escribe hasta ${MAXIMO_TEMAS.deportes} piezas, una por tema, al menos una por cada eje que tenga candidatos (region, mexico, internacional), con una publicación o un titular de SU lista; el titular que acompaña a una publicación sale de los que van debajo de ella. Un eje «sin candidatos» no lleva pieza: no lo rellenes con otro.`,
+          `- Agrupa por tema y escribe EXACTAMENTE ${MAXIMO_TEMAS.deportes} piezas (menos solo si no hay ${MAXIMO_TEMAS.deportes} temas distintos), una por tema, al menos una por cada eje que tenga candidatos (region, mexico, internacional), con una publicación o un titular de SU lista; el titular que acompaña a una publicación sale de los que van debajo de ella. Un eje «sin candidatos» no lleva pieza: no lo rellenes con otro.`,
         ),
         "- `eje` es la lista de donde sale la pieza: region (Baja California y San Diego), mexico o internacional. `tema` nombra el tema en pocas palabras («Los Padres en la postemporada»).",
         "- Agrupar es ELEGIR, no juntar: de dos publicaciones o dos titulares del mismo partido o del mismo tema tomas UNO, el que mejor lo cuente, y el otro no se menciona.",
@@ -886,12 +931,12 @@ function forma(p: ProgramaGuion, origen: OrigenGuion): string[] {
       return [
         "- La apertura puede presentar el programa y a su conductora por su nombre.",
         d(
-          `- Agrupa los videos por asunto y escribe hasta ${MAXIMO_TEMAS.minutapolitica} temas, un video por tema. Agrupar es ELEGIR, no juntar: de dos videos del mismo asunto tomas UNO, el que mejor lo plantee, y el otro no se menciona.`,
+          `- Agrupa los videos por asunto y escribe EXACTAMENTE ${MAXIMO_TEMAS.minutapolitica} temas (menos solo si no hay ${MAXIMO_TEMAS.minutapolitica} asuntos distintos), un video por tema. Agrupar es ELEGIR, no juntar: de dos videos del mismo asunto tomas UNO, el que mejor lo plantee, y el otro no se menciona.`,
           // Medido el 25 de septiembre de 2026: el tema de Juchitan salio de EL
           // PAIS y decia ademas «La Jornada añade...» y «El Financiero recoge...».
-          `- Agrupa los titulares por asunto y escribe hasta ${MAXIMO_TEMAS.minutapolitica} temas, un titular por tema. Agrupar es ELEGIR, no juntar: de dos titulares del mismo asunto tomas UNO, el que mejor lo plantee, y el otro no se menciona. Que otros medios lo cubran no se dice.`,
+          `- Agrupa los titulares por asunto y escribe EXACTAMENTE ${MAXIMO_TEMAS.minutapolitica} temas (menos solo si no hay ${MAXIMO_TEMAS.minutapolitica} asuntos distintos), un titular por tema. Agrupar es ELEGIR, no juntar: de dos titulares del mismo asunto tomas UNO, el que mejor lo plantee, y el otro no se menciona. Que otros medios lo cubran no se dice.`,
           undefined,
-          `- Agrupa por asunto y escribe hasta ${MAXIMO_TEMAS.minutapolitica} temas, una pieza por tema. Agrupar es ELEGIR, no juntar: de dos publicaciones o dos titulares del mismo asunto tomas UNO, el que mejor lo plantee, y el otro no se menciona. Que otros lo cubran no se dice.`,
+          `- Agrupa por asunto y escribe EXACTAMENTE ${MAXIMO_TEMAS.minutapolitica} temas (menos solo si no hay ${MAXIMO_TEMAS.minutapolitica} asuntos distintos), una pieza por tema. Agrupar es ELEGIR, no juntar: de dos publicaciones o dos titulares del mismo asunto tomas UNO, el que mejor lo plantee, y el otro no se menciona. Que otros lo cubran no se dice.`,
         ),
         d(
           "- Recibes los candidatos de cada eje: `local` (Baja California y el corredor Tijuana-San Diego) y `nacional` (México). Cada tema lleva el `eje` de cuya lista sale su video. Escribe al menos un tema de cada eje que tenga candidatos; un eje «sin videos» no lleva tema.",
@@ -918,10 +963,10 @@ function forma(p: ProgramaGuion, origen: OrigenGuion): string[] {
       return [
         "- Es de noche: la apertura puede saludar con «buenas noches» y decir «esta noche», y presentar el programa y a su conductora por su nombre. El nombre del programa lleva «Alerta» y puedes decirlo; fuera del nombre, la regla contra «alerta» sigue.",
         d(
-          `- Escribe un clip por hecho, hasta ${MAXIMO_TEMAS.estadodealerta}. Dos videos del mismo hecho son un solo clip; elige el que mejor lo cuente.`,
-          `- Escribe una nota por hecho, hasta ${MAXIMO_TEMAS.estadodealerta}. Agrupar es ELEGIR, no juntar: de dos titulares del mismo hecho tomas UNO, el que mejor lo cuente, y el otro no se menciona.`,
+          `- Escribe un clip por hecho: EXACTAMENTE ${MAXIMO_TEMAS.estadodealerta}, o menos solo si no hay ${MAXIMO_TEMAS.estadodealerta} hechos distintos. Dos videos del mismo hecho son un solo clip; elige el que mejor lo cuente.`,
+          `- Escribe una nota por hecho: EXACTAMENTE ${MAXIMO_TEMAS.estadodealerta}, o menos solo si no hay ${MAXIMO_TEMAS.estadodealerta} hechos distintos. Agrupar es ELEGIR, no juntar: de dos titulares del mismo hecho tomas UNO, el que mejor lo cuente, y el otro no se menciona.`,
           undefined,
-          `- Escribe una pieza por hecho, hasta ${MAXIMO_TEMAS.estadodealerta}. Agrupar es ELEGIR, no juntar: de dos publicaciones o dos titulares del mismo hecho tomas UNO, el que mejor lo cuente, y el otro no se menciona. Un titular solo tiene que ser de los que pueden ir solos.`,
+          `- Escribe una pieza por hecho: EXACTAMENTE ${MAXIMO_TEMAS.estadodealerta}, o menos solo si no hay ${MAXIMO_TEMAS.estadodealerta} hechos distintos. Agrupar es ELEGIR, no juntar: de dos publicaciones o dos titulares del mismo hecho tomas UNO, el que mejor lo cuente, y el otro no se menciona. Un titular solo tiene que ser de los que pueden ir solos.`,
         ),
         // 30 de septiembre de 2026 (cliente): «more news that are actually
         // violent and shocking». Ese dia el guion llevaba «montachoques», una
@@ -953,6 +998,8 @@ function forma(p: ProgramaGuion, origen: OrigenGuion): string[] {
  */
 function redesAlCentro(p: "deredenred" | "estadodealerta" | "deportes"): string[] {
   const que = p === "estadodealerta" ? "hecho" : "tema";
+  const n = MAXIMO_TEMAS[p];
+  const permitidos = "como máximo los que dice «Titulares solos permitidos» al final de tus listas";
   return [
     `- Este programa es de lo que circula en redes: cada pieza sale de una publicación, con su titular si cuenta EL MISMO HECHO, o sola si ninguno lo cuenta. Esto manda sobre la preferencia general de arriba: aquí una publicación sola va antes que un titular solo.`,
     // Medido en la primera corrida de De Red en Red, el mismo dia: la apertura
@@ -964,13 +1011,17 @@ function redesAlCentro(p: "deredenred" | "estadodealerta" | "deportes"): string[
       // cuatro publicaciones deportivas de la region, tres de Mexico y
       // ninguna internacional. Un titular solo por eje, donde ninguna
       // publicacion sirva, para que un eje sin clips no quede fuera.
-      ? `- Un titular solo (\`video\`: 0), a lo más UNO POR EJE, y solo en un eje donde ninguna publicación de su lista sirva. El segmento tiene como máximo ${MAXIMO_TEMAS[p]} piezas EN TOTAL, contando esos titulares.`
+      ? `- Titulares solos (\`video\`: 0): ${permitidos}, solo para un tema que ninguna publicación cuente, y primero en los ejes donde ninguna publicación de su lista sirva.`
       : p === "deredenred"
       // La internacional casi nunca tiene clip: las cuentas de fuera
       // publican mundo, no farandula. Puede ser titular solo, y el tope
       // (NOTAS_SOLAS_MAXIMO 2) cuenta los dos.
-      ? `- Un titular solo (\`video\`: 0): a lo más UNO de México y Baja, al final de las de su eje, y solo si es de lo más notable del día y ninguna publicación cuenta ese tema; la pieza internacional puede ser un titular solo si ninguna publicación internacional sirve. El segmento tiene como máximo ${MAXIMO_TEMAS[p]} piezas EN TOTAL, contando esos titulares.`
-      : `- Un titular solo (\`video\`: 0), a lo más UNO en todo el segmento, y solo si es de lo más notable del día y ninguna publicación de la lista cuenta ese ${que}. Va al final, después de las publicaciones. El segmento tiene como máximo ${MAXIMO_TEMAS[p]} piezas EN TOTAL, contando ese titular.`,
+      ? `- Titulares solos (\`video\`: 0): ${permitidos}, solo para un tema que ninguna publicación cuente, al final de las piezas de su eje; la pieza internacional puede ser un titular solo si ninguna publicación internacional sirve.`
+      : `- Titulares solos (\`video\`: 0): ${permitidos}, solo para un ${que} que ninguna publicación cuente, y van al final, después de las publicaciones.`,
+    // 2 de octubre de 2026 (cliente: «they need to be six unless stated
+    // otherwise»). Con «como máximo 6» el modelo cerraba en cuatro teniendo
+    // diez publicaciones y veintisiete titulares en la lista.
+    `- El segmento lleva EXACTAMENTE ${n} piezas EN TOTAL, contando los titulares solos. Si las publicaciones no dan para ${n} ${que}s distintos, complétalo con titulares de los que pueden ir solos; menos de ${n} solo si ni así alcanzan.`,
     // Las dos primeras corridas de De Red en Red: «Circula en redes que»
     // abria cinco de seis entradas.
     "- «Circula en redes que» va una vez en el segmento como mucho. Varía la atribución («En redes se comparte que», «Anda circulando que», «Nos llega de redes que», «En un video que circula»), sin quitarla.",
@@ -1081,7 +1132,9 @@ function pedidoMixto(plan: Plan): string {
       const ts = nombres(solos[e.id], t);
       return `- ${e.modelo}: ${ps === "" && ts === "" ? "sin candidatos" : `publicaciones ${ps || "ninguna"}; titulares ${ts || "ninguno"}`}`;
     }).join("\n");
-  return `${cabeza}\n${publicaciones}\n\nTitulares:\n${lineas}\n\n${pie}`;
+  const permitidas = notasSolasPermitidas(plan);
+  const tope = Number.isFinite(permitidas) ? `\n\nTitulares solos permitidos: ${permitidas}` : "";
+  return `${cabeza}\n${publicaciones}\n\nTitulares:\n${lineas}\n\n${pie}${tope}`;
 }
 
 /** Lo que el modelo lee: la lista numerada y, si el programa tiene ejes, los
@@ -1386,6 +1439,21 @@ export function notasSolasDe(plan: Pick<Plan, "origen">, clips: readonly ClipGui
   return plan.origen === "mixto" ? clips.filter((c) => c.pase === null).length : 0;
 }
 
+/**
+ * Cuantos titulares solos se le permiten a ESTE guion: el tope del programa,
+ * o lo que falte para completar MAXIMO_TEMAS si las publicaciones no dan para
+ * tantos temas distintos (temasEstimados). El 2 de octubre de 2026 (cliente:
+ * «it's generating 4 clips/articles sometimes… they need to be six unless
+ * stated otherwise») el tope fijo era la otra mitad del problema: con siete
+ * temas en doce publicaciones y uno o dos titulares solos, seis no cabia. Las
+ * publicaciones siguen primero; el numero va en lo que lee el modelo.
+ */
+export function notasSolasPermitidas(plan: Pick<Plan, "origen" | "programa" | "lista">): number {
+  const base = NOTAS_SOLAS_MAXIMO[plan.programa];
+  if (base === undefined || plan.origen !== "mixto" || plan.programa === "noticias33") return Infinity;
+  return Math.max(base, MAXIMO_TEMAS[plan.programa] - temasEstimados(plan.lista.map((v) => v.titulo)));
+}
+
 const PARTES_COMUNES = new Set([
   "noticias", "noticia", "news", "oficial", "informa", "informativo", "diario", "canal", "radio",
   "tijuana", "mexicali", "ensenada", "tecate", "rosarito", "sandiego", "mexico", "mundo", "baja", "california",
@@ -1553,53 +1621,96 @@ export async function escribirGuion(plan: Plan, opciones: {
   cache: string;
 }): Promise<Response> {
   const modelo = opciones.modelo ?? MODELO_GUION;
-  // Una negativa del modelo se reintenta en el de respaldo (modelo-guion.ts);
-  // si se niegan los dos, es un fallo como cualquier otro.
-  const respuesta = await pedirAlModeloGuion(opciones.solicitar, {
+  const inicio = Date.now();
+  const base = {
     max_tokens: sinEsfuerzo(modelo) ? 4000 : 12000,
     system: sistemaDe(plan.programa, plan.origen),
     output_config: {
       format: { type: "json_schema", schema: esquemaDe(plan.programa, plan.origen) },
       ...(sinEsfuerzo(modelo) ? {} : { effort: "low" }),
     },
-    messages: [{ role: "user", content: pedidoDe(plan) }],
-  }, { modelo, limiteMs: MS_LIMITE_MODELO });
-  if (!respuesta.ok) return fallo("No se pudo preparar el guion.", "modelo");
+  };
+  const pedido = { role: "user", content: pedidoDe(plan) };
+  let mensajes: { role: string; content: string }[] = [pedido];
+  let revision: Revision | null = null;
+  for (let intento = 0; intento < 2; intento++) {
+    // Un solo plazo para las dos vueltas: el reintento usa lo que quede y no
+    // se intenta si queda poco, asi que la ruta no tarda mas que antes.
+    const resta = MS_LIMITE_MODELO - (Date.now() - inicio);
+    if (intento > 0 && resta < MS_MINIMO_REINTENTO) break;
+    // Una negativa del modelo se reintenta en el de respaldo (modelo-guion.ts);
+    // si se niegan los dos, es un fallo como cualquier otro, sin otra vuelta.
+    const respuesta = await pedirAlModeloGuion(opciones.solicitar, { ...base, messages: mensajes }, { modelo, limiteMs: resta });
+    if (!respuesta.ok) break;
+    const crudo = respuesta.bloques.filter((b) => b.type === "text").map((b) => b.text ?? "").join("");
+    revision = revisar(plan, crudo);
+    if (revision.ok) return json(revision.guion, 200, opciones.cache);
+    mensajes = [pedido, { role: "assistant", content: crudo },
+      { role: "user", content: `Ese guion no se puede usar: ${revision.motivo} Escríbelo completo otra vez, con las mismas listas y las mismas reglas, corrigiendo eso.` }];
+  }
+  return fallo("No se pudo preparar el guion.", revision === null || revision.ok ? "modelo" : revision.codigo);
+}
 
-  const bloques = respuesta.bloques;
-  const crudo = bloques.filter((b) => b.type === "text").map((b) => b.text ?? "").join("");
+/**
+ * Lo que dice una revision que no paso: el codigo de la respuesta y, para el
+ * reintento, que se le dice al modelo.
+ */
+type Revision = { ok: true; guion: Guion } | { ok: false; codigo: "modelo" | "reglas"; motivo: string };
+
+/**
+ * Lo que el codigo exige a un guion que el modelo SI escribio, en orden. Cada
+ * fallo dice su motivo, porque desde el 2 de octubre de 2026 (cliente: «sure,
+ * add it») se le devuelve al modelo una vez: con «exactamente seis», una de
+ * cuatro corridas de Deportes salio con un titular solo de mas, y el guion
+ * entero era una llamada pagada sin guion.
+ */
+function revisar(plan: Plan, crudo: string): Revision {
   const leida = leerSalida(crudo, plan.programa, plan.origen);
-  if (leida === null || leida.clips.length === 0) return fallo("No se pudo preparar el guion.", "modelo");
+  if (leida === null || leida.clips.length === 0) return { ok: false, codigo: "modelo", motivo: "La respuesta no traía piezas que se pudieran leer." };
   const clips = leida.clips;
 
   // Las reglas sobre TODO lo que escribio, antes de tirar lo que no cumple:
   // un modelo que dijo «la mayoria» en un clip descartado ya no es de fiar en
   // los otros, y esto se dice al aire.
   const roto = reglaRota([leida.apertura, leida.cierre, ...clips.flatMap((c) => [c.tema, c.titular, c.entrada, c.pase, c.salida, c.pregunta])]);
-  if (roto !== null) return fallo("No se pudo preparar el guion.", "reglas");
+  if (roto !== null) {
+    return { ok: false, codigo: "reglas", motivo: `rompe la regla «${roto}»: ningún porcentaje, fracción ni proporción, y nada atribuido a «la mayoría», «la gente», «la ciudadanía» ni parecidos.` };
+  }
 
   const limpia = sinRelleno(leida);
-  if (limpia === null) return fallo("No se pudo preparar el guion.", "modelo");
+  if (limpia === null) return { ok: false, codigo: "modelo", motivo: "una pieza solo decía algo sobre la fuente o sobre lo que no se informó, y quedó vacía." };
   const resolver = resolverDe(plan);
   const porEje = urlsPorEje(plan);
   const armados = plan.programa === "noticias33"
     ? porEje === null ? null : armarNoticias33(limpia.clips, resolver, porEje)
     : armarPorTemas(plan.programa, limpia.clips, resolver, porEje, plan.origen === "mixto");
-  if (armados === null) return fallo("No se pudo preparar el guion.", "modelo");
-  if (notasSolasDe(plan, armados) > (NOTAS_SOLAS_MAXIMO[plan.programa] ?? Infinity)) return fallo("No se pudo preparar el guion.", "modelo");
-  if (guionFalsea(armados, [...plan.lista, ...(plan.titulares ?? [])], plan.origen)) return fallo("No se pudo preparar el guion.", "reglas");
-  if (armados.some((c) => sinAtribuir(plan, c))) return fallo("No se pudo preparar el guion.", "reglas");
+  if (armados === null) {
+    return { ok: false, codigo: "modelo", motivo: plan.programa === "noticias33"
+      ? "falta la pieza de un eje que tenía candidatos, una pieza usa algo que no está en la lista de su eje, o la libre repite."
+      : "una pieza usa un titular que no estaba debajo de su publicación o algo que no está en la lista de su eje, repite una publicación o un titular, sobran piezas, o hay más piezas de un eje de las permitidas." };
+  }
+  const solas = notasSolasDe(plan, armados);
+  const permitidas = notasSolasPermitidas(plan);
+  if (solas > permitidas) return { ok: false, codigo: "modelo", motivo: `tiene ${solas} titulares solos y el máximo de este guion es ${permitidas}.` };
+  if (guionFalsea(armados, [...plan.lista, ...(plan.titulares ?? [])], plan.origen)) {
+    return { ok: false, codigo: "reglas", motivo: "una pieza dice «mañanera» o «conferencia» sin que su pie o su titular lo diga, junta dos piezas en una, o nombra la cuenta de otra publicación." };
+  }
+  if (armados.some((c) => sinAtribuir(plan, c))) {
+    return { ok: false, codigo: "reglas", motivo: "una publicación sola no dice en su entrada que viene de redes («circula en redes», «se comparte un video»…)." };
+  }
 
-  const guion: Guion = {
-    origen: plan.origen,
-    programa: plan.programa,
-    apertura: limpia.apertura,
-    clips: armados,
-    cierre: limpia.cierre,
-    faltantes: plan.faltantes,
-    sinLeer: plan.sinLeer,
-    leidos: plan.lista.length + (plan.titulares?.length ?? 0),
-    ...(plan.hasta === undefined ? {} : { hasta: plan.hasta }),
+  return {
+    ok: true,
+    guion: {
+      origen: plan.origen,
+      programa: plan.programa,
+      apertura: limpia.apertura,
+      clips: armados,
+      cierre: limpia.cierre,
+      faltantes: plan.faltantes,
+      sinLeer: plan.sinLeer,
+      leidos: plan.lista.length + (plan.titulares?.length ?? 0),
+      ...(plan.hasta === undefined ? {} : { hasta: plan.hasta }),
+    },
   };
-  return json(guion, 200, opciones.cache);
 }

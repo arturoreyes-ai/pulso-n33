@@ -1852,6 +1852,33 @@ already refused on the record in `docs/PLAN.md` §3.
     one only if it does not fit. Noticias 33's libre breaks ties by the
     lowest P number. In those two a headline alone still beats a post
     alone (`redesAlCentro` is only for the other three).
+  - **Six means six** (2 October 2026, client: «it's generating 4
+    clips/articles sometimes… they need to be six unless stated
+    otherwise»). That day De Red en Red's lists held ten posts and 27
+    headlines and the script stopped at four: the prompt said «hasta 6»,
+    and the fixed cap on stand-alone headlines (one or two) could not
+    fill what the posts lacked once duplicates collapsed (four posts of
+    one attack are one event). Now every programme by topic writes
+    EXACTLY `MAXIMO_TEMAS` (6, Minuta 4), fewer only if the lists do not
+    hold that many distinct topics. In the mixed guion the stand-alone
+    cap is per script, `guion.ts::notasSolasPermitidas`: the programme's
+    base, or what is missing to reach six after `temasEstimados` (two
+    captions are one topic if they share two words of 4+ letters outside
+    `VACIAS_TEMA`), and the number rides in what the model reads
+    («Titulares solos permitidos: K») so prompt and check agree.
+    `soloLoGrave` counts violent events the same way, not posts. Posts
+    still come first. Measured that day: De Red en Red 6, Estado de
+    Alerta 6, Deportes 6 in three of four runs; the fourth broke a check
+    and answered `modelo`. **So a script that fails the code's review
+    goes back to the model once** (same day, client): `guion.ts::revisar`
+    runs every check and returns its `motivo`, and `escribirGuion` sends
+    the same request plus the model's own answer and «Ese guion no se
+    puede usar: <motivo>…». One shared `MS_LIMITE_MODELO` for both turns,
+    no retry with under `MS_MINIMO_REINTENTO` (20 s) left, none when the
+    call itself failed or was refused (that has its own fallback), and a
+    second failure answers the code it always did. It costs a call only
+    when a script fails. Three more Deportes runs that day: 6, 6, 6, no
+    retry needed.
   - **The apertura follows the pieces** (same day). The schema now lists
     `clips` before `apertura`, and structured output is generated in schema
     order, so the apertura is written last, over pieces that already exist;
