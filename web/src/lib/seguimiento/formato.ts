@@ -35,7 +35,8 @@ export function metricasDe(p: Pick<PublicacionSeguida, "red" | "tipo">): { clave
 }
 
 /** Como se llaman los likes en cada red: Facebook cuenta reacciones. */
-export function nombreLikes(red: PublicacionSeguida["red"]): [string, string] {
+/** Tambien lo usa /redes (paneles/comentarios-publicacion.tsx), por eso `string`. */
+export function nombreLikes(red: string): [string, string] {
   return red === "facebook" ? ["reacción", "reacciones"] : ["like", "likes"];
 }
 

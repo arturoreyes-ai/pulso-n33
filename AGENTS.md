@@ -2311,10 +2311,23 @@ Tailwind v4, pnpm.
   to an embed reading 3,944. That is not rule 4 breaking (it forbids *filling* a
   gap with a zero, not showing a figure), but it did supersede a written
   `docs/PLAN.md` note, so it has one of its own. The pipeline still ingests and
-  archives every one of those fields. In their place the chip row carries
+  archives every one of those fields. **Per-comment likes came back on 1
+  October 2026** (client), and only those: no embed shows a comment's likes,
+  so there is no live twin to contradict. The order was already most-voted
+  first (every list in the three text files, measured that day); what was
+  missing was seeing why. A heart and the count in a left column, the same
+  `ui/likes-comentario.tsx` as /seguimiento, never painted at 0 (the actors
+  return 0 when they bring no field; Facebook carries likes on 17% of
+  comments, TikTok on 87%). In their place the chip row carries
   **Analizar** (`paneles/analisis-publicacion.tsx`), whose sheet is hoisted to
   `Recorrido` beside the comments one — a `<dialog>` per card would be 98 of
-  them. **A second tab row, Tema, sits under the platforms** since 24 September 2026
+  them. **«Compartir» is one component, `ui/compartir.tsx`**, on the portada
+  cards and the Redes cards since 1 October 2026: copy link, WhatsApp, X,
+  Facebook, mail, in a panel mounted only while open (so not a dialog per
+  card) and measured on open to grow from the button toward the side with
+  room. It replaced the portada's `navigator.share` button at the client's
+  request: the system sheet differed per machine and on desktop only
+  copied, with no choice. Icon-only below `md` on Redes, where the band's height is counted. **A second tab row, Tema, sits under the platforms** since 24 September 2026
   (client): Todo plus the eight rubros of En Tendencia, hidden on X, state in
   module memory like the order. There a rubro is a live search; here it keeps
   the harvested posts whose **title** names one of the rubro's terms

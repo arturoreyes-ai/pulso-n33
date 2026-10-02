@@ -1187,17 +1187,63 @@ main:has(.lector) > .barra-inferior { display: block; }
   .acciones-ahora { gap: 0.5rem; }
   .acciones-ahora > a:first-child { flex-basis: 100%; }
   .acciones-ahora > button { flex: 1 1 auto; }
+  /* Compartir va envuelto (su panel se ancla al envoltorio): el envoltorio
+     crece como los demas botones y el boton lo llena. */
+  .acciones-ahora > .compartir { flex: 1 1 auto; }
+  .acciones-ahora > .compartir > button { width: 100%; }
   .acciones-ahora > p {
     flex-basis: 100%;
     margin-left: 0;
     text-align: right;
   }
 }
-.aviso-compartir {
+/* «Compartir» (ui/compartir.tsx): el panel crece DESDE el boton, hacia
+   arriba o hacia abajo segun quepa. Entra en
+   --dur-toque y sale sin transicion: se desmonta, y salir rapido es lo que
+   se espera de algo que uno acaba de usar. Con movimiento reducido el bloque
+   global deja solo el cambio, sin el recorrido de escala. */
+.compartir { position: relative; }
+.panel-compartir {
   position: absolute;
-  inset-inline-start: 0;
-  top: calc(100% + 0.5rem);
+  z-index: var(--z-elevado);
+  width: 15rem;
+  max-width: calc(100vw - 2rem);
+  display: grid;
+  gap: 0.125rem;
+  padding: 0.375rem;
+  border: 1px solid var(--color-filo);
+  border-radius: 1rem;
+  background: var(--color-carta);
+  box-shadow: var(--shadow-bisel), 0 12px 32px rgb(0 0 0 / 0.5);
+  transition: opacity var(--dur-toque) var(--ease-out), scale var(--dur-toque) var(--ease-out), translate var(--dur-toque) var(--ease-out);
+  @starting-style {
+    opacity: 0;
+    scale: 0.96;
+    translate: 0 4px;
+  }
 }
+/* El lado lo pone el componente en linea (`left` y `transform-origin`):
+   depende de donde cayo el boton, que solo se sabe al abrir. */
+.panel-compartir[data-hacia="arriba"] { bottom: calc(100% + 0.5rem); }
+.panel-compartir[data-hacia="abajo"] { top: calc(100% + 0.5rem); }
+.panel-compartir[data-hacia="abajo"] {
+  @starting-style { translate: 0 -4px; }
+}
+.opcion-compartir {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 0.75rem;
+  border-radius: 0.625rem;
+  color: var(--color-tinta-prosa);
+  transition: color var(--dur-toque) var(--ease-out), background-color var(--dur-toque) var(--ease-out), scale var(--dur-toque) var(--ease-out);
+}
+.opcion-compartir:active { scale: 0.97; }
+@media (hover: hover) and (pointer: fine) {
+  .opcion-compartir:hover { background: var(--color-vela); color: var(--color-tinta-titulo); }
+}
+.filo-compartir { height: 1px; margin: 0.25rem 0.5rem; background: var(--color-vela); }
 .control-lector {
   display: inline-flex;
   flex: none;

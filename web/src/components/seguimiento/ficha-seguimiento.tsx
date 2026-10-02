@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowClockwise as Actualizar, ArrowDown as Bajar, ArrowLeft as Volver, ArrowSquareOut as Abrir, Heart as Corazon, Sparkle as IA, Trash as Papelera, X as Cerrar } from "@phosphor-icons/react";
+import { ArrowClockwise as Actualizar, ArrowDown as Bajar, ArrowLeft as Volver, ArrowSquareOut as Abrir, Sparkle as IA, Trash as Papelera, X as Cerrar } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
@@ -13,6 +13,7 @@ import { CifraTono } from "@/components/ui/cifra-tono";
 import { clasesBoton, clasesInsignia } from "@/components/ui/clases";
 import { EstadoCarga } from "@/components/ui/estado-carga";
 import { Hoja } from "@/components/ui/hoja";
+import { CON_COLUMNA_LIKES as CON_COLUMNA, LikesComentario as Likes } from "@/components/ui/likes-comentario";
 import { Chip, Hueco } from "@/components/ui/primitivas";
 import { Segmentado } from "@/components/ui/segmentado";
 import { TiraTono } from "@/components/ui/tira-tono";
@@ -163,34 +164,10 @@ function Lectura({ a, previa, p }: { a: Actualizacion; previa: Actualizacion | u
   );
 }
 
-/**
- * Los likes de un comentario, en la columna de la izquierda: cuando la lista
- * abre por los mas votados, el orden se lee de un vistazo, como en un foro.
- * En /redes los likes por comentario se quitaron el 17 de septiembre de 2026
- * porque el embed de al lado los muestra en vivo; aqui el cliente los pidio el
- * 29 (cada cifra es de la ultima lectura que trajo el comentario). Un 0 no se
- * pinta: los actores devuelven 0 tambien cuando no traen el campo, y pintarlo
- * diria «nadie» donde puede ser «no se sabe».
- */
-function Likes({ n, likes: [uno, varios] }: { n: number; likes: [string, string] }) {
-  if (n <= 0) return <span aria-hidden />;
-  return (
-    <span className="inline-flex items-center gap-1 tabular-nums text-tinta-dato">
-      <Corazon size={12} weight="fill" aria-hidden className="shrink-0 text-tinta-meta" />
-      {numero(n)}
-      <span className="sr-only"> {pluralizar(n, uno, varios)}</span>
-    </span>
-  );
-}
-
-/** La rejilla de un comentario con su columna de likes. Solo cuando alguno
- *  los trae: sin ninguno, la columna seria un margen vacio. */
-const CON_COLUMNA = "grid grid-cols-[2.75rem_minmax(0,1fr)] items-baseline gap-x-3 sm:grid-cols-[3.5rem_minmax(0,1fr)] sm:gap-x-4";
-
 function Comentario({ c, likes, columna }: { c: ComentarioSeguido; likes: [string, string]; columna: boolean }) {
   return (
     <li className={`py-4 first:pt-0 ${columna ? CON_COLUMNA : ""}`}>
-      {columna ? <p className="text-cuerpo"><Likes n={c.likes} likes={likes} /></p> : null}
+      {columna ? <p className="text-cuerpo"><Likes n={c.likes} nombre={likes} /></p> : null}
       <div className="min-w-0">
         <blockquote className="max-w-[65ch] break-words text-lectura text-tinta-dato">{c.texto}</blockquote>
         <p className="mt-2 flex flex-wrap items-center gap-2 text-meta text-tinta-meta">
@@ -324,7 +301,7 @@ function TemaAbierto({ tema, datos, alVerTodos }: { tema: TemaComentarios; datos
       <ul className="grid gap-3">
         {suyos.slice(0, ASOMAN_POR_TEMA).map((c) => (
           <li key={c.huella} className={columna ? CON_COLUMNA : ""}>
-            {columna ? <p className="text-cuerpo"><Likes n={c.likes} likes={likes} /></p> : null}
+            {columna ? <p className="text-cuerpo"><Likes n={c.likes} nombre={likes} /></p> : null}
             <blockquote className="line-clamp-3 max-w-[60ch] break-words text-cuerpo text-tinta-prosa">{c.texto}</blockquote>
           </li>
         ))}

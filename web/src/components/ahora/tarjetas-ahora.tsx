@@ -1,10 +1,11 @@
 "use client";
 
-import { ShareNetwork as IconoCompartir, TrendUp as Tendencia } from "@phosphor-icons/react";
-import { useEffect, useState } from "react";
+import { TrendUp as Tendencia } from "@phosphor-icons/react";
+import { useState } from "react";
 
 import { BotonRelacionadas } from "@/components/paneles/relacionadas-titular";
 import { clasesBoton, clasesInsignia } from "@/components/ui/clases";
+import { Compartir } from "@/components/ui/compartir";
 import type { ReferenciaAnalisis } from "@/lib/busqueda/enlaces";
 import type { Tarjeta } from "@/lib/busqueda/capitulos";
 import { fechaCorta, hora } from "@/lib/dominio/formato";
@@ -153,43 +154,6 @@ export function TarjetaTitular({ t, titulares, indice, imagen = null, analisis =
         <p className="ml-auto text-meta tabular-nums text-tinta-meta">{t.orden} de {titulares}</p>
       </div>
     </article>
-  );
-}
-
-/** Compartir con la hoja del sistema donde exista; si no, copiar el enlace.
- *  `navigator` solo se toca en el manejador: el servidor pinta lo mismo. */
-function Compartir({ titulo, url }: { titulo: string; url: string }) {
-  const [aviso, setAviso] = useState("");
-  // El aviso se borra solo: si se quedaba, copiar otra vez escribia el mismo
-  // texto y la region viva no lo volvia a anunciar.
-  useEffect(() => {
-    if (aviso === "") return;
-    const t = window.setTimeout(() => setAviso(""), 4000);
-    return () => window.clearTimeout(t);
-  }, [aviso]);
-  async function compartir() {
-    try {
-      if (typeof navigator.share === "function") {
-        await navigator.share({ title: titulo, url });
-        setAviso("");
-      } else {
-        await navigator.clipboard.writeText(url);
-        setAviso("Enlace copiado.");
-      }
-    } catch (error) {
-      // Cerrar la hoja sin elegir no es un fallo.
-      if (error instanceof DOMException && error.name === "AbortError") return;
-      setAviso("No se pudo compartir.");
-    }
-  }
-  return (
-    <>
-      <button type="button" className={clasesBoton(false)} onClick={compartir}>
-        <IconoCompartir size={16} aria-hidden />
-        Compartir
-      </button>
-      <span role="status" className="aviso-compartir text-meta text-tinta-meta">{aviso}</span>
-    </>
   );
 }
 

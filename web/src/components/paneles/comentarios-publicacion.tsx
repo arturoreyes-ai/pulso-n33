@@ -8,6 +8,8 @@ import { NOMBRE_RED, type PublicacionVisual } from "@/lib/dominio/publicaciones"
 import { EstadoCarga } from "@/components/ui/estado-carga";
 import { ChipSentimiento } from "@/components/ui/chip-sentimiento";
 import { clasesInsignia } from "@/components/ui/clases";
+import { CON_COLUMNA_LIKES, LikesComentario } from "@/components/ui/likes-comentario";
+import { nombreLikes } from "@/lib/seguimiento/formato";
 
 /**
  * Los comentarios mas votados de una publicacion: la hoja «Comentarios» del
@@ -36,22 +38,35 @@ export interface Textos {
 
 const SIN_TEXTO = "El texto de los comentarios no está disponible en esta vista.";
 
-/* Los likes de cada comentario se fueron el 17 de septiembre de 2026 con las
-   cifras de la tarjeta (visor-redes.tsx). Siguen decidiendo el ORDEN -- estos
-   son los mas votados, y el pipeline ya descarto los que no tienen likes
-   despues de los visibles --, pero dejan de pintarse. */
-function Comentario({ c, recortar = false }: { c: ComentarioPublicado; recortar?: boolean }) {
+/* LOS LIKES DE CADA COMENTARIO VOLVIERON el 1 de octubre de 2026, a pedido
+   del cliente («mostrar los comentarios con mas likes»). Se habian ido el 17
+   de septiembre con las cifras de la tarjeta (visor-redes.tsx), y esas siguen
+   fuera: alli el embed de al lado mostraba la misma cifra en vivo y la nuestra
+   era la vieja. Un comentario no tiene ese doble: ningun embed muestra sus
+   likes. El orden no cambio -- el pipeline ya los publica de mas a menos
+   votado, medido sobre los 132 posts de ese dia --; lo que faltaba era ver
+   por que van en ese orden. Misma forma que /seguimiento
+   (ui/likes-comentario.tsx). */
+function Comentario({ c, recortar = false, columna, nombre }: {
+  c: ComentarioPublicado; recortar?: boolean; columna: boolean; nombre: readonly [string, string];
+}) {
   return (
-    <li>
-      <blockquote className={`max-w-[65ch] text-cuerpo text-tinta-dato ${recortar ? "line-clamp-2" : ""}`}>{c.texto}</blockquote>
-      {c.sentimiento === null ? null : (
-        <p className="mt-1 flex items-center gap-2 text-meta text-tinta-meta">
-          <ChipSentimiento s={c.sentimiento} />
-        </p>
-      )}
+    <li className={columna ? CON_COLUMNA_LIKES : ""}>
+      {columna ? <p className="text-cuerpo"><LikesComentario n={c.likes} nombre={nombre} /></p> : null}
+      <div className="min-w-0">
+        <blockquote className={`max-w-[65ch] break-words text-cuerpo text-tinta-dato ${recortar ? "line-clamp-2" : ""}`}>{c.texto}</blockquote>
+        {c.sentimiento === null ? null : (
+          <p className="mt-1 flex items-center gap-2 text-meta text-tinta-meta">
+            <ChipSentimiento s={c.sentimiento} />
+          </p>
+        )}
+      </div>
     </li>
   );
 }
+
+/** La columna de likes solo si alguno de la lista los trae. */
+const conLikes = (comentarios: readonly ComentarioPublicado[]) => comentarios.some((c) => c.likes > 0);
 
 function comentariosConClave(comentarios: readonly ComentarioPublicado[]) {
   const repetidos = new Map<string, number>();
@@ -65,16 +80,18 @@ function comentariosConClave(comentarios: readonly ComentarioPublicado[]) {
 
 /** Lo que la columna de escritorio deja ver sin abrir la hoja: los dos
  *  primeros, recortados a dos lineas. Sin texto, nada: la hoja lo explica. */
-export function VistaPreviaComentarios({ comentarios }: { comentarios: ComentarioPublicado[] | undefined }) {
+export function VistaPreviaComentarios({ comentarios, red }: { comentarios: ComentarioPublicado[] | undefined; red: string }) {
   if (comentarios === undefined || comentarios.length === 0) return null;
+  const dos = comentarios.slice(0, 2);
+  const columna = conLikes(dos);
   return (
     <ul className="space-y-3 border-l border-filo pl-4">
-      {comentariosConClave(comentarios.slice(0, 2)).map(({ c, clave }) => <Comentario key={clave} c={c} recortar />)}
+      {comentariosConClave(dos).map(({ c, clave }) => <Comentario key={clave} c={c} recortar columna={columna} nombre={nombreLikes(red)} />)}
     </ul>
   );
 }
 
-function CuerpoComentarios({ d, textos }: { d: PublicacionVisual["post"]; textos: Textos }) {
+function CuerpoComentarios({ d, red, textos }: { d: PublicacionVisual["post"]; red: string; textos: Textos }) {
   const [abierto, setAbierto] = useState(false);
   const lista = textos.data?.por_post[d.url];
   const visibles = textos.data?.visibles ?? 5;
@@ -87,10 +104,14 @@ function CuerpoComentarios({ d, textos }: { d: PublicacionVisual["post"]; textos
     return d.cosechados === 0 ? null : <p className="mt-6 text-cuerpo text-tinta-meta">No hay comentarios que mostrar en este post.</p>;
   }
 
+  // Sobre la lista entera y no sobre lo mostrado: «ver mas» no debe mover el
+  // texto de lugar al aparecer la columna.
+  const columna = conLikes(lista);
   return (
     <div className="mt-6 border-l border-filo pl-4">
+      {columna ? <p className="mb-4 text-meta text-tinta-meta">Los más votados primero</p> : null}
       <ul className="space-y-4">
-        {comentariosConClave(mostrados).map(({ c, clave }) => <Comentario key={clave} c={c} />)}
+        {comentariosConClave(mostrados).map(({ c, clave }) => <Comentario key={clave} c={c} columna={columna} nombre={nombreLikes(red)} />)}
       </ul>
       {ocultos > 0 ? (
         <button type="button" onClick={() => setAbierto(true)}
@@ -148,7 +169,7 @@ export function ComentariosPublicacion({ fila, textos }: { fila: PublicacionVisu
           ))}
         </p>
       )}
-      <CuerpoComentarios d={d} textos={textos} />
+      <CuerpoComentarios d={d} red={fila.red} textos={textos} />
     </div>
   );
 }

@@ -1,3 +1,18 @@
+> **Implementación · 1 de octubre de 2026 — Redes: los likes de cada
+> comentario y un botón de compartir.** Los comentarios de cada publicación ya
+> iban de más a menos votado, pero no se veía por qué. Ahora cada uno lleva sus
+> likes (reacciones en Facebook) a la izquierda, como en Seguimiento, y la hoja
+> dice «Los más votados primero». Es una excepción a la nota del 17 de
+> septiembre, que quitó las cifras de la tarjeta: aquellas competían con las
+> que el video muestra en vivo al lado, y los likes de un comentario no
+> aparecen en ningún video. Un comentario con 0 no muestra cifra, porque a
+> veces la red no la da. Las demás cifras siguen fuera de la tarjeta.
+>
+> Y hay un botón **Compartir**, el mismo en la portada y en Redes: copiar el
+> enlace, WhatsApp, X, Facebook o correo. Reemplaza al de la portada, que abría
+> la hoja de compartir del sistema y en una computadora solo copiaba el enlace,
+> sin dar a elegir.
+
 > **Implementación · 30 de septiembre de 2026 — Una sola búsqueda en la
 > portada y en Redes.** La lupa de la portada buscaba solo titulares, uno por
 > pantalla, y la de Redes abría la ficha de tono del término, con la búsqueda

@@ -12,6 +12,7 @@ import { corteVigente, fechaCorta, hace, hora } from "@/lib/dominio/formato";
 import { NOMBRE_CORTO, type ZonaRuta } from "@/lib/dominio/zonas";
 import { teclasDelRecorrido, useRecorrido } from "@/lib/pantalla/recorrido";
 import { clasesBoton } from "@/components/ui/clases";
+import { Compartir } from "@/components/ui/compartir";
 import { BotonAnalizar, FichaPublicacion } from "./analisis-publicacion";
 import { ComentariosPublicacion, VistaPreviaComentarios, type Textos } from "./comentarios-publicacion";
 import { EsqueletoMedio, MedioSocial } from "./medio-social";
@@ -345,10 +346,14 @@ function Publicacion({ fila, indice, posicion, total, corte, activo, preparado, 
             no busca en facebook.json, asi que el boton en Facebook abria una
             hoja que siempre decia «No se pudo». Ampliarlo es otra decision. */}
         {analisis && conComentarios && (fila.red === "instagram" || fila.red === "tiktok") ? <BotonAnalizar onAbrir={onAnalizar} /> : null}
+        {/* El mismo de la portada (ui/compartir.tsx, 1 de octubre de 2026).
+            Solo icono en el telefono: la banda tiene alto contado
+            (`--visor-reserva`) y una fila mas encogeria el medio. */}
+        {fila.url ? <Compartir titulo={fila.post.titulo || `Publicación de ${fila.fuente}`} url={fila.url} compacto /> : null}
         <p className="ml-auto text-meta tabular-nums text-tinta-meta">{indice + 1} de {total}</p>
       </div>
       {conComentarios && vistaPrevia
-        ? <div className="mt-6 hidden md:block"><VistaPreviaComentarios comentarios={comentarios} /></div>
+        ? <div className="mt-6 hidden md:block"><VistaPreviaComentarios comentarios={comentarios} red={fila.red} /></div>
         : null}
     </div>
   </article>;
