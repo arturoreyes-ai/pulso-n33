@@ -1,34 +1,34 @@
 {
  "esquema": 1,
- "generado": "2026-10-03T12:04:52+00:00",
+ "generado": "2026-10-03T16:46:58+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 2010,
- "posts_vigentes": 318,
- "opinion": 1831,
- "repetidos": 98,
- "reacciones": 146,
+ "comentarios_vigentes": 2060,
+ "posts_vigentes": 327,
+ "opinion": 1874,
+ "repetidos": 102,
+ "reacciones": 153,
  "por_zona": {
   "Ensenada": 65,
   "Mexicali": 56,
   "Playas de Rosarito": 13,
   "San Quintín": 1,
   "Tecate": 29,
-  "Tijuana": 923,
-  "estatal": 810,
+  "Tijuana": 967,
+  "estatal": 816,
   "internacional": 4,
   "nacional": 109
  },
  "por_cuenta": {
-  "aztecabc_fb": 80,
-  "blanconegro_fb": 859,
-  "blancorojo_fb": 453,
-  "ndtijuana_fb": 591,
+  "aztecabc_fb": 82,
+  "blanconegro_fb": 879,
+  "blancorojo_fb": 463,
+  "ndtijuana_fb": 609,
   "psn_fb": 27
  },
  "por_idioma": {
-  "es": 2010
+  "es": 2060
  },
  "por_tema": [
   {
@@ -43,13 +43,13 @@
   },
   {
    "tema": "mama",
-   "comentarios": 12,
-   "posts": 9
+   "comentarios": 13,
+   "posts": 10
   },
   {
-   "tema": "polo",
-   "comentarios": 12,
-   "posts": 9
+   "tema": "morena",
+   "comentarios": 11,
+   "posts": 10
   },
   {
    "tema": "ninos",
@@ -57,9 +57,9 @@
    "posts": 10
   },
   {
-   "tema": "morena",
+   "tema": "padres",
    "comentarios": 10,
-   "posts": 9
+   "posts": 10
   },
   {
    "tema": "caso",
@@ -67,19 +67,29 @@
    "posts": 8
   },
   {
-   "tema": "padres",
-   "comentarios": 9,
-   "posts": 9
-  },
-  {
    "tema": "deja",
-   "comentarios": 7,
-   "posts": 7
+   "comentarios": 8,
+   "posts": 8
   },
   {
    "tema": "estados unidos",
    "comentarios": 7,
    "posts": 6
+  },
+  {
+   "tema": "seguridad",
+   "comentarios": 7,
+   "posts": 6
+  },
+  {
+   "tema": "alto",
+   "comentarios": 6,
+   "posts": 6
+  },
+  {
+   "tema": "poder",
+   "comentarios": 5,
+   "posts": 5
   },
   {
    "tema": "torres",
@@ -88,11 +98,6 @@
   },
   {
    "tema": "historia",
-   "comentarios": 4,
-   "posts": 4
-  },
-  {
-   "tema": "poder",
    "comentarios": 4,
    "posts": 4
   },
@@ -128,9 +133,9 @@
   }
  ],
  "sentimiento": {
-  "positivo": 198,
-  "negativo": 912,
-  "neutral": 721,
+  "positivo": 200,
+  "negativo": 939,
+  "neutral": 735,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -170,8 +175,55 @@
    "activa": true
   }
  ],
- "releidos": 22,
+ "releidos": 17,
  "destacados": [
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02pz5mfyr4qAje8BhpjAovJ6PJdzBQe6BNecFgEe5cMbhVeWMsromEZSyTvfKEZnmHl",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-03",
+   "titulo": "🚨 Atacan a balazos a policía municipal de Tijuana",
+   "tipo": "otro",
+   "likes": 1233,
+   "comentarios": 242,
+   "compartidos": 39,
+   "alcance": "zona",
+   "publicado": "2026-10-03T06:11:51+00:00",
+   "cosechados": 9,
+   "opinion": 9,
+   "sentimiento": {
+    "positivo": 3,
+    "negativo": 4,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/4753865791550247",
+   "cuenta": "blanconegro_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-03",
+   "titulo": "🚨 Intentó asaltar una caseta, hirió a un guardia y terminó baleado tras enfrentar a agentes de la FESC",
+   "tipo": "video",
+   "likes": 823,
+   "comentarios": 45,
+   "compartidos": 44,
+   "reproducciones": 73133,
+   "alcance": "nacional",
+   "publicado": "2026-10-03T05:59:26+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 3,
+    "negativo": 3,
+    "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
   {
    "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0328AnujDfE9KgrNheaSe7fz58iQq3Fjkw2u8DKRZ9eAXf6PBhp5jhwfpjnfmeUXD8l&id=100086488503408",
    "cuenta": "blancorojo_fb",
@@ -190,29 +242,6 @@
     "positivo": 0,
     "negativo": 6,
     "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02pz5mfyr4qAje8BhpjAovJ6PJdzBQe6BNecFgEe5cMbhVeWMsromEZSyTvfKEZnmHl",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-03",
-   "titulo": "🚨 Atacan a balazos a policía municipal de Tijuana",
-   "tipo": "otro",
-   "likes": 750,
-   "comentarios": 117,
-   "compartidos": 29,
-   "alcance": "zona",
-   "publicado": "2026-10-03T06:11:51+00:00",
-   "cosechados": 9,
-   "opinion": 9,
-   "sentimiento": {
-    "positivo": 3,
-    "negativo": 4,
-    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -266,62 +295,15 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0chbaHmDTk4jLtSLTGM99ZHoPW7ZCjX7ShXUQLjuEy86jgiXiASaMLGzTMUryYAEnl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-02",
-   "titulo": "Se soltó el diablo en Tijuana como todos los días y esta vez de mañana.",
-   "tipo": "otro",
-   "likes": 627,
-   "comentarios": 96,
-   "compartidos": 17,
-   "alcance": "zona",
-   "publicado": "2026-10-02T13:16:20+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 5,
-    "neutral": 5,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/4753865791550247",
-   "cuenta": "blanconegro_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-03",
-   "titulo": "🚨 Intentó asaltar una caseta, hirió a un guardia y terminó baleado tras enfrentar a agentes de la FESC",
-   "tipo": "video",
-   "likes": 569,
-   "comentarios": 38,
-   "compartidos": 32,
-   "reproducciones": 51774,
-   "alcance": "nacional",
-   "publicado": "2026-10-03T05:59:26+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 3,
-    "negativo": 3,
-    "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0zVV8vUQKbxQysd7E6B6t55T6SijbP6zoERMzZ8AhB6MxB58vB6htp32gusKFUi75l",
    "cuenta": "blanconegro_fb",
    "zona": "Tijuana",
    "fecha": "2026-10-03",
    "titulo": "🚨 Una ciudadana denunció una situación que le causó preocupación en la zona de Otay, específicamente en el área de la línea SENTRI.",
    "tipo": "imagen",
-   "likes": 440,
-   "comentarios": 62,
-   "compartidos": 29,
+   "likes": 639,
+   "comentarios": 121,
+   "compartidos": 57,
    "alcance": "zona",
    "publicado": "2026-10-03T04:52:12+00:00",
    "cosechados": 10,
@@ -329,6 +311,29 @@
    "sentimiento": {
     "positivo": 0,
     "negativo": 9,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02BwUzNhC464AqnqW3A5buVviLzEfzXesnm3eAvAuTQFLm91uRFQ9haSuFW1DRCL9Vl",
+   "cuenta": "blanconegro_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-03",
+   "titulo": "🚨 Intentó asaltar una caseta, hirió a un guardia y terminó baleado tras enfrentar a agentes de la FESC",
+   "tipo": "otro",
+   "likes": 493,
+   "comentarios": 9,
+   "compartidos": 28,
+   "alcance": "nacional",
+   "publicado": "2026-10-03T05:35:01+00:00",
+   "cosechados": 2,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
     "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -360,39 +365,16 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02BwUzNhC464AqnqW3A5buVviLzEfzXesnm3eAvAuTQFLm91uRFQ9haSuFW1DRCL9Vl",
-   "cuenta": "blanconegro_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-03",
-   "titulo": "🚨 Intentó asaltar una caseta, hirió a un guardia y terminó baleado tras enfrentar a agentes de la FESC",
-   "tipo": "otro",
-   "likes": 352,
-   "comentarios": 7,
-   "compartidos": 18,
-   "alcance": "nacional",
-   "publicado": "2026-10-03T05:35:01+00:00",
-   "cosechados": 2,
-   "opinion": 2,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NdTijuana/videos/1126064153310200",
    "cuenta": "ndtijuana_fb",
    "zona": "estatal",
    "fecha": "2026-10-03",
-   "titulo": "Elementos de la FESC le salva la vida a un guardia de seguridad, tras intento asalto y neutralizan al asaltante",
+   "titulo": "Elementos de la FESC le salvan la vida a un guardia de seguridad, tras intento asalto y neutralizan al asaltante",
    "tipo": "video",
-   "likes": 299,
-   "comentarios": 16,
+   "likes": 367,
+   "comentarios": 20,
    "compartidos": 27,
-   "reproducciones": 34529,
+   "reproducciones": 42159,
    "alcance": "nacional",
    "publicado": "2026-10-03T05:59:26+00:00",
    "cosechados": 10,
@@ -431,6 +413,29 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0eb2RrqTdyA3vVUPz9dtzeWVNFYp2yUMFFLLLamszaxBJj6m2TiDMGXGrBuRPSJrel&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-03",
+   "titulo": "ATENCIÓN TATUADOS!!!",
+   "tipo": "imagen",
+   "likes": 245,
+   "comentarios": 30,
+   "compartidos": 142,
+   "alcance": "nacional",
+   "publicado": "2026-10-03T03:40:34+00:00",
+   "cosechados": 6,
+   "opinion": 6,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 2,
+    "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/NdTijuana/posts/pfbid0MHpcrN71ohDo6tDDp2WuimQeWdiwG2Hp66zBasnsr4kQ7zkYLzbGhn8kbhma5SrGl",
    "cuenta": "ndtijuana_fb",
    "zona": "Tijuana",
@@ -460,8 +465,8 @@
    "fecha": "2026-10-03",
    "titulo": "Que opinan",
    "tipo": "imagen",
-   "likes": 166,
-   "comentarios": 224,
+   "likes": 179,
+   "comentarios": 263,
    "compartidos": 1,
    "alcance": "nacional",
    "publicado": "2026-10-03T03:26:57+00:00",
@@ -471,6 +476,29 @@
     "positivo": 1,
     "negativo": 2,
     "neutral": 7,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02NXa6T4RgUPcgW913r6Q1kB5SFwEjZLJZAA3KHxeu4WBHi3LpdHn4uQa5HJb6uYuRl",
+   "cuenta": "blanconegro_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-03",
+   "titulo": "⚠️💨 ¡Atención, Baja California! Alertan por vientos de Santa Ana y temperaturas de hasta 40 °C",
+   "tipo": "imagen",
+   "likes": 160,
+   "comentarios": 7,
+   "compartidos": 41,
+   "alcance": "estatal",
+   "publicado": "2026-10-03T05:16:43+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -500,22 +528,46 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0eb2RrqTdyA3vVUPz9dtzeWVNFYp2yUMFFLLLamszaxBJj6m2TiDMGXGrBuRPSJrel&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "estatal",
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02BxU2Fkd8HS9FXnqUoZwYqHKwTtqPUUVTnzChGhoeZjtj8BJWVUdMCTRUmK9HvAzMl",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
    "fecha": "2026-10-03",
-   "titulo": "ATENCIÓN TATUADOS!!!",
+   "titulo": "#NDTInforma Kimberly Ariana Hernández Félix, de 16 años, fue vista por última vez el 1 de octubre en la calle Mártires de Pinos Altos, en la colonia Obrera de…",
    "tipo": "imagen",
-   "likes": 135,
-   "comentarios": 17,
-   "compartidos": 61,
-   "alcance": "nacional",
-   "publicado": "2026-10-03T03:40:34+00:00",
+   "likes": 143,
+   "comentarios": 46,
+   "compartidos": 119,
+   "alcance": "zona",
+   "publicado": "2026-10-03T00:32:59+00:00",
    "cosechados": 6,
-   "opinion": 6,
+   "opinion": 0,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 2,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/reel/2307300823359533",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-03",
+   "titulo": "#NDTInforma | “SE LO LLEVÓ A COMER Y YA NO VOLVIÓ”",
+   "tipo": "video",
+   "likes": 136,
+   "comentarios": 24,
+   "compartidos": 29,
+   "reproducciones": 11317,
+   "alcance": "zona",
+   "publicado": "2026-10-03T15:58:42+00:00",
+   "cosechados": 10,
+   "opinion": 9,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 5,
     "neutral": 4,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -523,23 +575,23 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02NXa6T4RgUPcgW913r6Q1kB5SFwEjZLJZAA3KHxeu4WBHi3LpdHn4uQa5HJb6uYuRl",
-   "cuenta": "blanconegro_fb",
-   "zona": "estatal",
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid023KdSiKQgnJJQpLhkFXtrifb7yaamfBGPysx94YBHPsPcTNZnmtkTgEnF17azDGLnl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "Tijuana",
    "fecha": "2026-10-03",
-   "titulo": "⚠️💨 ¡Atención, Baja California! Alertan por vientos de Santa Ana y temperaturas de hasta 40 °C",
-   "tipo": "imagen",
-   "likes": 124,
-   "comentarios": 7,
-   "compartidos": 38,
-   "alcance": "estatal",
-   "publicado": "2026-10-03T05:16:43+00:00",
-   "cosechados": 0,
-   "opinion": 0,
+   "titulo": "se soltó el diablo en Tijuana como todos los días ataques armados el diario vivir de Tijuana a Baja California",
+   "tipo": "otro",
+   "likes": 132,
+   "comentarios": 24,
+   "compartidos": 3,
+   "alcance": "zona",
+   "publicado": "2026-10-03T02:53:52+00:00",
+   "cosechados": 10,
+   "opinion": 10,
    "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
+    "positivo": 1,
+    "negativo": 7,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -552,10 +604,10 @@
    "fecha": "2026-10-03",
    "titulo": "",
    "tipo": "video",
-   "likes": 123,
-   "comentarios": 30,
-   "compartidos": 16,
-   "reproducciones": 14732,
+   "likes": 130,
+   "comentarios": 31,
+   "compartidos": 17,
+   "reproducciones": 16222,
    "alcance": "nacional",
    "publicado": "2026-10-03T01:08:08+00:00",
    "cosechados": 10,
@@ -599,9 +651,9 @@
    "fecha": "2026-10-03",
    "titulo": "Que opinan",
    "tipo": "imagen",
-   "likes": 108,
-   "comentarios": 246,
-   "compartidos": 28,
+   "likes": 115,
+   "comentarios": 258,
+   "compartidos": 29,
    "alcance": "nacional",
    "publicado": "2026-10-03T02:49:30+00:00",
    "cosechados": 9,
@@ -731,6 +783,29 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0muxoDtQuw9RtjFixWEMjTDtqmiJf3NfoeRnAKG4zRwuuVeiUoFu8gEmYXevix2eJl",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-03",
+   "titulo": "🏛️ Ismael Burgueño presenta su Segundo Informe de Gobierno ante el Cabildo de Tijuana",
+   "tipo": "imagen",
+   "likes": 62,
+   "comentarios": 23,
+   "compartidos": 12,
+   "alcance": "zona",
+   "publicado": "2026-10-03T02:52:00+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 7,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0NadWdxTXuA9U3YcBBCFjUnvy2o8TKz7rNfKq4pkhNEC1rpqgJHurWbuc6kcJhChAl",
    "cuenta": "blanconegro_fb",
    "zona": "Mexicali",
@@ -771,77 +846,6 @@
     "positivo": 0,
     "negativo": 6,
     "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02qwZWhhcUc3iS9ntMAhbH2cmrhL5ki7nqKoyWkbm5nF8GYxaAw5aoqr4YEzG3EErql",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-03",
-   "titulo": "🏛️ Ismael Burgueño presenta su Segundo Informe de Gobierno ante el Cabildo de Tijuana",
-   "tipo": "imagen",
-   "likes": 53,
-   "comentarios": 18,
-   "compartidos": 12,
-   "alcance": "zona",
-   "publicado": "2026-10-03T02:52:00+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 7,
-    "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/reel/1057934260447336",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-02",
-   "titulo": "💧🗑️ “Inician limpieza en Canalización del Río Tijuana”: refuerzan acciones ambientales y de prevención ante riesgos por fenómeno de El Niño",
-   "tipo": "video",
-   "likes": 50,
-   "comentarios": 11,
-   "compartidos": 22,
-   "reproducciones": 3757,
-   "alcance": "zona",
-   "publicado": "2026-10-02T21:46:19+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 3,
-    "negativo": 2,
-    "neutral": 5,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/reel/1405591438219435",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-03",
-   "titulo": "⚡🏭 “Cortes de energía pueden generar fuertes pérdidas a empresas”",
-   "tipo": "video",
-   "likes": 30,
-   "comentarios": 4,
-   "compartidos": 4,
-   "reproducciones": 6638,
-   "alcance": "zona",
-   "publicado": "2026-10-03T00:10:58+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -900,35 +904,12 @@
    "fecha": "2026-10-03",
    "titulo": "#LoVisteEnPSN | Localizan cabeza humana y mensaje amenazante cerca de la garita de Otay.",
    "tipo": "video",
-   "likes": 23,
-   "comentarios": 0,
+   "likes": 26,
+   "comentarios": 1,
    "compartidos": 1,
-   "reproducciones": 2916,
+   "reproducciones": 3523,
    "alcance": "zona",
    "publicado": "2026-10-03T03:00:43+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/redespsn/posts/pfbid02shTLJ2RJcbU5bn2giJHx5BVDiXiwtgZERt37394V8mTMZhJtZdaphAWXjYqnzwz6l",
-   "cuenta": "psn_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-02",
-   "titulo": "El cartón del día, por Abraham",
-   "tipo": "otro",
-   "likes": 12,
-   "comentarios": 0,
-   "compartidos": 2,
-   "alcance": "nacional",
-   "publicado": "2026-10-02T16:18:33+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1056,40 +1037,17 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/redespsn/posts/pfbid02zGpHcWKCe33Sk1tYqgXZ6rN5qWaGYFH5jPWuEbf3BWdxD6UpWKPSHqjjXeYoSj84l",
+   "url": "https://www.facebook.com/redespsn/posts/pfbid0nLry4rrRm8hEvBJNS9Nx2qgqjE2YicuYinZkgCDnHX3zgdUJPk7P2rnFVDatz52Ql",
    "cuenta": "psn_fb",
-   "zona": "nacional",
-   "fecha": "2026-10-02",
-   "titulo": "#BajaCalifornia Ernesto Ruffo Appel cuestionó el funcionamiento de las instituciones en México tras permanecer cerca de 72 días en el penal federal de máxima s…",
+   "zona": "estatal",
+   "fecha": "2026-10-03",
+   "titulo": "#Deportes Tarik Skubal, el estelar lanzador de Dodgers, abrirá el primer partido de la Serie Divisional de la Liga Nacional contra los Bravos este sábado por l…",
    "tipo": "otro",
    "likes": 0,
    "comentarios": 0,
    "compartidos": 0,
    "alcance": "nacional",
-   "publicado": "2026-10-02T15:52:17+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/redespsn/posts/pfbid0vjB6hLgqnyRAzDBeePnX4V4tm21jtzzdn16nc97S3E33E54uVsUJvWuCH2R3ktfnl",
-   "cuenta": "psn_fb",
-   "zona": "nacional",
-   "fecha": "2026-10-02",
-   "titulo": "#BajaCalifornia Ernesto Ruffo Appel cuestionó el funcionamiento de las instituciones en México tras permanecer cerca de 72 días en el penal federal de máxima s…",
-   "tipo": "otro",
-   "likes": 0,
-   "comentarios": 0,
-   "compartidos": 0,
-   "alcance": "nacional",
-   "publicado": "2026-10-02T15:52:17+00:00",
+   "publicado": "2026-10-03T14:40:31+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1107,7 +1065,7 @@
    "cuenta": "aztecabc_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 0,
+   "comentarios": 2,
    "crudos": 4,
    "fuera": 0,
    "compartidos": 0
@@ -1115,27 +1073,27 @@
   {
    "cuenta": "blanconegro_fb",
    "estado": "ok",
-   "posts": 7,
-   "comentarios": 29,
-   "crudos": 30,
-   "fuera": 1,
+   "posts": 8,
+   "comentarios": 21,
+   "crudos": 21,
+   "fuera": 0,
    "compartidos": 0
   },
   {
    "cuenta": "blancorojo_fb",
    "estado": "ok",
-   "posts": 5,
+   "posts": 4,
    "comentarios": 10,
    "crudos": 10,
    "fuera": 0,
-   "compartidos": 3
+   "compartidos": 4
   },
   {
    "cuenta": "ndtijuana_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 12,
-   "crudos": 12,
+   "comentarios": 22,
+   "crudos": 22,
    "fuera": 0,
    "compartidos": 0
   },
@@ -1144,21 +1102,20 @@
    "estado": "ok",
    "posts": 7,
    "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar",
-   "fuera": 0,
+   "crudos": 4,
+   "fuera": 1,
    "compartidos": 0
   }
  ],
  "gasto": {
   "resultados": 250,
-  "gastado": 95,
+  "gastado": 101,
   "por_concepto": {
    "aztecabc_fb": 12,
-   "blanconegro_fb": 38,
+   "blanconegro_fb": 29,
    "blancorojo_fb": 18,
-   "ndtijuana_fb": 20,
-   "psn_fb": 7
+   "ndtijuana_fb": 30,
+   "psn_fb": 12
   }
  }
 }
