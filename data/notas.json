@@ -1,8 +1,709 @@
 {
  "esquema": 1,
  "ventana_dias": 30,
- "total": 10742,
+ "total": 10779,
  "notas": [
+  {
+   "id": "9104426aa99bdd12",
+   "titulo": "Huracán Rachel provocará lluvias fuertes este fin de semana; así afectará a BCS",
+   "url": "https://www.elimparcial.com/mexico/2026/10/03/huracan-rachel-provocara-lluvias-fuertes-este-fin-de-semana-asi-afectara-a-bcs/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T11:36:35+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5075,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/NAJNPWE3VVHBFBA7HUKHRBMRYE.png?auth=93d72a300e0333338f3bfa967893f8756234f33502a7994f6d532b79055c9e04&smart=true&width=1200&height=720",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "687af56ad964a5a0",
+   "titulo": "All's fair in love and 'War' — a well-cast, classy-trashy divorce drama",
+   "url": "https://www.kpbs.org/news/arts-culture/2026/10/03/alls-fair-in-love-and-war-a-well-cast-classy-trashy-divorce-drama",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T11:00:00+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/be1cfb8/2147483647/strip/false/crop/1209x1209+356+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F74%2F47%2Fd122ddd94efaa3cc64d5b835aab1%2Fsienna-miller-dominic-west.jpg",
+   "rubros": []
+  },
+  {
+   "id": "3d4c87b95f89b632",
+   "titulo": "Hoy No Circula sábado 3 de octubre de 2026: estos autos no podrán circular en CDMX y Edomex",
+   "url": "https://www.elimparcial.com/mexico/2026/10/03/hoy-no-circula-sabado-3-de-octubre-de-2026-estos-autos-no-podran-circular-en-cdmx-y-edomex/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T11:00:00+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6422,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/VQUKD4A2RRDOVL3WWPPC3ELTDE.jpg?auth=3c9e6d1c88c38f8cbd6e0f23287deb3615ee595934d7d7b9f237d464da32bc40&smart=true&width=1240&height=664",
+   "rubros": []
+  },
+  {
+   "id": "2e00892186d15aa0",
+   "titulo": "Theaster Gates bets on fine china",
+   "url": "https://www.kpbs.org/news/arts-culture/2026/10/03/theaster-gates-bets-on-fine-china",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T11:00:00+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/4cf74c1/2147483647/strip/false/crop/6601x6601+1100+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fcc%2F04%2Fade23f264af7a6cc35f66b54eedb%2F2026-09-theastergates-atownsend-dsf2256.jpg",
+   "rubros": []
+  },
+  {
+   "id": "2de352b62e5f7fc4",
+   "titulo": "Just short of its 200th birthday, a landmark natural history museum shuts down",
+   "url": "https://www.kpbs.org/news/science-technology/2026/10/03/just-short-of-its-200th-birthday-a-landmark-natural-history-museum-shuts-down",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T11:00:00+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/2feb9a8/2147483647/strip/false/crop/3060x3060+510+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fae%2F63%2Fd4ea684b40f88cfb28c1fe8b05f7%2Fstaff-talking-dino-in-back.jpg",
+   "rubros": []
+  },
+  {
+   "id": "251584c80ad9653c",
+   "titulo": "EVALÚAN VIABILIDAD DE UN CENTRO DE BIENESTAR ANIMAL EN SAN QUINTÍN",
+   "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOc0hDa01ydUFjWmFTcjJFQ28wX1lsNnFNTnVtYnV5NTJncURoQWdWTnhpWTIwTXlCVDJpSDlxak9GTTFCakw3YkZ4bE5odE9nRmVuZnJJRFo1Y25EYm5hbkt5Sy1iZ1g4S0ZFQVN6NUdLdEQxc3lLcjdaV1FsU19rX3l5eW5qbmxNZE82U1Bn?oc=5",
+   "dominio": "bajacalifornia.gob.mx",
+   "fuente": "gn-01e4fd06574f",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Quintín"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T10:22:50+00:00",
+   "capturado": "2026-10-02T22:14:20+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5944,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
+   "id": "a416b16b972c8db0",
+   "titulo": "How the system failed us: Former foster youth tell their stories",
+   "url": "https://www.kpbs.org/news/2026/10/03/how-the-system-failed-us-former-foster-youth-tell-their-stories",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T09:00:00+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/c7751a4/2147483647/strip/false/crop/3038x3038+1181+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fdb%2F57%2F7e552025480485d0276789624ba8%2Ffoster-care-voices-update.png",
+   "rubros": []
+  },
+  {
+   "id": "642777b9abe3fa9f",
+   "titulo": "The Supreme Court faces another term jam-packed with controversy",
+   "url": "https://www.kpbs.org/news/politics/2026/10/03/the-supreme-court-faces-another-term-jam-packed-with-controversy",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T09:00:00+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/02ce902/2147483647/strip/false/crop/683x683+171+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fe6%2F08%2Feca9b3374b0d8fb37f66f272cf74%2Fgettyimages-2294936548.jpg",
+   "rubros": []
+  },
+  {
+   "id": "49867795dfbbc6a9",
+   "titulo": "No one expected an American pope. Here's the inside story of how 'Bob' became Pope Leo",
+   "url": "https://www.kpbs.org/news/arts-culture/2026/10/03/no-one-expected-an-american-pope-heres-the-inside-story-of-how-bob-became-pope-leo",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T09:00:00+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/d4c82da/2147483647/strip/false/crop/3335x3335+833+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fe8%2F57%2F72da0adf49f3bf2128c04f80dcdc%2Fgettyimages-2212121081.jpg",
+   "rubros": []
+  },
+  {
+   "id": "42dd840f7832138d",
+   "titulo": "A hot tip to battle performance anxiety? 'Pretend flush' a mistake down the toilet",
+   "url": "https://www.kpbs.org/news/health/2026/10/03/a-hot-tip-to-battle-performance-anxiety-pretend-flush-a-mistake-down-the-toilet",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T09:00:00+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/ac4c58c/2147483647/strip/false/crop/5134x5134+1282+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F08%2F74%2Fc444c85b45ba965b396c2c03bc1f%2Fgettyimages-1352881588.jpg",
+   "rubros": []
+  },
+  {
+   "id": "a7f703f889bbe56a",
+   "titulo": "Proposition 5: Delay replacing recalled state officials",
+   "url": "https://www.kpbs.org/news/politics/2026/10/02/proposition-5-delay-replacing-recalled-state-officials",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T06:36:25+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/26f1e0a/2147483647/strip/false/crop/400x400+1042+0/resize/600x600!/quality/90/?url=http%3A%2F%2Fkpbs-brightspot.s3.us-west-2.amazonaws.com%2F11%2F18%2Fb1163cc44c4e9d1c2358e5b37d3c%2Fvoterhub-main-1240x200-2x.jpg",
+   "rubros": []
+  },
+  {
+   "id": "ac18e10e13738dd2",
+   "titulo": "Químicos de pantallas de televisores y celulares se acumulan en el cerebro de delfines debido a la filtración de desechos electrónicos al mar, provocan alteraciones genéticas y neurotóxicas graves; un estudio revela el grave impacto ambiental",
+   "url": "https://www.elimparcial.com/locurioso/2026/10/02/quimicos-de-pantallas-de-televisores-y-celulares-se-acumulan-en-el-cerebro-de-delfines-debido-a-la-filtracion-de-desechos-electronicos-al-mar-provocan-alteraciones-geneticas-y-neurotoxicas-graves-un-estudio-revela-el-grave-impacto-ambiental/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T06:32:48+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9072,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/KHTO3LUFORGZPOUJJUXXTOZMCE.png?auth=da7142858316b0ecb2c069c64bebedba45ecba355c7b4af1bbff2b264130cb2e&smart=true&width=2436&height=1624",
+   "rubros": []
+  },
+  {
+   "id": "0cd63107d80f8aaa",
+   "titulo": "Rocio Adame destaca proyectos de agua, bienestar social, educación, obras públicas y salud, durante segundo informe de gobierno",
+   "url": "https://www.rosaritonoticias.com/2026/10/02/rocio-adame-destaca-proyectos-de-agua-bienestar-social-educacion-obras-publicas-y-salud-durante-segundo-informe-de-gobierno/",
+   "dominio": "rosaritonoticias.com",
+   "fuente": "rosarito",
+   "zona_medio": "Playas de Rosarito",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T06:30:17+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [
+    {
+     "id": "ram",
+     "via": "nominal",
+     "clave": "rocio adame"
+    }
+   ],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5532,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.rosaritonoticias.com/wp-content/uploads/2026/10/Segundo-Informe-Rocio-Adame-Munoz-Playas-de-Rosarito-Desaladora-Bienestar-Social-3.png",
+   "rubros": []
+  },
+  {
+   "id": "97e3c25aed52f830",
+   "titulo": "Proposition 2: Raise limit on rainy day fund deposits",
+   "url": "https://www.kpbs.org/news/politics/2026/10/02/proposition-2-raise-limit-on-rainy-day-fund-deposits",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T06:26:07+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/26f1e0a/2147483647/strip/false/crop/400x400+1042+0/resize/600x600!/quality/90/?url=http%3A%2F%2Fkpbs-brightspot.s3.us-west-2.amazonaws.com%2F11%2F18%2Fb1163cc44c4e9d1c2358e5b37d3c%2Fvoterhub-main-1240x200-2x.jpg",
+   "rubros": []
+  },
+  {
+   "id": "a5ee3a889ec9708e",
+   "titulo": "El error de una mujer que confundió dos marcas de helado se convirtió en la bancarrota de una empresa y una prueba clave del juicio que terminó con una condena de 23.8 millones de dólares",
+   "url": "https://www.elimparcial.com/estilos/2026/10/02/el-error-de-una-mujer-que-confundio-dos-marcas-de-helado-se-convirtio-en-la-bancarrota-de-una-empresa-y-una-prueba-clave-del-juicio-que-termino-con-una-condena-de-238-millones-de-dolares/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T06:20:33+00:00",
+   "capturado": "2026-09-20T06:29:16+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8809,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/SRLPOXL2XZELZNRHIZ45W5J2XU.jpg?auth=5348db58a80b77e2d3b4349e0883ebebd4407fbb365404ab503aae42cdb834b2&smart=true&width=1280&height=853",
+   "rubros": []
+  },
+  {
+   "id": "b4c241de39a5c5c3",
+   "titulo": "Mil 320 kilos de metanfetamina fueron asegurados en una camioneta en Culiacán durante un operativo de inteligencia militar, un golpe económico de más de 350 millones de pesos para “La Mayiza” sin detenidos",
+   "url": "https://www.elimparcial.com/mexico/2026/10/02/mil-320-kilos-de-metanfetamina-fueron-asegurados-en-una-camioneta-en-culiacan-durante-un-operativo-de-inteligencia-militar-un-golpe-economico-de-mas-de-350-millones-de-pesos-para-la-mayiza-sin-detenidos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T06:15:36+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6865,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/PV5APHLYBFCSBMYI7TQ2XDO27Q.png?auth=c239c8eb4502fa6721460b8da0a344ca32663a36a3987832d627174a681c5cc2&smart=true&width=1200&height=675",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "db60fc076513a0fc",
+   "titulo": "Proposition 37: Create low-cost mortgages for homebuyers",
+   "url": "https://www.kpbs.org/news/politics/2026/10/02/proposition-37-create-low-cost-mortgages-for-homebuyers",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T06:08:37+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/26f1e0a/2147483647/strip/false/crop/400x400+1042+0/resize/600x600!/quality/90/?url=http%3A%2F%2Fkpbs-brightspot.s3.us-west-2.amazonaws.com%2F11%2F18%2Fb1163cc44c4e9d1c2358e5b37d3c%2Fvoterhub-main-1240x200-2x.jpg",
+   "rubros": []
+  },
+  {
+   "id": "1749a61abd5cad0d",
+   "titulo": "Corea del Norte lanza un proyectil de unos 700 kilómetros hacia el mar de Japón en medio de nuevas tensiones regionales",
+   "url": "https://www.elimparcial.com/mundo/2026/10/02/corea-del-norte-lanza-un-proyectil-de-unos-700-kilometros-hacia-el-mar-de-japon-en-medio-de-nuevas-tensiones-regionales/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T06:06:23+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6251,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/OAH3JGF545FHBGAB3APLWOECOI.jpg?auth=0743fb355c2df1097a1f4d3ba2e5758df7b107ffe6f7e13d708a6bdfa5e1006a&smart=true&width=1280&height=853",
+   "rubros": []
+  },
+  {
+   "id": "5560b6a7dcdda929",
+   "titulo": "Baja california, narcoestado, escribe Jorge Triana",
+   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQekp1cTNmeUltaE0zUzIxdzNXZHU3LW15NWU4aW1yNGJ4NlZOQU82VFhUSWFWTVZUdXdxblVPcFBkdVBDSWlhd1lxNlozUHNUS3NBc19TZlQ5bURsTS1uSXlYNlRSRUM4VHN6elpDRnRXYmZUWkx2aE83bGV5ZEtjeEVESE80XzQ?oc=5",
+   "dominio": "eluniversal.com.mx",
+   "fuente": "gn-18c343e23753",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T06:03:00+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6571,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": []
+  },
+  {
+   "id": "9faa1de7768450bf",
+   "titulo": "Un estudio de la Universidad de Cornell identifica por primera vez el síndrome de Marfan en dos gatos domésticos y descubre cómo una alteración en ambas copias del gen FBN1 les permitió conservar suficiente función para llegar a la edad adulta",
+   "url": "https://www.elimparcial.com/locurioso/2026/10/02/un-estudio-de-la-universidad-de-cornell-identifica-por-primera-vez-el-sindrome-de-marfan-en-dos-gatos-domesticos-y-descubre-como-una-alteracion-en-ambas-copias-del-gen-fbn1-les-permitio-conservar-suficiente-funcion-para-llegar-a-la-edad-adulta/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T05:56:19+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6521,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/O4TJTERRUZEVTPAX2V4Q6EHNEU.png?auth=d54abd100fdcd1b7808dbbb938d5e9b8788131e20db2a2b5916eed568c0a4e61&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "11b28ad63cb1df10",
+   "titulo": "Proposition 1: Borrow $11.25 billion for housing",
+   "url": "https://www.kpbs.org/news/politics/2026/10/02/proposition-1-borrow-11-25-billion-for-housing",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T05:50:49+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/26f1e0a/2147483647/strip/false/crop/400x400+1042+0/resize/600x600!/quality/90/?url=http%3A%2F%2Fkpbs-brightspot.s3.us-west-2.amazonaws.com%2F11%2F18%2Fb1163cc44c4e9d1c2358e5b37d3c%2Fvoterhub-main-1240x200-2x.jpg",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "86a978d49ce57f1a",
+   "titulo": "San Luis Río Colorado tendrá su primer Walmart; proyectan 450 empleos directos",
+   "url": "https://www.elimparcial.com/mxl/sanluis/2026/10/02/san-luis-rio-colorado-tendra-su-primer-walmart-proyectan-450-empleos-directos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T05:45:33+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5585,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/T3L3AHS3HJGXVGMCT3SHHJ5RQM.png?auth=74bb16068eda9099911eac1002dc5a662b912ad2aac55d5da27a1fb3976784f1&smart=true&width=1280&height=960",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "e16a3566a00f1c33",
+   "titulo": "Una especie de pez con 100 millones de años de historia logra reproducirse por primera vez en cautiverio en Guatemala, cuyas crías fueron liberadas en un canal de manglares para obtener información que ayude a evitar su desaparición",
+   "url": "https://www.elimparcial.com/locurioso/2026/10/02/una-especie-de-pez-con-100-millones-de-anos-de-historia-logra-reproducirse-por-primera-vez-en-cautiverio-en-guatemala-cuyas-crias-fueron-liberadas-en-un-canal-de-manglares-para-obtener-informacion-que-ayude-a-evitar-su-desaparicion/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T05:45:10+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6913,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/LKDOW6QWQNHM3JQUNKKXZDDLSU.jpeg?auth=5c34afd73358bbaf751a91d9dc77f6acdac8789f6aa3cd24f087a32e897f1981&smart=true&width=1376&height=768",
+   "rubros": []
+  },
+  {
+   "id": "209bd0e2a2d51b25",
+   "titulo": "Detienen a presunto ladrón de despacho Dávila; abogado no se conforma y presenta videos de policías partícipes durante el robo",
+   "url": "https://www.elimparcial.com/mxl/policiaca/2026/10/02/detienen-a-presunto-ladron-de-despacho-davila-abogado-no-se-conforma-y-presenta-videos-de-policias-participes-durante-el-robo/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T05:40:09+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5829,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/3OWCEIDLQRHVZPESFUMZG46UU4.jpeg?auth=f6999e292f6d31935ea0e6334ceff3a56212161b9ba551ed5f600922e7e590ba&smart=true&width=1080&height=605",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "f902702ec9b5dcec",
+   "titulo": "Mientras Porsche estrena un sistema que permite recargar su nuevo Cayenne Electric sin conectar cables, los autos eléctricos podrían reducir hasta 82% las reparaciones y el mantenimiento mecánico durante esta década al tener muchas menos piezas móviles que los modelos de gasolina",
+   "url": "https://www.elimparcial.com/mundo/2026/10/02/mientras-porsche-estrena-un-sistema-que-permite-recargar-su-nuevo-cayenne-electric-sin-conectar-cables-los-autos-electricos-podrian-reducir-hasta-82-las-reparaciones-y-el-mantenimiento-mecanico-durante-esta-decada-al-tener-muchas-menos-piezas-moviles-que-los-modelos-de-gasolina/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T05:32:09+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6666,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/CXGZHT453JCYHIPTUZDURGZBDI.jpeg?auth=61b182605ab91f24b5398685ae0b80181cef4ad12fe4184d29390e6217a78e95&smart=true&width=1376&height=768",
+   "rubros": []
+  },
+  {
+   "id": "3b563b2f50ceb061",
+   "titulo": "Primer Festival del Alto Golfo reunirá la riqueza natural, cultural y gastronómica de Baja California",
+   "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOWHBFU0lMVGZua0poeldNY0k2VTZWTklKSUYtZTJGeVZJOVlLcmZFZkU1RkVib0o5bUg1eHpWUzI3S2NtSmMxOW1NenUwT3pNWmxkZXliNktnSHhEUHZGZ21yOFlyVXo0bWJETG5TNlcxZmstRk1GSVhBSlRVMTExdUUwUDIzNDVnZXVkZ0FGSExUUnl1RmM2dlNvWHRHZTZ1NUNMaG5wYjVzZzQ0VnB0R1ZvSWVUVnJXUE9EcEh6ck9xQ19xU1RvbEJueU0xWXlTeE5v?oc=5",
+   "dominio": "sandiegored.com",
+   "fuente": "gn-dc1580cd9943",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T05:30:00+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": [
+    "espectaculos"
+   ]
+  },
+  {
+   "id": "3f4fcdfbb9577b17",
+   "titulo": "Vientos de Santa Ana de hasta 70 km/h y calor de 41°C en Baja California",
+   "url": "https://www.elimparcial.com/tij/tijuana/2026/10/02/vientos-de-santa-ana-de-hasta-70-kmh-y-calor-de-41c-en-baja-california/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T05:29:46+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6177,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/4BBZ76Q3SBAKFPI3CYE63TTEMI.jpg?auth=5c7ee7fa4efb02eb347e5d9a2ff1423d52e6d71124a53c8679d5f0921016d08c&smart=true&width=1600&height=1200",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "5bb3a486cfff8924",
+   "titulo": "Meet the candidates for the National City mayoral race",
+   "url": "https://www.kpbs.org/news/politics/2026/10/02/2026-primary-election-national-city-mayoral-race-explainer",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T05:28:26+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/26f1e0a/2147483647/strip/false/crop/400x400+1042+0/resize/600x600!/quality/90/?url=http%3A%2F%2Fkpbs-brightspot.s3.us-west-2.amazonaws.com%2F11%2F18%2Fb1163cc44c4e9d1c2358e5b37d3c%2Fvoterhub-main-1240x200-2x.jpg",
+   "rubros": []
+  },
+  {
+   "id": "05a764e51db41515",
+   "titulo": "Christa Pike sobrevive a ejecución por inyección letal en Tennessee y permanece inconsciente con respirador",
+   "url": "https://www.elimparcial.com/mundo/2026/10/02/christa-pike-sobrevive-a-ejecucion-por-inyeccion-letal-en-tennessee-y-permanece-inconsciente-con-respirador/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T05:22:24+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5973,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/W7W7DOTJQNDETDVLJEMCHTPVFE.png?auth=ea746f95c33bbc79a684ca3153a8a941b3099501d33fd8cfd7700e7802cea729&smart=true&width=1920&height=1080",
+   "rubros": []
+  },
+  {
+   "id": "db9cc98f56a4769b",
+   "titulo": "Encuentran a hombre sin vida en plaza comercial de la zona dorada",
+   "url": "https://www.elimparcial.com/mxl/policiaca/2026/10/02/encuentran-a-hombre-sin-vida-en-plaza-comercial-de-la-zona-dorada/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T05:18:54+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5116,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/5VJ2IHIY7JGCNGTHUMBFHEJFLU.jpeg?auth=c5ac8158ebd80bcddbfd0305cb646232e0debb61ac97915db77175453eaa9b35&smart=true&width=1600&height=1200",
+   "rubros": [
+    "seguridad"
+   ]
+  },
   {
    "id": "7d0d7b659433b131",
    "titulo": "Realizan tercer Torneo Smash Pickleball Hexus en apoyo a la Fundación Teletón",
@@ -103,6 +804,27 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/7GVMHOCHABCOVC4IJBPBLPZTBI.png?auth=326acbea2077feaebf4a4fea3e1ecf852bb2aee6df7a7fd73819afaa0ad84930&smart=true&width=1024&height=673",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "f157d32339a59aae",
+   "titulo": "US travel warning flags crime, kidnappings and drones",
+   "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPb0k2UnhpM2NIWWQ4bmFTRW83Y19DNm5DcEZRdVRMbEtxZy1LRGlETFZ4ZGdHUlRtQU50RlNIaWh2R2pvRVI5eXFJY1daZUNZVEhDb01URDBOSUVzWDdxdG9rSk5WX0tBbmNKSVVYWEYtaHZGanNGQk1oZi1CMEN5T011Y2dpLWxr?oc=5",
+   "dominio": "thetraveler.org",
+   "fuente": "gn-2d2a98e92e9a",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T04:56:37+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
    "rubros": [
     "seguridad"
    ]
@@ -433,6 +1155,31 @@
    ]
   },
   {
+   "id": "b6754e51349582ba",
+   "titulo": "El ISSSTE transforma la atención médica básica con 12 nuevas Unidades de Medicina Familiar",
+   "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOMHB3LWdHMldpYkh1LS02WERwZlVMRXh5cklSb0JZc004UUlUb1NOc3Q5NmxUMHhWbkg5cjdmS0h6bEhpblpuR1ZwNUJha1k0STZOSnUzdGlVbkRDVENsdHBpRHpqTEZQWFZNcXpHemxkYzRIdFlILUdtdkQtNU5HWjFLUUV6cU9CR0FVZTBEWGZVX2YtR1E1NGs0cHQ0MFVpNDloU2dpdmpiNDZHNVlOODdaZGlfRGR2b29jLVlqd1dTR1nSAcMBQVVfeXFMTjBwdy1nRzJXaWJIdS0tNlhEcGZVTEV4eXJJUm9CWXNNOFFJVG9TTnN0OTZsVDB4Vm5IOXI3ZktIemxIaW5abkdWcDVCYWtZNEk2Tkp1M3RpVW5EQ1RDbHRwaUR6akxGUFhWTXF6R3psZGM0SHRZSC1HbXZELTVOR1oxS1FFenFPQkdBVWUwRFhmVV9mLUdRNTRrNHB0NDBVaTQ5aFNnaXZqYjQ2RzVZTjg3WmRpX0Rkdm9vYy1ZandXU0dZ?oc=5",
+   "dominio": "imagenradio.com.mx",
+   "fuente": "gn-903c8721d851",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T02:48:30+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4985,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
+   "rubros": []
+  },
+  {
    "id": "e715e7328905a54e",
    "titulo": "Carlos Slim invertirá 4 mil millones de pesos para transformar 45 mil metros cuadrados del Centro Histórico de Puebla con 700 departamentos, comercios, oficinas y espacios destinados a actividades culturales y conciertos",
    "url": "https://www.elimparcial.com/mexico/2026/10/02/carlos-slim-invertira-4-mil-millones-de-pesos-para-transformar-45-mil-metros-cuadrados-del-centro-historico-de-puebla-con-700-departamentos-comercios-oficinas-y-espacios-destinados-a-actividades-culturales-y-conciertos/",
@@ -502,6 +1249,31 @@
    "postura": {
     "etiqueta": "neutral",
     "confianza": 0.5723,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "b3977f3089f4f55c",
+   "titulo": "Presenta UABC primer hospital universitario",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/presenta-uabc-primer-hospital-universitario-32403723",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T02:00:00+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5659,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
@@ -663,6 +1435,31 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/6IO7WCGXC5BCNHXDVXPY25NPKM.png?auth=663c139479539faae6c5333a539e46bf5271ad038340e107afed1d8fb8387e99&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "bc0907bc28d86b57",
+   "titulo": "Ofrecen 13 capacitaciones gratuitas para emprendedores en BC",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE16cVNLV0F4Vk5yckc4V2xScVpONi0zaE52V1ZRclJvaEYyTkZXNHlIZHdOSm5CTXFwS0V6LVNObGlOYmZtbVo1NHpfYVQxRnBKb3VYMnFCNWhNQ0k?oc=5",
+   "dominio": "ensenada.net",
+   "fuente": "gn-906741a25e9c",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T01:27:45+00:00",
+   "capturado": "2026-10-03T05:16:07+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5215,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
    "rubros": []
   },
   {
@@ -924,7 +1721,7 @@
    "delegaciones": [],
    "alcance": "nacional",
    "fecha": "2026-10-03",
-   "publicado": "2026-10-03T00:38:37+00:00",
+   "publicado": "2026-10-03T00:38:38+00:00",
    "capturado": "2026-10-03T05:16:07+00:00",
    "figuras": [],
    "postura": {
@@ -1045,31 +1842,6 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
-   "rubros": []
-  },
-  {
-   "id": "bc0907bc28d86b57",
-   "titulo": "Ofrecen 13 capacitaciones gratuitas para emprendedores en BC",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE16cVNLV0F4Vk5yckc4V2xScVpONi0zaE52V1ZRclJvaEYyTkZXNHlIZHdOSm5CTXFwS0V6LVNObGlOYmZtbVo1NHpfYVQxRnBKb3VYMnFCNWhNQ0k?oc=5",
-   "dominio": "ensenada.net",
-   "fuente": "gn-906741a25e9c",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-03",
-   "publicado": "2026-10-03T00:29:31+00:00",
-   "capturado": "2026-10-03T05:16:07+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "favorable",
-    "confianza": 0.5215,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_sanquintin",
    "rubros": []
   },
   {
@@ -1347,6 +2119,29 @@
    "rubros": [
     "deportes"
    ]
+  },
+  {
+   "id": "b22140527b2b37d2",
+   "titulo": "Atiende SICT más de 74 mil kilómetros de la red carretera federal, a través del programa \"MegaBachetón 2026\"",
+   "url": "https://www.uniradioinforma.com/sociedad/atiende-sict-mas-74-mil-kilometros-red-carretera-federal-traves-programa-megabacheton-2026-n905895",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-03",
+   "publicado": "2026-10-03T00:00:00-07:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4398,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
   },
   {
    "id": "d5b6b91ed566e09c",
@@ -2421,6 +3216,48 @@
    "rubros": []
   },
   {
+   "id": "f52d86ec15d6cbb9",
+   "titulo": "Tyson Fury In Talks For Bare Knuckle Boxing Mega Event With Former Heavyweight Champion",
+   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQb2VjbUZtRTFtdnZrT1ZnRUpYc3lLSU9lcUpBNXdOV0lHTFdGNEdjak9QOWljQ1NDVmk4MXlFcUN6T2R6NUNjMHpPc010VGNERDZqQzQyMkJvM19MR25aZXRxOXE5Y0JlRHpFeEdjTi1qQkpITzlya29nQVdCREJ6NjZIZVU?oc=5",
+   "dominio": "sports.yahoo.com",
+   "fuente": "gn-2133f00fa7fb",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T22:32:47+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "8decb48c2b20868b",
+   "titulo": "Soccer: Bye-Bye Liverpool! Gilberto Mora Reveals His Dream European Destination",
+   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQQml0Nzh1UW95T0dOWERUclBxN2Z5anZ0aHFrQ3REOEpsZWgyLWVxbzhpZllMZ0JFbVQyV2FNRHp1YlpSMlpXNUpIWVZvUDVURlh6cHFZcGpMYnk3bHRkenhZQ3Fwb2RRUWpUZXk4RjJhZHRpOHZGOWlpQ01QNUFJT1JVeFRqTzlXVDhGSVNjYXhLWEhlbEdNS0JFMEo1THhrMERSc2Y2Q2ZSWi1jV2Zfc2hjNjZJTzV1N05VV2JPUmxPREps0gHKAUFVX3lxTE5JcVl0YUtGNkJLOHhoY2pCWjZ6MTJsOUtSUVJaNmdIV1p1b0JHRnZ1SHFyQXdCRHI1ZVRrQjVBc0tUSVhEQ1Fzc2I1bDh4ZDFGNDNlNkt2VkdaeXFrZnFOemNxeFVoU0R5c3JPTUVPckY1UlVTWTlGU2t5UXVtUEI0VlNZRjJrVUxXbkxEaEsza1NnY2NEMXVrckNsZC1mT0VTMzdma21yU09HRzFpcE5yQkwwOEhkZDE0eVVTak56SHpXVkRkVzdJeFE?oc=5",
+   "dominio": "en.albat.com",
+   "fuente": "gn-769c65421af0",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T22:30:45+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
    "id": "ad524b843545b3d0",
    "titulo": "Crece el tráfico de personas por el corredor marítimo del Pacífico",
    "url": "https://timesofsandiego.com/crime/2026/10/02/crece-el-trafico-de-personas-por-el-corredor-maritimo-del-pacifico/",
@@ -2492,6 +3329,39 @@
    "rubros": [
     "espectaculos"
    ]
+  },
+  {
+   "id": "ceb4882a84232c41",
+   "titulo": "Román Cota ordena revisar proveedores y contratos del Ayuntamiento de Tecate",
+   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQSzlqR1V0RVVOMi1EbmRCRXRUOExycE5pLTIwZFNKa0p1YlU0TlJLdUpZS3VKdG42YWxqUWFXZmx2X2VtNlgzRWZLUzRIdVlsb2ViMUdubHl5Y1l0bkEteVJDcWtGRWNSaExRdFZ1S0UyLWs3aGFab0pNRnVaTWJCZGtzNXJ2a3B3RzlxTmw2QnloVXlzdzlVNXhSVHFPWEs1aHMySlVEMDVhcVlqdE15eFRB?oc=5",
+   "dominio": "bctneus.mx",
+   "fuente": "gn-a94f5954ad2d",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tecate"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T22:09:52+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [
+    {
+     "id": "rcm",
+     "via": "nominal",
+     "clave": "roman cota"
+    }
+   ],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5766,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate",
+   "rubros": []
   },
   {
    "id": "209b3a7dccd7c612",
@@ -2578,6 +3448,31 @@
    },
    "origen": "busqueda_web",
    "descubierta_por": "bq_tecate",
+   "rubros": []
+  },
+  {
+   "id": "4f521531796b1b0e",
+   "titulo": "Baja California debe apostar por energías limpias para crecer: investigador Cetys",
+   "url": "https://www.uniradioinforma.com/sociedad/baja-california-debe-apostar-energias-limpias-crecer-investigador-cetys-n906273",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T22:00:00-07:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4309,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "rubros": []
   },
   {
@@ -2772,33 +3667,6 @@
    "rubros": [
     "seguridad"
    ]
-  },
-  {
-   "id": "251584c80ad9653c",
-   "titulo": "EVALÚAN VIABILIDAD DE UN CENTRO DE BIENESTAR ANIMAL EN SAN QUINTÍN",
-   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE40Yk9JeVhIWGgwZ0ZfbmdaUkhVWVFHYVdmWkFUanBlendfOHRFbFV6aHFLcVZmVE15ZVFfY2RQeDFNTFFTU21rZkZ4U0VrVlVETlBTbDdROWx2Z21KUzVBSkR2cnA?oc=5",
-   "dominio": "bajacalifornia.gob.mx",
-   "fuente": "gn-01e4fd06574f",
-   "zona_medio": "estatal",
-   "zonas": [
-    "San Quintín"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-10-02",
-   "publicado": "2026-10-02T21:36:32+00:00",
-   "capturado": "2026-10-02T22:14:20+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5944,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_sanquintin",
-   "rubros": []
   },
   {
    "id": "f788c4c1289bdac2",
@@ -3460,7 +4328,7 @@
     "version": "0.2.0"
    },
    "origen": "busqueda_web",
-   "descubierta_por": "bq_tecate",
+   "descubierta_por": "bq_rosarito",
    "rubros": [
     "economia"
    ]
@@ -3506,7 +4374,7 @@
    "delegaciones": [],
    "alcance": "zona",
    "fecha": "2026-10-02",
-   "publicado": "2026-10-02T20:38:59+00:00",
+   "publicado": "2026-10-02T20:39:05+00:00",
    "capturado": "2026-10-02T22:14:20+00:00",
    "figuras": [],
    "postura": {
@@ -4713,7 +5581,7 @@
    "delegaciones": [],
    "alcance": "zona",
    "fecha": "2026-10-02",
-   "publicado": "2026-10-02T19:12:21+00:00",
+   "publicado": "2026-10-02T19:12:26+00:00",
    "capturado": "2026-10-02T22:14:20+00:00",
    "figuras": [],
    "postura": {
@@ -5249,6 +6117,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/10/6ac059328f9a5.jpg",
    "rubros": [
     "clima"
    ]
@@ -5347,6 +6216,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/10/6ac05888a9224.jpg",
    "rubros": []
   },
   {
@@ -7269,6 +8139,33 @@
    "rubros": []
   },
   {
+   "id": "9ea208d7fbc3c1b8",
+   "titulo": "Baja California y Sonora contrataron firmas sancionadas por lavado; EU relaciona empresas al Cártel de Sinaloa",
+   "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQa3ZjSk9hRjF2b3pERTZYclkzS21MRHgtRDJuR2U2c0RjMFVVcjNUVTBxenUtSmNOM3RpdXhsTXkwQm1udmxnaVF5REtGeC1WWlFKUkF0aWFCSUQ1Y2ppZE12TFNBU01NcUJHWlNmcFVhemlPRW5tYzhXWDhLdFlHaEstcjJoRDRzdjd1d284YlQ3ZDgzTWRLRjRHdkltU2Z6dm42aURMSWZheWFRS1hFVVVEOXBlb0ptVFFXNzMybXR6S2J5RWxjUGtmSUFUU29ReWFrdS1wU0VLWnNuT0E?oc=5",
+   "dominio": "gentetlx.com.mx",
+   "fuente": "gn-c3dc86c5d515",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T16:07:43+00:00",
+   "capturado": "2026-10-03T11:39:19+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5836,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
    "id": "553a4f0f6eada117",
    "titulo": "Preparan a jóvenes de ITAMA para una vida independiente",
    "url": "https://www.uniradioinforma.com/sociedad/preparan-jovenes-itama-una-vida-independiente-n906551",
@@ -8491,6 +9388,25 @@
    ]
   },
   {
+   "id": "263263b092e64653",
+   "titulo": "Liverpool eyeing £40m move for Mexico wonderkid Gilberto Mora — reports",
+   "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNbE5iR0oxcG9MZzdkenVfRVBPZnJiV0VSbzVrcFc2Ukh4dEVXdjFVdUxvaURxTm51YTFaVl9iZTRGZDVWcjBOUUN5X2s0UXd1a05UTjFTOVVuVFdtYVZQd1RnY0Y1ZExzeERYM3h6Y2psc2hBUE9MNFpvZE90QlF2YVkwaXNCY3BzaDBWaE5XQ29QQklCTGlhVWdnWEdXZHBPT29Bc0kxYktiNzBE0gGyAUFVX3lxTE8wRzVBNnZDQWxyckhXWlVBcmlvMFVpOVZFeHNpZjFOUVZyNFRRUkZkUGp3aXVMcHliU2hjYWVUaDAwWmtRRXd0OVVRYkVUX21VZlU5X2V5Z0p0SkZteUxaMXhxWGxzMk5XSjlqcHBIWFlEdklvVWl2RlhNa3JKY19nb3M3SW1lTDNqUWdaWUlUWTFkcGhyanBkZmxuSVNxM1FMNHRISHVZRXpQU004Y0U4Y0E?oc=5",
+   "dominio": "tribuna.com",
+   "fuente": "gn-aa02448eca0a",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-02",
+   "publicado": "2026-10-02T11:45:39+00:00",
+   "capturado": "2026-10-03T05:16:07+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
+  },
+  {
    "id": "11dbccb2648fb6c3",
    "titulo": "Hallan a hombre sin vida en casa de la colonia Balderrama",
    "url": "https://www.uniradioinforma.com/policiaca/hallan-hombre-vida-casa-colonia-balderrama-n906503",
@@ -9348,25 +10264,6 @@
    "rubros": [
     "espectaculos"
    ]
-  },
-  {
-   "id": "263263b092e64653",
-   "titulo": "Liverpool eyeing £40m move for Mexico wonderkid Gilberto Mora — reports",
-   "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNbE5iR0oxcG9MZzdkenVfRVBPZnJiV0VSbzVrcFc2Ukh4dEVXdjFVdUxvaURxTm51YTFaVl9iZTRGZDVWcjBOUUN5X2s0UXd1a05UTjFTOVVuVFdtYVZQd1RnY0Y1ZExzeERYM3h6Y2psc2hBUE9MNFpvZE90QlF2YVkwaXNCY3BzaDBWaE5XQ29QQklCTGlhVWdnWEdXZHBPT29Bc0kxYktiNzBE0gGyAUFVX3lxTE8wRzVBNnZDQWxyckhXWlVBcmlvMFVpOVZFeHNpZjFOUVZyNFRRUkZkUGp3aXVMcHliU2hjYWVUaDAwWmtRRXd0OVVRYkVUX21VZlU5X2V5Z0p0SkZteUxaMXhxWGxzMk5XSjlqcHBIWFlEdklvVWl2RlhNa3JKY19nb3M3SW1lTDNqUWdaWUlUWTFkcGhyanBkZmxuSVNxM1FMNHRISHVZRXpQU004Y0U4Y0E?oc=5",
-   "dominio": "tribuna.com",
-   "fuente": "gn-aa02448eca0a",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-02",
-   "publicado": "2026-10-02T05:58:22+00:00",
-   "capturado": "2026-10-03T05:16:07+00:00",
-   "figuras": [],
-   "postura": null,
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_frontera_en",
-   "rubros": []
   },
   {
    "id": "97a3388a9e1148c1",
@@ -109983,30 +110880,6 @@
    "rubros": []
   },
   {
-   "id": "a5ee3a889ec9708e",
-   "titulo": "El error de una mujer que confundió dos marcas de helado se convirtió en la bancarrota de una empresa y una prueba clave del juicio que terminó con una condena de 23.8 millones de dólares",
-   "url": "https://www.elimparcial.com/locurioso/2026/09/19/el-error-de-una-mujer-que-confundio-dos-marcas-de-helado-se-convirtio-en-la-bancarrota-de-una-empresa-y-una-prueba-clave-del-juicio-que-termino-con-una-condena-de-238-millones-de-dolares/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-09-20",
-   "publicado": "2026-09-20T04:18:42+00:00",
-   "capturado": "2026-09-20T06:29:16+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.8809,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/SRLPOXL2XZELZNRHIZ45W5J2XU.jpg?auth=5348db58a80b77e2d3b4349e0883ebebd4407fbb365404ab503aae42cdb834b2&smart=true&width=1280&height=853",
-   "rubros": []
-  },
-  {
    "id": "1a1b0e80069c3157",
    "titulo": "Sindicato de telefonistas pide a Sheinbaum justicia laboral por despido de 200 trabajadores de Telnor",
    "url": "https://zetatijuana.com/2026/09/sindicato-de-telefonistas-pide-a-sheinbaum-justicia-laboral-por-despido-de-200-trabajadores-de-telnor/",
@@ -201174,7 +202047,7 @@
     {
      "id": "ram",
      "via": "nominal",
-     "clave": "adame munoz"
+     "clave": "rocio adame"
     }
    ],
    "postura": {
