@@ -82,3 +82,16 @@ export function publicacionVisual(p: PublicacionSeguida): PublicacionVisual {
   };
   return { post, red: p.red, fuente: p.creador ?? "", clave: p.id, url: p.url };
 }
+
+/** Fija, en pantalla y nunca en un prompt. El tono se muestra en seguimiento
+ *  aunque el titulo nombre a una figura del roster (cliente, 29 de septiembre
+ *  de 2026), y esta frase es lo que dice que el modelo lee como suena una
+ *  frase, no la postura hacia nadie. La comparten la ficha y el expediente de
+ *  /reportes, que pinta el mismo tono debajo de cada publicacion. */
+export const SALVEDAD_TONO = "Mide cómo suena cada comentario, no la postura hacia una persona.";
+
+/** Fija, al pie de «Lo que dicen los comentarios»: lo que el modelo no puede
+ *  decir bien sin nombrar lo que reglas.ts le prohibe (AGENTS.md, «The
+ *  sampling caveat is the page's»). La comparten la ficha, el expediente de
+ *  /reportes y su PDF. */
+export const SALVEDAD_RESUMEN = "Son los comentarios que se leyeron de esta publicación, no una muestra de nadie.";

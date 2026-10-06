@@ -333,7 +333,7 @@ const resumenVigente = (r: ResumenGuardado | null): boolean => r !== null && r.t
 /** Los temas con solo los comentarios que la pagina tiene: uno que vencio a
  *  los 15 dias, o que ya no vino, no se puede abrir. Un tema que se queda con
  *  menos de dos deja de ser un asunto que reaparece. */
-function temasPresentes(r: ResumenGuardado, filas: readonly { huella: string }[]): TemaComentarios[] | null {
+export function temasPresentes(r: ResumenGuardado, filas: readonly { huella: string }[]): TemaComentarios[] | null {
   if (r.temas === undefined) return null;
   const hay = new Set(filas.map((f) => f.huella));
   return r.temas

@@ -1,29 +1,28 @@
 "use client";
 
-import { ArrowClockwise as Actualizar, ArrowDown as Bajar, ArrowLeft as Volver, ArrowSquareOut as Abrir, Sparkle as IA, Trash as Papelera, X as Cerrar } from "@phosphor-icons/react";
+import { ArrowClockwise as Actualizar, ArrowLeft as Volver, ArrowSquareOut as Abrir, Trash as Papelera } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { useSWRConfig } from "swr";
 
 import { MedioSocial } from "@/components/paneles/medio-social";
+import { ComentariosSeguidos } from "@/components/seguimiento/comentarios-seguidos";
+import { ResumenComentarios } from "@/components/seguimiento/resumen-comentarios";
 import { Bisel } from "@/components/ui/bisel";
-import { ChipSentimiento } from "@/components/ui/chip-sentimiento";
 import { CifraTono } from "@/components/ui/cifra-tono";
-import { clasesBoton, clasesInsignia } from "@/components/ui/clases";
+import { clasesBoton } from "@/components/ui/clases";
 import { EstadoCarga } from "@/components/ui/estado-carga";
 import { Hoja } from "@/components/ui/hoja";
-import { CON_COLUMNA_LIKES as CON_COLUMNA, LikesComentario as Likes } from "@/components/ui/likes-comentario";
-import { Chip, Hueco } from "@/components/ui/primitivas";
-import { Segmentado } from "@/components/ui/segmentado";
+import { Hueco } from "@/components/ui/primitivas";
 import { TiraTono } from "@/components/ui/tira-tono";
 import { ErrorDatos } from "@/lib/datos/fetcher";
 import { serieTono } from "@/lib/dominio/consultas";
 import { fechaLarga, hora, numero, pluralizar } from "@/lib/dominio/formato";
 import { NOMBRE_RED } from "@/lib/dominio/publicaciones";
-import type { Actualizacion, ComentarioSeguido, RespuestaSeguimiento, TemaComentarios, TonoComentario } from "@/lib/seguimiento/contrato";
-import { diferencia, metricasDe, momento, nombreLikes, ordenarComentarios, publicacionVisual, type OrdenComentarios } from "@/lib/seguimiento/formato";
-import { useActualizar, useBorrar, useFichaSeguimiento, useResumir } from "@/lib/seguimiento/use-seguimiento";
+import type { Actualizacion, RespuestaSeguimiento, TemaComentarios } from "@/lib/seguimiento/contrato";
+import { SALVEDAD_TONO, diferencia, metricasDe, momento, publicacionVisual } from "@/lib/seguimiento/formato";
+import { useActualizar, useBorrar, useFichaSeguimiento } from "@/lib/seguimiento/use-seguimiento";
 
 /**
  * /seguimiento/[id]: una publicacion y todo lo que se sabe de ella.
@@ -58,17 +57,10 @@ import { useActualizar, useBorrar, useFichaSeguimiento, useResumir } from "@/lib
 
 const ANCHO = "mx-auto w-full max-w-[88rem] px-4 md:px-8";
 
-/** Los que se ven al abrir, y cuantos mas trae cada «Ver más». */
-const TOPE_INICIAL = 8;
-const MAS_POR_VEZ = 20;
-
 /** Fijas, en pantalla y no en el prompt: lo que el modelo no puede decir
  *  bien sin nombrar lo que reglas.ts le prohibe (ver AGENTS.md, «The sampling
  *  caveat is the page's»). */
-const SALVEDAD_TONO = "Mide cómo suena cada comentario, no la postura hacia una persona.";
-const SALVEDAD_RESUMEN = "Son los comentarios que se leyeron de esta publicación, no una muestra de nadie.";
 
-type Filtro = "todos" | TonoComentario;
 
 function Cifras({ a, previa, p }: { a: Actualizacion; previa: Actualizacion | undefined; p: RespuestaSeguimiento["publicacion"] }) {
   if (a.metricas === null) return <p className="text-cuerpo text-tinta-meta">La publicación no dio sus cifras en esta lectura.</p>;
@@ -161,229 +153,6 @@ function Lectura({ a, previa, p }: { a: Actualizacion; previa: Actualizacion | u
         </>
       )}
     </li>
-  );
-}
-
-function Comentario({ c, likes, columna }: { c: ComentarioSeguido; likes: [string, string]; columna: boolean }) {
-  return (
-    <li className={`py-4 first:pt-0 ${columna ? CON_COLUMNA : ""}`}>
-      {columna ? <p className="text-cuerpo"><Likes n={c.likes} nombre={likes} /></p> : null}
-      <div className="min-w-0">
-        <blockquote className="max-w-[65ch] break-words text-lectura text-tinta-dato">{c.texto}</blockquote>
-        <p className="mt-2 flex flex-wrap items-center gap-2 text-meta text-tinta-meta">
-          {c.escrito === null ? <Hueco>sin fecha</Hueco> : <span>{momento(c.escrito)}</span>}
-          <ChipSentimiento s={c.sentimiento} />
-          {c.nuevo ? <span className={clasesInsignia("dato")}>nuevo</span> : null}
-        </p>
-      </div>
-    </li>
-  );
-}
-
-const TONOS: readonly { id: TonoComentario; nombre: string }[] = [
-  { id: "positivo", nombre: "Positivos" },
-  { id: "negativo", nombre: "Negativos" },
-  { id: "neutral", nombre: "Neutrales" },
-];
-
-/**
- * Los comentarios. Abren por los de mas likes y con pocos a la vista
- * (cliente, 30 de septiembre de 2026: «muestra muchos desde el inicio»):
- * hasta ese dia eran los cincuenta mas recientes, y en un telefono eso son
- * veinte pantallas antes de llegar a las actualizaciones.
- *
- * Tres filtros que son tres gestos distintos: el TEMA llega desde el resumen
- * («Ver los 11 comentarios») y se quita con su pastilla; el tono es un filtro
- * con su cuenta (ui/primitivas.tsx::Chip, que alinea la etiqueta con su
- * numero por la linea base); el orden es un interruptor de dos
- * (ui/segmentado.tsx). Se combinan.
- *
- * Un control que no cambiaria nada no se ofrece: un tono sin comentarios (la
- * tarjeta de arriba ya dice el cero), el filtro entero cuando todos caen en el
- * mismo (una publicacion en ingles no tiene tono), y el orden por likes cuando
- * ningun comentario trae likes.
- */
-function Comentarios({ datos, tema, alQuitarTema }: {
-  datos: RespuestaSeguimiento;
-  tema: TemaComentarios | null;
-  alQuitarTema: () => void;
-}) {
-  const [filtro, setFiltro] = useState<Filtro>("todos");
-  const [orden, setOrden] = useState<OrdenComentarios>("likes");
-  const [tope, setTope] = useState(TOPE_INICIAL);
-  // Un tema nuevo vuelve a abrir la lista desde arriba. Es el ajuste de
-  // estado al cambiar una prop que recomienda React: sin efecto, en el render.
-  const [temaVisto, setTemaVisto] = useState(tema);
-  if (temaVisto !== tema) {
-    setTemaVisto(tema);
-    setTope(TOPE_INICIAL);
-  }
-  const todos = datos.comentarios;
-  const likes = nombreLikes(datos.publicacion.red);
-  const tonos = TONOS.map((t) => ({ ...t, n: todos.filter((c) => c.sentimiento === t.id).length })).filter((t) => t.n > 0);
-  const filtrable = tonos.some((t) => t.n < todos.length);
-  const ordenable = todos.length > 1 && todos.some((c) => c.likes > 0);
-  const delTema = tema === null ? todos : todos.filter((c) => tema.huellas.includes(c.huella));
-  const lista = ordenarComentarios(filtro === "todos" ? delTema : delTema.filter((c) => c.sentimiento === filtro), ordenable ? orden : "recientes");
-  const filtrar = (f: Filtro) => { setFiltro(f); setTope(TOPE_INICIAL); };
-  const ordenar = (o: OrdenComentarios) => { setOrden(o); setTope(TOPE_INICIAL); };
-  const resto = lista.length - tope;
-  return (
-    <section id="seguimiento-comentarios" aria-labelledby="seguimiento-comentarios-titulo" className="scroll-mt-24 border-t border-filo pt-8">
-      <h2 id="seguimiento-comentarios-titulo" className="text-rotulo text-tinta-titulo">Comentarios</h2>
-      <p className="mt-1 text-cuerpo text-tinta-meta">Se borran {datos.retencionDias} días después de la última actualización que los trajo.</p>
-      {filtrable || ordenable || tema !== null ? (
-        <div className="mt-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
-          <div className="flex flex-wrap items-center gap-2">
-            {tema === null ? null : (
-              <button type="button" onClick={alQuitarTema} aria-label={`Quitar el tema ${tema.nombre}`} className={clasesBoton(true)}>
-                {tema.nombre} <Cerrar size={16} aria-hidden />
-              </button>
-            )}
-            {filtrable ? (
-              <div role="group" aria-label="Tono de los comentarios" className="flex flex-wrap gap-2">
-                <Chip activo={filtro === "todos"} onClick={() => filtrar("todos")} cuenta={delTema.length}>Todos</Chip>
-                {tonos.map((t) => (
-                  <Chip key={t.id} activo={filtro === t.id} onClick={() => filtrar(t.id)} cuenta={delTema.filter((c) => c.sentimiento === t.id).length}>{t.nombre}</Chip>
-                ))}
-              </div>
-            ) : null}
-          </div>
-          {ordenable ? (
-            <Segmentado etiqueta="Orden de los comentarios" ancho="justo" opciones={[
-              { id: "likes", nombre: `Más ${likes[1]}`, activo: orden === "likes", onElegir: () => ordenar("likes") },
-              { id: "recientes", nombre: "Más recientes", activo: orden === "recientes", onElegir: () => ordenar("recientes") },
-            ]} />
-          ) : null}
-        </div>
-      ) : null}
-      {todos.length === 0 ? (
-        <p className="mt-6 text-cuerpo text-tinta-meta">
-          {datos.actualizaciones.some((a) => a.estado === "listo") ? "No hay comentarios con texto guardados." : "Todavía no se leen los comentarios."}
-        </p>
-      ) : lista.length === 0 ? (
-        <p className="mt-6 text-cuerpo text-tinta-meta">Ningún comentario con ese tono.</p>
-      ) : (
-        <>
-          <ul className="mt-6 divide-y divide-vela">
-            {lista.slice(0, tope).map((c) => <Comentario key={c.huella} c={c} likes={likes} columna={ordenable} />)}
-          </ul>
-          {resto > 0 ? (
-            <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
-              <button type="button" onClick={() => setTope((t) => t + MAS_POR_VEZ)} className={clasesBoton(false)}>
-                Ver {numero(Math.min(MAS_POR_VEZ, resto))} más
-              </button>
-              <p className="text-meta tabular-nums text-tinta-meta">{numero(tope)} de {numero(lista.length)}</p>
-            </div>
-          ) : null}
-        </>
-      )}
-    </section>
-  );
-}
-
-/** Cuantos comentarios de un tema se asoman en el resumen antes de ir a la
- *  lista: los de mas likes, como las resenas bajo un tema de Amazon. */
-const ASOMAN_POR_TEMA = 3;
-
-/**
- * Un tema abierto dentro del resumen: lo que se dice de el y sus comentarios
- * de mas likes, recortados a tres renglones, y el paso a la lista entera. Va
- * separado por un filo y no en otra caja: una tarjeta dentro de la tarjeta.
- */
-function TemaAbierto({ tema, datos, alVerTodos }: { tema: TemaComentarios; datos: RespuestaSeguimiento; alVerTodos: () => void }) {
-  const likes = nombreLikes(datos.publicacion.red);
-  const suyos = ordenarComentarios(datos.comentarios.filter((c) => tema.huellas.includes(c.huella)), "likes");
-  const columna = suyos.some((c) => c.likes > 0);
-  return (
-    <div className="grid gap-4 border-t border-vela pt-4 aparicion-suave">
-      <p className="max-w-[60ch] text-lectura text-tinta-dato">{tema.detalle}</p>
-      <ul className="grid gap-3">
-        {suyos.slice(0, ASOMAN_POR_TEMA).map((c) => (
-          <li key={c.huella} className={columna ? CON_COLUMNA : ""}>
-            {columna ? <p className="text-cuerpo"><Likes n={c.likes} nombre={likes} /></p> : null}
-            <blockquote className="line-clamp-3 max-w-[60ch] break-words text-cuerpo text-tinta-prosa">{c.texto}</blockquote>
-          </li>
-        ))}
-      </ul>
-      {suyos.length > ASOMAN_POR_TEMA ? (
-        <p>
-          <button type="button" onClick={alVerTodos} className={clasesBoton(false)}>
-            Ver los {numero(suyos.length)} comentarios <Bajar size={16} aria-hidden />
-          </button>
-        </p>
-      ) : null}
-    </div>
-  );
-}
-
-/**
- * «Lo que dicen los comentarios», con la forma del «Customers say» de Amazon
- * que el cliente mando (29 y 30 de septiembre de 2026): dos o tres frases de
- * conjunto y, debajo, los temas que reaparecen como pastillas con su cuenta.
- * Tocar una la abre aqui mismo; «Ver los N» lleva a la lista filtrada. La
- * cuenta de cada tema es cuantos comentarios cita el modelo y existen: la
- * pone el codigo (lib/analisis/seguimiento.ts), nunca el modelo.
- *
- * Un resumen de antes del 30 de septiembre era un solo parrafo, sin temas: se
- * pinta como estaba y se ofrece rehacerlo. Sin resumen se ofrece el boton;
- * nunca se pide solo.
- */
-function ResumenComentarios({ datos, alResumir, alVerTema }: {
-  datos: RespuestaSeguimiento;
-  alResumir: () => Promise<unknown>;
-  alVerTema: (t: TemaComentarios) => void;
-}) {
-  const resumir = useResumir();
-  const [abierto, setAbierto] = useState<string | null>(null);
-  const r = datos.resumen;
-  if (r === null && !datos.resumible) return null;
-  const temas = r?.temas ?? [];
-  const tema = temas.find((t) => t.nombre === abierto) ?? null;
-  async function pedir() {
-    if ((await resumir.correr(datos.publicacion.id)) !== null) await alResumir();
-  }
-  const boton = (texto: string) => (
-    <div className="grid justify-items-start gap-3">
-      {resumir.enviando ? <EstadoCarga etiqueta="Resumiendo comentarios" /> : (
-        <button type="button" onClick={() => void pedir()} className={clasesBoton(false)}>
-          <IA size={16} aria-hidden /> {texto}
-        </button>
-      )}
-      {resumir.fallo === null ? null : <p role="alert" className="text-cuerpo text-baja">{resumir.fallo.mensaje}</p>}
-    </div>
-  );
-  return (
-    <section aria-labelledby="seguimiento-resumen">
-      <Bisel nivel="panel" interior="grid gap-5 p-4 sm:p-6">
-        <h2 id="seguimiento-resumen" className="text-cuerpo font-medium text-tinta-prosa">Lo que dicen los comentarios</h2>
-        {r === null ? boton("Resumir comentarios") : (
-          <>
-            <p className="max-w-[60ch] break-words text-pretty text-lectura font-normal text-tinta-titulo aparicion-suave sm:text-rotulo sm:font-normal">{r.texto}</p>
-            {temas.length > 0 ? (
-              <div className="grid gap-4">
-                <div role="group" aria-label="Temas que reaparecen" className="flex flex-wrap gap-2">
-                  {temas.map((t) => (
-                    <Chip key={t.nombre} activo={abierto === t.nombre} onClick={() => setAbierto((a) => (a === t.nombre ? null : t.nombre))} cuenta={t.huellas.length}>
-                      {t.nombre}
-                    </Chip>
-                  ))}
-                </div>
-                {tema === null ? null : <TemaAbierto tema={tema} datos={datos} alVerTodos={() => alVerTema(tema)} />}
-              </div>
-            ) : null}
-            {r.temas === null && datos.resumible ? boton("Rehacer el resumen") : null}
-            <div className="grid gap-1 text-meta text-tinta-meta">
-              <p className="flex items-start gap-2">
-                <IA size={14} aria-hidden className="mt-px shrink-0" />
-                <span>Generado con IA a partir del texto de {numero(r.leidos)} {pluralizar(r.leidos, "comentario", "comentarios")} · {momento(r.fecha)}</span>
-              </p>
-              <p>{SALVEDAD_RESUMEN}</p>
-            </div>
-          </>
-        )}
-      </Bisel>
-    </section>
   );
 }
 
@@ -528,7 +297,7 @@ export function FichaSeguimiento({ id }: { id: string }) {
 
           {/* Los comentarios antes que la historia de lecturas: son lo que
               se viene a leer, y la historia es para comparar. */}
-          <Comentarios datos={data} tema={temaActivo} alQuitarTema={() => setTema(null)} />
+          <ComentariosSeguidos id="seguimiento-comentarios" datos={data} tema={temaActivo} alQuitarTema={() => setTema(null)} />
 
           <section aria-labelledby="seguimiento-lecturas" className="border-t border-filo pt-8">
             <h2 id="seguimiento-lecturas" className="text-rotulo text-tinta-titulo">Actualizaciones</h2>

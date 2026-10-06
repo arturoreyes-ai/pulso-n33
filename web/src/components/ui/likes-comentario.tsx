@@ -1,4 +1,4 @@
-import { Heart as Corazon } from "@phosphor-icons/react";
+import { Heart as Corazon } from "@phosphor-icons/react/dist/ssr";
 
 import { numero, pluralizar } from "@/lib/dominio/formato";
 
