@@ -1020,31 +1020,53 @@ def importar_comentarios(cache, consulta, url, textos, ahora, fecha=None):
     consultas-comentarios.json, que .gitignore excluye.
 
     `fecha` es la que la persona sepa del comentario (Facebook solo muestra
-    «27 sem»); sin ella queda vacia, que es «sin fecha», nunca inventada.
+    «27 sem»); sin ella queda la que ya tenia en el cache, y si no tenia,
+    vacia, que es «sin fecha», nunca inventada.
+
+    Cada linea puede empezar con sus likes, «12 | texto» (2 de octubre de
+    2026: el cliente pidio ver los likes de cada comentario, y los cuatro de
+    Tijuana Linea Roja habian entrado en 0 porque el formato no tenia donde
+    ponerlos). Sin prefijo es 0, que la tarjeta no pinta: el mismo «no se
+    sabe» de los actores. Reimportar el mismo texto reemplaza el registro,
+    porque el id sale del texto y no de los likes.
     Devuelve cuantos se guardaron (los repetidos colapsan por id).
     """
     red = red_de_url(url)
     if red is None:
         raise ValueError("{} no es un post de Facebook, Instagram ni TikTok".format(url))
+    dir_cache = _dir_cache(cache, consulta["id"], red)
+    previos = {c["id"]: c for c in leer_cache(dir_cache)}
     nuevos = []
-    for texto in textos:
-        texto = (texto or "").strip()
+    for linea in textos:
+        texto, likes = _linea_importada(linea)
         if not texto:
             continue
+        cid = _redes._id_comentario(url, texto)
         nuevos.append({
-            "id": _redes._id_comentario(url, texto),
+            "id": cid,
             "texto": texto,
             "post": url,
             "cuenta": consulta["id"],
             "zona_cuenta": "nacional",
             "idioma": consulta.get("idioma", "es"),
-            "fecha": fecha or "",
-            "likes": 0,
+            "fecha": fecha or previos.get(cid, {}).get("fecha") or "",
+            "likes": likes,
             "respuestas": 0,
             "plataforma": red,
         })
-    guardar_cache(nuevos, ahora, _dir_cache(cache, consulta["id"], red))
+    guardar_cache(nuevos, ahora, dir_cache)
     return len({c["id"] for c in nuevos})
+
+
+def _linea_importada(linea):
+    """(texto, likes) de una linea de --importar-comentarios: «12 | texto» o
+    solo el texto. Solo digitos antes de la barra: «Fraude | lo digo yo» es
+    un comentario entero, no un conteo."""
+    linea = (linea or "").strip()
+    cabeza, barra, resto = linea.partition("|")
+    if barra and cabeza.strip().isdigit() and resto.strip():
+        return resto.strip(), int(cabeza.strip())
+    return linea, 0
 
 
 # ------------------------------------------------------------- sentimiento

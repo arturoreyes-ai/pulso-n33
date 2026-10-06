@@ -16,7 +16,7 @@ import unittest
 from datetime import datetime, timedelta
 from unittest.mock import patch
 
-from pulso import consultas, facebook, instagram, tiktok
+from pulso import consultas, facebook, instagram, redes, tiktok
 from pulso.pipeline import _serializar
 from pulso.sentimiento import AnalizadorFalso
 from pulso.validador import (validar_consultas, validar_consultas_comentarios,
@@ -819,6 +819,24 @@ class TestImportarComentarios(Base):
             self.assertEqual(r["fecha"], "2026-03-18")
             for clave in ("autor", "usuario", "profileName", "ownerUsername"):
                 self.assertNotIn(clave, r)
+
+    def test_likes_delante_y_reimportar_conserva_la_fecha(self):
+        """2 de octubre de 2026: los likes entran como «12 | texto», y
+        reimportar para darlos no borra la fecha que ya tenian."""
+        consultas.importar_comentarios(self.cache, PERSONA, self.POST, [
+            "Prometen servicios y no cumplen", "Fraude | lo digo yo"], AHORA, fecha="2026-03-18")
+        otro_dia = "2026-09-05T18:00:00+00:00"
+        consultas.importar_comentarios(self.cache, PERSONA, self.POST, [
+            " 12 | Prometen servicios y no cumplen", "Fraude | lo digo yo"], otro_dia)
+        por_texto = {c["texto"]: c for c in redes.leer_cache(
+            os.path.join(self.cache, "cq_persona", "facebook"))}
+        self.assertEqual(sorted(por_texto), ["Fraude | lo digo yo", "Prometen servicios y no cumplen"],
+                         "el id sale del texto: reimportar no duplica")
+        self.assertEqual(por_texto["Prometen servicios y no cumplen"]["likes"], 12)
+        self.assertEqual(por_texto["Fraude | lo digo yo"]["likes"], 0,
+                         "sin digitos delante, la barra es del comentario")
+        for c in por_texto.values():
+            self.assertEqual(c["fecha"], "2026-03-18")
 
     def test_un_enlace_de_prensa_no_se_importa(self):
         with self.assertRaises(ValueError):
