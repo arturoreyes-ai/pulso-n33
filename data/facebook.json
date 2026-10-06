@@ -1,50 +1,50 @@
 {
  "esquema": 1,
- "generado": "2026-10-06T06:52:39+00:00",
+ "generado": "2026-10-06T13:55:13+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 2517,
- "posts_vigentes": 402,
- "opinion": 2304,
- "repetidos": 120,
- "reacciones": 170,
+ "comentarios_vigentes": 2581,
+ "posts_vigentes": 411,
+ "opinion": 2362,
+ "repetidos": 121,
+ "reacciones": 176,
  "por_zona": {
   "Ensenada": 65,
   "Mexicali": 58,
   "Playas de Rosarito": 23,
   "San Quintín": 1,
   "Tecate": 29,
-  "Tijuana": 1190,
-  "estatal": 1008,
+  "Tijuana": 1229,
+  "estatal": 1021,
   "internacional": 4,
-  "nacional": 139
+  "nacional": 151
  },
  "por_cuenta": {
   "aztecabc_fb": 98,
-  "blanconegro_fb": 1061,
-  "blancorojo_fb": 583,
-  "ndtijuana_fb": 738,
+  "blanconegro_fb": 1087,
+  "blancorojo_fb": 593,
+  "ndtijuana_fb": 766,
   "psn_fb": 37
  },
  "por_idioma": {
-  "es": 2517
+  "es": 2581
  },
  "por_tema": [
   {
    "tema": "agua",
-   "comentarios": 46,
-   "posts": 33
+   "comentarios": 50,
+   "posts": 34
   },
   {
    "tema": "gobierno",
-   "comentarios": 43,
-   "posts": 33
+   "comentarios": 45,
+   "posts": 35
   },
   {
    "tema": "calor",
-   "comentarios": 34,
-   "posts": 29
+   "comentarios": 35,
+   "posts": 30
   },
   {
    "tema": "policia",
@@ -97,6 +97,11 @@
    "posts": 4
   },
   {
+   "tema": "empresas",
+   "comentarios": 2,
+   "posts": 2
+  },
+  {
    "tema": "limpieza",
    "comentarios": 2,
    "posts": 2
@@ -120,22 +125,12 @@
    "tema": "cuerpos",
    "comentarios": 1,
    "posts": 1
-  },
-  {
-   "tema": "denuncian",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
-   "tema": "empresas",
-   "comentarios": 1,
-   "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 250,
-  "negativo": 1159,
-  "neutral": 895,
+  "positivo": 257,
+  "negativo": 1192,
+  "neutral": 913,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -175,7 +170,7 @@
    "activa": true
   }
  ],
- "releidos": 19,
+ "releidos": 18,
  "destacados": [
   {
    "url": "https://www.facebook.com/reel/1830939975007445",
@@ -184,10 +179,10 @@
    "fecha": "2026-10-06",
    "titulo": "⚡ Continúan las fallas eléctricas; reportan corto circuito en poste",
    "tipo": "video",
-   "likes": 870,
-   "comentarios": 67,
-   "compartidos": 73,
-   "reproducciones": 83067,
+   "likes": 1499,
+   "comentarios": 100,
+   "compartidos": 118,
+   "reproducciones": 151423,
    "alcance": "zona",
    "publicado": "2026-10-06T05:08:27+00:00",
    "cosechados": 10,
@@ -208,10 +203,10 @@
    "fecha": "2026-10-06",
    "titulo": "⁠Llamas consumen viviendas; bomberos en el lugar",
    "tipo": "video",
-   "likes": 289,
-   "comentarios": 31,
-   "compartidos": 32,
-   "reproducciones": 22037,
+   "likes": 571,
+   "comentarios": 44,
+   "compartidos": 51,
+   "reproducciones": 48727,
    "alcance": "nacional",
    "publicado": "2026-10-06T06:12:06+00:00",
    "cosechados": 10,
@@ -231,6 +226,77 @@
    ]
   },
   {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/1414586000785930",
+   "cuenta": "blanconegro_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-06",
+   "titulo": "Policías localizan restos humanos en bolsas negras y un mensaje Puente Amarillo",
+   "tipo": "video",
+   "likes": 526,
+   "comentarios": 30,
+   "compartidos": 38,
+   "reproducciones": 46445,
+   "alcance": "nacional",
+   "publicado": "2026-10-06T07:31:01+00:00",
+   "cosechados": 9,
+   "opinion": 9,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 5,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/reel/1600312827619854",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-06",
+   "titulo": "💡⚡️ ¡Así se vio el apagón desde las alturas!",
+   "tipo": "video",
+   "likes": 423,
+   "comentarios": 35,
+   "compartidos": 40,
+   "reproducciones": 43708,
+   "alcance": "zona",
+   "publicado": "2026-10-06T06:28:44+00:00",
+   "cosechados": 7,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 4,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0piMokxd5wLNiyWtkfgTYBqinH4EtYDi6HgqmdLdQ2KALczdUyU1iiqGF6oKojSSDl",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-06",
+   "titulo": "#GaleríaNDT Tijuana arde entre calor extremo e incendios; Bomberos enfrentan jornada intensa",
+   "tipo": "imagen",
+   "likes": 347,
+   "comentarios": 12,
+   "compartidos": 45,
+   "alcance": "zona",
+   "publicado": "2026-10-06T03:54:01+00:00",
+   "cosechados": 10,
+   "opinion": 9,
+   "sentimiento": {
+    "positivo": 4,
+    "negativo": 2,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid024NEy3GZohzK9gqqjinKvkGeZjhMS5Gz8zF1zetXEQ3feWqP5CcLbcFhfTUiyBcUZl&id=100086488503408",
    "cuenta": "blancorojo_fb",
    "zona": "estatal",
@@ -248,6 +314,29 @@
     "positivo": 0,
     "negativo": 7,
     "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid036zb821AMBr6fJWyfKVfagPHW2kFoLfmHyj6JhXmMsa14ukA5HbossdEFxMezNxojl",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-06",
+   "titulo": "#NDTInforma | Buscan a familiares de Ernestina Nohemí Bravo Reyes, localizada en Natura",
+   "tipo": "imagen",
+   "likes": 237,
+   "comentarios": 43,
+   "compartidos": 153,
+   "alcance": "zona",
+   "publicado": "2026-10-06T06:10:29+00:00",
+   "cosechados": 9,
+   "opinion": 6,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 5,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -323,6 +412,58 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid08Ajmpuv3MX7RAKwTCBNXy988gGUwYkNrR2HhMXbEE8ThRDiQDTFuCjg4ggeyqQQ9l",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-06",
+   "titulo": "#NDTInforma 💧 Calor y fallas eléctricas dejan sin agua a sectores de Tijuana",
+   "tipo": "imagen",
+   "likes": 191,
+   "comentarios": 25,
+   "compartidos": 91,
+   "alcance": "zona",
+   "publicado": "2026-10-06T03:17:45+00:00",
+   "cosechados": 9,
+   "opinion": 9,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 8,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": [
+    {
+     "tema": "agua",
+     "comentarios": 4
+    }
+   ]
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/videos/1659850778897922",
+   "cuenta": "ndtijuana_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-06",
+   "titulo": "Incendio Colonia Florido",
+   "tipo": "video",
+   "likes": 190,
+   "comentarios": 11,
+   "compartidos": 15,
+   "reproducciones": 15423,
+   "alcance": "nacional",
+   "publicado": "2026-10-06T06:16:32+00:00",
+   "cosechados": 8,
+   "opinion": 6,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 6,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/NdTijuana/posts/pfbid02BiNxk5YQCnidXLSmUhpDeL31ZrhbqmiSXsNmcgdcVrjGwJ28iGQiQCMdrSek5NR6l",
    "cuenta": "ndtijuana_fb",
    "zona": "Tijuana",
@@ -375,46 +516,46 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/reel/1600312827619854",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
+   "url": "https://www.facebook.com/NdTijuana/videos/28796150300017907",
+   "cuenta": "ndtijuana_fb",
+   "zona": "estatal",
    "fecha": "2026-10-06",
-   "titulo": "💡⚡️ ¡Así se vio el apagón desde las alturas!",
+   "titulo": "Localizan restos humanos Puente amarillo",
    "tipo": "video",
-   "likes": 97,
-   "comentarios": 7,
-   "compartidos": 7,
-   "reproducciones": 8391,
-   "alcance": "zona",
-   "publicado": "2026-10-06T06:28:44+00:00",
-   "cosechados": 7,
-   "opinion": 7,
+   "likes": 108,
+   "comentarios": 4,
+   "compartidos": 8,
+   "reproducciones": 11255,
+   "alcance": "nacional",
+   "publicado": "2026-10-06T07:25:33+00:00",
+   "cosechados": 4,
+   "opinion": 4,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 4,
-    "neutral": 3,
+    "negativo": 3,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0FfHUa6NBVx3jLmUihb4KsVXd6hQ4VWH2iUyeSiXT9ZmadjtbVFJZDFh2HZfANKmhl",
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02KWjBkmJ1MKtuGfRFyVDBQ6feGkTNnmSWpfKWKY8VC88m3vnLEy5gfeR1sn5ETaK7l",
    "cuenta": "ndtijuana_fb",
    "zona": "Tijuana",
    "fecha": "2026-10-06",
    "titulo": "#NDTInforma Caen cinco presuntos generadores de violencia",
    "tipo": "imagen",
-   "likes": 96,
+   "likes": 103,
    "comentarios": 1,
    "compartidos": 9,
    "alcance": "zona",
    "publicado": "2026-10-06T01:07:25+00:00",
-   "cosechados": 2,
-   "opinion": 2,
+   "cosechados": 5,
+   "opinion": 5,
    "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
+    "positivo": 1,
+    "negativo": 3,
     "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -428,9 +569,9 @@
    "fecha": "2026-10-06",
    "titulo": "💧 Calor y fallas eléctricas afectan el suministro de agua en Tijuana",
    "tipo": "imagen",
-   "likes": 87,
+   "likes": 102,
    "comentarios": 17,
-   "compartidos": 21,
+   "compartidos": 24,
    "alcance": "zona",
    "publicado": "2026-10-06T03:45:10+00:00",
    "cosechados": 9,
@@ -450,46 +591,22 @@
    ]
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/videos/1659850778897922",
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0FfHUa6NBVx3jLmUihb4KsVXd6hQ4VWH2iUyeSiXT9ZmadjtbVFJZDFh2HZfANKmhl",
    "cuenta": "ndtijuana_fb",
-   "zona": "estatal",
+   "zona": "Tijuana",
    "fecha": "2026-10-06",
-   "titulo": "Incendio Colonia Florido",
-   "tipo": "video",
-   "likes": 87,
-   "comentarios": 9,
-   "compartidos": 6,
-   "reproducciones": 6108,
-   "alcance": "nacional",
-   "publicado": "2026-10-06T06:16:32+00:00",
-   "cosechados": 8,
-   "opinion": 6,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 6,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02sdCNfpuPvZ6vpVDuRzqjhnVpneqcqkVUEnuJPKqsT8YuNAfdPCVruCs2PkXVFt2Ll&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-05",
-   "titulo": "¡Ya salió el peine! 🚨😱",
+   "titulo": "#NDTInforma Caen cinco presuntos generadores de violencia",
    "tipo": "imagen",
-   "likes": 86,
-   "comentarios": 19,
-   "compartidos": 3,
-   "alcance": "nacional",
-   "publicado": "2026-10-05T09:55:06+00:00",
-   "cosechados": 10,
-   "opinion": 10,
+   "likes": 96,
+   "comentarios": 1,
+   "compartidos": 9,
+   "alcance": "zona",
+   "publicado": "2026-10-06T01:07:25+00:00",
+   "cosechados": 2,
+   "opinion": 2,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 9,
+    "negativo": 1,
     "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -521,22 +638,22 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid036zb821AMBr6fJWyfKVfagPHW2kFoLfmHyj6JhXmMsa14ukA5HbossdEFxMezNxojl",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Tijuana",
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02J9DsdzCyf4SPVd6QDNaksDSQUFiouFd9s3VsEnJbDvWQTMtZLzysP99JwpZrzR6Zl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "nacional",
    "fecha": "2026-10-06",
-   "titulo": "#NDTInforma | Buscan a familiares de Ernestina Nohemí Bravo Reyes, localizada en Natura",
+   "titulo": "QUIERE QUE EL INE CUNTE LOS VOTOS.",
    "tipo": "imagen",
-   "likes": 78,
-   "comentarios": 22,
-   "compartidos": 37,
-   "alcance": "zona",
-   "publicado": "2026-10-06T06:10:29+00:00",
-   "cosechados": 9,
-   "opinion": 6,
+   "likes": 76,
+   "comentarios": 23,
+   "compartidos": 1,
+   "alcance": "nacional",
+   "publicado": "2026-10-06T12:56:53+00:00",
+   "cosechados": 10,
+   "opinion": 10,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 1,
+    "negativo": 5,
     "neutral": 5,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -544,23 +661,22 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/videos/1123215226927934",
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0WAXjkUjEa2RyySe5z43fx1QBxMiqNNjWnotzHgPQNmwC9Ycy7r4dUn43FZ4nL4fzl",
    "cuenta": "ndtijuana_fb",
-   "zona": "Tijuana",
+   "zona": "estatal",
    "fecha": "2026-10-05",
-   "titulo": "Tijuana en llamas se reportan varios incendios",
-   "tipo": "video",
-   "likes": 76,
-   "comentarios": 2,
-   "compartidos": 8,
-   "reproducciones": 5504,
-   "alcance": "zona",
-   "publicado": "2026-10-05T21:15:05+00:00",
-   "cosechados": 2,
-   "opinion": 2,
+   "titulo": "#NDTInforma Reciben 25 años por mantener a una persona privada de la libertad",
+   "tipo": "imagen",
+   "likes": 56,
+   "comentarios": 11,
+   "compartidos": 4,
+   "alcance": "nacional",
+   "publicado": "2026-10-05T23:59:48+00:00",
+   "cosechados": 0,
+   "opinion": 0,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 2,
+    "negativo": 0,
     "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -613,53 +729,6 @@
     "positivo": 4,
     "negativo": 0,
     "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid028cqZQtkuxvvThLSHMjJDjKe2X5h37eHyww1p2V9FCAyzmKC8t28pa69sTiqxv9Mel",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-05",
-   "titulo": "🔥🐎 ¡Laberinto abre una segunda fecha en Tijuana!",
-   "tipo": "imagen",
-   "likes": 42,
-   "comentarios": 20,
-   "compartidos": 89,
-   "alcance": "zona",
-   "publicado": "2026-10-05T23:53:35+00:00",
-   "cosechados": 9,
-   "opinion": 9,
-   "sentimiento": {
-    "positivo": 4,
-    "negativo": 0,
-    "neutral": 5,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/reel/4074632909359506",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-05",
-   "titulo": "#NDTInforma | Kurt Honold explica presión sobre la red eléctrica de Tijuana por altas temperaturas",
-   "tipo": "video",
-   "likes": 41,
-   "comentarios": 22,
-   "compartidos": 5,
-   "reproducciones": 6398,
-   "alcance": "zona",
-   "publicado": "2026-10-05T21:29:54+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 8,
-    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -741,16 +810,16 @@
    "fecha": "2026-10-06",
    "titulo": "La proporción de armas de EU en México alcanzó su nivel más alto en 11 años",
    "tipo": "otro",
-   "likes": 18,
+   "likes": 20,
    "comentarios": 1,
    "compartidos": 2,
    "alcance": "nacional",
    "publicado": "2026-10-06T03:15:00+00:00",
-   "cosechados": 0,
-   "opinion": 0,
+   "cosechados": 2,
+   "opinion": 1,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 0,
+    "negativo": 1,
     "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -787,10 +856,10 @@
    "fecha": "2026-10-05",
    "titulo": "#LoVisteEnPSN | De manera atípica, en Tijuana se registraron hasta 40 grados de sensación térmica en algunas zonas.",
    "tipo": "video",
-   "likes": 12,
+   "likes": 13,
    "comentarios": 1,
    "compartidos": 1,
-   "reproducciones": 1946,
+   "reproducciones": 2131,
    "alcance": "zona",
    "publicado": "2026-10-05T20:12:07+00:00",
    "cosechados": 1,
@@ -860,7 +929,7 @@
    "likes": 4,
    "comentarios": 1,
    "compartidos": 1,
-   "reproducciones": 277,
+   "reproducciones": 292,
    "alcance": "nacional",
    "publicado": "2026-10-06T03:00:32+00:00",
    "cosechados": 1,
@@ -898,6 +967,29 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/redespsn/posts/pfbid06HJvFqfs8UpBncWSqkhzktw2f9cCa4DVLvdHBe7vpWfxdGn8NTqPHPfbMEspcSofl",
+   "cuenta": "psn_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-05",
+   "titulo": "#BajaCalifornia | Marco Antonio Moreno Gómez Santelices publicó en redes sociales un video en el que reflexionó sobre la importancia de la lealtad.",
+   "tipo": "otro",
+   "likes": 3,
+   "comentarios": 1,
+   "compartidos": 0,
+   "alcance": "nacional",
+   "publicado": "2026-10-05T16:00:12+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/aztecabc/posts/pfbid0G8oiUQCVHghi9yKmC6oaPqF2qQxUZ5iDADfQi9WZcQhBSiALpgRhksy7jQJmaJgkl",
    "cuenta": "aztecabc_fb",
    "zona": "estatal",
@@ -909,76 +1001,6 @@
    "compartidos": 0,
    "alcance": "nacional",
    "publicado": "2026-10-06T05:30:01+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/aztecabc/posts/pfbid02Za6CLeWGiYVdXczWRBznbWkshG8ya71TQqdTRB2SYuZYMuBfhAkgU8RwQMZjxJ7yl",
-   "cuenta": "aztecabc_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-05",
-   "titulo": "¡Yeri Mua arremete contra Naim Darrechi! Esto dijo tras la denuncia de la mamá de Abelito 👀",
-   "tipo": "otro",
-   "likes": 2,
-   "comentarios": 1,
-   "compartidos": 0,
-   "alcance": "nacional",
-   "publicado": "2026-10-05T22:48:37+00:00",
-   "cosechados": 1,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid037rVpXPSFcdp8gCRMavfd6jNoKuGf4GnGgCVuzWXEsmtdECrEn2HXDWRWUNANQduxl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-06",
-   "titulo": "https://vt.tiktok.com/ZSbC9AoHp/",
-   "tipo": "otro",
-   "likes": 2,
-   "comentarios": 0,
-   "compartidos": 0,
-   "alcance": "nacional",
-   "publicado": "2026-10-06T01:44:18+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/reel/28608644178797278",
-   "cuenta": "aztecabc_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-05",
-   "titulo": "¡El milagro de la Notaría exprés!",
-   "tipo": "video",
-   "likes": 2,
-   "comentarios": 0,
-   "compartidos": 0,
-   "reproducciones": 507,
-   "alcance": "nacional",
-   "publicado": "2026-10-05T22:43:51+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1037,6 +1059,29 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/aztecabc/posts/pfbid0vRhjBrVJcMTAmZEDVUJLz8WqEP4NZdniidjXZUhoYHo3obrw2GnpxPBtEndZk834l",
+   "cuenta": "aztecabc_fb",
+   "zona": "internacional",
+   "fecha": "2026-10-06",
+   "titulo": "🚨 ¡Ocurrió en plena transmisión! Un reportero cubría un accidente fatal cuando las cámaras captaron a otro auto atropell@ndo a una joven.",
+   "tipo": "otro",
+   "likes": 0,
+   "comentarios": 0,
+   "compartidos": 0,
+   "alcance": "extranjero",
+   "publicado": "2026-10-06T11:30:20+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/reel/1542557300972362",
    "cuenta": "aztecabc_fb",
    "zona": "Ensenada",
@@ -1064,36 +1109,36 @@
   {
    "cuenta": "aztecabc_fb",
    "estado": "ok",
-   "posts": 8,
-   "comentarios": 11,
-   "crudos": 13,
-   "fuera": 0,
+   "posts": 7,
+   "comentarios": 0,
+   "crudos": 4,
+   "fuera": 1,
    "compartidos": 0
   },
   {
    "cuenta": "blanconegro_fb",
    "estado": "ok",
-   "posts": 7,
-   "comentarios": 37,
-   "crudos": 37,
-   "fuera": 1,
+   "posts": 8,
+   "comentarios": 28,
+   "crudos": 29,
+   "fuera": 0,
    "compartidos": 0
   },
   {
    "cuenta": "blancorojo_fb",
    "estado": "ok",
-   "posts": 4,
-   "comentarios": 0,
-   "crudos": 1,
+   "posts": 2,
+   "comentarios": 10,
+   "crudos": 10,
    "fuera": 0,
-   "compartidos": 1
+   "compartidos": 2
   },
   {
    "cuenta": "ndtijuana_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 36,
-   "crudos": 36,
+   "comentarios": 28,
+   "crudos": 29,
    "fuera": 0,
    "compartidos": 0
   },
@@ -1101,7 +1146,7 @@
    "cuenta": "psn_fb",
    "estado": "ok",
    "posts": 6,
-   "comentarios": 1,
+   "comentarios": 0,
    "crudos": 1,
    "fuera": 1,
    "compartidos": 1
@@ -1109,12 +1154,12 @@
  ],
  "gasto": {
   "resultados": 250,
-  "gastado": 125,
+  "gastado": 109,
   "por_concepto": {
-   "aztecabc_fb": 21,
-   "blanconegro_fb": 45,
-   "blancorojo_fb": 6,
-   "ndtijuana_fb": 44,
+   "aztecabc_fb": 12,
+   "blanconegro_fb": 37,
+   "blancorojo_fb": 14,
+   "ndtijuana_fb": 37,
    "psn_fb": 9
   }
  }
