@@ -2,6 +2,7 @@
 
 import { ArrowRight, DownloadSimple, MagnifyingGlass } from "@phosphor-icons/react";
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 import { Bisel } from "@/components/ui/bisel";
 import { clasesBoton } from "@/components/ui/clases";
@@ -45,8 +46,11 @@ function TarjetaTermino({ c }: { c: Consulta }) {
 
 /** Los términos vienen del mismo documento que sus fichas: nunca una lista
  * de ejemplos con conteos inventados. Buscar y abrir un reporte son gestos
- * distintos; una búsqueda no se convierte en un reporte antiguo por coincidir. */
-export function TableroReportes({ consulta }: { consulta: string }) {
+ * distintos; una búsqueda no se convierte en un reporte antiguo por coincidir.
+ *
+ * `expedientes` lo arma la pagina en el servidor (expedientes-reportes.tsx):
+ * el JSON de un expediente no debe entrar al bundle de este componente. */
+export function TableroReportes({ consulta, expedientes }: { consulta: string; expedientes?: ReactNode }) {
   const { data, error, mutate } = useConsultas();
   const valida = consulta.length >= MINIMO_CONSULTA && consulta.length <= LARGO_MAXIMO_CONSULTA;
   return (
@@ -66,6 +70,8 @@ export function TableroReportes({ consulta }: { consulta: string }) {
       </Bisel>
 
       {consulta === "" ? null : valida ? <ResultadosReportes consulta={consulta} /> : <p role="status" className="text-cuerpo text-tinta-meta">Escribe entre {MINIMO_CONSULTA} y {LARGO_MAXIMO_CONSULTA} caracteres para buscar.</p>}
+
+      {expedientes}
 
       <section aria-labelledby="terminos-reportes">
         <div className="mb-5 flex flex-wrap items-baseline justify-between gap-3">

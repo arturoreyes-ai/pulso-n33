@@ -29,7 +29,8 @@ export const PARAM_EDICION = "e";
  *  y por la misma razon: ver el docstring de paginas/en-tendencia.tsx. */
 export const PARAM_CONSULTA = "q";
 
-/** El termino en seguimiento cuyo reporte abre Redes (`/redes?reporte=`).
+/** El termino en seguimiento cuyo reporte abre /reportes (`/reportes?reporte=`;
+ *  en /redes hasta el 2 de octubre de 2026, que hoy redirige).
  *  Aparte de `q` desde el 30 de septiembre de 2026, cuando buscar dejo de
  *  abrir la ficha: ver paneles/busqueda-redes.tsx. */
 export const PARAM_REPORTE = "reporte";

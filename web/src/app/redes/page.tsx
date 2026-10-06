@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 import { Pagina } from "@/components/paginas/pagina";
 import { PARAM_CONSULTA, PARAM_REPORTE } from "@/lib/busqueda/entrada";
+import { rutaDeConsulta } from "@/lib/dominio/consultas";
 import { metadatos } from "@/lib/dominio/metadatos";
 
 /**
@@ -10,8 +12,7 @@ import { metadatos } from "@/lib/dominio/metadatos";
  *
  * Desde el 18 de septiembre de 2026 ESTA ruta lee `?q=`: la busqueda de la lupa
  * de Redes, desde el 30 de septiembre la misma de la portada (noticias y
- * publicaciones), y `?reporte=`, la ficha de un termino en seguimiento que
- * abre /reportes. Se lee en el SERVIDOR y baja como prop, igual que
+ * publicaciones). Se lee en el SERVIDOR y baja como prop, igual que
  * en la portada y por la misma razon escrita en paginas/en-tendencia.tsx: un
  * `useSearchParams` bajo Suspense se queda colgado en una ruta prerrenderizada.
  * Leer `searchParams` vuelve esta pagina dinamica, como ya lo es `/`; el HTML
@@ -20,6 +21,10 @@ import { metadatos } from "@/lib/dominio/metadatos";
  * Solo la ruta de REGION la lee. La de zona sigue prerrenderizada y sin
  * busqueda: un termino no es un lugar, y el formulario de la lupa envia
  * siempre aqui aunque se abra desde /tijuana/redes.
+ *
+ * `?reporte=` fue la ficha de un termino en seguimiento hasta el 2 de octubre
+ * de 2026, cuando se fue a /reportes (el cliente vio «redes» en la URL y en la
+ * barra de un reporte). Se redirige alla para no romper un enlace guardado.
  */
 export const metadata: Metadata = metadatos(null, "redes");
 
@@ -29,6 +34,6 @@ export default async function PaginaRedesRegion({ searchParams }: {
   const params = await searchParams;
   const q = params[PARAM_CONSULTA];
   const reporte = params[PARAM_REPORTE];
-  return <Pagina zona={null} vista="redes" consulta={typeof q === "string" ? q : null}
-    reporte={typeof reporte === "string" ? reporte : null} />;
+  if (typeof reporte === "string" && reporte.trim() !== "") redirect(rutaDeConsulta(reporte.trim()));
+  return <Pagina zona={null} vista="redes" consulta={typeof q === "string" ? q : null} />;
 }

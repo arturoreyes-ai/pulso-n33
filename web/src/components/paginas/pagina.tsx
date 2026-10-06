@@ -17,9 +17,10 @@ import { PaginaRedes } from "./redes";
  * El cuerpo se elige por tabla y no por una escalera de ternarios, que es lo
  * que crece mal cuando se agrega otra vista.
  */
-const CUERPOS: Record<Seccion, (props: { zona: ZonaRuta | null; consulta: string | null; reporte: string | null }) => ReactNode> = {
-  // Redes lee `consulta` (la busqueda de la lupa, `?q=`) y `reporte` (la
-  // ficha de un termino en seguimiento, `?reporte=`). Indicadores, que
+const CUERPOS: Record<Seccion, (props: { zona: ZonaRuta | null; consulta: string | null }) => ReactNode> = {
+  // Redes lee `consulta` (la busqueda de la lupa, `?q=`); la ficha de un
+  // termino en seguimiento se fue a /reportes el 2 de octubre de 2026
+  // (reportes/reporte-termino.tsx). Indicadores, que
   // tomaba solo `zona`, se fue el 28 de septiembre de 2026 (secciones.ts).
   redes: PaginaRedes,
 };
@@ -34,7 +35,7 @@ const CUERPOS: Record<Seccion, (props: { zona: ZonaRuta | null; consulta: string
  * y Redes la leen para la misma busqueda de noticias y publicaciones. Solo la ruta de region de Redes la lee del servidor
  * (app/redes/page.tsx); la de zona no, porque un termino no es un lugar.
  */
-export function Pagina({ zona, vista, edicion = null, consulta = null, rubro = null, reporte = null }: { zona: ZonaRuta | null; vista: Vista; edicion?: string | null; consulta?: string | null; rubro?: string | null; reporte?: string | null }) {
+export function Pagina({ zona, vista, edicion = null, consulta = null, rubro = null }: { zona: ZonaRuta | null; vista: Vista; edicion?: string | null; consulta?: string | null; rubro?: string | null }) {
   const Cuerpo = vista === null ? null : CUERPOS[vista];
 
   // AQUI VIVIA EL PREESTRENO DE notas.json, y su ausencia es el cambio.
@@ -55,7 +56,7 @@ export function Pagina({ zona, vista, edicion = null, consulta = null, rubro = n
   return (
     <>
       <Navegacion zona={zona} vista={vista} />
-      {Cuerpo === null ? <PaginaEnTendencia zona={zona} edicion={edicion} consulta={consulta} rubro={rubro} /> : <Cuerpo zona={zona} consulta={consulta} reporte={reporte} />}
+      {Cuerpo === null ? <PaginaEnTendencia zona={zona} edicion={edicion} consulta={consulta} rubro={rubro} /> : <Cuerpo zona={zona} consulta={consulta} />}
       {/* El pie se repite en las tres paginas a proposito. Es prosa de
           servidor, no pesa un byte de bundle, y es la integridad del producto:
           recortarlo por pagina obligaria a decidir en cual se puede omitir que

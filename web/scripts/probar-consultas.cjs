@@ -93,8 +93,8 @@ assert.equal(filtrarPorTexto(filas, {}, 'valle').length, 1, 'sin archivo de text
 
 // --- la ruta y los huecos ----------------------------------------------------
 // El reporte y no la busqueda desde el 30 de septiembre de 2026: `?q=` busca.
-assert.equal(rutaDeConsulta('Vive la Baja'), '/redes?reporte=Vive+la+Baja');
-assert.equal(rutaDeConsulta('Valente Márquez'), '/redes?reporte=Valente+M%C3%A1rquez');
+assert.equal(rutaDeConsulta('Vive la Baja'), '/reportes?reporte=Vive+la+Baja');
+assert.equal(rutaDeConsulta('Valente Márquez Amézquita'), '/reportes?reporte=Valente+M%C3%A1rquez+Am%C3%A9zquita');
 assert.match(SIN_FILAS_BUSQUEDA('garita'), /garita/);
 for (const frase of [SIN_FILAS_BUSQUEDA('x'), SIN_FILAS_CONSULTA('x', 30)]) {
   for (const mecanismo of ['corte', 'corrida', 'pipeline', 'cosech']) assert.ok(!frase.includes(mecanismo), `${frase} nombra el mecanismo`);

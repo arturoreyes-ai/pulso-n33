@@ -7,7 +7,6 @@ import {
   type PublicacionVisual,
   type RedVisual,
 } from "./publicaciones";
-import { ruta } from "./secciones";
 import { PARAM_CONSULTA, PARAM_REPORTE } from "../busqueda/entrada";
 
 /**
@@ -128,14 +127,15 @@ export function filtrarPorTexto(
   });
 }
 
-/** A donde lleva elegir un termino en seguimiento: su REPORTE, la ficha. Siempre
- *  la vista de region: un termino no es un lugar. Es `?reporte=` y no `?q=`
- *  desde el 30 de septiembre de 2026, cuando `?q=` paso a ser la busqueda de
- *  noticias y publicaciones y dejo de abrir la ficha (paneles/busqueda-redes.tsx). */
+/** A donde lleva elegir un termino en seguimiento: su REPORTE, la ficha, en
+ *  /reportes. Es `?reporte=` y no `?q=` desde el 30 de septiembre de 2026,
+ *  cuando `?q=` paso a ser la busqueda de noticias y publicaciones y dejo de
+ *  abrir la ficha. Vivio en /redes hasta el 2 de octubre de 2026
+ *  (reportes/reporte-termino.tsx). */
 export function rutaDeConsulta(termino: string): string {
   const params = new URLSearchParams();
   params.set(PARAM_REPORTE, termino);
-  return `${ruta(null, "redes")}?${params.toString()}`;
+  return `/reportes?${params.toString()}`;
 }
 
 /** El hueco del filtro, dicho como hueco. No dice «corte» ni «corrida»: la
