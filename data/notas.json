@@ -1,8 +1,722 @@
 {
  "esquema": 1,
  "ventana_dias": 30,
- "total": 11060,
+ "total": 11087,
  "notas": [
+  {
+   "id": "704b416d5a165ca4",
+   "titulo": "Cerro de La Campana",
+   "url": "https://www.elimparcial.com/son/columnas/2026/10/06/cerro-de-la-campana/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T13:20:35+00:00",
+   "capturado": "2026-09-04T15:24:36+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5054,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/T3D4QQN4M5HP5L2GXSSLKIUFQQ.jpg?auth=374576b1d0ae44a2c36e4ce4ddcb3dff7fd99b4b3bd1f16e31867b3ec209d510&smart=true&width=1200&height=630",
+   "rubros": []
+  },
+  {
+   "id": "86a3b935f1f26cfd",
+   "titulo": "Ataque armado deja dos personas muertas y un joven lesionado en Fuentes de Piedra",
+   "url": "https://www.elimparcial.com/son/hermosillo/2026/10/05/ataque-armado-deja-dos-personas-muertas-y-un-joven-lesionado-en-fuentes-de-piedra/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T13:15:36+00:00",
+   "capturado": "2026-10-06T06:19:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6095,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/ZOBPMXIYHNGY5BB2QTXHISV2CQ.png?auth=7c250f1450d92c418592922f4f3decd61b9588fa0473a37f51d849d7c3b674d1&smart=true&width=1200&height=675",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "4122dce5aed328f6",
+   "titulo": "Empalme y Guaymas presentan marea creciente con niveles nunca vistos en 70 años",
+   "url": "https://www.elimparcial.com/son/sonora/2026/10/05/empalme-y-guaymas-presentan-marea-creciente-con-niveles-nunca-vistos-en-70-anos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T13:15:29+00:00",
+   "capturado": "2026-10-06T06:19:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5766,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/5HUTKOVKMJEOLG4VCG5646VGYI.jpg?auth=7680929fa5ddbb2e777e4787db62e34e110528fb1080e1355b71690bd61dcccb&smart=true&width=1280&height=960",
+   "rubros": []
+  },
+  {
+   "id": "d6cbb3ca8bb06f03",
+   "titulo": "Derriban el útlimo álamo “La Abuela”, de 200 años de antigüedad, para continuar el muro fronterizo en la zona de Lochiel de Arizona; activistas fueron rodeados durante una ceremonia",
+   "url": "https://www.elimparcial.com/son/sonora/2026/10/05/derriban-el-utlimo-alamo-la-abuela-de-200-anos-de-antiguedad-para-continuar-el-muro-fronterizo-en-la-zona-de-lochiel-de-arizona-activistas-fueron-rodeados-durante-una-ceremonia/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T13:15:25+00:00",
+   "capturado": "2026-10-06T00:02:56+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7016,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/XFUWWAGGKZBG7MTR44CWZDPLQY.jpg?auth=5e61d65366b4dfa7011e2ef617183a655bcdacde5a210e9b40e10c6aec428673&smart=true&width=1200&height=780",
+   "rubros": []
+  },
+  {
+   "id": "86bedb5550764a21",
+   "titulo": "Rocío Nahle regala el nuevo libro de AMLO en Veracruz y destaca la dedicatoria a Claudia Sheinbaum como parte de la Cuarta Transformación",
+   "url": "https://www.elimparcial.com/mexico/2026/10/05/rocio-nahle-regala-el-nuevo-libro-de-amlo-en-veracruz-y-destaca-la-dedicatoria-a-claudia-sheinbaum-como-parte-de-la-cuarta-transformacion/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T13:14:07+00:00",
+   "capturado": "2026-10-06T06:19:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.8425,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/LO44BH4AOJGJ3CQAAJRBBCNKRU.png?auth=b37a35a28498e2f8f0aae5f567246cbd84c311fea4b303d1903b57a531d65044&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "6308596bb7239308",
+   "titulo": "Exalcalde de Juchitán Emilio Montero niega ser líder de “Los Cromos”, organización que la Fiscalía de Oaxaca vincula con el CJNG, asegura que no está prófugo y pide que se investiguen los señalamientos en su contra",
+   "url": "https://www.elimparcial.com/mexico/2026/10/05/exalcalde-de-juchitan-emilio-montero-niega-ser-lider-de-los-cromos-organizacion-que-la-fiscalia-de-oaxaca-vincula-con-el-cjng-asegura-que-no-esta-profugo-y-pide-que-se-investiguen-los-senalamientos-en-su-contra/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T13:13:55+00:00",
+   "capturado": "2026-10-06T06:19:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5664,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/3LT4WL7UYFAB5FTG7O55ZA252M.png?auth=6d938c8fea0bcbe7c6dcfa35125ccda769bf48de594ac419fe7ec7b1694344f6&smart=true&width=1200&height=675",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "065210e6d154003e",
+   "titulo": "México podría mirar hacia los BRICS mientras Claudia Sheinbaum prepara su primera visita a China en medio de la revisión del T-MEC, un escenario que abre el debate sobre qué beneficios tendría una eventual integración al grupo frente a las ventajas comerciales que mantiene con Estados Unidos y Canadá",
+   "url": "https://www.elimparcial.com/mundo/2026/10/05/mexico-podria-mirar-hacia-los-brics-mientras-claudia-sheinbaum-prepara-su-primera-visita-a-china-en-medio-de-la-revision-del-t-mec-un-escenario-que-abre-el-debate-sobre-que-beneficios-tendria-una-eventual-integracion-al-grupo-frente-a-las-ventajas-comerciales-que-mantiene-con-estados-unidos-y-canada/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T13:13:25+00:00",
+   "capturado": "2026-10-06T06:19:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6567,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/C23CQ56J5NCXXJ4HUHYUE7R7OI.jpg?auth=875a93ce1469a0f73e4060adacdabc3836a9dfbd090ea28d31fe7f4131802b91&smart=true&width=1920&height=1080",
+   "rubros": []
+  },
+  {
+   "id": "2fbceb55c44df0f9",
+   "titulo": "Peso mexicano suma ganancias frente al dólar y así cotiza el tipo de cambio este martes 6 de octubre",
+   "url": "https://www.elimparcial.com/dinero/2026/10/06/peso-mexicano-suma-ganancias-frente-al-dolar-y-asi-cotiza-el-tipo-de-cambio-este-martes-6-de-octubre/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T13:12:33+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6635,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/QWAWPQKFGRBQNAZOXFZDIPXGPE.jpg?auth=8fbe59420b3e68a44173e493b82c29971215e405937b2263bbfff94065f61b12&smart=true&width=1200&height=750",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "883e7ae062efe3f6",
+   "titulo": "SEP confirma próximo puente de octubre 2026: ¿qué días no habrá clases?",
+   "url": "https://www.elimparcial.com/mexico/2026/10/06/sep-confirma-proximo-puente-de-octubre-2026-que-dias-no-habra-clases/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T13:04:50+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7518,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/4REU7RM4FBB47MX6WHFCM56OVY.png?auth=f6efbffe0c34e1c754cc4e8bec9b7038d155ee39e4b97e9a176dfe37b36d8230&smart=true&width=1200&height=720",
+   "rubros": []
+  },
+  {
+   "id": "f2b8796695c37f77",
+   "titulo": "Daily Business Report: October 6, 2026",
+   "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNSGNoRkpOZnNUM3hWZ0VQeURyTnZFU3NDSkpiYjRHS1NuU21UQ2gtZ3JTXzRLeHlaM185Z3RLM2lPemkwTWc2TFZsN0xwdS1ZaDlWelV1cTNuc0xIZ3dwN0tRSTJoRk82OXM0NDNKeVM3RUtkXzNaNlBVTUk0dXd4MA?oc=5",
+   "dominio": "sandiegometro.com",
+   "fuente": "gn-9dcd619c4dd5",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T13:03:25+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_aguasnegras",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "044f81334c1da6bb",
+   "titulo": "El crimen organizado tendría el control efectivo en 30% del territorio de México, mientras sólo 23% tendría predominio claro del Estado; estudio ubica a 9 estados con predominio criminal y 14 bajo disputa",
+   "url": "https://www.elimparcial.com/mexico/2026/10/04/el-crimen-organizado-tendria-control-efectivo-en-30-del-territorio-de-mexico-mientras-solo-23-tendria-predominio-claro-del-estado-estudio-ubica-a-9-estados-con-predominio-criminal-y-14-bajo-disputa/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T12:45:15+00:00",
+   "capturado": "2026-10-04T21:24:05+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6147,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/CZHFAZ4YK5CHZMX37TM5YQ3PKU.jpg?auth=32be639fa54318608ebc0ad9293450857373367d1c7654377f86cc4142ae63a8&smart=true&width=1200&height=750",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "db1d69695109e1a3",
+   "titulo": "Militarizaron las aduanas para frenar la corrupción y el contrabando, pero seis años después la FGR investiga una red de huachicol fiscal en Matamoros con 13 personas bajo orden de aprehensión, entre ellas dos tenientes coroneles ligados al presunto tráfico de 144 millones de litros de combustible",
+   "url": "https://www.elimparcial.com/mexico/2026/10/05/militarizaron-las-aduanas-para-frenar-la-corrupcion-y-el-contrabando-pero-seis-anos-despues-la-fgr-investiga-una-red-de-huachicol-fiscal-en-matamoros-con-13-personas-bajo-orden-de-aprehension-entre-ellas-dos-tenientes-coroneles-ligados-al-presunto-trafico-de-144-millones-de-litros-de-combustible/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T12:44:37+00:00",
+   "capturado": "2026-10-06T00:02:56+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7547,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/5MTMJWLNBVB6HFW6DUBVHBW7YQ.jpg?auth=f75b3b6583f64cfb3efd231819bb376a675c049336ce263faf41235d71982dc3&smart=true&width=1920&height=1080",
+   "rubros": []
+  },
+  {
+   "id": "a776a6974c088e5d",
+   "titulo": "Mañanera de Claudia Sheinbaum hoy martes 6 de octubre del 2026",
+   "url": "https://www.elimparcial.com/mexico/2026/10/06/mananera-de-claudia-sheinbaum-hoy-martes-6-de-octubre-del-2026/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T12:30:00+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6696,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/BYR3QQBN7NCO7I3E5QNUSFCPXQ.jpg?auth=f145e0bad00cd7f85749db7b48a1264f5106ff44701b55ebe7954f26c3075476&smart=true&width=1500&height=1000",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "730cccac7c05d9aa",
+   "titulo": "'Avengers: Endgame' takes the box office crown back from 'Avatar'",
+   "url": "https://www.kpbs.org/news/arts-culture/2026/10/06/avengers-endgame-takes-the-box-office-crown-back-from-avatar",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T12:19:46+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/011fd80/2147483647/strip/false/crop/1080x1080+484+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fad%2F59%2F7919ef2f41e393425176ffab0df4%2Feba4360-v376-1023.jpg",
+   "rubros": []
+  },
+  {
+   "id": "896d0436398d03b5",
+   "titulo": "Después de Rachel y Polo, frente frío y dos posibles ciclones alertan a México: esto se espera en los próximos días",
+   "url": "https://www.elimparcial.com/mexico/2026/10/06/despues-de-rachel-y-polo-frente-frio-y-dos-posibles-ciclones-alertan-a-mexico-esto-se-espera-en-los-proximos-dias/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T12:10:51+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5276,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/KRGSDSJF2NBFTDLLQEJXXXM2MA.png?auth=1b892e54f0e562dbb8623c9050f0907d7bf1f44c4a94e8497fe8a9a3fe9d4311&smart=true&width=1200&height=720",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "35968769fd616428",
+   "titulo": "Carlos Salinas de Gortari reaparece en Harvard ante estudiantes mexicanos",
+   "url": "https://www.elimparcial.com/mexico/2026/10/06/carlos-salinas-de-gortari-reaparece-en-harvard-ante-estudiantes-mexicanos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T11:44:12+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4214,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/XSVATE5QNZHGFKQIOHOPLOYUFU.png?auth=08f4c579ba453d2502c22d4601d45db1a6fa37cd02049b36b0adb6837f51b451&smart=true&width=1200&height=720",
+   "rubros": []
+  },
+  {
+   "id": "e30a3a5da8f61904",
+   "titulo": "Vietnamese police arrest 12 suspected of prowling city streets at night, snatching cats for meat",
+   "url": "https://www.kpbs.org/news/international/2026/10/06/vietnamese-police-arrest-12-suspected-of-prowling-city-streets-at-night-snatching-cats-for-meat",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T11:38:48+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/94c9208/2147483647/strip/false/crop/2876x2876+562+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fd0%2Fe6%2F8d430bfb4c04b164f7d20e303c94%2Fap26279302555609.jpg",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "6d5522975878255c",
+   "titulo": "A history of presidents naming things after themselves (It's short. They rarely do)",
+   "url": "https://www.kpbs.org/news/politics/2026/10/06/a-history-of-presidents-naming-things-after-themselves-its-short-they-rarely-do",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T11:00:00+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/e3dc192/2147483647/strip/false/crop/3468x3468+867+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fa0%2F6f%2F4eab16a14ebcbb3eb000e7c5609e%2Fgettyimages-2280581273.jpg",
+   "rubros": []
+  },
+  {
+   "id": "6b0ef00c407efcad",
+   "titulo": "What voters in 6 key states could tell us about the 2026 midterms",
+   "url": "https://www.kpbs.org/news/economy/2026/10/06/what-voters-in-6-key-states-could-tell-us-about-the-2026-midterms",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T11:00:00+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/1f2635c/2147483647/strip/false/crop/2631x2631+658+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F1b%2Fb8%2F8aac5cfa498ebb756d5324429c2c%2Fgettyimages-2295283121.jpg",
+   "rubros": []
+  },
+  {
+   "id": "79981f9803cd6504",
+   "titulo": "Francis Halzen wins Nobel Prize in physics for work on high-energy neutrinos from space",
+   "url": "https://www.kpbs.org/news/science-technology/2026/10/06/francis-halzen-wins-nobel-prize-in-physics-for-work-on-high-energy-neutrinos-from-space",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T10:16:28+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/9d9a776/2147483647/strip/false/crop/3522x3522+877+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F68%2F60%2Fb88a79434709af3e60e9407e2d96%2Fap26276547774483.jpg",
+   "rubros": []
+  },
+  {
+   "id": "f2d746498dc9e582",
+   "titulo": "Disney, ABC battle Trump's FCC in court over free speech protections",
+   "url": "https://www.kpbs.org/news/politics/2026/10/06/disney-abc-battle-trumps-fcc-in-court-over-free-speech-protections",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T09:17:00+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/1683389/2147483647/strip/false/crop/635x635+195+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F87%2F23%2Fb6ecac4a467eb09602807df149fc%2Fgettyimages-2236799142.jpg",
+   "rubros": []
+  },
+  {
+   "id": "4f84bca54c70a607",
+   "titulo": "Dems Want at Least One South County Mayor",
+   "url": "https://voiceofsandiego.org/2026/10/06/nat-city-mayor-race-is-pivotal-for-south-county-dems/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T09:15:00+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2026/10/vito-di-stefano-9-17-24-30-1024x684.jpg",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "e1eebf0e7f0dcdc6",
+   "titulo": "Democrats' advantage is clear with less than a month to go in the midterm elections",
+   "url": "https://www.kpbs.org/news/politics/2026/10/06/democrats-advantage-is-clear-with-less-than-a-month-to-go-in-the-midterm-elections",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T09:00:00+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/d88a1ae/2147483647/strip/false/crop/3907x3907+977+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F11%2F43%2Fabee069348fea33d852ee5964995%2Fgettyimages-2296831934.jpg",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "a4f71116889989d9",
+   "titulo": "Elon Musk and Palmer Luckey's new Pentagon roles raise ethics worries",
+   "url": "https://www.kpbs.org/news/national/2026/10/06/elon-musk-and-palmer-luckeys-new-pentagon-roles-raise-ethics-worries",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T09:00:00+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/fa86106/2147483647/strip/false/crop/3488x3488+872+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F77%2F19%2F0fa089eb40768ba50e735c6a5a1e%2Fap26152829867592.jpg",
+   "rubros": []
+  },
+  {
+   "id": "6388b92786387441",
+   "titulo": "New Hollywood era begins with an epic mega merger between Paramount and Warner Bros.",
+   "url": "https://www.kpbs.org/news/arts-culture/2026/10/06/new-hollywood-era-begins-with-an-epic-mega-merger-between-paramount-and-warner-bros",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T09:00:00+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/5766055/2147483647/strip/false/crop/3278x3278+861+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F17%2Ff6%2F40e1f7a24e7680e021cc2dd27746%2Fgettyimages-2271654832.jpg",
+   "rubros": []
+  },
+  {
+   "id": "325cf3de7b40515f",
+   "titulo": "South County Democrats Pin Hopes on National City Mayor’s Race",
+   "url": "https://voiceofsandiego.org/2026/10/06/south-county-democrats-pin-hopes-on-national-city-mayors-race/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T09:00:00+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2025/09/vito-distefano-9-2-25-2-1024x684.jpg",
+   "rubros_categoria": [
+    "politica"
+   ],
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "176e8924e9696646",
+   "titulo": "As Trump focuses the FBI on immigration, counterintelligence is falling behind",
+   "url": "https://www.kpbs.org/news/national/2026/10/06/as-trump-focuses-the-fbi-on-immigration-counterintelligence-is-falling-behind",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T09:00:00+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/d71befa/2147483647/strip/false/crop/5013x5013+1252+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fe6%2Fd2%2F28d9aff74c62b588f3fd8db32906%2Fgettyimages-2295422163.jpg",
+   "rubros": []
+  },
+  {
+   "id": "02955e24688ea789",
+   "titulo": "Wildfire smoke affects animals in unique ways. Scientists are trying to understand it",
+   "url": "https://www.kpbs.org/news/health/2026/10/06/wildfire-smoke-affects-animals-in-unique-ways-scientists-are-trying-to-understand-it",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T09:00:00+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/29c120c/2147483647/strip/false/crop/4284x4284+714+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fcb%2F8d%2F0ebd98c943b98fec6b5e73aca53d%2Fximg-6316.jpg",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "601e55bfcf0eb49a",
+   "titulo": "EPA Provides Update on Tijuana Sewage Crisis",
+   "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQczhKR1UzNXBvNFpsYzNVOGhvNm1mNldVSkNsdkxnVzFBOW5PNWd6TTBHZTdXcGF0NUliRDR5SXFsVlNfT0tybHpQbDQ5bEEtUTRsczc2TE5RbXBRa2RFdmFxMEtBLUt2ZzlZWjdGUjFQR3ExbEE5cWR3Znp3RDhXMndEUUN1MjBLbk1HaTFDaHZmNlVSbW1EWHNIYw?oc=5",
+   "dominio": "presidentialprayerteam.org",
+   "fuente": "gn-fdec5ef82f4b",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T08:30:00+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
+  },
+  {
+   "id": "9f9c0c8eb0566a77",
+   "titulo": "San Diego Tijuana International Jazz Festival sizzled in Escondido",
+   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNeVpFVjVBSjlMLVF6cEpLUUpNSjNNSkNfUlVtaWpta2I2V2YxZDlMYUVQazBGVG4xTWdWWUZBRWwzQXltU3RDTEI1dW8tSG5kbmJ2MXh1SlJGRzh0bFpwVEV4UTUxX2dlMnVSXzRSTlhIeFFZWTI3Yk5md3JRdEFOeDA3WENHYUhOa0ctU2wwTGw1NG1idmJFZ0xCN005NGplMmZVb3ExZlZWZnBhZ1cyb3E1MVZSdw?oc=5",
+   "dominio": "sandiegouniontribune.com",
+   "fuente": "gn-5bad11419dae",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana",
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T07:15:48+00:00",
+   "capturado": "2026-10-06T01:06:29+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": [
+    "espectaculos"
+   ]
+  },
+  {
+   "id": "8e007e69d0ac7fd7",
+   "titulo": "Temblor HOY, 6 de octubre 2026: ¿A qué hora y de cuánto fue el último sismo en México?",
+   "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOeHY4WmhkaUNWZm9EMlV3WWJRWjNKcU05SzJTYzFRcTFoVzB0UGlmRnJYUmk2T3FEbS1GaEg4c25aRTdjN3l6TkM3T2pmbEp5bDVmbXRJNG5YaEN3eVRSWVR2UEMxZXJOdHZLLU1WWjR1eU5ERExXWWdRMmwyYm1fZjgwVkl2T25GVXg1S0l6aS1rcjdjaGY0NXhhdWN0OU1lRm1kSmE4aUplTjFrNU9EbURWVWpRX1hGQ3F4bGJ4SEVoeGtsUmpPdFZkNWFnREpLN0h4SnhVcw?oc=5",
+   "dominio": "reporteindigo.com",
+   "fuente": "gn-759fc9543d6f",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T06:09:00+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7892,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": [
+    "clima"
+   ]
+  },
   {
    "id": "159dfbf6f6878c6b",
    "titulo": "Jim Bakker, who built 'PTL Club' televangelism empire, has died at 86",
@@ -22,32 +736,6 @@
    "postura": null,
    "imagen": "https://cdn.kpbs.org/dims4/default/3f5b6b9/2147483647/strip/false/crop/1974x1974+512+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F12%2F9a%2F98bae10248a2901609630324c210%2Fap23166671048388.jpg",
    "rubros": []
-  },
-  {
-   "id": "86a3b935f1f26cfd",
-   "titulo": "Ataque armado deja dos personas muertas y un joven lesionado en Fuentes de Piedra",
-   "url": "https://www.elimparcial.com/son/hermosillo/2026/10/05/ataque-armado-deja-dos-personas-muertas-y-un-joven-lesionado-en-fuentes-de-piedra/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-06",
-   "publicado": "2026-10-06T05:48:46+00:00",
-   "capturado": "2026-10-06T06:19:34+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.6095,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/ZOBPMXIYHNGY5BB2QTXHISV2CQ.png?auth=7c250f1450d92c418592922f4f3decd61b9588fa0473a37f51d849d7c3b674d1&smart=true&width=1200&height=675",
-   "rubros": [
-    "seguridad"
-   ]
   },
   {
    "id": "e6e382bb505f81f9",
@@ -199,27 +887,28 @@
    ]
   },
   {
-   "id": "86bedb5550764a21",
-   "titulo": "Rocío Nahle regala el nuevo libro de AMLO en Veracruz y destaca la dedicatoria a Claudia Sheinbaum como parte de la Cuarta Transformación",
-   "url": "https://www.elimparcial.com/mexico/2026/10/05/rocio-nahle-regala-el-nuevo-libro-de-amlo-en-veracruz-y-destaca-la-dedicatoria-a-claudia-sheinbaum-como-parte-de-la-cuarta-transformacion/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
+   "id": "7b41da17df7231fa",
+   "titulo": "VIDEO.- Pacientes recién operados enfrentan esperas de más de 90 minutos en garitas de Tijuana",
+   "url": "https://www.uniradioinforma.com/sociedad/video-pacientes-recien-operados-enfrentan-esperas-mas-90-minutos-garitas-tijuana-n906812",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
    "zona_medio": "estatal",
-   "zonas": [],
+   "zonas": [
+    "Tijuana"
+   ],
    "delegaciones": [],
-   "alcance": "fuera",
+   "alcance": "zona",
    "fecha": "2026-10-06",
-   "publicado": "2026-10-06T04:53:05+00:00",
-   "capturado": "2026-10-06T06:19:34+00:00",
+   "publicado": "2026-10-06T04:45:00-07:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
    "figuras": [],
    "postura": {
-    "etiqueta": "favorable",
-    "confianza": 0.8425,
+    "etiqueta": "adversa",
+    "confianza": 0.67,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
-   "imagen": "https://www.elimparcial.com/resizer/v2/LO44BH4AOJGJ3CQAAJRBBCNKRU.png?auth=b37a35a28498e2f8f0aae5f567246cbd84c311fea4b303d1903b57a531d65044&smart=true&width=1200&height=675",
    "rubros": []
   },
   {
@@ -423,6 +1112,56 @@
    "rubros": []
   },
   {
+   "id": "ebb9c547da8d1433",
+   "titulo": "Buscan a Yael Reyes Castro",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9WR045RjVNdFMwU3Y2REJ2djlSTzZVSmFMcTZlTU14QnZGMlNTREJFZG1qUWI0MTdpdks2V1lxUy1uTGRBQWpNbmpWaVVzSnhLVWZFSFBpWEhIQ2s?oc=5",
+   "dominio": "ensenada.net",
+   "fuente": "gn-906741a25e9c",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T04:02:46+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6647,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
+   "id": "059e1d62b32cc009",
+   "titulo": "Detectan contaminación industrial en la canalización del Río Tijuana",
+   "url": "https://www.uniradioinforma.com/sociedad/detectan-contaminacion-industrial-canalizacion-rio-tijuana-n906798",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T04:00:00-07:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6192,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
    "id": "6f56df64d03d7045",
    "titulo": "Julieta Ramírez se reúne con alcaldes para “consolidar la unidad”",
    "url": "https://jornadabc.com.mx/principales/julieta-ramirez-se-reune-con-alcaldes-para-consolidar-la-unidad/",
@@ -554,54 +1293,6 @@
    ]
   },
   {
-   "id": "065210e6d154003e",
-   "titulo": "México podría mirar hacia los BRICS mientras Claudia Sheinbaum prepara su primera visita a China en medio de la revisión del T-MEC, un escenario que abre el debate sobre qué beneficios tendría una eventual integración al grupo frente a las ventajas comerciales que mantiene con Estados Unidos y Canadá",
-   "url": "https://www.elimparcial.com/mundo/2026/10/05/mexico-podria-mirar-hacia-los-brics-mientras-claudia-sheinbaum-prepara-su-primera-visita-a-china-en-medio-de-la-revision-del-t-mec-un-escenario-que-abre-el-debate-sobre-que-beneficios-tendria-una-eventual-integracion-al-grupo-frente-a-las-ventajas-comerciales-que-mantiene-con-estados-unidos-y-canada/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-06",
-   "publicado": "2026-10-06T03:27:37+00:00",
-   "capturado": "2026-10-06T06:19:34+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.6567,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/C23CQ56J5NCXXJ4HUHYUE7R7OI.jpg?auth=875a93ce1469a0f73e4060adacdabc3836a9dfbd090ea28d31fe7f4131802b91&smart=true&width=1920&height=1080",
-   "rubros": []
-  },
-  {
-   "id": "4122dce5aed328f6",
-   "titulo": "Empalme y Guaymas presentan marea creciente con niveles nunca vistos en 70 años",
-   "url": "https://www.elimparcial.com/son/sonora/2026/10/05/empalme-y-guaymas-presentan-marea-creciente-con-niveles-nunca-vistos-en-70-anos/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "fuera",
-   "fecha": "2026-10-06",
-   "publicado": "2026-10-06T03:27:25+00:00",
-   "capturado": "2026-10-06T06:19:34+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5766,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/5HUTKOVKMJEOLG4VCG5646VGYI.jpg?auth=7680929fa5ddbb2e777e4787db62e34e110528fb1080e1355b71690bd61dcccb&smart=true&width=1280&height=960",
-   "rubros": []
-  },
-  {
    "id": "99e9e69fbfe9f2b7",
    "titulo": "Familiares de las 8 víctimas de los sueros vitaminados exigen justicia y que no se favorezca al doctor Maximiano",
    "url": "https://www.elimparcial.com/son/hermosillo/2026/10/05/familiares-de-las-8-victimas-de-los-sueros-vitaminados-exigen-justicia-y-que-no-se-favorezca-al-doctor-maximiano/",
@@ -728,32 +1419,6 @@
     "version": "0.2.0"
    },
    "rubros": []
-  },
-  {
-   "id": "6308596bb7239308",
-   "titulo": "Exalcalde de Juchitán Emilio Montero niega ser líder de “Los Cromos”, organización que la Fiscalía de Oaxaca vincula con el CJNG, asegura que no está prófugo y pide que se investiguen los señalamientos en su contra",
-   "url": "https://www.elimparcial.com/mexico/2026/10/05/exalcalde-de-juchitan-emilio-montero-niega-ser-lider-de-los-cromos-organizacion-que-la-fiscalia-de-oaxaca-vincula-con-el-cjng-asegura-que-no-esta-profugo-y-pide-que-se-investiguen-los-senalamientos-en-su-contra/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "fuera",
-   "fecha": "2026-10-06",
-   "publicado": "2026-10-06T03:09:18+00:00",
-   "capturado": "2026-10-06T06:19:34+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.5664,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/3LT4WL7UYFAB5FTG7O55ZA252M.png?auth=6d938c8fea0bcbe7c6dcfa35125ccda769bf48de594ac419fe7ec7b1694344f6&smart=true&width=1200&height=675",
-   "rubros": [
-    "seguridad"
-   ]
   },
   {
    "id": "ee76e20a4b5643b9",
@@ -938,6 +1603,31 @@
    "rubros": []
   },
   {
+   "id": "58c75ad07e4a877d",
+   "titulo": "INVITAN A SUMARSE AL ENCENDIDO DE LUCES ROSA DEL PALACIO MUNICIPAL",
+   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPYnI2Q0daOUVERlZhN2tIZG5GZEdYVU9hTGlEUnRiUE1rdGNMRWl6LVhZa0JaQXI1NE5rV0ZTR3RLTi1aVTZUaXZVTjZ6bXh6SGJjOWs2cXdKNFlidVlsektxR3JzbFF4cDJSMmg4czJKT1UzMW1oOG9sZEN1ZE1NNWVIYkQ0bmhRZjc1U1c4TXVIcUZwaUNvaFZXaHd1eDNxcXhicWtjWFBMUQ?oc=5",
+   "dominio": "radartecatenews.com",
+   "fuente": "gn-6e69f2b2f169",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T02:53:37+00:00",
+   "capturado": "2026-10-06T06:19:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4821,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate",
+   "rubros": []
+  },
+  {
    "id": "e01bae9bc42f4269",
    "titulo": "Buscan a Joven de 16 Años Desaparecida en San Quintín, Baja California",
    "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQenNoTFFoX3MtRDFKUEhVSjZ0cWhPUnd6YWhrUVZLSG1sbW1KRnFkUWloLV9kNW1xYkxOLXZJU2JOT1hBVUlSY0hfb1dmamt4cHllb0dhLU9LWHU4SWxKUTQ1aEROV1Y1VjY5Q19weE9OM3dXVEdkQzF3c0F3dHJVYnRlc2ZRek1fUGhaT1poY0NjN1lYeXV1Z0gxTmFraWlLelc1SUt3eEdibS1mRkJseHg4R2RKYlhNdU5jM0hBNGp5LUpxb0hrTE5vRmkxYmM?oc=5",
@@ -1066,6 +1756,33 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/RLPKYZVHLBCRJF4HUYZWPXJQW4.png?auth=d9705baa1017ec75451f31943837db99f47a20ce58d60e0982a31338e99f7d75&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "4656bdb4c1fb033d",
+   "titulo": "En prisión mujer acusada de privación de la libertad y lesiones en San Quintín",
+   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOSjBBN2l4SGhZNkZwWTlYZnBSdmJqclZheU9jR3lvdFZSTmJHQjdVNjloZVplcjVBeFVMUXQwN2c0U005aEgtZ3JzOTliR2tsa1Y1VXRSNllIT25MSTJrbmhSbWxCTTJwZ09yZUl6WDJOMGU3TXQyNTVTdkppT0hhcXhrU1BaNlFoU09mTWxlR0lPTnFtUHRMSWhpbTUxbDl5ckpJSGZud3htZTAta2REUnBDbnhHNTA?oc=5",
+   "dominio": "encontrastenews.com",
+   "fuente": "gn-b69697f8b5c8",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Quintín"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T02:44:10+00:00",
+   "capturado": "2026-10-06T06:19:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5694,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
    "rubros": []
   },
   {
@@ -1236,6 +1953,25 @@
    "rubros": []
   },
   {
+   "id": "5faaa675a535b25c",
+   "titulo": "Football's Next Gen: Eight young players to watch at the 2026 World Cup",
+   "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPZktaaG9Ma2NyT0xVWmRoX3FQOEZ1Y2FFRjJJMXJlcHhHYWxZTDhGQ0puTEJfUXlPaVdILVVJMXByMnJnZVdYdVNZRGdlVXd4SDZnTEZ4ajlJMUNIdE5EM2NkNjU2OTR1MDVTUVB0NG9XNlYtSG1VYkxYdXRVUXFZT3U5cERTUi12eWFCRXVQZFhyWVgwR1doZ1RUWWNPeFlqc185VWdkYkxwcDFhR2ZUZkVCMUJiRTZDVS12ZFBVbWJaenNBZlFrd3V5eldfUmIzaDl3bXVGNG9BS2lWazl3?oc=5",
+   "dominio": "tribalfootball.com",
+   "fuente": "gn-ca561ff7f667",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T02:12:07+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
+  },
+  {
    "id": "f4def019317bc816",
    "titulo": "Pesquisa de Guillermina López Ahumada de 55 años",
    "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOQXNzNWlFNzljeFNrY0t5NDNEemdNUmJoWjBpOEo0dDk4R29EVGd6RUhvMFpiS0pCRlhMMUNDNFRMMHl4Q1h2RVVQQzlVN09COXFkVGdMdDhWSnFGNmNqcHRmYkZtQUhBX1VZRU44RjRXRWpnd3lZc1REX3ZzdVhPRlMxbmxvSlJpWi0w?oc=5",
@@ -1308,6 +2044,31 @@
    },
    "origen": "busqueda_web",
    "descubierta_por": "bq_rosarito",
+   "rubros": []
+  },
+  {
+   "id": "f34e42d6f3eff4d5",
+   "titulo": "Entre Teclas / Maíz transgénico, ¿sí o no?",
+   "url": "https://oem.com.mx/lavozdelafrontera/analisis/entre-teclas-maiz-transgenico-si-o-no-32450575",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T02:00:00+00:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7587,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "rubros": []
   },
   {
@@ -1535,6 +2296,27 @@
    ]
   },
   {
+   "id": "9eafa5b0cf754e84",
+   "titulo": "San Diego County voters to decide in November on half-cent sales tax to fund health, safety and sewage crisis",
+   "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQYkFNUERBVlgtQjl0YUNReWVsRkp0b0lYMC1HbmhTV3hvZUdUWEx2ejNkT21pMUd1bkJZaVluWk0ybHk0eWtXQmVnMVF1LWJYV1NhSkxGZVpkSEsxcUN1MGljUkQySzFMeVBqQjBiaUlQcHdxSGdETXdaa2RiMElObEJJSFFJNGxXbWtlNEc3aTQyMWd3eHhMRzZEZ2VydnVMUHE1bHl1SWdydkJsZEFVTEx4amFlY0FQbXZoYjJ5M1ZBTEd4Yjd5Q2ZEWi1rNEQtRU1nSE1tbWEzN2MwMVVOSg?oc=5",
+   "dominio": "10news.com",
+   "fuente": "gn-65e51224f05e",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T01:09:00+00:00",
+   "capturado": "2026-10-06T06:19:34+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_aguasnegras",
+   "rubros": []
+  },
+  {
    "id": "d033d8e758b92db7",
    "titulo": "San Diego was hotter than Dubai this weekend. No, we’re not exaggerating",
    "url": "https://timesofsandiego.com/weather/2026/10/05/san-diego-hotter-dubai-heat-wave/",
@@ -1558,33 +2340,6 @@
    "rubros": [
     "clima"
    ]
-  },
-  {
-   "id": "4656bdb4c1fb033d",
-   "titulo": "En prisión mujer acusada de privación de la libertad y lesiones en San Quintín",
-   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOSjBBN2l4SGhZNkZwWTlYZnBSdmJqclZheU9jR3lvdFZSTmJHQjdVNjloZVplcjVBeFVMUXQwN2c0U005aEgtZ3JzOTliR2tsa1Y1VXRSNllIT25MSTJrbmhSbWxCTTJwZ09yZUl6WDJOMGU3TXQyNTVTdkppT0hhcXhrU1BaNlFoU09mTWxlR0lPTnFtUHRMSWhpbTUxbDl5ckpJSGZud3htZTAta2REUnBDbnhHNTA?oc=5",
-   "dominio": "encontrastenews.com",
-   "fuente": "gn-b69697f8b5c8",
-   "zona_medio": "estatal",
-   "zonas": [
-    "San Quintín"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-10-06",
-   "publicado": "2026-10-06T01:04:20+00:00",
-   "capturado": "2026-10-06T06:19:34+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5694,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_sanquintin",
-   "rubros": []
   },
   {
    "id": "c5610535f1e7e102",
@@ -1682,30 +2437,6 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/W2HPMLSGVZGGPEMZT4IAMXCHFY.jpg?auth=3c3a34b3997b3d54b9e4645060693a4e18df77d66f76bde1f3696fc1f358eabc&smart=true&width=1200&height=780",
-   "rubros": []
-  },
-  {
-   "id": "d6cbb3ca8bb06f03",
-   "titulo": "Derriban el útlimo álamo “La Abuela”, de 200 años de antigüedad, para continuar el muro fronterizo en la zona de Lochiel de Arizona; activistas fueron rodeados durante una ceremonia",
-   "url": "https://www.elimparcial.com/son/sonora/2026/10/05/derriban-el-utlimo-alamo-la-abuela-de-200-anos-de-antiguedad-para-continuar-el-muro-fronterizo-en-la-zona-de-lochiel-de-arizona-activistas-fueron-rodeados-durante-una-ceremonia/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-06",
-   "publicado": "2026-10-06T00:48:54+00:00",
-   "capturado": "2026-10-06T00:02:56+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.7016,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/XFUWWAGGKZBG7MTR44CWZDPLQY.jpg?auth=5e61d65366b4dfa7011e2ef617183a655bcdacde5a210e9b40e10c6aec428673&smart=true&width=1200&height=780",
    "rubros": []
   },
   {
@@ -1988,31 +2719,6 @@
    ]
   },
   {
-   "id": "58c75ad07e4a877d",
-   "titulo": "INVITAN A SUMARSE AL ENCENDIDO DE LUCES ROSA DEL PALACIO MUNICIPAL",
-   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPYnI2Q0daOUVERlZhN2tIZG5GZEdYVU9hTGlEUnRiUE1rdGNMRWl6LVhZa0JaQXI1NE5rV0ZTR3RLTi1aVTZUaXZVTjZ6bXh6SGJjOWs2cXdKNFlidVlsektxR3JzbFF4cDJSMmg4czJKT1UzMW1oOG9sZEN1ZE1NNWVIYkQ0bmhRZjc1U1c4TXVIcUZwaUNvaFZXaHd1eDNxcXhicWtjWFBMUQ?oc=5",
-   "dominio": "radartecatenews.com",
-   "fuente": "gn-6e69f2b2f169",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-06",
-   "publicado": "2026-10-06T00:37:19+00:00",
-   "capturado": "2026-10-06T06:19:34+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.4821,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_tecate",
-   "rubros": []
-  },
-  {
    "id": "9d55710e8a2412c9",
    "titulo": "Bacheo en bulevar Lomas de Jatnil: reparan vialidad en Rosarito",
    "url": "https://www.rosaritonoticias.com/2026/10/05/bacheo-en-bulevar-lomas-de-jatnil-reparan-vialidad-en-rosarito/",
@@ -2085,51 +2791,6 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
-   "rubros": []
-  },
-  {
-   "id": "9f9c0c8eb0566a77",
-   "titulo": "San Diego Tijuana International Jazz Festival sizzled in Escondido",
-   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNeVpFVjVBSjlMLVF6cEpLUUpNSjNNSkNfUlVtaWpta2I2V2YxZDlMYUVQazBGVG4xTWdWWUZBRWwzQXltU3RDTEI1dW8tSG5kbmJ2MXh1SlJGRzh0bFpwVEV4UTUxX2dlMnVSXzRSTlhIeFFZWTI3Yk5md3JRdEFOeDA3WENHYUhOa0ctU2wwTGw1NG1idmJFZ0xCN005NGplMmZVb3ExZlZWZnBhZ1cyb3E1MVZSdw?oc=5",
-   "dominio": "sandiegouniontribune.com",
-   "fuente": "gn-5bad11419dae",
-   "zona_medio": "estatal",
-   "zonas": [
-    "Tijuana",
-    "San Diego"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-10-06",
-   "publicado": "2026-10-06T00:27:07+00:00",
-   "capturado": "2026-10-06T01:06:29+00:00",
-   "figuras": [],
-   "postura": null,
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_frontera_en",
-   "rubros": [
-    "espectaculos"
-   ]
-  },
-  {
-   "id": "9eafa5b0cf754e84",
-   "titulo": "San Diego County voters to decide in November on half-cent sales tax to fund health, safety and sewage crisis",
-   "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQYkFNUERBVlgtQjl0YUNReWVsRkp0b0lYMC1HbmhTV3hvZUdUWEx2ejNkT21pMUd1bkJZaVluWk0ybHk0eWtXQmVnMVF1LWJYV1NhSkxGZVpkSEsxcUN1MGljUkQySzFMeVBqQjBiaUlQcHdxSGdETXdaa2RiMElObEJJSFFJNGxXbWtlNEc3aTQyMWd3eHhMRzZEZ2VydnVMUHE1bHl1SWdydkJsZEFVTEx4amFlY0FQbXZoYjJ5M1ZBTEd4Yjd5Q2ZEWi1rNEQtRU1nSE1tbWEzN2MwMVVOSg?oc=5",
-   "dominio": "10news.com",
-   "fuente": "gn-65e51224f05e",
-   "zona_medio": "estatal",
-   "zonas": [
-    "San Diego"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-10-06",
-   "publicado": "2026-10-06T00:24:51+00:00",
-   "capturado": "2026-10-06T06:19:34+00:00",
-   "figuras": [],
-   "postura": null,
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_aguasnegras",
    "rubros": []
   },
   {
@@ -2308,6 +2969,34 @@
    "imagen": "https://www.elimparcial.com/resizer/v2/5FOHOC66ORCAVPXQ2LBS2BKV2Y.jpg?auth=400982d0b4d6ece9f08058105560cdc2049641347a2e0d66296469140a65ffa8&smart=true&width=869&height=738",
    "rubros": [
     "seguridad"
+   ]
+  },
+  {
+   "id": "98a9163ea141730c",
+   "titulo": "Secretaría de Turismo fortalece labores de seguridad turística con enfoque ambiental en Baja California",
+   "url": "https://www.uniradioinforma.com/sociedad/secretaria-turismo-fortalece-labores-seguridad-turistica-enfoque-ambiental-baja-california-n906753",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:00:00-07:00",
+   "capturado": "2026-10-06T13:23:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.4866,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "economia",
+    "turismo"
    ]
   },
   {
@@ -5139,56 +5828,6 @@
    "rubros": []
   },
   {
-   "id": "db1d69695109e1a3",
-   "titulo": "Militarizaron las aduanas para frenar la corrupción y el contrabando, pero seis años después la FGR investiga una red de huachicol fiscal en Matamoros con 13 personas bajo orden de aprehensión, entre ellas dos tenientes coroneles ligados al presunto tráfico de 144 millones de litros de combustible",
-   "url": "https://www.elimparcial.com/mexico/2026/10/05/militarizaron-las-aduanas-para-frenar-la-corrupcion-y-el-contrabando-pero-seis-anos-despues-la-fgr-investiga-una-red-de-huachicol-fiscal-en-matamoros-con-13-personas-bajo-orden-de-aprehension-entre-ellas-dos-tenientes-coroneles-ligados-al-presunto-trafico-de-144-millones-de-litros-de-combustible/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "fuera",
-   "fecha": "2026-10-05",
-   "publicado": "2026-10-05T19:46:09+00:00",
-   "capturado": "2026-10-06T00:02:56+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.7547,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/5MTMJWLNBVB6HFW6DUBVHBW7YQ.jpg?auth=f75b3b6583f64cfb3efd231819bb376a675c049336ce263faf41235d71982dc3&smart=true&width=1920&height=1080",
-   "rubros": []
-  },
-  {
-   "id": "044f81334c1da6bb",
-   "titulo": "El crimen organizado tendría el control efectivo en 30% del territorio de México, mientras sólo 23% tendría predominio claro del Estado; estudio ubica a 9 estados con predominio criminal y 14 bajo disputa",
-   "url": "https://www.elimparcial.com/mexico/2026/10/04/el-crimen-organizado-tendria-control-efectivo-en-30-del-territorio-de-mexico-mientras-solo-23-tendria-predominio-claro-del-estado-estudio-ubica-a-9-estados-con-predominio-criminal-y-14-bajo-disputa/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-05",
-   "publicado": "2026-10-05T19:46:00+00:00",
-   "capturado": "2026-10-04T21:24:05+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.6147,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/CZHFAZ4YK5CHZMX37TM5YQ3PKU.jpg?auth=32be639fa54318608ebc0ad9293450857373367d1c7654377f86cc4142ae63a8&smart=true&width=1200&height=750",
-   "rubros": [
-    "seguridad"
-   ]
-  },
-  {
    "id": "1384a30f010e68ff",
    "titulo": "Avioneta se estrella en un campo agrícola de Yuma; piloto resulta herido",
    "url": "https://www.elimparcial.com/mxl/sanluis/2026/10/05/avioneta-se-estrella-en-un-campo-agricola-de-yuma-piloto-resulta-herido/",
@@ -5256,6 +5895,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/10/6ac45f3de057f.jpeg",
    "rubros": [
     "politica"
    ]
@@ -5528,6 +6168,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/10/6ac45acbd0149.jpg",
    "rubros": [
     "politica"
    ]
@@ -15917,30 +16558,6 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
-   "rubros": []
-  },
-  {
-   "id": "704b416d5a165ca4",
-   "titulo": "Cerro de La Campana",
-   "url": "https://www.elimparcial.com/son/columnas/2026/10/04/cerro-de-la-campana/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-04",
-   "publicado": "2026-10-04T12:52:07+00:00",
-   "capturado": "2026-09-04T15:24:36+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5054,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/T3D4QQN4M5HP5L2GXSSLKIUFQQ.jpg?auth=374576b1d0ae44a2c36e4ce4ddcb3dff7fd99b4b3bd1f16e31867b3ec209d510&smart=true&width=1200&height=630",
    "rubros": []
   },
   {
@@ -225837,7 +226454,7 @@
     {
      "id": "ram",
      "via": "nominal",
-     "clave": "rocio adame"
+     "clave": "adame munoz"
     }
    ],
    "postura": {
