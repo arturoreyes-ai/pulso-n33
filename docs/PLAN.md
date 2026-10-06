@@ -1,3 +1,17 @@
+> **Implementación · 2 de octubre de 2026 — El año de Ismael Burgueño en
+> redes, mes por mes.** Se pidió lo más popular de todo el año —lo más visto,
+> lo de más likes— con unos 50 comentarios por publicación para cuidar el
+> costo, y solo de dos fuentes: la búsqueda de TikTok y sus propias cuentas.
+> El expediente suma la sección «Lo más visto, mes por mes»: por mes y por
+> red, las tres publicaciones con más vistas (TikTok), likes (Instagram) o
+> reacciones (Facebook), cada red con su cifra y nunca sumadas, y debajo de
+> cada una cómo suenan sus comentarios, con la salvedad de siempre. Sus
+> cuentas son las que enlaza su propio sitio; su TikTok no aparece y queda
+> fuera hasta encontrarlo. Leer el año de los 32 medios del catálogo costaba
+> unos 370 USD por publicaciones que en su mayoría no lo nombran; así cuesta
+> unos 10 a 16. El texto de los comentarios no se guarda con el expediente:
+> se borra a los 30 días y las cifras quedan.
+
 > **Implementación · 1 de octubre de 2026 — Redes: los likes de cada
 > comentario y un botón de compartir.** Los comentarios de cada publicación ya
 > iban de más a menos votado, pero no se veía por qué. Ahora cada uno lleva sus

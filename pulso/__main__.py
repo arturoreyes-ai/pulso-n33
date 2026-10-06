@@ -7,6 +7,7 @@
   python -m pulso tiktok [--videos N] [--comentarios N] [--probar]
   python -m pulso facebook [--sondear [ID ...]] [--sentimiento ninguno|modelo]
   python -m pulso consultas [--consulta ID] [--sentimiento ninguno|modelo] [--probar] [--sin-cosecha] [--sondear-web]
+  python -m pulso expediente-redes --expediente ID [--probar] [--estimar] [--sin-cosecha] [--sentimiento modelo]
   python -m pulso tendencias [--probar] [--ubicaciones]
   python -m pulso gasto-electoral [--solo-financiamiento]
   python -m pulso apify [--verificar]
@@ -816,6 +817,134 @@ def cmd_consultas(args):
     return 0
 
 
+def cmd_expediente_redes(args):
+    """Lo mas visto del ano de un expediente en sus cuentas y en TikTok.
+
+    A mano y fuera del cron, como consultas: ver pulso/expediente_redes.py.
+    Conteos a web/src/lib/expedientes/<id>-redes.json (git); el texto de los
+    comentarios a data/expedientes-comentarios.json (fuera de git).
+    """
+    from .apify import SinToken, token
+    from .expediente_redes import (TEXTO, clasificar, comentar, derivar, estimado_usd,
+                                   expediente, guardar_catalogo, leer_catalogo, leer_config,
+                                   listar, probar, publicar_texto, seleccionar,
+                                   usd_comentarios, validar_config)
+    from .pipeline import _escribir, ahora_utc
+    from .validador import validar_expediente_redes
+
+    try:
+        e = expediente(leer_config(os.path.join(args.config, "expedientes-redes.json")),
+                       args.expediente)
+    except (KeyError, OSError, ValueError) as ex:
+        print("expediente-redes: {}".format(ex), file=sys.stderr)
+        return 1
+    errores = validar_config(e)
+    if errores:
+        for x in errores:
+            print("error: " + x, file=sys.stderr)
+        return 1
+    ahora = ahora_utc()
+    estimado = estimado_usd(e)
+    if args.estimar:
+        print("{}: peor caso ~{:.2f} USD (tope {} USD); nada se llamó".format(
+            e["id"], estimado, e.get("tope_usd")))
+        return 0
+
+    if args.probar or not args.sin_cosecha or args.sin_listar:
+        try:
+            tok = token()
+        except SinToken as ex:
+            print("expediente-redes: {}".format(ex), file=sys.stderr)
+            return 1
+
+    if args.probar:
+        for f in probar(e, ahora, tok):
+            print("\n{} {} {}: {} ({} leídas)".format(f["red"], f["origen"], f["valor"],
+                                                    f["estado"], f.get("leidas", 0)))
+            if f.get("error"):
+                print("  " + f["error"])
+            for k, v in (f.get("quien") or {}).items():
+                print("  {}: {}".format(k, v))
+            for m in f.get("muestra", []):
+                print("  {:<14} {:<22} {:<10} {:>9}  {}".format(
+                    m["motivo"] or "queda", (m["creador"] or "")[:22], m["fecha"] or "",
+                    m["reproducciones"] or "", (m["titulo"] or "")[:60]))
+        print("\nAnota en la `razon` de cada cuenta qué devolvió y fecha `verificado` antes de "
+              "poner activo: true. Nada se escribió.")
+        return 0
+
+    previo_doc = {}
+    destino = os.path.join(args.destino, e["id"] + "-redes.json")
+    if os.path.exists(destino):
+        previo_doc = _leer(destino)
+    fallos = []     # (url, error) de los comentarios que no se pudieron leer
+    if args.sin_listar:
+        # Lo leido ya esta en el cache; solo se pagan los comentarios de lo
+        # que entro a la seleccion y nunca se leyo (un excluido deja su lugar a
+        # la siguiente del mes). El caso: 5 de octubre de 2026, tres TikToks
+        # sacados a mano; volver a listar el ano costaba 7.59 USD.
+        publicaciones, fuentes = leer_catalogo(args.cache, e["id"])
+        _, facturados, fallos = comentar(e, seleccionar(publicaciones, e), ahora, tok, args.cache)
+        gasto = dict(previo_doc.get("gasto") or {})
+        previos = dict(gasto.get("comentarios_facturados") or {})
+        for red, n in facturados.items():
+            previos[red] = previos.get(red, 0) + n
+        gasto["comentarios_facturados"] = dict(sorted(previos.items()))
+        gasto["usd_comentarios_estimado"] = usd_comentarios(previos)
+        print("comentarios nuevos facturados: {} (~{:.2f} USD)".format(
+            sum(facturados.values()), usd_comentarios(facturados)))
+    elif args.sin_cosecha:
+        publicaciones, fuentes = leer_catalogo(args.cache, e["id"])
+        gasto = previo_doc.get("gasto")
+    else:
+        if estimado > float(e.get("tope_usd") or 0):
+            print("expediente-redes: el peor caso es ~{:.2f} USD y el tope {} USD; baja "
+                  "`tope_posts`, `por_mes` o `comentarios_por_post`".format(
+                      estimado, e.get("tope_usd")), file=sys.stderr)
+            return 1
+        publicaciones, fuentes, usd_listado = listar(e, ahora, tok)
+        guardar_catalogo(args.cache, e["id"], publicaciones, fuentes)
+        _, facturados, fallos = comentar(e, seleccionar(publicaciones, e), ahora, tok, args.cache)
+        gasto = {"usd_listado": usd_listado, "comentarios_facturados": dict(sorted(facturados.items())),
+                 "usd_comentarios_estimado": usd_comentarios(facturados)}
+
+    for url, error in fallos:
+        print("aviso: no se leyeron los comentarios de {} ({})".format(url, error), file=sys.stderr)
+    if fallos:
+        print("aviso: {} publicaciones quedan sin comentarios; se reintentan con --sin-listar"
+              .format(len(fallos)), file=sys.stderr)
+    if args.sentimiento == "modelo":
+        from .sentimiento import Analizador
+        print("tono: {} comentarios etiquetados".format(clasificar(args.cache, e, Analizador())))
+
+    doc = derivar(e, publicaciones, fuentes, ahora, args.cache, gasto=gasto)
+    errores, avisos = validar_expediente_redes(doc)
+    for a in avisos:
+        print("aviso: " + a)
+    if errores:
+        for x in errores:
+            print("error: " + x, file=sys.stderr)
+        print("expediente-redes: no se escribió nada", file=sys.stderr)
+        return 1
+    _escribir(destino, doc)
+    if not args.sin_texto:
+        ruta_texto = os.path.join(args.salida, TEXTO)
+        previo = _leer(ruta_texto) if os.path.exists(ruta_texto) else None
+        _escribir(ruta_texto, publicar_texto(e, doc, ahora, args.cache, previo=previo))
+
+    for f in doc["fuentes"]:
+        print("{:<9} {:<8} {:<26} {:<9} leídas {:>5}  quedan {:>5}".format(
+            f["red"], f["origen"], f["valor"][:26], f["estado"], f.get("leidas", 0),
+            f.get("quedan", 0)))
+    elegidas = sum(len(l) for m in doc["meses"] for l in m["redes"].values())
+    leidos = sum(p["cosechados"] for m in doc["meses"] for l in m["redes"].values() for p in l)
+    print("\n{}: {} publicaciones en {} meses, {} comentarios leídos -> {}".format(
+        e["id"], elegidas, len(doc["meses"]), leidos, destino))
+    if gasto:
+        print("gasto: {}".format(json.dumps(gasto, ensure_ascii=False)))
+    return 0
+
+
 def cmd_youtube(args):
     """Shorts y videos de YouTube por feed publico. No cuesta nada.
 
@@ -1374,7 +1503,8 @@ def main(argv=None):
     cq.add_argument("--consulta", action="append", metavar="ID",
                     help="solo estos términos (repetible)")
     cq.add_argument("--importar-comentarios", metavar="ARCHIVO",
-                    help="un comentario por linea, copiados a mano de --post, SIN nombres; van "
+                    help="un comentario por linea, copiados a mano de --post, SIN nombres, "
+                         "con sus likes delante si se saben («12 | texto»); van "
                          "al cache (fuera de git) y no llaman a nada")
     cq.add_argument("--post", help="con --importar-comentarios: la URL del post agregado")
     cq.add_argument("--fecha", help="con --importar-comentarios: la fecha de los comentarios "
@@ -1390,6 +1520,28 @@ def main(argv=None):
                          "páginas web que nombran cada término encuentra Brave Search, 30 "
                          "días; requiere BRAVE_API_KEY, no llama a Apify y no escribe")
     cq.set_defaults(fn=cmd_consultas)
+
+    ex = sub.add_parser("expediente-redes",
+                        help="lo más visto del año de un expediente en sus cuentas y en la "
+                             "búsqueda de TikTok (requiere APIFY_TOKEN; fuera del cron)")
+    ex.add_argument("--expediente", required=True, metavar="ID")
+    ex.add_argument("--destino", default=os.path.join("web", "src", "lib", "expedientes"),
+                    help="dónde va <id>-redes.json, que entra a git")
+    ex.add_argument("--salida", default="data",
+                    help="dónde va expedientes-comentarios.json, fuera de git")
+    ex.add_argument("--cache", default=os.path.join("cache", "expedientes"))
+    ex.add_argument("--sentimiento", default="ninguno", choices=("ninguno", "modelo"))
+    ex.add_argument("--probar", action="store_true",
+                    help="pocos resultados por cuenta y búsqueda, apagadas incluidas; no escribe")
+    ex.add_argument("--estimar", action="store_true", help="el peor caso en USD; no llama a nada")
+    ex.add_argument("--sin-cosecha", action="store_true",
+                    help="rehace los dos archivos con el cache, sin llamar a Apify")
+    ex.add_argument("--sin-listar", action="store_true",
+                    help="no vuelve a listar: usa lo leido y paga solo los comentarios de lo "
+                         "que entro a la seleccion (por ejemplo, tras excluir una publicacion)")
+    ex.add_argument("--sin-texto", action="store_true",
+                    help="no escribe expedientes-comentarios.json")
+    ex.set_defaults(fn=cmd_expediente_redes)
 
     yt = sub.add_parser("youtube",
                         help="Shorts y videos de YouTube por feed público (sin llave, sin costo)")

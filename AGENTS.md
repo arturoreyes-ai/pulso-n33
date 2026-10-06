@@ -896,10 +896,16 @@ paid starts from a search any more. What went: `busqueda-en-vivo.tsx`,
 `use-termino.ts`, `buscador-ahora.tsx`, `buscador-redes.tsx`. What stays and
 nothing calls: `/api/termino`, `/api/redes-en-vivo`, its ledger,
 `lib/redes-en-vivo/`, `termino-vivo.ts` and their tests, so bringing the paid
-pass back is interface work. A tracked term's ficha is `/redes?reporte=`
-(`rutaDeConsulta`, «Ver reporte» on /reportes), deliberately not `?q=`: a
-search does not turn into a report by matching one. The rest of this section
-describes the live ficha as it was.
+pass back is interface work. A tracked term's ficha is `/reportes?reporte=`
+(`rutaDeConsulta`, «Ver reporte» on /reportes,
+`components/reportes/reporte-termino.tsx`), deliberately not `?q=`: a search
+does not turn into a report by matching one, and an untracked `?reporte=`
+becomes `/reportes?q=`. It lived at `/redes?reporte=` until 2 October 2026,
+when the client saw «redes» in a report's URL and bar and its back arrow
+landing on the Redes reader; that URL now redirects. The reader there is
+wrapped in a `<section>` on purpose: `main:has(.lector) > :not(:has(.lector))`
+hides any direct child of `<main>` that does not CONTAIN a reader, the bare
+reader included. The rest of this section describes the live ficha as it was.
 
 Since 23 September 2026 the Redes magnifier answers **any** term, not only the
 three consultas. A term that is not in `config/consultas.json` used to filter
@@ -1030,6 +1036,122 @@ are not:
 - **Jornada BC moved to `jornadabc.com.mx`** (found 23 September 2026): its
   searcher 302s there and every link then fails the own-domain rule, in the
   pipeline too, silently. The row in `config/consultas.json` needs a new probe.
+
+### Expedientes: a fixed report on one person
+
+Since 2 October 2026 /reportes carries **Expedientes** above the tracked
+terms, and each one opens at `/reportes/<id>` (`app/reportes/[expediente]/`,
+same admin gate). The first is Ismael Burgueño's year in the press, which the
+client asked for as «the most shocking, most controversial, whatever gained
+the most traction», built with free sources **before** any Apify spend. What
+is not obvious:
+
+- **It is a dated snapshot, not a tracked term.** It lives in
+  `web/src/lib/expedientes/<id>.json` (hand-built; how is in its `nota`), not
+  in `data/` (bot-written) or `config/consultas.json` (a harvest). Nothing
+  regenerates it; a new cut is a new file and a new row in `EXPEDIENTES`.
+- **Server components only.** The JSON weighs ~190 KB; `ExpedientesReportes`
+  is passed into the client `TableroReportes` as a prop so only the card's
+  figures reach the browser.
+- **Reach is distinct outlets per storyline, plus which are national** (a
+  hand-written list). Only headlines that NAME him count, the same rule as
+  `consultas._nombra`; Zeta and «Semanario ZETA» are one outlet. No tone
+  in the press part (rule 5: he is in the roster), no percentages.
+- **The screen names no mechanism** (no Google, no harvest): the method is in
+  the JSON's `nota`. Social reach before 14 September 2026 is «sin dato»,
+  because the project's own harvest history starts there.
+- **A row of «En redes» opens to what its comments say** (client, 2 October
+  2026: first «all the info», then the same day «a summary instead of every
+  comment»). The text is NOT in the expediente: that JSON is in git, and
+  comment text never is. `reportes/redes-expediente.tsx` shows the post's
+  /seguimiento record: first «Lo que dicen los comentarios», the AI summary
+  seguimiento already wrote with its read (`seguimiento/resumen-comentarios.tsx`,
+  extracted from the ficha), then the tone card with `SALVEDAD_TONO`, and the
+  list (`seguimiento/comentarios-seguidos.tsx`) only behind «Ver los N
+  comentarios» or a theme chip. Under ten comments there is no summary and
+  the list shows directly. It is the
+  seguimiento exception to rule 5, not a new one. Opening a row only reads
+  the team list; a post nobody follows offers «Leer comentarios», which is
+  seguimiento's paid first read, behind its button and its cap. YouTube is
+  «sin dato». The informe post came in from /seguimiento, not the catalogue,
+  and its account is `null` because Instagram does not put it in the URL.
+  The other five were read on 2 October 2026 at the client's request (~$0.60
+  of the seguimiento cap); until then every row said «no se han leído».
+- **The PDF is `/api/expediente?e=<id>`** (`lib/expedientes/pdf.ts`,
+  `components/informe/informe-expediente.tsx`), the term PDF's engine and
+  theme. **A condensed brief for leadership, seven pages** (client, 2 October
+  2026: «how the mayor is perceived across the board»): en corto; each story
+  with its reach and its two-sentence `Historia.resumen` (hand-written, not
+  the screen's body); **the year in social media** (5 October 2026, client:
+  «show the whole year social media report», following the screen, which
+  had dropped «En redes» for it): the most-seen post of each network, the
+  month table with each network's #1 on a bar against THAT network's peak
+  (no cell titles: with them the table jumped a page), the tone of the
+  year's comments **per network and never totalled** (his accounts are his
+  audience, TikTok is anyone: `pdf.ts::tonoDeRed`), the themes with the
+  identical name in more than one post (`pdf.ts::temasRepetidos`, never
+  merged by meaning), and the AI summary of the top `RESUMIDAS_POR_RED` (3)
+  of each network, read from the git-ignored text file
+  (`comentarios.ts::resumenesDelExpediente`; absent, it prints «sin dato»);
+  and the minor items. No comment text, no headline annex, no press chart by
+  month: those stay on screen. Admin-only and `no-store`: the summaries
+  derive from comment text and expire with it. Nothing fetched, nothing
+  paid, no summary requested. Two Takumi traps fixed there, each written where it lives: a
+  one-sided border needs all four widths (or the other three come out black),
+  and a boundary space next to an inline link must be a hard space.
+  `ui/boton-pdf.tsx` downloads it with its state in place (the render takes
+  2–6 s and a bare `<a download>` gave no sign of life).
+
+- **«Lo más visto, mes por mes» is the year in social media** (client, 2
+  October 2026: «the most popular, most views, plays, likes, across the whole
+  year», ~50 comments «to keep costs down», and only TikTok search plus his
+  own accounts). `python -m pulso expediente-redes --expediente ID`
+  (`pulso/expediente_redes.py`, config `config/expedientes-redes.json`), by
+  hand and off the cron. What is not obvious:
+  - **Not the outlet catalogue.** A year of the 32 approved outlets was ~190k
+    posts (~$370) paid to throw nearly all away. His own accounts are listed
+    whole; TikTok search keeps a video only if its caption names a `terminos`
+    entry AND a `contexto` word (there are Burgueños in Sinaloa).
+  - **Sorted by `MOST_RELEVANT`, never `MOST_LIKED`**: probed that day,
+    MOST_LIKED returned 0 of 5 videos naming him (Jude Bellingham, Buika). TikTok's
+    relevance leans recent, so early months may read thinner than they were.
+  - **Async runs, the one exception to apify.py's 300 s rule**
+    (`correr_actor_largo`, with `maxItems` and `maxTotalChargeUsd` per run):
+    a year does not fit the sync endpoint, and a person is waiting, not the
+    cron. `--estimar` prints the worst case and the run refuses to start above
+    `tope_usd`.
+  - **Each network ranks by its own unit** (TikTok views, Instagram likes,
+    Facebook reactions), `por_mes` per month and network, comments only for
+    those, one run per post so the 50 is exact.
+  - **Counts go to git, text does not.** `web/src/lib/expedientes/<id>-redes.json`
+    (checked by `validador.validar_expediente_redes`, also inside `validar`)
+    and `data/expedientes-comentarios.json` (git-ignored by the glob, read from
+    disk by the page). Tone is counted with `SALVEDAD_TONO`: the consultas and
+    seguimiento exception to rule 5, not a new one. `--sin-cosecha` rebuilds
+    both from `cache/expedientes/` for free; after 30 days the text is gone and
+    the counts stay.
+  - His TikTok `@burguenotj` probed empty and stays off with the reason
+    written; his website links only Instagram, Facebook and X.
+  - **«En redes» left the page on 5 October 2026** (client: deprecated in
+    favour of the year), and its per-post summary moved into the year: «N
+    comentarios» under any post opens ONE hoisted `ui/hoja.tsx` sheet
+    (`reportes/hoja-comentarios-ano.tsx`) with «Lo que dicen los comentarios»,
+    the tone card and the list. A month is three narrow columns; the summary
+    did not fit inline. The sheet fetches one post from
+    `/api/expediente/comentarios` (admin, `no-store`, a lookup key, nothing
+    fetched): the page no longer carries ~3,700 comments in its HTML. The
+    summary view is `seguimiento/resumen-comentarios.tsx::VistaResumen`, the
+    same component /seguimiento renders, split out that day.
+  - **The summaries are written once, by hand, for every post with 10+
+    comments** (client's call that day, ~$1.30 for 97 posts):
+    `node --env-file=.env scripts/resumir-expediente.cjs <id>` from `web/`,
+    with seguimiento's own writer and rules (`lib/analisis/seguimiento.ts`,
+    no Python copy). They go to `cache/expedientes/<id>/resumenes.json`, and
+    `expediente-redes --sin-cosecha` publishes them in the text file only
+    when their `firma` (the hash of the exact comment list they were written
+    over, same in Python and JS) still matches and they are under 30 days:
+    themes cite positions in that list, so a changed list would point them
+    at other comments.
 
 ### Seguimiento: one post, followed over time
 

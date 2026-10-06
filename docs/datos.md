@@ -1998,6 +1998,33 @@ los comentarios de cada publicación unas diez veces al mes) y
 guardaría una sola vez en un cache compartido y su `cuenta` sería la del
 término que corrió al último.
 
+## `data/expedientes-comentarios.json` — el texto del año en redes de un expediente
+
+Lo escribe `python -m pulso expediente-redes` (`pulso/expediente_redes.py`).
+**No va a git** (regla `data/*-comentarios.json` de `.gitignore`) y se
+regenera del caché de 30 días en cada corrida. Forma (esquema 2, desde el 5
+de octubre de 2026): `esquema`, `generado`, `retencion_dias` y
+`expedientes: {<id>: {visibles, maximo, comentarios, resumenes}}`.
+`comentarios` es `{<url>: [comentario]}`, hasta `comentarios_por_post` por
+publicación, con las cuatro claves de siempre (`texto`, `likes`, `fecha`,
+`sentimiento`), sin identidad y con las menciones enmascaradas. `resumenes` es
+`{<url>: {texto, leidos, fecha, temas: [{nombre, detalle, comentarios}]}}`: el
+resumen de IA de esa publicación, escrito por
+`web/scripts/resumir-expediente.cjs` y publicado solo si se escribió sobre la
+lista de hoy y no pasa de la retención; `temas[].comentarios` son posiciones
+en la lista `comentarios` de la misma url. Cada url tiene que ser una
+publicación de `web/src/lib/expedientes/<id>-redes.json`.
+
+Ese otro archivo sí va a git, junto al expediente: `id`, `desde`, `hasta`,
+`por_mes`, `comentarios_por_post`, `unidades`, `sin_dato`, `fuentes`,
+`salvedad_tono` (texto exacto de `consultas.SALVEDAD_TONO`), `gasto` y
+`meses` ordenados (`{mes: "AAAA-MM", redes: {tiktok|instagram|facebook:
+[publicación]}}`). Cada publicación: `url`, `cuenta`, `propia`, `fecha`,
+`titulo` (primer renglón del pie), `likes`, `comentarios`, `cosechados`, y
+si vienen `reproducciones`, `compartidos` (nunca 0) y `tono` (cinco cubetas
+que suman `cosechados`). Ordenadas por la cifra de su red. Lo revisa
+`validador.validar_expediente_redes`.
+
 ## `data/consultas-comentarios.json` — el texto de los comentarios de un término
 
 Fuera de git por el glob `data/*-comentarios.json`, como los otros dos. Misma

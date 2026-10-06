@@ -4513,6 +4513,194 @@ def validar_publicidad_meta(datos, config=None, detalles=None):
     return [], []
 
 
+# ------------------------------------------------- expedientes: el ano en redes
+#
+# web/src/lib/expedientes/<id>-redes.json lo escribe pulso/expediente_redes.py
+# y va a git con el resto del expediente. Por eso las mismas dos reglas que
+# data/: ni texto de comentarios ni identidad, y un orden explicito en cada
+# lista. El texto va a data/expedientes-comentarios.json, fuera de git.
+
+REDES_EXPEDIENTE = ("tiktok", "instagram", "facebook")
+MERITO_EXPEDIENTE = {
+    "tiktok": ("reproducciones", "likes", "comentarios"),
+    "instagram": ("likes", "comentarios", "reproducciones"),
+    "facebook": ("likes", "compartidos", "comentarios"),
+}
+CLAVES_PUB_EXPEDIENTE = frozenset({"url", "cuenta", "propia", "fecha", "titulo", "likes",
+                                   "comentarios", "reproducciones", "compartidos",
+                                   "cosechados", "tono"})
+OBLIGATORIAS_PUB_EXPEDIENTE = frozenset({"url", "cuenta", "propia", "fecha", "titulo",
+                                         "likes", "comentarios", "cosechados"})
+CUBETAS_TONO = ("positivo", "negativo", "neutral", "sin_clasificar", "sin_modelo_idioma")
+HOST_EXPEDIENTE = {"tiktok": "tiktok.com", "instagram": "instagram.com",
+                   "facebook": "facebook.com"}
+CLAVES_PROHIBIDAS_EXPEDIENTE = (
+    CLAVES_PROHIBIDAS_CONSULTAS | CLAVES_PROHIBIDAS_COMENTARIO_PUBLICADO
+    | frozenset({"comentarios_texto", "creador_comentario"})) - {"id"}
+
+
+def validar_expediente_redes(doc):
+    """El ano en redes de un expediente. Devuelve (errores, avisos)."""
+    from .consultas import SALVEDAD_TONO
+    errores, avisos = [], []
+    et = "expediente-redes[{}]".format(doc.get("id", "?") if isinstance(doc, dict) else "?")
+    if not isinstance(doc, dict):
+        return [et + ": debe ser objeto"], avisos
+    for k in ("id", "desde", "hasta", "por_mes", "comentarios_por_post", "unidades",
+              "sin_dato", "fuentes", "salvedad_tono", "meses"):
+        if k not in doc:
+            errores.append("{}: falta '{}'".format(et, k))
+    if errores:
+        return errores, avisos
+    for ruta in _claves_prohibidas(doc, CLAVES_PROHIBIDAS_EXPEDIENTE):
+        errores.append("{}: clave prohibida (texto o identidad) en {}".format(et, ruta))
+    if doc["salvedad_tono"] != SALVEDAD_TONO:
+        errores.append("{}: 'salvedad_tono' no es el texto exacto de consultas.SALVEDAD_TONO"
+                       .format(et))
+    if "excluidos" in doc and not _entero_no_negativo(doc["excluidos"]):
+        errores.append("{}: 'excluidos' debe ser entero no negativo".format(et))
+    sin_dato = set(doc["sin_dato"])
+    meses = [m.get("mes") for m in doc["meses"]]
+    # Ordenado y sin repetir: un mes implicado por la posicion es la trampa de
+    # las series de indicadores (ver AGENTS.md, Determinismo).
+    if meses != sorted(set(meses)):
+        errores.append("{}: 'meses' debe ir ordenado y sin repetir".format(et))
+    for m in doc["meses"]:
+        em = "{}.{}".format(et, m.get("mes"))
+        for red, lista in (m.get("redes") or {}).items():
+            er = "{}.{}".format(em, red)
+            if red not in REDES_EXPEDIENTE:
+                errores.append("{}: red desconocida".format(er))
+                continue
+            if red in sin_dato:
+                errores.append("{}: la red esta en sin_dato y trae publicaciones".format(er))
+            if len(lista) > doc["por_mes"]:
+                errores.append("{}: {} publicaciones y el tope es {}".format(
+                    er, len(lista), doc["por_mes"]))
+            previo = None
+            for i, p in enumerate(lista):
+                ep = "{}[{}]".format(er, i)
+                if not isinstance(p, dict):
+                    errores.append(ep + ": debe ser objeto")
+                    continue
+                sobran, faltan = set(p) - CLAVES_PUB_EXPEDIENTE, OBLIGATORIAS_PUB_EXPEDIENTE - set(p)
+                if sobran or faltan:
+                    errores.append("{}: sobran {} faltan {}".format(ep, sorted(sobran), sorted(faltan)))
+                    continue
+                if HOST_EXPEDIENTE[red] not in dominio(p["url"]):
+                    errores.append("{}: url de otra red ({})".format(ep, p["url"]))
+                if (p["fecha"] or "")[:7] != m.get("mes"):
+                    errores.append("{}: la fecha {} no es de {}".format(ep, p["fecha"], m.get("mes")))
+                if not (doc["desde"] <= p["fecha"] <= doc["hasta"]):
+                    errores.append("{}: fecha fuera de la ventana".format(ep))
+                for k in ("likes", "comentarios", "cosechados"):
+                    if not _entero_no_negativo(p[k]):
+                        errores.append("{}: '{}' debe ser entero no negativo".format(ep, k))
+                # Ausente si la red no lo trajo; nunca un 0 que diga «nadie lo vio».
+                for k in ("reproducciones", "compartidos"):
+                    if k in p and not (isinstance(p[k], int) and p[k] > 0):
+                        errores.append("{}: '{}' presente debe ser > 0".format(ep, k))
+                if p["cosechados"] > doc["comentarios_por_post"]:
+                    errores.append("{}: {} comentarios leidos y el tope es {}".format(
+                        ep, p["cosechados"], doc["comentarios_por_post"]))
+                if "tono" in p:
+                    t = p["tono"]
+                    if set(t) != set(CUBETAS_TONO) or not all(_entero_no_negativo(v) for v in t.values()):
+                        errores.append("{}: 'tono' debe traer las cinco cubetas enteras".format(ep))
+                    elif sum(t.values()) != p["cosechados"]:
+                        errores.append("{}: el tono suma {} y se leyeron {}".format(
+                            ep, sum(t.values()), p["cosechados"]))
+                elif p["cosechados"]:
+                    errores.append("{}: comentarios leidos sin 'tono'".format(ep))
+                clave = tuple(-int(p.get(k) or 0) for k in MERITO_EXPEDIENTE[red]) + (p["url"],)
+                if previo is not None and clave < previo:
+                    errores.append("{}: fuera del orden por {}".format(ep, MERITO_EXPEDIENTE[red][0]))
+                previo = clave
+    for f in doc["fuentes"]:
+        if f.get("estado") not in ("ok",):
+            avisos.append("{}: la fuente {} {} quedo en '{}'".format(
+                et, f.get("red"), f.get("valor"), f.get("estado")))
+    return errores, avisos
+
+
+def validar_expedientes_comentarios(texto, docs):
+    """data/expedientes-comentarios.json contra los <id>-redes.json leidos."""
+    errores, avisos = [], []
+    et = "expedientes-comentarios"
+    if not isinstance(texto, dict) or not isinstance(texto.get("expedientes"), dict):
+        return [et + ": falta 'expedientes'"], avisos
+    for eid, bloque in texto["expedientes"].items():
+        ee = "{}.{}".format(et, eid)
+        doc = docs.get(eid)
+        if doc is None:
+            errores.append("{}: texto de {} sin su {}-redes.json".format(et, eid, eid))
+            continue
+        if not isinstance(bloque, dict) or not isinstance(bloque.get("comentarios"), dict):
+            errores.append(ee + ": falta 'comentarios' (esquema 2: comentarios y resumenes por post)")
+            continue
+        urls = {p["url"] for m in doc.get("meses", []) for lista in m.get("redes", {}).values()
+                for p in lista if isinstance(p, dict) and "url" in p}
+        por_post = bloque["comentarios"]
+        _validar_comentarios_publicados(por_post, urls, bloque.get("visibles"),
+                                        bloque.get("maximo"), ee, errores)
+        # El resumen de IA de cada post: deriva del texto, asi que vive aqui y
+        # no en git, y sus temas citan posiciones de la lista publicada.
+        for url, r in (bloque.get("resumenes") or {}).items():
+            er = "{}.resumenes[{}]".format(ee, url)
+            lista = por_post.get(url)
+            if not isinstance(lista, list):
+                errores.append(er + ": resumen de un post sin comentarios publicados")
+                continue
+            if not isinstance(r, dict) or set(r) != {"texto", "leidos", "fecha", "temas"}:
+                errores.append(er + ": claves exactas texto, leidos, fecha, temas")
+                continue
+            if not _texto(r["texto"]):
+                errores.append(er + ": 'texto' vacio")
+            if not _entero_no_negativo(r["leidos"]) or r["leidos"] < 1:
+                errores.append(er + ": 'leidos' debe ser entero positivo")
+            for i, t in enumerate(r["temas"] if isinstance(r["temas"], list) else []):
+                et_ = "{}.temas[{}]".format(er, i)
+                if not isinstance(t, dict) or set(t) != {"nombre", "detalle", "comentarios"}:
+                    errores.append(et_ + ": claves exactas nombre, detalle, comentarios")
+                    continue
+                idx = t["comentarios"]
+                if (not isinstance(idx, list) or len(idx) < 2 or len(set(idx)) != len(idx)
+                        or not all(isinstance(n, int) and 0 <= n < len(lista) for n in idx)):
+                    errores.append(et_ + ": 'comentarios' debe citar dos o mas posiciones "
+                                   "distintas de la lista publicada")
+    return errores, avisos
+
+
+def _validar_expedientes(dir_datos, errores, avisos):
+    """Los <id>-redes.json del repo de este data/, y el texto si esta."""
+    raiz = os.path.dirname(os.path.abspath(dir_datos))
+    carpeta = os.path.join(raiz, "web", "src", "lib", "expedientes")
+    docs = {}
+    if os.path.isdir(carpeta):
+        for nombre in sorted(os.listdir(carpeta)):
+            if not nombre.endswith("-redes.json"):
+                continue
+            try:
+                doc = _leer(os.path.join(carpeta, nombre))
+            except (ValueError, OSError) as ex:
+                errores.append("expediente-redes: no se pudo leer {} ({})".format(nombre, ex))
+                continue
+            e, a = validar_expediente_redes(doc)
+            errores += e
+            avisos += a
+            if isinstance(doc, dict):
+                docs[doc.get("id")] = doc
+    ruta = os.path.join(dir_datos, "expedientes-comentarios.json")
+    if os.path.exists(ruta):
+        try:
+            e, a = validar_expedientes_comentarios(_leer(ruta), docs)
+            errores += e
+            avisos += a
+        except (ValueError, OSError) as ex:
+            errores.append("expedientes-comentarios: no se pudo leer {} ({})".format(ruta, ex))
+        errores += _regla_gitignore(dir_datos)
+
+
 def validar_todo(dir_config="config", dir_datos="data", hoy=None):
     """Valida todo lo que exista. data/ ausente es aviso, no error.
 
@@ -4843,6 +5031,8 @@ def validar_todo(dir_config="config", dir_datos="data", hoy=None):
 
     if hay_texto:
         errores += _regla_gitignore(dir_datos)
+
+    _validar_expedientes(dir_datos, errores, avisos)
 
     ruta_estado = os.path.join(dir_datos, "estado.json")
     estado = None

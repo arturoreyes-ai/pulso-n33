@@ -1,0 +1,98 @@
+{
+ "nota": "Lo más visto de un año en redes para un expediente (pulso/expediente_redes.py), a mano y fuera del cron: `python -m pulso expediente-redes --expediente ID`. Dos fuentes nada más, por decisión del cliente del 2 de octubre de 2026: las cuentas PROPIAS de la persona y la búsqueda de TikTok; leer el año de los 32 medios del catálogo eran ~190 mil publicaciones pagadas para tirar casi todas. Cada cuenta lleva `razon` con de dónde salió y no corre sin `verificado`: se sondea con `--probar`. De la búsqueda solo quedan los videos cuyo pie nombra uno de `terminos` Y uno de `contexto`, porque el apellido solo trae a cualquiera que se llame igual. `por_mes` publicaciones por mes y por red, y `comentarios_por_post` comentarios de cada una; `tope_usd` frena la corrida antes de llamar a nada si el peor caso lo pasa.",
+ "expedientes": [
+  {
+   "id": "ismael-burgueno-2026",
+   "persona": "Ismael Burgueño Ruiz",
+   "idioma": "es",
+   "desde": "2025-10-01",
+   "hasta": "2026-10-02",
+   "por_mes": 3,
+   "comentarios_por_post": 50,
+   "tope_usd": 20,
+   "terminos": [
+    "Burgueño",
+    "burguenotj",
+    "#IsmaelBurgueño",
+    "#Burgueño"
+   ],
+   "contexto": [
+    "Ismael",
+    "Tijuana",
+    "alcalde",
+    "presidente municipal",
+    "ayuntamiento",
+    "cabildo",
+    "Morena",
+    "burguenotj",
+    "TJ"
+   ],
+   "cuentas": [
+    {
+     "red": "instagram",
+     "valor": "@burguenotj",
+     "activo": true,
+     "verificado": "2026-10-02",
+     "tope_posts": 1500,
+     "razon": "Enlazada desde su sitio, ismaelburgueno.org, leído el 2 de octubre de 2026: la cuenta la declara él, no un parecido de nombre. Sondeo del mismo día: nombre «Ismael Burgueño», biografía «Presidente Municipal de Tijuana», 32,455 seguidores, 2,744 publicaciones."
+    },
+    {
+     "red": "facebook",
+     "valor": "BurguenoIsmael",
+     "activo": true,
+     "verificado": "2026-10-02",
+     "tope_posts": 1500,
+     "razon": "Enlazada desde su sitio, ismaelburgueno.org, leído el 2 de octubre de 2026. Sondeo del mismo día: la página responde y publica."
+    },
+    {
+     "red": "tiktok",
+     "valor": "@burguenotj",
+     "activo": false,
+     "tope_posts": 800,
+     "razon": "Su sitio no enlaza TikTok. Sondeado el 2 de octubre de 2026: @burguenotj devuelve un perfil vacío, sin autor ni videos, así que sigue apagado; sus videos que circulan los trae la búsqueda."
+    }
+   ],
+   "busquedas_tiktok": [
+    {
+     "consulta": "Ismael Burgueño",
+     "orden": "MOST_RELEVANT",
+     "filtro_fecha": "ALL_TIME",
+     "tope": 150
+    },
+    {
+     "consulta": "Ismael Burgueño",
+     "orden": "MOST_RELEVANT",
+     "filtro_fecha": "LAST_6_MONTHS",
+     "tope": 150
+    },
+    {
+     "consulta": "Burgueño Tijuana",
+     "orden": "MOST_RELEVANT",
+     "filtro_fecha": "ALL_TIME",
+     "tope": 100
+    },
+    {
+     "consulta": "alcalde de Tijuana",
+     "orden": "MOST_RELEVANT",
+     "filtro_fecha": "ALL_TIME",
+     "tope": 100
+    }
+   ],
+   "nota_busquedas": "Sondeadas el 2 de octubre de 2026, cinco videos por fila. MOST_LIKED no sirve: con ALL_TIME devolvió 0 de 5 que lo nombran (Jude Bellingham, Buika, un audio en indonesio): ordena por likes de todo TikTok y la consulta apenas filtra. MOST_RELEVANT con «Ismael Burgueño» dejó 5 de 5 (ALL_TIME) y 3 de 5 (LAST_6_MONTHS), y «Burgueño Tijuana» 4 de 5. El orden lo pone TikTok y se inclina a lo reciente, así que los primeros meses de la ventana pueden salir más delgados que lo que de verdad circuló.",
+   "excluidos": [
+    {
+     "url": "https://www.tiktok.com/@patrullaespiritual33/video/7670363608269835550",
+     "razon": "Sacado por el cliente el 5 de octubre de 2026: el pie lo nombra pero el video no trata de él. Era el más visto del año (301,592 vistas)."
+    },
+    {
+     "url": "https://www.tiktok.com/@patrullaespiritual33/video/7675846068273302814",
+     "razon": "Sacado por el cliente el 5 de octubre de 2026, junto con el de arriba: misma cuenta y mismo caso, lo nombra en el pie y no trata de él (120,155 vistas)."
+    },
+    {
+     "url": "https://www.tiktok.com/@yestaeslahistoria/video/7584662334606462221",
+     "razon": "Sacado por el cliente el 5 de octubre de 2026: «Se hace viral agente de Movilidad pidiendo mordida» lo nombra en la descripción y no es sobre él (140,200 vistas)."
+    }
+   ]
+  }
+ ]
+}

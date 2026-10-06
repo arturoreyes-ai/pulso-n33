@@ -25,6 +25,10 @@ const nextConfig: NextConfig = {
   // existen; un patron que no empareja nada simplemente no se incluye, que es
   // el comportamiento que se quiere.
   outputFileTracingIncludes: {
+    // La hoja de una publicacion del año en redes de un expediente lee su
+    // texto y su resumen del disco (lib/expedientes/comentarios.ts). Fuera de
+    // git: en un despliegue desde git no existe y la hoja lo dice.
+    "/api/expediente/comentarios": ["./public/data/expedientes-comentarios.json"],
     "/api/analizar-publicacion": [
       "./public/data/redes.json",
       "./public/data/tiktok.json",
@@ -82,6 +86,16 @@ const nextConfig: NextConfig = {
     // el motor de PDF no lee las fuentes del sistema. Sin esto la ruta
     // devuelve 503 en produccion y solo en produccion; el segundo archivo
     // vive fuera de git y puede no estar, y entonces el informe lo dice.
+    // El expediente en PDF: el JSON va en el bundle; del disco lee los
+    // resumenes del año (fuera de git, pueden faltar y el PDF lo dice) y las
+    // fuentes. Sin ellas, 503 solo en produccion.
+    "/api/expediente": [
+      "./public/data/expedientes-comentarios.json",
+      "./node_modules/geist/dist/fonts/geist-sans/Geist-Regular.woff2",
+      "./node_modules/geist/dist/fonts/geist-sans/Geist-Medium.woff2",
+      "./node_modules/geist/dist/fonts/geist-sans/Geist-SemiBold.woff2",
+      "./node_modules/geist/dist/fonts/geist-sans/Geist-Bold.woff2",
+    ],
     "/api/informe-consulta": [
       "./public/data/consultas.json",
       "./public/data/consultas-comentarios.json",

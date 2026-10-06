@@ -44,6 +44,13 @@
   /* La curva de firma. Como token para no repetir el cubic-bezier a mano. */
   --ease-firma: cubic-bezier(0.32, 0.72, 0, 1);
 
+  /* Lo que CAMBIA DE TAMANO en pantalla: entra y sale despacio, acelera en
+     medio. La firma no sirve para eso: tira tres cuartos del movimiento al
+     primer cuarto del tiempo, y en un pliegue de 520px los renglones de abajo
+     subian de golpe y luego se arrastraban (medido el 5 de octubre de 2026:
+     520 -> 141px en 64ms, y 190ms mas para los ultimos 100). */
+  --ease-tamano: cubic-bezier(0.77, 0, 0.175, 1);
+
   /* Que un `transition-colors` pelado haga LO CORRECTO por omision. De
      fabrica eran 150ms con ease-in-out, que es la curva equivocada para
      realimentacion. Asi el hover correcto es tambien el que menos se escribe,
@@ -438,6 +445,60 @@ input[type="search"]::-webkit-search-decoration {
 
 .aparicion-suave {
   animation: aparicion var(--dur-cambio) var(--ease-firma) both;
+}
+
+/* Lo que un <details> revela al abrirse, con la misma aparicion de una hoja.
+   El caso: en el expediente («El año en redes», reportes/reporte-redes.tsx)
+   abrir un mes metia nueve publicaciones en un cuadro y empujaba los meses
+   de abajo sin decir de donde salian. Va colgado de [open] y no como clase
+   fija porque desde Chrome 131 un <details> cerrado oculta su contenido con
+   content-visibility, sin quitarlo: una clase fija animaria una sola vez.
+   El bloque de prefers-reduced-motion la apaga. */
+details[open] > .al-abrir {
+  animation: aparicion var(--dur-cambio) var(--ease-firma) both;
+}
+
+/* El pliegue: el alto de lo que el <details> muestra, de 0 a su alto natural
+   y de vuelta. El caso (5 de octubre de 2026, cliente: «el cierre se ve
+   brusco»): abrir ya aparecia con `.al-abrir`, pero cerrar quitaba nueve
+   publicaciones en un cuadro y los meses de abajo SALTABAN varias pantallas
+   hacia arriba en el telefono. Animar el alto es animar layout, y aqui es a
+   proposito: el salto que molesta ES el layout, y una sola caja por clic lo
+   aguanta.
+
+   Asimetrico, como se cierra algo que ya se leyo. Al CERRAR, primero se va el
+   texto (--dur-toque) y despues se cierra el hueco con --ease-tamano: medido,
+   la opacidad llega a 0.02 a los 93ms con el alto casi quieto, y el hueco se
+   desliza y asienta a los 248ms. Con la firma el cierre se sentia brusco:
+   ver el comentario de --ease-tamano. Al ABRIR, alto y opacidad van juntos
+   con la firma, que responde de inmediato, y `.al-abrir` pone encima su
+   subida de 6px. `content-visibility` va con allow-discrete para que el
+   contenido siga visible hasta el final del cierre.
+
+   Sin `interpolate-size` (Safari y Firefox en octubre de 2026) el alto no
+   anima: el cierre se desvanece y luego cierra, que ya es mejor que el salto,
+   y nada se rompe. Va por clase (`.pliegue`) y no a todo <details> del sitio. */
+details.pliegue {
+  interpolate-size: allow-keywords;
+}
+
+details.pliegue::details-content {
+  block-size: 0;
+  overflow-y: clip;
+  opacity: 0;
+  transition:
+    block-size var(--dur-cambio) var(--ease-tamano),
+    opacity var(--dur-toque) var(--ease-out),
+    content-visibility var(--dur-cambio) allow-discrete;
+}
+
+details.pliegue[open]::details-content {
+  block-size: auto;
+  opacity: 1;
+  transition:
+    block-size var(--dur-cambio) var(--ease-firma),
+    opacity var(--dur-cambio) var(--ease-firma),
+    content-visibility var(--dur-cambio) allow-discrete;
 }
 
 /* ------------------------------------------------------------------ lector */

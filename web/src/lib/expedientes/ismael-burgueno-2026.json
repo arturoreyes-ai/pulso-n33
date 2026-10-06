@@ -1,0 +1,2582 @@
+{
+ "nota": "Expediente editorial fijo, armado a mano el 2 de octubre de 2026 a pedido del cliente y ANTES de cualquier cosecha pagada. Fuentes, todas gratuitas: el RSS de busqueda de Google Noticias (edicion MX, '\"Burgueño\" (Tijuana OR alcalde OR Ismael)' en ventanas de 10 dias, y de 3 para oct 2025-abr 2026, porque el indice devuelve ~10 por consulta en fechas viejas); los buscadores propios de config/consultas.json con robots.txt; busqueda web para el contexto de la FGR y de las sanciones; y el historial de git de data/redes.json, tiktok.json, facebook.json y youtube.json. Solo cuentan titulares que lo NOMBRAN (o «alcalde de Tijuana»), plegados y sin repetir: 632 de 71 medios, con Zeta y Semanario ZETA como uno. Cada titular cae en una sola historia, por palabras clave revisadas a mano; la agenda de gobierno (282) no se pinta. `nacionales` es una lista escrita a mano de medios de alcance nacional, no un dato de la fuente. Sin tono a proposito: es una figura del roster (regla 5). Los enlaces de Google son el token tal cual, como en la busqueda en vivo. No se regenera solo: es una foto de ese dia.",
+ "id": "ismael-burgueno-2026",
+ "persona": "Ismael Burgueño Ruiz",
+ "cargo": "Presidente municipal de Tijuana",
+ "desde": "2025-10-01",
+ "hasta": "2026-10-02",
+ "titulares": 632,
+ "medios": 71,
+ "proximo": {
+  "fecha": "2026-10-04",
+  "evento": "Segundo informe de gobierno"
+ },
+ "enCorto": [
+  {
+   "titulo": "Dos historias lo llevaron a la prensa nacional",
+   "texto": [
+    "Por algo distinto a sus propios anuncios: la carpeta de la FGR por lavado de dinero (noviembre de 2025, de vuelta el 30 de septiembre) y las sanciones del Tesoro de Estados Unidos del 29 de septiembre. Coinciden justo ahora, cuatro días antes de su segundo informe."
+   ]
+  },
+  {
+   "titulo": "Por volumen, el año fue la gubernatura",
+   "texto": [
+    "269 de 632 titulares, de 56 medios. Licencia en junio, puntero todo el verano, derrotado por Julieta Ramírez el 15 de septiembre, de vuelta en la alcaldía el 18 y en busca de la reelección desde el 26."
+   ]
+  },
+  {
+   "titulo": "El momento más impactante",
+   "texto": [
+    "La cabeza de cerdo con una amenaza contra él en la Zona Río, el 10 de abril."
+   ]
+  },
+  {
+   "titulo": "La crítica más dura salió de Zeta",
+   "texto": [
+    "Acarreo en sus asambleas, 19 propiedades de la familia, calles «en ruinas», la fiscalización de Jireh. Pocos medios la retomaron, y si viajó en redes está sin medir."
+   ]
+  },
+  {
+   "titulo": "En redes, lo que más se movió fue su informe",
+   "texto": [
+    "La publicación de su segundo año de labores en Instagram, del 29 de septiembre, juntó 1,237 likes y 64 comentarios; ninguna otra medida pasó de 414 likes ni de 1,708 vistas. La de más comentarios fue la de la reelección en Blanco y Negro, en Facebook, con 226."
+   ]
+  }
+ ],
+ "meses": [
+  {
+   "mes": "2025-10",
+   "titulares": 20,
+   "polemica": 0
+  },
+  {
+   "mes": "2025-11",
+   "titulares": 23,
+   "polemica": 13
+  },
+  {
+   "mes": "2025-12",
+   "titulares": 9,
+   "polemica": 2
+  },
+  {
+   "mes": "2026-01",
+   "titulares": 5,
+   "polemica": 0
+  },
+  {
+   "mes": "2026-02",
+   "titulares": 25,
+   "polemica": 0
+  },
+  {
+   "mes": "2026-03",
+   "titulares": 27,
+   "polemica": 2
+  },
+  {
+   "mes": "2026-04",
+   "titulares": 48,
+   "polemica": 11
+  },
+  {
+   "mes": "2026-05",
+   "titulares": 62,
+   "polemica": 14
+  },
+  {
+   "mes": "2026-06",
+   "titulares": 110,
+   "polemica": 9
+  },
+  {
+   "mes": "2026-07",
+   "titulares": 55,
+   "polemica": 5
+  },
+  {
+   "mes": "2026-08",
+   "titulares": 102,
+   "polemica": 5
+  },
+  {
+   "mes": "2026-09",
+   "titulares": 118,
+   "polemica": 16
+  },
+  {
+   "mes": "2026-10",
+   "titulares": 28,
+   "polemica": 4
+  }
+ ],
+ "historias": [
+  {
+   "id": "fgr",
+   "titulo": "La carpeta de la FGR por lavado de dinero",
+   "resumen": "La FGR lo citó en noviembre de 2025 por presunto lavado de dinero, tras una denuncia anónima; él habló de campaña negra y amagó con demandar a los medios. En junio exhibió el no ejercicio de la acción penal, y un reportaje de N+ reabrió el tema el 30 de septiembre.",
+   "medios": 26,
+   "nacionales": [
+    "El Universal",
+    "La Jornada",
+    "LatinUS",
+    "PolíticoMX",
+    "PostaMx",
+    "Proceso",
+    "Radio Fórmula",
+    "sdpnoticias",
+    "vanguardia.com.mx"
+   ],
+   "cuerpo": [
+    {
+     "parrafo": [
+      "La polémica que más medios llevaron en el año, y la única que llegó a la prensa nacional en volumen. Vino en tres oleadas."
+     ]
+    },
+    {
+     "oleadas": [
+      {
+       "cuando": "18–20 nov 2025",
+       "texto": [
+        "Medios nacionales publican que la unidad de delincuencia organizada de la FGR citó a Burgueño, al empresario Fernando Salgado y a unos veinte funcionarios por presunto lavado de dinero; varios lo ligaron al CJNG. En la misma tanda de citatorios estaba Carlos Torres, exesposo de la gobernadora. Burgueño mandó abogados en vez de comparecer, habló de una campaña negra y ",
+        {
+         "t": "amagó con demandar a los medios que publicaron los citatorios",
+         "url": "https://www.proceso.com.mx/nacional/estados/2025/11/20/alcalde-de-tijuana-amaga-con-demandar-medios-que-publican-citatorios-de-la-fgr-361233.html"
+        },
+        ", que fue noticia por sí sola."
+       ]
+      },
+      {
+       "cuando": "17–19 jun 2026",
+       "texto": [
+        "Al pedir licencia para buscar la gubernatura exhibió un documento de la FGR que no ejerce acción penal. Los titulares dijeron «absuelve», «se cae denuncia anónima» y «estoy limpiecito». En agosto, Zeta recogió la petición de una organización civil para que la Fiscalía lo informe de oficio."
+       ]
+      },
+      {
+       "cuando": "30 sep–1 oct 2026",
+       "texto": [
+        "Un reportaje de N+ lo reabrió y en dos días una docena de medios publicó su desmentido: «caso cerrado», «guerra sucia» (",
+        {
+         "t": "El Imparcial",
+         "url": "https://www.elimparcial.com/tij/tijuana/2026/09/30/burgueno-niega-estar-bajo-investigacion-de-la-fgr-por-lavado-de-dinero/"
+        },
+        "). Llegó un día después de las sanciones de Estados Unidos, y desde entonces las dos historias van juntas."
+       ]
+      }
+     ]
+    }
+   ],
+   "titulares": [
+    {
+     "fecha": "2025-11-18",
+     "titulo": "FGR investiga a alcalde de Tijuana por presunto lavado de dinero; Burgueño Ruiz y 20 funcionarios son requeridos",
+     "medio": "El Universal",
+     "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxQUW9JWGxfRHJpS0dtOVd3YnNUbW11RjBrNVdvam80MEotMU43eDk0Rjd2R0tFSFU5R2VWR0t0NGtRek12M0JYeWZpVUwzTGNZazdnMll1Q0VUc3JuV1VVWkN0d2tFOVBXUFFlcnVGSXhlSlNUZWVSTXpsYXJ2TjFONGMwTWN0LWp2TlZYN0FLVUIzZVp3QTYyWnkxUl9LSWRoVVFFSDVqcmtkZkg4YlRhdVJuN0RNazJuLXp2dDczWDZDZFplV0xkMDlfemM5bXNsd0d3WDJaeG5lRWpvcFp5YkFOMXnSAfgBQVVfeXFMT3E1cWZwME11Yi1BZmo0aXpCMVR5QTFrMmFWQzRkRjYtN0h6VnJZY0E4WXVSZE1Fb1BLZDBMWjJ4Wk5mdVF4bGdXRThKT3Zycmo4Tm93azZMeGV3Z2xjUzh1QkNvRXU3bzlJSFpKV3JsN2E0dFFHMDViaDZ6V2ZPNG0wcHBfRnFxUklJNFFramFmX3ZDVXBJcGg5ZGFBWUI0RDdpVWdNbGZjRWJYcmRwMWtUUGVtb3Q4NFhuMV9FWjg2SXR1ME9ucW1DcnoyZTI2Q0tmalpQMUxQeWw0TTE2MFlCNnNOdV9aWlJMWWpKVkw5cVl4RFBIc1Q?oc=5"
+    },
+    {
+     "fecha": "2025-11-18",
+     "titulo": "FGR cita a comparecer al alcalde de Tijuana, Baja California",
+     "medio": "LatinUS",
+     "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNZC1objA2VGpDc0s3b0tUM05malFPN0Rjb2ZXQTA2ajVJZ3JYVDh3dEdqYzBJSmRhRXZyRkh1Y3oxay1iMVlTZ2xGQXU3Z0wweGZ6UDRTSGREOEQ0RUZfN0tPdlZoQ1N3QTlMWjNBcVRmMWFnN19lZkZfMmdSSS11TTctQWg3UVhXLUczZndkWWthTEMtTjBrYS1qRTEyQ3ZvS2VMVjhlbjUyd9IBqgFBVV95cUxNZC1objA2VGpDc0s3b0tUM05malFPN0Rjb2ZXQTA2ajVJZ3JYVDh3dEdqYzBJSmRhRXZyRkh1Y3oxay1iMVlTZ2xGQXU3Z0wweGZ6UDRTSGREOEQ0RUZfN0tPdlZoQ1N3QTlMWjNBcVRmMWFnN19lZkZfMmdSSS11TTctQWg3UVhXLUczZndkWWthTEMtTjBrYS1qRTEyQ3ZvS2VMVjhlbjUydw?oc=5"
+    },
+    {
+     "fecha": "2025-11-18",
+     "titulo": "Cita la FGR al alcalde y a Salgado Chávez",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNblNraG1nYUVfZkNzNHhtRXV1UzlnLW5Wd1YtU2hUTUQwUk12X3J6T2dpUG9kck00emYzR1lPc1owaVhfLWZleVZQUDJxbm9nMERoRzd1VllkYjBWcGY5U3dYLUw4TnA5NHFPU1BSQ1g2QnZWakhMSURpRWJZQldMbGEtQk5iWHdJY3dvUS1mbi1hRDE1UUpJ?oc=5"
+    },
+    {
+     "fecha": "2025-11-18",
+     "titulo": "Burgueño y Salgado citados en la FGR por operaciones con recursos de procedencia ilícita",
+     "medio": "Zeta",
+     "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNNXFFRnloT0MwVzg3eVFtaWJKRTRJeDB6TGZzam1DREVfWXhhOGc3WG53cWV6MmVrV2lLX0RCZTBPU2xGV3VUTmhEcDFHMmVaNEh0Q2pJbHJORVdHZGtZM213bG5mUFkyeTRBNmJQY3N6SlJzYmNzcTVOb3FNNTZpbzJ0ejRLMUE0VHVib2N4RkVaRTVVdVEwb2NWS1Q4cmU3cUhrZ1NFc2c0OHJ0V2RCTzI0Y3VBTFE5SmMtSmJn?oc=5"
+    },
+    {
+     "fecha": "2025-11-18",
+     "titulo": "Avalancha de citatorios de la FGR requieren a los Torres, Burgueño, Salgado y Ayala",
+     "medio": "Brújula News",
+     "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPdWw4MjMtRXJWdVlXdGNMa0oxakxvMGhfcS02cm1BSmNtdUJDTE1CZnR6LU1WZVZrbDBDa20tS0Z5SnE3ZHBBZXpacEZ0WkxqS1JsbjlLVUNOdVVXOE50c05MOExCZUZfM1RjSTdkSDdYQ01DQUpVUnhhcWlQSl9HdFV4cFhJRjgyWV9QRWV3Vmd6WnlRRVhGY0p2cVdDX1FkTlhYbV9GLUVZaHBZZ2syRGp1VXJJeGplQ0E?oc=5"
+    },
+    {
+     "fecha": "2025-11-19",
+     "titulo": "Ismael Burgueño Ruiz: quién es el alcalde de Tijuana vinculado al CJNG",
+     "medio": "sdpnoticias",
+     "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQMWJqaGUxbHUycFdIajVNSDVsZ2RpX0NXdFFEcGlYVFBrc1ZyWWpUMnJuZS13SVRFZ1BjUUFDNzBDSlZPSjJRUjRnZ1BoTHMwTzhZYnZyckNDYzZqb013NW5nZmhvN1VBa05QcTJOS1dDRldIOWRVYzNhRVMyYk5hckNSMXRBQjJVLWZiUEZ2Znh0VS1WM2NkSlY0MA?oc=5"
+    },
+    {
+     "fecha": "2025-11-19",
+     "titulo": "FGR investiga a Ismael Burgueño, alcalde morenista de Tijuana por presunto lavado de dinero",
+     "medio": "PolíticoMX",
+     "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPZ3c3T1RYcTU0OF8tc2JkTS1vWHcyYVV4YlpQbmZmZS1fSlk4X3YwaUloUHZxQ2s0VEF2ZW55RUVUY2xGR3VmakRqbVo1NWFDam5RWmJkZlk4WGFvOG9yeGZxY09ZNjRfbjRFUGRnX3lWdEc5ejU3eWlXLTdhaDJ0eWQ0WlBEWVZjazl6MnJRclFLNWdKSFFaMEx4QXNaSEp3c3ZNMWdkVW0xeGZuTVJ0ckN5M2xBZVpzVXVr?oc=5"
+    },
+    {
+     "fecha": "2025-11-19",
+     "titulo": "Burgueño acusa intento de manchar su imagen tras citatorio de la FGE: \"Es una campaña negra\"",
+     "medio": "La Política Online",
+     "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPUVppVThVWGtkWkhrZ04wdWJ2Z1NiQld2Mm1RbW12OHp1UldBeTd0NzFSOW9nZURDRjZtdVBwU3d6QWsxVFg5TVJ6eWxWQl96aHQ4cUVZSVBjSXlPYk1TOVg0c2ZUaGRVNHdmTjItNGlqWFhQR2prV25YNmlOd3prRXBGckMyNFltbV9nQkdueXU2YmhtdDJZbklseFU4QXU4bnJEeXFrdHJQZEdjS3BYaTN3b3UxWThUdjNiNGQwSnZwOGw2ZnNnSlBJZEfSAc8BQVVfeXFMT21xNjM3VTczdUVWUndVWDF0ZGlrR2xEaS14QjFSQk9KMGtBelpwTHA0NzZRMGZWbWx2UHJEelNpMDVUQ3FrcTRlRWZBMGVSVldZaklzb20zRlBkdmRmb0tPOVV2TW80aGJRQVpGVjRrbzZRZU05cjMwY1c1a2NSUVNVMHJHOW9PZnJpZHlhUUtkMjY5aDI0ektUWktydkdwUnNMbGYzN0xWamVVM2VtakpvdzV0TWxJM01YaHVmbGFDS1JYeTM0ejZyYUJaZ3RJ?oc=5"
+    },
+    {
+     "fecha": "2025-11-19",
+     "titulo": "Reportan presunta investigación del alcalde de Tijuana por lavado de dinero y vínculos con el crimen organizado",
+     "medio": "vanguardia.com.mx",
+     "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxQVFFnMzVyNFVBZmFRcWNlUUVKejU1czlNZS1ReDh5TE01OVo0eEdEaTVkdGhrUlBEWmt5MjJBSDdRQjBtaVUwYnhYOFlOT1NsbVdCd2FGbEtQMFAzLUk1WncwcXMtd1kwc19CQmFEMXU1aHJoOGpVR2NUbHp1NU5QSXNtdDZLT0hsRmlvYTJpeVZYRTE2cVVVS2M2TG9FNF81NEJ6NUJ5VzBpcHBFblNtX3hvTFA2MkstdTFkeXBuX3lFWWZfNVpLSmdGWFRyLUZsbzBfcThqY1l2S0RUMkdCcUZwMlFhd0V1aVVzX09kRVJRSWlwRDJZ?oc=5"
+    },
+    {
+     "fecha": "2025-11-19",
+     "titulo": "'El que nada debe, nada teme': Alcalde Ismael Burgueño tras denuncia de la FGR",
+     "medio": "Cadena Noticias",
+     "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQWWE3QXdjM29kTnV2Wll2dmthVnJKekM2dExPTVVHSUVQLTNDeFhjWHBkTEo5NjhlREFRajZEbFlTQ2hBa0E2N1NsaG04SENGTDktTnppckYwUC1CcmJfMF9sclVYY3BXazhEbWVfT0FsNTFLem11aEdBUUN0UkdQS2FhaklXX1ZGM1kwR2Z2RDdzRUplN0VmNFdXZzFZX0E5eE43UXBzS0ZFYXpoYTV1Y2lDRENxN1F2TkE?oc=5"
+    },
+    {
+     "fecha": "2025-11-20",
+     "titulo": "Burgueño amenaza con proceder legalmente contra medios que lo difamen",
+     "medio": "Zeta",
+     "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQVFU4RllHS19wSWNfUlFsY2VmUVZfYWxaMGYtSldKQTlFT016WnltT21LYjh3YW94Zkp6c0l3R0ZPWnFpS0hpVjlVTFAzMVctczB1RExiRVVnb19xc1NvME5JYzhhdVdoMmNfS2FnWmRyQS1ta3RzTUQ5YXpXMTBha2dSZjFYUHhkdWRobHVWZXdsWlhpY00yampXM0hjYWpFUW9xOQ?oc=5"
+    },
+    {
+     "fecha": "2025-11-20",
+     "titulo": "Alcalde de Tijuana amaga con demandar a medios que publican citatorios de la FGR",
+     "medio": "Proceso",
+     "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQRlJtVEJRUkVjQ0syZi1VRTF0alo5TEFHWmRNN1FlRlA5bmdoWEZkNEdua2JWNmdic3dxNHI1NXc3NmZhVXVOTzRPN1lUdzRERlpkSUNqTUJhaG8wTkNtaDVzV2NRQWdmQkNWUlY2S2ZIak9sREU4WlFIb3R5b3BVVUFCbVdqLW9LVDRCdkNxY1pBMTc0VjRIaGRCWHQ2RjRzUDdJejhxZjdNeFhHWjl0ZG54aW82U1pLbG41OFZDUFZxVjAwMTA5MU5oQmUybHE3THJVQlBwMVlOVWMzcFE?oc=5"
+    },
+    {
+     "fecha": "2025-11-20",
+     "titulo": "¿Quién es Ismael Burgueño Ruiz, el alcalde de Tijuana investigado por lavado de dinero y delincuencia organizada?",
+     "medio": "PostaMx",
+     "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQRVQ1TWJkNHdJN3g3elVmVHgzSTItUW1BOWNjYkJBbW1sempXak9FWE1aUnY3dmpoMWo2RkxPMDJabUY5dlhlRE5iVGtBeHVtdWppWEFXUkwtZmg1RDd6ZldWUUJVU2N4RTVhLWJHUEVOdjEtT2h1Um1YWGg5NWp2TTktQmN3VmRfRm1Nb292cTV4ei1pUE55WXo3TVFNU3RVRDRmVUQ5SENlUjdQWXFIUElIdmZRclprRGt1YkpUWkFLREtQdFBsZEZ3THFOSmhLUUVZMXpzZ2Y4LU50eUZXLV9oUdIB6AFBVV95cUxNMnJYSDFfVHJtQjVhNmd1cy1VV2N2cjJMMXA0ZXVqMk1aNUZ5Qms0em5LY09MYl83WUxoaFl3Ykk0azYtWjVVRnp0SjlJTUhGM1VPc1NmMlhhd0xNby15UE5tTFUxVlYxOXB6MGs5aWNtME5SSEU3bThyeEUxTDBtX0lkeEljX3lpMEtZTGpKb1ZOQ0ROOHE0Z2FwclhVeUk3YW5SQjFsQUZDMXhGU29DMHVVdWNNYThvX3EtaktyMDZhNmZqVU44bHA5UzdVamIyXzFpYlNDTFBQcUg2Y2Zkb3lBdTEzd2xT?oc=5"
+    },
+    {
+     "fecha": "2026-06-17",
+     "titulo": "Burgueño anuncia que va por gobernatura y exhibe documento de FGR donde no se le investiga",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxORmQ3bGlCRWRRWVIzYXY1VEFFVTNsbXdKSDR4RFB4N3lKd180SVZEaUIzSTlDY1JBT3d3T3I2VEFWMlh1OFBObDVTTFVkS2owMl9rOFEtU3pINkUzUGZOd1dGdmZqOUNFNWxUZFh2a3hVT3psSlJpT25mSEZoZF95dVY0TG5yc2szcDdCSDNsamdCUnRNbXVPNjVHZ0EybjNDLUJydmVfejQwdWo5bjA3a2VBMEZpYzFuYXc5WE5rd2RfdW9E?oc=5"
+    },
+    {
+     "fecha": "2026-06-18",
+     "titulo": "Buscará Burgueño coordinación de la 4T en BC; denuncia anónima no frenó sus aspiraciones políticas",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/06/17/buscara-burgueno-coordinacion-de-la-4t-en-bc-denuncia-anonima-no-freno-sus-aspiraciones-politicas/"
+    },
+    {
+     "fecha": "2026-06-18",
+     "titulo": "La FGR absuelve a Ismael Burgueño, alcalde de Tijuana, de proceso judicial en su contra",
+     "medio": "La Jornada",
+     "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxQQ2NKbGFxSEM1Rm44UGw0Q0ZUMU0wbHpGZlRsUnY3NE1CNmFodHFHem1HT2ZIRjJjSXQ0YzFCQlRDQVIyOWpUZ1dHUlVPUW9KSU9DRk4yZ1BJdEdYNnlOZFg0LVpwN211LXkxWmxIRmx0QlcweUdEYVJsRDN0SmJkMmticS1HR29WMXVNSVlSS2piYjQ3SHZYSHRMejNnWXVnTTRXYm9XX0tfdnFicUNVVTNvaGNZMHcwQlFUVE85NVJtWi1lQmlHZ2p6MVpzLUQ1YlFtV2c4S3c0VnNSRUZGdTFLMm1HRzZzTXV2LU11OVM?oc=5"
+    },
+    {
+     "fecha": "2026-06-18",
+     "titulo": "Se cae denuncia anónima contra alcalde de Tijuana y buscará la candidatura de Morena en Baja California",
+     "medio": "Radio Fórmula",
+     "url": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxNdC1TQ1hXSGMxRy0zVklGY215dGNudDYtV0VMbEV0NExfR3JMd0pjWmhqTDJxNHRjTFhpYzdmdDhRMG9pZnR5bjBSaXA2aEVwRHFSWUw1RDBNMnFncEZhckdVTmtNWjZfMllhaTYybXJKQkJsQzF3WUFpOWtJVU54akVsMGJPTF9rZTJ4Rnd4ZmdreUxXczBFaC1zTzdscUtJdklYb25FNU1zMUJWTlJOOXJTNW1iVmVUNzljcVVubGtpeml1MXhkdDYzY0pNVURMdnFtOGtLLVpRS05RZnp1U3B6eURfRDk2YXdIZktGd3VRSGEwNUE0bUFZYmJvd9IBgwJBVV95cUxQc1FJMWc4NTNGakprbmFDd0NSSFkycGpyMUVEQjd5REp6OGRwQVdTOTNLWDQxSVB1TDJVT2JIajQ1Z21VQzFuRzl3M0Q2LTVrUkRKNE9hNlp4c2JNSThXSk14ZzFLTDFfekpzbmRFOTJZVGdIa1RYNWFJZ0tlX3lGR1d4YUVORktwTXNqemxhdWs4SXVpMS1zZ3BibDFnUnlDV21XbWUwNjJFaUhSR2VYak04ZF90RE9udDB5NHpEZ1ljM2U2NzB5TTg3QW5PczYyd0ZTNEJ4WEc1aHNHd2pJbFJjV0JQRlBXb1BYbXJyUDNKNDVMWTZHRkZvRnFJTEJjUk44?oc=5"
+    },
+    {
+     "fecha": "2026-06-19",
+     "titulo": "Alcalde de Tijuana asegura que ya no lo investiga la FEMDO de la FGR",
+     "medio": "Proceso",
+     "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPbDZOOU00OG04d0x2OVE3dzZsOVkwWmVSZ0RKdWRkb0kxdEVMU21BNGlUWkxacWo4emVpalJhWmlDU1BiYkdycENWRXpWSVR6ZEpFdkxVOVR2TkdaZzBiNWZHYVJGSTd0VzMtR3Y5emk3MDk2bW9XdVZwdDdfTTNoWWJENkpmTGFMRW1Ubjgxb0YxYWVvYUo2WWJyUVhVUjIyNVg4b3gxQUl3M1lvQTZaODBEQnNoV3Boem4yQ0ZweXZVMnJLcmkyUkJKcHZOYzg?oc=5"
+    },
+    {
+     "fecha": "2026-06-30",
+     "titulo": "“Estoy limpiecito”: Ismael Burgueño",
+     "medio": "El Sol de México",
+     "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQNWxxb1RaTDBjbnBOczlXeHVoa1pWdXFNMlQ1MDdSNkhUY3JmaS1FT2JPZE1GZ3RzQ25YS2pwbWM0ZEhST1JwV2dzV1BYcUxjcXgxc1c0MElTa1E5WFNwZFNDd2x1TE40VnVCTzR4NTNQYzZLc0JCMmtycUdabGxNNkNOTG1JY0JoV2ZsSA?oc=5"
+    },
+    {
+     "fecha": "2026-09-30",
+     "titulo": "Aclara Ismael Burgueño Ruiz que no es parte de ninguna investigación de la FGR",
+     "medio": "Blanco y Negro Noticias",
+     "url": "https://blancoynegro.mx/bc/tijuana/aclara-ismael-burgueno-ruiz-que-no-es-parte-de-ninguna-investigacion-de-la-fgr/?utm_source=rss&utm_medium=rss&utm_campaign=aclara-ismael-burgueno-ruiz-que-no-es-parte-de-ninguna-investigacion-de-la-fgr"
+    },
+    {
+     "fecha": "2026-09-30",
+     "titulo": "Ismael Burgueño niega investigación de FGR en Tijuana por lavado de dinero",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/09/30/ismael-burgueno-niega-investigacion-de-fgr-en-tijuana-por-lavado-de-dinero/"
+    },
+    {
+     "fecha": "2026-09-30",
+     "titulo": "Ismael Burgueño niega estar siendo investigado por la FGR",
+     "medio": "bajanews.mx",
+     "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNY1p6NXFTX1U1ei0yVFRFNENWWUxjRGtVVU5hbHVjLXhTRFVZdkF0cnNkNFBmWEFvZmY0dVh4M25qcExuWkRJRnVGRVJLM25pc1VYdmY3enpFMVJwc3lPSUtlWWpqN1dhNGxBdlEzcDdKOXk5TW4wcHlYZTFacXFURDJjZ3NmY2x4VDU3LVJndXRVeTZHMzZ6eg?oc=5"
+    },
+    {
+     "fecha": "2026-09-30",
+     "titulo": "Ismael Burgueño asegura que no tiene ninguna investigación abierta por lavado de dinero",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPdjlWZ21URmdaNEFqZEM4VU1YMzNOYkF1MGNtekdENUNHWXdwOHU1RmdKQUNuYjhWZG1zZS1sdmdwV3J2WU1SWHU1Y1ZST3VQbzBKTC16T3ZWdUk2b0RnRDkwSUFiNExBRjhKV1VRTHZaQnQwdjktbWVKR2pQLWotTWhseVgwendJbWhtRzV2TmdKYjdyTzlzMy1RQWN1WGlJdFYyVU5WM0tjMHlTMXkxaVIwdXlOUDZSSV9vcVBGekpEdw?oc=5"
+    },
+    {
+     "fecha": "2026-09-30",
+     "titulo": "Burgueño niega estar bajo investigación de la FGR por lavado de dinero",
+     "medio": "El Imparcial",
+     "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNS3lPZUVBYjdUdGZsWG1RYW1vNmFFZVV4RG1ydkNZWnRqS3p6QUx5bFpMMjRHd2pMRUlUU1lOdjk5clJwMUFka1hnd1d3ZFpmUWhCci1kclJwSFR5c1dkQmZtdXJFc09XZU5WMzhVVTlqRUpJUDl2dUN4cTNDTTgzRDNLZUphbnJtSHd3b3lOX0ZNY016aXlhZ2RYM29FeUpSTll5MWlybU5JaDNnblZQT1JQRzZGbkcyUmJxZmt5a9IB2gFBVV95cUxQbEhSMUhYaXJfNHVkU2pKbFJpMGxwVXdvZnVDR2JxcEl5blBJTVI2R0FQWVBQYTQtOVpHbF9VeEFFbi1BdnJUbGJSMzNndnFNZlAxdnlGQnZ3eHhGME1DWlJRM0d3WFR2WFZBYzU1ZGRnTkdJZ0lQclRWRi1URE5ka3FweDVkYUg0VnUxU3JjcElFT1o4VVNzU1htblJjQmNZVjA4X2g3b0twSzdPUGVaOVlsZ05RQTJ3bUVwcmVpSUhLdTBuWHhOd28wb19KSnFhOXh2Y3BpZGRsUQ?oc=5"
+    },
+    {
+     "fecha": "2026-09-30",
+     "titulo": "Rechaza Ismael Burgueño indagatoria en su contra y exhibe no ejercicio de la acción penal de la FGR",
+     "medio": "bajanews.mx",
+     "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOdlZ3cWk4Q0IxWGJvZlZCRGFXamUxZGpQNmRqM0QyaFB4VEdCVFhrOGV2ZGh1T3JOVTVmRlF5TjdDbU9nWEt3elBMdV9DSDA0WHplUUtVcGl2T3FpeWQ5NW1nVk1qMlNFZ2NlVVJWanZKMGJtSVhYN2lXa0xXNlZVYUxDX0hGekFmUXEwaXl1NG1rZ3dyY2tZT2lNMDVscXB2RXpYdmI1TloyN1NnT2FaSHlTMUpoYURlbGZvR1daWnJsbm9EVzZLck91OUlBSWJp?oc=5"
+    },
+    {
+     "fecha": "2026-09-30",
+     "titulo": "Reitera Burgueño que investigación de la FGR es \"caso cerrado\"",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPQ1FzdDJJYmVUbzJ2MHJfVnlybzRxQjNUZWJlUlMxc0xIaUNUNHNRazlFNTlDbjRNZ3hCek84VDRLRjFENHROdnJzRG5UTk1YM2tRaW5JYzdjRFd3MXZmTy0zWFJNUE1kRGpHTVNEZllnZHBXQmxFMjdabC1sVlZ4YVU1SVdWZ3RFbEF2Z19UelRacUhZZExZak1BNlp1QU90cFhNUmtWTEhjdWM0TXludQ?oc=5"
+    },
+    {
+     "fecha": "2026-09-30",
+     "titulo": "Alcalde de Tijuana desmintió investigación de la FGR en su contra.",
+     "medio": "Siempre En La Noticia",
+     "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNSGVobkZ2UUY5eXlsU1EyRWlQSTE4MHJZT1BuRlN5cjZic1I1T3A4eUtYQ1pjbkNERzhVN0VhZFJkR3RITktMaGM2eFhBYzloelkwalY0RTZDLUNaYWwxSlhPaXk2aTlTN1pvdzdqb0RDRXJwMEFfTEU5eGl1LVpHQm9ydk55Rk5jRVRVMWZPWEcxYS1iUTZuNWNoYXNZRGJhYVVIUjR3eUpGOS12a1dDMXFPV0JPelnSAbcBQVVfeXFMTUhlaG5GdlFGOXl5bFNRMkVpUEkxODByWU9QbkZTeXI2YnNSNU9wOHlLWENaY25DREc4VTdFYWRSZEd0SE5LTGhjNnhYQWM5aHpZMGpWNEU2Qy1DWmFsMUpYT2l5Nmk5Uzdab3c3am9EQ0VycDBBX0xFOXhpdS1aR0JvcnZOeUZOY0VUVTFmT1hHMWEtYlE2bjVjaGFzWURiYWFVSFI0d3lKRjktdmtXQzFxT1dCT3pZ?oc=5"
+    },
+    {
+     "fecha": "2026-09-30",
+     "titulo": "Burgueño asegura que no enfrenta ninguna investigación de la FGR",
+     "medio": "La Jornada Baja California",
+     "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxONmsyMHF5Z3hRZTBIYmczb2NUcktGMGRadFVNVktZRU4xelR1LVo1bXhHQ2p3Yk11OVA2TE1pS3BWQkM4MFRkZEtKZlpXZkpVa19faDF0ZGM0dUVnQnltTnFvS1hUZ2RvWlVucFhNcENmdGVGRVNXNnY1U2Y1S2swdkNtQjE0VnJmT3o4RlRHXzF4aVdDWjlRajhxLUpwaEJobHhIeg?oc=5"
+    },
+    {
+     "fecha": "2026-09-30",
+     "titulo": "Burgueño responde a reporte de N+ y asegura que no tiene investigación abierta en la FGR",
+     "medio": "garabato.info",
+     "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1ubmVrWS1nTTJ1TzBrVDJkYUZaX3NUMmx3Mnp6dTNRWklYR3BaY002azNmaEMwc1dIWHJZMHl3dTU1MDBCRERjbzk2QWVOYWRxdklvTzRnVlNCWUdHN29fb3VySzZFdEthTWNLbHI3eDJRbzljSXQyN9IBeEFVX3lxTE1ubmVrWS1nTTJ1TzBrVDJkYUZaX3NUMmx3Mnp6dTNRWklYR3BaY002azNmaEMwc1dIWHJZMHl3dTU1MDBCRERjbzk2QWVOYWRxdklvTzRnVlNCWUdHN29fb3VySzZFdEthTWNLbHI3eDJRbzljSXQyNw?oc=5"
+    },
+    {
+     "fecha": "2026-10-01",
+     "titulo": "Ismael Burgueño descarta investigaciones en su contra y acusa “guerra sucia”",
+     "medio": "alfredoalvarez.mx",
+     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQcGtFVXlnb1lNUnVRUU5jR0I2b0pQVzdReDd0Zk56OFdVcGlhbVJSSGZiQUh2Y0ltdVJCcEt4Ymw1X01OTHdOdzYzTjRXT2s3anNYWHNoc2xRUE1EbngwUEl1Um1TSWVla0RDVTYwcE9ZQ0dPUldOa2E5U3pzbC00LVptNXE4NnVWZGVSOFFrdVlRS3BRNWJCOFUwb2NSQWpUSDdJ?oc=5"
+    }
+   ]
+  },
+  {
+   "id": "sanciones",
+   "titulo": "Las sanciones del Tesoro de Estados Unidos",
+   "resumen": "El 29 de septiembre el Tesoro de Estados Unidos sancionó a 25 empresas ligadas a Los Mayos y señaló a Carlos Torres, exesposo de la gobernadora. Burgueño se deslindó y ordenó revisar si alguna es proveedora del Ayuntamiento; es la historia con más probabilidad de crecer.",
+   "medios": 5,
+   "nacionales": [
+    "Grupo Animal",
+    "Milenio"
+   ],
+   "cuerpo": [
+    {
+     "parrafo": [
+      "El 29 de septiembre el Tesoro ",
+      {
+       "t": "sancionó a 25 empresas mexicanas",
+       "url": "https://www.elimparcial.com/mundo/2026/09/30/tesoro-de-eu-sanciona-25-empresas-mexicanas-ligadas-con-el-cartel-de-sinaloa-hay-hoteles-casas-de-cambio-y-gasolineras/"
+      },
+      " que liga a Los Mayos, del Cártel de Sinaloa. Entre las personas señaladas está Carlos Torres Torres, exesposo de la gobernadora. Burgueño se deslindó de Torres y ordenó revisar si alguna de las 25 es proveedora del Ayuntamiento; Grupo Animal tituló el 1 de octubre que «desconocía» un contrato con una empresa sancionada. ",
+      {
+       "t": "MVS",
+       "url": "https://mvsnoticias.com/entrevistas/2026/10/2/sanciones-de-eu-ponen-bajo-la-lupa-contratos-de-baja-california-748381.html"
+      },
+      " dice que las sanciones ponen bajo la lupa contratos de Baja California, y ",
+      {
+       "t": "Grupo Animal",
+       "url": "https://grupoanimal.mx/baja-california/seguridad/fiscalia-contratos-directos-baja-california-empresas-sancionadas-ofac"
+      },
+      " documenta más de 101 millones de pesos en contratos de 2023 entre una de ellas y la Fiscalía estatal. Ninguna nota de este corte pone monto a un contrato de Tijuana."
+     ]
+    },
+    {
+     "parrafo": [
+      {
+       "t": "Es la historia con más probabilidad de crecer esta semana.",
+       "fuerte": true
+      },
+      " Tiene tres días, ya llegó a dos medios nacionales y el segundo informe del domingo 4 de octubre le da escenario."
+     ]
+    }
+   ],
+   "titulares": [
+    {
+     "fecha": "2026-09-30",
+     "titulo": "Burgueño Ruiz: Tijuana revisará si las 25 empresas sancionadas por EU son sus proveedoras",
+     "medio": "bajanews.mx",
+     "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPOW82MWhIZGlWUXFNVU9KMnZWWExFbVJOcmRzampaZHB0eG1nQTl4bmFJS1ROTTVGVVVjR1F2aUNMa1lHaWp4dUJIZm5oOWx4OHRfQjZKWWM0bUlRNGl2aWQwS1Q0cUFZU0RfV01QVDN5blQzSmFMb09sbFVGUnJzTzBtbzR2dndZejlCN1BIM0NUM3V0MkxMYnFhNTNBNUJrajZ6Z0JVaEUwUG1laTdnRWMzbGNPVDFSNU9xUWFSNjBMQQ?oc=5"
+    },
+    {
+     "fecha": "2026-09-30",
+     "titulo": "Burgueño se deslinda de Carlos Torres tras reportes del Tesoro de EU",
+     "medio": "bajanews.mx",
+     "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPek50NGFQUjRoekVYZFNveFpOUFk0ZnNrcldtTVJkN1hNdHBKczlPU3padGdUVkt0RnIxTEVqSWVkc0RtOTRXTlBiakZsTjl0UmFVVnI5SUY4SEZnQ3FzZ1Foc1ZpQy1nelJFbElsSHJVYmRFYW5JelN0Mmc2LWVhTWNxenNSY3g2MExmcXY5QjN0cDc4OFRPd0dsQWN3aHFrSFBTd2FfMA?oc=5"
+    },
+    {
+     "fecha": "2026-09-30",
+     "titulo": "El alcalde Ismael Burgueño anunció que revisará contratos con las 25 empresas sancionadas por EU.",
+     "medio": "El Congresista",
+     "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQRktQbG14N0pkc19wSE5TN1lEYVpVc3o1anlaWU5zRUxTUGhFNFY2N2hvVVJWVmlkQV9vRFpHTGRJajRpYWt2Zk9DUnpmN1dxQzdWaWx3ek5CSGZCX0ZOZGRobWE1SGdEam81TDR5MVI5dEJUOWtpUFl4RHFPSUtmdFk5NS1seDZYSEJ3VTZMLXBZZUFp?oc=5"
+    },
+    {
+     "fecha": "2026-10-01",
+     "titulo": "Desconocía alcalde de Tijuana contrato con empresa sancionada por EU",
+     "medio": "Grupo Animal",
+     "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPU0hHSEF4NlJGamJZYzEwTjdodDdpSmNfV0Y2U19VT3p2bV9DUFAzQjlDNWswcEpudWZISzlxU1B6QjE5dXY1bE51a1ZzWVpaemFjekZkbWg3N2VGTTdVOXlRTDZwTm50ZW1GQzVZaXdkVmk2cFpobW93UWkwOVRrYlpmU1NwZjVkU1Z6OUJrNkthX09zTzNFQ2ZOUUV5TG8ySHZJZ0ZPa3VnNTB1SEU3ck1WVE9ES2tYR2c?oc=5"
+    },
+    {
+     "fecha": "2026-10-01",
+     "titulo": "VIDEO.- \"Investigación está cerrada\": Burgueño desmiente reportaje y marca distancia de Carlos Torres",
+     "medio": "Uniradio Informa",
+     "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxNblBFR1FWMHdEamlYQ3loRDd1bW1Gb2FYOENVcHRoa1hqOVpRejN6WVY1YlFXYnpRVEFKQTI3UnNyMUFNWmhTaWl6M3dUVmhUUm05WXd0WUpHZElER29NWnJqdFRST1Y4cjVnTzJyTzV5VGswQ1psdkRkaVVYbUVkQ3NrSTNsTzVXT0cwZVE5R2xFR0REZW9VZnlCZFZ6d3BIZ2JxRk0zYnF4TnNldVQ1R2R5S3JEZldxTVpnVnpSdXZrSmFuYUdiNDFyckhFZTNTRGJ1Tkt2S0NDMWgtR29PWXl3aHdNS0hiY2JnYm1B?oc=5"
+    },
+    {
+     "fecha": "2026-10-02",
+     "titulo": "Alcalde Ismael Burgueño revisa contratos tras sanción de EU",
+     "medio": "Milenio",
+     "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOUGRDcThvQkw0RS1QcFVCcDE3RWNuNmJnVlgzcXhTSkkzcFhTbFJsZU5MRXFmTVFjUHpGT29OZTBFc3ZHVnhGVUtIVzZQaGNISkEtWUkxOW5DdzRpVUxHRjhVc1o5RjFQNDBhbWgwSzlLU2p6TF9XbVNlQzA4dklQRVZHenFnYVU0Z1VQT01CN0tqUmFaSUpoQzNXSTkyTmxBSWZNMNIBpAFBVV95cUxPRHR0aS1MSjZ6aWo4XzB1YUlnQmJmanRDOTF3WFZmT0VIU0J2dEtUM0lNMFZjR0g5eDh0cjlRTzd4WEp0LXhCZ0ZNc0g0OXA3Y2Y5UV9NQTQtRk5TQXNhYzZ5aFpiU1U4WkJFc01EZkVSQS1HcDBCTHRETk1WVG1hM1ptT3luNkMzcHFfMUNFWUJjZXcwQjN6cUJBc2RCVGtBSy1VaA?oc=5"
+    }
+   ]
+  },
+  {
+   "id": "candidatura",
+   "titulo": "La gubernatura, la derrota y el regreso",
+   "resumen": "Pidió licencia en junio para buscar la coordinación de Morena en el estado, encabezó las encuestas y perdió ante Julieta Ramírez el 15 de septiembre. Volvió a la alcaldía el 18 y el 26 anunció que buscará la reelección.",
+   "medios": 56,
+   "nacionales": [
+    "El Economista",
+    "El Heraldo de México",
+    "El Universal",
+    "Excélsior",
+    "Grupo Animal",
+    "Infobae",
+    "MVS Noticias",
+    "Milenio",
+    "Mundo Ejecutivo",
+    "PolíticoMX",
+    "PostaMx",
+    "Proceso",
+    "Quadratín México",
+    "Radio Fórmula",
+    "Telemundo San Diego",
+    "Yahoo",
+    "razon.com.mx",
+    "sdpnoticias"
+   ],
+   "cuerpo": [
+    {
+     "parrafo": [
+      "La historia más grande por volumen. Pidió licencia el 20 de junio, se registró en Morena el 22, recorrió el estado y encabezó la mayoría de las encuestas publicadas hasta agosto. El 15 de septiembre Morena eligió a Julieta Ramírez, que EL PAÍS leyó como una ruptura con la línea de la gobernadora. Volvió a la alcaldía el 18 y el 26 anunció que buscará la reelección, con el Partido Verde dando señales de apoyo."
+     ]
+    },
+    {
+     "parrafo": [
+      "Casi todo son anuncios, encuestas y crónicas de asambleas. La fricción dentro de la historia: el «chapulineo» que le reprochó el PRI, las viudas de policías que lo encararon al irse (Zeta, 18 jun) y el «Derrotado en la estatal, Burgueño buscará reelección» de Zeta del 26 de septiembre."
+     ]
+    }
+   ],
+   "titulares": [
+    {
+     "fecha": "2025-10-01",
+     "titulo": "Claudia Sheinbaum impulsa transformación en Tijuana con obras y programas sociales: Ismael Burgueño",
+     "medio": "Milenio",
+     "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPWk5Sejl0OVJRZmRjaGV0U01GcnV3VDhSTk5nOV9yTFFSdTdoT256XzFPNlFaVklNYmFaNTFRa2twNUxjemZvY2FQV2w2d0lwM2o0OTUtWTRuZVB1bkZaR0JGSHdtcVBRSjJxdHRSNV82LU9iNHhuM2VlSHExSHMxeG9COWJ6QTk5ZDQ5etIBjAFBVV95cUxObVpUZDNQMWkzMXlHc1pPWmhfWWIzLUxwT0xlbXEtMHMtSUs5Z29kN2lJNm1udWNGX0RNYmpWTllKRERKeHNPRWVkb1BNb21mWFA4MHJYV2MzQTUxYWV3ZHhIYmo0cXB5ZzJ2dlRYaW5zb0c3aWhWUi1MMFBMemVkV0thb3g5ekZMd2J1Xw?oc=5"
+    },
+    {
+     "fecha": "2025-10-26",
+     "titulo": "Burgueño, el gran ausente en primer Informe de Julieta Ramírez en Tijuana",
+     "medio": "Zeta",
+     "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOSnZzZFpOWWxHMUw5LUdXaE5JZ0R3dXRFTHd3bU9wVUZETWk5Sk5TR3hIWGQtOXRwd1k4bW00bzNPemFUQlNJMWFoSDZINlFvdUUyZGZseHVwdExVYng2NFlWZzJhelctN1hRZmF3V0o3RlFWaEtaSnpFRk9QekxjenEzR2ZlSFF1WVVxUl9qLUllN1ZyNTRMUEVybHlQaW1mbFFhVVViUEM?oc=5"
+    },
+    {
+     "fecha": "2025-12-09",
+     "titulo": "Julieta Ramírez e Ismael Burgueño se ‘pelean’ la candidatura de Morena para Baja California 2027",
+     "medio": "PolíticoMX",
+     "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNR0NRbzJQb2hvblFRZVUxRU04c3Bla2h5Yno1ZUt1N2R6Qm1pMS1DUkdxRktEbkxQN3QxTDNQMzRfTTdFRHdKUHFuRUhoLUQ4VllFYThSOGgxZzdlUG5WTVBBNEw4d1o4M3p0ZjQ3a2piOUlKeXF4MFNMTFFxeDNXWEx1SVQ3VHVKbXdabmN3SFFMX0VWV0RTWWtmSWI3aG9Pd0UyRjI3TVRaYjhNMG13QjdDbElNbkNvYWVRTnVoa0QtTFl0bjAyUkpKRzQ?oc=5"
+    },
+    {
+     "fecha": "2026-02-05",
+     "titulo": "Ismael Burgueño destaca como el favorito de Morena para la gubernatura de Baja California: Encuesta de El Universal",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQR09BRVlkRERmdEVCNXdWSHl3MlBPX2lyZDd4VDBQV2xWekVLTmVYQWZHZnFrd1JURVZsVEVETEx4X0U2dmJOejNwYjltYVk4M29vQk9PTGxmTGpTSFdsZ3lYcEgwUk5ieV9OUkRYeDdvWkRWekpITmhLaF9hYzBMenNPSk90NnVJdHdnX2RMOFNpWEpfcUFPNzlFT2RHR3hIUUlSbGFlSXg5aDUtYlJwWWpXb01mcENidjZUMXdzNEUyaEZZVHVUS1doeVdPaTdETHNKM2lURkZMRFdGMzZYRVdQRks5dw?oc=5"
+    },
+    {
+     "fecha": "2026-02-17",
+     "titulo": "Ismael Burgueño encabeza preferencias rumbo al 2027, según La Encuesta MX",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQN21IQnBWSUgzS2xQdVFSa0NPdUNXUDZZZWRscklDcGJSTmtnZkNLcUNHYXJ6ZjRieVgtRHhCRXRSTlJMbHo1Z2k2YnVJbmxjZ0JkNlVYZ2Q2RFVvS0JhUDdWS2JzQTE0UG5SaVM3NEJDUzZ2SnlzeHZ0Z040VzdROHViWEREWURadENOLVlqTUp1bkZSS1R0NnM3NFd1NFFTT0hSeHVKQkx0SDFnZmc?oc=5"
+    },
+    {
+     "fecha": "2026-02-23",
+     "titulo": "Nombra Burgueño secretario particular a su suplente, Abdiel Gutiérrez",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPaEFOQS1KOElrNnBUR3BfSmFadDRYaUJ0TWFZOExVR2owdlI0UWFxdU0tQ3Nhd1E3MkdSTkh2MXNUeU43cVRUNkFNZzJtZlgwV3BwZDVkMGlrZUF0X1dyRFBUX1QtWVVsdVBxWU91ZE5EdEhQQTB4Wk9xYVFoMzZKTklOUndtcUI0aFlQc1FZazFOYlZSeVdCaDdEaklVVkZaSTY3WjBaYjVpRW5jaDkzcC11UG5na1gyeTZV?oc=5"
+    },
+    {
+     "fecha": "2026-03-17",
+     "titulo": "Señalan a operador de Julieta Ramírez de financiar campañas contra Burgueño",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOWE1jTWVsZ192dlRxbl9hZ04wSWFLbG9UbG9qTkY3Y0NVMlR1Y3BIUHcyOFgwNGNIQ25yYW5KZlRnS0t6Yk9Gc0VCRm1HNEZjTWp4MUFSVTRYLUJZVkVXeDZZdEE4cFcyb0RVaVlYc0dGR0VhVFhwVktOcVVSeko4bnA4cjlnNGVaOElneGdLWTVsZ0dLNnB1ak44ZzJreG8xUWREU0VCUzNZLXJDaUlEMA?oc=5"
+    },
+    {
+     "fecha": "2026-03-25",
+     "titulo": "Ismael Burgueño aparece como el más competitivo para encabezar candidatura de Morena a la gubernatura de BC",
+     "medio": "El Economista",
+     "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOMjVOOU41NXE2YmxqWEJHV2t3OEUxN0thdWVfYVFzWG5YWGRHUkRGMmJfZWpEdnJGbEVpV1o3UlZURHhWYWVyeTdGWjk5NmMzb0ZrQkJFUTVmZ0lKNHF3a3lmLVhha1lDR3BFTW1VejdjdTE1Q05iN1FNeFMzc2pLQlR0bHJja2RRWERzV2dzeVhNYnZDT19jaU5MSUk0OWVNeDhUS1VMYlFzMVdBQnFWQnpfM3d0UUh3UEVLRS0zR2NZbG1HdEUxcnhQamZKNXNMVGFDeFlaZDnSAd4BQVVfeXFMT0hpV3dMd0U1Tmdod3o4WFJJTjctci1NeTJ5LUpIanFtQjNzWUZBUzY5STN2MjFJdzEzZWlPZ3lJc3dleHBYNTdkbGhrRkYtN2RuejlWdEljZS1TWG0zeWkyMFFncEZOMUl3YzB1cHdWV1lrU3g1ZlFYeFBqSmYxRUxmSzhKdkgzZnhIM3hxSHFWckVuZFV0a1JDNVE2eEFRVkthVUhxMzF1R29nR2VIajdaMXp3LTRhZXhjdUhUcnpRX1FQQ0xEUHdBR1RYSFRtZHM2SEh1MDR4YTlVQW5B?oc=5"
+    },
+    {
+     "fecha": "2026-03-26",
+     "titulo": "Tijuana toma el liderazgo municipal: Ismael Burgueño asume coordinación estatal de la AALMAC",
+     "medio": "MVS Noticias",
+     "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQd3FUcU1HdFlrY3ZJREM3Q3VzejEzZHhMY0IyYjlxQWZ5Z2VKYnRJRmt6R1g4cTEwakFWWnphR3lySGZCWFNiUWZnVFp5ZENxWTJ4QlNOUDBocUk4eEszTUtDVlg1VVZvUGlEVTBsMVhhSGRXV0E4ZE1aTERodDV4TG8xcW5mVVB3eGlVd0pRMklTSVlLbmk4WUs4b2IxbVd5b240bEtpMVNWanoxRmktSktrRVlYTm11Rjg4c0dCcDk5dXVBNFcxeEotMGNPY3lORE1FaVRhU29qSmhiRnZCeC12bUpUczBWRlE?oc=5"
+    },
+    {
+     "fecha": "2026-04-11",
+     "titulo": "Eva Moreno y Burgueño en fórmula; ¿Le sale el tiro por la culata a Julieta?",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNNHA0Q0RfUFB4eGppZXRQNDlleGJsRXVMVWt1dUpVYjVfZlVJOC01NGZyZllkUHkxOVdMMUFSUmtuV1U3VjJ3Zk01UFBpR0ZuMTI1LUxSQmIyRUpEektSTHlodjA0a0FJTnN5LWlZa3MtSHU5TVdCM2VyeE1YU3IzazJLNWdYbkpuOWo4VHVSLVczUXo3MnhEWm5WQWs3azQxeHJuRkVuQU9sTjktdnB1Vk1YUHJQd0tl?oc=5"
+    },
+    {
+     "fecha": "2026-04-13",
+     "titulo": "Ismael Burgueño encabeza interna de Morena hacia 2027",
+     "medio": "El Universal",
+     "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNN1g0TXRPemRPUExZdzR3VmwzeVg4VnJFRVBUZGI3WHlyNVF0N29MTmNuMGdsZXpRZ0NzWFFTWW1laVlLdDIyeWV2M2RzYl9hNDQwdGtYZHpZUmRJRlFiT1MyZG9kR0I1M2ctUGNKbUcwZ1lkWmZTR3RVUmw3N0xvZC1HZzliZUhBSE8wN3M4N2ppaV9nQzltedIBrAFBVV95cUxNUzlPeFdtdUpONk00S1M2NmxQME01cXlQLWNpdkdkVGxfSEltekJoNEJQN0EtYVJyOXlVVFp2bHFteFpmdF8tQ2tIWDJIQW1TY21MXzhGUjk5bVZGcjdBSDREZS1lNEZSS0ZYNlZ3c21jX3BSUmJacTF2aE14ZzdiVEMxOEQySVlVYll2MDZKb0Z2d2lQTVNNWnJLYk5fWkpHYXFmM2c2M0V1d1Ju?oc=5"
+    },
+    {
+     "fecha": "2026-04-13",
+     "titulo": "Ismael Burgueño, puntero de Morena para gubernatura en Baja California",
+     "medio": "Quadratín México",
+     "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQTU5ma195VWdWVi1SN3IwOHRmeGEyanFtYjR4M3E3TF9CWkhUTFFhTVFvaTR6VmJtUl9vWmFhSkszZmNvcF84WElzQnRHNkhUa1gwRkJrVldTOFFOSDZtVG5NQnRQbWFERFVwak9SVktzR2VjZXl0cGNDeEEwRndGVUpCa0JuQ1ZUWjd5b3Y5VFlpcjdLM01LR1VlckJCR3daTEpISg?oc=5"
+    },
+    {
+     "fecha": "2026-04-13",
+     "titulo": "Ismael Burgueño lidera preferencias para gubernatura de Baja California 2027, revela encuesta Enkoll",
+     "medio": "Yahoo",
+     "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQMllNYlpNVjFreXFENkRqMjBBQWQxTVYzSzF1Q0lNRVVHd3RyRmtKalZoS0dkTnZWZlZWSXFteHNXaEM5RG9ILUV6UDRWV2hzalFQUWFSNDlLZzAzYm9nYlBfUHQ2WUxib1oyMzluWWVTd3M0aE9DXzRuN3BBc1BrYXg5bm5YZDkwdTBzMVo5b2VvV09vZUVnYjNWdUxEdFEwc0E?oc=5"
+    },
+    {
+     "fecha": "2026-04-13",
+     "titulo": "RUMBO A 2027: ISMAEL BURGUEÑO LIDERA PREFERENCIAS EN BAJA CALIFORNIA, SEGÚN ENKOLL",
+     "medio": "Mundo Ejecutivo",
+     "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOS1VHTmtGblgyR2hHSWdtWjZTVWJpMnFwT1FIUzFteG1hNlhDa0hDakZWZHRxZ2lKME10dDdUcXZLTVpBV2RfWTBmbzM4UXZyRkMwcVo3UEZUb0hHZVlaOTFlT0NQX05WVUtrNEFWQzdHSlRmVlY0akxHYkFjbnhEMXAtTExDR2RBV0VyV0RaVlVycmV2VEMxeG9UckFmQXRmakVCQnlOb2Ryd1gwa2k4YXVzWUU2Q1dVTUlMWlRBczV4NFpUbC1vUm13?oc=5"
+    },
+    {
+     "fecha": "2026-04-13",
+     "titulo": "Burgueño se posiciona como favorito en Morena para la gu...",
+     "medio": "El Mexicano",
+     "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNTk0xUmhwWkdxa0treURxZWIybllIRFpZTWREbWt0b3lxV2ZoN0dHNkw1Yy1KTkpkY1hST0IwMTBUN2p3NUIzVGdoOWVyRGZIWDFKckJtREQxeWR3SGZjWXhlbThlUVhOSFVMRkY4NWU2NkI4NUMzTlZ0SnRESUI3ZFY3Q0pHbkVJQkk4S1psZlZ3ZGp4WGJXZE5pREMtU0YzcGt5eWR5a2R4OWZEX1VHZUpOUlpjRUIwLTRfSE9USmtLYnpYUWUzbVZITzZ3RGhyaW5XdA?oc=5"
+    },
+    {
+     "fecha": "2026-04-13",
+     "titulo": "BURGUEÑO RUIZ CONSOLIDA LIDERAZGO CON FIGURAS CLAVE DE MORENA EN BAJA CALIFORNIA",
+     "medio": "Línea Política",
+     "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQNFd6ck9kdWxnbHRNa1NEa2RfTWx0aUZCeGdzZTFaZHJuS0NmdlFVMUowRTc5Ykk2SW9mSlNTV3o3TUptVDhfTE1NMGxaeW52SkFOSHhUTTNwRUZDSW1DV291NmtRN0RaaHdXT0hyUDlFV2ZPSkJROWk5c2hmSzJ2U09QZ3pJWDJpQzhjOTdJcEl6Tkh2R0t2aXM4bjhiOTJWNlJadU1zTXVyWkk?oc=5"
+    },
+    {
+     "fecha": "2026-04-13",
+     "titulo": "Rumbo al 2027: Ismael Burgueño lidera las preferencias para la gubernatura de Baja California",
+     "medio": "Radio Fórmula",
+     "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxQMkF4OXdXNnNLelhBY3pWNW9zVl9CbmxMTC1GVU11Z1J2VnBSSkxZS25nSFV2bTcxQW90bV9ueEJXQkJyLUtjTU1yMFZyUjd3Z2w4enZvR0pDLU02WDJGMXYxalZic1RlN0U0VGQ2TU9tUVpaNGxXdmJOZDVSTFFSbklNdlF2RXNJWTZXVVhBazhjZ0p4NV9DMWpNVzdDUEJ4UVFpeVY2WE54UHFTUFVuc05KcGFQdEtMSkpZOHpaSnFtenpveEExOW44X2VCUmZERW9HWHRFNWlrVmRUUlRXWFdzSzk0N0HSAewBQVVfeXFMT1o0c1dHbmFpQWR5dzIzTmR0N3VkVXo3Q3g1cnhVX1psOGREeWgwQndWNGJIQXVpSWJLWnlWRzhma3JHZXFQUlh2dThWU0VIcGVwbXhsb2hLT3d2WlpiREF1Y1E3UDQ2V0MyVlZVdlJGNUtRMzI4VjNCTEdrWHVEWVhYRW1WODIwdlh6T2t2MGlSempsaEprOXJ3bUxRSktVUm4xWEJJM3FMZC14T3RSVWZnOFFLT09xazlPOERwbzdKZDdRX1dhMm12RHhnU2ZRRHVQMktjbFBwUmxSbVdWZVBTVFJfeHBETnVIQ0E?oc=5"
+    },
+    {
+     "fecha": "2026-04-22",
+     "titulo": "Ismael Burgueño se posiciona con el 50% de preferencias, según encuesta “Destino 27”",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPemxwd3UzNEZ4V0FYeVFUdVphSHV5WDdIeFR0eFdWNy1vYzFBY2NKajRKbjVFYTZVTGZnTTRiTno3dmJBT0c1QnI5dFhKcUhsMzdXa3NHVG0wWjhrRUJnT2h5cldhell6V1huY1phM1diVk1ZWk1QclRmSDNPcC1NckJJeldpLV9NTXlhT0tTc1kxSzNEZEJvLTI5azhlWG5PYUtwTDFtbXJ1RkRWd204Y2xXYXA0bDV5?oc=5"
+    },
+    {
+     "fecha": "2026-04-24",
+     "titulo": "Burgueño esperará convocatoria de Morena para elecciones de 2027, para dejar alcaldía",
+     "medio": "El Sol de México",
+     "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxPRHYzdEVQTmk4Z1pveldMREh5bENBc0hOQWIwYzRkUGhrRk5DeU5veC1GT3NXajZvTkRFWlFqdGpOdjZ4NWJKb3VVbmg4TUYtb1p0R1VvS1FTRlNiMk1WakZOSndWclpfY2VZVEFzWTlXLUJYRWJmNzdEbDIxRWlfcW9fVmJTdDdCRTIxVjJtSDdrNEsyZ1c5cW15OVJocVdIdG5YVVlJdi1mYjNiclZkcjQ0RWNwd2NYVHdKV0h4TThsWGFjaDFPWEFjc0E1QzBLQy1NazFpSnpvQVZGQUU3YWlKMEhNNmJVNzhV?oc=5"
+    },
+    {
+     "fecha": "2026-04-24",
+     "titulo": "Burgueño en espera de convocatoria de Morena para definir posible candidatura",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOclljMGhwREhMd3VueV9jRUd4VEhzS2VYX2liYWxPNjNFbjR6dF9FeU1vSkZQcTB1bUtwY1pHS3VwRE0xb3U1Yk5QaDJmZXktTWpSWTRtV2dmRzRBeDl5bUNIMmhMTDNVUDRjQ1JQQk1uTlVPRTNhTVl3dWNjZFdhVXh4Y2k2TFd5NkJlaF8xMkFOTXBkR1NxdVVtaGhFQmdiM3kzQXQtOVVxdzVpS29hN2FhS096WHNJUFkxTFFkNlhtWjdCQ1Rr?oc=5"
+    },
+    {
+     "fecha": "2026-04-24",
+     "titulo": "Ismael Burgueño esperará convocatoria de Morena rumbo a 2027",
+     "medio": "El Imparcial",
+     "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOMWRrUlRXNzdKOExCZlJ2V3lDdDZTQngtTUpFeU5IdUEtWDgtb0p0Q3ZhazRVRnRTUzEyRVFiTzlDT2lVdEN6cE56X3ZRWlFDOGlfZ3NzaTItckJoVVJwM0dPVldxLVZsOWdTNUtLMkJ6ZEdWR1loRFBKYXRUME10ZlRkeW1iMUhrVk9ockd6WXhzelZoTWx5M2Jsd2VTeUpud01sYmtJM1l5S1daRVN4ZGF30gHMAUFVX3lxTFBqTmRDY0J5d2lwSkliVWhtNUgzZlpUaXo0WEtqSURLa21KZGpKelFXQ0ZBejR2LTBnSWdveXp3VG9FVmJWTGV2QlhHbUlUcHhDVUZPSW9hSGhQNVpucGROamUtN0pheFNBaTJjbnlPajRCTHBjTW4xMEtHM0ZoQzF3R1VvZWNrcklmeEYyal9CVzYyM2FxY0JQV2tjVUJPVHQ0aU91M2dxREN2Y3pzX0U5ZkUtZkxYd05LazNaY3pWdW1lcTljbW1rZEx4aQ?oc=5"
+    },
+    {
+     "fecha": "2026-04-24",
+     "titulo": "Burgueño reúne a alcaldes, diputados, regidores y cuadros de Morena ante Ramírez Cuéllar: “Venimos a construir una gran unidad aquí en Tijuana”",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMihAJBVV95cUxQV0dtc2Z1ZzN0WHhjOWJTXzdPZkhUdVB6SWkxM3JIX1FJOTVxdU1CN1RlTEpHLUF5WFVNS19vZi1DaDk3dmNXTVBYVnJ5dGt5N1hfbnpPQTdoalZpcDlSdFBxTWl5R3BtcEs2R2g5aXFjSldTQnk0dnRFOHVLZ05Rd3FxZ2g2cVZPYWRnSl9iazNIUmduaWtieFBJUV9IcUpZSVA1eWFUNXk3UlYxZHpkVGhPRmxENDgwUm5wWlF4T0t5eklyZUR5OXFiUzNRNXJPTmJTY3lJTFkxYWFCMnNKVDJ1Q1dmZzZIY2RTUXYzS3liZm9QLWtXdTZMSGsteHNqVFFORA?oc=5"
+    },
+    {
+     "fecha": "2026-04-25",
+     "titulo": "Ismael Burgueño y Ramírez Cuéllar consolidan agenda de transformación en Tijuana",
+     "medio": "Excélsior",
+     "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPbGIzSkxLcnkzQUpYQXFmLWJUS0dtdTJTZHNCbFFTOW5VRkNTaHA5Z2pLaU9FUjlwUFdLVEU1Q3RXcUV5YWZ2NnNOanRNMW5jejBMYVBHVnhnalR2MkRSTGhuY1JDdWwxUGJweFhzNGFJRHVOWlV4RDlSRUJzX0xsWUF0SE0xVjJDY0toWVQ4cjJ2YkcyQkN1bHRR0gGfAUFVX3lxTE5pOXRZblRoUEY4LXctSUZCTHdJWGNscXNXTTZabHg1WThVNVRRckx6SGRwaXJLOFNJN0pRWUo5aEQyOXBoTmFoNHFLNXNrN01SV2VmeERmOXBJRmpvcFNXTENZcV83U0hwQ0dyRWxjcVY0bWxqTnRCN1FHcHR0ZjRTaWdlYS11c01keHFramg1N0ZoVTVSeE5wU2V6bnRFVQ?oc=5"
+    },
+    {
+     "fecha": "2026-05-01",
+     "titulo": "Burgueño y Ramírez sabrán si solicitan licencia: Moreno se vuelca a proceso interno en BC",
+     "medio": "Zeta",
+     "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQYnVYLWN4bDdicVBQV1FWeV9uWkFGUm1LRFZaV1FhMlI0ZGtnTllfMXhZblB5Y290dnNQemlvemV2MndkZTFuSHBjd2ZyNzlyMjBHYzBjb29FS1ZwVEVZWWZBRGhLazZhcG5oaFBhLUs0Ty14VnZ5bUduZldyZi1qMXVEWC1vZDJFcHlwN2g5T1cyd2d1ek1OS2lDdzBUWHIxYS1xUEFqSmNGblN0dG1WYzFjRlIxYmJaSkNDY2d3?oc=5"
+    },
+    {
+     "fecha": "2026-05-05",
+     "titulo": "Omite opinar sobre criterios a aplicar si Burgueño participa en proceso interno de Morena",
+     "medio": "Zeta",
+     "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQYllsUy1LUk5ZNDh4VjhtaG1BZDByWUNCR1NPekYtb01fODFtZm9ycTJuUmdjSmU4V3RwYnFTOTdsYW9IN0VPV3R6TndBNUtsNThwWlYwallJZjdqa0w2am1Rckp0MHdtWWxsT0p4X3BLTHIxNnlvZTlFQmg3SzY0WkFzZnBOd3hJeTQtRnhzY0dLTE9rcjhwMlFnNjJRbHpieWhXaV9ENzFHQmxaVS03eG50aG1SVUYwa2NTY1hBaw?oc=5"
+    },
+    {
+     "fecha": "2026-05-18",
+     "titulo": "Ismael Burgueño encabeza preferencias rumbo a la gubernatura en BC: Encuesta territorial de BCTneus",
+     "medio": "BCTneus",
+     "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPQkJtVjNkTXJ4NGN6bnRpcFRfUGdSNEQwUktyc3RmVTMxeTV6NkhxcWlKM0U3Z3kyU0NueFJqbWtWSkdKczFMblR4OTY5cUpqQVlWUDhxMUh6NEt1d1ZEbVZMZzZvY3VRaUQtTXMySFptY0RtYWstd2gxZ0FkZUhsTFdYWjNKSkFpRzVnbWtFRXB2eVZpNTc5V1VJTDNrakpZdWpXNnJDYUhvcU91WThNT0I0T0RJSmV0VkJpQ3FrdU9VVlRBZ0I2dDRicDdMbmM?oc=5"
+    },
+    {
+     "fecha": "2026-05-27",
+     "titulo": "Ismael Burgueño lidera encuesta entre perfiles de Morena rumbo a la gubernatura de Baja California 2027: Plural.mx",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQd3VuUDg0QlotbldzM001QWpzS3Y1MHo3X2hxb2tpUXhaSnAtS3F2Qk9rTzJtZkh6aDFESF9iZkc4eVZDLVF5TW5XVUJXbkZWWm9xR1loOERzN1Jfb3RfTk1qdl9jcGJjcG5ESFp6QXBIYlE2RmlUbzZKZWtiSmhLbVRJaDQxMFR5cW5raE1zSlB6bFlQRkdjV0FqQ0V1QldwQlFXVjd4S0JRcWx2QmZfWl9xenJWOWRyS1hkazBkaEdkcGpQ?oc=5"
+    },
+    {
+     "fecha": "2026-05-28",
+     "titulo": "¿Fufo sale por guerra interna? Cómo afectará la renuncia a Burgueño",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPTnZWTGFTLW1JSlozdHZRRTZuVDFCU2pPMFFNdkhGczhFV09iQjh4VE9UUjYtVHNld3lISVctU3BLMjJ3RUtYLXI4V09raW1rQlNFY210cmRldFplUzU1MEJSMEpSU1BtNFBMOVFJWElkbDlKNGtVRkdYU3I5QTZsODlYNGdxdmdtaWNaSjlQdHRIYVFmZm5qWE5VWWVMaE56ZFlYZE00X3dIcVV4UDVF?oc=5"
+    },
+    {
+     "fecha": "2026-06-08",
+     "titulo": "Ismael Burgueño celebra galardón internacional para Tijuana por proyecto de transformación digital",
+     "medio": "PolíticoMX",
+     "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNLWVXRWJkTlQzV3VUTWRob2EyUVJOYXpQRlhrdlk0c19QXzZrYUlzcTM2bVFtWFgtUjhqYzAzblNFdE5OWVdiaXYtUkdYOTdQQ3hxV04tc2R0NF94UDRSQXVUbkZ5LVVybHBBOEJ0Qm1sZWgyNnZBSzBjRnFBZmxIZGtDZG1QUnYwaFVTTzQxaW9PX1FVT25QTU1zQTI4aHJCbmlqeXUwMWpfbEVHQjRCQlVVQm5pSFJnS3F2Z18xQ05CT3VhVjhyRVJR?oc=5"
+    },
+    {
+     "fecha": "2026-06-10",
+     "titulo": "Entrega Ismael Burgueño apoyos económicos para atletas que competirán en el torneo internacional ‘Amazing Muay Thai World Festival 2026’",
+     "medio": "Blanco y Negro Noticias",
+     "url": "https://blancoynegro.mx/bc/tijuana/entrega-ismael-burgueno-apoyos-economicos-para-atletas-que-competiran-en-el-torneo-internacional-amazing-muay-thai-world-festival-2026/?utm_source=rss&utm_medium=rss&utm_campaign=entrega-ismael-burgueno-apoyos-economicos-para-atletas-que-competiran-en-el-torneo-internacional-amazing-muay-thai-world-festival-2026"
+    },
+    {
+     "fecha": "2026-06-10",
+     "titulo": "Burgueño lidera aprobación en Tijuana con 63%: destaca en encuesta de Plural",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQaHBDQnBIYWRWUjQ4d1k5T2hzcS03N1I2UHVIWEkzaEZCTG0xU3l0OFFaNjFNajZCRUpuSF9YZUtFQ3lfanhoM1ZSR3psNGt6SXktdHk4QXM0MnluVjA2b3V5ZDhUaGxGazc0WW1KeXFxOXlyQnU0VkxPWS1YMFF0T2tmT01LQXQ0X1M5ZXBpYjNDcHI1RW1LbjdhaTJaVExxVHNUR2dmTXlCQ1FySTdjaw?oc=5"
+    },
+    {
+     "fecha": "2026-06-17",
+     "titulo": "Recibe Gobierno de Ismael Burgueño certificación internacional por la calidad de procesos del IMPLAN",
+     "medio": "Blanco y Negro Noticias",
+     "url": "https://blancoynegro.mx/bc/tijuana/recibe-gobierno-de-ismael-burgueno-certificacion-internacional-por-la-calidad-de-procesos-del-implan/?utm_source=rss&utm_medium=rss&utm_campaign=recibe-gobierno-de-ismael-burgueno-certificacion-internacional-por-la-calidad-de-procesos-del-implan"
+    },
+    {
+     "fecha": "2026-06-17",
+     "titulo": "Burgueño puntea encuesta rumbo a la gubernatura de BC",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/06/17/burgueno-puntea-encuesta-rumbo-a-la-gubernatura-de-bc/"
+    },
+    {
+     "fecha": "2026-06-17",
+     "titulo": "Alcalde de Tijuana anuncia licencia para buscar la candidatura de Morena rumbo al 2027",
+     "medio": "Telemundo San Diego",
+     "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQVXIteENXYng0NE1LVU9XVmI0SF9lZzVKMUppLVp5OFVFWGQtSWtnejRvV254cDdZdlhuS2twdEd4VEppcENrR2RiNFBzUkwtbll5WHJvVW1TSlFNWFgxdGtJd2NTTVM0VEloZUdQUGNLTzh3S0gwTVEta3JVcWN5TWluUnM2bENLTGVuMFdQVXBxbFBWU2NZUThLMEVEU0xqVnfSAaoBQVVfeXFMUGxDLWV1SkNGWnhnUExRc1J5MklVMEZsNmRRel8tVTNQeHFuNVhfWkRCdlI4cE1LeXIyMXJwaVpZdlNYWE9jZUI2RXZTZXFkOUp1VUNLZERHcElybDRkYUVzcUpIOGNkNi1mM3c3VldzSnc1TW9lZTJ5Z3BEaHhtNlVUdkhhdDEwZ0JJUHFoWnFsQ3o0b01ybTdPX1U4c2w5NXJ3MWRvdnBCLVE?oc=5"
+    },
+    {
+     "fecha": "2026-06-17",
+     "titulo": "Burgueño solicitará licencia a la alcaldía de Tijuana y buscará coordinación de Morena",
+     "medio": "Zeta",
+     "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQbGVMTkhkOFBadThVSEVlNzN5VEx1blV5TFhaaHMycW0zQ001MHI4VWdiS1R5RG9uNVJkQkM2cVdWNXR3OEZMZDFqY3Bpb1ktelNaMXlhUFNZU1I4b3N6X3BuclBuVTJpLTZOTDliNXlGSjZwenkzS2hkUDRnZnRlQW93WEVjOTJBNVF1WGEtSkhRbXZ0SjRzUUh5R1IwbnEwU2h4YUxUdnE2YVlEY1ZPQzVpUVNWdnJqNXlN?oc=5"
+    },
+    {
+     "fecha": "2026-06-17",
+     "titulo": "Ismael Burgueño pedirá licencia para ser coordinador de Morena en BC; buscará gubernatura en 2027",
+     "medio": "El Sol de México",
+     "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOXzlpazBuREJkakJ6bWRkUzNmTWFJckRkQ09xdDVyVUFydk92RXlWNGN6RTY4YVlPcjRsY2Fxb2dJMG1GZkJjRHl0Y1BzRkk0ZDVLZmoyajJMbHhnZHl3UDBZNXQ2blpJY3p0b2d3b1ZUQzRJRkRYbUFWVWZ5bHRGNFBaUTZCUHo5YThUS1hVRzlzOGx6NG5HUThBaWZQVzI0X0JRWXhrUFplUFp1cmNjdnJmWU1VRTZqSDRGVmNNNkxLWkxWMm9TbjV1RWhYMGMtRnZmNjk0ZllmU2MzSEE?oc=5"
+    },
+    {
+     "fecha": "2026-06-17",
+     "titulo": "Ismael Burgueño confirma licencia como alcalde de Tijuana para buscar la candidatura por Baja California",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQTXU0WUFLdTR4ZWNIMnp3M2tvMlpsX2RsQmFYZnRTOGlmSzhHT2lfZVpTdFpvRzdUU3Y1X0o0b2s5eTg2TktSei1naTdCTlBmVVkxVjEwR2hhdldEelRoZ3RqOFVvdGxMM3RmS0cydU5YbTFlNk1ZMmFTbWxwS1dFVjBOUjRDTnREam1Da215WWlMUTQ2Nld4R1k5RE1NUGhqUVJMN2dJMWJMVUJvWDhhY01GaU1KTHhCVjRPRUd0eFVyVl80OXA0eVB5Vm8wV203REU1cG9FRlY?oc=5"
+    },
+    {
+     "fecha": "2026-06-17",
+     "titulo": "Burgueño anunciará su solicitud de licencia esta tarde",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNQjNXRFJlTHh1VjB4X2FieWFnNFl1aTRRRmFQZGpGcGNocnR4b0VvY2JCR25XamhPbjN5NnBJZVM4NENIWnZBUjVxNWxJOTh4RFdJcmUwUXdfOHBrcmlzSkR0cmRsOTVXMm53OGhhWEVIQ0RtemVfSUlHOWNTSWFEZWEzUDhQUlVBenFkNXZRUjlncGdZUUxSclV1NTlmWUx5SjQ3MTVZMEM?oc=5"
+    },
+    {
+     "fecha": "2026-06-17",
+     "titulo": "Burgueño solicitará licencia a la alcaldía de Tijuana para participar en proceso interno de Morena rumbo a la gubernatura",
+     "medio": "El Imparcial",
+     "url": "https://news.google.com/rss/articles/CBMigwJBVV95cUxPeDNZTkQzUEU3SkxFUkxReFZxdExXeU5WZzd3c2pRYTV3Sm83RGQzdmYwc21UQjA3YnJUdk5uZDJXeERqYnlub3ZBc0NRdXg2YkVTdVVVVkk4alIwWTczOWNELVd6eWpYZVdHQ3RJbXJ1Nkc1cVFLdzJvWDV6ZWVtV3NIaTQ2aUNqSnF1a3BvcV9pZVNISEFHZ293dGJUbWRDbGZSNnZzQVJpeVhDMjVwTlA1bWpxaEN6Uk5YVjFVX3hlRWJxMGxYYTBkcUdNYkdZcUtqQzZLdVNaNDU3c2J1SVRpaDIxTmJiTUJzeUhZSzlEZFVTYThnSm1GMHpVczBNT29N0gGeAkFVX3lxTE5mTVhZOFhPcEFGZlBzM25ETkdvSXRhcWJMTXdTZ2FTR3BSa1BOY1QxSWRBMUwtZjRpYllqOHg5MlQyZjRyZm1Pbi02S1YzMHF2TWJzTHZDb0wweUd3RUc5bFlqTVVncldPbG1aUW9UWVlyeG0xNi1GRFd6RkxybVhDVHNTakZiN3ZTTWIySFZOWnhoRDRGZVVMcGtoWUpNN05PTVQtLVM2NmZYUmFoMllSbVFydnpndlZLVF9ha3kwZmhBUHB4RHJmNy1XQ21mMWJic1RtbEVmcXgwYUhvX2k4MFZ6V0FRSjZ6cmdseE00Mm5oOF8zX2FEV0RNaEFaUmRkbnl6emdUa1huZHdpblA1ZV9UNlRuc180UV9YR0E?oc=5"
+    },
+    {
+     "fecha": "2026-06-17",
+     "titulo": "Ismael Burgueño Ruiz pedirá licencia como alcalde de Tijuana",
+     "medio": "bajanews.mx",
+     "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNYjRuMk91eHNrZGZJTktWY2M4VFplMFdNR1djWk1KTC04V1hld2ZOcUU5cTF3ZC1rWXo5LWVqUktyemUtSDQ0UHg5S05fQ18yOGRZRFJLdGs1alNTWVdDaG9VWVk0RDdITW9nU1JWTUhBWE1ucTNWdmg0LWp2bDhqb3pobmNyTHV3bVhDcTVRY3R1QXExSGxQWWp6a0lRSVFKMWduWmozRG51aG56OUVpZFZlTDNmdVptaGY4?oc=5"
+    },
+    {
+     "fecha": "2026-06-17",
+     "titulo": "Pedirá Burgueño licencia antes del lunes; buscará la Coordinación estatal de Morena",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOWXh4WW9QSkE5b2FpSW5keF9fT0wwUGloWmFOTzlmclNhMWM3YlZ5REhkTkxsajZjamU3UC1TRlJrZnlXSFpGbjdiQmU2d0x2d0pwWERmcUVzSTlCblZIbTljcEkwZFBRMmI2bWNEdGhUWjFBLXhDWDNvS0N1SktSaE5ndG1kc2ppSHlpajJEVm9UbkpaUVd5c1Jtblk2MGdab3J0M2RFRjdLRXpGeWtucVNWMXVvZG9nRVlBRWVLQU1QVDY3UzZsRmNidUdUdw?oc=5"
+    },
+    {
+     "fecha": "2026-06-17",
+     "titulo": "Ismael Burgueño pedirá licencia para buscar la Coordinación Estatal; asegura estar libre de investigación",
+     "medio": "Periodismo Negro",
+     "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxPQkt2U0pzRmdoNFdnaGRscGhsTFVIcWo4Ry02Z28xaHJ6M3hKRUxqLVlQZGhMR09pSmZPUWdWT1N0ZUJEVGx6dlYteXJLRzRzS0NEWjAwa0UwTzI4ZWZzM1lheVVIeXYwUDQwZE9GaDNoSFFOT2VyVnM2ZnRwTlV1X1E3U0g4X2E4SlF1RFhTRExxci1nbjdwWnVwNTA0N1ROZC1oMktkdHh3WDdHeWxZQkI4Qm9CVjRQZUEwS1duVHR5clVqYUxzX3B2dzhJbFc1UG05akU5Y21BbnJyZDlRZw?oc=5"
+    },
+    {
+     "fecha": "2026-06-18",
+     "titulo": "Habrá continuidad en el Ayuntamiento tras licencia de Ismael Burgueño: Ramón Vázquez",
+     "medio": "Blanco y Negro Noticias",
+     "url": "https://blancoynegro.mx/bc/tijuana/habra-continuidad-en-el-ayuntamiento-tras-licencia-de-ismael-burgueno-ramon-vazquez/?utm_source=rss&utm_medium=rss&utm_campaign=habra-continuidad-en-el-ayuntamiento-tras-licencia-de-ismael-burgueno-ramon-vazquez"
+    },
+    {
+     "fecha": "2026-06-18",
+     "titulo": "Burgueño se deslinda de investigaciones y buscará Coordinación de la Defensa de la Transformación",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/06/17/burgueno-se-deslinda-de-investigaciones-y-buscara-coordinacion-de-la-defensa-de-la-transformacion/"
+    },
+    {
+     "fecha": "2026-06-18",
+     "titulo": "Monreal enfría a Castro Trenti: la pelea real por Morena en BC está entre Julieta Ramírez e Ismael Burgueño",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/06/18/monreal-enfria-a-castro-trenti-la-pelea-real-por-morena-en-bc-esta-entre-julieta-ramirez-e-ismael-burgueno/"
+    },
+    {
+     "fecha": "2026-06-18",
+     "titulo": "Buscará Ismael Burgueño la coordinación estatal de la defensa de la 4T",
+     "medio": "El Mexicano",
+     "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQWmZ1OG9sVTZicXNlUWN3LW1HbU45UEpyX25mR2IwM3E1VjFVOGk1c0tsSzctb082aXg2bDJCLTE4MWdvc2t4LWxCd2dweDhCM3ZuQ1VYS2JQLTNIeWVkWHBrVm0wQ3ZZaTliWkpuVVY0Sm5id3F0bFZiLUpGaERuTHdyWXh5ZGRFM01VX0xXRDJjb044MmJQOWhEV0FqUl8xYlRzeGFiRlIyNGlnbGliVmVKc1d6cWdhMlNBSndfQjVtZkd1OU5mS3YtRTFXNmM?oc=5"
+    },
+    {
+     "fecha": "2026-06-18",
+     "titulo": "CCE confía en continuidad de proyectos municipales tras licencia de Burgueño",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQYmIxRjVQOFZueGFxbFRsQlJnUERPQlZkWWxFMXQ5U2dNN1JfUFdmUFlZVmhQc0tXMmVUQUlDQ285aURIM3RyOGNGS0p2dTBzVzVEc0R2VE5sMldiRXJMa0tzSjJkeG9pbnFORTRrSDJIVzc1dXRhUUtuMUlKNTluaWQ1TzFMZjVWcU1qTnlPNGVja1FYNlNjUmFBdnFEbHgxV0ZOb0lyMmo2V3Z3U1dWSVJYTWh0V2UtZHYtaWdjRXcwQkZhNHc?oc=5"
+    },
+    {
+     "fecha": "2026-06-18",
+     "titulo": "Revela Monreal que Burgueño y Julieta \"son cartas muy pesadas\"",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQZWpOSVo5NTFSM0dRUzNSSC0yQVFMNFNMaW94VUJ2UUtONFJZRDFJOHlNSi1wQ0JuakRQRnZWQTUxYlVZYTJySWd6dkx6U0NTOG5jcE5CMTJMU1hXaDBNVk51VkNVWUtQTGRYNUk2WWJCWUJlMkdiSkkxN2cwOUg4VVNvOEYxWjJWMFBnUEd5cmdaQzdZUjV3THprVWtqSFREYzRrcGZ4UGJxVThXWXNjZA?oc=5"
+    },
+    {
+     "fecha": "2026-06-18",
+     "titulo": "Monreal dice que Burgueño y Julieta están arriba en las encuestas: “no le levanté la mano a Castro Trenti”",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPNzZNbzRPbWwyQ0RpQlRmRkNveXE0TVprSEthbjZudW0tYTZKYjNmbThUR2JMOGJab1dNenRlOVUxMUozbVNpUzF5UUZJUzhFVjF0dVV3ajhCTWhIa3E1bGJYWDlzdDk5a3BqR1VtZ3RuQmpNUGJPNFlqZEZCOGRqVDVVQU16eVlrZ3l4LUctcWtSZnJTVWJDSDVLVnFuNXotRFcxZ29oZWVVWjk3cDFOZzRQU2pSQm1JNjRVSUEwUlVOaVVCMGtzNlE0czNVYnVKaHBEZkJB?oc=5"
+    },
+    {
+     "fecha": "2026-06-19",
+     "titulo": "¿Quién es Ismael Burgueño, alcalde de Tijuana que solicitará licencia a su cargo? Buscará llegar a la gubernatura de BC",
+     "medio": "Milenio",
+     "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPczliWFI5dy0tcDlkbHI3SVRTX2YzaGZyZDVyYjBBY1dRdUtQQUJ4NzFQb3oxUEhQRklBZ0ZwaXQ0RHBQUl9vb0xzNXZsTEt3OTRNXzBqS0NBM2xIX2pEOG81ZTV3QUI0bXZfVk95Vko1NEJlZnd5b05aenNyNXVNVElqd2c4dmJUcnlpcjI1VEZITVZ6eHkzZ3RMTErSAZwBQVVfeXFMUEY3LTRNcWRKX0VKNUhwRndSNGlpdjVRY05UVlBDSWFtbnhZS0wtcEhGcndqQzhIbmNwWWhGMWRoVlRzVl9NSmpxTWU4V3J3RnNjdHZrNVNac29INl9NTUs1cFBpdWRyT09MV2JLVm9GMVR0c3RaSDJDZkNpeUlTcEtDbTJINU9jXzNBODk0Mi1zRmxUbERPOWZSTGlu?oc=5"
+    },
+    {
+     "fecha": "2026-06-19",
+     "titulo": "Alcalde de Tijuana pedirá licencia para buscar candidatura de Morena a la gubernatura de Baja California; deja cargo a secretario particular",
+     "medio": "Grupo Animal",
+     "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQczdDbXVzTXE1UC1sb0hHS0d4WFJ3UUJLanMwU3EtajlXLU5WTGUwSjB4Wml6SG9ISkp3eDBnMU9ESjFYWDY5NjFYN2tHR2xqV05Hcnc5dUZuR2xQOTcyTVpPNW9KczN3Ymk4NFhrY0syMHhtdnZqUkZNYkNyaHhzVzJWaC02ZzNkLU50WVBaLUdmd1VGMEpkb0ZXeURXbTVkNkVXNA?oc=5"
+    },
+    {
+     "fecha": "2026-06-19",
+     "titulo": "Alcalde de Tijuana solicitará licencia para buscar nominación partidaria para carrera a gobernador",
+     "medio": "San Diego Union-Tribune",
+     "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQT3ZSRDctallEVmdCdzVYUk00VDhjNm9QQ1YwakZwRGRSYmJfa1d5UFY0SDd2d3VobzNjUmdsV0NmcUp6V29ua21BeHJjaG9pOUxzQTNsaU9xMlAxNmlXOEViZDQxei1oYnZjMFBLSlZSS2M5NjNMWEdYY2JwX1hfNHhTY2xaNVc1UGh4ZFR6NS1ac1c2a0VrbmhKZVE4VUotSEZTdzJPSDFTUFVQSllSMUdCQV9NQVRaSWNIQnV2XzNVNTNRNHd1M3lyRU5ncUlUMU5NdVRWM2RTTTdXLWJjSw?oc=5"
+    },
+    {
+     "fecha": "2026-06-19",
+     "titulo": "Alcalde de Tijuana solicitará licencia para ser candidato a la gubernatura de Baja California",
+     "medio": "Milenio",
+     "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNTEFkaC1IUnVrYnVqWVU1dC1LVU9fS2tJT1JKZHRrY20tcU02aXgyZ1FYTGg0dkR3a2t4NTA2NHBpR0R6WnE5MjhWNEI1a1ZWZFZ5c3FyWUhWRk9vQjlOSFFZTXVKX29LTG5YTVpGaUdDZ1BTdDd0MWU0dFo1NWM1clRrSmJwUjBhcHBkYTg1VWt6QzBYQllzNtIBmAFBVV95cUxOTU5adnhiajY0b19ybWF4V0VqWU1PbXZ0UHpac3BJY0YwcGtFdGZwVDJMZmNMUHBqYzA4S0gyZ1Y5cFdsUTdfZDJiT2RFRlpFSmFUTXM0dzlPeXY4U054Vy0tbDdtNnVJU2c4N21uUnlKWDBJQ2NBVUFpb0RqcGU5UXBGa21LTnFzQmxiWGJLeHNIVFR0al8tYw?oc=5"
+    },
+    {
+     "fecha": "2026-06-19",
+     "titulo": "Alcalde de Tijuana solicitará licencia para buscar candidatura a la gubernatura de Baja California",
+     "medio": "BI Noticias",
+     "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQY2lUZlQ3Yl9hNTRPRWk4NWcweUVKNXNEUjh4ekkzNU9WZkdhSXhRczdxeF81NzJSb2k3aFozdTZkaGFJZkM4Rm1tZk91YU9iWEtraFc0VVVSWm1RY2kzLXVFTlVKdFB4cGVVZHBXblV1T2VoakxLSDJCdVRXOEhkRWdPMm9waVhBSmNVWDdfVG1zaXlyT3pwalFZM3pvYTBleUdrcUpfSmljTXltdmRZcjJOQ005ZFBqSkxiRkxn?oc=5"
+    },
+    {
+     "fecha": "2026-06-20",
+     "titulo": "Ismael Burgueño solicitará licencia para buscar coordinación estatal en BC",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/06/20/ismael-burgueno-solicitara-licencia-para-buscar-coordinacion-estatal-en-bc/"
+    },
+    {
+     "fecha": "2026-06-20",
+     "titulo": "Abdiel Gutiérrez asumirá la alcaldía de Tijuana tras licencia de Ismael Burgueño",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNMkxNRjJpaDYxSmxVVW1qZUJMbDI3WGdYSFJsbmYtNWlYamJKdHBvRDVDS0J1OHoybUZTWWJnTmhrODA4SWdHblVXM2hNdE1BTU1iYnhpY1hoNUdtYW5PLV9zQ240M2c5c0pkRjZTTzZ3SUJrVThLR1NkX1NEc1hNOUxjZllZOWNCZ2I4NFhBdjl3c3hCQWlwMmJjQW1jZFhMVWlCbEhEQ2ZVelZ0WkZYdDlmR1hxMlc2?oc=5"
+    },
+    {
+     "fecha": "2026-06-20",
+     "titulo": "Ismael Burgueño solicitará hoy licencia como alcalde de Tijuana para buscar coordinación estatal de Morena",
+     "medio": "Zeta",
+     "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxOaVB1Z2FRTXRzYmszS1h0ZUVtczBiSldEZzJHTG5SNmxrb1U1S2R1b3lxX3huTlR2ZFBEem1mb1RYMFpLRGpONHZyd1JpbWIyWndCdmh3LUdjOEpJZjRNSnd5VzFtM1FocTBmbTZ2T3c0U3MxZ1ZaSDU5el9PTXFsR3hVeWtuci1Mb05tNUlOOVBmYnpnMGIyTVg3VTU5MER1bHNta2NtWkg0YWZIS0V4QzZuUkVJRFpRRW9CenpsME16U2lYOE4tcWlhT0I4ZHRGQ3ZZd213?oc=5"
+    },
+    {
+     "fecha": "2026-06-20",
+     "titulo": "Ismael Burgueño pedirá licencia como alcalde de Tijuana para buscar gubernatura de Baja California",
+     "medio": "sdpnoticias",
+     "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNWjZIZGpXS1E4bTZpWE8ybW9LNHhObWhVNWx2enVfQnBaOFY2VFdhWDBZTHdfZWcySHdzU3pQRzdFOTBPOXRnWjVMaHNBMFEyLWp6TVFYRXBXRldyZGtVZUd3cTNVTFh3VEZYc2hFUm9sSUF4ek9LOVoyZnBMSzYyMmd1V3VURENxTHIzdkRnazhzZlVTN1dmazRtNHB5UzZPUkFsS0N2VGFMS2lmSzZHeDlWUnNfRnc5NFdXZmt0cWEyUjJfUTJuWWZGWFBMblV3?oc=5"
+    },
+    {
+     "fecha": "2026-06-20",
+     "titulo": "Ismael Burgueño buscará liderar la transformación en Baja California",
+     "medio": "enlineabc.com.mx",
+     "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQc2NKbEZNWTFEYlNnaGR5RFJ0LXBsTGhIOFJ1ZUtKM2RIOXp0RnBCUFMxY3JfQ3h2QWdnTW9kVFAyd2dUOVZuR25yZDVJb1l3TnhJVkI0OG9Wc2VxVDhIeUhPUkZEY2ZNaUJGRFZFQWdRbG5nM1RxYVBWc2J0bVZOWUtBdVdIZE9YVWo1M002TGlxeVNzNDFWVzJ0X3VnRDdmeHhhN3FfOXJnQ0NubFNHOGY3TjYyQmFUczgwaHpKaDBqdw?oc=5"
+    },
+    {
+     "fecha": "2026-06-20",
+     "titulo": "Ismael Burgueño es el favorito en las preferencias para candidato de Morena por la gubernatura de Baja California",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxNcXdUR2JOazB3QWF2SVRoWmg3TnJTR25FZ1FqNmxkVm5FeGlVOWdIYnVHSHZZM25UV1k4UlB2R2JpQjZBSDdraHFSYnNIemFMZnFYaDVVcnlCQnd4dkVqY2xIQm9YNGx1cHV4LUM1TkY1SmNYLUZKMU1ka1Y4N2RsbmQwTlJxTjNfRUxWaXNsQ09HYWNnbjZQbEM1LUlXZkNmY0d2azBPNHY4RmlRYlpXUTVESmd4WndPZUpoU0xvZzJ2Tlp0Z2VaWUxDSzlkbnJ3NEF3VGVWU3p3bXVhUXRGaFdVUkQ?oc=5"
+    },
+    {
+     "fecha": "2026-06-21",
+     "titulo": "Aprueba Cabildo de Tijuana licencia temporal al presidente municipal Ismael Burgueño Ruiz",
+     "medio": "Blanco y Negro Noticias",
+     "url": "https://blancoynegro.mx/bc/tijuana/aprueba-cabildo-de-tijuana-licencia-temporal-al-presidente-municipal-ismael-burgueno-ruiz/?utm_source=rss&utm_medium=rss&utm_campaign=aprueba-cabildo-de-tijuana-licencia-temporal-al-presidente-municipal-ismael-burgueno-ruiz"
+    },
+    {
+     "fecha": "2026-06-21",
+     "titulo": "Abdiel Gutiérrez es el nuevo alcalde de Tijuana tras relevar a Ismael Burgueño",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/06/21/abdiel-gutierrez-es-el-nuevo-alcalde-de-tijuana-tras-relevar-a-ismael-burgueno/"
+    },
+    {
+     "fecha": "2026-06-21",
+     "titulo": "Ismael Burgueño asegura que Tijuana sigue en buenas manos con Abdiel Gutiérrez",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/06/21/ismael-burgueno-asegura-que-tijuana-sigue-en-buenas-manos-con-abdiel-gutierrez/"
+    },
+    {
+     "fecha": "2026-06-21",
+     "titulo": "Aprueba Cabildo de Tijuana licencia temporal al alcalde Ismael Burgueño Ruiz",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/06/21/aprueba-cabildo-de-tijuana-licencia-temporal-al-alcalde-ismael-burgueno-ruiz/"
+    },
+    {
+     "fecha": "2026-06-21",
+     "titulo": "Ismael Burgueño buscará la coordinación estatal de la transformación en Baja California",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/06/20/ismael-burgueno-buscara-la-coordinacion-estatal-de-la-transformacion-en-baja-california/"
+    },
+    {
+     "fecha": "2026-06-21",
+     "titulo": "Burgueño se va de licencia a interna de Morena; Abdiel Gutiérrez asume alcaldía de Tijuana",
+     "medio": "Zeta",
+     "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNRnZpZE9JdE5sYTNIbWVycGRpQVFXM2tMLXhsRnVKVTJsX0NCSlppel9wbDFndTVYSzQ0Umd0Y1Y1b3pHeEx0dUkxeHF0NXI2Qlg2TEdNdk0xMXY4bnM5X3pNQW85RmpIalRfc2o3cU92WG1BMXRfMlhPWE9QaW9nY2lQRFN6bzFNMzRxQmhkellWamVFdEhNVDlhc2F6cVJjUmlWZm5mZjV4WUxOM2cxb21obnhULTdjN1dPY2RSRQ?oc=5"
+    },
+    {
+     "fecha": "2026-06-21",
+     "titulo": "Cabildo aprueba licencia de Ismael Burgueño; Abdiel Gutiérrez asume la alcaldía de Tijuana",
+     "medio": "Diario Tijuana",
+     "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPaWtkREhLOGVhX1BNVGdUQ2VBNkdGS3BmTTdMVm9pT3l1S0g0Tk4zeWhHNzhvWXFaVGJ4ajlST25BNkloYmFrYWtuMU41SEVzdkR2RzdNcGtBb2dSOXFBNjBsMGR2cFpYd0wtdWhRSDZkOU0xcDdIclFxNFl4NUZBa3R0NjctclprSzU3MFNrUjNESzJVY3MtbENDclVoV0VUbFJqNUVYUUFXVjM4YmhVSHlhTkY3cXFfUjg4aFhvNDl6Zw?oc=5"
+    },
+    {
+     "fecha": "2026-06-21",
+     "titulo": "Aprueba Cabildo de Tijuana licencia temporal a Ismael Burgueño",
+     "medio": "Tribuna Económica",
+     "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNaTdQMXlnelNhVGNQT3BLbWZqeWlLYzdPbkRzOC1QNF9xN2Vqc0xwbmxLaXJRc0xoRmUxNy1NRWg3MXNjYnlGaVBLbF82d01zZUZ2WXNmR0tqSVFkQXBPVnJ0WWhsNU9fd2hGckRfbEgxRExJSHp3ekdCeGpXNERDTDNDTlZjY2liWmp5dUdYUEU1TnA1Q0hCVjBIR3I5cWFweHA3ZjRhX1hPM2w5RGtDS3hrUFRfeFZyMU5jdmFKaEwyaHc?oc=5"
+    },
+    {
+     "fecha": "2026-06-21",
+     "titulo": "Cabildo aprobó licencia indefinida a Burgueño; Abdiel Gutiérrez asume el cargo",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQWlloVnV4RFJqTDJOQUo5NFA2YlEzSlFSN2cwM29Tb3ZOWDdfXzR5WHJQQmtrU1RqbzdnME1xU1VDWmY3eEp2a1F2bHd5LUk2YXZVX21Tb2w5dGVPb25pMnlwWGlJVUxmWE5IbWl1QzFYQTJVR1huZzNBVzBXNHZIREtvT1lHcWpzY0ZXSjlldzJVc2Y4Rlc2cmRmRVBrT1hpdlpqNE1GQXdIeFRMRmRudXFFSWdXSEhwU0Vvc0NyYnE1cHVjaTBN?oc=5"
+    },
+    {
+     "fecha": "2026-06-21",
+     "titulo": "Tras pedir licencia, Burgueño asegura que solventará con recursos propios su aspiración política - El Sol de Tijuana",
+     "medio": "El Sol de México",
+     "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQMTdKRjE4YlNkTkdDQXE4emUtMlJlSFk1YTUydEpaT0FraGdFM3hRX28yVG9kYTkzOHVCUDU1aV92bFJKZlUwU044Q1FXSWF0NHNsM2htd3Z2WnZDU0pzTEpFQVdSS0NWQ3VPOEx2UW82Wl82SlJOVWoxRFpSbDZIVTBRZUlHaUpHbGpMd2toTmljSUNmZmVMVXFLVW5UWEdnOFBLY3h1TFVDbHVBa2VRZTFqT3dzLW8wdmNQYk1jeXg3RVNiZmo3NGVFYk1BczFRLUdDT0stamg1Q0Jv?oc=5"
+    },
+    {
+     "fecha": "2026-06-21",
+     "titulo": "Se registrará Ismael Burgueño en la CDMX",
+     "medio": "El Mexicano",
+     "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPSFNHRnBaVDhzRHROY3FKYW5BR3dfbDlOTWpDYV9TOVVHTDVjV3dVdkZkWFc2aXB6Qm05YzhmYWZYeTA1RlF2N1dZRGpLUC1WMEY0ZzljcklGQjc3ZVNHcms2TWYydkxrY1BnRnNPcmpXRk9TUzlwZXJMQVg4ZER6b2FNckZrTDlwWm4ySE5YbGw4SDV2c1lvS2hHZnJXd1lC?oc=5"
+    },
+    {
+     "fecha": "2026-06-21",
+     "titulo": "Abdiel Gutiérrez asume la alcaldía de Tijuana tras licencia de Ismael Burgueño",
+     "medio": "El Sol de México",
+     "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPTnMweDJMekNUcVAzQjRpVU1rX3lNTVEyLWFtOXNCUkhickhVRER0UEprZVpxVFNoams0WFNDcmZqMC1CZDE5MF9iYTJRaHVvS2FsVGpYdmw3bGlsR3JiVzBXcmt4Vk95elczSmpZNlluOVNIRDlYNmQ2WFdzN05PZjFZYUM4RGFFRHp4a2JRVUhCcjRkckNDZEZGSWdoNEVFZXJldU1VNlpieEkxdEp4UTRwQWo0SzNGRmRXNHhnLUtZdERMVlE?oc=5"
+    },
+    {
+     "fecha": "2026-06-21",
+     "titulo": "Abdiel Gutiérrez asume como alcalde de Tijuana tras licencia de Ismael Burgueño",
+     "medio": "infobaja.info",
+     "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNQjNWMGNjNXViY205bDh0QUpfeU02S2hURzlEbWlGWC1fYU9iUGQ2MDVaOHVtTFVuY0wyeDhlRElad21yUC1pbnZ4dVBnUnhqTDFoT2RVTnFpU0h1N0RPSFA3aEstYUdEdTA2OHRzdEVtc3Q2RXdTNXZpXzRMTi1jQWtVeW1JZEdJWEo3UHZwLWlIVWIwNEkzOXVaMHZlZnFsNlhHX2VrU05zUQ?oc=5"
+    },
+    {
+     "fecha": "2026-06-21",
+     "titulo": "Nombran a Abdiel Gutiérrez como nuevo alcalde de Tijuana",
+     "medio": "Central Municipal",
+     "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNTmdJcHpYX0U2aFlNN2t2WnNWZ084MFFrUVBXVHNGUnNMdzBJZ0FIWVhjTEhVWW5NaDUwQktuczJTd2tyQjc0SUR2MEd3d3VtdTI4UkE4VnNTOTF5QWpjWmV4ZWZxVHdtdWNfTUxUekFsTkowVFBJMFVQdlNXamxtTXdQVXB2Um9EUG1XZTZ5eEJ4ZThmSlBBV3luVGxhUWU0M2lwQnhKbXdGNGM?oc=5"
+    },
+    {
+     "fecha": "2026-06-21",
+     "titulo": "Tijuana estrena alcalde: Abdiel Gutiérrez toma protesta tras licencia de Burgueño",
+     "medio": "bajanews.mx",
+     "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPcGdTeXhVR3R2aHlSMElpSXJGQjZnaEhCQ3VDbXptZFdGRDAwTDF3ck1Xd0xUY1JyX1lOY3FaeGx6RGZmWWN5QUluT21RZ1RWaVhIRVRfeWJKVWlqMFBkWUZxLUdpTDlNbUU1U3BOQlhBS1JrWkJaal91Tk52cWx3SFZsVlVQTENaX1Rib3cxT0tzakNqRFB6cno2dnhqZ3duY29UR2NQM1RINUQ5OE9xeEF4OTdwNzA?oc=5"
+    },
+    {
+     "fecha": "2026-06-21",
+     "titulo": "Burgueño pide licencia para ir por la gubernatura: “Me voy tranquilo”",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQY19LMHVTWGtrdTF4MlBjdXhfWk9ZS3hwZ19MdmY0S1NWZHpvc1hKSF9QVS1EVXRXVk9IbGdmUlVoV2t1YU5xTTNwNjNzQ3Q4VWdLVW1zVHM4X2hoX2NCclMyU0g3ZHlCM1hfbVlpbXFCbnM5LXZzcUVnamd2LWpKNEl3MUpzSkdHeE5Pem1QN0twNFd2Xy1xUUxLZlVyTl9Tc1hadg?oc=5"
+    },
+    {
+     "fecha": "2026-06-21",
+     "titulo": "Ismael Burgueño confía en Abdiel Gutiérrez tras relevo en Tijuana",
+     "medio": "Cadena Noticias",
+     "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOQTFVNTFPYkFvcnJpVlF4bS1mSzZWZ1RIdEpESkxfb0h1SG5oUnowWEpPY3VfMkdPal9mRjVYZlFtYkozVnZNTmxBUU44UEdHOVdxakVPSTVvQUtWUDFOU1VaM2k4a1hXTzY5Y1EtVFE5c3pJWmthVmE4Um5hSHhkTjNXTV9BN1ZZazhCR1lWQjRteXNlZjc4N1FjYUViZjhPWWpsVXhsTnBUdEtOYUE?oc=5"
+    },
+    {
+     "fecha": "2026-06-21",
+     "titulo": "Abdiel Gutiérrez es el nuevo alcalde de Tijuana tras licencia de Ismael Burgueño",
+     "medio": "PostaMx",
+     "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQYmJfVTdvdG84UGgtVFJqOXhiUXRTeEhKVXplZHJkNkc1NExOXzRvX3g0Wmp3M0h0TUl2czN4b3ZKTEZXblpNcWVJc2VpRGppSVlRRW1ubUxfX1RfSC1HYW93OVQ1bVB1U0xMVjFJUlZfSkpKS3hkdWUzMGgteFVaVmVFT3VzMU84NW16QzVpZ0QzWFpwLU41dUx2Q04yWlJHQlpKekc0Tlc2VG4tLUlXS3VyT0dpZGRqVWVV0gHAAUFVX3lxTE8zWHc2dWVkczNsZl9aTHV3bV9YVm12SWdpQzJLaDBtU3pta3Z2S3VrdnlxRXVfMHhFX09rNkNvNy12amVsNjhOMmRWcUhrUWZkcFNlcE1DbThNMHZuM2dEVDdXckJFTWc0ZERBZDFaTkFUdlV5Z0ZwcXV5bkRwY2EyOHR2NzZzYnlUQlFJLUNSWElkY1hrTlhBbzdWaHZkZDFVWXRuTUNodWFrbzZybm14dzBrRC1zeUlLdkFickU5Tw?oc=5"
+    },
+    {
+     "fecha": "2026-06-22",
+     "titulo": "Se registra Ismael Burgueño Ruiz en el proceso interno de Morena a la Coordinación Estatal de la Defensa de la Transformación en Baja California",
+     "medio": "Blanco y Negro Noticias",
+     "url": "https://blancoynegro.mx/mx/se-registra-ismael-burgueno-ruiz-en-el-proceso-interno-de-morena-a-la-coordinacion-estatal-de-la-defensa-de-la-transformacion-en-baja-california/?utm_source=rss&utm_medium=rss&utm_campaign=se-registra-ismael-burgueno-ruiz-en-el-proceso-interno-de-morena-a-la-coordinacion-estatal-de-la-defensa-de-la-transformacion-en-baja-california"
+    },
+    {
+     "fecha": "2026-06-22",
+     "titulo": "Burgueño recibe constancia de aspirante a coordinación en Morena",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/06/22/burgueno-recibe-constancia-de-aspirante-a-coordinacion-en-morena/"
+    },
+    {
+     "fecha": "2026-06-22",
+     "titulo": "Burgueño se registra entre porras y llama a cerrar filas en Morena",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/06/22/burgueno-se-registra-entre-porras-y-llama-a-cerrar-filas-en-morena/"
+    },
+    {
+     "fecha": "2026-06-22",
+     "titulo": "Alcalde con licencia de Tijuana, Ismael Burgueño, busca candidatura de Morena en Baja California",
+     "medio": "Infobae",
+     "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxNd193ZFVBTlM2UDVqdUJzWkNpNzlNTUtjbWhOVWFTSTh6eU9nVTFXaXRBaG92X2I2MVhlbU9XNVB6cG1pcGk4djAxVUFpZXRLQ08tcVVHV3RhcDhpUEVFZmd1dDhhUFdIbjdqUlZDNGt4dU0yTGViRTVZQkhWSnFGYVVWT0hZeGU0THNXTUxHay1xcDJCQ2NGcmlqOF82eGNrQU4yMFFxVXBaMVZpaXFDay1VaWxJMWdTU0xsUjhzbU04STJqR2EtVnExZ25lZjNlZGU00gHuAUFVX3lxTFBoVjJZcVVCTHM1b1k5M3Fla3lRVnkzbERHSXlqQ29WMEhsMkg3VEs5TjRqNmtPVmpGbmdWLVF1cV9wdUNGaV81MW9WY1VEd2JxbElQNG5rbl8wTm5GUm9FYm9TNWlNOExUWnpfSUdiOVBLYW5pVUMxZ3NRa0lmZ3hnclhadmpuNmYxcENjWHVrMUswUllKM1VWMG91WUtxaFA2SDdxTnV4dGE4RFN4UGJBeFVEQ3Vwb2dZVThhbWgxZ3ppSTNfRXFuQlZLVlBCUFFGal9sTDN4TmVEeEtGcTZEekNfQkM3T3doLUJhZHc?oc=5"
+    },
+    {
+     "fecha": "2026-06-22",
+     "titulo": "Ismael Burgueño viaja a CDMX para registrarse en el proceso interno de Morena rumbo a la gubernatura de Baja California",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxNaF9fRmxFZjc5bWtkdGZwTk9ZXzlyWkx4RmZBY3BVWDJmb3E3X2gtaHE2aDRBOTJYNmpnZm43M282TktmX0RLWWROdVBQMXlkRFZBbVp3SURKRGpMWWJEZ0VJMGtfd2prZGtQTnQ0RGQ1d3BvYzFNRU1nYlRGOFVkdVhsa2hhTnBZWDdTdmwtbU52SThpLTFhSmdlMFVBNVB2MXp2QWdScGllT0duR3R0SUM0Yi02T3RzdGNqOUZRVFpINXBNMEhOUDlvMDM2TWxmR21pZy03TDhhdU4tZjJRa25VNVo5d2VOaS1Qeg?oc=5"
+    },
+    {
+     "fecha": "2026-06-22",
+     "titulo": "Se registra Ismael Burgueño como aspirante a la gubernatura de Baja California",
+     "medio": "Diario Tijuana",
+     "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQTEhNbFUxejFQbW92WXNqUUVCSko1RFV6ZGN4QUNaMEVUUVQzd2ZTM1plQ3RlRmdrSnNWcDQ5WTJTak9wUGQzeFl5UE5OSm5FM19VVWxNQWVHSzRWcXNKcnpNeDdRS195eWEyN2o5ZEd4U1VEdG0wYjlUMW9HLXZuWWhKQ3hybW5nLU93SVdiMW9DRHN0am1KdmxCc2Yzd2h6eWpDX2N3TURyOFR1a2FsQ2k2aw?oc=5"
+    },
+    {
+     "fecha": "2026-06-22",
+     "titulo": "Ismael Burgueño se registra en Morena para buscar la candidatura al gobierno de Baja California",
+     "medio": "El Imparcial",
+     "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNeUJQTnJBaXFSWlZoeDR6VmI4bE0wN0trNTNMTDJVZkhtVkZfUklJMGlEX1F3ckhEbnNadnZ1VnBvbWsyb1JOdVBDc0NkQ2JDRmZ3Zndubk1oUmwzVnF5dU5JTkExa05fRnJaY1M1UkFLbFo1TDdaUmpvb2ZvU181VTR0OW1tNWt6Y1MxS0RrSWgtejQ0b3dHQWFHQnZNeG9rXzhVRXlKQTE2RkxCcktFd29zV0IyeGtwV1NEZ203OUc4SXlBTVh4cWZZNWNHRzRxN3U2ZThSM05pY3hYUWxIX9IB-wFBVV95cUxOQnJCWWVHTE9xYUJKRkNzUzBTSlU3b09ZcXpTLV9oSEVBOXJsYm4yZWUzWGVSZHdsdFVfYWx4dE0wZTRIaW1wai1RRGxmVWI1c1BWWUpCZlc0bER6SlJBaGxQNVJJM1IySDBCMHE2N2lQZEpVcEpDNmtPYVRlR2ZZczk5dHQ1azBvVjhqRjRaU09BNkhlaWNoTzgzMjl6S0hLdHU0YVRrV3NGQVdfTVhLOXJuTVZWRHNIVW8yN1JCdXh0a3gteXJ1ZzBxMEpRNVdRZ1lfaTVHSXRfS3l4MEs0UGluRElaT0tkVnRJR3lVUmFyb0d1aF9KT0pMOA?oc=5"
+    },
+    {
+     "fecha": "2026-06-22",
+     "titulo": "Burgueño y ex alcaldes de Tijuana encabezan lista de aspirantes de Morena en Baja California",
+     "medio": "Campaigns and Elections México",
+     "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQLU9DMDMzTUlWbjJ1b2V4bXUteUFGeTlxWGZPTGlxLVM2X0EtYjg1QXdhZGdYYXoxUEMzZFAtYkREbThyeElGbHliWGpIRlh3Z2tOaHRseTc0c3BvWDBRV3VYN1dLYkZRWG91TkxVWThPZ1lod25LWldTalpBTlJ4YmJLZmR0OTlzZnJaOWZSVGgyTExSSWx3TlFfNzE0Qm83cENpTFQwZXZkdkVUYjJTblQwZEJMclFx?oc=5"
+    },
+    {
+     "fecha": "2026-06-22",
+     "titulo": "Ismael Burgueño formaliza su registro como aspirante a la coordinación estatal de BC",
+     "medio": "bajanews.mx",
+     "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPa2dLR3VTdlFFU2dNVndDUzdfWnQ5bHc5MGIxZ2RiSk4wZHpPYnVRYVpZQ0t0a01KbEpTNHc5ckt4ZHAzX05oc2RKdUJqMG5iNmtDYnQ4UmQ4SVRQUjJUam4xS1VhOW9MeG9ob2pFdzZNQTZkTmxKMkd3Q2YtQjNjdkFuRVZfcmtSM0owSFJLTXhTanNCUGFzSXlvcjNvUWw3anNnUEtaMEZoTGh0bnRMQXFmME5xRmJfcjk4Tg?oc=5"
+    },
+    {
+     "fecha": "2026-06-22",
+     "titulo": "VIDEO: Logros calificarán su administración, dice Burgueño previo a pedir licencia como alcalde de Tijuana",
+     "medio": "Uniradio Informa",
+     "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPR1YyaFl4MHd4LV80SEtKQTZJZllWTGpWUmh2RzQ4bDRrMjdRaGRZV3dNT2pDUUZyVlJNbTRWTmdKNnZCM0JxTkNWQ2xFYUxhRDBiTXRPaGdiYUM1djBVVGFILVZOaVphMmNrcXh2emJCYTlRWktqamlHR1UyWFRmU1RqNlR6YndfZmNlMDg0Ry1wOWJNdy1jeEFGXzh4MHRUa3Y1c3R6TXQycnpVNTJ6ZVRsSWJGUS1qTDAzNmxiUFFXWE5vMmFZLXNEZVh1QXZLakt4SjhRTjZrNkxieUHSAeMBQVVfeXFMUFNfQkhHQXhTa3UxX2Nmb3d1a3NTMkI4UTNxZV9DcFdIVVJSSzFDVU1UZF84ODdYbFV5LUpCMmctd3pmWEZuZFNjV0NTMUxVNDRDaWE2bGpOSU5QQXdFbmIxdmhNWHRnWTlYUHlmdC1ZRk5wQngyamQ2N21BeDE4VWhXSU51cXpROG9od1dEZkpIQ2RtVHNuV1VqbUJzM3p0cTFyVnVsMmlsb3Itdkd5SUtfenhJTklxVzY4VmZzNkZMRjlGWk4yRko3dF9HamZSdE5SUnlwaHpnNTVtbXFhX01ERDg?oc=5"
+    },
+    {
+     "fecha": "2026-06-22",
+     "titulo": "Ismael Burgueño presenta su registro ante Morena para la Coordinación de la 4T en BC",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNOVRuZG5WY2RzazR6RlNtNVlhLWZQNjVRN194RXRHb2dvRzY4dVFDUWZyalBNQXV6NWlhRzlPU0hMXzNzVEQzZEVOU2JqWHgxektFdjNSY2R4S2xfYTBmdlFqY2dyejliM2M5VENtOVFUcWpqU3VlUVo3ZnpWdm1YYV9nUUgzY2hKaUxqNTVUZktWR24xNTZGdWpkWWJldnUwUVdWRHBxQ2FSb0FVMjJyOXc1d1pxUlc5ZGN6a0xR?oc=5"
+    },
+    {
+     "fecha": "2026-06-24",
+     "titulo": "Impulsa Ismael Burgueño transformación integral mediante infraestructura, seguridad y bienestar social",
+     "medio": "El Heraldo de México",
+     "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxOc0ktTE5EZUNlX1BXclFZVFVnblF2Z1RpZFJKWG16OGxxMFBUeTNiUk9rcjBqeFNSVk9yNm1sZjJXQW5Qbmd4R3dBdE1sUll4RFEycFF5V1h2R3hWbnpsZjRwZk1yVmY4eG5OVEVFS0xCdldIaDk1ZTlsdlpJM045aDM0Q2Rzb1dOZkVoRzdmUzJiTjZPVkl1ME9ET2VWZkg4bXRfMmdHUl91dDZsSThnc0RjaWd3NmFteG5GRjA1SXRnOGZPUnE4a21Zc3M5SlQ1R3JOUmpGTVRQNWtEbEpJYTBraklTbjEzanhGMEJfTUNObkk?oc=5"
+    },
+    {
+     "fecha": "2026-06-24",
+     "titulo": "Simpatizantes reciben a Ismael Burgueño tras registro como aspirante a gubernatura",
+     "medio": "infobaja.info",
+     "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOcnExT2lMdDFRQUIzd20zVE5MNEVmWk1ZSUJWdGx3SS13aTZpWkdlY21DQVpnVC1qUHlsaFR3RmZaNFQ0Q2dGa2Y5Skx1LUpwWlIyZzlVMUpySEtwbDUxVUpkSHlzZGZqQS0yN1NkX0gxeklza3RMQTFaeWlwRUZSY0N4QzUteGFVYVVPbzhjM2RHM0xHazJ6XzdYc1RVbWlNb0hlTW9yT3c2bW9nZ2c?oc=5"
+    },
+    {
+     "fecha": "2026-06-25",
+     "titulo": "Arropan morenistas a Burgueño en su regreso a Tijuana tras registro por la gubernatura",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/06/24/arropan-morenistas-a-burgueno-en-su-regreso-a-tijuana-tras-registro-por-la-gubernatura/"
+    },
+    {
+     "fecha": "2026-06-25",
+     "titulo": "Burgueño defiende su aspiración en Morena: \"Nunca he militado en otro partido\"",
+     "medio": "La Política Online",
+     "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxNTnpaS1BkMEJxdHFubjR0bElLNk9vOHNwMG5ISUZuWlZPLVZIaGZlbVpXUVFvdEZfdzY1ZDU2VU00SERFT0JIMGpWWGFYblp2SnQ4VjVuai1XTTh0R0N1VGs0clFYaHhkMkd5S0RHNVVZUVRaVklwUVhsSjdmcENRbGNTMllkOExrRXNTcWtEVHJjNFplNnQ1TEdwWk1WTTFsYU56YjA5eEJWQWowcGNSM2tISzZLZVBvdk8zcUZyVUJZNy1jWHJESTlzS0wwbUpmS0VUZWRVV1pHaVdUZTVlQ20yR0R5YVg2czMwdNIBvAFBVV95cUxOMnBjM2NOUUUwc1VNLVB1R1hwakdmajJNTXhvWnhvOWN6MURNcDlEblptMFBlRmxwcVJHbWVwQUlQNlR6QTk5UkUwMTdCeUxIaldIVkE2R3lqZ3dXb0JqaWlCSGNObFJHZDhLaEtVc0xYZWdUNHRYZkxIVndEWVBJT1pKby13UjB3RC11cFQ4SzZ5YkUwUUYwMUQzVWNwZ3JwLWhhakU5SmQ5eV8yWG5SbFVjcVl2VGZtYXlLeg?oc=5"
+    },
+    {
+     "fecha": "2026-06-30",
+     "titulo": "Ismael Burgueño llama a la unidad en Morena BC",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/06/30/ismael-burgueno-llama-a-la-unidad-en-morena-bc/"
+    },
+    {
+     "fecha": "2026-06-30",
+     "titulo": "Pide Burgueño unidad en MORENA y evitar guerras sucias; durante su recorrido por Mexicali",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/06/30/pide-burgueno-unidad-en-morena-y-evitar-guerras-sucias-durante-su-recorrido-por-mexicali/"
+    },
+    {
+     "fecha": "2026-06-30",
+     "titulo": "Burgueño arrancó en San Quintín sus asambleas rumbo a la coordinación de MORENA",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/06/30/burgueno-arranco-en-san-quintin-sus-asambleas-rumbo-a-la-coordinacion-de-morena/"
+    },
+    {
+     "fecha": "2026-06-30",
+     "titulo": "Tendrá Morena carro completo en 2027, afirma Ismael Burgueño",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOU0pYMzE5ZnVPMDNoaDI5LTlReTJDc3U3Y3dYRmdvOWNETnVUYlEyRnFDVE1CNVNGdjVDSmxNSHVoS0N3V0kwUzVqWU9aUlE3TFotMkI5ZHNZVF94MjV1TGp0NE5tMVNqVnZ6ZVBxVmpxU1lic191YU9jWmxNeW90ZEhLQzhEcjJpSjJWdUVlTnVzWWYyVUVkRDN2SUhMM2pSeEF1aEJNVzBXNDFta0ZR?oc=5"
+    },
+    {
+     "fecha": "2026-06-30",
+     "titulo": "Ismael Burgueño destaca avances de la Cuarta Transformación",
+     "medio": "bajanews.mx",
+     "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNeW5xT0NGb1JHVkFsOExVVHNGY2Q0UzVNVWxsQ3VPSHNTNkVjd05jeHhjVjl1VTdtN0UzMGFxZWF0cktRdlo3bXN5OVQ0bmJ6UDRJSG15Nk5CSWw4UTlPQUpfUzNUbVhtUHRBV0ZONGNacG1kSDVEdy12SEZHdk5mVUJmRnNnTGNJcDg0YmlVSy1xVEs0eEJpb1cyYw?oc=5"
+    },
+    {
+     "fecha": "2026-07-01",
+     "titulo": "Ismael Burgueño, “soldado” de la 4T en Baja California",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/07/01/ismael-burgueno-soldado-de-la-4t-en-baja-california/"
+    },
+    {
+     "fecha": "2026-07-02",
+     "titulo": "Ismael Burgueño: “Tocando puertas logramos en BC consolidar Morena”",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/07/02/ismael-burgueno-tocando-puertas-logramos-en-bc-consolidar-morena/"
+    },
+    {
+     "fecha": "2026-07-02",
+     "titulo": "Desde Playas de Rosarito, Ismael Burgueño llama a defender la soberanía nacional",
+     "medio": "Uniradio Informa",
+     "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQTkg0UU5HY0hZV04tbDNsenNJRWFRTnpiUVZfLTBFZ0Ntblpwa0RBc054V0tsNWpHajZ5RjY2cU41ZFlBeWp4bUFjU2c0aDVWZXFoYm92LVZyampJZnpORm5BdU8xZXBnclVsMGVFQTI3NlloUWhKZmhzRnJwT0dUWkw2cnIzSkp1R0dWenJ1RHFwakJOUkVkZkhpMjJBR1U1M0tTZG0yeGJFR3U4eHZiWG1OcGltVFBIQzhiY9IBwgFBVV95cUxNU1pzM1hfUGtreDFIWFJ6b2ZIYkhWU3JoNmhuQmZKVnZybWtoTTM2emVRMEtzdGNSVlVlUzl2TGNnS01lLVA0VUVPQUF2YWFySDVsd0pzcUZSY0FlZEh6cnJNOGdNeVVHaGdsOTZBdElySkJMd2xkUDN5enA3b0pMY203Rk12VVVtV1pkaUp0Mi1rVDBUOGM0d3BpdF9MR21vSEhNZ0lPWmFZRXJuUGpkZGV1b2dUbkh6VEhrSkdfalZOQQ?oc=5"
+    },
+    {
+     "fecha": "2026-07-02",
+     "titulo": "Ismael Burgueño realiza asamblea informativa con militantes de Morena en Rosarito",
+     "medio": "infobaja.info",
+     "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQZE13NTBxTFgtUWFJVGU1amZ4QklUeWpvUFljamMxS0Z3SVJTdFdkcEFWdVlURHdQbXFHU2diUW9ob0JuSWpobjFBcGRoYjh2SGdDNDlLa3Frel9sLU40eDdqalFXcXdfcERkVDdOMVgyT2Z6MkRYS2h6Ym5TaDVmUUhVcHZRVjZmbWxYSGFtTUFfNVlsbTRHS2hoTlhkXzAxRzVMVXhIam52cWho?oc=5"
+    },
+    {
+     "fecha": "2026-07-02",
+     "titulo": "Ismael Burgueño continúa recorrido por Baja California y encabeza asamblea informativa en Rosarito",
+     "medio": "El Mexicano",
+     "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxNUzkta2d6bmxjTThyRjFqNUhDMFo0cXNpaWx2bXZ0RTVEZjJ6SFhkQ2lzdVhBUVE5ZUsxbVdHU2VIRnF4aTdTOFk3NFloQ1daOVVqd3FyREdQNFlxYU1hQjhQQmhhb1NrZkpIdi02enJnbF9fOF9hQ2tQaTc4OEt3NnVzSzFYTm9CUWF3QnV6R3JyOXpza25HVXhBdnhKRmhkUUE3NzZLZW9uUEh0RVpfbnBBUjFRTU15bTM0eUVMRm4wZ1JLZ3owX2hhTE1oLVQ5ZzVjTVU0VnRBMWkxT2dVWFBZbXBCU0k4bkstU0ZB?oc=5"
+    },
+    {
+     "fecha": "2026-07-02",
+     "titulo": "Ismael Burgueño inicia gira en Rosarito con llamado a fortalecer la defensa de la soberanía nacional",
+     "medio": "bajanews.mx",
+     "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNM3RURlhzWHUxSnVJSlFqOXEzcHZlWFF2MGExZFNQX2xmTTFRTTktMW4zZ1pCcHBaR2RIc1lrQXJRNVZhM0NUSWFFcmtqLURHNm5oTDIyQkd4ME1LWGxyTF9YTjZrU3NPbXExbkZDOUk0b1RhVEpoVm1tdG1ZMmdtaUhBMUE2bl9ZNDhjdS1weFFqU2ZrQ3h4YWt2R1lZNjZfMVFuSnpSYlh3NmRlYXRsX19KZ1R6Z20ydTRsbEtuQV9tdkR0Y1ZVX1ZVejQ2bU5EWGc?oc=5"
+    },
+    {
+     "fecha": "2026-07-03",
+     "titulo": "Burgueño llama desde Rosarito a defender la soberanía nacional",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/07/02/burgueno-llama-desde-rosarito-a-defender-la-soberania-nacional/"
+    },
+    {
+     "fecha": "2026-07-04",
+     "titulo": "Defender a la Cuarta Transformación es un responsabilidad con nuestro país: Ismael Burgueño",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/07/03/defender-a-la-cuarta-transformacion-es-un-responsabilidad-con-nuestro-pais-ismael-burgueno/"
+    },
+    {
+     "fecha": "2026-07-05",
+     "titulo": "Con argumentos, es como debe defenderse la soberanía nacional, asegura Ismael Burgueño",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/07/04/con-argumentos-es-como-debe-defenderse-la-soberania-nacional-asegura-ismael-burgueno/"
+    },
+    {
+     "fecha": "2026-07-05",
+     "titulo": "Ismael Burgueño es acompañado por la militancia de Morena en Mexicali durante su gira de trabajo",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQS2FoRWdEdUYySjJZcXN0OEZlVXhraFZxMW95cG5CS1IwNWhLWHJLZktqbHJ3UDlsNE9FbGlhalZsczk4cE9BOWQ4UXgxRDZxRllkRzFGYmpnUzBWZ1dTQlNWSVpXVUE5YVRYajhxSGctcDFrdTFHTk9faGJUcF9vREpHUHg5Z0dTMUFfbzVHNDJkdXkwWDRfa25YS2thbWRQa0NweGNHTW5jd0R2YVFWMFFZZ0xKeEwzcnkteVY2QXJUUHlyZVJxdUt1b2FlUQ?oc=5"
+    },
+    {
+     "fecha": "2026-07-07",
+     "titulo": "Asambleas informativas fortalecen a Morena: Ismael Burgueño",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/07/07/asambleas-informativas-fortalecen-a-morena-ismael-burgueno/"
+    },
+    {
+     "fecha": "2026-07-09",
+     "titulo": "Ismael Burgueño destaca avances de Morena en seguridad ante empresarios de Tijuana",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQQ2xwQzM4dmxpNnYxU1h0cmNoejllNWxvYmZLcC1fVzFyajNvdURKYUZuTU1yeVBDTUNDZ1dOWnhwaERGZ205d0s3SWp0NGN3WFNmQ25mTnJ3M0JnVnpPemZoeGpHQkdpOU1UNV95QzFWVFktZW8yMmh0amt3SlBnanJMZTFVZGpqb0VoakV2bzYwS25neXNSb0EzUy11WDdpNjNYQ2FUaE81aGFCTmZtQ2k1VDBURWp2WmNYeFhMVTFKQkxPQ0ZlV0d4MFhWTE1xNFdCRUpUdDRTQQ?oc=5"
+    },
+    {
+     "fecha": "2026-07-10",
+     "titulo": "Gobiernos de Morena, generadores de bienestar social: Ismael Burgueño",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/07/09/gobiernos-de-morena-generadores-de-bienestar-social-ismael-burgueno/"
+    },
+    {
+     "fecha": "2026-07-12",
+     "titulo": "Ismael Burgueño recorre colonias de Mexicali: ciudadanos apoyan defensa de la soberanía del país",
+     "medio": "Yahoo",
+     "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPQ1BET2h2bllXQjBhVUhyVkNVNTRQUlBwWFpTbGNneEtlWTJHU04wQjQ1QzRKZTVBWlN0bmYwLTJUMXl4RFVYMGIyMVRMaC1xTkZQdWlCS2dvN1ZrWFlmYnpXTnF5VDdVNmFkRUZjeHBXUDk4Q0tBclpCME9HNFZTUTIxRzdPbTYyazJjM3k5b3VQQ0ZsQ3FObEV3?oc=5"
+    },
+    {
+     "fecha": "2026-07-17",
+     "titulo": "Burgueño toma ventaja en Morena rumbo a la gubernatura de Baja California",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/07/16/burgueno-toma-ventaja-en-morena-rumbo-a-la-gubernatura-de-baja-california/"
+    },
+    {
+     "fecha": "2026-07-17",
+     "titulo": "Burgueño lleva asambleas informativas a colonias de Rosarito",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/07/17/burgueno-lleva-asambleas-informativas-a-colonias-de-rosarito/"
+    },
+    {
+     "fecha": "2026-07-17",
+     "titulo": "Ismael Burgueño lidera rumbo al 2027 en Baja California",
+     "medio": "Mundo Ejecutivo",
+     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOYmZVdG5jZmNUZFNCazcwMmI5YWdsVF9nejU1T183c21yQ0gyU1ZkTGxzWjdkWUlzTzZ6Nl9Fb2c4MEFsd0s5NGVRTWJhcHo0U3h6aTFhMEU3LThKcmI0ZkJvcUZhYTJUVlJ6MjR6MDYxWm1heFZxSi04MnpubUZ4bjlZZGdva1FzZ2JCcWlHZnN4aGhEczZla3BhdlFFbTNIbFdr?oc=5"
+    },
+    {
+     "fecha": "2026-07-19",
+     "titulo": "Ismael Burgueño fortalece en San Quintín la organización territorial de la Cuarta Transformación",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/07/19/ismael-burgueno-fortalece-en-san-quintin-la-organizacion-territorial-de-la-cuarta-transformacion/"
+    },
+    {
+     "fecha": "2026-07-22",
+     "titulo": "Ismael Burgueño encabeza preferencias para gubernatura de Baja California",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/07/22/ismael-burgueno-encabeza-preferencias-para-gubernatura-de-baja-california/"
+    },
+    {
+     "fecha": "2026-07-22",
+     "titulo": "Ismael Burgueño lidera preferencias en Morena por Baja California: encuesta",
+     "medio": "Grupo Animal",
+     "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOb18wLUFybVNVUEtOUVZJSlZhNWhfM0VQem5pVlI0Vkl5d09xUHFUSldDZGJSRUFDTlBlc3lJc0lOMVgtQlZFb3VxbzcteFozYjBCa2tTQ2ZyWTN3aWV0MnJHeHdJVDZzQWN0YlJBeG5xS1ZZSVM4cWVXUHJzS09uTXp4ZjJvb1I1Unc?oc=5"
+    },
+    {
+     "fecha": "2026-07-22",
+     "titulo": "Ismael Burgueño encabeza preferencias en proceso interno de Morena rumbo a Baja California",
+     "medio": "tijuanaenlinea.com",
+     "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQdWwzUU51N2VBV1pLc2pEQl9vMWVQbXM3SnNhNjVKMWNxRGk3S0llWmhzT2NhckVWbmxIcW9tLWhfTk1pdWU1NDJ2VUx2d2oxVHlxWTk0Y1JmNmpvTVJrWk1fRlYwUWdGS2ZvTmJuNkZ4bk9BX3dGNWZPblFNSnRRVU11MGVzdXNUbmxQeDY0STdYVUxBWFo5VHVvR3ZhV2FKVUozWTJLenhMcmw0c3lEU0ZSTmJVZkdGRHFtZ1dhQWpYQjRyamVobU1FWnRCeTlaOUZsMkpsQnRnQQ?oc=5"
+    },
+    {
+     "fecha": "2026-07-22",
+     "titulo": "Burgueño se consolida como puntero de Morena rumbo a la gubernatura",
+     "medio": "La Política Online",
+     "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOS2N6d1B1SVJwWXVWT3FtS3AzNTVMUDNfSXEtMXhzd1VGOHNTOExqZVF5enpXZDhWdEY4ZVk3eUNSV1VaaDRFOEVLSUpsaW5SOU9RM3lQc2RGLTNtZ1h4UWJCZEo2d2VNbW00dGhhcjNjMk5wYXFwc0dsTXJMclFPVWR2UXExZVR3M1FOTzQzY2NxTUlEYVgtVS1KdHl1STFadFdNWDY4NDZ1cUVhOElidUphdHF3NXZuNDFXR2NScE93anhx0gGyAUFVX3lxTFAtaW9Kb3RDZGhtY0J2YVBSVE5uSVkzWnFmdzFyQThlM1Bxa1Z2RXFwamdpSXlpLUVONGltbTNsZFkyY1EyUjM2d21Fbm0tNTYwbldMTHBYOEd0N2lFRUZUUmQ1OVNlTHNXWThoRFhYY1pBZHV5TzA4QnlNV1lkelIzYkFwMGE1bEFRU0VTNTZEazRmT1lzTDFwenRQYWVIQUxEb0dsQklvSE0wTmtITTFKc3c?oc=5"
+    },
+    {
+     "fecha": "2026-07-22",
+     "titulo": "Lidera Ismael Burgueño encuesta de Enkoll en BC",
+     "medio": "La Crónica de Hoy",
+     "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQSTcyMWtMWUNyQjJ1V0FKTmpTX2J4WTNZd2NHUEExMFJDR1hURE9OSFJsR0FaZVJRWFdIRmxvOFV3S3B2bXd2WkhnbEVIbEhfak5JcUFWRzluX3dHcmd3WWI3b0w1UzRCbm9YRDBEOTA5cDJ6T1F2eDBVbl9TajV3eVREUkRWc3FLaWY2aWx1d21wQlJpT0FfeUR3?oc=5"
+    },
+    {
+     "fecha": "2026-07-22",
+     "titulo": "Ismael Burgueño lidera encuesta de Morena rumbo a 2027",
+     "medio": "bajanews.mx",
+     "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPckZYUUJGbXZNWGFlU3dJclYwcklmd1ZxdHRIX08xbjl1Zkt5NDU2NDRTM2xIczRiQWd3Y2F1SnAwSnJ2T1ROQW9EeUM1cnRxVDE5a3F2emRsTXpfR2NyRVMtU1dEaGZDdEFNYzIxR0dlX2tUdE83ODZ4VGxJdHk1d0FRNzkzQkxOcGNwVVZlTXZaSlZj?oc=5"
+    },
+    {
+     "fecha": "2026-07-22",
+     "titulo": "Ismael Burgueño lidera preferencias de Morena rumbo a la gubernatura de Baja California: Encuesta de El Universal",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxOR3haUU1uOV9BX2FyOTREaFZvTjdrNjA2X241SDdRTXRTZV91NWVHZlNmTkZRd2lnMEwtWmpQeFRsalBOeHZJWVEyY2s2aWc4V2VfQmEyV1UwQ0FpaTVXQWZKcHRfMVJ1QUtpcnNnYjVkRnVjQXdwOGlmd2JwNkRtZWNXNmRycHdkOHk2UExCVnBtVTlpNEx5SjJYdlZiUzllMjhVWmRMak4waVA4VWhZOWN3YkdzQy1wa0kzc0FwV0NXdTB0aWpQOFpxM3ZSUmwzcmtUT09JRDNpc24xVW0wRTNZd1JCMUZtbG5QMHBXRVlRYmZwNlhn?oc=5"
+    },
+    {
+     "fecha": "2026-07-22",
+     "titulo": "Ismael Burgueño avanza en Morena entre diversas voces de la ciudad",
+     "medio": "Maya Comunicación",
+     "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNankyQ0Z3aVNmeU5ZMzlud09Eejc0Z3VCQXRfRFpIdjA4ajBOQlFMVUdjX1V1Rk9UUU5wZ0phSzEyTG9aV2hzX3NXVTRkaGpQSXgwOFM5bl8xaHBEeFFNdk5pU1hoazVCLVlveVpsNDFFZ2RVRGRFMURJR05vTl9RMFVkXzB5eVVQWHcxQVBYR2lhZUtIM3dUblVKTzE2blQw?oc=5"
+    },
+    {
+     "fecha": "2026-07-23",
+     "titulo": "Ismael Burgueño lleva su campaña interna a colonias de Mexicali",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/07/23/ismael-burgueno-lleva-su-campana-interna-a-colonias-de-mexicali/"
+    },
+    {
+     "fecha": "2026-07-23",
+     "titulo": "Ismael Burgueño, con paso firme rumbo al 2027",
+     "medio": "IMPACTO - El Diario",
+     "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQNkxEazEwLWpFS1JDdHRzQ0U2YWlYdElJQ2szSVZxdHhQbkZwZVQ5S1QwaFpZT2ZfeUVVYktDY2xCOFdPNldZT081SENBSEpGSS1BSmZQMXM0YjdXbHBaNFU5aER5VDlaNUZWTzRraEQxNHRpdG1BckRVU3FuN1BCZW9SakF6THlrUkE?oc=5"
+    },
+    {
+     "fecha": "2026-07-27",
+     "titulo": "Burgueño obtiene la calificación perfecta en la encuesta de Enkoll rumbo a la candidatura de Morena en Baja California",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/07/27/burgueno-obtiene-la-calificacion-perfecta-en-la-encuesta-de-enkoll-rumbo-a-la-candidatura-de-morena-en-baja-california/"
+    },
+    {
+     "fecha": "2026-07-28",
+     "titulo": "Burgueño lleva a sus asambleas el debate por el uso excesivo de celulares entre menores",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/07/28/burgueno-lleva-a-sus-asambleas-el-debate-por-el-uso-excesivo-de-celulares-entre-menores/"
+    },
+    {
+     "fecha": "2026-07-29",
+     "titulo": "Ismael Burgueño encabeza preferencias de Morena rumbo a la gubernatura de BC; aventaja a Julieta Ramírez",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/07/29/ismael-burgueno-encabeza-preferencias-de-morena-rumbo-a-la-gubernatura-de-bc-aventaja-a-julieta-ramirez/"
+    },
+    {
+     "fecha": "2026-07-29",
+     "titulo": "Es Ismael Burgueño el aspirante con más probabilidades de ganar el proceso interno de Morena en BC, según Chatgpt",
+     "medio": "El Imparcial",
+     "url": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxPRWdVbzZBNEpwWjdaUUxGSmk3Nk0zcDA2OEdCOG02ZUVMVWw2d2NYdVQ2RExpd2NqYUpwZUhFNy1zelpUWU91OGpxeGU5Zk9ubUtBVWRiUHcwV3N0WlBQLW5EelFad1poeUdJZmVDYmVNS0FCQ2JSbVY1blBpQ3dmN21qZjNzdnNUQzE4dk9RM0VUMVpXbC1kc2tYaGt6MVVIcGx3NHkxOVprTTVKRW9BaURHb2JjV1dDa3JCenk3Q0hwbUhQc0daeXR4WlM3aWlUbFFjOElXMW96T09OZnozbEdtcWpxVmI2LUxGcTUwSVM0NUhZY3JYZdIBkwJBVV95cUxNOF9hRldyY2tzdG1VNngtR2RpLWdfUHFTVU9UUjVQX3FENjlyYm1YRnBHMUh4VVpFWkZrYXlMMUtTdThTSlFkWnUwdVR1c0QyZ19CcU51dkNJUmhUeTk0X3ljU290bHhTUEJJb0F4MF9felVxTHE5X0p4WEdMRkV5SjN0cTVFMlgtbEVhbzJjdVdHazY2dDBUNHVzSklqMEljSUVIRDA4NVNPei0zdmdIVHJXR0IyTVM1MTBJRWxHdmZ5SFY5MkJyNG9KODZDakpqSG1LN3l0YTVWMzlBTV92d2FKSzlNLWcyc01kQk5kd0ZPWEVxZkF1Rk1xa1BxcEVGRDFPRkFhMmxUNjFMa2loRFJXcw?oc=5"
+    },
+    {
+     "fecha": "2026-07-30",
+     "titulo": "Ismael Burgueño aventaja en proceso interno de Morena",
+     "medio": "El Universal",
+     "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNcXBZTmZGMEFKWE1zLTlzT3AwVENlNjZVM29xekF2RnNyQkhyS1ZEMVZ6V3QtNUNLQWthQXR6Um12dUVIUF9ya1pRRnN5aEcyaElWN1RvaGVLWFFjclNuLXZjT0p3OXNPZUE3dXFRT2pqbHRMWjEtT3lTdk56WDNaX0FHbUw5MndseU5vR3pVdUlQTW9EbE9fU9IBrAFBVV95cUxPSElteVZ1dXRPUy1wLU0wMWNEVEM5Y2syTzlnaGJ5SldjSXVBci1CUExPZ01TTW5RSFNnZGR6YVhSTGdGY1lUWk92UHpPZG85QlFUcTJYODBxMXByYXdaWE1lNmpWMmpNakhDbVNuSTBYQmlDLW1oaFcwOTJJX0t4WHp3Wk9KRm1MRXFxcXk3amhpNFNBVVk4VFdzN2Z3SXlKUnE0a0Z3cW5ocUJj?oc=5"
+    },
+    {
+     "fecha": "2026-07-31",
+     "titulo": "Sondeo de SRC coloca a Ismael Burgueño al frente de las preferencias de Morena rumbo a 2027",
+     "medio": "bajanews.mx",
+     "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPM0o2cy1za1ZUbURxRlI0WlRSOHVUWGRvaVFWQURBSDkybEI2Wnphd3Z1dzFRY2lIbXM1Tk5kRVRtNlVLZFlldloxY0ZrT1Z2NGxPaGRueFhTdk9CcURrY2RhQ1V5NXBLVEhnY0tCOEloRmFzUm5QOWZ2WmtoSkgxYVhnRi1TdUdoY2RmUmYxVC1HYjVhZkgtVFhTZS1kZDd2QTFHdGtpa0dVa3pIRTlRa3pEbWYzY3Z3NXBVazJMYjV6TkNFVHc?oc=5"
+    },
+    {
+     "fecha": "2026-07-31",
+     "titulo": "Encuesta coloca a Burgueño en primer lugar para la candidatura de Morena a gobernador",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPdVBLV3hONlN3bjJrM3B2SzRDakpxa2hlOEdnYzhzVnJpcXJNclVnVlpVaGN1Yk00OFNPVDFoNkNQZURZVHBqYl83cElvcWFKa1pubHktYk1CX3dLcTJFYkd0S3JYeVlldG1MM0Q4YUYwVmtHYkZEZ01OQ3ZUb3dvbmR3bERVZGg5R2pQZHdsa0xYYzlJQ19QdmFRazhKWl9ITXNMUFlOZTMxdGZsYkVOVVhWSmVPSVR1aXBwNmh3?oc=5"
+    },
+    {
+     "fecha": "2026-08-01",
+     "titulo": "Ismael Burgueño Ruiz se consolida como el favorito para ser el candidato de MORENA a la Gubernatura de Baja California en 2027",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/07/31/ismael-burgueno-ruiz-se-consolida-como-el-favorito-para-ser-el-candidato-de-morena-a-la-gubernatura-de-baja-california-en-2027/"
+    },
+    {
+     "fecha": "2026-08-01",
+     "titulo": "Otra encuesta, Burgueño ganaría gubernatura de Baja California",
+     "medio": "Periodismo Negro",
+     "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQc1lVaFpaY3hMMzFOLTZmRXByVXhkR0JjM05hTEZiVUpOck00S3N0T1VSRDNvRXRRcnlRUGluNGV2M0V1YmxUR084RW4zRE5xNDU0VUxSb1RydUNaZ1pkSzRHZjFPWEFPdHF4c1hCdlZVcHB3UzRDMkNiR2xwZE1DdnppcnNlUDhnRzR1Q1V2SFNpR19KNWlxTjVnejVmd01lYWdxTmRzbw?oc=5"
+    },
+    {
+     "fecha": "2026-08-04",
+     "titulo": "Ismael Burgueño, el delfín de Marina del Pilar, bajo la lupa por contratos, patrimonio y promoción rumbo a 2027",
+     "medio": "Proceso",
+     "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxQTFI4bkRVRWlWaXI0TEc0dTBJVDVleGEteEVEV0JBTHdiQTNoeTljUGFCZEpHQUtEaVlWMXNvSF9QbExXOXRIMXJrRUFqbXpST2ZBalVwMjBiODh5cWtIcEt1b1pQOUhEV0J5anNud3NmV3ZOQXVUa011YmQ2Vk5HYldjd25sU0RMNnRZdm1vYmFSWlVBbVJsWkRESXNSZkJWd1FjMlZkeVZzeUc2c0VBZF9aZUpFWl8tVlA0ZFBlbDg2Z1lQTmZyN0dLNmZ0MFlfRmNGQUpnV0pPOEdyeHRtaWpDZXNQSE5oVVBSbFFB?oc=5"
+    },
+    {
+     "fecha": "2026-08-05",
+     "titulo": "Ruiz Uribe tiene empate técnico con Ismael Burgueño y lo supera en imagen positiva en encuesta de La Crónica",
+     "medio": "pregonerobaja.com.mx",
+     "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQTDBuZ3hMMjdmM2Z2YVd5a2JRMWtPaVp6ZUo2dUdhNEpYalRTOEJMVXVwS3ZmNFNGNjZBNEt2SGF2OXhxdXZ2Wk1iLUJKejNJdlBjM0JULXd5Z0x6bTgycFUybjVtU1pkQkY3YldwdnQ3cFljbHF5czdjZnRHUFhGb19WelBNUlc1ekdTZ0VTbDQwMW81OUpPNUswSmhZRmpoUHJvQ2lVT0ZWcWI3YTVjc0VWZ2ZSN3ZVMU1jRGJSMFUySjNuM1M3TDAwX3p6bk9aUUd2VUhCX3lGd0RrbkVlSTBIMA?oc=5"
+    },
+    {
+     "fecha": "2026-08-06",
+     "titulo": "Ismael Burgueño se consolida como favorito de Morena; es el perfil fundador que lidera varias las mediciones",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/06/ismael-burgueno-se-consolida-como-favorito-de-morena-es-el-perfil-fundador-que-lidera-varias-las-mediciones/"
+    },
+    {
+     "fecha": "2026-08-06",
+     "titulo": "Ismael Burgueño niega pertenecer a corrientes internas y pide unidad en Morena",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPeVZxWWF0c0pqazNoZ25Qd1FRM19qRU9NNVAxdVBFWVM3U01zR0FXNUdBY3duS1U4RFNLQ0hZWnZPOFowYkRIUXVodkpvZGRLU3ExbE5WbnlpMlU4aVRVM25OUEU3OTk4cjVkTDM1OU9TcE5VOEQwRmJxekRhWkNNOFJxM09GalRmU3FXN1ktLVRPOHQwUW9pYlctV1RPa1hGRzVLcHZjUl9JeUp2ajlTSjRwWjhfZw?oc=5"
+    },
+    {
+     "fecha": "2026-08-06",
+     "titulo": "Ismael Burgueño lidera encuesta de Morena rumbo a la gubernatura de Baja California",
+     "medio": "bajanews.mx",
+     "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPRThVRFB0U2hWYkxKNUdLV2V3Nnl0bG9qbVE1UGFxaG1IaWhMOHlsQTcxUFZwRFJGOFA0bGMxQnY1YV9fNHF0STFfcHhvTGNELS1seG85QWhTVDg5RXVQekYzelpoajFCdWJ1Vk5FYXIxajlxWWpVYkVFelZ1UVBMWlV2Tnc1b1ZjRzFSb2NrdUxoTEdpZEwyZHQtbkxIMEFJVVRzTUhRU0w4c3BmSWZnbXByLXhyTlFGZ01F?oc=5"
+    },
+    {
+     "fecha": "2026-08-06",
+     "titulo": "Ismael Burgueño lidera carrera de Morena por Baja California en 2027",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNMWwydHVfSDhnN0dCaENiUmtrZWUwQVloWWR0VkpoUkpQMWtmNTc0OUVZbjluYjRQN1VDRjlTUkFBWEk1TjdlN0R0a2ktRGdRTHRfa2xraGlER2szdmdVMlc5NHNfNUxDZ3ZUZk5iSnNnS3Q3aU0ybjIzdXY2SWkwNDdiSkF4V1draVFuYUVDR2V3cGF0SjdaamJyRGxTeU5ibDZzVXlkMVQ?oc=5"
+    },
+    {
+     "fecha": "2026-08-07",
+     "titulo": "Ismael Burgueño suma el respaldo del sector productivo de San Felipe rumbo al proceso interno de Morena",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/08/06/ismael-burgueno-suma-el-respaldo-del-sector-productivo-de-san-felipe-rumbo-al-proceso-interno-de-morena/"
+    },
+    {
+     "fecha": "2026-08-07",
+     "titulo": "Miembros fundadores de Morena expresan su respaldo a Ismael Burgueño",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNMllnendNbEdaZ19NVFotZE15MnBYdTRBZ1NjRnVLQlQxYWRsSFVlajNVRkJGWVRpVHhBbDl2YnJMRDAyX1dSZ3lSMG5ZdDRVODJEUmVMZjEwX1lXV005TUg0aEhGWVFmVms4MkJBcE9Ka3NVamRUbklfb2MzaWlDaE5ER0xSWjE4clIyb2NfZjlvMmJIV3hmSE9CNmdGRXM1M3B4bVJxNFg?oc=5"
+    },
+    {
+     "fecha": "2026-08-08",
+     "titulo": "Ismael Burgueño encabeza primer Asamblea masiva en defen...",
+     "medio": "El Mexicano",
+     "url": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxNWVF6T2prbFNPXzdzcmdrSzg0MHVPN0NjelJ3b1g4NXh1eTlILWJhNDlOaThjcm5hbm5RbkZoMHZHWWtDYlpndW9SNGFabC1CNDhTVmdSbERzMzhWYnU0dVRIRkNueEdmWVNUcXJOOFlQUmZYN3lGVEo1NFVTZ1gzUnplOUJJVE9nZm95MlNRb0pzZG9vYzhrLVAzakR4MExwLTdYUWdfbDlaOU9RczJ0TUdHX3lONkt4bVhhZ3A4ZHBCREVwUVpwZ2hMS1ZyVGllbF9ydENGU0dndm1PbEhCUzlocEktTkJ3azl6X1FMZTJsdV96NkRFWFEzVTh6QQ?oc=5"
+    },
+    {
+     "fecha": "2026-08-08",
+     "titulo": "Si Morena decide ir en coalición en Baja California, “vamos en colación”: Ismael Burgueño",
+     "medio": "El Universal",
+     "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxQdThSUUpNanZOT0ltSldPQlJIaDhrNkVuV0NqSG90eVpfRGRxX2dYSXA3MUFCc25IYmttdHBDdFA4U0tKRlY0NXM5eDlTaDFGSy1VaXZ4REVsdjBCV1JaYmtLaS1pdnVxWHdCOWk2NDJWOTJpbDFob3IybkFBYTZ3WmFUM3B3WktsR2U1Zi1vc0lSZVZtZEw2R1BKc2RBQ055MW04VnhTRE9WeUNNV2dIM0h5U3N0WkJ3b0VyWW5xNm1tai1NbUU1eXNDMmhGc1RfOHhoNEhJQlFlMTV2MG9VTnpja0lFSDl3YTZnYkd2SVRKMEQ5ZG5n0gGLAkFVX3lxTE1DcXhPLURZRmpYRVVQT19jOXZXbnB6ZnN3MW1mYUR4bTEtVmw0QnU0dmZTOHlwZVMtbU1Cb1RlbzRDaHJpUDZ3Q19VdlpvcHRMTldEY0ZSQXdLZVNGcEJHbl9jRjg1NnM3S08tRWlGa1Z1Vmh4RTBLNFdNeGVOdVh2V0RoS0tKMjgtNTVoa2x5UnNma2NNclQxck5tbE4teEg3ZHVVQlJwdzFJX3RobmxlM1hyUkJ0WWxaTDYydGpCZWl4aXVIOTdEaHpLTERYanNpek1KMU9JOTdPVWJxSWlRaVh1MFA4TmJreHFMZThYUXd2Z3NvWG5GOHhNZFpNX2JCY3RRRzk2eUlacw?oc=5"
+    },
+    {
+     "fecha": "2026-08-08",
+     "titulo": "Encabeza Burgueño asamblea masiva en Tijuana",
+     "medio": "NDT Noticias de Tijuana",
+     "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE41c3o0N3VMck9uZ2pOS3M3azlYd0lEbVFfa2ZGTkVscjdFVzh4dnp5cEhiNHJyZjBjVjlOYk1LYzhSWGlyTGxENXU2RnlJci0yN0VnVlNUT2JGVjdObXIyR1V1VzN5b1gwNDVpTDl4TUpydU9STTNIWDRhMlNjZw?oc=5"
+    },
+    {
+     "fecha": "2026-08-08",
+     "titulo": "Burgueño encabeza Asamblea de Morena en Tijuana con 5 mil asistentes",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNMWlLMS0xWkItaDFDLUFta0J5eTBsNzc3cnZSMDloWUpTSUdHSlZ6MG9sRWFNUHgtdERwYmlfMlYzMjU5TERSb3doVkVaM0s1OVdYbGV4blFyajdsczZfWVhMc2F1Z2huTUExTkRFTmE5eS1hdHI1cGdOaFBmZHd5LUpPd1RkV0NGZXM5OHBhWEJBSElrbGRCT3NweWNfVDFhdXFwVXRzRQ?oc=5"
+    },
+    {
+     "fecha": "2026-08-09",
+     "titulo": "Ismael Burgueño encabeza primer Asamblea masiva en defensa de la Transformación y la soberanía en Tijuana",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/08/ismael-burgueno-encabeza-primer-asamblea-masiva-en-defensa-de-la-transformacion-y-la-soberania-en-tijuana/"
+    },
+    {
+     "fecha": "2026-08-09",
+     "titulo": "Burgueño reúne a más de 5 mil personas en asamblea en Tijuana",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/08/08/burgueno-reune-a-mas-de-5-mil-personas-en-asamblea-en-tijuana/"
+    },
+    {
+     "fecha": "2026-08-10",
+     "titulo": "Ismael Burgueño descarta encuestas externas y llama a respetar tiempos de Morena",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/10/ismael-burgueno-descarta-encuestas-externas-y-llama-a-respetar-tiempos-de-morena/"
+    },
+    {
+     "fecha": "2026-08-10",
+     "titulo": "Ismael Burgueño acerca a vecinos de Ensenada los avances de la 4T y refuerza respaldo al proyecto nacional",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/10/ismael-burgueno-acerca-a-vecinos-de-ensenada-los-avances-de-la-4t-y-refuerza-respaldo-al-proyecto-nacional/"
+    },
+    {
+     "fecha": "2026-08-10",
+     "titulo": "Burgueño llama a hacer equipo y cerrar filas en Morena",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/08/09/burgueno-llama-a-hacer-equipo-y-cerrar-filas-en-morena/"
+    },
+    {
+     "fecha": "2026-08-11",
+     "titulo": "Ismael Burgueño vista a Don Javii y Doña Alicia, fundadores de MORENA en Ensenada",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/11/ismael-burgueno-vista-a-don-javii-y-dona-alicia-fundadores-de-morena-en-ensenada/"
+    },
+    {
+     "fecha": "2026-08-12",
+     "titulo": "Ismael Burgueño llama a mantener los principios fundacionales de Morena en Baja California",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNUjhRYjZ0bDZjaV9VQjlic2VUdExJdFhERkFTUEJNWHhrSzgya1VxTGJNQWdQOEFFOWZLbFN0ZTVteG84aUpqbjVWNHhZaTZIa0M1VkhtNnpJYmRGS2I0REhuQmZLZEV2SDJ0S1kwd1hjX0dhUDZqV0xHek1lbVdkaC1DQlhvVENvLVh5aWJIajBPaVVKZ3FsR0N2X2dCX0hBdEh1UTVVSXlPUDBVLUc2SC1vMjZZaFpfWTdfeXNUU3MyMTRXREE?oc=5"
+    },
+    {
+     "fecha": "2026-08-12",
+     "titulo": "Burgueño dialoga con fundadores de Morena sobre los orígenes del movimiento",
+     "medio": "La Política Online",
+     "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNYXNjbVlUT1ZCMjIyZ28xSV9ISXJiNm03Q0VuQlRvNkhuZ1FWZ3RZMnJmanEwYndFLWo5NG4xdExPcU1hNklSdGZDalIwS29jTnRURUxCWUFEWWlnNk8yWHF4LUlMbGZ2aHZpY1FiT25qVTVQNDVBblVhcDBieWltUTdDeV9McEktMVN1UFdHS3EyTXJIUmtyQTNJNzAtb2JCanlNX1ZEN1k2ejdLakQ3bldzak93aXZQb01VSU1rOGdQVFhid3VQd3FNbmNwcDJINlRMLWNB0gG8AUFVX3lxTFBrbDZrOWRNeWZqRUFfM1p6N0dqcmR2VG5DaVlxTlRtY2hGVmwxREhsdDY5YTRFMHA0bWx2VFJONVpZWFhuQnpHZGJfbVVMd3hIb2lPdUJ0Yl9Da0ZZaDR0Q1hJTHl2M3dFZ040NkE3d3FQbmJVc2JNX1BKNHkwVjlzNGdMZXlzWjFfZDRqUy1sVXJqNTdlRS1DOHBiVGo3clNjQzczU2NWSDhfdkk1NUhEQXBrVmdGRE9XRThk?oc=5"
+    },
+    {
+     "fecha": "2026-08-13",
+     "titulo": "Ismael Burgueño plantea mantener en Baja California los principios fundacionales de Morena en favor de quienes por años fueron olvidados",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/13/ismael-burgueno-plantea-mantener-en-baja-california-los-principios-fundacionales-de-morena-en-favor-de-quienes-por-anos-fueron-olvidados/"
+    },
+    {
+     "fecha": "2026-08-13",
+     "titulo": "Burgueño llama a Morena a no alejarse de sus bases en BC",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/08/12/burgueno-llama-a-morena-a-no-alejarse-de-sus-bases-en-bc/"
+    },
+    {
+     "fecha": "2026-08-14",
+     "titulo": "Desde el centro de Mexicali, Burgueño reúne a militancia para fortalecer la defensa de la Transformación",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/14/desde-el-centro-de-mexicali-burgueno-reune-a-militancia-para-fortalecer-la-defensa-de-la-transformacion/"
+    },
+    {
+     "fecha": "2026-08-14",
+     "titulo": "Burgueño encabeza dos encuestas rumbo a la gubernatura de Baja California",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/08/14/burgueno-encabeza-dos-encuestas-rumbo-a-la-gubernatura-de-baja-california/"
+    },
+    {
+     "fecha": "2026-08-14",
+     "titulo": "Burgueño reúne a morenistas en Mexicali rumbo a la coordinación estatal",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/08/14/burgueno-reune-a-morenistas-en-mexicali-rumbo-a-la-coordinacion-estatal/"
+    },
+    {
+     "fecha": "2026-08-14",
+     "titulo": "Burgueño destaca organización y unidad de Morena durante encuentro en Mexicali",
+     "medio": "La Política Online",
+     "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPUUc1cFZSRF82b1MzanlkZDM5ZlJmdURoenhLb0ViZ19ybnV6XzJwWHVlTG1SbjR6QVBVeVVpc0pLVHBrYUJCMjJjb0Eza3VXNjMtUmJqZXlmdTRtVHBOalo3THNhVmZhNThsV0dsM0Z4X2ZObDQtRDNJTzdiU0xkYXEzTW5Ucm5WX1d4OFVubGVScFJxdmJDZFhhdnN5M2RHUVZWZDZxMnVIbkYtQTM5RXM2dU9rYkFPTzlkbzd1VWZxUm1HcTAxU3V1eVdLQnNUUWxV0gHAAUFVX3lxTFBpc3gxVFpXMVZZWTVDaDNnVWxZbHRKeDdzc3k1elJmd3RFbzF1UGwzN01hSFZUcW9pSmVzNzdwRHZMcFhpRE1kMUI5YkRLQ2JaZkxwQXdPc3JVTmZ5VWdBcmlrNHZhNmxXVE9EeFFuMW5jUWJoZWNtQXRkeXVMQkNQbnVTekwyTnRHNVFackRsNExSWktJMHdkWU0tRnJjd3hRc2lZODVaLU14MkJsWjkxU1ViU3YxZ0toMVBTNEtsUQ?oc=5"
+    },
+    {
+     "fecha": "2026-08-15",
+     "titulo": "Fortalece Ismael Burgueño su preferencia en encuestas para dirigir Baja California",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/14/fortalece-ismael-burgueno-su-preferencia-en-encuestas-para-dirigir-baja-california/"
+    },
+    {
+     "fecha": "2026-08-15",
+     "titulo": "Ismael Burgueño continúa liderando encuestas de Morena rumbo a la gubernatura de Baja California",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQX3hGZTkyMHFFalFzMFJqMDAtbVRQQ3hxQjVlMDFTWGhUdmFySnVLQVpOOXB6dWEtTmVuUEtBMWNwZkIxU2JSNk5QTjNkZjNGOTItTGprVmRjUUxEMjFhRVFWMlY5RzdNM1g5ZGM2TklvWV9qNEJtTnV4cThud2otSEM3djNyM2pmMHZfQUZQWWlmN0lKMFFuZkRHR0ZxVmRrdTVBelZuTURQUTI2cExrQUs0a1JqMHFfZndENGJPMXFWV1BKWHFDS2tIRWtvQQ?oc=5"
+    },
+    {
+     "fecha": "2026-08-16",
+     "titulo": "“La Transformación avanza cuando los beneficios llegan directamente al pueblo”: Ismael Burgueño",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/16/la-transformacion-avanza-cuando-los-beneficios-llegan-directamente-al-pueblo-ismael-burgueno/"
+    },
+    {
+     "fecha": "2026-08-16",
+     "titulo": "Ismael Burgueño reúne a militancia de Morena en Mexicali para respaldar la Transformación",
+     "medio": "El Imparcial",
+     "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxNZkx6MUVTVXNFVEpuMFFPbjBaaGk0YXJ6bmM5ZzUxYWJoNnIwd19oSXZqR1pzM3FENE91bzh2ZGpDaVdUQWF3OXJNWkRYR09yNTdnc3lnX3JSYkNXZ1dlXzJXeTQ3ZlNHdU1SRFBYTG4yd1RXTGRIMFlaRHlZLU8yeTdkcFZhcmZpcGhNR0Q4UlE5YmUxaHJWX1czUTZwTXdBVXd4c2NQd2ZWMmtyX25ZM0UzMkZDS1BSVmxBVlo3WkJSMHRDejhQNVVyQXhrRlJEdmp0dmVEZi04UdIB9AFBVV95cUxOY3FSaVJFSXZna0ZNc0tMMmxpeU9XdWdsOTBlSDR0alVhRWczY0tUbVZLUHllamRBX0hYUk84VjRrR0NWaEQ4YlEzdlFzaUVRMHN3QjEyQTdMNUk2U1Nnc2dxWUdWZ0hfSVBKaFU3d0pNTTR3M043SUs2ZHF4MGNPRFVjQmZkQlJkekZiT0I1SHN6NEVZQXhUYzFSeHFldjRTQmxyU1VXZndZVXZ0QUJmUmdsVTJTTWlVOEhfN3B0S09qZGNlalBlQ2lhV0NyN3pqeGFDSDhvcUI4NUFUdGFKWHZYZmUtVjFiTkpQVnRrd0JTc05V?oc=5"
+    },
+    {
+     "fecha": "2026-08-17",
+     "titulo": "Morena mantiene amplia fortaleza frente a la oposición en Baja California: Ismael Burgueño",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/17/morena-mantiene-amplia-fortaleza-frente-a-la-oposicion-en-baja-california-ismael-burgueno/"
+    },
+    {
+     "fecha": "2026-08-17",
+     "titulo": "Burgueño expone en San Quintín la importancia de defender la soberanía",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/08/17/burgueno-expone-en-san-quintin-la-importancia-de-defender-la-soberania/"
+    },
+    {
+     "fecha": "2026-08-17",
+     "titulo": "Ismael Burgueño afirma que Morena “no tiene oposición” en Baja California",
+     "medio": "sdpnoticias",
+     "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNTmdBamVEek1KWmViM1ZRZEwyWVROdzNvRUhvV3hmcHNrcmloLU1Ua1BJNU1XZGYxcWVhNjd5Q0Nvd0FPRjY2aXptVVl2UEZaSHpzSnd2bjhCWkFvWl9vMGNoaW9OMXprLV9FTkM3YjlpT1QtTEtjS3QyczlINllPamNSdTE3NE53YXlBWmNFQ1gzc3VsV1VYZ0xJMkNBUldSdkZBQmEyc0JxSGVJ?oc=5"
+    },
+    {
+     "fecha": "2026-08-17",
+     "titulo": "Morena sostiene amplia ventaja frente a la oposición en Baja California: Ismael Burgueño",
+     "medio": "alfredoalvarez.mx",
+     "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNa3ZjU2pHaWlRQTFSQUFGMXdiamtPVGVlbEJuN3hpVWo4ZHFXUHJxNDh4TTl3YVFqS2ZWSTJsNS1hcGNGR0xkUmRWTU9DcENUSTdBenJ3YnlTdFBaSk5RWUVGRW9qdVd2Z1BzbVZVLUd4OFBZeUloQncwQ2V6VndmRmt0ZkdCSktJaXd6X3lxUGd5VGloZlM0cWhNOHpzTkhVeGdDMWtIQ2stdVY3ZHlIQ3pmeTk?oc=5"
+    },
+    {
+     "fecha": "2026-08-17",
+     "titulo": "Defensa de la soberanía como eje de la Transformación, dice Burgueño durante Asamblea en San Quintín",
+     "medio": "Radio Fórmula",
+     "url": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxPRXRzbUlCUHhWNE41aTlVTVpaTXZTYS1hZ2hIMEVrV2Uyc3RkcXJXUmxxVERsQmFaeTRjNUhmenVKc1dCREFad0xmbVo2RHRUX21zT21CcmRhN1hXNGdMYmdlNS03N2hQaEprYW96QXN3dnJqQURaaVp1RkJyVDFtellza28tY0ZtZk5Jald2YWZBTlJVbEl4X2NmYjlmMUxCY1JqVmxFa2NkYndxaXpxVWp2bi03M211WkU1ZDdOMGJwZUhvR2VUWkxvR3ZWWTFmUHFaMDE0ZnNId1hGb2hPX1RFX1M0T2FueUdBbnp0SE1sNTJQajZGaNIB_gFBVV95cUxOUDZWa3pFN0hRWVRSS0RHeGJsTDlfTWtoV05kM1FfdFZnZHdfaWt6OERpd25NbEFvSnVnbDIxSFJvTjJUOFp4UFVHdHFfbmMtNGwtWnRlcWNmejlZWWJwN005UWxTb0JYdFMtd2pFZnp4MUQ1czJVTVlCb09hVmZRT1VHdllEV2JIWVFMOXEzSEtfOTY3eFVZd2JIRXNnRE8wYkN0eTdTTUJHeTZVb1FXRkdSek41emhOeTM5WFM3dktaQW1CSHp1OWVxM1dINUpvMFhQTGY0andoeTFhSWdVSy1sSVRlY2c5VTVqdVBUc01xSUtYemliYnVqb0k5Zw?oc=5"
+    },
+    {
+     "fecha": "2026-08-18",
+     "titulo": "Ismael Burgueño asegura que Morena \"no tiene oposición\" en Baja California",
+     "medio": "La Política Online",
+     "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQVXFKbFVEc1BOeElYU0pTLWFXTW1uMUdyYlZDVmZ0REhCdmtzZlRxMnUwVllwZDdObS1OYjBPa1d1b1dEMmtqelpydlZHM1kxbi1Hb0l0QUxxTEVYT2czbi1vMWpyQzlwMkk4UGU5empybDZQWlVTNURzY001M3g0NmRTbHNBVXlzdkdhZ3RoOTBhNnpWaVZlMFJfZ0ZYTUI2NDduR1N3bFZvVU5GSlVTSmlXRVdhZFBwRnBaY3d4bTZNV05TYlp5VGZkVdIBuAFBVV95cUxPQ3VsWnpZSk5tTlRhYllCSnNrM2VSRVhaeHd0eVNCTTVrMURGcnFMbTh5WTgwZU92cVltbHpKYjFJNGJGd1RqOGJhYUZGQ3pKODgxckJoRkR3S0Y0N0ZTaVBQVnRwX05zTklRd3M3S2lzTE1rUExiUEhobEVKdU04RE0zLWNFSV9Lc09OdGFCRmxPRGdzZ21RSnVHSnowRm11V18wTUo2ZktENXNod0lScEJVNy1TQUlM?oc=5"
+    },
+    {
+     "fecha": "2026-08-18",
+     "titulo": "Programas y educación: Ismael Burgueño señala avances de la 4T en Baja California",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPZXJ0eTlJNVRGSktQd3FTU3BENWhpeVJPbXU5dUJ5dmxPLUFaNDhwSU5YRFhLUVg2NUlPSGtqblE5YVVydlVmcnpQNG5ZbmxZVGd6eTZFTE9oT3U5MklyN1JhQk5iZ0QxQmdKNGxlUjM4b1FyV1Bsd3lBbUEyZVNYWTY4d2MwUFZKcFVvejZ6VGVzWmdMWVdYaG5lckxQT1hfRnIyRjRZUTRDVmUycjRia0FKMW0ySENT?oc=5"
+    },
+    {
+     "fecha": "2026-08-18",
+     "titulo": "Ismael Burgueño apuesta por la continuidad de la 4T en Baja California",
+     "medio": "El Heraldo de México",
+     "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPQ3pYTlR5VGNkUS12Zm1SVGpWMWppdnlhd1FYSy1lc2RvM0VWc05UMVVSVnhZY0NheWdMczZhWVZjZk9KTWNzSHd6ZHNlT2JPSnhtXzFCNVNyVUg3dkFWd3hYaUh2M0o2ZDVkNUtYNWllVXFyWmZrcHZmZmpNS1VnSGZfeVJnSDUxbzB0dmNFQWE4WFZiM01GRVlYSGxLZjdKYTlRNDN5TENIMTA0Qm84cHVuM084TDd1YUFGTGEtdVlCMGVwN0g5TXUzYlY?oc=5"
+    },
+    {
+     "fecha": "2026-08-19",
+     "titulo": "Ismael Burgueño reconoce que la 4T creó nuevas oportunidades para estudiantes, mujeres y familias de Baja California",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/18/ismael-burgueno-reconoce-que-la-4t-creo-nuevas-oportunidades-para-estudiantes-mujeres-y-familias-de-baja-california/"
+    },
+    {
+     "fecha": "2026-08-19",
+     "titulo": "Burgueño destaca avances de la 4T en Baja California",
+     "medio": "bajanews.mx",
+     "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOa2ZVSC1mVnY0MEhCQ0hqeGNLWWhUNTVCVTVEcFBtam1BMHNCczgtZmpMLWhwWHpGVkhqR1VKSERiai01NFRucnF2ZWVvWDI4MldlV2hGMUhyM180MFc3ckp6cU1GUTNKV1c1bDc0ck5vOGtlaldRVzc1LTV6eXd0UnNiM1NST3RveDJPX0piT0N0dw?oc=5"
+    },
+    {
+     "fecha": "2026-08-21",
+     "titulo": "Ismael Burgueño llama a cerrar filas para que los avances de la 4T sigan llegando a BC",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/20/ismael-burgueno-llama-a-cerrar-filas-para-que-los-avances-de-la-4t-sigan-llegando-a-bc/"
+    },
+    {
+     "fecha": "2026-08-22",
+     "titulo": "“La fuerza de Morena está en no olvidar nuestros principios y mantenernos unidos”: Ismael Burgueño",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/22/la-fuerza-de-morena-esta-en-no-olvidar-nuestros-principios-y-mantenernos-unidos-ismael-burgueno/"
+    },
+    {
+     "fecha": "2026-08-22",
+     "titulo": "Ismael Burgueño pide poner la unidad de Morena por encima de las aspiraciones",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/08/22/ismael-burgueno-pide-poner-la-unidad-de-morena-por-encima-de-las-aspiraciones/"
+    },
+    {
+     "fecha": "2026-08-23",
+     "titulo": "Burgueño llama a evitar divisiones en Morena ante el proceso interno",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/08/23/burgueno-llama-a-evitar-divisiones-en-morena-ante-el-proceso-interno/"
+    },
+    {
+     "fecha": "2026-08-23",
+     "titulo": "Burgueño busca respaldo de jóvenes rumbo a la definición interna de Morena",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/08/22/burgueno-busca-respaldo-de-jovenes-rumbo-a-la-definicion-interna-de-morena/"
+    },
+    {
+     "fecha": "2026-08-23",
+     "titulo": "Morena cierra filas en Baja California durante encuentro encabezado por Ismael Burgueño",
+     "medio": "Yahoo",
+     "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQamxLVklrUU1URkg4dW40OUdBYWVrdXRDenZNcTBtanN0LS1MQXN3alMtZjhKTlh3V19ta0N6aUQtcEp5VTlKMU1QaWRzdF9UcDNiRTJqa3RWcnRMU2oyVkhmNldJaWxDN1lPWXAxUnZqT2VnMEFIcGxWanNfZkxVUHdPUWljWjVUSkZN?oc=5"
+    },
+    {
+     "fecha": "2026-08-23",
+     "titulo": "Ismael Burgueño lleva ante militancia de Tijuana principios que sostienen a Morena",
+     "medio": "razon.com.mx",
+     "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOZTZOR2k0bWRxZ2FnS0dsV1FBMy0wWGpmMFpzODVWOXh0dEFseHVxRGotclltNkphaEN5VzJpWVhzcmhxWWVWVGI4WXFzaGZ3QklNZk5iZ0Nock5UX05wUjZiMF9xOFJEVEV4WVNQajRfYWFrSXdNbC1PVG16OGVUb2xGWlJBUU1EaGZnNlk1MFpZYm1lLXJjTnhyWUFYSDIxejMtWVdIU2pRQTZHYjJLUTMzeFhHWXVQSVFzdnMxSWNEOVVxM3c?oc=5"
+    },
+    {
+     "fecha": "2026-08-24",
+     "titulo": "Ismael Burgueño amplía ventaja rumbo a 2027 y se mantiene como el perfil mejor posicionado en BC",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/24/ismael-burgueno-amplia-ventaja-rumbo-a-2027-y-se-mantiene-como-el-perfil-mejor-posicionado-en-bc/"
+    },
+    {
+     "fecha": "2026-08-24",
+     "titulo": "Burgueño cierra filas con las bases de Morena; rechaza corrupción y privilegios",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/08/23/burgueno-cierra-filas-con-las-bases-de-morena-rechaza-corrupcion-y-privilegios/"
+    },
+    {
+     "fecha": "2026-08-25",
+     "titulo": "Previo a la encuesta interna de Morena, Ismael Burgueño lidera entre los perfiles rumbo al Gobierno de Baja California",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/25/previo-a-la-encuesta-interna-de-morena-ismael-burgueno-lidera-entre-los-perfiles-rumbo-al-gobierno-de-baja-california/"
+    },
+    {
+     "fecha": "2026-08-25",
+     "titulo": "Burgueño amplía ventaja rumbo a la gubernatura de BC en 2027",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/08/24/burgueno-amplia-ventaja-rumbo-a-la-gubernatura-de-bc-en-2027/"
+    },
+    {
+     "fecha": "2026-08-25",
+     "titulo": "Ismael Burgueño llama a dar continuidad a la transformación en Baja California",
+     "medio": "Yahoo",
+     "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOZWJvTVNzdTZmTnBHelVzWTE3NEVVY1dvdGV5b3d6QlNiTUVSMGNrcDVnOTV0MWdrT3pSaVhOYVJfOFdsd01yTDRYakpxRlBNLUV3ZDRrM1Y3d1BnMTNpSTRoWWtGWjR1NGxaWl9xS3QxMDV5dGRzSTdTQW9fUmFDN3h3ajE3OWp0NnUzZl9vUjd5Z3c0TGdBbnZQX2F0aXFfZjV5SE90bEJ0Zw?oc=5"
+    },
+    {
+     "fecha": "2026-08-26",
+     "titulo": "“No es el puesto, es seguir aportando a la gente”: Ismael Burgueño pone la unidad por encima de aspiraciones en Morena",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/26/no-es-el-puesto-es-seguir-aportando-a-la-gente-ismael-burgueno-pone-la-unidad-por-encima-de-aspiraciones-en-morena/"
+    },
+    {
+     "fecha": "2026-08-26",
+     "titulo": "Encuesta coloca a Burgueño al frente de Morena rumbo a 2027",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/08/25/encuesta-coloca-a-burgueno-al-frente-de-morena-rumbo-a-2027/"
+    },
+    {
+     "fecha": "2026-08-26",
+     "titulo": "“No hay quien ponga en riesgo a la 4T”: Ismael Burgueño",
+     "medio": "El Universal",
+     "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPSTE5OXNHbXEyQ25KQmFkT0NGVEoxbE5WYng5SlRlRzJMbG5LSUpUekRpa2xJQ0x4dnNJVWxiOVlQRDN6Z2YycFRZdUpDS2JiejlSS0R0N0J4cGtSeE1hX1I2UkNnYVR2TUdRaDNXNjhuVU9sS0RLM2tyYm9UQnk2VDdKdGNaUmlMMVNMS2RNbmt4WFRyb0lF0gGrAUFVX3lxTE1teTFRUnZfRlJjLWZ5V05jWVJmblAtNElnSzAzZGIwekQ2NXpnczF6ODlrYjVGZXZvX3ZZbE5JcTJoQVB4bXdnYVBNSmtPWlo1RXc3UXIwSVFVUlRPcnh1bWxxaVVzbXFaYV9mRjJ4bllMaHl0YlVMemI1YUROLTQ5MjQtY2VJN0NCUDFNV2pKOGp0VGNoV19acTVPY3dhUmx3RGkxNmN1WTc4SQ?oc=5"
+    },
+    {
+     "fecha": "2026-08-26",
+     "titulo": "Ismael Burgueño asegura que Morena aventaja por hasta 30 puntos en Baja California y llama a cerrar filas",
+     "medio": "El Heraldo de México",
+     "url": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxNTm1JM19SZGhJYkJ6bjYzMXM0ZV9Bc0o2ekNKSnZ6M3B0ZkFndmVFUlhSempRRlh3alN4VVJhYm1HTWFDNjJwbDN5cEhpbjA0TnlDMGNNWl9MeXI1dV9QXy1HRTFwamw5TnNCWEs5MlllYnlZUWV1OWUtbWpkWjNXMXl4bGlrLXE3aDBNXy1rN3U4ZWRsRWR6c19vWVJHWWE5N0s5ejJrODhxSVg3YjlDTzM1QWZxQ285QTdpTEFGMkdmUEJac056WU5ISmg3dzE4UDA2c2xGckMwb1NEQnhCVkJkcXN4MDZRWWk3MTFLUHZhWElPTWc?oc=5"
+    },
+    {
+     "fecha": "2026-08-27",
+     "titulo": "Encuesta posiciona a Ismael Burgueño como el perfil más competitivo de Morena rumbo a 2027",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/27/encuesta-posiciona-a-ismael-burgueno-como-el-perfil-mas-competitivo-de-morena-rumbo-a-2027/"
+    },
+    {
+     "fecha": "2026-08-27",
+     "titulo": "Enkoll coloca a Ismael Burgueño al frente de Morena rumbo a 2027",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/08/27/enkoll-coloca-a-ismael-burgueno-al-frente-de-morena-rumbo-a-2027/"
+    },
+    {
+     "fecha": "2026-08-27",
+     "titulo": "“No es el puesto, es seguir aportando”: Burgueño llama a mantener la unidad en Morena",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/08/26/no-es-el-puesto-es-seguir-aportando-burgueno-llama-a-mantener-la-unidad-en-morena/"
+    },
+    {
+     "fecha": "2026-08-27",
+     "titulo": "Encuesta consolida a Ismael Burgueño al frente de la carrera interna de Morena por la gubernatura de Baja California",
+     "medio": "Yahoo",
+     "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPUEE2aVZrb1lMdjVWZmJQNWZ0d0g5YVBuZXRNYS1yYmtWRkxOMlNDSXlfcU9Rd0ItWElfREp4VHdKeS1oSDJMV1FybDItUDNkY0hLT2JFV3pXZ0Jsd1BSa0hoUTVyN05QVjNOTHEycHNVTFJ4d2hJVXNyS1hDLTVId2w1QmNqenVaNHVMZDB3UXRaRm1rYU83TTN3?oc=5"
+    },
+    {
+     "fecha": "2026-08-29",
+     "titulo": "Ismael Burgueño busca coordinar la continuidad de la 4T en Baja California",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOZ0VpN1BfbnJQcGN4QVota0VqQnRLajN1S3RCdGxkOWVJQlE5czJEZW1HQzJld0o5ZkVjeE5ZS3R6cmlwam9Ia1FpLU8ySHY3MGtIMkxzZS12cmRVNnVScmZCUk1sbGRjX0Q2bDljOFRLeGFkNDIyTjNzQmplOVZhWEkteFZKcHVQS1QtU3FEQ2dzNWRYd19RbkRQTXpkZ2VkUFdyNk5HYXdWbmVIb1Z3dw?oc=5"
+    },
+    {
+     "fecha": "2026-08-30",
+     "titulo": "“Sin unidad no hay nada”: Ismael Burgueño exhorta cerrar filas para consolidar la Transformación en Baja California",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/30/sin-unidad-no-hay-nada-ismael-burgueno-exhorta-cerrar-filas-para-consolidar-la-transformacion-en-baja-california/"
+    },
+    {
+     "fecha": "2026-08-30",
+     "titulo": "Ismael Burgueño plantea preservar la confianza en Morena para que BC siga avanzando",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/29/ismael-burgueno-plantea-preservar-la-confianza-en-morena-para-que-bc-siga-avanzando/"
+    },
+    {
+     "fecha": "2026-08-30",
+     "titulo": "Saldrán fortalecidos del proceso interno aspirantes a la gubernatura, dice Burgueño",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOUDhnSFE2NkRpSjNlNlRfdURSdVZQVHM3U201Wjg0MEF6clR3VFZSbTZ4RF9OZW5NZGIzcXRqTVhya0Znb0hOOHI2cUFjdWtIdFpuOEhaRGd2S3BuWnkxeWVXc29VV0trcDJ4XzJEV3RfOGVlNVJRc2l3bWhLbk1NMTd1Z0JzdnAwRHA2LVIyNUpDeHoxUHVkQTFxcVNJdDVCS19FNVB4eXp4bUpkRnAwa3BPckdvaGVtUjdYNzlrSWpHZ2c3Y3FWTHpCb2FDQQ?oc=5"
+    },
+    {
+     "fecha": "2026-08-30",
+     "titulo": "Burgueño pide cerrar fila para consolidar Transformación en BC",
+     "medio": "El Mexicano",
+     "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNWGFBOTRHbHpCOHFhcjdhR1VlYzZNOEJtemY4aVlqeXZScjA2RzhkRVVRYkNBMHc1OFJyYzJrQkhMZFRtREJhbnZvRGY5dkxwQ3Qxb01IcGw5TUllY3FDZjNzcUd4Ynp3YUtQUXY1NkVCTEM2TmhVSXFndmFmYnV6MjFGQUJHU1ZFMC1pQVgyazBEMVZyS0lNcUpxOUhpemFPZlhzdnNTVnByR3QxdUxIWnZuZ0luN0lkMGQ4M2dR?oc=5"
+    },
+    {
+     "fecha": "2026-08-31",
+     "titulo": "La Transformación debe conservar las raíces que permitieron llevar resultados al pueblo, afirma Ismael Burgueño durante recorridos en Tijuana",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/31/la-transformacion-debe-conservar-las-raices-que-permitieron-llevar-resultados-al-pueblo-afirma-ismael-burgueno-durante-recorridos-en-tijuana/"
+    },
+    {
+     "fecha": "2026-08-31",
+     "titulo": "Ismael Burgueño llama a Morena a conservar sus raíces y cercanía con las colonias",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/08/31/ismael-burgueno-llama-a-morena-a-conservar-sus-raices-y-cercania-con-las-colonias/"
+    },
+    {
+     "fecha": "2026-08-31",
+     "titulo": "Ismael Burgueño llama a fortalecer la comunicación de la Cuarta Transformación en Baja California",
+     "medio": "El Heraldo de México",
+     "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxPUmh3QUZ3S0E1dlJUelRPYnR6cldYRE5Ha29mc0NVWkV6MTE4QW5OUjRfcnJZMW9LekxLdUJMYlJ6WW5VNF9uQnlnYzdsY0tkbFlLSkl4MWppNlphSDNRVE52NkJBS1FZZDNyakE5MFdlTXhKWUl1QXJVZmR2cVpNeWptXzlCT2hOVFZfR3A0NnNDYzJUb2k5cU1kUjRwb0dTcjB4TEJSRC1nVTl2M2lfd0dHbklqS0VDS05HemJ6VFJWdmlNNS1FX3FqMU0wdWxXSGU2Rzd4SXFIdzRxZWNGbml1aTk4Vl9xQTVfd3BR?oc=5"
+    },
+    {
+     "fecha": "2026-08-31",
+     "titulo": "Tres encuestas consecutivas consolidan a Ismael Burgueño como el favorito de Morena para Baja California",
+     "medio": "Yahoo",
+     "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOdm93VGdqelF6QUlJR2haTm1pQjZjVHZFYUdpUjJxSjJkSEUzMHFtakU2TWk0T09jVUlERVlWUE50MXRfX2JpblJBc09YU0VKLTlsTGZ6cjlmeENncTRmdmxmbHAxM3dfT0RiRThsTzNvcVQtd29GU0dmR3RWTlpGcjBxSXJPMW9DR2lnYXhvRmJYN2Qtb3Y1RWI1MGVTT002RS1RWA?oc=5"
+    },
+    {
+     "fecha": "2026-09-01",
+     "titulo": "Ismael Burgueño se mantiene como el aspirante de Morena con mayor respaldo ciudadano al cierre de agosto",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/08/31/ismael-burgueno-se-mantiene-como-el-aspirante-de-morena-con-mayor-respaldo-ciudadano-al-cierre-de-agosto/"
+    },
+    {
+     "fecha": "2026-09-01",
+     "titulo": "Tres encuestas colocan a Ismael Burgueño al frente de Morena rumbo a 2027",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/09/01/tres-encuestas-colocan-a-ismael-burgueno-al-frente-de-morena-rumbo-a-2027/"
+    },
+    {
+     "fecha": "2026-09-02",
+     "titulo": "Respalda Ismael Burgueño avances de Sheinbaum en BC y apuesta por mantener la Transformación en marcha",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/09/01/respalda-ismael-burgueno-avances-de-sheinbaum-en-bc-y-apuesta-por-mantener-la-transformacion-en-marcha/"
+    },
+    {
+     "fecha": "2026-09-03",
+     "titulo": "Ismael Burgueño lidera intención de voto en BC: Encuesta PluralMx",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/09/03/ismael-burgueno-lidera-intencion-de-voto-en-bc-encuesta-pluralmx/"
+    },
+    {
+     "fecha": "2026-09-03",
+     "titulo": "Morena suma 11.6 millones de afiliados con base en el trabajo territorial, señala Ismael Burgueño",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/09/02/morena-suma-11-6-millones-de-afiliados-con-base-en-el-trabajo-territorial-senala-ismael-burgueno/"
+    },
+    {
+     "fecha": "2026-09-03",
+     "titulo": "Lidera Ismael Burgueño conocimiento y preferencias entre aspirantes de Morena en Baja California",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/09/03/lidera-ismael-burgueno-conocimiento-y-preferencias-entre-aspirantes-de-morena-en-baja-california/"
+    },
+    {
+     "fecha": "2026-09-03",
+     "titulo": "Morena aumenta 400% su militancia; Burgueño atribuye crecimiento al trabajo en las colonias",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/09/03/morena-aumenta-400-su-militancia-burgueno-atribuye-crecimiento-al-trabajo-en-las-colonias/"
+    },
+    {
+     "fecha": "2026-09-03",
+     "titulo": "Ismael Burgueño encabeza carrera de Morena por la gubernatura de Baja California",
+     "medio": "Yahoo",
+     "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQWTdyZkxhS0FNTE03cTRWT1VFU0RqREpjWFdNTWtqZU1tMENkeE9kYnhZVHhGSHduVjlkMDUwZ1djcXFhTzRJcGNzZ0lqLTN1TVJxVGw3SE53Z2FiRnJDNmNKWU1nbzlKVGhvVmw1TEduYW1YNzI2NWJoXzFNOHZTLU9YVzg4M2dPM2d0aGpXYW45akwzSU00?oc=5"
+    },
+    {
+     "fecha": "2026-09-08",
+     "titulo": "La Transformación se fortalece cuando se informa y se escucha directamente al pueblo: Ismael Burgueño",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/09/07/la-transformacion-se-fortalece-cuando-se-informa-y-se-escucha-directamente-al-pueblo-ismael-burgueno/"
+    },
+    {
+     "fecha": "2026-09-08",
+     "titulo": "Retoma Burgueño reparto de Regeneración rumbo a la coordinación de la 4T",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/09/07/retoma-burgueno-reparto-de-regeneracion-rumbo-a-la-coordinacion-de-la-4t/"
+    },
+    {
+     "fecha": "2026-09-08",
+     "titulo": "Ismael Burgueño retoma el trabajo de campo de Morena con la entrega del periódico Regeneración",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPX3BzcG53VGtMQzRMMnh2UG56bXhJMTF1NmJJeWhDTXRDZHVpYWJaVmN1TUxSd1VESTdQbHBNS0ZCSFBNdU1FYnJjMng5OE1DV0lFaVAtMS1lQ25RSmhDdmdxaGJSY1dsRlhnLVFGQV9hOFhHaVlLMHMwUUZ4ZnYybGVmemhnSzZyV0ZHTldlQ1BFWFZXRFBXUEtDNDNaLVJyRUJYZUtod3htUGdUaVBIdXotWGlteUkyT0FGMVgxbnpvRE5RNGh0YU1oOA?oc=5"
+    },
+    {
+     "fecha": "2026-09-11",
+     "titulo": "Ismael Burgueño lidera encuesta de Polls MX en la contienda interna de Morena por Baja California",
+     "medio": "Yahoo",
+     "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPVFNtVG0weGwzcVNSa0xOUGxuYU8yVFJlamNOVEJtTUJfZHVpTWtVd3Q5T1MwN1c5WEh5al9BR2pVY25LMlFOcFR4Q0tkV3U2MkFuUXE5eVhQRm1GUDlTVWVZOEU3eEtOaURyU1B6OEJObVdiMUx5b2JEdHhKTkViZWtkMy15Y05fRkdabVFsWUFabmFS?oc=5"
+    },
+    {
+     "fecha": "2026-09-14",
+     "titulo": "Julieta Ramírez, única aspirante de Morena sancionada; IEE declara improcedentes medidas cautelares contra Burgueño",
+     "medio": "Zeta",
+     "url": "https://zetatijuana.com/2026/09/julieta-ramirez-unica-aspirante-de-morena-sancionada-iee-declara-improcedentes-medidas-cautelares-contra-burgueno/?utm_source=rss&utm_medium=rss&utm_campaign=julieta-ramirez-unica-aspirante-de-morena-sancionada-iee-declara-improcedentes-medidas-cautelares-contra-burgueno"
+    },
+    {
+     "fecha": "2026-09-15",
+     "titulo": "Ismael Burgueño, alcalde de Tijuana, reconoce triunfo de Julieta Ramírez",
+     "medio": "Grupo Animal",
+     "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPNDRDckZtajdOdTAySEhNWk80RVVnc2VnSUpPajdkdWJpYnBKRXJhOHdqUGZpNGVJRkp4cHRNNFlVcnNBQnRJNzFkQ1ZHSUNyX1JIQXM1Q3BacWEyRVk5UkRfQ05TN294dkVwUVIxMlJnZkFkc2xQdGRQaDdQQVNZQ3kwYkpaNnRmRVM1R0VUbkJwUHM2YjhVUDRtSW1EOERFM1ZjS1lOU2I?oc=5"
+    },
+    {
+     "fecha": "2026-09-15",
+     "titulo": "Ismael Burgueño anuncia su regreso a la alcaldía de Tijuana",
+     "medio": "alfredoalvarez.mx",
+     "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNOS1RTy01ZTgtU2FQWElSUmFaOHEwQTJNM3h2WWlqQXhFZHp4WnY1S3pITzhwZ2gzMkViYkstSzRucHBhZU1yT0pIbDAtS2RmYW5xMEsxbjE3VnBPU2htRmg2QjhJMnk2b3BwMWdlTU9OVE54OHpUbUM3N3REQlJFVlRHaGNVRVF0UkZ4RHFvRQ?oc=5"
+    },
+    {
+     "fecha": "2026-09-15",
+     "titulo": "Ismael Burgueño retomará la alcaldía de Tijuana este 16 de septiembre",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPWENrYWdKTkRpcjhPcVVBallWejZuNTRIaVIwOXFsSlJVUGl5UjhNclIzczdiQ0RvOXB6VGsweS04TUo1SVVrVDAtOERBRVJaUEpmWG5uUDBnV2FmU0FZQUZDVVFxWEhnR0hmZlVMR3NDeTV2eTBWZXItRXc3SzNTZHdKWnF2TGdkYlhJQjVGd1FObkZQcW00YzRHcTNicW1vNDhJNlBGRHh4dw?oc=5"
+    },
+    {
+     "fecha": "2026-09-16",
+     "titulo": "Abdiel Gutiérrez espera notificación formal sobre regreso de Burgueño a la alcaldía",
+     "medio": "Zeta",
+     "url": "https://zetatijuana.com/2026/09/abdiel-gutierrez-espera-notificacion-formal-sobre-regreso-de-burgueno-a-la-alcaldia/?utm_source=rss&utm_medium=rss&utm_campaign=abdiel-gutierrez-espera-notificacion-formal-sobre-regreso-de-burgueno-a-la-alcaldia"
+    },
+    {
+     "fecha": "2026-09-16",
+     "titulo": "Burgueño reasumirá alcaldía de Tijuana; tras derrota en proceso interno de Morena",
+     "medio": "Zeta",
+     "url": "https://zetatijuana.com/2026/09/burgueno-reasumira-alcaldia-de-tijuana-tras-derrota-en-proceso-interno-de-morena/?utm_source=rss&utm_medium=rss&utm_campaign=burgueno-reasumira-alcaldia-de-tijuana-tras-derrota-en-proceso-interno-de-morena"
+    },
+    {
+     "fecha": "2026-09-16",
+     "titulo": "Abdiel Gutiérrez espera retorno de Ismael Burgueño a la alcaldía de Tijuana",
+     "medio": "El Imparcial",
+     "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOWDI4eHNCMkdaTUxtUHRlaGs4V3R2Rnd6WExXNVJxVlpsaDY1LXBwc0s2ZmNGWEI1cTlCRTk5TlF2Mko2QmNOTW1DVDJMVWFyR3l5ZEtrYXZBVVp6YVpfdmdydm1nT0tGVk5fZkZaTjg1ejM5VlBEZVZDRExTdnFSdWlXZkowZDFEMFRRSUlYQ3oyMGZMS3hJd2tVUWVXdE94RHJDdm5zX2s5VTB6amh0MzVmTU45U1hnbllqU3l6dmxNaUJ6ekHSAeABQVVfeXFMTUxVbTZvMVMwbjZ5clRsWkEwbHA5YTI5TVRGdXNlVEQ5ZUxia1NHSmVwWDNHVnJxal9NRmpkWFdOQy1RZnZuRGc3UVM3SFVMdU9fdUJuOUE4MVpUS0R0a0pzU2lDWVhDaUt1NE41dkhZczlKS0JGdnExT19OeDBDWEY2RzQxRmRQZFJ3V0dtOHJtRVMzWEVWTDZBVlJEMFdtQ2NIOTd1QzQ5cTRJR2RGYWJFdHItOUl3MVB3WVVXTlRJS3ZiTUJ2ZGQ0VkpTRWplc3pXbkU2MnNjeU1qX2otYVk?oc=5"
+    },
+    {
+     "fecha": "2026-09-16",
+     "titulo": "Burgueño anuncia su regreso a la alcaldía de Tijuana a partir de mañana",
+     "medio": "Tribuna Económica",
+     "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOTXVtQ1BtbUs1WHc2OFpJVk5XYXpQNWh4YUNMc29ka1dtVDFmR0xjVEtrVXRfNThrMjNNZ0ZER3Y2aGlURW1JS1YxYWpTZmlLYlQ4YVZFOGRrVWpMMlNYeVFXV2VVTlBIa21IVGNUR1JMLTlnVEVaNjZXSlFHVFRjQndzTDlVaFZpQmNveGZDLTlGU2tBbnlWakxvSnNyZEFtV0paOUNoQUNydFlaSDFCRWQwVmRWTTFhYW1ZdndCeGVhWmEwd2FvWUxwYlFOa28?oc=5"
+    },
+    {
+     "fecha": "2026-09-16",
+     "titulo": "Burgueño se reintegrará a la alcaldía \"en cualquier momento\", dice Abdiel",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOLXJEMUt4M1NHUm15QUZ2OC1ETFc4bEVjOFdrTld1emxOeUNLRERRYW03aDBXYzI1MGk3ajRNdGFZRllxbXBMSWhONVNkWGMwb0xVNE9sMG9rdW5hM1pKSFR5RVA2OGo1VzJoNnpZeUJEd1IyaGhuX25jU2lYbE9uRWdubk56R0ZlM05wdFJ5bnZFNE85M1pOcjI1RkJSaWZ2WXB4Q3FDYzJybmtPLURhY2xjRmNOSlNiSFJZa3hn?oc=5"
+    },
+    {
+     "fecha": "2026-09-16",
+     "titulo": "Abdiel Gutiérrez alista entrega de la alcaldía ante retorno de Burgueño",
+     "medio": "El Sol de México",
+     "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOdDlaVEtpLWp6a0RmalA0RkpJdVJRcWFsMlAxVkxzX0lLTTljY3ZhcTZSRjM5bWVOZTlxRHItdUt5UWt3ZWdwNlV0eHl3cUM1dkNXZU83UU8zb0w3SEhLWDNzOEhUVmJwWEo1cWkydy1QTXB3QURXZXV1YjBZakU4M3hyNElfVUg5RXF2S0FUenpRZWNJR3AwSWtIZEdIemQwaTQxMGk0MmNzcmh3RS1oNUQwZG5pMjR4NWtSRg?oc=5"
+    },
+    {
+     "fecha": "2026-09-16",
+     "titulo": "Abdiel Gutiérrez espera fecha para regreso de Ismael Burgueño a la alcaldía de Tijuana",
+     "medio": "bajanews.mx",
+     "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNTW5VQnRLZ1FVbXJXQXJ6UFFuandQbVpFRnVFQnNmcDVCZWJFaDdvcnlCZm9WVF9uM21aOURKTjNnajN4OURJbl9STXlRUXBLeGRLVldnYURVZE5MWEJNNTB0TkNjNFJwYmFhM08zZmxsaklfWE01OW5ldE1pT3owaFpYVEpleWkxNUI4aTBobWxUNVktMlhjQmQtR05fOXNFcTB2ZzI3czl1eTlEcHd1V0JfMlBUOTdSY0lmNGt4Zw?oc=5"
+    },
+    {
+     "fecha": "2026-09-17",
+     "titulo": "Ismael Burgueño regresa a la presidencia municipal de Tijuana",
+     "medio": "Grupo Animal",
+     "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPQWdUeVNRSmpJX2pRbXdjUW1lbWl1WlRoeDNOekJoYmlEY2dvYkJyVlVIUml2WGFZOWc0OHQzVWw5WFNjb3VpSEktbnB0cS0wTXBEY19XQnRod1BUR28wZ3p2WlRBaE0wWnZwSnJQM0c1MUJPU2VLSDdxUWkxTXFMb19xQlYyU1dTd29GdWtaclIxUy1veHRB?oc=5"
+    },
+    {
+     "fecha": "2026-09-17",
+     "titulo": "Burgueño aún no define fecha para regresar a la alcaldía de Tijuana",
+     "medio": "La Política Online",
+     "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPSTNycjlMMGQyYnNiMTRoNHNZU1IyLWlfOGFTUGFwZ3ZMSE9uUlNQNnJUYTBYSHNwZFBXSDV3T2pqb1dMS3ZKR3dmNERrZ29lNVYxQWdCUUxCMm9mR1lzU1c1aTZzaGtNLWhrVDluRFNQbVYwdnVRbFlmSFRFcWJDbl9FN014TTBNVjhrQ3gzSEhmbTNxUFpiN0tEdENBYk91eTNidFpWdHpSaUgwSTg2alpzOWs0ZlJnWXhVRGNaUFV4ejZZY2x2b25WSdIBsgFBVV95cUxNYXlvVjF0VXpXRG42c0RBaklySzU1czg0dWhYUjFoWTNZeTZKZThybnBtQmJWbGthd2trMTF6b3FpY1VBVi1veWx2QmpJWXhoOVRRT3p6TFB5OTNKbzZuYV9WRUE2c0RUODNPMzJ5Y243Y2pkdzBiOGhwaVItUjJhdDB6YjY0aXQ4ZFBhOEtPbGpzLXJZblJkWDJSOHZPTWVEdjE2M0s2Ml9xN1d1a2dqT2FB?oc=5"
+    },
+    {
+     "fecha": "2026-09-17",
+     "titulo": "Aún no hay fecha para que Ismael Burgueño retome su cargo como alcalde de Tijuana",
+     "medio": "El Heraldo de México",
+     "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQaUZGbHNULVJPN3pseldIRnQyVlUya1NPODNwWnUyZTl1TUViX1Z5aG91MDNkdmRPTGJwN1V4YVZWYjVMTmxnZFlXQ3hTM0daUHNRR3hyOHQwdjA5dU95R1lKblJSd2N4TXpMOXl1YnpOV2d1TVlJMkFaR2k0eDNYQW5WTVcxWlVqUUpNZm00V2dOenBKdFYweEpOY25ZUkVKNjlreS1Tel91bDFHbmd5cjRrT0E3ZVVHLWd6SS1hQ25XU3doaWNCMUtKei1EZF80aGJCUUYtb0JGQ28?oc=5"
+    },
+    {
+     "fecha": "2026-09-17",
+     "titulo": "Ismael Burgueño regresará a la presidencia municipal de Tijuana este viernes",
+     "medio": "El Sol de México",
+     "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQMWNnWjNqcFJoTmktc25BVTBYemxzZTdNNXhhYmJsSERBUVcwcG9HOXdaN2JibHk1NjZaWDBSV2NsV2h6S2tXcVhSSjV5ZEppQklSWC11UXpjVVhjcnUzUGVuTXUwb0VodURWZzJKZEE1QnhvYVVoSDhHQVpjOTlTelZUZGpyR2IwNzhCR05VaEljYnBRZ2EyUUttYzBwdmJTVFNGTTJNekoyemlNcVVxT3RFVjFJMkJ3cHJJc2RwcmxZSjQ?oc=5"
+    },
+    {
+     "fecha": "2026-09-17",
+     "titulo": "Retoma Ismael Burgueño alcaldía de Tijuana tras proceso interno de Morena",
+     "medio": "Central Municipal",
+     "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOQjJ0WkVjeWVaWVBGMHB0SGNMb1BvUEFmVGxnRHlWVnVHQ1NLUW9zM1ZQdDFySDJ0V1ROZGsyWFNmMGJhZXFzaktFM2VlcGlqQnVNYnNZX2hRbGI4VEJ2emFIRS1OTkFoLWptN2NMV2FZWVdleDFJZTFNTkJpV0tXdU1ZcXVDOC1nRTl2RWdFMzhFZVE3OFhUbHJFZEIzZXFYVkZxb1Y5WDdtR19oMnlCODhWM1dHVjhkNGJEbHJjZ1NlQQ?oc=5"
+    },
+    {
+     "fecha": "2026-09-17",
+     "titulo": "Burgueño regresa este viernes 18 a la alcaldía",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQaGI1dkV0bk1FaERfc3NLbXlUVWpXWVdKcnNKNi1qZ2M2LUxlTTNWeWIxWEpBOWRGWXo4V3FwZDh0bXFENTBLbEhVN2t2QXFCWE92V0VzMGF3cUQ0b1d6NmtXNi0zUy1JczI2ME9jdTJxeGR5RTJfMXZFbTUwMlMxbVJ6MWpXYkxvUDhOcTVYRXN0dGdDZEtfYkYxTGg3Zw?oc=5"
+    },
+    {
+     "fecha": "2026-09-17",
+     "titulo": "Burgueño Ruiz regresa a la Alcaldía de Tijuana",
+     "medio": "El Imparcial",
+     "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxORmpjRkxyRXJvRExFLU0tZFg4bTRHWDBkbnBkbWxQY3VSOXA2TVN4YlptNXFSd2s3Nzc2SjRfWVRWZE5rOFZyNE1odWZRV21LdnhidW9mOC1SM1BxZzRuRGM4VnhUNGs4M0Q3NC01dnZvc3dKTEFFa0d4UnNiQWFodzBjNXJtRWQ4UUNCSnJOSVNHTHg0TzNMMDFaV1pSYkHSAboBQVVfeXFMTmpQN1BERXdVcFdHRG0xN29mb0UwMV93MUVmT3Jpd2hnNEpwU001YXpjelFWN0kyTm9CNk1jVENBLXcxX3BId2l3S1NRREl1R3drRHdKNm0zQ2VQTjJsWUFtbDdIUE5ra3JnMnREM0pYZUY4VXZFTEFNSHlfOWlOMU5HOGt6bzUwRVBFaG8yQ3NTbDlGdl9NYkN3VjFrT05CV2pZUEVaUlI1NWltNDJJMDVmbW1iZmJZNWFn?oc=5"
+    },
+    {
+     "fecha": "2026-09-17",
+     "titulo": "Burgueño regresa mañana a la alcaldía de Tijuana",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOZTM4bUdLMTY1LUx4anFJWWdRYkdJS2FSV201U3o1NXVlUzVjZ3Z4M05qUnNJNVBZaXVtQ3Fnb0NRVFJaS180ZDZ5WkE5cmRVQzBwTGN1SHFoWnVkRnlFcllidzZjeG9hUVU5MTJMeXctMjZONEs1Rk9yU2F5ZWwza1N5Q0g2cHZ6SUlLdw?oc=5"
+    },
+    {
+     "fecha": "2026-09-18",
+     "titulo": "Ismael Burgueño retoma la alcaldía de Tijuana y promete bacheo intensivo",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/09/18/ismael-burgueno-retoma-la-alcaldia-de-tijuana-y-promete-bacheo-intensivo/"
+    },
+    {
+     "fecha": "2026-09-18",
+     "titulo": "Burgueño reasume alcaldía de Tijuana; promete reanudar obras de bacheo",
+     "medio": "Zeta",
+     "url": "https://zetatijuana.com/2026/09/burgueno-reasume-alcaldia-de-tijuana-promete-reanudar-obras-de-bacheo/?utm_source=rss&utm_medium=rss&utm_campaign=burgueno-reasume-alcaldia-de-tijuana-promete-reanudar-obras-de-bacheo"
+    },
+    {
+     "fecha": "2026-09-18",
+     "titulo": "Ismael Burgueño retomará la alcaldía de Tijuana este 18 de septiembre",
+     "medio": "Zeta",
+     "url": "https://zetatijuana.com/2026/09/ismael-burgueno-retomara-la-alcaldia-de-tijuana-este-18-de-septiembre/?utm_source=rss&utm_medium=rss&utm_campaign=ismael-burgueno-retomara-la-alcaldia-de-tijuana-este-18-de-septiembre"
+    },
+    {
+     "fecha": "2026-09-18",
+     "titulo": "Ismael Burgueño regresó este viernes a la alcaldía de Tijuana",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNcTk5UGZCa1JaOGZpZ1M4cVZKQl9ldEt0S2Z6Mlp0RHkyUW96dGViVWxNQm9ib3huOXIxSGVjY0Q3MXNoX1ZqVURDZGFXaFdXVWxUUElZY1RYQnBEdWI0SXZzQ0lmQUlUXzhHMGdqNTZDQzdDZUFkZURVYXU2bFdUTGM5NGRGaTRqbVNSX1BteXQwbXdRU2RjRmdlWlA5UWc?oc=5"
+    },
+    {
+     "fecha": "2026-09-18",
+     "titulo": "Burgueño regresa a la alcaldía de Tijuana y retoma agenda de gobierno",
+     "medio": "bajanews.mx",
+     "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1PeW1lR3kxdDQ2Z2V4VlA1V2VUaWlZMXZ2dTZkSkVpQ1hYSVRqUFpwcVExWFotMkNmXy1yWkwxZVZHdE1KZC1rUFJHa1dKUUtnQ24xTGcycmE?oc=5"
+    },
+    {
+     "fecha": "2026-09-18",
+     "titulo": "Ismael Burgueño se reincorpora a la Alcaldía de Tijuana",
+     "medio": "El Imparcial",
+     "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOOEtFSjEtU2tRb3RyekZMNU9yOW5vV0laR1p1eVJIMmw5bnRKMVBwRExIckdia1dZdkJHcy1iZV9FM19MVFpJcDg0UGdac2txemtHbm15T29CVzdZSlU0anJBU2JBNEhISDUxYTdXek12ODFUOFoySWdNQ2FCSFJlWFBBVm9Sc3dHc3VhdzA3eXYweFkxdjJxSGNPZGRVVnNPckt4RWFwbjNHcFXSAcYBQVVfeXFMUFVuMzVaTGZ6TTc0MHpid3RpclpXdWt2WmEtbmpoX29qWXczOUt0ZHlJN2xkNGp3ZXIyUDE2RTZDazUtaW1nbVV5cDdfanlzX041UFpHNnNPdlVOLUxUanNTOXc5Z2h4Ym9vbS1rbTMycnJ0LWtPU1RqbjloQkFsRDhGUjVDRy1tNmlIaXpfY244TkpWUDBRb1Z0Y05pTkhfbXUxdnIwZ0ZnYjctMEZjYzZIbUtEQl9uSEE2cFdxMWtRVFBPZTN3?oc=5"
+    },
+    {
+     "fecha": "2026-09-19",
+     "titulo": "Tras su regreso, Burgueño ofrece bachear la ciudad",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQbEpYZ3FuZUhRYzUzc3ZKclg1Y2dBOHJCXzNtMGE2LVB0RHFvZkNWQ0xmUUg5UmIzYUZTYVRuX09WVXc4MmMtMHJ1SU5aSmJkVEdhZ0M3WnNOSXdaUWJXQXRITkVpdXFQMXY1OVVTOVNvblZ5RVhxeW1aRHdOSUhxN2RYTGpFYUV1WXdRVGFPMDA1d2pjUGptMVF6VENEY3VVMWc?oc=5"
+    },
+    {
+     "fecha": "2026-09-20",
+     "titulo": "Burgueño reaparece junto a Sheinbaum tras retomar la Alcaldía de Tijuana",
+     "medio": "garabato.info",
+     "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE54aUJlMjViZ2Fva2xSZUlXNHlKVXJ4ckU1bTRBRTNtLUpxaE1md3Q5VDVTSk1hYWVob0xIWGVmRktFdnpoTXJzQ0Z2eXJXM3J1OXJ0M0h2cnM3a1ZBbGJOb3ZXUmhjRkxvS2VSa040RnBtdzVs0gF0QVVfeXFMTnhpQmUyNWJnYW9rbFJlSVc0eUpVcnhyRTVtNEFFM20tSnFoTWZ3dDlUNVNKTWFhZWhvTEhYZWZGS0V2emhNcnNDRnZ5clczcnU5cnQzSHZyczdrVkFsYk5vdldSaGNGTG9LZVJrTjRGcG13NWw?oc=5"
+    },
+    {
+     "fecha": "2026-09-21",
+     "titulo": "Ismael Burgueño retoma sus actividades como presidente municipal de Tijuana",
+     "medio": "alcaldesdemexico.com",
+     "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNLV9US2JZZThXSGdrSHFubXR0RTM5RFlIa0c0MEFkakIyZ1J6Tmw1QzhsWEw4NnpKZGJFRkxQX2ZHc29VVjFWSFFPaXFUOVRPU2l3c0xleE5VNDVjYmtOclg2RklYOVZtUGRCcl9VQVN1ME9JNkxUNk9KYVhTVTFpVmQ3Y3Jid3BSQzBiWm1rbXhiMU14U08takkxREZGM2V5TEpVODAyODdISE11TWFsVzRkb0w1Q1B2WFpwRg?oc=5"
+    },
+    {
+     "fecha": "2026-09-25",
+     "titulo": "Va Verde con Morena a través de Ismael Burgueño para la alcaldía de Tijuana: Arturo Escobar",
+     "medio": "Rosarito Noticias",
+     "url": "https://www.rosaritonoticias.com/2026/09/25/va-verde-con-morena-a-traves-de-ismael-burgueno-para-la-alcaldia-de-tijuana-arturo-escobar/"
+    },
+    {
+     "fecha": "2026-09-25",
+     "titulo": "PVEM perfila a Burgueño para competir por la Alcaldía de Tijuana em 2027",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/09/25/pvem-busca-perfila-a-burgueno-para-2027/"
+    },
+    {
+     "fecha": "2026-09-25",
+     "titulo": "Ismael Burgueño, el perfil que el Partido Verde ve mejor posicionado para la reelección de Tijuana",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOTno1Z2dHT19JS3BLaE83ekpfaE9YX0wtb0ljQXFjbm0xT09TalM5Y1pfZEdtdUhta0RJSldDYzZDcUdqTlh4ZVRXTTBSclZWUzVjVk5SUDhkT1FrOU1pVXFqRFVEX0tmOWViX1RweWkxNGxZaWItNGlKdlFoYU9nWHJySzdEanFvbF9XN3dsTWVBUzNVMlN6R0UwdU1mMDJTQlFacE5hc3p6VFlYR1JQckFzNHRKMlpuTEtxVzBVSGs3d3VDNENsZXJVLUJzR0U?oc=5"
+    },
+    {
+     "fecha": "2026-09-25",
+     "titulo": "PVEM ve a Burgueño como favorito para Tijuana, pero candidatura se definirá por encuesta",
+     "medio": "bajanews.mx",
+     "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOc0EwZnpxQzQzVVIzeHFzZ3NONklybldHbWhZUms1ci1TcFN5c0hzZFl0M3B2cTRoWE5LM2VSVHRoWUNzVFlzLUlYV1J0NEttZjA1TF9nSFZ4eTY4TGQwZlVZaEk4TnB5MldLTVd6Ti1uNnV0UFN1SFNrWmxSVDRVY1RXQ29ZM2JPOTdtRXpXM2tJbVJKczBXb1VESE9vRGRsUGhrSFFPZ0VEVk9JSjRxLXRWV2psV1gtcUtMQ1RuMVY?oc=5"
+    },
+    {
+     "fecha": "2026-09-25",
+     "titulo": "Va Verde con Morena e Ismael Burgueño para la alcaldía de Tijuana: Arturo Escobar",
+     "medio": "En Contraste News",
+     "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNTk40WERYaGcyMW9QcnRsV1c2d2V1NWFwM0NVQXM0R0pqNE9Vb25SSzZFeUItNXZrdms4R2o3TVpBcHVPNHloanNOZUtDX05NSElaUEIwcW9YUTA5NWlBZUVLWC1xeWd6M3NnbXdielhfOV9ZdHEtWGVIRkVETVRCZ19rMTlOeVZ3UkJUTlJ1Tk12YlNOaTZHVS1US2JXaWtBR3pmeVRmejgxZmpUcS14NDZNdTVaR3B3dWc?oc=5"
+    },
+    {
+     "fecha": "2026-09-25",
+     "titulo": "Verde respaldará reelección de Ismael Burgueño en Tijuana",
+     "medio": "alfredoalvarez.mx",
+     "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQUHU4cF9pc0hadWJoS1NRRzB3eFEyWHFIeEgxeE40X19xOE9iNjY1ZkY1am9TMVdLRUFrTUJUN2lGMk94NXREOVkyRFJfSXltQ1BNTWdmRXl2dXJ6YnNlNnhjRVNfVXY5QmQ1RzJnWjRKWGhmdGlGUHhVRXJ2YnJncTFpNkNyQ1ZZbmF4ZA?oc=5"
+    },
+    {
+     "fecha": "2026-09-25",
+     "titulo": "“Hoy por hoy, de manera muy clara, el candidato sería Burgueño”: Arturo Escobar quiere siglar la reelección del Verde con Morena en Tijuana",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxPNlZrM0FSY1BMVWtPdWJxcm9YSVpYWHBvVm0tSVgxaWFwbzFjc1pTYlA5cnNxWEFKNlhFWDcxQU81aHhaSHpTY0tLUWdqRFlvWVRTUWtUYXkzcnZ1RTJLZFQ2SlR0MndLSDdnOU9aSGszc284VF9TT0l6bmk5LU1IeTdpTkxXY0lRLUNobzhWSE56Uk1fSHE1WjVuOGRXUlJzdzJUM1l6OWlVVTl2d1NQc1hqTEdNTWVqeGlQVWRoenNXTHlkTTNXM0dEQUVrVjBFUDdwQkxOY0l3MjZlZ2l1dUN2TkV3ZDE5RTdocXVGZ1ZFb2ZXTmE1TTFIR3VNTHM?oc=5"
+    },
+    {
+     "fecha": "2026-09-25",
+     "titulo": "Ismael Burgueño con respaldo del Verde para 2027; podría ser el candidato más viable para Tijuana",
+     "medio": "El Congresista",
+     "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOelZhWWJFalItREVRaVh4NEpIcklQUV9xX3JjZnZLcXhoSFVTRlQ1azBjeTlmSXRMM19sVUI0SlRJWk5NLVBLdjFvMlNFVUdjQS1iN1RQS0JZMVVKSUtLQVVMR1NKZjNDSEJ4Z2pwT0JIYjgtUXlJWjdOV0dfVnlTNGJmZGdLM1AzcVV6MDBGWmJKTzhjaXkwNWpB?oc=5"
+    },
+    {
+     "fecha": "2026-09-25",
+     "titulo": "Ismael Burgueño se posiciona para buscar la reelección como alcalde de Tijuana en 2024.",
+     "medio": "El Congresista",
+     "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxONzBmWUFmQlVacGZoZmJuSGFWamI1WVRYWVRKMzhzTGpWSlVMX194ZEg4SHkxLUljQUVHV3luNlNaSE1ZRl9PUXpJOFVSeDJWVGhib1daVlc2UHozbjJDVE9fMDhTbXhOMlhBSkVOYnl1bnhxdV9VOGhKOTllWjRhLU5yT3JfNTk3Ty0wajk3bHlKRzg1cno5SkF6QzY?oc=5"
+    },
+    {
+     "fecha": "2026-09-25",
+     "titulo": "Partido Verde apuesta por Ismael Burgueño en Tijuana, su candidato para las elecciones de 2027.",
+     "medio": "El Congresista",
+     "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPVjl0WlI0cDE0a1ZmVFdTdUpzdU1TZU9sZkVodThZTzlxYnVNdFJqbE1mNFl4LWNwdkZaTS01ZndHOVJYaE9qeHRhM1BwVERnUXdLeUhTZnE2M0xKNTZyMVNLX0g4WVdXZlZZb0NSSzdUM1BOUWJ1cTN2NGRKSDVucW14RDhwdEZLLU1EdVl3bVhPZFpLZ1lCTmdKVVlqZw?oc=5"
+    },
+    {
+     "fecha": "2026-09-26",
+     "titulo": "Derrotado en la estatal, Burgueño buscará reelección en Tijuana; sindica se descarta",
+     "medio": "Zeta",
+     "url": "https://zetatijuana.com/2026/09/derrotado-en-la-estatal-burgueno-buscara-reeleccion-en-tijuana-sindica-se-descarta/?utm_source=rss&utm_medium=rss&utm_campaign=derrotado-en-la-estatal-burgueno-buscara-reeleccion-en-tijuana-sindica-se-descarta"
+    },
+    {
+     "fecha": "2026-09-26",
+     "titulo": "Ismael Burgueño confirma que buscará la reelección por la alcaldía de Tijuana",
+     "medio": "El Sol de México",
+     "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQd0V4bFozWTdwWUZBbVg1c0Y0akJJZWlJNTVoV3dneTVjWFdTbzJpTWRwSkZBZlFBVWNpODJZTDh6MkxxekI2cDJCcUYzYXVRbEpidWV3RkhyWTRfOWpiU0puLTFQZUtkVGZoUldFRUhNSjZhZmYycExfTWw4TzJycUNHTlBkU3gtZzVlOVhacHU1Ym1faVFpbEFJbUJqa1VQR1hkQ2lWTGFiUjJiaWVfVklfWTM0SzROTzRTM1JpY2dMVWxM?oc=5"
+    },
+    {
+     "fecha": "2026-09-26",
+     "titulo": "Ismael Burgueño confirma que buscará la reelección en Tijuana",
+     "medio": "bajanews.mx",
+     "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNQlhVcnFQR1EwYjB1R3hWVTlUVTFoRUdpeDZQR1h6ZU1IdHY1alRMOFY2VFMxd2I2ZjZLYk5jN3hRVEVtdmplRFRXZThKZUFuRHdSRS1MMmV2aFNSdVJlSFh5WVRFN1Vza3ZCNjBSOHhGb1llcHNLdEpOZTJsaFNEbVlCQzA3UFgzb2RBZkVMSzlhZUs5RGJKWVpLR0l2UQ?oc=5"
+    },
+    {
+     "fecha": "2026-09-26",
+     "titulo": "Burgueño buscará reelección; Montserrat quiere regresar a la alcaldía",
+     "medio": "Brújula News",
+     "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNcWdrbERTbXdPRHU5YTFyTXFZVWxBdTViQllFc2tDeUpqZVRRZ014OGRSR2p0UzhXSS1KMkxjNHdsVEh2WEMxVTNyQWxaaVpubmJaeUR4QWdveFZLRnVPTU1XbzFicTlscGxiRWpzb3BzQTRjMjNxUVJieU1mRkxHSmhDLVBNSWJxTnFjUkUwcmhOMm4yUExUYURnZlRSWGdXeDkycmxtd2c?oc=5"
+    },
+    {
+     "fecha": "2026-09-26",
+     "titulo": "Burgueño confirma que buscará la reelección",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPR0hBWl8zNFhFa2ZCWWwzYkxUczJ6X2JlQjVhV1dIbzhMODUtTGdjOXdORFF2Q2w1S24yNDBxRl9FRlZ6S2ozQjJPd3ljdnI3N3dOb04zRFNkZU5MZVZpdU5DcHBCM2E0V0dheU1JaGxWdm5FMTlSU2tKNXprSHR0cHhpQ2hMTU5HSzNXaDMzMGpDc2hpRzFSY3J3?oc=5"
+    },
+    {
+     "fecha": "2026-09-26",
+     "titulo": "Burgueño anuncia que buscará la reelección a la alcaldía",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQd2JRMjlSMDlXOWdoZmtoTTgyUEpPNEV6VmVYWlZ5TnFncFY0ZlVoWHl3SnpNWDBGSlZNdnAtVVh1bnJmcDRwSFhsaFhaSUpENC1LN2l0RFNkaGRYZ0l2QmJSUnBWT01BUzF4T1l6RExScGV4Z1dZcE1mZ0YzaGdjM0NDbUppa25laTVYTDFsSVNwd2hlUk40?oc=5"
+    },
+    {
+     "fecha": "2026-09-27",
+     "titulo": "Burgueño confirma que buscará la reelección: “Estamos li...",
+     "medio": "El Mexicano",
+     "url": "https://news.google.com/rss/articles/CBMikgJBVV95cUxOV1VkUk9kVkZPRksxU3FoOExvSlpkVHJCTzlpb0F2QklBbi1lamZmTWZiOGM0YzNRMWt6NnE5WlpPVWZKLUo0OUdGQXJUaV9mZlBXdHlvZ3E3RDdYbjU1dzBxWkVPRVNuNkNaSDZZU0RYdWcxQVBWRTVoMzZvLVlDb1o4N05pN25odUF6dlZhSWJHd3NDdTJOc1puNWRBYi1YckNfTGJ1X1Q5Vl9qUi1fU3hETU9Gbk02cGZldVJJWE11Vkg4NWNqbnV1eExheXIxT1hFT0xyUUQ4ZFEzV09qdGd0amR5Zlg2cS1aVmVWOHc5SFVINFZmWC1xNTZUSkhiLWw1bTBCTFRRWTlzckpURkxn?oc=5"
+    },
+    {
+     "fecha": "2026-09-27",
+     "titulo": "Ismael Burgueño buscará la reelección en Tijuana",
+     "medio": "ksdy50.com",
+     "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5TUDV4NjMwRUNDeXVQVFZrelluaElBNFJUb1pLcnJlS01Ub1h1WE5SUmk5TkN3TngzZ0ZPM2g3OVN3bGhXakpvZ0twSDJuZGVQUDVyRFJJTlRRUDk3MjllbHFDRkF2T1dwQlYwQ1NUTmJRdFJZcGNn?oc=5"
+    },
+    {
+     "fecha": "2026-09-27",
+     "titulo": "Rodrigo Otañez se apunta por Tijuana en 2027 y da la bienvenida a Burgueño al proceso del PVEM",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOczBMQnJxVzFzOGxLR2JRSlVkbFRnOGt6SVdsRFg3TGVZb3VKdG9HRHF1VUJlX0lqczhTQ0tfM3Y1M3p0bjdZUTFBbmxvMG5tX3NXejNpSGxuZUNLZmhjai1lVlU5N2dZdHE1b29EUGdqaExVTjNuaFJnX0xNZXhwSlIzX2hpSnpNSkE1SXQzQjBtNjdwZ1IwSVZtZHZHMHdVelRXbWRFQTZVTUl6WWhmNm1Demw0eE1IVWJtdjJTVE5MWWE3SlBXdHN1TQ?oc=5"
+    },
+    {
+     "fecha": "2026-09-29",
+     "titulo": "Julieta supera a Burgueño en siete indicadores; Morena confirma resultado de encuesta en BC",
+     "medio": "Said Betanzos",
+     "url": "https://saidbetanzos.com/2026/09/29/julieta-supera-a-burgueno-en-siete-indicadores-morena-confirma-resultado-de-encuesta-en-bc/"
+    },
+    {
+     "fecha": "2026-09-29",
+     "titulo": "Ismael Burgueño buscará la reelección por la Alcaldía de Tijuana",
+     "medio": "Cadena Noticias",
+     "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOdnNRNFUzOXh1Q3p6NE5KeVhBNVY1RFdKWDVsX1VjcDBweVpDMmpDNmg1MElIN1F3NEZZb3J5S1pkV25wOFc3WUllVUdISlF3Z3JuanhKTDV6VGYwcDk5SlpPTjVuM284UUtJRVMzcFYyNFFBUUVZQjYtTzdTeXhXU3ltNldtcEJEX05wUXdKU2t0UkExTHRPdTc1WXZ4RUNXTmVUa0l0c0ZXX1cx?oc=5"
+    },
+    {
+     "fecha": "2026-09-30",
+     "titulo": "Ismael Burgueño confirma reelección en primer evento púb...",
+     "medio": "El Mexicano",
+     "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxPWjlnYXR2bEJYVHhGdXBuZzRYNkU1RVBSbndMZU95Y2hQSjM5OEJ6bm5mbVJ5UUJ2UTN5ZDdWaVJqa3pIaHhyaV81ZDJoTkp1QWc4b19FX3AzU0dtR21kSUVVcXhhTmZ1ZDBsbVFfMURlWFRsTGQtQ3lEVXlnZEFKNllKLWpHM2dMZVVxWHRyc1dUZDRXYTdEd0Q0VGtRZWVxS0hqbjhnc3YtUlhlZ0dFNExsNmtDRHdmSktEVzZNRzJuT2VWMUVVa1dCczh0U2h2Z2lQX1NHMDh5VkRlRXYzc1Bsb0FzMHJwWDZPTw?oc=5"
+    },
+    {
+     "fecha": "2026-09-30",
+     "titulo": "Revelan: Burgueño, el más conocido; Julieta le ganó en otros rubros",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNUHkzd3pYQm9IcWtMYVdBNk9GNEFzRERENDFCelcxcE5OSGlGLXIxVFNOT1ZseTljWEpyeVZld0k1cU9QZ0psdkhzTlpKc19ZcUZrYnRiS2hMdEk5WE82cjNNZ2Rid2F5aXBUb1hvQ2cyTVlHMEw1bWVzdzRlYWNfZEFMcXYzaGdnT3o0YWN0eDZjbWg2azlrbGIzSEV1eXdDNGxBZ0F1WDcxTkluWVAtZW0wQXNJdw?oc=5"
+    },
+    {
+     "fecha": "2026-10-01",
+     "titulo": "Ismael Burgueño irá por reelección para la alcaldía de Tijuana en 2027",
+     "medio": "Grupo Animal",
+     "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPcjdmU1dHMVA5UkNnVFpQUDRGUGszd3dycnczZjJ0bVd1ajBwb0tTYXdQRGFIaktscU5ZVnRwUjBTc2RPRnpES2tTcFpHdkNRY3BUYmhvV1JCdDJ1WmVKWW9aZy1uRDN2LTNMTm5MYlRsQ0lvekdTaV9BLVRCT0dneFQ5R0RFUjRIUjAycHF1UFNjRmUyTWZDcmc2WTB2b1ZHYmw1LQ?oc=5"
+    },
+    {
+     "fecha": "2026-10-02",
+     "titulo": "Ismael Burgueño prevé buscar la reelección en Tijuana y defiende resultados de su gobierno",
+     "medio": "Milenio",
+     "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPSDM4aTJtMC1fc3JhbHphNXhrblF5bG5FZnVxU3plaTZxMkNRX1dZR1VCWnlCLUFsaXVwMUQ1cDM2Q1F2SFhYTVlCWjR4NFZWbmI2NGtuS2FGRjJHYzlGaUlSVFVfVll1SVNUb2ZJZ1QzRUplUl9kUUJfYlpFRVVCMXBHOUVPVGZFdGfSAYoBQVVfeXFMT0gzOGkybTAtX3NyYWx6YTV4a25ReWxuRWZ1cVN6ZWk2cTJDUV9XWUdVQlp5Qi1BbGl1cDFENXAzNkNRdkhYWE1ZQlo0eDRWVm5iNjRrbkthRkYyR2M5RmlJUlRVX1ZZdUlTVG9mSWdUM0VKZVJfZFFCX2JaRUVVQjFwRzlFT1RmRXRn?oc=5"
+    }
+   ]
+  },
+  {
+   "id": "acarreo",
+   "titulo": "Asambleas con acarreo y funcionarios",
+   "resumen": "Zeta, Brújula y AFN documentaron acarreo, apoyos condicionados y funcionarios en sus asambleas de julio y agosto. Ningún medio nacional lo retomó.",
+   "medios": 4,
+   "nacionales": [],
+   "cuerpo": [
+    {
+     "parrafo": [
+      "La llevó casi solo ",
+      {
+       "t": "Zeta",
+       "url": "https://zetatijuana.com/2026/08/burgueno-hace-mitin-con-acarreados-y-funcionarios-en-tijuana/"
+      },
+      ", con Brújula y AFN. Las notas describen asistentes convocados por grupos de WhatsApp («Líderes Estrella», «Líderes Unidos Tijuana»), apoyos condicionados a la asistencia (Brújula, 8 ago), funcionarios municipales y estatales presentes pese a la instrucción del partido, y ",
+      {
+       "t": "32 personas atendidas por calor el 23 de agosto",
+       "url": "https://zetatijuana.com/2026/08/acarreo-funcionarios-servicio-de-eventos-en-asamblea-de-burgueno-no-hay-dispendio-asegura/"
+      },
+      " mientras él llegó con más de una hora de retraso. En julio la Sindicatura de Tecate abrió una revisión del uso de recursos públicos en un evento de Morena con él. Ningún medio nacional de este corte lo retomó."
+     ]
+    }
+   ],
+   "titulares": [
+    {
+     "fecha": "2026-06-18",
+     "titulo": "PRI acusa “chapulineo” de Burgueño; CCE y Coparmex exigen que no se frenen proyectos",
+     "medio": "El Sol de México",
+     "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPbkYybmM1N2xpbmgxYml2c1dTcHAtS0dtNDRZYWF1eUE4bWJQTG83T0VqV2U1MHp5RHNNR2xXdVlSME1kVzhoNDhrSk5WZDJKWThJclM2QTZmbkxGZkFVYjh2LWM1SU9qNnRLTlJuYXpVRWszZUNnMXFtX2l6WjFjcEFJMTkwa2pUdTRQRE8wWXN3UHZuaTR5NDVERFhrU2g4WjRQWXR1TmNoYXRlQ3Vvb3Z6dmYwbUl1SWJhcmNVTDFKcWJIMVI2Qktn?oc=5"
+    },
+    {
+     "fecha": "2026-07-01",
+     "titulo": "Con recursos oficiales, Tecate promueve conferencia de Burgueño",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPczVVdjhmUVJUWFYzZGV2ZlVtTER5bVotNm85UmdtWTNtcy1fZHpPYU1kSElpdEQyNHNRV1hCcllJQnZiYjRIc2kxOElVSkNEdldFaEcxZnd6RkVDajd5RU4tRUNCQjFBYk5RbFhEaUJraFc0UURqY0ptX3cyMUpuNURPWjI5UVhuRVVEVTU5SUJHOW5RSEZrSm92bzlLTEpsTEFPVnZOQ0h6XzhFMWZrZVVkUQ?oc=5"
+    },
+    {
+     "fecha": "2026-07-02",
+     "titulo": "Funcionarias \"seguramente\" pidieron día libre para apoyar a Burgueño, dice Cota",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQdGZXUmtLUFFubEQxLWsySG1NMURBbkxQck1ocnVWRERFNlVaQlVVU0NTWmtjM2hhYUhMZUEtV0E2Rm1xTTM2dmFXZ0FMQ3ZkVmc2NVFjWkxtN0VmN1JQSUJqSmdVVXRvakExaXd0RlVGTEdDRWlDTFVkZWhKYzN1NUxiV0VXZ25DZzg5aDFfV1JxZmVzVm1lVlBGaEJ5YUx3V1FtSEluaENxbW1KZFpmaDJsSkcxTURXNHpKTkpUR2tDZmtVcFE?oc=5"
+    },
+    {
+     "fecha": "2026-07-07",
+     "titulo": "“Estamos viendo puro chapulín en todo lo que es Morena”: reclama ciudadana a Burgueño",
+     "medio": "Zeta",
+     "url": "https://zetatijuana.com/2026/07/estamos-viendo-puro-chapulin-en-todo-lo-que-es-morena-reclama-ciudadana-a-burgueno/?utm_source=rss&utm_medium=rss&utm_campaign=estamos-viendo-puro-chapulin-en-todo-lo-que-es-morena-reclama-ciudadana-a-burgueno"
+    },
+    {
+     "fecha": "2026-07-11",
+     "titulo": "No hacen \"campañas adelantadas\", asegura Burgueño",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQSE5LTFZCWEF4MEZRMzlVNGhvZzRFeVNaTk5kczM4aS1ZUEhLdktsdG9QanBaOW9wTWhPUTNXekxjbUN0WDZLdnJVUkFRdXhNNEJYOHUtZkFLR1pxaWlEU1lCY0QxNE9scVVqMlZZMGNhQTlRbmJtc2U4REZuS2hZUWZtcEI5cGlQZDJic1FkbUNIUGhYdGFMM0NZcG5Gdw?oc=5"
+    },
+    {
+     "fecha": "2026-08-08",
+     "titulo": "Contrario a recomendación de Ariadna Montiel, organizan acto masivo con acarreo para Burgueño",
+     "medio": "Zeta",
+     "url": "https://zetatijuana.com/2026/08/contrario-a-recomendacion-de-ariadna-montiel-organizan-acto-masivo-con-acarreo-para-burgueno/?utm_source=rss&utm_medium=rss&utm_campaign=contrario-a-recomendacion-de-ariadna-montiel-organizan-acto-masivo-con-acarreo-para-burgueno"
+    },
+    {
+     "fecha": "2026-08-08",
+     "titulo": "Condicionan apoyos a cambio de asistencia a evento de Burgueño en Tijuana",
+     "medio": "Brújula News",
+     "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNN0lYMU5VOXlSOFFfV3VCSW1nUE5aV3duUExVTXlwWXJNTG9hU2VETW1qckVBbEV3Mm1fR2xGQTJpNFFhYVN1eWNaNGJBTlRHRzJDX3A4eUNOSTM1QUJzVFhBUzR4MVBjdlFraE9GN3l3Y1VsMC13cmN6aXgtNXJfTmdNblhLdzI1WVRzQ3hXUUJGaHpsYVF6Uzh1aXRwbTJ4bzVhZFp3a2ZMaUtrNUhR?oc=5"
+    },
+    {
+     "fecha": "2026-08-09",
+     "titulo": "Burgueño hace mitin con acarreados y funcionarios en Tijuana",
+     "medio": "Zeta",
+     "url": "https://zetatijuana.com/2026/08/burgueno-hace-mitin-con-acarreados-y-funcionarios-en-tijuana/?utm_source=rss&utm_medium=rss&utm_campaign=burgueno-hace-mitin-con-acarreados-y-funcionarios-en-tijuana"
+    },
+    {
+     "fecha": "2026-08-24",
+     "titulo": "Acarreo, funcionarios, servicio de eventos en Asamblea de Burgueño; “no hay dispendio”, asegura",
+     "medio": "Zeta",
+     "url": "https://zetatijuana.com/2026/08/acarreo-funcionarios-servicio-de-eventos-en-asamblea-de-burgueno-no-hay-dispendio-asegura/?utm_source=rss&utm_medium=rss&utm_campaign=acarreo-funcionarios-servicio-de-eventos-en-asamblea-de-burgueno-no-hay-dispendio-asegura"
+    },
+    {
+     "fecha": "2026-08-31",
+     "titulo": "Pese a prohibición explícita servidores acompañan a Burgueño en Asamblea",
+     "medio": "Zeta",
+     "url": "https://zetatijuana.com/2026/08/pese-a-prohibicion-explicita-servidores-acompanan-a-burgueno-en-asamblea/?utm_source=rss&utm_medium=rss&utm_campaign=pese-a-prohibicion-explicita-servidores-acompanan-a-burgueno-en-asamblea"
+    }
+   ]
+  },
+  {
+   "id": "patrulla",
+   "titulo": "Patrulla Espiritual y los 7.2 millones",
+   "resumen": "Entregó 7.2 millones de pesos a la Patrulla Espiritual para becas; en septiembre ese dinero y la clínica Jireh entraron a fiscalización. Él dice que el apoyo sigue mientras no haya irregularidades.",
+   "medios": 8,
+   "nacionales": [
+    "Yahoo"
+   ],
+   "cuerpo": [
+    {
+     "parrafo": [
+      "Una historia larga que mezcla personajes virales con dinero público. En diciembre de 2025 suspendieron a policías municipales por robar a integrantes de la Patrulla Espiritual. En abril de 2026 Burgueño le entregó 7.2 millones de pesos para becar a 300 «tazos dorados», y en mayo fue padrino de su clínica Jireh en Mexicali. En septiembre ese dinero entró a fiscalización (Zeta, Los Ángeles Press); el 29 dijo que el apoyo sigue mientras no haya irregularidades. Los líderes del grupo son figuras de redes por su cuenta, así que es donde el alcance en redes puede superar a la prensa."
+     ]
+    }
+   ],
+   "titulares": [
+    {
+     "fecha": "2025-12-13",
+     "titulo": "Burgueño recibe a “El Chiquilín” y “El Rambo”",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNX0RDYUppYUpVNzFHMERRcnNCX3RmTEdab01CTzRBOTRKOTE4R2kxVW1CVjREb0hITzVDbTNjWUNuWFRWVkhMb0JKY3JIVXBYbGpNU1hwNVNsczZVRHBtX1dZLVotX0hMY3ZmSGh4cENTNUJwR1RIc0VCTkd0dFNHcHlRSQ?oc=5"
+    },
+    {
+     "fecha": "2025-12-15",
+     "titulo": "Presuntos policías implicados en robo a integrantes de “Patrulla espiritual” fueron separados del servicio: Burgueño",
+     "medio": "El Sol de México",
+     "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxOOXBJLWFwN2N6TjlNUm9Yd2cxbVl6RHdVRWNFVGJXSGlxa0xKcjFsTEd0OUUzUWdhaTdIVlp3ZEFjdDByaW1QQjFFT2lBLV9fbWNpU1ZZcF9uMTkzcTB3QTNhMDRULUVRUldZbTh0azV6Nmx0aXc2TVA1eWY1MEhiVE9XSDBTVTFRNnRua0o1VmJxUG83UFUzTmYtVTdtdEtzeUp5YlpLdkRyQXl3RkhXMXF3V1dCMUc3OXJXX0dybUdKUVRIT3hyS2JIRTI3LVdhUTNLZEdPYjZQc1l2RDJodGlfZW9SRmlLbXpmNFczY1c5cjg?oc=5"
+    },
+    {
+     "fecha": "2026-03-12",
+     "titulo": "Patrulla Espiritual anuncia nuevo proyecto en colaboración con el alcalde de Tijuana, Ismael Burgueño",
+     "medio": "San Diego Red",
+     "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxNZjZaU0lzRmJrLWFtRFlKWmZpVUdFZnk1NVZiT3BTWkpHZkFLMGZ5ZkJpTWhzYWVXSWZpTnpBRlBwNTZ5LUE0MXh2MEp5RnEwY2RYX1ZzQk5lbDlkZ25EallxTDVRRjJxZGkyVlVKek9FU2Z5STMyX3JuY05pcXpQXzFWaVhIZmdvbkxDLVNFaHNQVEVBbkhqNmQxQy1oOXNjWjhYMzVxelk3QUZZN1FGeGxfcFFfdENmV3lrenJ4NEZkdFBrRGZjV0VBQW5XRjVtRUpB?oc=5"
+    },
+    {
+     "fecha": "2026-04-28",
+     "titulo": "Burgueño entrega 7.2 millones de pesos a la Patrulla Espiritual para becar a 300 ‘tazos dorados’",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOblNHYTE5VklRUktCd1FRZEV1NlFJZmFhaXhWSndOSWUxYklqUTdNR185d3psblllTmZHbzhNYTZxdS1FVVgtSG9ld1hBV0xfUmp3M2ZRQmNtSDVnZkY3N0dVMEZOd1NGV1FyTlRGQ2FBT2VzNFhoNjFsOUNVUzdod0NyV3pJLS1VQkM3Q1FKLUdjY2ZVVncxTHE2U2hWa0p6MVNadDgzWVFNYVFGZ3ozWFRrcEJ0ZnBkNkoyMnlCSmJXOS1TRENDRWVn?oc=5"
+    },
+    {
+     "fecha": "2026-05-05",
+     "titulo": "La Patrulla Espiritual inaugura clínica en Mexicali: Burgueño fue el padrino",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPWk9yWmdJOEp1MkxFa0xLaUpsZzV5ZGtFMnFBUGM1UVRuMVBKQ1FPUEJKbExCNzM5RHlsNUg0WDZVenlrV0Ftb2syT0J1MUd6V1VkQm1NeS1XZGJxa0Fwb1NDejdVRmxhU2dKTTZFVzI1Z1JDdU9abV9OLTUtazFBTTN2MU5NamJTeGxQSC1kTjF2XzM0VkQyc09wOWlEWkV1UW51em9RLUwxMWFYS3RvMg?oc=5"
+    },
+    {
+     "fecha": "2026-05-06",
+     "titulo": "Asiste Ismael Burgueño a inauguración de la clínica ‘Jireh' en Mexicali",
+     "medio": "La Política Online",
+     "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPZ0M3aGxsUTFIelhnUXVfOGtRVFZ1VkpXa2dGNXZwZTBtaWFmS3FOaDR0c1VWaldnMFY0YlM4TlZ4bG02R3NzR1VQMjJMMGZLTzZuS1Fvc1dwb1VESnVDdWVSY0dWemZwQ2xlcDQ0TFROU0gyUUZXajZ6WFRBQkJvMFJzU0FfYWc1Nl9xME1aaWpib05BZS1rbWNVMUxIdlVQbHVWUzd3dVJhaThTRVdUaTlwOUEzWTduR0p5NTdnblc3N1RabkJN0gG0AUFVX3lxTFBJX2g1eHFpMDFZUHQ1c2xHaVV4SXIxT2NUdTl2STduMWJFRGxOd0F5ZEt1UExFZ0pNUDJSUnZQc193T0ZIZlFqenJhT1RMR3dZUDlmVmdXamxORWJFbzMtWlJxMW5DS2ZMSFNmc0pBbWhiVGRKLVYzbVdXTzNXeGtRRzl5V2ZpeVUwb0hyYm9XSTEwdEJLV3BXUnlOcG5FMW1iNnhFUnpnMkl5S0xHYWNDLVhIeg?oc=5"
+    },
+    {
+     "fecha": "2026-05-15",
+     "titulo": "Burgueño reúne a El Chiquilín con activista trans",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNdXp0dm05MnpqYmw3c2xud3lEbjhkWGQ5ZW11RXdVWDVydHFJMmJUMXU1OHJST0F6UmFMVXdURXNmbnFGWjBGQ3dqclIxcmZlSnRuZUdDUGR3RmlzbE1nZW8zcDYzSjNfcjh3U0luR1Jua3pxODczejRqVldpSVRybTBoYkpyU1pkSmp3QzJn?oc=5"
+    },
+    {
+     "fecha": "2026-05-16",
+     "titulo": "Sostiene Ismael Burgueño reunión con ‘El Chiquilín’ de Patrulla Espiritual y directora de Centro Comunitario LGBTQ+",
+     "medio": "El Imparcial",
+     "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxNUGFaUzBpUHpDNzBnM2RjOE9DRFNwZXhLajA4bGhHZmNKcjlEWTFWeUR0M000OFdHZnNHWG9hc0RIZzQ3dWplb2pkT1RBaktaQ1BzSFNuOF9KaXdMUk5wQVFxcktwNVlkWUtMeGhONGx5aU04ZzFzM2x5YzZrZE9lMEg5MDRZbjU0NjdDdzUwVVZnc1BvOFRXOE5BWkNGRGlpWHlMRmg4emEzZUw2MlJiREdGUld3ZjE5UjlQWlZCLVR5Y1lEaktlYUFPejFfS0lkbk0weVp5LTQ1b1hXLTZ4czJ5dTk0djRNREtYZTNvd20wa2hOMXBF0gGSAkFVX3lxTFB4bTVzNDdobjFpS2dwdGdlNTZmNEduN3dGM2lheWQzSGVfOEVtYVNhdGYxb3hqSkpjbHNnLUZHWDJSSldhWklHZkQxRGVqVHFLeUp5VHVkTWlzZVItdGp4MkoteUUtNXZTQkk3aXBHYVpCeVY2SU9INmNTeE9qTEtmU3NTdHlJNU1NMTNyc1JhenJyM2VtV0p0LXI4MHl1ek5YTVVnNzZkcDc0cnc2X0otamJfck01LUxBY3FOU0tobHV0a252ZTRRYnZmQ2psUUR0SkR5WVlIaUFDcFo5Ql9VcE9UOUN1c084QldvLW5SNXptMFo4UVZZQ01Gb2N1bnItYzdlek05QU0ybVU2bWZYS0E?oc=5"
+    },
+    {
+     "fecha": "2026-06-16",
+     "titulo": "“Les hemos cambiado la vida”: asegura alcalde Ismael Burgueño respecto a apoyo con becas de la Patrulla Espiritual para combatir las adicciones",
+     "medio": "Yahoo",
+     "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQanNIZHp6dVlJblI5eDRxbklDVVVvZTdWWUNLdUlhdWtMcHhpb1oxb3U2dnhkZ3VBWFRCUWwwbC1xNUhFWjR3LWNWTVdkR0RNODdaZnpsRWdDQkwzUWdfcExnUDFURGtUejZIakkxUEIyLW9qQU5NR3BnOVVBVWtpd21aS1pfdXFLbzZBcw?oc=5"
+    },
+    {
+     "fecha": "2026-09-08",
+     "titulo": "Tijuana audita 7.2 mdp entregados por Burgueño a Patrulla Espiritual",
+     "medio": "Los Ángeles Press",
+     "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNVFF5bkZvQUU0OGEtQmZ5eWVzbFVkc3hHaUQ0d2E3NjhKSVdxSGNzNjVkekx6eE1xbjF2ZzF0SGhxOVI0VnA2M3JWUm02bWRGelFXVlhXUVVodGlVZWE4TER2Zlh6U1hOcENxSWtheGg1eWg0V1c1N0xXUlI4TDBiQ0J6cTlnTzhEeGR4bGVpQm42T2hYekJYYXQ5djNTSjdJV2xoVHlEd3VTV3NGOG52VE9Bb0JHWUR6YkFjUEc2Q2RXS0xCckhLYmh1bmpWT1XSAdQBQVVfeXFMTmpJVlB6OGJuSW53eGdMeTAwQ3BlMm00MnNiSVdCMnhyTWk5OTFNajctVE9qWHNHWnVvNENCLVZWcngwdl9lRmZWdU8wN2ozTGFTR0lEYmZoOFFYYUx1cGlodGdISURNZHM0em9pV0dlS0VneHUySUZWV1lhYU9WRnZXQVlmLXRIY05QMmNIWlVrV2pYdWZGOHVuaFdaRWxmd1hPVEhRN2FBdkhEWkFhMjN0eFI1MGFYWGwwU1RaLUQ1X1V1THVzR2YwamhNeDZmeXhHUWw?oc=5"
+    },
+    {
+     "fecha": "2026-09-14",
+     "titulo": "Jireh, bajo fiscalización por los 7.2 mdp que le dio Burgueño",
+     "medio": "Zeta",
+     "url": "https://zetatijuana.com/2026/09/jireh-bajo-fiscalizacion-por-los-7-2-mdp-que-le-dio-burgueno/?utm_source=rss&utm_medium=rss&utm_campaign=jireh-bajo-fiscalizacion-por-los-7-2-mdp-que-le-dio-burgueno"
+    },
+    {
+     "fecha": "2026-09-29",
+     "titulo": "Burgueño mantendrá apoyo millonario a Clínica Jireh hasta no haber irregularidades",
+     "medio": "Zeta",
+     "url": "https://zetatijuana.com/2026/09/burgueno-mantendra-apoyo-millonario-a-clinica-jireh-hasta-no-haber-irregularidades/?utm_source=rss&utm_medium=rss&utm_campaign=burgueno-mantendra-apoyo-millonario-a-clinica-jireh-hasta-no-haber-irregularidades"
+    }
+   ]
+  },
+  {
+   "id": "amenazas",
+   "titulo": "La cabeza de cerdo y el relevo en Inspección y Verificación",
+   "resumen": "El 10 de abril dejaron una cabeza de cerdo con una amenaza contra él en la Zona Río. En las semanas siguientes relevó al titular de Inspección y Verificación, cambio que Zeta ligó a narcomensajes y denuncias de extorsión.",
+   "medios": 5,
+   "nacionales": [],
+   "cuerpo": [
+    {
+     "parrafo": [
+      "La imagen más impactante del año: el 10 de abril dejaron una cabeza de cerdo con una amenaza contra el alcalde en la Zona Río (Zeta, AFN). En dos semanas relevó al titular de Inspección y Verificación; Zeta lo ligó a narcomensajes y denuncias de extorsión, y Burgueño lo llamó un reacomodo interno. Un diputado local (César Damián, según Zeta) responsabilizó a la gobernadora y a Burgueño de un ataque contra su esposa y lo llamó represalia por denunciar extorsión en el Ayuntamiento; la Secretaría de Seguridad dijo que fue un asalto."
+     ]
+    }
+   ],
+   "titulares": [
+    {
+     "fecha": "2026-04-10",
+     "titulo": "Dejan cabeza de cerdo y amenaza al alcalde de Tijuana en Zona Río",
+     "medio": "Zeta",
+     "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPdmlFQ0g3MFBfUWFkbGFHOWM2WXdvd3BiSG90M0lZUWZNZ2RWQzJXSG5vXzZieEZBT3VucVJrRWpLeDFEVldkanpicXYxTnV2WklYUVlfTjJyMTgzSEpOM0pnNWt5N1ZqMkpyNnpFZmx4MlFBVmx5akROQkNUT3N6ZUFzcTByZ1FFbTd6Mk5vVDM5MGc0RmVRelRmOUlxbGJvOE0tdFBnZEI?oc=5"
+    },
+    {
+     "fecha": "2026-04-18",
+     "titulo": "Designa Ismael Burgueño a nueva titular de la Dirección de Inspección y Verificación Municipal",
+     "medio": "Uniradio Informa",
+     "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQMEZHLV9wWXZZNHdFS0NJclZGRk1mNTlwcF9hTFZZMFlCNzhFUWpkNHpUcHRqTXA1ZDFGVzR2cEVNTnhNZkNBV0JrY3BaVTNnQ0Q2RFVMazlpQWVlTHBSd0oyUWxqLXJXd3R1RWdady1XUW53ZVBEdWZUaVNJa2NSMk1fYWd5LTVFMlcwUnJyOWdKWmQtcktRZXN5dld2TFFMUmVVQnl6MDZ2Q0o5aWZGQWdKWGQ1ZVBUYzAydGp2R0YydUxtSEHSAcsBQVVfeXFMTTJHMXNTbXdMd0lLLV82ajN4d0FQQ0JfZVE1VWZDNnlQUFhXUXFXbTdVY0Y5Wnlzc2JIT2k2Rkc5S1ZESHpNQzZGMzU1X09GTUhub1ZWbjNqaDJfV1REN1NBaFRRYkwzbGVKSndycGNjM1VGVFBOTW03UmVqd3pncG91VXVGLXZVT2hkczZNUldPWGs4WDdhMkl5N0I0U0tlSnhqcTY5cVk1eVFuZ2Z2OFhob2E0WGdmVHRZbkIwWC1FUk4xUGpvMDAzblE?oc=5"
+    },
+    {
+     "fecha": "2026-04-20",
+     "titulo": "Diputado responsabiliza a Marina y Burgueño por atentado contra su esposa; hay un detenido",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOY2tNR3VtNTIwRUVxOHRsOHdQSWExRnkzVXFuSXNUT2lRTnRkTU9haHU3REw3ZnZ2aXRDcXJVaWhwdVA2aDA0QTRZcnFDQVVtZjBiVFNBa1NHMEd3Y3ZpaFdkWG4xUmVtMUNld0J1anQyQlFaeVAzZFFEaGFyUFdkRjFaQ1J4ZklfdFpKdGhwVGMtM2VhZU4zZUZLck1paGxQemVSWVZHOUgtZXJQc0pxanhGRkVQWlJFcm1TRl9XRDdheWdWSXBBaFdB?oc=5"
+    },
+    {
+     "fecha": "2026-04-27",
+     "titulo": "Destitución de director de Reglamentos fue por reacomodo interno: Ismael Burgueño",
+     "medio": "bajanews.mx",
+     "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOZDFEd3FBUEx1M3hNMnFsQ2gyVzdDWXY5WUxHRVRFRUlhc0tYNk85RFFYOFdqMXlZZ0R2MWFJNmVvR0VuOVZkRzlNUWhCZ2EyYWs4TS15RVJ1VWtEclhRYmo1Tm03S085dEhIdUFrLVg0S1YzSjJoN2w3eEFoWnJuR2NEdDZTQWFkRzRQRDI4OGtBb0JIYUdLM05OY0diMnJ6aUw4V3hGY2xfZkhEdU5NbnNsbk9PVXM?oc=5"
+    },
+    {
+     "fecha": "2026-04-27",
+     "titulo": "Burgueño descarta que relevo de José Antonio Olivas en Inspección y Verificación esté relacionado con amenazas",
+     "medio": "Zeta",
+     "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPQlN4R1JIY1Q5blpaamFNXzhTSlVwRW5UcVl3ZHBHcnlXbTNmTFJlRk4wZGhnb3EwNzkxODdPU2RvQnUzOVBjWlB3OEF3MS1QZGtjTWJXZHZrbzZsWVFjLXl5dFR2YmxMYjVkbFc1REIxS3g2MmxsM0RDQV9aeUQtWTA1WDdwZ0R2LUNqUF9aSTdibE5uWXBnYlg1cUVtbm1oem1lRkpZclY3Wm5Sa3NudldsYjBlVE5UZ2pHN1h5anc2MGl3aEwwaW80Sjl3emR5VXNFQnJpX0J2aTA?oc=5"
+    },
+    {
+     "fecha": "2026-04-27",
+     "titulo": "Cambio en Dirección de Inspección y Verificación en Tijuana obedecía a reacomodo interno, señala Ismael Burgueño",
+     "medio": "El Imparcial",
+     "url": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxPcThmTXpSeElWdkV0U0g0N2VRamZuSkowNFBzYmlibF9Ub2pxS1c4cWplZUZLdHlSNVI0WDd6dkJaU3ZOR3dzek9RSF84cWViS0RaSnZZOWxpcWg0ZHc3RF9ocXJtaFV1YzFYc3AyTHBJU0F0Ym05MnIzeWdmV2hvem1oLXBaSmY5WXVVei1sei0wRjBhVTFFWHEzYUo2VDlNU2p4RVlWMkFhLWt5N1dRX0xIV3pfTnZ5dGxpVHprU0Q1N1ZnUVEwZ2NLank4UEVtbERqd0VZT1dEazd2cENvcjNBNW12RktfRXBmSW85U194X0hlSnfSAZACQVVfeXFMTlA2RkhqUjFJQTQ5Nll6ZGUyelZKOGs3bERIZEx2dC0weHR6Y01PSFp0Ti1pazVneFZmYnBlMnNUdmp1THpnNUo4ZVBDT3hNN1BOMDVReFMwSEdIU3ZMRERobC11MnVaNTBQSDZtLVdENHc2TTRiV2ltOGVfd2JDbDl0bGE3cnRjaU1KXzhaTDg2enIwOWhlQUR2N1ZPSzJ2Q0VOZ2NxTDRZUXpGWkpWRzFPd2k0cHZaZFdid1pTeTBJWGtJN180aHhjblVlejZZNktKcnlKaEtaSFBrZkVmUkdkdFBRYklyaXpBSlJNbHNOZG1VN2FIbHBVcndWYUNxUS0tNXgxb25SbFM1UmtzaVg?oc=5"
+    },
+    {
+     "fecha": "2026-04-27",
+     "titulo": "Diputado César Damián acusa represión por denunciar “extorsión” en gobierno de Burgueño; SSC dice que fue un asalto",
+     "medio": "Zeta",
+     "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQRzRCN0F4aFJnRjRQalFjQjl6dVJMbEJ5dHJ0QmZHeDI4TFJjeEVmSE5WTmRLaUpsZ3lTbExJWHBrVzZyYWlIeWZzbUE2NW5WNWRwaGZVLTdPb3RtX04zOFVXbGtZY0VKQlV3bFJ2MG5kenFpR1dEdTJuVGJhZUh4RUx1d1kzNXkyajNXOFFnel9CZ3ZXTzJIb01uc3AzUVczSEdPWnp6VEwwMHQ1UEpKTXhEbzhBajViRDNhRlFPMkZJN0IxbG9EbTM2WGFzM3h3cGswc3ZXRDI0X0pESlE?oc=5"
+    }
+   ]
+  },
+  {
+   "id": "playas",
+   "titulo": "Playas de Tijuana y Grupo Ruba",
+   "resumen": "Vecinos de Playas reunieron 4 mil firmas contra un desarrollo de Grupo Ruba en la Cañada Azteca. Tras posponer una reunión, prometió mantener la obra clausurada y revisar los permisos.",
+   "medios": 4,
+   "nacionales": [],
+   "cuerpo": [
+    {
+     "parrafo": [
+      "Un pleito vecinal que se quedó en lo local. Vecinos contra un desarrollo de condominios de Grupo Ruba en la Cañada Azteca, que describen como zona de conservación, reunieron 4 mil firmas. AFN tituló «\"Planta\" Burgueño» el 17 de mayo, cuando se pospuso una reunión con un centenar de ellos; en los días siguientes prometió mantener la obra clausurada y revisar sus permisos. En junio, manifestantes contra el Programa de Desarrollo Urbano se quedaron afuera del Ayuntamiento."
+     ]
+    }
+   ],
+   "titulares": [
+    {
+     "fecha": "2026-03-29",
+     "titulo": "Burgueño presenta de resultados de los Comités de Seguridad Ciudadana en Playas de Tijuana",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNZzJ4WjNXbWYyNEFYTmgxcHpvZUZJOEt6ZGdCdUh4NkFxazNVVk8waVc2c1dwSVdjamFnQUZmdmU1MGFFN0RiYzlCTV9lS01nclNjUzlGMEFNQS1pcGR2eDFhd3lzT1cxTWc1OXVvb1JjYTA3TFpSd1g1WVcyd3duYVNjMGwzaDgwTVpPajM0bXNtUm5sT09BRUhWcWxjSFlpblVmbXI3aDJkc29uRTdyMms1eFBYZXNINXpqU0lwR1pnZ3l3?oc=5"
+    },
+    {
+     "fecha": "2026-04-19",
+     "titulo": "Piden a Marina y Burgueño frenar a Grupo Ruba, construyen 10 torres de condominios en área de conservación de Playas",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxPVWphcXB4WFpxRFg2TEE1cG9ZVHRPalRlLVd3WEEwcVJvQkJRUDJQTkQzWTRJYl9VLVBkUnRDX1hZZW1KZWRuZE0xYjBILXNVY2s5VGt3QjJ3MUR1RVZxNm0weTd1eWZsZVpRQ3pBM3RONUM2cEdFTkJNOWpGblpfWHVtMWtqbGtvNjJMelZPVDRtekZEV1JCRU16RG1vMG50dFBad3lzQ2w4SnVzSEJXbUJvNkVYM0x5LTRMV3JtZVQ1cFFPclJrTktRTlVteDRmU3R3OUhXbXJieWZhY1ZsTzFGai1vZw?oc=5"
+    },
+    {
+     "fecha": "2026-04-24",
+     "titulo": "Piden reunión con Burgueño por problemas en la Cañada Azteca",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOWGM3c2k1T0VxWlpfUVp4WXdrMjZSQWtjT1lRSWJFdHNERENnY0stVkdsV2V1UW1SS0dTUGRmRU9TbGc0akVYWURpa2g0Mm1rX1FOeHUzOXNqZVdoSExtYldOUmdQQnJ6ME9QODFHQklrcU1hZF9xT09KZ2s5YThlMDItQUdmb3ZiV0pKYTJWTi1TdEVVNGh3SmVSdEVrSHcxNHJ2WTAtWFZBa1ZmYmpWdQ?oc=5"
+    },
+    {
+     "fecha": "2026-05-17",
+     "titulo": "\"Planta\" Burgueño a residentes de Playas de Tijuana",
+     "medio": "Agencia Fronteriza de Noticias AFN",
+     "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQa0pPT2VwLWZzbVpDTlZ6cU1LVHBjX1BWTzJvZFJ3VTZwUVU4V29XUmxSWWVlUTd6aXdBcWlTZEgzdno3LWNDVzlwS2V0azZSRFQ1T3MtQnNVVUVyaHZPcUd0aTQtOWZ2bFJKMGwyUUpjTlVCbGtzYVlVNlBhZ1o2WXZiR3FYVTMzODMwVlNDbFJfejBpTDFjWE1XTzVGTGJrd2c?oc=5"
+    },
+    {
+     "fecha": "2026-05-18",
+     "titulo": "Burgueño pospuso reunión con Defendamos Playas: 100 vecinos lo esperaban para pedirle frenar la destrucción de la Cañada Azteca",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxPalNLdjhCenJ0eE5fc0pYekxTU05kcThCR3lWY0VwUnhPVENvOXRqcWQ0aDJRdER4Vm5NWkRvRlR4eXh2Z2RVU3pSSUx3X2lESUNPXzdBc0tOdWt2ajRpS0VSNV9zWHh3TWhDYl9zMHNicHBvRmFGNlE1eng2MzdvT3V5bWljbkMxYnNNSTJQRVhBLWVacmJHWW1kTFFmaDlCcTh3OWxPZ2RlV1IxeWNXU21aSnNaeUVOUWgwV1BQeFdweE9kTDdzdmU5dzU5b1Rvc0FQTnQxcnNCck1IdVN0dDFYb0JXQ21KOVVpVDNlS0tZdnJW?oc=5"
+    },
+    {
+     "fecha": "2026-05-19",
+     "titulo": "Continuará clausura de obra en Cañada Azteca, aseguró Ismael Burgueño",
+     "medio": "El Sol de México",
+     "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOd3pCclRHUDRLTUt6S0tycnp6TVpGNHk0TGNDMUFzNXVQam9zc0dqWG1yTWNYWFFtREFTZjVVM0Y3QS1Mc2FOWWlzZWtWZ0k2eUlBXzZXYzJTVDFJX1h5ODZWV3ZHY1dZQ0ZQXzdwWmQyOXBHdzJQb19fTU1jVDYwbGlOa1FqaXJMUzZaam5ZcnowWkZIYXBuNFBzOHg4MmU1Q3dyakZGNVdYV3hEUkFabTgzWHVJMmRY?oc=5"
+    },
+    {
+     "fecha": "2026-05-20",
+     "titulo": "Se reúne Ismael Burgueño Ruiz con el colectivo ´Defendamos Playas de Tijuana´",
+     "medio": "Blanco y Negro Noticias",
+     "url": "https://blancoynegro.mx/bc/tijuana/se-reune-ismael-burgueno-ruiz-con-el-colectivo-defendamos-playas-de-tijuana/?utm_source=rss&utm_medium=rss&utm_campaign=se-reune-ismael-burgueno-ruiz-con-el-colectivo-defendamos-playas-de-tijuana"
+    },
+    {
+     "fecha": "2026-05-20",
+     "titulo": "Burgueño se reúne con 400 vecinos de Playas: les asegura que seguirá clausurada obra de RUBA en la Cañada Azteca",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNYXBINDhFYmQ2TndmNFRZWWNWQWxOSWZTd0dHdkU5WlJsRVRkdDQ2bWxLMG5TYndSblpZdUNyNXJ2NExJWGJsb2ZxRXVYWnJJSjdsY1NZYkxDZlJXWDVWTFN3aDBNYUhuQm01Sk91UXYycVZoOXpDWHNjNXFPQnhhRDRsRlRLY0lsNDVNNWFUN0lkME96aS1DUEFtV01OTXhlX1lpWkN0cm9GV0dCczNCeTkydi1Jb29KZngza3p3RDQ3M25fRTJObHdaYU9tU1llN09VRGt0OURsSEU0cGgxUg?oc=5"
+    },
+    {
+     "fecha": "2026-05-25",
+     "titulo": "Burgueño acuerda con vecinos de Playas que se revisarán los permisos de construcción de Grupo Ruba en Cañada Azteca",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxOSWVNRHhrYmRGeUFzUVkwRTVIWUR3a1g1Vk5GT2o4WjhoYlVhR2wxUWZUVHd3UmwyQUl0Z0d1WndxYkpadWo0MjloSkVIak5mZHBETGo1TWpSZEJmNS1sSGs0N1BlUUd2bFJJTWdRZzZZZkZkSG1nMG9iSW0wbUlibmtlbVg3MVJkUm12SWo3MnpsR3FwNXRrWldZR0ozaEpHVlJ4dGdqbmc4ZEVyUlVLNlNSYVdwTnBjZ1pnLTg4bHVfLTBMTWxGNW1tbzFXRXk5WERJUWkwdGZEX01ucEI5ek1PWU5idw?oc=5"
+    },
+    {
+     "fecha": "2026-05-31",
+     "titulo": "Vecinos de Playas se reúnen de nuevo con Burgueño y piden acceso a permisos de Grupo Ruba en Cañada Azteca",
+     "medio": "Punto Norte",
+     "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxONXNCNFBHMnkxWGxJSWoySjQ2MWVCbHd0TzJvYUJmR0dpVzAzWklTZ1FUMUc4OHBpV211U2xoV2hfblJTc2E0U0RFc3g3MlN4ejdfWF80WjZ2UVRjNlFQNU5NZk94bFhoTDZqRzZCZTFNdmdCTERiTDhBZlpQRVMzbmJub0VMYmRnUjM1aWJwRWhrSW5DaDExdl9ETWpkdmJjYnZodEtBdzdBaXVjakVUaHFESGpVVXd0NlBia01sb0FhVTZHc181bnRsX0xoVkctOFQzMDRhQzlKUQ?oc=5"
+    }
+   ]
+  },
+  {
+   "id": "patrimonio",
+   "titulo": "Patrimonio personal",
+   "resumen": "Zeta publicó en mayo que la familia Burgueño tiene 19 propiedades, que él renta una residencia de lujo y que su hermano usaba escolta y un auto de un proveedor del Ayuntamiento. Ningún otro medio lo retomó.",
+   "medios": 1,
+   "nacionales": [],
+   "cuerpo": [
+    {
+     "parrafo": [
+      "Tres notas de Zeta en mayo de 2026: 19 propiedades de la familia Burgueño y una residencia de lujo en renta, «Burgueño no explica origen de sus recursos», y su hermano visto con escolta y un auto de un proveedor del Ayuntamiento. Ningún otro medio de este corte las retomó. Su alcance en redes está sin medir, y es el caso más claro para medirlo."
+     ]
+    }
+   ],
+   "titulares": [
+    {
+     "fecha": "2026-05-11",
+     "titulo": "19 propiedades de los Burgueño y el alcalde renta residencia de lujo",
+     "medio": "Zeta",
+     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPbDExV01wSWh1bGkzbXIyXzUzSXk1SExBT2dkQ1pydGhuUHd2WU9vM3dKbXlmSXA3TmxVMTZnWmFhalpQMW12X2FzQ2VsT0RQY2pKdW05WmpLTzU3WjhhVTZjSjNqSkc0QTFieHkwbk95WXRjUllTeU56VWNtRGJjZld2RFFzZTg0ekdFaVQyREhiN3BmNXVnYW12dDZIeTFNWWJN?oc=5"
+    },
+    {
+     "fecha": "2026-05-21",
+     "titulo": "Burgueño no explica origen de sus recursos",
+     "medio": "Zeta",
+     "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOcTlkZmhCeVk4RkN6b0U3TjdmMmt5NEtudW5tcVJxbHF1Qmx5SGNQYXlaNjRhbW1iQkV2OUNlbDF5Q0QxZjFJOTlfSVlvRzhJdEZZTFI4UTE4dncxV2pwM25LQzNIMDVJVVJRZUxiNldDY3E3ZHlzM3k2YUJnWldFTw?oc=5"
+    },
+    {
+     "fecha": "2026-05-26",
+     "titulo": "Hermano de Burgueño, con escolta y auto de proveedor del Ayuntamiento",
+     "medio": "Zeta",
+     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNc0xYQnZaRGlSU2VGbzNLZVBRSURXcGNoZ25RakVrTTBoUk9TZnBXNDRrMFlNeklsMXlyQ2RqdTBsTTQ5c3daNUVnR1pxc2pCYmtFTHp2T1FXNU9wQXFPSUk4a3ZidTVZcEZzWlA1cko3R01ick5ITnlyVWpXaDl2QzltT3FYU1dVTmxVRmlCUWJLWEoya3p0eGJCTlgyUDhQdE5N?oc=5"
+    }
+   ]
+  }
+ ],
+ "otros": [
+  {
+   "fecha": "2026-04-06",
+   "titulo": "En ruinas calles de Tijuana, pese a inversión millonaria de Burgueño",
+   "medio": "Zeta",
+   "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPak9hU2hOOWpIWWRoZ3VVWUo3MWJacXQ1U0xJbXIzQkFySFBYclFtQ2RaZlNqdE51d3RPdUN2QlVpT3BZS0psOG53dVZWejk0UEdTTUJIYjEyRU5BUzdycVJ0aHc2SmdDWWdGVHVvWC1kRGY3WmwwZlp4dFQ3UkJnUEw5TUd2aXM2MV9WcE9jbEFzVWpTOGdqYlQ4emxFeXZaTHc?oc=5",
+   "detalle": "Respondió a las críticas por baches en julio y al volver a la alcaldía prometió bachear la ciudad."
+  },
+  {
+   "fecha": "2026-02-12",
+   "titulo": "Ya son ocho módulos de Tijuana Saludable, que renta Ayuntamiento a Medical Life",
+   "medio": "Zeta",
+   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNQmFHbUplM1ZKaEJkUV9idGtyMWItNTlTazQyRTNKeWttcENHSG5EeWZ2ZE0tZXk0SlBHb2VsQzNhbEVxY1V2N1RGS1FYWFJIVnFWY2E3a1R3Wnl0cE1UQ0RRWXNGRGlPVE9wSU44RVpWMnNOeHFkWk9rMjVWQkVaZlZ4TUNqZU1aVkptc3JYQlpxWWN1VHVkRDJwMERQTnN1ZnNRWDg1Tnp6dlFSODVxNg?oc=5",
+   "detalle": "En diciembre, Zeta había puesto el costo en 2 millones de pesos al mes. El programa tuvo amplia cobertura nacional."
+  },
+  {
+   "fecha": "2025-12-22",
+   "titulo": "Arrendamiento plurianual de 120 patrullas para Tijuana, asciende a casi 344 millones de pesos al año",
+   "medio": "Uniradio Informa",
+   "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOTmIxRG1MWGxkemdZRHNUSVhzZUJrbWVOTkh6ZzJNRGtxa0NyaVJrNGVJSXFnRWhZZ0QycUtIbkpfRElqQlJhMGJVUXhzQ3pEU28zX3dSLXFkRTdydUxRZzRzVU5xbHpTYlNCUG9kQzVDQ0FBX3JGNXJEUUNxYkJ2RmtVSnJWVDdhLUMxSTVYbUlfaFNHNHdDTkw3NWJZRU16WWtMMjVUU01TX1VEMS1zRTMtX2JTN3ZUMnRsaHhSNG9iaThKZEx1TNIBzgFBVV95cUxOT09IQ0gzY1BGZjFFUW1KLTV3d2xfRlNmeDc4aGtCbFl1X0UtdkhUOWZsbTZGbWZaWVphT0t3cnN2a2RDTVB1MExHeVk1cmxmOHNEWGVSTWlPNldfVnNhanA0TDZkLTNyTVNpZmFOdV9Sc3N3cG5LdnhlbkJRODlWUlR0cUpMSWZhNmVlbHF0ZjZZcjU4RTRQWnhDeWVnSUlVcko4MlJLZmRlY3N3cEJOVllOS1hlRlZTX0tGXzZoeGFTOTZIUm1WMTBaYzJ5dw?oc=5",
+   "detalle": null
+  },
+  {
+   "fecha": "2026-05-06",
+   "titulo": "Renuncia secretaria de Cultura, tras cancelación de Feria del Libro Tijuana",
+   "medio": "El Sol de México",
+   "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOcDhkWEZGYmtBbTZQRmt2WktFS24wQjNnX19SVHBUZVdOQkFyaXNtdDhQbDVFS1hVOTNDdnd1ZjZDRmRJN0JxcWFfWjlsUkFocGFQc01tdktSUEQ5aFU0blRJRmRLby1UVXFSRmFOendxMmJ3Q0hiZWt1azRNeVJKeXNGdk45dU10SGw0SzRUVVlvUmo5emhKMWE0YWhPbWJwcVh2dFRqaUY1dlMyNmJsaXM1cHhBd2F3YXpZcERORmU?oc=5",
+   "detalle": "Burgueño había dicho que la feria se hace «sí o sí»."
+  },
+  {
+   "fecha": "2026-10-02",
+   "titulo": "Acusan inmobiliarios 'moches' en Tijuana",
+   "medio": "Reforma",
+   "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE8tRHZldFdXRU9DOFdJa3pTcU1RYTZNUWxidHVaS3E5TjR3WDc3a0w4SVJWbnpSamxsdVpZX1Y4cDh6WlJsakNwWHpvRXpSNjBfdVpCVWoyTk5Gb0ZlU19ycXNvNll2UlhsVDhpZXVvMW5PWXJxN2JhbktlRVk?oc=5",
+   "detalle": "El titular no lo nombra, y por eso queda fuera de las cuentas."
+  }
+ ],
+ "redes": {
+  "desde": "2026-09-14",
+  "publicaciones": [
+   {
+    "red": "instagram",
+    "cuenta": null,
+    "fecha": "2026-09-29",
+    "titulo": "En este Segundo Año de Labores del presidente municipal Ismael Burgueño Ruiz…",
+    "alcance": 1237,
+    "unidad": "likes",
+    "comentarios": 64,
+    "url": "https://www.instagram.com/p/Dd4ThREmsv2/"
+   },
+   {
+    "red": "youtube",
+    "cuenta": "Siempre en la Noticia",
+    "fecha": "2026-09-26",
+    "titulo": "Burgueño buscará la reelección de Tijuana",
+    "alcance": 1708,
+    "unidad": "vistas",
+    "comentarios": null,
+    "url": "https://www.youtube.com/shorts/zOKMS-bcC9s"
+   },
+   {
+    "red": "youtube",
+    "cuenta": "Siempre en la Noticia",
+    "fecha": "2026-09-18",
+    "titulo": "Burgueño retomó la alcaldía de Tijuana",
+    "alcance": 1254,
+    "unidad": "vistas",
+    "comentarios": null,
+    "url": "https://www.youtube.com/shorts/LfhtpphjyQo"
+   },
+   {
+    "red": "youtube",
+    "cuenta": "Canal 33",
+    "fecha": "2026-09-19",
+    "titulo": "¡De vuelta a la Alcaldía! Ismael Burgueño regresa como alcalde de Tijuana",
+    "alcance": 1244,
+    "unidad": "vistas",
+    "comentarios": null,
+    "url": "https://www.youtube.com/shorts/22IGuSV_ktA"
+   },
+   {
+    "red": "youtube",
+    "cuenta": "Canal 33",
+    "fecha": "2026-10-01",
+    "titulo": "Burgueño asegura que no tiene una investigación vigente en su contra",
+    "alcance": 1087,
+    "unidad": "vistas",
+    "comentarios": null,
+    "url": "https://www.youtube.com/shorts/4k5QWCjcYhg"
+   },
+   {
+    "red": "youtube",
+    "cuenta": "Canal 33",
+    "fecha": "2026-09-29",
+    "titulo": "¡Va por otros tres años! Burgueño confirma que buscará la reelección",
+    "alcance": 1010,
+    "unidad": "vistas",
+    "comentarios": null,
+    "url": "https://www.youtube.com/shorts/N_xrVMFdsrw"
+   },
+   {
+    "red": "tiktok",
+    "cuenta": "@siempreenlanoticia",
+    "fecha": "2026-09-16",
+    "titulo": "Burgueño tras el nombramiento de Julieta Ramírez",
+    "alcance": 414,
+    "unidad": "likes",
+    "comentarios": 165,
+    "url": "https://www.tiktok.com/@siempreenlanoticia/video/7685920815279312136"
+   },
+   {
+    "red": "tiktok",
+    "cuenta": "@canal33tijuana",
+    "fecha": "2026-09-16",
+    "titulo": "«Jamás voy a poner en duda lo que el partido de Morena realice»",
+    "alcance": 277,
+    "unidad": "likes",
+    "comentarios": 95,
+    "url": "https://www.tiktok.com/@canal33tijuana/video/7685941359135558920"
+   },
+   {
+    "red": "facebook",
+    "cuenta": "Blanco y Negro",
+    "fecha": "2026-09-26",
+    "titulo": "Burgueño abre la puerta a la reelección",
+    "alcance": 261,
+    "unidad": "reacciones",
+    "comentarios": 226,
+    "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02pMVcxCtm7PhTr6YA1JSgT1UKhpKstbPNeAJNxvUD7mUY6YXoTAZea3uQZHB21gEnl"
+   },
+   {
+    "red": "tiktok",
+    "cuenta": "@canal33tijuana",
+    "fecha": "2026-09-26",
+    "titulo": "¡Va por otros tres años!",
+    "alcance": 114,
+    "unidad": "likes",
+    "comentarios": 106,
+    "url": "https://www.tiktok.com/@canal33tijuana/video/7689964098255097106"
+   },
+   {
+    "red": "instagram",
+    "cuenta": "@tjnoticias",
+    "fecha": "2026-09-25",
+    "titulo": "Primera piedra de la desaladora de Rosarito",
+    "alcance": 51,
+    "unidad": "likes",
+    "comentarios": 2,
+    "url": "https://www.instagram.com/p/DdulM68Pnj1/"
+   }
+  ]
+ }
+}

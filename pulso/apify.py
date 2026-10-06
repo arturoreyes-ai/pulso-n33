@@ -281,6 +281,60 @@ def correr_actor(actor, entrada, tok, limite, timeout=None):
     return items if isinstance(items, list) else []
 
 
+ESTADOS_FINALES = ("SUCCEEDED", "FAILED", "ABORTED", "TIMED-OUT")
+PAGINA_DATASET = 1000
+
+
+def correr_actor_largo(actor, entrada, tok, limite, max_usd=None, espera=3600, pausa=15,
+                       dormir=None):
+    """Corre un actor en modo ASINCRONO y devuelve (items, estado, usd).
+
+    Solo para lecturas A MANO que no caben en 300 s: un ano de una cuenta
+    (pulso/expediente_redes.py, 2 de octubre de 2026). El cron NO lo usa, y
+    por la razon del encabezado: una corrida que tarda mas de lo que el cron
+    tolera gasta dinero y no commitea nada. Aqui quien espera es una persona.
+
+    Dos topes, porque los actores cobran de dos formas: `maxItems` acota a los
+    que cobran por resultado y `maxTotalChargeUsd` a los que cobran por
+    evento. Una corrida que termina TIMED-OUT o ABORTED devuelve lo que alcanzo
+    a escribir con su estado: ya se pago, y tirarlo seria pagarlo dos veces.
+    """
+    import time
+    dormir = dormir or time.sleep
+    revisar_entrada(entrada, actor)
+    params = {"maxItems": int(limite)}
+    if max_usd:
+        params["maxTotalChargeUsd"] = "{:.2f}".format(max_usd)
+    corrida = (_pedir("POST", "actors/{}/runs".format(actor.replace("/", "~")), tok,
+                      cuerpo=entrada, params=params) or {}).get("data") or {}
+    rid, dataset = corrida.get("id"), corrida.get("defaultDatasetId")
+    if not rid or not dataset:
+        raise RuntimeError("{}: Apify no devolvio id de corrida".format(actor))
+    esperado, estado = 0, corrida.get("status")
+    while estado not in ESTADOS_FINALES:
+        if esperado >= espera:
+            _pedir("POST", "actor-runs/{}/abort".format(rid), tok)
+            estado = "ABORTED"
+            break
+        dormir(pausa)
+        esperado += pausa
+        corrida = (_pedir("GET", "actor-runs/{}".format(rid), tok) or {}).get("data") or {}
+        estado = corrida.get("status")
+    if estado == "FAILED":
+        raise RuntimeError("{}: la corrida {} fallo".format(actor, rid))
+    items, desde = [], 0
+    while True:
+        pagina = _pedir("GET", "datasets/{}/items".format(dataset), tok,
+                        params={"format": "json", "clean": "true", "offset": desde,
+                                "limit": PAGINA_DATASET}, timeout=120)
+        pagina = pagina if isinstance(pagina, list) else []
+        items.extend(pagina)
+        if len(pagina) < PAGINA_DATASET or len(items) >= limite:
+            break
+        desde += len(pagina)
+    return items[:int(limite)], estado, float(corrida.get("usageTotalUsd") or 0)
+
+
 def leer_catalogo(ruta):
     """Lee config/apify.json y devuelve (activos, errores).
 
