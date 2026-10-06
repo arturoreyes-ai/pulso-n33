@@ -1,6 +1,6 @@
 {
  "esquema": 1,
- "generado": "2026-10-06T00:46:17+00:00",
+ "generado": "2026-10-06T01:19:34+00:00",
  "plataforma": "youtube",
  "retencion_dias": 30,
  "cosecha_comentarios": false,
@@ -188,7 +188,7 @@
    "activa": true
   }
  ],
- "releidos": 10,
+ "releidos": 0,
  "destacados": [
   {
    "url": "https://www.youtube.com/shorts/j_6xZMhxxTw",
@@ -395,30 +395,6 @@
    "alcance": "extranjero",
    "publicado": "2026-10-05T05:05:11+00:00",
    "imagen": "https://i4.ytimg.com/vi/CCbFcFYiZ1g/hqdefault.jpg",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.youtube.com/watch?v=QEXcfAAZ6Sg",
-   "cuenta": "yt_nmas",
-   "zona": "internacional",
-   "fecha": "2026-10-05",
-   "titulo": "Elecciones en Brasil 2026: Flávio Bolsonaro y Lula da Silva van a segunda vuelta",
-   "tipo": "video",
-   "reproducciones": 27686,
-   "valoraciones": 162,
-   "formato": "video",
-   "alcance": "extranjero",
-   "publicado": "2026-10-05T00:50:58+00:00",
-   "imagen": "https://i2.ytimg.com/vi/QEXcfAAZ6Sg/hqdefault.jpg",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1727,6 +1703,30 @@
    "temas": []
   },
   {
+   "url": "https://www.youtube.com/watch?v=GTOk9A8e1cs",
+   "cuenta": "yt_nmas",
+   "zona": "internacional",
+   "fecha": "2026-10-05",
+   "titulo": "¿Peste en Siberia? Esto se sabe de la emergencia en Rusia",
+   "tipo": "video",
+   "reproducciones": 607,
+   "valoraciones": 19,
+   "formato": "video",
+   "alcance": "extranjero",
+   "publicado": "2026-10-05T22:00:30+00:00",
+   "imagen": "https://i4.ytimg.com/vi/GTOk9A8e1cs/hqdefault.jpg",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.youtube.com/shorts/V9kXoTdyHe0",
    "cuenta": "yt_siempre",
    "zona": "estatal",
@@ -2522,42 +2522,43 @@
  "salud": [
   {
    "cuenta": "yt_afn",
-   "estado": "ok",
-   "entradas": 13,
-   "posts": 11,
+   "estado": "sin_lista",
+   "entradas": 0,
+   "posts": 0,
    "reclasificados": 0,
    "descartados": 0,
-   "fuera": 2,
-   "nota": "1 lista(s) inexistente(s); se leyo el resto"
+   "fuera": 0,
+   "nota": "el canal no tiene la lista automatica que se pidio"
   },
   {
    "cuenta": "yt_bbcmundo",
-   "estado": "ok",
-   "entradas": 15,
-   "posts": 15,
+   "estado": "sin_lista",
+   "entradas": 0,
+   "posts": 0,
    "reclasificados": 0,
    "descartados": 0,
    "fuera": 0,
-   "nota": "1 lista(s) inexistente(s); se leyo el resto"
+   "nota": "el canal no tiene la lista automatica que se pidio"
   },
   {
    "cuenta": "yt_canal33",
-   "estado": "ok",
-   "entradas": 30,
-   "posts": 27,
-   "reclasificados": 0,
-   "descartados": 0,
-   "fuera": 3
-  },
-  {
-   "cuenta": "yt_canal66",
-   "estado": "ok",
-   "entradas": 15,
-   "posts": 15,
+   "estado": "sin_lista",
+   "entradas": 0,
+   "posts": 0,
    "reclasificados": 0,
    "descartados": 0,
    "fuera": 0,
-   "nota": "1 lista(s) inexistente(s); se leyo el resto"
+   "nota": "el canal no tiene la lista automatica que se pidio"
+  },
+  {
+   "cuenta": "yt_canal66",
+   "estado": "sin_lista",
+   "entradas": 0,
+   "posts": 0,
+   "reclasificados": 0,
+   "descartados": 0,
+   "fuera": 0,
+   "nota": "el canal no tiene la lista automatica que se pidio"
   },
   {
    "cuenta": "yt_cnnee",
@@ -2581,14 +2582,13 @@
   },
   {
    "cuenta": "yt_dwespanol",
-   "estado": "fallo",
+   "estado": "sin_lista",
    "entradas": 0,
    "posts": 0,
    "reclasificados": 0,
    "descartados": 0,
    "fuera": 0,
-   "error": "HTTPError: HTTP Error 500: Internal Server Error",
-   "nota": "1 lista(s) inexistente(s); se leyo el resto"
+   "nota": "el canal no tiene la lista automatica que se pidio"
   },
   {
    "cuenta": "yt_elpais",
@@ -2612,46 +2612,43 @@
   },
   {
    "cuenta": "yt_euronewses",
-   "estado": "fallo",
+   "estado": "sin_lista",
    "entradas": 0,
    "posts": 0,
    "reclasificados": 0,
    "descartados": 0,
    "fuera": 0,
-   "error": "HTTPError: HTTP Error 500: Internal Server Error",
-   "nota": "1 lista(s) inexistente(s); se leyo el resto"
+   "nota": "el canal no tiene la lista automatica que se pidio"
   },
   {
    "cuenta": "yt_france24es",
-   "estado": "ok",
-   "entradas": 15,
-   "posts": 15,
+   "estado": "sin_lista",
+   "entradas": 0,
+   "posts": 0,
    "reclasificados": 0,
    "descartados": 0,
    "fuera": 0,
-   "nota": "1 lista(s) inexistente(s); se leyo el resto"
+   "nota": "el canal no tiene la lista automatica que se pidio"
   },
   {
    "cuenta": "yt_imagen",
-   "estado": "fallo",
+   "estado": "sin_lista",
    "entradas": 0,
    "posts": 0,
    "reclasificados": 0,
    "descartados": 0,
    "fuera": 0,
-   "error": "HTTPError: HTTP Error 500: Internal Server Error",
-   "nota": "1 lista(s) inexistente(s); se leyo el resto"
+   "nota": "el canal no tiene la lista automatica que se pidio"
   },
   {
    "cuenta": "yt_infonort",
-   "estado": "fallo",
+   "estado": "sin_lista",
    "entradas": 0,
    "posts": 0,
    "reclasificados": 0,
    "descartados": 0,
    "fuera": 0,
-   "error": "HTTPError: HTTP Error 500: Internal Server Error",
-   "nota": "1 lista(s) inexistente(s); se leyo el resto"
+   "nota": "el canal no tiene la lista automatica que se pidio"
   },
   {
    "cuenta": "yt_milenio",
@@ -2675,23 +2672,23 @@
   },
   {
    "cuenta": "yt_psn",
-   "estado": "ok",
-   "entradas": 15,
-   "posts": 15,
+   "estado": "sin_lista",
+   "entradas": 0,
+   "posts": 0,
    "reclasificados": 0,
    "descartados": 0,
    "fuera": 0,
-   "nota": "1 lista(s) inexistente(s); se leyo el resto"
+   "nota": "el canal no tiene la lista automatica que se pidio"
   },
   {
    "cuenta": "yt_siempre",
-   "estado": "fallo",
-   "entradas": 15,
-   "posts": 15,
+   "estado": "sin_lista",
+   "entradas": 0,
+   "posts": 0,
    "reclasificados": 0,
    "descartados": 0,
    "fuera": 0,
-   "error": "HTTPError: HTTP Error 500: Internal Server Error"
+   "nota": "el canal no tiene la lista automatica que se pidio"
   },
   {
    "cuenta": "yt_sintesis",
@@ -2705,23 +2702,23 @@
   },
   {
    "cuenta": "yt_telemundo20",
-   "estado": "ok",
-   "entradas": 15,
-   "posts": 15,
+   "estado": "sin_lista",
+   "entradas": 0,
+   "posts": 0,
    "reclasificados": 0,
    "descartados": 0,
    "fuera": 0,
-   "nota": "1 lista(s) inexistente(s); se leyo el resto"
+   "nota": "el canal no tiene la lista automatica que se pidio"
   },
   {
    "cuenta": "yt_uniradio",
-   "estado": "ok",
-   "entradas": 15,
-   "posts": 14,
+   "estado": "sin_lista",
+   "entradas": 0,
+   "posts": 0,
    "reclasificados": 0,
    "descartados": 0,
-   "fuera": 1,
-   "nota": "1 lista(s) inexistente(s); se leyo el resto"
+   "fuera": 0,
+   "nota": "el canal no tiene la lista automatica que se pidio"
   },
   {
    "cuenta": "yt_unotv",
@@ -2735,14 +2732,13 @@
   },
   {
    "cuenta": "yt_zeta",
-   "estado": "fallo",
+   "estado": "sin_lista",
    "entradas": 0,
    "posts": 0,
    "reclasificados": 0,
    "descartados": 0,
    "fuera": 0,
-   "error": "HTTPError: HTTP Error 500: Internal Server Error",
-   "nota": "1 lista(s) inexistente(s); se leyo el resto"
+   "nota": "el canal no tiene la lista automatica que se pidio"
   }
  ],
  "gasto": {

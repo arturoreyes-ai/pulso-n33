@@ -1,8 +1,457 @@
 {
  "esquema": 1,
  "ventana_dias": 30,
- "total": 10952,
+ "total": 10969,
  "notas": [
+  {
+   "id": "d033d8e758b92db7",
+   "titulo": "San Diego was hotter than Dubai this weekend. No, we’re not exaggerating",
+   "url": "https://timesofsandiego.com/weather/2026/10/05/san-diego-hotter-dubai-heat-wave/",
+   "dominio": "timesofsandiego.com",
+   "fuente": "timessd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T01:05:05+00:00",
+   "capturado": "2026-10-06T01:06:29+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://i0.wp.com/timesofsandiego.com/wp-content/uploads/2026/03/Thomas-Murphy-Stock-82.jpg?fit=1024%2C640&ssl=1",
+   "rubros_categoria": [
+    "clima"
+   ],
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "c5610535f1e7e102",
+   "titulo": "Protestan estudiantes de Cecyte Ejido Puebla por presunto bullying a alumna con autismo",
+   "url": "https://www.elimparcial.com/mxl/mexicali/2026/10/05/protestan-estudiantes-de-cecyte-ejido-puebla-por-presunto-bullying-a-alumna-con-autismo/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:59:42+00:00",
+   "capturado": "2026-10-06T01:06:29+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7949,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/TNYWNB4XK5GIRDA3HNFLWD6ZPY.jpeg?auth=a673c7282fac09859bc445b18f925467fe0b8e17f398352a734beda0eb48a648&smart=true&width=1600&height=1280",
+   "rubros": []
+  },
+  {
+   "id": "fc7fccd5dae0265a",
+   "titulo": "Bomberos atienden 297 emergencias durante fin de semana en Tijuana",
+   "url": "https://www.elimparcial.com/tij/tijuana/2026/10/05/bomberos-atienden-297-emergencias-durante-fin-de-semana-en-tijuana/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:52:01+00:00",
+   "capturado": "2026-10-06T01:06:29+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6509,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/OA6V36T6FRGMFLLYMU6I67U33M.jpg?auth=f7ddba021b0fd4e4513ba535923d354c327aa48bf1e96fae9bd71e31cb0d24df&smart=true&width=1600&height=1200",
+   "rubros": []
+  },
+  {
+   "id": "0dc73a9e639ba16d",
+   "titulo": "José Flores, de 119 años, podría convertirse en el hombre más longevo del mundo si las autoridades validan su fecha de nacimiento de 1907, un proceso que mantiene en espera a su familia mientras se revisan documentos históricos",
+   "url": "https://www.elimparcial.com/mundo/2026/10/05/jose-flores-de-119-anos-podria-convertirse-en-el-hombre-mas-longevo-del-mundo-si-las-autoridades-validan-su-fecha-de-nacimiento-de-1907-un-proceso-que-mantiene-en-espera-a-su-familia-mientras-se-revisan-documentos-historicos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:50:30+00:00",
+   "capturado": "2026-09-10T06:32:32+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7549,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/LPHTJK7FPJDZZOYFNZGNANUMZE.png?auth=fd6331a4d60ca0e7bd0042671c71c28fb5f16ea6442f7805c01f482367c9d6f3&smart=true&width=1280&height=720",
+   "rubros": []
+  },
+  {
+   "id": "e133bdbc849b481d",
+   "titulo": "Vinculan a proceso a Alejandra “N”, empleada del Isssteson acusada de robar 18 frascos de medicamento en el Hospital Chávez de Hermosillo",
+   "url": "https://www.elimparcial.com/son/hermosillo/2026/10/05/vinculan-a-proceso-a-alejandra-n-empleada-del-isssteson-acusada-de-robar-18-frascos-de-medicamento-en-el-hospital-chavez-de-hermosillo/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:49:07+00:00",
+   "capturado": "2026-10-06T00:02:56+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.642,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/W2HPMLSGVZGGPEMZT4IAMXCHFY.jpg?auth=3c3a34b3997b3d54b9e4645060693a4e18df77d66f76bde1f3696fc1f358eabc&smart=true&width=1200&height=780",
+   "rubros": []
+  },
+  {
+   "id": "d6cbb3ca8bb06f03",
+   "titulo": "Derriban el útlimo álamo “La Abuela”, de 200 años de antigüedad, para continuar el muro fronterizo en la zona de Lochiel de Arizona; activistas fueron rodeados durante una ceremonia",
+   "url": "https://www.elimparcial.com/son/sonora/2026/10/05/derriban-el-utlimo-alamo-la-abuela-de-200-anos-de-antiguedad-para-continuar-el-muro-fronterizo-en-la-zona-de-lochiel-de-arizona-activistas-fueron-rodeados-durante-una-ceremonia/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:48:54+00:00",
+   "capturado": "2026-10-06T00:02:56+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7016,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/XFUWWAGGKZBG7MTR44CWZDPLQY.jpg?auth=5e61d65366b4dfa7011e2ef617183a655bcdacde5a210e9b40e10c6aec428673&smart=true&width=1200&height=780",
+   "rubros": []
+  },
+  {
+   "id": "99e9e69fbfe9f2b7",
+   "titulo": "Familiares de las 8 víctimas de los sueros vitaminados exigen justicia y que no se favorezca al doctor Maximiano",
+   "url": "https://www.elimparcial.com/son/hermosillo/2026/10/05/familiares-de-las-8-victimas-de-los-sueros-vitaminados-exigen-justicia-y-que-no-se-favorezca-al-doctor-maximiano/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:48:41+00:00",
+   "capturado": "2026-10-06T00:02:56+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9093,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/FIIITTAPGZCMBCCPIFM4PF6UXU.jpeg?auth=e193451c1903f383558be3ae1039f68b5c5d28e610f6e3c4715aa8401f9b2829&smart=true&width=1599&height=1066",
+   "rubros": []
+  },
+  {
+   "id": "0995ba0eb9c77dce",
+   "titulo": "Cinco personas son detenidas por el asesinato del político Guillermo Pamuce Yep en Coatzacoalcos",
+   "url": "https://www.elimparcial.com/mexico/2026/10/05/cinco-personas-son-detenidas-por-el-asesinato-del-politico-guillermo-pamuce-yep-en-coatzacoalcos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:47:23+00:00",
+   "capturado": "2026-10-06T00:02:56+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6832,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/OGOVVKZRYRGGRB47C3K34CCCII.png?auth=f7dfe6cf9ec81ea59def3c6389b9197efe84153ba5aeeb748dbae3961bde7e99&smart=true&width=1620&height=1080",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "ab96bd22e8dc17b6",
+   "titulo": "España desaloja el asentamiento migrante de la playa del Trampolín en Ceuta; 2 mil permanecen en un centro de acogida",
+   "url": "https://www.elimparcial.com/mundo/2026/10/05/espana-desaloja-el-asentamiento-migrante-de-la-playa-del-trampolin-en-ceuta-2-mil-permanecen-en-un-centro-de-acogida/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:47:02+00:00",
+   "capturado": "2026-10-06T00:35:28+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6311,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/BB52V6VATJHZDEXBC4HQR3NO3A.png?auth=10cbb2da6230016b198dbd8f57c20f3328cea197e44ba875b079ddf55380540f&smart=true&width=1620&height=1080",
+   "rubros": []
+  },
+  {
+   "id": "dd8c8ba918fa7348",
+   "titulo": "Una Nueva manera de disfrutar la propiedad vacacional con mayor eficiencia.",
+   "url": "https://www.elimparcial.com/dinero/2026/10/05/una-nueva-manera-de-disfrutar-la-propiedad-vacacional-con-mayor-eficiencia/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:46:30+00:00",
+   "capturado": "2026-10-06T01:06:29+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.7935,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/DGU3GX77ARGKNNYGAHMRGNXCRM.jpg?auth=50a232c40afc85af33c7d974dea68ca9ba88db88627eb6e86b005a344edf67ba&smart=true&width=1200&height=800",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "8062a805b420fccc",
+   "titulo": "Mauricio Kuri afirmó que sí avisó a la Cancillería de la visita del embajador de Estados Unidos para inaugurar academia internacional policial",
+   "url": "https://www.elimparcial.com/mexico/2026/10/05/mauricio-kuri-afirmo-que-si-aviso-a-la-cancilleria-de-la-visita-del-embajador-de-estados-unidos-para-inaugurar-academia-internacional-policial/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:45:55+00:00",
+   "capturado": "2026-10-06T01:06:29+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6349,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/4HI5DNYPFZGB3JIHSQZVBOQMEI.jpg?auth=2dacf656b8e883408090baaf3b3781fd67494befcc429dc4af3c2d7efb001181&smart=true&width=1920&height=1200",
+   "rubros": []
+  },
+  {
+   "id": "9178a5898ca681ba",
+   "titulo": "Coordinador de MC cuestiona segundo año de gestión de Adame en Rosarito",
+   "url": "https://zetatijuana.com/2026/10/coordinador-de-mc-cuestiona-segundo-ano-de-gestion-de-adame-en-rosarito/",
+   "dominio": "zetatijuana.com",
+   "fuente": "zeta",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Playas de Rosarito"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:45:42+00:00",
+   "capturado": "2026-10-06T01:06:29+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6316,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros_categoria": [
+    "politica"
+   ],
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "c317a69723ee83c7",
+   "titulo": "Ortodoncistas realizarán congreso anual en Mexicali del 9 al 10 de octubre",
+   "url": "https://www.elimparcial.com/mxl/mexicali/2026/10/05/ortodoncistas-realizaran-congreso-anual-en-mexicali-del-9-al-10-de-octubre/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:45:13+00:00",
+   "capturado": "2026-10-06T01:06:29+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6191,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/TXKCMWEPZNCCZJHOBHCGDLUW2Q.jpeg?auth=404f27a1096be3b4c8c5725bc0f3de4efa84f631353f721787fae05cfd91d901&smart=true&width=1600&height=900",
+   "rubros": []
+  },
+  {
+   "id": "3a0da9e3e5c49e53",
+   "titulo": "Expertos en eficiencia energética coinciden: dejar un ventilador de techo encendido toda la noche consume cerca de 0.4 kWh y suele gastar mucho menos que el aire acondicionado, aunque el costo en México depende de la tarifa de CFE",
+   "url": "https://www.elimparcial.com/locurioso/2026/10/03/expertos-en-eficiencia-energetica-coinciden-dejar-un-ventilador-de-techo-encendido-toda-la-noche-consume-cerca-de-04-kwh-y-suele-gastar-mucho-menos-que-el-aire-acondicionado-aunque-el-costo-en-mexico-depende-de-la-tarifa-de-cfe/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:41:10+00:00",
+   "capturado": "2026-09-15T06:33:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6244,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/UGQUVL47J5HRRLDTFEKAEFMCJM.jpg?auth=b1a5afd2293a46ff4d84173d40af274aac1307eb7f2283ed2bb48bc3b5309535&smart=true&width=1920&height=1080",
+   "rubros": []
+  },
+  {
+   "id": "52066b94a3048103",
+   "titulo": "Un lugar para volver, compartir y disfrutar de los que más queremos.",
+   "url": "https://www.elimparcial.com/son/estilosocial/2026/10/05/un-lugar-para-volver-compartir-y-disfrutar-de-los-que-mas-queremos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:41:08+00:00",
+   "capturado": "2026-10-06T01:06:29+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.9496,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/THGUWXEJARH5ZB4T3PW757A4A4.jpg?auth=e2e705e8e1d5fe2b86ab1953cb4caa8fd95b78c6d7cb9ba291eb26488172b4f5&smart=true&width=1200&height=800",
+   "rubros": []
+  },
+  {
+   "id": "c762ee788799e03d",
+   "titulo": "Un hombre de 73 años intenta cobrar más de 5 millones de pesos con un cheque falso en Ciudad de México, la falta de medidas de seguridad del documento provoca la intervención de la SSC",
+   "url": "https://www.elimparcial.com/mexico/2026/10/04/un-hombre-de-73-anos-intenta-cobrar-mas-de-5-millones-de-pesos-con-un-cheque-falso-en-ciudad-de-mexico-la-falta-de-medidas-de-seguridad-del-documento-provoca-la-intervencion-de-la-ssc/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:40:55+00:00",
+   "capturado": "2026-10-06T01:06:29+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9731,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/6FEVYP2IC5A5DIN5QXDBN77H6Q.png?auth=3a73189accd53a81f7ac30f064bce848b581ae99f3ab2d1dc497d2fc9014290e&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "e64c55945933863c",
+   "titulo": "Los romanos construyeron 80,000 kilómetros de carreteras hace más de 2,000 años con un sistema de capas tan preciso que muchas siguen marcando el trazo de autopistas modernas en Europa porque ninguna civilización posterior logró superar su técnica de drenaje y pavimentación",
+   "url": "https://www.elimparcial.com/locurioso/2026/10/03/los-romanos-construyeron-80000-kilometros-de-carreteras-hace-mas-de-2000-anos-con-un-sistema-de-capas-tan-preciso-que-muchas-siguen-marcando-el-trazo-de-autopistas-modernas-en-europa-porque-ninguna-civilizacion-posterior-logro-superar-su-tecnica-de-drenaje-y-pavimentacion/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:40:40+00:00",
+   "capturado": "2026-09-12T06:29:10+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5154,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/WOINJPMPDFC3RKYCOJ5FFLKAMQ.jpg?auth=90dbb814908b1c323bbe505b25cc2a4830567ae650fe0d39738d54dfd62491f8&smart=true&width=1920&height=1080",
+   "rubros": []
+  },
+  {
+   "id": "3678d2aa36ac6d95",
+   "titulo": "Irlanda pide a la UEFA evitar futuros partidos contra Israel",
+   "url": "https://www.elimparcial.com/deporte/2026/10/05/irlanda-pide-a-la-uefa-evitar-futuros-partidos-contra-israel/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:37:47+00:00",
+   "capturado": "2026-10-06T01:06:29+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6422,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/7PVEUT2G25F3TMWAGM6AIADE34.png?auth=66cd7196ac7bcbf667694dddf7cd230f69be5d69bc0799c31078d15eb7d10104&smart=true&width=1620&height=1080",
+   "rubros": [
+    "deportes"
+   ]
+  },
   {
    "id": "9d55710e8a2412c9",
    "titulo": "Bacheo en bulevar Lomas de Jatnil: reparan vialidad en Rosarito",
@@ -79,28 +528,31 @@
    "rubros": []
   },
   {
-   "id": "ab96bd22e8dc17b6",
-   "titulo": "España desaloja el asentamiento migrante de la playa del Trampolín en Ceuta; 2 mil permanecen en un centro de acogida",
-   "url": "https://www.elimparcial.com/mundo/2026/10/05/espana-desaloja-el-asentamiento-migrante-de-la-playa-del-trampolin-en-ceuta-2-mil-permanecen-en-un-centro-de-acogida/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
+   "id": "cbeb82235c642248",
+   "titulo": "Gobernación promete en el Senado elecciones seguras y pide a partidos postular candidatos limpios",
+   "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNMlZVdVVSRHc5Wi1VOGJJazZRRW9hMGJMSVVQNGREczFLMFYxSFlnbHZ1MDJONUhRQzJEc2xocllPcjF3VGdnakczeXhsRzEzYnhEUG16VHdsWlNtcHBVVUFwbU9odEhtM210UktrZTZPRGc5NnYtT2E5STh6V0VMTnBhNnVxakZGQmF4dlR3?oc=5",
+   "dominio": "animalpolitico.com",
+   "fuente": "gn-c3e35c36380b",
    "zona_medio": "estatal",
    "zonas": [],
    "delegaciones": [],
    "alcance": "nacional",
    "fecha": "2026-10-06",
-   "publicado": "2026-10-06T00:22:14+00:00",
-   "capturado": "2026-10-06T00:35:28+00:00",
+   "publicado": "2026-10-06T00:21:08+00:00",
+   "capturado": "2026-10-06T01:06:29+00:00",
    "figuras": [],
    "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.6311,
+    "etiqueta": "neutral",
+    "confianza": 0.6232,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
-   "imagen": "https://www.elimparcial.com/resizer/v2/BB52V6VATJHZDEXBC4HQR3NO3A.png?auth=10cbb2da6230016b198dbd8f57c20f3328cea197e44ba875b079ddf55380540f&smart=true&width=1620&height=1080",
-   "rubros": []
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
+   "rubros": [
+    "politica"
+   ]
   },
   {
    "id": "b1c0dd63cbf2da0f",
@@ -227,29 +679,27 @@
    ]
   },
   {
-   "id": "0995ba0eb9c77dce",
-   "titulo": "Cinco personas son detenidas por el asesinato del político Guillermo Pamuce Yep en Coatzacoalcos",
-   "url": "https://www.elimparcial.com/mexico/2026/10/05/cinco-personas-son-detenidas-por-el-asesinato-del-politico-guillermo-pamuce-yep-en-coatzacoalcos/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
+   "id": "9f9c0c8eb0566a77",
+   "titulo": "San Diego Tijuana International Jazz Festival sizzled in Escondido",
+   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNeVpFVjVBSjlMLVF6cEpLUUpNSjNNSkNfUlVtaWpta2I2V2YxZDlMYUVQazBGVG4xTWdWWUZBRWwzQXltU3RDTEI1dW8tSG5kbmJ2MXh1SlJGRzh0bFpwVEV4UTUxX2dlMnVSXzRSTlhIeFFZWTI3Yk5md3JRdEFOeDA3WENHYUhOa0ctU2wwTGw1NG1idmJFZ0xCN005NGplMmZVb3ExZlZWZnBhZ1cyb3E1MVZSdw?oc=5",
+   "dominio": "sandiegouniontribune.com",
+   "fuente": "gn-5bad11419dae",
    "zona_medio": "estatal",
-   "zonas": [],
+   "zonas": [
+    "Tijuana",
+    "San Diego"
+   ],
    "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-05",
-   "publicado": "2026-10-05T23:55:56+00:00",
-   "capturado": "2026-10-06T00:02:56+00:00",
+   "alcance": "zona",
+   "fecha": "2026-10-06",
+   "publicado": "2026-10-06T00:00:00+00:00",
+   "capturado": "2026-10-06T01:06:29+00:00",
    "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.6832,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/OGOVVKZRYRGGRB47C3K34CCCII.png?auth=f7dfe6cf9ec81ea59def3c6389b9197efe84153ba5aeeb748dbae3961bde7e99&smart=true&width=1620&height=1080",
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
    "rubros": [
-    "seguridad"
+    "espectaculos"
    ]
   },
   {
@@ -422,6 +872,33 @@
    "rubros": [
     "economia"
    ]
+  },
+  {
+   "id": "ea18df162fef0a6b",
+   "titulo": "Plantean revisar doble nacionalidad en funcionarios de Tijuana y Baja California",
+   "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOZG9PWDdIaElkSlhhQXEwSWcyOEtfR3E5d1l1U3ZtZ1JUZGtZS3dia0hFbUtHd0xBMmd1ajFfTmZBaV9iVVg2ZzdCRV9GU0lMbG9oalFTTV84eUtqakozQU9hZVNFY2pwMUdjUmRHcjlsUkk4OGpwYzBYUDFrcG9ZbDJESm9LbGR6NVRxS25NZE1iOGFOcTM2NUdVZVFwS2lWMHhYWjNlU2kwVjhFQmgyQmlKZzdUOXVUaVFTOGdYY1ZxSkZxS0JvQ3l5QnVFNlA2THUw?oc=5",
+   "dominio": "tijuanaenlinea.com",
+   "fuente": "gn-f8497491006c",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-05",
+   "publicado": "2026-10-05T23:33:39+00:00",
+   "capturado": "2026-10-06T01:06:29+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6729,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate",
+   "rubros": []
   },
   {
    "id": "e150fc93667a7322",
@@ -899,78 +1376,6 @@
    "rubros": [
     "seguridad"
    ]
-  },
-  {
-   "id": "d6cbb3ca8bb06f03",
-   "titulo": "Derriban el útlimo álamo “La Abuela”, de 200 años de antigüedad, para continuar el muro fronterizo en la zona de Lochiel de Arizona; activistas fueron rodeados durante una ceremonia",
-   "url": "https://www.elimparcial.com/son/sonora/2026/10/05/derriban-el-utlimo-alamo-la-abuela-de-200-anos-de-antiguedad-para-continuar-el-muro-fronterizo-en-la-zona-de-lochiel-de-arizona-activistas-fueron-rodeados-durante-una-ceremonia/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-05",
-   "publicado": "2026-10-05T22:36:17+00:00",
-   "capturado": "2026-10-06T00:02:56+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.7016,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/XFUWWAGGKZBG7MTR44CWZDPLQY.jpg?auth=5e61d65366b4dfa7011e2ef617183a655bcdacde5a210e9b40e10c6aec428673&smart=true&width=1200&height=780",
-   "rubros": []
-  },
-  {
-   "id": "e133bdbc849b481d",
-   "titulo": "Vinculan a proceso a Alejandra “N”, empleada del Isssteson acusada de robar 18 frascos de medicamento en el Hospital Chávez de Hermosillo",
-   "url": "https://www.elimparcial.com/son/hermosillo/2026/10/05/vinculan-a-proceso-a-alejandra-n-empleada-del-isssteson-acusada-de-robar-18-frascos-de-medicamento-en-el-hospital-chavez-de-hermosillo/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "fuera",
-   "fecha": "2026-10-05",
-   "publicado": "2026-10-05T22:35:58+00:00",
-   "capturado": "2026-10-06T00:02:56+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.642,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/W2HPMLSGVZGGPEMZT4IAMXCHFY.jpg?auth=3c3a34b3997b3d54b9e4645060693a4e18df77d66f76bde1f3696fc1f358eabc&smart=true&width=1200&height=780",
-   "rubros": []
-  },
-  {
-   "id": "99e9e69fbfe9f2b7",
-   "titulo": "Familiares de las 8 víctimas de los sueros vitaminados exigen justicia y que no se favorezca al doctor Maximiano",
-   "url": "https://www.elimparcial.com/son/hermosillo/2026/10/05/familiares-de-las-8-victimas-de-los-sueros-vitaminados-exigen-justicia-y-que-no-se-favorezca-al-doctor-maximiano/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-05",
-   "publicado": "2026-10-05T22:35:46+00:00",
-   "capturado": "2026-10-06T00:02:56+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.9093,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/FIIITTAPGZCMBCCPIFM4PF6UXU.jpeg?auth=e193451c1903f383558be3ae1039f68b5c5d28e610f6e3c4715aa8401f9b2829&smart=true&width=1599&height=1066",
-   "rubros": []
   },
   {
    "id": "d79c22eacc9fecd2",
@@ -2471,6 +2876,31 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.rosaritonoticias.com/wp-content/uploads/2026/10/Autoridades-municipales-y-educativas-realizan-reunion-de-seguridad-en-el-plantel-escolar.jpeg",
+   "rubros": []
+  },
+  {
+   "id": "6066cd9a4b7f10ee",
+   "titulo": "Turistas optan por nuevas experiencias de viaje y manejar por carretera",
+   "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNd2JfeXNXWHVkUUlrWXNWdVFpUG9HT01Bal8wTWlIbUpBN19veVVkMm5iNktjTmhrSWs4cXBvZkt5a2hCUnJnalBPSjk0b0pZZWNKNTR6cHB5ZmVRMnp1WFp1RTZGdTdkSG8yR2lWZENNQm9GT2hLVHNSUTQ5YThpZjJhZ2E2ZDFkTFBVM21lWHJrZFpLQnc0ZXVtNWhjTFZUNzBlakdR?oc=5",
+   "dominio": "ecosderosarito.com",
+   "fuente": "gn-9029938f1c9d",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-05",
+   "publicado": "2026-10-05T20:17:10+00:00",
+   "capturado": "2026-10-06T01:06:29+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.8106,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
    "rubros": []
   },
   {
@@ -8246,6 +8676,32 @@
    ]
   },
   {
+   "id": "aa78a581dcd270b3",
+   "titulo": "Cuestiona Gina Arana trabajo del exsecretario de Movilidad",
+   "url": "https://afntijuana.info/informacion_general/182537_cuestiona_gina_arana_trabajo_del_exsecretario_de_movilidad",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-05",
+   "publicado": "2026-10-05T00:00:00",
+   "capturado": "2026-10-06T01:06:29+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6526,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.afnbc.com/images.php?src=imagenes/gina51026y.jpg&w=500&h=250",
+   "rubros": []
+  },
+  {
    "id": "a075d8eb1e4d1750",
    "titulo": "Critican que la FGE carece de periciales para atender homicidios",
    "url": "https://afntijuana.info/informacion_general/182529_critican_que_la_fge_carece_de_periciales_para_atender_homicidios",
@@ -8371,6 +8827,32 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.afnbc.com/images.php?src=imagenes/carmen-banuelos-05102026.jpg&w=500&h=250",
+   "rubros": []
+  },
+  {
+   "id": "7858f348842d5c43",
+   "titulo": "BC entre las entidades con más incidentes violentos en escuelas: ADEPT",
+   "url": "https://afntijuana.info/informacion_general/182538_bc_entre_las_entidades_con_mas_incidentes_violentos_en_escuelas_adept",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-05",
+   "publicado": "2026-10-05T00:00:00",
+   "capturado": "2026-10-06T01:06:29+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6821,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.afnbc.com/images.php?src=imagenes/incidentes51026y.jpg&w=500&h=250",
    "rubros": []
   },
   {
@@ -14715,30 +15197,6 @@
    "rubros": []
   },
   {
-   "id": "3a0da9e3e5c49e53",
-   "titulo": "Expertos en eficiencia energética coinciden: dejar un ventilador de techo encendido toda la noche consume cerca de 0.4 kWh y suele gastar mucho menos que el aire acondicionado, aunque el costo en México depende de la tarifa de CFE",
-   "url": "https://www.elimparcial.com/locurioso/2026/10/03/expertos-en-eficiencia-energetica-coinciden-dejar-un-ventilador-de-techo-encendido-toda-la-noche-consume-cerca-de-04-kwh-y-suele-gastar-mucho-menos-que-el-aire-acondicionado-aunque-el-costo-en-mexico-depende-de-la-tarifa-de-cfe/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-04",
-   "publicado": "2026-10-04T03:58:13+00:00",
-   "capturado": "2026-09-15T06:33:34+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.6244,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/UGQUVL47J5HRRLDTFEKAEFMCJM.jpg?auth=b1a5afd2293a46ff4d84173d40af274aac1307eb7f2283ed2bb48bc3b5309535&smart=true&width=1920&height=1080",
-   "rubros": []
-  },
-  {
    "id": "e1f5b0c2a6b1faaf",
    "titulo": "Llevan propuestas a Parlamento Abierto para nueva Ley de Autismo",
    "url": "https://www.elimparcial.com/tij/tijuana/2026/10/03/llevan-propuestas-a-parlamento-abierto-para-nueva-ley-de-autismo/",
@@ -14787,30 +15245,6 @@
    "rubros": [
     "economia"
    ]
-  },
-  {
-   "id": "e64c55945933863c",
-   "titulo": "Los romanos construyeron 80,000 kilómetros de carreteras hace más de 2,000 años con un sistema de capas tan preciso que muchas siguen marcando el trazo de autopistas modernas en Europa porque ninguna civilización posterior logró superar su técnica de drenaje y pavimentación",
-   "url": "https://www.elimparcial.com/locurioso/2026/10/03/los-romanos-construyeron-80000-kilometros-de-carreteras-hace-mas-de-2000-anos-con-un-sistema-de-capas-tan-preciso-que-muchas-siguen-marcando-el-trazo-de-autopistas-modernas-en-europa-porque-ninguna-civilizacion-posterior-logro-superar-su-tecnica-de-drenaje-y-pavimentacion/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-04",
-   "publicado": "2026-10-04T03:53:00+00:00",
-   "capturado": "2026-09-12T06:29:10+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5154,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/WOINJPMPDFC3RKYCOJ5FFLKAMQ.jpg?auth=90dbb814908b1c323bbe505b25cc2a4830567ae650fe0d39738d54dfd62491f8&smart=true&width=1920&height=1080",
-   "rubros": []
   },
   {
    "id": "6d192784b42acf42",
@@ -223180,7 +223614,7 @@
     {
      "id": "ram",
      "via": "nominal",
-     "clave": "rocio adame"
+     "clave": "adame munoz"
     }
    ],
    "postura": {
@@ -230636,29 +231070,6 @@
    "rubros": [
     "espectaculos"
    ]
-  },
-  {
-   "id": "0dc73a9e639ba16d",
-   "titulo": "José Flores, de 119 años, podría convertirse en el hombre más longevo del mundo si las autoridades validan su fecha de nacimiento de 1907, un proceso que mantiene en espera a su familia mientras se revisan documentos históricos",
-   "url": "https://www.elimparcial.com/locurioso/2026/09/09/jose-flores-de-119-anos-podria-convertirse-en-el-hombre-mas-longevo-del-mundo-si-las-autoridades-validan-su-fecha-de-nacimiento-de-1907-un-proceso-que-mantiene-en-espera-a-su-familia-mientras-se-revisan-documentos-historicos/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-09-10",
-   "publicado": "2026-09-10T06:23:30+00:00",
-   "capturado": "2026-09-10T06:32:32+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.7549,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "rubros": []
   },
   {
    "id": "a731828b5d85be0b",
@@ -268475,6 +268886,29 @@
    "postura": {
     "etiqueta": "adversa",
     "confianza": 0.4709,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "e6ece6af8e30233b",
+   "titulo": "Colectivos LGBT+ entregan pliego petitorio para impulsar cambios legislativos",
+   "url": "https://bajanews.mx/Cali-Baja/61066/Colectivos-LGBT-entregan-pliego-petitorio-para-impulsar-cambios-legislativos",
+   "dominio": "bajanews.mx",
+   "fuente": "bajanews",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": null,
+   "publicado": null,
+   "capturado": "2026-10-06T01:06:29+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.59,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"

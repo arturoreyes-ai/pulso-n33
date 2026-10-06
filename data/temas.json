@@ -3,7 +3,7 @@
  "generado": "2026-10-06",
  "ventana_dias": 7,
  "minimo": 3,
- "notas_ventana": 2096,
+ "notas_ventana": 2111,
  "notas_previas": 2305,
  "temas": [
   {
@@ -758,6 +758,49 @@
    ]
   },
   {
+   "termino": "trabajo",
+   "n": 16,
+   "n_previo": 5,
+   "momento": 11,
+   "zonas": {
+    "nacional": 9,
+    "Tijuana": 5,
+    "estatal": 2
+   },
+   "fuentes": {
+    "imparcial": 10,
+    "uniradio": 2,
+    "afn": 1,
+    "jornadabc": 1,
+    "rosarito": 1,
+    "tecate": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "04604881b7e298eb",
+    "0ddba44442dfbcd4",
+    "2862a4777effbd89",
+    "3d7d2c070954c1c7",
+    "716e508265cf083e",
+    "7fcfadf57eb5d54c",
+    "89aaba9b34842b32",
+    "aa78a581dcd270b3",
+    "ae8e8f1ebe4ef8c3",
+    "d9e78b9565748ea0",
+    "e1151d7bd907f67e",
+    "e1590795b6e93919",
+    "e3ababd8d3769f79",
+    "ed53add06f722e0f",
+    "fdbd427031b949ee",
+    "feb68a75df1f1fa6"
+   ],
+   "ejemplos": [
+    "Ante los bajos ingresos que predominan en la mayor parte del territorio nacional, los hogares recurren cada vez más a transferencias y fuentes de ingresos ajenas al trabajo tradicional, y especialistas advirtieron que está creciendo la dependencia de apoyos del gobierno frente a los salarios insuficientes",
+    "Consolidan unidad en Baja California: Julieta Ramírez concluye gira de trabajo con los siete alcaldes del estado",
+    "Cuestiona Gina Arana trabajo del exsecretario de Movilidad"
+   ]
+  },
+  {
    "termino": "profeco",
    "n": 15,
    "n_previo": 4,
@@ -866,47 +909,6 @@
     "Una policia más cerca de las colonias: Norma Bustamante",
     "Norma Bustamante define Academia de Policía como proyecto central en su tercer año de gobierno",
     "Norma Bustamante presume reducción delictiva y anuncia academia de policía en Mexicali"
-   ]
-  },
-  {
-   "termino": "trabajo",
-   "n": 15,
-   "n_previo": 5,
-   "momento": 10,
-   "zonas": {
-    "nacional": 9,
-    "Tijuana": 4,
-    "estatal": 2
-   },
-   "fuentes": {
-    "imparcial": 10,
-    "uniradio": 2,
-    "jornadabc": 1,
-    "rosarito": 1,
-    "tecate": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "04604881b7e298eb",
-    "0ddba44442dfbcd4",
-    "2862a4777effbd89",
-    "3d7d2c070954c1c7",
-    "716e508265cf083e",
-    "7fcfadf57eb5d54c",
-    "89aaba9b34842b32",
-    "ae8e8f1ebe4ef8c3",
-    "d9e78b9565748ea0",
-    "e1151d7bd907f67e",
-    "e1590795b6e93919",
-    "e3ababd8d3769f79",
-    "ed53add06f722e0f",
-    "fdbd427031b949ee",
-    "feb68a75df1f1fa6"
-   ],
-   "ejemplos": [
-    "Ante los bajos ingresos que predominan en la mayor parte del territorio nacional, los hogares recurren cada vez más a transferencias y fuentes de ingresos ajenas al trabajo tradicional, y especialistas advirtieron que está creciendo la dependencia de apoyos del gobierno frente a los salarios insuficientes",
-    "Consolidan unidad en Baja California: Julieta Ramírez concluye gira de trabajo con los siete alcaldes del estado",
-    "G20 condena el uso de alimentos como herramienta de coerción comercial, pero mantiene divisiones sobre trabajo forzoso y aranceles"
    ]
   },
   {
@@ -1194,23 +1196,23 @@
  "descartados": [
   {
    "termino": "estados",
-   "n": 39,
+   "n": 40,
    "porque": "duplica «estados unidos»"
   },
   {
    "termino": "unidos",
-   "n": 31,
+   "n": 32,
    "porque": "duplica «estados unidos»"
+  },
+  {
+   "termino": "segundo",
+   "n": 30,
+   "porque": "duplica «segundo informe»"
   },
   {
    "termino": "marina",
    "n": 29,
    "porque": "duplica «marina pilar»"
-  },
-  {
-   "termino": "segundo",
-   "n": 29,
-   "porque": "duplica «segundo informe»"
   },
   {
    "termino": "informe",
@@ -1229,18 +1231,18 @@
   },
   {
    "termino": "nacionalidad",
-   "n": 15,
+   "n": 16,
+   "porque": "duplica «doble nacionalidad»"
+  },
+  {
+   "termino": "doble",
+   "n": 14,
    "porque": "duplica «doble nacionalidad»"
   },
   {
    "termino": "jorge",
    "n": 14,
    "porque": "duplica «jorge kahwagi»"
-  },
-  {
-   "termino": "doble",
-   "n": 13,
-   "porque": "duplica «doble nacionalidad»"
   },
   {
    "termino": "vientos",
@@ -1295,7 +1297,7 @@
  ],
  "por_zona": {
   "Tijuana": {
-   "notas_ventana": 510,
+   "notas_ventana": 515,
    "minimo": 3,
    "temas": [
     {
@@ -2138,7 +2140,7 @@
    ]
   },
   "Mexicali": {
-   "notas_ventana": 207,
+   "notas_ventana": 208,
    "minimo": 3,
    "temas": [
     {
@@ -3042,7 +3044,7 @@
    ]
   },
   "Playas de Rosarito": {
-   "notas_ventana": 69,
+   "notas_ventana": 70,
    "minimo": 3,
    "temas": [
     {
@@ -3994,7 +3996,7 @@
    ]
   },
   "San Diego": {
-   "notas_ventana": 280,
+   "notas_ventana": 282,
    "minimo": 3,
    "temas": [
     {
