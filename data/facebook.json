@@ -1,45 +1,45 @@
 {
  "esquema": 1,
- "generado": "2026-10-08T06:25:04+00:00",
+ "generado": "2026-10-08T13:51:25+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 3044,
- "posts_vigentes": 478,
- "opinion": 2800,
- "repetidos": 137,
- "reacciones": 191,
+ "comentarios_vigentes": 3104,
+ "posts_vigentes": 489,
+ "opinion": 2848,
+ "repetidos": 150,
+ "reacciones": 200,
  "por_zona": {
   "Ensenada": 73,
   "Mexicali": 68,
   "Playas de Rosarito": 23,
   "San Quintín": 1,
   "Tecate": 29,
-  "Tijuana": 1391,
-  "estatal": 1234,
+  "Tijuana": 1424,
+  "estatal": 1260,
   "internacional": 13,
-  "nacional": 212
+  "nacional": 213
  },
  "por_cuenta": {
   "aztecabc_fb": 110,
-  "blanconegro_fb": 1264,
-  "blancorojo_fb": 726,
-  "ndtijuana_fb": 900,
-  "psn_fb": 44
+  "blanconegro_fb": 1279,
+  "blancorojo_fb": 761,
+  "ndtijuana_fb": 909,
+  "psn_fb": 45
  },
  "por_idioma": {
-  "es": 3044
+  "es": 3104
  },
  "por_tema": [
   {
    "tema": "calor",
-   "comentarios": 46,
-   "posts": 37
+   "comentarios": 48,
+   "posts": 38
   },
   {
    "tema": "casa",
-   "comentarios": 40,
-   "posts": 34
+   "comentarios": 41,
+   "posts": 35
   },
   {
    "tema": "colonias",
@@ -47,14 +47,14 @@
    "posts": 13
   },
   {
+   "tema": "incendio",
+   "comentarios": 10,
+   "posts": 6
+  },
+  {
    "tema": "medio",
    "comentarios": 10,
    "posts": 10
-  },
-  {
-   "tema": "incendio",
-   "comentarios": 9,
-   "posts": 5
   },
   {
    "tema": "llama",
@@ -133,9 +133,9 @@
   }
  ],
  "sentimiento": {
-  "positivo": 312,
-  "negativo": 1419,
-  "neutral": 1069,
+  "positivo": 314,
+  "negativo": 1443,
+  "neutral": 1091,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -178,6 +178,29 @@
  "releidos": 23,
  "destacados": [
   {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0rTVLYLRh8NRnFrSeY6jF8rhhWoAHNffxjWJywr5Ag6iP6VkpXmgqZnPvGHke5idYl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-07",
+   "titulo": "Esto es lo que viene a Tijuana, aunque Rachel es Huracán en estos momentos 🌀, llegará a Tijuana solo los remanentes, con lluvia domingo, lunes en la mañana y m…",
+   "tipo": "imagen",
+   "likes": 1220,
+   "comentarios": 104,
+   "compartidos": 130,
+   "alcance": "zona",
+   "publicado": "2026-10-07T18:54:14+00:00",
+   "cosechados": 10,
+   "opinion": 9,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 2,
+    "neutral": 7,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02v18XTW43ycESuar7SukX5hPpdYed28ALV779irwRSXiTdx9RZuWHSj8LBK14bXJJl&id=100086488503408",
    "cuenta": "blancorojo_fb",
    "zona": "Tijuana",
@@ -190,34 +213,11 @@
    "alcance": "zona",
    "publicado": "2026-10-07T18:54:14+00:00",
    "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 2,
-    "neutral": 8,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0EoAAAmrvttkZ9LukPtRKsasC5h9pa932fRNtRJ98W8Wk82DErPCZJGQXRzRsxCHXl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-07",
-   "titulo": "🚨¡MADRE E HIJA SE REENCUENTRAN!… MUERE MARTHA ELENA MARTINEZ HIJA DE PAQUITA LA DEL BARRIO🚨",
-   "tipo": "imagen",
-   "likes": 947,
-   "comentarios": 49,
-   "compartidos": 45,
-   "alcance": "nacional",
-   "publicado": "2026-10-07T22:24:12+00:00",
-   "cosechados": 9,
    "opinion": 9,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 1,
-    "neutral": 8,
+    "negativo": 2,
+    "neutral": 7,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -230,9 +230,9 @@
    "fecha": "2026-10-08",
    "titulo": "#NDTInforma | Agente de FESC que golpeó a peatón con su camioneta no tenía alta operativa, reporta Jorge Eras",
    "tipo": "imagen",
-   "likes": 596,
-   "comentarios": 156,
-   "compartidos": 47,
+   "likes": 1030,
+   "comentarios": 238,
+   "compartidos": 80,
    "alcance": "zona",
    "publicado": "2026-10-08T03:50:50+00:00",
    "cosechados": 10,
@@ -247,23 +247,93 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0EoAAAmrvttkZ9LukPtRKsasC5h9pa932fRNtRJ98W8Wk82DErPCZJGQXRzRsxCHXl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-07",
+   "titulo": "🚨¡MADRE E HIJA SE REENCUENTRAN!… MUERE MARTHA ELENA MARTINEZ HIJA DE PAQUITA LA DEL BARRIO🚨",
+   "tipo": "imagen",
+   "likes": 965,
+   "comentarios": 49,
+   "compartidos": 48,
+   "alcance": "nacional",
+   "publicado": "2026-10-07T22:24:12+00:00",
+   "cosechados": 9,
+   "opinion": 9,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 8,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02vomDv3KpPZxBah1Y7xfqDqCESMDWtoVVHF6CTkgXBu3YbTySXdohn4P69dyFLi7Sl&id=100086488503408",
    "cuenta": "blancorojo_fb",
    "zona": "estatal",
    "fecha": "2026-10-08",
    "titulo": "A ponerle llantas y barrotes a las lonas del techo que se espera lluvia 🌧️ la noche del sábado y madrugada del domingo",
    "tipo": "imagen",
-   "likes": 580,
-   "comentarios": 28,
-   "compartidos": 62,
+   "likes": 714,
+   "comentarios": 38,
+   "compartidos": 77,
    "alcance": "nacional",
    "publicado": "2026-10-08T02:49:26+00:00",
    "cosechados": 10,
-   "opinion": 10,
+   "opinion": 9,
    "sentimiento": {
     "positivo": 1,
     "negativo": 4,
-    "neutral": 5,
+    "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid06ga9fUi4Z1iXJuhxukXPXRVHJPGK8ApC1ELyXFQ8vi6MroRoSgnwhGKGCbWoCRmYl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-07",
+   "titulo": "Rachel el huracán categoría 2 se dirige a Baja California Norte estará llegando el sábado por la noche como categoría 1 se esperan fuertes lluvias en Tijuana T…",
+   "tipo": "imagen",
+   "likes": 475,
+   "comentarios": 59,
+   "compartidos": 142,
+   "alcance": "zona",
+   "publicado": "2026-10-07T23:17:07+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 8,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/videos/2317067985733954",
+   "cuenta": "ndtijuana_fb",
+   "zona": "nacional",
+   "fecha": "2026-10-08",
+   "titulo": "Central de bomberos solicita la presencia de la CFE desde la mañana para reconeccion de luz y no llega",
+   "tipo": "video",
+   "likes": 442,
+   "comentarios": 81,
+   "compartidos": 47,
+   "reproducciones": 34956,
+   "alcance": "nacional",
+   "publicado": "2026-10-08T04:33:18+00:00",
+   "cosechados": 9,
+   "opinion": 8,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 7,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -293,47 +363,24 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid06ga9fUi4Z1iXJuhxukXPXRVHJPGK8ApC1ELyXFQ8vi6MroRoSgnwhGKGCbWoCRmYl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-07",
-   "titulo": "Rachel el huracán categoría 2 se dirige a Baja California Norte estará llegando el sábado por la noche como categoría 1 se esperan fuertes lluvias en Tijuana T…",
-   "tipo": "imagen",
-   "likes": 384,
-   "comentarios": 51,
-   "compartidos": 121,
-   "alcance": "zona",
-   "publicado": "2026-10-07T23:17:07+00:00",
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/1322009463236955",
+   "cuenta": "blanconegro_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-08",
+   "titulo": "🚨 ¡Ni los bomberos se salvan! Sin luz para operar equipo necesario en emergencias",
+   "tipo": "video",
+   "likes": 349,
+   "comentarios": 41,
+   "compartidos": 86,
+   "reproducciones": 30349,
+   "alcance": "nacional",
+   "publicado": "2026-10-08T04:51:21+00:00",
    "cosechados": 10,
    "opinion": 10,
    "sentimiento": {
-    "positivo": 0,
-    "negativo": 8,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NdTijuana/videos/2317067985733954",
-   "cuenta": "ndtijuana_fb",
-   "zona": "nacional",
-   "fecha": "2026-10-08",
-   "titulo": "Central de bomberos solicita la presencia de la CFE desde la mañana para reconeccion de luz y no llega",
-   "tipo": "video",
-   "likes": 354,
-   "comentarios": 72,
-   "compartidos": 41,
-   "reproducciones": 27459,
-   "alcance": "nacional",
-   "publicado": "2026-10-08T04:33:18+00:00",
-   "cosechados": 9,
-   "opinion": 8,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 7,
-    "neutral": 1,
+    "positivo": 1,
+    "negativo": 5,
+    "neutral": 4,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -346,10 +393,10 @@
    "fecha": "2026-10-07",
    "titulo": "última hora última hora del huracán Rachel se dirige a lo que es Baja California estará pasando por Tijuana San Diego habrán tormentas eléctricas y fuertes vie…",
    "tipo": "video",
-   "likes": 333,
-   "comentarios": 43,
-   "compartidos": 64,
-   "reproducciones": 16680,
+   "likes": 346,
+   "comentarios": 47,
+   "compartidos": 68,
+   "reproducciones": 18303,
    "alcance": "zona",
    "publicado": "2026-10-07T21:52:43+00:00",
    "cosechados": 10,
@@ -370,10 +417,10 @@
    "fecha": "2026-10-08",
    "titulo": "Vehículo cae sobre vivienda",
    "tipo": "video",
-   "likes": 278,
+   "likes": 330,
    "comentarios": 17,
    "compartidos": 25,
-   "reproducciones": 28190,
+   "reproducciones": 31584,
    "alcance": "nacional",
    "publicado": "2026-10-08T01:46:09+00:00",
    "cosechados": 10,
@@ -382,6 +429,53 @@
     "positivo": 1,
     "negativo": 4,
     "neutral": 5,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02pKeHY4215szkJ974fPBDf5rKgbhn4iNSbrURoNXym9TdvPe83YQ8j2xrek1PgLWpl",
+   "cuenta": "blanconegro_fb",
+   "zona": "Ensenada",
+   "fecha": "2026-10-08",
+   "titulo": "⚓🇲🇽 ¡El Buque Escuela Cuauhtémoc llega a Ensenada! Podrás visitarlo gratis hasta el 11 de octubre",
+   "tipo": "imagen",
+   "likes": 305,
+   "comentarios": 34,
+   "compartidos": 42,
+   "alcance": "zona",
+   "publicado": "2026-10-08T03:03:46+00:00",
+   "cosechados": 8,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 3,
+    "negativo": 1,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/1084072031077202",
+   "cuenta": "blanconegro_fb",
+   "zona": "nacional",
+   "fecha": "2026-10-08",
+   "titulo": "Personal de la CFE llegó a central de bomberos",
+   "tipo": "video",
+   "likes": 267,
+   "comentarios": 35,
+   "compartidos": 22,
+   "reproducciones": 26923,
+   "alcance": "nacional",
+   "publicado": "2026-10-08T05:57:13+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 3,
+    "negativo": 6,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -405,30 +499,6 @@
     "positivo": 2,
     "negativo": 4,
     "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/1322009463236955",
-   "cuenta": "blanconegro_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-08",
-   "titulo": "🚨 ¡Ni los bomberos se salvan! Sin luz para operar equipo necesario en emergencias",
-   "tipo": "video",
-   "likes": 250,
-   "comentarios": 36,
-   "compartidos": 61,
-   "reproducciones": 22369,
-   "alcance": "nacional",
-   "publicado": "2026-10-08T04:51:21+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 5,
-    "neutral": 4,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -529,29 +599,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02pKeHY4215szkJ974fPBDf5rKgbhn4iNSbrURoNXym9TdvPe83YQ8j2xrek1PgLWpl",
-   "cuenta": "blanconegro_fb",
-   "zona": "Ensenada",
-   "fecha": "2026-10-08",
-   "titulo": "⚓🇲🇽 ¡El Buque Escuela Cuauhtémoc llega a Ensenada! Podrás visitarlo gratis hasta el 11 de octubre",
-   "tipo": "imagen",
-   "likes": 173,
-   "comentarios": 22,
-   "compartidos": 19,
-   "alcance": "zona",
-   "publicado": "2026-10-08T03:03:46+00:00",
-   "cosechados": 8,
-   "opinion": 7,
-   "sentimiento": {
-    "positivo": 3,
-    "negativo": 1,
-    "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0DacGsrJXAntyrczmyjRyyBRtm8CMJDgBEfqTKvqUFQ6rAU5vAGe9GtDRNjcPHT4El&id=100086488503408",
    "cuenta": "blancorojo_fb",
    "zona": "Tijuana",
@@ -605,10 +652,10 @@
    "fecha": "2026-10-07",
    "titulo": "💡“Vecinos de Mariano Matamoros llevan más de cuatro días sin luz y reportan pérdidas económicas”",
    "tipo": "video",
-   "likes": 132,
-   "comentarios": 39,
-   "compartidos": 39,
-   "reproducciones": 14807,
+   "likes": 146,
+   "comentarios": 47,
+   "compartidos": 51,
+   "reproducciones": 16243,
    "alcance": "zona",
    "publicado": "2026-10-07T23:25:41+00:00",
    "cosechados": 10,
@@ -616,6 +663,30 @@
    "sentimiento": {
     "positivo": 1,
     "negativo": 8,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/videos/966964373150899",
+   "cuenta": "ndtijuana_fb",
+   "zona": "nacional",
+   "fecha": "2026-10-08",
+   "titulo": "Llegó personal de la CFE a la central de bomberos",
+   "tipo": "video",
+   "likes": 131,
+   "comentarios": 15,
+   "compartidos": 11,
+   "reproducciones": 12273,
+   "alcance": "nacional",
+   "publicado": "2026-10-08T05:53:14+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 3,
+    "negativo": 6,
     "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -646,94 +717,92 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/1084072031077202",
-   "cuenta": "blanconegro_fb",
-   "zona": "nacional",
-   "fecha": "2026-10-08",
-   "titulo": "Personal de la CFE llegó a central de bomberos",
-   "tipo": "video",
-   "likes": 113,
-   "comentarios": 17,
-   "compartidos": 6,
-   "reproducciones": 10510,
-   "alcance": "nacional",
-   "publicado": "2026-10-08T05:57:13+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 3,
-    "negativo": 6,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0xGHwg8PYP1xD2KHTVndv2Apqvdom5s6P2WfQj5cqxjvPnizkk2euNstJr4YGfgbCl&id=100086488503408",
    "cuenta": "blancorojo_fb",
    "zona": "estatal",
    "fecha": "2026-10-08",
    "titulo": "🛑 Última Hora | Menor regresa a casa de sus padres tras separarse temporalmente de su pareja adulta",
    "tipo": "imagen",
-   "likes": 103,
-   "comentarios": 42,
+   "likes": 124,
+   "comentarios": 50,
    "compartidos": 4,
    "alcance": "nacional",
    "publicado": "2026-10-08T02:06:13+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02Y1fZgYWBYaG8sPMKZXxpC4gpqcVE8dGnKvDUHq7EPqGk1W399n4xDb9iQYyXBWKml&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-07",
-   "titulo": "🌧️ 😎 ¡#Tijuana pidió un respiro y Rachel dijo “ahí te va”! Se acercan las lluvias",
-   "tipo": "imagen",
-   "likes": 103,
-   "comentarios": 13,
-   "compartidos": 8,
-   "alcance": "zona",
-   "publicado": "2026-10-07T23:54:14+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NdTijuana/videos/966964373150899",
-   "cuenta": "ndtijuana_fb",
-   "zona": "nacional",
-   "fecha": "2026-10-08",
-   "titulo": "Llegó personal de la CFE a la central de bomberos",
-   "tipo": "video",
-   "likes": 62,
-   "comentarios": 12,
-   "compartidos": 5,
-   "reproducciones": 5768,
-   "alcance": "nacional",
-   "publicado": "2026-10-08T05:53:14+00:00",
    "cosechados": 10,
    "opinion": 10,
    "sentimiento": {
-    "positivo": 3,
-    "negativo": 6,
-    "neutral": 1,
+    "positivo": 0,
+    "negativo": 8,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0K3kmydh8zX1bJerFo3mVBkWixVmuQqKwQaiFm3382fNs7NJA1quMDv1LGNeAKcpdl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-07",
+   "titulo": "Yo agregándole un poquito de filtro a mi foto antes de publicarla: si otras se ponen filtros porque yo no",
+   "tipo": "imagen",
+   "likes": 60,
+   "comentarios": 9,
+   "compartidos": 8,
+   "alcance": "nacional",
+   "publicado": "2026-10-07T23:56:23+00:00",
+   "cosechados": 5,
+   "opinion": 5,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 5,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0wf212fcLWoxLXviRA45WNyWNF3abXiFbo6XZfd9GLc7CTjku9ydANhdQ4kgpJTMMl",
+   "cuenta": "blanconegro_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-08",
+   "titulo": "Julieta Ramírez se reúne con funcionario federal para abordar el desarrollo económico de Baja California",
+   "tipo": "imagen",
+   "likes": 57,
+   "comentarios": 61,
+   "compartidos": 25,
+   "alcance": "estatal",
+   "publicado": "2026-10-08T04:32:26+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 8,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02g3tEJy7AbYMvKcM8uovDPgQQaARdx4nmCzp1GrM8pSXkrsQYqhPg9eQpMfZEjCUdl",
+   "cuenta": "blanconegro_fb",
+   "zona": "nacional",
+   "fecha": "2026-10-08",
+   "titulo": "Conagua y el Meteorológico nacional alertó por la presencia simultánea de tres ciclones tropicales en ambas costas.",
+   "tipo": "otro",
+   "likes": 54,
+   "comentarios": 15,
+   "compartidos": 17,
+   "alcance": "nacional",
+   "publicado": "2026-10-08T02:41:10+00:00",
+   "cosechados": 1,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -855,29 +924,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0wf212fcLWoxLXviRA45WNyWNF3abXiFbo6XZfd9GLc7CTjku9ydANhdQ4kgpJTMMl",
-   "cuenta": "blanconegro_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-08",
-   "titulo": "Julieta Ramírez se reúne con funcionario federal para abordar el desarrollo económico de Baja California",
-   "tipo": "imagen",
-   "likes": 18,
-   "comentarios": 27,
-   "compartidos": 13,
-   "alcance": "estatal",
-   "publicado": "2026-10-08T04:32:26+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NdTijuana/posts/pfbid0YcPttDQgCdkVfBbJAi4NtEEfSNn8KvfQ9B17cqEJB47PHHXnadiBaN4VVpuWckYql",
    "cuenta": "ndtijuana_fb",
    "zona": "Mexicali",
@@ -895,6 +941,30 @@
     "positivo": 0,
     "negativo": 0,
     "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/reel/1124029309969780",
+   "cuenta": "psn_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-08",
+   "titulo": "#LoVisteEnPSN | Pareja de motociclistas pierde la vida en Colinas del Florido.",
+   "tipo": "video",
+   "likes": 17,
+   "comentarios": 1,
+   "compartidos": 3,
+   "reproducciones": 2810,
+   "alcance": "zona",
+   "publicado": "2026-10-08T03:30:48+00:00",
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -947,17 +1017,17 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02y9HvYKK2f4Qw2XfJwZSrpCn1sH7QmcPzk7FNkdNEGKef4GMDtBJ9FHGdoLTuzDdYl",
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0TCJmwLnrD9puEaomnWAL4hgWNKT6EHhMC5nsVKMEueZkQpF7ekRuMA2viiXvLd7Rl",
    "cuenta": "ndtijuana_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-07",
-   "titulo": "#NDTInforma Detienen a hombre tras disparar contra casa de su vecino",
+   "zona": "Ensenada",
+   "fecha": "2026-10-08",
+   "titulo": "#NDTInforma │ Emprendedoras de Ensenada plantean a Arregui obstáculos para crecer",
    "tipo": "imagen",
-   "likes": 13,
-   "comentarios": 1,
-   "compartidos": 1,
-   "alcance": "nacional",
-   "publicado": "2026-10-07T22:50:16+00:00",
+   "likes": 8,
+   "comentarios": 0,
+   "compartidos": 2,
+   "alcance": "zona",
+   "publicado": "2026-10-08T02:09:58+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -993,41 +1063,18 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0TCJmwLnrD9puEaomnWAL4hgWNKT6EHhMC5nsVKMEueZkQpF7ekRuMA2viiXvLd7Rl",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Ensenada",
-   "fecha": "2026-10-08",
-   "titulo": "#NDTInforma │ Emprendedoras de Ensenada plantean a Arregui obstáculos para crecer",
-   "tipo": "imagen",
-   "likes": 6,
-   "comentarios": 0,
-   "compartidos": 2,
-   "alcance": "zona",
-   "publicado": "2026-10-08T02:09:58+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/reel/1654784382649499",
+   "url": "https://www.facebook.com/reel/1091034797004809",
    "cuenta": "psn_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-07",
-   "titulo": "#primersistemadenoticias #bajacalifornia #tijuana #mexicali #rosarito #ensenada #sanquintin #sanfelipe #tecate #marinadelpilar #marinadelpilaravila #gobierno #…",
+   "zona": "estatal",
+   "fecha": "2026-10-08",
+   "titulo": "#LoVisteEnPSN | Incendio afecta una vivienda durante la madrugada en Mineral de Santa Fe.",
    "tipo": "video",
    "likes": 6,
    "comentarios": 0,
    "compartidos": 0,
-   "reproducciones": 230,
-   "alcance": "zona",
-   "publicado": "2026-10-07T17:32:13+00:00",
+   "reproducciones": 856,
+   "alcance": "nacional",
+   "publicado": "2026-10-08T04:30:34+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1063,6 +1110,29 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/aztecabc/posts/pfbid0HFZwM433VQetX8MpQD3c9V4KByY4vXL1npfRQudvovHdGB87gpTQJmuTUhfCwQdWl",
+   "cuenta": "aztecabc_fb",
+   "zona": "internacional",
+   "fecha": "2026-10-08",
+   "titulo": "🧊Fuerte granizada atípica sorprende a Bogotá y la cubre por completo de blanco. Checa las imágenes en el enlace 👇",
+   "tipo": "otro",
+   "likes": 1,
+   "comentarios": 0,
+   "compartidos": 0,
+   "alcance": "extranjero",
+   "publicado": "2026-10-08T10:30:05+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/aztecabc/posts/pfbid0pN3hRjXCwa1zTmFkW6NhkHFqBENZUDrtBYmGUzMW8Q1ZtSUdDHDAxvhwDgkHLkbCl",
    "cuenta": "aztecabc_fb",
    "zona": "internacional",
@@ -1074,6 +1144,52 @@
    "compartidos": 0,
    "alcance": "extranjero",
    "publicado": "2026-10-08T05:00:04+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/aztecabc/posts/pfbid0SEW1Kn81oyfFA2JZ6YH6v1h9aHxvBNqkSYxpXsvUixKMRNGPiyYsfAeoswfV2tWbl",
+   "cuenta": "aztecabc_fb",
+   "zona": "nacional",
+   "fecha": "2026-10-08",
+   "titulo": "Rafael Márquez firma el peor inicio para un DT de México con 2 derrotas. ⚽ ¿Debe seguir? Comenta. 👇",
+   "tipo": "otro",
+   "likes": 0,
+   "comentarios": 1,
+   "compartidos": 0,
+   "alcance": "nacional",
+   "publicado": "2026-10-08T11:30:03+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/aztecabc/posts/pfbid02eBsiiXg4SS1okToq9RjxQzCmiHyWqXXKiXP3b9EKtsjh9tepXiGaLjoCfE7C4Jvol",
+   "cuenta": "aztecabc_fb",
+   "zona": "nacional",
+   "fecha": "2026-10-08",
+   "titulo": "¡Vuelve el fútbol mexicano! Checa el calendario de la Jornada 11 de la Liga MX. ⚽ ¿Cómo crees que quede tu equipo?",
+   "tipo": "otro",
+   "likes": 0,
+   "comentarios": 0,
+   "compartidos": 0,
+   "alcance": "nacional",
+   "publicado": "2026-10-08T13:00:09+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1130,29 +1246,6 @@
     "sin_modelo_idioma": 0
    },
    "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/redespsn/posts/pfbid02R1d5rG3Di2vf4yJ8yU2FHe3jCD6ABQpEh16LMCfiWcy1eEgwwZzTW2yAhrooUDgil",
-   "cuenta": "psn_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-07",
-   "titulo": "Henri Kagan y Kenso Soai fueron reconocidos con el Premio Nobel de Química 2026.",
-   "tipo": "otro",
-   "likes": 0,
-   "comentarios": 0,
-   "compartidos": 0,
-   "alcance": "nacional",
-   "publicado": "2026-10-07T22:16:39+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
   }
  ],
  "salud": [
@@ -1160,7 +1253,7 @@
    "cuenta": "aztecabc_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 2,
+   "comentarios": 0,
    "crudos": 4,
    "fuera": 0,
    "compartidos": 0
@@ -1169,8 +1262,8 @@
    "cuenta": "blanconegro_fb",
    "estado": "ok",
    "posts": 7,
-   "comentarios": 38,
-   "crudos": 40,
+   "comentarios": 23,
+   "crudos": 30,
    "fuera": 1,
    "compartidos": 0
   },
@@ -1178,8 +1271,8 @@
    "cuenta": "blancorojo_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 40,
-   "crudos": 40,
+   "comentarios": 35,
+   "crudos": 37,
    "fuera": 0,
    "compartidos": 0
   },
@@ -1187,8 +1280,8 @@
    "cuenta": "ndtijuana_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 39,
-   "crudos": 40,
+   "comentarios": 13,
+   "crudos": 14,
    "fuera": 0,
    "compartidos": 0
   },
@@ -1196,21 +1289,21 @@
    "cuenta": "psn_fb",
    "estado": "ok",
    "posts": 7,
-   "comentarios": 0,
-   "crudos": 4,
+   "comentarios": 1,
+   "crudos": 2,
    "fuera": 1,
    "compartidos": 0
   }
  ],
  "gasto": {
   "resultados": 250,
-  "gastado": 168,
+  "gastado": 127,
   "por_concepto": {
    "aztecabc_fb": 12,
-   "blanconegro_fb": 48,
-   "blancorojo_fb": 48,
-   "ndtijuana_fb": 48,
-   "psn_fb": 12
+   "blanconegro_fb": 38,
+   "blancorojo_fb": 45,
+   "ndtijuana_fb": 22,
+   "psn_fb": 10
   }
  }
 }
