@@ -1,8 +1,647 @@
 {
  "esquema": 1,
  "ventana_dias": 30,
- "total": 11563,
+ "total": 11592,
  "notas": [
+  {
+   "id": "b3a0ff6403b0b810",
+   "titulo": "La Nación Tohono O’odham busca frenar la construcción del muro fronterizo en 100 kilómetros de sus territorios ancestrales y condena la tala del árbol sagrado “La Abuela” en Arizona, además de denunciar daños a sitios arqueológicos y culturales por las obras de la barrera",
+   "url": "https://www.elimparcial.com/son/sonora/2026/10/08/la-nacion-tohono-oodham-busca-frenar-la-construccion-del-muro-fronterizo-en-100-kilometros-de-sus-territorios-ancestrales-y-condena-la-tala-del-arbol-sagrado-la-abuela-en-arizona-ademas-de-denunciar-danos-a-sitios-arqueologicos-y-culturales-por-las-obras-de-la-barrera/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T13:03:49+00:00",
+   "capturado": "2026-10-09T06:08:09+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8416,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/VYZ4MPIMNNANHAR67IYZS2JCLQ.png?auth=684a3257a07eefef9148903ca39de47e611b4ee599506aa4874e648c5fe89878&smart=true&width=1200&height=780",
+   "rubros": []
+  },
+  {
+   "id": "5ba647c3b0e72b1d",
+   "titulo": "When health advice goes viral, these San Diego doctors are trying to cut through the noise",
+   "url": "https://www.kpbs.org/news/health/2026/10/09/when-health-advice-goes-viral-these-san-diego-doctors-are-trying-to-cut-through-the-noise",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T13:00:00+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/2c47a9d/2147483647/strip/false/crop/4883x4883+1221+0/resize/600x600!/quality/90/?url=http%3A%2F%2Fkpbs-brightspot.s3.us-west-2.amazonaws.com%2F1d%2Ff6%2F123792814b008e56282952e31dc4%2Finfluencer-2.jpg",
+   "rubros": []
+  },
+  {
+   "id": "ea6ac888d24da703",
+   "titulo": "Cómo circular de norte a sur por el bulevar Quiroga en Hermosillo durante las obras y qué desvíos tomar por la calle Mendoza",
+   "url": "https://www.elimparcial.com/son/hermosillo/2026/10/08/como-circular-de-norte-a-sur-por-el-bulevar-quiroga-en-hermosillo-durante-las-obras-y-que-desvios-tomar-por-la-calle-mendoza/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T12:59:15+00:00",
+   "capturado": "2026-10-08T23:21:56+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6785,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/DZ33RZZGLBAC5K6GL57L625RMI.jpg?auth=6ecd978669d62b2b41f4093cb5d03a04d526d67ac5ac2c472adc9b5c20b83a8e&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "176a90a63b589e96",
+   "titulo": "Ex director de Pemex Víctor Rodríguez pagará 120 mil pesos y deberá ir a terapia tras obtener suspensión condicional por el delito de violencia familiar contra su esposa Felicia Jiménez y su hijo",
+   "url": "https://www.elimparcial.com/mexico/2026/10/08/ex-director-de-pemex-victor-rodriguez-pagara-120-mil-pesos-y-debera-ir-a-terapia-tras-obtener-suspension-condicional-por-el-delito-de-violencia-familiar-contra-su-esposa-felicia-jimenez-y-su-hijo/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T12:58:02+00:00",
+   "capturado": "2026-10-09T06:08:09+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6504,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/QS4W25EVGZHR7E5GE7HCIB7FF4.jpg?auth=cb3e47d4760ff70104a20fb12f73ae3d822ce62a486ed808ffff95f93d84ec0c&smart=true&width=1200&height=750",
+   "rubros": []
+  },
+  {
+   "id": "5545f9eb35f346fd",
+   "titulo": "Morena abre registro para elegir coordinadores municipales de la Defensa de la Transformación; aspirantes podrán inscribirse hasta el 18 de octubre",
+   "url": "https://www.elimparcial.com/son/sonora/2026/10/08/morena-abre-registro-para-elegir-coordinadores-municipales-de-la-defensa-de-la-transformacion-aspirantes-podran-inscribirse-hasta-el-18-de-octubre/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T12:57:41+00:00",
+   "capturado": "2026-10-09T06:08:09+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5985,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/NM3ZJJWLTVADNOG36LIAOU4AOQ.jpeg?auth=0e5b3800bc5118d6be9d6b2ee44d46c96dd224895bd7d4bd3eeadab803faa110&smart=true&width=1600&height=800",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "5310f71ce4be55db",
+   "titulo": "Peso mexicano pierde terreno frente al dólar tras cuatro días de ganancias y así cotiza el tipo de cambio este viernes 9 de octubre",
+   "url": "https://www.elimparcial.com/dinero/2026/10/09/peso-mexicano-pierde-terreno-frente-al-dolar-tras-cuatro-dias-de-ganancias-y-asi-cotiza-el-tipo-de-cambio-este-viernes-9-de-octubre/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T12:43:41+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6198,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/ISSS5WMBD5FDXHWOSGPWFHTTPE.jpg?auth=9d319b91cafa6a14c8930dbffd578ec2feaeff887e63a91161bd8a7f5c8bedb8&smart=true&width=1200&height=750",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "c4dcd38af4aa5942",
+   "titulo": "Tormenta tropical Rachel: prevén lluvias y rachas de hasta 140 km/h en Baja California",
+   "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQVTlkRzRUZV9aQ0pHRmVMcHFBMzVlMU1kZ0F0M2FsQWpxVTBOTFJVbmphcFhUR0tQMHhCY2F5cWh1R1duTDhhUUx1LUVZU29LTnZOd19oNWlMMGlzVlY3enNJdEZLOWZ1TWVpQjNEM0JGUkxKU2c3SDRYQ2tXWGY4Vngtci03NWFiTTI5QjVDaU9tTjduZ2JvTVVnQVA4eWw4N3hBUlE1TTlhaHhJVkdlTFd0MnNWR1NvczZzaGVVeWZidHM3ZWc?oc=5",
+   "dominio": "sociedad-noticias.com",
+   "fuente": "gn-b4bf210d5652",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T12:30:00+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.4568,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "120ceb3b0fb1de76",
+   "titulo": "Derek Maltz, exjefe de la DEA, felicita a Omar García Harfuch por capturar a “El Tanque”, pero exige enviar a Rubén Rocha Moya a Estados Unidos: “Sería un gran logro”",
+   "url": "https://www.elimparcial.com/mexico/2026/10/08/derek-maltz-exjefe-de-la-dea-felicita-a-garcia-harfuch-por-capturar-a-el-tanque-pero-exige-enviar-a-ruben-rocha-moya-a-estados-unidos-seria-un-gran-logro/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T12:09:22+00:00",
+   "capturado": "2026-10-08T23:21:56+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.3637,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/VOFQDEWNZZHDZLC6WLSPHYDJIM.jpg?auth=d712e091572afb6c9dee1f3eedbbabe229f8860f9e21ca14c541210d88a8293d&smart=true&width=1200&height=750",
+   "rubros": []
+  },
+  {
+   "id": "7396d3d20fe73772",
+   "titulo": "Mientras en México la salchicha se disfruta en hot dogs, desayunos y guisados, en Alemania se suele acompañar con mostaza, chucrut, pretzel y otras tradiciones",
+   "url": "https://www.elimparcial.com/estilos/2026/10/08/mientras-en-mexico-la-salchicha-se-disfruta-en-hot-dogs-desayunos-y-guisados-en-alemania-se-suele-acompanar-con-mostaza-chucrut-pretzel-y-otras-tradiciones/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T12:08:56+00:00",
+   "capturado": "2026-10-08T23:21:56+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7034,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/B37UZOYCLVHQ7JMYQR2VWKYOPY.jpg?auth=c77665555c89a17661b376b6b81ac87b38d1e77fa7ec5bc53fa5b67b9a964fa7&smart=true&width=1200&height=750",
+   "rubros": []
+  },
+  {
+   "id": "118a6c2beaaa9ada",
+   "titulo": "“Un mal partido”: divertida y entretenida",
+   "url": "https://zetatijuana.com/2026/10/un-mal-partido-divertida-y-entretenida/",
+   "dominio": "zetatijuana.com",
+   "fuente": "zeta",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T12:08:43+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.7912,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros_categoria": [
+    "espectaculos"
+   ],
+   "rubros": [
+    "espectaculos"
+   ]
+  },
+  {
+   "id": "9311b1d6051cc4e2",
+   "titulo": "Juan Manuel Márquez aceptaría volver a pelear después de 12 años, pero puso una condición insólita: un millón de reproducciones",
+   "url": "https://www.elimparcial.com/deporte/2026/10/09/juan-manuel-marquez-aceptaria-volver-a-pelear-despues-de-12-anos-pero-puso-una-condicion-insolita-un-millon-de-reproducciones/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T12:05:00+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.703,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/KXASDNAWCVFSFKTQDJTZZIQM2E.jpg?auth=5d2172b1e5c09bd4a5cce0221bd7a4b39a3736153ff0b438d012358629acda15&smart=true&width=5092&height=3346",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "1089b840fe351a99",
+   "titulo": "Trabajadores del IMSS en Acapulco, Iguala y Zihuatanejo protestan para exigir salario digno",
+   "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPNi1SNjA5aWFOV1NGMkdWaVBPNmg1OVZlazRxRzRmckdwYWhTTGVnYXpPTnU0UnNLYUoxWkQzVEZjQlJxcWxWMVZWMkUwZUk2MG1haTMzVWZySUxGelZza2MwWUo2dGFhX2ZmU242bTBWVUJTZ1d1T29xaU9IS1Nnd3VXeDZYN2gtR0FLRmlNNi01ak1GcmhZbWg1aUdkYlBqTVhCQzNzUGRuU3ZKMVRjWmxYc3ZwUWx0SlRjd3ZfLVZCQQ?oc=5",
+   "dominio": "suracapulco.mx",
+   "fuente": "gn-2c2bd8511d76",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T11:43:15+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.626,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
+   "id": "9fb3d8f5633bbb44",
+   "titulo": "White Sox estuvo a una victoria de eliminar a Cleveland y ahora podría sufrir una remontada que parecía imposible",
+   "url": "https://www.elimparcial.com/deporte/2026/10/09/white-sox-estuvo-a-una-victoria-de-eliminar-a-cleveland-y-ahora-podria-sufrir-una-remontada-que-parecia-imposible/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T11:04:00+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7311,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/VO4PZEMOE5DWPIOMOAJVIBZCBI.jpg?auth=f61444e7eb72de13f871ac8758e42fd4acf5dff8604b53bdfc17eb9b829a2c54&smart=true&width=1920&height=1080",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "e5f387063bd1d0cc",
+   "titulo": "BKB News & Notes: New Broadcast Deal, Martinjak Returns",
+   "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQbFFrcjgtV3BPX2UtSEVjUEp3d2JEdjhwaXF2am5RbFgteW9JdkN4RW80NjFNckZrMTQwQVZubDduMmZoSkRyQ2gwb2FDQWFhakRIdTZkcTMwclhXUi04SVV0UWVnV0x3VklsQVFHYV9BcTNMeW8xN2EwbG82UzN1amdqRC1JOUtRbXc?oc=5",
+   "dominio": "bareknuckleheroes.com",
+   "fuente": "gn-be19c2e02977",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T10:45:09+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
+  },
+  {
+   "id": "0779b997b531eaa7",
+   "titulo": "Cowboys perdió ante un equipo que no había ganado en la NFL y la lesión de CeeDee Lamb empeoró la noche",
+   "url": "https://www.elimparcial.com/deporte/2026/10/09/cowboys-perdio-ante-un-equipo-que-no-habia-ganado-en-la-nfl-y-la-lesion-de-ceedee-lamb-empeoro-la-noche/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T10:33:00+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9399,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/TEUI2LTUFBCW3I5OPRTYNEVHGM.png?auth=a5579d4b27544e556e6a47c072243a0011fa61194f05b1b608433e9903c65b49&smart=true&width=1672&height=941",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "9663352342b6b182",
+   "titulo": "Presos que reclaman su inocencia, asesinos en serie y parricidas, entre los 563 reos que evitarían la pena capital en California",
+   "url": "https://news.google.com/rss/articles/CBMiiwJBVV95cUxQRHlBaFgwMndLUHMzYkxiamRGX2s3WHU1RzBoTENWalZ1RTRvaE1PWUp6TGhlWVJiV3JFenpvRzRmTjRmNVlycWRJZ21nYUdpTGlwNFduU0RIcWFSdXFXVE1FdnVvLXptOTNOMFN0QjNod0oxTGJkdXdDQk5HSmFHSjF0Z1ZSS1lISmxwS3JMRXhkX3NtckFuUS1fTWYyQmppS2gtUUVJbkRZOHlxYVlFejRvSTJITmI3THRxeERCYXRaTG9DaXItb2tURW93ME90ZHk4MUpKM3JDTkJJN1lOel9nV2xwN05oQUhXNUZNT1dNNnp2TUtrajBRUzB1c2VyVjZMYVpXVGdaY2fSAYsCQVVfeXFMUER5QWhYMDJ3S1BzM2JMYmpkRl9rN1h1NUcwaExDVmpWdUU0b2hNT1lKekxoZVlSYldyRXp6b0c0Zk40ZjVZcnFkSWdtZ2FHaUxpcDRXblNESHFhUnVxV1RNRXZ1by16bTkzTjBTdEIzaHdKMUxiZHV3Q0JOR0phR0oxdGdWUktZSEpscEtyTEV4ZF9zbXJBblEtX01mMkJqaUtoLVFFSW5EWTh5cWFZRXo0b0kySE5iN0x0cXhEQmF0WkxvQ2lyLW9rVEVvdzBPdGR5ODFKSjNyQ05CSTdZTnpfZ1dscDdOaEFIVzVGTU9XTTZ6dk1La2owUVMwdXNlclY2TGFaV1RnWmNn?oc=5",
+   "dominio": "elpais.com",
+   "fuente": "gn-ab49ec778314",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T09:30:00+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5615,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
+   "id": "5095faed215f06f2",
+   "titulo": "All About the Proposed Countywide Sales Tax Hike",
+   "url": "https://voiceofsandiego.org/2026/10/09/all-about-the-proposed-countywide-sales-tax-hike/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T09:15:00+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2025/11/San-Ysidro_0033-1024x683.jpg",
+   "rubros": []
+  },
+  {
+   "id": "d904678ae74a4dc6",
+   "titulo": "Supe Candidate Kyle Krahel Says People Will Die if Measure B Fails",
+   "url": "https://voiceofsandiego.org/2026/10/09/supe-candidate-kyle-krahel-says-people-will-die-if-measure-b-fails/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T09:05:00+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2026/10/GAS_politifestnorthcounty10_2_26x013-1024x683.jpg",
+   "rubros_categoria": [
+    "politica"
+   ],
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "b88ca60c5767f52e",
+   "titulo": "Why mailing a ballot close to Election Day may get it rejected for a late postmark",
+   "url": "https://www.kpbs.org/news/politics/2026/10/09/why-mailing-a-ballot-close-to-election-day-may-get-it-rejected-for-a-late-postmark",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T09:00:00+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/4c0d571/2147483647/strip/false/crop/4672x4672+1168+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fa7%2F83%2F7bea12cf477caf2a401bb8ab2e74%2Fap26246568670102.jpg",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "9585e6f0b6ef1ad1",
+   "titulo": "ChatGPT for Teens has special safeguards. A watchdog group finds most don't work",
+   "url": "https://www.kpbs.org/news/health/2026/10/09/chatgpt-for-teens-has-special-safeguards-a-watchdog-group-finds-most-dont-work",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T09:00:00+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/8e4f478/2147483647/strip/false/crop/3336x3336+832+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F11%2Ff1%2F1e313de8414cad3c0bf3d8a767f2%2Fgettyimages-2271833760.jpg",
+   "rubros": [
+    "ia"
+   ]
+  },
+  {
+   "id": "553ecedc851f21ab",
+   "titulo": "The Fine Print in the Countywide Sales Tax Hike Pitch",
+   "url": "https://voiceofsandiego.org/2026/10/09/the-fine-print-in-the-countywide-sales-tax-hike-pitch/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T09:00:00+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2022/12/untitled-06429.jpg",
+   "rubros_categoria": [
+    "politica"
+   ],
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "2e1ff9cd9d55059c",
+   "titulo": "Fill in the blank in the quiz: A plague research employee in Russia died from ____",
+   "url": "https://www.kpbs.org/news/national/2026/10/09/fill-in-the-blank-in-the-quiz-a-plague-research-employee-in-russia-died-from",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T09:00:00+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/9d82e78/2147483647/strip/false/crop/3182x3182+1236+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F6b%2F74%2F37b9e76b4ab0bed602f029c28b25%2Frm-cher-david.jpg",
+   "rubros": []
+  },
+  {
+   "id": "4eff4134497b38ef",
+   "titulo": "U.s. Border Patrol and U.S. Coast Guard Deter Dangerous Maritime Border Crossing",
+   "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOcVNPN2xkeU1LRDhCVzVCdGx0bi0zVUh2X1FxLU9xeDdMOFRBTkNlMjgzTHlLV0FmVHU3dzBTbHRacFdVV1FYa0duem8wYU5rZTk2eF9zSW5YYzEwM2FfN2l3cWhYZlQtZUg1ZnNPRFY1UmthVFhSQ21hU0ctaUluOHVBaVhGSXRVLXpJMmlUeWpTNWd1ZlZjU0NZM2x2U1lMcUZyNzVIVWVWZnNpZW1mNXpNWUpRTllyd1NCcGN6dmZpSldBTkFWZWJScG1CX1h0eVpLcGcxa1k?oc=5",
+   "dominio": "hstoday.us",
+   "fuente": "gn-2fdc23db7a84",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T08:27:35+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "3d531ebc340564cc",
+   "titulo": "Aaron Sorkin warns of Facebook's recklessness in 'The Social Reckoning'",
+   "url": "https://www.kpbs.org/news/arts-culture/2026/10/09/aaron-sorkin-warns-of-facebooks-recklessness-in-the-social-reckoning",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T08:27:09+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/e52e320/2147483647/strip/false/crop/4608x4608+1792+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F47%2F0e%2F0231373b400690d77eadf9aa5742%2Fdf-07685-r.tif",
+   "rubros": []
+  },
+  {
+   "id": "ef2ce0f258b5ee37",
+   "titulo": "South African human rights lawyer Navi Pillay wins the Nobel Peace Prize",
+   "url": "https://www.kpbs.org/news/international/2026/10/09/south-african-human-rights-lawyer-navi-pillay-wins-the-nobel-peace-prize",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T08:23:16+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/15672a6/2147483647/strip/false/crop/3000x3000+750+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F3e%2Fa5%2F406685634c73a582ad680acd20db%2Fgettyimages-2220014397.jpg",
+   "rubros": []
+  },
+  {
+   "id": "fb3aabd1767456de",
+   "titulo": "Huracán Isaías alcanza categoría 2 y avanza hacia Estados Unidos",
+   "url": "https://www.elimparcial.com/mexico/2026/10/08/huracan-isaias-alcanza-categoria-2-y-avanza-hacia-estados-unidos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T06:14:54+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6349,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/WNNJZHLQIFHG5AJTJ5P4FVNWJM.png?auth=72c91c4bc37ee4cf62b4349adb7cccdda28986c89272819a45ee912d63ac2c48&smart=true&width=744&height=431",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "99c089d0d83f5fd0",
+   "titulo": "Christa Pike is walking with help and eating after failed execution attempt",
+   "url": "https://www.kpbs.org/news/national/2026/10/08/christa-pike-is-walking-with-help-and-eating-after-failed-execution-attempt",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T05:52:50+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/f59aeaa/2147483647/strip/false/crop/3373x3373+844+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F01%2F97%2Faef5f81d4712b66cdce4001fc3b6%2Fap26280677262297.jpg",
+   "rubros": []
+  },
   {
    "id": "8d9497ee7b331331",
    "titulo": "SpaceX acuerda adquirir frecuencias de 800 MHz para ampliar la cobertura de Starlink Mobile y recibe autorización para lanzar 15 mil satélites que conectarán teléfonos sin modificaciones especiales",
@@ -25,6 +664,26 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/67QDQKSYCFBMDNV4NSLZW752EU.jpg?auth=3a36c3fe7d7b71b48471f2f51ba9265961448a701dd93df4d1e3a5db48be7836&smart=true&width=1280&height=800",
+   "rubros": []
+  },
+  {
+   "id": "ea12ef45d5279bf2",
+   "titulo": "Pentagon says the firing squad execution of Fort Hood shooter will be livestreamed",
+   "url": "https://www.kpbs.org/news/national/2026/10/08/pentagon-says-the-firing-squad-execution-of-fort-hood-shooter-will-be-livestreamed",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T05:35:41+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/e946213/2147483647/strip/false/crop/2996x2996+645+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F1d%2F2d%2Fd7830f0647c0b2b37b4075a00557%2Fap26279659849146.jpg",
    "rubros": []
   },
   {
@@ -172,7 +831,7 @@
    "figuras": [],
    "postura": null,
    "origen": "busqueda_web",
-   "descubierta_por": "bq_aguasnegras",
+   "descubierta_por": "bq_frontera_en",
    "rubros": []
   },
   {
@@ -274,6 +933,31 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/IWIEYCDZYFDUBI2Z6RPU7VMCHQ.jpeg?auth=3abf22e4e5de71862ce8c5f0e1d3e3aca199e7c38906babff4781148e2167a85&smart=true&width=848&height=514",
+   "rubros": []
+  },
+  {
+   "id": "6ca99761868f1366",
+   "titulo": "Baja California suma 941 denuncias por abuso de confianza y ocupa el lugar 17 del país",
+   "url": "https://www.uniradioinforma.com/sociedad/baja-california-suma-941-denuncias-abuso-confianza-ocupa-lugar-17-pais-n907025",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T04:00:00-07:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5348,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "rubros": []
   },
   {
@@ -529,30 +1213,6 @@
    "rubros": []
   },
   {
-   "id": "176a90a63b589e96",
-   "titulo": "Ex director de Pemex Víctor Rodríguez pagará 120 mil pesos y deberá ir a terapia tras obtener suspensión condicional por el delito de violencia familiar contra su esposa Felicia Jiménez y su hijo",
-   "url": "https://www.elimparcial.com/mexico/2026/10/08/ex-director-de-pemex-victor-rodriguez-pagara-120-mil-pesos-y-debera-ir-a-terapia-tras-obtener-suspension-condicional-por-el-delito-de-violencia-familiar-contra-su-esposa-felicia-jimenez-y-su-hijo/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-09",
-   "publicado": "2026-10-09T03:09:38+00:00",
-   "capturado": "2026-10-09T06:08:09+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.6504,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/QS4W25EVGZHR7E5GE7HCIB7FF4.jpg?auth=cb3e47d4760ff70104a20fb12f73ae3d822ce62a486ed808ffff95f93d84ec0c&smart=true&width=1200&height=750",
-   "rubros": []
-  },
-  {
    "id": "77d50292e0433497",
    "titulo": "Aunque ‘Rachel’ perderá fuerza en su trayectoria, mantendrá marejadas fuertes a partir del sábado",
    "url": "https://www.elimparcial.com/tij/tijuana/2026/10/08/aunque-rachel-perdera-fuerza-en-su-trayectoria-mantendra-marejadas-fuertes-a-partir-del-sabado/",
@@ -598,30 +1258,6 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/TUIXW2GEHNFOPGHIJSEDAQAIA4.jpg?auth=1a806b7111ed4713920d36f5e8d9c8eb65cc2528a4106ca6d2fa2d752abd000b&smart=true&width=4732&height=3173",
-   "rubros": []
-  },
-  {
-   "id": "b3a0ff6403b0b810",
-   "titulo": "La Nación Tohono O’odham busca frenar la construcción del muro fronterizo en 100 kilómetros de sus territorios ancestrales y condena la tala del árbol sagrado “La Abuela” en Arizona, además de denunciar daños a sitios arqueológicos y culturales por las obras de la barrera",
-   "url": "https://www.elimparcial.com/son/sonora/2026/10/08/la-nacion-tohono-oodham-busca-frenar-la-construccion-del-muro-fronterizo-en-100-kilometros-de-sus-territorios-ancestrales-y-condena-la-tala-del-arbol-sagrado-la-abuela-en-arizona-ademas-de-denunciar-danos-a-sitios-arqueologicos-y-culturales-por-las-obras-de-la-barrera/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-09",
-   "publicado": "2026-10-09T02:55:42+00:00",
-   "capturado": "2026-10-09T06:08:09+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.8416,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/VYZ4MPIMNNANHAR67IYZS2JCLQ.png?auth=684a3257a07eefef9148903ca39de47e611b4ee599506aa4874e648c5fe89878&smart=true&width=1200&height=780",
    "rubros": []
   },
   {
@@ -839,29 +1475,32 @@
    ]
   },
   {
-   "id": "5545f9eb35f346fd",
-   "titulo": "Morena abre registro para elegir coordinadores municipales de la Defensa de la Transformación; aspirantes podrán inscribirse hasta el 18 de octubre",
-   "url": "https://www.elimparcial.com/son/sonora/2026/10/08/morena-abre-registro-para-elegir-coordinadores-municipales-de-la-defensa-de-la-transformacion-aspirantes-podran-inscribirse-hasta-el-18-de-octubre/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
+   "id": "60595b8961c0bb70",
+   "titulo": "Vive San Felipe y su Festival del Alto Golfo: naturaleza, tradición y sabores inigualables",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQT0hnNFJ1WWNPWlZnTDZIcDFYXzdyTlU5MW9QNkxNUm0xa1ZnNDQ2X1RRSU5iVXBMenRzWC15NWFCOHdWd2UtYnh4Z0FRT1JCSWtjSTlvMHZTWkhMNlVjNEpraF9WMk1LUlJsR093RF9LOWYzYkJNYktwZWZEODVBblZoSkhUVlhiWW1SOHZ2M1hGWHpwWW1udjU1eEg5ZF9tclJWV3hXY05LbGhXLV9ld0xZUDk2SzNVWWc?oc=5",
+   "dominio": "descubreenmexico.com",
+   "fuente": "gn-704f83760328",
    "zona_medio": "estatal",
-   "zonas": [],
+   "zonas": [
+    "San Felipe"
+   ],
    "delegaciones": [],
-   "alcance": "nacional",
+   "alcance": "zona",
    "fecha": "2026-10-09",
-   "publicado": "2026-10-09T02:16:00+00:00",
+   "publicado": "2026-10-09T02:15:55+00:00",
    "capturado": "2026-10-09T06:08:09+00:00",
    "figuras": [],
    "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5985,
+    "etiqueta": "favorable",
+    "confianza": 0.9442,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
-   "imagen": "https://www.elimparcial.com/resizer/v2/NM3ZJJWLTVADNOG36LIAOU4AOQ.jpeg?auth=0e5b3800bc5118d6be9d6b2ee44d46c96dd224895bd7d4bd3eeadab803faa110&smart=true&width=1600&height=800",
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
    "rubros": [
-    "politica"
+    "espectaculos"
    ]
   },
   {
@@ -964,6 +1603,31 @@
    "rubros": [
     "seguridad"
    ]
+  },
+  {
+   "id": "db56d8f2ae590ec3",
+   "titulo": "OFAC no investiga a proveedores locales",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/ofac-no-investiga-a-proveedores-locales-32502868",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T02:00:00+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5064,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
   },
   {
    "id": "e055c701b55a32a4",
@@ -1135,6 +1799,33 @@
    "rubros": []
   },
   {
+   "id": "faf82c863542dfd7",
+   "titulo": "Rescatan a dos animales durante cateo por probable maltrato en San Felipe",
+   "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPTmVTd3ZFZFFfQmhYR3lSMFMwLTBFeklScHVKTVlXNF85RVBTNW1qN0VWZGtIZm9EXzhXbk0wYjE0TER6V3hPeVBoWDREWmFYOEpxWjE0TU40elpYdE53TGltc2Z2MEVEczhEanpJYlRQYTNYODNNMEo4eVh5Zmh5VVhaVFNTUC1WQndkaVJFdERuRUFNN2twSlpVZkp4NVo0V2pZZU5zVFBqTjRsQnEtN21qejBNV05Kc1FjcXh1Y3BNbHdvdDZQc3ZxU2Z0OFBSWmlsdXdXb212ODBNeUgw0gHfAUFVX3lxTE9OZVN3dkVkUV9CaFhHeVIwUzAtMEV6SVJwdUpNWVc0XzlFUFM1bWo3RVZka0hmb0RfOFduTTBiMTRMRHpXeE95UGhYNERaYVg4SnFaMTRNTjR6Wlh0TndMaW1zZnYwRURzOERqekliVFBhM1g4M00wSjh5WHlmaHlVWFpUU1NQLVZCd2RpUkV0RG5FQU03a3BKWlVmSng1WjRXalllTnNUUGpONGxCcS03bWp6ME1XTkpzUWNxeHVjcE1sd290NlBzdnFTZnQ4UFJaaWx1d1dvbXY4ME15SDA?oc=5",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Felipe"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T01:42:32+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6568,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": []
+  },
+  {
    "id": "df278b8e4b3dae40",
    "titulo": "Rescatan a perrito y a una gallina durante cateo por probable maltrato en San Felipe",
    "url": "https://www.elimparcial.com/mxl/mexicali/2026/10/08/rescatan-a-dos-animales-durante-cateo-por-probable-maltrato-en-san-felipe/",
@@ -1209,35 +1900,6 @@
     "version": "0.2.0"
    },
    "rubros": []
-  },
-  {
-   "id": "60595b8961c0bb70",
-   "titulo": "Vive San Felipe y su Festival del Alto Golfo: naturaleza, tradición y sabores inigualables",
-   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQT0hnNFJ1WWNPWlZnTDZIcDFYXzdyTlU5MW9QNkxNUm0xa1ZnNDQ2X1RRSU5iVXBMenRzWC15NWFCOHdWd2UtYnh4Z0FRT1JCSWtjSTlvMHZTWkhMNlVjNEpraF9WMk1LUlJsR093RF9LOWYzYkJNYktwZWZEODVBblZoSkhUVlhiWW1SOHZ2M1hGWHpwWW1udjU1eEg5ZF9tclJWV3hXY05LbGhXLV9ld0xZUDk2SzNVWWc?oc=5",
-   "dominio": "descubreenmexico.com",
-   "fuente": "gn-704f83760328",
-   "zona_medio": "estatal",
-   "zonas": [
-    "San Felipe"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-10-09",
-   "publicado": "2026-10-09T01:30:05+00:00",
-   "capturado": "2026-10-09T06:08:09+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "favorable",
-    "confianza": 0.9442,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_sanfelipe",
-   "rubros": [
-    "espectaculos"
-   ]
   },
   {
    "id": "f1d763fd4a902b51",
@@ -2012,6 +2674,31 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/CGC27L2FOFFSTF26EI3YLAHKFI.jpeg?auth=a29c68c268aeaf88f691a6af754d2a8f8821d310949c9dad23c5aaa551bd87b1&smart=true&width=1280&height=1135",
+   "rubros": []
+  },
+  {
+   "id": "355222ff494057c2",
+   "titulo": "SEP BC informa que hay más de mil 400 escuelas sin aire acondicionado de Tijuana",
+   "url": "https://www.uniradioinforma.com/sociedad/sep-bc-informa-hay-mas-mil-400-escuelas-aire-acondicionado-tijuana-n907455",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T00:00:00-07:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7953,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "rubros": []
   },
   {
@@ -3099,6 +3786,32 @@
    "rubros": []
   },
   {
+   "id": "34c0fb8b3428a9cd",
+   "titulo": "Anuncia Sidurt habilitación de nuevo retorno en Corredor Tijuana - Rosarito 2000",
+   "url": "https://www.uniradioinforma.com/sociedad/anuncia-sidurt-habilitacion-nuevo-retorno-corredor-tijuana-rosarito-2000-n907286",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana",
+    "Playas de Rosarito"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-08",
+   "publicado": "2026-10-08T22:05:00-07:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.579,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
    "id": "8e91a7ee55315c09",
    "titulo": "Aranceles de Estados Unidos Impactan Actividad Industrial de Baja California",
    "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNdk92NVV0cGd1MjJ0TmltNkZYUW1DT2h2ai1uOFZ1QTZPdGVZa0VEdnRfRy15ZWpYY1VPSlcxQVd3bFlJZU9PVU10SWt1SmpubWhSSnZ0WU56VC1SejNORlRERjYwNDZ2Mi15VlFRLW5sMnZ3ZHVib1BtN2U4elBPYTFGVUw4aktwRmpTbHhQaHd5b3ZUZHJhbXNMbThBbzJuOXFObV9hSXZZRFZqSkhaMEExMHNIQUJSSU5ybktSSEtXVW1f?oc=5",
@@ -3645,6 +4358,25 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/65W6KLHWXNCXPPO4CQPZOI6OJI.jpg?auth=803afdb9e0f3a1901becfa3eb22629e40a6a1b54016ac435a026263d33cb963a&smart=true&width=1200&height=900",
+   "rubros": []
+  },
+  {
+   "id": "f0ee9860d37a1a33",
+   "titulo": "So whose responsibility is the sewage crisis anyways?",
+   "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNTlJqUjJMN2dFRERRM3lIbFByeFJxSW96S3JQbDFyVUZVdTBNOTgyRnM1eVhFRTJUWFRXT1cxdUVnVndSb2g5UW5sajdGVHNaMjF6SndzMUJBY2xTbktEN01HdmdseElsNGxnUnhjOXNNMWx6WVVrUlZIbkk0Q3pTZGJhekNKbjIya092YnRlRnhTVjg?oc=5",
+   "dominio": "thecoronadonews.com",
+   "fuente": "gn-e5254349f911",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-08",
+   "publicado": "2026-10-08T21:06:10+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_aguasnegras",
    "rubros": []
   },
   {
@@ -4312,6 +5044,33 @@
    ]
   },
   {
+   "id": "952084dbbd991a64",
+   "titulo": "Buscan a Francisco Javier Sauri Noriega de San Quintín",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE00emVUOER1bWg1U2M3UEFXeWZYdGtvRG1LVXdUVS1aUW9CRXhNMHNiUDl2SnpkS25UTEphMGYzTW9OQWl6SHIwMHp4YUwwSGRlMmo5Q1l3X1ZBM0U?oc=5",
+   "dominio": "ensenada.net",
+   "fuente": "gn-906741a25e9c",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Quintín"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-08",
+   "publicado": "2026-10-08T20:14:57+00:00",
+   "capturado": "2026-10-09T13:16:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.621,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
    "id": "8e83318dd6536592",
    "titulo": "Buscan a Francisco Javier Sauri Noriega",
    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE00emVUOER1bWg1U2M3UEFXeWZYdGtvRG1LVXdUVS1aUW9CRXhNMHNiUDl2SnpkS25UTEphMGYzTW9OQWl6SHIwMHp4YUwwSGRlMmo5Q1l3X1ZBM0U?oc=5",
@@ -4505,6 +5264,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/08/6a8b5fd668624.jpg",
    "rubros": [
     "politica"
    ]
@@ -4662,30 +5422,6 @@
    "rubros": [
     "deportes"
    ]
-  },
-  {
-   "id": "7396d3d20fe73772",
-   "titulo": "Mientras en México la salchicha se disfruta en hot dogs, desayunos y guisados, en Alemania se suele acompañar con mostaza, chucrut, pretzel y otras tradiciones",
-   "url": "https://www.elimparcial.com/estilos/2026/10/08/mientras-en-mexico-la-salchicha-se-disfruta-en-hot-dogs-desayunos-y-guisados-en-alemania-se-suele-acompanar-con-mostaza-chucrut-pretzel-y-otras-tradiciones/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-08",
-   "publicado": "2026-10-08T20:02:05+00:00",
-   "capturado": "2026-10-08T23:21:56+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.7034,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/B37UZOYCLVHQ7JMYQR2VWKYOPY.jpg?auth=c77665555c89a17661b376b6b81ac87b38d1e77fa7ec5bc53fa5b67b9a964fa7&smart=true&width=1200&height=750",
-   "rubros": []
   },
   {
    "id": "c4214c94ad32b254",
@@ -5229,30 +5965,6 @@
    "rubros": [
     "economia"
    ]
-  },
-  {
-   "id": "120ceb3b0fb1de76",
-   "titulo": "Derek Maltz, exjefe de la DEA, felicita a Omar García Harfuch por capturar a “El Tanque”, pero exige enviar a Rubén Rocha Moya a Estados Unidos: “Sería un gran logro”",
-   "url": "https://www.elimparcial.com/mexico/2026/10/08/derek-maltz-exjefe-de-la-dea-felicita-a-garcia-harfuch-por-capturar-a-el-tanque-pero-exige-enviar-a-ruben-rocha-moya-a-estados-unidos-seria-un-gran-logro/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-08",
-   "publicado": "2026-10-08T19:25:18+00:00",
-   "capturado": "2026-10-08T23:21:56+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.3637,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/VOFQDEWNZZHDZLC6WLSPHYDJIM.jpg?auth=d712e091572afb6c9dee1f3eedbbabe229f8860f9e21ca14c541210d88a8293d&smart=true&width=1200&height=750",
-   "rubros": []
   },
   {
    "id": "64db2fde69e67dfd",
@@ -6981,30 +7693,6 @@
    ]
   },
   {
-   "id": "ea6ac888d24da703",
-   "titulo": "Cómo circular de norte a sur por el bulevar Quiroga en Hermosillo durante las obras y qué desvíos tomar por la calle Mendoza",
-   "url": "https://www.elimparcial.com/son/hermosillo/2026/10/08/como-circular-de-norte-a-sur-por-el-bulevar-quiroga-en-hermosillo-durante-las-obras-y-que-desvios-tomar-por-la-calle-mendoza/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "fuera",
-   "fecha": "2026-10-08",
-   "publicado": "2026-10-08T18:00:30+00:00",
-   "capturado": "2026-10-08T23:21:56+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.6785,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/DZ33RZZGLBAC5K6GL57L625RMI.jpg?auth=6ecd978669d62b2b41f4093cb5d03a04d526d67ac5ac2c472adc9b5c20b83a8e&smart=true&width=1200&height=675",
-   "rubros": []
-  },
-  {
    "id": "4ae3f70593e7f5bc",
    "titulo": "Mientras la venta de autos nuevos cae 6.6% en Hermosillo, 14 marcas logran vender más y alcanzan crecimientos de hasta 88%",
    "url": "https://www.elimparcial.com/son/sonora/2026/10/08/mientras-la-venta-de-autos-nuevos-cae-66-en-hermosillo-14-marcas-logran-vender-mas-y-alcanzan-crecimientos-de-hasta-88/",
@@ -7711,6 +8399,31 @@
    "figuras": [],
    "postura": null,
    "imagen": "https://i0.wp.com/timesofsandiego.com/wp-content/uploads/2023/08/sc-exterior.jpg?fit=640%2C359&ssl=1",
+   "rubros": []
+  },
+  {
+   "id": "2ed496b2f252dbc3",
+   "titulo": "Conanp da a conocer el informe de la “Campaña de Entrenamiento en Observación y Fotografía de Vaquita 2026”",
+   "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxPSHItbXJldzBIZjBMbUUwcDREMDgzNXBVRUdCb2plcV9vNEE2azBUa3JIYTI4aWZzMWVlcVdndzFHM0FGTzl6ZTFJVkFBajRiamFQSldfb3p5TGY3TFZXZEM4dGZtVDgwU0hrSUtrSnhDTTlVNHRjN1dGT2hlczJsQnZZam9VOVlHR1JOUnZBU3M0YllwTnRpdEs1R3gzSHlyRkt4THNKd25INUVoVFdWYVN1Qmh6MEtkanFRRHZSekE3M2J1UEt2T1NlYTNyWTlVQlZndUNSVS1ZYUo1Ym9nNw?oc=5",
+   "dominio": "gob.mx",
+   "fuente": "gn-86d59fc60ccb",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-08",
+   "publicado": "2026-10-08T16:56:00+00:00",
+   "capturado": "2026-10-06T00:02:56+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7709,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
    "rubros": []
   },
   {
@@ -39435,31 +40148,6 @@
    },
    "origen": "busqueda_web",
    "descubierta_por": "bq_sanquintin",
-   "rubros": []
-  },
-  {
-   "id": "2ed496b2f252dbc3",
-   "titulo": "Conanp da a conocer el informe de la “Campaña de Entrenamiento en Observación y Fotografía de Vaquita 2026”",
-   "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxPSHItbXJldzBIZjBMbUUwcDREMDgzNXBVRUdCb2plcV9vNEE2azBUa3JIYTI4aWZzMWVlcVdndzFHM0FGTzl6ZTFJVkFBajRiamFQSldfb3p5TGY3TFZXZEM4dGZtVDgwU0hrSUtrSnhDTTlVNHRjN1dGT2hlczJsQnZZam9VOVlHR1JOUnZBU3M0YllwTnRpdEs1R3gzSHlyRkt4THNKd25INUVoVFdWYVN1Qmh6MEtkanFRRHZSekE3M2J1UEt2T1NlYTNyWTlVQlZndUNSVS1ZYUo1Ym9nNw?oc=5",
-   "dominio": "gob.mx",
-   "fuente": "gn-86d59fc60ccb",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-05",
-   "publicado": "2026-10-05T18:37:00+00:00",
-   "capturado": "2026-10-06T00:02:56+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.7709,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_sanfelipe",
    "rubros": []
   },
   {
@@ -258664,7 +259352,7 @@
     {
      "id": "ram",
      "via": "nominal",
-     "clave": "adame munoz"
+     "clave": "rocio adame"
     }
    ],
    "postura": {
