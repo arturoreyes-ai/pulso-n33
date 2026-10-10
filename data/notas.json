@@ -1,8 +1,440 @@
 {
  "esquema": 1,
  "ventana_dias": 30,
- "total": 11438,
+ "total": 11460,
  "notas": [
+  {
+   "id": "6cc956b9a81a9cd8",
+   "titulo": "Karim López recibió más minutos con Grizzlies y respondió con su mejor partido de pretemporada ante Bulls",
+   "url": "https://www.elimparcial.com/deporte/2026/10/09/karim-lopez-recibio-mas-minutos-con-grizzlies-y-respondio-con-su-mejor-partido-de-pretemporada-ante-bulls/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T12:26:38+00:00",
+   "capturado": "2026-10-10T05:51:15+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.6471,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/J63RB53YMRF47EW3BVVSGUOA2Q.jpg?auth=e71e58894019368602938631d5625a6adbe77d7535e21cfc12fcf51c43f3b5ea&smart=true&width=1920&height=1080",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "aa367ff3363d4f3f",
+   "titulo": "La alianza de Morena y el Partido Verde rumbo a 2027 enfrenta desacuerdos tras la salida de un dirigente estatal que propone formar un frente político para impulsar un cambio",
+   "url": "https://www.elimparcial.com/mexico/2026/10/09/la-alianza-de-morena-y-el-partido-verde-rumbo-a-2027-enfrenta-desacuerdos-tras-la-salida-de-un-dirigente-estatal-que-propone-formar-un-frente-politico-para-impulsar-un-cambio/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T12:26:22+00:00",
+   "capturado": "2026-10-10T05:51:15+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8564,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/GLVHZA2LB5DDRPIIDK6C3IZ5LQ.png?auth=f66ec488af0cecd6503f435abf263a909c33ef2b48ea30ad4ca2699b45d5565f&smart=true&width=1200&height=675",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "ae6950a7d94bae16",
+   "titulo": "Huracán Simón alcanza categoría 3 y amenaza costas del Pacífico mexicano",
+   "url": "https://www.elimparcial.com/mexico/2026/10/09/huracan-simon-alcanza-categoria-3-y-amenaza-costas-del-pacifico-mexicano/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T12:25:57+00:00",
+   "capturado": "2026-10-10T05:51:15+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5247,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/7ISXDZ7K6FDT3H63K5DTB2RDTI.png?auth=0c8dfbb32ce459c1e1002c45c68eb2d9b54e0f0d904c1ad4ddc1f6439a62b551&smart=true&width=817&height=469",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "fe36a8ca79649268",
+   "titulo": "Baja California activa protocolo por lluvias y vientos de El Niño",
+   "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQZXJRS19YREhZa29XOVluWlUwaFZHelZleE5QbGctY3JQV3R4Vm9HZldvaUxFZFh3ZjlpdldVZndvdjR3QkVENktTZ0liOWI0QW9hMjJPU1RNUTF2cnY3aGI2NHV4ZVdGRk5BTC1NMG5LZVdrdE43alZuWi1iRnBHZWFGQ0RjM0NZUDBHRXZuNlhSLUwwNkNTODJXSHdWY1kx?oc=5",
+   "dominio": "unotv.com",
+   "fuente": "gn-6b7d3783657b",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T09:21:00+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5606,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "faa62271c2abccda",
+   "titulo": "A year of ceasefire in Gaza through the lens of NPR's reporter",
+   "url": "https://www.kpbs.org/news/international/2026/10/10/a-year-of-ceasefire-in-gaza-through-the-lens-of-nprs-reporter",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T09:00:00+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/a13fa18/2147483647/strip/false/crop/3024x3024+504+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F5d%2Fa4%2Fda87682f4b4e963a85f1dd2f71b2%2Fgaza-04.JPEG",
+   "rubros": []
+  },
+  {
+   "id": "82ac4b9dad822ba8",
+   "titulo": "After losing ground with Latino voters, Democrats are turning to influencers for help",
+   "url": "https://www.kpbs.org/news/politics/2026/10/10/after-losing-ground-with-latino-voters-democrats-are-turning-to-influencers-for-help",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T09:00:00+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/f435f5d/2147483647/strip/false/crop/3648x3648+912+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Ff0%2F7b%2F899029124ad2a5817177479815ae%2Fap24304669006483.jpg",
+   "rubros": [
+    "espectaculos"
+   ]
+  },
+  {
+   "id": "47594d265ec2d988",
+   "titulo": "The Met puts a modern artist front and center (and there's some Jackson Pollock, too)",
+   "url": "https://www.kpbs.org/news/arts-culture/2026/10/10/the-met-puts-a-modern-artist-front-and-center-and-theres-some-jackson-pollock-too",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T09:00:00+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/2312656/2147483647/strip/false/crop/3896x3896+962+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F5e%2Fe6%2Fcc4894c441a99b6eaae0eb7549cf%2Fgettyimages-488958535.jpg",
+   "rubros": []
+  },
+  {
+   "id": "01f6992543259a33",
+   "titulo": "16 cozy activities to add to your fall bucket list",
+   "url": "https://www.kpbs.org/news/arts-culture/2026/10/10/16-cozy-activities-to-add-to-your-fall-bucket-list",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T09:00:00+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/68937b2/2147483647/strip/false/crop/1080x1080+420+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F9a%2F9e%2F68995f5746ce8ae1e4caa775343a%2Fcozy-illustration-16-9.jpg",
+   "rubros": []
+  },
+  {
+   "id": "938966aa73919d26",
+   "titulo": "Refuerzan dique contra inundaciones en la Moscú de Tampico",
+   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQX3dEVFIwdEdGSzFpZDktczVneE5MSEV5YzVzQ18xVUdycGhLTURzQXg5RjNVMTRUenFYaEZ6ZEhwX3NLQVcwUmd1MzBoYjYyTUJkanp2UC0tQWNDSE9vc0ZfQ3AxX0RKcmNlOVJxYkF0bE5BS0syYUZLTjhnRWxnSENURU5mMEhpcl95azR3MG5XNm44dDdhUm95TjgwZ09fMy1jYXViVjR0Zw?oc=5",
+   "dominio": "hoytamaulipas.net",
+   "fuente": "gn-c6ef5f7ce39f",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T08:54:00+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5213,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
+   "id": "8d871f430161f9c0",
+   "titulo": "India cracks down on youth protests as anger grows against Modi and election chief",
+   "url": "https://www.kpbs.org/news/international/2026/10/10/india-cracks-down-on-youth-protests-as-anger-grows-against-modi-and-election-chief",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T08:31:28+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/3a1b095/2147483647/strip/false/crop/2636x2636+659+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F00%2F39%2F5c77716b4ce493dd9aeaec5f4d48%2Fap26283120193955.jpg",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "c8af48fc0fb87c76",
+   "titulo": "El silencio impuesto, escribe María Elena Morera",
+   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNTDlBM0hlMjNSemR5MURuc2IxRnV4WEhJM0Vzei1PQzE0dnZHeXNNRlpyLTlzZzh4YWpRVkxNWEkybkN6WmVMZFdSTU5pZ3h2OU9XZURhUlp1TTE1YmxWSHFsSVhORHZBRXBoN05ad3d3djBYSnJzMGFhTlRvVm9xa0NqRmpTZw?oc=5",
+   "dominio": "eluniversal.com.mx",
+   "fuente": "gn-18c343e23753",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T07:28:46+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4807,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate",
+   "rubros": []
+  },
+  {
+   "id": "f4d267c0c23dcf7b",
+   "titulo": "Man putting cartels out of business",
+   "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxQV1BEd3FqTDhsV20zS0pLUjBTUEJOTHIta29uZVE2X1BqbWxOdmItY3BqMlhQRy1PRTFiV2U1WnlEeUdxYmRmbDdkYUZIdHY0TTQ3VHBKUHZxLTIxQW5KV1pyUXB2aWxQX2Q1eXl3MDFmQjhsaFNyc21NTXRwX0hFUHlRajg5ZXAtd251SkgwOV80RUtINGtTSkExODNDNDJfdUJiU2ZPWlNid3JNamg2YlFTSVAxRVd6N25nbkVRVkIzN21WektYem9pZkh3bXpObFRfRzNrVllkTXF5ZGlWZkJHcUlGNEJ2ekoxTzVwcVFqY3hFbi1GaTRR0gH_AUFVX3lxTE9BU2h6S3R1di1zSUI3VTdlUXFWV2JCWkRLY1haMXFocjRhZS1YMzNDZFBLdFIxYjc3clE5M0M4elZlb3doWWZhb0dsbENQdlVUSk0xRF9TRFZBeFNRUGFYd1BnSEdXaTJmdVhONnc4RDc0RGdnTmFsMGM4V1RBeVpIeUl5TEJhU3hMeU1KcVIzQ1JaRlRuM00wa3hJVkNtQ1NpOWNCbHktMGdVYUFhRllkMzNkTTBhQ0FEYlNTdkZIUXRRT0EzM29lQktUZGRrc0dJRFpEVmxaVEI4WmtobXFoZHhFWjNUeGZ1bllLYURNOTFHSTZwU3pxeHJWcl9rZw?oc=5",
+   "dominio": "news.com.au",
+   "fuente": "gn-e3b464af5862",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T06:45:47+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "404d5611313cb101",
+   "titulo": "Un hombre gastó 1,4 millones de dólares en un pueblo minero abandonado de California pensando quedarse unas semanas durante la pandemia, pero seis años después sigue siendo su único habitante permanente, sin agua corriente ni señal de celular y con el objetivo de restaurar sus edificios históricos",
+   "url": "https://www.elimparcial.com/locurioso/2026/10/09/un-hombre-gasto-14-millones-de-dolares-en-un-pueblo-minero-abandonado-de-california-pensando-quedarse-unas-semanas-durante-la-pandemia-pero-seis-anos-despues-sigue-siendo-su-unico-habitante-permanente-sin-agua-corriente-ni-senal-de-celular-y-con-el-objetivo-de-restaurar-sus-edificios-historicos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T06:20:18+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5061,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/3WHF6VNOYFFZTDHU2SGRAWIR2E.png?auth=d6e3a59a4d7f395a32e6f748c4f012f719a910cbe1eed68632a3d181e839dbc3&smart=true&width=1200&height=780",
+   "rubros": []
+  },
+  {
+   "id": "fb2f1133a59b8592",
+   "titulo": "Tras caída de la natalidad la matrícula de educación básica perdió más de 47 mil alumnos y obligará a reorganizar escuelas, turnos y grupos, mientras más de 500 maestros enfrentan incertidumbre sobre sus plazas en Tabasco",
+   "url": "https://www.elimparcial.com/mexico/2026/10/09/tras-caida-de-la-natalidad-la-matricula-de-educacion-basica-perdio-mas-de-47-mil-alumnos-y-obligara-a-reorganizar-escuelas-turnos-y-grupos-mientras-mas-de-500-maestros-enfrentan-incertidumbre-sobre-sus-plazas-en-tabasco/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T06:10:19+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9291,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/4PKZBFQDKRDIJGMVZTL5UCYB6U.png?auth=bea556cae545321f2e911379b2b9e2ba95895aa87b0e487fc1acd89eb142baef&smart=true&width=700&height=380",
+   "rubros": []
+  },
+  {
+   "id": "fa08e0a2a63bf716",
+   "titulo": "Activan Consejo Estatal de Protección Civil en Baja California por el fenómeno de ‘El Niño’",
+   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPYXlYbUJKVkZwbnlLa19lZld3ZS0tZXhoRG92MFpSaV9RTlRlcUNtbTRkcjVjSW5OWXRqUUl5N3BYR05WbngyS1VXNlZJNVM3dlIyWTVfVi01NXQycHVYaE5seUJHLUJYLTl2MjAtdHFrNnZsQlFFaUR6UDYwU0RsQ1hQd3VMVWUxVFh1ZnAxX2FvWkFOUVhHSWVSQXJJNmhDS1VrOEVJczZieWx5Qkl6OUZXMDRYSThmUHowc29iVm5OZ2pN?oc=5",
+   "dominio": "sandiegored.com",
+   "fuente": "gn-dc1580cd9943",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T05:59:00+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.4487,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
+   "rubros": []
+  },
+  {
+   "id": "cce5b551debdbcbf",
+   "titulo": "Mientras en Corea del Sur los herederos de LG aceptaron pagar “de forma transparente y fiel” una factura de casi 14 mil 350 mdp por acciones heredadas, en México Sheinbaum descarta cobrar impuestos a las herencias y afirma que su gobierno no abrirá ese debate ante la propuesta de Lenia Batres",
+   "url": "https://www.elimparcial.com/mexico/2026/10/09/mientras-en-corea-del-sur-los-herederos-de-lg-aceptaron-pagar-de-forma-transparente-y-fiel-una-factura-de-casi-14-mil-350-mdp-por-acciones-heredadas-en-mexico-sheinbaum-descarta-cobrar-impuestos-a-las-herencias-y-afirma-que-su-gobierno-no-abrira-ese-debate-ante-la-propuesta-de-lenia-batres/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T05:54:53+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8604,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/W33NQEUK4NAJNKQBDU5HRVAKBI.jpg?auth=f6402e72409f61ee405214dec30906025fd6d293f617a068c6866979f07606d4&smart=true&width=1200&height=780",
+   "rubros": []
+  },
+  {
+   "id": "365304093b1baff7",
+   "titulo": "Alistan acciones ante llegada de lluvias y vientos a BC",
+   "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNeFhLVWZaNW1ZQmNROVVHR1hUOGIzTTcycVE5cl9XajhQbUpIbkFGSDZMMmU3TGdkYk9md0lWemp2Skd1TUxvTUJFd1dYcHgxT09wM2liaThTWmQ5MUxSWVhWQVZDc3E1XzhNNDdnVUphdlhMeXFiZ0Rab2oxczJ4aF82NGZnWnh6SmNyZ25aVjlrS2plbUE?oc=5",
+   "dominio": "podermx.tv",
+   "fuente": "gn-da769adb9964",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T05:50:23+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5609,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "1a04dbc728e59a3d",
+   "titulo": "En 2007, un niño de 9 años convirtió una tarea escolar sobre el cambio climático en un movimiento internacional que ya ha plantado más de 36 millones de árboles y busca contribuir a recuperar un billón",
+   "url": "https://www.elimparcial.com/locurioso/2026/10/09/en-2007-un-nino-de-9-anos-convirtio-una-tarea-escolar-sobre-el-cambio-climatico-en-un-movimiento-internacional-que-ya-ha-plantado-mas-de-36-millones-de-arboles-y-busca-contribuir-a-recuperar-un-billon/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T05:49:44+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.6494,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/2LCHY3ORTFERTATYEVENJIAGOQ.jpeg?auth=cb8312889620ab0ca17f1963d0e2fae6579c9007e50e9f89aaad666e7df0f203&smart=true&width=1376&height=768",
+   "rubros": []
+  },
   {
    "id": "356481392929314e",
    "titulo": "Detienen a “El Moco”, presunto líder huachicolero de Puebla que fue candidato a alcalde en 2024 tras salir de prisión con un amparo",
@@ -137,58 +569,6 @@
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/3YNROV45FRCDBCB4N6BUKBCABQ.png?auth=68592c479ef016260a49e32d3cd797cc6d83bfd7712b0c0e419ea1bac747da0c&smart=true&width=1200&height=675",
    "rubros": []
-  },
-  {
-   "id": "aa367ff3363d4f3f",
-   "titulo": "La alianza de Morena y el Partido Verde rumbo a 2027 enfrenta desacuerdos tras la salida de un dirigente estatal que propone formar un frente político para impulsar un cambio",
-   "url": "https://www.elimparcial.com/mexico/2026/10/09/la-alianza-de-morena-y-el-partido-verde-rumbo-a-2027-enfrenta-desacuerdos-tras-la-salida-de-un-dirigente-estatal-que-propone-formar-un-frente-politico-para-impulsar-un-cambio/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-10",
-   "publicado": "2026-10-10T05:07:28+00:00",
-   "capturado": "2026-10-10T05:51:15+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.8564,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/GLVHZA2LB5DDRPIIDK6C3IZ5LQ.png?auth=f66ec488af0cecd6503f435abf263a909c33ef2b48ea30ad4ca2699b45d5565f&smart=true&width=1200&height=675",
-   "rubros": [
-    "politica"
-   ]
-  },
-  {
-   "id": "ae6950a7d94bae16",
-   "titulo": "Huracán Simón alcanza categoría 3 y amenaza costas del Pacífico mexicano",
-   "url": "https://www.elimparcial.com/mexico/2026/10/09/huracan-simon-alcanza-categoria-3-y-amenaza-costas-del-pacifico-mexicano/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-10",
-   "publicado": "2026-10-10T05:06:36+00:00",
-   "capturado": "2026-10-10T05:51:15+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.5247,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/7ISXDZ7K6FDT3H63K5DTB2RDTI.png?auth=0c8dfbb32ce459c1e1002c45c68eb2d9b54e0f0d904c1ad4ddc1f6439a62b551&smart=true&width=817&height=469",
-   "rubros": [
-    "clima"
-   ]
   },
   {
    "id": "8fad69ab5d292be8",
@@ -344,6 +724,31 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/ALZKDDKPRJD7HECTVYWMSOXPCY.png?auth=b59a08ed0d53429fea51602893c1bfeb43081ae24282d7b93545cfdcb0a213c6&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "b3b8d6def12498e6",
+   "titulo": "Llama la Secretaría de Medio Ambiente de Baja California a proteger el hábitat con acciones desde el hogar",
+   "url": "https://www.uniradioinforma.com/sociedad/llama-secretaria-medio-ambiente-baja-california-proteger-habitat-acciones-hogar-n906865",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T04:00:00-07:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.4543,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "rubros": []
   },
   {
@@ -546,32 +951,6 @@
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/2P6GKI5RF5DKTAFZHM3K2Q3HIE.png?auth=76a01c32ca4f9171630192b89f9d7bd74b057aa1051554902a89d752d28d945d&smart=true&width=1200&height=675",
    "rubros": []
-  },
-  {
-   "id": "6cc956b9a81a9cd8",
-   "titulo": "Karim López recibió más minutos con Grizzlies y respondió con su mejor partido de pretemporada ante Bulls",
-   "url": "https://www.elimparcial.com/deporte/2026/10/09/karim-lopez-recibio-mas-minutos-con-grizzlies-y-respondio-con-su-mejor-partido-de-pretemporada-ante-bulls/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-10",
-   "publicado": "2026-10-10T03:27:52+00:00",
-   "capturado": "2026-10-10T05:51:15+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "favorable",
-    "confianza": 0.6471,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/J63RB53YMRF47EW3BVVSGUOA2Q.jpg?auth=e71e58894019368602938631d5625a6adbe77d7535e21cfc12fcf51c43f3b5ea&smart=true&width=1920&height=1080",
-   "rubros": [
-    "deportes"
-   ]
   },
   {
    "id": "3520d858e9e863fb",
@@ -956,6 +1335,31 @@
    "rubros": []
   },
   {
+   "id": "23531918894ae8a6",
+   "titulo": "Crean ley para atender cáncer en niñez de BC",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/crean-ley-para-atender-cancer-en-ninez-de-bc-32520670",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T02:00:00+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5899,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
    "id": "a03754a0db1f33ed",
    "titulo": "El fideicomiso de Donald Trump compró hasta 25 millones de dólares en acciones de Meta y hasta cinco millones en bonos de SpaceX, según documentos oficiales que también revelan cientos de operaciones bursátiles y reavivan las dudas sobre posibles conflictos de interés",
    "url": "https://www.elimparcial.com/mundo/2026/10/09/el-fideicomiso-de-donald-trump-compro-hasta-25-millones-de-dolares-en-acciones-de-meta-y-hasta-cinco-millones-en-bonos-de-spacex-segun-documentos-oficiales-que-tambien-revelan-cientos-de-operaciones-bursatiles-y-reavivan-las-dudas-sobre-posibles-conflictos-de-interes/",
@@ -1280,6 +1684,33 @@
    ]
   },
   {
+   "id": "4f8fdf54e922bcd7",
+   "titulo": "Punta Colonet tendrá estudios de impacto previo a su con...",
+   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOVmhuTzd0TlFKaVVFaGVpbHE4OVpiRGJGaEtVN2hHU1ZsR204N1BVcTRuWC1HNTUxNmdMTTlTTldkalNrV1h0VmtBU0tmdGs1WjFnNlg0N0JsUF9yd1hPTjEzczZOcXpPdkxCUlNKMmdkeDcxa1JZcUZZcTQ5M081UmxWZ3FrdlEwU0Zxa0xRZXVZR052YVRQMUdzSmFiWWRKTFJLMkRMb3MzZi1BV1BDZktSZU5sNEZ5RUlRYzBDOUVidkk3?oc=5",
+   "dominio": "el-mexicano.com.mx",
+   "fuente": "gn-d33696b00d82",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Quintín"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T00:58:20+00:00",
+   "capturado": "2026-10-10T05:51:15+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7818,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
    "id": "88580752a0449cd8",
    "titulo": "Más de 1,800 armas aseguradas este año en Tijuana: caen en homicidios, robos y hasta en filtros de alcoholimetría",
    "url": "https://www.elimparcial.com/tij/policiaca/2026/10/09/mas-de-1800-armas-aseguradas-este-ano-en-tijuana-caen-en-homicidios-robos-y-hasta-en-filtros-de-alcoholimetria/",
@@ -1306,6 +1737,25 @@
    "rubros": [
     "seguridad"
    ]
+  },
+  {
+   "id": "e746df516f28dee6",
+   "titulo": "News briefs: Everbridge transition, CoRA opens, Soroptimists support JLAB, Ruff Run",
+   "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOaTVpeDJPYlBrX2JVOTc0M2NHSFlJV3N3RWg3Y1BST3pma3oxVXFObTNaejh4MWVqNlNjelRsaWRqenY2YlBJYXRkUjhuSkNqSW5SX2VWLVVKT2lNMEMzVXFMTUlzU25DQWE3TnZoNS16emZvTXFsWkJJejVLRER2ZGdOR1hpQVA3NGJxLUdVdEQzQV9JZXdOYTB2LXNMVUw0ZlVWVkVYR3hGby0tTDdKbWdoVEFlbGFfMVlKSkJ0VQ?oc=5",
+   "dominio": "coronadotimes.com",
+   "fuente": "gn-c70f6d389c2a",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T00:55:42+00:00",
+   "capturado": "2026-10-10T05:51:15+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_aguasnegras",
+   "rubros": []
   },
   {
    "id": "524e7ecddafa80ae",
@@ -1348,33 +1798,6 @@
    "rubros": []
   },
   {
-   "id": "4f8fdf54e922bcd7",
-   "titulo": "Punta Colonet tendrá estudios de impacto previo a su con...",
-   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOVmhuTzd0TlFKaVVFaGVpbHE4OVpiRGJGaEtVN2hHU1ZsR204N1BVcTRuWC1HNTUxNmdMTTlTTldkalNrV1h0VmtBU0tmdGs1WjFnNlg0N0JsUF9yd1hPTjEzczZOcXpPdkxCUlNKMmdkeDcxa1JZcUZZcTQ5M081UmxWZ3FrdlEwU0Zxa0xRZXVZR052YVRQMUdzSmFiWWRKTFJLMkRMb3MzZi1BV1BDZktSZU5sNEZ5RUlRYzBDOUVidkk3?oc=5",
-   "dominio": "el-mexicano.com.mx",
-   "fuente": "gn-d33696b00d82",
-   "zona_medio": "estatal",
-   "zonas": [
-    "San Quintín"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-10-10",
-   "publicado": "2026-10-10T00:43:39+00:00",
-   "capturado": "2026-10-10T05:51:15+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.7818,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_sanquintin",
-   "rubros": []
-  },
-  {
    "id": "7aa09f6a4b11ec4f",
    "titulo": "Rachel se acerca a Baja California: zonas que tendrán lluvias y vientos fuertes",
    "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQZVRuOFVDTlZEdEdlWWlsS3N2VzVXZ0FKU3RLY1oyNHd4cVVLTkx1Tk5EbE91Y1lMZE1yTFUxRFR2MkI4SjdDRG5VQVJObGhXRUU3YjhVeXd6eWU0b19CTkRyZ1d0R0dtel84OGRza0dIaTJ4QVJKVThxcE1xS05jdmNRbDExZjV6SHgzUkd2TVdyalZxdEljeHd4c3dPWFg4R0FHV0c1aUVPRUNtNUNNbmZab2diOEYzUFE5aWZB0gHYAUFVX3lxTE1lY3M2VEtlOEprM1ZralJCZEE2ci02cE44WU5scnRfN3Q2ZXlUT1BQaW9hYk1SVnJBbWN3QjZQX0dOWDZOUDM5cVpsTmQ1aGxGNDhxQWc0cUJlQ0Zhd193T1dCZGpldk1ldEtQLTQ4d1Jxc2lNQmxUR3FIcFRINEFhTE9GXzlidzFtVnpWQmlqNkpPdEdhRUlYeTVhWExKYnVPQnVQcV9HNU5nTnhVWFFCWi1zc05NZkpadFgyNVlnVjBnZHVEOS1kbm1pT1oxelhFTEVQWXp0bg?oc=5",
@@ -1398,7 +1821,7 @@
     "version": "0.2.0"
    },
    "origen": "busqueda_web",
-   "descubierta_por": "bq_tecate",
+   "descubierta_por": "bq_rosarito",
    "rubros": [
     "clima"
    ]
@@ -1870,6 +2293,27 @@
    "rubros": []
   },
   {
+   "id": "1a8fad25a6aa8024",
+   "titulo": "San Diego County launches new forecasting tool as flu cases rise early",
+   "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPYkVQcFU5bVBSUHFJdlpzSW1ELUg3MXd3TUQ3ekJJalhuSnhiQXpxLWhweHM2N2dRZF9mYzdYMEZhb1FnWWphSWNXd2pjbEs3QWlpV09kT1FVYUdBN0JhR3d4cXppY0JaZFotSWFpVE9saUFVWWY4aUNaYmxINzNkaG5RMExZZUVzN3FBWFk3UEpDNGVqOGZtbXBGQzVZREdRUE96MzBPbXNERk5Kcy05VnlSblRBeHBVNFRxUtIBxAFBVV95cUxPZk82ZGdLbl82MF9CWDR6VmxfZXlJUnA1RXVqTldFVDRNMEt1NzFfVXVTUXVROE1UcG9zMXJLVzEyS19ud2tpVy01Q010Rk1JYlZkbWE0N2FRbVlxRDFIQlNpNWRYR0dtdzBseU9nWUY3dUw3eFBta0VKUWRDendtZGdYQjlNc1pFbXFiZGhiOTZqeHZ0UlhuS09xdkVmVEdOaHI1bTlyYUxEQlN2Tk1ieG1yeERRUUNpZ2hvMlJNS1BxaWJm?oc=5",
+   "dominio": "nbcsandiego.com",
+   "fuente": "gn-a956e11d03ed",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T00:11:43+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_aguasnegras",
+   "rubros": []
+  },
+  {
    "id": "f56e65eb9caa58d1",
    "titulo": "¿Por qué Raphinha es baja del Barcelona y cuándo volverá a jugar? Los partidos que se perderá",
    "url": "https://www.elimparcial.com/deporte/2026/10/09/por-que-raphinha-es-baja-del-barcelona-y-cuando-volvera-a-jugar-los-partidos-que-se-perdera/",
@@ -1894,6 +2338,33 @@
    "rubros": [
     "deportes"
    ]
+  },
+  {
+   "id": "c1f160fcb84be6c0",
+   "titulo": "Gobierno de Tecate fortalece el mantenimiento de vialidades y espacios públicos del municipio",
+   "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOeDNWVzdNZXNMQXpveVhzeFZTRW9QelE2SExNbDJkdlItdDdLdnhJUmZ5elV2aWdLaHhfaUh5QlNzMEx2Q0JscGRHcVRyT01qZTdoOGpENnRCc0tCQ21ZTnRBWHNPOVV3YkNQc01KSjZUQ09qZFV6M2pzN2FXOUJ1Nk9mUTVuckdOdEt4WjRCS3R4WFRpUU5GR0xGTXVTc2ZEQUhMQ1dpMTdWUUR0Wm45OXAwVnZkSlh5Q3JBUA?oc=5",
+   "dominio": "psn.si",
+   "fuente": "gn-062dc8648157",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tecate"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T00:09:42+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.4994,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate",
+   "rubros": []
   },
   {
    "id": "dd523fd004c534d5",
@@ -2077,6 +2548,31 @@
    "rubros": []
   },
   {
+   "id": "639b004747313322",
+   "titulo": "Promueve IMSS Baja California alimentación saludable para prevenir enfermedades crónicas",
+   "url": "https://www.uniradioinforma.com/salud/promueve-imss-baja-california-alimentacion-saludable-prevenir-enfermedades-cronicas-n906857",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-10",
+   "publicado": "2026-10-10T00:00:00-07:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4677,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
    "id": "faad63481dda0770",
    "titulo": "¿Qué futuro le espera a la toma de agua de emergencia de Tijuana con la desaladora?",
    "url": "https://oem.com.mx/elsoldetijuana/local/que-futuro-le-espera-a-la-toma-de-agua-de-emergencia-de-tijuana-con-la-desaladora-32522336",
@@ -2174,25 +2670,6 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
-   "rubros": []
-  },
-  {
-   "id": "e746df516f28dee6",
-   "titulo": "News briefs: Everbridge transition, CoRA opens, Soroptimists support JLAB, Ruff Run",
-   "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOaTVpeDJPYlBrX2JVOTc0M2NHSFlJV3N3RWg3Y1BST3pma3oxVXFObTNaejh4MWVqNlNjelRsaWRqenY2YlBJYXRkUjhuSkNqSW5SX2VWLVVKT2lNMEMzVXFMTUlzU25DQWE3TnZoNS16emZvTXFsWkJJejVLRER2ZGdOR1hpQVA3NGJxLUdVdEQzQV9JZXdOYTB2LXNMVUw0ZlVWVkVYR3hGby0tTDdKbWdoVEFlbGFfMVlKSkJ0VQ?oc=5",
-   "dominio": "coronadotimes.com",
-   "fuente": "gn-c70f6d389c2a",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-09",
-   "publicado": "2026-10-09T23:57:01+00:00",
-   "capturado": "2026-10-10T05:51:15+00:00",
-   "figuras": [],
-   "postura": null,
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_aguasnegras",
    "rubros": []
   },
   {
@@ -3035,6 +3512,31 @@
    "rubros": []
   },
   {
+   "id": "1128ad7cfa775f71",
+   "titulo": "Proyectará Baja California su liderazgo en servicios de salud en cumbre internacional de longevidad: Honold Morales",
+   "url": "https://www.uniradioinforma.com/sociedad/proyectara-baja-california-su-liderazgo-servicios-salud-cumbre-internacional-longevidad-honold-morales-n907548",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T22:00:00-07:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.4649,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
    "id": "9fba86f0421fbc44",
    "titulo": "Denuncian que primaria Vicente Guerrero en La Paz opera sin luz; alumnos estudian a la intemperie",
    "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNNTNMS2pqY3hNZkdXWVRYSkp4b0Y2VGZOVTI1cmlRWHhGTU5LdTBKdW5laFBIQW9ZWmViWmJzRUF2V1FiTzJSYkpaUlg2ZEtRbTA4UUszTUlWTEJwWGJZLTA1YXhjZl9HeTF6ZURaWDBkR0wxc0FhRHNaVXE1MHhHdnhkbzQ3cktydEFDVWFfR0lQeWZsZ1JBNzYwM2hKYUNzbW1oaFgwakx3M040NTVJQ1FGVlNva0RDQjNPN1dLY2FMQQ?oc=5",
@@ -3620,6 +4122,33 @@
    "rubros": []
   },
   {
+   "id": "ce20b5e970ca67fe",
+   "titulo": "Gobierno de Baja California",
+   "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9mcVNwSXF5S3doMi1PeW1TNkR5dEpoVVJkRlVfN29kNXNmSXZLMmM3R3lqMnB3Q29MM05td2RXdjJEaTNmcjR6VVJ4LVdwUkJKbVVlSTBtT2RabnZVTlBDZlZEaw?oc=5",
+   "dominio": "bajacalifornia.gob.mx",
+   "fuente": "gn-01e4fd06574f",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T21:05:29+00:00",
+   "capturado": "2026-09-08T17:24:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6598,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
+   "rubros": []
+  },
+  {
    "id": "7f210e85f2d13a12",
    "titulo": "Tigres vs Toluca: A qué hora y dónde ver HOY la Jornada 11 del Apertura 2026",
    "url": "https://www.elimparcial.com/deporte/2026/10/09/tigres-vs-toluca-a-que-hora-y-donde-ver-hoy-la-jornada-11-del-apertura-2026/",
@@ -3836,7 +4365,7 @@
    "delegaciones": [],
    "alcance": "zona",
    "fecha": "2026-10-09",
-   "publicado": "2026-10-09T20:48:43+00:00",
+   "publicado": "2026-10-09T20:48:45+00:00",
    "capturado": "2026-10-10T05:51:15+00:00",
    "figuras": [],
    "postura": {
@@ -3952,7 +4481,7 @@
   {
    "id": "7ae2c40ae1b32c2e",
    "titulo": "Tropical storm watch issued for San Diego County from Friday evening through Tuesday",
-   "url": "https://timesofsandiego.com/community/2026/10/09/tropical-storm-watch-issued-for-san-diego-county-from-friday-evening-through-tuesday/",
+   "url": "https://timesofsandiego.com/life/2026/10/09/tropical-storm-watch-issued-for-san-diego-county-from-friday-evening-through-tuesday/",
    "dominio": "timesofsandiego.com",
    "fuente": "timessd",
    "zona_medio": "San Diego",
@@ -4395,7 +4924,7 @@
    "delegaciones": [],
    "alcance": "zona",
    "fecha": "2026-10-09",
-   "publicado": "2026-10-09T19:51:00+00:00",
+   "publicado": "2026-10-09T19:51:03+00:00",
    "capturado": "2026-10-09T22:39:21+00:00",
    "figuras": [],
    "postura": {
@@ -4740,6 +5269,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/10/6ac9a36b295a0.jpg",
    "rubros": [
     "seguridad"
    ]
@@ -4898,6 +5428,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/10/6ac9a201ba2b8.jpg",
    "rubros": [
     "economia"
    ]
@@ -5580,31 +6111,6 @@
    ]
   },
   {
-   "id": "2c396913fa653462",
-   "titulo": "Encapuchados irrumpen en el Bachilleres 6 de Iztapalapa; suspenden clases",
-   "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNek5JWU15ZEhvWl9tOWg5c2RlRUpvSmUxbTNWc1g3bTRDLXpVVTRjM25VQWxuaGRZR00yNEN5N1EzTG14bGI2Z2lNa3plN0dJeWU1R0p1elhiRXZYamd5WWlReGRRZ3doTWdWUWlGZ25TV1lwR1FmLVR3TXZHcmdnUmtoX2dCYmN4QWFvcElDdFc0SklndzlLdjZUM253WVlDNGQySmp4WTNQUFppVkRfUUh6bXRWeHhqVzZvY1k3Rm81LWM?oc=5",
-   "dominio": "lasillarota.com",
-   "fuente": "gn-173f8fbcfc4a",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "fuera",
-   "fecha": "2026-10-09",
-   "publicado": "2026-10-09T18:36:53+00:00",
-   "capturado": "2026-10-09T22:39:21+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.7181,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_sanquintin",
-   "rubros": []
-  },
-  {
    "id": "243703e6f243f3a4",
    "titulo": "Brazil Runoff: Bolsonaro’s New Slim Poll Lead Tests Voter Loyalty",
    "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOMEF1Y3VlcDVQVDdZUHBVRFNVMEV4aVdMazd4UndMbmFBUDFHNG9FTzdmVVNxVzBSX29KTlJtNENmUjJPakVQdnlSSThFZWxZQ2JFLXBfXzZJOFNvaVRWWE9CNzhRaFRpbjNFVWdobFFLVG0xSjhUN1ZjRHhEUlIwUGlQdXVDajI5dmtNaFU5ckdyVUw5VW5BM1pmN3VYcWNQSTJCa2xB?oc=5",
@@ -5621,6 +6127,31 @@
    "postura": null,
    "origen": "busqueda_web",
    "descubierta_por": "bq_aguasnegras",
+   "rubros": []
+  },
+  {
+   "id": "2c396913fa653462",
+   "titulo": "Encapuchados irrumpen en el Bachilleres 6 de Iztapalapa; suspenden clases",
+   "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNek5JWU15ZEhvWl9tOWg5c2RlRUpvSmUxbTNWc1g3bTRDLXpVVTRjM25VQWxuaGRZR00yNEN5N1EzTG14bGI2Z2lNa3plN0dJeWU1R0p1elhiRXZYamd5WWlReGRRZ3doTWdWUWlGZ25TV1lwR1FmLVR3TXZHcmdnUmtoX2dCYmN4QWFvcElDdFc0SklndzlLdjZUM253WVlDNGQySmp4WTNQUFppVkRfUUh6bXRWeHhqVzZvY1k3Rm81LWM?oc=5",
+   "dominio": "lasillarota.com",
+   "fuente": "gn-173f8fbcfc4a",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T18:36:00+00:00",
+   "capturado": "2026-10-09T22:39:21+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7181,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
    "rubros": []
   },
   {
@@ -7959,6 +8490,25 @@
    "rubros": []
   },
   {
+   "id": "99de090202ed038a",
+   "titulo": "$5 Million Worth Of Cocaine Found In Gas Tank Of Commercial Bus At California Border",
+   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQaWJiNkZrcmpvRGktVDJfMl9mTS1iOVZmVFVLR25IQ2ZNTTFLWXpHV0hZTU45UHFiSDdwWDU5V1cwMDVKN191YUpvTHRHeE9KY3BsODNzZGdqeFBfQ0VmTGQ4cnpraWVhMmZ6ei16cE9uczR4eXVsUEs3Q1lvZndEVkw3eFZnZ2FadTloenJaY0UzSDBkbTNhcURWVjF4QmNOcDRvNHNEZzlRWEtHcktUY2ZHbw?oc=5",
+   "dominio": "nationalenquirer.com",
+   "fuente": "gn-4385c34d12cc",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-09",
+   "publicado": "2026-10-09T14:30:09+00:00",
+   "capturado": "2026-10-10T12:30:27+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
+  },
+  {
    "id": "6827e359a377e60d",
    "titulo": "$5 Million Worth Of Cocaine Found In Gas Tank Of Commercial Bus At California Border",
    "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQTWpMVXRmOXBPVUhqS2pUcW5QSnNRMjBFeGZUQ0hNYnJSdTc3MUVYa3Y1cUw1NnZzTFF4YndTeTBxUGp0dE1HVzR1NDRJYXhrQVFiZVZvb20tQldiblYyRjdIRFRVa05lVUtmbDQxTFByZndhTVZCbDUyTzJDTkRNX3dLRkJuVHY3eGdB?oc=5",
@@ -9561,33 +10111,6 @@
    "figuras": [],
    "postura": null,
    "imagen": "https://cdn.kpbs.org/dims4/default/15672a6/2147483647/strip/false/crop/3000x3000+750+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F3e%2Fa5%2F406685634c73a582ad680acd20db%2Fgettyimages-2220014397.jpg",
-   "rubros": []
-  },
-  {
-   "id": "ce20b5e970ca67fe",
-   "titulo": "Gobierno de Baja California",
-   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE8xLTZrQjBuZEQ5cGtXUE5ROXAtbzQ3dkRta2MtajNfWHZaVm9rQXJRTVhveFZKVFVtNWlMTlVGbVdVS0pXcjdVX29uOFYxY1F5V2toaUw5OWlWd0k0SUJHZWZVbVQ?oc=5",
-   "dominio": "bajacalifornia.gob.mx",
-   "fuente": "gn-01e4fd06574f",
-   "zona_medio": "estatal",
-   "zonas": [
-    "estatal"
-   ],
-   "delegaciones": [],
-   "alcance": "estatal",
-   "fecha": "2026-10-09",
-   "publicado": "2026-10-09T08:17:54+00:00",
-   "capturado": "2026-09-08T17:24:53+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.6598,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_sanquintin",
    "rubros": []
   },
   {
