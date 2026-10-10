@@ -3,16 +3,361 @@
  "generado": "2026-10-10",
  "ventana_dias": 7,
  "minimo": 3,
- "notas_ventana": 2275,
+ "notas_ventana": 2436,
  "notas_previas": 2603,
  "temas": [
   {
-   "termino": "incendio",
-   "n": 19,
-   "n_previo": 3,
-   "momento": 16,
+   "termino": "rachel",
+   "n": 45,
+   "n_previo": 10,
+   "momento": 35,
    "zonas": {
-    "Tijuana": 10,
+    "nacional": 14,
+    "Tijuana": 11,
+    "estatal": 9,
+    "Ensenada": 4,
+    "Playas de Rosarito": 2,
+    "San Diego": 2,
+    "Mexicali": 1,
+    "San Felipe": 1,
+    "Tecate": 1
+   },
+   "fuentes": {
+    "imparcial": 15,
+    "afn": 4,
+    "soltij": 4,
+    "uniradio": 4,
+    "zeta": 4,
+    "lavoz": 2,
+    "bajanews": 1,
+    "gn-208187d76ea7": 1,
+    "gn-250e3d3bf1ff": 1,
+    "gn-31ae7e9b28e1": 1,
+    "gn-906741a25e9c": 1,
+    "gn-a96a3aaee9d9": 1,
+    "gn-b4bf210d5652": 1,
+    "gn-dc1580cd9943": 1,
+    "jornadabc": 1,
+    "kpbs": 1,
+    "rosarito": 1,
+    "timessd": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "0a7e9364adb276d5",
+    "0bffaca685b92f41",
+    "0f4189811cf146ca",
+    "14e9a5550e9ad3e5",
+    "194d84d3c682e5bf",
+    "1b428747383fb42c",
+    "31118c6474e896bd",
+    "3dbeccd9a4fd88b2",
+    "3ef1549e6eca4502",
+    "400c8c955dc3a5e9",
+    "484a600563412fb0",
+    "512deffca8e68faf",
+    "5464d51af11c5e8e",
+    "57594cefb7746a19",
+    "5d69c414e2b636f6",
+    "669fa06efcba7fd6",
+    "68ea6b8b930f8f90",
+    "6ca201432c264582",
+    "77d50292e0433497",
+    "7aa09f6a4b11ec4f",
+    "896d0436398d03b5",
+    "8da0cca6b12ce8a8",
+    "8fad69ab5d292be8",
+    "95ad62fbd61bd1d3",
+    "9807847cfa77abb3",
+    "994bb27c7a6a8063",
+    "a9e1e0d9be8c603a",
+    "ac8923961c7377a8",
+    "ae643e0d0c465ba5",
+    "c4dcd38af4aa5942",
+    "c994de6fd2b36a72",
+    "ccf2fb45ddb46f78",
+    "ce5fe06dd985e4ca",
+    "cec950321218b2f6",
+    "d36bdc4a1c105a04",
+    "d62cea731a013d94",
+    "dd523fd004c534d5",
+    "e001a4e3c9acb3b8",
+    "e43faa940c814c5d",
+    "e51de05f0883d884",
+    "ea8a0603cb27d46c",
+    "ed2035c01e6f87a8",
+    "f081726d9dd08cb8",
+    "f118e3f2a7dc251e",
+    "f5e9f4febe67c402"
+   ],
+   "ejemplos": [
+    "Provoca Rachel alto oleaje e inunda viviendas en Playas de Rosarito",
+    "Marina refuerza avisos a embarcaciones en Ensenada por ‘Rachel’",
+    "Frente frío azotará el norte y noroeste de México en medio de la crisis por Simon y Rachel"
+   ]
+  },
+  {
+   "termino": "tropical",
+   "n": 29,
+   "n_previo": 5,
+   "momento": 24,
+   "zonas": {
+    "nacional": 13,
+    "Tijuana": 5,
+    "San Diego": 4,
+    "Ensenada": 3,
+    "estatal": 2,
+    "San Felipe": 1,
+    "Tecate": 1
+   },
+   "fuentes": {
+    "imparcial": 11,
+    "zeta": 4,
+    "timessd": 3,
+    "lavoz": 2,
+    "uniradio": 2,
+    "bajanews": 1,
+    "gn-86d59fc60ccb": 1,
+    "gn-a96a3aaee9d9": 1,
+    "gn-b4bf210d5652": 1,
+    "jornadabc": 1,
+    "kpbs": 1,
+    "soltij": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "09a8fdb35c70caa6",
+    "0f4189811cf146ca",
+    "14e9a5550e9ad3e5",
+    "194d84d3c682e5bf",
+    "1bcaf72c213a618b",
+    "29977eb287c62ba5",
+    "2d465d6185d0a53c",
+    "31118c6474e896bd",
+    "3df71b6d5c12ee5a",
+    "3ef1549e6eca4502",
+    "5464d51af11c5e8e",
+    "54cf28c6373ebaa5",
+    "57594cefb7746a19",
+    "5ba0817cd4a7de21",
+    "669fa06efcba7fd6",
+    "6868d6245f1e2ad3",
+    "7ae2c40ae1b32c2e",
+    "7f5c04a093532570",
+    "8da0cca6b12ce8a8",
+    "8fad69ab5d292be8",
+    "95ad62fbd61bd1d3",
+    "994bb27c7a6a8063",
+    "a9e1e0d9be8c603a",
+    "b984dd156d00e460",
+    "c43f162459b0f6b5",
+    "c4dcd38af4aa5942",
+    "ccf2fb45ddb46f78",
+    "d36bdc4a1c105a04",
+    "eff813bb65e16e28"
+   ],
+   "ejemplos": [
+    "Habilitan albergues en Tijuana ante llegada de Tormenta Tropical Rachel a BC",
+    "This is where people can find weather shelters and sandbags to prepare for Tropical Storm Rachel",
+    "Alerta PC por aproximación de la tormenta tropical “Rachel” a SLRC"
+   ]
+  },
+  {
+   "termino": "vientos",
+   "n": 33,
+   "n_previo": 12,
+   "momento": 21,
+   "zonas": {
+    "nacional": 20,
+    "estatal": 7,
+    "Tijuana": 4,
+    "Mexicali": 2
+   },
+   "fuentes": {
+    "imparcial": 11,
+    "soltij": 3,
+    "gn-31ae7e9b28e1": 2,
+    "gn-6327d1dd772f": 2,
+    "gn-d33696b00d82": 2,
+    "afn": 1,
+    "gn-01e4fd06574f": 1,
+    "gn-208187d76ea7": 1,
+    "gn-250e3d3bf1ff": 1,
+    "gn-36bce513f849": 1,
+    "gn-53fe2da95fac": 1,
+    "gn-6b7d3783657b": 1,
+    "gn-87dd1da2757d": 1,
+    "gn-a96a3aaee9d9": 1,
+    "gn-da769adb9964": 1,
+    "gn-dc1580cd9943": 1,
+    "uniradio": 1,
+    "zeta": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "0bffaca685b92f41",
+    "194d84d3c682e5bf",
+    "1bcaf72c213a618b",
+    "2b20559bc20107f7",
+    "351e44b099090d7a",
+    "365304093b1baff7",
+    "484a600563412fb0",
+    "512deffca8e68faf",
+    "5464d51af11c5e8e",
+    "5a904836a6df7d08",
+    "6868d6245f1e2ad3",
+    "761024eef5bfc212",
+    "7aa09f6a4b11ec4f",
+    "887822d8030aacda",
+    "91c3b05c571ed01f",
+    "981aa873d3666a45",
+    "a490583231fd186b",
+    "a55b0e96764d919b",
+    "ac8923961c7377a8",
+    "ae643e0d0c465ba5",
+    "bba4f47e356c5a76",
+    "bc01423eaeabb459",
+    "c2f61278d5ceb145",
+    "c994de6fd2b36a72",
+    "d49049217c2a5f46",
+    "d62cea731a013d94",
+    "d76a599ef50e621b",
+    "d963005da77a1737",
+    "d98e72a68f07956a",
+    "e001a4e3c9acb3b8",
+    "e43faa940c814c5d",
+    "eb68ff4d7f0a3115",
+    "fe36a8ca79649268"
+   ],
+   "ejemplos": [
+    "Baja California activa protocolo por lluvias y vientos de El Niño",
+    "Alertan por lluvias y vientos de hasta 70 km/h en Mexicali por la tormenta Rachel",
+    "Protección civil informa que Rachel provocará lluvias y vientos de hasta 110 km/h en BC"
+   ]
+  },
+  {
+   "termino": "lluvias",
+   "n": 70,
+   "n_previo": 51,
+   "momento": 19,
+   "zonas": {
+    "nacional": 33,
+    "Tijuana": 19,
+    "estatal": 9,
+    "Mexicali": 6,
+    "Ensenada": 1,
+    "Playas de Rosarito": 1,
+    "San Diego": 1
+   },
+   "fuentes": {
+    "imparcial": 33,
+    "uniradio": 8,
+    "afn": 6,
+    "jornadabc": 3,
+    "soltij": 3,
+    "lavoz": 2,
+    "gn-01e4fd06574f": 1,
+    "gn-208187d76ea7": 1,
+    "gn-250e3d3bf1ff": 1,
+    "gn-31ae7e9b28e1": 1,
+    "gn-36bce513f849": 1,
+    "gn-53fe2da95fac": 1,
+    "gn-6327d1dd772f": 1,
+    "gn-6b7d3783657b": 1,
+    "gn-a96a3aaee9d9": 1,
+    "gn-b4bf210d5652": 1,
+    "gn-d33696b00d82": 1,
+    "gn-da769adb9964": 1,
+    "gn-dc1580cd9943": 1,
+    "rosarito": 1,
+    "zeta": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "035424e98bf72c8f",
+    "0a7e9364adb276d5",
+    "0bffaca685b92f41",
+    "0e0aba448b528afd",
+    "0f05448142a50e24",
+    "1695ebb1c30e5862",
+    "194d84d3c682e5bf",
+    "1bcaf72c213a618b",
+    "23082be4f720d17e",
+    "28da10c578673723",
+    "2b20559bc20107f7",
+    "351e44b099090d7a",
+    "358b7fd4f700c6e1",
+    "365304093b1baff7",
+    "3f4d9cc5a3b62b3c",
+    "3fd8ce82eeedd2fd",
+    "4154ab2a29f6a98b",
+    "484a600563412fb0",
+    "512deffca8e68faf",
+    "5464d51af11c5e8e",
+    "59b0d48b60c8826a",
+    "5a904836a6df7d08",
+    "634bc6b9082e40a2",
+    "6868d6245f1e2ad3",
+    "68ea6b8b930f8f90",
+    "6ca201432c264582",
+    "761024eef5bfc212",
+    "7902b17040c526bc",
+    "7aa09f6a4b11ec4f",
+    "7e0ba9cc33e6d7bb",
+    "7ee61de49fad622f",
+    "887822d8030aacda",
+    "8f12b0124f7ef8fb",
+    "91c3b05c571ed01f",
+    "93185823c01a5b75",
+    "96aef512a27ee877",
+    "9ec60be167eeb326",
+    "a55b0e96764d919b",
+    "ac8923961c7377a8",
+    "ae5e99cfb48e407a",
+    "ae643e0d0c465ba5",
+    "b747b5db6edc3876",
+    "b908b77e06e9dc0c",
+    "bc01423eaeabb459",
+    "c215fb2433a77dad",
+    "c2f61278d5ceb145",
+    "c43f162459b0f6b5",
+    "c4dcd38af4aa5942",
+    "cec950321218b2f6",
+    "cf0e5305e4021db6",
+    "cf9a8b4bb1854f5c",
+    "d42027ce8df072ef",
+    "d62cea731a013d94",
+    "d98e72a68f07956a",
+    "dd523fd004c534d5",
+    "e001a4e3c9acb3b8",
+    "e17e343b2ebe90db",
+    "e40dc2d35f0070e8",
+    "e43faa940c814c5d",
+    "e51de05f0883d884",
+    "e86382444d442814",
+    "e8bbc558bf3ce47f",
+    "eb68ff4d7f0a3115",
+    "eefa17783b855767",
+    "f6738f9fcd3ad84e",
+    "f91d882ac4ef1fc0",
+    "f9d29564efb2b92e",
+    "fb507315db988d91",
+    "fe36a8ca79649268",
+    "fec231266c721592"
+   ],
+   "ejemplos": [
+    "Recomiendan medidas preventivas ante pronóstico de lluvias este fin de semana",
+    "Baja California activa protocolo por lluvias y vientos de El Niño",
+    "Revisa techos, canaletas y láminas: cómo evitar accidentes ante las lluvias del fin de semana en Tijuana"
+   ]
+  },
+  {
+   "termino": "incendio",
+   "n": 20,
+   "n_previo": 3,
+   "momento": 17,
+   "zonas": {
+    "Tijuana": 11,
     "nacional": 3,
     "Ensenada": 2,
     "Mexicali": 2,
@@ -23,16 +368,17 @@
     "imparcial": 10,
     "gn-df1d301d141c": 2,
     "jornadabc": 2,
+    "zeta": 2,
     "afn": 1,
     "lavoz": 1,
     "rosarito": 1,
-    "uniradio": 1,
-    "zeta": 1
+    "uniradio": 1
    },
    "un_solo_medio": false,
    "notas": [
     "0a104b0fea4cc515",
     "0cb84d0775fbdcc8",
+    "0ec25d66f35247c8",
     "149ba4945bbb3196",
     "23f29e58ece05f47",
     "39dbafa33f6b6cf5",
@@ -52,138 +398,259 @@
     "e503880bb0764f61"
    ],
    "ejemplos": [
+    "Incendio en Los Reyes deja un hombre lesionado",
     "Incendio en El Pípila deja a 2 bomberos afectados",
-    "Incendio Afecta 15 Hectáreas de Vegetación en Arroyo San Simón de San Quintín",
-    "Incendio consume casa rodante y moviliza a bomberos en la colonia Guajardo"
+    "Incendio Afecta 15 Hectáreas de Vegetación en Arroyo San Simón de San Quintín"
    ]
   },
   {
-   "termino": "rachel",
-   "n": 25,
-   "n_previo": 10,
+   "termino": "lluvias vientos",
+   "n": 16,
+   "n_previo": 1,
    "momento": 15,
    "zonas": {
-    "nacional": 10,
-    "estatal": 6,
-    "Tijuana": 5,
-    "Ensenada": 1,
-    "Playas de Rosarito": 1,
-    "San Diego": 1,
-    "Tecate": 1
+    "nacional": 8,
+    "estatal": 5,
+    "Tijuana": 2,
+    "Mexicali": 1
    },
    "fuentes": {
-    "imparcial": 7,
-    "uniradio": 3,
-    "soltij": 2,
-    "zeta": 2,
-    "afn": 1,
-    "bajanews": 1,
-    "gn-250e3d3bf1ff": 1,
-    "gn-31ae7e9b28e1": 1,
-    "gn-906741a25e9c": 1,
-    "gn-a96a3aaee9d9": 1,
-    "gn-b4bf210d5652": 1,
-    "gn-dc1580cd9943": 1,
-    "jornadabc": 1,
-    "kpbs": 1,
-    "rosarito": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "0bffaca685b92f41",
-    "0f4189811cf146ca",
-    "14e9a5550e9ad3e5",
-    "484a600563412fb0",
-    "512deffca8e68faf",
-    "5464d51af11c5e8e",
-    "5d69c414e2b636f6",
-    "669fa06efcba7fd6",
-    "6ca201432c264582",
-    "77d50292e0433497",
-    "7aa09f6a4b11ec4f",
-    "896d0436398d03b5",
-    "8da0cca6b12ce8a8",
-    "8fad69ab5d292be8",
-    "9807847cfa77abb3",
-    "994bb27c7a6a8063",
-    "a9e1e0d9be8c603a",
-    "ac8923961c7377a8",
-    "ae643e0d0c465ba5",
-    "c4dcd38af4aa5942",
-    "ce5fe06dd985e4ca",
-    "d62cea731a013d94",
-    "dd523fd004c534d5",
-    "ed2035c01e6f87a8",
-    "f118e3f2a7dc251e"
-   ],
-   "ejemplos": [
-    "Frente frío azotará el norte y noroeste de México en medio de la crisis por Simon y Rachel",
-    "Alerta en Rosarito: Tormenta Rachel traerá lluvias el fin de semana",
-    "Cruz Roja Mexicana en alerta por Huracán Simón y Tormenta Tropical Rachel"
-   ]
-  },
-  {
-   "termino": "vientos",
-   "n": 26,
-   "n_previo": 12,
-   "momento": 14,
-   "zonas": {
-    "nacional": 17,
-    "estatal": 6,
-    "Tijuana": 3
-   },
-   "fuentes": {
-    "imparcial": 6,
-    "gn-31ae7e9b28e1": 2,
-    "gn-6327d1dd772f": 2,
-    "gn-d33696b00d82": 2,
-    "soltij": 2,
+    "imparcial": 4,
     "afn": 1,
     "gn-01e4fd06574f": 1,
-    "gn-208187d76ea7": 1,
     "gn-250e3d3bf1ff": 1,
+    "gn-31ae7e9b28e1": 1,
     "gn-36bce513f849": 1,
     "gn-53fe2da95fac": 1,
+    "gn-6327d1dd772f": 1,
     "gn-6b7d3783657b": 1,
-    "gn-87dd1da2757d": 1,
-    "gn-a96a3aaee9d9": 1,
+    "gn-d33696b00d82": 1,
     "gn-da769adb9964": 1,
-    "gn-dc1580cd9943": 1,
+    "soltij": 1,
     "uniradio": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "0bffaca685b92f41",
-    "1bcaf72c213a618b",
     "2b20559bc20107f7",
-    "351e44b099090d7a",
     "365304093b1baff7",
     "484a600563412fb0",
     "512deffca8e68faf",
-    "5464d51af11c5e8e",
-    "6868d6245f1e2ad3",
     "7aa09f6a4b11ec4f",
     "887822d8030aacda",
     "91c3b05c571ed01f",
-    "981aa873d3666a45",
-    "a490583231fd186b",
     "ac8923961c7377a8",
     "ae643e0d0c465ba5",
-    "bba4f47e356c5a76",
     "bc01423eaeabb459",
     "c2f61278d5ceb145",
-    "d49049217c2a5f46",
     "d62cea731a013d94",
-    "d76a599ef50e621b",
-    "d963005da77a1737",
-    "d98e72a68f07956a",
+    "e001a4e3c9acb3b8",
+    "e43faa940c814c5d",
     "eb68ff4d7f0a3115",
     "fe36a8ca79649268"
    ],
    "ejemplos": [
     "Baja California activa protocolo por lluvias y vientos de El Niño",
-    "Rachel se acerca a Baja California: zonas que tendrán lluvias y vientos fuertes",
-    "Activan Plan Marina en Baja California ante posibles lluvias y vientos por “Rachel”"
+    "Alertan por lluvias y vientos de hasta 70 km/h en Mexicali por la tormenta Rachel",
+    "Protección civil informa que Rachel provocará lluvias y vientos de hasta 110 km/h en BC"
+   ]
+  },
+  {
+   "termino": "felipe",
+   "n": 30,
+   "n_previo": 16,
+   "momento": 14,
+   "zonas": {
+    "San Felipe": 29,
+    "nacional": 1
+   },
+   "fuentes": {
+    "gn-507c32aa93b3": 11,
+    "lavoz": 7,
+    "imparcial": 4,
+    "bajanews": 1,
+    "gn-2f955974c5c0": 1,
+    "gn-704f83760328": 1,
+    "gn-875e5e1681c0": 1,
+    "gn-8b479637ed46": 1,
+    "gn-c1d6f8717505": 1,
+    "gn-dc1580cd9943": 1,
+    "soltij": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "031b9e374cd9f5da",
+    "05ce578be32a0d08",
+    "07ac990d992653aa",
+    "14598bbb8d41f8c4",
+    "19f4600e995ead3a",
+    "1cfc95006caf020d",
+    "1fd9ec50614d710a",
+    "264335fe9eeb88d9",
+    "2aae4f8559f8db16",
+    "31118c6474e896bd",
+    "422cde0294867037",
+    "535958f2a989d420",
+    "5ab50da68649b0a6",
+    "60595b8961c0bb70",
+    "63ded6b6663fdf8f",
+    "646e3425829880d6",
+    "6f38a1cd9278c77b",
+    "70132e26a7241a51",
+    "749bdf8db66d1ce9",
+    "87d7ba1a4939790a",
+    "9e3cf42a2f38564b",
+    "a7d7125eb0209793",
+    "b8a1ba078701dcf6",
+    "c26279f4ec60e1e9",
+    "d7338f9eb9950cf2",
+    "df278b8e4b3dae40",
+    "e57e3f705b909041",
+    "efa8251e8aed0778",
+    "f93bd9e1b9b7bbc8",
+    "faf82c863542dfd7"
+   ],
+   "ejemplos": [
+    "Sismo de magnitud 3.6 sacude el noreste de San Felipe, Baja California",
+    "Fatal choque en San Felipe deja un muerto y dos lesionados",
+    "Registran sismo de magnitud 3.5 al noreste de San Felipe, Baja California"
+   ]
+  },
+  {
+   "termino": "frente",
+   "n": 25,
+   "n_previo": 11,
+   "momento": 14,
+   "zonas": {
+    "nacional": 16,
+    "Tijuana": 3,
+    "Mexicali": 2,
+    "San Diego": 2,
+    "Tecate": 1,
+    "estatal": 1
+   },
+   "fuentes": {
+    "imparcial": 17,
+    "jornadabc": 2,
+    "uniradio": 2,
+    "afn": 1,
+    "gn-05eb1fd0e478": 1,
+    "lavoz": 1,
+    "soltij": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "0227b6292b369290",
+    "03beadb52e58b41d",
+    "065210e6d154003e",
+    "09a8fdb35c70caa6",
+    "184e9617a47d5ad1",
+    "20b4129180a5c7e7",
+    "2fbceb55c44df0f9",
+    "34c9ddaf00b8ca77",
+    "5310f71ce4be55db",
+    "5ba0817cd4a7de21",
+    "6977321af5b201f4",
+    "6a7d79594ee176e7",
+    "6b4c59f734d6a4e9",
+    "6c03b0c063bd107e",
+    "81b4031f10e507d8",
+    "896d0436398d03b5",
+    "aa367ff3363d4f3f",
+    "abcef8627f6ff80e",
+    "afdb2bb3bf2d0d29",
+    "bbcf5dd8cf1a6be7",
+    "e5fbd96be9610e4c",
+    "ea8a0603cb27d46c",
+    "ed2035c01e6f87a8",
+    "f12e2f412b55dd14",
+    "feb68a75df1f1fa6"
+   ],
+   "ejemplos": [
+    "Frente frío azotará el norte y noroeste de México en medio de la crisis por Simon y Rachel",
+    "Informa Protección Civil Estatal acciones preventivas ante impacto de \"Rachel\" y frente frío en Baja California",
+    "La alianza de Morena y el Partido Verde rumbo a 2027 enfrenta desacuerdos tras la salida de un dirigente estatal que propone formar un frente político para impulsar un cambio"
+   ]
+  },
+  {
+   "termino": "nobel",
+   "n": 14,
+   "n_previo": 0,
+   "momento": 14,
+   "zonas": {
+    "nacional": 8,
+    "San Diego": 6
+   },
+   "fuentes": {
+    "imparcial": 7,
+    "kpbs": 6,
+    "uniradio": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "028b8590b81f0963",
+    "2d6260cabf028bb0",
+    "375d2fd05f5dffd4",
+    "38740d119465cdac",
+    "38b3af9910561cc3",
+    "3eb1ce6274ecbc22",
+    "431a5faffd779b5d",
+    "76ed1e98c65a1d1f",
+    "79981f9803cd6504",
+    "a528f3c3e5ff5272",
+    "c47cad77e2040914",
+    "e53263f668288a2e",
+    "ef2ce0f258b5ee37",
+    "f35ba969a41b86eb"
+   ],
+   "ejemplos": [
+    "Las mujeres del Nobel",
+    "South African human rights lawyer Navi Pillay wins the Nobel Peace Prize",
+    "Siete libros clave para conocer a Anne Carson, la escritora canadiense que ganó el Premio Nobel de Literatura 2026"
+   ]
+  },
+  {
+   "termino": "serie",
+   "n": 19,
+   "n_previo": 6,
+   "momento": 13,
+   "zonas": {
+    "nacional": 14,
+    "Tijuana": 5
+   },
+   "fuentes": {
+    "imparcial": 10,
+    "uniradio": 3,
+    "soltij": 2,
+    "zeta": 2,
+    "afn": 1,
+    "gn-ab49ec778314": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "0136c48d8a57ffb3",
+    "09a498f6da12c239",
+    "353ef793fc486de4",
+    "3b59a73029598036",
+    "3d5eeaf5155f3cfe",
+    "438ad9cbd94a6178",
+    "43e9e87dde5e3052",
+    "4d48db889bcf5888",
+    "5012254e7f67b90f",
+    "55ac7b1fef3022f1",
+    "5fc4aaa788e6c6bd",
+    "8c027bc953f472c5",
+    "9663352342b6b182",
+    "a5ab208120f224d5",
+    "bf8515e61992b0bc",
+    "cbcf4c8bc64622a6",
+    "cd6de1d77a83d321",
+    "d9933c27d5518196",
+    "df102b8efae72fb8"
+   ],
+   "ejemplos": [
+    "Luis de Llano rechaza el uso de su imagen en la serie “Timbiriche”",
+    "Presos que reclaman su inocencia, asesinos en serie y parricidas, entre los 563 reos que evitarían la pena capital en California",
+    "Luis de Llano se pronuncia previo al estreno de la serie de Timbiriche y fija postura sobre el caso Sasha Sokol"
    ]
   },
   {
@@ -236,190 +703,58 @@
    ]
   },
   {
-   "termino": "lluvias vientos",
-   "n": 14,
-   "n_previo": 1,
-   "momento": 13,
+   "termino": "mantiene",
+   "n": 24,
+   "n_previo": 12,
+   "momento": 12,
    "zonas": {
-    "nacional": 7,
-    "estatal": 5,
-    "Tijuana": 2
+    "nacional": 16,
+    "Tijuana": 4,
+    "Ensenada": 1,
+    "Mexicali": 1,
+    "San Quintín": 1,
+    "estatal": 1
    },
    "fuentes": {
-    "imparcial": 2,
-    "afn": 1,
-    "gn-01e4fd06574f": 1,
-    "gn-250e3d3bf1ff": 1,
-    "gn-31ae7e9b28e1": 1,
-    "gn-36bce513f849": 1,
-    "gn-53fe2da95fac": 1,
+    "imparcial": 14,
+    "afn": 3,
+    "jornadabc": 2,
+    "uniradio": 2,
     "gn-6327d1dd772f": 1,
-    "gn-6b7d3783657b": 1,
-    "gn-d33696b00d82": 1,
-    "gn-da769adb9964": 1,
     "soltij": 1,
-    "uniradio": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "2b20559bc20107f7",
-    "365304093b1baff7",
-    "484a600563412fb0",
-    "512deffca8e68faf",
-    "7aa09f6a4b11ec4f",
-    "887822d8030aacda",
-    "91c3b05c571ed01f",
-    "ac8923961c7377a8",
-    "ae643e0d0c465ba5",
-    "bc01423eaeabb459",
-    "c2f61278d5ceb145",
-    "d62cea731a013d94",
-    "eb68ff4d7f0a3115",
-    "fe36a8ca79649268"
-   ],
-   "ejemplos": [
-    "Baja California activa protocolo por lluvias y vientos de El Niño",
-    "Rachel se acerca a Baja California: zonas que tendrán lluvias y vientos fuertes",
-    "Activan Plan Marina en Baja California ante posibles lluvias y vientos por “Rachel”"
-   ]
-  },
-  {
-   "termino": "nobel",
-   "n": 13,
-   "n_previo": 0,
-   "momento": 13,
-   "zonas": {
-    "nacional": 7,
-    "San Diego": 6
-   },
-   "fuentes": {
-    "imparcial": 6,
-    "kpbs": 6,
-    "uniradio": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "028b8590b81f0963",
-    "2d6260cabf028bb0",
-    "375d2fd05f5dffd4",
-    "38740d119465cdac",
-    "38b3af9910561cc3",
-    "3eb1ce6274ecbc22",
-    "431a5faffd779b5d",
-    "76ed1e98c65a1d1f",
-    "79981f9803cd6504",
-    "a528f3c3e5ff5272",
-    "e53263f668288a2e",
-    "ef2ce0f258b5ee37",
-    "f35ba969a41b86eb"
-   ],
-   "ejemplos": [
-    "South African human rights lawyer Navi Pillay wins the Nobel Peace Prize",
-    "Siete libros clave para conocer a Anne Carson, la escritora canadiense que ganó el Premio Nobel de Literatura 2026",
-    "Poet and essayist Anne Carson wins 2026 Nobel Prize in literature"
-   ]
-  },
-  {
-   "termino": "felipe",
-   "n": 28,
-   "n_previo": 16,
-   "momento": 12,
-   "zonas": {
-    "San Felipe": 27,
-    "nacional": 1
-   },
-   "fuentes": {
-    "gn-507c32aa93b3": 11,
-    "lavoz": 6,
-    "imparcial": 3,
-    "bajanews": 1,
-    "gn-2f955974c5c0": 1,
-    "gn-704f83760328": 1,
-    "gn-875e5e1681c0": 1,
-    "gn-8b479637ed46": 1,
-    "gn-c1d6f8717505": 1,
-    "gn-dc1580cd9943": 1,
-    "soltij": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "031b9e374cd9f5da",
-    "05ce578be32a0d08",
-    "07ac990d992653aa",
-    "14598bbb8d41f8c4",
-    "19f4600e995ead3a",
-    "1cfc95006caf020d",
-    "1fd9ec50614d710a",
-    "264335fe9eeb88d9",
-    "2aae4f8559f8db16",
-    "422cde0294867037",
-    "535958f2a989d420",
-    "5ab50da68649b0a6",
-    "60595b8961c0bb70",
-    "63ded6b6663fdf8f",
-    "646e3425829880d6",
-    "6f38a1cd9278c77b",
-    "70132e26a7241a51",
-    "749bdf8db66d1ce9",
-    "87d7ba1a4939790a",
-    "9e3cf42a2f38564b",
-    "a7d7125eb0209793",
-    "b8a1ba078701dcf6",
-    "c26279f4ec60e1e9",
-    "d7338f9eb9950cf2",
-    "df278b8e4b3dae40",
-    "e57e3f705b909041",
-    "f93bd9e1b9b7bbc8",
-    "faf82c863542dfd7"
-   ],
-   "ejemplos": [
-    "Registran sismo de magnitud 3.5 al noreste de San Felipe, Baja California",
-    "Rescatan a dos animales durante cateo por probable maltrato en San Felipe",
-    "Sismo de magnitud 3.6 sacude el noreste de San Felipe, Baja California"
-   ]
-  },
-  {
-   "termino": "serie",
-   "n": 18,
-   "n_previo": 6,
-   "momento": 12,
-   "zonas": {
-    "nacional": 14,
-    "Tijuana": 4
-   },
-   "fuentes": {
-    "imparcial": 10,
-    "uniradio": 3,
-    "soltij": 2,
-    "afn": 1,
-    "gn-ab49ec778314": 1,
     "zeta": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "0136c48d8a57ffb3",
-    "09a498f6da12c239",
-    "353ef793fc486de4",
-    "3b59a73029598036",
-    "3d5eeaf5155f3cfe",
-    "438ad9cbd94a6178",
-    "4d48db889bcf5888",
-    "5012254e7f67b90f",
-    "55ac7b1fef3022f1",
-    "5fc4aaa788e6c6bd",
-    "8c027bc953f472c5",
-    "9663352342b6b182",
-    "a5ab208120f224d5",
-    "bf8515e61992b0bc",
-    "cbcf4c8bc64622a6",
-    "cd6de1d77a83d321",
-    "d9933c27d5518196",
-    "df102b8efae72fb8"
+    "031606255bd34d14",
+    "05efe00958931ede",
+    "065210e6d154003e",
+    "0d0711fa56a2a42d",
+    "0dc73a9e639ba16d",
+    "1c01ef8aa25e982e",
+    "20b4129180a5c7e7",
+    "2b20559bc20107f7",
+    "3dbeccd9a4fd88b2",
+    "3ef1549e6eca4502",
+    "4c6757fe73e4e769",
+    "51093ce5ba36a65e",
+    "5f858b9e98a6804a",
+    "6b05e6dc3408f652",
+    "6ca201432c264582",
+    "716e508265cf083e",
+    "7ce123f0ed0531e0",
+    "89aaba9b34842b32",
+    "8d9834a24990bba0",
+    "ad20a88feed68050",
+    "bdd79cde3c4e79c1",
+    "cec950321218b2f6",
+    "e9e4bae70128f58b",
+    "f8cb0ef00e0ed579"
    ],
    "ejemplos": [
-    "Presos que reclaman su inocencia, asesinos en serie y parricidas, entre los 563 reos que evitarían la pena capital en California",
-    "Luis de Llano se pronuncia previo al estreno de la serie de Timbiriche y fija postura sobre el caso Sasha Sokol",
-    "Yankees quedan eliminados: el tijuanense Jonathan Aranda y Rays avanzan a la Serie de Campeonato de la Liga Americana"
+    "Mantiene sindicato del IMSS bloqueo en la Vicente Guerrero; esperan concentración al mediodía",
+    "Ensenada mantiene prealerta por Rachel; prevén lluvias de 50 mm",
+    "México prepara el Olinia eléctrico con velocidad máxima de 50 km/h para trayectos urbanos, mientras Japón mantiene al Honda N-Box entre sus vehículos más vendidos gracias a su espacio interior, motor pequeño de gasolina y enfoque práctico para la movilidad diaria"
    ]
   },
   {
@@ -481,55 +816,56 @@
    ]
   },
   {
-   "termino": "frente",
-   "n": 22,
-   "n_previo": 11,
+   "termino": "crisis",
+   "n": 19,
+   "n_previo": 8,
    "momento": 11,
    "zonas": {
-    "nacional": 14,
-    "Tijuana": 3,
-    "Mexicali": 2,
-    "San Diego": 2,
-    "Tecate": 1
+    "nacional": 8,
+    "Tijuana": 7,
+    "San Diego": 3,
+    "Mexicali": 2
    },
    "fuentes": {
-    "imparcial": 15,
-    "jornadabc": 2,
-    "afn": 1,
-    "gn-05eb1fd0e478": 1,
-    "lavoz": 1,
+    "imparcial": 6,
+    "afn": 2,
+    "lavoz": 2,
+    "gn-238af5028a39": 1,
+    "gn-5bad11419dae": 1,
+    "gn-65e51224f05e": 1,
+    "gn-e5254349f911": 1,
+    "gn-fdec5ef82f4b": 1,
+    "jornadabc": 1,
+    "kpbs": 1,
     "soltij": 1,
-    "uniradio": 1
+    "zeta": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "0227b6292b369290",
-    "065210e6d154003e",
-    "09a8fdb35c70caa6",
-    "184e9617a47d5ad1",
-    "2fbceb55c44df0f9",
-    "34c9ddaf00b8ca77",
-    "5310f71ce4be55db",
-    "5ba0817cd4a7de21",
-    "6977321af5b201f4",
-    "6a7d79594ee176e7",
-    "6b4c59f734d6a4e9",
-    "6c03b0c063bd107e",
-    "81b4031f10e507d8",
-    "896d0436398d03b5",
-    "aa367ff3363d4f3f",
-    "abcef8627f6ff80e",
-    "afdb2bb3bf2d0d29",
-    "bbcf5dd8cf1a6be7",
-    "e5fbd96be9610e4c",
+    "378b90946fe7ead9",
+    "51ebac50b3f17f5a",
+    "5a1fbb792c0aa074",
+    "5be01521e59c60b2",
+    "601e55bfcf0eb49a",
+    "62cfa1e49afa9627",
+    "858579c5d4dfbe29",
+    "88ff05a00990acca",
+    "8d3d88d47b59b4cf",
+    "95ec8cf8e654c239",
+    "9eafa5b0cf754e84",
+    "bc861d0047655231",
+    "cde5b9d25098ce6b",
+    "dbb025573216a2da",
+    "e8673932de22f88e",
     "ed2035c01e6f87a8",
-    "f12e2f412b55dd14",
-    "feb68a75df1f1fa6"
+    "ed4374f7bb4363d1",
+    "ef08d2f56bc9a178",
+    "f0ee9860d37a1a33"
    ],
    "ejemplos": [
     "Frente frío azotará el norte y noroeste de México en medio de la crisis por Simon y Rachel",
-    "La alianza de Morena y el Partido Verde rumbo a 2027 enfrenta desacuerdos tras la salida de un dirigente estatal que propone formar un frente político para impulsar un cambio",
-    "Fuga de drenaje frente a un kínder en la colonia Quinta Emilia provoca malos olores y zancudos desde hace más de una semana"
+    "Línea de crisis: 44 de cada 100 llamadas son por ansiedad, depresión y psiquiátricos",
+    "Estados Unidos impone sanciones financieras a la Corte Penal Internacional para limitar sus operaciones y desata una crisis con sus aliados, mientras la institución denuncia un ataque al estado de derecho"
    ]
   },
   {
@@ -577,22 +913,23 @@
    ]
   },
   {
-   "termino": "tormenta tropical",
+   "termino": "tormenta tropical rachel",
    "n": 14,
    "n_previo": 3,
    "momento": 11,
    "zonas": {
-    "nacional": 7,
-    "Tijuana": 3,
+    "Tijuana": 4,
+    "nacional": 4,
+    "Ensenada": 2,
     "estatal": 2,
-    "Ensenada": 1,
+    "San Felipe": 1,
     "Tecate": 1
    },
    "fuentes": {
-    "imparcial": 5,
-    "zeta": 2,
+    "imparcial": 3,
+    "zeta": 3,
+    "lavoz": 2,
     "bajanews": 1,
-    "gn-86d59fc60ccb": 1,
     "gn-a96a3aaee9d9": 1,
     "gn-b4bf210d5652": 1,
     "jornadabc": 1,
@@ -603,23 +940,23 @@
    "notas": [
     "0f4189811cf146ca",
     "14e9a5550e9ad3e5",
-    "1bcaf72c213a618b",
-    "29977eb287c62ba5",
-    "2d465d6185d0a53c",
+    "194d84d3c682e5bf",
+    "31118c6474e896bd",
+    "3ef1549e6eca4502",
     "5464d51af11c5e8e",
+    "57594cefb7746a19",
     "669fa06efcba7fd6",
-    "6868d6245f1e2ad3",
     "8da0cca6b12ce8a8",
     "8fad69ab5d292be8",
+    "95ad62fbd61bd1d3",
     "a9e1e0d9be8c603a",
-    "c43f162459b0f6b5",
     "c4dcd38af4aa5942",
-    "eff813bb65e16e28"
+    "d36bdc4a1c105a04"
    ],
    "ejemplos": [
-    "Cruz Roja Mexicana en alerta por Huracán Simón y Tormenta Tropical Rachel",
-    "Tormenta tropical Rachel: prevén lluvias y rachas de hasta 140 km/h en Baja California",
-    "Tormenta tropical Rachel: ¿cuándo llegará a Tijuana y qué día lloverá más?"
+    "Habilitan albergues en Tijuana ante llegada de Tormenta Tropical Rachel a BC",
+    "Alerta PC por aproximación de la tormenta tropical “Rachel” a SLRC",
+    "Cruz Roja Mexicana en alerta por Huracán Simón y Tormenta Tropical Rachel"
    ]
   },
   {
@@ -742,6 +1079,71 @@
    ]
   },
   {
+   "termino": "calor",
+   "n": 29,
+   "n_previo": 19,
+   "momento": 10,
+   "zonas": {
+    "Tijuana": 16,
+    "nacional": 4,
+    "estatal": 3,
+    "Mexicali": 2,
+    "San Diego": 2,
+    "Playas de Rosarito": 1,
+    "Tecate": 1
+   },
+   "fuentes": {
+    "imparcial": 10,
+    "afn": 5,
+    "soltij": 3,
+    "gn-208187d76ea7": 2,
+    "timessd": 2,
+    "uniradio": 2,
+    "gn-708d0b4af98b": 1,
+    "gn-d33696b00d82": 1,
+    "jornadabc": 1,
+    "lavoz": 1,
+    "rosarito": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "032c3a29a7977569",
+    "035424e98bf72c8f",
+    "038854e340ae2c43",
+    "080098331b076a43",
+    "0aed2b180360635a",
+    "0c7263e937ed903d",
+    "0f88fbe799402149",
+    "18b764b0637c0767",
+    "1f308e615f19ba64",
+    "21eb5fa4b04d5625",
+    "2acbdda8ed91ebd3",
+    "2ad24501d0e17c71",
+    "45b60c506f5add31",
+    "47449fde68a2bc76",
+    "533c54b772976113",
+    "55e8ff6b4f496db6",
+    "58de7060b1881205",
+    "634bc6b9082e40a2",
+    "700d54ce6ccc2e0a",
+    "864606924233ae1f",
+    "8c0e9cb483132141",
+    "aa3a6e364758219d",
+    "ac7e240e26381276",
+    "b9596de8598f6809",
+    "c2f61278d5ceb145",
+    "d49049217c2a5f46",
+    "f59171c04c07ba5b",
+    "f7b989be556eacf2",
+    "fb6ef29f348141c5"
+   ],
+   "ejemplos": [
+    "Aumento de temperatura del Pacífico favorece tormentas y olas de calor en BC, plantea especialista",
+    "Estudiantes del Cobach Rubén Vizcaíno protestan por falta de maestros, baños deteriorados y calor en las aulas",
+    "Del calor a las lluvias fuertes: prevén cambio drástico del clima en Baja California"
+   ]
+  },
+  {
    "termino": "presunto",
    "n": 26,
    "n_previo": 16,
@@ -800,55 +1202,54 @@
    ]
   },
   {
-   "termino": "crisis",
-   "n": 18,
-   "n_previo": 8,
+   "termino": "colonia",
+   "n": 20,
+   "n_previo": 10,
    "momento": 10,
    "zonas": {
-    "nacional": 8,
-    "Tijuana": 6,
-    "San Diego": 3,
-    "Mexicali": 2
+    "Tijuana": 11,
+    "nacional": 5,
+    "Playas de Rosarito": 2,
+    "Mexicali": 1,
+    "Tecate": 1
    },
    "fuentes": {
     "imparcial": 6,
-    "lavoz": 2,
-    "afn": 1,
-    "gn-238af5028a39": 1,
-    "gn-5bad11419dae": 1,
-    "gn-65e51224f05e": 1,
-    "gn-e5254349f911": 1,
-    "gn-fdec5ef82f4b": 1,
-    "jornadabc": 1,
-    "kpbs": 1,
+    "afn": 3,
+    "jornadabc": 3,
+    "rosarito": 3,
+    "zeta": 2,
     "soltij": 1,
-    "zeta": 1
+    "tecate": 1,
+    "uniradio": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "51ebac50b3f17f5a",
-    "5a1fbb792c0aa074",
-    "5be01521e59c60b2",
-    "601e55bfcf0eb49a",
-    "62cfa1e49afa9627",
-    "858579c5d4dfbe29",
-    "88ff05a00990acca",
-    "8d3d88d47b59b4cf",
-    "95ec8cf8e654c239",
-    "9eafa5b0cf754e84",
-    "bc861d0047655231",
-    "cde5b9d25098ce6b",
-    "dbb025573216a2da",
-    "e8673932de22f88e",
-    "ed2035c01e6f87a8",
-    "ed4374f7bb4363d1",
-    "ef08d2f56bc9a178",
-    "f0ee9860d37a1a33"
+    "00bddab1db79c117",
+    "063b9c2a7ff54d46",
+    "106b49a812ca5fda",
+    "149ba4945bbb3196",
+    "1ee6ea074129c81f",
+    "301ef894c296fcfe",
+    "31c27006c2172c19",
+    "39dbafa33f6b6cf5",
+    "3eab0e3153b6bbda",
+    "593e7d1e5021bbef",
+    "621efffb2c78c868",
+    "7c551ef60cb15474",
+    "a2f15d40d0da941f",
+    "a8fba80d01de9711",
+    "af8eb21845bd1941",
+    "bbcf5dd8cf1a6be7",
+    "bbf8ec1ed722f5f6",
+    "c016ca2d765fe657",
+    "cdab19f4197b2ad4",
+    "d8d692385e773e83"
    ],
    "ejemplos": [
-    "Frente frío azotará el norte y noroeste de México en medio de la crisis por Simon y Rachel",
-    "Línea de crisis: 44 de cada 100 llamadas son por ansiedad, depresión y psiquiátricos",
-    "Estados Unidos impone sanciones financieras a la Corte Penal Internacional para limitar sus operaciones y desata una crisis con sus aliados, mientras la institución denuncia un ataque al estado de derecho"
+    "Cuatro postes caídos dejan sin luz a la colonia Monte San Antonio de Tijuana",
+    "Familia queda sin vivienda tras demolición en la colonia Libertad",
+    "Ataque armado deja a un joven sin vida en la colonia Solidaridad"
    ]
   },
   {
@@ -892,227 +1293,20 @@
    ]
   },
   {
-   "termino": "calor",
-   "n": 28,
-   "n_previo": 19,
-   "momento": 9,
-   "zonas": {
-    "Tijuana": 15,
-    "nacional": 4,
-    "estatal": 3,
-    "Mexicali": 2,
-    "San Diego": 2,
-    "Playas de Rosarito": 1,
-    "Tecate": 1
-   },
-   "fuentes": {
-    "imparcial": 10,
-    "afn": 5,
-    "gn-208187d76ea7": 2,
-    "soltij": 2,
-    "timessd": 2,
-    "uniradio": 2,
-    "gn-708d0b4af98b": 1,
-    "gn-d33696b00d82": 1,
-    "jornadabc": 1,
-    "lavoz": 1,
-    "rosarito": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "032c3a29a7977569",
-    "035424e98bf72c8f",
-    "038854e340ae2c43",
-    "080098331b076a43",
-    "0aed2b180360635a",
-    "0c7263e937ed903d",
-    "0f88fbe799402149",
-    "18b764b0637c0767",
-    "1f308e615f19ba64",
-    "21eb5fa4b04d5625",
-    "2acbdda8ed91ebd3",
-    "2ad24501d0e17c71",
-    "45b60c506f5add31",
-    "47449fde68a2bc76",
-    "533c54b772976113",
-    "55e8ff6b4f496db6",
-    "58de7060b1881205",
-    "634bc6b9082e40a2",
-    "700d54ce6ccc2e0a",
-    "8c0e9cb483132141",
-    "aa3a6e364758219d",
-    "ac7e240e26381276",
-    "b9596de8598f6809",
-    "c2f61278d5ceb145",
-    "d49049217c2a5f46",
-    "f59171c04c07ba5b",
-    "f7b989be556eacf2",
-    "fb6ef29f348141c5"
-   ],
-   "ejemplos": [
-    "Estudiantes del Cobach Rubén Vizcaíno protestan por falta de maestros, baños deteriorados y calor en las aulas",
-    "Del calor a las lluvias fuertes: prevén cambio drástico del clima en Baja California",
-    "VIDEO.- Piden en Tijuana incorporar protecciones contra el calor en contratos colectivos"
-   ]
-  },
-  {
-   "termino": "fiestas",
-   "n": 22,
-   "n_previo": 13,
-   "momento": 9,
-   "zonas": {
-    "nacional": 13,
-    "Mexicali": 5,
-    "Tijuana": 3,
-    "estatal": 1
-   },
-   "fuentes": {
-    "imparcial": 12,
-    "lavoz": 5,
-    "jornadabc": 2,
-    "afn": 1,
-    "uniradio": 1,
-    "zeta": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "0427972fd22e6c47",
-    "0d86734a6bdef74e",
-    "1a0b82de07d9c2d8",
-    "2d956029479fd606",
-    "39b3686176786a83",
-    "46d2253001484c95",
-    "566183916f34187e",
-    "69bce26cda248bef",
-    "6b1af496ffdb4335",
-    "7d33a192d0aab192",
-    "7d60bc4cda01382b",
-    "7dbafbea36ab9a73",
-    "8e5ff5d4d6e0b516",
-    "b01952a1bd49dac4",
-    "c8c0626361bf137f",
-    "c98dd207256e84e9",
-    "cb17f95670444d93",
-    "cd7741dbbc03b04c",
-    "cd8767d02437b133",
-    "e6866fa0a22f8a91",
-    "f17bd35769188394",
-    "fef9e123bd9ac996"
-   ],
-   "ejemplos": [
-    "Una mujer de 59 años perdió su empleo en HP y se mudó a la Antártida para trabajar en una estación científica, donde recibe mercancías, controla inventarios y disfruta de una vida social que incluye fiestas hasta la madrugada",
-    "Trasladarán a Fiestas del Sol solo a familias previamente registradas",
-    "Gobierno de Mexicali trasladará a familias del Valle a las Fiestas del Sol este sábado"
-   ]
-  },
-  {
-   "termino": "colonia",
-   "n": 19,
-   "n_previo": 10,
-   "momento": 9,
-   "zonas": {
-    "Tijuana": 10,
-    "nacional": 5,
-    "Playas de Rosarito": 2,
-    "Mexicali": 1,
-    "Tecate": 1
-   },
-   "fuentes": {
-    "imparcial": 6,
-    "afn": 3,
-    "rosarito": 3,
-    "jornadabc": 2,
-    "zeta": 2,
-    "soltij": 1,
-    "tecate": 1,
-    "uniradio": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "00bddab1db79c117",
-    "063b9c2a7ff54d46",
-    "106b49a812ca5fda",
-    "149ba4945bbb3196",
-    "1ee6ea074129c81f",
-    "31c27006c2172c19",
-    "39dbafa33f6b6cf5",
-    "3eab0e3153b6bbda",
-    "593e7d1e5021bbef",
-    "621efffb2c78c868",
-    "7c551ef60cb15474",
-    "a2f15d40d0da941f",
-    "a8fba80d01de9711",
-    "af8eb21845bd1941",
-    "bbcf5dd8cf1a6be7",
-    "bbf8ec1ed722f5f6",
-    "c016ca2d765fe657",
-    "cdab19f4197b2ad4",
-    "d8d692385e773e83"
-   ],
-   "ejemplos": [
-    "Familia queda sin vivienda tras demolición en la colonia Libertad",
-    "Ataque armado deja a un joven sin vida en la colonia Solidaridad",
-    "Fuga de drenaje frente a un kínder en la colonia Quinta Emilia provoca malos olores y zancudos desde hace más de una semana"
-   ]
-  },
-  {
-   "termino": "lopez",
-   "n": 19,
-   "n_previo": 10,
-   "momento": 9,
-   "zonas": {
-    "nacional": 18,
-    "Tijuana": 1
-   },
-   "fuentes": {
-    "imparcial": 13,
-    "uniradio": 4,
-    "afn": 1,
-    "gn-291a95aaf8ce": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "20503fb7aa909329",
-    "24c0f790c5457a89",
-    "2abc4625faef0e4d",
-    "34e7cc229bbd6c3b",
-    "413a9dbd08192893",
-    "456dab1c958f3305",
-    "4c57dea03af4a55c",
-    "62c8c729db29cbdb",
-    "69526877536e5b16",
-    "6cc956b9a81a9cd8",
-    "71d2e5c817ca525c",
-    "89ead4fbcc64bdb7",
-    "8af34f62b9ba112f",
-    "95ec8cf8e654c239",
-    "c9b1e34baa9bcddf",
-    "d8d6f0004c540986",
-    "e7461665f9a7109e",
-    "f0c1508a2e4cb32d",
-    "f4def019317bc816"
-   ],
-   "ejemplos": [
-    "Karim López recibió más minutos con Grizzlies y respondió con su mejor partido de pretemporada ante Bulls",
-    "Martha López asume presidencia del Colegio de Abogados Laboralistas de BC",
-    "Grizzlies vs Bulls: A qué hora y dónde ver HOY a Karim López en la pretemporada de la NBA"
-   ]
-  },
-  {
    "termino": "familiares",
-   "n": 12,
+   "n": 13,
    "n_previo": 3,
-   "momento": 9,
+   "momento": 10,
    "zonas": {
     "nacional": 6,
     "Mexicali": 3,
-    "Ensenada": 1,
+    "Ensenada": 2,
     "Tijuana": 1,
     "estatal": 1
    },
    "fuentes": {
     "imparcial": 6,
-    "afn": 2,
+    "afn": 3,
     "gn-9029938f1c9d": 1,
     "lavoz": 1,
     "soltij": 1,
@@ -1120,6 +1314,7 @@
    },
    "un_solo_medio": false,
    "notas": [
+    "012f608b5005a8b1",
     "0821144b593c6010",
     "359880ecd157336d",
     "4251db92a0f5ad5e",
@@ -1135,93 +1330,64 @@
    ],
    "ejemplos": [
     "Congreso de BC busca frenar que funcionarios acomoden a sus familiares en el servicio público",
-    "DIF busca familiares de dos bebés bajo resguardo en Mexicali para su reintegración familiar",
-    "Convivencias familiares en espacios especializados"
+    "Revocarán terreno asignado a juzgados familiares en Ensenada",
+    "DIF busca familiares de dos bebés bajo resguardo en Mexicali para su reintegración familiar"
    ]
   },
   {
-   "termino": "activan",
+   "termino": "huracan simon",
    "n": 10,
-   "n_previo": 1,
-   "momento": 9,
-   "zonas": {
-    "nacional": 4,
-    "estatal": 3,
-    "Tijuana": 2,
-    "Mexicali": 1
-   },
-   "fuentes": {
-    "imparcial": 5,
-    "uniradio": 2,
-    "afn": 1,
-    "gn-dc1580cd9943": 1,
-    "jornadabc": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "0e0aba448b528afd",
-    "3f4d9cc5a3b62b3c",
-    "4154ab2a29f6a98b",
-    "484a600563412fb0",
-    "7917cc40a6ef43f0",
-    "7e0ba9cc33e6d7bb",
-    "9807847cfa77abb3",
-    "99b5ea11f8b0fb9d",
-    "c215fb2433a77dad",
-    "fa08e0a2a63bf716"
-   ],
-   "ejemplos": [
-    "Activan Consejo Estatal de Protección Civil en Baja California por el fenómeno de ‘El Niño’",
-    "Activan Consejo Estatal de Protección Civil ante lluvias en BC de este fin de semana",
-    "Activan Plan Marina en Baja California ante posibles lluvias y vientos por “Rachel”"
-   ]
-  },
-  {
-   "termino": "cjng",
-   "n": 9,
    "n_previo": 0,
-   "momento": 9,
+   "momento": 10,
    "zonas": {
-    "nacional": 3,
-    "Mexicali": 2,
-    "Tecate": 2,
-    "Tijuana": 2
+    "nacional": 9,
+    "Tijuana": 1
    },
    "fuentes": {
-    "imparcial": 3,
-    "zeta": 3,
-    "gn-250e3d3bf1ff": 2,
-    "gn-2e78384f67ad": 1
+    "imparcial": 6,
+    "uniradio": 3,
+    "zeta": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "1f691c3a74c78dfc",
-    "3dfad725230ee112",
-    "62a08c8a0c0f1600",
-    "7bb95d133572d43a",
-    "97c12595ec7b44a5",
-    "b3d688cbc6070fac",
-    "c9b1e34baa9bcddf",
-    "dfaa0c15f0f372ce",
-    "fb2b0af7969dc73d"
+    "0a7e9364adb276d5",
+    "1113aaa5096f45fa",
+    "194d84d3c682e5bf",
+    "7244bc03b0447c7d",
+    "7ee61de49fad622f",
+    "8ba05aa4b544e22c",
+    "8fad69ab5d292be8",
+    "94929d6dc1b8c687",
+    "ae6950a7d94bae16",
+    "d2a1030f9379fd99"
    ],
    "ejemplos": [
-    "Juez impone prisión preventiva al “Tanque” presunto operador del CJNG",
-    "Dejan cuerpo con narcomensaje para El Mechacorta, operador del CJNG y La Chapiza en Mexicali",
-    "Dejan cuerpo con narcomensaje para operador del CJNG y «La Chapiza», en Mexicali"
+    "Huracán Simón alcanza categoría 3 y amenaza costas del Pacífico mexicano",
+    "Sheinbaum anuncia suspensión de actividades no esenciales por el huracán Simón en cuatro estados",
+    "Cruz Roja Mexicana en alerta por Huracán Simón y Tormenta Tropical Rachel"
    ]
   }
  ],
  "descartados": [
   {
    "termino": "estados",
-   "n": 46,
+   "n": 52,
    "porque": "duplica «estados unidos»"
   },
   {
    "termino": "unidos",
-   "n": 36,
+   "n": 38,
    "porque": "duplica «estados unidos»"
+  },
+  {
+   "termino": "tormenta",
+   "n": 24,
+   "porque": "duplica «tropical»"
+  },
+  {
+   "termino": "proteccion",
+   "n": 23,
+   "porque": "duplica «proteccion civil»"
   },
   {
    "termino": "cancer",
@@ -1229,24 +1395,14 @@
    "porque": "duplica «cancer mama»"
   },
   {
-   "termino": "prision",
+   "termino": "tormenta tropical",
    "n": 20,
-   "porque": "duplica «prision preventiva»"
-  },
-  {
-   "termino": "tropical",
-   "n": 20,
-   "porque": "duplica «tormenta tropical»"
+   "porque": "duplica «tormenta tropical rachel»"
   },
   {
    "termino": "altas",
    "n": 19,
    "porque": "duplica «altas temperaturas»"
-  },
-  {
-   "termino": "proteccion",
-   "n": 19,
-   "porque": "duplica «proteccion civil»"
   },
   {
    "termino": "temperaturas",
@@ -1257,6 +1413,11 @@
    "termino": "sismo",
    "n": 18,
    "porque": "duplica «sismo magnitud sacude»"
+  },
+  {
+   "termino": "civil",
+   "n": 17,
+   "porque": "duplica «proteccion civil»"
   },
   {
    "termino": "magnitud",
@@ -1279,14 +1440,19 @@
    "porque": "duplica «sismo magnitud sacude»"
   },
   {
-   "termino": "tormenta",
-   "n": 16,
-   "porque": "duplica «tormenta tropical»"
+   "termino": "pronostico",
+   "n": 14,
+   "porque": "duplica «pronostico lluvias»"
   },
   {
-   "termino": "civil",
-   "n": 15,
-   "porque": "duplica «proteccion civil»"
+   "termino": "simon",
+   "n": 14,
+   "porque": "duplica «huracan simon»"
+  },
+  {
+   "termino": "tropical rachel",
+   "n": 14,
+   "porque": "duplica «tormenta tropical rachel»"
   },
   {
    "termino": "agaton",
@@ -1302,21 +1468,11 @@
    "termino": "sacude",
    "n": 13,
    "porque": "duplica «sismo magnitud sacude»"
-  },
-  {
-   "termino": "pronostico",
-   "n": 12,
-   "porque": "duplica «pronostico lluvias»"
-  },
-  {
-   "termino": "datos",
-   "n": 11,
-   "porque": "duplica «datos actualizados»"
   }
  ],
  "por_zona": {
   "Tijuana": {
-   "notas_ventana": 552,
+   "notas_ventana": 602,
    "minimo": 3,
    "temas": [
     {
@@ -1410,16 +1566,16 @@
     },
     {
      "termino": "calor",
-     "n": 15,
+     "n": 16,
      "n_previo": 6,
-     "momento": 9,
+     "momento": 10,
      "zonas": {
-      "Tijuana": 15
+      "Tijuana": 16
      },
      "fuentes": {
       "imparcial": 5,
       "afn": 4,
-      "soltij": 2,
+      "soltij": 3,
       "uniradio": 2,
       "gn-708d0b4af98b": 1,
       "jornadabc": 1
@@ -1436,6 +1592,7 @@
       "533c54b772976113",
       "58de7060b1881205",
       "700d54ce6ccc2e0a",
+      "864606924233ae1f",
       "8c0e9cb483132141",
       "aa3a6e364758219d",
       "ac7e240e26381276",
@@ -1443,9 +1600,80 @@
       "f7b989be556eacf2"
      ],
      "ejemplos": [
+      "Aumento de temperatura del Pacífico favorece tormentas y olas de calor en BC, plantea especialista",
       "VIDEO.- Piden en Tijuana incorporar protecciones contra el calor en contratos colectivos",
-      "Se quejan padres por clases presenciales pese a ola de calor y apagones",
-      "Más de mil 400 escuelas públicas de Tijuana operan sin aire acondicionado ante ola de calor"
+      "Se quejan padres por clases presenciales pese a ola de calor y apagones"
+     ]
+    },
+    {
+     "termino": "incendio",
+     "n": 11,
+     "n_previo": 1,
+     "momento": 10,
+     "zonas": {
+      "Tijuana": 11,
+      "Mexicali": 1
+     },
+     "fuentes": {
+      "imparcial": 4,
+      "jornadabc": 2,
+      "zeta": 2,
+      "afn": 1,
+      "gn-df1d301d141c": 1,
+      "lavoz": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "0cb84d0775fbdcc8",
+      "0ec25d66f35247c8",
+      "149ba4945bbb3196",
+      "3e68e375c4c440ba",
+      "725211d78ae0b31c",
+      "80405bb81c9cdffc",
+      "8e4795609b114a28",
+      "ba07ea835d0a0357",
+      "bbf8ec1ed722f5f6",
+      "d8d692385e773e83",
+      "df69bcb2f236eff4"
+     ],
+     "ejemplos": [
+      "Incendio en Los Reyes deja un hombre lesionado",
+      "Incendio en El Pípila deja a 2 bomberos afectados",
+      "Sin lesionados incendio de la calle sexta de Tijuana."
+     ]
+    },
+    {
+     "termino": "rachel",
+     "n": 11,
+     "n_previo": 1,
+     "momento": 10,
+     "zonas": {
+      "Tijuana": 11
+     },
+     "fuentes": {
+      "zeta": 4,
+      "afn": 3,
+      "imparcial": 2,
+      "soltij": 2
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "3dbeccd9a4fd88b2",
+      "3ef1549e6eca4502",
+      "400c8c955dc3a5e9",
+      "512deffca8e68faf",
+      "5d69c414e2b636f6",
+      "68ea6b8b930f8f90",
+      "8fad69ab5d292be8",
+      "a9e1e0d9be8c603a",
+      "ae643e0d0c465ba5",
+      "d36bdc4a1c105a04",
+      "e51de05f0883d884"
+     ],
+     "ejemplos": [
+      "SSPCM de Tijuana pide prevenir riesgos ante lluvias por remanentes de Rachel",
+      "Habilitan albergues en Tijuana ante llegada de Tormenta Tropical Rachel a BC",
+      "Cruz Roja Mexicana en alerta por Huracán Simón y Tormenta Tropical Rachel"
      ]
     },
     {
@@ -1485,53 +1713,17 @@
      ]
     },
     {
-     "termino": "incendio",
-     "n": 10,
-     "n_previo": 1,
+     "termino": "colonia",
+     "n": 11,
+     "n_previo": 2,
      "momento": 9,
      "zonas": {
-      "Tijuana": 10,
-      "Mexicali": 1
-     },
-     "fuentes": {
-      "imparcial": 4,
-      "jornadabc": 2,
-      "afn": 1,
-      "gn-df1d301d141c": 1,
-      "lavoz": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0cb84d0775fbdcc8",
-      "149ba4945bbb3196",
-      "3e68e375c4c440ba",
-      "725211d78ae0b31c",
-      "80405bb81c9cdffc",
-      "8e4795609b114a28",
-      "ba07ea835d0a0357",
-      "bbf8ec1ed722f5f6",
-      "d8d692385e773e83",
-      "df69bcb2f236eff4"
-     ],
-     "ejemplos": [
-      "Incendio en El Pípila deja a 2 bomberos afectados",
-      "Sin lesionados incendio de la calle sexta de Tijuana.",
-      "Choque entre dos tráileres deja dos muertos y provoca incendio en carretera a Tijuana"
-     ]
-    },
-    {
-     "termino": "colonia",
-     "n": 10,
-     "n_previo": 2,
-     "momento": 8,
-     "zonas": {
-      "Tijuana": 10
+      "Tijuana": 11
      },
      "fuentes": {
       "afn": 3,
+      "jornadabc": 3,
       "imparcial": 2,
-      "jornadabc": 2,
       "rosarito": 1,
       "soltij": 1,
       "zeta": 1
@@ -1541,6 +1733,7 @@
       "063b9c2a7ff54d46",
       "149ba4945bbb3196",
       "1ee6ea074129c81f",
+      "301ef894c296fcfe",
       "31c27006c2172c19",
       "a2f15d40d0da941f",
       "a8fba80d01de9711",
@@ -1550,9 +1743,9 @@
       "d8d692385e773e83"
      ],
      "ejemplos": [
+      "Cuatro postes caídos dejan sin luz a la colonia Monte San Antonio de Tijuana",
       "Familia queda sin vivienda tras demolición en la colonia Libertad",
-      "Asesinan a un hombre en la colonia Rinconada de Tijuana",
-      "Acribillan a balazos a un hombre de 47 años de edad en la colonia Ampliación Solidaridad"
+      "Asesinan a un hombre en la colonia Rinconada de Tijuana"
      ]
     },
     {
@@ -1637,6 +1830,81 @@
       "Suspenden clases en Tijuana por altas temperaturas; aplicará desde esta tarde",
       "Suspenden clases presenciales en Tijuana este 6 y 7 de octubre por calor",
       "Suspenden clases en Tijuana por altas temperaturas; medida inicia este martes: Marina del Pilar"
+     ]
+    },
+    {
+     "termino": "lluvias",
+     "n": 19,
+     "n_previo": 13,
+     "momento": 6,
+     "zonas": {
+      "Tijuana": 19
+     },
+     "fuentes": {
+      "afn": 6,
+      "imparcial": 6,
+      "jornadabc": 3,
+      "soltij": 3,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "035424e98bf72c8f",
+      "0e0aba448b528afd",
+      "23082be4f720d17e",
+      "358b7fd4f700c6e1",
+      "3fd8ce82eeedd2fd",
+      "512deffca8e68faf",
+      "59b0d48b60c8826a",
+      "68ea6b8b930f8f90",
+      "761024eef5bfc212",
+      "8f12b0124f7ef8fb",
+      "ae5e99cfb48e407a",
+      "ae643e0d0c465ba5",
+      "b908b77e06e9dc0c",
+      "c215fb2433a77dad",
+      "e17e343b2ebe90db",
+      "e51de05f0883d884",
+      "f6738f9fcd3ad84e",
+      "f9d29564efb2b92e",
+      "fec231266c721592"
+     ],
+     "ejemplos": [
+      "Recomiendan medidas preventivas ante pronóstico de lluvias este fin de semana",
+      "Revisa techos, canaletas y láminas: cómo evitar accidentes ante las lluvias del fin de semana en Tijuana",
+      "SSPCM de Tijuana pide prevenir riesgos ante lluvias por remanentes de Rachel"
+     ]
+    },
+    {
+     "termino": "trabajadores",
+     "n": 8,
+     "n_previo": 2,
+     "momento": 6,
+     "zonas": {
+      "Tijuana": 8
+     },
+     "fuentes": {
+      "soltij": 3,
+      "afn": 2,
+      "imparcial": 1,
+      "jornadabc": 1,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "112e89e3a4d513a7",
+      "2cd20c0b16028146",
+      "751e4d83c578c5b3",
+      "82b3c0c7abd7aaa8",
+      "b2434061e48493ad",
+      "b3a2fe9f608fe25c",
+      "e61474b70026ce98",
+      "e8fb9bdf5b077e84"
+     ],
+     "ejemplos": [
+      "Industria manufacturera demanda trabajadores con mayor preparación técnica y especializada",
+      "Protestan trabajadores del IMSS en Tijuana por falta de insumos",
+      "Se manifestaron trabajadores del IMSS en Tijuana; exigen incremento salarial, medicamentos e insumos"
      ]
     },
     {
@@ -1817,6 +2085,34 @@
      ]
     },
     {
+     "termino": "florido",
+     "n": 5,
+     "n_previo": 0,
+     "momento": 5,
+     "zonas": {
+      "Tijuana": 5
+     },
+     "fuentes": {
+      "zeta": 2,
+      "afn": 1,
+      "imparcial": 1,
+      "soltij": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "6b74fd9aae7ebcf4",
+      "9531c9dac463783b",
+      "cc83c98161dbd8a0",
+      "d48b52d9e24eb44a",
+      "f8ba6d9aa07fc3aa"
+     ],
+     "ejemplos": [
+      "Abandonan restos humanos con amenazas en El Florido",
+      "El Florido lanza su marca propia con precios más bajos en productos básicos para las familias",
+      "El Florido lanza marca propia con productos de la canasta básica"
+     ]
+    },
+    {
      "termino": "fraude",
      "n": 5,
      "n_previo": 0,
@@ -1926,6 +2222,43 @@
      ]
     },
     {
+     "termino": "hombre",
+     "n": 13,
+     "n_previo": 9,
+     "momento": 4,
+     "zonas": {
+      "Tijuana": 13
+     },
+     "fuentes": {
+      "afn": 4,
+      "imparcial": 3,
+      "zeta": 3,
+      "jornadabc": 2,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "063b9c2a7ff54d46",
+      "0b0b82a7b8fba7d4",
+      "0ec25d66f35247c8",
+      "103881519c4e42cb",
+      "31c27006c2172c19",
+      "3dfad725230ee112",
+      "4e6f43820e7c0794",
+      "606f96994569b13d",
+      "731a6240c229ccde",
+      "a1ff245a142957c1",
+      "a8fba80d01de9711",
+      "af8eb21845bd1941",
+      "c4d04f51364956c0"
+     ],
+     "ejemplos": [
+      "Detienen a hombre por presunta violencia familiar en Tijuana",
+      "Incendio en Los Reyes deja un hombre lesionado",
+      "Detienen a hombre acusado de empujar a una persona por escaleras en Tijuana"
+     ]
+    },
+    {
      "termino": "colonias",
      "n": 9,
      "n_previo": 5,
@@ -1990,151 +2323,11 @@
       "Colonos del Valle exigen en el Congreso atención urgente por crisis eléctrica",
       "Nuevos parques industriales de Tijuana podrían asumir el costo de infraestructura eléctrica"
      ]
-    },
-    {
-     "termino": "denuncian",
-     "n": 6,
-     "n_previo": 2,
-     "momento": 4,
-     "zonas": {
-      "Tijuana": 6
-     },
-     "fuentes": {
-      "soltij": 2,
-      "zeta": 2,
-      "afn": 1,
-      "imparcial": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "7cfa9fbd7e9946d0",
-      "89d1804e3de1bdcb",
-      "a9b5c7ef9b7c7015",
-      "c78f67e7aa0a8440",
-      "dc789641d76e3309",
-      "fee0c6fcacd53683"
-     ],
-     "ejemplos": [
-      "Estudiantes de Cobach Rubén Vizcaíno denuncian irregularidades en manejo de recursos",
-      "Denuncian presunto intento de desalojo tras presunto fraude inmobiliario en San Antonio de los Buenos",
-      "Denuncian deterioro de salud de mujer tras un año y medio en espera de estudios en el IMSS"
-     ]
-    },
-    {
-     "termino": "ismael burgueno",
-     "n": 5,
-     "n_previo": 1,
-     "momento": 4,
-     "zonas": {
-      "Tijuana": 5,
-      "San Diego": 1
-     },
-     "fuentes": {
-      "afn": 1,
-      "gn-dc1580cd9943": 1,
-      "imparcial": 1,
-      "jornadabc": 1,
-      "rosarito": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0227b6292b369290",
-      "5c40b2a9e83b48d3",
-      "74d8e425faa7acff",
-      "a79f877cd3bd0882",
-      "af5b5d86cbf3a749"
-     ],
-     "ejemplos": [
-      "Ismael Burgueño buscará la coordinación de Morena en Tijuana",
-      "¿Darán el \"andreazo\" en Tijuana con Ismael Burgueño?",
-      "Ismael Burgueño Administration Delivers Major Upgrades to Infrastructure and Mobility at San Ysidro and Otay Ports of Entry"
-     ]
-    },
-    {
-     "termino": "laboral",
-     "n": 5,
-     "n_previo": 1,
-     "momento": 4,
-     "zonas": {
-      "Tijuana": 5
-     },
-     "fuentes": {
-      "soltij": 3,
-      "afn": 1,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "2d89d85bff85c38a",
-      "61b52ce677f821bc",
-      "84014c6b0920ff34",
-      "ad20a88feed68050",
-      "dbcfea8c55bc9c8d"
-     ],
-     "ejemplos": [
-      "Maquiladoras de BC prevén aumento de costos y automatización por salario y jornada laboral de 2027",
-      "Plantean ampliar descansos e hidratación laboral ante altas temperaturas",
-      "Se anticipan industrias de Tijuana con ajustes ante reducción gradual de la jornada laboral: Arhitac"
-     ]
-    },
-    {
-     "termino": "maquiladoras",
-     "n": 5,
-     "n_previo": 1,
-     "momento": 4,
-     "zonas": {
-      "Tijuana": 5
-     },
-     "fuentes": {
-      "soltij": 4,
-      "imparcial": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "20d2b7c1bdccad8b",
-      "2d89d85bff85c38a",
-      "84014c6b0920ff34",
-      "85a65a97eac288c3",
-      "f0401695c5b8e78e"
-     ],
-     "ejemplos": [
-      "Hasta 90% de las maquiladoras de Tijuana ya utiliza inteligencia artificial en sus operaciones",
-      "Reformas aduaneras obligan a maquiladoras a revisar sus operaciones",
-      "Maquiladoras de BC prevén más costos y automatización ante cambios laborales en 2027"
-     ]
-    },
-    {
-     "termino": "rachel",
-     "n": 5,
-     "n_previo": 1,
-     "momento": 4,
-     "zonas": {
-      "Tijuana": 5
-     },
-     "fuentes": {
-      "zeta": 2,
-      "afn": 1,
-      "imparcial": 1,
-      "soltij": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "512deffca8e68faf",
-      "5d69c414e2b636f6",
-      "8fad69ab5d292be8",
-      "a9e1e0d9be8c603a",
-      "ae643e0d0c465ba5"
-     ],
-     "ejemplos": [
-      "Cruz Roja Mexicana en alerta por Huracán Simón y Tormenta Tropical Rachel",
-      "Tormenta tropical Rachel: ¿cuándo llegará a Tijuana y qué día lloverá más?",
-      "Alerta en BC: \"Rachel\" traerá lluvias y vientos de hasta 140 kph el fin de semana"
-     ]
     }
    ]
   },
   "Mexicali": {
-   "notas_ventana": 212,
+   "notas_ventana": 226,
    "minimo": 3,
    "temas": [
     {
@@ -2172,6 +2365,60 @@
       "Gobierno de Mexicali trasladará a familias del Valle a las Fiestas del Sol este sábado",
       "Descartan intento de privación de la libertad en caso de hombre presuntamente asesinado por su novia en el Valle de Mexicali",
       "Advierten crisis hídrica en el Valle de Mexicali"
+     ]
+    },
+    {
+     "termino": "mujer",
+     "n": 6,
+     "n_previo": 0,
+     "momento": 6,
+     "zonas": {
+      "Mexicali": 6
+     },
+     "fuentes": {
+      "lavoz": 5,
+      "imparcial": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "3d4f02b7b215e417",
+      "52ecdd4b156bebe7",
+      "5b711c8539c1308e",
+      "5e0b0f5c63094ac2",
+      "770d2506210b6c33",
+      "b8d8076e03dd7856"
+     ],
+     "ejemplos": [
+      "Mujer que chocó intencionalmente el auto de su ex llevará proceso en libertad",
+      "Queda en prisión sujeto que extorsionó a una mujer con difundir video íntimo",
+      "Rescatan a mujer brasileña y sus dos hijas tras alerta de un adolescente ante la Patrulla Fronteriza"
+     ]
+    },
+    {
+     "termino": "morena",
+     "n": 6,
+     "n_previo": 1,
+     "momento": 5,
+     "zonas": {
+      "Mexicali": 6
+     },
+     "fuentes": {
+      "afn": 3,
+      "lavoz": 3
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "0c29c796e049f5c4",
+      "66c19dc75ce2655b",
+      "6b93553d537f0341",
+      "b0723bf9f85acb47",
+      "bea716734ad210b9",
+      "cc4420526e65f643"
+     ],
+     "ejemplos": [
+      "Confirma Armando Samaniego que buscará la coordinación de Morena en Mexicali",
+      "Exsenadora Alejandra León buscará la candidatura de Morena a la alcaldía de Mexicali",
+      "Busca alcaldía de Mexicali Eva Gricelda Rodríguez para Morena"
      ]
     },
     {
@@ -2282,33 +2529,7 @@
      ]
     },
     {
-     "termino": "morena",
-     "n": 5,
-     "n_previo": 1,
-     "momento": 4,
-     "zonas": {
-      "Mexicali": 5
-     },
-     "fuentes": {
-      "lavoz": 3,
-      "afn": 2
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0c29c796e049f5c4",
-      "66c19dc75ce2655b",
-      "6b93553d537f0341",
-      "b0723bf9f85acb47",
-      "cc4420526e65f643"
-     ],
-     "ejemplos": [
-      "Exsenadora Alejandra León buscará la candidatura de Morena a la alcaldía de Mexicali",
-      "Busca alcaldía de Mexicali Eva Gricelda Rodríguez para Morena",
-      "Exdiputada Eva Rodríguez buscará la coordinación de Morena en Mexicali"
-     ]
-    },
-    {
-     "termino": "mujer",
+     "termino": "avanza",
      "n": 4,
      "n_previo": 0,
      "momento": 4,
@@ -2316,20 +2537,21 @@
       "Mexicali": 4
      },
      "fuentes": {
-      "lavoz": 3,
-      "imparcial": 1
+      "imparcial": 2,
+      "lavoz": 1,
+      "uniradio": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "3d4f02b7b215e417",
-      "52ecdd4b156bebe7",
-      "5e0b0f5c63094ac2",
-      "b8d8076e03dd7856"
+      "0187fafcd9a840e3",
+      "0436fc2096325be0",
+      "e8140669569a704d",
+      "ef9680c2da5ecdf3"
      ],
      "ejemplos": [
-      "Rescatan a mujer brasileña y sus dos hijas tras alerta de un adolescente ante la Patrulla Fronteriza",
-      "Cae fecundidad a menos de 2 hijos por mujer en Mexicali; población envejece y frena su crecimiento",
-      "Detienena mujer acusada de chocar intencionalmente el auto de su presunta expareja"
+      "Avanza propuesta para permitir bebidas alcohólicas en cines y teatros",
+      "Avanza reparación de afectaciones en la bóveda de Río Nuevo en Mexicali",
+      "SADER avanza al 75% en entrega de apoyos de 45 mil pesos a agricultores del Valle de Mexicali"
      ]
     },
     {
@@ -2509,30 +2731,6 @@
       "Recorte de agua para 2027 será equivalente a 4.3 veces el consumo anual de Mexicali",
       "Ortodoncistas de Baja California realizarán congreso anual en Mexicali",
       "Ortodoncistas realizarán congreso anual en Mexicali del 9 al 10 de octubre"
-     ]
-    },
-    {
-     "termino": "avanza",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Mexicali": 3
-     },
-     "fuentes": {
-      "imparcial": 2,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0436fc2096325be0",
-      "e8140669569a704d",
-      "ef9680c2da5ecdf3"
-     ],
-     "ejemplos": [
-      "Avanza reparación de afectaciones en la bóveda de Río Nuevo en Mexicali",
-      "SADER avanza al 75% en entrega de apoyos de 45 mil pesos a agricultores del Valle de Mexicali",
-      "Avanza nuevo reglamento de tránsito en Mexicali; prevén votarlo en octubre"
      ]
     },
     {
@@ -2784,24 +2982,25 @@
    ]
   },
   "Ensenada": {
-   "notas_ventana": 48,
+   "notas_ventana": 56,
    "minimo": 3,
    "temas": [
     {
      "termino": "surfistas",
-     "n": 5,
+     "n": 6,
      "n_previo": 1,
-     "momento": 4,
+     "momento": 5,
      "zonas": {
-      "Ensenada": 5
+      "Ensenada": 6
      },
      "fuentes": {
       "imparcial": 3,
-      "jornadabc": 1,
+      "jornadabc": 2,
       "zeta": 1
      },
      "un_solo_medio": false,
      "notas": [
+      "3a2dea751924930a",
       "bb4fd7743c40deae",
       "c297e0e7f2657b94",
       "c8c768c3d23c7458",
@@ -2812,6 +3011,32 @@
       "Cronología de una tragedia: así fueron los hechos que llevaron a la condena de los asesinos de los surfistas en Ensenada",
       "Declaran culpables a tres hombres por asesinato de surfistas en Ensenada",
       "Padres de surfistas asesinados en Ensenada afirman que nunca serán olvidados"
+     ]
+    },
+    {
+     "termino": "rachel",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "Ensenada": 4
+     },
+     "fuentes": {
+      "imparcial": 2,
+      "lavoz": 1,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "0f4189811cf146ca",
+      "57594cefb7746a19",
+      "cec950321218b2f6",
+      "f081726d9dd08cb8"
+     ],
+     "ejemplos": [
+      "Marina refuerza avisos a embarcaciones en Ensenada por ‘Rachel’",
+      "Ensenada mantiene prealerta por Rachel; prevén lluvias de 50 mm",
+      "Mantienen prealerta en Ensenada por tormenta tropical Rachel"
      ]
     },
     {
@@ -2840,6 +3065,31 @@
       "Regidora de Ensenada señala deficiencias en gobierno de Claudia Agatón",
       "Invita Claudia Agatón a visitar el Buque Escuela Cuauhtémoc en Ensenada",
       "Critican presunta opacidad de Claudia Agatón en 2 años de Carnaval de Ensenada"
+     ]
+    },
+    {
+     "termino": "ayuntamiento",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Ensenada": 3
+     },
+     "fuentes": {
+      "imparcial": 1,
+      "jornadabc": 1,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "82cc841fab635b7c",
+      "86afd1e165d2c9a7",
+      "9d0efb78dda70584"
+     ],
+     "ejemplos": [
+      "Ayuntamiento de Ensenada ofrece descuentos de hasta 100% en multas y recargos",
+      "Ayuntamiento de Ensenada suspenderá labores el lunes 12 de octubre",
+      "Con carta de no lavado de dinero ayuntamiento de Ensenada se previene de acusaciones: Agatón"
      ]
     },
     {
@@ -2966,6 +3216,31 @@
      ]
     },
     {
+     "termino": "tropical",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Ensenada": 3
+     },
+     "fuentes": {
+      "imparcial": 1,
+      "lavoz": 1,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "0f4189811cf146ca",
+      "57594cefb7746a19",
+      "7f5c04a093532570"
+     ],
+     "ejemplos": [
+      "Cierran puerto de Ensenada a la navegación por tormeta tropical",
+      "Mantienen prealerta en Ensenada por tormenta tropical Rachel",
+      "Informa Gobierno de Ensenada sobre la tormenta tropical \"Rachel\""
+     ]
+    },
+    {
      "termino": "gobierno",
      "n": 8,
      "n_previo": 6,
@@ -2998,11 +3273,35 @@
       "Gobierno de Ensenada rehabilita casi 100 mil metros cuadrados de espacios verdes",
       "Gobierno de Ensenada no tiene cartas de no lavado de dinero que Agatón aseguró tener sobre FAMA"
      ]
+    },
+    {
+     "termino": "juzgados",
+     "n": 3,
+     "n_previo": 3,
+     "momento": 0,
+     "zonas": {
+      "Ensenada": 3
+     },
+     "fuentes": {
+      "soltij": 2,
+      "afn": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "012f608b5005a8b1",
+      "d232cb0896f818cb",
+      "f01f992dc5c8dc97"
+     ],
+     "ejemplos": [
+      "Revocarán terreno asignado a juzgados familiares en Ensenada",
+      "Poder Judicial aún desconoce dónde serán construidos juzgados familiares de Ensenada",
+      "Juzgados en Ensenada serán reubicados tras revocación: Alejandro Fragoso"
+     ]
     }
    ]
   },
   "Playas de Rosarito": {
-   "notas_ventana": 64,
+   "notas_ventana": 67,
    "minimo": 3,
    "temas": [
     {
@@ -3063,6 +3362,51 @@
       "Jóvenes prefieren ser ‘youtubers’ que policías: Seguridad en Rosarito",
       "Policías de Rosarito denuncian uniformes de baja calidad; cuestionan autenticidad de prendas tácticas",
       "Policías de Rosarito denuncian que reciben uniformes de baja calidad"
+     ]
+    },
+    {
+     "termino": "playas",
+     "n": 15,
+     "n_previo": 12,
+     "momento": 3,
+     "zonas": {
+      "Playas de Rosarito": 15,
+      "Tijuana": 1
+     },
+     "fuentes": {
+      "gn-f8497491006c": 4,
+      "rosarito": 3,
+      "gn-208187d76ea7": 1,
+      "gn-291a95aaf8ce": 1,
+      "gn-36bce513f849": 1,
+      "gn-3d33531b3bed": 1,
+      "gn-507c32aa93b3": 1,
+      "gn-8b479637ed46": 1,
+      "gn-df1d301d141c": 1,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "2b11c60839e8cb19",
+      "2fc45b7d84abe08c",
+      "3a7281891f96bd76",
+      "45b60c506f5add31",
+      "4c523932e875d10a",
+      "58259bff99cf919f",
+      "591884a8dcd1d940",
+      "69ff0cd2710164b0",
+      "6b73c93a190efe94",
+      "984176c382ebcf5a",
+      "a010dfd6e3e5e448",
+      "adbf9bbc0068a74a",
+      "f4b030c90c50120b",
+      "f5e9f4febe67c402",
+      "fd9a71370fb703c4"
+     ],
+     "ejemplos": [
+      "Provoca Rachel alto oleaje e inunda viviendas en Playas de Rosarito",
+      "New Desalination Plant in Playas de Rosarito to Secure Water Supply for Nearly 900,000 Residents",
+      "Impulsan rescate de sitios e historia de Playas de Rosarito"
      ]
     },
     {
@@ -3191,47 +3535,6 @@
      ]
     },
     {
-     "termino": "playas",
-     "n": 13,
-     "n_previo": 12,
-     "momento": 1,
-     "zonas": {
-      "Playas de Rosarito": 13,
-      "Tijuana": 1
-     },
-     "fuentes": {
-      "gn-f8497491006c": 4,
-      "rosarito": 3,
-      "gn-291a95aaf8ce": 1,
-      "gn-36bce513f849": 1,
-      "gn-507c32aa93b3": 1,
-      "gn-8b479637ed46": 1,
-      "gn-df1d301d141c": 1,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "2b11c60839e8cb19",
-      "2fc45b7d84abe08c",
-      "3a7281891f96bd76",
-      "45b60c506f5add31",
-      "4c523932e875d10a",
-      "58259bff99cf919f",
-      "69ff0cd2710164b0",
-      "6b73c93a190efe94",
-      "984176c382ebcf5a",
-      "a010dfd6e3e5e448",
-      "adbf9bbc0068a74a",
-      "f4b030c90c50120b",
-      "fd9a71370fb703c4"
-     ],
-     "ejemplos": [
-      "Impulsan rescate de sitios e historia de Playas de Rosarito",
-      "Pena de 37 años y 6 meses para responsable de homicidio en Playas de Rosarito",
-      "Localizan Cuerpo en Inmediaciones de Plaza del Mar en Playas de Rosarito, BC"
-     ]
-    },
-    {
      "termino": "cespt",
      "n": 3,
      "n_previo": 3,
@@ -3260,7 +3563,7 @@
    ]
   },
   "Tecate": {
-   "notas_ventana": 34,
+   "notas_ventana": 36,
    "minimo": 3,
    "temas": [
     {
@@ -3321,6 +3624,29 @@
      ]
     },
     {
+     "termino": "bomberos",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Tecate": 3
+     },
+     "fuentes": {
+      "afn": 3
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "049194a70b18330b",
+      "880e0492884dca2f",
+      "9c960e6623055b0b"
+     ],
+     "ejemplos": [
+      "Bomberos de Tecate atienden alrededor de 120 incendios por mes",
+      "Anuncian carrera atlética en beneficio de Bomberos de Tecate",
+      "Hubo \"banderazo\", pero no concluirán subestación de bomberos en Tecate, reconocen"
+     ]
+    },
+    {
      "termino": "deja",
      "n": 3,
      "n_previo": 6,
@@ -3348,7 +3674,7 @@
    ]
   },
   "San Quintín": {
-   "notas_ventana": 30,
+   "notas_ventana": 32,
    "minimo": 3,
    "temas": [
     {
@@ -3406,6 +3732,41 @@
      ]
     },
     {
+     "termino": "vicente guerrero",
+     "n": 9,
+     "n_previo": 10,
+     "momento": -1,
+     "zonas": {
+      "San Quintín": 9
+     },
+     "fuentes": {
+      "gn-2aaf697f6b1b": 3,
+      "gn-2c2bd8511d76": 1,
+      "gn-507c32aa93b3": 1,
+      "gn-82f33712a155": 1,
+      "gn-8ee5bccaca78": 1,
+      "gn-b041eae59658": 1,
+      "soltij": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "2dacdf2a65dbc1a7",
+      "2e7e81698c00b35b",
+      "588440661b107899",
+      "5d230cc6e60e7a17",
+      "68a070e421146911",
+      "70f2d9256fb8f7db",
+      "9fba86f0421fbc44",
+      "e9e4bae70128f58b",
+      "f7093afa8bfd6c6c"
+     ],
+     "ejemplos": [
+      "Sigue plantón del IMSS y cierre de Vicente Guerrero tras jornada de bloqueos",
+      "Mantiene sindicato del IMSS bloqueo en la Vicente Guerrero; esperan concentración al mediodía",
+      "Denuncian que primaria Vicente Guerrero en La Paz opera sin luz; alumnos estudian a la intemperie"
+     ]
+    },
+    {
      "termino": "mujer",
      "n": 3,
      "n_previo": 4,
@@ -3428,56 +3789,25 @@
       "En prisión mujer acusada de privación de la libertad y lesiones en San Quintín",
       "Mujer resulta herida con arma blanca en Vicente Guerrero; agresor fue sometido por testigos"
      ]
-    },
-    {
-     "termino": "vicente guerrero",
-     "n": 7,
-     "n_previo": 10,
-     "momento": -3,
-     "zonas": {
-      "San Quintín": 7
-     },
-     "fuentes": {
-      "gn-2aaf697f6b1b": 3,
-      "gn-2c2bd8511d76": 1,
-      "gn-507c32aa93b3": 1,
-      "gn-82f33712a155": 1,
-      "gn-8ee5bccaca78": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "2dacdf2a65dbc1a7",
-      "2e7e81698c00b35b",
-      "588440661b107899",
-      "5d230cc6e60e7a17",
-      "68a070e421146911",
-      "70f2d9256fb8f7db",
-      "9fba86f0421fbc44"
-     ],
-     "ejemplos": [
-      "Denuncian que primaria Vicente Guerrero en La Paz opera sin luz; alumnos estudian a la intemperie",
-      "Localizan mujer sin vida sobre carretera Panamericana de Vicente Guerrero",
-      "Vicente Guerrero y Lucio Cabañas, probables asiáticos descendientes, señala estudioso"
-     ]
     }
    ]
   },
   "San Felipe": {
-   "notas_ventana": 27,
+   "notas_ventana": 29,
    "minimo": 2,
    "temas": [
     {
      "termino": "felipe",
-     "n": 27,
+     "n": 29,
      "n_previo": 16,
-     "momento": 11,
+     "momento": 13,
      "zonas": {
-      "San Felipe": 27
+      "San Felipe": 29
      },
      "fuentes": {
       "gn-507c32aa93b3": 11,
-      "lavoz": 6,
-      "imparcial": 2,
+      "lavoz": 7,
+      "imparcial": 3,
       "bajanews": 1,
       "gn-2f955974c5c0": 1,
       "gn-704f83760328": 1,
@@ -3497,6 +3827,7 @@
       "1fd9ec50614d710a",
       "264335fe9eeb88d9",
       "2aae4f8559f8db16",
+      "31118c6474e896bd",
       "422cde0294867037",
       "535958f2a989d420",
       "5ab50da68649b0a6",
@@ -3514,13 +3845,14 @@
       "d7338f9eb9950cf2",
       "df278b8e4b3dae40",
       "e57e3f705b909041",
+      "efa8251e8aed0778",
       "f93bd9e1b9b7bbc8",
       "faf82c863542dfd7"
      ],
      "ejemplos": [
-      "Registran sismo de magnitud 3.5 al noreste de San Felipe, Baja California",
-      "Rescatan a dos animales durante cateo por probable maltrato en San Felipe",
-      "Sismo de magnitud 3.6 sacude el noreste de San Felipe, Baja California"
+      "Sismo de magnitud 3.6 sacude el noreste de San Felipe, Baja California",
+      "Fatal choque en San Felipe deja un muerto y dos lesionados",
+      "Registran sismo de magnitud 3.5 al noreste de San Felipe, Baja California"
      ]
     },
     {
@@ -3574,8 +3906,8 @@
       "f93bd9e1b9b7bbc8"
      ],
      "ejemplos": [
-      "Registran sismo de magnitud 3.5 al noreste de San Felipe, Baja California",
       "Sismo de magnitud 3.6 sacude el noreste de San Felipe, Baja California",
+      "Registran sismo de magnitud 3.5 al noreste de San Felipe, Baja California",
       "Sismo de magnitud 3.7 se registró al noreste de San Felipe, Baja California."
      ]
     },
@@ -3723,6 +4055,27 @@
      ]
     },
     {
+     "termino": "llegada",
+     "n": 2,
+     "n_previo": 0,
+     "momento": 2,
+     "zonas": {
+      "San Felipe": 2
+     },
+     "fuentes": {
+      "lavoz": 2
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "31118c6474e896bd",
+      "749bdf8db66d1ce9"
+     ],
+     "ejemplos": [
+      "Toman precauciones en San Felipe ante llegada de tormenta tropical “Rachel”",
+      "Blindan Capitanía de Puerto ante llegada de pescadores en San Felipe"
+     ]
+    },
+    {
      "termino": "magnitud sacude cercanias",
      "n": 2,
      "n_previo": 0,
@@ -3813,7 +4166,7 @@
    ]
   },
   "San Diego": {
-   "notas_ventana": 309,
+   "notas_ventana": 324,
    "minimo": 3,
    "temas": [
     {
@@ -4307,6 +4660,55 @@
      ]
     },
     {
+     "termino": "county",
+     "n": 21,
+     "n_previo": 18,
+     "momento": 3,
+     "zonas": {
+      "San Diego": 21,
+      "Tijuana": 1
+     },
+     "fuentes": {
+      "timessd": 5,
+      "voiceofsd": 4,
+      "gn-46bc88bd6277": 3,
+      "kpbs": 3,
+      "gn-65e51224f05e": 2,
+      "gn-a956e11d03ed": 2,
+      "gn-08669c4d9d25": 1,
+      "gn-5bad11419dae": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "1396cbf5fcaf749c",
+      "1a8fad25a6aa8024",
+      "21869090ae74d760",
+      "325cf3de7b40515f",
+      "39d7d9d6745269f1",
+      "4f84bca54c70a607",
+      "7607f2c91890c794",
+      "7ae2c40ae1b32c2e",
+      "89255bd3a9968412",
+      "93d6f4dd1ba6f0d8",
+      "9eafa5b0cf754e84",
+      "a64dfe5db38b4141",
+      "b4d7b9aa6fae9a49",
+      "b984dd156d00e460",
+      "dee18c2c11fa4645",
+      "def5a46573e0fde8",
+      "e150fc93667a7322",
+      "e2de4e729a8c3527",
+      "e3415409b0514456",
+      "ee76e20a4b5643b9",
+      "f0a4afe77007a181"
+     ],
+     "ejemplos": [
+      "Where did San Diego County’s roadside motor lodges go?",
+      "San Diego County launches new forecasting tool as flu cases rise early",
+      "Candidate Says This County Policy Is Pushing San Diegans to Riverside"
+     ]
+    },
+    {
      "termino": "voters",
      "n": 6,
      "n_previo": 3,
@@ -4387,6 +4789,32 @@
      ]
     },
     {
+     "termino": "clash",
+     "n": 4,
+     "n_previo": 1,
+     "momento": 3,
+     "zonas": {
+      "San Diego": 4
+     },
+     "fuentes": {
+      "timessd": 2,
+      "inewsource": 1,
+      "voiceofsd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "1118d5a5739886a8",
+      "1e2aeb258933bfd8",
+      "366a9d7308b868d4",
+      "476cd2902deda8a2"
+     ],
+     "ejemplos": [
+      "Shaw and Barrera clash over parental rights, Trump and SAT in California state superintendent debate",
+      "Candidates for Coastal Council District Clash on Vacation Rental Facts",
+      "San Diego Unified and city create pilot program to settle ongoing clash over joint-use fields"
+     ]
+    },
+    {
      "termino": "execution",
      "n": 4,
      "n_previo": 1,
@@ -4436,54 +4864,6 @@
       "Mission Trails Foundation granted nearly $1M for South Fortuna Steps project",
       "San Diego Foundation Grants Nearly $1M in Binational Water Health Grants",
       "San Diego Foundation Launches $100 Million Partnership to Speed Up Construction of Affordable Housing"
-     ]
-    },
-    {
-     "termino": "nlds",
-     "n": 4,
-     "n_previo": 1,
-     "momento": 3,
-     "zonas": {
-      "San Diego": 4
-     },
-     "fuentes": {
-      "timessd": 4
-     },
-     "un_solo_medio": true,
-     "notas": [
-      "349010f2a7b482ea",
-      "5279ca29424ae5e4",
-      "d268b290b2c91e8f",
-      "fff872437cfa563d"
-     ],
-     "ejemplos": [
-      "Michael King saves Padres’ season with heroic performance in Game 3 NLDS win",
-      "Nick Pivetta takes the mound with Padres’ season, NLDS on the line",
-      "Chourio’s 2-run single with 2 outs in 9th off Miller lifts Brewers over Padres for 2-0 NLDS lead"
-     ]
-    },
-    {
-     "termino": "abraham lincoln regresa",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "San Diego": 3
-     },
-     "fuentes": {
-      "imparcial": 2,
-      "timessd": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "428516417a6f240f",
-      "5fc716196c26758e",
-      "e592178e4735b818"
-     ],
-     "ejemplos": [
-      "USS Abraham Lincoln regresa a San Diego tras un despliegue récord de 265 días en el mar",
-      "USS Abraham Lincoln regresa a San Diego tras despliegue récord de 322 días",
-      "USS Abraham Lincoln regresa a San Diego tras casi 11 meses en Oriente Medio, con 265 días sin escala en puerto, problemas de abastecimiento y ocho intentos de suicidio reportados durante el despliegue"
      ]
     }
    ]
