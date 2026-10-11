@@ -1,40 +1,40 @@
 {
  "esquema": 1,
- "generado": "2026-10-11T06:18:36+00:00",
+ "generado": "2026-10-11T13:17:13+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 3821,
- "posts_vigentes": 594,
- "opinion": 3498,
- "repetidos": 203,
- "reacciones": 251,
+ "comentarios_vigentes": 3935,
+ "posts_vigentes": 606,
+ "opinion": 3607,
+ "repetidos": 207,
+ "reacciones": 254,
  "por_zona": {
   "Ensenada": 92,
   "Mexicali": 83,
   "Playas de Rosarito": 46,
   "San Quintín": 1,
   "Tecate": 29,
-  "Tijuana": 1733,
-  "estatal": 1607,
+  "Tijuana": 1830,
+  "estatal": 1624,
   "internacional": 14,
   "nacional": 216
  },
  "por_cuenta": {
   "aztecabc_fb": 149,
-  "blanconegro_fb": 1530,
-  "blancorojo_fb": 1003,
-  "ndtijuana_fb": 1087,
+  "blanconegro_fb": 1567,
+  "blancorojo_fb": 1040,
+  "ndtijuana_fb": 1127,
   "psn_fb": 52
  },
  "por_idioma": {
-  "es": 3821
+  "es": 3935
  },
  "por_tema": [
   {
    "tema": "lluvias",
-   "comentarios": 33,
-   "posts": 25
+   "comentarios": 36,
+   "posts": 27
   },
   {
    "tema": "joven",
@@ -43,8 +43,8 @@
   },
   {
    "tema": "tormenta",
-   "comentarios": 20,
-   "posts": 15
+   "comentarios": 21,
+   "posts": 16
   },
   {
    "tema": "familiares",
@@ -53,6 +53,11 @@
   },
   {
    "tema": "apagones",
+   "comentarios": 8,
+   "posts": 8
+  },
+  {
+   "tema": "frente",
    "comentarios": 8,
    "posts": 8
   },
@@ -67,7 +72,7 @@
    "posts": 7
   },
   {
-   "tema": "frente",
+   "tema": "fuertes",
    "comentarios": 6,
    "posts": 6
   },
@@ -75,11 +80,6 @@
    "tema": "tropical",
    "comentarios": 6,
    "posts": 4
-  },
-  {
-   "tema": "fuertes",
-   "comentarios": 5,
-   "posts": 5
   },
   {
    "tema": "fiestas",
@@ -108,9 +108,9 @@
   }
  ],
  "sentimiento": {
-  "positivo": 372,
-  "negativo": 1745,
-  "neutral": 1381,
+  "positivo": 384,
+  "negativo": 1802,
+  "neutral": 1421,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -150,7 +150,7 @@
    "activa": true
   }
  ],
- "releidos": 22,
+ "releidos": 14,
  "destacados": [
   {
    "url": "https://www.facebook.com/reel/1436611365339175",
@@ -224,6 +224,30 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/reel/1339758058099122",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-11",
+   "titulo": "El río pluvial del Florido Primera y Segunda Sección.",
+   "tipo": "video",
+   "likes": 2952,
+   "comentarios": 83,
+   "compartidos": 238,
+   "reproducciones": 208786,
+   "alcance": "zona",
+   "publicado": "2026-10-11T06:52:05+00:00",
+   "cosechados": 10,
+   "opinion": 9,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 6,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/reel/28610121115322073",
    "cuenta": "blanconegro_fb",
    "zona": "Tijuana",
@@ -241,6 +265,125 @@
    "sentimiento": {
     "positivo": 0,
     "negativo": 6,
+    "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0xeaEweZ4xqksDtnGfh3acsx2BKnc3zPpZUNkPo2dkrRRtiQZs4djpKCvm8MacR8vl",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-11",
+   "titulo": "#GaleríaNDT 🌧️ El agua alcanzó 1.80 metros; rescatan a siete personas atrapadas en Tijuana",
+   "tipo": "imagen",
+   "likes": 1784,
+   "comentarios": 76,
+   "compartidos": 255,
+   "alcance": "zona",
+   "publicado": "2026-10-11T09:26:25+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 7,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/2235787714018746",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-11",
+   "titulo": "Operativo para rescatar a familias tras inundaciones en Tijuana",
+   "tipo": "video",
+   "likes": 1515,
+   "comentarios": 219,
+   "compartidos": 199,
+   "reproducciones": 113945,
+   "alcance": "zona",
+   "publicado": "2026-10-11T07:59:41+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 4,
+    "neutral": 5,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/reel/1748866286408684",
+   "cuenta": "blancorojo_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-11",
+   "titulo": "Vecinos de la colonia Aeropuerto quedaron atrapados debido a las intensas lluvias, por años han pedido el apoyo de las autoridades para encontrar una solución.",
+   "tipo": "video",
+   "likes": 1137,
+   "comentarios": 53,
+   "compartidos": 135,
+   "reproducciones": 147943,
+   "alcance": "zona",
+   "publicado": "2026-10-11T07:37:36+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 8,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/videos/2982351735432219",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-11",
+   "titulo": "Rescate de una familia en Praderas de la Mesa.",
+   "tipo": "video",
+   "likes": 1131,
+   "comentarios": 104,
+   "compartidos": 157,
+   "reproducciones": 107161,
+   "alcance": "zona",
+   "publicado": "2026-10-11T07:02:40+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 3,
+    "neutral": 6,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/reel/1608048003602320",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-11",
+   "titulo": "🚨 El canal ubicado en el parque industrial El Florido l registra afectaciones por las lluvias, donde dos vehículos ya quedaron varados.",
+   "tipo": "video",
+   "likes": 1077,
+   "comentarios": 37,
+   "compartidos": 115,
+   "reproducciones": 190310,
+   "alcance": "zona",
+   "publicado": "2026-10-11T07:29:13+00:00",
+   "cosechados": 9,
+   "opinion": 8,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 4,
     "neutral": 4,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -272,6 +415,30 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/4522974907921561",
+   "cuenta": "blanconegro_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-11",
+   "titulo": "Ataque armado deja dos hombres sin vida y uno lesionado",
+   "tipo": "video",
+   "likes": 759,
+   "comentarios": 44,
+   "compartidos": 55,
+   "reproducciones": 53789,
+   "alcance": "nacional",
+   "publicado": "2026-10-11T10:13:24+00:00",
+   "cosechados": 10,
+   "opinion": 8,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 4,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/1912404099740066",
    "cuenta": "blanconegro_fb",
    "zona": "estatal",
@@ -290,6 +457,30 @@
     "positivo": 0,
     "negativo": 6,
     "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/reel/3380461415476040",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-11",
+   "titulo": "🌧️🚨 Reportan corrientes de agua e inundaciones en la colonia La Morita 1",
+   "tipo": "video",
+   "likes": 735,
+   "comentarios": 42,
+   "compartidos": 94,
+   "reproducciones": 49331,
+   "alcance": "zona",
+   "publicado": "2026-10-11T07:50:50+00:00",
+   "cosechados": 8,
+   "opinion": 8,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 6,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -435,23 +626,46 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02hZgzPcqGXKtYe9VEFDBVFiEE86MYxZBwSCGiJkjJ5irLUNhRobKWEcMWN63PoAkrl",
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid034YwrZnkMyD2ntP54BDEVZ3mhSyd6K3J5Li5bgsfYTwnrK8TjraZokL3y1rhKgKhTl",
    "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
+   "zona": "Ensenada",
    "fecha": "2026-10-11",
-   "titulo": "🐶🐱❤️ ¡No los dejan atrás! Resguardan a personas en situación de calle junto con sus mascotas ante las lluvias en Tijuana",
+   "titulo": "🚨🌧️ Una familia habría sido arrastrada por la corriente del arroyo El Pípila, en Maneadero, por lo que se solicita apoyo para localizarlos.",
    "tipo": "imagen",
-   "likes": 319,
-   "comentarios": 14,
+   "likes": 376,
+   "comentarios": 12,
    "compartidos": 26,
    "alcance": "zona",
-   "publicado": "2026-10-11T03:21:07+00:00",
-   "cosechados": 9,
-   "opinion": 8,
+   "publicado": "2026-10-11T08:25:54+00:00",
+   "cosechados": 0,
+   "opinion": 0,
    "sentimiento": {
-    "positivo": 3,
-    "negativo": 1,
-    "neutral": 4,
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02FXRXavbx6mgMJxDTEqdVKDgS9iUfXaZgwgeNvA7wMN1wzVQigcXm5fKKDhBHM8hol&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-11",
+   "titulo": "Madre he hija fueron arrastradas por la corriente",
+   "tipo": "imagen",
+   "likes": 362,
+   "comentarios": 12,
+   "compartidos": 28,
+   "alcance": "nacional",
+   "publicado": "2026-10-11T07:44:22+00:00",
+   "cosechados": 7,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 2,
+    "neutral": 3,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -545,122 +759,6 @@
     "positivo": 0,
     "negativo": 0,
     "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0BchqneK65LMjn1BfLfjZ5jM3PM9C6K9F67jJFczWSZRyFwJ6D5B7FGvQ4FC2yiVvl",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-11",
-   "titulo": "🌧️ Bajo la lluvia, tijuanenses buscan refugio ante los efectos de Rachel",
-   "tipo": "imagen",
-   "likes": 281,
-   "comentarios": 13,
-   "compartidos": 9,
-   "alcance": "zona",
-   "publicado": "2026-10-11T05:53:47+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 3,
-    "neutral": 6,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0Kr4YbGct9ACQ6KQeNwUagpcPLqkjLEWuXaK3PR21MEvRxRWtBhRVernRCDMmKTEil",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-10",
-   "titulo": "⛈️ Comenzó la lluvia y truenos en Tijuana",
-   "tipo": "otro",
-   "likes": 213,
-   "comentarios": 31,
-   "compartidos": 30,
-   "alcance": "zona",
-   "publicado": "2026-10-10T18:53:45+00:00",
-   "cosechados": 8,
-   "opinion": 7,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 3,
-    "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/reel/1077672248595350",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-11",
-   "titulo": "¡ALERTA EN TIJUANA! PIDEN EXTREMAR PRECAUCIONES ANTE TORMENTA TROPICAL RACHEL",
-   "tipo": "video",
-   "likes": 192,
-   "comentarios": 2,
-   "compartidos": 37,
-   "reproducciones": 16299,
-   "alcance": "zona",
-   "publicado": "2026-10-11T02:57:33+00:00",
-   "cosechados": 1,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid045kjkXyhqCQccyx6byu5NFReoPKGakNL4uMkxrUreX7WviWsSvgTdiYHts92vdvyl",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-10",
-   "titulo": "#GaleríaNDT Localizan Hyundai con restos humanos y un mensaje amenazante",
-   "tipo": "imagen",
-   "likes": 188,
-   "comentarios": 2,
-   "compartidos": 18,
-   "alcance": "zona",
-   "publicado": "2026-10-10T20:03:01+00:00",
-   "cosechados": 2,
-   "opinion": 2,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid021DD251U8o6KMHox9SVwK3nBtmRHx73wLsV7TPRwEqQt5rEJRVehPRoeSxEkCbqtFl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-10",
-   "titulo": "Si quieres estar Informado Sobre la Tomenta rachel se dirige a Tijuana y Ensenada rosarito tecate Mexicali hoy tocará tierra por la noche Sigue la Página Los m…",
-   "tipo": "imagen",
-   "likes": 180,
-   "comentarios": 11,
-   "compartidos": 15,
-   "alcance": "zona",
-   "publicado": "2026-10-10T11:31:28+00:00",
-   "cosechados": 6,
-   "opinion": 5,
-   "sentimiento": {
-    "positivo": 2,
-    "negativo": 2,
-    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -761,29 +859,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/videos/1469811111633277",
-   "cuenta": "ndtijuana_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-11",
-   "titulo": "Fuerte corriente cañón del pato",
-   "tipo": "video",
-   "likes": 150,
-   "comentarios": 9,
-   "compartidos": 13,
-   "alcance": "nacional",
-   "publicado": "2026-10-11T06:15:26+00:00",
-   "cosechados": 9,
-   "opinion": 9,
-   "sentimiento": {
-    "positivo": 3,
-    "negativo": 3,
-    "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NdTijuana/posts/pfbid0A4pnJcXUByZVhPbwumgTKEurM8Sd5cXc7gn5dDFqR8LYtPBN7DwYgepQ1xB6MkP9l",
    "cuenta": "ndtijuana_fb",
    "zona": "Mexicali",
@@ -807,40 +882,17 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0P2Wz9aNEA7yYLEy62zxQajRoQYhT5spAHAtJor2fwxJTSfmV2gceQfHB3cVMkB51l",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid027CH7VZJ6qJ37ysvCzCetZ1v9uxdZaQsEaz18RUSYiXuon4GTC3X98os9QDFbQzV5l&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "Ensenada",
    "fecha": "2026-10-11",
-   "titulo": "La Dirección Municipal de Protección Civil informa a la población que para este domingo 11 de octubre se estima un 70% de probabilidad de lluvias, cuya intensi…",
+   "titulo": "ENSENADA BAJA CALIFORNIA, BAJO EL AGUA.",
    "tipo": "imagen",
-   "likes": 88,
-   "comentarios": 2,
-   "compartidos": 4,
+   "likes": 87,
+   "comentarios": 0,
+   "compartidos": 9,
    "alcance": "zona",
-   "publicado": "2026-10-11T05:40:06+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid095Ge8a996n48yjbwvjPfFqnnum6PnPRkBj5JtxATkCjdgRxXt7HyEW3xJcqBCeyXl",
-   "cuenta": "blanconegro_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-10",
-   "titulo": "🚨 Tráiler derrapa y queda atravesado en el bulevar 2000; afecta la circulación",
-   "tipo": "imagen",
-   "likes": 85,
-   "comentarios": 12,
-   "compartidos": 6,
-   "alcance": "nacional",
-   "publicado": "2026-10-10T20:56:57+00:00",
+   "publicado": "2026-10-11T09:41:16+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -928,10 +980,10 @@
    "fecha": "2026-10-10",
    "titulo": "#LoVisteEnPSN | Ataque armado deja a dos hombres lesionados en la Zona Centro.",
    "tipo": "video",
-   "likes": 11,
+   "likes": 13,
    "comentarios": 0,
    "compartidos": 0,
-   "reproducciones": 1485,
+   "reproducciones": 1767,
    "alcance": "zona",
    "publicado": "2026-10-10T17:30:56+00:00",
    "cosechados": 0,
@@ -946,23 +998,23 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/aztecabc/posts/pfbid02tPsBQtnipp5S4TbjX8bu6aHp2XZK3VLPkWew6ZWwvydmuRHxCGY8efTKf2Uq5XH2l",
+   "url": "https://www.facebook.com/aztecabc/posts/pfbid0wqB9wDigNXPWn6oVnPyNqitWeqwhTrnJTjVb5tNfXrU4MRc8CFNt6uHVBYtYk1mMl",
    "cuenta": "aztecabc_fb",
    "zona": "Tijuana",
    "fecha": "2026-10-10",
-   "titulo": "¡Adiós al bochorno! Tijuana registrará 3 días de lluvia consecutivos para despedir al calor. 🌧️ ¿Listo para el frío?",
+   "titulo": "Camión se estrella contra tráiler en Tijuana; conductor QUEDA PRENS4D0 🚚🚨",
    "tipo": "otro",
-   "likes": 10,
-   "comentarios": 0,
+   "likes": 6,
+   "comentarios": 1,
    "compartidos": 0,
    "alcance": "zona",
-   "publicado": "2026-10-10T09:30:00+00:00",
-   "cosechados": 0,
-   "opinion": 0,
+   "publicado": "2026-10-10T21:40:31+00:00",
+   "cosechados": 1,
+   "opinion": 1,
    "sentimiento": {
     "positivo": 0,
     "negativo": 0,
-    "neutral": 0,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -980,6 +1032,29 @@
    "compartidos": 0,
    "alcance": "zona",
    "publicado": "2026-10-10T21:26:00+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/aztecabc/posts/pfbid02YoRgpQJ9tZvmiUi35ZkCM87chPM8ZYe41br5MfLGHjohZ1d8BvRYL6p2fVwjz8X5l",
+   "cuenta": "aztecabc_fb",
+   "zona": "Playas de Rosarito",
+   "fecha": "2026-10-11",
+   "titulo": "Localizan SIN VID4 a César Yadiel tras cinco días desaparecido en el mar de Los Alisitos, Rosarito. 🌊😢",
+   "tipo": "otro",
+   "likes": 1,
+   "comentarios": 0,
+   "compartidos": 0,
+   "alcance": "zona",
+   "publicado": "2026-10-11T13:00:00+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1047,7 +1122,7 @@
    "likes": 0,
    "comentarios": 0,
    "compartidos": 0,
-   "reproducciones": 145,
+   "reproducciones": 159,
    "alcance": "nacional",
    "publicado": "2026-10-10T20:00:35+00:00",
    "cosechados": 0,
@@ -1090,8 +1165,8 @@
    "cuenta": "aztecabc_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 19,
-   "crudos": 22,
+   "comentarios": 0,
+   "crudos": 4,
    "fuera": 0,
    "compartidos": 0
   },
@@ -1099,8 +1174,8 @@
    "cuenta": "blanconegro_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 35,
-   "crudos": 37,
+   "comentarios": 37,
+   "crudos": 40,
    "fuera": 0,
    "compartidos": 0
   },
@@ -1108,8 +1183,8 @@
    "cuenta": "blancorojo_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 38,
-   "crudos": 40,
+   "comentarios": 37,
+   "crudos": 37,
    "fuera": 0,
    "compartidos": 0
   },
@@ -1117,8 +1192,8 @@
    "cuenta": "ndtijuana_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 20,
-   "crudos": 21,
+   "comentarios": 40,
+   "crudos": 40,
    "fuera": 0,
    "compartidos": 0
   },
@@ -1127,20 +1202,21 @@
    "estado": "ok",
    "posts": 5,
    "comentarios": 0,
-   "crudos": 2,
+   "crudos": 0,
+   "nota": "sin posts nuevos que cosechar",
    "fuera": 0,
    "compartidos": 0
   }
  ],
  "gasto": {
   "resultados": 250,
-  "gastado": 159,
+  "gastado": 158,
   "por_concepto": {
-   "aztecabc_fb": 30,
-   "blanconegro_fb": 45,
-   "blancorojo_fb": 48,
-   "ndtijuana_fb": 29,
-   "psn_fb": 7
+   "aztecabc_fb": 12,
+   "blanconegro_fb": 48,
+   "blancorojo_fb": 45,
+   "ndtijuana_fb": 48,
+   "psn_fb": 5
   }
  }
 }
