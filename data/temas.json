@@ -3,42 +3,288 @@
  "generado": "2026-10-13",
  "ventana_dias": 7,
  "minimo": 3,
- "notas_ventana": 2345,
+ "notas_ventana": 2567,
  "notas_previas": 2507,
  "temas": [
   {
-   "termino": "lluvias",
-   "n": 180,
-   "n_previo": 26,
-   "momento": 154,
+   "termino": "rachel",
+   "n": 177,
+   "n_previo": 9,
+   "momento": 168,
    "zonas": {
-    "Tijuana": 60,
-    "nacional": 44,
+    "Ensenada": 45,
+    "Tijuana": 42,
+    "estatal": 34,
+    "nacional": 28,
+    "Playas de Rosarito": 12,
+    "San Diego": 8,
+    "Mexicali": 7,
+    "Tecate": 6,
+    "San Quintín": 4,
+    "San Felipe": 2
+   },
+   "fuentes": {
+    "imparcial": 44,
+    "zeta": 23,
+    "afn": 15,
+    "soltij": 14,
+    "uniradio": 13,
+    "lavoz": 11,
+    "jornadabc": 7,
+    "gn-208187d76ea7": 5,
+    "timessd": 4,
+    "gn-31193328f8e2": 3,
+    "gn-a956e11d03ed": 3,
+    "rosarito": 3,
+    "gn-173f8fbcfc4a": 2,
+    "gn-507c32aa93b3": 2,
+    "gn-c3e35c36380b": 2,
+    "gn-df1d301d141c": 2,
+    "bajanews": 1,
+    "gn-0081b18d05b3": 1,
+    "gn-1e56ab0989d3": 1,
+    "gn-2054b108274f": 1,
+    "gn-24bb87bf33e2": 1,
+    "gn-250e3d3bf1ff": 1,
+    "gn-31ae7e9b28e1": 1,
+    "gn-6327d1dd772f": 1,
+    "gn-655a47696e14": 1,
+    "gn-666bf1ff27e9": 1,
+    "gn-6a0220a25f7f": 1,
+    "gn-7c95a9b2ff3a": 1,
+    "gn-83da8e82d7a6": 1,
+    "gn-906741a25e9c": 1,
+    "gn-a96a3aaee9d9": 1,
+    "gn-b31589421181": 1,
+    "gn-b4bf210d5652": 1,
+    "gn-d33696b00d82": 1,
+    "gn-dc1580cd9943": 1,
+    "gn-f8497491006c": 1,
+    "gn-fa0b3527c7cc": 1,
+    "kpbs": 1,
+    "sintesis": 1,
+    "tecate": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "00c4772ae88d7cdf",
+    "01923917a239ca78",
+    "023bbc082c80669d",
+    "06809bd3a2ab4e41",
+    "06a2744ff275ef91",
+    "0a7e9364adb276d5",
+    "0bd5cffb1b93ad2a",
+    "0bffaca685b92f41",
+    "0f4189811cf146ca",
+    "12e64001de20d470",
+    "1407e91bbe1e5d05",
+    "14e9a5550e9ad3e5",
+    "194d84d3c682e5bf",
+    "1984d58382a59f36",
+    "1b428747383fb42c",
+    "1b83354ae588e3d8",
+    "1d7062d57b10b40f",
+    "1f5a4c9508542863",
+    "205c4c2cd835c5e0",
+    "211c9b741c705b39",
+    "219377529a3410ba",
+    "21eb4d98a26f2119",
+    "22dcbfd7b26bcf54",
+    "235cc65a419f4c49",
+    "2480b023387deb6a",
+    "249d56b21f6b7b42",
+    "24ad1ca77ed1ad10",
+    "26f9974a8956db3f",
+    "271a1498d3b97798",
+    "2722ca2aecd4d29e",
+    "27dae66197b4da2a",
+    "29a8ca9b44d9ee38",
+    "29fac9aa03c783f5",
+    "2bfea8788ca87846",
+    "2d8965258f9d3de6",
+    "31118c6474e896bd",
+    "32e5b6fbd9a4da1c",
+    "394f112608a49caf",
+    "3b23f78a7f1382c5",
+    "3d0470705d63981b",
+    "3d2a34f0a8abce2a",
+    "3dbeccd9a4fd88b2",
+    "3ef1549e6eca4502",
+    "400c8c955dc3a5e9",
+    "41272b86668b7c8b",
+    "41a9a7542d012f14",
+    "4320d3a495f93267",
+    "4457663446844b75",
+    "458beeab649f33f8",
+    "4711d65d5d0c9cdd",
+    "484a600563412fb0",
+    "4d52d7b6d3f64394",
+    "4ded26f905314d62",
+    "512deffca8e68faf",
+    "52a7a746604a2a8c",
+    "540b208e03767d3f",
+    "5464d51af11c5e8e",
+    "5688e84764819e8d",
+    "57594cefb7746a19",
+    "5c1da343e7e40e09",
+    "5cb46eacdf4a7385",
+    "5ce7bf12444002f9",
+    "5d69c414e2b636f6",
+    "5deecf231c00b5f2",
+    "5fb8c8b2638bb4f2",
+    "61931454c5e5639b",
+    "669fa06efcba7fd6",
+    "675b0037bcc8c61e",
+    "67da7af79a6723d8",
+    "68ea6b8b930f8f90",
+    "6b271fbf8e9ee841",
+    "6b4a558702d7c6c2",
+    "6cb7b1c4514d47cc",
+    "6cccf0e885527e23",
+    "722bc5450e8437a4",
+    "73d128774a6976ec",
+    "744bd5a23f9cccad",
+    "748f9e520f8f91f7",
+    "75e0c2e75ad9d0bc",
+    "77d50292e0433497",
+    "7aa09f6a4b11ec4f",
+    "7b2b776334372d4c",
+    "7d831a245c30c3af",
+    "7e803fb0a893a38a",
+    "8492fa139145affb",
+    "88d17c7a8de74939",
+    "890fa20cc53ae9a9",
+    "8cf253de00b2f6e0",
+    "8da0cca6b12ce8a8",
+    "8ea6c4e6acecc50b",
+    "8fad69ab5d292be8",
+    "910f6f125708b2e6",
+    "931722755589f23a",
+    "93ae90ceeb390668",
+    "943285ba2cfd6d76",
+    "953bf34296fe31bf",
+    "95ad62fbd61bd1d3",
+    "9807847cfa77abb3",
+    "994bb27c7a6a8063",
+    "99e5cd40981d0657",
+    "9b6a56981724d59b",
+    "9c19d3719441fb30",
+    "9c985f287b761d97",
+    "9cd7d138415afee0",
+    "9d7ac7b1e9c83a73",
+    "9dea704997f44035",
+    "a05eb96e23d776fc",
+    "a2b8f36b2f63c647",
+    "a32c27afee559985",
+    "a9e1e0d9be8c603a",
+    "ab2450e9c8ca64bc",
+    "ac8923961c7377a8",
+    "ae643e0d0c465ba5",
+    "b175d30cc950b7e1",
+    "b297f87d776f7a7b",
+    "b3ffb79a085a1491",
+    "b84cf2451e62e8d5",
+    "b949cb8e246b5d94",
+    "ba3a737d2b00cd77",
+    "bb1ff79e6f145037",
+    "bb625d7840654dbf",
+    "be316b2d320c62a0",
+    "bed0f56568810acd",
+    "c1269062d63a8741",
+    "c1e256b3086b207e",
+    "c4dcd38af4aa5942",
+    "c4df13937dda8408",
+    "c5385de6ebd6af35",
+    "c5cc157644b675d9",
+    "c8d41cc8ac586ebc",
+    "c98e69a2ad534d2e",
+    "c994de6fd2b36a72",
+    "c9a3d47fc89b3ca2",
+    "c9bd864eba81c6bc",
+    "cb4805fb5d111fee",
+    "cb82b834bc282384",
+    "cbd59d9955e536e1",
+    "ccf2fb45ddb46f78",
+    "ce5fe06dd985e4ca",
+    "cec950321218b2f6",
+    "d236088d05e27194",
+    "d36bdc4a1c105a04",
+    "d43f6289284b885a",
+    "d46a7541a2c8c87e",
+    "d62cea731a013d94",
+    "d87dd09a54bf1e95",
+    "dd523fd004c534d5",
+    "df856fd0e44b92ce",
+    "e001a4e3c9acb3b8",
+    "e18b026017e19e4c",
+    "e43faa940c814c5d",
+    "e51de05f0883d884",
+    "e64bbf0f2b637fc3",
+    "e74a5f5f4c654d4d",
+    "e8a98c9233ce59c2",
+    "e98f77a2cc627212",
+    "e996c461cbd3683e",
+    "e9e6ecf1a6534677",
+    "ea638dabb5277871",
+    "ea8a0603cb27d46c",
+    "eb6399710dd610d3",
+    "ec375a1e0841ebce",
+    "ed2035c01e6f87a8",
+    "f081726d9dd08cb8",
+    "f118e3f2a7dc251e",
+    "f4925fd198db8e46",
+    "f530ae7de4e8b3cb",
+    "f5dec9b281c72a31",
+    "f5e9f4febe67c402",
+    "f636e540719898ea",
+    "f718df68793aa96b",
+    "f84a1567a04964ff",
+    "f89225ceb4e89164",
+    "fa97c6b3eb1aac6e",
+    "fb4c73b63cca1438",
+    "fc201590ee21ec52",
+    "fdbcf9f70c0c614a"
+   ],
+   "ejemplos": [
+    "Lluvias de Rachel y el Súper Niño elevan riesgo de dengue en Tijuana",
+    "Rachel deja más de 50 MDD en pérdidas, calculan ejidatarios de Ensenada",
+    "Gobierno de Sonora apoyará con traslados y funerales a la familia de Hermosillo que murió en Ensenada por la tormenta Rachel"
+   ]
+  },
+  {
+   "termino": "lluvias",
+   "n": 190,
+   "n_previo": 26,
+   "momento": 164,
+   "zonas": {
+    "Tijuana": 63,
+    "nacional": 46,
+    "estatal": 23,
     "Mexicali": 22,
-    "estatal": 21,
-    "Ensenada": 16,
+    "Ensenada": 19,
     "Playas de Rosarito": 16,
     "Tecate": 6,
     "San Diego": 2
    },
    "fuentes": {
-    "imparcial": 63,
+    "imparcial": 69,
     "soltij": 18,
     "uniradio": 17,
     "afn": 15,
+    "jornadabc": 13,
     "zeta": 13,
-    "jornadabc": 11,
     "rosarito": 6,
     "lavoz": 5,
     "gn-36bce513f849": 3,
+    "gn-a96a3aaee9d9": 3,
     "gn-d33696b00d82": 3,
     "gn-31193328f8e2": 2,
-    "gn-a96a3aaee9d9": 2,
     "gn-dc1580cd9943": 2,
     "gn-01e4fd06574f": 1,
     "gn-1e56ab0989d3": 1,
     "gn-208187d76ea7": 1,
     "gn-250e3d3bf1ff": 1,
+    "gn-291a95aaf8ce": 1,
     "gn-31ae7e9b28e1": 1,
     "gn-507c32aa93b3": 1,
     "gn-53fe2da95fac": 1,
@@ -87,6 +333,7 @@
     "2303acd6e447c295",
     "23082be4f720d17e",
     "249d56b21f6b7b42",
+    "252fc82850fcaad2",
     "26f9974a8956db3f",
     "29f899e0df3384a4",
     "29fac9aa03c783f5",
@@ -106,9 +353,11 @@
     "3f4d9cc5a3b62b3c",
     "3fd8ce82eeedd2fd",
     "40ad9d30adcb15cd",
+    "411d2eb7061cb812",
     "4154ab2a29f6a98b",
     "4261b0fb9a506491",
     "43f41e09f817a6eb",
+    "44c459974bcdcd04",
     "484a600563412fb0",
     "4854654f5ad59e58",
     "4e407579a5990bac",
@@ -129,6 +378,7 @@
     "604d24ce4de08cc0",
     "627331b85012904f",
     "634bc6b9082e40a2",
+    "6369ac33d1bac815",
     "640ad34e92886781",
     "6492e1ee6e7131dc",
     "655518e062590d3b",
@@ -156,6 +406,7 @@
     "887822d8030aacda",
     "88d17c7a8de74939",
     "890fa20cc53ae9a9",
+    "8a7919c98f206bee",
     "8cb58c51752aac8a",
     "8cf253de00b2f6e0",
     "8f12b0124f7ef8fb",
@@ -183,6 +434,7 @@
     "aeb9fd27747ce9e5",
     "af3ebb61952716dd",
     "b297f87d776f7a7b",
+    "b37648ad7e22353d",
     "b5a60cb2b37af5d0",
     "b747b5db6edc3876",
     "b8d2fe46f605b4c9",
@@ -220,6 +472,7 @@
     "e40dc2d35f0070e8",
     "e43faa940c814c5d",
     "e51de05f0883d884",
+    "e569ed71c74cad02",
     "e6feba7f486f5e19",
     "e83cc60a5d635faa",
     "e86382444d442814",
@@ -230,274 +483,51 @@
     "ec25e575f6cda00f",
     "eebc9e5330073ead",
     "eefa17783b855767",
+    "f14e3efcd324d3b9",
+    "f636e540719898ea",
     "f6738f9fcd3ad84e",
     "f869310f75fb43da",
     "f91d882ac4ef1fc0",
     "f9d29564efb2b92e",
     "fb507315db988d91",
+    "fdbcf9f70c0c614a",
     "fe29788088343cb3",
     "fe36a8ca79649268",
     "fec231266c721592"
    ],
    "ejemplos": [
-    "Huracán Simón y tormenta tropical Rachel dejan 5 muertos en México, mientras las lluvias provocan inundaciones, deslaves y personas desaparecidas en la costa del Pacífico",
-    "Advierten por lluvias “históricas” en Tijuana tras afectaciones de Rachel",
-    "Rachel golpea California con olas que dañan viviendas y lluvias intensas: El Niño ayuda a explicar lo ocurrido"
-   ]
-  },
-  {
-   "termino": "rachel",
-   "n": 159,
-   "n_previo": 9,
-   "momento": 150,
-   "zonas": {
-    "Tijuana": 40,
-    "Ensenada": 36,
-    "estatal": 34,
-    "nacional": 23,
-    "Playas de Rosarito": 12,
-    "San Diego": 8,
-    "Mexicali": 5,
-    "Tecate": 5,
-    "San Quintín": 4,
-    "San Felipe": 2
-   },
-   "fuentes": {
-    "imparcial": 36,
-    "zeta": 21,
-    "soltij": 14,
-    "afn": 13,
-    "lavoz": 11,
-    "uniradio": 11,
-    "gn-208187d76ea7": 5,
-    "jornadabc": 5,
-    "timessd": 4,
-    "gn-31193328f8e2": 3,
-    "gn-a956e11d03ed": 3,
-    "rosarito": 3,
-    "gn-507c32aa93b3": 2,
-    "gn-c3e35c36380b": 2,
-    "bajanews": 1,
-    "gn-0081b18d05b3": 1,
-    "gn-173f8fbcfc4a": 1,
-    "gn-1e56ab0989d3": 1,
-    "gn-2054b108274f": 1,
-    "gn-24bb87bf33e2": 1,
-    "gn-250e3d3bf1ff": 1,
-    "gn-31ae7e9b28e1": 1,
-    "gn-6327d1dd772f": 1,
-    "gn-655a47696e14": 1,
-    "gn-666bf1ff27e9": 1,
-    "gn-6a0220a25f7f": 1,
-    "gn-7c95a9b2ff3a": 1,
-    "gn-83da8e82d7a6": 1,
-    "gn-906741a25e9c": 1,
-    "gn-a96a3aaee9d9": 1,
-    "gn-b31589421181": 1,
-    "gn-b4bf210d5652": 1,
-    "gn-d33696b00d82": 1,
-    "gn-dc1580cd9943": 1,
-    "gn-df1d301d141c": 1,
-    "gn-f8497491006c": 1,
-    "gn-fa0b3527c7cc": 1,
-    "kpbs": 1,
-    "sintesis": 1,
-    "tecate": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "00c4772ae88d7cdf",
-    "01923917a239ca78",
-    "023bbc082c80669d",
-    "06809bd3a2ab4e41",
-    "06a2744ff275ef91",
-    "0a7e9364adb276d5",
-    "0bd5cffb1b93ad2a",
-    "0bffaca685b92f41",
-    "0f4189811cf146ca",
-    "1407e91bbe1e5d05",
-    "14e9a5550e9ad3e5",
-    "194d84d3c682e5bf",
-    "1984d58382a59f36",
-    "1b428747383fb42c",
-    "1b83354ae588e3d8",
-    "1d7062d57b10b40f",
-    "1f5a4c9508542863",
-    "205c4c2cd835c5e0",
-    "211c9b741c705b39",
-    "219377529a3410ba",
-    "21eb4d98a26f2119",
-    "22dcbfd7b26bcf54",
-    "235cc65a419f4c49",
-    "2480b023387deb6a",
-    "249d56b21f6b7b42",
-    "26f9974a8956db3f",
-    "271a1498d3b97798",
-    "2722ca2aecd4d29e",
-    "27dae66197b4da2a",
-    "29a8ca9b44d9ee38",
-    "29fac9aa03c783f5",
-    "2bfea8788ca87846",
-    "2d8965258f9d3de6",
-    "31118c6474e896bd",
-    "32e5b6fbd9a4da1c",
-    "394f112608a49caf",
-    "3b23f78a7f1382c5",
-    "3d0470705d63981b",
-    "3d2a34f0a8abce2a",
-    "3dbeccd9a4fd88b2",
-    "3ef1549e6eca4502",
-    "400c8c955dc3a5e9",
-    "41272b86668b7c8b",
-    "41a9a7542d012f14",
-    "4320d3a495f93267",
-    "4457663446844b75",
-    "458beeab649f33f8",
-    "4711d65d5d0c9cdd",
-    "484a600563412fb0",
-    "4d52d7b6d3f64394",
-    "4ded26f905314d62",
-    "512deffca8e68faf",
-    "52a7a746604a2a8c",
-    "540b208e03767d3f",
-    "5464d51af11c5e8e",
-    "5688e84764819e8d",
-    "57594cefb7746a19",
-    "5c1da343e7e40e09",
-    "5cb46eacdf4a7385",
-    "5ce7bf12444002f9",
-    "5d69c414e2b636f6",
-    "5deecf231c00b5f2",
-    "5fb8c8b2638bb4f2",
-    "61931454c5e5639b",
-    "669fa06efcba7fd6",
-    "675b0037bcc8c61e",
-    "67da7af79a6723d8",
-    "68ea6b8b930f8f90",
-    "6b271fbf8e9ee841",
-    "6cccf0e885527e23",
-    "744bd5a23f9cccad",
-    "748f9e520f8f91f7",
-    "75e0c2e75ad9d0bc",
-    "77d50292e0433497",
-    "7aa09f6a4b11ec4f",
-    "7b2b776334372d4c",
-    "7d831a245c30c3af",
-    "7e803fb0a893a38a",
-    "8492fa139145affb",
-    "88d17c7a8de74939",
-    "890fa20cc53ae9a9",
-    "8cf253de00b2f6e0",
-    "8da0cca6b12ce8a8",
-    "8ea6c4e6acecc50b",
-    "8fad69ab5d292be8",
-    "910f6f125708b2e6",
-    "931722755589f23a",
-    "93ae90ceeb390668",
-    "943285ba2cfd6d76",
-    "953bf34296fe31bf",
-    "95ad62fbd61bd1d3",
-    "9807847cfa77abb3",
-    "994bb27c7a6a8063",
-    "99e5cd40981d0657",
-    "9b6a56981724d59b",
-    "9c19d3719441fb30",
-    "9c985f287b761d97",
-    "9d7ac7b1e9c83a73",
-    "9dea704997f44035",
-    "a05eb96e23d776fc",
-    "a2b8f36b2f63c647",
-    "a32c27afee559985",
-    "a9e1e0d9be8c603a",
-    "ab2450e9c8ca64bc",
-    "ac8923961c7377a8",
-    "ae643e0d0c465ba5",
-    "b297f87d776f7a7b",
-    "b3ffb79a085a1491",
-    "b84cf2451e62e8d5",
-    "ba3a737d2b00cd77",
-    "bb1ff79e6f145037",
-    "be316b2d320c62a0",
-    "bed0f56568810acd",
-    "c1269062d63a8741",
-    "c1e256b3086b207e",
-    "c4dcd38af4aa5942",
-    "c4df13937dda8408",
-    "c5385de6ebd6af35",
-    "c5cc157644b675d9",
-    "c8d41cc8ac586ebc",
-    "c994de6fd2b36a72",
-    "c9a3d47fc89b3ca2",
-    "c9bd864eba81c6bc",
-    "cb4805fb5d111fee",
-    "cb82b834bc282384",
-    "cbd59d9955e536e1",
-    "ccf2fb45ddb46f78",
-    "ce5fe06dd985e4ca",
-    "cec950321218b2f6",
-    "d236088d05e27194",
-    "d36bdc4a1c105a04",
-    "d43f6289284b885a",
-    "d46a7541a2c8c87e",
-    "d62cea731a013d94",
-    "d87dd09a54bf1e95",
-    "dd523fd004c534d5",
-    "df856fd0e44b92ce",
-    "e001a4e3c9acb3b8",
-    "e18b026017e19e4c",
-    "e43faa940c814c5d",
-    "e51de05f0883d884",
-    "e74a5f5f4c654d4d",
-    "e8a98c9233ce59c2",
-    "e98f77a2cc627212",
-    "e996c461cbd3683e",
-    "e9e6ecf1a6534677",
-    "ea638dabb5277871",
-    "ea8a0603cb27d46c",
-    "eb6399710dd610d3",
-    "ed2035c01e6f87a8",
-    "f081726d9dd08cb8",
-    "f118e3f2a7dc251e",
-    "f4925fd198db8e46",
-    "f530ae7de4e8b3cb",
-    "f5e9f4febe67c402",
-    "f718df68793aa96b",
-    "f84a1567a04964ff",
-    "f89225ceb4e89164",
-    "fa97c6b3eb1aac6e"
-   ],
-   "ejemplos": [
-    "Despliegan 3 mil 500 elementos en Ensenada por emergencia tras tormenta Rachel",
-    "Ensenada registra 80 rescates tras el paso de Rachel",
-    "Tormenta Postropical ‘Rachel‘ Deja Pérdidas Económicas en Playas de Rosarito"
+    "Lluvias de Rachel y el Súper Niño elevan riesgo de dengue en Tijuana",
+    "Colapsan viviendas por deslizamiento de tierra en la colonia 3 de Octubre tras lluvias por tormenta Rachel",
+    "Localizan con vida a niño desaparecido durante las lluvias en Ensenada"
    ]
   },
   {
    "termino": "tormenta",
-   "n": 70,
+   "n": 76,
    "n_previo": 3,
-   "momento": 67,
+   "momento": 73,
    "zonas": {
+    "nacional": 18,
+    "Ensenada": 17,
     "Tijuana": 17,
-    "nacional": 15,
-    "Ensenada": 14,
     "estatal": 11,
     "Playas de Rosarito": 6,
-    "Mexicali": 3,
+    "Mexicali": 4,
     "San Quintín": 3,
     "San Diego": 2,
     "San Felipe": 1,
     "Tecate": 1
    },
    "fuentes": {
-    "imparcial": 17,
+    "imparcial": 21,
     "zeta": 11,
     "soltij": 7,
     "afn": 5,
     "lavoz": 5,
     "gn-208187d76ea7": 4,
-    "uniradio": 3,
+    "uniradio": 4,
     "gn-507c32aa93b3": 2,
+    "gn-df1d301d141c": 2,
     "rosarito": 2,
     "bajanews": 1,
     "gn-24bb87bf33e2": 1,
@@ -509,7 +539,6 @@
     "gn-b4bf210d5652": 1,
     "gn-c3e35c36380b": 1,
     "gn-d33696b00d82": 1,
-    "gn-df1d301d141c": 1,
     "jornadabc": 1,
     "kpbs": 1,
     "timessd": 1
@@ -528,6 +557,7 @@
     "1bcaf72c213a618b",
     "219377529a3410ba",
     "21979d7ddc2ad48b",
+    "24ad1ca77ed1ad10",
     "27dae66197b4da2a",
     "29977eb287c62ba5",
     "29a8ca9b44d9ee38",
@@ -549,6 +579,8 @@
     "67da7af79a6723d8",
     "6868d6245f1e2ad3",
     "6cccf0e885527e23",
+    "722bc5450e8437a4",
+    "73d128774a6976ec",
     "75e0c2e75ad9d0bc",
     "7d831a245c30c3af",
     "8492fa139145affb",
@@ -584,22 +616,25 @@
     "e74a5f5f4c654d4d",
     "e85215f7539c6a9a",
     "e98f77a2cc627212",
+    "ec375a1e0841ebce",
+    "f636e540719898ea",
     "f89225ceb4e89164",
-    "fa97c6b3eb1aac6e"
+    "fa97c6b3eb1aac6e",
+    "fb4c73b63cca1438"
    ],
    "ejemplos": [
+    "Gobierno de Sonora apoyará con traslados y funerales a la familia de Hermosillo que murió en Ensenada por la tormenta Rachel",
     "Despliegan 3 mil 500 elementos en Ensenada por emergencia tras tormenta Rachel",
-    "Tormenta Postropical ‘Rachel‘ Deja Pérdidas Económicas en Playas de Rosarito",
-    "Huracán Simón y tormenta tropical Rachel dejan 5 muertos en México, mientras las lluvias provocan inundaciones, deslaves y personas desaparecidas en la costa del Pacífico"
+    "Colapsan viviendas por deslizamiento de tierra en la colonia 3 de Octubre tras lluvias por tormenta Rachel"
    ]
   },
   {
    "termino": "tropical",
-   "n": 53,
+   "n": 54,
    "n_previo": 1,
-   "momento": 52,
+   "momento": 53,
    "zonas": {
-    "nacional": 18,
+    "nacional": 19,
     "San Diego": 9,
     "Tijuana": 9,
     "Ensenada": 7,
@@ -612,9 +647,9 @@
     "imparcial": 14,
     "zeta": 7,
     "timessd": 5,
+    "uniradio": 4,
     "gn-a956e11d03ed": 3,
     "lavoz": 3,
-    "uniradio": 3,
     "gn-31193328f8e2": 2,
     "gn-507c32aa93b3": 2,
     "jornadabc": 2,
@@ -684,40 +719,42 @@
     "d36bdc4a1c105a04",
     "d43f6289284b885a",
     "d46a7541a2c8c87e",
-    "ea638dabb5277871"
+    "ea638dabb5277871",
+    "ec375a1e0841ebce"
    ],
    "ejemplos": [
+    "Llama Index Zona Costa BC a sumar esfuerzos en favor de las familias afectadas por la tormenta tropical Rachel",
     "Huracán Simón y tormenta tropical Rachel dejan 5 muertos en México, mientras las lluvias provocan inundaciones, deslaves y personas desaparecidas en la costa del Pacífico",
-    "Mientras Simon pierde fuerza, el ciclón tropical Trudy podría formarse",
-    "Post-Tropical Cyclone Rachel leaves San Diego coastal communities soaked"
+    "Mientras Simon pierde fuerza, el ciclón tropical Trudy podría formarse"
    ]
   },
   {
    "termino": "paso",
-   "n": 43,
+   "n": 49,
    "n_previo": 11,
-   "momento": 32,
+   "momento": 38,
    "zonas": {
-    "Ensenada": 14,
-    "nacional": 11,
+    "Ensenada": 17,
+    "nacional": 13,
     "estatal": 9,
     "Tijuana": 4,
     "Playas de Rosarito": 3,
     "San Diego": 3,
+    "Tecate": 2,
     "San Felipe": 1,
-    "San Quintín": 1,
-    "Tecate": 1
+    "San Quintín": 1
    },
    "fuentes": {
-    "imparcial": 9,
-    "zeta": 6,
+    "imparcial": 10,
+    "zeta": 7,
     "soltij": 5,
+    "afn": 4,
     "lavoz": 4,
-    "afn": 3,
-    "uniradio": 3,
+    "uniradio": 4,
+    "jornadabc": 3,
     "gn-c3e35c36380b": 2,
-    "jornadabc": 2,
     "bajanews": 1,
+    "gn-173f8fbcfc4a": 1,
     "gn-208187d76ea7": 1,
     "gn-507c32aa93b3": 1,
     "gn-6327d1dd772f": 1,
@@ -752,15 +789,20 @@
     "5deecf231c00b5f2",
     "5e029c9629cc5c73",
     "61931454c5e5639b",
+    "6b4a558702d7c6c2",
     "76ed1e98c65a1d1f",
     "910f6f125708b2e6",
     "943285ba2cfd6d76",
+    "943d2b051cc6b895",
+    "9cd7d138415afee0",
     "9e7ad26100fdd65b",
     "a05eb96e23d776fc",
     "a06ff56d2b03b1de",
     "b5e99491e492ae68",
     "bb1ff79e6f145037",
+    "bb625d7840654dbf",
     "c4df13937dda8408",
+    "c98e69a2ad534d2e",
     "c9a3d47fc89b3ca2",
     "c9bd864eba81c6bc",
     "d236088d05e27194",
@@ -770,13 +812,87 @@
     "e98f77a2cc627212",
     "eb6399710dd610d3",
     "f530ae7de4e8b3cb",
+    "f5dec9b281c72a31",
     "f718df68793aa96b",
     "f89225ceb4e89164"
    ],
    "ejemplos": [
+    "Localizan un quinto cuerpo en el arroyo Oaxaca tras el paso de Rachel por Ensenada",
     "Ensenada registra 80 rescates tras el paso de Rachel",
-    "Recorren asentamientos en canalización de río Tijuana tras paso de “Rachel”",
-    "Efemérides del 13 de octubre: ¿qué pasó un día como hoy en México y el mundo?"
+    "Atendieron más de sesenta emergencias en Tecate durante el paso de \"Rachel"
+   ]
+  },
+  {
+   "termino": "tormenta rachel",
+   "n": 35,
+   "n_previo": 0,
+   "momento": 35,
+   "zonas": {
+    "Ensenada": 12,
+    "Tijuana": 8,
+    "Mexicali": 4,
+    "estatal": 4,
+    "nacional": 4,
+    "Playas de Rosarito": 3,
+    "San Quintín": 3,
+    "San Diego": 1
+   },
+   "fuentes": {
+    "imparcial": 11,
+    "soltij": 5,
+    "gn-208187d76ea7": 4,
+    "zeta": 4,
+    "afn": 3,
+    "rosarito": 2,
+    "gn-24bb87bf33e2": 1,
+    "gn-c3e35c36380b": 1,
+    "gn-df1d301d141c": 1,
+    "lavoz": 1,
+    "timessd": 1,
+    "uniradio": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "023bbc082c80669d",
+    "06809bd3a2ab4e41",
+    "0a7e9364adb276d5",
+    "1407e91bbe1e5d05",
+    "219377529a3410ba",
+    "24ad1ca77ed1ad10",
+    "394f112608a49caf",
+    "3b23f78a7f1382c5",
+    "3d2a34f0a8abce2a",
+    "4320d3a495f93267",
+    "5cb46eacdf4a7385",
+    "5deecf231c00b5f2",
+    "722bc5450e8437a4",
+    "73d128774a6976ec",
+    "75e0c2e75ad9d0bc",
+    "890fa20cc53ae9a9",
+    "8ea6c4e6acecc50b",
+    "9c985f287b761d97",
+    "9d7ac7b1e9c83a73",
+    "a2b8f36b2f63c647",
+    "a32c27afee559985",
+    "ab2450e9c8ca64bc",
+    "c5cc157644b675d9",
+    "c8d41cc8ac586ebc",
+    "c9a3d47fc89b3ca2",
+    "cbd59d9955e536e1",
+    "d87dd09a54bf1e95",
+    "dd523fd004c534d5",
+    "e43faa940c814c5d",
+    "e74a5f5f4c654d4d",
+    "e98f77a2cc627212",
+    "f636e540719898ea",
+    "f89225ceb4e89164",
+    "fa97c6b3eb1aac6e",
+    "fb4c73b63cca1438"
+   ],
+   "ejemplos": [
+    "Gobierno de Sonora apoyará con traslados y funerales a la familia de Hermosillo que murió en Ensenada por la tormenta Rachel",
+    "Despliegan 3 mil 500 elementos en Ensenada por emergencia tras tormenta Rachel",
+    "Colapsan viviendas por deslizamiento de tierra en la colonia 3 de Octubre tras lluvias por tormenta Rachel"
    ]
   },
   {
@@ -844,70 +960,71 @@
    ]
   },
   {
-   "termino": "tormenta rachel",
-   "n": 30,
+   "termino": "tormenta tropical rachel",
+   "n": 29,
    "n_previo": 0,
-   "momento": 30,
+   "momento": 29,
    "zonas": {
-    "Ensenada": 9,
-    "Tijuana": 8,
-    "estatal": 4,
-    "Mexicali": 3,
-    "Playas de Rosarito": 3,
-    "San Quintín": 3,
-    "nacional": 2,
-    "San Diego": 1
+    "nacional": 9,
+    "estatal": 6,
+    "Ensenada": 5,
+    "Tijuana": 5,
+    "Playas de Rosarito": 2,
+    "San Felipe": 1,
+    "Tecate": 1
    },
    "fuentes": {
-    "imparcial": 7,
-    "soltij": 5,
-    "gn-208187d76ea7": 4,
-    "zeta": 4,
-    "afn": 3,
-    "rosarito": 2,
-    "gn-24bb87bf33e2": 1,
-    "gn-c3e35c36380b": 1,
-    "lavoz": 1,
-    "timessd": 1,
-    "uniradio": 1
+    "imparcial": 6,
+    "zeta": 5,
+    "lavoz": 3,
+    "uniradio": 3,
+    "gn-507c32aa93b3": 2,
+    "soltij": 2,
+    "bajanews": 1,
+    "gn-31193328f8e2": 1,
+    "gn-666bf1ff27e9": 1,
+    "gn-a96a3aaee9d9": 1,
+    "gn-b31589421181": 1,
+    "gn-b4bf210d5652": 1,
+    "gn-d33696b00d82": 1,
+    "jornadabc": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "023bbc082c80669d",
-    "06809bd3a2ab4e41",
-    "0a7e9364adb276d5",
-    "1407e91bbe1e5d05",
-    "219377529a3410ba",
-    "394f112608a49caf",
-    "3b23f78a7f1382c5",
-    "3d2a34f0a8abce2a",
-    "4320d3a495f93267",
-    "5cb46eacdf4a7385",
-    "5deecf231c00b5f2",
-    "75e0c2e75ad9d0bc",
-    "890fa20cc53ae9a9",
-    "8ea6c4e6acecc50b",
-    "9c985f287b761d97",
-    "9d7ac7b1e9c83a73",
-    "a2b8f36b2f63c647",
-    "a32c27afee559985",
-    "ab2450e9c8ca64bc",
-    "c5cc157644b675d9",
-    "c8d41cc8ac586ebc",
-    "c9a3d47fc89b3ca2",
-    "cbd59d9955e536e1",
-    "d87dd09a54bf1e95",
-    "dd523fd004c534d5",
-    "e43faa940c814c5d",
-    "e74a5f5f4c654d4d",
-    "e98f77a2cc627212",
-    "f89225ceb4e89164",
-    "fa97c6b3eb1aac6e"
+    "06a2744ff275ef91",
+    "0f4189811cf146ca",
+    "14e9a5550e9ad3e5",
+    "194d84d3c682e5bf",
+    "1b83354ae588e3d8",
+    "27dae66197b4da2a",
+    "29a8ca9b44d9ee38",
+    "31118c6474e896bd",
+    "3ef1549e6eca4502",
+    "4457663446844b75",
+    "5464d51af11c5e8e",
+    "57594cefb7746a19",
+    "669fa06efcba7fd6",
+    "67da7af79a6723d8",
+    "6cccf0e885527e23",
+    "7d831a245c30c3af",
+    "8492fa139145affb",
+    "8da0cca6b12ce8a8",
+    "8fad69ab5d292be8",
+    "93ae90ceeb390668",
+    "953bf34296fe31bf",
+    "95ad62fbd61bd1d3",
+    "9c19d3719441fb30",
+    "a9e1e0d9be8c603a",
+    "b297f87d776f7a7b",
+    "c4dcd38af4aa5942",
+    "d36bdc4a1c105a04",
+    "d43f6289284b885a",
+    "ec375a1e0841ebce"
    ],
    "ejemplos": [
-    "Despliegan 3 mil 500 elementos en Ensenada por emergencia tras tormenta Rachel",
-    "Encuentran sin vida a tres de los desaparecidos por la tormenta Rachel",
-    "Cruz Roja atendió 167 emergencias y realizó cuatro rescates durante tormenta Rachel en BC"
+    "Llama Index Zona Costa BC a sumar esfuerzos en favor de las familias afectadas por la tormenta tropical Rachel",
+    "Huracán Simón y tormenta tropical Rachel dejan 5 muertos en México, mientras las lluvias provocan inundaciones, deslaves y personas desaparecidas en la costa del Pacífico",
+    "Rescatan a 32 personas incomunicadas y tres perritos en rancho tras tormenta tropical Rachel en Ensenada"
    ]
   },
   {
@@ -995,73 +1112,6 @@
    ]
   },
   {
-   "termino": "tormenta tropical rachel",
-   "n": 28,
-   "n_previo": 0,
-   "momento": 28,
-   "zonas": {
-    "nacional": 8,
-    "estatal": 6,
-    "Ensenada": 5,
-    "Tijuana": 5,
-    "Playas de Rosarito": 2,
-    "San Felipe": 1,
-    "Tecate": 1
-   },
-   "fuentes": {
-    "imparcial": 6,
-    "zeta": 5,
-    "lavoz": 3,
-    "gn-507c32aa93b3": 2,
-    "soltij": 2,
-    "uniradio": 2,
-    "bajanews": 1,
-    "gn-31193328f8e2": 1,
-    "gn-666bf1ff27e9": 1,
-    "gn-a96a3aaee9d9": 1,
-    "gn-b31589421181": 1,
-    "gn-b4bf210d5652": 1,
-    "gn-d33696b00d82": 1,
-    "jornadabc": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "06a2744ff275ef91",
-    "0f4189811cf146ca",
-    "14e9a5550e9ad3e5",
-    "194d84d3c682e5bf",
-    "1b83354ae588e3d8",
-    "27dae66197b4da2a",
-    "29a8ca9b44d9ee38",
-    "31118c6474e896bd",
-    "3ef1549e6eca4502",
-    "4457663446844b75",
-    "5464d51af11c5e8e",
-    "57594cefb7746a19",
-    "669fa06efcba7fd6",
-    "67da7af79a6723d8",
-    "6cccf0e885527e23",
-    "7d831a245c30c3af",
-    "8492fa139145affb",
-    "8da0cca6b12ce8a8",
-    "8fad69ab5d292be8",
-    "93ae90ceeb390668",
-    "953bf34296fe31bf",
-    "95ad62fbd61bd1d3",
-    "9c19d3719441fb30",
-    "a9e1e0d9be8c603a",
-    "b297f87d776f7a7b",
-    "c4dcd38af4aa5942",
-    "d36bdc4a1c105a04",
-    "d43f6289284b885a"
-   ],
-   "ejemplos": [
-    "Huracán Simón y tormenta tropical Rachel dejan 5 muertos en México, mientras las lluvias provocan inundaciones, deslaves y personas desaparecidas en la costa del Pacífico",
-    "Rescatan a 32 personas incomunicadas y tres perritos en rancho tras tormenta tropical Rachel en Ensenada",
-    "🌧️🏥 Inundaciones afectan al Hospital General de Ensenada, México Las lluvias asociadas a la tormenta tropical “Rachel” provocaron inundaciones en el Hospital General de Ensenada, Baja California, lo que llevó a la evacuación de decenas de pacientes."
-   ]
-  },
-  {
    "termino": "fuertes",
    "n": 35,
    "n_previo": 10,
@@ -1140,18 +1190,18 @@
   },
   {
    "termino": "huracan simon",
-   "n": 24,
+   "n": 25,
    "n_previo": 0,
-   "momento": 24,
+   "momento": 25,
    "zonas": {
-    "nacional": 20,
+    "nacional": 21,
     "Tijuana": 2,
     "San Diego": 1,
     "estatal": 1
    },
    "fuentes": {
     "imparcial": 13,
-    "uniradio": 4,
+    "uniradio": 5,
     "gn-6a0220a25f7f": 2,
     "gn-2054b108274f": 1,
     "gn-5c24216ca826": 1,
@@ -1166,6 +1216,7 @@
     "194d84d3c682e5bf",
     "21054acdf3fd4354",
     "36e452d04404c8d3",
+    "3ff6f1dd41374571",
     "43f41e09f817a6eb",
     "4ded26f905314d62",
     "5634e651d48d3bcf",
@@ -1188,8 +1239,347 @@
    ],
    "ejemplos": [
     "Huracán Simón y tormenta tropical Rachel dejan 5 muertos en México, mientras las lluvias provocan inundaciones, deslaves y personas desaparecidas en la costa del Pacífico",
-    "Huracán ‘Simón’ pone en alerta a las costas del Pacífico; Marina evacúa a 616 personas",
-    "Huracán Simon: Mexicana cancela vuelos y cambia rutas"
+    "Huracán Simón se mantiene en categoría 1",
+    "Huracán ‘Simón’ pone en alerta a las costas del Pacífico; Marina evacúa a 616 personas"
+   ]
+  },
+  {
+   "termino": "sheinbaum",
+   "n": 53,
+   "n_previo": 31,
+   "momento": 22,
+   "zonas": {
+    "nacional": 39,
+    "Tijuana": 13,
+    "estatal": 1
+   },
+   "fuentes": {
+    "imparcial": 26,
+    "uniradio": 13,
+    "jornadabc": 7,
+    "afn": 4,
+    "gn-28ea37048c09": 1,
+    "soltij": 1,
+    "zeta": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "05b8d1a061b0d526",
+    "05ce578be32a0d08",
+    "19df328905bb0ed5",
+    "1f00a76f3dfde5bb",
+    "23d88e370be4497e",
+    "2e43f517a1d704a4",
+    "3192aa40c902233d",
+    "33026f179b85cfdb",
+    "4bb897977130922a",
+    "4d6177ca627f56f2",
+    "4e61cf3cbc576b99",
+    "531219a0737cf620",
+    "5b273bc7df40f79d",
+    "5cde1b633f29d55f",
+    "5cfb5714436dc239",
+    "5d880ee8b4fbe7a7",
+    "61f047f7e36a22e1",
+    "6290b4c49ec9e742",
+    "69aa582db735704a",
+    "69d77a9175645875",
+    "6b94cc2ec27f21b9",
+    "6deb08bd73a80998",
+    "7730f499dee1c302",
+    "7b873635e0ad2713",
+    "7e932c7ec4f4d309",
+    "81ccb52f5aaec6a3",
+    "8ab0ce16afce3580",
+    "8f38cfe5bd6eb25f",
+    "94929d6dc1b8c687",
+    "98693cdad33af34e",
+    "a6a39791010ae613",
+    "a923f20ecdb26d57",
+    "ac81b1de50ad7ad6",
+    "c4be3383ebc9d5ec",
+    "c55d974ff231ffb4",
+    "c616da2e126e8ff9",
+    "c73e601aabf0f8df",
+    "c81dd12773fe33c4",
+    "c9b1e34baa9bcddf",
+    "cce5b551debdbcbf",
+    "d09c57683e3fe3c2",
+    "d337342eec38d566",
+    "d8d6f0004c540986",
+    "e0f8ca1de8671e55",
+    "e37a438330fe4bbc",
+    "e6de07e0247c957a",
+    "ea6645f94528b0d3",
+    "ee7ce5e67fb5f96d",
+    "f6f66fddf42619eb",
+    "f939a45decca27ba",
+    "f9cd8f3b14970377",
+    "fb54fce2a16f0cfe",
+    "ff090bad9b3f1d2a"
+   ],
+   "ejemplos": [
+    "Mañanera de Claudia Sheinbaum hoy martes 13 de octubre del 2026",
+    "\"Fue para salvar vidas: Sheinbaum justifica liberación de presunto criminal en Morelos",
+    "IMSS requiere un «verdadero diagnóstico» para atender lo que no está resuelto: Sheinbaum"
+   ]
+  },
+  {
+   "termino": "imss",
+   "n": 44,
+   "n_previo": 22,
+   "momento": 22,
+   "zonas": {
+    "nacional": 21,
+    "Tijuana": 15,
+    "San Quintín": 4,
+    "Mexicali": 2,
+    "Ensenada": 1,
+    "estatal": 1
+   },
+   "fuentes": {
+    "imparcial": 17,
+    "afn": 7,
+    "uniradio": 6,
+    "jornadabc": 4,
+    "soltij": 4,
+    "zeta": 3,
+    "gn-b041eae59658": 2,
+    "gn-f7cfee7134bd": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "08cc30c7ed3c622a",
+    "112e89e3a4d513a7",
+    "1a6d0ff68bc1d414",
+    "1f00a76f3dfde5bb",
+    "2cd20c0b16028146",
+    "2cdb602a4c431b08",
+    "317459e92204d82a",
+    "47b1c6a3b43427ed",
+    "5f01596203269fce",
+    "5f08f1fb2ae246ca",
+    "6290b4c49ec9e742",
+    "639b004747313322",
+    "661bd28fc1a7fdcc",
+    "751e4d83c578c5b3",
+    "772707274c40b830",
+    "7e932c7ec4f4d309",
+    "7f4a38fecb5d8638",
+    "8724143695681f22",
+    "8cb58c51752aac8a",
+    "8f51d83bae3b3b08",
+    "91bcf5174a818a27",
+    "91cb2e0ffc1e3b1c",
+    "97d0e1e0e5930141",
+    "98981995adcaed70",
+    "9925f684f0948e9f",
+    "a0d57eba651e829f",
+    "a2f6edb2a4ad5261",
+    "a6a39791010ae613",
+    "ad683f10e9dcbbfe",
+    "af862c77ae692e93",
+    "b2434061e48493ad",
+    "bba8b29ac7ee1f0c",
+    "c4be3383ebc9d5ec",
+    "cc1aa5126e25d3ec",
+    "ccc0ee6b58a61d57",
+    "d7e4968e0febf762",
+    "d8db6578cd77559b",
+    "e9e4bae70128f58b",
+    "f1e56325a44fef7d",
+    "f28137d1365fdb6b",
+    "f7093afa8bfd6c6c",
+    "f81bcd7a1af1e78d",
+    "fbe747eb52e3339c",
+    "fe8a1ce2886d7cfd"
+   ],
+   "ejemplos": [
+    "IMSS e instituciones de salud abren campaña para aplicar la vacuna gratuita contra el VPH en todo México para alumnos de quinto de primaria y personas de 11 a 49 años con VIH hasta julio de 2027",
+    "IMSS requiere un «verdadero diagnóstico» para atender lo que no está resuelto: Sheinbaum",
+    "Ya puedes reportar la falta de medicamentos en el IMSS por internet"
+   ]
+  },
+  {
+   "termino": "paso rachel",
+   "n": 22,
+   "n_previo": 0,
+   "momento": 22,
+   "zonas": {
+    "Ensenada": 14,
+    "estatal": 4,
+    "Tijuana": 3,
+    "Tecate": 2,
+    "Playas de Rosarito": 1,
+    "San Felipe": 1
+   },
+   "fuentes": {
+    "afn": 4,
+    "lavoz": 4,
+    "zeta": 4,
+    "jornadabc": 3,
+    "uniradio": 3,
+    "gn-6327d1dd772f": 1,
+    "gn-6a0220a25f7f": 1,
+    "gn-c3e35c36380b": 1,
+    "sintesis": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "1984d58382a59f36",
+    "271a1498d3b97798",
+    "41272b86668b7c8b",
+    "4d52d7b6d3f64394",
+    "5ce7bf12444002f9",
+    "61931454c5e5639b",
+    "910f6f125708b2e6",
+    "943285ba2cfd6d76",
+    "9cd7d138415afee0",
+    "a05eb96e23d776fc",
+    "bb1ff79e6f145037",
+    "bb625d7840654dbf",
+    "c4df13937dda8408",
+    "c98e69a2ad534d2e",
+    "c9bd864eba81c6bc",
+    "d236088d05e27194",
+    "df856fd0e44b92ce",
+    "e8a98c9233ce59c2",
+    "eb6399710dd610d3",
+    "f530ae7de4e8b3cb",
+    "f5dec9b281c72a31",
+    "f718df68793aa96b"
+   ],
+   "ejemplos": [
+    "Localizan un quinto cuerpo en el arroyo Oaxaca tras el paso de Rachel por Ensenada",
+    "Ensenada registra 80 rescates tras el paso de Rachel",
+    "Atendieron más de sesenta emergencias en Tecate durante el paso de \"Rachel"
+   ]
+  },
+  {
+   "termino": "familias",
+   "n": 35,
+   "n_previo": 14,
+   "momento": 21,
+   "zonas": {
+    "Tijuana": 10,
+    "nacional": 10,
+    "Tecate": 4,
+    "Ensenada": 3,
+    "Mexicali": 3,
+    "estatal": 3,
+    "Playas de Rosarito": 1,
+    "San Diego": 1
+   },
+   "fuentes": {
+    "imparcial": 16,
+    "jornadabc": 3,
+    "soltij": 3,
+    "uniradio": 3,
+    "gn-36bce513f849": 2,
+    "lavoz": 2,
+    "afn": 1,
+    "gn-291a95aaf8ce": 1,
+    "gn-29632c8487f6": 1,
+    "gn-bcb3aac555e0": 1,
+    "rosarito": 1,
+    "timessd": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "00f204a12b7bd44e",
+    "0dff9c77eb7035d8",
+    "12e64001de20d470",
+    "13962030f82f90ae",
+    "15f5abd50deb7120",
+    "1a0b82de07d9c2d8",
+    "1c33fd1b5ece702f",
+    "1d105f4a327c8c8a",
+    "2cf37d74ada75c84",
+    "2efd7aca202c7ce7",
+    "3c2e938bb5764ec7",
+    "411d2eb7061cb812",
+    "538079c080bfcc59",
+    "576345cd492e7365",
+    "5dc4843b159b5dbd",
+    "6369ac33d1bac815",
+    "6492e1ee6e7131dc",
+    "67e1953baac917e9",
+    "6eb86b7ea05ba40c",
+    "6edeb57455dea1c4",
+    "9ca68807883297eb",
+    "9ef52c3c96744fd5",
+    "aa1f1a41b1512da7",
+    "ae6bf27beb54bbdb",
+    "ba3a737d2b00cd77",
+    "bb7e8ed41614cfe5",
+    "c417973640dc4fc0",
+    "c9e63be9be81f283",
+    "cc83c98161dbd8a0",
+    "da141513a11c2533",
+    "e978fea162ddd67f",
+    "ec375a1e0841ebce",
+    "ecca1022b991f2e4",
+    "fe29788088343cb3",
+    "fef9e123bd9ac996"
+   ],
+   "ejemplos": [
+    "PJBC y Elementa difundirán guía para familias de personas desaparecidas",
+    "Llama Index Zona Costa BC a sumar esfuerzos en favor de las familias afectadas por la tormenta tropical Rachel",
+    "Casi 20 mil familias dependían de AHMSA y MINOSA, pero reactivar ambas empresas requeriría una inversión millonaria y un plan de hasta 15 años, según Napoleón Gómez Urrutia"
+   ]
+  },
+  {
+   "termino": "viviendas",
+   "n": 21,
+   "n_previo": 3,
+   "momento": 18,
+   "zonas": {
+    "Tijuana": 8,
+    "nacional": 6,
+    "Playas de Rosarito": 3,
+    "Mexicali": 2,
+    "Ensenada": 1,
+    "estatal": 1
+   },
+   "fuentes": {
+    "imparcial": 8,
+    "afn": 3,
+    "uniradio": 3,
+    "gn-208187d76ea7": 2,
+    "gn-29632c8487f6": 1,
+    "jornadabc": 1,
+    "lavoz": 1,
+    "soltij": 1,
+    "zeta": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "0d2dd1bad1f3a1c2",
+    "0eea8a4662a00bd6",
+    "16253ec5378dedd3",
+    "1ca0eabeee3c2b4a",
+    "2303acd6e447c295",
+    "2efd7aca202c7ce7",
+    "30b3b2b7124738a4",
+    "3e68e375c4c440ba",
+    "748f9e520f8f91f7",
+    "85b823793c16f45e",
+    "9b0eddb0e612afc6",
+    "aa1f1a41b1512da7",
+    "ab2450e9c8ca64bc",
+    "acc3872cc210db09",
+    "b27bd98af123a533",
+    "b37648ad7e22353d",
+    "c704016df6a0f637",
+    "d638c726a4ba26ff",
+    "e60a3f86ac942235",
+    "f5e9f4febe67c402",
+    "f636e540719898ea"
+   ],
+   "ejemplos": [
+    "Colapsan viviendas por deslizamiento de tierra en la colonia 3 de Octubre tras lluvias por tormenta Rachel",
+    "Protección Civil evalúa 30 viviendas más tras hundimiento en la colonia 3 de Octubre",
+    "Deslizamiento de tierra tras lluvias pone en riesgo viviendas en la 3 de Octubre de Tijuana"
    ]
   },
   {
@@ -1247,54 +1637,125 @@
    ]
   },
   {
-   "termino": "paso rachel",
-   "n": 18,
-   "n_previo": 0,
-   "momento": 18,
+   "termino": "felipe",
+   "n": 33,
+   "n_previo": 16,
+   "momento": 17,
    "zonas": {
-    "Ensenada": 11,
-    "estatal": 4,
-    "Tijuana": 3,
-    "Playas de Rosarito": 1,
-    "San Felipe": 1,
-    "Tecate": 1
+    "San Felipe": 32,
+    "Ensenada": 1,
+    "nacional": 1
    },
    "fuentes": {
-    "lavoz": 4,
-    "afn": 3,
-    "zeta": 3,
-    "jornadabc": 2,
-    "uniradio": 2,
+    "lavoz": 9,
+    "gn-507c32aa93b3": 8,
+    "imparcial": 8,
+    "afn": 1,
+    "bajanews": 1,
+    "gn-2f955974c5c0": 1,
     "gn-6327d1dd772f": 1,
-    "gn-6a0220a25f7f": 1,
-    "gn-c3e35c36380b": 1,
-    "sintesis": 1
+    "gn-704f83760328": 1,
+    "gn-875e5e1681c0": 1,
+    "gn-b4bf210d5652": 1,
+    "gn-c1d6f8717505": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "1984d58382a59f36",
-    "271a1498d3b97798",
-    "41272b86668b7c8b",
-    "4d52d7b6d3f64394",
-    "5ce7bf12444002f9",
-    "61931454c5e5639b",
+    "031b9e374cd9f5da",
+    "05ce578be32a0d08",
+    "07ac990d992653aa",
+    "14598bbb8d41f8c4",
+    "1cfc95006caf020d",
+    "1fd9ec50614d710a",
+    "264335fe9eeb88d9",
+    "27cbdba657702037",
+    "31118c6474e896bd",
+    "535958f2a989d420",
+    "5e3aba56c391852e",
+    "60595b8961c0bb70",
+    "6b764f436b936a7c",
+    "6f38a1cd9278c77b",
+    "70132e26a7241a51",
+    "749bdf8db66d1ce9",
+    "7672968ab001d0fc",
+    "82e8f9429096faa6",
+    "84afc13e20c593df",
+    "87d7ba1a4939790a",
+    "88d226611dcd4e2b",
     "910f6f125708b2e6",
-    "943285ba2cfd6d76",
-    "a05eb96e23d776fc",
-    "bb1ff79e6f145037",
-    "c4df13937dda8408",
-    "c9bd864eba81c6bc",
-    "d236088d05e27194",
-    "df856fd0e44b92ce",
-    "e8a98c9233ce59c2",
-    "eb6399710dd610d3",
-    "f530ae7de4e8b3cb",
-    "f718df68793aa96b"
+    "a5061c8cad345113",
+    "acbd6c02c8d3c77b",
+    "b8a1ba078701dcf6",
+    "bf02360c36480588",
+    "c26279f4ec60e1e9",
+    "c5b0bb4bba242b88",
+    "df278b8e4b3dae40",
+    "efa8251e8aed0778",
+    "f93bd9e1b9b7bbc8",
+    "f9c90dca7d435aa4",
+    "faf82c863542dfd7"
    ],
    "ejemplos": [
-    "Ensenada registra 80 rescates tras el paso de Rachel",
-    "Recorren asentamientos en canalización de río Tijuana tras paso de “Rachel”",
-    "Siete personas desaparecidas y una fallecida tras el paso de Rachel por Ensenada"
+    "Llama Secretaria de Medio Ambiente a unirse al Colillatón y Baja las pilas en San Felipe",
+    "Dialogan pescadores y alcalde de San Felipe; piden solucionar límites de pesca",
+    "Regresan al mar a tortuga que se encontraba varada en San Felipe"
+   ]
+  },
+  {
+   "termino": "trabajadores",
+   "n": 27,
+   "n_previo": 11,
+   "momento": 16,
+   "zonas": {
+    "Tijuana": 11,
+    "nacional": 11,
+    "Mexicali": 3,
+    "San Quintín": 1,
+    "estatal": 1
+   },
+   "fuentes": {
+    "imparcial": 11,
+    "afn": 4,
+    "soltij": 4,
+    "lavoz": 3,
+    "jornadabc": 2,
+    "uniradio": 2,
+    "gn-b041eae59658": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "0f05448142a50e24",
+    "112e89e3a4d513a7",
+    "1816e5d23ec03e6f",
+    "1a6d0ff68bc1d414",
+    "1f00a76f3dfde5bb",
+    "24dc46f0bfae484c",
+    "25f3ae7610bec409",
+    "2cd20c0b16028146",
+    "2cdb602a4c431b08",
+    "3685f7a46819c700",
+    "47b1c6a3b43427ed",
+    "70d09f3aff5b555d",
+    "751e4d83c578c5b3",
+    "7f4a38fecb5d8638",
+    "82b3c0c7abd7aaa8",
+    "97d0e1e0e5930141",
+    "9aeb9959569f9b40",
+    "ac158ce26f506ea7",
+    "ad683f10e9dcbbfe",
+    "b2434061e48493ad",
+    "b3a2fe9f608fe25c",
+    "d382794efc618168",
+    "e592d5c50b664971",
+    "e61474b70026ce98",
+    "e8fb9bdf5b077e84",
+    "fa646f29f827f00d",
+    "fbe747eb52e3339c"
+   ],
+   "ejemplos": [
+    "Protestan trabajadores del IMSS; exigen mejorar condiciones laborales",
+    "Marchan ex trabajadores de Luz y Fuerza, sindicato extinto hace 17 años",
+    "IMSS escuchará a trabajadores de 277 hospitales para resolver problemas operativos"
    ]
   },
   {
@@ -1397,198 +1858,63 @@
    ]
   },
   {
-   "termino": "sheinbaum",
-   "n": 46,
-   "n_previo": 31,
-   "momento": 15,
-   "zonas": {
-    "nacional": 35,
-    "Tijuana": 10,
-    "estatal": 1
-   },
-   "fuentes": {
-    "imparcial": 25,
-    "uniradio": 10,
-    "jornadabc": 5,
-    "afn": 3,
-    "gn-28ea37048c09": 1,
-    "soltij": 1,
-    "zeta": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "05b8d1a061b0d526",
-    "05ce578be32a0d08",
-    "19df328905bb0ed5",
-    "1f00a76f3dfde5bb",
-    "23d88e370be4497e",
-    "3192aa40c902233d",
-    "33026f179b85cfdb",
-    "4bb897977130922a",
-    "4d6177ca627f56f2",
-    "4e61cf3cbc576b99",
-    "531219a0737cf620",
-    "5b273bc7df40f79d",
-    "5cde1b633f29d55f",
-    "5cfb5714436dc239",
-    "5d880ee8b4fbe7a7",
-    "61f047f7e36a22e1",
-    "6290b4c49ec9e742",
-    "69d77a9175645875",
-    "6b94cc2ec27f21b9",
-    "6deb08bd73a80998",
-    "7b873635e0ad2713",
-    "81ccb52f5aaec6a3",
-    "8ab0ce16afce3580",
-    "94929d6dc1b8c687",
-    "98693cdad33af34e",
-    "ac81b1de50ad7ad6",
-    "c4be3383ebc9d5ec",
-    "c55d974ff231ffb4",
-    "c616da2e126e8ff9",
-    "c73e601aabf0f8df",
-    "c81dd12773fe33c4",
-    "c9b1e34baa9bcddf",
-    "cce5b551debdbcbf",
-    "d09c57683e3fe3c2",
-    "d337342eec38d566",
-    "d8d6f0004c540986",
-    "e0f8ca1de8671e55",
-    "e37a438330fe4bbc",
-    "e6de07e0247c957a",
-    "ea6645f94528b0d3",
-    "ee7ce5e67fb5f96d",
-    "f6f66fddf42619eb",
-    "f939a45decca27ba",
-    "f9cd8f3b14970377",
-    "fb54fce2a16f0cfe",
-    "ff090bad9b3f1d2a"
-   ],
-   "ejemplos": [
-    "Mañanera de Claudia Sheinbaum hoy martes 13 de octubre del 2026",
-    "Pablo Lemus responde a Sheinbaum tras violencia en marcha por el agua",
-    "Mañanera de Claudia Sheinbaum hoy lunes 12 de octubre del 2026"
-   ]
-  },
-  {
-   "termino": "familias",
+   "termino": "colonia",
    "n": 29,
    "n_previo": 14,
    "momento": 15,
    "zonas": {
-    "Tijuana": 8,
-    "nacional": 8,
-    "Tecate": 4,
-    "Ensenada": 3,
-    "Mexicali": 3,
-    "Playas de Rosarito": 1,
-    "San Diego": 1,
-    "estatal": 1
+    "Tijuana": 20,
+    "nacional": 6,
+    "Mexicali": 2,
+    "Tecate": 1
    },
    "fuentes": {
-    "imparcial": 14,
-    "jornadabc": 3,
-    "gn-36bce513f849": 2,
-    "lavoz": 2,
-    "soltij": 2,
-    "uniradio": 2,
-    "gn-29632c8487f6": 1,
-    "gn-bcb3aac555e0": 1,
-    "rosarito": 1,
-    "timessd": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "00f204a12b7bd44e",
-    "0dff9c77eb7035d8",
-    "13962030f82f90ae",
-    "15f5abd50deb7120",
-    "1a0b82de07d9c2d8",
-    "1c33fd1b5ece702f",
-    "1d105f4a327c8c8a",
-    "2cf37d74ada75c84",
-    "2efd7aca202c7ce7",
-    "3c2e938bb5764ec7",
-    "538079c080bfcc59",
-    "576345cd492e7365",
-    "5dc4843b159b5dbd",
-    "6492e1ee6e7131dc",
-    "67e1953baac917e9",
-    "6eb86b7ea05ba40c",
-    "9ca68807883297eb",
-    "aa1f1a41b1512da7",
-    "ae6bf27beb54bbdb",
-    "ba3a737d2b00cd77",
-    "bb7e8ed41614cfe5",
-    "c417973640dc4fc0",
-    "c9e63be9be81f283",
-    "cc83c98161dbd8a0",
-    "da141513a11c2533",
-    "e978fea162ddd67f",
-    "ecca1022b991f2e4",
-    "fe29788088343cb3",
-    "fef9e123bd9ac996"
-   ],
-   "ejemplos": [
-    "PJBC y Elementa difundirán guía para familias de personas desaparecidas",
-    "Casi 20 mil familias dependían de AHMSA y MINOSA, pero reactivar ambas empresas requeriría una inversión millonaria y un plan de hasta 15 años, según Napoleón Gómez Urrutia",
-    "Lluvias en Tijuana afectan 10 viviendas; familias acuden a albergue"
-   ]
-  },
-  {
-   "termino": "trabajadores",
-   "n": 26,
-   "n_previo": 11,
-   "momento": 15,
-   "zonas": {
-    "nacional": 11,
-    "Tijuana": 10,
-    "Mexicali": 3,
-    "San Quintín": 1,
-    "estatal": 1
-   },
-   "fuentes": {
-    "imparcial": 11,
+    "imparcial": 9,
+    "afn": 4,
     "soltij": 4,
-    "afn": 3,
-    "lavoz": 3,
+    "zeta": 4,
     "jornadabc": 2,
+    "rosarito": 2,
     "uniradio": 2,
-    "gn-b041eae59658": 1
+    "lavoz": 1,
+    "tecate": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "0f05448142a50e24",
-    "112e89e3a4d513a7",
-    "1816e5d23ec03e6f",
-    "1a6d0ff68bc1d414",
-    "1f00a76f3dfde5bb",
-    "24dc46f0bfae484c",
-    "25f3ae7610bec409",
-    "2cd20c0b16028146",
-    "2cdb602a4c431b08",
-    "3685f7a46819c700",
-    "70d09f3aff5b555d",
-    "751e4d83c578c5b3",
-    "7f4a38fecb5d8638",
-    "82b3c0c7abd7aaa8",
-    "97d0e1e0e5930141",
-    "9aeb9959569f9b40",
-    "ac158ce26f506ea7",
-    "ad683f10e9dcbbfe",
-    "b2434061e48493ad",
-    "b3a2fe9f608fe25c",
-    "d382794efc618168",
-    "e592d5c50b664971",
-    "e61474b70026ce98",
-    "e8fb9bdf5b077e84",
-    "fa646f29f827f00d",
-    "fbe747eb52e3339c"
+    "00bddab1db79c117",
+    "063b9c2a7ff54d46",
+    "0f858f67da0d7df8",
+    "106b49a812ca5fda",
+    "1ee6ea074129c81f",
+    "202f974d753359db",
+    "2064bc17bff0a91a",
+    "301ef894c296fcfe",
+    "31c27006c2172c19",
+    "604d24ce4de08cc0",
+    "621efffb2c78c868",
+    "7a278ef62aed1fad",
+    "7c551ef60cb15474",
+    "81afeb40edd7f1ce",
+    "99027b646b733a4c",
+    "9dea704997f44035",
+    "9e96117783bf82e4",
+    "a2f15d40d0da941f",
+    "a5a20295301b8157",
+    "a8fba80d01de9711",
+    "b27bd98af123a533",
+    "ba3a737d2b00cd77",
+    "bbcf5dd8cf1a6be7",
+    "c339e7b17d6a03de",
+    "cdab19f4197b2ad4",
+    "e60a3f86ac942235",
+    "f005b86ca7708205",
+    "f636e540719898ea",
+    "fe29788088343cb3"
    ],
    "ejemplos": [
-    "Marchan ex trabajadores de Luz y Fuerza, sindicato extinto hace 17 años",
-    "IMSS escuchará a trabajadores de 277 hospitales para resolver problemas operativos",
-    "Indagan ataque armado contra trabajadores de Pemex en Minatitlán y no descaran que sea un móvil personal"
+    "Colapsan viviendas por deslizamiento de tierra en la colonia 3 de Octubre tras lluvias por tormenta Rachel",
+    "Protección Civil evalúa 30 viviendas más tras hundimiento en la colonia 3 de Octubre",
+    "Familias evacúan sus casas en colonia 3 de Octubre porque lluvias aceleraron hundimiento"
    ]
   },
   {
@@ -1638,254 +1964,22 @@
    ]
   },
   {
-   "termino": "imss",
-   "n": 36,
-   "n_previo": 22,
-   "momento": 14,
-   "zonas": {
-    "nacional": 18,
-    "Tijuana": 11,
-    "San Quintín": 3,
-    "Mexicali": 2,
-    "Ensenada": 1,
-    "estatal": 1
-   },
-   "fuentes": {
-    "imparcial": 15,
-    "afn": 5,
-    "uniradio": 5,
-    "jornadabc": 3,
-    "soltij": 3,
-    "zeta": 3,
-    "gn-b041eae59658": 2
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "08cc30c7ed3c622a",
-    "112e89e3a4d513a7",
-    "1a6d0ff68bc1d414",
-    "1f00a76f3dfde5bb",
-    "2cd20c0b16028146",
-    "2cdb602a4c431b08",
-    "5f01596203269fce",
-    "5f08f1fb2ae246ca",
-    "6290b4c49ec9e742",
-    "639b004747313322",
-    "751e4d83c578c5b3",
-    "772707274c40b830",
-    "7f4a38fecb5d8638",
-    "8724143695681f22",
-    "8cb58c51752aac8a",
-    "91bcf5174a818a27",
-    "91cb2e0ffc1e3b1c",
-    "97d0e1e0e5930141",
-    "9925f684f0948e9f",
-    "a0d57eba651e829f",
-    "a2f6edb2a4ad5261",
-    "ad683f10e9dcbbfe",
-    "af862c77ae692e93",
-    "b2434061e48493ad",
-    "bba8b29ac7ee1f0c",
-    "c4be3383ebc9d5ec",
-    "cc1aa5126e25d3ec",
-    "ccc0ee6b58a61d57",
-    "d7e4968e0febf762",
-    "d8db6578cd77559b",
-    "e9e4bae70128f58b",
-    "f28137d1365fdb6b",
-    "f7093afa8bfd6c6c",
-    "f81bcd7a1af1e78d",
-    "fbe747eb52e3339c",
-    "fe8a1ce2886d7cfd"
-   ],
-   "ejemplos": [
-    "Confirman que menor fallecido en clínica del IMSS en Mexicali presentaba síndrome del niño maltratado",
-    "Mientras en México los hombres necesitan 875 semanas cotizadas en 2026 para pensionarse bajo la Ley 97 del IMSS, en Colombia el requisito general es de 1,300 semanas, una diferencia de 425 semanas entre ambos países",
-    "IMSS escuchará a trabajadores de 277 hospitales para resolver problemas operativos"
-   ]
-  },
-  {
-   "termino": "viviendas",
-   "n": 17,
-   "n_previo": 3,
-   "momento": 14,
-   "zonas": {
-    "Tijuana": 5,
-    "nacional": 5,
-    "Playas de Rosarito": 3,
-    "Mexicali": 2,
-    "Ensenada": 1,
-    "estatal": 1
-   },
-   "fuentes": {
-    "imparcial": 7,
-    "uniradio": 3,
-    "afn": 2,
-    "gn-208187d76ea7": 2,
-    "gn-29632c8487f6": 1,
-    "lavoz": 1,
-    "zeta": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "0d2dd1bad1f3a1c2",
-    "0eea8a4662a00bd6",
-    "16253ec5378dedd3",
-    "1ca0eabeee3c2b4a",
-    "2303acd6e447c295",
-    "2efd7aca202c7ce7",
-    "30b3b2b7124738a4",
-    "3e68e375c4c440ba",
-    "748f9e520f8f91f7",
-    "85b823793c16f45e",
-    "aa1f1a41b1512da7",
-    "ab2450e9c8ca64bc",
-    "acc3872cc210db09",
-    "b27bd98af123a533",
-    "c704016df6a0f637",
-    "d638c726a4ba26ff",
-    "f5e9f4febe67c402"
-   ],
-   "ejemplos": [
-    "Rachel golpea California con olas que dañan viviendas y lluvias intensas: El Niño ayuda a explicar lo ocurrido",
-    "Lluvias en Tijuana afectan 10 viviendas; familias acuden a albergue",
-    "Desalojan viviendas por hundimiento y grietas en la colonia 3 de Octubre en Tijuana"
-   ]
-  },
-  {
-   "termino": "felipe",
-   "n": 29,
-   "n_previo": 16,
-   "momento": 13,
-   "zonas": {
-    "San Felipe": 28,
-    "Ensenada": 1,
-    "nacional": 1
-   },
-   "fuentes": {
-    "gn-507c32aa93b3": 8,
-    "imparcial": 8,
-    "lavoz": 7,
-    "bajanews": 1,
-    "gn-2f955974c5c0": 1,
-    "gn-6327d1dd772f": 1,
-    "gn-704f83760328": 1,
-    "gn-875e5e1681c0": 1,
-    "gn-b4bf210d5652": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "031b9e374cd9f5da",
-    "05ce578be32a0d08",
-    "07ac990d992653aa",
-    "14598bbb8d41f8c4",
-    "1cfc95006caf020d",
-    "1fd9ec50614d710a",
-    "264335fe9eeb88d9",
-    "27cbdba657702037",
-    "31118c6474e896bd",
-    "535958f2a989d420",
-    "5e3aba56c391852e",
-    "60595b8961c0bb70",
-    "6b764f436b936a7c",
-    "6f38a1cd9278c77b",
-    "70132e26a7241a51",
-    "749bdf8db66d1ce9",
-    "84afc13e20c593df",
-    "87d7ba1a4939790a",
-    "88d226611dcd4e2b",
-    "910f6f125708b2e6",
-    "a5061c8cad345113",
-    "b8a1ba078701dcf6",
-    "bf02360c36480588",
-    "c26279f4ec60e1e9",
-    "c5b0bb4bba242b88",
-    "df278b8e4b3dae40",
-    "efa8251e8aed0778",
-    "f93bd9e1b9b7bbc8",
-    "faf82c863542dfd7"
-   ],
-   "ejemplos": [
-    "Sigue búsqueda de hombre y menor desaparecidos en el mar tras salir de San Felipe",
-    "Prioriza Marina del Pilar búsqueda de pescadores desaparecidos en San Felipe",
-    "Marina del Pilar activa operativos de rescate en Ensenada y San Felipe tras el paso de Rachel"
-   ]
-  },
-  {
-   "termino": "colonia",
-   "n": 27,
-   "n_previo": 14,
-   "momento": 13,
-   "zonas": {
-    "Tijuana": 19,
-    "nacional": 5,
-    "Mexicali": 2,
-    "Tecate": 1
-   },
-   "fuentes": {
-    "imparcial": 8,
-    "afn": 4,
-    "zeta": 4,
-    "soltij": 3,
-    "jornadabc": 2,
-    "rosarito": 2,
-    "uniradio": 2,
-    "lavoz": 1,
-    "tecate": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "00bddab1db79c117",
-    "063b9c2a7ff54d46",
-    "0f858f67da0d7df8",
-    "106b49a812ca5fda",
-    "1ee6ea074129c81f",
-    "202f974d753359db",
-    "2064bc17bff0a91a",
-    "301ef894c296fcfe",
-    "31c27006c2172c19",
-    "604d24ce4de08cc0",
-    "621efffb2c78c868",
-    "7a278ef62aed1fad",
-    "7c551ef60cb15474",
-    "81afeb40edd7f1ce",
-    "99027b646b733a4c",
-    "9dea704997f44035",
-    "9e96117783bf82e4",
-    "a2f15d40d0da941f",
-    "a5a20295301b8157",
-    "a8fba80d01de9711",
-    "b27bd98af123a533",
-    "ba3a737d2b00cd77",
-    "bbcf5dd8cf1a6be7",
-    "c339e7b17d6a03de",
-    "cdab19f4197b2ad4",
-    "f005b86ca7708205",
-    "fe29788088343cb3"
-   ],
-   "ejemplos": [
-    "Familias evacúan sus casas en colonia 3 de Octubre porque lluvias aceleraron hundimiento",
-    "Desalojan viviendas por hundimiento y grietas en la colonia 3 de Octubre en Tijuana",
-    "Lluvias provocan deslave a la altura de colonia Valle de las Flores"
-   ]
-  },
-  {
    "termino": "danos",
-   "n": 18,
+   "n": 19,
    "n_previo": 5,
-   "momento": 13,
+   "momento": 14,
    "zonas": {
     "estatal": 5,
     "nacional": 5,
+    "Ensenada": 2,
     "Mexicali": 2,
     "San Quintín": 2,
-    "Ensenada": 1,
     "Playas de Rosarito": 1,
     "San Diego": 1,
     "Tijuana": 1
    },
    "fuentes": {
-    "imparcial": 5,
+    "imparcial": 6,
     "afn": 3,
     "uniradio": 2,
     "zeta": 2,
@@ -1913,110 +2007,100 @@
     "b5a60cb2b37af5d0",
     "ba3a737d2b00cd77",
     "da02253a236183f0",
+    "e64bbf0f2b637fc3",
     "e98f77a2cc627212",
     "eebc9e5330073ead",
     "fe4463ae981ab65d"
    ],
    "ejemplos": [
+    "Reanuda clases la Secundaria Diurna 2 pese a daños por Rachel en Ensenada",
     "Burgueño no atendió reporte de daños en puente de Terrazas, acusa Gilvaja",
-    "\"Simón\" y \"Rachel\" golpean el Pacífico; reportan daños y personas no localizadas",
-    "Cierres viales y daños en postes de la CFE, el saldo de las fuertes lluvias en Mexicali"
+    "\"Simón\" y \"Rachel\" golpean el Pacífico; reportan daños y personas no localizadas"
    ]
   },
   {
-   "termino": "rescatan",
-   "n": 18,
-   "n_previo": 5,
-   "momento": 13,
+   "termino": "amenaza",
+   "n": 16,
+   "n_previo": 2,
+   "momento": 14,
    "zonas": {
-    "Ensenada": 4,
-    "Mexicali": 4,
-    "Playas de Rosarito": 3,
+    "nacional": 10,
     "Tijuana": 3,
-    "San Felipe": 2,
-    "estatal": 1,
-    "nacional": 1
+    "estatal": 2,
+    "Mexicali": 1
    },
    "fuentes": {
-    "imparcial": 4,
-    "afn": 2,
-    "lavoz": 2,
-    "uniradio": 2,
+    "imparcial": 11,
     "zeta": 2,
-    "gn-a96a3aaee9d9": 1,
-    "gn-c3e35c36380b": 1,
-    "jornadabc": 1,
-    "rosarito": 1,
-    "sintesis": 1,
-    "soltij": 1
+    "afn": 1,
+    "gn-24bb87bf33e2": 1,
+    "gn-666bf1ff27e9": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "0015f909e47763f9",
-    "0f858f67da0d7df8",
-    "20f311e03167233a",
-    "249d56b21f6b7b42",
-    "4854654f5ad59e58",
-    "4cad78cbbb9981e6",
-    "5d461c572bf680f7",
-    "640ad34e92886781",
-    "720afd360e72842d",
-    "8492fa139145affb",
-    "9271e9818a1be806",
-    "93e00afaa01b5975",
-    "b8d8076e03dd7856",
-    "bc2a7ee77e6ef6a2",
-    "c417973640dc4fc0",
-    "df278b8e4b3dae40",
-    "eb6399710dd610d3",
-    "faf82c863542dfd7"
+    "04834cf40f8788f0",
+    "04ccda52f0b3e3ce",
+    "0d42d446b87b3d4f",
+    "12e64a8beb69dd87",
+    "1bcaf72c213a618b",
+    "2d465d6185d0a53c",
+    "351e44b099090d7a",
+    "94f2c309f9d96ede",
+    "953bf34296fe31bf",
+    "9a51412c0a6a092e",
+    "9d5172c53ad2781a",
+    "ae6950a7d94bae16",
+    "c43f162459b0f6b5",
+    "d2a1030f9379fd99",
+    "d87dd09a54bf1e95",
+    "f6f8ffa838461789"
    ],
    "ejemplos": [
-    "Rescatan a 32 personas incomunicadas en Ensenada tras paso de Rachel",
-    "Rescatan a familias atrapadas por las lluvias en rancho Génesis con apoyo de la defensa y gobierno de Marina del Pilar",
-    "Rescatan en helicópteros a 30 personas aisladas en poblado"
+    "Extorsión amenaza a la economía pesquera",
+    "Muro fronterizo amenaza a miles de sahuaros en territorio Tohono O’odham",
+    "Irrumpe en casa de su expareja, agrede a dos personas y las amenaza con una navaja"
    ]
   }
  ],
  "descartados": [
   {
    "termino": "estados",
-   "n": 47,
+   "n": 49,
    "porque": "duplica «estados unidos»"
   },
   {
-   "termino": "simon",
-   "n": 36,
+   "termino": "huracan",
+   "n": 38,
    "porque": "duplica «huracan simon»"
   },
   {
-   "termino": "huracan",
-   "n": 35,
+   "termino": "simon",
+   "n": 37,
    "porque": "duplica «huracan simon»"
   },
   {
    "termino": "tormenta tropical",
-   "n": 34,
-   "porque": "duplica «tormenta tropical rachel»"
-  },
-  {
-   "termino": "tropical rachel",
-   "n": 30,
+   "n": 35,
    "porque": "duplica «tormenta tropical rachel»"
   },
   {
    "termino": "unidos",
-   "n": 30,
+   "n": 32,
    "porque": "duplica «estados unidos»"
   },
   {
+   "termino": "tropical rachel",
+   "n": 31,
+   "porque": "duplica «tormenta tropical rachel»"
+  },
+  {
    "termino": "proteccion",
-   "n": 26,
+   "n": 28,
    "porque": "duplica «proteccion civil»"
   },
   {
    "termino": "civil",
-   "n": 20,
+   "n": 21,
    "porque": "duplica «proteccion civil»"
   },
   {
@@ -2035,19 +2119,34 @@
    "porque": "duplica «prision preventiva»"
   },
   {
-   "termino": "cancer",
+   "termino": "leon",
    "n": 13,
-   "porque": "duplica «cancer mama»"
+   "porque": "duplica «papa leon»"
   },
   {
    "termino": "refugios",
-   "n": 12,
+   "n": 13,
    "porque": "duplica «refugios temporales»"
   },
   {
    "termino": "campeonato",
-   "n": 11,
+   "n": 12,
    "porque": "duplica «serie campeonato»"
+  },
+  {
+   "termino": "mental",
+   "n": 12,
+   "porque": "duplica «salud mental»"
+  },
+  {
+   "termino": "vicente",
+   "n": 12,
+   "porque": "duplica «vicente guerrero»"
+  },
+  {
+   "termino": "guerrero",
+   "n": 11,
+   "porque": "duplica «vicente guerrero»"
   },
   {
    "termino": "magnitud",
@@ -2055,54 +2154,40 @@
    "porque": "duplica «sismo magnitud sacude»"
   },
   {
-   "termino": "mental",
-   "n": 11,
-   "porque": "duplica «salud mental»"
-  },
-  {
-   "termino": "lincoln",
-   "n": 10,
-   "porque": "duplica «abraham lincoln»"
-  },
-  {
    "termino": "mama",
-   "n": 10,
+   "n": 11,
    "porque": "duplica «cancer mama»"
   },
   {
-   "termino": "paso tormenta",
+   "termino": "corte",
    "n": 10,
-   "porque": "duplica «paso tormenta rachel»"
-  },
-  {
-   "termino": "sismo magnitud",
-   "n": 10,
-   "porque": "duplica «sismo magnitud sacude»"
+   "porque": "duplica «suprema corte»"
   }
  ],
  "por_zona": {
   "Tijuana": {
-   "notas_ventana": 566,
+   "notas_ventana": 614,
    "minimo": 3,
    "temas": [
     {
      "termino": "lluvias",
-     "n": 60,
+     "n": 63,
      "n_previo": 7,
-     "momento": 53,
+     "momento": 56,
      "zonas": {
-      "Tijuana": 60,
+      "Tijuana": 63,
       "Playas de Rosarito": 5,
       "Ensenada": 2
      },
      "fuentes": {
-      "imparcial": 13,
+      "imparcial": 14,
       "soltij": 13,
       "afn": 12,
       "zeta": 9,
-      "jornadabc": 7,
+      "jornadabc": 8,
       "uniradio": 2,
       "gn-31193328f8e2": 1,
+      "gn-a96a3aaee9d9": 1,
       "gn-d33696b00d82": 1,
       "gn-dc1580cd9943": 1,
       "gn-df1d301d141c": 1
@@ -2148,6 +2233,7 @@
       "ae643e0d0c465ba5",
       "aeb9fd27747ce9e5",
       "af3ebb61952716dd",
+      "b37648ad7e22353d",
       "b908b77e06e9dc0c",
       "ba3a737d2b00cd77",
       "beb3ffea3b81af6e",
@@ -2164,32 +2250,34 @@
       "e17e343b2ebe90db",
       "e1f6f023f7f2b25f",
       "e51de05f0883d884",
+      "e569ed71c74cad02",
       "ec25e575f6cda00f",
       "f6738f9fcd3ad84e",
       "f9d29564efb2b92e",
+      "fdbcf9f70c0c614a",
       "fe29788088343cb3",
       "fec231266c721592"
      ],
      "ejemplos": [
-      "Advierten por lluvias “históricas” en Tijuana tras afectaciones de Rachel",
-      "Lluvias en Tijuana afectan 10 viviendas; familias acuden a albergue",
-      "Familias evacúan sus casas en colonia 3 de Octubre porque lluvias aceleraron hundimiento"
+      "Lluvias de Rachel y el Súper Niño elevan riesgo de dengue en Tijuana",
+      "Dónde donar en Baja California: habilitan centros de acopio en Tijuana y municipios tras las lluvias",
+      "Deslizamiento de tierra tras lluvias pone en riesgo viviendas en la 3 de Octubre de Tijuana"
      ]
     },
     {
      "termino": "rachel",
-     "n": 40,
+     "n": 42,
      "n_previo": 1,
-     "momento": 39,
+     "momento": 41,
      "zonas": {
-      "Tijuana": 40,
+      "Tijuana": 42,
       "Ensenada": 5,
       "Playas de Rosarito": 2
      },
      "fuentes": {
+      "imparcial": 10,
       "zeta": 10,
-      "imparcial": 9,
-      "afn": 8,
+      "afn": 9,
       "soltij": 6,
       "jornadabc": 2,
       "uniradio": 2,
@@ -2199,6 +2287,7 @@
      },
      "un_solo_medio": false,
      "notas": [
+      "12e64001de20d470",
       "26f9974a8956db3f",
       "3d0470705d63981b",
       "3dbeccd9a4fd88b2",
@@ -2238,12 +2327,13 @@
       "e74a5f5f4c654d4d",
       "e996c461cbd3683e",
       "f4925fd198db8e46",
-      "f84a1567a04964ff"
+      "f84a1567a04964ff",
+      "fdbcf9f70c0c614a"
      ],
      "ejemplos": [
+      "Lluvias de Rachel y el Súper Niño elevan riesgo de dengue en Tijuana",
       "Advierten por lluvias “históricas” en Tijuana tras afectaciones de Rachel",
-      "Recorren asentamientos en canalización de río Tijuana tras paso de “Rachel”",
-      "Basura arrastrada por Rachel evidencia fallas en recolección e impunidad ambiental en Tijuana: CostaSalvaje"
+      "Recorren asentamientos en canalización de río Tijuana tras paso de “Rachel”"
      ]
     },
     {
@@ -2291,16 +2381,16 @@
     },
     {
      "termino": "colonia",
-     "n": 19,
+     "n": 20,
      "n_previo": 5,
-     "momento": 14,
+     "momento": 15,
      "zonas": {
-      "Tijuana": 19
+      "Tijuana": 20
      },
      "fuentes": {
       "imparcial": 5,
       "afn": 4,
-      "soltij": 3,
+      "soltij": 4,
       "zeta": 3,
       "jornadabc": 2,
       "rosarito": 2
@@ -2324,13 +2414,121 @@
       "b27bd98af123a533",
       "ba3a737d2b00cd77",
       "c339e7b17d6a03de",
+      "e60a3f86ac942235",
       "f005b86ca7708205",
       "fe29788088343cb3"
      ],
      "ejemplos": [
+      "Protección Civil evalúa 30 viviendas más tras hundimiento en la colonia 3 de Octubre",
       "Familias evacúan sus casas en colonia 3 de Octubre porque lluvias aceleraron hundimiento",
-      "Desalojan viviendas por hundimiento y grietas en la colonia 3 de Octubre en Tijuana",
-      "Lluvias provocan deslave a la altura de colonia Valle de las Flores"
+      "Desalojan viviendas por hundimiento y grietas en la colonia 3 de Octubre en Tijuana"
+     ]
+    },
+    {
+     "termino": "imss",
+     "n": 15,
+     "n_previo": 6,
+     "momento": 9,
+     "zonas": {
+      "Tijuana": 15
+     },
+     "fuentes": {
+      "afn": 6,
+      "jornadabc": 4,
+      "soltij": 2,
+      "zeta": 2,
+      "imparcial": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "112e89e3a4d513a7",
+      "2cd20c0b16028146",
+      "47b1c6a3b43427ed",
+      "6290b4c49ec9e742",
+      "661bd28fc1a7fdcc",
+      "751e4d83c578c5b3",
+      "8724143695681f22",
+      "8f51d83bae3b3b08",
+      "91bcf5174a818a27",
+      "a6a39791010ae613",
+      "ad683f10e9dcbbfe",
+      "b2434061e48493ad",
+      "ccc0ee6b58a61d57",
+      "f81bcd7a1af1e78d",
+      "fe8a1ce2886d7cfd"
+     ],
+     "ejemplos": [
+      "IMSS requiere un «verdadero diagnóstico» para atender lo que no está resuelto: Sheinbaum",
+      "Piden participación ciudadana en inspecciones del IMSS para conocer condiciones reales de hospitales",
+      "Piden a tijuanenses apoyar a médicos del IMSS en sus reclamos"
+     ]
+    },
+    {
+     "termino": "trabajadores",
+     "n": 11,
+     "n_previo": 2,
+     "momento": 9,
+     "zonas": {
+      "Tijuana": 11
+     },
+     "fuentes": {
+      "afn": 4,
+      "soltij": 3,
+      "jornadabc": 2,
+      "imparcial": 1,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "112e89e3a4d513a7",
+      "2cd20c0b16028146",
+      "47b1c6a3b43427ed",
+      "751e4d83c578c5b3",
+      "82b3c0c7abd7aaa8",
+      "ad683f10e9dcbbfe",
+      "b2434061e48493ad",
+      "b3a2fe9f608fe25c",
+      "e592d5c50b664971",
+      "e61474b70026ce98",
+      "e8fb9bdf5b077e84"
+     ],
+     "ejemplos": [
+      "Protestan trabajadores del IMSS; exigen mejorar condiciones laborales",
+      "Marchan ex trabajadores de Luz y Fuerza, sindicato extinto hace 17 años",
+      "IMSS escuchará a trabajadores de 277 hospitales para resolver problemas operativos"
+     ]
+    },
+    {
+     "termino": "calle",
+     "n": 9,
+     "n_previo": 0,
+     "momento": 9,
+     "zonas": {
+      "Tijuana": 9
+     },
+     "fuentes": {
+      "afn": 2,
+      "jornadabc": 2,
+      "soltij": 2,
+      "uniradio": 2,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "083f5265d88f51bf",
+      "2064bc17bff0a91a",
+      "604d24ce4de08cc0",
+      "7f05c3940330e09d",
+      "7f1ddac222273f84",
+      "a1ff245a142957c1",
+      "b11a0b9169ca45ec",
+      "ba07ea835d0a0357",
+      "f45c8c8a63fb8f7c"
+     ],
+     "ejemplos": [
+      "Anuncia Ópera en la Calle presentación musical el 25 de octubre",
+      "Paseo del Parque y Ópera de Tijuana presentan la Extensión del Festival Ópera en la Calle 2026",
+      "Extensión de la Ópera en la Calle llegará a plaza Paseo del Parque"
      ]
     },
     {
@@ -2440,7 +2638,7 @@
      ]
     },
     {
-     "termino": "trabajadores",
+     "termino": "familias",
      "n": 10,
      "n_previo": 2,
      "momento": 8,
@@ -2448,29 +2646,28 @@
       "Tijuana": 10
      },
      "fuentes": {
-      "afn": 3,
+      "imparcial": 4,
       "soltij": 3,
       "jornadabc": 2,
-      "imparcial": 1,
-      "uniradio": 1
+      "afn": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "112e89e3a4d513a7",
-      "2cd20c0b16028146",
-      "751e4d83c578c5b3",
-      "82b3c0c7abd7aaa8",
-      "ad683f10e9dcbbfe",
-      "b2434061e48493ad",
-      "b3a2fe9f608fe25c",
-      "e592d5c50b664971",
-      "e61474b70026ce98",
-      "e8fb9bdf5b077e84"
+      "12e64001de20d470",
+      "13962030f82f90ae",
+      "1a0b82de07d9c2d8",
+      "1d105f4a327c8c8a",
+      "2efd7aca202c7ce7",
+      "3c2e938bb5764ec7",
+      "6edeb57455dea1c4",
+      "ba3a737d2b00cd77",
+      "cc83c98161dbd8a0",
+      "fe29788088343cb3"
      ],
      "ejemplos": [
-      "Marchan ex trabajadores de Luz y Fuerza, sindicato extinto hace 17 años",
-      "IMSS escuchará a trabajadores de 277 hospitales para resolver problemas operativos",
-      "Industria manufacturera demanda trabajadores con mayor preparación técnica y especializada"
+      "“Compramos de buena fe”: familias temen perder sus hogares por presunto fraude inmobiliario",
+      "Lluvias en Tijuana afectan 10 viviendas; familias acuden a albergue",
+      "Instalan centros de acopio para familias afectadas por \"Rachel"
      ]
     },
     {
@@ -2542,6 +2739,41 @@
      ]
     },
     {
+     "termino": "xolos",
+     "n": 10,
+     "n_previo": 3,
+     "momento": 7,
+     "zonas": {
+      "Tijuana": 10
+     },
+     "fuentes": {
+      "soltij": 4,
+      "imparcial": 2,
+      "afn": 1,
+      "gn-8633f03ae819": 1,
+      "gn-bf49c5f7d1e2": 1,
+      "gn-f5b3072fe346": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "27ed33dbb136b765",
+      "39df9b54c3d7acee",
+      "4099fd58a1da86a0",
+      "58c03c1610f96365",
+      "61f05865d4a5e6a8",
+      "6ae5064217accbb3",
+      "943c169fe82653d5",
+      "b942f3bd473e2cb5",
+      "c37adf9c670c8ebd",
+      "dc39bd044dde0aa9"
+     ],
+     "ejemplos": [
+      "Presenta Xolos nueva equipación inspirada en el Día de Muertos",
+      "Xolos: Sebastián Abreu Spills the Beans on Gilberto Mora’s Injury Woes",
+      "‘Inflamación de cadera’, la molestia que hizo a Gil Mora perderse un juego con Xolos"
+     ]
+    },
+    {
      "termino": "florido",
      "n": 8,
      "n_previo": 1,
@@ -2573,34 +2805,35 @@
      ]
     },
     {
-     "termino": "calle",
-     "n": 7,
-     "n_previo": 0,
+     "termino": "viviendas",
+     "n": 8,
+     "n_previo": 1,
      "momento": 7,
      "zonas": {
-      "Tijuana": 7
+      "Tijuana": 8
      },
      "fuentes": {
-      "jornadabc": 2,
-      "soltij": 2,
-      "afn": 1,
-      "uniradio": 1,
-      "zeta": 1
+      "imparcial": 3,
+      "afn": 2,
+      "jornadabc": 1,
+      "soltij": 1,
+      "uniradio": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "083f5265d88f51bf",
-      "2064bc17bff0a91a",
-      "604d24ce4de08cc0",
-      "7f1ddac222273f84",
-      "a1ff245a142957c1",
-      "b11a0b9169ca45ec",
-      "ba07ea835d0a0357"
+      "0eea8a4662a00bd6",
+      "2efd7aca202c7ce7",
+      "3e68e375c4c440ba",
+      "85b823793c16f45e",
+      "9b0eddb0e612afc6",
+      "b27bd98af123a533",
+      "b37648ad7e22353d",
+      "e60a3f86ac942235"
      ],
      "ejemplos": [
-      "Extensión de la Ópera en la Calle llegará a plaza Paseo del Parque",
-      "50 personas en situación de calle fueron retiradas de las calles en las últimas tres semanas",
-      "Lluvias aceleran hundimiento de calle en la colonia 3 de octubre en Tijuana"
+      "Protección Civil evalúa 30 viviendas más tras hundimiento en la colonia 3 de Octubre",
+      "Deslizamiento de tierra tras lluvias pone en riesgo viviendas en la 3 de Octubre de Tijuana",
+      "Prohíben habitar 15 viviendas por riesgo de derrumbes"
      ]
     },
     {
@@ -2635,6 +2868,41 @@
      ]
     },
     {
+     "termino": "riesgo",
+     "n": 11,
+     "n_previo": 5,
+     "momento": 6,
+     "zonas": {
+      "Tijuana": 11
+     },
+     "fuentes": {
+      "imparcial": 5,
+      "afn": 2,
+      "jornadabc": 2,
+      "uniradio": 1,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "21423c67988625e0",
+      "3fd8ce82eeedd2fd",
+      "803ef80eca030021",
+      "8724143695681f22",
+      "9b0eddb0e612afc6",
+      "b37648ad7e22353d",
+      "b52b2c36b04b7793",
+      "ba3a737d2b00cd77",
+      "d458ffd79b9ea296",
+      "e18b026017e19e4c",
+      "fdbcf9f70c0c614a"
+     ],
+     "ejemplos": [
+      "Lluvias de Rachel y el Súper Niño elevan riesgo de dengue en Tijuana",
+      "Deslizamiento de tierra tras lluvias pone en riesgo viviendas en la 3 de Octubre de Tijuana",
+      "Prohíben habitar 15 viviendas por riesgo de derrumbes"
+     ]
+    },
+    {
      "termino": "deja",
      "n": 9,
      "n_previo": 3,
@@ -2665,70 +2933,6 @@
       "Gobierno Municipal deja responsabilidad al Estado por socavón en Terrazas del Valle",
       "Ataque armado en colonia Arboledas deja a joven grave",
       "Inundación en La Morita deja pérdidas materiales tras lluvias en Tijuana; vecinos exigen atender cauce pluvial"
-     ]
-    },
-    {
-     "termino": "xolos",
-     "n": 9,
-     "n_previo": 3,
-     "momento": 6,
-     "zonas": {
-      "Tijuana": 9
-     },
-     "fuentes": {
-      "soltij": 3,
-      "imparcial": 2,
-      "afn": 1,
-      "gn-8633f03ae819": 1,
-      "gn-bf49c5f7d1e2": 1,
-      "gn-f5b3072fe346": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "27ed33dbb136b765",
-      "39df9b54c3d7acee",
-      "4099fd58a1da86a0",
-      "58c03c1610f96365",
-      "61f05865d4a5e6a8",
-      "6ae5064217accbb3",
-      "b942f3bd473e2cb5",
-      "c37adf9c670c8ebd",
-      "dc39bd044dde0aa9"
-     ],
-     "ejemplos": [
-      "Xolos: Sebastián Abreu Spills the Beans on Gilberto Mora’s Injury Woes",
-      "‘Inflamación de cadera’, la molestia que hizo a Gil Mora perderse un juego con Xolos",
-      "“Es un fantasma instalado en el club hace 3 años”, dice Abreu sobre los malos resultados de Xolos"
-     ]
-    },
-    {
-     "termino": "familias",
-     "n": 8,
-     "n_previo": 2,
-     "momento": 6,
-     "zonas": {
-      "Tijuana": 8
-     },
-     "fuentes": {
-      "imparcial": 4,
-      "jornadabc": 2,
-      "soltij": 2
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "13962030f82f90ae",
-      "1a0b82de07d9c2d8",
-      "1d105f4a327c8c8a",
-      "2efd7aca202c7ce7",
-      "3c2e938bb5764ec7",
-      "ba3a737d2b00cd77",
-      "cc83c98161dbd8a0",
-      "fe29788088343cb3"
-     ],
-     "ejemplos": [
-      "Lluvias en Tijuana afectan 10 viviendas; familias acuden a albergue",
-      "Familias evacúan sus casas en colonia 3 de Octubre porque lluvias aceleraron hundimiento",
-      "Casi 300 familias viven con riesgo de deslaves en Tijuana y vecinos convierten un restaurante en albergue ante el temor de que las lluvias de Rachel agraven los daños en la colonia Sánchez Taboada"
      ]
     },
     {
@@ -2910,105 +3114,11 @@
       "Ofrecen rescates gratis a conductores atrapados por las lluvias en Tijuana",
       "Ante llegada de “El Niño” autoridades ofrecen refugio a habitantes de la Canalización Río Tijuana"
      ]
-    },
-    {
-     "termino": "preven",
-     "n": 6,
-     "n_previo": 0,
-     "momento": 6,
-     "zonas": {
-      "Tijuana": 6
-     },
-     "fuentes": {
-      "afn": 3,
-      "soltij": 3
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "2d89d85bff85c38a",
-      "563059593a51c89e",
-      "6ddfd41257a81f0f",
-      "85a65a97eac288c3",
-      "890fa20cc53ae9a9",
-      "e17e343b2ebe90db"
-     ],
-     "ejemplos": [
-      "Prevén temperaturas de hasta 30 grados en Tijuana este próximo fin de semana",
-      "Prevén lluvias de hasta 50 milímetros y vientos de 100 km h por tormenta Rachel",
-      "Prevén lluvias este fin de semana en Tijuana y otros municipios"
-     ]
-    },
-    {
-     "termino": "imss",
-     "n": 11,
-     "n_previo": 6,
-     "momento": 5,
-     "zonas": {
-      "Tijuana": 11
-     },
-     "fuentes": {
-      "afn": 4,
-      "jornadabc": 3,
-      "zeta": 2,
-      "imparcial": 1,
-      "soltij": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "112e89e3a4d513a7",
-      "2cd20c0b16028146",
-      "6290b4c49ec9e742",
-      "751e4d83c578c5b3",
-      "8724143695681f22",
-      "91bcf5174a818a27",
-      "ad683f10e9dcbbfe",
-      "b2434061e48493ad",
-      "ccc0ee6b58a61d57",
-      "f81bcd7a1af1e78d",
-      "fe8a1ce2886d7cfd"
-     ],
-     "ejemplos": [
-      "IMSS escuchará a trabajadores de 277 hospitales para resolver problemas operativos",
-      "El CCE alza la voz contra el IMSS: pide medicinas y cirugías a tiempo tras cumplir con las cuotas patronales",
-      "¡EL IMSS COLAPSA Y SHEINBAUM MIENTE!"
-     ]
-    },
-    {
-     "termino": "advierte",
-     "n": 8,
-     "n_previo": 3,
-     "momento": 5,
-     "zonas": {
-      "Tijuana": 8
-     },
-     "fuentes": {
-      "afn": 3,
-      "zeta": 2,
-      "imparcial": 1,
-      "jornadabc": 1,
-      "soltij": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0a2f690a54628055",
-      "118d4648e33e4eba",
-      "320a6f728b3a0f1a",
-      "aa6346b55bb0ae6a",
-      "ac1d0542b90cbdd4",
-      "b38966ec5b1966f4",
-      "dd31ed07db202040",
-      "ec66605d6a17b297"
-     ],
-     "ejemplos": [
-      "Advierte Moreira de vulnerabilidad energética por falta de previsión",
-      "Posible alza al predial, advierte Silva; destaca despojos en BC",
-      "Protección Civil de BC advierte sobre lluvias muy fuertes"
-     ]
     }
    ]
   },
   "Mexicali": {
-   "notas_ventana": 224,
+   "notas_ventana": 241,
    "minimo": 3,
    "temas": [
     {
@@ -3060,20 +3170,21 @@
     },
     {
      "termino": "morena",
-     "n": 12,
+     "n": 13,
      "n_previo": 0,
-     "momento": 12,
+     "momento": 13,
      "zonas": {
-      "Mexicali": 12
+      "Mexicali": 13
      },
      "fuentes": {
-      "lavoz": 6,
+      "lavoz": 7,
       "afn": 5,
       "zeta": 1
      },
      "un_solo_medio": false,
      "notas": [
       "0c29c796e049f5c4",
+      "15f8368aa47158c2",
       "2f6a971c9f0ce8e6",
       "32eacb84ac29b6b3",
       "34d04b9723451bc1",
@@ -3087,9 +3198,9 @@
       "e04515d1f87fd52e"
      ],
      "ejemplos": [
+      "Ysmael Rodríguez busca coordinar comités de Morena en Distrito 1 federal",
       "Marco Aurelio se registra para coordinar los comités de Morena en Mexicali",
-      "También en Mexicali, sobran aspirantes de Morena para la alcaldía",
-      "Michel Sánchez se registra en busca de la coordinación de Morena en Mexicali"
+      "También en Mexicali, sobran aspirantes de Morena para la alcaldía"
      ]
     },
     {
@@ -3123,6 +3234,66 @@
      ]
     },
     {
+     "termino": "rachel",
+     "n": 7,
+     "n_previo": 0,
+     "momento": 7,
+     "zonas": {
+      "Mexicali": 7,
+      "Ensenada": 2,
+      "San Quintín": 1
+     },
+     "fuentes": {
+      "imparcial": 3,
+      "lavoz": 2,
+      "gn-208187d76ea7": 1,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "211c9b741c705b39",
+      "2d8965258f9d3de6",
+      "3b23f78a7f1382c5",
+      "722bc5450e8437a4",
+      "b949cb8e246b5d94",
+      "c8d41cc8ac586ebc",
+      "e43faa940c814c5d"
+     ],
+     "ejemplos": [
+      "Instalan centro de acopio en Mexicali para apoyar a afectados por Rachel",
+      "Mexicali envía bomberos, policías y binomio canino a Ensenada tras la tormenta Rachel",
+      "Encuentran sin vida a tres de los desaparecidos por la tormenta Rachel"
+     ]
+    },
+    {
+     "termino": "aguilas",
+     "n": 7,
+     "n_previo": 2,
+     "momento": 5,
+     "zonas": {
+      "Mexicali": 7
+     },
+     "fuentes": {
+      "imparcial": 5,
+      "lavoz": 2
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "30d98b8e5812c5d7",
+      "3493bd122331baeb",
+      "4cf61050fb1d9321",
+      "7bbee0fd412f8808",
+      "848c97c85b2f435c",
+      "8c32eb5b28eca856",
+      "cddafa888c9b4357"
+     ],
+     "ejemplos": [
+      "Águilas de Mexicali inauguran temporada este miércoles 14 de octubre",
+      "Norberto Obeso busca su tercer Guante de Oro con Águilas de Mexicali",
+      "Jesús Cruz busca ser campeón con Águilas de Mexicali en la temporada 2026-2027"
+     ]
+    },
+    {
      "termino": "dejan",
      "n": 5,
      "n_previo": 0,
@@ -3147,63 +3318,6 @@
       "Lluvias dejan encharcamientos en Mexicali y filtraciones en el CEJUM",
       "Lluvias dejan 25.2 milímetros de precipitación en la zona urbana de Mexicali",
       "Lluvias dejan personas atrapadas en vehículos y viviendas inundadas en Mexicali"
-     ]
-    },
-    {
-     "termino": "rachel",
-     "n": 5,
-     "n_previo": 0,
-     "momento": 5,
-     "zonas": {
-      "Mexicali": 5,
-      "Ensenada": 1,
-      "San Quintín": 1
-     },
-     "fuentes": {
-      "lavoz": 2,
-      "gn-208187d76ea7": 1,
-      "imparcial": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "211c9b741c705b39",
-      "2d8965258f9d3de6",
-      "3b23f78a7f1382c5",
-      "c8d41cc8ac586ebc",
-      "e43faa940c814c5d"
-     ],
-     "ejemplos": [
-      "Encuentran sin vida a tres de los desaparecidos por la tormenta Rachel",
-      "Tormenta Rachel impactará Ensenada por Punta Colonet; habilita Mexicali 8 albergues",
-      "Rachel” provoca cierres de cinco puentes y suspensión de las Fiestas del Sol, en Mexicali"
-     ]
-    },
-    {
-     "termino": "aguilas",
-     "n": 6,
-     "n_previo": 2,
-     "momento": 4,
-     "zonas": {
-      "Mexicali": 6
-     },
-     "fuentes": {
-      "imparcial": 4,
-      "lavoz": 2
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "30d98b8e5812c5d7",
-      "3493bd122331baeb",
-      "4cf61050fb1d9321",
-      "7bbee0fd412f8808",
-      "8c32eb5b28eca856",
-      "cddafa888c9b4357"
-     ],
-     "ejemplos": [
-      "Águilas de Mexicali inauguran temporada este miércoles 14 de octubre",
-      "Jesús Cruz busca ser campeón con Águilas de Mexicali en la temporada 2026-2027",
-      "Bendecirán la temporada de Águilas de Mexicali este lunes en la Catedral"
      ]
     },
     {
@@ -3282,6 +3396,34 @@
      ]
     },
     {
+     "termino": "tormenta rachel",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "Mexicali": 4,
+      "Ensenada": 2,
+      "San Quintín": 1
+     },
+     "fuentes": {
+      "imparcial": 2,
+      "gn-208187d76ea7": 1,
+      "lavoz": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "3b23f78a7f1382c5",
+      "722bc5450e8437a4",
+      "c8d41cc8ac586ebc",
+      "e43faa940c814c5d"
+     ],
+     "ejemplos": [
+      "Mexicali envía bomberos, policías y binomio canino a Ensenada tras la tormenta Rachel",
+      "Encuentran sin vida a tres de los desaparecidos por la tormenta Rachel",
+      "Tormenta Rachel impactará Ensenada por Punta Colonet; habilita Mexicali 8 albergues"
+     ]
+    },
+    {
      "termino": "fiestas",
      "n": 8,
      "n_previo": 5,
@@ -3309,6 +3451,33 @@
       "Vecinos de Mexicali: dos décadas en disputa con salón de fiestas Los Faroles",
       "Seis niños extraviados fueron reubicados con sus familias durante las Fiestas del Sol 2026",
       "El Día de las Comunidades en Mexicali reunió a mil 200 personas en Fiestas del Sol"
+     ]
+    },
+    {
+     "termino": "mujer",
+     "n": 6,
+     "n_previo": 3,
+     "momento": 3,
+     "zonas": {
+      "Mexicali": 6
+     },
+     "fuentes": {
+      "lavoz": 4,
+      "imparcial": 2
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "5b711c8539c1308e",
+      "678fe66568c9c766",
+      "770d2506210b6c33",
+      "b8d8076e03dd7856",
+      "d156add420008439",
+      "ea630ceda201a518"
+     ],
+     "ejemplos": [
+      "Vinculan a sujeto por abusar sexualmente de una mujer en su casa y apoderarse de 20 mil pesos",
+      "Entra a casa, agrede sexualmente a mujer y roba 20 mil pesos en Mexicali",
+      "Vinculan a proceso a mujer por muerte de su pareja en Los Algodones"
      ]
     },
     {
@@ -3412,6 +3581,29 @@
       "Reportan afectaciones menores y vialidades restablecidas en Mexicali tras lluvias; CEJUM con filtraciones de agua",
       "Rescatan a 13 personas derivado a afectaciones relacionadas por las lluvias en Mexicali",
       "Avanza reparación de afectaciones en la bóveda de Río Nuevo en Mexicali"
+     ]
+    },
+    {
+     "termino": "apoyar",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Mexicali": 3
+     },
+     "fuentes": {
+      "imparcial": 3
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "00f204a12b7bd44e",
+      "a708894d73059eca",
+      "b949cb8e246b5d94"
+     ],
+     "ejemplos": [
+      "Instalan centro de acopio en Mexicali para apoyar a afectados por Rachel",
+      "DIF Mexicali busca 100 donaciones de cabello durante octubre para apoyar a mujeres con cáncer de mama",
+      "Charreada busca reunir a familias de Mexicali para apoyar a nueve adolescentes pertenecientes a casa hogar"
      ]
     },
     {
@@ -3605,107 +3797,35 @@
       "Refuerza CESPM limpieza de infraestructura pluvial ante pronóstico de lluvias en Mexicali",
       "Ayuntamiento de Mexicali invierte 38.3 mdp en rehabilitar infraestructura deportiva"
      ]
-    },
-    {
-     "termino": "inundaciones",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Mexicali": 3
-     },
-     "fuentes": {
-      "imparcial": 1,
-      "jornadabc": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "315d8bb38e068e8b",
-      "5d461c572bf680f7",
-      "acc3872cc210db09"
-     ],
-     "ejemplos": [
-      "Atienden inundaciones en viviendas y calles del Valle de Mexicali tras las lluvias",
-      "Rescatan a 14 personas por inundaciones en Mexicali",
-      "Inundaciones, caída de postes y la cancelación de las fiestas del sol, fueron los estragos de las lluvias en Mexicali"
-     ]
-    },
-    {
-     "termino": "lluvias dejan",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Mexicali": 3
-     },
-     "fuentes": {
-      "imparcial": 3
-     },
-     "un_solo_medio": true,
-     "notas": [
-      "2303acd6e447c295",
-      "40ad9d30adcb15cd",
-      "9e98bd930abe0e4d"
-     ],
-     "ejemplos": [
-      "Lluvias dejan encharcamientos en Mexicali y filtraciones en el CEJUM",
-      "Lluvias dejan 25.2 milímetros de precipitación en la zona urbana de Mexicali",
-      "Lluvias dejan personas atrapadas en vehículos y viviendas inundadas en Mexicali"
-     ]
-    },
-    {
-     "termino": "morena alcaldia",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Mexicali": 3
-     },
-     "fuentes": {
-      "afn": 2,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "2f6a971c9f0ce8e6",
-      "4e1b0e9c070fff5e",
-      "cc4420526e65f643"
-     ],
-     "ejemplos": [
-      "También en Mexicali, sobran aspirantes de Morena para la alcaldía",
-      "Ola de registros de Morena en busca de alcaldía de Mexicali",
-      "Exsenadora Alejandra León buscará la candidatura de Morena a la alcaldía de Mexicali"
-     ]
     }
    ]
   },
   "Ensenada": {
-   "notas_ventana": 97,
+   "notas_ventana": 116,
    "minimo": 3,
    "temas": [
     {
      "termino": "rachel",
-     "n": 36,
+     "n": 45,
      "n_previo": 0,
-     "momento": 36,
+     "momento": 45,
      "zonas": {
-      "Ensenada": 36,
+      "Ensenada": 45,
       "Tijuana": 5,
+      "Mexicali": 2,
       "Playas de Rosarito": 2,
-      "Mexicali": 1,
       "San Felipe": 1,
       "San Quintín": 1
      },
      "fuentes": {
-      "imparcial": 7,
-      "zeta": 6,
+      "imparcial": 11,
+      "zeta": 8,
       "afn": 5,
       "lavoz": 5,
+      "jornadabc": 4,
       "gn-31193328f8e2": 3,
       "soltij": 3,
-      "jornadabc": 2,
-      "uniradio": 2,
+      "uniradio": 3,
       "gn-208187d76ea7": 1,
       "gn-6327d1dd772f": 1,
       "gn-c3e35c36380b": 1
@@ -3726,15 +3846,20 @@
       "5deecf231c00b5f2",
       "61931454c5e5639b",
       "6cccf0e885527e23",
+      "722bc5450e8437a4",
+      "73d128774a6976ec",
       "8492fa139145affb",
       "8cf253de00b2f6e0",
       "8ea6c4e6acecc50b",
       "910f6f125708b2e6",
       "943285ba2cfd6d76",
+      "9cd7d138415afee0",
       "a05eb96e23d776fc",
       "a2b8f36b2f63c647",
+      "b175d30cc950b7e1",
       "b84cf2451e62e8d5",
       "bb1ff79e6f145037",
+      "bb625d7840654dbf",
       "c1269062d63a8741",
       "c9a3d47fc89b3ca2",
       "c9bd864eba81c6bc",
@@ -3742,42 +3867,48 @@
       "cec950321218b2f6",
       "d43f6289284b885a",
       "d46a7541a2c8c87e",
+      "e64bbf0f2b637fc3",
       "e9e6ecf1a6534677",
       "eb6399710dd610d3",
       "f081726d9dd08cb8",
       "f530ae7de4e8b3cb",
+      "f5dec9b281c72a31",
       "f718df68793aa96b",
-      "fa97c6b3eb1aac6e"
+      "fa97c6b3eb1aac6e",
+      "fb4c73b63cca1438",
+      "fc201590ee21ec52"
      ],
      "ejemplos": [
-      "Despliegan 3 mil 500 elementos en Ensenada por emergencia tras tormenta Rachel",
-      "Ensenada registra 80 rescates tras el paso de Rachel",
-      "Siete personas desaparecidas y una fallecida tras el paso de Rachel por Ensenada"
+      "Rachel deja más de 50 MDD en pérdidas, calculan ejidatarios de Ensenada",
+      "Gobierno de Sonora apoyará con traslados y funerales a la familia de Hermosillo que murió en Ensenada por la tormenta Rachel",
+      "Despliegan 3 mil 500 elementos en Ensenada por emergencia tras tormenta Rachel"
      ]
     },
     {
      "termino": "lluvias",
-     "n": 16,
+     "n": 19,
      "n_previo": 2,
-     "momento": 14,
+     "momento": 17,
      "zonas": {
-      "Ensenada": 16,
+      "Ensenada": 19,
       "Playas de Rosarito": 2,
       "Tijuana": 2
      },
      "fuentes": {
-      "imparcial": 8,
+      "imparcial": 10,
       "gn-31193328f8e2": 2,
+      "jornadabc": 2,
       "soltij": 2,
       "uniradio": 2,
-      "jornadabc": 1,
       "zeta": 1
      },
      "un_solo_medio": false,
      "notas": [
       "1407e91bbe1e5d05",
       "249d56b21f6b7b42",
+      "252fc82850fcaad2",
       "3b784643e18b96e1",
+      "44c459974bcdcd04",
       "576345cd492e7365",
       "640ad34e92886781",
       "6492e1ee6e7131dc",
@@ -3790,32 +3921,33 @@
       "9b8812c32d32311d",
       "c1269062d63a8741",
       "cec950321218b2f6",
-      "ec2585bb45b4427a"
+      "ec2585bb45b4427a",
+      "f14e3efcd324d3b9"
      ],
      "ejemplos": [
+      "Localizan con vida a niño desaparecido durante las lluvias en Ensenada",
       "Localizan a tres personas sin vida tras lluvias en Ensenada",
-      "Marina del Pilar recorre zonas afectadas por lluvias en Ensenada",
-      "🔴 Las lluvias continúan en Baja California por el ciclón postropical ‘Rachel’. En Tijuana, Rosarito y Ensenada, las autoridades suspendieron clases en escuelas públicas y privadas, así como trámites gubernamentales, para atender la limpieza de vialidades a"
+      "Localizan con vida a menor de 10 años tras lluvias en Ensenada"
      ]
     },
     {
      "termino": "paso rachel",
-     "n": 11,
+     "n": 14,
      "n_previo": 0,
-     "momento": 11,
+     "momento": 14,
      "zonas": {
-      "Ensenada": 11,
+      "Ensenada": 14,
       "Tijuana": 2,
       "San Felipe": 1
      },
      "fuentes": {
       "afn": 3,
+      "zeta": 3,
+      "jornadabc": 2,
       "lavoz": 2,
-      "zeta": 2,
+      "uniradio": 2,
       "gn-6327d1dd772f": 1,
-      "gn-c3e35c36380b": 1,
-      "jornadabc": 1,
-      "uniradio": 1
+      "gn-c3e35c36380b": 1
      },
      "un_solo_medio": false,
      "notas": [
@@ -3824,32 +3956,35 @@
       "61931454c5e5639b",
       "910f6f125708b2e6",
       "943285ba2cfd6d76",
+      "9cd7d138415afee0",
       "a05eb96e23d776fc",
       "bb1ff79e6f145037",
+      "bb625d7840654dbf",
       "c9bd864eba81c6bc",
       "eb6399710dd610d3",
       "f530ae7de4e8b3cb",
+      "f5dec9b281c72a31",
       "f718df68793aa96b"
      ],
      "ejemplos": [
+      "Localizan un quinto cuerpo en el arroyo Oaxaca tras el paso de Rachel por Ensenada",
       "Ensenada registra 80 rescates tras el paso de Rachel",
-      "Siete personas desaparecidas y una fallecida tras el paso de Rachel por Ensenada",
-      "Rescatan a 32 personas incomunicadas en Ensenada tras paso de Rachel"
+      "Hallan sin vida a dos personas más en Maneadero; buscan a tres tras el paso de Rachel"
      ]
     },
     {
      "termino": "tormenta rachel",
-     "n": 9,
+     "n": 12,
      "n_previo": 0,
-     "momento": 9,
+     "momento": 12,
      "zonas": {
-      "Ensenada": 9,
-      "Mexicali": 1,
+      "Ensenada": 12,
+      "Mexicali": 2,
       "San Quintín": 1,
       "Tijuana": 1
      },
      "fuentes": {
-      "imparcial": 3,
+      "imparcial": 6,
       "soltij": 2,
       "zeta": 2,
       "afn": 1,
@@ -3862,15 +3997,50 @@
       "394f112608a49caf",
       "3b23f78a7f1382c5",
       "5deecf231c00b5f2",
+      "722bc5450e8437a4",
+      "73d128774a6976ec",
       "8ea6c4e6acecc50b",
       "a2b8f36b2f63c647",
       "c9a3d47fc89b3ca2",
-      "fa97c6b3eb1aac6e"
+      "fa97c6b3eb1aac6e",
+      "fb4c73b63cca1438"
      ],
      "ejemplos": [
+      "Gobierno de Sonora apoyará con traslados y funerales a la familia de Hermosillo que murió en Ensenada por la tormenta Rachel",
       "Despliegan 3 mil 500 elementos en Ensenada por emergencia tras tormenta Rachel",
-      "SSPCM Tijuana envía equipos K9, de búsqueda y Bomberos a Ensenada tras el paso de la tormenta Rachel",
-      "Ensenada fue la más golpeada por tormenta \"Rachel\", dice Marina del Pilar"
+      "Tormenta Rachel deja pérdidas de 50 millones de dólares en el campo de Maneadero"
+     ]
+    },
+    {
+     "termino": "localizan",
+     "n": 9,
+     "n_previo": 1,
+     "momento": 8,
+     "zonas": {
+      "Ensenada": 9
+     },
+     "fuentes": {
+      "imparcial": 4,
+      "jornadabc": 2,
+      "lavoz": 2,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "1984d58382a59f36",
+      "44c459974bcdcd04",
+      "4cfb56ec13a95435",
+      "655518e062590d3b",
+      "69826650c251778f",
+      "c1a8a7a10b4cc119",
+      "cb4805fb5d111fee",
+      "f14e3efcd324d3b9",
+      "f5dec9b281c72a31"
+     ],
+     "ejemplos": [
+      "Localizan un quinto cuerpo en el arroyo Oaxaca tras el paso de Rachel por Ensenada",
+      "Localizan con vida a niño desaparecido durante las lluvias en Ensenada",
+      "Localizan sin vida a dos mujeres en Maneadero y Esteban Cantú"
      ]
     },
     {
@@ -3906,15 +4076,15 @@
     },
     {
      "termino": "tres",
-     "n": 7,
+     "n": 8,
      "n_previo": 0,
-     "momento": 7,
+     "momento": 8,
      "zonas": {
-      "Ensenada": 7
+      "Ensenada": 8
      },
      "fuentes": {
       "imparcial": 3,
-      "zeta": 2,
+      "zeta": 3,
       "afn": 1,
       "lavoz": 1
      },
@@ -3925,13 +4095,75 @@
       "1984d58382a59f36",
       "655518e062590d3b",
       "8492fa139145affb",
+      "bb625d7840654dbf",
       "c297e0e7f2657b94",
       "e4ff831732ccf90a"
      ],
      "ejemplos": [
+      "Hallan sin vida a dos personas más en Maneadero; buscan a tres tras el paso de Rachel",
       "Localizan a tres personas sin vida tras lluvias en Ensenada",
-      "Buscan a Gael, de 14 años, y a tres personas tras corriente en Maneadero",
-      "Rescatan a 32 personas incomunicadas y tres perritos en rancho tras tormenta tropical Rachel en Ensenada"
+      "Buscan a Gael, de 14 años, y a tres personas tras corriente en Maneadero"
+     ]
+    },
+    {
+     "termino": "vida",
+     "n": 8,
+     "n_previo": 0,
+     "momento": 8,
+     "zonas": {
+      "Ensenada": 8
+     },
+     "fuentes": {
+      "imparcial": 3,
+      "lavoz": 2,
+      "zeta": 2,
+      "jornadabc": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "3787f08185911d37",
+      "44c459974bcdcd04",
+      "4dce85486c351ca4",
+      "655518e062590d3b",
+      "bb625d7840654dbf",
+      "c1a8a7a10b4cc119",
+      "cb4805fb5d111fee",
+      "f14e3efcd324d3b9"
+     ],
+     "ejemplos": [
+      "Localizan con vida a niño desaparecido durante las lluvias en Ensenada",
+      "Localizan sin vida a dos mujeres en Maneadero y Esteban Cantú",
+      "Hallan sin vida a dos personas más en Maneadero; buscan a tres tras el paso de Rachel"
+     ]
+    },
+    {
+     "termino": "familia",
+     "n": 6,
+     "n_previo": 0,
+     "momento": 6,
+     "zonas": {
+      "Ensenada": 6
+     },
+     "fuentes": {
+      "zeta": 2,
+      "afn": 1,
+      "imparcial": 1,
+      "soltij": 1,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "219377529a3410ba",
+      "7cac8b791f89be33",
+      "88395603a24c9537",
+      "9b8812c32d32311d",
+      "c9a3d47fc89b3ca2",
+      "fb4c73b63cca1438"
+     ],
+     "ejemplos": [
+      "Gobierno de Sonora apoyará con traslados y funerales a la familia de Hermosillo que murió en Ensenada por la tormenta Rachel",
+      "Hallan los cuerpos de una familia arrastrada por el agua en Ensenada; dos son menores de edad",
+      "Hay una familia desaparecida en Ensenada tras el paso de la tormenta Rachel"
      ]
     },
     {
@@ -4023,6 +4255,34 @@
      ]
     },
     {
+     "termino": "arroyo",
+     "n": 5,
+     "n_previo": 0,
+     "momento": 5,
+     "zonas": {
+      "Ensenada": 5
+     },
+     "fuentes": {
+      "imparcial": 2,
+      "afn": 1,
+      "jornadabc": 1,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "5dc4843b159b5dbd",
+      "69826650c251778f",
+      "8d0eb876f818f2e0",
+      "dd21157e1518e5a7",
+      "f5dec9b281c72a31"
+     ],
+     "ejemplos": [
+      "Localizan un quinto cuerpo en el arroyo Oaxaca tras el paso de Rachel por Ensenada",
+      "Localizan cuerpo de menor en arroyo de Maneadero; investigan si es Gael",
+      "Sigue la búsqueda de ocho personas arrastradas por arroyo en Ensenada"
+     ]
+    },
+    {
      "termino": "desaparecidos",
      "n": 5,
      "n_previo": 0,
@@ -4049,34 +4309,6 @@
       "Vecina de Maneadero teme que haya más de ocho desaparecidos por desbordamiento",
       "Localizan sin vida a cuatro desaparecidos por Rachel en Ensenada",
       "Rescatistas de Tijuana se suman a la búsqueda de desaparecidos en Ensenada tras el paso de Rachel"
-     ]
-    },
-    {
-     "termino": "familia",
-     "n": 5,
-     "n_previo": 0,
-     "momento": 5,
-     "zonas": {
-      "Ensenada": 5
-     },
-     "fuentes": {
-      "zeta": 2,
-      "afn": 1,
-      "soltij": 1,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "219377529a3410ba",
-      "7cac8b791f89be33",
-      "88395603a24c9537",
-      "9b8812c32d32311d",
-      "c9a3d47fc89b3ca2"
-     ],
-     "ejemplos": [
-      "Hallan los cuerpos de una familia arrastrada por el agua en Ensenada; dos son menores de edad",
-      "Hay una familia desaparecida en Ensenada tras el paso de la tormenta Rachel",
-      "Reportan segundo caso de desaparición de una familia por lluvias en El Pípila, Ensenada; buscan a cuatro personas"
      ]
     },
     {
@@ -4210,6 +4442,32 @@
      ]
     },
     {
+     "termino": "localizan vida",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "Ensenada": 4
+     },
+     "fuentes": {
+      "imparcial": 2,
+      "jornadabc": 1,
+      "lavoz": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "44c459974bcdcd04",
+      "c1a8a7a10b4cc119",
+      "cb4805fb5d111fee",
+      "f14e3efcd324d3b9"
+     ],
+     "ejemplos": [
+      "Localizan con vida a niño desaparecido durante las lluvias en Ensenada",
+      "Localizan sin vida a dos mujeres en Maneadero y Esteban Cantú",
+      "Localizan con vida a menor de 10 años tras lluvias en Ensenada"
+     ]
+    },
+    {
      "termino": "marina pilar",
      "n": 4,
      "n_previo": 0,
@@ -4235,6 +4493,32 @@
       "Marina del Pilar recorre zonas afectadas por lluvias en Ensenada",
       "Marina del Pilar activa operativos de rescate en Ensenada y San Felipe tras el paso de Rachel",
       "Recorre gobernadora Marina del Pilar zonas afectadas por lluvias en Ensenada para atender a las familias"
+     ]
+    },
+    {
+     "termino": "rachel deja",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "Ensenada": 4
+     },
+     "fuentes": {
+      "imparcial": 2,
+      "soltij": 1,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "205c4c2cd835c5e0",
+      "73d128774a6976ec",
+      "a2b8f36b2f63c647",
+      "fc201590ee21ec52"
+     ],
+     "ejemplos": [
+      "Rachel deja más de 50 MDD en pérdidas, calculan ejidatarios de Ensenada",
+      "Tormenta Rachel deja pérdidas de 50 millones de dólares en el campo de Maneadero",
+      "Tormenta Rachel deja 25 colonias de Ensenada sin electricidad y vialidades inundadas"
      ]
     },
     {
@@ -4265,6 +4549,33 @@
      ]
     },
     {
+     "termino": "menor",
+     "n": 5,
+     "n_previo": 2,
+     "momento": 3,
+     "zonas": {
+      "Ensenada": 5
+     },
+     "fuentes": {
+      "imparcial": 2,
+      "lavoz": 2,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "1984d58382a59f36",
+      "44c459974bcdcd04",
+      "4cfb56ec13a95435",
+      "4dce85486c351ca4",
+      "69826650c251778f"
+     ],
+     "ejemplos": [
+      "Localizan cuerpo de menor en arroyo de Maneadero; investigan si es Gael",
+      "Encuentran con vida a menor de 10 años desaparecido en Ensenada",
+      "Localizan cuerpo de un menor en Maneadero, Ensenada"
+     ]
+    },
+    {
      "termino": "hospital general",
      "n": 4,
      "n_previo": 1,
@@ -4290,162 +4601,11 @@
       "Pacientes del Hospital General de Ensenada fueron evacuados por inundación del nosocomio",
       "Se inunda Hospital General de Ensenada por tormenta Rachel; evacúan a pacientes"
      ]
-    },
-    {
-     "termino": "aisladas",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Ensenada": 3,
-      "Playas de Rosarito": 1,
-      "Tijuana": 1
-     },
-     "fuentes": {
-      "imparcial": 2,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "640ad34e92886781",
-      "6492e1ee6e7131dc",
-      "c1269062d63a8741"
-     ],
-     "ejemplos": [
-      "Realizan rescates en helicóptero de familias aisladas por lluvias en Ensenada",
-      "Rescatan a 32 personas aisladas por las lluvias en Rancho Génesis, Ensenada",
-      "Continuarán lluvias aisladas este sábado en Tijuana, Rosarito y Ensenada por “Rachel”"
-     ]
-    },
-    {
-     "termino": "alerta",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Ensenada": 3
-     },
-     "fuentes": {
-      "lavoz": 1,
-      "uniradio": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "190122bb8fb83bf2",
-      "a05eb96e23d776fc",
-      "d43f6289284b885a"
-     ],
-     "ejemplos": [
-      "Desmiente Gobierno de Ensenada falsa alerta sobre represa en El Zorrillo",
-      "Alerta en Ensenada por tormenta tropical Rachel, varias colonias se quedan sin luz",
-      "Ensenada mantiene alerta por inundaciones y apagones tras el paso de Rachel"
-     ]
-    },
-    {
-     "termino": "arroyo",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Ensenada": 3
-     },
-     "fuentes": {
-      "afn": 1,
-      "imparcial": 1,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "5dc4843b159b5dbd",
-      "8d0eb876f818f2e0",
-      "dd21157e1518e5a7"
-     ],
-     "ejemplos": [
-      "Sigue la búsqueda de ocho personas arrastradas por arroyo en Ensenada",
-      "Continúa búsqueda de 3 personas presuntamente arrastradas por corriente del arroyo El Pípila, Ensenada",
-      "Desbordamiento de arroyo obliga a evacuar a 30 familias en Ensenada; 182 personas están en refugios"
-     ]
-    },
-    {
-     "termino": "ayuntamiento",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Ensenada": 3
-     },
-     "fuentes": {
-      "imparcial": 1,
-      "jornadabc": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "82cc841fab635b7c",
-      "86afd1e165d2c9a7",
-      "9d0efb78dda70584"
-     ],
-     "ejemplos": [
-      "Ayuntamiento de Ensenada ofrece descuentos de hasta 100% en multas y recargos",
-      "Ayuntamiento de Ensenada suspenderá labores el lunes 12 de octubre",
-      "Con carta de no lavado de dinero ayuntamiento de Ensenada se previene de acusaciones: Agatón"
-     ]
-    },
-    {
-     "termino": "colonias",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Ensenada": 3
-     },
-     "fuentes": {
-      "imparcial": 1,
-      "soltij": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "205c4c2cd835c5e0",
-      "a2b8f36b2f63c647",
-      "d43f6289284b885a"
-     ],
-     "ejemplos": [
-      "Alerta en Ensenada por tormenta tropical Rachel, varias colonias se quedan sin luz",
-      "Tormenta Rachel deja 25 colonias de Ensenada sin electricidad y vialidades inundadas",
-      "Rachel deja 25 colonias sin luz en Ensenada; continúan inundaciones y cierres viales"
-     ]
-    },
-    {
-     "termino": "cuatro",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Ensenada": 3
-     },
-     "fuentes": {
-      "imparcial": 1,
-      "lavoz": 1,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "82a465c2cb024021",
-      "9b8812c32d32311d",
-      "cb4805fb5d111fee"
-     ],
-     "ejemplos": [
-      "Localizan sin vida a cuatro desaparecidos por Rachel en Ensenada",
-      "Reportan segundo caso de desaparición de una familia por lluvias en El Pípila, Ensenada; buscan a cuatro personas",
-      "Liquidan incendio forestal que afectó 600 hectáreas en San Vicente tras cuatro días de labores"
-     ]
     }
    ]
   },
   "Playas de Rosarito": {
-   "notas_ventana": 58,
+   "notas_ventana": 62,
    "minimo": 3,
    "temas": [
     {
@@ -4568,6 +4728,55 @@
      ]
     },
     {
+     "termino": "playas",
+     "n": 18,
+     "n_previo": 14,
+     "momento": 4,
+     "zonas": {
+      "Playas de Rosarito": 18,
+      "Tijuana": 2
+     },
+     "fuentes": {
+      "rosarito": 5,
+      "gn-df1d301d141c": 3,
+      "uniradio": 2,
+      "afn": 1,
+      "gn-208187d76ea7": 1,
+      "gn-291a95aaf8ce": 1,
+      "gn-36bce513f849": 1,
+      "gn-3d33531b3bed": 1,
+      "gn-87dd1da2757d": 1,
+      "gn-f8497491006c": 1,
+      "soltij": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "17d534742ae10771",
+      "18da88b2d867095f",
+      "1aaccbbef7140a03",
+      "29a8ca9b44d9ee38",
+      "2fc45b7d84abe08c",
+      "34017a129822f24a",
+      "3a7281891f96bd76",
+      "4261b0fb9a506491",
+      "591884a8dcd1d940",
+      "87cdfa0429e5cf06",
+      "984176c382ebcf5a",
+      "a010dfd6e3e5e448",
+      "a32c27afee559985",
+      "c4df13937dda8408",
+      "cb82b834bc282384",
+      "f4b030c90c50120b",
+      "f5e9f4febe67c402",
+      "fd9a71370fb703c4"
+     ],
+     "ejemplos": [
+      "Tormenta Postropical ‘Rachel‘ Deja Pérdidas Económicas en Playas de Rosarito",
+      "Buscan nuevos elementos para Seguridad Pública en Playas de Rosarito",
+      "Entregan lonas de emergencia tras lluvias en Playas de Rosarito"
+     ]
+    },
+    {
      "termino": "metros",
      "n": 4,
      "n_previo": 0,
@@ -4647,53 +4856,6 @@
       "Comerciantes de Playas de Tijuana y Rosarito Reportan Pérdidas por Lluvias",
       "Tormenta Rachel: evacuan a 150 personas de festividad y reportan viviendas inundadas en Rosarito",
       "Reportan cortes de agua en Tijuana y Rosarito por lluvias, fugas y fallas eléctricas"
-     ]
-    },
-    {
-     "termino": "playas",
-     "n": 17,
-     "n_previo": 14,
-     "momento": 3,
-     "zonas": {
-      "Playas de Rosarito": 17,
-      "Tijuana": 2
-     },
-     "fuentes": {
-      "rosarito": 5,
-      "gn-df1d301d141c": 3,
-      "uniradio": 2,
-      "gn-208187d76ea7": 1,
-      "gn-291a95aaf8ce": 1,
-      "gn-36bce513f849": 1,
-      "gn-3d33531b3bed": 1,
-      "gn-87dd1da2757d": 1,
-      "gn-f8497491006c": 1,
-      "soltij": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "17d534742ae10771",
-      "18da88b2d867095f",
-      "1aaccbbef7140a03",
-      "29a8ca9b44d9ee38",
-      "2fc45b7d84abe08c",
-      "34017a129822f24a",
-      "3a7281891f96bd76",
-      "4261b0fb9a506491",
-      "591884a8dcd1d940",
-      "984176c382ebcf5a",
-      "a010dfd6e3e5e448",
-      "a32c27afee559985",
-      "c4df13937dda8408",
-      "cb82b834bc282384",
-      "f4b030c90c50120b",
-      "f5e9f4febe67c402",
-      "fd9a71370fb703c4"
-     ],
-     "ejemplos": [
-      "Tormenta Postropical ‘Rachel‘ Deja Pérdidas Económicas en Playas de Rosarito",
-      "Entregan lonas de emergencia tras lluvias en Playas de Rosarito",
-      "Remodelan rampas en unidades deportivas de Playas de Rosarito"
      ]
     },
     {
@@ -4924,35 +5086,92 @@
     },
     {
      "termino": "cespt",
-     "n": 3,
+     "n": 4,
      "n_previo": 3,
-     "momento": 0,
+     "momento": 1,
      "zonas": {
-      "Playas de Rosarito": 3,
-      "Tijuana": 3
+      "Playas de Rosarito": 4,
+      "Tijuana": 4
      },
      "fuentes": {
-      "jornadabc": 2,
+      "jornadabc": 3,
       "uniradio": 1
      },
      "un_solo_medio": false,
      "notas": [
+      "82da6fc8f94b4a4f",
       "984176c382ebcf5a",
       "9e25a51356c74618",
       "d70bf46486ba8060"
      ],
      "ejemplos": [
+      "Cespt da mantenimiento a casi 300 kilómetros de tubería sanitaria en Tijuana y Rosarito",
       "Cespt atendió efectos de lluvias en Tijuana y Rosarito",
-      "Cespt bachea 74 mil metros cuadrados en Tijuana y Rosarito",
-      "Alcanza CESPT 74 mil metros cuadrados de bacheo en Tijuana y Playas de Rosarito"
+      "Cespt bachea 74 mil metros cuadrados en Tijuana y Rosarito"
+     ]
+    },
+    {
+     "termino": "seguridad",
+     "n": 3,
+     "n_previo": 4,
+     "momento": -1,
+     "zonas": {
+      "Playas de Rosarito": 3,
+      "Tijuana": 1
+     },
+     "fuentes": {
+      "rosarito": 2,
+      "afn": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "87cdfa0429e5cf06",
+      "bc5e78fb491e5be7",
+      "f13cadc0971a3c0d"
+     ],
+     "ejemplos": [
+      "Buscan nuevos elementos para Seguridad Pública en Playas de Rosarito",
+      "Rosarito y Tijuana coordinan blindaje de seguridad con vecinos",
+      "Jóvenes prefieren ser ‘youtubers’ que policías: Seguridad en Rosarito"
      ]
     }
    ]
   },
   "Tecate": {
-   "notas_ventana": 42,
+   "notas_ventana": 51,
    "minimo": 3,
    "temas": [
+    {
+     "termino": "rachel",
+     "n": 6,
+     "n_previo": 0,
+     "momento": 6,
+     "zonas": {
+      "Tecate": 6
+     },
+     "fuentes": {
+      "afn": 1,
+      "gn-f8497491006c": 1,
+      "sintesis": 1,
+      "soltij": 1,
+      "tecate": 1,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "0bd5cffb1b93ad2a",
+      "271a1498d3b97798",
+      "4711d65d5d0c9cdd",
+      "52a7a746604a2a8c",
+      "669fa06efcba7fd6",
+      "c98e69a2ad534d2e"
+     ],
+     "ejemplos": [
+      "Atendieron más de sesenta emergencias en Tecate durante el paso de \"Rachel",
+      "Tecate rehabilita calles tras estragos por el huracán Rachel",
+      "Rehabilitan vialidades en Tecate tras afectaciones del huracán Rachel"
+     ]
+    },
     {
      "termino": "lluvias",
      "n": 6,
@@ -4983,32 +5202,86 @@
      ]
     },
     {
-     "termino": "rachel",
+     "termino": "roman cota",
      "n": 5,
-     "n_previo": 0,
-     "momento": 5,
+     "n_previo": 1,
+     "momento": 4,
      "zonas": {
       "Tecate": 5
      },
      "fuentes": {
-      "gn-f8497491006c": 1,
-      "sintesis": 1,
-      "soltij": 1,
-      "tecate": 1,
+      "gn-36bce513f849": 1,
+      "gn-6e69f2b2f169": 1,
+      "gn-bcb3aac555e0": 1,
+      "gn-c1d6f8717505": 1,
       "uniradio": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "0bd5cffb1b93ad2a",
-      "271a1498d3b97798",
-      "4711d65d5d0c9cdd",
-      "52a7a746604a2a8c",
-      "669fa06efcba7fd6"
+      "67e1953baac917e9",
+      "7a668bbe2eed54d7",
+      "9ca68807883297eb",
+      "bb7e8ed41614cfe5",
+      "e0cef1df62f1cd6e"
      ],
      "ejemplos": [
-      "Tecate rehabilita calles tras estragos por el huracán Rachel",
-      "Rehabilitan vialidades en Tecate tras afectaciones del huracán Rachel",
-      "Reportan autos varados y pluviales bloqueados tras paso de Rachel en Tecate"
+      "ROMÁN COTA IMPULSA EL ORDENAMIENTO ECOLÓGICO DE TECATE PARA PROTEGER EL AGUA",
+      "Román Cota impulsa el ordenamiento ecológico de Tecate para proteger el agua y el futuro del municipio",
+      "Activa Román Cota refugios temporales en Tecate para proteger a las familias ante las lluvias"
+     ]
+    },
+    {
+     "termino": "aerogenerador",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "Tecate": 4
+     },
+     "fuentes": {
+      "afn": 1,
+      "imparcial": 1,
+      "lavoz": 1,
+      "radarbc": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "08d4cf7e57cfd162",
+      "8d2c12c455a15039",
+      "9252fbb0d0673dd3",
+      "bf751c0059c31586"
+     ],
+     "ejemplos": [
+      "Se incendia aerogenerador del Estado en La Rumorosa",
+      "Se incendió un aerogenerador estatal en La Rumorosa",
+      "Confirma SIDURT incendio de aerogenerador en la Rumorosa"
+     ]
+    },
+    {
+     "termino": "gobierno",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "Tecate": 4
+     },
+     "fuentes": {
+      "gn-062dc8648157": 1,
+      "gn-36bce513f849": 1,
+      "imparcial": 1,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "08d4cf7e57cfd162",
+      "0dff9c77eb7035d8",
+      "52a7a746604a2a8c",
+      "c1f160fcb84be6c0"
+     ],
+     "ejemplos": [
+      "Se incendia aerogenerador del Gobierno del Estado en La Rumorosa",
+      "Gobierno de Tecate realiza operativos para proteger a las familias ante las lluvias",
+      "Gobierno de Tecate fortalece el mantenimiento de vialidades y espacios públicos del municipio"
      ]
     },
     {
@@ -5039,33 +5312,6 @@
      ]
     },
     {
-     "termino": "roman cota",
-     "n": 4,
-     "n_previo": 1,
-     "momento": 3,
-     "zonas": {
-      "Tecate": 4
-     },
-     "fuentes": {
-      "gn-36bce513f849": 1,
-      "gn-bcb3aac555e0": 1,
-      "gn-c1d6f8717505": 1,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "67e1953baac917e9",
-      "7a668bbe2eed54d7",
-      "9ca68807883297eb",
-      "bb7e8ed41614cfe5"
-     ],
-     "ejemplos": [
-      "Román Cota impulsa el ordenamiento ecológico de Tecate para proteger el agua y el futuro del municipio",
-      "Activa Román Cota refugios temporales en Tecate para proteger a las familias ante las lluvias",
-      "Activa Román Cota refugios temporales en Tecate para proteger a las familias ante las lluvias"
-     ]
-    },
-    {
      "termino": "bomberos",
      "n": 3,
      "n_previo": 0,
@@ -5086,31 +5332,6 @@
       "Bomberos de Tecate atienden alrededor de 120 incendios por mes",
       "Anuncian carrera atlética en beneficio de Bomberos de Tecate",
       "Hubo \"banderazo\", pero no concluirán subestación de bomberos en Tecate, reconocen"
-     ]
-    },
-    {
-     "termino": "gobierno",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Tecate": 3
-     },
-     "fuentes": {
-      "gn-062dc8648157": 1,
-      "gn-36bce513f849": 1,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0dff9c77eb7035d8",
-      "52a7a746604a2a8c",
-      "c1f160fcb84be6c0"
-     ],
-     "ejemplos": [
-      "Gobierno de Tecate realiza operativos para proteger a las familias ante las lluvias",
-      "Gobierno de Tecate fortalece el mantenimiento de vialidades y espacios públicos del municipio",
-      "Refuerza gobierno de Tecateacciones preventivas ante lluvias y vientos por el huracán Rachel"
      ]
     },
     {
@@ -5161,13 +5382,64 @@
       "Activa Román Cota refugios temporales en Tecate para proteger a las familias ante las lluvias",
       "Gobierno de Tecate realiza operativos para proteger a las familias ante las lluvias"
      ]
+    },
+    {
+     "termino": "predial",
+     "n": 3,
+     "n_previo": 1,
+     "momento": 2,
+     "zonas": {
+      "Tecate": 3
+     },
+     "fuentes": {
+      "gn-594c807d2116": 1,
+      "gn-f8497491006c": 1,
+      "tecate": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "0ef1f67b916922c6",
+      "4072979509600b60",
+      "fdcf4179e8485688"
+     ],
+     "ejemplos": [
+      "Piden reforzar cobro del predial en Tecate sin privilegios",
+      "Exhortan a Tecate a cobro parejo de predial y frenar privilegios",
+      "Exhortan a Tecate a cobrar predial parejo y sin privilegios"
+     ]
     }
    ]
   },
   "San Quintín": {
-   "notas_ventana": 33,
+   "notas_ventana": 36,
    "minimo": 3,
    "temas": [
+    {
+     "termino": "imss",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "San Quintín": 4
+     },
+     "fuentes": {
+      "soltij": 2,
+      "gn-b041eae59658": 1,
+      "gn-f7cfee7134bd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "2cdb602a4c431b08",
+      "317459e92204d82a",
+      "e9e4bae70128f58b",
+      "f7093afa8bfd6c6c"
+     ],
+     "ejemplos": [
+      "Cierran manifestantes del IMSS la Vicente Guerrero",
+      "Tras 56 horas trabajadores del IMSS abren carriles de la Vicente Guerrero",
+      "Sigue plantón del IMSS y cierre de Vicente Guerrero tras jornada de bloqueos"
+     ]
+    },
     {
      "termino": "mujeres",
      "n": 4,
@@ -5277,30 +5549,6 @@
      ]
     },
     {
-     "termino": "imss",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "San Quintín": 3
-     },
-     "fuentes": {
-      "soltij": 2,
-      "gn-b041eae59658": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "2cdb602a4c431b08",
-      "e9e4bae70128f58b",
-      "f7093afa8bfd6c6c"
-     ],
-     "ejemplos": [
-      "Tras 56 horas trabajadores del IMSS abren carriles de la Vicente Guerrero",
-      "Sigue plantón del IMSS y cierre de Vicente Guerrero tras jornada de bloqueos",
-      "Mantiene sindicato del IMSS bloqueo en la Vicente Guerrero; esperan concentración al mediodía"
-     ]
-    },
-    {
      "termino": "tormenta rachel",
      "n": 3,
      "n_previo": 0,
@@ -5354,26 +5602,29 @@
     },
     {
      "termino": "vicente guerrero",
-     "n": 9,
+     "n": 11,
      "n_previo": 11,
-     "momento": -2,
+     "momento": 0,
      "zonas": {
-      "San Quintín": 9
+      "San Quintín": 11
      },
      "fuentes": {
+      "gn-2aaf697f6b1b": 2,
       "soltij": 2,
       "gn-0106d27445ac": 1,
-      "gn-2aaf697f6b1b": 1,
       "gn-82f33712a155": 1,
       "gn-8ee5bccaca78": 1,
       "gn-b041eae59658": 1,
       "gn-e0db246e5666": 1,
+      "gn-f7cfee7134bd": 1,
       "gn-fd2f893c25cd": 1
      },
      "un_solo_medio": false,
      "notas": [
       "2cdb602a4c431b08",
       "2dacdf2a65dbc1a7",
+      "317459e92204d82a",
+      "8341dbcea0b5e38c",
       "9fba86f0421fbc44",
       "ad889b16f3c40371",
       "c65552789ccb601f",
@@ -5384,35 +5635,37 @@
      ],
      "ejemplos": [
       "Vicente Guerrero: “La lengua en fundamental para trabajar, promocionar y vivir mejorar”",
-      "Eternos inundados: Vicente Guerrero",
-      "Camioneta arrolla a pareja en motocicleta y conductor huye en avenida Vicente Guerrero"
+      "Detienen a tres hombres por presunto fraude procesal en Vicente Guerrero",
+      "Cierran manifestantes del IMSS la Vicente Guerrero"
      ]
     }
    ]
   },
   "San Felipe": {
-   "notas_ventana": 28,
+   "notas_ventana": 32,
    "minimo": 2,
    "temas": [
     {
      "termino": "felipe",
-     "n": 28,
+     "n": 32,
      "n_previo": 16,
-     "momento": 12,
+     "momento": 16,
      "zonas": {
-      "San Felipe": 28,
+      "San Felipe": 32,
       "Ensenada": 1
      },
      "fuentes": {
+      "lavoz": 9,
       "gn-507c32aa93b3": 8,
       "imparcial": 7,
-      "lavoz": 7,
+      "afn": 1,
       "bajanews": 1,
       "gn-2f955974c5c0": 1,
       "gn-6327d1dd772f": 1,
       "gn-704f83760328": 1,
       "gn-875e5e1681c0": 1,
-      "gn-b4bf210d5652": 1
+      "gn-b4bf210d5652": 1,
+      "gn-c1d6f8717505": 1
      },
      "un_solo_medio": false,
      "notas": [
@@ -5431,11 +5684,14 @@
       "6f38a1cd9278c77b",
       "70132e26a7241a51",
       "749bdf8db66d1ce9",
+      "7672968ab001d0fc",
+      "82e8f9429096faa6",
       "84afc13e20c593df",
       "87d7ba1a4939790a",
       "88d226611dcd4e2b",
       "910f6f125708b2e6",
       "a5061c8cad345113",
+      "acbd6c02c8d3c77b",
       "b8a1ba078701dcf6",
       "bf02360c36480588",
       "c26279f4ec60e1e9",
@@ -5443,12 +5699,13 @@
       "df278b8e4b3dae40",
       "efa8251e8aed0778",
       "f93bd9e1b9b7bbc8",
+      "f9c90dca7d435aa4",
       "faf82c863542dfd7"
      ],
      "ejemplos": [
-      "Sigue búsqueda de hombre y menor desaparecidos en el mar tras salir de San Felipe",
-      "Prioriza Marina del Pilar búsqueda de pescadores desaparecidos en San Felipe",
-      "Marina del Pilar activa operativos de rescate en Ensenada y San Felipe tras el paso de Rachel"
+      "Llama Secretaria de Medio Ambiente a unirse al Colillatón y Baja las pilas en San Felipe",
+      "Dialogan pescadores y alcalde de San Felipe; piden solucionar límites de pesca",
+      "Regresan al mar a tortuga que se encontraba varada en San Felipe"
      ]
     },
     {
@@ -5559,6 +5816,30 @@
      ]
     },
     {
+     "termino": "zona",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "San Felipe": 3
+     },
+     "fuentes": {
+      "lavoz": 2,
+      "gn-507c32aa93b3": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "031b9e374cd9f5da",
+      "27cbdba657702037",
+      "7672968ab001d0fc"
+     ],
+     "ejemplos": [
+      "Piden que se disminuya zona prohibida para la pesca en San Felipe",
+      "Analizan pescadores de San Felipe trabajar en zona de cero tolerancia",
+      "Sismo de magnitud 3.8 sacude la zona sureste de San Felipe, Baja California"
+     ]
+    },
+    {
      "termino": "busqueda",
      "n": 2,
      "n_previo": 0,
@@ -5644,6 +5925,50 @@
      ]
     },
     {
+     "termino": "pesca",
+     "n": 2,
+     "n_previo": 0,
+     "momento": 2,
+     "zonas": {
+      "San Felipe": 2
+     },
+     "fuentes": {
+      "afn": 1,
+      "lavoz": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "7672968ab001d0fc",
+      "acbd6c02c8d3c77b"
+     ],
+     "ejemplos": [
+      "Dialogan pescadores y alcalde de San Felipe; piden solucionar límites de pesca",
+      "Piden que se disminuya zona prohibida para la pesca en San Felipe"
+     ]
+    },
+    {
+     "termino": "pilas felipe",
+     "n": 2,
+     "n_previo": 0,
+     "momento": 2,
+     "zonas": {
+      "San Felipe": 2
+     },
+     "fuentes": {
+      "gn-c1d6f8717505": 1,
+      "imparcial": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "84afc13e20c593df",
+      "f9c90dca7d435aa4"
+     ],
+     "ejemplos": [
+      "Llama Secretaria de Medio Ambiente a unirse al Colillatón y Baja las pilas en San Felipe",
+      "Invitan a limpiar playas y recolectar pilas en San Felipe"
+     ]
+    },
+    {
      "termino": "rachel",
      "n": 2,
      "n_previo": 0,
@@ -5689,7 +6014,7 @@
      ]
     },
     {
-     "termino": "zona",
+     "termino": "secretaria",
      "n": 2,
      "n_previo": 0,
      "momento": 2,
@@ -5697,17 +6022,17 @@
       "San Felipe": 2
      },
      "fuentes": {
-      "gn-507c32aa93b3": 1,
+      "gn-c1d6f8717505": 1,
       "lavoz": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "031b9e374cd9f5da",
-      "27cbdba657702037"
+      "6b764f436b936a7c",
+      "f9c90dca7d435aa4"
      ],
      "ejemplos": [
-      "Analizan pescadores de San Felipe trabajar en zona de cero tolerancia",
-      "Sismo de magnitud 3.8 sacude la zona sureste de San Felipe, Baja California"
+      "Llama Secretaria de Medio Ambiente a unirse al Colillatón y Baja las pilas en San Felipe",
+      "Queda recinto portuario de San Felipe bajo la administración de la Secretaría de Marina"
      ]
     },
     {
@@ -5804,7 +6129,7 @@
    ]
   },
   "San Diego": {
-   "notas_ventana": 284,
+   "notas_ventana": 313,
    "minimo": 3,
    "temas": [
     {
@@ -6156,6 +6481,31 @@
      ]
     },
     {
+     "termino": "diesel",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "San Diego": 4
+     },
+     "fuentes": {
+      "kpbs": 3,
+      "timessd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "4ab993cd2a56c17c",
+      "98314ddab077f56d",
+      "c47a795e6573d458",
+      "c4ac4722713b77c6"
+     ],
+     "ejemplos": [
+      "Bipartisan group of senators call on Trump to rescind Russian diesel deal",
+      "Climate scientists and others call for action on diesel trucks at the port",
+      "Trump says U.S. to get diesel from Russia, relaxing pressure on Moscow to ease prices before midterms"
+     ]
+    },
+    {
      "termino": "pounds",
      "n": 4,
      "n_previo": 0,
@@ -6371,6 +6721,31 @@
      ]
     },
     {
+     "termino": "candidate",
+     "n": 4,
+     "n_previo": 1,
+     "momento": 3,
+     "zonas": {
+      "San Diego": 4
+     },
+     "fuentes": {
+      "gn-5bad11419dae": 2,
+      "voiceofsd": 2
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "8768756b4a6b5f42",
+      "d2e777ce00f4bc99",
+      "d904678ae74a4dc6",
+      "e2de4e729a8c3527"
+     ],
+     "ejemplos": [
+      "Q&A: Meet Martin Arias, candidate for San Ysidro School District trustee",
+      "Q&A: Meet Rebecca King, candidate for Coronado City Council",
+      "Candidate Says This County Policy Is Pushing San Diegans to Riverside"
+     ]
+    },
+    {
      "termino": "execution",
      "n": 4,
      "n_previo": 1,
@@ -6395,76 +6770,29 @@
      ]
     },
     {
-     "termino": "prison",
+     "termino": "minutos datos actualizados",
      "n": 4,
      "n_previo": 1,
      "momento": 3,
      "zonas": {
-      "San Diego": 4
+      "San Diego": 4,
+      "Mexicali": 2,
+      "Tijuana": 1
      },
      "fuentes": {
-      "kpbs": 3,
-      "timessd": 1
+      "gn-f8497491006c": 4
      },
-     "un_solo_medio": false,
+     "un_solo_medio": true,
      "notas": [
-      "0499a297cb510a35",
-      "882979c28f778715",
-      "91eebde424364fe0",
-      "b7f7ff887684a0a2"
+      "069a039312b05cd3",
+      "27b34e064c94681f",
+      "847f05523943b3dd",
+      "8f1a394f2b770cbd"
      ],
      "ejemplos": [
-      "State lawmaker calls for hearings on extreme heat at Donovan state prison",
-      "Christa Pike discharged from the hospital and back in prison",
-      "San Diego man sentenced to 12 years in prison for scheme holding immigrants captive for ransom"
-     ]
-    },
-    {
-     "termino": "abraham lincoln regresa",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "San Diego": 3
-     },
-     "fuentes": {
-      "imparcial": 2,
-      "timessd": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "428516417a6f240f",
-      "5fc716196c26758e",
-      "e592178e4735b818"
-     ],
-     "ejemplos": [
-      "USS Abraham Lincoln regresa a San Diego tras un despliegue récord de 265 días en el mar",
-      "USS Abraham Lincoln regresa a San Diego tras despliegue récord de 322 días",
-      "USS Abraham Lincoln regresa a San Diego tras casi 11 meses en Oriente Medio, con 265 días sin escala en puerto, problemas de abastecimiento y ocho intentos de suicidio reportados durante el despliegue"
-     ]
-    },
-    {
-     "termino": "accused",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "San Diego": 3
-     },
-     "fuentes": {
-      "kpbs": 2,
-      "timessd": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "67db429381d5d4b9",
-      "8c5f081f1b2d6e29",
-      "ecdc5df349594aa5"
-     ],
-     "ejemplos": [
-      "Syrian general accused of atrocities is protected by U.S. and Lebanon, NPR and BBC find",
-      "For 14 years, an accused kidnapper built a new life as a San Diego chef under a false identity",
-      "Former CIA official accused of stealing $40M in gold bars pleads guilty"
+      "Garitas de Mexicali y San Ysidro registran filas de hasta 150 minutos (Datos actualizados a las 12:00 PM PDT) Los cruces de Baja California a Estados Unidos registran demoras importantes este martes, posicionando a Calexico West como el puerto más con",
+      "Garitas de San Ysidro y Mexicali registran esperas de 30 minutos (Datos actualizados a las 6:00 am PDT) Los cruces fronterizos entre Baja California y Estados Unidos registran un flujo continuo con demoras moderadas este inicio de jornada. Los puntos de",
+      "🚨 Garitas de Tijuana registran cruces ágiles de hasta 15 minutos (Datos actualizados a las 7:00 AM PDT) Los cruces fronterizos de Baja California reportan un flujo fluido esta mañana. Las garitas de San Ysidro y Otay Mesa presentan demoras máximas de ta"
      ]
     }
    ]
