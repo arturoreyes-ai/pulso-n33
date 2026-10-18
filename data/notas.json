@@ -1,8 +1,397 @@
 {
  "esquema": 1,
  "ventana_dias": 30,
- "total": 11608,
+ "total": 11639,
  "notas": [
+  {
+   "id": "2077a402217ba931",
+   "titulo": "With an ad aimed at Trump, this Republican exposed GOP angst about Latino voters",
+   "url": "https://www.kpbs.org/news/politics/2026/10/18/with-an-ad-aimed-at-trump-this-republican-exposed-gop-angst-about-latino-voters",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T09:00:00+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/01457ea/2147483647/strip/false/crop/5005x5005+1250+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F6c%2Fac%2Ffc3bbe93495fa44fe8b172314b5d%2Fgettyimages-2277340758.jpg",
+   "rubros": []
+  },
+  {
+   "id": "ad48e9e2f27b8475",
+   "titulo": "Major fire breaks out in Alberta after deadly incident at military base",
+   "url": "https://www.kpbs.org/news/international/2026/10/18/major-fire-breaks-out-in-alberta-after-deadly-incident-at-military-base",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T07:56:08+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/fb4a334/2147483647/strip/false/crop/5504x5504+1376+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F00%2F2a%2Fa5e2242c4287be6dedf0da163a0b%2Fap26291249424490.jpg",
+   "rubros": []
+  },
+  {
+   "id": "c79fbe186f0fa74a",
+   "titulo": "Dónde aplicar el perfume antes de una fiesta y qué hacer para que el aroma dure más horas sin tener que rociarlo constantemente",
+   "url": "https://www.elimparcial.com/estilos/2026/10/17/donde-aplicar-el-perfume-antes-de-una-fiesta-y-que-hacer-para-que-el-aroma-dure-mas-horas-sin-tener-que-rociarlo-constantemente/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T06:50:55+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.8443,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/LJQFAWRMFRGDDLKJUMZWER5KZY.jpg?auth=5fbe13ef1be0a3821b5d0455575aa8c719cd0382b18f2810b24277e12185ec7a&smart=true&width=1200&height=780",
+   "rubros": []
+  },
+  {
+   "id": "8159024a4e6eedd1",
+   "titulo": "Rescatan en Alaska a una cría de morsa huérfana que estaba amenazada por gaviotas y osos polares y, tras esperar tres días por una tormenta, la trasladan a un centro donde vivirá bajo cuidado humano porque no podrá regresar a la naturaleza",
+   "url": "https://www.elimparcial.com/locurioso/2026/10/17/rescatan-en-alaska-a-una-cria-de-morsa-huerfana-que-estaba-amenazada-por-gaviotas-y-osos-polares-y-tras-esperar-tres-dias-por-una-tormenta-la-trasladan-a-un-centro-donde-vivira-bajo-cuidado-humano-porque-no-podra-regresar-a-la-naturaleza/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T06:40:26+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8857,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/XLBIGLX23VCUXL7R7FDWRIQ26I.png?auth=89d1f2880bc6a423544c42819e5673d851c1e656bb5693e6b2781520e786d078&smart=true&width=1200&height=780",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "e2481d6dfa98c8d2",
+   "titulo": "Una pipa de agua con capacidad de 20 mil litros queda atrapada en un socavón de tres metros de profundidad en Guadalajara, mientras bomberos y Protección Civil coordinan las maniobras para retirar la unidad",
+   "url": "https://www.elimparcial.com/mexico/2026/10/17/una-pipa-de-agua-con-capacidad-de-20-mil-litros-queda-atrapada-en-un-socavon-de-tres-metros-de-profundidad-en-guadalajara-mientras-bomberos-y-proteccion-civil-coordinan-las-maniobras-para-retirar-la-unidad/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T06:35:13+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.568,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/C3EY775CQZA4TAXTF5VPVYBZ2I.png?auth=3394d503b93bae2cdcc37733ebbb7f5f6740ea2e948b0b485f0d253b5b794fbb&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "8d65be1dd6a18620",
+   "titulo": "Donald Trump exime a Rusia de sanciones económicas y enfrenta críticas de republicanos y demócratas por favorecer a Putin",
+   "url": "https://www.elimparcial.com/mundo/2026/10/17/donald-trump-exime-a-rusia-de-sanciones-economicas-y-enfrenta-criticas-de-republicanos-y-democratas-por-favorecer-a-putin/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T06:31:52+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5543,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/TAEGAUHZYZGJHPXSE4ZBUJKHJE.png?auth=dad370b2900b0d0cf73f8fde077ce5b639a3e978823dbfe9557846a2a8c01cbe&smart=true&width=1600&height=1200",
+   "rubros": []
+  },
+  {
+   "id": "1544c4dbb21b8df9",
+   "titulo": "Naranjeros pierden ventaja y caen ante Mayos",
+   "url": "https://www.elimparcial.com/deporte/2026/10/17/naranjeros-pierden-ventaja-y-caen-ante-mayos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T06:14:40+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4878,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/ATHFJ4MY5BEYPO6Y55IUGEMJZM.jpeg?auth=4cc8a7fbecb1e2352ad76160bf0030fd81e320e652853a0592e303893c2c04bb&smart=true&width=1600&height=911",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "26460cd8fcc21bcc",
+   "titulo": "Las viviendas sociales costarán más de 600 mil pesos por unidad mientras el gobierno proyecta construir 90 mil casas durante los próximos seis años para reducir el rezago habitacional en Tabasco",
+   "url": "https://www.elimparcial.com/mexico/2026/10/17/las-viviendas-sociales-costaran-mas-de-600-mil-pesos-por-unidad-mientras-el-gobierno-proyecta-construir-90-mil-casas-durante-los-proximos-seis-anos-para-reducir-el-rezago-habitacional-en-tabasco/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T06:12:21+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4934,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/34LZC6NI45HEPPSDQTVKWV5ZZY.png?auth=05d7b08a363f74c8d65a5b2255a17393849d080bf2b9ea55620f0136027c0819&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "d17c43a46c165dfe",
+   "titulo": "Un estudiante de doctorado pasó semanas sin saber por qué perdía sensibilidad en los dedos y fuerza en las piernas hasta que sus colegas analizaron un polvo blanco hallado junto a su cafetera y detectaron acrilamida; la investigación apuntó a una compañera de laboratorio que ahora enfrenta cargos por agresión agravada y lesiones en Estados Unidos",
+   "url": "https://www.elimparcial.com/locurioso/2026/10/17/un-estudiante-de-doctorado-paso-semanas-sin-saber-por-que-perdia-sensibilidad-en-los-dedos-y-fuerza-en-las-piernas-hasta-que-sus-colegas-analizaron-un-polvo-blanco-hallado-junto-a-su-cafetera-y-detectaron-acrilamida-la-investigacion-apunto-a-una-companera-de-laboratorio-que-ahora-enfrenta-cargos-por-agresion-agravada-y-lesiones-en-estados-unidos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T05:43:45+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7368,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/BHRR3DFVNZAVLDMA4GGPWPHYZI.png?auth=1ac717b48588f9322e82d8a49f4641959626dbfef90c705174bf6a0867b0e3b6&smart=true&width=1200&height=780",
+   "rubros": []
+  },
+  {
+   "id": "11356264236384eb",
+   "titulo": "Claudia Sheinbaum realiza visitas sorpresa a hospitales y anuncia cambios en el IMSS, Issste e IMSS-Bienestar para combatir la burocracia, la falta de medicamentos y las demoras en cirugías",
+   "url": "https://www.elimparcial.com/mexico/2026/10/17/claudia-sheinbaum-realiza-visitas-sorpresa-a-hospitales-y-anuncia-cambios-en-el-imss-issste-e-imss-bienestar-para-combatir-la-burocracia-la-falta-de-medicamentos-y-las-demoras-en-cirugias/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T05:07:00+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6339,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/R7BOY7VTCJHM3LD3RSBU6PMWQM.jpg?auth=c1cb8d0019ad08cb460d22db7061e3fb2291430fc4924bcd68e3fa1578203a59&smart=true&width=1920&height=1200",
+   "rubros": []
+  },
+  {
+   "id": "20a6345248a4f396",
+   "titulo": "“Mi aspiración es irme a mi terrenito”: José Ramiro López Obrador descarta buscar cargos de elección popular en 2027 y 2030 pese a las aspiraciones políticas de su familia",
+   "url": "https://www.elimparcial.com/mexico/2026/10/17/mi-aspiracion-es-irme-a-mi-terrenito-jose-ramiro-lopez-obrador-descarta-buscar-cargos-de-eleccion-popular-en-2027-y-2030-pese-a-las-aspiraciones-politicas-de-su-familia/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T05:06:51+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5025,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/B257GLKFH5FTPNJSDRQEFRHKCU.png?auth=7a2ac6ad9bb7099015bb5882795a413feabb03812a17bb26edbef6d159809ae4&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "1e7d0607d4bbb52c",
+   "titulo": "Empresario pide retirar el nombre del aeropuerto de Tulum tras la salida de aerolíneas internacionales y la cancelación de rutas que afectan al destino turístico",
+   "url": "https://www.elimparcial.com/mexico/2026/10/17/empresario-pide-retirar-el-nombre-del-aeropuerto-de-tulum-tras-la-salida-de-aerolineas-internacionales-y-la-cancelacion-de-rutas-que-afectan-al-destino-turistico/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T04:41:29+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9209,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/BE33ZSVROBFH3CCDH7JGZRV36Y.png?auth=70ad3521a5e7edbe73c27c82d1c07595c1af714e9a573b567ee9ebbc92709f6f&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "c6f82f67758896c4",
+   "titulo": "UBRTON 2026 busca reunir apoyos para las terapias de personas con discapacidad en San Luis Río Colorado",
+   "url": "https://www.elimparcial.com/mxl/policiaca/2026/10/17/ubrton-2026-busca-reunir-apoyos-para-las-terapias-de-personas-con-discapacidad-en-san-luis-rio-colorado/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T04:35:12+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6904,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/RWFNLXMBDRBYBLZHFVN4U5YEDU.png?auth=64593f21eb4ca2e43109daf9a15dd62ecd9b725c6e0fc9ebb86718744fedadce&smart=true&width=800&height=547",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "f724a0b56dd3fa71",
+   "titulo": "León vs América: Goles, resumen y mejores momentos de la jornada 12 de la Liga MX",
+   "url": "https://www.elimparcial.com/deporte/2026/10/17/leon-vs-america-goles-resumen-y-mejores-momentos-de-la-jornada-12-de-la-liga-mx/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T04:33:12+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5345,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/GFIIAYY7N5DFJJNCPS75XQKV4E.jpg?auth=ddb59f990dc7cd1e1687732b824cd9c23857852b0b0f1231303aa743d8411c2a&smart=true&width=1920&height=1080",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "a20b75d38d40b5fe",
+   "titulo": "Localizan a dos hombres sin vida en la ‘tolva’ de colonia Vicente Guerrero - El Sol de Acapulco",
+   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQdHZYZ3ZIQ1NLc29zZG1OZS1HbW5EZnEybkRwOEhtdnVmMFdlNDROUVBMU1ZUNnhuSGpTLUZGUW9ram5iVGhsazRiamlPS0dJeXBILWplUWtuZWdncUlWVnBVQUxiM3E0MWM5V211M1lfVThHV2MtbjhkaFkxRzZKbDJVbEdic0IxYktiTFdkUElENHpYQ0tRWnd6QkV6ZFdheS03SWhGcFlKSlN5YmRtYWJSUjMxUWtFMzliMV9FMEtCaDhX?oc=5",
+   "dominio": "elsoldetijuana.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T04:32:01+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5845,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "e2b26b5c43e4d18b",
+   "titulo": "Huracán Trudy vuelve a categoría 2 y amenaza las costas con oleaje de siete metros",
+   "url": "https://www.elimparcial.com/mexico/2026/10/17/huracan-trudy-vuelve-a-categoria-2-y-amenaza-las-costas-con-oleaje-de-siete-metros/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T04:30:01+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.4849,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/YFFXDZLSARGOVD7OSQVSWLSJYU.png?auth=157834aba1adb88873a1c02a16498a454aed61e08e37572a9f4bedc87bc1c7b3&smart=true&width=792&height=456",
+   "rubros": [
+    "clima"
+   ]
+  },
   {
    "id": "e0ed1a7da81a3a02",
    "titulo": "Localizan a dos hombres sin vida en la ‘tolva’ de colonia Vicente Guerrero",
@@ -83,6 +472,35 @@
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/FVJRCBT6LVGYHITWTY5SYHF754.png?auth=3aec13137081d194e54a96b4e48c0c0e234dae4f6a42049cf5bd3135218a6477&smart=true&width=1200&height=720",
    "rubros": []
+  },
+  {
+   "id": "751a30c5d980706b",
+   "titulo": "Estas avenidas tendrán cierres por el Maratón Internacional de Juárez 2026",
+   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxORWRjSGtHajFUU0d5QnV0TG9VNGJNQlh1RkNxcWVILUFkQkdHRFNDLUtLQlBQdkFrcGZ3OEtEMTJ3a3VwNktOcmJRZnpJOHZKOUYwNGFCVlE2TFAwMkswREU0YlF4bGVmTy1TempITHZpeFlvNUFwYy1jSWU3N1FHWjFBdWk1b19YTVExb0VTS3BwZmFuOVVuUC1zbERrOXlLc0hUbkd3UUhZdkw4N0doUTJGeWlqVG8zdDVWQk9iZjZFQVFH?oc=5",
+   "dominio": "elsoldetijuana.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T04:07:57+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.633,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": [
+    "deportes"
+   ]
   },
   {
    "id": "378d5f450bf3ab87",
@@ -310,6 +728,35 @@
    "rubros": []
   },
   {
+   "id": "db2fe5ea7394f257",
+   "titulo": "Continúa la búsqueda de dos desaparecidos en el mar de San Felipe; localizan hielera y chaleco salvavidas",
+   "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQaEdtdXdBREdBWmdQVG9SWkdZV24taXk3S2QzcTNKYTU3QXRQUG1PdldkWXBNT0VMbzJ6aTJwZnBQMW5fQVVaZTNVR2xzcm9SLVdndVRtN1NabVlqSkFXc2Y1SEV3ZnZnbXJFYW95X05ITjRuc0pjZzdPN29qeWcxZWMwZ0xXNFJwTEJWZkV0eHJycXZMd0d6VVZGQVMyWEpKaTJCdTgxWldFWEd5NWQ3alN5cWN1dGRsM2VVSlhJQXk?oc=5",
+   "dominio": "tvaztecabajacalifornia.com",
+   "fuente": "gn-8c7449ec9af7",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Felipe"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T03:31:24+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5446,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
    "id": "968135e20f63f761",
    "titulo": "Arranca campaña de vacunación invernal en BC",
    "url": "https://jornadabc.com.mx/principales/arranca-campana-de-vacunacion-invernal-en-bc-2/",
@@ -383,6 +830,30 @@
    "rubros": [
     "seguridad"
    ]
+  },
+  {
+   "id": "b19380cd46750e56",
+   "titulo": "Regresan familias por sus pertenencias al asentamiento evacuado de la Vía Rápida Poniente",
+   "url": "https://www.elimparcial.com/tij/tijuana/2026/10/17/regresan-familias-por-sus-pertenencias-al-asentamiento-evacuado-de-la-via-rapida-poniente/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T03:04:00+00:00",
+   "capturado": "2026-10-18T04:30:16+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5731,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/GZHKWCY7HFHV5MQC5L3TNVPH4Q.jpg?auth=598d7d188e9e9de0e7426ac4479a78928df02a290d14992318ca86e55febf3d6&smart=true&width=4000&height=3000",
+   "rubros": []
   },
   {
    "id": "6dc028dc0237cfa5",
@@ -605,6 +1076,31 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/5257OXCZJRESXEQJVMSAIGSNZA.png?auth=f609ae4345b5a777ac5962e1e5472b0daa551a925a0179e54d4119eaa2a1f626&smart=true&width=1090&height=860",
+   "rubros": []
+  },
+  {
+   "id": "2b34adb97e9b039c",
+   "titulo": "La Espiga / Leer la Historia como un thriller policial",
+   "url": "https://oem.com.mx/lavozdelafrontera/analisis/la-espiga-leer-la-historia-como-un-thriller-policial-32653548",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T02:00:00+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7614,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "rubros": []
   },
   {
@@ -935,6 +1431,33 @@
    "rubros": []
   },
   {
+   "id": "8f9a3e686961dbec",
+   "titulo": "Poder Judicial de Baja California y Elementa impulsarán socialización de la guía sobre declaración especial de ausencia",
+   "url": "https://www.uniradioinforma.com/gobierno/poder-judicial-baja-california-elementa-impulsaran-socializacion-guia-sobre-declaracion-especial-ausencia-n908221",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T00:45:00-07:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6635,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
    "id": "b3367c84ab1f03b6",
    "titulo": "‘No Kings’ events spread around San Diego to push voter turnout for November",
    "url": "https://timesofsandiego.com/politics/2026/10/17/no-kings-events-spread-around-san-diego-to-push-voter-turnout-for-november/",
@@ -1009,6 +1532,33 @@
    "imagen": "https://www.elimparcial.com/resizer/v2/27YD3M4JVVAM3LGQ7CMMJXEVIU.png?auth=2d974b443b0bf2b3c5cd29e89b4a7ab18c0a2b260b2e5a924cfb1f2ca5748c92&smart=true&width=1620&height=1080",
    "rubros": [
     "seguridad"
+   ]
+  },
+  {
+   "id": "cf955bc7e7eeb222",
+   "titulo": "San Diego FC suma un punto de su visita a Los Ángeles y sueña con postemporada",
+   "url": "https://oem.com.mx/elsoldetijuana/deportes/san-diego-fc-suma-un-punto-de-su-visita-a-los-angeles-y-suena-con-postemporada-32660723",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T00:39:26+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5112,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "deportes"
    ]
   },
   {
@@ -1169,6 +1719,54 @@
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/7FIGMJNZQ5FGJBJEZQ3DFF2E4E.jpeg?auth=125b92471389f8d14cf292948fb87b30e83d83fca64668f41ffabccf2a8dd94a&smart=true&width=1600&height=1066",
    "rubros": []
+  },
+  {
+   "id": "dc6598e40b93e064",
+   "titulo": "Los Tucanes de Tijuana: The story behind their global success",
+   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPeEFfN09NOEdtTXdtUF9GQ2dFZXJpY1NDazdBLUdHbnZ2aGZQWXhBbmJ5UlFXQ21FU3dMdERldGJEZU1NSFFoWTB1VjBndnpMNWxlWHdqa0RHQjZrUFd1bFdCelY3T2pzUmlEcjM4MVpua2psNktRWFUtU0RXNnV2Mmo3TQ?oc=5",
+   "dominio": "latination.com",
+   "fuente": "gn-aeacde3648a6",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T00:02:11+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
+  },
+  {
+   "id": "6088c36401454b09",
+   "titulo": "Águilas se queda con la serie",
+   "url": "https://oem.com.mx/lavozdelafrontera/deportes/aguilas-se-queda-con-la-serie-32660394",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T00:00:41+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6598,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "deportes"
+   ]
   },
   {
    "id": "4335f92e085c486d",
@@ -1430,6 +2028,33 @@
    ]
   },
   {
+   "id": "04b1b5881cc79726",
+   "titulo": "El Atlético Tijuana rescató el empate ante Delfines Baja en la jornada 4 de la Liga TDP",
+   "url": "https://oem.com.mx/elsoldetijuana/deportes/el-atletico-tijuana-rescato-el-empate-ante-delfines-baja-en-la-jornada-4-de-la-liga-tdp-32660208",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-17",
+   "publicado": "2026-10-17T23:29:20+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6821,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
    "id": "75b3c8126a1105b7",
    "titulo": "Desalojados del Río Tijuana rechazan albergue y buscan dónde quedarse",
    "url": "https://zetatijuana.com/2026/10/desalojados-del-rio-tijuana-rechazan-albergue-y-buscan-donde-quedarse/",
@@ -1658,27 +2283,49 @@
    "rubros": []
   },
   {
-   "id": "b19380cd46750e56",
-   "titulo": "Regresan familias por sus pertenencias al asentamiento evacuado de la Vía Rápida Poniente",
-   "url": "https://www.elimparcial.com/tij/tijuana/2026/10/17/regresan-familias-por-sus-pertenencias-al-asentamiento-evacuado-de-la-via-rapida-poniente/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
+   "id": "590690aa90db3f99",
+   "titulo": "U.S. and Mexican Authorities Search for Missing After Shipwreck Near Ensenada",
+   "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPY0FLVUx6N2hTQVdfQWtWTXRYcUNBci1ZT2NEWmV2aUMydF9iekVQMDFTaWJQaUlNMkRwM19XZWtUQjVRNUgzTVhqU0VLdUFyZ3lQTlM3Mjl0THFpdzFqTUhKSm82UTJJSlk3WU9lbnJnNjJhZ1NjV3NtSUY0dlBWV0pxWm5XMlIyRmM1Mk1tNXpqN3Fzbm5LNG9TY1BMazFHNUJQMTYtZTE?oc=5",
+   "dominio": "mexicodailypost.com",
+   "fuente": "gn-3d33531b3bed",
    "zona_medio": "estatal",
-   "zonas": [],
+   "zonas": [
+    "Ensenada"
+   ],
    "delegaciones": [],
-   "alcance": "nacional",
+   "alcance": "zona",
    "fecha": "2026-10-17",
-   "publicado": "2026-10-17T22:04:46+00:00",
-   "capturado": "2026-10-18T04:30:16+00:00",
+   "publicado": "2026-10-17T22:07:47+00:00",
+   "capturado": "2026-10-17T20:35:41+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
+  },
+  {
+   "id": "12ece2fa1e501b4f",
+   "titulo": "Proyectará Encuentro Binacional de Hospitalidad la oferta médica de Tijuana: Cotuco",
+   "url": "https://www.uniradioinforma.com/sociedad/proyectara-encuentro-binacional-hospitalidad-oferta-medica-tijuana-cotuco-n908347",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-17",
+   "publicado": "2026-10-17T22:05:00-07:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
    "figuras": [],
    "postura": {
     "etiqueta": "neutral",
-    "confianza": 0.5731,
+    "confianza": 0.5513,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
-   "imagen": "https://www.elimparcial.com/resizer/v2/GZHKWCY7HFHV5MQC5L3TNVPH4Q.jpg?auth=598d7d188e9e9de0e7426ac4479a78928df02a290d14992318ca86e55febf3d6&smart=true&width=4000&height=3000",
    "rubros": []
   },
   {
@@ -1700,6 +2347,33 @@
    "descubierta_por": "bq_frontera_en",
    "rubros": [
     "seguridad"
+   ]
+  },
+  {
+   "id": "88c9c5d12fb1d030",
+   "titulo": "¡Ya es mañana! Así será el operativo por Maratón Internacional",
+   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNS3dEZ0pyYU1KRWxiOWl6ZkNYRXdTZ18xU1pRa2NGVTBjR0lycGh6bUhtdHRQRVZVNXI4MU4tcjRweVdORExCWGd1TmVpeWNhYkhUcFYzRkdOWHNTOS1kMG5qVEozaE4yRDZ4TTNiMF9DaWF4VnV6OHQ2RkQ0WFNyRzFiR1IyYU9CZmtCZ0lRaUV1Rkk2QTFfai1yRnQyMV9FZEo3Wm93cXNaLU0?oc=5",
+   "dominio": "puentelibre.mx",
+   "fuente": "gn-917c85134fc2",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-17",
+   "publicado": "2026-10-17T22:01:02+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5795,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": [
+    "deportes"
    ]
   },
   {
@@ -2054,6 +2728,33 @@
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/2POE376NRZFVRH4PCEDBX5KBIA.png?auth=047af2d0426e942c9321d127ed3516eb9a9b5e4beab1974b3eb547e45ffbe525&smart=true&width=1200&height=675",
    "rubros": []
+  },
+  {
+   "id": "93f7ffdb74f3d3b7",
+   "titulo": "Desplegará Seguridad Vial 143 agentes por Maratón Internacional de Juárez 2026",
+   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPeVZ6QXhjSU1sdGxLUlRYc3hMU1ZwMFdBbmFaQ3c5SHNZa2tTTzRCeEdfdFg4OWxiYmhiM2xJdVNlcGlvdHdIMVFlZnNLbzFDeTJ6WTFrVlQ2Um0xRlhDak5Id04zekIxdEIxUENHQ1JvNm9SZlRKRXBaRXZyRmdubk1FT2JFMzBzOUZjYXpzNzlBN1BITXgteUlldXh5YnYzX01RV0VtdDZjclUzNHMzVVZaSjZ2a0E?oc=5",
+   "dominio": "adiario.mx",
+   "fuente": "gn-bb83a042bb9a",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-17",
+   "publicado": "2026-10-17T21:30:20+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5179,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": [
+    "deportes"
+   ]
   },
   {
    "id": "4e6919af60e8b91f",
@@ -2431,6 +3132,35 @@
     "version": "0.2.0"
    },
    "rubros": []
+  },
+  {
+   "id": "bfb6e2a92ce9cadf",
+   "titulo": "Alertan sobre lluvias y vientos de hasta 50 km/h en Baja California",
+   "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNSzN5bFMyRXhBNm0xN21Tdl82NV9RY1IxaUhEeERHb09RZ1dRdHdzN2FGRE8yeVZlbEowZDgwUi0xcTNWd0w0TlQyRjBlM25VbGdHSmNrTzdGYTNOcGkzV2RNZENhZFNkUFJEWjJQVC1qNkpkblBwckV6VE8ya0FSMWFZM2sxR1lQ?oc=5",
+   "dominio": "elcongresista.mx",
+   "fuente": "gn-65052a9c3141",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-17",
+   "publicado": "2026-10-17T20:31:59+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4638,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": [
+    "clima"
+   ]
   },
   {
    "id": "9d9e9e79ab6c07c8",
@@ -2831,27 +3561,6 @@
    ]
   },
   {
-   "id": "590690aa90db3f99",
-   "titulo": "U.S. and Mexican Authorities Search for Missing After Shipwreck Near Ensenada",
-   "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPY0FLVUx6N2hTQVdfQWtWTXRYcUNBci1ZT2NEWmV2aUMydF9iekVQMDFTaWJQaUlNMkRwM19XZWtUQjVRNUgzTVhqU0VLdUFyZ3lQTlM3Mjl0THFpdzFqTUhKSm82UTJJSlk3WU9lbnJnNjJhZ1NjV3NtSUY0dlBWV0pxWm5XMlIyRmM1Mk1tNXpqN3Fzbm5LNG9TY1BMazFHNUJQMTYtZTE?oc=5",
-   "dominio": "mexicodailypost.com",
-   "fuente": "gn-3d33531b3bed",
-   "zona_medio": "estatal",
-   "zonas": [
-    "Ensenada"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-10-17",
-   "publicado": "2026-10-17T19:55:02+00:00",
-   "capturado": "2026-10-17T20:35:41+00:00",
-   "figuras": [],
-   "postura": null,
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_aguasnegras",
-   "rubros": []
-  },
-  {
    "id": "54f8e46b20f13f4d",
    "titulo": "El Inegi mide por primera vez el desplazamiento forzado en México y confirma que la violencia provocó la salida de 509 mil familias de sus hogares",
    "url": "https://www.elimparcial.com/mexico/2026/10/17/el-inegi-mide-por-primera-vez-el-desplazamiento-forzado-en-mexico-y-confirma-que-la-violencia-provoco-la-salida-de-509-mil-familias-de-sus-hogares/",
@@ -3200,7 +3909,7 @@
    ],
    "alcance": "zona",
    "fecha": "2026-10-17",
-   "publicado": "2026-10-17T19:12:38+00:00",
+   "publicado": "2026-10-17T19:13:18+00:00",
    "capturado": "2026-10-17T20:35:41+00:00",
    "figuras": [],
    "postura": {
@@ -3751,6 +4460,31 @@
    ]
   },
   {
+   "id": "1de4842ba230a43e",
+   "titulo": "Edna Alicia Noriega asume la titularidad de SADER BC",
+   "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE54NjlRZ19nUlhnUWllWE54X3k2QVFwQkRfYzRjQnRJQ1FmdjdRV3B4bnEtM0lEaUF6cGQya1RybzVlWFp6TG1YczN0N21yc1NRT1pHZEtHSm1YT05XbEhxc0s2YUhIWW9RUU9pNFY4QmQ?oc=5",
+   "dominio": "ndtnoticiasdetijuana.com",
+   "fuente": "gn-6327d1dd772f",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-17",
+   "publicado": "2026-10-17T18:09:33+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6436,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate",
+   "rubros": []
+  },
+  {
    "id": "873e64eb714db405",
    "titulo": "Enfrenta proceso penal por asalto violento a tienda en la Condesa",
    "url": "https://www.elimparcial.com/mxl/policiaca/2026/10/17/enfrenta-proceso-penal-por-asalto-violento-a-tienda-en-la-condesa/",
@@ -3959,7 +4693,7 @@
   {
    "id": "baee8e668c789264",
    "titulo": "Buscan nuevos perfiles para la Fuerza Estatal",
-   "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNVXBmcUttSXlTUWRrWVZnWUhoTjdPSnl4aVRGYWtIRUxtdWpKb01MbDl6LUlpNWdJSmppQXVJdFdPaFBLdHJrbEtlLTRsUmZNbU82Nzd6T1ltcEN0bnE4SWhWdE9uYjdGamExdjdheTVaQ1dlSWVzU0FGeWpvVWNHbE95ZEZyWnJSNWZn0gGQAUFVX3lxTE9JRXBJM2EzTVNUb0k1UFNpaHRJZS1WRTc3M0tqYWxoS1lCdmctNUxabENuYi1EWFFVUi1SYnRMR1hqb1dfaHBGdmQ0Z1JTYjM0cGlfa1ZnaFp1VlBOQW1XRElnbjBPenRYVHVqYkxfQnZlU0F1ME9sS09KQ1RqRU1iV3M3a1Z1REFlUWV2WEREbg?oc=5",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPSUVwSTNhM01TVG9JNVBTaWh0SWUtVkU3NzNLamFsaEtZQnZnLTVMWmxDbmItRFhRVVItUmJ0TEdYam9XX2hwRnZkNGdSU2IzNHBpX2tWZ2hadVZQTkFtV0RJZ24wT3p0WFR1amJMX0J2ZVNBdTBPbEtPSkNUakVNYldzN2tWdURBZVFldlhERG7SAZABQVVfeXFMT0lFcEkzYTNNU1RvSTVQU2lodEllLVZFNzczS2phbGhLWUJ2Zy01TFpsQ25iLURYUVVSLVJidExHWGpvV19ocEZ2ZDRnUlNiMzRwaV9rVmdoWnVWUE5BbVdESWduME96dFhUdWpiTF9CdmVTQXUwT2xLT0pDVGpFTWJXczdrVnVEQWVRZXZYRERu?oc=5",
    "dominio": "uniradiobaja.com",
    "fuente": "gn-36bce513f849",
    "zona_medio": "estatal",
@@ -5020,6 +5754,28 @@
    "rubros": []
   },
   {
+   "id": "f8a09327b6c58a04",
+   "titulo": "Paris police report 855 arrests after violent clashes and looting during protests",
+   "url": "https://www.kpbs.org/news/international/2026/10/17/paris-police-report-855-arrests-after-violent-clashes-and-looting-during-protests",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-17",
+   "publicado": "2026-10-17T15:57:40+00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/0ab2e2b/2147483647/strip/false/crop/5504x5504+1376+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F67%2Feb%2F568abeb84af6bbb784b8ce305682%2Fap26290464234778.jpg",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
    "id": "2a58ffeb80a3a285",
    "titulo": "Scuffles and fires break out as protesters rally across France, joining students",
    "url": "https://www.kpbs.org/news/international/2026/10/17/scuffles-and-fires-break-out-as-protesters-rally-across-france-joining-students",
@@ -5085,6 +5841,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/10/6ad3fcab86724.jpg",
    "rubros": [
     "seguridad"
    ]
@@ -5110,6 +5867,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/10/6ad3fd294e9c3.jpg",
    "rubros": []
   },
   {
@@ -9893,6 +10651,32 @@
    "rubros": [
     "seguridad"
    ]
+  },
+  {
+   "id": "a1d6d934d61e47cc",
+   "titulo": "Acusa la FGR a ex fiscal Jáuregui de \"traición a la patria",
+   "url": "https://afntijuana.info/informacion_general/183098_acusa_la_fgr_a_ex_fiscal_jauregui_de_traicion_a_la_patria",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-17",
+   "publicado": "2026-10-17T00:00:00",
+   "capturado": "2026-10-18T11:01:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7819,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.afnbc.com/images.php?src=imagenes/NotaCesarN-171026.jpg&w=500&h=250",
+   "rubros": []
   },
   {
    "id": "844b94ddaac45730",
