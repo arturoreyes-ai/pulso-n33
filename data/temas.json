@@ -3,24 +3,24 @@
  "generado": "2026-10-19",
  "ventana_dias": 7,
  "minimo": 3,
- "notas_ventana": 2660,
+ "notas_ventana": 2677,
  "notas_previas": 2636,
  "temas": [
   {
    "termino": "cancer",
-   "n": 45,
+   "n": 46,
    "n_previo": 18,
-   "momento": 27,
+   "momento": 28,
    "zonas": {
     "nacional": 31,
     "San Diego": 5,
     "estatal": 4,
-    "Mexicali": 2,
+    "Mexicali": 3,
     "Tijuana": 2,
     "Ensenada": 1
    },
    "fuentes": {
-    "imparcial": 25,
+    "imparcial": 26,
     "uniradio": 9,
     "kpbs": 5,
     "afn": 1,
@@ -43,6 +43,7 @@
     "1c337352824996f8",
     "25d6fbe3227b6ea6",
     "2944077427bfff9b",
+    "2ea3b37b72339e44",
     "34dce67744dc911c",
     "42de0607c1345ea1",
     "48ee45c82837e7b8",
@@ -86,12 +87,12 @@
   },
   {
    "termino": "imss",
-   "n": 64,
+   "n": 65,
    "n_previo": 38,
-   "momento": 26,
+   "momento": 27,
    "zonas": {
     "nacional": 36,
-    "Tijuana": 24,
+    "Tijuana": 25,
     "Mexicali": 2,
     "San Quintín": 1,
     "estatal": 1
@@ -99,8 +100,8 @@
    "fuentes": {
     "imparcial": 31,
     "uniradio": 8,
+    "zeta": 8,
     "afn": 7,
-    "zeta": 7,
     "jornadabc": 5,
     "soltij": 4,
     "gn-f7cfee7134bd": 1,
@@ -138,6 +139,7 @@
     "5a2041f18148b96f",
     "5ae35366bfcd08fd",
     "5f01596203269fce",
+    "60727fd2ec5d3e5a",
     "62b7a371dc7facda",
     "661bd28fc1a7fdcc",
     "7e932c7ec4f4d309",
@@ -181,13 +183,13 @@
   },
   {
    "termino": "salud",
-   "n": 46,
+   "n": 47,
    "n_previo": 24,
-   "momento": 22,
+   "momento": 23,
    "zonas": {
     "nacional": 21,
     "Tijuana": 16,
-    "Mexicali": 4,
+    "Mexicali": 5,
     "estatal": 4,
     "San Diego": 1
    },
@@ -196,9 +198,9 @@
     "uniradio": 11,
     "afn": 10,
     "jornadabc": 3,
+    "lavoz": 2,
     "gn-01e4fd06574f": 1,
     "gn-36bce513f849": 1,
-    "lavoz": 1,
     "zeta": 1
    },
    "un_solo_medio": false,
@@ -219,6 +221,7 @@
     "34dce67744dc911c",
     "3865fdb0187d18c4",
     "3b68d6606000c14f",
+    "3dd1bb4cce7f86e0",
     "4214cf4ec33a62a2",
     "4580b4a8f1a9772d",
     "48ee45c82837e7b8",
@@ -1164,6 +1167,60 @@
    ]
   },
   {
+   "termino": "uabc",
+   "n": 24,
+   "n_previo": 10,
+   "momento": 14,
+   "zonas": {
+    "Tijuana": 10,
+    "Mexicali": 8,
+    "nacional": 5,
+    "San Quintín": 2,
+    "Ensenada": 1
+   },
+   "fuentes": {
+    "imparcial": 8,
+    "afn": 5,
+    "lavoz": 5,
+    "jornadabc": 2,
+    "soltij": 2,
+    "gn-e46da57e413e": 1,
+    "zeta": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "0223e0dc5493ff80",
+    "0b590275e38213cd",
+    "34896a021e294cb2",
+    "37b12161fd2b539b",
+    "4355dc6323441550",
+    "4bdae96ea86ef1c8",
+    "525f206654b760a0",
+    "56cc3fd750eaafcf",
+    "59c2726b4c4f1c07",
+    "5a9aef0fb2357998",
+    "5b11da2ce815a83b",
+    "6f4b5ae337e1f79d",
+    "7dc4a59ce6618d4d",
+    "8c5895793398fe7e",
+    "ab13a89d38bdeee6",
+    "add133b07ff7911f",
+    "b58aec086184c9d2",
+    "b9affd32c1fcf403",
+    "bfe843e418d84b36",
+    "d85437cd65ce7786",
+    "d9205bbf8d7771d6",
+    "deeab9a63c80ebfe",
+    "e885b432d7a4f67b",
+    "f2f2bc13349fe147"
+   ],
+   "ejemplos": [
+    "UABC planteará a la CFE reforzar la infraestructura eléctrica de sus planteles",
+    "UABC impulsa donación altruista de sangre en Tijuana",
+    "Rachel dejó sin clases presenciales a 900 alumnos de UABC"
+   ]
+  },
+  {
    "termino": "familias afectadas",
    "n": 14,
    "n_previo": 0,
@@ -1288,59 +1345,6 @@
     "¡Ganan los pescadores!, se reduce más el polígono de protección de vaquita marina",
     "No aplica declaratoria de emergencia para Ensenada, asegura Marina",
     "Por recomendación internacional, Semarnat reactiva la pesca en el refugio de la vaquita marina"
-   ]
-  },
-  {
-   "termino": "uabc",
-   "n": 23,
-   "n_previo": 10,
-   "momento": 13,
-   "zonas": {
-    "Tijuana": 9,
-    "Mexicali": 8,
-    "nacional": 5,
-    "San Quintín": 2,
-    "Ensenada": 1
-   },
-   "fuentes": {
-    "imparcial": 8,
-    "lavoz": 5,
-    "afn": 4,
-    "jornadabc": 2,
-    "soltij": 2,
-    "gn-e46da57e413e": 1,
-    "zeta": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "0223e0dc5493ff80",
-    "0b590275e38213cd",
-    "34896a021e294cb2",
-    "37b12161fd2b539b",
-    "4355dc6323441550",
-    "4bdae96ea86ef1c8",
-    "525f206654b760a0",
-    "56cc3fd750eaafcf",
-    "59c2726b4c4f1c07",
-    "5a9aef0fb2357998",
-    "5b11da2ce815a83b",
-    "6f4b5ae337e1f79d",
-    "7dc4a59ce6618d4d",
-    "8c5895793398fe7e",
-    "ab13a89d38bdeee6",
-    "add133b07ff7911f",
-    "b58aec086184c9d2",
-    "bfe843e418d84b36",
-    "d85437cd65ce7786",
-    "d9205bbf8d7771d6",
-    "deeab9a63c80ebfe",
-    "e885b432d7a4f67b",
-    "f2f2bc13349fe147"
-   ],
-   "ejemplos": [
-    "UABC impulsa donación altruista de sangre en Tijuana",
-    "Rachel dejó sin clases presenciales a 900 alumnos de UABC",
-    "CIMABUS iniciará operaciones de Santa Fe a UABC Otay con tarifa de 9 pesos para estudiantes y docentes"
    ]
   },
   {
@@ -1580,6 +1584,11 @@
    "porque": "duplica «papa leon»"
   },
   {
+   "termino": "mama",
+   "n": 20,
+   "porque": "duplica «cancer mama»"
+  },
+  {
    "termino": "vaquita",
    "n": 20,
    "porque": "duplica «vaquita marina»"
@@ -1588,11 +1597,6 @@
    "termino": "civil",
    "n": 19,
    "porque": "duplica «proteccion civil»"
-  },
-  {
-   "termino": "mama",
-   "n": 19,
-   "porque": "duplica «cancer mama»"
   },
   {
    "termino": "guerrero",
@@ -1640,19 +1644,19 @@
    "porque": "duplica «huracan trudy»"
   },
   {
+   "termino": "agaton",
+   "n": 11,
+   "porque": "duplica «claudia agaton»"
+  },
+  {
    "termino": "airlines",
    "n": 11,
    "porque": "duplica «american airlines»"
-  },
-  {
-   "termino": "serie campeonato",
-   "n": 11,
-   "porque": "duplica «juego serie campeonato»"
   }
  ],
  "por_zona": {
   "Tijuana": {
-   "notas_ventana": 684,
+   "notas_ventana": 690,
    "minimo": 3,
    "temas": [
     {
@@ -1703,15 +1707,15 @@
     },
     {
      "termino": "imss",
-     "n": 24,
+     "n": 25,
      "n_previo": 12,
-     "momento": 12,
+     "momento": 13,
      "zonas": {
-      "Tijuana": 24
+      "Tijuana": 25
      },
      "fuentes": {
       "afn": 7,
-      "zeta": 6,
+      "zeta": 7,
       "jornadabc": 5,
       "soltij": 4,
       "imparcial": 2
@@ -1728,6 +1732,7 @@
       "456a29452b81ee63",
       "47b1c6a3b43427ed",
       "48af60e3ffb18764",
+      "60727fd2ec5d3e5a",
       "661bd28fc1a7fdcc",
       "8f51d83bae3b3b08",
       "9bd184132cb928a9",
@@ -1745,8 +1750,8 @@
      ],
      "ejemplos": [
       "IMSS necesita auditoría urgente para transparentar carencias y frenar corrupción: Rebeca Hernández",
-      "IMSS ha supervisado 166 de sus 277 hospitales con la estrategia Piso por Piso",
-      "IMSS evalúa programa integral para trabajadores tras rechazo al alza salarial"
+      "Exapoderada atribuye “pésima administración” a Robledo en el IMSS; “debe renunciar”",
+      "IMSS ha supervisado 166 de sus 277 hospitales con la estrategia Piso por Piso"
      ]
     },
     {
@@ -2260,6 +2265,41 @@
      ]
     },
     {
+     "termino": "uabc",
+     "n": 10,
+     "n_previo": 5,
+     "momento": 5,
+     "zonas": {
+      "Tijuana": 10,
+      "Ensenada": 1,
+      "Mexicali": 1
+     },
+     "fuentes": {
+      "afn": 5,
+      "jornadabc": 2,
+      "soltij": 2,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "4bdae96ea86ef1c8",
+      "525f206654b760a0",
+      "59c2726b4c4f1c07",
+      "5b11da2ce815a83b",
+      "6f4b5ae337e1f79d",
+      "7dc4a59ce6618d4d",
+      "8c5895793398fe7e",
+      "b9affd32c1fcf403",
+      "d85437cd65ce7786",
+      "d9205bbf8d7771d6"
+     ],
+     "ejemplos": [
+      "UABC planteará a la CFE reforzar la infraestructura eléctrica de sus planteles",
+      "UABC impulsa donación altruista de sangre en Tijuana",
+      "CIMABUS iniciará operaciones de Santa Fe a UABC Otay con tarifa de 9 pesos para estudiantes y docentes"
+     ]
+    },
+    {
      "termino": "industria",
      "n": 7,
      "n_previo": 2,
@@ -2491,39 +2531,11 @@
       "Detienen a supuestos funcionarios federales por intento de extorsión",
       "Procesan a excomandante de la FGR por secuestro y extorsión"
      ]
-    },
-    {
-     "termino": "lugar",
-     "n": 5,
-     "n_previo": 0,
-     "momento": 5,
-     "zonas": {
-      "Tijuana": 5
-     },
-     "fuentes": {
-      "soltij": 2,
-      "afn": 1,
-      "jornadabc": 1,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "033976a86e13c5f0",
-      "1a39f1040bdae848",
-      "8c23115525e31ab3",
-      "951c4980dc3d5bcb",
-      "ad8d2b66ed19fdb1"
-     ],
-     "ejemplos": [
-      "CETYS Tijuana participa en la 11.ª Feria Ambiental Académica de Tijuana Innovadora y obtiene segundo lugar",
-      "Cetys Tijuana obtiene segundo lugar en la Feria Ambiental Académica",
-      "Comercio ambulante crece fuera de toda proporción y fuera de todo lugar: Canaco"
-     ]
     }
    ]
   },
   "Mexicali": {
-   "notas_ventana": 230,
+   "notas_ventana": 232,
    "minimo": 3,
    "temas": [
     {
@@ -2721,6 +2733,33 @@
       "Soles de Mexicali aplasta 102-58 a Abejas y toma ventaja en semifinales",
       "Aplastante triunfo de Soles en playoffs",
       "Soles de Mexicali inicia los playoffs ante Abejas de León por la quinta estrella"
+     ]
+    },
+    {
+     "termino": "salud",
+     "n": 5,
+     "n_previo": 1,
+     "momento": 4,
+     "zonas": {
+      "Mexicali": 5
+     },
+     "fuentes": {
+      "afn": 2,
+      "lavoz": 2,
+      "imparcial": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "2914f2957b2ef84a",
+      "2cd879f54d586cda",
+      "3dd1bb4cce7f86e0",
+      "5aab9e1f8fab6878",
+      "730e5889e68fd156"
+     ],
+     "ejemplos": [
+      "Forman lazo rosa en Mexicali; reportan alta cifra de cáncer de mama: Salud",
+      "Promueve Hospital Hispano Americano salud masculina con carrera atlética",
+      "Organizan carrera gratuita de 5K en Mexicali para promover la salud masculina"
      ]
     },
     {
@@ -3129,32 +3168,6 @@
      ]
     },
     {
-     "termino": "salud",
-     "n": 4,
-     "n_previo": 1,
-     "momento": 3,
-     "zonas": {
-      "Mexicali": 4
-     },
-     "fuentes": {
-      "afn": 2,
-      "imparcial": 1,
-      "lavoz": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "2914f2957b2ef84a",
-      "2cd879f54d586cda",
-      "5aab9e1f8fab6878",
-      "730e5889e68fd156"
-     ],
-     "ejemplos": [
-      "Forman lazo rosa en Mexicali; reportan alta cifra de cáncer de mama: Salud",
-      "Organizan carrera gratuita de 5K en Mexicali para promover la salud masculina",
-      "Recibe línea de emergencia 800 llamadas al mes por salud mental"
-     ]
-    },
-    {
      "termino": "abejas",
      "n": 3,
      "n_previo": 0,
@@ -3204,7 +3217,7 @@
    ]
   },
   "Ensenada": {
-   "notas_ventana": 136,
+   "notas_ventana": 137,
    "minimo": 3,
    "temas": [
     {
@@ -5731,7 +5744,7 @@
    ]
   },
   "San Diego": {
-   "notas_ventana": 296,
+   "notas_ventana": 300,
    "minimo": 3,
    "temas": [
     {
@@ -5793,39 +5806,6 @@
       "VOSD Podcast: Midway Rising Week with Chris Ward",
       "Midway Rising Advances But Council Insists Affordable Housing Should Be ‘New’",
       "Midway Rising moves to full council for approval, with some changes"
-     ]
-    },
-    {
-     "termino": "pollution",
-     "n": 7,
-     "n_previo": 1,
-     "momento": 6,
-     "zonas": {
-      "San Diego": 7,
-      "Tijuana": 2
-     },
-     "fuentes": {
-      "kpbs": 2,
-      "gn-46bc88bd6277": 1,
-      "gn-5bad11419dae": 1,
-      "gn-7c69e9ae3c6b": 1,
-      "gn-a956e11d03ed": 1,
-      "timessd": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "02d30702204dacca",
-      "09689980f2c1b803",
-      "2bede710366b7acf",
-      "4adfc52d173e6d0e",
-      "9b7847f3e9b9c80b",
-      "acfb3cc295dd72c0",
-      "fcd8c8bcb702b3b8"
-     ],
-     "ejemplos": [
-      "San Diego County To Name New Pollution Crisis Chief",
-      "SD County set to announce Bridget Premont as first pollution crisis chief",
-      "San Diego County names new pollution crisis chief"
      ]
     },
     {
@@ -5903,6 +5883,36 @@
       "Pope Leo says he will gradually resume duties after cancer surgery",
       "Pope Leo XIV leaves hospital days after lung cancer surgery",
       "Pope Leo's cancer prognosis is 'very good,' according to outside medical experts"
+     ]
+    },
+    {
+     "termino": "pollution crisis chief",
+     "n": 5,
+     "n_previo": 0,
+     "momento": 5,
+     "zonas": {
+      "San Diego": 5,
+      "Tijuana": 1
+     },
+     "fuentes": {
+      "gn-46bc88bd6277": 1,
+      "gn-5bad11419dae": 1,
+      "gn-65e51224f05e": 1,
+      "gn-a956e11d03ed": 1,
+      "timessd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "09689980f2c1b803",
+      "4adfc52d173e6d0e",
+      "acfb3cc295dd72c0",
+      "c2ae3aeeeae6caa0",
+      "fcd8c8bcb702b3b8"
+     ],
+     "ejemplos": [
+      "San Diego County To Name New Pollution Crisis Chief",
+      "San Diego County to name new Pollution Crisis Chief",
+      "SD County set to announce Bridget Premont as first pollution crisis chief"
      ]
     },
     {
@@ -6185,34 +6195,6 @@
      ]
     },
     {
-     "termino": "pollution crisis chief",
-     "n": 4,
-     "n_previo": 0,
-     "momento": 4,
-     "zonas": {
-      "San Diego": 4,
-      "Tijuana": 1
-     },
-     "fuentes": {
-      "gn-46bc88bd6277": 1,
-      "gn-5bad11419dae": 1,
-      "gn-a956e11d03ed": 1,
-      "timessd": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "09689980f2c1b803",
-      "4adfc52d173e6d0e",
-      "acfb3cc295dd72c0",
-      "fcd8c8bcb702b3b8"
-     ],
-     "ejemplos": [
-      "San Diego County To Name New Pollution Crisis Chief",
-      "SD County set to announce Bridget Premont as first pollution crisis chief",
-      "San Diego County names new pollution crisis chief"
-     ]
-    },
-    {
      "termino": "park",
      "n": 5,
      "n_previo": 2,
@@ -6414,6 +6396,32 @@
       "False confessions play a big role in wrongful convictions. One photographer's lens examines how they happen",
       "Banana Ball in San Diego | Savannah Bananas to play at Petco Park in 2027",
       "Aztecs, snakebit during inaugural Pac-12 season, try to overcome poor play and a contagion to draw fans back to Snapdragon"
+     ]
+    },
+    {
+     "termino": "registra",
+     "n": 4,
+     "n_previo": 1,
+     "momento": 3,
+     "zonas": {
+      "San Diego": 4,
+      "Tijuana": 1
+     },
+     "fuentes": {
+      "gn-f8497491006c": 3,
+      "kpbs": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "2e2aabe6d0551fb9",
+      "5b1c3092592a5fba",
+      "86193b31b401c2a0",
+      "f496b05c5d4bb4fe"
+     ],
+     "ejemplos": [
+      "Garita de Otay registra demoras con hasta una hora de espera (Datos actualizados a las 6:00 am PDT) Esta mañana el cruce hacia Estados Unidos presenta mayor saturación en la garita de Otay Mesa, donde el carril general registra esperas de hasta 60 min",
+      "🚨 San Ysidro registra filas intensas de hasta 100 minutos de demora (Datos actualizados a las 09:00 a.m. PDT / 11:55 a.m. EST) Los garitas fronterizas entre Baja California y Estados Unidos registran un tráfico intenso este domingo, situando a San Ysidro co",
+      "San Ysidro registra demoras de casi tres horas en garita vehicular (Datos actualizados a las 3:00 pm PDT) Los cruces fronterizos hacia Estados Unidos registran filas prolongadas esta tarde, siendo San Ysidro la garita más saturada con esperas de hasta 170"
      ]
     }
    ]
