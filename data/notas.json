@@ -1,8 +1,991 @@
 {
  "esquema": 1,
  "ventana_dias": 30,
- "total": 11406,
+ "total": 11453,
  "notas": [
+  {
+   "id": "46a6dd4c0846d811",
+   "titulo": "This tiny mouse is having a big comeback at Camp Pendleton",
+   "url": "https://www.kpbs.org/news/environment/2026/10/19/this-tiny-mouse-is-having-a-big-comeback-at-camp-pendleton",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T13:00:00+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/63f9364/2147483647/strip/false/crop/1500x1500+375+0/resize/600x600!/quality/90/?url=http%3A%2F%2Fkpbs-brightspot.s3.us-west-2.amazonaws.com%2F06%2F01%2Fb1197a524d5386da9b1b62c28a43%2Ft2026-0250-071.jpg",
+   "rubros": []
+  },
+  {
+   "id": "faa25d5de1634d80",
+   "titulo": "US Navy sailor reunites with deported father in Mexico after nearly yearlong deployment",
+   "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPc2dJMHBDZUs3MWZ5NTN6NWtLQnh4OWFzV2MzRkNpdE5vWmJZNEdFZUNLQmhNbF9iN2ZkczRDanpqME9UMmE5eXhKbkI2WExQZlJxazRaaU1MZWlvRUc0ZXBZcE1sSGIwWmstbHJwOHJQZTJPd3NPWmFEMU1od3A1dmkwS1FnTWpPNWFBRlhTenNHTGNuY0Q5TXQtMGVGQXVqY1NrSW5KUHBaMGp1LW9wNGVLcy1RUlg1U09DU2tIdkM1S2V0VndkdHZOWnhLNEU?oc=5",
+   "dominio": "local10.com",
+   "fuente": "gn-46f872120bd6",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T12:52:36+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
+  },
+  {
+   "id": "06d03b6dc306ac6f",
+   "titulo": "Mientras los mexicanos en 2030 tendrán una jornada laboral de 40 horas, en Brasil una nueva reforma reduce el límite a 40 horas y establece dos días de descanso remunerado por semana",
+   "url": "https://www.elimparcial.com/mexico/2026/10/18/mientras-los-mexicanos-en-2030-tendran-una-jornada-laboral-de-40-horas-en-brasil-una-nueva-reforma-reduce-el-limite-a-40-horas-y-establece-dos-dias-de-descanso-remunerado-por-semana/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T12:49:39+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7261,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/DC76LAGCLRG6JGJIHDMKC6QUCE.png?auth=2f98cf2dd0e62784ee0700d19e18a8162c55ef25856f674788a906eb2c0feee2&smart=true&width=1200&height=750",
+   "rubros": []
+  },
+  {
+   "id": "8d7b12d5ced6fe1f",
+   "titulo": "Inhabilitan hasta por 15 años a cuatro funcionarios del Banco del Bienestar por contratos irregulares que causaron daño de 380 millones de pesos",
+   "url": "https://www.elimparcial.com/dinero/2026/10/18/inhabilitan-hasta-por-15-anos-a-cuatro-funcionarios-del-banco-del-bienestar-por-contratos-irregulares-que-causaron-dano-de-380-millones-de-pesos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T12:45:29+00:00",
+   "capturado": "2026-10-18T20:41:34+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8153,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/5PGCTFLC6RH7JHN2HNWXHMNXVQ.jpg?auth=2adcecb7bfc61a55030e34160f4018e2b7b7a277e163a2031969adf50dd13c25&smart=true&width=1200&height=750",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "13f8e3614fd62713",
+   "titulo": "Panistas acusan a Maru Campos de traición; juez descarta prisión preventiva para Jáuregui",
+   "url": "https://zetatijuana.com/2026/10/panistas-acusan-a-maru-campos-de-traicion-juez-descarta-prision-preventiva-para-jauregui/",
+   "dominio": "zetatijuana.com",
+   "fuente": "zeta",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T12:32:39+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7022,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "aade0e787b5bd021",
+   "titulo": "Por recomendación internacional, Semarnat reactiva la pesca en el refugio de la vaquita marina",
+   "url": "https://www.elimparcial.com/mexico/2026/10/19/por-recomendacion-internacional-semarnat-reactiva-la-pesca-en-el-refugio-de-la-vaquita-marina/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T12:29:04+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5308,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/PQ7Q5MR2ZVC5JMA5QSOR3KOVJE.png?auth=8a303fd686d8b477e1a3bc230b7ad8deb268aa394789d65f19181f9876f65f07&smart=true&width=623&height=416",
+   "rubros": []
+  },
+  {
+   "id": "5fa385271f321ebd",
+   "titulo": "Efemérides del 19 de octubre: ¿qué pasó un día como hoy en México y el mundo?",
+   "url": "https://www.elimparcial.com/mundo/2026/10/19/efemerides-del-19-de-octubre-que-paso-un-dia-como-hoy-en-mexico-y-el-mundo/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T12:28:56+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.708,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/6IRRBXKRNVD7XDTESQ2TLLFKHE.jpg?auth=37a2da2cebc08f0ded9e478e51e9ff7b0055a796876808fd42f454b05f0282ab&smart=true&width=800&height=400",
+   "rubros": []
+  },
+  {
+   "id": "f5b50bc6f05d5ef9",
+   "titulo": "Pressure mounts to clean Tijuana River to prevent cross-border pollution ahead of El Niño",
+   "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQZk9PSENReGV3N0tvRkd2NW5lZXJZX2c2N0hFZjBDc0N6VkgxZmc0UDNlZkFLb1p2eHpUVzdLU1czM1AyRzVYU1Z3VTdnX0FiMGdEQ0xtT2xlSVVBcm1LOV9KUUtzSDdET0hMQTl6YnU0SmphWmV6MmxFblFaX3NFZ1BaV3BWZXVwSHA2NWhtUmNqMmNIRUU4YnNvOG9MSWo2ZGsyMXphVWMyQ3ZqNmlWbGQtWUFSRlZSaE91N00yUGFNT1RHTEpCQTZDY0JpZ2RubGxaRQ?oc=5",
+   "dominio": "sandiegouniontribune.com",
+   "fuente": "gn-5bad11419dae",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T12:01:31+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
+  },
+  {
+   "id": "3d5230c797bd1bc3",
+   "titulo": "“Nunca trabajó y conoce el autobús por literatura”, responde Lula a Flávio Bolsonaro durante el debate presidencial en Brasil, donde también intercambiaron ataques por los votos de los presos y la situación de Jair Bolsonaro",
+   "url": "https://www.elimparcial.com/mundo/2026/10/18/nunca-trabajo-y-conoce-el-autobus-por-literatura-responde-lula-a-flavio-bolsonaro-durante-el-debate-presidencial-en-brasil-donde-tambien-intercambiaron-ataques-por-los-votos-de-los-presos-y-la-situacion-de-jair-bolsonaro/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T11:57:34+00:00",
+   "capturado": "2026-10-19T04:37:27+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6337,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/VR73AY64L5CXDFI5PDX3AR5NWE.png?auth=b96fee054f281456c197325e59c298f6f9fc4131a0da8a0e7987dfd55034ce42&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "15ca8f4b1b33c0e0",
+   "titulo": "La SRE exige investigar la muerte de un mexicano en custodia de ICE en Laredo, Texas: Ya van 18 desde 2025",
+   "url": "https://www.elimparcial.com/mundo/2026/10/19/la-sre-exige-investigar-la-muerte-de-un-mexicano-en-custodia-de-ice-en-laredo-texas-ya-van-18-desde-2025/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T11:54:38+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7405,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/R2RXOQDGP5FBBKWTGPREXMCAYM.png?auth=33fca46ebcedfa2779231a4cb926199ba25c9f67e57ddc6f0df4dec236a99651&smart=true&width=700&height=380",
+   "rubros": []
+  },
+  {
+   "id": "13fe79eb64276ee4",
+   "titulo": "Asesinan a cinco hombres y hieren a tres en diferentes ataques entre sábado y domingo",
+   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOY0l3VDdfNEVaVE91d3JOelJuTWd5d1NTQ1JjRlczUXRuMkY2NmpDZ01LS3VnaGQzZmJ0bHF1ckl5a0xPeVVGbnpBSHo4c2N0b3pxSU1lNTRZcnhvU0FSZW91d0ZKRHdTbDBzUXp1djduVFE0QkJWTzRvUFY5enBBZzRNVW5hT3ZhZjlVWDZYdWNIcGRTOUV0UVlLTXhUUl9BZ1RMUVhlSFJtelg4YW0zdHhkaXU2UWR3S1ZF?oc=5",
+   "dominio": "suracapulco.mx",
+   "fuente": "gn-2c2bd8511d76",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T11:46:34+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5304,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "52edf8f7c74f3112",
+   "titulo": "Cumbre trilateral: La propuesta de Putin a Trump y Xi Jinping para negociar el futuro de Ucrania,según WSJ",
+   "url": "https://www.elimparcial.com/mundo/2026/10/19/cumbre-trilateral-la-propuesta-de-putin-a-trump-y-xi-jinping-para-negociar-el-futuro-de-ucraniasegun-wsj/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T11:40:43+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6528,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/QCNWCTG275D2LD4SLKQW5X7L5A.JPG?auth=a4bb36931578ab734f3a5c6573c0a0c93f898563c4c885ea25c7aa4e8732ce1d&smart=true&width=3133&height=2090",
+   "rubros": []
+  },
+  {
+   "id": "cc4bf49f018f87e9",
+   "titulo": "Australian prime minister says lawmaker critically injured by car is 'no accident'",
+   "url": "https://www.kpbs.org/news/international/2026/10/19/australian-prime-minister-says-lawmaker-critically-injured-by-car-is-no-accident",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T11:38:43+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/326a425/2147483647/strip/false/crop/4897x4897+1255+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F0a%2F8f%2F9597ae5d4a8da98c93d208aecd8d%2Fap26292313653500.jpg",
+   "rubros": []
+  },
+  {
+   "id": "88c3f61db375867f",
+   "titulo": "Crisis en Francia: Macron rechaza la dimisión de su ministro del Interior tras disturbios y fallos de inteligencia",
+   "url": "https://www.elimparcial.com/mundo/2026/10/19/crisis-en-francia-macron-rechaza-la-dimision-de-su-ministro-del-interior-tras-disturbios-y-fallos-de-inteligencia/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T11:29:23+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8111,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/YSEWWXKNFNAJFJEBJXGXACJXAY.png?auth=9e16583d2d4e52c42d77b7b3787ed553793e317f3a6271c7e995b3696f71a458&smart=true&width=1362&height=843",
+   "rubros": []
+  },
+  {
+   "id": "8fdd2e627fb7bdbf",
+   "titulo": "CBP finds nearly 1,600 pounds of meth in tomatillo shipment",
+   "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOWDQ4RUs4cjdEQ29JTl9wWE1kOVdYYVJmVUhpaEJwa1BtcWpNZnRxUzczdGNBX3FySUprbjV2M0J4NjA0Q25OUkp2Z0RZLU5NYU9wWUFWMVhUMU9vbmdtUlVyc1ZBQUVXbE9YMHZtNFgwcEtDTlJ1YlU0d0kwTnJXWm01clh3RnN1NmtFdnF3dzk1Q2NBdHFUTzN3bnI4NmNmWEVFbXJBdzdwVW5jaEJR?oc=5",
+   "dominio": "thetrucker.com",
+   "fuente": "gn-6f02615c6ad6",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T11:25:02+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
+  },
+  {
+   "id": "71b687f754b8f724",
+   "titulo": "Lluvias intensas, frío y fuertes vientos afectarán a varios estados de México por el huracán Trudy y el Frente Frío 2, con oleaje de hasta cuatro metros y temperaturas de hasta 0 grados",
+   "url": "https://www.elimparcial.com/mexico/2026/10/18/lluvias-intensas-frio-y-fuertes-vientos-afectaran-a-varios-estados-de-mexico-por-el-huracan-trudy-y-el-frente-frio-2-con-oleaje-de-hasta-cuatro-metros-y-temperaturas-de-hasta-0-grados/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T11:21:44+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5706,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/I4ISFKW4UVDURGNA5RONNYMZF4.png?auth=7e081e897009b18f96e49449a4727bf3f6e7466e3b9cd9c5126a9fc9c24cb17a&smart=true&width=1200&height=675",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "fa3841ffea58c803",
+   "titulo": "Pescadores de San Felipe logran acuerdo para mantener captura de camarón en polígonos",
+   "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNMVhTMG0zRmNyclhSWGxUT2Q1aFlZTEw4Zm5LYWJ6RzB1dGdjc1dvS3JCUXU5VzNvZU5OTEtfanZLekpEQmdfYWtnLWUtczBLWEx3a0pySGl2c3VWMXhDbUM3aFFINVdWSlkzb0dkTHg1LWxENXUxaDZZZ3ZrRlFtanF5U2EtU3VoRTVEZUx5LTZSYzNzSnJ4UURnN0k0SjJON1Q5bVF6OVU2UFk4?oc=5",
+   "dominio": "grupoanimal.mx",
+   "fuente": "gn-208187d76ea7",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Felipe"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T11:20:18+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5597,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": []
+  },
+  {
+   "id": "446fa6bbeabafb0f",
+   "titulo": "How Much Taxpayer Money Jim Desmond Spends Advertising Himself",
+   "url": "https://voiceofsandiego.org/2026/10/19/how-much-taxpayer-money-jim-desmond-spends-advertising-himself/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T09:24:00+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2026/06/GAS_primaryelectionnight6_2_26x001-1024x683.jpg",
+   "rubros": []
+  },
+  {
+   "id": "c5a33f74392e8cd5",
+   "titulo": "Fixing the South Bay Plant Won’t Stop the Tijuana River’s Industrial Waste",
+   "url": "https://voiceofsandiego.org/2026/10/19/fixing-the-south-bay-plant-wont-stop-the-tijuana-rivers-industrial-waste/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T09:00:00+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2021/02/TJ-river-scaled.jpg",
+   "rubros": []
+  },
+  {
+   "id": "992c9538d56a0bcf",
+   "titulo": "Desmond Has Spent a Lot of County Money on Ads About Himself",
+   "url": "https://voiceofsandiego.org/2026/10/19/desmond-has-spent-a-lot-of-county-money-on-ads-about-himself/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T09:00:00+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2026/06/GAS_primaryelectionnight6_2_26x005-1024x618.jpg",
+   "rubros_categoria": [
+    "politica"
+   ],
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "62e89ae29de24311",
+   "titulo": "The real reason it's going to take a while to know who won in some midterm races",
+   "url": "https://www.kpbs.org/news/politics/2026/10/19/the-real-reason-its-going-to-take-a-while-to-know-who-won-in-some-midterm-races",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T09:00:00+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/a4c9b71/2147483647/strip/false/crop/3868x3868+901+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fed%2Fae%2F1281a3b9443d99ea35ed88de00d1%2Fgettyimages-2280066898.jpg",
+   "rubros": []
+  },
+  {
+   "id": "3c853cd30ed982f9",
+   "titulo": "A Kelvin wave raised sea levels on the West Coast. More are coming",
+   "url": "https://www.kpbs.org/news/environment/2026/10/19/a-kelvin-wave-raised-sea-levels-on-the-west-coast-more-are-coming",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T09:00:00+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/fbc4eb5/2147483647/strip/false/crop/788x788+0+71/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F65%2F06%2F0998242247b9b80893e4d8583d33%2Fctw-animation-ccs-realtime.gif",
+   "rubros": []
+  },
+  {
+   "id": "4d17e0b11b183355",
+   "titulo": "Alberta voters weigh future in Canada",
+   "url": "https://www.kpbs.org/news/international/2026/10/19/alberta-voters-weigh-future-in-canada",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T08:45:01+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/e4bc4ad/2147483647/strip/false/crop/2667x2667+667+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F93%2Fb0%2F652371c74108beebc8d5d4775426%2Fgettyimages-2297161486.jpg",
+   "rubros": []
+  },
+  {
+   "id": "bc4787cea7d9f78f",
+   "titulo": "CESPT suma 9 mil comercios al programa para prevenir derrames de aguas residuales",
+   "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQdGVDYjdKdGpNbi01WkZYT2xhTUxrUlVhQzBMeHNHanBxS01VUnZwVDN3T2Q5VGE4UWZWcWx1LXM2bm5pM0wxdEt3bmhIX1Q4M1JnNk1UeHVNak55NW5BOWFZaTBMYnpvb3Y5Y0l2a1IzZElaUmFfS2tLS1huT2JUOW1XYkZieVQwMWVoV0RYbFItNm1QQTFURE9GMXNpdlEybmU0R181NEZBeGZnSmx5c2MyUG45NFFI?oc=5",
+   "dominio": "bajanews.mx",
+   "fuente": "bajanews",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T07:48:36+00:00",
+   "capturado": "2026-10-19T04:37:27+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5851,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
+   "rubros": []
+  },
+  {
+   "id": "8c9c24c1b12397aa",
+   "titulo": "⚠️ Hallan 10 cuerpos en Tijuana en tres días; todos fueron localizados en la misma zona https://mile.io/3U5uKEY",
+   "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxNSXAyUzFkN0hSNDVuZkY3YkRhY3NTYVo0N2ppWXJ0Tkx1Qkx5emNISWtzWVhZdWp4ZXF4a2hWTFA1T19MZ1FsT0ktU0w5SEVtdjRTWDJiNThtSkNBVVBDWTJvUjNiMlVoc1FmTHUwbEZoV3ZQSHNyejhSN2dDTFdmZF9Ec3VmSzcxSU5Fa3NxdlVueHF2cm51aThRVWlOQUQtbjBsbXVOMVJOTkJrNDE2MEZROTBkWllocWUzZXBhYjl4eTQ2SDJWUWJmdHVGVDBQN3ZvUEFlSkd5ZGVlSnEtTzNoc3BOWmlwRWZFOQ?oc=5",
+   "dominio": "facebook.com",
+   "fuente": "gn-31193328f8e2",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T07:36:47+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6754,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
+   "rubros": []
+  },
+  {
+   "id": "5aa54bb80f79f5b4",
+   "titulo": "Piden declarar zona de desastre en SQ",
+   "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPWVhFYzZuTGlhZncxYzhKVjVhQy0yZElxd2I4N2tVbWZrT1Z2VmUyNHhDWVpHc01LaVpyVzJGeFVRSjNLRC05RUZaajZjLUN2VWpEVFFlb0V1UXYtdDNMdF9BcUJHNWVZci1XZml3MXAyZ1l5dF9FTUQyMDRGeG1RM3FRTW5mdWF2Tm9iTjdEVWJYbV83R0pMRQ?oc=5",
+   "dominio": "elvigia.net",
+   "fuente": "elvigia",
+   "zona_medio": "Ensenada",
+   "zonas": [
+    "Ensenada"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T07:00:00+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5233,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
+   "id": "e1ee87c275a60d1b",
+   "titulo": "Por qué no deberías frotarte las muñecas después de aplicar perfume, aunque sea una costumbre al prepararte para salir",
+   "url": "https://www.elimparcial.com/estilos/2026/10/18/por-que-no-deberias-frotarte-las-munecas-despues-de-aplicar-perfume-aunque-sea-una-costumbre-al-prepararte-para-salir/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T06:50:07+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6802,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/YF6G7REAARCR5OZNVYAMGFVW54.jpg?auth=afcd6216bf0df559b8666707f9e2715a60c4038760eff0342fa08f0a4246a42c&smart=true&width=1920&height=1080",
+   "rubros": []
+  },
+  {
+   "id": "32dc1d6a6882b44d",
+   "titulo": "Quién era Patricio Sánchez Molinari, el sacerdote que murió durante una misa en Ecuador tras ser golpeado por una cruz de madera",
+   "url": "https://www.elimparcial.com/mundo/2026/10/18/quien-era-patricio-sanchez-molinari-el-sacerdote-que-murio-durante-una-misa-en-ecuador-tras-ser-golpeado-por-una-cruz-de-madera/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T06:36:34+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.4959,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/GA3OY2R34JHDZOZPISYFRSHBRE.png?auth=2a134d4de77387c48125fa280de4cf158cb189b4ca729bd028b83d925f6ab636&smart=true&width=1620&height=1080",
+   "rubros": []
+  },
+  {
+   "id": "2279c3b53d75ad7d",
+   "titulo": "Ecuador reubicará miles de presos de seis cárceles según su nivel de peligrosidad para debilitar a las bandas criminales que operan dentro de las prisiones y recuperar el control del Estado",
+   "url": "https://www.elimparcial.com/mundo/2026/10/18/ecuador-reubicara-miles-de-presos-de-seis-carceles-segun-su-nivel-de-peligrosidad-para-debilitar-a-las-bandas-criminales-que-operan-dentro-de-las-prisiones-y-recuperar-el-control-del-estado/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T06:17:58+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7888,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/G5A3R7ZHQJE7JL7PSKFXUHQZXU.jpg?auth=14ca2d17e1abc5e7d3f995ae59ad2220b5a46c0286b322dba48203ebb942ad8f&smart=true&width=1920&height=1215",
+   "rubros": []
+  },
+  {
+   "id": "a2d692a2e7b5b679",
+   "titulo": "Tres policías reciben reconocimiento de Santander tras devolver 16 mil 800 pesos olvidados en cajeros automáticos a sus propietarios",
+   "url": "https://www.elimparcial.com/mexico/2026/10/18/tres-policias-reciben-reconocimiento-de-santander-tras-devolver-16-mil-800-pesos-olvidados-en-cajeros-automaticos-a-sus-propietarios/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T06:13:20+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5551,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/XZKEXUE2OBE63KYS5NOQPDL5C4.png?auth=19db3461e94270397054a9b5b64a5a72213a28e4c4e616864d0ed9c7d9f1add6&smart=true&width=1200&height=675",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "4cf1037b47ea511e",
+   "titulo": "Carlos “Gullit” Peña busca llegar a la alcaldía de León con Morena y se suma a una lista de aspirantes que incluye legisladores, regidores y una exalcaldesa priista",
+   "url": "https://www.elimparcial.com/mexico/2026/10/18/carlos-gullit-pena-busca-llegar-a-la-alcaldia-de-leon-con-morena-y-se-suma-a-una-lista-de-aspirantes-que-incluye-legisladores-regidores-y-una-exalcaldesa-priista/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T05:44:55+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5937,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/KRUZO3I4ZZC6LJKZ42OXMAIKOE.png?auth=8bf27a377b302082179100c30c39ef1bffbb965fc084e8a735d3e46486f43a68&smart=true&width=1200&height=675",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "6edc6cde29efecac",
+   "titulo": "El descontento se expande por Europa: Portugal, Italia y Bélgica se suman a las protestas de Francia y España por salarios y vivienda",
+   "url": "https://www.elimparcial.com/mundo/2026/10/18/el-descontento-se-expande-por-europa-portugal-italia-y-belgica-se-suman-a-las-protestas-de-francia-y-espana-por-salarios-y-vivienda/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T05:37:53+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8553,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/JCJ224GOYZCTRATTDWW5A3HELA.png?auth=cb54b7fa03cd16cf9e937dca2648ac46faf3543aa1a7946bc459feeed7e3c5b7&smart=true&width=1074&height=605",
+   "rubros": []
+  },
+  {
+   "id": "738ffd435a5d1a76",
+   "titulo": "Trump endorses embattled Israeli Prime Minister Benjamin Netanyahu for reelection",
+   "url": "https://www.kpbs.org/news/international/2026/10/18/trump-endorses-embattled-israeli-prime-minister-benjamin-netanyahu-for-reelection",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T05:35:39+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/3a5f931/2147483647/strip/false/crop/2961x2961+740+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F94%2Fbd%2Ffcfe0cef471fbc2526b243894172%2Fap26291551891113.jpg",
+   "rubros": []
+  },
+  {
+   "id": "74ced88d51558423",
+   "titulo": "Soles abre semifinales con triunfo ante Abejas",
+   "url": "https://zetatijuana.com/2026/10/soles-abre-semifinales-con-triunfo-ante-abejas/",
+   "dominio": "zetatijuana.com",
+   "fuente": "zeta",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T05:28:03+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.4741,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros_categoria": [
+    "deportes"
+   ],
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "1d0bd26437b4fc6f",
+   "titulo": "Representación del Año Nuevo Seri en el bosque de cardones marca el inicio del KinoFest con cánticos de sanación y pinturas tradicionales",
+   "url": "https://www.elimparcial.com/son/sonora/2026/10/18/representacion-del-ano-nuevo-seri-en-el-bosque-de-cardones-marca-el-inicio-del-kinofest-con-canticos-de-sanacion-y-pinturas-tradicionales/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T05:08:35+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.7352,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/POSOKG3OHZAWVD72VMIKD6SLKE.jpeg?auth=bb5efa8db902ed37f18542c36f6d7c92ea1aa530348dd89f05ad23bcc83f000b&smart=true&width=1280&height=960",
+   "rubros": []
+  },
+  {
+   "id": "e28427366d46beb9",
+   "titulo": "Agilizará distribuidor vial Otay II cruce de transportes a garitas",
+   "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPdng0WmVtUXdKZDNoanJIblhWa055eFM0WW40T29ZOGtyNWtQVENjcHR6VnV1MkdUczZkZGRoNjNScWRhUDlJVGtPV08ydUdCaG96Q2RGR3hVWmVzaUlJcWttbmJ3dEJOSjdDbERKQ3diN0VHT1h2Y2xtRmFVZzRYT0g2NmhVZE9Ud25z?oc=5",
+   "dominio": "grupoanimal.mx",
+   "fuente": "gn-208187d76ea7",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [
+    "Otay Centenario"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T05:01:08+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6664,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
+   "rubros": []
+  },
+  {
+   "id": "c597ebfb35ff3054",
+   "titulo": "Soles de Mexicali aplasta 102-58 a Abejas y toma ventaja en semifinales",
+   "url": "https://www.elimparcial.com/mxl/mexicali/2026/10/18/soles-de-mexicali-aplasta-102-58-a-abejas-y-toma-ventaja-en-semifinales/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T05:00:16+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5119,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/WKTZLNXRM5CEDFHYCXNQ36FLCE.jpeg?auth=39d44b057aad657ee521dd52df76f21bba9ddfb110919586c431eae91692dd41&smart=true&width=1600&height=1098",
+   "rubros": []
+  },
+  {
+   "id": "8b739381c042c844",
+   "titulo": "Una auditoría del SAT detectó vínculos con empresas que simulan operaciones en siete proveedores que validan una de cada cinco facturas de México y provocó que cinco perdieran su autorización",
+   "url": "https://www.elimparcial.com/mexico/2026/10/18/una-auditoria-del-sat-detecto-vinculos-con-empresas-que-simulan-operaciones-en-siete-proveedores-que-validan-una-de-cada-cinco-facturas-de-mexico-y-provoco-que-cinco-perdieran-su-autorizacion/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T04:57:08+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7232,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/IAOVHQWZCVFQNICNTU7OK2FFCQ.png?auth=b51db4eb0a74fe2449f0432761bb6ef9823f8af24ae3561762d0e4979a81333e&smart=true&width=1200&height=675",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "9596baba9e96a90d",
+   "titulo": "Baja California, el estado con menos pobreza en México: 1 de cada 10 habitantes",
+   "url": "https://www.uniradioinforma.com/gobierno/baja-california-estado-menos-pobreza-mexico-1-cada-10-habitantes-n908606",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T04:45:00-07:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5133,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "0ab8e46e9539bc0d",
+   "titulo": "X suspende más de 13 mil cuentas vinculadas a presuntas operaciones de influencia de Irán, Rusia y China que difundían mensajes políticos en Estados Unidos antes de las elecciones legislativas del 3 de noviembre",
+   "url": "https://www.elimparcial.com/mundo/2026/10/18/x-suspende-mas-de-13-mil-cuentas-vinculadas-a-presuntas-operaciones-de-influencia-de-iran-rusia-y-china-que-difundian-mensajes-politicos-en-estados-unidos-antes-de-las-elecciones-legislativas-del-3-de-noviembre/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T04:44:42+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6534,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/CFIYXOPG4VAC5NDHWUOPR2RGFU.jpg?auth=cdd035e79cc13c5a2665c43d5273432cbff67c36fe9597f10b93ea9d2ddfff8b&smart=true&width=1350&height=900",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "ce3b9d4330b1b44b",
+   "titulo": "PRI acusa a Agatón de usar estructura de XXV Ayuntamiento pera defender intereses personales",
+   "url": "https://zetatijuana.com/2026/10/pri-acusa-a-agaton-de-usar-estructura-de-xxv-ayuntamiento-pera-defender-intereses-personales/",
+   "dominio": "zetatijuana.com",
+   "fuente": "zeta",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T04:38:49+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8028,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
   {
    "id": "a0f0e169b3031b33",
    "titulo": "“Estoy con ellos al 100%”: Guillermo del Toro defiende las protestas por agua limpia en Guadalajara durante el FICM",
@@ -326,30 +1309,6 @@
    ]
   },
   {
-   "id": "3d5230c797bd1bc3",
-   "titulo": "“Nunca trabajó y conoce el autobús por literatura”, responde Lula a Flávio Bolsonaro durante el debate presidencial en Brasil, donde también intercambiaron ataques por los votos de los presos y la situación de Jair Bolsonaro",
-   "url": "https://www.elimparcial.com/mundo/2026/10/18/nunca-trabajo-y-conoce-el-autobus-por-literatura-responde-lula-a-flavio-bolsonaro-durante-el-debate-presidencial-en-brasil-donde-tambien-intercambiaron-ataques-por-los-votos-de-los-presos-y-la-situacion-de-jair-bolsonaro/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-19",
-   "publicado": "2026-10-19T03:09:48+00:00",
-   "capturado": "2026-10-19T04:37:27+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.6337,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/VR73AY64L5CXDFI5PDX3AR5NWE.png?auth=b96fee054f281456c197325e59c298f6f9fc4131a0da8a0e7987dfd55034ce42&smart=true&width=1200&height=675",
-   "rubros": []
-  },
-  {
    "id": "9f1389618e6fa4f5",
    "titulo": "Abre la llave del gas y amenaza con provocar una explosión tras discutir con su madre en Mexicali",
    "url": "https://www.elimparcial.com/mxl/policiaca/2026/10/18/abre-la-llave-del-gas-y-amenaza-con-provocar-una-explosion-tras-discutir-con-su-madre-en-mexicali/",
@@ -449,6 +1408,33 @@
    ]
   },
   {
+   "id": "f8ee7275a616bc57",
+   "titulo": "Weak mag. 2.8 earthquake (unconfirmed) - 59 km northwest of San Felipe, Estado de Baja California, Mexico, on Sunday, Oct 18, 2026, at 10:24 am (GMT -7)",
+   "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNMWhmOUdEeDMtUzlLS2FkanhsM01tN2VSbjlSVjl4cDNEMGpqUUw5bWtoOW9OSDN5SUs3bHd3VXhlUTlMU0lGNUJtNGZpalIyWHdYbFVxTnFVRHFmN1RxbXZnbHFIWTdBekQyenZSeVRjQzJkbnFRWEE4R2F4SVZ6TnBGN2lGTFgxQUh3c0hXeUU2SmhxX0lZVE9CanBVTG5VdkszeHE2ZUg4c1g4OVh6THhsZ2U?oc=5",
+   "dominio": "volcanodiscovery.com",
+   "fuente": "gn-13afd86dbb5f",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Felipe"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T02:44:38+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.619,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": []
+  },
+  {
    "id": "163db83e2f79f76a",
    "titulo": "FRONTERA/GAMER: Castlevania: Belmont’s Curse regresa la saga a sus raíces en 2D",
    "url": "https://www.elimparcial.com/mxl/mexicali/2026/10/18/fronteragamer-castlevania-belmonts-curse-regresa-la-saga-a-sus-raices-en-2d/",
@@ -499,6 +1485,26 @@
    ]
   },
   {
+   "id": "da2910805195a51a",
+   "titulo": "Trump to close and renovate D.C. golf course, despite legal battle",
+   "url": "https://www.kpbs.org/news/national/2026/10/18/trump-to-close-and-renovate-d-c-golf-course-despite-legal-battle",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T02:09:43+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/4f217e0/2147483647/strip/false/crop/3213x3213+803+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Faa%2F74%2F0bb935124de09dfa1aec7efcf155%2Fap26286635206019.jpg",
+   "rubros": []
+  },
+  {
    "id": "a6cdcef18a124f4d",
    "titulo": "Detienen en Sinaloa a cinco presuntos integrantes de Los Chapitos por el secuestro de los 10 mineros de Vizsla Silver",
    "url": "https://www.elimparcial.com/mexico/2026/10/18/detienen-en-sinaloa-a-cinco-presuntos-integrantes-de-los-chapitos-por-el-secuestro-de-los-10-mineros-de-vizsla-silver/",
@@ -525,6 +1531,31 @@
    ]
   },
   {
+   "id": "d103194cbd9003b3",
+   "titulo": "Logran pescadores y gobierno acuerdos",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/logran-pescadores-y-gobierno-acuerdos-32671091",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T02:00:00+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5555,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
    "id": "b32d55f62d1f2d33",
    "titulo": "KFC rompe una alianza de casi 40 años con PepsiCo y elige a Coca-Cola para abastecer sus 3 mil 718 restaurantes en Estados Unidos a partir de 2027, en un momento en que su antiguo socio busca recuperar ventas y mejorar sus márgenes",
    "url": "https://www.elimparcial.com/mundo/2026/10/18/kfc-rompe-una-alianza-de-casi-40-anos-con-pepsico-y-elige-a-coca-cola-para-abastecer-sus-3-mil-718-restaurantes-en-estados-unidos-a-partir-de-2027-en-un-momento-en-que-su-antiguo-socio-busca-recuperar-ventas-y-mejorar-sus-margenes/",
@@ -549,6 +1580,26 @@
    "rubros": [
     "turismo"
    ]
+  },
+  {
+   "id": "703395fdf6c16740",
+   "titulo": "What does a White House press secretary do?",
+   "url": "https://www.kpbs.org/news/politics/2026/10/18/what-does-a-white-house-press-secretary-do",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T01:41:24+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/4e3be23/2147483647/strip/false/crop/3065x3065+766+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fb4%2F88%2Fe01714b14c92b04ca175755c5462%2Fap26286502696919.jpg",
+   "rubros": []
   },
   {
    "id": "9bbc8844ca63ceb9",
@@ -629,31 +1680,6 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/CYKC7QQO3JDL5D5PBXZT6YHNOQ.jpeg?auth=329b6078f41308fa1104e5e2abe2bd1bd20e514f2b6a1ee61041891b7d0dab93&smart=true&width=1600&height=900",
-   "rubros": []
-  },
-  {
-   "id": "bc4787cea7d9f78f",
-   "titulo": "CESPT suma 9 mil comercios al programa para prevenir derrames de aguas residuales",
-   "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQdGVDYjdKdGpNbi01WkZYT2xhTUxrUlVhQzBMeHNHanBxS01VUnZwVDN3T2Q5VGE4UWZWcWx1LXM2bm5pM0wxdEt3bmhIX1Q4M1JnNk1UeHVNak55NW5BOWFZaTBMYnpvb3Y5Y0l2a1IzZElaUmFfS2tLS1huT2JUOW1XYkZieVQwMWVoV0RYbFItNm1QQTFURE9GMXNpdlEybmU0R181NEZBeGZnSmx5c2MyUG45NFFI?oc=5",
-   "dominio": "bajanews.mx",
-   "fuente": "bajanews",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-19",
-   "publicado": "2026-10-19T01:35:18+00:00",
-   "capturado": "2026-10-19T04:37:27+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5851,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_rosarito",
    "rubros": []
   },
   {
@@ -1207,6 +2233,31 @@
    ]
   },
   {
+   "id": "2421da91b0c7d769",
+   "titulo": "Avanza la construcción de caminos artesanales en Baja California: SICT",
+   "url": "https://www.uniradioinforma.com/sociedad/avanza-construccion-caminos-artesanales-baja-california-sict-n908826",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T00:00:00-07:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.476,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
    "id": "17734a7e2ac118e3",
    "titulo": "¿La has visto? Buscan en Tijuana y Rosarito a Luna, la perrita de apoyo emocional extraviada por la que ofrecen recompensa",
    "url": "https://www.elimparcial.com/tij/rosarito/2026/10/18/la-has-visto-buscan-en-tijuana-y-rosarito-a-luna-la-perrita-de-apoyo-emocional-extraviada-por-la-que-ofrecen-recompensa/",
@@ -1232,6 +2283,33 @@
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/34I2GQMQIREQVGRGWD3O47ZJRM.jpeg?auth=3b2d3cdfedc7db5545eddc234f0ebf17ad0f0d562c2c6e99fa237cfdaf357262&smart=true&width=1193&height=895",
    "rubros": []
+  },
+  {
+   "id": "06cb10a274eaaa12",
+   "titulo": "Jonathan Aranda pone a Tijuana en alto acercando a los Rays a la serie mundial",
+   "url": "https://oem.com.mx/elsoldetijuana/deportes/jonathan-aranda-pone-a-tijuana-en-alto-acercando-a-los-rays-a-la-serie-mundial-32676430",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T23:46:10+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5816,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "deportes"
+   ]
   },
   {
    "id": "bc9e64b7f9d74a17",
@@ -1890,6 +2968,29 @@
    ]
   },
   {
+   "id": "e363d652271e249b",
+   "titulo": "Alerta Concanaco sobre praìcticas de fraude y simulacioìn laboral",
+   "url": "https://www.uniradioinforma.com/sociedad/alerta-concanaco-sobre-praicticas-fraude-simulacioin-laboral-n908795",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T22:05:00-07:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6327,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
    "id": "5555c59c50faaa2a",
    "titulo": "Trump visa crackdown slashes legal immigration; Korea drops 19% - CHOSUNBIZ",
    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPLTRzaDJfY0ExMUVNQTJNa3RYdDhXdERjaXB1WTFSSDhUcTNBUzJUVGg5WG9TNmhCbXZtTU1EOHNJS3ZKcVh3Ukc0R1prejFzSGtCcVFtdHpyLW8ycDVyZHg1OGpXT2NWS0FwMGwwWURZTkxXSEZYajcwM2dwMUE2bDVxZHh4OUlJ0gGcAUFVX3lxTE1KeVVZZV9qZHBCNmJCaVpGSjdOSFZ1WmdxSXp2OHEzZzBzTHRIM0dYdmFlSlUydTlwSzJtZkRwSEZzalNpSG1aX0NMSmpfT2lvLVRSVFlBeXdoVVBHQU9nRGVmLTBVVEh2ZDktYTRUbGdaSGdTeTFWV3JhWHhaY0xtXzVuNzBILTVyR0NkT0FadTM5NDdUYURkenRHMw?oc=5",
@@ -2140,6 +3241,33 @@
     "version": "0.2.0"
    },
    "rubros": []
+  },
+  {
+   "id": "bb57191f87ad251a",
+   "titulo": "Detienen en Tlaxcala a “El Bélico”, señalado por homicidio en Baja California",
+   "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQb2VxVWhKTm5HSl9Db05YUjZuSFZsSDZZVGQ1SVVfLVNtcTY0bWJpSGVCeUY0ODc2UTNhZEQyazVoQU0ycWNDWGFqaFcySVU2SE9oSl95RlpQeHh1MWVfanRrSGlyeTJjSFBrOEhXWUo3bjhLQkNSVllFUHF2WVVhS2hSa2djbktabXloZHVGQ1pqV3poeHdyM2FURlRHc1oyX2xHY0JHa2tCSzVpYXlFaHl1Y0JKVkNqekhGOWlGM0ZVcU9KWnFJNFo2TC0?oc=5",
+   "dominio": "meganoticias.mx",
+   "fuente": "gn-e0db246e5666",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T21:51:00+00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5147,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate",
+   "rubros": [
+    "seguridad"
+   ]
   },
   {
    "id": "1dd4e6f20445fcd7",
@@ -3117,32 +4245,6 @@
    "descubierta_por": "bq_sanquintin",
    "rubros": [
     "deportes"
-   ]
-  },
-  {
-   "id": "8d7b12d5ced6fe1f",
-   "titulo": "Inhabilitan hasta por 15 años a cuatro funcionarios del Banco del Bienestar por contratos irregulares que causaron daño de 380 millones de pesos",
-   "url": "https://www.elimparcial.com/dinero/2026/10/18/inhabilitan-hasta-por-15-anos-a-cuatro-funcionarios-del-banco-del-bienestar-por-contratos-irregulares-que-causaron-dano-de-380-millones-de-pesos/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-18",
-   "publicado": "2026-10-18T20:07:58+00:00",
-   "capturado": "2026-10-18T20:41:34+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.8153,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/5PGCTFLC6RH7JHN2HNWXHMNXVQ.jpg?auth=2adcecb7bfc61a55030e34160f4018e2b7b7a277e163a2031969adf50dd13c25&smart=true&width=1200&height=750",
-   "rubros": [
-    "economia"
    ]
   },
   {
@@ -4592,6 +5694,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/10/6ad568817b30a.jpg",
    "rubros": []
   },
   {
@@ -5390,6 +6493,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/10/6acfa92fac28c.jpg",
    "rubros": []
   },
   {
@@ -6033,6 +7137,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/10/6ad5408d08fcd.jpg",
    "rubros": []
   },
   {
@@ -9579,6 +10684,32 @@
    "rubros": [
     "politica"
    ]
+  },
+  {
+   "id": "110b06318990e3ff",
+   "titulo": "Piden investigar a INDIVI por regularización de predios afectados por Rachel en Ensenada",
+   "url": "https://afntijuana.info/informacion_general/183125_piden_investigar_a_indivi_por_regularizacion_de_predios_afectados_por_rachel_en_ensenada",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Ensenada"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-18",
+   "publicado": "2026-10-18T00:00:00",
+   "capturado": "2026-10-19T13:07:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6083,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.afnbc.com/images.php?src=imagenes/regularizacion181026yh.jpg&w=500&h=250",
+   "rubros": []
   },
   {
    "id": "0f9788b4619c1baf",
