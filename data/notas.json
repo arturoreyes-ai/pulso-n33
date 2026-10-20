@@ -1,12 +1,543 @@
 {
  "esquema": 1,
  "ventana_dias": 30,
- "total": 11624,
+ "total": 11654,
  "notas": [
+  {
+   "id": "a4a5ec26529a5d69",
+   "titulo": "Trump recurrió a México para cerrar un acuerdo e intentar bajar de forma drástica el déficit comercial de EEUU",
+   "url": "https://www.elimparcial.com/dinero/2026/10/19/trump-recurrio-a-mexico-para-cerrar-un-acuerdo-e-intentar-bajar-de-forma-drastica-el-deficit-comercial-de-eeuu/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T11:10:24+00:00",
+   "capturado": "2026-10-20T04:46:49+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7838,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/JYSFA5QQVNA4VAVZKIEXA5VZAU.jpg?auth=e94f8afd0b073e2dcc0c44ba77f62c5534ca442931529e68d4fa2f4ef834e234&smart=true&width=1200&height=750",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "e74ce96c66c1cf93",
+   "titulo": "Con 53 votos a favor y 13 en contra, un organismo internacional de magistrados expulsa a la CONATRIB por su respaldo a la reforma judicial que cambió la forma de elegir jueces en México",
+   "url": "https://www.elimparcial.com/mexico/2026/10/19/con-53-votos-a-favor-y-13-en-contra-un-organismo-internacional-de-magistrados-expulsa-a-la-conatrib-por-su-respaldo-a-la-reforma-judicial-que-cambio-la-forma-de-elegir-jueces-en-mexico/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T11:08:50+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8206,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/N4K2WSUVTZC6ZK2SACE6APW7BY.png?auth=bb4e4fbe2a6b8267227a7225925774f23f333f59f9793cbb2b063c51c900e63f&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "a682fb8ea26d4a24",
+   "titulo": "Mexico reroutes border truck traffic",
+   "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNZU55X202c2JURWloSjY3MVdLZUlMNmFwUG9fbFhlemJkMElPc1lJSGZ6dUtNdVJlYXVrSjlOOWEyX1duQ3Z3UUZJdHVzTklCdXVucWxleDFMUm5LY2NsMkR6ZGstREFmaWxKQ3QyUnc5VGU1VkJCZVRoSG5PT0EyUExDRzZtWUVIR2pOSDZmSFdEVzVwTW1xRmJBakstWlR0N3dvMkhXNGQyOVF2UUswX1lUbWgtd2dzbTdRdzZ5MUlBUQ?oc=5",
+   "dominio": "avpress.com",
+   "fuente": "gn-3d7e5261c034",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T11:00:00+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
+  },
+  {
+   "id": "93a7bee8e8ab9cf0",
+   "titulo": "What if an AI bubble bursts — and that accelerates AI job losses?",
+   "url": "https://www.kpbs.org/news/science-technology/2026/10/20/what-if-an-ai-bubble-bursts-and-that-accelerates-ai-job-losses",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T10:30:00+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/849941d/2147483647/strip/false/crop/3559x3559+1224+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F30%2F73%2F30ccbe9b4d3c903bb381870a6cf5%2Fgettyimages-1466243146.jpg",
+   "rubros": [
+    "ia"
+   ]
+  },
+  {
+   "id": "f93f3cdadee1a2f1",
+   "titulo": "Manchester Promises Housing at NAVWAR",
+   "url": "https://voiceofsandiego.org/2026/10/20/manchester-promises-housing-at-navwar/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T09:15:00+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2026/10/vito-di-stefano-10-13-26-20-1024x684.jpg",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "b9be79994aa7de89",
+   "titulo": "TikTok staff raised child safety alarms. Court records show executives failed to act",
+   "url": "https://www.kpbs.org/news/science-technology/2026/10/20/tiktok-staff-raised-child-safety-alarms-court-records-show-executives-failed-to-act",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T09:00:00+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/274e99c/2147483647/strip/false/crop/3264x3264+816+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F22%2F26%2Fe544d725449598514b51dd7221db%2Fgettyimages-2298297976.jpg",
+   "rubros": []
+  },
+  {
+   "id": "b2c474c8994b30e0",
+   "titulo": "COMIC: Backpacking teaches artist lessons in patience, trust and friendship",
+   "url": "https://www.kpbs.org/news/arts-culture/2026/10/20/comic-backpacking-teaches-artist-lessons-in-patience-trust-and-friendship",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T09:00:00+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/98ccbe5/2147483647/strip/false/crop/4800x4800+0+600/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Ff8%2Feb%2F6b705b0f4112aeca090627aea0c1%2Fdabinhan-1.png",
+   "rubros": []
+  },
+  {
+   "id": "8247c7ac6a76430a",
+   "titulo": "Manchester Group Promises Housing Will Be ‘Major Part’ of NAVWAR Development",
+   "url": "https://voiceofsandiego.org/2026/10/20/manchester-group-promises-housing-will-be-major-part-of-navwar-development/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T09:00:00+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2026/10/vito-di-stefano-10-13-26-8-1024x684.jpg",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "42737aa7de0b67a7",
+   "titulo": "Can the new federal voucher program help public schools? Democrats are torn",
+   "url": "https://www.kpbs.org/news/education/2026/10/20/can-the-new-federal-voucher-program-help-public-schools-democrats-are-torn",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T09:00:00+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/73fbb01/2147483647/strip/false/crop/4046x4046+177+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F2e%2Fb8%2Faef234494be2a7c8a3e614b5bcfa%2Fgettyimages-1742945157.jpg",
+   "rubros": []
+  },
+  {
+   "id": "23f8f05afc90c425",
+   "titulo": "Why are some food prices up and others down? Here are the stories of 5 items",
+   "url": "https://www.kpbs.org/news/economy/2026/10/20/why-are-some-food-prices-up-and-others-down-here-are-the-stories-of-5-items",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T09:00:00+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": null,
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "cd7af21d39a2f858",
+   "titulo": "Commercial tomatillo shipment concealed $2.5 million in methamphetamine, CBP says",
+   "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxOUFM2Rk1UN3FsbTNZekxQUWRVb0xpNWZhZ1lCclRwYWpmYzZMVHctYVRQY1A2d0hoUWV2S1VudGk3aXYyejY3WWZaMDRkeVRuWVphcURScGVmTlctSktyTnJubl9NdWhraGVvVmJJQWVuNUpUck9hMlNFWjd5Y2EyUnQ3UzNjNC1KdHgyZWVHM2xUbGJ4dm5OTXo4bHd5QW9nZzNFRGRfNnoyYWx5azFLUk1DZ0QyUDExSGROd1dpVERHcG91X2gtMUJiUXhHWWNFa0NZdlY1RkRCREc1T3Z1UGYwZk4wZkt0ejN0WUpxRktjTVJNWHdV?oc=5",
+   "dominio": "ivpressonline.com",
+   "fuente": "gn-70815d93ef01",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T07:00:00+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
+  },
+  {
+   "id": "89f14cd5efc0fd9d",
+   "titulo": "Detienen en Tecate a presuntos sicarios",
+   "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQU2c3di1aOVVmeWV2am5KLUgwRXA5YUh4a0xFam5UYmp3eXhxTHU5d096VFR6cEotQVdCbFFVQldzOUs0eE40ODd1bEtyZ2MwM3FYTVZUa1ZBeWtlMkFpUWpWSHRPUFVEbzJXdllYOFNCNjZ5MWFscXkzd2JVVTEwMkppYW9SUjFRSGtKTGtTdUVhRWZZ?oc=5",
+   "dominio": "elvigia.net",
+   "fuente": "elvigia",
+   "zona_medio": "Ensenada",
+   "zonas": [
+    "Tecate"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T07:00:00+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.455,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "24c104c22e42a5c0",
+   "titulo": "Desaparecen dos menores de edad",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOckRsMnU1NGVyeW9HbTBNdXRjQUlwUjNnZnhvSjRLR3UyVUl2aDZTS3hlOGhXQVpUZzNHUXZROTJxS2ZtUENVeXFTd3FpZXU2WThKS1M5eXpTNm5CelRuemVvRVRsbEtRN1J5WGRONzJleUVlUWYzclFZaUktYmN1MktHNzZPRzRIdTJvTVZCZWQ?oc=5",
+   "dominio": "elvigia.net",
+   "fuente": "elvigia",
+   "zona_medio": "Ensenada",
+   "zonas": [
+    "Ensenada"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T07:00:00+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.4893,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
+   "id": "3ca186f65534a786",
+   "titulo": "Caravanas de la salud estarán en Maneadero y San Quintín",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1TeHZfNUVRdEVLLVVRVUxUUzhMX0d2NVN0YjFxdGNaZ2FiU1ZpRkhhRjVKUGpyNHJWeUJTNl92Vk9nOTdLUzBST0NJNVNYUVJXQzg1ZkpFYm5aMkk?oc=5",
+   "dominio": "ensenada.net",
+   "fuente": "gn-906741a25e9c",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Ensenada",
+    "San Quintín"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T06:43:50+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.8131,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
+   "id": "064a5b77299a6300",
+   "titulo": "Rays will face Brewers in World Series to produce a first-time champion",
+   "url": "https://www.kpbs.org/news/2026/10/19/rays-will-face-brewers-in-world-series-to-produce-a-first-time-champion",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T06:28:10+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/e067059/2147483647/strip/false/crop/2213x2213+553+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F1f%2Fff%2F93f8110d4be9874c45bf573c63ad%2Fap26293134688107.jpg",
+   "rubros": []
+  },
+  {
+   "id": "c0ef00fd55af88d6",
+   "titulo": "Autoridades y pescadores fortalecen acuerdos por una actividad sustentable y conservación de la vaquita marina en Alto Golfo de California",
+   "url": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxOVm9DRmVQVEdLaVBnWkpfOXNZQ3pVS29zb3J4Zlg3NVdvUUo0MFNkd1dDdk5wUUNUYjR3RnVFVEhSSWRTOXA2bUxjX1JFQU9oeDlET2gzaDYwclRSSUJkSG1lamljYTUxLVNuTjRKbklKSkhXMEpGeGZ4aTNfMVFjV2Q4Q005UFF2S01SMG1BTlZ2WWNSeDRvMnpZY0NwQ1I3RG1wN3EzUmRqTm1XWWFHQ0xDbTZQcWVWbENxaGVEQnF2SWY5R0JLeTZUaE1tSnpJcThneHQ4YWJNNFJXMFpPbUpkcV90Z1ZMS01VNm5ETkhqWmhsN2Q0MWY3WkQ?oc=5",
+   "dominio": "hojaderutadigital.mx",
+   "fuente": "gn-29632c8487f6",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T06:21:34+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5651,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": []
+  },
+  {
+   "id": "e6a6bc1ac97b449d",
+   "titulo": "Cambio de horario 2026 en México: qué municipios de la frontera atrasan el reloj el domingo 1 de noviembre",
+   "url": "https://news.google.com/rss/articles/CBMigwJBVV95cUxPNEdnTmRjcnhZSjdwY1JZXzM2NWlJUlQ4dlJrc2hlb3hWbG44MkdwM0d3TkNJY04xa3I4UkNMVEYyclZUdVVxTFN1RTNzLUJZUEJQYXJrRU5TMVRsT0VUZElhQjlyalJHX3ZtWGQwSEFPelpXYXUwNkk3MUZma1RxZk5PSEp6R2poNHJNMHR6UjFSY2taSkd0UmtPYjRabkN1NWROdG9wZVg5Sk5iOUVlUXRRZXNuOEU1WHVReVhSSkpMYUZMVy1TMUl1cnlSbXJIdFN2VFVmTHdSRncxWTZZQU56Y0xQRmhremRiU3ktT1prcUFxR0RpT291RlVaX3EyRHBz0gGDAkFVX3lxTE80R2dOZGNyeFlKN3BjUllfMzY1aUlSVDh2UmtzaGVveFZsbjgyR3AzR3dOQ0ljTjFrcjhSQ0xURjJyVlR1VXFMU3VFM3MtQllQQlBhcmtFTlMxVGxPRVRkSWFCOXJqUkdfdm1YZDBIQU96WldhdTA2STcxRmZrVHFmTk9ISnpHamg0ck0wdHpSMVJja1pKR3RSa09iNFpuQ3U1ZE50b3BlWDlKTmI5RWVRdFFlc244RTVYdVF5WFJKSkxhRkxXLVMxSXVyeVJtckh0U3ZUVWZMd1JGdzFZNllBTnpjTFBGaGt6ZGJTeS1PWmtxQXFHRGlPb3VGVVpfcTJEcHM?oc=5",
+   "dominio": "bloomberglinea.com",
+   "fuente": "gn-9b3712fcf86f",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T06:09:56+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6554,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
+   "rubros": []
+  },
+  {
+   "id": "0e729b0c17ef6e5b",
+   "titulo": "Mujeres musulmanas logran obtener pasaportes con hiyab en México tras años de negativas, pero la SRE todavía debe eliminar barreras para garantizar su libertad religiosa",
+   "url": "https://www.elimparcial.com/mexico/2026/10/19/mujeres-musulmanas-logran-obtener-pasaportes-con-hiyab-en-mexico-tras-anos-de-negativas-pero-la-sre-todavia-debe-eliminar-barreras-para-garantizar-su-libertad-religiosa/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T06:08:58+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5309,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/TPT6YAQPM5EEJETVL5YY7M6WME.png?auth=c4361e7bc412bc46f4612bc19ef8aebd2a8819e26eb0841bcc31395bd78ba20c&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "a8c44ebc9fd33097",
+   "titulo": "Alberta voters reject a move toward independence in referendum backing Canadian unity",
+   "url": "https://www.kpbs.org/news/international/2026/10/19/alberta-voters-reject-a-move-toward-independence-in-referendum-backing-canadian-unity",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T06:02:40+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/b0ae4da/2147483647/strip/false/crop/4219x4219+1055+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F58%2Fd3%2F07604eb44312b402a29642da0a3a%2Fap26292784967982.jpg",
+   "rubros": []
+  },
+  {
+   "id": "f7d7d32f4eace0dc",
+   "titulo": "Ted the Caver, antes de Slender Man y Reddit: la ‘creepypasta’ considerada la primera en el internet se publicó en 2001 sin saber que revolucionaría la forma de contar leyendas",
+   "url": "https://www.elimparcial.com/locurioso/2026/10/19/ted-the-caver-antes-de-slender-man-y-reddit-la-creepypasta-considerada-la-primera-en-el-internet-se-publico-en-2001-sin-saber-que-revolucionaria-la-forma-de-contar-leyendas/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T05:48:27+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6527,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/4UH4NASR6JGKNFAVYXAMF77524.png?auth=2a87c8cb5c91280aee8bb74cad69c13a03c5d38ad21b8794b3b3bf95d6673f15&smart=true&width=770&height=424",
+   "rubros": []
+  },
+  {
+   "id": "44c42b1bcaee7bde",
+   "titulo": "Se incendia camión de transporte urbano en el bulevar Kino de Hermosillo; no reportan lesionados",
+   "url": "https://www.elimparcial.com/son/hermosillo/2026/10/19/se-incendia-camion-de-transporte-urbano-en-el-bulevar-kino-de-hermosillo-no-reportan-lesionados/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T05:19:55+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7273,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/N4I3H4IFHJGQBKE44KRYAJE2NU.jpeg?auth=5128be61f934c6ce42794dcc55a97ec9df51d77604ec8b421a4428a4f1ca7d07&smart=true&width=1600&height=900",
+   "rubros": []
+  },
+  {
+   "id": "7aed07bf378c763c",
+   "titulo": "Tras meses de restricciones que afectaron a Aeroméxico, Volaris y Viva Aerobus, México y Estados Unidos reactivan el diálogo sobre seguridad aérea y operaciones transfronterizas para destrabar la conectividad entre ambos países",
+   "url": "https://www.elimparcial.com/mexico/2026/10/19/tras-meses-de-restricciones-que-afectaron-a-aeromexico-volaris-y-viva-aerobus-mexico-y-estados-unidos-reactivan-el-dialogo-sobre-seguridad-aerea-y-operaciones-transfronterizas-para-destrabar-la-conectividad-entre-ambos-paises/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T05:14:04+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4643,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/VSOVOVDICVGBBLQOMDU54AQWXA.png?auth=213f36c2288c375cf3a82bd1f8da85d915a2b354e3c5635f4ba4768df9981295&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "236683926e7db6e0",
+   "titulo": "“Prioritario posicionar a Baja California en la agenda nacional”: Evelyn Sánchez participa en gestiones en CDMX con la Cámara de San Diego",
+   "url": "https://www.elimparcial.com/tij/tijuana/2026/10/19/prioritario-posicionar-a-baja-california-en-la-agenda-nacional-evelyn-sanchez-participa-en-gestiones-en-cdmx-con-la-camara-de-san-diego/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T04:48:01+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.529,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/FNUS5RIE4FGKZOWYC2B7UZJYHU.jpeg?auth=282477b88b792576a45b340dd81320ac4a005e3c009893cb5e53e4a343d62c44&smart=true&width=1280&height=856",
+   "rubros": []
+  },
   {
    "id": "c804f8ab7874cbad",
    "titulo": "Colocarán cámaras en desarenadores de Tijuana para detectar a gente que tira basura",
-   "url": "https://jornadabc.com.mx/general/colocaran-camaras-en-desarenadores-de-tijuana-para-detectar-a-gente-que-tira-basura/",
+   "url": "https://jornadabc.com.mx/principales/colocaran-camaras-en-desarenadores-de-tijuana-para-detectar-a-gente-que-tira-basura/",
    "dominio": "jornadabc.com.mx",
    "fuente": "jornadabc",
    "zona_medio": "Tijuana",
@@ -384,32 +915,6 @@
    "rubros": []
   },
   {
-   "id": "a4a5ec26529a5d69",
-   "titulo": "Trump recurrió a México para cerrar un acuerdo e intentar bajar de forma drástica el déficit comercial de EEUU",
-   "url": "https://www.elimparcial.com/dinero/2026/10/19/trump-recurrio-a-mexico-para-cerrar-un-acuerdo-e-intentar-bajar-de-forma-drastica-el-deficit-comercial-de-eeuu/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-10-20",
-   "publicado": "2026-10-20T03:22:10+00:00",
-   "capturado": "2026-10-20T04:46:49+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.7838,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/JYSFA5QQVNA4VAVZKIEXA5VZAU.jpg?auth=e94f8afd0b073e2dcc0c44ba77f62c5534ca442931529e68d4fa2f4ef834e234&smart=true&width=1200&height=750",
-   "rubros": [
-    "economia"
-   ]
-  },
-  {
    "id": "f3c36701b4d5aeaf",
    "titulo": "Las enfermedades renales en felinos son de las más comunes y suelen avanzar en silencio, prestar atención al consumo de agua, el apetito y permiten identificar el problema a tiempo",
    "url": "https://www.elimparcial.com/estilos/2026/10/19/las-enfermedades-renales-en-felinos-son-de-las-mas-comunes-y-suelen-avanzar-en-silencio-prestar-atencion-al-consumo-de-agua-el-apetito-y-permiten-identificar-el-problema-a-tiempo/",
@@ -716,6 +1221,31 @@
    ]
   },
   {
+   "id": "94665f744e69d338",
+   "titulo": "Federaciones llaman a pescadores a respetar nuevas reglas en hábitat de vaquita marina",
+   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOVlF4MnZOeXgwd1J4MGQ2WGVNYmJCN3dmRXl2M1ZSZ0FVV3NTMEQ2amFTTUdvNUNfWk5wNDllMW43V3lMQ1BnZjhhMlFNVTBuTUdhUDVST1A5MEEzQ251YUxhVGU4dk9SblhxU2pRY3hFbkNGdlJzcmZFSVFJZXFVMHo2ZkNpZ1d2dlk3RGFOWTA2SlBCdFlPSEVtSlo2VWtmWlYzbDIxaEY3eHpJMF9iYVBQUUpLQmlnUzl3LUY3X2NwcG9U?oc=5",
+   "dominio": "dossierpolitico.com",
+   "fuente": "gn-03c0842f619f",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T02:21:17+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6003,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": []
+  },
+  {
    "id": "dc4a837e27007bd1",
    "titulo": "Donald Trump se muestra dispuesto a reunirse con Putin y Xi Jinping en China para buscar una salida a la guerra en Ucrania y hablar de armas nucleares, mientras presiona a Zelenski para negociar",
    "url": "https://www.elimparcial.com/mundo/2026/10/19/donald-trump-se-muestra-dispuesto-a-reunirse-con-putin-y-xi-jinping-en-china-para-buscar-una-salida-a-la-guerra-en-ucrania-y-hablar-de-armas-nucleares-mientras-presiona-a-zelenski-para-negociar/",
@@ -808,6 +1338,31 @@
    "postura": {
     "etiqueta": "neutral",
     "confianza": 0.6304,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "8b30f6c0446d537c",
+   "titulo": "Entre Teclas / Se desploma la producción de granos básicos",
+   "url": "https://oem.com.mx/lavozdelafrontera/analisis/entre-teclas-se-desploma-la-produccion-de-granos-basicos-32686930",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T02:00:00+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8769,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
@@ -1352,6 +1907,33 @@
    "rubros": []
   },
   {
+   "id": "1c7110e050945fad",
+   "titulo": "Texas: elecciones 2026, comercio y seguridad económica con México",
+   "url": "https://oem.com.mx/elsoldetijuana/analisis/texas-elecciones-2026-comercio-y-seguridad-economica-con-mexico-32692269",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T00:55:45+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7102,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
    "id": "0825de64e856e37c",
    "titulo": "“YOREME” MENDOZA RECIBE CINTURÓN DE CAMPEÓN DEL CMB",
    "url": "https://www.elimparcial.com/deporte/2026/10/19/yoreme-mendoza-recibe-cinturon-de-campeon-del-cmb/",
@@ -1378,6 +1960,29 @@
    ]
   },
   {
+   "id": "2afa90f8c41e1e78",
+   "titulo": "Expediente Confidencial / Guadalajara, París y Chihuahua",
+   "url": "https://oem.com.mx/elsoldetijuana/analisis/expediente-confidencial-guadalajara-paris-y-chihuahua-32692262",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T00:51:11+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.8263,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
    "id": "95ef6f499f5ba0d9",
    "titulo": "Recibió más de 1.6 millones de dólares en ayudas fraudulentas, compró un Lamborghini y un Rolex, y en 2021 fue condenado a 110 meses de prisión en Estados Unidos",
    "url": "https://www.elimparcial.com/mundo/2026/10/19/recibio-mas-de-16-millones-de-dolares-en-ayudas-fraudulentas-compro-un-lamborghini-y-un-rolex-y-en-2021-fue-condenado-a-110-meses-de-prision-en-estados-unidos/",
@@ -1400,6 +2005,34 @@
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/I2HK4GPZRVBFVGJMAGWWBKETUQ.jpg?auth=003a99cd4cc2891f9302b881d17a0f50cb94be08cc6acad171572e410b3c3c8a&smart=true&width=1200&height=675",
    "rubros": []
+  },
+  {
+   "id": "ee24bb39f12d73bf",
+   "titulo": "Ayuntamiento de Tijuana reduce 20% los pases de cruce ágil para empresas",
+   "url": "https://www.uniradioinforma.com/gobierno/ayuntamiento-tijuana-reduce-20-pases-cruce-agil-empresas-n908856",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-20",
+   "publicado": "2026-10-20T00:45:00-07:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5996,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "politica",
+    "economia"
+   ]
   },
   {
    "id": "3e1ede94171f9df9",
@@ -2018,6 +2651,33 @@
    "rubros": []
   },
   {
+   "id": "ddd0114674b502a4",
+   "titulo": "Busca CCSPBC ampliar la participación ciudadana en la integración del Comité de Seguridad Pública de San Quintín",
+   "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNd0g1eTdObmxtbU96eURIUUNlZWVpU0R1NGFCWkNOdW5RUDVkNUxTWlVlUUhhVVZrS0w0T0VkOVVlQ3RydkJMcFliZl9UQ29BNk55ajNPWVN2eml5NTEyX3ViMjYxN0NWZjFyYTFIRG1jTmg1NFZRS1dsNWNOQXpGbVVqRnAxVjRZVnVWSTRXY2Z3TnBwRXhWTi0zWXdtV3pySlJucEhCWGlTazdrMW9SeXd3UkZiaXFJZWRCZHRXcHg1ZlVBX3Q1QmxNeVA4ZmhxMHR1NE1ZR0MtRWRBV3Y0Qw?oc=5",
+   "dominio": "diariotijuana.info",
+   "fuente": "gn-291a95aaf8ce",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Quintín"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T23:43:17+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5083,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
    "id": "abbf6ee378af9361",
    "titulo": "Camiones de carga ya comienzan a circular por la garita de Otay 2 para aliviar el tráfico en la Zona Industrial",
    "url": "https://zetatijuana.com/2026/10/camiones-de-carga-ya-comienzan-a-circular-por-la-garita-de-otay-2-para-aliviar-el-trafico-en-la-zona-industrial/",
@@ -2446,6 +3106,27 @@
    ]
   },
   {
+   "id": "396abf660715a55e",
+   "titulo": "Local leaders have long argued that one person should direct efforts to solve the Tijuana River pollution crisis. Now they've got her",
+   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPaF96a0VaejdSLVdQcTFxTm01T0NBc0J1YjNjeE1rZU1KNnhDb25JcFNoVmJlLXlBU1FwUXdmVlRjdXE4UEF5RjE4czUwUE5oWHliNnlTSzRaeV9xck5MdnJvM0hYa3lwWndwXzFZVGppNEdsMGxCeTQzOHZKS1JCUHNRN0VfSVFzbjhuVnByYXBOdzlUV2w5OHJXT3JuS09mcUR6bThINE96UQ?oc=5",
+   "dominio": "timesofsandiego.com",
+   "fuente": "timessd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T23:10:24+00:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
+  },
+  {
    "id": "06885638670d6fca",
    "titulo": "A 6 años de su desaparición, buscan por primera vez a Norma Lucero Gordian",
    "url": "https://jornadabc.com.mx/principales/a-6-anos-de-su-desaparicion-buscan-por-primera-vez-a-norma-lucero-gordian/",
@@ -2666,6 +3347,31 @@
    "rubros": [
     "deportes"
    ]
+  },
+  {
+   "id": "eb7a9ce927e87963",
+   "titulo": "Reforzarán vacunación del VPH en primarias de Baja California",
+   "url": "https://www.uniradioinforma.com/salud/reforzaran-vacunacion-vph-primarias-baja-california-n908840",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-10-19",
+   "publicado": "2026-10-19T22:45:00-07:00",
+   "capturado": "2026-10-20T11:33:12+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6052,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
   },
   {
    "id": "3fad8821eebc15e9",
@@ -5781,6 +6487,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/10/6ad6c9e429fbb.jpeg",
    "rubros": [
     "seguridad"
    ]
@@ -6086,6 +6793,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/10/6ad6c83c0e87f.jpg",
    "rubros": [
     "economia"
    ]
