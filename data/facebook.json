@@ -1,13 +1,13 @@
 {
  "esquema": 1,
- "generado": "2026-10-21T17:50:18+00:00",
+ "generado": "2026-10-21T22:22:13+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 7130,
- "posts_vigentes": 1088,
- "opinion": 6466,
- "repetidos": 469,
+ "comentarios_vigentes": 7216,
+ "posts_vigentes": 1101,
+ "opinion": 6544,
+ "repetidos": 477,
  "reacciones": 432,
  "por_zona": {
   "Ensenada": 233,
@@ -16,26 +16,26 @@
   "San Diego": 12,
   "San Quintín": 1,
   "Tecate": 87,
-  "Tijuana": 3028,
-  "estatal": 3152,
+  "Tijuana": 3092,
+  "estatal": 3174,
   "internacional": 142,
   "nacional": 331
  },
  "por_cuenta": {
-  "aztecabc_fb": 335,
-  "blanconegro_fb": 2698,
-  "blancorojo_fb": 1961,
-  "ndtijuana_fb": 2057,
-  "psn_fb": 79
+  "aztecabc_fb": 341,
+  "blanconegro_fb": 2732,
+  "blancorojo_fb": 1967,
+  "ndtijuana_fb": 2096,
+  "psn_fb": 80
  },
  "por_idioma": {
-  "es": 7130
+  "es": 7216
  },
  "por_tema": [
   {
    "tema": "hombre",
-   "comentarios": 57,
-   "posts": 50
+   "comentarios": 58,
+   "posts": 51
   },
   {
    "tema": "marina",
@@ -51,6 +51,16 @@
    "tema": "santa",
    "comentarios": 40,
    "posts": 33
+  },
+  {
+   "tema": "seguridad",
+   "comentarios": 37,
+   "posts": 32
+  },
+  {
+   "tema": "bienestar",
+   "comentarios": 17,
+   "posts": 17
   },
   {
    "tema": "homicidio",
@@ -83,9 +93,9 @@
    "posts": 10
   },
   {
-   "tema": "choque",
-   "comentarios": 7,
-   "posts": 7
+   "tema": "detienen",
+   "comentarios": 9,
+   "posts": 9
   },
   {
    "tema": "cancer",
@@ -104,9 +114,9 @@
   }
  ],
  "sentimiento": {
-  "positivo": 747,
-  "negativo": 3172,
-  "neutral": 2547,
+  "positivo": 751,
+  "negativo": 3207,
+  "neutral": 2586,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -146,7 +156,7 @@
    "activa": true
   }
  ],
- "releidos": 16,
+ "releidos": 9,
  "destacados": [
   {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid026qKFDU4afMatVF9QEYEZxgc6yvcgnoAygSAKwZcRwZXsHjDv5M1di6VXQM88SiwLl",
@@ -172,29 +182,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02cVA34KGWTuYr7xat4pZvtep9Km3wmPk7869Dz4BdYFjCdenwmAbR9UvGeQJHEFN8l&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-20",
-   "titulo": "Ya llegó el nuevo transporte a la Sánchez Taboada",
-   "tipo": "imagen",
-   "likes": 1347,
-   "comentarios": 79,
-   "compartidos": 259,
-   "alcance": "zona",
-   "publicado": "2026-10-20T19:58:24+00:00",
-   "cosechados": 10,
-   "opinion": 8,
-   "sentimiento": {
-    "positivo": 2,
-    "negativo": 2,
-    "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NdTijuana/videos/1434897518007600",
    "cuenta": "ndtijuana_fb",
    "zona": "estatal",
@@ -213,29 +200,6 @@
     "positivo": 1,
     "negativo": 4,
     "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0YdiKseLgcaBMHmSbJnjFqtLDKiM322Xn8kXgbEqJwCE7XHSwHNcYvVUTAvvLQ4BMl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-20",
-   "titulo": "Ya llegó el nuevo transporte a la Sánchez Taboada",
-   "tipo": "imagen",
-   "likes": 1321,
-   "comentarios": 77,
-   "compartidos": 253,
-   "alcance": "zona",
-   "publicado": "2026-10-20T19:58:24+00:00",
-   "cosechados": 8,
-   "opinion": 7,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 4,
-    "neutral": 3,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -342,9 +306,9 @@
    "fecha": "2026-10-21",
    "titulo": "Asi las cosas en la clínica 1 hasta en la sala de espera atienden a los pacientes, no hay ni camas ni sillas",
    "tipo": "imagen",
-   "likes": 394,
-   "comentarios": 145,
-   "compartidos": 40,
+   "likes": 420,
+   "comentarios": 160,
+   "compartidos": 45,
    "alcance": "nacional",
    "publicado": "2026-10-21T03:04:28+00:00",
    "cosechados": 10,
@@ -430,30 +394,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/videos/1520804689870771",
-   "cuenta": "ndtijuana_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-20",
-   "titulo": "Fuerte choque en 5&10",
-   "tipo": "video",
-   "likes": 304,
-   "comentarios": 19,
-   "compartidos": 29,
-   "reproducciones": 29164,
-   "alcance": "nacional",
-   "publicado": "2026-10-20T20:07:34+00:00",
-   "cosechados": 10,
-   "opinion": 8,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 2,
-    "neutral": 5,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NdTijuana/videos/1635220177986034",
    "cuenta": "ndtijuana_fb",
    "zona": "estatal",
@@ -526,6 +466,76 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/NdTijuana/videos/1124722753386550",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-21",
+   "titulo": "Inicia la demolición en la invasión de la canalización del río Tijuana",
+   "tipo": "video",
+   "likes": 275,
+   "comentarios": 52,
+   "compartidos": 11,
+   "reproducciones": 16327,
+   "alcance": "zona",
+   "publicado": "2026-10-21T20:18:35+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 3,
+    "neutral": 7,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0qfxNsawHRoFMtQuybxAhM9TrjErbchKMQ5ScdCziYm6XMtBiSqqrDYUGZWUxtkiFl",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-21",
+   "titulo": "#GaleríaNDT Rafaguean vivienda con casi 80 disparos; dejan a pareja grave y un perro sin vida",
+   "tipo": "imagen",
+   "likes": 241,
+   "comentarios": 28,
+   "compartidos": 33,
+   "alcance": "zona",
+   "publicado": "2026-10-21T20:19:39+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 6,
+    "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0BcPAJ6N5D19m5BJD3utL2yy36FbNPgi9G3Z357hhg9jp7FvFB1jN5LedJ6wFSL1ol&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-21",
+   "titulo": "#AVISO ⚠️",
+   "tipo": "imagen",
+   "likes": 224,
+   "comentarios": 7,
+   "compartidos": 29,
+   "alcance": "nacional",
+   "publicado": "2026-10-21T21:03:59+00:00",
+   "cosechados": 6,
+   "opinion": 6,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 6,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/1143093558052091",
    "cuenta": "blanconegro_fb",
    "zona": "estatal",
@@ -550,6 +560,29 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02fkxrNYzoyGtpMzNxD37SqGJZ5T1ZMQcFHuoiz8Cg8Va7eyHmNx9aLgBSBtrvfaH3l&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-21",
+   "titulo": "Vota por tu presidente favorito",
+   "tipo": "imagen",
+   "likes": 191,
+   "comentarios": 35,
+   "compartidos": 1,
+   "alcance": "nacional",
+   "publicado": "2026-10-21T01:30:52+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 5,
+    "negativo": 2,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0uVDSSC2gJoEKijSPuBU2YSs1tXwcZiXUGGkiddSHeKGjxD8zRPhW6mweHDZ9SUw1l",
    "cuenta": "blanconegro_fb",
    "zona": "nacional",
@@ -567,29 +600,6 @@
     "positivo": 1,
     "negativo": 9,
     "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02fkxrNYzoyGtpMzNxD37SqGJZ5T1ZMQcFHuoiz8Cg8Va7eyHmNx9aLgBSBtrvfaH3l&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-21",
-   "titulo": "Vota por tu presidente favorito",
-   "tipo": "imagen",
-   "likes": 185,
-   "comentarios": 33,
-   "compartidos": 1,
-   "alcance": "nacional",
-   "publicado": "2026-10-21T01:30:52+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 5,
-    "negativo": 2,
-    "neutral": 3,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -666,23 +676,23 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02XZu6JUcyt9nawkCPETncfyVwr4dZ4LK8CZahuW3sm6BoKrSyAttDSsRq5mJfx7xyl",
-   "cuenta": "blanconegro_fb",
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02AAQ7T25Drme8guWM4w6kUwuuekt5X3ctBGSHMQKLRcDPwaBbrxc8nVCKSA5jJgVMl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
    "zona": "estatal",
-   "fecha": "2026-10-20",
-   "titulo": "SEP dará megapuente de cuatro días a estudiantes de nivel básico: consulta las fechas",
+   "fecha": "2026-10-21",
+   "titulo": "Vota por tu presidente favorito",
    "tipo": "imagen",
    "likes": 113,
-   "comentarios": 20,
-   "compartidos": 22,
+   "comentarios": 27,
+   "compartidos": 2,
    "alcance": "nacional",
-   "publicado": "2026-10-20T21:27:44+00:00",
-   "cosechados": 8,
-   "opinion": 6,
+   "publicado": "2026-10-21T01:37:06+00:00",
+   "cosechados": 10,
+   "opinion": 10,
    "sentimiento": {
-    "positivo": 1,
-    "negativo": 2,
-    "neutral": 3,
+    "positivo": 0,
+    "negativo": 3,
+    "neutral": 7,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -713,37 +723,14 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid09Fm4yKYuyY1AEyXiudUUR9LyKt33hZWkEYthNhyiWGZbUjccJrWdngA5Vvpi4PBBl",
-   "cuenta": "blanconegro_fb",
-   "zona": "Ensenada",
-   "fecha": "2026-10-20",
-   "titulo": "Termina búsqueda de 11 desaparecidos tras naufragio frente a Ensenada",
-   "tipo": "imagen",
-   "likes": 81,
-   "comentarios": 9,
-   "compartidos": 24,
-   "alcance": "zona",
-   "publicado": "2026-10-20T19:55:57+00:00",
-   "cosechados": 9,
-   "opinion": 4,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 2,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0bst9t5PU2oCfuwY5gjfydbbDnYKLdinufj4ZoN2Bitzvu77GDvsz4ZCqCDUJH38pl&id=100086488503408",
    "cuenta": "blancorojo_fb",
    "zona": "Tijuana",
    "fecha": "2026-10-20",
    "titulo": "?Que opinan de los candidatos Morena a la alcaldia de Tijuana",
    "tipo": "otro",
-   "likes": 80,
-   "comentarios": 88,
+   "likes": 83,
+   "comentarios": 90,
    "compartidos": 1,
    "alcance": "zona",
    "publicado": "2026-10-20T22:35:38+00:00",
@@ -828,23 +815,24 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0HkdE8j2hsH5t2xb4xK2yJJ6HEjWpCaASF1KbPhsszWKeWDDGBehjd98KUCZAh5DPl",
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/1405374788466338",
    "cuenta": "blanconegro_fb",
    "zona": "Tijuana",
-   "fecha": "2026-10-20",
-   "titulo": "🚨 Migrante cae de hasta 12 metros del muro fronterizo y sufre múltiples fracturas",
-   "tipo": "imagen",
+   "fecha": "2026-10-21",
+   "titulo": "Vecinos de Zona Río alzan la voz contra nueva gasolinera por temor a riesgos para escuelas y viviendas",
+   "tipo": "video",
    "likes": 69,
-   "comentarios": 10,
-   "compartidos": 23,
+   "comentarios": 21,
+   "compartidos": 21,
+   "reproducciones": 14512,
    "alcance": "zona",
-   "publicado": "2026-10-20T19:39:12+00:00",
+   "publicado": "2026-10-21T20:55:06+00:00",
    "cosechados": 10,
-   "opinion": 3,
+   "opinion": 9,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 0,
-    "neutral": 3,
+    "negativo": 4,
+    "neutral": 5,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -869,6 +857,29 @@
     "positivo": 0,
     "negativo": 0,
     "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0ojUAaqZRD2CFvC2fvEEW1wELMr2dgYpdHzR5sdz3U3enGSCuKB3bXUeCVxWvZCztl",
+   "cuenta": "blanconegro_fb",
+   "zona": "internacional",
+   "fecha": "2026-10-21",
+   "titulo": "La organización The Workers Circle señala que varios aprehendidos en centros de Miami y Pompano Beach han recibido este aviso de deportación.",
+   "tipo": "otro",
+   "likes": 13,
+   "comentarios": 8,
+   "compartidos": 20,
+   "alcance": "extranjero",
+   "publicado": "2026-10-21T21:24:20+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -968,29 +979,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0244ZKj96L6mUGsTwFGAZ6JodvzF4YPJhCogVehdWaHsU5ynsQF1jfGYM5MYuHqLeul",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Ensenada",
-   "fecha": "2026-10-20",
-   "titulo": "#NDTInforma Concluirá esta semana la rehabilitación del Colector Ensenada",
-   "tipo": "imagen",
-   "likes": 3,
-   "comentarios": 1,
-   "compartidos": 1,
-   "alcance": "zona",
-   "publicado": "2026-10-20T21:22:23+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02DnX4XiYWCkuBKfmUHxQuzEwfotT3Kn8wkB1QgFQJpfwwbUAm1pcCSCy2SykKVYrml",
    "cuenta": "blanconegro_fb",
    "zona": "Playas de Rosarito",
@@ -1031,29 +1019,6 @@
     "positivo": 0,
     "negativo": 0,
     "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/aztecabc/posts/pfbid02oQFGJiBpYcrZGxWcFpQx5EyPF1cENUA2ui6RahCKtUckF8Mkft5TgGKRt9GmpCvfl",
-   "cuenta": "aztecabc_fb",
-   "zona": "Ensenada",
-   "fecha": "2026-10-20",
-   "titulo": "FUGA QUÍMICA obliga evacuación en Ensenada; esto fue lo que pasó 👇🏼⚠️",
-   "tipo": "otro",
-   "likes": 0,
-   "comentarios": 0,
-   "compartidos": 0,
-   "alcance": "zona",
-   "publicado": "2026-10-20T21:40:37+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -1111,35 +1076,35 @@
    "cuenta": "aztecabc_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 3,
-   "crudos": 4,
+   "comentarios": 6,
+   "crudos": 7,
    "fuera": 0,
    "compartidos": 0
   },
   {
    "cuenta": "blanconegro_fb",
    "estado": "ok",
-   "posts": 7,
-   "comentarios": 36,
-   "crudos": 37,
-   "fuera": 1,
+   "posts": 8,
+   "comentarios": 34,
+   "crudos": 34,
+   "fuera": 0,
    "compartidos": 0
   },
   {
    "cuenta": "blancorojo_fb",
    "estado": "ok",
    "posts": 5,
-   "comentarios": 30,
-   "crudos": 30,
+   "comentarios": 6,
+   "crudos": 6,
    "fuera": 0,
-   "compartidos": 3
+   "compartidos": 2
   },
   {
    "cuenta": "ndtijuana_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 14,
-   "crudos": 14,
+   "comentarios": 39,
+   "crudos": 39,
    "fuera": 0,
    "compartidos": 0
   },
@@ -1148,20 +1113,20 @@
    "estado": "ok",
    "posts": 8,
    "comentarios": 1,
-   "crudos": 4,
+   "crudos": 3,
    "fuera": 0,
    "compartidos": 0
   }
  ],
  "gasto": {
   "resultados": 250,
-  "gastado": 129,
+  "gastado": 128,
   "por_concepto": {
-   "aztecabc_fb": 12,
-   "blanconegro_fb": 45,
-   "blancorojo_fb": 38,
-   "ndtijuana_fb": 22,
-   "psn_fb": 12
+   "aztecabc_fb": 15,
+   "blanconegro_fb": 42,
+   "blancorojo_fb": 13,
+   "ndtijuana_fb": 47,
+   "psn_fb": 11
   }
  }
 }
