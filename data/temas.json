@@ -1,340 +1,18 @@
 {
  "origen": "prensa",
- "generado": "2026-10-21",
+ "generado": "2026-10-22",
  "ventana_dias": 7,
  "minimo": 3,
- "notas_ventana": 2685,
- "notas_previas": 2681,
+ "notas_ventana": 2402,
+ "notas_previas": 2709,
  "temas": [
   {
-   "termino": "cancer",
-   "n": 47,
-   "n_previo": 23,
-   "momento": 24,
-   "zonas": {
-    "nacional": 30,
-    "estatal": 5,
-    "Mexicali": 4,
-    "San Diego": 3,
-    "Tijuana": 3,
-    "Ensenada": 2,
-    "Playas de Rosarito": 1
-   },
-   "fuentes": {
-    "imparcial": 26,
-    "uniradio": 9,
-    "afn": 2,
-    "jornadabc": 2,
-    "kpbs": 2,
-    "gn-18c343e23753": 1,
-    "gn-6e69f2b2f169": 1,
-    "gn-dc5a4d87b215": 1,
-    "lavoz": 1,
-    "soltij": 1,
-    "timessd": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "02426defe8eabf21",
-    "084dc4798a18b502",
-    "0872e5c588f489d9",
-    "0947d29e30133dcf",
-    "09dda1fce801921c",
-    "1960bb734cb3e43c",
-    "1ac8bd5bfbbd252f",
-    "1c337352824996f8",
-    "21333ffebd0d933f",
-    "2944077427bfff9b",
-    "2e73d26b49cb3680",
-    "2ea3b37b72339e44",
-    "50eae2926ca2d461",
-    "58e5d693742c3f8d",
-    "5cb3ad30abcdb597",
-    "6625939cdf093bee",
-    "6997fe788d6d22ed",
-    "6e80afe2aee1db33",
-    "6ffddbc625bea74a",
-    "701540f05616f7ee",
-    "7197dcf937201d6b",
-    "71c0d12ef5642673",
-    "72a29a322ed390d2",
-    "730e5889e68fd156",
-    "7f30d513fea43188",
-    "83e84b039dd1cf13",
-    "88fb143fb0a09ed8",
-    "8b85eba81881dab8",
-    "9a6e6d3b5574ac45",
-    "9b2b14947abd04bd",
-    "a1f3fa4ad829aed9",
-    "a9b33b13f8d2ed21",
-    "abb96bf75123d4c7",
-    "b4cb07d9a9cfc5a8",
-    "b958d3a1ac8627e2",
-    "c5ec86728f9553f7",
-    "c69615480c2f2f66",
-    "d25320d1a84fb66a",
-    "d9609ed3887d9e32",
-    "db8a1ab998070498",
-    "dbb096f8f0916aab",
-    "ddd006208f83535a",
-    "e65b361766700586",
-    "e7a5be37c2f59150",
-    "ec341ff357bbea0b",
-    "ec964ca0c745163d",
-    "f6221e0e27c02f4e"
-   ],
-   "ejemplos": [
-    "Alistan Paseo Ciclista Rosarito–Ensenada en apoyo a cinco pacientes con cáncer",
-    "Cáncer de mama: el 80% de los casos se presenta en mujeres sin factores de riesgo específicos, advierte la OMS",
-    "Entrega Gobierno de BC prótesis mamarias gratuitas a sobrevivientes de cáncer"
-   ]
-  },
-  {
-   "termino": "estados unidos",
-   "n": 51,
-   "n_previo": 28,
-   "momento": 23,
-   "zonas": {
-    "nacional": 35,
-    "Tijuana": 11,
-    "San Diego": 4,
-    "Mexicali": 3,
-    "Tecate": 1
-   },
-   "fuentes": {
-    "imparcial": 35,
-    "gn-f8497491006c": 5,
-    "uniradio": 5,
-    "afn": 3,
-    "soltij": 2,
-    "timessd": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "0440d21fd7d81a5f",
-    "093195d3d2e2a180",
-    "0ab8e46e9539bc0d",
-    "0ea0eb02a3bf8d2d",
-    "112f3dc356b42ed0",
-    "160f69c0915e98b2",
-    "1993b6c52b39ee6e",
-    "2371d00e7124037f",
-    "23ae5730aec1b4f5",
-    "24dad9a027eb0e88",
-    "27c515e40f53ea27",
-    "2e2aabe6d0551fb9",
-    "3fad8821eebc15e9",
-    "4338c05a7e3399bd",
-    "456187737af7083f",
-    "54e31f0fa24b58b9",
-    "56011a3dedf4f8e9",
-    "58d660cca12466e4",
-    "5a4eff089d81a02b",
-    "5b1c3092592a5fba",
-    "5f566f0f997fbe7c",
-    "62a5fd3651293f60",
-    "677c1c21fbdd392f",
-    "695536c0c93de4d3",
-    "6aaa56210db0dc0e",
-    "6be7d3667ccce444",
-    "6ee71ab837c4ef3e",
-    "701540f05616f7ee",
-    "74b4c3c3bd43bcb8",
-    "7aed07bf378c763c",
-    "813390cc07cab1d0",
-    "85afadfc316ecf77",
-    "88155de53c37f7fe",
-    "8b5ed3aa8c2bd0da",
-    "8c54acf6ad7db96d",
-    "8e3e969ed2b88102",
-    "908b474c6809d84a",
-    "92f8bb501f3a5e6e",
-    "95ef6f499f5ba0d9",
-    "9b2e762c3e289fe2",
-    "b32d55f62d1f2d33",
-    "b58aec086184c9d2",
-    "babe85fa3cd39ea0",
-    "bd3b7df018a8f6dd",
-    "c82f59048ae62479",
-    "d17c43a46c165dfe",
-    "ea14c7b7025ba1ec",
-    "f17c8f6678420b12",
-    "f31f90e41a7be2e2",
-    "f496b05c5d4bb4fe",
-    "febb31953181b6f3"
-   ],
-   "ejemplos": [
-    "Marcelo Ebrard asegura que el narcotráfico no ha sido tema en las negociaciones del T-MEC con Estados Unidos y Canadá, pese a los constantes señalamientos de Donald Trump contra México, y afirma que las 115 reuniones comerciales se han centrado en asuntos de comercio, inversión, energía y condiciones laborales.",
-    "Estados Unidos invoca una ley contra la tortura poco utilizada para ampliar el juicio contra Nicolás Maduro y su esposa, Cilia Flores, por presuntos abusos contra opositores en Venezuela",
-    "Pese a que un tribunal lo declaró ilegal, Estados Unidos deportará a África a migrantes con graves enfermedades que México rechazó"
-   ]
-  },
-  {
-   "termino": "santa",
-   "n": 32,
-   "n_previo": 10,
+   "termino": "crisis",
+   "n": 33,
+   "n_previo": 11,
    "momento": 22,
    "zonas": {
-    "Tijuana": 21,
-    "nacional": 7,
-    "Playas de Rosarito": 4,
-    "Tecate": 3,
-    "Ensenada": 1,
-    "Mexicali": 1,
-    "estatal": 1
-   },
-   "fuentes": {
-    "soltij": 7,
-    "imparcial": 6,
-    "uniradio": 4,
-    "zeta": 4,
-    "afn": 3,
-    "jornadabc": 3,
-    "gn-208187d76ea7": 1,
-    "gn-36bce513f849": 1,
-    "gn-3d33531b3bed": 1,
-    "gn-c3e35c36380b": 1,
-    "rosarito": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "08a7daf310d887c2",
-    "10833c85e4d13ed1",
-    "222a7e0e5fb74ceb",
-    "2c022b4f7129c0e6",
-    "2d6c56a9a2811b24",
-    "30315c25415e4582",
-    "3a8a5fa4194a4d58",
-    "3b68d6606000c14f",
-    "48c6be52da72a439",
-    "4ab43a11c73bdaac",
-    "504f076a7a4b67aa",
-    "545ada7393d36e0b",
-    "6055fcf19c214af3",
-    "6e7813489d28db44",
-    "6fe047167ac495f8",
-    "8b183d0c1f25060c",
-    "9e1cf887b9ccda4d",
-    "9e924fc79f2135b3",
-    "a9ddfc6bdab6c39a",
-    "ad2e8ad4e91bb86a",
-    "ae3c98e8dc967751",
-    "b256aa038e73f36f",
-    "cd18fbb54f57f6f0",
-    "d427855012fa6ea8",
-    "d85437cd65ce7786",
-    "e07e8551a9e95cea",
-    "e2e850469366660d",
-    "e4eb94d30aa85f2d",
-    "e9a45f33ca7b4558",
-    "fb5dce2f30f46b35",
-    "fdf24e92b95dc526",
-    "fe707a6f32d9f7ae"
-   ],
-   "ejemplos": [
-    "Retiran sellos de clausura y ahora siete viviendas en riesgo por cortes de tierra en Pedregal de Santa Julia",
-    "Frente frío traerá lluvias y descenso de temperatura a Tijuana tras el calor de Santa Ana",
-    "Corte ilegal en cerro del Pedregal de Santa Julia deja 7 casas en riesgo"
-   ]
-  },
-  {
-   "termino": "marina",
-   "n": 40,
-   "n_previo": 19,
-   "momento": 21,
-   "zonas": {
-    "nacional": 20,
-    "Ensenada": 6,
-    "estatal": 6,
-    "Tijuana": 3,
-    "San Felipe": 2,
-    "Tecate": 2,
-    "Mexicali": 1
-   },
-   "fuentes": {
-    "imparcial": 9,
-    "zeta": 3,
-    "gn-3795a4827492": 2,
-    "gn-759fc9543d6f": 2,
-    "radarbc": 2,
-    "uniradio": 2,
-    "afn": 1,
-    "elvigia": 1,
-    "gn-03c0842f619f": 1,
-    "gn-117320d2fcc3": 1,
-    "gn-173f8fbcfc4a": 1,
-    "gn-1b2c7929af6f": 1,
-    "gn-29632c8487f6": 1,
-    "gn-31193328f8e2": 1,
-    "gn-338f8f17e509": 1,
-    "gn-5f8b423882f1": 1,
-    "gn-65f3da652123": 1,
-    "gn-7c8f92835304": 1,
-    "gn-9ec3d3bd2463": 1,
-    "gn-c2d2e0670417": 1,
-    "gn-ded8dbe66fc7": 1,
-    "gn-effb46cf0b55": 1,
-    "gn-f8b4c268745f": 1,
-    "jornadabc": 1,
-    "lavoz": 1,
-    "soltij": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "0c57cf4bbabb0570",
-    "11083e8f9cf2c581",
-    "160f69c0915e98b2",
-    "2418b3abfef5837c",
-    "244d4fb04d106e17",
-    "3041caa4a0cca001",
-    "3921e9db5f43eb5a",
-    "3d92fd8196f7bc42",
-    "3e734c17432c57c0",
-    "3f4a02bec19b07d1",
-    "3f90729e2e0284ab",
-    "4648202333a472f4",
-    "4946f17ff991df84",
-    "4e6e6eaa22a788d7",
-    "535443e54b38132d",
-    "5736bfc29dd8e109",
-    "75a8009d861acc21",
-    "7aa17ef36ca3b53b",
-    "7b630e6c37139d3e",
-    "93c77b20ab103611",
-    "94665f744e69d338",
-    "97bdeef38d1d5ae6",
-    "9e8ec66556e2798f",
-    "a099331d7ee23ea0",
-    "a9c6902c71e864bc",
-    "aade0e787b5bd021",
-    "ab987be43644ee33",
-    "acd9a6faa9e04297",
-    "b6a7f8b2e227590b",
-    "baa1d1f794c40be9",
-    "bb682fa35eeb4c90",
-    "be48e524af58a98d",
-    "c0ef00fd55af88d6",
-    "c6b476ec97c1383c",
-    "d36b2da3245f8806",
-    "da998e3c727a771b",
-    "dee87241b81ca363",
-    "e98b4c80aeaa539d",
-    "ecfca6759ef55ea0",
-    "fa56283f902a7299"
-   ],
-   "ejemplos": [
-    "Marina incinera más de 1.4 millones de plantas de marihuana al sur de Tecate",
-    "Autoridades y pescadores fortalecen acuerdos por una actividad sustentable y conservación de la vaquita marina en Alto Golfo de California",
-    "Entregó Marina prótesis mamarias"
-   ]
-  },
-  {
-   "termino": "crisis",
-   "n": 34,
-   "n_previo": 14,
-   "momento": 20,
-   "zonas": {
-    "Tijuana": 17,
+    "Tijuana": 16,
     "San Diego": 13,
     "nacional": 8,
     "Mexicali": 2,
@@ -343,7 +21,7 @@
    "fuentes": {
     "imparcial": 8,
     "timessd": 6,
-    "afn": 4,
+    "afn": 3,
     "gn-5bad11419dae": 2,
     "gn-a0ec1cdd1d90": 2,
     "gn-a956e11d03ed": 2,
@@ -361,10 +39,9 @@
    "notas": [
     "037e331d693af6b3",
     "09689980f2c1b803",
-    "0ffcfc8ae4cf7be2",
+    "0e50f44ffa1b2b28",
     "1ec333b13a75c810",
     "30946750e9a6e27f",
-    "3365d65cb4d04db1",
     "348a46bb4d0503b6",
     "396abf660715a55e",
     "42dc5116bd4c560e",
@@ -402,18 +79,18 @@
   },
   {
    "termino": "pescadores",
-   "n": 29,
-   "n_previo": 9,
+   "n": 28,
+   "n_previo": 8,
    "momento": 20,
    "zonas": {
     "San Felipe": 19,
-    "nacional": 7,
+    "nacional": 6,
     "Mexicali": 5,
     "Ensenada": 1,
     "Tijuana": 1
    },
    "fuentes": {
-    "lavoz": 7,
+    "lavoz": 6,
     "jornadabc": 4,
     "imparcial": 2,
     "afn": 1,
@@ -425,8 +102,8 @@
     "gn-29632c8487f6": 1,
     "gn-307344280fcb": 1,
     "gn-31193328f8e2": 1,
-    "gn-3795a4827492": 1,
     "gn-759fc9543d6f": 1,
+    "gn-7c1bf4c96b92": 1,
     "gn-875e5e1681c0": 1,
     "gn-8c7449ec9af7": 1,
     "gn-ded8dbe66fc7": 1,
@@ -436,7 +113,6 @@
    "un_solo_medio": false,
    "notas": [
     "182c303166e88828",
-    "2418b3abfef5837c",
     "302e8255a631cdc3",
     "3045c1751e175281",
     "49dfed15f2b0fc9d",
@@ -444,6 +120,7 @@
     "57792fb25bbe8f7b",
     "6761ff97ebdc994b",
     "74b3607893b04ed9",
+    "8068e358357253d3",
     "82341da135b01d34",
     "83da2f4989ef9bd1",
     "87543127fa5b644d",
@@ -461,170 +138,188 @@
     "da998e3c727a771b",
     "dee87241b81ca363",
     "f235e545b773c5ca",
-    "f30c726ca2c32a93",
     "fa3841ffea58c803",
     "fa56283f902a7299"
    ],
    "ejemplos": [
     "Acuerdan pescadores de San Felipe y autoridades condiciones para usar redes de enmalle",
-    "Acuerdan Negociación tras Bloqueo de Pescadores en la Carretera Mexicali-San Felipe",
-    "Acuerdan reducir 86% zona de prohibición de redes de enmalle para pescadores"
+    "Ausencia de titular de Pesca marca negociación con pescadores de San Felipe",
+    "Acuerdan Negociación tras Bloqueo de Pescadores en la Carretera Mexicali-San Felipe"
    ]
   },
   {
-   "termino": "vaquita marina",
-   "n": 20,
-   "n_previo": 0,
-   "momento": 20,
+   "termino": "estados unidos",
+   "n": 46,
+   "n_previo": 27,
+   "momento": 19,
    "zonas": {
-    "nacional": 16,
-    "San Felipe": 2,
-    "Mexicali": 1,
-    "Tijuana": 1
+    "nacional": 31,
+    "Tijuana": 10,
+    "San Diego": 4,
+    "Mexicali": 2,
+    "Tecate": 1
    },
    "fuentes": {
-    "imparcial": 3,
-    "gn-3795a4827492": 2,
-    "gn-03c0842f619f": 1,
-    "gn-117320d2fcc3": 1,
-    "gn-173f8fbcfc4a": 1,
-    "gn-1b2c7929af6f": 1,
-    "gn-29632c8487f6": 1,
-    "gn-31193328f8e2": 1,
-    "gn-338f8f17e509": 1,
-    "gn-5f8b423882f1": 1,
-    "gn-65f3da652123": 1,
-    "gn-759fc9543d6f": 1,
-    "gn-ded8dbe66fc7": 1,
-    "gn-f8b4c268745f": 1,
+    "imparcial": 31,
+    "uniradio": 5,
+    "gn-f8497491006c": 4,
+    "afn": 3,
+    "soltij": 2,
+    "timessd": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "0440d21fd7d81a5f",
+    "093195d3d2e2a180",
+    "0ab8e46e9539bc0d",
+    "0ea0eb02a3bf8d2d",
+    "112f3dc356b42ed0",
+    "1993b6c52b39ee6e",
+    "2371d00e7124037f",
+    "23ae5730aec1b4f5",
+    "24dad9a027eb0e88",
+    "27c515e40f53ea27",
+    "2e2aabe6d0551fb9",
+    "3fad8821eebc15e9",
+    "54e31f0fa24b58b9",
+    "56011a3dedf4f8e9",
+    "58d660cca12466e4",
+    "5b1c3092592a5fba",
+    "5f566f0f997fbe7c",
+    "62a5fd3651293f60",
+    "677c1c21fbdd392f",
+    "695536c0c93de4d3",
+    "6aaa56210db0dc0e",
+    "6be7d3667ccce444",
+    "6ee71ab837c4ef3e",
+    "701540f05616f7ee",
+    "74b4c3c3bd43bcb8",
+    "7aed07bf378c763c",
+    "813390cc07cab1d0",
+    "85afadfc316ecf77",
+    "88155de53c37f7fe",
+    "8b5ed3aa8c2bd0da",
+    "8c54acf6ad7db96d",
+    "8e3e969ed2b88102",
+    "908b474c6809d84a",
+    "92f8bb501f3a5e6e",
+    "95ef6f499f5ba0d9",
+    "9b2e762c3e289fe2",
+    "b32d55f62d1f2d33",
+    "b58aec086184c9d2",
+    "babe85fa3cd39ea0",
+    "bd3b7df018a8f6dd",
+    "d17c43a46c165dfe",
+    "ea14c7b7025ba1ec",
+    "f17c8f6678420b12",
+    "f31f90e41a7be2e2",
+    "f496b05c5d4bb4fe",
+    "febb31953181b6f3"
+   ],
+   "ejemplos": [
+    "Marcelo Ebrard asegura que el narcotráfico no ha sido tema en las negociaciones del T-MEC con Estados Unidos y Canadá, pese a los constantes señalamientos de Donald Trump contra México, y afirma que las 115 reuniones comerciales se han centrado en asuntos de comercio, inversión, energía y condiciones laborales.",
+    "Estados Unidos invoca una ley contra la tortura poco utilizada para ampliar el juicio contra Nicolás Maduro y su esposa, Cilia Flores, por presuntos abusos contra opositores en Venezuela",
+    "Pese a que un tribunal lo declaró ilegal, Estados Unidos deportará a África a migrantes con graves enfermedades que México rechazó"
+   ]
+  },
+  {
+   "termino": "cancer",
+   "n": 43,
+   "n_previo": 24,
+   "momento": 19,
+   "zonas": {
+    "nacional": 25,
+    "estatal": 5,
+    "Mexicali": 4,
+    "Tijuana": 4,
+    "San Diego": 3,
+    "Ensenada": 2,
+    "Playas de Rosarito": 1
+   },
+   "fuentes": {
+    "imparcial": 23,
+    "uniradio": 7,
+    "afn": 3,
+    "jornadabc": 2,
+    "kpbs": 2,
+    "gn-18c343e23753": 1,
+    "gn-6e69f2b2f169": 1,
+    "gn-dc5a4d87b215": 1,
     "lavoz": 1,
     "soltij": 1,
-    "uniradio": 1
+    "timessd": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "2418b3abfef5837c",
-    "3e734c17432c57c0",
-    "4946f17ff991df84",
-    "535443e54b38132d",
-    "7aa17ef36ca3b53b",
-    "7b630e6c37139d3e",
-    "94665f744e69d338",
-    "a099331d7ee23ea0",
-    "a9c6902c71e864bc",
-    "aade0e787b5bd021",
-    "b6a7f8b2e227590b",
-    "bb682fa35eeb4c90",
-    "c0ef00fd55af88d6",
-    "c6b476ec97c1383c",
-    "d36b2da3245f8806",
-    "da998e3c727a771b",
-    "dee87241b81ca363",
-    "e98b4c80aeaa539d",
-    "ecfca6759ef55ea0",
-    "fa56283f902a7299"
+    "02426defe8eabf21",
+    "084dc4798a18b502",
+    "0872e5c588f489d9",
+    "09dda1fce801921c",
+    "1ac8bd5bfbbd252f",
+    "1c337352824996f8",
+    "21333ffebd0d933f",
+    "2e73d26b49cb3680",
+    "2ea3b37b72339e44",
+    "50eae2926ca2d461",
+    "58e5d693742c3f8d",
+    "5cb3ad30abcdb597",
+    "6625939cdf093bee",
+    "6997fe788d6d22ed",
+    "6e80afe2aee1db33",
+    "6ffddbc625bea74a",
+    "701540f05616f7ee",
+    "7197dcf937201d6b",
+    "71c0d12ef5642673",
+    "72a29a322ed390d2",
+    "730e5889e68fd156",
+    "7f30d513fea43188",
+    "83e84b039dd1cf13",
+    "8b85eba81881dab8",
+    "9b2b14947abd04bd",
+    "a1f3fa4ad829aed9",
+    "a9b33b13f8d2ed21",
+    "abb96bf75123d4c7",
+    "b4cb07d9a9cfc5a8",
+    "b958d3a1ac8627e2",
+    "c5ec86728f9553f7",
+    "c69615480c2f2f66",
+    "ca76d0c031194d0f",
+    "d25320d1a84fb66a",
+    "d9609ed3887d9e32",
+    "db8a1ab998070498",
+    "dbb096f8f0916aab",
+    "ddd006208f83535a",
+    "e65b361766700586",
+    "e7a5be37c2f59150",
+    "ec341ff357bbea0b",
+    "ec964ca0c745163d",
+    "f6221e0e27c02f4e"
    ],
    "ejemplos": [
-    "Autoridades y pescadores fortalecen acuerdos por una actividad sustentable y conservación de la vaquita marina en Alto Golfo de California",
-    "Federaciones llaman a pescadores a respetar nuevas reglas en hábitat de vaquita marina",
-    "¡Ganan los pescadores!, se reduce más el polígono de protección de vaquita marina"
-   ]
-  },
-  {
-   "termino": "zona",
-   "n": 37,
-   "n_previo": 19,
-   "momento": 18,
-   "zonas": {
-    "Tijuana": 17,
-    "nacional": 13,
-    "Mexicali": 4,
-    "Ensenada": 2,
-    "estatal": 1
-   },
-   "fuentes": {
-    "imparcial": 10,
-    "afn": 4,
-    "soltij": 4,
-    "lavoz": 3,
-    "uniradio": 3,
-    "gn-31193328f8e2": 2,
-    "zeta": 2,
-    "elvigia": 1,
-    "gn-0b69025e2d99": 1,
-    "gn-117320d2fcc3": 1,
-    "gn-338f8f17e509": 1,
-    "gn-65f3da652123": 1,
-    "gn-759fc9543d6f": 1,
-    "gn-bb0202be0c4f": 1,
-    "gn-f8497491006c": 1,
-    "jornadabc": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "19338979b9600d8c",
-    "30744e5bc7ddeefd",
-    "34896a021e294cb2",
-    "3786719c6c798a0e",
-    "434ce28988ee3398",
-    "4355dc6323441550",
-    "4b6cb66e3b730e32",
-    "4f750f174180cc99",
-    "50d52cdf5372bff9",
-    "54e31f0fa24b58b9",
-    "5aa54bb80f79f5b4",
-    "5f09fcaeebf1911d",
-    "718e90f53b7bd23a",
-    "779944950f062e02",
-    "7aa17ef36ca3b53b",
-    "7b630e6c37139d3e",
-    "8c9c24c1b12397aa",
-    "93e221b5213b9adf",
-    "9a515ddf22bda361",
-    "9f8278578ee3ff0e",
-    "a3df01d543cb8c2e",
-    "a9c68fed115d9eac",
-    "a9c6902c71e864bc",
-    "ab987be43644ee33",
-    "abbf6ee378af9361",
-    "ad741aa1d8e21b53",
-    "b5f0be0077ce7777",
-    "b7ee995c83eab65c",
-    "bb682fa35eeb4c90",
-    "bb861011a42cd923",
-    "d1bfebaa0ae91ce5",
-    "d36b2da3245f8806",
-    "da998e3c727a771b",
-    "e94ddf7bef6b714c",
-    "e98b4c80aeaa539d",
-    "f2f11aa4cfa65b15",
-    "fa56283f902a7299"
-   ],
-   "ejemplos": [
-    "Hubo tres heridos por disparos; uno en barbería y una pareja en zona de invasión",
-    "Zona Sísmica",
-    "Acuerdan reducir 86% zona de prohibición de redes de enmalle para pescadores"
+    "El Papa León XIV no requiere más tratamiento contra el cáncer, informó el Vaticano",
+    "Alistan Paseo Ciclista Rosarito–Ensenada en apoyo a cinco pacientes con cáncer",
+    "Cáncer de mama: el 80% de los casos se presenta en mujeres sin factores de riesgo específicos, advierte la OMS"
    ]
   },
   {
    "termino": "uabc",
-   "n": 27,
+   "n": 28,
    "n_previo": 9,
-   "momento": 18,
+   "momento": 19,
    "zonas": {
-    "Tijuana": 11,
-    "Mexicali": 7,
-    "nacional": 7,
+    "Tijuana": 12,
+    "Mexicali": 8,
+    "nacional": 6,
     "San Quintín": 2
    },
    "fuentes": {
-    "imparcial": 9,
-    "afn": 6,
-    "lavoz": 6,
-    "jornadabc": 2,
+    "imparcial": 8,
+    "lavoz": 7,
+    "afn": 5,
+    "jornadabc": 3,
+    "soltij": 2,
     "zeta": 2,
-    "gn-e46da57e413e": 1,
-    "soltij": 1
+    "gn-e46da57e413e": 1
    },
    "un_solo_medio": false,
    "notas": [
@@ -639,325 +334,35 @@
     "59c2726b4c4f1c07",
     "5a9aef0fb2357998",
     "5b11da2ce815a83b",
+    "65d86b6d14e640f9",
     "666c014cc10af089",
+    "7717a0a2320fde66",
     "7dc4a59ce6618d4d",
-    "8c5895793398fe7e",
     "99c27b5e3e85ff97",
+    "9ebaf49bd53f2ef5",
     "ab13a89d38bdeee6",
     "ad2e8ad4e91bb86a",
-    "add133b07ff7911f",
     "b58aec086184c9d2",
     "b9affd32c1fcf403",
     "bfe843e418d84b36",
+    "cd562eafde0064fc",
     "d85437cd65ce7786",
     "d9205bbf8d7771d6",
     "d9d2e611130f72f0",
     "deeab9a63c80ebfe",
-    "e885b432d7a4f67b",
-    "f2f2bc13349fe147"
+    "e885b432d7a4f67b"
    ],
    "ejemplos": [
     "Piden que una mujer asuma la rectoría de la UABC",
-    "UABC canalizará denuncias por cobros excesivos en el transporte público ante el IMOS",
-    "Exigen que haya paridad de género en elección de rector de la UABC"
-   ]
-  },
-  {
-   "termino": "cancer mama",
-   "n": 26,
-   "n_previo": 8,
-   "momento": 18,
-   "zonas": {
-    "nacional": 16,
-    "Mexicali": 4,
-    "Tijuana": 2,
-    "estatal": 2,
-    "Ensenada": 1,
-    "San Diego": 1
-   },
-   "fuentes": {
-    "imparcial": 12,
-    "uniradio": 7,
-    "jornadabc": 2,
-    "afn": 1,
-    "gn-6e69f2b2f169": 1,
-    "lavoz": 1,
-    "soltij": 1,
-    "timessd": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "02426defe8eabf21",
-    "084dc4798a18b502",
-    "0947d29e30133dcf",
-    "09dda1fce801921c",
-    "1c337352824996f8",
-    "21333ffebd0d933f",
-    "2944077427bfff9b",
-    "2ea3b37b72339e44",
-    "50eae2926ca2d461",
-    "58e5d693742c3f8d",
-    "701540f05616f7ee",
-    "71c0d12ef5642673",
-    "72a29a322ed390d2",
-    "730e5889e68fd156",
-    "7f30d513fea43188",
-    "88fb143fb0a09ed8",
-    "a9b33b13f8d2ed21",
-    "abb96bf75123d4c7",
-    "c5ec86728f9553f7",
-    "d9609ed3887d9e32",
-    "dbb096f8f0916aab",
-    "ddd006208f83535a",
-    "e65b361766700586",
-    "e7a5be37c2f59150",
-    "ec341ff357bbea0b",
-    "ec964ca0c745163d"
-   ],
-   "ejemplos": [
-    "Cáncer de mama: el 80% de los casos se presenta en mujeres sin factores de riesgo específicos, advierte la OMS",
-    "Llama Lorenia Valles a mujeres sonorenses a luchar contra el cáncer de mama",
-    "Prevención del cáncer de mama para familias hispanas en Estados Unidos"
-   ]
-  },
-  {
-   "termino": "aguilas",
-   "n": 24,
-   "n_previo": 10,
-   "momento": 14,
-   "zonas": {
-    "Mexicali": 20,
-    "nacional": 3,
-    "Tijuana": 1
-   },
-   "fuentes": {
-    "imparcial": 14,
-    "lavoz": 6,
-    "afn": 2,
-    "radarbc": 1,
-    "zeta": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "09d4cf973d798f02",
-    "184fae4ed962e085",
-    "3c9c7799c94a0df6",
-    "3dd105f458edcd85",
-    "4167abf8559c8faf",
-    "4ae8cd821711fee1",
-    "4caf3242ae911a3c",
-    "4f3848be182e0922",
-    "55c0958117edbc6a",
-    "5cce5152077095d3",
-    "6088c36401454b09",
-    "74d1a1351b1f2554",
-    "7d0c711b5dfc79e6",
-    "93ce33626ce96d79",
-    "94f1aa129fb2d676",
-    "97b19c227dc16194",
-    "9ef0ac161ab88ce2",
-    "ab03a6fc277c278b",
-    "ad0cda565d553457",
-    "c351198a2d3f4d3d",
-    "c54b0c9151f5095e",
-    "ea55fd70f6cf9024",
-    "ec0ba4a18d66524b",
-    "f49ef896d6182713"
-   ],
-   "ejemplos": [
-    "Águilas de Mexicali vence 11-10 a Charros y suma cuatro triunfos consecutivos",
-    "Atlas vs América: A qué hora y dónde ver GRATIS el partido de la Jornada 13 en el que las Águilas defienden el liderato de la Liga MX",
-    "Los Águilas ganan en duelo de batazos"
-   ]
-  },
-  {
-   "termino": "pollution",
-   "n": 19,
-   "n_previo": 5,
-   "momento": 14,
-   "zonas": {
-    "San Diego": 12,
-    "Tijuana": 11
-   },
-   "fuentes": {
-    "kpbs": 4,
-    "timessd": 4,
-    "gn-5bad11419dae": 3,
-    "gn-a0ec1cdd1d90": 2,
-    "gn-a956e11d03ed": 2,
-    "gn-38795d41fdf6": 1,
-    "gn-46bc88bd6277": 1,
-    "gn-65e51224f05e": 1,
-    "gn-8547ebdaed0d": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "02d30702204dacca",
-    "0594a084a5057f57",
-    "09689980f2c1b803",
-    "2bede710366b7acf",
-    "396abf660715a55e",
-    "4adfc52d173e6d0e",
-    "6adeb00779220989",
-    "8328b73cdbaa3e71",
-    "865aff517b9c4c6c",
-    "a6e3e04b43957912",
-    "acfb3cc295dd72c0",
-    "adddfd9de27ac9ab",
-    "c2ae3aeeeae6caa0",
-    "c865421e0361eddc",
-    "da5cae94d81ccf6d",
-    "dcf765eee33eb83e",
-    "de630e97404c9681",
-    "f5b50bc6f05d5ef9",
-    "fcd8c8bcb702b3b8"
-   ],
-   "ejemplos": [
-    "United Nations report highlights significant increase in U.S. climate pollution",
-    "Pressure mounts to clean Tijuana River to prevent cross-border pollution ahead of El Niño",
-    "San Diego County appoints first Pollution Crisis Chief to tackle Tijuana River sewage crisis"
-   ]
-  },
-  {
-   "termino": "bulevar",
-   "n": 18,
-   "n_previo": 4,
-   "momento": 14,
-   "zonas": {
-    "Tijuana": 8,
-    "nacional": 7,
-    "Playas de Rosarito": 2,
-    "Tecate": 2
-   },
-   "fuentes": {
-    "imparcial": 8,
-    "uniradio": 3,
-    "afn": 2,
-    "gn-36bce513f849": 1,
-    "gn-df1d301d141c": 1,
-    "gn-f8497491006c": 1,
-    "soltij": 1,
-    "zeta": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "0e42a0c3c6f17c8f",
-    "0f8f7545e55f85e8",
-    "11aaeefa31e79dcc",
-    "14f6c090d07d75a2",
-    "22ee96ffd7509f42",
-    "42dce86eabb55563",
-    "507aebf46dafd9cf",
-    "5825e7785a95e8f5",
-    "5e25d738ec0227be",
-    "673fbeadb7e307ce",
-    "7bd9a71bc3b93831",
-    "879bbc66fdea6d6a",
-    "9477a97766a04b7c",
-    "af8a93a60567cc29",
-    "e1d66a9727b3211b",
-    "e3f8698b9f16f9ed",
-    "f050cd347ee1105b",
-    "fa5aa3c2c279a275"
-   ],
-   "ejemplos": [
-    "Brandon, de 2 años, sobrevivió al choque del bulevar Kino y ahora su familia teme que el IMSS lo deje sin atención por falta de papeles",
-    "Construyen puente peatonal en el bulevar 2000 frente a la Universidad Rosario Castellanos",
-    "Vuelca camión cisterna con diésel sobre el bulevar 2000; atienden derrame de combustible"
-   ]
-  },
-  {
-   "termino": "felipe",
-   "n": 46,
-   "n_previo": 33,
-   "momento": 13,
-   "zonas": {
-    "San Felipe": 46,
-    "Mexicali": 5,
-    "Ensenada": 2
-   },
-   "fuentes": {
-    "imparcial": 10,
-    "lavoz": 6,
-    "gn-13afd86dbb5f": 3,
-    "gn-507c32aa93b3": 3,
-    "gn-8c7449ec9af7": 3,
-    "gn-df1d301d141c": 3,
-    "jornadabc": 3,
-    "afn": 2,
-    "gn-208187d76ea7": 2,
-    "bajanews": 1,
-    "gn-1b2c7929af6f": 1,
-    "gn-24bb87bf33e2": 1,
-    "gn-307344280fcb": 1,
-    "gn-5f8b423882f1": 1,
-    "gn-875e5e1681c0": 1,
-    "gn-a7d03561b038": 1,
-    "gn-e46da57e413e": 1,
-    "gn-effb46cf0b55": 1,
-    "sintesis": 1,
-    "zeta": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "031de3e56a95daa7",
-    "07ac990d992653aa",
-    "11eb099d55040877",
-    "15ffc75835fb2be2",
-    "161a4e779b79c411",
-    "1bd13b695ad75aed",
-    "22b59f4852956cd1",
-    "2aca1347f646fd3b",
-    "302e8255a631cdc3",
-    "3045c1751e175281",
-    "3bc63dae908bba87",
-    "3c8c815bfdbb8113",
-    "3e734c17432c57c0",
-    "49dfed15f2b0fc9d",
-    "529e9f2a20f49024",
-    "53c7263a489b8fb6",
-    "54d85f91859ca522",
-    "57792fb25bbe8f7b",
-    "5cc8c33b37a185f3",
-    "5e9044ed5e949e94",
-    "662149a6007aa1a6",
-    "6761ff97ebdc994b",
-    "82341da135b01d34",
-    "83da2f4989ef9bd1",
-    "87543127fa5b644d",
-    "9cc89a5e87026ccd",
-    "a08b900d8c97c81a",
-    "aea9eeb36b837945",
-    "b4090214b09b74ef",
-    "b41033b1900b6d83",
-    "b540dbbd448ad184",
-    "b76660d8f2367a41",
-    "bb596890474db557",
-    "c88336f7901ec80b",
-    "c88f963192422d6e",
-    "c90af9ae0ca9536b",
-    "caaae7a6d71756c8",
-    "cbc8706ded373b84",
-    "ccadc14891d15715",
-    "db2fe5ea7394f257",
-    "ecb2a3f278e99252",
-    "ecfca6759ef55ea0",
-    "f235e545b773c5ca",
-    "f30c726ca2c32a93",
-    "f8ee7275a616bc57",
-    "fa3841ffea58c803"
-   ],
-   "ejemplos": [
-    "Investiga FGE ataque armado contra pareja en San Felipe",
-    "Acuerdan pescadores de San Felipe y autoridades condiciones para usar redes de enmalle",
-    "Buscan elevar hasta 600 pesos el kilo de camarón de San Felipe"
+    "UABC incorpora asignatura para prevenir incendios y refuerza equipo en laboratorios de Mexicali",
+    "UABC prepara a estudiantes de Turismo y Mercadotecnia para usar IA en el campo laboral"
    ]
   },
   {
    "termino": "frente",
    "n": 36,
-   "n_previo": 23,
-   "momento": 13,
+   "n_previo": 18,
+   "momento": 18,
    "zonas": {
     "nacional": 18,
     "Tijuana": 10,
@@ -1022,184 +427,180 @@
    ]
   },
   {
-   "termino": "bienestar",
-   "n": 25,
-   "n_previo": 12,
-   "momento": 13,
+   "termino": "cancer mama",
+   "n": 23,
+   "n_previo": 7,
+   "momento": 16,
    "zonas": {
-    "nacional": 15,
-    "Tijuana": 3,
-    "estatal": 3,
-    "Ensenada": 2,
-    "Mexicali": 1,
+    "nacional": 13,
+    "Mexicali": 4,
+    "Tijuana": 2,
+    "estatal": 2,
+    "Ensenada": 1,
     "San Diego": 1
    },
    "fuentes": {
-    "imparcial": 9,
-    "uniradio": 8,
+    "imparcial": 11,
+    "uniradio": 5,
     "jornadabc": 2,
-    "soltij": 2,
     "afn": 1,
-    "gn-01e4fd06574f": 1,
-    "gn-3795a4827492": 1,
+    "gn-6e69f2b2f169": 1,
+    "lavoz": 1,
+    "soltij": 1,
     "timessd": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "0286602ce64ebbd0",
-    "11356264236384eb",
-    "11c72953b53df98c",
-    "13befe0beef1778f",
-    "1b719591d320fd64",
-    "3c64856ed6544ed7",
-    "3d70329b6c773cf5",
-    "423a6bdaccbfa646",
-    "469a2f4cca965185",
-    "58ebdb2530b1add5",
-    "5905fb258439b1b5",
-    "59ffd09282a24e74",
-    "5a5fbe4062eb6486",
-    "7d0c602550fb71ce",
-    "897f0e2aa1fdc73a",
-    "8d7b12d5ced6fe1f",
-    "9ecf8c2a5c1a1202",
-    "9f3d20bc0fbcfc14",
-    "9f5c683f7726c4fd",
-    "a567bd50f01dc861",
-    "a949c2233d78fa00",
-    "aa7625c82568d702",
-    "d71e754b52e3c3f2",
-    "dcfee34457e18a79",
-    "f883069ba560c452"
+    "02426defe8eabf21",
+    "084dc4798a18b502",
+    "09dda1fce801921c",
+    "1c337352824996f8",
+    "21333ffebd0d933f",
+    "2ea3b37b72339e44",
+    "50eae2926ca2d461",
+    "58e5d693742c3f8d",
+    "701540f05616f7ee",
+    "71c0d12ef5642673",
+    "72a29a322ed390d2",
+    "730e5889e68fd156",
+    "7f30d513fea43188",
+    "a9b33b13f8d2ed21",
+    "abb96bf75123d4c7",
+    "c5ec86728f9553f7",
+    "d9609ed3887d9e32",
+    "dbb096f8f0916aab",
+    "ddd006208f83535a",
+    "e65b361766700586",
+    "e7a5be37c2f59150",
+    "ec341ff357bbea0b",
+    "ec964ca0c745163d"
    ],
    "ejemplos": [
-    "Coordina Gobierno Municipal Foro 'Bienestar Social, Seguridad y Cohesión Comunitaria'",
-    "Programas sociales tendrán ajustes por elecciones hasta 2027, señala delegado de Bienestar",
-    "Pensión del Bienestar y Pensión Mujeres Bienestar: registro del 19 al 25 de octubre; requisitos y calendario por apellido"
+    "Cáncer de mama: el 80% de los casos se presenta en mujeres sin factores de riesgo específicos, advierte la OMS",
+    "Llama Lorenia Valles a mujeres sonorenses a luchar contra el cáncer de mama",
+    "Prevención del cáncer de mama para familias hispanas en Estados Unidos"
    ]
   },
   {
-   "termino": "redes",
-   "n": 19,
-   "n_previo": 6,
-   "momento": 13,
-   "zonas": {
-    "nacional": 15,
-    "Tijuana": 2,
-    "Mexicali": 1,
-    "San Felipe": 1
-   },
-   "fuentes": {
-    "imparcial": 14,
-    "bajanews": 1,
-    "gn-bb0202be0c4f": 1,
-    "jornadabc": 1,
-    "lavoz": 1,
-    "soltij": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "01f7811e9968545f",
-    "0a4c2a738d552154",
-    "17cd5fe9b571b6e7",
-    "1de8215596811aa2",
-    "4580b4a8f1a9772d",
-    "4a9d3d399358ed23",
-    "5f09fcaeebf1911d",
-    "778ec4405c5b3563",
-    "82341da135b01d34",
-    "8967943a181d2311",
-    "9c326fbd0d277d9d",
-    "9ccc5d3ba03c5c15",
-    "c9eb1237a3f4e4d5",
-    "d0b4f504df0e3c09",
-    "d1bfebaa0ae91ce5",
-    "d4eb94b3cd920384",
-    "db20d49533d5b0e6",
-    "dbe3ad3e54f033e7",
-    "e98b4c80aeaa539d"
-   ],
-   "ejemplos": [
-    "Las personas que prefieren no tener redes sociales y se mantienen reservados en detalles de su vida no es que le teman a socializar, sino que establecen límites protectores para preservar su salud mental frente a la presión digital, según la psicología",
-    "Acuerdan pescadores de San Felipe y autoridades condiciones para usar redes de enmalle",
-    "Mientras el 65% de la generación Z, nacida entre 1997 y 2012 utiliza TikTok los baby boomers, nacidos entre 1946 y 1964, prefieren otras redes sociales"
-   ]
-  },
-  {
-   "termino": "pesca",
-   "n": 17,
+   "termino": "bulevar",
+   "n": 20,
    "n_previo": 4,
-   "momento": 13,
+   "momento": 16,
    "zonas": {
-    "San Felipe": 8,
-    "nacional": 5,
-    "Tijuana": 2,
-    "Mexicali": 1,
-    "estatal": 1
+    "nacional": 9,
+    "Tijuana": 8,
+    "Playas de Rosarito": 2,
+    "Tecate": 2
    },
    "fuentes": {
-    "imparcial": 4,
-    "afn": 1,
-    "gn-1b2c7929af6f": 1,
-    "gn-24bb87bf33e2": 1,
-    "gn-291a95aaf8ce": 1,
-    "gn-307344280fcb": 1,
-    "gn-31193328f8e2": 1,
-    "gn-5f8b423882f1": 1,
-    "gn-e46da57e413e": 1,
-    "gn-effb46cf0b55": 1,
-    "lavoz": 1,
-    "sintesis": 1,
+    "imparcial": 10,
+    "uniradio": 3,
+    "afn": 2,
+    "gn-36bce513f849": 1,
+    "gn-df1d301d141c": 1,
+    "gn-f8497491006c": 1,
     "soltij": 1,
     "zeta": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "12f6601cf6c3155b",
-    "182c303166e88828",
-    "3e734c17432c57c0",
-    "4e6e6eaa22a788d7",
-    "529e9f2a20f49024",
-    "535443e54b38132d",
-    "57792fb25bbe8f7b",
-    "87543127fa5b644d",
-    "9cc89a5e87026ccd",
-    "a099331d7ee23ea0",
-    "aade0e787b5bd021",
-    "ab987be43644ee33",
-    "aea9eeb36b837945",
-    "b41033b1900b6d83",
-    "e98b4c80aeaa539d",
-    "ecfca6759ef55ea0",
-    "fa56283f902a7299"
+    "0e42a0c3c6f17c8f",
+    "0f8f7545e55f85e8",
+    "11aaeefa31e79dcc",
+    "14f6c090d07d75a2",
+    "22ee96ffd7509f42",
+    "42dce86eabb55563",
+    "507aebf46dafd9cf",
+    "5825e7785a95e8f5",
+    "5e25d738ec0227be",
+    "673fbeadb7e307ce",
+    "7bd9a71bc3b93831",
+    "879bbc66fdea6d6a",
+    "9477a97766a04b7c",
+    "af8a93a60567cc29",
+    "b9ff1f9d042603ae",
+    "e1d66a9727b3211b",
+    "e3f8698b9f16f9ed",
+    "f050cd347ee1105b",
+    "fa5aa3c2c279a275",
+    "ff99d49ddfd0a59b"
    ],
    "ejemplos": [
-    "Tras años de inconformidades en San Felipe, modifican polígonos de pesca",
-    "Nuevos polígonos de pesca aún no benefician a las familias de San Felipe",
-    "Califican como logro la reducción del polígono de prohibición de pesca en golfo de California"
+    "Niños sobrevivientes del accidente en el bulevar Kino siguen graves y requieren donadores de sangre",
+    "Tras choque en bulevar Kino donde murieron 4 personas se deben tomar acciones para evitar su repetición: CEDH",
+    "Brandon, de 2 años, sobrevivió al choque del bulevar Kino y ahora su familia teme que el IMSS lo deje sin atención por falta de papeles"
+   ]
+  },
+  {
+   "termino": "pollution",
+   "n": 19,
+   "n_previo": 3,
+   "momento": 16,
+   "zonas": {
+    "Tijuana": 12,
+    "San Diego": 11
+   },
+   "fuentes": {
+    "timessd": 4,
+    "gn-5bad11419dae": 3,
+    "kpbs": 3,
+    "gn-a0ec1cdd1d90": 2,
+    "gn-a956e11d03ed": 2,
+    "gn-38795d41fdf6": 1,
+    "gn-46bc88bd6277": 1,
+    "gn-65e51224f05e": 1,
+    "gn-8547ebdaed0d": 1,
+    "gn-b3e1b48b2d36": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "02d30702204dacca",
+    "0594a084a5057f57",
+    "09689980f2c1b803",
+    "396abf660715a55e",
+    "4adfc52d173e6d0e",
+    "6adeb00779220989",
+    "8328b73cdbaa3e71",
+    "865aff517b9c4c6c",
+    "a6e3e04b43957912",
+    "acfb3cc295dd72c0",
+    "adddfd9de27ac9ab",
+    "c2ae3aeeeae6caa0",
+    "c865421e0361eddc",
+    "da5cae94d81ccf6d",
+    "dcf765eee33eb83e",
+    "de630e97404c9681",
+    "f5b50bc6f05d5ef9",
+    "f642ed820b9da820",
+    "fcd8c8bcb702b3b8"
+   ],
+   "ejemplos": [
+    "Tijuana River Pollution Sends North America a Bill It Cannot Dredge Away",
+    "United Nations report highlights significant increase in U.S. climate pollution",
+    "Pressure mounts to clean Tijuana River to prevent cross-border pollution ahead of El Niño"
    ]
   },
   {
    "termino": "hombre",
-   "n": 46,
-   "n_previo": 34,
-   "momento": 12,
+   "n": 47,
+   "n_previo": 32,
+   "momento": 15,
    "zonas": {
-    "Tijuana": 18,
+    "Tijuana": 17,
     "nacional": 15,
     "Mexicali": 5,
+    "San Quintín": 3,
     "Ensenada": 2,
     "Tecate": 2,
     "Playas de Rosarito": 1,
     "San Diego": 1,
-    "San Felipe": 1,
-    "San Quintín": 1
+    "San Felipe": 1
    },
    "fuentes": {
-    "imparcial": 17,
-    "afn": 11,
-    "uniradio": 6,
-    "zeta": 3,
+    "imparcial": 18,
+    "afn": 10,
+    "uniradio": 5,
+    "zeta": 5,
     "jornadabc": 2,
     "gn-36bce513f849": 1,
     "gn-82f33712a155": 1,
@@ -1212,6 +613,7 @@
    "un_solo_medio": false,
    "notas": [
     "04e6de9a7da7cfa6",
+    "04f60779c85881f1",
     "0b172e59172dbfb2",
     "0dac46b9426ff06f",
     "12f042a52ef9e460",
@@ -1224,6 +626,7 @@
     "371ab5d83d43e8f9",
     "37a999d87d904070",
     "3cb318a2e4038b57",
+    "3cbc0bdd529bb073",
     "422d0b7cd4a0cbe0",
     "4302f2b25b92653a",
     "5205d869797f8fb1",
@@ -1234,7 +637,7 @@
     "6b396976dc8d4c8e",
     "7bc2b3ef40ea6915",
     "7e6bff4e2e5e07f3",
-    "82d9ad6c8a2e920f",
+    "8a322b9f718194cc",
     "8ddc40faffe5d5ea",
     "958efc51b0bf6805",
     "9723e034e6cd561f",
@@ -1249,7 +652,6 @@
     "dcaabb0c1a79e421",
     "dd9f8bda6b72cf00",
     "dfd8d89cddb7223e",
-    "e14187d81121e39f",
     "e5bb61a7acb1103f",
     "eb4476f70c2cd268",
     "ecb1a33683377106",
@@ -1259,251 +661,293 @@
     "ff60ec8eed8faade"
    ],
    "ejemplos": [
+    "Detienen a un hombre en Kansas por presuntas amenazas de muerte contra Donald Trump",
     "Policías municipales abaten a hombre agresivo con machete en el ejido Quico Santana",
-    "Muere hombre en volcadura en Villas del Rey II",
-    "Hombre sufre descarga eléctrica mientras impermeabilizaba techo en Tijuana"
+    "Muere hombre en volcadura en Villas del Rey II"
    ]
   },
   {
-   "termino": "homicidio",
-   "n": 20,
-   "n_previo": 8,
-   "momento": 12,
+   "termino": "felipe",
+   "n": 46,
+   "n_previo": 32,
+   "momento": 14,
    "zonas": {
-    "Tecate": 6,
-    "Tijuana": 4,
-    "nacional": 4,
-    "Ensenada": 2,
-    "Mexicali": 2,
-    "San Felipe": 1,
-    "estatal": 1
+    "San Felipe": 46,
+    "Mexicali": 5,
+    "Ensenada": 1
    },
    "fuentes": {
-    "imparcial": 5,
+    "imparcial": 10,
+    "lavoz": 5,
+    "gn-13afd86dbb5f": 4,
+    "gn-507c32aa93b3": 3,
+    "gn-8c7449ec9af7": 3,
+    "gn-df1d301d141c": 3,
+    "jornadabc": 3,
     "afn": 2,
-    "lavoz": 2,
-    "uniradio": 2,
+    "gn-208187d76ea7": 2,
+    "bajanews": 1,
+    "gn-1b2c7929af6f": 1,
     "gn-24bb87bf33e2": 1,
-    "gn-291a95aaf8ce": 1,
-    "gn-301061e140e7": 1,
-    "gn-36bce513f849": 1,
-    "gn-6327d1dd772f": 1,
-    "gn-cf84c1e7e819": 1,
-    "gn-df1d301d141c": 1,
-    "radarbc": 1,
+    "gn-307344280fcb": 1,
+    "gn-5f8b423882f1": 1,
+    "gn-7c1bf4c96b92": 1,
+    "gn-875e5e1681c0": 1,
+    "gn-e46da57e413e": 1,
+    "gn-effb46cf0b55": 1,
+    "sintesis": 1,
     "zeta": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "1195d987b60ace1b",
-    "131531d6afbc29b3",
-    "1d26100799e3560a",
-    "21ca194525822df6",
+    "031de3e56a95daa7",
+    "07ac990d992653aa",
+    "11eb099d55040877",
+    "15ffc75835fb2be2",
+    "161a4e779b79c411",
+    "1bd13b695ad75aed",
     "2aca1347f646fd3b",
-    "2dd28a578cd25f18",
-    "35a6510aa989d441",
-    "41fe8e42606c7022",
-    "4978b76f597efa82",
-    "4ee32762a69bd8ef",
-    "7a397be865ee6e7f",
-    "800f9272af6ad570",
-    "97e708a7e6208557",
-    "a8122d81455b4187",
-    "c0e4edd7ad1a1956",
-    "c6c7d7101aed2163",
-    "d44cbe4a6c6fe043",
-    "e1b9393853aa7dd4",
-    "f28714426f26f706",
-    "febc2c3bb557541b"
+    "302e8255a631cdc3",
+    "3045c1751e175281",
+    "3bc63dae908bba87",
+    "3c8c815bfdbb8113",
+    "3e734c17432c57c0",
+    "49dfed15f2b0fc9d",
+    "529e9f2a20f49024",
+    "53c7263a489b8fb6",
+    "54d85f91859ca522",
+    "57792fb25bbe8f7b",
+    "5cc8c33b37a185f3",
+    "5e9044ed5e949e94",
+    "662149a6007aa1a6",
+    "6761ff97ebdc994b",
+    "8068e358357253d3",
+    "82341da135b01d34",
+    "83da2f4989ef9bd1",
+    "87543127fa5b644d",
+    "9cc89a5e87026ccd",
+    "a08b900d8c97c81a",
+    "aea9eeb36b837945",
+    "aebfa3aea7175c3d",
+    "b4090214b09b74ef",
+    "b41033b1900b6d83",
+    "b540dbbd448ad184",
+    "b76660d8f2367a41",
+    "bb596890474db557",
+    "c88336f7901ec80b",
+    "c88f963192422d6e",
+    "c90af9ae0ca9536b",
+    "caaae7a6d71756c8",
+    "cbc8706ded373b84",
+    "ccadc14891d15715",
+    "db2fe5ea7394f257",
+    "ecb2a3f278e99252",
+    "ecfca6759ef55ea0",
+    "f235e545b773c5ca",
+    "f8ee7275a616bc57",
+    "fa3841ffea58c803"
    ],
    "ejemplos": [
-    "Vinculan a proceso a dos personas por homicidio calificado en Tijuana",
-    "FGE obtiene vinculación a proceso para \"El bélico\" por homicidio calificado con ventaja",
-    "Aplazan Audiencia en el Homicidio del Activista Sunshine Rodríguez en San Felipe, BC"
+    "Sismo de magnitud 3.5 sacude las cercanías de San Felipe en Baja California",
+    "Investiga FGE ataque armado contra pareja en San Felipe",
+    "Light mag. 3.2 earthquake - 39 km west of San Felipe, Estado de Baja California, Mexico, on Wednesday, Oct 21, 2026, at 02:45 am (GMT -7)"
    ]
   },
   {
-   "termino": "vientos santa",
-   "n": 16,
-   "n_previo": 4,
-   "momento": 12,
+   "termino": "pescadores felipe",
+   "n": 15,
+   "n_previo": 1,
+   "momento": 14,
    "zonas": {
-    "Tijuana": 11,
-    "Playas de Rosarito": 4,
-    "Tecate": 3,
+    "San Felipe": 15,
     "Ensenada": 1,
-    "estatal": 1,
-    "nacional": 1
+    "Mexicali": 1
    },
    "fuentes": {
-    "zeta": 4,
-    "afn": 2,
-    "soltij": 2,
-    "uniradio": 2,
+    "jornadabc": 3,
+    "imparcial": 2,
+    "lavoz": 2,
+    "afn": 1,
+    "bajanews": 1,
     "gn-208187d76ea7": 1,
-    "gn-36bce513f849": 1,
-    "gn-c3e35c36380b": 1,
-    "imparcial": 1,
-    "jornadabc": 1,
-    "rosarito": 1
+    "gn-24bb87bf33e2": 1,
+    "gn-307344280fcb": 1,
+    "gn-7c1bf4c96b92": 1,
+    "gn-875e5e1681c0": 1,
+    "sintesis": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "08a7daf310d887c2",
-    "222a7e0e5fb74ceb",
-    "30315c25415e4582",
-    "3a8a5fa4194a4d58",
-    "4ab43a11c73bdaac",
-    "504f076a7a4b67aa",
-    "6055fcf19c214af3",
-    "6e7813489d28db44",
-    "6fe047167ac495f8",
-    "8b183d0c1f25060c",
-    "b256aa038e73f36f",
-    "d427855012fa6ea8",
-    "e4eb94d30aa85f2d",
-    "fb5dce2f30f46b35",
-    "fdf24e92b95dc526",
-    "fe707a6f32d9f7ae"
+    "3045c1751e175281",
+    "49dfed15f2b0fc9d",
+    "57792fb25bbe8f7b",
+    "6761ff97ebdc994b",
+    "8068e358357253d3",
+    "82341da135b01d34",
+    "83da2f4989ef9bd1",
+    "87543127fa5b644d",
+    "b41033b1900b6d83",
+    "b540dbbd448ad184",
+    "b76660d8f2367a41",
+    "c88f963192422d6e",
+    "cbc8706ded373b84",
+    "ccadc14891d15715",
+    "fa3841ffea58c803"
    ],
    "ejemplos": [
-    "Piden extremar precauciones ante vientos de Santa Ana de hasta 65 km/h",
-    "Vientos de Santa Ana exhiben vulnerabilidad de Tijuana ante incendios",
-    "Vientos de Santa Ana dejan sin luz al 40% de Tijuana, Tecate y Rosarito"
+    "Acuerdan pescadores de San Felipe y autoridades condiciones para usar redes de enmalle",
+    "Ausencia de titular de Pesca marca negociación con pescadores de San Felipe",
+    "Mantienen búsqueda de dos pescadores en San Felipe y una mujer en Ensenada"
    ]
   },
   {
-   "termino": "detienen",
-   "n": 32,
-   "n_previo": 21,
-   "momento": 11,
+   "termino": "river",
+   "n": 15,
+   "n_previo": 3,
+   "momento": 12,
    "zonas": {
-    "Tijuana": 18,
-    "nacional": 6,
-    "Mexicali": 3,
-    "Tecate": 2,
-    "Playas de Rosarito": 1,
-    "San Diego": 1,
-    "San Quintín": 1
+    "Tijuana": 15,
+    "San Diego": 4
    },
    "fuentes": {
-    "imparcial": 10,
-    "afn": 7,
-    "uniradio": 6,
-    "zeta": 3,
-    "rosarito": 2,
-    "elvigia": 1,
-    "gn-31193328f8e2": 1,
-    "gn-8b729feb7e1f": 1,
+    "timessd": 4,
+    "gn-5bad11419dae": 2,
+    "gn-a0ec1cdd1d90": 2,
+    "gn-38795d41fdf6": 1,
+    "gn-65e51224f05e": 1,
+    "gn-8547ebdaed0d": 1,
+    "gn-a956e11d03ed": 1,
+    "gn-b3e1b48b2d36": 1,
+    "kpbs": 1,
+    "voiceofsd": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "0594a084a5057f57",
+    "09689980f2c1b803",
+    "396abf660715a55e",
+    "6adeb00779220989",
+    "6ddfdd4a6accc154",
+    "865aff517b9c4c6c",
+    "a6e3e04b43957912",
+    "adddfd9de27ac9ab",
+    "c5a33f74392e8cd5",
+    "c865421e0361eddc",
+    "da5cae94d81ccf6d",
+    "dcf765eee33eb83e",
+    "eb1f2c8857d2a59a",
+    "f5b50bc6f05d5ef9",
+    "f642ed820b9da820"
+   ],
+   "ejemplos": [
+    "Tijuana River Pollution Sends North America a Bill It Cannot Dredge Away",
+    "Pressure mounts to clean Tijuana River to prevent cross-border pollution ahead of El Niño",
+    "Tijuana River cleanup efforts expand with new construction phase"
+   ]
+  },
+  {
+   "termino": "muere",
+   "n": 23,
+   "n_previo": 12,
+   "momento": 11,
+   "zonas": {
+    "nacional": 13,
+    "Ensenada": 3,
+    "Tijuana": 3,
+    "San Quintín": 2,
+    "Mexicali": 1,
+    "Playas de Rosarito": 1
+   },
+   "fuentes": {
+    "uniradio": 7,
+    "imparcial": 6,
+    "zeta": 4,
+    "afn": 2,
+    "gn-82f33712a155": 1,
+    "gn-a94f5954ad2d": 1,
+    "gn-d33696b00d82": 1,
+    "jornadabc": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "04e6de9a7da7cfa6",
+    "25f23b7cc722e069",
+    "27323086e66a9bdd",
+    "2f99a4637d3fd2b3",
+    "3559e2a69a413eb0",
+    "38558d3352b28d3d",
+    "496ce6685fee3151",
+    "526123f3bb29a1e9",
+    "5977b0337a052dec",
+    "6b396976dc8d4c8e",
+    "8a322b9f718194cc",
+    "92e64c70a5ca46cb",
+    "9c8a61d774dc7133",
+    "a05abdd96f76d1f9",
+    "a207f4706c594c09",
+    "a2ca5fe5d58481b1",
+    "a8aa9638cdedf9db",
+    "a9d881f4b2305cb0",
+    "c41401d993ce893f",
+    "dfd8d89cddb7223e",
+    "e3459df4c8aaa416",
+    "eb4476f70c2cd268",
+    "f207548540893c47"
+   ],
+   "ejemplos": [
+    "Muere mujer tras ataque armado en zona turística de Ensenada",
+    "Muere hombre en volcadura en Villas del Rey II",
+    "VIDEO Muere tras caer de un juego mecánico"
+   ]
+  },
+  {
+   "termino": "choque",
+   "n": 19,
+   "n_previo": 8,
+   "momento": 11,
+   "zonas": {
+    "nacional": 10,
+    "Tijuana": 6,
+    "Playas de Rosarito": 2,
+    "Mexicali": 1,
+    "Tecate": 1
+   },
+   "fuentes": {
+    "imparcial": 7,
+    "uniradio": 4,
+    "afn": 2,
+    "gn-a96a3aaee9d9": 2,
+    "gn-a94f5954ad2d": 1,
+    "gn-df1d301d141c": 1,
+    "jornadabc": 1,
     "lavoz": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "12f042a52ef9e460",
-    "2241009b46905d2b",
-    "243373ceb09a54ae",
-    "27a23e8f9307f5b1",
-    "300bd3f32bc089c2",
-    "35ef9851e7645dd5",
-    "371ab5d83d43e8f9",
-    "5205d869797f8fb1",
-    "59b245d3919d88fa",
-    "60994a77d6445b7d",
-    "686fcc65d4c619b7",
-    "6ed8a4cd513b4854",
-    "74db4c971bec0ff2",
-    "766164fdeb8f7d25",
-    "8425280a28c084c5",
-    "89f14cd5efc0fd9d",
-    "908b474c6809d84a",
-    "93ab937e88b1e129",
-    "968259102e2ae91b",
-    "970071eecc6cfa5d",
-    "9d1583e7a173462c",
-    "bb68e531b7b3f457",
-    "be2d92372d1604e0",
-    "d74cb4eeb5cbdf73",
-    "d8675344aee5a158",
-    "dd9f8bda6b72cf00",
-    "dfc51b2e737f72d2",
-    "e0b02a9b9b9ec633",
-    "e1fc132bc8856e7b",
+    "0411ba84d2cecc40",
+    "091850cd7ae00075",
+    "0b0fcffcab73ab4f",
+    "0d5fd9f2651c128e",
+    "0f8f7545e55f85e8",
+    "1527c0f4a25c8530",
+    "22ee96ffd7509f42",
+    "507aebf46dafd9cf",
+    "525ebebf172b1227",
+    "5394a8ed63040564",
+    "82ff8c8798adc21c",
+    "879bbc66fdea6d6a",
+    "a8aa9638cdedf9db",
+    "b9ff1f9d042603ae",
+    "c09afb4e7f6a9f7a",
+    "cfce7d6da31d15a4",
     "e32797dcfedf33ef",
-    "e9c86e1191449225",
-    "fecada6cfe3a7433"
+    "e3459df4c8aaa416",
+    "e3f8698b9f16f9ed"
    ],
    "ejemplos": [
-    "🚔Detienen a cuatro personas armadas en Tecate, Baja California; el vehículo tenía reporte de robo en EU https://mile.io/4seF2iy",
-    "Lo detienen con navaja y lo relacionan con robos de bicicletas en casinos y gasolinera",
-    "Detienen al presunto agresor de una pareja; les disparó en local de \"maquinitas"
-   ]
-  },
-  {
-   "termino": "seguridad",
-   "n": 30,
-   "n_previo": 19,
-   "momento": 11,
-   "zonas": {
-    "nacional": 15,
-    "San Quintín": 5,
-    "Tijuana": 5,
-    "Playas de Rosarito": 2,
-    "Tecate": 2,
-    "estatal": 1
-   },
-   "fuentes": {
-    "imparcial": 12,
-    "uniradio": 4,
-    "rosarito": 2,
-    "soltij": 2,
-    "afn": 1,
-    "gn-01e4fd06574f": 1,
-    "gn-168efcf455f8": 1,
-    "gn-291a95aaf8ce": 1,
-    "gn-6e69f2b2f169": 1,
-    "gn-906741a25e9c": 1,
-    "gn-af970297e3da": 1,
-    "gn-bb83a042bb9a": 1,
-    "gn-cbb568c94a0c": 1,
-    "gn-dc5a4d87b215": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "11c72953b53df98c",
-    "1c7110e050945fad",
-    "2e41d8388819a706",
-    "40c59a7f71e84284",
-    "4a5073906f0c1912",
-    "5282f818fdcaef78",
-    "5fb567fc8140a4a7",
-    "61e82148c695c1db",
-    "79e8214833d35636",
-    "7aed07bf378c763c",
-    "7d0c602550fb71ce",
-    "7e4b20f66b274050",
-    "84e5365d6f4b690c",
-    "93f7ffdb74f3d3b7",
-    "9f1b3de9ceb44778",
-    "a609d51f0341db09",
-    "a6765df6776d22e1",
-    "a99c488fe8163ed0",
-    "b36ba6c106f009d0",
-    "b3d49ffbb38facd3",
-    "b9feb68cddc06498",
-    "ce68d0122f351a78",
-    "d56c330fca8d878c",
-    "d874ca8d67466a22",
-    "ddd0114674b502a4",
-    "f192c636b35a872b",
-    "f2b8ee1a94568d4e",
-    "f75ab39d1001a2c5",
-    "f80af71378b12cba",
-    "febb31953181b6f3"
-   ],
-   "ejemplos": [
-    "Más de 27 mil agentes de seguridad reprueban controles de confianza en México; Guardia Nacional concentra miles de casos",
-    "La Guardia Nacional tendrá acceso al Centro Nacional de Inteligencia para compartir datos con la Defensa, cruzar información sobre grupos criminales y fortalecer investigaciones y operativos de seguridad en México",
-    "Demandan a Coco Robotics y Serve Robotics en Chicago por presunta recopilación de datos biométricos sin consentimiento mediante robots repartidores que escanean rostros y manos, mientras las empresas rechazan las acusaciones y crece el debate sobre la privacidad, la seguridad y el uso de inteligencia artificial en espacios públicos."
+    "Despiden con globos blancos a Suyva, Dafpne y Maydelin, las tres víctimas del choque en la colonia San Luis",
+    "Tras choque en bulevar Kino donde murieron 4 personas se deben tomar acciones para evitar su repetición: CEDH",
+    "Brandon, de 2 años, sobrevivió al choque del bulevar Kino y ahora su familia teme que el IMSS lo deje sin atención por falta de papeles"
    ]
   },
   {
@@ -1552,78 +996,447 @@
    ]
   },
   {
-   "termino": "sanchez",
-   "n": 16,
-   "n_previo": 5,
+   "termino": "garita",
+   "n": 15,
+   "n_previo": 4,
    "momento": 11,
    "zonas": {
-    "Tijuana": 11,
-    "nacional": 2,
+    "Tijuana": 12,
+    "San Diego": 4,
+    "Mexicali": 1
+   },
+   "fuentes": {
+    "gn-f8497491006c": 5,
+    "imparcial": 5,
+    "soltij": 2,
+    "afn": 1,
+    "lavoz": 1,
+    "zeta": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "0c650ce7360726b9",
+    "1252700acc4ad4fa",
+    "54e31f0fa24b58b9",
+    "5b1c3092592a5fba",
+    "7304f95704761a16",
+    "79c976f385146cad",
+    "7c9de795a1648b9e",
+    "844b94ddaac45730",
+    "88ba953f77fef73d",
+    "8cd86910f1d1f947",
+    "9e7c6c64175037ad",
+    "abbf6ee378af9361",
+    "b8c808d1da860f70",
+    "f050cd347ee1105b",
+    "f496b05c5d4bb4fe"
+   ],
+   "ejemplos": [
+    "🚨 Otay Mesa registra filas de hora y media este miércoles (Datos actualizados a las 3:00 PM PDT) Los cruces fronterizos de Baja California reportan un panorama desigual esta tarde, donde la garita de Otay Mesa se posiciona como el puerto con mayor satur",
+    "Garita Otay II abre parcialmente para camiones vacíos",
+    "Garita de Otay suma demoras de hasta 100 minutos en cruce a EE. UU. (Datos actualizados a las 07:00 am PDT) Esta mañana el cruce hacia los Estados Unidos presenta demoras significativas en la zona fronteriza de Baja California, colocándose la garita d"
+   ]
+  },
+  {
+   "termino": "derrame",
+   "n": 11,
+   "n_previo": 0,
+   "momento": 11,
+   "zonas": {
+    "Playas de Rosarito": 6,
+    "Tijuana": 3,
     "Mexicali": 1,
-    "San Diego": 1,
+    "nacional": 1
+   },
+   "fuentes": {
+    "imparcial": 3,
+    "afn": 1,
+    "gn-062dc8648157": 1,
+    "gn-8b479637ed46": 1,
+    "gn-dc5a4d87b215": 1,
+    "jornadabc": 1,
+    "rosarito": 1,
+    "soltij": 1,
+    "uniradio": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "0791223758cbe10b",
+    "31cbbfb4646067b0",
+    "8824e003c060b1d3",
+    "8cd86910f1d1f947",
+    "92e6ba431a35184e",
+    "a75de336c42c7f94",
+    "af8a93a60567cc29",
+    "c15fa3a3562fadda",
+    "dc188d4320b58b18",
+    "e5a87318cff07ff6",
+    "fa5aa3c2c279a275"
+   ],
+   "ejemplos": [
+    "Alerta en rancherías por derrame de 9 mil litros de diésel en arroyo",
+    "Derrame de 9 mil litros de diésel contamina arroyo de Rosarito; instalan barreras",
+    "Derrame de 9 mil litros de diésel contamina arroyo de Rosarito; instalan barreras"
+   ]
+  },
+  {
+   "termino": "jauregui",
+   "n": 11,
+   "n_previo": 0,
+   "momento": 11,
+   "zonas": {
+    "nacional": 6,
+    "Tijuana": 4,
     "estatal": 1
    },
    "fuentes": {
-    "afn": 4,
-    "imparcial": 4,
-    "jornadabc": 2,
-    "soltij": 2,
-    "lavoz": 1,
+    "imparcial": 3,
+    "uniradio": 3,
+    "zeta": 3,
+    "afn": 2
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "13f8e3614fd62713",
+    "46736c43ccd7a359",
+    "6e6865267236f7f2",
+    "707737fe0023a7d5",
+    "8b8018cfa13172a8",
+    "93ab937e88b1e129",
+    "9910d40deabadccb",
+    "a1d6d934d61e47cc",
+    "acbb4ca567e63b0d",
+    "bfb9be4523d50ae0",
+    "ee1e18964a375127"
+   ],
+   "ejemplos": [
+    "Abogado de César Jáuregui rechazó que sea un “traidor a la patria” porque “no hay pruebas” de que agentes de la CIA participaron en México",
+    "Dictan prisión preventiva oficiosa a César Jáuregui por traición a la patria",
+    "Jáuregui: ¿Traición a la Patria o irresponsabilidad?"
+   ]
+  },
+  {
+   "termino": "pollution crisis chief",
+   "n": 11,
+   "n_previo": 0,
+   "momento": 11,
+   "zonas": {
+    "San Diego": 9,
+    "Tijuana": 6
+   },
+   "fuentes": {
+    "gn-5bad11419dae": 2,
+    "gn-a0ec1cdd1d90": 2,
+    "gn-a956e11d03ed": 2,
+    "gn-46bc88bd6277": 1,
+    "gn-65e51224f05e": 1,
+    "gn-8547ebdaed0d": 1,
+    "kpbs": 1,
+    "timessd": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "09689980f2c1b803",
+    "4adfc52d173e6d0e",
+    "6adeb00779220989",
+    "8328b73cdbaa3e71",
+    "865aff517b9c4c6c",
+    "acfb3cc295dd72c0",
+    "adddfd9de27ac9ab",
+    "c2ae3aeeeae6caa0",
+    "c865421e0361eddc",
+    "dcf765eee33eb83e",
+    "fcd8c8bcb702b3b8"
+   ],
+   "ejemplos": [
+    "San Diego County appoints first Pollution Crisis Chief to tackle Tijuana River sewage crisis",
+    "County appoints pollution crisis chief to tackle Tijuana River issues",
+    "San Diego County's new ‘Pollution Crisis Chief' to tackle Tijuana River sewage problem"
+   ]
+  },
+  {
+   "termino": "santa",
+   "n": 26,
+   "n_previo": 16,
+   "momento": 10,
+   "zonas": {
+    "Tijuana": 17,
+    "nacional": 7,
+    "Playas de Rosarito": 3,
+    "Tecate": 3,
+    "Mexicali": 1,
+    "estatal": 1
+   },
+   "fuentes": {
+    "soltij": 6,
+    "imparcial": 5,
+    "zeta": 4,
+    "jornadabc": 3,
+    "uniradio": 3,
+    "afn": 1,
+    "gn-208187d76ea7": 1,
+    "gn-36bce513f849": 1,
+    "gn-3d33531b3bed": 1,
+    "gn-c3e35c36380b": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "08a7daf310d887c2",
+    "10833c85e4d13ed1",
+    "222a7e0e5fb74ceb",
+    "2c022b4f7129c0e6",
+    "2d6c56a9a2811b24",
+    "30315c25415e4582",
+    "3a8a5fa4194a4d58",
+    "48c6be52da72a439",
+    "4ab43a11c73bdaac",
+    "504f076a7a4b67aa",
+    "545ada7393d36e0b",
+    "8b183d0c1f25060c",
+    "9e1cf887b9ccda4d",
+    "9e924fc79f2135b3",
+    "a9ddfc6bdab6c39a",
+    "ad2e8ad4e91bb86a",
+    "b256aa038e73f36f",
+    "cd18fbb54f57f6f0",
+    "d427855012fa6ea8",
+    "d85437cd65ce7786",
+    "e07e8551a9e95cea",
+    "e2e850469366660d",
+    "e4eb94d30aa85f2d",
+    "e9a45f33ca7b4558",
+    "fdf24e92b95dc526",
+    "fe707a6f32d9f7ae"
+   ],
+   "ejemplos": [
+    "Retiran sellos de clausura y ahora siete viviendas en riesgo por cortes de tierra en Pedregal de Santa Julia",
+    "Frente frío traerá lluvias y descenso de temperatura a Tijuana tras el calor de Santa Ana",
+    "Corte ilegal en cerro del Pedregal de Santa Julia deja 7 casas en riesgo"
+   ]
+  },
+  {
+   "termino": "homicidio",
+   "n": 19,
+   "n_previo": 9,
+   "momento": 10,
+   "zonas": {
+    "Tecate": 6,
+    "nacional": 4,
+    "Tijuana": 3,
+    "Ensenada": 2,
+    "Mexicali": 2,
+    "San Felipe": 1,
+    "estatal": 1
+   },
+   "fuentes": {
+    "imparcial": 5,
+    "afn": 2,
+    "lavoz": 2,
+    "gn-24bb87bf33e2": 1,
+    "gn-291a95aaf8ce": 1,
+    "gn-301061e140e7": 1,
+    "gn-36bce513f849": 1,
+    "gn-6327d1dd772f": 1,
+    "gn-cf84c1e7e819": 1,
+    "gn-df1d301d141c": 1,
     "radarbc": 1,
     "uniradio": 1,
     "zeta": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "0a6960e266503810",
-    "210a94acd5ddb6ca",
-    "236683926e7db6e0",
-    "2a0a362415698dd3",
-    "2ede72708ad573ce",
-    "32dc1d6a6882b44d",
-    "378d5f450bf3ab87",
-    "3d92fd8196f7bc42",
-    "5c1789b8cbcc4e27",
-    "6b306e9eedaaf115",
-    "845b05fa233d99db",
-    "acf977a72c45fb2a",
-    "ad741aa1d8e21b53",
-    "d5cf87973acbd516",
-    "dcbdcbaec47fc869",
-    "f3ca74dd61e1f5db"
+    "1195d987b60ace1b",
+    "131531d6afbc29b3",
+    "1d26100799e3560a",
+    "21ca194525822df6",
+    "2aca1347f646fd3b",
+    "2dd28a578cd25f18",
+    "35a6510aa989d441",
+    "41fe8e42606c7022",
+    "4978b76f597efa82",
+    "4ee32762a69bd8ef",
+    "7a397be865ee6e7f",
+    "800f9272af6ad570",
+    "97e708a7e6208557",
+    "a8122d81455b4187",
+    "c0e4edd7ad1a1956",
+    "c6c7d7101aed2163",
+    "e1b9393853aa7dd4",
+    "f28714426f26f706",
+    "febc2c3bb557541b"
    ],
    "ejemplos": [
-    "Calafias rojas suspenden servicio en Sánchez Taboada por calles dañadas y bloqueos",
-    "Residentes de la Sánchez Taboada impiden el paso de calafias debido a los deslaves en la zona",
-    "Choferes de transporte público suspenden servicio en la Sánchez Taboada tras bloqueo de calles por vecinos"
+    "Vinculan a proceso a dos personas por homicidio calificado en Tijuana",
+    "FGE obtiene vinculación a proceso para \"El bélico\" por homicidio calificado con ventaja",
+    "Aplazan Audiencia en el Homicidio del Activista Sunshine Rodríguez en San Felipe, BC"
+   ]
+  },
+  {
+   "termino": "incendio",
+   "n": 17,
+   "n_previo": 7,
+   "momento": 10,
+   "zonas": {
+    "Tijuana": 7,
+    "nacional": 7,
+    "Playas de Rosarito": 2,
+    "San Diego": 1
+   },
+   "fuentes": {
+    "imparcial": 7,
+    "jornadabc": 3,
+    "afn": 2,
+    "gn-a94f5954ad2d": 1,
+    "gn-a96a3aaee9d9": 1,
+    "gn-df1d301d141c": 1,
+    "soltij": 1,
+    "timessd": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "0c49fbc2148b964d",
+    "1029568ac9ab36a9",
+    "202f6b4dba8b440a",
+    "21994501e9b1f7a1",
+    "2d05d39186c3d66f",
+    "326326b7f0462f46",
+    "426d28e8de8ec23d",
+    "478fd23cd2d21630",
+    "5c629117c8c73bcd",
+    "7696c74097a1124c",
+    "9a5e14190a95c237",
+    "a8aa9638cdedf9db",
+    "c09afb4e7f6a9f7a",
+    "cc80f6d6ebce777f",
+    "cfce7d6da31d15a4",
+    "e0d8313888a4a1ee",
+    "e3459df4c8aaa416"
+   ],
+   "ejemplos": [
+    "Mujer muere calcinada tras choque e incendio en la carretera Escénica",
+    "Incendio Tras Choque Deja una Mujer sin Vida y un Hombre con Quemaduras en Rosarito",
+    "Choque e incendio en la carretera Escénica deja una mujer sin vida y un lesionado grave"
+   ]
+  },
+  {
+   "termino": "carretera",
+   "n": 16,
+   "n_previo": 6,
+   "momento": 10,
+   "zonas": {
+    "San Felipe": 7,
+    "nacional": 5,
+    "Mexicali": 4,
+    "Tecate": 2,
+    "Tijuana": 2,
+    "Ensenada": 1,
+    "Playas de Rosarito": 1
+   },
+   "fuentes": {
+    "imparcial": 8,
+    "gn-a96a3aaee9d9": 2,
+    "lavoz": 2,
+    "gn-8c7449ec9af7": 1,
+    "gn-a94f5954ad2d": 1,
+    "gn-df1d301d141c": 1,
+    "jornadabc": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "031de3e56a95daa7",
+    "091850cd7ae00075",
+    "1527c0f4a25c8530",
+    "302e8255a631cdc3",
+    "4c90b4e8fd9f7a22",
+    "54d85f91859ca522",
+    "662149a6007aa1a6",
+    "83da2f4989ef9bd1",
+    "a8aa9638cdedf9db",
+    "b37ddeec16d4f1fa",
+    "c09afb4e7f6a9f7a",
+    "c96a29994ef9ed37",
+    "caaae7a6d71756c8",
+    "d8971841e18c3537",
+    "e3459df4c8aaa416",
+    "f235e545b773c5ca"
+   ],
+   "ejemplos": [
+    "Procesan a dos hombres tras decomiso de más de una tonelada de cocaína en carretera de SLRC",
+    "Fallece trailero por causas desconocidas en carretera a Tijuana",
+    "Acuerdan Negociación tras Bloqueo de Pescadores en la Carretera Mexicali-San Felipe"
+   ]
+  },
+  {
+   "termino": "pesca",
+   "n": 16,
+   "n_previo": 6,
+   "momento": 10,
+   "zonas": {
+    "San Felipe": 9,
+    "nacional": 5,
+    "Tijuana": 2
+   },
+   "fuentes": {
+    "imparcial": 4,
+    "afn": 1,
+    "gn-1b2c7929af6f": 1,
+    "gn-24bb87bf33e2": 1,
+    "gn-291a95aaf8ce": 1,
+    "gn-307344280fcb": 1,
+    "gn-31193328f8e2": 1,
+    "gn-5f8b423882f1": 1,
+    "gn-7c1bf4c96b92": 1,
+    "gn-e46da57e413e": 1,
+    "gn-effb46cf0b55": 1,
+    "sintesis": 1,
+    "soltij": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "12f6601cf6c3155b",
+    "182c303166e88828",
+    "3e734c17432c57c0",
+    "4e6e6eaa22a788d7",
+    "529e9f2a20f49024",
+    "57792fb25bbe8f7b",
+    "8068e358357253d3",
+    "87543127fa5b644d",
+    "9cc89a5e87026ccd",
+    "a099331d7ee23ea0",
+    "aade0e787b5bd021",
+    "aea9eeb36b837945",
+    "b41033b1900b6d83",
+    "e98b4c80aeaa539d",
+    "ecfca6759ef55ea0",
+    "fa56283f902a7299"
+   ],
+   "ejemplos": [
+    "Ausencia de titular de Pesca marca negociación con pescadores de San Felipe",
+    "Tras años de inconformidades en San Felipe, modifican polígonos de pesca",
+    "Nuevos polígonos de pesca aún no benefician a las familias de San Felipe"
    ]
   }
  ],
  "descartados": [
   {
    "termino": "estados",
-   "n": 64,
+   "n": 59,
    "porque": "duplica «estados unidos»"
   },
   {
    "termino": "unidos",
-   "n": 53,
+   "n": 48,
    "porque": "duplica «estados unidos»"
   },
   {
    "termino": "mama",
-   "n": 28,
+   "n": 25,
    "porque": "duplica «cancer mama»"
   },
   {
-   "termino": "tormenta",
-   "n": 27,
-   "porque": "duplica «tormenta rachel»"
-  },
-  {
-   "termino": "vaquita",
-   "n": 22,
-   "porque": "duplica «vaquita marina»"
+   "termino": "proteccion",
+   "n": 24,
+   "porque": "duplica «proteccion civil»"
   },
   {
    "termino": "civil",
@@ -1631,24 +1444,9 @@
    "porque": "duplica «proteccion civil»"
   },
   {
-   "termino": "afectadas",
-   "n": 19,
-   "porque": "duplica «afectadas rachel»"
-  },
-  {
    "termino": "frio",
-   "n": 19,
+   "n": 18,
    "porque": "duplica «frente frio»"
-  },
-  {
-   "termino": "leon",
-   "n": 15,
-   "porque": "duplica «papa leon»"
-  },
-  {
-   "termino": "chief",
-   "n": 14,
-   "porque": "duplica «pollution crisis chief»"
   },
   {
    "termino": "pollution crisis",
@@ -1656,9 +1454,19 @@
    "porque": "duplica «pollution crisis chief»"
   },
   {
-   "termino": "huracan",
+   "termino": "tormenta",
+   "n": 14,
+   "porque": "duplica «tormenta rachel»"
+  },
+  {
+   "termino": "vaquita",
+   "n": 14,
+   "porque": "duplica «vaquita marina»"
+  },
+  {
+   "termino": "chief",
    "n": 13,
-   "porque": "duplica «huracan trudy»"
+   "porque": "duplica «pollution crisis chief»"
   },
   {
    "termino": "inteligencia",
@@ -1666,9 +1474,9 @@
    "porque": "duplica «inteligencia artificial»"
   },
   {
-   "termino": "papa",
+   "termino": "secretario",
    "n": 12,
-   "porque": "duplica «papa leon»"
+   "porque": "duplica «secretario gobierno»"
   },
   {
    "termino": "crisis chief",
@@ -1676,19 +1484,14 @@
    "porque": "duplica «pollution crisis chief»"
   },
   {
-   "termino": "guerrero",
+   "termino": "huracan",
    "n": 11,
-   "porque": "duplica «vicente guerrero»"
+   "porque": "duplica «huracan trudy»"
   },
   {
-   "termino": "musk",
+   "termino": "patria",
    "n": 11,
-   "porque": "duplica «elon musk»"
-  },
-  {
-   "termino": "secretario",
-   "n": 11,
-   "porque": "duplica «secretario gobierno»"
+   "porque": "duplica «traicion patria»"
   },
   {
    "termino": "traicion",
@@ -1699,33 +1502,93 @@
    "termino": "trudy",
    "n": 11,
    "porque": "duplica «huracan trudy»"
+  },
+  {
+   "termino": "lopez",
+   "n": 10,
+   "porque": "duplica «karim lopez»"
+  },
+  {
+   "termino": "musk",
+   "n": 10,
+   "porque": "duplica «elon musk»"
+  },
+  {
+   "termino": "elon",
+   "n": 9,
+   "porque": "duplica «elon musk»"
   }
  ],
  "por_zona": {
   "Tijuana": {
-   "notas_ventana": 721,
+   "notas_ventana": 651,
    "minimo": 3,
    "temas": [
     {
-     "termino": "santa",
-     "n": 21,
+     "termino": "river",
+     "n": 15,
      "n_previo": 2,
-     "momento": 19,
+     "momento": 13,
      "zonas": {
-      "Tijuana": 21,
+      "Tijuana": 15,
+      "San Diego": 4
+     },
+     "fuentes": {
+      "timessd": 4,
+      "gn-5bad11419dae": 2,
+      "gn-a0ec1cdd1d90": 2,
+      "gn-38795d41fdf6": 1,
+      "gn-65e51224f05e": 1,
+      "gn-8547ebdaed0d": 1,
+      "gn-a956e11d03ed": 1,
+      "gn-b3e1b48b2d36": 1,
+      "kpbs": 1,
+      "voiceofsd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "0594a084a5057f57",
+      "09689980f2c1b803",
+      "396abf660715a55e",
+      "6adeb00779220989",
+      "6ddfdd4a6accc154",
+      "865aff517b9c4c6c",
+      "a6e3e04b43957912",
+      "adddfd9de27ac9ab",
+      "c5a33f74392e8cd5",
+      "c865421e0361eddc",
+      "da5cae94d81ccf6d",
+      "dcf765eee33eb83e",
+      "eb1f2c8857d2a59a",
+      "f5b50bc6f05d5ef9",
+      "f642ed820b9da820"
+     ],
+     "ejemplos": [
+      "Tijuana River Pollution Sends North America a Bill It Cannot Dredge Away",
+      "Pressure mounts to clean Tijuana River to prevent cross-border pollution ahead of El Niño",
+      "Tijuana River cleanup efforts expand with new construction phase"
+     ]
+    },
+    {
+     "termino": "santa",
+     "n": 17,
+     "n_previo": 6,
+     "momento": 11,
+     "zonas": {
+      "Tijuana": 17,
       "Playas de Rosarito": 3,
       "Tecate": 2,
       "Mexicali": 1
      },
      "fuentes": {
-      "soltij": 6,
+      "soltij": 5,
       "zeta": 4,
-      "afn": 3,
       "jornadabc": 3,
-      "imparcial": 2,
+      "afn": 1,
       "gn-208187d76ea7": 1,
       "gn-3d33531b3bed": 1,
-      "gn-c3e35c36380b": 1
+      "gn-c3e35c36380b": 1,
+      "imparcial": 1
      },
      "un_solo_medio": false,
      "notas": [
@@ -1734,20 +1597,16 @@
       "222a7e0e5fb74ceb",
       "30315c25415e4582",
       "3a8a5fa4194a4d58",
-      "3b68d6606000c14f",
       "48c6be52da72a439",
       "4ab43a11c73bdaac",
       "504f076a7a4b67aa",
-      "6e7813489d28db44",
       "9e1cf887b9ccda4d",
       "a9ddfc6bdab6c39a",
-      "ae3c98e8dc967751",
       "b256aa038e73f36f",
       "d85437cd65ce7786",
       "e07e8551a9e95cea",
       "e2e850469366660d",
       "e9a45f33ca7b4558",
-      "fb5dce2f30f46b35",
       "fdf24e92b95dc526",
       "fe707a6f32d9f7ae"
      ],
@@ -1758,61 +1617,17 @@
      ]
     },
     {
-     "termino": "zona",
-     "n": 17,
-     "n_previo": 5,
-     "momento": 12,
-     "zonas": {
-      "Tijuana": 17
-     },
-     "fuentes": {
-      "afn": 4,
-      "imparcial": 4,
-      "soltij": 4,
-      "gn-0b69025e2d99": 1,
-      "gn-31193328f8e2": 1,
-      "gn-f8497491006c": 1,
-      "jornadabc": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "3786719c6c798a0e",
-      "434ce28988ee3398",
-      "4b6cb66e3b730e32",
-      "50d52cdf5372bff9",
-      "54e31f0fa24b58b9",
-      "718e90f53b7bd23a",
-      "8c9c24c1b12397aa",
-      "93e221b5213b9adf",
-      "9a515ddf22bda361",
-      "a3df01d543cb8c2e",
-      "abbf6ee378af9361",
-      "ad741aa1d8e21b53",
-      "b5f0be0077ce7777",
-      "b7ee995c83eab65c",
-      "bb861011a42cd923",
-      "e98b4c80aeaa539d",
-      "f2f11aa4cfa65b15"
-     ],
-     "ejemplos": [
-      "Hubo tres heridos por disparos; uno en barbería y una pareja en zona de invasión",
-      "Residentes de la Sánchez Taboada impiden el paso de calafias debido a los deslaves en la zona",
-      "Garita de Otay suma demoras de hasta 100 minutos en cruce a EE. UU. (Datos actualizados a las 07:00 am PDT) Esta mañana el cruce hacia los Estados Unidos presenta demoras significativas en la zona fronteriza de Baja California, colocándose la garita d"
-     ]
-    },
-    {
      "termino": "crisis",
-     "n": 17,
-     "n_previo": 6,
+     "n": 16,
+     "n_previo": 5,
      "momento": 11,
      "zonas": {
-      "Tijuana": 17,
+      "Tijuana": 16,
       "San Diego": 6
      },
      "fuentes": {
       "timessd": 5,
-      "afn": 4,
+      "afn": 3,
       "gn-a0ec1cdd1d90": 2,
       "gn-5bad11419dae": 1,
       "gn-8547ebdaed0d": 1,
@@ -1825,7 +1640,6 @@
      "notas": [
       "09689980f2c1b803",
       "30946750e9a6e27f",
-      "3365d65cb4d04db1",
       "348a46bb4d0503b6",
       "396abf660715a55e",
       "42dc5116bd4c560e",
@@ -1848,202 +1662,108 @@
      ]
     },
     {
-     "termino": "mujer",
-     "n": 12,
-     "n_previo": 2,
+     "termino": "frente",
+     "n": 10,
+     "n_previo": 0,
      "momento": 10,
      "zonas": {
-      "Tijuana": 12
+      "Tijuana": 10
      },
      "fuentes": {
-      "afn": 3,
+      "afn": 5,
       "imparcial": 3,
-      "zeta": 3,
-      "jornadabc": 2,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0411ba84d2cecc40",
-      "5205d869797f8fb1",
-      "60f14820ec2fb0b0",
-      "723339d978338297",
-      "9d1583e7a173462c",
-      "a8122d81455b4187",
-      "acf977a72c45fb2a",
-      "b6fa365937ca81f9",
-      "d9d2e611130f72f0",
-      "dd9f8bda6b72cf00",
-      "f3ca74dd61e1f5db",
-      "f5315b11d8dd592e"
-     ],
-     "ejemplos": [
-      "Piden que una mujer asuma la rectoría de la UABC",
-      "Detienen a hombre y mujer por presunto robo de celular en Tijuana",
-      "Choque en la escénica deja una mujer calcinada"
-     ]
-    },
-    {
-     "termino": "vientos santa",
-     "n": 11,
-     "n_previo": 1,
-     "momento": 10,
-     "zonas": {
-      "Tijuana": 11,
-      "Playas de Rosarito": 3,
-      "Tecate": 2
-     },
-     "fuentes": {
-      "zeta": 4,
-      "afn": 2,
-      "gn-208187d76ea7": 1,
-      "gn-c3e35c36380b": 1,
-      "imparcial": 1,
       "jornadabc": 1,
       "soltij": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "08a7daf310d887c2",
-      "222a7e0e5fb74ceb",
-      "30315c25415e4582",
-      "3a8a5fa4194a4d58",
-      "4ab43a11c73bdaac",
-      "504f076a7a4b67aa",
-      "6e7813489d28db44",
-      "b256aa038e73f36f",
-      "fb5dce2f30f46b35",
-      "fdf24e92b95dc526",
-      "fe707a6f32d9f7ae"
+      "787f70c7c128dc1e",
+      "7b46342e61364ddd",
+      "7dc4a59ce6618d4d",
+      "8104c6e0cab2588b",
+      "87aa70000780d1ba",
+      "cfa57de5cb7a968a",
+      "d24576fcc08f836e",
+      "e2c8a01e4054ea26",
+      "e9a45f33ca7b4558",
+      "f46acd25145701cc"
      ],
      "ejemplos": [
-      "Piden extremar precauciones ante vientos de Santa Ana de hasta 65 km/h",
-      "Vientos de Santa Ana exhiben vulnerabilidad de Tijuana ante incendios",
-      "Vientos de Santa Ana dejan sin luz al 40% de Tijuana, Tecate y Rosarito"
+      "Colocan \"narcomanta\" frente a un jardín de niños en Palaco",
+      "Prevén lluvias y descenso de temperaturas por ingreso de frente frío en BC",
+      "Frente frío traerá lluvias y descenso de temperatura a Tijuana tras el calor de Santa Ana"
      ]
     },
     {
-     "termino": "viviendas",
-     "n": 19,
-     "n_previo": 10,
+     "termino": "garita",
+     "n": 12,
+     "n_previo": 3,
      "momento": 9,
      "zonas": {
-      "Tijuana": 19
+      "Tijuana": 12,
+      "San Diego": 2
      },
      "fuentes": {
-      "afn": 5,
-      "soltij": 4,
-      "imparcial": 3,
-      "zeta": 3,
-      "jornadabc": 2,
-      "uniradio": 2
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "1029568ac9ab36a9",
-      "1a6ec168621e0e13",
-      "2d05d39186c3d66f",
-      "2f9343ee277e4709",
-      "46c0ccdfde8fdce4",
-      "48c6be52da72a439",
-      "59ffd09282a24e74",
-      "5c629117c8c73bcd",
-      "5f5dd707f587cffe",
-      "688512902b36c828",
-      "7696c74097a1124c",
-      "848da98f86af91ca",
-      "a3df01d543cb8c2e",
-      "b7ee995c83eab65c",
-      "bd7fa70eded29127",
-      "c4a6cee66dc60e16",
-      "d40b0d8255cc1f0b",
-      "e1fe2c53e8019d62",
-      "e2e850469366660d"
-     ],
-     "ejemplos": [
-      "Conagua inicia demolición de viviendas en invasión del Río Tijuana",
-      "Retiran escombros y demuelen viviendas tras desalojo en Arroyo de La Presa en Tijuana",
-      "Demuelen viviendas en la canalización del Río Tijuana y retiran materiales que obstruyen el cauce"
-     ]
-    },
-    {
-     "termino": "river",
-     "n": 14,
-     "n_previo": 5,
-     "momento": 9,
-     "zonas": {
-      "Tijuana": 14,
-      "San Diego": 4
-     },
-     "fuentes": {
-      "timessd": 4,
-      "gn-5bad11419dae": 2,
-      "gn-a0ec1cdd1d90": 2,
-      "gn-38795d41fdf6": 1,
-      "gn-65e51224f05e": 1,
-      "gn-8547ebdaed0d": 1,
-      "gn-a956e11d03ed": 1,
-      "kpbs": 1,
-      "voiceofsd": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0594a084a5057f57",
-      "09689980f2c1b803",
-      "396abf660715a55e",
-      "6adeb00779220989",
-      "6ddfdd4a6accc154",
-      "865aff517b9c4c6c",
-      "a6e3e04b43957912",
-      "adddfd9de27ac9ab",
-      "c5a33f74392e8cd5",
-      "c865421e0361eddc",
-      "da5cae94d81ccf6d",
-      "dcf765eee33eb83e",
-      "eb1f2c8857d2a59a",
-      "f5b50bc6f05d5ef9"
-     ],
-     "ejemplos": [
-      "Pressure mounts to clean Tijuana River to prevent cross-border pollution ahead of El Niño",
-      "Tijuana River cleanup efforts expand with new construction phase",
-      "San Diego County appoints first Pollution Crisis Chief to tackle Tijuana River sewage crisis"
-     ]
-    },
-    {
-     "termino": "estados unidos",
-     "n": 11,
-     "n_previo": 2,
-     "momento": 9,
-     "zonas": {
-      "Tijuana": 11,
-      "Mexicali": 1,
-      "San Diego": 1,
-      "Tecate": 1
-     },
-     "fuentes": {
-      "imparcial": 4,
+      "imparcial": 5,
       "gn-f8497491006c": 3,
-      "afn": 2,
-      "soltij": 2
+      "soltij": 2,
+      "afn": 1,
+      "zeta": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "093195d3d2e2a180",
-      "0ea0eb02a3bf8d2d",
-      "23ae5730aec1b4f5",
+      "0c650ce7360726b9",
+      "1252700acc4ad4fa",
       "54e31f0fa24b58b9",
-      "58d660cca12466e4",
-      "5f566f0f997fbe7c",
-      "695536c0c93de4d3",
-      "74b4c3c3bd43bcb8",
-      "8e3e969ed2b88102",
-      "c82f59048ae62479",
+      "7304f95704761a16",
+      "844b94ddaac45730",
+      "88ba953f77fef73d",
+      "8cd86910f1d1f947",
+      "9e7c6c64175037ad",
+      "abbf6ee378af9361",
+      "b8c808d1da860f70",
+      "f050cd347ee1105b",
       "f496b05c5d4bb4fe"
      ],
      "ejemplos": [
-      "AnclaPowerball y Mega Millions: qué diferencias hay entre los dos grandes sorteos de Estados Unidos",
-      "Garita de Otay suma demoras de hasta 100 minutos en cruce a EE. UU. (Datos actualizados a las 07:00 am PDT) Esta mañana el cruce hacia los Estados Unidos presenta demoras significativas en la zona fronteriza de Baja California, colocándose la garita d",
-      "Elon Musk promete regalar una acción de SpaceX a cada niño en Estados Unidos en 2027"
+      "🚨 Otay Mesa registra filas de hora y media este miércoles (Datos actualizados a las 3:00 PM PDT) Los cruces fronterizos de Baja California reportan un panorama desigual esta tarde, donde la garita de Otay Mesa se posiciona como el puerto con mayor satur",
+      "Garita Otay II abre parcialmente para camiones vacíos",
+      "Garita de Otay suma demoras de hasta 100 minutos en cruce a EE. UU. (Datos actualizados a las 07:00 am PDT) Esta mañana el cruce hacia los Estados Unidos presenta demoras significativas en la zona fronteriza de Baja California, colocándose la garita d"
+     ]
+    },
+    {
+     "termino": "presunto",
+     "n": 12,
+     "n_previo": 3,
+     "momento": 9,
+     "zonas": {
+      "Tijuana": 12
+     },
+     "fuentes": {
+      "afn": 5,
+      "imparcial": 5,
+      "soltij": 1,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "5205d869797f8fb1",
+      "580c6a8dce7ced57",
+      "5f3be2b04ad5462a",
+      "5f566f0f997fbe7c",
+      "6a764e38c132d887",
+      "6ed8a4cd513b4854",
+      "943ad849adb18402",
+      "968259102e2ae91b",
+      "bb68e531b7b3f457",
+      "be2d92372d1604e0",
+      "e1d3904a07a39cd4",
+      "fecada6cfe3a7433"
+     ],
+     "ejemplos": [
+      "Detienen al presunto agresor de una pareja; les disparó en local de \"maquinitas",
+      "Detienen a presunto \"halcón\" que espiaba a autoridades de México y EU",
+      "Denuncian a docente de Tijuana por presunto hostigamiento y agresiones a estudiantes"
      ]
     },
     {
@@ -2082,39 +1802,6 @@
      ]
     },
     {
-     "termino": "frente",
-     "n": 10,
-     "n_previo": 1,
-     "momento": 9,
-     "zonas": {
-      "Tijuana": 10
-     },
-     "fuentes": {
-      "afn": 5,
-      "imparcial": 3,
-      "jornadabc": 1,
-      "soltij": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "787f70c7c128dc1e",
-      "7b46342e61364ddd",
-      "7dc4a59ce6618d4d",
-      "8104c6e0cab2588b",
-      "87aa70000780d1ba",
-      "cfa57de5cb7a968a",
-      "d24576fcc08f836e",
-      "e2c8a01e4054ea26",
-      "e9a45f33ca7b4558",
-      "f46acd25145701cc"
-     ],
-     "ejemplos": [
-      "Colocan \"narcomanta\" frente a un jardín de niños en Palaco",
-      "Prevén lluvias y descenso de temperaturas por ingreso de frente frío en BC",
-      "Frente frío traerá lluvias y descenso de temperatura a Tijuana tras el calor de Santa Ana"
-     ]
-    },
-    {
      "termino": "secretario gobierno",
      "n": 9,
      "n_previo": 0,
@@ -2148,15 +1835,57 @@
      ]
     },
     {
-     "termino": "hombre",
-     "n": 18,
-     "n_previo": 10,
+     "termino": "agua",
+     "n": 17,
+     "n_previo": 9,
      "momento": 8,
      "zonas": {
-      "Tijuana": 18
+      "Tijuana": 17,
+      "Playas de Rosarito": 2
      },
      "fuentes": {
-      "afn": 10,
+      "zeta": 6,
+      "imparcial": 5,
+      "afn": 3,
+      "jornadabc": 2,
+      "soltij": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "0f8f7545e55f85e8",
+      "113069b9d3462159",
+      "222a7e0e5fb74ceb",
+      "22ee96ffd7509f42",
+      "26e94d90dc43cfb4",
+      "2ede72708ad573ce",
+      "36a32133f02860f3",
+      "3a8a5fa4194a4d58",
+      "4ab43a11c73bdaac",
+      "5c1d1f5175787908",
+      "7969f05b3e7b701b",
+      "875c577c163c7992",
+      "99c77ca8246ad9d0",
+      "9ae6ce03ca89ab76",
+      "af345eebf45e9186",
+      "b36ba6c106f009d0",
+      "c9f734c79afe68aa"
+     ],
+     "ejemplos": [
+      "AGUA SUCIA – Hernández",
+      "Acumulan casi dos semanas sin agua en Hacienda Los Laureles en Tijuana",
+      "Fraccionamiento Paseos del Pacífico suma 10 días sin agua; urgen a gobernadora a solucionar desabasto"
+     ]
+    },
+    {
+     "termino": "hombre",
+     "n": 17,
+     "n_previo": 9,
+     "momento": 8,
+     "zonas": {
+      "Tijuana": 17
+     },
+     "fuentes": {
+      "afn": 9,
       "imparcial": 3,
       "jornadabc": 2,
       "uniradio": 2,
@@ -2172,7 +1901,6 @@
       "59b245d3919d88fa",
       "686fcc65d4c619b7",
       "7e6bff4e2e5e07f3",
-      "82d9ad6c8a2e920f",
       "8ddc40faffe5d5ea",
       "958efc51b0bf6805",
       "acf977a72c45fb2a",
@@ -2190,148 +1918,119 @@
      ]
     },
     {
-     "termino": "garita",
-     "n": 11,
-     "n_previo": 3,
+     "termino": "uabc",
+     "n": 12,
+     "n_previo": 4,
      "momento": 8,
      "zonas": {
-      "Tijuana": 11,
-      "San Diego": 1
+      "Tijuana": 12
      },
      "fuentes": {
-      "imparcial": 5,
-      "gn-f8497491006c": 2,
+      "afn": 5,
+      "jornadabc": 3,
       "soltij": 2,
-      "afn": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0c650ce7360726b9",
-      "1252700acc4ad4fa",
-      "54e31f0fa24b58b9",
-      "7304f95704761a16",
-      "844b94ddaac45730",
-      "88ba953f77fef73d",
-      "8cd86910f1d1f947",
-      "abbf6ee378af9361",
-      "b8c808d1da860f70",
-      "f050cd347ee1105b",
-      "f496b05c5d4bb4fe"
-     ],
-     "ejemplos": [
-      "Garita Otay II abre parcialmente para camiones vacíos",
-      "Garita de Otay suma demoras de hasta 100 minutos en cruce a EE. UU. (Datos actualizados a las 07:00 am PDT) Esta mañana el cruce hacia los Estados Unidos presenta demoras significativas en la zona fronteriza de Baja California, colocándose la garita d",
-      "Entra en operaciones la garita Otay II en Tijuana; inicia con camiones vacíos"
-     ]
-    },
-    {
-     "termino": "detienen",
-     "n": 18,
-     "n_previo": 11,
-     "momento": 7,
-     "zonas": {
-      "Tijuana": 18
-     },
-     "fuentes": {
-      "imparcial": 8,
-      "afn": 6,
-      "uniradio": 2,
       "zeta": 2
      },
      "un_solo_medio": false,
      "notas": [
-      "12f042a52ef9e460",
-      "2241009b46905d2b",
-      "35ef9851e7645dd5",
-      "5205d869797f8fb1",
-      "59b245d3919d88fa",
-      "686fcc65d4c619b7",
-      "6ed8a4cd513b4854",
-      "766164fdeb8f7d25",
-      "8425280a28c084c5",
-      "93ab937e88b1e129",
-      "968259102e2ae91b",
-      "9d1583e7a173462c",
-      "bb68e531b7b3f457",
-      "be2d92372d1604e0",
-      "dd9f8bda6b72cf00",
-      "e1fc132bc8856e7b",
-      "e9c86e1191449225",
-      "fecada6cfe3a7433"
+      "4bdae96ea86ef1c8",
+      "50e2818afe35bc24",
+      "525f206654b760a0",
+      "59c2726b4c4f1c07",
+      "5b11da2ce815a83b",
+      "7717a0a2320fde66",
+      "7dc4a59ce6618d4d",
+      "9ebaf49bd53f2ef5",
+      "b9affd32c1fcf403",
+      "d85437cd65ce7786",
+      "d9205bbf8d7771d6",
+      "d9d2e611130f72f0"
      ],
      "ejemplos": [
-      "Detienen al presunto agresor de una pareja; les disparó en local de \"maquinitas",
-      "Detienen a hombre y mujer por presunto robo de celular en Tijuana",
-      "Detienen a dos agentes federales por presunto secuestro exprés y robo en Tijuana"
+      "Piden que una mujer asuma la rectoría de la UABC",
+      "UABC prepara a estudiantes de Turismo y Mercadotecnia para usar IA en el campo laboral",
+      "UABC reconoce buenas prácticas de educación continua con impacto social"
      ]
     },
     {
-     "termino": "presenta",
+     "termino": "gobierno",
+     "n": 20,
+     "n_previo": 13,
+     "momento": 7,
+     "zonas": {
+      "Tijuana": 20
+     },
+     "fuentes": {
+      "afn": 5,
+      "jornadabc": 5,
+      "zeta": 3,
+      "imparcial": 2,
+      "soltij": 2,
+      "uniradio": 2,
+      "gn-12dd3893fdc2": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "1b85665afca2d5bc",
+      "2f9c1268311a80bd",
+      "30049b58371006c1",
+      "415dc0a2f786bc89",
+      "42ab25e0f927a61e",
+      "50d52cdf5372bff9",
+      "6a6e97d1c1c6fe43",
+      "74b3607893b04ed9",
+      "776c587804649b5f",
+      "77cbf134a0586c25",
+      "8a53392bce0698ce",
+      "8ee1ec7198b43a91",
+      "90cef5eb0005739b",
+      "97664a91d619f3c5",
+      "9dab765679ae0dd4",
+      "a477593bae588bb1",
+      "d3b2c52365c9c6cc",
+      "d8212ee75fe83cc2",
+      "f7748b5f33edf6eb",
+      "fb28d5633bf8a30f"
+     ],
+     "ejemplos": [
+      "Gobierno de BC participa en reunión sobre Vivienda para el Bienestar",
+      "Nombran a Miguel Alfredo Nuño García secretario de Gobierno de Tijuana",
+      "Gobierno de BC proyecta 61 mmdp de inversión pública tras mejorar sus finanzas"
+     ]
+    },
+    {
+     "termino": "estados unidos",
      "n": 10,
      "n_previo": 3,
      "momento": 7,
      "zonas": {
       "Tijuana": 10,
-      "San Diego": 1
+      "San Diego": 1,
+      "Tecate": 1
      },
      "fuentes": {
-      "jornadabc": 5,
+      "imparcial": 4,
+      "afn": 2,
       "gn-f8497491006c": 2,
-      "soltij": 2,
-      "afn": 1
+      "soltij": 2
      },
      "un_solo_medio": false,
      "notas": [
-      "258bf2fb277722a8",
-      "378d5f450bf3ab87",
+      "093195d3d2e2a180",
+      "0ea0eb02a3bf8d2d",
+      "23ae5730aec1b4f5",
       "54e31f0fa24b58b9",
-      "61c105021ea2fdcd",
-      "6aa50550f5dcf15e",
-      "89e056f60c7f3702",
-      "9bffe0662e2c76db",
-      "d8212ee75fe83cc2",
-      "e55815873289652d",
+      "58d660cca12466e4",
+      "5f566f0f997fbe7c",
+      "695536c0c93de4d3",
+      "74b4c3c3bd43bcb8",
+      "8e3e969ed2b88102",
       "f496b05c5d4bb4fe"
      ],
      "ejemplos": [
-      "IMSS presenta plan de mejora de condiciones de trabajo",
-      "Zoé Robledo presenta este miércoles la propuesta integral salarial a los trabajadores del IMSS, adelanta Sheinbaum",
-      "Presenta IMDET la octava etapa del Serial Atlético Delegacional 2026"
-     ]
-    },
-    {
-     "termino": "transporte",
-     "n": 9,
-     "n_previo": 2,
-     "momento": 7,
-     "zonas": {
-      "Tijuana": 9
-     },
-     "fuentes": {
-      "soltij": 3,
-      "afn": 2,
-      "imparcial": 1,
-      "jornadabc": 1,
-      "uniradio": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "1696c78ab18b4beb",
-      "2729ab5b7c51c97c",
-      "5c1789b8cbcc4e27",
-      "65aa0d60eb9e1d10",
-      "6f33d50b23c579cf",
-      "77cbf134a0586c25",
-      "7e16f6188ac53c80",
-      "890eeb8b8777210a",
-      "aa317e62820e795f"
-     ],
-     "ejemplos": [
-      "Volcó camión de transporte de personal en el libramiento",
-      "Vuelca camión de transporte de personal en el Libramiento Rosas Magallón de Tijuana",
-      "Autobús de transporte de personal volcó en canalización de Camino Verde"
+      "AnclaPowerball y Mega Millions: qué diferencias hay entre los dos grandes sorteos de Estados Unidos",
+      "Garita de Otay suma demoras de hasta 100 minutos en cruce a EE. UU. (Datos actualizados a las 07:00 am PDT) Esta mañana el cruce hacia los Estados Unidos presenta demoras significativas en la zona fronteriza de Baja California, colocándose la garita d",
+      "Elon Musk promete regalar una acción de SpaceX a cada niño en Estados Unidos en 2027"
      ]
     },
     {
@@ -2430,69 +2129,246 @@
      ]
     },
     {
-     "termino": "uabc",
-     "n": 11,
-     "n_previo": 5,
+     "termino": "zona",
+     "n": 14,
+     "n_previo": 8,
      "momento": 6,
      "zonas": {
-      "Tijuana": 11
+      "Tijuana": 14
      },
      "fuentes": {
-      "afn": 6,
-      "jornadabc": 2,
-      "zeta": 2,
-      "soltij": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "4bdae96ea86ef1c8",
-      "50e2818afe35bc24",
-      "525f206654b760a0",
-      "59c2726b4c4f1c07",
-      "5b11da2ce815a83b",
-      "7dc4a59ce6618d4d",
-      "8c5895793398fe7e",
-      "b9affd32c1fcf403",
-      "d85437cd65ce7786",
-      "d9205bbf8d7771d6",
-      "d9d2e611130f72f0"
-     ],
-     "ejemplos": [
-      "Piden que una mujer asuma la rectoría de la UABC",
-      "Exigen que haya paridad de género en elección de rector de la UABC",
-      "UABC planteará a la CFE reforzar la infraestructura eléctrica de sus planteles"
-     ]
-    },
-    {
-     "termino": "presunto",
-     "n": 10,
-     "n_previo": 4,
-     "momento": 6,
-     "zonas": {
-      "Tijuana": 10
-     },
-     "fuentes": {
-      "imparcial": 5,
-      "afn": 4,
+      "soltij": 4,
+      "afn": 3,
+      "imparcial": 2,
+      "gn-0b69025e2d99": 1,
+      "gn-31193328f8e2": 1,
+      "gn-f8497491006c": 1,
+      "jornadabc": 1,
       "zeta": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "5205d869797f8fb1",
-      "580c6a8dce7ced57",
-      "5f3be2b04ad5462a",
-      "5f566f0f997fbe7c",
-      "6ed8a4cd513b4854",
-      "968259102e2ae91b",
-      "bb68e531b7b3f457",
-      "be2d92372d1604e0",
-      "e1d3904a07a39cd4",
-      "fecada6cfe3a7433"
+      "3786719c6c798a0e",
+      "434ce28988ee3398",
+      "4b6cb66e3b730e32",
+      "50d52cdf5372bff9",
+      "54e31f0fa24b58b9",
+      "8c9c24c1b12397aa",
+      "93e221b5213b9adf",
+      "9a515ddf22bda361",
+      "a3df01d543cb8c2e",
+      "abbf6ee378af9361",
+      "ad741aa1d8e21b53",
+      "b7ee995c83eab65c",
+      "e98b4c80aeaa539d",
+      "f2f11aa4cfa65b15"
      ],
      "ejemplos": [
-      "Detienen al presunto agresor de una pareja; les disparó en local de \"maquinitas",
-      "Detienen a hombre y mujer por presunto robo de celular en Tijuana",
-      "Detienen a dos agentes federales por presunto secuestro exprés y robo en Tijuana"
+      "Hubo tres heridos por disparos; uno en barbería y una pareja en zona de invasión",
+      "Residentes de la Sánchez Taboada impiden el paso de calafias debido a los deslaves en la zona",
+      "Garita de Otay suma demoras de hasta 100 minutos en cruce a EE. UU. (Datos actualizados a las 07:00 am PDT) Esta mañana el cruce hacia los Estados Unidos presenta demoras significativas en la zona fronteriza de Baja California, colocándose la garita d"
+     ]
+    },
+    {
+     "termino": "tres",
+     "n": 11,
+     "n_previo": 5,
+     "momento": 6,
+     "zonas": {
+      "Tijuana": 11,
+      "San Diego": 1
+     },
+     "fuentes": {
+      "afn": 3,
+      "imparcial": 3,
+      "zeta": 2,
+      "gn-0b69025e2d99": 1,
+      "gn-31193328f8e2": 1,
+      "gn-f8497491006c": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "00d316afe1971609",
+      "039fee09c5f17b91",
+      "2241009b46905d2b",
+      "29eb4e4d78fdf65a",
+      "32c2c68f2fa0f8af",
+      "3786719c6c798a0e",
+      "4b6cb66e3b730e32",
+      "5394a8ed63040564",
+      "5d230f44c0e8d854",
+      "8c9c24c1b12397aa",
+      "e3ccd23662532c9b"
+     ],
+     "ejemplos": [
+      "Despiden con globos blancos a Suyva, Dafpne y Maydelin, las tres víctimas del choque en la colonia San Luis",
+      "Detiene la FESC a tres hombres con armas de fuego",
+      "Hubo tres heridos por disparos; uno en barbería y una pareja en zona de invasión"
+     ]
+    },
+    {
+     "termino": "presenta",
+     "n": 9,
+     "n_previo": 3,
+     "momento": 6,
+     "zonas": {
+      "Tijuana": 9,
+      "San Diego": 1
+     },
+     "fuentes": {
+      "jornadabc": 4,
+      "gn-f8497491006c": 2,
+      "soltij": 2,
+      "afn": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "258bf2fb277722a8",
+      "378d5f450bf3ab87",
+      "54e31f0fa24b58b9",
+      "61c105021ea2fdcd",
+      "89e056f60c7f3702",
+      "9bffe0662e2c76db",
+      "d8212ee75fe83cc2",
+      "e55815873289652d",
+      "f496b05c5d4bb4fe"
+     ],
+     "ejemplos": [
+      "IMSS presenta plan de mejora de condiciones de trabajo",
+      "Zoé Robledo presenta este miércoles la propuesta integral salarial a los trabajadores del IMSS, adelanta Sheinbaum",
+      "Presenta IMDET la octava etapa del Serial Atlético Delegacional 2026"
+     ]
+    },
+    {
+     "termino": "vientos santa",
+     "n": 9,
+     "n_previo": 3,
+     "momento": 6,
+     "zonas": {
+      "Tijuana": 9,
+      "Playas de Rosarito": 3,
+      "Tecate": 2
+     },
+     "fuentes": {
+      "zeta": 4,
+      "afn": 1,
+      "gn-208187d76ea7": 1,
+      "gn-c3e35c36380b": 1,
+      "jornadabc": 1,
+      "soltij": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "08a7daf310d887c2",
+      "222a7e0e5fb74ceb",
+      "30315c25415e4582",
+      "3a8a5fa4194a4d58",
+      "4ab43a11c73bdaac",
+      "504f076a7a4b67aa",
+      "b256aa038e73f36f",
+      "fdf24e92b95dc526",
+      "fe707a6f32d9f7ae"
+     ],
+     "ejemplos": [
+      "Piden extremar precauciones ante vientos de Santa Ana de hasta 65 km/h",
+      "Vientos de Santa Ana exhiben vulnerabilidad de Tijuana ante incendios",
+      "Vientos de Santa Ana dejan sin luz al 40% de Tijuana, Tecate y Rosarito"
+     ]
+    },
+    {
+     "termino": "garcia",
+     "n": 8,
+     "n_previo": 2,
+     "momento": 6,
+     "zonas": {
+      "Tijuana": 8
+     },
+     "fuentes": {
+      "afn": 3,
+      "imparcial": 1,
+      "jornadabc": 1,
+      "soltij": 1,
+      "uniradio": 1,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "2bee9b559e9bbbc5",
+      "2f9c1268311a80bd",
+      "4d7445b43eddd32f",
+      "8ee1ec7198b43a91",
+      "a362c0c1d80b0eb6",
+      "a477593bae588bb1",
+      "abf71e0b76f0f61e",
+      "d3b2c52365c9c6cc"
+     ],
+     "ejemplos": [
+      "Nombran a Miguel Alfredo Nuño García secretario de Gobierno de Tijuana",
+      "Miguel Alfredo Nuño García es nombrado secretario de Gobierno de Tijuana",
+      "¡Me acaban de echar una mantequilla! Gael García Bernal vive insólito momento en el FICM"
+     ]
+    },
+    {
+     "termino": "transporte",
+     "n": 8,
+     "n_previo": 2,
+     "momento": 6,
+     "zonas": {
+      "Tijuana": 8
+     },
+     "fuentes": {
+      "afn": 2,
+      "soltij": 2,
+      "imparcial": 1,
+      "jornadabc": 1,
+      "uniradio": 1,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "1696c78ab18b4beb",
+      "2729ab5b7c51c97c",
+      "5c1789b8cbcc4e27",
+      "6f33d50b23c579cf",
+      "77cbf134a0586c25",
+      "7e16f6188ac53c80",
+      "890eeb8b8777210a",
+      "aa317e62820e795f"
+     ],
+     "ejemplos": [
+      "Volcó camión de transporte de personal en el libramiento",
+      "Vuelca camión de transporte de personal en el Libramiento Rosas Magallón de Tijuana",
+      "Autobús de transporte de personal volcó en canalización de Camino Verde"
+     ]
+    },
+    {
+     "termino": "incendio",
+     "n": 7,
+     "n_previo": 1,
+     "momento": 6,
+     "zonas": {
+      "Tijuana": 7
+     },
+     "fuentes": {
+      "jornadabc": 3,
+      "afn": 2,
+      "imparcial": 1,
+      "soltij": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "0c49fbc2148b964d",
+      "1029568ac9ab36a9",
+      "2d05d39186c3d66f",
+      "5c629117c8c73bcd",
+      "7696c74097a1124c",
+      "cc80f6d6ebce777f",
+      "e0d8313888a4a1ee"
+     ],
+     "ejemplos": [
+      "Piden ayuda familias afectadas tras incendio en la colonia Lázaro Cárdenas",
+      "Pemex confirma incendio en plataforma Abkatún-H",
+      "Incendio consume 2 viviendas de madera en la colonia Reforma"
      ]
     },
     {
@@ -2556,199 +2432,40 @@
       "Abandera IMDET a los atletas que competirán en el mundial WKC 2026",
       "Más de 200 colaboradores forman un moño rosa por el Día Mundial de la Lucha contra el Cáncer de Mama"
      ]
-    },
-    {
-     "termino": "caliente",
-     "n": 6,
-     "n_previo": 0,
-     "momento": 6,
-     "zonas": {
-      "Tijuana": 6
-     },
-     "fuentes": {
-      "imparcial": 2,
-      "soltij": 2,
-      "afn": 1,
-      "jornadabc": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "02426defe8eabf21",
-      "0f8f7545e55f85e8",
-      "22ee96ffd7509f42",
-      "5cf505cb417a2071",
-      "be5c359a1fe1838f",
-      "e7a81717ac24a907"
-     ],
-     "ejemplos": [
-      "El Canódromo Caliente celebrará el Día Nacional del Xoloitzcuintle en Tijuana con carreras y alberca para mascotas",
-      "Personal de Caliente forma moño rosa para sensibilizar sobre cáncer de mama",
-      "Empate a 0 entre Xolos y Puebla termina con abucheos de la afición en el Estadio Caliente"
-     ]
-    },
-    {
-     "termino": "pollution crisis chief",
-     "n": 6,
-     "n_previo": 0,
-     "momento": 6,
-     "zonas": {
-      "Tijuana": 6,
-      "San Diego": 4
-     },
-     "fuentes": {
-      "gn-a0ec1cdd1d90": 2,
-      "gn-5bad11419dae": 1,
-      "gn-8547ebdaed0d": 1,
-      "gn-a956e11d03ed": 1,
-      "kpbs": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "09689980f2c1b803",
-      "6adeb00779220989",
-      "865aff517b9c4c6c",
-      "adddfd9de27ac9ab",
-      "c865421e0361eddc",
-      "dcf765eee33eb83e"
-     ],
-     "ejemplos": [
-      "San Diego County appoints first Pollution Crisis Chief to tackle Tijuana River sewage crisis",
-      "County appoints pollution crisis chief to tackle Tijuana River issues",
-      "San Diego County's new ‘Pollution Crisis Chief' to tackle Tijuana River sewage problem"
-     ]
     }
    ]
   },
   "Mexicali": {
-   "notas_ventana": 232,
+   "notas_ventana": 215,
    "minimo": 3,
    "temas": [
     {
-     "termino": "aguilas",
-     "n": 20,
-     "n_previo": 9,
-     "momento": 11,
-     "zonas": {
-      "Mexicali": 20
-     },
-     "fuentes": {
-      "imparcial": 11,
-      "lavoz": 6,
-      "afn": 1,
-      "radarbc": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "09d4cf973d798f02",
-      "184fae4ed962e085",
-      "3c9c7799c94a0df6",
-      "3dd105f458edcd85",
-      "4167abf8559c8faf",
-      "4ae8cd821711fee1",
-      "4caf3242ae911a3c",
-      "4f3848be182e0922",
-      "55c0958117edbc6a",
-      "5cce5152077095d3",
-      "6088c36401454b09",
-      "74d1a1351b1f2554",
-      "7d0c711b5dfc79e6",
-      "93ce33626ce96d79",
-      "97b19c227dc16194",
-      "ad0cda565d553457",
-      "c54b0c9151f5095e",
-      "ea55fd70f6cf9024",
-      "ec0ba4a18d66524b",
-      "f49ef896d6182713"
-     ],
-     "ejemplos": [
-      "Águilas de Mexicali vence 11-10 a Charros y suma cuatro triunfos consecutivos",
-      "Los Águilas ganan en duelo de batazos",
-      "Águilas de Mexicali visita a Charros de Jalisco en su primera serie fuera de casa"
-     ]
-    },
-    {
-     "termino": "soles",
-     "n": 7,
-     "n_previo": 1,
+     "termino": "sistema lagunar",
+     "n": 6,
+     "n_previo": 0,
      "momento": 6,
      "zonas": {
-      "Mexicali": 7
-     },
-     "fuentes": {
-      "imparcial": 4,
-      "lavoz": 3
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "5151f5315ea97faa",
-      "87905a02bec00923",
-      "9f8278578ee3ff0e",
-      "b30cfa4a900ef772",
-      "c597ebfb35ff3054",
-      "c69dff76650f0b4f",
-      "edd44fcb648f415f"
-     ],
-     "ejemplos": [
-      "Soles de Mexicali aplasta 100-60 a Abejas y queda a un triunfo de la Final de Zona",
-      "Soles de Mexicali aplasta 102-58 a Abejas y toma ventaja en semifinales",
-      "Aplastante triunfo de Soles en playoffs"
-     ]
-    },
-    {
-     "termino": "naranjeros",
-     "n": 7,
-     "n_previo": 2,
-     "momento": 5,
-     "zonas": {
-      "Mexicali": 7
-     },
-     "fuentes": {
-      "imparcial": 5,
-      "lavoz": 1,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "3c9c7799c94a0df6",
-      "4caf3242ae911a3c",
-      "7d0c711b5dfc79e6",
-      "93ce33626ce96d79",
-      "9c58afc760f2fedd",
-      "aa38fa2836dda1fc",
-      "ad0cda565d553457"
-     ],
-     "ejemplos": [
-      "¡Remontada naranja! Naranjeros vence a Mexicali en el juego inaugural",
-      "Estallan los Naranjeros con seis carreras en la octava entrada y vencen a los Águilas de Mexicali",
-      "Águilas de Mexicali vs Naranjeros: A qué hora y dónde ver HOY la inauguración de la LMP 2026-27 en Hermosillo"
-     ]
-    },
-    {
-     "termino": "aire acondicionado",
-     "n": 5,
-     "n_previo": 0,
-     "momento": 5,
-     "zonas": {
-      "Mexicali": 5
+      "Mexicali": 6
      },
      "fuentes": {
       "lavoz": 3,
+      "afn": 1,
       "imparcial": 1,
-      "zeta": 1
+      "radarbc": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "27a23e8f9307f5b1",
-      "5c74a2bc756c1574",
-      "99dc33b526d29b13",
-      "aa04abde7d591f66",
-      "ffb3b7f0f3eb01e9"
+      "59384aa6e13a45ad",
+      "6dbb88cb8640cd78",
+      "89654ab31072e9dc",
+      "9d44e1aa87ecef24",
+      "d3de73aa9c327dd9",
+      "e14473c33c7b3203"
      ],
      "ejemplos": [
-      "Emitieron solo 10 sanciones por no encender aire acondicionado en camiones de Mexicali",
-      "Permanece grave de salud menor que ingirió ácido de aire acondicionado",
-      "Mexicali: Detienen a presunto padrastro de menor intoxicado con ácido para aire acondicionado; buscan a su madre"
+      "El Sistema Lagunar de Mexicali se mantendrá como Parque Estatal, afirman",
+      "Se niegan a replantear la protección del Sistema Lagunar; se queda como parque estatal",
+      "Concluyen estudio para declarar Área Natural Protegida al Sistema Lagunar de Mexicali"
      ]
     },
     {
@@ -2809,42 +2526,15 @@
      ]
     },
     {
-     "termino": "sistema lagunar",
-     "n": 5,
-     "n_previo": 0,
-     "momento": 5,
-     "zonas": {
-      "Mexicali": 5
-     },
-     "fuentes": {
-      "lavoz": 3,
-      "imparcial": 1,
-      "radarbc": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "59384aa6e13a45ad",
-      "89654ab31072e9dc",
-      "9d44e1aa87ecef24",
-      "d3de73aa9c327dd9",
-      "e14473c33c7b3203"
-     ],
-     "ejemplos": [
-      "Se niegan a replantear la protección del Sistema Lagunar; se queda como parque estatal",
-      "Concluyen estudio para declarar Área Natural Protegida al Sistema Lagunar de Mexicali",
-      "Avanza en el Congreso propuesta para proteger al sistema lagunar de Mexicali"
-     ]
-    },
-    {
      "termino": "uabc",
-     "n": 7,
-     "n_previo": 3,
+     "n": 8,
+     "n_previo": 4,
      "momento": 4,
      "zonas": {
-      "Mexicali": 7
+      "Mexicali": 8
      },
      "fuentes": {
-      "lavoz": 6,
+      "lavoz": 7,
       "imparcial": 1
      },
      "un_solo_medio": false,
@@ -2852,71 +2542,16 @@
       "0b590275e38213cd",
       "34896a021e294cb2",
       "5a9aef0fb2357998",
+      "65d86b6d14e640f9",
       "99c27b5e3e85ff97",
+      "cd562eafde0064fc",
       "deeab9a63c80ebfe",
-      "e885b432d7a4f67b",
-      "f2f2bc13349fe147"
+      "e885b432d7a4f67b"
      ],
      "ejemplos": [
-      "Fernando González propone reformar la Ley Orgánica de la UABC",
-      "Rachel dejó sin clases presenciales a 900 alumnos de UABC",
-      "Requerirá UABC fuerte inversión para atender altas temperaturas en zona costa"
-     ]
-    },
-    {
-     "termino": "pirotecnia",
-     "n": 6,
-     "n_previo": 2,
-     "momento": 4,
-     "zonas": {
-      "Mexicali": 6
-     },
-     "fuentes": {
-      "lavoz": 3,
-      "afn": 1,
-      "radarbc": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "184fae4ed962e085",
-      "3dd105f458edcd85",
-      "41e266966985113a",
-      "4f3848be182e0922",
-      "5cce5152077095d3",
-      "a298e1fe9c683b4b"
-     ],
-     "ejemplos": [
-      "Hacen llamado OSC’s a no permitir uso de pirotecnia en eventos masivos y a aplicar sanciones a quienes incumplan",
-      "Biomac llama a buscar alternativas al uso de pirotecnia",
-      "Podrían sancionar a las Águilas de Mexicali por usar pirotecnia en acto inaugural"
-     ]
-    },
-    {
-     "termino": "avanza",
-     "n": 5,
-     "n_previo": 1,
-     "momento": 4,
-     "zonas": {
-      "Mexicali": 5
-     },
-     "fuentes": {
-      "lavoz": 3,
-      "jornadabc": 1,
-      "radarbc": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "407458989cfbd0e7",
-      "779e96ca372d2205",
-      "89654ab31072e9dc",
-      "9f5c683f7726c4fd",
-      "e14473c33c7b3203"
-     ],
-     "ejemplos": [
-      "Avanza crisis del sistema de pensiones del Estado",
-      "“Pee Wee” Zepeda avanza a octavos en mundial de boxeo",
-      "Avanza en el Congreso propuesta para proteger al sistema lagunar de Mexicali"
+      "UABC incorpora asignatura para prevenir incendios y refuerza equipo en laboratorios de Mexicali",
+      "Analiza la UABC abrir las puertas a los candidatos en el próximo proceso electoral",
+      "Fernando González propone reformar la Ley Orgánica de la UABC"
      ]
     },
     {
@@ -2948,32 +2583,7 @@
      ]
     },
     {
-     "termino": "abejas",
-     "n": 4,
-     "n_previo": 0,
-     "momento": 4,
-     "zonas": {
-      "Mexicali": 4
-     },
-     "fuentes": {
-      "imparcial": 3,
-      "lavoz": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "5151f5315ea97faa",
-      "9f8278578ee3ff0e",
-      "b30cfa4a900ef772",
-      "c597ebfb35ff3054"
-     ],
-     "ejemplos": [
-      "Soles de Mexicali aplasta 100-60 a Abejas y queda a un triunfo de la Final de Zona",
-      "Soles de Mexicali aplasta 102-58 a Abejas y toma ventaja en semifinales",
-      "Soles de Mexicali inicia los playoffs ante Abejas de León por la quinta estrella"
-     ]
-    },
-    {
-     "termino": "bosque",
+     "termino": "cancer mama",
      "n": 4,
      "n_previo": 0,
      "momento": 4,
@@ -2982,19 +2592,20 @@
      },
      "fuentes": {
       "imparcial": 2,
-      "lavoz": 2
+      "afn": 1,
+      "lavoz": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "790336f4cf3c43db",
-      "957aedab11f30547",
-      "b18508a91f48d338",
-      "b5993b94503d7b5a"
+      "084dc4798a18b502",
+      "21333ffebd0d933f",
+      "2ea3b37b72339e44",
+      "730e5889e68fd156"
      ],
      "ejemplos": [
-      "Bosque de Mexicali y Ecoparque Laguna México preparan altares y eventos por Día de Muertos",
-      "Anuncian quinta edición del altar monumental para mascotas del Bosque",
-      "Resguardan a 40 animales silvestres en el Bosque y Zoológico de Mexicali durante 2026"
+      "Primaria Gabriela Mistral promueve la prevención del cáncer de mama en Mexicali",
+      "Forman lazo rosa en Mexicali; reportan alta cifra de cáncer de mama: Salud",
+      "Unen a Mexicali y el Valle Imperial con lazos contra el cáncer de mama"
      ]
     },
     {
@@ -3024,7 +2635,7 @@
      ]
     },
     {
-     "termino": "electrica",
+     "termino": "hallan",
      "n": 4,
      "n_previo": 0,
      "momento": 4,
@@ -3032,46 +2643,22 @@
       "Mexicali": 4
      },
      "fuentes": {
-      "lavoz": 3,
-      "imparcial": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "2278a63dba42fd48",
-      "3af19343bc93f95e",
-      "8a1f21c1497fac6d",
-      "99dc33b526d29b13"
-     ],
-     "ejemplos": [
-      "Aún sin definir nueva ruta eléctrica para Mexicali",
-      "Continúan pronósticos de lluvias y tormenta eléctrica en Mexicali",
-      "Casi dos horas sin luz: así fue la interrupción eléctrica en el oriente de Mexicali"
-     ]
-    },
-    {
-     "termino": "inauguracion",
-     "n": 4,
-     "n_previo": 0,
-     "momento": 4,
-     "zonas": {
-      "Mexicali": 4
-     },
-     "fuentes": {
-      "imparcial": 2,
-      "radarbc": 1,
+      "afn": 1,
+      "lavoz": 1,
+      "soltij": 1,
       "zeta": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "3c9c7799c94a0df6",
-      "3dd105f458edcd85",
-      "4f3848be182e0922",
-      "ad0cda565d553457"
+      "184b77f757aea837",
+      "5590cf17fe818223",
+      "ab7e50bbbe72da7e",
+      "afc75af5c15b967e"
      ],
      "ejemplos": [
-      "Águilas de Mexicali vs Naranjeros: A qué hora y dónde ver HOY la inauguración de la LMP 2026-27 en Hermosillo",
-      "Águilas de Mexicali será sancionado por utilizar pirotecnia en su inauguración",
-      "Multarán a los Águilas de Mexicali por utilizar pirotecnia durante inauguración"
+      "Hallan a hombre ejecutado con narcomensaje en el ejido Hermosillo, en Mexicali",
+      "Hallan 11 cuerpos y restos óseos en la colonia Las Cachanillas; colectivos acusan deficiencias en peritajes",
+      "Hallan cuerpo maniatado con narcomanta en el Valle de Mexicali"
      ]
     },
     {
@@ -3100,56 +2687,6 @@
      ]
     },
     {
-     "termino": "promueve",
-     "n": 4,
-     "n_previo": 0,
-     "momento": 4,
-     "zonas": {
-      "Mexicali": 4
-     },
-     "fuentes": {
-      "imparcial": 2,
-      "lavoz": 2
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0e78ffa067db97a9",
-      "21333ffebd0d933f",
-      "3dd1bb4cce7f86e0",
-      "9ad160c66ff26b5d"
-     ],
-     "ejemplos": [
-      "Primaria Gabriela Mistral promueve la prevención del cáncer de mama en Mexicali",
-      "Promueve Hospital Hispano Americano salud masculina con carrera atlética",
-      "Promueve Hospitales Hispano Americano salud masculina con carrera atlética"
-     ]
-    },
-    {
-     "termino": "proteccion",
-     "n": 4,
-     "n_previo": 0,
-     "momento": 4,
-     "zonas": {
-      "Mexicali": 4
-     },
-     "fuentes": {
-      "lavoz": 3,
-      "jornadabc": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "3739f4a2a9e89335",
-      "535443e54b38132d",
-      "824b5b9207f621a4",
-      "d3de73aa9c327dd9"
-     ],
-     "ejemplos": [
-      "Se niegan a replantear la protección del Sistema Lagunar; se queda como parque estatal",
-      "Mexicali prepara acciones preventivas con Protección Civil ante contingencias",
-      "Preparan medidas de protección animal en el Zoológico ante el descenso de temperaturas"
-     ]
-    },
-    {
      "termino": "rector unam",
      "n": 4,
      "n_previo": 0,
@@ -3174,171 +2711,375 @@
      ]
     },
     {
-     "termino": "zoologico",
-     "n": 4,
-     "n_previo": 0,
-     "momento": 4,
-     "zonas": {
-      "Mexicali": 4
-     },
-     "fuentes": {
-      "lavoz": 2,
-      "afn": 1,
-      "imparcial": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "139b32f85844a6cf",
-      "3739f4a2a9e89335",
-      "957aedab11f30547",
-      "b18508a91f48d338"
-     ],
-     "ejemplos": [
-      "Preparan medidas de protección animal en el Zoológico ante el descenso de temperaturas",
-      "Resguardan a 40 animales silvestres en el Bosque y Zoológico de Mexicali durante 2026",
-      "Van alrededor de 40 animales resguardados en el Zoológico del Bosque de la Ciudad en 2026"
-     ]
-    },
-    {
-     "termino": "cancer mama",
-     "n": 4,
-     "n_previo": 1,
+     "termino": "soles",
+     "n": 6,
+     "n_previo": 3,
      "momento": 3,
      "zonas": {
-      "Mexicali": 4
-     },
-     "fuentes": {
-      "imparcial": 2,
-      "afn": 1,
-      "lavoz": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "084dc4798a18b502",
-      "21333ffebd0d933f",
-      "2ea3b37b72339e44",
-      "730e5889e68fd156"
-     ],
-     "ejemplos": [
-      "Primaria Gabriela Mistral promueve la prevención del cáncer de mama en Mexicali",
-      "Forman lazo rosa en Mexicali; reportan alta cifra de cáncer de mama: Salud",
-      "Unen a Mexicali y el Valle Imperial con lazos contra el cáncer de mama"
-     ]
-    },
-    {
-     "termino": "conquista",
-     "n": 4,
-     "n_previo": 1,
-     "momento": 3,
-     "zonas": {
-      "Mexicali": 4
+      "Mexicali": 6
      },
      "fuentes": {
       "imparcial": 3,
-      "lavoz": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "129dae8660b878e4",
-      "23dfb22aaba4dad6",
-      "a970f5e6d0901a1b",
-      "e84fe50c37c0f492"
-     ],
-     "ejemplos": [
-      "Manchester Vera Femenil conquista el bicampeonato de la Liga Urbana de Mexicali",
-      "Conquista México el oro en el Tour Continental Norceca Sub-23",
-      "Pumas CREA conquista la Copa Balbuena 2026 tras vencer a Cachanillas en penales."
-     ]
-    },
-    {
-     "termino": "estudiantes",
-     "n": 4,
-     "n_previo": 1,
-     "momento": 3,
-     "zonas": {
-      "Mexicali": 4
-     },
-     "fuentes": {
-      "imparcial": 3,
-      "lavoz": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "9ad160c66ff26b5d",
-      "c14c9659deffbd87",
-      "e1a1f76c49e4b0ad",
-      "f2f2bc13349fe147"
-     ],
-     "ejemplos": [
-      "Estudiantes de Mexicali ganan primer lugar a nivel nacional con plataforma de IA para niños",
-      "Rams Aerospace: estudiantes de la UABC diseñan y prueban aeronaves en Mexicali para competir internacionalmente",
-      "Reúne a más de 5 mil estudiantes “Ambientalízate” en su quinta edición en Mexicali"
-     ]
-    },
-    {
-     "termino": "playoffs",
-     "n": 4,
-     "n_previo": 1,
-     "momento": 3,
-     "zonas": {
-      "Mexicali": 4
-     },
-     "fuentes": {
-      "imparcial": 2,
-      "lavoz": 2
+      "lavoz": 3
      },
      "un_solo_medio": false,
      "notas": [
       "5151f5315ea97faa",
-      "87905a02bec00923",
+      "9f8278578ee3ff0e",
       "b30cfa4a900ef772",
+      "c597ebfb35ff3054",
+      "e5bb01b2f6a6765d",
       "edd44fcb648f415f"
      ],
      "ejemplos": [
-      "Aplastante triunfo de Soles en playoffs",
-      "Soles de Mexicali inicia los playoffs ante Abejas de León por la quinta estrella",
-      "Soles abrirá playoffs ante Abejas"
+      "Soles a sellar el pase a final de zona",
+      "Soles de Mexicali aplasta 100-60 a Abejas y queda a un triunfo de la Final de Zona",
+      "Soles de Mexicali aplasta 102-58 a Abejas y toma ventaja en semifinales"
+     ]
+    },
+    {
+     "termino": "aire",
+     "n": 5,
+     "n_previo": 2,
+     "momento": 3,
+     "zonas": {
+      "Mexicali": 5
+     },
+     "fuentes": {
+      "lavoz": 3,
+      "imparcial": 1,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "27a23e8f9307f5b1",
+      "5b22280d4932b972",
+      "5c74a2bc756c1574",
+      "aa04abde7d591f66",
+      "ffb3b7f0f3eb01e9"
+     ],
+     "ejemplos": [
+      "Emitieron solo 10 sanciones por no encender aire acondicionado en camiones de Mexicali",
+      "Permanece grave de salud menor que ingirió ácido de aire acondicionado",
+      "Mexicali: Detienen a presunto padrastro de menor intoxicado con ácido para aire acondicionado; buscan a su madre"
+     ]
+    },
+    {
+     "termino": "proyectan",
+     "n": 4,
+     "n_previo": 1,
+     "momento": 3,
+     "zonas": {
+      "Mexicali": 4
+     },
+     "fuentes": {
+      "imparcial": 4
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "03a6ecd8695fc305",
+      "04963dd060a119ad",
+      "0879b50ad9f156bb",
+      "933546a4eea923b8"
+     ],
+     "ejemplos": [
+      "Prevén iniciar en 2027 obras de academia policial en Mexicali; proyectan egresar hasta 200 agentes",
+      "Proyectan restauración del Gimnasio de Mexicali con inversión de 30 millones de pesos",
+      "Aceleran desarrollo urbano en Mexicali: recortan tiempos de trámites y proyectan 16 mil viviendas"
+     ]
+    },
+    {
+     "termino": "acido aire acondicionado",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Mexicali": 3
+     },
+     "fuentes": {
+      "lavoz": 2,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "27a23e8f9307f5b1",
+      "5c74a2bc756c1574",
+      "aa04abde7d591f66"
+     ],
+     "ejemplos": [
+      "Permanece grave de salud menor que ingirió ácido de aire acondicionado",
+      "Mexicali: Detienen a presunto padrastro de menor intoxicado con ácido para aire acondicionado; buscan a su madre",
+      "Niño de dos años se encuentra internado por ingerir ácido de aire acondicionado"
+     ]
+    },
+    {
+     "termino": "aguilas vence",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Mexicali": 3
+     },
+     "fuentes": {
+      "imparcial": 3
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "55c0958117edbc6a",
+      "97b19c227dc16194",
+      "f49ef896d6182713"
+     ],
+     "ejemplos": [
+      "Águilas de Mexicali vence 11-10 a Charros y suma cuatro triunfos consecutivos",
+      "Águilas de Mexicali vence 1-0 a Yaquis con jonrón de Phillip Evans",
+      "¡Remontada épica! Águilas de Mexicali vence 9-8 a Yaquis con hit de Yadir Drake"
+     ]
+    },
+    {
+     "termino": "altas",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Mexicali": 3
+     },
+     "fuentes": {
+      "lavoz": 2,
+      "afn": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "039f6d03b09463cf",
+      "34896a021e294cb2",
+      "c21a75d665fcf367"
+     ],
+     "ejemplos": [
+      "Vinculan a hombre por caso de violencia familiar en Lomas Altas",
+      "Reporta INEGI altas exportaciones en Mexicali en el segundo trimestre de 2026",
+      "Requerirá UABC fuerte inversión para atender altas temperaturas en zona costa"
+     ]
+    },
+    {
+     "termino": "aplasta",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Mexicali": 3
+     },
+     "fuentes": {
+      "imparcial": 3
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "257e3fcce35e3ad3",
+      "9f8278578ee3ff0e",
+      "c597ebfb35ff3054"
+     ],
+     "ejemplos": [
+      "Soles de Mexicali aplasta 100-60 a Abejas y queda a un triunfo de la Final de Zona",
+      "Cetys Mexicali aplasta 68-0 a Monaguillos y mantiene el invicto en la OEFA",
+      "Soles de Mexicali aplasta 102-58 a Abejas y toma ventaja en semifinales"
+     ]
+    },
+    {
+     "termino": "carretera felipe",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Mexicali": 3,
+      "San Felipe": 3
+     },
+     "fuentes": {
+      "gn-df1d301d141c": 1,
+      "imparcial": 1,
+      "lavoz": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "302e8255a631cdc3",
+      "662149a6007aa1a6",
+      "caaae7a6d71756c8"
+     ],
+     "ejemplos": [
+      "Acuerdan Negociación tras Bloqueo de Pescadores en la Carretera Mexicali-San Felipe",
+      "Volcadura en la carretera Mexicali-San Felipe deja cinco lesionados",
+      "Levantan pescadores bloqueo en carretera Mexicali- San Felipe"
+     ]
+    },
+    {
+     "termino": "deficit",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Mexicali": 3
+     },
+     "fuentes": {
+      "lavoz": 2,
+      "imparcial": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "49c7a557ef275212",
+      "96d7ff8bb559d6a8",
+      "deeab9a63c80ebfe"
+     ],
+     "ejemplos": [
+      "Absorbe Mexicali mil 900 MDP por déficit de ISSSTECALI en cuatro años",
+      "Persiste déficit del 40% de luminarias LED en Mexicali y el Valle",
+      "Déficit presupuestario en UABC asciende a 350 millones de pesos"
+     ]
+    },
+    {
+     "termino": "ganan",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Mexicali": 3
+     },
+     "fuentes": {
+      "imparcial": 2,
+      "lavoz": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "4167abf8559c8faf",
+      "b2db11020a9f59dc",
+      "c14c9659deffbd87"
+     ],
+     "ejemplos": [
+      "Los Águilas ganan en duelo de batazos",
+      "Estudiantes de Mexicali ganan primer lugar a nivel nacional con plataforma de IA para niños",
+      "Jóvenes de Mexicali ganan primer lugar a nivel nacional con plataforma de IA para niños"
+     ]
+    },
+    {
+     "termino": "interno",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Mexicali": 3
+     },
+     "fuentes": {
+      "lavoz": 3
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "3b8d7f1f9eb5e898",
+      "718de90a4bcf7b9e",
+      "86362069cb63ef00"
+     ],
+     "ejemplos": [
+      "Sigue DIMOS operando sin reglamento interno de operación",
+      "CEDHBC emite recomendación por tortura y muerte de interno tras recaptura violenta en Mexicali",
+      "Diputado pide debates en proceso interno del PAN"
+     ]
+    },
+    {
+     "termino": "llama",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Mexicali": 3
+     },
+     "fuentes": {
+      "lavoz": 3
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "156284a5e2e57d7c",
+      "41e266966985113a",
+      "da871489ea1dac65"
+     ],
+     "ejemplos": [
+      "Rector de la UNAM llama a garantizar financiamiento para universidades públicas",
+      "Biomac llama a buscar alternativas al uso de pirotecnia",
+      "Llama Julieta Ramírez a medios a no caer en las intenciones de la derecha internacional"
+     ]
+    },
+    {
+     "termino": "lugar",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Mexicali": 3
+     },
+     "fuentes": {
+      "imparcial": 2,
+      "lavoz": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "6d3b8163d925bf07",
+      "b2db11020a9f59dc",
+      "c14c9659deffbd87"
+     ],
+     "ejemplos": [
+      "Estudiantes de Mexicali ganan primer lugar a nivel nacional con plataforma de IA para niños",
+      "Jóvenes de Mexicali ganan primer lugar a nivel nacional con plataforma de IA para niños",
+      "Ven reto en tecnología, tras avance de ley que busca fomentar ventas digitales en lugar del uso de efectivo"
+     ]
+    },
+    {
+     "termino": "muertos",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Mexicali": 3
+     },
+     "fuentes": {
+      "lavoz": 2,
+      "imparcial": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "581fe552f371eaf7",
+      "790336f4cf3c43db",
+      "b338a59d072e6b12"
+     ],
+     "ejemplos": [
+      "Día de Muertos: qué lleva el altar y qué significa cada elemento",
+      "Confirman la realización del Festival Mágico de Luces por Día de Muertos",
+      "Bosque de Mexicali y Ecoparque Laguna México preparan altares y eventos por Día de Muertos"
+     ]
+    },
+    {
+     "termino": "parque estatal",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Mexicali": 3
+     },
+     "fuentes": {
+      "lavoz": 2,
+      "afn": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "6dbb88cb8640cd78",
+      "9d44e1aa87ecef24",
+      "d3de73aa9c327dd9"
+     ],
+     "ejemplos": [
+      "El Sistema Lagunar de Mexicali se mantendrá como Parque Estatal, afirman",
+      "Se niegan a replantear la protección del Sistema Lagunar; se queda como parque estatal",
+      "Estado plantea Parque Estatal del Sistema Lagunar sin la preservación de especies"
      ]
     }
    ]
   },
   "Ensenada": {
-   "notas_ventana": 111,
+   "notas_ventana": 89,
    "minimo": 3,
    "temas": [
-    {
-     "termino": "danos",
-     "n": 7,
-     "n_previo": 1,
-     "momento": 6,
-     "zonas": {
-      "Ensenada": 7,
-      "Tijuana": 1
-     },
-     "fuentes": {
-      "afn": 2,
-      "imparcial": 1,
-      "jornadabc": 1,
-      "lavoz": 1,
-      "uniradio": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "17cc7906eeef23a2",
-      "21305d78ac16c617",
-      "2f7fb38358b868f4",
-      "560e3424c9b2c41b",
-      "8f49694419ab3d6a",
-      "c82e66185ffef63a",
-      "eb2913ca731f0010"
-     ],
-     "ejemplos": [
-      "Ensenada recibe apoyo federal para evaluar daños por tormenta Rachel",
-      "Rachel dejó daños en más de 3 millones de metros cuadrados de vialidades en Ensenada",
-      "Evalúan daños por \"Rachel\" en Ensenada; hay 60 colonias afectadas"
-     ]
-    },
     {
      "termino": "embarcacion",
      "n": 5,
@@ -3366,63 +3107,6 @@
       "Rescatan a 16 personas tras hundimiento de embarcación a 140 millas de Ensenada",
       "Guardia Costera de EU rescata a 16 personas de embarcación hundida a 140 millas de Ensenada; buscan a 11 más",
       "La Guardia Costera interviene en el caso de una embarcación que se hunde a 140 millas al oeste de Ensenada"
-     ]
-    },
-    {
-     "termino": "afectadas rachel",
-     "n": 4,
-     "n_previo": 0,
-     "momento": 4,
-     "zonas": {
-      "Ensenada": 4,
-      "San Quintín": 1
-     },
-     "fuentes": {
-      "gn-906741a25e9c": 1,
-      "gn-b69697f8b5c8": 1,
-      "gn-df1d301d141c": 1,
-      "imparcial": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "275ec1105772f181",
-      "63b9f9ef4109131d",
-      "66a4f4d878a5f2c9",
-      "c29579b9b81a2177"
-     ],
-     "ejemplos": [
-      "Regidores de Ensenada piden investigar al Indivi por regularizar colonias afectadas por Rachel donde hubo muertes",
-      "Llevarán Apoyo a Familias Afectadas por ‘Rachel’ en Ensenada, Baja California",
-      "Sheinbaum reporta mil 500 viviendas afectadas por Rachel en Ensenada y San Quintín"
-     ]
-    },
-    {
-     "termino": "auxilio",
-     "n": 4,
-     "n_previo": 0,
-     "momento": 4,
-     "zonas": {
-      "Ensenada": 4,
-      "San Quintín": 1,
-      "Tijuana": 1
-     },
-     "fuentes": {
-      "afn": 1,
-      "gn-759fc9543d6f": 1,
-      "gn-a96a3aaee9d9": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "2f7fb38358b868f4",
-      "3921e9db5f43eb5a",
-      "4913c7db4c2d8268",
-      "f71e6978f4f9607c"
-     ],
-     "ejemplos": [
-      "¿Qué hace la Marina en Maneadero? Continúan las labores de Auxilio en Baja California por “Rachel”",
-      "Se hunde una embarcación cerca de Ensenada; EU les presta auxilio",
-      "Mantienen operativo de auxilio en Ensenada y San Quintín tras paso de tormenta Rachel; vigilan huracán Simón"
      ]
     },
     {
@@ -3480,35 +3164,6 @@
      ]
     },
     {
-     "termino": "sheinbaum",
-     "n": 4,
-     "n_previo": 0,
-     "momento": 4,
-     "zonas": {
-      "Ensenada": 4,
-      "San Quintín": 2,
-      "Tijuana": 1
-     },
-     "fuentes": {
-      "bajanews": 1,
-      "gn-b69697f8b5c8": 1,
-      "imparcial": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "17cc7906eeef23a2",
-      "2f7fb38358b868f4",
-      "63b9f9ef4109131d",
-      "c5c72dd3f9b0d977"
-     ],
-     "ejemplos": [
-      "Sheinbaum anuncia atención a damnificados por ‘Rachel’ en Ensenada y San Quintín",
-      "Sheinbaum reporta mil 500 viviendas afectadas por Rachel en Ensenada y San Quintín",
-      "Evalúan daños en Ensenada y Tijuana: Sheinbaum promete auxilio inmediato a Baja California"
-     ]
-    },
-    {
      "termino": "cerca",
      "n": 3,
      "n_previo": 0,
@@ -3534,7 +3189,7 @@
      ]
     },
     {
-     "termino": "colonias afectadas",
+     "termino": "cuauhtemoc",
      "n": 3,
      "n_previo": 0,
      "momento": 3,
@@ -3542,19 +3197,20 @@
       "Ensenada": 3
      },
      "fuentes": {
-      "imparcial": 2,
-      "afn": 1
+      "gn-0f4fcb595b6c": 1,
+      "gn-906741a25e9c": 1,
+      "imparcial": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "66a4f4d878a5f2c9",
-      "cda144ea1cd29dc6",
-      "eb2913ca731f0010"
+      "199278e25bded05a",
+      "408962b355c2c325",
+      "cac165598a165c1d"
      ],
      "ejemplos": [
-      "Brigadistas de Coepris desinfectan colonias afectadas por desbordamientos de drenaje en Ensenada tras la tormenta",
-      "Regidores de Ensenada piden investigar al Indivi por regularizar colonias afectadas por Rachel donde hubo muertes",
-      "Evalúan daños por \"Rachel\" en Ensenada; hay 60 colonias afectadas"
+      "Zarpa Buque Velero Cuauhtémoc de Ensenada, continúa su crucero de instrucción “Pacífico Norte 2026”",
+      "Participó personal del Velero Cuauhtémoc en apoyos a Ensenada por Rachel",
+      "Buque Escuela Cuauhtémoc arriba a Ensenada por fenómenos meteorológicos"
      ]
     },
     {
@@ -3583,6 +3239,30 @@
      ]
     },
     {
+     "termino": "muere",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Ensenada": 3
+     },
+     "fuentes": {
+      "zeta": 2,
+      "imparcial": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "04e6de9a7da7cfa6",
+      "496ce6685fee3151",
+      "f207548540893c47"
+     ],
+     "ejemplos": [
+      "Muere mujer tras ataque armado en zona turística de Ensenada",
+      "Muere conductor tras volcarse en vehículo robado en Ensenada",
+      "Muere hombre prensado tras volcadura durante persecución policiaca en Ensenada"
+     ]
+    },
+    {
      "termino": "search",
      "n": 3,
      "n_previo": 0,
@@ -3607,29 +3287,29 @@
      ]
     },
     {
-     "termino": "colonias",
-     "n": 5,
-     "n_previo": 3,
+     "termino": "afectadas rachel",
+     "n": 3,
+     "n_previo": 1,
      "momento": 2,
      "zonas": {
-      "Ensenada": 5
+      "Ensenada": 3,
+      "San Quintín": 1
      },
      "fuentes": {
-      "imparcial": 4,
-      "afn": 1
+      "gn-b69697f8b5c8": 1,
+      "gn-df1d301d141c": 1,
+      "imparcial": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "244d4fb04d106e17",
+      "63b9f9ef4109131d",
       "66a4f4d878a5f2c9",
-      "91a271529caf70bd",
-      "cda144ea1cd29dc6",
-      "eb2913ca731f0010"
+      "c29579b9b81a2177"
      ],
      "ejemplos": [
-      "Brigadistas de Coepris desinfectan colonias afectadas por desbordamientos de drenaje en Ensenada tras la tormenta",
       "Regidores de Ensenada piden investigar al Indivi por regularizar colonias afectadas por Rachel donde hubo muertes",
-      "Marina distribuye 460 mil litros de agua potable en colonias de Ensenada"
+      "Llevarán Apoyo a Familias Afectadas por ‘Rachel’ en Ensenada, Baja California",
+      "Sheinbaum reporta mil 500 viviendas afectadas por Rachel en Ensenada y San Quintín"
      ]
     },
     {
@@ -3654,56 +3334,6 @@
       "Piden investigar a INDIVI por regularización de predios afectados por Rachel en Ensenada",
       "Federación y Estado atienden a afectados por Rachel en Ensenada",
       "Establecen plan para la atención a los afectados por el paso de Rachel en Ensenada"
-     ]
-    },
-    {
-     "termino": "declarar",
-     "n": 3,
-     "n_previo": 1,
-     "momento": 2,
-     "zonas": {
-      "Ensenada": 3
-     },
-     "fuentes": {
-      "elvigia": 1,
-      "lavoz": 1,
-      "radarbc": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "5311b211a1cdf7ed",
-      "5aa54bb80f79f5b4",
-      "c49bef03a66f018a"
-     ],
-     "ejemplos": [
-      "Piden declarar zona de desastre en SQ",
-      "Rechazan declarar desastre en Ensenada",
-      "Habrá consulta para declarar área natural protegida al sistema lagunar"
-     ]
-    },
-    {
-     "termino": "lluvia",
-     "n": 3,
-     "n_previo": 1,
-     "momento": 2,
-     "zonas": {
-      "Ensenada": 3
-     },
-     "fuentes": {
-      "gn-36bce513f849": 1,
-      "imparcial": 1,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "68154ff09dcec01e",
-      "ab0ffbf75070482a",
-      "f06b3212d69af010"
-     ],
-     "ejemplos": [
-      "Rachel dejó en Ensenada el 42% de la lluvia anual en una sola tormenta",
-      "Se prevé lluvia ligera y vientos para Ensenada durante este sábado",
-      "VIDEO.- Rachel dejó 116 mm de lluvia en Ensenada y más de mil incidentes en BC: Protección Civil"
      ]
     },
     {
@@ -3732,86 +3362,6 @@
      ]
     },
     {
-     "termino": "marina",
-     "n": 6,
-     "n_previo": 5,
-     "momento": 1,
-     "zonas": {
-      "Ensenada": 6
-     },
-     "fuentes": {
-      "imparcial": 2,
-      "afn": 1,
-      "elvigia": 1,
-      "gn-759fc9543d6f": 1,
-      "gn-effb46cf0b55": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "244d4fb04d106e17",
-      "3041caa4a0cca001",
-      "3921e9db5f43eb5a",
-      "97bdeef38d1d5ae6",
-      "baa1d1f794c40be9",
-      "be48e524af58a98d"
-     ],
-     "ejemplos": [
-      "Entregó Marina prótesis mamarias",
-      "No aplica declaratoria de emergencia para Ensenada, asegura Marina",
-      "¿Qué hace la Marina en Maneadero? Continúan las labores de Auxilio en Baja California por “Rachel”"
-     ]
-    },
-    {
-     "termino": "caso",
-     "n": 3,
-     "n_previo": 2,
-     "momento": 1,
-     "zonas": {
-      "Ensenada": 3
-     },
-     "fuentes": {
-      "radarbc": 1,
-      "timessd": 1,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "8670771d4aa28c0b",
-      "8e323d3016261d31",
-      "f4fca5d56c8d4c85"
-     ],
-     "ejemplos": [
-      "Suspenden búsqueda de 11 desaparecidos frente a la costa de Ensenada en aparente caso de tráfico de personas",
-      "La Guardia Costera interviene en el caso de una embarcación que se hunde a 140 millas al oeste de Ensenada",
-      "El Radiador: Léase en caso de emergencia"
-     ]
-    },
-    {
-     "termino": "rachel dejo",
-     "n": 3,
-     "n_previo": 2,
-     "momento": 1,
-     "zonas": {
-      "Ensenada": 3
-     },
-     "fuentes": {
-      "gn-36bce513f849": 1,
-      "imparcial": 1,
-      "jornadabc": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "560e3424c9b2c41b",
-      "68154ff09dcec01e",
-      "f06b3212d69af010"
-     ],
-     "ejemplos": [
-      "Rachel dejó en Ensenada el 42% de la lluvia anual en una sola tormenta",
-      "Rachel dejó daños en más de 3 millones de metros cuadrados de vialidades en Ensenada",
-      "VIDEO.- Rachel dejó 116 mm de lluvia en Ensenada y más de mil incidentes en BC: Protección Civil"
-     ]
-    },
-    {
      "termino": "apoyo",
      "n": 4,
      "n_previo": 4,
@@ -3836,57 +3386,6 @@
       "Alistan Paseo Ciclista Rosarito–Ensenada en apoyo a cinco pacientes con cáncer",
       "Reconoce SSCBC a policías y agentes caninos por apoyo tras Rachel en Ensenada",
       "Ensenada recibe apoyo federal para evaluar daños por tormenta Rachel"
-     ]
-    },
-    {
-     "termino": "desastre",
-     "n": 4,
-     "n_previo": 4,
-     "momento": 0,
-     "zonas": {
-      "Ensenada": 4
-     },
-     "fuentes": {
-      "lavoz": 2,
-      "elvigia": 1,
-      "radarbc": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "3ec76bd9a2b82ed9",
-      "5311b211a1cdf7ed",
-      "5aa54bb80f79f5b4",
-      "8cd58cdb6776764a"
-     ],
-     "ejemplos": [
-      "Piden declarar zona de desastre en SQ",
-      "Rechazan declarar desastre en Ensenada",
-      "Descartan declaratoria de desastre para Ensenada"
-     ]
-    },
-    {
-     "termino": "declaratoria",
-     "n": 3,
-     "n_previo": 3,
-     "momento": 0,
-     "zonas": {
-      "Ensenada": 3
-     },
-     "fuentes": {
-      "afn": 1,
-      "lavoz": 1,
-      "radarbc": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "3ec76bd9a2b82ed9",
-      "8cd58cdb6776764a",
-      "baa1d1f794c40be9"
-     ],
-     "ejemplos": [
-      "No aplica declaratoria de emergencia para Ensenada, asegura Marina",
-      "Descartan declaratoria de desastre para Ensenada",
-      "Solicita gobierno de Ensenada declaratoria de desastre natural"
      ]
     },
     {
@@ -3920,50 +3419,96 @@
      ]
     },
     {
-     "termino": "deja",
-     "n": 3,
-     "n_previo": 4,
+     "termino": "marina",
+     "n": 5,
+     "n_previo": 6,
      "momento": -1,
      "zonas": {
-      "Ensenada": 3,
-      "San Quintín": 1,
-      "Tecate": 1
+      "Ensenada": 5
      },
      "fuentes": {
-      "gn-df1d301d141c": 1,
-      "imparcial": 1,
-      "lavoz": 1
+      "afn": 1,
+      "elvigia": 1,
+      "gn-759fc9543d6f": 1,
+      "gn-effb46cf0b55": 1,
+      "imparcial": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "21305d78ac16c617",
-      "c96a29994ef9ed37",
-      "cbd6586215c24ebd"
+      "244d4fb04d106e17",
+      "3921e9db5f43eb5a",
+      "97bdeef38d1d5ae6",
+      "baa1d1f794c40be9",
+      "be48e524af58a98d"
      ],
      "ejemplos": [
-      "Accidente en carretera Ensenada-Tecate deja un muerto y un lesionado",
-      "Tormenta Rachel Deja 571 Casas Dañadas en Ensenada y San Quintín, BC",
-      "Rachel deja daños en 3 mdm2 de vialidades en Ensenada"
+      "Entregó Marina prótesis mamarias",
+      "No aplica declaratoria de emergencia para Ensenada, asegura Marina",
+      "¿Qué hace la Marina en Maneadero? Continúan las labores de Auxilio en Baja California por “Rachel”"
+     ]
+    },
+    {
+     "termino": "colonias",
+     "n": 3,
+     "n_previo": 5,
+     "momento": -2,
+     "zonas": {
+      "Ensenada": 3
+     },
+     "fuentes": {
+      "imparcial": 3
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "244d4fb04d106e17",
+      "66a4f4d878a5f2c9",
+      "cda144ea1cd29dc6"
+     ],
+     "ejemplos": [
+      "Brigadistas de Coepris desinfectan colonias afectadas por desbordamientos de drenaje en Ensenada tras la tormenta",
+      "Regidores de Ensenada piden investigar al Indivi por regularizar colonias afectadas por Rachel donde hubo muertes",
+      "Marina distribuye 460 mil litros de agua potable en colonias de Ensenada"
+     ]
+    },
+    {
+     "termino": "desastre",
+     "n": 3,
+     "n_previo": 5,
+     "momento": -2,
+     "zonas": {
+      "Ensenada": 3
+     },
+     "fuentes": {
+      "lavoz": 2,
+      "elvigia": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "3ec76bd9a2b82ed9",
+      "5311b211a1cdf7ed",
+      "5aa54bb80f79f5b4"
+     ],
+     "ejemplos": [
+      "Piden declarar zona de desastre en SQ",
+      "Rechazan declarar desastre en Ensenada",
+      "Descartan declaratoria de desastre para Ensenada"
      ]
     },
     {
      "termino": "desaparecidos",
-     "n": 4,
-     "n_previo": 6,
-     "momento": -2,
+     "n": 3,
+     "n_previo": 7,
+     "momento": -4,
      "zonas": {
-      "Ensenada": 4,
-      "San Felipe": 1
+      "Ensenada": 3
      },
      "fuentes": {
-      "gn-a7d03561b038": 1,
       "imparcial": 1,
       "jornadabc": 1,
       "timessd": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "22b59f4852956cd1",
       "72c641f852a4684f",
       "de6a5cd4124c6c8d",
       "f4fca5d56c8d4c85"
@@ -3973,46 +3518,141 @@
       "Suspende Guardia Costera de EU búsqueda de desaparecidos en Ensenada",
       "Operativo en el Pacífico: Rescatan a 16 mexicanos tras naufragio cerca de Ensenada y buscan a 11 desaparecidos"
      ]
+    },
+    {
+     "termino": "gobierno",
+     "n": 3,
+     "n_previo": 9,
+     "momento": -6,
+     "zonas": {
+      "Ensenada": 3
+     },
+     "fuentes": {
+      "afn": 1,
+      "jornadabc": 1,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "5e5c5f6ebbb0caf9",
+      "9d21f5bc474548cb",
+      "f883069ba560c452"
+     ],
+     "ejemplos": [
+      "ASF detecta irregularidades por 120 mdp al gobierno de Ensenada",
+      "Anuncia gobierno estatal blindaje a terreno de Ceart Ensenada",
+      "Benefician Gobierno de Ensenada y Shorty's Rescue a 245 perros y gatos en jornada de bienestar animal en Francisco Zarco"
+     ]
+    },
+    {
+     "termino": "tormenta rachel",
+     "n": 4,
+     "n_previo": 22,
+     "momento": -18,
+     "zonas": {
+      "Ensenada": 4,
+      "Mexicali": 1,
+      "San Quintín": 1
+     },
+     "fuentes": {
+      "imparcial": 3,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "07e47a1d364fa08c",
+      "1c1a19183760914c",
+      "c1fecc1d31c651be",
+      "c82e66185ffef63a"
+     ],
+     "ejemplos": [
+      "Bombero de Mexicali participa en búsqueda de personas tras tormenta Rachel en Ensenada",
+      "Restablecen servicios e infraestructura en Ensenada y San Quintín tras el paso de la tormenta Rachel",
+      "Ensenada recibe apoyo federal para evaluar daños por tormenta Rachel"
+     ]
+    },
+    {
+     "termino": "lluvias",
+     "n": 3,
+     "n_previo": 22,
+     "momento": -19,
+     "zonas": {
+      "Ensenada": 3
+     },
+     "fuentes": {
+      "gn-c3e35c36380b": 1,
+      "imparcial": 1,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "2bdafcb0cbd8cbb8",
+      "2f0ad7260ade7a8f",
+      "4cef89c0ba52dd63"
+     ],
+     "ejemplos": [
+      "Prevén lluvias ligeras en Ensenada para este jueves",
+      "Lluvias exhiben rezago en infraestructura pluvial de Ensenada: CICE",
+      "De Hermosillo a Maneadero: viajan a despedir a familiares muertos por lluvias de Rachel"
+     ]
+    },
+    {
+     "termino": "rachel",
+     "n": 20,
+     "n_previo": 67,
+     "momento": -47,
+     "zonas": {
+      "Ensenada": 20,
+      "San Quintín": 3,
+      "Mexicali": 1
+     },
+     "fuentes": {
+      "imparcial": 6,
+      "uniradio": 4,
+      "afn": 2,
+      "jornadabc": 2,
+      "bajanews": 1,
+      "gn-759fc9543d6f": 1,
+      "gn-906741a25e9c": 1,
+      "gn-b69697f8b5c8": 1,
+      "gn-c3e35c36380b": 1,
+      "gn-df1d301d141c": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "07e47a1d364fa08c",
+      "110b06318990e3ff",
+      "1a865810ed3d87dd",
+      "1c1a19183760914c",
+      "220488c5e1d90464",
+      "2f0ad7260ade7a8f",
+      "3921e9db5f43eb5a",
+      "408962b355c2c325",
+      "560e3424c9b2c41b",
+      "63b9f9ef4109131d",
+      "66a4f4d878a5f2c9",
+      "8a2d54e217a80f59",
+      "c1fecc1d31c651be",
+      "c29579b9b81a2177",
+      "c5c72dd3f9b0d977",
+      "c82e66185ffef63a",
+      "d83bf56750a8635b",
+      "ddfd78c6ad95d243",
+      "f06b3212d69af010",
+      "f857805684f3ca7f"
+     ],
+     "ejemplos": [
+      "Bombero de Mexicali participa en búsqueda de personas tras tormenta Rachel en Ensenada",
+      "Regidores de Ensenada piden investigar al Indivi por regularizar colonias afectadas por Rachel donde hubo muertes",
+      "¿Qué hace la Marina en Maneadero? Continúan las labores de Auxilio en Baja California por “Rachel”"
+     ]
     }
    ]
   },
   "Playas de Rosarito": {
-   "notas_ventana": 72,
+   "notas_ventana": 64,
    "minimo": 3,
    "temas": [
-    {
-     "termino": "diesel",
-     "n": 7,
-     "n_previo": 0,
-     "momento": 7,
-     "zonas": {
-      "Playas de Rosarito": 7
-     },
-     "fuentes": {
-      "gn-062dc8648157": 1,
-      "gn-a96a3aaee9d9": 1,
-      "gn-dc5a4d87b215": 1,
-      "gn-f8497491006c": 1,
-      "imparcial": 1,
-      "jornadabc": 1,
-      "rosarito": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0791223758cbe10b",
-      "32fdd9ce86e4f2e9",
-      "7bd9a71bc3b93831",
-      "a75de336c42c7f94",
-      "c15fa3a3562fadda",
-      "dc188d4320b58b18",
-      "e5a87318cff07ff6"
-     ],
-     "ejemplos": [
-      "Alerta en rancherías por derrame de 9 mil litros de diésel en arroyo",
-      "Derrame de 9 mil litros de diésel contamina arroyo de Rosarito; instalan barreras",
-      "Derrame de 9 mil litros de diésel contamina arroyo de Rosarito; instalan barreras"
-     ]
-    },
     {
      "termino": "instalan",
      "n": 6,
@@ -4044,7 +3684,7 @@
      ]
     },
     {
-     "termino": "coordinacion",
+     "termino": "derrame litros diesel",
      "n": 5,
      "n_previo": 0,
      "momento": 5,
@@ -4052,28 +3692,31 @@
       "Playas de Rosarito": 5
      },
      "fuentes": {
-      "rosarito": 4,
-      "uniradio": 1
+      "gn-8b479637ed46": 1,
+      "gn-dc5a4d87b215": 1,
+      "imparcial": 1,
+      "jornadabc": 1,
+      "rosarito": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "47b113ec720cf4f9",
-      "748f3f1cf70d88b3",
-      "84dac86bacc98ba6",
-      "a96f1211fe3273ed",
-      "b7f086904f8c39bd"
+      "0791223758cbe10b",
+      "31cbbfb4646067b0",
+      "c15fa3a3562fadda",
+      "dc188d4320b58b18",
+      "e5a87318cff07ff6"
      ],
      "ejemplos": [
-      "Fortalece DIF Baja California coordinación institucional para la conservación digna en playas de Rosarito",
-      "Rocío Adame se registra para la Coordinación Municipal en Playas de Rosarito",
-      "Araceli Brown se registra para buscar coordinación municipal de Morena en Rosarito"
+      "Alerta en rancherías por derrame de 9 mil litros de diésel en arroyo",
+      "Derrame de 9 mil litros de diésel contamina arroyo de Rosarito; instalan barreras",
+      "Derrame de 9 mil litros de diésel contamina arroyo de Rosarito; instalan barreras"
      ]
     },
     {
      "termino": "municipal",
      "n": 5,
-     "n_previo": 1,
-     "momento": 4,
+     "n_previo": 0,
+     "momento": 5,
      "zonas": {
       "Playas de Rosarito": 5
      },
@@ -4093,138 +3736,6 @@
       "Vendedoras del sobre ruedas en Lucio Blanco protestan en Palacio Municipal",
       "Vendedoras del sobre ruedas en Lucio Blanco protestan en Palacio Municipal de Rosarito",
       "Rocío Adame se registra para la Coordinación Municipal en Playas de Rosarito"
-     ]
-    },
-    {
-     "termino": "derrame litros diesel",
-     "n": 4,
-     "n_previo": 0,
-     "momento": 4,
-     "zonas": {
-      "Playas de Rosarito": 4
-     },
-     "fuentes": {
-      "gn-dc5a4d87b215": 1,
-      "imparcial": 1,
-      "jornadabc": 1,
-      "rosarito": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0791223758cbe10b",
-      "c15fa3a3562fadda",
-      "dc188d4320b58b18",
-      "e5a87318cff07ff6"
-     ],
-     "ejemplos": [
-      "Alerta en rancherías por derrame de 9 mil litros de diésel en arroyo",
-      "Derrame de 9 mil litros de diésel contamina arroyo de Rosarito; instalan barreras",
-      "Derrame de 9 mil litros de diésel contamina arroyo de Rosarito; instalan barreras"
-     ]
-    },
-    {
-     "termino": "diesel contamina arroyo",
-     "n": 4,
-     "n_previo": 0,
-     "momento": 4,
-     "zonas": {
-      "Playas de Rosarito": 4
-     },
-     "fuentes": {
-      "gn-062dc8648157": 1,
-      "gn-dc5a4d87b215": 1,
-      "imparcial": 1,
-      "jornadabc": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0791223758cbe10b",
-      "a75de336c42c7f94",
-      "c15fa3a3562fadda",
-      "dc188d4320b58b18"
-     ],
-     "ejemplos": [
-      "Derrame de 9 mil litros de diésel contamina arroyo de Rosarito; instalan barreras",
-      "Derrame de 9 mil litros de diésel contamina arroyo de Rosarito; instalan barreras",
-      "Derrame de diésel contamina arroyo en Rosarito"
-     ]
-    },
-    {
-     "termino": "vientos santa",
-     "n": 4,
-     "n_previo": 0,
-     "momento": 4,
-     "zonas": {
-      "Playas de Rosarito": 4,
-      "Tijuana": 3,
-      "Tecate": 2
-     },
-     "fuentes": {
-      "gn-208187d76ea7": 1,
-      "gn-c3e35c36380b": 1,
-      "rosarito": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "30315c25415e4582",
-      "3a8a5fa4194a4d58",
-      "6055fcf19c214af3",
-      "b256aa038e73f36f"
-     ],
-     "ejemplos": [
-      "Vientos de Santa Ana dejan sin luz al 40% de Tijuana, Tecate y Rosarito",
-      "Persisten cortes de agua y luz en colonias de Tijuana y Rosarito por vientos de Santa Ana",
-      "Vientos de Santa Ana dejan sin luz al 40% de Tijuana, Tecate y Rosarito"
-     ]
-    },
-    {
-     "termino": "colonia",
-     "n": 4,
-     "n_previo": 1,
-     "momento": 3,
-     "zonas": {
-      "Playas de Rosarito": 4
-     },
-     "fuentes": {
-      "rosarito": 4
-     },
-     "un_solo_medio": true,
-     "notas": [
-      "2a7cd90df3308896",
-      "2bb22bda2f9d5a4e",
-      "354968c6f8d5207c",
-      "b7fefad553b03ff4"
-     ],
-     "ejemplos": [
-      "Tráiler derriba postes en colonia Machado Sur y frena tránsito",
-      "Investigante maltrato animal en colonia Constitución de Playas de Rosarito",
-      "Investigan maltrato animal en colonia Constitución de Playas de Rosarito"
-     ]
-    },
-    {
-     "termino": "morena",
-     "n": 4,
-     "n_previo": 1,
-     "momento": 3,
-     "zonas": {
-      "Playas de Rosarito": 4
-     },
-     "fuentes": {
-      "rosarito": 3,
-      "gn-f8497491006c": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "47b113ec720cf4f9",
-      "748f3f1cf70d88b3",
-      "84dac86bacc98ba6",
-      "d0fb89f3d7b9308e"
-     ],
-     "ejemplos": [
-      "Araceli Brown se registra para buscar coordinación municipal de Morena en Rosarito",
-      "Stephanie Esquivel confirma registro en busca de la coordinación municipal de Morena en Playas de Rosarito",
-      "Fidel Mogollón busca la candidatura de Morena por alcaldía de Rosarito"
      ]
     },
     {
@@ -4274,31 +3785,6 @@
      ]
     },
     {
-     "termino": "ofrecen",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Playas de Rosarito": 3,
-      "Tijuana": 1
-     },
-     "fuentes": {
-      "rosarito": 2,
-      "imparcial": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "17734a7e2ac118e3",
-      "cc08370c2f350044",
-      "e88a9da3c76776d8"
-     ],
-     "ejemplos": [
-      "Ofrecen mastografías y pruebas de salud gratis por Jornada Rosa",
-      "¿La has visto? Buscan en Tijuana y Rosarito a Luna, la perrita de apoyo emocional extraviada por la que ofrecen recompensa",
-      "Ofrecen pláticas de prevención del noviazgo violento a jóvenes del CECyTE"
-     ]
-    },
-    {
      "termino": "primer violentometro deportivo",
      "n": 3,
      "n_previo": 0,
@@ -4321,6 +3807,30 @@
       "Instalan en Unidad Deportiva Ruffo Appel el primer Violentómetro Deportivo de Rosarito",
       "Instalan primer Violentómetro Deportivo en Rosarito para prevenir la violencia",
       "Instalan primer violentómetro deportivo en Rosarito para prevenir la violencia"
+     ]
+    },
+    {
+     "termino": "ruedas lucio blanco",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Playas de Rosarito": 3
+     },
+     "fuentes": {
+      "rosarito": 2,
+      "gn-f8497491006c": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "808289a82b73cffa",
+      "d43029bccc8692bd",
+      "f0040da9a436582b"
+     ],
+     "ejemplos": [
+      "Vendedoras del sobre ruedas en Lucio Blanco protestan en Palacio Municipal",
+      "Vendedoras del sobre ruedas en Lucio Blanco protestan en Palacio Municipal de Rosarito",
+      "Vendedoras del sobre ruedas en Lucio Blanco logran acuerdo con el Ayuntamiento"
      ]
     },
     {
@@ -4347,31 +3857,6 @@
       "Vuelca pipa y derrama 9 mil litros de diésel en arroyo de Playas de Rosarito; activan cerco ecológico",
       "Se vuelca pipa con diésel en el Bulevar 2000, cerca de Playas de Rosarito",
       "Vuelca pipa de combustible en el bulevar 2000, entre Tijuana y Rosarito"
-     ]
-    },
-    {
-     "termino": "agua",
-     "n": 3,
-     "n_previo": 1,
-     "momento": 2,
-     "zonas": {
-      "Playas de Rosarito": 3,
-      "Tijuana": 2
-     },
-     "fuentes": {
-      "zeta": 2,
-      "gn-df1d301d141c": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "3a8a5fa4194a4d58",
-      "3e1c0ee26892b911",
-      "5c1d1f5175787908"
-     ],
-     "ejemplos": [
-      "“Se fue el agua y peor aún sin luz”: reclaman ciudadanos de Tijuana y Rosarito",
-      "Persisten cortes de agua y luz en colonias de Tijuana y Rosarito por vientos de Santa Ana",
-      "Cortes de Luz y Agua Generan Pérdidas en Comercios de Playas de Rosarito"
      ]
     },
     {
@@ -4424,19 +3909,68 @@
      ]
     },
     {
-     "termino": "playas",
-     "n": 16,
-     "n_previo": 20,
-     "momento": -4,
+     "termino": "vientos santa",
+     "n": 3,
+     "n_previo": 1,
+     "momento": 2,
      "zonas": {
-      "Playas de Rosarito": 16
+      "Playas de Rosarito": 3,
+      "Tijuana": 3,
+      "Tecate": 2
      },
      "fuentes": {
-      "rosarito": 10,
+      "gn-208187d76ea7": 1,
+      "gn-c3e35c36380b": 1,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "30315c25415e4582",
+      "3a8a5fa4194a4d58",
+      "b256aa038e73f36f"
+     ],
+     "ejemplos": [
+      "Vientos de Santa Ana dejan sin luz al 40% de Tijuana, Tecate y Rosarito",
+      "Persisten cortes de agua y luz en colonias de Tijuana y Rosarito por vientos de Santa Ana",
+      "Vientos de Santa Ana dejan sin luz al 40% de Tijuana, Tecate y Rosarito"
+     ]
+    },
+    {
+     "termino": "colonia",
+     "n": 3,
+     "n_previo": 2,
+     "momento": 1,
+     "zonas": {
+      "Playas de Rosarito": 3
+     },
+     "fuentes": {
+      "rosarito": 3
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "2a7cd90df3308896",
+      "2bb22bda2f9d5a4e",
+      "b7fefad553b03ff4"
+     ],
+     "ejemplos": [
+      "Tráiler derriba postes en colonia Machado Sur y frena tránsito",
+      "Investigante maltrato animal en colonia Constitución de Playas de Rosarito",
+      "Investigan maltrato animal en colonia Constitución de Playas de Rosarito"
+     ]
+    },
+    {
+     "termino": "playas",
+     "n": 14,
+     "n_previo": 19,
+     "momento": -5,
+     "zonas": {
+      "Playas de Rosarito": 14
+     },
+     "fuentes": {
+      "rosarito": 9,
       "gn-507c32aa93b3": 1,
       "gn-a94f5954ad2d": 1,
       "gn-a96a3aaee9d9": 1,
-      "gn-df1d301d141c": 1,
       "gn-f8497491006c": 1,
       "uniradio": 1
      },
@@ -4445,8 +3979,6 @@
       "2a7cd90df3308896",
       "2bb22bda2f9d5a4e",
       "32fdd9ce86e4f2e9",
-      "3e1c0ee26892b911",
-      "47b113ec720cf4f9",
       "4ca208fe910e928b",
       "615556d2487173ca",
       "748f3f1cf70d88b3",
@@ -4468,7 +4000,7 @@
    ]
   },
   "Tecate": {
-   "notas_ventana": 47,
+   "notas_ventana": 38,
    "minimo": 3,
    "temas": [
     {
@@ -4552,37 +4084,13 @@
      ]
     },
     {
-     "termino": "festival",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Tecate": 3
-     },
-     "fuentes": {
-      "lavoz": 2,
-      "gn-dc1580cd9943": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0e5bedfb395fa36a",
-      "2c5d0198ab0d223a",
-      "2d9e947879782009"
-     ],
-     "ejemplos": [
-      "Tecate Península: ¿cuáles objetos no puedo introducir al festival?",
-      "Invitan a vivir la tradición con el festival \"El pan de la catrina\" en Tecate",
-      "Tecate Península: guía para sobrevivir al festival"
-     ]
-    },
-    {
-     "termino": "localizan",
+     "termino": "localizan menor",
      "n": 3,
      "n_previo": 0,
      "momento": 3,
      "zonas": {
       "Tecate": 3,
-      "Tijuana": 1
+      "Tijuana": 2
      },
      "fuentes": {
       "gn-a96a3aaee9d9": 1,
@@ -4591,14 +4099,14 @@
      },
      "un_solo_medio": false,
      "notas": [
-      "262de0d696d2f7b8",
+      "b558f88e64072d2e",
       "b789c58316a920d2",
       "e3f4535c41bef05f"
      ],
      "ejemplos": [
       "Agentes municipales de Tijuana localizan a menor desaparecido desde mayo en Tecate",
       "Localizan a menor de edad reportado como desaparecido en Tecate desde mayo",
-      "Localizan e Incineran 15 Plantíos y Cuatro Secaderos de Marihuana en Tecate, BC"
+      "Localizan en Tijuana a Menor Reportado como Desaparecido desde Mayo en Tecate, BC"
      ]
     },
     {
@@ -4652,31 +4160,6 @@
      ]
     },
     {
-     "termino": "periodistas marchan",
-     "n": 3,
-     "n_previo": 1,
-     "momento": 2,
-     "zonas": {
-      "Tecate": 3
-     },
-     "fuentes": {
-      "gn-31ae7e9b28e1": 1,
-      "gn-63942f473bec": 1,
-      "gn-cbb568c94a0c": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "37f6d45ce444cb36",
-      "5282f818fdcaef78",
-      "96540e780af9219d"
-     ],
-     "ejemplos": [
-      "Periodistas marchan en Tecate tras irrupción armada en casa de reportero",
-      "Periodistas marchan en Tecate en protestan por agresión contra reportero",
-      "Periodistas marchan en Tecate para exigir seguridad tras irrupción armada"
-     ]
-    },
-    {
      "termino": "vientos santa",
      "n": 3,
      "n_previo": 1,
@@ -4702,68 +4185,18 @@
       "Vientos de Santa Ana dejan sin luz al 40% de Tijuana, Tecate y Rosarito",
       "Gobierno de Tecate emite recomendaciones preventinas ante los vientos de Santa Ana"
      ]
-    },
-    {
-     "termino": "agresion",
-     "n": 3,
-     "n_previo": 4,
-     "momento": -1,
-     "zonas": {
-      "Tecate": 3
-     },
-     "fuentes": {
-      "gn-208187d76ea7": 1,
-      "gn-31ae7e9b28e1": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "3dce4041b5c1729c",
-      "96540e780af9219d",
-      "cf8c11183eab5b25"
-     ],
-     "ejemplos": [
-      "Elevan drones en protesta; FGR ignora agresión al periodista Jorge Caro en Tecate",
-      "Periodistas marchan en Tecate en protestan por agresión contra reportero",
-      "Periodistas protestan en Tecate por agresión y robo contra reportero"
-     ]
-    },
-    {
-     "termino": "reportero",
-     "n": 3,
-     "n_previo": 10,
-     "momento": -7,
-     "zonas": {
-      "Tecate": 3
-     },
-     "fuentes": {
-      "gn-208187d76ea7": 1,
-      "gn-31ae7e9b28e1": 1,
-      "gn-63942f473bec": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "37f6d45ce444cb36",
-      "3dce4041b5c1729c",
-      "96540e780af9219d"
-     ],
-     "ejemplos": [
-      "Periodistas marchan en Tecate tras irrupción armada en casa de reportero",
-      "Periodistas marchan en Tecate en protestan por agresión contra reportero",
-      "Periodistas protestan en Tecate por agresión y robo contra reportero"
-     ]
     }
    ]
   },
   "San Quintín": {
-   "notas_ventana": 48,
+   "notas_ventana": 42,
    "minimo": 3,
    "temas": [
     {
      "termino": "seguridad",
      "n": 5,
-     "n_previo": 1,
-     "momento": 4,
+     "n_previo": 0,
+     "momento": 5,
      "zonas": {
       "San Quintín": 5
      },
@@ -4789,57 +4222,29 @@
      ]
     },
     {
-     "termino": "tormenta rachel",
-     "n": 6,
-     "n_previo": 3,
-     "momento": 3,
-     "zonas": {
-      "San Quintín": 6,
-      "Ensenada": 3
-     },
-     "fuentes": {
-      "imparcial": 3,
-      "gn-a96a3aaee9d9": 1,
-      "gn-df1d301d141c": 1,
-      "gn-e46da57e413e": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "02c9a569a06620f4",
-      "1c1a19183760914c",
-      "ab13a89d38bdeee6",
-      "bfe843e418d84b36",
-      "cbd6586215c24ebd",
-      "f71e6978f4f9607c"
-     ],
-     "ejemplos": [
-      "Restablecen servicios e infraestructura en Ensenada y San Quintín tras el paso de la tormenta Rachel",
-      "Deja tormenta Rachel sin luz por tres días a unidad de la UABC en San Quintín",
-      "UABC en San Quintín permaneció tres días sin luz tras el paso de la tormenta Rachel"
-     ]
-    },
-    {
-     "termino": "calle vicente guerrero",
-     "n": 3,
+     "termino": "vehiculo",
+     "n": 5,
      "n_previo": 0,
-     "momento": 3,
+     "momento": 5,
      "zonas": {
-      "San Quintín": 3
+      "San Quintín": 5
      },
      "fuentes": {
-      "soltij": 2,
-      "gn-338f8f17e509": 1
+      "zeta": 4,
+      "afn": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "2d332709ecd07264",
-      "78709a1dd26bfb14",
-      "faa9a37be3ed5789"
+      "04f60779c85881f1",
+      "4d2e10089d840fcd",
+      "8a322b9f718194cc",
+      "ec0d76138345fc42",
+      "f53e4355ffce7bdf"
      ],
      "ejemplos": [
-      "Gobierno de Ocoyoacac inaugura calle Vicente Guerrero en San Jerónimo Acazulco",
-      "Inauguran calle Vicente Guerrero en San Jerónimo Acazulco, Ocoyoacac",
-      "Concluyen renovación de la calle Vicente Guerrero en Guadalupe Ixcotla, Chiautempan"
+      "Muere hombre tras ser impactado por vehículo de presidencia en San Quintín",
+      "Vehículo de Miriam Cano involucrado en atropellamiento y muerte en San Quintín",
+      "Fallece hombre tras ser impactado por vehículo de presidencia en San Quintín"
      ]
     },
     {
@@ -4917,69 +4322,94 @@
      ]
     },
     {
-     "termino": "deja",
+     "termino": "hombre",
      "n": 3,
      "n_previo": 1,
      "momento": 2,
+     "zonas": {
+      "San Quintín": 3
+     },
+     "fuentes": {
+      "zeta": 2,
+      "soltij": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "04f60779c85881f1",
+      "8a322b9f718194cc",
+      "e5bb61a7acb1103f"
+     ],
+     "ejemplos": [
+      "Muere hombre tras ser impactado por vehículo de presidencia en San Quintín",
+      "Fallece hombre tras ser impactado por vehículo de presidencia en San Quintín",
+      "Localizan a un hombre sin vida en la colonia Vicente Guerrero"
+     ]
+    },
+    {
+     "termino": "tormenta rachel",
+     "n": 3,
+     "n_previo": 6,
+     "momento": -3,
      "zonas": {
       "San Quintín": 3,
       "Ensenada": 1
      },
      "fuentes": {
       "imparcial": 2,
-      "gn-df1d301d141c": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "02c9a569a06620f4",
-      "bfe843e418d84b36",
-      "cbd6586215c24ebd"
-     ],
-     "ejemplos": [
-      "Deja tormenta Rachel sin luz por tres días a unidad de la UABC en San Quintín",
-      "Tormenta Rachel Deja 571 Casas Dañadas en Ensenada y San Quintín, BC",
-      "Tormenta Rachel deja 65 viviendas con pérdida total y otras 193 con daños en San Quintín"
-     ]
-    },
-    {
-     "termino": "paso tormenta rachel",
-     "n": 3,
-     "n_previo": 1,
-     "momento": 2,
-     "zonas": {
-      "San Quintín": 3,
-      "Ensenada": 2
-     },
-     "fuentes": {
-      "gn-a96a3aaee9d9": 1,
-      "gn-e46da57e413e": 1,
-      "imparcial": 1
+      "gn-e46da57e413e": 1
      },
      "un_solo_medio": false,
      "notas": [
       "1c1a19183760914c",
       "ab13a89d38bdeee6",
-      "f71e6978f4f9607c"
+      "bfe843e418d84b36"
      ],
      "ejemplos": [
       "Restablecen servicios e infraestructura en Ensenada y San Quintín tras el paso de la tormenta Rachel",
-      "UABC en San Quintín permaneció tres días sin luz tras el paso de la tormenta Rachel",
-      "Mantienen operativo de auxilio en Ensenada y San Quintín tras paso de tormenta Rachel; vigilan huracán Simón"
+      "Deja tormenta Rachel sin luz por tres días a unidad de la UABC en San Quintín",
+      "UABC en San Quintín permaneció tres días sin luz tras el paso de la tormenta Rachel"
+     ]
+    },
+    {
+     "termino": "rachel",
+     "n": 5,
+     "n_previo": 9,
+     "momento": -4,
+     "zonas": {
+      "San Quintín": 5,
+      "Ensenada": 3
+     },
+     "fuentes": {
+      "imparcial": 2,
+      "bajanews": 1,
+      "gn-b69697f8b5c8": 1,
+      "gn-e46da57e413e": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "1c1a19183760914c",
+      "63b9f9ef4109131d",
+      "ab13a89d38bdeee6",
+      "bfe843e418d84b36",
+      "c5c72dd3f9b0d977"
+     ],
+     "ejemplos": [
+      "Restablecen servicios e infraestructura en Ensenada y San Quintín tras el paso de la tormenta Rachel",
+      "Deja tormenta Rachel sin luz por tres días a unidad de la UABC en San Quintín",
+      "Sheinbaum anuncia atención a damnificados por ‘Rachel’ en Ensenada y San Quintín"
      ]
     },
     {
      "termino": "vicente guerrero",
-     "n": 11,
-     "n_previo": 15,
-     "momento": -4,
+     "n": 9,
+     "n_previo": 16,
+     "momento": -7,
      "zonas": {
-      "San Quintín": 11,
-      "Tijuana": 1
+      "San Quintín": 9
      },
      "fuentes": {
-      "soltij": 4,
+      "soltij": 3,
       "gn-1c37fe9db89e": 1,
-      "gn-235f6770b9cb": 1,
       "gn-338f8f17e509": 1,
       "gn-446f358ab9c4": 1,
       "gn-507c32aa93b3": 1,
@@ -4992,8 +4422,6 @@
       "4371c2a0871e79e3",
       "4e3f9c7e01671754",
       "5edb28bf16283419",
-      "7029483885eb4865",
-      "78709a1dd26bfb14",
       "befbe65af879b9e7",
       "e0ed1a7da81a3a02",
       "e5bb61a7acb1103f",
@@ -5015,17 +4443,17 @@
     {
      "termino": "felipe",
      "n": 46,
-     "n_previo": 32,
-     "momento": 14,
+     "n_previo": 31,
+     "momento": 15,
      "zonas": {
       "San Felipe": 46,
       "Mexicali": 5,
-      "Ensenada": 2
+      "Ensenada": 1
      },
      "fuentes": {
       "imparcial": 10,
-      "lavoz": 6,
-      "gn-13afd86dbb5f": 3,
+      "lavoz": 5,
+      "gn-13afd86dbb5f": 4,
       "gn-507c32aa93b3": 3,
       "gn-8c7449ec9af7": 3,
       "gn-df1d301d141c": 3,
@@ -5037,8 +4465,8 @@
       "gn-24bb87bf33e2": 1,
       "gn-307344280fcb": 1,
       "gn-5f8b423882f1": 1,
+      "gn-7c1bf4c96b92": 1,
       "gn-875e5e1681c0": 1,
-      "gn-a7d03561b038": 1,
       "gn-e46da57e413e": 1,
       "gn-effb46cf0b55": 1,
       "sintesis": 1,
@@ -5052,7 +4480,6 @@
       "15ffc75835fb2be2",
       "161a4e779b79c411",
       "1bd13b695ad75aed",
-      "22b59f4852956cd1",
       "2aca1347f646fd3b",
       "302e8255a631cdc3",
       "3045c1751e175281",
@@ -5068,12 +4495,14 @@
       "5e9044ed5e949e94",
       "662149a6007aa1a6",
       "6761ff97ebdc994b",
+      "8068e358357253d3",
       "82341da135b01d34",
       "83da2f4989ef9bd1",
       "87543127fa5b644d",
       "9cc89a5e87026ccd",
       "a08b900d8c97c81a",
       "aea9eeb36b837945",
+      "aebfa3aea7175c3d",
       "b4090214b09b74ef",
       "b41033b1900b6d83",
       "b540dbbd448ad184",
@@ -5089,23 +4518,22 @@
       "ecb2a3f278e99252",
       "ecfca6759ef55ea0",
       "f235e545b773c5ca",
-      "f30c726ca2c32a93",
       "f8ee7275a616bc57",
       "fa3841ffea58c803"
      ],
      "ejemplos": [
+      "Sismo de magnitud 3.5 sacude las cercanías de San Felipe en Baja California",
       "Investiga FGE ataque armado contra pareja en San Felipe",
-      "Acuerdan pescadores de San Felipe y autoridades condiciones para usar redes de enmalle",
-      "Buscan elevar hasta 600 pesos el kilo de camarón de San Felipe"
+      "Light mag. 3.2 earthquake - 39 km west of San Felipe, Estado de Baja California, Mexico, on Wednesday, Oct 21, 2026, at 02:45 am (GMT -7)"
      ]
     },
     {
      "termino": "pescadores felipe",
-     "n": 14,
-     "n_previo": 3,
-     "momento": 11,
+     "n": 15,
+     "n_previo": 1,
+     "momento": 14,
      "zonas": {
-      "San Felipe": 14,
+      "San Felipe": 15,
       "Ensenada": 1,
       "Mexicali": 1
      },
@@ -5118,6 +4546,7 @@
       "gn-208187d76ea7": 1,
       "gn-24bb87bf33e2": 1,
       "gn-307344280fcb": 1,
+      "gn-7c1bf4c96b92": 1,
       "gn-875e5e1681c0": 1,
       "sintesis": 1
      },
@@ -5127,6 +4556,7 @@
       "49dfed15f2b0fc9d",
       "57792fb25bbe8f7b",
       "6761ff97ebdc994b",
+      "8068e358357253d3",
       "82341da135b01d34",
       "83da2f4989ef9bd1",
       "87543127fa5b644d",
@@ -5140,17 +4570,17 @@
      ],
      "ejemplos": [
       "Acuerdan pescadores de San Felipe y autoridades condiciones para usar redes de enmalle",
-      "Mantienen búsqueda de dos pescadores en San Felipe y una mujer en Ensenada",
-      "Pescadores de San Felipe llevan a acuerdos con Gobierno y levantan bloqueo carretero (video)"
+      "Ausencia de titular de Pesca marca negociación con pescadores de San Felipe",
+      "Mantienen búsqueda de dos pescadores en San Felipe y una mujer en Ensenada"
      ]
     },
     {
      "termino": "pesca",
-     "n": 8,
+     "n": 9,
      "n_previo": 3,
-     "momento": 5,
+     "momento": 6,
      "zonas": {
-      "San Felipe": 8
+      "San Felipe": 9
      },
      "fuentes": {
       "afn": 1,
@@ -5158,6 +4588,7 @@
       "gn-24bb87bf33e2": 1,
       "gn-307344280fcb": 1,
       "gn-5f8b423882f1": 1,
+      "gn-7c1bf4c96b92": 1,
       "gn-e46da57e413e": 1,
       "gn-effb46cf0b55": 1,
       "imparcial": 1
@@ -5167,6 +4598,7 @@
       "3e734c17432c57c0",
       "529e9f2a20f49024",
       "57792fb25bbe8f7b",
+      "8068e358357253d3",
       "87543127fa5b644d",
       "9cc89a5e87026ccd",
       "aea9eeb36b837945",
@@ -5174,38 +4606,9 @@
       "ecfca6759ef55ea0"
      ],
      "ejemplos": [
+      "Ausencia de titular de Pesca marca negociación con pescadores de San Felipe",
       "Tras años de inconformidades en San Felipe, modifican polígonos de pesca",
-      "Nuevos polígonos de pesca aún no benefician a las familias de San Felipe",
-      "San Felipe Ajusta las Reglas de Pesca: Cambian las Zonas Prohibidas en el Alto Golfo de California"
-     ]
-    },
-    {
-     "termino": "carretera felipe",
-     "n": 6,
-     "n_previo": 1,
-     "momento": 5,
-     "zonas": {
-      "San Felipe": 6,
-      "Mexicali": 3
-     },
-     "fuentes": {
-      "lavoz": 3,
-      "imparcial": 2,
-      "gn-df1d301d141c": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "031de3e56a95daa7",
-      "302e8255a631cdc3",
-      "54d85f91859ca522",
-      "662149a6007aa1a6",
-      "caaae7a6d71756c8",
-      "f30c726ca2c32a93"
-     ],
-     "ejemplos": [
-      "Acuerdan Negociación tras Bloqueo de Pescadores en la Carretera Mexicali-San Felipe",
-      "Volcadura en la carretera Mexicali-San Felipe deja cinco lesionados",
-      "Levantan pescadores bloqueo en carretera Mexicali- San Felipe"
+      "Nuevos polígonos de pesca aún no benefician a las familias de San Felipe"
      ]
     },
     {
@@ -5289,6 +4692,34 @@
       "Investiga FGE ataque armado contra pareja en San Felipe",
       "Atacan a Balazos a Pareja de Recién Casados tras su Boda en San Felipe, BC",
       "Sujetos armados lesionados a disparos a pareja en San Felipe"
+     ]
+    },
+    {
+     "termino": "carretera felipe",
+     "n": 5,
+     "n_previo": 2,
+     "momento": 3,
+     "zonas": {
+      "San Felipe": 5,
+      "Mexicali": 3
+     },
+     "fuentes": {
+      "imparcial": 2,
+      "lavoz": 2,
+      "gn-df1d301d141c": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "031de3e56a95daa7",
+      "302e8255a631cdc3",
+      "54d85f91859ca522",
+      "662149a6007aa1a6",
+      "caaae7a6d71756c8"
+     ],
+     "ejemplos": [
+      "Acuerdan Negociación tras Bloqueo de Pescadores en la Carretera Mexicali-San Felipe",
+      "Volcadura en la carretera Mexicali-San Felipe deja cinco lesionados",
+      "Levantan pescadores bloqueo en carretera Mexicali- San Felipe"
      ]
     },
     {
@@ -5416,6 +4847,29 @@
      ]
     },
     {
+     "termino": "west felipe estado",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "San Felipe": 3
+     },
+     "fuentes": {
+      "gn-13afd86dbb5f": 3
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "aebfa3aea7175c3d",
+      "b4090214b09b74ef",
+      "c88336f7901ec80b"
+     ],
+     "ejemplos": [
+      "Light mag. 3.2 earthquake - 39 km west of San Felipe, Estado de Baja California, Mexico, on Wednesday, Oct 21, 2026, at 02:45 am (GMT -7)",
+      "Light mag. 3.2 earthquake (unconfirmed) - 54 km west of San Felipe, Estado de Baja California, Mexico, on Saturday, Oct 17, 2026, at 10:38 pm (GMT -7)",
+      "Light mag. 3.2 earthquake (unconfirmed) - 37 km west of San Felipe, Estado de Baja California, Mexico, on Saturday, Oct 17, 2026, at 01:12 am (GMT -7)"
+     ]
+    },
+    {
      "termino": "busqueda",
      "n": 3,
      "n_previo": 4,
@@ -5458,79 +4912,17 @@
       "3c8c815bfdbb8113"
      ],
      "ejemplos": [
-      "Sismo de magnitud 3.7 sacude el sureste de San Felipe, Baja California",
       "Sismo de magnitud 3.5 sacude las cercanías de San Felipe en Baja California",
+      "Sismo de magnitud 3.7 sacude el sureste de San Felipe, Baja California",
       "Registran sismo de magnitud 3.7 al sureste de San Felipe, Baja California"
      ]
     }
    ]
   },
   "San Diego": {
-   "notas_ventana": 298,
+   "notas_ventana": 271,
    "minimo": 3,
    "temas": [
-    {
-     "termino": "camp pendleton",
-     "n": 10,
-     "n_previo": 0,
-     "momento": 10,
-     "zonas": {
-      "San Diego": 10
-     },
-     "fuentes": {
-      "timessd": 7,
-      "kpbs": 2,
-      "afn": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0eec782ec6bb77d4",
-      "3193e71ca13a2d47",
-      "3378947bd073b31b",
-      "384b55a7466cc781",
-      "3fbec41d866df21b",
-      "46a6dd4c0846d811",
-      "561736bf7a051c4c",
-      "9a5e14190a95c237",
-      "bf370cc1627791ce",
-      "dda0d0db725a6846"
-     ],
-     "ejemplos": [
-      "This tiny mouse is having a big comeback at Camp Pendleton",
-      "UPDATED: Camp Pendleton fire now 65% contained",
-      "Camp Pendleton brush fire now 50% contained"
-     ]
-    },
-    {
-     "termino": "fire",
-     "n": 9,
-     "n_previo": 0,
-     "momento": 9,
-     "zonas": {
-      "San Diego": 9
-     },
-     "fuentes": {
-      "timessd": 7,
-      "kpbs": 2
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0eec782ec6bb77d4",
-      "3378947bd073b31b",
-      "384b55a7466cc781",
-      "3fbec41d866df21b",
-      "88f9ac63f8933dc4",
-      "ad48e9e2f27b8475",
-      "bf370cc1627791ce",
-      "dda0d0db725a6846",
-      "fb3b06f2421e8a01"
-     ],
-     "ejemplos": [
-      "Lawsuit blames San Diego Gas & Electric equipment for fire that destroyed Orange County homes",
-      "Major fire breaks out in Alberta after deadly incident at military base",
-      "Carney says 4 service members killed and dozens injured in fire at Alberta military base"
-     ]
-    },
     {
      "termino": "pollution crisis chief",
      "n": 9,
@@ -5567,25 +4959,168 @@
      ]
     },
     {
-     "termino": "voters",
-     "n": 11,
-     "n_previo": 4,
+     "termino": "fire",
+     "n": 8,
+     "n_previo": 1,
      "momento": 7,
      "zonas": {
-      "San Diego": 11
+      "San Diego": 8
      },
      "fuentes": {
-      "kpbs": 7,
-      "timessd": 3,
+      "timessd": 6,
+      "kpbs": 2
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "0eec782ec6bb77d4",
+      "3378947bd073b31b",
+      "384b55a7466cc781",
+      "88f9ac63f8933dc4",
+      "ad48e9e2f27b8475",
+      "bf370cc1627791ce",
+      "dda0d0db725a6846",
+      "fb3b06f2421e8a01"
+     ],
+     "ejemplos": [
+      "Lawsuit blames San Diego Gas & Electric equipment for fire that destroyed Orange County homes",
+      "Major fire breaks out in Alberta after deadly incident at military base",
+      "Carney says 4 service members killed and dozens injured in fire at Alberta military base"
+     ]
+    },
+    {
+     "termino": "sewage crisis",
+     "n": 5,
+     "n_previo": 0,
+     "momento": 5,
+     "zonas": {
+      "San Diego": 5,
+      "Tijuana": 3
+     },
+     "fuentes": {
+      "gn-a0ec1cdd1d90": 2,
+      "gn-5bad11419dae": 1,
+      "gn-9c4f20ea32c8": 1,
       "inewsource": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "06f18c66c6d5c737",
+      "09689980f2c1b803",
+      "6adeb00779220989",
+      "759521f1bb70fe05",
+      "d56ec34b5dc8a051",
+      "dcf765eee33eb83e"
+     ],
+     "ejemplos": [
+      "San Diego County Names First Chief to Tackle Sewage Crisis",
+      "San Diego County appoints first Pollution Crisis Chief to tackle Tijuana River sewage crisis",
+      "San Diego County names first Pollution Crisis Chief to tackle Tijuana River sewage crisis"
+     ]
+    },
+    {
+     "termino": "county",
+     "n": 18,
+     "n_previo": 14,
+     "momento": 4,
+     "zonas": {
+      "San Diego": 18,
+      "Tijuana": 4
+     },
+     "fuentes": {
+      "timessd": 3,
+      "gn-5bad11419dae": 2,
+      "gn-a0ec1cdd1d90": 2,
+      "gn-a956e11d03ed": 2,
+      "inewsource": 2,
+      "kpbs": 2,
+      "gn-46bc88bd6277": 1,
+      "gn-65e51224f05e": 1,
+      "gn-753bcc7ac031": 1,
+      "gn-9c4f20ea32c8": 1,
+      "voiceofsd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "09689980f2c1b803",
+      "254222cb838f3e05",
+      "4adfc52d173e6d0e",
+      "6adeb00779220989",
+      "759521f1bb70fe05",
+      "8328b73cdbaa3e71",
+      "865aff517b9c4c6c",
+      "992c9538d56a0bcf",
+      "ab282f9ace703929",
+      "acfb3cc295dd72c0",
+      "c2ae3aeeeae6caa0",
+      "dcf765eee33eb83e",
+      "e688ebc7b5884a0c",
+      "e80ea9d65fafac48",
+      "fb3b06f2421e8a01",
+      "fb60dea5bc3004f6",
+      "fcd8c8bcb702b3b8",
+      "ff3d3ceca63e8a0f"
+     ],
+     "ejemplos": [
+      "San Diego County Names First Chief to Tackle Sewage Crisis",
+      "Lawsuit blames San Diego Gas & Electric equipment for fire that destroyed Orange County homes",
+      "Four face criminal charges in San Diego County amid sweeping federal voter fraud probe"
+     ]
+    },
+    {
+     "termino": "city",
+     "n": 15,
+     "n_previo": 11,
+     "momento": 4,
+     "zonas": {
+      "San Diego": 15
+     },
+     "fuentes": {
+      "kpbs": 7,
+      "timessd": 6,
+      "inewsource": 1,
+      "voiceofsd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "031df11b6acb8e15",
+      "2ad52597a789b915",
+      "3542d83ca8b0abac",
+      "3ca3590beff9677c",
+      "445dd216d56f6c2e",
+      "451a75e727c1ed68",
+      "6b8ab82e16e2afff",
+      "6fcf5419ccc3dc34",
+      "76f5a9d7c243cfcf",
+      "93fff83e2de7785c",
+      "a4071d90ce901833",
+      "ca877d80a6c82b74",
+      "d287a5b8d20d9f1b",
+      "edce8443f68f7832",
+      "f5eec04b12024dd9"
+     ],
+     "ejemplos": [
+      "San Diego police will no longer use “other” as reason for searching the city’s license plate readers",
+      "The Fairgrounds Board And City of Del Mar Are Still Beefing",
+      "City Council committee votes to end San Diego's use of Flock ALPR technology"
+     ]
+    },
+    {
+     "termino": "voters",
+     "n": 9,
+     "n_previo": 5,
+     "momento": 4,
+     "zonas": {
+      "San Diego": 9
+     },
+     "fuentes": {
+      "kpbs": 6,
+      "timessd": 2,
+      "inewsource": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
       "1476133af0c7d0b4",
       "2077a402217ba931",
       "37a63eb953e747fc",
-      "4ac474ba35a2bb62",
       "4d17e0b11b183355",
       "52b9a0c88cc35ad8",
       "5c43359906e79332",
@@ -5600,90 +5135,31 @@
      ]
     },
     {
-     "termino": "brush fire",
-     "n": 5,
-     "n_previo": 0,
-     "momento": 5,
+     "termino": "camp pendleton",
+     "n": 7,
+     "n_previo": 3,
+     "momento": 4,
      "zonas": {
-      "San Diego": 5
+      "San Diego": 7
      },
      "fuentes": {
-      "timessd": 5
+      "timessd": 6,
+      "kpbs": 1
      },
-     "un_solo_medio": true,
+     "un_solo_medio": false,
      "notas": [
       "0eec782ec6bb77d4",
       "3378947bd073b31b",
-      "3fbec41d866df21b",
+      "384b55a7466cc781",
+      "46a6dd4c0846d811",
+      "9a5e14190a95c237",
       "bf370cc1627791ce",
       "dda0d0db725a6846"
      ],
      "ejemplos": [
-      "Camp Pendleton brush fire now 50% contained",
-      "Camp Pendleton brush fire now 35% contained with more than 3,000 acres burned",
-      "Brush fire at Camp Pendleton 20% contained, with Interstate 5 again open in area"
-     ]
-    },
-    {
-     "termino": "city",
-     "n": 14,
-     "n_previo": 10,
-     "momento": 4,
-     "zonas": {
-      "San Diego": 14
-     },
-     "fuentes": {
-      "kpbs": 7,
-      "timessd": 7
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "031df11b6acb8e15",
-      "22db7567b7c875b9",
-      "3542d83ca8b0abac",
-      "3ca3590beff9677c",
-      "445dd216d56f6c2e",
-      "6b8ab82e16e2afff",
-      "6fcf5419ccc3dc34",
-      "a3a0e0fbb24b98c8",
-      "a4071d90ce901833",
-      "ba76123029e94b43",
-      "ca877d80a6c82b74",
-      "d287a5b8d20d9f1b",
-      "f2530e41e6584907",
-      "f5eec04b12024dd9"
-     ],
-     "ejemplos": [
-      "City crews complete stormwater channel maintenance in Sorrento Valley",
-      "City Ballet’s ‘American Icons’ caps nation’s 250th with three master choreographers",
-      "City Council confirms Bethany Bezak as San Diego's new COO"
-     ]
-    },
-    {
-     "termino": "know",
-     "n": 6,
-     "n_previo": 2,
-     "momento": 4,
-     "zonas": {
-      "San Diego": 6
-     },
-     "fuentes": {
-      "kpbs": 3,
-      "timessd": 3
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "01239cddcd3746c7",
-      "62e89ae29de24311",
-      "6af3ad2ec1da260e",
-      "c7ce34bc09e1d5d7",
-      "e56f14253b8369b3",
-      "f37fff6902890e22"
-     ],
-     "ejemplos": [
-      "The real reason it's going to take a while to know who won in some midterm races",
-      "There’s a $11.25 billion housing bond on the ballot this November. Here’s what you should know",
-      "Ukraine and the U.S. are at odds over Starshield. Here's what to know"
+      "This tiny mouse is having a big comeback at Camp Pendleton",
+      "UPDATED: Camp Pendleton fire now 65% contained",
+      "Camp Pendleton brush fire now 50% contained"
      ]
     },
     {
@@ -5715,36 +5191,35 @@
      ]
     },
     {
-     "termino": "sewage crisis",
+     "termino": "mesa",
      "n": 5,
      "n_previo": 1,
      "momento": 4,
      "zonas": {
       "San Diego": 5,
-      "Tijuana": 3
+      "Tijuana": 5
      },
      "fuentes": {
-      "gn-a0ec1cdd1d90": 2,
+      "gn-f8497491006c": 3,
       "gn-5bad11419dae": 1,
-      "gn-9c4f20ea32c8": 1,
-      "inewsource": 1
+      "gn-b24471c85f62": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "09689980f2c1b803",
-      "6adeb00779220989",
-      "759521f1bb70fe05",
-      "d56ec34b5dc8a051",
-      "dcf765eee33eb83e"
+      "19b50480f60812d0",
+      "29eb4e4d78fdf65a",
+      "38333bff87807d66",
+      "9e7c6c64175037ad",
+      "f496b05c5d4bb4fe"
      ],
      "ejemplos": [
-      "San Diego County Names First Chief to Tackle Sewage Crisis",
-      "San Diego County appoints first Pollution Crisis Chief to tackle Tijuana River sewage crisis",
-      "San Diego County names first Pollution Crisis Chief to tackle Tijuana River sewage crisis"
+      "🚨 Otay Mesa registra filas de hora y media este miércoles (Datos actualizados a las 3:00 PM PDT) Los cruces fronterizos de Baja California reportan un panorama desigual esta tarde, donde la garita de Otay Mesa se posiciona como el puerto con mayor satur",
+      "🚨 Garitas de Tijuana se saturan con esperas de casi tres horas (Datos actualizados a las 1:00 PM PDT) Los cruces fronterizos entre Tijuana y San Diego registran una severa saturación esta tarde, siendo San Ysidro y Otay Mesa los puntos más afectados con",
+      "Mexico redirects commercial truck border traffic to future Otay Mesa East facilities"
      ]
     },
     {
-     "termino": "voting",
+     "termino": "national",
      "n": 5,
      "n_previo": 1,
      "momento": 4,
@@ -5752,21 +5227,21 @@
       "San Diego": 5
      },
      "fuentes": {
-      "kpbs": 4,
-      "gn-a956e11d03ed": 1
+      "timessd": 4,
+      "kpbs": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "01239cddcd3746c7",
-      "1915500430d0c510",
-      "33763f81808f3060",
-      "4ac474ba35a2bb62",
-      "7409d277300ec5e6"
+      "1bdc835b1505b1a5",
+      "3542d83ca8b0abac",
+      "6b8ab82e16e2afff",
+      "ca877d80a6c82b74",
+      "eecf652ff0b1b803"
      ],
      "ejemplos": [
-      "Voting fraud crackdown leads to arrests in California | San Diego News Daily",
-      "DOJ charges 28 in California with voting crimes as election tensions escalate",
-      "No Kings draws crowds with focus on early voting"
+      "National City proveerá sacos de arena gratis en preparación para tormentas",
+      "MarketInk: ‘Shotgun’ Tom Kelly is ‘overwhelmed’ as he’s inducted into National Radio Hall of Fame",
+      "SDSU waterski team seeks another national title after losing most of championship roster"
      ]
     },
     {
@@ -5796,31 +5271,6 @@
      ]
     },
     {
-     "termino": "acres",
-     "n": 4,
-     "n_previo": 0,
-     "momento": 4,
-     "zonas": {
-      "San Diego": 4
-     },
-     "fuentes": {
-      "timessd": 3,
-      "kpbs": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "3378947bd073b31b",
-      "3fbec41d866df21b",
-      "561736bf7a051c4c",
-      "9a5e14190a95c237"
-     ],
-     "ejemplos": [
-      "Camp Pendleton brush fire now 35% contained with more than 3,000 acres burned",
-      "Incendio forestal de rápida propagación consume más de 1,100 acres en Camp Pendleton y se acerca a la Interestatal 5",
-      "I-5 reopens near Camp Pendleton as wildfire burns more than 1,100 acres"
-     ]
-    },
-    {
      "termino": "alberta",
      "n": 4,
      "n_previo": 0,
@@ -5845,7 +5295,7 @@
      ]
     },
     {
-     "termino": "gold",
+     "termino": "american",
      "n": 4,
      "n_previo": 0,
      "momento": 4,
@@ -5853,94 +5303,20 @@
       "San Diego": 4
      },
      "fuentes": {
-      "kpbs": 2,
-      "timessd": 2
+      "kpbs": 3,
+      "timessd": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "2a019be4c0529288",
-      "e56f14253b8369b3",
-      "f37fff6902890e22",
-      "ffdbf9a25c1d1e37"
+      "3ca3590beff9677c",
+      "5530424ccdee07a0",
+      "8e25c9f8a5eb0866",
+      "f1bd51683c5967fd"
      ],
      "ejemplos": [
-      "THE GOLD On MASTERPIECE",
-      "THE GOLD On MASTERPIECE: Season 2",
-      "10 things you may not know about Julian that have nothing to do with gold"
-     ]
-    },
-    {
-     "termino": "interstate",
-     "n": 4,
-     "n_previo": 0,
-     "momento": 4,
-     "zonas": {
-      "San Diego": 4
-     },
-     "fuentes": {
-      "timessd": 4
-     },
-     "un_solo_medio": true,
-     "notas": [
-      "3fbec41d866df21b",
-      "61418ddff2246426",
-      "bf370cc1627791ce",
-      "dda0d0db725a6846"
-     ],
-     "ejemplos": [
-      "Collision on Interstate 5 ties up traffic for hours near Old Town",
-      "Brush fire at Camp Pendleton 20% contained, with Interstate 5 again open in area",
-      "Brush fire at Camp Pendleton continues to spread, prompting more closures along Interstate 5"
-     ]
-    },
-    {
-     "termino": "national city",
-     "n": 4,
-     "n_previo": 0,
-     "momento": 4,
-     "zonas": {
-      "San Diego": 4
-     },
-     "fuentes": {
-      "timessd": 3,
-      "kpbs": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "3542d83ca8b0abac",
-      "6b8ab82e16e2afff",
-      "a3a0e0fbb24b98c8",
-      "ca877d80a6c82b74"
-     ],
-     "ejemplos": [
-      "National City proveerá sacos de arena gratis en preparación para tormentas",
-      "Encinitas reserves shelter beds in National City despite councilmember’s objections",
-      "Encinitas aprueba enviar a personas sin hogar al South Bay tras enfrentamiento con concejal de National City"
-     ]
-    },
-    {
-     "termino": "navwar",
-     "n": 4,
-     "n_previo": 0,
-     "momento": 4,
-     "zonas": {
-      "San Diego": 4
-     },
-     "fuentes": {
-      "voiceofsd": 3,
-      "kpbs": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "4e3dc627c2370cd5",
-      "7a6a5013cde956e4",
-      "8247c7ac6a76430a",
-      "f93f3cdadee1a2f1"
-     ],
-     "ejemplos": [
-      "Manchester Promises Housing at NAVWAR",
-      "Manchester Group Promises Housing Will Be ‘Major Part’ of NAVWAR Development",
-      "San Diego lawmakers oppose data center concept at NAVWAR campus"
+      "City Ballet’s ‘American Icons’ caps nation’s 250th with three master choreographers",
+      "In Pursuit: Lessons of American Leadership",
+      "'Lincoln in the Bardo' takes a distinctly American grief to the Met stage"
      ]
     },
     {
@@ -5971,33 +5347,31 @@
      ]
     },
     {
-     "termino": "season",
-     "n": 5,
-     "n_previo": 2,
+     "termino": "brush fire",
+     "n": 4,
+     "n_previo": 1,
      "momento": 3,
      "zonas": {
-      "San Diego": 5
+      "San Diego": 4
      },
      "fuentes": {
-      "kpbs": 3,
-      "timessd": 2
+      "timessd": 4
      },
-     "un_solo_medio": false,
+     "un_solo_medio": true,
      "notas": [
-      "2a019be4c0529288",
-      "2f06d04b6892ba5d",
-      "307f6fc2168dd775",
-      "ec5ac1fd84e5bd57",
-      "f928ce779dbd1c21"
+      "0eec782ec6bb77d4",
+      "3378947bd073b31b",
+      "bf370cc1627791ce",
+      "dda0d0db725a6846"
      ],
      "ejemplos": [
-      "Stingray injuries in La Jolla drop, but warmer waters could extend stingray season",
-      "Aztecs, snakebit during inaugural Pac-12 season, try to overcome poor play and a contagion to draw fans back to Snapdragon",
-      "THE GOLD On MASTERPIECE: Season 2"
+      "Camp Pendleton brush fire now 50% contained",
+      "Camp Pendleton brush fire now 35% contained with more than 3,000 acres burned",
+      "Brush fire at Camp Pendleton 20% contained, with Interstate 5 again open in area"
      ]
     },
     {
-     "termino": "american",
+     "termino": "elections",
      "n": 4,
      "n_previo": 1,
      "momento": 3,
@@ -6006,19 +5380,44 @@
      },
      "fuentes": {
       "kpbs": 3,
-      "timessd": 1
+      "voiceofsd": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "3ca3590beff9677c",
-      "5530424ccdee07a0",
-      "8e25c9f8a5eb0866",
-      "f1bd51683c5967fd"
+      "1f0e4bc39a25a6c1",
+      "3bc598857eb56fa4",
+      "a0c5a848d8fddd46",
+      "f9579a802ea346d4"
      ],
      "ejemplos": [
-      "City Ballet’s ‘American Icons’ caps nation’s 250th with three master choreographers",
-      "In Pursuit: Lessons of American Leadership",
-      "'Lincoln in the Bardo' takes a distinctly American grief to the Met stage"
+      "The Justice Department begins notifying counties where it wants to monitor elections",
+      "Trump leans into unprecedented power ahead of midterm elections",
+      "California elections officials say state is prepared to defend election integrity"
+     ]
+    },
+    {
+     "termino": "grossmont",
+     "n": 4,
+     "n_previo": 1,
+     "momento": 3,
+     "zonas": {
+      "San Diego": 4
+     },
+     "fuentes": {
+      "timessd": 3,
+      "kpbs": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "1303ec140bb5e948",
+      "376e83873d5889c7",
+      "a66283fb3dcf4000",
+      "c48febfdf6695e94"
+     ],
+     "ejemplos": [
+      "Grossmont Union High School District to reinstate librarian positions",
+      "Grossmont to bring back librarians next school year, ending labor complaint",
+      "William Gross came to San Diego looking for a retirement home. He helped create Grossmont instead"
      ]
     },
     {
@@ -6048,7 +5447,32 @@
      ]
     },
     {
-     "termino": "weekend",
+     "termino": "registra",
+     "n": 4,
+     "n_previo": 1,
+     "momento": 3,
+     "zonas": {
+      "San Diego": 4,
+      "Tijuana": 2
+     },
+     "fuentes": {
+      "gn-f8497491006c": 4
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "2e2aabe6d0551fb9",
+      "5b1c3092592a5fba",
+      "9e7c6c64175037ad",
+      "f496b05c5d4bb4fe"
+     ],
+     "ejemplos": [
+      "🚨 Otay Mesa registra filas de hora y media este miércoles (Datos actualizados a las 3:00 PM PDT) Los cruces fronterizos de Baja California reportan un panorama desigual esta tarde, donde la garita de Otay Mesa se posiciona como el puerto con mayor satur",
+      "Garita de Otay registra demoras con hasta una hora de espera (Datos actualizados a las 6:00 am PDT) Esta mañana el cruce hacia Estados Unidos presenta mayor saturación en la garita de Otay Mesa, donde el carril general registra esperas de hasta 60 min",
+      "🚨 San Ysidro registra filas intensas de hasta 100 minutos de demora (Datos actualizados a las 09:00 a.m. PDT / 11:55 a.m. EST) Los garitas fronterizas entre Baja California y Estados Unidos registran un tráfico intenso este domingo, situando a San Ysidro co"
+     ]
+    },
+    {
+     "termino": "voting",
      "n": 4,
      "n_previo": 1,
      "momento": 3,
@@ -6057,19 +5481,19 @@
      },
      "fuentes": {
       "kpbs": 3,
-      "timessd": 1
+      "gn-a956e11d03ed": 1
      },
      "un_solo_medio": false,
      "notas": [
       "01239cddcd3746c7",
-      "8a4cb0f4492a7eaf",
-      "dacc84fbe5048f96",
-      "fc75377ebd8c9b0d"
+      "1915500430d0c510",
+      "33763f81808f3060",
+      "7409d277300ec5e6"
      ],
      "ejemplos": [
-      "No Kings turns its focus to voting this weekend. Here's what we know",
-      "San Diego Weekend Guide Oct. 16-18: Spotlight on North County",
-      "Horror fun happening at 2 San Diego events this weekend"
+      "Voting fraud crackdown leads to arrests in California | San Diego News Daily",
+      "DOJ charges 28 in California with voting crimes as election tensions escalate",
+      "No Kings draws crowds with focus on early voting"
      ]
     },
     {
@@ -6096,29 +5520,6 @@
      ]
     },
     {
-     "termino": "attacks",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "San Diego": 3
-     },
-     "fuentes": {
-      "kpbs": 3
-     },
-     "un_solo_medio": true,
-     "notas": [
-      "3fa8529148edf981",
-      "648ae28ab6c8d7f1",
-      "a90fa868c3d5e531"
-     ],
-     "ejemplos": [
-      "Zelenskyy says early warning system for Russian missile attacks resumes",
-      "Israeli settlers beat Palestinians and a U.S. photojournalist in West Bank attacks",
-      "Ukraine resumes attacks on Russian oil refineries, officials say, after brief truce"
-     ]
-    },
-    {
      "termino": "billion",
      "n": 3,
      "n_previo": 0,
@@ -6139,6 +5540,81 @@
       "Taxpayer-funded $3.2 billion fruit, vegetable program restarts",
       "Commentary: California voters to consider $8.4 billion bond measure to fund only one field of medical research",
       "There’s a $11.25 billion housing bond on the ballot this November. Here’s what you should know"
+     ]
+    },
+    {
+     "termino": "bridget premont",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "San Diego": 3,
+      "Tijuana": 1
+     },
+     "fuentes": {
+      "gn-5bad11419dae": 1,
+      "imparcial": 1,
+      "timessd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "348a46bb4d0503b6",
+      "8328b73cdbaa3e71",
+      "acfb3cc295dd72c0"
+     ],
+     "ejemplos": [
+      "San Diego County officially introduces former diplomat Bridget Premont as first pollution crisis chief",
+      "SD County set to announce Bridget Premont as first pollution crisis chief",
+      "Nombran a Bridget Premont encargada para frenar crisis de contaminación del Río Tijuana en San Diego"
+     ]
+    },
+    {
+     "termino": "charges",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "San Diego": 3
+     },
+     "fuentes": {
+      "kpbs": 2,
+      "inewsource": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "1915500430d0c510",
+      "5c43359906e79332",
+      "e80ea9d65fafac48"
+     ],
+     "ejemplos": [
+      "Four face criminal charges in San Diego County amid sweeping federal voter fraud probe",
+      "Justice Department charges more than 2 dozen in California sweep targeting alleged noncitizen voters",
+      "DOJ charges 28 in California with voting crimes as election tensions escalate"
+     ]
+    },
+    {
+     "termino": "chief tackle river",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "San Diego": 3,
+      "Tijuana": 3
+     },
+     "fuentes": {
+      "gn-a0ec1cdd1d90": 2,
+      "gn-a956e11d03ed": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "6adeb00779220989",
+      "865aff517b9c4c6c",
+      "dcf765eee33eb83e"
+     ],
+     "ejemplos": [
+      "San Diego County appoints first Pollution Crisis Chief to tackle Tijuana River sewage crisis",
+      "San Diego County's new ‘Pollution Crisis Chief' to tackle Tijuana River sewage problem",
+      "San Diego County names first Pollution Crisis Chief to tackle Tijuana River sewage crisis"
      ]
     }
    ]
