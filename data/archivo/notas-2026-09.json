@@ -1,8 +1,1536 @@
 {
  "esquema": 1,
  "mes": "2026-09",
- "total": 6617,
+ "total": 6677,
  "notas": [
+  {
+   "id": "34eb556ec8de3bc8",
+   "titulo": "Cae Atlético Tijuana ante Datileros en la Copa Promesas MX",
+   "url": "https://oem.com.mx/elsoldetijuana/deportes/cae-atletico-tijuana-ante-datileros-en-la-copa-promesas-mx-32219375",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T23:44:47+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.473,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "3dbeca34287456f4",
+   "titulo": "Estado nunca destinó recursos al proyecto del Mercado Municipal",
+   "url": "https://radarbc.com/general/estado-nunca-destino-recursos-al-proyecto-del-mercado-municipal/",
+   "dominio": "radarbc.com",
+   "fuente": "radarbc",
+   "zona_medio": "Ensenada",
+   "zonas": [
+    "Ensenada"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T23:42:03+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8144,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://radarbc.com/wp-content/uploads/2026/09/mercado-municipal-protesta.jpg",
+   "rubros": []
+  },
+  {
+   "id": "61ea7813440a8567",
+   "titulo": "Tragedia en Primo Tapia: Muere técnico al tocar cables de alta tensión",
+   "url": "https://www.rosaritonoticias.com/2026/09/22/tragedia-en-primo-tapia-muere-tecnico-al-tocar-cables-de-alta-tension/",
+   "dominio": "rosaritonoticias.com",
+   "fuente": "rosarito",
+   "zona_medio": "Playas de Rosarito",
+   "zonas": [
+    "Playas de Rosarito"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T22:54:08+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8596,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "59d8298cc806d1f6",
+   "titulo": "Asesinan en el valle a subcomandante de la policía municipal de Mexicali",
+   "url": "https://radarbc.com/general/asesinan-en-el-valle-a-subcomandante-de-la-policia-municipal-de-mexicali/",
+   "dominio": "radarbc.com",
+   "fuente": "radarbc",
+   "zona_medio": "Ensenada",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T22:21:17+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6812,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://radarbc.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-22-at-3.01.47-PM-1-1024x768.jpeg",
+   "rubros_categoria": [
+    "seguridad"
+   ],
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "f3b0e7067f4de127",
+   "titulo": "¿Cómo logra la inteligencia artificial entender lo que escribimos?",
+   "url": "https://oem.com.mx/lavozdelafrontera/ciencia-y-salud/como-logra-la-inteligencia-artificial-entender-lo-que-escribimos-32218297",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T22:18:57+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5928,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "ia"
+   ]
+  },
+  {
+   "id": "a482ccd8f3b9b0b5",
+   "titulo": "No habrá sanciones por no cumplir con restricción del uso de celulares en escuelas",
+   "url": "https://oem.com.mx/elsoldetijuana/local/no-habra-sanciones-por-no-cumplir-con-restriccion-del-uso-de-celulares-en-escuelas-32217890",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T21:49:59+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6866,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "4dc9529385555b69",
+   "titulo": "Rescatan a menor atrapado en el mar y buscan a un segundo en Playas de Tijuana",
+   "url": "https://oem.com.mx/elsoldetijuana/local/rescatan-a-menor-atrapado-en-el-mar-y-buscan-a-un-segundo-en-playas-de-tijuana-32218223",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [
+    "Playas de Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T21:47:43+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5236,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "3a4e5262b8f3d5a8",
+   "titulo": "Violencia ha desplazado al menos a 18 mil bajacalifornianos: Inegi",
+   "url": "https://oem.com.mx/elsoldetijuana/local/violencia-ha-desplazado-al-menos-a-18-mil-bajacalifornianos-inegi-32217736",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T21:23:34+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7756,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "790fec1b45129181",
+   "titulo": "Yardas y negocios de autopartes sostienen sus ventas en Mexicali",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/mantienen-apenas-las-ventas-giros-de-yardas-carroceros-y-autopartes-32216850",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T21:19:52+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5313,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "0a713a402df0edf9",
+   "titulo": "Aún no devuelven el recurso retenido a Alejandra Ang",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/aun-no-devuelven-el-recurso-retenido-a-alejandra-ang-32217321",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T21:00:13+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.538,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "8409dc950f11245c",
+   "titulo": "SETEBC amaga con emprender acciones legales contra el municipio de no obtener respuesta",
+   "url": "https://oem.com.mx/elsoldetijuana/local/setebc-amaga-con-emprender-acciones-legales-contra-el-municipio-de-no-obtener-respuesta-32217271",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T20:49:45+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8969,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "4f6d0205554a3af0",
+   "titulo": "Informan pronóstico del tiempo para los próximos días; mantiene monitoreo de fenómenos meteorológicos en BC",
+   "url": "https://oem.com.mx/elsoldetijuana/local/informan-pronostico-del-tiempo-para-los-proximos-dias-mantiene-monitoreo-de-fenomenos-meteorologicos-en-bc-32217129",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T20:38:46+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6343,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "c4aca6d974678c88",
+   "titulo": "Compañía telefónica continúa impidiendo acceso a 40 trabajadores en Mexicali",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/compania-telefonica-continua-impidiendo-acceso-a-40-trabajadores-en-mexicali-32216826",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T20:35:29+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8938,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "f3156ac4d64f9b30",
+   "titulo": "Protocolo de protección para abogados estará listo el 5 de octubre",
+   "url": "https://oem.com.mx/elsoldetijuana/local/protocolo-de-proteccion-para-abogados-estara-listo-el-5-de-octubre-32216718",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T20:10:37+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.8086,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "f51c7c89e3111817",
+   "titulo": "Deben reducirse los lugares de venta de alcohol en vez de ampliarse: CCAM",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/deben-reducirse-los-lugares-de-venta-de-alcohol-en-vez-de-ampliarse-ccam-32216074",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T19:49:45+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6147,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "9c386f562617ec8a",
+   "titulo": "Mantiene bajo nivel lago Mead",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/mantiene-bajo-nivel-lago-mead-32215990",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T19:42:56+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.825,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "86691e8fba2f413e",
+   "titulo": "Poder Judicial del Estado no tiene la intención de retirar cercanía con la gente, dice magistrada",
+   "url": "https://oem.com.mx/elsoldetijuana/local/poder-judicial-del-estado-no-tiene-la-intencion-de-retirar-cercania-con-la-gente-dice-magistrada-32216146",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T19:42:12+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7527,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "9d1a0f84cdbf6b11",
+   "titulo": "Vecinos de La Gloria temen inundaciones ante posible llegada de El Niño",
+   "url": "https://oem.com.mx/elsoldetijuana/local/vecinos-de-la-gloria-temen-inundaciones-ante-posible-llegada-de-el-nino-32215696",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T19:38:30+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5335,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "73281b4521bc3c73",
+   "titulo": "Proyectan terminar rehabilitación de la Madero en dos semanas",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/proyectan-terminar-rehabilitacion-de-la-madero-en-dos-semanas-32215214",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T19:34:04+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5409,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "62c0377066b7d11f",
+   "titulo": "Los 10 fenómenos naturales que la ciencia aún no logra explicar completamente",
+   "url": "https://noticiasensenada.com/los-10-fenomenos-naturales-que-la-ciencia-aun-no-logra-explicar-completamente/",
+   "dominio": "noticiasensenada.com",
+   "fuente": "notiens",
+   "zona_medio": "Ensenada",
+   "zonas": [
+    "Ensenada"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T19:28:11+00:00",
+   "capturado": "2026-09-25T11:50:09+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.4835,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "1f1707837984f41b",
+   "titulo": "Toman primaria en Islas Agrarias A por falta de maestros",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/toman-primaria-en-islas-agrarias-a-por-falta-de-maestros-32215586",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T19:26:11+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8719,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "d4c4bfa39a9e86cc",
+   "titulo": "Expediente Confidencial / Del “decomiso histórico” al decomiso histérico",
+   "url": "https://oem.com.mx/elsoldetijuana/analisis/expediente-confidencial-del-decomiso-historico-al-decomiso-histerico-32215533",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T19:10:38+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5845,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "bcb01b87336e2360",
+   "titulo": "Proponen reconocer al turismo como derecho ciudadano",
+   "url": "https://radarbc.com/general/proponen-reconocer-al-turismo-como-derecho-ciudadano/",
+   "dominio": "radarbc.com",
+   "fuente": "radarbc",
+   "zona_medio": "Ensenada",
+   "zonas": [
+    "Ensenada"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T19:00:00+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6377,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "economia",
+    "turismo"
+   ]
+  },
+  {
+   "id": "03d2238a42881515",
+   "titulo": "Proyectan repunte económico en Baja California en la XXV edición del Festival de Octubre",
+   "url": "https://oem.com.mx/elsoldetijuana/local/proyectan-repunte-economico-en-baja-california-en-la-xxv-edicion-del-festival-de-octubre-32215258",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T18:50:49+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6413,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "espectaculos"
+   ]
+  },
+  {
+   "id": "ae0006b223376086",
+   "titulo": "Sin permisos promotores de evento de globos de Cantoya: Alcaldesa",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/sin-permisos-promotores-de-evento-de-globos-de-cantoya-alcaldesa-32214478",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T18:33:15+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7924,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "16c48f31c28e62fd",
+   "titulo": "Son 7 aspirantes a encabezar la Auditoría Superior del Estado",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/son-7-aspirantes-a-encabezar-la-auditoria-superior-del-estado-32214105",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T17:46:09+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7705,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "97541347f4d89482",
+   "titulo": "¿Sobrevivirías al fin del mundo? Esta experiencia escénica te pondrá a prueba en Tijuana",
+   "url": "https://oem.com.mx/elsoldetijuana/local/sobrevivirias-al-fin-del-mundo-esta-experiencia-escenica-te-pondra-a-prueba-en-tijuana-32213981",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T17:29:02+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5866,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "0d66edc6e87ed801",
+   "titulo": "“Apenas iba a comenzar su vida”: exigen justicia por joven que murió tras caerle estructura de básquetbol",
+   "url": "https://oem.com.mx/elsoldetijuana/local/apenas-iba-a-comenzar-su-vida-exigen-justicia-por-joven-que-murio-tras-caerle-estructura-de-basquetbol-32213952",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T17:28:50+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.752,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "9e12a57b899ec66d",
+   "titulo": "Marcela Lagarde dará conferencia magistral sobre violencia contra las mujeres en UABC Tijuana",
+   "url": "https://oem.com.mx/elsoldetijuana/local/marcela-lagarde-dara-conferencia-magistral-sobre-violencia-contra-las-mujeres-en-uabc-tijuana-32212960",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T16:51:08+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5357,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "fec26ef03f504887",
+   "titulo": "Tavo Vildósola no correrá la BAJA 1000",
+   "url": "https://oem.com.mx/lavozdelafrontera/deportes/tavo-vildosola-no-correra-la-baja-1000-32213212",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T16:45:20+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7598,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "c2aef991be9c1739",
+   "titulo": "Ejecutan a subcomandante del Grupo Reacción Inmediata de la DSPM",
+   "url": "https://oem.com.mx/lavozdelafrontera/policiaca/disparan-contra-domicilio-de-subcomandante-de-la-dspm-reportan-una-persona-sin-vida-32212783",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T16:17:09+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5143,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "61fcbb89fe9f5aab",
+   "titulo": "Empresarios chocan con reforma aduanera",
+   "url": "https://www.uniradioinforma.com/negocios/empresarios-chocan-reforma-aduanera-n904942",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T16:13:00-07:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8643,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6ab30bf37fb63.jpg",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "4ddcb698b3a2d11d",
+   "titulo": "Proponen uso de energías renovables para operar desaladora de Rosarito",
+   "url": "https://oem.com.mx/elsoldetijuana/local/proponen-uso-de-energias-renovables-para-operar-desaladora-de-rosarito-32212386",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Playas de Rosarito"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T15:57:26+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5837,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "fcb6eb09d8757f9a",
+   "titulo": "Buscan acercar a 3.7 millones de personas con la cultura e historia en el Día del Patrimonio de BC",
+   "url": "https://oem.com.mx/elsoldetijuana/local/buscan-acercar-a-3-7-millones-de-personas-con-la-cultura-e-historia-en-el-dia-del-patrimonio-de-bc-32210850",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T15:00:36+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.7636,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "e27a31a95fdca154",
+   "titulo": "Inicia Congreso Internacional de Bomberos de Tijuana, con la participación de 750 elementos",
+   "url": "https://oem.com.mx/elsoldetijuana/local/inicia-congreso-internacional-de-bomberos-de-tijuana-con-la-participacion-de-750-elementos-32211258",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T14:58:50+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.4871,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "cfaeb93e68dae2d9",
+   "titulo": "Falta de denuncias oculta la realidad delictiva en Tijuana: Concam",
+   "url": "https://oem.com.mx/elsoldetijuana/local/falta-de-denuncias-oculta-la-realidad-delictiva-en-tijuana-concam-32211202",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T14:53:06+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8646,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "edd8e01029fb2854",
+   "titulo": "El ensenadense Cristian Púas Pérez ya tiene fecha de debut en UFC",
+   "url": "https://oem.com.mx/lavozdelafrontera/deportes/el-ensenadense-cristian-puas-perez-ya-tiene-fecha-de-debut-en-ufc-32210257",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T14:50:44+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5808,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "f8ffa141bb294aca",
+   "titulo": "¿Qué tan latino es V de BTS? De la cocina mexicana hasta los boleros de Los Panchos",
+   "url": "https://oem.com.mx/lavozdelafrontera/tendencias/que-tan-latino-es-v-de-bts-de-la-cocina-mexicana-hasta-los-boleros-de-los-panchos-32206752",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T14:28:41+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6571,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "a5321c01f386286d",
+   "titulo": "Presenta EDUCEB su segunda carrera “5km corriendo por la salud mental”",
+   "url": "https://oem.com.mx/elsoldetijuana/deportes/presenta-educeb-su-segunda-carrera-5km-corriendo-por-la-salud-mental-32210162",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T14:21:53+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.4977,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "98180f71cc533f45",
+   "titulo": "Limitarán a 13 mil personas aforo en Isla de las Estrellas",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/limitaran-a-13-mil-personas-aforo-en-isla-de-las-estrellas-32210158",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T14:01:47+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6225,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "9ac3aadc7a8bdc8f",
+   "titulo": "Lleva Canacintra al Congreso cambios fiscales para empleo formal",
+   "url": "https://oem.com.mx/elsoldetijuana/local/lleva-canacintra-al-congreso-cambios-fiscales-para-empleo-formal-32209667",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T13:35:18+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5211,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "b33a0b230c9c1a5a",
+   "titulo": "Se termina la racha de Soles en casa",
+   "url": "https://oem.com.mx/lavozdelafrontera/deportes/se-termina-la-racha-de-soles-en-casa-32207951",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T13:31:46+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5958,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "90025db7725260a3",
+   "titulo": "Vinculan a sujeto por intentar asfixiar a menor y provocar quemaduras a bebé",
+   "url": "https://oem.com.mx/lavozdelafrontera/policiaca/vinculan-a-sujeto-por-intentar-asfixiar-a-menor-y-provocar-quemaduras-a-bebe-32209211",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T13:24:44+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6193,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "3ae230e547adcf0c",
+   "titulo": "Fiebre por flores amarillas aumenta ventas, pero aún lejos de fechas tradicionales",
+   "url": "https://oem.com.mx/elsoldetijuana/local/fiebre-por-flores-amarillas-aumenta-ventas-pero-aun-lejos-de-fechas-tradicionales-32209381",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T13:21:52+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5123,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "8c4011562d841cad",
+   "titulo": "Detienen a sujeto acusado de arrastrar y colgar a una cachorra en la Prohogar",
+   "url": "https://oem.com.mx/lavozdelafrontera/policiaca/detienen-a-sujeto-acusado-de-arrastrar-y-colgar-a-una-cachorra-en-la-prohogar-32208873",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T13:07:52+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5988,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "c9e579ffb383f9d2",
+   "titulo": "Crece 6.3% el financiamiento automotriz en México",
+   "url": "https://www.uniradioinforma.com/negocios/crece-63-financiamiento-automotriz-mexico-n904851",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T12:36:00-07:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5915,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6ab2d95b60a27.jpeg",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "f8d2b3d522a0704e",
+   "titulo": "GN entorpece revisión en retén El Centinela",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/insiste-cce-bc-en-agilizar-paso-por-punto-de-revision-del-centinela-sobre-todo-para-turistas-32207575",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T12:01:55+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7392,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "e8e52b5c02a7f07d",
+   "titulo": "“Estaba viendo la nada”: Gilberto sobre Lobito",
+   "url": "https://oem.com.mx/lavozdelafrontera/deportes/estaba-viendo-la-nada-gilberto-sobre-lobito-32207149",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T11:55:00+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6062,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "a0b1bd9119f7416e",
+   "titulo": "Pronostican cielo mayormente despejado para este martes",
+   "url": "https://oem.com.mx/elsoldetijuana/local/pronostican-cielo-mayormente-despejado-para-este-martes-32205988",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T10:24:31+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6025,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "5dd2b73bafa1d100",
+   "titulo": "Muere un hombre calcinado en incendio de casa en la colonia Libertad",
+   "url": "https://oem.com.mx/lavozdelafrontera/policiaca/muere-un-hombre-calcinado-en-incendio-de-casa-en-la-colonia-libertad-32205384",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [
+    "Otay Centenario"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T10:06:59+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5864,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "c9e64e04f78d697e",
+   "titulo": "Selección mexicana protagoniza actuación para el recuerdo en Mundial de Ciclismo",
+   "url": "https://www.uniradioinforma.com/deportes/seleccion-mexicana-protagoniza-actuacion-recuerdo-mundial-ciclismo-n904795",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T09:26:00-07:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4979,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6ab2abad09bb2.png",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "07ac4e88d654e3d4",
+   "titulo": "Sheriff: Replacing Old Vista Jail Will Improve Inmate Safety",
+   "url": "https://voiceofsandiego.org/2026/09/22/sheriff-replacing-old-vista-jail-will-improve-inmate-safety/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T09:15:00+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2026/02/vistajail-7-1024x683.jpg",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "34ced34090972b37",
+   "titulo": "\"México, epicentro de la violencia de los cárteles\", dice Trump ante la ONU",
+   "url": "https://www.uniradioinforma.com/mundo/mexico-epicentro-violencia-carteles-dice-trump-onu-n904781",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T09:10:00-07:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9332,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6ab2a86c24e2c.jpg",
+   "rubros": []
+  },
+  {
+   "id": "4c13b7bf302c2121",
+   "titulo": "The Debate Over a Countywide Sales Tax Increase",
+   "url": "https://voiceofsandiego.org/2026/09/22/the-debate-over-a-countywide-sales-tax-increase/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T09:00:00+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2026/05/vito-di-stefano-5-4-26-6-1024x684.jpg",
+   "rubros": []
+  },
+  {
+   "id": "39e73859a8ab5692",
+   "titulo": "Excessed Teacher of the Year Has New Role at San Diego Unified",
+   "url": "https://voiceofsandiego.org/2026/09/22/excessed-teacher-of-the-year-has-new-role-at-san-diego-unified/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T09:00:00+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2026/09/2026-5-15-TOY-Stacy-Williams-001-1024x680.jpg",
+   "rubros": []
+  },
+  {
+   "id": "ad963c8cb20aebfc",
+   "titulo": "Entre Teclas/ Crisis hídrica",
+   "url": "https://oem.com.mx/lavozdelafrontera/analisis/entre-teclas-crisis-hidrica-32198558",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T02:00:00+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5074,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "857efea45d8f8c1a",
+   "titulo": "Restricción de celulares aplica a 500 mil alumnos en Baja California",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/restriccion-de-celulares-aplica-a-500-mil-alumnos-en-baja-california-32199075",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T02:00:00+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4885,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "63886763068726e0",
+   "titulo": "Punta Colonet",
+   "url": "https://oem.com.mx/lavozdelafrontera/analisis/punta-colonet-32200891",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "San Quintín"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T02:00:00+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5204,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "f37a4679c4564b80",
+   "titulo": "De los videojuegos al cine: Cuando la crítica y el público no coinciden",
+   "url": "https://oem.com.mx/lavozdelafrontera/tendencias/de-los-videojuegos-al-cine-cuando-la-critica-y-el-publico-no-coinciden-32200881",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T00:15:44+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8138,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "4ca9f7c18b031052",
+   "titulo": "Big Border Patrol Investment",
+   "url": "https://voiceofsandiego.org/2026/09/21/big-border-patrol-investment/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-09-22",
+   "publicado": "2026-09-22T00:00:00+00:00",
+   "capturado": "2026-09-24T21:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2026/09/BP-5-1024x683.jpg",
+   "rubros": [
+    "seguridad"
+   ]
+  },
   {
    "id": "608c58a6153852e6",
    "titulo": "Bazar en Parque Los Encinos: Cómo ganar dinero extra este sábado",
