@@ -1,41 +1,41 @@
 {
  "esquema": 1,
- "generado": "2026-10-25T05:07:45+00:00",
+ "generado": "2026-10-25T11:46:45+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 8286,
- "posts_vigentes": 1271,
- "opinion": 7470,
- "repetidos": 593,
- "reacciones": 515,
+ "comentarios_vigentes": 8344,
+ "posts_vigentes": 1280,
+ "opinion": 7520,
+ "repetidos": 600,
+ "reacciones": 516,
  "por_zona": {
   "Ensenada": 234,
   "Mexicali": 121,
   "Playas de Rosarito": 66,
   "San Diego": 25,
   "San Quintín": 11,
-  "Tecate": 87,
-  "Tijuana": 3569,
-  "estatal": 3595,
+  "Tecate": 89,
+  "Tijuana": 3607,
+  "estatal": 3613,
   "internacional": 142,
   "nacional": 436
  },
  "por_cuenta": {
   "aztecabc_fb": 389,
-  "blanconegro_fb": 3148,
-  "blancorojo_fb": 2244,
-  "ndtijuana_fb": 2403,
+  "blanconegro_fb": 3173,
+  "blancorojo_fb": 2248,
+  "ndtijuana_fb": 2432,
   "psn_fb": 102
  },
  "por_idioma": {
-  "es": 8286
+  "es": 8344
  },
  "por_tema": [
   {
    "tema": "tiempo",
-   "comentarios": 85,
-   "posts": 80
+   "comentarios": 87,
+   "posts": 82
   },
   {
    "tema": "madre",
@@ -49,8 +49,8 @@
   },
   {
    "tema": "ninos",
-   "comentarios": 37,
-   "posts": 35
+   "comentarios": 38,
+   "posts": 36
   },
   {
    "tema": "primera",
@@ -124,9 +124,9 @@
   }
  ],
  "sentimiento": {
-  "positivo": 865,
-  "negativo": 3668,
-  "neutral": 2937,
+  "positivo": 870,
+  "negativo": 3696,
+  "neutral": 2954,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -166,7 +166,7 @@
    "activa": true
   }
  ],
- "releidos": 24,
+ "releidos": 18,
  "destacados": [
   {
    "url": "https://www.facebook.com/reel/1126101626468258",
@@ -175,10 +175,10 @@
    "fecha": "2026-10-24",
    "titulo": "#NDTInforma │ Denunció amenazas de muerte y que un vecino la dejó encerrada con candado en Tijuana. La joven de 19 años declaró ante la Fiscalía que el hombre…",
    "tipo": "video",
-   "likes": 1426,
-   "comentarios": 181,
-   "compartidos": 374,
-   "reproducciones": 76820,
+   "likes": 1843,
+   "comentarios": 210,
+   "compartidos": 455,
+   "reproducciones": 114174,
    "alcance": "zona",
    "publicado": "2026-10-24T21:25:35+00:00",
    "cosechados": 10,
@@ -288,6 +288,30 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/NdTijuana/videos/2335396313902840",
+   "cuenta": "ndtijuana_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-25",
+   "titulo": "Persona atrapada en medio de dos moteles",
+   "tipo": "video",
+   "likes": 428,
+   "comentarios": 93,
+   "compartidos": 48,
+   "reproducciones": 64664,
+   "alcance": "nacional",
+   "publicado": "2026-10-25T07:21:19+00:00",
+   "cosechados": 10,
+   "opinion": 9,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 3,
+    "neutral": 5,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0VeBRmnGJddKYh8RYw3Wu7FX2UYRqwELk24tkX5FczECUecT4wnbR9WG8FoKfTuaGl&id=100086488503408",
    "cuenta": "blancorojo_fb",
    "zona": "estatal",
@@ -358,23 +382,24 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02ReYZNhaA8HKETzhkTNwAzQyFswrm1MmVpyfKvSsrStNbguaX5x2sCxk3jhaRnvx3l",
-   "cuenta": "ndtijuana_fb",
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/2207599776815430",
+   "cuenta": "blanconegro_fb",
    "zona": "Tijuana",
-   "fecha": "2026-10-24",
-   "titulo": "#GaleríaNDT Escuchan disparo y encuentran a hombre herido en la colonia Emperadores",
-   "tipo": "imagen",
-   "likes": 342,
-   "comentarios": 17,
-   "compartidos": 16,
+   "fecha": "2026-10-25",
+   "titulo": "En vivo, #Tijuana Un hombre pierde la vida tras ser atacado a balazos en valle imperial",
+   "tipo": "video",
+   "likes": 282,
+   "comentarios": 22,
+   "compartidos": 27,
+   "reproducciones": 32761,
    "alcance": "zona",
-   "publicado": "2026-10-24T05:43:31+00:00",
+   "publicado": "2026-10-25T08:08:41+00:00",
    "cosechados": 10,
-   "opinion": 9,
+   "opinion": 8,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 6,
-    "neutral": 3,
+    "negativo": 2,
+    "neutral": 6,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -404,6 +429,29 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0VN8KwDxY12en8sDsUf26fKesokm9ZcUCWs5ewhcC1YvfJF5tYP3tBTiRVpTwFeRCl",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-24",
+   "titulo": "#GaleríaNDT Denuncias ciudadanas dan resultado: Inician reparación del puente de Terrazas del Valle",
+   "tipo": "imagen",
+   "likes": 205,
+   "comentarios": 24,
+   "compartidos": 26,
+   "alcance": "zona",
+   "publicado": "2026-10-24T19:46:07+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 8,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/NdTijuana/posts/pfbid02YumWrPatr8ZB57D5Qsyqc2uKBNt5ZAKtKxhPYq4zx5qgMd3H8PHBiH8Vni5DnsJal",
    "cuenta": "ndtijuana_fb",
    "zona": "Tijuana",
@@ -421,6 +469,29 @@
     "positivo": 0,
     "negativo": 4,
     "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0BZKuKMnna3WqB3aR9FeyvcXuqv2MvKT5NgcveUEarwgC7r5VgybjN6WkGV8CAiVWl",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-24",
+   "titulo": "🚨 Disputa por el control del cobro de cuotas en la Aduana de Tijuana",
+   "tipo": "imagen",
+   "likes": 177,
+   "comentarios": 69,
+   "compartidos": 52,
+   "alcance": "zona",
+   "publicado": "2026-10-24T22:08:26+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 6,
+    "neutral": 4,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -450,29 +521,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0BZKuKMnna3WqB3aR9FeyvcXuqv2MvKT5NgcveUEarwgC7r5VgybjN6WkGV8CAiVWl",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-24",
-   "titulo": "🚨 Disputa por el control del cobro de cuotas en la Aduana de Tijuana",
-   "tipo": "imagen",
-   "likes": 151,
-   "comentarios": 64,
-   "compartidos": 48,
-   "alcance": "zona",
-   "publicado": "2026-10-24T22:08:26+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 6,
-    "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02y68n1cVnCnFCpRtRR2ydMBbv9ktTL7waqeYmgWYB7UvMin9oeaW98gwX3vsiznEil&id=100086488503408",
    "cuenta": "blancorojo_fb",
    "zona": "nacional",
@@ -490,6 +538,100 @@
     "positivo": 1,
     "negativo": 7,
     "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/2344376876333018",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-25",
+   "titulo": "Hombre atrapado Colonia Guillén",
+   "tipo": "video",
+   "likes": 139,
+   "comentarios": 9,
+   "compartidos": 9,
+   "reproducciones": 21286,
+   "alcance": "zona",
+   "publicado": "2026-10-25T07:41:33+00:00",
+   "cosechados": 9,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 4,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0Vn9piaMrQFPGgbx98eDPxDZN7Q56ZrwbJwNM77CZkJiU8TCChkvpKvBZJmq9hzqzl",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-25",
+   "titulo": "🌇🌙 Colorido atardecer y luna creciente adornan el cielo de Tijuana",
+   "tipo": "imagen",
+   "likes": 110,
+   "comentarios": 9,
+   "compartidos": 7,
+   "alcance": "zona",
+   "publicado": "2026-10-25T02:41:31+00:00",
+   "cosechados": 2,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 0,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid032JLcZdbikiv8iPyenPWM3M8HmVVGH57gXYDJK7fsyUoz6eYSDKZhu57czZg9jNnEl",
+   "cuenta": "blanconegro_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-24",
+   "titulo": "La ASF dijo que cuenta con elementos para investigar el presunto conflicto de interés y triangulación de recursos en el INE.",
+   "tipo": "otro",
+   "likes": 93,
+   "comentarios": 27,
+   "compartidos": 27,
+   "alcance": "nacional",
+   "publicado": "2026-10-24T20:53:33+00:00",
+   "cosechados": 8,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 4,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/videos/1750263283133004",
+   "cuenta": "ndtijuana_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-24",
+   "titulo": "La vida de Christian a tenido retos de vida o muerte, pero a podido enfrentar cada uno de ellos, hoy nuevamente tiene una prueba más…",
+   "tipo": "video",
+   "likes": 93,
+   "comentarios": 12,
+   "compartidos": 30,
+   "reproducciones": 17574,
+   "alcance": "nacional",
+   "publicado": "2026-10-24T20:57:54+00:00",
+   "cosechados": 7,
+   "opinion": 6,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 1,
+    "neutral": 4,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -542,70 +684,46 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/videos/1750263283133004",
-   "cuenta": "ndtijuana_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-24",
-   "titulo": "La vida de Christian a tenido retos de vida o muerte, pero a podido enfrentar cada uno de ellos, hoy nuevamente tiene una prueba más…",
-   "tipo": "video",
-   "likes": 87,
-   "comentarios": 12,
-   "compartidos": 30,
-   "reproducciones": 16004,
-   "alcance": "nacional",
-   "publicado": "2026-10-24T20:57:54+00:00",
-   "cosechados": 7,
-   "opinion": 6,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 1,
-    "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid032JLcZdbikiv8iPyenPWM3M8HmVVGH57gXYDJK7fsyUoz6eYSDKZhu57czZg9jNnEl",
-   "cuenta": "blanconegro_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-24",
-   "titulo": "La ASF dijo que cuenta con elementos para investigar el presunto conflicto de interés y triangulación de recursos en el INE.",
-   "tipo": "otro",
-   "likes": 83,
-   "comentarios": 25,
-   "compartidos": 26,
-   "alcance": "nacional",
-   "publicado": "2026-10-24T20:53:33+00:00",
-   "cosechados": 8,
-   "opinion": 7,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 4,
-    "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0Vn9piaMrQFPGgbx98eDPxDZN7Q56ZrwbJwNM77CZkJiU8TCChkvpKvBZJmq9hzqzl",
-   "cuenta": "blanconegro_fb",
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid036WXrWoBnavMngtKYgc6K5H9VvJdM1rFTqDgGoh1M7wpKgeYM3VTEyr8sJsZ1oVjLl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
    "zona": "Tijuana",
    "fecha": "2026-10-25",
-   "titulo": "🌇🌙 Colorido atardecer y luna creciente adornan el cielo de Tijuana",
+   "titulo": "Por si andan buscando ese perrito anda por la Sánchez Taboada , anda perdido desorientados.",
    "tipo": "imagen",
-   "likes": 69,
-   "comentarios": 7,
-   "compartidos": 5,
+   "likes": 71,
+   "comentarios": 8,
+   "compartidos": 3,
    "alcance": "zona",
-   "publicado": "2026-10-25T02:41:31+00:00",
+   "publicado": "2026-10-25T02:43:05+00:00",
+   "cosechados": 7,
+   "opinion": 5,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 3,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0VSPLRtkeNNMyfes7jLt76n8YceQKHsnQGtbPtp2Z3tYsKZh9Jk3SroN9772ZZ37Hl",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tecate",
+   "fecha": "2026-10-25",
+   "titulo": "🎤✨ Profeta en su tierra: Julieta Venegas regresa a casa y conquista Tecate Península",
+   "tipo": "imagen",
+   "likes": 68,
+   "comentarios": 3,
+   "compartidos": 1,
+   "alcance": "zona",
+   "publicado": "2026-10-25T05:23:11+00:00",
    "cosechados": 2,
    "opinion": 2,
    "sentimiento": {
-    "positivo": 1,
+    "positivo": 0,
     "negativo": 0,
-    "neutral": 1,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -629,29 +747,6 @@
     "positivo": 0,
     "negativo": 1,
     "neutral": 6,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid036WXrWoBnavMngtKYgc6K5H9VvJdM1rFTqDgGoh1M7wpKgeYM3VTEyr8sJsZ1oVjLl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-25",
-   "titulo": "Por si andan buscando ese perrito anda por la Sánchez Taboada , anda perdido desorientados.",
-   "tipo": "imagen",
-   "likes": 60,
-   "comentarios": 7,
-   "compartidos": 3,
-   "alcance": "zona",
-   "publicado": "2026-10-25T02:43:05+00:00",
-   "cosechados": 7,
-   "opinion": 5,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 3,
-    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -761,10 +856,10 @@
    "fecha": "2026-10-24",
    "titulo": "#primersistemadenoticias #bajacalifornia #tijuana #mexicali #rosarito #ensenada #sanquintin #sanfelipe #tecate #marinadelpilar #marinadelpilaravila #gobierno #…",
    "tipo": "video",
-   "likes": 31,
+   "likes": 35,
    "comentarios": 6,
-   "compartidos": 4,
-   "reproducciones": 939,
+   "compartidos": 5,
+   "reproducciones": 1018,
    "alcance": "zona",
    "publicado": "2026-10-24T16:01:17+00:00",
    "cosechados": 0,
@@ -772,6 +867,76 @@
    "sentimiento": {
     "positivo": 0,
     "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/reel/1433613374943378",
+   "cuenta": "psn_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-24",
+   "titulo": "#LoVisteEnPSN | La violencia sigue a todas horas en la ciudad: un hombre fue asesinado en Camino Verde.",
+   "tipo": "video",
+   "likes": 32,
+   "comentarios": 0,
+   "compartidos": 0,
+   "reproducciones": 3001,
+   "alcance": "zona",
+   "publicado": "2026-10-24T16:00:33+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0Wzp4pwK8u2r5xe9eMVdZ9c52FoxMkJmMuJWZXk3Em8uMV1NB9JHhzLnJUd8eqKACl",
+   "cuenta": "blanconegro_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-25",
+   "titulo": "🐾 Baja California fortalece las acciones contra el maltrato animal con penas de hasta ocho años de prisión por crueldad, mecanismos de atención a denuncias y e…",
+   "tipo": "imagen",
+   "likes": 31,
+   "comentarios": 7,
+   "compartidos": 1,
+   "alcance": "estatal",
+   "publicado": "2026-10-25T00:35:37+00:00",
+   "cosechados": 4,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 4,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0imbNgnH1Dwp27H9eHsBhPL7VuGrJyh4GPTLpHnjCA9T8J7RxMzPXtXfUEJ2YQjWil",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-25",
+   "titulo": "SIN ANESTESIA | LA TEORÍA DEL REBAÑO: MORENA Y EL ARTE DE PASTOREAR AMBICIONES",
+   "tipo": "imagen",
+   "likes": 27,
+   "comentarios": 8,
+   "compartidos": 5,
+   "alcance": "zona",
+   "publicado": "2026-10-25T03:54:39+00:00",
+   "cosechados": 7,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 7,
     "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -802,76 +967,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/reel/1433613374943378",
-   "cuenta": "psn_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-24",
-   "titulo": "#LoVisteEnPSN | La violencia sigue a todas horas en la ciudad: un hombre fue asesinado en Camino Verde.",
-   "tipo": "video",
-   "likes": 26,
-   "comentarios": 0,
-   "compartidos": 0,
-   "reproducciones": 1986,
-   "alcance": "zona",
-   "publicado": "2026-10-24T16:00:33+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid06nG3hxPTTUdDkJ95JKBswmGLEfgzWE4ExvP43k19CgF8aQMTuQdfbE42RbZGeBBnl",
-   "cuenta": "ndtijuana_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-24",
-   "titulo": "#NDTInforma Entró como cliente y robó 5 mil con un cuchillo",
-   "tipo": "imagen",
-   "likes": 25,
-   "comentarios": 1,
-   "compartidos": 4,
-   "alcance": "nacional",
-   "publicado": "2026-10-24T19:34:49+00:00",
-   "cosechados": 2,
-   "opinion": 2,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0Wzp4pwK8u2r5xe9eMVdZ9c52FoxMkJmMuJWZXk3Em8uMV1NB9JHhzLnJUd8eqKACl",
-   "cuenta": "blanconegro_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-25",
-   "titulo": "🐾 Baja California fortalece las acciones contra el maltrato animal con penas de hasta ocho años de prisión por crueldad, mecanismos de atención a denuncias y e…",
-   "tipo": "imagen",
-   "likes": 24,
-   "comentarios": 2,
-   "compartidos": 1,
-   "alcance": "estatal",
-   "publicado": "2026-10-25T00:35:37+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0awApqUpnH59HeyYQ4uU2XjyNiNQrCBn8o8GCzidso9Ek9Nc3Q44QakaMii6WHRJPl&id=100086488503408",
    "cuenta": "blancorojo_fb",
    "zona": "nacional",
@@ -895,18 +990,17 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/reel/1095029253312105",
-   "cuenta": "psn_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-24",
-   "titulo": "#LoVisteEnPSN | Continuarán las ¡lluvias en Tijuana no se confíe, extreme precauciones!",
-   "tipo": "video",
-   "likes": 15,
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0VouCH45M6ZcASwMXSPmfMx4UA3N7pbwKtri6176oYgkM3rkVqstT8z5y7m1XR2mxl",
+   "cuenta": "blanconegro_fb",
+   "zona": "nacional",
+   "fecha": "2026-10-25",
+   "titulo": "WhatsApp cambió la ubicación de los Estados como parte de una prueba por tiempo limitado en México",
+   "tipo": "otro",
+   "likes": 19,
    "comentarios": 1,
-   "compartidos": 2,
-   "reproducciones": 852,
-   "alcance": "zona",
-   "publicado": "2026-10-24T19:00:46+00:00",
+   "compartidos": 1,
+   "alcance": "nacional",
+   "publicado": "2026-10-25T03:45:45+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -942,29 +1036,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0imbNgnH1Dwp27H9eHsBhPL7VuGrJyh4GPTLpHnjCA9T8J7RxMzPXtXfUEJ2YQjWil",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-25",
-   "titulo": "SIN ANESTESIA | LA TEORÍA DEL REBAÑO: MORENA Y EL ARTE DE PASTOREAR AMBICIONES",
-   "tipo": "imagen",
-   "likes": 14,
-   "comentarios": 0,
-   "compartidos": 4,
-   "alcance": "zona",
-   "publicado": "2026-10-25T03:54:39+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02ZMYPCDhhwkhCPeQRDGXvGv5SyFFAq67dEw39nUyJ6ygmaTSSeMDHHpQCpxGDZ4chl",
    "cuenta": "blanconegro_fb",
    "zona": "nacional",
@@ -988,39 +1059,16 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0n2drKbitEJtXqnQcFtH7WshdCBQtw1vdLPkg8qrx2iQy713X5CWfrxcHE6h37fNKl",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-24",
-   "titulo": "#NDTInforma Tijuana fortalece la atención de salud mental y adicciones",
-   "tipo": "imagen",
-   "likes": 10,
-   "comentarios": 2,
-   "compartidos": 2,
-   "alcance": "zona",
-   "publicado": "2026-10-24T17:55:08+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/reel/1418310326953351",
    "cuenta": "psn_fb",
    "zona": "estatal",
    "fecha": "2026-10-24",
    "titulo": "#LoVisteEnPSN | Muere hombre a un costado del muro fronterizo tras haber sido atacado a disparos.",
    "tipo": "video",
-   "likes": 9,
+   "likes": 10,
    "comentarios": 0,
    "compartidos": 0,
-   "reproducciones": 1038,
+   "reproducciones": 1127,
    "alcance": "nacional",
    "publicado": "2026-10-24T15:01:04+00:00",
    "cosechados": 0,
@@ -1105,29 +1153,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/aztecabc/posts/pfbid027PeGGQ2GpN4TJ1PjX7afRRpZXuqhciAEKroPNS3Sw54TbA333j3Xr1FUFnxT2sfZl",
-   "cuenta": "aztecabc_fb",
-   "zona": "Mexicali",
-   "fecha": "2026-10-24",
-   "titulo": "Peligro vial en Mexicali: semáforo en importante crucero lleva más de una semana apagado y sin reparación. 🚦",
-   "tipo": "otro",
-   "likes": 0,
-   "comentarios": 0,
-   "compartidos": 0,
-   "alcance": "zona",
-   "publicado": "2026-10-24T10:30:01+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/aztecabc/posts/pfbid02qeY6buRZ8KGaNp43ovUAkhC5oLN6docF8p5M3Pvxnkmd4v6K66xQmgEz74WGvqZ8l",
    "cuenta": "aztecabc_fb",
    "zona": "San Diego",
@@ -1149,65 +1174,87 @@
     "sin_modelo_idioma": 0
    },
    "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/aztecabc/posts/pfbid05XRCFFFyv2zxENxEAFE4zqKXmc6qNHZ7quoNoSgCNf6jsTJL3DHxWC54EPCyJzCul",
+   "cuenta": "aztecabc_fb",
+   "zona": "nacional",
+   "fecha": "2026-10-25",
+   "titulo": "¿Has visto una esfera de fuego en la noche? La leyenda mexicana sobre las brujas que se apoderan de las montañas. 🔥",
+   "tipo": "otro",
+   "likes": 0,
+   "comentarios": 0,
+   "compartidos": 0,
+   "alcance": "nacional",
+   "publicado": "2026-10-25T10:30:02+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
   }
  ],
  "salud": [
   {
    "cuenta": "aztecabc_fb",
    "estado": "ok",
-   "posts": 8,
-   "comentarios": 2,
-   "crudos": 5,
-   "fuera": 0,
+   "posts": 7,
+   "comentarios": 0,
+   "crudos": 4,
+   "fuera": 1,
    "compartidos": 0
   },
   {
    "cuenta": "blanconegro_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 29,
-   "crudos": 37,
+   "comentarios": 25,
+   "crudos": 29,
    "fuera": 0,
    "compartidos": 0
   },
   {
    "cuenta": "blancorojo_fb",
    "estado": "ok",
-   "posts": 4,
-   "comentarios": 17,
-   "crudos": 18,
+   "posts": 3,
+   "comentarios": 4,
+   "crudos": 4,
    "fuera": 1,
-   "compartidos": 3
+   "compartidos": 4
   },
   {
    "cuenta": "ndtijuana_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 30,
-   "crudos": 32,
+   "comentarios": 29,
+   "crudos": 30,
    "fuera": 0,
    "compartidos": 0
   },
   {
    "cuenta": "psn_fb",
    "estado": "ok",
-   "posts": 6,
+   "posts": 7,
    "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar",
+   "crudos": 2,
    "fuera": 0,
    "compartidos": 1
   }
  ],
  "gasto": {
   "resultados": 250,
-  "gastado": 131,
+  "gastado": 109,
   "por_concepto": {
-   "aztecabc_fb": 13,
-   "blanconegro_fb": 45,
-   "blancorojo_fb": 26,
-   "ndtijuana_fb": 40,
-   "psn_fb": 7
+   "aztecabc_fb": 12,
+   "blanconegro_fb": 37,
+   "blancorojo_fb": 12,
+   "ndtijuana_fb": 38,
+   "psn_fb": 10
   }
  }
 }
