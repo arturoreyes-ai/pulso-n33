@@ -21,6 +21,7 @@
  * ni terminos buscados, ni titulares. Las herramientas son de solo lectura.
  */
 
+import type { Contexto } from "./comun";
 import { correrHerramienta, HERRAMIENTAS } from "./herramientas";
 import { verificarAcceso } from "./oauth/claves";
 import { desafio401, origenPublico, puedeConectar, recursoDe, secretoMcp } from "./oauth/servidor";
@@ -30,8 +31,9 @@ import { desafio401, origenPublico, puedeConectar, recursoDe, secretoMcp } from 
 const VERSIONES = ["2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05"];
 
 const INSTRUCCIONES = [
-  "Pulso N33 es el tablero de inteligencia regional de Tijuana–San Diego. Este servidor contesta cuánto cuesta operarlo.",
-  "Empieza por resumen_de_gasto. Montos en dólares estadounidenses; fechas en hora de Tijuana.",
+  "Pulso N33 es el tablero de inteligencia regional de Tijuana–San Diego. Este servidor hace lo mismo que el tablero: leer noticias, redes, X, garitas, reportes y el seguimiento; generar guiones, analizar, seguir publicaciones y buscar en redes; administrar usuarios; y decir cuánto cuesta todo eso.",
+  "Las herramientas cuyo título dice «(cuesta)» gastan dinero real. Antes de usar una, dile a la persona cuánto suele costar (está en su descripción y en cuanto_cuesta_cada_accion); después, dile lo que costó, que viene en la respuesta (costo_ia, costo o reservado_usd).",
+  "Montos en dólares estadounidenses salvo el gasto electoral, que va en pesos; fechas en hora de Tijuana.",
   "«sin_dato» quiere decir que esa cifra no se registraba o no se pudo leer: no es cero, no lo reportes como cero.",
 ].join(" ");
 
@@ -75,7 +77,7 @@ function error(id: Mensaje["id"], codigo: number, mensaje: string) {
   return { jsonrpc: "2.0", id: id ?? null, error: { code: codigo, message: mensaje } };
 }
 
-async function atender(m: Mensaje): Promise<object | null> {
+async function atender(m: Mensaje, contexto: Contexto): Promise<object | null> {
   // Una RESPUESTA del cliente (trae result o error y no method) se acepta y
   // no se contesta, igual que una notificacion: la especificacion pide 202.
   if (m.method === undefined && (m.result !== undefined || m.error !== undefined)) return null;
@@ -92,7 +94,7 @@ async function atender(m: Mensaje): Promise<object | null> {
         result: {
           protocolVersion: VERSIONES.includes(pedida) ? pedida : VERSIONES[0],
           capabilities: { tools: { listChanged: false } },
-          serverInfo: { name: "pulso-n33-gasto", title: "Pulso N33: gasto", version: "1.0.0" },
+          serverInfo: { name: "pulso-n33", title: "Pulso N33", version: "2.0.0" },
           instructions: INSTRUCCIONES,
         },
       };
@@ -109,7 +111,7 @@ async function atender(m: Mensaje): Promise<object | null> {
       const nombre = typeof m.params?.name === "string" ? m.params.name : "";
       const args = m.params?.arguments;
       const argumentos = args !== null && typeof args === "object" && !Array.isArray(args) ? (args as Record<string, unknown>) : {};
-      return { jsonrpc: "2.0", id: m.id, result: await correrHerramienta(nombre, argumentos) };
+      return { jsonrpc: "2.0", id: m.id, result: await correrHerramienta(nombre, argumentos, contexto) };
     }
     default:
       return error(m.id, -32601, `Método no disponible: ${m.method}`);
@@ -155,7 +157,7 @@ export async function responderMcp(peticion: Request, entorno: NodeJS.ProcessEnv
     return Response.json(error(null, -32600, "Esta versión del protocolo no admite lotes"), { status: 400, headers: SIN_CACHE });
   }
   const mensajes = (lote ? cuerpo : [cuerpo]) as Mensaje[];
-  const respuestas = (await Promise.all(mensajes.map((m) => atender(m ?? {})))).filter((r) => r !== null);
+  const respuestas = (await Promise.all(mensajes.map((m) => atender(m ?? {}, { usuarioId: llamante, origen })))).filter((r) => r !== null);
   if (respuestas.length === 0) return new Response(null, { status: 202, headers: SIN_CACHE });
   return Response.json(lote ? respuestas : respuestas[0], { headers: SIN_CACHE });
 }

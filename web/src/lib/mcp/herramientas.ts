@@ -1,5 +1,7 @@
 /**
- * Las herramientas del MCP: cinco preguntas de gasto, todas de solo lectura.
+ * El registro de herramientas del MCP y las de GASTO: cuanto ha costado y
+ * cuanto cuesta cada accion. Las que leen el tablero estan en
+ * herramientas-lectura.ts y las que gastan o borran en herramientas-pago.ts.
  *
  * Lo que cuestan las cosas sale de dos fuentes y nunca se inventa una
  * tercera: la cuenta de Apify (lo cobrado, lib/uso/apify.ts) y los libros
@@ -16,17 +18,15 @@ import { cuentaApify, gastoPorActor, SinApify } from "@/lib/uso/apify";
 import { accionesRecientes, gastoPorAccion, gastoPorPersona, modeloAnotadoDesde, type FilaAccion } from "@/lib/uso/libros";
 import { PRECIOS } from "@/lib/uso/modelo";
 import { periodoDe, PeriodoInvalido, ZONA, type Periodo } from "@/lib/uso/periodo";
+import { conContexto, type CostoModelo } from "@/lib/uso/contexto";
+import { TOPE_POR_BUSQUEDA } from "@/lib/redes-en-vivo/responder";
+import { ErrorDeAccion, type Contexto, type Herramienta } from "./comun";
+import { HERRAMIENTAS_LECTURA } from "./herramientas-lectura";
+import { HERRAMIENTAS_PAGO } from "./herramientas-pago";
+
+export type { Herramienta };
 
 type Argumentos = Record<string, unknown>;
-
-export type Herramienta = {
-  name: string;
-  title: string;
-  description: string;
-  inputSchema: Record<string, unknown>;
-  annotations: Record<string, boolean>;
-  correr: (a: Argumentos) => Promise<unknown>;
-};
 
 const PERIODO = {
   desde: { type: "string", description: "Primer día, AAAA-MM-DD, hora de Tijuana. Si falta: el día 1 del mes en curso." },
@@ -162,7 +162,47 @@ async function porActor(a: Argumentos) {
   };
 }
 
-export const HERRAMIENTAS: Herramienta[] = [
+/** Lo que suele costar cada accion pagada, medido (AGENTS.md lleva las
+ *  fechas de cada medida). Es la cifra de antes de hacerla; la de despues la
+ *  dice la respuesta de la herramienta, y el promedio real, los libros. */
+const REFERENCIA: { accion: string; herramienta: string; tipico: string; reserva_maxima_usd?: number; tope?: string }[] = [
+  { accion: "busqueda_redes", herramienta: "busqueda_en_vivo_en_redes", tipico: "US$0.17 medido; hasta ~US$0.60", reserva_maxima_usd: TOPE_POR_BUSQUEDA, tope: `US$${TOPE_BUSQUEDA} al mes, 10 al día por persona` },
+  { accion: "seguimiento", herramienta: "seguir_publicacion / actualizar_seguimiento", tipico: "US$0.07 en promedio por lectura", reserva_maxima_usd: 0.6, tope: `US$${TOPE_SEGUIMIENTO} al mes, 10 al día por persona` },
+  { accion: "modelo:guion", herramienta: "generar_guion", tipico: "US$0.02–0.04 por guion" },
+  { accion: "modelo:detallar", herramienta: "detallar_nota", tipico: "US$0.01–0.02 por nota" },
+  { accion: "modelo:analizar", herramienta: "analizar_nota", tipico: "menos de US$0.01" },
+  { accion: "modelo:analizar-publicacion", herramienta: "analizar_publicacion", tipico: "menos de US$0.01" },
+  { accion: "modelo:resumen-seguimiento", herramienta: "resumir_comentarios_seguidos", tipico: "US$0.01–0.02" },
+];
+
+async function cuantoCuesta() {
+  const p = periodoDe(new Date(Date.now() - 90 * 86_400_000).toISOString().slice(0, 10), undefined);
+  const filas = hayBaseDeDatos() ? await gastoPorAccion(p) : [];
+  return {
+    acciones: REFERENCIA.map((r) => {
+      // «modelo:analizar» no debe sumar «modelo:analizar-publicacion».
+      const propias = filas.filter((f) => f.accion === r.accion || f.accion.startsWith(`${r.accion}:`));
+      const veces = propias.reduce((n, f) => n + f.veces, 0);
+      const total = propias.reduce((n, f) => n + f.usd_total, 0);
+      return {
+        ...r,
+        ultimos_90_dias: veces > 0 ? { veces, usd_total: redondo(total), usd_promedio: Math.round((total / veces) * 10_000) / 10_000 } : "sin_dato",
+      };
+    }),
+    gratis: "Leer noticias, redes, X, garitas, reportes, expedientes, el seguimiento, el gasto electoral y los usuarios no cuesta.",
+    automatico: "La cosecha de redes cada seis horas cuesta aunque nadie pulse nada; está en resumen_de_gasto y gasto_apify_por_actor.",
+  };
+}
+
+const HERRAMIENTAS_GASTO: Herramienta[] = [
+  {
+    name: "cuanto_cuesta_cada_accion",
+    title: "Cuánto cuesta cada acción",
+    description: "Antes de hacer algo que cuesta: lo que suele costar cada acción pagada del tablero, su reserva máxima, su tope, y lo que costó de verdad en promedio los últimos 90 días.",
+    inputSchema: { type: "object", properties: {}, additionalProperties: false },
+    annotations: SOLO_LECTURA,
+    correr: cuantoCuesta,
+  },
   {
     name: "resumen_de_gasto",
     title: "Resumen de gasto",
@@ -214,18 +254,45 @@ export const HERRAMIENTAS: Herramienta[] = [
   },
 ];
 
-/** El resultado de `tools/call`. Un error de la pregunta (una fecha mal
- *  escrita) vuelve al modelo como `isError` para que corrija; no es un error
- *  del protocolo. */
-export async function correrHerramienta(nombre: string, argumentos: Argumentos) {
+export const HERRAMIENTAS: Herramienta[] = [...HERRAMIENTAS_GASTO, ...HERRAMIENTAS_LECTURA, ...HERRAMIENTAS_PAGO];
+
+/** Lo que vuelve a Claude cabe en ~150,000 caracteres en claude.ai. */
+const TOPE_CARACTERES = 140_000;
+
+const micro = (n: number) => Math.round(n * 1_000_000) / 1_000_000;
+
+function costoIa(costos: CostoModelo[]) {
+  return { usd: micro(costos.reduce((n, c) => n + c.usd, 0)), llamadas: costos.map((c) => ({ ...c, usd: micro(c.usd) })) };
+}
+
+/**
+ * El resultado de `tools/call`. Corre dentro del contexto de uso (quien
+ * llama y lo que cuesta); si la accion llamo al modelo, la respuesta lleva
+ * `costo_ia` con la suma exacta. Un error de la pregunta vuelve al modelo como
+ * `isError` para que corrija; no es un error del protocolo.
+ */
+export async function correrHerramienta(nombre: string, argumentos: Argumentos, contexto: Contexto) {
   const h = HERRAMIENTAS.find((x) => x.name === nombre);
   if (h === undefined) return { isError: true, content: [{ type: "text", text: `No existe la herramienta «${nombre}».` }] };
+  const uso = { usuarioId: contexto.usuarioId, costos: [] as CostoModelo[] };
   try {
-    const valor = await h.correr(argumentos);
-    return { content: [{ type: "text", text: JSON.stringify(valor, null, 1) }], structuredContent: valor };
+    let valor = await conContexto(uso, () => h.correr(argumentos, contexto));
+    if (uso.costos.length > 0) {
+      valor = valor !== null && typeof valor === "object" && !Array.isArray(valor)
+        ? { ...(valor as object), costo_ia: costoIa(uso.costos) }
+        : { resultado: valor, costo_ia: costoIa(uso.costos) };
+    }
+    const texto = JSON.stringify(valor, null, 1);
+    if (texto.length > TOPE_CARACTERES) {
+      return { content: [{ type: "text", text: `${texto.slice(0, TOPE_CARACTERES)}\n… (recortado: no cabe completo; pide menos con los filtros de la herramienta)` }] };
+    }
+    return { content: [{ type: "text", text: texto }], structuredContent: valor };
   } catch (e) {
-    if (!(e instanceof PeriodoInvalido || e instanceof SinConfiguracion || e instanceof SinApify)) console.error(e);
+    const esperado = e instanceof PeriodoInvalido || e instanceof SinConfiguracion || e instanceof SinApify || e instanceof ErrorDeAccion;
+    if (!esperado) console.error(e);
     const texto = e instanceof Error ? e.message : "Error desconocido";
-    return { isError: true, content: [{ type: "text", text: texto }] };
+    // Si la accion alcanzo a llamar al modelo y luego fallo, eso tambien se cobro.
+    const cobrado = uso.costos.length > 0 ? `\n(La IA alcanzó a cobrar US$${costoIa(uso.costos).usd}.)` : "";
+    return { isError: true, content: [{ type: "text", text: `${texto}${cobrado}` }] };
   }
 }

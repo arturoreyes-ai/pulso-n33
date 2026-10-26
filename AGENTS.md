@@ -1272,14 +1272,37 @@ and are not:
   caps, the single save, the dataset deletion, rule 5, language and the purge
   secret.
 
-### The spending MCP (`/api/mcp`)
+### The MCP (`/api/mcp`): the whole dashboard from Claude, with its cost
 
-Since 26 October 2026 the company's president can ask their own Claude what
-Pulso costs: a remote MCP server inside `web/` (`lib/mcp/`, route
-`app/api/mcp/route.ts`), five read-only tools (`resumen_de_gasto`,
-`costo_por_accion`, `gasto_por_persona`, `acciones_recientes`,
-`gasto_apify_por_actor`). What is not obvious:
+Since 26 October 2026 the company's owner can use Pulso from their own Claude:
+a remote MCP server inside `web/` (`lib/mcp/`, route `app/api/mcp/route.ts`).
+It started that morning as five read-only spending tools; the same day the
+owner asked that it «do everything» and say what each thing costs, «so they
+take it into account». It now has 31 tools in three classes (`comun.ts`):
+read (free, `readOnlyHint`), paid (title ends «(cuesta)», never read-only, so
+Claude asks before each call), and destructive (`dejar_de_seguir`,
+`cambiar_usuario`). What is not obvious:
 
+- **Every tool calls the site's own `responder*` function**, so flags, caps,
+  ledgers and the 30-minute cooldowns apply exactly as from a button. The
+  caller has no Entra cookie, so seguimiento and the live search get the
+  token's user through their existing `deps.usuario`, and the AI cost log gets
+  it through `lib/uso/contexto.ts` (AsyncLocalStorage): without it every MCP
+  model call would be logged with no person.
+- **Cost before and after.** Each paid description gives the measured typical
+  cost; `cuanto_cuesta_cada_accion` adds the real 90-day average; and each
+  result carries what it cost: `costo_ia` (the exact sum of that action's
+  model calls, collected by the context), or the Apify reservation and the
+  month's cap (`costo`, `reservado_usd`, `tope`); the charged amount of a
+  seguimiento read or live search arrives when it finishes
+  (`ficha_de_seguimiento`, `estado_busqueda_en_vivo`). The server
+  `instructions` ask Claude to say both to the person.
+- **The CDN does not protect the MCP.** /guion and Analizar avoid paying twice
+  through `s-maxage`; the MCP calls the functions directly, so every
+  `generar_guion` is a model call. The description says so.
+- **Results are trimmed to ~140,000 characters** (claude.ai caps a tool
+  result near 150,000): an expediente drops each story's body, and
+  anything longer is cut with a note.
 - **Two sources, never a third.** What was *billed* comes from Apify's own
   account API (`lib/uso/apify.ts`: `users/me/limits`, `usage/monthly`,
   `actor-runs` with `usageTotalUsd`); *whose* it was comes from the three
@@ -1325,9 +1348,12 @@ Pulso costs: a remote MCP server inside `web/` (`lib/mcp/`, route
   database, else every route is 404. The transport also follows the spec's
   MUSTs: `Origin` checked (403), unknown `MCP-Protocol-Version` is 400, no
   batches after 2025-06-18, client responses get 202.
-- **It exposes money and team names, never text**: no comment, term or
-  headline. Months are counted in America/Tijuana like the caps; Apify's days
-  are UTC, and the summary says so.
+- **It shows what the screen shows, to an admin.** Since it does everything,
+  it returns headlines, post captions and the published comment text, like the
+  site does; never commenter identity, which does not exist anywhere. Months
+  are counted in America/Tijuana like the caps; Apify's days are UTC, and the
+  summary says so. The OAuth scope is `pulso` (it was `gasto` that morning);
+  a token of the old scope is refused and Claude asks for consent again.
 
 ### Publicidad Meta tiene dos lectores y tampoco comparten fundamento legal
 

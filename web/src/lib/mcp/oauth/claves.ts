@@ -12,7 +12,11 @@
 import { createHash, createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 
 export const SEGUNDOS_ACCESO = 3600;
-export const ALCANCE = "gasto";
+/** Todo el tablero, desde el 26 de octubre de 2026 (antes «gasto», cuando el
+ *  MCP solo contaba el gasto). Un token del alcance viejo deja de valer y
+ *  Claude vuelve a pedir permiso, que es lo correcto: lo que se concede
+ *  cambio. */
+export const ALCANCE = "pulso";
 
 const PREFIJO = "pmcp";
 

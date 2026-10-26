@@ -21,6 +21,7 @@
  */
 
 import { hayBaseDeDatos, sql } from "@/lib/acceso/bd";
+import { contextoActual } from "./contexto";
 
 /** Dolares por millon de tokens, precio de lista de Anthropic al 26 de
  *  octubre de 2026. La escritura de cache cuesta 1.25 veces la entrada (TTL
@@ -101,17 +102,22 @@ async function escribir(accion: string, modelo: string, uso: Uso, negativa: bool
  * respuesta que no trae `model`.
  */
 export async function anotarUsoModelo(accion: string, modeloPedido: string, cuerpo: unknown): Promise<void> {
-  if (!hayBaseDeDatos() || cuerpo === null || typeof cuerpo !== "object") return;
+  if (cuerpo === null || typeof cuerpo !== "object") return;
   const r = cuerpo as { model?: unknown; usage?: Uso; stop_reason?: unknown };
   if (r.usage === undefined) return;
   const modelo = typeof r.model === "string" && r.model !== "" ? r.model : modeloPedido;
   const uso = r.usage;
   const negativa = r.stop_reason === "refusal";
+  // Dentro del MCP: la persona es la del token y el costo se le devuelve a
+  // la herramienta (contexto.ts). Se toma AHORA, antes de `after`.
+  const contexto = contextoActual();
+  contexto?.costos.push({ accion, modelo, usd: costoDe(modelo, uso) });
+  if (!hayBaseDeDatos()) return;
   try {
     const { after } = await import("next/server");
-    after(async () => escribir(accion, modelo, uso, negativa, await quienPulso()));
+    after(async () => escribir(accion, modelo, uso, negativa, contexto ? contexto.usuarioId : await quienPulso()));
   } catch {
-    // Fuera de una peticion (un script): se escribe ahora, sin persona.
-    await escribir(accion, modelo, uso, negativa, null);
+    // Fuera de una peticion (un script): se escribe ahora.
+    await escribir(accion, modelo, uso, negativa, contexto?.usuarioId ?? null);
   }
 }

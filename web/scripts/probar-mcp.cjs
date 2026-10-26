@@ -18,6 +18,12 @@ const SRC = path.resolve(__dirname, '../src');
 const cargados = new Map();
 
 function cargar(relativo) {
+  // Un JSON importado (los expedientes) se lee tal cual; una carpeta, por su index.
+  if (relativo.endsWith('.json')) {
+    const datos = JSON.parse(fs.readFileSync(path.join(SRC, relativo), 'utf8'));
+    return { __esModule: true, default: datos };
+  }
+  if (!fs.existsSync(path.join(SRC, relativo + '.ts')) && fs.existsSync(path.join(SRC, relativo, 'index.ts'))) relativo = path.join(relativo, 'index');
   const ruta = path.join(SRC, relativo + '.ts');
   if (cargados.has(ruta)) return cargados.get(ruta).exports;
   const modulo = new Module(ruta, module);
@@ -48,10 +54,13 @@ const oauth = cargar('lib/mcp/oauth/servidor');
 const claves = cargar('lib/mcp/oauth/claves');
 const { leerCliente, redirectPermitido, CLIENTES } = cargar('lib/mcp/oauth/clientes');
 const { revisarSolicitud, firmarSolicitud, leerSolicitud } = cargar('lib/mcp/oauth/autorizacion');
+const { conContexto } = cargar('lib/uso/contexto');
+const { leerRespuesta, ErrorDeAccion } = cargar('lib/mcp/comun');
 
 const SECRETO = 's'.repeat(40);
 const ORIGEN = 'https://x.test';
 const RECURSO = `${ORIGEN}/api/mcp`;
+const CTX = { usuarioId: 7, origen: ORIGEN };
 const encendido = { MCP_HABILITADO: 'true', AUTH_SECRET: SECRETO };
 // El usuario 7 es administrador; el 8, no. Sin base: se sustituye la consulta.
 oauth.puedeConectar = async (id) => id === 7;
@@ -96,7 +105,7 @@ function pedido(cuerpo, { metodo = 'POST', cabeceras = {}, token = TOKEN } = {})
   assert.equal(medianocheEnZona('2026-12-01').toISOString(), '2026-12-01T08:00:00.000Z');
 
   // Los errores de la pregunta, sin base: antes de fingir una.
-  const sinBase = await correrHerramienta('resumen_de_gasto', {});
+  const sinBase = await correrHerramienta('resumen_de_gasto', {}, CTX);
   assert.equal(sinBase.isError, true);
   assert.match(sinBase.content[0].text, /base de datos/);
 
@@ -121,7 +130,7 @@ function pedido(cuerpo, { metodo = 'POST', cabeceras = {}, token = TOKEN } = {})
   const desafio = sinToken.headers.get('www-authenticate');
   assert.match(desafio, /^Bearer /);
   assert.match(desafio, /resource_metadata="https:\/\/x\.test\/\.well-known\/oauth-protected-resource\/api\/mcp"/);
-  assert.match(desafio, /scope="gasto"/);
+  assert.match(desafio, /scope="pulso"/);
   // Tokens que no valen: otra audiencia, otro emisor, vencido, firma ajena,
   // una solicitud firmada presentada como token, y la llave vieja en la URL.
   const malos = [
@@ -129,7 +138,7 @@ function pedido(cuerpo, { metodo = 'POST', cabeceras = {}, token = TOKEN } = {})
     claves.emitirAcceso(7, RECURSO, 'https://otro.test', 'c', SECRETO),
     claves.emitirAcceso(7, RECURSO, ORIGEN, 'c', SECRETO, Date.now() - 2 * 3600_000),
     claves.emitirAcceso(7, RECURSO, ORIGEN, 'c', 'o'.repeat(40)),
-    claves.firmar({ sub: 7, aud: RECURSO, iss: ORIGEN, scp: 'gasto', exp: 9e9 }, SECRETO, 'solicitud'),
+    claves.firmar({ sub: 7, aud: RECURSO, iss: ORIGEN, scp: 'pulso', exp: 9e9 }, SECRETO, 'solicitud'),
     'cualquiera',
   ];
   for (const t of malos) assert.equal((await responderMcp(pedido(init, { token: t }), encendido)).status, 401, t.slice(0, 30));
@@ -153,12 +162,11 @@ function pedido(cuerpo, { metodo = 'POST', cabeceras = {}, token = TOKEN } = {})
   assert.equal((await responderMcp(pedido({ jsonrpc: '2.0', method: 'notifications/initialized' }), encendido)).status, 202);
   assert.equal((await responderMcp(pedido(null, { metodo: 'GET' }), encendido)).status, 405);
 
-  // tools/list: cinco, de solo lectura, sin la funcion adentro.
+  // tools/list: todas, sin la funcion adentro (las anotaciones, abajo).
   const lista = await (await responderMcp(pedido({ jsonrpc: '2.0', id: 2, method: 'tools/list' }), encendido)).json();
   assert.equal(lista.result.tools.length, HERRAMIENTAS.length);
   for (const t of lista.result.tools) {
     assert.equal(t.correr, undefined);
-    assert.equal(t.annotations.readOnlyHint, true, t.name);
     assert.match(t.name, /^[a-z_]+$/);
   }
 
@@ -177,10 +185,10 @@ function pedido(cuerpo, { metodo = 'POST', cabeceras = {}, token = TOKEN } = {})
   assert.equal((await responderMcp(pedido({ jsonrpc: '2.0', id: 9, result: {} }), encendido)).status, 202, 'una respuesta del cliente: 202');
 
   // Errores de la pregunta vuelven como isError, no como error del protocolo.
-  const mala = await correrHerramienta('costo_por_accion', { desde: 'ayer' });
+  const mala = await correrHerramienta('costo_por_accion', { desde: 'ayer' }, CTX);
   assert.equal(mala.isError, true);
   assert.match(mala.content[0].text, /AAAA-MM-DD/);
-  assert.equal((await correrHerramienta('inventada', {})).isError, true);
+  assert.equal((await correrHerramienta('inventada', {}, CTX)).isError, true);
 
   // === OAuth ================================================================
   // PKCE S256, con el vector del apendice B de RFC 7636.
@@ -262,6 +270,60 @@ function pedido(cuerpo, { metodo = 'POST', cabeceras = {}, token = TOKEN } = {})
   assert.equal((await token('grant_type=password')).headers.get('cache-control'), 'no-store');
 
   delete process.env.DATABASE_URL;
+
+  // === Todo el tablero ======================================================
+  // Cada herramienta: nombre corto y unico, titulo, y la anotacion que decide
+  // si Claude pide permiso. Las que cuestan lo dicen en el titulo y en la
+  // descripcion, y NUNCA son de solo lectura (Claude las correria sin preguntar).
+  const nombres = new Set();
+  for (const h of HERRAMIENTAS) {
+    assert.ok(!nombres.has(h.name), `repetida: ${h.name}`);
+    nombres.add(h.name);
+    assert.ok(h.name.length <= 64 && /^[a-z_]+$/.test(h.name), h.name);
+    assert.ok(h.title && h.description, h.name);
+    const cuesta = h.title.includes('(cuesta)');
+    assert.equal(cuesta, /CUESTA/.test(h.description), `titulo y descripcion de ${h.name} dicen lo mismo del costo`);
+    if (cuesta) assert.equal(h.annotations.readOnlyHint, false, `${h.name} cuesta y no puede ser de solo lectura`);
+    if (h.annotations.destructiveHint) assert.equal(h.annotations.readOnlyHint, false, h.name);
+  }
+  for (const n of ['generar_guion', 'detallar_nota', 'analizar_nota', 'analizar_publicacion', 'seguir_publicacion',
+    'actualizar_seguimiento', 'resumir_comentarios_seguidos', 'busqueda_en_vivo_en_redes']) {
+    assert.ok(HERRAMIENTAS.find((h) => h.name === n).title.includes('(cuesta)'), n);
+  }
+  for (const n of ['dejar_de_seguir', 'cambiar_usuario']) assert.equal(HERRAMIENTAS.find((h) => h.name === n).annotations.destructiveHint, true, n);
+  for (const n of ['noticias_en_tendencia', 'publicaciones_en_redes', 'garitas', 'usuarios', 'cuanto_cuesta_cada_accion']) {
+    assert.equal(HERRAMIENTAS.find((h) => h.name === n).annotations.readOnlyHint, true, n);
+  }
+
+  // El costo de la IA llega a la herramienta que la llamo, sin base.
+  const uso = { usuarioId: 7, costos: [] };
+  await conContexto(uso, () => anotarUsoModelo('guion:noticias33', 'claude-sonnet-5-5', { model: 'claude-sonnet-5-5', usage: { input_tokens: 1000, output_tokens: 100 } }));
+  assert.equal(uso.costos.length, 1);
+  assert.equal(uso.costos[0].usd, 0.003);
+  assert.equal(uso.costos[0].accion, 'guion:noticias33');
+
+  // Una respuesta del sitio con {codigo, mensaje} es un error aunque sea 200.
+  await assert.rejects(leerRespuesta(Response.json({ codigo: 'modelo', mensaje: 'No se pudo preparar el guion.' })), ErrorDeAccion);
+  await assert.rejects(leerRespuesta(Response.json({ detalle: 'Prohibido' }, { status: 403 })), /Prohibido/);
+  assert.deepEqual(await leerRespuesta(Response.json({ codigo: 'x', mensaje: 'y', apertura: 'a', clips: [] })), { codigo: 'x', mensaje: 'y', apertura: 'a', clips: [] });
+
+  // Con la IA apagada, una herramienta que cuesta no gasta y lo dice.
+  delete process.env.ANALISIS_HABILITADO;
+  const apagada = await correrHerramienta('generar_guion', { programa: 'noticias33' }, CTX);
+  assert.equal(apagada.isError, true);
+  assert.match(apagada.content[0].text, /apagada/);
+
+  // Leer del disco: las redes publicadas, filtradas y cortadas.
+  const redes = await correrHerramienta('publicaciones_en_redes', { red: 'tiktok', limite: 3 }, CTX);
+  assert.equal(redes.isError, undefined, redes.content?.[0]?.text);
+  assert.ok(redes.structuredContent.publicaciones.length <= 3);
+  for (const pub of redes.structuredContent.publicaciones) assert.equal(pub.red, 'tiktok');
+  assert.equal((await correrHerramienta('noticias_en_tendencia', { lugar: 'marte' }, CTX)).isError, true, 'lugar desconocido');
+  const listaExp = await correrHerramienta('expedientes', {}, CTX);
+  assert.ok(listaExp.structuredContent.expedientes.length >= 1);
+  const exp = await correrHerramienta('expedientes', { id: listaExp.structuredContent.expedientes[0].id }, CTX);
+  assert.ok(exp.structuredContent.pdf_en_el_navegador.startsWith(ORIGEN));
+  assert.ok(exp.content[0].text.length < 140_000, 'el expediente cabe en una respuesta');
 
   console.log('probar-mcp: ok');
 })().catch((e) => {

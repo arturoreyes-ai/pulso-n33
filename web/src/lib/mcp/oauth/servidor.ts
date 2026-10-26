@@ -68,7 +68,7 @@ export function metadatosRecurso(origen: string) {
     authorization_servers: [origen],
     scopes_supported: [ALCANCE],
     bearer_methods_supported: ["header"],
-    resource_name: "Pulso N33: gasto",
+    resource_name: "Pulso N33",
   };
 }
 

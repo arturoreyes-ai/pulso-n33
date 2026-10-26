@@ -8,8 +8,10 @@ import { firmarSolicitud, revisarSolicitud } from "@/lib/mcp/oauth/autorizacion"
 import { origenPublico, secretoMcp } from "@/lib/mcp/oauth/servidor";
 
 /**
- * Donde una persona le da permiso a su Claude para leer el gasto del tablero
- * (el MCP de lib/mcp/). Es el `authorization_endpoint` del OAuth del MCP.
+ * Donde una persona le da permiso a su Claude para usar el tablero en su
+ * nombre (el MCP de lib/mcp/). Es el `authorization_endpoint` del OAuth del
+ * MCP. Desde el 26 de octubre de 2026 eso incluye acciones que cuestan y
+ * cambios de usuarios, y la pantalla lo dice antes de «Permitir».
  *
  * No es publica a proposito: proxy.ts la trata como cualquier pagina, asi que
  * sin sesion manda a /entrar y vuelve aqui con la misma URL. Esa es toda la
@@ -72,12 +74,13 @@ export default async function PaginaAutorizar({ searchParams }: Props) {
       {esAdmin ? (
         <>
           <p className="mt-4 text-lectura text-tinta-prosa">
-            <strong className="text-tinta-dato">{s.clienteHost}</strong> pide leer, con la cuenta de{" "}
-            <strong className="text-tinta-dato">{usuario.nombre}</strong>, cuánto cuesta operar Pulso: el gasto por acción, por
-            persona y por proveedor.
+            <strong className="text-tinta-dato">{s.clienteHost}</strong> pide usar Pulso con la cuenta de{" "}
+            <strong className="text-tinta-dato">{usuario.nombre}</strong>: leer todo lo que muestra el tablero, generar guiones,
+            analizar, seguir publicaciones, buscar en redes y administrar usuarios.
           </p>
           <p className="mt-3 text-cuerpo text-tinta-meta">
-            Solo lectura. No incluye comentarios, términos buscados ni titulares. Al permitir, vuelves a {destino}.
+            Algunas acciones cuestan dinero y cuentan contra los mismos topes del mes; Claude dirá cuánto antes y después de
+            cada una. Al permitir, vuelves a {destino}.
           </p>
         </>
       ) : (
