@@ -1272,6 +1272,63 @@ and are not:
   caps, the single save, the dataset deletion, rule 5, language and the purge
   secret.
 
+### The spending MCP (`/api/mcp`)
+
+Since 26 October 2026 the company's president can ask their own Claude what
+Pulso costs: a remote MCP server inside `web/` (`lib/mcp/`, route
+`app/api/mcp/route.ts`), five read-only tools (`resumen_de_gasto`,
+`costo_por_accion`, `gasto_por_persona`, `acciones_recientes`,
+`gasto_apify_por_actor`). What is not obvious:
+
+- **Two sources, never a third.** What was *billed* comes from Apify's own
+  account API (`lib/uso/apify.ts`: `users/me/limits`, `usage/monthly`,
+  `actor-runs` with `usageTotalUsd`); *whose* it was comes from the three
+  ledgers in Neon (`lib/uso/libros.ts`). The cron's harvest records Apify
+  RESULTS, not dollars (`pulso/apify.py::Presupuesto`), and it is most of the
+  bill: that day the account stood at $158.06 of a $250 cycle, against $0.41
+  of /seguimiento. So «cosecha automática» is the account minus the ledgers,
+  not a sum anyone wrote.
+- **AI cost was not recorded anywhere until that day**, and is now:
+  `db/0005_uso_modelo.sql`, written by `lib/uso/modelo.ts::anotarUsoModelo`
+  from every Messages API response (`analizar.ts`, `publicacion.ts`,
+  `consulta.ts`, and `modelo-guion.ts` for guion, Detallar and the
+  seguimiento summary, each attempt including a refusal, since it is billed).
+  Tokens, dollars at that day's list price (`PRECIOS`), a fixed `accion`
+  label and who pressed: never text. It writes in `after()` and swallows a
+  database failure: a paid reading is not lost for not being logged. Before
+  the first row the tools say `sin_dato` and `total_usd.completo: false`,
+  never 0. **Run `pnpm migrar` against production before relying on it**
+  (0005 and 0006); without the tables the logger fails silently and the
+  MCP cannot issue tokens.
+- **Hand-written, stateless Streamable HTTP**, no SDK: one POST, one JSON
+  answer, GET is 405, which the spec allows. Same stance as the hand-written
+  .docx. `probar-mcp.cjs` pins it.
+- **Sign-in is OAuth, with Pulso as its own authorization server**
+  (`lib/mcp/oauth/`). The first version took a key in `?llave=`; reviewed the
+  same day, both the MCP spec and Anthropic's connector guide forbid tokens
+  in the query string, and request-header credentials are a beta few orgs
+  have. Entra could not be the authorization server directly: it rejects
+  `*.vercel.app` as an Application ID URI (needs a tenant-verified domain) and
+  its discovery omits `code_challenge_methods_supported`. So the site issues
+  its own tokens and delegates identity: `/mcp/autorizar` is an ordinary page
+  behind `proxy.ts`, so whoever reaches it already signed in with Microsoft,
+  and only an active, approved **admin** gets a code. What Claude checks, and
+  `probar-mcp.cjs` pins: RFC 9728 and RFC 8414 metadata under
+  `app/.well-known/`, `client_id_metadata_document_supported` plus `"none"`
+  (so Claude uses its published CIMD), mandatory PKCE S256, single-use codes,
+  rotated refresh tokens with family revocation on reuse (`db/0006`), a `401`
+  with `WWW-Authenticate: Bearer resource_metadata=…` (the only thing that
+  opens Claude's sign-in), audience-bound HMAC access tokens of one hour
+  keyed from `AUTH_SECRET`, and the role re-read on every call. Only Anthropic's
+  two CIMD URLs are accepted (`clientes.ts::CLIENTES`): fetching any client_id
+  URL a stranger sends is SSRF. Gate: `MCP_HABILITADO=true` + `AUTH_SECRET` +
+  database, else every route is 404. The transport also follows the spec's
+  MUSTs: `Origin` checked (403), unknown `MCP-Protocol-Version` is 400, no
+  batches after 2025-06-18, client responses get 202.
+- **It exposes money and team names, never text**: no comment, term or
+  headline. Months are counted in America/Tijuana like the caps; Apify's days
+  are UTC, and the summary says so.
+
 ### Publicidad Meta tiene dos lectores y tampoco comparten fundamento legal
 
 Es el mismo reparto que YouTube. `pulso/publicidad_meta_navegador.py` abre un

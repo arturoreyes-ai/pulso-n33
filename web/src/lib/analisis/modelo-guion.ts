@@ -1,3 +1,4 @@
+import { anotarUsoModelo } from "@/lib/uso/modelo";
 import { MODELO_GUION, MODELO_RESPALDO_GUION } from "./config";
 
 /**
@@ -41,7 +42,7 @@ export type ResultadoModelo =
   | { ok: true; bloques: Bloque[]; modelo: string }
   | { ok: false };
 
-async function una(solicitar: typeof fetch, modelo: string, cuerpo: Record<string, unknown>, senal: AbortSignal): Promise<Respuesta | null> {
+async function una(solicitar: typeof fetch, modelo: string, cuerpo: Record<string, unknown>, senal: AbortSignal, accion: string): Promise<Respuesta | null> {
   const conServidor = CON_RESPALDO_DEL_SERVIDOR.has(modelo);
   try {
     const r = await solicitar("https://api.anthropic.com/v1/messages", {
@@ -57,7 +58,10 @@ async function una(solicitar: typeof fetch, modelo: string, cuerpo: Record<strin
       body: JSON.stringify({ model: modelo, ...cuerpo, ...(conServidor ? { fallbacks: "default" } : {}) }),
     });
     if (!r.ok) return null;
-    return (await r.json()) as Respuesta;
+    const respuesta = (await r.json()) as Respuesta;
+    // Cada intento se anota, la negativa tambien: Anthropic la cobra.
+    await anotarUsoModelo(accion, modelo, respuesta);
+    return respuesta;
   } catch {
     return null;
   }
@@ -72,15 +76,17 @@ export async function pedirAlModeloGuion(solicitar: typeof fetch, cuerpo: Record
   modelo?: string;
   /** El plazo de las dos llamadas juntas. */
   limiteMs: number;
+  /** La etiqueta con la que se anota el costo (lib/uso/modelo.ts). */
+  accion: string;
 }): Promise<ResultadoModelo> {
   const modelo = opciones.modelo ?? MODELO_GUION;
   const senal = AbortSignal.timeout(opciones.limiteMs);
-  const primera = await una(solicitar, modelo, cuerpo, senal);
+  const primera = await una(solicitar, modelo, cuerpo, senal, opciones.accion);
   if (primera === null) return { ok: false };
   if (primera.stop_reason !== "refusal") return { ok: true, bloques: primera.content ?? [], modelo };
   const categoria = primera.stop_details?.category ?? "";
   if (modelo === MODELO_RESPALDO_GUION || (CON_RESPALDO_DEL_SERVIDOR.has(modelo) && REINTENTADAS_POR_EL_SERVIDOR.has(categoria))) return { ok: false };
-  const segunda = await una(solicitar, MODELO_RESPALDO_GUION, cuerpo, senal);
+  const segunda = await una(solicitar, MODELO_RESPALDO_GUION, cuerpo, senal, opciones.accion);
   if (segunda === null || segunda.stop_reason === "refusal") return { ok: false };
   return { ok: true, bloques: segunda.content ?? [], modelo: MODELO_RESPALDO_GUION };
 }

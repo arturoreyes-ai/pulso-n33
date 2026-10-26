@@ -160,6 +160,12 @@ jobs:
       - name: Contrato del seguimiento de publicaciones offline
         run: node scripts/probar-seguimiento.cjs
 
+      # El servidor MCP de gasto: que sin MCP_LLAVE no exista, que la llave
+      # entre por las dos vias y no por otra, la negociacion de version, los
+      # precios por prefijo y la medianoche de Tijuana. Sin red y sin base.
+      - name: Contrato del servidor MCP de gasto offline
+        run: node scripts/probar-mcp.cjs
+
       - name: Escalas de diseno
         run: pnpm tokens
 

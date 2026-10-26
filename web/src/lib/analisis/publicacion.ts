@@ -6,6 +6,7 @@ import type { SugerenciaSocial } from "./contrato";
 import type { LecturaPublicacion, RedAnalizable } from "./contrato-publicacion";
 import { leerDatoPublicado, ubicarPublicacion, type LeerDatos } from "./datos-redes";
 import { reglaRota } from "./reglas";
+import { anotarUsoModelo } from "@/lib/uso/modelo";
 
 /**
  * La lectura automatica de una publicacion de Instagram o TikTok.
@@ -223,6 +224,7 @@ export async function responderAnalisisPublicacion(
     });
     if (!r.ok) return fallo("No se pudo hacer la lectura.", "modelo");
     cuerpo = await r.json();
+    await anotarUsoModelo("analizar-publicacion", MODELO_ANALISIS, cuerpo);
   } catch {
     return fallo("No se pudo hacer la lectura.", "modelo");
   }

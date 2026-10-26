@@ -212,7 +212,7 @@ export async function resumirComentarios(
     system: SISTEMA,
     output_config: { format: { type: "json_schema", schema: ESQUEMA }, ...(haiku ? {} : { effort: "low" }) },
     messages: [{ role: "user", content: partes.join("\n") }],
-  }, { modelo, limiteMs: MS_LIMITE_MODELO });
+  }, { modelo, limiteMs: MS_LIMITE_MODELO, accion: "resumen-seguimiento" });
   if (!respuesta.ok) return { estado: "fallo" };
 
   const bloques = respuesta.bloques;

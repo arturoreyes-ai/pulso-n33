@@ -1640,7 +1640,7 @@ export async function escribirGuion(plan: Plan, opciones: {
     if (intento > 0 && resta < MS_MINIMO_REINTENTO) break;
     // Una negativa del modelo se reintenta en el de respaldo (modelo-guion.ts);
     // si se niegan los dos, es un fallo como cualquier otro, sin otra vuelta.
-    const respuesta = await pedirAlModeloGuion(opciones.solicitar, { ...base, messages: mensajes }, { modelo, limiteMs: resta });
+    const respuesta = await pedirAlModeloGuion(opciones.solicitar, { ...base, messages: mensajes }, { modelo, limiteMs: resta, accion: `guion:${plan.programa}` });
     if (!respuesta.ok) break;
     const crudo = respuesta.bloques.filter((b) => b.type === "text").map((b) => b.text ?? "").join("");
     revision = revisar(plan, crudo);

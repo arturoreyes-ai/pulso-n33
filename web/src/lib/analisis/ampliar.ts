@@ -78,7 +78,7 @@ export async function responderAmpliar(
     // Sin el medio: el guion no lo cita, y lo que no se lee no se dice. El
     // texto lo trae a veces igual, y para eso esta la comprobacion de abajo.
     messages: [{ role: "user", content: `Titular: ${titulo}\n\nTexto de la nota:\n${leida.texto}` }],
-  }, { modelo, limiteMs: MS_LIMITE_MODELO });
+  }, { modelo, limiteMs: MS_LIMITE_MODELO, accion: `detallar:${programa}` });
   if (!respuesta.ok) return fallo(NO_SE_PUDO, "modelo");
 
   const bloques = respuesta.bloques;

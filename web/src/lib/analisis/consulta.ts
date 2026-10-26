@@ -3,6 +3,7 @@ import type { LecturaInforme } from "@/lib/informe/modelo";
 import { analisisHabilitado, MODELO_ANALISIS } from "./config";
 import type { LecturaConsulta } from "./contrato-consulta";
 import { reglaRota } from "./reglas";
+import { anotarUsoModelo } from "@/lib/uso/modelo";
 
 /**
  * «Lo que se repite»: la lectura automatica de los comentarios de un TERMINO,
@@ -139,6 +140,7 @@ export async function leerConsulta(
     });
     if (!r.ok) return { estado: "fallo" };
     cuerpo = await r.json();
+    await anotarUsoModelo("informe-consulta", MODELO_ANALISIS, cuerpo);
   } catch {
     return { estado: "fallo" };
   }

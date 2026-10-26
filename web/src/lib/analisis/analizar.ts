@@ -6,6 +6,7 @@ import { dominioDeUrl } from "./dominio";
 import { extraerTexto } from "./extraer";
 import { resolverEnlace, type ResultadoEnlace } from "./resolver-enlace";
 import { urlSegura } from "./url";
+import { anotarUsoModelo } from "@/lib/uso/modelo";
 
 /**
  * La lectura automatica de una nota enlazada.
@@ -226,6 +227,7 @@ export async function responderAnalisis(
     });
     if (!r.ok) return fallo("No se pudo hacer la lectura.", "modelo");
     cuerpo = await r.json();
+    await anotarUsoModelo("analizar", MODELO, cuerpo);
   } catch {
     return fallo("No se pudo hacer la lectura.", "modelo");
   }
