@@ -3,7 +3,7 @@
  "generado": "2026-10-26",
  "ventana_dias": 7,
  "minimo": 3,
- "notas_ventana": 2731,
+ "notas_ventana": 2752,
  "notas_previas": 2738,
  "temas": [
   {
@@ -190,11 +190,11 @@
   },
   {
    "termino": "hombre",
-   "n": 61,
+   "n": 62,
    "n_previo": 38,
-   "momento": 23,
+   "momento": 24,
    "zonas": {
-    "nacional": 22,
+    "nacional": 23,
     "Tijuana": 13,
     "Mexicali": 9,
     "San Quintín": 6,
@@ -206,7 +206,7 @@
    },
    "fuentes": {
     "imparcial": 15,
-    "uniradio": 14,
+    "uniradio": 15,
     "afn": 8,
     "zeta": 8,
     "lavoz": 4,
@@ -261,6 +261,7 @@
     "a4fe917b70e37090",
     "a59b0a0987ca4817",
     "ac9842c370c8766c",
+    "afbb437892bb1da2",
     "afc75af5c15b967e",
     "b048599abce7e771",
     "b94bfda6164a0ec4",
@@ -287,7 +288,7 @@
    "ejemplos": [
     "Detienen a un hombre por ofrecer 140 dólares a policías",
     "Lesionan a hombre por disparos en el fraccionamiento San Miguel",
-    "Muere hombre tras volcadura en el Valle de Guadalupe"
+    "Arrestan agentes de la SSPCM a un hombre por su presunta responsabilidad de daños a propiedad ajena"
    ]
   },
   {
@@ -1168,6 +1169,49 @@
    ]
   },
   {
+   "termino": "presidencia",
+   "n": 15,
+   "n_previo": 2,
+   "momento": 13,
+   "zonas": {
+    "nacional": 8,
+    "San Quintín": 4,
+    "Tijuana": 3
+   },
+   "fuentes": {
+    "imparcial": 4,
+    "uniradio": 3,
+    "zeta": 3,
+    "afn": 2,
+    "gn-235f6770b9cb": 1,
+    "gn-73f0b94598bb": 1,
+    "gn-d38d8e833ae2": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "02b6b5735c4ce8fb",
+    "04f60779c85881f1",
+    "0748b05dde97021d",
+    "2fbbcb06ac0cab7a",
+    "3a1184891cbecf76",
+    "6e33c4cbb8aabf2a",
+    "7e6bfbb04ff131b4",
+    "8a322b9f718194cc",
+    "9a3e57812362873b",
+    "a14f1b85e0996d4a",
+    "b5f4ed3f70524e7c",
+    "d1bdcebb82afc2e2",
+    "d7b3e0f848da3458",
+    "e2add5cab314be17",
+    "e662778344e39158"
+   ],
+   "ejemplos": [
+    "Taddei presenta su renuncia a la presidencia del INE ante Diputados",
+    "Aram Hodoyán asume presidencia del CDT; movilidad, competitividad y planeación metropolitana, entre sus prioridades",
+    "Asume Aram Hodoyán presidencia del CDT"
+   ]
+  },
+  {
    "termino": "detienen",
    "n": 40,
    "n_previo": 28,
@@ -1383,47 +1427,6 @@
    ]
   },
   {
-   "termino": "presidencia",
-   "n": 14,
-   "n_previo": 2,
-   "momento": 12,
-   "zonas": {
-    "nacional": 7,
-    "San Quintín": 4,
-    "Tijuana": 3
-   },
-   "fuentes": {
-    "imparcial": 4,
-    "uniradio": 3,
-    "zeta": 3,
-    "afn": 2,
-    "gn-235f6770b9cb": 1,
-    "gn-73f0b94598bb": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "02b6b5735c4ce8fb",
-    "04f60779c85881f1",
-    "0748b05dde97021d",
-    "2fbbcb06ac0cab7a",
-    "3a1184891cbecf76",
-    "6e33c4cbb8aabf2a",
-    "7e6bfbb04ff131b4",
-    "8a322b9f718194cc",
-    "9a3e57812362873b",
-    "a14f1b85e0996d4a",
-    "d1bdcebb82afc2e2",
-    "d7b3e0f848da3458",
-    "e2add5cab314be17",
-    "e662778344e39158"
-   ],
-   "ejemplos": [
-    "Taddei presenta su renuncia a la presidencia del INE ante Diputados",
-    "Asume Aram Hodoyán presidencia del CDT",
-    "Asume Aram Hodoyán la presidencia del CDT"
-   ]
-  },
-  {
    "termino": "bienestar",
    "n": 32,
    "n_previo": 21,
@@ -1544,6 +1547,11 @@
    "porque": "duplica «policia municipal»"
   },
   {
+   "termino": "frio",
+   "n": 17,
+   "porque": "duplica «frente frio»"
+  },
+  {
    "termino": "libro",
    "n": 17,
    "porque": "duplica «feria libro»"
@@ -1559,19 +1567,19 @@
    "porque": "duplica «vinculan proceso»"
   },
   {
-   "termino": "frio",
-   "n": 16,
-   "porque": "duplica «frente frio»"
-  },
-  {
    "termino": "inteligencia",
-   "n": 15,
+   "n": 16,
    "porque": "duplica «inteligencia artificial»"
   },
   {
    "termino": "mama",
    "n": 15,
    "porque": "duplica «cancer mama»"
+  },
+  {
+   "termino": "abuso",
+   "n": 14,
+   "porque": "duplica «abuso sexual»"
   },
   {
    "termino": "datos",
@@ -1582,16 +1590,11 @@
    "termino": "vientos",
    "n": 14,
    "porque": "duplica «lluvias vientos»"
-  },
-  {
-   "termino": "abuso",
-   "n": 13,
-   "porque": "duplica «abuso sexual»"
   }
  ],
  "por_zona": {
   "Tijuana": {
-   "notas_ventana": 725,
+   "notas_ventana": 729,
    "minimo": 3,
    "temas": [
     {
@@ -1719,6 +1722,45 @@
      ]
     },
     {
+     "termino": "santos",
+     "n": 11,
+     "n_previo": 0,
+     "momento": 11,
+     "zonas": {
+      "Tijuana": 11
+     },
+     "fuentes": {
+      "imparcial": 2,
+      "soltij": 2,
+      "gn-22ae7db43182": 1,
+      "gn-65115cb0d03f": 1,
+      "gn-7c0e6f84c0c7": 1,
+      "gn-89876dda561d": 1,
+      "gn-9732d890caac": 1,
+      "uniradio": 1,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "3e0581148b1c4490",
+      "4a10188f5070b335",
+      "5d565555a8149d0c",
+      "5ef5ef8ef99607d5",
+      "6bb915cc40c3aca2",
+      "8a2bb6ae4b6351d0",
+      "a8abe3289b685d8c",
+      "ae5dc9ae086034fe",
+      "e7101307ff6c5106",
+      "fafeae852ae615a7",
+      "fb8b4a355b502459"
+     ],
+     "ejemplos": [
+      "Xolos gana y golea a Santos en el Mictlán",
+      "Tijuana vs. Santos (26 Oct, 2026) Live Score",
+      "Tijuana vs. Santos (26 Oct, 2026) Live Score"
+     ]
+    },
+    {
      "termino": "feria libro",
      "n": 14,
      "n_previo": 4,
@@ -1822,43 +1864,6 @@
       "«Confiamos en las investigaciones de la ASF»: Montiel",
       "Analiza Ariadna Montiel denunciar a la gobernadora de Chihuahua; ofrece conferencia en Tijuana",
       "Recurso ante el Tribunal Electoral no afectará designación de Julieta Ramírez: Ariadna Montiel"
-     ]
-    },
-    {
-     "termino": "santos",
-     "n": 10,
-     "n_previo": 0,
-     "momento": 10,
-     "zonas": {
-      "Tijuana": 10
-     },
-     "fuentes": {
-      "imparcial": 2,
-      "soltij": 2,
-      "gn-22ae7db43182": 1,
-      "gn-65115cb0d03f": 1,
-      "gn-7c0e6f84c0c7": 1,
-      "gn-89876dda561d": 1,
-      "gn-9732d890caac": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "3e0581148b1c4490",
-      "4a10188f5070b335",
-      "5d565555a8149d0c",
-      "5ef5ef8ef99607d5",
-      "6bb915cc40c3aca2",
-      "8a2bb6ae4b6351d0",
-      "a8abe3289b685d8c",
-      "ae5dc9ae086034fe",
-      "e7101307ff6c5106",
-      "fafeae852ae615a7"
-     ],
-     "ejemplos": [
-      "Tijuana vs. Santos (26 Oct, 2026) Live Score",
-      "Tijuana vs. Santos (26 Oct, 2026) Live Score",
-      "Santos Laguna busca extender su racha ganadora ante Xolos en Tijuana"
      ]
     },
     {
@@ -2464,7 +2469,7 @@
    ]
   },
   "Mexicali": {
-   "notas_ventana": 263,
+   "notas_ventana": 265,
    "minimo": 3,
    "temas": [
     {
@@ -2806,6 +2811,33 @@
      ]
     },
     {
+     "termino": "ampliar subsidio",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "Mexicali": 4,
+      "San Felipe": 2
+     },
+     "fuentes": {
+      "lavoz": 2,
+      "afn": 1,
+      "imparcial": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "2e9ac91076b59dfb",
+      "339af773b331b65b",
+      "a477702a46c2fc8e",
+      "f6f80c7320a3d087"
+     ],
+     "ejemplos": [
+      "CFE analiza ampliar subsidio eléctrico de verano en Mexicali",
+      "Buscan ampliar subsidio de luz y mejorar tarifa en Mexicali y San Felipe",
+      "Buscan ampliar un mes el subsidio de verano para Mexicali y San Felipe"
+     ]
+    },
+    {
      "termino": "cerro",
      "n": 4,
      "n_previo": 0,
@@ -3026,31 +3058,6 @@
      ]
     },
     {
-     "termino": "ampliar subsidio",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Mexicali": 3,
-      "San Felipe": 1
-     },
-     "fuentes": {
-      "lavoz": 2,
-      "imparcial": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "2e9ac91076b59dfb",
-      "a477702a46c2fc8e",
-      "f6f80c7320a3d087"
-     ],
-     "ejemplos": [
-      "CFE analiza ampliar subsidio eléctrico de verano en Mexicali",
-      "Buscan ampliar un mes el subsidio de verano para Mexicali y San Felipe",
-      "CFE analiza ampliar el subsidio eléctrico en Mexicali"
-     ]
-    },
-    {
      "termino": "analiza",
      "n": 3,
      "n_previo": 0,
@@ -3126,7 +3133,7 @@
    ]
   },
   "Ensenada": {
-   "notas_ventana": 90,
+   "notas_ventana": 91,
    "minimo": 3,
    "temas": [
     {
@@ -3343,8 +3350,8 @@
      ],
      "ejemplos": [
       "Esta semana habrá consulta y servicios de salud gratuitos en Mexicali, Maneadero y San Quintín en Caravanas de Salud",
-      "Esta semana habrá consulta y servicios de salud gratuitos en Mexicali, Maneadero y San Quintín en caravanas de salud",
-      "Caravanas de la salud estarán en Maneadero y San Quintín"
+      "Caravanas de la Salud estarán en Maneadero y San Quintín",
+      "Esta semana habrá consulta y servicios de salud gratuitos en Mexicali, Maneadero y San Quintín en caravanas de salud"
      ]
     },
     {
@@ -3765,16 +3772,16 @@
     },
     {
      "termino": "rachel",
-     "n": 11,
+     "n": 12,
      "n_previo": 53,
-     "momento": -42,
+     "momento": -41,
      "zonas": {
-      "Ensenada": 11,
+      "Ensenada": 12,
       "San Quintín": 3,
       "Mexicali": 1
      },
      "fuentes": {
-      "imparcial": 3,
+      "imparcial": 4,
       "jornadabc": 3,
       "afn": 1,
       "gn-6327d1dd772f": 1,
@@ -3786,6 +3793,7 @@
      "notas": [
       "05bea8993233f78c",
       "117f169ce08ff7fb",
+      "14f1311edf0bf0c6",
       "517d89626bca7e56",
       "c1fecc1d31c651be",
       "c2d30e4baade8a41",
@@ -3805,7 +3813,7 @@
    ]
   },
   "Playas de Rosarito": {
-   "notas_ventana": 71,
+   "notas_ventana": 74,
    "minimo": 3,
    "temas": [
     {
@@ -3891,6 +3899,34 @@
       "Conductor cae a barranco en carretera Rosarito-Tijuana",
       "Auto cae a barranco de cuatro metros en la carretera libre Rosarito-Tijuana",
       "Conductor cae a barranco de 4 metros en carretera libre Rosarito-Tijuana"
+     ]
+    },
+    {
+     "termino": "operativo",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "Playas de Rosarito": 4,
+      "Tecate": 1,
+      "Tijuana": 1
+     },
+     "fuentes": {
+      "rosarito": 2,
+      "gn-a96a3aaee9d9": 1,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "2fea51f968a0a2db",
+      "345ee11a0c794a0f",
+      "5c8545f62342c432",
+      "c2d011bb372b0e64"
+     ],
+     "ejemplos": [
+      "CFE inicia operativo de mantenimiento eléctrico de 30 días en Tijuana, Rosarito y Tecate",
+      "Rosarito prepara operativo de seguridad para Halloween",
+      "Despliegan operativo de seguridad en 13 colonias de Rosarito y aseguran arma"
      ]
     },
     {
@@ -3989,30 +4025,6 @@
       "FGE detiene en Playas de Rosarito a hombre requerido por la justicia de Veracruz",
       "Detienen en Playas de Rosarito a hombre requerido por la justicia de Veracruz por presunta pederastia",
       "FGE captura en Rosarito a persona requerida por la justicia de Veracruz por pederastia"
-     ]
-    },
-    {
-     "termino": "operativo",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Playas de Rosarito": 3
-     },
-     "fuentes": {
-      "rosarito": 2,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "2fea51f968a0a2db",
-      "5c8545f62342c432",
-      "c2d011bb372b0e64"
-     ],
-     "ejemplos": [
-      "Rosarito prepara operativo de seguridad para Halloween",
-      "Despliegan operativo de seguridad en 13 colonias de Rosarito y aseguran arma",
-      "Operativo conjunto en Rosarito permite detención de sujeto armado"
      ]
     },
     {
@@ -4182,7 +4194,7 @@
    ]
   },
   "Tecate": {
-   "notas_ventana": 50,
+   "notas_ventana": 52,
    "minimo": 3,
    "temas": [
     {
@@ -4711,8 +4723,8 @@
      ],
      "ejemplos": [
       "Esta semana habrá consulta y servicios de salud gratuitos en Mexicali, Maneadero y San Quintín en Caravanas de Salud",
-      "Esta semana habrá consulta y servicios de salud gratuitos en Mexicali, Maneadero y San Quintín en caravanas de salud",
-      "Caravanas de la salud estarán en Maneadero y San Quintín"
+      "Caravanas de la Salud estarán en Maneadero y San Quintín",
+      "Esta semana habrá consulta y servicios de salud gratuitos en Mexicali, Maneadero y San Quintín en caravanas de salud"
      ]
     },
     {
@@ -4849,9 +4861,35 @@
    ]
   },
   "San Felipe": {
-   "notas_ventana": 35,
+   "notas_ventana": 37,
    "minimo": 3,
    "temas": [
+    {
+     "termino": "nino",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "San Felipe": 3,
+      "Tijuana": 2
+     },
+     "fuentes": {
+      "gn-65052a9c3141": 1,
+      "imparcial": 1,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "6b7cec8af7a56d3a",
+      "8dd214ec6d179c1c",
+      "f1b2b980ca005541"
+     ],
+     "ejemplos": [
+      "Localizan sin vida a niño desaparecido hace más de dos semanas en San Felipe; continúa la búsqueda de su tío",
+      "Localizan a niño con Alerta Amber en Tijuana; su padre es detenido por sustracción de menores en San Felipe.",
+      "Víctor Luis “N” es detenido por sustracción de menores en San Felipe; niño de 9 años fue localizado en Tijuana."
+     ]
+    },
     {
      "termino": "felipe estado",
      "n": 5,
@@ -4898,6 +4936,31 @@
       "Weak mag. 2.8 earthquake (unconfirmed) - 58 km northwest of San Felipe, Estado de Baja California, Mexico, on Saturday, Oct 24, 2026, at 05:11 am (GMT -7)",
       "Light mag. 3.1 earthquake (unconfirmed) - 37 km southeast of San Felipe, Estado de Baja California, Mexico, on Friday, Oct 23, 2026, at 08:53 am (GMT -7)",
       "Light mag. 3.6 earthquake (unconfirmed) - 87 km southeast of San Felipe, Estado de Baja California, Mexico, on Wednesday, Oct 21, 2026, at 09:21 pm (GMT -7)"
+     ]
+    },
+    {
+     "termino": "busqueda",
+     "n": 3,
+     "n_previo": 4,
+     "momento": -1,
+     "zonas": {
+      "San Felipe": 3,
+      "Ensenada": 1
+     },
+     "fuentes": {
+      "imparcial": 2,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "6761ff97ebdc994b",
+      "f1b2b980ca005541",
+      "f74aa1352f622ae3"
+     ],
+     "ejemplos": [
+      "Continúa búsqueda de desaparecidos en San Felipe tras tormenta Rachel",
+      "Localizan sin vida a niño desaparecido hace más de dos semanas en San Felipe; continúa la búsqueda de su tío",
+      "Mantienen búsqueda de dos pescadores en San Felipe y una mujer en Ensenada"
      ]
     },
     {
@@ -4984,24 +5047,24 @@
     },
     {
      "termino": "felipe",
-     "n": 35,
+     "n": 37,
      "n_previo": 46,
-     "momento": -11,
+     "momento": -9,
      "zonas": {
-      "San Felipe": 35,
-      "Mexicali": 3,
+      "San Felipe": 37,
+      "Mexicali": 4,
       "Tijuana": 2,
       "Ensenada": 1
      },
      "fuentes": {
+      "imparcial": 7,
       "gn-13afd86dbb5f": 6,
-      "imparcial": 6,
       "gn-df1d301d141c": 4,
       "gn-507c32aa93b3": 3,
       "lavoz": 3,
       "zeta": 3,
+      "afn": 2,
       "gn-65052a9c3141": 2,
-      "afn": 1,
       "bajanews": 1,
       "gn-1107a3254305": 1,
       "gn-7c1bf4c96b92": 1,
@@ -5020,6 +5083,7 @@
       "2e9ac91076b59dfb",
       "302e8255a631cdc3",
       "3045c1751e175281",
+      "339af773b331b65b",
       "3489fb94073d6407",
       "3aadbb391c93fb9d",
       "3b83a43b3594c52c",
@@ -5044,14 +5108,15 @@
       "d9aa8ca4cd8e6cb6",
       "e07ba0ba87a37787",
       "e09d80829a759a40",
+      "f1b2b980ca005541",
       "f49f385705c8a07e",
       "f74aa1352f622ae3",
       "fa69c89a1f698bc3"
      ],
      "ejemplos": [
       "Continúa búsqueda de desaparecidos en San Felipe tras tormenta Rachel",
-      "“Queremos recuperar nuestro mar”: pescadores de San Felipe",
-      "Confirman Muerte de Adrián, Pescador de 12 Años Desaparecido en San Felipe tras Rachel"
+      "Localizan sin vida a niño desaparecido hace más de dos semanas en San Felipe; continúa la búsqueda de su tío",
+      "“Queremos recuperar nuestro mar”: pescadores de San Felipe"
      ]
     }
    ]
