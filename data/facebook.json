@@ -1,46 +1,42 @@
 {
  "esquema": 1,
- "generado": "2026-10-26T13:27:49+00:00",
+ "generado": "2026-10-26T22:13:16+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 8522,
- "posts_vigentes": 1308,
- "opinion": 7688,
- "repetidos": 601,
- "reacciones": 522,
+ "comentarios_vigentes": 8588,
+ "posts_vigentes": 1321,
+ "opinion": 7735,
+ "repetidos": 619,
+ "reacciones": 528,
  "por_zona": {
   "Ensenada": 234,
-  "Mexicali": 121,
+  "Mexicali": 122,
   "Playas de Rosarito": 63,
   "San Diego": 25,
+  "San Felipe": 5,
   "San Quintín": 11,
-  "Tecate": 109,
-  "Tijuana": 3722,
-  "estatal": 3649,
-  "internacional": 142,
-  "nacional": 446
+  "Tecate": 123,
+  "Tijuana": 3738,
+  "estatal": 3677,
+  "internacional": 143,
+  "nacional": 447
  },
  "por_cuenta": {
-  "aztecabc_fb": 411,
-  "blanconegro_fb": 3236,
-  "blancorojo_fb": 2304,
-  "ndtijuana_fb": 2462,
-  "psn_fb": 109
+  "aztecabc_fb": 413,
+  "blanconegro_fb": 3260,
+  "blancorojo_fb": 2314,
+  "ndtijuana_fb": 2486,
+  "psn_fb": 115
  },
  "por_idioma": {
-  "es": 8522
+  "es": 8588
  },
  "por_tema": [
   {
    "tema": "mujer",
    "comentarios": 77,
    "posts": 64
-  },
-  {
-   "tema": "madre",
-   "comentarios": 71,
-   "posts": 67
   },
   {
    "tema": "hombre",
@@ -58,8 +54,18 @@
    "posts": 20
   },
   {
-   "tema": "transporte",
+   "tema": "bienestar",
+   "comentarios": 18,
+   "posts": 18
+  },
+  {
+   "tema": "sheinbaum",
    "comentarios": 17,
+   "posts": 17
+  },
+  {
+   "tema": "precio",
+   "comentarios": 16,
    "posts": 16
   },
   {
@@ -73,9 +79,9 @@
    "posts": 11
   },
   {
-   "tema": "acceso",
-   "comentarios": 10,
-   "posts": 10
+   "tema": "detienen",
+   "comentarios": 11,
+   "posts": 11
   },
   {
    "tema": "mesa",
@@ -98,11 +104,6 @@
    "posts": 6
   },
   {
-   "tema": "santos",
-   "comentarios": 6,
-   "posts": 6
-  },
-  {
    "tema": "horario",
    "comentarios": 5,
    "posts": 5
@@ -111,6 +112,11 @@
    "tema": "pension",
    "comentarios": 4,
    "posts": 4
+  },
+  {
+   "tema": "transportistas",
+   "comentarios": 4,
+   "posts": 3
   },
   {
    "tema": "rescatan",
@@ -128,30 +134,15 @@
    "posts": 2
   },
   {
-   "tema": "ariadna montiel",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
-   "tema": "infantil",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
-   "tema": "presidencia",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
-   "tema": "transportistas",
+   "tema": "lula",
    "comentarios": 1,
    "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 894,
-  "negativo": 3780,
-  "neutral": 3014,
+  "positivo": 898,
+  "negativo": 3803,
+  "neutral": 3034,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -191,7 +182,7 @@
    "activa": true
   }
  ],
- "releidos": 20,
+ "releidos": 26,
  "destacados": [
   {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0Ua3Kpw6k4s8XATMip1JUM6w25gM1oAt4kzZ5yr7o83Z4c1SxV4fL2euzto4xpBrMl",
@@ -240,6 +231,30 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/NdTijuana/videos/1645965660244323",
+   "cuenta": "ndtijuana_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-26",
+   "titulo": "Manifestación CANACAR llega a la glorieta Cuauhtémoc",
+   "tipo": "video",
+   "likes": 728,
+   "comentarios": 60,
+   "compartidos": 56,
+   "reproducciones": 49780,
+   "alcance": "nacional",
+   "publicado": "2026-10-26T18:27:08+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 3,
+    "negativo": 4,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02asM6QQ9cCCN6X4t5EEfN3nvcBkiunPbVAEaGPvLXwjjvvdRreFyUgB9P2JH1F6v4l",
    "cuenta": "blanconegro_fb",
    "zona": "Tijuana",
@@ -256,6 +271,29 @@
    "sentimiento": {
     "positivo": 4,
     "negativo": 4,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02xDgTTgjCpECgBHo8txE1d6LwrNWRHmz3h4pPqPft2Asft7pUWgUzbFFpqb1xeHw1l&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-26",
+   "titulo": "Que opinan",
+   "tipo": "imagen",
+   "likes": 580,
+   "comentarios": 119,
+   "compartidos": 19,
+   "alcance": "nacional",
+   "publicado": "2026-10-26T19:34:04+00:00",
+   "cosechados": 10,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 3,
     "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -286,70 +324,23 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02syxZavDPph7zjJVnUXVsUwSZ3RVYLESu1Kevi9wPyEbYcrKBgSAcCaSv4C3yhwUdl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-25",
-   "titulo": "#INDIGNANTE 😡 #Tijuana Este sujeto pone a su mujer a cargar un tanque de gas de 10 kg. Cuando claramente se ve que la doña si aguanta el de 30 kg.",
-   "tipo": "imagen",
-   "likes": 325,
-   "comentarios": 58,
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02ExT87f78N8xC75pwi5imUF2cUG7ctVAMDNr3FnXRaF1gmjRz8DtaAVFtwpiyXiril",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tecate",
+   "fecha": "2026-10-26",
+   "titulo": "Balacera en #Tecate deja al menos cuatro personas lesionadas",
+   "tipo": "otro",
+   "likes": 286,
+   "comentarios": 21,
    "compartidos": 23,
    "alcance": "zona",
-   "publicado": "2026-10-25T20:23:20+00:00",
+   "publicado": "2026-10-26T21:06:18+00:00",
    "cosechados": 9,
-   "opinion": 9,
-   "sentimiento": {
-    "positivo": 2,
-    "negativo": 3,
-    "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0pcUNxtrmo5ozuAbBWs1dQ1E1n3Jce9MSH9XvjTVFoCuYRTvgyYcZL8Smz37dmKQpl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-25",
-   "titulo": "#INDIGNANTE 😡 #Tijuana Este sujeto pone a su mujer a cargar un tanque de gas de 10 kg. Cuando claramente se ve que la doña si aguanta el de 30 kg.",
-   "tipo": "imagen",
-   "likes": 319,
-   "comentarios": 58,
-   "compartidos": 23,
-   "alcance": "zona",
-   "publicado": "2026-10-25T20:23:20+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 2,
-    "negativo": 4,
-    "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/reel/1454639373306469",
-   "cuenta": "psn_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-25",
-   "titulo": "#LoVisteEnPSN | Cárceles de BC, reprobadas por la CNDH a causa de hacinamiento, falta de custodios y más.",
-   "tipo": "video",
-   "likes": 293,
-   "comentarios": 29,
-   "compartidos": 50,
-   "reproducciones": 24805,
-   "alcance": "nacional",
-   "publicado": "2026-10-25T18:00:41+00:00",
-   "cosechados": 5,
-   "opinion": 5,
+   "opinion": 7,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 4,
-    "neutral": 1,
+    "negativo": 3,
+    "neutral": 4,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -373,6 +364,29 @@
     "positivo": 2,
     "negativo": 5,
     "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0mFrtEyZVH9fpnm4a2fWKk61GvM3eswCpezrTfskGqNMtfiX8U7qGdt5PEQbJUTnsl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-26",
+   "titulo": "Déjanos tus comentarios y síguenos en la página",
+   "tipo": "imagen",
+   "likes": 271,
+   "comentarios": 182,
+   "compartidos": 3,
+   "alcance": "nacional",
+   "publicado": "2026-10-26T02:41:06+00:00",
+   "cosechados": 9,
+   "opinion": 8,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 5,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -425,53 +439,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0mFrtEyZVH9fpnm4a2fWKk61GvM3eswCpezrTfskGqNMtfiX8U7qGdt5PEQbJUTnsl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-26",
-   "titulo": "Déjanos tus comentarios y síguenos en la página",
-   "tipo": "imagen",
-   "likes": 208,
-   "comentarios": 123,
-   "compartidos": 2,
-   "alcance": "nacional",
-   "publicado": "2026-10-26T02:41:06+00:00",
-   "cosechados": 9,
-   "opinion": 8,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 5,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/984565631395939",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-25",
-   "titulo": "#Tijuana Conferencia de prensa con Ariadna Montiel, dirigente nacional de Morena, y Julieta Ramírez, coordinadora estatal de los trabajos de la 4T en Baja Cali…",
-   "tipo": "video",
-   "likes": 198,
-   "comentarios": 144,
-   "compartidos": 14,
-   "reproducciones": 9544,
-   "alcance": "zona",
-   "publicado": "2026-10-25T18:09:29+00:00",
-   "cosechados": 10,
-   "opinion": 9,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 5,
-    "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid09vRYXiCqViucKoqcJUeh2sTJhRtCSDA2jzRbiH28RRqgs8s5JvPos19YwqhEf558l",
    "cuenta": "blanconegro_fb",
    "zona": "Tijuana",
@@ -488,6 +455,29 @@
    "sentimiento": {
     "positivo": 0,
     "negativo": 7,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0PwVZWaCwCtj7XhSQfbGhJvLiQzRS74JEAbuHXo1r5rNL2rubkCxdxwdqyQzugeKul&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-26",
+   "titulo": "",
+   "tipo": "imagen",
+   "likes": 163,
+   "comentarios": 5,
+   "compartidos": 25,
+   "alcance": "nacional",
+   "publicado": "2026-10-26T03:32:04+00:00",
+   "cosechados": 3,
+   "opinion": 3,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
     "neutral": 3,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -518,23 +508,23 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0PwVZWaCwCtj7XhSQfbGhJvLiQzRS74JEAbuHXo1r5rNL2rubkCxdxwdqyQzugeKul&id=100086488503408",
-   "cuenta": "blancorojo_fb",
+   "url": "https://www.facebook.com/NdTijuana/videos/2041668786543313",
+   "cuenta": "ndtijuana_fb",
    "zona": "estatal",
    "fecha": "2026-10-26",
-   "titulo": "",
-   "tipo": "imagen",
-   "likes": 101,
-   "comentarios": 4,
-   "compartidos": 12,
+   "titulo": "Llegaron a asesinar a toda una familia dentro de su hogar, sicarios dejaron varios muertos",
+   "tipo": "video",
+   "likes": 108,
+   "comentarios": 1,
+   "compartidos": 8,
    "alcance": "nacional",
-   "publicado": "2026-10-26T03:32:04+00:00",
+   "publicado": "2026-10-26T22:10:32+00:00",
    "cosechados": 3,
-   "opinion": 3,
+   "opinion": 2,
    "sentimiento": {
     "positivo": 0,
     "negativo": 0,
-    "neutral": 3,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -564,92 +554,23 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid07Z37XX7FmVAZF6V6ZLENS9Sdw6DtM44tFuoVrr3GTmNPszNWmaGESgn3rsrfFSbjl",
-   "cuenta": "blanconegro_fb",
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0FHtfixMB3ZuhjmC8NLHNuATxBAmqks3poSyYF6gtZsCg48NR78eoqnEvrsBHQCd9l",
+   "cuenta": "ndtijuana_fb",
    "zona": "Tijuana",
-   "fecha": "2026-10-25",
-   "titulo": "🚨 Choque entre taxi y automóvil deja a una mujer lesionada en Tijuana",
+   "fecha": "2026-10-26",
+   "titulo": "#NDTInforma Detienen a hombre por presunto cohecho",
    "tipo": "imagen",
-   "likes": 87,
-   "comentarios": 1,
-   "compartidos": 10,
+   "likes": 62,
+   "comentarios": 19,
+   "compartidos": 2,
    "alcance": "zona",
-   "publicado": "2026-10-25T18:38:06+00:00",
-   "cosechados": 1,
-   "opinion": 1,
+   "publicado": "2026-10-26T19:37:07+00:00",
+   "cosechados": 10,
+   "opinion": 9,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 1,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/aztecabc/posts/pfbid02bdo7CtKt3BM2fHHgg8QJY3Bnu1AbLWTLm7gxrhjxLpPHUYLMtrqDhWLpmWezc8Mcl",
-   "cuenta": "aztecabc_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-25",
-   "titulo": "¡Bájale al ruido! Desde esta hora pueden reportarte en Tijuana 🗣️⚠️",
-   "tipo": "otro",
-   "likes": 69,
-   "comentarios": 9,
-   "compartidos": 27,
-   "alcance": "zona",
-   "publicado": "2026-10-25T19:59:15+00:00",
-   "cosechados": 8,
-   "opinion": 8,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 6,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02wPxRB7uh7m78LFWFWEqocSY35FgRHRHD4znW2RUJ9CsYm4pKwRELC6uHZ5VbaFnYl",
-   "cuenta": "blanconegro_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-25",
-   "titulo": "La mandataria hizo este llamado después de que la ASF afirmó que cuenta con indicios de posibles conflictos de interés y triangulación de recursos en el INE.",
-   "tipo": "otro",
-   "likes": 52,
-   "comentarios": 18,
-   "compartidos": 8,
-   "alcance": "nacional",
-   "publicado": "2026-10-25T20:58:20+00:00",
-   "cosechados": 3,
-   "opinion": 3,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 2,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid025i7uj7xqJQQiLzwZazLrCRgaXpkET6YoVM8vmYE5zTj7MxEJhSQtFYwU4Vi4Kutal",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-25",
-   "titulo": "🌅 Tijuana amanece con cielo despejado este domingo",
-   "tipo": "imagen",
-   "likes": 50,
-   "comentarios": 3,
-   "compartidos": 6,
-   "alcance": "zona",
-   "publicado": "2026-10-25T15:17:41+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
+    "negativo": 4,
+    "neutral": 5,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -673,29 +594,6 @@
     "positivo": 0,
     "negativo": 0,
     "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02ErfPPgTyKYBFxMVe35QrZtHZNP3Rd89EdAZaLDpSsyUmwDpdFNK1159r2mCeApvLl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-25",
-   "titulo": "MENSAJE CONTUNDENTE CONTRA LA CORRUPCIÓN.",
-   "tipo": "imagen",
-   "likes": 42,
-   "comentarios": 14,
-   "compartidos": 6,
-   "alcance": "nacional",
-   "publicado": "2026-10-25T17:26:42+00:00",
-   "cosechados": 6,
-   "opinion": 6,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 5,
-    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -794,17 +692,134 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0tgoZMU74nUv7d85pyWJP4HdGUdZx874pNvAnbvqDa4bWSoWqpvbjb5rukWuFSR46l",
-   "cuenta": "blanconegro_fb",
+   "url": "https://www.facebook.com/redespsn/posts/pfbid02B35M7hkMVpbsL7FGwmKufvt4V4148ERrE7DV5juYZjybnqkyAVxgUKosSsjCE3AMl",
+   "cuenta": "psn_fb",
    "zona": "estatal",
-   "fecha": "2026-10-25",
-   "titulo": "El temblor alcanzó el nivel 3 en la escala sísmica nipona en archipiélago de Osagawara y también se percibió en la capital del país.",
+   "fecha": "2026-10-26",
+   "titulo": "#Nacional | La consejera presidenta del INE, Guadalupe Taddei, anunció que presentará su renuncia al cargo ante la Cámara de Diputados",
    "tipo": "otro",
-   "likes": 27,
-   "comentarios": 1,
-   "compartidos": 3,
+   "likes": 21,
+   "comentarios": 6,
+   "compartidos": 0,
    "alcance": "nacional",
-   "publicado": "2026-10-25T19:55:23+00:00",
+   "publicado": "2026-10-26T16:07:02+00:00",
+   "cosechados": 5,
+   "opinion": 5,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 4,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/reel/1522386899909586",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-26",
+   "titulo": "🚨🌊 “Familiares de desaparecidos tras naufragio exigen respuestas sobre su paradero”",
+   "tipo": "video",
+   "likes": 20,
+   "comentarios": 6,
+   "compartidos": 23,
+   "reproducciones": 1959,
+   "alcance": "zona",
+   "publicado": "2026-10-26T21:45:41+00:00",
+   "cosechados": 5,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02a9xVC4PE2DCdCHxaq4o6e9ivdbFHSVgtMAkT2jgTLNpwQ56XXA2WX1QBBzxEvokTl",
+   "cuenta": "blanconegro_fb",
+   "zona": "San Felipe",
+   "fecha": "2026-10-26",
+   "titulo": "🟢 Partido Verde suma a regidora del PAN y excandidata de Movimiento Ciudadano en San Felipe",
+   "tipo": "imagen",
+   "likes": 14,
+   "comentarios": 6,
+   "compartidos": 19,
+   "alcance": "zona",
+   "publicado": "2026-10-26T21:51:13+00:00",
+   "cosechados": 5,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 2,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02jFfFU7d84Wkyu41yboSYMKXKcw6kEJCeooiPyGuxHrvuazbh5NEZzFBCuRrEEhYkl",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tecate",
+   "fecha": "2026-10-26",
+   "titulo": "🚨 Ataque armado en Tecate deja tres personas sin vida y una mujer gravemente herida",
+   "tipo": "imagen",
+   "likes": 14,
+   "comentarios": 4,
+   "compartidos": 10,
+   "alcance": "zona",
+   "publicado": "2026-10-26T22:08:00+00:00",
+   "cosechados": 5,
+   "opinion": 3,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 2,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/aztecabc/posts/pfbid02bSYgn1b6R7LTvfUiQjtz476NHgCfuXjAn8EWVUptTVQ6EE2YL9k1wmWNLNttWzh7l",
+   "cuenta": "aztecabc_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-26",
+   "titulo": "🌧️ Octubre se despide con 4 días de lluvia en Tijuana",
+   "tipo": "otro",
+   "likes": 14,
+   "comentarios": 0,
+   "compartidos": 2,
+   "alcance": "zona",
+   "publicado": "2026-10-26T02:00:41+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/reel/1498106052199756",
+   "cuenta": "ndtijuana_fb",
+   "zona": "internacional",
+   "fecha": "2026-10-26",
+   "titulo": "#NDTInforma | Como resultado de la coordinación entre autoridades federales y estatales, se logró la detención de Israel “N”, alias “El Isra”, identificado com…",
+   "tipo": "video",
+   "likes": 14,
+   "comentarios": 0,
+   "compartidos": 1,
+   "reproducciones": 1759,
+   "alcance": "extranjero",
+   "publicado": "2026-10-26T20:13:27+00:00",
    "cosechados": 1,
    "opinion": 1,
    "sentimiento": {
@@ -817,87 +832,17 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid034npmSzkeps5QxaK9KPPDpSDUo6NaiodGHJ5YbvxkaDHcoDG7wcM39sXfgcAb6E8Zl",
-   "cuenta": "ndtijuana_fb",
-   "zona": "nacional",
-   "fecha": "2026-10-25",
-   "titulo": "Este lunes 26 de octubre se publicarán los resultados de JOBEC, programa de apoyo dirigido a estudiantes de preparatoria y universidad.",
-   "tipo": "imagen",
-   "likes": 23,
-   "comentarios": 0,
-   "compartidos": 3,
-   "alcance": "nacional",
-   "publicado": "2026-10-25T21:53:06+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/aztecabc/posts/pfbid0h6WJoqxTjz13Z7B3YCetVyHYi4nLJxhZsSZkJW1FkbJDm31H8GrJ6tMPtTBWeymbl",
-   "cuenta": "aztecabc_fb",
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid028LU6jqpSNv9TV9ao3HuidbPFT5sD2y98DnuaYvqTEc2a1xTUrWzL1WC2vvh4oArXl",
+   "cuenta": "blanconegro_fb",
    "zona": "Tijuana",
-   "fecha": "2026-10-25",
-   "titulo": "Mhoni Vidente lanza advertencia sobre un gran terremoto en la Falla de San Andrés que sacudiría a Tijuana y San Diego. 🔮",
-   "tipo": "otro",
-   "likes": 20,
-   "comentarios": 7,
-   "compartidos": 1,
-   "alcance": "zona",
-   "publicado": "2026-10-25T13:30:01+00:00",
-   "cosechados": 6,
-   "opinion": 5,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 2,
-    "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/aztecabc/posts/pfbid02dgchhPUg7BEGA3aJpBwqCsJMaCcYQq7yua36NLtmcbd2VJvYbxcjUnFvq4zDkombl",
-   "cuenta": "aztecabc_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-25",
-   "titulo": "Esto le pasaría a Baja California si ocurre un MEGATERREMOTO. 🚨⚠",
-   "tipo": "otro",
+   "fecha": "2026-10-26",
+   "titulo": "Vecinos de Guaycura se organizan contra construcción de guardería en parque público",
+   "tipo": "imagen",
    "likes": 11,
    "comentarios": 3,
-   "compartidos": 0,
-   "alcance": "estatal",
-   "publicado": "2026-10-25T15:30:05+00:00",
-   "cosechados": 3,
-   "opinion": 3,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/reel/1117085957731050",
-   "cuenta": "psn_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-25",
-   "titulo": "#LoVisteEnPSN | Incendio en local comercial de plaza Navarrete; sospechan pudo ser provocado.",
-   "tipo": "video",
-   "likes": 10,
-   "comentarios": 0,
-   "compartidos": 0,
-   "reproducciones": 1049,
-   "alcance": "nacional",
-   "publicado": "2026-10-25T16:01:14+00:00",
+   "compartidos": 2,
+   "alcance": "zona",
+   "publicado": "2026-10-26T22:10:18+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -910,63 +855,41 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/redespsn/posts/pfbid0pdTQqxHqzSWq8rvgH5TfaLZtCny3FdunHZ1M7zs6qUZQiXhTvYiaF6QAUX5BNbF1l",
+   "url": "https://www.facebook.com/reel/1493033089335596",
    "cuenta": "psn_fb",
    "zona": "Tijuana",
-   "fecha": "2026-10-25",
-   "titulo": "#Tijuana | Un predio ubicado sobre el bulevar Cucapah, entre las colonias Villa Fontana y Valle Verde, se ha convertido en un basurero clandestino",
-   "tipo": "otro",
-   "likes": 6,
-   "comentarios": 2,
-   "compartidos": 0,
-   "alcance": "zona",
-   "publicado": "2026-10-25T15:12:21+00:00",
-   "cosechados": 2,
-   "opinion": 2,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/aztecabc/posts/pfbid06kx4YkyG9z1rvfWUeUDiL1L4b4yKy8ZynK9ALFssEjPV94BL9bvAqC2CsZrraBahl",
-   "cuenta": "aztecabc_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-25",
-   "titulo": "VIDEO ⚠️",
-   "tipo": "imagen",
-   "likes": 5,
+   "fecha": "2026-10-26",
+   "titulo": "#primersistemadenoticias #bajacalifornia #tijuana #mexicali #rosarito #ensenada #sanquintin #sanfelipe #tecate #marinadelpilar #marinadelpilaravila #gobierno #…",
+   "tipo": "video",
+   "likes": 10,
    "comentarios": 2,
    "compartidos": 2,
-   "alcance": "nacional",
-   "publicado": "2026-10-25T16:33:49+00:00",
-   "cosechados": 2,
-   "opinion": 2,
+   "reproducciones": 376,
+   "alcance": "zona",
+   "publicado": "2026-10-26T15:24:55+00:00",
+   "cosechados": 1,
+   "opinion": 1,
    "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 1,
+    "positivo": 1,
+    "negativo": 0,
+    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/aztecabc/posts/pfbid0SVFh1YiuT8BjnhMGox3K2uPzVhL9iGcvF8i5eAMewwg1MEzq95kGEKqv3jTEHNcJl",
-   "cuenta": "aztecabc_fb",
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0NVHuNKJhSFpk64H5K9kTsv5E7aavp7g8EiJadvkPSrnTGW8qNz4x4mGD3c9b8yTdl",
+   "cuenta": "blanconegro_fb",
    "zona": "estatal",
-   "fecha": "2026-10-25",
-   "titulo": "¿Se abrió la Falla de San Andrés? Esto es lo que realmente se sabe detrás del video viral que causa alarma. 🌋",
+   "fecha": "2026-10-26",
+   "titulo": "El actor reveló cuáles fueron las causas que lo llevaron a ser hospitalizado y además agradeció a quienes acudieron a donar sangre.",
    "tipo": "otro",
-   "likes": 5,
-   "comentarios": 0,
-   "compartidos": 0,
+   "likes": 9,
+   "comentarios": 8,
+   "compartidos": 23,
    "alcance": "nacional",
-   "publicado": "2026-10-25T14:00:18+00:00",
+   "publicado": "2026-10-26T21:34:21+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -979,17 +902,270 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/aztecabc/posts/pfbid03dfMxoPak4EnahvJBm3MdF14unMNm6s3AKxcqiLrzbs5ZmmG5GL28zToiiFhJ5crl",
+   "url": "https://www.facebook.com/reel/2262095524649738",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-26",
+   "titulo": "🚍🚨 “Alcalde asegura que se resolverá problema del SITT sin comprometer recursos públicos”",
+   "tipo": "video",
+   "likes": 8,
+   "comentarios": 5,
+   "compartidos": 12,
+   "alcance": "zona",
+   "publicado": "2026-10-26T22:05:05+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/aztecabc/posts/pfbid035DwevqyvC3oH54fbcSqviWTGkLTWJtsgdpY2qB4LJcn7u6n9pHiNbR9p6L9TwvkVl",
    "cuenta": "aztecabc_fb",
-   "zona": "internacional",
-   "fecha": "2026-10-25",
-   "titulo": "🌏 Un fuerte sismo sacude Japón, esto se sabe sobre daños y alerta de tsunami.",
+   "zona": "nacional",
+   "fecha": "2026-10-26",
+   "titulo": "¡Lluvias, calor y frío en México! Así cambiará el clima por Vance 🌧️",
+   "tipo": "imagen",
+   "likes": 7,
+   "comentarios": 1,
+   "compartidos": 1,
+   "alcance": "nacional",
+   "publicado": "2026-10-26T21:50:26+00:00",
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02w8ZJCYVUDevxq2ZyZYUBBjmikk8MuvNSgk3pLaG7Mr76KmyHt7HskZaBrjGVcmDKl",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-26",
+   "titulo": "#NDTInforma │ Aram Hodoyan asume la presidencia del CDT en Tijuana",
+   "tipo": "imagen",
+   "likes": 7,
+   "comentarios": 0,
+   "compartidos": 1,
+   "alcance": "zona",
+   "publicado": "2026-10-26T21:18:39+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/redespsn/posts/pfbid09CNuavGhurub4tCiFeyPoG4qMERGJhz9emhLRqPcVDtEV7NqzxBhJeTWZNu2gAGkl",
+   "cuenta": "psn_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-26",
+   "titulo": "#Tijuana | Un hombre y una mujer resultaron lesionados por disparos de arma de fuego este domingo en la colonia Jardines del Rubí",
+   "tipo": "otro",
+   "likes": 5,
+   "comentarios": 0,
+   "compartidos": 0,
+   "alcance": "zona",
+   "publicado": "2026-10-26T15:47:34+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/aztecabc/posts/pfbid0MfErw9Drx5gbx9moEgU2V34xbprbj8D7A6DwQG3xVXQFiP55mVongdnXjs15FcZNl",
+   "cuenta": "aztecabc_fb",
+   "zona": "Mexicali",
+   "fecha": "2026-10-26",
+   "titulo": "VIDEO ⚠️",
+   "tipo": "otro",
+   "likes": 4,
+   "comentarios": 1,
+   "compartidos": 0,
+   "alcance": "zona",
+   "publicado": "2026-10-26T21:29:20+00:00",
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/redespsn/posts/pfbid02qQT4XTyvtRgf79iWsWL8brqqRZTo29WU4L13puyhR95fjF3fXqR6cR6fCtjZTTjTl",
+   "cuenta": "psn_fb",
+   "zona": "Ensenada",
+   "fecha": "2026-10-26",
+   "titulo": "#Ensenada | Un motociclista murió tras una persecución y un intercambio de disparos con elementos de la Policía Municipal de Ensenada",
+   "tipo": "otro",
+   "likes": 4,
+   "comentarios": 0,
+   "compartidos": 0,
+   "alcance": "zona",
+   "publicado": "2026-10-26T15:52:31+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02nHpKNFehMzu2X3tAvJk3CLttryFmXBVTG1jJUiYjBuaf9TMjeRhQmEiXZ8L9Cv8ul",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Ensenada",
+   "fecha": "2026-10-26",
+   "titulo": "#NDTInforma Productores tienen hasta el 30 de octubre para reportar daños por Rachel",
+   "tipo": "imagen",
+   "likes": 2,
+   "comentarios": 1,
+   "compartidos": 1,
+   "alcance": "zona",
+   "publicado": "2026-10-26T20:33:19+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/aztecabc/posts/pfbid02C1s6jra4QiZYCBTa9xkM5cJUN7YnDr1AK8V9QhRizSszAAVd4hKDWuFppcwaiRLXl",
+   "cuenta": "aztecabc_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-26",
+   "titulo": "🌊 ¡Calles convertidas en ríos! Corrientes arrastran vehículos tras fuertes lluvias",
    "tipo": "otro",
    "likes": 2,
    "comentarios": 0,
    "compartidos": 0,
+   "alcance": "nacional",
+   "publicado": "2026-10-26T04:30:11+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02epgujEjRcJM9mSNEq5Jqkvn73PqYocJhPfRfRRn713RvVgPQaPt7WYu99PTA4PyXl",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Mexicali",
+   "fecha": "2026-10-26",
+   "titulo": "#NDTInforma La inclusión también requiere atención médica oportuna",
+   "tipo": "imagen",
+   "likes": 1,
+   "comentarios": 1,
+   "compartidos": 1,
+   "alcance": "zona",
+   "publicado": "2026-10-26T21:50:41+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/aztecabc/posts/pfbid02wfMY9hKv23GpFY76rzAessRZdYrsqEjbwqspwtnJBQebrrZ2BnjjwWYw1LZqBaWVl",
+   "cuenta": "aztecabc_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-26",
+   "titulo": "🗓️ ¡Se acerca un descanso escolar! Esta es la fecha sin clases por Día de Muertos en BC.",
+   "tipo": "otro",
+   "likes": 1,
+   "comentarios": 0,
+   "compartidos": 0,
+   "alcance": "nacional",
+   "publicado": "2026-10-26T13:00:48+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/aztecabc/posts/pfbid05y5ke7G7vFAcCL4TBZQxGY6nY8AeXQ7VxMGBwh4HdYRhJMhHhmw6CDsDR5TTrZfNl",
+   "cuenta": "aztecabc_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-26",
+   "titulo": "😱 ¿Un encuentro con lo paranormal? La historia del hombre sin cab3za que pocos olvidan.",
+   "tipo": "otro",
+   "likes": 1,
+   "comentarios": 0,
+   "compartidos": 0,
+   "alcance": "nacional",
+   "publicado": "2026-10-26T10:00:21+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/aztecabc/posts/pfbid02DndZxZmz1U7wjw7UpWP1enhDcEqmVZqXn2rDvLbnDfRCYLYjh5nBXaQasWqQvvifl",
+   "cuenta": "aztecabc_fb",
+   "zona": "internacional",
+   "fecha": "2026-10-26",
+   "titulo": "🎥 VIDEO muestra un Cristo encadenado tras una tragedia durante una misa",
+   "tipo": "otro",
+   "likes": 0,
+   "comentarios": 0,
+   "compartidos": 0,
    "alcance": "extranjero",
-   "publicado": "2026-10-25T21:00:20+00:00",
+   "publicado": "2026-10-26T20:20:02+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1071,6 +1247,29 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/aztecabc/posts/pfbid0fwnAnV6NBuCR6vTdsJFm3L6tDfZ61XqzViZvwpUnU5Mka93uPmpKKk5cHricKbmgl",
+   "cuenta": "aztecabc_fb",
+   "zona": "Mexicali",
+   "fecha": "2026-10-26",
+   "titulo": "🚨 ¿Quién es ‘El Isra’? Lo detienen en Mexicali por un caso de h0mic¡dio",
+   "tipo": "otro",
+   "likes": 0,
+   "comentarios": 0,
+   "compartidos": 0,
+   "alcance": "zona",
+   "publicado": "2026-10-26T21:00:06+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/aztecabc/posts/pfbid0imNknr3f3htnt2xyZ5n8eTamD44t1L7CxxpRpTKssmPwSpUoofbNdVzxo1s7qw6ol",
    "cuenta": "aztecabc_fb",
    "zona": "internacional",
@@ -1092,65 +1291,87 @@
     "sin_modelo_idioma": 0
    },
    "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/redespsn/posts/pfbid01UqPR9jBcfUHKGjtKEWYmtzVfrsM9sQ6bZPHTveW69f7UVWs8csB4bHY2R8vR9Ral",
+   "cuenta": "psn_fb",
+   "zona": "internacional",
+   "fecha": "2026-10-26",
+   "titulo": "#Internacional | Lula da Silva fue reelegido presidente de Brasil al imponerse en la segunda vuelta de las elecciones ante el senador Flávio Bolsonaro",
+   "tipo": "otro",
+   "likes": 0,
+   "comentarios": 0,
+   "compartidos": 0,
+   "alcance": "extranjero",
+   "publicado": "2026-10-26T15:29:32+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
   }
  ],
  "salud": [
   {
    "cuenta": "aztecabc_fb",
    "estado": "ok",
-   "posts": 8,
-   "comentarios": 1,
-   "crudos": 5,
-   "fuera": 0,
+   "posts": 6,
+   "comentarios": 2,
+   "crudos": 4,
+   "fuera": 2,
    "compartidos": 0
   },
   {
    "cuenta": "blanconegro_fb",
    "estado": "ok",
-   "posts": 8,
-   "comentarios": 37,
-   "crudos": 37,
-   "fuera": 0,
+   "posts": 7,
+   "comentarios": 26,
+   "crudos": 27,
+   "fuera": 1,
    "compartidos": 0
   },
   {
    "cuenta": "blancorojo_fb",
    "estado": "ok",
-   "posts": 4,
-   "comentarios": 9,
+   "posts": 3,
+   "comentarios": 10,
    "crudos": 10,
-   "fuera": 2,
-   "compartidos": 2
+   "fuera": 1,
+   "compartidos": 1
   },
   {
    "cuenta": "ndtijuana_fb",
    "estado": "ok",
-   "posts": 4,
-   "comentarios": 8,
-   "crudos": 9,
-   "fuera": 0,
+   "posts": 7,
+   "comentarios": 24,
+   "crudos": 24,
+   "fuera": 1,
    "compartidos": 0
   },
   {
    "cuenta": "psn_fb",
    "estado": "ok",
-   "posts": 4,
-   "comentarios": 0,
-   "crudos": 0,
-   "nota": "sin posts nuevos que cosechar",
+   "posts": 7,
+   "comentarios": 6,
+   "crudos": 10,
    "fuera": 0,
    "compartidos": 0
   }
  ],
  "gasto": {
   "resultados": 250,
-  "gastado": 93,
+  "gastado": 111,
   "por_concepto": {
-   "aztecabc_fb": 13,
-   "blanconegro_fb": 45,
-   "blancorojo_fb": 18,
-   "ndtijuana_fb": 13,
-   "psn_fb": 4
+   "aztecabc_fb": 12,
+   "blanconegro_fb": 35,
+   "blancorojo_fb": 15,
+   "ndtijuana_fb": 32,
+   "psn_fb": 17
   }
  }
 }
