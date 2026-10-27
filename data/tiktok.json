@@ -1,14 +1,14 @@
 {
  "esquema": 1,
- "generado": "2026-10-27T12:39:49+00:00",
+ "generado": "2026-10-27T18:33:43+00:00",
  "plataforma": "tiktok",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 39197,
- "posts_vigentes": 6476,
- "opinion": 33621,
- "repetidos": 4364,
- "reacciones": 3050,
+ "comentarios_vigentes": 39442,
+ "posts_vigentes": 6524,
+ "opinion": 33820,
+ "repetidos": 4404,
+ "reacciones": 3071,
  "por_zona": {
   "Ensenada": 1258,
   "Mexicali": 1304,
@@ -19,21 +19,21 @@
   "Tecate": 4,
   "Tijuana": 4802,
   "estatal": 75,
-  "internacional": 11514,
-  "nacional": 17231
+  "internacional": 11639,
+  "nacional": 17351
  },
  "por_cuenta": {
-  "tk_aztecanoticias": 4048,
-  "tk_bbcmundo": 481,
-  "tk_cnnee": 977,
-  "tk_dwespanol": 1427,
+  "tk_aztecanoticias": 4084,
+  "tk_bbcmundo": 494,
+  "tk_cnnee": 994,
+  "tk_dwespanol": 1451,
   "tk_ensenada_noticias": 1609,
-  "tk_heraldo": 3171,
-  "tk_latinus": 4518,
+  "tk_heraldo": 3218,
+  "tk_latinus": 4574,
   "tk_mexicali_noticias": 1708,
   "tk_mexico_noticias": 5426,
   "tk_mundo_noticias": 2821,
-  "tk_nmas": 2786,
+  "tk_nmas": 2802,
   "tk_rosarito_noticias": 907,
   "tk_rubro_clima": 401,
   "tk_rubro_deportes": 97,
@@ -42,18 +42,18 @@
   "tk_rubro_turismo": 76,
   "tk_sandiego_news": 1538,
   "tk_sandiego_noticias": 1542,
-  "tk_telemundo": 2314,
+  "tk_telemundo": 2350,
   "tk_tijuana_noticias": 3184
  },
  "por_idioma": {
   "en": 1538,
-  "es": 37659
+  "es": 37904
  },
  "por_tema": [
   {
    "tema": "hombre",
-   "comentarios": 198,
-   "posts": 169
+   "comentarios": 203,
+   "posts": 170
   },
   {
    "tema": "lula",
@@ -66,6 +66,16 @@
    "posts": 50
   },
   {
+   "tema": "sheinbaum",
+   "comentarios": 51,
+   "posts": 51
+  },
+  {
+   "tema": "muertos",
+   "comentarios": 38,
+   "posts": 35
+  },
+  {
    "tema": "salario",
    "comentarios": 35,
    "posts": 29
@@ -74,6 +84,11 @@
    "tema": "pension",
    "comentarios": 32,
    "posts": 28
+  },
+  {
+   "tema": "inseguridad",
+   "comentarios": 27,
+   "posts": 25
   },
   {
    "tema": "diputados",
@@ -141,11 +156,6 @@
    "posts": 4
   },
   {
-   "tema": "santos",
-   "comentarios": 4,
-   "posts": 4
-  },
-  {
    "tema": "ariadna montiel",
    "comentarios": 1,
    "posts": 1
@@ -162,9 +172,9 @@
   }
  ],
  "sentimiento": {
-  "positivo": 3538,
-  "negativo": 15644,
-  "neutral": 13012,
+  "positivo": 3551,
+  "negativo": 15759,
+  "neutral": 13083,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 1427,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -351,7 +361,7 @@
    "activa": false
   }
  ],
- "releidos": 35,
+ "releidos": 18,
  "destacados": [
   {
    "url": "https://www.tiktok.com/@latinus_us/video/7701197039669054728",
@@ -412,34 +422,6 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@dw_espanol/video/7701018145154174230",
-   "cuenta": "tk_dwespanol",
-   "zona": "internacional",
-   "fecha": "2026-10-26",
-   "titulo": "Neonazis enmascarados marchan con esvásticas y haciendo el saludo nazi en Springfield, Ohio",
-   "tipo": "video",
-   "rubros": [],
-   "likes": 97300,
-   "comentarios": 2287,
-   "reproducciones": 1500000,
-   "creador": "@dw_espanol",
-   "alcance": "nacional",
-   "publicado": "2026-10-26T16:43:37+00:00",
-   "compartidos": 25000,
-   "guardados": 12495,
-   "duracion": 50,
-   "cosechados": 7,
-   "opinion": 7,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 6,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.tiktok.com/@latinus_us/video/7701196344014294279",
    "cuenta": "tk_latinus",
    "zona": "internacional",
@@ -468,28 +450,30 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@bbcnewsmundo/video/7701007062737800500",
-   "cuenta": "tk_bbcmundo",
-   "zona": "internacional",
-   "fecha": "2026-10-26",
-   "titulo": "Lula hizo historia en Brasil. 🇧🇷 Lo que parecía una victoria improbable terminó convirtiéndose en una remontada histórica y se aseguró un cuarto mandato presid…",
+   "url": "https://www.tiktok.com/@n.mas/video/7701131873417776392",
+   "cuenta": "tk_nmas",
+   "zona": "nacional",
+   "fecha": "2026-10-27",
+   "titulo": "La plataforma petrolera de perforación Prospector 5 se hundió frente a las costas de Mayumba, Gabón. Se rescataron a más de 100 personas, un cuerpo sin vida y…",
    "tipo": "video",
-   "rubros": [],
-   "likes": 36900,
-   "comentarios": 477,
-   "reproducciones": 277600,
-   "creador": "@bbcnewsmundo",
-   "alcance": "extranjero",
-   "publicado": "2026-10-26T16:00:46+00:00",
-   "compartidos": 972,
-   "guardados": 1842,
-   "duracion": 155,
-   "cosechados": 6,
-   "opinion": 6,
+   "rubros": [
+    "seguridad"
+   ],
+   "likes": 30300,
+   "comentarios": 843,
+   "reproducciones": 793200,
+   "creador": "@n.mas",
+   "alcance": "nacional",
+   "publicado": "2026-10-27T00:05:01+00:00",
+   "compartidos": 3488,
+   "guardados": 2404,
+   "duracion": 43,
+   "cosechados": 7,
+   "opinion": 7,
    "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 5,
+    "positivo": 1,
+    "negativo": 3,
+    "neutral": 3,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -570,36 +554,6 @@
    "compartidos": 316,
    "guardados": 611,
    "duracion": 32,
-   "cosechados": 7,
-   "opinion": 7,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 3,
-    "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@n.mas/video/7701131873417776392",
-   "cuenta": "tk_nmas",
-   "zona": "nacional",
-   "fecha": "2026-10-27",
-   "titulo": "La plataforma petrolera de perforación Prospector 5 se hundió frente a las costas de Mayumba, Gabón. Se rescataron a más de 100 personas, un cuerpo sin vida y…",
-   "tipo": "video",
-   "rubros": [
-    "seguridad"
-   ],
-   "likes": 18500,
-   "comentarios": 595,
-   "reproducciones": 529800,
-   "creador": "@n.mas",
-   "alcance": "nacional",
-   "publicado": "2026-10-27T00:05:01+00:00",
-   "compartidos": 2091,
-   "guardados": 1461,
-   "duracion": 43,
    "cosechados": 7,
    "opinion": 7,
    "sentimiento": {
@@ -759,6 +713,62 @@
    "temas": []
   },
   {
+   "url": "https://www.tiktok.com/@noticiastelemundo/video/7701303945624423710",
+   "cuenta": "tk_telemundo",
+   "zona": "internacional",
+   "fecha": "2026-10-27",
+   "titulo": "☀️🗞️ ¡Buenos días, TikTok! Estas son las #noticias más importantes que debes saber este martes 27 de octubre de 2026:",
+   "tipo": "video",
+   "rubros": [],
+   "likes": 10100,
+   "comentarios": 95,
+   "reproducciones": 270300,
+   "creador": "@noticiastelemundo",
+   "alcance": "nacional",
+   "publicado": "2026-10-27T11:12:48+00:00",
+   "compartidos": 368,
+   "guardados": 454,
+   "duracion": 144,
+   "cosechados": 7,
+   "opinion": 5,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 1,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@n.mas/video/7701191427304279303",
+   "cuenta": "tk_nmas",
+   "zona": "internacional",
+   "fecha": "2026-10-27",
+   "titulo": "Durante el lanzamiento de su campaña presidencial, la candidata francesa Marine Le Pen declaró que su gobierno no permitirá que Francia caiga en una \"mexicaniz…",
+   "tipo": "video",
+   "rubros": [],
+   "likes": 9053,
+   "comentarios": 622,
+   "reproducciones": 161900,
+   "creador": "@n.mas",
+   "alcance": "extranjero",
+   "publicado": "2026-10-27T03:56:05+00:00",
+   "compartidos": 418,
+   "guardados": 746,
+   "duracion": 35,
+   "cosechados": 7,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 6,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.tiktok.com/@latinus_us/video/7701197108300303622",
    "cuenta": "tk_latinus",
    "zona": "nacional",
@@ -808,6 +818,34 @@
    "sentimiento": {
     "positivo": 0,
     "negativo": 3,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@latinus_us/video/7701399036275756295",
+   "cuenta": "tk_latinus",
+   "zona": "internacional",
+   "fecha": "2026-10-27",
+   "titulo": "Irene Miller, de 50 años, fue arrestada en un aeropuerto de Florida tras regresar de un viaje a Las Vegas; las autoridades la acusaran de dejar solos en casa a…",
+   "tipo": "video",
+   "rubros": [],
+   "likes": 6699,
+   "comentarios": 187,
+   "reproducciones": 161800,
+   "creador": "@latinus_us",
+   "alcance": "extranjero",
+   "publicado": "2026-10-27T17:21:41+00:00",
+   "compartidos": 146,
+   "guardados": 250,
+   "duracion": 51,
+   "cosechados": 7,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 5,
     "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -1014,28 +1052,31 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@n.mas/video/7701036201830092050",
-   "cuenta": "tk_nmas",
-   "zona": "nacional",
-   "fecha": "2026-10-26",
-   "titulo": "La Alianza Mexicana de Organización de Transportistas A.C. realiza este lunes 26 de octubre un paro nacional, en el que buscan mostrar sus problemas a la ciuda…",
+   "url": "https://www.tiktok.com/@noticiastelemundo/video/7701373174801321247",
+   "cuenta": "tk_telemundo",
+   "zona": "internacional",
+   "fecha": "2026-10-27",
+   "titulo": "⚽️ ¡Tiene solo 3 años y deja a todos atrás! Un video viral grabado en Winter Park, Florida, muestra al pequeño futbolista regateando a niños mayores y anotando…",
    "tipo": "video",
-   "rubros": [],
-   "likes": 4500,
-   "comentarios": 85,
-   "reproducciones": 157700,
-   "creador": "@n.mas",
-   "alcance": "nacional",
-   "publicado": "2026-10-26T17:53:42+00:00",
-   "compartidos": 436,
-   "guardados": 216,
-   "duracion": 53,
+   "rubros": [
+    "politica",
+    "espectaculos"
+   ],
+   "likes": 4533,
+   "comentarios": 140,
+   "reproducciones": 95800,
+   "creador": "@noticiastelemundo",
+   "alcance": "extranjero",
+   "publicado": "2026-10-27T15:41:35+00:00",
+   "compartidos": 553,
+   "guardados": 234,
+   "duracion": 37,
    "cosechados": 7,
-   "opinion": 7,
+   "opinion": 6,
    "sentimiento": {
-    "positivo": 2,
+    "positivo": 0,
     "negativo": 3,
-    "neutral": 2,
+    "neutral": 3,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -1100,34 +1141,6 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@n.mas/video/7701191427304279303",
-   "cuenta": "tk_nmas",
-   "zona": "internacional",
-   "fecha": "2026-10-27",
-   "titulo": "Durante el lanzamiento de su campaña presidencial, la candidata francesa Marine Le Pen declaró que su gobierno no permitirá que Francia caiga en una \"mexicaniz…",
-   "tipo": "video",
-   "rubros": [],
-   "likes": 4017,
-   "comentarios": 296,
-   "reproducciones": 86600,
-   "creador": "@n.mas",
-   "alcance": "extranjero",
-   "publicado": "2026-10-27T03:56:05+00:00",
-   "compartidos": 175,
-   "guardados": 357,
-   "duracion": 35,
-   "cosechados": 7,
-   "opinion": 7,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 6,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.tiktok.com/@latinus_us/video/7701107324806597908",
    "cuenta": "tk_latinus",
    "zona": "nacional",
@@ -1152,6 +1165,34 @@
     "positivo": 0,
     "negativo": 3,
     "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@n.mas/video/7701197960662486279",
+   "cuenta": "tk_nmas",
+   "zona": "nacional",
+   "fecha": "2026-10-27",
+   "titulo": "Este lunes se habló sobre el reconocimiento que ganó la mexicana Charlyn Corral durante la ceremonia del Balón de Oro 2026, el cual la coloca como la mejor del…",
+   "tipo": "video",
+   "rubros": [],
+   "likes": 3629,
+   "comentarios": 66,
+   "reproducciones": 44800,
+   "creador": "@n.mas",
+   "alcance": "nacional",
+   "publicado": "2026-10-27T05:05:00+00:00",
+   "compartidos": 130,
+   "guardados": 186,
+   "duracion": 202,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -1276,6 +1317,36 @@
    "temas": []
   },
   {
+   "url": "https://www.tiktok.com/@n.mas/video/7701399507614829831",
+   "cuenta": "tk_nmas",
+   "zona": "nacional",
+   "fecha": "2026-10-27",
+   "titulo": "Un vehículo a exceso de velocidad no logró tomar una curva y se estrelló contra un portón, atravesó la cochera de una vivienda, destruyó una terraza y cayó en…",
+   "tipo": "video",
+   "rubros": [
+    "economia"
+   ],
+   "likes": 1787,
+   "comentarios": 77,
+   "reproducciones": 48300,
+   "creador": "@n.mas",
+   "alcance": "fuera",
+   "publicado": "2026-10-27T17:23:31+00:00",
+   "compartidos": 417,
+   "guardados": 143,
+   "duracion": 19,
+   "cosechados": 7,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 0,
+    "neutral": 5,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.tiktok.com/@aztecanoticias/video/7701212225926728968",
    "cuenta": "tk_aztecanoticias",
    "zona": "nacional",
@@ -1306,6 +1377,36 @@
    "temas": []
   },
   {
+   "url": "https://www.tiktok.com/@dw_espanol/video/7701116810980035862",
+   "cuenta": "tk_dwespanol",
+   "zona": "internacional",
+   "fecha": "2026-10-26",
+   "titulo": "Netanyahu alerta de un \"segundo Holocausto\" si no es reelegido en las elecciones de Israel",
+   "tipo": "video",
+   "rubros": [
+    "politica"
+   ],
+   "likes": 1101,
+   "comentarios": 85,
+   "reproducciones": 21500,
+   "creador": "@dw_espanol",
+   "alcance": "extranjero",
+   "publicado": "2026-10-26T23:07:28+00:00",
+   "compartidos": 121,
+   "guardados": 88,
+   "duracion": 60,
+   "cosechados": 3,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.tiktok.com/@latinus_us/video/7701107331521596693",
    "cuenta": "tk_latinus",
    "zona": "nacional",
@@ -1330,66 +1431,6 @@
     "positivo": 1,
     "negativo": 1,
     "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@aztecanoticias/video/7701046292780207367",
-   "cuenta": "tk_aztecanoticias",
-   "zona": "nacional",
-   "fecha": "2026-10-26",
-   "titulo": "Morena (@morena_partido) puso a Taddei al frente del INE (@inemexico), pero ¿ahora quién se hace responsable? 🤔⁉️⁣",
-   "tipo": "video",
-   "rubros": [
-    "politica"
-   ],
-   "likes": 908,
-   "comentarios": 94,
-   "reproducciones": 13300,
-   "creador": "@aztecanoticias",
-   "alcance": "nacional",
-   "publicado": "2026-10-26T18:32:55+00:00",
-   "compartidos": 24,
-   "guardados": 27,
-   "duracion": 35,
-   "cosechados": 5,
-   "opinion": 5,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 3,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@dw_espanol/video/7701116810980035862",
-   "cuenta": "tk_dwespanol",
-   "zona": "internacional",
-   "fecha": "2026-10-26",
-   "titulo": "Netanyahu alerta de un \"segundo Holocausto\" si no es reelegido en las elecciones de Israel",
-   "tipo": "video",
-   "rubros": [
-    "politica"
-   ],
-   "likes": 906,
-   "comentarios": 51,
-   "reproducciones": 17700,
-   "creador": "@dw_espanol",
-   "alcance": "extranjero",
-   "publicado": "2026-10-26T23:07:28+00:00",
-   "compartidos": 96,
-   "guardados": 74,
-   "duracion": 60,
-   "cosechados": 3,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -1486,36 +1527,6 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@n.mas/video/7700990294820441351",
-   "cuenta": "tk_nmas",
-   "zona": "internacional",
-   "fecha": "2026-10-26",
-   "titulo": "El crucero de lujo Mein Schiff 3 colisionó contra el buque portacontenedores MSC Victorine mientras intentaba zarpar en medio de la tormenta Manja.",
-   "tipo": "video",
-   "rubros": [
-    "clima"
-   ],
-   "likes": 762,
-   "comentarios": 8,
-   "reproducciones": 33000,
-   "creador": "@n.mas",
-   "alcance": "extranjero",
-   "publicado": "2026-10-26T14:55:36+00:00",
-   "compartidos": 36,
-   "guardados": 51,
-   "duracion": 33,
-   "cosechados": 6,
-   "opinion": 5,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.tiktok.com/@latinus_us/video/7701107330221591829",
    "cuenta": "tk_latinus",
    "zona": "nacional",
@@ -1576,36 +1587,6 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@latinus_us/video/7701044386657881345",
-   "cuenta": "tk_latinus",
-   "zona": "internacional",
-   "fecha": "2026-10-26",
-   "titulo": "\"Decidió venir aquí y hablar de traseros\": el candidato al Senado de EUA Abdul El-Sayed le responde a Trump y critica al republicano por no hacerle frente al c…",
-   "tipo": "video",
-   "rubros": [
-    "politica"
-   ],
-   "likes": 588,
-   "comentarios": 15,
-   "reproducciones": 23500,
-   "creador": "@latinus_us",
-   "alcance": "extranjero",
-   "publicado": "2026-10-26T18:25:40+00:00",
-   "compartidos": 3,
-   "guardados": 16,
-   "duracion": 58,
-   "cosechados": 7,
-   "opinion": 5,
-   "sentimiento": {
-    "positivo": 2,
-    "negativo": 2,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.tiktok.com/@n.mas/video/7701089394903600402",
    "cuenta": "tk_nmas",
    "zona": "internacional",
@@ -1630,36 +1611,6 @@
     "positivo": 0,
     "negativo": 4,
     "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@noticiastelemundo/video/7701027730233543966",
-   "cuenta": "tk_telemundo",
-   "zona": "internacional",
-   "fecha": "2026-10-26",
-   "titulo": "Un crucero de lujo chocó contra dos buques de carga al salir del puerto de Bremerhaven, Alemania, en medio de fuertes vientos. El incidente causó daños importa…",
-   "tipo": "video",
-   "rubros": [
-    "clima"
-   ],
-   "likes": 532,
-   "comentarios": 6,
-   "reproducciones": 16700,
-   "creador": "@noticiastelemundo",
-   "alcance": "extranjero",
-   "publicado": "2026-10-26T17:20:54+00:00",
-   "compartidos": 23,
-   "guardados": 26,
-   "duracion": 57,
-   "cosechados": 4,
-   "opinion": 4,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 3,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -1826,14 +1777,14 @@
    "rubros": [
     "seguridad"
    ],
-   "likes": 350,
-   "comentarios": 14,
-   "reproducciones": 11700,
+   "likes": 384,
+   "comentarios": 15,
+   "reproducciones": 12900,
    "creador": "@n.mas",
    "alcance": "extranjero",
    "publicado": "2026-10-27T03:30:29+00:00",
-   "compartidos": 13,
-   "guardados": 20,
+   "compartidos": 14,
+   "guardados": 22,
    "duracion": 32,
    "cosechados": 7,
    "opinion": 7,
@@ -1847,59 +1798,59 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@cnnee/video/7701037197973032200",
-   "cuenta": "tk_cnnee",
+   "url": "https://www.tiktok.com/@latinus_us/video/7701410474281225493",
+   "cuenta": "tk_latinus",
    "zona": "internacional",
-   "fecha": "2026-10-26",
-   "titulo": "El candidato demócrata al Senado por Michigan, Abdul El-Sayed, respondió al presidente de EE.UU., Donald #Trump, tras los ataques del mandatario contra su nomb…",
+   "fecha": "2026-10-27",
+   "titulo": "#LatinusDiario. Delcy Rodríguez, presidenta encargada de Venezuela, criticó el regreso de María Corina Machado y dijo que “podía evitarse el show”. Sostuvo que…",
    "tipo": "video",
    "rubros": [
     "politica"
    ],
-   "likes": 330,
-   "comentarios": 12,
-   "reproducciones": 6078,
-   "creador": "@cnnee",
+   "likes": 296,
+   "comentarios": 15,
+   "reproducciones": 5725,
+   "creador": "@latinus_us",
    "alcance": "extranjero",
-   "publicado": "2026-10-26T17:57:34+00:00",
-   "compartidos": 11,
-   "guardados": 12,
-   "duracion": 54,
-   "cosechados": 7,
-   "opinion": 6,
+   "publicado": "2026-10-27T18:06:03+00:00",
+   "compartidos": 4,
+   "guardados": 6,
+   "duracion": 81,
+   "cosechados": 6,
+   "opinion": 5,
    "sentimiento": {
-    "positivo": 2,
-    "negativo": 0,
-    "neutral": 4,
+    "positivo": 1,
+    "negativo": 2,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@cnnee/video/7700972677443390728",
-   "cuenta": "tk_cnnee",
-   "zona": "internacional",
-   "fecha": "2026-10-26",
-   "titulo": "El candidato Flávio Bolsonaro dijo que no reconocerá el resultado de las elecciones en #Brasil y que recurrirá a su equipo jurídico para solicitar su anulación.",
+   "url": "https://www.tiktok.com/@elheraldodemexico/video/7701396498159783188",
+   "cuenta": "tk_heraldo",
+   "zona": "nacional",
+   "fecha": "2026-10-27",
+   "titulo": "El actor, Manuel \"Flaco\" Ibáñez se salvó de unas complicaciones de salud que tuvo hace algunos días.",
    "tipo": "video",
    "rubros": [
-    "politica"
+    "espectaculos"
    ],
-   "likes": 303,
-   "comentarios": 43,
-   "reproducciones": 5219,
-   "creador": "@cnnee",
-   "alcance": "extranjero",
-   "publicado": "2026-10-26T13:47:10+00:00",
-   "compartidos": 14,
-   "guardados": 11,
-   "duracion": 32,
-   "cosechados": 7,
-   "opinion": 7,
+   "likes": 270,
+   "comentarios": 7,
+   "reproducciones": 6395,
+   "creador": "@elheraldodemexico",
+   "alcance": "nacional",
+   "publicado": "2026-10-27T17:50:00+00:00",
+   "compartidos": 0,
+   "guardados": 3,
+   "duracion": 100,
+   "cosechados": 3,
+   "opinion": 2,
    "sentimiento": {
-    "positivo": 1,
-    "negativo": 5,
+    "positivo": 0,
+    "negativo": 1,
     "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -1967,6 +1918,36 @@
    "temas": []
   },
   {
+   "url": "https://www.tiktok.com/@latinus_us/video/7701410445516737813",
+   "cuenta": "tk_latinus",
+   "zona": "nacional",
+   "fecha": "2026-10-27",
+   "titulo": "#LatinusDiario. Trump ofreció un millón de dólares a quien denuncie fraude en elecciones pasadas o en las intermedias del 3 de noviembre, que definirán si los…",
+   "tipo": "video",
+   "rubros": [
+    "politica"
+   ],
+   "likes": 250,
+   "comentarios": 9,
+   "reproducciones": 4888,
+   "creador": "@latinus_us",
+   "alcance": "nacional",
+   "publicado": "2026-10-27T18:06:03+00:00",
+   "compartidos": 1,
+   "guardados": 6,
+   "duracion": 55,
+   "cosechados": 7,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 3,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.tiktok.com/@elheraldodemexico/video/7701147440950381876",
    "cuenta": "tk_heraldo",
    "zona": "internacional",
@@ -2021,36 +2002,6 @@
    "sentimiento": {
     "positivo": 0,
     "negativo": 3,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@cnnee/video/7700983673474125064",
-   "cuenta": "tk_cnnee",
-   "zona": "internacional",
-   "fecha": "2026-10-26",
-   "titulo": "El candidato demócrata al Senado por Michigan, Abdul El-Sayed, bromeó en un mitin en Grand Rapids sobre los frecuentes comentarios del presidente de EE.UU., Do…",
-   "tipo": "video",
-   "rubros": [
-    "politica"
-   ],
-   "likes": 210,
-   "comentarios": 3,
-   "reproducciones": 5436,
-   "creador": "@cnnee",
-   "alcance": "extranjero",
-   "publicado": "2026-10-26T14:29:53+00:00",
-   "compartidos": 3,
-   "guardados": 8,
-   "duracion": 33,
-   "cosechados": 2,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
     "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -2118,6 +2069,66 @@
    "temas": []
   },
   {
+   "url": "https://www.tiktok.com/@aztecanoticias/video/7701185387225500929",
+   "cuenta": "tk_aztecanoticias",
+   "zona": "internacional",
+   "fecha": "2026-10-27",
+   "titulo": "La líder de extrema derecha, Marine Le Pen, aseguró que en caso de ganar las elecciones no dejará que ocurra la \"mexicanización\" de Francia, en referencia a la…",
+   "tipo": "video",
+   "rubros": [
+    "politica"
+   ],
+   "likes": 192,
+   "comentarios": 4,
+   "reproducciones": 11100,
+   "creador": "@aztecanoticias",
+   "alcance": "extranjero",
+   "publicado": "2026-10-27T03:32:45+00:00",
+   "compartidos": 1,
+   "guardados": 7,
+   "duracion": 25,
+   "cosechados": 3,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 2,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@noticiastelemundo/video/7701134117777181983",
+   "cuenta": "tk_telemundo",
+   "zona": "internacional",
+   "fecha": "2026-10-27",
+   "titulo": "David Morales busca convertirse en el alcalde más joven de Providence, Rhode Island, con propuestas para limitar los aumentos de alquiler al 4 %, impulsar la e…",
+   "tipo": "video",
+   "rubros": [
+    "politica"
+   ],
+   "likes": 172,
+   "comentarios": 4,
+   "reproducciones": 6289,
+   "creador": "@noticiastelemundo",
+   "alcance": "nacional",
+   "publicado": "2026-10-27T00:13:41+00:00",
+   "compartidos": 5,
+   "guardados": 8,
+   "duracion": 125,
+   "cosechados": 3,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.tiktok.com/@elheraldodemexico/video/7701152732639399169",
    "cuenta": "tk_heraldo",
    "zona": "nacional",
@@ -2157,14 +2168,14 @@
    "rubros": [
     "seguridad"
    ],
-   "likes": 159,
+   "likes": 163,
    "comentarios": 2,
-   "reproducciones": 4936,
+   "reproducciones": 5170,
    "creador": "@n.mas",
    "alcance": "extranjero",
    "publicado": "2026-10-27T02:36:59+00:00",
    "compartidos": 2,
-   "guardados": 8,
+   "guardados": 9,
    "duracion": 29,
    "cosechados": 1,
    "opinion": 1,
@@ -2208,29 +2219,29 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@dw_espanol/video/7700986506436955414",
-   "cuenta": "tk_dwespanol",
+   "url": "https://www.tiktok.com/@elheraldodemexico/video/7701407677510847796",
+   "cuenta": "tk_heraldo",
    "zona": "nacional",
-   "fecha": "2026-10-26",
-   "titulo": "Auge del fútbol femenino en México",
+   "fecha": "2026-10-27",
+   "titulo": "De tener un Récord Guiness a convertirse en la Mejor Delantera del Mundo en el Balón de Oro, ella es Charlyn Coral la mexicana que está triunfando en el futbol.",
    "tipo": "video",
    "rubros": [
     "deportes"
    ],
-   "likes": 135,
-   "comentarios": 3,
-   "reproducciones": 5448,
-   "creador": "@dw_espanol",
+   "likes": 111,
+   "comentarios": 5,
+   "reproducciones": 4092,
+   "creador": "@elheraldodemexico",
    "alcance": "nacional",
-   "publicado": "2026-10-26T14:40:50+00:00",
-   "compartidos": 3,
-   "guardados": 6,
-   "duracion": 107,
-   "cosechados": 2,
-   "opinion": 1,
+   "publicado": "2026-10-27T18:30:00+00:00",
+   "compartidos": 0,
+   "guardados": 4,
+   "duracion": 78,
+   "cosechados": 4,
+   "opinion": 2,
    "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
+    "positivo": 2,
+    "negativo": 0,
     "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -2238,30 +2249,30 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@cnnee/video/7701043757134744840",
+   "url": "https://www.tiktok.com/@cnnee/video/7701385086297492788",
    "cuenta": "tk_cnnee",
    "zona": "internacional",
-   "fecha": "2026-10-26",
-   "titulo": "Este 26 de octubre se entrega el Balón de Oro, el premio individual más prestigioso del fútbol. Y entre los aficionados al balompié hay dudas que van más allá…",
+   "fecha": "2026-10-27",
+   "titulo": "El vicepresidente de #EstadosUnidos, J. D. Vance, reconoció este lunes que los altos precios de la gasolina tienen indecisos a algunos votantes antes de las el…",
    "tipo": "video",
    "rubros": [
-    "deportes"
+    "economia"
    ],
-   "likes": 121,
-   "comentarios": 3,
-   "reproducciones": 11600,
+   "likes": 94,
+   "comentarios": 5,
+   "reproducciones": 1738,
    "creador": "@cnnee",
    "alcance": "nacional",
-   "publicado": "2026-10-26T18:23:03+00:00",
-   "compartidos": 0,
-   "guardados": 3,
-   "duracion": 158,
-   "cosechados": 3,
-   "opinion": 3,
+   "publicado": "2026-10-27T16:27:42+00:00",
+   "compartidos": 1,
+   "guardados": 0,
+   "duracion": 40,
+   "cosechados": 4,
+   "opinion": 4,
    "sentimiento": {
-    "positivo": 1,
-    "negativo": 0,
-    "neutral": 2,
+    "positivo": 0,
+    "negativo": 4,
+    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -2298,30 +2309,89 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@elheraldodemexico/video/7701072124508785926",
-   "cuenta": "tk_heraldo",
+   "url": "https://www.tiktok.com/@latinus_us/video/7701407138559577345",
+   "cuenta": "tk_latinus",
    "zona": "nacional",
-   "fecha": "2026-10-26",
-   "titulo": "‼️Anuncian fechas de deposito para pensiones del bienestar y la presidenta habla de la renuncia de Guadalupe Taddei al frente del INE‼️",
+   "fecha": "2026-10-27",
+   "titulo": "El gobierno de la presidenta Claudia Sheinbaum anunció este martes un plan de emergencia para mejorar la atención en el Instituto Mexicano del Seguro Socia (IM…",
    "tipo": "video",
    "rubros": [
     "politica"
    ],
-   "likes": 63,
-   "comentarios": 4,
-   "reproducciones": 7018,
-   "creador": "@elheraldodemexico",
+   "likes": 87,
+   "comentarios": 12,
+   "reproducciones": 3581,
+   "creador": "@latinus_us",
    "alcance": "nacional",
-   "publicado": "2026-10-26T20:13:03+00:00",
+   "publicado": "2026-10-27T17:53:07+00:00",
    "compartidos": 0,
-   "guardados": 3,
-   "duracion": 82,
-   "cosechados": 2,
-   "opinion": 1,
+   "guardados": 2,
+   "duracion": 43,
+   "cosechados": 7,
+   "opinion": 5,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 3,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@elheraldodemexico/video/7701398858303098164",
+   "cuenta": "tk_heraldo",
+   "zona": "nacional",
+   "fecha": "2026-10-27",
+   "titulo": "¡Una suma bastante grande! Ya que más de 3 mil 500 corredores participaron en el Medio Maratón Alfeñique 2026 en Toluca.",
+   "tipo": "video",
+   "rubros": [
+    "deportes"
+   ],
+   "likes": 59,
+   "comentarios": 1,
+   "reproducciones": 1697,
+   "creador": "@elheraldodemexico",
+   "alcance": "fuera",
+   "publicado": "2026-10-27T18:00:00+00:00",
+   "compartidos": 1,
+   "guardados": 1,
+   "duracion": 58,
+   "cosechados": 0,
+   "opinion": 0,
    "sentimiento": {
     "positivo": 0,
     "negativo": 0,
-    "neutral": 1,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@dw_espanol/video/7701380309249559810",
+   "cuenta": "tk_dwespanol",
+   "zona": "internacional",
+   "fecha": "2026-10-27",
+   "titulo": "La empresa china Unitree Robotics presentó su nuevo modelo H2-X, un robot humanoide que serviría para ayudar en emergencias, levantar vehículos y enfrentar las…",
+   "tipo": "carrusel",
+   "rubros": [
+    "ia"
+   ],
+   "likes": 54,
+   "comentarios": 1,
+   "reproducciones": 1349,
+   "creador": "@dw_espanol",
+   "alcance": "extranjero",
+   "publicado": "2026-10-27T17:00:00+00:00",
+   "compartidos": 6,
+   "guardados": 4,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -2332,52 +2402,50 @@
   {
    "cuenta": "tk_aztecanoticias",
    "estado": "ok",
-   "posts": 10,
-   "comentarios": 24,
-   "crudos": 24,
+   "posts": 9,
+   "comentarios": 36,
+   "crudos": 39,
    "fuera": 0,
    "sin_lugar": 0,
-   "descartados": 0,
-   "con_subtitulos": 6,
+   "descartados": 1,
+   "con_subtitulos": 4,
    "fuera_de_ventana": 0
   },
   {
    "cuenta": "tk_bbcmundo",
    "estado": "ok",
-   "posts": 1,
-   "comentarios": 0,
-   "crudos": 0,
+   "posts": 2,
+   "comentarios": 13,
+   "crudos": 13,
    "fuera": 0,
    "sin_lugar": 0,
-   "descartados": 0,
-   "con_subtitulos": 9,
-   "fuera_de_ventana": 9,
-   "nota": "sin videos nuevos que cosechar"
+   "descartados": 1,
+   "con_subtitulos": 8,
+   "fuera_de_ventana": 7
   },
   {
    "cuenta": "tk_cnnee",
    "estado": "ok",
    "posts": 10,
-   "comentarios": 0,
-   "crudos": 7,
+   "comentarios": 17,
+   "crudos": 19,
    "fuera": 0,
    "sin_lugar": 0,
    "descartados": 0,
-   "con_subtitulos": 10,
+   "con_subtitulos": 7,
    "fuera_de_ventana": 0
   },
   {
    "cuenta": "tk_dwespanol",
    "estado": "ok",
    "posts": 10,
-   "comentarios": 0,
-   "crudos": 0,
+   "comentarios": 24,
+   "crudos": 24,
    "fuera": 0,
    "sin_lugar": 0,
    "descartados": 0,
-   "con_subtitulos": 8,
-   "fuera_de_ventana": 0,
-   "nota": "sin videos nuevos que cosechar"
+   "con_subtitulos": 7,
+   "fuera_de_ventana": 0
   },
   {
    "cuenta": "tk_ensenada_noticias",
@@ -2395,25 +2463,24 @@
    "cuenta": "tk_heraldo",
    "estado": "ok",
    "posts": 10,
-   "comentarios": 0,
-   "crudos": 0,
+   "comentarios": 49,
+   "crudos": 49,
    "fuera": 0,
    "sin_lugar": 0,
    "descartados": 0,
-   "con_subtitulos": 10,
-   "fuera_de_ventana": 0,
-   "nota": "sin videos nuevos que cosechar"
+   "con_subtitulos": 6,
+   "fuera_de_ventana": 0
   },
   {
    "cuenta": "tk_latinus",
    "estado": "ok",
-   "posts": 10,
-   "comentarios": 7,
-   "crudos": 7,
+   "posts": 9,
+   "comentarios": 57,
+   "crudos": 59,
    "fuera": 0,
    "sin_lugar": 0,
-   "descartados": 0,
-   "con_subtitulos": 10,
+   "descartados": 1,
+   "con_subtitulos": 8,
    "fuera_de_ventana": 0
   },
   {
@@ -2456,14 +2523,13 @@
    "cuenta": "tk_nmas",
    "estado": "ok",
    "posts": 10,
-   "comentarios": 0,
-   "crudos": 0,
+   "comentarios": 16,
+   "crudos": 16,
    "fuera": 0,
    "sin_lugar": 0,
    "descartados": 0,
-   "con_subtitulos": 5,
-   "fuera_de_ventana": 0,
-   "nota": "sin videos nuevos que cosechar"
+   "con_subtitulos": 2,
+   "fuera_de_ventana": 0
   },
   {
    "cuenta": "tk_rosarito_noticias",
@@ -2492,10 +2558,16 @@
   },
   {
    "cuenta": "tk_rubro_deportes",
-   "estado": "fallo",
-   "error": "RuntimeError: actors/clockworks~tiktok-scraper/run-sync-get-dataset-items HTTP 502: <html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n</body>\r\n</h",
+   "estado": "ok",
    "posts": 0,
-   "comentarios": 0
+   "comentarios": 0,
+   "crudos": 0,
+   "fuera": 0,
+   "sin_lugar": 0,
+   "descartados": 0,
+   "sin_rubro": 0,
+   "con_subtitulos": 0,
+   "nota": "sin videos nuevos que cosechar"
   },
   {
    "cuenta": "tk_rubro_espectaculos",
@@ -2564,12 +2636,12 @@
    "cuenta": "tk_telemundo",
    "estado": "ok",
    "posts": 10,
-   "comentarios": 7,
-   "crudos": 7,
+   "comentarios": 36,
+   "crudos": 36,
    "fuera": 0,
    "sin_lugar": 0,
    "descartados": 0,
-   "con_subtitulos": 8,
+   "con_subtitulos": 10,
    "fuera_de_ventana": 0
   },
   {
@@ -2587,27 +2659,28 @@
  ],
  "gasto": {
   "resultados": 8820,
-  "gastado": 125,
+  "gastado": 335,
   "por_concepto": {
-   "tk_aztecanoticias": 34,
-   "tk_bbcmundo": 10,
-   "tk_cnnee": 17,
-   "tk_dwespanol": 10,
+   "tk_aztecanoticias": 49,
+   "tk_bbcmundo": 23,
+   "tk_cnnee": 29,
+   "tk_dwespanol": 34,
    "tk_ensenada_noticias": 0,
-   "tk_heraldo": 10,
-   "tk_latinus": 17,
+   "tk_heraldo": 59,
+   "tk_latinus": 69,
    "tk_mexicali_noticias": 0,
    "tk_mexico_noticias": 0,
    "tk_mundo_noticias": 0,
-   "tk_nmas": 10,
+   "tk_nmas": 26,
    "tk_rosarito_noticias": 0,
    "tk_rubro_clima": 0,
+   "tk_rubro_deportes": 0,
    "tk_rubro_espectaculos": 0,
    "tk_rubro_seguridad": 0,
    "tk_rubro_turismo": 0,
    "tk_sandiego_news": 0,
    "tk_sandiego_noticias": 0,
-   "tk_telemundo": 17,
+   "tk_telemundo": 46,
    "tk_tijuana_noticias": 0
   }
  }
