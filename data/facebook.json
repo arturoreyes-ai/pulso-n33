@@ -1,13 +1,13 @@
 {
  "esquema": 1,
- "generado": "2026-10-27T05:39:44+00:00",
+ "generado": "2026-10-27T12:52:44+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 8577,
- "posts_vigentes": 1315,
- "opinion": 7714,
- "repetidos": 629,
+ "comentarios_vigentes": 8641,
+ "posts_vigentes": 1323,
+ "opinion": 7774,
+ "repetidos": 633,
  "reacciones": 530,
  "por_zona": {
   "Ensenada": 214,
@@ -16,21 +16,21 @@
   "San Diego": 25,
   "San Felipe": 5,
   "San Quintín": 11,
-  "Tecate": 152,
-  "Tijuana": 3705,
-  "estatal": 3703,
+  "Tecate": 161,
+  "Tijuana": 3735,
+  "estatal": 3728,
   "internacional": 153,
   "nacional": 443
  },
  "por_cuenta": {
   "aztecabc_fb": 421,
-  "blanconegro_fb": 3260,
-  "blancorojo_fb": 2331,
-  "ndtijuana_fb": 2451,
-  "psn_fb": 114
+  "blanconegro_fb": 3298,
+  "blancorojo_fb": 2341,
+  "ndtijuana_fb": 2462,
+  "psn_fb": 119
  },
  "por_idioma": {
-  "es": 8577
+  "es": 8641
  },
  "por_tema": [
   {
@@ -47,16 +47,6 @@
    "tema": "ayuntamiento",
    "comentarios": 13,
    "posts": 13
-  },
-  {
-   "tema": "obras",
-   "comentarios": 12,
-   "posts": 12
-  },
-  {
-   "tema": "inseguridad",
-   "comentarios": 10,
-   "posts": 10
   },
   {
    "tema": "mesa",
@@ -119,6 +109,16 @@
    "posts": 2
   },
   {
+   "tema": "ariadna montiel",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
+   "tema": "expertos",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
    "tema": "lula",
    "comentarios": 1,
    "posts": 1
@@ -130,9 +130,9 @@
   }
  ],
  "sentimiento": {
-  "positivo": 904,
-  "negativo": 3772,
-  "neutral": 3038,
+  "positivo": 908,
+  "negativo": 3808,
+  "neutral": 3058,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -172,7 +172,7 @@
    "activa": true
   }
  ],
- "releidos": 24,
+ "releidos": 19,
  "destacados": [
   {
    "url": "https://www.facebook.com/NdTijuana/videos/2041668786543313",
@@ -229,9 +229,9 @@
    "fecha": "2026-10-26",
    "titulo": "Que opinan",
    "tipo": "imagen",
-   "likes": 1265,
-   "comentarios": 260,
-   "compartidos": 70,
+   "likes": 1545,
+   "comentarios": 313,
+   "compartidos": 90,
    "alcance": "nacional",
    "publicado": "2026-10-26T19:34:04+00:00",
    "cosechados": 10,
@@ -246,16 +246,40 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/reel/2581590505687244",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-27",
+   "titulo": "🚨 Más de 20 detonaciones de arma de fuego alarman a vecinos del Mariano Matamoros Sur en Tijuana",
+   "tipo": "video",
+   "likes": 1248,
+   "comentarios": 79,
+   "compartidos": 70,
+   "reproducciones": 141051,
+   "alcance": "zona",
+   "publicado": "2026-10-27T06:55:58+00:00",
+   "cosechados": 10,
+   "opinion": 8,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 5,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/NdTijuana/videos/2237915667606479",
    "cuenta": "ndtijuana_fb",
    "zona": "Tecate",
    "fecha": "2026-10-27",
    "titulo": "Atacan a balazos a agentes de la Fuerza Estatal en Tecate, al menos 3 agentes lesionados",
    "tipo": "video",
-   "likes": 872,
-   "comentarios": 185,
-   "compartidos": 117,
-   "reproducciones": 72870,
+   "likes": 992,
+   "comentarios": 202,
+   "compartidos": 130,
+   "reproducciones": 84188,
    "alcance": "zona",
    "publicado": "2026-10-27T01:26:26+00:00",
    "cosechados": 10,
@@ -264,6 +288,30 @@
     "positivo": 5,
     "negativo": 4,
     "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/2923735614670290",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-27",
+   "titulo": "Decenas de casquillos quedaron en la zona tras disparar contra tienda de abarrotes en #Tijuana",
+   "tipo": "video",
+   "likes": 785,
+   "comentarios": 52,
+   "compartidos": 75,
+   "reproducciones": 68462,
+   "alcance": "zona",
+   "publicado": "2026-10-27T07:21:42+00:00",
+   "cosechados": 9,
+   "opinion": 8,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 3,
+    "neutral": 5,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -340,6 +388,75 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid05DHma5FbUzkW9m5zsCauHDhCDHRqdHXn1hKfuxw3E3qefGhkEQ51YWBQhvKnjVLgl",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-26",
+   "titulo": "#NDTInforma Tijuana siembra 25 árboles frutales y apuesta por los huertos urbanos",
+   "tipo": "imagen",
+   "likes": 497,
+   "comentarios": 52,
+   "compartidos": 21,
+   "alcance": "zona",
+   "publicado": "2026-10-26T23:34:56+00:00",
+   "cosechados": 2,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02u6q6QYAd7Y8BeRocC8UACvT9tEnCECtGoQaGn4UUApZWiQHfqwpZAgAftZAn9gw4l&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-27",
+   "titulo": "Cuando ya no hay nada que repartir, así se olvidan de ti...",
+   "tipo": "imagen",
+   "likes": 491,
+   "comentarios": 28,
+   "compartidos": 45,
+   "alcance": "nacional",
+   "publicado": "2026-10-27T02:47:12+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 9,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02xx49RZCrs1TWEWcfkG2vi7iy7ZFC6EVM6RNuH9ZwjQ6vt1c9GPNFxRuDbFx6Eyhdl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-27",
+   "titulo": "Que el pueblo decida",
+   "tipo": "imagen",
+   "likes": 472,
+   "comentarios": 112,
+   "compartidos": 3,
+   "alcance": "nacional",
+   "publicado": "2026-10-27T04:01:29+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 4,
+    "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0DPG7WRANmP34hDQGrtarnLowhiySWbU1eF5eKznLKoaz3LM6ovNpJfqxnjMThBUql",
    "cuenta": "blanconegro_fb",
    "zona": "internacional",
@@ -357,6 +474,29 @@
     "positivo": 2,
     "negativo": 4,
     "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid03txCReLEPjJmPWAhtizKogWqVtZTi3KYuirkfojYtTRP6ivTmh1Sgfkg9pdEfRzGl",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-27",
+   "titulo": "#GaleríaNDT Lo buscaban desde el sábado y lo encontraron decapitado dentro de su vivienda",
+   "tipo": "imagen",
+   "likes": 433,
+   "comentarios": 10,
+   "compartidos": 23,
+   "alcance": "zona",
+   "publicado": "2026-10-27T01:08:09+00:00",
+   "cosechados": 7,
+   "opinion": 5,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 3,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -386,46 +526,23 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid03txCReLEPjJmPWAhtizKogWqVtZTi3KYuirkfojYtTRP6ivTmh1Sgfkg9pdEfRzGl",
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02QECgUq4VVkQSw85QAXtPd35igoFJkxdvKi9zfGCtgHsGqtVzRD8DiMkmwBQsGFf5l",
    "cuenta": "ndtijuana_fb",
-   "zona": "Tijuana",
+   "zona": "Tecate",
    "fecha": "2026-10-27",
-   "titulo": "#GaleríaNDT Lo buscaban desde el sábado y lo encontraron decapitado dentro de su vivienda",
+   "titulo": "#NDTInforma │ Muere una agente estatal y otro elemento queda grave tras enfrentamiento armado en Tecate",
    "tipo": "imagen",
-   "likes": 377,
-   "comentarios": 8,
+   "likes": 323,
+   "comentarios": 39,
    "compartidos": 16,
    "alcance": "zona",
-   "publicado": "2026-10-27T01:08:09+00:00",
-   "cosechados": 7,
-   "opinion": 5,
+   "publicado": "2026-10-27T01:49:10+00:00",
+   "cosechados": 9,
+   "opinion": 9,
    "sentimiento": {
-    "positivo": 0,
+    "positivo": 2,
     "negativo": 3,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid05DHma5FbUzkW9m5zsCauHDhCDHRqdHXn1hKfuxw3E3qefGhkEQ51YWBQhvKnjVLgl",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-26",
-   "titulo": "#NDTInforma Tijuana siembra 25 árboles frutales y apuesta por los huertos urbanos",
-   "tipo": "imagen",
-   "likes": 314,
-   "comentarios": 34,
-   "compartidos": 16,
-   "alcance": "zona",
-   "publicado": "2026-10-26T23:34:56+00:00",
-   "cosechados": 2,
-   "opinion": 2,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 2,
+    "neutral": 4,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -455,6 +572,29 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02FxLF157gQ7QaMPWY1XZy3MCk2rxm8NkztKzbv4sLsqf4rAsjG9nwYtdffQMvhGv4l",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tecate",
+   "fecha": "2026-10-26",
+   "titulo": "#GaleríaNDT Ataque contra una familia deja tres muertos y una mujer grave en Tecate",
+   "tipo": "imagen",
+   "likes": 286,
+   "comentarios": 23,
+   "compartidos": 21,
+   "alcance": "zona",
+   "publicado": "2026-10-26T23:23:09+00:00",
+   "cosechados": 7,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 3,
+    "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02ExT87f78N8xC75pwi5imUF2cUG7ctVAMDNr3FnXRaF1gmjRz8DtaAVFtwpiyXiril",
    "cuenta": "blanconegro_fb",
    "zona": "Tecate",
@@ -478,61 +618,15 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02FxLF157gQ7QaMPWY1XZy3MCk2rxm8NkztKzbv4sLsqf4rAsjG9nwYtdffQMvhGv4l",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Tecate",
-   "fecha": "2026-10-26",
-   "titulo": "#GaleríaNDT Ataque contra una familia deja tres muertos y una mujer grave en Tecate",
-   "tipo": "imagen",
-   "likes": 281,
-   "comentarios": 20,
-   "compartidos": 21,
-   "alcance": "zona",
-   "publicado": "2026-10-26T23:23:09+00:00",
-   "cosechados": 7,
-   "opinion": 7,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 3,
-    "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02xx49RZCrs1TWEWcfkG2vi7iy7ZFC6EVM6RNuH9ZwjQ6vt1c9GPNFxRuDbFx6Eyhdl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-27",
-   "titulo": "Que el pueblo decida",
-   "tipo": "imagen",
-   "likes": 237,
-   "comentarios": 54,
-   "compartidos": 3,
-   "alcance": "nacional",
-   "publicado": "2026-10-27T04:01:29+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 2,
-    "negativo": 4,
-    "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid032rSuygmfNW6wpG6J7or6x6L9caE7gkg8GRJa4TV6QVDKgdyAR3Hx7WkX9iabftjBl",
    "cuenta": "blanconegro_fb",
    "zona": "Tecate",
    "fecha": "2026-10-27",
    "titulo": "🚨 Agente de la FESC pierde la vida tras ataque armado en Tecate; hay dos lesionados más",
    "tipo": "imagen",
-   "likes": 209,
-   "comentarios": 28,
-   "compartidos": 6,
+   "likes": 284,
+   "comentarios": 49,
+   "compartidos": 19,
    "alcance": "zona",
    "publicado": "2026-10-27T03:44:44+00:00",
    "cosechados": 10,
@@ -576,9 +670,9 @@
    "fecha": "2026-10-27",
    "titulo": "Descansa en paz angelito y que quien te hizo tanto daño no les alcance su miserable vida y la justicia d Dios llegue .. te fuiste a descansar de la indifencia…",
    "tipo": "imagen",
-   "likes": 118,
-   "comentarios": 11,
-   "compartidos": 4,
+   "likes": 142,
+   "comentarios": 13,
+   "compartidos": 5,
    "alcance": "nacional",
    "publicado": "2026-10-27T02:26:59+00:00",
    "cosechados": 7,
@@ -587,6 +681,52 @@
     "positivo": 0,
     "negativo": 6,
     "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02WpSLJAdgndpLSEhWExvLQFktop9FJao5pLmP3mEWPmDJFEBfCc1rVS26QBtd71NWl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-27",
+   "titulo": "ESTE AMIGUITO NO RESPONDIÓ, EDUCÓ 🔥👏",
+   "tipo": "imagen",
+   "likes": 133,
+   "comentarios": 0,
+   "compartidos": 5,
+   "alcance": "nacional",
+   "publicado": "2026-10-27T10:25:36+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0aVwhiNQ9LtUPKCK377c4jqvbq5gNydq5vgZB6T5dSYQHgWN4hnD9FFxPRNFFXG8Wl",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-27",
+   "titulo": "🚨 Fuerte accidente deja a hombre atrapado",
+   "tipo": "imagen",
+   "likes": 129,
+   "comentarios": 18,
+   "compartidos": 17,
+   "alcance": "zona",
+   "publicado": "2026-10-27T06:29:58+00:00",
+   "cosechados": 9,
+   "opinion": 8,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 6,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -617,6 +757,29 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid022EX2WEMyNRVPQUWhUeNPHApnnkiWprWucgvGa7bdPhXVcTkopq6tbLvinUBqiN11l",
+   "cuenta": "blanconegro_fb",
+   "zona": "estatal",
+   "fecha": "2026-10-26",
+   "titulo": "¿Cuándo no habrá clases? Estas son las fechas del megapuente de noviembre",
+   "tipo": "imagen",
+   "likes": 73,
+   "comentarios": 21,
+   "compartidos": 30,
+   "alcance": "nacional",
+   "publicado": "2026-10-26T23:59:52+00:00",
+   "cosechados": 4,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/NdTijuana/posts/pfbid0FHtfixMB3ZuhjmC8NLHNuATxBAmqks3poSyYF6gtZsCg48NR78eoqnEvrsBHQCd9l",
    "cuenta": "ndtijuana_fb",
    "zona": "Tijuana",
@@ -634,29 +797,6 @@
     "positivo": 0,
     "negativo": 4,
     "neutral": 5,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid022EX2WEMyNRVPQUWhUeNPHApnnkiWprWucgvGa7bdPhXVcTkopq6tbLvinUBqiN11l",
-   "cuenta": "blanconegro_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-26",
-   "titulo": "¿Cuándo no habrá clases? Estas son las fechas del megapuente de noviembre",
-   "tipo": "imagen",
-   "likes": 58,
-   "comentarios": 14,
-   "compartidos": 23,
-   "alcance": "nacional",
-   "publicado": "2026-10-26T23:59:52+00:00",
-   "cosechados": 4,
-   "opinion": 4,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 4,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -709,17 +849,40 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0wW5DWviLNrj3zoCLr8oStfAoSny3Ne1pofBvbUiMBCJ7JgKNL7WQMQbY6LDZKxmrl",
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02eZHqd8bQPVpM7jRbUKkbe4c29UQCEM6BhDkCQ8rNVvVD3XCVjH3mmHcuTozA2P7sl",
    "cuenta": "blanconegro_fb",
    "zona": "estatal",
-   "fecha": "2026-10-26",
-   "titulo": "¡Muy buenos días!☕️",
+   "fecha": "2026-10-27",
+   "titulo": "Al parecer fueron enterrados desnudos, ya que no había prendas ni artículos personales.",
    "tipo": "otro",
-   "likes": 48,
-   "comentarios": 5,
-   "compartidos": 2,
+   "likes": 54,
+   "comentarios": 15,
+   "compartidos": 17,
    "alcance": "nacional",
-   "publicado": "2026-10-26T13:02:01+00:00",
+   "publicado": "2026-10-27T02:18:51+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 5,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0FUhn4Fhxo2C9LLT5Jww3k3hf1vQZBV3cDPCQ9cgdiq2ANnVXBM4WtQkAJkrQf4pXl",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-10-27",
+   "titulo": "⚡🔧 La gobernadora Marina del Pilar sostuvo una reunión con representantes de la CFE y autoridades municipales para revisar los avances del operativo de manteni…",
+   "tipo": "imagen",
+   "likes": 48,
+   "comentarios": 36,
+   "compartidos": 18,
+   "alcance": "zona",
+   "publicado": "2026-10-27T03:12:39+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -826,52 +989,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0bBof17EnMrMoD5AMpKv7EXyZUwLfv1imXdoCM676Fch6zRmVKvC1kHeJDGDxAb61l",
-   "cuenta": "blanconegro_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-27",
-   "titulo": "Al parecer fueron enterrados desnudos, ya que no había prendas ni artículos personales.",
-   "tipo": "otro",
-   "likes": 34,
-   "comentarios": 2,
-   "compartidos": 3,
-   "alcance": "nacional",
-   "publicado": "2026-10-27T02:18:51+00:00",
-   "cosechados": 3,
-   "opinion": 3,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 2,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0PSZ2W6qm2kAWngxx8Rp9jE4K7Az3uejn51483TTYQqA8CYijfaji496mvXtsvrDKl",
-   "cuenta": "blanconegro_fb",
-   "zona": "estatal",
-   "fecha": "2026-10-27",
-   "titulo": "La consejera presidenta anunció su salida del INE tras los señalamientos de corrupción en su contra; el instituto deberá designar a una persona que ocupe el ca…",
-   "tipo": "otro",
-   "likes": 28,
-   "comentarios": 7,
-   "compartidos": 3,
-   "alcance": "nacional",
-   "publicado": "2026-10-27T00:40:37+00:00",
-   "cosechados": 7,
-   "opinion": 6,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 4,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02a9xVC4PE2DCdCHxaq4o6e9ivdbFHSVgtMAkT2jgTLNpwQ56XXA2WX1QBBzxEvokTl",
    "cuenta": "blanconegro_fb",
    "zona": "San Felipe",
@@ -919,17 +1036,18 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0FUhn4Fhxo2C9LLT5Jww3k3hf1vQZBV3cDPCQ9cgdiq2ANnVXBM4WtQkAJkrQf4pXl",
-   "cuenta": "blanconegro_fb",
+   "url": "https://www.facebook.com/reel/1445272440902744",
+   "cuenta": "psn_fb",
    "zona": "Tijuana",
    "fecha": "2026-10-27",
-   "titulo": "⚡🔧 La gobernadora Marina del Pilar sostuvo una reunión con representantes de la CFE y autoridades municipales para revisar los avances del operativo de manteni…",
-   "tipo": "imagen",
-   "likes": 22,
-   "comentarios": 18,
-   "compartidos": 5,
+   "titulo": "#primersistemadenoticias #bajacalifornia #tijuana #mexicali #rosarito #ensenada #sanquintin #sanfelipe #tecate #marinadelpilar #marinadelpilaravila #gobierno #…",
+   "tipo": "video",
+   "likes": 24,
+   "comentarios": 0,
+   "compartidos": 7,
+   "reproducciones": 590,
    "alcance": "zona",
-   "publicado": "2026-10-27T03:12:39+00:00",
+   "publicado": "2026-10-27T03:00:33+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1035,53 +1153,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/reel/1445272440902744",
-   "cuenta": "psn_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-27",
-   "titulo": "#primersistemadenoticias #bajacalifornia #tijuana #mexicali #rosarito #ensenada #sanquintin #sanfelipe #tecate #marinadelpilar #marinadelpilaravila #gobierno #…",
-   "tipo": "video",
-   "likes": 12,
-   "comentarios": 0,
-   "compartidos": 2,
-   "reproducciones": 280,
-   "alcance": "zona",
-   "publicado": "2026-10-27T03:00:33+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid028LU6jqpSNv9TV9ao3HuidbPFT5sD2y98DnuaYvqTEc2a1xTUrWzL1WC2vvh4oArXl",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-26",
-   "titulo": "Vecinos de Guaycura se organizan contra construcción de guardería en parque público",
-   "tipo": "imagen",
-   "likes": 11,
-   "comentarios": 3,
-   "compartidos": 2,
-   "alcance": "zona",
-   "publicado": "2026-10-26T22:10:18+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/aztecabc/posts/pfbid035DwevqyvC3oH54fbcSqviWTGkLTWJtsgdpY2qB4LJcn7u6n9pHiNbR9p6L9TwvkVl",
    "cuenta": "aztecabc_fb",
    "zona": "nacional",
@@ -1098,53 +1169,6 @@
    "sentimiento": {
     "positivo": 0,
     "negativo": 0,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/reel/1493033089335596",
-   "cuenta": "psn_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-26",
-   "titulo": "#primersistemadenoticias #bajacalifornia #tijuana #mexicali #rosarito #ensenada #sanquintin #sanfelipe #tecate #marinadelpilar #marinadelpilaravila #gobierno #…",
-   "tipo": "video",
-   "likes": 10,
-   "comentarios": 2,
-   "compartidos": 2,
-   "reproducciones": 401,
-   "alcance": "zona",
-   "publicado": "2026-10-26T15:24:55+00:00",
-   "cosechados": 1,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid07KAinFY5YXFMPPxF5FtaFxEgedLQZCRQP7aei7W4uyndUE22MRCXioCHjFrh3Gx9l",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-10-27",
-   "titulo": "#NDTInforma Anuncian operativo para mejorar el servicio eléctrico en Tijuana, Rosarito y Tecate",
-   "tipo": "video",
-   "likes": 9,
-   "comentarios": 1,
-   "compartidos": 1,
-   "alcance": "zona",
-   "publicado": "2026-10-27T00:13:18+00:00",
-   "cosechados": 2,
-   "opinion": 2,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
     "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -1383,29 +1407,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/aztecabc/posts/pfbid0imNknr3f3htnt2xyZ5n8eTamD44t1L7CxxpRpTKssmPwSpUoofbNdVzxo1s7qw6ol",
-   "cuenta": "aztecabc_fb",
-   "zona": "internacional",
-   "fecha": "2026-10-26",
-   "titulo": "😱 ¡De la nada lo golpea! Captan at@que con mart¡llo que dejó a un hombre en el suelo.",
-   "tipo": "otro",
-   "likes": 0,
-   "comentarios": 0,
-   "compartidos": 0,
-   "alcance": "extranjero",
-   "publicado": "2026-10-26T12:30:07+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/redespsn/posts/pfbid01UqPR9jBcfUHKGjtKEWYmtzVfrsM9sQ6bZPHTveW69f7UVWs8csB4bHY2R8vR9Ral",
    "cuenta": "psn_fb",
    "zona": "internacional",
@@ -1433,36 +1434,36 @@
   {
    "cuenta": "aztecabc_fb",
    "estado": "ok",
-   "posts": 8,
-   "comentarios": 9,
-   "crudos": 13,
-   "fuera": 0,
+   "posts": 7,
+   "comentarios": 0,
+   "crudos": 4,
+   "fuera": 1,
    "compartidos": 0
   },
   {
    "cuenta": "blanconegro_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 30,
-   "crudos": 30,
+   "comentarios": 38,
+   "crudos": 40,
    "fuera": 0,
    "compartidos": 0
   },
   {
    "cuenta": "blancorojo_fb",
    "estado": "ok",
-   "posts": 4,
-   "comentarios": 37,
-   "crudos": 40,
+   "posts": 5,
+   "comentarios": 10,
+   "crudos": 11,
    "fuera": 0,
-   "compartidos": 2
+   "compartidos": 3
   },
   {
    "cuenta": "ndtijuana_fb",
    "estado": "ok",
    "posts": 7,
-   "comentarios": 28,
-   "crudos": 30,
+   "comentarios": 11,
+   "crudos": 12,
    "fuera": 1,
    "compartidos": 0
   },
@@ -1470,21 +1471,21 @@
    "cuenta": "psn_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 0,
-   "crudos": 3,
+   "comentarios": 5,
+   "crudos": 7,
    "fuera": 0,
    "compartidos": 0
   }
  ],
  "gasto": {
   "resultados": 250,
-  "gastado": 154,
+  "gastado": 114,
   "por_concepto": {
-   "aztecabc_fb": 21,
-   "blanconegro_fb": 38,
-   "blancorojo_fb": 46,
-   "ndtijuana_fb": 38,
-   "psn_fb": 11
+   "aztecabc_fb": 12,
+   "blanconegro_fb": 48,
+   "blancorojo_fb": 19,
+   "ndtijuana_fb": 20,
+   "psn_fb": 15
   }
  }
 }
