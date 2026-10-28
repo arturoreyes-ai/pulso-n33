@@ -69,6 +69,11 @@ const MENSAJE_GENERICO = "No se pudo completar la entrada. Intenta de nuevo.";
 export default async function PaginaEntrar({ searchParams }: Props) {
   const { volver, error, salida } = await searchParams;
   const destino = rutaDeRegreso(volver);
+  // Llegar aqui desde el conector de Claude (/mcp/autorizar) parecia un
+  // callejon: el 28 de octubre de 2026 la ventana que abrio Claude se quedo en
+  // «Inteligencia regional, con llave» y nadie pulso Entrar. La puerta dice
+  // para que es, y que despues de entrar se vuelve a Claude.
+  const paraClaude = destino === "/mcp/autorizar" || destino.startsWith("/mcp/autorizar?");
 
   if (acceso.sinEntra) redirect(destino);
   const sesion = await auth();
@@ -138,12 +143,14 @@ export default async function PaginaEntrar({ searchParams }: Props) {
 
       <section aria-labelledby="entrar-titulo" className="entrada w-full max-w-[34rem]">
         <h1 id="entrar-titulo" className="font-titular text-seccion text-tinta-titulo">
-          {salida === "1" ? "Sesión cerrada." : "Inteligencia regional, con llave."}
+          {salida === "1" ? "Sesión cerrada." : paraClaude ? "Conecta Claude a Pulso." : "Inteligencia regional, con llave."}
         </h1>
         <p className="mx-auto mt-4 max-w-[38ch] text-lectura text-tinta-prosa">
           {salida === "1"
             ? "Puedes cerrar esta ventana o volver a entrar."
-            : "Entra con tu cuenta de la organización."}
+            : paraClaude
+              ? "Entra con tu cuenta de la organización. Después pulsa «Permitir» y volverás a Claude."
+              : "Entra con tu cuenta de la organización."}
         </p>
 
         {aviso && (
