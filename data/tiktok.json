@@ -1,14 +1,14 @@
 {
  "esquema": 1,
- "generado": "2026-10-29T13:15:46+00:00",
+ "generado": "2026-10-29T23:18:11+00:00",
  "plataforma": "tiktok",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 37784,
- "posts_vigentes": 6283,
- "opinion": 32340,
- "repetidos": 4252,
- "reacciones": 2953,
+ "comentarios_vigentes": 38065,
+ "posts_vigentes": 6340,
+ "opinion": 32553,
+ "repetidos": 4310,
+ "reacciones": 2977,
  "por_zona": {
   "Ensenada": 1034,
   "Mexicali": 1198,
@@ -17,23 +17,23 @@
   "San Felipe": 11,
   "San Quintín": 22,
   "Tecate": 4,
-  "Tijuana": 4496,
+  "Tijuana": 4503,
   "estatal": 70,
-  "internacional": 11450,
-  "nacional": 16633
+  "internacional": 11594,
+  "nacional": 16763
  },
  "por_cuenta": {
-  "tk_aztecanoticias": 4139,
-  "tk_bbcmundo": 537,
-  "tk_cnnee": 1012,
+  "tk_aztecanoticias": 4189,
+  "tk_bbcmundo": 559,
+  "tk_cnnee": 1034,
   "tk_dwespanol": 1469,
   "tk_ensenada_noticias": 1363,
-  "tk_heraldo": 3181,
-  "tk_latinus": 4501,
+  "tk_heraldo": 3222,
+  "tk_latinus": 4562,
   "tk_mexicali_noticias": 1561,
   "tk_mexico_noticias": 4847,
   "tk_mundo_noticias": 2614,
-  "tk_nmas": 2783,
+  "tk_nmas": 2819,
   "tk_rosarito_noticias": 817,
   "tk_rubro_clima": 376,
   "tk_rubro_deportes": 87,
@@ -42,23 +42,23 @@
   "tk_rubro_turismo": 69,
   "tk_sandiego_news": 1466,
   "tk_sandiego_noticias": 1432,
-  "tk_telemundo": 2439,
+  "tk_telemundo": 2488,
   "tk_tijuana_noticias": 2947
  },
  "por_idioma": {
   "en": 1466,
-  "es": 36318
+  "es": 36599
  },
  "por_tema": [
   {
    "tema": "morena",
-   "comentarios": 436,
-   "posts": 333
+   "comentarios": 439,
+   "posts": 335
   },
   {
    "tema": "policia",
-   "comentarios": 319,
-   "posts": 198
+   "comentarios": 321,
+   "posts": 200
   },
   {
    "tema": "lula",
@@ -71,14 +71,9 @@
    "posts": 62
   },
   {
-   "tema": "gana",
-   "comentarios": 97,
-   "posts": 94
-  },
-  {
    "tema": "elecciones",
-   "comentarios": 59,
-   "posts": 55
+   "comentarios": 62,
+   "posts": 58
   },
   {
    "tema": "sheinbaum",
@@ -89,6 +84,11 @@
    "tema": "muertos",
    "comentarios": 36,
    "posts": 33
+  },
+  {
+   "tema": "ataque",
+   "comentarios": 33,
+   "posts": 30
   },
   {
    "tema": "inseguridad",
@@ -106,9 +106,9 @@
    "posts": 21
   },
   {
-   "tema": "fiscales",
+   "tema": "agente",
    "comentarios": 19,
-   "posts": 16
+   "posts": 18
   },
   {
    "tema": "punta",
@@ -116,14 +116,9 @@
    "posts": 11
   },
   {
-   "tema": "cuauhtemoc",
-   "comentarios": 13,
-   "posts": 13
-  },
-  {
    "tema": "taddei",
-   "comentarios": 11,
-   "posts": 11
+   "comentarios": 12,
+   "posts": 12
   },
   {
    "tema": "transportistas",
@@ -131,14 +126,19 @@
    "posts": 7
   },
   {
+   "tema": "halloween",
+   "comentarios": 6,
+   "posts": 6
+  },
+  {
    "tema": "contratos",
    "comentarios": 5,
    "posts": 5
   },
   {
-   "tema": "maru campos",
-   "comentarios": 5,
-   "posts": 5
+   "tema": "cuauhtemoc cardenas",
+   "comentarios": 4,
+   "posts": 4
   },
   {
    "tema": "niega",
@@ -156,20 +156,15 @@
    "posts": 1
   },
   {
-   "tema": "expertos",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
    "tema": "serie mundial",
    "comentarios": 1,
    "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 3378,
-  "negativo": 15094,
-  "neutral": 12503,
+  "positivo": 3405,
+  "negativo": 15191,
+  "neutral": 12592,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 1365,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -356,7 +351,7 @@
    "activa": false
   }
  ],
- "releidos": 37,
+ "releidos": 25,
  "destacados": [
   {
    "url": "https://www.tiktok.com/@elheraldodemexico/video/7701911189525138696",
@@ -381,34 +376,6 @@
     "positivo": 0,
     "negativo": 7,
     "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@bbcnewsmundo/video/7701729251208203572",
-   "cuenta": "tk_bbcmundo",
-   "zona": "internacional",
-   "fecha": "2026-10-28",
-   "titulo": "Al menos 60 personas han muerto y decenas resultaron heridas tras la colisión entre dos trenes de alta velocidad en Castilla-La Mancha, España. Según una de la…",
-   "tipo": "video",
-   "rubros": [],
-   "likes": 224200,
-   "comentarios": 2732,
-   "reproducciones": 3600000,
-   "creador": "@bbcnewsmundo",
-   "alcance": "extranjero",
-   "publicado": "2026-10-28T14:43:11+00:00",
-   "compartidos": 12100,
-   "guardados": 11549,
-   "duracion": 53,
-   "cosechados": 7,
-   "opinion": 7,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 6,
-    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -443,6 +410,34 @@
    "temas": []
   },
   {
+   "url": "https://www.tiktok.com/@bbcnewsmundo/video/7702133811920030983",
+   "cuenta": "tk_bbcmundo",
+   "zona": "internacional",
+   "fecha": "2026-10-29",
+   "titulo": "El personal médico de un centro de tratamiento de ébola en Mongbwalu, en la República Democrática del Congo, celebró con un baile el alta de sus últimos pacien…",
+   "tipo": "video",
+   "rubros": [],
+   "likes": 51800,
+   "comentarios": 111,
+   "reproducciones": 314900,
+   "creador": "@bbcnewsmundo",
+   "alcance": "nacional",
+   "publicado": "2026-10-29T17:15:00+00:00",
+   "compartidos": 641,
+   "guardados": 1139,
+   "duracion": 37,
+   "cosechados": 7,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 4,
+    "negativo": 1,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.tiktok.com/@noticiastelemundo/video/7701909419453467918",
    "cuenta": "tk_telemundo",
    "zona": "internacional",
@@ -459,6 +454,61 @@
    "compartidos": 2854,
    "guardados": 2632,
    "duracion": 99,
+   "cosechados": 7,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 4,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@noticiastelemundo/video/7702162079565876511",
+   "cuenta": "tk_telemundo",
+   "zona": "internacional",
+   "fecha": "2026-10-29",
+   "titulo": "La líder opositora y premio nobel de la paz 2025, María Corina Machado, dijo este jueves que su regreso a Venezuela fue \"estrictamente autónomo\" y organizado p…",
+   "tipo": "video",
+   "rubros": [],
+   "likes": 27300,
+   "comentarios": 694,
+   "reproducciones": 147400,
+   "creador": "@noticiastelemundo",
+   "alcance": "extranjero",
+   "publicado": "2026-10-29T18:42:46+00:00",
+   "compartidos": 1018,
+   "guardados": 1009,
+   "duracion": 59,
+   "cosechados": 7,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 1,
+    "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@aztecanoticias/video/7702184343598288134",
+   "cuenta": "tk_aztecanoticias",
+   "zona": "internacional",
+   "fecha": "2026-10-29",
+   "titulo": "#ÚLTIMAHORA 🔴 Muere a los 86 años Sir Patrick Stewart, leyenda del cine y la televisión 💔",
+   "tipo": "carrusel",
+   "rubros": [],
+   "likes": 26200,
+   "comentarios": 396,
+   "reproducciones": 169100,
+   "creador": "@aztecanoticias",
+   "alcance": "extranjero",
+   "publicado": "2026-10-29T20:10:46+00:00",
+   "compartidos": 5216,
+   "guardados": 2319,
    "cosechados": 7,
    "opinion": 7,
    "sentimiento": {
@@ -499,67 +549,64 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@bbcnewsmundo/video/7701765285338025222",
-   "cuenta": "tk_bbcmundo",
+   "url": "https://www.tiktok.com/@noticiastelemundo/video/7702112120518888734",
+   "cuenta": "tk_telemundo",
    "zona": "internacional",
-   "fecha": "2026-10-28",
-   "titulo": "La misteriosa salida de Bolsonaro. El senador brasileño y excandidato a la presidencia Flávio Bolsonaro aterrizó este miércoles en un aeropuerto del área de Mi…",
+   "fecha": "2026-10-29",
+   "titulo": "Este video muestra el brutal choque que causó un hombre que escapaba de la policía.",
    "tipo": "video",
    "rubros": [
-    "politica"
+    "seguridad"
    ],
-   "likes": 21000,
-   "comentarios": 868,
-   "reproducciones": 319600,
-   "creador": "@bbcnewsmundo",
-   "alcance": "extranjero",
-   "publicado": "2026-10-28T17:55:00+00:00",
-   "compartidos": 1359,
-   "guardados": 1278,
-   "duracion": 157,
+   "likes": 22400,
+   "comentarios": 156,
+   "reproducciones": 788500,
+   "creador": "@noticiastelemundo",
+   "alcance": "nacional",
+   "publicado": "2026-10-29T15:28:55+00:00",
+   "compartidos": 1572,
+   "guardados": 1421,
+   "duracion": 29,
    "cosechados": 7,
    "opinion": 7,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 2,
-    "neutral": 5,
+    "negativo": 1,
+    "neutral": 6,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@noticiastelemundo/video/7701726361324408095",
-   "cuenta": "tk_telemundo",
-   "zona": "internacional",
-   "fecha": "2026-10-28",
-   "titulo": "📍 Estados Unidos | Flávio Bolsonaro aterriza en Miami con su familia tras salir de Brasil luego de su derrota electoral ante Lula da Silva y de amenazar con in…",
+   "url": "https://www.tiktok.com/@aztecanoticias/video/7702196240523545863",
+   "cuenta": "tk_aztecanoticias",
+   "zona": "nacional",
+   "fecha": "2026-10-29",
+   "titulo": "Muere en prisión Andrés Filomeno, el “Caníbal de Atizapán”; cumplía múltiples condenas por feminicidio",
    "tipo": "video",
-   "rubros": [],
-   "likes": 16900,
-   "comentarios": 1756,
-   "reproducciones": 407200,
-   "creador": "@noticiastelemundo",
-   "alcance": "extranjero",
-   "publicado": "2026-10-28T14:31:58+00:00",
-   "compartidos": 1287,
-   "guardados": 1171,
-   "duracion": 40,
+   "rubros": [
+    "seguridad"
+   ],
+   "likes": 21100,
+   "comentarios": 128,
+   "reproducciones": 238300,
+   "creador": "@aztecanoticias",
+   "alcance": "fuera",
+   "publicado": "2026-10-29T20:55:17+00:00",
+   "compartidos": 1646,
+   "guardados": 1424,
+   "duracion": 67,
    "cosechados": 7,
    "opinion": 7,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 5,
-    "neutral": 2,
+    "negativo": 3,
+    "neutral": 4,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
-   "temas": [
-    {
-     "tema": "brasil",
-     "comentarios": 4
-    }
-   ]
+   "temas": []
   },
   {
    "url": "https://www.tiktok.com/@n.mas/video/7701910068647726344",
@@ -676,6 +723,34 @@
    "temas": []
   },
   {
+   "url": "https://www.tiktok.com/@latinus_us/video/7702214666080226580",
+   "cuenta": "tk_latinus",
+   "zona": "nacional",
+   "fecha": "2026-10-29",
+   "titulo": "#ObjetivoCiudadano. Una ardilla fue captada comiendo un tamal junto a un puesto afuera de una clínica del IMSS en Aguascalientes.",
+   "tipo": "video",
+   "rubros": [],
+   "likes": 11800,
+   "comentarios": 125,
+   "reproducciones": 130800,
+   "creador": "@latinus_us",
+   "alcance": "fuera",
+   "publicado": "2026-10-29T22:06:47+00:00",
+   "compartidos": 153,
+   "guardados": 567,
+   "duracion": 28,
+   "cosechados": 6,
+   "opinion": 4,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.tiktok.com/@elheraldodemexico/video/7701941054999710983",
    "cuenta": "tk_heraldo",
    "zona": "nacional",
@@ -698,6 +773,34 @@
     "positivo": 2,
     "negativo": 3,
     "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@noticiastelemundo/video/7702045550840941838",
+   "cuenta": "tk_telemundo",
+   "zona": "internacional",
+   "fecha": "2026-10-29",
+   "titulo": "☀️🗞️ ¡Buenos días, TikTok! Estas son las #noticias más importantes que debes saber este jueves 29 de octubre de 2026:",
+   "tipo": "video",
+   "rubros": [],
+   "likes": 10600,
+   "comentarios": 65,
+   "reproducciones": 244900,
+   "creador": "@noticiastelemundo",
+   "alcance": "extranjero",
+   "publicado": "2026-10-29T11:10:25+00:00",
+   "compartidos": 260,
+   "guardados": 492,
+   "duracion": 175,
+   "cosechados": 7,
+   "opinion": 6,
+   "sentimiento": {
+    "positivo": 5,
+    "negativo": 1,
+    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -762,6 +865,64 @@
    "temas": []
   },
   {
+   "url": "https://www.tiktok.com/@aztecanoticias/video/7702175641227283730",
+   "cuenta": "tk_aztecanoticias",
+   "zona": "nacional",
+   "fecha": "2026-10-29",
+   "titulo": "🚨 Cámaras identifican a presunto responsable de envenenar a seis perros en Parque España",
+   "tipo": "video",
+   "rubros": [],
+   "likes": 9829,
+   "comentarios": 646,
+   "reproducciones": 107000,
+   "creador": "@aztecanoticias",
+   "alcance": "fuera",
+   "publicado": "2026-10-29T19:35:21+00:00",
+   "compartidos": 810,
+   "guardados": 460,
+   "duracion": 131,
+   "cosechados": 7,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 4,
+    "neutral": 2,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@noticiastelemundo/video/7702145543958514974",
+   "cuenta": "tk_telemundo",
+   "zona": "internacional",
+   "fecha": "2026-10-29",
+   "titulo": "Una pelea entre legisladores sacudió el Parlamento de Armenia este miércoles. El enfrentamiento dejó a un diputado con la nariz ensangrentada y obligó a solici…",
+   "tipo": "video",
+   "rubros": [
+    "politica"
+   ],
+   "likes": 8852,
+   "comentarios": 555,
+   "reproducciones": 338400,
+   "creador": "@noticiastelemundo",
+   "alcance": "nacional",
+   "publicado": "2026-10-29T17:38:37+00:00",
+   "compartidos": 1500,
+   "guardados": 902,
+   "duracion": 38,
+   "cosechados": 7,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 6,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.tiktok.com/@latinus_us/video/7701943823278066950",
    "cuenta": "tk_latinus",
    "zona": "internacional",
@@ -790,28 +951,28 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@bbcnewsmundo/video/7701824260012018951",
-   "cuenta": "tk_bbcmundo",
+   "url": "https://www.tiktok.com/@n.mas/video/7702135837596699922",
+   "cuenta": "tk_nmas",
    "zona": "internacional",
-   "fecha": "2026-10-28",
-   "titulo": "Flávio Bolsonaro ya está en Miami.",
+   "fecha": "2026-10-29",
+   "titulo": "Una modelo de vestidos de novia fue arrastrada por los globos decorativos que llevaba en la mano para una sesión de fotos en Estambul, Turquía.",
    "tipo": "video",
    "rubros": [],
-   "likes": 7895,
-   "comentarios": 762,
-   "reproducciones": 138400,
-   "creador": "@bbcnewsmundo",
+   "likes": 7470,
+   "comentarios": 61,
+   "reproducciones": 164400,
+   "creador": "@n.mas",
    "alcance": "extranjero",
-   "publicado": "2026-10-28T20:51:59+00:00",
-   "compartidos": 377,
-   "guardados": 522,
-   "duracion": 62,
+   "publicado": "2026-10-29T17:00:52+00:00",
+   "compartidos": 278,
+   "guardados": 272,
+   "duracion": 24,
    "cosechados": 7,
    "opinion": 7,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 5,
-    "neutral": 2,
+    "negativo": 3,
+    "neutral": 4,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -848,56 +1009,30 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@noticiastelemundo/video/7701857248250711326",
-   "cuenta": "tk_telemundo",
+   "url": "https://www.tiktok.com/@cnnee/video/7702197095008128263",
+   "cuenta": "tk_cnnee",
    "zona": "internacional",
-   "fecha": "2026-10-28",
-   "titulo": "Sobrevivientes y testigos relatan los momentos de angustia que vivieron tras el choque de dos trenes de alta velocidad en Urda, Toledo, España, que dejó al men…",
+   "fecha": "2026-10-29",
+   "titulo": "La presidenta encargada de #Venezuela, Delcy #Rodríguez, se anticipó este jueves a la conferencia de prensa de la líder opositora María Corina #Machado con un…",
    "tipo": "video",
-   "rubros": [],
-   "likes": 6530,
-   "comentarios": 51,
-   "reproducciones": 240600,
-   "creador": "@noticiastelemundo",
+   "rubros": [
+    "politica"
+   ],
+   "likes": 6056,
+   "comentarios": 3607,
+   "reproducciones": 166700,
+   "creador": "@cnnee",
    "alcance": "extranjero",
-   "publicado": "2026-10-28T22:59:53+00:00",
-   "compartidos": 153,
-   "guardados": 390,
-   "duracion": 67,
-   "cosechados": 5,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@noticiastelemundo/video/7701744747311811870",
-   "cuenta": "tk_telemundo",
-   "zona": "internacional",
-   "fecha": "2026-10-28",
-   "titulo": "🚨 #ÚLTIMAHORA | Muere Dolores Huerta, líder histórica del movimiento por los derechos civiles de los latinos en EE.UU.",
-   "tipo": "video",
-   "rubros": [],
-   "likes": 6366,
-   "comentarios": 120,
-   "reproducciones": 191400,
-   "creador": "@noticiastelemundo",
-   "alcance": "nacional",
-   "publicado": "2026-10-28T15:43:17+00:00",
-   "compartidos": 314,
-   "guardados": 309,
-   "duracion": 110,
+   "publicado": "2026-10-29T20:58:15+00:00",
+   "compartidos": 1860,
+   "guardados": 498,
+   "duracion": 89,
    "cosechados": 7,
    "opinion": 7,
    "sentimiento": {
-    "positivo": 2,
+    "positivo": 0,
     "negativo": 3,
-    "neutral": 2,
+    "neutral": 4,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -964,28 +1099,28 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@noticiastelemundo/video/7702045550840941838",
-   "cuenta": "tk_telemundo",
-   "zona": "internacional",
+   "url": "https://www.tiktok.com/@latinus_us/video/7702214665660534036",
+   "cuenta": "tk_latinus",
+   "zona": "nacional",
    "fecha": "2026-10-29",
-   "titulo": "☀️🗞️ ¡Buenos días, TikTok! Estas son las #noticias más importantes que debes saber este jueves 29 de octubre de 2026:",
+   "titulo": "#ObjetivoCiudadano. Suspenden la licencia y concesión de un taxista captado agrediendo a un conductor de aplicación en Tulum.",
    "tipo": "video",
    "rubros": [],
-   "likes": 4324,
-   "comentarios": 24,
-   "reproducciones": 98000,
-   "creador": "@noticiastelemundo",
-   "alcance": "extranjero",
-   "publicado": "2026-10-29T11:10:25+00:00",
-   "compartidos": 112,
-   "guardados": 192,
-   "duracion": 175,
+   "likes": 4754,
+   "comentarios": 60,
+   "reproducciones": 47900,
+   "creador": "@latinus_us",
+   "alcance": "fuera",
+   "publicado": "2026-10-29T22:06:47+00:00",
+   "compartidos": 18,
+   "guardados": 161,
+   "duracion": 69,
    "cosechados": 7,
    "opinion": 6,
    "sentimiento": {
-    "positivo": 5,
-    "negativo": 1,
-    "neutral": 0,
+    "positivo": 1,
+    "negativo": 4,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -1022,6 +1157,36 @@
    "temas": []
   },
   {
+   "url": "https://www.tiktok.com/@latinus_us/video/7702224856120823047",
+   "cuenta": "tk_latinus",
+   "zona": "nacional",
+   "fecha": "2026-10-29",
+   "titulo": "#ObjetivoCiudadano. Muere a los 86 años Patrick Stewart, actor reconocido por sus papeles en Star Trek y X-Men.",
+   "tipo": "video",
+   "rubros": [
+    "espectaculos"
+   ],
+   "likes": 4018,
+   "comentarios": 59,
+   "reproducciones": 52800,
+   "creador": "@latinus_us",
+   "alcance": "nacional",
+   "publicado": "2026-10-29T22:46:18+00:00",
+   "compartidos": 135,
+   "guardados": 149,
+   "duracion": 29,
+   "cosechados": 7,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 2,
+    "negativo": 4,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.tiktok.com/@latinus_us/video/7701943801832590593",
    "cuenta": "tk_latinus",
    "zona": "nacional",
@@ -1052,56 +1217,30 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@aztecanoticias/video/7701812213094288648",
-   "cuenta": "tk_aztecanoticias",
-   "zona": "nacional",
-   "fecha": "2026-10-28",
-   "titulo": "“La delincuencia está por encima de la autoridad en Mazatlán” ‼️",
+   "url": "https://www.tiktok.com/@noticiastelemundo/video/7702049583249001741",
+   "cuenta": "tk_telemundo",
+   "zona": "internacional",
+   "fecha": "2026-10-29",
+   "titulo": "Revelan las comunicaciones entre los maquinistas de los trenes que colisionaron en España y dejaron al menos 69 muertos, decenas de heridos y desaparecidos.",
    "tipo": "video",
-   "rubros": [],
-   "likes": 3607,
-   "comentarios": 81,
-   "reproducciones": 65200,
-   "creador": "@aztecanoticias",
-   "alcance": "fuera",
-   "publicado": "2026-10-28T20:05:03+00:00",
-   "compartidos": 327,
-   "guardados": 189,
-   "duracion": 103,
+   "rubros": [
+    "seguridad"
+   ],
+   "likes": 3579,
+   "comentarios": 53,
+   "reproducciones": 110600,
+   "creador": "@noticiastelemundo",
+   "alcance": "extranjero",
+   "publicado": "2026-10-29T11:26:11+00:00",
+   "compartidos": 164,
+   "guardados": 213,
+   "duracion": 55,
    "cosechados": 7,
-   "opinion": 7,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 7,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@aztecanoticias/video/7701828195665972532",
-   "cuenta": "tk_aztecanoticias",
-   "zona": "nacional",
-   "fecha": "2026-10-28",
-   "titulo": "¿Tú también crees que Rocky tenía mucho que contar? 🐶🐾⁣",
-   "tipo": "video",
-   "rubros": [],
-   "likes": 3565,
-   "comentarios": 25,
-   "reproducciones": 29600,
-   "creador": "@aztecanoticias",
-   "alcance": "fuera",
-   "publicado": "2026-10-28T21:07:09+00:00",
-   "compartidos": 78,
-   "guardados": 136,
-   "duracion": 26,
-   "cosechados": 5,
-   "opinion": 4,
+   "opinion": 6,
    "sentimiento": {
     "positivo": 1,
-    "negativo": 1,
-    "neutral": 2,
+    "negativo": 4,
+    "neutral": 1,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -1136,34 +1275,6 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@latinus_us/video/7701839714537524501",
-   "cuenta": "tk_latinus",
-   "zona": "nacional",
-   "fecha": "2026-10-28",
-   "titulo": "#ObjetivoCiudadano. Una persona destrozó altares y derribó cráneos monumentales de Día de Muertos en Morelia.",
-   "tipo": "video",
-   "rubros": [],
-   "likes": 3410,
-   "comentarios": 40,
-   "reproducciones": 46200,
-   "creador": "@latinus_us",
-   "alcance": "fuera",
-   "publicado": "2026-10-28T21:51:44+00:00",
-   "compartidos": 140,
-   "guardados": 120,
-   "duracion": 59,
-   "cosechados": 7,
-   "opinion": 5,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 1,
-    "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.tiktok.com/@aztecanoticias/video/7701929767599197447",
    "cuenta": "tk_aztecanoticias",
    "zona": "nacional",
@@ -1192,173 +1303,58 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@aztecanoticias/video/7701801173438827783",
-   "cuenta": "tk_aztecanoticias",
-   "zona": "nacional",
-   "fecha": "2026-10-28",
-   "titulo": "Una señal de auxilio hizo la diferencia 👋",
-   "tipo": "video",
-   "rubros": [],
-   "likes": 2798,
-   "comentarios": 27,
-   "reproducciones": 80900,
-   "creador": "@aztecanoticias",
-   "alcance": "fuera",
-   "publicado": "2026-10-28T19:22:18+00:00",
-   "compartidos": 59,
-   "guardados": 102,
-   "duracion": 30,
-   "cosechados": 7,
-   "opinion": 7,
-   "sentimiento": {
-    "positivo": 5,
-    "negativo": 1,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@latinus_us/video/7701940258321059093",
+   "url": "https://www.tiktok.com/@latinus_us/video/7702214659444722965",
    "cuenta": "tk_latinus",
    "zona": "nacional",
    "fecha": "2026-10-29",
-   "titulo": "#Loret. Sheinbaum respondió a Marine Le Pen y defendió que los valores de México deberían extenderse al mundo.",
-   "tipo": "video",
-   "rubros": [],
-   "likes": 2390,
-   "comentarios": 183,
-   "reproducciones": 31300,
-   "creador": "@latinus_us",
-   "alcance": "nacional",
-   "publicado": "2026-10-29T04:21:57+00:00",
-   "compartidos": 13,
-   "guardados": 106,
-   "duracion": 30,
-   "cosechados": 6,
-   "opinion": 5,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 1,
-    "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@latinus_us/video/7701855978798599432",
-   "cuenta": "tk_latinus",
-   "zona": "nacional",
-   "fecha": "2026-10-28",
-   "titulo": "#ObjetivoCiudadano. Un gato se volvió viral tras darse un banquete con la comida de una ofrenda dedicada a otra mascota.",
+   "titulo": "#ObjetivoCiudadano. Detienen a una mujer acusada de drogar con chocolate a un adulto mayor para robarle en el Centro Histórico, CDMX.",
    "tipo": "video",
    "rubros": [
-    "espectaculos"
+    "politica",
+    "seguridad"
    ],
-   "likes": 1566,
-   "comentarios": 62,
-   "reproducciones": 18800,
+   "likes": 2563,
+   "comentarios": 34,
+   "reproducciones": 38200,
    "creador": "@latinus_us",
-   "alcance": "nacional",
-   "publicado": "2026-10-28T22:54:56+00:00",
-   "compartidos": 29,
-   "guardados": 56,
-   "duracion": 30,
-   "cosechados": 7,
-   "opinion": 5,
+   "alcance": "fuera",
+   "publicado": "2026-10-29T22:06:47+00:00",
+   "compartidos": 74,
+   "guardados": 105,
+   "duracion": 49,
+   "cosechados": 6,
+   "opinion": 2,
    "sentimiento": {
     "positivo": 2,
     "negativo": 0,
-    "neutral": 3,
+    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@noticiastelemundo/video/7702049583249001741",
-   "cuenta": "tk_telemundo",
-   "zona": "internacional",
+   "url": "https://www.tiktok.com/@elheraldodemexico/video/7702199669442596097",
+   "cuenta": "tk_heraldo",
+   "zona": "Tijuana",
    "fecha": "2026-10-29",
-   "titulo": "Revelan las comunicaciones entre los maquinistas de los trenes que colisionaron en España y dejaron al menos 69 muertos, decenas de heridos y desaparecidos.",
+   "titulo": "Un menor fue captado circulando a gran velocidad en un patín eléctrico sobre la calle Segunda, en la Zona Centro de Tijuana. Además, se señaló a un agente de T…",
    "tipo": "video",
-   "rubros": [
-    "seguridad"
-   ],
-   "likes": 1313,
-   "comentarios": 21,
-   "reproducciones": 51000,
-   "creador": "@noticiastelemundo",
-   "alcance": "extranjero",
-   "publicado": "2026-10-29T11:26:11+00:00",
-   "compartidos": 53,
-   "guardados": 64,
-   "duracion": 55,
+   "rubros": [],
+   "likes": 1472,
+   "comentarios": 37,
+   "reproducciones": 30300,
+   "creador": "@elheraldodemexico",
+   "alcance": "zona",
+   "publicado": "2026-10-29T21:30:00+00:00",
+   "compartidos": 5,
+   "guardados": 54,
+   "duracion": 42,
    "cosechados": 7,
    "opinion": 6,
    "sentimiento": {
-    "positivo": 1,
+    "positivo": 0,
     "negativo": 4,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@bbcnewsmundo/video/7701820330452569365",
-   "cuenta": "tk_bbcmundo",
-   "zona": "Tijuana",
-   "fecha": "2026-10-28",
-   "titulo": "Un tornado registrado en cámara 🎥🇨🇱",
-   "tipo": "video",
-   "rubros": [],
-   "likes": 1019,
-   "comentarios": 30,
-   "reproducciones": 24100,
-   "creador": "@bbcnewsmundo",
-   "alcance": "zona",
-   "publicado": "2026-10-28T20:36:33+00:00",
-   "compartidos": 78,
-   "guardados": 49,
-   "duracion": 20,
-   "cosechados": 7,
-   "opinion": 2,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@noticiastelemundo/video/7701729682659544350",
-   "cuenta": "tk_telemundo",
-   "zona": "internacional",
-   "fecha": "2026-10-28",
-   "titulo": "Un incendio en un restaurante de la Terminal C Norte del aeropuerto George Bush, en Houston, movilizó a los bomberos y causó alarma entre pasajeros. No se repo…",
-   "tipo": "video",
-   "rubros": [
-    "turismo"
-   ],
-   "likes": 953,
-   "comentarios": 15,
-   "reproducciones": 27200,
-   "creador": "@noticiastelemundo",
-   "alcance": "extranjero",
-   "publicado": "2026-10-28T15:10:00+00:00",
-   "compartidos": 105,
-   "guardados": 44,
-   "duracion": 46,
-   "cosechados": 7,
-   "opinion": 4,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 2,
     "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -1366,30 +1362,30 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@bbcnewsmundo/video/7701739941339942150",
-   "cuenta": "tk_bbcmundo",
-   "zona": "internacional",
-   "fecha": "2026-10-28",
-   "titulo": "El senador brasileño y excandidato a la presidencia Flávio Bolsonaro aterrizó este miércoles en un aeropuerto del área de Miami. El político de 45 años llegó e…",
+   "url": "https://www.tiktok.com/@n.mas/video/7702169219504278792",
+   "cuenta": "tk_nmas",
+   "zona": "nacional",
+   "fecha": "2026-10-29",
+   "titulo": "Una mujer drogó con un chocolate a un adulto mayor y le quitó sus pertenencias en calles del Centro Histórico de la CDMX.",
    "tipo": "video",
    "rubros": [
     "politica"
    ],
-   "likes": 816,
-   "comentarios": 236,
-   "reproducciones": 23000,
-   "creador": "@bbcnewsmundo",
-   "alcance": "extranjero",
-   "publicado": "2026-10-28T15:24:45+00:00",
-   "compartidos": 40,
-   "guardados": 61,
-   "duracion": 54,
-   "cosechados": 7,
-   "opinion": 7,
+   "likes": 1273,
+   "comentarios": 28,
+   "reproducciones": 36800,
+   "creador": "@n.mas",
+   "alcance": "fuera",
+   "publicado": "2026-10-29T19:10:23+00:00",
+   "compartidos": 235,
+   "guardados": 85,
+   "duracion": 37,
+   "cosechados": 6,
+   "opinion": 6,
    "sentimiento": {
-    "positivo": 0,
-    "negativo": 6,
-    "neutral": 1,
+    "positivo": 1,
+    "negativo": 3,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -1426,36 +1422,6 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@dw_espanol/video/7701763603476647190",
-   "cuenta": "tk_dwespanol",
-   "zona": "internacional",
-   "fecha": "2026-10-28",
-   "titulo": "Desde Birkenstock hasta Viessmann, cada vez son más las empresas alemanas que acaban en manos estadounidenses. A medida que los propietarios de estas empresas…",
-   "tipo": "video",
-   "rubros": [
-    "economia"
-   ],
-   "likes": 525,
-   "comentarios": 13,
-   "reproducciones": 9125,
-   "creador": "@dw_espanol",
-   "alcance": "extranjero",
-   "publicado": "2026-10-28T22:15:00+00:00",
-   "compartidos": 9,
-   "guardados": 50,
-   "duracion": 117,
-   "cosechados": 7,
-   "opinion": 7,
-   "sentimiento": {
-    "positivo": 2,
-    "negativo": 3,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.tiktok.com/@aztecanoticias/video/7701962283798285586",
    "cuenta": "tk_aztecanoticias",
    "zona": "nacional",
@@ -1486,60 +1452,30 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@latinus_us/video/7701839688365034772",
-   "cuenta": "tk_latinus",
-   "zona": "nacional",
-   "fecha": "2026-10-28",
-   "titulo": "#ObjetivoCiudadano. Sheinbaum y Lemus anuncian inversión millonaria para atender la crisis de agua en Guadalajara.",
+   "url": "https://www.tiktok.com/@cnnee/video/7702088166819269895",
+   "cuenta": "tk_cnnee",
+   "zona": "internacional",
+   "fecha": "2026-10-29",
+   "titulo": "El expresidente Barack #Obama señaló que a su sucesor le ofendió más la comparación del diseño interior de la Casa Blanca con el de un restaurante que su alusi…",
    "tipo": "video",
    "rubros": [
-    "economia"
+    "turismo"
    ],
-   "likes": 417,
-   "comentarios": 29,
-   "reproducciones": 7007,
-   "creador": "@latinus_us",
-   "alcance": "fuera",
-   "publicado": "2026-10-28T21:51:44+00:00",
-   "compartidos": 2,
-   "guardados": 21,
-   "duracion": 166,
-   "cosechados": 7,
-   "opinion": 5,
+   "likes": 365,
+   "comentarios": 9,
+   "reproducciones": 6832,
+   "creador": "@cnnee",
+   "alcance": "nacional",
+   "publicado": "2026-10-29T13:55:51+00:00",
+   "compartidos": 12,
+   "guardados": 13,
+   "duracion": 124,
+   "cosechados": 6,
+   "opinion": 6,
    "sentimiento": {
-    "positivo": 1,
-    "negativo": 2,
+    "positivo": 0,
+    "negativo": 4,
     "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@latinus_us/video/7701855983747763463",
-   "cuenta": "tk_latinus",
-   "zona": "nacional",
-   "fecha": "2026-10-28",
-   "titulo": "#ObjetivoCiudadano. Una adulta mayor se sumó al tradicional ritual de los cantaritos en Jalisco y bebió de cabeza.",
-   "tipo": "video",
-   "rubros": [
-    "politica"
-   ],
-   "likes": 392,
-   "comentarios": 24,
-   "reproducciones": 5312,
-   "creador": "@latinus_us",
-   "alcance": "fuera",
-   "publicado": "2026-10-28T22:54:56+00:00",
-   "compartidos": 6,
-   "guardados": 10,
-   "duracion": 26,
-   "cosechados": 7,
-   "opinion": 7,
-   "sentimiento": {
-    "positivo": 2,
-    "negativo": 1,
-    "neutral": 4,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -1565,36 +1501,6 @@
    "guardados": 13,
    "duracion": 56,
    "cosechados": 3,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@elheraldodemexico/video/7701839812558425362",
-   "cuenta": "tk_heraldo",
-   "zona": "nacional",
-   "fecha": "2026-10-28",
-   "titulo": "#Contexto Las intensas lluvias registradas anoche en Cabo San Lucas, Baja California Sur, provocaron que vialidades principales quedaran anegadas e inundadas,…",
-   "tipo": "video",
-   "rubros": [
-    "clima"
-   ],
-   "likes": 317,
-   "comentarios": 6,
-   "reproducciones": 16200,
-   "creador": "@elheraldodemexico",
-   "alcance": "fuera",
-   "publicado": "2026-10-28T21:52:31+00:00",
-   "compartidos": 5,
-   "guardados": 15,
-   "duracion": 34,
-   "cosechados": 2,
    "opinion": 0,
    "sentimiento": {
     "positivo": 0,
@@ -1636,97 +1542,6 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@noticiastelemundo/video/7701730001321757982",
-   "cuenta": "tk_telemundo",
-   "zona": "internacional",
-   "fecha": "2026-10-28",
-   "titulo": "Michigan: un estado clave en la batalla por el Senado 🗳️",
-   "tipo": "video",
-   "rubros": [
-    "politica"
-   ],
-   "likes": 315,
-   "comentarios": 3,
-   "reproducciones": 7559,
-   "creador": "@noticiastelemundo",
-   "alcance": "extranjero",
-   "publicado": "2026-10-28T14:46:05+00:00",
-   "compartidos": 13,
-   "guardados": 13,
-   "duracion": 99,
-   "cosechados": 3,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@aztecanoticias/video/7701812646890245394",
-   "cuenta": "tk_aztecanoticias",
-   "zona": "Tijuana",
-   "fecha": "2026-10-28",
-   "titulo": "¡Policía rescata a perrito que cayó a aguas negras! 🐶🚔",
-   "tipo": "video",
-   "rubros": [
-    "seguridad"
-   ],
-   "likes": 291,
-   "comentarios": 5,
-   "reproducciones": 7662,
-   "creador": "@aztecanoticias",
-   "alcance": "zona",
-   "publicado": "2026-10-28T20:25:00+00:00",
-   "compartidos": 1,
-   "guardados": 14,
-   "duracion": 49,
-   "cosechados": 2,
-   "opinion": 2,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 1,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@aztecanoticias/video/7701826295658777864",
-   "cuenta": "tk_aztecanoticias",
-   "zona": "nacional",
-   "fecha": "2026-10-28",
-   "titulo": "🗣 “No sé, pregúntenle a la Fiscalía”. Esa fue la respuesta del alcalde de Escuinapa ante los más de 15 feminicidios registrados este año en su municipio 🙄",
-   "tipo": "video",
-   "rubros": [
-    "politica",
-    "seguridad"
-   ],
-   "likes": 283,
-   "comentarios": 3,
-   "reproducciones": 9012,
-   "creador": "@aztecanoticias",
-   "alcance": "nacional",
-   "publicado": "2026-10-28T20:59:45+00:00",
-   "compartidos": 9,
-   "guardados": 9,
-   "duracion": 81,
-   "cosechados": 3,
-   "opinion": 2,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 2,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.tiktok.com/@noticiastelemundo/video/7701932233489255710",
    "cuenta": "tk_telemundo",
    "zona": "internacional",
@@ -1751,6 +1566,36 @@
     "positivo": 0,
     "negativo": 0,
     "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@cnnee/video/7702206545932717318",
+   "cuenta": "tk_cnnee",
+   "zona": "internacional",
+   "fecha": "2026-10-29",
+   "titulo": "La líder opositora venezolana #MaríaCorina #Machado habló este jueves e insistió en que se realicen #elecciones presidenciales en 2027, con apego al plan que E…",
+   "tipo": "video",
+   "rubros": [
+    "politica"
+   ],
+   "likes": 259,
+   "comentarios": 20,
+   "reproducciones": 2791,
+   "creador": "@cnnee",
+   "alcance": "nacional",
+   "publicado": "2026-10-29T21:37:31+00:00",
+   "compartidos": 3,
+   "guardados": 10,
+   "duracion": 41,
+   "cosechados": 6,
+   "opinion": 6,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 3,
+    "neutral": 3,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -1848,36 +1693,6 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@n.mas/video/7701815854157024520",
-   "cuenta": "tk_nmas",
-   "zona": "nacional",
-   "fecha": "2026-10-28",
-   "titulo": "El conductor de una grúa robada chocó con un poste mientras era perseguido por la policía en la capital de Chihuahua.",
-   "tipo": "video",
-   "rubros": [
-    "seguridad"
-   ],
-   "likes": 188,
-   "comentarios": 3,
-   "reproducciones": 10400,
-   "creador": "@n.mas",
-   "alcance": "fuera",
-   "publicado": "2026-10-28T20:19:21+00:00",
-   "compartidos": 1,
-   "guardados": 12,
-   "duracion": 18,
-   "cosechados": 2,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.tiktok.com/@aztecanoticias/video/7701957555328683272",
    "cuenta": "tk_aztecanoticias",
    "zona": "nacional",
@@ -1902,6 +1717,36 @@
     "positivo": 0,
     "negativo": 2,
     "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@elheraldodemexico/video/7702204622945013010",
+   "cuenta": "tk_heraldo",
+   "zona": "nacional",
+   "fecha": "2026-10-29",
+   "titulo": "#Ruta2027 | ¿Habrá homenaje nacional para Cuauhtémoc Cárdenas? La presidenta Claudia Sheinbaum anunció que buscará coordinar un homenaje nacional junto con la…",
+   "tipo": "video",
+   "rubros": [
+    "politica"
+   ],
+   "likes": 175,
+   "comentarios": 8,
+   "reproducciones": 5798,
+   "creador": "@elheraldodemexico",
+   "alcance": "nacional",
+   "publicado": "2026-10-29T22:10:00+00:00",
+   "compartidos": 0,
+   "guardados": 8,
+   "duracion": 64,
+   "cosechados": 3,
+   "opinion": 2,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -1998,59 +1843,29 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@cnnee/video/7701771219296652545",
-   "cuenta": "tk_cnnee",
-   "zona": "internacional",
-   "fecha": "2026-10-28",
-   "titulo": "Las elecciones en #Israel no dejaron un ganador claro el martes por la noche, según las encuestas a pie de urna. Ni el bloque del primer ministro Benjamin #Net…",
+   "url": "https://www.tiktok.com/@n.mas/video/7702147056353234184",
+   "cuenta": "tk_nmas",
+   "zona": "nacional",
+   "fecha": "2026-10-29",
+   "titulo": "¿Qué características debe tener quien encabece el INE? En este episodio de #Hablemos, Denise Maerker y el consejero electoral Uuc-Kib Espadas plantean un perfi…",
    "tipo": "video",
    "rubros": [
     "politica"
    ],
    "likes": 114,
    "comentarios": 4,
-   "reproducciones": 2910,
-   "creador": "@cnnee",
-   "alcance": "extranjero",
-   "publicado": "2026-10-28T17:26:07+00:00",
-   "compartidos": 17,
+   "reproducciones": 2727,
+   "creador": "@n.mas",
+   "alcance": "nacional",
+   "publicado": "2026-10-29T17:44:25+00:00",
+   "compartidos": 2,
    "guardados": 4,
-   "duracion": 119,
+   "duracion": 82,
    "cosechados": 4,
-   "opinion": 4,
+   "opinion": 2,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 3,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.tiktok.com/@elheraldodemexico/video/7701831723729931526",
-   "cuenta": "tk_heraldo",
-   "zona": "nacional",
-   "fecha": "2026-10-28",
-   "titulo": "🚨 Cámaras del @c5cdmx_oficial captan a dos hombres robando una motocicleta; policías los detienen tras huir",
-   "tipo": "video",
-   "rubros": [
-    "seguridad"
-   ],
-   "likes": 81,
-   "comentarios": 1,
-   "reproducciones": 1942,
-   "creador": "@elheraldodemexico",
-   "alcance": "fuera",
-   "publicado": "2026-10-28T21:20:59+00:00",
-   "compartidos": 1,
-   "guardados": 4,
-   "duracion": 45,
-   "cosechados": 1,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
+    "negativo": 2,
     "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -2058,24 +1873,24 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@cnnee/video/7701833493801684276",
+   "url": "https://www.tiktok.com/@cnnee/video/7702152950084668679",
    "cuenta": "tk_cnnee",
    "zona": "internacional",
-   "fecha": "2026-10-28",
-   "titulo": "El senador republicano Jon Husted bromeó sobre su entrenamiento en el gimnasio para no decepcionar a Donald #Trump, quien ha elogiado repetidamente su físico e…",
+   "fecha": "2026-10-29",
+   "titulo": "El presidente de EE.UU., Donald Trump, y sus seguidores aseguran que las encuestas sobre las elecciones intermedias están amañadas. Un analista de CNN explica…",
    "tipo": "video",
    "rubros": [
     "politica"
    ],
-   "likes": 75,
-   "comentarios": 1,
-   "reproducciones": 3289,
+   "likes": 80,
+   "comentarios": 4,
+   "reproducciones": 1723,
    "creador": "@cnnee",
    "alcance": "nacional",
-   "publicado": "2026-10-28T21:30:38+00:00",
-   "compartidos": 1,
-   "guardados": 0,
-   "duracion": 13,
+   "publicado": "2026-10-29T18:07:15+00:00",
+   "compartidos": 0,
+   "guardados": 2,
+   "duracion": 110,
    "cosechados": 1,
    "opinion": 1,
    "sentimiento": {
@@ -2088,25 +1903,84 @@
    "temas": []
   },
   {
-   "url": "https://www.tiktok.com/@cnnee/video/7701780497617210625",
+   "url": "https://www.tiktok.com/@cnnee/video/7702228367407451413",
    "cuenta": "tk_cnnee",
-   "zona": "internacional",
-   "fecha": "2026-10-28",
-   "titulo": "#Anthropic, la empresa de inteligencia artificial, presentó su solicitud para salir a bolsa en lo que podría ser una de las mayores ofertas públicas iniciales…",
+   "zona": "nacional",
+   "fecha": "2026-10-29",
+   "titulo": "El desfile del #DíadeMuertos en Ciudad de #México tiene un origen sorprendente: nació inspirado en una escena de la película \"#Spectre\", donde el protagonista…",
    "tipo": "video",
    "rubros": [
-    "politica",
-    "ia"
+    "espectaculos"
    ],
-   "likes": 33,
-   "comentarios": 1,
-   "reproducciones": 932,
+   "likes": 41,
+   "comentarios": 0,
+   "reproducciones": 726,
    "creador": "@cnnee",
    "alcance": "nacional",
-   "publicado": "2026-10-28T18:02:10+00:00",
+   "publicado": "2026-10-29T22:59:28+00:00",
    "compartidos": 0,
    "guardados": 1,
-   "duracion": 115,
+   "duracion": 88,
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@cnnee/video/7702130393960418578",
+   "cuenta": "tk_cnnee",
+   "zona": "internacional",
+   "fecha": "2026-10-29",
+   "titulo": "Dolly Parton, el rapero Oliver Tree, el rey Agamenón de “La Odisea” y Nikki, la protagonista de la película “Obsession”, están entre los disfraces más buscados…",
+   "tipo": "video",
+   "rubros": [
+    "espectaculos"
+   ],
+   "likes": 38,
+   "comentarios": 1,
+   "reproducciones": 1468,
+   "creador": "@cnnee",
+   "alcance": "nacional",
+   "publicado": "2026-10-29T16:39:41+00:00",
+   "compartidos": 0,
+   "guardados": 0,
+   "duracion": 87,
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.tiktok.com/@cnnee/video/7702112058849938694",
+   "cuenta": "tk_cnnee",
+   "zona": "internacional",
+   "fecha": "2026-10-29",
+   "titulo": "Condenan en Florida a un hombre que se tragó un par de aretes de Tiffany de más de US$ 760.000. La Policía tuvo que esperar casi dos semanas en el hospital par…",
+   "tipo": "video",
+   "rubros": [
+    "seguridad"
+   ],
+   "likes": 25,
+   "comentarios": 0,
+   "reproducciones": 887,
+   "creador": "@cnnee",
+   "alcance": "extranjero",
+   "publicado": "2026-10-29T15:28:32+00:00",
+   "compartidos": 1,
+   "guardados": 0,
+   "duracion": 41,
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -2124,78 +1998,75 @@
    "cuenta": "tk_aztecanoticias",
    "estado": "ok",
    "posts": 10,
-   "comentarios": 23,
-   "crudos": 34,
+   "comentarios": 50,
+   "crudos": 55,
    "fuera": 0,
    "sin_lugar": 0,
    "descartados": 0,
-   "con_subtitulos": 10,
+   "con_subtitulos": 9,
    "fuera_de_ventana": 0
   },
   {
    "cuenta": "tk_bbcmundo",
    "estado": "ok",
-   "posts": 6,
-   "comentarios": 0,
-   "crudos": 0,
+   "posts": 4,
+   "comentarios": 22,
+   "crudos": 24,
    "fuera": 0,
    "sin_lugar": 0,
    "descartados": 0,
-   "con_subtitulos": 6,
-   "fuera_de_ventana": 4,
-   "nota": "sin videos nuevos que cosechar"
+   "con_subtitulos": 7,
+   "fuera_de_ventana": 6
   },
   {
    "cuenta": "tk_cnnee",
    "estado": "ok",
    "posts": 10,
-   "comentarios": 4,
-   "crudos": 14,
+   "comentarios": 22,
+   "crudos": 24,
    "fuera": 0,
    "sin_lugar": 0,
    "descartados": 0,
-   "con_subtitulos": 8,
+   "con_subtitulos": 9,
    "fuera_de_ventana": 0
   },
   {
    "cuenta": "tk_dwespanol",
+   "estado": "fallo",
+   "error": "RuntimeError: actors/clockworks~tiktok-scraper/run-sync-get-dataset-items HTTP 502: <html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n</body>\r\n</h",
+   "posts": 0,
+   "comentarios": 0
+  },
+  {
+   "cuenta": "tk_ensenada_noticias",
    "estado": "ok",
-   "posts": 10,
+   "posts": 0,
    "comentarios": 0,
    "crudos": 0,
    "fuera": 0,
    "sin_lugar": 0,
    "descartados": 0,
-   "con_subtitulos": 7,
-   "fuera_de_ventana": 0,
+   "con_subtitulos": 0,
    "nota": "sin videos nuevos que cosechar"
-  },
-  {
-   "cuenta": "tk_ensenada_noticias",
-   "estado": "fallo",
-   "error": "RemoteDisconnected: Remote end closed connection without response",
-   "posts": 0,
-   "comentarios": 0
   },
   {
    "cuenta": "tk_heraldo",
    "estado": "ok",
    "posts": 10,
-   "comentarios": 0,
-   "crudos": 0,
+   "comentarios": 42,
+   "crudos": 44,
    "fuera": 0,
    "sin_lugar": 0,
    "descartados": 0,
-   "con_subtitulos": 8,
-   "fuera_de_ventana": 0,
-   "nota": "sin videos nuevos que cosechar"
+   "con_subtitulos": 5,
+   "fuera_de_ventana": 0
   },
   {
    "cuenta": "tk_latinus",
    "estado": "ok",
    "posts": 10,
-   "comentarios": 7,
-   "crudos": 7,
+   "comentarios": 62,
+   "crudos": 64,
    "fuera": 0,
    "sin_lugar": 0,
    "descartados": 0,
@@ -2204,10 +2075,15 @@
   },
   {
    "cuenta": "tk_mexicali_noticias",
-   "estado": "fallo",
-   "error": "RemoteDisconnected: Remote end closed connection without response",
+   "estado": "ok",
    "posts": 0,
-   "comentarios": 0
+   "comentarios": 0,
+   "crudos": 0,
+   "fuera": 0,
+   "sin_lugar": 0,
+   "descartados": 0,
+   "con_subtitulos": 0,
+   "nota": "sin videos nuevos que cosechar"
   },
   {
    "cuenta": "tk_mexico_noticias",
@@ -2236,22 +2112,26 @@
   {
    "cuenta": "tk_nmas",
    "estado": "ok",
-   "posts": 10,
+   "posts": 9,
+   "comentarios": 37,
+   "crudos": 39,
+   "fuera": 0,
+   "sin_lugar": 0,
+   "descartados": 1,
+   "con_subtitulos": 4,
+   "fuera_de_ventana": 0
+  },
+  {
+   "cuenta": "tk_rosarito_noticias",
+   "estado": "ok",
+   "posts": 0,
    "comentarios": 0,
    "crudos": 0,
    "fuera": 0,
    "sin_lugar": 0,
    "descartados": 0,
-   "con_subtitulos": 5,
-   "fuera_de_ventana": 0,
+   "con_subtitulos": 0,
    "nota": "sin videos nuevos que cosechar"
-  },
-  {
-   "cuenta": "tk_rosarito_noticias",
-   "estado": "fallo",
-   "error": "RemoteDisconnected: Remote end closed connection without response",
-   "posts": 0,
-   "comentarios": 0
   },
   {
    "cuenta": "tk_rubro_clima",
@@ -2332,17 +2212,22 @@
   },
   {
    "cuenta": "tk_sandiego_noticias",
-   "estado": "fallo",
-   "error": "RemoteDisconnected: Remote end closed connection without response",
+   "estado": "ok",
    "posts": 0,
-   "comentarios": 0
+   "comentarios": 0,
+   "crudos": 0,
+   "fuera": 0,
+   "sin_lugar": 0,
+   "descartados": 0,
+   "con_subtitulos": 0,
+   "nota": "sin videos nuevos que cosechar"
   },
   {
    "cuenta": "tk_telemundo",
    "estado": "ok",
    "posts": 10,
-   "comentarios": 14,
-   "crudos": 14,
+   "comentarios": 50,
+   "crudos": 50,
    "fuera": 0,
    "sin_lugar": 0,
    "descartados": 0,
@@ -2351,32 +2236,41 @@
   },
   {
    "cuenta": "tk_tijuana_noticias",
-   "estado": "fallo",
-   "error": "RemoteDisconnected: Remote end closed connection without response",
+   "estado": "ok",
    "posts": 0,
-   "comentarios": 0
+   "comentarios": 0,
+   "crudos": 0,
+   "fuera": 0,
+   "sin_lugar": 0,
+   "descartados": 0,
+   "con_subtitulos": 0,
+   "nota": "sin videos nuevos que cosechar"
   }
  ],
  "gasto": {
   "resultados": 8820,
-  "gastado": 149,
+  "gastado": 370,
   "por_concepto": {
-   "tk_aztecanoticias": 44,
-   "tk_bbcmundo": 10,
-   "tk_cnnee": 24,
-   "tk_dwespanol": 10,
-   "tk_heraldo": 10,
-   "tk_latinus": 17,
+   "tk_aztecanoticias": 65,
+   "tk_bbcmundo": 34,
+   "tk_cnnee": 34,
+   "tk_ensenada_noticias": 0,
+   "tk_heraldo": 54,
+   "tk_latinus": 74,
+   "tk_mexicali_noticias": 0,
    "tk_mexico_noticias": 0,
    "tk_mundo_noticias": 0,
-   "tk_nmas": 10,
+   "tk_nmas": 49,
+   "tk_rosarito_noticias": 0,
    "tk_rubro_clima": 0,
    "tk_rubro_deportes": 0,
    "tk_rubro_espectaculos": 0,
    "tk_rubro_seguridad": 0,
    "tk_rubro_turismo": 0,
    "tk_sandiego_news": 0,
-   "tk_telemundo": 24
+   "tk_sandiego_noticias": 0,
+   "tk_telemundo": 60,
+   "tk_tijuana_noticias": 0
   }
  }
 }
