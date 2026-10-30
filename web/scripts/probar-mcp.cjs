@@ -55,6 +55,7 @@ const claves = cargar('lib/mcp/oauth/claves');
 const { leerCliente, redirectPermitido, CLIENTES } = cargar('lib/mcp/oauth/clientes');
 const { revisarSolicitud, firmarSolicitud, leerSolicitud } = cargar('lib/mcp/oauth/autorizacion');
 const { conContexto } = cargar('lib/uso/contexto');
+const registro = cargar('lib/mcp/oauth/registro');
 const { leerRespuesta, ErrorDeAccion } = cargar('lib/mcp/comun');
 
 const SECRETO = 's'.repeat(40);
@@ -324,6 +325,55 @@ function pedido(cuerpo, { metodo = 'POST', cabeceras = {}, token = TOKEN } = {})
   const exp = await correrHerramienta('expedientes', { id: listaExp.structuredContent.expedientes[0].id }, CTX);
   assert.ok(exp.structuredContent.pdf_en_el_navegador.startsWith(ORIGEN));
   assert.ok(exp.content[0].text.length < 140_000, 'el expediente cabe en una respuesta');
+
+  // === Registro dinamico (n8n, 30 de octubre de 2026) ======================
+  assert.equal(esRutaPublica('/api/mcp/registro'), true);
+  assert.equal(oauth.metadatosServidor(ORIGEN).registration_endpoint, `${ORIGEN}/api/mcp/registro`);
+  assert.deepEqual(oauth.metadatosServidor(ORIGEN).token_endpoint_auth_methods_supported, ['none'], 'Claude sigue eligiendo CIMD');
+  const N8N = 'https://n8n.viveenlabaja.mx/rest/oauth2-credential/callback';
+  const registrar = (cuerpo, entorno = {}) => registro.responderRegistro(new Request(`${ORIGEN}/api/mcp/registro`, {
+    method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(cuerpo),
+  }), SECRETO, entorno);
+  const ajeno = await registrar({ redirect_uris: ['https://evil.test/cb'], client_name: 'x' });
+  assert.equal(ajeno.status, 400);
+  assert.equal((await ajeno.json()).error, 'invalid_redirect_uri');
+  assert.equal((await registrar({ redirect_uris: ['http://n8n.viveenlabaja.mx/rest/oauth2-credential/callback'] })).status, 400, 'solo https');
+  assert.equal((await registrar({ redirect_uris: [] })).status, 400);
+  const bueno = await registrar({ redirect_uris: [N8N], client_name: 'n8n', token_endpoint_auth_method: 'client_secret_post' });
+  assert.equal(bueno.status, 201);
+  const reg = await bueno.json();
+  assert.ok(reg.client_id.startsWith('pdcr:'));
+  assert.equal(reg.token_endpoint_auth_method, 'none');
+  assert.equal(reg.client_secret, undefined, 'cliente publico: sin secreto');
+  // El client_id ES el registro: se lee de su firma, y alterado no vale.
+  assert.deepEqual(registro.clienteRegistrado(reg.client_id, SECRETO).redirect_uris, [N8N]);
+  assert.equal(registro.clienteRegistrado(reg.client_id.slice(0, -2) + 'xx', SECRETO), null, 'firma rota');
+  assert.equal(registro.clienteRegistrado(reg.client_id, 'o'.repeat(40)), null, 'otro secreto');
+  assert.equal(registro.clienteRegistrado(reg.client_id, SECRETO, { MCP_DESTINOS_PERMITIDOS: 'https://otro.test' }), null, 'quitar el origen de la lista lo desconecta');
+  assert.equal(registro.clienteRegistrado(claves.firmar({ r: [N8N], n: 'x', t: 1 }, SECRETO, 'solicitud'), SECRETO), null);
+
+  // La autorizacion de un cliente registrado: sin descargar nada, y la
+  // pantalla nombra el host al que vuelve.
+  process.env.MCP_HABILITADO = 'true';
+  process.env.AUTH_SECRET = SECRETO;
+  process.env.DATABASE_URL = 'postgres://u:p@base.invalid/db';
+  let descargasN8n = 0;
+  const nada = async () => { descargasN8n++; return new Response('{}'); };
+  const okN8n = await revisarSolicitud({ ...base, client_id: reg.client_id, redirect_uri: N8N }, ORIGEN, nada);
+  assert.equal(okN8n.tipo, 'ok', JSON.stringify(okN8n));
+  assert.equal(okN8n.solicitud.clienteHost, 'n8n.viveenlabaja.mx');
+  assert.equal(descargasN8n, 0);
+  assert.equal((await revisarSolicitud({ ...base, client_id: reg.client_id, redirect_uri: 'https://n8n.viveenlabaja.mx/otra' }, ORIGEN, nada)).tipo, 'pantalla', 'otro destino del mismo origen no estaba registrado');
+  // El client_id en Basic tambien cuenta: sin codigo, el error es del codigo, no del cliente.
+  const conBasic = await oauth.responderToken(new Request(`${ORIGEN}/api/mcp/token`, {
+    method: 'POST',
+    headers: { 'x-forwarded-host': 'x.test', 'content-type': 'application/x-www-form-urlencoded', authorization: 'Basic ' + Buffer.from(encodeURIComponent(reg.client_id) + ':x').toString('base64') },
+    body: 'grant_type=authorization_code&code_verifier=' + 'v'.repeat(43),
+  }), encendido);
+  assert.equal((await conBasic.json()).error, 'invalid_request', 'falta el code, no el cliente');
+  delete process.env.MCP_HABILITADO;
+  delete process.env.AUTH_SECRET;
+  delete process.env.DATABASE_URL;
 
   console.log('probar-mcp: ok');
 })().catch((e) => {

@@ -1348,6 +1348,20 @@ Claude asks before each call), and destructive (`dejar_de_seguir`,
   database, else every route is 404. The transport also follows the spec's
   MUSTs: `Origin` checked (403), unknown `MCP-Protocol-Version` is 400, no
   batches after 2025-06-18, client responses get 202.
+- **n8n connects too, and does everything** (user's call, 30 October 2026).
+  Its «MCP OAuth2 API» credential self-registers, so the server now has a
+  `registration_endpoint` (`lib/mcp/oauth/registro.ts`, RFC 7591): stateless,
+  the `client_id` IS the signed registration (`pdcr:` + key use «cliente»),
+  and every `redirect_uri` must be https on an origin in
+  `MCP_DESTINOS_PERMITIDOS` (default the company's n8n), re-checked on every
+  authorization, so dropping an origin disconnects its clients. Open
+  registration would let anyone get a client_id and send an admin a
+  «Permitir» that delivers the code to their own server. Public client, no
+  secret; a `client_id` in a Basic header is accepted. Claude still picks
+  CIMD (`"none"` stays the only token auth method). **This reverses, for the
+  MCP, seguimiento's «never on a schedule»**: an n8n workflow spends without
+  anyone pressing, under the same caps; `docs/PLAN.md` records it. The consent
+  screen names a registered client by the host it returns to.
 - **It shows what the screen shows, to an admin.** Since it does everything,
   it returns headlines, post captions and the published comment text, like the
   site does; never commenter identity, which does not exist anywhere. Months

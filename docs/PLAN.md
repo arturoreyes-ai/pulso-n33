@@ -1,3 +1,19 @@
+> **Implementación · 30 de octubre de 2026 — Pulso desde Claude y desde n8n.**
+> Desde el 26 de octubre el dueño usa Pulso desde su Claude con un conector
+> (MCP): lee todo lo que muestra el tablero, genera guiones, analiza, sigue
+> publicaciones, busca en redes y administra usuarios, y cada acción pagada
+> dice cuánto suele costar antes y cuánto costó después. Claude pregunta antes
+> de cada acción que cuesta. El 30 de octubre se pidió conectar también n8n, y
+> se decidió que n8n pueda hacer todo lo que hace Claude, acciones pagadas
+> incluidas. **Eso cambia, para el conector, la decisión del 28 de
+> septiembre de que el seguimiento se paga «al pulsar un botón, nunca
+> programado»**: un flujo de n8n corre sin que nadie pulse. Los topes no
+> cambian y valen igual para n8n: 20 USD al mes y 10 lecturas por persona al
+> día en el seguimiento, 50 USD al mes en la búsqueda en vivo. La IA no tiene
+> tope propio. Solo se aceptan conexiones que vuelvan al n8n de la empresa
+> (n8n.viveenlabaja.mx), y cada una la aprueba un administrador al entrar con
+> su cuenta.
+
 > **Implementación · 2 de octubre de 2026 — El año de Ismael Burgueño en
 > redes, mes por mes.** Se pidió lo más popular de todo el año —lo más visto,
 > lo de más likes— con unos 50 comentarios por publicación para cuidar el

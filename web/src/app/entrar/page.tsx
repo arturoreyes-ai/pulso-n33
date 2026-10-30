@@ -9,6 +9,7 @@ import { acceso } from "@/lib/acceso/config";
 import { rutaDeRegreso } from "@/lib/acceso/regreso";
 import { buscarUsuarioPorCorreo } from "@/lib/acceso/usuarios";
 import { cerrarSesion } from "@/lib/acceso/acciones";
+import { nombreDeAplicacion } from "@/lib/mcp/oauth/clientes";
 
 /**
  * La puerta. Es la unica pagina que proxy.ts deja pasar sin sesion, y la
@@ -73,7 +74,16 @@ export default async function PaginaEntrar({ searchParams }: Props) {
   // callejon: el 28 de octubre de 2026 la ventana que abrio Claude se quedo en
   // «Inteligencia regional, con llave» y nadie pulso Entrar. La puerta dice
   // para que es, y que despues de entrar se vuelve a Claude.
-  const paraClaude = destino === "/mcp/autorizar" || destino.startsWith("/mcp/autorizar?");
+  const conectando = destino === "/mcp/autorizar" || destino.startsWith("/mcp/autorizar?");
+  const parametros = conectando ? new URLSearchParams(destino.split("?")[1] ?? "") : null;
+  let hostRegreso: string | null = null;
+  try {
+    hostRegreso = parametros?.get("redirect_uri") ? new URL(parametros.get("redirect_uri")!).host : null;
+  } catch {
+    hostRegreso = null;
+  }
+  // Claude o el n8n de la empresa (lib/mcp/oauth/registro.ts): se nombra a quien pide.
+  const app = conectando ? nombreDeAplicacion(parametros?.get("client_id") ?? null, hostRegreso) : null;
 
   if (acceso.sinEntra) redirect(destino);
   const sesion = await auth();
@@ -143,13 +153,13 @@ export default async function PaginaEntrar({ searchParams }: Props) {
 
       <section aria-labelledby="entrar-titulo" className="entrada w-full max-w-[34rem]">
         <h1 id="entrar-titulo" className="font-titular text-seccion text-tinta-titulo">
-          {salida === "1" ? "Sesión cerrada." : paraClaude ? "Conecta Claude a Pulso." : "Inteligencia regional, con llave."}
+          {salida === "1" ? "Sesión cerrada." : app !== null ? `Conecta ${app} a Pulso.` : "Inteligencia regional, con llave."}
         </h1>
         <p className="mx-auto mt-4 max-w-[38ch] text-lectura text-tinta-prosa">
           {salida === "1"
             ? "Puedes cerrar esta ventana o volver a entrar."
-            : paraClaude
-              ? "Entra con tu cuenta de la organización. Después pulsa «Permitir» y volverás a Claude."
+            : app !== null
+              ? `Entra con tu cuenta de la organización. Después pulsa «Permitir» y volverás a ${app}.`
               : "Entra con tu cuenta de la organización."}
         </p>
 

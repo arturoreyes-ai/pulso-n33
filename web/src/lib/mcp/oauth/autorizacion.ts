@@ -73,7 +73,9 @@ export async function revisarSolicitud(
     solicitud: {
       clienteId,
       clienteNombre: cliente.client_name,
-      clienteHost: new URL(clienteId).host,
+      // Un client_id CIMD es una URL y se nombra por su host; uno registrado
+      // (n8n) no lo es, y se nombra por el host al que vuelve el codigo.
+      clienteHost: clienteId.startsWith("https://") ? new URL(clienteId).host : new URL(redirectUri).host,
       redirectUri,
       desafio: p.code_challenge ?? "",
       estado,

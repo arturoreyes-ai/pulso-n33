@@ -19,6 +19,7 @@ const PUBLICAS = new Set([
   "/api/seguimiento/purgar",
   "/api/mcp",
   "/api/mcp/token",
+  "/api/mcp/registro",
   "/.well-known/oauth-protected-resource",
   "/.well-known/oauth-protected-resource/api/mcp",
   "/.well-known/oauth-authorization-server",

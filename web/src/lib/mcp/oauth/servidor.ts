@@ -33,6 +33,7 @@ import { aleatorio, ALCANCE, emitirAcceso, huellaDe, pkceValido, SEGUNDOS_ACCESO
 export const RUTA_MCP = "/api/mcp";
 export const RUTA_AUTORIZAR = "/mcp/autorizar";
 export const RUTA_TOKEN = "/api/mcp/token";
+export const RUTA_REGISTRO = "/api/mcp/registro";
 export const RUTA_METADATOS_RECURSO = "/.well-known/oauth-protected-resource/api/mcp";
 
 const SEGUNDOS_CODIGO = 120;
@@ -81,6 +82,8 @@ export function metadatosServidor(origen: string) {
     response_types_supported: ["code"],
     response_modes_supported: ["query"],
     grant_types_supported: ["authorization_code", "refresh_token"],
+    // n8n se registra solo (registro.ts); Claude sigue eligiendo CIMD.
+    registration_endpoint: `${origen}${RUTA_REGISTRO}`,
     token_endpoint_auth_methods_supported: ["none"],
     code_challenge_methods_supported: ["S256"],
     client_id_metadata_document_supported: true,
@@ -170,6 +173,16 @@ export async function puedeConectar(usuarioId: number): Promise<boolean> {
   return u !== null && u.activo && u.aprobado && u.rol === "admin";
 }
 
+function clienteDeBasic(cabecera: string | null): string | null {
+  if (cabecera === null || !cabecera.startsWith("Basic ")) return null;
+  try {
+    const [id] = Buffer.from(cabecera.slice(6).trim(), "base64").toString("utf8").split(":");
+    return id ? decodeURIComponent(id) : null;
+  } catch {
+    return null;
+  }
+}
+
 export async function responderToken(peticion: Request, entorno: NodeJS.ProcessEnv = process.env): Promise<Response> {
   const secreto = secretoMcp(entorno);
   if (secreto === null) return new Response(null, { status: 404 });
@@ -179,7 +192,10 @@ export async function responderToken(peticion: Request, entorno: NodeJS.ProcessE
   }
   const origen = origenPublico(peticion.headers);
   const f = new URLSearchParams(await peticion.text());
-  const clienteId = f.get("client_id") ?? "";
+  // Un cliente publico lo manda en el cuerpo; algunos (como puede hacer n8n)
+  // lo mandan en una cabecera Basic. El secreto, si viene, no se usa: nadie
+  // lo tiene, el cliente es publico y lo que prueba quien es es el PKCE.
+  const clienteId = f.get("client_id") ?? clienteDeBasic(peticion.headers.get("authorization")) ?? "";
   if (!recursoAceptado(f.get("resource"), origen)) return errorToken("invalid_target", "Este servidor solo emite tokens para su MCP.");
 
   const entregar = async (usuarioId: number, familia: string) => {

@@ -26,7 +26,7 @@ function b64(datos: Buffer | string): string {
 
 /** Para que firma un valor. Cada uso tiene su llave: una solicitud de
  *  autorizacion firmada no puede presentarse como token de acceso. */
-export type Uso = "acceso" | "solicitud";
+export type Uso = "acceso" | "solicitud" | "cliente";
 
 function llave(secreto: string, uso: Uso): Buffer {
   return createHash("sha256").update(`pulso-mcp-${uso}|${secreto}`).digest();

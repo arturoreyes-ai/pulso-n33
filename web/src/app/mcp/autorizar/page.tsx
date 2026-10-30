@@ -5,6 +5,7 @@ import { notFound, redirect } from "next/navigation";
 import { usuarioActual } from "@/lib/acceso/sesion";
 import { decidirAutorizacion } from "@/lib/mcp/oauth/acciones";
 import { firmarSolicitud, revisarSolicitud } from "@/lib/mcp/oauth/autorizacion";
+import { nombreDeAplicacion } from "@/lib/mcp/oauth/clientes";
 import { origenPublico, secretoMcp } from "@/lib/mcp/oauth/servidor";
 
 /**
@@ -23,7 +24,7 @@ import { origenPublico, secretoMcp } from "@/lib/mcp/oauth/servidor";
  * codigo: llegar aqui con un enlace no conecta nada.
  */
 export const metadata: Metadata = {
-  title: "Conectar Claude · Pulso",
+  title: "Conectar a Pulso",
   robots: { index: false, follow: false },
 };
 
@@ -68,9 +69,10 @@ export default async function PaginaAutorizar({ searchParams }: Props) {
   const esAdmin = usuario.activo && usuario.aprobado && usuario.rol === "admin";
   const s = revision.solicitud;
   const destino = new URL(s.redirectUri).host;
+  const app = nombreDeAplicacion(s.clienteId, destino);
 
   return (
-    <Marco titulo={esAdmin ? "¿Conectar Claude al tablero?" : "Solo un administrador puede conectar Claude."}>
+    <Marco titulo={esAdmin ? `¿Conectar ${app} al tablero?` : `Solo un administrador puede conectar ${app}.`}>
       {esAdmin ? (
         <>
           <p className="mt-4 text-lectura text-tinta-prosa">
@@ -79,8 +81,8 @@ export default async function PaginaAutorizar({ searchParams }: Props) {
             analizar, seguir publicaciones, buscar en redes y administrar usuarios.
           </p>
           <p className="mt-3 text-cuerpo text-tinta-meta">
-            Algunas acciones cuestan dinero y cuentan contra los mismos topes del mes; Claude dirá cuánto antes y después de
-            cada una. Al permitir, vuelves a {destino}.
+            Algunas acciones cuestan dinero y cuentan contra los mismos topes del mes; cada una dice lo que suele costar y su
+            respuesta, lo que costó. Al permitir, vuelves a {destino}.
           </p>
         </>
       ) : (
@@ -101,7 +103,7 @@ export default async function PaginaAutorizar({ searchParams }: Props) {
           </button>
         )}
         <button type="submit" name="decision" value="cancelar" className="rounded-full border border-filo px-6 py-3 text-cuerpo">
-          {esAdmin ? "Cancelar" : "Volver a Claude"}
+          {esAdmin ? "Cancelar" : `Volver a ${app}`}
         </button>
       </form>
     </Marco>

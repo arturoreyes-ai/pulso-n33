@@ -11,6 +11,9 @@
  * cliente es agregar su URL aqui con la razon.
  */
 
+import { clienteRegistrado, esClienteRegistrado } from "./registro";
+import { secretoMcp } from "./servidor";
+
 export const CLIENTES = new Set([
   "https://claude.ai/oauth/mcp-oauth-client-metadata",
   "https://claude.ai/oauth/claude-code-client-metadata",
@@ -25,6 +28,11 @@ const cache = new Map<string, { cliente: Cliente; hasta: number }>();
 /** El documento del cliente, validado; null si no es uno de los nuestros o
  *  no se pudo leer. Se guarda una hora por instancia. */
 export async function leerCliente(clientId: string, solicitar: typeof fetch = fetch): Promise<Cliente | null> {
+  // Un cliente registrado (n8n) no se descarga: su client_id ES el registro.
+  if (esClienteRegistrado(clientId)) {
+    const secreto = secretoMcp();
+    return secreto === null ? null : clienteRegistrado(clientId, secreto);
+  }
   if (!CLIENTES.has(clientId)) return null;
   const guardado = cache.get(clientId);
   if (guardado !== undefined && guardado.hasta > Date.now()) return guardado.cliente;
@@ -76,4 +84,13 @@ export function redirectPermitido(pedido: string, declarados: string[]): boolean
       && u.pathname === p.pathname && p.search === ""
     );
   });
+}
+
+/** Como se nombra en pantalla la aplicacion que pide conectarse: «Claude»
+ *  para sus dos documentos CIMD, y si no, el host al que vuelve el codigo
+ *  (n8n.viveenlabaja.mx). El nombre que el cliente declara no se usa: lo
+ *  escribe el mismo cliente. */
+export function nombreDeAplicacion(clientId: string | null, host: string | null): string {
+  if (clientId !== null && CLIENTES.has(clientId)) return "Claude";
+  return host ?? "la aplicación";
 }
