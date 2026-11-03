@@ -1,8 +1,508 @@
 {
  "esquema": 1,
  "ventana_dias": 30,
- "total": 12983,
+ "total": 13018,
  "notas": [
+  {
+   "id": "aaa6ce49b3311351",
+   "titulo": "SDPD chief pledges more transparency around interactions with ICE",
+   "url": "https://www.kpbs.org/news/public-safety/2026/11/02/sdpd-chief-pledges-more-transparency-around-interactions-with-ice",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T01:43:14+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/2b1db99/2147483647/strip/false/crop/728x728+358+0/resize/600x600!/quality/90/?url=http%3A%2F%2Fkpbs-brightspot.s3.us-west-2.amazonaws.com%2F74%2F55%2Fff7e335c4f0c812a9202b085c61b%2Fice-at-south-park.jpg",
+   "rubros": []
+  },
+  {
+   "id": "6d872e2233e68fe4",
+   "titulo": "Supermercados de siete países europeos pierden millones de euros en alimentos tras un ciberataque que elevó la temperatura de sus refrigeradores y congeladores",
+   "url": "https://www.elimparcial.com/mundo/2026/11/02/supermercados-de-siete-paises-europeos-pierden-millones-de-euros-en-alimentos-tras-un-ciberataque-que-elevo-la-temperatura-de-sus-refrigeradores-y-congeladores/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T01:39:14+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9328,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/3ZQIM5IIW5A5ZJM34N7UBNUVNM.jpg?auth=d9af42eac32be73ed359e294619fbea3cc25afdcf2bf5a3f363f9d5b74de1010&smart=true&width=5452&height=3271",
+   "rubros": []
+  },
+  {
+   "id": "6a92b873b40c357a",
+   "titulo": "El hijo adoptivo de una senadora estadounidense fue detenido por autoridades migratorias cuando estaba a unos 16 kilómetros de llegar a Canadá, país del que ya era ciudadano, permaneció dos noches bajo custodia del ICE antes de ser trasladado a la misma frontera que intentaba cruzar",
+   "url": "https://www.elimparcial.com/mundo/2026/11/02/el-hijo-adoptivo-de-una-senadora-estadounidense-fue-detenido-por-autoridades-migratorias-cuando-estaba-a-unos-16-kilometros-de-llegar-a-canada-pais-del-que-ya-era-ciudadano-permanecio-dos-noches-bajo-custodia-del-ice-antes-de-ser-trasladado-a-la-misma-frontera-que-intentaba-cruzar/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T01:38:24+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6663,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/A2UAM54NAFHLJDF3YVC5WGFGAE.jpg?auth=73282f8dba327e31882a7144a66a2c5b90aa678993365b14b0a171804a8c8b29&smart=true&width=1200&height=750",
+   "rubros": [
+    "politica",
+    "seguridad"
+   ]
+  },
+  {
+   "id": "794d151d2979f89e",
+   "titulo": "Acuden familias a panteones de Tijuana para recordar a sus seres queridos por el Día de Muertos",
+   "url": "https://www.elimparcial.com/tij/tijuana/2026/11/02/acuden-familias-a-panteones-de-tijuana-para-recordar-a-sus-seres-queridos-por-el-dia-de-muertos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T01:38:06+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4521,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/MJD22AH5UJGOPE4UDSPXAUVROY.jpeg?auth=a4e5a7a3561daabed5638acd6ce86aee1f58e527f5142e13da9a5e33825498ec&smart=true&width=1280&height=853",
+   "rubros": []
+  },
+  {
+   "id": "fb70a1c9ff921ea0",
+   "titulo": "Canelo Álvarez reveló su “regla de oro” para prestarle dinero a sus conocidos y familiares",
+   "url": "https://www.elimparcial.com/deporte/2026/11/02/canelo-alvarez-revelo-su-regla-de-oro-para-prestarle-dinero-a-sus-conocidos-y-familiares/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T01:37:04+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6013,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/2GF2EHQI6JGGDDWV7LNBPCWT5Y.png?auth=2b6ad0224cd0f1828075719c30f64359ec13dcc469d744c216a651da21307fb3&smart=true&width=3050&height=2033",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "542342d4814a58a4",
+   "titulo": "Incendios de basureros clandestinos ponen en riesgo a bomberos en Real del Mar, en Tijuana",
+   "url": "https://zetatijuana.com/2026/11/incendios-de-basureros-clandestinos-ponen-en-riesgo-a-bomberos-en-real-del-mar-en-tijuana/",
+   "dominio": "zetatijuana.com",
+   "fuente": "zeta",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T01:36:51+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8791,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "af8d03d917db0b1e",
+   "titulo": "Universidad de Sonora inaugura exposición en memoria de la pintora sonorense Martha Peterson a nueve años de su fallecimiento",
+   "url": "https://www.elimparcial.com/son/hermosillo/2026/11/02/universidad-de-sonora-inaugura-exposicion-en-memoria-de-la-pintora-sonorense-martha-peterson-a-nueve-anos-de-su-fallecimiento/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T01:35:31+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.4657,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/PRPS4W6UBVAPXHXPZAV3JBDBZA.png?auth=c0c38abd66c3f726607cd65c3dfb374c1d7472713ac1603e8997d83eff9a5558&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "84ae3a3a2d94ec14",
+   "titulo": "Light mag. 3.9 earthquake - 46 km northwest of San Felipe, Estado de Baja California, Mexico, on Monday, Nov 2, 2026, at 05:32 pm (Tijuana time)",
+   "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOUnc5N0ctVmR6MWVOdmc2bHAtTnY5dW8wWEtHeUQ0MjR0amFEc05vWWxEdmN3TFZIU1NBbHotYXhMckN6N2dVTS1ZLWFVZDJjSmFGMnBURkw5b1hLTll3OXhpM0xMcy1HNl9ldnZrcnBJMUpldmp6UTRPNml4UUNnZk5FVGsybmcxWlI1UXc0OE1RSW9hSERwUVI1dXNQN2pRT011b3I5eVEzOEJxbjhjVEdRRjh0MjZfSEh0VkF3?oc=5",
+   "dominio": "volcanodiscovery.com",
+   "fuente": "gn-13afd86dbb5f",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana",
+    "San Felipe"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T01:33:00+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6101,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": []
+  },
+  {
+   "id": "4827b5fec92d5363",
+   "titulo": "Terremoto leve mag. 3.9 - 46 km al noroeste de San Felipe, Baja California, México, Monday 2 Nov 2026 a las 17:32 (Hora Tijuana)",
+   "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOc2Q1QkEwcXNGdjhXeE1CYW9pWHJpTFE5LTczd1VqeW1PY0JfWlI4VDNTWFJFZ0lzbWVqc05ubDFnRkJXd2VIeUJGRzFiRjVwcnJqX0FHYkJWSWZvVEVMVllrdmlFeF9ZaEt3cXlQaDZiZUZPclJjdTJvdTc4bGd5RGxfZEtXUm9ueTk0YU04SmIzY3FHQU9CU0VtMTBjWGd1RWgyZ0VVcUZIRll2SUp1ZDVydXhSMEdxQ05TTXBoTQ?oc=5",
+   "dominio": "volcanodiscovery.com",
+   "fuente": "gn-13afd86dbb5f",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana",
+    "San Felipe"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T01:33:00+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6789,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": []
+  },
+  {
+   "id": "c2ebd00a79838723",
+   "titulo": "Protestan en Maneadero por desbordamiento del arroyo San Carlos",
+   "url": "https://jornadabc.com.mx/principales/protestan-en-maneadero-por-desbordamiento-del-arroyo-san-carlos/",
+   "dominio": "jornadabc.com.mx",
+   "fuente": "jornadabc",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Ensenada"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T01:29:12+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6964,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "2acc9d2cce442b16",
+   "titulo": "Registrar's office evacuated due to abandoned suitcase in lobby",
+   "url": "https://www.kpbs.org/news/public-safety/2026/11/02/registrars-office-evacuated-due-to-abandoned-suitcase-in-lobby",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T01:23:53+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/01a9256/2147483647/strip/false/crop/2100x2100+817+0/resize/600x600!/quality/90/?url=http%3A%2F%2Fkpbs-brightspot.s3.us-west-2.amazonaws.com%2Fimg%2Fphotos%2F2021%2F03%2F19%2FPXL_20201103_202758773_2.jpg",
+   "rubros": []
+  },
+  {
+   "id": "d84b406528d12aad",
+   "titulo": "¿Ya te vacunaste? conoce dónde puedes acudir a protegerte contra la influenza, Covid-19 y neumococo",
+   "url": "https://jornadabc.com.mx/bajacalifornia/ya-te-vacunaste-conoce-donde-puedes-acudir-a-protegerte-contra-la-influenza-covid-19-y-neumococo/",
+   "dominio": "jornadabc.com.mx",
+   "fuente": "jornadabc",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T01:22:31+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6788,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "d38b28697d2e21b1",
+   "titulo": "Rosarito concluye autodiagnóstico para impulsar su desarrollo turístico",
+   "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxONEpncTl5M1FFZ0JCaEREVm1qcTNtcDRQX09PX3dHbC1nbFlvTDhxSFZWempfNzBqb1hnTVRvcWNMSmtEamR0aG5yaFR4RC1hUEw4S2daODNHMno4TzZEUVh3R3VrV2piUU0yUFQ5SVlyRmhJQUppaUlKUkJSMlRGRlZiZm5XWm16QXFMOVA4aFlKM1VfNklqNzloQl9SUmM?oc=5",
+   "dominio": "infobaja.info",
+   "fuente": "gn-dc5a4d87b215",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Playas de Rosarito"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T01:15:16+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5075,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
+   "rubros": []
+  },
+  {
+   "id": "e11a7ace60813706",
+   "titulo": "Baja California invierte $15,600 MDP en agua",
+   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOd21CWk5MQ3pCMHcxbHlsUENIVXIzRHZJM0JVUGh0QlEtNDhyTkxFN0ZqeDE0dHJHOTRaeUVQOFZSZHpqa2RkenJWT0tEOVhDY0JkSjd4V0IteWlqMHFWZGJwRWJNQTNXeEpXN0x5ZGlzX3phdHY2YmlwWUprNXJlN0tQemfSAYoBQVVfeXFMTUgxMVZqSlVnNEtBU2NYZFJ2a1dER1BIZHRJc004WkZNUFFYMkhHd2ozN1VJTjdrem5Vdi12VkQ0cHRUSXBfRll3TWFMUnJQVlBzVEEyN1BYWmJCWXFLeDRKRTRpdTh4RmtCYXdFQk9RODdIOGlrcWxWOF8tVnVJaWgyU1drNksyVHBB?oc=5",
+   "dominio": "excelsior.com.mx",
+   "fuente": "gn-ded8dbe66fc7",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T01:11:57+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4809,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
+   "rubros": []
+  },
+  {
+   "id": "12dd6d0060c4d9cd",
+   "titulo": "Baja California destina más de 15 mil mdp a obras para garantizar el abasto de agua",
+   "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQeXpfU092a052U0hsY1JoMHNRZkhYYXFvVVBpcmdjdXhEQzJTcENCbk5EWGNnQWJ5WDFjaUYzczRyNzZwTUhlNVJEYmtsaHA4WmhWU3k1Q0xSN2lEYzNWZjU0VUhBNURwWTdhbjlRdDBNcWx2dk5RMVpHMkVVMVVkN1hlOUJLVzZjX2tiRy1jVXkzbm8taGJrSG8ya0ZBVUd0dkNtTVJkbWFpLU5IREltdllBNFUzbFhmdUdIaldpamFWbFdjdWtsWVJ2ZWhqRTZMOHpV?oc=5",
+   "dominio": "lasillarota.com",
+   "fuente": "gn-173f8fbcfc4a",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T01:11:13+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4453,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate",
+   "rubros": []
+  },
+  {
+   "id": "90f7b11f2d56495e",
+   "titulo": "Pro-housing group says San Diego is breaking state law by delaying Pacific Beach tower",
+   "url": "https://timesofsandiego.com/community/2026/11/02/pro-housing-group-says-san-diego-is-breaking-state-law-by-delaying-pacific-beach-tower/",
+   "dominio": "timesofsandiego.com",
+   "fuente": "timessd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T01:05:39+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://i0.wp.com/timesofsandiego.com/wp-content/uploads/2026/01/1-Project-Vela-rendering_edited.jpg?fit=721%2C861&ssl=1",
+   "rubros_categoria": [
+    "economia"
+   ],
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "5a4dd0b1c14b48cd",
+   "titulo": "Vendedores de Nogales reportan pocas ventas durante Día de Muertos y mantendrán sus puestos para recuperar ingresos",
+   "url": "https://www.elimparcial.com/son/nogales/2026/11/02/vendedores-de-nogales-reportan-pocas-ventas-durante-dia-de-muertos-y-mantendran-sus-puestos-para-recuperar-ingresos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T01:01:41+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.649,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/CJXPQPK3P5B7PAJ5MJHHNA6MVA.jpeg?auth=c245276fc6820d756ff1b07bf0d11bd01f1410036b6c801a8a40cfeafc1572cb&smart=true&width=1280&height=960",
+   "rubros": []
+  },
+  {
+   "id": "559735f51fb2c1a0",
+   "titulo": "Suprema Corte deja firme el desalojo de un hombre de 83 años que vivía desde hace 17 años en un departamento de Iztapalapa y acumuló 54 meses de renta sin pagar, luego de rechazar por seis votos contra tres el recurso con el que buscaba evitar perder su vivienda",
+   "url": "https://www.elimparcial.com/mexico/2026/10/31/suprema-corte-deja-firme-el-desalojo-de-un-hombre-de-83-anos-que-vivia-desde-hace-17-anos-en-un-departamento-de-iztapalapa-y-acumulo-54-meses-de-renta-sin-pagar-luego-de-rechazar-por-seis-votos-contra-tres-el-recurso-con-el-que-buscaba-evitar-perder-su-vivienda/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T00:59:14+00:00",
+   "capturado": "2026-11-01T13:18:57+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7565,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/LHZPAQYGZZCNBKNMOOOP5KA5GY.png?auth=4bd6bf780b1a901d3699c8c6119ee29ea8e7d549068228f7784600b052f6e0d8&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "23699166b656e6de",
+   "titulo": "Jorge Álvarez Máynez denunció a Amílcar Olán ante la ASF por contratos para surtir casi 20 millones de órdenes de medicamentos, de las cuales más de 17 millones no habrían sido entregadas, según el dirigente de Movimiento Ciudadano",
+   "url": "https://www.elimparcial.com/mexico/2026/10/31/jorge-alvarez-maynez-denuncio-a-amilcar-olan-ante-la-asf-por-contratos-para-surtir-casi-20-millones-de-ordenes-de-medicamentos-de-las-cuales-mas-de-17-millones-no-habrian-sido-entregadas-segun-el-dirigente-de-movimiento-ciudadano/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T00:58:57+00:00",
+   "capturado": "2026-11-01T06:01:37+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7344,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/SEJSRRQ46NCFBBC3K744RZDG3I.png?auth=51eccd17e242235a53ae4700247ecb84f5d3749e789ab61723984b6c99a83190&smart=true&width=1200&height=675",
+   "rubros": []
+  },
+  {
+   "id": "7f01096e688c6664",
+   "titulo": "Falsificaron un acta de cateo y un oficio oficial para inculpar a una persona en Guerrero, pero los tres servidores públicos terminaron condenados a cuatro años de prisión por esos documentos",
+   "url": "https://www.elimparcial.com/mexico/2026/11/01/falsificaron-un-acta-de-cateo-y-un-oficio-oficial-para-inculpar-a-una-persona-en-guerrero-pero-los-tres-servidores-publicos-terminaron-condenados-a-cuatro-anos-de-prision-por-esos-documentos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-11-03",
+   "publicado": "2026-11-03T00:58:37+00:00",
+   "capturado": "2026-11-02T15:45:46+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7285,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/7XU5GLVBOZBMTNTIWJ4W66WGU4.png?auth=517597b7f7250dd5f386d42474cb87de60411c9b04e14cf42375919cebc18ca4&smart=true&width=1920&height=1080",
+   "rubros": []
+  },
   {
    "id": "f167512efb35af57",
    "titulo": "Marina del Pilar anuncia inversión histórica de más de 15,600 mdp para infraestructura hídrica en Baja California",
@@ -190,7 +690,7 @@
     "version": "0.2.0"
    },
    "origen": "busqueda_web",
-   "descubierta_por": "bq_rosarito",
+   "descubierta_por": "bq_sanquintin",
    "rubros": [
     "economia"
    ]
@@ -1052,6 +1552,25 @@
    "rubros": [
     "economia"
    ]
+  },
+  {
+   "id": "9510021ffaae5b5d",
+   "titulo": "U.S. citizen fined $5K after illegal border crossing",
+   "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE55ay1FN0padEtUVTlNWF9lLWd0QS03Mm55SVBQV01fRmpRdjdsSENvX3FCQ0FoYlZZOFQtNnllc1lRQldEdVozU1pBMWgwcTBLM2ZvbGdjeEk2eUtob056NTlCaGNGZXZ2bHVlYzJqM2NPZ1pPcXppRUpuNNIBgAFBVV95cUxQTG1yVDEtWU92Y2ZJaEtQT1IxUnk1M1VYQU12UTY3UDhwRUlZbm5sOTN2S21hcWRWNDdHcnR5V04wUTdvb2NIZmcwZWdpZ0p2NHVUbG5FZFgtOHA5V25fZnZ2enZqY1MzZVpjSkV6b1JJVlJzUXZNdmdTNkIxbXFFVg?oc=5",
+   "dominio": "ktla.com",
+   "fuente": "gn-769075bbdb1c",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-02",
+   "publicado": "2026-11-02T22:35:37+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
   },
   {
    "id": "3ea56bbce4012f9e",
@@ -2419,6 +2938,31 @@
    ]
   },
   {
+   "id": "73dc18ef7f532d76",
+   "titulo": "Retrasan huelga en compañía telefónica; revisarán propuesta nacional",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/retrasan-huelga-en-compania-telefonica-revisaran-propuesta-nacional-32932035",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-02",
+   "publicado": "2026-11-02T20:40:00+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5799,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
    "id": "00c2db23a2e1fbf8",
    "titulo": "Beware the ‘red mirage’ if California Republicans have an election night lead",
    "url": "https://www.kpbs.org/news/politics/2026/11/02/beware-the-red-mirage-if-california-republicans-have-an-election-night-lead",
@@ -2439,6 +2983,58 @@
    "rubros": [
     "politica"
    ]
+  },
+  {
+   "id": "6802364bab6ce4a2",
+   "titulo": "Obtiene Kassandra Espinoza el bronce en Panamericano Open de Judo",
+   "url": "https://oem.com.mx/lavozdelafrontera/deportes/reclama-kassandra-espinoza-el-bronce-en-panamericano-open-de-judo-32931425",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-02",
+   "publicado": "2026-11-02T20:35:22+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5223,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "914fc52941978aea",
+   "titulo": "Reforma al TEJA plantea que el Ejecutivo envíe lista de aspirantes",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/reforma-al-teja-plantea-que-el-ejecutivo-envie-lista-de-aspirantes-32931407",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-02",
+   "publicado": "2026-11-02T20:34:01+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7678,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
   },
   {
    "id": "b69481dfe924a919",
@@ -2543,6 +3139,31 @@
    "rubros": []
   },
   {
+   "id": "f19778d6ca987426",
+   "titulo": "Cambios en modalidad 40 afectan a las personas ahorradoras",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/cambios-en-modalidad-40-afectan-a-las-personas-ahorradoras-32931366",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-02",
+   "publicado": "2026-11-02T20:21:49+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7475,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
    "id": "021322461c4c9646",
    "titulo": "SAT puede inmovilizar cuentas bancarias en noviembre por adeudos fiscales, declaraciones omitidas y requerimientos desatendidos",
    "url": "https://www.elimparcial.com/dinero/2026/11/01/ya-es-oficial-el-sat-bloqueara-en-noviembre-las-cuentas-bancarias-de-contribuyentes-con-adeudos-fiscales-firmes-declaraciones-omitidas-o-requerimientos-desatendidos-inmovilizando-fondos-en-bbva-citibanamex-santander-banorte-y-banco-azteca/",
@@ -2635,6 +3256,58 @@
    "imagen": "https://www.elimparcial.com/resizer/v2/JBGQ6PM5LRDNRP3ATRDM74YS5I.jpg?auth=f0b4ed9e3e6605a23c74bfe5c09734ca621ff6a8e2dfe9bf82008495fcd6e2ff&smart=true&width=4330&height=2886",
    "rubros": [
     "espectaculos"
+   ]
+  },
+  {
+   "id": "8e40ab6eaeed14e9",
+   "titulo": "Aceptan padres prohibición de celular, pero persiste preocupación",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/aceptan-padres-prohibicion-de-celular-pero-persiste-preocupacion-32931178",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-02",
+   "publicado": "2026-11-02T20:05:14+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5239,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "9f23c8654d0b830f",
+   "titulo": "Suman arqueros bajacalifornianos experiencia en Serie Mundial Indoor",
+   "url": "https://oem.com.mx/lavozdelafrontera/deportes/suman-arqueros-bajacalifornianos-experiencia-en-serie-mundial-indoor-32931358",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-02",
+   "publicado": "2026-11-02T20:05:08+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6087,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "deportes"
    ]
   },
   {
@@ -2732,6 +3405,31 @@
    ]
   },
   {
+   "id": "b7745c1178e6e4bd",
+   "titulo": "Floristas de Mexicali reportan caída del 80% en ventas por Día de Muertos",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/floristas-de-mexicali-reportan-caida-del-80-en-ventas-por-dia-de-muertos-32931091",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-02",
+   "publicado": "2026-11-02T19:59:00+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.769,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
    "id": "18f27695daf019dd",
    "titulo": "Familias rinden tributo a sus difuntos en panteones por Día de Muertos",
    "url": "https://oem.com.mx/lavozdelafrontera/local/familias-rinden-tributo-a-sus-difuntos-en-panteones-por-dia-de-muertos-32930607",
@@ -2802,6 +3500,33 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/AVRSK3OOKFGPNM6OFUJODGPPYA.jpeg?auth=2f1cecc69bd2eb881ed1649fa5267340ea8402b83de05afa9f891fb52354b1c4&smart=true&width=900&height=1600",
+   "rubros": []
+  },
+  {
+   "id": "9320818ce4dd14ae",
+   "titulo": "Vecinos denuncian quema constante de basura en tiraderos clandestinos de Playas de Tijuana",
+   "url": "https://oem.com.mx/elsoldetijuana/local/denuncian-quema-de-basura-en-tiraderos-clandestinos-de-playas-de-tijuana-32931064",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [
+    "Playas de Tijuana"
+   ],
+   "alcance": "zona",
+   "fecha": "2026-11-02",
+   "publicado": "2026-11-02T19:52:40+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8122,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
    "rubros": []
   },
   {
@@ -3594,6 +4319,32 @@
    "rubros": []
   },
   {
+   "id": "283d88e0a0f53f99",
+   "titulo": "Britney Spears arremete contra su hermana y Kevin Federline",
+   "url": "https://www.uniradioinforma.com/fama/britney-spears-arremete-su-hermana-kevin-federline-n912169",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-02",
+   "publicado": "2026-11-02T18:09:00-07:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6145,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/11/6ae934c27ebb8.jfif",
+   "rubros": [
+    "espectaculos"
+   ]
+  },
+  {
    "id": "bfb7edf096d5ce74",
    "titulo": "Chumel Torres y su equipo apoyaron a un joven que afirmaba haber recibido el respaldo de Stephen Hawking para estudiar en Oxford, la historia resultó desacreditada y el segmento original fue retirado de El Pulso de la República",
    "url": "https://www.elimparcial.com/mexico/2026/11/02/chumel-torres-y-su-equipo-apoyaron-a-un-joven-que-afirmaba-haber-recibido-el-respaldo-de-stephen-hawking-para-estudiar-en-oxford-la-historia-resulto-desacreditada-y-el-segmento-original-fue-retirado-de-el-pulso-de-la-republica/",
@@ -3918,6 +4669,79 @@
    "rubros": []
   },
   {
+   "id": "6458e81bb2f03d99",
+   "titulo": "Congreso local aprueba reforma para actualizar disposiciones que regulan las casas de empeño en Baja California",
+   "url": "https://www.uniradioinforma.com/gobierno/congreso-local-aprueba-reforma-actualizar-disposiciones-regulan-casas-empeno-baja-california-n911996",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-11-02",
+   "publicado": "2026-11-02T17:37:00-07:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5861,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "076ef713f6c85e4d",
+   "titulo": "La Sauceda honra al \"guardián de las mariposas\" con altar",
+   "url": "https://www.uniradioinforma.com/sociedad/la-sauceda-honra-guardian-mariposas-altar-n912166",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-02",
+   "publicado": "2026-11-02T17:37:00-07:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.494,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "619e37ecb1a8d36b",
+   "titulo": "Unison apuesta por energía solar con instalación de 56 paneles",
+   "url": "https://www.uniradioinforma.com/sociedad/unison-apuesta-energia-solar-instalacion-56-paneles-n912164",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-02",
+   "publicado": "2026-11-02T17:34:00-07:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4687,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
    "id": "b93590a7b1115b07",
    "titulo": "Ely Sallard busca continuar en el servicio público en Sonora y afirma que la ciudadanía decidirá sus aspiraciones rumbo a las elecciones de 2027",
    "url": "https://www.elimparcial.com/son/hermosillo/2026/11/02/ely-sallard-busca-continuar-en-el-servicio-publico-en-sonora-y-afirma-que-la-ciudadania-decidira-sus-aspiraciones-rumbo-a-las-elecciones-de-2027/",
@@ -3992,6 +4816,25 @@
    "rubros": [
     "ia"
    ]
+  },
+  {
+   "id": "ce32e5d7e6f4d0cc",
+   "titulo": "US citizen caught entering country illegally in Southern California, fined $5,000",
+   "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxObFJueFVUM184T29ud05YRXB4ZHdKVUdzRjBqZFNGT1dHSHh4NmdKLTdvOC1ZcHFrX2VyVTRmWkw3UUhQQXVMLUo0RlMzNWpvRXVnRDJsLTdEVFhYR0IxX1NIaENUbWhZR3NjSXcwN2pPbm10Y1RCZUJYcjFQNUpjcW5ZWXNjRHpXRms3V0Joc0xDNGdPTEHSAZsBQVVfeXFMUEJkOTN5eU0tY2Yyb3hIX1pBcHd5ZE1iMjBSdTVvdzJBNjkxWTBraUZwRkdLRE1lODZlUUZUbFFxb3J3bHQ4eDNud2J2a2hnaHVNamdXNDk2YlZRVi1ZNG5PdHZkN2NxMTAyaUZOZkVMQXdDRV9ldVZaQl91RDFRNHoyelQxQWhXS0JKM3VTczFiMlYxMmNMNDhfeEU?oc=5",
+   "dominio": "fox5sandiego.com",
+   "fuente": "gn-4b075bf74df6",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-02",
+   "publicado": "2026-11-02T17:24:30+00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
   },
   {
    "id": "7f88f0436f2a6801",
@@ -4251,6 +5094,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/11/6ae91a9ad629b.jpeg",
    "rubros": []
   },
   {
@@ -4326,6 +5170,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/11/6ae9159eaf831.jpg",
    "rubros": [
     "politica"
    ]
@@ -4378,6 +5223,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/11/6ae911efc95a5.jpg",
    "rubros": []
   },
   {
@@ -7111,30 +7957,6 @@
    "rubros": []
   },
   {
-   "id": "7f01096e688c6664",
-   "titulo": "Falsificaron un acta de cateo y un oficio oficial para inculpar a una persona en Guerrero, pero los tres servidores públicos terminaron condenados a cuatro años de prisión por esos documentos",
-   "url": "https://www.elimparcial.com/mexico/2026/11/01/falsificaron-un-acta-de-cateo-y-un-oficio-oficial-para-inculpar-a-una-persona-en-guerrero-pero-los-tres-servidores-publicos-terminaron-condenados-a-cuatro-anos-de-prision-por-esos-documentos/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "fuera",
-   "fecha": "2026-11-02",
-   "publicado": "2026-11-02T06:55:37+00:00",
-   "capturado": "2026-11-02T15:45:46+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.7285,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/7XU5GLVBOZBMTNTIWJ4W66WGU4.png?auth=517597b7f7250dd5f386d42474cb87de60411c9b04e14cf42375919cebc18ca4&smart=true&width=1920&height=1080",
-   "rubros": []
-  },
-  {
    "id": "3954bde86c94cc64",
    "titulo": "Anthropic advierte que usuarios de su IA que sean crueles o abusivos con ella podrían recibir un veto permanente, una medida que busca proteger el comportamiento de sus modelos y evitar que el maltrato influya en sus respuestas",
    "url": "https://www.elimparcial.com/locurioso/2026/11/01/anthropic-advierte-que-usuarios-de-su-ia-que-sean-crueles-o-abusivos-con-ella-podrian-recibir-un-veto-permanente-una-medida-que-busca-proteger-el-comportamiento-de-sus-modelos-y-evitar-que-el-maltrato-influya-en-sus-respuestas/",
@@ -8438,54 +9260,6 @@
    ]
   },
   {
-   "id": "559735f51fb2c1a0",
-   "titulo": "Suprema Corte deja firme el desalojo de un hombre de 83 años que vivía desde hace 17 años en un departamento de Iztapalapa y acumuló 54 meses de renta sin pagar, luego de rechazar por seis votos contra tres el recurso con el que buscaba evitar perder su vivienda",
-   "url": "https://www.elimparcial.com/mexico/2026/10/31/suprema-corte-deja-firme-el-desalojo-de-un-hombre-de-83-anos-que-vivia-desde-hace-17-anos-en-un-departamento-de-iztapalapa-y-acumulo-54-meses-de-renta-sin-pagar-luego-de-rechazar-por-seis-votos-contra-tres-el-recurso-con-el-que-buscaba-evitar-perder-su-vivienda/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "fuera",
-   "fecha": "2026-11-02",
-   "publicado": "2026-11-02T02:05:08+00:00",
-   "capturado": "2026-11-01T13:18:57+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.7565,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/LHZPAQYGZZCNBKNMOOOP5KA5GY.png?auth=4bd6bf780b1a901d3699c8c6119ee29ea8e7d549068228f7784600b052f6e0d8&smart=true&width=1200&height=675",
-   "rubros": []
-  },
-  {
-   "id": "23699166b656e6de",
-   "titulo": "Jorge Álvarez Máynez denunció a Amílcar Olán ante la ASF por contratos para surtir casi 20 millones de órdenes de medicamentos, de las cuales más de 17 millones no habrían sido entregadas, según el dirigente de Movimiento Ciudadano",
-   "url": "https://www.elimparcial.com/mexico/2026/10/31/jorge-alvarez-maynez-denuncio-a-amilcar-olan-ante-la-asf-por-contratos-para-surtir-casi-20-millones-de-ordenes-de-medicamentos-de-las-cuales-mas-de-17-millones-no-habrian-sido-entregadas-segun-el-dirigente-de-movimiento-ciudadano/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-02",
-   "publicado": "2026-11-02T02:04:39+00:00",
-   "capturado": "2026-11-01T06:01:37+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.7344,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/SEJSRRQ46NCFBBC3K744RZDG3I.png?auth=51eccd17e242235a53ae4700247ecb84f5d3749e789ab61723984b6c99a83190&smart=true&width=1200&height=675",
-   "rubros": []
-  },
-  {
    "id": "c1f5cd1da464e0cd",
    "titulo": "Un hombre de 63 años escaló los 14 volcanes más altos de Guatemala en 14 días consecutivos, recorrió rutas de más de 3 mil metros de altura y estableció un récord Guinness que reconoce su resistencia y preparación física",
    "url": "https://www.elimparcial.com/locurioso/2026/11/01/un-hombre-de-63-anos-escalo-los-14-volcanes-mas-altos-de-guatemala-en-14-dias-consecutivos-recorrio-rutas-de-mas-de-3-mil-metros-de-altura-y-establecio-un-record-guinness-que-reconoce-su-resistencia-y-preparacion-fisica/",
@@ -9176,6 +9950,34 @@
    "rubros": []
   },
   {
+   "id": "fd2da5e8b160b1da",
+   "titulo": "Molina quiere otra Taddei en Baja California",
+   "url": "https://afntijuana.info/afn_politico/183733_molina_quiere_otra_taddei_en_baja_california",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-11-02",
+   "publicado": "2026-11-02T00:00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5757,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.afnbc.com/images.php?src=imagenes/afnpolitico21126f.jpg&w=500&h=250",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
    "id": "f72060beae1059f2",
    "titulo": "Dedican un altar en \"El Chaparral\" a 60 migrantes fallecidos detenidos por el ICE",
    "url": "https://afntijuana.info/informacion_general/183728_dedican_un_altar_en_el_chaparral_a_60_migrantes_fallecidos_detenidos_por_el_ice",
@@ -9283,6 +10085,32 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.afnbc.com/images.php?src=imagenes/guillermo-rivera-02112026.jpg&w=500&h=250",
+   "rubros": []
+  },
+  {
+   "id": "bab0601277a08e73",
+   "titulo": "Reunió el \"Día de Muertos\" a cientos de familias en panteones",
+   "url": "https://afntijuana.info/informacion_general/183731_reunio_el_dia_de_muertos_a_cientos_de_familias_en_panteones",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-02",
+   "publicado": "2026-11-02T00:00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8017,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.afnbc.com/images.php?src=imagenes/diademuertos21126ds.jpg&w=500&h=250",
    "rubros": []
   },
   {
@@ -9474,6 +10302,34 @@
    },
    "imagen": "https://www.afnbc.com/images.php?src=imagenes/lourdes-lopez-02112026.jpg&w=500&h=250",
    "rubros": []
+  },
+  {
+   "id": "86309122d8fdca0d",
+   "titulo": "Esperan gran afluencia de votantes en elecciones de EU",
+   "url": "https://afntijuana.info/informacion_general/183732_esperan_gran_afluencia_de_votantes_en_elecciones_de_eu",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-02",
+   "publicado": "2026-11-02T00:00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6988,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.afnbc.com/images.php?src=imagenes/hernanraulochoa21126f.jpg&w=500&h=250",
+   "rubros": [
+    "politica"
+   ]
   },
   {
    "id": "7c946b5a54d108dd",
@@ -9822,6 +10678,34 @@
    "imagen": "https://www.afnbc.com/images.php?src=imagenes/lenny-kravitz-02112026.jpg&w=500&h=250",
    "rubros": [
     "espectaculos"
+   ]
+  },
+  {
+   "id": "28a066283b6129c4",
+   "titulo": "Detuvo la Policía de Tijuana a 863 personas durante octubre",
+   "url": "https://afntijuana.info/informacion_general/183730_detuvo_la_policia_de_tijuana_a_863_personas_durante_octubre",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-02",
+   "publicado": "2026-11-02T00:00:00",
+   "capturado": "2026-11-03T01:46:25+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6249,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.afnbc.com/images.php?src=imagenes/detuvo21126gh.jpeg&w=500&h=250",
+   "rubros": [
+    "seguridad"
    ]
   },
   {
