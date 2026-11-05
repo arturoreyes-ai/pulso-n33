@@ -1,14 +1,14 @@
 {
  "esquema": 1,
- "generado": "2026-11-05T07:20:05+00:00",
+ "generado": "2026-11-05T20:40:12+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 8908,
- "posts_vigentes": 1349,
- "opinion": 8003,
- "repetidos": 660,
- "reacciones": 576,
+ "comentarios_vigentes": 8976,
+ "posts_vigentes": 1363,
+ "opinion": 8063,
+ "repetidos": 665,
+ "reacciones": 582,
  "por_zona": {
   "Ensenada": 191,
   "Mexicali": 123,
@@ -16,21 +16,21 @@
   "San Diego": 44,
   "San Felipe": 6,
   "San Quintín": 28,
-  "Tecate": 194,
-  "Tijuana": 3615,
-  "estatal": 3869,
-  "internacional": 252,
+  "Tecate": 197,
+  "Tijuana": 3656,
+  "estatal": 3883,
+  "internacional": 262,
   "nacional": 525
  },
  "por_cuenta": {
-  "aztecabc_fb": 419,
-  "blanconegro_fb": 3342,
-  "blancorojo_fb": 2394,
-  "ndtijuana_fb": 2622,
-  "psn_fb": 131
+  "aztecabc_fb": 432,
+  "blanconegro_fb": 3375,
+  "blancorojo_fb": 2396,
+  "ndtijuana_fb": 2641,
+  "psn_fb": 132
  },
  "por_idioma": {
-  "es": 8908
+  "es": 8976
  },
  "por_tema": [
   {
@@ -64,6 +64,16 @@
    "posts": 21
   },
   {
+   "tema": "trump",
+   "comentarios": 19,
+   "posts": 15
+  },
+  {
+   "tema": "playas",
+   "comentarios": 16,
+   "posts": 14
+  },
+  {
    "tema": "resultados",
    "comentarios": 13,
    "posts": 11
@@ -71,11 +81,6 @@
   {
    "tema": "prision",
    "comentarios": 12,
-   "posts": 11
-  },
-  {
-   "tema": "escuelas",
-   "comentarios": 11,
    "posts": 11
   },
   {
@@ -87,6 +92,11 @@
    "tema": "inversion",
    "comentarios": 8,
    "posts": 8
+  },
+  {
+   "tema": "elecciones",
+   "comentarios": 7,
+   "posts": 6
   },
   {
    "tema": "halloween",
@@ -104,19 +114,9 @@
    "posts": 4
   },
   {
-   "tema": "democratas",
-   "comentarios": 4,
-   "posts": 3
-  },
-  {
    "tema": "sismo",
    "comentarios": 4,
    "posts": 2
-  },
-  {
-   "tema": "leon",
-   "comentarios": 3,
-   "posts": 3
   },
   {
    "tema": "panteones",
@@ -130,9 +130,9 @@
   }
  ],
  "sentimiento": {
-  "positivo": 937,
-  "negativo": 3957,
-  "neutral": 3109,
+  "positivo": 942,
+  "negativo": 3987,
+  "neutral": 3134,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -172,7 +172,7 @@
    "activa": true
   }
  ],
- "releidos": 24,
+ "releidos": 19,
  "destacados": [
   {
    "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/1439111101011231",
@@ -192,52 +192,6 @@
    "sentimiento": {
     "positivo": 0,
     "negativo": 7,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0221rXtJrDv85CPz1dWHpDH1LEArxGvRbvM42QTHhpGusud79ZcaFujEKzwosL6d8ql",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-11-04",
-   "titulo": "🕊️ Localizan sin vida a Sayuri, joven de 20 años desaparecida en Tijuana; presentaba huellas de violencia",
-   "tipo": "imagen",
-   "likes": 1902,
-   "comentarios": 165,
-   "compartidos": 165,
-   "alcance": "zona",
-   "publicado": "2026-11-04T07:52:20+00:00",
-   "cosechados": 9,
-   "opinion": 7,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 6,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0qKm3ko6zUK57KqwzW5HA2NvQEqATD1WWNNkDtthdPeUmHH8YkUkfefydWN4Cos5xl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "internacional",
-   "fecha": "2026-11-04",
-   "titulo": "🚨🇺🇲 COMPLETAMENTE HISTÓRICO: Deb Haaland (Demócratas) ha ganado la elección para Gobernadora de Nuevo México",
-   "tipo": "imagen",
-   "likes": 964,
-   "comentarios": 24,
-   "compartidos": 21,
-   "alcance": "extranjero",
-   "publicado": "2026-11-04T10:43:08+00:00",
-   "cosechados": 8,
-   "opinion": 8,
-   "sentimiento": {
-    "positivo": 6,
-    "negativo": 0,
     "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -317,29 +271,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0363LzHdDKBL5VDykNLVVfLvihCiGfeUqt7ddmt2r57RKrucqgDMsDKsNszKLz1b44l",
-   "cuenta": "blanconegro_fb",
-   "zona": "nacional",
-   "fecha": "2026-11-04",
-   "titulo": "🇲🇽🇺🇸 ¡Histórico! Xavier Becerra será el primer gobernador de origen mexicano elegido por voto popular en California",
-   "tipo": "imagen",
-   "likes": 603,
-   "comentarios": 54,
-   "compartidos": 48,
-   "alcance": "nacional",
-   "publicado": "2026-11-04T07:37:43+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 2,
-    "negativo": 5,
-    "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NdTijuana/videos/29719709664386514",
    "cuenta": "ndtijuana_fb",
    "zona": "estatal",
@@ -358,6 +289,29 @@
     "positivo": 1,
     "negativo": 4,
     "neutral": 5,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid084RMbL63FZiUYj4g8oENeVX1ZixKfWJJSMvkUmjRUhfmWcWucBxLZangmJQ4yAfsl",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tecate",
+   "fecha": "2026-11-05",
+   "titulo": "#NDTInforma │ Una fuga en El Hongo I puso bajo revisión la seguridad del penal. El reo, Orlando “N” escapó alrededor de las 04:20 horas de este 4 de noviembre,…",
+   "tipo": "imagen",
+   "likes": 586,
+   "comentarios": 83,
+   "compartidos": 35,
+   "alcance": "zona",
+   "publicado": "2026-11-05T02:02:01+00:00",
+   "cosechados": 10,
+   "opinion": 9,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 1,
+    "neutral": 7,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -405,29 +359,6 @@
     "positivo": 2,
     "negativo": 6,
     "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid084RMbL63FZiUYj4g8oENeVX1ZixKfWJJSMvkUmjRUhfmWcWucBxLZangmJQ4yAfsl",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Tecate",
-   "fecha": "2026-11-05",
-   "titulo": "#NDTInforma │ Una fuga en El Hongo I puso bajo revisión la seguridad del penal. El reo, Orlando “N” escapó alrededor de las 04:20 horas de este 4 de noviembre,…",
-   "tipo": "imagen",
-   "likes": 471,
-   "comentarios": 48,
-   "compartidos": 23,
-   "alcance": "zona",
-   "publicado": "2026-11-05T02:02:01+00:00",
-   "cosechados": 10,
-   "opinion": 9,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 1,
-    "neutral": 7,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -527,6 +458,76 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0CAcEvaobsBysGBM46Kvt8jEV4sDJq3BmFGbHKefX78b1kM1CKTDzUFesDjJ5kEpWl",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-11-05",
+   "titulo": "🚨🚕 Denuncian cobro de 18 pesos y negativa de servicio en taxis verdes con blanco de la ruta Otay-Aeropuerto",
+   "tipo": "imagen",
+   "likes": 181,
+   "comentarios": 121,
+   "compartidos": 50,
+   "alcance": "zona",
+   "publicado": "2026-11-05T19:02:12+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 7,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/aztecabc/posts/pfbid037WrgTYowvv5Nu51qibAkHSrAtbeQojParXdTedUhYfyyL83V7SRfPHR7HsUcvsjJl",
+   "cuenta": "aztecabc_fb",
+   "zona": "estatal",
+   "fecha": "2026-11-05",
+   "titulo": "¡SE APAGAN! Televisores imterrumpirán su señal ⚠️",
+   "tipo": "otro",
+   "likes": 150,
+   "comentarios": 24,
+   "compartidos": 8,
+   "alcance": "nacional",
+   "publicado": "2026-11-05T19:41:53+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 5,
+    "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/reel/29273075355621787",
+   "cuenta": "psn_fb",
+   "zona": "estatal",
+   "fecha": "2026-11-05",
+   "titulo": "#LoVisteEnPSN | Localizan sin vida a Sayuri, joven de 20 años reportada como desaparecida en Natura",
+   "tipo": "video",
+   "likes": 136,
+   "comentarios": 0,
+   "compartidos": 10,
+   "reproducciones": 9158,
+   "alcance": "nacional",
+   "publicado": "2026-11-05T04:01:03+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/NdTijuana/posts/pfbid0FxZGTXCbmEN9LkXxkJCCnJ9neA8EkrKxHNFNjzZ61Ar5gqXAwasNb78KbVo9hxkGl",
    "cuenta": "ndtijuana_fb",
    "zona": "internacional",
@@ -620,23 +621,117 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0kHQRzFgKE1qrquFVxiJ8tm7J1y2eLRyb6StB3Xkduu4W6eUHhWq17gfj2tnBVsJcl",
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02tdkWh6fixBLVYhsWa7wvCzbgzRkM33QZpYSUZ7EnGvVg7Gccp12STcZJh5ZGYEKql",
+   "cuenta": "blanconegro_fb",
+   "zona": "internacional",
+   "fecha": "2026-11-05",
+   "titulo": "“Quiero pedir disculpas al pueblo”: Santiago Peña renuncia como presidente de Paraguay",
+   "tipo": "otro",
+   "likes": 93,
+   "comentarios": 44,
+   "compartidos": 43,
+   "alcance": "extranjero",
+   "publicado": "2026-11-05T18:01:13+00:00",
+   "cosechados": 8,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 3,
+    "neutral": 3,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/reel/1134288372567475",
    "cuenta": "ndtijuana_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-11-04",
-   "titulo": "#NDTInforma Detienen a anciano ebrio por apuñalar a su compañero de copas",
-   "tipo": "imagen",
-   "likes": 101,
-   "comentarios": 15,
-   "compartidos": 6,
-   "alcance": "zona",
-   "publicado": "2026-11-04T18:33:58+00:00",
-   "cosechados": 10,
-   "opinion": 10,
+   "zona": "estatal",
+   "fecha": "2026-11-05",
+   "titulo": "🚨 Llegó herido de bala y pidió auxilio a policías, pero lo que ocurrió después terminó en tragedia en Lomas del Porvenir.",
+   "tipo": "video",
+   "likes": 88,
+   "comentarios": 2,
+   "compartidos": 1,
+   "reproducciones": 6651,
+   "alcance": "nacional",
+   "publicado": "2026-11-05T18:43:41+00:00",
+   "cosechados": 2,
+   "opinion": 2,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 4,
-    "neutral": 6,
+    "negativo": 2,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/videos/1740813564429176",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-11-05",
+   "titulo": "Actividades para adultos mayores “vejez digna” en centro comunitario de la colonia Alemán",
+   "tipo": "video",
+   "likes": 76,
+   "comentarios": 26,
+   "compartidos": 47,
+   "reproducciones": 6222,
+   "alcance": "zona",
+   "publicado": "2026-11-05T18:30:16+00:00",
+   "cosechados": 7,
+   "opinion": 3,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 1,
+    "neutral": 1,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02Gc1rj3pEbkrFc95im54wQ1iiPbMtygJJcoakGnaLkxbLNMGUqBwadxgELuu6pNJzl",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-11-05",
+   "titulo": "💵🇺🇸 ¡Así se cotiza el dólar en Tijuana!",
+   "tipo": "imagen",
+   "likes": 66,
+   "comentarios": 24,
+   "compartidos": 38,
+   "alcance": "zona",
+   "publicado": "2026-11-05T17:19:05+00:00",
+   "cosechados": 8,
+   "opinion": 7,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 3,
+    "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0xcqiBAazpKLycX6WBqLbaCwzoebKvSKhbUfREM1gTDZuDuJtKz3LtVq1m368iCaal",
+   "cuenta": "blanconegro_fb",
+   "zona": "internacional",
+   "fecha": "2026-11-05",
+   "titulo": "⚽🇵🇹 Cristiano Ronaldo anuncia su retiro de la selección de Portugal tras 23 años",
+   "tipo": "imagen",
+   "likes": 63,
+   "comentarios": 26,
+   "compartidos": 36,
+   "alcance": "extranjero",
+   "publicado": "2026-11-05T18:37:11+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -694,6 +789,29 @@
    ]
   },
   {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0PkgphoSf3zhezqmEqNU5C2vtZgY5EsrhwiVRWNBuT4Ld85vjfF5dsxqFfmBHbpsGl",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-11-05",
+   "titulo": "#NDTInforma Detienen a dos tras ataque armado en la 5 y 10",
+   "tipo": "imagen",
+   "likes": 55,
+   "comentarios": 10,
+   "compartidos": 1,
+   "alcance": "zona",
+   "publicado": "2026-11-05T18:18:59+00:00",
+   "cosechados": 10,
+   "opinion": 9,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 4,
+    "neutral": 4,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/NdTijuana/posts/pfbid0fXDFSUKBYLcamHD14XNdfWHFERoHmaVDraeUgrd4Ku9FjSgfS4YsPPWgZ9bWtgAul",
    "cuenta": "ndtijuana_fb",
    "zona": "Tijuana",
@@ -717,63 +835,40 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/redespsn/posts/pfbid06GtYhCbhACi4kvHqHKcS5bCez769LniCuJKzKsNQwvix5kuYW7eYGujvk8ffZGhml",
-   "cuenta": "psn_fb",
-   "zona": "internacional",
-   "fecha": "2026-11-04",
-   "titulo": "#Internacional | El cantante texano Bobby Pulido ganó la elección para representar al distrito 15 de Texas en la Cámara de Representantes de Estados Unidos.",
-   "tipo": "otro",
-   "likes": 46,
-   "comentarios": 1,
-   "compartidos": 2,
-   "alcance": "extranjero",
-   "publicado": "2026-11-04T17:11:33+00:00",
-   "cosechados": 1,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid025yrMWMxguFFwKSzaaWwGFRbzii4S8MommicSiwKkooXELrkYxydCXjDg1MyrSwoVl",
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0ANy6eFZUqz7ZxufrQa7gBfYmDNmWDRUmEKpEcvGzUYsBm37Bfrmeyuoex5MczoJcl",
    "cuenta": "ndtijuana_fb",
    "zona": "Tijuana",
-   "fecha": "2026-11-04",
-   "titulo": "#NDTINforma │ Acude a Telcel por línea suspendida y denuncia que le aparecen 10 números a su nombre",
+   "fecha": "2026-11-05",
+   "titulo": "#NDTInforma Detienen a dos jóvenes por asaltar a conductor de Uber",
    "tipo": "imagen",
-   "likes": 32,
-   "comentarios": 7,
-   "compartidos": 8,
+   "likes": 41,
+   "comentarios": 2,
+   "compartidos": 2,
    "alcance": "zona",
-   "publicado": "2026-11-04T23:50:01+00:00",
+   "publicado": "2026-11-05T19:09:51+00:00",
    "cosechados": 4,
    "opinion": 4,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 3,
-    "neutral": 1,
+    "negativo": 1,
+    "neutral": 3,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02vdWj2h3jBiwgE1F2tKhuSyKFWGLLs1UCQBxyAaYVftwStyRiaM6NhPqeQJsx6yUMl",
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02VpZWdaJLpxvD3nbE8F766HtpAmAnktjxZDtenVfZLshB8ijNUKQxw59QPt9cTTckl",
    "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
+   "zona": "internacional",
    "fecha": "2026-11-05",
-   "titulo": "🎤🔥 ¡Virlán García regresa a Tijuana con su “Mi Entorno Tour”!",
-   "tipo": "imagen",
-   "likes": 30,
-   "comentarios": 9,
-   "compartidos": 26,
-   "alcance": "zona",
-   "publicado": "2026-11-05T00:05:22+00:00",
+   "titulo": "Vuelos en Europa se vieron obligados a cambiar de rumbo, aterrizar antes o recibir escoltas de aviones de combate tras una serie de amenazas de bomba.",
+   "tipo": "otro",
+   "likes": 33,
+   "comentarios": 17,
+   "compartidos": 34,
+   "alcance": "extranjero",
+   "publicado": "2026-11-05T19:27:10+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -832,17 +927,17 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid03sY6oMvAii3ot2BZr5UwUXufoyMzN1vLzj6NNpynoUAt2R377bh2PuthcoSQTVYBl",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-11-04",
-   "titulo": "#NDTInforma Evelyn Sánchez lleva al Congreso la exigencia de mejores calles",
-   "tipo": "imagen",
-   "likes": 26,
-   "comentarios": 12,
-   "compartidos": 2,
-   "alcance": "zona",
-   "publicado": "2026-11-04T20:01:39+00:00",
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02VvgE4vZipEzrZJ35yZ5UbWyZMFYzXW5eVvf3QULT2p7LfeAvoDbLzXnX3rp9t8X9l",
+   "cuenta": "blanconegro_fb",
+   "zona": "estatal",
+   "fecha": "2026-11-05",
+   "titulo": "🚨 Denuncian ingreso de sujetos presuntamente armados al CBTIS 155 para amenazar de muerte a un estudiante",
+   "tipo": "otro",
+   "likes": 24,
+   "comentarios": 1,
+   "compartidos": 1,
+   "alcance": "nacional",
+   "publicado": "2026-11-05T20:37:35+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -855,23 +950,46 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/redespsn/posts/pfbid029pXjcNE41TChUqLp2pEEsmgVZfbz4eKRM1zsJzm1Vy4XxgQhain9hAZEVciM8U7ql",
-   "cuenta": "psn_fb",
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid09o7VyRbM3jLGteQdw9EzAtK8BXb2WY1mCvwyoZqNr7uBMGZyz5UKnfVaXU6TMxVol&id=100086488503408",
+   "cuenta": "blancorojo_fb",
    "zona": "internacional",
-   "fecha": "2026-11-04",
-   "titulo": "#Internacional | El cantante texano Bobby Pulido ganó la elección para representar al distrito 15 de Texas en la Cámara de Representantes de Estados Unidos.",
-   "tipo": "otro",
-   "likes": 24,
-   "comentarios": 1,
-   "compartidos": 2,
+   "fecha": "2026-11-05",
+   "titulo": "🇭🇹🇸🇻🚨 HAITÍ ES LIBRE DE PANDILLAS Y BANDAS CRIMINALES GRACIAS A BUKELE",
+   "tipo": "imagen",
+   "likes": 19,
+   "comentarios": 2,
+   "compartidos": 1,
    "alcance": "extranjero",
-   "publicado": "2026-11-04T17:11:33+00:00",
-   "cosechados": 1,
+   "publicado": "2026-11-05T20:14:10+00:00",
+   "cosechados": 2,
    "opinion": 1,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 0,
-    "neutral": 1,
+    "negativo": 1,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0KAKicG1EvJV1chrdgH3Tn4ShWcaSGNo217Xn3WtHDbJmdTur6FryYMkS7GUCZFd7l",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tecate",
+   "fecha": "2026-11-05",
+   "titulo": "#NDTInforma | Reparan semáforos y refuerzan señalización en Tecate",
+   "tipo": "imagen",
+   "likes": 16,
+   "comentarios": 3,
+   "compartidos": 2,
+   "alcance": "zona",
+   "publicado": "2026-11-05T02:00:03+00:00",
+   "cosechados": 3,
+   "opinion": 3,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -970,115 +1088,21 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02wTM6hTd1oxxKWUMqWqBKpYcouthTQo3Eo4aXiP4dXgpKFhV4wozoCrNsCNz4zHrrl",
-   "cuenta": "ndtijuana_fb",
-   "zona": "nacional",
-   "fecha": "2026-11-04",
-   "titulo": "Protección Civil aclara: no existe una alerta por desastre inminente en México.",
-   "tipo": "imagen",
-   "likes": 12,
-   "comentarios": 3,
-   "compartidos": 4,
-   "alcance": "nacional",
-   "publicado": "2026-11-04T14:51:34+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/reel/29273075355621787",
-   "cuenta": "psn_fb",
-   "zona": "estatal",
-   "fecha": "2026-11-05",
-   "titulo": "#LoVisteEnPSN | Localizan sin vida a Sayuri, joven de 20 años reportada como desaparecida en Natura",
-   "tipo": "video",
-   "likes": 12,
-   "comentarios": 0,
-   "compartidos": 0,
-   "reproducciones": 1037,
-   "alcance": "nacional",
-   "publicado": "2026-11-05T04:01:03+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0KAKicG1EvJV1chrdgH3Tn4ShWcaSGNo217Xn3WtHDbJmdTur6FryYMkS7GUCZFd7l",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Tecate",
-   "fecha": "2026-11-05",
-   "titulo": "#NDTInforma | Reparan semáforos y refuerzan señalización en Tecate",
-   "tipo": "imagen",
-   "likes": 11,
-   "comentarios": 2,
-   "compartidos": 2,
-   "alcance": "zona",
-   "publicado": "2026-11-05T02:00:03+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02ziHGPJxDjJMvnGaVRTGKkUup65xk2FopNbmX5xEB7yrXGw23ZxdbFVWCn5cpa2Zsl",
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02kaDruUeYbyJm9Dt7n4Ar1iTEUQpYJRGYx6F3SYSoaNcjdGvuSGnMjDJz7EtJH4yyl",
    "cuenta": "blanconegro_fb",
    "zona": "estatal",
    "fecha": "2026-11-05",
-   "titulo": "La CNPC aclaró el motivo del llamado a preparar una mochila de emergencia, ante las especulaciones de una crisis mundial",
+   "titulo": "La Secretaría Anticorrupción detalló cómo operó la red de los Hernández Casillas para obtener contratos millonarios para material electoral",
    "tipo": "otro",
    "likes": 10,
    "comentarios": 5,
-   "compartidos": 4,
+   "compartidos": 20,
    "alcance": "nacional",
-   "publicado": "2026-11-05T06:26:14+00:00",
+   "publicado": "2026-11-05T20:12:09+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
     "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/reel/1809570447023542",
-   "cuenta": "psn_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-11-04",
-   "titulo": "#primersistemadenoticias #bajacalifornia #tijuana #mexicali #rosarito #ensenada #sanquintin #sanfelipe #tecate #marinadelpilar #marinadelpilaravila #gobierno #…",
-   "tipo": "video",
-   "likes": 9,
-   "comentarios": 1,
-   "compartidos": 0,
-   "reproducciones": 389,
-   "alcance": "zona",
-   "publicado": "2026-11-04T16:01:13+00:00",
-   "cosechados": 1,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 1,
     "negativo": 0,
     "neutral": 0,
     "sin_clasificar": 0,
@@ -1110,63 +1134,18 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/redespsn/posts/pfbid08xqjuNim2gdqAvJ9qXdhquzMbSQWKDgj7YrK7Q7w6LU8WQ9fdC6ksde3W8LdyrA8l",
+   "url": "https://www.facebook.com/reel/1121985653781834",
    "cuenta": "psn_fb",
-   "zona": "estatal",
-   "fecha": "2026-11-04",
-   "titulo": "#Nacional La presidenta provisional del INE, Blanca Yassahara Cruz García, confirmó que las contrataciones destinadas a la organización de las elecciones de 20…",
-   "tipo": "otro",
+   "zona": "Tijuana",
+   "fecha": "2026-11-05",
+   "titulo": "#primersistemadenoticias #bajacalifornia #tijuana #mexicali #rosarito #ensenada #sanquintin #sanfelipe #tecate #marinadelpilar #marinadelpilaravila #gobierno #…",
+   "tipo": "video",
    "likes": 5,
    "comentarios": 0,
-   "compartidos": 2,
-   "alcance": "nacional",
-   "publicado": "2026-11-04T16:26:11+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/aztecabc/posts/pfbid0vf9oExGWYNuto3A8NkjomV2xmS9erd7oQwGHYPj723t7KcLSo72TZYZyzgcBPgMRl",
-   "cuenta": "aztecabc_fb",
-   "zona": "estatal",
-   "fecha": "2026-11-04",
-   "titulo": "Revelan la última fotografía de Ana María antes del ACCID3NTE AÉRE0 💔📸",
-   "tipo": "otro",
-   "likes": 4,
-   "comentarios": 0,
-   "compartidos": 0,
-   "alcance": "nacional",
-   "publicado": "2026-11-04T23:00:03+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/redespsn/posts/pfbid02NTz9xifYn5vPeG4UP1kBqk6H53aFUtiu3BtJKPzpJe4qNcTBmxpXhjnTq439KRHNl",
-   "cuenta": "psn_fb",
-   "zona": "internacional",
-   "fecha": "2026-11-04",
-   "titulo": "#Internacional | Dos demócratas latinos, Gina Hinojosa y Xavier Becerra, ganaron las elecciones para gobernar Texas y California, respectivamente.",
-   "tipo": "otro",
-   "likes": 4,
-   "comentarios": 0,
    "compartidos": 1,
-   "alcance": "extranjero",
-   "publicado": "2026-11-04T17:41:44+00:00",
+   "reproducciones": 185,
+   "alcance": "zona",
+   "publicado": "2026-11-05T04:00:59+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1179,109 +1158,17 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/aztecabc/posts/pfbid0a7zoZDjYygGJwotUbamRTPWq3wpUa5FXYkgC7zda1oYTmXuBkUWLLy5tTCdSpPjxl",
-   "cuenta": "aztecabc_fb",
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02bkaCTyiRC9427U8osb2eV7VdKXDt26sfu4ociKXxEAeRR2CDTYN8F2PQZCtgKUodl",
+   "cuenta": "ndtijuana_fb",
    "zona": "Ensenada",
-   "fecha": "2026-11-04",
-   "titulo": "Se desborda el arroyo San Carlos en Ensenada e invade la zona urbana y vialidades de Maneadero. 🌧️",
-   "tipo": "otro",
-   "likes": 3,
-   "comentarios": 0,
+   "fecha": "2026-11-05",
+   "titulo": "#NDTInforma Más de 300 estudiantes reciben orientación para prevenir la violencia escolar",
+   "tipo": "imagen",
+   "likes": 4,
+   "comentarios": 1,
    "compartidos": 0,
    "alcance": "zona",
-   "publicado": "2026-11-04T11:30:00+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/redespsn/posts/pfbid0JcYSn3jive5WnTwhBhBE68xN2mUfqmtJGDfcKY6nfWXHryrZijfkCStPJRPr5LQHl",
-   "cuenta": "psn_fb",
-   "zona": "internacional",
-   "fecha": "2026-11-04",
-   "titulo": "#Internacional | Dos demócratas latinos, Gina Hinojosa y Xavier Becerra, ganaron las elecciones para gobernar Texas y California, respectivamente.",
-   "tipo": "otro",
-   "likes": 3,
-   "comentarios": 0,
-   "compartidos": 1,
-   "alcance": "extranjero",
-   "publicado": "2026-11-04T17:41:44+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02snw5i32GHyRKuWEAFoQNpLNQfF6iKFdmDfnLFZh9F48umCDgL2sRcjpmsaHtaDwgl",
-   "cuenta": "ndtijuana_fb",
-   "zona": "estatal",
-   "fecha": "2026-11-04",
-   "titulo": "#NDTInforma | Morena analizará sin prisas el relevo de Rosina del Villar en Baja California",
-   "tipo": "imagen",
-   "likes": 2,
-   "comentarios": 1,
-   "compartidos": 1,
-   "alcance": "estatal",
-   "publicado": "2026-11-04T22:38:40+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/redespsn/posts/pfbid02YDFuMjB221tWZHuhSSrtKFJv2mvAjr749v2pKbPLaKCaMjysDt2BB8Lse2mtj4Sxl",
-   "cuenta": "psn_fb",
-   "zona": "internacional",
-   "fecha": "2026-11-04",
-   "titulo": "#Deportes El Real Madrid estará visitando al AEK de Atenas este miércoles en un juego correspondiente a la fecha 4 de la Champions League.",
-   "tipo": "otro",
-   "likes": 1,
-   "comentarios": 0,
-   "compartidos": 0,
-   "alcance": "extranjero",
-   "publicado": "2026-11-04T16:28:55+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/aztecabc/posts/pfbid02xJ47zcbQ2MhGXDmhPM5xw4mtRSuEw99FZHSrttPSndv3VLG6NdX7DWhhc8zbgCmXl",
-   "cuenta": "aztecabc_fb",
-   "zona": "nacional",
-   "fecha": "2026-11-04",
-   "titulo": "3. ¿Llegará a México? Aprueban versión genérica de inyección preventiva cada seis meses 💉🩺",
-   "tipo": "otro",
-   "likes": 0,
-   "comentarios": 0,
-   "compartidos": 0,
-   "alcance": "nacional",
-   "publicado": "2026-11-04T14:40:01+00:00",
+   "publicado": "2026-11-05T19:59:08+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1338,23 +1225,69 @@
     "sin_modelo_idioma": 0
    },
    "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/redespsn/posts/pfbid02xUYFcYKxpxGYPfQQJiAGDH5Vdbyo3SxJrZYutC42r5C4dGvmE6Fp19inGtAjUXZql",
+   "cuenta": "psn_fb",
+   "zona": "nacional",
+   "fecha": "2026-11-05",
+   "titulo": "#Nacional Claudia Sheinbaum Pardo consideró que las redadas contra migrantes realizadas durante la administración de Donald Trump pudieron influir en el compor…",
+   "tipo": "imagen",
+   "likes": 0,
+   "comentarios": 0,
+   "compartidos": 0,
+   "alcance": "nacional",
+   "publicado": "2026-11-05T18:12:30+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/redespsn/posts/pfbid0XeH4eynLvQ37THWfuzBYkfTgA5e6Zgn1gwAYV3qgZjwhv4SDv1NedT8zdNnBgX4ol",
+   "cuenta": "psn_fb",
+   "zona": "Ensenada",
+   "fecha": "2026-11-05",
+   "titulo": "La FGE cumplimentó órdenes de aprehensión contra dos hombres identificados como Sergio Eugenio “N”, alias “El Queko” o “Keko”, y Luis Alberto “N”, conocido com…",
+   "tipo": "imagen",
+   "likes": 0,
+   "comentarios": 0,
+   "compartidos": 0,
+   "alcance": "zona",
+   "publicado": "2026-11-05T19:23:38+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
   }
  ],
  "salud": [
   {
    "cuenta": "aztecabc_fb",
    "estado": "ok",
-   "posts": 8,
-   "comentarios": 1,
-   "crudos": 4,
-   "fuera": 0,
+   "posts": 7,
+   "comentarios": 13,
+   "crudos": 18,
+   "fuera": 1,
    "compartidos": 0
   },
   {
    "cuenta": "blanconegro_fb",
    "estado": "ok",
    "posts": 8,
-   "comentarios": 39,
+   "comentarios": 36,
    "crudos": 40,
    "fuera": 0,
    "compartidos": 0
@@ -1362,19 +1295,19 @@
   {
    "cuenta": "blancorojo_fb",
    "estado": "ok",
-   "posts": 4,
-   "comentarios": 28,
-   "crudos": 28,
+   "posts": 1,
+   "comentarios": 2,
+   "crudos": 2,
    "fuera": 0,
-   "compartidos": 3
+   "compartidos": 7
   },
   {
    "cuenta": "ndtijuana_fb",
    "estado": "ok",
-   "posts": 7,
-   "comentarios": 39,
-   "crudos": 40,
-   "fuera": 1,
+   "posts": 8,
+   "comentarios": 19,
+   "crudos": 19,
+   "fuera": 0,
    "compartidos": 0
   },
   {
@@ -1389,12 +1322,12 @@
  ],
  "gasto": {
   "resultados": 250,
-  "gastado": 155,
+  "gastado": 123,
   "por_concepto": {
-   "aztecabc_fb": 12,
+   "aztecabc_fb": 26,
    "blanconegro_fb": 48,
-   "blancorojo_fb": 35,
-   "ndtijuana_fb": 48,
+   "blancorojo_fb": 10,
+   "ndtijuana_fb": 27,
    "psn_fb": 12
   }
  }
