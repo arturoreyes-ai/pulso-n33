@@ -3,25 +3,25 @@
  "generado": "2026-11-05",
  "ventana_dias": 7,
  "minimo": 3,
- "notas_ventana": 2402,
+ "notas_ventana": 2588,
  "notas_previas": 2814,
  "temas": [
   {
    "termino": "lluvias",
-   "n": 78,
+   "n": 79,
    "n_previo": 40,
-   "momento": 38,
+   "momento": 39,
    "zonas": {
     "Tijuana": 19,
+    "nacional": 18,
     "Ensenada": 17,
-    "nacional": 17,
     "estatal": 14,
     "Mexicali": 8,
     "San Quintín": 3,
     "Tecate": 1
    },
    "fuentes": {
-    "imparcial": 23,
+    "imparcial": 24,
     "afn": 9,
     "uniradio": 9,
     "soltij": 6,
@@ -120,6 +120,7 @@
     "d24a575e9e3ca38e",
     "d45c685f81e0c50e",
     "e5a4d64ebca84eb9",
+    "e711127e7710d639",
     "ec0e6d943a07e7d8",
     "fb3f01dcbb5b2a86",
     "fc6860318ece63e8",
@@ -127,9 +128,103 @@
     "ff682ecd4a723a7c"
    ],
    "ejemplos": [
+    "SMN alerta por lluvias fuertes en 5 estados y temperaturas bajo cero por frente frío 4; este es el pronóstico para México hoy 5 de noviembre",
     "Protección Civil pide preparar mochila de emergencia ante sismos y temporada de lluvias en Baja California",
-    "Autopista Phoenix-Flagstaff se inundó por lluvias en Arizona",
-    "Prevén temperaturas de hasta 30 grados y lluvias fuertes por Superniño a partir de diciembre"
+    "Autopista Phoenix-Flagstaff se inundó por lluvias en Arizona"
+   ]
+  },
+  {
+   "termino": "estados unidos",
+   "n": 65,
+   "n_previo": 32,
+   "momento": 33,
+   "zonas": {
+    "nacional": 50,
+    "Tijuana": 11,
+    "estatal": 4,
+    "San Diego": 3,
+    "Mexicali": 1
+   },
+   "fuentes": {
+    "imparcial": 48,
+    "uniradio": 5,
+    "gn-f8497491006c": 4,
+    "soltij": 4,
+    "jornadabc": 3,
+    "afn": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "00e2f1f177ef35d6",
+    "05b4daef96955b14",
+    "05d54206d94893d3",
+    "062ea398e0ab9fe6",
+    "06304c0509b06bed",
+    "0b462a1f623c9817",
+    "0ec6c510cf01d083",
+    "1775ef6021259939",
+    "191f1a18ab092abe",
+    "1f82c426591c4161",
+    "29cfba255cdca29e",
+    "34da4132260c33c2",
+    "3a27eccc7bf9710f",
+    "3b532124b02c0ed3",
+    "3d008042ba895af5",
+    "4206809afddc9a2a",
+    "45e8a14ac7ea854c",
+    "4b0bb9fc5856a255",
+    "5434045ce980d1e4",
+    "58bccf24260def0d",
+    "5b0b5306cdeb453a",
+    "5caab2066c984267",
+    "61a6466b25e540af",
+    "61f817cffbbdf5ff",
+    "6479e5a41ed85b6c",
+    "65279f8831f41335",
+    "694f283f5e6d813c",
+    "6aa843476ef03efe",
+    "728c5fcb374343c4",
+    "741b01f15c7506f7",
+    "79e603a631455c7d",
+    "7b462884eb7b3ee0",
+    "803e105a41f6fadf",
+    "8169274162a8c439",
+    "8207fd2ffea95e63",
+    "86d3ed4d6162ea7a",
+    "8c84e63dfe4fe797",
+    "97cea682c61820af",
+    "9c2136c85cd606f2",
+    "9d722fe43d012a89",
+    "9f03eac2a9ed3a1c",
+    "a4c0a7d8dde9d220",
+    "adbb2b30a284c86e",
+    "ae07082991813d6b",
+    "bdbce486178aaace",
+    "c37fff92ff40b191",
+    "c4d189a9b68e20dc",
+    "c614612774478b43",
+    "d26a5a257ca63d11",
+    "d474929e7383f4b5",
+    "d5c0197e69beacc7",
+    "d7b254ab674b374e",
+    "d7e9ebdf68302c85",
+    "dadd646d54e81f62",
+    "de552110e1e3963a",
+    "e21054923990550d",
+    "e2e069f9457093e4",
+    "e9ba41cf82d23a92",
+    "ea906e7beb9033dd",
+    "eb9683484ac8e2d4",
+    "ec34212f6808afe0",
+    "ef13b57b3b6e0194",
+    "ef3a292c0db27457",
+    "f5047ac5c5d359f7",
+    "fc4a0d967f5f1c33"
+   ],
+   "ejemplos": [
+    "Detienen a Luis Benítez Alcántara, el juez mexicano que presuntamente cobró 2 millones de dólares para liberar a narcotraficante ligado al exatleta olímpico Ryan Wedding, pese a que Estados Unidos había solicitado su extradición",
+    "Tijuana asegura a 32 personas por presuntamente facilitar que automovilistas se metieran a las filas de las garitas para cruzar a Estados Unidos, una práctica que altera el orden de espera y genera inconformidad entre quienes esperan su turno",
+    "Garitas de Tijuana registran filas de hasta 90 minutos este jueves (Datos actualizados a las 7:00 AM PST) El cruce fronterizo hacia Estados Unidos registra una mañana de carga vehicular intensa en Baja California, encabezada por la garita de Otay Mesa co"
    ]
   },
   {
@@ -244,103 +339,90 @@
    ]
   },
   {
-   "termino": "estados unidos",
-   "n": 59,
-   "n_previo": 32,
-   "momento": 27,
+   "termino": "election",
+   "n": 43,
+   "n_previo": 15,
+   "momento": 28,
    "zonas": {
-    "nacional": 45,
-    "Tijuana": 10,
-    "estatal": 4,
-    "San Diego": 2,
-    "Mexicali": 1
+    "San Diego": 38,
+    "nacional": 5
    },
    "fuentes": {
-    "imparcial": 43,
-    "uniradio": 5,
-    "soltij": 4,
-    "gn-f8497491006c": 3,
-    "jornadabc": 3,
-    "afn": 1
+    "kpbs": 22,
+    "timessd": 5,
+    "voiceofsd": 5,
+    "gn-7cd794b7d847": 2,
+    "inewsource": 2,
+    "gn-19c2d380772f": 1,
+    "gn-46bc88bd6277": 1,
+    "gn-4b075bf74df6": 1,
+    "gn-5bad11419dae": 1,
+    "gn-8a489297fa14": 1,
+    "gn-a956e11d03ed": 1,
+    "gn-c70f6d389c2a": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "00e2f1f177ef35d6",
-    "05b4daef96955b14",
-    "05d54206d94893d3",
-    "062ea398e0ab9fe6",
-    "06304c0509b06bed",
-    "0b462a1f623c9817",
-    "0ec6c510cf01d083",
-    "1775ef6021259939",
-    "191f1a18ab092abe",
-    "1f82c426591c4161",
-    "29cfba255cdca29e",
-    "34da4132260c33c2",
-    "3a27eccc7bf9710f",
-    "3b532124b02c0ed3",
-    "3d008042ba895af5",
-    "4206809afddc9a2a",
-    "45e8a14ac7ea854c",
-    "4b0bb9fc5856a255",
-    "5434045ce980d1e4",
-    "5b0b5306cdeb453a",
-    "5caab2066c984267",
-    "61a6466b25e540af",
-    "61f817cffbbdf5ff",
-    "6479e5a41ed85b6c",
-    "65279f8831f41335",
-    "694f283f5e6d813c",
-    "6aa843476ef03efe",
-    "741b01f15c7506f7",
-    "79e603a631455c7d",
-    "7b462884eb7b3ee0",
-    "803e105a41f6fadf",
-    "8169274162a8c439",
-    "8207fd2ffea95e63",
-    "86d3ed4d6162ea7a",
-    "8c84e63dfe4fe797",
-    "97cea682c61820af",
-    "9c2136c85cd606f2",
-    "9d722fe43d012a89",
-    "9f03eac2a9ed3a1c",
-    "a4c0a7d8dde9d220",
-    "ae07082991813d6b",
-    "bdbce486178aaace",
-    "c37fff92ff40b191",
-    "c4d189a9b68e20dc",
-    "c614612774478b43",
-    "d26a5a257ca63d11",
-    "d474929e7383f4b5",
-    "d5c0197e69beacc7",
-    "d7b254ab674b374e",
-    "d7e9ebdf68302c85",
-    "dadd646d54e81f62",
-    "de552110e1e3963a",
-    "e21054923990550d",
-    "e2e069f9457093e4",
-    "ea906e7beb9033dd",
-    "ec34212f6808afe0",
-    "ef3a292c0db27457",
-    "f5047ac5c5d359f7",
-    "fc4a0d967f5f1c33"
+    "00c2db23a2e1fbf8",
+    "0371bb96f1553897",
+    "066e9a8368400a4d",
+    "17df653f9d8e4df1",
+    "27bc8029c82566a1",
+    "27d9131d42a4d5fd",
+    "2ade416d634f855c",
+    "2b7b0b7abca24aea",
+    "2badcb5dd7acf2a8",
+    "31fe70e0f42baa0b",
+    "337cf4a18f509524",
+    "388b8e3a06c6aea9",
+    "3b3b50e74db6f4e7",
+    "4898392012ddc803",
+    "4a1e2cdecfc3ea05",
+    "5b03b63a80e0275e",
+    "5ff04ff0dccabefe",
+    "600de70936073de0",
+    "71ad32abe6dee3ea",
+    "721e923a7c7a6107",
+    "731d45937c711429",
+    "77863a2a21bf32f3",
+    "7d0d0d758ec666ca",
+    "8c4f858fc214114b",
+    "984e3b00ea95acce",
+    "9c9dae90115588c4",
+    "a5218694c73a5566",
+    "abb2a06cb7e733a1",
+    "b7f6e3b3a6bde110",
+    "bdf69f2a6d19586e",
+    "c74da6e4f3f6b6ec",
+    "c90e8abc00d56bce",
+    "ce741981a811dc29",
+    "d169bab6e66e6db9",
+    "d1bcd937e882415a",
+    "d21c3338392622ee",
+    "db3b2ea2c82d3f94",
+    "e200de032500b7a8",
+    "e32ac0c550038a40",
+    "e5f722b643872f3e",
+    "e8db8e5ca5274beb",
+    "ebfa76aac896c13e",
+    "ffa2c9ca8b6b7d96"
    ],
    "ejemplos": [
-    "Tijuana asegura a 32 personas por presuntamente facilitar que automovilistas se metieran a las filas de las garitas para cruzar a Estados Unidos, una práctica que altera el orden de espera y genera inconformidad entre quienes esperan su turno",
-    "James Talarico gana un escaño en el Senado de Estados Unidos por Texas y rompe más de tres décadas de derrotas demócratas en elecciones estatales, en un resultado que cambia el panorama político de uno de los bastiones republicanos más importantes del país",
-    "De trabajar en la construcción junto a su padre a competir por la gubernatura de California, Xavier Becerra podría hacer historia como el primer latino elegido para dirigir el estado con mayor población inmigrante de Estados Unidos"
+    "San Diego County sees high midterm election turnout, some voters deal with long waits",
+    "Elected officials, union members and grassroots groups celebrate Tuesday’s election results",
+    "Election results show San Diego's 2 countywide measures too close to call"
    ]
   },
   {
    "termino": "marina",
-   "n": 38,
+   "n": 39,
    "n_previo": 12,
-   "momento": 26,
+   "momento": 27,
    "zonas": {
     "estatal": 17,
     "nacional": 10,
     "Tijuana": 7,
-    "Ensenada": 2,
+    "Ensenada": 3,
     "Mexicali": 1,
     "Playas de Rosarito": 1,
     "San Quintín": 1
@@ -369,6 +451,7 @@
     "gn-daac788a7e24": 1,
     "gn-ded8dbe66fc7": 1,
     "lavoz": 1,
+    "radarbc": 1,
     "zeta": 1
    },
    "un_solo_medio": false,
@@ -404,6 +487,7 @@
     "a89508c544a547ad",
     "be84b1ff57faf303",
     "c37c2c61a1a1b0ea",
+    "c3a1d3b030313fbd",
     "d3d5207ec72c47da",
     "d4ed294b901a95c7",
     "dbdd1c3ea354944e",
@@ -413,92 +497,23 @@
     "fd1e4a0a235519c3"
    ],
    "ejemplos": [
+    "El Radiador: Que alguien piense en Marina",
     "México retira más de 10 mil metros de redes ilegales para proteger a la vaquita marina; Semarnat reporta avances",
-    "México reporta avances en la protección de la vaquita marina",
-    "CITES considera insuficientes las medidas de protección a la Vaquita Marina"
-   ]
-  },
-  {
-   "termino": "election",
-   "n": 40,
-   "n_previo": 15,
-   "momento": 25,
-   "zonas": {
-    "San Diego": 36,
-    "nacional": 4
-   },
-   "fuentes": {
-    "kpbs": 22,
-    "timessd": 5,
-    "voiceofsd": 5,
-    "gn-7cd794b7d847": 2,
-    "inewsource": 2,
-    "gn-19c2d380772f": 1,
-    "gn-4b075bf74df6": 1,
-    "gn-5bad11419dae": 1,
-    "gn-c70f6d389c2a": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "00c2db23a2e1fbf8",
-    "0371bb96f1553897",
-    "066e9a8368400a4d",
-    "17df653f9d8e4df1",
-    "27bc8029c82566a1",
-    "27d9131d42a4d5fd",
-    "2b7b0b7abca24aea",
-    "2badcb5dd7acf2a8",
-    "337cf4a18f509524",
-    "388b8e3a06c6aea9",
-    "3b3b50e74db6f4e7",
-    "4898392012ddc803",
-    "4a1e2cdecfc3ea05",
-    "5b03b63a80e0275e",
-    "5ff04ff0dccabefe",
-    "600de70936073de0",
-    "71ad32abe6dee3ea",
-    "721e923a7c7a6107",
-    "731d45937c711429",
-    "77863a2a21bf32f3",
-    "8c4f858fc214114b",
-    "984e3b00ea95acce",
-    "9c9dae90115588c4",
-    "a5218694c73a5566",
-    "abb2a06cb7e733a1",
-    "b7f6e3b3a6bde110",
-    "bdf69f2a6d19586e",
-    "c74da6e4f3f6b6ec",
-    "c90e8abc00d56bce",
-    "ce741981a811dc29",
-    "d169bab6e66e6db9",
-    "d1bcd937e882415a",
-    "d21c3338392622ee",
-    "db3b2ea2c82d3f94",
-    "e200de032500b7a8",
-    "e32ac0c550038a40",
-    "e5f722b643872f3e",
-    "e8db8e5ca5274beb",
-    "ebfa76aac896c13e",
-    "ffa2c9ca8b6b7d96"
-   ],
-   "ejemplos": [
-    "San Diego County sees high midterm election turnout, some voters deal with long waits",
-    "Elected officials, union members and grassroots groups celebrate Tuesday’s election results",
-    "2026 Election Results: Imperial Beach mayor ahead of challengers"
+    "México reporta avances en la protección de la vaquita marina"
    ]
   },
   {
    "termino": "ines gomez mont",
-   "n": 23,
+   "n": 24,
    "n_previo": 0,
-   "momento": 23,
+   "momento": 24,
    "zonas": {
-    "nacional": 18,
+    "nacional": 19,
     "Tijuana": 5
    },
    "fuentes": {
     "imparcial": 14,
-    "uniradio": 4,
+    "uniradio": 5,
     "jornadabc": 3,
     "afn": 2
    },
@@ -506,6 +521,7 @@
    "notas": [
     "05d54206d94893d3",
     "161004ec5198af53",
+    "16ba39e76dad5b1f",
     "3a5b0c8249184ded",
     "3ab47a58407e09b1",
     "3bff7e895c823ae7",
@@ -530,8 +546,8 @@
    ],
    "ejemplos": [
     "TV Azteca rompió el silencio sobre Inés Gómez Mont mientras se deslindan de los delitos por los que la acusan",
-    "Conductores de Ventaneando responden a críticas por no hablar de Inés Gómez Mont",
-    "Ninfa Salinas Sada, hija del empresario Ricardo Salinas Pliego, vuelve a aparecer en la conversación pública por sus vínculos personales con figuras relacionadas con el caso de Inés Gómez Mont y Víctor Manuel Álvarez Puga, su exesposo, Rodrigo Ripstein Kaim, figura en una investigación periodística que identificó depósitos por 11.3 millones de pesos provenientes de una empresa y un operador vinculados con la trama financiera atribuida al abogado"
+    "Galilea Montijo enfrenta preguntas tras la detención de Inés Gómez Mont",
+    "Conductores de Ventaneando responden a críticas por no hablar de Inés Gómez Mont"
    ]
   },
   {
@@ -666,6 +682,77 @@
    ]
   },
   {
+   "termino": "border",
+   "n": 29,
+   "n_previo": 11,
+   "momento": 18,
+   "zonas": {
+    "San Diego": 13,
+    "nacional": 12,
+    "Tijuana": 5
+   },
+   "fuentes": {
+    "gn-a956e11d03ed": 4,
+    "gn-5bad11419dae": 2,
+    "gn-70815d93ef01": 2,
+    "gn-99ba26031ed3": 2,
+    "gn-a0ec1cdd1d90": 2,
+    "gn-dc1580cd9943": 2,
+    "bajanews": 1,
+    "gn-2fdc23db7a84": 1,
+    "gn-34e680389a95": 1,
+    "gn-46bc88bd6277": 1,
+    "gn-4b075bf74df6": 1,
+    "gn-64aced4808d6": 1,
+    "gn-695174b93394": 1,
+    "gn-6f93c73fd5b5": 1,
+    "gn-769075bbdb1c": 1,
+    "gn-85eaa0a46f82": 1,
+    "gn-8bc543d6be79": 1,
+    "gn-a4f940a10a6e": 1,
+    "gn-ac192a3921b7": 1,
+    "gn-b33960790a6d": 1,
+    "timessd": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "142066e56dacfbeb",
+    "17a8d55cf14c379e",
+    "1ac1707589710152",
+    "1ad1f84025648ccc",
+    "240017d0a48b7445",
+    "27425545aafbb0d0",
+    "3604e4e50438bd60",
+    "38752813a1b9fa21",
+    "42807b8b1eadb522",
+    "4bc719e69549e7a6",
+    "4c2b3f4165a49407",
+    "6229917d717ff900",
+    "673df31d53c36711",
+    "6ce3cbf17f13cc42",
+    "6df2a6698a762120",
+    "70d1553709aa9615",
+    "7b16f8a291655af4",
+    "81412182c17ea377",
+    "84fb0d819856bc6c",
+    "9510021ffaae5b5d",
+    "9d2a6d718a4bbf12",
+    "b1f231c399b34a9d",
+    "b24bc4f21ea7e6cc",
+    "c919d335bbc8da59",
+    "cedb1afc8b43c856",
+    "d07e93452e88e7be",
+    "d6049e3f9dd26bfa",
+    "f75b95ef3b2c1951",
+    "fbe45d571378bc54"
+   ],
+   "ejemplos": [
+    "Gunfire erupts at border crossing as officers confront grand theft suspect fleeing to Mexico",
+    "CBP agents shoot at pursuit suspect near U.S.–Mexico border",
+    "Police Chase Shuts Down US/Mexico Border Entrance At San Ysidro"
+   ]
+  },
+  {
    "termino": "sismo",
    "n": 21,
    "n_previo": 3,
@@ -772,6 +859,58 @@
    ]
   },
   {
+   "termino": "resultados",
+   "n": 22,
+   "n_previo": 6,
+   "momento": 16,
+   "zonas": {
+    "San Diego": 8,
+    "Tijuana": 6,
+    "nacional": 6,
+    "Ensenada": 1,
+    "Tecate": 1
+   },
+   "fuentes": {
+    "kpbs": 7,
+    "imparcial": 5,
+    "jornadabc": 4,
+    "uniradio": 3,
+    "soltij": 1,
+    "timessd": 1,
+    "zeta": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "0539c9cb14789275",
+    "1775ef6021259939",
+    "2b7c022fd3a27356",
+    "3d008042ba895af5",
+    "41ed4c9c94a16efa",
+    "43d4b2eb87ac7011",
+    "4d0f3d6acbdc82ed",
+    "5df9b14ceb03657a",
+    "6a7b4a69ca887617",
+    "7eb8d88bc81d5a90",
+    "8437911aa250cb4b",
+    "a010c12f58264326",
+    "a94ef3ddab4aa928",
+    "bf6d3ea32465178b",
+    "c4740e664edd822e",
+    "d26a5a257ca63d11",
+    "e1013f32202e794a",
+    "e23185e4a07b3d2d",
+    "e77da00276337be7",
+    "ee547d2690b65e6f",
+    "f4e81cc4e803070e",
+    "ffb6c91377af92a1"
+   ],
+   "ejemplos": [
+    "Lo que sabemos sobre los resultados de las 14 proposiciones en la boleta de California",
+    "Culpa TSJE a la Fiscalía de generar judicializaciones para simular resultados",
+    "Sheinbaum ve en resultados electorales de EU un reflejo del sentir ciudadano"
+   ]
+  },
+  {
    "termino": "marina pilar",
    "n": 18,
    "n_previo": 2,
@@ -819,6 +958,73 @@
     "Inversión histórica transformó la infraestructura pública en 5 años: Marina del Pilar",
     "Desaladora abastecerá Tijuana y Rosarito: Marina del Pilar",
     "Plantea Marina del Pilar mantener coordinación con California tras triunfo de Xavier Becerra"
+   ]
+  },
+  {
+   "termino": "estado",
+   "n": 33,
+   "n_previo": 18,
+   "momento": 15,
+   "zonas": {
+    "nacional": 12,
+    "Mexicali": 7,
+    "Tijuana": 7,
+    "San Felipe": 6,
+    "estatal": 2,
+    "San Diego": 1
+   },
+   "fuentes": {
+    "imparcial": 11,
+    "gn-13afd86dbb5f": 8,
+    "afn": 3,
+    "jornadabc": 3,
+    "lavoz": 2,
+    "uniradio": 2,
+    "radarbc": 1,
+    "soltij": 1,
+    "timessd": 1,
+    "zeta": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "03f040cddf818764",
+    "0941ff7b603486b2",
+    "1164bf360f0cb0a2",
+    "16300eb48b38865b",
+    "1630b5b423928ecf",
+    "18fe5591b36e7bf9",
+    "1979feddaca05ce8",
+    "1cad675211127a19",
+    "2f864590eab6d309",
+    "38ca0c17a099bf4f",
+    "4206809afddc9a2a",
+    "498430db0357098f",
+    "4ddf513ee9084354",
+    "554c1f4e04d809a8",
+    "56ab4d905e28ade0",
+    "5d59fc1897537fd1",
+    "66fd2b2527554f16",
+    "70724ae1b0944ca9",
+    "78efa9fd1de2a07e",
+    "810e4fa9db17375e",
+    "84ae3a3a2d94ec14",
+    "8951393d935661d6",
+    "8d026863089464f5",
+    "92fc57f3b7b995da",
+    "9b7ffc52bbaf5ce0",
+    "9d2c90e7d6a7d7ba",
+    "aaef7f96aaae6f6b",
+    "c618ec092350be8a",
+    "cc4c2a2847edc083",
+    "ceeb90187770166f",
+    "dd127136e4b70133",
+    "e2e069f9457093e4",
+    "feb7c7c36beeb785"
+   ],
+   "ejemplos": [
+    "La Sección Segunda del Estado Mayor",
+    "California aprueba dos bonos para vivienda: qué significan las Proposiciones 1 y 37 para el estado",
+    "El problema de Pemex no es ser del Estado sino de este Estado"
    ]
   },
   {
@@ -922,52 +1128,141 @@
    ]
   },
   {
-   "termino": "resultados",
-   "n": 20,
-   "n_previo": 6,
+   "termino": "elecciones",
+   "n": 49,
+   "n_previo": 35,
    "momento": 14,
    "zonas": {
-    "San Diego": 7,
-    "nacional": 6,
-    "Tijuana": 5,
-    "Ensenada": 1,
-    "Tecate": 1
+    "nacional": 32,
+    "Tijuana": 14,
+    "Mexicali": 1,
+    "Playas de Rosarito": 1,
+    "San Diego": 1
    },
    "fuentes": {
-    "kpbs": 7,
-    "imparcial": 5,
-    "jornadabc": 3,
+    "imparcial": 29,
+    "afn": 6,
+    "jornadabc": 5,
+    "soltij": 3,
     "uniradio": 3,
-    "soltij": 1,
-    "zeta": 1
+    "gn-f8497491006c": 1,
+    "lavoz": 1,
+    "timessd": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "0539c9cb14789275",
+    "0e8d2a3d4c8e1003",
+    "0ec6c510cf01d083",
+    "10313acfdf1e0427",
     "1775ef6021259939",
-    "2b7c022fd3a27356",
     "3d008042ba895af5",
-    "41ed4c9c94a16efa",
-    "43d4b2eb87ac7011",
-    "4d0f3d6acbdc82ed",
-    "5df9b14ceb03657a",
+    "451328c986f372e6",
+    "5434045ce980d1e4",
+    "61a6466b25e540af",
+    "61f817cffbbdf5ff",
+    "63b62022591414a3",
+    "64d83208438a6334",
+    "68e8e6d43a926507",
     "6a7b4a69ca887617",
-    "7eb8d88bc81d5a90",
-    "8437911aa250cb4b",
+    "70902221c8238a9f",
+    "72d6eff681560dcf",
+    "741b01f15c7506f7",
+    "7a867a18d64b1992",
+    "7b155f81316c7eab",
+    "7b462884eb7b3ee0",
+    "7e6199c9f566b695",
+    "803e105a41f6fadf",
+    "86309122d8fdca0d",
+    "8703fe23405df44e",
+    "875d4303113a8ca2",
+    "88e879a4849d85b0",
+    "8bda3077f654822a",
+    "900b695a1fe874bc",
+    "92f8fb2e5f5c6195",
+    "9be81ad68a6f56ca",
+    "9d6c7cb2e8de3c59",
+    "a08362562a39820c",
+    "a471f47041244432",
+    "a64571261e23c20c",
+    "a6e32e71d82ceb91",
+    "a92969ddb86e9ac0",
     "a94ef3ddab4aa928",
-    "bf6d3ea32465178b",
-    "c4740e664edd822e",
+    "ae07082991813d6b",
+    "b72c109d64ff1280",
+    "c37fff92ff40b191",
+    "c614612774478b43",
+    "c792666e8fb48377",
+    "c7a6fa1235cabca0",
     "d26a5a257ca63d11",
-    "e1013f32202e794a",
-    "e23185e4a07b3d2d",
-    "e77da00276337be7",
+    "d7b254ab674b374e",
+    "de2bc66365729d09",
+    "ea906e7beb9033dd",
+    "ec5d0ac24766bb39",
     "ee547d2690b65e6f",
-    "f4e81cc4e803070e"
+    "f5047ac5c5d359f7"
    ],
    "ejemplos": [
-    "Sheinbaum ve en resultados electorales de EU un reflejo del sentir ciudadano",
-    "Lo que sabemos sobre los resultados de las 14 propuestas electorales de California",
-    "Resultados en vivo: Martha Abraham toma la delantera de la contienda por el Distrito 4 del Concejo de San Diego"
+    "Ariadna Montiel niega que Morena haya contratado a Heurística durante su gestión, pero reconoce que podría recurrir a esta consultora para las elecciones de 2027",
+    "La caída de Guadalupe Taddei y el bloqueo de cuentas a decenas de actores vinculados con la proveeduría electoral desataron una revisión de 25 años de gasto público, evidenciando cómo operaban los esquemas de simulación comercial en los órganos encargados de organizar las elecciones (INE, IFE y OPLEs)",
+    "Elecciones en EU abren expectativas para la industria maquiladora, pero persiste incertidumbre, plantea Index"
+   ]
+  },
+  {
+   "termino": "prision",
+   "n": 27,
+   "n_previo": 13,
+   "momento": 14,
+   "zonas": {
+    "nacional": 19,
+    "Tecate": 4,
+    "Mexicali": 2,
+    "San Felipe": 1,
+    "Tijuana": 1
+   },
+   "fuentes": {
+    "imparcial": 16,
+    "uniradio": 5,
+    "gn-708d0b4af98b": 1,
+    "gn-759fc9543d6f": 1,
+    "gn-90e355854e82": 1,
+    "gn-a711459b4e32": 1,
+    "jornadabc": 1,
+    "lavoz": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "05d54206d94893d3",
+    "0b6a16c02bd2dcfb",
+    "161004ec5198af53",
+    "17095b18821c901f",
+    "1b251294fb11f271",
+    "1b5100efa707b0a6",
+    "1b8e3a0b9b9d0a98",
+    "211b19414f9f1d28",
+    "216a0c925eaac134",
+    "263a514772989e8a",
+    "27ceb9b4cc1fcdd3",
+    "3bab5895b19dba11",
+    "4841fa1135f3c266",
+    "4f2de0a392c28bff",
+    "5139a88716b33447",
+    "527e5de879727c6a",
+    "5cb828eed7cf6bf8",
+    "5ff912e9490d3655",
+    "7c2e21da5f7c9870",
+    "8007521f126e1fb4",
+    "840740788c438372",
+    "85ca4fc099a53ae8",
+    "87962b30399ce131",
+    "9168c5bf659c2188",
+    "b62ce3efba848cb5",
+    "d4d03a8f8ed96856",
+    "ec23ee9bdbf8f969"
+   ],
+   "ejemplos": [
+    "Ernesto Ruffo reclama que le desbloqueen la cuenta donde recibía la Pensión Bienestar, pero una jueza le niega la protección provisional que pidió para disponer del dinero que, asegura, necesita para alimentación, atención médica y cuidados durante su prisión domiciliaria",
+    "¿Cuántos años podría pasar Russell Brand en prisión? El comediante británico fue declarado culpable de violación y tres agresiones sexuales",
+    "Mexicano detenido en Aguila Mountain con tarjeta de residencia y seguro social falsos podría enfrentar hasta 15 años de prisión por robo de identidad"
    ]
   },
   {
@@ -1020,123 +1315,305 @@
    ]
   },
   {
-   "termino": "estado",
-   "n": 31,
-   "n_previo": 18,
-   "momento": 13,
+   "termino": "time",
+   "n": 16,
+   "n_previo": 2,
+   "momento": 14,
    "zonas": {
-    "nacional": 11,
-    "Mexicali": 7,
-    "Tijuana": 7,
+    "San Diego": 6,
     "San Felipe": 6,
-    "estatal": 2
+    "Mexicali": 2,
+    "Tijuana": 2,
+    "nacional": 2
    },
    "fuentes": {
-    "imparcial": 10,
     "gn-13afd86dbb5f": 8,
-    "afn": 3,
-    "jornadabc": 3,
-    "lavoz": 2,
-    "uniradio": 2,
-    "radarbc": 1,
-    "soltij": 1,
-    "zeta": 1
+    "timessd": 3,
+    "kpbs": 2,
+    "gn-18b09c92e250": 1,
+    "imparcial": 1,
+    "voiceofsd": 1
    },
    "un_solo_medio": false,
    "notas": [
     "03f040cddf818764",
-    "0941ff7b603486b2",
-    "1164bf360f0cb0a2",
+    "15b60b96c5439910",
     "1630b5b423928ecf",
-    "18fe5591b36e7bf9",
-    "1979feddaca05ce8",
-    "1cad675211127a19",
-    "2f864590eab6d309",
-    "38ca0c17a099bf4f",
-    "4206809afddc9a2a",
+    "1c02cd1f049df11a",
     "498430db0357098f",
     "4ddf513ee9084354",
     "554c1f4e04d809a8",
-    "56ab4d905e28ade0",
-    "5d59fc1897537fd1",
-    "66fd2b2527554f16",
-    "70724ae1b0944ca9",
-    "78efa9fd1de2a07e",
+    "5a47aeecd20480d9",
+    "616ce866017e4d25",
+    "68d40e600fac9534",
     "84ae3a3a2d94ec14",
-    "8951393d935661d6",
-    "8d026863089464f5",
     "92fc57f3b7b995da",
-    "9b7ffc52bbaf5ce0",
-    "9d2c90e7d6a7d7ba",
-    "aaef7f96aaae6f6b",
-    "c618ec092350be8a",
-    "cc4c2a2847edc083",
-    "ceeb90187770166f",
-    "dd127136e4b70133",
-    "e2e069f9457093e4",
-    "feb7c7c36beeb785"
+    "aec3cfb45b871b47",
+    "af25c7b350694360",
+    "b9961d562c9bbd16",
+    "ceeb90187770166f"
    ],
    "ejemplos": [
-    "El problema de Pemex no es ser del Estado sino de este Estado",
-    "De trabajar en la construcción junto a su padre a competir por la gubernatura de California, Xavier Becerra podría hacer historia como el primer latino elegido para dirigir el estado con mayor población inmigrante de Estados Unidos",
+    "First-time homebuyers remain scarce, but a record share of them pay all cash",
+    "How Democrats took over San Diego’s congressional delegation, one seat at a time",
     "Moderate mag. 4.9 earthquake - 34 km southeast of Mexicali, Estado de Baja California, Mexico, on Tuesday, Nov 3, 2026, at 10:27 am (Tijuana time)"
    ]
   },
   {
-   "termino": "prision",
-   "n": 26,
-   "n_previo": 13,
-   "momento": 13,
+   "termino": "iran",
+   "n": 15,
+   "n_previo": 1,
+   "momento": 14,
    "zonas": {
-    "nacional": 18,
-    "Tecate": 4,
-    "Mexicali": 2,
-    "San Felipe": 1,
+    "nacional": 13,
+    "San Diego": 1,
     "Tijuana": 1
    },
    "fuentes": {
-    "imparcial": 15,
-    "uniradio": 5,
-    "gn-708d0b4af98b": 1,
-    "gn-759fc9543d6f": 1,
-    "gn-90e355854e82": 1,
-    "gn-a711459b4e32": 1,
-    "jornadabc": 1,
-    "lavoz": 1
+    "imparcial": 10,
+    "gn-383e6c440b4d": 1,
+    "gn-774b6fcdd8b7": 1,
+    "kpbs": 1,
+    "uniradio": 1,
+    "zeta": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "05d54206d94893d3",
-    "0b6a16c02bd2dcfb",
-    "161004ec5198af53",
-    "17095b18821c901f",
-    "1b251294fb11f271",
-    "1b5100efa707b0a6",
-    "1b8e3a0b9b9d0a98",
-    "211b19414f9f1d28",
-    "216a0c925eaac134",
-    "263a514772989e8a",
-    "27ceb9b4cc1fcdd3",
-    "3bab5895b19dba11",
-    "4841fa1135f3c266",
-    "4f2de0a392c28bff",
-    "5139a88716b33447",
-    "527e5de879727c6a",
-    "5cb828eed7cf6bf8",
-    "5ff912e9490d3655",
-    "7c2e21da5f7c9870",
-    "8007521f126e1fb4",
-    "840740788c438372",
-    "85ca4fc099a53ae8",
-    "87962b30399ce131",
-    "9168c5bf659c2188",
-    "d4d03a8f8ed96856",
-    "ec23ee9bdbf8f969"
+    "019efe989c096b98",
+    "03aa80089816c752",
+    "187573b2d3287b42",
+    "3d008042ba895af5",
+    "7c3b9d5977f5cfd7",
+    "8834d5663f79afff",
+    "92ccc02743a486a5",
+    "aa207665227f3fe3",
+    "ac1f00372714f709",
+    "ad8159e1d7547fd5",
+    "bdbce486178aaace",
+    "c37fff92ff40b191",
+    "c3b615500d533e87",
+    "ca35a66fbe088f55",
+    "cd5560d8dc567935"
    ],
    "ejemplos": [
-    "Ernesto Ruffo reclama que le desbloqueen la cuenta donde recibía la Pensión Bienestar, pero una jueza le niega la protección provisional que pidió para disponer del dinero que, asegura, necesita para alimentación, atención médica y cuidados durante su prisión domiciliaria",
-    "Mexicano detenido en Aguila Mountain con tarjeta de residencia y seguro social falsos podría enfrentar hasta 15 años de prisión por robo de identidad",
-    "Herdez reveló un sofisticado fraude procesal luego de que un supuesto extrabajador fantasma logró congelar 650 millones de pesos de sus cuentas utilizando fallos judiciales amañados para embargar plantas y oficinas corporativas en un caso que hoy mantiene a una abogada en prisión"
+    "Sen. Gillibrand says Democrats must end Iran war, hold Trump accountable. But how?",
+    "Trump atribuye derrota republicana a la guerra en Irán; culpa a candidatos",
+    "JD Vance culpa a la guerra con Irán de la derrota republicana en Estados Unidos y admite que votantes de Trump en 2024 apoyaron a los demócratas en 2026"
+   ]
+  },
+  {
+   "termino": "trump",
+   "n": 56,
+   "n_previo": 43,
+   "momento": 13,
+   "zonas": {
+    "nacional": 36,
+    "San Diego": 11,
+    "Tijuana": 9
+   },
+   "fuentes": {
+    "imparcial": 30,
+    "kpbs": 10,
+    "uniradio": 4,
+    "zeta": 3,
+    "afn": 2,
+    "jornadabc": 2,
+    "gn-695174b93394": 1,
+    "gn-8bc543d6be79": 1,
+    "gn-ac192a3921b7": 1,
+    "soltij": 1,
+    "timessd": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "019efe989c096b98",
+    "01f066742be557eb",
+    "0e8d2a3d4c8e1003",
+    "142066e56dacfbeb",
+    "15984209c8983b1b",
+    "17fadcdd1a02e9b1",
+    "1e2222e65f5717e5",
+    "21ceba8b84a8181a",
+    "2f64955d87a763e0",
+    "33e2fb7ad676927a",
+    "389c6b5ee7671bba",
+    "3d008042ba895af5",
+    "58bccf24260def0d",
+    "5a0bb4526fd93073",
+    "6766750fc4c94dc9",
+    "6a7b4a69ca887617",
+    "6aa843476ef03efe",
+    "70902221c8238a9f",
+    "7e6199c9f566b695",
+    "7eb8d88bc81d5a90",
+    "7f72b81ae46db8ac",
+    "81412182c17ea377",
+    "828cfe435410e121",
+    "8834d5663f79afff",
+    "88c6e1152fb93fa0",
+    "88e879a4849d85b0",
+    "8c3219a9fe202491",
+    "8f16cb387847e818",
+    "8fb4607a68cf4a14",
+    "900b695a1fe874bc",
+    "92ccc02743a486a5",
+    "98606ddbe9fd5595",
+    "9a03a548bbf61252",
+    "9d8a6cb8f41e5243",
+    "9f6ccfc36f5a9458",
+    "a9234bcc5cf54ef1",
+    "ad8159e1d7547fd5",
+    "b0673c4ca82f0248",
+    "bc5b4d01090b72c5",
+    "bdbce486178aaace",
+    "c37fff92ff40b191",
+    "c70b1d5102e220f9",
+    "c919d335bbc8da59",
+    "cd5560d8dc567935",
+    "d169bab6e66e6db9",
+    "d26a5a257ca63d11",
+    "d662c4015179a889",
+    "da38dd86122ff0c0",
+    "df2e519f022bd374",
+    "e002352693074410",
+    "e0b68f339babaef7",
+    "e1152f2386d661e6",
+    "e23325e4f050d300",
+    "ec5d0ac24766bb39",
+    "f236820f3989bcfa",
+    "ffd9d6b5c02102dd"
+   ],
+   "ejemplos": [
+    "Trump pidió que votaran por él y lo mandaron al diablo",
+    "Sheinbaum viajará a China para participar en el foro APEC 2026; permanecerá toda la semana y buscará reunirse con Donald Trump",
+    "Trump's arch is on the verge of federal approval. But a judge could block construction"
+   ]
+  },
+  {
+   "termino": "playas",
+   "n": 30,
+   "n_previo": 17,
+   "momento": 13,
+   "zonas": {
+    "Playas de Rosarito": 21,
+    "Tijuana": 9,
+    "Tecate": 1,
+    "nacional": 1
+   },
+   "fuentes": {
+    "rosarito": 12,
+    "soltij": 4,
+    "imparcial": 3,
+    "gn-291a95aaf8ce": 2,
+    "sintesis": 2,
+    "uniradio": 2,
+    "bajanews": 1,
+    "gn-8b479637ed46": 1,
+    "gn-daac788a7e24": 1,
+    "jornadabc": 1,
+    "zeta": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "083c961c8f524012",
+    "09ba18b2c6a6eeb9",
+    "09f6c6d2bfda99d1",
+    "1f17c92abe154faf",
+    "26e18c850e33dd49",
+    "46b6973468ef6890",
+    "4fe4db3cee5155e0",
+    "508b229f12b597e2",
+    "510fa0de6b6f781d",
+    "51966ca16cc68b99",
+    "51c95d0b278d69e5",
+    "5e12defa4087ef3f",
+    "60e9395dc265f65a",
+    "700fb57750deadd6",
+    "7970283424eb8e66",
+    "79ae8e3cf42bf656",
+    "7ac1c9f02d652031",
+    "9320818ce4dd14ae",
+    "a076d3881862abc2",
+    "a2aa95e82d87be61",
+    "ac6d137e39c435f0",
+    "b77ad8304427120d",
+    "cd4a2cb817fd4bf0",
+    "e1fe15c88775182f",
+    "e7912e689322d185",
+    "e9dbee71e436ea3e",
+    "efdde49788f7a1e6",
+    "f31d6188abe5f342",
+    "f61dd7a09dec781c",
+    "fab8a35e91b6bb14"
+   ],
+   "ejemplos": [
+    "Descartan presencia de montachoques en Playas de Rosarito",
+    "FGE despliega presencia operativa en calles de Playas de Tijuana",
+    "Bachean bulevar Lomas de Jatnil en Playas de Rosarito"
+   ]
+  },
+  {
+   "termino": "markle",
+   "n": 22,
+   "n_previo": 9,
+   "momento": 13,
+   "zonas": {
+    "nacional": 11,
+    "Tijuana": 5,
+    "Playas de Rosarito": 3,
+    "estatal": 3
+   },
+   "fuentes": {
+    "soltij": 2,
+    "uniradio": 2,
+    "afn": 1,
+    "gn-1f62378f69a4": 1,
+    "gn-21f7a1cb9603": 1,
+    "gn-23c4bdbe1485": 1,
+    "gn-250e3d3bf1ff": 1,
+    "gn-2d9d02403b23": 1,
+    "gn-301061e140e7": 1,
+    "gn-36bce513f849": 1,
+    "gn-708d0b4af98b": 1,
+    "gn-82fd8c99bb8c": 1,
+    "gn-8c31ab120e0a": 1,
+    "gn-8ec0afb4cc26": 1,
+    "gn-a7d03561b038": 1,
+    "gn-c215d2d62dbf": 1,
+    "gn-ca352991a22c": 1,
+    "gn-dc1580cd9943": 1,
+    "gn-df1d301d141c": 1,
+    "imparcial": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "24360e923148e946",
+    "280446d871903f34",
+    "3d5423858218ea8c",
+    "50c6a7f88605f74f",
+    "5950138a38382f6f",
+    "5fc4e533aa630ead",
+    "693bda452b90c4ad",
+    "6ff82af5160211c8",
+    "7b976bd5b545d165",
+    "814099549a0a9d73",
+    "92e8ee490d82df77",
+    "94111d46adceba2b",
+    "96db4cab46589dd8",
+    "9d7d8012147701aa",
+    "a49e036df2ef7ff7",
+    "a706d498bf1bdd96",
+    "bee1689515cd83c7",
+    "d6ec46da161211ea",
+    "e6772dc2d847a1ed",
+    "eb30552b316bf12b",
+    "f27b4d9f98a240f7",
+    "f3685f3b8a1222cb"
+   ],
+   "ejemplos": [
+    "En graves delitos Thomas Markle Sr.",
+    "Padre de Meghan Markle: así fue su vida en Baja California",
+    "Confirman Existencia de Pornografía Infantil en Casa de Padre de Meghan Markle"
    ]
   },
   {
@@ -1190,364 +1667,32 @@
     "Transforma Gobierno de Baja California infraestructura pública con cinco años de inversión histórica en obras",
     "Inversión histórica transformó la infraestructura pública en 5 años: Marina del Pilar"
    ]
-  },
-  {
-   "termino": "time",
-   "n": 15,
-   "n_previo": 2,
-   "momento": 13,
-   "zonas": {
-    "San Felipe": 6,
-    "San Diego": 5,
-    "Mexicali": 2,
-    "Tijuana": 2,
-    "nacional": 2
-   },
-   "fuentes": {
-    "gn-13afd86dbb5f": 8,
-    "timessd": 3,
-    "gn-18b09c92e250": 1,
-    "imparcial": 1,
-    "kpbs": 1,
-    "voiceofsd": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "03f040cddf818764",
-    "15b60b96c5439910",
-    "1630b5b423928ecf",
-    "1c02cd1f049df11a",
-    "498430db0357098f",
-    "4ddf513ee9084354",
-    "554c1f4e04d809a8",
-    "5a47aeecd20480d9",
-    "616ce866017e4d25",
-    "84ae3a3a2d94ec14",
-    "92fc57f3b7b995da",
-    "aec3cfb45b871b47",
-    "af25c7b350694360",
-    "b9961d562c9bbd16",
-    "ceeb90187770166f"
-   ],
-   "ejemplos": [
-    "How Democrats took over San Diego’s congressional delegation, one seat at a time",
-    "Moderate mag. 4.9 earthquake - 34 km southeast of Mexicali, Estado de Baja California, Mexico, on Tuesday, Nov 3, 2026, at 10:27 am (Tijuana time)",
-    "Review: The Legend of Zelda: Ocarina of Time remake is superb, streamlined and safe"
-   ]
-  },
-  {
-   "termino": "iran",
-   "n": 14,
-   "n_previo": 1,
-   "momento": 13,
-   "zonas": {
-    "nacional": 13,
-    "Tijuana": 1
-   },
-   "fuentes": {
-    "imparcial": 10,
-    "gn-383e6c440b4d": 1,
-    "gn-774b6fcdd8b7": 1,
-    "uniradio": 1,
-    "zeta": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "03aa80089816c752",
-    "187573b2d3287b42",
-    "3d008042ba895af5",
-    "7c3b9d5977f5cfd7",
-    "8834d5663f79afff",
-    "92ccc02743a486a5",
-    "aa207665227f3fe3",
-    "ac1f00372714f709",
-    "ad8159e1d7547fd5",
-    "bdbce486178aaace",
-    "c37fff92ff40b191",
-    "c3b615500d533e87",
-    "ca35a66fbe088f55",
-    "cd5560d8dc567935"
-   ],
-   "ejemplos": [
-    "Trump atribuye derrota republicana a la guerra en Irán; culpa a candidatos",
-    "JD Vance culpa a la guerra con Irán de la derrota republicana en Estados Unidos y admite que votantes de Trump en 2024 apoyaron a los demócratas en 2026",
-    "Donald Trump admite que la guerra con Irán le costó votos al Partido Republicano, pero afirma que valió la pena y mantendrá las operaciones militares pese a resultados de las elecciones en Estados Unidos"
-   ]
-  },
-  {
-   "termino": "border",
-   "n": 23,
-   "n_previo": 11,
-   "momento": 12,
-   "zonas": {
-    "nacional": 10,
-    "San Diego": 9,
-    "Tijuana": 5
-   },
-   "fuentes": {
-    "gn-a956e11d03ed": 3,
-    "gn-70815d93ef01": 2,
-    "gn-dc1580cd9943": 2,
-    "gn-34e680389a95": 1,
-    "gn-46bc88bd6277": 1,
-    "gn-4b075bf74df6": 1,
-    "gn-5bad11419dae": 1,
-    "gn-64aced4808d6": 1,
-    "gn-695174b93394": 1,
-    "gn-6f93c73fd5b5": 1,
-    "gn-769075bbdb1c": 1,
-    "gn-85eaa0a46f82": 1,
-    "gn-8bc543d6be79": 1,
-    "gn-99ba26031ed3": 1,
-    "gn-a0ec1cdd1d90": 1,
-    "gn-a4f940a10a6e": 1,
-    "gn-ac192a3921b7": 1,
-    "gn-b33960790a6d": 1,
-    "timessd": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "142066e56dacfbeb",
-    "17a8d55cf14c379e",
-    "1ac1707589710152",
-    "1ad1f84025648ccc",
-    "27425545aafbb0d0",
-    "3604e4e50438bd60",
-    "38752813a1b9fa21",
-    "42807b8b1eadb522",
-    "4bc719e69549e7a6",
-    "4c2b3f4165a49407",
-    "6229917d717ff900",
-    "6ce3cbf17f13cc42",
-    "70d1553709aa9615",
-    "81412182c17ea377",
-    "84fb0d819856bc6c",
-    "9510021ffaae5b5d",
-    "9d2a6d718a4bbf12",
-    "b1f231c399b34a9d",
-    "c919d335bbc8da59",
-    "cedb1afc8b43c856",
-    "d07e93452e88e7be",
-    "f75b95ef3b2c1951",
-    "fbe45d571378bc54"
-   ],
-   "ejemplos": [
-    "CBP agents shoot at pursuit suspect near U.S.–Mexico border",
-    "Police Chase Shuts Down US/Mexico Border Entrance At San Ysidro",
-    "Stolen vehicle pursuit from Riverside County ends in shooting near U.S.-Mexico border"
-   ]
-  },
-  {
-   "termino": "markle",
-   "n": 21,
-   "n_previo": 9,
-   "momento": 12,
-   "zonas": {
-    "nacional": 10,
-    "Tijuana": 5,
-    "Playas de Rosarito": 3,
-    "estatal": 3
-   },
-   "fuentes": {
-    "soltij": 2,
-    "uniradio": 2,
-    "afn": 1,
-    "gn-1f62378f69a4": 1,
-    "gn-21f7a1cb9603": 1,
-    "gn-23c4bdbe1485": 1,
-    "gn-250e3d3bf1ff": 1,
-    "gn-301061e140e7": 1,
-    "gn-36bce513f849": 1,
-    "gn-708d0b4af98b": 1,
-    "gn-82fd8c99bb8c": 1,
-    "gn-8c31ab120e0a": 1,
-    "gn-8ec0afb4cc26": 1,
-    "gn-a7d03561b038": 1,
-    "gn-c215d2d62dbf": 1,
-    "gn-ca352991a22c": 1,
-    "gn-dc1580cd9943": 1,
-    "gn-df1d301d141c": 1,
-    "imparcial": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "24360e923148e946",
-    "280446d871903f34",
-    "3d5423858218ea8c",
-    "50c6a7f88605f74f",
-    "5950138a38382f6f",
-    "5fc4e533aa630ead",
-    "6ff82af5160211c8",
-    "7b976bd5b545d165",
-    "814099549a0a9d73",
-    "92e8ee490d82df77",
-    "94111d46adceba2b",
-    "96db4cab46589dd8",
-    "9d7d8012147701aa",
-    "a49e036df2ef7ff7",
-    "a706d498bf1bdd96",
-    "bee1689515cd83c7",
-    "d6ec46da161211ea",
-    "e6772dc2d847a1ed",
-    "eb30552b316bf12b",
-    "f27b4d9f98a240f7",
-    "f3685f3b8a1222cb"
-   ],
-   "ejemplos": [
-    "Padre de Meghan Markle: así fue su vida en Baja California",
-    "Confirman Existencia de Pornografía Infantil en Casa de Padre de Meghan Markle",
-    "Policía de Filipinas confirma hallazgo de material de abuso sexual infantil en dispositivos del padre de Meghan Markle"
-   ]
-  },
-  {
-   "termino": "escuelas",
-   "n": 16,
-   "n_previo": 4,
-   "momento": 12,
-   "zonas": {
-    "nacional": 7,
-    "Tijuana": 5,
-    "Playas de Rosarito": 2,
-    "Mexicali": 1,
-    "estatal": 1
-   },
-   "fuentes": {
-    "imparcial": 7,
-    "soltij": 3,
-    "jornadabc": 2,
-    "gn-b6163137472a": 1,
-    "lavoz": 1,
-    "rosarito": 1,
-    "uniradio": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "024a87f75e3e0259",
-    "13d9af3298091b36",
-    "1cf7185d94dab99e",
-    "377486e309d1dbc5",
-    "37ef1a19bcc52bb9",
-    "3934e02a8520f82c",
-    "3ea56bbce4012f9e",
-    "5389da7a15f58693",
-    "6391270a6beb243c",
-    "681a37d49aa69ef0",
-    "8bfc758f350cf478",
-    "94a8b7cd4985d947",
-    "9b7ffc52bbaf5ce0",
-    "b2e6f79dc68161c9",
-    "db98ce3953089be4",
-    "f0c683e1d8e6856d"
-   ],
-   "ejemplos": [
-    "Padres respaldan restricción de celulares en escuelas, aunque persisten dudas sobre su uso",
-    "Ayuntamiento de SLP Capital inicia campaña “Los Cuetes no son tus Cuates” en escuelas",
-    "La Banda del Estado llevará a cabo conciertos en distintas escuelas durante noviembre"
-   ]
-  },
-  {
-   "termino": "democratas",
-   "n": 15,
-   "n_previo": 3,
-   "momento": 12,
-   "zonas": {
-    "nacional": 9,
-    "Tijuana": 6
-   },
-   "fuentes": {
-    "imparcial": 9,
-    "zeta": 3,
-    "jornadabc": 2,
-    "afn": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "15984209c8983b1b",
-    "5caab2066c984267",
-    "70902221c8238a9f",
-    "7eb8d88bc81d5a90",
-    "828cfe435410e121",
-    "875d4303113a8ca2",
-    "88e879a4849d85b0",
-    "8c3219a9fe202491",
-    "9f03eac2a9ed3a1c",
-    "bdbce486178aaace",
-    "c88401a844edcdfb",
-    "ce08f4f1f1fc47c9",
-    "d8a9a0e2d6967e43",
-    "ea906e7beb9033dd",
-    "ec5d0ac24766bb39"
-   ],
-   "ejemplos": [
-    "Desgaste de políticas de Trump impulsó a los demócratas, sostiene académico de Cetys",
-    "James Talarico gana un escaño en el Senado de Estados Unidos por Texas y rompe más de tres décadas de derrotas demócratas en elecciones estatales, en un resultado que cambia el panorama político de uno de los bastiones republicanos más importantes del país",
-    "Donalds gana Florida como primer gobernador afroamericano y demócratas avanzan en la Cámara de EU"
-   ]
-  },
-  {
-   "termino": "leon",
-   "n": 13,
-   "n_previo": 1,
-   "momento": 12,
-   "zonas": {
-    "nacional": 8,
-    "Mexicali": 2,
-    "Tijuana": 2,
-    "Ensenada": 1
-   },
-   "fuentes": {
-    "imparcial": 7,
-    "uniradio": 3,
-    "soltij": 2,
-    "gn-a349045cf933": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "030f2b8a41a4764b",
-    "03f78d7b30dd6ef9",
-    "13370f36c5b58864",
-    "2f0521679ecec4c1",
-    "7b462884eb7b3ee0",
-    "803e105a41f6fadf",
-    "9858942f939cf21a",
-    "9c59e2cd5e2bd88a",
-    "a5bda3d703ccd565",
-    "b1e99de50af79096",
-    "b3ff2d047695c6cd",
-    "b7a87484e1d45e73",
-    "ea3005485127be2f"
-   ],
-   "ejemplos": [
-    "Luis Mexia, compositor de éxitos de Carín León, firma con el sello del cantante y prepara su expansión internacional",
-    "Preparan accesos y estacionamiento especial para concierto de Carin León en Mexicali",
-    "Avanza montaje del escenario para concierto de Carin León en Mexicali"
-   ]
   }
  ],
  "descartados": [
   {
    "termino": "estados",
-   "n": 71,
+   "n": 79,
    "porque": "duplica «estados unidos»"
   },
   {
    "termino": "unidos",
-   "n": 60,
+   "n": 66,
    "porque": "duplica «estados unidos»"
   },
   {
    "termino": "gomez",
-   "n": 27,
+   "n": 28,
    "porque": "duplica «ines gomez mont»"
   },
   {
    "termino": "gomez mont",
-   "n": 26,
+   "n": 27,
    "porque": "duplica «ines gomez mont»"
   },
   {
    "termino": "mont",
-   "n": 26,
+   "n": 27,
    "porque": "duplica «ines gomez mont»"
   },
   {
@@ -1557,13 +1702,18 @@
   },
   {
    "termino": "ines",
-   "n": 24,
+   "n": 25,
    "porque": "duplica «ines gomez mont»"
   },
   {
    "termino": "ines gomez",
-   "n": 23,
+   "n": 24,
    "porque": "duplica «ines gomez mont»"
+  },
+  {
+   "termino": "civil",
+   "n": 23,
+   "porque": "duplica «proteccion civil»"
   },
   {
    "termino": "cardenas",
@@ -1576,19 +1726,14 @@
    "porque": "duplica «canelo alvarez»"
   },
   {
-   "termino": "civil",
+   "termino": "guadalupe",
    "n": 21,
-   "porque": "duplica «proteccion civil»"
+   "porque": "duplica «guadalupe taddei»"
   },
   {
    "termino": "cuauhtemoc",
    "n": 18,
    "porque": "duplica «cuauhtemoc cardenas»"
-  },
-  {
-   "termino": "guadalupe",
-   "n": 18,
-   "porque": "duplica «guadalupe taddei»"
   },
   {
    "termino": "pilar",
@@ -1601,34 +1746,34 @@
    "porque": "duplica «canelo alvarez»"
   },
   {
+   "termino": "results",
+   "n": 17,
+   "porque": "duplica «election results»"
+  },
+  {
+   "termino": "claudia",
+   "n": 16,
+   "porque": "duplica «claudia sheinbaum»"
+  },
+  {
    "termino": "libre",
    "n": 16,
    "porque": "duplica «mercado libre»"
   },
   {
-   "termino": "miguel",
-   "n": 15,
-   "porque": "duplica «miguel aleman»"
-  },
-  {
-   "termino": "results",
-   "n": 15,
-   "porque": "duplica «election results»"
-  },
-  {
    "termino": "becerra",
-   "n": 14,
+   "n": 15,
    "porque": "duplica «xavier becerra»"
   },
   {
-   "termino": "mbilli",
-   "n": 14,
-   "porque": "duplica «canelo alvarez»"
+   "termino": "miguel",
+   "n": 15,
+   "porque": "duplica «miguel aleman»"
   }
  ],
  "por_zona": {
   "Tijuana": {
-   "notas_ventana": 620,
+   "notas_ventana": 661,
    "minimo": 3,
    "temas": [
     {
@@ -1755,6 +1900,42 @@
      ]
     },
     {
+     "termino": "estados unidos",
+     "n": 11,
+     "n_previo": 3,
+     "momento": 8,
+     "zonas": {
+      "Tijuana": 11,
+      "San Diego": 3,
+      "Mexicali": 1
+     },
+     "fuentes": {
+      "gn-f8497491006c": 4,
+      "soltij": 4,
+      "jornadabc": 2,
+      "imparcial": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "06304c0509b06bed",
+      "191f1a18ab092abe",
+      "3a27eccc7bf9710f",
+      "61f817cffbbdf5ff",
+      "8169274162a8c439",
+      "d474929e7383f4b5",
+      "d7b254ab674b374e",
+      "dadd646d54e81f62",
+      "e21054923990550d",
+      "eb9683484ac8e2d4",
+      "ec34212f6808afe0"
+     ],
+     "ejemplos": [
+      "Tijuana asegura a 32 personas por presuntamente facilitar que automovilistas se metieran a las filas de las garitas para cruzar a Estados Unidos, una práctica que altera el orden de espera y genera inconformidad entre quienes esperan su turno",
+      "Garitas de Tijuana registran filas de hasta 90 minutos este jueves (Datos actualizados a las 7:00 AM PST) El cruce fronterizo hacia Estados Unidos registra una mañana de carga vehicular intensa en Baja California, encabezada por la garita de Otay Mesa co",
+      "Estados Unidos 2026: nuevo mapa político y México"
+     ]
+    },
+    {
      "termino": "familias",
      "n": 11,
      "n_previo": 3,
@@ -1790,38 +1971,69 @@
      ]
     },
     {
-     "termino": "estados unidos",
+     "termino": "migrantes",
+     "n": 8,
+     "n_previo": 0,
+     "momento": 8,
+     "zonas": {
+      "Tijuana": 8
+     },
+     "fuentes": {
+      "soltij": 3,
+      "jornadabc": 2,
+      "afn": 1,
+      "imparcial": 1,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "235f680651aef4cc",
+      "3a27eccc7bf9710f",
+      "5a0bb4526fd93073",
+      "68e8e6d43a926507",
+      "9780a357e6702a7b",
+      "c106b393d42f00d5",
+      "d751c04b09e56468",
+      "f72060beae1059f2"
+     ],
+     "ejemplos": [
+      "Defensa a trabajadores y migrantes, la clave del triunfo de demócratas en elecciones de EU",
+      "Becerra, hijo de migrantes mexicanos, gana California y será el primer gobernador latino desde 1875",
+      "Tijuana resiente las políticas migratorias de Trump; migrantes llaman a reflexionar el voto"
+     ]
+    },
+    {
+     "termino": "primera",
      "n": 10,
      "n_previo": 3,
      "momento": 7,
      "zonas": {
-      "Tijuana": 10,
-      "San Diego": 2,
-      "Mexicali": 1
+      "Tijuana": 10
      },
      "fuentes": {
-      "soltij": 4,
-      "gn-f8497491006c": 3,
-      "jornadabc": 2,
-      "imparcial": 1
+      "jornadabc": 3,
+      "afn": 2,
+      "imparcial": 2,
+      "zeta": 2,
+      "soltij": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "06304c0509b06bed",
-      "191f1a18ab092abe",
-      "3a27eccc7bf9710f",
-      "61f817cffbbdf5ff",
-      "8169274162a8c439",
-      "d474929e7383f4b5",
-      "d7b254ab674b374e",
-      "dadd646d54e81f62",
-      "e21054923990550d",
-      "ec34212f6808afe0"
+      "0f843ecdaed72372",
+      "1f4c143f6f85ae4c",
+      "23efc8380af8b1e6",
+      "53c33f107e5353e1",
+      "700630b1999f6ff1",
+      "70724ae1b0944ca9",
+      "95b96198e47066a3",
+      "9b78e5c280eaba94",
+      "ad84b62d9e767b3a",
+      "b6963e527b83ec1a"
      ],
      "ejemplos": [
-      "Tijuana asegura a 32 personas por presuntamente facilitar que automovilistas se metieran a las filas de las garitas para cruzar a Estados Unidos, una práctica que altera el orden de espera y genera inconformidad entre quienes esperan su turno",
-      "Estados Unidos 2026: nuevo mapa político y México",
-      "🚨 Garitas de San Ysidro y Otay registran demoras de más de 2 horas (Datos actualizados a las 10:00 am PST) El cruce fronterizo hacia Estados Unidos presenta una fuerte saturación este miércoles, colocándose la garita de San Ysidro como el punto más le"
+      "Fallece la primera actriz María Alicia Delgado a los 77 años",
+      "Generarían “maquilas” mil 500 empleos en Tijuana por primera cuota de reducción de la jornada laboral",
+      "Haaland gana Nuevo México y será la primera mujer nativa americana en gobernar un estado de EU"
      ]
     },
     {
@@ -1888,7 +2100,7 @@
      ]
     },
     {
-     "termino": "migrantes",
+     "termino": "democratas",
      "n": 7,
      "n_previo": 0,
      "momento": 7,
@@ -1896,26 +2108,24 @@
       "Tijuana": 7
      },
      "fuentes": {
-      "soltij": 3,
-      "afn": 1,
-      "imparcial": 1,
-      "jornadabc": 1,
-      "zeta": 1
+      "jornadabc": 3,
+      "zeta": 3,
+      "afn": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "235f680651aef4cc",
-      "3a27eccc7bf9710f",
-      "5a0bb4526fd93073",
-      "9780a357e6702a7b",
-      "c106b393d42f00d5",
-      "d751c04b09e56468",
-      "f72060beae1059f2"
+      "15984209c8983b1b",
+      "68e8e6d43a926507",
+      "7eb8d88bc81d5a90",
+      "828cfe435410e121",
+      "8c3219a9fe202491",
+      "d8a9a0e2d6967e43",
+      "ec5d0ac24766bb39"
      ],
      "ejemplos": [
-      "Becerra, hijo de migrantes mexicanos, gana California y será el primer gobernador latino desde 1875",
-      "Tijuana resiente las políticas migratorias de Trump; migrantes llaman a reflexionar el voto",
-      "Dedican un altar en \"El Chaparral\" a 60 migrantes fallecidos detenidos por el ICE"
+      "Defensa a trabajadores y migrantes, la clave del triunfo de demócratas en elecciones de EU",
+      "Desgaste de políticas de Trump impulsó a los demócratas, sostiene académico de Cetys",
+      "Donalds gana Florida como primer gobernador afroamericano y demócratas avanzan en la Cámara de EU"
      ]
     },
     {
@@ -1944,6 +2154,73 @@
       "Bobby Pulido gana el Distrito 15 de Texas en la Cámara de Representantes",
       "Talarico gana el senado por Texas y rompe casi 40 años de dominio republicano",
       "Hinojosa derrota a Abbott por la gubernatura y rompe 31 años de control republicano en Texas"
+     ]
+    },
+    {
+     "termino": "elecciones",
+     "n": 14,
+     "n_previo": 8,
+     "momento": 6,
+     "zonas": {
+      "Tijuana": 14
+     },
+     "fuentes": {
+      "afn": 6,
+      "jornadabc": 5,
+      "soltij": 3
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "61f817cffbbdf5ff",
+      "63b62022591414a3",
+      "68e8e6d43a926507",
+      "7a867a18d64b1992",
+      "7b155f81316c7eab",
+      "86309122d8fdca0d",
+      "8bda3077f654822a",
+      "92f8fb2e5f5c6195",
+      "9be81ad68a6f56ca",
+      "a6e32e71d82ceb91",
+      "a94ef3ddab4aa928",
+      "d7b254ab674b374e",
+      "ec5d0ac24766bb39",
+      "ee547d2690b65e6f"
+     ],
+     "ejemplos": [
+      "Elecciones en EU abren expectativas para la industria maquiladora, pero persiste incertidumbre, plantea Index",
+      "Defensa a trabajadores y migrantes, la clave del triunfo de demócratas en elecciones de EU",
+      "Elecciones en EU avanzan con triunfo parcial progresista"
+     ]
+    },
+    {
+     "termino": "exige",
+     "n": 9,
+     "n_previo": 3,
+     "momento": 6,
+     "zonas": {
+      "Tijuana": 9
+     },
+     "fuentes": {
+      "afn": 4,
+      "zeta": 3,
+      "imparcial": 2
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "0f35217737b4f2d9",
+      "2edf63fa061984b8",
+      "3974a1a13c73896f",
+      "40b65dac823d97fc",
+      "5d72591398377630",
+      "87558705d4fa692f",
+      "c8302bcd4425d36b",
+      "d4958a3bbf563cc7",
+      "db67f286d59fdfe3"
+     ],
+     "ejemplos": [
+      "Exige Coparmex detener y someter a consulta reforma de operación del TEJA",
+      "Reclama mujer a Fragoso por dilatoria judicial, exige resolver conflicto familiar",
+      "Madre de joven asesinada en Tijuana exige justicia y protección"
      ]
     },
     {
@@ -2071,7 +2348,7 @@
      ]
     },
     {
-     "termino": "democratas",
+     "termino": "resultados",
      "n": 6,
      "n_previo": 0,
      "momento": 6,
@@ -2079,23 +2356,23 @@
       "Tijuana": 6
      },
      "fuentes": {
-      "zeta": 3,
-      "jornadabc": 2,
-      "afn": 1
+      "jornadabc": 4,
+      "soltij": 1,
+      "zeta": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "15984209c8983b1b",
+      "43d4b2eb87ac7011",
       "7eb8d88bc81d5a90",
-      "828cfe435410e121",
-      "8c3219a9fe202491",
-      "d8a9a0e2d6967e43",
-      "ec5d0ac24766bb39"
+      "a010c12f58264326",
+      "a94ef3ddab4aa928",
+      "e77da00276337be7",
+      "ee547d2690b65e6f"
      ],
      "ejemplos": [
-      "Desgaste de políticas de Trump impulsó a los demócratas, sostiene académico de Cetys",
-      "Donalds gana Florida como primer gobernador afroamericano y demócratas avanzan en la Cámara de EU",
-      "Demócratas le arrebatan a Trump el control de la Cámara de Representantes"
+      "Culpa TSJE a la Fiscalía de generar judicializaciones para simular resultados",
+      "Trump acepta los resultados, culpa a su ausencia en la boleta y ofrece trabajar con los demócratas",
+      "México respetará resultados de elecciones intermedias de EU: Sheinbaum"
      ]
     },
     {
@@ -2131,65 +2408,32 @@
      ]
     },
     {
-     "termino": "exige",
-     "n": 8,
-     "n_previo": 3,
+     "termino": "justicia",
+     "n": 7,
+     "n_previo": 2,
      "momento": 5,
      "zonas": {
-      "Tijuana": 8
+      "Tijuana": 7
      },
      "fuentes": {
-      "afn": 3,
-      "zeta": 3,
-      "imparcial": 2
+      "afn": 4,
+      "imparcial": 2,
+      "zeta": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "0f35217737b4f2d9",
+      "21a3348de62d3051",
       "2edf63fa061984b8",
-      "3974a1a13c73896f",
       "40b65dac823d97fc",
-      "5d72591398377630",
+      "4d0476070f915689",
       "87558705d4fa692f",
-      "d4958a3bbf563cc7",
-      "db67f286d59fdfe3"
+      "b511909a54b559ec",
+      "c0090b7e1f3367e8"
      ],
      "ejemplos": [
-      "Reclama mujer a Fragoso por dilatoria judicial, exige resolver conflicto familiar",
-      "Madre de joven asesinada en Tijuana exige justicia y protección",
-      "Exige la Coparmex designar titular del INE con transparencia y basados en méritos"
-     ]
-    },
-    {
-     "termino": "primera",
-     "n": 8,
-     "n_previo": 3,
-     "momento": 5,
-     "zonas": {
-      "Tijuana": 8
-     },
-     "fuentes": {
-      "jornadabc": 3,
-      "zeta": 2,
-      "afn": 1,
-      "imparcial": 1,
-      "soltij": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0f843ecdaed72372",
-      "1f4c143f6f85ae4c",
-      "53c33f107e5353e1",
-      "700630b1999f6ff1",
-      "70724ae1b0944ca9",
-      "9b78e5c280eaba94",
-      "ad84b62d9e767b3a",
-      "b6963e527b83ec1a"
-     ],
-     "ejemplos": [
-      "Haaland gana Nuevo México y será la primera mujer nativa americana en gobernar un estado de EU",
-      "Gina Hinojosa se convierte en la primera gobernadora latina de Texas",
-      "Lance Bottoms gana Georgia y se convierte en la primera gobernadora afroamericana en la historia de EU"
+      "Pide Evelyn Sánchez garantizar intérpretes indígenas en la justicia",
+      "Asesinan a enlace del Movimiento del Sombrero en Tijuana; exigen justicia",
+      "Madre de joven asesinada en Tijuana exige justicia y protección"
      ]
     },
     {
@@ -2253,6 +2497,35 @@
      ]
     },
     {
+     "termino": "asesinan",
+     "n": 6,
+     "n_previo": 1,
+     "momento": 5,
+     "zonas": {
+      "Tijuana": 6
+     },
+     "fuentes": {
+      "afn": 3,
+      "imparcial": 1,
+      "jornadabc": 1,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "532d1aa5db82fe14",
+      "9910c5cdf42d018b",
+      "9a20b4db56fde4de",
+      "a1ee3397724e81b2",
+      "c0090b7e1f3367e8",
+      "d2907cedd3610406"
+     ],
+     "ejemplos": [
+      "Asesinan a un hombre a tiros en Lomas del Porvenir; no hubo detenidos",
+      "Asesinan a enlace del Movimiento del Sombrero en Tijuana; exigen justicia",
+      "Asesinan a balazos a coordinador de Movimiento del Sombrero en Tijuana: líder estatal"
+     ]
+    },
+    {
      "termino": "carcel",
      "n": 5,
      "n_previo": 0,
@@ -2304,137 +2577,11 @@
       "Si EU deporta a Inés Gómez Mont será detenida en cuanto pise México: FGR",
       "ICE publica ficha de Inés Gómez Mont: aparece bajo custodia en Florida"
      ]
-    },
-    {
-     "termino": "resultados",
-     "n": 5,
-     "n_previo": 0,
-     "momento": 5,
-     "zonas": {
-      "Tijuana": 5
-     },
-     "fuentes": {
-      "jornadabc": 3,
-      "soltij": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "43d4b2eb87ac7011",
-      "7eb8d88bc81d5a90",
-      "a94ef3ddab4aa928",
-      "e77da00276337be7",
-      "ee547d2690b65e6f"
-     ],
-     "ejemplos": [
-      "Trump acepta los resultados, culpa a su ausencia en la boleta y ofrece trabajar con los demócratas",
-      "México respetará resultados de elecciones intermedias de EU: Sheinbaum",
-      "Resultados de elecciones en EU podría tener repercusiones en la economía de México"
-     ]
-    },
-    {
-     "termino": "vence",
-     "n": 5,
-     "n_previo": 0,
-     "momento": 5,
-     "zonas": {
-      "Tijuana": 5,
-      "Mexicali": 1,
-      "Playas de Rosarito": 1
-     },
-     "fuentes": {
-      "soltij": 2,
-      "bajanews": 1,
-      "imparcial": 1,
-      "jornadabc": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "1d3be36c5807c3f1",
-      "23b43e0c528efd7e",
-      "28d07613729fbf33",
-      "a6cc6e83195c24d3",
-      "e656619080097ede"
-     ],
-     "ejemplos": [
-      "Xochicalco Mexicali vence a Tijuana y se acerca a los playoffs de OEFA",
-      "Vence plazo para condonación de adeudos de agua en Tijuana y Rosarito",
-      "‘Canelo’ vence a Christian Mbilli y recupera el título supermediano del CMB"
-     ]
-    },
-    {
-     "termino": "elecciones",
-     "n": 12,
-     "n_previo": 8,
-     "momento": 4,
-     "zonas": {
-      "Tijuana": 12
-     },
-     "fuentes": {
-      "afn": 6,
-      "jornadabc": 4,
-      "soltij": 2
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "61f817cffbbdf5ff",
-      "63b62022591414a3",
-      "7a867a18d64b1992",
-      "86309122d8fdca0d",
-      "8bda3077f654822a",
-      "92f8fb2e5f5c6195",
-      "9be81ad68a6f56ca",
-      "a6e32e71d82ceb91",
-      "a94ef3ddab4aa928",
-      "d7b254ab674b374e",
-      "ec5d0ac24766bb39",
-      "ee547d2690b65e6f"
-     ],
-     "ejemplos": [
-      "Elecciones en EU avanzan con triunfo parcial progresista",
-      "IA y democracia: lo que revelan las elecciones de EU 2026",
-      "Prevén cambios en política migratoria de EE.UU. tras elecciones intermedias"
-     ]
-    },
-    {
-     "termino": "municipal",
-     "n": 11,
-     "n_previo": 7,
-     "momento": 4,
-     "zonas": {
-      "Tijuana": 11,
-      "Mexicali": 1
-     },
-     "fuentes": {
-      "soltij": 4,
-      "afn": 3,
-      "imparcial": 3,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0a53d7030c4aa6d7",
-      "0aefd157a5444f78",
-      "0f90200fa369559b",
-      "1b39834f71514f82",
-      "32fafb338cca083b",
-      "998ffc5397897297",
-      "9c8ed82af1cdab64",
-      "aaf6dea9d3c6426a",
-      "adbe251672ad4901",
-      "ce14cbc8c876da55",
-      "e4a12aed9dafbd0b"
-     ],
-     "ejemplos": [
-      "Movimiento del Sombrero condena asesinato de su enlace municipal en Tijuana",
-      "Vecinos de Altavista Norte protestan en Palacio Municipal por departamentos en riesgo de colapso",
-      "Presenta Gobierno Municipal eventos artísticos y culturales en Tijuana durante el mes de noviembre"
-     ]
     }
    ]
   },
   "Mexicali": {
-   "notas_ventana": 250,
+   "notas_ventana": 257,
    "minimo": 3,
    "temas": [
     {
@@ -2516,16 +2663,16 @@
     },
     {
      "termino": "busqueda",
-     "n": 10,
+     "n": 11,
      "n_previo": 2,
-     "momento": 8,
+     "momento": 9,
      "zonas": {
-      "Mexicali": 10,
+      "Mexicali": 11,
       "San Felipe": 1,
       "Tecate": 1
      },
      "fuentes": {
-      "zeta": 3,
+      "zeta": 4,
       "lavoz": 2,
       "afn": 1,
       "gn-a96a3aaee9d9": 1,
@@ -2544,12 +2691,13 @@
       "4d8407ecac819631",
       "5927520cbb1274e9",
       "aaef7f96aaae6f6b",
-      "bb112dfe009b48ee"
+      "bb112dfe009b48ee",
+      "c8e6b7126be0481d"
      ],
      "ejemplos": [
+      "Sigue la búsqueda del K-9 Bertho; se perdió en la colonia Ampliación Nacionalista en Mexicali",
       "Brigada Estatal de Búsqueda concluye jornada en Mexicali y avanza hacia San Felipe",
-      "Niegan autoridades que comida estuviera en mal estado en la Brigada de Búsqueda",
-      "En Mexicali: Hallan restos óseos en el poblado Miguel Alemán tras labores de búsqueda de colectivos"
+      "Niegan autoridades que comida estuviera en mal estado en la Brigada de Búsqueda"
      ]
     },
     {
@@ -2829,6 +2977,36 @@
      ]
     },
     {
+     "termino": "registra",
+     "n": 5,
+     "n_previo": 0,
+     "momento": 5,
+     "zonas": {
+      "Mexicali": 5,
+      "Tijuana": 2,
+      "San Diego": 1
+     },
+     "fuentes": {
+      "gn-f8497491006c": 2,
+      "afn": 1,
+      "imparcial": 1,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "0d1889256f814710",
+      "117373730394bdfc",
+      "b09c505acbc799b7",
+      "b6de26d455cf2fe4",
+      "dadd646d54e81f62"
+     ],
+     "ejemplos": [
+      "Registra Mexicali buena calidad del aire, con excepción de la zona de Anáhuac",
+      "Garitas de Tijuana y Mexicali suman esperas de hasta 100 minutos (Datos actualizados a las 7:00 a. m. PST) La jornada fronteriza registra una importante saturación en Otay Mesa Pasajeros y Calexico West con demoras de hora y media a 100 minutos en ca",
+      "Se registra sismo de 5.1 en Mexicali; no se reportan daños"
+     ]
+    },
+    {
      "termino": "valle",
      "n": 9,
      "n_previo": 5,
@@ -3001,34 +3179,6 @@
      ]
     },
     {
-     "termino": "registra",
-     "n": 4,
-     "n_previo": 0,
-     "momento": 4,
-     "zonas": {
-      "Mexicali": 4,
-      "Tijuana": 2,
-      "San Diego": 1
-     },
-     "fuentes": {
-      "gn-f8497491006c": 2,
-      "afn": 1,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0d1889256f814710",
-      "117373730394bdfc",
-      "b6de26d455cf2fe4",
-      "dadd646d54e81f62"
-     ],
-     "ejemplos": [
-      "Garitas de Tijuana y Mexicali suman esperas de hasta 100 minutos (Datos actualizados a las 7:00 a. m. PST) La jornada fronteriza registra una importante saturación en Otay Mesa Pasajeros y Calexico West con demoras de hora y media a 100 minutos en ca",
-      "Se registra sismo de 5.1 en Mexicali; no se reportan daños",
-      "Garitas de Tijuana y Mexicali registran demoras de hasta 110 minutos (Datos actualizados a las 10:00 AM PST) Este lunes se registra una intensa saturación en los cruces fronterizos de Baja California hacia Estados Unidos, con garitas como Calexico West y"
-     ]
-    },
-    {
      "termino": "registran",
      "n": 4,
      "n_previo": 0,
@@ -3187,7 +3337,7 @@
    ]
   },
   "Ensenada": {
-   "notas_ventana": 59,
+   "notas_ventana": 64,
    "minimo": 3,
    "temas": [
     {
@@ -3314,6 +3464,31 @@
      ]
     },
     {
+     "termino": "marina",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Ensenada": 3
+     },
+     "fuentes": {
+      "imparcial": 1,
+      "radarbc": 1,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "0d0178e727e93d14",
+      "8222024d5e5a54e1",
+      "c3a1d3b030313fbd"
+     ],
+     "ejemplos": [
+      "El Radiador: Que alguien piense en Marina",
+      "Marina habilita refugio temporal en Ensenada con capacidad para 170 personas ante lluvias",
+      "Activa Marina fase preventiva del Plan Marina ante lluvias en Ensenada"
+     ]
+    },
+    {
      "termino": "punta",
      "n": 3,
      "n_previo": 0,
@@ -3337,6 +3512,30 @@
       "Punta Colonet pone a Ensenada en el mapa logístico mundial: CCEE",
       "Punta Colonet abre nueva etapa para construcción en Ensenada: COMICE",
       "Punta Colonet abre una nueva etapa para la construcción en Ensenada: Enrique Sánchez González"
+     ]
+    },
+    {
+     "termino": "vida",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Ensenada": 3
+     },
+     "fuentes": {
+      "imparcial": 2,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "3e39dc121225d151",
+      "b19a46804dfe6ee6",
+      "e66c725fa18cfd54"
+     ],
+     "ejemplos": [
+      "Una mujer sin vida y un hombre lesionado en ataque armado en Ensenada",
+      "Bomberos de Ensenada arriesgan la vida con uniformes desgastados y equipo estructural obsoleto",
+      "Hallan cuerpo sin vida en Lengüeta Arenosa de Ensenada; investigan posible accidente acuático"
      ]
     },
     {
@@ -3573,24 +3772,24 @@
    ]
   },
   "Playas de Rosarito": {
-   "notas_ventana": 61,
+   "notas_ventana": 66,
    "minimo": 3,
    "temas": [
     {
      "termino": "playas",
-     "n": 19,
+     "n": 21,
      "n_previo": 11,
-     "momento": 8,
+     "momento": 10,
      "zonas": {
-      "Playas de Rosarito": 19,
+      "Playas de Rosarito": 21,
       "Tecate": 1,
       "Tijuana": 1
      },
      "fuentes": {
-      "rosarito": 11,
+      "rosarito": 12,
+      "gn-291a95aaf8ce": 2,
       "sintesis": 2,
       "bajanews": 1,
-      "gn-291a95aaf8ce": 1,
       "gn-8b479637ed46": 1,
       "gn-daac788a7e24": 1,
       "soltij": 1,
@@ -3606,9 +3805,11 @@
       "4fe4db3cee5155e0",
       "510fa0de6b6f781d",
       "51966ca16cc68b99",
+      "51c95d0b278d69e5",
       "5e12defa4087ef3f",
       "60e9395dc265f65a",
       "7ac1c9f02d652031",
+      "a076d3881862abc2",
       "a2aa95e82d87be61",
       "ac6d137e39c435f0",
       "b77ad8304427120d",
@@ -3620,8 +3821,8 @@
      ],
      "ejemplos": [
       "Descartan presencia de montachoques en Playas de Rosarito",
-      "Abre nuevo espacio para estudiantes de preparatoria en Playas de Rosarito",
-      "FGE obtiene vinculación a proceso por allanamiento de morada y violencia familiar en playas de Rosarito"
+      "Bachean bulevar Lomas de Jatnil en Playas de Rosarito",
+      "Abre nuevo espacio para estudiantes de preparatoria en Playas de Rosarito"
      ]
     },
     {
@@ -3656,6 +3857,29 @@
       "Cierran actividades por celebraciones del \"Día de Muertos\" en Rosarito",
       "Celebran segunda edición del festival de Día de Muertos en Rosarito",
       "Rosarito alista festival de Día de Muertos con entrada libre"
+     ]
+    },
+    {
+     "termino": "bruma costera",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Playas de Rosarito": 3
+     },
+     "fuentes": {
+      "rosarito": 3
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "6dc6305d945ac5ef",
+      "e682aab2aa49b8a4",
+      "e9d30a1f80b60aed"
+     ],
+     "ejemplos": [
+      "Rosarito alcanzará 22°C con bruma costera: maneje atento",
+      "Rosarito alcanzará 22°C con bruma costera: precaución vial hoy",
+      "Rosarito registrará 22°C y bruma costera: maneje con precaución"
      ]
     },
     {
@@ -3780,6 +4004,31 @@
      ]
     },
     {
+     "termino": "proceso",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Playas de Rosarito": 3
+     },
+     "fuentes": {
+      "gn-291a95aaf8ce": 1,
+      "soltij": 1,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "092674c9395929b0",
+      "a076d3881862abc2",
+      "b77ad8304427120d"
+     ],
+     "ejemplos": [
+      "FGE obtiene vinculación a proceso por allanamiento de morada y violencia familiar en playas de Rosarito",
+      "FGE obtiene vinculación a proceso por allanamiento de morada y violencia familiar en Playas de Rosarito",
+      "Avanza proceso de Morena para elegir coordinador en Rosarito; son 13 aspirantes"
+     ]
+    },
+    {
      "termino": "representante",
      "n": 3,
      "n_previo": 0,
@@ -3834,6 +4083,29 @@
      ]
     },
     {
+     "termino": "alcanzara",
+     "n": 3,
+     "n_previo": 1,
+     "momento": 2,
+     "zonas": {
+      "Playas de Rosarito": 3
+     },
+     "fuentes": {
+      "rosarito": 3
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "37ac4ac15dc0277d",
+      "6dc6305d945ac5ef",
+      "e9d30a1f80b60aed"
+     ],
+     "ejemplos": [
+      "Rosarito alcanzará 22°C con bruma costera: maneje atento",
+      "Rosarito alcanzará 22°C con bruma costera: precaución vial hoy",
+      "Rosarito alcanzará 21°C con cielo despejado: precaución vial"
+     ]
+    },
+    {
      "termino": "desaladora",
      "n": 3,
      "n_previo": 1,
@@ -3882,6 +4154,31 @@
       "Catean almacén del padre de Meghan Markle en Rosarito tras emitirse alerta internacional por abuso infantil",
       "Padre de Meghan Markle guardaba presunta pornografía infantil en bodega de Rosarito",
       "Catean bodega de Thomas Markle en Rosarito por pornografía"
+     ]
+    },
+    {
+     "termino": "morena",
+     "n": 3,
+     "n_previo": 2,
+     "momento": 1,
+     "zonas": {
+      "Playas de Rosarito": 3
+     },
+     "fuentes": {
+      "gn-208187d76ea7": 1,
+      "gn-f8497491006c": 1,
+      "soltij": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "092674c9395929b0",
+      "b80ae631a0889cb1",
+      "de2bc66365729d09"
+     ],
+     "ejemplos": [
+      "Dan último adiós en Rosarito a Rosina del Villar, dirigente estatal de Morena",
+      "Javier Robles expone plan de seguridad y desarrollo ante elecciones internas de Morena en Rosarito",
+      "Avanza proceso de Morena para elegir coordinador en Rosarito; son 13 aspirantes"
      ]
     },
     {
@@ -4648,7 +4945,7 @@
    ]
   },
   "San Felipe": {
-   "notas_ventana": 27,
+   "notas_ventana": 29,
    "minimo": 3,
    "temas": [
     {
@@ -4877,11 +5174,11 @@
     },
     {
      "termino": "felipe",
-     "n": 27,
+     "n": 29,
      "n_previo": 40,
-     "momento": -13,
+     "momento": -11,
      "zonas": {
-      "San Felipe": 27,
+      "San Felipe": 29,
       "Mexicali": 4,
       "San Quintín": 2,
       "Tijuana": 2
@@ -4889,11 +5186,12 @@
      "fuentes": {
       "gn-13afd86dbb5f": 9,
       "gn-507c32aa93b3": 5,
-      "lavoz": 4,
+      "lavoz": 5,
       "gn-8c7449ec9af7": 2,
       "gn-c1d6f8717505": 2,
       "soltij": 2,
       "gn-291a95aaf8ce": 1,
+      "gn-4c772506798b": 1,
       "gn-a96a3aaee9d9": 1,
       "imparcial": 1
      },
@@ -4915,6 +5213,7 @@
       "554c1f4e04d809a8",
       "62b02c0e4955fbdc",
       "65db5eebb7923733",
+      "732d0f8926715c6b",
       "76739beef34c62e4",
       "8419782e817e2684",
       "84ae3a3a2d94ec14",
@@ -4925,34 +5224,37 @@
       "bb112dfe009b48ee",
       "bf912da380c92fb7",
       "c518fd4ca6468e84",
-      "ecbd28996b189169"
+      "ecbd28996b189169",
+      "fe35d3fc3a2ab82f"
      ],
      "ejemplos": [
-      "Brigada Estatal de Búsqueda concluye jornada en Mexicali y avanza hacia San Felipe",
-      "Cierran jornada en Mexicali; la esperanza de encontrar a quienes les hacen falta sigue en San Felipe",
-      "Light mag. 3.0 earthquake - 87 km northwest of San Felipe, Estado de Baja California, Mexico, on Monday, Nov 2, 2026, at 10:57 pm (Mexico_City time)"
+      "¡Una segunda oportunidad! Liberan a dos lobas marinas atrapadas en redes de pesca en San Felipe",
+      "Liberan a dos lobos marinos que estaban atrapadas en redes de pesca, en San Felipe",
+      "Brigada Estatal de Búsqueda concluye jornada en Mexicali y avanza hacia San Felipe"
      ]
     }
    ]
   },
   "San Diego": {
-   "notas_ventana": 317,
+   "notas_ventana": 345,
    "minimo": 3,
    "temas": [
     {
      "termino": "election",
-     "n": 36,
+     "n": 38,
      "n_previo": 14,
-     "momento": 22,
+     "momento": 24,
      "zonas": {
-      "San Diego": 36
+      "San Diego": 38
      },
      "fuentes": {
       "kpbs": 22,
       "timessd": 5,
       "voiceofsd": 5,
       "inewsource": 2,
+      "gn-46bc88bd6277": 1,
       "gn-5bad11419dae": 1,
+      "gn-a956e11d03ed": 1,
       "gn-c70f6d389c2a": 1
      },
      "un_solo_medio": false,
@@ -4963,6 +5265,7 @@
       "17df653f9d8e4df1",
       "27bc8029c82566a1",
       "27d9131d42a4d5fd",
+      "2ade416d634f855c",
       "2badcb5dd7acf2a8",
       "337cf4a18f509524",
       "388b8e3a06c6aea9",
@@ -4974,6 +5277,7 @@
       "71ad32abe6dee3ea",
       "721e923a7c7a6107",
       "731d45937c711429",
+      "7d0d0d758ec666ca",
       "8c4f858fc214114b",
       "984e3b00ea95acce",
       "9c9dae90115588c4",
@@ -4997,7 +5301,7 @@
      "ejemplos": [
       "San Diego County sees high midterm election turnout, some voters deal with long waits",
       "Elected officials, union members and grassroots groups celebrate Tuesday’s election results",
-      "2026 Election Results: Imperial Beach mayor ahead of challengers"
+      "Election results show San Diego's 2 countywide measures too close to call"
      ]
     },
     {
@@ -5048,18 +5352,62 @@
      ]
     },
     {
-     "termino": "races",
-     "n": 11,
-     "n_previo": 1,
-     "momento": 10,
+     "termino": "border",
+     "n": 13,
+     "n_previo": 2,
+     "momento": 11,
      "zonas": {
-      "San Diego": 11
+      "San Diego": 13,
+      "Tijuana": 1
+     },
+     "fuentes": {
+      "gn-5bad11419dae": 2,
+      "gn-a0ec1cdd1d90": 2,
+      "bajanews": 1,
+      "gn-2fdc23db7a84": 1,
+      "gn-46bc88bd6277": 1,
+      "gn-4b075bf74df6": 1,
+      "gn-70815d93ef01": 1,
+      "gn-99ba26031ed3": 1,
+      "gn-a956e11d03ed": 1,
+      "gn-dc1580cd9943": 1,
+      "timessd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "1ac1707589710152",
+      "1ad1f84025648ccc",
+      "38752813a1b9fa21",
+      "4bc719e69549e7a6",
+      "4c2b3f4165a49407",
+      "673df31d53c36711",
+      "6df2a6698a762120",
+      "7b16f8a291655af4",
+      "9d2a6d718a4bbf12",
+      "b24bc4f21ea7e6cc",
+      "cedb1afc8b43c856",
+      "f75b95ef3b2c1951",
+      "fbe45d571378bc54"
+     ],
+     "ejemplos": [
+      "Police Chase Shuts Down US/Mexico Border Entrance At San Ysidro",
+      "CBP Agents Shoot at Pursuit Suspect Near San Ysidro Port of Entry, Border Closed For Several Hours",
+      "Pursuit ends in shooting at San Ysidro border crossing, prompting 9-hour closure"
+     ]
+    },
+    {
+     "termino": "races",
+     "n": 12,
+     "n_previo": 1,
+     "momento": 11,
+     "zonas": {
+      "San Diego": 12
      },
      "fuentes": {
       "inewsource": 3,
       "kpbs": 3,
+      "gn-46bc88bd6277": 2,
       "voiceofsd": 2,
-      "gn-46bc88bd6277": 1,
       "gn-65e51224f05e": 1,
       "timessd": 1
      },
@@ -5067,6 +5415,7 @@
      "notas": [
       "221678f93844eb6d",
       "2711af0c22ffac59",
+      "2ade416d634f855c",
       "3d1abe640f926578",
       "4ea52e9e6aba5a5d",
       "731d45937c711429",
@@ -5081,6 +5430,42 @@
       "How North County Races Are Shaping Out So Far",
       "South Bay school board incumbents leading in their races",
       "Encinitas election results: Who’s ahead in races for mayor, City Council"
+     ]
+    },
+    {
+     "termino": "election results",
+     "n": 11,
+     "n_previo": 0,
+     "momento": 11,
+     "zonas": {
+      "San Diego": 11
+     },
+     "fuentes": {
+      "kpbs": 6,
+      "gn-46bc88bd6277": 1,
+      "gn-5bad11419dae": 1,
+      "gn-a956e11d03ed": 1,
+      "inewsource": 1,
+      "timessd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "066e9a8368400a4d",
+      "27bc8029c82566a1",
+      "2ade416d634f855c",
+      "2badcb5dd7acf2a8",
+      "4a1e2cdecfc3ea05",
+      "5ff04ff0dccabefe",
+      "731d45937c711429",
+      "7d0d0d758ec666ca",
+      "a5218694c73a5566",
+      "ce741981a811dc29",
+      "e5f722b643872f3e"
+     ],
+     "ejemplos": [
+      "Elected officials, union members and grassroots groups celebrate Tuesday’s election results",
+      "Election results show San Diego's 2 countywide measures too close to call",
+      "2026 Election Results: Imperial Beach mayor ahead of challengers"
      ]
     },
     {
@@ -5117,87 +5502,18 @@
      ]
     },
     {
-     "termino": "election results",
-     "n": 9,
-     "n_previo": 0,
-     "momento": 9,
-     "zonas": {
-      "San Diego": 9
-     },
-     "fuentes": {
-      "kpbs": 6,
-      "gn-5bad11419dae": 1,
-      "inewsource": 1,
-      "timessd": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "066e9a8368400a4d",
-      "27bc8029c82566a1",
-      "2badcb5dd7acf2a8",
-      "4a1e2cdecfc3ea05",
-      "5ff04ff0dccabefe",
-      "731d45937c711429",
-      "a5218694c73a5566",
-      "ce741981a811dc29",
-      "e5f722b643872f3e"
-     ],
-     "ejemplos": [
-      "Elected officials, union members and grassroots groups celebrate Tuesday’s election results",
-      "2026 Election Results: Imperial Beach mayor ahead of challengers",
-      "Live election results: Antonio Martinez ahead in San Diego City Council District 8 race"
-     ]
-    },
-    {
-     "termino": "border",
-     "n": 9,
-     "n_previo": 2,
-     "momento": 7,
-     "zonas": {
-      "San Diego": 9,
-      "Tijuana": 1
-     },
-     "fuentes": {
-      "gn-46bc88bd6277": 1,
-      "gn-4b075bf74df6": 1,
-      "gn-5bad11419dae": 1,
-      "gn-70815d93ef01": 1,
-      "gn-99ba26031ed3": 1,
-      "gn-a0ec1cdd1d90": 1,
-      "gn-a956e11d03ed": 1,
-      "gn-dc1580cd9943": 1,
-      "timessd": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "1ac1707589710152",
-      "1ad1f84025648ccc",
-      "38752813a1b9fa21",
-      "4bc719e69549e7a6",
-      "4c2b3f4165a49407",
-      "9d2a6d718a4bbf12",
-      "cedb1afc8b43c856",
-      "f75b95ef3b2c1951",
-      "fbe45d571378bc54"
-     ],
-     "ejemplos": [
-      "Police Chase Shuts Down US/Mexico Border Entrance At San Ysidro",
-      "Stolen vehicle pursuit from Riverside ends in shooting near San Ysidro border.",
-      "Police activity, pursuit spanning several counties closes San Ysidro border crossing"
-     ]
-    },
-    {
      "termino": "early",
-     "n": 7,
+     "n": 8,
      "n_previo": 0,
-     "momento": 7,
+     "momento": 8,
      "zonas": {
-      "San Diego": 7
+      "San Diego": 8
      },
      "fuentes": {
       "timessd": 3,
       "inewsource": 2,
-      "kpbs": 2
+      "kpbs": 2,
+      "gn-8a489297fa14": 1
      },
      "un_solo_medio": false,
      "notas": [
@@ -5207,12 +5523,13 @@
       "5c570ff80f258cc1",
       "6ad603194a9677cc",
       "d8dea5c90ac54b03",
-      "f2157085cb6f8db7"
+      "f2157085cb6f8db7",
+      "f4802a6673764ba8"
      ],
      "ejemplos": [
+      "Imperial Beach Mayor McKay Leads Early Count Over Two Challengers",
       "California billionaire tax trailing in early returns",
-      "San Diego’s Richard Barrera leads Sonja Shaw in California superintendent race, early results show",
-      "California billionaire tax trailing in early returns"
+      "San Diego’s Richard Barrera leads Sonja Shaw in California superintendent race, early results show"
      ]
     },
     {
@@ -5305,6 +5622,33 @@
      ]
     },
     {
+     "termino": "community",
+     "n": 6,
+     "n_previo": 0,
+     "momento": 6,
+     "zonas": {
+      "San Diego": 6
+     },
+     "fuentes": {
+      "timessd": 4,
+      "kpbs": 2
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "1b00be9e4352e3eb",
+      "3232cd28f7905316",
+      "71ad32abe6dee3ea",
+      "7425f696d0c2d97e",
+      "af25c7b350694360",
+      "b9961d562c9bbd16"
+     ],
+     "ejemplos": [
+      "Community colleges rush to expand semiconductor training as labor shortage looms US chip industry",
+      "Pacific Beach Town Council to celebrate 75 years of serving the community",
+      "Free Aging Well Expo in PB to focus on senior health and community"
+     ]
+    },
+    {
      "termino": "congressional",
      "n": 6,
      "n_previo": 0,
@@ -5386,6 +5730,63 @@
      ]
     },
     {
+     "termino": "pursuit",
+     "n": 6,
+     "n_previo": 0,
+     "momento": 6,
+     "zonas": {
+      "San Diego": 6
+     },
+     "fuentes": {
+      "gn-4b075bf74df6": 2,
+      "gn-a0ec1cdd1d90": 2,
+      "gn-2fdc23db7a84": 1,
+      "gn-5bad11419dae": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "1ad1f84025648ccc",
+      "38752813a1b9fa21",
+      "673df31d53c36711",
+      "7b16f8a291655af4",
+      "b24bc4f21ea7e6cc",
+      "ff15f8f597ed31c3"
+     ],
+     "ejemplos": [
+      "San Ysidro Port of Entry reopens after police shooting, multi-county pursuit",
+      "CBP Agents Shoot at Pursuit Suspect Near San Ysidro Port of Entry, Border Closed For Several Hours",
+      "Pursuit ends in shooting at San Ysidro border crossing, prompting 9-hour closure"
+     ]
+    },
+    {
+     "termino": "time",
+     "n": 6,
+     "n_previo": 0,
+     "momento": 6,
+     "zonas": {
+      "San Diego": 6
+     },
+     "fuentes": {
+      "timessd": 3,
+      "kpbs": 2,
+      "voiceofsd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "15b60b96c5439910",
+      "5a47aeecd20480d9",
+      "68d40e600fac9534",
+      "aec3cfb45b871b47",
+      "af25c7b350694360",
+      "b9961d562c9bbd16"
+     ],
+     "ejemplos": [
+      "First-time homebuyers remain scarce, but a record share of them pay all cash",
+      "How Democrats took over San Diego’s congressional delegation, one seat at a time",
+      "Review: The Legend of Zelda: Ocarina of Time remake is superb, streamlined and safe"
+     ]
+    },
+    {
      "termino": "race",
      "n": 15,
      "n_previo": 10,
@@ -5453,32 +5854,6 @@
      ]
     },
     {
-     "termino": "community",
-     "n": 5,
-     "n_previo": 0,
-     "momento": 5,
-     "zonas": {
-      "San Diego": 5
-     },
-     "fuentes": {
-      "timessd": 4,
-      "kpbs": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "1b00be9e4352e3eb",
-      "3232cd28f7905316",
-      "71ad32abe6dee3ea",
-      "af25c7b350694360",
-      "b9961d562c9bbd16"
-     ],
-     "ejemplos": [
-      "Pacific Beach Town Council to celebrate 75 years of serving the community",
-      "Free Aging Well Expo in PB to focus on senior health and community",
-      "Long-time bar SRO Lounge closes after 44 years of serving as ‘safe haven’ for trans community"
-     ]
-    },
-    {
      "termino": "live election results",
      "n": 5,
      "n_previo": 0,
@@ -5501,6 +5876,34 @@
       "Live election results: Antonio Martinez ahead in San Diego City Council District 8 race",
       "Live election results: Tamayo concedes Chula Vista mayoral race, paving way for McCann to serve 2nd term",
       "Live election results: San Diego County sales tax Measure B"
+     ]
+    },
+    {
+     "termino": "office",
+     "n": 5,
+     "n_previo": 0,
+     "momento": 5,
+     "zonas": {
+      "San Diego": 5,
+      "Tijuana": 1
+     },
+     "fuentes": {
+      "gn-a956e11d03ed": 2,
+      "kpbs": 2,
+      "timessd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "0185be3c621fb7c9",
+      "1ac1707589710152",
+      "2acc9d2cce442b16",
+      "4431c4633d745944",
+      "6b9583d354d09a50"
+     ],
+     "ejemplos": [
+      "Head of Justice Department office on Civil Rights resigns",
+      "Registrar's office evacuated due to abandoned suitcase in lobby",
+      "Registrar’s Office evacuated due to suspicious abandoned bag in lobby"
      ]
     },
     {
@@ -5584,143 +5987,87 @@
      ]
     },
     {
-     "termino": "time",
-     "n": 5,
-     "n_previo": 0,
-     "momento": 5,
-     "zonas": {
-      "San Diego": 5
-     },
-     "fuentes": {
-      "timessd": 3,
-      "kpbs": 1,
-      "voiceofsd": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "15b60b96c5439910",
-      "5a47aeecd20480d9",
-      "aec3cfb45b871b47",
-      "af25c7b350694360",
-      "b9961d562c9bbd16"
-     ],
-     "ejemplos": [
-      "How Democrats took over San Diego’s congressional delegation, one seat at a time",
-      "Review: The Legend of Zelda: Ocarina of Time remake is superb, streamlined and safe",
-      "Long-time bar SRO Lounge closes after 44 years of serving as ‘safe haven’ for trans community"
-     ]
-    },
-    {
-     "termino": "senate",
-     "n": 8,
-     "n_previo": 4,
+     "termino": "county",
+     "n": 24,
+     "n_previo": 20,
      "momento": 4,
      "zonas": {
-      "San Diego": 8
+      "San Diego": 24
      },
      "fuentes": {
-      "kpbs": 6,
-      "gn-65e51224f05e": 1,
-      "voiceofsd": 1
+      "kpbs": 7,
+      "timessd": 5,
+      "voiceofsd": 4,
+      "gn-46bc88bd6277": 3,
+      "gn-65e51224f05e": 2,
+      "inewsource": 2,
+      "gn-4b075bf74df6": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "36e28fc743bffff4",
+      "0d408a8d8b08af6d",
+      "1761141f9187800f",
+      "17df653f9d8e4df1",
+      "221678f93844eb6d",
+      "2711af0c22ffac59",
+      "27c5b14c60ba7a5a",
+      "2ade416d634f855c",
+      "2badcb5dd7acf2a8",
+      "2f4fe94f5715ea8f",
+      "30b330df5b792e08",
+      "363e3d99af5a018d",
+      "388b8e3a06c6aea9",
+      "3b3b50e74db6f4e7",
       "3d1abe640f926578",
-      "4dd62609bb2f47a7",
-      "8f16cb387847e818",
-      "9607fb0e27fe54c1",
-      "aa3bb38ffade82ea",
-      "abb2a06cb7e733a1",
-      "da3eafd7a198fe49"
-     ],
-     "ejemplos": [
-      "Chuck Schumer heralds Democrats' 'generational remake' of Senate",
-      "Democrat Abdul El-Sayed defeats Republican Mike Rogers in key Michigan Senate race",
-      "4 state Senate seats, 7 Assembly races to be decided by San Diego County voters"
-     ]
-    },
-    {
-     "termino": "voter",
-     "n": 7,
-     "n_previo": 3,
-     "momento": 4,
-     "zonas": {
-      "San Diego": 7
-     },
-     "fuentes": {
-      "kpbs": 4,
-      "timessd": 2,
-      "inewsource": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "07a072d8f975daae",
-      "0cf5513aad267338",
       "5c7036cbf8fbee42",
-      "650e9367561bc12d",
-      "71ad32abe6dee3ea",
+      "821626b352b4a432",
+      "838b44bae13b70c3",
+      "a9f446da971fa246",
+      "ad4d01a4b24e968b",
+      "b82d2c73b27bd4e0",
       "c78759903c8816e0",
-      "f9a40f91c0a232cc"
+      "e069ea1c553369cb",
+      "ff15f8f597ed31c3",
+      "ffa2c9ca8b6b7d96"
      ],
      "ejemplos": [
-      "California voters reject conservative voter ID proposal",
-      "California voters reject conservative voter ID proposal",
-      "Why San Diego County refused to give private voter information to the DOJ, and what’s next"
+      "San Diego County sees high midterm election turnout, some voters deal with long waits",
+      "San Ysidro Port of Entry reopens after police shooting, multi-county pursuit",
+      "How North County Races Are Shaping Out So Far"
      ]
     },
     {
-     "termino": "congress",
-     "n": 6,
-     "n_previo": 2,
+     "termino": "mayor",
+     "n": 9,
+     "n_previo": 5,
      "momento": 4,
      "zonas": {
-      "San Diego": 6
+      "San Diego": 9
      },
      "fuentes": {
-      "kpbs": 4,
-      "inewsource": 1,
-      "voiceofsd": 1
+      "inewsource": 4,
+      "gn-5bad11419dae": 1,
+      "gn-8a489297fa14": 1,
+      "gn-b5ad07a87e1a": 1,
+      "kpbs": 1,
+      "timessd": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "0469ed15aad47860",
-      "3ab978c718d7316c",
-      "721e923a7c7a6107",
-      "e681013d6112ffec",
-      "f4efa6076a22bccf",
-      "ff4f17e1b5f1de18"
+      "2905da5e4773d133",
+      "4a8b2ab7fcc9355c",
+      "55a10291527ec902",
+      "731d45937c711429",
+      "8dabd1defedad4b5",
+      "e32ac0c550038a40",
+      "e5f722b643872f3e",
+      "ed0fe21b1205f165",
+      "f4802a6673764ba8"
      ],
      "ejemplos": [
-      "It was a big night for doctors to win seats in Congress, riding the blue wave",
-      "Will Democrats control Congress? Their path runs through California. Watch these races",
-      "It's Election Day. Control of Congress is on the line, and what else you need to know"
-     ]
-    },
-    {
-     "termino": "californians",
-     "n": 5,
-     "n_previo": 1,
-     "momento": 4,
-     "zonas": {
-      "San Diego": 5
-     },
-     "fuentes": {
-      "timessd": 3,
-      "kpbs": 2
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "15d7efc4d34338f7",
-      "317e58183114a76d",
-      "60225cbff25129a0",
-      "65f68a9ae5970fb5",
-      "cdf413f956ab4b60"
-     ],
-     "ejemplos": [
-      "Jane Kim in the lead as Californians choose new insurance commissioner",
-      "Jane Kim in the lead as Californians choose new insurance commissioner",
-      "Prop. 2: Californians vote to grow the state’s savings amid AI-driven economic boom"
+      "Imperial Beach Mayor McKay Leads Early Count Over Two Challengers",
+      "Rodriguez widens lead for National City mayor",
+      "2026 Election Results: Imperial Beach mayor ahead of challengers"
      ]
     }
    ]
