@@ -1,6 +1,6 @@
 {
  "esquema": 1,
- "generado": "2026-11-07T06:42:16+00:00",
+ "generado": "2026-11-07T13:30:13+00:00",
  "plataforma": "x",
  "acceso": "sin_sesion",
  "maximo_por_ubicacion": 20,
@@ -23,65 +23,9 @@
    "zona": "Mexicali",
    "ambito": "zona",
    "activa": true,
-   "estado": "ok",
-   "corte": "2026-11-07T06:42:21+00:00",
-   "tendencias": [
-    {
-     "puesto": 1,
-     "nombre": "#LaGranjaTraición",
-     "url": "https://x.com/search?q=%23LaGranjaTraici%C3%B3n"
-    },
-    {
-     "puesto": 2,
-     "nombre": "Paraguay",
-     "url": "https://x.com/search?q=Paraguay"
-    },
-    {
-     "puesto": 3,
-     "nombre": "#LigaMXxESPN",
-     "url": "https://x.com/search?q=%23LigaMXxESPN"
-    },
-    {
-     "puesto": 4,
-     "nombre": "Santiago Peña",
-     "url": "https://x.com/search?q=%22Santiago%20Pe%C3%B1a%22"
-    },
-    {
-     "puesto": 5,
-     "nombre": "Natalia",
-     "url": "https://x.com/search?q=Natalia"
-    },
-    {
-     "puesto": 6,
-     "nombre": "#LaGranjaSalvación",
-     "url": "https://x.com/search?q=%23LaGranjaSalvaci%C3%B3n"
-    },
-    {
-     "puesto": 7,
-     "nombre": "aaron en premios heat",
-     "url": "https://x.com/search?q=%22aaron%20en%20premios%20heat%22"
-    },
-    {
-     "puesto": 8,
-     "nombre": "Atlante",
-     "url": "https://x.com/search?q=Atlante"
-    },
-    {
-     "puesto": 9,
-     "nombre": "#TaddeiEsMorena",
-     "url": "https://x.com/search?q=%23TaddeiEsMorena"
-    },
-    {
-     "puesto": 10,
-     "nombre": "Ueno Bank",
-     "url": "https://x.com/search?q=%22Ueno%20Bank%22"
-    },
-    {
-     "puesto": 11,
-     "nombre": "Esteban Lozano",
-     "url": "https://x.com/search?q=%22Esteban%20Lozano%22"
-    }
-   ]
+   "estado": "fallo",
+   "corte": null,
+   "tendencias": []
   },
   {
    "id": "mexico",
@@ -90,7 +34,7 @@
    "zona": null,
    "ambito": "nacional",
    "activa": true,
-   "estado": "sin_dato",
+   "estado": "fallo",
    "corte": null,
    "tendencias": []
   },
@@ -101,7 +45,7 @@
    "zona": null,
    "ambito": "mundial",
    "activa": true,
-   "estado": "sin_dato",
+   "estado": "fallo",
    "corte": null,
    "tendencias": []
   },
@@ -123,7 +67,7 @@
    "zona": "San Diego",
    "ambito": "zona",
    "activa": true,
-   "estado": "sin_dato",
+   "estado": "fallo",
    "corte": null,
    "tendencias": []
   },
@@ -167,7 +111,7 @@
    "zona": "Tijuana",
    "ambito": "zona",
    "activa": true,
-   "estado": "sin_dato",
+   "estado": "fallo",
    "corte": null,
    "tendencias": []
   }
@@ -175,44 +119,43 @@
  "salud": [
   {
    "ubicacion": "mexicali",
-   "estado": "ok",
-   "tendencias": 11,
-   "promocionadas": 0
+   "estado": "fallo",
+   "tendencias": 0,
+   "promocionadas": 0,
+   "error": "RuntimeError: actors/automation-lab~twitter-trends-scraper/run-sync-get-dataset-items HTTP 403: {\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"You've reached your monthly usag"
   },
   {
    "ubicacion": "mexico",
-   "estado": "sin_dato",
+   "estado": "fallo",
    "tendencias": 0,
    "promocionadas": 0,
-   "nota": "el actor no devolvio tendencias para esta ubicacion"
+   "error": "RuntimeError: actors/automation-lab~twitter-trends-scraper/run-sync-get-dataset-items HTTP 403: {\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"You've reached your monthly usag"
   },
   {
    "ubicacion": "mundo",
-   "estado": "sin_dato",
+   "estado": "fallo",
    "tendencias": 0,
    "promocionadas": 0,
-   "nota": "el actor no devolvio tendencias para esta ubicacion"
+   "error": "RuntimeError: actors/automation-lab~twitter-trends-scraper/run-sync-get-dataset-items HTTP 403: {\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"You've reached your monthly usag"
   },
   {
    "ubicacion": "sandiego",
-   "estado": "sin_dato",
+   "estado": "fallo",
    "tendencias": 0,
    "promocionadas": 0,
-   "nota": "el actor no devolvio tendencias para esta ubicacion"
+   "error": "RuntimeError: actors/automation-lab~twitter-trends-scraper/run-sync-get-dataset-items HTTP 403: {\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"You've reached your monthly usag"
   },
   {
    "ubicacion": "tijuana",
-   "estado": "sin_dato",
+   "estado": "fallo",
    "tendencias": 0,
    "promocionadas": 0,
-   "nota": "el actor no devolvio tendencias para esta ubicacion"
+   "error": "RuntimeError: actors/automation-lab~twitter-trends-scraper/run-sync-get-dataset-items HTTP 403: {\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"You've reached your monthly usag"
   }
  ],
  "gasto": {
   "resultados": 200,
-  "gastado": 11,
-  "por_concepto": {
-   "automation-lab~twitter-trends-scraper": 11
-  }
+  "gastado": 0,
+  "por_concepto": {}
  }
 }

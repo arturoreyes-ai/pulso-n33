@@ -1,6 +1,6 @@
 {
  "esquema": 1,
- "generado": "2026-11-07T06:42:12+00:00",
+ "generado": "2026-11-07T13:30:09+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
@@ -47,11 +47,6 @@
    "tema": "justicia",
    "comentarios": 29,
    "posts": 23
-  },
-  {
-   "tema": "pena",
-   "comentarios": 25,
-   "posts": 22
   },
   {
    "tema": "emergencia",
@@ -899,35 +894,35 @@
   {
    "cuenta": "aztecabc_fb",
    "estado": "fallo",
-   "error": "PresupuestoAgotado: Apify reporta credito agotado (402): {\n  \"error\": {\n    \"type\": \"not-enough-usage-to-run-paid-actor\",\n    \"message\": \"Your remaining usage of $0.004745 this billing cycle isn't eno",
+   "error": "RuntimeError: actors/apify~facebook-posts-scraper/run-sync-get-dataset-items HTTP 403: {\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"You've reached your monthly usage limit o",
    "posts": 0,
    "comentarios": 0
   },
   {
    "cuenta": "blanconegro_fb",
    "estado": "fallo",
-   "error": "PresupuestoAgotado: Apify reporta credito agotado (402): {\n  \"error\": {\n    \"type\": \"not-enough-usage-to-run-paid-actor\",\n    \"message\": \"Your remaining usage of $0.004745 this billing cycle isn't eno",
+   "error": "RuntimeError: actors/apify~facebook-posts-scraper/run-sync-get-dataset-items HTTP 403: {\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"You've reached your monthly usage limit o",
    "posts": 0,
    "comentarios": 0
   },
   {
    "cuenta": "blancorojo_fb",
    "estado": "fallo",
-   "error": "PresupuestoAgotado: Apify reporta credito agotado (402): {\n  \"error\": {\n    \"type\": \"not-enough-usage-to-run-paid-actor\",\n    \"message\": \"Your remaining usage of $0.004745 this billing cycle isn't eno",
+   "error": "RuntimeError: actors/apify~facebook-posts-scraper/run-sync-get-dataset-items HTTP 403: {\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"You've reached your monthly usage limit o",
    "posts": 0,
    "comentarios": 0
   },
   {
    "cuenta": "ndtijuana_fb",
    "estado": "fallo",
-   "error": "PresupuestoAgotado: Apify reporta credito agotado (402): {\n  \"error\": {\n    \"type\": \"not-enough-usage-to-run-paid-actor\",\n    \"message\": \"Your remaining usage of $0.004745 this billing cycle isn't eno",
+   "error": "RuntimeError: actors/apify~facebook-posts-scraper/run-sync-get-dataset-items HTTP 403: {\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"You've reached your monthly usage limit o",
    "posts": 0,
    "comentarios": 0
   },
   {
    "cuenta": "psn_fb",
    "estado": "fallo",
-   "error": "PresupuestoAgotado: Apify reporta credito agotado (402): {\n  \"error\": {\n    \"type\": \"not-enough-usage-to-run-paid-actor\",\n    \"message\": \"Your remaining usage of $0.004745 this billing cycle isn't eno",
+   "error": "RuntimeError: actors/apify~facebook-posts-scraper/run-sync-get-dataset-items HTTP 403: {\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"You've reached your monthly usage limit o",
    "posts": 0,
    "comentarios": 0
   }
