@@ -3,7 +3,7 @@
  "generado": "2026-11-07",
  "ventana_dias": 7,
  "minimo": 3,
- "notas_ventana": 2417,
+ "notas_ventana": 2447,
  "notas_previas": 2851,
  "temas": [
   {
@@ -167,17 +167,18 @@
   },
   {
    "termino": "congreso",
-   "n": 30,
+   "n": 31,
    "n_previo": 9,
-   "momento": 21,
+   "momento": 22,
    "zonas": {
     "nacional": 12,
     "Tijuana": 9,
     "Mexicali": 5,
-    "estatal": 4
+    "estatal": 4,
+    "Tecate": 1
    },
    "fuentes": {
-    "imparcial": 14,
+    "imparcial": 15,
     "afn": 5,
     "lavoz": 4,
     "jornadabc": 3,
@@ -205,6 +206,7 @@
     "b2f1ecaf7a2cf515",
     "b72c109d64ff1280",
     "c0252bb212124cb6",
+    "c52c9d79a7cfb5e1",
     "c88401a844edcdfb",
     "d26a5a257ca63d11",
     "d2bd33d861d8aefc",
@@ -218,9 +220,80 @@
     "fb619aca2a8e614f"
    ],
    "ejemplos": [
+    "Congreso de BC pide a García Harfuch operativo especial para frenar violencia en Tecate",
     "Congreso define calendario para la glosa del Quinto Informe de Gobierno",
-    "Entrega Gobierno de BC su Quinto Informe de Administración Estatal al Congreso",
-    "SAT: Con 349 votos a favor, el Congreso de la Unión dio luz verde definitiva a las reglas del ISR para el ejercicio fiscal 2027, blindando de los límites de deducción a sectores clave como el automotriz y el gasolinero bajo el argumento de proteger la competitividad y el empleo"
+    "Entrega Gobierno de BC su Quinto Informe de Administración Estatal al Congreso"
+   ]
+  },
+  {
+   "termino": "estado",
+   "n": 36,
+   "n_previo": 16,
+   "momento": 20,
+   "zonas": {
+    "nacional": 12,
+    "Tijuana": 8,
+    "Mexicali": 7,
+    "San Felipe": 7,
+    "estatal": 3,
+    "San Diego": 1,
+    "San Quintín": 1
+   },
+   "fuentes": {
+    "imparcial": 13,
+    "gn-13afd86dbb5f": 9,
+    "afn": 3,
+    "jornadabc": 3,
+    "lavoz": 3,
+    "gn-906741a25e9c": 1,
+    "radarbc": 1,
+    "soltij": 1,
+    "timessd": 1,
+    "zeta": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "03f040cddf818764",
+    "0941ff7b603486b2",
+    "1164bf360f0cb0a2",
+    "16300eb48b38865b",
+    "1630b5b423928ecf",
+    "1979feddaca05ce8",
+    "1c44639136af5ca0",
+    "1cad675211127a19",
+    "2f864590eab6d309",
+    "37c85e07c4a94cce",
+    "38ca0c17a099bf4f",
+    "4206809afddc9a2a",
+    "498430db0357098f",
+    "4ddf513ee9084354",
+    "554c1f4e04d809a8",
+    "56ab4d905e28ade0",
+    "5d59fc1897537fd1",
+    "69d97b3f291c75f3",
+    "70724ae1b0944ca9",
+    "78efa9fd1de2a07e",
+    "810e4fa9db17375e",
+    "84ae3a3a2d94ec14",
+    "8951393d935661d6",
+    "8d026863089464f5",
+    "92fc57f3b7b995da",
+    "9b7ffc52bbaf5ce0",
+    "aaef7f96aaae6f6b",
+    "c618ec092350be8a",
+    "cc4c2a2847edc083",
+    "ceeb90187770166f",
+    "d5d5caaa6bb35670",
+    "d5d76cfc9763fb7b",
+    "dcb1c99319a2459f",
+    "dd127136e4b70133",
+    "e2e069f9457093e4",
+    "feb7c7c36beeb785"
+   ],
+   "ejemplos": [
+    "Realizará Estado colecta de juguetes para niños de San Quintín",
+    "Light mag. 3.6 earthquake - 39 km southeast of San Felipe, Estado de Baja California, Mexico, on Friday, Nov 6, 2026, at 02:12 pm (Tijuana time)",
+    "IEEBC consultará con comunidades indígenas y afromexicanas del estado los requisitos y opiniones para candidaturas de 2027"
    ]
   },
   {
@@ -326,73 +399,6 @@
     "¿Cuánto cuesta armar una mochila de emergencia en México?",
     "Tijuana aprueba declaratoria de emergencia ante pronóstico por El Niño",
     "Declararán emergencia en Tijuana por el fenómeno de El Niño"
-   ]
-  },
-  {
-   "termino": "estado",
-   "n": 34,
-   "n_previo": 16,
-   "momento": 18,
-   "zonas": {
-    "nacional": 12,
-    "Mexicali": 7,
-    "Tijuana": 7,
-    "San Felipe": 6,
-    "estatal": 3,
-    "San Diego": 1
-   },
-   "fuentes": {
-    "imparcial": 13,
-    "gn-13afd86dbb5f": 8,
-    "afn": 3,
-    "jornadabc": 3,
-    "lavoz": 3,
-    "radarbc": 1,
-    "soltij": 1,
-    "timessd": 1,
-    "zeta": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "03f040cddf818764",
-    "0941ff7b603486b2",
-    "1164bf360f0cb0a2",
-    "16300eb48b38865b",
-    "1630b5b423928ecf",
-    "1979feddaca05ce8",
-    "1cad675211127a19",
-    "2f864590eab6d309",
-    "38ca0c17a099bf4f",
-    "4206809afddc9a2a",
-    "498430db0357098f",
-    "4ddf513ee9084354",
-    "554c1f4e04d809a8",
-    "56ab4d905e28ade0",
-    "5d59fc1897537fd1",
-    "69d97b3f291c75f3",
-    "70724ae1b0944ca9",
-    "78efa9fd1de2a07e",
-    "810e4fa9db17375e",
-    "84ae3a3a2d94ec14",
-    "8951393d935661d6",
-    "8d026863089464f5",
-    "92fc57f3b7b995da",
-    "9b7ffc52bbaf5ce0",
-    "aaef7f96aaae6f6b",
-    "c618ec092350be8a",
-    "cc4c2a2847edc083",
-    "ceeb90187770166f",
-    "d5d5caaa6bb35670",
-    "d5d76cfc9763fb7b",
-    "dcb1c99319a2459f",
-    "dd127136e4b70133",
-    "e2e069f9457093e4",
-    "feb7c7c36beeb785"
-   ],
-   "ejemplos": [
-    "IEEBC consultará con comunidades indígenas y afromexicanas del estado los requisitos y opiniones para candidaturas de 2027",
-    "Ejecutivo entrega quinto informe de gobierno al Congreso del Estado",
-    "Elon Musk gastó más de 445 millones de dólares para mantener a los republicanos en el poder, pero perdió en Texas, el estado al que mudó Tesla y SpaceX para alejarse de los demócratas, y ahora enfrenta un golpe bursátil cercano a los 120 mil millones de dólares"
    ]
   },
   {
@@ -773,6 +779,53 @@
    ]
   },
   {
+   "termino": "pemex",
+   "n": 17,
+   "n_previo": 3,
+   "momento": 14,
+   "zonas": {
+    "nacional": 9,
+    "Playas de Rosarito": 5,
+    "Tijuana": 3
+   },
+   "fuentes": {
+    "imparcial": 8,
+    "jornadabc": 2,
+    "afn": 1,
+    "gn-062dc8648157": 1,
+    "gn-208187d76ea7": 1,
+    "gn-a96a3aaee9d9": 1,
+    "gn-df1d301d141c": 1,
+    "rosarito": 1,
+    "soltij": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "0808f3e8c46f5888",
+    "1cad675211127a19",
+    "24147d08fac9e4f8",
+    "2587b778d5535e0f",
+    "3a4b1e080c717789",
+    "42b810366836db92",
+    "44cde5119e2a86c4",
+    "45fc85f03fa7d090",
+    "46241277e1f22833",
+    "5acf69cfc1e724fc",
+    "5b4a386b2c77e44a",
+    "75664aadba5e78e2",
+    "97cea682c61820af",
+    "b66bbd2fe2ae0a3f",
+    "cc5a5429410045c9",
+    "feb7c7c36beeb785",
+    "ffcb05127ff694e1"
+   ],
+   "ejemplos": [
+    "Jubilados de Pemex protestan en Rosarito por falta de atención médica",
+    "Jubilados de Pemex Bloquean Accesos a Instalaciones en Playas de Rosarito",
+    "Jubilados de Pemex protestan en Rosarito por falta de medicamentos y especialistas"
+   ]
+  },
+  {
    "termino": "padre meghan markle",
    "n": 15,
    "n_previo": 1,
@@ -976,6 +1029,71 @@
    ]
   },
   {
+   "termino": "playas",
+   "n": 31,
+   "n_previo": 18,
+   "momento": 13,
+   "zonas": {
+    "Playas de Rosarito": 19,
+    "Tijuana": 11,
+    "Tecate": 1,
+    "estatal": 1,
+    "nacional": 1
+   },
+   "fuentes": {
+    "rosarito": 10,
+    "soltij": 4,
+    "uniradio": 4,
+    "imparcial": 3,
+    "gn-291a95aaf8ce": 2,
+    "gn-df1d301d141c": 2,
+    "jornadabc": 2,
+    "bajanews": 1,
+    "gn-8b479637ed46": 1,
+    "gn-daac788a7e24": 1,
+    "zeta": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "083c961c8f524012",
+    "1f17c92abe154faf",
+    "2129268b67b2ac42",
+    "26e18c850e33dd49",
+    "2edaab4464fdc274",
+    "417d501fa6d75b12",
+    "4183baab79d69a0a",
+    "46b6973468ef6890",
+    "508b229f12b597e2",
+    "510fa0de6b6f781d",
+    "51966ca16cc68b99",
+    "51c95d0b278d69e5",
+    "60b826da8d9e08fa",
+    "700fb57750deadd6",
+    "7970283424eb8e66",
+    "79ae8e3cf42bf656",
+    "7ac1c9f02d652031",
+    "89cd7bcad39186c1",
+    "9320818ce4dd14ae",
+    "a076d3881862abc2",
+    "ac6d137e39c435f0",
+    "b77ad8304427120d",
+    "cd4a2cb817fd4bf0",
+    "cd5258d8039e2c40",
+    "da6b5ee47ee71efc",
+    "e7912e689322d185",
+    "e9dbee71e436ea3e",
+    "efdde49788f7a1e6",
+    "f31d6188abe5f342",
+    "fbc4f69110c09fcf",
+    "ffcb05127ff694e1"
+   ],
+   "ejemplos": [
+    "Sostiene Burgueño reunión en Playas previo a El Niño",
+    "Jubilados de Pemex Bloquean Accesos a Instalaciones en Playas de Rosarito",
+    "Comerciantes rescatan las letras de Playas de Tijuana; el malecón acumula hasta tres años de retraso"
+   ]
+  },
+  {
    "termino": "marina pilar",
    "n": 19,
    "n_previo": 6,
@@ -1077,112 +1195,47 @@
    ]
   },
   {
-   "termino": "pemex",
+   "termino": "time",
    "n": 16,
    "n_previo": 3,
    "momento": 13,
    "zonas": {
-    "nacional": 9,
-    "Playas de Rosarito": 4,
-    "Tijuana": 3
+    "San Felipe": 7,
+    "San Diego": 5,
+    "Tijuana": 3,
+    "Mexicali": 2,
+    "nacional": 2
    },
    "fuentes": {
-    "imparcial": 8,
-    "jornadabc": 2,
-    "afn": 1,
-    "gn-062dc8648157": 1,
-    "gn-a96a3aaee9d9": 1,
-    "gn-df1d301d141c": 1,
-    "rosarito": 1,
-    "soltij": 1
+    "gn-13afd86dbb5f": 9,
+    "timessd": 3,
+    "kpbs": 2,
+    "gn-18b09c92e250": 1,
+    "imparcial": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "0808f3e8c46f5888",
-    "1cad675211127a19",
-    "2587b778d5535e0f",
-    "3a4b1e080c717789",
-    "42b810366836db92",
-    "44cde5119e2a86c4",
-    "45fc85f03fa7d090",
-    "46241277e1f22833",
-    "5acf69cfc1e724fc",
-    "5b4a386b2c77e44a",
-    "75664aadba5e78e2",
-    "97cea682c61820af",
-    "b66bbd2fe2ae0a3f",
-    "cc5a5429410045c9",
-    "feb7c7c36beeb785",
-    "ffcb05127ff694e1"
+    "03f040cddf818764",
+    "1630b5b423928ecf",
+    "1c02cd1f049df11a",
+    "1c44639136af5ca0",
+    "498430db0357098f",
+    "4ddf513ee9084354",
+    "554c1f4e04d809a8",
+    "5a47aeecd20480d9",
+    "616ce866017e4d25",
+    "68d40e600fac9534",
+    "84ae3a3a2d94ec14",
+    "92fc57f3b7b995da",
+    "aec3cfb45b871b47",
+    "b9961d562c9bbd16",
+    "bd7b2d587981aca7",
+    "ceeb90187770166f"
    ],
    "ejemplos": [
-    "Jubilados de Pemex Bloquean Accesos a Instalaciones en Playas de Rosarito",
-    "Jubilados de Pemex protestan en Rosarito por falta de medicamentos y especialistas",
-    "Jubilados protestan en accesos de Pemex, exigen medicamentos y atención médica"
-   ]
-  },
-  {
-   "termino": "playas",
-   "n": 30,
-   "n_previo": 18,
-   "momento": 12,
-   "zonas": {
-    "Playas de Rosarito": 19,
-    "Tijuana": 10,
-    "Tecate": 1,
-    "estatal": 1,
-    "nacional": 1
-   },
-   "fuentes": {
-    "rosarito": 10,
-    "soltij": 4,
-    "imparcial": 3,
-    "uniradio": 3,
-    "gn-291a95aaf8ce": 2,
-    "gn-df1d301d141c": 2,
-    "jornadabc": 2,
-    "bajanews": 1,
-    "gn-8b479637ed46": 1,
-    "gn-daac788a7e24": 1,
-    "zeta": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "083c961c8f524012",
-    "1f17c92abe154faf",
-    "2129268b67b2ac42",
-    "26e18c850e33dd49",
-    "2edaab4464fdc274",
-    "417d501fa6d75b12",
-    "4183baab79d69a0a",
-    "46b6973468ef6890",
-    "508b229f12b597e2",
-    "510fa0de6b6f781d",
-    "51966ca16cc68b99",
-    "51c95d0b278d69e5",
-    "60b826da8d9e08fa",
-    "700fb57750deadd6",
-    "7970283424eb8e66",
-    "79ae8e3cf42bf656",
-    "7ac1c9f02d652031",
-    "89cd7bcad39186c1",
-    "9320818ce4dd14ae",
-    "a076d3881862abc2",
-    "ac6d137e39c435f0",
-    "b77ad8304427120d",
-    "cd4a2cb817fd4bf0",
-    "cd5258d8039e2c40",
-    "e7912e689322d185",
-    "e9dbee71e436ea3e",
-    "efdde49788f7a1e6",
-    "f31d6188abe5f342",
-    "fbc4f69110c09fcf",
-    "ffcb05127ff694e1"
-   ],
-   "ejemplos": [
-    "Sostiene Burgueño reunión en Playas previo a El Niño",
-    "Jubilados de Pemex Bloquean Accesos a Instalaciones en Playas de Rosarito",
-    "Puente peatonal carretera Escénica en Playas de Rosarito sigue sin protección"
+    "San Diego upset by Utah in NWSL quarterfinals, falling to Royals for first time in franchise history",
+    "Light mag. 3.6 earthquake - 39 km southeast of San Felipe, Estado de Baja California, Mexico, on Friday, Nov 6, 2026, at 02:12 pm (Tijuana time)",
+    "First-time homebuyers remain scarce, but a record share of them pay all cash"
    ]
   },
   {
@@ -1354,43 +1407,6 @@
     "Election results show San Diego's 2 countywide measures too close to call",
     "2026 Election Results: Imperial Beach mayor ahead of challengers"
    ]
-  },
-  {
-   "termino": "pena",
-   "n": 12,
-   "n_previo": 0,
-   "momento": 12,
-   "zonas": {
-    "nacional": 8,
-    "Tijuana": 3,
-    "estatal": 1
-   },
-   "fuentes": {
-    "imparcial": 8,
-    "zeta": 2,
-    "afn": 1,
-    "gn-dc1580cd9943": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "1402fd86098d5959",
-    "3d008042ba895af5",
-    "4b39aaf418ccdaff",
-    "6c04dc1252e9298d",
-    "7fa5bdad059b7298",
-    "8227558780031580",
-    "85d6dc22cee20239",
-    "953ea59056c5060d",
-    "98652e0237afc380",
-    "bfa80263493aaa7b",
-    "c159e951be3a2f80",
-    "daeecee59bbbd187"
-   ],
-   "ejemplos": [
-    "Policía de Paraguay detiene a Santiago Peña en su domicilio tras destitución por el Senado",
-    "“Debe haber separación entre el poder económico y el político”, dijo Sheinbaum tras la crisis bancaria que terminó con la salida de Santiago Peña de la Presidencia de Paraguay, en medio de cuestionamientos por sus vínculos con Ueno Bank",
-    "Santiago Peña, presidente de Paraguay, pide 72 horas para defenderse de juicio político tras el colapso de Ueno Bank que congeló los ahorros de casi 3 millones de personas"
-   ]
   }
  ],
  "descartados": [
@@ -1497,7 +1513,7 @@
  ],
  "por_zona": {
   "Tijuana": {
-   "notas_ventana": 606,
+   "notas_ventana": 613,
    "minimo": 3,
    "temas": [
     {
@@ -1711,6 +1727,40 @@
      ]
     },
     {
+     "termino": "estado",
+     "n": 8,
+     "n_previo": 1,
+     "momento": 7,
+     "zonas": {
+      "Tijuana": 8,
+      "San Felipe": 2,
+      "Mexicali": 1
+     },
+     "fuentes": {
+      "gn-13afd86dbb5f": 3,
+      "afn": 2,
+      "jornadabc": 1,
+      "soltij": 1,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "1164bf360f0cb0a2",
+      "1c44639136af5ca0",
+      "2f864590eab6d309",
+      "70724ae1b0944ca9",
+      "84ae3a3a2d94ec14",
+      "8951393d935661d6",
+      "c618ec092350be8a",
+      "ceeb90187770166f"
+     ],
+     "ejemplos": [
+      "Light mag. 3.6 earthquake - 39 km southeast of San Felipe, Estado de Baja California, Mexico, on Friday, Nov 6, 2026, at 02:12 pm (Tijuana time)",
+      "Moderate mag. 4.9 earthquake - 34 km southeast of Mexicali, Estado de Baja California, Mexico, on Tuesday, Nov 3, 2026, at 10:27 am (Tijuana time)",
+      "Investigarán entrega de alimentos en mal estado: Pon Méndez"
+     ]
+    },
+    {
      "termino": "justicia",
      "n": 8,
      "n_previo": 1,
@@ -1797,6 +1847,43 @@
       "Vecinos de Sánchez Taboada se manifestaron en Palacio Municipal para exigir reparación de calle colapsada",
       "Vecinos de Altavista Norte protestan en Palacio Municipal por departamentos en riesgo de colapso",
       "Familias de Altavista protestan en Palacio Municipal: 68 departamentos en riesgo de colapso y constructora desaparecida"
+     ]
+    },
+    {
+     "termino": "playas",
+     "n": 11,
+     "n_previo": 5,
+     "momento": 6,
+     "zonas": {
+      "Tijuana": 11,
+      "Playas de Rosarito": 1,
+      "Tecate": 1
+     },
+     "fuentes": {
+      "soltij": 4,
+      "uniradio": 3,
+      "imparcial": 2,
+      "jornadabc": 1,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "417d501fa6d75b12",
+      "508b229f12b597e2",
+      "510fa0de6b6f781d",
+      "700fb57750deadd6",
+      "7970283424eb8e66",
+      "79ae8e3cf42bf656",
+      "9320818ce4dd14ae",
+      "da6b5ee47ee71efc",
+      "e7912e689322d185",
+      "e9dbee71e436ea3e",
+      "efdde49788f7a1e6"
+     ],
+     "ejemplos": [
+      "Comerciantes rescatan las letras de Playas de Tijuana; el malecón acumula hasta tres años de retraso",
+      "Malecón de Playas de Tijuana suma cerca de 1 millón de pesos en multas federales; la obra sigue sin permiso ambiental",
+      "FGE despliega presencia operativa en calles de Playas de Tijuana"
      ]
     },
     {
@@ -1899,39 +1986,6 @@
      ]
     },
     {
-     "termino": "estado",
-     "n": 7,
-     "n_previo": 1,
-     "momento": 6,
-     "zonas": {
-      "Tijuana": 7,
-      "Mexicali": 1,
-      "San Felipe": 1
-     },
-     "fuentes": {
-      "afn": 2,
-      "gn-13afd86dbb5f": 2,
-      "jornadabc": 1,
-      "soltij": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "1164bf360f0cb0a2",
-      "2f864590eab6d309",
-      "70724ae1b0944ca9",
-      "84ae3a3a2d94ec14",
-      "8951393d935661d6",
-      "c618ec092350be8a",
-      "ceeb90187770166f"
-     ],
-     "ejemplos": [
-      "Moderate mag. 4.9 earthquake - 34 km southeast of Mexicali, Estado de Baja California, Mexico, on Tuesday, Nov 3, 2026, at 10:27 am (Tijuana time)",
-      "Investigarán entrega de alimentos en mal estado: Pon Méndez",
-      "Haaland gana Nuevo México y será la primera mujer nativa americana en gobernar un estado de EU"
-     ]
-    },
-    {
      "termino": "desaparecida",
      "n": 6,
      "n_previo": 0,
@@ -2015,42 +2069,6 @@
       "Culpa TSJE a la Fiscalía de generar judicializaciones para simular resultados",
       "Trump acepta los resultados, culpa a su ausencia en la boleta y ofrece trabajar con los demócratas",
       "México respetará resultados de elecciones intermedias de EU: Sheinbaum"
-     ]
-    },
-    {
-     "termino": "playas",
-     "n": 10,
-     "n_previo": 5,
-     "momento": 5,
-     "zonas": {
-      "Tijuana": 10,
-      "Playas de Rosarito": 1,
-      "Tecate": 1
-     },
-     "fuentes": {
-      "soltij": 4,
-      "imparcial": 2,
-      "uniradio": 2,
-      "jornadabc": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "417d501fa6d75b12",
-      "508b229f12b597e2",
-      "510fa0de6b6f781d",
-      "700fb57750deadd6",
-      "7970283424eb8e66",
-      "79ae8e3cf42bf656",
-      "9320818ce4dd14ae",
-      "e7912e689322d185",
-      "e9dbee71e436ea3e",
-      "efdde49788f7a1e6"
-     ],
-     "ejemplos": [
-      "Malecón de Playas de Tijuana suma cerca de 1 millón de pesos en multas federales; la obra sigue sin permiso ambiental",
-      "FGE despliega presencia operativa en calles de Playas de Tijuana",
-      "FGE refuerza presencia operativa en calles de la delegación playas de Tijuana"
      ]
     },
     {
@@ -2284,7 +2302,7 @@
    ]
   },
   "Mexicali": {
-   "notas_ventana": 245,
+   "notas_ventana": 246,
    "minimo": 3,
    "temas": [
     {
@@ -3014,7 +3032,7 @@
    ]
   },
   "Ensenada": {
-   "notas_ventana": 51,
+   "notas_ventana": 53,
    "minimo": 3,
    "temas": [
     {
@@ -3255,7 +3273,7 @@
    ]
   },
   "Playas de Rosarito": {
-   "notas_ventana": 68,
+   "notas_ventana": 70,
    "minimo": 3,
    "temas": [
     {
@@ -3304,6 +3322,33 @@
       "Jubilados de Pemex Bloquean Accesos a Instalaciones en Playas de Rosarito",
       "Puente peatonal carretera Escénica en Playas de Rosarito sigue sin protección",
       "Restaurantes de Playas de Rosarito resienten caída en ventas"
+     ]
+    },
+    {
+     "termino": "jubilados pemex protestan",
+     "n": 4,
+     "n_previo": 0,
+     "momento": 4,
+     "zonas": {
+      "Playas de Rosarito": 4
+     },
+     "fuentes": {
+      "gn-208187d76ea7": 1,
+      "gn-a96a3aaee9d9": 1,
+      "jornadabc": 1,
+      "rosarito": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "24147d08fac9e4f8",
+      "44cde5119e2a86c4",
+      "5acf69cfc1e724fc",
+      "cc5a5429410045c9"
+     ],
+     "ejemplos": [
+      "Jubilados de Pemex protestan en Rosarito por falta de atención médica",
+      "Jubilados de Pemex protestan en Rosarito por falta de medicamentos y especialistas",
+      "Jubilados de Pemex protestan en Rosarito por desabasto médico"
      ]
     },
     {
@@ -3433,56 +3478,6 @@
      ]
     },
     {
-     "termino": "issste",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Playas de Rosarito": 3
-     },
-     "fuentes": {
-      "gn-7d4f269c2a1b": 1,
-      "gn-86d59fc60ccb": 1,
-      "gn-b4bf210d5652": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "922d1fb058ea1a0f",
-      "99e22cf98b2ec2d1",
-      "e6a03a05cfc74d68"
-     ],
-     "ejemplos": [
-      "ISSSTE abre nueva unidad médica en Rosarito; atenderá a 5 mil derechohabientes: Martí Batres",
-      "Informa Martí Batres inicio de funciones de la nueva UMF del ISSSTE en Rosarito, Baja California",
-      "ISSSTE abre nueva Unidad de Medicina Familiar en Rosarito"
-     ]
-    },
-    {
-     "termino": "jubilados pemex protestan",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Playas de Rosarito": 3
-     },
-     "fuentes": {
-      "gn-a96a3aaee9d9": 1,
-      "jornadabc": 1,
-      "rosarito": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "44cde5119e2a86c4",
-      "5acf69cfc1e724fc",
-      "cc5a5429410045c9"
-     ],
-     "ejemplos": [
-      "Jubilados de Pemex protestan en Rosarito por falta de medicamentos y especialistas",
-      "Jubilados de Pemex protestan en Rosarito por desabasto médico",
-      "Jubilados de Pemex protestan en Rosarito por falta de medicamentos y médicos"
-     ]
-    },
-    {
      "termino": "markle",
      "n": 3,
      "n_previo": 0,
@@ -3505,6 +3500,31 @@
       "Catean almacén del padre de Meghan Markle en Rosarito tras emitirse alerta internacional por abuso infantil",
       "Padre de Meghan Markle guardaba presunta pornografía infantil en bodega de Rosarito",
       "Catean bodega de Thomas Markle en Rosarito por pornografía"
+     ]
+    },
+    {
+     "termino": "marti batres",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "Playas de Rosarito": 3
+     },
+     "fuentes": {
+      "gn-29632c8487f6": 1,
+      "gn-86d59fc60ccb": 1,
+      "gn-b4bf210d5652": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "929ea0f1a7197fad",
+      "99e22cf98b2ec2d1",
+      "e6a03a05cfc74d68"
+     ],
+     "ejemplos": [
+      "Informa Martí Batres inicio de funciones de la nueva UMF del ISSSTE en Rosarito, Baja California",
+      "ISSSTE abre nueva unidad médica en Rosarito; atenderá a 5 mil derechohabientes: Martí Batres",
+      "Informa Martí Batres inicio de funciones de la nueva UMF del ISSSTE en Rosarito, Baja California"
      ]
     },
     {
@@ -3711,7 +3731,7 @@
    ]
   },
   "Tecate": {
-   "notas_ventana": 53,
+   "notas_ventana": 54,
    "minimo": 3,
    "temas": [
     {
@@ -4050,6 +4070,36 @@
      ]
     },
     {
+     "termino": "operativo",
+     "n": 6,
+     "n_previo": 8,
+     "momento": -2,
+     "zonas": {
+      "Tecate": 6
+     },
+     "fuentes": {
+      "imparcial": 2,
+      "afn": 1,
+      "gn-01e4fd06574f": 1,
+      "gn-df1d301d141c": 1,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "4140ab5d6a1c58be",
+      "5139765d112ecee0",
+      "83f3fe806002c394",
+      "c52c9d79a7cfb5e1",
+      "d83ead89db249212",
+      "debfbb7a2600f286"
+     ],
+     "ejemplos": [
+      "Congreso de BC pide a García Harfuch operativo especial para frenar violencia en Tecate",
+      "Aseguran Combustible Ilícito tras Operativo en Inmueble de El Hongo en Tecate",
+      "DETIENEN FUERZAS DE SEGURIDAD A HOMBRE ARMADO Y ASEGURAN ESCOPETA EN OPERATIVO TECATE"
+     ]
+    },
+    {
      "termino": "seguridad",
      "n": 4,
      "n_previo": 6,
@@ -4074,35 +4124,6 @@
       "Policías en Tecate viven en constante temor por su seguridad",
       "Gobierno de Tecate y autoridades estatales y federales revisan estrategia de seguridad",
       "Fuerzas de coordinación mantienen resultados de seguridad en Tecate"
-     ]
-    },
-    {
-     "termino": "operativo",
-     "n": 5,
-     "n_previo": 8,
-     "momento": -3,
-     "zonas": {
-      "Tecate": 5
-     },
-     "fuentes": {
-      "afn": 1,
-      "gn-01e4fd06574f": 1,
-      "gn-df1d301d141c": 1,
-      "imparcial": 1,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "4140ab5d6a1c58be",
-      "5139765d112ecee0",
-      "83f3fe806002c394",
-      "d83ead89db249212",
-      "debfbb7a2600f286"
-     ],
-     "ejemplos": [
-      "Aseguran Combustible Ilícito tras Operativo en Inmueble de El Hongo en Tecate",
-      "DETIENEN FUERZAS DE SEGURIDAD A HOMBRE ARMADO Y ASEGURAN ESCOPETA EN OPERATIVO TECATE",
-      "Detienen a hombre armado y aseguran una escopeta durante operativo en Tecate"
      ]
     },
     {
@@ -4137,7 +4158,7 @@
    ]
   },
   "San Quintín": {
-   "notas_ventana": 31,
+   "notas_ventana": 33,
    "minimo": 3,
    "temas": [
     {
@@ -4178,6 +4199,31 @@
      ]
     },
     {
+     "termino": "colecta juguetes",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "San Quintín": 3
+     },
+     "fuentes": {
+      "gn-906741a25e9c": 1,
+      "gn-c1d6f8717505": 1,
+      "gn-d33696b00d82": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "37c85e07c4a94cce",
+      "8d1d125beb2bc919",
+      "9031b3078ebf677e"
+     ],
+     "ejemplos": [
+      "Realizará Estado colecta de juguetes para niños de San Quintín",
+      "Invitan a participar en colecta de juguetes para niñas y niños de San Quintín",
+      "Convoca gobierno de BC a sumarse a la colecta de juguetes 2026 para la niñez de San Quintín"
+     ]
+    },
+    {
      "termino": "mundial",
      "n": 3,
      "n_previo": 0,
@@ -4204,6 +4250,31 @@
      ]
     },
     {
+     "termino": "ninos",
+     "n": 3,
+     "n_previo": 0,
+     "momento": 3,
+     "zonas": {
+      "San Quintín": 3
+     },
+     "fuentes": {
+      "gn-0f4fcb595b6c": 1,
+      "gn-906741a25e9c": 1,
+      "gn-c1d6f8717505": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "37c85e07c4a94cce",
+      "4a1f447771a2488a",
+      "9031b3078ebf677e"
+     ],
+     "ejemplos": [
+      "Realizará Estado colecta de juguetes para niños de San Quintín",
+      "Invitan a participar en colecta de juguetes para niñas y niños de San Quintín",
+      "Entregan obras de rehabilitación integral en el Jardín de Niños «Vicente Guerrero» de Bajos de Coyula"
+     ]
+    },
+    {
      "termino": "obras",
      "n": 3,
      "n_previo": 2,
@@ -4226,6 +4297,32 @@
       "Entregan obras de rehabilitación integral en el Jardín de Niños «Vicente Guerrero» de Bajos de Coyula",
       "Se volcó plataforma de obras en Punta Colonet; alertan por afectaciones de Raquel",
       "Tesorero de Vicente Guerrero termina a golpes con pobladores tras reclamos por falta de obras"
+     ]
+    },
+    {
+     "termino": "servicios",
+     "n": 3,
+     "n_previo": 2,
+     "momento": 1,
+     "zonas": {
+      "San Quintín": 3,
+      "Ensenada": 1,
+      "Tecate": 1
+     },
+     "fuentes": {
+      "elvigia": 2,
+      "imparcial": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "6f90da398b7b67b0",
+      "7419c88c13acf4bf",
+      "bc5475ddad9f8496"
+     ],
+     "ejemplos": [
+      "Atiende Servicios Públicos a 283 colonias de San Quintín",
+      "Llevan servicios médicos a residentes de Camalú",
+      "Llevarán servicios médicos gratuitos a San Quintín, Ensenada y Tecate del 3 al 7 de noviembre"
      ]
     },
     {
@@ -4270,7 +4367,7 @@
    ]
   },
   "San Felipe": {
-   "notas_ventana": 27,
+   "notas_ventana": 28,
    "minimo": 3,
    "temas": [
     {
@@ -4423,42 +4520,43 @@
     },
     {
      "termino": "light earthquake",
-     "n": 4,
+     "n": 5,
      "n_previo": 4,
-     "momento": 0,
+     "momento": 1,
      "zonas": {
-      "San Felipe": 4,
-      "Tijuana": 1
+      "San Felipe": 5,
+      "Tijuana": 2
      },
      "fuentes": {
-      "gn-13afd86dbb5f": 4
+      "gn-13afd86dbb5f": 5
      },
      "un_solo_medio": true,
      "notas": [
+      "1c44639136af5ca0",
       "498430db0357098f",
       "554c1f4e04d809a8",
       "84ae3a3a2d94ec14",
       "92fc57f3b7b995da"
      ],
      "ejemplos": [
+      "Light mag. 3.6 earthquake - 39 km southeast of San Felipe, Estado de Baja California, Mexico, on Friday, Nov 6, 2026, at 02:12 pm (Tijuana time)",
       "Light mag. 3.0 earthquake - 87 km northwest of San Felipe, Estado de Baja California, Mexico, on Monday, Nov 2, 2026, at 10:57 pm (Mexico_City time)",
-      "Light mag. 3.9 earthquake - 46 km northwest of San Felipe, Estado de Baja California, Mexico, on Monday, Nov 2, 2026, at 05:32 pm (Tijuana time)",
-      "Light mag. 3.2 earthquake - 55 km west of San Felipe, Estado de Baja California, Mexico, on Sunday, Nov 1, 2026, at 11:38 am (Mexico_City time)"
+      "Light mag. 3.9 earthquake - 46 km northwest of San Felipe, Estado de Baja California, Mexico, on Monday, Nov 2, 2026, at 05:32 pm (Tijuana time)"
      ]
     },
     {
      "termino": "felipe",
-     "n": 27,
+     "n": 28,
      "n_previo": 39,
-     "momento": -12,
+     "momento": -11,
      "zonas": {
-      "San Felipe": 27,
+      "San Felipe": 28,
       "Mexicali": 3,
-      "San Quintín": 2,
-      "Tijuana": 2
+      "Tijuana": 3,
+      "San Quintín": 2
      },
      "fuentes": {
-      "gn-13afd86dbb5f": 8,
+      "gn-13afd86dbb5f": 9,
       "gn-507c32aa93b3": 6,
       "lavoz": 4,
       "gn-8c7449ec9af7": 2,
@@ -4478,6 +4576,7 @@
       "0d727f6354a2945c",
       "1630b5b423928ecf",
       "17095b18821c901f",
+      "1c44639136af5ca0",
       "1d1cfd39924e625f",
       "1fd9ec50614d710a",
       "2bc3fa3c9dbd7d65",
@@ -4502,14 +4601,14 @@
      ],
      "ejemplos": [
       "Sismo de magnitud 3.6 en San Felipe, Baja California este 6 de noviembre de 2026",
-      "Sismo de magnitud 3.9 en San Felipe, Baja California hoy 6 de noviembre de 2026",
-      "San Felipe, el placer de sentirse ligero"
+      "Light mag. 3.6 earthquake - 39 km southeast of San Felipe, Estado de Baja California, Mexico, on Friday, Nov 6, 2026, at 02:12 pm (Tijuana time)",
+      "Sismo de magnitud 3.9 en San Felipe, Baja California hoy 6 de noviembre de 2026"
      ]
     }
    ]
   },
   "San Diego": {
-   "notas_ventana": 320,
+   "notas_ventana": 325,
    "minimo": 3,
    "temas": [
     {
@@ -4825,6 +4924,39 @@
      ]
     },
     {
+     "termino": "democrats",
+     "n": 11,
+     "n_previo": 5,
+     "momento": 6,
+     "zonas": {
+      "San Diego": 11
+     },
+     "fuentes": {
+      "kpbs": 8,
+      "timessd": 2,
+      "inewsource": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "019efe989c096b98",
+      "0bea8720a4ceb24e",
+      "33005b62df1cda88",
+      "41064b1bc82559c7",
+      "5a47aeecd20480d9",
+      "731448d7382d4003",
+      "984e3b00ea95acce",
+      "c4b4b9be6ce0f8d6",
+      "da3eafd7a198fe49",
+      "fa0571379f82f041",
+      "ff4f17e1b5f1de18"
+     ],
+     "ejemplos": [
+      "Three new faces are set to join the City Council. All are Democrats, but that doesn’t mean they’ll vote in lockstep",
+      "The economy propelled Democrats to victory. What can they actually do about it?",
+      "How Democrats took over San Diego’s congressional delegation, one seat at a time"
+     ]
+    },
+    {
      "termino": "lead",
      "n": 8,
      "n_previo": 2,
@@ -4976,38 +5108,6 @@
       "6 takeaways from Democrats' big wave on election night",
       "Four types of House races to watch on election night to know how it might go",
       "Beware the ‘red mirage’ if California Republicans have an election night lead"
-     ]
-    },
-    {
-     "termino": "democrats",
-     "n": 10,
-     "n_previo": 5,
-     "momento": 5,
-     "zonas": {
-      "San Diego": 10
-     },
-     "fuentes": {
-      "kpbs": 7,
-      "timessd": 2,
-      "inewsource": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "019efe989c096b98",
-      "0bea8720a4ceb24e",
-      "41064b1bc82559c7",
-      "5a47aeecd20480d9",
-      "731448d7382d4003",
-      "984e3b00ea95acce",
-      "c4b4b9be6ce0f8d6",
-      "da3eafd7a198fe49",
-      "fa0571379f82f041",
-      "ff4f17e1b5f1de18"
-     ],
-     "ejemplos": [
-      "Three new faces are set to join the City Council. All are Democrats, but that doesn’t mean they’ll vote in lockstep",
-      "How Democrats took over San Diego’s congressional delegation, one seat at a time",
-      "How North Carolina Democrats flipped several House seats in historically GOP districts"
      ]
     },
     {
