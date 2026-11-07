@@ -1,57 +1,57 @@
 {
  "esquema": 1,
- "generado": "2026-11-06T20:08:49+00:00",
+ "generado": "2026-11-07T06:42:12+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 8746,
- "posts_vigentes": 1326,
- "opinion": 7862,
- "repetidos": 642,
- "reacciones": 573,
+ "comentarios_vigentes": 8500,
+ "posts_vigentes": 1289,
+ "opinion": 7638,
+ "repetidos": 625,
+ "reacciones": 562,
  "por_zona": {
   "Ensenada": 194,
-  "Mexicali": 123,
+  "Mexicali": 113,
   "Playas de Rosarito": 51,
   "San Diego": 44,
   "San Felipe": 6,
   "San Quintín": 28,
   "Tecate": 197,
-  "Tijuana": 3513,
-  "estatal": 3833,
-  "internacional": 265,
-  "nacional": 492
+  "Tijuana": 3429,
+  "estatal": 3703,
+  "internacional": 256,
+  "nacional": 479
  },
  "por_cuenta": {
-  "aztecabc_fb": 424,
-  "blanconegro_fb": 3288,
-  "blancorojo_fb": 2336,
-  "ndtijuana_fb": 2570,
-  "psn_fb": 128
+  "aztecabc_fb": 418,
+  "blanconegro_fb": 3189,
+  "blancorojo_fb": 2270,
+  "ndtijuana_fb": 2499,
+  "psn_fb": 124
  },
  "por_idioma": {
-  "es": 8746
+  "es": 8500
  },
  "por_tema": [
   {
    "tema": "estado",
-   "comentarios": 86,
-   "posts": 81
-  },
-  {
-   "tema": "lluvias",
-   "comentarios": 54,
-   "posts": 44
+   "comentarios": 84,
+   "posts": 79
   },
   {
    "tema": "marina",
-   "comentarios": 48,
-   "posts": 46
+   "comentarios": 46,
+   "posts": 44
   },
   {
    "tema": "justicia",
-   "comentarios": 30,
-   "posts": 24
+   "comentarios": 29,
+   "posts": 23
+  },
+  {
+   "tema": "pena",
+   "comentarios": 25,
+   "posts": 22
   },
   {
    "tema": "emergencia",
@@ -64,6 +64,16 @@
    "posts": 21
   },
   {
+   "tema": "trump",
+   "comentarios": 18,
+   "posts": 14
+  },
+  {
+   "tema": "playas",
+   "comentarios": 16,
+   "posts": 14
+  },
+  {
    "tema": "escuelas",
    "comentarios": 13,
    "posts": 13
@@ -74,17 +84,22 @@
    "posts": 11
   },
   {
-   "tema": "florida",
-   "comentarios": 6,
-   "posts": 6
+   "tema": "material",
+   "comentarios": 11,
+   "posts": 11
+  },
+  {
+   "tema": "judicial",
+   "comentarios": 9,
+   "posts": 9
+  },
+  {
+   "tema": "recibir",
+   "comentarios": 9,
+   "posts": 9
   },
   {
    "tema": "infraestructura",
-   "comentarios": 6,
-   "posts": 6
-  },
-  {
-   "tema": "reforma",
    "comentarios": 6,
    "posts": 6
   },
@@ -99,9 +114,9 @@
    "posts": 4
   },
   {
-   "tema": "texas",
+   "tema": "reforma",
    "comentarios": 5,
-   "posts": 4
+   "posts": 5
   },
   {
    "tema": "celulares",
@@ -112,27 +127,12 @@
    "tema": "sismo",
    "comentarios": 4,
    "posts": 2
-  },
-  {
-   "tema": "bodega",
-   "comentarios": 3,
-   "posts": 2
-  },
-  {
-   "tema": "ines gomez mont",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
-   "tema": "infantil",
-   "comentarios": 1,
-   "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 920,
-  "negativo": 3872,
-  "neutral": 3070,
+  "positivo": 883,
+  "negativo": 3767,
+  "neutral": 2988,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
@@ -172,77 +172,8 @@
    "activa": true
   }
  ],
- "releidos": 23,
+ "releidos": 0,
  "destacados": [
-  {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02S1xUoRNhMuWwRu2gFnGLTrJAx2agMSCYVvo7t8UWGCoVqyQGyWemKcABUPDtzihnl",
-   "cuenta": "ndtijuana_fb",
-   "zona": "estatal",
-   "fecha": "2026-11-06",
-   "titulo": "#NDTInforma | IMOS inicia cancelación definitiva de licencia a chofer de Altisa por agresión a pasajero",
-   "tipo": "imagen",
-   "likes": 602,
-   "comentarios": 105,
-   "compartidos": 68,
-   "alcance": "nacional",
-   "publicado": "2026-11-06T03:42:28+00:00",
-   "cosechados": 9,
-   "opinion": 7,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 5,
-    "neutral": 2,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid031uQohbhZPWd5hrhr1Hcw2MGEP1skPubRknp29MubTWiBaQStkAi9oTzA3xLzMhJLl",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-11-06",
-   "titulo": "🚨🌧️ Declaran emergencia y desastre natural en Tijuana ante posibles afectaciones por el fenómeno de El Niño",
-   "tipo": "imagen",
-   "likes": 545,
-   "comentarios": 173,
-   "compartidos": 65,
-   "alcance": "zona",
-   "publicado": "2026-11-06T00:04:44+00:00",
-   "cosechados": 9,
-   "opinion": 8,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 5,
-    "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid0159EshYbkdqMuqiMavJPKKREDZ2kLCzgD9dvavFkBeRXJN7Di5B7T9eY7KWvf9DYl",
-   "cuenta": "ndtijuana_fb",
-   "zona": "estatal",
-   "fecha": "2026-11-06",
-   "titulo": "#NDTInforma Emily Vianney García García, de 19 años, fue vista por última vez el 5 de octubre en el Cañón Miramar, de la colonia Manuel Paredes 3.",
-   "tipo": "imagen",
-   "likes": 445,
-   "comentarios": 112,
-   "compartidos": 354,
-   "alcance": "nacional",
-   "publicado": "2026-11-06T01:41:50+00:00",
-   "cosechados": 8,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
   {
    "url": "https://www.facebook.com/NdTijuana/posts/pfbid0nqpe69eEZZQsKSEj4u2XqQRdjQwWGmhmMw37xaH7Ampzv2ygAnc78dHGVcGSWJdfl",
    "cuenta": "ndtijuana_fb",
@@ -261,29 +192,6 @@
     "positivo": 0,
     "negativo": 7,
     "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/aztecabc/posts/pfbid02TSjny3Ts4h3HxADJ9BCaN9JrteFtsbz1ch2oZrJ2ZFj2PwWjx31VtAvFiXGHckkBl",
-   "cuenta": "aztecabc_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-11-06",
-   "titulo": "¿MEGACATÁSTROFE INMINENTE? EMITEN ALERTA en Tijuana por El Niño",
-   "tipo": "otro",
-   "likes": 260,
-   "comentarios": 26,
-   "compartidos": 15,
-   "alcance": "zona",
-   "publicado": "2026-11-06T04:50:10+00:00",
-   "cosechados": 8,
-   "opinion": 8,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 4,
-    "neutral": 4,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -338,76 +246,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/reel/1847430946262827",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-11-06",
-   "titulo": "🚧⚠️”Vecinos de Sánchez Taboada exigen reparación de vialidad afectada por deslizamiento”",
-   "tipo": "video",
-   "likes": 119,
-   "comentarios": 23,
-   "compartidos": 41,
-   "reproducciones": 6962,
-   "alcance": "zona",
-   "publicado": "2026-11-06T00:04:31+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 7,
-    "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid09o7VyRbM3jLGteQdw9EzAtK8BXb2WY1mCvwyoZqNr7uBMGZyz5UKnfVaXU6TMxVol&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "internacional",
-   "fecha": "2026-11-05",
-   "titulo": "🇭🇹🇸🇻🚨 HAITÍ ES LIBRE DE PANDILLAS Y BANDAS CRIMINALES GRACIAS A BUKELE",
-   "tipo": "imagen",
-   "likes": 117,
-   "comentarios": 17,
-   "compartidos": 4,
-   "alcance": "extranjero",
-   "publicado": "2026-11-05T20:14:10+00:00",
-   "cosechados": 2,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0qtCMKTYFsknfSjTgp9PR9ycULmD7xugb2Cd1dRJM4Nn4pqbi9srCuv2GZN9dPfAGl",
-   "cuenta": "blanconegro_fb",
-   "zona": "internacional",
-   "fecha": "2026-11-06",
-   "titulo": "🕷️ ¡Llevaban más de 3 mil tarántulas escondidas en calcetines!",
-   "tipo": "imagen",
-   "likes": 111,
-   "comentarios": 4,
-   "compartidos": 7,
-   "alcance": "extranjero",
-   "publicado": "2026-11-06T05:12:53+00:00",
-   "cosechados": 3,
-   "opinion": 3,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 2,
-    "neutral": 1,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid021A4DdbcJ6Xfcbd6JbRSsoXmrX1avcCFkB5X4Qxqmki5F8idUuJRWTTPFGV1wjV7zl&id=100086488503408",
    "cuenta": "blancorojo_fb",
    "zona": "estatal",
@@ -425,29 +263,6 @@
     "positivo": 1,
     "negativo": 5,
     "neutral": 4,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid04YCTBaNb3QhKKe3vayznoZ3MSoqTwZ96cXFp1gmf3zaUcyVVbvD6gqHKPC7j9kjnl",
-   "cuenta": "blanconegro_fb",
-   "zona": "estatal",
-   "fecha": "2026-11-05",
-   "titulo": "Sólo 14% de todos los jóvenes hace el ejercicio necesario para estar sano en el futuro: OMS",
-   "tipo": "otro",
-   "likes": 79,
-   "comentarios": 20,
-   "compartidos": 31,
-   "alcance": "nacional",
-   "publicado": "2026-11-05T23:35:57+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 1,
-    "negativo": 7,
-    "neutral": 2,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -478,29 +293,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid034U7gUuWGnBTVGWG6Hm4LNZKFCCUhnr8xQDh3rmK4MPcqU8JMAAjuG2cUf2uGcvQl&id=100086488503408",
-   "cuenta": "blancorojo_fb",
-   "zona": "estatal",
-   "fecha": "2026-11-06",
-   "titulo": "Quienes apoyan la idea creen que mostrar a científicos, docentes y otros profesionales puede despertar la curiosidad de los niños y acercarlos a modelos que ap…",
-   "tipo": "imagen",
-   "likes": 78,
-   "comentarios": 0,
-   "compartidos": 7,
-   "alcance": "nacional",
-   "publicado": "2026-11-06T04:26:40+00:00",
-   "cosechados": 2,
-   "opinion": 2,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 2,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NdTijuana/videos/1154863196890588",
    "cuenta": "ndtijuana_fb",
    "zona": "estatal",
@@ -518,30 +310,6 @@
     "positivo": 1,
     "negativo": 2,
     "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/reel/1122212463764941",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-11-06",
-   "titulo": "¡Tráiler vuelca y riega toneladas de trigo en la carretera Tijuana-Tecate!",
-   "tipo": "video",
-   "likes": 63,
-   "comentarios": 1,
-   "compartidos": 6,
-   "reproducciones": 9156,
-   "alcance": "zona",
-   "publicado": "2026-11-06T01:51:49+00:00",
-   "cosechados": 1,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
-    "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -617,29 +385,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid0KYiGxH1EuzSoyDYkzqwT7RX4JQqJMgFESdPG5c3RvUVLCWcyuWchUvMtKiktSdUul",
-   "cuenta": "blanconegro_fb",
-   "zona": "nacional",
-   "fecha": "2026-11-06",
-   "titulo": "🗳️ Morena respalda a Claudia Sheinbaum para investigar presuntas irregularidades en contrataciones del INE",
-   "tipo": "imagen",
-   "likes": 46,
-   "comentarios": 15,
-   "compartidos": 9,
-   "alcance": "nacional",
-   "publicado": "2026-11-06T03:19:11+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0KhZLxh8z7VFhcDZq2VG2ZZNDhuXnNBvQ2oVbhkUduLW2sUhbxbVafVKJnC46Ahhbl&id=100086488503408",
    "cuenta": "blancorojo_fb",
    "zona": "estatal",
@@ -656,54 +401,6 @@
    "sentimiento": {
     "positivo": 0,
     "negativo": 4,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/reel/1136582872250234",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-11-06",
-   "titulo": "💉🩺 “Han aplicado cerca de 50 mil vacunas contra la influenza en el estado”",
-   "tipo": "video",
-   "likes": 41,
-   "comentarios": 13,
-   "compartidos": 31,
-   "reproducciones": 5658,
-   "alcance": "zona",
-   "publicado": "2026-11-06T00:43:19+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/reel/2657816344663693",
-   "cuenta": "blanconegro_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-11-05",
-   "titulo": "🇲🇽🇺🇸 “Buscan fortalecer relación con California y agilizar cruces fronterizos”: SEDETI",
-   "tipo": "video",
-   "likes": 32,
-   "comentarios": 16,
-   "compartidos": 29,
-   "reproducciones": 2717,
-   "alcance": "zona",
-   "publicado": "2026-11-05T23:21:27+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
     "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -758,76 +455,6 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02iUnFE7PAFoVi2wB79QBCNMQhTSKTpsr6iapLoTnwpiDwMNh71KCrQZp9Y6CBke1gl",
-   "cuenta": "ndtijuana_fb",
-   "zona": "nacional",
-   "fecha": "2026-11-06",
-   "titulo": "#NDTInforma │ Marina del Pilar respalda a Sheinbaum y pide al INE e IEEBC transparentar contratos",
-   "tipo": "imagen",
-   "likes": 26,
-   "comentarios": 16,
-   "compartidos": 1,
-   "alcance": "nacional",
-   "publicado": "2026-11-06T01:35:11+00:00",
-   "cosechados": 10,
-   "opinion": 10,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 7,
-    "neutral": 3,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/reel/1426316215801503",
-   "cuenta": "psn_fb",
-   "zona": "Tijuana",
-   "fecha": "2026-11-06",
-   "titulo": "#primersistemadenoticias #bajacalifornia #tijuana #mexicali #rosarito #ensenada #sanquintin #sanfelipe #tecate #marinadelpilar #marinadelpilaravila #gobierno #…",
-   "tipo": "video",
-   "likes": 24,
-   "comentarios": 2,
-   "compartidos": 2,
-   "reproducciones": 392,
-   "alcance": "zona",
-   "publicado": "2026-11-06T04:00:21+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02VvgE4vZipEzrZJ35yZ5UbWyZMFYzXW5eVvf3QULT2p7LfeAvoDbLzXnX3rp9t8X9l",
-   "cuenta": "blanconegro_fb",
-   "zona": "estatal",
-   "fecha": "2026-11-05",
-   "titulo": "🚨 Denuncian ingreso de sujetos presuntamente armados al CBTIS 155 para amenazar de muerte a un estudiante",
-   "tipo": "otro",
-   "likes": 24,
-   "comentarios": 1,
-   "compartidos": 1,
-   "alcance": "nacional",
-   "publicado": "2026-11-05T20:37:35+00:00",
-   "cosechados": 0,
-   "opinion": 0,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
    "url": "https://www.facebook.com/NdTijuana/posts/pfbid0CZS5vwYVtqbgdCU3ijrAYaUezEGownYnSPuxbF6CcHCwaGPQbKAcZ2TaoVkcmuntl",
    "cuenta": "ndtijuana_fb",
    "zona": "estatal",
@@ -851,24 +478,46 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/reel/1296460992621428",
-   "cuenta": "psn_fb",
-   "zona": "Tijuana",
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02p25SsbTDMi98wun5poHYBoTUeAyQM2EMvrYi5UWKKp5Z1ryRoQykMRQPFvo5qRiFl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "estatal",
    "fecha": "2026-11-06",
-   "titulo": "#LoVisteEnPSN | Las temperaturas en Tijuana alcanzarán máximas de 30 grados para el fin de semana",
-   "tipo": "video",
-   "likes": 12,
+   "titulo": "Las perdidas ahora son enfermeras felicidades",
+   "tipo": "imagen",
+   "likes": 13,
    "comentarios": 0,
-   "compartidos": 5,
-   "reproducciones": 1005,
-   "alcance": "zona",
-   "publicado": "2026-11-06T02:00:56+00:00",
+   "compartidos": 1,
+   "alcance": "nacional",
+   "publicado": "2026-11-06T17:53:45+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
     "positivo": 0,
     "negativo": 0,
     "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02oKT8UCh41HJgenRAVurPAgUy8MVcr159spnScRiWuFYd9aAF5LZxPr5uf231qbDZl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "estatal",
+   "fecha": "2026-11-06",
+   "titulo": "Que opinan",
+   "tipo": "imagen",
+   "likes": 11,
+   "comentarios": 23,
+   "compartidos": 1,
+   "alcance": "nacional",
+   "publicado": "2026-11-06T19:57:08+00:00",
+   "cosechados": 10,
+   "opinion": 10,
+   "sentimiento": {
+    "positivo": 1,
+    "negativo": 3,
+    "neutral": 6,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
    },
@@ -898,17 +547,17 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02crThQYEaHb7ZM6UuQ6BtXbmDezfpBH55127tn89y484TLg5rgSzd5V9ftmEUHVbPl",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Ensenada",
+   "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02b35ESCZAFZzPbZvn4uYVp6EHbCgFpYyBKtoH1fkt7ARVigdeYUjYbUANKgBsWeWAl&id=100086488503408",
+   "cuenta": "blancorojo_fb",
+   "zona": "estatal",
    "fecha": "2026-11-06",
-   "titulo": "#NDTInforma | Isaías Bertín abandona glosa tras ser cuestionado por intentar sacar raja política de tragedia por Rachel",
+   "titulo": "SERA UNA PLAGA CON ESO QUE YA ESTAMOS EN LOS ULTIMOS TIEMPOS",
    "tipo": "imagen",
-   "likes": 7,
-   "comentarios": 0,
+   "likes": 8,
+   "comentarios": 1,
    "compartidos": 2,
-   "alcance": "zona",
-   "publicado": "2026-11-06T05:23:05+00:00",
+   "alcance": "nacional",
+   "publicado": "2026-11-06T20:06:38+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -944,45 +593,22 @@
    "temas": []
   },
   {
-   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02Tx1MZMjTsKFsG2jiWgGYHLyeXYq7LJZaFjbR4GRGxYSbiRx9hh5rFq7Bcz833zLFl",
-   "cuenta": "ndtijuana_fb",
-   "zona": "Mexicali",
+   "url": "https://www.facebook.com/NoticiasBlancoyNegro/posts/pfbid02swnFTPiQrK4BCqUPSnpKSvMZjC83tMpKeYfYQXJkMqS2TzS7DQB7H9a2ir1S4tPLl",
+   "cuenta": "blanconegro_fb",
+   "zona": "Tijuana",
    "fecha": "2026-11-06",
-   "titulo": "#NDTInforma Mil 500 estudiantes se convierten en Guardianes de la Nutrición en Mexicali",
+   "titulo": "🤖🚀 ¡Tijuana será sede de un congreso-festival de inteligencia artificial con enfoque binacional! 🇲🇽🇺🇸",
    "tipo": "imagen",
-   "likes": 5,
+   "likes": 6,
    "comentarios": 1,
-   "compartidos": 1,
+   "compartidos": 4,
    "alcance": "zona",
-   "publicado": "2026-11-06T00:55:45+00:00",
+   "publicado": "2026-11-06T19:50:49+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
     "positivo": 0,
     "negativo": 0,
-    "neutral": 0,
-    "sin_clasificar": 0,
-    "sin_modelo_idioma": 0
-   },
-   "temas": []
-  },
-  {
-   "url": "https://www.facebook.com/aztecabc/posts/pfbid02NnmfEp7tJ1StP9RWUa1myL2GvK6QkqPMyG4wvegV7tyHHcZ57UKB36zZH8oHtBhrl",
-   "cuenta": "aztecabc_fb",
-   "zona": "estatal",
-   "fecha": "2026-11-05",
-   "titulo": "VIDEO ⚠️",
-   "tipo": "otro",
-   "likes": 5,
-   "comentarios": 1,
-   "compartidos": 0,
-   "alcance": "nacional",
-   "publicado": "2026-11-05T20:10:19+00:00",
-   "cosechados": 1,
-   "opinion": 1,
-   "sentimiento": {
-    "positivo": 0,
-    "negativo": 1,
     "neutral": 0,
     "sin_clasificar": 0,
     "sin_modelo_idioma": 0
@@ -1036,6 +662,77 @@
    "temas": []
   },
   {
+   "url": "https://www.facebook.com/reel/1798436434703369",
+   "cuenta": "psn_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-11-06",
+   "titulo": "#primersistemadenoticias #bajacalifornia #tijuana #mexicali #rosarito #ensenada #sanquintin #sanfelipe #tecate #marinadelpilar #marinadelpilaravila #gobierno #…",
+   "tipo": "video",
+   "likes": 3,
+   "comentarios": 1,
+   "compartidos": 2,
+   "reproducciones": 178,
+   "alcance": "zona",
+   "publicado": "2026-11-06T16:00:53+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/reel/1133359019418529",
+   "cuenta": "aztecabc_fb",
+   "zona": "estatal",
+   "fecha": "2026-11-06",
+   "titulo": "Los cuestionamientos sobre la gestión de Guadalupe Taddei en el INE siguen creciendo.",
+   "tipo": "video",
+   "likes": 3,
+   "comentarios": 0,
+   "compartidos": 0,
+   "reproducciones": 287,
+   "alcance": "nacional",
+   "publicado": "2026-11-06T19:38:47+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02Wc6thKfTo8unbQMZkXagxujRMpDvvwSaERWa2pnVt32MmFVYpBCw1ty6ZBi7QBY2l",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-11-06",
+   "titulo": "#NDTInforma Refuerzan preparativos en Tijuana ante el fenómeno de El Niño",
+   "tipo": "imagen",
+   "likes": 2,
+   "comentarios": 2,
+   "compartidos": 1,
+   "alcance": "zona",
+   "publicado": "2026-11-06T18:03:56+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
    "url": "https://www.facebook.com/NdTijuana/posts/pfbid031aC1mAWKqS6Jg8j7Aa8hJTEaoFayxi8Gi8CopU6fGvvQKfAqPZC8Wa7jgJ7nEPeGl",
    "cuenta": "ndtijuana_fb",
    "zona": "Tecate",
@@ -1047,6 +744,76 @@
    "compartidos": 1,
    "alcance": "zona",
    "publicado": "2026-11-06T19:18:41+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/NdTijuana/posts/pfbid02G9NLkqJKvJam89fNPNzeP4PCUrAXxPYi5HfaBtN8WgjAkyL6dcFKssbMciAmKCLul",
+   "cuenta": "ndtijuana_fb",
+   "zona": "Tijuana",
+   "fecha": "2026-11-06",
+   "titulo": "#NDTInforma El campo de BC pone sobre la mesa sus principales problemas",
+   "tipo": "imagen",
+   "likes": 1,
+   "comentarios": 1,
+   "compartidos": 1,
+   "alcance": "zona",
+   "publicado": "2026-11-06T17:55:16+00:00",
+   "cosechados": 0,
+   "opinion": 0,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 0,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/reel/1451742037095111",
+   "cuenta": "aztecabc_fb",
+   "zona": "estatal",
+   "fecha": "2026-11-06",
+   "titulo": "En el foro El futuro de la libertad en las Américas, realizado en la Universidad de la Libertad, Ricardo Benjamín Salinas Pliego llamó a los ciudadanos a organ…",
+   "tipo": "video",
+   "likes": 1,
+   "comentarios": 1,
+   "compartidos": 0,
+   "reproducciones": 282,
+   "alcance": "nacional",
+   "publicado": "2026-11-06T19:34:47+00:00",
+   "cosechados": 1,
+   "opinion": 1,
+   "sentimiento": {
+    "positivo": 0,
+    "negativo": 1,
+    "neutral": 0,
+    "sin_clasificar": 0,
+    "sin_modelo_idioma": 0
+   },
+   "temas": []
+  },
+  {
+   "url": "https://www.facebook.com/aztecabc/posts/pfbid0mMSJHqeWDkUEG5K54nzX9LpSCTedUMxB23iKKw13S5RPJDFLPZqXPdPXmF2n45n4l",
+   "cuenta": "aztecabc_fb",
+   "zona": "estatal",
+   "fecha": "2026-11-06",
+   "titulo": "Dos fallas de California acumulan una tensión que precoupa a expertos ⚠👀",
+   "tipo": "otro",
+   "likes": 1,
+   "comentarios": 0,
+   "compartidos": 0,
+   "alcance": "nacional",
+   "publicado": "2026-11-06T19:20:01+00:00",
    "cosechados": 0,
    "opinion": 0,
    "sentimiento": {
@@ -1131,59 +898,43 @@
  "salud": [
   {
    "cuenta": "aztecabc_fb",
-   "estado": "ok",
-   "posts": 8,
-   "comentarios": 2,
-   "crudos": 4,
-   "fuera": 0,
-   "compartidos": 0
+   "estado": "fallo",
+   "error": "PresupuestoAgotado: Apify reporta credito agotado (402): {\n  \"error\": {\n    \"type\": \"not-enough-usage-to-run-paid-actor\",\n    \"message\": \"Your remaining usage of $0.004745 this billing cycle isn't eno",
+   "posts": 0,
+   "comentarios": 0
   },
   {
    "cuenta": "blanconegro_fb",
-   "estado": "ok",
-   "posts": 8,
-   "comentarios": 37,
-   "crudos": 40,
-   "fuera": 0,
-   "compartidos": 0
+   "estado": "fallo",
+   "error": "PresupuestoAgotado: Apify reporta credito agotado (402): {\n  \"error\": {\n    \"type\": \"not-enough-usage-to-run-paid-actor\",\n    \"message\": \"Your remaining usage of $0.004745 this billing cycle isn't eno",
+   "posts": 0,
+   "comentarios": 0
   },
   {
    "cuenta": "blancorojo_fb",
-   "estado": "ok",
-   "posts": 6,
-   "comentarios": 25,
-   "crudos": 26,
-   "fuera": 2,
-   "compartidos": 0
+   "estado": "fallo",
+   "error": "PresupuestoAgotado: Apify reporta credito agotado (402): {\n  \"error\": {\n    \"type\": \"not-enough-usage-to-run-paid-actor\",\n    \"message\": \"Your remaining usage of $0.004745 this billing cycle isn't eno",
+   "posts": 0,
+   "comentarios": 0
   },
   {
    "cuenta": "ndtijuana_fb",
-   "estado": "ok",
-   "posts": 8,
-   "comentarios": 19,
-   "crudos": 19,
-   "fuera": 0,
-   "compartidos": 0
+   "estado": "fallo",
+   "error": "PresupuestoAgotado: Apify reporta credito agotado (402): {\n  \"error\": {\n    \"type\": \"not-enough-usage-to-run-paid-actor\",\n    \"message\": \"Your remaining usage of $0.004745 this billing cycle isn't eno",
+   "posts": 0,
+   "comentarios": 0
   },
   {
    "cuenta": "psn_fb",
-   "estado": "ok",
-   "posts": 8,
-   "comentarios": 3,
-   "crudos": 5,
-   "fuera": 0,
-   "compartidos": 0
+   "estado": "fallo",
+   "error": "PresupuestoAgotado: Apify reporta credito agotado (402): {\n  \"error\": {\n    \"type\": \"not-enough-usage-to-run-paid-actor\",\n    \"message\": \"Your remaining usage of $0.004745 this billing cycle isn't eno",
+   "posts": 0,
+   "comentarios": 0
   }
  ],
  "gasto": {
   "resultados": 250,
-  "gastado": 134,
-  "por_concepto": {
-   "aztecabc_fb": 12,
-   "blanconegro_fb": 48,
-   "blancorojo_fb": 34,
-   "ndtijuana_fb": 27,
-   "psn_fb": 13
-  }
+  "gastado": 0,
+  "por_concepto": {}
  }
 }
