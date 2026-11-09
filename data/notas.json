@@ -1,8 +1,2854 @@
 {
  "esquema": 1,
  "ventana_dias": 30,
- "total": 13145,
+ "total": 13243,
  "notas": [
+  {
+   "id": "66f1e7b4380ecf1b",
+   "titulo": "After Silicon Valley spending spree, more moderate Democrats are heading to the Capitol",
+   "url": "https://www.kpbs.org/news/politics/2026/11/09/after-silicon-valley-spending-spree-more-moderate-democrats-are-heading-to-the-capitol",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T16:16:31+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/b39388f/2147483647/strip/false/crop/3452x3452+863+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F7c%2F46%2Fa0d1438147769771664c68fdedce%2Fap26153614076181.jpg",
+   "rubros": []
+  },
+  {
+   "id": "b2c6f1ac898a9f39",
+   "titulo": "¡Danna sorprende a Belinda con un beso en la boca durante Mentiras All Stars!",
+   "url": "https://www.elimparcial.com/espectaculos/2026/11/09/danna-sorprende-a-belinda-con-un-beso-en-la-boca-durante-mentiras-all-stars/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T16:14:57+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4848,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/3RMNNUUP5JCDXABGUOKMME6K5Q.jpg?auth=0b5db3a2687cb2e7722c9ab1ebbc6bb8dd6f294c60e9856b4008916fefe9069e&smart=true&width=1200&height=675",
+   "rubros": [
+    "espectaculos"
+   ]
+  },
+  {
+   "id": "793100fc935c3665",
+   "titulo": "‘Soul-hurting pain’: Victims’ families enraged at Newsom’s death row decision",
+   "url": "https://www.kpbs.org/news/public-safety/2026/11/09/soul-hurting-pain-victims-families-enraged-at-newsoms-death-row-decision",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T16:07:04+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/ed856ca/2147483647/strip/false/crop/1024x1024+256+0/resize/600x600!/quality/90/?url=http%3A%2F%2Fkpbs-brightspot.s3.us-west-2.amazonaws.com%2Fa8%2Fbb%2F47b82ded484bac3a0677c78d5e3b%2Fimage-2026-11-09t075818-746.jpg",
+   "rubros": []
+  },
+  {
+   "id": "ecacc9e0c9b1342d",
+   "titulo": "Lupita Villalobos denuncia que un exsocio la estafó con 250 mil pesos; señala a Carlos Acuña, conocido como CAAP",
+   "url": "https://www.elimparcial.com/espectaculos/2026/11/09/lupita-villalobos-denuncia-que-un-exsocio-le-quito-250-mil-pesos-senala-a-carlos-acuna-conocido-como-caap/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T16:03:48+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.779,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/LJ7VKPR5UVHU3AYELBYEIZDQDU.jpg?auth=f5ac4aa307df129a9aa0111ed94b8b9779fbef2904bab2c1bc757a58a831ca2b&smart=true&width=1200&height=675",
+   "rubros": [
+    "espectaculos"
+   ]
+  },
+  {
+   "id": "33b0b764c02b1bff",
+   "titulo": "Luego de que Sheinbaum hizo oficial la eliminación del efectivo en servicios como casetas y gasolineras, las autoridades mexicanas integraron herramientas como CoDi, la CURP Digital y el Expediente Digital Ciudadano para agilizar los pagos y la contratación de servicios financieros a distancia bajo estrictos mecanismos de confianza",
+   "url": "https://www.elimparcial.com/dinero/2026/11/05/luego-de-que-sheinbaum-confirmo-la-eliminacion-del-efectivo-en-servicios-como-casetas-y-gasolineras-las-autoridades-mexicanas-integraron-herramientas-como-codi-la-curp-digital-y-el-expediente-digital-ciudadano-para-agilizar-los-pagos-y-la-contratacion-de-servicios-financieros-a-distancia-bajo-estrictos-mecanismos-de-confianza/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T16:02:22+00:00",
+   "capturado": "2026-11-06T06:37:46+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6719,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/4GDTI6NQ6JAFPI4P6IFAGNA5QM.jpg?auth=302c8d64bd0e254fbe27a21f71412b4e66d089f0d4765d1c1a661c579f7f2cf8&smart=true&width=1920&height=1200",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "03dc3154dbb75b5a",
+   "titulo": "CFE: ¿Cuándo y cómo cambiar el titular del recibo de luz para evitar problemas?",
+   "url": "https://www.elimparcial.com/dinero/2026/11/06/cfe-cuando-y-como-cambiar-el-titular-del-recibo-de-luz-para-evitar-problemas/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T16:02:06+00:00",
+   "capturado": "2026-09-27T21:21:43+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7039,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/4UDXAT5UQRHARLFZFUMSZNXC6I.jpg?auth=c49300d63b25e76d067fe2aba4b8c271f4e0c2fb4dbe9d1a87134f421b2999cc&smart=true&width=1620&height=1080",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "76d45712c053fdff",
+   "titulo": "Multarán con más de 586 mil pesos a todos los patrones que no respeten el tiempo libre de sus trabajadores con la nueva reforma que prohíbe a los jefes exigir respuestas fuera de la jornada laboral, sin importar si el empleo es presencial, híbrido o remoto",
+   "url": "https://www.elimparcial.com/mexico/2026/11/08/multaran-con-mas-de-586-mil-pesos-a-todas-las-empresas-que-no-respeten-el-tiempo-libre-de-sus-trabajadores-con-la-nueva-reforma-que-prohibe-a-los-jefes-exigir-respuestas-fuera-de-la-jornada-laboral-sin-importar-si-el-empleo-es-presencial-hibrido-o-remoto/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T16:01:49+00:00",
+   "capturado": "2026-11-08T22:04:22+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6201,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/PYR7ML5BJRFCLE4SJXUBGWSO2I.jpg?auth=bcfb574c8627d9f9adfbb62c8a3b9a8ab7192e9873e6920675f522110e7abe8e&smart=true&width=1920&height=1200",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "405d21430e416409",
+   "titulo": "Frotar una bola de papel aluminio en las parrillas del asador antes de la carne asada permite retirar la grasa adherida sin usar cepillos de alambre, aunque aplicarlo sobre rejillas con esmalte de porcelana o teflón puede rayar el recubrimiento de forma permanente",
+   "url": "https://www.elimparcial.com/estilos/2026/11/08/frotar-una-bola-de-papel-aluminio-en-las-parrillas-del-asador-antes-de-la-carne-asada-permite-retirar-la-grasa-adherida-sin-usar-cepillos-de-alambre-aunque-aplicarlo-sobre-rejillas-con-esmalte-de-porcelana-o-teflon-puede-rayar-el-recubrimiento-de-forma-permanente/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T16:01:35+00:00",
+   "capturado": "2026-11-08T22:04:22+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.8178,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/A6HQXC77MFHKLGUMFOK5ILSKRA.jpg?auth=5d55c65589b33d324826a8db4d808878ed59f8cfa3a8e71144ac9301159c9d86&smart=true&width=1920&height=1200",
+   "rubros": []
+  },
+  {
+   "id": "b1e73eb5e228b98f",
+   "titulo": "El imperio telefónico de Carlos Slim resintió la desaparición de 7.4 millones de líneas móviles en México, justo cuando Televisa adquirió AT&T con un nuevo plan competirle a Telcel con paquetes de internet, telefonía y televisión",
+   "url": "https://www.elimparcial.com/mexico/2026/11/08/el-imperio-telefonico-de-carlos-slim-resintio-la-desaparicion-de-74-millones-de-lineas-moviles-en-mexico-justo-cuando-televisa-adquirio-att-con-un-nuevo-plan-competirle-a-telcel-con-paquetes-de-internet-telefonia-y-television/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T16:01:26+00:00",
+   "capturado": "2026-11-08T22:04:22+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9029,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/BXMTXRWOXREH3PCFGLF2IC3FGY.jpg?auth=88b67c9f82e1607ff39a6af1b72fa0df5bf1091b866a8088f069c9a32096cddc&smart=true&width=1920&height=1200",
+   "rubros": []
+  },
+  {
+   "id": "0ed65288c10141de",
+   "titulo": "El Ejército de Estados Unidos evita reclutar soldados con un coeficiente intelectual menor a 83 porque las decisiones autónomas en combate elevan el riesgo de errores fatales, según psicólogo experto",
+   "url": "https://www.elimparcial.com/locurioso/2026/11/08/el-ejercito-de-estados-unidos-evita-reclutar-soldados-con-un-coeficiente-intelectual-menor-a-83-porque-las-decisiones-autonomas-en-combate-elevan-el-riesgo-de-errores-fatales/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T16:01:17+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7839,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/MMBVUV27OFBOFNGMFABU7FCOGA.jpg?auth=af4cf12b33f806f357ea2bcf7a05c4adf9b8b5c4dbcc7c525c4ddde0db298987&smart=true&width=1920&height=1200",
+   "rubros": []
+  },
+  {
+   "id": "d9d152c7b8c5571d",
+   "titulo": "Claudia Sheinbaum confirmó el aguinaldo adelantado de 40 días de salario a partir del 10 de noviembre para todos los trabajadores del Estado, servidores públicos, fuerzas armadas, pensionados y jubilados en México que forman parte de los beneficiarios del decreto oficial publicado en el DOF",
+   "url": "https://www.elimparcial.com/dinero/2026/11/09/claudia-sheinbaum-confirmo-el-aguinaldo-adelantado-de-40-dias-de-salario-a-partir-del-10-de-noviembre-para-todos-los-trabajadores-del-estado-servidores-publicos-fuerzas-armadas-pensionados-y-jubilados-en-mexico-que-forman-parte-de-los-beneficiarios-del-decreto-oficial-publicado-en-el-dof/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T16:01:09+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6955,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/GNXHSZ2LJBEB7ICNLFBVFYH7YU.jpg?auth=a23c9ae5ebac2e4f885128cf9a8424b2fdc4967c209645da124ca5240afd5c14&smart=true&width=1920&height=1080",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "9b576a83bb5ccd56",
+   "titulo": "Tucson celebra la cultura lowrider con exposición de arte sobre ruedas",
+   "url": "https://www.elimparcial.com/son/arizona/2026/11/09/tucson-celebra-la-cultura-lowrider-con-exposicion-de-arte-sobre-ruedas/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T16:00:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5712,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/2CB2CPXV2FAJZORQS5I4EU6IW4.jpg?auth=f2a90273172c24c5d42ea112b6ffad611dd7365447adf3a74c8696f93181625b&smart=true&width=1920&height=1280",
+   "rubros": []
+  },
+  {
+   "id": "0e032a7acb0024ed",
+   "titulo": "New book wrestles with University of California’s role in making college accessible",
+   "url": "https://timesofsandiego.com/education/2026/11/09/new-book-university-of-california/",
+   "dominio": "timesofsandiego.com",
+   "fuente": "timessd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T16:00:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://i0.wp.com/timesofsandiego.com/wp-content/uploads/2025/07/0.Price_.jpg?fit=1024%2C681&ssl=1",
+   "rubros": []
+  },
+  {
+   "id": "3f04659a7f4ac680",
+   "titulo": "Apple eliminaría el botón de acción de los próximos iPhone; estas serían las funciones que cambiarían",
+   "url": "https://www.elimparcial.com/tecnologia/2026/11/09/apple-eliminaria-el-boton-de-accion-de-los-proximos-iphone-estas-serian-las-funciones-que-cambiarian/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:59:55+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5878,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/GYKBT2OGY5ESLNPHEOFGUZWR4I.png?auth=673988de83214eab7cf086c42441dd6f6ca0d87d87e24200619435f51908b90c&smart=true&width=1200&height=800",
+   "rubros": []
+  },
+  {
+   "id": "86aa7a73d7411830",
+   "titulo": "Floods bring rare relief to US Southwest reservoirs as Lake Powell rises 20 feet",
+   "url": "https://www.kpbs.org/news/environment/2026/11/09/floods-bring-rare-relief-to-us-southwest-reservoirs-as-lake-powell-rises-20-feet",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:48:31+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/56cfaaf/2147483647/strip/false/crop/3347x3347+837+0/resize/600x600!/quality/90/?url=http%3A%2F%2Fkpbs-brightspot.s3.us-west-2.amazonaws.com%2Fda%2Fb3%2F8479b7b4b5ab3e3c3ba64e234149%2Fdownload",
+   "rubros": []
+  },
+  {
+   "id": "3c8c1d208e51378e",
+   "titulo": "Investigan muerte de hombre dentro de panteón en el Valle de Mexicali",
+   "url": "https://www.elimparcial.com/mxl/policiaca/2026/11/08/investigan-muerte-de-hombre-dentro-de-panteon-en-el-valle-de-mexicali/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:46:00+00:00",
+   "capturado": "2026-11-09T06:22:07+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.4902,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/K4NTXUSN7JFNPBDECU4U3MJ7EM.JPG?auth=15e0cbe6cecfec1443063e63eef6cdb8581b5608019d3b947a01746a8b8c7d97&smart=true&width=5472&height=3648",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "6929c9962df5dea1",
+   "titulo": "Crece brecha salarial en el INE; consejeros ganan más que Sheinbaum",
+   "url": "https://jornadabc.com.mx/principales/crece-brecha-salarial-en-el-ine-consejeros-ganan-mas-que-sheinbaum/",
+   "dominio": "jornadabc.com.mx",
+   "fuente": "jornadabc",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:45:24+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8028,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "d52aff766e5983a5",
+   "titulo": "Mexicali tendrá temperaturas de 31 grados y hasta 65% de probabilidad de lluvia el viernes",
+   "url": "https://www.elimparcial.com/mxl/mexicali/2026/11/08/mexicali-tendra-temperaturas-de-31-grados-y-hasta-65-de-probabilidad-de-lluvia-el-viernes/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:44:00+00:00",
+   "capturado": "2026-11-09T06:22:07+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6819,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/FQHNHBUVHNENXD6JMGF6JWNH6I.jpeg?auth=32d0236d1658b06ac0241cf19cecb0e4f8affe6a21cc4192fb7971ee2c228849&smart=true&width=1600&height=1204",
+   "rubros": [
+    "clima"
+   ]
+  },
+  {
+   "id": "0651fdeb9ee88069",
+   "titulo": "Destina SIDURT 326 millones de pesos a obras en el Valle de Mexicali",
+   "url": "https://www.elimparcial.com/mxl/mexicali/2026/11/08/destina-sidurt-326-millones-de-pesos-a-obras-en-el-valle-de-mexicali/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:44:00+00:00",
+   "capturado": "2026-11-09T06:22:07+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4071,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/LWD6BDIF3VEHPHIH4IAYOAGZRI.jpeg?auth=9f59d171a7fb70505bf4ea80dd13f4afaeea2c924d912c4837d9b4f8aa1ec488&smart=true&width=1280&height=962",
+   "rubros": []
+  },
+  {
+   "id": "1b889ed40cf24ee0",
+   "titulo": "Cierran más de 100 OXXO en México: FEMSA reorganiza sus tiendas y acelera su expansión con Bara mientras Tiendas 3B suma sucursales",
+   "url": "https://www.elimparcial.com/mexico/2026/11/09/cierran-mas-de-100-oxxo-en-mexico-femsa-reorganiza-sus-tiendas-y-acelera-su-expansion-con-bara-mientras-tiendas-3b-suma-sucursales/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:31:42+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5022,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/W46ENTRGVRDDDFJ57HBI4GTIWQ.jpg?auth=d21fc73891d4a513a68ab5c4b4cfca3282b9f621db91d74b117492d753493c00&smart=true&width=1200&height=780",
+   "rubros": []
+  },
+  {
+   "id": "d86b9771f1f14518",
+   "titulo": "Brinda UABC casi 2 mil servicios gratuitos en el Valle de Mexicali",
+   "url": "https://www.elimparcial.com/mxl/mexicali/2026/11/08/brinda-uabc-casi-2-mil-servicios-gratuitos-en-el-valle-de-mexicali/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:30:00+00:00",
+   "capturado": "2026-11-09T06:22:07+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5199,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/L4XX2JTAVRABPP3GBKZ5ZJHFAI.jpeg?auth=34a7f37796a82d013bbbb1278fd36d2d9418939f4f8100055aa0dae8241bb378&smart=true&width=1280&height=854",
+   "rubros": []
+  },
+  {
+   "id": "91cabff26d00021e",
+   "titulo": "Jorge Álvarez Máynez pide a Samuel García “dar la cara” por presuntas triangulaciones millonarias investigadas por la ASF y acusa que el organismo busca “empatar el marcador” con casos de corrupción que atribuye a Morena",
+   "url": "https://www.elimparcial.com/mexico/2026/11/09/jorge-alvarez-maynez-pide-a-samuel-garcia-dar-la-cara-por-presuntas-triangulaciones-millonarias-investigadas-por-la-asf-y-acusa-que-el-organismo-busca-empatar-el-marcador-con-casos-de-corrupcion-que-atribuye-a-morena/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:25:23+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8127,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/FGNGXLIYMJCMLDGGZ3OH5DWERI.jpg?auth=1f9199a7602fc808e8022bb6af0f99b3234dd7c260f1e55b988390a08c41b037&smart=true&width=1200&height=750",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "0919171382e63d33",
+   "titulo": "Russell Brand es sentenciado a 10 años y medio de prisión por violación y agresión sexual",
+   "url": "https://www.elimparcial.com/espectaculos/2026/11/09/russell-brand-es-sentenciado-a-10-anos-y-medio-de-prision-por-violacion-y-agresion-sexual/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:25:19+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4849,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/RON3TEHAPJC53HY7GVQ5SH7NRE.jpg?auth=61a17cbeb9425ff118dfc7b7bf64d8b568c76dd3613238258b9f127e934d9955&smart=true&width=1600&height=900",
+   "rubros": [
+    "espectaculos"
+   ]
+  },
+  {
+   "id": "100157bbb73703ff",
+   "titulo": "Expertos explican cómo una botella de plástico colocada en el techo puede transformar la luz solar en iluminación natural dentro de una habitación oscura",
+   "url": "https://www.elimparcial.com/estilos/2026/11/08/expertos-explican-como-una-botella-de-plastico-colocada-en-el-techo-puede-transformar-la-luz-solar-en-iluminacion-natural-dentro-de-una-habitacion-oscura/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:23:04+00:00",
+   "capturado": "2026-09-16T06:32:39+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6059,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/I7OZK4LQ2NEKVI3Q3HOAXFOY64.png?auth=02ae8ae3433711f1874c41fb365a0ce24ddcc3c7e08159337f8799200b1655be&smart=true&width=1200&height=780",
+   "rubros": []
+  },
+  {
+   "id": "bdcbdf442c515515",
+   "titulo": "Garantiza Gobierno de Marina del Pilar beca Corazón de Cimarrón y tarjeta Violeta a quienes más lo necesiten",
+   "url": "https://www.elimparcial.com/mxl/mexicali/2026/11/08/garantiza-gobierno-de-marina-del-pilar-beca-corazon-de-cimarron-y-tarjeta-violeta-a-quienes-mas-lo-necesiten/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:19:00+00:00",
+   "capturado": "2026-11-09T06:22:07+00:00",
+   "figuras": [
+    {
+     "id": "mpao",
+     "via": "nominal",
+     "clave": "marina del pilar"
+    }
+   ],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.4386,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/WMFZSXOVTFGTPKTNXI7WPKWXKY.jpeg?auth=b00ff218fe0edd5e2a27bc311df72262559466e4a12e6fd427f91af49bf1ccd0&smart=true&width=1280&height=853",
+   "rubros": []
+  },
+  {
+   "id": "0806fbc8603cfef9",
+   "titulo": "Trabajadores del INE anuncian paro nacional en al menos 20 estados; exigen aumento salarial de 100%",
+   "url": "https://www.elimparcial.com/mexico/2026/11/09/trabajadores-del-ine-anuncian-paro-nacional-en-al-menos-20-estados-exigen-aumento-salarial-de-100/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:17:58+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5821,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/RUQ45RL7RJFR5DQLNYPE4IRASY.png?auth=77958e525bc8cf31810a5e54bbe1b0b3d81f100b25e8729300038d2dc42e52b5&smart=true&width=673&height=449",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "ec3aecb407b2f86e",
+   "titulo": "Sorteo Magno de la UABC suma 78% de boletos vendidos y más de 125 mil folios registrados",
+   "url": "https://www.elimparcial.com/mxl/mexicali/2026/11/08/sorteo-magno-de-la-uabc-suma-78-de-boletos-vendidos-y-mas-de-125-mil-folios-registrados/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:16:00+00:00",
+   "capturado": "2026-11-09T06:22:07+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7882,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/HUKJIEDMFVAQJGEZB6CDF4L4ZM.jpeg?auth=f9bf1c61cedf8b6bd58c7af63d75165cd667782a5435c206b9abf23e383f891d&smart=true&width=1600&height=900",
+   "rubros": []
+  },
+  {
+   "id": "5bf6f934540786cf",
+   "titulo": "Peso mexicano sube frente al dólar pese a las expectativas de un aumento de tasas en Estados Unidos y así cotiza el tipo de cambio este lunes 9 de noviembre",
+   "url": "https://www.elimparcial.com/dinero/2026/11/09/peso-mexicano-sube-frente-al-dolar-pese-a-las-expectativas-de-un-aumento-de-tasas-en-estados-unidos-y-asi-cotiza-el-tipo-de-cambio-este-lunes-9-de-noviembre/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:15:34+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5195,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/YJ23XRCPQFFB3N4WDGJHAOC4NE.jpg?auth=47bf4ea0de7dc926a7af388b817912978d2ab99c6ef2c818e85b7d0aa34b9f65&smart=true&width=1600&height=1200",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "6398b7e7175fe875",
+   "titulo": "Personal sindicalizado cierra el Cobach Villa de Seris en Hermosillo para exigir aumento y homologación salaria",
+   "url": "https://www.elimparcial.com/son/hermosillo/2026/11/09/personal-sindicalizado-cierra-el-cobach-villa-de-seris-en-hermosillo-para-exigir-aumento-y-homologacion-salaria/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:10:04+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.719,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/R4TOANTESRB5DM4E4DRZKHV2AE.jpeg?auth=3a4224c1b0cb88a05f608460a20a948a9e8f8fc8671ba796345a8202c86fdd76&smart=true&width=1280&height=853",
+   "rubros": []
+  },
+  {
+   "id": "ff5866e1e28acea2",
+   "titulo": "Thick smog shrouds New Delhi after Diwali firecrackers add to seasonal pollution",
+   "url": "https://www.kpbs.org/news/international/2026/11/09/thick-smog-shrouds-new-delhi-after-diwali-firecrackers-add-to-seasonal-pollution",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:09:53+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/7cfa521/2147483647/strip/false/crop/5497x5497+1375+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F0f%2Fa0%2F9498db764f74bf5081bd7fb99824%2Fap26313155738342.jpg",
+   "rubros": []
+  },
+  {
+   "id": "1856ca4922d4336a",
+   "titulo": "Horóscopos de hoy 9 de noviembre: ¿qué te depara el destino según el tarot?",
+   "url": "https://www.elimparcial.com/espectaculos/2026/11/09/horoscopos-de-hoy-9-de-noviembre-que-te-depara-el-destino-segun-el-tarot/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:09:33+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7335,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/7L47MTUTFNFEVG6WIKC5YE2UUE.png?auth=74765d6b9c3ee187362b91ad9b70b6fd65dd31e09f81687153322e6db5798105&smart=true&width=1536&height=1024",
+   "rubros": [
+    "espectaculos"
+   ]
+  },
+  {
+   "id": "4cf08e215b2aa30c",
+   "titulo": "Sheinbaum insiste en que Guadalupe Taddei “traicionó al pueblo” de México y responde al respaldo que recibió de AMLO al recordar que PAN, PRI y Morena avalaron su candidatura al INE",
+   "url": "https://www.elimparcial.com/mexico/2026/11/09/sheinbaum-acusa-a-guadalupe-taddei-de-traicionar-al-pueblo-de-mexico-y-rechaza-que-morena-la-haya-impuesto-en-el-ine/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:08:51+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8688,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/R3UHWCH5TRGANNM3W5FFDDSIGE.jpg?auth=4ee8e6592abf281d3435a78e75e1aa8ca05bf25e9ccd3aa0e17f4997b6eaaca1&smart=true&width=1200&height=750",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "8f996a13a1256fdc",
+   "titulo": "Criptomonedas y acciones de inteligencia artificial se desploman ante incertidumbre política en Estados Unidos",
+   "url": "https://www.elimparcial.com/mundo/2026/11/09/criptomonedas-y-acciones-de-inteligencia-artificial-se-desploman-ante-incertidumbre-politica-en-estados-unidos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T15:01:44+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8555,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/KCTJMUA6JRASFDQJMOABSISDPM.png?auth=4f472af69b6a74027b79deb3ef32df322f70874845073be3ebb8336a5424a1e4&smart=true&width=1280&height=720",
+   "rubros": [
+    "ia"
+   ]
+  },
+  {
+   "id": "cc36bddda6c00347",
+   "titulo": "Sheinbaum y el gen de escurrir el bulto",
+   "url": "https://www.elimparcial.com/columnas/2026/11/09/sheinbaum-y-el-gen-de-escurrir-el-bulto/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:55:27+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8952,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "09d7b3da6971c448",
+   "titulo": "La maldad de Trump",
+   "url": "https://www.elimparcial.com/columnas/2026/11/09/la-maldad-de-trump/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:53:12+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7346,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "c013f9dada4d59c4",
+   "titulo": "El INE sí se toca",
+   "url": "https://www.elimparcial.com/columnas/2026/11/09/el-ine-si-se-toca/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:51:19+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4332,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "47394a56f4bc118f",
+   "titulo": "Trump: ¿De rey a apestado?",
+   "url": "https://www.elimparcial.com/columnas/2026/11/09/trump-de-rey-a-apestado/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:49:09+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5863,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "38964de24f3a9681",
+   "titulo": "Es la economía estúpida",
+   "url": "https://www.elimparcial.com/columnas/2026/11/09/es-la-economia-estupida/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:48:01+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8127,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "a07e2c519a228f4a",
+   "titulo": "INEGI reporta inflación anual de 3.75 por ciento en octubre, su nivel más alto desde mayo",
+   "url": "https://zetatijuana.com/2026/11/inegi-reporta-inflacion-anual-de-3-75-por-ciento-en-octubre-su-nivel-mas-alto-desde-mayo/",
+   "dominio": "zetatijuana.com",
+   "fuente": "zeta",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:47:04+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5607,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "5f5f873fd3b744a7",
+   "titulo": "Envenenadores",
+   "url": "https://www.elimparcial.com/columnas/2026/11/09/envenenadores/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:46:59+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7559,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "c367330b13cc1eb2",
+   "titulo": "Salinas Pliego se victimiza",
+   "url": "https://www.elimparcial.com/columnas/2026/11/09/salinas-pliego-se-victimiza/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:44:09+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.908,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "d2d02adc306d7fb0",
+   "titulo": "Ya es oficial: SAT embargará todas las cuentas de quienes mantengan créditos fiscales exigibles tras la validación constitucional del buzón tributario emitida por un tribunal colegiado en materia administrativa",
+   "url": "https://www.elimparcial.com/dinero/2026/11/02/sat-embargara-todas-las-cuentas-de-quienes-mantengan-creditos-fiscales-exigibles-tras-la-validacion-constitucional-del-buzon-tributario-emitida-por-un-tribunal-colegiado-en-materia-administrativa/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:38:16+00:00",
+   "capturado": "2026-11-04T23:42:29+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7632,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/5WT7TUYGRBCAHP5X3XHMP6XHOU.jpg?auth=b0a658aebe5c55f3bebb127418a3b1f9747f741daf4a83e6b95b37821705b2ce&smart=true&width=1920&height=1080",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "fb8efed5c6baaa96",
+   "titulo": "Los niños que crecieron en medio de discusiones y conflictos familiares no es que adquieran una mayor inteligencia emocional, sino que aprendieron a leer los mínimos cambios de humor y expresiones faciales como una rigurosa estrategia de defensa, según la psicología",
+   "url": "https://www.elimparcial.com/estilos/2026/11/02/los-ninos-que-crecieron-en-medio-de-discusiones-y-conflictos-familiares-no-es-que-adquieran-una-mayor-inteligencia-emocional-sino-que-aprendieron-a-leer-los-minimos-cambios-de-humor-y-expresiones-faciales-como-una-rigurosa-estrategia-de-defensa-segun-la-psicologia/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:38:06+00:00",
+   "capturado": "2026-11-03T00:59:23+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5684,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/ZPBU5R3EKFCBXFMCJOU2O4WDRQ.jpg?auth=40d36be4b3e74ac4095bb42049adeaeadf74439ccf37af34daf6039ee21143f9&smart=true&width=1920&height=1200",
+   "rubros": []
+  },
+  {
+   "id": "515d13f37176e9af",
+   "titulo": "Claudia Sheinbaum confirmó el incremento oficial de la Pensión del Bienestar para 2027, garantizando por mandato constitucional que el apoyo económico se mantenga por arriba de la tasa de inflación anual para proteger el poder adquisitivo de más de 13 millones de adultos mayores en todo México",
+   "url": "https://www.elimparcial.com/dinero/2026/11/03/claudia-sheinbaum-confirmo-el-incremento-oficial-de-la-pension-del-bienestar-para-2027-garantizando-por-mandato-constitucional-que-el-apoyo-economico-se-mantenga-por-arriba-de-la-tasa-de-inflacion-anual-para-proteger-el-poder-adquisitivo-de-mas-de-13-millones-de-adultos-mayores-en-todo-mexico/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:37:57+00:00",
+   "capturado": "2026-11-03T23:19:48+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5166,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/G7ESXGXVWZGBFMZZ24VU44EBHQ.jpg?auth=cd2506e5688339baad93e28bf54dd83217766c5cdf911912fd7903f777f1146f&smart=true&width=1920&height=1200",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "589d2e444911fd9c",
+   "titulo": "Tras la imposición del registro obligatorio de celulares con CURP de Claudia Sheinbaum, y con las nuevas fechas límite encima, miles de usuarios recurrieron a eSIM extranjeras para evitar el bloqueo de líneas, aunque expertos advierten que esta alternativa puede costar hasta diez veces más que una tarifa local",
+   "url": "https://www.elimparcial.com/dinero/2026/11/03/tras-la-imposicion-del-registro-obligatorio-de-celulares-con-curp-por-parte-de-la-crt-y-las-nuevas-fechas-limite-encima-miles-de-usuarios-recurrieron-a-esim-extranjeras-para-evitar-el-bloqueo-de-lineas-aunque-expertos-advierten-que-esta-alternativa-puede-costar-hasta-diez-veces-mas-que-una-tarifa-local/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:37:44+00:00",
+   "capturado": "2026-11-05T19:58:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5691,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/IXBGY356DVCM3OOEVCQDSPS65Y.jpg?auth=2cb6982e87be4b2e9d53a96946b5d735afe427a522f27f4a72da7bf926afe18f&smart=true&width=1920&height=1080",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "0cf596561df64caa",
+   "titulo": "Ricardo Salinas Pliego se unió al IMSS a favor de los pensionados, consolidando con Banco Azteca su servicio de dispersión de nómina de pensión sin comisiones con el respaldo de la red de convenios; los pagos retroactivos y dobles aguinaldos ingresan de forma íntegra gracias a la capacidad de depósito autorizada",
+   "url": "https://www.elimparcial.com/dinero/2026/11/03/con-el-respaldo-de-la-red-de-convenios-encabezada-por-ricardo-salinas-pliego-banco-azteca-consolido-su-servicio-de-dispersion-de-nomina-de-pension-sin-comisiones-para-millones-de-jubilados-del-imss-en-mexico-los-pagos-retroactivos-y-dobles-aguinaldos-ingresan-de-forma-integra-gracias-a-la-capacidad-de-deposito-autorizada/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:37:21+00:00",
+   "capturado": "2026-11-03T23:19:48+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5842,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/CLSSJLCO25EWPFCBIVWCTIOSYY.jpg?auth=fd768799041d89a0e98b44e0fd6a91359710ea754009dd50f9f703ee6e02bba3&smart=true&width=1920&height=1200",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "4aed7b344d75f5e2",
+   "titulo": "British comedian Russell Brand sentenced to over 10 years for rape and sexual assault",
+   "url": "https://www.kpbs.org/news/international/2026/11/09/british-comedian-russell-brand-sentenced-to-over-10-years-for-rape-and-sexual-assault",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:36:54+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/a6f9d55/2147483647/strip/false/crop/3762x3762+159+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fdd%2F10%2Fc857c3834375bada2b4dddb35e12%2Fap26309660909871.jpg",
+   "rubros": []
+  },
+  {
+   "id": "7370680101d2efac",
+   "titulo": "Luego de que el IMSS eliminó el esquema de la Modalidad 40 que permitía a extrabajadores cotizar con montos elevados para inflar su pensión bajo la Ley 73, la industria aseguradora aseguró que los esquemas públicos no garantizan una vejez digna y que se intensificará la promoción de los planes personales de retiro entre los jóvenes",
+   "url": "https://www.elimparcial.com/dinero/2026/11/04/luego-de-que-el-imss-puso-fin-al-esquema-de-la-modalidad-40-que-permitia-a-extrabajadores-cotizar-con-montos-elevados-para-inflar-su-pension-bajo-la-ley-73-la-industria-aseguradora-aseguro-que-los-esquemas-publicos-no-garantizan-una-vejez-digna-y-que-se-intensificara-la-promocion-de-los-planes-personales-de-retiro-entre-los-jovenes/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:36:37+00:00",
+   "capturado": "2026-11-05T19:58:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9519,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/FFE4ZGSLU5BD3EIHMORQL63ETY.jpg?auth=08c2b8949149b4fac1e42e8159716122caa2e1f82629e1ffa4c3a0125b1f1dcd&smart=true&width=1920&height=1080",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "f5e8a89a778fbd31",
+   "titulo": "SAT les descontará ISR del aguinaldo a todos los trabajadores que ganan entre 18 y 21 mil pesos al mes: ¿Cómo les quedaría el pago neto?",
+   "url": "https://www.elimparcial.com/dinero/2026/11/05/sat-descontara-isr-del-aguinaldo-a-todos-los-trabajadores-que-ganan-entre-18-y-21-mil-pesos-y-asi-les-quedara-el-pago-neto/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:36:20+00:00",
+   "capturado": "2026-11-06T19:25:04+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7283,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/TLOPYOILMNFWBLQDJC2NNRAFUI.jpg?auth=8641f59fc6dacd6f5589d4511bf21e17e994f443c925b5e940428511c4de76c2&smart=true&width=1920&height=1200",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "fb619aca2a8e614f",
+   "titulo": "SAT: Con 349 votos a favor, el Congreso de la Unión dio luz verde definitiva a las reglas del ISR para el ejercicio fiscal 2027, blindando de los límites de deducción a sectores clave como el automotriz y el gasolinero bajo el argumento de proteger la competitividad y el empleo",
+   "url": "https://www.elimparcial.com/dinero/2026/11/05/sat-con-349-votos-a-favor-el-congreso-de-la-union-dio-luz-verde-definitiva-a-las-reglas-del-isr-para-el-ejercicio-fiscal-2027-blindando-de-los-limites-de-deduccion-a-sectores-clave-como-el-automotriz-y-el-gasolinero-bajo-el-argumento-de-proteger-la-competitividad-y-el-empleo/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:36:08+00:00",
+   "capturado": "2026-11-05T19:58:41+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6367,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/ETHTG2NIANAF7JQLQMP5O46RM4.jpg?auth=891e723031139a96442a48e429ce8ac5b23b364dd884a5c85fc6aa9fa7956fc1&smart=true&width=1920&height=1200",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "c1ba55d6209f6d9b",
+   "titulo": "Choferes de Uber y DiDi deberán trabajar más de 95 horas y alcanzar ingresos brutos cercanos a los 19 mil pesos al mes para garantizar el salario mínimo y acceder al IMSS, según los nuevos lineamientos de la STPS",
+   "url": "https://www.elimparcial.com/dinero/2026/11/05/choferes-de-uber-y-didi-deberan-trabajar-mas-de-95-horas-al-mes-y-alcanzar-ingresos-brutos-cercanos-a-los-19-mil-pesos-para-garantizar-el-salario-minimo-y-acceder-al-imss-segun-los-nuevos-lineamientos-de-la-stps/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:35:58+00:00",
+   "capturado": "2026-11-07T05:58:17+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7676,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/S6RUZC3TA5FG3DHX6PJIDXTEHM.jpg?auth=c13bb1bdf9fe996b6e990c68ee5f1c25b6fdd99b791530eadd333773ca666a29&smart=true&width=1920&height=1200",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "f620143c89ba5b74",
+   "titulo": "Un hombre de 36 años fue acusado de matar brutalmente a una madre de 3 hijos y abusar sexualmente de un niño de 14 años y de animales; fue formalmente imputado por 16 cargos criminales ante un gran jurado de Texas y las autoridades creen que puede haber más víctimas",
+   "url": "https://www.elimparcial.com/mundo/2026/11/06/un-hombre-de-36-anos-fue-acusado-de-matar-brutalmente-a-una-madre-de-3-hijos-y-abusar-sexualmente-de-un-nino-de-14-anos-y-de-animales-fue-formalmente-imputado-por-16-cargos-criminales-ante-un-gran-jurado-de-texas-y-las-autoridades-creen-que-puede-haber-mas-victimas/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:35:48+00:00",
+   "capturado": "2026-11-06T19:25:04+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9299,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/CU2TBZ6VBRH37MELKEGN6V5KJ4.jpg?auth=35eeaa729d6f3ceb3d93941e6e941f415e1ee0d55bcbd92a247c4b3fd06fad16&smart=true&width=1920&height=1200",
+   "rubros": []
+  },
+  {
+   "id": "f21423aafca8f94a",
+   "titulo": "Tras evadir a la justicia ocultándose en México por más de 20 años, Miguel Urbano Vázquez, de 50 años, quien violó y mató a mujeres desde 2002 en Estados Unidos, fue extraditado para enfrentar una condena a cadena perpetua, gracias a la combinación de bases de datos de ADN y una estrecha cooperación binacional",
+   "url": "https://www.elimparcial.com/mundo/2026/11/06/tras-evadir-a-la-justicia-ocultandose-en-mexico-por-mas-de-20-anos-miguel-urbano-vazquez-de-50-anos-quien-violo-y-mato-a-mujeres-desde-2002-en-estados-unidos-fue-extraditado-para-enfrentar-una-condena-a-cadena-perpetua-gracias-a-la-combinacion-de-bases-de-datos-de-adn-y-una-estrecha-cooperacion-binacional/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:35:41+00:00",
+   "capturado": "2026-11-06T19:25:04+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5964,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/JQEYRNNSUVHCTDH2H4BNFHW36A.jpg?auth=9d7c5794755bac0c710d81625cbe190b97d3688bcb7f15fdca1b392c586b3cf5&smart=true&width=1920&height=1200",
+   "rubros": []
+  },
+  {
+   "id": "e467b417a1206369",
+   "titulo": "Luego de que la SEP y Claudia Sheinbaum prohibieron los celulares en las escuelas de todo México, millones de estudiantes volverán a los juegos como saltar la cuerda o las canicas en el patio, a la lectura, juegos de mesa y los deportes tradicionales durante la hora del recreo: ¿A qué jugar en el recreo?",
+   "url": "https://www.elimparcial.com/mexico/2026/11/06/ya-es-oficial-sep-y-sheinbaum-prohibieron-los-celulares-en-las-escuelas-de-todo-mexico-y-ahora-millones-de-estudiantes-tendran-que-regresar-a-los-juegos-en-el-patio-la-lectura-juegos-de-mesa-y-los-deportes-tradicionales-durante-la-hora-del-recreo/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:35:27+00:00",
+   "capturado": "2026-11-07T05:58:17+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6772,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/EMO75YOONFBNJDIEO5DYQAKSXI.jpg?auth=ff1d70fc3d41b546e28289076b25c74a59b7d8eab51394144e496e771ac65a84&smart=true&width=1920&height=1200",
+   "rubros": []
+  },
+  {
+   "id": "ba5fba362c42b174",
+   "titulo": "La industria maquiladora destina el 96 por ciento de su presupuesto a importar insumos principalmente de EEUU, un reto estructural para el gobierno de Claudia Sheinbaum frente a una dependencia extrema que condena a los trabajadores a bajos salarios y acelera la fuga de talento joven mexicano",
+   "url": "https://www.elimparcial.com/mexico/2026/11/08/el-inegi-revelo-que-la-industria-maquiladora-destina-el-96-por-ciento-de-su-presupuesto-a-importar-insumos-principalmente-de-eeuu-un-reto-estructural-para-el-gobierno-de-claudia-sheinbaum-frente-a-una-dependencia-extrema-que-condena-a-los-trabajadores-a-bajos-salarios-y-acelera-la-fuga-de-talento-joven-mexicano/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:34:52+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9767,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/XQY6AV7A4NA6BA3N53V634FZZ4.jpg?auth=f42a0a526fdba884e39f48099be03faa45e9592e18a89be650fa7295e55e5ca9&smart=true&width=1920&height=1200",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "cbc076986a427be3",
+   "titulo": "San Diego’s congressional delegation is all Democrats. What’s next?",
+   "url": "https://inewsource.org/2026/11/09/san-diego-congressional-delegation-all-democrats-now-what/",
+   "dominio": "inewsource.org",
+   "fuente": "inewsource",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:30:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://i0.wp.com/inewsource.org/wp-content/uploads/2026/11/election_night_6-scaled.jpg?fit=1024%2C683&ssl=1",
+   "rubros": []
+  },
+  {
+   "id": "ae3dc4d097c70354",
+   "titulo": "Secretaría Anticorrupción denuncia ante la FGR una red de presuntas extorsiones que utilizaba documentos falsos y el nombre de Raquel Buenrostro para exigir dinero",
+   "url": "https://www.elimparcial.com/mexico/2026/11/09/secretaria-anticorrupcion-denuncia-ante-la-fgr-una-red-de-presuntas-extorsiones-que-utilizaba-documentos-falsos-y-el-nombre-de-raquel-buenrostro-para-exigir-dinero/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:29:36+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7532,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/65PPLOA5UNCF3L2GQSJNLSO2UA.jpg?auth=a4abbbdfa329a5568ac6bdbafa54741e556eab10cc21dc2ecaae878793ac1cd4&smart=true&width=1200&height=750",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "26c8fe25b5ad8959",
+   "titulo": "Tesla y SpaceX pierden más de 208 mil millones de dólares en valor bursátil en una semana",
+   "url": "https://www.elimparcial.com/tecnologia/2026/11/09/tesla-y-spacex-pierden-mas-de-208-mil-millones-de-dolares-en-valor-bursatil-en-una-semana/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:28:05+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7223,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/NMUDCB4ZCZA2NAVG2GBE5I5ZEI.png?auth=9fef2df13b22bedd634f791077457d686072304ee728848e28a346918075c319&smart=true&width=1920&height=1080",
+   "rubros": []
+  },
+  {
+   "id": "7578624ade7294d1",
+   "titulo": "Permanece hospitalizado el “R2” tras enfrentamiento en Guadalajara",
+   "url": "https://zetatijuana.com/2026/11/permanece-hospitalizado-el-r2-tras-enfrentamiento-en-guadalajara/",
+   "dominio": "zetatijuana.com",
+   "fuente": "zeta",
+   "zona_medio": "Tijuana",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:24:49+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.4866,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "48abd1fb1d6bf84c",
+   "titulo": "Eco Depot’s CCT Finalizing Participation in $100 Million Dredging Contract for Mexico’s Landmark $4 Billion Punta Colonet Megaport Project",
+   "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxNWmlCUlhNWmJMZl9fQ0JqY0wzdWpMVDJFUlZGMThBclljUi0wbVN5NGk3MDJ2NlJxUHRwOXNqN1JXUGNrYWVFS0U3UVdpWVhwVm9DUWlHYW42QzJSXzJFaGdkUVJQYVNmanE4SzBfVnZrSkdEOEJnZVJraDE2MEpseWxuQkN6U3RrSGZCUGcwTVhlT1JHRUVYTC1ibkYzc05kNGN2Q1E0S0RQbHRXTTBOSnZhblkxOUlNMU9YTmRhTUJoZU03d0wwTUdrVmVvclpEVkZXSWZ3X3VQWEloU3N5aXIxMVM4WjRmX0k2cUxUUQ?oc=5",
+   "dominio": "dredgewire.com",
+   "fuente": "gn-7650212e50ff",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Quintín"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:23:17+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
+  },
+  {
+   "id": "cb4dc09075d405d2",
+   "titulo": "¿Precaución jurídica o protección a Taddei?",
+   "url": "https://www.elimparcial.com/columnas/2026/11/09/precaucion-juridica-o-proteccion-a-taddei/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:22:26+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.8465,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "5e7555e8e5a4e10d",
+   "titulo": "Pimpinela derrocha drama y nostalgia en El Foro",
+   "url": "https://zetatijuana.com/2026/11/pimpinela-derrocha-drama-y-nostalgia-en-el-foro/",
+   "dominio": "zetatijuana.com",
+   "fuente": "zeta",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:02:50+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5279,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros_categoria": [
+    "espectaculos"
+   ],
+   "rubros": [
+    "espectaculos"
+   ]
+  },
+  {
+   "id": "1a40e965d2d41101",
+   "titulo": "Daily Business Report: November 9, 2026",
+   "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxObExnRTRLMDlreU9HVi1ydDRSa2Z5V29KVXNIcTBfanVJczFqQ2hYUEVzcWtSX3Y2b2RRQzVOekl5Rlp4T040QUZEcFFQUktRM1FRS2ZTVVBnTDNQYXFIdFpBZFVjb1NtcWVqNEcwaUwzT0dBMHdPWHB2V182QmZXYjdB?oc=5",
+   "dominio": "sandiegometro.com",
+   "fuente": "gn-9dcd619c4dd5",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:01:31+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_aguasnegras",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "614d36ad2380cc4c",
+   "titulo": "Garitas de Tijuana registran demoras de más de 100 minutos este lunes (Datos actualizados a las 06:00 AM PST) Los cruces fronterizos de Baja California inician la jornada con importante saturación en Tijuana, donde las garitas de San Ysidro y Otay Mesa",
+   "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPX2NBcUI3YkdEZnNWNjJERXN4OUJZT05WRFAzU2RIOGFpU3RHUF8xQzhPUVFMNE5LaGxnemlBVW5nY3djcDJZZXBMdG13Wm9MMnRiSjNvaTVOMnZDZUJOV2RJYzFYQnh0N0NaZV80SFlqa2NrMG95RE1LQnF3Z1VZaF9peU9RaE00YTRtbHJ4bFN2SUFwQzNjVU9VZG1GY21OeEFFZ1Q3OVBJMV9TbHQtRWFsQ1dGTnBhUEtCSg?oc=5",
+   "dominio": "tijuanaenlinea.com",
+   "fuente": "gn-f8497491006c",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana",
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:00:32+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7123,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate",
+   "rubros": []
+  },
+  {
+   "id": "3f8de8a42cb3324f",
+   "titulo": "Marina detiene al ‘R2’ y a otros 19 presuntos integrantes del CJNG en Zapopan tras enfrentamiento armado que dejó dos heridos; lo investigan por su posible vínculo con el asesinato de Carlos Manzo y enfrenta órdenes de captura por homicidio y extradición a Estados Unidos",
+   "url": "https://www.elimparcial.com/mexico/2026/11/09/marina-detiene-al-r2-y-a-otros-19-presuntos-integrantes-del-cjng-en-zapopan-tras-enfrentamiento-armado-que-dejo-dos-heridos-lo-investigan-por-su-posible-vinculo-con-el-asesinato-de-carlos-manzo-y-enfrenta-ordenes-de-captura-por-homicidio-y-extradicion-a-estados-unidos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T14:00:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.5591,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/6P4ZKCW5WJGS5HKO2JTPATK3SI.jpg?auth=c85dd6d5a600ea6205b4036b27861851684e032034457c05587b90b59de95bb9&smart=true&width=1200&height=750",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "239434952c3e66e8",
+   "titulo": "Sonora pierde participación en las remesas que recibe México mientras sus ingresos apenas crecen en 2026",
+   "url": "https://www.elimparcial.com/son/sonora/2026/11/09/sonora-pierde-participacion-en-las-remesas-que-recibe-mexico-mientras-sus-ingresos-apenas-crecen-en-2026/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T13:55:50+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8843,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/FN5U4LU7DBGB5F37UVGWAHIR4M.png?auth=4f23fa10986db03b0b598471bfb04084f21c4f9914aa586af923d6dc28cca7e5&smart=true&width=641&height=365",
+   "rubros": []
+  },
+  {
+   "id": "84f595af2b1e0ba0",
+   "titulo": "Banxico reduce su tasa de interés a 6.25% y abre la puerta a cambios en los rendimientos del ahorro y el costo de los créditos",
+   "url": "https://www.elimparcial.com/mexico/2026/11/09/banxico-reduce-su-tasa-de-interes-a-625-y-abre-la-puerta-a-cambios-en-los-rendimientos-del-ahorro-y-el-costo-de-los-creditos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T13:54:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5185,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/T3E2CESWPZDPVHQAH5TEPA2WL4.jpg?auth=98c44d81dcb11adea9c3510cdeef6ace862b0bea829aa6039da6da2b71a4ffea&smart=true&width=1500&height=1000",
+   "rubros": []
+  },
+  {
+   "id": "ccbbb9eed04379c4",
+   "titulo": "¡Vio mi peor parte y siguió creyendo en mí!",
+   "url": "https://www.elimparcial.com/columnas/2026/11/09/vio-mi-peor-parte-y-siguio-creyendo-en-mi/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T13:49:34+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.4395,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "704b416d5a165ca4",
+   "titulo": "Cerro de La Campana",
+   "url": "https://www.elimparcial.com/son/columnas/2026/11/09/cerro-de-la-campana/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T13:46:36+00:00",
+   "capturado": "2026-09-04T15:24:36+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5054,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/T3D4QQN4M5HP5L2GXSSLKIUFQQ.jpg?auth=374576b1d0ae44a2c36e4ce4ddcb3dff7fd99b4b3bd1f16e31867b3ec209d510&smart=true&width=1200&height=630",
+   "rubros": []
+  },
+  {
+   "id": "544f9485ee4daaae",
+   "titulo": "A Utah judge is expected to set a trial date in Charlie Kirk’s killing",
+   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5EWk5DWXZoeXFpNWw1UTlzNXc4d1E1TkhzVVJZWW1PQk8zZElKZl82X3FNa0dXdXNjTS15cVljVF9lWVJ4X29UMkxZaW1qWmVFTjQzUE00TmZ0ZzE5cVg0RlBLeGtaQk5wZHd0MkdnRW5mX0VMWFE?oc=5",
+   "dominio": "courant.com",
+   "fuente": "gn-0fb48c3e82dc",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T13:37:24+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_aguasnegras",
+   "rubros": []
+  },
+  {
+   "id": "6e2754a603a3b5be",
+   "titulo": "EN VIVO: Mañanera de Claudia Sheinbaum hoy lunes 9 de noviembre del 2026",
+   "url": "https://www.elimparcial.com/mexico/2026/11/09/en-vivo-mananera-de-claudia-sheinbaum-hoy-lunes-9-de-noviembre-del-2026/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T13:31:05+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6866,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/T33FBAVEYJCNNGQNHTZPD2HU74.jpg?auth=47145e2149a75d5ff4fd297bdc9c6e3fd46c0229cf9ca090bac4da39bdd1b5dc&smart=true&width=2300&height=1534",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "ca67a245430adf00",
+   "titulo": "Los mexicanos confían más en las marcas chinas: JAC y GWM lideran ranking de confiabilidad de autos Datos de J.D. Power",
+   "url": "https://www.elimparcial.com/mexico/2026/11/09/los-mexicanos-confian-mas-en-las-marcas-chinas-jac-y-gwm-lideran-ranking-de-confiabilidad-de-autos-datos-de-jd-power/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T13:28:56+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.4603,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/HFO45X5IYJCHBIZGLZMHM4ILDQ.jpg?auth=93298d783df7d71ded987cb7c806c6e71cc24d8dccc9196f2d836ef2c2492247&smart=true&width=1280&height=720",
+   "rubros": []
+  },
+  {
+   "id": "d2ea8f7267474d04",
+   "titulo": "Efemérides del 9 de noviembre: ¿qué pasó un día como hoy en México y el mundo?",
+   "url": "https://www.elimparcial.com/mundo/2026/11/09/efemerides-del-9-de-noviembre-que-paso-un-dia-como-hoy-en-mexico-y-el-mundo/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T13:27:25+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7041,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/I6OIWIJPDRHVZFOAQ4PRJDXOBI.jpg?auth=96ebf9fe5dfcd7bcceacf5ef3cb80911eb39dc28e8c12f0b3d507d6a8049a413&smart=true&width=1200&height=750",
+   "rubros": []
+  },
+  {
+   "id": "320f5449fc83464c",
+   "titulo": "Carolina lleva 45 años amasando tradición con sus tortillas de harina en Los Cabos",
+   "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxQVW5HLVBuMmhKOFhSUDY2MlN5VkpUbTZfbzBqZU11WFhucUU2d25zdjFXRktwQXUwUVNtRHZral9WY1E0eWRzc0hiU3YwLVVlS0hCakFVWDJ5YnBvUWd1WEx6bHQzRXA5WGFjUmZ1SFlnRE1WbmZhTlVzVWNEM0U4ZG42Mk0taTlJdlc3R0NoSUZTaWZKVmNFWlNvaUlqVThoaE90MTB5TmROd2RDeFo2QWRQeWxtRW9HSmdhWDlhZy1SNm9xUGppTWVVdW84cnBIWDY4X1lUVm0xQjhia2l0MTlXZUcyczQ?oc=5",
+   "dominio": "elsudcaliforniano.com.mx",
+   "fuente": "gn-44d26da6f2a1",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T13:11:41+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4713,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": []
+  },
+  {
+   "id": "a7f2c51646fa6bb2",
+   "titulo": "Hoy No Circula: Estos autos tendrán restricciones este lunes, 9 de noviembre de 2026 en CDMX y Edomex",
+   "url": "https://www.elimparcial.com/mexico/2026/11/09/hoy-no-circula-estos-autos-tendran-restricciones-este-lunes-9-de-noviembre-de-2026-en-cdmx-y-edomex/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T12:50:19+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7944,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/BGFUADDIZZF3LFFCMX6UJOV4MA.jpg?auth=bc79d484278292c384e2dc6b30cc5913e2ef06aeca1ca8d25801d39f4bb42284&smart=true&width=1200&height=750",
+   "rubros": []
+  },
+  {
+   "id": "475f892c3c000639",
+   "titulo": "Mientras en México la carne asada se disfruta en tacos y con salsa, en Italia la ‘bistecca alla Fiorentina’ se cocina gruesa, con hueso en T y casi sin condimentos",
+   "url": "https://www.elimparcial.com/estilos/2026/11/06/mientras-en-mexico-la-carne-asada-se-disfruta-en-tacos-y-con-salsa-en-italia-la-bistecca-alla-fiorentina-se-cocina-gruesa-y-casi-sin-condimentos/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T12:41:58+00:00",
+   "capturado": "2026-11-08T22:04:22+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5212,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/LU4VK6CEJ5HTBNC6TICZO3PWAY.jpg?auth=994e8fd5742ba0089f521c997f3690ccb15e306ed64178c5945dc9aeb6b42aac&smart=true&width=1200&height=750",
+   "rubros": []
+  },
+  {
+   "id": "a43d323d20e9aabf",
+   "titulo": "El Niño podría repetir un fenómeno de hace casi 30 años con un segundo pico de calentamiento en 2027 que elevaría el riesgo de inundaciones y los científicos explican qué regiones estarían más expuestas",
+   "url": "https://www.elimparcial.com/mundo/2026/11/08/el-nino-podria-repetir-un-fenomeno-de-hace-casi-30-anos-con-un-segundo-pico-de-calentamiento-en-2027-que-elevaria-el-riesgo-de-inundaciones-y-los-cientificos-explican-que-regiones-estarian-mas-expuestas/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T12:41:47+00:00",
+   "capturado": "2026-11-08T22:04:22+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5451,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/OLZ3V6FB5JGVPDYRMHOWQONFJE.jpg?auth=b011029016d45b6d1a5be44ca5f0be0c23777aa62673b1d2ae7d2c0ac778f150&smart=true&width=1200&height=750",
+   "rubros": []
+  },
+  {
+   "id": "402f48689c168a05",
+   "titulo": "INE ofrece aumento salarial de 6% a trabajadores de módulos de atención ante el paro convocado para exigir mejores sueldos y condiciones laborales",
+   "url": "https://www.elimparcial.com/mexico/2026/11/08/ine-ofrece-aumento-salarial-de-6-a-trabajadores-de-modulos-de-atencion-ante-el-paro-convocado-para-exigir-mejores-sueldos-y-condiciones-laborales/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T12:40:47+00:00",
+   "capturado": "2026-11-09T06:22:07+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6233,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/BDTRPO3LKZG23AHG7NFGWSUGGY.jpg?auth=61bb8a00a24c360f5ec71f5f12c159b088c966b65e1a50b419dfdac2878dcd70&smart=true&width=1280&height=852",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "93ee3f62230585cb",
+   "titulo": "Miguel Ángel Almaraz, alcalde de Río Bravo, narró cómo escapó de sus secuestradores y recorrió 80 kilómetros",
+   "url": "https://www.elimparcial.com/mexico/2026/11/09/miguel-angel-almaraz-alcalde-de-rio-bravo-narro-como-escapo-de-sus-secuestradores-y-recorrio-80-kilometros/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T12:27:13+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5282,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/3BWU5OX4AZDPPP3M7YCD5YZOFU.jpg?auth=0d7769512871109a70d5e01dcc986ab427fb5e11973d9531a5f496a0c1b5c25b&smart=true&width=1280&height=720",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "0cd7c794308b5e6a",
+   "titulo": "Asesinan en Acapulco a cuatro hombres en sábado y domingo; dos estaban desmembrados",
+   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPS1paVG5sRjhuVDVjLVFhYXdjNGpmQ2IyTWhFVVhObmF6b2t4WW1Lejl6VkhWdUdUMm5sTE1BdFcwek9aRVFFeUVVM3JiWVRfZHJIVllmal9hdVM1LWFzM01oU1E5N1ZNRHRzX0xqeUdDckUxV1BkMU1mbGliUWV5SE12bXkxd3hnclZuS2dHY3pJSFJkV2UxeGwtcU56NTZScVhOWVFjWHNtQQ?oc=5",
+   "dominio": "suracapulco.mx",
+   "fuente": "gn-2c2bd8511d76",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T11:44:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7562,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "e6572b0b269202f8",
+   "titulo": "Confirman mega marcha HOY 9 de noviembre en CDMX del IMSS: Calles cerradas y rutas alternativas",
+   "url": "https://www.elimparcial.com/mundo/2026/11/09/confirman-mega-marcha-hoy-9-de-noviembre-en-cdmx-calles-cerradas-y-rutas-alternativas/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T11:41:47+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8072,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/HWT4SISSPBCRJLSHXOEL5ZM2JI.png?auth=87ec22b91001039cdd9d44b196341559e37005cfdbeb4e8658a1096318335f35&smart=true&width=1200&height=720",
+   "rubros": []
+  },
+  {
+   "id": "d0e8d2c24aaf4363",
+   "titulo": "La SEP aclara por qué las computadoras seguirán en las escuelas pese a la restricción de celulares, defiende su uso como herramientas de aprendizaje y presenta cifras sobre conectividad, equipos y participación de más de 565 mil docentes",
+   "url": "https://www.elimparcial.com/mexico/2026/11/08/la-sep-aclara-por-que-las-computadoras-seguiran-en-las-escuelas-pese-a-la-restriccion-de-celulares-defiende-su-uso-como-herramientas-de-aprendizaje-y-presenta-cifras-sobre-conectividad-equipos-y-participacion-de-mas-de-565-mil-docentes/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T11:30:21+00:00",
+   "capturado": "2026-11-09T06:22:07+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5315,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/BKKSS4X5WNAUZL3UAOEIOVA2I4.png?auth=112dcad89af37763566f7a279cafde857a7c9d74bc07c0c4b840593748a4e487&smart=true&width=1920&height=1080",
+   "rubros": []
+  },
+  {
+   "id": "ac4f7804c6511ed5",
+   "titulo": "Trump considera poco probable reanudar los ataques contra Irán, pero condiciona el fin de la guerra a un acuerdo nuclear y a garantizar la navegación por el estrecho de Ormuz",
+   "url": "https://www.elimparcial.com/mundo/2026/11/08/trump-considera-poco-probable-reanudar-los-ataques-contra-iran-pero-condiciona-el-fin-de-la-guerra-a-un-acuerdo-nuclear-y-a-garantizar-la-navegacion-por-el-estrecho-de-ormuz/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T11:30:10+00:00",
+   "capturado": "2026-11-09T06:22:07+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.501,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/S3RLPTFH5NFOHJH32KO63ZELWE.png?auth=dc4dfc49b33c9dc85b06f6812a3d3b2d7184787cad2b0040e770f81a0bdc70f2&smart=true&width=1920&height=1080",
+   "rubros": []
+  },
+  {
+   "id": "ee21b5f642b60f8a",
+   "titulo": "León XIV llega a Argentina y envía un mensaje a Javier Milei sobre los costos de la austeridad, al defender que la economía debe servir a las personas y pedir atención para trabajadores, jubilados y sectores vulnerables",
+   "url": "https://www.elimparcial.com/mundo/2026/11/08/leon-xiv-llega-a-argentina-y-envia-un-mensaje-a-javier-milei-sobre-los-costos-de-la-austeridad-al-defender-que-la-economia-debe-servir-a-las-personas-y-pedir-atencion-para-trabajadores-jubilados-y-sectores-vulnerables/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T11:29:36+00:00",
+   "capturado": "2026-11-09T06:22:07+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5314,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/5GJ5A5H7B5H3JBESLVYOOBRCEY.png?auth=c3d08e9e52371e7c335a075c86dd491b5beadf714dd77ad4444ba87712b11a22&smart=true&width=1920&height=1080",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "f34bdb3c5b84635f",
+   "titulo": "Así será el Puerto Bahía Colonet y su infraestructura para el comercio transpacífico",
+   "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNNmVPNmN3VGpOUGloS24wb1ZKSVFGZDMydVJDYXFHbGhnQklqaFlwVE1PM2czZ2tKRldRNlI5b0ozc1U2QjJTZDdocUVjZV9WOWFYRzA0WXlCZ2tZRFBtdXZpSkQzVEc3azh6XzlPd21ab0NjTzNoX2ZJNXp1dFRCTGN0X190aXowaVA0eVoxWl9jNWZhX28xVEZqMkRaaGhsY2RPTl8xUmNTeTQ1TXItWXB0dWF5UWFYQmNQZWNnaTdxR2FMb1E?oc=5",
+   "dominio": "thelogisticsworld.com",
+   "fuente": "gn-ab35ee8f2ce7",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Quintín"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T11:25:53+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5285,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
+   "id": "9b835de421cef94b",
+   "titulo": "Pronostican cielo despejado para este lunes",
+   "url": "https://oem.com.mx/elsoldetijuana/local/pronostican-cielo-despejado-para-este-lunes-33044038",
+   "dominio": "oem.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T11:22:42+00:00",
+   "capturado": "2026-09-04T00:35:01+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6233,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
+   "id": "81af78be437582b0",
+   "titulo": "Why a South Korean city is turning to a U.S. college to outsmart AI?",
+   "url": "https://www.kpbs.org/news/international/2026/11/09/why-a-south-korean-city-is-turning-to-a-u-s-college-to-outsmart-ai",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T10:47:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/c668873/2147483647/strip/false/crop/3376x3376+844+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F50%2F1e%2F815c3ced4743a1d265ce01b4d05a%2F5979129-kuhn-1.JPG",
+   "rubros": [
+    "ia"
+   ]
+  },
+  {
+   "id": "344d9d76098ddaae",
+   "titulo": "National City’s New Era",
+   "url": "https://voiceofsandiego.org/2026/11/09/national-citys-new-era/",
+   "dominio": "voiceofsandiego.org",
+   "fuente": "voiceofsd",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T10:30:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://voiceofsandiego.org/wp-content/uploads/2026/10/vito-di-stefano-10-2-26-1-1-1024x684.jpg",
+   "rubros": []
+  },
+  {
+   "id": "eb570fd467ceeb69",
+   "titulo": "Democrats won big on issues like immigration. But ICE still has the money",
+   "url": "https://www.kpbs.org/news/national/2026/11/09/democrats-won-big-on-issues-like-immigration-but-ice-still-has-the-money",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T10:00:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/b15757a/2147483647/strip/false/crop/5200x5200+1320+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fef%2F04%2F306e17864f1eb9deaa70f95efa6d%2Fgettyimages-2262725884.jpg",
+   "rubros": []
+  },
+  {
+   "id": "c0506cde9ef83657",
+   "titulo": "Supreme Court weighs effort to shield federal law enforcement as ICE complaints rise",
+   "url": "https://www.kpbs.org/news/politics/2026/11/09/supreme-court-weighs-effort-to-shield-federal-law-enforcement-as-ice-complaints-rise",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T10:00:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/1758e0c/2147483647/strip/false/crop/4000x4000+1000+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F5e%2F7a%2F09d469e94929a1a138f554be6c41%2Fap26275652659374.jpg",
+   "rubros": []
+  },
+  {
+   "id": "a480bd1e3a66df0f",
+   "titulo": "Democrats won big. Can they lower your grocery bill?",
+   "url": "https://www.kpbs.org/news/politics/2026/11/09/democrats-won-big-can-they-lower-your-grocery-bill",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T10:00:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/32a6eb0/2147483647/strip/false/crop/4936x4936+1234+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F7b%2Fc1%2F21e723b44cb190bd1f5376a9bcb0%2Fgettyimages-2302583788.jpg",
+   "rubros": []
+  },
+  {
+   "id": "9449e7f9e7cc3047",
+   "titulo": "Congress is coming back to Washington. Here's what to expect",
+   "url": "https://www.kpbs.org/news/politics/2026/11/09/congress-is-coming-back-to-washington-heres-what-to-expect",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T10:00:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/d10fc45/2147483647/strip/false/crop/1333x1333+334+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F9f%2F88%2F780a9a564af39daf6190b94bfd90%2F021025-capitol-zayrharodriguez-4-1.jpg",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "1b4653503655b62f",
+   "titulo": "On wild Cumberland Island, a land swap proposal stirs controversy",
+   "url": "https://www.kpbs.org/news/national/2026/11/09/on-wild-cumberland-island-a-land-swap-proposal-stirs-controversy",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T10:00:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/09811b2/2147483647/strip/false/crop/5152x5152+1288+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fa9%2F5e%2Fcb4d96264f14a6bd361de7dc6079%2Fdscf2242.jpg",
+   "rubros": []
+  },
+  {
+   "id": "0a7646334ac78934",
+   "titulo": "U.N. climate talks begin today. Here are 3 things to know",
+   "url": "https://www.kpbs.org/news/2026/11/09/u-n-climate-talks-begin-today-here-are-3-things-to-know",
+   "dominio": "kpbs.org",
+   "fuente": "kpbs",
+   "zona_medio": "San Diego",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T10:00:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "imagen": "https://cdn.kpbs.org/dims4/default/6e06220/2147483647/strip/false/crop/3059x3059+765+0/resize/600x600!/quality/90/?url=https%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fd9%2F1a%2F40f6d9c544f5bdfb4ad128dfb6a1%2Fgettyimages-2303993104.jpg",
+   "rubros": []
+  },
+  {
+   "id": "ac26cd3cde405c5c",
+   "titulo": "Empleo formal ante el IMSS alcanza su cifra máxima histórica: Sheinbaum",
+   "url": "https://www.uniradioinforma.com/gobierno/empleo-formal-imss-alcanza-su-cifra-maxima-historica-sheinbaum-n913247",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T09:20:00-07:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4367,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "politica",
+    "economia"
+   ]
+  },
+  {
+   "id": "1a19ff5a93bf625c",
+   "titulo": "Profeco recomienda comparar precios antes de comprar en El Buen Fin",
+   "url": "https://www.uniradioinforma.com/negocios/profeco-recomienda-comparar-precios-antes-comprar-buen-fin-n913245",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T09:17:00-07:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7713,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "3232799b23986229",
+   "titulo": "Choque y volcadura en bulevar Progreso de Hermosillo deja daños materiales",
+   "url": "https://www.uniradioinforma.com/policiaca/choque-volcadura-bulevar-progreso-hermosillo-deja-danos-materiales-n913242",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T09:09:00-07:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8356,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "49da6ab9dd862038",
+   "titulo": "Today in History: November 9, Theodore Roosevelt becomes first president to travel abroad",
+   "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPd19UMS1YenYyd2NSVWZNeVVVaWttRlctdFVYS3REanJETGpjTDUxN21aUnlOMkNweTM4UFNzXy11MTlua2R5N2MwTHRwUUJCa3Y3OGVPczNPMFI3WEdOMWJNWktjREYyRTZRZmxoS1JkNmhLVTI4NkFIdGVhSUs5eEl2WlJsSHdQQUVVdDloOThFRFYyRVFBSWk4SDcwX1JIb2otNDRHLWdBUDRwU1Z1UE9PVUpOT29hMlREc20xNnA?oc=5",
+   "dominio": "courant.com",
+   "fuente": "gn-0fb48c3e82dc",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T09:01:35+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_aguasnegras",
+   "rubros": []
+  },
+  {
+   "id": "3152f1beeb7590c6",
+   "titulo": "Belinda y Danna comparten escenario y sorprenden con un beso en Mentiras All Stars",
+   "url": "https://www.uniradioinforma.com/fama/belinda-danna-comparten-escenario-sorprenden-beso-mentiras-all-stars-n913240",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T08:57:00-07:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.6323,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/11/6af1ed40de98d.jpg",
+   "rubros": [
+    "espectaculos"
+   ]
+  },
+  {
+   "id": "7fc9c0ed6eac406b",
+   "titulo": "La Mansión VIP 2 arranca con 16 participantes y sorpresiva entrada de Dani Flow",
+   "url": "https://www.uniradioinforma.com/fama/la-mansion-vip-2-arranca-16-participantes-sorpresiva-entrada-dani-flow-n913237",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T08:41:00-07:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.8293,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/11/6af1e99ccceaf.png",
+   "rubros": [
+    "espectaculos"
+   ]
+  },
+  {
+   "id": "f1f67932cca08a24",
+   "titulo": "Los Vaqueros de Dallas regresaron a la senda del triunfo",
+   "url": "https://www.uniradioinforma.com/deportes/los-vaqueros-dallas-regresaron-senda-triunfo-n913234",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T08:32:00-07:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.6664,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/11/6af1e75d251a3.png",
+   "rubros": [
+    "deportes"
+   ]
+  },
+  {
+   "id": "bc292ac937604b31",
+   "titulo": "Denuncian fuga de agua en El Florido",
+   "url": "https://www.uniradioinforma.com/sociedad/denuncian-fuga-agua-florido-n913228",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T08:21:00-07:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7758,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/11/6af1e529d47bd.jpg",
+   "rubros": []
+  },
+  {
+   "id": "b06ee676b3962eeb",
+   "titulo": "UNAM descubre libro de 1622 con anotaciones manuscritas de Sor Juana Inés de la Cruz",
+   "url": "https://www.uniradioinforma.com/viral/unam-descubre-libro-1622-anotaciones-manuscritas-sor-juana-ines-cruz-n913231",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T08:21:00-07:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7028,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/11/6af1e4e948f89.png",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "d822f408d0328624",
+   "titulo": "ASF recurre a informantes para investigar presunto esquema de corrupción en el INE",
+   "url": "https://www.uniradioinforma.com/gobierno/asf-recurre-informantes-investigar-presunto-esquema-corrupcion-ine-n913224",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T08:13:00-07:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4868,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/11/6aeb4ea60c1de.jpg",
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "fb26546afa0a3634",
+   "titulo": "Capturan a presunto halcón con fusil y radios en Tecate",
+   "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQTmFtaTFnLVNmY0cyeml2RHkyVXpCbHBjUFVHYkY2eWdENFNvcTAtN1JDdUJfQy1odk1JUGRDQm9BSks4R0gwbU8xczNZVkFEYVNJRVhaenRlWEtLV2dDVXZRclhrc1hNSl8tLWxISGItd0JsTEFoTGdhQmZ1QkpkVDdub2Zfc1Zwdy14ZlB3cVViWndTekp0TmlYYXI0S2NhcTBLWXZZSG4?oc=5",
+   "dominio": "elvigia.net",
+   "fuente": "elvigia",
+   "zona_medio": "Ensenada",
+   "zonas": [
+    "Tecate"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T08:00:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4417,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_tecate",
+   "rubros": []
+  },
+  {
+   "id": "831c63f7f32ad129",
+   "titulo": "Concluye recorrido del Librobús en SQ",
+   "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPTW9TRExzTDlHNW82X3ZWUThVdldyN05lcnRVSEFWeFhhdFBQb2ZER1EtcEw1R2dzS2FjekRaOGVSSjVQZDhZOGkzMXZ3RDhsNmxNUThQc0hEa3U3d0NLMWh1YVYtLXJnS0hlWEhkdjI5UDctUzdCakFjWi10aEZpbHo5S0FPSnFVVFNyUWJ3ZGVzVmVYbGhF?oc=5",
+   "dominio": "elvigia.net",
+   "fuente": "elvigia",
+   "zona_medio": "Ensenada",
+   "zonas": [
+    "Ensenada"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T08:00:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5348,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
+   "id": "53ed90e53c945e55",
+   "titulo": "Estrena oficinas de Educación Indígena",
+   "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNQ0c2TDQ2Z3ZWRnlSS1kzajRSd2ZHQlBEZWNwYkQ0OEhmOC10Y1pjcTc4Rm5QVlNfY254Y1ZTQlZ4WmVWYzRLSHdLdnRIR25oYzZYUHRBQk44OU8tRTVNcFI3QjVnUHF1eE8yRWRxUEQ5UmxVcFFOcEY0UzVHbWZJOU1DeEdETnN3Ym5rXzgwb1RyaDVRUW0xZg?oc=5",
+   "dominio": "elvigia.net",
+   "fuente": "elvigia",
+   "zona_medio": "Ensenada",
+   "zonas": [
+    "Ensenada"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T08:00:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.7333,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
+   "id": "a2c3494635d1fa4f",
+   "titulo": "VIDEO.- \"No queremos más Triángulo de las Bermudas\": Fiscalía conecta cámaras de bares de Mexicali al C5 para vigilar incluso a policías",
+   "url": "https://www.uniradioinforma.com/gobierno/video-no-queremos-mas-triangulo-bermudas-fiscalia-conecta-camaras-bares-mexicali-c5-vigilar-incluso-policias-n912543",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T07:45:00-07:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7314,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2024/12/6750ee8515683.jpg",
+   "rubros": [
+    "politica",
+    "seguridad"
+   ]
+  },
+  {
+   "id": "c68e7647968d2b1c",
+   "titulo": "U.S. Veterans helping veterans: San Diego food drive supports military families",
+   "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOenpxTWpaaU93Vm9UNW54TEQ4VnhSclE5RkczQ1hGZlcycnk4U2xZTlI3SWljYzgwOVk5OWhoNkJyMmFsdko0OE4wMEQ0aGZEWHNYa1gtcjJkRDlYSTNqaVBjcjR4aVBjNVFJNGpKcVpxTlFCOU1uNmZqUmZ5NzJrWFcyci1MNHhCSnJVa0FUbTJGS1JrRGJ0dHc0ME02VjdTZHA3bHZ3OEY5LTZJNG9lV1MyRGc3LUdFVm9ZVG1USG1udWhZN2fSAc4BQVVfeXFMT21ibVJWNG5vUDJnNVFydEU2b19HLVkxRkRyZklVaEE5Yi1rOC10M3RQSGdpSUd1ODBWMnpnSXpSODcwajlfZVdsSEdqbllFbEgyVjdOblBzM1JuVUxRdnlXNUZrRmxCQXNVRVJtc3h3S3RrUnEyWVFVc3JIZmhYX1FGbVM0WlZIZjZVRXg1TndCV1NTOE01WVZXYld4Y2hzSDk0MDRkUGtRdkNHMGd6anpZUDlyYXFfN1Z4ZE1yOFZQRmV0MTNFalhIYllnbUE?oc=5",
+   "dominio": "nbcsandiego.com",
+   "fuente": "gn-a956e11d03ed",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T07:28:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_aguasnegras",
+   "rubros": []
+  },
+  {
+   "id": "bb3c10e0aa41851a",
+   "titulo": "Después de una noche de fuegos artificiales por festividad hindú, la capital de India amanece con niveles de contaminación casi 59 veces superiores a los recomendados por la OMS",
+   "url": "https://www.elimparcial.com/mundo/2026/11/09/despues-de-una-noche-de-fuegos-artificiales-por-festividad-hindu-la-capital-de-india-amanece-con-niveles-de-contaminacion-casi-59-veces-superiores-a-los-recomendados-por-la-oms/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T07:21:41+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5782,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/4SQXQNMTOZCSBMTZBI6LG7NSOE.jpg?auth=7012079ded5971bcd753e4a975cbde243e92f340b73e593954bcc50eb3ba2b7d&smart=true&width=6341&height=4227",
+   "rubros": []
+  },
+  {
+   "id": "45d229ab3659fb65",
+   "titulo": "FOTOS DE LA SEMANA: Del concierto de Carín León, Día de Muertos y los hallazgos de restos humanos en el valle de Mexicali",
+   "url": "https://www.elimparcial.com/mxl/mexicali/2026/11/08/fotos-de-la-semana-del-concierto-de-carin-leon-dia-de-muertos-y-los-hallazgos-de-restos-humanos-en-el-valle-de-mexicali/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T06:43:53+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6946,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/LFXTROQHNFD5ZHDZDFFUPDH47Q.jpg?auth=5719d216ed5e871d8145e231c52c7236fa2463541e37117a2f423cbf8264cbf3&smart=true&width=1200&height=896",
+   "rubros": [
+    "espectaculos"
+   ]
+  },
+  {
+   "id": "de9f3ff39c221f19",
+   "titulo": "China construye una grúa capaz de levantar 14 mil toneladas, pero hay un detalle que la hace diferente a cualquier otra: necesita unir dos unidades de 7 mil toneladas para mover cargas que ninguna podría levantar por separado",
+   "url": "https://www.elimparcial.com/tecnologia/2026/11/08/china-construye-una-grua-capaz-de-levantar-14-mil-toneladas-pero-hay-un-detalle-que-la-hace-diferente-a-cualquier-otra-necesita-unir-dos-unidades-de-7-mil-toneladas-para-mover-cargas-que-ninguna-podria-levantar-por-separado/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T06:33:13+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5704,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/PF6AYYRS6ZDQFGW36PDEU2XSWM.png?auth=28f574e9d88554bffc5de97a971952b60f3cf84c43b6fc5b2f459504578d94a0&smart=true&width=1920&height=1080",
+   "rubros": []
+  },
+  {
+   "id": "acdaeeff0d8a5b07",
+   "titulo": "Vinculan a proceso a hombre acusado de feminicidio en Tijuana",
+   "url": "https://www.elimparcial.com/tij/policiaca/2026/11/08/vinculan-a-proceso-a-hombre-acusado-de-feminicidio-en-tijuana/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T06:32:07+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4817,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/XN67KUCKLJCLXH44CJM6J6AD5M.png?auth=3952ef7bd4e8a9130c3ad1b909fe1d58469b53fb9333868595378c8c53d562ed&smart=true&width=883&height=605",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
+   "id": "acb8e3a0b5d8c312",
+   "titulo": "Mahoma dejó una reflexión sobre la riqueza que invita a mirar más allá de lo que tenemos en el banco, pues plantea que la verdadera riqueza de una persona está en el bien que hace por los demás",
+   "url": "https://www.elimparcial.com/locurioso/2026/11/08/mahoma-dejo-una-reflexion-sobre-la-riqueza-que-invita-a-mirar-mas-alla-de-lo-que-tenemos-en-el-banco-pues-plantea-que-la-verdadera-riqueza-de-una-persona-esta-en-el-bien-que-hace-por-los-demas/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T06:25:17+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.7851,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/HIVLLOGQJFCSTEUN7LWZA5VRT4.jpg?auth=d6a4e4fc37cdc7a2ff1593bafd8eb603052508005c7d063ff7a2c29be1a1260b&smart=true&width=1376&height=768",
+   "rubros": []
+  },
+  {
+   "id": "17d6b14d3fb84655",
+   "titulo": "Trabajadores del INE van a paro en 20 entidades; organismo ofrece 6% de aumento salarial",
+   "url": "https://zetatijuana.com/2026/11/trabajadores-del-ine-van-a-paro-en-20-entidades-organismo-ofrece-6-de-aumento-salarial/",
+   "dominio": "zetatijuana.com",
+   "fuente": "zeta",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T06:23:42+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6508,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": [
+    "politica"
+   ]
+  },
+  {
+   "id": "404e62c12ebdecb5",
+   "titulo": "Matías Rosales aventaja por 149 votos en elección para alcalde de San Luis, Arizona",
+   "url": "https://www.elimparcial.com/mxl/sanluis/2026/11/08/matias-rosales-aventaja-por-149-votos-en-eleccion-para-alcalde-de-san-luis-arizona/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "nacional",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T06:20:33+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6604,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/3XY3AV4GOVA3RC72YRD3D33NTE.png?auth=4b36c11d8f266b27fed60b1e8bad17a44f23b84ed26dd5c37ee33455a6aac5ca&smart=true&width=1200&height=675",
+   "rubros": [
+    "politica"
+   ]
+  },
   {
    "id": "28f7fc0a77562ae2",
    "titulo": "Voto hispano y comunidades mexicanas impulsan una de las peores derrotas republicanas en 50 años durante las elecciones intermedias de Estados Unidos por las políticas de Donald Trump",
@@ -135,30 +2981,57 @@
    ]
   },
   {
-   "id": "ee21b5f642b60f8a",
-   "titulo": "León XIV llega a Argentina y envía un mensaje a Javier Milei sobre los costos de la austeridad, al defender que la economía debe servir a las personas y pedir atención para trabajadores, jubilados y sectores vulnerables",
-   "url": "https://www.elimparcial.com/mundo/2026/11/08/leon-xiv-llega-a-argentina-y-envia-un-mensaje-a-javier-milei-sobre-los-costos-de-la-austeridad-al-defender-que-la-economia-debe-servir-a-las-personas-y-pedir-atencion-para-trabajadores-jubilados-y-sectores-vulnerables/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
+   "id": "2f34113e7feae6f4",
+   "titulo": "VIDEO.- Sin sanciones por usar celular en escuelas de BC: \"tenemos que dialogar\", dice Educación; secundaria y prepa, el reto",
+   "url": "https://www.uniradioinforma.com/gobierno/video-sanciones-usar-celular-escuelas-bc-tenemos-dialogar-dice-educacion-secundaria-prepa-reto-n912549",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
    "zona_medio": "estatal",
    "zonas": [],
    "delegaciones": [],
    "alcance": "nacional",
    "fecha": "2026-11-09",
-   "publicado": "2026-11-09T05:38:49+00:00",
-   "capturado": "2026-11-09T06:22:07+00:00",
+   "publicado": "2026-11-09T05:45:00-07:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
    "figuras": [],
    "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5314,
+    "etiqueta": "adversa",
+    "confianza": 0.4402,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
-   "imagen": "https://www.elimparcial.com/resizer/v2/5GJ5A5H7B5H3JBESLVYOOBRCEY.png?auth=c3d08e9e52371e7c335a075c86dd491b5beadf714dd77ad4444ba87712b11a22&smart=true&width=1920&height=1080",
+   "imagen": "https://statics.uniradioinforma.com/2026/09/6aa4561ce4a38.jpeg",
    "rubros": [
-    "economia"
+    "politica"
    ]
+  },
+  {
+   "id": "ce20b5e970ca67fe",
+   "titulo": "Gobierno de Baja California",
+   "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBPbjVvQzVwM1dWTWpneDJMRXdfM2t3UTI2bnJsWHNXX1o5MzFjNWxTMzRUSVN0U2ZDOWRfcUZwaEpMazBkYnB3WlVoYW9PVUJETldxY3d6MGtEWnl2dXZ6T0Nxcw?oc=5",
+   "dominio": "bajacalifornia.gob.mx",
+   "fuente": "gn-01e4fd06574f",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T05:35:53+00:00",
+   "capturado": "2026-09-08T17:24:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6598,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
+   "rubros": []
   },
   {
    "id": "e1b7a7126e13bf27",
@@ -185,30 +3058,6 @@
     "politica",
     "seguridad"
    ]
-  },
-  {
-   "id": "ac4f7804c6511ed5",
-   "titulo": "Trump considera poco probable reanudar los ataques contra Irán, pero condiciona el fin de la guerra a un acuerdo nuclear y a garantizar la navegación por el estrecho de Ormuz",
-   "url": "https://www.elimparcial.com/mundo/2026/11/08/trump-considera-poco-probable-reanudar-los-ataques-contra-iran-pero-condiciona-el-fin-de-la-guerra-a-un-acuerdo-nuclear-y-a-garantizar-la-navegacion-por-el-estrecho-de-ormuz/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-09",
-   "publicado": "2026-11-09T05:26:21+00:00",
-   "capturado": "2026-11-09T06:22:07+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.501,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/S3RLPTFH5NFOHJH32KO63ZELWE.png?auth=dc4dfc49b33c9dc85b06f6812a3d3b2d7184787cad2b0040e770f81a0bdc70f2&smart=true&width=1920&height=1080",
-   "rubros": []
   },
   {
    "id": "dae817608c71608a",
@@ -389,30 +3238,6 @@
    ]
   },
   {
-   "id": "d0e8d2c24aaf4363",
-   "titulo": "La SEP aclara por qué las computadoras seguirán en las escuelas pese a la restricción de celulares, defiende su uso como herramientas de aprendizaje y presenta cifras sobre conectividad, equipos y participación de más de 565 mil docentes",
-   "url": "https://www.elimparcial.com/mexico/2026/11/08/la-sep-aclara-por-que-las-computadoras-seguiran-en-las-escuelas-pese-a-la-restriccion-de-celulares-defiende-su-uso-como-herramientas-de-aprendizaje-y-presenta-cifras-sobre-conectividad-equipos-y-participacion-de-mas-de-565-mil-docentes/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-09",
-   "publicado": "2026-11-09T04:23:45+00:00",
-   "capturado": "2026-11-09T06:22:07+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5315,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/BKKSS4X5WNAUZL3UAOEIOVA2I4.png?auth=112dcad89af37763566f7a279cafde857a7c9d74bc07c0c4b840593748a4e487&smart=true&width=1920&height=1080",
-   "rubros": []
-  },
-  {
    "id": "666a20afe2a45e82",
    "titulo": "Puebla encuentra una segunda granja de criptomonedas en menos de dos meses, asegura 50 equipos para minar activos digitales y detiene a un hombre mientras investiga el posible uso irregular de electricidad en la Sierra Norte",
    "url": "https://www.elimparcial.com/mexico/2026/11/08/puebla-encuentra-una-segunda-granja-de-criptomonedas-en-menos-de-dos-meses-asegura-50-equipos-para-minar-activos-digitales-y-detiene-a-un-hombre-mientras-investiga-el-posible-uso-irregular-de-electricidad-en-la-sierra-norte/",
@@ -483,34 +3308,6 @@
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/HTNMNAV76ZDPRG2HA2LSFZQM64.png?auth=f6415ae0a34c1db867be91cb4391f18340a92ab3bbd23be3a08b07ff5a878c19&smart=true&width=1920&height=1080",
    "rubros": []
-  },
-  {
-   "id": "3c8c1d208e51378e",
-   "titulo": "Investigan muerte de hombre dentro de panteón en el Valle de Mexicali",
-   "url": "https://www.elimparcial.com/mxl/policiaca/2026/11/08/investigan-muerte-de-hombre-dentro-de-panteon-en-el-valle-de-mexicali/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [
-    "Mexicali"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-11-09",
-   "publicado": "2026-11-09T03:46:14+00:00",
-   "capturado": "2026-11-09T06:22:07+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.4902,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/K4NTXUSN7JFNPBDECU4U3MJ7EM.JPG?auth=15e0cbe6cecfec1443063e63eef6cdb8581b5608019d3b947a01746a8b8c7d97&smart=true&width=5472&height=3648",
-   "rubros": [
-    "seguridad"
-   ]
   },
   {
    "id": "894f954bc401a989",
@@ -639,6 +3436,31 @@
    "rubros": []
   },
   {
+   "id": "55a3cb141f8612a9",
+   "titulo": "Periferia de la ciudad no es apta para tener camiones de transporte urbano: IMOS",
+   "url": "https://oem.com.mx/lavozdelafrontera/local/periferia-de-la-ciudad-no-es-apta-para-tener-camiones-de-transporte-urbano-imos-33036904",
+   "dominio": "oem.com.mx",
+   "fuente": "lavoz",
+   "zona_medio": "Mexicali",
+   "zonas": [
+    "Mexicali"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T03:00:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.9176,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "rubros": []
+  },
+  {
    "id": "8ee246c6ca4e50bf",
    "titulo": "2027 marcará el fin de la adolescencia para toda la generación de los 2000, pues los nacidos en 2009 cumplirán 18 años y los primeros de la década ya estarán cerca de los 30",
    "url": "https://www.elimparcial.com/estilos/2026/11/08/2027-marcara-el-fin-de-la-adolescencia-para-toda-la-generacion-de-los-2000-pues-los-nacidos-en-2009-cumpliran-18-anos-y-los-primeros-de-la-decada-ya-estaran-cerca-de-los-30/",
@@ -660,6 +3482,60 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/YVQVX3KM3NHFREISQ7OER72I4I.png?auth=41d3738f66c85d98f8b2b8fc71ebc322b7e32da32d7e88ca877151107c8efbe8&smart=true&width=1620&height=1080",
+   "rubros": []
+  },
+  {
+   "id": "dd8e7d6ceaa0d7ec",
+   "titulo": "Light mag. 3.6 earthquake - 114 km southeast of San Felipe, Estado de Baja California, Mexico, on Sunday, Nov 8, 2026, at 06:01 am (Mexico_City time)",
+   "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQeFRudGs2ZzhaWDFWVFBRT0YwMUpOMndpSTIxVUlCb3lSeGhzOFd1T2RYelZMVm9yOXZiMlUxTmZ0YUFMY0JDTHM0OUJFY0FKWUYzdVp6b2tWYnl0Q0UxdVVSR3lWcEZtRWhkSmJrSWtxanRxQXZFTGJaOXFINTFiMlFudGVja292R1BldXBLQm9TWDVfVGxBc1Z5SW5jUVFiN1dQTEFzb0hubjZyYzB3b2FjOGMxaHFtRkJacmJBRHl6TC1LNUZXS0l4a3g?oc=5",
+   "dominio": "volcanodiscovery.com",
+   "fuente": "gn-13afd86dbb5f",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Felipe"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T02:24:26+00:00",
+   "capturado": "2026-11-09T06:22:07+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.591,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": []
+  },
+  {
+   "id": "4892221aa9faec3c",
+   "titulo": "Light mag. 3.4 earthquake - 119 km southeast of San Felipe, Estado de Baja California, Mexico, on Sunday, Nov 8, 2026, at 08:32 am (Mexico_City time)",
+   "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNQlEzVWhWZmFCU3V0MDdqVzJGcXlPdnVGZU9sX1Z5YWpfQUFLbXc1ckJiVUFyU3I1VS1hWVhvWWZlMEtRaHZ2cmUxblZmcm1SaVRNdk5qU01qcVNDNlpxRDRJeThVWmIyT19ieE1wU0V1Zk1NcUZoNW1VX2puWlVkQzdwbm43ZS1EMFdRd0JvSGQ1NEJPUnRQYUNTR0t2LVpUYmNhRFF4Rzd5OXBWNUhPdEZCT1BTdW12Z3dNVF9RV2hrb24tcldRQjdieG4?oc=5",
+   "dominio": "volcanodiscovery.com",
+   "fuente": "gn-13afd86dbb5f",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Felipe"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T02:24:26+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5923,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
    "rubros": []
   },
   {
@@ -796,6 +3672,33 @@
    ]
   },
   {
+   "id": "dab5ee096ba38145",
+   "titulo": "Deja tres lesionados choque entre dos motocicletas en Chilpancingo",
+   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOYWxqQXNuTWlReGdPX0lvYURibEFwalRsb3FiOUZNNEhzTmdNM3cweF9oTHhLUS1Kc3kwY2dMMVJBVUkyeTMyUFdzVVFmLWtfVFJXWXhLTl9oSEtjS1V6TGo4Ry1lWlg0WlBOUWsxYWRNYk5VdlpWVXhXaGd4aTA5RUZ0LW9xUFNlSGMyOURIelpPOUxlYk1jNWRaaWFNOXBMZzg2S000Z2pXcWlMNzZPMzVLcjJNWEE?oc=5",
+   "dominio": "elsoldetijuana.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T01:51:23+00:00",
+   "capturado": "2026-11-08T22:04:22+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.7224,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": []
+  },
+  {
    "id": "ccb6b6df3a9016a4",
    "titulo": "Personas de talla baja enfrentan obstáculos para acceder a educación, empleo y salud en México",
    "url": "https://zetatijuana.com/2026/11/personas-de-talla-baja-enfrentan-obstaculos-para-acceder-a-educacion-empleo-y-salud-en-mexico/",
@@ -821,6 +3724,28 @@
    "rubros": [
     "economia"
    ]
+  },
+  {
+   "id": "f13f0bb634ba04a9",
+   "titulo": "Mexico's Ambassador Vows Action on Tijuana River Sewage During San Diego Visit",
+   "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOVVRZREFjS3JEUVdEQzJ3MXhKSkZ3ZnYyakVhMElwX25nbDRKNjJxdmlGb0lxYzNCa2U0YTFZNjc0Y3lta1N4UzhxMnJuLTl3VEtkS1NfdTBRZWtIOFQ1ODF6dGhOVE0xNERBVjBWdEJHUmNwQTQwVTdJM2ZaR2ZxbXk4c1NveXAzc2NqRVhPTWZ5ODNEYmVZSFYtY1FWS29ZaDJwQ29seXgzendL?oc=5",
+   "dominio": "hoodline.com",
+   "fuente": "gn-8a489297fa14",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana",
+    "San Diego"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T01:45:46+00:00",
+   "capturado": "2026-11-09T06:22:07+00:00",
+   "figuras": [],
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
+   "rubros": []
   },
   {
    "id": "f29791d3e0b2bdbb",
@@ -955,6 +3880,36 @@
    ]
   },
   {
+   "id": "61b4033aa36656c0",
+   "titulo": "Señala diputada falta de empatía de Conagua y Ayuntamiento de San Quintín tras lluvias - La Voz de la Frontera",
+   "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOSFhjd2dpejRZMnJ6RUZDZ2ZfNEM4eHlzTjM5b3NwbGUxRzFWa00tS1BuRXNsMFhQQjZ5eU9WbU1mWktUN253M2tWM0xUd1JQUXk3ZWcyRWo1WmhrYmt3cTRpeUotVTlSNTVZY25YaWVoc2dFZjh1eGd5ZkoyRGtBZDVqY3ozd0laZk1xVXJDQXhJcFJ4VmtsWnpLdU5hZk04NzI2c0pMUGRrQmx6ZEVjTzBxc2VNNURTM1ZmSEJnZW1uVFZrY2JZcXNJejlUeGg1TS1odw?oc=5",
+   "dominio": "elsoldetijuana.com.mx",
+   "fuente": "soltij",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "San Quintín"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T01:27:32+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.8567,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanquintin",
+   "rubros": [
+    "politica",
+    "clima"
+   ]
+  },
+  {
    "id": "40bb1a295e9462a2",
    "titulo": "Baja California recibió 1 mil 807 millones de dólares en remesas, pero tiene menor dependencia económica que otros estados",
    "url": "https://www.elimparcial.com/mxl/mexicali/2026/11/08/baja-california-recibio-1-mil-807-millones-de-dolares-en-remesas-pero-tiene-menor-dependencia-economica-que-otros-estados/",
@@ -1058,6 +4013,30 @@
    ]
   },
   {
+   "id": "0d3f21b1fc313819",
+   "titulo": "Baja California, en el lugar 21 de 32 en el ranking nacional de rencor; sus vecinos Sonora y BCS lo encabezan",
+   "url": "https://www.uniradioinforma.com/sociedad/baja-california-lugar-21-32-ranking-nacional-rencor-sus-vecinos-sonora-bcs-lo-encabezan-n912655",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [],
+   "delegaciones": [],
+   "alcance": "fuera",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T01:20:00-07:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5797,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/11/6aecbdc05c41f.png",
+   "rubros": []
+  },
+  {
    "id": "93c097e565c6d849",
    "titulo": "Crecen 5.3% anual ingresos del mercado de telecomunicaciones en el tercer trimestre",
    "url": "https://jornadabc.com.mx/region/crecen-5-3-anual-ingresos-del-mercado-de-telecomunicaciones-en-el-tercer-trimestre/",
@@ -1080,28 +4059,6 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
-   "rubros": []
-  },
-  {
-   "id": "f13f0bb634ba04a9",
-   "titulo": "Mexico's Ambassador Vows Action on Tijuana River Sewage During San Diego Visit",
-   "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOVVRZREFjS3JEUVdEQzJ3MXhKSkZ3ZnYyakVhMElwX25nbDRKNjJxdmlGb0lxYzNCa2U0YTFZNjc0Y3lta1N4UzhxMnJuLTl3VEtkS1NfdTBRZWtIOFQ1ODF6dGhOVE0xNERBVjBWdEJHUmNwQTQwVTdJM2ZaR2ZxbXk4c1NveXAzc2NqRVhPTWZ5ODNEYmVZSFYtY1FWS29ZaDJwQ29seXgzendL?oc=5",
-   "dominio": "hoodline.com",
-   "fuente": "gn-8a489297fa14",
-   "zona_medio": "estatal",
-   "zonas": [
-    "Tijuana",
-    "San Diego"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-11-09",
-   "publicado": "2026-11-09T01:12:26+00:00",
-   "capturado": "2026-11-09T06:22:07+00:00",
-   "figuras": [],
-   "postura": null,
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_frontera_en",
    "rubros": []
   },
   {
@@ -1202,32 +4159,6 @@
    "imagen": "https://www.elimparcial.com/resizer/v2/M64KEG464NAK3DYLJJQ46I66P4.jpeg?auth=ac2b9f38dfdd1983c287d469356f09acd0b338e9aec8671699485890ebcd3bff&smart=true&width=1280&height=960",
    "rubros": [
     "seguridad"
-   ]
-  },
-  {
-   "id": "402f48689c168a05",
-   "titulo": "INE ofrece aumento salarial de 6% a trabajadores de módulos de atención ante el paro convocado para exigir mejores sueldos y condiciones laborales",
-   "url": "https://www.elimparcial.com/mexico/2026/11/08/ine-ofrece-aumento-salarial-de-6-a-trabajadores-de-modulos-de-atencion-ante-el-paro-convocado-para-exigir-mejores-sueldos-y-condiciones-laborales/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-09",
-   "publicado": "2026-11-09T00:32:18+00:00",
-   "capturado": "2026-11-09T06:22:07+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.6233,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/BDTRPO3LKZG23AHG7NFGWSUGGY.jpg?auth=61bb8a00a24c360f5ec71f5f12c159b088c966b65e1a50b419dfdac2878dcd70&smart=true&width=1280&height=852",
-   "rubros": [
-    "politica"
    ]
   },
   {
@@ -1378,32 +4309,6 @@
    "rubros": []
   },
   {
-   "id": "d86b9771f1f14518",
-   "titulo": "Brinda UABC casi 2 mil servicios gratuitos en el Valle de Mexicali",
-   "url": "https://www.elimparcial.com/mxl/mexicali/2026/11/08/brinda-uabc-casi-2-mil-servicios-gratuitos-en-el-valle-de-mexicali/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [
-    "Mexicali"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-11-09",
-   "publicado": "2026-11-09T00:00:34+00:00",
-   "capturado": "2026-11-09T06:22:07+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5199,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/L4XX2JTAVRABPP3GBKZ5ZJHFAI.jpeg?auth=34a7f37796a82d013bbbb1278fd36d2d9418939f4f8100055aa0dae8241bb378&smart=true&width=1280&height=854",
-   "rubros": []
-  },
-  {
    "id": "f0f1cd104fd73ed5",
    "titulo": "Warmer weather will stick around SD before giving way to a chance of rainfall",
    "url": "https://timesofsandiego.com/weather/2026/11/08/warmer-weather-will-stick-around-sd-before-giving-way-to-a-chance-of-rainfall/",
@@ -1429,31 +4334,87 @@
    ]
   },
   {
-   "id": "d52aff766e5983a5",
-   "titulo": "Mexicali tendrá temperaturas de 31 grados y hasta 65% de probabilidad de lluvia el viernes",
-   "url": "https://www.elimparcial.com/mxl/mexicali/2026/11/08/mexicali-tendra-temperaturas-de-31-grados-y-hasta-65-de-probabilidad-de-lluvia-el-viernes/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
+   "id": "ef7f4a7e7e811ac1",
+   "titulo": "Ordena el Trife desechar quejas de Morena contra el PRI",
+   "url": "https://afntijuana.info/nacionales/183988_ordena_el_trife_desechar_quejas_de_morena_contra_el_pri",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
    "zonas": [
-    "Mexicali"
+    "Tijuana"
    ],
    "delegaciones": [],
    "alcance": "zona",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T23:52:23+00:00",
-   "capturado": "2026-11-09T06:22:07+00:00",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T00:00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
    "figuras": [],
    "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.6819,
+    "etiqueta": "adversa",
+    "confianza": 0.6463,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
-   "imagen": "https://www.elimparcial.com/resizer/v2/FQHNHBUVHNENXD6JMGF6JWNH6I.jpeg?auth=32d0236d1658b06ac0241cf19cecb0e4f8affe6a21cc4192fb7971ee2c228849&smart=true&width=1600&height=1204",
+   "imagen": "https://www.afnbc.com/images.php?src=imagenes/moreira-09112026.jpg&w=500&h=250",
    "rubros": [
-    "clima"
+    "politica"
+   ]
+  },
+  {
+   "id": "ccc4911bdf8eeb0c",
+   "titulo": "Presupuesto federal para BC llegaría a los 78 mil 995 mdp en 2027",
+   "url": "https://afntijuana.info/empresarial/183986_presupuesto_federal_para_bc_llegaria_a_los_78_mil_995_mdp_en_2027",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T00:00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.6149,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.afnbc.com/images.php?src=imagenes/Presupuesto-federal-BC-llegaría-78-995-mdp-2027.jpeg&w=500&h=250",
+   "rubros": [
+    "economia"
+   ]
+  },
+  {
+   "id": "a53e6719d88e8788",
+   "titulo": "Registra BC inflación del 2.57% anual en octubre",
+   "url": "https://afntijuana.info/informacion_general/183987_registra_bc_inflacion_del_2_57_anual_en_octubre",
+   "dominio": "afntijuana.info",
+   "fuente": "afn",
+   "zona_medio": "Tijuana",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-09",
+   "publicado": "2026-11-09T00:00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.4843,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.afnbc.com/images.php?src=imagenes/Registra-BC-inflación2.57-anual-octubre.jpeg&w=500&h=250",
+   "rubros": [
+    "economia"
    ]
   },
   {
@@ -1479,6 +4440,32 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "rubros": []
+  },
+  {
+   "id": "90cbb90f1e0d725b",
+   "titulo": "Canacintra Tijuana advierte riesgos para la industria por reforma al ISR",
+   "url": "https://www.uniradioinforma.com/sociedad/canacintra-tijuana-advierte-riesgos-industria-reforma-isr-n912771",
+   "dominio": "uniradioinforma.com",
+   "fuente": "uniradio",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-08",
+   "publicado": "2026-11-08T23:45:00-07:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "adversa",
+    "confianza": 0.6235,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://statics.uniradioinforma.com/2026/11/6aed08e9d618b.jpg",
    "rubros": []
   },
   {
@@ -1629,53 +4616,22 @@
    "rubros": []
   },
   {
-   "id": "ec3aecb407b2f86e",
-   "titulo": "Sorteo Magno de la UABC suma 78% de boletos vendidos y más de 125 mil folios registrados",
-   "url": "https://www.elimparcial.com/mxl/mexicali/2026/11/08/sorteo-magno-de-la-uabc-suma-78-de-boletos-vendidos-y-mas-de-125-mil-folios-registrados/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
+   "id": "f43469821fd2cc44",
+   "titulo": "Democrats win every House district on US-Mexico border",
+   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxObDRFdEdtaDJCbExYcmxmby12NzZwbDZHOGgwRFlvOEdzQ29hRU4wbmxlSndmdHRGTGVHdTdqUFdKbDRLY3BXRmIyVmxSd2ZrMjF1UHBlOEhGcXFtOFBWcFJ2WmZOR1JOakVURXVtVzBGOWtDbUFaeGI4Z2xJaGZ4N2E3d2pHbWpWTGo2VXEzRXhxUdIBmAFBVV95cUxPcjNoZ3BkVVluREI4ZFZJcE5IaUNzR0JfUUpvbjlwa1lrN2QyNENUcVhkZTA0UEhyZk5HRG9WcFJvbnVJbnZlSkZMVUZMMVcwcEQzNXZLblh1R2Q2UERYR2pMckVjOXFCczVFd1p6NmNnNFJzWlNoeVVramFFS19mOHVJb3Q1OU5oVklUMjJEczZ0SEFrSGljbA?oc=5",
+   "dominio": "myarklamiss.com",
+   "fuente": "gn-29dc9f664cb7",
    "zona_medio": "estatal",
    "zonas": [],
    "delegaciones": [],
    "alcance": "nacional",
    "fecha": "2026-11-08",
-   "publicado": "2026-11-08T23:16:31+00:00",
+   "publicado": "2026-11-08T23:10:24+00:00",
    "capturado": "2026-11-09T06:22:07+00:00",
    "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.7882,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/HUKJIEDMFVAQJGEZB6CDF4L4ZM.jpeg?auth=f9bf1c61cedf8b6bd58c7af63d75165cd667782a5435c206b9abf23e383f891d&smart=true&width=1600&height=900",
-   "rubros": []
-  },
-  {
-   "id": "0651fdeb9ee88069",
-   "titulo": "Destina SIDURT 326 millones de pesos a obras en el Valle de Mexicali",
-   "url": "https://www.elimparcial.com/mxl/mexicali/2026/11/08/destina-sidurt-326-millones-de-pesos-a-obras-en-el-valle-de-mexicali/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [
-    "Mexicali"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T23:02:22+00:00",
-   "capturado": "2026-11-09T06:22:07+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.4071,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/LWD6BDIF3VEHPHIH4IAYOAGZRI.jpeg?auth=9f59d171a7fb70505bf4ea80dd13f4afaeea2c924d912c4837d9b4f8aa1ec488&smart=true&width=1280&height=962",
+   "postura": null,
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_frontera_en",
    "rubros": []
   },
   {
@@ -1804,38 +4760,6 @@
    "rubros": []
   },
   {
-   "id": "bdcbdf442c515515",
-   "titulo": "Garantiza Gobierno de Marina del Pilar beca Corazón de Cimarrón y tarjeta Violeta a quienes más lo necesiten",
-   "url": "https://www.elimparcial.com/mxl/mexicali/2026/11/08/garantiza-gobierno-de-marina-del-pilar-beca-corazon-de-cimarron-y-tarjeta-violeta-a-quienes-mas-lo-necesiten/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [
-    "estatal"
-   ],
-   "delegaciones": [],
-   "alcance": "estatal",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T22:19:05+00:00",
-   "capturado": "2026-11-09T06:22:07+00:00",
-   "figuras": [
-    {
-     "id": "mpao",
-     "via": "nominal",
-     "clave": "marina del pilar"
-    }
-   ],
-   "postura": {
-    "etiqueta": "favorable",
-    "confianza": 0.4386,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/WMFZSXOVTFGTPKTNXI7WPKWXKY.jpeg?auth=b00ff218fe0edd5e2a27bc311df72262559466e4a12e6fd427f91af49bf1ccd0&smart=true&width=1280&height=853",
-   "rubros": []
-  },
-  {
    "id": "e7eba1fc9e1f288f",
    "titulo": "Dana White rechaza la oferta de Donald Trump para convertirse en vocero de la Casa Blanca, pero se reunirá con el presidente",
    "url": "https://www.elimparcial.com/deporte/2026/11/08/dana-white-rechaza-la-oferta-de-donald-trump-para-convertirse-en-vocero-de-la-casa-blanca-pero-se-reunira-con-el-presidente/",
@@ -1938,27 +4862,36 @@
    ]
   },
   {
-   "id": "b1e73eb5e228b98f",
-   "titulo": "El imperio telefónico de Carlos Slim resintió la desaparición de 7.4 millones de líneas móviles en México, justo cuando Televisa adquirió AT&T con un nuevo plan competirle a Telcel con paquetes de internet, telefonía y televisión",
-   "url": "https://www.elimparcial.com/mexico/2026/11/08/el-imperio-telefonico-de-carlos-slim-resintio-la-desaparicion-de-74-millones-de-lineas-moviles-en-mexico-justo-cuando-televisa-adquirio-att-con-un-nuevo-plan-competirle-a-telcel-con-paquetes-de-internet-telefonia-y-television/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
+   "id": "33bc40ea3d0eac7a",
+   "titulo": "Marina del Pilar presenta avances en educación, mujeres y seguridad",
+   "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxORlF1Z1NiaU9zTG9JRWNvNDJ6a1ZiVjR3a0tiOFJEUDNWaENlQU9YWGdWUE1LUWE4M1A1bHRkWEtjaVI5VDZRZTZkNGt0bXFfeWRUellBaTViSGJPXzRCN29DbFBUWmdNdm1CWnc2Z0hxaGp1WVZzQ29OZEJpWEZuR0w5dWM1MmlHYTRRWGVuSXRMNll1aGZrRFVGRWZjU0tLTVBUTE9VME9xNEFKS1V3WnlJbzJadFRPX1JITA?oc=5",
+   "dominio": "lasillarota.com",
+   "fuente": "gn-173f8fbcfc4a",
    "zona_medio": "estatal",
-   "zonas": [],
+   "zonas": [
+    "estatal"
+   ],
    "delegaciones": [],
-   "alcance": "nacional",
+   "alcance": "estatal",
    "fecha": "2026-11-08",
-   "publicado": "2026-11-08T21:54:56+00:00",
-   "capturado": "2026-11-08T22:04:22+00:00",
-   "figuras": [],
+   "publicado": "2026-11-08T21:58:28+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [
+    {
+     "id": "mpao",
+     "via": "nominal",
+     "clave": "marina del pilar"
+    }
+   ],
    "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.9029,
+    "etiqueta": "favorable",
+    "confianza": 0.5572,
     "metodo": "modelo",
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
-   "imagen": "https://www.elimparcial.com/resizer/v2/BXMTXRWOXREH3PCFGLF2IC3FGY.jpg?auth=88b67c9f82e1607ff39a6af1b72fa0df5bf1091b866a8088f069c9a32096cddc&smart=true&width=1920&height=1200",
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
    "rubros": []
   },
   {
@@ -2219,106 +5152,6 @@
    ]
   },
   {
-   "id": "f5e8a89a778fbd31",
-   "titulo": "SAT les descontará ISR del aguinaldo a todos los trabajadores que ganan entre 18 y 21 mil pesos al mes: ¿Cómo les quedaría el pago neto?",
-   "url": "https://www.elimparcial.com/dinero/2026/11/05/sat-descontara-isr-del-aguinaldo-a-todos-los-trabajadores-que-ganan-entre-18-y-21-mil-pesos-y-asi-les-quedara-el-pago-neto/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T21:31:39+00:00",
-   "capturado": "2026-11-06T19:25:04+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.7283,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/TLOPYOILMNFWBLQDJC2NNRAFUI.jpg?auth=8641f59fc6dacd6f5589d4511bf21e17e994f443c925b5e940428511c4de76c2&smart=true&width=1920&height=1200",
-   "rubros": [
-    "economia"
-   ]
-  },
-  {
-   "id": "f21423aafca8f94a",
-   "titulo": "Tras evadir a la justicia ocultándose en México por más de 20 años, Miguel Urbano Vázquez, de 50 años, quien violó y mató a mujeres desde 2002 en Estados Unidos, fue extraditado para enfrentar una condena a cadena perpetua, gracias a la combinación de bases de datos de ADN y una estrecha cooperación binacional",
-   "url": "https://www.elimparcial.com/mundo/2026/11/06/tras-evadir-a-la-justicia-ocultandose-en-mexico-por-mas-de-20-anos-miguel-urbano-vazquez-de-50-anos-quien-violo-y-mato-a-mujeres-desde-2002-en-estados-unidos-fue-extraditado-para-enfrentar-una-condena-a-cadena-perpetua-gracias-a-la-combinacion-de-bases-de-datos-de-adn-y-una-estrecha-cooperacion-binacional/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T21:29:47+00:00",
-   "capturado": "2026-11-06T19:25:04+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.5964,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/JQEYRNNSUVHCTDH2H4BNFHW36A.jpg?auth=9d7c5794755bac0c710d81625cbe190b97d3688bcb7f15fdca1b392c586b3cf5&smart=true&width=1920&height=1200",
-   "rubros": []
-  },
-  {
-   "id": "e467b417a1206369",
-   "titulo": "Luego de que la SEP y Claudia Sheinbaum prohibieron los celulares en las escuelas de todo México, millones de estudiantes volverán a los juegos como saltar la cuerda o las canicas en el patio, a la lectura, juegos de mesa y los deportes tradicionales durante la hora del recreo: ¿A qué jugar en el recreo?",
-   "url": "https://www.elimparcial.com/mexico/2026/11/06/ya-es-oficial-sep-y-sheinbaum-prohibieron-los-celulares-en-las-escuelas-de-todo-mexico-y-ahora-millones-de-estudiantes-tendran-que-regresar-a-los-juegos-en-el-patio-la-lectura-juegos-de-mesa-y-los-deportes-tradicionales-durante-la-hora-del-recreo/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T21:29:39+00:00",
-   "capturado": "2026-11-07T05:58:17+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.6772,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/EMO75YOONFBNJDIEO5DYQAKSXI.jpg?auth=ff1d70fc3d41b546e28289076b25c74a59b7d8eab51394144e496e771ac65a84&smart=true&width=1920&height=1200",
-   "rubros": []
-  },
-  {
-   "id": "03dc3154dbb75b5a",
-   "titulo": "CFE: ¿Cuándo y cómo cambiar el titular del recibo de luz para evitar problemas?",
-   "url": "https://www.elimparcial.com/dinero/2026/11/06/cfe-cuando-y-como-cambiar-el-titular-del-recibo-de-luz-para-evitar-problemas/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T21:29:31+00:00",
-   "capturado": "2026-09-27T21:21:43+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.7039,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/4UDXAT5UQRHARLFZFUMSZNXC6I.jpg?auth=c49300d63b25e76d067fe2aba4b8c271f4e0c2fb4dbe9d1a87134f421b2999cc&smart=true&width=1620&height=1080",
-   "rubros": [
-    "economia"
-   ]
-  },
-  {
    "id": "c48888c568b7864a",
    "titulo": "El Ejército de Estados Unidos evita reclutar soldados con un coeficiente intelectual menor a 83 porque las decisiones autónomas en combate elevan el riesgo de errores fatales",
    "url": "https://www.elimparcial.com/locurioso/2026/11/08/el-ejercito-de-estados-unidos-evita-reclutar-soldados-con-un-coeficiente-intelectual-menor-a-83-porque-las-decisiones-autonomas-en-combate-elevan-el-riesgo-de-errores-fatales/",
@@ -2340,30 +5173,6 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/MMBVUV27OFBOFNGMFABU7FCOGA.jpg?auth=af4cf12b33f806f357ea2bcf7a05c4adf9b8b5c4dbcc7c525c4ddde0db298987&smart=true&width=1920&height=1200",
-   "rubros": []
-  },
-  {
-   "id": "405d21430e416409",
-   "titulo": "Frotar una bola de papel aluminio en las parrillas del asador antes de la carne asada permite retirar la grasa adherida sin usar cepillos de alambre, aunque aplicarlo sobre rejillas con esmalte de porcelana o teflón puede rayar el recubrimiento de forma permanente",
-   "url": "https://www.elimparcial.com/estilos/2026/11/08/frotar-una-bola-de-papel-aluminio-en-las-parrillas-del-asador-antes-de-la-carne-asada-permite-retirar-la-grasa-adherida-sin-usar-cepillos-de-alambre-aunque-aplicarlo-sobre-rejillas-con-esmalte-de-porcelana-o-teflon-puede-rayar-el-recubrimiento-de-forma-permanente/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T21:27:14+00:00",
-   "capturado": "2026-11-08T22:04:22+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.8178,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/A6HQXC77MFHKLGUMFOK5ILSKRA.jpg?auth=5d55c65589b33d324826a8db4d808878ed59f8cfa3a8e71144ac9301159c9d86&smart=true&width=1920&height=1200",
    "rubros": []
   },
   {
@@ -2415,32 +5224,6 @@
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/VUY3QF64ONH7NED63UGV6EIC4Y.jpg?auth=06d11f534a31747a7e1a6e125f43ace30367b2e7a505420af60df84d27ac3280&smart=true&width=1920&height=1200",
    "rubros": []
-  },
-  {
-   "id": "76d45712c053fdff",
-   "titulo": "Multarán con más de 586 mil pesos a todos los patrones que no respeten el tiempo libre de sus trabajadores con la nueva reforma que prohíbe a los jefes exigir respuestas fuera de la jornada laboral, sin importar si el empleo es presencial, híbrido o remoto",
-   "url": "https://www.elimparcial.com/mexico/2026/11/08/multaran-con-mas-de-586-mil-pesos-a-todas-las-empresas-que-no-respeten-el-tiempo-libre-de-sus-trabajadores-con-la-nueva-reforma-que-prohibe-a-los-jefes-exigir-respuestas-fuera-de-la-jornada-laboral-sin-importar-si-el-empleo-es-presencial-hibrido-o-remoto/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T21:26:48+00:00",
-   "capturado": "2026-11-08T22:04:22+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.6201,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/PYR7ML5BJRFCLE4SJXUBGWSO2I.jpg?auth=bcfb574c8627d9f9adfbb62c8a3b9a8ab7192e9873e6920675f522110e7abe8e&smart=true&width=1920&height=1200",
-   "rubros": [
-    "economia"
-   ]
   },
   {
    "id": "1ba84e858fee6a9f",
@@ -2620,6 +5403,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/11/6aecd35ca244b.png",
    "rubros": [
     "seguridad"
    ]
@@ -3539,30 +6323,6 @@
    "rubros": []
   },
   {
-   "id": "a43d323d20e9aabf",
-   "titulo": "El Niño podría repetir un fenómeno de hace casi 30 años con un segundo pico de calentamiento en 2027 que elevaría el riesgo de inundaciones y los científicos explican qué regiones estarían más expuestas",
-   "url": "https://www.elimparcial.com/mundo/2026/11/08/el-nino-podria-repetir-un-fenomeno-de-hace-casi-30-anos-con-un-segundo-pico-de-calentamiento-en-2027-que-elevaria-el-riesgo-de-inundaciones-y-los-cientificos-explican-que-regiones-estarian-mas-expuestas/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T19:00:11+00:00",
-   "capturado": "2026-11-08T22:04:22+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5451,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/OLZ3V6FB5JGVPDYRMHOWQONFJE.jpg?auth=b011029016d45b6d1a5be44ca5f0be0c23777aa62673b1d2ae7d2c0ac778f150&smart=true&width=1200&height=750",
-   "rubros": []
-  },
-  {
    "id": "f92d2e1825b2123f",
    "titulo": "Aumentan revisiones fiscales en Baja California para combatir factureras",
    "url": "https://oem.com.mx/elsoldetijuana/local/aumentan-revisiones-fiscales-en-baja-california-para-combatir-factureras-33035979",
@@ -3813,6 +6573,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/11/6af123f2d0dea.jpg",
    "rubros": []
   },
   {
@@ -3839,6 +6600,33 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/YNUG6MWY7FBV7FBIR6Y2P2Z6QU.jpeg?auth=030cef995f8df98d5e801f2370a243dbd9a1d039e1321c8c37e995ff1171462c&smart=true&width=1087&height=1447",
+   "rubros": []
+  },
+  {
+   "id": "c66180afcf22588e",
+   "titulo": "Baja California ampliará becas y apoyos a mujeres",
+   "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNeHNxWERtMWt0TEotQV85Q3IyVDFVWllhVmV3ZGx0LU1TbWtJVV9uems2THVWdTRZZXRvaHZkUFI5RXhVWDg3LUo1UFRTdnhOcGVrR0JlaGFKY1gyR2s5bGpnS21zLVpxcHM5WWtSMjZPeV9jSGp1SkR4LVBwV24xVQ?oc=5",
+   "dominio": "ahoratabasco.com",
+   "fuente": "gn-61ee18426b64",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-11-08",
+   "publicado": "2026-11-08T18:31:25+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5502,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
    "rubros": []
   },
   {
@@ -3948,9 +6736,37 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/11/6af120a6eed0f.jpg",
    "rubros": [
     "politica"
    ]
+  },
+  {
+   "id": "0a10dbacab6a00d8",
+   "titulo": "Movimiento CONSTRUIR reúne a ciudadanos y líderes sociales en Parlamento Ciudadano realizado en Tijuana",
+   "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPY01zNjRDRVdqT0gtSldJMVlmYzJ2Z0s4NkxPT3RCTGxmN2N4NDBNblpPazlSeHBRMWdEYTVhV3VnMV9ZSkFPcUw4ZWlmLTJFZmI0bXlULWZNOFpySHVsUUZKWnV5d1RjWXM4MVlmbkVHV2RNMzgxZmNKMjFVVkdrVzFXcDZ4b2w3NndmMWF0a28tYlNEQTBGVDVpZHhWU09qQnJickloalVfRlZiMnZoOWtMTHlCWEx2YVRTWHdGRlJ2QUFWZ0kyaWpYS1FVTmFEUlE1NHVJdWN6NURXTEHSAd4BQVVfeXFMT2NNczY0Q0VXak9ILUpXSTFZZmMydmdLODZMT090QkxsZjdjeDQwTW5aT2s5UnhwUTFnRGE1YVd1ZzFfWUpBT3FMOGVpZi0yRWZiNG15VC1mTThackh1bFFGSlp1eXdUY1lzODFZZm5FR1dkTTM4MWZjSjIxVVZHa1cxV3A2eG9sNzZ3ZjFhdGtvLWJTREEwRlQ1aWR4VlNPakJyYnJJaGpVX0ZWYjJ2aDlrTEx5QlhMdmFUU1h3RkZSdkFBVmdJMmlqWEtRVU5hRFJRNTR1SXVjejVEV0xB?oc=5",
+   "dominio": "uniradiobaja.com",
+   "fuente": "gn-36bce513f849",
+   "zona_medio": "estatal",
+   "zonas": [
+    "Tijuana"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-08",
+   "publicado": "2026-11-08T18:20:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "favorable",
+    "confianza": 0.5064,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_rosarito",
+   "rubros": []
   },
   {
    "id": "50af6cae3ce96cab",
@@ -4263,6 +7079,33 @@
    "rubros": []
   },
   {
+   "id": "1a87950b42ae675b",
+   "titulo": "Terremoto leve mag. 3.6 - 114 km al sureste de San Felipe, Baja California, México, Sunday 8 Nov 2026 a las 06:01 (Hora Mexico_City)",
+   "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNenhTUGJVZEw4bkQ0VjlWcVo2dEVYeHdMUHVkT1UtYlI3Sm1PQlF4V3lFVWJjcHplTGJyUVFLRlNiOTJydE5FblJoRGxJbmFGNXNfQS1UMk5FSWs5b0trU1NoS2dSOUd0VVd2TG80TDFEaWRrODlHaEZ0Z3dWRXN5OENxc3h4elhjbFlCaEFfWlhwemxCV19SUGlhY1dHcm1QcnFYZ2J0bmo1U25tZEtXWUtnOUVyWDdidFdQa2FBQTJEbU02WmNIYXMtLUN4Zw?oc=5",
+   "dominio": "volcanodiscovery.com",
+   "fuente": "gn-13afd86dbb5f",
+   "zona_medio": "estatal",
+   "zonas": [
+    "San Felipe"
+   ],
+   "delegaciones": [],
+   "alcance": "zona",
+   "fecha": "2026-11-08",
+   "publicado": "2026-11-08T17:48:50+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.666,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "origen": "busqueda_web",
+   "descubierta_por": "bq_sanfelipe",
+   "rubros": []
+  },
+  {
    "id": "5994c103fd9cc498",
    "titulo": "El dólar se mantiene en 18.35 pesos en casas de cambio locales este domingo",
    "url": "https://www.elimparcial.com/mxl/mexicali/2026/11/08/el-dolar-se-mantiene-en-1835-pesos-en-casas-de-cambio-locales-este-domingo/",
@@ -4406,25 +7249,6 @@
    "rubros": []
   },
   {
-   "id": "f43469821fd2cc44",
-   "titulo": "Democrats win every House district on US-Mexico border",
-   "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPcjNoZ3BkVVluREI4ZFZJcE5IaUNzR0JfUUpvbjlwa1lrN2QyNENUcVhkZTA0UEhyZk5HRG9WcFJvbnVJbnZlSkZMVUZMMVcwcEQzNXZLblh1R2Q2UERYR2pMckVjOXFCczVFd1p6NmNnNFJzWlNoeVVramFFS19mOHVJb3Q1OU5oVklUMjJEczZ0SEFrSGljbNIBmAFBVV95cUxPcjNoZ3BkVVluREI4ZFZJcE5IaUNzR0JfUUpvbjlwa1lrN2QyNENUcVhkZTA0UEhyZk5HRG9WcFJvbnVJbnZlSkZMVUZMMVcwcEQzNXZLblh1R2Q2UERYR2pMckVjOXFCczVFd1p6NmNnNFJzWlNoeVVramFFS19mOHVJb3Q1OU5oVklUMjJEczZ0SEFrSGljbA?oc=5",
-   "dominio": "myarklamiss.com",
-   "fuente": "gn-29dc9f664cb7",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T17:10:24+00:00",
-   "capturado": "2026-11-09T06:22:07+00:00",
-   "figuras": [],
-   "postura": null,
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_frontera_en",
-   "rubros": []
-  },
-  {
    "id": "0dd551d5f8c39741",
    "titulo": "Capturan en Jalisco a Rafael Álvarez, presunto líder de \"Los Rs\" del CJNG",
    "url": "https://www.uniradioinforma.com/sociedad/capturan-jalisco-rafael-alvarez-presunto-lider-los-rs-cjng-n913207",
@@ -4445,6 +7269,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/11/6af10f2299577.png",
    "rubros": []
   },
   {
@@ -4598,33 +7423,6 @@
    "rubros": [
     "seguridad"
    ]
-  },
-  {
-   "id": "dab5ee096ba38145",
-   "titulo": "Deja tres lesionados choque entre dos motocicletas en Chilpancingo",
-   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOYWxqQXNuTWlReGdPX0lvYURibEFwalRsb3FiOUZNNEhzTmdNM3cweF9oTHhLUS1Kc3kwY2dMMVJBVUkyeTMyUFdzVVFmLWtfVFJXWXhLTl9oSEtjS1V6TGo4Ry1lWlg0WlBOUWsxYWRNYk5VdlpWVXhXaGd4aTA5RUZ0LW9xUFNlSGMyOURIelpPOUxlYk1jNWRaaWFNOXBMZzg2S000Z2pXcWlMNzZPMzVLcjJNWEE?oc=5",
-   "dominio": "elsoldetijuana.com.mx",
-   "fuente": "soltij",
-   "zona_medio": "Tijuana",
-   "zonas": [
-    "Tijuana"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T16:49:50+00:00",
-   "capturado": "2026-11-08T22:04:22+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.7224,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_sanquintin",
-   "rubros": []
   },
   {
    "id": "69bd7b5b0d3e2717",
@@ -4782,7 +7580,7 @@
   {
    "id": "92c7cf060224e72c",
    "titulo": "México consolida esfuerzos para proteger a la vaquita marina",
-   "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQb2diMk9EUVlRN0pqX1FacDJHU3pUbC1WYnNYVUVfN1JlOTJEbFB0dTA5UG9Qa1U5MkN1WTA1Mk5jVmtSVk8yc0xJQTY3dW1UREFCd3dOeExFbGZzaDNyOWhtT2FIbHhKUnBJRWRrTUpyS05UbG1YQU1tZ3lxb2JxX1htMi1vTmRNUzZSRklCc0h2RTNteENQdFBXSm1WVHVHd3QyNGtzVnUzRGtS0gG6AUFVX3lxTE93eDBhOW9FVWxIaG1wZmliS3VnejFoMVlvVWVuSmxTdDM4Q1BSa3BYRTBZWGZNR0hXN1M0UFhIVUFTUUZYUjRZS05kYmpDUjVoZ3JPQ1BLSkN2aV91dHo1N3p5RjNTZ2M4UFI3OE5KNlA0azc1VHpRVEVEMmQ4N19XQUJGVERpbERtcFN5cnpiYXRRNjA1SkR3eTFhWVhma05HM1RIOTQ4eXRieUNVQkM5T0IxMWJUbnF6dw?oc=5",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPd3gwYTlvRVVsSGhtcGZpYkt1Z3oxaDFZb1VlbkpsU3QzOENQUmtwWEUwWVhmTUdIVzdTNFBYSFVBU1FGWFI0WUtOZGJqQ1I1aGdyT0NQS0pDdmlfdXR6NTd6eUYzU2djOFBSNzhOSjZQNGs3NVR6UVRFRDJkODdfV0FCRlREaWxEbXBTeXJ6YmF0UTYwNUpEd3kxYVlYZmtORzNUSDk0OHl0YnlDVUJDOU9CMTFiVG5xenfSAboBQVVfeXFMT3d4MGE5b0VVbEhobXBmaWJLdWd6MWgxWW9VZW5KbFN0MzhDUFJrcFhFMFlYZk1HSFc3UzRQWEhVQVNRRlhSNFlLTmRiakNSNWhnck9DUEtKQ3ZpX3V0ejU3enlGM1NnYzhQUjc4Tko2UDRrNzVUelFURUQyZDg3X1dBQkZURGlsRG1wU3lyemJhdFE2MDVKRHd5MWFZWGZrTkczVEg5NDh5dGJ5Q1VCQzlPQjExYlRucXp3?oc=5",
    "dominio": "vertigopolitico.com",
    "fuente": "gn-fa9761106032",
    "zona_medio": "estatal",
@@ -4900,30 +7698,6 @@
    "rubros": []
   },
   {
-   "id": "475f892c3c000639",
-   "titulo": "Mientras en México la carne asada se disfruta en tacos y con salsa, en Italia la ‘bistecca alla Fiorentina’ se cocina gruesa, con hueso en T y casi sin condimentos",
-   "url": "https://www.elimparcial.com/estilos/2026/11/06/mientras-en-mexico-la-carne-asada-se-disfruta-en-tacos-y-con-salsa-en-italia-la-bistecca-alla-fiorentina-se-cocina-gruesa-y-casi-sin-condimentos/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T16:26:36+00:00",
-   "capturado": "2026-11-08T22:04:22+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5212,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/LU4VK6CEJ5HTBNC6TICZO3PWAY.jpg?auth=994e8fd5742ba0089f521c997f3690ccb15e306ed64178c5945dc9aeb6b42aac&smart=true&width=1200&height=750",
-   "rubros": []
-  },
-  {
    "id": "14fe89d458a07961",
    "titulo": "Muere mujer de 65 años tras ser atropellada en bulevar Río Nuevo",
    "url": "https://www.elimparcial.com/mxl/policiaca/2026/11/08/muere-mujer-de-65-anos-tras-ser-atropellada-en-bulevar-rio-nuevo/",
@@ -4970,6 +7744,7 @@
     "modelo": "pysentimiento/robertuito-sentiment-analysis",
     "version": "0.2.0"
    },
+   "imagen": "https://statics.uniradioinforma.com/2026/11/6aee0be9764c6.jpg",
    "rubros": [
     "politica"
    ]
@@ -5569,6 +8344,40 @@
    ]
   },
   {
+   "id": "9d38113fec40edd6",
+   "titulo": "Quinto informe de gobierno: Marina del Pilar destaca becas, desalinizadora y pensión para policías",
+   "url": "https://www.elimparcial.com/mxl/mexicali/2026/11/07/inician-construccion-de-desalinizadora-de-rosarito-con-inversion-de-15-mil-mdp/",
+   "dominio": "elimparcial.com",
+   "fuente": "imparcial",
+   "zona_medio": "estatal",
+   "zonas": [
+    "estatal"
+   ],
+   "delegaciones": [],
+   "alcance": "estatal",
+   "fecha": "2026-11-08",
+   "publicado": "2026-11-08T15:00:00+00:00",
+   "capturado": "2026-11-09T16:31:53+00:00",
+   "figuras": [
+    {
+     "id": "mpao",
+     "via": "nominal",
+     "clave": "marina del pilar"
+    }
+   ],
+   "postura": {
+    "etiqueta": "neutral",
+    "confianza": 0.5429,
+    "metodo": "modelo",
+    "modelo": "pysentimiento/robertuito-sentiment-analysis",
+    "version": "0.2.0"
+   },
+   "imagen": "https://www.elimparcial.com/resizer/v2/LMHN2GMGPFEQJAHPWNEEE3ZLYE.jpeg?auth=105795fc27f334516f05e63a636acfba4e4a133f3589e8b4ae298567945ecd54&smart=true&width=1280&height=960",
+   "rubros": [
+    "seguridad"
+   ]
+  },
+  {
    "id": "0837c6de8c81743d",
    "titulo": "Águilas de Mexicali cayó 5-3 ante Cañeros de Los Mochis",
    "url": "https://www.elimparcial.com/mxl/mexicali/2026/11/07/aguilas-de-mexicali-cayo-5-3-ante-caneros-de-los-mochis/",
@@ -5648,108 +8457,6 @@
    ]
   },
   {
-   "id": "fb8efed5c6baaa96",
-   "titulo": "Los niños que crecieron en medio de discusiones y conflictos familiares no es que adquieran una mayor inteligencia emocional, sino que aprendieron a leer los mínimos cambios de humor y expresiones faciales como una rigurosa estrategia de defensa, según la psicología",
-   "url": "https://www.elimparcial.com/estilos/2026/11/02/los-ninos-que-crecieron-en-medio-de-discusiones-y-conflictos-familiares-no-es-que-adquieran-una-mayor-inteligencia-emocional-sino-que-aprendieron-a-leer-los-minimos-cambios-de-humor-y-expresiones-faciales-como-una-rigurosa-estrategia-de-defensa-segun-la-psicologia/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T14:53:53+00:00",
-   "capturado": "2026-11-03T00:59:23+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5684,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/ZPBU5R3EKFCBXFMCJOU2O4WDRQ.jpg?auth=40d36be4b3e74ac4095bb42049adeaeadf74439ccf37af34daf6039ee21143f9&smart=true&width=1920&height=1200",
-   "rubros": []
-  },
-  {
-   "id": "515d13f37176e9af",
-   "titulo": "Claudia Sheinbaum confirmó el incremento oficial de la Pensión del Bienestar para 2027, garantizando por mandato constitucional que el apoyo económico se mantenga por arriba de la tasa de inflación anual para proteger el poder adquisitivo de más de 13 millones de adultos mayores en todo México",
-   "url": "https://www.elimparcial.com/dinero/2026/11/03/claudia-sheinbaum-confirmo-el-incremento-oficial-de-la-pension-del-bienestar-para-2027-garantizando-por-mandato-constitucional-que-el-apoyo-economico-se-mantenga-por-arriba-de-la-tasa-de-inflacion-anual-para-proteger-el-poder-adquisitivo-de-mas-de-13-millones-de-adultos-mayores-en-todo-mexico/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T14:53:38+00:00",
-   "capturado": "2026-11-03T23:19:48+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5166,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/G7ESXGXVWZGBFMZZ24VU44EBHQ.jpg?auth=cd2506e5688339baad93e28bf54dd83217766c5cdf911912fd7903f777f1146f&smart=true&width=1920&height=1200",
-   "rubros": [
-    "economia"
-   ]
-  },
-  {
-   "id": "589d2e444911fd9c",
-   "titulo": "Tras la imposición del registro obligatorio de celulares con CURP de Claudia Sheinbaum, y con las nuevas fechas límite encima, miles de usuarios recurrieron a eSIM extranjeras para evitar el bloqueo de líneas, aunque expertos advierten que esta alternativa puede costar hasta diez veces más que una tarifa local",
-   "url": "https://www.elimparcial.com/dinero/2026/11/03/tras-la-imposicion-del-registro-obligatorio-de-celulares-con-curp-por-parte-de-la-crt-y-las-nuevas-fechas-limite-encima-miles-de-usuarios-recurrieron-a-esim-extranjeras-para-evitar-el-bloqueo-de-lineas-aunque-expertos-advierten-que-esta-alternativa-puede-costar-hasta-diez-veces-mas-que-una-tarifa-local/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T14:53:20+00:00",
-   "capturado": "2026-11-05T19:58:41+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.5691,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/IXBGY356DVCM3OOEVCQDSPS65Y.jpg?auth=2cb6982e87be4b2e9d53a96946b5d735afe427a522f27f4a72da7bf926afe18f&smart=true&width=1920&height=1080",
-   "rubros": [
-    "economia"
-   ]
-  },
-  {
-   "id": "0cf596561df64caa",
-   "titulo": "Ricardo Salinas Pliego se unió al IMSS a favor de los pensionados, consolidando con Banco Azteca su servicio de dispersión de nómina de pensión sin comisiones con el respaldo de la red de convenios; los pagos retroactivos y dobles aguinaldos ingresan de forma íntegra gracias a la capacidad de depósito autorizada",
-   "url": "https://www.elimparcial.com/dinero/2026/11/03/con-el-respaldo-de-la-red-de-convenios-encabezada-por-ricardo-salinas-pliego-banco-azteca-consolido-su-servicio-de-dispersion-de-nomina-de-pension-sin-comisiones-para-millones-de-jubilados-del-imss-en-mexico-los-pagos-retroactivos-y-dobles-aguinaldos-ingresan-de-forma-integra-gracias-a-la-capacidad-de-deposito-autorizada/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T14:52:59+00:00",
-   "capturado": "2026-11-03T23:19:48+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5842,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/CLSSJLCO25EWPFCBIVWCTIOSYY.jpg?auth=fd768799041d89a0e98b44e0fd6a91359710ea754009dd50f9f703ee6e02bba3&smart=true&width=1920&height=1200",
-   "rubros": [
-    "economia"
-   ]
-  },
-  {
    "id": "40516bde6c15cda3",
    "titulo": "Mientras en México Jarritos puede pasar desapercibido frente a refrescos como Coca-Cola y Pepsi, en Corea del Sur está teniendo un rotundo éxito con una línea de sabores exóticos inspirados en el K-Pop, cautivando sobre todo al público joven asiático",
    "url": "https://www.elimparcial.com/dinero/2026/11/03/mientras-las-bebidas-jarritos-son-tan-comunes-en-el-paisaje-cotidiano-mexicano-su-expansion-hacia-corea-del-sur-triunfo-con-una-linea-de-sabores-exoticos-inspirados-en-el-k-pop-y-estan-cautivando-al-publico-asiatico/",
@@ -5822,134 +8529,6 @@
     "version": "0.2.0"
    },
    "imagen": "https://www.elimparcial.com/resizer/v2/F5F6NXRZYBBDDNPSLT3XBXWZOY.jpg?auth=d24b6a8ccdfb40daf2e98b9eeeea893fc2e85252227e2b1d762492a3e3445adf&smart=true&width=1920&height=1200",
-   "rubros": []
-  },
-  {
-   "id": "7370680101d2efac",
-   "titulo": "Luego de que el IMSS eliminó el esquema de la Modalidad 40 que permitía a extrabajadores cotizar con montos elevados para inflar su pensión bajo la Ley 73, la industria aseguradora aseguró que los esquemas públicos no garantizan una vejez digna y que se intensificará la promoción de los planes personales de retiro entre los jóvenes",
-   "url": "https://www.elimparcial.com/dinero/2026/11/04/luego-de-que-el-imss-puso-fin-al-esquema-de-la-modalidad-40-que-permitia-a-extrabajadores-cotizar-con-montos-elevados-para-inflar-su-pension-bajo-la-ley-73-la-industria-aseguradora-aseguro-que-los-esquemas-publicos-no-garantizan-una-vejez-digna-y-que-se-intensificara-la-promocion-de-los-planes-personales-de-retiro-entre-los-jovenes/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T14:52:00+00:00",
-   "capturado": "2026-11-05T19:58:41+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.9519,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/FFE4ZGSLU5BD3EIHMORQL63ETY.jpg?auth=08c2b8949149b4fac1e42e8159716122caa2e1f82629e1ffa4c3a0125b1f1dcd&smart=true&width=1920&height=1080",
-   "rubros": [
-    "economia"
-   ]
-  },
-  {
-   "id": "fb619aca2a8e614f",
-   "titulo": "SAT: Con 349 votos a favor, el Congreso de la Unión dio luz verde definitiva a las reglas del ISR para el ejercicio fiscal 2027, blindando de los límites de deducción a sectores clave como el automotriz y el gasolinero bajo el argumento de proteger la competitividad y el empleo",
-   "url": "https://www.elimparcial.com/dinero/2026/11/05/sat-con-349-votos-a-favor-el-congreso-de-la-union-dio-luz-verde-definitiva-a-las-reglas-del-isr-para-el-ejercicio-fiscal-2027-blindando-de-los-limites-de-deduccion-a-sectores-clave-como-el-automotriz-y-el-gasolinero-bajo-el-argumento-de-proteger-la-competitividad-y-el-empleo/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T14:51:28+00:00",
-   "capturado": "2026-11-05T19:58:41+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.6367,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/ETHTG2NIANAF7JQLQMP5O46RM4.jpg?auth=891e723031139a96442a48e429ce8ac5b23b364dd884a5c85fc6aa9fa7956fc1&smart=true&width=1920&height=1200",
-   "rubros": [
-    "economia"
-   ]
-  },
-  {
-   "id": "c1ba55d6209f6d9b",
-   "titulo": "Choferes de Uber y DiDi deberán trabajar más de 95 horas y alcanzar ingresos brutos cercanos a los 19 mil pesos al mes para garantizar el salario mínimo y acceder al IMSS, según los nuevos lineamientos de la STPS",
-   "url": "https://www.elimparcial.com/dinero/2026/11/05/choferes-de-uber-y-didi-deberan-trabajar-mas-de-95-horas-al-mes-y-alcanzar-ingresos-brutos-cercanos-a-los-19-mil-pesos-para-garantizar-el-salario-minimo-y-acceder-al-imss-segun-los-nuevos-lineamientos-de-la-stps/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T14:51:16+00:00",
-   "capturado": "2026-11-07T05:58:17+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.7676,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/S6RUZC3TA5FG3DHX6PJIDXTEHM.jpg?auth=c13bb1bdf9fe996b6e990c68ee5f1c25b6fdd99b791530eadd333773ca666a29&smart=true&width=1920&height=1200",
-   "rubros": [
-    "economia"
-   ]
-  },
-  {
-   "id": "33b0b764c02b1bff",
-   "titulo": "Luego de que Sheinbaum hizo oficial la eliminación del efectivo en servicios como casetas y gasolineras, las autoridades mexicanas integraron herramientas como CoDi, la CURP Digital y el Expediente Digital Ciudadano para agilizar los pagos y la contratación de servicios financieros a distancia bajo estrictos mecanismos de confianza",
-   "url": "https://www.elimparcial.com/dinero/2026/11/05/luego-de-que-sheinbaum-confirmo-la-eliminacion-del-efectivo-en-servicios-como-casetas-y-gasolineras-las-autoridades-mexicanas-integraron-herramientas-como-codi-la-curp-digital-y-el-expediente-digital-ciudadano-para-agilizar-los-pagos-y-la-contratacion-de-servicios-financieros-a-distancia-bajo-estrictos-mecanismos-de-confianza/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T14:51:01+00:00",
-   "capturado": "2026-11-06T06:37:46+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.6719,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/4GDTI6NQ6JAFPI4P6IFAGNA5QM.jpg?auth=302c8d64bd0e254fbe27a21f71412b4e66d089f0d4765d1c1a661c579f7f2cf8&smart=true&width=1920&height=1200",
-   "rubros": [
-    "economia"
-   ]
-  },
-  {
-   "id": "f620143c89ba5b74",
-   "titulo": "Un hombre de 36 años fue acusado de matar brutalmente a una madre de 3 hijos y abusar sexualmente de un niño de 14 años y de animales; fue formalmente imputado por 16 cargos criminales ante un gran jurado de Texas y las autoridades creen que puede haber más víctimas",
-   "url": "https://www.elimparcial.com/mundo/2026/11/06/un-hombre-de-36-anos-fue-acusado-de-matar-brutalmente-a-una-madre-de-3-hijos-y-abusar-sexualmente-de-un-nino-de-14-anos-y-de-animales-fue-formalmente-imputado-por-16-cargos-criminales-ante-un-gran-jurado-de-texas-y-las-autoridades-creen-que-puede-haber-mas-victimas/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T14:50:47+00:00",
-   "capturado": "2026-11-06T19:25:04+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.9299,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/CU2TBZ6VBRH37MELKEGN6V5KJ4.jpg?auth=35eeaa729d6f3ceb3d93941e6e941f415e1ee0d55bcbd92a247c4b3fd06fad16&smart=true&width=1920&height=1200",
    "rubros": []
   },
   {
@@ -6569,30 +9148,6 @@
    "rubros": []
   },
   {
-   "id": "100157bbb73703ff",
-   "titulo": "Expertos explican cómo una botella de plástico colocada en el techo puede transformar la luz solar en iluminación natural dentro de una habitación oscura",
-   "url": "https://www.elimparcial.com/estilos/2026/11/08/expertos-explican-como-una-botella-de-plastico-colocada-en-el-techo-puede-transformar-la-luz-solar-en-iluminacion-natural-dentro-de-una-habitacion-oscura/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T13:00:01+00:00",
-   "capturado": "2026-09-16T06:32:39+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.6059,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/I7OZK4LQ2NEKVI3Q3HOAXFOY64.png?auth=02ae8ae3433711f1874c41fb365a0ce24ddcc3c7e08159337f8799200b1655be&smart=true&width=1200&height=780",
-   "rubros": []
-  },
-  {
    "id": "715246435386000a",
    "titulo": "Cantaste en los conciertos de La Mayiza: ¿Qué shows organizó una empresa ligada al narco según EU?",
    "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxOVGhrOVFUMm9lZE9pbTFkNHpxTEd3SVAzNkJvV3NoNVhZQTBnbnQ0WGhBc0ItMkd6U2tnYkh3dnF0cFdTR2FBZDV5Z0JmcXpPNk82U3BPNmhfOHZBeWpXZmhuNG5UaGZKdWZzTkZtcG1sMkxtRmNYT1BzLTNacU5hLWN4OUE0RzdVQjVTenp0MjMwZWxNVjJ1OHlfNkhVZkF5MXZsdU1sMEN4NmREYU41cC05c3phQ3ItTXc1Sms0RW4zNlppbjZyV0RyMnlvOFpUNXpJSExIZUhlQXV0MlVkRmNn?oc=5",
@@ -7061,57 +9616,6 @@
    "rubros": [
     "deportes"
    ]
-  },
-  {
-   "id": "dd8e7d6ceaa0d7ec",
-   "titulo": "Light mag. 3.6 earthquake - 114 km southeast of San Felipe, Estado de Baja California, Mexico, on Sunday, Nov 8, 2026, at 06:01 am (Mexico_City time)",
-   "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQeFRudGs2ZzhaWDFWVFBRT0YwMUpOMndpSTIxVUlCb3lSeGhzOFd1T2RYelZMVm9yOXZiMlUxTmZ0YUFMY0JDTHM0OUJFY0FKWUYzdVp6b2tWYnl0Q0UxdVVSR3lWcEZtRWhkSmJrSWtxanRxQXZFTGJaOXFINTFiMlFudGVja292R1BldXBLQm9TWDVfVGxBc1Z5SW5jUVFiN1dQTEFzb0hubjZyYzB3b2FjOGMxaHFtRkJacmJBRHl6TC1LNUZXS0l4a3g?oc=5",
-   "dominio": "volcanodiscovery.com",
-   "fuente": "gn-13afd86dbb5f",
-   "zona_medio": "estatal",
-   "zonas": [
-    "San Felipe"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T12:25:20+00:00",
-   "capturado": "2026-11-09T06:22:07+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.591,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_sanfelipe",
-   "rubros": []
-  },
-  {
-   "id": "704b416d5a165ca4",
-   "titulo": "Cerro de La Campana",
-   "url": "https://www.elimparcial.com/son/columnas/2026/11/08/cerro-de-la-campana/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-08",
-   "publicado": "2026-11-08T12:23:55+00:00",
-   "capturado": "2026-09-04T15:24:36+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.5054,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/T3D4QQN4M5HP5L2GXSSLKIUFQQ.jpg?auth=374576b1d0ae44a2c36e4ce4ddcb3dff7fd99b4b3bd1f16e31867b3ec209d510&smart=true&width=1200&height=630",
-   "rubros": []
   },
   {
    "id": "69ec1a68b4d3266b",
@@ -17010,33 +19514,6 @@
    ]
   },
   {
-   "id": "ce20b5e970ca67fe",
-   "titulo": "Gobierno de Baja California",
-   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFB6aFJ3X1E4UUszZVRWNjNWMmwzU0ExVlBUY0NSbnhYZExtdl9YRVRWNlRFYlQ1WTljMWh5RFpsR2laMWh1MzBURVF2Mjh0OVlWa3ZaQVNIWERRYnhUY3FQbS0yeng?oc=5",
-   "dominio": "bajacalifornia.gob.mx",
-   "fuente": "gn-01e4fd06574f",
-   "zona_medio": "estatal",
-   "zonas": [
-    "estatal"
-   ],
-   "delegaciones": [],
-   "alcance": "estatal",
-   "fecha": "2026-11-07",
-   "publicado": "2026-11-07T02:20:06+00:00",
-   "capturado": "2026-09-08T17:24:53+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "adversa",
-    "confianza": 0.6598,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "origen": "busqueda_web",
-   "descubierta_por": "bq_rosarito",
-   "rubros": []
-  },
-  {
    "id": "fdb1985d333372e9",
    "titulo": "Haitian boy, 8, detained during scheduled immigration appointment",
    "url": "https://www.kpbs.org/news/border-immigration/2026/11/06/haitian-boy-8-detained-during-scheduled-immigration-appointment",
@@ -24435,32 +26912,6 @@
    },
    "rubros": [
     "politica"
-   ]
-  },
-  {
-   "id": "d2d02adc306d7fb0",
-   "titulo": "Ya es oficial: SAT embargará todas las cuentas de quienes mantengan créditos fiscales exigibles tras la validación constitucional del buzón tributario emitida por un tribunal colegiado en materia administrativa",
-   "url": "https://www.elimparcial.com/dinero/2026/11/02/sat-embargara-todas-las-cuentas-de-quienes-mantengan-creditos-fiscales-exigibles-tras-la-validacion-constitucional-del-buzon-tributario-emitida-por-un-tribunal-colegiado-en-materia-administrativa/",
-   "dominio": "elimparcial.com",
-   "fuente": "imparcial",
-   "zona_medio": "estatal",
-   "zonas": [],
-   "delegaciones": [],
-   "alcance": "nacional",
-   "fecha": "2026-11-06",
-   "publicado": "2026-11-06T14:53:52+00:00",
-   "capturado": "2026-11-04T23:42:29+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.7632,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "imagen": "https://www.elimparcial.com/resizer/v2/5WT7TUYGRBCAHP5X3XHMP6XHOU.jpg?auth=b0a658aebe5c55f3bebb127418a3b1f9747f741daf4a83e6b95b37821705b2ce&smart=true&width=1920&height=1080",
-   "rubros": [
-    "economia"
    ]
   },
   {
@@ -151621,31 +154072,6 @@
    "rubros": [
     "espectaculos"
    ]
-  },
-  {
-   "id": "9b835de421cef94b",
-   "titulo": "Pronostican cielo despejado para este lunes",
-   "url": "https://oem.com.mx/elsoldetijuana/local/pronostican-cielo-despejado-para-este-lunes-32803405",
-   "dominio": "oem.com.mx",
-   "fuente": "soltij",
-   "zona_medio": "Tijuana",
-   "zonas": [
-    "Tijuana"
-   ],
-   "delegaciones": [],
-   "alcance": "zona",
-   "fecha": "2026-10-26",
-   "publicado": "2026-10-26T10:25:40+00:00",
-   "capturado": "2026-09-04T00:35:01+00:00",
-   "figuras": [],
-   "postura": {
-    "etiqueta": "neutral",
-    "confianza": 0.6233,
-    "metodo": "modelo",
-    "modelo": "pysentimiento/robertuito-sentiment-analysis",
-    "version": "0.2.0"
-   },
-   "rubros": []
   },
   {
    "id": "5e28cf7409168fd9",
