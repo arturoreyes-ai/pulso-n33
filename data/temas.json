@@ -3,27 +3,27 @@
  "generado": "2026-11-10",
  "ventana_dias": 7,
  "minimo": 3,
- "notas_ventana": 2291,
+ "notas_ventana": 2399,
  "notas_previas": 2709,
  "temas": [
   {
    "termino": "paro",
-   "n": 21,
+   "n": 23,
    "n_previo": 2,
-   "momento": 19,
+   "momento": 21,
    "zonas": {
-    "Tijuana": 9,
-    "nacional": 8,
+    "Tijuana": 10,
+    "nacional": 9,
     "Mexicali": 3,
     "estatal": 1
    },
    "fuentes": {
+    "imparcial": 7,
     "afn": 6,
-    "imparcial": 6,
     "zeta": 3,
+    "jornadabc": 2,
     "lavoz": 2,
     "uniradio": 2,
-    "jornadabc": 1,
     "soltij": 1
    },
    "un_solo_medio": false,
@@ -32,12 +32,14 @@
     "0cfd5bdc4d49f540",
     "17d6b14d3fb84655",
     "1f8a1c7a9e1b1ead",
+    "2abaee3a0e7c4fa9",
     "2d87c7fc2a8dd854",
     "402f48689c168a05",
     "49af330fefcc2fa4",
     "689bc02962fb6221",
     "7b98520aaadf1c73",
     "7ede62e21f3264dd",
+    "7f05e0b0a22f4a83",
     "88e10fb1a176db28",
     "9a08088945c91e33",
     "a16c3dbeaa9aab0e",
@@ -51,22 +53,82 @@
     "f20adedf90a1fca6"
    ],
    "ejemplos": [
+    "Trabajadores del INE se van a paro en 20 estados para exigir que les dupliquen el sueldo, rechazan el aumento del 6% y consiguen abrir una negociación para mejorar sus ingresos y condiciones laborales",
     "INE acuerda incremento salarial base del 6% para 2027 tras paro del 64.7% en módulos",
-    "INE ofrece revisión para elevar aumento salarial tras paro de 544 módulos en todo el país",
-    "“Venga mañana”: paro laboral en el INE deja a ciudadanos sin poder realizar sus trámites"
+    "Sindicatos y trabajadores del Poder Judicial anuncian fin del paro de labores; mañana se reintegran a los órganos jurisdiccionales"
+   ]
+  },
+  {
+   "termino": "congreso",
+   "n": 30,
+   "n_previo": 11,
+   "momento": 19,
+   "zonas": {
+    "nacional": 12,
+    "Tijuana": 9,
+    "Mexicali": 5,
+    "estatal": 2,
+    "Playas de Rosarito": 1,
+    "Tecate": 1
+   },
+   "fuentes": {
+    "imparcial": 15,
+    "jornadabc": 5,
+    "afn": 4,
+    "lavoz": 4,
+    "gn-31ae7e9b28e1": 1,
+    "zeta": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "00e2f1f177ef35d6",
+    "1402fd86098d5959",
+    "19e5a003c25f4555",
+    "2573ba673b78fafb",
+    "2f5d3c4e79f32af3",
+    "3659efa4bc4320f4",
+    "368e8768d77d433b",
+    "39e4c80f02b112b1",
+    "3b59a810191efae0",
+    "40737cd2c6924d21",
+    "4fc2fb7d79d952fe",
+    "637b4c575c46df74",
+    "6c04dc1252e9298d",
+    "875da03af0c9a680",
+    "8ba8d8b604587ea8",
+    "9d355f71070587ee",
+    "a53b2d98067754d5",
+    "a9234bcc5cf54ef1",
+    "ae07082991813d6b",
+    "c0252bb212124cb6",
+    "c52c9d79a7cfb5e1",
+    "c850a0bdd3a24a45",
+    "c88401a844edcdfb",
+    "d2bd33d861d8aefc",
+    "d5d76cfc9763fb7b",
+    "ddb06a70ffbd811c",
+    "e24504f84a21b1c2",
+    "e478d8dd4a6d1fa7",
+    "e9ba41cf82d23a92",
+    "fb619aca2a8e614f"
+   ],
+   "ejemplos": [
+    "Congreso Latinoamericano de Ciencias Jurídicas, Forenses y de la Salud Mental en Rosarito",
+    "Mayoría demócrata en Congreso de EU no elimina presión de Trump sobre México",
+    "Jueza que avaló la entrada de policías a la embajada de México en Ecuador participa en un congreso de la UNAM"
    ]
   },
   {
    "termino": "democrats",
-   "n": 20,
+   "n": 21,
    "n_previo": 2,
-   "momento": 18,
+   "momento": 19,
    "zonas": {
-    "San Diego": 16,
+    "San Diego": 17,
     "nacional": 4
    },
    "fuentes": {
-    "kpbs": 13,
+    "kpbs": 14,
     "timessd": 2,
     "gn-1882423408cb": 1,
     "gn-29dc9f664cb7": 1,
@@ -85,6 +147,7 @@
     "5a47aeecd20480d9",
     "66f1e7b4380ecf1b",
     "731448d7382d4003",
+    "8c8b7db860594aca",
     "906066e8bfc5250c",
     "984e3b00ea95acce",
     "a480bd1e3a66df0f",
@@ -98,35 +161,37 @@
     "fa0571379f82f041"
    ],
    "ejemplos": [
+    "California voters defeat billionaire tax proposal that divided Democrats",
     "Democrats win every House district on US-Mexico border",
-    "Democrats won big on issues like immigration. But ICE still has the money",
-    "San Diego’s congressional delegation is all Democrats. What’s next?"
+    "Democrats won big on issues like immigration. But ICE still has the money"
    ]
   },
   {
    "termino": "poder judicial",
-   "n": 18,
+   "n": 20,
    "n_previo": 1,
-   "momento": 17,
+   "momento": 19,
    "zonas": {
-    "Tijuana": 7,
+    "Tijuana": 9,
     "nacional": 5,
     "Mexicali": 4,
-    "estatal": 2,
-    "San Quintín": 1
+    "San Quintín": 2,
+    "estatal": 2
    },
    "fuentes": {
     "lavoz": 5,
     "imparcial": 4,
     "afn": 3,
     "uniradio": 3,
-    "jornadabc": 1,
+    "jornadabc": 2,
+    "gn-36bce513f849": 1,
     "soltij": 1,
     "zeta": 1
    },
    "un_solo_medio": false,
    "notas": [
     "035cbd892fec5d9a",
+    "2abaee3a0e7c4fa9",
     "35c1c409bc8cd214",
     "3d0b2bb4af6ae1c7",
     "6bb1cafa42aea30d",
@@ -142,13 +207,81 @@
     "af4246bb10d739de",
     "bfc30eeee7d86d3c",
     "c96caf36ec7d0f53",
+    "d2fe0edaaef3f9d4",
     "e4d7ccde9972679b",
     "f633f0e6efc006e0"
    ],
    "ejemplos": [
+    "Sindicatos y trabajadores del Poder Judicial anuncian fin del paro de labores; mañana se reintegran a los órganos jurisdiccionales",
     "Investigan a 10 jueces por presunto \"cártel inmobiliario\" en Tijuana y San Quintín; Poder Judicial de BC cierra capacitación de Ley Daryela",
-    "Reanudan paro laboral en Poder Judicial de la Federación en Mexicali",
-    "Proyectan que totalidad de personal del Poder Judicial cumpla con capacitaciones en materia de género por Ley Daryela"
+    "Investigan a 10 jueces por presunto \"cártel inmobiliario\" en Tijuana y San Quintín; Poder Judicial de BC cierra capacitación de Ley Daryela"
+   ]
+  },
+  {
+   "termino": "atencion",
+   "n": 28,
+   "n_previo": 10,
+   "momento": 18,
+   "zonas": {
+    "nacional": 13,
+    "Tijuana": 5,
+    "estatal": 5,
+    "Ensenada": 1,
+    "Mexicali": 1,
+    "Playas de Rosarito": 1,
+    "San Quintín": 1,
+    "Tecate": 1
+   },
+   "fuentes": {
+    "imparcial": 8,
+    "uniradio": 6,
+    "afn": 3,
+    "jornadabc": 2,
+    "gn-01e4fd06574f": 1,
+    "gn-062dc8648157": 1,
+    "gn-208187d76ea7": 1,
+    "gn-2f955974c5c0": 1,
+    "gn-31193328f8e2": 1,
+    "gn-c1d6f8717505": 1,
+    "gn-f3fbae11701a": 1,
+    "lavoz": 1,
+    "soltij": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "1d1e3d2495133f6f",
+    "1f9d823ec376db3c",
+    "24147d08fac9e4f8",
+    "2587b778d5535e0f",
+    "266cd16c63434adb",
+    "2d87c7fc2a8dd854",
+    "3163539d12c1d875",
+    "402f48689c168a05",
+    "49af330fefcc2fa4",
+    "54168576bc72ea8b",
+    "69d97b3f291c75f3",
+    "6b4f426d80ed5598",
+    "724a5616f629ea2a",
+    "7b289d6e05abf9e5",
+    "8b93ea5147c0df10",
+    "905074c4dd19fec5",
+    "90e2e75f1d9c219e",
+    "9438de6e1463a4a0",
+    "a70cc860442574f6",
+    "b34b9a9de0948b2a",
+    "b66bbd2fe2ae0a3f",
+    "ba0ed0dcbb91d67a",
+    "c244d64caf341ff4",
+    "c4716a4c4d495f5e",
+    "d4d03a8f8ed96856",
+    "d90eb8c9e14bc4eb",
+    "ee21b5f642b60f8a",
+    "f7d613d39bef7f10"
+   ],
+   "ejemplos": [
+    "León XIV llega a Argentina y envía un mensaje a Javier Milei sobre los costos de la austeridad, al defender que la economía debe servir a las personas y pedir atención para trabajadores, jubilados y sectores vulnerables",
+    "Brindan atención y equipos de movilidad a más de 50 niños en jornada binacional de rehabilitación",
+    "Clínicas móviles llevarán atención médica gratuita a cuatro municipios"
    ]
   },
   {
@@ -189,125 +322,6 @@
     "El nuevo presidente de Paraguay, Pedro Alliana, solicita la renuncia a todos sus ministros e inicia una reestructuración total del Ejecutivo tras la caída y detención de Santiago Peña",
     "Allanan en Paraguay la mansión del expresidente Santiago Peña y encuentran una bóveda oculta detrás de una pared falsa durante la investigación por el colapso de Ueno Bank",
     "Pedro Alliana asume la Presidencia de Paraguay en medio de una crisis política y recibe mensajes de Lula, Fujimori y Mulino"
-   ]
-  },
-  {
-   "termino": "congreso",
-   "n": 27,
-   "n_previo": 11,
-   "momento": 16,
-   "zonas": {
-    "nacional": 11,
-    "Tijuana": 8,
-    "Mexicali": 5,
-    "estatal": 2,
-    "Tecate": 1
-   },
-   "fuentes": {
-    "imparcial": 14,
-    "afn": 4,
-    "jornadabc": 4,
-    "lavoz": 4,
-    "zeta": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "00e2f1f177ef35d6",
-    "1402fd86098d5959",
-    "19e5a003c25f4555",
-    "2573ba673b78fafb",
-    "2f5d3c4e79f32af3",
-    "3659efa4bc4320f4",
-    "39e4c80f02b112b1",
-    "3b59a810191efae0",
-    "40737cd2c6924d21",
-    "4fc2fb7d79d952fe",
-    "637b4c575c46df74",
-    "6c04dc1252e9298d",
-    "875da03af0c9a680",
-    "8ba8d8b604587ea8",
-    "a53b2d98067754d5",
-    "a9234bcc5cf54ef1",
-    "ae07082991813d6b",
-    "c0252bb212124cb6",
-    "c52c9d79a7cfb5e1",
-    "c88401a844edcdfb",
-    "d2bd33d861d8aefc",
-    "d5d76cfc9763fb7b",
-    "ddb06a70ffbd811c",
-    "e24504f84a21b1c2",
-    "e478d8dd4a6d1fa7",
-    "e9ba41cf82d23a92",
-    "fb619aca2a8e614f"
-   ],
-   "ejemplos": [
-    "SAT: Con 349 votos a favor, el Congreso de la Unión dio luz verde definitiva a las reglas del ISR para el ejercicio fiscal 2027, blindando de los límites de deducción a sectores clave como el automotriz y el gasolinero bajo el argumento de proteger la competitividad y el empleo",
-    "Aprueba congreso de BC reforma para reconocer el servicio social como experiencia laboral",
-    "Denuncian a Abelardo de la Espriella ante el Congreso de EEUU por presuntos negocios con narcotraficantes, operaciones inmobiliarias y vínculos con empresas que podrían haber lavado dinero"
-   ]
-  },
-  {
-   "termino": "atencion",
-   "n": 26,
-   "n_previo": 10,
-   "momento": 16,
-   "zonas": {
-    "nacional": 12,
-    "Tijuana": 5,
-    "estatal": 4,
-    "Ensenada": 1,
-    "Mexicali": 1,
-    "Playas de Rosarito": 1,
-    "San Quintín": 1,
-    "Tecate": 1
-   },
-   "fuentes": {
-    "imparcial": 8,
-    "uniradio": 5,
-    "afn": 3,
-    "jornadabc": 2,
-    "gn-01e4fd06574f": 1,
-    "gn-062dc8648157": 1,
-    "gn-208187d76ea7": 1,
-    "gn-2f955974c5c0": 1,
-    "gn-31193328f8e2": 1,
-    "gn-c1d6f8717505": 1,
-    "gn-f3fbae11701a": 1,
-    "lavoz": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "1d1e3d2495133f6f",
-    "1f9d823ec376db3c",
-    "24147d08fac9e4f8",
-    "2587b778d5535e0f",
-    "266cd16c63434adb",
-    "2d87c7fc2a8dd854",
-    "3163539d12c1d875",
-    "402f48689c168a05",
-    "49af330fefcc2fa4",
-    "54168576bc72ea8b",
-    "69d97b3f291c75f3",
-    "6b4f426d80ed5598",
-    "724a5616f629ea2a",
-    "7b289d6e05abf9e5",
-    "8b93ea5147c0df10",
-    "905074c4dd19fec5",
-    "90e2e75f1d9c219e",
-    "9438de6e1463a4a0",
-    "b34b9a9de0948b2a",
-    "b66bbd2fe2ae0a3f",
-    "ba0ed0dcbb91d67a",
-    "c244d64caf341ff4",
-    "d4d03a8f8ed96856",
-    "d90eb8c9e14bc4eb",
-    "ee21b5f642b60f8a",
-    "f7d613d39bef7f10"
-   ],
-   "ejemplos": [
-    "León XIV llega a Argentina y envía un mensaje a Javier Milei sobre los costos de la austeridad, al defender que la economía debe servir a las personas y pedir atención para trabajadores, jubilados y sectores vulnerables",
-    "Brindan atención y equipos de movilidad a más de 50 niños en jornada binacional de rehabilitación",
-    "Paro Nacional en módulos del INE dejó sin atención a ciudadanos en BC"
    ]
   },
   {
@@ -407,9 +421,9 @@
     "ff53b8ac3dd2adf1"
    ],
    "ejemplos": [
+    "La industria maquiladora destina el 96 por ciento de su presupuesto a importar insumos principalmente de EEUU, un reto estructural para el gobierno de Claudia Sheinbaum frente a una dependencia extrema que condena a los trabajadores a bajos salarios y acelera la fuga de talento joven mexicano",
     "Fallece peatón al ser atropellado; conductor se dio a la fuga",
-    "Reo se fuga de El Hongo I, en Tecate; antes escapó del Cereso de Mexicali",
-    "Denuncian fuga de agua en El Florido"
+    "Reo se fuga de El Hongo I, en Tecate; antes escapó del Cereso de Mexicali"
    ]
   },
   {
@@ -467,8 +481,8 @@
     "e88f0cb7649a3088"
    ],
    "ejemplos": [
-    "¿Quién es Alice Huang? La mujer señalada por presunto espionaje para China que puso bajo investigación a Jensen Huang, CEO de Nvidia",
     "Mujer creyó que Brad Pitt se enamoró de ella, así que se divorció y comenzó a enviarle millones de pesos, pero terminó internada en psiquiátrico luego de enterarse de que todo era una estafa con videos de IA",
+    "¿Quién es Alice Huang? La mujer señalada por presunto espionaje para China que puso bajo investigación a Jensen Huang, CEO de Nvidia",
     "Buscan a mujer desaparecida en playa La Misión"
    ]
   },
@@ -623,6 +637,54 @@
    ]
   },
   {
+   "termino": "jubilados",
+   "n": 16,
+   "n_previo": 3,
+   "momento": 13,
+   "zonas": {
+    "nacional": 6,
+    "Playas de Rosarito": 5,
+    "Tijuana": 4,
+    "Mexicali": 1
+   },
+   "fuentes": {
+    "imparcial": 5,
+    "afn": 3,
+    "gn-062dc8648157": 1,
+    "gn-208187d76ea7": 1,
+    "gn-a96a3aaee9d9": 1,
+    "gn-df1d301d141c": 1,
+    "jornadabc": 1,
+    "lavoz": 1,
+    "rosarito": 1,
+    "soltij": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "24147d08fac9e4f8",
+    "2587b778d5535e0f",
+    "2cd757c3ac009236",
+    "3a4b1e080c717789",
+    "44cde5119e2a86c4",
+    "568ac2ca3b8d2e2a",
+    "5acf69cfc1e724fc",
+    "7a1e7b6797e91975",
+    "896f666e5da8890c",
+    "94599efe08005941",
+    "b66bbd2fe2ae0a3f",
+    "cc5a5429410045c9",
+    "d9d152c7b8c5571d",
+    "ee21b5f642b60f8a",
+    "fadd6e63da578993",
+    "ffcb05127ff694e1"
+   ],
+   "ejemplos": [
+    "¿Cuándo pagan la segunda parte del aguinaldo para pensionados y jubilados ISSSTE?",
+    "Claudia Sheinbaum confirmó el aguinaldo adelantado de 40 días de salario a partir del 10 de noviembre para todos los trabajadores del Estado, servidores públicos, fuerzas armadas, pensionados y jubilados en México que forman parte de los beneficiarios del decreto oficial publicado en el DOF",
+    "León XIV llega a Argentina y envía un mensaje a Javier Milei sobre los costos de la austeridad, al defender que la economía debe servir a las personas y pedir atención para trabajadores, jubilados y sectores vulnerables"
+   ]
+  },
+  {
    "termino": "derrota",
    "n": 14,
    "n_previo": 1,
@@ -705,6 +767,66 @@
    ]
   },
   {
+   "termino": "city",
+   "n": 30,
+   "n_previo": 18,
+   "momento": 12,
+   "zonas": {
+    "San Diego": 18,
+    "San Felipe": 9,
+    "Mexicali": 2,
+    "Ensenada": 1,
+    "Tijuana": 1
+   },
+   "fuentes": {
+    "gn-13afd86dbb5f": 12,
+    "kpbs": 6,
+    "timessd": 4,
+    "inewsource": 3,
+    "voiceofsd": 3,
+    "gn-001969923469": 1,
+    "gn-a956e11d03ed": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "1423b3bc6334512d",
+    "1a87950b42ae675b",
+    "1c4ead3299085be8",
+    "27bc8029c82566a1",
+    "297fc1713c4c8780",
+    "344d9d76098ddaae",
+    "369196d68f4109eb",
+    "4892221aa9faec3c",
+    "4d0f3d6acbdc82ed",
+    "4fb2510353f3a397",
+    "506bfb3e3cd5e49a",
+    "55a10291527ec902",
+    "5ab917a5d9e66f70",
+    "5bdbc8fbb24d09c3",
+    "67bfecc140f59236",
+    "731d45937c711429",
+    "7b7c95002555b791",
+    "7bf8a2f4966c020e",
+    "8150b0529ef5a392",
+    "81af78be437582b0",
+    "85c703d429d0bd99",
+    "87a4be57a966faa5",
+    "90bde07432930801",
+    "a20bacd308f9043f",
+    "b2d48376401c4925",
+    "cc8e81967833b9b7",
+    "ce741981a811dc29",
+    "dd8e7d6ceaa0d7ec",
+    "ed0fe21b1205f165",
+    "fa0571379f82f041"
+   ],
+   "ejemplos": [
+    "City Council approves $4.2 billion Midway District makeover",
+    "City of San Diego on sounder financial footing, with some caveats",
+    "Light mag. 3.6 earthquake - 114 km southeast of San Felipe, Estado de Baja California, Mexico, on Sunday, Nov 8, 2026, at 06:01 am (Mexico_City time)"
+   ]
+  },
+  {
    "termino": "bienestar",
    "n": 18,
    "n_previo": 6,
@@ -749,55 +871,98 @@
    ],
    "ejemplos": [
     "Albañiles detuvieron la construcción de las Casas del Bienestar porque la empresa contratada para el proyecto federal les adeuda dos pagos por jornadas trabajadas; los obreros advirtieron que no reanudarán las actividades hasta recibir el dinero",
-    "Adultos mayores esperan hasta cuatro horas para cobrar la pensión del Bienestar",
-    "Claudia Sheinbaum confirmó el incremento oficial de la Pensión del Bienestar para 2027, garantizando por mandato constitucional que el apoyo económico se mantenga por arriba de la tasa de inflación anual para proteger el poder adquisitivo de más de 13 millones de adultos mayores en todo México"
+    "Claudia Sheinbaum confirmó el incremento oficial de la Pensión del Bienestar para 2027, garantizando por mandato constitucional que el apoyo económico se mantenga por arriba de la tasa de inflación anual para proteger el poder adquisitivo de más de 13 millones de adultos mayores en todo México",
+    "Adultos mayores esperan hasta cuatro horas para cobrar la pensión del Bienestar"
    ]
   },
   {
-   "termino": "jubilados",
-   "n": 15,
-   "n_previo": 3,
+   "termino": "ninos",
+   "n": 18,
+   "n_previo": 6,
    "momento": 12,
    "zonas": {
-    "Playas de Rosarito": 5,
-    "nacional": 5,
+    "nacional": 7,
+    "San Quintín": 4,
     "Tijuana": 4,
-    "Mexicali": 1
+    "Mexicali": 2,
+    "estatal": 1
    },
    "fuentes": {
-    "imparcial": 4,
-    "afn": 3,
-    "gn-062dc8648157": 1,
-    "gn-208187d76ea7": 1,
-    "gn-a96a3aaee9d9": 1,
-    "gn-df1d301d141c": 1,
-    "jornadabc": 1,
+    "imparcial": 6,
+    "afn": 2,
+    "uniradio": 2,
+    "zeta": 2,
+    "gn-0f4fcb595b6c": 1,
+    "gn-5be76c9544e5": 1,
+    "gn-906741a25e9c": 1,
+    "gn-c1d6f8717505": 1,
     "lavoz": 1,
-    "rosarito": 1,
     "soltij": 1
    },
    "un_solo_medio": false,
    "notas": [
-    "24147d08fac9e4f8",
-    "2587b778d5535e0f",
-    "2cd757c3ac009236",
-    "3a4b1e080c717789",
-    "44cde5119e2a86c4",
-    "568ac2ca3b8d2e2a",
-    "5acf69cfc1e724fc",
-    "7a1e7b6797e91975",
+    "0cfd56eba7df9c2d",
+    "37c85e07c4a94cce",
+    "3a69a39be90f2cf7",
+    "4764017be9fff38e",
+    "4a1f447771a2488a",
+    "64b9872dc4716b5d",
+    "75e96089eeeab6d3",
+    "78699f075b0b18c6",
+    "81d6572e1cf500c2",
     "896f666e5da8890c",
-    "94599efe08005941",
-    "b66bbd2fe2ae0a3f",
-    "cc5a5429410045c9",
-    "d9d152c7b8c5571d",
-    "ee21b5f642b60f8a",
-    "ffcb05127ff694e1"
+    "9031b3078ebf677e",
+    "c4364fc14e1c8273",
+    "c6df34009d957c0b",
+    "d5029485276c79be",
+    "d6285f7713c128d1",
+    "d90eb8c9e14bc4eb",
+    "da9fab3ad2ff9f23",
+    "fb8efed5c6baaa96"
    ],
    "ejemplos": [
-    "León XIV llega a Argentina y envía un mensaje a Javier Milei sobre los costos de la austeridad, al defender que la economía debe servir a las personas y pedir atención para trabajadores, jubilados y sectores vulnerables",
-    "Claudia Sheinbaum confirmó el aguinaldo adelantado de 40 días de salario a partir del 10 de noviembre para todos los trabajadores del Estado, servidores públicos, fuerzas armadas, pensionados y jubilados en México que forman parte de los beneficiarios del decreto oficial publicado en el DOF",
-    "China ya tiene más adultos mayores que niños por primera vez: la caída histórica de los nacimientos elevó la dependencia de los jubilados al 23.1% y aumenta la presión sobre las pensiones y los servicios de salud"
+    "Los niños que crecieron en medio de discusiones y conflictos familiares no es que adquieran una mayor inteligencia emocional, sino que aprendieron a leer los mínimos cambios de humor y expresiones faciales como una rigurosa estrategia de defensa, según la psicología",
+    "Lanzan en Tijuana la campaña ReUtiliza para financiar desayunos de 250 niños vulnerables",
+    "Brindan atención y equipos de movilidad a más de 50 niños en jornada binacional de rehabilitación"
+   ]
+  },
+  {
+   "termino": "democrata",
+   "n": 13,
+   "n_previo": 1,
+   "momento": 12,
+   "zonas": {
+    "nacional": 8,
+    "Tijuana": 4,
+    "Mexicali": 1
+   },
+   "fuentes": {
+    "imparcial": 8,
+    "jornadabc": 2,
+    "afn": 1,
+    "lavoz": 1,
+    "soltij": 1
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "00e2f1f177ef35d6",
+    "2573ba673b78fafb",
+    "34da4132260c33c2",
+    "44f4e297cf62e717",
+    "45143e04e815e67a",
+    "5d59fc1897537fd1",
+    "6aa843476ef03efe",
+    "74ab9147631ffef1",
+    "8fb4607a68cf4a14",
+    "9d355f71070587ee",
+    "adbb2b30a284c86e",
+    "d6f885d4045e57ea",
+    "e9ba41cf82d23a92"
+   ],
+   "ejemplos": [
+    "Mayoría demócrata en Congreso de EU no elimina presión de Trump sobre México",
+    "Líder demócrata promete mantener el T-MEC y revocar los aranceles «injustificados» de Trump",
+    "Mayoría demócrata en el Congreso de EU podría frenar políticas migratorias de Trump: Pérez Canchola"
    ]
   },
   {
@@ -837,6 +1002,74 @@
     "Elected officials, union members and grassroots groups celebrate Tuesday’s election results",
     "Election results show San Diego's 2 countywide measures too close to call",
     "2026 Election Results: Imperial Beach mayor ahead of challengers"
+   ]
+  },
+  {
+   "termino": "trabajadores",
+   "n": 40,
+   "n_previo": 29,
+   "momento": 11,
+   "zonas": {
+    "nacional": 25,
+    "Tijuana": 10,
+    "Mexicali": 5
+   },
+   "fuentes": {
+    "imparcial": 21,
+    "afn": 4,
+    "jornadabc": 4,
+    "uniradio": 4,
+    "lavoz": 3,
+    "soltij": 2,
+    "zeta": 2
+   },
+   "un_solo_medio": false,
+   "notas": [
+    "029ab424bc85593c",
+    "035cbd892fec5d9a",
+    "0806fbc8603cfef9",
+    "0ef12baa4fecd355",
+    "17d6b14d3fb84655",
+    "1f8a1c7a9e1b1ead",
+    "21b4bcf2ce0eab61",
+    "2339892117838214",
+    "2382135a32b75e33",
+    "2abaee3a0e7c4fa9",
+    "2d87c7fc2a8dd854",
+    "402f48689c168a05",
+    "48d72383aa24b2b0",
+    "5d461e1a82b1f12d",
+    "68e8e6d43a926507",
+    "76d45712c053fdff",
+    "7b98520aaadf1c73",
+    "7f05e0b0a22f4a83",
+    "86c33f11e68182d3",
+    "8ba8d8b604587ea8",
+    "993ac9853b0b288b",
+    "9a08088945c91e33",
+    "a0ee03187d761123",
+    "a4cf69f7dadce3fe",
+    "aac133fa05bed3e1",
+    "af4246bb10d739de",
+    "ba5fba362c42b174",
+    "bba80c3b48bb2a6c",
+    "bfcbeeb20d523477",
+    "c64388ac8c121630",
+    "c96caf36ec7d0f53",
+    "d9d152c7b8c5571d",
+    "e70dab6a01231b5f",
+    "ebd9e72aec55ccd7",
+    "ee21b5f642b60f8a",
+    "f5e8a89a778fbd31",
+    "f633f0e6efc006e0",
+    "f7dc391dec8a5ac1",
+    "f954e048be0d04f8",
+    "ffb792fe8b221e67"
+   ],
+   "ejemplos": [
+    "Claudia Sheinbaum confirmó el aguinaldo adelantado de 40 días de salario a partir del 10 de noviembre para todos los trabajadores del Estado, servidores públicos, fuerzas armadas, pensionados y jubilados en México que forman parte de los beneficiarios del decreto oficial publicado en el DOF",
+    "La industria maquiladora destina el 96 por ciento de su presupuesto a importar insumos principalmente de EEUU, un reto estructural para el gobierno de Claudia Sheinbaum frente a una dependencia extrema que condena a los trabajadores a bajos salarios y acelera la fuga de talento joven mexicano",
+    "Trabajadores del INE se van a paro en 20 estados para exigir que les dupliquen el sueldo, rechazan el aumento del 6% y consiguen abrir una negociación para mejorar sus ingresos y condiciones laborales"
    ]
   },
   {
@@ -977,55 +1210,6 @@
    ]
   },
   {
-   "termino": "ninos",
-   "n": 17,
-   "n_previo": 6,
-   "momento": 11,
-   "zonas": {
-    "nacional": 7,
-    "San Quintín": 4,
-    "Tijuana": 4,
-    "Mexicali": 2
-   },
-   "fuentes": {
-    "imparcial": 6,
-    "afn": 2,
-    "zeta": 2,
-    "gn-0f4fcb595b6c": 1,
-    "gn-5be76c9544e5": 1,
-    "gn-906741a25e9c": 1,
-    "gn-c1d6f8717505": 1,
-    "lavoz": 1,
-    "soltij": 1,
-    "uniradio": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "0cfd56eba7df9c2d",
-    "37c85e07c4a94cce",
-    "3a69a39be90f2cf7",
-    "4764017be9fff38e",
-    "4a1f447771a2488a",
-    "64b9872dc4716b5d",
-    "75e96089eeeab6d3",
-    "78699f075b0b18c6",
-    "81d6572e1cf500c2",
-    "896f666e5da8890c",
-    "9031b3078ebf677e",
-    "c6df34009d957c0b",
-    "d5029485276c79be",
-    "d6285f7713c128d1",
-    "d90eb8c9e14bc4eb",
-    "da9fab3ad2ff9f23",
-    "fb8efed5c6baaa96"
-   ],
-   "ejemplos": [
-    "Los niños que crecieron en medio de discusiones y conflictos familiares no es que adquieran una mayor inteligencia emocional, sino que aprendieron a leer los mínimos cambios de humor y expresiones faciales como una rigurosa estrategia de defensa, según la psicología",
-    "Lanzan en Tijuana la campaña ReUtiliza para financiar desayunos de 250 niños vulnerables",
-    "Brindan atención y equipos de movilidad a más de 50 niños en jornada binacional de rehabilitación"
-   ]
-  },
-  {
    "termino": "luis",
    "n": 15,
    "n_previo": 4,
@@ -1063,145 +1247,33 @@
     "Luis Carlos Ugalde defiende elección de 2006 y rechaza señalamientos de Morena",
     "Luis Núñez recomienda planear el uso de caja de ahorro y aguinaldo"
    ]
-  },
-  {
-   "termino": "democrata",
-   "n": 12,
-   "n_previo": 1,
-   "momento": 11,
-   "zonas": {
-    "nacional": 8,
-    "Tijuana": 3,
-    "Mexicali": 1
-   },
-   "fuentes": {
-    "imparcial": 8,
-    "afn": 1,
-    "jornadabc": 1,
-    "lavoz": 1,
-    "soltij": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "00e2f1f177ef35d6",
-    "2573ba673b78fafb",
-    "34da4132260c33c2",
-    "44f4e297cf62e717",
-    "45143e04e815e67a",
-    "5d59fc1897537fd1",
-    "6aa843476ef03efe",
-    "74ab9147631ffef1",
-    "8fb4607a68cf4a14",
-    "adbb2b30a284c86e",
-    "d6f885d4045e57ea",
-    "e9ba41cf82d23a92"
-   ],
-   "ejemplos": [
-    "Líder demócrata promete mantener el T-MEC y revocar los aranceles «injustificados» de Trump",
-    "Mayoría demócrata en el Congreso de EU podría frenar políticas migratorias de Trump: Pérez Canchola",
-    "Richard Neal, el congresista demócrata que promete revertir aranceles de Trump y mantener el T-MEC con México y Canadá"
-   ]
-  },
-  {
-   "termino": "filas",
-   "n": 12,
-   "n_previo": 1,
-   "momento": 11,
-   "zonas": {
-    "Tijuana": 8,
-    "San Diego": 6,
-    "Mexicali": 2,
-    "nacional": 2
-   },
-   "fuentes": {
-    "gn-f8497491006c": 6,
-    "imparcial": 4,
-    "jornadabc": 1,
-    "soltij": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "370d403a43f00586",
-    "73c87a23713e3a51",
-    "8ca87fd20425208b",
-    "987efa46a02c69e3",
-    "9f6254c6c28f6893",
-    "a594160ed06717ef",
-    "bd1d8e2d15b0e3f1",
-    "be5987d2a824453b",
-    "c43918fe07a9fc3c",
-    "db619a2db7d7fa10",
-    "eb9683484ac8e2d4",
-    "ec34212f6808afe0"
-   ],
-   "ejemplos": [
-    "San Ysidro registra filas de tres horas en garitas de Tijuana (Datos actualizados a las 18:00 horas PST) Los cruces fronterizos reportan alta saturación este sábado, siendo la garita de San Ysidro la más afectada con demoras de hasta tres horas en el carril tra",
-    "Garita de Otay registra filas intensas de hasta 160 minutos de espera (Datos actualizados a las 10:00 AM PST) Este domingo se reporta una fuerte congestión en las garitas de Baja California, donde Otay Mesa encabeza los tiempos de espera más prolongad",
-    "🚨 Garita de Otay registra filas intensas de hasta 160 minutos de espera (Datos actualizados a las 10:00 AM PST) Este domingo se reporta una fuerte congestión en las garitas de Baja California, donde Otay Mesa encabeza los tiempos de espera más prolong"
-   ]
-  },
-  {
-   "termino": "hongo",
-   "n": 11,
-   "n_previo": 0,
-   "momento": 11,
-   "zonas": {
-    "Mexicali": 4,
-    "Tecate": 4,
-    "nacional": 3,
-    "Tijuana": 2
-   },
-   "fuentes": {
-    "gn-df1d301d141c": 3,
-    "imparcial": 2,
-    "afn": 1,
-    "gn-208187d76ea7": 1,
-    "gn-a96a3aaee9d9": 1,
-    "jornadabc": 1,
-    "lavoz": 1,
-    "zeta": 1
-   },
-   "un_solo_medio": false,
-   "notas": [
-    "201031979fae46f4",
-    "44b8fe7af1d51ffc",
-    "5139765d112ecee0",
-    "686a1c016a492e8c",
-    "843d793a451517ca",
-    "8b42318e8e6a3b63",
-    "8eb69b8c4f8a2596",
-    "bc807e68671dd4cd",
-    "d743d6ce3e7aeffc",
-    "e47b08a8fcc49841",
-    "e78844477f00ca78"
-   ],
-   "ejemplos": [
-    "Reo se fuga de El Hongo I, en Tecate; antes escapó del Cereso de Mexicali",
-    "¿Alguien tiene una segueta? Reo escapa de El Hongo; lleva dos fugas en tres meses",
-    "Aseguran hidrocarburo y resguardan inmueble durante operativo en El Hongo"
-   ]
   }
  ],
  "descartados": [
   {
    "termino": "estados",
-   "n": 67,
+   "n": 71,
    "porque": "duplica «estados unidos»"
   },
   {
    "termino": "unidos",
-   "n": 52,
+   "n": 53,
    "porque": "duplica «estados unidos»"
   },
   {
    "termino": "poder",
-   "n": 25,
+   "n": 27,
    "porque": "duplica «poder judicial»"
   },
   {
    "termino": "judicial",
-   "n": 23,
+   "n": 25,
    "porque": "duplica «poder judicial»"
+  },
+  {
+   "termino": "pilar",
+   "n": 21,
+   "porque": "duplica «marina pilar»"
   },
   {
    "termino": "informe",
@@ -1209,19 +1281,19 @@
    "porque": "duplica «quinto informe»"
   },
   {
-   "termino": "pilar",
-   "n": 19,
-   "porque": "duplica «marina pilar»"
-  },
-  {
    "termino": "claudia",
-   "n": 18,
+   "n": 19,
    "porque": "duplica «claudia sheinbaum»"
   },
   {
    "termino": "guadalupe",
-   "n": 18,
+   "n": 19,
    "porque": "duplica «guadalupe taddei»"
+  },
+  {
+   "termino": "padre",
+   "n": 16,
+   "porque": "duplica «padre meghan markle»"
   },
   {
    "termino": "results",
@@ -1244,19 +1316,19 @@
    "porque": "duplica «padre meghan markle»"
   },
   {
-   "termino": "padre",
-   "n": 15,
-   "porque": "duplica «padre meghan markle»"
-  },
-  {
    "termino": "pena",
    "n": 15,
    "porque": "duplica «santiago pena»"
   },
   {
    "termino": "quinto",
-   "n": 14,
+   "n": 15,
    "porque": "duplica «quinto informe»"
+  },
+  {
+   "termino": "corte",
+   "n": 13,
+   "porque": "duplica «suprema corte»"
   },
   {
    "termino": "ines",
@@ -1269,24 +1341,19 @@
    "porque": "duplica «padre meghan markle»"
   },
   {
+   "termino": "mochila",
+   "n": 13,
+   "porque": "duplica «mochila emergencia»"
+  },
+  {
    "termino": "santiago",
    "n": 13,
    "porque": "duplica «santiago pena»"
-  },
-  {
-   "termino": "actualizados",
-   "n": 12,
-   "porque": "duplica «datos actualizados»"
-  },
-  {
-   "termino": "corte",
-   "n": 12,
-   "porque": "duplica «suprema corte»"
   }
  ],
  "por_zona": {
   "Tijuana": {
-   "notas_ventana": 578,
+   "notas_ventana": 604,
    "minimo": 3,
    "temas": [
     {
@@ -1341,6 +1408,39 @@
      ]
     },
     {
+     "termino": "sanchez",
+     "n": 11,
+     "n_previo": 2,
+     "momento": 9,
+     "zonas": {
+      "Tijuana": 11
+     },
+     "fuentes": {
+      "afn": 6,
+      "soltij": 3,
+      "jornadabc": 2
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "0ecb700fa2156592",
+      "19a0791f84b27d3f",
+      "228bebcd2d0f7740",
+      "6b4f426d80ed5598",
+      "a6dad5cd09463985",
+      "a9be2bcf86662833",
+      "b511909a54b559ec",
+      "c7e3611c9d0b09a3",
+      "da81cb3a93218123",
+      "e05cef296e815ba8",
+      "f04583abfc7d7578"
+     ],
+     "ejemplos": [
+      "Padres de familia exigen inspección por daños estructurales en kínder de la Sánchez Taboada",
+      "Rechaza Evelyn Sánchez cambios a la paridad de género en BC",
+      "Padres de familia exigen inspección por daños en la estructura de un kínder de la Sánchez Taboada"
+     ]
+    },
+    {
      "termino": "gana",
      "n": 10,
      "n_previo": 1,
@@ -1374,35 +1474,71 @@
      ]
     },
     {
-     "termino": "sanchez",
+     "termino": "paro",
      "n": 10,
-     "n_previo": 2,
-     "momento": 8,
+     "n_previo": 1,
+     "momento": 9,
      "zonas": {
       "Tijuana": 10
      },
      "fuentes": {
-      "afn": 6,
+      "afn": 5,
       "jornadabc": 2,
-      "soltij": 2
+      "zeta": 2,
+      "soltij": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "0ecb700fa2156592",
-      "19a0791f84b27d3f",
-      "228bebcd2d0f7740",
-      "6b4f426d80ed5598",
-      "a6dad5cd09463985",
-      "a9be2bcf86662833",
-      "b511909a54b559ec",
-      "c7e3611c9d0b09a3",
-      "da81cb3a93218123",
-      "e05cef296e815ba8"
+      "0cfd5bdc4d49f540",
+      "17d6b14d3fb84655",
+      "2abaee3a0e7c4fa9",
+      "2d87c7fc2a8dd854",
+      "7b98520aaadf1c73",
+      "a16c3dbeaa9aab0e",
+      "a4cf69f7dadce3fe",
+      "c96caf36ec7d0f53",
+      "d5392683ce6cf09b",
+      "f20adedf90a1fca6"
      ],
      "ejemplos": [
-      "Rechaza Evelyn Sánchez cambios a la paridad de género en BC",
-      "Padres de familia exigen inspección por daños en la estructura de un kínder de la Sánchez Taboada",
-      "Sánchez rechaza propuesta que frenaría la paridad de género en siguientes elecciones"
+      "Sindicatos y trabajadores del Poder Judicial anuncian fin del paro de labores; mañana se reintegran a los órganos jurisdiccionales",
+      "INE ofrece revisión para elevar aumento salarial tras paro de 544 módulos en todo el país",
+      "“Venga mañana”: paro laboral en el INE deja a ciudadanos sin poder realizar sus trámites"
+     ]
+    },
+    {
+     "termino": "poder judicial",
+     "n": 9,
+     "n_previo": 0,
+     "momento": 9,
+     "zonas": {
+      "Tijuana": 9,
+      "San Quintín": 2
+     },
+     "fuentes": {
+      "afn": 3,
+      "jornadabc": 2,
+      "gn-36bce513f849": 1,
+      "soltij": 1,
+      "uniradio": 1,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "035cbd892fec5d9a",
+      "2abaee3a0e7c4fa9",
+      "35c1c409bc8cd214",
+      "3d0b2bb4af6ae1c7",
+      "898260dfcace59ba",
+      "98147829a12036de",
+      "c96caf36ec7d0f53",
+      "d2fe0edaaef3f9d4",
+      "f633f0e6efc006e0"
+     ],
+     "ejemplos": [
+      "Sindicatos y trabajadores del Poder Judicial anuncian fin del paro de labores; mañana se reintegran a los órganos jurisdiccionales",
+      "Investigan a 10 jueces por presunto \"cártel inmobiliario\" en Tijuana y San Quintín; Poder Judicial de BC cierra capacitación de Ley Daryela",
+      "Investigan a 10 jueces por presunto \"cártel inmobiliario\" en Tijuana y San Quintín; Poder Judicial de BC cierra capacitación de Ley Daryela"
      ]
     },
     {
@@ -1440,38 +1576,6 @@
      ]
     },
     {
-     "termino": "paro",
-     "n": 9,
-     "n_previo": 1,
-     "momento": 8,
-     "zonas": {
-      "Tijuana": 9
-     },
-     "fuentes": {
-      "afn": 5,
-      "zeta": 2,
-      "jornadabc": 1,
-      "soltij": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "0cfd5bdc4d49f540",
-      "17d6b14d3fb84655",
-      "2d87c7fc2a8dd854",
-      "7b98520aaadf1c73",
-      "a16c3dbeaa9aab0e",
-      "a4cf69f7dadce3fe",
-      "c96caf36ec7d0f53",
-      "d5392683ce6cf09b",
-      "f20adedf90a1fca6"
-     ],
-     "ejemplos": [
-      "INE ofrece revisión para elevar aumento salarial tras paro de 544 módulos en todo el país",
-      "“Venga mañana”: paro laboral en el INE deja a ciudadanos sin poder realizar sus trámites",
-      "Trabajadores del INE en BC se unen al paro nacional, exigen mejores salarios"
-     ]
-    },
-    {
      "termino": "filas",
      "n": 8,
      "n_previo": 0,
@@ -1504,6 +1608,39 @@
      ]
     },
     {
+     "termino": "desaparecida",
+     "n": 8,
+     "n_previo": 1,
+     "momento": 7,
+     "zonas": {
+      "Tijuana": 8
+     },
+     "fuentes": {
+      "imparcial": 2,
+      "soltij": 2,
+      "afn": 1,
+      "gn-c3e35c36380b": 1,
+      "jornadabc": 1,
+      "zeta": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "0f90200fa369559b",
+      "2f7327b579675446",
+      "63b42447a927c0ad",
+      "6bae0ec79eb24453",
+      "83641fb5e3a0bbce",
+      "9cc39cd22544074c",
+      "c75cbf9d2ef94b17",
+      "fc86405e07c22c53"
+     ],
+     "ejemplos": [
+      "Buscan a Katia Guadalupe, de 17 años, desaparecida en Tijuana",
+      "Buscan a Katia Guadalupe, joven de 17 años desaparecida en Tijuana desde agosto",
+      "Buscan a adolescente desaparecida en Mariano Matamoros"
+     ]
+    },
+    {
      "termino": "ofrece",
      "n": 8,
      "n_previo": 1,
@@ -1532,38 +1669,6 @@
       "INE ofrece revisión para elevar aumento salarial tras paro de 544 módulos en todo el país",
       "Trabajadores del INE van a paro en 20 entidades; organismo ofrece 6% de aumento salarial",
       "Evelyn Sánchez ofrece atención ciudadana con las \"Jornadas con el Pueblo"
-     ]
-    },
-    {
-     "termino": "poder judicial",
-     "n": 7,
-     "n_previo": 0,
-     "momento": 7,
-     "zonas": {
-      "Tijuana": 7,
-      "San Quintín": 1
-     },
-     "fuentes": {
-      "afn": 3,
-      "jornadabc": 1,
-      "soltij": 1,
-      "uniradio": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "035cbd892fec5d9a",
-      "35c1c409bc8cd214",
-      "3d0b2bb4af6ae1c7",
-      "898260dfcace59ba",
-      "98147829a12036de",
-      "c96caf36ec7d0f53",
-      "f633f0e6efc006e0"
-     ],
-     "ejemplos": [
-      "Investigan a 10 jueces por presunto \"cártel inmobiliario\" en Tijuana y San Quintín; Poder Judicial de BC cierra capacitación de Ley Daryela",
-      "Poder Judicial y sindicatos acuerdan modificar evaluaciones para que no tengan efectos sancionatorios",
-      "Trabajadores del Poder Judicial de la Federación paran labores en Tijuana"
      ]
     },
     {
@@ -1660,7 +1765,7 @@
      ]
     },
     {
-     "termino": "desaparecida",
+     "termino": "presupuesto",
      "n": 7,
      "n_previo": 1,
      "momento": 6,
@@ -1668,27 +1773,25 @@
       "Tijuana": 7
      },
      "fuentes": {
-      "soltij": 2,
-      "afn": 1,
-      "gn-c3e35c36380b": 1,
-      "imparcial": 1,
+      "afn": 4,
       "jornadabc": 1,
+      "soltij": 1,
       "zeta": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "0f90200fa369559b",
-      "2f7327b579675446",
-      "63b42447a927c0ad",
-      "6bae0ec79eb24453",
-      "83641fb5e3a0bbce",
-      "9cc39cd22544074c",
-      "fc86405e07c22c53"
+      "07a34a2baf55577e",
+      "1ab93d67722f8f13",
+      "2238db6aa3251d62",
+      "346b26a62f96d48d",
+      "5c96a221a8e48bc3",
+      "afef5df962665d65",
+      "ccc4911bdf8eeb0c"
      ],
      "ejemplos": [
-      "Buscan a Katia Guadalupe, joven de 17 años desaparecida en Tijuana desde agosto",
-      "Buscan a adolescente desaparecida en Mariano Matamoros",
-      "Hallan sin vida a Sayuri Tajimaroa Ponce en Tijuana; llevaba 4 días desaparecida"
+      "Presupuesto federal para BC llegaría a los 78 mil 995 mdp en 2027",
+      "Diputados inician la discusión del Presupuesto de Egresos 2027; contempla reducción al INE",
+      "Candidatos a rectoría de UABC abordan presupuesto, seguridad y sobrecarga laboral de docentes"
      ]
     },
     {
@@ -1792,6 +1895,40 @@
      ]
     },
     {
+     "termino": "deja",
+     "n": 9,
+     "n_previo": 4,
+     "momento": 5,
+     "zonas": {
+      "Tijuana": 9,
+      "Playas de Rosarito": 1
+     },
+     "fuentes": {
+      "soltij": 4,
+      "zeta": 2,
+      "gn-a96a3aaee9d9": 1,
+      "imparcial": 1,
+      "jornadabc": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "2843bcbaa593f7fb",
+      "2d87c7fc2a8dd854",
+      "4ceba71c12f40796",
+      "6f2d655e2e2aef46",
+      "7cd1b5adf6c6c524",
+      "a57080dda5b62049",
+      "c6fad6dfcb85734e",
+      "d5392683ce6cf09b",
+      "dab5ee096ba38145"
+     ],
+     "ejemplos": [
+      "Explosión deja a adulto mayor con quemaduras graves en Santa Fe, Tijuana",
+      "Deja tres lesionados choque entre dos motocicletas en Chilpancingo",
+      "“Venga mañana”: paro laboral en el INE deja a ciudadanos sin poder realizar sus trámites"
+     ]
+    },
+    {
      "termino": "garita",
      "n": 9,
      "n_previo": 4,
@@ -1821,6 +1958,38 @@
       "San Ysidro registra filas de tres horas en garitas de Tijuana (Datos actualizados a las 18:00 horas PST) Los cruces fronterizos reportan alta saturación este sábado, siendo la garita de San Ysidro la más afectada con demoras de hasta tres horas en el carril tra",
       "Garita de Otay registra filas intensas de hasta 160 minutos de espera (Datos actualizados a las 10:00 AM PST) Este domingo se reporta una fuerte congestión en las garitas de Baja California, donde Otay Mesa encabeza los tiempos de espera más prolongad",
       "🚨 Garita de Otay registra filas intensas de hasta 160 minutos de espera (Datos actualizados a las 10:00 AM PST) Este domingo se reporta una fuerte congestión en las garitas de Baja California, donde Otay Mesa encabeza los tiempos de espera más prolong"
+     ]
+    },
+    {
+     "termino": "trump",
+     "n": 9,
+     "n_previo": 4,
+     "momento": 5,
+     "zonas": {
+      "Tijuana": 9
+     },
+     "fuentes": {
+      "jornadabc": 4,
+      "afn": 2,
+      "zeta": 2,
+      "soltij": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "15984209c8983b1b",
+      "2573ba673b78fafb",
+      "7eb8d88bc81d5a90",
+      "8c3219a9fe202491",
+      "9d355f71070587ee",
+      "a9234bcc5cf54ef1",
+      "cd5560d8dc567935",
+      "d662c4015179a889",
+      "d6f885d4045e57ea"
+     ],
+     "ejemplos": [
+      "Mayoría demócrata en Congreso de EU no elimina presión de Trump sobre México",
+      "Líder demócrata promete mantener el T-MEC y revocar los aranceles «injustificados» de Trump",
+      "Mayoría demócrata en el Congreso de EU podría frenar políticas migratorias de Trump: Pérez Canchola"
      ]
     },
     {
@@ -1883,32 +2052,33 @@
      ]
     },
     {
-     "termino": "presupuesto",
+     "termino": "capacitacion",
      "n": 6,
      "n_previo": 1,
      "momento": 5,
      "zonas": {
-      "Tijuana": 6
+      "Tijuana": 6,
+      "San Quintín": 2
      },
      "fuentes": {
-      "afn": 3,
-      "jornadabc": 1,
-      "soltij": 1,
-      "zeta": 1
+      "afn": 2,
+      "soltij": 2,
+      "gn-36bce513f849": 1,
+      "uniradio": 1
      },
      "un_solo_medio": false,
      "notas": [
-      "1ab93d67722f8f13",
-      "2238db6aa3251d62",
-      "346b26a62f96d48d",
-      "5c96a221a8e48bc3",
-      "afef5df962665d65",
-      "ccc4911bdf8eeb0c"
+      "195546eaead9f264",
+      "402f778dce085abc",
+      "898260dfcace59ba",
+      "d2fe0edaaef3f9d4",
+      "d3f9c5192735e174",
+      "dfc7d628fa8b8903"
      ],
      "ejemplos": [
-      "Presupuesto federal para BC llegaría a los 78 mil 995 mdp en 2027",
-      "Candidatos a rectoría de UABC abordan presupuesto, seguridad y sobrecarga laboral de docentes",
-      "Reforma al TEJA costará al presupuesto 7 mdp anuales, señalan"
+      "Falta capacitación en BC para identificación forense, dice directora de Grupo Conciencia",
+      "Investigan a 10 jueces por presunto \"cártel inmobiliario\" en Tijuana y San Quintín; Poder Judicial de BC cierra capacitación de Ley Daryela",
+      "Investigan a 10 jueces por presunto \"cártel inmobiliario\" en Tijuana y San Quintín; Poder Judicial de BC cierra capacitación de Ley Daryela"
      ]
     },
     {
@@ -1996,102 +2166,11 @@
       "Informa Evelyn Sánchez sobre programas sociales a colonos de Tijuana",
       "Plantea Evelyn Sánchez fortalecer a pequeños negocios en Tijuana"
      ]
-    },
-    {
-     "termino": "fenomeno nino",
-     "n": 5,
-     "n_previo": 0,
-     "momento": 5,
-     "zonas": {
-      "Tijuana": 5
-     },
-     "fuentes": {
-      "afn": 3,
-      "imparcial": 1,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "2c18d9dd62cb72d7",
-      "c563b25343b01cb9",
-      "dae83f7869a1ce10",
-      "f3e4d0f14a8cc440",
-      "f9029adfd3394ec4"
-     ],
-     "ejemplos": [
-      "Realizan mesa de respuesta ante el fenómeno de \"El Niño",
-      "Impulsan prevención de riesgos ante fenómeno El Niño en Tijuana",
-      "Da Ismael Burgueño seguimiento a la Mesa Permanente de Preparación y Respuesta ante el fenómeno de El Niño"
-     ]
-    },
-    {
-     "termino": "deja",
-     "n": 8,
-     "n_previo": 4,
-     "momento": 4,
-     "zonas": {
-      "Tijuana": 8,
-      "Playas de Rosarito": 1
-     },
-     "fuentes": {
-      "soltij": 4,
-      "gn-a96a3aaee9d9": 1,
-      "imparcial": 1,
-      "jornadabc": 1,
-      "zeta": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "2843bcbaa593f7fb",
-      "2d87c7fc2a8dd854",
-      "6f2d655e2e2aef46",
-      "7cd1b5adf6c6c524",
-      "a57080dda5b62049",
-      "c6fad6dfcb85734e",
-      "d5392683ce6cf09b",
-      "dab5ee096ba38145"
-     ],
-     "ejemplos": [
-      "Deja tres lesionados choque entre dos motocicletas en Chilpancingo",
-      "“Venga mañana”: paro laboral en el INE deja a ciudadanos sin poder realizar sus trámites",
-      "Atropellamiento a la altura del Hospital General deja cinco personas lesionadas"
-     ]
-    },
-    {
-     "termino": "trump",
-     "n": 8,
-     "n_previo": 4,
-     "momento": 4,
-     "zonas": {
-      "Tijuana": 8
-     },
-     "fuentes": {
-      "jornadabc": 3,
-      "afn": 2,
-      "zeta": 2,
-      "soltij": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "15984209c8983b1b",
-      "2573ba673b78fafb",
-      "7eb8d88bc81d5a90",
-      "8c3219a9fe202491",
-      "a9234bcc5cf54ef1",
-      "cd5560d8dc567935",
-      "d662c4015179a889",
-      "d6f885d4045e57ea"
-     ],
-     "ejemplos": [
-      "Líder demócrata promete mantener el T-MEC y revocar los aranceles «injustificados» de Trump",
-      "Mayoría demócrata en el Congreso de EU podría frenar políticas migratorias de Trump: Pérez Canchola",
-      "Desgaste de políticas de Trump impulsó a los demócratas, sostiene académico de Cetys"
-     ]
     }
    ]
   },
   "Mexicali": {
-   "notas_ventana": 220,
+   "notas_ventana": 226,
    "minimo": 3,
    "temas": [
     {
@@ -2125,6 +2204,43 @@
      ]
     },
     {
+     "termino": "valle",
+     "n": 13,
+     "n_previo": 8,
+     "momento": 5,
+     "zonas": {
+      "Mexicali": 13
+     },
+     "fuentes": {
+      "imparcial": 5,
+      "lavoz": 5,
+      "jornadabc": 1,
+      "radarbc": 1,
+      "uniradio": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "017e7c5303e82218",
+      "0651fdeb9ee88069",
+      "0a936539f5d5f602",
+      "33fe387b414ff5a5",
+      "3c8c1d208e51378e",
+      "45d229ab3659fb65",
+      "4fc2fb7d79d952fe",
+      "70f49a25c3f04b21",
+      "775b65e99e5bb015",
+      "90f9b123288ea70f",
+      "aa272120dd1a04f2",
+      "c9bcaec9cc3ea492",
+      "d86b9771f1f14518"
+     ],
+     "ejemplos": [
+      "FCASI cumplió 20 años impulsando en desarrollo del Valle de Mexicali: UABC",
+      "Brinda UABC casi 2 mil servicios gratuitos en el Valle de Mexicali",
+      "FOTOS DE LA SEMANA: Del concierto de Carín León, Día de Muertos y los hallazgos de restos humanos en el valle de Mexicali"
+     ]
+    },
+    {
      "termino": "congreso",
      "n": 5,
      "n_previo": 0,
@@ -2151,38 +2267,29 @@
      ]
     },
     {
-     "termino": "valle",
-     "n": 12,
-     "n_previo": 8,
-     "momento": 4,
+     "termino": "islas agrarias",
+     "n": 5,
+     "n_previo": 0,
+     "momento": 5,
      "zonas": {
-      "Mexicali": 12
+      "Mexicali": 5
      },
      "fuentes": {
-      "imparcial": 5,
-      "lavoz": 5,
-      "radarbc": 1,
-      "uniradio": 1
+      "lavoz": 3,
+      "imparcial": 2
      },
      "un_solo_medio": false,
      "notas": [
-      "0651fdeb9ee88069",
-      "0a936539f5d5f602",
-      "33fe387b414ff5a5",
-      "3c8c1d208e51378e",
-      "45d229ab3659fb65",
-      "4fc2fb7d79d952fe",
-      "70f49a25c3f04b21",
-      "775b65e99e5bb015",
-      "90f9b123288ea70f",
-      "aa272120dd1a04f2",
-      "c9bcaec9cc3ea492",
-      "d86b9771f1f14518"
+      "2d0e698ae7b41523",
+      "5597d3cb9b3084d5",
+      "8cd864483a29fbc9",
+      "cb1fe0f75aa587af",
+      "fff395fd4ae11e18"
      ],
      "ejemplos": [
-      "Brinda UABC casi 2 mil servicios gratuitos en el Valle de Mexicali",
-      "FOTOS DE LA SEMANA: Del concierto de Carín León, Día de Muertos y los hallazgos de restos humanos en el valle de Mexicali",
-      "Investigan muerte de hombre dentro de panteón en el Valle de Mexicali"
+      "Confirman bacterias en agua en Islas Agrarias B en Mexicali; buscan conectarla a red potable",
+      "COEPRIS confirman bacterias en agua de Islas Agrarias B en el Vallle de Mexicali; buscan conectarla a red potable",
+      "Escuelas del ejido Islas Agrarias B toman clases a distancia por bacteria en agua"
      ]
     },
     {
@@ -2316,7 +2423,7 @@
      ]
     },
     {
-     "termino": "islas agrarias",
+     "termino": "mochila emergencia",
      "n": 4,
      "n_previo": 0,
      "momento": 4,
@@ -2324,20 +2431,19 @@
       "Mexicali": 4
      },
      "fuentes": {
-      "lavoz": 3,
-      "imparcial": 1
+      "lavoz": 4
      },
-     "un_solo_medio": false,
+     "un_solo_medio": true,
      "notas": [
-      "2d0e698ae7b41523",
-      "8cd864483a29fbc9",
-      "cb1fe0f75aa587af",
-      "fff395fd4ae11e18"
+      "26e460678f9a02d5",
+      "2f4281e502cb528a",
+      "8c30aa01445a9753",
+      "e04a8c7a3789dbe2"
      ],
      "ejemplos": [
-      "COEPRIS confirman bacterias en agua de Islas Agrarias B en el Vallle de Mexicali; buscan conectarla a red potable",
-      "Escuelas del ejido Islas Agrarias B toman clases a distancia por bacteria en agua",
-      "Siguen mesas de trabajo por agua sucia en Islas Agrarias B"
+      "¿Mochila de emergencia para mascotas? Así la puedes armar",
+      "¿Cuánto cuesta armar una mochila de emergencia en México?",
+      "¿Qué contiene la mochila de emergencia?"
      ]
     },
     {
@@ -2713,35 +2819,11 @@
       "La cachanilla disputará el encuentro internacional del 11 al 14 de noviembre tras 13 años en el fútbol americano",
       "Ensenadense apunta a la selección mexicana de futbol"
      ]
-    },
-    {
-     "termino": "justicia",
-     "n": 3,
-     "n_previo": 0,
-     "momento": 3,
-     "zonas": {
-      "Mexicali": 3
-     },
-     "fuentes": {
-      "lavoz": 2,
-      "jornadabc": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "7c092e4b42b4b83a",
-      "b04739c94f6e510d",
-      "f94724b5bbf08d52"
-     ],
-     "ejemplos": [
-      "Madre de Rudy se arrodilla para pedir justicia por el homicidio de su hijo en Mexicali",
-      "Familiares de Rudy se manifestaron afuera de la FGE para exigir justicia",
-      "Resuelve Centro Estatal de Justicia Alternativa de manera exitosa más de 4 mil 200 casos en un año"
-     ]
     }
    ]
   },
   "Ensenada": {
-   "notas_ventana": 44,
+   "notas_ventana": 46,
    "minimo": 3,
    "temas": [
     {
@@ -2824,7 +2906,7 @@
    ]
   },
   "Playas de Rosarito": {
-   "notas_ventana": 66,
+   "notas_ventana": 68,
    "minimo": 3,
    "temas": [
     {
@@ -3103,7 +3185,7 @@
    ]
   },
   "Tecate": {
-   "notas_ventana": 46,
+   "notas_ventana": 48,
    "minimo": 3,
    "temas": [
     {
@@ -3341,7 +3423,7 @@
    ]
   },
   "San Quintín": {
-   "notas_ventana": 36,
+   "notas_ventana": 39,
    "minimo": 3,
    "temas": [
     {
@@ -3596,9 +3678,62 @@
    ]
   },
   "San Felipe": {
-   "notas_ventana": 19,
+   "notas_ventana": 21,
    "minimo": 3,
    "temas": [
+    {
+     "termino": "city",
+     "n": 9,
+     "n_previo": 6,
+     "momento": 3,
+     "zonas": {
+      "San Felipe": 9
+     },
+     "fuentes": {
+      "gn-13afd86dbb5f": 9
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "1423b3bc6334512d",
+      "1a87950b42ae675b",
+      "297fc1713c4c8780",
+      "4892221aa9faec3c",
+      "506bfb3e3cd5e49a",
+      "7b7c95002555b791",
+      "7bf8a2f4966c020e",
+      "8150b0529ef5a392",
+      "dd8e7d6ceaa0d7ec"
+     ],
+     "ejemplos": [
+      "Light mag. 3.6 earthquake - 114 km southeast of San Felipe, Estado de Baja California, Mexico, on Sunday, Nov 8, 2026, at 06:01 am (Mexico_City time)",
+      "Terremoto leve mag. 3.4 - Sonora, 61 km al noreste de San Felipe, Baja California, México, Monday 9 Nov 2026 a las 09:05 (Hora Mexico_City)",
+      "Light mag. 3.4 earthquake - 119 km southeast of San Felipe, Estado de Baja California, Mexico, on Sunday, Nov 8, 2026, at 08:32 am (Mexico_City time)"
+     ]
+    },
+    {
+     "termino": "felipe city",
+     "n": 4,
+     "n_previo": 1,
+     "momento": 3,
+     "zonas": {
+      "San Felipe": 4
+     },
+     "fuentes": {
+      "gn-13afd86dbb5f": 4
+     },
+     "un_solo_medio": true,
+     "notas": [
+      "1423b3bc6334512d",
+      "1a87950b42ae675b",
+      "506bfb3e3cd5e49a",
+      "8150b0529ef5a392"
+     ],
+     "ejemplos": [
+      "Terremoto leve mag. 3.4 - Sonora, 61 km al noreste de San Felipe, Baja California, México, Monday 9 Nov 2026 a las 09:05 (Hora Mexico_City)",
+      "Terremoto leve mag. 3.5 - 97 km al sur de San Felipe, Baja California, México, Monday 9 Nov 2026 a las 07:16 (Hora Mexico_City)",
+      "Terremoto leve mag. 3.6 - 114 km al sureste de San Felipe, Baja California, México, Sunday 8 Nov 2026 a las 06:01 (Hora Mexico_City)"
+     ]
+    },
     {
      "termino": "earthquake southeast felipe",
      "n": 3,
@@ -3700,17 +3835,17 @@
     },
     {
      "termino": "felipe",
-     "n": 19,
+     "n": 21,
      "n_previo": 39,
-     "momento": -20,
+     "momento": -18,
      "zonas": {
-      "San Felipe": 19,
+      "San Felipe": 21,
       "Mexicali": 2,
       "San Quintín": 1,
       "Tijuana": 1
      },
      "fuentes": {
-      "gn-13afd86dbb5f": 8,
+      "gn-13afd86dbb5f": 10,
       "gn-507c32aa93b3": 4,
       "gn-291a95aaf8ce": 1,
       "gn-4c772506798b": 1,
@@ -3722,12 +3857,14 @@
      },
      "un_solo_medio": false,
      "notas": [
+      "1423b3bc6334512d",
       "1a87950b42ae675b",
       "1c44639136af5ca0",
       "1d1cfd39924e625f",
       "297fc1713c4c8780",
       "3a9ae978310d671b",
       "4892221aa9faec3c",
+      "506bfb3e3cd5e49a",
       "593d9584df5fbdef",
       "732d0f8926715c6b",
       "7b7c95002555b791",
@@ -3751,19 +3888,19 @@
    ]
   },
   "San Diego": {
-   "notas_ventana": 308,
+   "notas_ventana": 324,
    "minimo": 3,
    "temas": [
     {
      "termino": "democrats",
-     "n": 16,
+     "n": 17,
      "n_previo": 2,
-     "momento": 14,
+     "momento": 15,
      "zonas": {
-      "San Diego": 16
+      "San Diego": 17
      },
      "fuentes": {
-      "kpbs": 13,
+      "kpbs": 14,
       "timessd": 2,
       "inewsource": 1
      },
@@ -3776,6 +3913,7 @@
       "5a47aeecd20480d9",
       "66f1e7b4380ecf1b",
       "731448d7382d4003",
+      "8c8b7db860594aca",
       "906066e8bfc5250c",
       "984e3b00ea95acce",
       "a480bd1e3a66df0f",
@@ -3787,9 +3925,9 @@
       "fa0571379f82f041"
      ],
      "ejemplos": [
+      "California voters defeat billionaire tax proposal that divided Democrats",
       "Democrats won big on issues like immigration. But ICE still has the money",
-      "San Diego’s congressional delegation is all Democrats. What’s next?",
-      "Democrats won big. Can they lower your grocery bill?"
+      "San Diego’s congressional delegation is all Democrats. What’s next?"
      ]
     },
     {
@@ -3882,17 +4020,17 @@
     },
     {
      "termino": "city",
-     "n": 17,
+     "n": 18,
      "n_previo": 9,
-     "momento": 8,
+     "momento": 9,
      "zonas": {
-      "San Diego": 17,
+      "San Diego": 18,
       "Tijuana": 1
      },
      "fuentes": {
       "kpbs": 6,
+      "timessd": 4,
       "inewsource": 3,
-      "timessd": 3,
       "voiceofsd": 3,
       "gn-001969923469": 1,
       "gn-a956e11d03ed": 1
@@ -3913,14 +4051,15 @@
       "87a4be57a966faa5",
       "90bde07432930801",
       "a20bacd308f9043f",
+      "cc8e81967833b9b7",
       "ce741981a811dc29",
       "ed0fe21b1205f165",
       "fa0571379f82f041"
      ],
      "ejemplos": [
+      "City Council approves $4.2 billion Midway District makeover",
       "City of San Diego on sounder financial footing, with some caveats",
-      "Why a South Korean city is turning to a U.S. college to outsmart AI?",
-      "National City’s New Era"
+      "Why a South Korean city is turning to a U.S. college to outsmart AI?"
      ]
     },
     {
@@ -4080,6 +4219,35 @@
      ]
     },
     {
+     "termino": "house",
+     "n": 8,
+     "n_previo": 2,
+     "momento": 6,
+     "zonas": {
+      "San Diego": 8
+     },
+     "fuentes": {
+      "kpbs": 7,
+      "timessd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "1321dda62eb8e5ed",
+      "28866951d6c64076",
+      "2e4924faed0874eb",
+      "41064b1bc82559c7",
+      "71721ae90735e2d9",
+      "762c05e1a44e23d2",
+      "eaf649952b07027b",
+      "f43d1b12a7dbb892"
+     ],
+     "ejemplos": [
+      "House Republicans to elect a new leader as they look to rebuild from midterm defeat",
+      "UFC's Dana White says he will meet with Trump Monday over offer to be White House press secretary",
+      "Past White House adviser Raj Panjabi has written a playbook for 'living room' crises"
+     ]
+    },
+    {
      "termino": "shooting",
      "n": 8,
      "n_previo": 2,
@@ -4209,34 +4377,6 @@
      ]
     },
     {
-     "termino": "house",
-     "n": 7,
-     "n_previo": 2,
-     "momento": 5,
-     "zonas": {
-      "San Diego": 7
-     },
-     "fuentes": {
-      "kpbs": 6,
-      "timessd": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "1321dda62eb8e5ed",
-      "28866951d6c64076",
-      "2e4924faed0874eb",
-      "41064b1bc82559c7",
-      "71721ae90735e2d9",
-      "762c05e1a44e23d2",
-      "eaf649952b07027b"
-     ],
-     "ejemplos": [
-      "UFC's Dana White says he will meet with Trump Monday over offer to be White House press secretary",
-      "Past White House adviser Raj Panjabi has written a playbook for 'living room' crises",
-      "These are the races in the House and Senate that haven't been called yet"
-     ]
-    },
-    {
      "termino": "measures",
      "n": 7,
      "n_previo": 2,
@@ -4265,35 +4405,6 @@
       "Early returns show several San Diego County school bond measures passing",
       "With tax-hike, charter rewrite measures nearing victory, San Diego County leaders eye vast new powers — and money",
       "Election results show San Diego's 2 countywide measures too close to call"
-     ]
-    },
-    {
-     "termino": "wave",
-     "n": 7,
-     "n_previo": 2,
-     "momento": 5,
-     "zonas": {
-      "San Diego": 7
-     },
-     "fuentes": {
-      "kpbs": 4,
-      "timessd": 2,
-      "voiceofsd": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "3ab978c718d7316c",
-      "984e3b00ea95acce",
-      "a8407d48b981c39a",
-      "a92876e1fd16becf",
-      "ae6678194c02a7af",
-      "e1d592bbf98e3eb0",
-      "fd9cb85a22a57d89"
-     ],
-     "ejemplos": [
-      "How Gen Z voters helped fuel a blue wave for Democrats",
-      "Blue Wave in South County? More Like a Ripple",
-      "Local progressives hope to build on Tuesday’s blue wave"
      ]
     },
     {
@@ -4385,6 +4496,33 @@
      ]
     },
     {
+     "termino": "city council",
+     "n": 5,
+     "n_previo": 0,
+     "momento": 5,
+     "zonas": {
+      "San Diego": 5
+     },
+     "fuentes": {
+      "timessd": 3,
+      "inewsource": 1,
+      "kpbs": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "731d45937c711429",
+      "90bde07432930801",
+      "cc8e81967833b9b7",
+      "ce741981a811dc29",
+      "fa0571379f82f041"
+     ],
+     "ejemplos": [
+      "City Council approves $4.2 billion Midway District makeover",
+      "Future of Midway District at stake as City Council considers $4.2 billion Midway Rising housing project",
+      "Three new faces are set to join the City Council. All are Democrats, but that doesn’t mean they’ll vote in lockstep"
+     ]
+    },
+    {
      "termino": "fuerte",
      "n": 5,
      "n_previo": 0,
@@ -4461,6 +4599,32 @@
      ]
     },
     {
+     "termino": "talks",
+     "n": 5,
+     "n_previo": 0,
+     "momento": 5,
+     "zonas": {
+      "San Diego": 5
+     },
+     "fuentes": {
+      "kpbs": 4,
+      "timessd": 1
+     },
+     "un_solo_medio": false,
+     "notas": [
+      "096adfcd0a304772",
+      "0a7646334ac78934",
+      "2bf006dd69dd639f",
+      "313cce1ea64eabbc",
+      "f570feb4f45314be"
+     ],
+     "ejemplos": [
+      "Russia and Ukraine hold nearly 4 hours of U.S.-mediated talks in Abu Dhabi",
+      "Dead set on making good music: Oh He Dead’s CJ Johnson talks songwriting, a film in the works and the band’s return to The Casbah",
+      "U.N. climate talks begin today. Here are 3 things to know"
+     ]
+    },
+    {
      "termino": "term",
      "n": 5,
      "n_previo": 0,
@@ -4518,38 +4682,6 @@
       "‘Soul-hurting pain’: Victims’ families enraged at Newsom’s death row decision",
       "Otay Mesa detainee death prompts San Diego congressional demands",
       "Six members of Congress demand ‘answers and investigation’ after Otay Mesa detainee’s death"
-     ]
-    },
-    {
-     "termino": "beach",
-     "n": 7,
-     "n_previo": 3,
-     "momento": 4,
-     "zonas": {
-      "San Diego": 7,
-      "Tijuana": 2
-     },
-     "fuentes": {
-      "timessd": 3,
-      "gn-5bad11419dae": 1,
-      "gn-8547ebdaed0d": 1,
-      "gn-8a489297fa14": 1,
-      "uniradio": 1
-     },
-     "un_solo_medio": false,
-     "notas": [
-      "3016f7c9bb1ae4a8",
-      "3232cd28f7905316",
-      "4feec78fd1f396b1",
-      "6e4c93f865774610",
-      "aa16164b522a9fee",
-      "e5f722b643872f3e",
-      "f4802a6673764ba8"
-     ],
-     "ejemplos": [
-      "County, Partners to Host Healthy Community Fair in Imperial Beach About Tijuana River Pollution",
-      "Realizarán feria comunitaria de salud en Imperial Beach sobre contaminación del río Tijuana",
-      "Suspect in security guard’s shooting death in Pacific Beach pleads not guilty to murder"
      ]
     }
    ]
