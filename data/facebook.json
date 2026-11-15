@@ -1,87 +1,92 @@
 {
  "esquema": 1,
- "generado": "2026-11-14T22:49:58+00:00",
+ "generado": "2026-11-15T06:59:32+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 7975,
- "posts_vigentes": 1206,
- "opinion": 7060,
- "repetidos": 665,
- "reacciones": 605,
+ "comentarios_vigentes": 7621,
+ "posts_vigentes": 1149,
+ "opinion": 6774,
+ "repetidos": 608,
+ "reacciones": 573,
  "por_zona": {
-  "Ensenada": 68,
-  "Mexicali": 110,
+  "Ensenada": 47,
+  "Mexicali": 101,
   "Playas de Rosarito": 28,
-  "San Diego": 50,
+  "San Diego": 39,
   "San Felipe": 6,
   "San Quintín": 28,
-  "Tecate": 195,
-  "Tijuana": 3087,
-  "estatal": 3605,
-  "internacional": 256,
-  "nacional": 542
+  "Tecate": 191,
+  "Tijuana": 2982,
+  "estatal": 3440,
+  "internacional": 248,
+  "nacional": 511
  },
  "por_cuenta": {
-  "aztecabc_fb": 383,
-  "blanconegro_fb": 3010,
-  "blancorojo_fb": 2175,
-  "ndtijuana_fb": 2289,
-  "psn_fb": 118
+  "aztecabc_fb": 363,
+  "blanconegro_fb": 2887,
+  "blancorojo_fb": 2054,
+  "ndtijuana_fb": 2205,
+  "psn_fb": 112
  },
  "por_idioma": {
-  "es": 7975
+  "es": 7621
  },
  "por_tema": [
   {
    "tema": "apoyo",
-   "comentarios": 53,
-   "posts": 41
+   "comentarios": 52,
+   "posts": 40
   },
   {
    "tema": "buen",
-   "comentarios": 49,
-   "posts": 46
+   "comentarios": 48,
+   "posts": 45
   },
   {
    "tema": "seguridad",
-   "comentarios": 40,
-   "posts": 34
+   "comentarios": 37,
+   "posts": 32
   },
   {
    "tema": "deja",
-   "comentarios": 30,
-   "posts": 30
+   "comentarios": 29,
+   "posts": 29
   },
   {
-   "tema": "medio",
-   "comentarios": 24,
-   "posts": 23
-  },
-  {
-   "tema": "tres",
-   "comentarios": 23,
-   "posts": 23
-  },
-  {
-   "tema": "junto",
-   "comentarios": 17,
+   "tema": "sanchez",
+   "comentarios": 26,
    "posts": 17
+  },
+  {
+   "tema": "lluvias",
+   "comentarios": 23,
+   "posts": 19
+  },
+  {
+   "tema": "dentro",
+   "comentarios": 22,
+   "posts": 20
   },
   {
    "tema": "nacional",
-   "comentarios": 17,
-   "posts": 17
+   "comentarios": 16,
+   "posts": 16
   },
   {
-   "tema": "trabajadores",
-   "comentarios": 11,
-   "posts": 9
+   "tema": "sheinbaum",
+   "comentarios": 13,
+   "posts": 13
   },
   {
    "tema": "secretaria",
    "comentarios": 10,
    "posts": 10
+  },
+  {
+   "tema": "trabajadores",
+   "comentarios": 9,
+   "posts": 7
   },
   {
    "tema": "paro",
@@ -90,13 +95,13 @@
   },
   {
    "tema": "aumento",
-   "comentarios": 7,
-   "posts": 5
+   "comentarios": 6,
+   "posts": 4
   },
   {
    "tema": "china",
-   "comentarios": 7,
-   "posts": 6
+   "comentarios": 6,
+   "posts": 5
   },
   {
    "tema": "detenidos",
@@ -104,9 +109,9 @@
    "posts": 6
   },
   {
-   "tema": "genero",
-   "comentarios": 4,
-   "posts": 4
+   "tema": "empresas",
+   "comentarios": 5,
+   "posts": 5
   },
   {
    "tema": "pensiones",
@@ -115,19 +120,29 @@
   },
   {
    "tema": "visa",
-   "comentarios": 4,
-   "posts": 4
+   "comentarios": 3,
+   "posts": 3
+  },
+  {
+   "tema": "caida",
+   "comentarios": 2,
+   "posts": 2
   },
   {
    "tema": "pacientes",
-   "comentarios": 3,
-   "posts": 3
+   "comentarios": 2,
+   "posts": 2
+  },
+  {
+   "tema": "ingresos",
+   "comentarios": 1,
+   "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 859,
-  "negativo": 3511,
-  "neutral": 2690,
+  "positivo": 822,
+  "negativo": 3382,
+  "neutral": 2570,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
