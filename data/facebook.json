@@ -1,14 +1,14 @@
 {
  "esquema": 1,
- "generado": "2026-11-15T19:26:41+00:00",
+ "generado": "2026-11-16T06:45:09+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 7621,
- "posts_vigentes": 1149,
- "opinion": 6774,
- "repetidos": 608,
- "reacciones": 573,
+ "comentarios_vigentes": 7242,
+ "posts_vigentes": 1099,
+ "opinion": 6439,
+ "repetidos": 574,
+ "reacciones": 556,
  "por_zona": {
   "Ensenada": 47,
   "Mexicali": 101,
@@ -17,91 +17,56 @@
   "San Felipe": 6,
   "San Quintín": 28,
   "Tecate": 191,
-  "Tijuana": 2982,
-  "estatal": 3440,
-  "internacional": 248,
+  "Tijuana": 2831,
+  "estatal": 3222,
+  "internacional": 238,
   "nacional": 511
  },
  "por_cuenta": {
-  "aztecabc_fb": 363,
-  "blanconegro_fb": 2887,
-  "blancorojo_fb": 2054,
-  "ndtijuana_fb": 2205,
-  "psn_fb": 112
+  "aztecabc_fb": 343,
+  "blanconegro_fb": 2743,
+  "blancorojo_fb": 1952,
+  "ndtijuana_fb": 2094,
+  "psn_fb": 110
  },
  "por_idioma": {
-  "es": 7621
+  "es": 7242
  },
  "por_tema": [
   {
+   "tema": "apoyo",
+   "comentarios": 52,
+   "posts": 40
+  },
+  {
    "tema": "buen",
-   "comentarios": 48,
-   "posts": 45
+   "comentarios": 43,
+   "posts": 40
   },
   {
    "tema": "seguridad",
-   "comentarios": 37,
-   "posts": 32
-  },
-  {
-   "tema": "deja",
-   "comentarios": 29,
-   "posts": 29
-  },
-  {
-   "tema": "salud",
-   "comentarios": 27,
-   "posts": 24
-  },
-  {
-   "tema": "sanchez",
-   "comentarios": 26,
-   "posts": 17
+   "comentarios": 35,
+   "posts": 31
   },
   {
    "tema": "lluvias",
-   "comentarios": 23,
-   "posts": 19
-  },
-  {
-   "tema": "dentro",
    "comentarios": 22,
-   "posts": 20
+   "posts": 18
   },
   {
-   "tema": "nacional",
-   "comentarios": 16,
-   "posts": 16
+   "tema": "tres",
+   "comentarios": 22,
+   "posts": 22
   },
   {
-   "tema": "sheinbaum",
-   "comentarios": 13,
-   "posts": 13
+   "tema": "mundial",
+   "comentarios": 18,
+   "posts": 18
   },
   {
-   "tema": "secretaria",
-   "comentarios": 10,
-   "posts": 10
-  },
-  {
-   "tema": "trabajadores",
-   "comentarios": 9,
-   "posts": 7
-  },
-  {
-   "tema": "paro",
-   "comentarios": 8,
-   "posts": 7
-  },
-  {
-   "tema": "aumento",
-   "comentarios": 6,
-   "posts": 4
-  },
-  {
-   "tema": "china",
-   "comentarios": 6,
-   "posts": 5
+   "tema": "junto",
+   "comentarios": 15,
+   "posts": 15
   },
   {
    "tema": "detenidos",
@@ -109,14 +74,14 @@
    "posts": 6
   },
   {
-   "tema": "empresas",
+   "tema": "china",
    "comentarios": 5,
-   "posts": 5
+   "posts": 4
   },
   {
-   "tema": "pensiones",
-   "comentarios": 4,
-   "posts": 4
+   "tema": "proteccion civil",
+   "comentarios": 3,
+   "posts": 3
   },
   {
    "tema": "visa",
@@ -129,20 +94,50 @@
    "posts": 2
   },
   {
+   "tema": "cancer",
+   "comentarios": 2,
+   "posts": 2
+  },
+  {
    "tema": "pacientes",
    "comentarios": 2,
    "posts": 2
   },
   {
+   "tema": "suspension",
+   "comentarios": 2,
+   "posts": 2
+  },
+  {
+   "tema": "alza",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
+   "tema": "ampliar",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
    "tema": "ingresos",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
+   "tema": "inversiones",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
+   "tema": "oleaje",
    "comentarios": 1,
    "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 822,
-  "negativo": 3382,
-  "neutral": 2570,
+  "positivo": 787,
+  "negativo": 3223,
+  "neutral": 2429,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
