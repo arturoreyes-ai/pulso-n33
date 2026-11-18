@@ -1,57 +1,47 @@
 {
  "esquema": 1,
- "generado": "2026-11-17T21:17:01+00:00",
+ "generado": "2026-11-18T08:01:05+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 6912,
- "posts_vigentes": 1053,
- "opinion": 6141,
- "repetidos": 548,
- "reacciones": 549,
+ "comentarios_vigentes": 6671,
+ "posts_vigentes": 1013,
+ "opinion": 5921,
+ "repetidos": 534,
+ "reacciones": 535,
  "por_zona": {
-  "Ensenada": 37,
+  "Ensenada": 35,
   "Mexicali": 101,
   "Playas de Rosarito": 28,
   "San Diego": 38,
   "San Felipe": 6,
   "San Quintín": 28,
-  "Tecate": 191,
-  "Tijuana": 2704,
-  "estatal": 3043,
-  "internacional": 226,
-  "nacional": 510
+  "Tecate": 185,
+  "Tijuana": 2583,
+  "estatal": 2952,
+  "internacional": 222,
+  "nacional": 493
  },
  "por_cuenta": {
-  "aztecabc_fb": 317,
-  "blanconegro_fb": 2654,
-  "blancorojo_fb": 1856,
-  "ndtijuana_fb": 1976,
-  "psn_fb": 109
+  "aztecabc_fb": 296,
+  "blanconegro_fb": 2607,
+  "blancorojo_fb": 1778,
+  "ndtijuana_fb": 1885,
+  "psn_fb": 105
  },
  "por_idioma": {
-  "es": 6912
+  "es": 6671
  },
  "por_tema": [
   {
-   "tema": "agua",
-   "comentarios": 68,
-   "posts": 56
-  },
-  {
-   "tema": "policia",
-   "comentarios": 57,
-   "posts": 50
-  },
-  {
-   "tema": "apoyo",
-   "comentarios": 49,
-   "posts": 37
+   "tema": "vida",
+   "comentarios": 84,
+   "posts": 69
   },
   {
    "tema": "buen",
-   "comentarios": 43,
-   "posts": 40
+   "comentarios": 40,
+   "posts": 38
   },
   {
    "tema": "seguridad",
@@ -59,19 +49,14 @@
    "posts": 30
   },
   {
-   "tema": "lluvias",
-   "comentarios": 22,
-   "posts": 18
-  },
-  {
    "tema": "tres",
    "comentarios": 21,
    "posts": 21
   },
   {
-   "tema": "mundial",
-   "comentarios": 18,
-   "posts": 18
+   "tema": "lluvias",
+   "comentarios": 17,
+   "posts": 16
   },
   {
    "tema": "oficial",
@@ -84,19 +69,29 @@
    "posts": 14
   },
   {
-   "tema": "sheinbaum",
-   "comentarios": 12,
-   "posts": 12
+   "tema": "control",
+   "comentarios": 10,
+   "posts": 8
+  },
+  {
+   "tema": "real",
+   "comentarios": 10,
+   "posts": 8
   },
   {
    "tema": "busqueda",
-   "comentarios": 11,
-   "posts": 11
+   "comentarios": 9,
+   "posts": 9
   },
   {
-   "tema": "fuertes",
-   "comentarios": 10,
-   "posts": 9
+   "tema": "homicidio",
+   "comentarios": 6,
+   "posts": 4
+  },
+  {
+   "tema": "plan",
+   "comentarios": 6,
+   "posts": 6
   },
   {
    "tema": "militar",
@@ -109,19 +104,14 @@
    "posts": 2
   },
   {
-   "tema": "visa",
-   "comentarios": 3,
-   "posts": 3
-  },
-  {
    "tema": "aereo",
    "comentarios": 2,
    "posts": 2
   },
   {
-   "tema": "suspension",
-   "comentarios": 2,
-   "posts": 2
+   "tema": "ampliar",
+   "comentarios": 1,
+   "posts": 1
   },
   {
    "tema": "castro",
@@ -129,15 +119,15 @@
    "posts": 1
   },
   {
-   "tema": "oleaje",
+   "tema": "ruben",
    "comentarios": 1,
    "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 763,
-  "negativo": 3050,
-  "neutral": 2328,
+  "positivo": 740,
+  "negativo": 2940,
+  "neutral": 2241,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
