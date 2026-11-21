@@ -1,14 +1,14 @@
 {
  "esquema": 1,
- "generado": "2026-11-20T20:36:17+00:00",
+ "generado": "2026-11-21T07:25:11+00:00",
  "plataforma": "tiktok",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 24092,
- "posts_vigentes": 4354,
- "opinion": 20568,
- "repetidos": 2617,
- "reacciones": 1980,
+ "comentarios_vigentes": 23271,
+ "posts_vigentes": 4191,
+ "opinion": 19926,
+ "repetidos": 2459,
+ "reacciones": 1926,
  "por_zona": {
   "Ensenada": 289,
   "Mexicali": 664,
@@ -16,23 +16,23 @@
   "San Diego": 1119,
   "San Felipe": 26,
   "Tecate": 11,
-  "Tijuana": 2136,
+  "Tijuana": 2117,
   "estatal": 42,
-  "internacional": 8825,
-  "nacional": 10914
+  "internacional": 8552,
+  "nacional": 10385
  },
  "por_cuenta": {
-  "tk_aztecanoticias": 2925,
-  "tk_bbcmundo": 502,
-  "tk_cnnee": 652,
-  "tk_dwespanol": 1198,
+  "tk_aztecanoticias": 2717,
+  "tk_bbcmundo": 484,
+  "tk_cnnee": 616,
+  "tk_dwespanol": 1160,
   "tk_ensenada_noticias": 505,
-  "tk_heraldo": 2245,
-  "tk_latinus": 3434,
+  "tk_heraldo": 2113,
+  "tk_latinus": 3274,
   "tk_mexicali_noticias": 827,
   "tk_mexico_noticias": 2740,
   "tk_mundo_noticias": 1318,
-  "tk_nmas": 2117,
+  "tk_nmas": 1999,
   "tk_rosarito_noticias": 282,
   "tk_rubro_clima": 100,
   "tk_rubro_deportes": 52,
@@ -41,28 +41,23 @@
   "tk_rubro_turismo": 65,
   "tk_sandiego_news": 599,
   "tk_sandiego_noticias": 637,
-  "tk_telemundo": 2206,
+  "tk_telemundo": 2095,
   "tk_tijuana_noticias": 1545
  },
  "por_idioma": {
   "en": 599,
-  "es": 23493
+  "es": 22672
  },
  "por_tema": [
   {
    "tema": "vida",
-   "comentarios": 205,
-   "posts": 182
-  },
-  {
-   "tema": "familia",
-   "comentarios": 125,
-   "posts": 102
+   "comentarios": 194,
+   "posts": 171
   },
   {
    "tema": "china",
-   "comentarios": 54,
-   "posts": 46
+   "comentarios": 53,
+   "posts": 45
   },
   {
    "tema": "zona",
@@ -71,18 +66,18 @@
   },
   {
    "tema": "hombres",
-   "comentarios": 37,
-   "posts": 32
+   "comentarios": 35,
+   "posts": 30
   },
   {
    "tema": "sheinbaum",
-   "comentarios": 31,
-   "posts": 31
+   "comentarios": 29,
+   "posts": 29
   },
   {
    "tema": "militar",
-   "comentarios": 25,
-   "posts": 24
+   "comentarios": 24,
+   "posts": 23
   },
   {
    "tema": "frente",
@@ -95,14 +90,14 @@
    "posts": 20
   },
   {
-   "tema": "tres",
-   "comentarios": 21,
-   "posts": 21
+   "tema": "agente",
+   "comentarios": 18,
+   "posts": 16
   },
   {
-   "tema": "agente",
-   "comentarios": 20,
-   "posts": 18
+   "tema": "carteles",
+   "comentarios": 14,
+   "posts": 14
   },
   {
    "tema": "conoce",
@@ -115,9 +110,9 @@
    "posts": 10
   },
   {
-   "tema": "checo",
-   "comentarios": 9,
-   "posts": 7
+   "tema": "cuerpos",
+   "comentarios": 11,
+   "posts": 10
   },
   {
    "tema": "revolucion",
@@ -130,24 +125,19 @@
    "posts": 7
   },
   {
+   "tema": "armado",
+   "comentarios": 6,
+   "posts": 5
+  },
+  {
+   "tema": "checo",
+   "comentarios": 6,
+   "posts": 5
+  },
+  {
    "tema": "desfile",
    "comentarios": 3,
    "posts": 3
-  },
-  {
-   "tema": "aprehension",
-   "comentarios": 2,
-   "posts": 2
-  },
-  {
-   "tema": "castro",
-   "comentarios": 2,
-   "posts": 2
-  },
-  {
-   "tema": "cjng",
-   "comentarios": 2,
-   "posts": 2
   },
   {
    "tema": "cumbre",
@@ -165,15 +155,15 @@
    "posts": 1
   },
   {
-   "tema": "vuelos",
+   "tema": "reunion",
    "comentarios": 1,
    "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 2329,
-  "negativo": 9338,
-  "neutral": 8345,
+  "positivo": 2274,
+  "negativo": 9010,
+  "neutral": 8086,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 556,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",

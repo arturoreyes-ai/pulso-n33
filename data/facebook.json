@@ -1,57 +1,47 @@
 {
  "esquema": 1,
- "generado": "2026-11-20T20:36:25+00:00",
+ "generado": "2026-11-21T07:25:17+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 6016,
- "posts_vigentes": 912,
- "opinion": 5371,
- "repetidos": 449,
- "reacciones": 486,
+ "comentarios_vigentes": 5636,
+ "posts_vigentes": 857,
+ "opinion": 5033,
+ "repetidos": 414,
+ "reacciones": 467,
  "por_zona": {
   "Ensenada": 26,
-  "Mexicali": 101,
+  "Mexicali": 100,
   "Playas de Rosarito": 28,
   "San Diego": 38,
   "San Felipe": 6,
   "San Quintín": 28,
-  "Tecate": 166,
-  "Tijuana": 2342,
-  "estatal": 2663,
+  "Tecate": 155,
+  "Tijuana": 2179,
+  "estatal": 2468,
   "internacional": 142,
-  "nacional": 476
+  "nacional": 466
  },
  "por_cuenta": {
-  "aztecabc_fb": 259,
-  "blanconegro_fb": 2335,
-  "blancorojo_fb": 1596,
-  "ndtijuana_fb": 1722,
-  "psn_fb": 104
+  "aztecabc_fb": 245,
+  "blanconegro_fb": 2192,
+  "blancorojo_fb": 1502,
+  "ndtijuana_fb": 1599,
+  "psn_fb": 98
  },
  "por_idioma": {
-  "es": 6016
+  "es": 5636
  },
  "por_tema": [
   {
    "tema": "vida",
-   "comentarios": 75,
-   "posts": 60
-  },
-  {
-   "tema": "familia",
-   "comentarios": 73,
-   "posts": 65
+   "comentarios": 74,
+   "posts": 59
   },
   {
    "tema": "zona",
    "comentarios": 23,
    "posts": 23
-  },
-  {
-   "tema": "tres",
-   "comentarios": 19,
-   "posts": 19
   },
   {
    "tema": "hombres",
@@ -69,14 +59,19 @@
    "posts": 9
   },
   {
+   "tema": "armado",
+   "comentarios": 8,
+   "posts": 8
+  },
+  {
    "tema": "detienen",
    "comentarios": 8,
    "posts": 8
   },
   {
    "tema": "frente",
-   "comentarios": 8,
-   "posts": 7
+   "comentarios": 7,
+   "posts": 6
   },
   {
    "tema": "homicidio",
@@ -104,22 +99,27 @@
    "posts": 3
   },
   {
+   "tema": "carteles",
+   "comentarios": 2,
+   "posts": 1
+  },
+  {
+   "tema": "cuerpos",
+   "comentarios": 2,
+   "posts": 2
+  },
+  {
    "tema": "hacienda",
    "comentarios": 2,
    "posts": 1
   },
   {
-   "tema": "aprehension",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
-   "tema": "castro",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
    "tema": "cumbre",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
+   "tema": "frente frio",
    "comentarios": 1,
    "posts": 1
   },
@@ -130,9 +130,9 @@
   }
  ],
  "sentimiento": {
-  "positivo": 642,
-  "negativo": 2679,
-  "neutral": 2050,
+  "positivo": 605,
+  "negativo": 2516,
+  "neutral": 1912,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
