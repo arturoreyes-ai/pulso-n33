@@ -1,14 +1,14 @@
 {
  "esquema": 1,
- "generado": "2026-11-22T20:00:09+00:00",
+ "generado": "2026-11-23T08:08:33+00:00",
  "plataforma": "tiktok",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 22491,
- "posts_vigentes": 4021,
- "opinion": 19285,
- "repetidos": 2338,
- "reacciones": 1873,
+ "comentarios_vigentes": 21744,
+ "posts_vigentes": 3864,
+ "opinion": 18695,
+ "repetidos": 2196,
+ "reacciones": 1814,
  "por_zona": {
   "Ensenada": 289,
   "Mexicali": 664,
@@ -18,21 +18,21 @@
   "Tecate": 11,
   "Tijuana": 2111,
   "estatal": 42,
-  "internacional": 8299,
-  "nacional": 9864
+  "internacional": 8017,
+  "nacional": 9399
  },
  "por_cuenta": {
-  "tk_aztecanoticias": 2532,
-  "tk_bbcmundo": 453,
-  "tk_cnnee": 589,
-  "tk_dwespanol": 1119,
+  "tk_aztecanoticias": 2350,
+  "tk_bbcmundo": 432,
+  "tk_cnnee": 575,
+  "tk_dwespanol": 1057,
   "tk_ensenada_noticias": 505,
-  "tk_heraldo": 1987,
-  "tk_latinus": 3075,
+  "tk_heraldo": 1883,
+  "tk_latinus": 2899,
   "tk_mexicali_noticias": 827,
   "tk_mexico_noticias": 2740,
   "tk_mundo_noticias": 1318,
-  "tk_nmas": 1911,
+  "tk_nmas": 1809,
   "tk_rosarito_noticias": 282,
   "tk_rubro_clima": 100,
   "tk_rubro_deportes": 52,
@@ -41,33 +41,23 @@
   "tk_rubro_turismo": 65,
   "tk_sandiego_news": 599,
   "tk_sandiego_noticias": 637,
-  "tk_telemundo": 2012,
+  "tk_telemundo": 1926,
   "tk_tijuana_noticias": 1545
  },
  "por_idioma": {
   "en": 599,
-  "es": 21892
+  "es": 21145
  },
  "por_tema": [
   {
-   "tema": "vida",
-   "comentarios": 189,
-   "posts": 166
-  },
-  {
-   "tema": "china",
-   "comentarios": 50,
-   "posts": 42
-  },
-  {
    "tema": "mayor",
-   "comentarios": 45,
-   "posts": 39
+   "comentarios": 44,
+   "posts": 38
   },
   {
-   "tema": "zona",
-   "comentarios": 39,
-   "posts": 38
+   "tema": "violencia",
+   "comentarios": 35,
+   "posts": 34
   },
   {
    "tema": "hombres",
@@ -75,14 +65,14 @@
    "posts": 29
   },
   {
-   "tema": "frontera",
-   "comentarios": 23,
-   "posts": 19
+   "tema": "nacional",
+   "comentarios": 29,
+   "posts": 26
   },
   {
-   "tema": "militar",
-   "comentarios": 22,
-   "posts": 21
+   "tema": "lider",
+   "comentarios": 23,
+   "posts": 22
   },
   {
    "tema": "frente",
@@ -90,14 +80,24 @@
    "posts": 20
   },
   {
-   "tema": "agente",
-   "comentarios": 16,
-   "posts": 14
+   "tema": "frontera",
+   "comentarios": 20,
+   "posts": 17
   },
   {
    "tema": "carteles",
-   "comentarios": 14,
-   "posts": 14
+   "comentarios": 13,
+   "posts": 13
+  },
+  {
+   "tema": "imss",
+   "comentarios": 13,
+   "posts": 10
+  },
+  {
+   "tema": "conoce",
+   "comentarios": 12,
+   "posts": 12
   },
   {
    "tema": "detienen",
@@ -110,11 +110,6 @@
    "posts": 8
   },
   {
-   "tema": "homicidio",
-   "comentarios": 7,
-   "posts": 7
-  },
-  {
    "tema": "checo",
    "comentarios": 6,
    "posts": 5
@@ -125,7 +120,12 @@
    "posts": 3
   },
   {
-   "tema": "captura",
+   "tema": "xolos",
+   "comentarios": 2,
+   "posts": 2
+  },
+  {
+   "tema": "cjng",
    "comentarios": 1,
    "posts": 1
   },
@@ -135,15 +135,25 @@
    "posts": 1
   },
   {
+   "tema": "liguilla",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
    "tema": "navideno",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
+   "tema": "wife",
    "comentarios": 1,
    "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 2207,
-  "negativo": 8676,
-  "neutral": 7846,
+  "positivo": 2129,
+  "negativo": 8378,
+  "neutral": 7632,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 556,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",

@@ -1,62 +1,57 @@
 {
  "esquema": 1,
- "generado": "2026-11-22T20:00:13+00:00",
+ "generado": "2026-11-23T08:08:41+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 5291,
- "posts_vigentes": 800,
- "opinion": 4742,
- "repetidos": 375,
- "reacciones": 427,
+ "comentarios_vigentes": 4947,
+ "posts_vigentes": 745,
+ "opinion": 4440,
+ "repetidos": 343,
+ "reacciones": 400,
  "por_zona": {
   "Ensenada": 26,
-  "Mexicali": 91,
-  "Playas de Rosarito": 28,
+  "Mexicali": 77,
+  "Playas de Rosarito": 18,
   "San Diego": 25,
   "San Felipe": 6,
   "San Quintín": 18,
   "Tecate": 155,
-  "Tijuana": 2035,
-  "estatal": 2319,
+  "Tijuana": 1863,
+  "estatal": 2191,
   "internacional": 142,
-  "nacional": 446
+  "nacional": 426
  },
  "por_cuenta": {
-  "aztecabc_fb": 219,
-  "blanconegro_fb": 2047,
-  "blancorojo_fb": 1435,
-  "ndtijuana_fb": 1503,
-  "psn_fb": 87
+  "aztecabc_fb": 206,
+  "blanconegro_fb": 1908,
+  "blancorojo_fb": 1328,
+  "ndtijuana_fb": 1420,
+  "psn_fb": 85
  },
  "por_idioma": {
-  "es": 5291
+  "es": 4947
  },
  "por_tema": [
   {
-   "tema": "vida",
-   "comentarios": 73,
-   "posts": 58
-  },
-  {
    "tema": "mayor",
-   "comentarios": 22,
-   "posts": 22
+   "comentarios": 18,
+   "posts": 18
   },
   {
-   "tema": "zona",
-   "comentarios": 21,
-   "posts": 21
-  },
-  {
-   "tema": "agente",
-   "comentarios": 14,
-   "posts": 14
+   "tema": "violencia",
+   "comentarios": 16,
+   "posts": 12
   },
   {
    "tema": "hombres",
-   "comentarios": 14,
-   "posts": 13
+   "comentarios": 13,
+   "posts": 12
+  },
+  {
+   "tema": "imss",
+   "comentarios": 11,
+   "posts": 10
   },
   {
    "tema": "detienen",
@@ -64,29 +59,29 @@
    "posts": 7
   },
   {
-   "tema": "frente",
-   "comentarios": 7,
-   "posts": 6
-  },
-  {
    "tema": "frontera",
    "comentarios": 7,
    "posts": 6
   },
   {
-   "tema": "homicidio",
+   "tema": "lider",
+   "comentarios": 7,
+   "posts": 6
+  },
+  {
+   "tema": "nacional",
+   "comentarios": 7,
+   "posts": 7
+  },
+  {
+   "tema": "frente",
    "comentarios": 6,
-   "posts": 4
+   "posts": 5
   },
   {
-   "tema": "militar",
-   "comentarios": 4,
-   "posts": 4
-  },
-  {
-   "tema": "china",
+   "tema": "conoce",
    "comentarios": 3,
-   "posts": 2
+   "posts": 3
   },
   {
    "tema": "carteles",
@@ -99,22 +94,7 @@
    "posts": 1
   },
   {
-   "tema": "captura",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
-   "tema": "frente frio",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
    "tema": "guasave",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
-   "tema": "navideno",
    "comentarios": 1,
    "posts": 1
   },
@@ -124,15 +104,15 @@
    "posts": 1
   },
   {
-   "tema": "temperaturas",
+   "tema": "xolos",
    "comentarios": 1,
    "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 574,
-  "negativo": 2366,
-  "neutral": 1802,
+  "positivo": 519,
+  "negativo": 2232,
+  "neutral": 1689,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
