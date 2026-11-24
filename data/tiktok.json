@@ -1,38 +1,38 @@
 {
  "esquema": 1,
- "generado": "2026-11-23T08:08:33+00:00",
+ "generado": "2026-11-24T00:11:42+00:00",
  "plataforma": "tiktok",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 21744,
- "posts_vigentes": 3864,
- "opinion": 18695,
- "repetidos": 2196,
- "reacciones": 1814,
+ "comentarios_vigentes": 21164,
+ "posts_vigentes": 3752,
+ "opinion": 18254,
+ "repetidos": 2066,
+ "reacciones": 1763,
  "por_zona": {
   "Ensenada": 289,
   "Mexicali": 664,
   "Playas de Rosarito": 66,
-  "San Diego": 1119,
+  "San Diego": 1112,
   "San Felipe": 26,
   "Tecate": 11,
-  "Tijuana": 2111,
+  "Tijuana": 2106,
   "estatal": 42,
-  "internacional": 8017,
-  "nacional": 9399
+  "internacional": 7838,
+  "nacional": 9010
  },
  "por_cuenta": {
-  "tk_aztecanoticias": 2350,
-  "tk_bbcmundo": 432,
-  "tk_cnnee": 575,
-  "tk_dwespanol": 1057,
+  "tk_aztecanoticias": 2211,
+  "tk_bbcmundo": 415,
+  "tk_cnnee": 567,
+  "tk_dwespanol": 1016,
   "tk_ensenada_noticias": 505,
-  "tk_heraldo": 1883,
-  "tk_latinus": 2899,
+  "tk_heraldo": 1784,
+  "tk_latinus": 2738,
   "tk_mexicali_noticias": 827,
   "tk_mexico_noticias": 2740,
   "tk_mundo_noticias": 1318,
-  "tk_nmas": 1809,
+  "tk_nmas": 1749,
   "tk_rosarito_noticias": 282,
   "tk_rubro_clima": 100,
   "tk_rubro_deportes": 52,
@@ -41,18 +41,33 @@
   "tk_rubro_turismo": 65,
   "tk_sandiego_news": 599,
   "tk_sandiego_noticias": 637,
-  "tk_telemundo": 1926,
+  "tk_telemundo": 1871,
   "tk_tijuana_noticias": 1545
  },
  "por_idioma": {
   "en": 599,
-  "es": 21145
+  "es": 20565
  },
  "por_tema": [
   {
+   "tema": "gracias",
+   "comentarios": 307,
+   "posts": 239
+  },
+  {
+   "tema": "trabajo",
+   "comentarios": 139,
+   "posts": 114
+  },
+  {
+   "tema": "robo",
+   "comentarios": 56,
+   "posts": 53
+  },
+  {
    "tema": "mayor",
-   "comentarios": 44,
-   "posts": 38
+   "comentarios": 43,
+   "posts": 37
   },
   {
    "tema": "violencia",
@@ -85,19 +100,14 @@
    "posts": 17
   },
   {
+   "tema": "danos",
+   "comentarios": 19,
+   "posts": 19
+  },
+  {
    "tema": "carteles",
    "comentarios": 13,
    "posts": 13
-  },
-  {
-   "tema": "imss",
-   "comentarios": 13,
-   "posts": 10
-  },
-  {
-   "tema": "conoce",
-   "comentarios": 12,
-   "posts": 12
   },
   {
    "tema": "detienen",
@@ -108,6 +118,11 @@
    "tema": "revolucion",
    "comentarios": 9,
    "posts": 8
+  },
+  {
+   "tema": "presunto",
+   "comentarios": 7,
+   "posts": 6
   },
   {
    "tema": "checo",
@@ -130,11 +145,6 @@
    "posts": 1
   },
   {
-   "tema": "hacienda",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
    "tema": "liguilla",
    "comentarios": 1,
    "posts": 1
@@ -143,17 +153,12 @@
    "tema": "navideno",
    "comentarios": 1,
    "posts": 1
-  },
-  {
-   "tema": "wife",
-   "comentarios": 1,
-   "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 2129,
-  "negativo": 8378,
-  "neutral": 7632,
+  "positivo": 2079,
+  "negativo": 8195,
+  "neutral": 7424,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 556,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",

@@ -1,57 +1,67 @@
 {
  "esquema": 1,
- "generado": "2026-11-23T08:08:41+00:00",
+ "generado": "2026-11-24T00:11:47+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 4947,
- "posts_vigentes": 745,
- "opinion": 4440,
- "repetidos": 343,
- "reacciones": 400,
+ "comentarios_vigentes": 4642,
+ "posts_vigentes": 698,
+ "opinion": 4164,
+ "repetidos": 317,
+ "reacciones": 390,
  "por_zona": {
-  "Ensenada": 26,
+  "Ensenada": 25,
   "Mexicali": 77,
-  "Playas de Rosarito": 18,
+  "Playas de Rosarito": 8,
   "San Diego": 25,
   "San Felipe": 6,
   "San Quintín": 18,
   "Tecate": 155,
-  "Tijuana": 1863,
-  "estatal": 2191,
+  "Tijuana": 1731,
+  "estatal": 2085,
   "internacional": 142,
-  "nacional": 426
+  "nacional": 370
  },
  "por_cuenta": {
-  "aztecabc_fb": 206,
-  "blanconegro_fb": 1908,
-  "blancorojo_fb": 1328,
-  "ndtijuana_fb": 1420,
-  "psn_fb": 85
+  "aztecabc_fb": 199,
+  "blanconegro_fb": 1805,
+  "blancorojo_fb": 1242,
+  "ndtijuana_fb": 1320,
+  "psn_fb": 76
  },
  "por_idioma": {
-  "es": 4947
+  "es": 4642
  },
  "por_tema": [
+  {
+   "tema": "gracias",
+   "comentarios": 94,
+   "posts": 70
+  },
+  {
+   "tema": "trabajo",
+   "comentarios": 49,
+   "posts": 41
+  },
   {
    "tema": "mayor",
    "comentarios": 18,
    "posts": 18
   },
   {
+   "tema": "robo",
+   "comentarios": 17,
+   "posts": 16
+  },
+  {
    "tema": "violencia",
-   "comentarios": 16,
-   "posts": 12
+   "comentarios": 15,
+   "posts": 11
   },
   {
    "tema": "hombres",
    "comentarios": 13,
    "posts": 12
-  },
-  {
-   "tema": "imss",
-   "comentarios": 11,
-   "posts": 10
   },
   {
    "tema": "detienen",
@@ -64,37 +74,32 @@
    "posts": 6
   },
   {
-   "tema": "lider",
-   "comentarios": 7,
-   "posts": 6
-  },
-  {
-   "tema": "nacional",
-   "comentarios": 7,
-   "posts": 7
-  },
-  {
    "tema": "frente",
    "comentarios": 6,
    "posts": 5
   },
   {
-   "tema": "conoce",
-   "comentarios": 3,
-   "posts": 3
+   "tema": "lider",
+   "comentarios": 6,
+   "posts": 5
   },
   {
-   "tema": "carteles",
-   "comentarios": 2,
-   "posts": 1
+   "tema": "nacional",
+   "comentarios": 6,
+   "posts": 6
   },
   {
-   "tema": "hacienda",
-   "comentarios": 2,
-   "posts": 1
+   "tema": "danos",
+   "comentarios": 5,
+   "posts": 4
   },
   {
    "tema": "guasave",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
+   "tema": "presunto",
    "comentarios": 1,
    "posts": 1
   },
@@ -110,9 +115,9 @@
   }
  ],
  "sentimiento": {
-  "positivo": 519,
-  "negativo": 2232,
-  "neutral": 1689,
+  "positivo": 490,
+  "negativo": 2081,
+  "neutral": 1593,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
