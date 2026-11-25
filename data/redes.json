@@ -1,78 +1,78 @@
 {
  "esquema": 1,
- "generado": "2026-11-24T22:48:30+00:00",
+ "generado": "2026-11-25T09:08:41+00:00",
  "plataforma": "instagram",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 26733,
- "posts_vigentes": 2284,
- "opinion": 21950,
- "repetidos": 2445,
- "reacciones": 4688,
+ "comentarios_vigentes": 25335,
+ "posts_vigentes": 2159,
+ "opinion": 20803,
+ "repetidos": 2269,
+ "reacciones": 4442,
  "por_zona": {
-  "Ensenada": 159,
-  "Mexicali": 680,
-  "San Diego": 944,
+  "Ensenada": 157,
+  "Mexicali": 651,
+  "San Diego": 936,
   "San Felipe": 3,
   "Tecate": 3,
-  "Tijuana": 3818,
+  "Tijuana": 3615,
   "estatal": 28,
-  "internacional": 14922,
-  "nacional": 6176
+  "internacional": 14069,
+  "nacional": 5873
  },
  "por_cuenta": {
   "afn_ig": 42,
-  "aztecanoticias_ig": 1533,
-  "bbcmundo_ig": 3438,
-  "canal66_ig": 389,
+  "aztecanoticias_ig": 1410,
+  "bbcmundo_ig": 3355,
+  "canal66_ig": 380,
   "capitalmxl_ig": 9,
-  "cnnee_ig": 3933,
-  "dwespanol_ig": 2755,
+  "cnnee_ig": 3716,
+  "dwespanol_ig": 2604,
   "elensenadense_ig": 4,
-  "elmexicano_ig": 123,
-  "eltijuanense_ig": 313,
-  "elvigia_ig": 13,
-  "ensenadadigna_ig": 134,
-  "frontera_ig": 306,
-  "ksdy50_ig": 133,
-  "lacronica_ig": 90,
-  "latinus_ig": 3803,
-  "lavoz_ig": 65,
+  "elmexicano_ig": 116,
+  "eltijuanense_ig": 307,
+  "elvigia_ig": 12,
+  "ensenadadigna_ig": 133,
+  "frontera_ig": 294,
+  "ksdy50_ig": 127,
+  "lacronica_ig": 75,
+  "latinus_ig": 3553,
+  "lavoz_ig": 59,
   "mexicali686_ig": 132,
-  "nmas_ig": 2217,
+  "nmas_ig": 2064,
   "noticiasmxl_ig": 41,
   "radartecate_ig": 2,
   "sd619_ig": 599,
-  "siempre_ig": 753,
-  "sintesis_ig": 84,
-  "soltij_ig": 35,
-  "telemundo_ig": 3578,
-  "tijuanainforma_ig": 89,
-  "tjnoticias_ig": 1425,
-  "tjpublica_ig": 222,
+  "siempre_ig": 722,
+  "sintesis_ig": 81,
+  "soltij_ig": 33,
+  "telemundo_ig": 3378,
+  "tijuanainforma_ig": 88,
+  "tjnoticias_ig": 1310,
+  "tjpublica_ig": 220,
   "uniradio_ig": 16,
-  "univisionsd_ig": 204,
-  "zeta_ig": 253
+  "univisionsd_ig": 202,
+  "zeta_ig": 251
  },
  "por_idioma": {
   "en": 599,
-  "es": 26134
+  "es": 24736
  },
  "por_tema": [
   {
    "tema": "gracias",
-   "comentarios": 330,
-   "posts": 241
+   "comentarios": 315,
+   "posts": 227
+  },
+  {
+   "tema": "trabajo",
+   "comentarios": 184,
+   "posts": 151
   },
   {
    "tema": "mayor",
-   "comentarios": 65,
-   "posts": 62
-  },
-  {
-   "tema": "salud",
-   "comentarios": 62,
-   "posts": 51
+   "comentarios": 64,
+   "posts": 61
   },
   {
    "tema": "hombres",
@@ -81,38 +81,33 @@
   },
   {
    "tema": "violencia",
-   "comentarios": 55,
-   "posts": 47
-  },
-  {
-   "tema": "lider",
    "comentarios": 52,
    "posts": 44
   },
   {
-   "tema": "frontera",
-   "comentarios": 48,
-   "posts": 35
-  },
-  {
    "tema": "cartel",
-   "comentarios": 43,
-   "posts": 36
+   "comentarios": 41,
+   "posts": 34
   },
   {
    "tema": "armas",
-   "comentarios": 39,
-   "posts": 30
+   "comentarios": 35,
+   "posts": 28
   },
   {
-   "tema": "nacional",
-   "comentarios": 34,
-   "posts": 32
+   "tema": "cultura",
+   "comentarios": 26,
+   "posts": 23
+  },
+  {
+   "tema": "playas",
+   "comentarios": 15,
+   "posts": 12
   },
   {
    "tema": "detienen",
-   "comentarios": 14,
-   "posts": 14
+   "comentarios": 13,
+   "posts": 13
   },
   {
    "tema": "revolucion",
@@ -120,9 +115,9 @@
    "posts": 10
   },
   {
-   "tema": "xolos",
-   "comentarios": 5,
-   "posts": 4
+   "tema": "cuatro",
+   "comentarios": 8,
+   "posts": 8
   },
   {
    "tema": "desfile",
@@ -145,15 +140,15 @@
    "posts": 2
   },
   {
-   "tema": "revela",
+   "tema": "issstecali",
    "comentarios": 1,
    "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 2572,
-  "negativo": 11070,
-  "neutral": 7741,
+  "positivo": 2442,
+  "negativo": 10481,
+  "neutral": 7313,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 567,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",

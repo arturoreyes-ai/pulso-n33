@@ -1,14 +1,14 @@
 {
  "esquema": 1,
- "generado": "2026-11-24T22:48:46+00:00",
+ "generado": "2026-11-25T09:09:01+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 4642,
- "posts_vigentes": 698,
- "opinion": 4164,
- "repetidos": 317,
- "reacciones": 390,
+ "comentarios_vigentes": 4408,
+ "posts_vigentes": 659,
+ "opinion": 3958,
+ "repetidos": 300,
+ "reacciones": 376,
  "por_zona": {
   "Ensenada": 25,
   "Mexicali": 77,
@@ -16,42 +16,42 @@
   "San Diego": 25,
   "San Felipe": 6,
   "San Quintín": 18,
-  "Tecate": 155,
-  "Tijuana": 1731,
-  "estatal": 2085,
+  "Tecate": 153,
+  "Tijuana": 1594,
+  "estatal": 2000,
   "internacional": 142,
-  "nacional": 370
+  "nacional": 360
  },
  "por_cuenta": {
-  "aztecabc_fb": 199,
-  "blanconegro_fb": 1805,
-  "blancorojo_fb": 1242,
-  "ndtijuana_fb": 1320,
-  "psn_fb": 76
+  "aztecabc_fb": 176,
+  "blanconegro_fb": 1732,
+  "blancorojo_fb": 1186,
+  "ndtijuana_fb": 1243,
+  "psn_fb": 71
  },
  "por_idioma": {
-  "es": 4642
+  "es": 4408
  },
  "por_tema": [
   {
    "tema": "gracias",
-   "comentarios": 94,
-   "posts": 70
+   "comentarios": 86,
+   "posts": 62
+  },
+  {
+   "tema": "trabajo",
+   "comentarios": 43,
+   "posts": 36
   },
   {
    "tema": "mayor",
-   "comentarios": 18,
-   "posts": 18
+   "comentarios": 16,
+   "posts": 16
   },
   {
    "tema": "violencia",
    "comentarios": 15,
    "posts": 11
-  },
-  {
-   "tema": "salud",
-   "comentarios": 14,
-   "posts": 13
   },
   {
    "tema": "hombres",
@@ -69,19 +69,9 @@
    "posts": 7
   },
   {
-   "tema": "frontera",
+   "tema": "playas",
    "comentarios": 7,
-   "posts": 6
-  },
-  {
-   "tema": "lider",
-   "comentarios": 6,
    "posts": 5
-  },
-  {
-   "tema": "nacional",
-   "comentarios": 6,
-   "posts": 6
   },
   {
    "tema": "armas",
@@ -89,12 +79,27 @@
    "posts": 4
   },
   {
-   "tema": "guasave",
+   "tema": "area verde",
+   "comentarios": 2,
+   "posts": 2
+  },
+  {
+   "tema": "presuntamente",
+   "comentarios": 2,
+   "posts": 2
+  },
+  {
+   "tema": "cuatro",
    "comentarios": 1,
    "posts": 1
   },
   {
-   "tema": "revela",
+   "tema": "cultura",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
+   "tema": "guasave",
    "comentarios": 1,
    "posts": 1
   },
@@ -102,17 +107,12 @@
    "tema": "revolucion",
    "comentarios": 1,
    "posts": 1
-  },
-  {
-   "tema": "xolos",
-   "comentarios": 1,
-   "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 490,
-  "negativo": 2081,
-  "neutral": 1593,
+  "positivo": 472,
+  "negativo": 1970,
+  "neutral": 1516,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",

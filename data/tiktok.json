@@ -1,14 +1,14 @@
 {
  "esquema": 1,
- "generado": "2026-11-24T22:48:40+00:00",
+ "generado": "2026-11-25T09:08:52+00:00",
  "plataforma": "tiktok",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 21164,
- "posts_vigentes": 3752,
- "opinion": 18254,
- "repetidos": 2066,
- "reacciones": 1763,
+ "comentarios_vigentes": 20553,
+ "posts_vigentes": 3637,
+ "opinion": 17736,
+ "repetidos": 1983,
+ "reacciones": 1722,
  "por_zona": {
   "Ensenada": 289,
   "Mexicali": 664,
@@ -18,21 +18,21 @@
   "Tecate": 11,
   "Tijuana": 2106,
   "estatal": 42,
-  "internacional": 7838,
-  "nacional": 9010
+  "internacional": 7504,
+  "nacional": 8733
  },
  "por_cuenta": {
-  "tk_aztecanoticias": 2211,
-  "tk_bbcmundo": 415,
-  "tk_cnnee": 567,
-  "tk_dwespanol": 1016,
+  "tk_aztecanoticias": 2085,
+  "tk_bbcmundo": 408,
+  "tk_cnnee": 540,
+  "tk_dwespanol": 981,
   "tk_ensenada_noticias": 505,
-  "tk_heraldo": 1784,
-  "tk_latinus": 2738,
+  "tk_heraldo": 1702,
+  "tk_latinus": 2579,
   "tk_mexicali_noticias": 827,
   "tk_mexico_noticias": 2740,
   "tk_mundo_noticias": 1318,
-  "tk_nmas": 1749,
+  "tk_nmas": 1658,
   "tk_rosarito_noticias": 282,
   "tk_rubro_clima": 100,
   "tk_rubro_deportes": 52,
@@ -41,28 +41,33 @@
   "tk_rubro_turismo": 65,
   "tk_sandiego_news": 599,
   "tk_sandiego_noticias": 637,
-  "tk_telemundo": 1871,
+  "tk_telemundo": 1787,
   "tk_tijuana_noticias": 1545
  },
  "por_idioma": {
   "en": 599,
-  "es": 20565
+  "es": 19954
  },
  "por_tema": [
   {
    "tema": "gracias",
-   "comentarios": 307,
-   "posts": 239
+   "comentarios": 299,
+   "posts": 231
+  },
+  {
+   "tema": "trabajo",
+   "comentarios": 139,
+   "posts": 114
   },
   {
    "tema": "mayor",
-   "comentarios": 43,
-   "posts": 37
+   "comentarios": 42,
+   "posts": 36
   },
   {
    "tema": "cartel",
-   "comentarios": 39,
-   "posts": 37
+   "comentarios": 38,
+   "posts": 36
   },
   {
    "tema": "violencia",
@@ -75,29 +80,14 @@
    "posts": 29
   },
   {
-   "tema": "nacional",
-   "comentarios": 29,
-   "posts": 26
-  },
-  {
-   "tema": "salud",
-   "comentarios": 25,
-   "posts": 25
-  },
-  {
    "tema": "armas",
-   "comentarios": 23,
-   "posts": 21
+   "comentarios": 22,
+   "posts": 20
   },
   {
-   "tema": "lider",
-   "comentarios": 23,
-   "posts": 22
-  },
-  {
-   "tema": "frontera",
-   "comentarios": 20,
-   "posts": 17
+   "tema": "cultura",
+   "comentarios": 14,
+   "posts": 14
   },
   {
    "tema": "detienen",
@@ -110,6 +100,16 @@
    "posts": 8
   },
   {
+   "tema": "cuatro",
+   "comentarios": 8,
+   "posts": 8
+  },
+  {
+   "tema": "playas",
+   "comentarios": 7,
+   "posts": 7
+  },
+  {
    "tema": "checo",
    "comentarios": 6,
    "posts": 5
@@ -118,11 +118,6 @@
    "tema": "desfile",
    "comentarios": 3,
    "posts": 3
-  },
-  {
-   "tema": "xolos",
-   "comentarios": 2,
-   "posts": 2
   },
   {
    "tema": "liguilla",
@@ -135,7 +130,7 @@
    "posts": 1
   },
   {
-   "tema": "revela",
+   "tema": "presuntamente",
    "comentarios": 1,
    "posts": 1
   },
@@ -151,9 +146,9 @@
   }
  ],
  "sentimiento": {
-  "positivo": 2079,
-  "negativo": 8195,
-  "neutral": 7424,
+  "positivo": 2002,
+  "negativo": 7975,
+  "neutral": 7203,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 556,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
