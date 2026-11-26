@@ -1,14 +1,14 @@
 {
  "esquema": 1,
- "generado": "2026-11-25T22:12:13+00:00",
+ "generado": "2026-11-26T08:53:37+00:00",
  "plataforma": "tiktok",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 20553,
- "posts_vigentes": 3637,
- "opinion": 17736,
- "repetidos": 1983,
- "reacciones": 1722,
+ "comentarios_vigentes": 19738,
+ "posts_vigentes": 3479,
+ "opinion": 17050,
+ "repetidos": 1873,
+ "reacciones": 1674,
  "por_zona": {
   "Ensenada": 289,
   "Mexicali": 664,
@@ -18,21 +18,21 @@
   "Tecate": 11,
   "Tijuana": 2106,
   "estatal": 42,
-  "internacional": 7504,
-  "nacional": 8733
+  "internacional": 7030,
+  "nacional": 8392
  },
  "por_cuenta": {
-  "tk_aztecanoticias": 2085,
-  "tk_bbcmundo": 408,
-  "tk_cnnee": 540,
-  "tk_dwespanol": 981,
+  "tk_aztecanoticias": 1945,
+  "tk_bbcmundo": 388,
+  "tk_cnnee": 470,
+  "tk_dwespanol": 909,
   "tk_ensenada_noticias": 505,
-  "tk_heraldo": 1702,
-  "tk_latinus": 2579,
+  "tk_heraldo": 1589,
+  "tk_latinus": 2372,
   "tk_mexicali_noticias": 827,
   "tk_mexico_noticias": 2740,
   "tk_mundo_noticias": 1318,
-  "tk_nmas": 1658,
+  "tk_nmas": 1563,
   "tk_rosarito_noticias": 282,
   "tk_rubro_clima": 100,
   "tk_rubro_deportes": 52,
@@ -41,18 +41,23 @@
   "tk_rubro_turismo": 65,
   "tk_sandiego_news": 599,
   "tk_sandiego_noticias": 637,
-  "tk_telemundo": 1787,
+  "tk_telemundo": 1689,
   "tk_tijuana_noticias": 1545
  },
  "por_idioma": {
   "en": 599,
-  "es": 19954
+  "es": 19139
  },
  "por_tema": [
   {
-   "tema": "trabajo",
-   "comentarios": 139,
-   "posts": 114
+   "tema": "gobierno",
+   "comentarios": 373,
+   "posts": 273
+  },
+  {
+   "tema": "carretera",
+   "comentarios": 43,
+   "posts": 29
   },
   {
    "tema": "mayor",
@@ -60,9 +65,14 @@
    "posts": 36
   },
   {
+   "tema": "policias",
+   "comentarios": 37,
+   "posts": 35
+  },
+  {
    "tema": "cartel",
-   "comentarios": 38,
-   "posts": 36
+   "comentarios": 36,
+   "posts": 34
   },
   {
    "tema": "violencia",
@@ -70,24 +80,19 @@
    "posts": 34
   },
   {
-   "tema": "hombres",
-   "comentarios": 34,
-   "posts": 29
-  },
-  {
    "tema": "mujeres",
-   "comentarios": 34,
-   "posts": 32
+   "comentarios": 33,
+   "posts": 31
   },
   {
-   "tema": "nacional",
-   "comentarios": 29,
-   "posts": 26
+   "tema": "ines gomez mont",
+   "comentarios": 24,
+   "posts": 23
   },
   {
-   "tema": "cultura",
-   "comentarios": 14,
-   "posts": 14
+   "tema": "armas",
+   "comentarios": 21,
+   "posts": 19
   },
   {
    "tema": "detienen",
@@ -95,8 +100,8 @@
    "posts": 10
   },
   {
-   "tema": "revolucion",
-   "comentarios": 9,
+   "tema": "operativo",
+   "comentarios": 10,
    "posts": 8
   },
   {
@@ -110,12 +115,22 @@
    "posts": 7
   },
   {
-   "tema": "checo",
+   "tema": "felipe",
    "comentarios": 6,
-   "posts": 5
+   "posts": 6
+  },
+  {
+   "tema": "grados",
+   "comentarios": 5,
+   "posts": 4
   },
   {
    "tema": "desfile",
+   "comentarios": 3,
+   "posts": 3
+  },
+  {
+   "tema": "residentes",
    "comentarios": 3,
    "posts": 3
   },
@@ -125,17 +140,7 @@
    "posts": 2
   },
   {
-   "tema": "jornada",
-   "comentarios": 2,
-   "posts": 2
-  },
-  {
    "tema": "navideno",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
-   "tema": "siete",
    "comentarios": 1,
    "posts": 1
   },
@@ -151,9 +156,9 @@
   }
  ],
  "sentimiento": {
-  "positivo": 2002,
-  "negativo": 7975,
-  "neutral": 7203,
+  "positivo": 1902,
+  "negativo": 7673,
+  "neutral": 6919,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 556,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",

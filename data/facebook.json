@@ -1,42 +1,42 @@
 {
  "esquema": 1,
- "generado": "2026-11-25T22:12:21+00:00",
+ "generado": "2026-11-26T08:53:45+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 4408,
- "posts_vigentes": 659,
- "opinion": 3958,
- "repetidos": 300,
- "reacciones": 376,
+ "comentarios_vigentes": 4162,
+ "posts_vigentes": 618,
+ "opinion": 3731,
+ "repetidos": 282,
+ "reacciones": 365,
  "por_zona": {
-  "Ensenada": 25,
-  "Mexicali": 77,
+  "Ensenada": 24,
+  "Mexicali": 75,
   "Playas de Rosarito": 8,
   "San Diego": 25,
-  "San Felipe": 6,
+  "San Felipe": 1,
   "San Quintín": 18,
-  "Tecate": 153,
-  "Tijuana": 1594,
-  "estatal": 2000,
-  "internacional": 142,
-  "nacional": 360
+  "Tecate": 119,
+  "Tijuana": 1472,
+  "estatal": 1939,
+  "internacional": 131,
+  "nacional": 350
  },
  "por_cuenta": {
-  "aztecabc_fb": 176,
-  "blanconegro_fb": 1732,
-  "blancorojo_fb": 1186,
-  "ndtijuana_fb": 1243,
-  "psn_fb": 71
+  "aztecabc_fb": 168,
+  "blanconegro_fb": 1597,
+  "blancorojo_fb": 1155,
+  "ndtijuana_fb": 1180,
+  "psn_fb": 62
  },
  "por_idioma": {
-  "es": 4408
+  "es": 4162
  },
  "por_tema": [
   {
-   "tema": "trabajo",
-   "comentarios": 43,
-   "posts": 36
+   "tema": "gobierno",
+   "comentarios": 73,
+   "posts": 60
   },
   {
    "tema": "burgueno",
@@ -44,14 +44,14 @@
    "posts": 22
   },
   {
-   "tema": "mayor",
-   "comentarios": 16,
+   "tema": "policias",
+   "comentarios": 17,
    "posts": 16
   },
   {
-   "tema": "violencia",
+   "tema": "mayor",
    "comentarios": 15,
-   "posts": 11
+   "posts": 15
   },
   {
    "tema": "mujeres",
@@ -59,9 +59,9 @@
    "posts": 13
   },
   {
-   "tema": "hombres",
+   "tema": "violencia",
    "comentarios": 13,
-   "posts": 12
+   "posts": 10
   },
   {
    "tema": "cartel",
@@ -69,7 +69,7 @@
    "posts": 8
   },
   {
-   "tema": "detienen",
+   "tema": "operativo",
    "comentarios": 7,
    "posts": 7
   },
@@ -79,17 +79,22 @@
    "posts": 5
   },
   {
-   "tema": "nacional",
+   "tema": "detienen",
    "comentarios": 6,
    "posts": 6
   },
   {
-   "tema": "jornada",
+   "tema": "armas",
    "comentarios": 3,
    "posts": 3
   },
   {
-   "tema": "area verde",
+   "tema": "carretera",
+   "comentarios": 3,
+   "posts": 3
+  },
+  {
+   "tema": "felipe",
    "comentarios": 2,
    "posts": 2
   },
@@ -99,25 +104,20 @@
    "posts": 1
   },
   {
-   "tema": "cultura",
+   "tema": "grados",
    "comentarios": 1,
    "posts": 1
   },
   {
-   "tema": "revolucion",
-   "comentarios": 1,
-   "posts": 1
-  },
-  {
-   "tema": "siete",
+   "tema": "ines gomez mont",
    "comentarios": 1,
    "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 472,
-  "negativo": 1970,
-  "neutral": 1516,
+  "positivo": 446,
+  "negativo": 1860,
+  "neutral": 1425,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
