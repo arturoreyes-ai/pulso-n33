@@ -1,14 +1,14 @@
 {
  "esquema": 1,
- "generado": "2026-11-26T22:05:17+00:00",
+ "generado": "2026-11-27T09:05:24+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 4162,
- "posts_vigentes": 618,
- "opinion": 3731,
- "repetidos": 282,
- "reacciones": 365,
+ "comentarios_vigentes": 3755,
+ "posts_vigentes": 561,
+ "opinion": 3346,
+ "repetidos": 273,
+ "reacciones": 348,
  "por_zona": {
   "Ensenada": 24,
   "Mexicali": 75,
@@ -16,61 +16,46 @@
   "San Diego": 25,
   "San Felipe": 1,
   "San Quintín": 18,
-  "Tecate": 119,
-  "Tijuana": 1472,
-  "estatal": 1939,
-  "internacional": 131,
-  "nacional": 350
+  "Tecate": 51,
+  "Tijuana": 1332,
+  "estatal": 1761,
+  "internacional": 121,
+  "nacional": 339
  },
  "por_cuenta": {
-  "aztecabc_fb": 168,
-  "blanconegro_fb": 1597,
-  "blancorojo_fb": 1155,
-  "ndtijuana_fb": 1180,
-  "psn_fb": 62
+  "aztecabc_fb": 151,
+  "blanconegro_fb": 1425,
+  "blancorojo_fb": 1070,
+  "ndtijuana_fb": 1055,
+  "psn_fb": 54
  },
  "por_idioma": {
-  "es": 4162
+  "es": 3755
  },
  "por_tema": [
   {
    "tema": "gobierno",
-   "comentarios": 73,
-   "posts": 60
+   "comentarios": 65,
+   "posts": 53
   },
   {
    "tema": "burgueno",
-   "comentarios": 25,
-   "posts": 22
+   "comentarios": 22,
+   "posts": 19
   },
   {
    "tema": "policias",
-   "comentarios": 17,
-   "posts": 16
-  },
-  {
-   "tema": "fuego",
    "comentarios": 14,
    "posts": 13
   },
   {
    "tema": "mujeres",
-   "comentarios": 14,
-   "posts": 13
-  },
-  {
-   "tema": "violencia",
    "comentarios": 13,
-   "posts": 10
-  },
-  {
-   "tema": "estados unidos",
-   "comentarios": 12,
    "posts": 12
   },
   {
-   "tema": "cartel",
-   "comentarios": 10,
+   "tema": "violencia",
+   "comentarios": 11,
    "posts": 8
   },
   {
@@ -79,9 +64,9 @@
    "posts": 8
   },
   {
-   "tema": "playas",
+   "tema": "operativo",
    "comentarios": 7,
-   "posts": 5
+   "posts": 7
   },
   {
    "tema": "detienen",
@@ -89,19 +74,24 @@
    "posts": 6
   },
   {
+   "tema": "playas",
+   "comentarios": 6,
+   "posts": 4
+  },
+  {
    "tema": "armas",
    "comentarios": 3,
    "posts": 3
   },
   {
-   "tema": "carretera",
+   "tema": "proceso",
    "comentarios": 3,
    "posts": 3
   },
   {
-   "tema": "felipe",
-   "comentarios": 2,
-   "posts": 2
+   "tema": "construccion",
+   "comentarios": 1,
+   "posts": 1
   },
   {
    "tema": "cuatro",
@@ -109,7 +99,7 @@
    "posts": 1
   },
   {
-   "tema": "grados",
+   "tema": "felipe",
    "comentarios": 1,
    "posts": 1
   },
@@ -120,9 +110,9 @@
   }
  ],
  "sentimiento": {
-  "positivo": 446,
-  "negativo": 1860,
-  "neutral": 1425,
+  "positivo": 401,
+  "negativo": 1673,
+  "neutral": 1272,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
