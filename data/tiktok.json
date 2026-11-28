@@ -1,38 +1,38 @@
 {
  "esquema": 1,
- "generado": "2026-11-27T21:38:48+00:00",
+ "generado": "2026-11-28T08:25:32+00:00",
  "plataforma": "tiktok",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 19016,
- "posts_vigentes": 3337,
- "opinion": 16456,
- "repetidos": 1765,
- "reacciones": 1623,
+ "comentarios_vigentes": 18298,
+ "posts_vigentes": 3199,
+ "opinion": 15872,
+ "repetidos": 1647,
+ "reacciones": 1557,
  "por_zona": {
   "Ensenada": 289,
   "Mexicali": 664,
   "Playas de Rosarito": 66,
-  "San Diego": 1112,
+  "San Diego": 1105,
   "San Felipe": 26,
   "Tecate": 11,
-  "Tijuana": 2099,
+  "Tijuana": 2084,
   "estatal": 42,
-  "internacional": 6699,
-  "nacional": 8008
+  "internacional": 6336,
+  "nacional": 7675
  },
  "por_cuenta": {
-  "tk_aztecanoticias": 1780,
-  "tk_bbcmundo": 370,
-  "tk_cnnee": 441,
-  "tk_dwespanol": 882,
+  "tk_aztecanoticias": 1668,
+  "tk_bbcmundo": 307,
+  "tk_cnnee": 398,
+  "tk_dwespanol": 807,
   "tk_ensenada_noticias": 505,
-  "tk_heraldo": 1457,
-  "tk_latinus": 2193,
+  "tk_heraldo": 1365,
+  "tk_latinus": 2066,
   "tk_mexicali_noticias": 827,
   "tk_mexico_noticias": 2740,
   "tk_mundo_noticias": 1318,
-  "tk_nmas": 1501,
+  "tk_nmas": 1405,
   "tk_rosarito_noticias": 282,
   "tk_rubro_clima": 100,
   "tk_rubro_deportes": 52,
@@ -41,23 +41,23 @@
   "tk_rubro_turismo": 65,
   "tk_sandiego_news": 599,
   "tk_sandiego_noticias": 637,
-  "tk_telemundo": 1579,
+  "tk_telemundo": 1469,
   "tk_tijuana_noticias": 1545
  },
  "por_idioma": {
   "en": 599,
-  "es": 18417
+  "es": 17699
  },
  "por_tema": [
   {
    "tema": "gobierno",
-   "comentarios": 356,
-   "posts": 256
+   "comentarios": 340,
+   "posts": 243
   },
   {
-   "tema": "policias",
-   "comentarios": 35,
-   "posts": 33
+   "tema": "estados unidos",
+   "comentarios": 85,
+   "posts": 81
   },
   {
    "tema": "violencia",
@@ -66,23 +66,8 @@
   },
   {
    "tema": "mujeres",
-   "comentarios": 31,
-   "posts": 29
-  },
-  {
-   "tema": "ines gomez mont",
-   "comentarios": 24,
-   "posts": 23
-  },
-  {
-   "tema": "empresas",
-   "comentarios": 23,
-   "posts": 21
-  },
-  {
-   "tema": "armas",
-   "comentarios": 20,
-   "posts": 18
+   "comentarios": 29,
+   "posts": 28
   },
   {
    "tema": "denuncia",
@@ -90,8 +75,13 @@
    "posts": 20
   },
   {
-   "tema": "municipal",
-   "comentarios": 15,
+   "tema": "construccion",
+   "comentarios": 17,
+   "posts": 17
+  },
+  {
+   "tema": "unidad",
+   "comentarios": 12,
    "posts": 12
   },
   {
@@ -110,12 +100,12 @@
    "posts": 8
   },
   {
-   "tema": "reforma",
-   "comentarios": 8,
-   "posts": 8
+   "tema": "playas",
+   "comentarios": 7,
+   "posts": 7
   },
   {
-   "tema": "playas",
+   "tema": "reforma",
    "comentarios": 7,
    "posts": 7
   },
@@ -135,7 +125,17 @@
    "posts": 2
   },
   {
+   "tema": "aseguran",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
    "tema": "navideno",
+   "comentarios": 1,
+   "posts": 1
+  },
+  {
+   "tema": "revela",
    "comentarios": 1,
    "posts": 1
   },
@@ -151,9 +151,9 @@
   }
  ],
  "sentimiento": {
-  "positivo": 1846,
-  "negativo": 7379,
-  "neutral": 6675,
+  "positivo": 1771,
+  "negativo": 7100,
+  "neutral": 6445,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 556,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",

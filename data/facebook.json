@@ -1,47 +1,41 @@
 {
  "esquema": 1,
- "generado": "2026-11-27T21:38:55+00:00",
+ "generado": "2026-11-28T08:25:38+00:00",
  "plataforma": "facebook",
  "retencion_dias": 30,
  "cosecha_comentarios": true,
- "comentarios_vigentes": 3755,
- "posts_vigentes": 561,
- "opinion": 3346,
- "repetidos": 273,
- "reacciones": 348,
+ "comentarios_vigentes": 3490,
+ "posts_vigentes": 525,
+ "opinion": 3100,
+ "repetidos": 260,
+ "reacciones": 334,
  "por_zona": {
   "Ensenada": 24,
   "Mexicali": 75,
   "Playas de Rosarito": 8,
   "San Diego": 25,
   "San Felipe": 1,
-  "San Quintín": 18,
   "Tecate": 51,
-  "Tijuana": 1332,
-  "estatal": 1761,
+  "Tijuana": 1210,
+  "estatal": 1675,
   "internacional": 121,
-  "nacional": 339
+  "nacional": 300
  },
  "por_cuenta": {
-  "aztecabc_fb": 151,
-  "blanconegro_fb": 1425,
-  "blancorojo_fb": 1070,
-  "ndtijuana_fb": 1055,
-  "psn_fb": 54
+  "aztecabc_fb": 148,
+  "blanconegro_fb": 1328,
+  "blancorojo_fb": 991,
+  "ndtijuana_fb": 970,
+  "psn_fb": 53
  },
  "por_idioma": {
-  "es": 3755
+  "es": 3490
  },
  "por_tema": [
   {
    "tema": "gobierno",
-   "comentarios": 65,
-   "posts": 53
-  },
-  {
-   "tema": "policias",
-   "comentarios": 14,
-   "posts": 13
+   "comentarios": 58,
+   "posts": 48
   },
   {
    "tema": "mujeres",
@@ -49,19 +43,19 @@
    "posts": 12
   },
   {
-   "tema": "municipal",
-   "comentarios": 11,
-   "posts": 10
+   "tema": "estados unidos",
+   "comentarios": 12,
+   "posts": 12
   },
   {
    "tema": "violencia",
-   "comentarios": 11,
-   "posts": 8
+   "comentarios": 10,
+   "posts": 7
   },
   {
    "tema": "denuncia",
-   "comentarios": 8,
-   "posts": 8
+   "comentarios": 6,
+   "posts": 6
   },
   {
    "tema": "detienen",
@@ -69,24 +63,19 @@
    "posts": 6
   },
   {
-   "tema": "playas",
-   "comentarios": 6,
-   "posts": 4
-  },
-  {
-   "tema": "armas",
-   "comentarios": 3,
-   "posts": 3
-  },
-  {
-   "tema": "empresas",
-   "comentarios": 3,
+   "tema": "unidad",
+   "comentarios": 4,
    "posts": 3
   },
   {
    "tema": "proceso",
    "comentarios": 3,
    "posts": 3
+  },
+  {
+   "tema": "playas",
+   "comentarios": 2,
+   "posts": 2
   },
   {
    "tema": "cuatro",
@@ -99,15 +88,15 @@
    "posts": 1
   },
   {
-   "tema": "ines gomez mont",
+   "tema": "revela",
    "comentarios": 1,
    "posts": 1
   }
  ],
  "sentimiento": {
-  "positivo": 401,
-  "negativo": 1673,
-  "neutral": 1272,
+  "positivo": 365,
+  "negativo": 1539,
+  "neutral": 1196,
   "sin_clasificar": 0,
   "sin_modelo_idioma": 0,
   "modelo": "pysentimiento/robertuito-sentiment-analysis",
